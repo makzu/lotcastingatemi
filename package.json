@@ -1,0 +1,21 @@
+{
+  "name": "Lot-Casting-Atemi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makzu/lotcastingatemi.git"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-2": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^14.0.0",
+    "browserify-incremental": "^3.0.1",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4",
+    "redux-devtools": "^3.0.1",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.1",
+    "redux-thunk": "^1.0.0"
+  }
+}

@@ -22,8 +22,6 @@
 
 config/secrets.yml
 
-/node_modules
-/coverage
 
 # Vim
 [._]*.s[a-w][a-z]
@@ -31,3 +29,5 @@ config/secrets.yml
 *.un~
 Session.vim
 
+/public/packs
+/node_modules

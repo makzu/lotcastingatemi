@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const cha = (state) => state.cha
+const chara = (state) => state
 
 function findArmor(character) {
   const arm = character.armors.find(function(armor) {
@@ -153,11 +153,10 @@ function _weapons(character) {
   });
 }
 
-const computedValues = createSelector([cha], (char) => {
-  if (char.character == null)
-    return {};
+const computedValues = createSelector([chara], (character) => {
+  if (character == null)
+    return null;
 
-  const character = char.character;
   const arm = findArmor(character)
   const evasionRaw = Math.ceil((character.attr_dexterity + character.abil_dodge) / 2)
   const resolveRaw = Math.ceil((character.attr_wits + character.abil_integrity) / 2)

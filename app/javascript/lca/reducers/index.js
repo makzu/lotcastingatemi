@@ -1,33 +1,39 @@
 import { combineReducers } from 'redux';
 //import { characterReducer } from './characterReducer.js'
-import { REQUEST_CHAR, RECEIVE_CHAR } from '../actions'
+import * as c from '../utils/constants'
 
 import { defaultState } from './defaultState.js'
 
-function characterReducer(state = defaultState, action) {
+function characterReducer(state = null, action) {
   switch (action.type) {
-  case REQUEST_CHAR:
-    return {... state, isFetching: true, isError: false }
-  case RECEIVE_CHAR:
-    return {... state,
-      isFetching: false,
-      isError: false,
-      character: action.character
-    }
+  case c.RECEIVE_CHAR:
+    return action.character
+  case c.UPDATE_CHAR:
+    const tr = action.update.trait
+    const val = action.update.value
+    return {... state, [tr]: val }
   default:
     return state
   }
 }
 
-function lcaReducer(state = defaultState, action) {
-  switch(action.type) {
+function appReducer(state = defaultState, action) {
+  switch (action.type) {
+  case c.REQUEST_CHAR:
+    return {... state, isFetching: true, isError: false }
+  case c.RECEIVE_CHAR:
+    return {... state, isFetching: false, isError: false }
+  case c.TOGGLE_EDITOR:
+    return {... state, isEditing: !state.isEditing }
   default:
     return state
   }
+
 }
 
 const lcaApp = combineReducers({
-  lcaReducer, cha : characterReducer
+  app : appReducer,
+  character : characterReducer
 });
 
 export default lcaApp

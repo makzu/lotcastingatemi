@@ -1,29 +1,34 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { createStore, applyMiddleware, compose } from 'redux'
-//import { apiMiddleware } from 'redux-api-middleware'
-import thunk from 'redux-thunk'
+require("react-hot-loader/patch")
 
-import reducer from './reducers'
-import { Provider } from 'react-redux'
-import RootContainer from './containers/rootContainer.jsx'
+//import 'babel-polyfill';
+import React from 'react';
+import { render } from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 
-import { defaultState } from './reducers'
+import configureStore from './store/configureStore.js';
+import RootContainer from './containers/rootContainer.jsx';
 
-const enhancer = compose(
-  applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
 
-const store = createStore(
-  reducer,
-  defaultState,
-  enhancer
-);
+const store = configureStore();
 
 render(
-  <Provider store={ store }>
-    <RootContainer />
-  </Provider>,
+  <AppContainer>
+    <RootContainer store={ store }/>
+  </AppContainer>,
   document.getElementById('root')
-)
+);
+
+
+if (module.hot) {
+  module.hot.accept('./containers/rootContainer.jsx', () => {
+    //const NewRoot = require('./containers/rootContainer.jsx').default;
+    render(
+      <AppContainer>
+        <RootContainer store={ store } />
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  });
+}
+
+// */

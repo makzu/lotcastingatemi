@@ -1,4 +1,7 @@
 import React from 'react'
+
+import toggleEditor from '../../actions'
+
 import CombatBlock from './combatBlock.jsx'
 import ArmorSummary from './armorSummary.jsx'
 import FullAttributeBlock from './fullAttributeBlock.jsx'
@@ -44,6 +47,7 @@ function CharacterSheetDisplay(props) {
   const computed = props.computed
 
   return(<div className="characterSheet">
+    <button onClick={props.toggleClick}>begin editing</button>
     <h1>{character.name}</h1>
 
     <CombatBlock character={character} computed={ computed } />

@@ -1,6 +1,9 @@
 import React from 'react'
 
 function ArmorSummary(props) {
+  if (props.computed == null)
+    return <div />
+
   const arm = props.computed.currentArmor
 
   return(<div className="armorSummary">

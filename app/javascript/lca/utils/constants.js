@@ -1,0 +1,4 @@
+export const REQUEST_CHAR = 'REQUEST_CHAR'
+export const RECEIVE_CHAR = 'RECEIVE_CHAR'
+export const TOGGLE_EDITOR = 'TOGGLE_EDITOR'
+export const UPDATE_CHAR = 'UPDATE_CHAR'

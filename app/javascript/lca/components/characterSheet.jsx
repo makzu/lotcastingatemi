@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchCharacter } from '../actions'
+import { fetchCharacter, toggleEditor, updateCharacter } from '../actions'
+
 import computedValues from '../selectors'
 import CharacterSheetDisplay from './characterSheet/characterSheetDisplay.jsx'
+import CharacterEditor from './characterEditor.jsx'
 
 class CharacterSheet extends React.Component {
   constructor(props) {
@@ -10,8 +12,7 @@ class CharacterSheet extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch, id } = this.props
-    dispatch(fetchCharacter(id))
+    this.props.onComponentMounted(this.props.id)
   }
 
 
@@ -22,23 +23,43 @@ class CharacterSheet extends React.Component {
     if (character == null)
       return(<h1>Lot-Casting Atemi</h1>)
 
-    return (<CharacterSheetDisplay character={character} computed={computed} />);
+    if (this.props.isEditing)
+      return(<CharacterEditor character={character} toggleClick={this.props.onEditorToggleClick} onUpdate={this.props.onUpdate} />)
+
+    //return (<CharacterSheetDisplay character={character} computed={computed} />);
+    return (<CharacterSheetDisplay character={character} computed={computed} toggleClick={this.props.onEditorToggleClick}/>);
   }
 }
 
 function mapStateToProps(state) {
-  const { character, isFetching, isError } = state.cha
-  const computed = computedValues(state)
+  const character = state.character
+  const { isFetching, isError, isEditing } = state.app
+  const computed = computedValues(state.character)
   return {
     character,
     computed,
+    isEditing,
     isFetching,
     isError
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onEditorToggleClick: () => {
+      dispatch(toggleEditor())
+    },
+    onComponentMounted: (id) => {
+      dispatch(fetchCharacter(id))
+    },
+    onUpdate: (id, trait, value) => {
+      dispatch(updateCharacter(id, trait, value))
+    }
+  }
+}
+
 export default connect(
-  mapStateToProps//,
-  //mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(CharacterSheet)
 

@@ -13,7 +13,7 @@ function WeaponData(props) {
 }
 
 function CombatBlock(props) {
-  if (props.character.id == undefined)
+  if (props.computed == null)
     return <div />
 
   const weapons = props.computed.weapons.map((weapon) =>

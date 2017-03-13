@@ -26,11 +26,11 @@ marnan.update(
   abil_war: 1,
 
   abil_craft: [
-    { craft: "Blacksmithing", rating: 1 }
+    { craft: "blacksmithing", rating: 1 }
   ],
 
   abil_martial_arts: [
-    { style: "Seven Hand Style", rating: 1 }
+    { style: "seven hand style", rating: 1 }
   ],
 
   specialties: [
@@ -80,31 +80,44 @@ m = Weapon.find_or_create_by(name: "Marnan's Ancestral sword", character: marnan
 m.update(
   weight: "medium",
   tags: ["lethal", "melee", "balanced"],
+  ability: "melee",
+  is_artifact: true
+)
+m = Weapon.find_or_create_by(name: "Marnan's Ancestral sword (seven hand style)", character: marnan)
+m.update(
+  weight: "medium",
+  tags: ["lethal", "martial arts", "balanced"],
+  ability: "martial arts (seven hand style)",
   is_artifact: true
 )
 m = Weapon.find_or_create_by(name: "Great sword", character: marnan)
 m.update(
   weight: "heavy",
+  ability: "melee",
   tags: ["lethal", "melee", "balanced", "reaching", "two-handed when on foot"]
 )
 m = Weapon.find_or_create_by(name: "Shortsword", character: marnan)
 m.update(
   weight: "light",
+  ability: "melee",
   tags: ["lethal", "melee", "balanced"]
 )
 m = Weapon.find_or_create_by(name: "Chopping sword", character: marnan)
 m.update(
   weight: "medium",
+  ability: "melee",
   tags: ["lethal", "melee", "chopping"]
 )
 m = Weapon.find_or_create_by(name: "straight sword", character: marnan)
 m.update(
   weight: "medium",
+  ability: "melee",
   tags: ["lethal", "melee", "balanced"]
 )
 andhisshield = Weapon.find_or_create_by(name: "Shield", character: marnan)
 andhisshield.update(
   weight: "medium",
+  ability: "melee",
   tags: ["bashing", "melee", "shield"]
 )
 m = Armor.find_or_create_by(name: "Ereden guard hauberk", character: marnan)

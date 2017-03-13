@@ -1,5 +1,5 @@
 import React from 'react'
-import RatingDots from './ratingDots.jsx'
+import RatingDots from '../../utils/ratingDots.jsx'
 
 function AttributeBlock(props) {
   return(<div className="attributeBlock">

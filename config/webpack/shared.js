@@ -51,7 +51,9 @@ const config = {
   },
 
   plugins: [
-    new webpack.EnvironmentPlugin(Object.keys(process.env))
+    new webpack.EnvironmentPlugin(
+      Object.keys(process.env).filter((key)=>!key.match(/GNOME_KEYRING/)).filter((key)=>!key.match(/[UPSTART_]?INSTANCE/))
+    )
   ],
 
   resolve: {

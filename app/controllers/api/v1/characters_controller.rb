@@ -19,8 +19,9 @@ class Api::V1::CharactersController < Api::V1::BaseController
   end
 
   def update
+    #byebug
     @character.update_attributes(character_params)
-    respond_with character, json: character
+    render json: @character
   end
 
   private
@@ -29,6 +30,7 @@ class Api::V1::CharactersController < Api::V1::BaseController
   end
 
   def character_params
-    params.require(:character).permit(:name, :merit, :weapon, :armor)
+    #params.require(:character).permit(:name, :merit, :weapon, :armor)
+    params.require(:character).permit!
   end
 end

@@ -69,13 +69,15 @@ function _weapons(character) {
   const init = character.initiative
 
   return character.weapons.map(function(weapon) {
-    let witheringPool = dex
-    let decisivePool = dex
+    let witheringPool = 0
+    let decisivePool = 0
     let damage = 0
     let overwhelming = 1
     let parry = 0
 
     let abl = weapon.ability
+    witheringPool += dex
+    decisivePool += dex
 
     if (abl.startsWith("martial arts"))
       abl = "martial arts"
@@ -160,12 +162,13 @@ const computedValues = createSelector([chara], (character) => {
   const arm = findArmor(character)
   const evasionRaw = Math.ceil((character.attr_dexterity + character.abil_dodge) / 2)
   const resolveRaw = Math.ceil((character.attr_wits + character.abil_integrity) / 2)
-  const guileRaw = Math.ceil((character.attr_wits + character.abil_integrity) / 2)
+  const guileRaw = Math.ceil((character.attr_manipulation + character.abil_socialize) / 2)
   const jbPool = character.wits + character.awareness
 
   return {
     currentArmor: {
       name: arm.name,
+      id: arm.id,
       weight: arm.weight,
       mobilityPenalty: _mobilityPenalty(arm),
       soak: _soak(arm),

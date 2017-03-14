@@ -24,10 +24,11 @@ class CharacterSheet extends React.Component {
       return(<h1>Lot-Casting Atemi</h1>)
 
     if (this.props.isEditing)
-      return(<CharacterEditor character={character} toggleClick={this.props.onEditorToggleClick} onUpdate={this.props.onUpdate} />)
+      return(<CharacterEditor character={character}
+      toggleClick={this.props.onEditorToggleClick} onUpdate={this.props.onUpdate} />)
 
-    //return (<CharacterSheetDisplay character={character} computed={computed} />);
-    return (<CharacterSheetDisplay character={character} computed={computed} toggleClick={this.props.onEditorToggleClick}/>);
+    return (<CharacterSheetDisplay character={character} computed={computed}
+      toggleClick={this.props.onEditorToggleClick}/>);
   }
 }
 

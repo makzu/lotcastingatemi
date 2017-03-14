@@ -2,9 +2,6 @@ import fetch from 'isomorphic-fetch'
 
 import * as c from '../utils/constants'
 
-
-//export const FAILURE = 'FAILURE'
-
 function requestChar(id) {
   return {
     type: c.REQUEST_CHAR,
@@ -16,6 +13,15 @@ function receiveChar(id, json) {
     type: c.RECEIVE_CHAR,
     id,
     character: json
+  }
+}
+
+function updateTrait(id, trait, value) {
+  // TODO post change to API
+  return {
+    type: c.UPDATE_CHAR,
+    id: id,
+    update: { trait: trait, value: value }
   }
 }
 
@@ -32,11 +38,17 @@ export function fetchCharacter(id) {
 }
 
 export function updateCharacter(id, trait, value) {
-  // TODO post change to database
-  return {
-    type: c.UPDATE_CHAR,
-    id: id,
-    update: { trait: trait, value: value }
+  return function (dispatch) {
+    dispatch(updateTrait(id, trait, value))
+
+    let bd = { character: { id: id }}
+    bd.character[trait] = value
+
+    return fetch(`/api/v1/characters/${id}`, {
+      method: "PATCH",
+      headers: new Headers({"Content-Type": "application/json"}),
+      body: JSON.stringify(bd)
+    }) //*/
   }
 }
 

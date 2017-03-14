@@ -1,6 +1,7 @@
 puts "updating Marnan"
-marnan = Character.find_or_create_by(name: "Marnan Five-Sword")
+marnan = Character.find_or_create_by(id: 1)
 marnan.update(
+  name: "Marnan Five-Sword",
   description: "Five swords and one chip on his shoulder",
 
   attr_dexterity:    4, attr_strength:     2, attr_stamina:    3,

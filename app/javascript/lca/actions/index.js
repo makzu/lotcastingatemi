@@ -38,6 +38,9 @@ export function fetchCharacter(id) {
 }
 
 export function updateCharacter(id, trait, value) {
+  if (trait == "") {
+    return
+  }
   return function (dispatch) {
     dispatch(updateTrait(id, trait, value))
 

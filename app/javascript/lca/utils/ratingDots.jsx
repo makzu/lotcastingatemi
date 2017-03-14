@@ -1,11 +1,14 @@
 import React from 'react'
 
 function RatingDots(props) {
-  const fullDots = "●".repeat( props.rating );
+  const fullCount = props.rating || 1
+  const emptyCount = ( props.fillTo || 5 ) - fullCount
+
+  const fullDots = "●".repeat( fullCount );
   let emptyDots = "";
 
-  if (props.dontFill == null) {
-    emptyDots = "○".repeat( (props.fillTo || 5) - props.rating );
+  if (props.dontFill == null && emptyCount >= 0) {
+    emptyDots = "○".repeat( emptyCount );
   }
   return <span>{ fullDots }{ emptyDots }</span>;
 }

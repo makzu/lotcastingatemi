@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const chara = (state) => state
+const character = (state) => state
 
 function findArmor(character) {
   const arm = character.armors.find(function(armor) {
@@ -126,6 +126,95 @@ function _weapons(character) {
       break
 
     case "brawl":
+      witheringPool += brawl
+      decisivePool += brawl
+      parry = Math.ceil(( dex + brawl ) /2 )
+      switch (weapon.weight) {
+      case "light":
+        if (weapon.is_artifact) {
+          witheringPool += 5
+          damage += 10
+          overwhelming = 3
+        } else {
+          witheringPool += 4
+          damage += 7
+        }
+        break
+      case "medium":
+        if (weapon.is_artifact) {
+          witheringPool += 3
+          damage += 12
+          parry += 1
+          overwhelming = 4
+        } else {
+          witheringPool += 2
+          damage += 9
+          parry += 1
+        }
+        break
+      case "heavy":
+        if (weapon.is_artifact) {
+          witheringPool += 1
+          damage += 14
+          overwhelming = 5
+        } else {
+          witheringPool += 0
+          damage += 11
+          parry -= 1
+        }
+        break
+      }
+      break
+
+    case "martial arts":
+      let sr = 0
+      const _theMa = ma.find((art) =>
+        weapon.ability.endsWith("(" + art.style + ")")
+      )
+
+      if (_theMa)
+        sr = _theMa.rating
+
+      const styleRating = parseInt(sr)
+
+      witheringPool += styleRating
+      decisivePool += styleRating
+      parry = Math.ceil(( dex + styleRating ) /2 )
+      switch (weapon.weight) {
+      case "light":
+        if (weapon.is_artifact) {
+          witheringPool += 5
+          damage += 10
+          overwhelming = 3
+        } else {
+          witheringPool += 4
+          damage += 7
+        }
+        break
+      case "medium":
+        if (weapon.is_artifact) {
+          witheringPool += 3
+          damage += 12
+          parry += 1
+          overwhelming = 4
+        } else {
+          witheringPool += 2
+          damage += 9
+          parry += 1
+        }
+        break
+      case "heavy":
+        if (weapon.is_artifact) {
+          witheringPool += 1
+          damage += 14
+          overwhelming = 5
+        } else {
+          witheringPool += 0
+          damage += 11
+          parry -= 1
+        }
+        break
+      }
       break
     }
 
@@ -155,7 +244,7 @@ function _weapons(character) {
   });
 }
 
-const computedValues = createSelector([chara], (character) => {
+const computedValues = createSelector([character], (character) => {
   if (character == null)
     return null;
 

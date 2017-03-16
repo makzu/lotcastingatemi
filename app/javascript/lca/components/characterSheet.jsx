@@ -23,23 +23,27 @@ class CharacterSheet extends React.Component {
   }
 
   render() {
-    const character = this.props.character || null
+    const character = this.props.character
     const computed = this.props.computed
 
-    if (character == null)
+    if (character == undefined)
       return(<h1>Lot-Casting Atemi</h1>)
 
     if (this.props.isEditing)
-      return(<CharacterEditor character={character}
-      toggleClick={this.editorToggle} onUpdate={this.props.onUpdate} />)
+      return(<CharacterEditor
+        character={character} computed={computed}
+        toggleClick={this.editorToggle} onUpdate={this.props.updateChar}
+      />)
 
-    return (<CharacterSheetDisplay character={character} computed={computed}
-      toggleClick={this.editorToggle}/>);
+    return (<CharacterSheetDisplay
+      character={character} computed={computed}
+      toggleClick={this.editorToggle}
+    />);
   }
 }
 
-function mapStateToProps(state) {
-  const character = state.character
+function mapStateToProps(state, ownProps) {
+  const character = state.character.characters[ownProps.id]
   const { isFetching, isError, isEditing } = state.app
   const computed = computedValues(character)
   return {
@@ -59,7 +63,7 @@ function mapDispatchToProps(dispatch) {
     onComponentMounted: (id) => {
       dispatch(fetchCharacter(id))
     },
-    onUpdate: (id, trait, value) => {
+    updateChar: (id, trait, value) => {
       dispatch(updateCharacter(id, trait, value))
     }
   }

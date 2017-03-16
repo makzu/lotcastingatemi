@@ -59,6 +59,7 @@ function _hardness(armor) {
 }
 
 function _weapons(character) {
+  return {}
   const dex = character.attr_dexterity
   const str = character.attr_strength
   const archery = character.abil_archery
@@ -245,7 +246,7 @@ function _weapons(character) {
 }
 
 const computedValues = createSelector([character], (character) => {
-  if (character == null)
+  if (character == undefined)
     return null;
 
   const arm = findArmor(character)
@@ -253,6 +254,18 @@ const computedValues = createSelector([character], (character) => {
   const resolveRaw = Math.ceil((character.attr_wits + character.abil_integrity) / 2)
   const guileRaw = Math.ceil((character.attr_manipulation + character.abil_socialize) / 2)
   const jbPool = character.wits + character.awareness
+
+  const attackAbilities = ['abil_archery', 'abil_brawl', 'abil_melee', 'abil_thrown']
+
+  let abils = attackAbilities.filter((abil)=>character[abil] > 0).map(function(abil){
+    let name = abil.substring(5)
+    return { abil: name, rating: character[abil] }
+  })
+
+  let mas = character.abil_martial_arts.map(function(abil){
+    let name = "martial arts (" + abil.style + ")"
+    return { abil: name, rating: abil.rating }
+  })
 
   return {
     currentArmor: {
@@ -263,6 +276,7 @@ const computedValues = createSelector([character], (character) => {
       soak: _soak(arm),
       hardness: _hardness(arm)
     },
+    attackAbils: abils.concat(mas),
     totalSoak: _soak(arm) + character.attr_stamina,
     evasionRaw: evasionRaw,
     resolveRaw: resolveRaw,

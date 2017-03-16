@@ -19,7 +19,6 @@ class Api::V1::CharactersController < Api::V1::BaseController
   end
 
   def update
-    #byebug
     @character.update_attributes(character_params)
     render json: @character
   end

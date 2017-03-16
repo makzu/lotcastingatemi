@@ -22,4 +22,7 @@ class Api::V1::WeaponsController < Api::V1::BaseController
   end
 
   private
+  def weapon_params
+    params.require(:weapon).permit!
+  end
 end

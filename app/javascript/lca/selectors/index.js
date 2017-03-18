@@ -1,63 +1,8 @@
 import { createSelector } from 'reselect'
 
-const character = (state) => state
+const character = (state) => state.characters.characters
 
-function findArmor(character) {
-  const arm = character.armors.find(function(armor) {
-    return armor.equipped;
-  });
-
-  if (arm == undefined) {
-    return {
-      weight: "unarmored",
-      tags: "unarmored",
-      is_artifact: false
-    }
-  } else {
-    return arm
-  }
-}
-
-function _mobilityPenalty(armor) {
-  switch(armor.weight) {
-  case "light":
-  case "unarmored":
-    return 0
-  case "medium":
-    return 1
-  case "heavy":
-    return 2
-  default:
-    return 0
-  }
-}
-function _soak(armor) {
-  switch(armor.weight) {
-  case "light":
-    return armor.isArtifact ? 5 : 3
-  case "medium":
-    return armor.isArtifact ? 8 : 5
-  case "heavy":
-    return armor.isArtifact ? 11 : 7
-  case "unarmored":
-    return 0
-  }
-}
-function _hardness(armor) {
-  if (!armor.isArtifact)
-    return 0
-  switch(armor.weight) {
-  case "light":
-    return 4
-  case "medium":
-    return 7
-  case "heavy":
-    return 10
-  default:
-    return 0
-  }
-}
-
+/*
 function _weapons(character) {
   return {}
   const dex = character.attr_dexterity
@@ -244,46 +189,8 @@ function _weapons(character) {
     }
   });
 }
+// */
 
-const computedValues = createSelector([character], (character) => {
-  if (character == undefined)
-    return null;
 
-  const arm = findArmor(character)
-  const evasionRaw = Math.ceil((character.attr_dexterity + character.abil_dodge) / 2)
-  const resolveRaw = Math.ceil((character.attr_wits + character.abil_integrity) / 2)
-  const guileRaw = Math.ceil((character.attr_manipulation + character.abil_socialize) / 2)
-  const jbPool = character.wits + character.awareness
-
-  const attackAbilities = ['abil_archery', 'abil_brawl', 'abil_melee', 'abil_thrown']
-
-  let abils = attackAbilities.filter((abil)=>character[abil] > 0).map(function(abil){
-    let name = abil.substring(5)
-    return { abil: name, rating: character[abil] }
-  })
-
-  let mas = character.abil_martial_arts.map(function(abil){
-    let name = "martial arts (" + abil.style + ")"
-    return { abil: name, rating: abil.rating }
-  })
-
-  return {
-    currentArmor: {
-      name: arm.name,
-      id: arm.id,
-      weight: arm.weight,
-      mobilityPenalty: _mobilityPenalty(arm),
-      soak: _soak(arm),
-      hardness: _hardness(arm)
-    },
-    attackAbils: abils.concat(mas),
-    totalSoak: _soak(arm) + character.attr_stamina,
-    evasionRaw: evasionRaw,
-    resolveRaw: resolveRaw,
-    guileRaw: guileRaw,
-    jbPool: jbPool,
-    weapons: _weapons(character)
-  }
+export const computedValues = createSelector([character], (character) => {
 })
-
-export default computedValues

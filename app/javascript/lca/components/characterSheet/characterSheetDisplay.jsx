@@ -42,37 +42,48 @@ function MeritSummary(props) {
   </div>);
 }
 
-function CharacterSheetDisplay(props) {
-  const character = props.character
-  const computed = props.computed
+//function CharacterSheetDisplay(props) {
+class CharacterSheetDisplay extends React.Component{
+  constructor(props) {
+    super(props)
+  }
 
-  return(<div className="characterSheet">
-    <button onClick={props.toggleClick}>begin editing</button>
-    <h1>{character.name}</h1>
+  render() {
+    const { character, weapons, armors, merits } = this.props
 
-    <CombatBlock character={character} computed={ computed } />
+    return(<div className="characterSheet">
+      <button onClick={this.props.toggleClick}>begin editing</button>
+      <h1>{character.name}</h1>
 
-    <FullAttributeBlock character={ character } />
-    <FullAbilityBlock character={ character } />
-    <FullSpecialtyBlock specialties={ character.specialties } />
-    <MeritSummary merits={ character.merits } />
-    <ArmorSummary character={ character } computed={ computed } />
+      <CombatBlock character={character} weapons={weapons} armors={armors} merits={merits}/>
+
+      <FullAttributeBlock character={ character } />
+      <FullAbilityBlock character={ character } />
+      <FullSpecialtyBlock specialties={ character.specialties } />
+      <MeritSummary merits={ merits } />
+      <ArmorSummary character={ character } armors={ armors } />
 
 
-    <h3>Health/Willpower</h3>
-    <ul>
-      <li>{ character.health_level_0s } x0</li>
-      <li>{ character.health_level_1s } x1</li>
-      <li>{ character.health_level_2s } x2</li>
-      <li>{ character.health_level_4s } x4</li>
-      <li>{ character.health_level_incap } incap</li>
-      <li>Willpower:
-        <RatingDots rating={ character.willpower_temporary } fillTo={10} />
-        /
-        <RatingDots rating={ character.willpower_permanent } fillTo={10} />
-      </li>
-    </ul>
-  </div>)
+      <h3>Health/Willpower</h3>
+      <ul>
+        <li>{ character.health_level_0s } x0</li>
+        <li>{ character.health_level_1s } x1</li>
+        <li>{ character.health_level_2s } x2</li>
+        <li>{ character.health_level_4s } x4</li>
+        <li>{ character.health_level_incap } incap</li>
+        <li>Willpower:
+          <RatingDots rating={ character.willpower_temporary } fillTo={10} />
+          /
+          <RatingDots rating={ character.willpower_permanent } fillTo={10} />
+        </li>
+      </ul>
+    </div>)
+  }
 }
+  /*
+  const weapons = character.weapons.map((id) => state.character.weapons[id])
+  const armors = character.armors.map((id) => state.character.armors[id])
+  const merits = character.merits.map((id) => state.character.merits[id])
+  */
 
 export default CharacterSheetDisplay

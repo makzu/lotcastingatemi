@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { ATTRIBUTES, ABILITIES } from '../utils/constants'
 
 import { EditorBlock } from './editor/editorBlock.jsx'
+import CombatBlock from './characterSheet/combatBlock.jsx'
 import { AttributeFieldset } from './editor/attributeFieldset.jsx'
 import WeaponEditor from './editor/weaponEditor.jsx'
 
@@ -155,7 +156,7 @@ class _CharacterEditor extends React.Component {
   addMa(e) {
     e.preventDefault()
     let ma = this.state.character.abil_martial_arts.slice()
-    ma.push({ craft: "", rating: 0 })
+    ma.push({ style: "style", rating: 0 })
 
     this.setState({character: {... this.state.character, abil_martial_arts: ma}})
   }
@@ -187,10 +188,13 @@ class _CharacterEditor extends React.Component {
       handleMaChange, handleMaBlur,
       handleWeaponChange
     } = this
+    const { weapons, merits, armors } = this.props
 
     return(<form action="" onSubmit={ handleSubmit }>
       <button onClick={this.props.toggleClick}>end editing</button>
       <h1>Editing { ch.name }</h1>
+
+      <CombatBlock character={ch} weapons={ weapons } armors={ armors } merits={ merits } />
 
       <WeaponEditor character={ ch } />
 

@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchCharacter, toggleEditor, updateCharacter } from '../actions'
 
-import computedValues from '../selectors'
 import CharacterSheetDisplay from './characterSheet/characterSheetDisplay.jsx'
 import CharacterEditor from './characterEditor.jsx'
 
@@ -23,20 +22,21 @@ class CharacterSheet extends React.Component {
   }
 
   render() {
-    const character = this.props.character
-    const computed = this.props.computed
+    const { character, weapons, armors, merits } = this.props
 
     if (character == undefined)
       return(<h1>Lot-Casting Atemi</h1>)
 
     if (this.props.isEditing)
       return(<CharacterEditor
-        character={character} computed={computed}
+        character={character}
+        weapons={ weapons } armors={ armors } merits={ merits }
         toggleClick={this.editorToggle} onUpdate={this.props.updateChar}
       />)
 
     return (<CharacterSheetDisplay
-      character={character} computed={computed}
+      character={ character }
+      weapons={ weapons } armors={ armors } merits={ merits }
       toggleClick={this.editorToggle}
     />);
   }
@@ -44,11 +44,22 @@ class CharacterSheet extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   const character = state.character.characters[ownProps.id]
+  let weapons = []
+  let armors = []
+  let merits = []
+
+  if (character != undefined) {
+    weapons = character.weapons.map((id) => state.character.weapons[id])
+    armors = character.armors.map((id) => state.character.armors[id])
+    merits = character.merits.map((id) => state.character.merits[id])
+  }
+
   const { isFetching, isError, isEditing } = state.app
-  const computed = computedValues(character)
   return {
     character,
-    computed,
+    weapons,
+    armors,
+    merits,
     isEditing,
     isFetching,
     isError

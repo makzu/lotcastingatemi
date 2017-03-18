@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { updateWeapon } from '../../actions'
+import * as calc from '../../utils/calculated'
 
 function WeightSelect(props) {
   return(
@@ -13,7 +14,7 @@ function WeightSelect(props) {
 }
 
 function AbilitySelect(props) {
-  const options = props.computed.attackAbils.map((abil) =>
+  const options = calc.attackAbilities(props.character).map((abil) =>
     <option key={ abil.abil } value={abil.abil}>{ abil.abil }({ abil.rating })</option>
   )
   return(
@@ -29,6 +30,7 @@ class WeaponFieldset extends React.Component {
 
     this.updateWeap = this.updateWeap.bind(this)
     this.pushUpdate = this.pushUpdate.bind(this)
+    this.updateCheckbox = this.updateCheckbox.bind(this)
 
     this.state = { weapon: this.props.weapon }
   }
@@ -44,6 +46,17 @@ class WeaponFieldset extends React.Component {
     this.setState({weapon: {...this.state.weapon, [e.target.name]: val}})
   }
 
+  updateCheckbox(e) {
+    // Toggle, don't just grab the input's value
+    const newVal = ! this.state.weapon[e.target.name]
+
+    this.setState({weapon: {...this.state.weapon, [e.target.name]: newVal}})
+    this.props.onUpdate(this.state.weapon.id,
+      this.state.weapon.character_id,
+      e.target.name, newVal
+    )
+  }
+
   pushUpdate(e) {
     const trait = e.target.name
 
@@ -55,7 +68,7 @@ class WeaponFieldset extends React.Component {
 
   render() {
     const weapon = this.state.weapon
-    const { pushUpdate, updateWeap } = this
+    const { pushUpdate, updateWeap, updateCheckbox } = this
 
     return(<div>
       <label htmlFor="name">Name</label>
@@ -64,8 +77,12 @@ class WeaponFieldset extends React.Component {
       <label htmlFor="weight">Weight</label>
       <WeightSelect weapon={ weapon }
         onBlur={ pushUpdate } onChange={ updateWeap } />
-
-
+      <label htmlFor="is_artifact">Artifact?</label>
+      <input type="checkbox" name="is_artifact" checked={ weapon.is_artifact }
+        onChange={ updateCheckbox } />
+      <input type="text" name="tags" value={ weapon.tags }
+        />
+      <AbilitySelect character={ this.props.character } weapon={ weapon } onChange={ updateWeap } onBlur={ pushUpdate }/>
 
     </div>)
   }
@@ -86,7 +103,7 @@ class _WeaponEditor extends React.Component {
 
   render() {
     const weaps = this.props.weapons.map((weap) =>
-      <WeaponFieldset key={ weap.id } weapon={ weap } onUpdate={ this.onUpdateWeapon } />
+      <WeaponFieldset key={ weap.id } weapon={ weap } character={ this.props.character } onUpdate={ this.onUpdateWeapon } />
     )
     return(<fieldset>
       <legend>Weapon Editor</legend>

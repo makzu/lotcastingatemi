@@ -47,3 +47,15 @@ export const ABILITIES = [
   { abil: "abil_thrown", pretty: "Thrown" },
   { abil: "abil_war", pretty: "War" }
 ]
+
+export const ABILITIES_ALL = ABILITIES.concat([
+  { abil: "abil_craft", pretty: "Craft" },
+  { abil: "abil_martial_arts", pretty: "Martial Arts" }
+])
+
+export const ATTACK_ABILITIES = [
+  "abil_archery",
+  "abil_brawl",
+  "abil_melee",
+  "abil_thrown"
+]

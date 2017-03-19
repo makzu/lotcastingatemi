@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ATTRIBUTES, ABILITIES } from '../utils/constants'
-
+import { ATTRIBUTES, ABILITIES, ABILITIES_ALL } from '../utils/constants' 
 import { EditorBlock } from './editor/editorBlock.jsx'
+import ExpandableListEditor from './editor/expandableListEditor.jsx'
 import CombatBlock from './characterSheet/combatBlock.jsx'
 import { AttributeFieldset } from './editor/attributeFieldset.jsx'
 import WeaponEditor from './editor/weaponEditor.jsx'
@@ -25,47 +25,6 @@ function AbilityFieldset(props) {
   )
 }
 
-function CraftFieldset(props) {
-  const { character, handleChange, handleBlur, addCraft, removeCraft } = props
-
-  const crafts = character.abil_craft.map((craft, index) =>
-    <p key={index}>
-      Craft
-      <input type="text" value={ craft.craft } name={ index }
-        onChange={ handleChange } onBlur={ handleBlur } />
-      <input type="number" value={ craft.rating } name={ index }
-        onChange={ handleChange } onBlur={ handleBlur } min={ 0 } max={ 5 } />
-      <input type="button" value="-" name={ index } onClick={ removeCraft } />
-    </p>
-  )
-  return(<div>
-    <h4>Crafts:</h4>
-    {crafts}
-    <input type="button" value="+" onClick={ addCraft } />
-  </div>)
-}
-
-function MartialArtsFieldset(props) {
-  const { character, handleChange, handleBlur, addMa, removeMa } = props
-
-  const mas = character.abil_martial_arts.map((ma, index) =>
-    <div key={index}>
-      Martial Arts
-      <input type="text" value={ ma.style } name={ index }
-        onChange={ handleChange } onBlur={ handleBlur } />
-      <input type="number" value={ ma.rating } name={ index }
-        onChange={ handleChange } onBlur={ handleBlur } min={ 0 } max={ 5 } />
-      <input type="button" value="-" name={ index } onClick={ removeMa } />
-    </div>
-  )
-  return(<div>
-    <h4>Martial Arts:</h4>
-    {mas}
-    <input type="button" value="+" onClick={ addMa } />
-  </div>)
-}
-
-
 class _CharacterEditor extends React.Component {
   constructor(props) {
     super(props)
@@ -73,16 +32,9 @@ class _CharacterEditor extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
-    this.handleCraftBlur = this.handleCraftBlur.bind(this)
-    this.handleCraftChange = this.handleCraftChange.bind(this)
-    this.handleMaBlur = this.handleMaBlur.bind(this)
-    this.handleMaChange = this.handleMaChange.bind(this)
 
-    this.addCraft = this.addCraft.bind(this)
-    this.removeCraft = this.removeCraft.bind(this)
-    this.addMa = this.addMa.bind(this)
-    this.removeMa = this.removeMa.bind(this)
-
+    this.onListChange = this.onListChange.bind(this)
+    this.onListBlur = this.onListBlur.bind(this)
   }
 
   handleChange(e) {
@@ -105,87 +57,25 @@ class _CharacterEditor extends React.Component {
     this.props.onUpdate(this.state.character.id, trait, this.state.character[trait])
   }
 
-  handleCraftChange(e) {
-    e.preventDefault()
-    const index = e.target.name
-    let craft = this.state.character.abil_craft.slice()
-
-    if (e.target.type == "number") {
-      craft[index].rating = parseInt(e.target.value)
-    } else {
-      craft[index].craft = e.target.value
-    }
-
-    this.setState({character: {... this.state.character, abil_craft: craft}})
+  onListChange(trait, value) {
+    //this.setState({ character: { ...this.state.character, [trait]: value}})
   }
 
-  addCraft(e) {
-    e.preventDefault()
-    let craft = this.state.character.abil_craft.slice()
-    craft.push({ craft: "", rating: 0 })
-
-    this.setState({character: {... this.state.character, abil_craft: craft}})
-  }
-  removeCraft(e) {
-    e.preventDefault()
-    const index = parseInt(e.target.name)
-
-    let craft = this.state.character.abil_craft.slice()
-    craft.splice(index, 1)
-
-    this.setState({character: {... this.state.character, abil_craft: craft}})
-    this.props.onUpdate(this.state.character.id, "abil_craft", craft)
-  }
-
-  handleCraftBlur(e) {
-    this.props.onUpdate(this.state.character.id, "abil_craft", this.state.character.abil_craft)
-  }
-
-  handleMaChange(e) {
-    e.preventDefault()
-    let ma = this.state.character.abil_martial_arts.slice()
-
-    if (e.target.type == "number") {
-      ma[e.target.name].rating = parseInt(e.target.value)
-    } else {
-      ma[e.target.name].style = e.target.value
-    }
-
-    this.setState({character: {... this.state.character, abil_martial_arts: ma}})
-  }
-  addMa(e) {
-    e.preventDefault()
-    let ma = this.state.character.abil_martial_arts.slice()
-    ma.push({ style: "style", rating: 0 })
-
-    this.setState({character: {... this.state.character, abil_martial_arts: ma}})
-  }
-  removeMa(e) {
-    e.preventDefault()
-    const index = parseInt(e.target.name)
-
-    let ma = this.state.character.abil_martial_arts.slice()
-    ma.splice(index, 1)
-
-    this.setState({character: {... this.state.character, abil_martial_arts: ma}})
-    this.props.onUpdate(this.state.character.id, "abil_martial_arts", ma)
-  }
-
-  handleMaBlur(e) {
-    this.props.onUpdate(this.state.character.id, "abil_martial_arts", this.state.character.abil_martial_arts)
+  onListBlur(trait, value) {
+    console.log('in onListBlur', trait, value)
+    this.setState({ character: { ...this.state.character, [trait]: value}})
+    this.props.onUpdate(this.state.character.id, trait, value)
   }
 
   handleSubmit(e) {
     e.preventDefault()
   }
 
-
   render() {
     const ch = this.state.character
     const {
       handleSubmit, handleChange, handleBlur,
-      handleCraftChange, handleCraftBlur,
-      handleMaChange, handleMaBlur,
+      onListChange, onListBlur,
       handleWeaponChange
     } = this
     const { weapons, merits, armors } = this.props
@@ -194,9 +84,8 @@ class _CharacterEditor extends React.Component {
       <button onClick={this.props.toggleClick}>end editing</button>
       <h1>Editing { ch.name }</h1>
 
-      <CombatBlock character={ch} weapons={ weapons } armors={ armors } merits={ merits } />
 
-      <WeaponEditor character={ ch } />
+      <CombatBlock character={ ch } weapons={ weapons } armors={ armors } merits={ merits } />
 
       <fieldset>
         <legend>Basics</legend>
@@ -207,7 +96,16 @@ class _CharacterEditor extends React.Component {
         <textarea name="description" value={ ch.description } onChange={handleChange} onBlur={handleBlur} />
 
         <EditorBlock trait="essence" value={ ch.essence } prettyName="Essence"
-          type="number" min={1} onChange={ handleChange } onBlur={ handleBlur } />
+          type="number" min={ 1 } onChange={ handleChange } onBlur={ handleBlur } />
+
+        <h4>Ties</h4>
+        <ExpandableListEditor character={ ch } trait="ties"
+          onUpdate={ onListChange } onBlur={ onListBlur }
+        />
+        <h4>Principles</h4>
+        <ExpandableListEditor character={ ch } trait="principles"
+          onUpdate={ onListChange } onBlur={ onListBlur }
+        />
       </fieldset>
 
       <AttributeFieldset character={ ch }
@@ -215,13 +113,21 @@ class _CharacterEditor extends React.Component {
 
       <AbilityFieldset character={ ch }
         handleChange={ handleChange } handleBlur={ handleBlur }>
-        <CraftFieldset character={ ch }
-          handleChange={ handleCraftChange } handleBlur={ handleCraftBlur }
-          addCraft={this.addCraft} removeCraft={ this.removeCraft } />
-        <MartialArtsFieldset character={ ch }
-          handleChange={ handleMaChange } handleBlur={ handleMaBlur }
-          addMa={this.addMa} removeMa={this.removeMa} />
+        <h4>Crafts:</h4>
+        <ExpandableListEditor character={ ch } trait="abil_craft"
+          onUpdate={ onListChange } onBlur={ onListBlur }
+        />
+        <h4>Martial Arts:</h4>
+        <ExpandableListEditor character={ ch } trait="abil_martial_arts"
+          onUpdate={ onListChange } onBlur={ onListBlur }
+        />
+        <h4>Specialties:</h4>
+        <ExpandableListEditor character={ ch } trait="specialties"
+          onUpdate={ onListChange } onBlur={ onListBlur }
+        />
       </AbilityFieldset>
+
+      <WeaponEditor character={ ch } />
 
       <fieldset>
         <legend>Willpower and Health Levels</legend>

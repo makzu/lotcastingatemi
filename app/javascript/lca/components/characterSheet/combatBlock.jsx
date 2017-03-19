@@ -26,6 +26,7 @@ function CombatBlock(props) {
   return(<div>
     <p>Evasion: { calc.evasionRaw(character) }</p>
     <p>Soak: { soak }</p>
+    <p>Wound penalty: { calc.woundPenalty(character) }</p>
     <table>
       <thead><tr>
         <th>Name</th>

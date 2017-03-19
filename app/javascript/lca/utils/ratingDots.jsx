@@ -1,7 +1,7 @@
 import React from 'react'
 
 function RatingDots(props) {
-  const fullCount = props.rating || 1
+  const fullCount = props.rating
   const emptyCount = ( props.fillTo || 5 ) - fullCount
 
   const fullDots = "●".repeat( fullCount );

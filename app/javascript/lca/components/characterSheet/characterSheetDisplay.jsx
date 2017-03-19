@@ -41,6 +41,36 @@ function MeritSummary(props) {
     { merits}
   </div>);
 }
+function IntimacySummary(props) {
+  const principles = props.character.principles.map((p, index) =>
+    <li key={index}>
+      { p.subject }
+      <RatingDots rating={ p.rating } dontFill />
+    </li>
+  )
+  const ties = props.character.ties.map((p, index) =>
+    <li key={index}>
+      { p.subject }
+      <RatingDots rating={ p.rating } dontFill />
+    </li>
+  )
+  return(<div className="intimacySummary">
+    <h3>Intimacies</h3>
+    <div>
+      <h5>Principles</h5>
+      <ul>
+        { principles }
+      </ul>
+    </div>
+    <div>
+      <h5>Ties</h5>
+      <ul>
+        { ties }
+      </ul>
+    </div>
+
+  </div>);
+}
 
 //function CharacterSheetDisplay(props) {
 class CharacterSheetDisplay extends React.Component{
@@ -63,6 +93,7 @@ class CharacterSheetDisplay extends React.Component{
       <MeritSummary merits={ merits } />
       <ArmorSummary character={ character } armors={ armors } />
 
+      <IntimacySummary character={ character } />
 
       <h3>Health/Willpower</h3>
       <ul>

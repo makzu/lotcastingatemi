@@ -1,5 +1,5 @@
 /* Defense values (Parry is per-weapon and in weapons.js) */
-import ATTACK_ABILITIES from '../constants.js'
+import { ATTACK_ABILITIES, ABILITIES, ABILITIES_ALL } from '../constants.js'
 
 export function evasionRaw(character) {
   return Math.ceil((character.attr_dexterity + character.abil_dodge) / 2)
@@ -13,10 +13,28 @@ export function resolveRaw(character) {
   return Math.ceil((character.attr_wits + character.abil_integrity) / 2)
 }
 
-export function attackAbilities(character) {
-  const attackAbilities = ['abil_archery', 'abil_brawl', 'abil_melee', 'abil_thrown']
+export function woundPenalty(character) {
+  const totalDmg = character.damage_bashing + character.damage_lethal + character.damage_aggravated
+  const lvl0 = character.health_level_0s
+  const lvl1 = character.health_level_1s
+  const lvl2 = character.health_level_2s
+  const lvl4 = character.health_level_4s
 
-  let abils = attackAbilities.filter((abil)=>character[abil] > 0).map(function(abil){
+  if (totalDmg <= lvl0) {
+    return 0
+  } else if (totalDmg <= (lvl0 + lvl1)) {
+    return 1
+  } else if (totalDmg <= (lvl0 + lvl1 + lvl2)) {
+    return 2
+  } else if (totalDmg <= (lvl0 + lvl1 + lvl2 + lvl4)) {
+    return 4
+  } else {
+    return -1
+  }
+}
+
+export function attackAbilities(character) {
+  let abils = ATTACK_ABILITIES.filter((abil)=>character[abil] > 0).map(function(abil){
     let name = abil.substring(5)
     return { abil: name, rating: character[abil], specialties: character.specialties.filter((spec) => spec.ability == name)}
   })
@@ -27,6 +45,17 @@ export function attackAbilities(character) {
   })
 
   return abils.concat(mas)
+}
+
+export function abilitiesWithRatings(character) {
+  const abils = ABILITIES_ALL.filter((a) => {
+    if (a.abil == "abil_craft" || a.abil == "abil_martial_arts")
+      return character[a.abil].length >0
+    else
+      return character[a.abil] > 0
+  })
+
+  return abils
 }
 
 export function weaponAccuracyBonus(weapon) {

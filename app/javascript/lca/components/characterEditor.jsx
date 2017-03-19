@@ -6,6 +6,7 @@ import ExpandableListEditor from './editor/expandableListEditor.jsx'
 import CombatBlock from './characterSheet/combatBlock.jsx'
 import { AttributeFieldset } from './editor/attributeFieldset.jsx'
 import WeaponEditor from './editor/weaponEditor.jsx'
+import MeritEditor from './editor/meritEditor.jsx'
 
 function AbilityFieldset(props) {
   const { character, handleChange, handleBlur } = props
@@ -92,6 +93,7 @@ class _CharacterEditor extends React.Component {
       <button onClick={this.props.toggleClick}>end editing</button>
       <h1>Editing { ch.name }</h1>
 
+      <MeritEditor character={ ch } merits={ merits } />
 
       <CombatBlock character={ ch } weapons={ weapons } merits={ merits } />
 

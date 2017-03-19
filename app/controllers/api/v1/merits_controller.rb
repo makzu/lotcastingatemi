@@ -22,4 +22,7 @@ class Api::V1::MeritsController < Api::V1::BaseController
   end
 
   private
+  def merit_params
+    params.require(:merit).permit!
+  end
 end

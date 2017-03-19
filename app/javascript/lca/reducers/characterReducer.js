@@ -52,6 +52,15 @@ export default function CharacterReducer(state = defaultState, action) {
         ...weap, [wtr]: wval } }
     }
 
+  case c.UPDATE_MERIT:
+    const mtr = action.update.trait
+    const mval = action.update.value
+    const merit = state.merits[action.id]
+    return { ...state, merits: {
+      ...state.merits, [action.id]: {
+        ...merit, [mtr]: mval } }
+    }
+
   default:
     return state
   }

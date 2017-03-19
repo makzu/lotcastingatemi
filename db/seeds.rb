@@ -1,15 +1,18 @@
-puts "updating Marnan"
-marnan = Character.find_or_create_by(id: 1)
-marnan.update(
-  name: "Marnan Five-Sword",
-  description: "Five swords and one chip on his shoulder",
+puts "updating example character"
+
+exChr = Character.find_or_create_by(id: 1)
+exChr.update(
+  name: "Vincible Sword Princess",
+  description: "Exactly what it says on the tin.",
 
   attr_dexterity:    4, attr_strength:     2, attr_stamina:    3,
   attr_charisma:     2, attr_manipulation: 2, attr_appearance: 2,
   attr_intelligence: 2, attr_wits:         2, attr_perception: 3,
 
-  willpower_temporary: 6,
+  willpower_temporary: 4,
   willpower_permanent: 6,
+
+  damage_bashing: 2,
 
   abil_melee: 4,
   abil_brawl: 1,
@@ -18,119 +21,108 @@ marnan.update(
   abil_integrity: 3,
   abil_resistance: 3,
   abil_presence: 2,
-  abil_bureaucracy: 1,
-  abil_investigation: 1,
-  abil_linguistics: 1,
-  abil_medicine: 1,
-  abil_socialize: 1,
-  abil_survival: 1,
-  abil_war: 1,
-
+  abil_bureaucracy: 2,
+  abil_investigation: 2,
+  abil_linguistics: 2,
+  abil_socialize: 4,
+  abil_war: 2,
   abil_craft: [
-    { craft: "blacksmithing", rating: 1 }
+    { craft: "weapon forging", rating: 3 }
   ],
-
   abil_martial_arts: [
-    { style: "seven hand style", rating: 1 }
+    { style: "steel devil style", rating: 4 }
   ],
 
   specialties: [
-    { ability: "Melee", context: "Swords" },
-    { ability: "Melee", context: "Shields" },
-    { ability: "Bureaucracy", context: "Satrapy Governments" },
-    { ability: "Survival", context: "Tracking people" }
+    { ability: "dodge", context: "While surrounded" },
+    { ability: "melee", context: "While surrounded" },
+    { ability: "bureaucracy", context: "Official duties of a princess" },
+    { ability: "socialize", context: "royal courts" },
+    { ability: "craft", context: "her own weapons" }
   ],
 
   ties: [
-    { subject: "Enambris Rosen-Ash (Bittersweet respect)", rating: 3 }
+    { subject: "My people (love)", rating: 3 },
+    { subject: "Vincible Sword King, my father (love)", rating: 2 },
   ],
+
   principles: [
-    { subject: "I must do what I can to protect my city.", rating: 3 }
+    { subject: "I must defend those that I love", rating: 3 }
   ]
 )
 
-m = Merit.find_or_create_by(merit_name: "martial artist", character: marnan)
+puts "updating example character merits"
+m = Merit.find_or_create_by(id: 1, character: exChr)
 m.update(
   name: "martial artist",
+  merit_name: "martial artist",
   rating: 4,
   prereqs: "brawl 1",
   ref: "core p.163-164"
 )
-m = Merit.find_or_create_by(merit_name: "artifact", rating: 3, character: marnan)
+m = Merit.find_or_create_by(id: 2, character: exChr)
 m.update(
-  name: "Marnan's Ancestral Sword"
-)
-m = Merit.find_or_create_by(merit_name: "quick draw", character: marnan)
-m.update(
-  name: "quick draw",
-  rating: 4
-)
-m = Merit.find_or_create_by(merit_name: "fast reflexes", character: marnan)
-m.update(
-  name: "fast reflexes"
-)
-m = Merit.find_or_create_by(merit_name: "ambidextrous", rating: 1, character: marnan)
-m = Merit.find_or_create_by(merit_name: "backing", character: marnan)
-m.update(
-  name: "Backing of the Ereden City Guard",
+  name: "royal stipend",
+  merit_name: "resources",
+  description: "The princess has some access to her kingdom's coffers",
   rating: 2
 )
-m = Merit.find_or_create_by(merit_name: "resources", rating: 2, character: marnan)
-
-m = Weapon.find_or_create_by(name: "Marnan's Ancestral sword", character: marnan)
+puts "updating example character weapons"
+m = Weapon.find_or_create_by(id: 1, character: exChr)
 m.update(
-  weight: "medium",
-  tags: ["lethal", "melee", "balanced"],
-  ability: "melee",
-  is_artifact: true
-)
-m = Weapon.find_or_create_by(name: "Marnan's Ancestral sword (seven hand style)", character: marnan)
-m.update(
+  name: "Twin blades (paired)",
   weight: "medium",
   tags: ["lethal", "martial arts", "balanced"],
-  ability: "martial arts (seven hand style)",
-  is_artifact: true
+  ability: "martial arts (steel devil style)"
 )
-m = Weapon.find_or_create_by(name: "Great sword", character: marnan)
+m = Weapon.find_or_create_by(id: 2, character: exChr)
 m.update(
-  weight: "heavy",
-  ability: "melee",
-  tags: ["lethal", "melee", "balanced", "reaching", "two-handed when on foot"]
-)
-m = Weapon.find_or_create_by(name: "Shortsword", character: marnan)
-m.update(
-  weight: "light",
-  ability: "melee",
-  tags: ["lethal", "melee", "balanced"]
-)
-m = Weapon.find_or_create_by(name: "Chopping sword", character: marnan)
-m.update(
+  name: "Stem (the left blade)",
   weight: "medium",
-  ability: "melee",
-  tags: ["lethal", "melee", "chopping"]
+  tags: ["lethal", "melee", "balanced"],
+  ability: "melee"
 )
-m = Weapon.find_or_create_by(name: "straight sword", character: marnan)
+m = Weapon.find_or_create_by(id: 3, character: exChr)
 m.update(
+  name: "Blossom (the right blade)",
   weight: "medium",
-  ability: "melee",
-  tags: ["lethal", "melee", "balanced"]
+  tags: ["lethal", "melee", "balanced"],
+  ability: "melee"
 )
-andhisshield = Weapon.find_or_create_by(name: "Shield", character: marnan)
-andhisshield.update(
+m = Weapon.find_or_create_by(id: 4, character: exChr)
+m.update(
+  name: "Shield example",
   weight: "medium",
   ability: "melee",
   tags: ["bashing", "melee", "shield"]
 )
-m = Armor.find_or_create_by(name: "Ereden guard hauberk", character: marnan)
+m = Weapon.find_or_create_by(id: 5, character: exChr)
 m.update(
+  name: "Light Artifact example",
+  weight: "light",
+  ability: "brawl",
+  is_artifact: "true",
+  tags: ["bashing", "brawl", "smashing"]
+)
+puts "updating example character armor"
+m = Armor.find_or_create_by(id: 1, character: exChr)
+m.update(
+  name: "Reinforced Breastplate",
   weight: "medium",
   equipped: true
+)
+m = Armor.find_or_create_by(id: 2, character: exChr)
+m.update(
+  name: "Regal heavy suit",
+  weight: "heavy",
+  is_artifact: "true"
 )
 
 #################################
 puts 'Updating qc 1'
-q = Qc.find_or_create_by(name: "Generic guardsman")
+q = Qc.find_or_create_by(id: 1)
 q.update(
+  name: "Generic guardsman",
   willpower_temporary: 4, willpower_permanent: 4,
   join_battle: 6, movement: 4,
   soak: 8, evasion: 2, parry: 4,
@@ -143,7 +135,9 @@ q.update(
     { action: "threaten", pool: 4 }
   ]
 )
-qm = QcMerit.find_or_create_by(qc: q, name: "Call for Help")
+puts "Updating qc 1 merits"
+qm = QcMerit.find_or_create_by(qc: q, id: 1)
 qm.update(
+  name: "Call for Help",
   body: "Upon detecting intruders, she immediately lets out a cry that somehow manages to alert all other guards within a certain radius."
 )

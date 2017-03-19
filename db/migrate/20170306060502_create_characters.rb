@@ -68,6 +68,11 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
       t.json    :principles        # [{ subject: "The Mayor's Daughter (love)", rating: 2 }]
       t.json    :specialties       # [{ ability: "Melee", context: "Swords" }]
 
+      t.string  :armor_name,          default: "unarmored"
+      t.string  :armor_weight,        default: "unarmored"
+      t.boolean :armor_is_artifact,   default: false
+      t.string  :armor_tags, array: true, default: []
+
       # Experience points of all kinds
       t.integer :xp_total,            default: 0
       t.integer :xp_spent,            default: 0

@@ -6,7 +6,7 @@ class Api::V1::CharactersController < Api::V1::BaseController
   #end
 
   def show
-    included = %w{merits weapons armors}
+    included = %w{merits weapons}
     render json: @character, include: included
   end
 
@@ -29,7 +29,6 @@ class Api::V1::CharactersController < Api::V1::BaseController
   end
 
   def character_params
-    #params.require(:character).permit(:name, :merit, :weapon, :armor)
     params.require(:character).permit!
   end
 end

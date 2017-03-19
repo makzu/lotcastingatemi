@@ -5,6 +5,8 @@ export const UPDATE_CHAR = 'UPDATE_CHAR'
 export const UPDATE_CHAR_COMPLETE = 'UPDATE_CHAR_COMPLETE'
 export const UPDATE_WEAP = 'UPDATE_WEAP'
 export const UPDATE_WEAP_COMPLETE = 'UPDATE_WEAP_COMPLETE'
+export const UPDATE_MERIT = 'UPDATE_MERIT'
+export const UPDATE_MERIT_COMPLETE = 'UPDATE_MERIT_COMPLETE'
 
 export const ATTRIBUTES = [
   { attr: "attr_strength", pretty: "Strength" },

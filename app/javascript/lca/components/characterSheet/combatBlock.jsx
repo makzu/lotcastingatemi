@@ -16,16 +16,17 @@ function WeaponData(props) {
 // */
 
 function CombatBlock(props) {
-  const { character, weapons, armors, merits } = props
-  const currentArmor = calc.currentArmor(character, armors)
-  const soak = character.attr_stamina + calc.armorSoak(currentArmor)
+  const { character, weapons, merits } = props
+  const naturalSoak = calc.naturalSoak(character)
+  const armorSoak = calc.armorSoak(character)
   const weaps = weapons.map((weapon) =>
     <WeaponData key={weapon.id} character={character} weapon={weapon} />
   )
 
   return(<div>
     <p>Evasion: { calc.evasionRaw(character) }</p>
-    <p>Soak: { soak }</p>
+    <p>Soak: { naturalSoak + armorSoak } ({ armorSoak } from armor)</p>
+    <p>Hardness: { calc.hardness(character) }</p>
     <p>Wound penalty: { calc.woundPenalty(character) }</p>
     <table>
       <thead><tr>

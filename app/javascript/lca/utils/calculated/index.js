@@ -2,18 +2,22 @@
 import { ATTACK_ABILITIES, ABILITIES, ABILITIES_ALL } from '../constants.js'
 
 export function evasionRaw(character) {
+  // TODO specialties
   return Math.ceil((character.attr_dexterity + character.abil_dodge) / 2)
 }
 
 export function guileRaw(character) {
+  // TODO specialties
   return Math.ceil((character.attr_manipulation + character.abil_socialize) / 2)
 }
 
 export function resolveRaw(character) {
+  // TODO specialties
   return Math.ceil((character.attr_wits + character.abil_integrity) / 2)
 }
 
 export function woundPenalty(character) {
+  // TODO merits that have an effect on wound penalties
   const totalDmg = character.damage_bashing + character.damage_lethal + character.damage_aggravated
   const lvl0 = character.health_level_0s
   const lvl1 = character.health_level_1s
@@ -129,10 +133,12 @@ export function weaponOverwhelming(weapon) {
 }
 
 export function witheringAttackPool(character, weapon) {
+  // TODO specialties
   return decisiveAttackPool(character, weapon) + weaponAccuracyBonus(weapon)
 }
 
 export function decisiveAttackPool(character, weapon) {
+  // TODO specialties
   const ability = attackAbilities(character).find((abil) =>
     abil.abil == weapon.ability
   )
@@ -144,26 +150,12 @@ export function decisiveAttackPool(character, weapon) {
 
 export function weaponParry(character, weapon) {
   // TODO handle archery and thrown
+  // TODO specialties
   return Math.ceil(decisiveAttackPool(character, weapon) / 2) + weaponDefenseBonus(weapon)
 }
 
-export function currentArmor(character, armors) {
-  const arm = armors.find((armor) => armor.equipped)
-  if (arm == undefined) {
-    return {
-      name: "unarmored",
-      weight: "unarmored",
-      isArtifact: false,
-      equipped: true,
-      tags: []
-    }
-  } else {
-    return arm
-  }
-}
-
-export function armorMobilityPenalty(armor) {
-  switch(armor.weight) {
+export function mobilityPenalty(character) {
+  switch(character.armor_weight) {
   case "light":
   case "unarmored":
     return 0
@@ -176,22 +168,28 @@ export function armorMobilityPenalty(armor) {
   }
 }
 
-export function armorSoak(armor) {
-  switch(armor.weight) {
+export function armorSoak(character) {
+  switch(character.armor_weight) {
   case "light":
-    return armor.isArtifact ? 5 : 3
+    return character.armor_is_artifact ? 5 : 3
   case "medium":
-    return armor.isArtifact ? 8 : 5
+    return character.armor_is_artifact ? 8 : 5
   case "heavy":
-    return armor.isArtifact ? 11 : 7
+    return character.armor_is_artifact ? 11 : 7
   case "unarmored":
     return 0
   }
 }
-export function armorHardness(armor) {
-  if (!armor.isArtifact)
+
+export function naturalSoak(character) {
+  // TODO handle merits and other effects that modify natural soak
+  return character.attr_stamina
+}
+
+export function hardness(character) {
+  if (! character.armor_is_artifact)
     return 0
-  switch(armor.weight) {
+  switch(character.armor_weight) {
   case "light":
     return 4
   case "medium":

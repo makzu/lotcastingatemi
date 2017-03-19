@@ -15,18 +15,6 @@ ActiveRecord::Schema.define(version: 20170311054129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "armors", id: :serial, force: :cascade do |t|
-    t.integer "character_id"
-    t.string "name"
-    t.string "weight"
-    t.string "tags", array: true
-    t.boolean "is_artifact", default: false
-    t.boolean "equipped", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["character_id"], name: "index_armors_on_character_id"
-  end
-
   create_table "characters", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -81,6 +69,10 @@ ActiveRecord::Schema.define(version: 20170311054129) do
     t.json "ties"
     t.json "principles"
     t.json "specialties"
+    t.string "armor_name", default: "unarmored"
+    t.string "armor_weight", default: "unarmored"
+    t.boolean "armor_is_artifact", default: false
+    t.string "armor_tags", default: [], array: true
     t.integer "xp_total", default: 0
     t.integer "xp_spent", default: 0
     t.integer "xp_solar_total", default: 0
@@ -172,7 +164,6 @@ ActiveRecord::Schema.define(version: 20170311054129) do
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 
-  add_foreign_key "armors", "characters"
   add_foreign_key "merits", "characters"
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "weapons", "characters"

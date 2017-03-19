@@ -5,15 +5,12 @@ import * as c from '../utils/constants'
 const defaultState = {
   characters: {},
   weapons: {},
-  merits: {},
-  armors: {}
+  merits: {}
 }
 const weapon = new schema.Entity('weapons')
-const armor = new schema.Entity('armors')
 const merit = new schema.Entity('merits')
 const character = new schema.Entity('characters', {
   weapons: [ weapon ],
-  armors: [ armor ],
   merits: [ merit ]
 })
 
@@ -23,13 +20,11 @@ function _receive_char(state, action) {
   const id = newState.result
   const newChar = newState.entities.characters
   const newWeapons = newState.entities.weapons
-  const newArmors = newState.entities.armors
   const newMerits = newState.entities.merits
 
   return {
     characters: { ...state.characters, ...newChar },
     weapons: { ...state.weapons, ...newWeapons },
-    armors: { ...state.armors, ...newArmors },
     merits: { ...state.merits, ...newMerits }
   }
 }
@@ -40,12 +35,12 @@ export default function CharacterReducer(state = defaultState, action) {
     return _receive_char(state, action)
 
   case c.UPDATE_CHAR:
-    const tr = action.update.trait
-    const val = action.update.value
+    const ctr = action.update.trait
+    const cval = action.update.value
     const char = state.characters[action.id]
     return {... state, characters: {
       ...state.characters, [action.id]: {
-        ...char, [tr]: val } }
+        ...char, [ctr]: cval } }
     }
 
   case c.UPDATE_WEAP:
@@ -56,6 +51,7 @@ export default function CharacterReducer(state = defaultState, action) {
       ...state.weapons, [action.id]: {
         ...weap, [wtr]: wval } }
     }
+
   default:
     return state
   }

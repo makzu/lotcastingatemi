@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :characters, only: [:show, :create, :destroy, :update] do
-        resources :merits, :armors, :weapons, only: [:index, :show, :create, :destroy, :update]
+        resources :merits, :weapons, only: [:index, :show, :create, :destroy, :update]
       end
 
       resources :qcs, only: [:show, :create, :destroy, :update] do

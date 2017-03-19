@@ -40,9 +40,18 @@ class _CharacterEditor extends React.Component {
   handleChange(e) {
     e.preventDefault()
     let val = null
+
     if (e.target.type == "number")
       val = parseInt(e.target.value)
-    else
+
+    else if (e.target.type == "checkbox") {
+      val = ! this.state.character[e.target.name]
+      this.props.onUpdate(this.state.character.id, e.target.name, val)
+
+    } else if (e.target.dataset.array) {
+      val = e.target.value.split(",")
+
+    } else
       val = e.target.value
 
     this.setState({character: {... this.state.character, [e.target.name]: val}})
@@ -62,7 +71,6 @@ class _CharacterEditor extends React.Component {
   }
 
   onListBlur(trait, value) {
-    console.log('in onListBlur', trait, value)
     this.setState({ character: { ...this.state.character, [trait]: value}})
     this.props.onUpdate(this.state.character.id, trait, value)
   }
@@ -78,14 +86,14 @@ class _CharacterEditor extends React.Component {
       onListChange, onListBlur,
       handleWeaponChange
     } = this
-    const { weapons, merits, armors } = this.props
+    const { weapons, merits } = this.props
 
     return(<form action="" onSubmit={ handleSubmit }>
       <button onClick={this.props.toggleClick}>end editing</button>
       <h1>Editing { ch.name }</h1>
 
 
-      <CombatBlock character={ ch } weapons={ weapons } armors={ armors } merits={ merits } />
+      <CombatBlock character={ ch } weapons={ weapons } merits={ merits } />
 
       <fieldset>
         <legend>Basics</legend>
@@ -127,7 +135,28 @@ class _CharacterEditor extends React.Component {
         />
       </AbilityFieldset>
 
-      <WeaponEditor character={ ch } />
+      <WeaponEditor character={ ch } weapons={ weapons } />
+
+      <fieldset>
+        <legend>Armor</legend>
+        <EditorBlock prettyName="Armor Name"
+          type="text"
+          trait="armor_name" value={ ch.armor_name }
+          onChange={ handleChange } onBlur={ handleBlur } />
+        <label htmlFor="armor_weight">Weight:</label>
+        <select name="armor_weight" value={ ch.armor_weight } onChange={ handleChange } onBlur={ handleBlur }>
+          <option value="unarmored">Unarmored</option>
+          <option value="light">Light</option>
+          <option value="medium">Medium</option>
+          <option value="heavy">Heavy</option>
+        </select>
+
+        <label htmlFor="armor_is_artifact">Artifact ?</label>
+        <input type="checkbox" name="armor_is_artifact" checked={ ch.armor_is_artifact } onChange={ handleChange } />
+
+        <label htmlFor="armor_tags">Tags:</label>
+        <input type="text" name="armor_tags" value={ ch.armor_tags } onChange={handleChange} onBlur={ handleBlur } data-array={ true } />
+      </fieldset>
 
       <fieldset>
         <legend>Willpower and Health Levels</legend>
@@ -180,7 +209,6 @@ class _CharacterEditor extends React.Component {
   }
 }
 function mapStateToProps(state) {
-  //return {character: state.character}
   return {}
 }
 

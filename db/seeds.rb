@@ -48,7 +48,9 @@ exChr.update(
 
   principles: [
     { subject: "I must defend those that I love", rating: 3 }
-  ]
+  ],
+  armor_weight: "medium",
+  armor_name:   "Reinforced breastplate"
 )
 
 puts "updating example character merits"
@@ -103,19 +105,6 @@ m.update(
   ability: "brawl",
   is_artifact: "true",
   tags: ["bashing", "brawl", "smashing"]
-)
-puts "updating example character armor"
-m = Armor.find_or_create_by(id: 1, character: exChr)
-m.update(
-  name: "Reinforced Breastplate",
-  weight: "medium",
-  equipped: true
-)
-m = Armor.find_or_create_by(id: 2, character: exChr)
-m.update(
-  name: "Regal heavy suit",
-  weight: "heavy",
-  is_artifact: "true"
 )
 
 #################################

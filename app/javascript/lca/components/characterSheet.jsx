@@ -22,7 +22,7 @@ class CharacterSheet extends React.Component {
   }
 
   render() {
-    const { character, weapons, armors, merits } = this.props
+    const { character, weapons, merits } = this.props
 
     if (character == undefined)
       return(<h1>Lot-Casting Atemi</h1>)
@@ -30,13 +30,13 @@ class CharacterSheet extends React.Component {
     if (this.props.isEditing)
       return(<CharacterEditor
         character={character}
-        weapons={ weapons } armors={ armors } merits={ merits }
+        weapons={ weapons } merits={ merits }
         toggleClick={this.editorToggle} onUpdate={this.props.updateChar}
       />)
 
     return (<CharacterSheetDisplay
       character={ character }
-      weapons={ weapons } armors={ armors } merits={ merits }
+      weapons={ weapons } merits={ merits }
       toggleClick={this.editorToggle}
     />);
   }
@@ -45,12 +45,10 @@ class CharacterSheet extends React.Component {
 function mapStateToProps(state, ownProps) {
   const character = state.character.characters[ownProps.id]
   let weapons = []
-  let armors = []
   let merits = []
 
   if (character != undefined) {
     weapons = character.weapons.map((id) => state.character.weapons[id])
-    armors = character.armors.map((id) => state.character.armors[id])
     merits = character.merits.map((id) => state.character.merits[id])
   }
 
@@ -58,7 +56,6 @@ function mapStateToProps(state, ownProps) {
   return {
     character,
     weapons,
-    armors,
     merits,
     isEditing,
     isFetching,

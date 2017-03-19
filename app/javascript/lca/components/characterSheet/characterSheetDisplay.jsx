@@ -3,10 +3,10 @@ import React from 'react'
 import toggleEditor from '../../actions'
 
 import CombatBlock from './combatBlock.jsx'
-import ArmorSummary from './armorSummary.jsx'
 import FullAttributeBlock from './fullAttributeBlock.jsx'
 import FullAbilityBlock from './fullAbilityBlock.jsx'
 import RatingDots from '../../utils/ratingDots.jsx'
+import * as calc from '../../utils/calculated/'
 
 function FullSpecialtyBlock(props) {
   if (props.specialties == undefined)
@@ -79,19 +79,18 @@ class CharacterSheetDisplay extends React.Component{
   }
 
   render() {
-    const { character, weapons, armors, merits } = this.props
+    const { character, weapons, merits } = this.props
 
     return(<div className="characterSheet">
       <button onClick={this.props.toggleClick}>begin editing</button>
       <h1>{character.name}</h1>
 
-      <CombatBlock character={character} weapons={weapons} armors={armors} merits={merits}/>
+      <CombatBlock character={character} weapons={weapons} merits={merits}/>
 
       <FullAttributeBlock character={ character } />
       <FullAbilityBlock character={ character } />
       <FullSpecialtyBlock specialties={ character.specialties } />
       <MeritSummary merits={ merits } />
-      <ArmorSummary character={ character } armors={ armors } />
 
       <IntimacySummary character={ character } />
 
@@ -107,14 +106,12 @@ class CharacterSheetDisplay extends React.Component{
           /
           <RatingDots rating={ character.willpower_permanent } fillTo={10} />
         </li>
+        <li>Armor:
+          { character.armor_name } ({ character.armor_weight }, +{ calc.armorSoak(character)} soak)
+        </li>
       </ul>
     </div>)
   }
 }
-  /*
-  const weapons = character.weapons.map((id) => state.character.weapons[id])
-  const armors = character.armors.map((id) => state.character.armors[id])
-  const merits = character.merits.map((id) => state.character.merits[id])
-  */
 
 export default CharacterSheetDisplay

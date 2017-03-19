@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-//import { characterReducer } from './characterReducer.js'
 import * as c from '../utils/constants'
 
 import { defaultState } from './defaultState.js'
 import CharacterReducer from './characterReducer.js'
-import WeaponReducer from './weaponReducer.js'
 
 function appReducer(state = defaultState, action) {
   switch (action.type) {
@@ -19,10 +17,12 @@ function appReducer(state = defaultState, action) {
 
   case c.UPDATE_CHAR:
   case c.UPDATE_WEAP:
+  case c.UPDATE_MERIT:
     return {... state, isFetching: true }
 
   case c.UPDATE_CHAR_COMPLETE:
   case c.UPDATE_WEAP_COMPLETE:
+  case c.UPDATE_MERIT_COMPLETE:
     return {... state, isFetching: false }
 
   default:

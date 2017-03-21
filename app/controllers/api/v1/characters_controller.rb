@@ -1,10 +1,6 @@
 class Api::V1::CharactersController < Api::V1::BaseController
   before_action :set_character, only: [:show, :update, :destroy]
 
-  #def index
-    #respond_with Character.all
-  #end
-
   def show
     included = %w{merits weapons}
     render json: @character, include: included

@@ -1,8 +1,4 @@
 class Api::V1::QcsController < Api::V1::BaseController
-  def index
-    respond_with Qc.all
-  end
-
   def show
     respond_with Qc.find(params[:id])
   end

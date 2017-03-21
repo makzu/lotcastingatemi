@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
 
       resources :qcs, only: [:show, :create, :destroy, :update] do
-        resources :qc_merits, only: [:index, :show, :create, :destroy, :update]
+        resources :qc_merits, only: [:show, :create, :destroy, :update]
       end
     end
   end

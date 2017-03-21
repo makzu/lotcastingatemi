@@ -1,8 +1,4 @@
 class Api::V1::WeaponsController < Api::V1::BaseController
-  def index
-    respond_with Character.find(params[:character_id]).weapons
-  end
-
   def show
     respond_with Weapon.find(params[:id])
   end

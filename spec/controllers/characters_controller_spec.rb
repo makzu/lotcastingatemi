@@ -1,13 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CharactersController, type: :controller do
-
-  describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
-  end
+RSpec.describe Api::V1::CharactersController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do

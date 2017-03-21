@@ -1,48 +1,49 @@
 import React from 'react'
+import Divider from 'material-ui/Divider'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+
 import * as calc from '../../utils/calculated'
+import RatingDots from '../../utils/ratingDots.jsx'
 
-
-function WeaponData(props) {
-  const { weapon, character } = props
-
-  return(<tr>
-    <td>{ weapon.name }</td>
-    <td>{ calc.witheringAttackPool(character, weapon) } ({ calc.decisiveAttackPool(character, weapon) } decisive)</td>
-    <td>{ calc.weaponDamage(character, weapon) }</td>
-    <td>{ calc.weaponParry(character, weapon) }</td>
-    <td>{ calc.weaponOverwhelming(weapon) }</td>
-  </tr>)
-}
-// */
 
 function CombatBlock(props) {
   const { character, weapons, merits } = props
   const naturalSoak = calc.naturalSoak(character)
   const armorSoak = calc.armorSoak(character)
-  const weaps = weapons.map((weapon) =>
-    <WeaponData key={weapon.id} character={character} weapon={weapon} />
-  )
 
-  return(<div>
-    <p>Evasion: { calc.evasionRaw(character) }</p>
-    <p>Soak: { naturalSoak + armorSoak } ({ armorSoak } from armor)</p>
-    <p>Hardness: { calc.hardness(character) }</p>
-    <p>Wound penalty: { calc.woundPenalty(character) }</p>
-    <table>
-      <thead><tr>
-        <th>Name</th>
-        <th>Attack pool</th>
-        <th>Damage</th>
-        <th>Parry</th>
-        <th>Over.</th>
-      </tr></thead>
-      <tbody>
-        { weaps }
-      </tbody>
-    </table>
+  return(<div className="combatSummaryBlock">
+    <h3>Combat Pools</h3>
 
-    <p>Resolve: { calc.resolveRaw(character) }</p>
-    <p>Guile:   { calc.guileRaw(character)   }</p>
+    <Table className="poolTable" selectable={ false }>
+      <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>
+        <TableRow>
+          <TableHeaderColumn className="defenseValueName">Evasion</TableHeaderColumn>
+
+          <TableHeaderColumn className="poolName">Join Battle</TableHeaderColumn>
+          <TableHeaderColumn className="poolName">Rush</TableHeaderColumn>
+          <TableHeaderColumn className="poolName">Disengage</TableHeaderColumn>
+          <TableHeaderColumn className="poolName">Rise/Prone</TableHeaderColumn>
+          <TableHeaderColumn className="poolName">Take Cover</TableHeaderColumn>
+          <TableHeaderColumn className="poolName">Withdraw</TableHeaderColumn>
+
+        </TableRow>
+      </TableHeader>
+
+      <TableBody displayRowCheckbox={ false }>
+        <TableRow>
+          <TableRowColumn className="defenseValue">{ calc.evasionRaw(character) }</TableRowColumn>
+
+          <TableRowColumn className="pool">{ calc.joinBattlePool(character) }</TableRowColumn>
+          <TableRowColumn className="pool">{ calc.rushPool(character) }</TableRowColumn>
+          <TableRowColumn className="pool">{ calc.disengagePool(character) }</TableRowColumn>
+          <TableRowColumn className="pool">{ calc.riseFromPronePool(character) }</TableRowColumn>
+          <TableRowColumn className="pool">{ calc.takeCoverPool(character) }</TableRowColumn>
+          <TableRowColumn className="pool">{ calc.withdrawPool(character) }</TableRowColumn>
+
+        </TableRow>
+      </TableBody>
+    </Table>
+
   </div>)
 }
 

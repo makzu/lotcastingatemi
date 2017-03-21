@@ -1,5 +1,9 @@
 /* Defense values (Parry is per-weapon and in weapons.js) */
 import { ATTACK_ABILITIES, ABILITIES, ABILITIES_ALL } from '../constants.js'
+export {
+  joinBattlePool, rushPool, disengagePool, riseFromPronePool, takeCoverPool,
+  withdrawPool, readIntentionsPool, shapeSorceryPool
+} from './_pools.js'
 
 export function evasionRaw(character) {
   // TODO specialties
@@ -14,6 +18,12 @@ export function guileRaw(character) {
 export function resolveRaw(character) {
   // TODO specialties
   return Math.ceil((character.attr_wits + character.abil_integrity) / 2)
+}
+
+export function totalHealthLevels(character) {
+  return character.health_level_0s + character.health_level_1s +
+    character.health_level_2s + character.health_level_4s +
+    character.health_level_incap
 }
 
 export function woundPenalty(character) {
@@ -62,6 +72,7 @@ export function abilitiesWithRatings(character) {
   return abils
 }
 
+
 export function weaponAccuracyBonus(weapon) {
   // TODO: thrown/archery
   switch(weapon.weight) {
@@ -94,6 +105,17 @@ export function weaponDamageBonus(weapon) {
     damage -= 2
 
   return damage
+}
+
+export function weaponDamageType(weapon) {
+  if (weapon.tags.includes("bashing"))
+    return "B"
+  else if (weapon.tags.includes("lethal"))
+    return "L"
+  else if (weapon.tags.includes("aggravated"))
+    return "A"
+  else
+    return "B"
 }
 
 export function weaponDefenseBonus(weapon) {

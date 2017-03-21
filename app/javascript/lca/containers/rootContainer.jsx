@@ -1,5 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import CharacterSheet from '../components/characterSheet.jsx'
 import LcaHeader from '../components/header.jsx'
@@ -15,11 +16,13 @@ class RootContainer extends React.Component {
 
     return (
       <Provider store={ store }>
-        <div>
-          <LcaHeader />
-          <CharacterSheet id={1} />
-          <LcaFooter />
-        </div>
+        <MuiThemeProvider>
+          <div>
+            <LcaHeader />
+            <CharacterSheet id={1} />
+            <LcaFooter />
+          </div>
+        </MuiThemeProvider>
       </Provider>
     )
   }

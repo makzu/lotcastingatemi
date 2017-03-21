@@ -1,13 +1,13 @@
 require("react-hot-loader/patch")
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin()
 
-//import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import configureStore from './store/configureStore.js';
 import RootContainer from './containers/rootContainer.jsx';
-
 
 const store = configureStore();
 

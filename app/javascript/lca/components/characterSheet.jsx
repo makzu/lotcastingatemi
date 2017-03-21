@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { fetchCharacter, toggleEditor, updateCharacter } from '../actions'
 
 import CharacterSheetDisplay from './characterSheet/characterSheetDisplay.jsx'
-import CharacterEditor from './characterEditor.jsx'
 
 class CharacterSheet extends React.Component {
   constructor(props) {
@@ -24,15 +23,9 @@ class CharacterSheet extends React.Component {
   render() {
     const { character, weapons, merits } = this.props
 
+    // Don't render the display without a character
     if (character == undefined)
       return(<h1>Lot-Casting Atemi</h1>)
-
-    if (this.props.isEditing)
-      return(<CharacterEditor
-        character={character}
-        weapons={ weapons } merits={ merits }
-        toggleClick={this.editorToggle} onUpdate={this.props.updateChar}
-      />)
 
     return (<CharacterSheetDisplay
       character={ character }
@@ -52,12 +45,11 @@ function mapStateToProps(state, ownProps) {
     merits = character.merits.map((id) => state.character.merits[id])
   }
 
-  const { isFetching, isError, isEditing } = state.app
+  const { isFetching, isError } = state.app
   return {
     character,
     weapons,
     merits,
-    isEditing,
     isFetching,
     isError
   }
@@ -65,9 +57,6 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onEditorToggleClick: () => {
-      dispatch(toggleEditor())
-    },
     onComponentMounted: (id) => {
       dispatch(fetchCharacter(id))
     },

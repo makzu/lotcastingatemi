@@ -1,78 +1,109 @@
 import React from 'react'
+import Paper from 'material-ui/Paper'
+import Divider from 'material-ui/Divider'
 
 import toggleEditor from '../../actions'
 
 import CombatBlock from './combatBlock.jsx'
+import SocialBlock from './socialBlock.jsx'
 import FullAttributeBlock from './fullAttributeBlock.jsx'
 import FullAbilityBlock from './fullAbilityBlock.jsx'
+import WeaponSummary from './weaponSummary.jsx'
+import ArmorSummary from './armorSummary.jsx'
+import HealthLevelBlock from './healthLevelBlock.jsx'
+
+import SpecialtyPopup from './editors/specialtyPopup.jsx'
+import IntimacyPopup from './editors/intimacyPopup.jsx'
+import WillpowerPopup from './editors/willpowerPopup.jsx'
+import AllMeritsPopup from './editors/allMeritsPopup.jsx'
+import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
+
 import RatingDots from '../../utils/ratingDots.jsx'
 import * as calc from '../../utils/calculated/'
 
 function FullSpecialtyBlock(props) {
-  if (props.specialties == undefined)
-    return(<div />);
+  const character = props.character
+  const specialties = character.specialties
 
-  const spec = props.specialties.map((s) =>
+  const spec = specialties.map((s) =>
     <div key={s.ability + s.context}>
-      { s.ability }:
-      { s.context }
+      <span className="specialtyAbility">
+        { s.ability }
+      </span>
+      <span className="specialtyContext">
+        { s.context }
+      </span>
+      <Divider />
     </div>
   );
 
   return(<div className="fullSpecialtyBlock">
-    <h3>Specialties</h3>
+    <h3>Specialties<SpecialtyPopup character={ character } /></h3>
     { spec }
   </div>);
 }
 
 function MeritSummary(props) {
-  if (props.merits == undefined)
-    return(<div />);
-
   const merits = props.merits.map((merit) =>
     <div key={merit.id}>
-      { merit.name || merit.merit_name }
+      { merit.name }
+      ({ merit.merit_name })
       <RatingDots rating={merit.rating} dontFill />
+      <Divider />
     </div>
   );
 
-  return(<div className="meritSummary">
-    <h3>Merits</h3>
+  return(<div className="meritSummaryBlock">
+    <h3>Merits<AllMeritsPopup character={ props.character } merits={ props.merits } /></h3>
     { merits}
   </div>);
 }
+
 function IntimacySummary(props) {
   const principles = props.character.principles.map((p, index) =>
-    <li key={index}>
+    <div className="intimacyListItem" key={index}>
       { p.subject }
-      <RatingDots rating={ p.rating } dontFill />
-    </li>
+      <RatingDots rating={ p.rating } fillTo={ 3 } />
+      <Divider />
+    </div>
   )
   const ties = props.character.ties.map((p, index) =>
-    <li key={index}>
+    <div className="intimacyListItem" key={index}>
       { p.subject }
-      <RatingDots rating={ p.rating } dontFill />
-    </li>
+      <RatingDots rating={ p.rating } fillTo={ 3 } />
+      <Divider />
+    </div>
   )
-  return(<div className="intimacySummary">
-    <h3>Intimacies</h3>
+
+  return(<div className="intimacySummaryBlock">
+    <h3>Intimacies<IntimacyPopup character={ props.character } /></h3>
     <div>
       <h5>Principles</h5>
-      <ul>
-        { principles }
-      </ul>
+      { principles }
     </div>
     <div>
       <h5>Ties</h5>
-      <ul>
-        { ties }
-      </ul>
+      { ties }
     </div>
 
   </div>);
 }
 
-//function CharacterSheetDisplay(props) {
+function WillpowerBlock(props) {
+  const { character } = props
+
+  return(<div className="willpowerBlock">
+    <h3>Willpower<WillpowerPopup character={ character } /></h3>
+    <div className="current">
+      Current: <RatingDots rating={ character.willpower_temporary } fillTo={10} />
+    </div>
+    <div className="permanant">
+      Permanant: <RatingDots rating={ character.willpower_permanent } fillTo={10} />
+    </div>
+    <Divider />
+  </div>)
+}
+
 class CharacterSheetDisplay extends React.Component{
   constructor(props) {
     super(props)
@@ -81,36 +112,32 @@ class CharacterSheetDisplay extends React.Component{
   render() {
     const { character, weapons, merits } = this.props
 
-    return(<div className="characterSheet">
-      <button onClick={this.props.toggleClick}>begin editing</button>
-      <h1>{character.name}</h1>
+    return(<Paper className="characterSheetPaper">
+      <div className="characterSheet">
+        <h1 className="name">{character.name}<BasicsEditorPopup character={ character } /></h1>
 
-      <CombatBlock character={character} weapons={weapons} merits={merits}/>
+        <FullAbilityBlock character={ character } />
+        <FullAttributeBlock character={ character } />
 
-      <FullAttributeBlock character={ character } />
-      <FullAbilityBlock character={ character } />
-      <FullSpecialtyBlock specialties={ character.specialties } />
-      <MeritSummary merits={ merits } />
+        <FullSpecialtyBlock character={ character } />
+        <MeritSummary character={ character } merits={ merits } />
 
-      <IntimacySummary character={ character } />
+        <WeaponSummary character={ character } weapons={ weapons } />
 
-      <h3>Health/Willpower</h3>
-      <ul>
-        <li>{ character.health_level_0s } x0</li>
-        <li>{ character.health_level_1s } x1</li>
-        <li>{ character.health_level_2s } x2</li>
-        <li>{ character.health_level_4s } x4</li>
-        <li>{ character.health_level_incap } incap</li>
-        <li>Willpower:
-          <RatingDots rating={ character.willpower_temporary } fillTo={10} />
-          /
-          <RatingDots rating={ character.willpower_permanent } fillTo={10} />
-        </li>
-        <li>Armor:
-          { character.armor_name } ({ character.armor_weight }, +{ calc.armorSoak(character)} soak)
-        </li>
-      </ul>
-    </div>)
+        <hr className="clear4" />
+
+        <CombatBlock character={ character } weapons={ weapons } merits={ merits } />
+        <HealthLevelBlock character={ character } />
+        <WillpowerBlock character={ character } />
+
+        <hr className="clear4" />
+        <ArmorSummary character={ character } />
+
+        <SocialBlock character={ character } />
+        <IntimacySummary character={ character } />
+
+      </div>
+    </Paper>)
   }
 }
 

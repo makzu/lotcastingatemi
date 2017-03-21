@@ -1,34 +1,46 @@
 import React from 'react'
+import Divider from 'material-ui/Divider'
+import AttributePopup from './editors/attributePopup.jsx'
 import RatingDots from '../../utils/ratingDots.jsx'
 
 function AttributeBlock(props) {
   return(<div className="attributeBlock">
-    { props.attribute }:
+    <span className="attributeName">{ props.attribute }:</span>
     <RatingDots rating={ props.rating } />
   </div>);
 }
 
 function FullAttributeBlock(props) {
+  const { character } = props
   return (
     <div className="fullAttributeBlock">
-      <h3>Attributes</h3>
+      <h3>Attributes<AttributePopup character={ character } /></h3>
+
       <div className="attrContainer physical">
-        <AttributeBlock attribute="Strength" rating={props.character.attr_strength} />
-        <AttributeBlock attribute="Dexterity" rating={props.character.attr_dexterity} />
-        <AttributeBlock attribute="Stamina" rating={props.character.attr_stamina} />
+        <AttributeBlock attribute="Strength" rating={ character.attr_strength} />
+        <Divider />
+        <AttributeBlock attribute="Dexterity" rating={ character.attr_dexterity} />
+        <Divider />
+        <AttributeBlock attribute="Stamina" rating={ character.attr_stamina} />
       </div>
+
       <div className="attrContainer social">
-        <AttributeBlock attribute="Charisma" rating={props.character.attr_charisma} />
-        <AttributeBlock attribute="Manipulation" rating={props.character.attr_manipulation} />
-        <AttributeBlock attribute="Appearance" rating={props.character.attr_appearance} />
+        <AttributeBlock attribute="Charisma" rating={ character.attr_charisma} />
+        <Divider />
+        <AttributeBlock attribute="Manipulation" rating={ character.attr_manipulation} />
+        <Divider />
+        <AttributeBlock attribute="Appearance" rating={ character.attr_appearance} />
       </div>
+
       <div className="attrContainer mental">
-        <AttributeBlock attribute="Perception" rating={props.character.attr_perception} />
-        <AttributeBlock attribute="Intelligence" rating={props.character.attr_intelligence} />
-        <AttributeBlock attribute="Wits" rating={props.character.attr_wits} />
+        <AttributeBlock attribute="Perception" rating={ character.attr_perception} />
+        <Divider />
+        <AttributeBlock attribute="Intelligence" rating={ character.attr_intelligence} />
+        <Divider />
+        <AttributeBlock attribute="Wits" rating={ character.attr_wits} />
       </div>
     </div>
   );
 }
-
+ 
 export default FullAttributeBlock

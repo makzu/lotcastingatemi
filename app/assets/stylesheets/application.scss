@@ -1,0 +1,271 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+@import "bourbon";
+@import "neat";
+
+html,
+body {
+  margin: 0px;
+}
+
+/* GRID: */
+#root {
+  @include grid-container;
+  @include grid-visual;
+}
+
+/* CHARSHEET GRID */
+$characterSheet-grid: (
+  columns: 4,
+  gutter: 24px,
+);
+
+.characterSheetPaper {
+  margin: 0 24px;
+}
+
+.characterSheet {
+  @include grid-container($characterSheet-grid);
+  hr {
+    margin: 0.25em !important;
+  }
+
+  .clear4 {
+    @include grid-column(4, $characterSheet-grid);
+    border-color: transparent;
+  }
+
+  .name {
+    @include grid-column(4, $characterSheet-grid);
+  }
+
+  .fullAttributeBlock {
+    h3 {
+      @include grid-column(3, $characterSheet-grid);
+    }
+
+    .attrContainer {
+      @include grid-column(1, $characterSheet-grid);
+
+    }
+  }
+
+  .fullAbilityBlock {
+    @include grid-column(1, $characterSheet-grid);
+  }
+
+  .fullSpecialtyBlock {
+    @include grid-column(1, $characterSheet-grid);
+    .specialtyAbility {
+      text-transform: capitalize;
+      display: inline-block;
+      width: 7em;
+    }
+  }
+  .meritSummaryBlock {
+    @include grid-column(2, $characterSheet-grid);
+  }
+  .willpowerBlock {
+    @include grid-column(1, $characterSheet-grid);
+    div {
+      clear: both;
+    }
+  }
+  .intimacySummaryBlock, .healthLevelBlock {
+    @include grid-column(1, $characterSheet-grid);
+  }
+  .armorSummaryBlock {
+    @include grid-column(2, $characterSheet-grid);
+
+    .hardnessColumn {
+      width: 3em;
+    }
+    .soakColumn, .mobPenColumn, .pool, .defenseValue, .poolName, .defenseValueName {
+      width: 2em;
+    }
+    .tagsColumn {
+      text-transform: capitalize;
+    }
+  }
+  .weaponSummaryBlock {
+    @include grid-column(3, $characterSheet-grid);
+
+    .damageColumn {
+      width: 3em;
+    }
+    .parryColumn, .overwhelmingColumn, .soakColumn, .mobPenColumn, .pool, .defenseValue, .poolName, .defenseValueName {
+      width: 2em;
+    }
+    .abilityColumn, .tagsColumn {
+      text-transform: capitalize;
+    }
+    .attackPoolColumn {
+      width: 7em;
+    }
+  }
+  .combatSummaryBlock {
+    @include grid-column(2, $characterSheet-grid);
+
+    .pool, .defenseValue, .poolName, .defenseValueName {
+      width: 2em;
+    }
+  }
+  .socialSummaryBlock {
+    @include grid-column(1, $characterSheet-grid);
+
+    .pool, .defenseValue, .poolName, .defenseValueName {
+      width: 2em;
+    }
+  }
+
+  .editor-wrap {
+    display: inline-block;
+    float: right;
+  }
+}
+.editor-popup {
+  .editor-description-field {
+    width: 75%;
+  }
+
+  .attribute-field, .ability-field {
+    width: 4em !important;
+    margin-right: 0.5em;
+
+    input {
+      text-align: center;
+    }
+  }
+  .attribute-field:last-child {
+    margin-right: 0;
+  }
+}
+.editor-popup-abilities {
+  .ability-set {
+    margin: 0 auto;
+    .ability-field{
+      display: inline-block;
+      margin-right: 2em;
+    }
+  }
+}
+
+/* EDITOR GRID */
+.characterEditor {
+  h1 {
+    @include grid-column(2, $characterSheet-grid);
+  }
+
+  .editor-fieldset-basics {
+    @include grid-column(1, $characterSheet-grid);
+  }
+  .editor-fieldset-attributes {
+    @include grid-column(1, $characterSheet-grid);
+  }
+  .editor-fieldset-health {
+    @include grid-column(1, $characterSheet-grid);
+  }
+  .editor-fieldset-specialties {
+    @include grid-column(2, $characterSheet-grid);
+  }
+
+  .editor-fieldset-intimacies {
+    @include grid-column(2, $characterSheet-grid);
+  }
+
+  .editor-fieldset-merits {
+    @include grid-column(3, $characterSheet-grid);
+  }
+
+  .specialtyAbilityField {
+    width: 10em !important;
+  }
+
+  .intimacyRatingField, .craftRatingField, .martialArtsRatingField, .meritRatingField {
+    width: 3em !important;
+  }
+}
+
+/* MISC: */
+
+.ratingDotContainer{
+  float: right;
+  clear: right;
+}
+
+.ratingDot {
+  display: inline-block;
+  color: transparent;
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 0.45em;
+  border: 0.125em solid black;
+  margin-left: 1px;
+}
+
+.ratingDotFull {
+  background-color: black;
+}
+
+.damageBoxWrapper {
+  display: inline-block;
+  margin-right: 2px;
+}
+
+.damageBoxLevel {
+  font-size: small;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.damageBox {
+  color: transparent;
+  width: 1em;
+  height: 1em;
+  border: 0.15em solid black;
+}
+.bashingDamageBox:after {
+  color: black;
+  position: relative;
+  top: -0.25em;
+  left: -0.5em;
+  text-align: center;
+  font-weight: bold;
+  font-size: 125%;
+  content: "|";
+}
+.lethalDamageBox:after {
+  color: black;
+  position: relative;
+  top: -0.3em;
+  left: -0.59em;
+  text-align: center;
+  font-size: 180%;
+  content: "❌";
+}
+.aggravatedDamageBox:after {
+  color: black;
+  position: relative;
+  top: -0.25em;
+  left: -0.65em;
+  text-align: center;
+  font-size: 150%;
+  content: "✱";
+}
+
+.editor-rating-field {
+  width: 3em !important;
+}

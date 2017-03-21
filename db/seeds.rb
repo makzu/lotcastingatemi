@@ -1,3 +1,5 @@
+# TODO move these to yaml files or something, sheesh
+
 puts "updating example character"
 
 exChr = Character.find_or_create_by(id: 1)
@@ -14,7 +16,7 @@ exChr.update(
 
   damage_bashing: 2,
 
-  abil_melee: 4,
+  abil_melee: 5,
   abil_brawl: 1,
   abil_dodge: 4,
   abil_awareness: 3,
@@ -67,8 +69,17 @@ m.update(
   name: "royal stipend",
   merit_name: "resources",
   description: "The princess has some access to her kingdom's coffers",
+  ref: "core p.164-165",
   rating: 2
 )
+m = Merit.find_or_create_by(id: 3, character: exChr)
+m.update(
+  name: "Ambidextrous",
+  merit_name: "ambidextrous",
+  rating: 1,
+  ref: "core p.158-159"
+)
+
 puts "updating example character weapons"
 m = Weapon.find_or_create_by(id: 1, character: exChr)
 m.update(
@@ -100,10 +111,17 @@ m.update(
 )
 m = Weapon.find_or_create_by(id: 5, character: exChr)
 m.update(
+  name: "Unarmed (brawl)",
+  weight: "light",
+  ability: "brawl",
+  tags: ["bashing", "brawl", "grappling", "natural"]
+)
+m = Weapon.find_or_create_by(id: 6, character: exChr)
+m.update(
   name: "Light Artifact example",
   weight: "light",
   ability: "brawl",
-  is_artifact: "true",
+  is_artifact: true,
   tags: ["bashing", "brawl", "smashing"]
 )
 

@@ -1,7 +1,11 @@
 import React from 'react'
+import AppBar from 'material-ui/AppBar'
 
 function LcaHeader(props) {
-  return(<header>lot-casting atemi!</header>)
+  return(
+    <AppBar title="Lot-Casting Atemi"
+    />
+  )
 }
 
 export default LcaHeader

@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Rails 5.1 beta for Webpacker
 gem 'rails', '~> 5.1.0.beta1'
+# Webpacker allows React/Redux and friends to thrive:
+gem 'webpacker', github: "rails/webpacker"
 
 gem 'responders'
 
@@ -17,15 +19,6 @@ gem 'neat'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', github: "rails/webpacker"
-
-group :production do
-  gem 'rails_serve_static_assets'
-end
-
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
@@ -36,6 +29,14 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'devise_token_auth'
+gem 'omniauth'
+
+# For Heroku:
+group :production do
+  gem 'rails_serve_static_assets'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,6 +53,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

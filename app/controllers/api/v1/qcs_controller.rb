@@ -24,6 +24,6 @@ class Api::V1::QcsController < Api::V1::BaseController
   private
 
   def qc_params
-    params.require(:qc).permit(:id, :name)
+    params.require(:qc).permit!
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311054129) do
+ActiveRecord::Schema.define(version: 20170321061251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,18 @@ ActiveRecord::Schema.define(version: 20170311054129) do
     t.text "lore_background"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "player_id"
+    t.bigint "chronicle_id"
+    t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
+    t.index ["player_id"], name: "index_characters_on_player_id"
+  end
+
+  create_table "chronicles", force: :cascade do |t|
+    t.bigint "player_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_chronicles_on_player_id"
   end
 
   create_table "merits", id: :serial, force: :cascade do |t|
@@ -102,6 +114,33 @@ ActiveRecord::Schema.define(version: 20170311054129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_merits_on_character_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "name"
+    t.string "email"
+    t.json "tokens"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_players_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_players_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
+    t.index ["uid", "provider"], name: "index_players_on_uid_and_provider", unique: true
   end
 
   create_table "qc_merits", id: :serial, force: :cascade do |t|
@@ -150,6 +189,10 @@ ActiveRecord::Schema.define(version: 20170311054129) do
     t.string "ref"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "player_id"
+    t.bigint "chronicle_id"
+    t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
+    t.index ["player_id"], name: "index_qcs_on_player_id"
   end
 
   create_table "weapons", id: :serial, force: :cascade do |t|
@@ -164,7 +207,11 @@ ActiveRecord::Schema.define(version: 20170311054129) do
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 
+  add_foreign_key "characters", "chronicles"
+  add_foreign_key "characters", "players"
   add_foreign_key "merits", "characters"
   add_foreign_key "qc_merits", "qcs"
+  add_foreign_key "qcs", "chronicles"
+  add_foreign_key "qcs", "players"
   add_foreign_key "weapons", "characters"
 end

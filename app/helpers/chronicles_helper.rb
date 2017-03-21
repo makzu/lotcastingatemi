@@ -1,0 +1,2 @@
+module ChroniclesHelper
+end

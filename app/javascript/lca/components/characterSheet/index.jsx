@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchCharacter, toggleEditor, updateCharacter } from '../actions'
+import { fetchCharacter, toggleEditor, updateCharacter } from '../../actions'
 
-import CharacterSheetDisplay from './characterSheet/characterSheetDisplay.jsx'
+import CharacterSheetDisplay from './characterSheetDisplay.jsx'
 
 class CharacterSheet extends React.Component {
   constructor(props) {

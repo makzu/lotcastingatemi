@@ -22,8 +22,11 @@
     "react-dom": "latest",
     "react-hot-loader": "next",
     "react-redux": "latest",
+    "react-router-dom": "next",
+    "react-router-redux": "next",
     "react-tap-event-plugin": "latest",
     "redux": "latest",
+    "redux-auth": "^0.0.5-beta5",
     "redux-thunk": "latest",
     "reselect": "latest",
     "webpack": "latest",
@@ -31,7 +34,7 @@
   },
   "devDependencies": {
     "webpack-dev-server": "latest"
-  }, "scripts": {
-  "start": "npm start"
+  },
+  "scripts": {
   }
 }

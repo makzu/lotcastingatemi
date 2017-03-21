@@ -1,11 +1,29 @@
 # TODO move these to yaml files or something, sheesh
 
+puts "updating example player"
+player1 = Player.find_or_create_by(id: 1)
+player1.update(
+  name: "Example player",
+  email: "solarShard179@IAM.net",
+  password: "praisethesun"
+)
+
+puts "updating example chronicle"
+exChronicle = Chronicle.find_or_create_by(id: 1)
+exChronicle.update(
+  name: "example mortals game",
+  player: player1
+)
+
 puts "updating example character"
 
 exChr = Character.find_or_create_by(id: 1)
 exChr.update(
   name: "Vincible Sword Princess",
   description: "Exactly what it says on the tin.",
+
+  player: player1,
+  chronicle: exChronicle,
 
   attr_dexterity:    4, attr_strength:     2, attr_stamina:    3,
   attr_charisma:     2, attr_manipulation: 2, attr_appearance: 2,
@@ -129,7 +147,10 @@ m.update(
 puts 'Updating qc 1'
 q = Qc.find_or_create_by(id: 1)
 q.update(
-  name: "Generic guardsman",
+  name: "Vincible Shieldman",
+  player: player1,
+  chronicle: exChronicle,
+
   willpower_temporary: 4, willpower_permanent: 4,
   join_battle: 6, movement: 4,
   soak: 8, evasion: 2, parry: 4,

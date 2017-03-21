@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux'
+import { authStateReducer } from 'redux-auth'
 import * as c from '../utils/constants'
 
 import { defaultState } from './defaultState.js'
@@ -7,13 +9,12 @@ import CharacterReducer from './characterReducer.js'
 function appReducer(state = defaultState, action) {
   switch (action.type) {
   case c.REQUEST_CHAR:
+  case c.REQUEST_CHRONICLE:
     return {... state, isFetching: true, isError: false }
 
   case c.RECEIVE_CHAR:
+  case c.RECEIVE_CHRONICLE:
     return {... state, isFetching: false, isError: false }
-
-  case c.TOGGLE_EDITOR:
-    return {... state, isEditing: !state.isEditing }
 
   case c.UPDATE_CHAR:
   case c.UPDATE_WEAP:
@@ -32,8 +33,10 @@ function appReducer(state = defaultState, action) {
 }
 
 const lcaApp = combineReducers({
-  app : appReducer,
-  character : CharacterReducer
+  auth: authStateReducer,
+  router: routerReducer,
+  app: appReducer,
+  character: CharacterReducer
 });
 
 export default lcaApp

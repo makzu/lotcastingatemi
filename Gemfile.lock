@@ -119,6 +119,7 @@ GEM
       nokogiri (~> 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_serve_static_assets (0.0.5)
     railties (5.1.0.rc1)
       actionpack (= 5.1.0.rc1)
       activesupport (= 5.1.0.rc1)
@@ -207,6 +208,7 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rails (~> 5.1.0.beta1)
+  rails_serve_static_assets
   responders
   rspec-rails
   sass-rails (~> 5.0)

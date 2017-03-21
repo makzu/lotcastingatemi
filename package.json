@@ -31,5 +31,7 @@
   },
   "devDependencies": {
     "webpack-dev-server": "latest"
+  }, "scripts": {
+  "start": "npm start"
   }
 }

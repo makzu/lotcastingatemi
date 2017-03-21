@@ -3,10 +3,17 @@ import { createStore, applyMiddleware, compose } from 'redux'
 
 import reducer from '../reducers'
 
-const enhancer = compose(
-  applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+let enhancer
+if (process.env.NODE_ENV === 'production') {
+  enhancer = applyMiddleware(thunk)
+} else {
+  enhancer = compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+}
+
+
 
 function configureStore() {
   return createStore(

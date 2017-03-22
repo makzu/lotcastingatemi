@@ -1,9 +1,19 @@
 class Character < ApplicationRecord
+  include HealthLevels
+  include Willpower
+
   belongs_to :player
   belongs_to :chronicle
 
   has_many :merits,  dependent: :destroy
   has_many :weapons, dependent: :destroy
+
+  # TODO add validators for:
+  # * attr_craft,
+  # * attr_martial_arts,
+  # * ties,
+  # * principles,
+  # * specialties
 
   validates :name, presence: true
 
@@ -49,24 +59,6 @@ class Character < ApplicationRecord
   validates :abil_thrown,         zero_thru_five_stat: true
   validates :abil_war,            zero_thru_five_stat: true
 
-  # TODO check to ensure valid ranges for Willpower
-  validates :willpower_temporary,
-    numericality: { less_than_or_equal_to: 10, greater_than_or_equal_to: 0 }
-  validates :willpower_permanent,
-    numericality: { less_than_or_equal_to: 10, greater_than: 0             }
-
-  # TODO check if it's possible for a character to have less than the 7
-  #      standard health levels
-  validates :health_level_0s,     numericality: { greater_than: 0 }
-  validates :health_level_1s,     numericality: { greater_than: 0 }
-  validates :health_level_2s,     numericality: { greater_than: 0 }
-  validates :health_level_4s,     numericality: { greater_than: 0 }
-  validates :health_level_incap,  numericality: { greater_than: 0 }
-
-  validates :damage_bashing,      numericality: { greater_than_or_equal_to: 0 }
-  validates :damage_lethal,       numericality: { greater_than_or_equal_to: 0 }
-  validates :damage_aggravated,   numericality: { greater_than_or_equal_to: 0 }
-
   validates :xp_craft_silver,     numericality: { greater_than_or_equal_to: 0 }
   validates :xp_craft_gold,       numericality: { greater_than_or_equal_to: 0 }
   validates :xp_craft_white,      numericality: { greater_than_or_equal_to: 0 }
@@ -74,4 +66,6 @@ class Character < ApplicationRecord
   validates :armor_weight, inclusion: { in: %w{unarmored light medium heavy} }
 
   validates :sorcerous_motes,     numericality: { greater_than_or_equal_to: 0 }
+
+  validates :onslaught,           numericality: { greater_than_or_equal_to: 0 }
 end

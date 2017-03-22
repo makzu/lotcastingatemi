@@ -97,6 +97,15 @@ export default function CharacterReducer(state = defaultState, action) {
         ...merit, [mtr]: mval } }
     }
 
+  case c.UPDATE_QC:
+    const qtr = action.update.trait
+    const qval = action.update.value
+    const qc = state.qcs[action.id]
+    return { ...state, qcs: {
+      ...state.qcs, [action.id]: {
+        ...qc, [qtr]: qval } }
+    }
+
   default:
     return state
   }

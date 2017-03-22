@@ -1,5 +1,5 @@
 ## Common validations and methods for entities with willpower ratings
-module HealthLevels
+module Willpower
   extend ActiveSupport::Concern
 
   included do

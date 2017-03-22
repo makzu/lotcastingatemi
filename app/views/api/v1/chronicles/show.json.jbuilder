@@ -1,4 +1,5 @@
 json.name @chronicle.name
+json.id   @chronicle.id
 
 json.characters @chronicle.characters do |character|
   json.(character,

@@ -9,6 +9,10 @@ export const UPDATE_WEAP_COMPLETE = 'UPDATE_WEAP_COMPLETE'
 export const UPDATE_MERIT = 'UPDATE_MERIT'
 export const UPDATE_MERIT_COMPLETE = 'UPDATE_MERIT_COMPLETE'
 
+
+export const UPDATE_QC = 'UPDATE_QC'
+export const UPDATE_QC_COMPLETE = 'UPDATE_QC_COMPLETE'
+
 export const ATTRIBUTES = [
   { attr: "attr_strength", pretty: "Strength" },
   { attr: "attr_dexterity", pretty: "Dexterity" },

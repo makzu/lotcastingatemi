@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchCharacter, toggleEditor, updateCharacter } from '../../actions'
+import { updateCharacter } from '../../actions'
 
 import CharacterSheetDisplay from './characterSheetDisplay.jsx'
 
@@ -8,16 +8,6 @@ class CharacterSheet extends React.Component {
   constructor(props) {
     super(props)
 
-    this.editorToggle = this.editorToggle.bind(this)
-  }
-
-  componentDidMount() {
-    this.props.onComponentMounted(this.props.id)
-  }
-
-  editorToggle(e) {
-    e.preventDefault()
-    this.props.onEditorToggleClick()
   }
 
   render() {
@@ -30,13 +20,12 @@ class CharacterSheet extends React.Component {
     return (<CharacterSheetDisplay
       character={ character }
       weapons={ weapons } merits={ merits }
-      toggleClick={this.editorToggle}
     />);
   }
 }
 
 function mapStateToProps(state, ownProps) {
-  const character = state.character.characters[ownProps.id]
+  const character = state.character.characters[ownProps.match.params.characterId]
   let weapons = []
   let merits = []
 
@@ -57,9 +46,6 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onComponentMounted: (id) => {
-      dispatch(fetchCharacter(id))
-    },
     updateChar: (id, trait, value) => {
       dispatch(updateCharacter(id, trait, value))
     }

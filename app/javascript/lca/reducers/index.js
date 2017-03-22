@@ -19,11 +19,13 @@ function appReducer(state = defaultState, action) {
   case c.UPDATE_CHAR:
   case c.UPDATE_WEAP:
   case c.UPDATE_MERIT:
+  case c.UPDATE_QC:
     return {... state, isFetching: true }
 
   case c.UPDATE_CHAR_COMPLETE:
   case c.UPDATE_WEAP_COMPLETE:
   case c.UPDATE_MERIT_COMPLETE:
+  case c.UPDATE_QC_COMPLETE:
     return {... state, isFetching: false }
 
   default:

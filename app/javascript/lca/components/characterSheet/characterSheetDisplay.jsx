@@ -97,8 +97,8 @@ function WillpowerBlock(props) {
     <div className="current">
       Current: <RatingDots rating={ character.willpower_temporary } fillTo={10} />
     </div>
-    <div className="permanant">
-      Permanant: <RatingDots rating={ character.willpower_permanent } fillTo={10} />
+    <div className="permanent">
+      Permanent: <RatingDots rating={ character.willpower_permanent } fillTo={10} />
     </div>
     <Divider />
   </div>)

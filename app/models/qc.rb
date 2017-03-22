@@ -16,7 +16,8 @@ class Qc < ApplicationRecord
   validates :motes_personal_total, numericality: { greater_than_or_equal_to: 0 }
   validates :motes_peripheral_current, numericality: { greater_than_or_equal_to: 0 }
   validates :motes_peripheral_total, numericality: { greater_than_or_equal_to: 0 }
-  validate :cant_spend_more_motes_than_total
+
+  validate  :cant_have_more_current_motes_than_total
 
   validates :onslaught, numericality: { greater_than_or_equal_to: 0 }
 

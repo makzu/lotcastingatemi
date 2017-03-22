@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
+import * as c from '../../../utils/constants.js'
 
 import ExpandableListEditor from './expandableListEditor.jsx'
 
@@ -34,7 +35,14 @@ class _HealthLevelPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    const val = parseInt(e.target.value)
+    let val = parseInt(e.target.value)
+
+    if (e.target.name.startsWith("health")) {
+      if (val < 0)
+        val = 0
+      if (val > c.HEALTH_LEVEL_MAX)
+        val = c.HEALTH_LEVEL_MAX
+    }
 
     this.setState({character: {... this.state.character, [e.target.name]: val}})
   }

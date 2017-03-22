@@ -17,17 +17,9 @@ export default function RouteContainer(props) {
     <div>
       <AppBar title="Lot-Casting Atemi" />
 
-      <Route exact path="/"><Redirect to="/characters/1" /></Route>
+      <Route exact path="/" component={ WelcomePage } />
       <Route path="/characters/:characterId" component={ CharacterSheet } />
       <Route path="/qcs/:qcId" component={ QcSheet } />
     </div>
   )
-    /*
-    <Route path="/" component={ AppWrapper }>
-      <Route exact path="/" component={ WelcomePage } />
-      <Route path="/characters/:characterId" component={ CharacterSheet } />
-      <Route path="/qcs/:qcId" component={ QcSheet } />
-    </Route>
-  )
-  // */
 }

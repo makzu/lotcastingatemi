@@ -1,3 +1,64 @@
+CRAFT_SCHEMA = {
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["craft", "rating"],
+    "properties": {
+      "craft": { "type": "string" },
+      "rating": { "type": "integer", "minimum": 0, "maximum": 5 }
+    },
+    "additionalProperties": false
+  }
+}
+
+MARTIAL_ARTS_SCHEMA = {
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["style", "rating"],
+    "properties": {
+      "style": { "type": "string" },
+      "rating": { "type": "integer", "minimum": 0, "maximum": 5 }
+    },
+    "additionalProperties": false
+  }
+}
+
+INTIMACY_SCHEMA = {
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["subject", "rating"],
+    "properties": {
+      "subject": { "type": "string" },
+      "rating": { "type": "integer", "minimum": 0, "maximum": 3 }
+    },
+    "additionalProperties": false
+  }
+}
+
+SPECIALTY_SCHEMA = {
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["ability", "context"],
+    "properties": {
+      "ability": {
+        "type": "string",
+        "enum": [
+          "archery", "athletics", "awareness", "brawl", "bureaucracy", "craft",
+          "dodge", "integrity", "investigation", "larceny", "linguistics",
+          "lore", "martial arts", "medicine", "melee", "occult", "performance",
+          "presence", "resistance", "ride", "sail", "socialize", "stealth",
+          "survival", "thrown", "war"
+        ]
+      },
+      "context": { "type": "string" }
+    },
+    "additionalProperties": false
+  }
+}
+
 class Character < ApplicationRecord
   include HealthLevels
   include Willpower
@@ -7,13 +68,6 @@ class Character < ApplicationRecord
 
   has_many :merits,  dependent: :destroy
   has_many :weapons, dependent: :destroy
-
-  # TODO add validators for:
-  # * attr_craft,
-  # * attr_martial_arts,
-  # * ties,
-  # * principles,
-  # * specialties
 
   validates :name, presence: true
 
@@ -59,11 +113,19 @@ class Character < ApplicationRecord
   validates :abil_thrown,         zero_thru_five_stat: true
   validates :abil_war,            zero_thru_five_stat: true
 
+  validates :abil_craft,          json: { schema: CRAFT_SCHEMA        }
+  validates :abil_martial_arts,   json: { schema: MARTIAL_ARTS_SCHEMA }
+
+  validates :principles,          json: { schema: INTIMACY_SCHEMA     }
+  validates :ties,                json: { schema: INTIMACY_SCHEMA     }
+
+  validates :specialties,         json: { schema: SPECIALTY_SCHEMA    }
+
   validates :xp_craft_silver,     numericality: { greater_than_or_equal_to: 0 }
   validates :xp_craft_gold,       numericality: { greater_than_or_equal_to: 0 }
   validates :xp_craft_white,      numericality: { greater_than_or_equal_to: 0 }
 
-  validates :armor_weight, inclusion: { in: %w{unarmored light medium heavy} }
+  validates :armor_weight, inclusion: { in: %w{unarmored light medium heavy}  }
 
   validates :sorcerous_motes,     numericality: { greater_than_or_equal_to: 0 }
 

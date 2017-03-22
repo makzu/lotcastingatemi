@@ -10,6 +10,7 @@ import Checkbox from 'material-ui/Checkbox'
 
 import { updateMerit } from '../../../actions'
 import * as calc from '../../../utils/calculated'
+import * as c from '../../../utils/constants.js'
 
 
 class MeritFieldset extends React.Component {
@@ -27,9 +28,14 @@ class MeritFieldset extends React.Component {
   updateMerit(e) {
     e.preventDefault()
     let val = null
-    if (e.target.type == "number")
+    if (e.target.type == "number") {
       val = parseInt(e.target.value)
-    else if (e.target.type == "checkbox") {
+      if (val > c.MERIT_RATING_MAX) {
+        val = c.MERIT_RATING_MAX
+      } else if (val < c.MERIT_RATING_MIN) {
+        val = c.MERIT_RATING_MIN
+      }
+    } else if (e.target.type == "checkbox") {
       val = ! this.state.merit[e.target.name]
       this.props.onUpdate(this.state.merit.id, this.state.merit.character_id, e.target.name, val)
     } else

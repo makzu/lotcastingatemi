@@ -143,10 +143,16 @@ export default class ExpandableListEditor extends React.Component {
     const index = e.target.dataset.index
     const theTrait = this.state.trait.slice()
 
+    const Max = this.props.numberMax
+
     let val
-    if (e.target.type == "number")
+    if (e.target.type == "number") {
       val = parseInt(e.target.value)
-    else
+      if (Max && val > Max)
+        val = Max
+      if (val < 0)
+        val = 0
+    } else
       val = e.target.value
 
     theTrait[index] = { ...theTrait[index], [e.target.name]: val }
@@ -165,7 +171,6 @@ export default class ExpandableListEditor extends React.Component {
 
   onBlur(e) {
     e.preventDefault()
-    console.log('in onBlur', e.target)
     const index = e.target.dataset.index
     const trait = e.target.name
 
@@ -236,7 +241,8 @@ export default class ExpandableListEditor extends React.Component {
     const traits = this.state.trait.map((e, index) =>
       <TraitFields key={ index } index={ index } character={ character }
         traitName={ trait } trait={ e }
-        onChange={ onChange } onBlur={ onBlur } onRemove={ onRemove } onSpecialtyAbilityChange={ onSpecialtyAbilityChange }
+        onChange={ onChange } onBlur={ onBlur } onRemove={ onRemove }
+        onSpecialtyAbilityChange={ onSpecialtyAbilityChange }
       />
     )
 

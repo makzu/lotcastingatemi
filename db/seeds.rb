@@ -33,6 +33,10 @@ exChr.update(
   willpower_permanent: 6,
 
   damage_bashing: 2,
+  damage_lethal: 1,
+  damage_aggravated: 1,
+  health_level_0s: 1, health_level_1s: 2, health_level_2s: 2,
+  health_level_4s: 1, health_level_incap: 1,
 
   abil_melee: 5,
   abil_brawl: 1,

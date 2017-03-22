@@ -5,6 +5,8 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+import * as c from '../../../utils/constants.js'
+
 import { updateCharacter } from '../../../actions'
 
 // TODO include sample pools on side of popup
@@ -33,7 +35,13 @@ class _AttributePopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    const val = parseInt(e.target.value)
+    let val = parseInt(e.target.value)
+
+    if (val > c.ATTRIBUTE_MAX) {
+      val = c.ATTRIBUTE_MAX
+    } else if (val < c.ATTRIBUTE_MIN) {
+      val = c.ATTRIBUTE_MIN
+    }
 
     this.setState({character: {... this.state.character, [e.target.name]: val}})
   }

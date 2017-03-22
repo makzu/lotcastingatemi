@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170321061251) do
 
   create_table "characters", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.text "description"
+    t.text "description", default: ""
     t.integer "essence", default: 1
     t.integer "willpower_temporary", default: 5
     t.integer "willpower_permanent", default: 5
@@ -64,11 +64,11 @@ ActiveRecord::Schema.define(version: 20170321061251) do
     t.integer "abil_survival", default: 0
     t.integer "abil_thrown", default: 0
     t.integer "abil_war", default: 0
-    t.json "abil_craft"
-    t.json "abil_martial_arts"
-    t.json "ties"
-    t.json "principles"
-    t.json "specialties"
+    t.json "abil_craft", default: []
+    t.json "abil_martial_arts", default: []
+    t.json "specialties", default: []
+    t.json "ties", default: []
+    t.json "principles", default: []
     t.string "armor_name", default: "unarmored"
     t.string "armor_weight", default: "unarmored"
     t.boolean "armor_is_artifact", default: false
@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 20170321061251) do
     t.integer "xp_craft_white", default: 0
     t.boolean "is_sorcerer", default: false
     t.integer "sorcerous_motes", default: 0
-    t.text "shaping_rituals"
+    t.text "shaping_rituals", default: ""
     t.string "native_language", default: "Riverspeak"
-    t.text "lore_background"
+    t.text "lore_background", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "player_id"
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20170321061251) do
     t.integer "evasion", default: 1
     t.integer "parry", default: 1
     t.string "armor_name"
-    t.json "actions"
+    t.json "actions", default: []
     t.string "ref"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -199,8 +199,8 @@ ActiveRecord::Schema.define(version: 20170321061251) do
     t.integer "character_id"
     t.string "name"
     t.string "ability"
-    t.string "weight"
-    t.string "tags", array: true
+    t.string "weight", default: "light"
+    t.string "tags", default: [], array: true
     t.boolean "is_artifact", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

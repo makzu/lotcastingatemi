@@ -4,7 +4,7 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
 
       # Vitals
       t.string  :name
-      t.text    :description
+      t.text    :description,         default: ""
 
       t.integer :essence,             default: 1
       t.integer :willpower_temporary, default: 5
@@ -61,12 +61,14 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
       t.integer :abil_thrown,         default: 0
       t.integer :abil_war,            default: 0
 
-      t.json    :abil_craft        # [{ craft: "Blacksmithing", rating: 3 }]
-      t.json    :abil_martial_arts # [{ style: "Snake Style", rating: 5 }]
+      t.json    :abil_craft,          default: [] # [{ craft: "Blacksmithing", rating: 3 }]
+      t.json    :abil_martial_arts,   default: [] # [{ style: "Snake Style",   rating: 5 }]
 
-      t.json    :ties              # [{ subject: "I must protect those I love", rating: 3 }]
-      t.json    :principles        # [{ subject: "The Mayor's Daughter (love)", rating: 2 }]
-      t.json    :specialties       # [{ ability: "Melee", context: "Swords" }]
+      t.json    :specialties,         default: [] # [{ ability: "Melee", context: "Swords" }]
+
+      # Intimacies
+      t.json    :ties,                default: [] # [{ subject: "I must protect those I love", rating: 3 }]
+      t.json    :principles,          default: [] # [{ subject: "The Mayor's Daughter (love)", rating: 2 }]
 
       t.string  :armor_name,          default: "unarmored"
       t.string  :armor_weight,        default: "unarmored"
@@ -86,11 +88,11 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
       # Sorcery
       t.boolean :is_sorcerer,         default: false
       t.integer :sorcerous_motes,     default: 0
-      t.text    :shaping_rituals
+      t.text    :shaping_rituals,     default: ""
 
       # Misc
       t.string  :native_language,     default: "Riverspeak"
-      t.text    :lore_background
+      t.text    :lore_background,     default: ""
 
       t.timestamps
     end

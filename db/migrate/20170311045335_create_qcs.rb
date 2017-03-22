@@ -42,7 +42,7 @@ class CreateQcs < ActiveRecord::Migration[5.0]
       t.integer :parry,               default: 1
       t.string  :armor_name
 
-      t.json    :actions # [{ action: "senses", pool: 4 }]
+      t.json    :actions,             default: [] # [{ action: "senses", pool: 4 }]
 
       t.string  :ref
 

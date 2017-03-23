@@ -13,12 +13,16 @@ module.exports = merge(sharedConfig.config, {
   },
 
   output: {
-    pathinfo: true
+    pathinfo: true,
+    publicPath: "http://localhost:8080/"
   },
 
   plugins: [
     new webpack.LoaderOptionsPlugin({
       debug: true
     })
-  ]
+  ],
+  devServer: {
+    hotOnly: true
+  }
 })

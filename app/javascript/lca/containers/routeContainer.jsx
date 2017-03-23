@@ -16,6 +16,10 @@ export default function RouteContainer(props) {
   return(
     <div>
       <AppBar title="Lot-Casting Atemi" />
+      <Drawer open={ false } docked={ true }>
+        <h2>Something in the drawer</h2>
+        <p>Something else in the drawer too.</p>
+      </Drawer>
 
       <Route exact path="/" component={ WelcomePage } />
       <Route path="/characters/:characterId" component={ CharacterSheet } />

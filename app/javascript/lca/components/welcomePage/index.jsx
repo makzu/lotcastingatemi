@@ -6,7 +6,7 @@ export default function WelcomePage(props) {
   return(<div>
     <h1>Lot-Casting Atemi</h1>
     <p>
-      Type: Reflexive
+      Type: Reflexive, Cost: 15m 1wp
     </p>
     <p>
       The Solar Exalted have achieved such heights of skill that even their
@@ -15,7 +15,7 @@ export default function WelcomePage(props) {
       likewise never forgets the strength of her signature moves, or the number
       of dice required to play them. She can roll those dice with but a
       thought, and no matter how distant she is from the game all participants
-      become aware of her successes. s
+      become aware of her successes.
     </p>
   </div>)
 }

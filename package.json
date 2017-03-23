@@ -35,6 +35,5 @@
   "devDependencies": {
     "webpack-dev-server": "latest"
   },
-  "scripts": {
-  }
+  "scripts": {}
 }

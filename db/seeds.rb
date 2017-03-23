@@ -39,17 +39,23 @@ exChr.update(
   health_level_4s: 1, health_level_incap: 1,
 
   abil_melee: 5,
-  abil_brawl: 1,
-  abil_dodge: 4,
+  abil_archery: 0,
   abil_awareness: 3,
-  abil_integrity: 3,
-  abil_resistance: 3,
-  abil_presence: 2,
+  abil_brawl: 1,
   abil_bureaucracy: 2,
+  abil_dodge: 4,
+  abil_integrity: 3,
   abil_investigation: 2,
+  abil_larceny: 0,
   abil_linguistics: 2,
+  abil_lore: 1,
+  abil_medicine: 0,
+  abil_occult: 0,
+  abil_resistance: 2,
+  abil_presence: 2,
   abil_socialize: 4,
   abil_war: 2,
+
   abil_craft: [
     { craft: "weapon forging", rating: 3 }
   ],
@@ -74,7 +80,9 @@ exChr.update(
     { subject: "I must defend those that I love", rating: 3 }
   ],
   armor_weight: "medium",
-  armor_name:   "Reinforced breastplate"
+  armor_name:   "Reinforced breastplate",
+  onslaught: 0,
+  initiative: 0
 )
 
 puts "updating example character merits"
@@ -160,7 +168,10 @@ q.update(
   soak: 8, evasion: 2, parry: 4,
   appearance: 2, resolve: 2,
 
-  health_level_1s: 1,
+  health_level_0s: 1, health_level_1s: 1, health_level_2s: 2,
+  health_level_4s: 1, health_level_incap: 1,
+
+  damage_bashing: 0, damage_lethal: 0, damage_aggravated: 0,
 
   actions: [
     { action: "senses", pool: 4 },

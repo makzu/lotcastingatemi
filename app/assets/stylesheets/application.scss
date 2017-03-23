@@ -26,6 +26,8 @@ body {
   @include grid-visual;
 }
 
+
+
 /* CHARSHEET GRID */
 $characterSheet-grid: (
   columns: 4,
@@ -162,42 +164,6 @@ $characterSheet-grid: (
   }
 }
 
-/* EDITOR GRID */
-.characterEditor {
-  h1 {
-    @include grid-column(2, $characterSheet-grid);
-  }
-
-  .editor-fieldset-basics {
-    @include grid-column(1, $characterSheet-grid);
-  }
-  .editor-fieldset-attributes {
-    @include grid-column(1, $characterSheet-grid);
-  }
-  .editor-fieldset-health {
-    @include grid-column(1, $characterSheet-grid);
-  }
-  .editor-fieldset-specialties {
-    @include grid-column(2, $characterSheet-grid);
-  }
-
-  .editor-fieldset-intimacies {
-    @include grid-column(2, $characterSheet-grid);
-  }
-
-  .editor-fieldset-merits {
-    @include grid-column(3, $characterSheet-grid);
-  }
-
-  .specialtyAbilityField {
-    width: 10em !important;
-  }
-
-  .intimacyRatingField, .craftRatingField, .martialArtsRatingField, .meritRatingField {
-    width: 3em !important;
-  }
-}
-
 /* MISC: */
 
 .ratingDotContainer{
@@ -218,6 +184,8 @@ $characterSheet-grid: (
 .ratingDotFull {
   background-color: black;
 }
+
+/* TODO replace these divs with svg icons or something */
 
 .damageBoxWrapper {
   display: inline-block;

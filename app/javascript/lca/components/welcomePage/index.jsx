@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Paper from 'material-ui/Paper'
-
 export default function WelcomePage(props) {
   return(<div>
     <h1>Lot-Casting Atemi</h1>

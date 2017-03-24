@@ -23,7 +23,6 @@ body {
 /* GRID: */
 #root {
   @include grid-container;
-  @include grid-visual;
 }
 
 

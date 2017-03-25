@@ -8,7 +8,8 @@ const defaultState = {
   weapons: {},
   merits: {},
   qcs: {},
-  qc_merits: {}
+  qc_merits: {},
+  qc_attacks: {}
 }
 
 const weapon = new schema.Entity('weapons')
@@ -17,10 +18,14 @@ const character = new schema.Entity('characters', {
   weapons: [ weapon ],
   merits: [ merit ]
 })
+
 const qcMerit = new schema.Entity('qcMerits')
+const qcAttack = new schema.Entity('qcAttacks')
 const qc = new schema.Entity('qcs', {
-  qc_merits: [ qcMerit ]
+  qc_merits: [ qcMerit ],
+  qc_attacks: [ qcAttack ]
 })
+
 const chronicle = new schema.Entity('chronicles', {
   characters: [ character ],
   qcs: [ qc ]
@@ -36,14 +41,16 @@ function _receive_chronicle(state, action) {
   const newMerits = newState.entities.merits
   const qcs = newState.entities.qcs
   const qcMerits = newState.entities.qcMerits
+  const qcAttacks = newState.entities.qcAttacks
 
   return {
-    chronicles: { ...state.chronicles, ...newChronicles },
     characters: { ...state.characters, ...newCharacters },
     merits:     { ...state.merits,     ...newMerits     },
     weapons:    { ...state.weapons,    ...newWeapons    },
     qcs:        { ...state.qcs,        ...qcs           },
-    qc_merits:  { ...state.qc_merits,  ...qcMerits      }
+    qc_merits:  { ...state.qc_merits,  ...qcMerits      },
+    qc_attacks: { ...state.qc_attacks, ...qcAttacks     },
+    chronicles: { ...state.chronicles, ...newChronicles }
   }
 }
 

@@ -120,4 +120,5 @@ json.qcs @chronicle.qcs do |qc|
     :chronicle_id
   )
   json.qc_merits qc.qc_merits
+  json.qc_attacks qc.qc_attacks
 end

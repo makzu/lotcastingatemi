@@ -1,3 +1,16 @@
+ACTION_SCHEMA = {
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["action", "pool"],
+    "properties": {
+      "action": { "type": "string" },
+      "pool": { "type": "integer", "minimum": 0, "maximum": 99 }
+    },
+    "additionalProperties": false
+  }
+}
+
 class Qc < ApplicationRecord
   include HealthLevels
   include Willpower
@@ -31,6 +44,7 @@ class Qc < ApplicationRecord
       :senses,
     greater_than: 0
 
+  validates :actions, json: { schema: ACTION_SCHEMA }
   validate :cant_have_more_current_motes_than_total
 
   private

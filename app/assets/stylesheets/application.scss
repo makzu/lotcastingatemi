@@ -14,18 +14,11 @@
  */
 @import "bourbon";
 @import "neat";
-
+// TODO get a proper responsive grid layout instead of this mix
 html,
 body {
   margin: 0px;
 }
-
-/* GRID: */
-#root {
-  @include grid-container;
-}
-
-
 
 /* CHARSHEET GRID */
 $characterSheet-grid: (
@@ -56,10 +49,8 @@ $characterSheet-grid: (
     h3 {
       @include grid-column(3, $characterSheet-grid);
     }
-
     .attrContainer {
       @include grid-column(1, $characterSheet-grid);
-
     }
   }
 
@@ -182,20 +173,6 @@ $characterSheet-grid: (
 
 .ratingDotFull {
   background-color: black;
-}
-
-/* TODO replace these divs with svg icons or something */
-
-.damageBoxWrapper {
-  display: inline-block;
-  margin-right: 2px;
-}
-
-.damageBoxLevel {
-  font-size: small;
-  text-align: center;
-  display: block;
-  margin: 0 auto;
 }
 
 .editor-rating-field {

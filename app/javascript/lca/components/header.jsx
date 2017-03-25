@@ -19,7 +19,10 @@ function LcaHeader(props) {
             <ListItem primaryText="Edit character" />
           </Link>
           <Link to="/qcs/1">
-            <ListItem primaryText="Edit QC" />
+            <ListItem primaryText="View QC 1" />
+          </Link>
+          <Link to="/qcs/2">
+            <ListItem primaryText="View QC 2" />
           </Link>
           <ListItem primaryText="Etc" />
         </List>

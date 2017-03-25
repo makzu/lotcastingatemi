@@ -48,3 +48,10 @@ YAML.load(File.read("db/seeds/qc_merits.yaml")).each do |m|
   merit.update(m)
   puts "Updated " + merit.name + " for " + merit.qc.name
 end
+
+puts "Reloading QC attacks"
+YAML.load(File.read("db/seeds/qc_attacks.yaml")).each do |a|
+  attack = QcAttack.find_or_create_by(id: a["id"])
+  attack.update(a)
+  puts "Updated " + attack.name + " for " + attack.qc.name
+end

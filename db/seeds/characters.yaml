@@ -1,4 +1,6 @@
 - id: 1
+  player_id: 1
+  chronicle_id: 1
   name: Vincible Sword Princess
   description: Exactly what it says on the tin.
 

@@ -1,4 +1,6 @@
 - id: 1
+  player_id: 1
+  chronicle_id: 1
   name: Vincible Shieldbearer
   player_id: 1
   chronicle_id: 1
@@ -26,6 +28,8 @@
     - action: threaten
       pool: 4
 - id: 2
+  player_id: 1
+  chronicle_id: 1
   name: Tiny Demon
   player_id: 1
   chronicle_id: 1

@@ -198,41 +198,6 @@ $characterSheet-grid: (
   margin: 0 auto;
 }
 
-.damageBox {
-  color: transparent;
-  width: 1em;
-  height: 1em;
-  border: 0.15em solid black;
-}
-.bashingDamageBox:after {
-  color: black;
-  position: relative;
-  top: -0.25em;
-  left: -0.5em;
-  text-align: center;
-  font-weight: bold;
-  font-size: 125%;
-  content: "|";
-}
-.lethalDamageBox:after {
-  color: black;
-  position: relative;
-  top: -0.3em;
-  left: -0.59em;
-  text-align: center;
-  font-size: 180%;
-  content: "❌";
-}
-.aggravatedDamageBox:after {
-  color: black;
-  position: relative;
-  top: -0.25em;
-  left: -0.65em;
-  text-align: center;
-  font-size: 150%;
-  content: "✱";
-}
-
 .editor-rating-field {
   width: 3em !important;
 }

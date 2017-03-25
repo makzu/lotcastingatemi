@@ -9,7 +9,7 @@ export default function HealthLevelBlock(props) {
   const { character } = props
 
   return (<div className="healthLevelBlock">
-    <h3>Health Levels<HealthLevelPopup character={ character } boxes={ hlBoxes } /></h3>
+    <h3>Health Levels<HealthLevelPopup character={ character } /></h3>
     <HealthLevelBoxes character={ character } />
     <Divider />
   </div>)

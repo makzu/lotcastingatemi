@@ -184,3 +184,37 @@ qm.update(
   name: "Call for Help",
   body: "Upon detecting intruders, she immediately lets out a cry that somehow manages to alert all other guards within a certain radius."
 )
+
+puts 'Updating Qc 2'
+q = Qc.find_or_create_by(id: 2)
+q.update(
+  name: "Tiny Demon",
+  player: player1,
+  chronicle: exChronicle,
+
+  essence: 2,
+  willpower_temporary: 3, willpower_permanent: 3,
+  join_battle: 5, movement: 5,
+  soak: 3, evasion: 3, parry: 3,
+  appearance: 2, resolve: 2,
+
+  motes_personal_total: 70,
+
+  health_level_0s: 1, health_level_1s: 1, health_level_2s: 1,
+  health_level_4s: 1, health_level_incap: 1,
+
+  damage_bashing: 0, damage_lethal: 0, damage_aggravated: 0,
+
+  actions: [
+    { action: "senses", pool: 5 },
+    { action: "stealth", pool: 6 },
+    { action: "tracking", pool: 4 },
+    { action: "whispering mean things", pool: 4 }
+  ]
+)
+puts "Updating qc 2 merits"
+qm = QcMerit.find_or_create_by(qc: q, id: 2)
+qm.update(
+  name: "Tiny Creature",
+  body: "Tiny Demon gets +2 evasion against a larger foe."
+)

@@ -1,6 +1,10 @@
 class Qc < ApplicationRecord
   include HealthLevels
   include Willpower
+  include Intimacies
+
+  has_many :battlegroups
+  has_many :qc_attacks
 
   belongs_to :player
   belongs_to :chronicle
@@ -10,16 +14,28 @@ class Qc < ApplicationRecord
   # TODO create validator for actions
 
   # Essence above 5 is explicitly mentioned in the book
-  validates :essence, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
+  validates_numericality_of :essence, greater_than_or_equal_to: 1, less_than_or_equal_to: 10
 
-  validates :motes_personal_current, numericality: { greater_than_or_equal_to: 0 }
-  validates :motes_personal_total, numericality: { greater_than_or_equal_to: 0 }
-  validates :motes_peripheral_current, numericality: { greater_than_or_equal_to: 0 }
-  validates :motes_peripheral_total, numericality: { greater_than_or_equal_to: 0 }
+  validates_numericality_of
+      :motes_personal_current,
+      :motes_personal_total,
+      :motes_peripheral_current,
+      :motes_peripheral_total,
 
-  validate  :cant_have_more_current_motes_than_total
+      :grapple, :grapple_control,
+      :hardness,
+      :initiative, :onslaught,
+    greater_than_or_equal_to: 0
 
-  validates :onslaught, numericality: { greater_than_or_equal_to: 0 }
+  validates_numericality_of
+      :resolve, :guile, :appearance,
+      :evasion, :parry, :soak,
+      :movement,
+
+      :senses,
+    greater_than: 0
+
+  validate :cant_have_more_current_motes_than_total
 
   private
 

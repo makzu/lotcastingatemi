@@ -149,13 +149,13 @@ class CharacterSheet extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const character = state.character.characters[ownProps.match.params.characterId]
+  const character = state.entities.characters[ownProps.match.params.characterId]
   let weapons = []
   let merits = []
 
   if (character != undefined) {
-    weapons = character.weapons.map((id) => state.character.weapons[id])
-    merits = character.merits.map((id) => state.character.merits[id])
+    weapons = character.weapons.map((id) => state.entities.weapons[id])
+    merits = character.merits.map((id) => state.entities.merits[id])
   }
 
   const { isFetching, isError } = state.app

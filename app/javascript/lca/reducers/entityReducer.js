@@ -55,14 +55,14 @@ function _receive_char(state, action) {
   const newWeapons = newState.entities.weapons
   const newMerits = newState.entities.merits
 
-  return {
+  return { ...state,
     characters: { ...state.characters, ...newChar },
     weapons: { ...state.weapons, ...newWeapons },
     merits: { ...state.merits, ...newMerits }
   }
 }
 
-export default function CharacterReducer(state = defaultState, action) {
+export default function EntityReducer(state = defaultState, action) {
   switch (action.type) {
   case c.RECEIVE_CHAR:
     return _receive_char(state, action)

@@ -4,7 +4,7 @@ import { authStateReducer } from 'redux-auth'
 import * as c from '../utils/constants'
 
 import { defaultState } from './defaultState.js'
-import CharacterReducer from './characterReducer.js'
+import EntityReducer from './entityReducer.js'
 
 function appReducer(state = defaultState, action) {
   switch (action.type) {
@@ -38,7 +38,7 @@ const lcaApp = combineReducers({
   auth: authStateReducer,
   router: routerReducer,
   app: appReducer,
-  character: CharacterReducer
+  entities: EntityReducer
 });
 
 export default lcaApp

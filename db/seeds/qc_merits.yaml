@@ -1,0 +1,8 @@
+- id: 1
+  qc_id: 1
+  name: Call for Help
+  body: Upon detecting intruders, she immediately lets out a cry that somehow manages to alert all other guards within a certain radius.
+- id: 2
+  qc_id: 2
+  name: Tiny Creature
+  body: Tiny Demon gets +2 evasion against a larger foe.

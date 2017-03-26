@@ -8,8 +8,8 @@ import IconButton from 'material-ui/RaisedButton'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
-import * as calc from '../../../utils/calculated'
-import { ATTRIBUTES, ABILITIES, ABILITIES_ALL } from '../../../utils/constants'
+import * as calc from '../../utils/calculated'
+import { ATTRIBUTES, ABILITIES, ABILITIES_ALL } from '../../utils/constants'
 
 function CraftFields(props) {
   const { trait, index, onChange, onBlur } = props

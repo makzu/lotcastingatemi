@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 import { INTIMACY_RATING_MAX } from '../../../utils/constants.js'
 import { updateCharacter } from '../../../actions'
 
-import ExpandableListEditor from './expandableListEditor.jsx'
+import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
 class _IntimacyPopup extends React.Component {
   constructor(props) {
@@ -91,4 +91,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_IntimacyPopup)
-

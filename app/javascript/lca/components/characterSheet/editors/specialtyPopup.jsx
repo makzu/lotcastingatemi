@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
 
-import ExpandableListEditor from './expandableListEditor.jsx'
+import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
 class _SpecialtyPopup extends React.Component {
   constructor(props) {
@@ -104,4 +104,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_SpecialtyPopup)
-

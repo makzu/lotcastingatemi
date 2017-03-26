@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 import { updateCharacter } from '../../../actions'
 import * as c from '../../../utils/constants.js'
 
-import ExpandableListEditor from './expandableListEditor.jsx'
+import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
 function AbilityBlock(props) {
   const { label, abil, value, onChange, onBlur } = props
@@ -235,4 +235,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_AbilityPopup)
-

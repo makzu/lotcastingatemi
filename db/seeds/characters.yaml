@@ -3,7 +3,6 @@
   chronicle_id: 1
   name: Vincible Sword Princess
   description: Exactly what it says on the tin.
-
   attr_dexterity:    4
   attr_strength:     2
   attr_stamina:      3
@@ -13,10 +12,8 @@
   attr_intelligence: 2
   attr_wits:         2
   attr_perception: 3
-
   willpower_temporary: 4
   willpower_permanent: 6
-
   damage_bashing: 2
   damage_lethal: 1
   damage_aggravated: 1
@@ -25,7 +22,6 @@
   health_level_2s: 2
   health_level_4s: 1
   health_level_incap: 1
-
   abil_melee: 5
   abil_archery: 0
   abil_awareness: 3
@@ -43,14 +39,12 @@
   abil_presence: 2
   abil_socialize: 4
   abil_war: 2
-
   abil_craft:
     - craft: weapon forging
       rating: 3
   abil_martial_arts:
     - style: steel devil style
       rating: 4
-
   specialties:
     - ability: dodge
       context: While surrounded
@@ -62,19 +56,14 @@
       context: royal courts
     - ability: craft
       context: her own weapons
-
-
   ties:
     - subject: My people (love)
       rating: 3
     - subject: Vincible Sword King my father (love)
       rating: 2
-
-
   principles:
     - subject: I must defend those that I love
       rating: 3
-
   armor_weight: medium
   armor_name: Reinforced breastplate
   onslaught: 0

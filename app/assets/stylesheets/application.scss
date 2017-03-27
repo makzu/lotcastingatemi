@@ -121,11 +121,10 @@ $characterSheet-grid: (
       width: 2em;
     }
   }
-
-  .editor-wrap {
-    display: inline-block;
-    float: right;
-  }
+}
+.editor-wrap {
+  display: inline-block;
+  float: right;
 }
 .editor-popup {
   .editor-description-field {

@@ -29,6 +29,24 @@ function CraftFields(props) {
   </span>)
 }
 
+function QcActionFields(props) {
+  const { trait, index, onChange, onBlur } = props
+  const action  = trait.action
+  const pool = trait.pool
+
+  return(<span>
+    <TextField name="action" data-index={ index } value={ action }
+      floatingLabelText="Action:" onChange={ onChange } onBlur={ onBlur }
+    />
+    <TextField name="pool" data-index={ index } value={ pool }
+      floatingLabelText="pool"
+      className="ratingField"
+      type="number" min={ 0 } max={ 5 }
+      onChange={ onChange } onBlur={ onBlur }
+    />
+  </span>)
+}
+
 function MartialArtFields(props) {
   const { trait, index, onChange, onBlur } = props
   const style  = trait.style
@@ -113,6 +131,10 @@ function TraitFields(props) {
   case "ties":
   case "principles":
     fields = <IntimacyFields {...props} />
+    break
+  case "actions":
+    fields = <QcActionFields {...props} />
+    break
   }
 
   const click = (e) => {
@@ -201,14 +223,14 @@ export default class ExpandableListEditor extends React.Component {
     case "principles":
       newTrait = {subject: "", rating: 0}
       break
+    case "actions":
+      newTrait = {action: "", pool: 0}
     }
 
     this.setState({ trait: [ ...this.state.trait, newTrait ] })
   }
 
   onRemove(e, index) {
-    console.log('in onRemove', index)
-
     let newTrait = this.state.trait.slice()
     newTrait.splice(index, 1)
 
@@ -236,7 +258,11 @@ export default class ExpandableListEditor extends React.Component {
     case "ties":
       traitName = "Tie"
       break
+    case "actions":
+      traitName = "Action"
+      break
     }
+
 
     const traits = this.state.trait.map((e, index) =>
       <TraitFields key={ index } index={ index } character={ character }

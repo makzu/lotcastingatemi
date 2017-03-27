@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import QcEditorPopup from './qcEditorPopup.jsx'
 
 import { updateQc } from '../../actions'
 
@@ -18,7 +19,6 @@ function MotePool(props){
   } else {
     return null
   }
-
 }
 
 class QcSheet extends React.Component {
@@ -35,8 +35,8 @@ class QcSheet extends React.Component {
       </div>)
     }
 
-    const actions = qc.actions.map((action) =>
-      <span>{action.action}: {action.pool} </span>
+    const actions = qc.actions.map((action, index) =>
+      <span key={index}>{action.action}: {action.pool} </span>
     )
     const attacks = qc_attacks.map((attack) =>
       <div key={attack.id}>
@@ -51,7 +51,7 @@ class QcSheet extends React.Component {
     )
 
     return(<div className="qcSheet">
-      <h1>{ this.props.qc.name }</h1>
+      <h1>{ qc.name } <QcEditorPopup qc={ qc } /></h1>
 
       <div>
         <strong>Essence:</strong> { qc.essence },
@@ -79,11 +79,14 @@ class QcSheet extends React.Component {
         <strong>Guile:</strong> { qc.guile },
         <strong>Appearance:</strong> { qc.appearance }<br />
         <strong>Actions:</strong>
-        Senses: { qc.senses }
+        Senses: { qc.senses },{" "}
         { actions }
       </div>
 
-      <div>{ merits }</div>
+      <div>
+        <h4 style={{marginBottom: '0.25em'}}>Merits:</h4>
+        { merits }
+      </div>
     </div>)
   }
 }

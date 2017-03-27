@@ -2,31 +2,37 @@
   player_id: 1
   chronicle_id: 1
   name: Vincible Shieldbearer
+  description: A member of Vincible Shield Princess' peronal guard.
   player_id: 1
   chronicle_id: 1
   willpower_temporary: 4
-  willpower_permanent: 4
-  join_battle: 6
-  movement: 4
+  willpower_permanent: 5
+  join_battle: 10
+  movement: 5
   soak: 8
-  evasion: 2
-  parry: 4
+  hardness: 0
+  armor_name: Pervious Armor
+  evasion: 3
+  parry: 5
   appearance: 2
-  resolve: 2
+  resolve: 4
+  guile: 1
   health_level_0s: 1
-  health_level_1s: 1
+  health_level_1s: 2
   health_level_2s: 2
   health_level_4s: 1
   health_level_incap: 1
-  damage_bashing: 0
+  damage_bashing: 1
   damage_lethal: 0
   damage_aggravated: 0
-  senses: 4
-  grapple: 0
-  grapple_control: 0
+  senses: 9
+  grapple: 5
+  grapple_control: 6
   actions:
     - action: threaten
-      pool: 4
+      pool: 6
+    - action: read intentions
+      pool: 6
 - id: 2
   player_id: 1
   chronicle_id: 1
@@ -39,6 +45,8 @@
   join_battle: 5
   movement: 5
   soak: 3
+  hardness: 2
+  armor_name: "Reddish hide"
   evasion: 3
   parry: 3
   appearance: 2

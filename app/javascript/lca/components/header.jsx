@@ -9,6 +9,7 @@ function LcaHeader(props) {
     <header>
       <AppBar title="Lot-Casting Atemi"
         style={{paddingLeft: '280px'}}
+        iconElementLeft={ <span /> }
       />
       <Drawer open={ true } docked={ true }>
         <List>

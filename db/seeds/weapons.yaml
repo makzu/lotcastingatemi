@@ -13,7 +13,10 @@
   character_id: 1
   name: Stem (the left blade
   weight: medium
-  tags: lethal melee balanced
+  tags:
+    - lethal
+    - melee
+    - balanced
   ability: melee
   is_artifact: false
 

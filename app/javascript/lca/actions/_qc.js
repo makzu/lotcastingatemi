@@ -19,7 +19,7 @@ function updateQcTraitComplete(id, json) {
 
 export function updateQc(id, trait, value) {
   return function (dispatch) {
-    dispatch(updateQcTrait(id, charId, trait, value))
+    dispatch(updateQcTrait(id, trait, value))
 
     let mt = { qc: { }}
     mt.qc[trait] = value

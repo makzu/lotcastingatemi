@@ -1,23 +1,28 @@
 class Api::V1::WeaponsController < Api::V1::BaseController
+  before_action :set_weapon, only: [:show, :update, :destroy]
+
   def show
-    respond_with Weapon.find(params[:id])
+    respond_with @weapon
   end
 
   def create
-    respond_with :api, :v1, Weapon.create(weapon_params)
+    render json: Weapon.create(weapon_params)
   end
 
   def destroy
-    respond_with Weapon.destroy(params[:id])
+    render json: @weapon.destroy
   end
 
   def update
-    weapon = Weapon.find(params[:id])
-    weapon.update_attributes(weapon_params)
-    respond_with weapon, json: weapon
+    @weapon.update_attributes(weapon_params)
+    render json: @weapon
   end
 
   private
+  def set_weapon
+    @weapon = Weapon.find(params[:id])
+  end
+
   def weapon_params
     params.require(:weapon).permit!
   end

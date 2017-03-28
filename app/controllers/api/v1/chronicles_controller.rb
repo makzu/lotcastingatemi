@@ -11,17 +11,16 @@ class Api::V1::ChroniclesController < Api::V1::BaseController
   end
 
   def create
-    respond_with :api, :v1, Chronicle.create(chronicle_params)
+    render json: Chronicle.create(chronicle_params)
   end
 
   def destroy
-    respond_with Chronicle.destroy(params[:id])
+    render json: @chronicle.destroy
   end
 
   def update
-    chronicle = Chronicle.find(params["id"])
-    chronicle.update_attributes(chronicle_params)
-    respond_with chronicle, json: chronicle
+    @chronicle.update_attributes(chronicle_params)
+    render json: @chronicle
   end
 
   private

@@ -7,11 +7,11 @@ class Api::V1::CharactersController < Api::V1::BaseController
   end
 
   def create
-    respond_with :api, :v1, Character.create(character_params)
+    render json: Character.create(character_params)
   end
 
   def destroy
-    @character.destroy
+    render json: @character.destroy
   end
 
   def update

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function WelcomePage(props) {
-  return(<div>
+  return(<div className="welcomePage">
     <h1>Lot-Casting Atemi</h1>
     <p>
       Type: Reflexive, Cost: 15m 1wp

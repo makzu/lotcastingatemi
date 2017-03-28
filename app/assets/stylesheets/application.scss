@@ -21,45 +21,48 @@ body {
 }
 
 /* CHARSHEET GRID */
-$characterSheet-grid: (
+$mainGrid: (
   columns: 4,
   gutter: 24px,
 );
+.contentWrapper {
+  @include grid-container($mainGrid);
+  padding-bottom: 24px;
+}
 
-.characterSheetPaper {
-  margin: 0 24px;
+.welcomePage, .characterList, .qcSheet {
+  @include grid-column(4, $mainGrid);
 }
 
 .characterSheet {
-  @include grid-container($characterSheet-grid);
   hr {
     margin: 0.25em !important;
   }
 
   .clear4 {
-    @include grid-column(4, $characterSheet-grid);
+    @include grid-column(4, $mainGrid);
     border-color: transparent;
   }
 
   .name {
-    @include grid-column(4, $characterSheet-grid);
+    @include grid-column(4, $mainGrid);
   }
 
   .fullAttributeBlock {
     h3 {
-      @include grid-column(3, $characterSheet-grid);
+      @include grid-column(3, $mainGrid);
     }
     .attrContainer {
-      @include grid-column(1, $characterSheet-grid);
+      @include grid-column(1, $mainGrid);
     }
   }
 
   .fullAbilityBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
   }
 
   .fullSpecialtyBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
     .specialtyAbility {
       text-transform: capitalize;
       display: inline-block;
@@ -67,19 +70,19 @@ $characterSheet-grid: (
     }
   }
   .meritSummaryBlock {
-    @include grid-column(2, $characterSheet-grid);
+    @include grid-column(2, $mainGrid);
   }
   .willpowerBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
     div {
       clear: both;
     }
   }
   .intimacySummaryBlock, .healthLevelBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
   }
   .armorSummaryBlock {
-    @include grid-column(2, $characterSheet-grid);
+    @include grid-column(2, $mainGrid);
 
     .hardnessColumn {
       width: 3em;
@@ -92,7 +95,7 @@ $characterSheet-grid: (
     }
   }
   .weaponSummaryBlock {
-    @include grid-column(3, $characterSheet-grid);
+    @include grid-column(3, $mainGrid);
 
     .damageColumn {
       width: 3em;
@@ -108,14 +111,14 @@ $characterSheet-grid: (
     }
   }
   .combatSummaryBlock {
-    @include grid-column(2, $characterSheet-grid);
+    @include grid-column(2, $mainGrid);
 
     .pool, .defenseValue, .poolName, .defenseValueName {
       width: 2em;
     }
   }
   .socialSummaryBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
 
     .pool, .defenseValue, .poolName, .defenseValueName {
       width: 2em;
@@ -154,7 +157,7 @@ $characterSheet-grid: (
 }
 
 /* MISC: */
-
+// TODO replace these with SVG icons or something?
 .ratingDotContainer{
   float: right;
   clear: right;
@@ -168,6 +171,7 @@ $characterSheet-grid: (
   border-radius: 0.45em;
   border: 0.125em solid black;
   margin-left: 1px;
+  background-color: white;
 }
 
 .ratingDotFull {

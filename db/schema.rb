@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325012602) do
+ActiveRecord::Schema.define(version: 20170327215309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170325012602) do
     t.integer "magnitude_current", default: 7
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["qc_id"], name: "index_battlegroups_on_qc_id"
   end
 

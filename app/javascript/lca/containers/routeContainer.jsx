@@ -6,8 +6,11 @@ import styled from 'styled-components'
 import LcaHeader from  '../components/header.jsx'
 import LcaFooter from  '../components/footer.jsx'
 
+import CharacterList from '../components/characterList/index.jsx'
 import CharacterSheet from '../components/characterSheet/index.jsx'
+//import QcList from '../components/qcList/index.jsx'
 import QcSheet from    '../components/qcSheet/index.jsx'
+
 import WelcomePage from '../components/welcomePage/index.jsx'
 
 const Wrapper = styled.div`
@@ -18,13 +21,14 @@ const Wrapper = styled.div`
 
 export default function RouteContainer(props) {
   return(
-    <Paper>
+    <div>
       <LcaHeader />
-      <Wrapper className="contentWrapper">
+      <Paper className="contentWrapper">
         <Route exact path="/" component={ WelcomePage } />
+        <Route exact path="/characters/" component={ CharacterList } />
         <Route path="/characters/:characterId" component={ CharacterSheet } />
         <Route path="/qcs/:qcId" component={ QcSheet } />
-      </Wrapper>
-    </Paper>
+      </Paper>
+    </div>
   )
 }

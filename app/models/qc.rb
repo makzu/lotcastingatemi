@@ -17,12 +17,11 @@ class Qc < ApplicationRecord
   include Intimacies
 
   has_many :battlegroups
-  has_many :qc_attacks
+  has_many :qc_attacks, dependent: :destroy
+  has_many :qc_merits, dependent: :destroy
 
   belongs_to :player
-  belongs_to :chronicle
-
-  has_many :qc_merits
+  belongs_to :chronicle, optional: true
 
   # TODO create validator for actions
 

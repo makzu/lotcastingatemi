@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import * as c from '../utils/constants'
+import * as c from '../utils/actionNames'
 
 function requestChar(id) {
   return {
@@ -59,6 +59,35 @@ export function updateCharacter(id, trait, value) {
       .then(json =>
         dispatch(updateTraitComplete(id, json))
       )
-    //*/
+  }
+}
+
+function createCharacterStart(playerId, chronicleId, name) {
+  return {
+    type: c.CREATE_CHAR,
+    name: name,
+    player: playerId,
+    chronicle: chronicleId
+  }
+}
+function createCharacterComplete(json) {
+  return {
+    type: c.CREATE_CHAR_COMPLETE,
+    character: json
+  }
+}
+// TODO handle errors here
+export function createCharacter(playerId, chronicleId, name) {
+  return function (dispatch) {
+    dispatch(createCharacterStart(playerId, chronicleId, name))
+    let char = { character: { name: name, player_id: playerId, chronicle_id: chronicleId }}
+    return fetch('/api/v1/characters', {
+      method: "POST",
+      headers: new Headers({"Content-Type": "application/json"}),
+      body: JSON.stringify(char)
+    }).then(response => response.json())
+      .then(json =>
+        dispatch(createCharacterComplete(json))
+      )
   }
 }

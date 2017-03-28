@@ -52,10 +52,11 @@ class Character < ApplicationRecord
   include Intimacies
 
   belongs_to :player
-  belongs_to :chronicle
+  belongs_to :chronicle, optional: true
 
   has_many :merits,  dependent: :destroy
   has_many :weapons, dependent: :destroy
+
 
   validates :name, presence: true
 

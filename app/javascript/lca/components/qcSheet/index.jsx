@@ -97,8 +97,10 @@ function mapStateToProps(state, ownProps) {
   let qc_attacks = []
   let qc_merits = []
 
-  if (qc != undefined) {
+  if (qc != undefined && qc.qc_attacks != undefined) {
     qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
+  }
+  if (qc != undefined && qc.qc_merits != undefined) {
     qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
   }
 

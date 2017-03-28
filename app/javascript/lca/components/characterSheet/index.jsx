@@ -153,8 +153,10 @@ function mapStateToProps(state, ownProps) {
   let weapons = []
   let merits = []
 
-  if (character != undefined) {
+  if (character != undefined && character.weapons != undefined) {
     weapons = character.weapons.map((id) => state.entities.weapons[id])
+  }
+  if (character != undefined && character.weapons != undefined) {
     merits = character.merits.map((id) => state.entities.merits[id])
   }
 

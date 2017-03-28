@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import * as c from '../utils/constants'
+import * as c from '../utils/actionNames'
 
 function updateMeritTrait(id, charId, trait, value) {
   return {

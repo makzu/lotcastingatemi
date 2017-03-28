@@ -4,7 +4,7 @@ class Api::V1::QcsController < Api::V1::BaseController
   end
 
   def create
-    respond_with :api, :v1, Qc.create(qc_params)
+    render json: Qc.create(qc_params).as_json
   end
 
   def destroy

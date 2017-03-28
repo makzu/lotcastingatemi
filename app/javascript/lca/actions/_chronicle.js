@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import * as c from '../utils/constants'
+import * as c from '../utils/actionNames'
 
 function requestChronicle(id) {
   return {
@@ -26,4 +26,3 @@ export function fetchChronicle(id) {
       )
   }
 }
-

@@ -1,35 +1,51 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import {List, ListItem} from 'material-ui/List'
+import {toggleMenu} from '../actions'
 
 function LcaHeader(props) {
-  return(
-    <header>
-      <AppBar title="Lot-Casting Atemi"
-        style={{paddingLeft: '280px'}}
-        iconElementLeft={ <span /> }
-      />
-      <Drawer open={ true } docked={ true }>
-        <List>
-          <Link to="/">
-            <ListItem primaryText="Home" />
-          </Link>
-          <Link to="/characters/1">
-            <ListItem primaryText="Edit character" />
-          </Link>
-          <Link to="/qcs/1">
-            <ListItem primaryText="View QC 1" />
-          </Link>
-          <Link to="/qcs/2">
-            <ListItem primaryText="View QC 2" />
-          </Link>
-          <ListItem primaryText="Etc" />
-        </List>
-      </Drawer>
-    </header>
-  )
+    const { navDrawerOpen, toggleMenu } = props
+
+    return(
+      <header>
+        <AppBar title="Lot-Casting Atemi"
+          onLeftIconButtonTouchTap={ toggleMenu }
+        />
+        <Drawer open={ navDrawerOpen } docked={ true }>
+          <List>
+            <Link to="/">
+              <ListItem primaryText="Home" onClick={ toggleMenu } />
+            </Link>
+            <Link to="/characters/">
+              <ListItem primaryText="My Characters" onClick={ toggleMenu } />
+            </Link>
+            <ListItem primaryText="Etc" onClick={ toggleMenu } />
+          </List>
+        </Drawer>
+      </header>
+    )
+  }
+
+function mapStateToProps(state) {
+  const navDrawerOpen = state.app.navDrawerOpen
+
+  return {
+    navDrawerOpen
+  }
 }
 
-export default LcaHeader
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleMenu: () => {
+      dispatch(toggleMenu())
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LcaHeader)

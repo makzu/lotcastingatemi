@@ -1,8 +1,9 @@
 import { normalize, schema } from 'normalizr'
 
-import * as c from '../utils/constants'
+import * as c from '../utils/actionNames'
 
 const defaultState = {
+  players: {},
   chronicles: {},
   characters: {},
   weapons: {},
@@ -26,7 +27,13 @@ const qc = new schema.Entity('qcs', {
   qc_attacks: [ qcAttack ]
 })
 
+const player = new schema.Entity('players', {
+  characters: [ character ],
+  qcs: [ qc ]
+})
+
 const chronicle = new schema.Entity('chronicles', {
+  st: player,
   characters: [ character ],
   qcs: [ qc ]
 })
@@ -36,20 +43,34 @@ function _receive_chronicle(state, action) {
 
   const id = newState.result
   const newChronicles = newState.entities.chronicles
+  const newPlayers = newState.entities.players
   const newCharacters = newState.entities.characters
   const newWeapons = newState.entities.weapons
   const newMerits = newState.entities.merits
-  const qcs = newState.entities.qcs
-  const qcMerits = newState.entities.qcMerits
-  const qcAttacks = newState.entities.qcAttacks
+  const newQcs = newState.entities.qcs
+  const newQcMerits = newState.entities.qcMerits
+  const newQcAttacks = newState.entities.qcAttacks
+
+  newChronicles[id].characters = []
+  newChronicles[id].qcs = []
+
+  for (var charId in newCharacters) {
+    if (newCharacters[charId].chronicle_id == id)
+      newChronicles[id].characters.push(parseInt(charId))
+  }
+  for (var qcId in newQcs) {
+    if (newQcs[qcId].chronicle_id == id)
+      newChronicles[id].qcs.push(parseInt(qcId))
+  }
 
   return {
     characters: { ...state.characters, ...newCharacters },
+    players:    { ...state.players,    ...newPlayers    },
     merits:     { ...state.merits,     ...newMerits     },
     weapons:    { ...state.weapons,    ...newWeapons    },
-    qcs:        { ...state.qcs,        ...qcs           },
-    qc_merits:  { ...state.qc_merits,  ...qcMerits      },
-    qc_attacks: { ...state.qc_attacks, ...qcAttacks     },
+    qcs:        { ...state.qcs,        ...newQcs        },
+    qc_merits:  { ...state.qc_merits,  ...newQcMerits   },
+    qc_attacks: { ...state.qc_attacks, ...newQcAttacks  },
     chronicles: { ...state.chronicles, ...newChronicles }
   }
 }
@@ -69,7 +90,55 @@ function _receive_char(state, action) {
   }
 }
 
+function _create_character(state, action) {
+  const newState = normalize(action.character, character)
+  const newCharacters = newState.entities.characters
+  const owner = state.players[action.character.player_id]
+
+  const chronId = action.character.chronicle_id
+  let newChronicles = state.chronicles
+
+  if (chronId != null) {
+    newChronicles = { ...newChronicles, [chronId]: {
+      ...newChronicles[chronId],
+      qcs: [ ...newChronicles[chronId].characters, action.character.id ]
+    }}
+  }
+
+  return { ...state,
+    characters: { ...state.characters, ...newCharacters },
+    players: { ...state.players, [owner.id]: { ...owner, characters: [ ...owner.characters, action.character.id ] }},
+    chronicles: newChronicles
+  }
+}
+
+function _create_qc(state, action) {
+  const newState = normalize(action.qc, qc)
+  const newQcs = newState.entities.qcs
+  const owner = state.players[action.qc.player_id]
+
+  const chronId = action.qc.chronicle_id
+  let newChronicles = state.chronicles
+  if (chronId != null) {
+    newChronicles = { ...newChronicles, [chronId]: {
+      ...newChronicles[chronId],
+      qcs: [ ...newChronicles[chronId].qcs, action.qc.id ]
+    }}
+  }
+
+  console.log(newChronicles)
+
+  return { ...state,
+    qcs: { ...state.qcs, ...newQcs },
+    players: { ...state.players, [owner.id]: { ...owner, qcs: [ ...owner.qcs, action.qc.id ] }},
+    chronicles: newChronicles
+  }
+}
+
 export default function EntityReducer(state = defaultState, action) {
+  const trait = action.update != undefined ? action.update.trait : null
+  const value = action.update != undefined ? action.update.value : null
+
   switch (action.type) {
   case c.RECEIVE_CHAR:
     return _receive_char(state, action)
@@ -77,40 +146,38 @@ export default function EntityReducer(state = defaultState, action) {
   case c.RECEIVE_CHRONICLE:
     return _receive_chronicle(state, action)
 
+  case c.CREATE_CHAR_COMPLETE:
+    return _create_character(state, action)
+
   case c.UPDATE_CHAR:
-    const ctr = action.update.trait
-    const cval = action.update.value
     const char = state.characters[action.id]
     return {... state, characters: {
       ...state.characters, [action.id]: {
-        ...char, [ctr]: cval } }
+        ...char, [trait]: value } }
     }
 
   case c.UPDATE_WEAP:
-    const wtr = action.update.trait
-    const wval = action.update.value
     const weap = state.weapons[action.id]
     return { ...state, weapons: {
       ...state.weapons, [action.id]: {
-        ...weap, [wtr]: wval } }
+        ...weap, [trait]: value } }
     }
 
   case c.UPDATE_MERIT:
-    const mtr = action.update.trait
-    const mval = action.update.value
     const merit = state.merits[action.id]
     return { ...state, merits: {
       ...state.merits, [action.id]: {
-        ...merit, [mtr]: mval } }
+        ...merit, [trait]: value } }
     }
 
+  case c.CREATE_QC_COMPLETE:
+    return _create_qc(state, action)
+
   case c.UPDATE_QC:
-    const qtr = action.update.trait
-    const qval = action.update.value
     const qc = state.qcs[action.id]
     return { ...state, qcs: {
       ...state.qcs, [action.id]: {
-        ...qc, [qtr]: qval } }
+        ...qc, [trait]: value } }
     }
 
   default:

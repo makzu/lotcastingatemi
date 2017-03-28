@@ -55,3 +55,8 @@ YAML.load(File.read("db/seeds/qc_attacks.yaml")).each do |a|
   attack.update(a)
   puts "Updated " + attack.name + " for " + attack.qc.name
 end
+
+# Needed to prevent PG:UniqueViolation errors
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.reset_pk_sequence!(t)
+end

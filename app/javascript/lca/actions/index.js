@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
 export { fetchCharacter, updateCharacter, createCharacter } from './_character.js'
-export { updateWeapon } from './_weapon.js'
+export { updateWeapon, createWeapon, destroyWeapon } from './_weapon.js'
 export { updateMerit } from './_merit.js'
 export { fetchChronicle } from './_chronicle.js'
 export { updateQc, createQc } from './_qc.js'

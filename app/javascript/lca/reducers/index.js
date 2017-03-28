@@ -11,26 +11,30 @@ function appReducer(state = defaultState, action) {
   case c.TOGGLE_MENU:
     return {...state, navDrawerOpen: !state.navDrawerOpen }
 
-  case c.REQUEST_CHAR:
+  case c.REQUEST_CHARACTER:
   case c.REQUEST_CHRONICLE:
     return {... state, isFetching: true, isError: false }
 
-  case c.RECEIVE_CHAR:
+  case c.RECEIVE_CHARACTER:
   case c.RECEIVE_CHRONICLE:
     return {... state, isFetching: false, isError: false }
 
-  case c.UPDATE_CHAR:
-  case c.CREATE_CHAR:
-  case c.UPDATE_WEAP:
+  case c.UPDATE_CHARACTER:
+  case c.CREATE_CHARACTER:
+  case c.UPDATE_WEAPON:
+  case c.CREATE_WEAPON:
   case c.UPDATE_MERIT:
+  case c.CREATE_MERIT:
   case c.UPDATE_QC:
   case c.CREATE_QC:
     return {... state, isFetching: true }
 
-  case c.UPDATE_CHAR_COMPLETE:
-  case c.CREATE_CHAR_COMPLETE:
-  case c.UPDATE_WEAP_COMPLETE:
+  case c.UPDATE_CHARACTER_COMPLETE:
+  case c.CREATE_CHARACTER_COMPLETE:
+  case c.UPDATE_WEAPON_COMPLETE:
+  case c.CREATE_WEAPON_COMPLETE:
   case c.UPDATE_MERIT_COMPLETE:
+  case c.CREATE_MERIT_COMPLETE:
   case c.UPDATE_QC_COMPLETE:
   case c.CREATE_QC_COMPLETE:
     return {... state, isFetching: false }

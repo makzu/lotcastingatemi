@@ -3,7 +3,7 @@ import * as c from '../utils/actionNames'
 
 function updateWeaponTrait(id, charId, trait, value) {
   return {
-    type: c.UPDATE_WEAP,
+    type: c.UPDATE_QC_ATTACK,
     id: id,
     update: { trait: trait, value: value }
   }
@@ -11,9 +11,9 @@ function updateWeaponTrait(id, charId, trait, value) {
 
 function updateWeaponTraitComplete(id, json) {
   return {
-    type: c.UPDATE_WEAP_COMPLETE,
+    type: c.UPDATE_QC_ATTACK_COMPLETE,
     id: id,
-    weapon: json
+    qc_attack: json
   }
 }
 
@@ -21,11 +21,11 @@ export function updateWeapon(id, charId, trait, value) {
   return function (dispatch) {
     dispatch(updateWeaponTrait(id, charId, trait, value))
 
-    let wp = { weapon: { }}
+    let wp = { qc_attack: { }}
 
-    wp.weapon[trait] = value
+    wp.qc_attack[trait] = value
 
-    return fetch(`/api/v1/characters/${charId}/weapons/${id}`, {
+    return fetch(`/api/v1/qcs/${charId}/qc_attacks/${id}`, {
       method: "PATCH",
       headers: new Headers({"Content-Type": "application/json"}),
       body: JSON.stringify(wp)
@@ -38,16 +38,16 @@ export function updateWeapon(id, charId, trait, value) {
 
 function createWeaponStart(charId, name) {
   return {
-    type: c.CREATE_WEAPON,
+    type: c.CREATE_QC_ATTACK,
     name: name,
-    character: charId
+    qc: charId
   }
 }
 
 function createWeaponComplete(json) {
   return {
-    type: c.CREATE_WEAPON_COMPLETE,
-    weapon: json
+    type: c.CREATE_QC_ATTACK_COMPLETE,
+    qc_attack: json
   }
 }
 
@@ -55,11 +55,11 @@ function createWeaponComplete(json) {
 export function createWeapon(charId, name) {
   return function (dispatch) {
     dispatch(createWeaponStart(charId, name))
-    let weapon = { weapon: { name: name, character_id: charId }}
-    return fetch('/api/v1/weapons', {
+    let qc_attack = { qc_attack: { name: name, qc_id: charId }}
+    return fetch('/api/v1/qc_attacks', {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),
-      body: JSON.stringify(weapon)
+      body: JSON.stringify(qc_attack)
     }).then(response => response.json())
       .then(json =>
         dispatch(createWeaponComplete(json))

@@ -112,6 +112,20 @@ function _create_character(state, action) {
   }
 }
 
+function _destroy_weapon(state, action) {
+  const id = action.weapon.id
+  const charId = action.weapon.character_id
+
+  const newWeapons = { ...state.weapons }
+
+  delete newWeapons[id]
+
+  const char = { ...state.characters[charId] }
+  char.weapons = char.weapons.filter((e) => e != id)
+
+  return { ...state, weapons: newWeapons, characters: { ...state.characters, [charId]: char } }
+}
+
 function _create_qc(state, action) {
   const newState = normalize(action.qc, qc)
   const newQcs = newState.entities.qcs
@@ -165,6 +179,9 @@ export default function EntityReducer(state = defaultState, action) {
       ...state.weapons, [action.id]: {
         ...weap, [trait]: value } }
     }
+
+  case c.DESTROY_WEAPON_COMPLETE:
+    return _destroy_weapon(state, action)
 
   case c.CREATE_MERIT_COMPLETE:
   return state

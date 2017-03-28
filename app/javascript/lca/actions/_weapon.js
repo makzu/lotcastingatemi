@@ -66,3 +66,32 @@ export function createWeapon(charId, name) {
       )
   }
 }
+
+function destroyWeaponStart(id) {
+  return {
+    type: c.DESTROY_WEAPON,
+    id: id
+  }
+}
+
+function destroyWeaponComplete(json) {
+  return {
+    type: c.DESTROY_WEAPON_COMPLETE,
+    weapon: json
+  }
+}
+
+// TODO handle errors here
+export function destroyWeapon(charId, id) {
+  return function (dispatch) {
+    dispatch(destroyWeaponStart(id))
+
+    return fetch(`/api/v1/characters/${charId}/weapons/${id}`, {
+      method: "DELETE",
+      headers: new Headers({"Content-Type": "application/json"})
+    }).then(response => response.json())
+      .then(json =>
+        dispatch(destroyWeaponComplete(json))
+      )
+  }
+}

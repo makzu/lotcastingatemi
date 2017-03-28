@@ -3,13 +3,13 @@ import * as c from '../utils/actionNames'
 
 function requestChar(id) {
   return {
-    type: c.REQUEST_CHAR,
+    type: c.REQUEST_CHARACTER,
     id
   }
 }
 function receiveChar(id, json) {
   return {
-    type: c.RECEIVE_CHAR,
+    type: c.RECEIVE_CHARACTER,
     id,
     character: json
   }
@@ -29,7 +29,7 @@ export function fetchCharacter(id) {
 
 function updateTrait(id, trait, value) {
   return {
-    type: c.UPDATE_CHAR,
+    type: c.UPDATE_CHARACTER,
     id: id,
     update: { trait: trait, value: value }
   }
@@ -37,7 +37,7 @@ function updateTrait(id, trait, value) {
 
 function updateTraitComplete(id, json) {
   return {
-    type: c.UPDATE_CHAR_COMPLETE,
+    type: c.UPDATE_CHARACTER_COMPLETE,
     id: id,
     character: json
   }
@@ -64,7 +64,7 @@ export function updateCharacter(id, trait, value) {
 
 function createCharacterStart(playerId, chronicleId, name) {
   return {
-    type: c.CREATE_CHAR,
+    type: c.CREATE_CHARACTER,
     name: name,
     player: playerId,
     chronicle: chronicleId
@@ -72,7 +72,7 @@ function createCharacterStart(playerId, chronicleId, name) {
 }
 function createCharacterComplete(json) {
   return {
-    type: c.CREATE_CHAR_COMPLETE,
+    type: c.CREATE_CHARACTER_COMPLETE,
     character: json
   }
 }

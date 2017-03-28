@@ -7,11 +7,11 @@ Rails.application.routes.draw do
       resources :chronicles, only: [:show, :create, :destroy, :update]
 
       resources :characters, only: [:show, :create, :destroy, :update] do
-        resources :merits, :weapons, only: [:index, :show, :create, :destroy, :update]
+        resources :merits, :weapons, only: [:show, :create, :destroy, :update]
       end
 
       resources :qcs, only: [:show, :create, :destroy, :update] do
-        resources :qc_merits, only: [:show, :create, :destroy, :update]
+        resources :qc_merits, :qc_attacks, only: [:show, :create, :destroy, :update]
       end
     end
   end

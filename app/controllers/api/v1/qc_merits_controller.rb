@@ -1,4 +1,4 @@
-class Api::V1::MeritsController < Api::V1::BaseController
+class Api::V1::QcMeritsController < Api::V1::BaseController
   before_action :set_qc_merit, only: [:show, :update, :destroy]
 
   def show
@@ -22,7 +22,7 @@ class Api::V1::MeritsController < Api::V1::BaseController
   def set_qc_merit
     @qc_merit = QcMerit.find(params[:id])
   end
-  
+
   def qc_merit_params
     params.require(:qc_merit).permit!
   end

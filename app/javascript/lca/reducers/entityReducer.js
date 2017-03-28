@@ -140,28 +140,34 @@ export default function EntityReducer(state = defaultState, action) {
   const value = action.update != undefined ? action.update.value : null
 
   switch (action.type) {
-  case c.RECEIVE_CHAR:
+  case c.RECEIVE_CHARACTER:
     return _receive_char(state, action)
 
   case c.RECEIVE_CHRONICLE:
     return _receive_chronicle(state, action)
 
-  case c.CREATE_CHAR_COMPLETE:
+  case c.CREATE_CHARACTER_COMPLETE:
     return _create_character(state, action)
 
-  case c.UPDATE_CHAR:
+  case c.UPDATE_CHARACTER:
     const char = state.characters[action.id]
     return {... state, characters: {
       ...state.characters, [action.id]: {
         ...char, [trait]: value } }
     }
 
-  case c.UPDATE_WEAP:
+  case c.CREATE_WEAPON_COMPLETE:
+    return state
+
+  case c.UPDATE_WEAPON:
     const weap = state.weapons[action.id]
     return { ...state, weapons: {
       ...state.weapons, [action.id]: {
         ...weap, [trait]: value } }
     }
+
+  case c.CREATE_MERIT_COMPLETE:
+  return state
 
   case c.UPDATE_MERIT:
     const merit = state.merits[action.id]

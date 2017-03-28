@@ -3,7 +3,7 @@ import * as c from '../utils/actionNames'
 
 function updateWeaponTrait(id, charId, trait, value) {
   return {
-    type: c.UPDATE_WEAPON,
+    type: c.UPDATE_WEAP,
     id: id,
     update: { trait: trait, value: value }
   }
@@ -11,7 +11,7 @@ function updateWeaponTrait(id, charId, trait, value) {
 
 function updateWeaponTraitComplete(id, json) {
   return {
-    type: c.UPDATE_WEAPON_COMPLETE,
+    type: c.UPDATE_WEAP_COMPLETE,
     id: id,
     weapon: json
   }

@@ -36,10 +36,9 @@ export function updateWeapon(id, charId, trait, value) {
   }
 }
 
-function createWeaponStart(charId, name) {
+function createWeaponStart(charId) {
   return {
     type: c.CREATE_WEAPON,
-    name: name,
     character: charId
   }
 }
@@ -52,11 +51,11 @@ function createWeaponComplete(json) {
 }
 
 // TODO handle errors here
-export function createWeapon(charId, name) {
+export function createWeapon(charId) {
   return function (dispatch) {
-    dispatch(createWeaponStart(charId, name))
-    let weapon = { weapon: { name: name, character_id: charId }}
-    return fetch('/api/v1/weapons', {
+    dispatch(createWeaponStart(charId))
+    let weapon = { weapon: { character_id: charId }}
+    return fetch(`/api/v1/characters/${charId}/weapons`, {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),
       body: JSON.stringify(weapon)

@@ -112,6 +112,19 @@ function _create_character(state, action) {
   }
 }
 
+function _create_weapon(state, action) {
+  const id = action.weapon.id
+  const charId = action.weapon.character_id
+
+  const char = { ...state.characters[charId] }
+  char.weapons.push(id)
+
+  return { ...state,
+    weapons: { ...state.weapons, [id]: action.weapon },
+    characters: { ...state.characters, [charId]: char }
+  }
+}
+
 function _destroy_weapon(state, action) {
   const id = action.weapon.id
   const charId = action.weapon.character_id
@@ -171,7 +184,7 @@ export default function EntityReducer(state = defaultState, action) {
     }
 
   case c.CREATE_WEAPON_COMPLETE:
-    return state
+    return _create_weapon(state, action)
 
   case c.UPDATE_WEAPON:
     const weap = state.weapons[action.id]

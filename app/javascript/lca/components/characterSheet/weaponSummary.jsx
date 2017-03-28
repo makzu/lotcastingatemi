@@ -57,7 +57,7 @@ function WeaponData(props) {
 function WeaponEditHeader() {
   return <TableRow>
     <TableHeaderColumn>Weapon Name</TableHeaderColumn>
-    <TableHeaderColumn style={{ width: '4em' }}>Weight</TableHeaderColumn>
+    <TableHeaderColumn style={{ width: '5em' }}>Weight</TableHeaderColumn>
     <TableHeaderColumn style={{ width: '2em' }}>Artifact?</TableHeaderColumn>
     <TableHeaderColumn>Tags</TableHeaderColumn>
     <TableHeaderColumn>Ability</TableHeaderColumn>
@@ -70,10 +70,10 @@ function WeaponEditHeader() {
 function WeightSelect(props) {
   return(
     <SelectField name="weight" value={ props.weapon.weight }
-      onChange={ props.onChange }>
-      <MenuItem value="light" primaryText="Light" />
-      <MenuItem value="medium" primaryText="Medium" />
-      <MenuItem value="heavy" primaryText="Heavy" />
+      onChange={ props.onChange } style={{width: '4em'}}>
+      <MenuItem value="light" label="L" primaryText="Light" />
+      <MenuItem value="medium" label="M" primaryText="Medium" />
+      <MenuItem value="heavy" label="H" primaryText="Heavy" />
     </SelectField>
   )
 }
@@ -148,22 +148,22 @@ class WeaponFieldset extends React.Component {
     const weapon = this.state.weapon
 
     return <TableRow>
-      <TableRowColumn style={{verticalAlign: 'baseline'}}>
-        <TextField name="name" value={ weapon.name }
+      <TableRowColumn style={{verticalAlign: 'bottom'}}>
+        <TextField name="name" value={ weapon.name || "" }
           onBlur={ handleBlur } onChange={ handleChange } />
       </TableRowColumn>
-      <TableRowColumn style={{ width: '4em' }}>
+      <TableRowColumn style={{ width: '5em', verticalAlign: 'baseline' }}>
         <WeightSelect weapon={ weapon } onChange={ handleWeightChange }/>
       </TableRowColumn>
       <TableRowColumn style={{ width: '2em' }}>
         <Checkbox name="is_artifact" checked={ weapon.is_artifact }
         />
       </TableRowColumn>
-      <TableRowColumn>
-        <TextField name="tags" value={ weapon.tags }
+      <TableRowColumn style={{verticalAlign: 'bottom'}}>
+        <TextField name="tags" value={ weapon.tags || "" }
           onBlur={ handleBlur } onChange={ handleChange } />
       </TableRowColumn>
-      <TableRowColumn>
+      <TableRowColumn style={{verticalAlign: 'bottom'}}>
         <AbilitySelect character={ character } weapon={ weapon }
           onChange={ handleAbilityChange }
         />
@@ -205,7 +205,7 @@ class WeaponSummary extends React.Component {
   }
 
   handleAdd() {
-
+    this.props._handleCreate(this.props.character.id)
   }
 
   handleRemove(id) {
@@ -256,8 +256,8 @@ function mapDispatchToProps(dispatch) {
     _handleDestroy: (charId, id) => {
       dispatch(destroyWeapon(charId, id))
     },
-    _handleCreate: (charId, name) => {
-      dispatch(createWeapon(charId, name))
+    _handleCreate: (charId) => {
+      dispatch(createWeapon(charId))
     }
   }
 }

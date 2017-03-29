@@ -51,7 +51,7 @@ class QcSheet extends React.Component {
     )
 
     return(<div className="qcSheet">
-      <h1>{ qc.name } <QcEditorPopup qc={ qc } /></h1>
+      <h1>{ qc.name } <QcEditorPopup qc={ qc } attacks={ qc_attacks } merits={ qc_merits } /></h1>
 
       <div>
         <strong>Essence:</strong> { qc.essence },

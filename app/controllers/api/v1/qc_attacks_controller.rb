@@ -14,7 +14,7 @@ class Api::V1::QcAttacksController < Api::V1::BaseController
   end
 
   def update
-    @qc_attack.update_attributes(attack_params)
+    @qc_attack.update_attributes(qc_attack_params)
     render json: @qc_attack
   end
 

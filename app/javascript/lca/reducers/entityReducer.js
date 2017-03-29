@@ -1,45 +1,23 @@
-import { normalize, schema } from 'normalizr'
+import { normalize } from 'normalizr'
 
 import * as c from '../utils/actionNames'
+import * as schemas from './entities/_schemas.js'
+import { _create_qc_attack, _destroy_qc_attack } from './entities/qc_attack.js'
+import { _create_weapon, _destroy_weapon } from './entities/weapon.js'
 
 const defaultState = {
-  players: {},
+  players:    {},
   chronicles: {},
   characters: {},
-  weapons: {},
-  merits: {},
-  qcs: {},
-  qc_merits: {},
+  weapons:    {},
+  merits:     {},
+  qcs:        {},
+  qc_merits:  {},
   qc_attacks: {}
 }
 
-const weapon = new schema.Entity('weapons')
-const merit = new schema.Entity('merits')
-const character = new schema.Entity('characters', {
-  weapons: [ weapon ],
-  merits: [ merit ]
-})
-
-const qcMerit = new schema.Entity('qcMerits')
-const qcAttack = new schema.Entity('qcAttacks')
-const qc = new schema.Entity('qcs', {
-  qc_merits: [ qcMerit ],
-  qc_attacks: [ qcAttack ]
-})
-
-const player = new schema.Entity('players', {
-  characters: [ character ],
-  qcs: [ qc ]
-})
-
-const chronicle = new schema.Entity('chronicles', {
-  st: player,
-  characters: [ character ],
-  qcs: [ qc ]
-})
-
 function _receive_chronicle(state, action) {
-  const newState = normalize(action.chronicle, chronicle)
+  const newState = normalize(action.chronicle, schemas.chronicle)
 
   const id = newState.result
   const newChronicles = newState.entities.chronicles
@@ -76,7 +54,7 @@ function _receive_chronicle(state, action) {
 }
 
 function _receive_char(state, action) {
-  const newState = normalize(action.character, character)
+  const newState = normalize(action.character, schemas.character)
 
   const id = newState.result
   const newChar = newState.entities.characters
@@ -91,7 +69,7 @@ function _receive_char(state, action) {
 }
 
 function _create_character(state, action) {
-  const newState = normalize(action.character, character)
+  const newState = normalize(action.character, schemas.character)
   const newCharacters = newState.entities.characters
   const owner = state.players[action.character.player_id]
 
@@ -112,33 +90,6 @@ function _create_character(state, action) {
   }
 }
 
-function _create_weapon(state, action) {
-  const id = action.weapon.id
-  const charId = action.weapon.character_id
-
-  const char = { ...state.characters[charId] }
-  char.weapons.push(id)
-
-  return { ...state,
-    weapons: { ...state.weapons, [id]: action.weapon },
-    characters: { ...state.characters, [charId]: char }
-  }
-}
-
-function _destroy_weapon(state, action) {
-  const id = action.weapon.id
-  const charId = action.weapon.character_id
-
-  const newWeapons = { ...state.weapons }
-
-  delete newWeapons[id]
-
-  const char = { ...state.characters[charId] }
-  char.weapons = char.weapons.filter((e) => e != id)
-
-  return { ...state, weapons: newWeapons, characters: { ...state.characters, [charId]: char } }
-}
-
 function _create_qc(state, action) {
   const newState = normalize(action.qc, qc)
   const newQcs = newState.entities.qcs
@@ -152,8 +103,6 @@ function _create_qc(state, action) {
       qcs: [ ...newChronicles[chronId].qcs, action.qc.id ]
     }}
   }
-
-  console.log(newChronicles)
 
   return { ...state,
     qcs: { ...state.qcs, ...newQcs },
@@ -214,6 +163,19 @@ export default function EntityReducer(state = defaultState, action) {
     return { ...state, qcs: {
       ...state.qcs, [action.id]: {
         ...qc, [trait]: value } }
+    }
+
+  case c.CREATE_QC_ATTACK_COMPLETE:
+    return _create_qc_attack(state, action)
+
+  case c.DESTROY_QC_ATTACK_COMPLETE:
+    return _destroy_qc_attack(state, action)
+
+  case c.UPDATE_QC_ATTACK:
+    const qca = state.qc_attacks[action.id]
+    return { ...state, qc_attacks: {
+      ...state.qc_attacks, [action.id]: {
+        ...qca, [trait]: value } }
     }
 
   default:

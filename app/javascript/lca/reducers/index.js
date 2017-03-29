@@ -3,8 +3,14 @@ import { routerReducer } from 'react-router-redux'
 import { authStateReducer } from 'redux-auth'
 import * as c from '../utils/actionNames'
 
-import { defaultState } from './defaultState.js'
 import EntityReducer from './entityReducer.js'
+
+const defaultState = {
+  navDrawerOpen: false,
+  isFetching: false,
+  isError: false,
+  isEditing: false
+}
 
 function appReducer(state = defaultState, action) {
   switch (action.type) {

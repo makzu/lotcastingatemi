@@ -4,7 +4,8 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
-import IconButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import IconButton from 'material-ui/FlatButton'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
@@ -22,7 +23,7 @@ function CraftFields(props) {
     />
     <TextField name="rating" data-index={ index } value={ rating }
       floatingLabelText="rating"
-      className="ratingField craftRatingField"
+      className="editor-rating-field"
       type="number" min={ 0 } max={ 5 }
       onChange={ onChange } onBlur={ onBlur }
     />
@@ -40,7 +41,7 @@ function QcActionFields(props) {
     />
     <TextField name="pool" data-index={ index } value={ pool }
       floatingLabelText="pool"
-      className="ratingField"
+      className="editor-rating-field"
       type="number" min={ 0 } max={ 5 }
       onChange={ onChange } onBlur={ onBlur }
     />
@@ -58,7 +59,7 @@ function MartialArtFields(props) {
     />
     <TextField name="rating" data-index={ index } value={ rating }
       floatingLabelText="rating"
-      className="ratingField martialArtsRatingField"
+      className="editor-rating-field"
       type="number" min={ 0 } max={ 5 }
       onChange={ onChange } onBlur={ onBlur }
     />
@@ -106,7 +107,7 @@ function IntimacyFields(props) {
     />
     <TextField name="rating" data-index={ index } value={ rating }
       floatingLabelText="Rating:"
-      className="ratingField intimacyRatingField"
+      className="editor-rating-field"
       type="number" min={ 1 } max={ 3 }
       onChange={ onChange } onBlur={ onBlur }
     />
@@ -143,7 +144,7 @@ function TraitFields(props) {
 
   return(<div>
     { fields }
-    <IconButton onClick={ click }><ContentRemoveCircle /></IconButton>
+    <IconButton onClick={ click } style={{minWidth: '2em'}}><ContentRemoveCircle /></IconButton>
   </div>)
 }
 

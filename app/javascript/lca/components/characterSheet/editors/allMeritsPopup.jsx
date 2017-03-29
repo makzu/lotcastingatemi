@@ -74,7 +74,7 @@ class MeritFieldset extends React.Component {
         onBlur={ pushUpdate } onChange={ updateMerit } />
 
       <TextField name="rating" value={ merit.rating }
-        className="meritRatingField" floatingLabelText="Rating:"
+        className="editor-rating-field" floatingLabelText="Rating:"
         type="number" min={ 0 } max={ 5 }
         onBlur={ pushUpdate } onChange={ updateMerit } />
 
@@ -173,4 +173,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_AllMeritsPopup)
-

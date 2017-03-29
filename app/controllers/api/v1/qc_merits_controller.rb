@@ -14,7 +14,7 @@ class Api::V1::QcMeritsController < Api::V1::BaseController
   end
 
   def update
-    @qc_merit.update_attributes(merit_params)
+    @qc_merit.update_attributes(qc_merit_params)
     render json: @qc_merit
   end
 

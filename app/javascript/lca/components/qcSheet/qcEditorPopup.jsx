@@ -1,21 +1,87 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Dialog from 'material-ui/Dialog'
+import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
+import IconButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
+import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
+import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
 import ExpandableListEditor from '../generic/expandableListEditor.jsx'
 
-import { updateQc } from '../../actions'
+import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack } from '../../actions'
 
 import * as c from '../../utils/constants.js'
+
+class QcAttackFields extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
+
+    this.state = {
+      attack: this.props.attack
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ attack: newProps.attack })
+  }
+
+  handleChange(e) {
+    e.preventDefault()
+    let val = e.target.value
+    if (e.target.type == "number") {
+      val = parseInt(val)
+      val = (val < 1) ? 1 : val
+    }
+
+    this.setState({ attack: {...this.state.attack, [e.target.name]: val }})
+  }
+
+  handleBlur(e) {
+    e.preventDefault()
+    if (this.state.attack[e.target.name] != this.props.attack[e.target.name])
+      this.props.onAttackChange(this.state.attack.id, e.target.name, e.target.value)
+  }
+
+  handleRemove(e) {
+    e.preventDefault()
+    this.props.onRemoveClick(this.state.attack.id)
+  }
+
+  render() {
+    const { attack } = this.state
+
+    return <div>
+      <TextField name="name" value={ attack.name }
+        floatingLabelText="Name:"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+      />
+      <TextField name="pool" value={ attack.pool }
+        floatingLabelText="Pool:"
+        type="number" min={ 1 }
+        className="editor-rating-field"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+      />
+      <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
+        <ContentRemoveCircle />
+      </IconButton>
+    </div>
+  }
+}
 
 class _QcEditorPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       open: false,
-      qc: this.props.qc
+      qc: this.props.qc,
+      attacks: this.props.attacks,
+      merits: this.props.merits
     }
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
@@ -23,12 +89,27 @@ class _QcEditorPopup extends React.Component {
     this.handleBlur = this.handleBlur.bind(this)
     this.onListChange = this.onListChange.bind(this)
     this.onListBlur = this.onListBlur.bind(this)
+    this.handleAttackChange = this.handleAttackChange.bind(this)
+    this.handleAttackRemove = this.handleAttackRemove.bind(this)
+    this.handleAttackAdd = this.handleAttackAdd.bind(this)
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      qc: newProps.qc,
+      attacks: newProps.attacks,
+      merits: newProps.merits
+    })
   }
 
   handleOpen() {
-    this.setState({ open: true, qc: this.props.qc })
+    this.setState({
+      open: true,
+      qc: this.props.qc,
+      attacks: this.props.attacks,
+      merits: this.props.merits
+    })
   }
-
   handleClose() {
     this.setState({ open: false })
   }
@@ -63,22 +144,34 @@ class _QcEditorPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    console.log('in onListChange')
     this.setState({ qc: { ...this.state.qc, [trait]: value}})
     this.props.updateQc(this.state.qc.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    console.log('in onListBlur', this.state)
     this.setState({ qc: { ...this.state.qc, [trait]: value}})
     this.props.updateQc(this.state.qc.id, trait, value)
+  }
+
+  handleAttackChange(id, trait, value) {
+    this.props.updateQcAttack(id, this.state.qc.id, trait, value)
+  }
+  handleAttackRemove(id) {
+    this.props.removeQcAttack(id, this.state.qc.id)
+  }
+  handleAttackAdd(e) {
+    this.props.addQcAttack(this.state.qc.id)
   }
 
   /* TODO: Clean this up. Yikes. */
   /* TODO also: replace popup with an editor that appears in-place */
   render() {
-    const qc = this.state.qc
-    const { handleOpen, handleClose, handleChange, handleBlur, onListChange, onListBlur } = this
+    const { qc, attacks, merits } = this.state
+    const {
+      handleOpen, handleClose, handleChange, handleBlur,
+      onListChange, onListBlur,
+      handleAttackAdd, handleAttackChange, handleAttackRemove
+    } = this
 
     const actions = [
       <FlatButton
@@ -87,6 +180,13 @@ class _QcEditorPopup extends React.Component {
         onTouchTap={ handleClose }
       />
     ]
+
+    const qcAttacks = attacks.map((attack) =>
+      <QcAttackFields key={ attack.id } attack={ attack } qc={ qc }
+        onAttackChange={ handleAttackChange } onRemoveClick={ handleAttackRemove }
+      />
+    )
+
     return(<div className="editor-wrap qc-editor-wrap">
       <FlatButton label="Edit" onClick={ handleOpen } />
       <Dialog
@@ -180,17 +280,24 @@ class _QcEditorPopup extends React.Component {
           type="text"
           onChange={ handleChange } onBlur={ handleBlur }
         />
-        <h4>Actions</h4>
+
+        <h4 style={{marginBottom: 0}}>Attacks</h4>
+        { qcAttacks }
+        <RaisedButton label="Add Attack" icon={ <ContentAddCircle /> } onClick={ handleAttackAdd } />
+
+        <h4 style={{marginBottom: 0}}>Actions</h4>
         <ExpandableListEditor character={ qc } trait="actions"
           onUpdate={ onListChange } onBlur={ onListBlur }
         />
-        <h4>Ties</h4>
+        <h4 style={{marginBottom: 0}}>Ties</h4>
         <ExpandableListEditor character={ qc } trait="ties"
-          onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ c.INTIMACY_RATING_MAX }
+          onUpdate={ onListChange } onBlur={ onListBlur }
+          numberMax={ c.INTIMACY_RATING_MAX }
         />
-        <h4>Principles</h4>
+        <h4 style={{marginBottom: 0}}>Principles</h4>
         <ExpandableListEditor character={ qc } trait="principles"
-          onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ c.INTIMACY_RATING_MAX }
+          onUpdate={ onListChange } onBlur={ onListBlur }
+          numberMax={ c.INTIMACY_RATING_MAX }
         />
       </Dialog>
     </div>)
@@ -201,6 +308,15 @@ function mapDispatchToProps(dispatch) {
   return {
     updateQc: (id, trait, value) => {
       dispatch(updateQc(id, trait, value))
+    },
+    updateQcAttack: (id, qcId, trait, value) => {
+      dispatch(updateQcAttack(id, qcId, trait, value))
+    },
+    addQcAttack: (qcId) => {
+      dispatch(createQcAttack(qcId))
+    },
+    removeQcAttack: (id, qcId) => {
+      dispatch(destroyQcAttack(id, qcId))
     }
   }
 }

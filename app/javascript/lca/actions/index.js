@@ -5,6 +5,7 @@ export { updateWeapon, createWeapon, destroyWeapon } from './_weapon.js'
 export { updateMerit } from './_merit.js'
 export { fetchChronicle } from './_chronicle.js'
 export { updateQc, createQc } from './_qc.js'
+export { updateQcAttack, createQcAttack, destroyQcAttack } from './_qc_attack.js'
 
 import * as c from '../utils/actionNames'
 

@@ -1,67 +1,67 @@
 import fetch from 'isomorphic-fetch'
 import * as c from '../utils/actionNames'
 
-function updateMeritTrait(id, charId, trait, value) {
+function updateQcMeritTrait(id, qcId, trait, value) {
   return {
-    type: c.UPDATE_MERIT,
+    type: c.UPDATE_QC_MERIT,
     id: id,
     update: { trait: trait, value: value }
   }
 }
 
-function updateMeritTraitComplete(id, json) {
+function updateQcMeritTraitComplete(id, json) {
   return {
-    type: c.UPDATE_MERIT_COMPLETE,
+    type: c.UPDATE_QC_MERIT_COMPLETE,
     id: id,
     weapon: json
   }
 }
 
-export function updateMerit(id, charId, trait, value) {
+export function updateQcMerit(id, qcId, trait, value) {
   return function (dispatch) {
-    dispatch(updateMeritTrait(id, charId, trait, value))
+    dispatch(updateQcMeritTrait(id, qcId, trait, value))
 
     let mt = { merit: { }}
     mt.merit[trait] = value
 
-    return fetch(`/api/v1/characters/${charId}/merits/${id}`, {
+    return fetch(`/api/v1/qcs/${qcId}/merits/${id}`, {
       method: "PATCH",
       headers: new Headers({"Content-Type": "application/json"}),
       body: JSON.stringify(mt)
     }).then(response => response.json())
       .then(json =>
-        dispatch(updateMeritTraitComplete(id, json))
+        dispatch(updateQcMeritTraitComplete(id, json))
       )
   }
 }
 
-function createMeritStart(charId, name) {
+function createQcMeritStart(qcId, name) {
   return {
-    type: c.CREATE_MERIT,
+    type: c.CREATE_QC_MERIT,
     name: name,
-    character: charId
+    qc: qcId
   }
 }
 
-function createMeritComplete(json) {
+function createQcMeritComplete(json) {
   return {
-    type: c.CREATE_MERIT_COMPLETE,
+    type: c.CREATE_QC_MERIT_COMPLETE,
     merit: json
   }
 }
 
 // TODO handle errors here
-export function createMerit(charId, name) {
+export function createQcMerit(qcId, name) {
   return function (dispatch) {
-    dispatch(createMeritStart(charId, name))
-    let merit = { merit: { name: name, character_id: charId }}
+    dispatch(createQcMeritStart(qcId, name))
+    let merit = { merit: { name: name, qc_id: qcId }}
     return fetch('/api/v1/merits', {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),
       body: JSON.stringify(merit)
     }).then(response => response.json())
       .then(json =>
-        dispatch(createMeritComplete(json))
+        dispatch(createQcMeritComplete(json))
       )
   }
 }

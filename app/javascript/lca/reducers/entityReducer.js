@@ -3,6 +3,7 @@ import { normalize } from 'normalizr'
 import * as c from '../utils/actionNames'
 import * as schemas from './entities/_schemas.js'
 import { _create_qc_attack, _destroy_qc_attack } from './entities/qc_attack.js'
+import { _create_qc_merit, _destroy_qc_merit } from './entities/qc_merit.js'
 import { _create_weapon, _destroy_weapon } from './entities/weapon.js'
 
 const defaultState = {
@@ -178,6 +179,18 @@ export default function EntityReducer(state = defaultState, action) {
         ...qca, [trait]: value } }
     }
 
+    case c.CREATE_QC_MERIT_COMPLETE:
+      return _create_qc_merit(state, action)
+
+    case c.DESTROY_QC_MERIT_COMPLETE:
+      return _destroy_qc_merit(state, action)
+
+    case c.UPDATE_QC_MERIT:
+      const qcm = state.qc_merits[action.id]
+      return { ...state, qc_merits: {
+        ...state.qc_merits, [action.id]: {
+          ...qcm, [trait]: value } }
+      }
   default:
     return state
   }

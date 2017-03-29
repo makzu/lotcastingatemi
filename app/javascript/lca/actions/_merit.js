@@ -21,8 +21,7 @@ export function updateMerit(id, charId, trait, value) {
   return function (dispatch) {
     dispatch(updateMeritTrait(id, charId, trait, value))
 
-    let mt = { merit: { }}
-    mt.merit[trait] = value
+    let mt = { merit: { [trait]: value }}
 
     return fetch(`/api/v1/characters/${charId}/merits/${id}`, {
       method: "PATCH",
@@ -54,7 +53,9 @@ function createMeritComplete(json) {
 export function createMerit(charId, name) {
   return function (dispatch) {
     dispatch(createMeritStart(charId, name))
+
     let merit = { merit: { name: name, character_id: charId }}
+
     return fetch('/api/v1/merits', {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),

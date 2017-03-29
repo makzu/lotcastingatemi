@@ -21,9 +21,7 @@ export function updateWeapon(id, charId, trait, value) {
   return function (dispatch) {
     dispatch(updateWeaponTrait(id, charId, trait, value))
 
-    let wp = { weapon: { }}
-
-    wp.weapon[trait] = value
+    let wp = { weapon: { [trait]: value }}
 
     return fetch(`/api/v1/characters/${charId}/weapons/${id}`, {
       method: "PATCH",
@@ -54,7 +52,9 @@ function createWeaponComplete(json) {
 export function createWeapon(charId) {
   return function (dispatch) {
     dispatch(createWeaponStart(charId))
+
     let weapon = { weapon: { character_id: charId }}
+
     return fetch(`/api/v1/characters/${charId}/weapons`, {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),

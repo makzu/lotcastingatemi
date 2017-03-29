@@ -10,7 +10,7 @@ import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
 import ExpandableListEditor from '../generic/expandableListEditor.jsx'
 
-import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack } from '../../actions'
+import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack, createQcMerit, destroyQcMerit, updateQcMerit } from '../../actions'
 
 import * as c from '../../utils/constants.js'
 
@@ -74,6 +74,58 @@ class QcAttackFields extends React.Component {
   }
 }
 
+class QcMeritFields extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
+
+    this.state = {
+      merit: this.props.merit
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ merit: newProps.merit })
+  }
+
+  handleChange(e) {
+    e.preventDefault()
+    this.setState({ merit: {...this.state.merit, [e.target.name]: e.target.value }})
+  }
+
+  handleBlur(e) {
+    e.preventDefault()
+    if (this.state.merit[e.target.name] != this.props.merit[e.target.name])
+      this.props.onMeritChange(this.state.merit.id, e.target.name, e.target.value)
+  }
+
+  handleRemove(e) {
+    e.preventDefault()
+    this.props.onRemoveClick(this.state.merit.id)
+  }
+
+  render() {
+    const { merit } = this.state
+
+    return <div>
+      <TextField name="name" value={ merit.name }
+        floatingLabelText="Name:"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+      />
+      <TextField name="body" value={ merit.body }
+        floatingLabelText="Text:"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+      />
+      <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
+        <ContentRemoveCircle />
+      </IconButton>
+    </div>
+  }
+}
+
 class _QcEditorPopup extends React.Component {
   constructor(props) {
     super(props)
@@ -92,6 +144,9 @@ class _QcEditorPopup extends React.Component {
     this.handleAttackChange = this.handleAttackChange.bind(this)
     this.handleAttackRemove = this.handleAttackRemove.bind(this)
     this.handleAttackAdd = this.handleAttackAdd.bind(this)
+    this.handleMeritChange = this.handleMeritChange.bind(this)
+    this.handleMeritRemove = this.handleMeritRemove.bind(this)
+    this.handleMeritAdd = this.handleMeritAdd.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -163,6 +218,16 @@ class _QcEditorPopup extends React.Component {
     this.props.addQcAttack(this.state.qc.id)
   }
 
+  handleMeritChange(id, trait, value) {
+    this.props.updateQcMerit(id, this.state.qc.id, trait, value)
+  }
+  handleMeritRemove(id) {
+    this.props.removeQcMerit(id, this.state.qc.id)
+  }
+  handleMeritAdd(e) {
+    this.props.addQcMerit(this.state.qc.id)
+  }
+
   /* TODO: Clean this up. Yikes. */
   /* TODO also: replace popup with an editor that appears in-place */
   render() {
@@ -170,7 +235,8 @@ class _QcEditorPopup extends React.Component {
     const {
       handleOpen, handleClose, handleChange, handleBlur,
       onListChange, onListBlur,
-      handleAttackAdd, handleAttackChange, handleAttackRemove
+      handleAttackAdd, handleAttackChange, handleAttackRemove,
+      handleMeritAdd, handleMeritChange, handleMeritRemove
     } = this
 
     const actions = [
@@ -184,6 +250,12 @@ class _QcEditorPopup extends React.Component {
     const qcAttacks = attacks.map((attack) =>
       <QcAttackFields key={ attack.id } attack={ attack } qc={ qc }
         onAttackChange={ handleAttackChange } onRemoveClick={ handleAttackRemove }
+      />
+    )
+
+    const qcMerits = merits.map((merit) =>
+      <QcMeritFields key={merit.id} merit={ merit } qc={ qc }
+        onMeritChange={ handleMeritChange } onRemoveClick={ handleMeritRemove }
       />
     )
 
@@ -299,6 +371,9 @@ class _QcEditorPopup extends React.Component {
           onUpdate={ onListChange } onBlur={ onListBlur }
           numberMax={ c.INTIMACY_RATING_MAX }
         />
+        <h4 style={{marginBottom: 0}}>Merits</h4>
+        { qcMerits }
+        <RaisedButton label="Add Merit" icon={ <ContentAddCircle /> } onClick={ handleMeritAdd } />
       </Dialog>
     </div>)
   }
@@ -317,6 +392,15 @@ function mapDispatchToProps(dispatch) {
     },
     removeQcAttack: (id, qcId) => {
       dispatch(destroyQcAttack(id, qcId))
+    },
+    updateQcMerit: (id, qcId, trait, value) => {
+      dispatch(updateQcMerit(id, qcId, trait, value))
+    },
+    addQcMerit: (qcId) => {
+      dispatch(createQcMerit(qcId))
+    },
+    removeQcMerit: (id, qcId) => {
+      dispatch(destroyQcMerit(id, qcId))
     }
   }
 }

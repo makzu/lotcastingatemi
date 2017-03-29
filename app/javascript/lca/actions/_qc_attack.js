@@ -22,9 +22,7 @@ export function updateQcAttack(id, qcId, trait, value) {
   return function (dispatch) {
     dispatch(updateQcAttackTrait(id, qcId, trait, value))
 
-    let wp = { qc_attack: { }}
-
-    wp.qc_attack[trait] = value
+    let wp = { qc_attack: { [trait]: value }}
 
     return fetch(`/api/v1/qcs/${qcId}/qc_attacks/${id}`, {
       method: "PATCH",
@@ -55,7 +53,9 @@ function createQcAttackComplete(json) {
 export function createQcAttack(qcId) {
   return function (dispatch) {
     dispatch(createQcAttackStart(qcId))
+
     let qc_attack = { qc_attack: { qc_id: qcId }}
+
     return fetch(`/api/v1/qcs/${qcId}/qc_attacks`, {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),

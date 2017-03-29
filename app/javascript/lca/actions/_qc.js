@@ -22,8 +22,7 @@ export function updateQc(id, trait, value) {
   return function (dispatch) {
     dispatch(updateQcTrait(id, trait, value))
 
-    let mt = { qc: { }}
-    mt.qc[trait] = value
+    let mt = { qc: { [trait]: value }}
 
     return fetch(`/api/v1/qcs/${id}`, {
       method: "PATCH",
@@ -53,7 +52,9 @@ function createQcComplete(json) {
 export function createQc(playerId, chronicleId, name) {
   return function (dispatch) {
     dispatch(createQcStart(playerId, chronicleId, name))
+
     let qc = { qc: { name: name, player_id: playerId, chronicle_id: chronicleId }}
+
     return fetch('/api/v1/qcs', {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),

@@ -13,21 +13,21 @@ function updateQcMeritTraitComplete(id, json) {
   return {
     type: c.UPDATE_QC_MERIT_COMPLETE,
     id: id,
-    weapon: json
+    qc_merit: json
   }
 }
 
+//TODO handle errors here
 export function updateQcMerit(id, qcId, trait, value) {
   return function (dispatch) {
     dispatch(updateQcMeritTrait(id, qcId, trait, value))
 
-    let mt = { merit: { }}
-    mt.merit[trait] = value
+    let wp = { qc_merit: { [trait]: value }}
 
-    return fetch(`/api/v1/qcs/${qcId}/merits/${id}`, {
+    return fetch(`/api/v1/qcs/${qcId}/qc_merits/${id}`, {
       method: "PATCH",
       headers: new Headers({"Content-Type": "application/json"}),
-      body: JSON.stringify(mt)
+      body: JSON.stringify(wp)
     }).then(response => response.json())
       .then(json =>
         dispatch(updateQcMeritTraitComplete(id, json))
@@ -35,10 +35,9 @@ export function updateQcMerit(id, qcId, trait, value) {
   }
 }
 
-function createQcMeritStart(qcId, name) {
+function createQcMeritStart(qcId) {
   return {
     type: c.CREATE_QC_MERIT,
-    name: name,
     qc: qcId
   }
 }
@@ -46,22 +45,53 @@ function createQcMeritStart(qcId, name) {
 function createQcMeritComplete(json) {
   return {
     type: c.CREATE_QC_MERIT_COMPLETE,
-    merit: json
+    qc_merit: json
   }
 }
 
 // TODO handle errors here
-export function createQcMerit(qcId, name) {
+export function createQcMerit(qcId) {
   return function (dispatch) {
-    dispatch(createQcMeritStart(qcId, name))
-    let merit = { merit: { name: name, qc_id: qcId }}
-    return fetch('/api/v1/merits', {
+    dispatch(createQcMeritStart(qcId))
+
+    let qc_merit = { qc_merit: { qc_id: qcId }}
+
+    return fetch(`/api/v1/qcs/${qcId}/qc_merits`, {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),
-      body: JSON.stringify(merit)
+      body: JSON.stringify(qc_merit)
     }).then(response => response.json())
       .then(json =>
         dispatch(createQcMeritComplete(json))
+      )
+  }
+}
+
+function destroyQcMeritStart(id) {
+  return {
+    type: c.DESTROY_QC_MERIT,
+    id: id
+  }
+}
+
+function destroyQcMeritComplete(json) {
+  return {
+    type: c.DESTROY_QC_MERIT_COMPLETE,
+    qc_merit: json
+  }
+}
+
+// TODO handle errors here
+export function destroyQcMerit(id, qcId) {
+  return function (dispatch) {
+    dispatch(destroyQcMeritStart(id))
+
+    return fetch(`/api/v1/qcs/${qcId}/qc_merits/${id}`, {
+      method: "DELETE",
+      headers: new Headers({"Content-Type": "application/json"})
+    }).then(response => response.json())
+      .then(json =>
+        dispatch(destroyQcMeritComplete(json))
       )
   }
 }

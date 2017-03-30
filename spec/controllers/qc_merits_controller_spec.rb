@@ -2,42 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::MeritsController, type: :controller do
 
-<<<<<<< HEAD
-   describe "GET #show" do
-    it "returns http success" do
-      get :show
-=======
+
   describe "GET #show" do
     it "returns http success" do
       @merit = FactoryGirl.create(:merit)
 
       get :show, params: { character_id: @merit.character_id, id: @merit.id, format: :json }
 
->>>>>>> 6df1b7c26d15cf2d23d96f29daec21200232ed8b
       expect(response).to have_http_status(:success)
     end
   end
 
-<<<<<<< HEAD
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-=======
   describe "POST #create" do
     context "With valid attributes" do
       it "Increases merit count by 1" do
@@ -95,7 +70,6 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
 
         expect(@merit.merit_cat).to eq("story")
       end
->>>>>>> 6df1b7c26d15cf2d23d96f29daec21200232ed8b
     end
   end
 

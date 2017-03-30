@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::MeritsController, type: :controller do
 
+
   describe "GET #show" do
     it "returns http success" do
       @merit = FactoryGirl.create(:merit)

@@ -6,6 +6,7 @@ class Api::V1::MeritsController < Api::V1::BaseController
   end
 
   def create
+    @character = Character.find(params[:character_id])
     render json: Merit.create(merit_params)
   end
 

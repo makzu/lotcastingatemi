@@ -1,3 +1,5 @@
+#RFC = Reason For Change
+
 class Api::V1::ChroniclesController < Api::V1::BaseController
   before_action :set_chronicle, only: [:show, :update, :destroy]
 
@@ -16,6 +18,11 @@ class Api::V1::ChroniclesController < Api::V1::BaseController
 
   def destroy
     render json: @chronicle.destroy
+  end
+
+  def update
+    @chronicle.update_attributes(chronicle_params)
+    render json: @chronicle
   end
 
   def update

@@ -7,7 +7,7 @@ class Api::V1::MeritsController < Api::V1::BaseController
 
   def create
     @character = Character.find(params[:character_id])
-    respond_with :api, :v1, Merit.create(merit_params), location: api_v1_character_merits_path
+    render json: Merit.create(merit_params)
   end
 
   def destroy

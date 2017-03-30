@@ -1,15 +1,15 @@
 import fetch from 'isomorphic-fetch'
-import * as c from '../utils/constants'
+import * as c from '../utils/actionNames'
 
 function requestChar(id) {
   return {
-    type: c.REQUEST_CHAR,
+    type: c.REQUEST_CHARACTER,
     id
   }
 }
 function receiveChar(id, json) {
   return {
-    type: c.RECEIVE_CHAR,
+    type: c.RECEIVE_CHARACTER,
     id,
     character: json
   }
@@ -29,7 +29,7 @@ export function fetchCharacter(id) {
 
 function updateTrait(id, trait, value) {
   return {
-    type: c.UPDATE_CHAR,
+    type: c.UPDATE_CHARACTER,
     id: id,
     update: { trait: trait, value: value }
   }
@@ -37,7 +37,7 @@ function updateTrait(id, trait, value) {
 
 function updateTraitComplete(id, json) {
   return {
-    type: c.UPDATE_CHAR_COMPLETE,
+    type: c.UPDATE_CHARACTER_COMPLETE,
     id: id,
     character: json
   }
@@ -59,6 +59,35 @@ export function updateCharacter(id, trait, value) {
       .then(json =>
         dispatch(updateTraitComplete(id, json))
       )
-    //*/
+  }
+}
+
+function createCharacterStart(playerId, chronicleId, name) {
+  return {
+    type: c.CREATE_CHARACTER,
+    name: name,
+    player: playerId,
+    chronicle: chronicleId
+  }
+}
+function createCharacterComplete(json) {
+  return {
+    type: c.CREATE_CHARACTER_COMPLETE,
+    character: json
+  }
+}
+// TODO handle errors here
+export function createCharacter(playerId, chronicleId, name) {
+  return function (dispatch) {
+    dispatch(createCharacterStart(playerId, chronicleId, name))
+    let char = { character: { name: name, player_id: playerId, chronicle_id: chronicleId }}
+    return fetch('/api/v1/characters', {
+      method: "POST",
+      headers: new Headers({"Content-Type": "application/json"}),
+      body: JSON.stringify(char)
+    }).then(response => response.json())
+      .then(json =>
+        dispatch(createCharacterComplete(json))
+      )
   }
 }

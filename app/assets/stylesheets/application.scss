@@ -14,60 +14,55 @@
  */
 @import "bourbon";
 @import "neat";
-
+// TODO get a proper responsive grid layout instead of this mix
 html,
 body {
   margin: 0px;
 }
 
-/* GRID: */
-#root {
-  @include grid-container;
-  @include grid-visual;
-}
-
 /* CHARSHEET GRID */
-$characterSheet-grid: (
+$mainGrid: (
   columns: 4,
   gutter: 24px,
 );
+.contentWrapper {
+  @include grid-container($mainGrid);
+  padding-bottom: 24px;
+}
 
-.characterSheetPaper {
-  margin: 0 24px;
+.welcomePage, .characterList, .qcSheet {
+  @include grid-column(4, $mainGrid);
 }
 
 .characterSheet {
-  @include grid-container($characterSheet-grid);
   hr {
     margin: 0.25em !important;
   }
 
   .clear4 {
-    @include grid-column(4, $characterSheet-grid);
+    @include grid-column(4, $mainGrid);
     border-color: transparent;
   }
 
   .name {
-    @include grid-column(4, $characterSheet-grid);
+    @include grid-column(4, $mainGrid);
   }
 
   .fullAttributeBlock {
     h3 {
-      @include grid-column(3, $characterSheet-grid);
+      @include grid-column(3, $mainGrid);
     }
-
     .attrContainer {
-      @include grid-column(1, $characterSheet-grid);
-
+      @include grid-column(1, $mainGrid);
     }
   }
 
   .fullAbilityBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
   }
 
   .fullSpecialtyBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
     .specialtyAbility {
       text-transform: capitalize;
       display: inline-block;
@@ -75,19 +70,19 @@ $characterSheet-grid: (
     }
   }
   .meritSummaryBlock {
-    @include grid-column(2, $characterSheet-grid);
+    @include grid-column(2, $mainGrid);
   }
   .willpowerBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
     div {
       clear: both;
     }
   }
   .intimacySummaryBlock, .healthLevelBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
   }
   .armorSummaryBlock {
-    @include grid-column(2, $characterSheet-grid);
+    @include grid-column(2, $mainGrid);
 
     .hardnessColumn {
       width: 3em;
@@ -100,7 +95,7 @@ $characterSheet-grid: (
     }
   }
   .weaponSummaryBlock {
-    @include grid-column(3, $characterSheet-grid);
+    @include grid-column(3, $mainGrid);
 
     .damageColumn {
       width: 3em;
@@ -116,24 +111,23 @@ $characterSheet-grid: (
     }
   }
   .combatSummaryBlock {
-    @include grid-column(2, $characterSheet-grid);
+    @include grid-column(2, $mainGrid);
 
     .pool, .defenseValue, .poolName, .defenseValueName {
       width: 2em;
     }
   }
   .socialSummaryBlock {
-    @include grid-column(1, $characterSheet-grid);
+    @include grid-column(1, $mainGrid);
 
     .pool, .defenseValue, .poolName, .defenseValueName {
       width: 2em;
     }
   }
-
-  .editor-wrap {
-    display: inline-block;
-    float: right;
-  }
+}
+.editor-wrap {
+  display: inline-block;
+  float: right;
 }
 .editor-popup {
   .editor-description-field {
@@ -162,44 +156,8 @@ $characterSheet-grid: (
   }
 }
 
-/* EDITOR GRID */
-.characterEditor {
-  h1 {
-    @include grid-column(2, $characterSheet-grid);
-  }
-
-  .editor-fieldset-basics {
-    @include grid-column(1, $characterSheet-grid);
-  }
-  .editor-fieldset-attributes {
-    @include grid-column(1, $characterSheet-grid);
-  }
-  .editor-fieldset-health {
-    @include grid-column(1, $characterSheet-grid);
-  }
-  .editor-fieldset-specialties {
-    @include grid-column(2, $characterSheet-grid);
-  }
-
-  .editor-fieldset-intimacies {
-    @include grid-column(2, $characterSheet-grid);
-  }
-
-  .editor-fieldset-merits {
-    @include grid-column(3, $characterSheet-grid);
-  }
-
-  .specialtyAbilityField {
-    width: 10em !important;
-  }
-
-  .intimacyRatingField, .craftRatingField, .martialArtsRatingField, .meritRatingField {
-    width: 3em !important;
-  }
-}
-
 /* MISC: */
-
+// TODO replace these with SVG icons or something?
 .ratingDotContainer{
   float: right;
   clear: right;
@@ -213,57 +171,11 @@ $characterSheet-grid: (
   border-radius: 0.45em;
   border: 0.125em solid black;
   margin-left: 1px;
+  background-color: white;
 }
 
 .ratingDotFull {
   background-color: black;
-}
-
-.damageBoxWrapper {
-  display: inline-block;
-  margin-right: 2px;
-}
-
-.damageBoxLevel {
-  font-size: small;
-  text-align: center;
-  display: block;
-  margin: 0 auto;
-}
-
-.damageBox {
-  color: transparent;
-  width: 1em;
-  height: 1em;
-  border: 0.15em solid black;
-}
-.bashingDamageBox:after {
-  color: black;
-  position: relative;
-  top: -0.25em;
-  left: -0.5em;
-  text-align: center;
-  font-weight: bold;
-  font-size: 125%;
-  content: "|";
-}
-.lethalDamageBox:after {
-  color: black;
-  position: relative;
-  top: -0.3em;
-  left: -0.59em;
-  text-align: center;
-  font-size: 180%;
-  content: "❌";
-}
-.aggravatedDamageBox:after {
-  color: black;
-  position: relative;
-  top: -0.25em;
-  left: -0.65em;
-  text-align: center;
-  font-size: 150%;
-  content: "✱";
 }
 
 .editor-rating-field {

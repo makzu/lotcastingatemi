@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321061251) do
+ActiveRecord::Schema.define(version: 20170327215309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "battlegroups", force: :cascade do |t|
+    t.bigint "qc_id"
+    t.integer "size", default: 0
+    t.integer "might", default: 0
+    t.integer "drill", default: 0
+    t.boolean "perfect_morale", default: false
+    t.integer "magnitude_current", default: 7
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["qc_id"], name: "index_battlegroups_on_qc_id"
+  end
 
   create_table "characters", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -143,6 +156,19 @@ ActiveRecord::Schema.define(version: 20170321061251) do
     t.index ["uid", "provider"], name: "index_players_on_uid_and_provider", unique: true
   end
 
+  create_table "qc_attacks", force: :cascade do |t|
+    t.bigint "qc_id"
+    t.string "name"
+    t.integer "pool", default: 1
+    t.string "range", default: "close"
+    t.integer "damage", default: 1
+    t.integer "overwhelming", default: 1
+    t.string "tags", array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["qc_id"], name: "index_qc_attacks_on_qc_id"
+  end
+
   create_table "qc_merits", id: :serial, force: :cascade do |t|
     t.integer "qc_id"
     t.string "name"
@@ -191,6 +217,11 @@ ActiveRecord::Schema.define(version: 20170321061251) do
     t.datetime "updated_at", null: false
     t.bigint "player_id"
     t.bigint "chronicle_id"
+    t.integer "senses", default: 3
+    t.integer "grapple", default: 0
+    t.integer "grapple_control", default: 0
+    t.json "ties", default: []
+    t.json "principles", default: []
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
@@ -207,9 +238,11 @@ ActiveRecord::Schema.define(version: 20170321061251) do
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 
+  add_foreign_key "battlegroups", "qcs"
   add_foreign_key "characters", "chronicles"
   add_foreign_key "characters", "players"
   add_foreign_key "merits", "characters"
+  add_foreign_key "qc_attacks", "qcs"
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "qcs", "chronicles"
   add_foreign_key "qcs", "players"

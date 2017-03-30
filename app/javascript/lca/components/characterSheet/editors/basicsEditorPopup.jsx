@@ -5,6 +5,8 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+import * as c from '../../../utils/constants.js'
+
 import { updateCharacter } from '../../../actions'
 
 class _BasicsEditorPopup extends React.Component {
@@ -22,7 +24,7 @@ class _BasicsEditorPopup extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true })
+    this.setState({ open: true, character: this.props.character })
   }
 
   handleClose() {
@@ -32,7 +34,19 @@ class _BasicsEditorPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    const val = parseInt(e.target.value)
+    let val
+
+    if (e.target.type == "number") {
+      val = parseInt(e.target.value)
+
+      if (val > c.ESSENCE_MAX) {
+        val = c.ESSENCE_MAX
+      } else if (val < c.ESSENCE_MIN) {
+        val = c.ESSENCE_MIN
+      }
+    } else {
+      val = e.target.value
+    }
 
     this.setState({character: {... this.state.character, [e.target.name]: val}})
   }
@@ -100,4 +114,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_BasicsEditorPopup)
-

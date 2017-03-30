@@ -35,7 +35,8 @@ const config = {
           presets: [
             'react',
             ['env', { modules: false }]
-          ]
+          ],
+          plugins: ['react-hot-loader/babel']
         }
       },
       {

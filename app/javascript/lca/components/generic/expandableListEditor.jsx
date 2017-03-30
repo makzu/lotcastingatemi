@@ -4,12 +4,13 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
-import IconButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import IconButton from 'material-ui/FlatButton'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
-import * as calc from '../../../utils/calculated'
-import { ATTRIBUTES, ABILITIES, ABILITIES_ALL } from '../../../utils/constants'
+import * as calc from '../../utils/calculated'
+import { ATTRIBUTES, ABILITIES, ABILITIES_ALL } from '../../utils/constants'
 
 function CraftFields(props) {
   const { trait, index, onChange, onBlur } = props
@@ -22,7 +23,25 @@ function CraftFields(props) {
     />
     <TextField name="rating" data-index={ index } value={ rating }
       floatingLabelText="rating"
-      className="ratingField craftRatingField"
+      className="editor-rating-field"
+      type="number" min={ 0 } max={ 5 }
+      onChange={ onChange } onBlur={ onBlur }
+    />
+  </span>)
+}
+
+function QcActionFields(props) {
+  const { trait, index, onChange, onBlur } = props
+  const action  = trait.action
+  const pool = trait.pool
+
+  return(<span>
+    <TextField name="action" data-index={ index } value={ action }
+      floatingLabelText="Action:" onChange={ onChange } onBlur={ onBlur }
+    />
+    <TextField name="pool" data-index={ index } value={ pool }
+      floatingLabelText="pool"
+      className="editor-rating-field"
       type="number" min={ 0 } max={ 5 }
       onChange={ onChange } onBlur={ onBlur }
     />
@@ -40,7 +59,7 @@ function MartialArtFields(props) {
     />
     <TextField name="rating" data-index={ index } value={ rating }
       floatingLabelText="rating"
-      className="ratingField martialArtsRatingField"
+      className="editor-rating-field"
       type="number" min={ 0 } max={ 5 }
       onChange={ onChange } onBlur={ onBlur }
     />
@@ -88,7 +107,7 @@ function IntimacyFields(props) {
     />
     <TextField name="rating" data-index={ index } value={ rating }
       floatingLabelText="Rating:"
-      className="ratingField intimacyRatingField"
+      className="editor-rating-field"
       type="number" min={ 1 } max={ 3 }
       onChange={ onChange } onBlur={ onBlur }
     />
@@ -113,6 +132,10 @@ function TraitFields(props) {
   case "ties":
   case "principles":
     fields = <IntimacyFields {...props} />
+    break
+  case "actions":
+    fields = <QcActionFields {...props} />
+    break
   }
 
   const click = (e) => {
@@ -121,7 +144,7 @@ function TraitFields(props) {
 
   return(<div>
     { fields }
-    <IconButton onClick={ click }><ContentRemoveCircle /></IconButton>
+    <IconButton onClick={ click } style={{minWidth: '2em'}}><ContentRemoveCircle /></IconButton>
   </div>)
 }
 
@@ -143,10 +166,16 @@ export default class ExpandableListEditor extends React.Component {
     const index = e.target.dataset.index
     const theTrait = this.state.trait.slice()
 
+    const Max = this.props.numberMax
+
     let val
-    if (e.target.type == "number")
+    if (e.target.type == "number") {
       val = parseInt(e.target.value)
-    else
+      if (Max && val > Max)
+        val = Max
+      if (val < 0)
+        val = 0
+    } else
       val = e.target.value
 
     theTrait[index] = { ...theTrait[index], [e.target.name]: val }
@@ -165,7 +194,6 @@ export default class ExpandableListEditor extends React.Component {
 
   onBlur(e) {
     e.preventDefault()
-    console.log('in onBlur', e.target)
     const index = e.target.dataset.index
     const trait = e.target.name
 
@@ -196,14 +224,14 @@ export default class ExpandableListEditor extends React.Component {
     case "principles":
       newTrait = {subject: "", rating: 0}
       break
+    case "actions":
+      newTrait = {action: "", pool: 0}
     }
 
     this.setState({ trait: [ ...this.state.trait, newTrait ] })
   }
 
   onRemove(e, index) {
-    console.log('in onRemove', index)
-
     let newTrait = this.state.trait.slice()
     newTrait.splice(index, 1)
 
@@ -231,12 +259,17 @@ export default class ExpandableListEditor extends React.Component {
     case "ties":
       traitName = "Tie"
       break
+    case "actions":
+      traitName = "Action"
+      break
     }
+
 
     const traits = this.state.trait.map((e, index) =>
       <TraitFields key={ index } index={ index } character={ character }
         traitName={ trait } trait={ e }
-        onChange={ onChange } onBlur={ onBlur } onRemove={ onRemove } onSpecialtyAbilityChange={ onSpecialtyAbilityChange }
+        onChange={ onChange } onBlur={ onBlur } onRemove={ onRemove }
+        onSpecialtyAbilityChange={ onSpecialtyAbilityChange }
       />
     )
 

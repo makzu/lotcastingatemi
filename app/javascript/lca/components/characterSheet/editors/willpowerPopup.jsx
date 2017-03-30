@@ -5,6 +5,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+import * as c from '../../../utils/constants.js'
 import { updateCharacter } from '../../../actions'
 
 class _WillpowerPopup extends React.Component {
@@ -22,7 +23,7 @@ class _WillpowerPopup extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true })
+    this.setState({ open: true, character: this.props.character })
   }
 
   handleClose() {
@@ -32,7 +33,11 @@ class _WillpowerPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    const val = parseInt(e.target.value)
+    let val = parseInt(e.target.value)
+    if (val > c.WILLPOWER_MAX)
+      val = c.WILLPOWER_MAX
+    else if (val < c.WILLPOWER_MIN)
+      val = c.WILLPOWER_MIN
 
     this.setState({character: {... this.state.character, [e.target.name]: val}})
   }
@@ -97,4 +102,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_WillpowerPopup)
-

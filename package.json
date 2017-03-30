@@ -29,12 +29,12 @@
     "redux-auth": "^0.0.5-beta5",
     "redux-thunk": "latest",
     "reselect": "latest",
+    "styled-components": "^1.4.4",
     "webpack": "latest",
     "webpack-merge": "latest"
   },
   "devDependencies": {
     "webpack-dev-server": "latest"
   },
-  "scripts": {
-  }
+  "scripts": {}
 }

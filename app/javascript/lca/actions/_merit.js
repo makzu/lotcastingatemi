@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import * as c from '../utils/constants'
+import * as c from '../utils/actionNames'
 
 function updateMeritTrait(id, charId, trait, value) {
   return {
@@ -31,6 +31,37 @@ export function updateMerit(id, charId, trait, value) {
     }).then(response => response.json())
       .then(json =>
         dispatch(updateMeritTraitComplete(id, json))
+      )
+  }
+}
+
+function createMeritStart(charId, name) {
+  return {
+    type: c.CREATE_MERIT,
+    name: name,
+    character: charId
+  }
+}
+
+function createMeritComplete(json) {
+  return {
+    type: c.CREATE_MERIT_COMPLETE,
+    merit: json
+  }
+}
+
+// TODO handle errors here
+export function createMerit(charId, name) {
+  return function (dispatch) {
+    dispatch(createMeritStart(charId, name))
+    let merit = { merit: { name: name, character_id: charId }}
+    return fetch('/api/v1/merits', {
+      method: "POST",
+      headers: new Headers({"Content-Type": "application/json"}),
+      body: JSON.stringify(merit)
+    }).then(response => response.json())
+      .then(json =>
+        dispatch(createMeritComplete(json))
       )
   }
 }

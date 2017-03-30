@@ -1,0 +1,73 @@
+- id: 1
+  player_id: 1
+  chronicle_id: 1
+  name: Vincible Shieldbearer
+  description: A member of Vincible Shield Princess' peronal guard.
+  player_id: 1
+  chronicle_id: 1
+  willpower_temporary: 4
+  willpower_permanent: 5
+  join_battle: 10
+  movement: 5
+  soak: 8
+  hardness: 0
+  armor_name: Pervious Armor
+  evasion: 3
+  parry: 5
+  appearance: 2
+  resolve: 4
+  guile: 1
+  health_level_0s: 1
+  health_level_1s: 2
+  health_level_2s: 2
+  health_level_4s: 1
+  health_level_incap: 1
+  damage_bashing: 1
+  damage_lethal: 0
+  damage_aggravated: 0
+  senses: 9
+  grapple: 5
+  grapple_control: 6
+  actions:
+    - action: threaten
+      pool: 6
+    - action: read intentions
+      pool: 6
+- id: 2
+  player_id: 1
+  chronicle_id: 1
+  name: Tiny Demon
+  player_id: 1
+  chronicle_id: 1
+  essence: 2
+  willpower_temporary: 3
+  willpower_permanent: 3
+  join_battle: 5
+  movement: 5
+  soak: 3
+  hardness: 2
+  armor_name: "Reddish hide"
+  evasion: 3
+  parry: 3
+  appearance: 2
+  resolve: 2
+  motes_personal_current: 50
+  motes_personal_total: 70
+  health_level_0s: 1
+  health_level_1s: 1
+  health_level_2s: 1
+  health_level_4s: 1
+  health_level_incap: 1
+  damage_bashing: 1
+  damage_lethal: 0
+  damage_aggravated: 1
+  senses: 5
+  grapple: 1
+  grapple_control: 1
+  actions:
+    - action: stealth
+      pool: 6
+    - action: tracking
+      pool: 4
+    - action: whispering mean things
+      pool: 4

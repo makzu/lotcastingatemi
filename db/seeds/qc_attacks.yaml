@@ -1,0 +1,28 @@
+- id: 1
+  qc_id: 1
+  name: Cheap sword
+  pool: 7
+  range: close
+  damage: 7
+  overwhelming: 1
+  tags:
+    - lethal
+    - balanced
+- id: 2
+  qc_id: 2
+  name: Tiny claws
+  pool: 5
+  range: close
+  damage: 3
+  overwhelming: 1
+  tags:
+    - bashing
+- id: 3
+  qc_id: 2
+  name: Gout of fire
+  pool: 7
+  range: short
+  damage: 5
+  overwhelming: 2
+  tags:
+    - flame

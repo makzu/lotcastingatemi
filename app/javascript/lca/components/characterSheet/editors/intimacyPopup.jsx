@@ -5,9 +5,10 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+import { INTIMACY_RATING_MAX } from '../../../utils/constants.js'
 import { updateCharacter } from '../../../actions'
 
-import ExpandableListEditor from './expandableListEditor.jsx'
+import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
 class _IntimacyPopup extends React.Component {
   constructor(props) {
@@ -19,36 +20,17 @@ class _IntimacyPopup extends React.Component {
 
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
 
     this.onListChange = this.onListChange.bind(this)
     this.onListBlur = this.onListBlur.bind(this)
   }
 
   handleOpen() {
-    this.setState({ open: true })
+    this.setState({ open: true, character: this.props.character })
   }
 
   handleClose() {
     this.setState({ open: false })
-  }
-
-  handleChange(e) {
-    e.preventDefault()
-
-    const val = parseInt(e.target.value)
-
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
-  }
-
-  handleBlur(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    if (this.state.character[trait] == this.props.character[trait])
-      return
-
-    this.props.updateChar(this.state.character.id, trait, this.state.character[trait])
   }
 
   onListChange(trait, value) {
@@ -63,7 +45,7 @@ class _IntimacyPopup extends React.Component {
 
   render() {
     const character = this.state.character
-    const { handleOpen, handleClose, handleChange, handleBlur, onListChange, onListBlur } = this
+    const { handleOpen, handleClose, onListChange, onListBlur } = this
 
     const actions = [
       <FlatButton
@@ -76,7 +58,7 @@ class _IntimacyPopup extends React.Component {
     return(<div className="editor-wrap ability-editor-wrap">
       <FlatButton label="Edit" onClick={ handleOpen } />
       <Dialog
-        title="Editing Abilities"
+        title="Editing Intimacies"
         actions={ actions }
         open={ this.state.open }
         autoScrollBodyContent={ true }
@@ -85,11 +67,11 @@ class _IntimacyPopup extends React.Component {
         <div className="editor-popup editor-popup-specialties">
           <h4>Ties</h4>
           <ExpandableListEditor character={ character } trait="ties"
-            onUpdate={ onListChange } onBlur={ onListBlur }
+            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ INTIMACY_RATING_MAX }
           />
           <h4>Principles</h4>
           <ExpandableListEditor character={ character } trait="principles"
-            onUpdate={ onListChange } onBlur={ onListBlur }
+            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ INTIMACY_RATING_MAX }
           />
         </div>
       </Dialog>
@@ -109,4 +91,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_IntimacyPopup)
-

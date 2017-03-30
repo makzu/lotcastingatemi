@@ -1,0 +1,12 @@
+- id: 1
+  qc_id: 1
+  name: Call for Help
+  body: Upon detecting intruders, she immediately lets out a cry that alerts far more guards than could possibly have been within earshot.
+- id: 2
+  qc_id: 2
+  name: Tiny Creature
+  body: Tiny Demon gets +2 evasion against a larger foe.
+- id: 3
+  qc_id: 1
+  name: Phalanx Maneuver
+  body: When assembled into a battlegroup of any size the Vincible Shieldbearers protect one another, granting +1 Defense.

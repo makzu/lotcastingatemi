@@ -1,23 +1,27 @@
 class Api::V1::QcsController < Api::V1::BaseController
+  before_action :set_qc, only: [:show, :update, :destroy]
+
   def show
-    respond_with Qc.find(params[:id])
+    render json: @qc
   end
 
   def create
-    respond_with :api, :v1, Qc.create(qc_params)
+    render json: Qc.create(qc_params).as_json
   end
 
   def destroy
-    respond_with Qc.destroy(params[:id])
+    render json: @qc.destroy
   end
 
   def update
-    qc = Qc.find(params["id"])
-    qc.update_attributes(qc_params)
-    respond_with qc, json: qc
+    @qc.update_attributes(qc_params)
+    render json: @qc
   end
 
   private
+  def set_qc
+    @qc = Qc.find(params[:id])
+  end
 
   def qc_params
     params.require(:qc).permit!

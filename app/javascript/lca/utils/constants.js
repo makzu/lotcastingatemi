@@ -1,13 +1,4 @@
-export const REQUEST_CHAR = 'REQUEST_CHAR'
-export const RECEIVE_CHAR = 'RECEIVE_CHAR'
-export const REQUEST_CHRONICLE = 'REQUEST_CHRONICLE'
-export const RECEIVE_CHRONICLE = 'RECEIVE_CHRONICLE'
-export const UPDATE_CHAR = 'UPDATE_CHAR'
-export const UPDATE_CHAR_COMPLETE = 'UPDATE_CHAR_COMPLETE'
-export const UPDATE_WEAP = 'UPDATE_WEAP'
-export const UPDATE_WEAP_COMPLETE = 'UPDATE_WEAP_COMPLETE'
-export const UPDATE_MERIT = 'UPDATE_MERIT'
-export const UPDATE_MERIT_COMPLETE = 'UPDATE_MERIT_COMPLETE'
+/* Constants: exactly what it says on the tin */
 
 export const ATTRIBUTES = [
   { attr: "attr_strength", pretty: "Strength" },
@@ -86,3 +77,22 @@ export const ATTACK_ABILITIES = [
   "abil_melee",
   "abil_thrown"
 ]
+
+/* Minimum and maximum */
+export const ESSENCE_MAX = 10
+export const ESSENCE_MIN = 1
+export const ATTRIBUTE_MAX = 5
+export const ATTRIBUTE_MIN = 1
+export const ABILITY_MAX = 5
+export const ABILITY_MIN = 0
+export const WILLPOWER_MAX = 10
+export const WILLPOWER_MIN = 0
+
+export const INTIMACY_RATING_MAX = 3
+export const INTIMACY_RATING_MIN = 1
+
+export const MERIT_RATING_MAX = 5
+export const MERIT_RATING_MIN = 1
+
+// Arbitrarily chosen number.  Hopefully it's not too much or too little.
+export const HEALTH_LEVEL_MAX = 15

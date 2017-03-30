@@ -6,8 +6,9 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
+import * as c from '../../../utils/constants.js'
 
-import ExpandableListEditor from './expandableListEditor.jsx'
+import HealthLevelBoxes from '../../generic/HealthLevelBoxes.jsx'
 
 class _HealthLevelPopup extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class _HealthLevelPopup extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true })
+    this.setState({ open: true, character: this.props.character })
   }
 
   handleClose() {
@@ -34,7 +35,14 @@ class _HealthLevelPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    const val = parseInt(e.target.value)
+    let val = parseInt(e.target.value)
+
+    if (e.target.name.startsWith("health")) {
+      if (val < 0)
+        val = 0
+      if (val > c.HEALTH_LEVEL_MAX)
+        val = c.HEALTH_LEVEL_MAX
+    }
 
     this.setState({character: {... this.state.character, [e.target.name]: val}})
   }
@@ -70,7 +78,7 @@ class _HealthLevelPopup extends React.Component {
         onRequestClose={ handleClose }
       >
         <div className="editor-popup editor-popup-specialties">
-          { boxes }
+          <HealthLevelBoxes character={ character } />
           <div>
             Health:
             <TextField name="health_level_0s" value={ character.health_level_0s }
@@ -135,4 +143,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_HealthLevelPopup)
-

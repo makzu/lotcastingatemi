@@ -1,0 +1,66 @@
+- id: 1
+  character_id: 1
+  name: Twin blades (paired)
+  weight: medium
+  is_artifact: false
+  tags:
+    - lethal
+    - martial arts
+    - balanced
+  ability: martial arts (steel devil style)
+
+- id: 2
+  character_id: 1
+  name: Stem (the left blade
+  weight: medium
+  tags:
+    - lethal
+    - melee
+    - balanced
+  ability: melee
+  is_artifact: false
+
+- id: 3
+  character_id: 1
+  name: Blossom (the right blade)
+  weight: medium
+  tags:
+    - lethal
+    - melee
+    - balanced
+  ability: melee
+  is_artifact: false
+
+- id: 4
+  character_id: 1
+  name: Shield example
+  weight: medium
+  ability: melee
+  is_artifact: false
+  tags:
+    - bashing
+    - melee
+    - shield
+
+- id: 5
+  character_id: 1
+  name: Unarmed (brawl)
+  weight: light
+  ability: brawl
+  is_artifact: false
+  tags:
+    - bashing
+    - brawl
+    - grappling
+    - natural
+
+- id: 6
+  character_id: 1
+  name: Light Artifact example
+  weight: light
+  ability: brawl
+  is_artifact: true
+  tags:
+    - bashing
+    - brawl
+    - smashing

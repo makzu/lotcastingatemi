@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise_token_auth'
 gem 'omniauth'
 
+# Validate json fields like craft ratings, qc pools, etc
+gem 'activerecord_json_validator'
+
 # For Heroku:
 group :production do
   gem 'rails_serve_static_assets'

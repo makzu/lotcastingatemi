@@ -27,7 +27,7 @@ class _ArmorPopup extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true })
+    this.setState({ open: true, character: this.props.character })
   }
 
   handleClose() {
@@ -136,4 +136,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_ArmorPopup)
-

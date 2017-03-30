@@ -1,24 +1,29 @@
-class Api::V1::MeritsController < Api::V1::BaseController
+class Api::V1::QcMeritsController < Api::V1::BaseController
+  before_action :set_qc_merit, only: [:show, :update, :destroy]
+
   def show
-    respond_with Merit.find(params[:id])
+    render json: @qc_merit
   end
 
   def create
-    respond_with :api, :v1, Merit.create(merit_params)
+    render json: QcMerit.create(qc_merit_params)
   end
 
   def destroy
-    respond_with Merit.destroy(params[:id])
+    render json: @qc_merit.destroy
   end
 
   def update
-    merit = Merit.find(params[:id])
-    merit.update_attributes(merit_params)
-    respond_with merit, json: merit
+    @qc_merit.update_attributes(qc_merit_params)
+    render json: @qc_merit
   end
 
   private
-  def merit_params
-    params.require(:merit).permit!
+  def set_qc_merit
+    @qc_merit = QcMerit.find(params[:id])
+  end
+
+  def qc_merit_params
+    params.require(:qc_merit).permit!
   end
 end

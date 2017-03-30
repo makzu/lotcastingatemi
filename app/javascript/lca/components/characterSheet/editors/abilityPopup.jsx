@@ -6,8 +6,9 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
+import * as c from '../../../utils/constants.js'
 
-import ExpandableListEditor from './expandableListEditor.jsx'
+import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
 function AbilityBlock(props) {
   const { label, abil, value, onChange, onBlur } = props
@@ -40,7 +41,7 @@ class _AbilityPopup extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true })
+    this.setState({ open: true, character: this.props.character })
   }
 
   handleClose() {
@@ -50,7 +51,13 @@ class _AbilityPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    const val = parseInt(e.target.value)
+    let val = parseInt(e.target.value)
+
+    // leash the data into an acceptable range
+    if (val > c.ABILITY_MAX)
+      val = c.ABILITY_MAX
+    else if ( val < c.ABILITY_MIN)
+      val = c.ABILITY_MIN
 
     this.setState({character: {... this.state.character, [e.target.name]: val}})
   }
@@ -204,11 +211,11 @@ class _AbilityPopup extends React.Component {
 
           <h4>Crafts:</h4>
           <ExpandableListEditor character={ character } trait="abil_craft"
-            onUpdate={ onListChange } onBlur={ onListBlur }
+            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ c.ABILITY_MAX }
           />
           <h4>Martial Arts:</h4>
           <ExpandableListEditor character={ character } trait="abil_martial_arts"
-            onUpdate={ onListChange } onBlur={ onListBlur }
+            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ c.ABILITY_MAX }
           />
         </div>
       </Dialog>
@@ -228,4 +235,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(_AbilityPopup)
-

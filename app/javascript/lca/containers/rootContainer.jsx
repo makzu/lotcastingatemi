@@ -1,45 +1,28 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { AuthGlobals } from 'redux-auth/material-ui-theme'
 
 import { ConnectedRouter } from 'react-router-redux'
-import { Route, Link } from 'react-router-dom'
 
-import CharacterSheet from '../components/characterSheet/index.jsx'
-import LcaHeader from '../components/header.jsx'
-import LcaFooter from '../components/footer.jsx'
-import WelcomePage from '../components/welcomePage/index.jsx'
+import RouteContainer from './routeContainer.jsx'
 
-function QcSheet(props) {
-  return(<span>QC Sheet!</span>)
-}
+const RootContainer = ({ store, history }) => (
+  <Provider store={ store }>
+    <MuiThemeProvider>
+      <div>
+        <AuthGlobals />
+        <ConnectedRouter history={ history }>
+          <RouteContainer />
+        </ConnectedRouter>
+      </div>
+    </MuiThemeProvider>
+  </Provider>
+)
 
-class RootContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { store, history } = this.props
-
-    return (<Provider store={ store }>
-      <MuiThemeProvider>
-        <div>
-          <AuthGlobals />
-          <ConnectedRouter history={ history }>
-            <div>
-              <LcaHeader />
-              <Route path="/" exact component={ WelcomePage } />
-              <Route path="/character" component={ CharacterSheet } />
-              <Route path="/qcs" component={ QcSheet } />
-              <LcaFooter />
-            </div>
-          </ConnectedRouter>
-        </div>
-      </MuiThemeProvider>
-    </Provider>)
-  }
+RootContainer.propTypes = {
+  store: PropTypes.object,
+  history: PropTypes.object
 }
 
 export default RootContainer

@@ -125,6 +125,18 @@ $mainGrid: (
     }
   }
 }
+
+.meritPage {
+  h1 {
+    @include grid-column(4, $mainGrid);
+  }
+
+  .singleMerit {
+    @include grid-column(2, $mainGrid);
+    margin-bottom: 1em;
+  }
+}
+
 .editor-wrap {
   display: inline-block;
   float: right;

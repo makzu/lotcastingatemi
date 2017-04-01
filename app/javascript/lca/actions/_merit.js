@@ -13,7 +13,7 @@ function updateMeritTraitComplete(id, json) {
   return {
     type: c.UPDATE_MERIT_COMPLETE,
     id: id,
-    weapon: json
+    merit: json
   }
 }
 
@@ -34,10 +34,9 @@ export function updateMerit(id, charId, trait, value) {
   }
 }
 
-function createMeritStart(charId, name) {
+function createMeritStart(charId) {
   return {
     type: c.CREATE_MERIT,
-    name: name,
     character: charId
   }
 }
@@ -50,19 +49,48 @@ function createMeritComplete(json) {
 }
 
 // TODO handle errors here
-export function createMerit(charId, name) {
+export function createMerit(charId) {
   return function (dispatch) {
-    dispatch(createMeritStart(charId, name))
+    dispatch(createMeritStart(charId))
 
-    let merit = { merit: { name: name, character_id: charId }}
+    let merit = { merit: { character_id: charId }}
 
-    return fetch('/api/v1/merits', {
+    return fetch(`/api/v1/characters/${charId}/merits`, {
       method: "POST",
       headers: new Headers({"Content-Type": "application/json"}),
       body: JSON.stringify(merit)
     }).then(response => response.json())
       .then(json =>
         dispatch(createMeritComplete(json))
+      )
+  }
+}
+
+function destroyMeritStart(id) {
+  return {
+    type: c.DESTROY_MERIT,
+    id: id
+  }
+}
+
+function destroyMeritComplete(json) {
+  return {
+    type: c.DESTROY_MERIT_COMPLETE,
+    merit: json
+  }
+}
+
+// TODO handle errors here
+export function destroyMerit(id, charId) {
+  return function (dispatch) {
+    dispatch(destroyMeritStart(id))
+
+    return fetch(`/api/v1/characters/${charId}/merits/${id}`, {
+      method: "DELETE",
+      headers: new Headers({"Content-Type": "application/json"})
+    }).then(response => response.json())
+      .then(json =>
+        dispatch(destroyMeritComplete(json))
       )
   }
 }

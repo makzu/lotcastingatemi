@@ -3,6 +3,8 @@
   name: martial artist
   merit_name: martial artist
   rating: 4
+  merit_cat: purchased
+  description: All royalty of the Vincible Sword Kingdom are trained in steel devil style.
   prereqs: brawl 1
   ref: core p.163-164
 
@@ -10,13 +12,18 @@
   character_id: 1
   name: royal stipend
   merit_name: resources
-  description: The princess has some access to her kingdom's coffers
-  ref: core p.164-165
   rating: 2
+  merit_cat: story
+  description: The princess has some access to her kingdom's coffers.
+  prereqs: ''
+  ref: core p.164-165
 
 - id: 3
   character_id: 1
   name: Ambidextrous
   merit_name: ambidextrous
   rating: 1
+  merit_cat: innate
+  description: Ignore any penalties to using her off hand.
+  prereqs: ''
   ref: core p.158-159

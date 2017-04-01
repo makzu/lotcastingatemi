@@ -81,7 +81,7 @@ function destroyWeaponComplete(json) {
 }
 
 // TODO handle errors here
-export function destroyWeapon(charId, id) {
+export function destroyWeapon(id, charId) {
   return function (dispatch) {
     dispatch(destroyWeaponStart(id))
 

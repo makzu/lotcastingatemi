@@ -23,8 +23,6 @@ class Qc < ApplicationRecord
   belongs_to :player
   belongs_to :chronicle, optional: true
 
-  # TODO create validator for actions
-
   # Essence above 5 is explicitly mentioned in the book
   validates_numericality_of :essence, greater_than_or_equal_to: 1, less_than_or_equal_to: 10
 

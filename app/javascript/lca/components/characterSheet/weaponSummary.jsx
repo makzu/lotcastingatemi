@@ -157,6 +157,7 @@ class WeaponFieldset extends React.Component {
       </TableRowColumn>
       <TableRowColumn style={{ width: '2em' }}>
         <Checkbox name="is_artifact" checked={ weapon.is_artifact }
+          onCheck={ handleChange }
         />
       </TableRowColumn>
       <TableRowColumn style={{verticalAlign: 'bottom'}}>
@@ -209,7 +210,7 @@ class WeaponSummary extends React.Component {
   }
 
   handleRemove(id) {
-    this.props._handleDestroy(this.props.character.id, id)
+    this.props._handleDestroy(id, this.props.character.id)
   }
 
   render() {
@@ -253,8 +254,8 @@ function mapDispatchToProps(dispatch) {
     _handleUpdate: (id, charId, trait, value) => {
       dispatch(updateWeapon(id, charId, trait, value))
     },
-    _handleDestroy: (charId, id) => {
-      dispatch(destroyWeapon(charId, id))
+    _handleDestroy: (id, charId) => {
+      dispatch(destroyWeapon(id, charId))
     },
     _handleCreate: (charId) => {
       dispatch(createWeapon(charId))

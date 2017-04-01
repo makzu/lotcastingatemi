@@ -5,6 +5,7 @@ import * as schemas from './entities/_schemas.js'
 import { _create_qc_attack, _destroy_qc_attack } from './entities/qc_attack.js'
 import { _create_qc_merit, _destroy_qc_merit } from './entities/qc_merit.js'
 import { _create_weapon, _destroy_weapon } from './entities/weapon.js'
+import { _create_merit, _destroy_merit } from './entities/merit.js'
 
 const defaultState = {
   players:    {},
@@ -147,7 +148,7 @@ export default function EntityReducer(state = defaultState, action) {
     return _destroy_weapon(state, action)
 
   case c.CREATE_MERIT_COMPLETE:
-  return state
+    return _create_merit(state, action)
 
   case c.UPDATE_MERIT:
     const merit = state.merits[action.id]
@@ -155,6 +156,8 @@ export default function EntityReducer(state = defaultState, action) {
       ...state.merits, [action.id]: {
         ...merit, [trait]: value } }
     }
+  case c.DESTROY_MERIT_COMPLETE:
+    return _destroy_merit(state, action)
 
   case c.CREATE_QC_COMPLETE:
     return _create_qc(state, action)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327215309) do
+ActiveRecord::Schema.define(version: 20170401021455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,13 +117,13 @@ ActiveRecord::Schema.define(version: 20170327215309) do
   create_table "merits", id: :serial, force: :cascade do |t|
     t.integer "character_id"
     t.integer "rating", default: 1
-    t.string "name"
-    t.string "merit_name"
+    t.string "name", default: ""
+    t.string "merit_name", default: ""
     t.string "merit_cat", default: "story"
-    t.text "description"
-    t.string "ref"
+    t.text "description", default: ""
+    t.string "ref", default: "Core p.xyz"
     t.boolean "supernatural", default: false
-    t.string "prereqs"
+    t.string "prereqs", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_merits_on_character_id"
@@ -174,8 +174,8 @@ ActiveRecord::Schema.define(version: 20170327215309) do
     t.string "name"
     t.boolean "latent", default: false
     t.boolean "magical", default: false
-    t.text "body"
-    t.string "ref"
+    t.text "body", default: ""
+    t.string "ref", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["qc_id"], name: "index_qc_merits_on_qc_id"

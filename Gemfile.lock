@@ -1,8 +1,15 @@
 GIT
-  remote: git://github.com/rails/webpacker.git
-  revision: 96223d1721e99d76508744e660bff7ac2dffdf96
+  remote: git://github.com/jackdempsey/omniauth-reddit.git
+  revision: 47d8d310f144c084fb373db282f6a4aa5f48847f
   specs:
-    webpacker (1.0)
+    omniauth-reddit (0.0.2)
+      omniauth-oauth2 (~> 1.1)
+
+GIT
+  remote: git://github.com/rails/webpacker.git
+  revision: a107b70f579e0cf34988e8b3627ba8d66ffb7f62
+  specs:
+    webpacker (1.1)
       activesupport (>= 4.2)
       multi_json (~> 1.2)
       railties (>= 4.2)
@@ -50,10 +57,11 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.0)
+    addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (8.0.0)
     bcrypt (3.1.11)
+    bindex (0.5.0)
     bourbon (4.3.3)
       sass (~> 3.4)
       thor (~> 0.19)
@@ -66,10 +74,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    childprocess (0.6.2)
+    childprocess (0.6.3)
       ffi (~> 1.0, >= 1.0.11)
     concurrent-ruby (1.0.5)
-    debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -88,6 +95,8 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
+    faraday (0.11.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -99,6 +108,7 @@ GEM
     json (2.0.3)
     json-schema (2.8.0)
       addressable (>= 2.4)
+    jwt (1.5.6)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -113,19 +123,32 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
+    multi_xml (0.6.0)
+    multipart-post (2.0.0)
     neat (2.0.0)
       sass (~> 3.4)
       thor (~> 0.19)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
+    oauth2 (1.3.1)
+      faraday (>= 0.8, < 0.12)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 3)
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
+    omniauth-oauth2 (1.4.0)
+      oauth2 (~> 1.0)
+      omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.20.0)
     public_suffix (2.0.5)
     puma (3.8.2)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -208,16 +231,16 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
-    tzinfo (1.2.2)
+    tzinfo (1.2.3)
       thread_safe (~> 0.1)
-    uglifier (3.1.9)
+    uglifier (3.1.12)
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.4.0)
+    web-console (3.5.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
-      debug_inspector
+      bindex (>= 0.4.0)
       railties (>= 5.0)
     websocket (1.2.4)
     websocket-driver (0.6.5)
@@ -240,9 +263,11 @@ DEPENDENCIES
   listen (~> 3.0.5)
   neat
   omniauth
+  omniauth-reddit!
   pg
   puma (~> 3.7)
-  rails (~> 5.1.0.beta1)
+  pundit
+  rails (~> 5.1.0.rc1)
   rails_serve_static_assets
   responders
   rspec-rails

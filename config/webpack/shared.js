@@ -1,76 +1,51 @@
 // Note: You must restart bin/webpack-watcher for changes to take effect
+/* eslint global-require: 0 */
+/* eslint import/no-dynamic-require: 0 */
 
 const webpack = require('webpack')
-const path = require('path')
-const process = require('process')
-const glob = require('glob')
+const { basename, join, resolve } = require('path')
+const { sync } = require('glob')
+const { readdirSync } = require('fs')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const extname = require('path-complete-extname')
+const { env, paths, publicPath, loadersDir } = require('./configuration.js')
 
-let distDir = process.env.WEBPACK_DIST_DIR
+const extensionGlob = `*{${paths.extensions.join(',')}}*`
+const packPaths = sync(join(paths.source, paths.entry, extensionGlob))
 
-if (distDir === undefined) {
-  distDir = 'packs'
-}
-
-const config = {
-  entry: glob.sync(path.join('app', 'javascript', 'packs', '*.js*')).reduce(
+module.exports = {
+  entry: packPaths.reduce(
     (map, entry) => {
-      const basename = path.basename(entry, extname(entry))
       const localMap = map
-      localMap[basename] = path.resolve(entry)
+      localMap[basename(entry, extname(entry))] = resolve(entry)
       return localMap
     }, {}
   ),
 
-  output: { filename: '[name].js', path: path.resolve('public', distDir) },
+  output: { filename: '[name].js', path: resolve(paths.output, paths.entry) },
 
   module: {
-    rules: [
-      { test: /\.coffee(\.erb)?$/, loader: 'coffee-loader' },
-      {
-        test: /\.jsx?(\.erb)?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            'react',
-            ['env', { modules: false }]
-          ],
-          plugins: ['react-hot-loader/babel']
-        }
-      },
-      {
-        test: /\.erb$/,
-        enforce: 'pre',
-        exclude: /node_modules/,
-        loader: 'rails-erb-loader',
-        options: {
-          runner: 'DISABLE_SPRING=1 bin/rails runner'
-        }
-      }
-    ]
+    rules: readdirSync(loadersDir).map(file => (
+      require(join(loadersDir, file))
+    ))
   },
 
   plugins: [
-    new webpack.EnvironmentPlugin(
-      Object.keys(process.env).filter((key)=>!key.match(/GNOME_KEYRING/)).filter((key)=>!key.match(/[UPSTART_]?INSTANCE/))
-    )
+    new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
+    new ExtractTextPlugin(env.NODE_ENV === 'production' ? '[name]-[hash].css' : '[name].css'),
+    new ManifestPlugin({ fileName: paths.manifest, publicPath, writeToFileEmit: true })
   ],
 
   resolve: {
-    extensions: ['.js', '.coffee'],
+    extensions: paths.extensions,
     modules: [
-      path.resolve('app/javascript'),
-      path.resolve('node_modules')
+      resolve(paths.source),
+      resolve(paths.node_modules)
     ]
   },
 
   resolveLoader: {
-    modules: [path.resolve('node_modules')]
+    modules: [paths.node_modules]
   }
-}
-
-module.exports = {
-  distDir,
-  config
 }

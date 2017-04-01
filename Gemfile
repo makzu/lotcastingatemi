@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-# Rails 5.1 beta for Webpacker
-gem 'rails', '~> 5.1.0.beta1'
+# Rails 5.1 rc for Webpacker
+gem 'rails', '~> 5.1.0.rc1'
 # Webpacker allows React/Redux and friends to thrive:
 gem 'webpacker', github: "rails/webpacker"
 
@@ -31,7 +31,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise_token_auth'
+gem 'pundit'
 gem 'omniauth'
+gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'

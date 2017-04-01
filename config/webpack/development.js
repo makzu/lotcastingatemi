@@ -1,11 +1,10 @@
 // Note: You must restart bin/webpack-watcher for changes to take effect
-
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-
 const sharedConfig = require('./shared.js')
+const { publicPath } = require('./configuration.js')
 
-module.exports = merge(sharedConfig.config, {
+module.exports = merge(sharedConfig, {
   devtool: 'sourcemap',
 
   stats: {
@@ -14,16 +13,14 @@ module.exports = merge(sharedConfig.config, {
 
   output: {
     pathinfo: true,
-    publicPath: "http://localhost:8080/"
+    publicPath
   },
 
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       debug: true
     }),
     new webpack.NamedModulesPlugin(),
   ],
-  devServer: {
-    hotOnly: true
-  }
 })

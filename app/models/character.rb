@@ -52,6 +52,7 @@ class Character < ApplicationRecord
   include Intimacies
 
   belongs_to :player
+  # TODO validate that if a character is in a chronicle, the player must be in it too
   belongs_to :chronicle, optional: true
 
   has_many :merits,  dependent: :destroy

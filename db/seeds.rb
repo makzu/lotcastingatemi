@@ -2,16 +2,29 @@
 puts "Reloading example player"
 player1 = Player.find_or_initialize_by(id: 1)
 player1.update(
-  name: "Example player",
+  name: "Example ST",
   email: "solarShard179@IAM.net",
   password: "praisethesun"
+)
+
+player2 = Player.find_or_initialize_by(id: 2)
+player2.update(
+  name: "Example Player",
+  email: "solarShard259@IAM.net",
+  password: "password"
 )
 
 puts "Reloading example chronicle"
 exChronicle = Chronicle.find_or_initialize_by(id: 1)
 exChronicle.update(
   name: "Example game",
-  player: player1
+  st: player1
+)
+
+pc = ChroniclePlayer.find_or_initialize_by(id: 1)
+pc.update(
+  player: player2,
+  chronicle: exChronicle
 )
 
 puts "Reloading characters"

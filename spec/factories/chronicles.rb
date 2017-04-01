@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :chronicle do
     name "Chronicle"
-    player
+    association :st, factory: :player
   end
 end

@@ -42,9 +42,7 @@ class FullAttributeBlock extends React.Component {
       <div className="fullAttributeBlock">
         <h3>
           Attributes
-          <FlatButton label={this.state.isEditing ? "done" : "edit"}
-            onClick={ this.toggleEditor }
-            style={{ float: 'right' }}
+          <AttributePopup character={ character }
           />
         </h3>
 

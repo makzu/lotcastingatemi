@@ -36,8 +36,12 @@ const store = createStore(
   enhancer
 )
 
-store.dispatch(configure({apiUrl: "/api/v1/auth"}))
+store.dispatch(configure({
+  apiUrl: "/api/v1",
+  clientOnly: true,
+}))
 
+// TODO: Only fetch chronicle/character data on login, not here
 store.dispatch(fetchChronicle(1))
 
 const render = (Component) => {

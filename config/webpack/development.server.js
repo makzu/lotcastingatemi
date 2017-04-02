@@ -13,7 +13,6 @@ module.exports = merge(devConfig, {
     historyApiFallback: true,
     contentBase: resolve(paths.output, paths.entry),
     publicPath,
-    headers: { 'Access-Control-Allow-Origin': '*'},
     hot: true
   }
 })

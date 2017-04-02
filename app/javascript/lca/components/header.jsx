@@ -3,8 +3,54 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
 import {List, ListItem} from 'material-ui/List'
+import { EmailSignInForm } from "redux-auth/material-ui-theme";
+
 import {toggleMenu} from '../actions'
+
+class LogInPopup extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+
+    this.state = { open: false }
+  }
+
+  handleOpen() {
+    this.setState({ open: true, character: this.props.character })
+  }
+
+  handleClose() {
+    this.setState({ open: false })
+  }
+
+  render() {
+    const { handleOpen, handleClose } = this
+    const actions = [
+      <FlatButton
+        label="Close"
+        primary={ true }
+        onTouchTap={ handleClose }
+      />
+    ]
+    return <span /> // Temporarily disable this
+    return <span>
+      <FlatButton label="Log in" onClick={ handleOpen } />
+      <Dialog
+        title="Log in via Email"
+        actions={ actions }
+        open={ this.state.open }
+        autoScrollBodyContent={ true }
+        onRequestClose={ handleClose }
+      >
+        <EmailSignInForm />
+      </Dialog>
+    </span>
+  }
+}
 
 function LcaHeader(props) {
     const { navDrawerOpen, toggleMenu } = props
@@ -16,6 +62,7 @@ function LcaHeader(props) {
         />
         <Drawer open={ navDrawerOpen } docked={ true }>
           <List>
+            <ListItem><LogInPopup /></ListItem>
             <Link to="/">
               <ListItem primaryText="Home" onClick={ toggleMenu } />
             </Link>
@@ -31,6 +78,7 @@ function LcaHeader(props) {
 
 function mapStateToProps(state) {
   const navDrawerOpen = state.app.navDrawerOpen
+  const isSignedIn = state.auth.get('user').get('isSignedIn')
 
   return {
     navDrawerOpen

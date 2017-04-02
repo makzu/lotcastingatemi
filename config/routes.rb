@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       mount_devise_token_auth_for 'Player', at: 'auth'
 
+      resources :players, only: [:show]
+
       resources :chronicles, only: [:show, :create, :destroy, :update]
 
       resources :characters, only: [:show, :create, :destroy, :update] do

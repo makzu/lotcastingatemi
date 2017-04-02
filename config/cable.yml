@@ -7,4 +7,4 @@ test:
 production:
   adapter: redis
   url: redis://localhost:6379/1
-  channel_prefix: lll_production
+  channel_prefix: lot_casting_atemi_production

@@ -55,4 +55,14 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.x.webpacker[:dev_server_host] = "http://localhost:8080"
+
+  config.middleware.use Rack::Cors do
+    allow do
+      origins 'localhost:5000', 'localhost:8080', '127.0.0.1:5000', '127.0.0.1:8080'
+      resource '*',
+        headers: :any,
+        expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+        methods: [:get, :post, :options, :delete, :put]
+    end
+  end
 end

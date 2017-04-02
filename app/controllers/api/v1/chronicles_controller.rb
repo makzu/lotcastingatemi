@@ -1,14 +1,11 @@
-#RFC = Reason For Change
-
 class Api::V1::ChroniclesController < Api::V1::BaseController
   before_action :set_chronicle, only: [:show, :update, :destroy]
 
   def show
     render json: @chronicle.as_json( include: {
-      st: { only: [:name, :id], include: {
-        characters: { include: [:weapons, :merits ]},
-        qcs: { include: [ :qc_attacks, :qc_merits ]}
-      }}
+      st: { only: [:name, :id]},
+      characters: { include: [:weapons, :merits ]},
+      qcs: { include: [ :qc_attacks, :qc_merits ]}
     })
   end
 

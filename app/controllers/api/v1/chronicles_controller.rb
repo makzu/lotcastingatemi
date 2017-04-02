@@ -4,6 +4,7 @@ class Api::V1::ChroniclesController < Api::V1::BaseController
   def show
     render json: @chronicle.as_json( include: {
       st: { only: [:name, :id]},
+      players: { only: [:name, :id]},
       characters: { include: [:weapons, :merits ]},
       qcs: { include: [ :qc_attacks, :qc_merits ]}
     })

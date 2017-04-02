@@ -21,6 +21,7 @@ export const player = new schema.Entity('players', {
 
 export const chronicle = new schema.Entity('chronicles', {
   st: player,
+  players: [ player ],
   characters: [ character ],
   qcs: [ qc ]
 })

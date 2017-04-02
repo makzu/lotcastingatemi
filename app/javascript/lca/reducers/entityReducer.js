@@ -34,13 +34,20 @@ function _receive_chronicle(state, action) {
   newChronicles[id].characters = []
   newChronicles[id].qcs = []
 
+  for (var plId in newPlayers) {
+    newPlayers[plId].characters = []
+    newPlayers[plId].qcs = []
+  }
+
   for (var charId in newCharacters) {
     if (newCharacters[charId].chronicle_id == id)
       newChronicles[id].characters.push(parseInt(charId))
+    newPlayers[newCharacters[charId].player_id].characters.push(parseInt(charId))
   }
   for (var qcId in newQcs) {
     if (newQcs[qcId].chronicle_id == id)
       newChronicles[id].qcs.push(parseInt(qcId))
+    newPlayers[newQcs[qcId].player_id].qcs.push(parseInt(qcId))
   }
 
   return {

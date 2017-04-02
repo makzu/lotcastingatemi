@@ -7,4 +7,9 @@ class Api::V1::PlayersController < Api::V1::BaseController
       qcs: { include: [ :qc_attacks, :qc_merits ]}
     })
   end
+
+  private
+  def set_player
+    @player = Player.find(params[:id])
+  end
 end

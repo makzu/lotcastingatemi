@@ -1,4 +1,4 @@
-class WeaponPolicy < ApplicationPolicy
+class CharacterTraitPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope

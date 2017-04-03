@@ -13,6 +13,7 @@ module LotCastingAtemi
     # -- all .rb files in that directory are automatically loaded.
 
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
-
+    config.annotations.register_extensions('jsx') { |annotation| %r(//\s*(#{annotation}):?\s*(.*?)$) }
+    config.annotations.register_extensions('scss', 'sass') { |annotation| %r(//\s*(#{annotation}):?\s*(.*?)$) }
   end
 end

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RatingDots renders at all 1`] = `
+<span
+  className="ratingDotContainer"
+>
+  <div
+    className="ratingDot ratingDotFull"
+  >
+    ●
+  </div>
+  <div
+    className="ratingDot ratingDotFull"
+  >
+    ●
+  </div>
+  <div
+    className="ratingDot ratingDotFull"
+  >
+    ●
+  </div>
+  <div
+    className="ratingDot ratingDotEmpty"
+  >
+    ○
+  </div>
+  <div
+    className="ratingDot ratingDotEmpty"
+  >
+    ○
+  </div>
+</span>
+`;

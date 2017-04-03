@@ -100,12 +100,13 @@ function _create_character(state, action) {
 }
 
 function _create_qc(state, action) {
-  const newState = normalize(action.qc, qc)
+  const newState = normalize(action.qc, schemas.qc)
   const newQcs = newState.entities.qcs
   const owner = state.players[action.qc.player_id]
 
   const chronId = action.qc.chronicle_id
   let newChronicles = state.chronicles
+
   if (chronId != null) {
     newChronicles = { ...newChronicles, [chronId]: {
       ...newChronicles[chronId],

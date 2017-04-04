@@ -5,8 +5,7 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import * as calc from '../../utils/calculated'
 import RatingDots from '../generic/ratingDots.jsx'
 
-
-function CombatBlock(props) {
+export function CombatBlock(props) {
   const { character, weapons, merits } = props
   const naturalSoak = calc.naturalSoak(character)
   const armorSoak = calc.armorSoak(character)

@@ -22,7 +22,7 @@ import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
 import RatingDots from '../generic/ratingDots.jsx'
 import * as calc from '../../utils/calculated/'
 
-function FullSpecialtyBlock(props) {
+export function FullSpecialtyBlock(props) {
   const character = props.character
   const specialties = character.specialties
 
@@ -44,7 +44,7 @@ function FullSpecialtyBlock(props) {
   </div>);
 }
 
-function MeritSummary(props) {
+export function MeritSummary(props) {
   const merits = props.merits.map((merit) =>
     <div key={merit.id}>
       { merit.name }
@@ -66,7 +66,7 @@ function MeritSummary(props) {
   </div>);
 }
 
-function IntimacySummary(props) {
+export function IntimacySummary(props) {
   const principles = props.character.principles.map((p, index) =>
     <div className="intimacyListItem" key={index}>
       { p.subject }
@@ -96,7 +96,7 @@ function IntimacySummary(props) {
   </div>);
 }
 
-function WillpowerBlock(props) {
+export function WillpowerBlock(props) {
   const { character } = props
 
   return(<div className="willpowerBlock">
@@ -111,7 +111,7 @@ function WillpowerBlock(props) {
   </div>)
 }
 
-class CharacterSheet extends React.Component {
+export class CharacterSheet extends React.Component {
   constructor(props) {
     super(props)
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Divider from 'material-ui/Divider'
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import FlatButton from 'material-ui/FlatButton'
 import IconButton from 'material-ui/FlatButton'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
@@ -32,7 +32,7 @@ function WeaponData(props) {
   return(<TableRow>
     <TableRowColumn>{ weapon.name }</TableRowColumn>
     <TableRowColumn className="attackPoolColumn">
-      { calc.witheringAttackPool(character, weapon) }{" "}
+      { calc.witheringAttackPool(character, weapon) }{' '}
       ({ calc.decisiveAttackPool(character, weapon) } decisive)
     </TableRowColumn>
     <TableRowColumn className="damageColumn">
@@ -46,7 +46,7 @@ function WeaponData(props) {
       { calc.weaponOverwhelming(weapon) }
     </TableRowColumn>
     <TableRowColumn className="tagsColumn">
-      { weapon.tags.join(", ") }
+      { weapon.tags.join(', ') }
     </TableRowColumn>
     <TableRowColumn className="abilityColumn">
       { weapon.ability }

@@ -51,8 +51,8 @@ export function updateCharacter(id, trait, value) {
     let bd = { character: { [trait]: value }}
 
     return fetch(`/api/v1/characters/${id}`, {
-      method: "PATCH",
-      headers: new Headers({"Content-Type": "application/json"}),
+      method: 'PATCH',
+      headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(bd)
     }).then(response => response.json())
       .then(json =>
@@ -83,8 +83,8 @@ export function createCharacter(playerId, chronicleId, name) {
     let char = { character: { name: name, player_id: playerId, chronicle_id: chronicleId }}
 
     return fetch('/api/v1/characters', {
-      method: "POST",
-      headers: new Headers({"Content-Type": "application/json"}),
+      method: 'POST',
+      headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(char)
     }).then(response => response.json())
       .then(json =>

@@ -1,4 +1,4 @@
-import { ATTACK_ABILITIES, ABILITIES, ABILITIES_ALL } from '../constants.js'
+import { ATTACK_ABILITIES, ABILITIES_ALL } from '../constants.js'
 export {
   joinBattlePool, rushPool, disengagePool, riseFromPronePool, takeCoverPool,
   withdrawPool, readIntentionsPool, shapeSorceryPool
@@ -63,7 +63,7 @@ export function attackAbilities(character) {
   })
 
   let mas = character.abil_martial_arts.map((abil)=> {
-    let name = "martial arts (" + abil.style + ")"
+    let name = 'martial arts (' + abil.style + ')'
     return { abil: name, rating: abil.rating }
   })
 
@@ -72,7 +72,7 @@ export function attackAbilities(character) {
 
 export function abilitiesWithRatings(character) {
   const abils = ABILITIES_ALL.filter((a) => {
-    if (a.abil == "abil_craft" || a.abil == "abil_martial_arts")
+    if (a.abil == 'abil_craft' || a.abil == 'abil_martial_arts')
       return character[a.abil].length >0
     else
       return character[a.abil] > 0
@@ -83,12 +83,12 @@ export function abilitiesWithRatings(character) {
 
 export function mobilityPenalty(character) {
   switch(character.armor_weight) {
-  case "light":
-  case "unarmored":
+  case 'light':
+  case 'unarmored':
     return 0
-  case "medium":
+  case 'medium':
     return 1
-  case "heavy":
+  case 'heavy':
     return 2
   default:
     return 0
@@ -97,13 +97,13 @@ export function mobilityPenalty(character) {
 
 export function armorSoak(character) {
   switch(character.armor_weight) {
-  case "light":
+  case 'light':
     return character.armor_is_artifact ? 5 : 3
-  case "medium":
+  case 'medium':
     return character.armor_is_artifact ? 8 : 5
-  case "heavy":
+  case 'heavy':
     return character.armor_is_artifact ? 11 : 7
-  case "unarmored":
+  case 'unarmored':
     return 0
   }
 }
@@ -117,11 +117,11 @@ export function hardness(character) {
   if (! character.armor_is_artifact)
     return 0
   switch(character.armor_weight) {
-  case "light":
+  case 'light':
     return 4
-  case "medium":
+  case 'medium':
     return 7
-  case "heavy":
+  case 'heavy':
     return 10
   }
 }

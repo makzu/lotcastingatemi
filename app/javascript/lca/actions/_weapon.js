@@ -24,8 +24,8 @@ export function updateWeapon(id, charId, trait, value) {
     let wp = { weapon: { [trait]: value }}
 
     return fetch(`/api/v1/characters/${charId}/weapons/${id}`, {
-      method: "PATCH",
-      headers: new Headers({"Content-Type": "application/json"}),
+      method: 'PATCH',
+      headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(wp)
     }).then(response => response.json())
       .then(json =>
@@ -56,8 +56,8 @@ export function createWeapon(charId) {
     let weapon = { weapon: { character_id: charId }}
 
     return fetch(`/api/v1/characters/${charId}/weapons`, {
-      method: "POST",
-      headers: new Headers({"Content-Type": "application/json"}),
+      method: 'POST',
+      headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(weapon)
     }).then(response => response.json())
       .then(json =>
@@ -86,8 +86,8 @@ export function destroyWeapon(id, charId) {
     dispatch(destroyWeaponStart(id))
 
     return fetch(`/api/v1/characters/${charId}/weapons/${id}`, {
-      method: "DELETE",
-      headers: new Headers({"Content-Type": "application/json"})
+      method: 'DELETE',
+      headers: new Headers({'Content-Type': 'application/json'})
     }).then(response => response.json())
       .then(json =>
         dispatch(destroyWeaponComplete(json))

@@ -4,7 +4,6 @@ import Paper from 'material-ui/Paper'
 import styled from 'styled-components'
 
 import LcaHeader from  '../components/header.jsx'
-import LcaFooter from  '../components/footer.jsx'
 
 import CharacterList from '../components/characterList/index.jsx'
 import CharacterSheet from '../components/characterSheet/index.jsx'

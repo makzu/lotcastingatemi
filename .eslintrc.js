@@ -4,7 +4,7 @@ module.exports = {
     "es6": true,
     "jest": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaVersion": 6,
     "ecmaFeatures": {
@@ -27,7 +27,12 @@ module.exports = {
     ],
     "quotes": [
       "warn",
-      "double"
+      "single",
+      { "allowTemplateLiterals": true }
+    ],
+    "jsx-quotes": [
+      "warn",
+      "prefer-double"
     ],
     "semi": [
       "error",

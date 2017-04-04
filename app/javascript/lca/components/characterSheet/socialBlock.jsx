@@ -5,7 +5,6 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import * as calc from '../../utils/calculated'
 import RatingDots from '../generic/ratingDots.jsx'
 
-
 export default function SocialBlock(props) {
   const { character, weapons, merits } = props
   const naturalSoak = calc.naturalSoak(character)
@@ -38,4 +37,3 @@ export default function SocialBlock(props) {
 
   </div>)
 }
-

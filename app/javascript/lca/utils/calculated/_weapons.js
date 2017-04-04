@@ -3,11 +3,11 @@ import { attackAbilities } from './index.js'
 export function weaponAccuracyBonus(weapon) {
   // TODO: thrown/archery
   switch(weapon.weight) {
-  case "light":
+  case 'light':
     return weapon.is_artifact ? 5 : 4
-  case "medium":
+  case 'medium':
     return weapon.is_artifact ? 3 : 2
-  case "heavy":
+  case 'heavy':
     return weapon.is_artifact ? 1 : 0
   }
 }
@@ -17,41 +17,41 @@ export function weaponDamageBonus(weapon) {
   let damage = 0
 
   switch(weapon.weight) {
-  case "light":
+  case 'light':
     damage = weapon.is_artifact ? 10 : 7
     break
-  case "medium":
+  case 'medium':
     damage = weapon.is_artifact ? 12 : 9
     break
-  case "heavy":
+  case 'heavy':
     damage = weapon.is_artifact ? 14 : 11
     break
   }
 
-  if (weapon.tags.includes("shield"))
+  if (weapon.tags.includes('shield'))
     damage -= 2
 
   return damage
 }
 
 export function weaponDamageType(weapon) {
-  if (weapon.tags.includes("bashing"))
-    return "B"
-  else if (weapon.tags.includes("lethal"))
-    return "L"
-  else if (weapon.tags.includes("aggravated"))
-    return "A"
+  if (weapon.tags.includes('bashing'))
+    return 'B'
+  else if (weapon.tags.includes('lethal'))
+    return 'L'
+  else if (weapon.tags.includes('aggravated'))
+    return 'A'
   else
-    return "B"
+    return 'B'
 }
 
 export function weaponDefenseBonus(weapon) {
   switch(weapon.weight) {
-  case "light":
+  case 'light':
     return weapon.is_artifact ? 0 : 0
-  case "medium":
+  case 'medium':
     return weapon.is_artifact ? 1 : 1
-  case "heavy":
+  case 'heavy':
     return weapon.is_artifact ? 0 : -1
   }
 }
@@ -59,7 +59,7 @@ export function weaponDefenseBonus(weapon) {
 export function weaponDamage(character, weapon) {
   let damage = weaponDamageBonus(weapon)
 
-  if (weapon.tags.includes("crossbow") || weapon.tags.includes("flame")) {
+  if (weapon.tags.includes('crossbow') || weapon.tags.includes('flame')) {
     damage += 4
   } else {
     damage += character.attr_strength
@@ -70,13 +70,13 @@ export function weaponDamage(character, weapon) {
 
 export function weaponOverwhelming(weapon) {
   if (! weapon.is_artifact)
-    return 0
+    return 1
   switch(weapon.weight) {
-  case "light":
+  case 'light':
     return 3
-  case "medium":
+  case 'medium':
     return 4
-  case "heavy":
+  case 'heavy':
     return 5
   }
 }

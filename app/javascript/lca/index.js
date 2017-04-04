@@ -37,7 +37,7 @@ const store = createStore(
 )
 
 store.dispatch(configure({
-  apiUrl: "/api/v1",
+  apiUrl: '/api/v1',
   clientOnly: true,
 }))
 

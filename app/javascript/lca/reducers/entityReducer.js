@@ -65,7 +65,6 @@ function _receive_chronicle(state, action) {
 function _receive_char(state, action) {
   const newState = normalize(action.character, schemas.character)
 
-  const id = newState.result
   const newChar = newState.entities.characters
   const newWeapons = newState.entities.weapons
   const newMerits = newState.entities.merits
@@ -136,20 +135,18 @@ export default function EntityReducer(state = defaultState, action) {
     return _create_character(state, action)
 
   case c.UPDATE_CHARACTER:
-    const char = state.characters[action.id]
     return {... state, characters: {
       ...state.characters, [action.id]: {
-        ...char, [trait]: value } }
+        ...state.characters[action.id], [trait]: value } }
     }
 
   case c.CREATE_WEAPON_COMPLETE:
     return _create_weapon(state, action)
 
   case c.UPDATE_WEAPON:
-    const weap = state.weapons[action.id]
     return { ...state, weapons: {
       ...state.weapons, [action.id]: {
-        ...weap, [trait]: value } }
+        ...state.weapons[action.id], [trait]: value } }
     }
 
   case c.DESTROY_WEAPON_COMPLETE:
@@ -159,10 +156,9 @@ export default function EntityReducer(state = defaultState, action) {
     return _create_merit(state, action)
 
   case c.UPDATE_MERIT:
-    const merit = state.merits[action.id]
     return { ...state, merits: {
       ...state.merits, [action.id]: {
-        ...merit, [trait]: value } }
+        ...state.merits[action.id], [trait]: value } }
     }
   case c.DESTROY_MERIT_COMPLETE:
     return _destroy_merit(state, action)
@@ -171,10 +167,9 @@ export default function EntityReducer(state = defaultState, action) {
     return _create_qc(state, action)
 
   case c.UPDATE_QC:
-    const qc = state.qcs[action.id]
     return { ...state, qcs: {
       ...state.qcs, [action.id]: {
-        ...qc, [trait]: value } }
+        ...state.qcs[action.id], [trait]: value } }
     }
 
   case c.CREATE_QC_ATTACK_COMPLETE:
@@ -184,24 +179,22 @@ export default function EntityReducer(state = defaultState, action) {
     return _destroy_qc_attack(state, action)
 
   case c.UPDATE_QC_ATTACK:
-    const qca = state.qc_attacks[action.id]
     return { ...state, qc_attacks: {
       ...state.qc_attacks, [action.id]: {
-        ...qca, [trait]: value } }
+        ...state.qc_attacks[action.id], [trait]: value } }
     }
 
-    case c.CREATE_QC_MERIT_COMPLETE:
-      return _create_qc_merit(state, action)
+  case c.CREATE_QC_MERIT_COMPLETE:
+    return _create_qc_merit(state, action)
 
-    case c.DESTROY_QC_MERIT_COMPLETE:
-      return _destroy_qc_merit(state, action)
+  case c.DESTROY_QC_MERIT_COMPLETE:
+    return _destroy_qc_merit(state, action)
 
-    case c.UPDATE_QC_MERIT:
-      const qcm = state.qc_merits[action.id]
-      return { ...state, qc_merits: {
-        ...state.qc_merits, [action.id]: {
-          ...qcm, [trait]: value } }
-      }
+  case c.UPDATE_QC_MERIT:
+    return { ...state, qc_merits: {
+      ...state.qc_merits, [action.id]: {
+        ...state.qc_merits[action.id], [trait]: value } }
+    }
   default:
     return state
   }

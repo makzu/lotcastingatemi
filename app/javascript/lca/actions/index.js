@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+//import fetch from 'isomorphic-fetch'
 
 export { fetchCharacter, updateCharacter, createCharacter } from './_character.js'
 export { updateWeapon, createWeapon, destroyWeapon } from './_weapon.js'

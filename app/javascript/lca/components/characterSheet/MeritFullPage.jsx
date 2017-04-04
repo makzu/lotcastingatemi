@@ -15,7 +15,7 @@ import { updateMerit, createMerit, destroyMerit } from '../../actions'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import RatingDots from '../generic/ratingDots.jsx'
 
-function SingleMerit(props) {
+export function SingleMerit(props) {
   const { merit } = props
 
   return <div className="singleMerit">
@@ -35,7 +35,7 @@ function SingleMerit(props) {
   </div>
 }
 
-class SingleMeritEditor extends React.Component {
+export class SingleMeritEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = { merit: this.props.merit }

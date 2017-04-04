@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
 import * as calc from '../../utils/calculated'
+import { withAttributes, withAbilities } from '../../utils/propTypes'
 
 export function CombatBlock(props) {
   const { character } = props
@@ -40,6 +41,9 @@ export function CombatBlock(props) {
     </Table>
 
   </div>)
+}
+CombatBlock.propTypes = {
+  character: React.PropTypes.shape({ ...withAttributes, ...withAbilities })
 }
 
 export default CombatBlock

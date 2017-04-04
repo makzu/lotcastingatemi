@@ -13,6 +13,7 @@ import Checkbox from 'material-ui/Checkbox'
 
 import { updateMerit, createMerit, destroyMerit } from '../../actions'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
+import { fullMerit } from '../../utils/propTypes'
 import RatingDots from '../generic/ratingDots.jsx'
 
 export function SingleMerit(props) {
@@ -34,6 +35,9 @@ export function SingleMerit(props) {
     <Divider />
   </div>
 }
+SingleMerit.propTypes = {
+  merit: React.PropTypes.shape(fullMerit),
+}
 
 export class SingleMeritEditor extends React.Component {
   constructor(props) {
@@ -51,14 +55,13 @@ export class SingleMeritEditor extends React.Component {
     let val = e.target.value
 
     if (e.target.name == 'rating') {
-      val = parseInt(val)
-      val = Math.max(Math.min(val, MERIT_RATING_MAX), MERIT_RATING_MIN)
+      val = Math.max(Math.min(parseInt(val), MERIT_RATING_MAX), MERIT_RATING_MIN)
     } else if (e.target.type == 'checkbox') {
       val = ! this.state.merit[e.target.name]
       this.props.onUpdate(this.state.merit.id, this.props.character.id, e.target.name, val)
     }
 
-    this.setState({ merit: { ...this.state.merit, [e.target.name]: val } })
+    this.setState({ merit: { ...this.state.merit, [e.target.name]: val }})
   }
   handleBlur(e) {
     const trait = e.target.name
@@ -69,12 +72,12 @@ export class SingleMeritEditor extends React.Component {
   }
 
   handleCatChange(e, key, value) {
-    this.setState({ merit: { ...this.state.merit, merit_cat: value } })
+    this.setState({ merit: { ...this.state.merit, merit_cat: value }})
 
     this.props.onUpdate(this.state.merit.id, this.props.character.id, 'merit_cat', value)
   }
 
-  handleRemove(e) {
+  handleRemove() {
     this.props.onRemove(this.state.merit.id)
   }
 
@@ -133,6 +136,12 @@ export class SingleMeritEditor extends React.Component {
       <Divider />
     </div>
   }
+}
+SingleMeritEditor.propTypes = {
+  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
+  merit: React.PropTypes.shape(fullMerit),
+  onUpdate: React.PropTypes.func.isRequired,
+  onRemove: React.PropTypes.func.isRequired
 }
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
@@ -211,11 +220,17 @@ function mapStateToProps(state, ownProps) {
     merits = character.merits.map((id) => state.entities.merits[id])
   }
 
-  const { isFetching, isError } = state.app
   return {
     character,
     merits,
   }
+}
+MeritFullPage.propTypes = {
+  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
+  merits: React.PropTypes.arrayOf(React.PropTypes.shape(fullMerit)),
+  _handleUpdate: React.PropTypes.func,
+  _handleDestroy: React.PropTypes.func,
+  _handleCreate: React.PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

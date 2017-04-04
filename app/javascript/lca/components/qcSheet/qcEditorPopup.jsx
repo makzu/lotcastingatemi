@@ -13,6 +13,7 @@ import ExpandableListEditor from '../generic/expandableListEditor.jsx'
 import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack, createQcMerit, destroyQcMerit, updateQcMerit } from '../../actions'
 
 import * as c from '../../utils/constants.js'
+import { fullQc, qcAttack, qcMerit } from '../../utils/propTypes'
 
 class QcAttackFields extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class QcAttackFields extends React.Component {
       val = (val < 1) ? 1 : val
     }
 
-    this.setState({ attack: { ...this.state.attack, [e.target.name]: val } })
+    this.setState({ attack: { ...this.state.attack, [e.target.name]: val }})
   }
 
   handleBlur(e) {
@@ -73,6 +74,11 @@ class QcAttackFields extends React.Component {
     </div>
   }
 }
+QcAttackFields.propTypes = {
+  attack: React.PropTypes.shape(qcAttack).isRequired,
+  onAttackChange: React.PropTypes.func.isRequired,
+  onRemoveClick: React.PropTypes.func.isRequired
+}
 
 class QcMeritFields extends React.Component {
   constructor(props) {
@@ -93,7 +99,7 @@ class QcMeritFields extends React.Component {
 
   handleChange(e) {
     e.preventDefault()
-    this.setState({ merit: { ...this.state.merit, [e.target.name]: e.target.value } })
+    this.setState({ merit: { ...this.state.merit, [e.target.name]: e.target.value }})
   }
 
   handleBlur(e) {
@@ -125,8 +131,13 @@ class QcMeritFields extends React.Component {
     </div>
   }
 }
+QcMeritFields.propTypes = {
+  merit: React.PropTypes.shape(qcMerit).isRequired,
+  onMeritChange: React.PropTypes.func.isRequired,
+  onRemoveClick: React.PropTypes.func.isRequired
+}
 
-class _QcEditorPopup extends React.Component {
+class QcEditorPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -187,7 +198,7 @@ class _QcEditorPopup extends React.Component {
     } else
       val = e.target.value
 
-    this.setState({ qc: { ... this.state.qc, [e.target.name]: val } })
+    this.setState({ qc: { ... this.state.qc, [e.target.name]: val }})
   }
   handleBlur(e) {
     e.preventDefault()
@@ -199,12 +210,12 @@ class _QcEditorPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    this.setState({ qc: { ...this.state.qc, [trait]: value } })
+    this.setState({ qc: { ...this.state.qc, [trait]: value }})
     this.props.updateQc(this.state.qc.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    this.setState({ qc: { ...this.state.qc, [trait]: value } })
+    this.setState({ qc: { ...this.state.qc, [trait]: value }})
     this.props.updateQc(this.state.qc.id, trait, value)
   }
 
@@ -214,7 +225,7 @@ class _QcEditorPopup extends React.Component {
   handleAttackRemove(id) {
     this.props.removeQcAttack(id, this.state.qc.id)
   }
-  handleAttackAdd(e) {
+  handleAttackAdd() {
     this.props.addQcAttack(this.state.qc.id)
   }
 
@@ -224,7 +235,7 @@ class _QcEditorPopup extends React.Component {
   handleMeritRemove(id) {
     this.props.removeQcMerit(id, this.state.qc.id)
   }
-  handleMeritAdd(e) {
+  handleMeritAdd() {
     this.props.addQcMerit(this.state.qc.id)
   }
 
@@ -378,6 +389,18 @@ class _QcEditorPopup extends React.Component {
     </div>)
   }
 }
+QcEditorPopup.propTypes = {
+  qc: React.PropTypes.shape(fullQc).isRequired,
+  attacks: React.PropTypes.arrayOf(React.PropTypes.shape(qcAttack)),
+  merits: React.PropTypes.arrayOf(React.PropTypes.shape(qcMerit)),
+  updateQc: React.PropTypes.func,
+  updateQcAttack: React.PropTypes.func,
+  addQcAttack: React.PropTypes.func,
+  removeQcAttack: React.PropTypes.func,
+  updateQcMerit: React.PropTypes.func,
+  addQcMerit: React.PropTypes.func,
+  removeQcMerit: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -408,4 +431,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_QcEditorPopup)
+)(QcEditorPopup)

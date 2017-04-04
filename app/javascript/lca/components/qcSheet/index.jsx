@@ -5,6 +5,7 @@ import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import QcEditorPopup from './qcEditorPopup.jsx'
 
 import { updateQc } from '../../actions'
+import { fullQc, withMotePool, qcMerit, qcAttack } from '../../utils/propTypes'
 
 function MotePool(props){
   const { qc } = props
@@ -19,6 +20,9 @@ function MotePool(props){
   } else {
     return null
   }
+}
+MotePool.propTypes = {
+  qc: React.PropTypes.shape(withMotePool)
 }
 
 class QcSheet extends React.Component {
@@ -112,6 +116,12 @@ function mapStateToProps(state, ownProps) {
     isFetching,
     isError
   }
+}
+QcSheet.propTypes = {
+  qc: React.PropTypes.shape(fullQc),
+  qc_merits: React.PropTypes.arrayOf(React.PropTypes.shape(qcMerit)),
+  qc_attacks: React.PropTypes.arrayOf(React.PropTypes.shape(qcAttack)),
+  updateQc: React.PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

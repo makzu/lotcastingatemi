@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import { createCharacter, createQc } from '../../actions'
+import { fullChar, fullQc } from '../../utils/propTypes'
 
 function NewQcForm(props) {
   return <div style={{ display: 'inline-block', fontWeight: 'normal', fontSize: 'normal' }} className="newQcForm">
@@ -17,7 +18,6 @@ function NewQcForm(props) {
     />
   </div>
 }
-
 NewQcForm.propTypes = {
   name: React.PropTypes.string,
   onCreateClick: React.PropTypes.func.isRequired,
@@ -120,6 +120,13 @@ class CharacterList extends React.Component {
       <p>(TODO)</p>
     </div>
   }
+}
+CharacterList.propTypes = {
+  player: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
+  characters: React.PropTypes.arrayOf(React.PropTypes.shape(fullChar)),
+  qcs: React.PropTypes.arrayOf(React.PropTypes.shape(fullQc)),
+  createCharacter: React.PropTypes.func,
+  createQc: React.PropTypes.func
 }
 
 function mapStateToProps(state) {

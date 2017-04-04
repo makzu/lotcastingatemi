@@ -19,13 +19,10 @@ import WillpowerPopup from './editors/willpowerPopup.jsx'
 import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
 
 import RatingDots from '../generic/ratingDots.jsx'
-import { withWillpower } from '../../utils/propTypes'
+import { withWillpower, withSpecialties, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
 
 export function FullSpecialtyBlock(props) {
-  const character = props.character
-  const specialties = character.specialties
-
-  const spec = specialties.map((s) =>
+  const spec = props.character.specialties.map((s) =>
     <div key={s.ability + s.context}>
       <span className="specialtyAbility">
         { s.ability }
@@ -38,9 +35,12 @@ export function FullSpecialtyBlock(props) {
   )
 
   return(<div className="fullSpecialtyBlock">
-    <h3>Specialties<SpecialtyPopup character={ character } /></h3>
+    <h3>Specialties<SpecialtyPopup character={ props.character } /></h3>
     { spec }
   </div>)
+}
+FullSpecialtyBlock.propTypes = {
+  character: React.PropTypes.shape(withSpecialties).isRequired
 }
 
 export function MeritSummary(props) {
@@ -63,6 +63,10 @@ export function MeritSummary(props) {
 
     { merits}
   </div>)
+}
+MeritSummary.propTypes = {
+  character: React.PropTypes.shape(fullChar).isRequired,
+  merits: React.PropTypes.arrayOf(React.PropTypes.shape(fullMerit)).isRequired
 }
 
 export function IntimacySummary(props) {
@@ -93,6 +97,9 @@ export function IntimacySummary(props) {
     </div>
 
   </div>)
+}
+IntimacySummary.propTypes = {
+  character: React.PropTypes.shape(withIntimacies)
 }
 
 export function WillpowerBlock(props) {
@@ -155,6 +162,11 @@ export class CharacterSheet extends React.Component {
       </div>
     )
   }
+}
+CharacterSheet.propTypes = {
+  character: React.PropTypes.shape(fullChar),
+  weapons: React.PropTypes.arrayOf(React.PropTypes.shape(fullWeapon)),
+  merits: React.PropTypes.arrayOf(React.PropTypes.shape(fullMerit)).isRequired
 }
 
 function mapStateToProps(state, ownProps) {

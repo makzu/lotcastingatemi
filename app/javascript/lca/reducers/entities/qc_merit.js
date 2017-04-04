@@ -22,5 +22,5 @@ export function _destroy_qc_merit(state, action) {
   const char = { ...state.qcs[charId] }
   char.qc_merits = char.qc_merits.filter((e) => e != id)
 
-  return { ...state, qc_merits: newMerits, qcs: { ...state.qcs, [charId]: char } }
+  return { ...state, qc_merits: newMerits, qcs: { ...state.qcs, [charId]: char }}
 }

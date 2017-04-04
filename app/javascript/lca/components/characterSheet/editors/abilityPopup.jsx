@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
-import * as c from '../../../utils/constants.js'
+import { ABILITY_MAX, ABILITY_MIN } from '../../../utils/constants.js'
 import { withAbilities } from '../../../utils/propTypes'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
@@ -59,15 +59,9 @@ class AbilityPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    let val = parseInt(e.target.value)
+    let val = Math.max(Math.min(parseInt(e.target.value), ABILITY_MAX), ABILITY_MIN)
 
-    // leash the data into an acceptable range
-    if (val > c.ABILITY_MAX)
-      val = c.ABILITY_MAX
-    else if ( val < c.ABILITY_MIN)
-      val = c.ABILITY_MIN
-
-    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
+    this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }
 
   handleBlur(e) {
@@ -80,11 +74,12 @@ class AbilityPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    //this.setState({ character: { ...this.state.character, [trait]: value}})
+    this.setState({ character: { ...this.state.character, [trait]: value }})
+    this.props.updateChar(this.state.character.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value } })
+    this.setState({ character: { ...this.state.character, [trait]: value }})
     this.props.updateChar(this.state.character.id, trait, value)
   }
 
@@ -219,11 +214,11 @@ class AbilityPopup extends React.Component {
 
           <h4>Crafts:</h4>
           <ExpandableListEditor character={ character } trait="abil_craft"
-            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ c.ABILITY_MAX }
+            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ ABILITY_MAX }
           />
           <h4>Martial Arts:</h4>
           <ExpandableListEditor character={ character } trait="abil_martial_arts"
-            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ c.ABILITY_MAX }
+            onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ ABILITY_MAX }
           />
         </div>
       </Dialog>

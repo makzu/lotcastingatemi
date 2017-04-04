@@ -63,7 +63,7 @@
   "scripts": {
     "test": "jest",
     "testcov": "jest --coverage",
-    "lint": "eslint app/javascript/"
+    "lint": "eslint app/javascript/ --ext js,jsx"
   },
   "jest": {
     "roots": [

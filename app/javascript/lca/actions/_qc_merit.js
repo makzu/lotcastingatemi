@@ -26,7 +26,7 @@ export function updateQcMerit(id, qcId, trait, value) {
 
     return fetch(`/api/v1/qcs/${qcId}/qc_merits/${id}`, {
       method: 'PATCH',
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(wp)
     }).then(response => response.json())
       .then(json =>
@@ -58,7 +58,7 @@ export function createQcMerit(qcId) {
 
     return fetch(`/api/v1/qcs/${qcId}/qc_merits`, {
       method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(qc_merit)
     }).then(response => response.json())
       .then(json =>
@@ -88,7 +88,7 @@ export function destroyQcMerit(id, qcId) {
 
     return fetch(`/api/v1/qcs/${qcId}/qc_merits/${id}`, {
       method: 'DELETE',
-      headers: new Headers({'Content-Type': 'application/json'})
+      headers: new Headers({ 'Content-Type': 'application/json' })
     }).then(response => response.json())
       .then(json =>
         dispatch(destroyQcMeritComplete(json))

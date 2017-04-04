@@ -5,10 +5,11 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
 import { updateCharacter } from '../../../actions'
+import { withSpecialties } from '../../../utils/propTypes'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
-class _SpecialtyPopup extends React.Component {
+class SpecialtyPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -38,7 +39,7 @@ class _SpecialtyPopup extends React.Component {
 
     const val = parseInt(e.target.value)
 
-    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
+    this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }
 
   handleBlur(e) {
@@ -51,18 +52,18 @@ class _SpecialtyPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value } })
+    this.setState({ character: { ...this.state.character, [trait]: value }})
     this.props.updateChar(this.state.character.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value } })
+    this.setState({ character: { ...this.state.character, [trait]: value }})
     this.props.updateChar(this.state.character.id, trait, value)
   }
 
   render() {
     const character = this.state.character
-    const { handleOpen, handleClose, handleChange, handleBlur, onListChange, onListBlur } = this
+    const { handleOpen, handleClose, onListChange, onListBlur } = this
 
     const actions = [
       <FlatButton
@@ -90,6 +91,10 @@ class _SpecialtyPopup extends React.Component {
     </div>)
   }
 }
+SpecialtyPopup.propTypes = {
+  character: React.PropTypes.shape(withSpecialties).isRequired,
+  updateChar: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -102,4 +107,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_SpecialtyPopup)
+)(SpecialtyPopup)

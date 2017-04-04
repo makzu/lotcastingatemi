@@ -21,7 +21,7 @@ const history = createHistory()
 
 let enhancer
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') { // eslint-disable-line no-undef
   enhancer = applyMiddleware(thunk, routerMiddleware(history))
 } else {
   enhancer = compose(
@@ -55,8 +55,8 @@ const render = (Component) => {
 
 render(RootContainer)
 
-if (module.hot) {
-  module.hot.accept('./containers/rootContainer.jsx', () => {
+if (module.hot) { // eslint-disable-line no-undef
+  module.hot.accept('./containers/rootContainer.jsx', () => { // eslint-disable-line no-undef
     render( RootContainer )
   })
 }

@@ -22,5 +22,5 @@ export function _destroy_weapon(state, action) {
   const char = { ...state.characters[charId] }
   char.weapons = char.weapons.filter((e) => e != id)
 
-  return { ...state, weapons: newWeapons, characters: { ...state.characters, [charId]: char } }
+  return { ...state, weapons: newWeapons, characters: { ...state.characters, [charId]: char }}
 }

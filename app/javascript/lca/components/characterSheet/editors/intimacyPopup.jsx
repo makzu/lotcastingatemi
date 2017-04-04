@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 
 import { INTIMACY_RATING_MAX } from '../../../utils/constants.js'
 import { updateCharacter } from '../../../actions'
+import { withIntimacies } from '../../../utils/propTypes'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
@@ -33,12 +34,12 @@ class IntimacyPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value } })
+    this.setState({ character: { ...this.state.character, [trait]: value }})
     this.props.updateChar(this.state.character.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value } })
+    this.setState({ character: { ...this.state.character, [trait]: value }})
     this.props.updateChar(this.state.character.id, trait, value)
   }
 
@@ -78,6 +79,7 @@ class IntimacyPopup extends React.Component {
   }
 }
 IntimacyPopup.propTypes = {
+  character: React.PropTypes.shape(withIntimacies).isRequired,
   updateChar: React.PropTypes.func
 }
 

@@ -9,6 +9,7 @@ import MenuItem from 'material-ui/MenuItem'
 import Checkbox from 'material-ui/Checkbox'
 
 import { updateCharacter } from '../../../actions'
+import { withArmorStats } from '../../../utils/propTypes'
 
 class ArmorPopup extends React.Component {
   constructor(props) {
@@ -50,11 +51,11 @@ class ArmorPopup extends React.Component {
     } else
       val = e.target.value
 
-    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
+    this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }
 
   handleWeightChange(e, key, value) {
-    this.setState({ character: { ...this.state.character, armor_weight: value } })
+    this.setState({ character: { ...this.state.character, armor_weight: value }})
 
     this.props.updateChar(this.state.character.id, 'armor_weight', value)
   }
@@ -124,6 +125,7 @@ class ArmorPopup extends React.Component {
   }
 }
 ArmorPopup.propTypes = {
+  character: React.PropTypes.shape(withArmorStats).isRequired,
   updateChar: React.PropTypes.func
 }
 

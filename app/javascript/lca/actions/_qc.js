@@ -26,7 +26,7 @@ export function updateQc(id, trait, value) {
 
     return fetch(`/api/v1/qcs/${id}`, {
       method: 'PATCH',
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(mt)
     }).then(response => response.json())
       .then(json =>
@@ -57,7 +57,7 @@ export function createQc(playerId, chronicleId, name) {
 
     return fetch('/api/v1/qcs', {
       method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(qc)
     }).then(response => response.json())
       .then(json =>

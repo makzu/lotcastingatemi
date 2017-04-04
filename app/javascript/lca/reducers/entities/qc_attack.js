@@ -22,5 +22,5 @@ export function _destroy_qc_attack(state, action) {
   const char = { ...state.qcs[charId] }
   char.qc_attacks = char.qc_attacks.filter((e) => e != id)
 
-  return { ...state, qc_attacks: newWeapons, qcs: { ...state.qcs, [charId]: char } }
+  return { ...state, qc_attacks: newWeapons, qcs: { ...state.qcs, [charId]: char }}
 }

@@ -45,7 +45,7 @@ class HealthLevelPopup extends React.Component {
         val = c.HEALTH_LEVEL_MAX
     }
 
-    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
+    this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }
 
   handleBlur(e) {

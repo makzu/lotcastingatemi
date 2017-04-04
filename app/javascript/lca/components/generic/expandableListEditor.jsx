@@ -8,6 +8,7 @@ import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
 import * as calc from '../../utils/calculated'
+import { withSpecialties, withAbilities, specialty } from '../../utils/propTypes'
 
 function CraftFields(props) {
   const { trait, index, onChange, onBlur } = props
@@ -25,6 +26,15 @@ function CraftFields(props) {
       onChange={ onChange } onBlur={ onBlur }
     />
   </span>)
+}
+CraftFields.propTypes = {
+  trait: React.PropTypes.shape({
+    craft: React.PropTypes.string.isRequired,
+    rating: React.PropTypes.number.isRequired
+  }).isRequired,
+  index: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired,
 }
 
 function QcActionFields(props) {
@@ -44,6 +54,15 @@ function QcActionFields(props) {
     />
   </span>)
 }
+QcActionFields.propTypes = {
+  trait: React.PropTypes.shape({
+    action: React.PropTypes.string.isRequired,
+    pool: React.PropTypes.number.isRequired
+  }).isRequired,
+  index: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired,
+}
 
 function MartialArtFields(props) {
   const { trait, index, onChange, onBlur } = props
@@ -61,6 +80,15 @@ function MartialArtFields(props) {
       onChange={ onChange } onBlur={ onBlur }
     />
   </span>)
+}
+MartialArtFields.propTypes = {
+  trait: React.PropTypes.shape({
+    style: React.PropTypes.string.isRequired,
+    rating: React.PropTypes.number.isRequired
+  }).isRequired,
+  index: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired,
 }
 
 function SpecialtyFields(props) {
@@ -91,6 +119,14 @@ function SpecialtyFields(props) {
     />
   </span>)
 }
+SpecialtyFields.propTypes = {
+  character: React.PropTypes.shape({ ...withSpecialties, ...withAbilities }).isRequired,
+  trait: React.PropTypes.shape(specialty).isRequired,
+  index: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired,
+  onSpecialtyAbilityChange: React.PropTypes.func.isRequired
+}
 
 function IntimacyFields(props) {
   const { trait, index, onChange, onBlur } = props
@@ -109,6 +145,15 @@ function IntimacyFields(props) {
       onChange={ onChange } onBlur={ onBlur }
     />
   </span>)
+}
+IntimacyFields.propTypes = {
+  trait: React.PropTypes.shape({
+    subject: React.PropTypes.string.isRequired,
+    rating: React.PropTypes.number.isRequired
+  }).isRequired,
+  index: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired,
 }
 
 function TraitFields(props) {
@@ -143,6 +188,11 @@ function TraitFields(props) {
     { fields }
     <IconButton onClick={ click } style={{ minWidth: '2em' }}><ContentRemoveCircle /></IconButton>
   </div>)
+}
+TraitFields.propTypes = {
+  traitName: React.PropTypes.string.isRequired,
+  index: React.PropTypes.number.isRequired,
+  onRemove: React.PropTypes.func.isRequired
 }
 
 export default class ExpandableListEditor extends React.Component {
@@ -261,7 +311,6 @@ export default class ExpandableListEditor extends React.Component {
       break
     }
 
-
     const traits = this.state.trait.map((e, index) =>
       <TraitFields key={ index } index={ index } character={ character }
         traitName={ trait } trait={ e }
@@ -277,4 +326,11 @@ export default class ExpandableListEditor extends React.Component {
       </div>
     )
   }
+}
+ExpandableListEditor.propTypes = {
+  character: React.PropTypes.shape({ ...withSpecialties, ...withAbilities }).isRequired,
+  trait: React.PropTypes.string.isRequired,
+  onUpdate: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired,
+  numberMax: React.PropTypes.number
 }

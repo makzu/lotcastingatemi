@@ -135,9 +135,9 @@ export default function EntityReducer(state = defaultState, action) {
     return _create_character(state, action)
 
   case c.UPDATE_CHARACTER:
-    return {... state, characters: {
+    return { ... state, characters: {
       ...state.characters, [action.id]: {
-        ...state.characters[action.id], [trait]: value } }
+        ...state.characters[action.id], [trait]: value }}
     }
 
   case c.CREATE_WEAPON_COMPLETE:
@@ -146,7 +146,7 @@ export default function EntityReducer(state = defaultState, action) {
   case c.UPDATE_WEAPON:
     return { ...state, weapons: {
       ...state.weapons, [action.id]: {
-        ...state.weapons[action.id], [trait]: value } }
+        ...state.weapons[action.id], [trait]: value }}
     }
 
   case c.DESTROY_WEAPON_COMPLETE:
@@ -158,7 +158,7 @@ export default function EntityReducer(state = defaultState, action) {
   case c.UPDATE_MERIT:
     return { ...state, merits: {
       ...state.merits, [action.id]: {
-        ...state.merits[action.id], [trait]: value } }
+        ...state.merits[action.id], [trait]: value }}
     }
   case c.DESTROY_MERIT_COMPLETE:
     return _destroy_merit(state, action)
@@ -169,7 +169,7 @@ export default function EntityReducer(state = defaultState, action) {
   case c.UPDATE_QC:
     return { ...state, qcs: {
       ...state.qcs, [action.id]: {
-        ...state.qcs[action.id], [trait]: value } }
+        ...state.qcs[action.id], [trait]: value }}
     }
 
   case c.CREATE_QC_ATTACK_COMPLETE:
@@ -181,7 +181,7 @@ export default function EntityReducer(state = defaultState, action) {
   case c.UPDATE_QC_ATTACK:
     return { ...state, qc_attacks: {
       ...state.qc_attacks, [action.id]: {
-        ...state.qc_attacks[action.id], [trait]: value } }
+        ...state.qc_attacks[action.id], [trait]: value }}
     }
 
   case c.CREATE_QC_MERIT_COMPLETE:
@@ -193,7 +193,7 @@ export default function EntityReducer(state = defaultState, action) {
   case c.UPDATE_QC_MERIT:
     return { ...state, qc_merits: {
       ...state.qc_merits, [action.id]: {
-        ...state.qc_merits[action.id], [trait]: value } }
+        ...state.qc_merits[action.id], [trait]: value }}
     }
   default:
     return state

@@ -12,10 +12,10 @@ describe('AppReducer', () => {
   })
 
   it('should handle TOGGLE_MENU', () => {
-    expect(appReducer({navDrawerOpen: false},{type: c.TOGGLE_MENU})).toEqual({
+    expect(appReducer({ navDrawerOpen: false },{ type: c.TOGGLE_MENU })).toEqual({
       navDrawerOpen: true
     })
-    expect(appReducer({navDrawerOpen: true},{type: c.TOGGLE_MENU})).toEqual({
+    expect(appReducer({ navDrawerOpen: true },{ type: c.TOGGLE_MENU })).toEqual({
       navDrawerOpen: false
     })
   })

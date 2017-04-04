@@ -48,7 +48,7 @@ class BasicsEditorPopup extends React.Component {
       val = e.target.value
     }
 
-    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
+    this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }
 
   handleBlur(e) {

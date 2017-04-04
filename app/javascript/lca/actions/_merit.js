@@ -25,7 +25,7 @@ export function updateMerit(id, charId, trait, value) {
 
     return fetch(`/api/v1/characters/${charId}/merits/${id}`, {
       method: 'PATCH',
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(mt)
     }).then(response => response.json())
       .then(json =>
@@ -57,7 +57,7 @@ export function createMerit(charId) {
 
     return fetch(`/api/v1/characters/${charId}/merits`, {
       method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(merit)
     }).then(response => response.json())
       .then(json =>
@@ -87,7 +87,7 @@ export function destroyMerit(id, charId) {
 
     return fetch(`/api/v1/characters/${charId}/merits/${id}`, {
       method: 'DELETE',
-      headers: new Headers({'Content-Type': 'application/json'})
+      headers: new Headers({ 'Content-Type': 'application/json' })
     }).then(response => response.json())
       .then(json =>
         dispatch(destroyMeritComplete(json))

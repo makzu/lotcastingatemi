@@ -5,6 +5,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import ArmorPopup from './editors/armorPopup.jsx'
 
 import * as calc from '../../utils/calculated'
+import { withArmorStats } from '../../utils/propTypes'
 
 export default function ArmorSummary(props) {
   const { character } = props
@@ -42,4 +43,7 @@ export default function ArmorSummary(props) {
       </TableBody>
     </Table>
   </div>)
+}
+ArmorSummary.propTypes = {
+  character: React.PropTypes.shape(withArmorStats)
 }

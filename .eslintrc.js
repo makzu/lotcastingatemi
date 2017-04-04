@@ -32,7 +32,8 @@ module.exports = {
     ],
     'object-curly-spacing': [
       'error',
-      'always'
+      'always',
+      { 'objectsInObjects': false }
     ],
     "jsx-quotes": [
       "warn",

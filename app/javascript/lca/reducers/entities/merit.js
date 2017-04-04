@@ -22,5 +22,5 @@ export function _destroy_merit(state, action) {
   const char = { ...state.characters[charId] }
   char.merits = char.merits.filter((e) => e != id)
 
-  return { ...state, merits: newWeapons, characters: { ...state.characters, [charId]: char } }
+  return { ...state, merits: newWeapons, characters: { ...state.characters, [charId]: char }}
 }

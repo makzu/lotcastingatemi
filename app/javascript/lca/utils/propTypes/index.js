@@ -54,3 +54,104 @@ export const withAbilities = {
   abil_thrown:        PropTypes.number.isRequired,
   abil_war:           PropTypes.number.isRequired
 }
+
+export const withArmorStats = {
+  armor_name: PropTypes.string,
+  armor_is_artifact: PropTypes.bool,
+  armor_tags: PropTypes.arrayOf(PropTypes.string)
+}
+
+export const specialty = {
+  ability: PropTypes.string.isRequired,
+  context: PropTypes.string.isRequired
+}
+export const withSpecialties = {
+  specialties: PropTypes.arrayOf(PropTypes.shape({ specialty }))
+}
+
+export const withBasicInfo = {
+  id:                 PropTypes.number.isRequired,
+  name:               PropTypes.string.isRequired,
+  description:        PropTypes.string.isRequired,
+  essence:            PropTypes.number.isRequired
+}
+
+export const withIntimacies = {
+  principles: PropTypes.arrayOf(PropTypes.shape({
+
+  })),
+  ties: PropTypes.arrayOf(PropTypes.shape({
+
+  }))
+}
+
+export const withCombatInfo = {
+  initiative:         PropTypes.number.isRequired,
+  onslaught:          PropTypes.number.isRequired
+}
+
+export const withMotePool = {
+  motes_personal_total: PropTypes.number.isRequired,
+  motes_personal_current: PropTypes.number.isRequired,
+  motes_peripheral_total: PropTypes.number.isRequired,
+  motes_peripheral_current: PropTypes.number.isRequired
+}
+
+export const qcAttack = {
+  name: PropTypes.string.isRequired,
+  pool: PropTypes.number.isRequired
+}
+export const qcMerit = {
+  name: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired
+}
+
+export const fullQc = {
+  ...withWillpower,
+  ...withHealthLevels,
+  ...withBasicInfo,
+  ...withCombatInfo,
+  ...withMotePool,
+  ...withIntimacies,
+  join_battle: PropTypes.number.isRequired,
+  movement: PropTypes.number.isRequired,
+  soak: PropTypes.number.isRequired,
+  hardness: PropTypes.number.isRequired,
+  appearance: PropTypes.number.isRequired,
+  resolve: PropTypes.number.isRequired,
+  guile: PropTypes.number.isRequired,
+  evasion: PropTypes.number.isRequired,
+  parry: PropTypes.number.isRequired,
+  armor_name: PropTypes.string.isRequired,
+  ref: PropTypes.string,
+}
+
+export const fullChar = {
+  ...withWillpower,
+  ...withHealthLevels,
+  ...withBasicInfo,
+  ...withCombatInfo,
+  ...withArmorStats,
+  ...withIntimacies
+}
+
+export const fullWeapon = {
+  id: PropTypes.number.isRequired,
+  character_id: PropTypes.number.isRequired,
+  weight: PropTypes.string.isRequired,
+  is_artifact: PropTypes.bool.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string),
+  ability: PropTypes.string
+}
+
+export const fullMerit = {
+  id: PropTypes.number.isRequired,
+  character_id: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  merit_name: PropTypes.string,
+  merit_cat: PropTypes.string,
+  description: PropTypes.string,
+  ref: PropTypes.string,
+  supernatural: PropTypes.bool,
+  prereqs: PropTypes.string
+}

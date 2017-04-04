@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Divider from 'material-ui/Divider'
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 import FlatButton from 'material-ui/FlatButton'
 import IconButton from 'material-ui/FlatButton'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
@@ -70,7 +69,7 @@ function WeaponEditHeader() {
 function WeightSelect(props) {
   return(
     <SelectField name="weight" value={ props.weapon.weight }
-      onChange={ props.onChange } style={{width: '4em'}}>
+      onChange={ props.onChange } style={{ width: '4em' }}>
       <MenuItem value="light" label="L" primaryText="Light" />
       <MenuItem value="medium" label="M" primaryText="Medium" />
       <MenuItem value="heavy" label="H" primaryText="Heavy" />
@@ -80,7 +79,7 @@ function WeightSelect(props) {
 
 function AbilitySelect(props) {
   const options = calc.attackAbilities(props.character).map((abil) =>
-    <MenuItem key={ abil.abil } value={abil.abil} primaryText={ abil.abil + "(" + abil.rating + ")" } />
+    <MenuItem key={ abil.abil } value={abil.abil} primaryText={ abil.abil + '(' + abil.rating + ')' } />
   )
   return(
     <SelectField name="ability" value={ props.weapon.ability }
@@ -106,15 +105,15 @@ class WeaponFieldset extends React.Component {
     e.preventDefault()
     let val = null
 
-    if (e.target.type == "checkbox") {
+    if (e.target.type == 'checkbox') {
       val = ! this.state.weapon[e.target.name]
       this.props.onUpdate(this.state.weapon.id, this.state.weapon.character_id, e.target.name, val)
-    } else if (e.target.name == "tags")
-      val = e.target.value.split(",")
+    } else if (e.target.name == 'tags')
+      val = e.target.value.split(',')
     else
       val = e.target.value
 
-    this.setState({weapon: {...this.state.weapon, [e.target.name]: val}})
+    this.setState({ weapon: { ...this.state.weapon, [e.target.name]: val } })
   }
 
   handleBlur(e) {
@@ -129,13 +128,13 @@ class WeaponFieldset extends React.Component {
   handleWeightChange(e, key, value) {
     this.setState({ weapon: { ...this.state.weapon, weight: value } })
 
-    this.props.onUpdate(this.state.weapon.id, this.props.character.id, "weight", value)
+    this.props.onUpdate(this.state.weapon.id, this.props.character.id, 'weight', value)
   }
 
   handleAbilityChange(e, key, value) {
     this.setState({ weapon: { ...this.state.weapon, ability: value } })
 
-    this.props.onUpdate(this.state.weapon.id, this.props.character.id, "ability", value)
+    this.props.onUpdate(this.state.weapon.id, this.props.character.id, 'ability', value)
   }
 
   handleRemove(e) {
@@ -148,8 +147,8 @@ class WeaponFieldset extends React.Component {
     const weapon = this.state.weapon
 
     return <TableRow>
-      <TableRowColumn style={{verticalAlign: 'bottom'}}>
-        <TextField name="name" value={ weapon.name || "" }
+      <TableRowColumn style={{ verticalAlign: 'bottom' }}>
+        <TextField name="name" value={ weapon.name }
           onBlur={ handleBlur } onChange={ handleChange } />
       </TableRowColumn>
       <TableRowColumn style={{ width: '5em', verticalAlign: 'baseline' }}>
@@ -160,11 +159,11 @@ class WeaponFieldset extends React.Component {
           onCheck={ handleChange }
         />
       </TableRowColumn>
-      <TableRowColumn style={{verticalAlign: 'bottom'}}>
-        <TextField name="tags" value={ weapon.tags || "" }
+      <TableRowColumn style={{ verticalAlign: 'bottom' }}>
+        <TextField name="tags" value={ weapon.tags }
           onBlur={ handleBlur } onChange={ handleChange } />
       </TableRowColumn>
-      <TableRowColumn style={{verticalAlign: 'bottom'}}>
+      <TableRowColumn style={{ verticalAlign: 'bottom' }}>
         <AbilitySelect character={ character } weapon={ weapon }
           onChange={ handleAbilityChange }
         />
@@ -173,10 +172,10 @@ class WeaponFieldset extends React.Component {
         { calc.witheringAttackPool(character, weapon) }
       </TableRowColumn>
       <TableRowColumn style={{ width: '2em' }}>
-        { calc.weaponDamage(character, weapon)}
+        { calc.weaponDamage(character, weapon) }
       </TableRowColumn>
       <TableRowColumn style={{ width: '2em' }}>
-        <IconButton onClick={ this.handleRemove } style={{minWidth: '2em'}}>
+        <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
           <ContentRemoveCircle />
         </IconButton>
       </TableRowColumn>
@@ -198,7 +197,7 @@ class WeaponSummary extends React.Component {
   }
 
   toggleEditor() {
-    this.setState({isEditing: !this.state.isEditing})
+    this.setState({ isEditing: !this.state.isEditing })
   }
 
   handleUpdate(id, charId, trait, value) {
@@ -227,7 +226,7 @@ class WeaponSummary extends React.Component {
 
     return (<div className="weaponSummaryBlock">
       <h3>Weapons
-        <FlatButton label={this.state.isEditing ? "done" : "edit"}
+        <FlatButton label={this.state.isEditing ? 'done' : 'edit' }
           onClick={ this.toggleEditor }
           style={{ float: 'right' }}
         />

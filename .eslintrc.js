@@ -30,6 +30,10 @@ module.exports = {
       "single",
       { "allowTemplateLiterals": true }
     ],
+    'object-curly-spacing': [
+      'error',
+      'always'
+    ],
     "jsx-quotes": [
       "warn",
       "prefer-double"

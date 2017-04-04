@@ -36,12 +36,12 @@ export function FullSpecialtyBlock(props) {
       </span>
       <Divider />
     </div>
-  );
+  )
 
   return(<div className="fullSpecialtyBlock">
     <h3>Specialties<SpecialtyPopup character={ character } /></h3>
     { spec }
-  </div>);
+  </div>)
 }
 
 export function MeritSummary(props) {
@@ -54,16 +54,16 @@ export function MeritSummary(props) {
       <RatingDots rating={merit.rating} dontFill />
       <Divider />
     </div>
-  );
+  )
 
   return(<div className="meritSummaryBlock">
     <h3>
-      <Link to={"/characters/" + props.character.id + "/merits"}>Merits</Link>
+      <Link to={'/characters/' + props.character.id + '/merits'}>Merits</Link>
       {/*<AllMeritsPopup character={ props.character } merits={ props.merits } /> */}
     </h3>
 
     { merits}
-  </div>);
+  </div>)
 }
 
 export function IntimacySummary(props) {
@@ -93,7 +93,7 @@ export function IntimacySummary(props) {
       { ties }
     </div>
 
-  </div>);
+  </div>)
 }
 
 export function WillpowerBlock(props) {
@@ -150,7 +150,7 @@ export class CharacterSheet extends React.Component {
         <IntimacySummary character={ character } />
 
       </div>
-    );
+    )
   }
 }
 

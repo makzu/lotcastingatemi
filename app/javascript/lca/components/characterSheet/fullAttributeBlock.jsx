@@ -12,7 +12,7 @@ function AttributeBlock(props) {
   return(<div className="attributeBlock">
     <span className="attributeName">{ props.attribute }:</span>
     <RatingDots rating={ props.rating } />
-  </div>);
+  </div>)
 }
 
 class FullAttributeBlock extends React.Component {
@@ -28,11 +28,11 @@ class FullAttributeBlock extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({character: nextProps.character})
+    this.setState({ character: nextProps.character })
   }
 
   toggleEditor() {
-    this.setState({isEditing: !this.state.isEditing})
+    this.setState({ isEditing: !this.state.isEditing })
   }
 
   render() {
@@ -70,7 +70,7 @@ class FullAttributeBlock extends React.Component {
           <AttributeBlock attribute="Wits" rating={ character.attr_wits} />
         </div>
       </div>
-    );
+    )
   }
 }
 

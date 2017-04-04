@@ -77,22 +77,22 @@ export default function HealthLevelBoxes(props) {
 
   for (var i = 0; i < totalHealthLevels; i++) {
     if (lv0s > 0) {
-      level = "0"
+      level = '0'
       lv0s--
     } else if (lv1s > 0) {
-      level = "-1"
+      level = '-1'
       lv1s--
     } else if (lv2s > 0) {
-      level = "-2"
+      level = '-2'
       lv2s--
     } else if (lv4s > 0) {
-      level = "-4"
+      level = '-4'
       lv4s--
     } else if (lvis > 0) {
-      level = "in"
+      level = 'in'
       lvis--
     } else {
-      level = "X"
+      level = 'X'
     }
 
     if (aggDamage > 0) {

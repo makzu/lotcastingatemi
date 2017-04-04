@@ -36,7 +36,7 @@ class _BasicsEditorPopup extends React.Component {
 
     let val
 
-    if (e.target.type == "number") {
+    if (e.target.type == 'number') {
       val = parseInt(e.target.value)
 
       if (val > c.ESSENCE_MAX) {
@@ -48,7 +48,7 @@ class _BasicsEditorPopup extends React.Component {
       val = e.target.value
     }
 
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
+    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
   }
 
   handleBlur(e) {

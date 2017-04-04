@@ -39,7 +39,7 @@ class _WillpowerPopup extends React.Component {
     else if (val < c.WILLPOWER_MIN)
       val = c.WILLPOWER_MIN
 
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
+    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
   }
 
   handleBlur(e) {

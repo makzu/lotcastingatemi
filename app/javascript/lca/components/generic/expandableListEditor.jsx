@@ -120,20 +120,20 @@ function TraitFields(props) {
   let fields
 
   switch(traitName) {
-  case "abil_craft":
+  case 'abil_craft':
     fields = <CraftFields {...props} />
     break
-  case "abil_martial_arts":
+  case 'abil_martial_arts':
     fields = <MartialArtFields {...props} />
     break
-  case "specialties":
+  case 'specialties':
     fields = <SpecialtyFields {...props} />
     break
-  case "ties":
-  case "principles":
+  case 'ties':
+  case 'principles':
     fields = <IntimacyFields {...props} />
     break
-  case "actions":
+  case 'actions':
     fields = <QcActionFields {...props} />
     break
   }
@@ -144,7 +144,7 @@ function TraitFields(props) {
 
   return(<div>
     { fields }
-    <IconButton onClick={ click } style={{minWidth: '2em'}}><ContentRemoveCircle /></IconButton>
+    <IconButton onClick={ click } style={{ minWidth: '2em' }}><ContentRemoveCircle /></IconButton>
   </div>)
 }
 
@@ -169,7 +169,7 @@ export default class ExpandableListEditor extends React.Component {
     const Max = this.props.numberMax
 
     let val
-    if (e.target.type == "number") {
+    if (e.target.type == 'number') {
       val = parseInt(e.target.value)
       if (Max && val > Max)
         val = Max
@@ -211,21 +211,21 @@ export default class ExpandableListEditor extends React.Component {
     let newTrait
 
     switch(this.props.trait) {
-    case "abil_craft":
-      newTrait = { craft: "", rating: 0 }
+    case 'abil_craft':
+      newTrait = { craft: '', rating: 0 }
       break
-    case "abil_martial_arts":
-      newTrait = {style: "", rating: 0}
+    case 'abil_martial_arts':
+      newTrait = { style: '', rating: 0 }
       break
-    case "specialties":
-      newTrait = {ability: "", context: ""}
+    case 'specialties':
+      newTrait = { ability: '', context: '' }
       break
-    case "ties":
-    case "principles":
-      newTrait = {subject: "", rating: 0}
+    case 'ties':
+    case 'principles':
+      newTrait = { subject: '', rating: 0 }
       break
-    case "actions":
-      newTrait = {action: "", pool: 0}
+    case 'actions':
+      newTrait = { action: '', pool: 0 }
     }
 
     this.setState({ trait: [ ...this.state.trait, newTrait ] })
@@ -244,23 +244,23 @@ export default class ExpandableListEditor extends React.Component {
     const { onChange, onSpecialtyAbilityChange, onBlur, onAdd, onRemove } = this
     let traitName
     switch(trait){
-    case "abil_craft":
-      traitName = "Craft"
+    case 'abil_craft':
+      traitName = 'Craft'
       break
-    case "abil_martial_arts":
-      traitName = "Martial Art"
+    case 'abil_martial_arts':
+      traitName = 'Martial Art'
       break
-    case "specialties":
-      traitName = "Specialty"
+    case 'specialties':
+      traitName = 'Specialty'
       break
-    case "principles":
-      traitName = "Principle"
+    case 'principles':
+      traitName = 'Principle'
       break
-    case "ties":
-      traitName = "Tie"
+    case 'ties':
+      traitName = 'Tie'
       break
-    case "actions":
-      traitName = "Action"
+    case 'actions':
+      traitName = 'Action'
       break
     }
 
@@ -276,7 +276,7 @@ export default class ExpandableListEditor extends React.Component {
     return (
       <div>
         { traits }
-        <RaisedButton label={ "Add " + traitName } icon={ <ContentAddCircle /> } onClick={ onAdd } data-trait={ trait } />
+        <RaisedButton label={ 'Add ' + traitName } icon={ <ContentAddCircle /> } onClick={ onAdd } data-trait={ trait } />
       </div>
     )
   }

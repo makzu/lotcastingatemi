@@ -79,12 +79,12 @@ class QcSheet extends React.Component {
         <strong>Guile:</strong> { qc.guile },
         <strong>Appearance:</strong> { qc.appearance }<br />
         <strong>Actions:</strong>
-        Senses: { qc.senses },{" "}
+        Senses: { qc.senses },{' '}
         { actions }
       </div>
 
       <div>
-        <h4 style={{marginBottom: '0.25em'}}>Merits:</h4>
+        <h4 style={{ marginBottom: '0.25em' }}>Merits:</h4>
         { merits }
       </div>
     </div>)

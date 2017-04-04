@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
 import ArmorPopup from './editors/armorPopup.jsx'
 
@@ -37,7 +37,7 @@ export default function ArmorSummary(props) {
           <TableRowColumn className="soakColumn">{ naturalSoak + armorSoak }</TableRowColumn>
           <TableRowColumn className="hardnessColumn">{ calc.hardness(character) }</TableRowColumn>
           <TableRowColumn className="mobPenColumn">{ calc.mobilityPenalty(character) }</TableRowColumn>
-          <TableRowColumn>{ character.armor_tags.join(", ") }</TableRowColumn>
+          <TableRowColumn>{ character.armor_tags.join(', ') }</TableRowColumn>
         </TableRow>
       </TableBody>
     </Table>

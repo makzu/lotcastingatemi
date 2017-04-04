@@ -59,7 +59,7 @@ class _AbilityPopup extends React.Component {
     else if ( val < c.ABILITY_MIN)
       val = c.ABILITY_MIN
 
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
+    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
   }
 
   handleBlur(e) {
@@ -76,7 +76,7 @@ class _AbilityPopup extends React.Component {
   }
 
   onListBlur(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value}})
+    this.setState({ character: { ...this.state.character, [trait]: value } })
     this.props.updateChar(this.state.character.id, trait, value)
   }
 

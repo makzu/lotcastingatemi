@@ -38,25 +38,25 @@ class _ArmorPopup extends React.Component {
     e.preventDefault()
     let val = null
 
-    if (e.target.type == "number")
+    if (e.target.type == 'number')
       val = parseInt(e.target.value)
 
-    else if (e.target.type == "checkbox") {
+    else if (e.target.type == 'checkbox') {
       val = ! this.state.character[e.target.name]
       this.props.updateChar(this.state.character.id, e.target.name, val)
 
-    } else if (e.target.name == "armor_tags") {
-      val = e.target.value.split(",")
+    } else if (e.target.name == 'armor_tags') {
+      val = e.target.value.split(',')
     } else
       val = e.target.value
 
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
+    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
   }
 
   handleWeightChange(e, key, value) {
     this.setState({ character: { ...this.state.character, armor_weight: value } })
 
-    this.props.updateChar(this.state.character.id, "armor_weight", value)
+    this.props.updateChar(this.state.character.id, 'armor_weight', value)
   }
 
   handleBlur(e) {

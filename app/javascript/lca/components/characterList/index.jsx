@@ -2,14 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import { createCharacter, createQc } from '../../actions'
 
 function NewQcForm(props) {
-  return <div style={{display: 'inline-block', fontWeight: 'normal', fontSize: 'normal'}} className="newQcForm">
+  return <div style={{ display: 'inline-block', fontWeight: 'normal', fontSize: 'normal' }} className="newQcForm">
     <FlatButton label="create" onClick={ props.onCreateClick } />
     <TextField name="name" value={ props.name }
       floatingLabelText="Name:"
@@ -19,14 +18,20 @@ function NewQcForm(props) {
   </div>
 }
 
+NewQcForm.propTypes = {
+  name: React.PropTypes.string,
+  onCreateClick: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired
+}
+
 class CharacterList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       newCharacter: false,
-      newCharacterName: "",
+      newCharacterName: '',
       newQc: false,
-      newQcName: ""
+      newQcName: ''
     }
 
     this.addCharacterClick = this.addCharacterClick.bind(this)
@@ -39,36 +44,36 @@ class CharacterList extends React.Component {
 
   addCharacterClick(e) {
     e.preventDefault()
-    this.setState({newCharacter: !this.state.newCharacter})
+    this.setState({ newCharacter: !this.state.newCharacter })
   }
 
   handleCharacterChange(e) {
     e.preventDefault()
     const val = e.target.value
-    this.setState({newCharacterName: val})
+    this.setState({ newCharacterName: val })
   }
 
   handleCharacterCreate(e) {
     e.preventDefault()
-    this.setState({newCharacter: false})
+    this.setState({ newCharacter: false })
     // TODO make chronicle ID optional
     this.props.createCharacter(this.props.player.id, 1, this.state.newCharacterName)
   }
 
   addQcClick(e) {
     e.preventDefault()
-    this.setState({newQc: !this.state.newQc})
+    this.setState({ newQc: !this.state.newQc })
   }
 
   handleQcChange(e) {
     e.preventDefault()
     const val = e.target.value
-    this.setState({newQcName: val})
+    this.setState({ newQcName: val })
   }
 
   handleQcCreate(e) {
     e.preventDefault()
-    this.setState({newQc: false})
+    this.setState({ newQc: false })
     // TODO make chronicle ID optional
     this.props.createQc(this.props.player.id, 1, this.state.newQcName)
   }
@@ -82,20 +87,20 @@ class CharacterList extends React.Component {
 
     const chars = this.props.characters.map((chara) =>
       <li key={ chara.id }>
-        <Link to={"/characters/" + chara.id}>{ chara.name }</Link>
+        <Link to={ '/characters/' + chara.id }>{ chara.name }</Link>
       </li>
     )
 
     const qcs = this.props.qcs.map((qc) =>
       <li key={ qc.id }>
-        <Link to={"/qcs/" + qc.id}>{ qc.name }</Link>
+        <Link to={ '/qcs/' + qc.id}>{ qc.name }</Link>
       </li>
     )
 
     return <div className="characterList">
       <h2>
         My Characters
-        <FlatButton label={newCharacter ? "cancel" : "Add"} onClick={ addCharacterClick } />
+        <FlatButton label={ newCharacter ? 'cancel' : 'Add' } onClick={ addCharacterClick } />
         { this.state.newCharacter &&
           <NewQcForm name={ newCharacterName } onChange={ handleCharacterChange } onCreateClick={ handleCharacterCreate } />
         }
@@ -104,7 +109,7 @@ class CharacterList extends React.Component {
 
       <h2>
         My QCs
-        <FlatButton label={newQc ? "cancel" : "Add"} onClick={ addQcClick } />
+        <FlatButton label={ newQc ? 'cancel' : 'Add' } onClick={ addQcClick } />
         { this.state.newQc &&
           <NewQcForm name={ newQcName } onChange={ handleQcChange } onCreateClick={ handleQcCreate } />
         }

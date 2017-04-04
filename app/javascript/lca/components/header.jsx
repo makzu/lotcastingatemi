@@ -5,10 +5,10 @@ import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import {List, ListItem} from 'material-ui/List'
-import { EmailSignInForm } from "redux-auth/material-ui-theme";
+import { List, ListItem } from 'material-ui/List'
+import { EmailSignInForm } from 'redux-auth/material-ui-theme'
 
-import {toggleMenu} from '../actions'
+import { toggleMenu } from '../actions'
 
 class LogInPopup extends React.Component {
   constructor(props) {
@@ -53,9 +53,9 @@ class LogInPopup extends React.Component {
 }
 
 function LcaHeader(props) {
-    const { navDrawerOpen, toggleMenu } = props
+  const { navDrawerOpen, toggleMenu } = props
 
-    return(
+  return(
       <header>
         <AppBar title="Lot-Casting Atemi"
           onLeftIconButtonTouchTap={ toggleMenu }
@@ -73,8 +73,8 @@ function LcaHeader(props) {
           </List>
         </Drawer>
       </header>
-    )
-  }
+  )
+}
 
 function mapStateToProps(state) {
   const navDrawerOpen = state.app.navDrawerOpen

@@ -39,7 +39,7 @@ class _SpecialtyPopup extends React.Component {
 
     const val = parseInt(e.target.value)
 
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
+    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
   }
 
   handleBlur(e) {
@@ -52,12 +52,12 @@ class _SpecialtyPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value}})
+    this.setState({ character: { ...this.state.character, [trait]: value } })
     this.props.updateChar(this.state.character.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value}})
+    this.setState({ character: { ...this.state.character, [trait]: value } })
     this.props.updateChar(this.state.character.id, trait, value)
   }
 

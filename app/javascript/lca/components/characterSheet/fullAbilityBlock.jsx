@@ -8,28 +8,28 @@ function AbilityBlock(props) {
     { props.ability }:
     <RatingDots rating={ props.rating } />
     <Divider />
-  </div>);
+  </div>)
 }
 
 function FullAbilityBlock(props) {
   const { character } = props
 
-  let craft = "";
+  let craft = ''
   if (character.abil_craft == null) {
     craft = <AbilityBlock ability="Craft" rating={0} />
   } else {
     craft = character.abil_craft.map((craft) =>
-      <AbilityBlock key={craft.craft} ability={ "Craft (" + craft.craft + ")" } rating={craft.rating} />
-    );
+      <AbilityBlock key={craft.craft} ability={ 'Craft (' + craft.craft + ')' } rating={craft.rating} />
+    )
   }
 
-  let ma = "";
+  let ma = ''
   if (character.abil_martial_arts == null) {
     ma = <AbilityBlock ability="Martial Arts" rating={0} />
   } else {
     ma = character.abil_martial_arts.map((ma) =>
-      <AbilityBlock key={ma.style} ability={ "Martial Arts (" + ma.style + ")" } rating={ma.rating} />
-    );
+      <AbilityBlock key={ma.style} ability={ 'Martial Arts (' + ma.style + ')' } rating={ma.rating} />
+    )
   }
 
   return(
@@ -62,7 +62,7 @@ function FullAbilityBlock(props) {
       <AbilityBlock ability="Thrown" rating={ character.abil_thrown } />
       <AbilityBlock ability="War" rating={ character.abil_war } />
     </div>
-  );
+  )
 }
 
 export default FullAbilityBlock

@@ -28,26 +28,26 @@ class MeritFieldset extends React.Component {
   updateMerit(e) {
     e.preventDefault()
     let val = null
-    if (e.target.type == "number") {
+    if (e.target.type == 'number') {
       val = parseInt(e.target.value)
       if (val > c.MERIT_RATING_MAX) {
         val = c.MERIT_RATING_MAX
       } else if (val < c.MERIT_RATING_MIN) {
         val = c.MERIT_RATING_MIN
       }
-    } else if (e.target.type == "checkbox") {
+    } else if (e.target.type == 'checkbox') {
       val = ! this.state.merit[e.target.name]
       this.props.onUpdate(this.state.merit.id, this.state.merit.character_id, e.target.name, val)
     } else
       val = e.target.value
 
-    this.setState({merit: {...this.state.merit, [e.target.name]: val}})
+    this.setState({ merit: { ...this.state.merit, [e.target.name]: val } })
   }
 
   updateMeritCat(e, key, value) {
     this.setState({ merit: { ...this.state.merit, merit_cat: value } })
 
-    this.props.onUpdate(this.state.merit.id, this.props.character.id, "merit_cat", value)
+    this.props.onUpdate(this.state.merit.id, this.props.character.id, 'merit_cat', value)
   }
 
 
@@ -65,7 +65,7 @@ class MeritFieldset extends React.Component {
     const { pushUpdate, updateMerit, updateMeritCat } = this
 
     return(<div>
-      <TextField name="name" value={ merit.name || "" }
+      <TextField name="name" value={ merit.name || '' }
         className="meritNameField" floatingLabelText="Name:"
         onBlur={ pushUpdate } onChange={ updateMerit } />
 
@@ -78,7 +78,7 @@ class MeritFieldset extends React.Component {
         type="number" min={ 0 } max={ 5 }
         onBlur={ pushUpdate } onChange={ updateMerit } />
 
-      <SelectField name="merit_cat" value={ merit.merit_cat || "" }
+      <SelectField name="merit_cat" value={ merit.merit_cat || '' }
         className="meritCatField"
         floatingLabelText="Type:" onChange={ updateMeritCat }>
         <MenuItem value="story" primaryText="Story" />
@@ -89,15 +89,15 @@ class MeritFieldset extends React.Component {
       <Checkbox label="Supernatural?" name="supernatural" checked={ merit.supernatural }
         onCheck={ updateMerit } style={{ display: 'inline-block', width: '9em' }} />
 
-      <TextField name="ref" value={ merit.ref || "" }
+      <TextField name="ref" value={ merit.ref || '' }
         className="meritRefField" floatingLabelText="Ref:"
         onBlur={ pushUpdate } onChange={ updateMerit } />
 
-      <TextField name="prereqs" value={ merit.prereqs || "" }
+      <TextField name="prereqs" value={ merit.prereqs || '' }
         className="meritPrereqsField" floatingLabelText="Prereqs:"
         onBlur={ pushUpdate } onChange={ updateMerit } />
 
-      <TextField name="description" value={ merit.description || "" }
+      <TextField name="description" value={ merit.description || '' }
         className="meritDescriptionField" floatingLabelText="Notes:"
         multiLine={ true }
         onBlur={ pushUpdate } onChange={ updateMerit } />

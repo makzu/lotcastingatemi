@@ -34,12 +34,12 @@ class _IntimacyPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value}})
+    this.setState({ character: { ...this.state.character, [trait]: value } })
     this.props.updateChar(this.state.character.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    this.setState({ character: { ...this.state.character, [trait]: value}})
+    this.setState({ character: { ...this.state.character, [trait]: value } })
     this.props.updateChar(this.state.character.id, trait, value)
   }
 

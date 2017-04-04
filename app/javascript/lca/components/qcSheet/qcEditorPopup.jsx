@@ -34,12 +34,12 @@ class QcAttackFields extends React.Component {
   handleChange(e) {
     e.preventDefault()
     let val = e.target.value
-    if (e.target.type == "number") {
+    if (e.target.type == 'number') {
       val = parseInt(val)
       val = (val < 1) ? 1 : val
     }
 
-    this.setState({ attack: {...this.state.attack, [e.target.name]: val }})
+    this.setState({ attack: { ...this.state.attack, [e.target.name]: val } })
   }
 
   handleBlur(e) {
@@ -93,7 +93,7 @@ class QcMeritFields extends React.Component {
 
   handleChange(e) {
     e.preventDefault()
-    this.setState({ merit: {...this.state.merit, [e.target.name]: e.target.value }})
+    this.setState({ merit: { ...this.state.merit, [e.target.name]: e.target.value } })
   }
 
   handleBlur(e) {
@@ -172,9 +172,9 @@ class _QcEditorPopup extends React.Component {
     e.preventDefault()
     let val
 
-    if (e.target.type == "number") {
+    if (e.target.type == 'number') {
       val = parseInt(e.target.value)
-      if (e.target.name == "essence") {
+      if (e.target.name == 'essence') {
         if (val > c.ESSENCE_MAX) {
           val = c.ESSENCE_MAX
         } else if (val < c.ESSENCE_MIN) {
@@ -187,7 +187,7 @@ class _QcEditorPopup extends React.Component {
     } else
       val = e.target.value
 
-    this.setState({qc: {... this.state.qc, [e.target.name]: val}})
+    this.setState({ qc: { ... this.state.qc, [e.target.name]: val } })
   }
   handleBlur(e) {
     e.preventDefault()
@@ -199,12 +199,12 @@ class _QcEditorPopup extends React.Component {
   }
 
   onListChange(trait, value) {
-    this.setState({ qc: { ...this.state.qc, [trait]: value}})
+    this.setState({ qc: { ...this.state.qc, [trait]: value } })
     this.props.updateQc(this.state.qc.id, trait, value)
   }
 
   onListBlur(trait, value) {
-    this.setState({ qc: { ...this.state.qc, [trait]: value}})
+    this.setState({ qc: { ...this.state.qc, [trait]: value } })
     this.props.updateQc(this.state.qc.id, trait, value)
   }
 
@@ -262,7 +262,7 @@ class _QcEditorPopup extends React.Component {
     return(<div className="editor-wrap qc-editor-wrap">
       <FlatButton label="Edit" onClick={ handleOpen } />
       <Dialog
-        title={ "Editing " + qc.name }
+        title={ 'Editing ' + qc.name }
         className="editor-popup"
         actions={ actions }
         open={ this.state.open }
@@ -310,7 +310,7 @@ class _QcEditorPopup extends React.Component {
           className="editor-rating-field"
           onChange={ handleChange } onBlur={ handleBlur }
         />
-        <h4 style={{marginBottom: 0}}>Combat stats</h4>
+        <h4 style={{ marginBottom: 0 }}>Combat stats</h4>
         <TextField name="join_battle" value={ qc.join_battle }
           floatingLabelText="JB:"
           type="number" min={ 1 }
@@ -353,25 +353,25 @@ class _QcEditorPopup extends React.Component {
           onChange={ handleChange } onBlur={ handleBlur }
         />
 
-        <h4 style={{marginBottom: 0}}>Attacks</h4>
+        <h4 style={{ marginBottom: 0 }}>Attacks</h4>
         { qcAttacks }
         <RaisedButton label="Add Attack" icon={ <ContentAddCircle /> } onClick={ handleAttackAdd } />
 
-        <h4 style={{marginBottom: 0}}>Actions</h4>
+        <h4 style={{ marginBottom: 0 }}>Actions</h4>
         <ExpandableListEditor character={ qc } trait="actions"
           onUpdate={ onListChange } onBlur={ onListBlur }
         />
-        <h4 style={{marginBottom: 0}}>Ties</h4>
+        <h4 style={{ marginBottom: 0 }}>Ties</h4>
         <ExpandableListEditor character={ qc } trait="ties"
           onUpdate={ onListChange } onBlur={ onListBlur }
           numberMax={ c.INTIMACY_RATING_MAX }
         />
-        <h4 style={{marginBottom: 0}}>Principles</h4>
+        <h4 style={{ marginBottom: 0 }}>Principles</h4>
         <ExpandableListEditor character={ qc } trait="principles"
           onUpdate={ onListChange } onBlur={ onListBlur }
           numberMax={ c.INTIMACY_RATING_MAX }
         />
-        <h4 style={{marginBottom: 0}}>Merits</h4>
+        <h4 style={{ marginBottom: 0 }}>Merits</h4>
         { qcMerits }
         <RaisedButton label="Add Merit" icon={ <ContentAddCircle /> } onClick={ handleMeritAdd } />
       </Dialog>

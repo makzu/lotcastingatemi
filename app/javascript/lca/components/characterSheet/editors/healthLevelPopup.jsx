@@ -37,14 +37,14 @@ class _HealthLevelPopup extends React.Component {
 
     let val = parseInt(e.target.value)
 
-    if (e.target.name.startsWith("health")) {
+    if (e.target.name.startsWith('health')) {
       if (val < 0)
         val = 0
       if (val > c.HEALTH_LEVEL_MAX)
         val = c.HEALTH_LEVEL_MAX
     }
 
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
+    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
   }
 
   handleBlur(e) {

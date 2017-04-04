@@ -50,15 +50,15 @@ export class SingleMeritEditor extends React.Component {
     e.preventDefault()
     let val = e.target.value
 
-    if (e.target.name == "rating") {
+    if (e.target.name == 'rating') {
       val = parseInt(val)
       val = Math.max(Math.min(val, MERIT_RATING_MAX), MERIT_RATING_MIN)
-    } else if (e.target.type == "checkbox") {
+    } else if (e.target.type == 'checkbox') {
       val = ! this.state.merit[e.target.name]
       this.props.onUpdate(this.state.merit.id, this.props.character.id, e.target.name, val)
     }
 
-    this.setState({merit: { ...this.state.merit, [e.target.name]: val}})
+    this.setState({ merit: { ...this.state.merit, [e.target.name]: val } })
   }
   handleBlur(e) {
     const trait = e.target.name
@@ -71,7 +71,7 @@ export class SingleMeritEditor extends React.Component {
   handleCatChange(e, key, value) {
     this.setState({ merit: { ...this.state.merit, merit_cat: value } })
 
-    this.props.onUpdate(this.state.merit.id, this.props.character.id, "merit_cat", value)
+    this.props.onUpdate(this.state.merit.id, this.props.character.id, 'merit_cat', value)
   }
 
   handleRemove(e) {
@@ -105,7 +105,7 @@ export class SingleMeritEditor extends React.Component {
           <MenuItem value="purchased" primaryText="Purchased" />
         </SelectField>
 
-        <div style={{display: 'inline-block'}}>
+        <div style={{ display: 'inline-block' }}>
           <Checkbox name="supernatural" value={merit.supernatural}
             onCheck={this.handleChange}
             label="Supernatural?" />
@@ -116,7 +116,7 @@ export class SingleMeritEditor extends React.Component {
         <TextField name="description" value={ merit.description }
           onChange={this.handleChange} onBlur={this.handleBlur}
           floatingLabelText="Description:"
-          multiLine={ true } style={{width: '100%'}}
+          multiLine={ true } style={{ width: '100%' }}
         />
       </div>
       <div>
@@ -125,7 +125,7 @@ export class SingleMeritEditor extends React.Component {
           floatingLabelText="Ref:"
         />
         <IconButton onClick={ this.handleRemove } label="Remove"
-          style={{float: 'right'}}
+          style={{ float: 'right' }}
         >
           <ContentRemoveCircle />
         </IconButton>
@@ -151,7 +151,7 @@ class MeritFullPage extends React.Component {
   }
 
   toggleEditor() {
-    this.setState({isEditing: !this.state.isEditing})
+    this.setState({ isEditing: !this.state.isEditing })
   }
 
   handleUpdate(id, charId, trait, value) {
@@ -183,13 +183,13 @@ class MeritFullPage extends React.Component {
     return <div className="meritPage">
       <h1>
         Merits
-        <small style={{fontSize: '60%', marginLeft: '5em'}}>
+        <small style={{ fontSize: '60%', marginLeft: '5em' }}>
           { this.props.character &&
-            <Link style={{textDecoration: 'none'}} to={"/characters/" + this.props.character.id }>
+            <Link style={{ textDecoration: 'none' }} to={'/characters/' + this.props.character.id }>
               Back to full sheet
             </Link>
           }</small>
-        <FlatButton style={{ float: 'right'}} label={ this.state.isEditing ? 'done' : 'edit' } onClick={ this.toggleEditor } />
+        <FlatButton style={{ float: 'right' }} label={ this.state.isEditing ? 'done' : 'edit' } onClick={ this.toggleEditor } />
         { this.state.isEditing &&
           <IconButton onClick={ this.handleAdd } label="Add Merit"
             style={{ float: 'right' }}

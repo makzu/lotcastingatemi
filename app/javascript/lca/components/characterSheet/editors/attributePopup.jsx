@@ -43,7 +43,7 @@ class _AttributePopup extends React.Component {
       val = c.ATTRIBUTE_MIN
     }
 
-    this.setState({character: {... this.state.character, [e.target.name]: val}})
+    this.setState({ character: { ... this.state.character, [e.target.name]: val } })
   }
 
   handleBlur(e) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Divider from 'material-ui/Divider'
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
 import * as calc from '../../utils/calculated'
 import RatingDots from '../generic/ratingDots.jsx'

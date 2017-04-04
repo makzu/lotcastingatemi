@@ -5,3 +5,4 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 task "testall": [:spec, :yarntest]
+task "testallcov": [:spec, :yarntestcov]

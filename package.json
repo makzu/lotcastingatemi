@@ -50,6 +50,9 @@
   "devDependencies": {
     "babel-jest": "latest",
     "enzyme": "^2.7.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-jest": "latest",
     "istanbul": "^0.4.5",
     "jest": "^19.0.0",
     "react-addons-test-utils": "^15.4.1",
@@ -59,7 +62,8 @@
   },
   "scripts": {
     "test": "jest",
-    "testcov": "jest --coverage"
+    "testcov": "jest --coverage",
+    "lint": "eslint app/javascript/"
   },
   "jest": {
     "roots": [

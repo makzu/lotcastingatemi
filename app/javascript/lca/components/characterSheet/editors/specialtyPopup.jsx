@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
 

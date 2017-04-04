@@ -10,7 +10,7 @@ import Checkbox from 'material-ui/Checkbox'
 
 import { updateCharacter } from '../../../actions'
 
-class _ArmorPopup extends React.Component {
+class ArmorPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -123,6 +123,9 @@ class _ArmorPopup extends React.Component {
     </div>)
   }
 }
+ArmorPopup.propTypes = {
+  updateChar: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -135,4 +138,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_ArmorPopup)
+)(ArmorPopup)

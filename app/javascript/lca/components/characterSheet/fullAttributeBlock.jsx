@@ -1,18 +1,20 @@
 import React from 'react'
 import Divider from 'material-ui/Divider'
-import FlatButton from 'material-ui/FlatButton'
-import TextField from 'material-ui/TextField'
-
-import { updateCharacter } from '../../actions'
 
 import AttributePopup from './editors/attributePopup.jsx'
 import RatingDots from '../generic/ratingDots.jsx'
+import { withAttributes } from '../../utils/propTypes'
 
 function AttributeBlock(props) {
   return(<div className="attributeBlock">
     <span className="attributeName">{ props.attribute }:</span>
     <RatingDots rating={ props.rating } />
   </div>)
+}
+
+AttributeBlock.propTypes = {
+  attribute: React.PropTypes.string.isRequired,
+  rating: React.PropTypes.number.isRequired
 }
 
 class FullAttributeBlock extends React.Component {
@@ -72,6 +74,10 @@ class FullAttributeBlock extends React.Component {
       </div>
     )
   }
+}
+
+FullAttributeBlock.propTypes = {
+  character: React.PropTypes.shape(withAttributes)
 }
 
 export default FullAttributeBlock

@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import TextField from 'material-ui/TextField'
 
 import { INTIMACY_RATING_MAX } from '../../../utils/constants.js'
 import { updateCharacter } from '../../../actions'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
-class _IntimacyPopup extends React.Component {
+class IntimacyPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -78,6 +77,9 @@ class _IntimacyPopup extends React.Component {
     </div>)
   }
 }
+IntimacyPopup.propTypes = {
+  updateChar: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -90,4 +92,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_IntimacyPopup)
+)(IntimacyPopup)

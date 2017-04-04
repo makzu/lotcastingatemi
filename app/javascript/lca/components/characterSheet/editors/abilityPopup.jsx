@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
 import * as c from '../../../utils/constants.js'
+import { withAbilities } from '../../../utils/propTypes'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
@@ -21,9 +22,16 @@ function AbilityBlock(props) {
     />
   )
 }
+AbilityBlock.propTypes = {
+  label: React.PropTypes.string.isRequired,
+  abil: React.PropTypes.string.isRequired,
+  value: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired
+}
 
 // TODO include sample pools on side of popup
-class _AbilityPopup extends React.Component {
+class AbilityPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -222,6 +230,10 @@ class _AbilityPopup extends React.Component {
     </div>)
   }
 }
+AbilityPopup.propTypes = {
+  character: React.PropTypes.shape(withAbilities).isRequired,
+  updateChar: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -234,4 +246,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_AbilityPopup)
+)(AbilityPopup)

@@ -7,10 +7,11 @@ import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../actions'
 import * as c from '../../../utils/constants.js'
+import { withHealthLevels } from '../../../utils/propTypes'
 
 import HealthLevelBoxes from '../../generic/HealthLevelBoxes.jsx'
 
-class _HealthLevelPopup extends React.Component {
+class HealthLevelPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -58,7 +59,7 @@ class _HealthLevelPopup extends React.Component {
 
   render() {
     const character = this.state.character
-    const { handleOpen, handleClose, handleChange, handleBlur, boxes } = this
+    const { handleOpen, handleClose, handleChange, handleBlur } = this
 
     const actions = [
       <FlatButton
@@ -130,6 +131,10 @@ class _HealthLevelPopup extends React.Component {
     </div>)
   }
 }
+HealthLevelPopup.propTypes = {
+  character: React.PropTypes.shape(withHealthLevels).isRequired,
+  updateChar: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -142,4 +147,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_HealthLevelPopup)
+)(HealthLevelPopup)

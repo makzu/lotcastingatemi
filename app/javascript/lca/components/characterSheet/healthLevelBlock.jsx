@@ -6,6 +6,7 @@ import HealthLevelPopup from './editors/healthLevelPopup.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 
 import { woundPenalty } from '../../utils/calculated'
+import { withHealthLevels } from '../../utils/propTypes'
 
 export default function HealthLevelBlock(props) {
   const { character } = props
@@ -16,4 +17,7 @@ export default function HealthLevelBlock(props) {
     <span><strong>Wound Penalty:</strong> -{ woundPenalty(character) }</span>
     <Divider />
   </div>)
+}
+HealthLevelBlock.propTypes = {
+  character: React.PropTypes.shape(withHealthLevels)
 }

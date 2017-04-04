@@ -9,7 +9,7 @@ import * as c from '../../../utils/constants.js'
 
 import { updateCharacter } from '../../../actions'
 
-class _BasicsEditorPopup extends React.Component {
+class BasicsEditorPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -101,7 +101,14 @@ class _BasicsEditorPopup extends React.Component {
     </div>)
   }
 }
-
+BasicsEditorPopup.propTypes = {
+  character: React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+    essence: React.PropTypes.number.isRequired,
+    description: React.PropTypes.string.isRequired
+  }).isRequired,
+  updateChar: React.PropTypes.func
+}
 function mapDispatchToProps(dispatch) {
   return {
     updateChar: (id, trait, value) => {
@@ -113,4 +120,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_BasicsEditorPopup)
+)(BasicsEditorPopup)

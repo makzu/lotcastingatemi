@@ -6,9 +6,10 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import * as c from '../../../utils/constants.js'
+import { withWillpower } from '../../../utils/propTypes'
 import { updateCharacter } from '../../../actions'
 
-class _WillpowerPopup extends React.Component {
+class WillpowerPopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -89,6 +90,10 @@ class _WillpowerPopup extends React.Component {
     </div>)
   }
 }
+WillpowerPopup.propTypes = {
+  character: React.PropTypes.shape(withWillpower).isRequired,
+  updateChar: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -101,4 +106,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_WillpowerPopup)
+)(WillpowerPopup)

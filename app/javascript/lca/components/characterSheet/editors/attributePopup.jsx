@@ -6,11 +6,12 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import * as c from '../../../utils/constants.js'
+import { withAttributes } from '../../../utils/propTypes'
 
 import { updateCharacter } from '../../../actions'
 
 // TODO include sample pools on side of popup
-class _AttributePopup extends React.Component {
+class AttributePopup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -147,6 +148,10 @@ class _AttributePopup extends React.Component {
     </div>)
   }
 }
+AttributePopup.propTypes = {
+  character: React.PropTypes.shape(withAttributes).isRequired,
+  updateChar: React.PropTypes.func
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -159,4 +164,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(_AttributePopup)
+)(AttributePopup)

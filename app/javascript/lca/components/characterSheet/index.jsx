@@ -16,11 +16,10 @@ import HealthLevelBlock from './healthLevelBlock.jsx'
 import SpecialtyPopup from './editors/specialtyPopup.jsx'
 import IntimacyPopup from './editors/intimacyPopup.jsx'
 import WillpowerPopup from './editors/willpowerPopup.jsx'
-import AllMeritsPopup from './editors/allMeritsPopup.jsx'
 import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
 
 import RatingDots from '../generic/ratingDots.jsx'
-import * as calc from '../../utils/calculated/'
+import { withWillpower } from '../../utils/propTypes'
 
 export function FullSpecialtyBlock(props) {
   const character = props.character
@@ -110,6 +109,10 @@ export function WillpowerBlock(props) {
     <Divider />
   </div>)
 }
+WillpowerBlock.propTypes = {
+  character: React.PropTypes.shape(withWillpower)
+}
+
 
 export class CharacterSheet extends React.Component {
   constructor(props) {

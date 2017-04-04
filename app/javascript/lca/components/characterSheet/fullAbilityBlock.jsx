@@ -2,6 +2,7 @@ import React from 'react'
 import Divider from 'material-ui/Divider'
 import AbilityPopup from './editors/abilityPopup.jsx'
 import RatingDots from '../generic/ratingDots.jsx'
+import { withAbilities } from '../../utils/propTypes'
 
 function AbilityBlock(props) {
   return(<div className="abilityBlock">
@@ -11,7 +12,12 @@ function AbilityBlock(props) {
   </div>)
 }
 
-function FullAbilityBlock(props) {
+AbilityBlock.propTypes = {
+  ability: React.PropTypes.string.isRequired,
+  rating: React.PropTypes.number.isRequired
+}
+
+export default function FullAbilityBlock(props) {
   const { character } = props
 
   let craft = ''
@@ -64,5 +70,6 @@ function FullAbilityBlock(props) {
     </div>
   )
 }
-
-export default FullAbilityBlock
+FullAbilityBlock.propTypes = {
+  character: React.PropTypes.shape(withAbilities)
+}

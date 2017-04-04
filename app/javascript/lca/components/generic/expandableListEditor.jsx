@@ -1,16 +1,13 @@
 import React from 'react'
-import Divider from 'material-ui/Divider'
 import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
 import IconButton from 'material-ui/FlatButton'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
 import * as calc from '../../utils/calculated'
-import { ATTRIBUTES, ABILITIES, ABILITIES_ALL } from '../../utils/constants'
 
 function CraftFields(props) {
   const { trait, index, onChange, onBlur } = props
@@ -115,7 +112,7 @@ function IntimacyFields(props) {
 }
 
 function TraitFields(props) {
-  const { character, index, traitName, onRemove } = props
+  const { index, traitName, onRemove } = props
 
   let fields
 

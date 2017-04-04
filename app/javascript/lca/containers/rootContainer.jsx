@@ -21,8 +21,8 @@ const RootContainer = ({ store, history }) => (
 )
 
 RootContainer.propTypes = {
-  store: PropTypes.object,
-  history: PropTypes.object
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 export default RootContainer

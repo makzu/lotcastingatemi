@@ -12,6 +12,7 @@ import Checkbox from 'material-ui/Checkbox'
 
 import { updateWeapon, createWeapon, destroyWeapon } from '../../actions'
 import * as calc from '../../utils/calculated'
+import { withAbilities } from '../../utils/propTypes'
 
 function WeaponHeader() {
   return <TableRow>
@@ -76,6 +77,10 @@ function WeightSelect(props) {
     </SelectField>
   )
 }
+WeightSelect.propTypes = {
+  onChange: React.PropTypes.func.isRequired,
+  weapon: React.PropTypes.shape({ weight: React.PropTypes.string.isRequired })
+}
 
 function AbilitySelect(props) {
   const options = calc.attackAbilities(props.character).map((abil) =>
@@ -87,6 +92,11 @@ function AbilitySelect(props) {
       {options}
     </SelectField>
   )
+}
+AbilitySelect.propTypes = {
+  onChange: React.PropTypes.func.isRequired,
+  character: React.PropTypes.shape(withAbilities).isRequired,
+  weapon: React.PropTypes.shape({ ability: React.PropTypes.string.isRequired }).isRequired
 }
 
 class WeaponFieldset extends React.Component {
@@ -246,6 +256,11 @@ class WeaponSummary extends React.Component {
       </Table>
     </div>)
   }
+}
+WeaponSummary.propTypes = {
+  _handleUpdate: React.PropTypes.func,
+  _handleDestroy: React.PropTypes.func,
+  _handleCreate: React.PropTypes.func,
 }
 
 function mapDispatchToProps(dispatch) {

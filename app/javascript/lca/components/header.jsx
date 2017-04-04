@@ -20,7 +20,7 @@ class LogInPopup extends React.Component {
   }
 
   handleOpen() {
-    this.setState({ open: true, character: this.props.character })
+    this.setState({ open: true })
   }
 
   handleClose() {
@@ -36,7 +36,6 @@ class LogInPopup extends React.Component {
         onTouchTap={ handleClose }
       />
     ]
-    return <span /> // Temporarily disable this
     return <span>
       <FlatButton label="Log in" onClick={ handleOpen } />
       <Dialog
@@ -76,11 +75,17 @@ function LcaHeader(props) {
   )
 }
 
+LcaHeader.propTypes = {
+  navDrawerOpen: React.PropTypes.bool.isRequired,
+  toggleMenu: React.PropTypes.func
+}
+
 function mapStateToProps(state) {
   const navDrawerOpen = state.app.navDrawerOpen
   const isSignedIn = state.auth.get('user').get('isSignedIn')
 
   return {
+    isSignedIn,
     navDrawerOpen
   }
 }

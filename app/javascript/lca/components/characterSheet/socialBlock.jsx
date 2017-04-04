@@ -1,14 +1,11 @@
 import React from 'react'
-import Divider from 'material-ui/Divider'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
 import * as calc from '../../utils/calculated'
-import RatingDots from '../generic/ratingDots.jsx'
+import { withAttributes, withAbilities } from '../../utils/propTypes'
 
 export default function SocialBlock(props) {
-  const { character, weapons, merits } = props
-  const naturalSoak = calc.naturalSoak(character)
-  const armorSoak = calc.armorSoak(character)
+  const { character } = props
 
   return(<div className="socialSummaryBlock">
     <h3>Social Pools</h3>
@@ -36,4 +33,7 @@ export default function SocialBlock(props) {
     </Table>
 
   </div>)
+}
+SocialBlock.propTypes = {
+  character: React.PropTypes.shape({ ...withAttributes, ...withAbilities })
 }

@@ -1,14 +1,10 @@
 import React from 'react'
-import Divider from 'material-ui/Divider'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
 import * as calc from '../../utils/calculated'
-import RatingDots from '../generic/ratingDots.jsx'
 
 export function CombatBlock(props) {
-  const { character, weapons, merits } = props
-  const naturalSoak = calc.naturalSoak(character)
-  const armorSoak = calc.armorSoak(character)
+  const { character } = props
 
   return(<div className="combatSummaryBlock">
     <h3>Combat Pools</h3>

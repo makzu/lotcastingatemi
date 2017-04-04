@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function WelcomePage(props) {
+export default function WelcomePage() {
   return(<div className="welcomePage">
     <h1>Lot-Casting Atemi</h1>
     <p>

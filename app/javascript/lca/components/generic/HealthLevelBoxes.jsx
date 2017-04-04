@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import * as calc from '../../utils/calculated'
+import { withHealthLevels } from '../../utils/propTypes'
 
 /* TODO replace this css nonsense with svg icons or something */
 const DamageDiv = styled.div`
@@ -11,7 +12,6 @@ const DamageDiv = styled.div`
   border: 0.15em solid black;
 `
 const EmptyDamageDiv = DamageDiv
-
 
 const BashingDamageDiv = styled(DamageDiv)`
   &::after{
@@ -126,4 +126,8 @@ export default function HealthLevelBoxes(props) {
   return (<div className="healthLevelBoxes">
     { hlBoxes }
   </div>)
+}
+
+HealthLevelBoxes.propTypes = {
+  character: React.PropTypes.shape(withHealthLevels)
 }

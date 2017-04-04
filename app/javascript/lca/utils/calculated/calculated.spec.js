@@ -4,12 +4,11 @@ const mockChar = {
   attr_dexterity: 3, attr_wits: 3, attr_manipulation: 3, attr_stamina: 3, attr_strength: 2,
   abil_dodge: 4,  abil_integrity: 4, abil_socialize: 4,
   abil_melee: 2,
+  abil_craft: [], abil_martial_arts: [], specialties: [],
   armor_weight: 'unarmored', armor_is_artifact: false,
   health_level_0s: 1, health_level_1s: 2, health_level_2s: 2, health_level_4s: 1, health_level_incap: 1,
   damage_bashing: 0, damage_lethal: 0, damage_aggravated: 0
 }
-
-jest.unmock('../constants.js')
 
 describe('Calculated values', () => {
   it('should give correct defense values', () => {
@@ -64,22 +63,26 @@ describe('Calculated values', () => {
 
   it('should give correct values for abilities', () => {
     // TODO figure out why this doesn't work
-    expect(calc.attackAbilities(mockChar)).toEqual([{abil: 'melee', rating: 2}])
+    expect(calc.attackAbilities(mockChar)).toEqual([{ abil: 'melee', rating: 2, specialties: [] }])
   })
 
   it('should give correct info for weapons', () => {
-    const light = {weight: 'light', is_artifact: false, tags: [], ability: 'melee'}
+    const light = { weight: 'light', is_artifact: false, tags: [], ability: 'melee' }
     const medium = { ...light, weight: 'medium' }
-    const heavy = { ...light, weight: 'heavy' }
+    const heavy =  { ...light, weight: 'heavy' }
     const shield = { ...medium, tags: ['shield'] }
 
-    const lightA = {...light, is_artifact: true }
-    const medA = {...medium, is_artifact: true }
-    const hvyA = {...heavy, is_artifact: true }
+    const lightA = { ...light,  is_artifact: true }
+    const medA =   { ...medium, is_artifact: true }
+    const hvyA =   { ...heavy,  is_artifact: true }
 
-    //expect(calc.witheringAttackPool(mockChar, light)).toEqual(9)
-    expect(calc.weaponAccuracyBonus(medium)).toEqual(2)
-    expect(calc.weaponAccuracyBonus(heavy)).toEqual(0)
+    expect(calc.witheringAttackPool(mockChar, light)).toEqual(9)
+    expect(calc.witheringAttackPool(mockChar, medium)).toEqual(7)
+    expect(calc.witheringAttackPool(mockChar, heavy)).toEqual(5)
+
+    expect(calc.witheringAttackPool(mockChar, lightA)).toEqual(10)
+    expect(calc.witheringAttackPool(mockChar, medA)).toEqual(8)
+    expect(calc.witheringAttackPool(mockChar, hvyA)).toEqual(6)
 
     expect(calc.weaponDamage(mockChar, light)).toEqual(9)
     expect(calc.weaponDamage(mockChar, shield)).toEqual(9)

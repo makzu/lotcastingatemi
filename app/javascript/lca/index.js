@@ -9,7 +9,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
-import { configure } from 'redux-auth'
 
 import reducer from './reducers'
 import { fetchChronicle } from './actions'
@@ -18,7 +17,6 @@ import RootContainer from './containers/rootContainer.jsx'
 
 
 const history = createHistory()
-
 let enhancer
 
 if (process.env.NODE_ENV === 'production') { // eslint-disable-line no-undef
@@ -35,11 +33,6 @@ const store = createStore(
   undefined,
   enhancer
 )
-
-store.dispatch(configure({
-  apiUrl: '/api/v1',
-  clientOnly: true,
-}))
 
 // TODO: Only fetch chronicle/character data on login, not here
 store.dispatch(fetchChronicle(1))

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import { authStateReducer } from 'redux-auth'
 import * as c from '../utils/actionNames'
 
 import EntityReducer from './entityReducer.js'
@@ -49,7 +48,6 @@ export function appReducer(state = defaultState, action) {
 }
 
 const lcaApp = combineReducers({
-  auth: authStateReducer,
   router: routerReducer,
   app: appReducer,
   entities: EntityReducer

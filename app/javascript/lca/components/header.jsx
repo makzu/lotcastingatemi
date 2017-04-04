@@ -6,7 +6,6 @@ import Drawer from 'material-ui/Drawer'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import { List, ListItem } from 'material-ui/List'
-import { EmailSignInForm } from 'redux-auth/material-ui-theme'
 
 import { toggleMenu } from '../actions'
 
@@ -45,7 +44,7 @@ class LogInPopup extends React.Component {
         autoScrollBodyContent={ true }
         onRequestClose={ handleClose }
       >
-        <EmailSignInForm />
+        <span>Stub!</span>
       </Dialog>
     </span>
   }
@@ -82,10 +81,8 @@ LcaHeader.propTypes = {
 
 function mapStateToProps(state) {
   const navDrawerOpen = state.app.navDrawerOpen
-  const isSignedIn = state.auth.get('user').get('isSignedIn')
 
   return {
-    isSignedIn,
     navDrawerOpen
   }
 }

@@ -30,10 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'devise_token_auth'
 gem 'pundit'
-gem 'omniauth'
-gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'

@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider'
 
-import { updateCharacter } from '../../actions'
-
 import CombatBlock from './combatBlock.jsx'
 import SocialBlock from './socialBlock.jsx'
 import FullAttributeBlock from './fullAttributeBlock.jsx'
@@ -191,15 +189,6 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    updateChar: (id, trait, value) => {
-      dispatch(updateCharacter(id, trait, value))
-    }
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(CharacterSheet)

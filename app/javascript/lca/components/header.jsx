@@ -51,7 +51,7 @@ class LogInPopup extends React.Component {
   }
 }
 
-function LcaHeader(props) {
+export function LcaHeader(props) {
   const { navDrawerOpen, toggleMenu } = props
 
   return(

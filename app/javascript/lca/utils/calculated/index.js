@@ -83,13 +83,12 @@ export function abilitiesWithRatings(character) {
 
 export function mobilityPenalty(character) {
   switch(character.armor_weight) {
-  case 'light':
-  case 'unarmored':
-    return 0
-  case 'medium':
-    return 1
   case 'heavy':
     return 2
+  case 'medium':
+    return 1
+  case 'light':
+  case 'unarmored':
   default:
     return 0
   }
@@ -104,6 +103,7 @@ export function armorSoak(character) {
   case 'heavy':
     return character.armor_is_artifact ? 11 : 7
   case 'unarmored':
+  default:
     return 0
   }
 }

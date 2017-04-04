@@ -19,7 +19,7 @@ import WillpowerPopup from './editors/willpowerPopup.jsx'
 import AllMeritsPopup from './editors/allMeritsPopup.jsx'
 import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
 
-import RatingDots from '../../utils/ratingDots.jsx'
+import RatingDots from '../generic/ratingDots.jsx'
 import * as calc from '../../utils/calculated/'
 
 function FullSpecialtyBlock(props) {

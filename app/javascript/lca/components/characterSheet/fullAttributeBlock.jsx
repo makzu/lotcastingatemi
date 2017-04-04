@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField'
 import { updateCharacter } from '../../actions'
 
 import AttributePopup from './editors/attributePopup.jsx'
-import RatingDots from '../../utils/ratingDots.jsx'
+import RatingDots from '../generic/ratingDots.jsx'
 
 function AttributeBlock(props) {
   return(<div className="attributeBlock">

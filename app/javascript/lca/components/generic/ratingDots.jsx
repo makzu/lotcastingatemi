@@ -1,10 +1,8 @@
 import React from 'react'
 
 function RatingDots(props) {
-  const fullCount = props.rating
-  const emptyCount = ( props.fillTo || 5 ) - fullCount
+  const emptyCount = ( props.fillTo || 5 ) - props.rating
 
-  //const fullDots = "●".repeat( fullCount );
   const fullDots = new Array(props.rating).fill("●")
   const fullDivs = fullDots.map((dot, index) =>
     <div key={ index } className="ratingDot ratingDotFull">{dot}</div>
@@ -18,6 +16,12 @@ function RatingDots(props) {
     )
   }
   return <span className="ratingDotContainer">{ fullDivs }{ emptyDivs }</span>;
+}
+
+RatingDots.propTypes = {
+  rating: React.PropTypes.number.isRequired,
+  fillTo: React.PropTypes.number,
+  dontFill: React.PropTypes.bool
 }
 
 export default RatingDots

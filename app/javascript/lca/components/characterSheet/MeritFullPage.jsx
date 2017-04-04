@@ -13,7 +13,7 @@ import Checkbox from 'material-ui/Checkbox'
 
 import { updateMerit, createMerit, destroyMerit } from '../../actions'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
-import RatingDots from '../../utils/ratingDots.jsx'
+import RatingDots from '../generic/ratingDots.jsx'
 
 function SingleMerit(props) {
   const { merit } = props

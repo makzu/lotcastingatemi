@@ -1,5 +1,5 @@
 import React from 'react'
-import RatingDots from '../utils/ratingDots.jsx'
+import RatingDots from '../components/generic/ratingDots.jsx'
 import renderer from 'react-test-renderer'
 
 test('RatingDots renders at all', () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Divider from 'material-ui/Divider'
 import AbilityPopup from './editors/abilityPopup.jsx'
-import RatingDots from '../../utils/ratingDots.jsx'
+import RatingDots from '../generic/ratingDots.jsx'
 
 function AbilityBlock(props) {
   return(<div className="abilityBlock">

@@ -3,7 +3,7 @@ import Divider from 'material-ui/Divider'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 import * as calc from '../../utils/calculated'
-import RatingDots from '../../utils/ratingDots.jsx'
+import RatingDots from '../generic/ratingDots.jsx'
 
 
 function CombatBlock(props) {

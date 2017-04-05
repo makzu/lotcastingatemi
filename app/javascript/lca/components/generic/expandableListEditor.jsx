@@ -328,7 +328,7 @@ export default class ExpandableListEditor extends React.Component {
   }
 }
 ExpandableListEditor.propTypes = {
-  character: React.PropTypes.shape({ ...withSpecialties, ...withAbilities }).isRequired,
+  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
   trait: React.PropTypes.string.isRequired,
   onUpdate: React.PropTypes.func.isRequired,
   onBlur: React.PropTypes.func.isRequired,

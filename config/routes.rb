@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :player_token, only: [:show]
       resources :players, only: [:show]
 
       resources :chronicles, only: [:show, :create, :destroy, :update]

@@ -1,4 +1,5 @@
 class Api::V1::PlayersController < Api::V1::BaseController
+  before_action :authenticate_player, except: [:create]
   before_action :set_player, only: [:show]
 
   def show

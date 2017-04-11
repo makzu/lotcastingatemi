@@ -2,20 +2,33 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::WeaponsController, type: :controller do
 
+  def authenticated_header(user)
+    token = Knock::AuthToken.new(payload: { sub: user.id }).token
+    "Bearer #{token}"
+  end
+
+  before(:each) do
+    @player = FactoryGirl.create(:player)
+    @character = FactoryGirl.create(:character, player_id: @player.id)
+    @weapon = FactoryGirl.create(:weapon, character_id: @character.id)
+  end
+
   describe "GET #show" do
     it "returns http success" do
-      @weapon = FactoryGirl.create(:weapon)
+      request.headers['Authorization'] = authenticated_header(@player)
 
       get :show, params: { character_id: @weapon.character_id, id: @weapon.id, format: :json }
 
       expect(response).to have_http_status(:success)
     end
+
+    it_behaves_like "respond_to_unauthenticated", 'show'
   end
 
   describe "POST #create" do
     context "With valid attributes" do
       it "Increases Weapon count by 1" do
-        @character = FactoryGirl.create(:character)
+        request.headers['Authorization'] = authenticated_header(@player)
         @weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id)
 
         expect { post :create, params: { character_id: @character.id, :weapon => @weapon_params }, format: :json }.to change(Weapon, :count).by(1)
@@ -24,27 +37,31 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
 
     context "With invalid attributes" do
       it "Increases Weapon count by 0" do
-        @character = FactoryGirl.create(:character)
+        request.headers['Authorization'] = authenticated_header(@player)
         @invalid_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: "Attribute")
 
         expect { post :create, params: { character_id: @character.id, :weapon => @invalid_weapon_params }, format: :json }.to change(Weapon, :count).by(0)
       end
     end
+
+    it_behaves_like "respond_to_unauthenticated", 'create'
   end
 
   describe "DELETE #destroy" do
     it "Decreases Weapon count by 1" do
-      @weapon = FactoryGirl.create(:weapon)
+      request.headers['Authorization'] = authenticated_header(@player)
 
       expect { delete :destroy, params: { character_id: @weapon.character_id, id: @weapon.id, format: :json } }.to change(Weapon, :count).by(-1)
     end
+
+    it_behaves_like "respond_to_unauthenticated", 'destroy'
   end
 
   describe "PATCH #update" do
     context "With valid attributes" do
       it "Updates weapon attributes" do
-        @weapon = FactoryGirl.create(:weapon)
-        @character = FactoryGirl.create(:character)
+        request.headers['Authorization'] = authenticated_header(@player)
+
         @updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: "heavy")
 
         expect(@weapon.weight).to eq("light")
@@ -58,8 +75,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
 
     context "With invalid attributes" do
       it "Updates weapon attributes" do
-        @weapon = FactoryGirl.create(:weapon)
-        @character = FactoryGirl.create(:character)
+        request.headers['Authorization'] = authenticated_header(@player)
         @invalid_updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: "Invalid Weight")
 
         expect(@weapon.weight).to eq("light")
@@ -70,6 +86,8 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
         expect(@weapon.weight).to eq("light")
       end
     end
+
+    it_behaves_like "respond_to_unauthenticated", 'update'
   end
 
 end

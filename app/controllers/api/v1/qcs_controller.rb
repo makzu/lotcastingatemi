@@ -1,4 +1,5 @@
 class Api::V1::QcsController < Api::V1::BaseController
+  before_action :authenticate_player
   before_action :set_qc, only: [:show, :update, :destroy]
 
   def show

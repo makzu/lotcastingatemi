@@ -1,4 +1,5 @@
 class Api::V1::QcMeritsController < Api::V1::BaseController
+  before_action :authenticate_player
   before_action :set_qc_merit, only: [:show, :update, :destroy]
 
   def show

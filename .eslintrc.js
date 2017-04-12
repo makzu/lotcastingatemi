@@ -1,47 +1,50 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
+  'env': {
+    'browser': true,
+    'es6': true,
+    'jest': true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
+  'extends': ['eslint:recommended', 'plugin:react/recommended'],
+  'parserOptions': {
+    'ecmaVersion': 6,
+    'ecmaFeatures': {
+      'experimentalObjectRestSpread': true,
+      'jsx': true
     },
-    "sourceType": "module"
+    'sourceType': 'module'
   },
-  "plugins": [
-    "react"
+  'plugins': [
+    'react'
   ],
-  "rules": {
-    "indent": [
-      "error",
+  'rules': {
+    'indent': [
+      'error',
       2
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
+    'linebreak-style': [
+      'error',
+      'unix'
     ],
-    "quotes": [
-      "warn",
-      "single",
-      { "allowTemplateLiterals": true }
+    'no-trailing-spaces': [
+      'error'
+    ],
+    'no-duplicate-imports': [
+      'warn'
+    ],
+    'quotes': [
+      'warn',
+      'single',
+      { 'allowTemplateLiterals': true }
     ],
     'object-curly-spacing': [
       'error',
       'always',
       { 'objectsInObjects': false }
     ],
-    "jsx-quotes": [
-      "warn",
-      "prefer-double"
+    'jsx-quotes': [
+      'warn',
+      'prefer-double'
     ],
-    "semi": [
-      "error",
-      "never"
-    ]
+    'semi': [ 'error', 'never' ]
   }
-};
+}

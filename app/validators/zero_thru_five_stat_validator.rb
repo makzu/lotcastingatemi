@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ZeroThruFiveStatValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if value.nil?
@@ -8,7 +10,7 @@ class ZeroThruFiveStatValidator < ActiveModel::EachValidator
     unless value >= 0
       record.errors[attribute] << (options[:message] || "#{attribute} cannot be negative")
     end
-    unless value <= 5
+    unless value <= 5 # rubocop:disable Style/GuardClause
       record.errors[attribute] << (options[:message] || "#{attribute} cannot be greater than 5")
     end
   end

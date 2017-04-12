@@ -1,72 +1,74 @@
 
-puts "Reloading example player"
+# frozen_string_literal: true
+
+puts 'Reloading example player'
 player1 = Player.find_or_initialize_by(id: 1)
 player1.update(
-  name: "Example ST",
-  email: "solarShard179@IAM.net",
-  password: "praisethesun"
+  name: 'Example ST',
+  email: 'solarShard179@IAM.net',
+  password: 'praisethesun'
 )
 
 player2 = Player.find_or_initialize_by(id: 2)
 player2.update(
-  name: "Example Player",
-  email: "solarShard259@IAM.net",
-  password: "password"
+  name: 'Example Player',
+  email: 'solarShard259@IAM.net',
+  password: 'password'
 )
 
-puts "Reloading example chronicle"
-exChronicle = Chronicle.find_or_initialize_by(id: 1)
-exChronicle.update(
-  name: "Example game",
+puts 'Reloading example chronicle'
+chronicle1 = Chronicle.find_or_initialize_by(id: 1)
+chronicle1.update(
+  name: 'Example game',
   st: player1
 )
 
 pc = ChroniclePlayer.find_or_initialize_by(id: 1)
 pc.update(
   player: player2,
-  chronicle: exChronicle
+  chronicle: chronicle1
 )
 
-puts "Reloading characters"
-YAML.load(File.read("db/seeds/characters.yaml")).each do |c|
-  character = Character.find_or_initialize_by(id: c["id"])
+puts 'Reloading characters'
+YAML.load(File.read('db/seeds/characters.yaml')).each do |c|
+  character = Character.find_or_initialize_by(id: c['id'])
   character.update(c)
-  puts "Updated " + character.name
+  puts 'Updated ' + character.name
 end
 
-puts "Reloading merits"
-YAML.load(File.read("db/seeds/merits.yaml")).each do |m|
-  merit = Merit.find_or_initialize_by(id: m["id"])
+puts 'Reloading merits'
+YAML.load(File.read('db/seeds/merits.yaml')).each do |m|
+  merit = Merit.find_or_initialize_by(id: m['id'])
   merit.update(m)
-  puts "Updated " + merit.name + " for " + merit.character.name
+  puts 'Updated ' + merit.name + ' for ' + merit.character.name
 end
 
-puts "Reloading weapons"
-YAML.load(File.read("db/seeds/weapons.yaml")).each do |w|
-  weapon = Weapon.find_or_initialize_by(id: w["id"])
+puts 'Reloading weapons'
+YAML.load(File.read('db/seeds/weapons.yaml')).each do |w|
+  weapon = Weapon.find_or_initialize_by(id: w['id'])
   weapon.update(w)
-  puts "Updated " + weapon.name + " for " + weapon.character.name
+  puts 'Updated ' + weapon.name + ' for ' + weapon.character.name
 end
 
-puts "Reloading QCs"
-YAML.load(File.read("db/seeds/qcs.yaml")).each do |q|
-  qc = Qc.find_or_initialize_by(id: q["id"])
+puts 'Reloading QCs'
+YAML.load(File.read('db/seeds/qcs.yaml')).each do |q|
+  qc = Qc.find_or_initialize_by(id: q['id'])
   qc.update(q)
-  puts "Updated " + qc.name
+  puts 'Updated ' + qc.name
 end
 
-puts "Reloading QC merits"
-YAML.load(File.read("db/seeds/qc_merits.yaml")).each do |m|
-  merit = QcMerit.find_or_initialize_by(id: m["id"])
+puts 'Reloading QC merits'
+YAML.load(File.read('db/seeds/qc_merits.yaml')).each do |m|
+  merit = QcMerit.find_or_initialize_by(id: m['id'])
   merit.update(m)
-  puts "Updated " + merit.name + " for " + merit.qc.name
+  puts 'Updated ' + merit.name + ' for ' + merit.qc.name
 end
 
-puts "Reloading QC attacks"
-YAML.load(File.read("db/seeds/qc_attacks.yaml")).each do |a|
-  attack = QcAttack.find_or_initialize_by(id: a["id"])
+puts 'Reloading QC attacks'
+YAML.load(File.read('db/seeds/qc_attacks.yaml')).each do |a|
+  attack = QcAttack.find_or_initialize_by(id: a['id'])
   attack.update(a)
-  puts "Updated " + attack.name + " for " + attack.qc.name
+  puts 'Updated ' + attack.name + ' for ' + attack.qc.name
 end
 
 # Needed to prevent PG:UniqueViolation errors

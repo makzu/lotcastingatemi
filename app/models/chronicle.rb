@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Chronicle < ApplicationRecord
   belongs_to :st, class_name: 'Player'
 

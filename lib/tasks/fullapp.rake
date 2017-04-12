@@ -11,7 +11,7 @@ namespace :lca do
 
     desc 'Lint code with rubocop'
     RuboCop::RakeTask.new(:rubocop) do |tsk|
-      tsk.options = ['-DRl']
+      tsk.options = ['-DR']
       tsk.fail_on_error = false
     end
 

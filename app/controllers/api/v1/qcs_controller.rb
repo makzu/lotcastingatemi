@@ -1,30 +1,37 @@
-class Api::V1::QcsController < Api::V1::BaseController
-  before_action :authenticate_player
-  before_action :set_qc, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  def show
-    render json: @qc
-  end
+module Api
+  module V1
+    class QcsController < Api::V1::BaseController
+      before_action :authenticate_player
+      before_action :set_qc, only: %i[show update destroy]
 
-  def create
-    render json: Qc.create(qc_params).as_json
-  end
+      def show
+        render json: @qc
+      end
 
-  def destroy
-    render json: @qc.destroy
-  end
+      def create
+        render json: Qc.create(qc_params).as_json
+      end
 
-  def update
-    @qc.update_attributes(qc_params)
-    render json: @qc
-  end
+      def destroy
+        render json: @qc.destroy
+      end
 
-  private
-  def set_qc
-    @qc = Qc.find(params[:id])
-  end
+      def update
+        @qc.update_attributes(qc_params)
+        render json: @qc
+      end
 
-  def qc_params
-    params.require(:qc).permit!
+      private
+
+      def set_qc
+        @qc = Qc.find(params[:id])
+      end
+
+      def qc_params
+        params.require(:qc).permit!
+      end
+    end
   end
 end

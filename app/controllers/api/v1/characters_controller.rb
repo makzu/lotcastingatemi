@@ -1,31 +1,38 @@
-class Api::V1::CharactersController < Api::V1::BaseController
-  before_action :authenticate_player
-  before_action :set_character, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  def show
-    included = %w{merits weapons}
-    render json: @character, include: included
-  end
+module Api
+  module V1
+    class CharactersController < BaseController
+      before_action :authenticate_player
+      before_action :set_character, only: %i[show update destroy]
 
-  def create
-    render json: Character.create(character_params)
-  end
+      def show
+        included = %w[merits weapons]
+        render json: @character, include: included
+      end
 
-  def destroy
-    render json: @character.destroy
-  end
+      def create
+        render json: Character.create(character_params)
+      end
 
-  def update
-    @character.update_attributes(character_params)
-    render json: @character
-  end
+      def destroy
+        render json: @character.destroy
+      end
 
-  private
-  def set_character
-    @character = Character.find(params[:id])
-  end
+      def update
+        @character.update_attributes(character_params)
+        render json: @character
+      end
 
-  def character_params
-    params.require(:character).permit!
+      private
+
+      def set_character
+        @character = Character.find(params[:id])
+      end
+
+      def character_params
+        params.require(:character).permit!
+      end
+    end
   end
 end

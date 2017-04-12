@@ -1,40 +1,42 @@
-class Api::V1::ChroniclesController < Api::V1::BaseController
-  before_action :authenticate_player
-  before_action :set_chronicle, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  def show
-    render json: @chronicle.as_json( include: {
-      st: { only: [:name, :id]},
-      players: { only: [:name, :id]},
-      characters: { include: [:weapons, :merits ]},
-      qcs: { include: [ :qc_attacks, :qc_merits ]}
-    })
-  end
+module Api
+  module V1
+    class ChroniclesController < Api::V1::BaseController
+      before_action :authenticate_player
+      before_action :set_chronicle, only: %i[show update destroy]
 
-  def create
-    render json: Chronicle.create(chronicle_params)
-  end
+      def show
+        render json: @chronicle.as_json(include: {
+          st: { only: %i[name id] },
+          players: { only: %i[name id] },
+          characters: { include: %i[weapons merits] },
+          qcs: { include: %i[qc_attacks qc_merits] }
+        })
+      end
 
-  def destroy
-    render json: @chronicle.destroy
-  end
+      def create
+        render json: Chronicle.create(chronicle_params)
+      end
 
-  def update
-    @chronicle.update_attributes(chronicle_params)
-    render json: @chronicle
-  end
+      def destroy
+        render json: @chronicle.destroy
+      end
 
-  def update
-    @chronicle.update_attributes(chronicle_params)
-    render json: @chronicle
-  end
+      def update
+        @chronicle.update_attributes(chronicle_params)
+        render json: @chronicle
+      end
 
-  private
-  def set_chronicle
-    @chronicle = Chronicle.find(params[:id])
-  end
+      private
 
-  def chronicle_params
-    params.require(:chronicle).permit!
+      def set_chronicle
+        @chronicle = Chronicle.find(params[:id])
+      end
+
+      def chronicle_params
+        params.require(:chronicle).permit!
+      end
+    end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ## Common validations and methods for entities with health levels and damage
 module HealthLevels
   extend ActiveSupport::Concern
@@ -12,6 +14,6 @@ module HealthLevels
               :damage_bashing,
               :damage_lethal,
               :damage_aggravated,
-      numericality: { greater_than_or_equal_to: 0 }
+              numericality: { greater_than_or_equal_to: 0 }
   end
 end

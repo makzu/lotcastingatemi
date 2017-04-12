@@ -1,14 +1,20 @@
-class Api::V1::BaseController < ActionController::API
-  include Knock::Authenticable
-  include Pundit
+# frozen_string_literal: true
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+module Api
+  module V1
+    class BaseController < ActionController::API
+      include Knock::Authenticable
+      include Pundit
 
-  def record_not_found
-    render status: :not_found
-  end
+      rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  def pundit_user
-    current_player
+      def record_not_found
+        render status: :not_found
+      end
+
+      def pundit_user
+        current_player
+      end
+    end
   end
 end

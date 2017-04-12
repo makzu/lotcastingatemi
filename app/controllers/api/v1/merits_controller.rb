@@ -1,31 +1,38 @@
-class Api::V1::MeritsController < Api::V1::BaseController
-  before_action :authenticate_player
-  before_action :set_merit, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  def show
-    render json: @merit
-  end
+module Api
+  module V1
+    class MeritsController < Api::V1::BaseController
+      before_action :authenticate_player
+      before_action :set_merit, only: %i[show update destroy]
 
-  def create
-    @character = Character.find(params[:character_id])
-    render json: Merit.create(merit_params)
-  end
+      def show
+        render json: @merit
+      end
 
-  def destroy
-    render json: @merit.destroy
-  end
+      def create
+        @character = Character.find(params[:character_id])
+        render json: Merit.create(merit_params)
+      end
 
-  def update
-    @merit.update_attributes(merit_params)
-    render json: @merit
-  end
+      def destroy
+        render json: @merit.destroy
+      end
 
-  private
-  def set_merit
-    @merit = Merit.find(params[:id])
-  end
+      def update
+        @merit.update_attributes(merit_params)
+        render json: @merit
+      end
 
-  def merit_params
-    params.require(:merit).permit!
+      private
+
+      def set_merit
+        @merit = Merit.find(params[:id])
+      end
+
+      def merit_params
+        params.require(:merit).permit!
+      end
+    end
   end
 end

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :character do
-    name "King"
+    name 'King'
     chronicle
     player
   end
 
   factory :character_2, class: Character do
-    name "Queen"
+    name 'Queen'
     chronicle
     player
   end

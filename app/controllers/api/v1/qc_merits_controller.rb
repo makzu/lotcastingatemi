@@ -1,30 +1,37 @@
-class Api::V1::QcMeritsController < Api::V1::BaseController
-  before_action :authenticate_player
-  before_action :set_qc_merit, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  def show
-    render json: @qc_merit
-  end
+module Api
+  module V1
+    class QcMeritsController < Api::V1::BaseController
+      before_action :authenticate_player
+      before_action :set_qc_merit, only: %i[show update destroy]
 
-  def create
-    render json: QcMerit.create(qc_merit_params)
-  end
+      def show
+        render json: @qc_merit
+      end
 
-  def destroy
-    render json: @qc_merit.destroy
-  end
+      def create
+        render json: QcMerit.create(qc_merit_params)
+      end
 
-  def update
-    @qc_merit.update_attributes(qc_merit_params)
-    render json: @qc_merit
-  end
+      def destroy
+        render json: @qc_merit.destroy
+      end
 
-  private
-  def set_qc_merit
-    @qc_merit = QcMerit.find(params[:id])
-  end
+      def update
+        @qc_merit.update_attributes(qc_merit_params)
+        render json: @qc_merit
+      end
 
-  def qc_merit_params
-    params.require(:qc_merit).permit!
+      private
+
+      def set_qc_merit
+        @qc_merit = QcMerit.find(params[:id])
+      end
+
+      def qc_merit_params
+        params.require(:qc_merit).permit!
+      end
+    end
   end
 end

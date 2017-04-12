@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::WeaponsController, type: :controller do
-
   def authenticated_header(user)
     token = Knock::AuthToken.new(payload: { sub: user.id }).token
     "Bearer #{token}"
@@ -13,8 +14,8 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
     @weapon = FactoryGirl.create(:weapon, character_id: @character.id)
   end
 
-  describe "GET #show" do
-    it "returns http success" do
+  describe 'GET #show' do
+    it 'returns http success' do
       request.headers['Authorization'] = authenticated_header(@player)
 
       get :show, params: { character_id: @weapon.character_id, id: @weapon.id, format: :json }
@@ -22,72 +23,71 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'show'
+    it_behaves_like 'respond_to_unauthenticated', 'show'
   end
 
-  describe "POST #create" do
-    context "With valid attributes" do
-      it "Increases Weapon count by 1" do
+  describe 'POST #create' do
+    context 'With valid attributes' do
+      it 'Increases Weapon count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
         @weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id)
 
-        expect { post :create, params: { character_id: @character.id, :weapon => @weapon_params }, format: :json }.to change(Weapon, :count).by(1)
+        expect { post :create, params: { character_id: @character.id, weapon: @weapon_params }, format: :json }.to change(Weapon, :count).by(1)
       end
     end
 
-    context "With invalid attributes" do
-      it "Increases Weapon count by 0" do
+    context 'With invalid attributes' do
+      it 'Increases Weapon count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: "Attribute")
+        @invalid_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: 'Attribute')
 
-        expect { post :create, params: { character_id: @character.id, :weapon => @invalid_weapon_params }, format: :json }.to change(Weapon, :count).by(0)
+        expect { post :create, params: { character_id: @character.id, weapon: @invalid_weapon_params }, format: :json }.to change(Weapon, :count).by(0)
       end
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'create'
+    it_behaves_like 'respond_to_unauthenticated', 'create'
   end
 
-  describe "DELETE #destroy" do
-    it "Decreases Weapon count by 1" do
+  describe 'DELETE #destroy' do
+    it 'Decreases Weapon count by 1' do
       request.headers['Authorization'] = authenticated_header(@player)
 
       expect { delete :destroy, params: { character_id: @weapon.character_id, id: @weapon.id, format: :json } }.to change(Weapon, :count).by(-1)
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'destroy'
+    it_behaves_like 'respond_to_unauthenticated', 'destroy'
   end
 
-  describe "PATCH #update" do
-    context "With valid attributes" do
-      it "Updates weapon attributes" do
+  describe 'PATCH #update' do
+    context 'With valid attributes' do
+      it 'Updates weapon attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
 
-        @updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: "heavy")
+        @updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: 'heavy')
 
-        expect(@weapon.weight).to eq("light")
+        expect(@weapon.weight).to eq('light')
 
         patch :update, params: { character_id: @character.id, id: @weapon.id, weapon: @updated_weapon_params, format: :json }
         @weapon.reload
 
-        expect(@weapon.weight).to eq("heavy")
+        expect(@weapon.weight).to eq('heavy')
       end
     end
 
-    context "With invalid attributes" do
-      it "Updates weapon attributes" do
+    context 'With invalid attributes' do
+      it 'Updates weapon attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: "Invalid Weight")
+        @invalid_updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: 'Invalid Weight')
 
-        expect(@weapon.weight).to eq("light")
+        expect(@weapon.weight).to eq('light')
 
         patch :update, params: { character_id: @character.id, id: @weapon.id, weapon: @invalid_updated_weapon_params, format: :json }
         @weapon.reload
 
-        expect(@weapon.weight).to eq("light")
+        expect(@weapon.weight).to eq('light')
       end
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'update'
+    it_behaves_like 'respond_to_unauthenticated', 'update'
   end
-
 end

@@ -12,3 +12,11 @@ AllCops:
 
 Style/IndentationWidth:
   Severity: warning
+
+Style/SpaceInsidePercentLiteralDelimiters:
+  Enabled: false
+
+Style/StringLiterals:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'

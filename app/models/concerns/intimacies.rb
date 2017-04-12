@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 ## Common validations for entities with intimacies
 INTIMACY_SCHEMA = {
-  "type": "array",
+  "type": 'array',
   "items": {
-    "type": "object",
-    "required": ["subject", "rating"],
+    "type": 'object',
+    "required": %w[subject rating],
     "properties": {
-      "subject": { "type": "string" },
-      "rating": { "type": "integer", "minimum": 0, "maximum": 3 }
+      "subject": { "type": 'string' },
+      "rating": { "type": 'integer', "minimum": 0, "maximum": 3 }
     },
     "additionalProperties": false
   }
-}
+}.freeze
 
 module Intimacies
   extend ActiveSupport::Concern

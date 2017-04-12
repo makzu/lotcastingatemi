@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
-require "#{Rails.root}/spec/controllers/shared_examples/respond_to_unauthenticated.rb"
+require Rails.root.join('spec', 'controllers', 'shared_examples', 'respond_to_unauthenticated.rb')
 
 RSpec.describe Api::V1::CharactersController, type: :controller do
-
   def authenticated_header(user)
     token = Knock::AuthToken.new(payload: { sub: user.id }).token
     "Bearer #{token}"
@@ -13,52 +14,52 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
     @character = FactoryGirl.create(:character, player_id: @player.id)
   end
 
-  describe "GET #show" do
-    it "returns http success" do
+  describe 'GET #show' do
+    it 'returns http success' do
       request.headers['Authorization'] = authenticated_header(@player)
       get :show, params: { id: @character, format: :json }
       expect(response).to have_http_status(:success)
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'show'
+    it_behaves_like 'respond_to_unauthenticated', 'show'
   end
 
-  describe "POST #create" do
-    context "With valid attributes" do
-      it "Increases Character count by 1" do
+  describe 'POST #create' do
+    context 'With valid attributes' do
+      it 'Increases Character count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryGirl.create(:chronicle)
         @character_params = FactoryGirl.attributes_for(:character, chronicle_id: @chronicle.id, player_id: @player.id)
 
-        expect { post :create, params: { :character => @character_params }, format: :json }.to change(Character, :count).by(1)
+        expect { post :create, params: { character: @character_params }, format: :json }.to change(Character, :count).by(1)
       end
     end
 
-    context "With invalid attributes" do
-      it "Increases Character count by 0" do
+    context 'With invalid attributes' do
+      it 'Increases Character count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryGirl.create(:chronicle)
-        @invalid_character_params = FactoryGirl.attributes_for(:character, chronicle_id: "Invalid", player_id: "Attribute")
+        @invalid_character_params = FactoryGirl.attributes_for(:character, chronicle_id: 'Invalid', player_id: 'Attribute')
 
-        expect { post :create, params: { :character => @invalid_character_params }, format: :json }.to change(Character, :count).by(0)
+        expect { post :create, params: { character: @invalid_character_params }, format: :json }.to change(Character, :count).by(0)
       end
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'create'
+    it_behaves_like 'respond_to_unauthenticated', 'create'
   end
 
-  describe "DELETE #destroy" do
-    it "Decreases Character count by 1" do
+  describe 'DELETE #destroy' do
+    it 'Decreases Character count by 1' do
       request.headers['Authorization'] = authenticated_header(@player)
       expect { delete :destroy, params: { id: @character.id, format: :json } }.to change(Character, :count).by(-1)
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'destroy'
+    it_behaves_like 'respond_to_unauthenticated', 'destroy'
   end
 
-  describe "PATCH #update" do
-    context "With valid attributes" do
-      it "Updates character attributes" do
+  describe 'PATCH #update' do
+    context 'With valid attributes' do
+      it 'Updates character attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryGirl.create(:chronicle)
         @updated_character_params = FactoryGirl.attributes_for(:character, essence: 5, attr_wits: 5)
@@ -74,11 +75,11 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
       end
     end
 
-    context "With invalid attributes" do
-      it "Updates character attributes" do
+    context 'With invalid attributes' do
+      it 'Updates character attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryGirl.create(:chronicle)
-        @invalid_updated_character_params = FactoryGirl.attributes_for(:character, essence: -1, )
+        @invalid_updated_character_params = FactoryGirl.attributes_for(:character, essence: -1)
 
         expect(@character.essence).not_to eq(-1)
 
@@ -89,7 +90,6 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
       end
     end
 
-    it_behaves_like "respond_to_unauthenticated", 'update'
+    it_behaves_like 'respond_to_unauthenticated', 'update'
   end
-  
 end

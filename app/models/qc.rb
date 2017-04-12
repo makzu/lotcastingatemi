@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 ACTION_SCHEMA = {
-  "type": "array",
+  "type": 'array',
   "items": {
-    "type": "object",
-    "required": ["action", "pool"],
+    "type": 'object',
+    "required": %w[action pool],
     "properties": {
-      "action": { "type": "string" },
-      "pool": { "type": "integer", "minimum": 0, "maximum": 99 }
+      "action": { "type": 'string' },
+      "pool": { "type": 'integer', "minimum": 0, "maximum": 99 }
     },
     "additionalProperties": false
   }
-}
+}.freeze
 
 class Qc < ApplicationRecord
   include HealthLevels
@@ -24,22 +26,22 @@ class Qc < ApplicationRecord
   belongs_to :chronicle, optional: true
 
   # Essence above 5 is explicitly mentioned in the book
-  validates_numericality_of :essence, greater_than_or_equal_to: 1, less_than_or_equal_to: 10
+  validates :essence, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
 
-  validates_numericality_of :motes_personal_current, :motes_personal_total,
-      :motes_peripheral_current, :motes_peripheral_total,
+  validates :motes_personal_current, :motes_personal_total,
+            :motes_peripheral_current, :motes_peripheral_total,
 
-      :grapple, :grapple_control,
-      :hardness,
-      :initiative, :onslaught,
-    greater_than_or_equal_to: 0
+            :grapple, :grapple_control,
+            :hardness,
+            :initiative, :onslaught,
+            numericality: { greater_than_or_equal_to: 0 }
 
-  validates_numericality_of :resolve, :guile, :appearance,
-      :evasion, :parry, :soak,
-      :movement,
+  validates :resolve, :guile, :appearance,
+            :evasion, :parry, :soak,
+            :movement,
 
-      :senses,
-    greater_than: 0
+            :senses,
+            numericality: { greater_than: 0 }
 
   validates :actions, json: { schema: ACTION_SCHEMA }
   validate :cant_have_more_current_motes_than_total
@@ -47,11 +49,11 @@ class Qc < ApplicationRecord
   private
 
   def cant_have_more_current_motes_than_total
-    if (motes_personal_current > motes_personal_total)
-      errors.add(:motes_personal_current, "cannot be more than total")
+    if motes_personal_current > motes_personal_total
+      errors.add(:motes_personal_current, 'cannot be more than total')
     end
-    if (motes_peripheral_current > motes_peripheral_total)
-      errors.add(:motes_peripheral_current, "cannot be more than total")
+    if motes_peripheral_current > motes_peripheral_total # rubocop:disable Style/GuardClause
+      errors.add(:motes_peripheral_current, 'cannot be more than total')
     end
   end
 end

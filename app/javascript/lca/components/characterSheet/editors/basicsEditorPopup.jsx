@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -102,12 +103,12 @@ class BasicsEditorPopup extends React.Component {
   }
 }
 BasicsEditorPopup.propTypes = {
-  character: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    essence: React.PropTypes.number.isRequired,
-    description: React.PropTypes.string.isRequired
+  character: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    essence: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired
   }).isRequired,
-  updateChar: React.PropTypes.func
+  updateChar: PropTypes.func
 }
 function mapDispatchToProps(dispatch) {
   return {

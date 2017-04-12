@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -91,8 +92,8 @@ class WillpowerPopup extends React.Component {
   }
 }
 WillpowerPopup.propTypes = {
-  character: React.PropTypes.shape(withWillpower).isRequired,
-  updateChar: React.PropTypes.func
+  character: PropTypes.shape(withWillpower).isRequired,
+  updateChar: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

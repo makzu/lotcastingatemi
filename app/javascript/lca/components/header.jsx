@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
@@ -75,8 +76,8 @@ export function LcaHeader(props) {
 }
 
 LcaHeader.propTypes = {
-  navDrawerOpen: React.PropTypes.bool.isRequired,
-  toggleMenu: React.PropTypes.func
+  navDrawerOpen: PropTypes.bool.isRequired,
+  toggleMenu: PropTypes.func
 }
 
 function mapStateToProps(state) {

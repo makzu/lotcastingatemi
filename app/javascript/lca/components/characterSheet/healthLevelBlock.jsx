@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Divider from 'material-ui/Divider'
 
@@ -19,5 +20,5 @@ export default function HealthLevelBlock(props) {
   </div>)
 }
 HealthLevelBlock.propTypes = {
-  character: React.PropTypes.shape(withHealthLevels)
+  character: PropTypes.shape(withHealthLevels)
 }

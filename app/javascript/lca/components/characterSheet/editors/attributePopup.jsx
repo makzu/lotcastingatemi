@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -149,8 +150,8 @@ class AttributePopup extends React.Component {
   }
 }
 AttributePopup.propTypes = {
-  character: React.PropTypes.shape(withAttributes).isRequired,
-  updateChar: React.PropTypes.func
+  character: PropTypes.shape(withAttributes).isRequired,
+  updateChar: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

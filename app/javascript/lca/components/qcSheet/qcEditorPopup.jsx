@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -75,9 +76,9 @@ class QcAttackFields extends React.Component {
   }
 }
 QcAttackFields.propTypes = {
-  attack: React.PropTypes.shape(qcAttack).isRequired,
-  onAttackChange: React.PropTypes.func.isRequired,
-  onRemoveClick: React.PropTypes.func.isRequired
+  attack: PropTypes.shape(qcAttack).isRequired,
+  onAttackChange: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired
 }
 
 class QcMeritFields extends React.Component {
@@ -132,9 +133,9 @@ class QcMeritFields extends React.Component {
   }
 }
 QcMeritFields.propTypes = {
-  merit: React.PropTypes.shape(qcMerit).isRequired,
-  onMeritChange: React.PropTypes.func.isRequired,
-  onRemoveClick: React.PropTypes.func.isRequired
+  merit: PropTypes.shape(qcMerit).isRequired,
+  onMeritChange: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired
 }
 
 class QcEditorPopup extends React.Component {
@@ -390,16 +391,16 @@ class QcEditorPopup extends React.Component {
   }
 }
 QcEditorPopup.propTypes = {
-  qc: React.PropTypes.shape(fullQc).isRequired,
-  attacks: React.PropTypes.arrayOf(React.PropTypes.shape(qcAttack)),
-  merits: React.PropTypes.arrayOf(React.PropTypes.shape(qcMerit)),
-  updateQc: React.PropTypes.func,
-  updateQcAttack: React.PropTypes.func,
-  addQcAttack: React.PropTypes.func,
-  removeQcAttack: React.PropTypes.func,
-  updateQcMerit: React.PropTypes.func,
-  addQcMerit: React.PropTypes.func,
-  removeQcMerit: React.PropTypes.func
+  qc: PropTypes.shape(fullQc).isRequired,
+  attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
+  merits: PropTypes.arrayOf(PropTypes.shape(qcMerit)),
+  updateQc: PropTypes.func,
+  updateQcAttack: PropTypes.func,
+  addQcAttack: PropTypes.func,
+  removeQcAttack: PropTypes.func,
+  updateQcMerit: PropTypes.func,
+  addQcMerit: PropTypes.func,
+  removeQcMerit: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Divider from 'material-ui/Divider'
 import AbilityPopup from './editors/abilityPopup.jsx'
 import RatingDots from '../generic/ratingDots.jsx'
@@ -13,8 +14,8 @@ function AbilityBlock(props) {
 }
 
 AbilityBlock.propTypes = {
-  ability: React.PropTypes.string.isRequired,
-  rating: React.PropTypes.number.isRequired
+  ability: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
 }
 
 export default function FullAbilityBlock(props) {
@@ -71,5 +72,5 @@ export default function FullAbilityBlock(props) {
   )
 }
 FullAbilityBlock.propTypes = {
-  character: React.PropTypes.shape(withAbilities)
+  character: PropTypes.shape(withAbilities)
 }

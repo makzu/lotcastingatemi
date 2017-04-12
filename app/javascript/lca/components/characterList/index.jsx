@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -19,9 +20,9 @@ function NewQcForm(props) {
   </div>
 }
 NewQcForm.propTypes = {
-  name: React.PropTypes.string,
-  onCreateClick: React.PropTypes.func.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  name: PropTypes.string,
+  onCreateClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
 class CharacterList extends React.Component {
@@ -122,11 +123,11 @@ class CharacterList extends React.Component {
   }
 }
 CharacterList.propTypes = {
-  player: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
-  characters: React.PropTypes.arrayOf(React.PropTypes.shape(fullChar)),
-  qcs: React.PropTypes.arrayOf(React.PropTypes.shape(fullQc)),
-  createCharacter: React.PropTypes.func,
-  createQc: React.PropTypes.func
+  player: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  characters: PropTypes.arrayOf(PropTypes.shape(fullChar)),
+  qcs: PropTypes.arrayOf(PropTypes.shape(fullQc)),
+  createCharacter: PropTypes.func,
+  createQc: PropTypes.func
 }
 
 function mapStateToProps(state) {

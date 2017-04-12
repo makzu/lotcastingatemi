@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function RatingDots(props) {
   const emptyCount = ( props.fillTo || 5 ) - props.rating
@@ -19,9 +20,9 @@ function RatingDots(props) {
 }
 
 RatingDots.propTypes = {
-  rating: React.PropTypes.number.isRequired,
-  fillTo: React.PropTypes.number,
-  dontFill: React.PropTypes.bool
+  rating: PropTypes.number.isRequired,
+  fillTo: PropTypes.number,
+  dontFill: PropTypes.bool
 }
 
 export default RatingDots

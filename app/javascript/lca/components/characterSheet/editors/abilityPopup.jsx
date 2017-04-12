@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -23,11 +24,11 @@ function AbilityBlock(props) {
   )
 }
 AbilityBlock.propTypes = {
-  label: React.PropTypes.string.isRequired,
-  abil: React.PropTypes.string.isRequired,
-  value: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired
+  label: PropTypes.string.isRequired,
+  abil: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired
 }
 
 // TODO include sample pools on side of popup
@@ -226,8 +227,8 @@ class AbilityPopup extends React.Component {
   }
 }
 AbilityPopup.propTypes = {
-  character: React.PropTypes.shape(withAbilities).isRequired,
-  updateChar: React.PropTypes.func
+  character: PropTypes.shape(withAbilities).isRequired,
+  updateChar: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider'
@@ -38,7 +39,7 @@ export function FullSpecialtyBlock(props) {
   </div>)
 }
 FullSpecialtyBlock.propTypes = {
-  character: React.PropTypes.shape(withSpecialties).isRequired
+  character: PropTypes.shape(withSpecialties).isRequired
 }
 
 export function MeritSummary(props) {
@@ -63,8 +64,8 @@ export function MeritSummary(props) {
   </div>)
 }
 MeritSummary.propTypes = {
-  character: React.PropTypes.shape(fullChar).isRequired,
-  merits: React.PropTypes.arrayOf(React.PropTypes.shape(fullMerit)).isRequired
+  character: PropTypes.shape(fullChar).isRequired,
+  merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)).isRequired
 }
 
 export function IntimacySummary(props) {
@@ -97,7 +98,7 @@ export function IntimacySummary(props) {
   </div>)
 }
 IntimacySummary.propTypes = {
-  character: React.PropTypes.shape(withIntimacies)
+  character: PropTypes.shape(withIntimacies)
 }
 
 export function WillpowerBlock(props) {
@@ -115,7 +116,7 @@ export function WillpowerBlock(props) {
   </div>)
 }
 WillpowerBlock.propTypes = {
-  character: React.PropTypes.shape(withWillpower)
+  character: PropTypes.shape(withWillpower)
 }
 
 
@@ -162,9 +163,9 @@ export class CharacterSheet extends React.Component {
   }
 }
 CharacterSheet.propTypes = {
-  character: React.PropTypes.shape(fullChar),
-  weapons: React.PropTypes.arrayOf(React.PropTypes.shape(fullWeapon)),
-  merits: React.PropTypes.arrayOf(React.PropTypes.shape(fullMerit)).isRequired
+  character: PropTypes.shape(fullChar),
+  weapons: PropTypes.arrayOf(PropTypes.shape(fullWeapon)),
+  merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)).isRequired
 }
 
 function mapStateToProps(state, ownProps) {

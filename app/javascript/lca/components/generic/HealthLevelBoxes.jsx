@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import * as calc from '../../utils/calculated'
 import { withHealthLevels } from '../../utils/propTypes'
@@ -129,5 +130,5 @@ export default function HealthLevelBoxes(props) {
 }
 
 HealthLevelBoxes.propTypes = {
-  character: React.PropTypes.shape(withHealthLevels)
+  character: PropTypes.shape(withHealthLevels)
 }

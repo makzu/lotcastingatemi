@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
 import * as calc from '../../utils/calculated'
@@ -35,5 +36,5 @@ export default function SocialBlock(props) {
   </div>)
 }
 SocialBlock.propTypes = {
-  character: React.PropTypes.shape({ ...withAttributes, ...withAbilities })
+  character: PropTypes.shape({ ...withAttributes, ...withAbilities })
 }

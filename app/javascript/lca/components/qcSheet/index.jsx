@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
@@ -22,7 +23,7 @@ function MotePool(props){
   }
 }
 MotePool.propTypes = {
-  qc: React.PropTypes.shape(withMotePool)
+  qc: PropTypes.shape(withMotePool)
 }
 
 class QcSheet extends React.Component {
@@ -118,10 +119,10 @@ function mapStateToProps(state, ownProps) {
   }
 }
 QcSheet.propTypes = {
-  qc: React.PropTypes.shape(fullQc),
-  qc_merits: React.PropTypes.arrayOf(React.PropTypes.shape(qcMerit)),
-  qc_attacks: React.PropTypes.arrayOf(React.PropTypes.shape(qcAttack)),
-  updateQc: React.PropTypes.func
+  qc: PropTypes.shape(fullQc),
+  qc_merits: PropTypes.arrayOf(PropTypes.shape(qcMerit)),
+  qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
+  updateQc: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

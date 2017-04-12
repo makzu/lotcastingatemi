@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 
 export const withHealthLevels = {
   health_level_0s:    PropTypes.number.isRequired,

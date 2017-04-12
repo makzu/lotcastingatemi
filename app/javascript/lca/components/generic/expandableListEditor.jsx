@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
@@ -28,13 +29,13 @@ function CraftFields(props) {
   </span>)
 }
 CraftFields.propTypes = {
-  trait: React.PropTypes.shape({
-    craft: React.PropTypes.string.isRequired,
-    rating: React.PropTypes.number.isRequired
+  trait: PropTypes.shape({
+    craft: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired
   }).isRequired,
-  index: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
 }
 
 function QcActionFields(props) {
@@ -55,13 +56,13 @@ function QcActionFields(props) {
   </span>)
 }
 QcActionFields.propTypes = {
-  trait: React.PropTypes.shape({
-    action: React.PropTypes.string.isRequired,
-    pool: React.PropTypes.number.isRequired
+  trait: PropTypes.shape({
+    action: PropTypes.string.isRequired,
+    pool: PropTypes.number.isRequired
   }).isRequired,
-  index: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
 }
 
 function MartialArtFields(props) {
@@ -82,13 +83,13 @@ function MartialArtFields(props) {
   </span>)
 }
 MartialArtFields.propTypes = {
-  trait: React.PropTypes.shape({
-    style: React.PropTypes.string.isRequired,
-    rating: React.PropTypes.number.isRequired
+  trait: PropTypes.shape({
+    style: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired
   }).isRequired,
-  index: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
 }
 
 function SpecialtyFields(props) {
@@ -120,12 +121,12 @@ function SpecialtyFields(props) {
   </span>)
 }
 SpecialtyFields.propTypes = {
-  character: React.PropTypes.shape({ ...withSpecialties, ...withAbilities }).isRequired,
-  trait: React.PropTypes.shape(specialty).isRequired,
-  index: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
-  onSpecialtyAbilityChange: React.PropTypes.func.isRequired
+  character: PropTypes.shape({ ...withSpecialties, ...withAbilities }).isRequired,
+  trait: PropTypes.shape(specialty).isRequired,
+  index: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onSpecialtyAbilityChange: PropTypes.func.isRequired
 }
 
 function IntimacyFields(props) {
@@ -147,13 +148,13 @@ function IntimacyFields(props) {
   </span>)
 }
 IntimacyFields.propTypes = {
-  trait: React.PropTypes.shape({
-    subject: React.PropTypes.string.isRequired,
-    rating: React.PropTypes.number.isRequired
+  trait: PropTypes.shape({
+    subject: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired
   }).isRequired,
-  index: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
 }
 
 function TraitFields(props) {
@@ -190,9 +191,9 @@ function TraitFields(props) {
   </div>)
 }
 TraitFields.propTypes = {
-  traitName: React.PropTypes.string.isRequired,
-  index: React.PropTypes.number.isRequired,
-  onRemove: React.PropTypes.func.isRequired
+  traitName: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  onRemove: PropTypes.func.isRequired
 }
 
 export default class ExpandableListEditor extends React.Component {
@@ -328,9 +329,9 @@ export default class ExpandableListEditor extends React.Component {
   }
 }
 ExpandableListEditor.propTypes = {
-  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
-  trait: React.PropTypes.string.isRequired,
-  onUpdate: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
-  numberMax: React.PropTypes.number
+  character: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  trait: PropTypes.string.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  numberMax: PropTypes.number
 }

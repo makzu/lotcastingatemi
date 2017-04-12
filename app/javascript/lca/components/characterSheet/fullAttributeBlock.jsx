@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Divider from 'material-ui/Divider'
 
 import AttributePopup from './editors/attributePopup.jsx'
@@ -13,8 +14,8 @@ function AttributeBlock(props) {
 }
 
 AttributeBlock.propTypes = {
-  attribute: React.PropTypes.string.isRequired,
-  rating: React.PropTypes.number.isRequired
+  attribute: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
 }
 
 class FullAttributeBlock extends React.Component {
@@ -77,7 +78,7 @@ class FullAttributeBlock extends React.Component {
 }
 
 FullAttributeBlock.propTypes = {
-  character: React.PropTypes.shape(withAttributes)
+  character: PropTypes.shape(withAttributes)
 }
 
 export default FullAttributeBlock

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -132,8 +133,8 @@ class HealthLevelPopup extends React.Component {
   }
 }
 HealthLevelPopup.propTypes = {
-  character: React.PropTypes.shape(withHealthLevels).isRequired,
-  updateChar: React.PropTypes.func
+  character: PropTypes.shape(withHealthLevels).isRequired,
+  updateChar: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

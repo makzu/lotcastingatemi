@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider'
@@ -36,7 +37,7 @@ export function SingleMerit(props) {
   </div>
 }
 SingleMerit.propTypes = {
-  merit: React.PropTypes.shape(fullMerit),
+  merit: PropTypes.shape(fullMerit),
 }
 
 export class SingleMeritEditor extends React.Component {
@@ -138,10 +139,10 @@ export class SingleMeritEditor extends React.Component {
   }
 }
 SingleMeritEditor.propTypes = {
-  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
-  merit: React.PropTypes.shape(fullMerit),
-  onUpdate: React.PropTypes.func.isRequired,
-  onRemove: React.PropTypes.func.isRequired
+  character: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  merit: PropTypes.shape(fullMerit),
+  onUpdate: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired
 }
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
@@ -226,11 +227,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 MeritFullPage.propTypes = {
-  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
-  merits: React.PropTypes.arrayOf(React.PropTypes.shape(fullMerit)),
-  _handleUpdate: React.PropTypes.func,
-  _handleDestroy: React.PropTypes.func,
-  _handleCreate: React.PropTypes.func
+  character: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)),
+  _handleUpdate: PropTypes.func,
+  _handleDestroy: PropTypes.func,
+  _handleCreate: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 import FlatButton from 'material-ui/FlatButton'
@@ -54,8 +55,8 @@ function WeaponData(props) {
   </TableRow>)
 }
 WeaponData.propTypes = {
-  weapon: React.PropTypes.shape(fullWeapon),
-  character: React.PropTypes.shape({ ...withAttributes, ...withAbilities })
+  weapon: PropTypes.shape(fullWeapon),
+  character: PropTypes.shape({ ...withAttributes, ...withAbilities })
 }
 
 function WeaponEditHeader() {
@@ -82,8 +83,8 @@ function WeightSelect(props) {
   )
 }
 WeightSelect.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
-  weapon: React.PropTypes.shape({ weight: React.PropTypes.string.isRequired })
+  onChange: PropTypes.func.isRequired,
+  weapon: PropTypes.shape({ weight: PropTypes.string.isRequired })
 }
 
 function AbilitySelect(props) {
@@ -98,9 +99,9 @@ function AbilitySelect(props) {
   )
 }
 AbilitySelect.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
-  character: React.PropTypes.shape(withAbilities).isRequired,
-  weapon: React.PropTypes.shape({ ability: React.PropTypes.string.isRequired }).isRequired
+  onChange: PropTypes.func.isRequired,
+  character: PropTypes.shape(withAbilities).isRequired,
+  weapon: PropTypes.shape({ ability: PropTypes.string.isRequired }).isRequired
 }
 
 class WeaponFieldset extends React.Component {
@@ -197,10 +198,10 @@ class WeaponFieldset extends React.Component {
   }
 }
 WeaponFieldset.propTypes = {
-  weapon: React.PropTypes.shape(fullWeapon),
-  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
-  onUpdate: React.PropTypes.func.isRequired,
-  onRemove: React.PropTypes.func.isRequired
+  weapon: PropTypes.shape(fullWeapon),
+  character: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired
 }
 
 class WeaponSummary extends React.Component {
@@ -268,11 +269,11 @@ class WeaponSummary extends React.Component {
   }
 }
 WeaponSummary.propTypes = {
-  weapons: React.PropTypes.arrayOf(React.PropTypes.shape(fullWeapon)),
-  character: React.PropTypes.shape({ id: React.PropTypes.number.isRequired }).isRequired,
-  _handleUpdate: React.PropTypes.func,
-  _handleDestroy: React.PropTypes.func,
-  _handleCreate: React.PropTypes.func,
+  weapons: PropTypes.arrayOf(PropTypes.shape(fullWeapon)),
+  character: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  _handleUpdate: PropTypes.func,
+  _handleDestroy: PropTypes.func,
+  _handleCreate: PropTypes.func,
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -92,8 +93,8 @@ class SpecialtyPopup extends React.Component {
   }
 }
 SpecialtyPopup.propTypes = {
-  character: React.PropTypes.shape(withSpecialties).isRequired,
-  updateChar: React.PropTypes.func
+  character: PropTypes.shape(withSpecialties).isRequired,
+  updateChar: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

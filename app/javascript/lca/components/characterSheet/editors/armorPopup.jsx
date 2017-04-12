@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -125,8 +126,8 @@ class ArmorPopup extends React.Component {
   }
 }
 ArmorPopup.propTypes = {
-  character: React.PropTypes.shape(withArmorStats).isRequired,
-  updateChar: React.PropTypes.func
+  character: PropTypes.shape(withArmorStats).isRequired,
+  updateChar: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
@@ -79,8 +80,8 @@ class IntimacyPopup extends React.Component {
   }
 }
 IntimacyPopup.propTypes = {
-  character: React.PropTypes.shape(withIntimacies).isRequired,
-  updateChar: React.PropTypes.func
+  character: PropTypes.shape(withIntimacies).isRequired,
+  updateChar: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {

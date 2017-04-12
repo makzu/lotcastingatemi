@@ -10,9 +10,11 @@ This is a web app with a backend written in Ruby on Rails and a frontend written
 
 ### How can I run it?
 
-You'll need postgres installed on your system, along with all the other dependencies for Rails development. Make sure you have Ruby 2.4.x installed. You'll also need [Yarn](https://yarnpkg.com/en/), which is a new dependency for Rails 5.1.
+You'll need postgres installed on your system, along with all the other dependencies for Rails development. Make sure you have Ruby *2.4.1* installed. You'll also need [Yarn](https://yarnpkg.com/en/), which is a new dependency for Rails 5.1.
 
-Once you have the repo cloned, run `bin/setup` and it *might* get everything set up for you.  Then run `bin/server` to launch both halves of the server.  Your mileage may vary.
+Once you have the repo cloned, run `bin/setup` and it *should* get everything set up for you.  Then run `bin/server` to launch both halves of the server, and point your browser to `localhost:5000`.  Your mileage may vary.
+
+You can run the code's test suite with `rails lca:test`.
 
 ### Where are the Solars?
 

@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Rails 5.1 rc for Webpacker
 gem 'rails', '~> 5.1.0.rc1'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', github: "rails/webpacker"
-
-gem 'responders'
+gem 'webpacker', github: 'rails/webpacker'
 
 # Use postgres as the database for Active Record
 gem 'pg'
@@ -13,6 +13,7 @@ gem 'pg'
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Used for grid layout and that's pretty much it
 gem 'bourbon'
 gem 'neat'
 
@@ -20,18 +21,18 @@ gem 'neat'
 gem 'uglifier', '>= 1.3.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.11'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'pundit'
 gem 'knock'
+gem 'pundit'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'
@@ -45,19 +46,20 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'capybara', '~> 2.7.0'
-  gem 'selenium-webdriver'
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails'
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'rubocop'
+  gem 'selenium-webdriver'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
   gem 'listen', '~> 3.0.5'
+  gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'rack-cors', require: 'rack/cors'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rack-cors', :require => 'rack/cors'
 end
 
 group :test do
@@ -65,6 +67,6 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-ruby "2.4.0"
+ruby '2.4.1'

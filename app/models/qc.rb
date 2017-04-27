@@ -1,18 +1,6 @@
 # frozen_string_literal: true
 
-ACTION_SCHEMA = {
-  "type": 'array',
-  "items": {
-    "type": 'object',
-    "required": %w[action pool],
-    "properties": {
-      "action": { "type": 'string' },
-      "pool": { "type": 'integer', "minimum": 0, "maximum": 99 }
-    },
-    "additionalProperties": false
-  }
-}.freeze
-
+# Traits for QCs.  A QC can serve as the base for any number of battlegroups.
 class Qc < ApplicationRecord
   include HealthLevels
   include Willpower
@@ -43,7 +31,7 @@ class Qc < ApplicationRecord
             :senses,
             numericality: { greater_than: 0 }
 
-  validates :actions, json: { schema: ACTION_SCHEMA }
+  validates :actions, json: { schema: Schemas::QC_ACTION }
   validate :cant_have_more_current_motes_than_total
 
   private

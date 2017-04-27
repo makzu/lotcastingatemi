@@ -1,53 +1,5 @@
 # frozen_string_literal: true
 
-CRAFT_SCHEMA = {
-  "type": 'array',
-  "items": {
-    "type": 'object',
-    "required": %w[ craft rating ],
-    "properties": {
-      "craft": { "type": 'string' },
-      "rating": { "type": 'integer', "minimum": 0, "maximum": 5 }
-    },
-    "additionalProperties": false
-  }
-}.freeze
-
-MARTIAL_ARTS_SCHEMA = {
-  "type": 'array',
-  "items": {
-    "type": 'object',
-    "required": %w[ style rating ],
-    "properties": {
-      "style": { "type": 'string' },
-      "rating": { "type": 'integer', "minimum": 0, "maximum": 5 }
-    },
-    "additionalProperties": false
-  }
-}.freeze
-
-SPECIALTY_SCHEMA = {
-  "type": 'array',
-  "items": {
-    "type": 'object',
-    "required": %w[ ability context ],
-    "properties": {
-      "ability": {
-        "type": 'string',
-        "enum": %w[
-          archery athletics awareness brawl bureaucracy craft
-          dodge integrity investigation larceny linguistics
-          lore martial arts medicine melee occult performance
-          presence resistance ride sail socialize stealth
-          survival thrown war
-        ]
-      },
-      "context": { "type": 'string' }
-    },
-    "additionalProperties": false
-  }
-}.freeze
-
 class Character < ApplicationRecord
   include HealthLevels
   include Willpower
@@ -84,10 +36,10 @@ class Character < ApplicationRecord
             :abil_survival,    :abil_thrown,         :abil_war,
             zero_thru_five_stat: true
 
-  validates :abil_craft,        json: { schema: CRAFT_SCHEMA        }
-  validates :abil_martial_arts, json: { schema: MARTIAL_ARTS_SCHEMA }
+  validates :abil_craft,        json: { schema: Schemas::CRAFT        }
+  validates :abil_martial_arts, json: { schema: Schemas::MARTIAL_ARTS }
 
-  validates :specialties,       json: { schema: SPECIALTY_SCHEMA    }
+  validates :specialties,       json: { schema: Schemas::SPECIALTY    }
 
   validates :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
             numericality: { greater_than_or_equal_to: 0 }

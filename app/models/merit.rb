@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Individual merits for characters. QC merits have their own model.
 class Merit < ApplicationRecord
   belongs_to :character
 

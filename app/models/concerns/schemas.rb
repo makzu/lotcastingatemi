@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Validation schemas for the various json columns on characters and QCs.
 module Schemas
   CRAFT = {
     "type": 'array',

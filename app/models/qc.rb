@@ -14,7 +14,9 @@ class Qc < ApplicationRecord
   belongs_to :chronicle, optional: true
 
   # Essence above 5 is explicitly mentioned in the book
-  validates :essence, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
+  validates :essence, numericality: {
+    greater_than_or_equal_to: 1, less_than_or_equal_to: 10
+  }
 
   validates :motes_personal_current, :motes_personal_total,
             :motes_peripheral_current, :motes_peripheral_total,

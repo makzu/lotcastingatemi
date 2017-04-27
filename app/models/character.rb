@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 
+# The central model for characters, holding stats that are common to all PCs.
+# Traits specific to exalts will be in separate models, one per exalt type.
+#
+# Traits that Characters share in common with QCs, like health tracks, willpower
+# pools, etc may eventually be split into separate classes, but Heroku has a
+# limit on the total number of rows allowed in the database before they start
+# charging extra.
 class Character < ApplicationRecord
   include HealthLevels
   include Willpower
   include Intimacies
 
   belongs_to :player
-  # TODO: validate that if a character is in a chronicle, the player must be in it too
+  # TODO: validate that if a character is in a chronicle, the player must be too
   belongs_to :chronicle, optional: true
 
   has_many :merits,  dependent: :destroy
@@ -15,10 +22,11 @@ class Character < ApplicationRecord
   validates :name, presence: true
 
   # Essence above 5 is explicitly mentioned in the book
-  validates :essence, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
+  validates :essence, numericality: {
+    greater_than_or_equal_to: 1, less_than_or_equal_to: 10
+  }
 
-  # TODO: see if values above 5 are/will ever be valid for attributes and abilities
-
+  # TODO: see if values above 5 are valid for attributes and abilities
   # Attributes can be one through five
   validates :attr_strength,     :attr_dexterity,    :attr_stamina,
             :attr_charisma,     :attr_manipulation, :attr_appearance,

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Represents an individual game.
 class Chronicle < ApplicationRecord
   belongs_to :st, class_name: 'Player'
 

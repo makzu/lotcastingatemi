@@ -9,14 +9,43 @@ AllCops:
     - db/schema.rb
     - db/migrate/**/*.rb
     - node_modules/**/*
+    - bin/rails
+    - bin/spring
+    - bin/webpack
+    - bin/webpack-dev-server
+    - bin/webpack-watcher
+    - bin/yarn
+    - test/test_helper.rb
 
 Style/IndentationWidth:
   Severity: warning
 
+# Make sure to include spaces in any percent literal expressions
+# e.g., %s{ a s d f }, not %s{a s d f}
 Style/SpaceInsidePercentLiteralDelimiters:
   Enabled: false
 
-Style/StringLiterals:
+Style/IndentHash:
+  EnforcedStyle: consistent
+
+Style/Documentation:
   Exclude:
-    - 'bin/**/*'
-    - 'config/**/*'
+    - app/controllers/**/*
+    - app/mailers/**/*
+    - app/models/application_record.rb
+    - config/**/*
+
+Style/FileName:
+  Exclude:
+    - 'Gemfile'
+
+Metrics/LineLength:
+  IgnoreCopDirectives: true
+
+Metrics/AbcSize:
+  Exclude:
+    - app/validators/**/*
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'

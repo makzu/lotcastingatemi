@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-# Rails 5.1 rc for Webpacker
-gem 'rails', '~> 5.1.0.rc1'
+# Rails 5.1 for Webpacker
+gem 'rails', '~> 5.1.0'
 # Webpacker allows React/Redux and friends to thrive:
 gem 'webpacker', github: 'rails/webpacker'
 
@@ -48,7 +48,7 @@ group :development, :test do
   gem 'capybara', '~> 2.7.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop', require: false
   gem 'selenium-webdriver'
 end
 

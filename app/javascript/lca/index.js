@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 require('react-hot-loader/patch')
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
@@ -9,7 +10,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 import reducer from './reducers'
-import { fetchChronicle } from './actions'
 
 import RootContainer from './containers/rootContainer.jsx'
 
@@ -30,9 +30,6 @@ const store = createStore(
   enhancer
 )
 
-// TODO: Only fetch chronicle/character data on login, not here
-store.dispatch(fetchChronicle(1))
-
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
@@ -44,8 +41,8 @@ const render = (Component) => {
 
 render(RootContainer)
 
-if (module.hot) { // eslint-disable-line no-undef
-  module.hot.accept('./containers/rootContainer.jsx', () => { // eslint-disable-line no-undef
-    render( RootContainer )
+if (module.hot) {
+  module.hot.accept('./containers/rootContainer.jsx', () => {
+    render(RootContainer)
   })
 }

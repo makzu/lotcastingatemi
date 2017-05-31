@@ -66,4 +66,6 @@ Rails.application.configure do
         methods: [:get, :post, :options, :delete, :put]
     end
   end
+
+  config.debug_exception_response_format = :api
 end

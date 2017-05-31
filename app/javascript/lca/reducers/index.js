@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import * as c from '../utils/actionNames'
 
 import EntityReducer from './entityReducer.js'
+import SessionReducer from './sessionReducer.js'
 
 const defaultState = {
   navDrawerOpen: false,
@@ -48,6 +49,7 @@ export function appReducer(state = defaultState, action) {
 
 const lcaApp = combineReducers({
   app: appReducer,
+  session: SessionReducer,
   entities: EntityReducer
 })
 

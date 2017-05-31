@@ -76,6 +76,29 @@ function _receive_char(state, action) {
   }
 }
 
+function _receive_player(state, action) {
+  const newState = normalize(action.player, schemas.player)
+
+  const newPlayers = newState.entities.players
+  const newCharacters = newState.entities.characters
+  const newWeapons = newState.entities.weapons
+  const newMerits = newState.entities.merits
+  const newQcs = newState.entities.qcs
+  const newQcMerits = newState.entities.qcMerits
+  const newQcAttacks = newState.entities.qcAttacks
+
+  return {
+    ...state,
+    characters: { ...state.characters, ...newCharacters },
+    players:    { ...state.players,    ...newPlayers    },
+    merits:     { ...state.merits,     ...newMerits     },
+    weapons:    { ...state.weapons,    ...newWeapons    },
+    qcs:        { ...state.qcs,        ...newQcs        },
+    qc_merits:  { ...state.qc_merits,  ...newQcMerits   },
+    qc_attacks: { ...state.qc_attacks, ...newQcAttacks  }
+  }
+}
+
 function _create_character(state, action) {
   const newState = normalize(action.character, schemas.character)
   const newCharacters = newState.entities.characters
@@ -130,6 +153,9 @@ export default function EntityReducer(state = defaultState, action) {
 
   case c.RECEIVE_CHRONICLE:
     return _receive_chronicle(state, action)
+
+  case c.RECEIVE_PLAYER:
+    return _receive_player(state, action)
 
   case c.CREATE_CHARACTER_COMPLETE:
     return _create_character(state, action)

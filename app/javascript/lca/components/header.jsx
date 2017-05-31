@@ -4,52 +4,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
 import { List, ListItem } from 'material-ui/List'
 
+import LoginForm from './account/login.jsx'
 import { toggleMenu } from '../actions'
-
-class LogInPopup extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-
-    this.state = { open: false }
-  }
-
-  handleOpen() {
-    this.setState({ open: true })
-  }
-
-  handleClose() {
-    this.setState({ open: false })
-  }
-
-  render() {
-    const { handleOpen, handleClose } = this
-    const actions = [
-      <FlatButton
-        label="Close"
-        primary={ true }
-        onTouchTap={ handleClose }
-      />
-    ]
-    return <span>
-      <FlatButton label="Log in" onClick={ handleOpen } />
-      <Dialog
-        title="Log in via Email"
-        actions={ actions }
-        open={ this.state.open }
-        autoScrollBodyContent={ true }
-        onRequestClose={ handleClose }
-      >
-        <span>Stub!</span>
-      </Dialog>
-    </span>
-  }
-}
 
 export function LcaHeader(props) {
   const { navDrawerOpen, toggleMenu } = props
@@ -61,7 +19,7 @@ export function LcaHeader(props) {
         />
         <Drawer open={ navDrawerOpen } docked={ true }>
           <List>
-            <ListItem><LogInPopup /></ListItem>
+            <ListItem><LoginForm /></ListItem>
             <Link to="/">
               <ListItem primaryText="Home" onClick={ toggleMenu } />
             </Link>
@@ -77,14 +35,16 @@ export function LcaHeader(props) {
 
 LcaHeader.propTypes = {
   navDrawerOpen: PropTypes.bool.isRequired,
+  authenticated: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func
 }
 
 function mapStateToProps(state) {
-  const navDrawerOpen = state.app.navDrawerOpen
+  const { navDrawerOpen } = state.app
+  const { authenticated } = state.session
 
   return {
-    navDrawerOpen
+    navDrawerOpen, authenticated
   }
 }
 

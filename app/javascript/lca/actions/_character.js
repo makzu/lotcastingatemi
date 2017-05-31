@@ -1,6 +1,13 @@
 import fetch from 'isomorphic-fetch'
 import * as c from '../utils/actionNames'
 
+function requestHeaders() {
+  return new Headers({
+    'Content-Type': 'application/json',
+    'AUTHORIZATION': `bearer ${sessionStorage.jwt}`
+  })
+}
+
 function requestChar(id) {
   return {
     type: c.REQUEST_CHARACTER,
@@ -52,7 +59,7 @@ export function updateCharacter(id, trait, value) {
 
     return fetch(`/api/v1/characters/${id}`, {
       method: 'PATCH',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
+      headers: requestHeaders(),
       body: JSON.stringify(bd)
     }).then(response => response.json())
       .then(json =>
@@ -84,7 +91,7 @@ export function createCharacter(playerId, chronicleId, name) {
 
     return fetch('/api/v1/characters', {
       method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
+      headers: requestHeaders(),
       body: JSON.stringify(char)
     }).then(response => response.json())
       .then(json =>

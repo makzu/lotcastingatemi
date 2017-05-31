@@ -4,7 +4,8 @@ export default function WelcomePage() {
   return(<div className="welcomePage">
     <h1>Lot-Casting Atemi</h1>
     <p>
-      Type: Reflexive, Cost: 15m, 1wp
+      <strong>Type:</strong> Reflexive,
+      <strong> Cost:</strong> 15m, 1wp
     </p>
     <p>
       The Solar Exalted have achieved such heights of skill that even their

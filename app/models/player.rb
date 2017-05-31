@@ -14,7 +14,12 @@ class Player < ActiveRecord::Base
 
   # Exclude password digest from any json output
   def as_json(options = {})
-    options[:except] ||= [:password_digest]
+    if options[:except].nil?
+      options[:except] = [:password_digest]
+    else
+      options[:except] << :password_digest
+    end
+
     super(options)
   end
 end

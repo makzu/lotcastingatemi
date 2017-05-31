@@ -1,4 +1,11 @@
 export const TOGGLE_MENU =               'TOGGLE_MENU'
+export const LOGIN_START =               'LOGIN_START'
+export const LOGIN_SUCCESS =             'LOGIN_SUCCESS'
+export const LOGIN_FAILED =              'LOGIN_FAILED'
+export const LOGOUT =                    'LOGOUT'
+
+export const REQUEST_PLAYER =            'REQUEST_PLAYER'
+export const RECEIVE_PLAYER =            'RECEIVE_PLAYER'
 
 export const REQUEST_CHARACTER =         'REQUEST_CHARACTER'
 export const RECEIVE_CHARACTER =         'RECEIVE_CHARACTER'

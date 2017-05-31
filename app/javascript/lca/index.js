@@ -6,24 +6,20 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
-import createHistory from 'history/createBrowserHistory'
 
 import reducer from './reducers'
 import { fetchChronicle } from './actions'
 
 import RootContainer from './containers/rootContainer.jsx'
 
-
-const history = createHistory()
 let enhancer
 
-if (process.env.NODE_ENV === 'production') { // eslint-disable-line no-undef
-  enhancer = applyMiddleware(thunk, routerMiddleware(history))
+if (process.env.NODE_ENV === 'production') {
+  enhancer = applyMiddleware(thunk)
 } else {
   enhancer = compose(
-    applyMiddleware(thunk, routerMiddleware(history)),
+    applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 }
@@ -40,7 +36,7 @@ store.dispatch(fetchChronicle(1))
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <Component store={ store } history={ history } />
+      <Component store={ store } />
     </AppContainer>,
     document.getElementById('root')
   )

@@ -3,23 +3,18 @@ import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import { ConnectedRouter } from 'react-router-redux'
-
 import RouteContainer from './routeContainer.jsx'
 
-const RootContainer = ({ store, history }) => (
+const RootContainer = ({ store }) => (
   <Provider store={ store }>
     <MuiThemeProvider>
-      <ConnectedRouter history={ history }>
-        <RouteContainer />
-      </ConnectedRouter>
+      <RouteContainer />
     </MuiThemeProvider>
   </Provider>
 )
 
 RootContainer.propTypes = {
-  store: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  store: PropTypes.object.isRequired
 }
 
 export default RootContainer

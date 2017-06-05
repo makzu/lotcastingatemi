@@ -1,13 +1,23 @@
 {
   "presets": [
-    ["env", {"modules": false}],
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": "> 1%",
+        "uglify": true
+      },
+      "useBuiltIns": true
+    }],
     ["es2015", {"modules": false}],
     "react",
     "stage-2"
   ],
 
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    "syntax-dynamic-import",
+    "transform-object-rest-spread",
+    ["transform-class-properties", { "spec": true }]
   ],
 
   "env": {

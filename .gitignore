@@ -33,3 +33,6 @@ config/secrets.yml
 [._]s[a-w][a-z]
 *.un~
 Session.vim
+/public/packs
+/public/packs-test
+/node_modules

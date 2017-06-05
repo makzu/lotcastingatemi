@@ -1,25 +1,37 @@
 // Note: You must restart bin/webpack-dev-server for changes to take effect
+
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const sharedConfig = require('./shared.js')
-const { publicPath } = require('./configuration.js')
+const { settings, output } = require('./configuration.js')
 
 module.exports = merge(sharedConfig, {
-  devtool: 'sourcemap',
+  devtool: 'cheap-eval-source-map',
 
   stats: {
     errorDetails: true
   },
 
   output: {
-    pathinfo: true,
-    publicPath
+    pathinfo: true
   },
 
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      debug: true
-    }),
-    new webpack.NamedModulesPlugin(),
+    new webpack.NamedModulesPlugin()
   ],
+
+  devServer: {
+    clientLogLevel: 'none',
+    https: settings.dev_server.https,
+    host: settings.dev_server.host,
+    port: settings.dev_server.port,
+    contentBase: output.path,
+    publicPath: output.publicPath,
+    compress: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    historyApiFallback: true,
+    watchOptions: {
+      ignored: /node_modules/
+    }
+  }
 })

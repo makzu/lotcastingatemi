@@ -11,7 +11,7 @@ import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
 import ExpandableListEditor from '../generic/expandableListEditor.jsx'
 
-import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack, createQcMerit, destroyQcMerit, updateQcMerit } from '../../actions'
+import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack, createQcMerit, destroyQcMerit, updateQcMerit } from '../../ducks/actions.js'
 
 import * as c from '../../utils/constants.js'
 import { fullQc, qcAttack, qcMerit } from '../../utils/propTypes'

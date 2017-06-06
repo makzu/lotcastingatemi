@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-import { createCharacter, createQc } from '../../actions'
+import { createCharacter, createQc } from '../../ducks/actions.js'
 import { fullChar, fullQc } from '../../utils/propTypes'
 
 function NewQcForm(props) {

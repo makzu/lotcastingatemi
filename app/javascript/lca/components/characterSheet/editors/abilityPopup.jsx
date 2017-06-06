@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-import { updateCharacter } from '../../../actions'
+import { updateCharacter } from '../../../ducks/actions.js'
 import { ABILITY_MAX, ABILITY_MIN } from '../../../utils/constants.js'
 import { withAbilities } from '../../../utils/propTypes'
 

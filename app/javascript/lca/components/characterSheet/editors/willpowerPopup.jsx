@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 
 import * as c from '../../../utils/constants.js'
 import { withWillpower } from '../../../utils/propTypes'
-import { updateCharacter } from '../../../actions'
+import { updateCharacter } from '../../../ducks/actions.js'
 
 class WillpowerPopup extends React.Component {
   constructor(props) {

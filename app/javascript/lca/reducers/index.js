@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import * as c from '../utils/actionNames'
 
 import EntityReducer from './entityReducer.js'
-import SessionReducer from './sessionReducer.js'
+import SessionReducer from '../ducks/account.js'
 
 const defaultState = {
   navDrawerOpen: false,
@@ -16,30 +16,6 @@ export function appReducer(state = defaultState, action) {
 
   case c.TOGGLE_MENU:
     return { ...state, navDrawerOpen: !state.navDrawerOpen }
-
-  case c.REQUEST_CHARACTER:
-  case c.REQUEST_CHRONICLE:
-  case c.UPDATE_CHARACTER:
-  case c.CREATE_CHARACTER:
-  case c.UPDATE_WEAPON:
-  case c.CREATE_WEAPON:
-  case c.UPDATE_MERIT:
-  case c.CREATE_MERIT:
-  case c.UPDATE_QC:
-  case c.CREATE_QC:
-    return { ...state, isFetching: true, isError: false }
-
-  case c.RECEIVE_CHARACTER:
-  case c.RECEIVE_CHRONICLE:
-  case c.UPDATE_CHARACTER_COMPLETE:
-  case c.CREATE_CHARACTER_COMPLETE:
-  case c.UPDATE_WEAPON_COMPLETE:
-  case c.CREATE_WEAPON_COMPLETE:
-  case c.UPDATE_MERIT_COMPLETE:
-  case c.CREATE_MERIT_COMPLETE:
-  case c.UPDATE_QC_COMPLETE:
-  case c.CREATE_QC_COMPLETE:
-    return { ...state, isFetching: false, isError: false }
 
   default:
     return state

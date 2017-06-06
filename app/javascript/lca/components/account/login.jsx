@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-import { fetchPlayer, login, logout } from '../../actions'
+import { fetchPlayer, login, logout } from '../../ducks/actions.js'
 
 class LoginForm extends React.Component {
   constructor(props) {

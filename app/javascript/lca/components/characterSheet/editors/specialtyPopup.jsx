@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
-import { updateCharacter } from '../../../actions'
+import { updateCharacter } from '../../../ducks/actions.js'
 import { withSpecialties } from '../../../utils/propTypes'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'

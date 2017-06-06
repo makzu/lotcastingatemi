@@ -7,11 +7,11 @@ module Api
       before_action :set_qc, only: %i[show update destroy]
 
       def show
-        render json: @qc
+        render json: @qc.as_json(include: %i[qc_attacks qc_merits])
       end
 
       def create
-        render json: Qc.create(qc_params).as_json
+        render json: Qc.create(qc_params).as_json(include: %i[qc_attacks qc_merits])
       end
 
       def destroy

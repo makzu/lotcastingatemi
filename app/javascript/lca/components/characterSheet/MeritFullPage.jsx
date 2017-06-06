@@ -11,7 +11,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import Checkbox from 'material-ui/Checkbox'
 
-import { updateMerit, createMerit, destroyMerit } from '../../actions'
+import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'
 import RatingDots from '../generic/ratingDots.jsx'

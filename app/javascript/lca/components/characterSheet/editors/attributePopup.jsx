@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField'
 import * as c from '../../../utils/constants.js'
 import { withAttributes } from '../../../utils/propTypes'
 
-import { updateCharacter } from '../../../actions'
+import { updateCharacter } from '../../../ducks/actions.js'
 
 // TODO include sample pools on side of popup
 class AttributePopup extends React.Component {

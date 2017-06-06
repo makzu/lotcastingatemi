@@ -11,7 +11,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import Checkbox from 'material-ui/Checkbox'
 
-import { updateWeapon, createWeapon, destroyWeapon } from '../../actions'
+import { updateWeapon, createWeapon, destroyWeapon } from '../../ducks/actions.js'
 import * as calc from '../../utils/calculated'
 import { withAttributes, withAbilities, fullWeapon } from '../../utils/propTypes'
 
@@ -261,7 +261,7 @@ class WeaponSummary extends React.Component {
         <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>
           { this.state.isEditing ? <WeaponEditHeader /> : <WeaponHeader /> }
         </TableHeader>
-        <TableBody displayRowCheckboxes={ false }>
+        <TableBody>
           { this.state.isEditing ? weapEdits : weaps }
         </TableBody>
       </Table>

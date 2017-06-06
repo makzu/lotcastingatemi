@@ -15,9 +15,9 @@ describe('entity reducer', () => {
     })
   })
 
-  it('should handle UPDATE_CHARACTER', () => {
+  it('should handle CHARACTER_UPDATE', () => {
     expect(reducer(undefined, {
-      type: c.UPDATE_CHARACTER,
+      type: c.CHARACTER_UPDATE,
       id: 1,
       update: { trait: 'abil_war', value: 3 }
     })).toEqual({

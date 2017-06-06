@@ -9,7 +9,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import Checkbox from 'material-ui/Checkbox'
 
-import { updateCharacter } from '../../../actions'
+import { updateCharacter } from '../../../ducks/actions.js'
 import { withArmorStats } from '../../../utils/propTypes'
 
 class ArmorPopup extends React.Component {

@@ -7,8 +7,7 @@ module Api
       before_action :set_character, only: %i[show update destroy]
 
       def show
-        included = %w[merits weapons]
-        render json: @character, include: included
+        render json: @character.as_json(include: %i[weapons merits])
       end
 
       def create

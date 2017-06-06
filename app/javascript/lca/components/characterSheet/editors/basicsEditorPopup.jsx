@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 
 import * as c from '../../../utils/constants.js'
 
-import { updateCharacter } from '../../../actions'
+import { updateCharacter } from '../../../ducks/actions.js'
 
 class BasicsEditorPopup extends React.Component {
   constructor(props) {

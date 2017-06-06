@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
 import { INTIMACY_RATING_MAX } from '../../../utils/constants.js'
-import { updateCharacter } from '../../../actions'
+import { updateCharacter } from '../../../ducks/actions.js'
 import { withIntimacies } from '../../../utils/propTypes'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'

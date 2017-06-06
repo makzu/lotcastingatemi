@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import FlatButton from 'material-ui/FlatButton'
+
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import QcEditorPopup from './qcEditorPopup.jsx'
 
-import { updateQc } from '../../actions'
+import { fetchQc, updateQc } from '../../ducks/actions.js'
 import { fullQc, withMotePool, qcMerit, qcAttack } from '../../utils/propTypes'
 
 function MotePool(props){
@@ -26,9 +28,15 @@ MotePool.propTypes = {
   qc: PropTypes.shape(withMotePool)
 }
 
-class QcSheet extends React.Component {
+class QcSheet extends React.PureComponent {
   constructor(props) {
     super(props)
+
+    this.fetch = this.fetch.bind(this)
+  }
+
+  fetch() {
+    this.props.fetchQc(this.props.id)
   }
 
   render() {
@@ -37,6 +45,7 @@ class QcSheet extends React.Component {
       return(<div>
         <h1>QC Editor</h1>
         <p>The QC has not yet loaded.</p>
+        <p><FlatButton onClick={ this.fetch } label="Fetch" /></p>
       </div>)
     }
 
@@ -56,7 +65,7 @@ class QcSheet extends React.Component {
     )
 
     return(<div className="qcSheet">
-      <h1>{ qc.name } <QcEditorPopup qc={ qc } attacks={ qc_attacks } merits={ qc_merits } /></h1>
+      <h1>{ qc.name } <QcEditorPopup qc={ qc } attacks={ qc_attacks } merits={ qc_merits } /><FlatButton onClick={ this.fetch } label="Refresh" /></h1>
 
       <div>
         <strong>Essence:</strong> { qc.essence },
@@ -97,7 +106,8 @@ class QcSheet extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const qc = state.entities.qcs[ownProps.match.params.qcId]
+  const id = ownProps.match.params.qcId
+  const qc = state.entities.qcs[id]
 
   let qc_attacks = []
   let qc_merits = []
@@ -111,6 +121,7 @@ function mapStateToProps(state, ownProps) {
 
   const { isFetching, isError } = state.app
   return {
+    id,
     qc,
     qc_attacks,
     qc_merits,
@@ -119,14 +130,19 @@ function mapStateToProps(state, ownProps) {
   }
 }
 QcSheet.propTypes = {
+  id: PropTypes.string.isRequired,
   qc: PropTypes.shape(fullQc),
   qc_merits: PropTypes.arrayOf(PropTypes.shape(qcMerit)),
   qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
-  updateQc: PropTypes.func
+  updateQc: PropTypes.func,
+  fetchQc: PropTypes.func
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    fetchQc: (id) => {
+      dispatch(fetchQc(id))
+    },
     updateQc: (id, trait, value) => {
       dispatch(updateQc(id, trait, value))
     }

@@ -7,7 +7,7 @@ import Drawer from 'material-ui/Drawer'
 import { List, ListItem } from 'material-ui/List'
 
 import LoginForm from './account/login.jsx'
-import { toggleMenu } from '../actions'
+import { toggleMenu } from '../ducks/actions.js'
 
 export function LcaHeader(props) {
   const { navDrawerOpen, toggleMenu } = props

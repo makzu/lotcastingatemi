@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
-import { FlatButton, IconButton } from 'material-ui/FlatButton'
+import FlatButton from 'material-ui/FlatButton'
+import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
@@ -252,6 +253,7 @@ class QcEditorPopup extends React.Component {
 
     const actions = [
       <FlatButton
+        key="close"
         label="Close"
         primary={ true }
         onTouchTap={ handleClose }

@@ -9,7 +9,7 @@ import CharacterSheet from '../components/characterSheet/index.jsx'
 import MeritFullPage from '../components/characterSheet/MeritFullPage.jsx'
 import QcSheet from '../components/qcSheet/index.jsx'
 import WelcomePage from '../components/welcomePage/index.jsx'
-import LoginForm from '../components/account/login.jsx'
+import SignupPage from '../components/account/signupPage.jsx'
 
 export default function RouteContainer() {
   return(
@@ -18,7 +18,7 @@ export default function RouteContainer() {
         <LcaHeader />
         <Paper className="contentWrapper">
           <Route exact path="/" component={ WelcomePage } />
-          <Route path="/login" component={ LoginForm } />
+          <Route path="/signup" component={ SignupPage } />
           <Route exact path="/characters/" component={ CharacterList } />
           <Route exact path="/characters/:characterId" component={ CharacterSheet } />
           <Route path="/characters/:characterId/merits" component={ MeritFullPage } />

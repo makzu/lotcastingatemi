@@ -23,10 +23,26 @@ module Api
         })
       end
 
+      def create
+        @player = Player.new(player_params)
+
+        if @player.save
+          t = Knock::AuthToken.new payload: { sub: @player.id }
+          render json: t, status: :created
+        else
+          # TODO: error or something?
+          render status: :bad_request
+        end
+      end
+
       private
 
       def set_player
         @player = Player.find(params[:id])
+      end
+
+      def player_params
+        params.require(:player).permit(:email, :password, :password_confirmation)
       end
     end
   end

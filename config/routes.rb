@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       # resources :player_token, only: [:show]
       post 'player_token' => 'player_token#create'
-      resources :players, only: [:index, :show]
+      resources :players, only: [:index, :create, :show]
 
       resources :chronicles, only: [:show, :create, :destroy, :update]
 

@@ -20,7 +20,6 @@ export function appReducer(state = defaultState, action) {
   default:
     return state
   }
-
 }
 
 const lcaApp = combineReducers({

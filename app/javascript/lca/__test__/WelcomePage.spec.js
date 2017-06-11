@@ -1,5 +1,5 @@
 import React from 'react'
-import WelcomePage from '../components/welcomePage/index.jsx'
+import WelcomePage from '../components/pages/welcomePage.jsx'
 import renderer from 'react-test-renderer'
 
 test('WelcomePage renders at all', () => {

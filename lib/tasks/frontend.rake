@@ -4,12 +4,22 @@ namespace :lca do
   namespace :frontend do
     desc 'Run the Jest test suite on the frontend'
     task :test do
-      sh './bin/yarn test'
+      begin
+        sh './bin/yarn test'
+      rescue RuntimeError => e
+        puts e.message
+        exit
+      end
     end
 
     desc 'Run the Jest test suite, re-rendering all component snapshots'
     task :testu do
-      sh './bin/yarn test -- -u'
+      begin
+        sh './bin/yarn test -- -u'
+      rescue RuntimeError => e
+        puts e.message
+        exit
+      end
     end
 
     desc 'Run the Jest test suite with optional (time-consuming) coverage report'

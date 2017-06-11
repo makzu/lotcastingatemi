@@ -26,6 +26,7 @@
     "js-yaml": "^3.8.4",
     "jss": "^7.0.0",
     "material-ui": "^0.18.0",
+    "mock-local-storage": "^1.0.2",
     "node-sass": "^4.5.3",
     "normalizr": "^3.2.2",
     "path-complete-extname": "^0.1.0",
@@ -78,6 +79,7 @@
     "collectCoverageFrom": [
       "app/javascript/lca/**/*.js",
       "app/javascript/lca/**/*.jsx"
-    ]
+    ],
+    "setupTestFrameworkScriptFile": "mock-local-storage"
   }
 }

@@ -1,9 +1,9 @@
 import reducer from './entityReducer.js'
-import * as c from '../utils/actionNames'
+import { UPDATE_SUCCESS } from '../ducks/character.js'
 
 describe('entity reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual({
+    expect(reducer(undefined, { type: '' })).toEqual({
       players:    {},
       chronicles: {},
       characters: {},
@@ -15,11 +15,11 @@ describe('entity reducer', () => {
     })
   })
 
-  it('should handle CHARACTER_UPDATE', () => {
+  it('should handle character/UPDATE_SUCCESS', () => {
     expect(reducer(undefined, {
-      type: c.CHARACTER_UPDATE,
-      id: 1,
-      update: { trait: 'abil_war', value: 3 }
+      type: UPDATE_SUCCESS,
+      payload: { id: 1, abil_war: 3 },
+      meta: { trait: 'abil_war' }
     })).toEqual({
       players:    {},
       chronicles: {},

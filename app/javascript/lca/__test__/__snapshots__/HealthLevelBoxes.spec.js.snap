@@ -5,99 +5,99 @@ exports[`HealthLevelBoxes renders at all 1`] = `
   className="healthLevelBoxes"
 >
   <div
-    className="EpvNP"
+    className="sc-ifAKCX bUkNeg"
   >
     <div
-      className="jLnisz"
+      className="sc-bxivhb jjDCoK sc-bdVaJa fmVsgK"
     >
       ◼
     </div>
     <div
-      className="jWYlqD"
+      className="sc-EHOje kLDnfe"
     >
       0
     </div>
   </div>
   <div
-    className="EpvNP"
+    className="sc-ifAKCX bUkNeg"
   >
     <div
-      className="gmQRuy"
+      className="sc-htpNat gqjEYj sc-bdVaJa fmVsgK"
     >
       ◩
     </div>
     <div
-      className="jWYlqD"
+      className="sc-EHOje kLDnfe"
     >
       -1
     </div>
   </div>
   <div
-    className="EpvNP"
+    className="sc-ifAKCX bUkNeg"
   >
     <div
-      className="gljLJl"
+      className="sc-bwzfXH jVnPlJ sc-bdVaJa fmVsgK"
     >
       ◫
     </div>
     <div
-      className="jWYlqD"
+      className="sc-EHOje kLDnfe"
     >
       -1
     </div>
   </div>
   <div
-    className="EpvNP"
+    className="sc-ifAKCX bUkNeg"
   >
     <div
-      className="cUrFZt"
+      className="sc-bdVaJa fmVsgK"
     >
       ◻
     </div>
     <div
-      className="jWYlqD"
+      className="sc-EHOje kLDnfe"
     >
       -2
     </div>
   </div>
   <div
-    className="EpvNP"
+    className="sc-ifAKCX bUkNeg"
   >
     <div
-      className="cUrFZt"
+      className="sc-bdVaJa fmVsgK"
     >
       ◻
     </div>
     <div
-      className="jWYlqD"
+      className="sc-EHOje kLDnfe"
     >
       -2
     </div>
   </div>
   <div
-    className="EpvNP"
+    className="sc-ifAKCX bUkNeg"
   >
     <div
-      className="cUrFZt"
+      className="sc-bdVaJa fmVsgK"
     >
       ◻
     </div>
     <div
-      className="jWYlqD"
+      className="sc-EHOje kLDnfe"
     >
       -4
     </div>
   </div>
   <div
-    className="EpvNP"
+    className="sc-ifAKCX bUkNeg"
   >
     <div
-      className="cUrFZt"
+      className="sc-bdVaJa fmVsgK"
     >
       ◻
     </div>
     <div
-      className="jWYlqD"
+      className="sc-EHOje kLDnfe"
     >
       in
     </div>

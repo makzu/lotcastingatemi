@@ -26,7 +26,7 @@ export default function reducer(state, action) {
   }
 }
 
-export function fetchPlayer() {
+export function fetchCurrentPlayer() {
   return callApi({
     endpoint: '/api/v1/players',
     method: 'GET',

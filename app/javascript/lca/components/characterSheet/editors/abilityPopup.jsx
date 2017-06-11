@@ -90,6 +90,7 @@ class AbilityPopup extends React.Component {
 
     const actions = [
       <FlatButton
+        key="close"
         label="Close"
         primary={ true }
         onTouchTap={ handleClose }

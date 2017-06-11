@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Base authentication policy.  Other policies inherit from this one.
+# Powered by the Knock gem
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -32,6 +34,7 @@ class ApplicationPolicy
     Pundit.policy_scope!(user, record.class)
   end
 
+  # Base authenticated scope.
   class Scope
     attr_reader :user, :scope
 

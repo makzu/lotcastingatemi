@@ -18,7 +18,7 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
@@ -61,9 +61,9 @@ Rails.application.configure do
     allow do
       origins 'localhost:5000', 'localhost:8080', '127.0.0.1:5000', '127.0.0.1:8080'
       resource '*',
-        headers: :any,
-        expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-        methods: [:get, :post, :options, :delete, :put]
+               headers: :any,
+               expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+               methods: %i[get post options delete put]
     end
   end
 

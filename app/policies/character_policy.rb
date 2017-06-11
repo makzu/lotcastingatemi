@@ -36,6 +36,7 @@ class CharacterPolicy < ApplicationPolicy
     character.chronicle.st == player
   end
 
+  # Authorization scopes for Characters.
   class Scope < Scope
     def resolve
       scope

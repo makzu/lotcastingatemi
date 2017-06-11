@@ -36,9 +36,9 @@ class CharacterTraitPolicy < ApplicationPolicy
     trait.character.chronicle.st == player
   end
 
-  class Scope < Scope
-    def resolve
-      scope
-    end
-  end
+  # class Scope < Scope
+  #   def resolve
+  #     scope
+  #   end
+  # end
 end

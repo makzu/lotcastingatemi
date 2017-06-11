@@ -17,35 +17,38 @@ AllCops:
     - bin/yarn
     - test/test_helper.rb
 
-Style/IndentationWidth:
+Layout/IndentationWidth:
   Severity: warning
+
+Layout/IndentHash:
+  EnforcedStyle: consistent
 
 # Make sure to include spaces in any percent literal expressions
 # e.g., %s{ a s d f }, not %s{a s d f}
-Style/SpaceInsidePercentLiteralDelimiters:
+Layout/SpaceInsidePercentLiteralDelimiters:
   Enabled: false
 
-Style/IndentHash:
-  EnforcedStyle: consistent
+Metrics/AbcSize:
+  Exclude:
+    - app/validators/**/*
+
+Metrics/LineLength:
+  IgnoreCopDirectives: true
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
 
 Style/Documentation:
   Exclude:
     - app/controllers/**/*
     - app/mailers/**/*
-    - app/models/application_record.rb
     - config/**/*
 
 Style/FileName:
   Exclude:
     - 'Gemfile'
 
-Metrics/LineLength:
-  IgnoreCopDirectives: true
-
-Metrics/AbcSize:
+Rails/Output:
   Exclude:
-    - app/validators/**/*
-
-Style/BlockComments:
-  Exclude:
-    - 'spec/spec_helper.rb'
+    - 'db/seeds.rb'

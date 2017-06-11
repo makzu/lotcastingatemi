@@ -1,16 +1,16 @@
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 
-import * as schemas from '../reducers/entities/_schemas.js'
-import { callApi } from '../utils/api.js'
+import * as schemas from './_schemas.js'
+import { callApi } from '../../utils/api.js'
 
-const FETCH =         'lca/player/FETCH'
-const FETCH_SUCCESS = 'lca/player/FETCH_SUCCESS'
-const FETCH_ERROR =   'lca/player/FETCH_ERROR'
+const PLA_FETCH =         'lca/player/FETCH'
+const PLA_FETCH_SUCCESS = 'lca/player/FETCH_SUCCESS'
+const PLA_FETCH_ERROR =   'lca/player/FETCH_ERROR'
 
 export default function reducer(state, action) {
   switch(action.type) {
-  case FETCH_SUCCESS:
+  case PLA_FETCH_SUCCESS:
     return {
       ...state,
       characters: { ...state.characters, ...action.payload.entities.characters },
@@ -31,14 +31,14 @@ export function fetchCurrentPlayer() {
     endpoint: '/api/v1/players',
     method: 'GET',
     types: [
-      FETCH,
+      PLA_FETCH,
       {
-        type: FETCH_SUCCESS,
+        type: PLA_FETCH_SUCCESS,
         payload: (action, state, res) => {
           return getJSON(res).then((json) => normalize(json, schemas.player))
         }
       },
-      FETCH_ERROR
+      PLA_FETCH_ERROR
     ]
   })
 }

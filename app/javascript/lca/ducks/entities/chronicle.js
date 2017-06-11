@@ -1,14 +1,14 @@
 import { normalize } from 'normalizr'
-import * as schemas from '../reducers/entities/_schemas.js'
-import { callApi } from '../utils/api.js'
+import * as schemas from './_schemas.js'
+import { callApi } from '../../utils/api.js'
 
-const FETCH =         'lca/chronicle/FETCH'
-const FETCH_SUCCESS = 'lca/chronicle/FETCH_SUCCESS'
-const FETCH_FAILURE = 'lca/chronicle/FETCH_FAILURE'
+export const CHN_FETCH =         'lca/chronicle/FETCH'
+export const CHN_FETCH_SUCCESS = 'lca/chronicle/FETCH_SUCCESS'
+export const CHN_FETCH_FAILURE = 'lca/chronicle/FETCH_FAILURE'
 
 export default function reducer(state, action) {
   switch(action.type) {
-  case FETCH_SUCCESS:
+  case CHN_FETCH_SUCCESS:
     return _receive_chronicle(state, action)
   default:
     return state
@@ -19,7 +19,7 @@ export function fetchChronicle(id) {
   return callApi({
     endpoint: `/api/v1/chronicles/${id}`,
     method: 'GET',
-    types: [FETCH, FETCH_SUCCESS, FETCH_FAILURE]
+    types: [CHN_FETCH, CHN_FETCH_SUCCESS, CHN_FETCH_FAILURE]
   })
 }
 

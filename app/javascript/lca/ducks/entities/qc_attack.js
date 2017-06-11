@@ -1,28 +1,28 @@
-import { callApi } from '../utils/api.js'
+import { callApi } from '../../utils/api.js'
 
-const CREATE =           'lca/qc_attack/CREATE'
-const CREATE_SUCCESS =   'lca/qc_attack/CREATE_SUCCESS'
-const CREATE_FAILURE =   'lca/qc_attack/CREATE_FAILURE'
-const UPDATE =           'lca/qc_attack/UPDATE'
-const UPDATE_SUCCESS =   'lca/qc_attack/UPDATE_SUCCESS'
-const UPDATE_FAILURE =   'lca/qc_attack/UPDATE_FAILURE'
-const DESTROY =          'lca/qc_attack/DESTROY'
-const DESTROY_SUCCESS =  'lca/qc_attack/DESTROY_SUCCESS'
-const DESTROY_FAILURE =  'lca/qc_attack/DESTROY_FAILURE'
+const QCA_CREATE =           'lca/qc_attack/CREATE'
+const QCA_CREATE_SUCCESS =   'lca/qc_attack/CREATE_SUCCESS'
+const QCA_CREATE_FAILURE =   'lca/qc_attack/CREATE_FAILURE'
+const QCA_UPDATE =           'lca/qc_attack/UPDATE'
+const QCA_UPDATE_SUCCESS =   'lca/qc_attack/UPDATE_SUCCESS'
+const QCA_UPDATE_FAILURE =   'lca/qc_attack/UPDATE_FAILURE'
+const QCA_DESTROY =          'lca/qc_attack/DESTROY'
+const QCA_DESTROY_SUCCESS =  'lca/qc_attack/DESTROY_SUCCESS'
+const QCA_DESTROY_FAILURE =  'lca/qc_attack/DESTROY_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
 
   switch(action.type) {
-  case CREATE_SUCCESS:
+  case QCA_CREATE_SUCCESS:
     return _create_qc_attack(state, action)
-  case UPDATE_SUCCESS:
+  case QCA_UPDATE_SUCCESS:
     return { ...state, qc_attacks: {
       ...state.qc_attacks, [_id]: {
         ...state.qc_attacks[_id], [_trait]: action.payload[_trait] }}
     }
-  case DESTROY_SUCCESS:
+  case QCA_DESTROY_SUCCESS:
     return _destroy_qc_attack(state, action)
   default:
     return state
@@ -36,7 +36,7 @@ export function createQcAttack(qcId) {
     endpoint: `/api/v1/qcs/${qcId}/qc_attacks`,
     method: 'POST',
     body: JSON.stringify(attack),
-    types: [CREATE, CREATE_SUCCESS, CREATE_FAILURE]
+    types: [QCA_CREATE, QCA_CREATE_SUCCESS, QCA_CREATE_FAILURE]
   })
 }
 
@@ -48,9 +48,9 @@ export function updateQcAttack(id, qcId, trait, value) {
     method: 'PATCH',
     body: JSON.stringify(attack),
     types: [
-      UPDATE,
-      { type: UPDATE_SUCCESS, meta: { trait: trait }},
-      UPDATE_FAILURE
+      QCA_UPDATE,
+      { type: QCA_UPDATE_SUCCESS, meta: { trait: trait }},
+      QCA_UPDATE_FAILURE
     ]
   })
 }
@@ -60,9 +60,9 @@ export function destroyQcAttack(id, qcId) {
     endpoint: `/api/v1/qcs/${qcId}/qc_attacks/${id}`,
     method: 'DELETE',
     types: [
-      DESTROY,
-      { type: DESTROY_SUCCESS, meta: { id: id, qcId: qcId }},
-      DESTROY_FAILURE
+      QCA_DESTROY,
+      { type: QCA_DESTROY_SUCCESS, meta: { id: id, qcId: qcId }},
+      QCA_DESTROY_FAILURE
     ]
   })
 }

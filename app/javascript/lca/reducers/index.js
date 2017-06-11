@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import * as c from '../utils/actionNames'
 
-import EntityReducer from './entityReducer.js'
+import EntityReducer from '../ducks/entities'
 import SessionReducer from '../ducks/account.js'
 
 const defaultState = {

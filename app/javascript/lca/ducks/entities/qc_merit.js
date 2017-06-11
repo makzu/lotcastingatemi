@@ -1,28 +1,28 @@
-import { callApi } from '../utils/api.js'
+import { callApi } from '../../utils/api.js'
 
-export const CREATE =            'lca/qc_merit/CREATE'
-export const CREATE_SUCCESS =    'lca/qc_merit/CREATE_SUCCESS'
-export const CREATE_FAILURE =    'lca/qc_merit/CREATE_FAILURE'
-export const UPDATE =            'lca/qc_merit/UPDATE'
-export const UPDATE_SUCCESS =    'lca/qc_merit/UPDATE_SUCCESS'
-export const UPDATE_FAILURE =    'lca/qc_merit/UPDATE_FAILURE'
-export const DESTROY =           'lca/qc_merit/DESTROY'
-export const DESTROY_SUCCESS =   'lca/qc_merit/DESTROY_SUCCESS'
-export const DESTROY_FAILURE =   'lca/qc_merit/DESTROY_FAILURE'
+export const QCM_CREATE =            'lca/qc_merit/CREATE'
+export const QCM_CREATE_SUCCESS =    'lca/qc_merit/CREATE_SUCCESS'
+export const QCM_CREATE_FAILURE =    'lca/qc_merit/CREATE_FAILURE'
+export const QCM_UPDATE =            'lca/qc_merit/UPDATE'
+export const QCM_UPDATE_SUCCESS =    'lca/qc_merit/UPDATE_SUCCESS'
+export const QCM_UPDATE_FAILURE =    'lca/qc_merit/UPDATE_FAILURE'
+export const QCM_DESTROY =           'lca/qc_merit/DESTROY'
+export const QCM_DESTROY_SUCCESS =   'lca/qc_merit/DESTROY_SUCCESS'
+export const QCM_DESTROY_FAILURE =   'lca/qc_merit/DESTROY_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
 
   switch(action.type) {
-  case CREATE_SUCCESS:
+  case QCM_CREATE_SUCCESS:
     return _create_qc_merit(state, action)
-  case UPDATE_SUCCESS:
+  case QCM_UPDATE_SUCCESS:
     return { ...state, qc_merits: {
       ...state.qc_merits, [_id]: {
         ...state.qc_merits[_id], [_trait]: action.payload[_trait] }}
     }
-  case DESTROY_SUCCESS:
+  case QCM_DESTROY_SUCCESS:
     return _destroy_qc_merit(state, action)
   default:
     return state
@@ -36,7 +36,7 @@ export function createQcMerit(qcId) {
     endpoint: `/api/v1/qcs/${qcId}/qc_merits`,
     method: 'POST',
     body: JSON.stringify(merit),
-    types: [CREATE, CREATE_SUCCESS, CREATE_FAILURE]
+    types: [QCM_CREATE, QCM_CREATE_SUCCESS, QCM_CREATE_FAILURE]
   })
 }
 
@@ -48,9 +48,9 @@ export function updateQcMerit(id, qcId, trait, value) {
     method: 'PATCH',
     body: JSON.stringify(merit),
     types: [
-      UPDATE,
-      { type: UPDATE_SUCCESS, meta: { trait: trait }},
-      UPDATE_FAILURE
+      QCM_UPDATE,
+      { type: QCM_UPDATE_SUCCESS, meta: { trait: trait }},
+      QCM_UPDATE_FAILURE
     ]
   })
 }
@@ -60,9 +60,9 @@ export function destroyQcMerit(id, qcId) {
     endpoint: `/api/v1/qcs/${qcId}/qc_merits/${id}`,
     method: 'DELETE',
     types: [
-      DESTROY,
-      { type: DESTROY_SUCCESS, meta: { id: id, qcId: qcId }},
-      DESTROY_FAILURE
+      QCM_DESTROY,
+      { type: QCM_DESTROY_SUCCESS, meta: { id: id, qcId: qcId }},
+      QCM_DESTROY_FAILURE
     ]
   })
 }

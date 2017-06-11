@@ -1,32 +1,32 @@
 // Common code for handing entities for the store.
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 import { normalize } from 'normalizr'
-import * as schemas from '../reducers/entities/_schemas.js'
-import { callApi } from '../utils/api.js'
+import * as schemas from './_schemas.js'
+import { callApi } from '../../utils/api.js'
 
-const FETCH =           'lca/qc/FETCH'
-const FETCH_SUCCESS =   'lca/qc/FETCH_SUCCESS'
-const FETCH_FAILURE =   'lca/qc/FETCH_FAILURE'
-const UPDATE =          'lca/qc/UPDATE'
-const UPDATE_SUCCESS =  'lca/qc/UPDATE_SUCCESS'
-const UPDATE_FAILURE =  'lca/qc/UPDATE_FAILURE'
-const CREATE =          'lca/qc/CREATE'
-const CREATE_SUCCESS =  'lca/qc/CREATE_SUCCESS'
-const CREATE_FAILURE =  'lca/qc/CREATE_FAILURE'
-const DESTROY =         'lca/qc/DESTROY'
-const DESTROY_SUCCESS = 'lca/qc/DESTROY_SUCCESS'
-const DESTROY_FAILURE = 'lca/qc/DESTROY_FAILURE'
+const QC_CREATE =          'lca/qc/CREATE'
+const QC_CREATE_SUCCESS =  'lca/qc/CREATE_SUCCESS'
+const QC_CREATE_FAILURE =  'lca/qc/CREATE_FAILURE'
+const QC_FETCH =           'lca/qc/FETCH'
+const QC_FETCH_SUCCESS =   'lca/qc/FETCH_SUCCESS'
+const QC_FETCH_FAILURE =   'lca/qc/FETCH_FAILURE'
+const QC_UPDATE =          'lca/qc/UPDATE'
+const QC_UPDATE_SUCCESS =  'lca/qc/UPDATE_SUCCESS'
+const QC_UPDATE_FAILURE =  'lca/qc/UPDATE_FAILURE'
+const QC_DESTROY =         'lca/qc/DESTROY'
+const QC_DESTROY_SUCCESS = 'lca/qc/DESTROY_SUCCESS'
+const QC_DESTROY_FAILURE = 'lca/qc/DESTROY_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
 
   switch(action.type) {
-  case CREATE_SUCCESS:
+  case QC_CREATE_SUCCESS:
     return _get_qc(state, action)
-  case FETCH_SUCCESS:
+  case QC_FETCH_SUCCESS:
     return _get_qc(state, action)
-  case UPDATE_SUCCESS:
+  case QC_UPDATE_SUCCESS:
     return { ...state, qcs: {
       ...state.qcs, [_id]: {
         ...state.qcs[_id], [_trait]: action.payload[_trait]
@@ -46,7 +46,7 @@ export function createQc(playerId, chronicleId, name) {
     endpoint: '/api/v1/qcs',
     method: 'POST',
     body: JSON.stringify(qc),
-    types: [CREATE, CREATE_SUCCESS, CREATE_FAILURE]
+    types: [QC_CREATE, QC_CREATE_SUCCESS, QC_CREATE_FAILURE]
   })
 }
 
@@ -54,7 +54,7 @@ export function fetchQc(id) {
   return callApi({
     endpoint: `/api/v1/qcs/${id}`,
     method: 'GET',
-    types: [FETCH, FETCH_SUCCESS, FETCH_FAILURE]
+    types: [QC_FETCH, QC_FETCH_SUCCESS, QC_FETCH_FAILURE]
   })
 }
 
@@ -64,9 +64,9 @@ export function updateQc(id, trait, value) {
     method: 'PATCH',
     body: JSON.stringify({ qc: { [trait]: value }}),
     types: [
-      UPDATE,
-      { type: UPDATE_SUCCESS, meta: { trait: trait }},
-      UPDATE_FAILURE
+      QC_UPDATE,
+      { type: QC_UPDATE_SUCCESS, meta: { trait: trait }},
+      QC_UPDATE_FAILURE
     ]
   })
 }
@@ -75,7 +75,7 @@ export function destroyQc(id) {
   return callApi({
     endpoint: `/api/v1/qcs/${id}`,
     method: 'DELETE',
-    types: [DESTROY, DESTROY_SUCCESS, DESTROY_FAILURE]
+    types: [QC_DESTROY, QC_DESTROY_SUCCESS, QC_DESTROY_FAILURE]
   })
 }
 

@@ -1,43 +1,43 @@
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 
-import * as schemas from '../reducers/entities/_schemas.js'
-import { callApi } from '../utils/api.js'
+import * as schemas from './_schemas.js'
+import { callApi } from '../../utils/api.js'
 
-export const CREATE =          'lca/character/CREATE'
-export const CREATE_SUCCESS =  'lca/character/CREATE_SUCCESS'
-export const CREATE_FAILURE =  'lca/character/CREATE_FAILURE'
-export const FETCH =           'lca/character/FETCH'
-export const FETCH_SUCCESS =   'lca/character/FETCH_SUCCESS'
-export const FETCH_FAILURE =   'lca/character/FETCH_FAILURE'
-export const UPDATE =          'lca/character/UPDATE'
-export const UPDATE_SUCCESS =  'lca/character/UPDATE_SUCCESS'
-export const UPDATE_FAILURE =  'lca/character/UPDATE_FAILURE'
-export const DESTROY =         'lca/character/DESTROY'
-export const DESTROY_SUCCESS = 'lca/character/DESTROY_SUCCESS'
-export const DESTROY_FAILURE = 'lca/character/DESTROY_FAILURE'
+export const CHA_CREATE =          'lca/character/CREATE'
+export const CHA_CREATE_SUCCESS =  'lca/character/CREATE_SUCCESS'
+export const CHA_CREATE_FAILURE =  'lca/character/CREATE_FAILURE'
+export const CHA_FETCH =           'lca/character/FETCH'
+export const CHA_FETCH_SUCCESS =   'lca/character/FETCH_SUCCESS'
+export const CHA_FETCH_FAILURE =   'lca/character/FETCH_FAILURE'
+export const CHA_UPDATE =          'lca/character/UPDATE'
+export const CHA_UPDATE_SUCCESS =  'lca/character/UPDATE_SUCCESS'
+export const CHA_UPDATE_FAILURE =  'lca/character/UPDATE_FAILURE'
+export const CHA_DESTROY =         'lca/character/DESTROY'
+export const CHA_DESTROY_SUCCESS = 'lca/character/DESTROY_SUCCESS'
+export const CHA_DESTROY_FAILURE = 'lca/character/DESTROY_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
 
   switch(action.type) {
-  case CREATE_SUCCESS:
+  case CHA_CREATE_SUCCESS:
     return _create_character(state, action)
-  case FETCH_SUCCESS:
+  case CHA_FETCH_SUCCESS:
     return {
       ...state,
       characters: { ...state.characters, ...action.payload.entities.characters },
       weapons:    { ...state.weapons,    ...action.payload.entities.weapons    },
       merits:     { ...state.merits,     ...action.payload.entities.merits     }
     }
-  case UPDATE_SUCCESS:
+  case CHA_UPDATE_SUCCESS:
     return { ...state, characters: {
       ...state.characters, [_id]: {
         ...state.characters[_id], [_trait]: action.payload[_trait]
       }
     }}
-  case DESTROY_SUCCESS:
+  case CHA_DESTROY_SUCCESS:
     return _destroy_char(state, _id)
   default:
     return state
@@ -51,7 +51,7 @@ export function createCharacter(playerId, chronicleId, name) {
     endpoint: '/api/v1/characters',
     method: 'POST',
     body: JSON.stringify(char),
-    types: [CREATE, CREATE_SUCCESS, CREATE_FAILURE]
+    types: [CHA_CREATE, CHA_CREATE_SUCCESS, CHA_CREATE_FAILURE]
   })
 }
 
@@ -60,14 +60,14 @@ export function fetchCharacter(id) {
     endpoint: `/api/v1/characters/${id}`,
     method: 'GET',
     types: [
-      FETCH,
+      CHA_FETCH,
       {
-        type: FETCH_SUCCESS,
+        type: CHA_FETCH_SUCCESS,
         payload: (action, state, res) => {
           return getJSON(res).then((json) => normalize(json, schemas.player))
         }
       },
-      FETCH_FAILURE
+      CHA_FETCH_FAILURE
     ]
   })
 }
@@ -78,9 +78,9 @@ export function updateCharacter(id, trait, value) {
     method: 'PATCH',
     body: JSON.stringify({ character: { [trait]: value }}),
     types: [
-      UPDATE,
-      { type: UPDATE_SUCCESS, meta: { trait: trait }},
-      UPDATE_FAILURE
+      CHA_UPDATE,
+      { type: CHA_UPDATE_SUCCESS, meta: { trait: trait }},
+      CHA_UPDATE_FAILURE
     ]
   })
 }
@@ -90,9 +90,9 @@ export function destroyCharacter(id) {
     endpoint: `/api/v1/characters/${id}`,
     method: 'DELETE',
     types: [
-      DESTROY,
-      { type: DESTROY_SUCCESS, meta: { id: id }},
-      DESTROY_FAILURE
+      CHA_DESTROY,
+      { type: CHA_DESTROY_SUCCESS, meta: { id: id }},
+      CHA_DESTROY_FAILURE
     ]
   })
 }

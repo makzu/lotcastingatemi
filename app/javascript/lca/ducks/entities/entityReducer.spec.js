@@ -1,5 +1,5 @@
-import reducer from './entityReducer.js'
-import { UPDATE_SUCCESS } from '../ducks/character.js'
+import reducer from './'
+import { CHA_UPDATE_SUCCESS } from './character.js'
 
 describe('entity reducer', () => {
   it('should return the initial state', () => {
@@ -17,7 +17,7 @@ describe('entity reducer', () => {
 
   it('should handle character/UPDATE_SUCCESS', () => {
     expect(reducer(undefined, {
-      type: UPDATE_SUCCESS,
+      type: CHA_UPDATE_SUCCESS,
       payload: { id: 1, abil_war: 3 },
       meta: { trait: 'abil_war' }
     })).toEqual({

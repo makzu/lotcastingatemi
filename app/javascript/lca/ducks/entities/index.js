@@ -1,11 +1,19 @@
-import PlayerReducer from '../ducks/player.js'
-import ChronicleReducer from '../ducks/chronicle.js'
-import CharacterReducer from '../ducks/character.js'
-import MeritReducer from '../ducks/merit.js'
-import WeaponReducer from '../ducks/weapon.js'
-import QcReducer from '../ducks/qc.js'
-import QcAttackReducer from '../ducks/qc_attack.js'
-import QcMeritReducer from '../ducks/qc_merit.js'
+export * from './character.js'
+export * from './merit.js'
+export * from './weapon.js'
+
+export * from './qc.js'
+export * from './qc_attack.js'
+export * from './qc_merit.js'
+
+import PlayerReducer from './player.js'
+import ChronicleReducer from './chronicle.js'
+import CharacterReducer from './character.js'
+import MeritReducer from './merit.js'
+import WeaponReducer from './weapon.js'
+import QcReducer from './qc.js'
+import QcAttackReducer from './qc_attack.js'
+import QcMeritReducer from './qc_merit.js'
 
 const defaultState = {
   players:    {},

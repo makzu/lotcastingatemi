@@ -11,6 +11,7 @@ gem 'webpacker', github: 'rails/webpacker'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Used for grid layout and that's pretty much it
@@ -31,11 +32,13 @@ gem 'bcrypt', '~> 3.1.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Authentication/Authorization
 gem 'knock'
 gem 'pundit'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'
+gem 'email_validator'
 
 # For Heroku:
 group :production do
@@ -63,6 +66,7 @@ group :development do
 end
 
 group :test do
+  gem 'pundit-matchers', '~> 1.3.0'
   gem 'simplecov', require: false
 end
 

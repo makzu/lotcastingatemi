@@ -7,6 +7,7 @@ module Api
       before_action :set_character, only: %i[show update destroy]
 
       def show
+        authorize @character
         render json: @character.as_json(include: %i[weapons merits])
       end
 
@@ -15,10 +16,12 @@ module Api
       end
 
       def destroy
+        authorize @character
         render json: @character.destroy
       end
 
       def update
+        authorize @character
         @character.update_attributes(character_params)
         render json: @character
       end

@@ -7,6 +7,7 @@ module Api
       before_action :set_qc, only: %i[show update destroy]
 
       def show
+        authorize @qc
         render json: @qc.as_json(include: %i[qc_attacks qc_merits])
       end
 
@@ -15,10 +16,12 @@ module Api
       end
 
       def destroy
+        authorize @qc
         render json: @qc.destroy
       end
 
       def update
+        authorize @qc
         @qc.update_attributes(qc_params)
         render json: @qc
       end

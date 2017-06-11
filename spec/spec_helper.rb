@@ -19,6 +19,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'pundit/rspec'
+require 'pundit/matchers'
 
 # Use SimpleCov to measure test coverage
 require 'simplecov'

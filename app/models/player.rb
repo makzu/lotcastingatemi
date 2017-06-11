@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # User account.
-class Player < ActiveRecord::Base
+class Player < ApplicationRecord
   has_secure_password
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, email: true
 
   has_many :own_chronicles, class_name: 'Chronicle', foreign_key: 'st_id', dependent: :destroy
   has_many :characters, dependent: :destroy
@@ -14,12 +14,18 @@ class Player < ActiveRecord::Base
 
   # Exclude password digest from any json output
   def as_json(options = {})
-    if options[:except].nil?
-      options[:except] = [:password_digest]
-    else
-      options[:except] << :password_digest
-    end
+    options[:except] ||= []
+    options[:except] << :password_digest
 
     super(options)
+  end
+
+  # Make knock login requests case-insensitive for email
+  # Innards shamelessly stolen from:
+  # https://robb.weblaws.org/2013/12/05/yes-rails-supports-case-insensitive-database-queries/
+  def self.from_token_request(request)
+    p = Player.arel_table
+    email = request.params['auth'] && request.params['auth']['email']
+    Player.find_by(p[:email].matches(email))
   end
 end

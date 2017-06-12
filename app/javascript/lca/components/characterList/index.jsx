@@ -58,7 +58,7 @@ class CharacterList extends React.Component {
     e.preventDefault()
     this.setState({ newCharacter: false })
     // TODO make chronicle ID optional
-    this.props.createCharacter(this.props.player.id, 1, this.state.newCharacterName)
+    this.props.createCharacter(this.props.player.id, this.state.newCharacterName)
   }
 
   addQcClick(e) {
@@ -76,7 +76,7 @@ class CharacterList extends React.Component {
     e.preventDefault()
     this.setState({ newQc: false })
     // TODO make chronicle ID optional
-    this.props.createQc(this.props.player.id, 1, this.state.newQcName)
+    this.props.createQc(this.props.player.id, this.state.newQcName)
   }
 
   render() {
@@ -123,6 +123,7 @@ class CharacterList extends React.Component {
   }
 }
 CharacterList.propTypes = {
+  player_id: PropTypes.string.isRequired,
   player: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
   characters: PropTypes.arrayOf(PropTypes.shape(fullChar)),
   qcs: PropTypes.arrayOf(PropTypes.shape(fullQc)),
@@ -131,7 +132,7 @@ CharacterList.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const player_id = 1 // TODO replace with 'current_player' or something
+  const player_id = state.session.id
   const player = state.entities.players[player_id]
 
   let characters = []
@@ -150,11 +151,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    createCharacter: (playerId, chronicleId, name) => {
-      dispatch(createCharacter(playerId, chronicleId, name))
+    createCharacter: (playerId, name) => {
+      dispatch(createCharacter(playerId, name))
     },
-    createQc: (playerId, chronicleId, name) => {
-      dispatch(createQc(playerId, chronicleId, name))
+    createQc: (playerId, name) => {
+      dispatch(createQc(playerId, name))
     }
   }
 }

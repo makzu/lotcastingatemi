@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-CRUD_ACTIONS = %i[create show update destroy].freeze
-
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
@@ -9,14 +7,14 @@ Rails.application.routes.draw do
       post 'player_token' => 'player_token#create'
       resources :players, only: %i[index create show]
 
-      resources :chronicles, only: CRUD_ACTIONS
+      resources :chronicles, only: %i[create show update destroy]
 
-      resources :characters, only: CRUD_ACTIONS do
-        resources :merits, :weapons, only: CRUD_ACTIONS
+      resources :characters, only: %i[create show update destroy] do
+        resources :merits, :weapons, only: %i[create show update destroy]
       end
 
-      resources :qcs, only: CRUD_ACTIONS do
-        resources :qc_merits, :qc_attacks, only: CRUD_ACTIONS
+      resources :qcs, only: %i[create show update destroy] do
+        resources :qc_merits, :qc_attacks, only: %i[create show update destroy]
       end
     end
   end

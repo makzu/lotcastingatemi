@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import * as c from '../utils/actionNames'
 
-import EntityReducer from '../ducks/entities'
-import SessionReducer from '../ducks/account.js'
+import EntityReducer from './entities'
+import SessionReducer from './account.js'
+import { TOGGLE_MENU } from './actions.js'
 
 const defaultState = {
   navDrawerOpen: false,
@@ -14,7 +14,7 @@ const defaultState = {
 export function appReducer(state = defaultState, action) {
   switch (action.type) {
 
-  case c.TOGGLE_MENU:
+  case TOGGLE_MENU:
     return { ...state, navDrawerOpen: !state.navDrawerOpen }
 
   default:

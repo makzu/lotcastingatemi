@@ -1,17 +1,33 @@
-export { fetchCharacter, updateCharacter, createCharacter } from './entities'
-export { updateWeapon, createWeapon, destroyWeapon } from './entities'
-export { updateMerit, createMerit, destroyMerit } from './entities'
-export { fetchChronicle } from './entities'
-export { fetchQc, updateQc, createQc } from './entities'
-export { updateQcAttack, createQcAttack, destroyQcAttack } from './entities'
-export { updateQcMerit, createQcMerit, destroyQcMerit } from './entities'
-export { login, logout, signup } from './account.js'
-export { fetchCurrentPlayer } from './entities'
+export {
+  fetchCharacter, updateCharacter, createCharacter,
+  updateWeapon, createWeapon, destroyWeapon,
+  updateMerit, createMerit, destroyMerit,
+  fetchChronicle,
+  fetchQc, updateQc, createQc,
+  updateQcAttack, createQcAttack, destroyQcAttack,
+  updateQcMerit, createQcMerit, destroyQcMerit,
+  fetchCurrentPlayer
+} from './entities'
 
-import * as c from '../utils/actionNames'
+export { login, loginAndFetch, logout, signup } from './account.js'
+
+import { fetchCurrentPlayer } from './entities'
+
+export const INIT = 'lca/app/INIT'
+export const TOGGLE_MENU = 'lca/app/TOGGLE_MENU'
 
 export function toggleMenu() {
   return function (dispatch) {
-    dispatch({ type: c.TOGGLE_MENU })
+    dispatch({ type: TOGGLE_MENU })
+  }
+}
+
+export function lcaInit() {
+  return (dispatch, getState) => {
+    if (getState().session.authenticated) {
+      dispatch(fetchCurrentPlayer())
+    }
+
+    dispatch({ type: INIT })
   }
 }

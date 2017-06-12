@@ -44,8 +44,8 @@ export default function reducer(state, action) {
   }
 }
 
-export function createCharacter(playerId, chronicleId, name) {
-  let char = { character: { name: name, player_id: playerId, chronicle_id: chronicleId }}
+export function createCharacter(playerId, name) {
+  let char = { character: { name: name, player_id: playerId }}
 
   return callApi({
     endpoint: '/api/v1/characters',

@@ -11,7 +11,8 @@ import thunk from 'redux-thunk'
 import { apiMiddleware } from 'redux-api-middleware'
 import authCookieMiddleware from './middleware/authCookieMiddleware.js'
 
-import reducer from './reducers'
+import reducer from './ducks'
+import { lcaInit } from './ducks/actions.js'
 
 import RootContainer from './containers/rootContainer.jsx'
 
@@ -31,6 +32,8 @@ const store = createStore(
   undefined,
   enhancer
 )
+
+store.dispatch(lcaInit())
 
 const render = (Component) => {
   ReactDOM.render(

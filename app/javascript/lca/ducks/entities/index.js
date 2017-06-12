@@ -1,3 +1,5 @@
+export * from './player.js'
+export * from './chronicle.js'
 export * from './character.js'
 export * from './merit.js'
 export * from './weapon.js'
@@ -16,7 +18,14 @@ import QcAttackReducer from './qc_attack.js'
 import QcMeritReducer from './qc_merit.js'
 
 const defaultState = {
-  players:    {},
+  players:    {
+    '0': {
+      id: 0,
+      name: 'Anonymous Player',
+      characters: [],
+      qcs: []
+    }
+  },
   chronicles: {},
   characters: {},
   weapons:    {},

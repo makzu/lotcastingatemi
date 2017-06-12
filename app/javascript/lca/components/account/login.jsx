@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-import { fetchCurrentPlayer, login, logout } from '../../ducks/actions.js'
+import { fetchCurrentPlayer, loginAndFetch, logout } from '../../ducks/actions.js'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -110,7 +110,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     login: (credentials) => {
-      dispatch(login(credentials))
+      dispatch(loginAndFetch(credentials))
     }, logout: () => {
       dispatch(logout())
     }, fetchCurrentPlayer: () => {

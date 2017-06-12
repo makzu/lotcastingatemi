@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405012649) do
+ActiveRecord::Schema.define(version: 20170612024421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 20170405012649) do
     t.integer "magnitude_current", default: 7
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "name", default: "New Battlegroup"
     t.index ["qc_id"], name: "index_battlegroups_on_qc_id"
   end
 
   create_table "characters", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "New Character"
     t.text "description", default: ""
     t.integer "essence", default: 1
     t.integer "willpower_temporary", default: 5
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20170405012649) do
 
   create_table "chronicles", force: :cascade do |t|
     t.bigint "st_id"
-    t.string "name"
+    t.string "name", default: "New Chronicle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["st_id"], name: "index_chronicles_on_st_id"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20170405012649) do
   create_table "merits", id: :serial, force: :cascade do |t|
     t.integer "character_id"
     t.integer "rating", default: 1
-    t.string "name", default: ""
+    t.string "name", default: "New Merit"
     t.string "merit_name", default: ""
     t.string "merit_cat", default: "story"
     t.text "description", default: ""
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20170405012649) do
 
   create_table "qc_attacks", force: :cascade do |t|
     t.bigint "qc_id"
-    t.string "name"
+    t.string "name", default: "New Attack"
     t.integer "pool", default: 1
     t.string "range", default: "close"
     t.integer "damage", default: 1
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 20170405012649) do
 
   create_table "qc_merits", id: :serial, force: :cascade do |t|
     t.integer "qc_id"
-    t.string "name"
+    t.string "name", default: "New Merit"
     t.boolean "latent", default: false
     t.boolean "magical", default: false
     t.text "body", default: ""
@@ -172,8 +172,8 @@ ActiveRecord::Schema.define(version: 20170405012649) do
   end
 
   create_table "qcs", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.text "description"
+    t.string "name", default: "New QC"
+    t.text "description", default: ""
     t.integer "essence", default: 1
     t.integer "willpower_temporary", default: 3
     t.integer "willpower_permanent", default: 3
@@ -200,9 +200,9 @@ ActiveRecord::Schema.define(version: 20170405012649) do
     t.integer "guile", default: 1
     t.integer "evasion", default: 1
     t.integer "parry", default: 1
-    t.string "armor_name"
+    t.string "armor_name", default: ""
     t.json "actions", default: []
-    t.string "ref"
+    t.string "ref", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "player_id"
@@ -218,8 +218,8 @@ ActiveRecord::Schema.define(version: 20170405012649) do
 
   create_table "weapons", id: :serial, force: :cascade do |t|
     t.integer "character_id"
-    t.string "name"
-    t.string "ability"
+    t.string "name", default: "New Weapon"
+    t.string "ability", default: "melee"
     t.string "weight", default: "light"
     t.string "tags", default: [], array: true
     t.boolean "is_artifact", default: false

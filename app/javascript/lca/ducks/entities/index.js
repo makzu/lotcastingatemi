@@ -17,7 +17,7 @@ import QcReducer from './qc.js'
 import QcAttackReducer from './qc_attack.js'
 import QcMeritReducer from './qc_merit.js'
 
-const defaultState = {
+export const defaultState = {
   players:    {
     '0': {
       id: 0,

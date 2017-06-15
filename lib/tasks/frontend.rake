@@ -14,7 +14,7 @@ namespace :lca do
 
     desc 'Run the Jest test suite with optional (time-consuming) coverage report'
     task :testcov do
-      send_yarn_command('./bin/yarn testcov')
+      send_yarn_command('testcov')
     end
   end
 end

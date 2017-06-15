@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Rails 5.1 for Webpacker
 gem 'rails', '~> 5.1.0'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', github: 'rails/webpacker'
+gem 'webpacker', '~> 2.0'
 
 # Use postgres as the database for Active Record
 gem 'pg'
@@ -48,7 +48,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'capybara', '~> 2.7.0'
+  gem 'capybara', '~> 2.14.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails'
   gem 'rubocop', require: false
@@ -57,7 +57,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.1.0'
   gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rack-cors', require: 'rack/cors'

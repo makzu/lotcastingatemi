@@ -1,5 +1,6 @@
 import { callApiNoAuth } from '../utils/api.js'
 import { fetchCurrentPlayer } from './actions.js'
+import { FETCH_SUCCESS as PLAYER_FETCH_SUCCESS } from './entities/player.js'
 
 export const LOGIN_REQUEST =  'lca/session/LOGIN_REQUEST'
 export const LOGIN_SUCCESS =  'lca/session/LOGIN_SUCCESS'
@@ -56,6 +57,12 @@ export default function SessionReducer(state = defaultState, action) {
       error: false,
       id: action.payload.id
     }
+
+  case PLAYER_FETCH_SUCCESS:
+    return { ...state,
+      id: action.payload.result
+    }
+
   default:
     return state
   }

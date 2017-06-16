@@ -119,14 +119,11 @@ function mapStateToProps(state, ownProps) {
     qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
   }
 
-  const { isFetching, isError } = state.app
   return {
     id,
     qc,
     qc_attacks,
-    qc_merits,
-    isFetching,
-    isError
+    qc_merits
   }
 }
 QcSheet.propTypes = {

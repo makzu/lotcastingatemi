@@ -180,13 +180,10 @@ function mapStateToProps(state, ownProps) {
     merits = character.merits.map((id) => state.entities.merits[id])
   }
 
-  const { isFetching, isError } = state.app
   return {
     character,
     weapons,
-    merits,
-    isFetching,
-    isError
+    merits
   }
 }
 

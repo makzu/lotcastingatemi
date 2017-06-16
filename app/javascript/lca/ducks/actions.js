@@ -14,13 +14,6 @@ export { login, loginAndFetch, logout, signup } from './account.js'
 import { fetchCurrentPlayer } from './entities'
 
 export const INIT = 'lca/app/INIT'
-export const TOGGLE_MENU = 'lca/app/TOGGLE_MENU'
-
-export function toggleMenu() {
-  return function (dispatch) {
-    dispatch({ type: TOGGLE_MENU })
-  }
-}
 
 export function lcaInit() {
   return (dispatch, getState) => {

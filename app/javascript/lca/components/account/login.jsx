@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-import { fetchCurrentPlayer, loginAndFetch, logout } from '../../ducks/actions.js'
+import { loginAndFetch } from '../../ducks/actions.js'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { handleOpen, handleClose, onChange, onSubmit } = this
-    const { authenticated, error, logout, fetchCurrentPlayer } = this.props
+    const { error } = this.props
 
     const actions = [
       <FlatButton
@@ -61,15 +61,7 @@ class LoginForm extends React.Component {
       />
     ]
     return <span>
-      { authenticated ?
-        <span>
-          <FlatButton label="Refresh" onClick={ fetchCurrentPlayer } />
-          <FlatButton label="Log out" onClick={ logout } />
-        </span>
-        :
-        <FlatButton label="Log in" onClick={ handleOpen } />
-      }
-
+      <FlatButton label="Log in" style={{ color: 'white' }} onClick={ handleOpen } />
       <Dialog
         title="Log in"
         actions={ actions }
@@ -94,9 +86,7 @@ LoginForm.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   fetching: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
-  fetchCurrentPlayer: PropTypes.func,
-  login: PropTypes.func,
-  logout: PropTypes.func
+  login: PropTypes.func
 }
 
 function mapStateToProps(state) {
@@ -111,10 +101,6 @@ function mapDispatchToProps(dispatch) {
   return {
     login: (credentials) => {
       dispatch(loginAndFetch(credentials))
-    }, logout: () => {
-      dispatch(logout())
-    }, fetchCurrentPlayer: () => {
-      dispatch(fetchCurrentPlayer())
     }
   }
 }

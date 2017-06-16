@@ -22,16 +22,17 @@ body {
 
 /* CHARSHEET GRID */
 $mainGrid: (
-  columns: 4,
+  columns: 12,
   gutter: 24px,
 );
 .contentWrapper {
   @include grid-container($mainGrid);
+  padding-top: 64px;
   padding-bottom: 24px;
 }
 
 .welcomePage, .characterList, .qcSheet {
-  @include grid-column(4, $mainGrid);
+  @include grid-column(12, $mainGrid);
 }
 
 .characterSheet {
@@ -40,29 +41,29 @@ $mainGrid: (
   }
 
   .clear4 {
-    @include grid-column(4, $mainGrid);
+    @include grid-column(12, $mainGrid);
     border-color: transparent;
   }
 
   .name {
-    @include grid-column(4, $mainGrid);
+    @include grid-column(12, $mainGrid);
   }
 
   .fullAttributeBlock {
     h3 {
-      @include grid-column(3, $mainGrid);
+      @include grid-column(9, $mainGrid);
     }
     .attrContainer {
-      @include grid-column(1, $mainGrid);
+      @include grid-column(3, $mainGrid);
     }
   }
 
   .fullAbilityBlock {
-    @include grid-column(1, $mainGrid);
+    @include grid-column(3, $mainGrid);
   }
 
   .fullSpecialtyBlock {
-    @include grid-column(1, $mainGrid);
+    @include grid-column(3, $mainGrid);
     .specialtyAbility {
       text-transform: capitalize;
       display: inline-block;
@@ -70,19 +71,19 @@ $mainGrid: (
     }
   }
   .meritSummaryBlock {
-    @include grid-column(2, $mainGrid);
+    @include grid-column(6, $mainGrid);
   }
   .willpowerBlock {
-    @include grid-column(1, $mainGrid);
+    @include grid-column(3, $mainGrid);
     div {
       clear: both;
     }
   }
   .intimacySummaryBlock, .healthLevelBlock {
-    @include grid-column(1, $mainGrid);
+    @include grid-column(3, $mainGrid);
   }
   .armorSummaryBlock {
-    @include grid-column(2, $mainGrid);
+    @include grid-column(6, $mainGrid);
 
     .hardnessColumn {
       width: 3em;
@@ -95,7 +96,7 @@ $mainGrid: (
     }
   }
   .weaponSummaryBlock {
-    @include grid-column(3, $mainGrid);
+    @include grid-column(9, $mainGrid);
 
     .damageColumn {
       width: 3em;
@@ -111,14 +112,14 @@ $mainGrid: (
     }
   }
   .combatSummaryBlock {
-    @include grid-column(2, $mainGrid);
+    @include grid-column(6, $mainGrid);
 
     .pool, .defenseValue, .poolName, .defenseValueName {
       width: 2em;
     }
   }
   .socialSummaryBlock {
-    @include grid-column(1, $mainGrid);
+    @include grid-column(3, $mainGrid);
 
     .pool, .defenseValue, .poolName, .defenseValueName {
       width: 2em;
@@ -128,11 +129,11 @@ $mainGrid: (
 
 .meritPage {
   h1 {
-    @include grid-column(4, $mainGrid);
+    @include grid-column(12, $mainGrid);
   }
 
   .singleMerit {
-    @include grid-column(2, $mainGrid);
+    @include grid-column(6, $mainGrid);
     margin-bottom: 1em;
   }
 }

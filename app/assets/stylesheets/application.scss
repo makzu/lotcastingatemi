@@ -168,28 +168,6 @@ $mainGrid: (
   }
 }
 
-/* MISC: */
-// TODO replace these with SVG icons or something?
-.ratingDotContainer{
-  float: right;
-  clear: right;
-}
-
-.ratingDot {
-  display: inline-block;
-  color: transparent;
-  width: 0.75em;
-  height: 0.75em;
-  border-radius: 0.45em;
-  border: 0.125em solid black;
-  margin-left: 1px;
-  background-color: white;
-}
-
-.ratingDotFull {
-  background-color: black;
-}
-
 .editor-rating-field {
   width: 3em !important;
 }

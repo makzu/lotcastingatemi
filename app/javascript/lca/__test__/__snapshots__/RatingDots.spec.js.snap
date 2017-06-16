@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RatingDots renders at all 1`] = `
-<span
-  className="ratingDotContainer"
+<div
+  className="sc-bdVaJa ikDpDj"
 >
   <div
-    className="ratingDot ratingDotFull"
+    className="sc-bxivhb gwefrW sc-bwzfXH jjwuFK"
   >
     ●
   </div>
   <div
-    className="ratingDot ratingDotFull"
+    className="sc-bxivhb gwefrW sc-bwzfXH jjwuFK"
   >
     ●
   </div>
   <div
-    className="ratingDot ratingDotFull"
+    className="sc-bxivhb gwefrW sc-bwzfXH jjwuFK"
   >
     ●
   </div>
   <div
-    className="ratingDot ratingDotEmpty"
+    className="sc-htpNat KtFsv sc-bwzfXH jjwuFK"
   >
     ○
   </div>
   <div
-    className="ratingDot ratingDotEmpty"
+    className="sc-htpNat KtFsv sc-bwzfXH jjwuFK"
   >
     ○
   </div>
-</span>
+</div>
 `;

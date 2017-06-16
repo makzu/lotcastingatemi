@@ -4,6 +4,8 @@
 # and add their own bonuses.
 class QcAttack < ApplicationRecord
   belongs_to :qc
+  delegate :player,    to: :qc
+  delegate :chronicle, to: :qc
 
   validates :pool, :damage, :overwhelming, numericality: { greater_than: 0 }
 end

@@ -6,9 +6,9 @@ class Qc < ApplicationRecord
   include Willpower
   include Intimacies
 
-  has_many :battlegroups
-  has_many :qc_attacks, dependent: :destroy
-  has_many :qc_merits, dependent: :destroy
+  has_many :battlegroups, dependent: :destroy
+  has_many :qc_attacks,   dependent: :destroy
+  has_many :qc_merits,    dependent: :destroy
 
   belongs_to :player
   belongs_to :chronicle, optional: true

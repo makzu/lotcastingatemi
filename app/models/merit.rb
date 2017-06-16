@@ -3,6 +3,8 @@
 # Individual merits for characters. QC merits have their own model.
 class Merit < ApplicationRecord
   belongs_to :character
+  delegate :player,    to: :character
+  delegate :chronicle, to: :character
 
   validates :merit_cat, inclusion: { in: %w[ story innate purchased ] }
 

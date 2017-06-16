@@ -23,17 +23,17 @@ class CharacterTraitPolicy < ApplicationPolicy
   end
 
   def player_is_owner?
-    player == trait.character.player
+    player == trait.player
   end
 
   def player_in_chronicle?
-    false unless trait.character.chronicle
-    trait.character.chronicle.players.include? player
+    false unless trait.chronicle
+    trait.chronicle.players.include? player
   end
 
   def player_is_st?
-    false unless trait.character.chronicle
-    trait.character.chronicle.st == player
+    false unless trait.chronicle
+    trait.chronicle.st == player
   end
 
   # class Scope < Scope

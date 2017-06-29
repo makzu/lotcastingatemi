@@ -1,6 +1,9 @@
 // Common code for handing entities for the store.
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
+
 import { normalize } from 'normalizr'
+import { getJSON } from 'redux-api-middleware'
+
 import * as schemas from './_schemas.js'
 import { callApi } from '../../utils/api.js'
 
@@ -20,12 +23,15 @@ const QC_DESTROY_FAILURE = 'lca/qc/DESTROY_FAILURE'
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
+  const _entities = action.payload != undefined ? action.payload.entities : undefined
 
   switch(action.type) {
   case QC_CREATE_SUCCESS:
     return _get_qc(state, action)
   case QC_FETCH_SUCCESS:
-    return _get_qc(state, action)
+    return { ...state,
+      qcs: { ...state.qcs, ..._entities.qcs }
+    }
   case QC_UPDATE_SUCCESS:
     return { ...state, qcs: {
       ...state.qcs, [_id]: {
@@ -54,7 +60,16 @@ export function fetchQc(id) {
   return callApi({
     endpoint: `/api/v1/qcs/${id}`,
     method: 'GET',
-    types: [QC_FETCH, QC_FETCH_SUCCESS, QC_FETCH_FAILURE]
+    types: [
+      QC_FETCH,
+      {
+        type: QC_FETCH_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.qc))
+        }
+      },
+      QC_FETCH_FAILURE
+    ]
   })
 }
 

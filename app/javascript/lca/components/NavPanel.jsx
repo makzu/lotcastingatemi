@@ -26,7 +26,6 @@ export class NavPanel extends React.Component {
           <Link to="/characters/">
             <ListItem primaryText="My Characters" />
           </Link>
-          <ListItem primaryText="Etc" />
         </List>
       </ResponsiveDrawer>
     )

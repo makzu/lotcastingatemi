@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import FlatButton from 'material-ui/FlatButton'
 
@@ -40,7 +41,7 @@ class QcSheet extends React.PureComponent {
   }
 
   render() {
-    const { qc, qc_merits, qc_attacks } = this.props
+    const { qc, qc_merits, qc_attacks, battlegroups } = this.props
     if (this.props.qc == undefined) {
       return(<div>
         <h1>QC Editor</h1>
@@ -63,24 +64,29 @@ class QcSheet extends React.PureComponent {
         <strong>{merit.name}: </strong>{ merit.body }
       </div>
     )
+    const bgs = battlegroups.map((group) =>
+      <div key={group.id}>
+        <Link to={`/battlegroups/${group.id}`}>{group.name}</Link>
+      </div>
+    )
 
     return(<div className="qcSheet">
       <h1>{ qc.name } <QcEditorPopup qc={ qc } attacks={ qc_attacks } merits={ qc_merits } /><FlatButton onClick={ this.fetch } label="Refresh" /></h1>
 
       <div>
-        <strong>Essence:</strong> { qc.essence },
+        <strong>Essence:</strong> { qc.essence }, {' '}
         <strong>Willpower</strong> { qc.willpower_temporary } / { qc.willpower_permanent }<br />
         <MotePool qc={ qc } />
         <HealthLevelBoxes character={ qc } />
       </div>
       <div>
-        <strong>Join Battle:</strong> { qc.join_battle } dice,
-        <strong>Combat Movement:</strong> { qc.movement } dice,
-        <strong>Soak:</strong> { qc.soak }({qc.armor_name}),
+        <strong>Join Battle:</strong> { qc.join_battle } dice, {' '}
+        <strong>Combat Movement:</strong> { qc.movement } dice, {' '}
+        <strong>Soak:</strong> { qc.soak } ({qc.armor_name}), {' '}
         {qc.hardness > 0 &&
-          <span><strong>Hardness:</strong> { qc.hardness },</span>
+          <span><strong>Hardness:</strong> { qc.hardness }, </span>
         }
-        <strong>Parry:</strong> { qc.parry },
+        <strong>Parry:</strong> { qc.parry }, {' '}
         <strong>Evasion:</strong> { qc.evasion }<br />
         <strong>Attacks:</strong>
         { qc.grapple > 0 &&
@@ -89,17 +95,22 @@ class QcSheet extends React.PureComponent {
         { attacks }
       </div>
       <div>
-        <strong>Resolve:</strong> { qc.resolve },
-        <strong>Guile:</strong> { qc.guile },
+        <strong>Resolve:</strong> { qc.resolve }, {' '}
+        <strong>Guile:</strong> { qc.guile }, {' '}
         <strong>Appearance:</strong> { qc.appearance }<br />
         <strong>Actions:</strong>
-        Senses: { qc.senses },{' '}
+        Senses: { qc.senses }, {' '}
         { actions }
       </div>
 
       <div>
         <h4 style={{ marginBottom: '0.25em' }}>Merits:</h4>
         { merits }
+      </div>
+
+      <div>
+        <h4 style={{ marginBottom: '0.25em' }}>Battlegroups based on { qc.name }:</h4>
+        { bgs }
       </div>
     </div>)
   }
@@ -111,19 +122,26 @@ function mapStateToProps(state, ownProps) {
 
   let qc_attacks = []
   let qc_merits = []
+  let battlegroups = []
 
-  if (qc != undefined && qc.qc_attacks != undefined) {
-    qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
-  }
-  if (qc != undefined && qc.qc_merits != undefined) {
-    qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
+  if (qc != undefined) {
+    if (qc.qc_attacks != undefined) {
+      qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
+    }
+    if (qc.qc_merits != undefined) {
+      qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
+    }
+    if (qc.battlegroups != undefined) {
+      battlegroups = qc.battlegroups.map((id) => state.entities.battlegroups[id])
+    }
   }
 
   return {
     id,
     qc,
     qc_attacks,
-    qc_merits
+    qc_merits,
+    battlegroups
   }
 }
 QcSheet.propTypes = {

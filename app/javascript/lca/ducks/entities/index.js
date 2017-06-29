@@ -8,6 +8,8 @@ export * from './qc.js'
 export * from './qc_attack.js'
 export * from './qc_merit.js'
 
+export * from './battlegroup.js'
+
 import PlayerReducer from './player.js'
 import ChronicleReducer from './chronicle.js'
 import CharacterReducer from './character.js'
@@ -16,6 +18,7 @@ import WeaponReducer from './weapon.js'
 import QcReducer from './qc.js'
 import QcAttackReducer from './qc_attack.js'
 import QcMeritReducer from './qc_merit.js'
+import BattlegroupReducer from './battlegroup.js'
 
 export const defaultState = {
   players:    {
@@ -23,16 +26,18 @@ export const defaultState = {
       id: 0,
       name: 'Anonymous Player',
       characters: [],
-      qcs: []
+      qcs: [],
+      battlegroups: []
     }
   },
-  chronicles: {},
-  characters: {},
-  weapons:    {},
-  merits:     {},
-  qcs:        {},
-  qc_merits:  {},
-  qc_attacks: {}
+  chronicles:   {},
+  characters:   {},
+  weapons:      {},
+  merits:       {},
+  qcs:          {},
+  qc_merits:    {},
+  qc_attacks:   {},
+  battlegroups: {}
 }
 
 export default function EntityReducer(state = defaultState, action) {
@@ -42,6 +47,7 @@ export default function EntityReducer(state = defaultState, action) {
     return state
 
   // TODO: refactor this, because it feels kind of stupid
+  //       Something something currying?
   switch(act[1]) {
   case 'player':
     return PlayerReducer(state, action)
@@ -61,6 +67,9 @@ export default function EntityReducer(state = defaultState, action) {
     return QcAttackReducer(state, action)
   case 'qc_merit':
     return QcMeritReducer(state, action)
+
+  case 'battlegroup':
+    return BattlegroupReducer(state, action)
 
   default:
     return state

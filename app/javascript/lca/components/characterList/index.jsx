@@ -83,7 +83,7 @@ class CharacterList extends React.Component {
     const {
       addCharacterClick, handleCharacterChange, handleCharacterCreate,
       addQcClick, handleQcChange, handleQcCreate
-     } = this
+    } = this
     const { newCharacter, newCharacterName, newQc, newQcName } = this.state
 
     const chars = this.props.characters.map((chara) =>
@@ -95,6 +95,12 @@ class CharacterList extends React.Component {
     const qcs = this.props.qcs.map((qc) =>
       <li key={ qc.id }>
         <Link to={ '/qcs/' + qc.id}>{ qc.name }</Link>
+      </li>
+    )
+
+    const bgs = this.props.battlegroups.map((bg) =>
+      <li key={ bg.id }>
+        <Link to={ '/battlegroups/' + bg.id }>{ bg.name }</Link>
       </li>
     )
 
@@ -118,15 +124,16 @@ class CharacterList extends React.Component {
       <ul>{ qcs }</ul>
 
       <h2>My Battlegroups</h2>
-      <p>(TODO)</p>
+      <ul>{ bgs }</ul>
     </div>
   }
 }
 CharacterList.propTypes = {
-  player_id: PropTypes.string.isRequired,
+  player_id: PropTypes.string,
   player: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
   characters: PropTypes.arrayOf(PropTypes.shape(fullChar)),
   qcs: PropTypes.arrayOf(PropTypes.shape(fullQc)),
+  battlegroups: PropTypes.arrayOf(PropTypes.object),
   createCharacter: PropTypes.func,
   createQc: PropTypes.func
 }
@@ -137,15 +144,18 @@ function mapStateToProps(state) {
 
   let characters = []
   let qcs = []
+  let battlegroups = []
   if (player != undefined) {
     characters = player.characters.map((id) => state.entities.characters[id])
     qcs = player.qcs.map((id) => state.entities.qcs[id])
+    battlegroups = player.battlegroups.map((id) => state.entities.battlegroups[id])
   }
 
   return {
     player,
     characters,
-    qcs
+    qcs,
+    battlegroups
   }
 }
 

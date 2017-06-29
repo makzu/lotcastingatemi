@@ -70,6 +70,13 @@ YAML.safe_load(File.read('db/seeds/qc_attacks.yaml')).each do |a|
   puts 'Updated QC Attack ' + attack.name + ' for ' + attack.qc.name
 end
 
+puts 'Reloading Battlegroups'
+YAML.safe_load(File.read('db/seeds/battlegroups.yaml')).each do |a|
+  battlegroup = Battlegroup.find_or_initialize_by(id: a['id'])
+  battlegroup.update(a)
+  puts 'Updated Battlegroup ' + battlegroup.name + ' of ' + battlegroup.qc.name
+end
+
 # Needed to prevent PG:UniqueViolation errors
 ActiveRecord::Base.connection.tables.each do |t|
   ActiveRecord::Base.connection.reset_pk_sequence!(t)

@@ -5,6 +5,7 @@ import CharacterList from './components/characterList/index.jsx'
 import CharacterSheet from './components/characterSheet/index.jsx'
 import MeritFullPage from './components/characterSheet/MeritFullPage.jsx'
 import QcSheet from './components/qcSheet/index.jsx'
+import BgSheet from './components/bgSheet/index.jsx'
 import WelcomePage from './components/pages/welcomePage.jsx'
 import SignupPage from './components/account/signupPage.jsx'
 
@@ -20,6 +21,7 @@ export default function Routes() {
       <Route path="/characters/:characterId/merits" component={ MeritFullPage } />
 
       <Route path="/qcs/:qcId" component={ QcSheet } />
+      <Route path="/battlegroups/:bgId" component={ BgSheet } />
     </div>
   )
 }

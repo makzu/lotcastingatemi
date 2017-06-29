@@ -1,3 +1,4 @@
+import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 
@@ -6,20 +7,24 @@ import { callApi } from '../../utils/api.js'
 
 export const FETCH =         'lca/player/FETCH'
 export const FETCH_SUCCESS = 'lca/player/FETCH_SUCCESS'
-export const FETCH_ERROR =   'lca/player/FETCH_ERROR'
+export const FETCH_FAILURE =   'lca/player/FETCH_FAILURE'
 
 export default function reducer(state, action) {
+  const _entities = action.payload != undefined ? action.payload.entities : undefined
+
   switch(action.type) {
   case FETCH_SUCCESS:
     return {
       ...state,
-      characters: { ...state.characters, ...action.payload.entities.characters },
-      players:    { ...state.players,    ...action.payload.entities.players    },
-      merits:     { ...state.merits,     ...action.payload.entities.merits     },
-      weapons:    { ...state.weapons,    ...action.payload.entities.weapons    },
-      qcs:        { ...state.qcs,        ...action.payload.entities.qcs        },
-      qc_merits:  { ...state.qc_merits,  ...action.payload.entities.qcMerits   },
-      qc_attacks: { ...state.qc_attacks, ...action.payload.entities.qcAttacks  }
+      characters:   merge({ ...state.characters   }, _entities.characters   ),
+      players:      merge({ ...state.players      }, _entities.players      ),
+      merits:       merge({ ...state.merits       }, _entities.merits       ),
+      weapons:      merge({ ...state.weapons      }, _entities.weapons      ),
+      qcs:          merge({ ...state.qcs          }, _entities.qcs          ),
+      qc_merits:    merge({ ...state.qc_merits    }, _entities.qcMerits     ),
+      qc_attacks:   merge({ ...state.qc_attacks   }, _entities.qcAttacks    ),
+      battlegroups: merge({ ...state.battlegroups }, _entities.battlegroups ),
+      chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   )
     }
   default:
     return state
@@ -38,7 +43,7 @@ export function fetchCurrentPlayer() {
           return getJSON(res).then((json) => normalize(json, schemas.player))
         }
       },
-      FETCH_ERROR
+      FETCH_FAILURE
     ]
   })
 }

@@ -63,6 +63,13 @@ YAML.safe_load(File.read('db/seeds/qc_merits.yaml')).each do |m|
   puts 'Updated QC Merit ' + merit.name + ' for ' + merit.qc.name
 end
 
+puts 'Reloading QC Charms'
+YAML.safe_load(File.read('db/seeds/qc_charms.yaml')).each do |c|
+  charm = QcCharm.find_or_initialize_by(id: c['id'])
+  charm.update(c)
+  puts 'Updated QC Charm ' + charm.name + ' for ' + charm.qc.name
+end
+
 puts 'Reloading QC attacks'
 YAML.safe_load(File.read('db/seeds/qc_attacks.yaml')).each do |a|
   attack = QcAttack.find_or_initialize_by(id: a['id'])

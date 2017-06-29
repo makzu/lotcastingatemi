@@ -9,9 +9,11 @@ export const character = new schema.Entity('characters', {
 
 const qcMerit = new schema.Entity('qcMerits')
 const qcAttack = new schema.Entity('qcAttacks')
+const qcCharm = new schema.Entity('qcCharms')
 export const qc = new schema.Entity('qcs', {
   qc_merits: [ qcMerit ],
   qc_attacks: [ qcAttack ],
+  qc_charms: [ qcCharm ],
   battlegroups: [ new schema.Entity('battlegroups') ],
 })
 

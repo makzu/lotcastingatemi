@@ -11,7 +11,7 @@ module Api
           st: { only: %i[name id] },
           players: { only: %i[name id] },
           characters: { include: %i[weapons merits] },
-          qcs: { include: [:qc_attacks, :qc_merits, battlegroups: { only: [:id] }] },
+          qcs: { include: [:qc_attacks, :qc_merits, :qc_charms, battlegroups: { only: [:id] }] },
           battlegroups: { include: { qc: { only: [:id] } } }
         })
       end

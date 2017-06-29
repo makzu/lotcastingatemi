@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612024421) do
+ActiveRecord::Schema.define(version: 20170629062658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,22 @@ ActiveRecord::Schema.define(version: 20170612024421) do
     t.index ["qc_id"], name: "index_qc_attacks_on_qc_id"
   end
 
+  create_table "qc_charms", force: :cascade do |t|
+    t.bigint "qc_id"
+    t.string "name", default: "New QC Charm"
+    t.string "cost", default: ""
+    t.string "charm_type", default: "supplemental"
+    t.string "duration", default: "instant"
+    t.string "keywords", default: [], array: true
+    t.integer "min_essence", default: 1
+    t.text "body", default: ""
+    t.string "ref", default: ""
+    t.string "category", default: "miscellaneous"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["qc_id"], name: "index_qc_charms_on_qc_id"
+  end
+
   create_table "qc_merits", id: :serial, force: :cascade do |t|
     t.integer "qc_id"
     t.string "name", default: "New Merit"
@@ -235,6 +251,7 @@ ActiveRecord::Schema.define(version: 20170612024421) do
   add_foreign_key "chronicle_players", "players"
   add_foreign_key "merits", "characters"
   add_foreign_key "qc_attacks", "qcs"
+  add_foreign_key "qc_charms", "qcs"
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "qcs", "chronicles"
   add_foreign_key "qcs", "players"

@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Rails 5.1 for Webpacker
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.1.2'
 # Webpacker allows React/Redux and friends to thrive:
 gem 'webpacker', '~> 2.0'
 

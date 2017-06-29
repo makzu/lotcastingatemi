@@ -7,6 +7,7 @@ export * from './weapon.js'
 export * from './qc.js'
 export * from './qc_attack.js'
 export * from './qc_merit.js'
+export * from './qc_charm.js'
 
 export * from './battlegroup.js'
 
@@ -17,6 +18,7 @@ import MeritReducer from './merit.js'
 import WeaponReducer from './weapon.js'
 import QcReducer from './qc.js'
 import QcAttackReducer from './qc_attack.js'
+import QcCharmReducer from './qc_charm.js'
 import QcMeritReducer from './qc_merit.js'
 import BattlegroupReducer from './battlegroup.js'
 
@@ -36,6 +38,7 @@ export const defaultState = {
   merits:       {},
   qcs:          {},
   qc_merits:    {},
+  qc_charms:    {},
   qc_attacks:   {},
   battlegroups: {}
 }
@@ -67,6 +70,8 @@ export default function EntityReducer(state = defaultState, action) {
     return QcAttackReducer(state, action)
   case 'qc_merit':
     return QcMeritReducer(state, action)
+  case 'qc_charm':
+    return QcCharmReducer(state, action)
 
   case 'battlegroup':
     return BattlegroupReducer(state, action)

@@ -41,7 +41,7 @@ class QcSheet extends React.PureComponent {
   }
 
   render() {
-    const { qc, qc_merits, qc_attacks, battlegroups } = this.props
+    const { qc, qc_attacks, qc_charms, qc_merits, battlegroups } = this.props
     if (this.props.qc == undefined) {
       return(<div>
         <h1>QC Editor</h1>
@@ -62,6 +62,16 @@ class QcSheet extends React.PureComponent {
     const merits = qc_merits.map((merit) =>
       <div key={merit.id}>
         <strong>{merit.name}: </strong>{ merit.body }
+      </div>
+    )
+    const charms = qc_charms.map((charm) =>
+      <div key={ charm.id }>
+        <strong>{ charm.name } </strong>
+        (
+        { charm.cost }; { charm.charm_type }; { charm.duration };
+        Essence { charm.min_essence }
+        )
+        { charm.body }
       </div>
     )
     const bgs = battlegroups.map((group) =>
@@ -108,6 +118,11 @@ class QcSheet extends React.PureComponent {
         { merits }
       </div>
 
+      { charms.length > 0 && <div>
+        <h4 style={{ marginBottom: '0.25em' }}>Charms:</h4>
+        { charms }
+      </div> }
+
       <div>
         <h4 style={{ marginBottom: '0.25em' }}>Battlegroups based on { qc.name }:</h4>
         { bgs }
@@ -121,12 +136,16 @@ function mapStateToProps(state, ownProps) {
   const qc = state.entities.qcs[id]
 
   let qc_attacks = []
+  let qc_charms = []
   let qc_merits = []
   let battlegroups = []
 
   if (qc != undefined) {
     if (qc.qc_attacks != undefined) {
       qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
+    }
+    if (qc.qc_charms != undefined) {
+      qc_charms = qc.qc_charms.map((id) => state.entities.qc_charms[id])
     }
     if (qc.qc_merits != undefined) {
       qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
@@ -140,6 +159,7 @@ function mapStateToProps(state, ownProps) {
     id,
     qc,
     qc_attacks,
+    qc_charms,
     qc_merits,
     battlegroups
   }
@@ -148,7 +168,9 @@ QcSheet.propTypes = {
   id: PropTypes.string.isRequired,
   qc: PropTypes.shape(fullQc),
   qc_merits: PropTypes.arrayOf(PropTypes.shape(qcMerit)),
+  qc_charms: PropTypes.arrayOf(PropTypes.object),
   qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
+  battlegroups: PropTypes.arrayOf(PropTypes.object),
   updateQc: PropTypes.func,
   fetchQc: PropTypes.func
 }

@@ -22,6 +22,7 @@ export default function reducer(state, action) {
       weapons:      merge({ ...state.weapons      }, _entities.weapons      ),
       qcs:          merge({ ...state.qcs          }, _entities.qcs          ),
       qc_merits:    merge({ ...state.qc_merits    }, _entities.qcMerits     ),
+      qc_charms:    merge({ ...state.qc_charms    }, _entities.qcCharms     ),
       qc_attacks:   merge({ ...state.qc_attacks   }, _entities.qcAttacks    ),
       battlegroups: merge({ ...state.battlegroups }, _entities.battlegroups ),
       chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   )

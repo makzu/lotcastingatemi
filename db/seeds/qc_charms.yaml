@@ -1,0 +1,9 @@
+- id: 1
+  qc_id: 2
+  name: Materialize
+  cost: 35m, 1wp
+  min_essence: 1
+  charm_type: simple
+  duration: Instant
+  body: Tiny Demon can appear in a puff of smoke.
+  ref: Core, p. 525

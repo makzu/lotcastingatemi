@@ -8,6 +8,7 @@ class Qc < ApplicationRecord
 
   has_many :battlegroups, dependent: :destroy
   has_many :qc_attacks,   dependent: :destroy
+  has_many :qc_charms,    dependent: :destroy
   has_many :qc_merits,    dependent: :destroy
 
   belongs_to :player

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
 
       resources :qcs, only: %i[create show update destroy] do
-        resources :qc_merits, :qc_attacks, only: %i[create show update destroy]
+        resources :qc_merits, :qc_attacks, :qc_charms, only: %i[create show update destroy]
       end
 
       resources :battlegroups, only: %i[create show update destroy]

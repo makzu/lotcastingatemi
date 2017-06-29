@@ -7,6 +7,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { createStore, applyMiddleware, compose } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { responsiveStoreEnhancer } from 'redux-responsive'
 import thunk from 'redux-thunk'
 import { apiMiddleware } from 'redux-api-middleware'
@@ -18,20 +19,12 @@ import { lcaInit } from './ducks/actions.js'
 
 import RootContainer from './containers/rootContainer.jsx'
 
-let enhancer
+const makeEnhancer = (process.env.NODE_ENV === 'production') ? compose : composeWithDevTools
 
-if (process.env.NODE_ENV === 'production') {
-  enhancer = compose(
-    responsiveStoreEnhancer,
-    applyMiddleware(thunk, apiMiddleware, authCookieMiddleware)
-  )
-} else {
-  enhancer = compose(
-    responsiveStoreEnhancer,
-    applyMiddleware(thunk, apiMiddleware, authCookieMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-}
+const enhancer = makeEnhancer(
+  responsiveStoreEnhancer,
+  applyMiddleware(thunk, apiMiddleware, authCookieMiddleware)
+)
 
 const store = createStore(
   reducer,

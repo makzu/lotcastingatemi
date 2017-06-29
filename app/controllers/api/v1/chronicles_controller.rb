@@ -11,7 +11,8 @@ module Api
           st: { only: %i[name id] },
           players: { only: %i[name id] },
           characters: { include: %i[weapons merits] },
-          qcs: { include: %i[qc_attacks qc_merits] }
+          qcs: { include: [:qc_attacks, :qc_merits, battlegroups: { only: [:id] }] },
+          battlegroups: { include: { qc: { only: [:id] } } }
         })
       end
 
@@ -20,10 +21,12 @@ module Api
       end
 
       def destroy
+        authorize @chronicle
         render json: @chronicle.destroy
       end
 
       def update
+        authorize @chronicle
         @chronicle.update_attributes(chronicle_params)
         render json: @chronicle
       end

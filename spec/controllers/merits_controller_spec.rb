@@ -38,7 +38,7 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
     context 'With invalid attributes' do
       it 'Increases merit count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_merit_params = FactoryGirl.attributes_for(:merit, character_id: 'Attribute')
+        @invalid_merit_params = FactoryGirl.attributes_for(:merit, rating: 9)
 
         expect { post :create, params: { character_id: @character.id, merit: @invalid_merit_params }, format: :json }.to change(Merit, :count).by(0)
       end

@@ -8,4 +8,7 @@ class QcAttack < ApplicationRecord
   delegate :chronicle, to: :qc
 
   validates :pool, :damage, :overwhelming, numericality: { greater_than: 0 }
+  def character
+    qc
+  end
 end

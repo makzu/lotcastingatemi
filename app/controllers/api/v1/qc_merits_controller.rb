@@ -7,18 +7,25 @@ module Api
       before_action :set_qc_merit, only: %i[show update destroy]
 
       def show
+        authorize @qc_merit
         render json: @qc_merit
       end
 
       def create
-        render json: QcMerit.create(qc_merit_params)
+        @qc = Qc.find(params[:qc_id])
+        @qcm = QcMerit.create(qc_merit_params)
+        @qcm.qc = @qc
+        authorize @qcm
+        render json: @qcm
       end
 
       def destroy
+        authorize @qc_merit
         render json: @qc_merit.destroy
       end
 
       def update
+        authorize @qc_merit
         @qc_merit.update_attributes(qc_merit_params)
         render json: @qc_merit
       end

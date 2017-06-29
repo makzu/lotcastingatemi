@@ -7,18 +7,25 @@ module Api
       before_action :set_qc_attack, only: %i[show update destroy]
 
       def show
+        authorize @qc_attack
         render json: @qc_attack
       end
 
       def create
-        render json: QcAttack.create(qc_attack_params)
+        @qc = Qc.find(params[:qc_id])
+        @qca = QcAttack.create(qc_attack_params)
+        @qca.qc = @qc
+        authorize @qca
+        render json: @qca
       end
 
       def destroy
+        authorize @qc_attack
         render json: @qc_attack.destroy
       end
 
       def update
+        authorize @qc_attack
         @qc_attack.update_attributes(qc_attack_params)
         render json: @qc_attack
       end

@@ -50,7 +50,6 @@ RSpec.describe Api::V1::ChroniclesController, type: :controller do
   describe 'DELETE #destroy' do
     it 'Decreases Chronicle count by 1' do
       request.headers['Authorization'] = authenticated_header(@player)
-      @chronicle = FactoryGirl.create(:chronicle)
 
       expect { delete :destroy, params: { id: @chronicle.id, format: :json } }.to change(Chronicle, :count).by(-1)
     end

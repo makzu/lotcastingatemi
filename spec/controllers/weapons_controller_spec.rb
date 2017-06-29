@@ -39,7 +39,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
     context 'With invalid attributes' do
       it 'Increases Weapon count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: 'Attribute')
+        @invalid_weapon_params = FactoryGirl.attributes_for(:weapon, weight: 'extra heavy')
 
         expect { post :create, params: { character_id: @character.id, weapon: @invalid_weapon_params }, format: :json }.to change(Weapon, :count).by(0)
       end

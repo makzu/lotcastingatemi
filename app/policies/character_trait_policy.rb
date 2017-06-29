@@ -10,6 +10,10 @@ class CharacterTraitPolicy < ApplicationPolicy
     @trait = trait
   end
 
+  def create?
+    player_is_owner?
+  end
+
   def show?
     player_is_owner? || player_is_st? || player_in_chronicle?
   end

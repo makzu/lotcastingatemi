@@ -27,19 +27,12 @@ class CharacterPolicy < ApplicationPolicy
   end
 
   def player_in_chronicle?
-    false unless character.chronicle
+    return false unless character.chronicle
     character.chronicle.players.include? player
   end
 
   def player_is_st?
-    false unless character.chronicle
+    return false unless character.chronicle
     character.chronicle.st == player
-  end
-
-  # Authorization scopes for Characters.
-  class Scope < Scope
-    def resolve
-      scope
-    end
   end
 end

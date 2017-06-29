@@ -7,19 +7,25 @@ module Api
       before_action :set_merit, only: %i[show update destroy]
 
       def show
+        authorize @merit
         render json: @merit
       end
 
       def create
         @character = Character.find(params[:character_id])
-        render json: Merit.create(merit_params)
+        @merit = Merit.create(merit_params)
+        @merit.character = @character
+        authorize @merit
+        render json: @merit
       end
 
       def destroy
+        authorize @merit
         render json: @merit.destroy
       end
 
       def update
+        authorize @merit
         @merit.update_attributes(merit_params)
         render json: @merit
       end

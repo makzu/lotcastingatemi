@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base authentication policy.  Other policies inherit from this one.
-# Powered by the Knock gem
+# Powered by the Pundit gem
 class ApplicationPolicy
   attr_reader :user, :record
 

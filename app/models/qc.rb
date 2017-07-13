@@ -5,6 +5,7 @@ class Qc < ApplicationRecord
   include HealthLevels
   include Willpower
   include Intimacies
+  include MotePool
 
   has_many :battlegroups, dependent: :destroy
   has_many :qc_attacks,   dependent: :destroy
@@ -19,10 +20,7 @@ class Qc < ApplicationRecord
     greater_than_or_equal_to: 1, less_than_or_equal_to: 10
   }
 
-  validates :motes_personal_current, :motes_personal_total,
-            :motes_peripheral_current, :motes_peripheral_total,
-
-            :grapple, :grapple_control,
+  validates :grapple, :grapple_control,
             :hardness,
             :initiative, :onslaught,
             numericality: { greater_than_or_equal_to: 0 }
@@ -35,16 +33,4 @@ class Qc < ApplicationRecord
             numericality: { greater_than: 0 }
 
   validates :actions, json: { schema: Schemas::QC_ACTION }
-  validate :cant_have_more_current_motes_than_total
-
-  private
-
-  def cant_have_more_current_motes_than_total
-    if motes_personal_current > motes_personal_total
-      errors.add(:motes_personal_current, 'cannot be more than total')
-    end
-    if motes_peripheral_current > motes_peripheral_total # rubocop:disable Style/GuardClause
-      errors.add(:motes_peripheral_current, 'cannot be more than total')
-    end
-  end
 end

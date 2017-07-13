@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629062658) do
+ActiveRecord::Schema.define(version: 20170712234430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,8 +102,40 @@ ActiveRecord::Schema.define(version: 20170629062658) do
     t.datetime "updated_at", null: false
     t.bigint "player_id"
     t.bigint "chronicle_id"
+    t.string "type"
+    t.string "caste"
+    t.string "caste_abilities", default: [], array: true
+    t.string "favored_abilities", default: [], array: true
+    t.string "supernal_ability"
+    t.integer "anima_level", default: 0
+    t.integer "motes_personal_total", default: 0
+    t.integer "motes_peripheral_total", default: 0
+    t.integer "motes_personal_current", default: 0
+    t.integer "motes_peripheral_current", default: 0
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
+  end
+
+  create_table "charms", force: :cascade do |t|
+    t.bigint "character_id"
+    t.string "name", default: "New Charm"
+    t.string "cost", default: "0m"
+    t.string "keywords", default: [], array: true
+    t.integer "min_essence", default: 1
+    t.string "timing", default: "reflexive"
+    t.string "duration", default: "instant"
+    t.string "prereqs", default: "none"
+    t.text "body", default: ""
+    t.string "ref", default: ""
+    t.string "type"
+    t.string "character_type"
+    t.string "artifact_name"
+    t.string "ability"
+    t.integer "min_ability"
+    t.string "style"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_charms_on_character_id"
   end
 
   create_table "chronicle_players", force: :cascade do |t|
@@ -163,7 +195,7 @@ ActiveRecord::Schema.define(version: 20170629062658) do
     t.bigint "qc_id"
     t.string "name", default: "New QC Charm"
     t.string "cost", default: ""
-    t.string "charm_type", default: "supplemental"
+    t.string "timing", default: "supplemental"
     t.string "duration", default: "instant"
     t.string "keywords", default: [], array: true
     t.integer "min_essence", default: 1
@@ -232,6 +264,20 @@ ActiveRecord::Schema.define(version: 20170629062658) do
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
 
+  create_table "spells", force: :cascade do |t|
+    t.bigint "character_id"
+    t.string "name", default: "New Spell"
+    t.string "cost", default: "0sm"
+    t.string "circle", default: "emerald"
+    t.string "keywords", default: [], array: true
+    t.string "duration", default: "instant"
+    t.text "body", default: ""
+    t.string "ref", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_spells_on_character_id"
+  end
+
   create_table "weapons", id: :serial, force: :cascade do |t|
     t.integer "character_id"
     t.string "name", default: "New Weapon"
@@ -247,6 +293,7 @@ ActiveRecord::Schema.define(version: 20170629062658) do
   add_foreign_key "battlegroups", "qcs"
   add_foreign_key "characters", "chronicles"
   add_foreign_key "characters", "players"
+  add_foreign_key "charms", "characters"
   add_foreign_key "chronicle_players", "chronicles"
   add_foreign_key "chronicle_players", "players"
   add_foreign_key "merits", "characters"
@@ -255,5 +302,6 @@ ActiveRecord::Schema.define(version: 20170629062658) do
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "qcs", "chronicles"
   add_foreign_key "qcs", "players"
+  add_foreign_key "spells", "characters"
   add_foreign_key "weapons", "characters"
 end

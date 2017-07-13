@@ -3,14 +3,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      # resources :player_token, only: [:show]
       post 'player_token' => 'player_token#create'
       resources :players, only: %i[index create show]
 
       resources :chronicles, only: %i[create show update destroy]
 
       resources :characters, only: %i[create show update destroy] do
-        resources :merits, :weapons, only: %i[create show update destroy]
+        resources :merits, :weapons, :charms, :spells, only: %i[create show update destroy]
       end
 
       resources :qcs, only: %i[create show update destroy] do

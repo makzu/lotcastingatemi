@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :spell do
     character
     name "MyString"
-    circle 'terrestrial'
+    circle 'emerald'
     cost "MyString"
     keywords ["MyString"]
     body "MyText"

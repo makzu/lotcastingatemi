@@ -36,14 +36,14 @@ RSpec.describe Api::V1::QcMeritsController, type: :controller do
       end
     end
 
-    context 'With invalid attributes' do
-      it 'Increases merit count by 0' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_merit_params = FactoryGirl.attributes_for(:qc_merit, qc_id: 'Attribute')
+    # context 'With invalid attributes' do
+    #   it 'Increases merit count by 0' do
+    #     request.headers['Authorization'] = authenticated_header(@player)
+    #     @invalid_merit_params = FactoryGirl.attributes_for(:qc_merit, qc_id: 'Attribute')
 
-        expect { post :create, params: { qc_id: @qc.id, qc_merit: @invalid_merit_params }, format: :json }.to change(QcMerit, :count).by(0)
-      end
-    end
+    #     expect { post :create, params: { qc_id: @qc.id, qc_merit: @invalid_merit_params }, format: :json }.to change(QcMerit, :count).by(0)
+    #   end
+    # end
 
     it_behaves_like 'respond_to_unauthenticated', 'create'
   end

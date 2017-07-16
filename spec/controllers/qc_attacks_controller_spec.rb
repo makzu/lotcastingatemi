@@ -39,7 +39,7 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
     context 'With invalid attributes' do
       it 'Increases attack count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_attack_params = FactoryGirl.attributes_for(:qc_attack, qc_id: 'Attribute')
+        @invalid_attack_params = FactoryGirl.attributes_for(:qc_attack, pool: -1)
 
         expect { post :create, params: { qc_id: @qc.id, qc_attack: @invalid_attack_params }, format: :json }.to change(QcAttack, :count).by(0)
       end

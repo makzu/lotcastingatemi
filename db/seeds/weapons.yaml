@@ -64,3 +64,26 @@
     - bashing
     - brawl
     - smashing
+
+- id: 7
+  character_id: 2
+  name: Sword of Righteousness
+  weight: medium
+  tags:
+    - lethal
+    - melee
+    - balanced
+  ability: melee
+  is_artifact: true
+
+- id: 8
+  character_id: 3
+  name: Unarmed (brawl)
+  weight: light
+  ability: brawl
+  is_artifact: false
+  tags:
+    - bashing
+    - brawl
+    - grappling
+    - natural

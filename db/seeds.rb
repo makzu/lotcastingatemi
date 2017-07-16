@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-puts 'Reloading example player'
+puts 'Reloading example players'
 player1 = Player.find_or_initialize_by(id: 1)
 player1.update(
   name: 'Example ST',
@@ -47,6 +47,13 @@ YAML.safe_load(File.read('db/seeds/weapons.yaml')).each do |w|
   weapon = Weapon.find_or_initialize_by(id: w['id'])
   weapon.update(w)
   puts 'Updated weapon ' + weapon.name + ' for ' + weapon.character.name
+end
+
+puts 'Reloading Charms'
+YAML.safe_load(File.read('db/seeds/charms.yaml')).each do |c|
+  charm = Charm.find_or_initialize_by(id: c['id'])
+  charm.update(c)
+  puts "Updated #{charm.type} #{charm.name} for #{charm.character.name}"
 end
 
 puts 'Reloading QCs'

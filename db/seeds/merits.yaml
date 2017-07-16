@@ -27,3 +27,13 @@
   description: Ignore any penalties to using her off hand.
   prereqs: ''
   ref: core p.158-159
+
+- id: 4
+  character_id: 2
+  name: martial artist
+  merit_name: martial artist
+  rating: 4
+  merit_cat: purchased
+  description: All royalty of the Vincible Sword Kingdom are trained in steel devil style.
+  prereqs: brawl 1
+  ref: core p.163-164

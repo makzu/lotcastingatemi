@@ -1,0 +1,31 @@
+- id: 1
+  character_id: 2
+  type: SolarCharm
+  name: Excellent Strike
+  character_type: Character
+  ability: melee
+  min_ability: 2
+  min_essence: 1
+  keywords:
+    - uniform
+  duration: instant
+  timing: supplemental
+  cost: 3m
+  prereqs: none
+  body: +1 auto-success, reroll all 1s.
+  ref: core p.346
+- id: 2
+  character_id: 2
+  character_type: Character
+  type: MartialArtsCharm
+  name: Naked Fang Draw
+  style: steel devil
+  min_ability: 2
+  min_essence: 1
+  cost: 5m
+  prereqs: none
+  keywords: []
+  duration: instant
+  timing: supplemental
+  body: +(essence) or +2 initiative to join battle rolls, plus other stuff
+  ref: core p.461

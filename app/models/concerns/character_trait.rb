@@ -9,4 +9,11 @@ module CharacterTrait
     delegate :player,    to: :character
     delegate :chronicle, to: :character
   end
+
+  # Ensure the correct Pundit policy is used (to prevent needing CharmPolicy, MeritPolicy, et al)
+  module ClassMethods
+    def policy_class
+      CharacterTraitPolicy
+    end
+  end
 end

@@ -12,4 +12,11 @@ module QcTrait
       qc
     end
   end
+
+  # Ensure the correct Pundit policy is used (to prevent needing QcCharmPolicy, QcMeritPolicy, et al)
+  module ClassMethods
+    def policy_class
+      CharacterTraitPolicy
+    end
+  end
 end

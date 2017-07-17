@@ -410,7 +410,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(updateQc(id, trait, value))
     },
     updateQcAttack: (id, qcId, trait, value) => {
-      dispatch(updateQcAttack(id, qcId, trait, value))
+      dispatch(updateQcAttack(id, qcId, 'qc', trait, value))
     },
     addQcAttack: (qcId) => {
       dispatch(createQcAttack(qcId))

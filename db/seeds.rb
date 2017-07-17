@@ -77,18 +77,18 @@ YAML.safe_load(File.read('db/seeds/qc_charms.yaml')).each do |c|
   puts 'Updated QC Charm ' + charm.name + ' for ' + charm.qc.name
 end
 
-puts 'Reloading QC attacks'
-YAML.safe_load(File.read('db/seeds/qc_attacks.yaml')).each do |a|
-  attack = QcAttack.find_or_initialize_by(id: a['id'])
-  attack.update(a)
-  puts 'Updated QC Attack ' + attack.name + ' for ' + attack.qc.name
-end
-
 puts 'Reloading Battlegroups'
 YAML.safe_load(File.read('db/seeds/battlegroups.yaml')).each do |a|
   battlegroup = Battlegroup.find_or_initialize_by(id: a['id'])
   battlegroup.update(a)
-  puts 'Updated Battlegroup ' + battlegroup.name + ' of ' + battlegroup.qc.name
+  puts "Updated Battlegroup #{battlegroup.name}"
+end
+
+puts 'Reloading QC attacks'
+YAML.safe_load(File.read('db/seeds/qc_attacks.yaml')).each do |a|
+  attack = QcAttack.find_or_initialize_by(id: a['id'])
+  attack.update(a)
+  puts "Updated QC Attack #{attack.name} for #{attack.qc_attackable.name}"
 end
 
 # Needed to prevent PG:UniqueViolation errors

@@ -7,8 +7,7 @@ class Qc < ApplicationRecord
   include Intimacies
   include MotePool
 
-  has_many :battlegroups, dependent: :destroy
-  has_many :qc_attacks,   dependent: :destroy
+  has_many :qc_attacks,   dependent: :destroy, as: :qc_attackable
   has_many :qc_charms,    dependent: :destroy
   has_many :qc_merits,    dependent: :destroy
 

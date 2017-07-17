@@ -40,11 +40,11 @@ export function createQcAttack(qcId) {
   })
 }
 
-export function updateQcAttack(id, qcId, trait, value) {
+export function updateQcAttack(id, qcId, qcType, trait, value) {
   let attack = { qc_attack: { [trait]: value }}
 
   return callApi({
-    endpoint: `/api/v1/qcs/${qcId}/qc_attacks/${id}`,
+    endpoint: `/api/v1/${qcType}s/${qcId}/qc_attacks/${id}`,
     method: 'PATCH',
     body: JSON.stringify(attack),
     types: [

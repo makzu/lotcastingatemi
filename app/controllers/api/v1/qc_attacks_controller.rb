@@ -5,6 +5,7 @@ module Api
     class QcAttacksController < Api::V1::BaseController
       before_action :authenticate_player
       before_action :set_qc_attack, only: %i[show update destroy]
+      before_action :set_parent, only: :create
 
       def show
         authorize @qc_attack
@@ -12,10 +13,10 @@ module Api
       end
 
       def create
-        @qc = Qc.find(params[:qc_id])
-        @qca = QcAttack.create(qc_attack_params)
-        @qca.qc = @qc
+        @qca = QcAttack.new(qc_attack_params)
+        @qca.qc_attackable = @parent
         authorize @qca
+        @qca.save
         render json: @qca
       end
 
@@ -38,6 +39,14 @@ module Api
 
       def qc_attack_params
         params.require(:qc_attack).permit!
+      end
+
+      def set_parent
+        if params[:qc_id]
+          @parent = Qc.find(params[:qc_id])
+        elsif params[:battlegroup_id]
+          @parent = Battlegroup.find(params[:battlegroup_id])
+        end
       end
     end
   end

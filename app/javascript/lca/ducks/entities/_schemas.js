@@ -14,11 +14,10 @@ export const qc = new schema.Entity('qcs', {
   qc_merits: [ qcMerit ],
   qc_attacks: [ qcAttack ],
   qc_charms: [ qcCharm ],
-  battlegroups: [ new schema.Entity('battlegroups') ],
 })
 
 export const battlegroup = new schema.Entity('battlegroups', {
-  qc: qc
+  qc_attacks: [ qcAttack ],
 })
 
 const chronicleId = new schema.Entity('chronicles')

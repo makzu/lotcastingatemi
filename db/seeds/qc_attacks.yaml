@@ -1,5 +1,6 @@
 - id: 1
-  qc_id: 1
+  qc_attackable_id: 1
+  qc_attackable_type: Qc
   name: Cheap sword
   pool: 7
   range: close
@@ -9,7 +10,8 @@
     - lethal
     - balanced
 - id: 2
-  qc_id: 2
+  qc_attackable_id: 2
+  qc_attackable_type: Qc
   name: Tiny claws
   pool: 5
   range: close
@@ -18,7 +20,8 @@
   tags:
     - bashing
 - id: 3
-  qc_id: 2
+  qc_attackable_id: 2
+  qc_attackable_type: Qc
   name: Gout of fire
   pool: 7
   range: short
@@ -26,3 +29,14 @@
   overwhelming: 2
   tags:
     - flame
+- id: 4
+  qc_attackable_id: 1
+  qc_attackable_type: Battlegroup
+  name: Cheap swords
+  pool: 7
+  range: close
+  damage: 7
+  overwhelming: 1
+  tags:
+    - lethal
+    - balanced

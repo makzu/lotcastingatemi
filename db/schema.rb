@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712234430) do
+ActiveRecord::Schema.define(version: 20170717211048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "battlegroups", force: :cascade do |t|
-    t.bigint "qc_id"
     t.integer "size", default: 0
     t.integer "might", default: 0
     t.integer "drill", default: 0
@@ -25,7 +24,28 @@ ActiveRecord::Schema.define(version: 20170712234430) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", default: "New Battlegroup"
-    t.index ["qc_id"], name: "index_battlegroups_on_qc_id"
+    t.bigint "player_id"
+    t.bigint "chronicle_id"
+    t.text "description", default: ""
+    t.integer "magnitude", default: 7
+    t.integer "essence", default: 1
+    t.integer "willpower_temporary", default: 3
+    t.integer "willpower_permanent", default: 3
+    t.integer "soak", default: 1
+    t.integer "hardness", default: 0
+    t.integer "evasion", default: 1
+    t.integer "parry", default: 1
+    t.integer "movement", default: 1
+    t.integer "resolve", default: 1
+    t.integer "guile", default: 1
+    t.integer "appearance", default: 1
+    t.integer "join_battle", default: 1
+    t.string "armor_name", default: ""
+    t.integer "senses", default: 1
+    t.integer "initiative", default: 0
+    t.integer "onslaught", default: 0
+    t.index ["chronicle_id"], name: "index_battlegroups_on_chronicle_id"
+    t.index ["player_id"], name: "index_battlegroups_on_player_id"
   end
 
   create_table "characters", id: :serial, force: :cascade do |t|
@@ -179,7 +199,7 @@ ActiveRecord::Schema.define(version: 20170712234430) do
   end
 
   create_table "qc_attacks", force: :cascade do |t|
-    t.bigint "qc_id"
+    t.bigint "qc_attackable_id"
     t.string "name", default: "New Attack"
     t.integer "pool", default: 1
     t.string "range", default: "close"
@@ -188,7 +208,8 @@ ActiveRecord::Schema.define(version: 20170712234430) do
     t.string "tags", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["qc_id"], name: "index_qc_attacks_on_qc_id"
+    t.string "qc_attackable_type"
+    t.index ["qc_attackable_id"], name: "index_qc_attacks_on_qc_attackable_id"
   end
 
   create_table "qc_charms", force: :cascade do |t|
@@ -290,14 +311,15 @@ ActiveRecord::Schema.define(version: 20170712234430) do
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 
-  add_foreign_key "battlegroups", "qcs"
+  add_foreign_key "battlegroups", "chronicles"
+  add_foreign_key "battlegroups", "players"
   add_foreign_key "characters", "chronicles"
   add_foreign_key "characters", "players"
   add_foreign_key "charms", "characters"
   add_foreign_key "chronicle_players", "chronicles"
   add_foreign_key "chronicle_players", "players"
   add_foreign_key "merits", "characters"
-  add_foreign_key "qc_attacks", "qcs"
+  add_foreign_key "qc_attacks", "qcs", column: "qc_attackable_id"
   add_foreign_key "qc_charms", "qcs"
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "qcs", "chronicles"

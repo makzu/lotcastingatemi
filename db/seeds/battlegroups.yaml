@@ -1,6 +1,7 @@
 - id: 1
+  player_id: 1
+  chronicle_id: 1
   name: Vincible guard corps
-  qc_id: 1
   size: 2
   might: 0
   drill: 1

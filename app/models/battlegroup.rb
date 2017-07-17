@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # Holds traits specific to Battlegroups, as defined starting at Core p.205.
-#   They must be linked with a QC that represents the average member's stats.
 class Battlegroup < ApplicationRecord
-  belongs_to :qc
-  delegate :player,    to: :qc
-  delegate :chronicle, to: :qc
+  belongs_to :player
+  belongs_to :chronicle
+
+  has_many :qc_attacks, as: :qc_attackable
 
   validates :size, zero_thru_five_stat: true
 

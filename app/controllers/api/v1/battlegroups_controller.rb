@@ -4,7 +4,7 @@ module Api
   module V1
     class BattlegroupsController < BaseController
       before_action :authenticate_player
-      before_action :set_battlebroup, only: %i[show update destroy]
+      before_action :set_battlegroup, only: %i[show update destroy]
     end
 
     def show

@@ -13,9 +13,10 @@ module Api
 
       def create
         @character = Character.find(params[:character_id])
-        @spell = Spell.create(spell_params)
+        @spell = Spell.new(spell_params)
         @spell.character = @character
         authorize @spell
+        @spell.save
         render json: @spell
       end
 

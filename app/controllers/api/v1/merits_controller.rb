@@ -13,9 +13,10 @@ module Api
 
       def create
         @character = Character.find(params[:character_id])
-        @merit = Merit.create(merit_params)
+        @merit = Merit.new(merit_params)
         @merit.character = @character
         authorize @merit
+        @merit.save
         render json: @merit
       end
 

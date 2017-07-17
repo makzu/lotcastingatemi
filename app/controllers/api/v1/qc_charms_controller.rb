@@ -13,9 +13,10 @@ module Api
 
       def create
         @qc = Qc.find(params[:qc_id])
-        @qca = QcCharm.create(qc_charm_params)
+        @qca = QcCharm.new(qc_charm_params)
         @qca.qc = @qc
         authorize @qca
+        @qca.save
         render json: @qca
       end
 

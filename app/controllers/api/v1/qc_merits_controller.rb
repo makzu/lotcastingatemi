@@ -13,9 +13,10 @@ module Api
 
       def create
         @qc = Qc.find(params[:qc_id])
-        @qcm = QcMerit.create(qc_merit_params)
+        @qcm = QcMerit.new(qc_merit_params)
         @qcm.qc = @qc
         authorize @qcm
+        @qcm.save
         render json: @qcm
       end
 

@@ -13,9 +13,10 @@ module Api
 
       def create
         @character = Character.find(params[:character_id])
-        @weapon = Weapon.create(weapon_params)
+        @weapon = Weapon.new(weapon_params)
         @weapon.character = @character
         authorize @weapon
+        @weapon.save
         render json: @weapon
       end
 

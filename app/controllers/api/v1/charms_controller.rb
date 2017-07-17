@@ -13,9 +13,10 @@ module Api
 
       def create
         @character = Character.find(params[:character_id])
-        @charm = Charm.create(charm_params)
+        @charm = Charm.new(charm_params)
         @charm.character = @character
         authorize @charm
+        @charm.save
         render json: @charm
       end
 

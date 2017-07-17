@@ -7,13 +7,8 @@ module Api
       before_action :set_chronicle, only: %i[show update destroy]
 
       def show
-        render json: @chronicle.as_json(include: {
-          st: { only: %i[name id] },
-          players: { only: %i[name id] },
-          characters: { include: %i[weapons merits] },
-          qcs: { include: [:qc_attacks, :qc_merits, :qc_charms, battlegroups: { only: [:id] }] },
-          battlegroups: { include: { qc: { only: [:id] } } }
-        })
+        authorize @chronicle
+        render json: @chronicle, include: %w[players.qcs.* players.characters.* st.qcs.* st.characters.* battlegroups]
       end
 
       def create

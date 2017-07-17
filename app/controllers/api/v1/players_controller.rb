@@ -8,21 +8,13 @@ module Api
 
       # Show the currently logged-in player
       def index
-        render json: current_player.as_json(include: {
-          characters: { include: %i[weapons merits] },
-          qcs: { include: [:qc_attacks, :qc_merits, :qc_charms, battlegroups: { only: [:id] }] },
-          battlegroups: { include: { qc: { only: [:id] } } },
-          chronicles: { only: %i[name id] },
-          own_chronicles: { only: %i[name id] }
-        })
+        render json: current_player, include: %w[chronicles.* own_chronicles.* characters.* qcs.* battlegroups]
       end
 
       # Show a single player
       def show
-        render json: @player.as_json(include: {
-          characters: { only: %i[name id] },
-          qcs: { only: %i[name id] }
-        })
+        authorize @player
+        render json: @player, include: %w[characters.* qcs.* battlegroups]
       end
 
       def create

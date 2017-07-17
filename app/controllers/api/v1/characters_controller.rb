@@ -8,7 +8,7 @@ module Api
 
       def show
         authorize @character
-        render json: @character.as_json(include: %i[weapons merits])
+        render json: @character
       end
 
       def create

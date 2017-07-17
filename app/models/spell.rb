@@ -2,7 +2,7 @@
 
 # Spells!  For sorcerers.
 class Spell < ApplicationRecord
-  CIRCLES = %w[ terrestrial celestial solar ].freeze
+  CIRCLES = %w[ emerald sapphire adamant ].freeze
   include CharacterTrait
 
   validates :name, presence: true

@@ -14,12 +14,8 @@ class Player < ApplicationRecord
 
   validates :email, uniqueness: true, email: true
 
-  # Exclude password digest from any json output
-  def as_json(options = {})
-    options[:except] ||= []
-    options[:except] << :password_digest
-
-    super(options)
+  def all_chronicle_ids
+    chronicle_ids + own_chronicle_ids
   end
 
   # Make knock login requests case-insensitive for email

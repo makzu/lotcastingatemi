@@ -11,14 +11,14 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
   before(:each) do
     @player = FactoryGirl.create(:player)
     @qc = FactoryGirl.create(:qc, player_id: @player.id)
-    @qc_attack = FactoryGirl.create(:qc_attack, qc_id: @qc.id)
+    @qc_attack = FactoryGirl.create(:qc_attack, qc_attackable: @qc)
   end
 
   describe 'GET #show' do
     it 'returns http success' do
       request.headers['Authorization'] = authenticated_header(@player)
 
-      get :show, params: { qc_id: @qc_attack.qc_id, id: @qc_attack.id, format: :json }
+      get :show, params: { qc_id: @qc.id, id: @qc_attack.id }
 
       expect(response).to have_http_status(:success)
     end
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
     context 'With valid attributes' do
       it 'Increases attack count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @qc_attack_params = FactoryGirl.attributes_for(:qc_attack, qc_id: @qc.id)
+        @qc_attack_params = FactoryGirl.attributes_for(:qc_attack, qc_attackable_id: @qc.id)
 
         expect { post :create, params: { qc_id: @qc.id, qc_attack: @qc_attack_params }, format: :json }.to change(QcAttack, :count).by(1)
       end
@@ -51,7 +51,7 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
   describe 'DELETE #destroy' do
     it 'Decreases attack count by 1' do
       request.headers['Authorization'] = authenticated_header(@player)
-      expect { delete :destroy, params: { qc_id: @qc_attack.qc_id, id: @qc_attack.id, format: :json } }.to change(QcAttack, :count).by(-1)
+      expect { delete :destroy, params: { qc_id: @qc_attack.qc_attackable_id, id: @qc_attack.id, format: :json } }.to change(QcAttack, :count).by(-1)
     end
 
     it_behaves_like 'respond_to_unauthenticated', 'destroy'
@@ -60,7 +60,7 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
   describe 'PATCH #update' do
     it 'Updates attack attributes' do
       request.headers['Authorization'] = authenticated_header(@player)
-      @updated_attack_params = FactoryGirl.attributes_for(:qc_attack, qc_id: @qc.id, name: 'test1')
+      @updated_attack_params = FactoryGirl.attributes_for(:qc_attack, qc_attackable_id: @qc.id, name: 'test1')
 
       expect(@qc_attack.name).not_to eq('test1')
 

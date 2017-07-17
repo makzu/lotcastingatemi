@@ -35,4 +35,17 @@ class CharacterPolicy < ApplicationPolicy
     return false unless character.chronicle
     character.chronicle.st == player
   end
+
+  class Scope < Scope
+    attr_reader :player, :scope
+
+    def initialize(player, scope)
+      @player = player
+      @scope = scope
+    end
+
+    def resolve
+      scope.where(player: @player).or(scope.where(chronicle_id: @player.all_chronicle_ids))
+    end
+  end
 end

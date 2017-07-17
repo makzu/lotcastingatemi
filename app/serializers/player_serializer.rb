@@ -8,6 +8,12 @@ class PlayerSerializer < ActiveModel::Serializer
   has_many :qcs
   has_many :battlegroups
 
-  has_many :own_chronicles, serializer: ChronicleSerializer
+  has_many :own_chronicles, type: 'Chronicle'
   has_many :chronicles
+
+  # We only really need the ID for Chronicles, as each Chronicle will be fetched
+  #   later by the client anyway.
+  class ChronicleSerializer < ActiveModel::Serializer
+    attribute :id
+  end
 end

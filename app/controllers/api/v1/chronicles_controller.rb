@@ -5,10 +5,11 @@ module Api
     class ChroniclesController < Api::V1::BaseController
       before_action :authenticate_player
       before_action :set_chronicle, only: %i[show update destroy]
+      serialization_scope :current_player
 
       def show
         authorize @chronicle
-        render json: @chronicle, include: %w[players.qcs.* players.characters.* st.qcs.* st.characters.* battlegroups]
+        render json: @chronicle, include: %w[players.qcs.* players.characters.* st.qcs.* st.characters.*]
       end
 
       def create

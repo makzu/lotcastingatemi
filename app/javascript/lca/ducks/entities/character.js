@@ -20,6 +20,7 @@ export const CHA_DESTROY_FAILURE = 'lca/character/DESTROY_FAILURE'
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
+  const _entities = action.payload != undefined ? action.payload.entities : undefined
 
   switch(action.type) {
   case CHA_CREATE_SUCCESS:
@@ -27,9 +28,11 @@ export default function reducer(state, action) {
   case CHA_FETCH_SUCCESS:
     return {
       ...state,
-      characters: { ...state.characters, ...action.payload.entities.characters },
-      weapons:    { ...state.weapons,    ...action.payload.entities.weapons    },
-      merits:     { ...state.merits,     ...action.payload.entities.merits     }
+      characters: { ...state.characters, ..._entities.characters },
+      weapons:    { ...state.weapons,    ..._entities.weapons    },
+      merits:     { ...state.merits,     ..._entities.merits     },
+      charms:     { ...state.charms,     ..._entities.charms     },
+      spells:     { ...state.spells,     ..._entities.spells     },
     }
   case CHA_UPDATE_SUCCESS:
     return { ...state, characters: {

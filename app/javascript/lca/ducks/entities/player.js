@@ -7,7 +7,7 @@ import { callApi } from '../../utils/api.js'
 
 export const FETCH =         'lca/player/FETCH'
 export const FETCH_SUCCESS = 'lca/player/FETCH_SUCCESS'
-export const FETCH_FAILURE =   'lca/player/FETCH_FAILURE'
+export const FETCH_FAILURE = 'lca/player/FETCH_FAILURE'
 
 export default function reducer(state, action) {
   const _entities = action.payload != undefined ? action.payload.entities : undefined
@@ -16,10 +16,12 @@ export default function reducer(state, action) {
   case FETCH_SUCCESS:
     return {
       ...state,
-      characters:   merge({ ...state.characters   }, _entities.characters   ),
       players:      merge({ ...state.players      }, _entities.players      ),
+      characters:   merge({ ...state.characters   }, _entities.characters   ),
       merits:       merge({ ...state.merits       }, _entities.merits       ),
       weapons:      merge({ ...state.weapons      }, _entities.weapons      ),
+      charms:       merge({ ...state.charms       }, _entities.charms       ),
+      spells:       merge({ ...state.spells       }, _entities.spells       ),
       qcs:          merge({ ...state.qcs          }, _entities.qcs          ),
       qc_merits:    merge({ ...state.qc_merits    }, _entities.qcMerits     ),
       qc_charms:    merge({ ...state.qc_charms    }, _entities.qcCharms     ),

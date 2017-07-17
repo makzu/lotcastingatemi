@@ -2,9 +2,13 @@ import { schema } from 'normalizr'
 
 const weapon = new schema.Entity('weapons')
 const merit = new schema.Entity('merits')
+const charm = new schema.Entity('charms')
 export const character = new schema.Entity('characters', {
+  evocations: [ charm ],
+  solar_charms: [ charm ],
+  martial_arts_charms: [ charm ],
   weapons: [ weapon ],
-  merits: [ merit ]
+  merits: [ merit ],
 })
 
 const qcMerit = new schema.Entity('qcMerits')
@@ -27,15 +31,13 @@ export const player = new schema.Entity('players', {
   own_chronicles: [ chronicleId ],
   characters: [ character ],
   qcs: [ qc ],
-  battlegroups: [ battlegroup ]
+  battlegroups: [ battlegroup ],
 })
 
-const playerNameOnly = new schema.Entity('players')
-
 export const chronicle = new schema.Entity('chronicles', {
-  st: playerNameOnly,
-  players: [ playerNameOnly ],
+  st: player,
+  players: [ player ],
   characters: [ character ],
   qcs: [ qc ],
-  battlegroups: [ battlegroup ]
+  battlegroups: [ battlegroup ],
 })

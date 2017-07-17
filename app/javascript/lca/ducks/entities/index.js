@@ -3,6 +3,8 @@ export * from './chronicle.js'
 export * from './character.js'
 export * from './merit.js'
 export * from './weapon.js'
+export * from './charm.js'
+export * from './spell.js'
 
 export * from './qc.js'
 export * from './qc_attack.js'
@@ -16,6 +18,8 @@ import ChronicleReducer from './chronicle.js'
 import CharacterReducer from './character.js'
 import MeritReducer from './merit.js'
 import WeaponReducer from './weapon.js'
+import CharmReducer from './charm.js'
+import SpellReducer from './spell.js'
 import QcReducer from './qc.js'
 import QcAttackReducer from './qc_attack.js'
 import QcCharmReducer from './qc_charm.js'
@@ -36,6 +40,8 @@ export const defaultState = {
   characters:   {},
   weapons:      {},
   merits:       {},
+  charms:       {},
+  spells:       {},
   qcs:          {},
   qc_merits:    {},
   qc_charms:    {},
@@ -63,6 +69,10 @@ export default function EntityReducer(state = defaultState, action) {
     return MeritReducer(state, action)
   case 'weapon':
     return WeaponReducer(state, action)
+  case 'charm':
+    return CharmReducer(state, action)
+  case 'spell':
+    return SpellReducer(state, action)
 
   case 'qc':
     return QcReducer(state, action)

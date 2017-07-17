@@ -1,6 +1,7 @@
 // Common code for handing entities for the store.
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 
+import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 
@@ -30,7 +31,10 @@ export default function reducer(state, action) {
     return _get_qc(state, action)
   case QC_FETCH_SUCCESS:
     return { ...state,
-      qcs: { ...state.qcs, ..._entities.qcs }
+      qcs:          merge({ ...state.qcs          }, _entities.qcs          ),
+      qc_merits:    merge({ ...state.qc_merits    }, _entities.qcMerits     ),
+      qc_charms:    merge({ ...state.qc_charms    }, _entities.qcCharms     ),
+      qc_attacks:   merge({ ...state.qc_attacks   }, _entities.qcAttacks    ),
     }
   case QC_UPDATE_SUCCESS:
     return { ...state, qcs: {

@@ -8,7 +8,7 @@ module Api
 
       # Show the currently logged-in player
       def index
-        render json: current_player, include: %w[chronicles.* own_chronicles.* characters.* qcs.* battlegroups]
+        render json: current_player, include: %w[chronicles.* own_chronicles.* characters.* qcs.* battlegroups.*]
       end
 
       # Show a single player

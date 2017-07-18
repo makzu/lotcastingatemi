@@ -92,7 +92,7 @@ class QcSheet extends React.PureComponent {
       <div>
         <strong>Join Battle:</strong> { qc.join_battle } dice, {' '}
         <strong>Combat Movement:</strong> { qc.movement } dice, {' '}
-        <strong>Soak:</strong> { qc.soak } ({qc.armor_name}), {' '}
+        <strong>Soak:</strong> { qc.soak } ({ qc.armor_name || 'unarmored' }), {' '}
         {qc.hardness > 0 &&
           <span><strong>Hardness:</strong> { qc.hardness }, </span>
         }

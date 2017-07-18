@@ -5,14 +5,14 @@ import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import { ResponsiveAppBar, toggleDrawerOpen } from 'material-ui-responsive-drawer'
+import { ResponsiveAppBar } from 'material-ui-responsive-drawer'
 
 import { fetchCurrentPlayer, logout } from '../ducks/actions.js'
 
 import LoginForm from './account/login.jsx'
 
 export function LcaHeader(props) {
-  const { authenticated, fetchCurrentPlayer, logout, toggleDrawerOpen } = props
+  const { authenticated, fetchCurrentPlayer, logout } = props
 
   let rightIcon
   if (authenticated) {
@@ -29,7 +29,6 @@ export function LcaHeader(props) {
   return(
     <header>
       <ResponsiveAppBar title="Lot-Casting Atemi"
-        onLeftIconButtonTouchTap={ toggleDrawerOpen }
         iconElementRight={ rightIcon }
       />
     </header>
@@ -57,8 +56,6 @@ function mapDispatchToProps(dispatch) {
       dispatch(fetchCurrentPlayer())
     }, logout: () => {
       dispatch(logout())
-    }, toggleDrawerOpen: () => {
-      dispatch(toggleDrawerOpen())
     },
   }
 }

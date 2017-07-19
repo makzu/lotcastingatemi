@@ -1,11 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { signup } from '../../ducks/actions.js'
+
+function EmailErrorBlock(props) {
+  const errors = props.error.map((e) => {
+    switch (e.error) {
+    case 'invalid':
+      return <span>Email is invalid.</span>
+    default:
+      return <span>Generic error</span>
+    }
+  })
+  return <div>{ errors }</div>
+}
+EmailErrorBlock.propTypes = {
+  error: PropTypes.arrayOf(PropTypes.object)
+}
+
+function PasswordErrorBlock() {
+  // TODO: detect this client-side before sending request to server
+  return <div>Password and password confirmation do not match</div>
+}
 
 // TODO: Proper error handling
 class SignupPage extends React.Component {
@@ -40,7 +61,13 @@ class SignupPage extends React.Component {
   }
 
   render() {
-    return <div>
+    const { authenticated, error } = this.props
+
+    if (authenticated) {
+      return <Redirect to={{ pathname: '/' }}/>
+    }
+
+    return <div className="page">
       <h1>sign up page</h1>
       <div>
         <TextField name="email" type="email"
@@ -48,6 +75,7 @@ class SignupPage extends React.Component {
           value={ this.state.credentials.email }
           onChange={ this.onChange }
         />
+        { error && error.email && <EmailErrorBlock error={ error.email } /> }
       </div>
       <div>
         <TextField name="password" type="password"
@@ -62,13 +90,29 @@ class SignupPage extends React.Component {
           value={ this.state.credentials.password_confirmation }
           onChange={ this.onChange }
         />
+        { error && error.password_confirmation && <PasswordErrorBlock error={ error.password_confirmation } />
+
+        }
       </div>
       <RaisedButton label="Create Account" onClick={ this.onSubmit } />
     </div>
   }
 }
 SignupPage.propTypes = {
-  signup: PropTypes.func
+  authenticated: PropTypes.bool,
+  error: PropTypes.object,
+  fetching: PropTypes.bool,
+  signup: PropTypes.func,
+}
+
+function mapStateToProps(state) {
+  const { authenticated, fetching, error } = state.session
+
+  return {
+    authenticated,
+    fetching,
+    error,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -79,4 +123,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(SignupPage)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPage)

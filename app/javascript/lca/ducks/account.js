@@ -15,7 +15,7 @@ const defaultState = {
   authenticated: !!sessionStorage.jwt || false,
   id: '0',
   fetching: false,
-  error: false
+  error: {},
 }
 
 export default function SessionReducer(state = defaultState, action) {
@@ -24,38 +24,53 @@ export default function SessionReducer(state = defaultState, action) {
   case LOGIN_REQUEST:
     return { ...state,
       fetching: true,
-      error: false
+      error: {},
     }
 
   case LOGIN_SUCCESS:
     return { ...state,
       authenticated: !!sessionStorage.jwt,
       fetching: false,
-      error: false,
-      id: action.payload.id
+      error: {},
+      id: action.payload.id,
     }
 
   case LOGIN_FAILURE:
     return { ...state,
       fetching: false,
-      error: true,
-      id: 0
+      id: 0,
+      error: action.payload.message,
     }
 
   case LOGOUT:
     return { ...state,
       authenticated: !!sessionStorage.jwt,
       fetching: false,
-      error: false,
-      id: 0
+      id: 0,
+      error: {},
+      errorMessage: '',
+    }
+
+  case SIGNUP_REQUEST:
+    return { ...state,
+      fetching: true,
+      error: {},
+      errorMessage: '',
     }
 
   case SIGNUP_SUCCESS:
     return { ...state,
       authenticated: !!sessionStorage.jwt,
       fetching: false,
-      error: false,
-      id: action.payload.id
+      error: {},
+      id: action.payload.id,
+    }
+
+  case SIGNUP_FAILURE:
+    return { ...state,
+      authenticated: false,
+      fetching: false,
+      error: action.payload.response,
     }
 
   case PLAYER_FETCH_SUCCESS:

@@ -25,7 +25,7 @@ module Api
           render json: t, status: :created
         else
           # TODO: error or something?
-          render status: :bad_request
+          render json: @player.errors.details, status: :bad_request
         end
       end
 

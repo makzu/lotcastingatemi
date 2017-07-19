@@ -85,7 +85,7 @@ class LoginForm extends React.Component {
 LoginForm.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   fetching: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.object.isRequired,
   login: PropTypes.func
 }
 

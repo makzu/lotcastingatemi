@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider'
-import { FlatButton, IconButton } from 'material-ui/FlatButton'
+import FlatButton from 'material-ui/FlatButton'
+import IconButton from 'material-ui/IconButton'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 import TextField from 'material-ui/TextField'
@@ -93,12 +94,11 @@ export class SingleMeritEditor extends React.Component {
         floatingLabelText="Summary:" />
       <TextField name="rating" value={merit.rating}
         type="number" min={MERIT_RATING_MIN} max={MERIT_RATING_MAX} className="editor-rating-field"
-          onChange={this.handleChange} onBlur={this.handleBlur}
+        onChange={this.handleChange} onBlur={this.handleBlur}
         floatingLabelText="Rating:"
       />
 
       <div>
-
         <SelectField name="merit_cat" value={merit.merit_cat}
           onChange={this.handleCatChange}
           floatingLabelText="Type:"

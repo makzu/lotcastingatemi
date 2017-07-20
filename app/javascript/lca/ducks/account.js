@@ -39,7 +39,7 @@ export default function SessionReducer(state = defaultState, action) {
     return { ...state,
       fetching: false,
       id: 0,
-      error: action.payload.message,
+      error: { login: action.payload.message },
     }
 
   case LOGOUT:

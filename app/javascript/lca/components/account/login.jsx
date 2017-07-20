@@ -69,7 +69,7 @@ class LoginForm extends React.Component {
         autoScrollBodyContent={ true }
         onRequestClose={ handleClose }
       >
-        { error &&
+        { error.login &&
           <div>Error logging in</div>
         }
         <TextField name="email" floatingLabelText="e-mail" onChange={ onChange }

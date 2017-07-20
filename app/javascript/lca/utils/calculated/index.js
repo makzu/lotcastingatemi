@@ -2,6 +2,7 @@ export * from './_battlegroups.js'
 export * from './_pools.js'
 export * from './_weapons.js'
 
+import { capitalize, includes } from 'lodash'
 import { ATTACK_ABILITIES, ABILITIES_ALL } from '../constants.js'
 
 /* Defense values (Parry is per-weapon) */
@@ -119,4 +120,27 @@ export function hardness(character) {
   case 'heavy':
     return 10
   }
+}
+
+export function prettyExaltType(character) {
+  switch (character.type) {
+  case 'Character':
+    return 'Mortal'
+  case 'SolarCharacter':
+    return `${capitalize(character.caste || '_____')} caste Solar`
+  default:
+    return 'other'
+  }
+}
+
+export function isCasteAbility(character, ability) {
+  return character.caste_abilities && includes(character.caste_abilities, ability)
+}
+
+export function isSupernalAbility(character, ability) {
+  return character.supernal_ability === ability
+}
+
+export function isFavoredAbility(character, ability) {
+  return character.favored_abilities && includes(character.favored_abilities, ability)
 }

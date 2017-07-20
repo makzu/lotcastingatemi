@@ -93,5 +93,5 @@ export const INTIMACY_RATING_MIN = 1
 export const MERIT_RATING_MAX = 5
 export const MERIT_RATING_MIN = 0
 
-// Arbitrarily chosen number.  Hopefully it's not too much or too little.
-export const HEALTH_LEVEL_MAX = 15
+// 7 health levels + 5 Stamina 5 Ox-Bodies:
+export const HEALTH_LEVEL_MAX = 22

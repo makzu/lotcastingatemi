@@ -17,14 +17,18 @@ class SolarCharacter < Character
     "eclipse":  %w[ bureaucracy larceny linguistics occult presence ride sail socialize ]
   }.freeze
 
-  validates :caste, inclusion: { in: SOLAR_CASTES }
-  validate :caste_abilities_are_valid
-  validate :caste_and_favored_dont_overlap
-  validate :favored_abilities_are_valid
-  validate :five_caste_and_five_favored_abilities
-  validate :supernal_ability_is_caste
+  validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :caste_is_blank?
+  validate :caste_abilities_are_valid,               unless: :caste_is_blank?
+  validate :caste_and_favored_dont_overlap,          unless: :caste_is_blank?
+  validate :favored_abilities_are_valid,             unless: :caste_is_blank?
+  validate :five_caste_and_five_favored_abilities,   unless: :caste_is_blank?
+  validate :supernal_ability_is_caste,               unless: :caste_is_blank?
 
   private
+
+  def caste_is_blank?
+    caste.blank?
+  end
 
   def caste_and_favored_dont_overlap
     unless (caste_abilities & favored_abilities).empty? # rubocop:disable Style/GuardClause

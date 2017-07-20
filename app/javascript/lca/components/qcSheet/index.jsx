@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import FlatButton from 'material-ui/FlatButton'
 
@@ -41,7 +40,7 @@ class QcSheet extends React.PureComponent {
   }
 
   render() {
-    const { qc, qc_attacks, qc_charms, qc_merits, battlegroups } = this.props
+    const { qc, qc_attacks, qc_charms, qc_merits } = this.props
     if (this.props.qc == undefined) {
       return(<div>
         <h1>QC Editor</h1>
@@ -72,11 +71,6 @@ class QcSheet extends React.PureComponent {
         Essence { charm.min_essence }
         )
         { charm.body }
-      </div>
-    )
-    const bgs = battlegroups.map((group) =>
-      <div key={group.id}>
-        <Link to={`/battlegroups/${group.id}`}>{group.name}</Link>
       </div>
     )
 
@@ -123,10 +117,6 @@ class QcSheet extends React.PureComponent {
         { charms }
       </div> }
 
-      <div>
-        <h4 style={{ marginBottom: '0.25em' }}>Battlegroups based on { qc.name }:</h4>
-        { bgs }
-      </div>
     </div>)
   }
 }
@@ -138,7 +128,6 @@ function mapStateToProps(state, ownProps) {
   let qc_attacks = []
   let qc_charms = []
   let qc_merits = []
-  let battlegroups = []
 
   if (qc != undefined) {
     if (qc.qc_attacks != undefined) {
@@ -150,9 +139,6 @@ function mapStateToProps(state, ownProps) {
     if (qc.qc_merits != undefined) {
       qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
     }
-    if (qc.battlegroups != undefined) {
-      battlegroups = qc.battlegroups.map((id) => state.entities.battlegroups[id])
-    }
   }
 
   return {
@@ -161,7 +147,6 @@ function mapStateToProps(state, ownProps) {
     qc_attacks,
     qc_charms,
     qc_merits,
-    battlegroups
   }
 }
 QcSheet.propTypes = {

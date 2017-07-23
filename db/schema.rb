@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717211048) do
+ActiveRecord::Schema.define(version: 20170723033842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(version: 20170717211048) do
     t.integer "motes_peripheral_total", default: 0
     t.integer "motes_personal_current", default: 0
     t.integer "motes_peripheral_current", default: 0
+    t.integer "limit"
+    t.string "limit_trigger"
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end

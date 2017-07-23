@@ -90,9 +90,17 @@
     - socialize
     - medicine
   supernal_ability: awareness
+  limit: 2
+  limit_trigger: Her combat prowess is called into question
   specialties:
     - ability: bureaucracy
-      context: assisting in a princess' royal duties
+      context: Assisting in a princess' royal duties
+    - ability: melee
+      context: Defending others
+    - ability: awareness
+      context: Detecting ambushes
+    - ability: resistance
+      context: desert heat
   attr_dexterity: 4
   attr_strength: 2
   attr_stamina: 3

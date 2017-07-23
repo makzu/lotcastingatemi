@@ -24,6 +24,13 @@ class SolarCharacter < Character
   validate :five_caste_and_five_favored_abilities,   unless: :caste_is_blank?
   validate :supernal_ability_is_caste,               unless: :caste_is_blank?
 
+  after_initialize do
+    unless new_record?
+      @limit = 0
+      @limit_trigger = ''
+    end
+  end
+
   private
 
   def caste_is_blank?

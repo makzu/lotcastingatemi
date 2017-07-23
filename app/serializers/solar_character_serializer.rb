@@ -6,7 +6,9 @@ class SolarCharacterSerializer < CharacterSerializer
              :motes_peripheral_current, :motes_peripheral_total,
              :anima_level, :caste,
 
-             :caste_abilities, :favored_abilities, :supernal_ability
+             :caste_abilities, :favored_abilities, :supernal_ability,
+
+             :limit_trigger, :limit
 
   has_many :solar_charms
   has_many :martial_arts_charms

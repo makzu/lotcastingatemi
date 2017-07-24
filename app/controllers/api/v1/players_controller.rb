@@ -24,7 +24,6 @@ module Api
           t = Knock::AuthToken.new payload: { sub: @player.id }
           render json: t, status: :created
         else
-          # TODO: error or something?
           render json: @player.errors.details, status: :bad_request
         end
       end

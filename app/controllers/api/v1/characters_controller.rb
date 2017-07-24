@@ -22,8 +22,11 @@ module Api
 
       def update
         authorize @character
-        @character.update_attributes(character_params)
-        render json: @character
+        if @character.update_attributes(character_params)
+          render json: @character
+        else
+          render json: @character.errors.details, status: :bad_request
+        end
       end
 
       private

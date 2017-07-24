@@ -23,8 +23,11 @@ module Api
 
       def update
         authorize @chronicle
-        @chronicle.update_attributes(chronicle_params)
-        render json: @chronicle
+        if @chronicle.update_attributes(chronicle_params)
+          render json: @chronicle
+        else
+          render json: @chronicle.errors.details, status: :bad_request
+        end
       end
 
       private

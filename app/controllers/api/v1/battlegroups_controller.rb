@@ -23,8 +23,11 @@ module Api
 
     def update
       authorize @battlegroup
-      @battlegroup.update_attributes(battlegroup_params)
-      render json: @battlegroup
+      if @battlegroup.update_attributes(battlegroup_params)
+        render json: @battlegroup
+      else
+        render json: @battlegroup.errors.details, status: :bad_request
+      end
     end
 
     private

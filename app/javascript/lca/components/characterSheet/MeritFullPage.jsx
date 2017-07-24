@@ -13,6 +13,7 @@ import MenuItem from 'material-ui/MenuItem'
 import Checkbox from 'material-ui/Checkbox'
 
 import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
+import { clamp } from '../../utils/'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'
 import RatingDots from '../generic/ratingDots.jsx'
@@ -56,7 +57,7 @@ export class SingleMeritEditor extends React.Component {
     let val = e.target.value
 
     if (e.target.name == 'rating') {
-      val = Math.max(Math.min(parseInt(val), MERIT_RATING_MAX), MERIT_RATING_MIN)
+      val = clamp(parseInt(val), MERIT_RATING_MIN, MERIT_RATING_MAX)
     } else if (e.target.type == 'checkbox') {
       val = ! this.state.merit[e.target.name]
       this.props.onUpdate(this.state.merit.id, this.props.character.id, e.target.name, val)

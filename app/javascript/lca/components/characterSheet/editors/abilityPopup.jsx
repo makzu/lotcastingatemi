@@ -7,6 +7,7 @@ import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../ducks/actions.js'
+import { clamp } from '../../../utils/'
 import { ABILITY_MAX, ABILITY_MIN } from '../../../utils/constants.js'
 import { withAbilities } from '../../../utils/propTypes'
 
@@ -60,7 +61,7 @@ class AbilityPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    let val = Math.max(Math.min(parseInt(e.target.value), ABILITY_MAX), ABILITY_MIN)
+    let val = clamp(parseInt(e.target.value), ABILITY_MIN, ABILITY_MAX)
 
     this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }

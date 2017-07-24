@@ -66,7 +66,7 @@ export const specialty = {
   context: PropTypes.string.isRequired
 }
 export const withSpecialties = {
-  specialties: PropTypes.arrayOf(PropTypes.shape({ specialty }))
+  specialties: PropTypes.arrayOf(PropTypes.shape( specialty ))
 }
 
 export const withBasicInfo = {

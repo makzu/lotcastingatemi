@@ -78,7 +78,7 @@ class SpecialtyPopup extends React.Component {
     return(<div className="editor-wrap ability-editor-wrap">
       <FlatButton label="Edit" onClick={ handleOpen } />
       <Dialog
-        title="Editing Abilities"
+        title="Editing Specialties"
         actions={ actions }
         open={ this.state.open }
         autoScrollBodyContent={ true }

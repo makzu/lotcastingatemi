@@ -10,10 +10,22 @@ const CHM_DESTROY =            'lca/charm/DESTROY'
 const CHM_DESTROY_SUCCESS =    'lca/charm/DESTROY_SUCCESS'
 const CHM_DESTROY_FAILURE =    'lca/charm/DESTROY_FAILURE'
 
+function normalized_type(type) {
+  switch(type) {
+  case 'SolarCharm':
+    return 'solar_charms'
+  case 'MartialArtsCharm':
+    return 'martial_arts_charms'
+  case 'Evocation':
+    return 'evocations'
+  }
+}
+
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _charId = action.payload != undefined ? action.payload.character_id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
+  const _type = action.payload != undefined ? normalized_type(action.payload.type) : null
 
   switch(action.type) {
   case CHM_CREATE_SUCCESS:
@@ -21,7 +33,7 @@ export default function reducer(state, action) {
       charms: { ...state.charms, [_id]: action.payload },
       characters: {
         ...state.characters,
-        [_charId]: { ...state.characters[_charId], charms: [...state.characters[_charId].charms, _id] }
+        [_charId]: { ...state.characters[_charId], [_type]: [...state.characters[_charId][_type], _id] }
       }
     }
   case CHM_UPDATE_SUCCESS:
@@ -36,8 +48,8 @@ export default function reducer(state, action) {
   }
 }
 
-export function createCharm(charId) {
-  let charm = { charm: { character_id: charId }}
+export function createCharm(charId, type) {
+  let charm = { charm: { character_id: charId, type: type }}
 
   return callApi({
     endpoint: `/api/v1/characters/${charId}/charms`,
@@ -77,13 +89,14 @@ export function destroyCharm(id, charId) {
 function _destroy_charm(state, action) {
   const id = action.meta.id
   const charId = action.meta.charId
+  const type = normalized_type(action.payload.type)
 
   const newCharms = { ...state.charms }
 
   delete newCharms[id]
 
   const char = { ...state.characters[charId] }
-  char.charms = char.charms.filter((e) => e != id)
+  char[type] = char[type].filter((e) => e != id)
 
   return { ...state, charms: newCharms, characters: { ...state.characters, [charId]: char }}
 }

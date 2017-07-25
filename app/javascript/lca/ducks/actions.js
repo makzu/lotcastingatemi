@@ -2,6 +2,7 @@ export {
   fetchCharacter, updateCharacter, createCharacter,
   updateWeapon, createWeapon, destroyWeapon,
   updateMerit, createMerit, destroyMerit,
+  updateCharm, createCharm, destroyCharm,
   fetchChronicle,
   fetchQc, updateQc, createQc,
   updateQcAttack, createQcAttack, destroyQcAttack,

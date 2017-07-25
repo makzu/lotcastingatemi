@@ -31,7 +31,7 @@ $mainGrid: (
   padding-bottom: 24px;
 }
 
-.welcomePage, .characterList, .qcSheet {
+.welcomePage, .characterList, .qcSheet, .bgSheet, .chronicleSheet, .page {
   @include grid-column(12, $mainGrid);
 }
 
@@ -125,14 +125,17 @@ $mainGrid: (
       width: 2em;
     }
   }
+  .charmSummaryBlock {
+    @include grid-column(4, $mainGrid);
+  }
 }
 
-.meritPage {
+.meritPage, .charmPage {
   h1 {
     @include grid-column(12, $mainGrid);
   }
 
-  .singleMerit {
+  .singleMerit, .singleCharm {
     @include grid-column(6, $mainGrid);
     margin-bottom: 1em;
   }

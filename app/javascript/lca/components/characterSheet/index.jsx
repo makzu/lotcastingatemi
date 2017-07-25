@@ -11,6 +11,7 @@ import FullAbilityBlock from './fullAbilityBlock.jsx'
 import WeaponSummary from './weaponSummary.jsx'
 import ArmorSummary from './armorSummary.jsx'
 import HealthLevelBlock from './healthLevelBlock.jsx'
+import CharmSummary from './charmSummary.jsx'
 
 import SpecialtyPopup from './editors/specialtyPopup.jsx'
 import IntimacyPopup from './editors/intimacyPopup.jsx'
@@ -19,6 +20,7 @@ import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
 
 import RatingDots from '../generic/ratingDots.jsx'
 import { withWillpower, withSpecialties, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
+import { prettyExaltType } from '../../utils/calculated'
 
 export function FullSpecialtyBlock(props) {
   const spec = props.character.specialties.map((s) =>
@@ -136,6 +138,7 @@ export class CharacterSheet extends React.Component {
       <div className="characterSheet">
 
         <h1 className="name">{character.name}<BasicsEditorPopup character={ character } /></h1>
+        <h3 className="name">{ prettyExaltType(character) }</h3>
 
         <FullAbilityBlock character={ character } />
         <FullAttributeBlock character={ character } />
@@ -158,6 +161,10 @@ export class CharacterSheet extends React.Component {
         <SocialBlock character={ character } />
         <IntimacySummary character={ character } />
 
+        <hr className="clear4" />
+
+        <CharmSummary character={ character } />
+
       </div>
     )
   }
@@ -173,17 +180,20 @@ function mapStateToProps(state, ownProps) {
   let weapons = []
   let merits = []
 
-  if (character != undefined && character.weapons != undefined) {
-    weapons = character.weapons.map((id) => state.entities.weapons[id])
+  if (character != undefined) {
+    if (character.weapons != undefined) {
+      weapons = character.weapons.map((id) => state.entities.weapons[id])
+    }
+    if (character.weapons != undefined) {
+      merits = character.merits.map((id) => state.entities.merits[id])
+    }
   }
-  if (character != undefined && character.weapons != undefined) {
-    merits = character.merits.map((id) => state.entities.merits[id])
-  }
+
 
   return {
     character,
     weapons,
-    merits
+    merits,
   }
 }
 

@@ -177,6 +177,10 @@ class MeritFullPage extends React.Component {
   }
 
   render() {
+    if (this.props.character == undefined) {
+      return null // TODO replace with spinner or something?
+    }
+
     let mts
     if (this.state.isEditing) {
       mts = this.props.merits.map((m) =>
@@ -194,18 +198,16 @@ class MeritFullPage extends React.Component {
       <h1>
         Merits
         <small style={{ fontSize: '60%', marginLeft: '5em' }}>
-          { this.props.character &&
-            <Link style={{ textDecoration: 'none' }} to={'/characters/' + this.props.character.id }>
-              Back to full sheet
-            </Link>
-          }</small>
+          <Link style={{ textDecoration: 'none' }} to={'/characters/' + this.props.character.id }>
+            Back to full sheet
+          </Link>
+        </small>
         <FlatButton style={{ float: 'right' }} label={ this.state.isEditing ? 'done' : 'edit' } onClick={ this.toggleEditor } />
         { this.state.isEditing &&
-          <IconButton onClick={ this.handleAdd } label="Add Merit"
+          <FlatButton label="Add Merit" icon={<ContentAddCircle />}
+            onClick={ this.handleAdd }
             style={{ float: 'right' }}
-          >
-            <ContentAddCircle />
-          </IconButton>
+          />
         }
       </h1>
       { mts }

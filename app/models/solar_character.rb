@@ -28,14 +28,14 @@ class SolarCharacter < Character
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10
   }
 
-  after_initialize do
-    unless new_record?
-      @limit = 0
-      @limit_trigger = ''
-    end
-  end
+  after_initialize :set_defaults
 
   private
+
+  def set_defaults
+    self.limit ||= 0
+    self.limit_trigger ||= ''
+  end
 
   def caste_is_blank?
     caste.blank?

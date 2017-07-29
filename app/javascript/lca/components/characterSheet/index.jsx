@@ -17,6 +17,7 @@ import SpecialtyPopup from './editors/specialtyPopup.jsx'
 import IntimacyPopup from './editors/intimacyPopup.jsx'
 import WillpowerPopup from './editors/willpowerPopup.jsx'
 import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
+import LimitPopup from './editors/limitPopup.jsx'
 
 import RatingDots from '../generic/ratingDots.jsx'
 import { withWillpower, withSpecialties, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
@@ -59,7 +60,6 @@ export function MeritSummary(props) {
   return(<div className="meritSummaryBlock">
     <h3>
       <Link to={'/characters/' + props.character.id + '/merits'}>Merits</Link>
-      {/*<AllMeritsPopup character={ props.character } merits={ props.merits } /> */}
     </h3>
 
     { merits}
@@ -121,6 +121,20 @@ WillpowerBlock.propTypes = {
   character: PropTypes.shape(withWillpower)
 }
 
+export function LimitTrackBlock(props) {
+  const { character } = props
+  if (character.limit == undefined)
+    return null
+
+  return <div className="limitTrackBlock">
+    <h3>Limit <LimitPopup character={ character } /></h3>
+    <div>Current: <RatingDots rating={ character.limit } fillTo={10} /></div>
+    <div>Limit Trigger: { character.limit_trigger }</div>
+  </div>
+}
+LimitTrackBlock.propTypes = {
+  character: PropTypes.object
+}
 
 export class CharacterSheet extends React.Component {
   constructor(props) {
@@ -153,6 +167,7 @@ export class CharacterSheet extends React.Component {
         <CombatBlock character={ character } weapons={ weapons } merits={ merits } />
         <HealthLevelBlock character={ character } />
         <WillpowerBlock character={ character } />
+        <LimitTrackBlock character={ character } />
 
         <hr className="clear4" />
 

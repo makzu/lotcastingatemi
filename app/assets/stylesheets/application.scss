@@ -79,6 +79,9 @@ $mainGrid: (
       clear: both;
     }
   }
+  .limitTrackBlock {
+    @include grid-column(3, $mainGrid)
+  }
   .intimacySummaryBlock, .healthLevelBlock {
     @include grid-column(3, $mainGrid);
   }

@@ -7,8 +7,8 @@ import { fullChar } from '../../utils/propTypes'
 
 function SingleCharm(props) {
   return <div className="charm">
-    <h4>{ props.charm.name } ({ props.charm.cost })</h4>
-    { props.charm.body}
+    <h4 style={{ marginBottom: 0 }}>{ props.charm.name } ({ props.charm.cost })</h4>
+    { props.charm.body }
   </div>
 }
 SingleCharm.propTypes = {

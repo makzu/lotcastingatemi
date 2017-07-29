@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Traits specific to Solars.
+# Traits and Validations specific to Solars.
 class SolarCharacter < Character
   include MotePool
 
@@ -17,12 +17,12 @@ class SolarCharacter < Character
     "eclipse":  %w[ bureaucracy larceny linguistics occult presence ride sail socialize ]
   }.freeze
 
-  validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :caste_is_blank?
-  validate :caste_abilities_are_valid,               unless: :caste_is_blank?
-  validate :caste_and_favored_dont_overlap,          unless: :caste_is_blank?
-  validate :favored_abilities_are_valid,             unless: :caste_is_blank?
-  validate :five_caste_and_five_favored_abilities,   unless: :caste_is_blank?
-  validate :supernal_ability_is_caste,               unless: :caste_is_blank?
+  validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :abils_are_blank?
+  validate :caste_abilities_are_valid,               unless: :abils_are_blank?
+  validate :caste_and_favored_dont_overlap,          unless: :abils_are_blank?
+  validate :favored_abilities_are_valid,             unless: :abils_are_blank?
+  validate :five_caste_and_five_favored_abilities,   unless: :abils_are_blank?
+  validate :supernal_ability_is_caste,               unless: :abils_are_blank?
 
   validates :limit, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10
@@ -37,8 +37,8 @@ class SolarCharacter < Character
     self.limit_trigger ||= ''
   end
 
-  def caste_is_blank?
-    caste.blank?
+  def abils_are_blank?
+    caste.blank? || caste_abilities.blank? || favored_abilities.blank?
   end
 
   def caste_and_favored_dont_overlap

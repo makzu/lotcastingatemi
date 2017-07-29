@@ -68,7 +68,7 @@ export class LimitPopup extends React.Component {
       />
     ]
 
-    return(<div className="editor-wrap basics-editor-wrap">
+    return(<div className="editor-wrap limit-editor-wrap">
       <FlatButton label="Edit" onClick={ handleOpen } />
       <Dialog
         title="Editing"

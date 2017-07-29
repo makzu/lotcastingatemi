@@ -6,8 +6,8 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-import * as c from '../../../utils/constants.js'
-
+import { ESSENCE_MIN, ESSENCE_MAX } from '../../../utils/constants.js'
+import { clamp } from '../../../utils'
 import { updateCharacter } from '../../../ducks/actions.js'
 
 class BasicsEditorPopup extends React.Component {
@@ -38,13 +38,7 @@ class BasicsEditorPopup extends React.Component {
     let val
 
     if (e.target.type == 'number') {
-      val = parseInt(e.target.value)
-
-      if (val > c.ESSENCE_MAX) {
-        val = c.ESSENCE_MAX
-      } else if (val < c.ESSENCE_MIN) {
-        val = c.ESSENCE_MIN
-      }
+      val = clamp(parseInt(e.target.value), ESSENCE_MIN, ESSENCE_MAX)
     } else {
       val = e.target.value
     }
@@ -93,6 +87,7 @@ class BasicsEditorPopup extends React.Component {
             type="number" min={ 0 } max={ 10 }
             className="editor-rating-field"
             onChange={ handleChange } onBlur={ handleBlur } />
+          <br />
           <TextField name="description" value={ character.description }
             floatingLabelText="Description:"
             className="editor-description-field"

@@ -107,13 +107,19 @@ class SingleCharmEditor extends React.Component {
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         floatingLabelText="Name:"
       />
-      <br />
       { charm.type == 'Evocation' &&
         <TextField name="artifact_name" value={ charm.artifact_name }
           onChange={ this.handleChange } onBlur={ this.handleBlur }
           floatingLabelText="Artifact Name:"
         />
       }
+      { charm.type == 'MartialArtsCharm' &&
+        <TextField name="style" value={ charm.style }
+          onChange={ this.handleChange } onBlur={ this.handleBlur }
+          floatingLabelText="Style:"
+        />
+      }
+      <br />
       Mins:
       { showAbility &&
         <AbilitySelect name="ability"
@@ -123,21 +129,17 @@ class SingleCharmEditor extends React.Component {
           multiple={ false }
         />
       }
-      { charm.type == 'MartialArtsCharm' &&
-        <TextField name="style" value={ charm.style }
-          onChange={ this.handleChange } onBlur={ this.handleBlur }
-          floatingLabelText="Style:"
-        />
-      }
       { showMinAbility &&
         <TextField name="min_ability" value={ charm.min_ability }
           type="number" min={ 1 } max={ 5 }
+          className="editor-rating-field"
           onChange={ this.handleChange } onBlur={ this.handleBlur }
-          floatingLabelText="Minimum Ability:"
+          floatingLabelText="Ability:"
         />
       }
       <TextField name="min_essence" value={ charm.min_essence }
         type="number" min={ 1 } max={ 10 }
+        className="editor-rating-field"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         floatingLabelText="Essence:"
       />
@@ -152,29 +154,32 @@ class SingleCharmEditor extends React.Component {
         <MenuItem value="simple" primaryText="Simple" />
         <MenuItem value="permanent" primaryText="Permanent" />
       </SelectField>
-      <br />
-      <TextField name="keywords" value={ charm.keywords }
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-        floatingLabelText="Keywords:"
-      />
-      <br />
       <TextField name="duration" value={ charm.duration }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         floatingLabelText="Duration:"
       />
       <br />
+      <TextField name="keywords" value={ charm.keywords }
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        fullWidth={ true }
+        floatingLabelText="Keywords:"
+      />
+      <br />
       <TextField name="prereqs" value={ charm.prereqs }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
+        fullWidth={ true }
         floatingLabelText="Prerequisite Charms:"
       />
       <br />
       <TextField name="body" value={ charm.body }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
+        className="editor-description-field" multiLine={ true } fullWidth={ true }
         floatingLabelText="Effect:"
       />
       <br />
       <TextField name="ref" value={ charm.ref }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
+        fullWidth={ true }
         floatingLabelText="Ref:"
       />
       <IconButton onClick={ this.handleRemove } label="Remove"

@@ -6,7 +6,8 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-import * as c from '../../../utils/constants.js'
+import { ATTRIBUTE_MIN, ATTRIBUTE_MAX } from '../../../utils/constants.js'
+import { clamp } from '../../../utils'
 import { withAttributes } from '../../../utils/propTypes'
 
 import { updateCharacter } from '../../../ducks/actions.js'
@@ -36,14 +37,7 @@ class AttributePopup extends React.Component {
 
   handleChange(e) {
     e.preventDefault()
-
-    let val = parseInt(e.target.value)
-
-    if (val > c.ATTRIBUTE_MAX) {
-      val = c.ATTRIBUTE_MAX
-    } else if (val < c.ATTRIBUTE_MIN) {
-      val = c.ATTRIBUTE_MIN
-    }
+    const val = clamp(parseInt(e.target.value), ATTRIBUTE_MIN, ATTRIBUTE_MAX)
 
     this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }

@@ -40,13 +40,9 @@ class ArmorPopup extends React.Component {
     e.preventDefault()
     let val = null
 
-    if (e.target.type == 'number')
-      val = parseInt(e.target.value)
-
-    else if (e.target.type == 'checkbox') {
+    if (e.target.type == 'checkbox') {
       val = ! this.state.character[e.target.name]
       this.props.updateChar(this.state.character.id, e.target.name, val)
-
     } else if (e.target.name == 'armor_tags') {
       val = e.target.value.split(',')
     } else

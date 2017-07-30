@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
 
-    this.state = { open: false, credentials: { email: '', password: '' }}
+    this.state = { open: false, credentials: { username: '', password: '' }}
   }
 
   handleOpen() {
@@ -72,7 +72,7 @@ class LoginForm extends React.Component {
         { error.login &&
           <div>Error logging in</div>
         }
-        <TextField name="email" floatingLabelText="e-mail" onChange={ onChange }
+        <TextField name="username" floatingLabelText="User Name" onChange={ onChange }
         />
         <br />
         <TextField name="password" type="password" floatingLabelText="password"

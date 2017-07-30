@@ -8,18 +8,18 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import { signup } from '../../ducks/actions.js'
 
-function EmailErrorBlock(props) {
+function UsernameErrorBlock(props) {
   const errors = props.error.map((e) => {
     switch (e.error) {
     case 'invalid':
-      return <span>Email is invalid.</span>
+      return <span>Username is invalid.</span>
     default:
       return <span>Generic error</span>
     }
   })
   return <div>{ errors }</div>
 }
-EmailErrorBlock.propTypes = {
+UsernameErrorBlock.propTypes = {
   error: PropTypes.arrayOf(PropTypes.object)
 }
 
@@ -34,7 +34,7 @@ class SignupPage extends React.Component {
     super(props)
     this.state = {
       credentials: {
-        email: '',
+        username: '',
         password: '',
         password_confirmation: '',
       },
@@ -70,12 +70,12 @@ class SignupPage extends React.Component {
     return <div className="page">
       <h1>sign up page</h1>
       <div>
-        <TextField name="email" type="email"
-          floatingLabelText="E-Mail Address"
-          value={ this.state.credentials.email }
+        <TextField name="username"
+          floatingLabelText="User Name"
+          value={ this.state.credentials.username }
           onChange={ this.onChange }
         />
-        { error && error.email && <EmailErrorBlock error={ error.email } /> }
+        { error && error.email && <UsernameErrorBlock error={ error.email } /> }
       </div>
       <div>
         <TextField name="password" type="password"

@@ -12,18 +12,15 @@ class Player < ApplicationRecord
   has_many :chronicle_players
   has_many :chronicles, through: :chronicle_players
 
-  validates :email, uniqueness: true, email: true
+  validates :email, uniqueness: true, email: true, allow_nil: true
+  validates :username, uniqueness: true
 
   def all_chronicle_ids
     chronicle_ids + own_chronicle_ids
   end
 
-  # Make knock login requests case-insensitive for email
-  # Innards shamelessly stolen from:
-  # https://robb.weblaws.org/2013/12/05/yes-rails-supports-case-insensitive-database-queries/
   def self.from_token_request(request)
-    p = Player.arel_table
-    email = request.params['auth'] && request.params['auth']['email']
-    Player.find_by(p[:email].matches(email))
+    name = request.params['auth'] && request.params['auth']['username']
+    Player.find_by(username: name)
   end
 end

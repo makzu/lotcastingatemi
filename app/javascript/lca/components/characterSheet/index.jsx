@@ -18,10 +18,11 @@ import IntimacyPopup from './editors/intimacyPopup.jsx'
 import WillpowerPopup from './editors/willpowerPopup.jsx'
 import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
 import LimitPopup from './editors/limitPopup.jsx'
+import ExaltEditorPopup from './editors/exaltEditorPopup.jsx'
 
 import RatingDots from '../generic/ratingDots.jsx'
 import { withWillpower, withSpecialties, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
-import { prettyExaltType } from '../../utils/calculated'
+import { prettyFullExaltType } from '../../utils/calculated'
 
 export function FullSpecialtyBlock(props) {
   const spec = props.character.specialties.map((s) =>
@@ -151,8 +152,14 @@ export class CharacterSheet extends React.Component {
     return (
       <div className="characterSheet">
 
-        <h1 className="name">{character.name}<BasicsEditorPopup character={ character } /></h1>
-        <h3 className="name">{ prettyExaltType(character) }</h3>
+        <h1 className="name" style={{ marginBottom: 0 }}>
+          { character.name }
+          <BasicsEditorPopup character={ character } />
+        </h1>
+        <h3 className="name" style={{ marginTop: 0 }}>
+          { prettyFullExaltType(character) }
+          <ExaltEditorPopup character={ character } />
+        </h3>
 
         <FullAbilityBlock character={ character } />
         <FullAttributeBlock character={ character } />

@@ -91,7 +91,7 @@ class BasicsEditorPopup extends React.Component {
           <TextField name="description" value={ character.description }
             floatingLabelText="Description:"
             className="editor-description-field"
-            multiLine={ true }
+            multiLine={ true } fullWidth={ true }
             onChange={ handleChange } onBlur={ handleBlur } />
         </div>
       </Dialog>

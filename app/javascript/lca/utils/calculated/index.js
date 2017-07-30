@@ -128,10 +128,21 @@ export function prettyExaltType(character) {
   case 'Character':
     return 'Mortal'
   case 'SolarCharacter':
-    return `${capitalize(character.caste || '_____')} caste Solar`
+    return 'Solar'
   default:
     return 'other'
   }
+}
+
+export function prettyFullExaltType(character) {
+  let type = prettyExaltType(character)
+
+  switch (character.type) {
+  case 'SolarCharacter':
+    type = `${capitalize(character.caste || '_____')} caste ${type}`
+  }
+
+  return type
 }
 
 export function isCasteAbility(character, ability) {

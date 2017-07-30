@@ -17,10 +17,7 @@ class AbilitySelect extends React.Component {
     )
 
     return (
-      <SelectField name={ this.props.name }
-        value={ this.props.value }
-        multiple={ this.props.multiple }
-        onChange={ this.props.onChange }
+      <SelectField { ...this.props }
       >
         { menuItems }
       </SelectField>
@@ -32,6 +29,7 @@ AbilitySelect.propTypes = {
   multiple: PropTypes.bool,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  floatingLabelText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }
 

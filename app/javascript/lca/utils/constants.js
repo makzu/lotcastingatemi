@@ -77,6 +77,59 @@ export const ATTACK_ABILITIES = [
   'abil_thrown'
 ]
 
+export const SOLAR_CASTE_ABILITIES = {
+  'dawn': [
+    { abil: 'abil_archery',       pretty: 'Archery'       },
+    { abil: 'abil_awareness',     pretty: 'Awareness'     },
+    { abil: 'abil_brawl',         pretty: 'Brawl'         },
+    { abil: 'abil_dodge',         pretty: 'Dodge'         },
+    { abil: 'abil_melee',         pretty: 'Melee'         },
+    { abil: 'abil_resistance',    pretty: 'Resistance'    },
+    { abil: 'abil_thrown',        pretty: 'Thrown'        },
+    { abil: 'abil_war',           pretty: 'War'           }
+  ],
+  'zenith': [
+    { abil: 'abil_athletics',     pretty: 'Athletics'     },
+    { abil: 'abil_integrity',     pretty: 'Integrity'     },
+    { abil: 'abil_lore',          pretty: 'Lore'          },
+    { abil: 'abil_performance',   pretty: 'Performance'   },
+    { abil: 'abil_presence',      pretty: 'Presence'      },
+    { abil: 'abil_resistance',    pretty: 'Resistance'    },
+    { abil: 'abil_survival',      pretty: 'Survival'      },
+    { abil: 'abil_war',           pretty: 'War'           }
+  ],
+  'twilight': [
+    { abil: 'abil_bureaucracy',   pretty: 'Bureaucracy'   },
+    { abil: 'abil_craft',         pretty: 'Craft'         },
+    { abil: 'abil_integrity',     pretty: 'Integrity'     },
+    { abil: 'abil_investigation', pretty: 'Investigation' },
+    { abil: 'abil_linguistics',   pretty: 'Linguistics'   },
+    { abil: 'abil_lore',          pretty: 'Lore'          },
+    { abil: 'abil_medicine',      pretty: 'Medicine'      },
+    { abil: 'abil_occult',        pretty: 'Occult'        }
+  ],
+  'night': [
+    { abil: 'abil_athletics',     pretty: 'Athletics'     },
+    { abil: 'abil_awareness',     pretty: 'Awareness'     },
+    { abil: 'abil_dodge',         pretty: 'Dodge'         },
+    { abil: 'abil_investigation', pretty: 'Investigation' },
+    { abil: 'abil_larceny',       pretty: 'Larceny'       },
+    { abil: 'abil_ride',          pretty: 'Ride'          },
+    { abil: 'abil_socialize',     pretty: 'Socialize'     },
+    { abil: 'abil_stealth',       pretty: 'Stealth'       }
+  ],
+  'eclipse': [
+    { abil: 'abil_bureaucracy',   pretty: 'Bureaucracy'   },
+    { abil: 'abil_larceny',       pretty: 'Larceny'       },
+    { abil: 'abil_linguistics',   pretty: 'Linguistics'   },
+    { abil: 'abil_occult',        pretty: 'Occult'        },
+    { abil: 'abil_presence',      pretty: 'Presence'      },
+    { abil: 'abil_ride',          pretty: 'Ride'          },
+    { abil: 'abil_sail',          pretty: 'Sail'          },
+    { abil: 'abil_socialize',     pretty: 'Socialize'     }
+  ]
+}
+
 /* Minimum and maximum */
 export const ESSENCE_MAX = 10
 export const ESSENCE_MIN = 1

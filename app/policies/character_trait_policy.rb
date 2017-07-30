@@ -11,7 +11,7 @@ class CharacterTraitPolicy < ApplicationPolicy
   end
 
   def create?
-    player_is_owner?
+    player_is_owner? || player_is_st?
   end
 
   def show?

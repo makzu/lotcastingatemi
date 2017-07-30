@@ -9,11 +9,18 @@ module Api
 
     def show
       authorize @battlegroup
-      render json: @battlegroup.as_json(include: %i[weapons merits])
+      render json: @battlegroup
     end
 
     def create
-      render json: Battlegroup.create(battlegroup_params)
+      @battlegroup = Battlegroup.new(battlegroup_params)
+      @battlegroup.player ||= current_player
+      authorize @battlegroup
+      if @battlegroup.save
+        render json: @battlegroup
+      else
+        render json: @battlegroup.errors.details, status: :bad_request
+      end
     end
 
     def destroy

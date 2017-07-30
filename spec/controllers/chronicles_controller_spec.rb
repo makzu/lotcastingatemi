@@ -35,14 +35,14 @@ RSpec.describe Api::V1::ChroniclesController, type: :controller do
       end
     end
 
-    context 'With invalid attributes' do
-      it 'Increases Chronicle count by 0' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_chronicle_params = FactoryGirl.attributes_for(:chronicle, st_id: 'Invalid Attribute')
+    # context 'With invalid attributes' do
+    #   it 'Increases Chronicle count by 0' do
+    #     request.headers['Authorization'] = authenticated_header(@player)
+    #     @invalid_chronicle_params = FactoryGirl.attributes_for(:chronicle, st_id: 'Invalid Attribute')
 
-        expect { post :create, params: { chronicle: @invalid_chronicle_params }, format: :json }.to change(Chronicle, :count).by(0)
-      end
-    end
+    #     expect { post :create, params: { chronicle: @invalid_chronicle_params }, format: :json }.to change(Chronicle, :count).by(0)
+    #   end
+    # end
 
     it_behaves_like 'respond_to_unauthenticated', 'create'
   end

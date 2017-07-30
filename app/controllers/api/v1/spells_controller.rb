@@ -16,8 +16,11 @@ module Api
         @spell = Spell.new(spell_params)
         @spell.character = @character
         authorize @spell
-        @spell.save
-        render json: @spell
+        if @spell.save
+          render json: @spell
+        else
+          render json: @spell.errors.details, status: :bad_request
+        end
       end
 
       def destroy

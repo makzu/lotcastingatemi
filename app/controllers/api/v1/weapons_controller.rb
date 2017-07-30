@@ -16,8 +16,11 @@ module Api
         @weapon = Weapon.new(weapon_params)
         @weapon.character = @character
         authorize @weapon
-        @weapon.save
-        render json: @weapon
+        if @weapon.save
+          render json: @weapon
+        else
+          render json: @weapon.errors.details, status: :bad_request
+        end
       end
 
       def destroy

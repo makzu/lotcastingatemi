@@ -9,11 +9,18 @@ module Api
 
       def show
         authorize @chronicle
-        render json: @chronicle, include: %w[chronicles.* own_chronicles.* characters.* qcs.* battlegroups.*]
+        render json: @chronicle
       end
 
       def create
-        render json: Chronicle.create(chronicle_params)
+        @chronicle = Chronicle.new(chronicle_params)
+        @chronicle.st ||= current_player
+        authorize @chronicle
+        if @chronicle.save
+          render json: @chronicle
+        else
+          render json: @chronicle.errors.details, status: :bad_request
+        end
       end
 
       def destroy

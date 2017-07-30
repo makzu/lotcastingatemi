@@ -36,6 +36,7 @@ class CharacterSerializer < ActiveModel::Serializer
              :xp_total, :xp_spent, :xp_solar_total, :xp_solar_spent,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white
 
+  attribute :player_id
   has_many :merits
   has_many :weapons
   has_many :spells

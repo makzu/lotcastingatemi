@@ -8,5 +8,6 @@ class BattlegroupSerializer < ActiveModel::Serializer
              :soak, :hardness, :evasion, :parry, :resolve, :guile, :appearance,
              :movement, :senses, :join_battle, :initiative, :onslaught
 
+  attribute :player_id
   has_many :qc_attacks
 end

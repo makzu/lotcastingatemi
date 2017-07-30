@@ -14,6 +14,10 @@ class CharacterPolicy < ApplicationPolicy
     player_is_owner? || player_is_st? || player_in_chronicle?
   end
 
+  def create?
+    player_is_owner? || player_is_st?
+  end
+
   def update?
     player_is_owner? || player_is_st?
   end

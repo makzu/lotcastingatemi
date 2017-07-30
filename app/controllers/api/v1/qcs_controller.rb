@@ -8,11 +8,18 @@ module Api
 
       def show
         authorize @qc
-        render json: @qc.as_json(include: %i[qc_attacks qc_merits])
+        render json: @qc
       end
 
       def create
-        render json: Qc.create(qc_params).as_json(include: %i[qc_attacks qc_merits])
+        @qc = Qc.new(qc_params)
+        @qc.player ||= current_player
+        authorize @qc
+        if @qc.save
+          render json: @qc
+        else
+          render json: @qc.errors.details, status: :bad_request
+        end
       end
 
       def destroy

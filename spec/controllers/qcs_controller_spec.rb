@@ -39,7 +39,7 @@ RSpec.describe Api::V1::QcsController, type: :controller do
       it 'Increases qc count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryGirl.create(:chronicle)
-        @invalid_qc_params = FactoryGirl.attributes_for(:qc, chronicle_id: 'Invalid', player_id: 'Attribute')
+        @invalid_qc_params = FactoryGirl.attributes_for(:qc, essence: 11)
 
         expect { post :create, params: { qc: @invalid_qc_params }, format: :json }.to change(Qc, :count).by(0)
       end

@@ -9,6 +9,10 @@ class PlayerPolicy < ApplicationPolicy
     @player_model = player_model
   end
 
+  def index?
+    self?
+  end
+
   def show?
     self?
   end

@@ -19,6 +19,7 @@ class QcSerializer < ActiveModel::Serializer
 
              :initiative, :onslaught
 
+  attribute :player_id
   has_many :qc_attacks
   has_many :qc_charms
   has_many :qc_merits

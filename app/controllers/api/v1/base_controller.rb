@@ -5,6 +5,7 @@ module Api
     class BaseController < ActionController::API
       include Knock::Authenticable
       include Pundit
+      after_action :verify_authorized
 
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 

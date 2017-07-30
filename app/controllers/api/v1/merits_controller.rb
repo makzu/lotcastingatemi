@@ -16,8 +16,11 @@ module Api
         @merit = Merit.new(merit_params)
         @merit.character = @character
         authorize @merit
-        @merit.save
-        render json: @merit
+        if @merit.save
+          render json: @merit
+        else
+          render json: @merit.errors.details, status: :bad_request
+        end
       end
 
       def destroy

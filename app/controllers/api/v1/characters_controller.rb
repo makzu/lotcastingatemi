@@ -12,7 +12,14 @@ module Api
       end
 
       def create
-        render json: Character.create(character_params)
+        @character = Character.new(character_params)
+        @character.player ||= current_player
+        authorize @character
+        if @character.save
+          render json: @character
+        else
+          render json: @character.errors.details, status: :bad_request
+        end
       end
 
       def destroy

@@ -16,8 +16,11 @@ module Api
         @qcm = QcMerit.new(qc_merit_params)
         @qcm.qc = @qc
         authorize @qcm
-        @qcm.save
-        render json: @qcm
+        if @qcm.save
+          render json: @qcm
+        else
+          render json: @qcm.errors.details, status: :bad_request
+        end
       end
 
       def destroy

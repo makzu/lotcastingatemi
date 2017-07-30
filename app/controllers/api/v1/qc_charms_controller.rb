@@ -16,8 +16,11 @@ module Api
         @qca = QcCharm.new(qc_charm_params)
         @qca.qc = @qc
         authorize @qca
-        @qca.save
-        render json: @qca
+        if @qca.save
+          render json: @qca
+        else
+          render json: @qca.errors.details, status: :bad_request
+        end
       end
 
       def destroy

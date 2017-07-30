@@ -9,6 +9,10 @@ class ChroniclePolicy < ApplicationPolicy
     @chronicle = chronicle
   end
 
+  def create?
+    player_is_st?
+  end
+
   def show?
     player_is_st? || player_in_chronicle?
   end

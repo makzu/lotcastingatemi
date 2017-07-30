@@ -39,7 +39,7 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
       it 'Increases Character count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryGirl.create(:chronicle)
-        @invalid_character_params = FactoryGirl.attributes_for(:character, chronicle_id: 'Invalid', player_id: 'Attribute')
+        @invalid_character_params = FactoryGirl.attributes_for(:character, essence: 11)
 
         expect { post :create, params: { character: @invalid_character_params }, format: :json }.to change(Character, :count).by(0)
       end

@@ -16,8 +16,11 @@ module Api
         @charm = Charm.new(charm_params)
         @charm.character = @character
         authorize @charm
-        @charm.save
-        render json: @charm
+        if @charm.save
+          render json: @charm
+        else
+          render json: @charm.errors.details, status: :bad_request
+        end
       end
 
       def destroy

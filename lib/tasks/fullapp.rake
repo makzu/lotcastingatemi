@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rubocop/rake_task'
-
 namespace :lca do
   desc 'Run full Rspec and Jest test suites'
   task test: [:spec, 'lca:frontend:test']

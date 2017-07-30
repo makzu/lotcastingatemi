@@ -31,12 +31,6 @@ MotePool.propTypes = {
 class QcSheet extends React.PureComponent {
   constructor(props) {
     super(props)
-
-    this.fetch = this.fetch.bind(this)
-  }
-
-  fetch() {
-    this.props.fetchQc(this.props.id)
   }
 
   render() {
@@ -45,7 +39,6 @@ class QcSheet extends React.PureComponent {
       return(<div>
         <h1>QC Editor</h1>
         <p>The QC has not yet loaded.</p>
-        <p><FlatButton onClick={ this.fetch } label="Fetch" /></p>
       </div>)
     }
 
@@ -75,7 +68,7 @@ class QcSheet extends React.PureComponent {
     )
 
     return(<div className="qcSheet">
-      <h1>{ qc.name } <QcEditorPopup qc={ qc } attacks={ qc_attacks } merits={ qc_merits } /><FlatButton onClick={ this.fetch } label="Refresh" /></h1>
+      <h1>{ qc.name } <QcEditorPopup qc={ qc } attacks={ qc_attacks } merits={ qc_merits } /></h1>
 
       <div>
         <strong>Essence:</strong> { qc.essence }, {' '}

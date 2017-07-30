@@ -47,13 +47,11 @@ export default function reducer(state, action) {
   }
 }
 
-export function createCharacter(playerId, name) {
-  let char = { character: { name: name, player_id: playerId }}
-
+export function createCharacter(char) {
   return callApi({
     endpoint: '/api/v1/characters',
     method: 'POST',
-    body: JSON.stringify(char),
+    body: JSON.stringify({ character: char }),
     types: [CHA_CREATE, CHA_CREATE_SUCCESS, CHA_CREATE_FAILURE]
   })
 }
@@ -104,6 +102,7 @@ function _create_character(state, action) {
   const newState = normalize(action.payload, schemas.character)
   const newCharacters = newState.entities.characters
   const owner = state.players[action.payload.player_id]
+  const id = action.payload.id
 
   const chronId = action.payload.chronicle_id
   let newChronicles = state.chronicles
@@ -111,13 +110,13 @@ function _create_character(state, action) {
   if (chronId != null) {
     newChronicles = { ...newChronicles, [chronId]: {
       ...newChronicles[chronId],
-      characters: [ ...newChronicles[chronId].characters, action.payload.id ]
+      characters: [ ...newChronicles[chronId].characters, id ]
     }}
   }
 
   return { ...state,
     characters: { ...state.characters, ...newCharacters },
-    players: { ...state.players, [owner.id]: { ...owner, characters: [ ...owner.characters, action.character.id ] }},
+    players: { ...state.players, [owner.id]: { ...owner, characters: [ ...owner.characters, id ] }},
     chronicles: newChronicles
   }
 }

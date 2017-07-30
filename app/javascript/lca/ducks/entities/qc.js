@@ -49,13 +49,11 @@ export default function reducer(state, action) {
 }
 
 // Action creators:
-export function createQc(playerId, chronicleId, name) {
-  let qc = { qc: { name: name, player_id: playerId, chronicle_id: chronicleId }}
-
+export function createQc(qc) {
   return callApi({
     endpoint: '/api/v1/qcs',
     method: 'POST',
-    body: JSON.stringify(qc),
+    body: JSON.stringify({ qc: qc }),
     types: [QC_CREATE, QC_CREATE_SUCCESS, QC_CREATE_FAILURE]
   })
 }

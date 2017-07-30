@@ -1,4 +1,7 @@
+import { normalize } from 'normalizr'
+
 import { callApi } from '../../utils/api.js'
+import * as schemas from './_schemas.js'
 
 const CREATE =           'lca/battlegroup/CREATE'
 const CREATE_SUCCESS =   'lca/battlegroup/CREATE_SUCCESS'
@@ -29,13 +32,11 @@ export default function reducer(state, action) {
   }
 }
 
-export function createBattlegroup(qcId) {
-  let group = { battlegroup: { qc_id: qcId }}
-
+export function createBattlegroup(bg) {
   return callApi({
     endpoint: `/api/v1/battlegroups`,
     method: 'POST',
-    body: JSON.stringify(group),
+    body: JSON.stringify({ battlegroup: bg }),
     types: [CREATE, CREATE_SUCCESS, CREATE_FAILURE]
   })
 }
@@ -68,18 +69,29 @@ export function destroyBattlegroup(id) {
 }
 
 function _create_battlegroup(state, action) {
+  const newState = normalize(action.payload, schemas.battlegroup)
+  const newBattlegroups = newState.entities.battlegroups
+  const owner = state.players[action.payload.player_id]
   const id = action.payload.id
-  const qcId = action.payload.qc_id
 
-  const qc = { ...state.qcs[qcId] }
-  qc.battlegroups.push(id)
+  const chronId = action.payload.chronicle_id
+  let newChronicles = state.chronicles
+
+  if (chronId != null) {
+    newChronicles = { ...newChronicles, [chronId]: {
+      ...newChronicles[chronId],
+      battlegroups: [ ...newChronicles[chronId].battlegroups, id ]
+    }}
+  }
 
   return { ...state,
-    battlegroups: { ...state.battlegroups, [id]: action.payload },
-    qcs: { ...state.qcs, [qcId]: qc }
+    battlegroups: { ...state.battlegroups, ...newBattlegroups },
+    players: { ...state.players, [owner.id]: { ...owner, battlegroups: [ ...owner.battlegroups, id ] }},
+    chronicles: newChronicles
   }
 }
 
+// TODO remove ID from player/chronicle entities
 function _destroy_battlegroup(state, action) {
   const id = action.meta.id
 

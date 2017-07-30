@@ -3,7 +3,7 @@
 # Holds traits specific to Battlegroups, as defined starting at Core p.205.
 class Battlegroup < ApplicationRecord
   belongs_to :player
-  belongs_to :chronicle
+  belongs_to :chronicle, optional: true
 
   has_many :qc_attacks, as: :qc_attackable
 

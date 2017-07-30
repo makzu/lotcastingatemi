@@ -5,46 +5,46 @@ module Api
     class BattlegroupsController < BaseController
       before_action :authenticate_player
       before_action :set_battlegroup, only: %i[show update destroy]
-    end
 
-    def show
-      authorize @battlegroup
-      render json: @battlegroup
-    end
-
-    def create
-      @battlegroup = Battlegroup.new(battlegroup_params)
-      @battlegroup.player ||= current_player
-      authorize @battlegroup
-      if @battlegroup.save
+      def show
+        authorize @battlegroup
         render json: @battlegroup
-      else
-        render json: @battlegroup.errors.details, status: :bad_request
       end
-    end
 
-    def destroy
-      authorize @battlegroup
-      render json: @battlegroup.destroy
-    end
-
-    def update
-      authorize @battlegroup
-      if @battlegroup.update_attributes(battlegroup_params)
-        render json: @battlegroup
-      else
-        render json: @battlegroup.errors.details, status: :bad_request
+      def create
+        @battlegroup = Battlegroup.new(battlegroup_params)
+        @battlegroup.player ||= current_player
+        authorize @battlegroup
+        if @battlegroup.save
+          render json: @battlegroup
+        else
+          render json: @battlegroup.errors.details, status: :bad_request
+        end
       end
-    end
 
-    private
+      def destroy
+        authorize @battlegroup
+        render json: @battlegroup.destroy
+      end
 
-    def set_battlegroup
-      @battlegroup = Battlegroup.find(params[:id])
-    end
+      def update
+        authorize @battlegroup
+        if @battlegroup.update_attributes(battlegroup_params)
+          render json: @battlegroup
+        else
+          render json: @battlegroup.errors.details, status: :bad_request
+        end
+      end
 
-    def battlegroup_params
-      params.require(:battlegroup).permit!
+      private
+
+      def set_battlegroup
+        @battlegroup = Battlegroup.find(params[:id])
+      end
+
+      def battlegroup_params
+        params.require(:battlegroup).permit!
+      end
     end
   end
 end

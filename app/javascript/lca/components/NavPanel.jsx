@@ -118,7 +118,7 @@ export class NavPanel extends React.Component {
 }
 NavPanel.propTypes = {
   authenticated: PropTypes.bool,
-  id: PropTypes.string,
+  id: PropTypes.number,
   player: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
   characters: PropTypes.arrayOf(PropTypes.shape(fullChar)),
   qcs: PropTypes.arrayOf(PropTypes.shape(fullQc)),

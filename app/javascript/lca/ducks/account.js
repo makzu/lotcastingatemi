@@ -13,7 +13,7 @@ export const SIGNUP_FAILURE = 'lca/session/SIGNUP_FAILURE'
 
 const defaultState = {
   authenticated: !!sessionStorage.jwt || false,
-  id: '0',
+  id: 0,
   fetching: false,
   error: {},
 }
@@ -32,7 +32,7 @@ export default function SessionReducer(state = defaultState, action) {
       authenticated: !!sessionStorage.jwt,
       fetching: false,
       error: {},
-      id: action.payload.id,
+      id: parseInt(action.payload.id),
     }
 
   case LOGIN_FAILURE:

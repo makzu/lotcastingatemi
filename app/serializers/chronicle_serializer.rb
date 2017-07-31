@@ -13,7 +13,7 @@ class ChronicleSerializer < ActiveModel::Serializer
   # We don't need the full associations duplicated under Player, because they're
   #   already included above.
   class PlayerSerializer < ActiveModel::Serializer
-    attributes :id, :name, :characters, :qcs, :battlegroups
+    attributes :id, :username, :display_name, :characters, :qcs, :battlegroups
 
     def characters
       CharacterPolicy::Scope.new(scope, Character).resolve.where(player: object).pluck(:id)

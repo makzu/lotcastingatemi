@@ -9,8 +9,6 @@ import { ResponsiveAppBar } from 'material-ui-responsive-drawer'
 
 import { fetchCurrentPlayer, logout } from '../ducks/actions.js'
 
-import LoginForm from './account/login.jsx'
-
 export function LcaHeader(props) {
   const { authenticated, fetchCurrentPlayer, logout } = props
 
@@ -22,8 +20,6 @@ export function LcaHeader(props) {
       <MenuItem primaryText="Refresh" onClick={ fetchCurrentPlayer } />
       <MenuItem primaryText="Sign out" onClick={ logout } />
     </IconMenu>
-  } else {
-    rightIcon = <LoginForm />
   }
 
   return(

@@ -8,6 +8,7 @@ import { List, ListItem, makeSelectable } from 'material-ui/List'
 import { ResponsiveDrawer } from 'material-ui-responsive-drawer'
 import styled from 'styled-components'
 
+import LoginForm from './account/login.jsx'
 import NewCharacterPopup from './generic/newCharacterPopup.jsx'
 import NewQcPopup from './generic/newQcPopup.jsx'
 import NewBattlegroupPopup from './generic/newBattlegroupPopup.jsx'
@@ -68,6 +69,16 @@ export class NavPanel extends React.Component {
         >
           <ListItem primaryText="Home" value="/" />
 
+          { !authenticated &&
+            <LoginForm />
+          }
+
+          { !authenticated &&
+            <ListItem primaryText="Create an Account"
+              value="/signup"
+            />
+          }
+
           { authenticated &&
             <ListItem primaryText="Characters"
               primaryTogglesNestedList={ true }
@@ -107,7 +118,7 @@ export class NavPanel extends React.Component {
 }
 NavPanel.propTypes = {
   authenticated: PropTypes.bool,
-  id: PropTypes.number,
+  id: PropTypes.string,
   player: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
   characters: PropTypes.arrayOf(PropTypes.shape(fullChar)),
   qcs: PropTypes.arrayOf(PropTypes.shape(fullQc)),

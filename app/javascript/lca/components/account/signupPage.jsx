@@ -68,7 +68,7 @@ class SignupPage extends React.Component {
     }
 
     return <div className="page">
-      <h1>sign up page</h1>
+      <h1>Create an account</h1>
       <div>
         <TextField name="username"
           floatingLabelText="User Name"

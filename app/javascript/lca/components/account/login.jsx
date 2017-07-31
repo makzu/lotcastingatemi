@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
+import { ListItem } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
 import { loginAndFetch } from '../../ducks/actions.js'
@@ -61,7 +62,7 @@ class LoginForm extends React.Component {
       />
     ]
     return <span>
-      <FlatButton label="Log in" style={{ color: 'white' }} onClick={ handleOpen } />
+      <ListItem primaryText="Log in" onClick={ handleOpen } />
       <Dialog
         title="Log in"
         actions={ actions }

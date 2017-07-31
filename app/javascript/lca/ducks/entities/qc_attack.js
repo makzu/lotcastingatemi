@@ -29,11 +29,11 @@ export default function reducer(state, action) {
   }
 }
 
-export function createQcAttack(qcId) {
-  let attack = { qc_attack: { qc_id: qcId }}
+export function createQcAttack(qcId, qcType) {
+  let attack = { qc_attack: { qc_attackable_id: qcId, qc_attackable_type: qcType }}
 
   return callApi({
-    endpoint: `/api/v1/qcs/${qcId}/qc_attacks`,
+    endpoint: `/api/v1/${qcType.toLowerCase()}s/${qcId}/qc_attacks`,
     method: 'POST',
     body: JSON.stringify(attack),
     types: [QCA_CREATE, QCA_CREATE_SUCCESS, QCA_CREATE_FAILURE]
@@ -44,7 +44,7 @@ export function updateQcAttack(id, qcId, qcType, trait, value) {
   let attack = { qc_attack: { [trait]: value }}
 
   return callApi({
-    endpoint: `/api/v1/${qcType}s/${qcId}/qc_attacks/${id}`,
+    endpoint: `/api/v1/${qcType.toLowerCase()}s/${qcId}/qc_attacks/${id}`,
     method: 'PATCH',
     body: JSON.stringify(attack),
     types: [
@@ -55,13 +55,13 @@ export function updateQcAttack(id, qcId, qcType, trait, value) {
   })
 }
 
-export function destroyQcAttack(id, qcId) {
+export function destroyQcAttack(id, qcId, qcType) {
   return callApi({
-    endpoint: `/api/v1/qcs/${qcId}/qc_attacks/${id}`,
+    endpoint: `/api/v1/${qcType.toLowerCase()}s/${qcId}/qc_attacks/${id}`,
     method: 'DELETE',
     types: [
       QCA_DESTROY,
-      { type: QCA_DESTROY_SUCCESS, meta: { id: id, qcId: qcId }},
+      { type: QCA_DESTROY_SUCCESS, meta: { id: id, qcId: qcId, qcType: qcType }},
       QCA_DESTROY_FAILURE
     ]
   })
@@ -69,27 +69,29 @@ export function destroyQcAttack(id, qcId) {
 
 function _create_qc_attack(state, action) {
   const id = action.payload.id
-  const qcId = action.payload.qc_id
+  const qcId = action.payload.qc_attackable_id
+  const qcType = action.payload.qc_attackable_type.toLowerCase() + 's'
 
-  const qc = { ...state.qcs[qcId] }
-  qc.qc_attacks.push(id)
+  const char = { ...state[qcType][qcId] }
+  char.qc_attacks.push(id)
 
   return { ...state,
     qc_attacks: { ...state.qc_attacks, [id]: action.payload },
-    qcs: { ...state.qcs, [qcId]: qc }
+    [qcType]: { ...state[qcType], [qcId]: char }
   }
 }
 
 function _destroy_qc_attack(state, action) {
   const id = action.meta.id
   const qcId = action.meta.qcId
+  const qcType = action.meta.qcType.toLowerCase() + 's'
 
   const newAttacks = { ...state.qc_attacks }
 
   delete newAttacks[id]
 
-  const char = { ...state.qcs[qcId] }
+  const char = { ...state[qcType][qcId] }
   char.qc_attacks = char.qc_attacks.filter((e) => e != id)
 
-  return { ...state, qc_attacks: newAttacks, qcs: { ...state.qcs, [qcId]: char }}
+  return { ...state, qc_attacks: newAttacks, [qcType]: { ...state[qcType], [qcId]: char }}
 }

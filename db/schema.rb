@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730072638) do
+ActiveRecord::Schema.define(version: 20170731185623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 20170730072638) do
     t.string "range", default: "close"
     t.integer "damage", default: 1
     t.integer "overwhelming", default: 1
-    t.string "tags", array: true
+    t.string "tags", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "qc_attackable_type"
@@ -292,7 +292,7 @@ ActiveRecord::Schema.define(version: 20170730072638) do
   create_table "spells", force: :cascade do |t|
     t.bigint "character_id"
     t.string "name", default: "New Spell"
-    t.string "cost", default: "0sm"
+    t.string "cost", default: "0sm, 1wp"
     t.string "circle", default: "emerald"
     t.string "keywords", default: [], array: true
     t.string "duration", default: "instant"

@@ -6,6 +6,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
 import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 
@@ -13,6 +15,7 @@ import ExpandableListEditor from '../generic/expandableListEditor.jsx'
 
 import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack, createQcMerit, destroyQcMerit, updateQcMerit } from '../../ducks/actions.js'
 
+import { clamp } from '../../utils/'
 import * as c from '../../utils/constants.js'
 import { fullQc, qcAttack, qcMerit } from '../../utils/propTypes'
 
@@ -20,6 +23,7 @@ class QcAttackFields extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
+    this.handleRangeChange = this.handleRangeChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
@@ -37,11 +41,15 @@ class QcAttackFields extends React.Component {
     e.preventDefault()
     let val = e.target.value
     if (e.target.type == 'number') {
-      val = parseInt(val)
-      val = (val < 1) ? 1 : val
+      val = clamp(parseInt(val), 1, Infinity)
     }
 
     this.setState({ attack: { ...this.state.attack, [e.target.name]: val }})
+  }
+
+  handleRangeChange(e, index, value) {
+    this.setState({ attack: { ...this.state.attack, range: value }})
+    this.props.onAttackChange(this.state.attack.id, 'range', value)
   }
 
   handleBlur(e) {
@@ -67,6 +75,20 @@ class QcAttackFields extends React.Component {
         floatingLabelText="Pool:"
         type="number" min={ 1 }
         className="editor-rating-field"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+      />
+      <SelectField name="range" value={ attack.range }
+        floatingLabelText="Range:"
+        onChange={ this.handleRangeChange }
+      >
+        <MenuItem value="close" primaryText="Close" />
+        <MenuItem value="short" primaryText="Short" />
+        <MenuItem value="medium" primaryText="Medium" />
+        <MenuItem value="long" primaryText="Long" />
+        <MenuItem value="extreme" primaryText="Extreme" />
+      </SelectField>
+      <TextField name="tags" value={ attack.tags }
+        floatingLabelText="Tags:"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
       <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
@@ -122,13 +144,15 @@ class QcMeritFields extends React.Component {
         floatingLabelText="Name:"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
-      <TextField name="body" value={ merit.body }
-        floatingLabelText="Text:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-      />
       <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
         <ContentRemoveCircle />
       </IconButton>
+      <br />
+      <TextField name="body" value={ merit.body }
+        floatingLabelText="Text:"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        fullWidth={ true } multiLine={ true }
+      />
     </div>
   }
 }
@@ -410,13 +434,13 @@ function mapDispatchToProps(dispatch) {
       dispatch(updateQc(id, trait, value))
     },
     updateQcAttack: (id, qcId, trait, value) => {
-      dispatch(updateQcAttack(id, qcId, 'qc', trait, value))
+      dispatch(updateQcAttack(id, qcId, 'Qc', trait, value))
     },
     addQcAttack: (qcId) => {
-      dispatch(createQcAttack(qcId))
+      dispatch(createQcAttack(qcId, 'Qc'))
     },
     removeQcAttack: (id, qcId) => {
-      dispatch(destroyQcAttack(id, qcId))
+      dispatch(destroyQcAttack(id, qcId, 'Qc'))
     },
     updateQcMerit: (id, qcId, trait, value) => {
       dispatch(updateQcMerit(id, qcId, trait, value))

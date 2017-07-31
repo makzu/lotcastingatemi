@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :player, aliases: [:st] do
-    name 'test player'
+    display_name 'test player'
+    sequence(:username, 100) { |n| "test#{n}" }
     sequence(:email, 100) { |n| "test#{n}@example.com" }
     password 'password'
   end

@@ -209,16 +209,10 @@ class QcEditorPopup extends React.Component {
     let val
 
     if (e.target.type == 'number') {
-      val = parseInt(e.target.value)
       if (e.target.name == 'essence') {
-        if (val > c.ESSENCE_MAX) {
-          val = c.ESSENCE_MAX
-        } else if (val < c.ESSENCE_MIN) {
-          val = c.ESSENCE_MIN
-        }
+        val = clamp(parseInt(e.target.value), c.ESSENCE_MIN, c.ESSENCE_MAX)
       } else {
-        if (val < 1)
-          val = 1
+        val = clamp(parseInt(e.target.value), 1, Infinity)
       }
     } else
       val = e.target.value

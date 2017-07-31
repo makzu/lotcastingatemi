@@ -2,12 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import FlatButton from 'material-ui/FlatButton'
-
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import QcEditorPopup from './qcEditorPopup.jsx'
 
-import { fetchQc, updateQc } from '../../ducks/actions.js'
 import { fullQc, withMotePool, qcMerit, qcAttack } from '../../utils/propTypes'
 
 function MotePool(props){
@@ -43,12 +40,14 @@ class QcSheet extends React.PureComponent {
     }
 
     const actions = qc.actions.map((action, index) =>
-      <span key={index}>{action.action}: {action.pool} </span>
+      <span key={index}>, {action.action}: {action.pool}</span>
     )
     const attacks = qc_attacks.map((attack) =>
       <div key={attack.id}>
         {attack.name}: {attack.pool} dice
         ({attack.damage} damage{ attack.overwhelming > 1 && <span>, minimum {attack.overwhelming}</span>})
+        , { attack.range } range
+        { attack.tags.length > 0 && <span>, tags: {attack.tags.join(', ')}</span>}
       </div>
     )
     const merits = qc_merits.map((merit) =>
@@ -87,7 +86,7 @@ class QcSheet extends React.PureComponent {
         <strong>Evasion:</strong> { qc.evasion }<br />
         <strong>Attacks:</strong>
         { qc.grapple > 0 &&
-          <span>Grapple: { qc.grapple } ({ qc.grapple_control} dice to control)</span>
+          <div>Grapple: { qc.grapple } ({ qc.grapple_control} dice to control)</div>
         }
         { attacks }
       </div>
@@ -95,8 +94,8 @@ class QcSheet extends React.PureComponent {
         <strong>Resolve:</strong> { qc.resolve }, {' '}
         <strong>Guile:</strong> { qc.guile }, {' '}
         <strong>Appearance:</strong> { qc.appearance }<br />
-        <strong>Actions:</strong>
-        Senses: { qc.senses }, {' '}
+        <strong>Actions: </strong>
+        Senses: { qc.senses }
         { actions }
       </div>
 
@@ -149,22 +148,8 @@ QcSheet.propTypes = {
   qc_charms: PropTypes.arrayOf(PropTypes.object),
   qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
   battlegroups: PropTypes.arrayOf(PropTypes.object),
-  updateQc: PropTypes.func,
-  fetchQc: PropTypes.func
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchQc: (id) => {
-      dispatch(fetchQc(id))
-    },
-    updateQc: (id, trait, value) => {
-      dispatch(updateQc(id, trait, value))
-    }
-  }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(QcSheet)

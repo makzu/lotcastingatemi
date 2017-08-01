@@ -1,28 +1,34 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ChroniclePolicy do
+  subject { described_class.new(player, chronicle) }
 
-  let(:user) { User.new }
+  let(:st) { FactoryGirl.create(:player) }
+  let(:other_player) { FactoryGirl.create(:player) }
+  let(:chronicle) { FactoryGirl.create(:chronicle, st: st, players: [other_player]) }
 
-  subject { described_class }
+  context 'for the ST' do
+    let(:player) { st }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it { is_expected.to permit_actions(%i[update show destroy]) }
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'for another player in a chronicle' do
+    let(:player) { other_player }
+
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_actions(%i[update destroy]) }
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'a user that has nothing to do with the chronicle' do
+    let(:player) { FactoryGirl.create(:player) }
+    it { is_expected.to forbid_actions(%i[update show destroy]) }
   end
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'a user that is not logged in' do
+    let(:player) { nil }
+    it { is_expected.to forbid_actions(%i[update show destroy]) }
   end
 end

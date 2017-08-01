@@ -28,7 +28,7 @@ AbilitySelect.propTypes = {
   abilities: PropTypes.arrayOf(PropTypes.object),
   multiple: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOf([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
   floatingLabelText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }

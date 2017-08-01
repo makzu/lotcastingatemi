@@ -42,6 +42,8 @@ class QcAttackFields extends React.Component {
     let val = e.target.value
     if (e.target.type == 'number') {
       val = clamp(parseInt(val), 1, Infinity)
+    } else if (e.target.name == 'tags') {
+      val = val.split(',')
     }
 
     this.setState({ attack: { ...this.state.attack, [e.target.name]: val }})
@@ -77,6 +79,16 @@ class QcAttackFields extends React.Component {
         className="editor-rating-field"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
+      <TextField name="damage" value={ attack.damage }
+        floatingLabelText="Damage:"
+        type="number" min={ 1 }
+        className="editor-rating-field"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+      />
+      <TextField name="tags" value={ attack.tags }
+        floatingLabelText="Tags:"
+        onChange={ this.handleChange } onBlur={ this.handleBlur }
+      />
       <SelectField name="range" value={ attack.range }
         floatingLabelText="Range:"
         onChange={ this.handleRangeChange }
@@ -87,10 +99,7 @@ class QcAttackFields extends React.Component {
         <MenuItem value="long" primaryText="Long" />
         <MenuItem value="extreme" primaryText="Extreme" />
       </SelectField>
-      <TextField name="tags" value={ attack.tags }
-        floatingLabelText="Tags:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-      />
+
       <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
         <ContentRemoveCircle />
       </IconButton>

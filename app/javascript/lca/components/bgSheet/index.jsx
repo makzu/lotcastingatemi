@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import BgEditorPopup from './bgEditorPopup.jsx'
 import { qcAttack } from '../../utils/propTypes'
 import * as calc from '../../utils/calculated'
 
@@ -28,7 +29,7 @@ class BgSheet extends React.PureComponent {
     )
 
     return(<div className="qcSheet">
-      <h1>{ battlegroup.name }</h1>
+      <h1>{ battlegroup.name } <BgEditorPopup battlegroup={ battlegroup } attacks={ qc_attacks } /></h1>
 
       <div>
         <strong>Size:</strong> { battlegroup.size },

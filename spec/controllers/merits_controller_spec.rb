@@ -9,9 +9,9 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
   end
 
   before(:each) do
-    @player = FactoryGirl.create(:player)
-    @character = FactoryGirl.create(:character, player_id: @player.id)
-    @merit = FactoryGirl.create(:merit, character_id: @character.id)
+    @player = FactoryBot.create(:player)
+    @character = FactoryBot.create(:character, player_id: @player.id)
+    @merit = FactoryBot.create(:merit, character_id: @character.id)
   end
 
   describe 'GET #show' do
@@ -29,7 +29,7 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
     context 'With valid attributes' do
       it 'Increases merit count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @merit_params = FactoryGirl.attributes_for(:merit, character_id: @character.id)
+        @merit_params = FactoryBot.attributes_for(:merit, character_id: @character.id)
 
         expect { post :create, params: { character_id: @character.id, merit: @merit_params }, format: :json }.to change(Merit, :count).by(1)
       end
@@ -38,7 +38,7 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
     context 'With invalid attributes' do
       it 'Increases merit count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_merit_params = FactoryGirl.attributes_for(:merit, rating: 9)
+        @invalid_merit_params = FactoryBot.attributes_for(:merit, rating: 9)
 
         expect { post :create, params: { character_id: @character.id, merit: @invalid_merit_params }, format: :json }.to change(Merit, :count).by(0)
       end
@@ -61,7 +61,7 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
     context 'With valid attributes' do
       it 'Updates merit attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @updated_merit_params = FactoryGirl.attributes_for(:merit, character_id: @character.id, merit_cat: 'innate')
+        @updated_merit_params = FactoryBot.attributes_for(:merit, character_id: @character.id, merit_cat: 'innate')
 
         expect(@merit.merit_cat).to eq('story')
 
@@ -75,7 +75,7 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
     context 'With invalid attributes' do
       it 'Updates merit attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_updated_merit_params = FactoryGirl.attributes_for(:merit, character_id: @character.id, merit_cat: 'Invalid merit_cat')
+        @invalid_updated_merit_params = FactoryBot.attributes_for(:merit, character_id: @character.id, merit_cat: 'Invalid merit_cat')
 
         expect(@merit.merit_cat).to eq('story')
 

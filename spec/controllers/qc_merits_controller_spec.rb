@@ -9,9 +9,9 @@ RSpec.describe Api::V1::QcMeritsController, type: :controller do
   end
 
   before(:each) do
-    @player = FactoryGirl.create(:player)
-    @qc = FactoryGirl.create(:qc, player_id: @player.id)
-    @qc_merit = FactoryGirl.create(:qc_merit, qc_id: @qc.id)
+    @player = FactoryBot.create(:player)
+    @qc = FactoryBot.create(:qc, player_id: @player.id)
+    @qc_merit = FactoryBot.create(:qc_merit, qc_id: @qc.id)
   end
 
   describe 'GET #show' do
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::QcMeritsController, type: :controller do
     context 'With valid attributes' do
       it 'Increases merit count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @qc_merit_params = FactoryGirl.attributes_for(:qc_merit, qc_id: @qc.id)
+        @qc_merit_params = FactoryBot.attributes_for(:qc_merit, qc_id: @qc.id)
 
         expect { post :create, params: { qc_id: @qc.id, qc_merit: @qc_merit_params }, format: :json }.to change(QcMerit, :count).by(1)
       end
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::QcMeritsController, type: :controller do
     # context 'With invalid attributes' do
     #   it 'Increases merit count by 0' do
     #     request.headers['Authorization'] = authenticated_header(@player)
-    #     @invalid_merit_params = FactoryGirl.attributes_for(:qc_merit, qc_id: 'Attribute')
+    #     @invalid_merit_params = FactoryBot.attributes_for(:qc_merit, qc_id: 'Attribute')
 
     #     expect { post :create, params: { qc_id: @qc.id, qc_merit: @invalid_merit_params }, format: :json }.to change(QcMerit, :count).by(0)
     #   end
@@ -60,7 +60,7 @@ RSpec.describe Api::V1::QcMeritsController, type: :controller do
   describe 'PATCH #update' do
     it 'Updates merit attributes' do
       request.headers['Authorization'] = authenticated_header(@player)
-      @updated_merit_params = FactoryGirl.attributes_for(:qc_merit, qc_id: @qc.id, name: 'test1')
+      @updated_merit_params = FactoryBot.attributes_for(:qc_merit, qc_id: @qc.id, name: 'test1')
 
       expect(@qc_merit.name).not_to eq('test1')
 

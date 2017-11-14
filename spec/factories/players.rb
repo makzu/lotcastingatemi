@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :player, aliases: [:st] do
     display_name 'test player'
     sequence(:username, 100) { |n| "test#{n}" }

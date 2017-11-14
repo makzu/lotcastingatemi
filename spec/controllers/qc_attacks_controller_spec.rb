@@ -9,9 +9,9 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
   end
 
   before(:each) do
-    @player = FactoryGirl.create(:player)
-    @qc = FactoryGirl.create(:qc, player_id: @player.id)
-    @qc_attack = FactoryGirl.create(:qc_attack, qc_attackable: @qc)
+    @player = FactoryBot.create(:player)
+    @qc = FactoryBot.create(:qc, player_id: @player.id)
+    @qc_attack = FactoryBot.create(:qc_attack, qc_attackable: @qc)
   end
 
   describe 'GET #show' do
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
     context 'With valid attributes' do
       it 'Increases attack count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @qc_attack_params = FactoryGirl.attributes_for(:qc_attack, qc_attackable_id: @qc.id)
+        @qc_attack_params = FactoryBot.attributes_for(:qc_attack, qc_attackable_id: @qc.id)
 
         expect { post :create, params: { qc_id: @qc.id, qc_attack: @qc_attack_params }, format: :json }.to change(QcAttack, :count).by(1)
       end
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
     context 'With invalid attributes' do
       it 'Increases attack count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_attack_params = FactoryGirl.attributes_for(:qc_attack, pool: -1)
+        @invalid_attack_params = FactoryBot.attributes_for(:qc_attack, pool: -1)
 
         expect { post :create, params: { qc_id: @qc.id, qc_attack: @invalid_attack_params }, format: :json }.to change(QcAttack, :count).by(0)
       end
@@ -60,7 +60,7 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
   describe 'PATCH #update' do
     it 'Updates attack attributes' do
       request.headers['Authorization'] = authenticated_header(@player)
-      @updated_attack_params = FactoryGirl.attributes_for(:qc_attack, qc_attackable_id: @qc.id, name: 'test1')
+      @updated_attack_params = FactoryBot.attributes_for(:qc_attack, qc_attackable_id: @qc.id, name: 'test1')
 
       expect(@qc_attack.name).not_to eq('test1')
 

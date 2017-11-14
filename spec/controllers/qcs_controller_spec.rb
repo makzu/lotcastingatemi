@@ -10,8 +10,8 @@ RSpec.describe Api::V1::QcsController, type: :controller do
   end
 
   before(:each) do
-    @player = FactoryGirl.create(:player)
-    @qc = FactoryGirl.create(:qc, player_id: @player.id)
+    @player = FactoryBot.create(:player)
+    @qc = FactoryBot.create(:qc, player_id: @player.id)
   end
 
   describe 'GET #show' do
@@ -28,8 +28,8 @@ RSpec.describe Api::V1::QcsController, type: :controller do
     context 'With valid attributes' do
       it 'Increases qc count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryGirl.create(:chronicle)
-        @qc_params = FactoryGirl.attributes_for(:qc, chronicle_id: @chronicle.id, player_id: @player.id)
+        @chronicle = FactoryBot.create(:chronicle)
+        @qc_params = FactoryBot.attributes_for(:qc, chronicle_id: @chronicle.id, player_id: @player.id)
 
         expect { post :create, params: { qc: @qc_params }, format: :json }.to change(Qc, :count).by(1)
       end
@@ -38,8 +38,8 @@ RSpec.describe Api::V1::QcsController, type: :controller do
     context 'With invalid attributes' do
       it 'Increases qc count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryGirl.create(:chronicle)
-        @invalid_qc_params = FactoryGirl.attributes_for(:qc, essence: 11)
+        @chronicle = FactoryBot.create(:chronicle)
+        @invalid_qc_params = FactoryBot.attributes_for(:qc, essence: 11)
 
         expect { post :create, params: { qc: @invalid_qc_params }, format: :json }.to change(Qc, :count).by(0)
       end
@@ -61,8 +61,8 @@ RSpec.describe Api::V1::QcsController, type: :controller do
     context 'With valid attributes' do
       it 'Updates qc attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryGirl.create(:chronicle)
-        @updated_qc_params = FactoryGirl.attributes_for(:qc, essence: 5)
+        @chronicle = FactoryBot.create(:chronicle)
+        @updated_qc_params = FactoryBot.attributes_for(:qc, essence: 5)
 
         expect(@qc.essence).not_to eq(5)
 
@@ -76,8 +76,8 @@ RSpec.describe Api::V1::QcsController, type: :controller do
     context 'With invalid attributes' do
       it 'Updates qc attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryGirl.create(:chronicle)
-        @invalid_updated_qc_params = FactoryGirl.attributes_for(:qc, essence: -1)
+        @chronicle = FactoryBot.create(:chronicle)
+        @invalid_updated_qc_params = FactoryBot.attributes_for(:qc, essence: -1)
 
         expect(@qc.essence).not_to eq(-1)
 

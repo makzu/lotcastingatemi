@@ -9,9 +9,9 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
   end
 
   before(:each) do
-    @player = FactoryGirl.create(:player)
-    @character = FactoryGirl.create(:character, player_id: @player.id)
-    @weapon = FactoryGirl.create(:weapon, character_id: @character.id)
+    @player = FactoryBot.create(:player)
+    @character = FactoryBot.create(:character, player_id: @player.id)
+    @weapon = FactoryBot.create(:weapon, character_id: @character.id)
   end
 
   describe 'GET #show' do
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
     context 'With valid attributes' do
       it 'Increases Weapon count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id)
+        @weapon_params = FactoryBot.attributes_for(:weapon, character_id: @character.id)
 
         expect { post :create, params: { character_id: @character.id, weapon: @weapon_params }, format: :json }.to change(Weapon, :count).by(1)
       end
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
     context 'With invalid attributes' do
       it 'Increases Weapon count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_weapon_params = FactoryGirl.attributes_for(:weapon, weight: 'extra heavy')
+        @invalid_weapon_params = FactoryBot.attributes_for(:weapon, weight: 'extra heavy')
 
         expect { post :create, params: { character_id: @character.id, weapon: @invalid_weapon_params }, format: :json }.to change(Weapon, :count).by(0)
       end
@@ -63,7 +63,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
       it 'Updates weapon attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
 
-        @updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: 'heavy')
+        @updated_weapon_params = FactoryBot.attributes_for(:weapon, character_id: @character.id, weight: 'heavy')
 
         expect(@weapon.weight).to eq('light')
 
@@ -77,7 +77,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
     context 'With invalid attributes' do
       it 'Updates weapon attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @invalid_updated_weapon_params = FactoryGirl.attributes_for(:weapon, character_id: @character.id, weight: 'Invalid Weight')
+        @invalid_updated_weapon_params = FactoryBot.attributes_for(:weapon, character_id: @character.id, weight: 'Invalid Weight')
 
         expect(@weapon.weight).to eq('light')
 

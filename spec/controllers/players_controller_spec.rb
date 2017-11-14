@@ -9,7 +9,7 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
   end
 
   before(:each) do
-    @player = FactoryGirl.create(:player)
+    @player = FactoryBot.create(:player)
   end
 
   describe 'GET #show' do

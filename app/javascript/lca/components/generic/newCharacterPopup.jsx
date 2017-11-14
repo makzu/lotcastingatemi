@@ -51,18 +51,18 @@ class NewCharacterPopup extends React.Component {
         key="close"
         label="Cancel"
         primary={ true }
-        onTouchTap={ handleClose }
+        onClick={ handleClose }
       />,
       <FlatButton
         key="save"
         label="Create"
-        onTouchTap={ handleSubmit }
+        onClick={ handleSubmit }
       />
     ]
     return <div>
       <ListItem primaryText="New Character"
         rightIcon={ <ActionNoteAdd /> }
-        onTouchTap={ handleOpen }
+        onClick={ handleOpen }
       />
       <Dialog title="Create new character"
         open={ this.state.open }

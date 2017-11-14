@@ -50,18 +50,18 @@ class NewQcPopup extends React.Component {
         key="close"
         label="Cancel"
         primary={ true }
-        onTouchTap={ handleClose }
+        onClick={ handleClose }
       />,
       <FlatButton
         key="save"
         label="Create"
-        onTouchTap={ handleSubmit }
+        onClick={ handleSubmit }
       />
     ]
     return <div>
       <ListItem primaryText="New QC"
         rightIcon={ <ActionNoteAdd /> }
-        onTouchTap={ handleOpen }
+        onClick={ handleOpen }
       />
       <Dialog title="Create new QC"
         open={ this.state.open }

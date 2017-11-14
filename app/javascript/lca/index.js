@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 require('react-hot-loader/patch')
-import injectTapEventPlugin from 'react-tap-event-plugin'
-injectTapEventPlugin()
 
 import React from 'react'
 import ReactDOM from 'react-dom'

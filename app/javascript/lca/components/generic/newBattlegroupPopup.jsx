@@ -50,18 +50,18 @@ class NewBattlegroupPopup extends React.Component {
         key="close"
         label="Cancel"
         primary={ true }
-        onTouchTap={ handleClose }
+        onClick={ handleClose }
       />,
       <FlatButton
         key="save"
         label="Create"
-        onTouchTap={ handleSubmit }
+        onClick={ handleSubmit }
       />
     ]
     return <div>
       <ListItem primaryText="New Battlegroup"
         rightIcon={ <ActionNoteAdd /> }
-        onTouchTap={ handleOpen }
+        onClick={ handleOpen }
       />
       <Dialog title="Create new battlegroup"
         open={ this.state.open }

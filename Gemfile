@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Rails 5.1 for Webpacker
 gem 'rails', '~> 5.1.2'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '~> 2.0'
+gem 'webpacker', '~> 3.0'
 
 # Use postgres as the database for Active Record
 gem 'pg'
@@ -50,7 +50,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'capybara', '~> 2.14.0'
+  gem 'capybara', '~> 2.16.0'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
@@ -68,7 +68,7 @@ group :development do
 end
 
 group :test do
-  gem 'pundit-matchers', '~> 1.3.0'
+  gem 'pundit-matchers', '~> 1.4.1'
   gem 'simplecov', require: false
 end
 

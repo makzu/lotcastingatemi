@@ -57,7 +57,7 @@ export class ExaltEditorPopup extends React.Component {
         key="close"
         label="Close"
         primary={ true }
-        onTouchTap={ handleClose }
+        onClick={ handleClose }
       />
     ]
 

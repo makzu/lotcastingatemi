@@ -52,13 +52,13 @@ class LoginForm extends React.Component {
       <FlatButton
         key="login"
         label="Log In"
-        onTouchTap={ onSubmit }
+        onClick={ onSubmit }
       />,
       <FlatButton
         key="close"
         label="Close"
         primary={ true }
-        onTouchTap={ handleClose }
+        onClick={ handleClose }
       />
     ]
     return <span>

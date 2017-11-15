@@ -45,6 +45,7 @@ render(RootContainer)
 
 if (module.hot) {
   module.hot.accept('./containers/rootContainer.jsx', () => {
-    render(RootContainer)
+    const NextRoot = require('./containers/rootContainer.jsx').default
+    render(NextRoot)
   })
 }

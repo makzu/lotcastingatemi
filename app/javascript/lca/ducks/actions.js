@@ -11,7 +11,7 @@ export {
   fetchCurrentPlayer
 } from './entities'
 
-export { login, loginAndFetch, logout, signup } from './account.js'
+export { logout } from './account.js'
 
 import { fetchCurrentPlayer, fetchChronicle } from './entities'
 

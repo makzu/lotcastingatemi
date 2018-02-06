@@ -8,7 +8,6 @@ import { List, ListItem, makeSelectable } from 'material-ui/List'
 import { ResponsiveDrawer } from 'material-ui-responsive-drawer'
 import styled from 'styled-components'
 
-import LoginForm from './account/login.jsx'
 import NewCharacterPopup from './generic/newCharacterPopup.jsx'
 import NewQcPopup from './generic/newQcPopup.jsx'
 import NewBattlegroupPopup from './generic/newBattlegroupPopup.jsx'
@@ -70,12 +69,8 @@ export class NavPanel extends React.Component {
           <ListItem primaryText="Home" value="/" />
 
           { !authenticated &&
-            <LoginForm />
-          }
-
-          { !authenticated &&
-            <ListItem primaryText="Create an Account"
-              value="/signup"
+            <ListItem primaryText="Log in with Google"
+              href="/auth/google_oauth2"
             />
           }
 
@@ -99,10 +94,6 @@ export class NavPanel extends React.Component {
               nestedItems={ bgListItems }
             />
           }
-
-          <ListItem primaryText="Log in with Google"
-            href="/auth/google_oauth2"
-          />
 
           <Divider />
           <ListItem primaryText="Resources"

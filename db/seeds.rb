@@ -4,17 +4,13 @@ puts 'Reloading example players'
 player1 = Player.find_or_initialize_by(id: 1)
 player1.update(
   display_name: 'Example ST',
-  username: 'exampleST',
-  email: 'solarShard179@IAM.net',
-  password: 'praisethesun'
+  email: 'solarShard179@IAM.net'
 )
 
 player2 = Player.find_or_initialize_by(id: 2)
 player2.update(
   display_name: 'Example Player',
-  username: 'examplePlayer',
-  email: 'solarShard259@IAM.net',
-  password: 'password'
+  email: 'solarShard259@IAM.net'
 )
 
 puts 'Reloading example chronicle'

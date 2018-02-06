@@ -2,7 +2,7 @@
 
 # app/serializers/player_serializer.rb
 class PlayerSerializer < ActiveModel::Serializer
-  attributes :id, :username, :display_name
+  attributes :id, :display_name
 
   has_many :characters
   has_many :qcs

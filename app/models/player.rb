@@ -3,6 +3,7 @@
 # User account.
 class Player < ApplicationRecord
   has_secure_password
+  has_many :identities, dependent: :destroy
 
   has_many :own_chronicles, class_name: 'Chronicle', foreign_key: 'st_id', dependent: :destroy
   has_many :characters,   dependent: :destroy
@@ -22,5 +23,19 @@ class Player < ApplicationRecord
   def self.from_token_request(request)
     name = request.params['auth'] && request.params['auth']['username']
     Player.find_by(username: name)
+  end
+
+  def token
+    Knock::AuthToken.new(payload: { sub: id }).token
+  end
+
+  def self.create_from_oauth(auth)
+    create(
+      display_name: auth['info']['name'],
+      email: auth['info']['email'],
+      username: auth['info']['email'],
+      password: auth['uid'],
+      password_confirmation: auth['uid']
+    )
   end
 end

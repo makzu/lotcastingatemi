@@ -38,6 +38,8 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'knock'
 gem 'pundit'
 
+gem 'omniauth-google-oauth2'
+
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'
 gem 'email_validator'

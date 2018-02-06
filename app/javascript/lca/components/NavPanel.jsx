@@ -100,6 +100,10 @@ export class NavPanel extends React.Component {
             />
           }
 
+          <ListItem primaryText="Log in with Google"
+            href="/auth/google_oauth2"
+          />
+
           <Divider />
           <ListItem primaryText="Resources"
             disabled={ true }

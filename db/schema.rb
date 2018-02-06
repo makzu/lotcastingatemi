@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731185623) do
+ActiveRecord::Schema.define(version: 20180205215046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,21 @@ ActiveRecord::Schema.define(version: 20170731185623) do
     t.index ["st_id"], name: "index_chronicles_on_st_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.string "provider"
+    t.string "name"
+    t.string "email"
+    t.string "image"
+    t.string "uid"
+    t.bigint "player_id"
+    t.string "token"
+    t.string "refresh_token"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_identities_on_player_id"
+  end
+
   create_table "merits", id: :serial, force: :cascade do |t|
     t.integer "character_id"
     t.integer "rating", default: 1
@@ -322,6 +337,7 @@ ActiveRecord::Schema.define(version: 20170731185623) do
   add_foreign_key "charms", "characters"
   add_foreign_key "chronicle_players", "chronicles"
   add_foreign_key "chronicle_players", "players"
+  add_foreign_key "identities", "players"
   add_foreign_key "merits", "characters"
   add_foreign_key "qc_attacks", "qcs", column: "qc_attackable_id"
   add_foreign_key "qc_charms", "qcs"

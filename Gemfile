@@ -3,12 +3,12 @@
 source 'https://rubygems.org'
 
 # Rails 5.1 for Webpacker
-gem 'rails', '~> 5.1.2'
+gem 'rails', '~> 5.1.5'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '~> 3.0'
+gem 'webpacker', '~> 3.2'
 
 # Use postgres as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Typography from 'material-ui/Typography'
 
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
-import QcEditorPopup from './qcEditorPopup.jsx'
 
 import { fullQc, withMotePool, qcMerit, qcAttack } from '../../utils/propTypes'
 
@@ -66,17 +66,22 @@ class QcSheet extends React.PureComponent {
       </div>
     )
 
-    return(<div className="qcSheet">
-      <h1>{ qc.name } <QcEditorPopup qc={ qc } attacks={ qc_attacks } merits={ qc_merits } /></h1>
+    return(<div>
 
-      <div>
+      <Typography variant="headline" gutterBottom>
+        { qc.name }
+      </Typography>
+
+      <Typography component="div">
         <strong>Essence:</strong> { qc.essence }, {' '}
-        <strong>Willpower</strong> { qc.willpower_temporary } / { qc.willpower_permanent }<br />
+        <strong>Willpower</strong> { qc.willpower_temporary }/{ qc.willpower_permanent }, {' '}
+        <strong>Join Battle:</strong> { qc.join_battle } dice
+        <br />
         <MotePool qc={ qc } />
         <HealthLevelBoxes character={ qc } />
-      </div>
-      <div>
-        <strong>Join Battle:</strong> { qc.join_battle } dice, {' '}
+      </Typography>
+
+      <Typography component="div">
         <strong>Combat Movement:</strong> { qc.movement } dice, {' '}
         <strong>Soak:</strong> { qc.soak } ({ qc.armor_name || 'unarmored' }), {' '}
         {qc.hardness > 0 &&
@@ -89,25 +94,26 @@ class QcSheet extends React.PureComponent {
           <div>Grapple: { qc.grapple } ({ qc.grapple_control} dice to control)</div>
         }
         { attacks }
-      </div>
-      <div>
+      </Typography>
+
+      <Typography component="div">
         <strong>Resolve:</strong> { qc.resolve }, {' '}
         <strong>Guile:</strong> { qc.guile }, {' '}
         <strong>Appearance:</strong> { qc.appearance }<br />
         <strong>Actions: </strong>
         Senses: { qc.senses }
         { actions }
-      </div>
+      </Typography>
 
-      <div>
+      <Typography component="div">
         <h4 style={{ marginBottom: '0.25em' }}>Merits:</h4>
         { merits }
-      </div>
+      </Typography>
 
-      { charms.length > 0 && <div>
+      { charms.length > 0 && <Typography component="div">
         <h4 style={{ marginBottom: '0.25em' }}>Charms:</h4>
         { charms }
-      </div> }
+      </Typography> }
 
     </div>)
   }

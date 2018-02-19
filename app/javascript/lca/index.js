@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { responsiveStoreEnhancer } from 'redux-responsive'
 import thunk from 'redux-thunk'
 import { apiMiddleware } from 'redux-api-middleware'
 
@@ -20,7 +19,6 @@ import RootContainer from './containers/rootContainer.jsx'
 const makeEnhancer = (process.env.NODE_ENV === 'production') ? compose : composeWithDevTools
 
 const enhancer = makeEnhancer(
-  responsiveStoreEnhancer,
   applyMiddleware(thunk, apiMiddleware, authCookieMiddleware)
 )
 

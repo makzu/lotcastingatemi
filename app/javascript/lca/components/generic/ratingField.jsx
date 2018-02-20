@@ -20,7 +20,7 @@ function RatingField(props) {
   return <TextField className={ classes.field }
     type="number" inputProps={{ min: min, max: max }}
     name={ trait } label={ label } value={ value }
-    onChange={ onChange }
+    onChange={ onChange } margin={ props.margin || 'none' }
   />
 }
 
@@ -31,6 +31,7 @@ RatingField.propTypes = {
   onChange: PropTypes.func.isRequired,
   min: PropTypes.number,
   max: PropTypes.number,
+  margin: PropTypes.string,
   classes: PropTypes.object.isRequired,
 }
 

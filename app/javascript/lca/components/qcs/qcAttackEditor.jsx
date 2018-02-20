@@ -9,11 +9,14 @@ import ContentAddCircle from 'material-ui-icons/AddCircle'
 import QcAttackFields from './qcAttackFields.jsx'
 
 import { createQcAttack, destroyQcAttack, updateQcAttack } from '../../ducks/actions.js'
-import { fullQc, qcAttack } from '../../utils/propTypes'
+import { qcAttack } from '../../utils/propTypes'
 
 class QcAttackEditor extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      type: this.props.battlegroup ? 'Battlegroup' : 'Qc'
+    }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
@@ -21,15 +24,15 @@ class QcAttackEditor extends React.Component {
   }
 
   handleChange(id, trait, value) {
-    this.props.updateQcAttack(id, this.props.qc.id, trait, value)
+    this.props.updateQcAttack(id, this.props.qc.id, this.state.type, trait, value)
   }
 
   handleAdd() {
-    this.props.addQcAttack(this.props.qc.id)
+    this.props.addQcAttack(this.props.qc.id, this.state.type)
   }
 
   handleRemove(id) {
-    this.props.removeQcAttack(id, this.props.qc.id)
+    this.props.removeQcAttack(id, this.props.qc.id, this.state.type)
   }
   render() {
     const { handleChange, handleAdd, handleRemove } = this
@@ -37,6 +40,7 @@ class QcAttackEditor extends React.Component {
     const qcAttacks = this.props.qc_attacks.map((attack) =>
       <QcAttackFields key={ attack.id } attack={ attack } qc={ this.props.qc }
         onAttackChange={ handleChange } onRemoveClick={ handleRemove }
+        battlegroup={ this.props.battlegroup }
       />
     )
 
@@ -47,15 +51,16 @@ class QcAttackEditor extends React.Component {
 
       { qcAttacks }
 
-      <Button variant="raised" onClick={ handleAdd }>
-        Add Attack
+      <Button onClick={ handleAdd }>
+        Add Attack&nbsp;
         <ContentAddCircle  />
       </Button>
     </div>
   }
 }
 QcAttackEditor.propTypes = {
-  qc: PropTypes.shape(fullQc),
+  qc: PropTypes.object,
+  battlegroup: PropTypes.bool,
   qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
   updateQcAttack: PropTypes.func,
   addQcAttack: PropTypes.func,
@@ -79,14 +84,14 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateQcAttack: (id, qcId, trait, value) => {
-      dispatch(updateQcAttack(id, qcId, 'Qc', trait, value))
+    updateQcAttack: (id, qcId, qcType, trait, value) => {
+      dispatch(updateQcAttack(id, qcId, qcType, trait, value))
     },
-    addQcAttack: (qcId) => {
-      dispatch(createQcAttack(qcId, 'Qc'))
+    addQcAttack: (qcId, qcType) => {
+      dispatch(createQcAttack(qcId, qcType))
     },
-    removeQcAttack: (id, qcId) => {
-      dispatch(destroyQcAttack(id, qcId, 'Qc'))
+    removeQcAttack: (id, qcId, qcType) => {
+      dispatch(destroyQcAttack(id, qcId, qcType))
     },
   }
 }

@@ -34,15 +34,14 @@ class QcSheet extends React.PureComponent {
   }
 
   render() {
-    const { qc, qc_attacks, qc_charms, qc_merits } = this.props
-
     /* Escape hatch */
     if (this.props.qc == undefined) {
       return(<div>
-        <Typography variant="title">QC Editor</Typography>
-        <Typography paragraph>The QC has not yet loaded.</Typography>
+        <Typography paragraph>This QC has not yet loaded.</Typography>
       </div>)
     }
+
+    const { qc, qc_attacks, qc_charms, qc_merits } = this.props
 
     const actions = qc.actions.map((action, index) =>
       <span key={index}>, {action.action}: {action.pool}</span>
@@ -78,7 +77,6 @@ class QcSheet extends React.PureComponent {
     )
 
     return(<div>
-
       <Typography variant="headline" gutterBottom>
         { qc.name }
         <Button component={ Link } to={`/qcs/${qc.id}/edit`}>Edit</Button>

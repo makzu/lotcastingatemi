@@ -7,7 +7,8 @@ import MeritFullPage from './components/characterSheet/MeritFullPage.jsx'
 import CharmFullPage from './components/characterSheet/charmFullPage.jsx'
 import QcSheet from './components/qcs/index.jsx'
 import QcEditor from './components/qcs/editor.jsx'
-import BgSheet from './components/bgSheet/index.jsx'
+import BattlegroupSheet from './components/battlegroups/index.jsx'
+import BattlegroupEditor from './components/battlegroups/editor.jsx'
 import WelcomePage from './components/pages/welcomePage.jsx'
 
 export default function Routes() {
@@ -23,7 +24,8 @@ export default function Routes() {
       <Route exact path="/qcs/:qcId" component={ QcSheet } />
       <Route path="/qcs/:qcId/edit" component={ QcEditor } />
 
-      <Route path="/battlegroups/:bgId" component={ BgSheet } />
+      <Route exact path="/battlegroups/:bgId" component={ BattlegroupSheet } />
+      <Route path="/battlegroups/:battlegroupId/edit" component={ BattlegroupEditor } />
     </div>
   )
 }

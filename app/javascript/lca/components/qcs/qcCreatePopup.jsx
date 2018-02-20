@@ -61,7 +61,7 @@ class QcCreatePopup extends React.Component {
         <DialogTitle>Create New Qc</DialogTitle>
         <DialogContent>
           <TextField name="name" value={ qc.name }
-            label="Name:"
+            label="Name:" margin="normal"
             onChange={ handleChange }
           />
         </DialogContent>

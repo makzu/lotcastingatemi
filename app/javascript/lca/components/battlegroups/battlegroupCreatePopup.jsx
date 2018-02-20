@@ -2,15 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
-import { ListItem } from 'material-ui/List'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
-import ActionNoteAdd from 'material-ui/svg-icons/action/note-add'
 
 import { createBattlegroup } from '../../ducks/actions.js'
 
-class NewBattlegroupPopup extends React.Component {
+// TODO enable creating a battlegroup of a player's existing QC
+class BattlegroupCreatePopup extends React.Component {
   constructor(props) {
     super(props)
 
@@ -32,8 +35,8 @@ class NewBattlegroupPopup extends React.Component {
     this.setState({ open: false })
   }
 
-  handleChange(e, value) {
-    this.setState({ battlegroup: { ...this.state.battlegroup, [e.target.name]: value }})
+  handleChange(e) {
+    this.setState({ battlegroup: { ...this.state.battlegroup, [e.target.name]: e.target.value }})
   }
 
   handleSubmit() {
@@ -45,39 +48,28 @@ class NewBattlegroupPopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { battlegroup } = this.state
 
-    const actions = [
-      <FlatButton
-        key="close"
-        label="Cancel"
-        primary={ true }
-        onClick={ handleClose }
-      />,
-      <FlatButton
-        key="save"
-        label="Create"
-        onClick={ handleSubmit }
-      />
-    ]
-    return <div>
-      <ListItem primaryText="New Battlegroup"
-        rightIcon={ <ActionNoteAdd /> }
-        onClick={ handleOpen }
-      />
-      <Dialog title="Create new battlegroup"
+    return <span>
+      <Button onClick={ handleOpen }>Create New</Button>
+      <Dialog
         open={ this.state.open }
-        actions={ actions }
-        onRequestClose={ handleClose }
+        onClose={ handleClose }
       >
-        <TextField name="name" value={ battlegroup.name }
-          floatingLabelText="Name:"
-          className="editor-name-field"
-          onChange={ handleChange }
-        />
+        <DialogTitle>Create New Battlegroup</DialogTitle>
+        <DialogContent>
+          <TextField name="name" value={ battlegroup.name }
+            label="Name:" margin="normal"
+            onChange={ handleChange }
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={ handleClose }>Cancel</Button>
+          <Button onClick={ handleSubmit } color="primary">Create</Button>
+        </DialogActions>
       </Dialog>
-    </div>
+    </span>
   }
 }
-NewBattlegroupPopup.propTypes = {
+BattlegroupCreatePopup.propTypes = {
   id: PropTypes.number.isRequired,
   createBattlegroup: PropTypes.func.isRequired,
 }
@@ -96,4 +88,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewBattlegroupPopup)
+export default connect(mapStateToProps, mapDispatchToProps)(BattlegroupCreatePopup)

@@ -21,14 +21,12 @@ class Qc < ApplicationRecord
 
   validates :grapple, :grapple_control,
             :hardness,
-            :initiative, :onslaught,
+            :onslaught,
             numericality: { greater_than_or_equal_to: 0 }
 
   validates :resolve, :guile, :appearance,
-            :evasion, :parry, :soak,
-            :movement,
-
-            :senses,
+            :join_battle, :evasion, :parry, :soak,
+            :movement, :senses,
             numericality: { greater_than: 0 }
 
   validates :actions, json: { schema: Schemas::QC_ACTION }

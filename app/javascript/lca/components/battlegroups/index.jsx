@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import BgEditorPopup from './bgEditorPopup.jsx'
+import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
+
 import { qcAttack } from '../../utils/propTypes'
 import * as calc from '../../utils/calculated'
 
-class BgSheet extends React.PureComponent {
+class BattlegroupSheet extends React.PureComponent {
   constructor(props) {
     super(props)
   }
@@ -15,9 +18,8 @@ class BgSheet extends React.PureComponent {
     const { battlegroup, qc_attacks } = this.props
 
     if (battlegroup == undefined) {
-      return(<div className="qcSheet">
-        <h1>Battlegroup Editor</h1>
-        <p>The Battlegroup has not yet loaded.</p>
+      return(<div>
+        <Typography paragraph>This Battlegroup has not yet loaded.</Typography>
       </div>)
     }
 
@@ -28,19 +30,23 @@ class BgSheet extends React.PureComponent {
       </div>
     )
 
-    return(<div className="qcSheet">
-      <h1>{ battlegroup.name } <BgEditorPopup battlegroup={ battlegroup } attacks={ qc_attacks } /></h1>
+    return(<div>
+      <Typography variant="headline" gutterBottom>
+        { battlegroup.name }
+        <Button component={ Link } to={`/battlegroups/${battlegroup.id}/edit`}>Edit</Button>
+      </Typography>
 
-      <div>
+      <Typography component="div">
         <strong>Size:</strong> { battlegroup.size },
         <strong> Drill:</strong> { battlegroup.drill },
         <strong> Might:</strong> { battlegroup.might }
-      </div>
+      </Typography>
 
-      <div>
+      <Typography component="div">
         <strong>Magnitude:</strong> { battlegroup.magnitude_current } / { battlegroup.magnitude }
-      </div>
-      <div>
+      </Typography>
+
+      <Typography component="div">
         <strong>Join Battle:</strong> { battlegroup.join_battle } dice,
         <strong> Combat Movement:</strong> { battlegroup.movement } dice,
         <strong> Soak:</strong> { calc.bgSoak(battlegroup) } {' '}
@@ -48,28 +54,26 @@ class BgSheet extends React.PureComponent {
         { battlegroup.hardness > 0 &&
           <span> <strong>Hardness:</strong> { battlegroup.hardness },</span>
         }
-        <strong> Defense:</strong> { calc.bgDefense(battlegroup) }
-      </div>
-      <div>
+        <strong> Parry:</strong> { battlegroup.parry + calc.bgDefenseBonus(battlegroup) },
+        <strong> Evasion:</strong> { battlegroup.evasion + calc.bgDefenseBonus(battlegroup) }
+      </Typography>
+
+      <Typography component="div">
         <strong>Attacks:</strong>
-        { battlegroup.grapple > 0 &&
-          <div>Grapple: { battlegroup.grapple } ({ battlegroup.grapple_control} dice to control)</div>
-        }
         { attacks }
-      </div>
-      <div>
+      </Typography>
+
+      <Typography component="div">
         <strong>Resolve:</strong> { battlegroup.resolve },
         <strong> Guile:</strong> { battlegroup.guile },
         <strong> Appearance:</strong> { battlegroup.appearance }<br />
-        <strong>Actions: </strong>
-        Senses: { battlegroup.senses }
-      </div>
-
+        <strong>Senses: </strong> { battlegroup.senses }
+      </Typography>
     </div>)
   }
 }
 
-BgSheet.propTypes = {
+BattlegroupSheet.propTypes = {
   id: PropTypes.string,
   battlegroup: PropTypes.object,
   qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
@@ -94,4 +98,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps
-)(BgSheet)
+)(BattlegroupSheet)

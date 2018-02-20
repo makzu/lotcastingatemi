@@ -8,7 +8,7 @@ export function bgDamage(battlegroup, qc_attack) {
   return qc_attack.damage + battlegroup.size + battlegroup.might
 }
 
-export function bgDefense(battlegroup) {
+export function bgDefenseBonus(battlegroup) {
   let bonus = 0
 
   bonus += battlegroup.drill
@@ -18,9 +18,20 @@ export function bgDefense(battlegroup) {
   if (battlegroup.might >= 3)
     bonus += 1
 
-  return Math.max(battlegroup.parry, battlegroup.evasion) + bonus
+  return bonus
 }
 
 export function bgSoak(battlegroup) {
   return battlegroup.soak + battlegroup.size
+}
+
+export function prettyDrillRating(battlegroup) {
+  switch(battlegroup.drill) {
+  case 0:
+    return 'Poor'
+  case 1:
+    return 'Average'
+  case 2:
+    return 'Elite'
+  }
 }

@@ -48,10 +48,10 @@ class QcSheet extends React.PureComponent {
       <span key={index}>, {action.action}: {action.pool}</span>
     )
     const principles = qc.principles.map((p, index) =>
-      <div key={index}>{ p.subject } ({ prettyIntimacyRating(p.rating) })</div>
+      <div key={index}><small>Principle: </small>{ p.subject } ({ prettyIntimacyRating(p.rating) })</div>
     )
     const ties = qc.ties.map((tie, index) =>
-      <div key={index}>{ tie.subject } ({ prettyIntimacyRating(tie.rating) })</div>
+      <div key={index}><small>Tie:</small>{ tie.subject } ({ prettyIntimacyRating(tie.rating) })</div>
     )
     const attacks = qc_attacks.map((attack) =>
       <div key={attack.id}>

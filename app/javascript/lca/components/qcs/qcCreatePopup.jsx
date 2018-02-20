@@ -2,15 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
-import { ListItem } from 'material-ui/List'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
-import ActionNoteAdd from 'material-ui/svg-icons/action/note-add'
 
 import { createQc } from '../../ducks/actions.js'
 
-class NewQcPopup extends React.Component {
+// TODO: Enable autofill for some example QCs?
+class QcCreatePopup extends React.Component {
   constructor(props) {
     super(props)
 
@@ -32,8 +35,8 @@ class NewQcPopup extends React.Component {
     this.setState({ open: false })
   }
 
-  handleChange(e, value) {
-    this.setState({ qc: { ...this.state.qc, [e.target.name]: value }})
+  handleChange(e) {
+    this.setState({ qc: { ...this.state.qc, name: e.target.value }})
   }
 
   handleSubmit() {
@@ -46,38 +49,31 @@ class NewQcPopup extends React.Component {
     const { qc } = this.state
 
     const actions = [
-      <FlatButton
-        key="close"
-        label="Cancel"
-        primary={ true }
-        onClick={ handleClose }
-      />,
-      <FlatButton
-        key="save"
-        label="Create"
-        onClick={ handleSubmit }
-      />
+
     ]
-    return <div>
-      <ListItem primaryText="New QC"
-        rightIcon={ <ActionNoteAdd /> }
-        onClick={ handleOpen }
-      />
-      <Dialog title="Create new QC"
+    return <span>
+      <Button onClick={ handleOpen }>Create New</Button>
+      <Dialog
         open={ this.state.open }
         actions={ actions }
-        onRequestClose={ handleClose }
+        onClose={ handleClose }
       >
-        <TextField name="name" value={ qc.name }
-          floatingLabelText="Name:"
-          className="editor-name-field"
-          onChange={ handleChange }
-        />
+        <DialogTitle>Create New Qc</DialogTitle>
+        <DialogContent>
+          <TextField name="name" value={ qc.name }
+            label="Name:"
+            onChange={ handleChange }
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={ handleClose }>Cancel</Button>
+          <Button onClick={ handleSubmit } color="primary">Create</Button>
+        </DialogActions>
       </Dialog>
-    </div>
+    </span>
   }
 }
-NewQcPopup.propTypes = {
+QcCreatePopup.propTypes = {
   id: PropTypes.number.isRequired,
   createQc: PropTypes.func.isRequired,
 }
@@ -90,10 +86,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    createQc: (char) => {
-      dispatch(createQc(char))
+    createQc: (qc) => {
+      dispatch(createQc(qc))
     },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewQcPopup)
+export default connect(mapStateToProps, mapDispatchToProps)(QcCreatePopup)

@@ -6,12 +6,13 @@ import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
 import QcListItem from '../qcs/qcListItem.jsx'
+import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
 import CharacterListItem from '../characterSheet/characterListItem.jsx'
 
 import { fullQc, fullChar } from '../../utils/propTypes'
 
 const styles = theme => ({
-  qcTitle: { marginTop: theme.spacing.unit * 3 }
+  nthTitle: { marginTop: theme.spacing.unit * 3 }
 })
 
 class ContentList extends React.Component {
@@ -28,7 +29,10 @@ class ContentList extends React.Component {
       <Typography variant="headline">Characters</Typography>
       { chars }
 
-      <Typography variant="headline" className={ classes.qcTitle }>QCs</Typography>
+      <Typography variant="headline" className={ classes.nthTitle }>
+        QCs
+        <QcCreatePopup />
+      </Typography>
       { qcs }
 
     </div>

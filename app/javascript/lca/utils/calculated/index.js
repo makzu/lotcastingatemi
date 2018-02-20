@@ -145,6 +145,19 @@ export function prettyFullExaltType(character) {
   return type
 }
 
+export function prettyIntimacyRating(rating) {
+  switch(rating) {
+  case 3:
+    return 'Defining'
+  case 2:
+    return 'Major'
+  case 1:
+    return 'Minor'
+  default:
+    return 'N/A'
+  }
+}
+
 export function isCasteAbility(character, ability) {
   return character.caste_abilities && includes(character.caste_abilities, ability)
 }

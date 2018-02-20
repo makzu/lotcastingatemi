@@ -1,216 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Button from 'material-ui/Button'
-import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
-import Select from 'material-ui/Select'
-import { MenuItem } from 'material-ui/Menu'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
 
 import Typography from 'material-ui/Typography'
 
-import ExpandableListEditor from '../generic/expandableListEditor.jsx'
+import QcActionEditor from './qcActionEditor.jsx'
+import QcAttackEditor from './qcAttackEditor.jsx'
+import QcMeritEditor from './qcMeritEditor.jsx'
+import QcCharmEditor from './qcCharmEditor.jsx'
+import RatingField from '../generic/ratingField.jsx'
+import IntimacyEditor from '../generic/intimacyEditor.jsx'
 
-import { updateQc, createQcAttack, destroyQcAttack, updateQcAttack, createQcMerit, destroyQcMerit, updateQcMerit } from '../../ducks/actions.js'
+import { updateQc } from '../../ducks/actions.js'
 
-import { clamp } from '../../utils/'
-import * as c from '../../utils/constants.js'
-import { fullQc, qcAttack, qcMerit } from '../../utils/propTypes'
-
-class QcAttackFields extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleRangeChange = this.handleRangeChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
-
-    this.state = {
-      attack: this.props.attack
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({ attack: newProps.attack })
-  }
-
-  handleChange(e) {
-    e.preventDefault()
-    let val = e.target.value
-    if (e.target.type == 'number') {
-      val = clamp(parseInt(val), 1, Infinity)
-    } else if (e.target.name == 'tags') {
-      val = val.split(',')
-    }
-
-    this.setState({ attack: { ...this.state.attack, [e.target.name]: val }})
-  }
-
-  handleRangeChange(e, index, value) {
-    this.setState({ attack: { ...this.state.attack, range: value }})
-    this.props.onAttackChange(this.state.attack.id, 'range', value)
-  }
-
-  handleBlur(e) {
-    e.preventDefault()
-    if (this.state.attack[e.target.name] != this.props.attack[e.target.name])
-      this.props.onAttackChange(this.state.attack.id, e.target.name, e.target.value)
-  }
-
-  handleRemove(e) {
-    e.preventDefault()
-    this.props.onRemoveClick(this.state.attack.id)
-  }
-
-  render() {
-    const { attack } = this.state
-
-    return <div>
-      <TextField name="name" value={ attack.name }
-        label="Name:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-      />
-      <TextField name="pool" value={ attack.pool }
-        label="Pool:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-      />
-      <TextField name="damage" value={ attack.damage }
-        label="Damage:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-      />
-      <TextField name="tags" value={ attack.tags }
-        label="Tags:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-      />
-      <Select name="range" value={ attack.range }
-        label="Range:"
-        onChange={ this.handleRangeChange }
-      >
-        <MenuItem value="close" primarytext="Close" />
-        <MenuItem value="short" primarytext="Short" />
-        <MenuItem value="medium" primarytext="Medium" />
-        <MenuItem value="long" primarytext="Long" />
-        <MenuItem value="extreme" primarytext="Extreme" />
-      </Select>
-
-      <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
-        <ContentRemoveCircle />
-      </IconButton>
-    </div>
-  }
-}
-QcAttackFields.propTypes = {
-  attack: PropTypes.shape(qcAttack).isRequired,
-  onAttackChange: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired
-}
-
-class QcMeritFields extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
-
-    this.state = {
-      merit: this.props.merit
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({ merit: newProps.merit })
-  }
-
-  handleChange(e) {
-    e.preventDefault()
-    this.setState({ merit: { ...this.state.merit, [e.target.name]: e.target.value }})
-  }
-
-  handleBlur(e) {
-    e.preventDefault()
-    if (this.state.merit[e.target.name] != this.props.merit[e.target.name])
-      this.props.onMeritChange(this.state.merit.id, e.target.name, e.target.value)
-  }
-
-  handleRemove(e) {
-    e.preventDefault()
-    this.props.onRemoveClick(this.state.merit.id)
-  }
-
-  render() {
-    const { merit } = this.state
-
-    return <div>
-      <TextField name="name" value={ merit.name }
-        label="Name:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-      />
-      <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
-        <ContentRemoveCircle />
-      </IconButton>
-      <br />
-      <TextField name="body" value={ merit.body }
-        label="Text:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-        fullWidth={ true } multiLine={ true }
-      />
-    </div>
-  }
-}
-QcMeritFields.propTypes = {
-  merit: PropTypes.shape(qcMerit).isRequired,
-  onMeritChange: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired
-}
+import { fullQc } from '../../utils/propTypes'
 
 class QcEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
       qc: this.props.qc,
-      qc_attacks: this.props.qc_attacks,
-      qc_merits: this.props.qc_merits
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
-    this.onListChange = this.onListChange.bind(this)
-    this.onListBlur = this.onListBlur.bind(this)
-    this.handleAttackChange = this.handleAttackChange.bind(this)
-    this.handleAttackRemove = this.handleAttackRemove.bind(this)
-    this.handleAttackAdd = this.handleAttackAdd.bind(this)
-    this.handleMeritChange = this.handleMeritChange.bind(this)
-    this.handleMeritRemove = this.handleMeritRemove.bind(this)
-    this.handleMeritAdd = this.handleMeritAdd.bind(this)
+    this.handleRatingChange = this.handleRatingChange.bind(this)
+    this.handleListChange = this.handleListChange.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({ qc: newProps.qc, qc_attacks: newProps.qc_attacks, qc_merits: newProps.qc_merits })
+    this.setState({ qc: newProps.qc })
   }
 
   handleChange(e) {
     e.preventDefault()
-    let val
 
-    if (e.target.type == 'number') {
-      if (e.target.name == 'essence') {
-        val = clamp(parseInt(e.target.value), c.ESSENCE_MIN, c.ESSENCE_MAX)
-      } else {
-        val = clamp(parseInt(e.target.value), 1, Infinity)
-      }
-    } else
-      val = e.target.value
-
-    this.setState({ qc: { ... this.state.qc, [e.target.name]: val }})
+    this.setState({ qc: { ... this.state.qc, [e.target.name]: e.target.value }})
   }
+
   handleBlur(e) {
     e.preventDefault()
     const trait = e.target.name
@@ -220,38 +49,19 @@ class QcEditor extends React.Component {
     this.props.updateQc(this.state.qc.id, trait, this.state.qc[trait])
   }
 
-  onListChange(trait, value) {
+  handleRatingChange(e) {
+    e.preventDefault()
+    const trait = e.target.name
+    const value = e.target.value
+    this.setState({ qc: { ... this.state.qc, [trait]: value }})
+    this.props.updateQc(this.state.qc.id, trait, value)
+  }
+
+  handleListChange(trait, value) {
     this.setState({ qc: { ...this.state.qc, [trait]: value }})
     this.props.updateQc(this.state.qc.id, trait, value)
   }
 
-  onListBlur(trait, value) {
-    this.setState({ qc: { ...this.state.qc, [trait]: value }})
-    this.props.updateQc(this.state.qc.id, trait, value)
-  }
-
-  handleAttackChange(id, trait, value) {
-    this.props.updateQcAttack(id, this.state.qc.id, trait, value)
-  }
-  handleAttackRemove(id) {
-    this.props.removeQcAttack(id, this.state.qc.id)
-  }
-  handleAttackAdd() {
-    this.props.addQcAttack(this.state.qc.id)
-  }
-
-  handleMeritChange(id, trait, value) {
-    this.props.updateQcMerit(id, this.state.qc.id, trait, value)
-  }
-  handleMeritRemove(id) {
-    this.props.removeQcMerit(id, this.state.qc.id)
-  }
-  handleMeritAdd() {
-    this.props.addQcMerit(this.state.qc.id)
-  }
-
-  /* TODO: Clean this up. Yikes. */
-  /* TODO also: replace popup with an editor that appears in-place */
   render() {
     if (this.props.qc == undefined) {
       return(<div>
@@ -260,106 +70,137 @@ class QcEditor extends React.Component {
       </div>)
     }
 
-    const { qc, qc_attacks, qc_merits } = this.state
+    const { qc } = this.state
     const {
-      handleChange, handleBlur,
-      onListChange, onListBlur,
-      handleAttackAdd, handleAttackChange, handleAttackRemove,
-      handleMeritAdd, handleMeritChange, handleMeritRemove
+      handleChange, handleBlur, handleRatingChange, handleListChange,
     } = this
 
-    const qcAttacks = qc_attacks.map((attack) =>
-      <QcAttackFields key={ attack.id } attack={ attack } qc={ qc }
-        onAttackChange={ handleAttackChange } onRemoveClick={ handleAttackRemove }
-      />
-    )
-
-    const qcMerits = qc_merits.map((merit) =>
-      <QcMeritFields key={merit.id} merit={ merit } qc={ qc }
-        onMeritChange={ handleMeritChange } onRemoveClick={ handleMeritRemove }
-      />
-    )
-
     return(<div>
-      <Typography>Editing { qc.name }</Typography>
+      <Typography variant="headline">
+        Editing { qc.name }
+        <Button component={ Link } to={ `/qcs/${qc.id}` }>Done</Button>
+      </Typography>
+
+      <Typography variant="subheading">
+        Basics
+      </Typography>
 
       <TextField name="name" value={ qc.name }
         label="Name:"
         className="editor-name-field"
         onChange={ handleChange } onBlur={ handleBlur }
       />
-      <TextField name="essence" value={ qc.essence }
-        label="Essence:"
-        type="number" min={ 0 } max={ 10 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
-      />
-      <TextField name="willpower_temporary" value={ qc.willpower_temporary }
-        label="Temp WP:"
-        type="number" min={ 0 } max={ 10 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur } />
-      /
-      <TextField name="willpower_permanent" value={ qc.willpower_permanent }
-        label="Perm WP"
-        type="number" min={ 0 } max={ 10 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur } />
       <br />
-      <TextField name="resolve" value={ qc.resolve }
-        label="Resolve:"
-        type="number" min={ 0 } max={ 10 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+
+      <RatingField trait="essence" value={ qc.essence }
+        label="Essence:" min={ 1 } max={ 10 }
+        onChange={ handleRatingChange }
       />
-      <TextField name="guile" value={ qc.guile }
-        label="Guile:"
-        type="number" min={ 0 } max={ 10 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      <RatingField trait="willpower_temporary" value={ qc.willpower_temporary }
+        label="Willpower:"
+        onChange={ handleRatingChange }
       />
-      <TextField name="appearance" value={ qc.appearance }
-        label="Appearance:"
-        type="number" min={ 0 } max={ 10 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      /
+      <RatingField trait="willpower_permanent" value={ qc.willpower_permanent }
+        label="" min={ 1 } max={ 10 }
+        onChange={ handleRatingChange }
       />
-      <h4 style={{ marginBottom: 0 }}>Combat stats</h4>
-      <TextField name="join_battle" value={ qc.join_battle }
-        label="JB:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
+        label="Personal:" max={ qc.motes_personal_total }
+        onChange={ handleRatingChange }
       />
-      <TextField name="movement" value={ qc.movement }
-        label="Move:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      /
+      <RatingField trait="motes_personal_total" value={ qc.motes_personal_total }
+        label=""
+        onChange={ handleRatingChange }
       />
-      <TextField name="parry" value={ qc.parry }
-        label="Parry:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      <RatingField trait="motes_peripheral_current" value={ qc.motes_peripheral_current }
+        label="Peripheral:" max={ qc.motes_peripheral_total }
+        onChange={ handleRatingChange }
       />
-      <TextField name="evasion" value={ qc.evasion }
-        label="Evasion:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      /
+      <RatingField trait="motes_peripheral_total" value={ qc.motes_peripheral_total }
+        label=""
+        onChange={ handleRatingChange }
       />
-      <TextField name="soak" value={ qc.soak }
-        label="Soak:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      <br />
+      <RatingField trait="health_level_0s" value={ qc.health_level_0s }
+        label="-0 HLs"
+        onChange={ handleRatingChange }
       />
-      <TextField name="hardness" value={ qc.hardness }
-        label="Hardness:"
-        type="number" min={ 1 }
-        className="editor-rating-field"
-        onChange={ handleChange } onBlur={ handleBlur }
+      <RatingField trait="health_level_1s" value={ qc.health_level_1s }
+        label="-1 HLs"
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="health_level_2s" value={ qc.health_level_2s }
+        label="-2 HLs"
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="health_level_4s" value={ qc.health_level_4s }
+        label="-4 HLs"
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="health_level_incap" value={ qc.health_level_incap }
+        label="Incap"
+        onChange={ handleRatingChange }
+      />
+      <br />
+
+      <RatingField trait="damage_bashing" value={ qc.damage_bashing }
+        label="Bashing"
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="damage_lethal" value={ qc.damage_lethal }
+        label="Lethal"
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="damage_aggravated" value={ qc.damage_aggravated }
+        label="Aggravated"
+        onChange={ handleRatingChange }
+      />
+
+      <Typography variant="subheading">
+        Social
+      </Typography>
+      <RatingField trait="resolve" value={ qc.resolve }
+        label="Resolve:" min={ 1 }
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="guile" value={ qc.guile }
+        label="Guile:" min={ 1 }
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="appearance" value={ qc.appearance }
+        label="Appearance:" min={ 1 } max={ 10 }
+        onChange={ handleRatingChange }
+      />
+
+      <Typography variant="subheading">
+        Combat
+      </Typography>
+      <RatingField trait="join_battle" value={ qc.join_battle }
+        label="JB:" min={ 1 }
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="movement" value={ qc.movement }
+        label="Move:" min={ 1 }
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="parry" value={ qc.parry }
+        label="Parry" min={ 1 }
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="evasion" value={ qc.evasion }
+        label="Evasion" min={ 1 }
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="soak" value={ qc.soak }
+        label="Soak" min={ 1 }
+        onChange={ handleRatingChange }
+      />
+      <RatingField trait="hardness" value={ qc.hardness }
+        label="Hardness"
+        onChange={ handleRatingChange }
       />
       <TextField name="armor_name" value={ qc.armor_name }
         label="Armor Name:"
@@ -367,75 +208,38 @@ class QcEditor extends React.Component {
         onChange={ handleChange } onBlur={ handleBlur }
       />
 
-      <h4 style={{ marginBottom: 0 }}>Attacks</h4>
-      { qcAttacks }
-      <Button variant="raised" onClick={ handleAttackAdd }>
-        Add Attack
-        <ContentAddCircle  />
-      </Button>
+      <QcAttackEditor qc={ qc } />
 
-      <h4 style={{ marginBottom: 0 }}>Actions</h4>
-      <ExpandableListEditor character={ qc } trait="actions"
-        onUpdate={ onListChange } onBlur={ onListBlur }
+      <Typography variant="subheading">
+        Actions
+      </Typography>
+      <QcActionEditor qc={ qc } onChange={ handleListChange } />
+
+      <Typography variant="subheading">
+        Intimacies
+      </Typography>
+      <IntimacyEditor character={ qc } characterType="qc"
+        onChange={ handleListChange }
       />
-      <h4 style={{ marginBottom: 0 }}>Ties</h4>
-      <ExpandableListEditor character={ qc } trait="ties"
-        onUpdate={ onListChange } onBlur={ onListBlur }
-        numberMax={ c.INTIMACY_RATING_MAX }
-      />
-      <h4 style={{ marginBottom: 0 }}>Principles</h4>
-      <ExpandableListEditor character={ qc } trait="principles"
-        onUpdate={ onListChange } onBlur={ onListBlur }
-        numberMax={ c.INTIMACY_RATING_MAX }
-      />
-      <h4 style={{ marginBottom: 0 }}>Merits</h4>
-      { qcMerits }
-      <Button variant="raised" onClick={ handleMeritAdd }>
-        Add Merit
-        <ContentAddCircle />
-      </Button>
+
+      <QcMeritEditor qc={ qc } />
+
+      <QcCharmEditor qc={ qc } />
     </div>)
   }
 }
 QcEditor.propTypes = {
-  qc: PropTypes.shape(fullQc).isRequired,
-  qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
-  qc_merits: PropTypes.arrayOf(PropTypes.shape(qcMerit)),
+  qc: PropTypes.shape(fullQc),
   updateQc: PropTypes.func,
-  updateQcAttack: PropTypes.func,
-  addQcAttack: PropTypes.func,
-  removeQcAttack: PropTypes.func,
-  updateQcMerit: PropTypes.func,
-  addQcMerit: PropTypes.func,
-  removeQcMerit: PropTypes.func
 }
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.qcId
   const qc = state.entities.qcs[id]
 
-  let qc_attacks = []
-  let qc_charms = []
-  let qc_merits = []
-
-  if (qc != undefined) {
-    if (qc.qc_attacks != undefined) {
-      qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
-    }
-    if (qc.qc_charms != undefined) {
-      qc_charms = qc.qc_charms.map((id) => state.entities.qc_charms[id])
-    }
-    if (qc.qc_merits != undefined) {
-      qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
-    }
-  }
-
   return {
     id,
     qc,
-    qc_attacks,
-    qc_charms,
-    qc_merits,
   }
 }
 
@@ -444,24 +248,6 @@ function mapDispatchToProps(dispatch) {
     updateQc: (id, trait, value) => {
       dispatch(updateQc(id, trait, value))
     },
-    updateQcAttack: (id, qcId, trait, value) => {
-      dispatch(updateQcAttack(id, qcId, 'Qc', trait, value))
-    },
-    addQcAttack: (qcId) => {
-      dispatch(createQcAttack(qcId, 'Qc'))
-    },
-    removeQcAttack: (id, qcId) => {
-      dispatch(destroyQcAttack(id, qcId, 'Qc'))
-    },
-    updateQcMerit: (id, qcId, trait, value) => {
-      dispatch(updateQcMerit(id, qcId, trait, value))
-    },
-    addQcMerit: (qcId) => {
-      dispatch(createQcMerit(qcId))
-    },
-    removeQcMerit: (id, qcId) => {
-      dispatch(destroyQcMerit(id, qcId))
-    }
   }
 }
 

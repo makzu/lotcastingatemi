@@ -7,6 +7,7 @@ export {
   fetchQc, updateQc, createQc,
   updateQcAttack, createQcAttack, destroyQcAttack,
   updateQcMerit, createQcMerit, destroyQcMerit,
+  updateQcCharm, createQcCharm, destroyQcCharm,
   createBattlegroup, updateBattlegroup, destroyBattlegroup,
   fetchCurrentPlayer
 } from './entities'

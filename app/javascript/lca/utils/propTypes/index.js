@@ -155,3 +155,17 @@ export const fullMerit = {
   supernatural: PropTypes.bool,
   prereqs: PropTypes.string
 }
+
+export const qcCharm = {
+  id: PropTypes.number.isRequired,
+  qc_id: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  cost: PropTypes.string,
+  timing: PropTypes.string,
+  duration: PropTypes.string,
+  keywords: PropTypes.arrayOf(PropTypes.string),
+  min_essence: PropTypes.number,
+  body: PropTypes.string,
+  ref: PropTypes.string,
+  category: PropTypes.string,
+}

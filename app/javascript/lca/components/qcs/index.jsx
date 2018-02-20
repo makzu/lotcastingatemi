@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 
 import { fullQc, withMotePool, qcMerit, qcAttack } from '../../utils/propTypes'
+import { prettyIntimacyRating } from '../../utils/calculated'
 
 function MotePool(props){
   const { qc } = props
@@ -32,15 +35,23 @@ class QcSheet extends React.PureComponent {
 
   render() {
     const { qc, qc_attacks, qc_charms, qc_merits } = this.props
+
+    /* Escape hatch */
     if (this.props.qc == undefined) {
       return(<div>
-        <h1>QC Editor</h1>
-        <p>The QC has not yet loaded.</p>
+        <Typography variant="title">QC Editor</Typography>
+        <Typography paragraph>The QC has not yet loaded.</Typography>
       </div>)
     }
 
     const actions = qc.actions.map((action, index) =>
       <span key={index}>, {action.action}: {action.pool}</span>
+    )
+    const principles = qc.principles.map((p, index) =>
+      <div key={index}>{ p.subject } ({ prettyIntimacyRating(p.rating) })</div>
+    )
+    const ties = qc.ties.map((tie, index) =>
+      <div key={index}>{ tie.subject } ({ prettyIntimacyRating(tie.rating) })</div>
     )
     const attacks = qc_attacks.map((attack) =>
       <div key={attack.id}>
@@ -70,6 +81,7 @@ class QcSheet extends React.PureComponent {
 
       <Typography variant="headline" gutterBottom>
         { qc.name }
+        <Button component={ Link } to={`/qcs/${qc.id}/edit`}>Edit</Button>
       </Typography>
 
       <Typography component="div">
@@ -103,6 +115,12 @@ class QcSheet extends React.PureComponent {
         <strong>Actions: </strong>
         Senses: { qc.senses }
         { actions }
+      </Typography>
+
+      <Typography component="div">
+        <h4 style={{ marginBottom: '0.25em' }}>Intimacies:</h4>
+        { principles }
+        { ties }
       </Typography>
 
       <Typography component="div">

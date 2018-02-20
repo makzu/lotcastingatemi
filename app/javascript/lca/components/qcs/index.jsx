@@ -14,12 +14,12 @@ function MotePool(props){
   const { qc } = props
 
   if (qc.motes_personal_total > 0) {
-    return(<span>
+    return <span>
       <span>Personal motes: {qc.motes_personal_current}/{qc.motes_personal_total}</span>
       {qc.motes_peripheral_total > 0 &&
         <span>Peripheral motes: {qc.motes_peripheral_current}/{qc.motes_peripheral_total}</span>
       }
-    </span>)
+    </span>
   } else {
     return null
   }
@@ -35,11 +35,10 @@ class QcSheet extends React.PureComponent {
 
   render() {
     /* Escape hatch */
-    if (this.props.qc == undefined) {
-      return(<div>
+    if (this.props.qc == undefined)
+      return <div>
         <Typography paragraph>This QC has not yet loaded.</Typography>
-      </div>)
-    }
+      </div>
 
     const { qc, qc_attacks, qc_charms, qc_merits } = this.props
 
@@ -76,7 +75,7 @@ class QcSheet extends React.PureComponent {
       </div>
     )
 
-    return(<div>
+    return <div>
       <Typography variant="headline" gutterBottom>
         { qc.name }
         <Button component={ Link } to={`/qcs/${qc.id}/edit`}>Edit</Button>
@@ -131,7 +130,7 @@ class QcSheet extends React.PureComponent {
         { charms }
       </Typography> }
 
-    </div>)
+    </div>
   }
 }
 

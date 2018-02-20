@@ -76,7 +76,7 @@ class App extends React.Component {
   render() {
     const { children, classes, theme } = this.props
 
-    return(<div className={ classes.appFrame }>
+    return <div className={ classes.appFrame }>
       <Reboot />
 
       <AppBar className={ classes.appBar } component="header">
@@ -123,7 +123,7 @@ class App extends React.Component {
       <main className={classes.content}>
         { children }
       </main>
-    </div>)
+    </div>
   }
 }
 App.propTypes = {

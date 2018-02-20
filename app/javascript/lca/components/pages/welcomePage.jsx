@@ -2,7 +2,7 @@ import React from 'react'
 import Typography from 'material-ui/Typography'
 
 export default function WelcomePage() {
-  return(<div>
+  return <div>
     <Typography variant="headline" gutterBottom>
       Lot-Casting Atemi
     </Typography>
@@ -21,5 +21,5 @@ export default function WelcomePage() {
       thought, and no matter how distant she is from the game, all participants
       become aware of her successes.
     </Typography>
-  </div>)
+  </div>
 }

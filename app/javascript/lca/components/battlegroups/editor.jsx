@@ -83,16 +83,16 @@ class BattlegroupEditor extends React.Component {
   /* TODO also: replace popup with an editor that appears in-place */
   render() {
     /* Escape hatch */
-    if (this.props.battlegroup == undefined) {
-      return(<div>
+    if (this.props.battlegroup == undefined)
+      return <div>
         <Typography paragraph>This QC has not yet loaded.</Typography>
-      </div>)
-    }
+      </div>
+
     const { battlegroup } = this.state
     const { handleChange, handleBlur, handleRatingChange } = this
     const { classes } = this.props
 
-    return(<div>
+    return <div>
       <Typography variant="headline">
         Editing { battlegroup.name }
         <Button component={ Link } to={ `/battlegroups/${battlegroup.id}` }>Done</Button>
@@ -222,7 +222,7 @@ class BattlegroupEditor extends React.Component {
       />
 
       <QcAttackEditor qc={ battlegroup } battlegroup />
-    </div>)
+    </div>
   }
 }
 BattlegroupEditor.propTypes = {

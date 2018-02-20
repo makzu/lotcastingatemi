@@ -15,13 +15,13 @@ class BattlegroupSheet extends React.PureComponent {
   }
 
   render() {
-    const { battlegroup, qc_attacks } = this.props
+    /* Escape hatch */
+    if (this.props.battlegroup == undefined)
+      return <div>
+        <Typography paragraph>This QC has not yet loaded.</Typography>
+      </div>
 
-    if (battlegroup == undefined) {
-      return(<div>
-        <Typography paragraph>This Battlegroup has not yet loaded.</Typography>
-      </div>)
-    }
+    const { battlegroup, qc_attacks } = this.props
 
     const attacks = qc_attacks.map((attack) =>
       <div key={attack.id}>
@@ -30,7 +30,7 @@ class BattlegroupSheet extends React.PureComponent {
       </div>
     )
 
-    return(<div>
+    return <div>
       <Typography variant="headline" gutterBottom>
         { battlegroup.name }
         <Button component={ Link } to={`/battlegroups/${battlegroup.id}/edit`}>Edit</Button>
@@ -69,7 +69,7 @@ class BattlegroupSheet extends React.PureComponent {
         <strong> Appearance:</strong> { battlegroup.appearance }<br />
         <strong>Senses: </strong> { battlegroup.senses }
       </Typography>
-    </div>)
+    </div>
   }
 }
 

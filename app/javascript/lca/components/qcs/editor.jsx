@@ -64,18 +64,17 @@ class QcEditor extends React.Component {
 
   render() {
     /* Escape hatch */
-    if (this.props.qc == undefined) {
-      return(<div>
+    if (this.props.qc == undefined)
+      return <div>
         <Typography paragraph>This QC has not yet loaded.</Typography>
-      </div>)
-    }
+      </div>
 
     const { qc } = this.state
     const {
       handleChange, handleBlur, handleRatingChange, handleListChange,
     } = this
 
-    return(<div>
+    return <div>
       <Typography variant="headline">
         Editing { qc.name }
         <Button component={ Link } to={ `/qcs/${qc.id}` }>Done</Button>
@@ -224,7 +223,7 @@ class QcEditor extends React.Component {
       <QcMeritEditor qc={ qc } />
 
       <QcCharmEditor qc={ qc } />
-    </div>)
+    </div>
   }
 }
 QcEditor.propTypes = {

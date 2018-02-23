@@ -48,8 +48,8 @@ class QcActionEditor extends React.Component {
   }
 
   onActionChange(index, e) {
-    var newActions = [...this.state.action]
-    newActions[index].subject = e.target.value
+    var newActions = [...this.state.actions]
+    newActions[index].action = e.target.value
     this.setState({ actions: newActions })
   }
 
@@ -72,7 +72,7 @@ class QcActionEditor extends React.Component {
     this.props.onChange('actions', newActions)
   }
 
-  onRemove(type, index) {
+  onRemove(index) {
     var newActions = [...this.state.actions]
     newActions.splice(index, 1)
 

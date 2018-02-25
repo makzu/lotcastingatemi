@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
-import CharacterListItem from '../characterSheet/characterListItem.jsx'
+import CharacterListItem from '../characters/characterListItem.jsx'
 import QcListItem from '../qcs/qcListItem.jsx'
 import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
 import BattlegroupListItem from '../battlegroups/battlegroupListItem'

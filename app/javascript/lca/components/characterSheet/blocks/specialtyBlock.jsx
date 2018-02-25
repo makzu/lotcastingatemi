@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from './blockPaper.jsx'
+import BlockPaper from '../../generic/blockPaper.jsx'
 import SpecialtyPopup from '../editors/specialtyPopup.jsx'
 import { withSpecialties } from '../../../utils/propTypes'
 

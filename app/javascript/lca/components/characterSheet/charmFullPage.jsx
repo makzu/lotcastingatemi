@@ -13,7 +13,7 @@ import Typography from 'material-ui/Typography'
 import Select from 'material-ui/Select'
 import { MenuItem } from 'material-ui/Menu'
 
-import BlockPaper from './blocks/blockPaper.jsx'
+import BlockPaper from '../generic/blockPaper.jsx'
 import AbilitySelect from '../generic/abilitySelect.jsx'
 import { updateCharm, createCharm, destroyCharm } from '../../ducks/actions.js'
 import { clamp } from '../../utils'

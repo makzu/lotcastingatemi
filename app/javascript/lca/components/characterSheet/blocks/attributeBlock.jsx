@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from './blockPaper.jsx'
+import BlockPaper from '../../generic/blockPaper.jsx'
 import AttributeBlockPhysical from './attributeBlockPhysical.jsx'
 import AttributeBlockSocial from './attributeBlockSocial.jsx'
 import AttributeBlockMental from './attributeBlockMental.jsx'

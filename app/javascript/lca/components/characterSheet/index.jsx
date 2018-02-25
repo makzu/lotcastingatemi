@@ -9,7 +9,7 @@ import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 
 import AttributeBlock from './blocks/attributeBlock.jsx'
-import BlockPaper from './blocks/blockPaper.jsx'
+import BlockPaper from '../generic/blockPaper.jsx'
 import MeritSummaryBlock from './blocks/meritSummaryBlock.jsx'
 import SpecialtyBlock from './blocks/specialtyBlock.jsx'
 import CombatBlock from './blocks/combatBlock.jsx'

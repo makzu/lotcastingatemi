@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Table, { TableBody, TableHead, TableRow, TableCell } from 'material-ui/Table'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from './blockPaper.jsx'
+import BlockPaper from '../../generic/blockPaper.jsx'
 import ArmorPopup from '../editors/armorPopup.jsx'
 import * as calc from '../../../utils/calculated'
 import { withArmorStats } from '../../../utils/propTypes'

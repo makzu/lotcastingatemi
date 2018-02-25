@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from './blockPaper.jsx'
+import BlockPaper from '../../generic/blockPaper.jsx'
 import HealthLevelPopup from '../editors/healthLevelPopup.jsx'
 import HealthLevelBoxes from '../../generic/HealthLevelBoxes.jsx'
 

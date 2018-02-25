@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from './blocks/blockPaper.jsx'
+import BlockPaper from '../generic/blockPaper.jsx'
 import { fullChar } from '../../utils/propTypes'
 
 function SingleCharm(props) {

@@ -3,12 +3,27 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import Divider from 'material-ui/Divider'
+import Typography from 'material-ui/Typography'
+
+import BlockPaper from './blocks/blockPaper.jsx'
 import { fullChar } from '../../utils/propTypes'
 
 function SingleCharm(props) {
-  return <div className="charm">
-    <h4 style={{ marginBottom: 0 }}>{ props.charm.name } ({ props.charm.cost })</h4>
-    { props.charm.body }
+  return <div>
+    <Typography>
+      <strong>
+        { props.charm.name }:
+      </strong>&nbsp;
+      (
+      { props.charm.cost }
+      , { props.charm.timing }
+      , duration: { props.charm.duration }
+      , keywords: { props.charm.keywords || 'none'}
+      )&nbsp;
+      { props.charm.body }
+    </Typography>
+    <Divider />
   </div>
 }
 SingleCharm.propTypes = {
@@ -34,16 +49,16 @@ function CharmSummary(props) {
   )
 
 
-  return <div className="charmSummaryBlock">
-    <h3>
+  return <BlockPaper>
+    <Typography variant="title" gutterBottom>
       <Link to={ `/characters/${character.id}/charms` }>Charms</Link>
-    </h3>
+    </Typography>
     { natives }
     { maCharms }
 
     { evocations.length > 0 && <h3>Evocations</h3> }
     { evocations.length > 0 && evo }
-  </div>
+  </BlockPaper>
 }
 CharmSummary.propTypes = {
   character: PropTypes.shape(fullChar),

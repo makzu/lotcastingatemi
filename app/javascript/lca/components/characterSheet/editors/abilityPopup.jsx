@@ -2,34 +2,35 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
-import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog'
+import Typography from 'material-ui/Typography'
+
+import RatingField from '../../generic/ratingField.jsx'
 
 import { updateCharacter } from '../../../ducks/actions.js'
-import { clamp } from '../../../utils/'
 import { ABILITY_MAX, ABILITY_MIN } from '../../../utils/constants.js'
 import { withAbilities } from '../../../utils/propTypes'
 
 import ExpandableListEditor from '../../generic/expandableListEditor.jsx'
 
 function AbilityBlock(props) {
-  const { label, abil, value, onChange, onBlur } = props
+  const { label, abil, value, onChange } = props
 
-  return(
-    <TextField name={ abil } floatingLabelText={ label } value={ value }
-      className="ability-field"
-      type="number" min={ 0 } max={ 5 }
-      onChange={ onChange } onBlur={ onBlur }
-    />
-  )
+  return <RatingField trait={ abil }  value={ value }
+    label={ label } min={ ABILITY_MIN } max={ ABILITY_MAX } margin="dense"
+    onChange={ onChange }
+  />
 }
 AbilityBlock.propTypes = {
   label: PropTypes.string.isRequired,
   abil: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired
 }
 
 // TODO include sample pools on side of popup
@@ -44,8 +45,6 @@ class AbilityPopup extends React.Component {
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-
     this.onListChange = this.onListChange.bind(this)
     this.onListBlur = this.onListBlur.bind(this)
   }
@@ -59,20 +58,10 @@ class AbilityPopup extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
-
-    let val = clamp(parseInt(e.target.value), ABILITY_MIN, ABILITY_MAX)
-
-    this.setState({ character: { ... this.state.character, [e.target.name]: val }})
-  }
-
-  handleBlur(e) {
-    e.preventDefault()
     const trait = e.target.name
-    if (this.state.character[trait] == this.props.character[trait])
-      return
-
-    this.props.updateChar(this.state.character.id, trait, this.state.character[trait])
+    const value = e.target.value
+    this.setState({ character: { ...this.state.character, [trait]: value }})
+    this.props.updateChar(this.state.character.id, trait, value)
   }
 
   onListChange(trait, value) {
@@ -87,145 +76,138 @@ class AbilityPopup extends React.Component {
 
   render() {
     const character = this.state.character
-    const { handleOpen, handleClose, handleChange, handleBlur, onListChange, onListBlur } = this
+    const { handleOpen, handleClose, handleChange, onListChange, onListBlur } = this
 
-    const actions = [
-      <FlatButton
-        key="close"
-        label="Close"
-        primary={ true }
-        onClick={ handleClose }
-      />
-    ]
-
-    return(<div className="editor-wrap ability-editor-wrap">
-      <FlatButton label="Edit" onClick={ handleOpen } />
+    return <span>
+      <Button onClick={ handleOpen }>Edit</Button>
       <Dialog
-        title="Editing Abilities"
-        actions={ actions }
         open={ this.state.open }
         autoScrollBodyContent={ true }
-        onRequestClose={ handleClose }
+        onClose={ handleClose }
       >
-        <div className="editor-popup editor-popup-abilities">
+        <DialogTitle>Editing Abilities</DialogTitle>
+        <DialogContent>
           <div className="ability-set">
             <AbilityBlock
               label="Archery" abil="abil_archery" value={ character.abil_archery }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Athletics" abil="abil_athletics" value={ character.abil_athletics }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Awareness" abil="abil_awareness" value={ character.abil_awareness }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Brawl" abil="abil_brawl" value={ character.abil_brawl }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Bureaucracy" abil="abil_bureaucracy" value={ character.abil_bureaucracy }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
           </div>
           <div className="ability-set">
             <AbilityBlock
               label="Dodge" abil="abil_dodge" value={ character.abil_dodge }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Integrity" abil="abil_integrity" value={ character.abil_integrity }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Investigation" abil="abil_investigation" value={ character.abil_investigation }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Larceny" abil="abil_larceny" value={ character.abil_larceny }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Linguistics" abil="abil_linguistics" value={ character.abil_linguistics }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
           </div>
           <div className="ability-set">
             <AbilityBlock
               label="Lore" abil="abil_lore" value={ character.abil_lore }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Medicine" abil="abil_medicine" value={ character.abil_medicine }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Melee" abil="abil_melee" value={ character.abil_melee }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Occult" abil="abil_occult" value={ character.abil_occult }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Performance" abil="abil_performance" value={ character.abil_performance }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
           </div>
           <div className="ability-set">
             <AbilityBlock
               label="Presence" abil="abil_presence" value={ character.abil_presence }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Resistance" abil="abil_resistance" value={ character.abil_resistance }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Ride" abil="abil_ride" value={ character.abil_ride }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Sail" abil="abil_sail" value={ character.abil_sail }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Socialize" abil="abil_socialize" value={ character.abil_socialize }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
           </div>
           <div className="ability-set">
             <AbilityBlock
               label="Stealth" abil="abil_stealth" value={ character.abil_stealth }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Survival" abil="abil_survival" value={ character.abil_survival }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="Thrown" abil="abil_thrown" value={ character.abil_thrown }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
             <AbilityBlock
               label="War" abil="abil_war" value={ character.abil_war }
-              onChange={ handleChange } onBlur={ handleBlur }
+              onChange={ handleChange }
             />
           </div>
 
-          <h4>Crafts:</h4>
+          <Typography variant="subheading">Crafts:</Typography>
           <ExpandableListEditor character={ character } trait="abil_craft"
             onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ ABILITY_MAX }
           />
-          <h4>Martial Arts:</h4>
+          <Typography variant="subheading">Martial Arts:</Typography>
           <ExpandableListEditor character={ character } trait="abil_martial_arts"
             onUpdate={ onListChange } onBlur={ onListBlur } numberMax={ ABILITY_MAX }
           />
-        </div>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={ handleClose }>Close</Button>
+        </DialogActions>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 AbilityPopup.propTypes = {

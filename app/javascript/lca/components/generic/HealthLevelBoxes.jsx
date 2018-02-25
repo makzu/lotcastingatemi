@@ -1,65 +1,50 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+
+import { withStyles } from 'material-ui/styles'
+
 import * as calc from '../../utils/calculated'
 import { withHealthLevels } from '../../utils/propTypes'
 
-/* TODO replace this css nonsense with svg icons or something */
-const DamageDiv = styled.div`
-  background-color: white;
-  color: transparent;
-  width: 1em;
-  height: 1em;
-  border: 0.15em solid black;
-`
-const EmptyDamageDiv = DamageDiv
+const styles = theme => ({
+  boxWrap: {
+    display: 'inline-block',
+    textAlign: 'center',
+    marginRight: '0.25em',
+  },
+  healthLevelBox: {
+    backgroundColor: 'white',
+    width: '1.25em',
+    height: '1.25em',
+    border: '0.2em solid black'
+  },
+  healthLevelLabel: { ...theme.typography.caption,
+    textAlign: 'center',
+  },
+  bashingDamage: {
+    fontSize: '100%',
+    fontWeight: 'bold',
+    position: 'relative',
+    top: '-0.125em',
+    left: '-0.05em',
+  },
+  lethalDamage: {
+    fontSize: '180%',
+    fontWeight: '100',
+    position: 'relative',
+    top: '-0.35em',
+    left: '-0.1em',
+  },
+  aggDamage: {
+    fontSize: '150%',
+    position: 'relative',
+    top: '-0.25em',
+    left: '-0.15em',
+  },
+})
 
-const BashingDamageDiv = styled(DamageDiv)`
-  &::after{
-    color: black;
-    position: relative;
-    top: -0.25em;
-    left: -0.5em;
-    text-align: center;
-    font-weight: bold;
-    font-size: 125%;
-    content: "|";
-  }
-`
-const LethalDamageDiv = styled(DamageDiv)`
-  &::after {
-    color: black;
-    position: relative;
-    top: -0.3em;
-    left: -0.59em;
-    text-align: center;
-    font-size: 180%;
-    content: "❌";
-  }
-`
-const AggravatedDamageDiv = styled(DamageDiv)`
-  &::after {
-    color: black;
-    position: relative;
-    top: -0.25em;
-    left: -0.65em;
-    text-align: center;
-    font-size: 150%;
-    content: "✱";
-  }
-`
-const DamageBoxWrap = styled.div`
-  display: inline-block;
-  margin-right: 2px;
-`
-const DamageBoxLabel = styled.div`
-  font-size: small;
-  text-align: center;
-  margin: 0 auto;
-`
-
-export default function HealthLevelBoxes(props) {
-  const { character } = props
+function HealthLevelBoxes(props) {
+  const { character, classes } = props
   const totalHealthLevels = calc.totalHealthLevels(character)
 
   let hlBoxes = []
@@ -97,38 +82,57 @@ export default function HealthLevelBoxes(props) {
     }
 
     if (aggDamage > 0) {
-      box = <DamageBoxWrap key={ i }>
-        <AggravatedDamageDiv>◼</AggravatedDamageDiv>
-        <DamageBoxLabel>{ level }</DamageBoxLabel>
-      </DamageBoxWrap>
+      box = <div className={ classes.boxWrap } key={ i }>
+        <div className={ classes.healthLevelBox }>
+          <span className={ classes.aggDamage }>✱</span>
+        </div>
+        <div className={ classes.healthLevelLabel }>
+          { level }
+        </div>
+      </div>
       aggDamage--
     } else if (lthDamage > 0) {
-      box = <DamageBoxWrap key={ i }>
-        <LethalDamageDiv>◩</LethalDamageDiv>
-        <DamageBoxLabel>{ level }</DamageBoxLabel>
-      </DamageBoxWrap>
+      box = <div className={ classes.boxWrap } key={ i }>
+        <div className={ classes.healthLevelBox }>
+          <span className={ classes.lethalDamage }>❌</span>
+        </div>
+        <div className={ classes.healthLevelLabel }>
+          { level }
+        </div>
+      </div>
       lthDamage--
     } else if (bshDamage > 0) {
-      box = <DamageBoxWrap key={ i }>
-        <BashingDamageDiv>◫</BashingDamageDiv>
-        <DamageBoxLabel>{ level }</DamageBoxLabel>
-      </DamageBoxWrap>
+      box = <div className={ classes.boxWrap } key={ i }>
+        <div className={ classes.healthLevelBox }>
+          <span className={ classes.bashingDamage }>╲</span>
+        </div>
+        <div className={ classes.healthLevelLabel }>
+          { level }
+        </div>
+      </div>
       bshDamage--
     } else {
-      box = <DamageBoxWrap key={ i }>
-        <EmptyDamageDiv>◻</EmptyDamageDiv>
-        <DamageBoxLabel>{ level }</DamageBoxLabel>
-      </DamageBoxWrap>
+      box = <div className={ classes.boxWrap } key={ i }>
+        <div className={ classes.healthLevelBox }>
+          &nbsp;
+        </div>
+        <div className={ classes.healthLevelLabel }>
+          { level }
+        </div>
+      </div>
     }
 
     hlBoxes.push(box)
   }
 
-  return (<div className="healthLevelBoxes">
+  return <div>
     { hlBoxes }
-  </div>)
+  </div>
 }
 
 HealthLevelBoxes.propTypes = {
-  character: PropTypes.shape(withHealthLevels)
+  character: PropTypes.shape(withHealthLevels),
+  classes: PropTypes.object,
 }
+
+export default withStyles(styles)(HealthLevelBoxes)

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 
 import { updateCharacter } from '../../../ducks/actions.js'
@@ -63,7 +63,7 @@ class HealthLevelPopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleBlur } = this
 
     const actions = [
-      <FlatButton
+      <Button
         key="close"
         label="Close"
         primary={ true }
@@ -71,8 +71,8 @@ class HealthLevelPopup extends React.Component {
       />
     ]
 
-    return(<div className="editor-wrap ability-editor-wrap">
-      <FlatButton label="Edit" onClick={ handleOpen } />
+    return <span>
+      <Button label="Edit" onClick={ handleOpen } />
       <Dialog
         title="Editing Health / Damage"
         actions={ actions }
@@ -85,27 +85,27 @@ class HealthLevelPopup extends React.Component {
           <div>
             Health:
             <TextField name="health_level_0s" value={ character.health_level_0s }
-              floatingLabelText="0"
+              label="0"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
             <TextField name="health_level_1s" value={ character.health_level_1s }
-              floatingLabelText="-1"
+              label="-1"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
             <TextField name="health_level_2s" value={ character.health_level_2s }
-              floatingLabelText="-2"
+              label="-2"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
             <TextField name="health_level_4s" value={ character.health_level_4s }
-              floatingLabelText="-4"
+              label="-4"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
             <TextField name="health_level_incap" value={ character.health_level_incap }
-              floatingLabelText="incap"
+              label="incap"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
@@ -113,24 +113,24 @@ class HealthLevelPopup extends React.Component {
           <div>
             Damage:
             <TextField name="damage_bashing" value={ character.damage_bashing }
-              floatingLabelText="Bashing"
+              label="Bashing"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
             <TextField name="damage_lethal" value={ character.damage_lethal }
-              floatingLabelText="Lethal"
+              label="Lethal"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
             <TextField name="damage_aggravated" value={ character.damage_aggravated }
-              floatingLabelText="Aggravated"
+              label="Aggravated"
               type="number" min={ 0 }
               className="editor-rating-field"
               onChange={ handleChange } onBlur={ handleBlur } />
           </div>
         </div>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 HealthLevelPopup.propTypes = {

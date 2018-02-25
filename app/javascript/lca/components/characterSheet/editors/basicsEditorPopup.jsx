@@ -2,9 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
+
+import RatingField from '../../generic/ratingField.jsx'
 
 import { ESSENCE_MIN, ESSENCE_MAX } from '../../../utils/constants.js'
 import { clamp } from '../../../utils'
@@ -22,6 +28,7 @@ class BasicsEditorPopup extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleRatingChange = this.handleRatingChange.bind(this)
   }
 
   handleOpen() {
@@ -35,15 +42,7 @@ class BasicsEditorPopup extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    let val
-
-    if (e.target.type == 'number') {
-      val = clamp(parseInt(e.target.value), ESSENCE_MIN, ESSENCE_MAX)
-    } else {
-      val = e.target.value
-    }
-
-    this.setState({ character: { ... this.state.character, [e.target.name]: val }})
+    this.setState({ character: { ... this.state.character, [e.target.name]: e.target.value }})
   }
 
   handleBlur(e) {
@@ -55,47 +54,46 @@ class BasicsEditorPopup extends React.Component {
     this.props.updateChar(this.state.character.id, trait, this.state.character[trait])
   }
 
+  handleRatingChange(e) {
+    const trait = e.target.name
+    const value = e.target.value
+    this.setState({ character: { ... this.state.character, [trait]: value }})
+    this.props.updateChar(this.state.character.id, trait, value)
+  }
+
   render() {
     const character = this.state.character
     const { handleOpen, handleClose, handleChange, handleBlur } = this
 
-    const actions = [
-      <FlatButton
-        key="close"
-        label="Close"
-        primary={ true }
-        onClick={ handleClose }
-      />
-    ]
-
-    return(<div className="editor-wrap basics-editor-wrap">
-      <FlatButton label="Edit Basic Info" onClick={ handleOpen } />
+    return <span>
+      <Button onClick={ handleOpen }>Edit Basic Info</Button>
       <Dialog
-        title="Editing"
-        actions={ actions }
         open={ this.state.open }
-        autoScrollBodyContent={ true }
-        onRequestClose={ handleClose }
+        onClose={ handleClose }
       >
-        <div className="editor-popup editor-popup-basics">
+        <DialogTitle>
+          Editing { character.name }
+        </DialogTitle>
+        <DialogContent>
           <TextField name="name" value={ character.name }
-            floatingLabelText="Name:"
+            label="Name:"
             className="editor-name-field"
             onChange={ handleChange } onBlur={ handleBlur } />
-          <TextField name="essence" value={ character.essence }
-            floatingLabelText="Essence:"
-            type="number" min={ 0 } max={ 10 }
-            className="editor-rating-field"
-            onChange={ handleChange } onBlur={ handleBlur } />
+          <RatingField trait="essence" value={ character.essence }
+            label="Essence:" min={ 1 } max={ 10 }
+          />
           <br />
+
           <TextField name="description" value={ character.description }
-            floatingLabelText="Description:"
-            className="editor-description-field"
-            multiLine={ true } fullWidth={ true }
+            label="Description:"
+            multiline={ true } fullWidth={ true }
             onChange={ handleChange } onBlur={ handleBlur } />
-        </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={ handleClose }>Close</Button>
+        </DialogActions>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 BasicsEditorPopup.propTypes = {

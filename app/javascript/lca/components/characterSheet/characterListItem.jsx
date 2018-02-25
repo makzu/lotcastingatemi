@@ -18,14 +18,6 @@ const styles = theme => ({
   })
 })
 
-function CharacterTypeLine(props) {
-  const { character } = props
-
-  return <Typography paragraph>
-    Essence { character.essence } { prettyFullExaltType(character) }
-  </Typography>
-}
-
 function CharacterListItem(props) {
   const { character, classes } = props
 
@@ -36,7 +28,9 @@ function CharacterListItem(props) {
         { character.name }
       </Typography>
 
-      <CharacterTypeLine character={ character } />
+      <Typography paragraph>
+        Essence { character.essence } { prettyFullExaltType(character) }
+      </Typography>
 
       <Button component={ Link } to={ `/characters/${character.id}` }>
         Full Sheet
@@ -48,7 +42,7 @@ function CharacterListItem(props) {
     </Paper>
   </div>
 }
-CharacterListItem.propTypes = CharacterTypeLine.propTypes = {
+CharacterListItem.propTypes = {
   character: PropTypes.shape(fullChar).isRequired,
   classes: PropTypes.object.isRequired
 }

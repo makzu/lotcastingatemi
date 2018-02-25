@@ -2,14 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import Divider from 'material-ui/Divider'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
-import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
-import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
+import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import ContentAddCircle from 'material-ui-icons/AddCircle'
 import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Typography from 'material-ui/Typography'
+import Select from 'material-ui/Select'
+import { MenuItem } from 'material-ui/Menu'
 import Checkbox from 'material-ui/Checkbox'
 
 import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
@@ -21,22 +23,32 @@ import RatingDots from '../generic/ratingDots.jsx'
 export function SingleMerit(props) {
   const { merit } = props
 
-  return <div className="singleMerit">
-    <h3>{ merit.name }</h3>
-    <RatingDots rating={merit.rating} dontFill />
-    <p><small>
-      { merit.name.toUpperCase() != merit.merit_name.toUpperCase() &&
-        <span>({ merit.merit_name }), </span>
-      }
-      { merit.supernatural && <span>supernatural </span> }
-      { merit.merit_cat } merit
-    </small></p>
+  return <div>
+    <Typography variant="title">
+      { merit.name }
+    </Typography>
+    <RatingDots rating={ merit.rating } dontFill />
 
-    <p>{ merit.description }</p>
-    <p><small>Ref: { merit.ref }</small></p>
+    <Typography variant="caption" gutterBottom>
+      { merit.name.toUpperCase() != merit.merit_name.toUpperCase() &&
+        `(${ merit.merit_name }) `
+      }
+      { merit.supernatural && 'Supernatural '}
+      { merit.merit_cat } Merit
+    </Typography>
+
+    <Typography>
+      { merit.description }
+    </Typography>
+
+    <Typography variant="caption" gutterBottom>
+      Ref: { merit.ref }
+    </Typography>
+
     <Divider />
   </div>
 }
+
 SingleMerit.propTypes = {
   merit: PropTypes.shape(fullMerit),
 }
@@ -89,25 +101,25 @@ export class SingleMeritEditor extends React.Component {
     return <div className="singleMerit">
       <TextField name="merit_name" value={ merit.merit_name }
         onChange={this.handleChange} onBlur={this.handleBlur}
-        floatingLabelText="Merit:" />
+        label="Merit:" />
       <TextField name="name" value={merit.name}
         onChange={this.handleChange} onBlur={this.handleBlur}
-        floatingLabelText="Summary:" />
+        label="Summary:" />
       <TextField name="rating" value={merit.rating}
         type="number" min={MERIT_RATING_MIN} max={MERIT_RATING_MAX} className="editor-rating-field"
         onChange={this.handleChange} onBlur={this.handleBlur}
-        floatingLabelText="Rating:"
+        label="Rating:"
       />
 
       <div>
-        <SelectField name="merit_cat" value={merit.merit_cat}
+        <Select name="merit_cat" value={merit.merit_cat}
           onChange={this.handleCatChange}
-          floatingLabelText="Type:"
+          label="Type:"
         >
-          <MenuItem value="story" primaryText="Story" />
-          <MenuItem value="innate" primaryText="Innate" />
-          <MenuItem value="purchased" primaryText="Purchased" />
-        </SelectField>
+          <MenuItem value="story" primarytext="Story" />
+          <MenuItem value="innate" primarytext="Innate" />
+          <MenuItem value="purchased" primarytext="Purchased" />
+        </Select>
 
         <div style={{ display: 'inline-block' }}>
           <Checkbox name="supernatural" value={merit.supernatural}
@@ -119,14 +131,14 @@ export class SingleMeritEditor extends React.Component {
       <div>
         <TextField name="description" value={ merit.description }
           onChange={this.handleChange} onBlur={this.handleBlur}
-          floatingLabelText="Description:"
+          label="Description:"
           multiLine={ true } style={{ width: '100%' }}
         />
       </div>
       <div>
         <TextField name="ref" value={ merit.ref }
           onChange={this.handleChange} onBlur={this.handleBlur}
-          floatingLabelText="Ref:"
+          label="Ref:"
         />
         <IconButton onClick={ this.handleRemove } label="Remove"
           style={{ float: 'right' }}
@@ -195,21 +207,21 @@ class MeritFullPage extends React.Component {
     }
 
     return <div className="meritPage">
-      <h1>
+      <Typography variant="headline">
         Merits
         <small style={{ fontSize: '60%', marginLeft: '5em' }}>
           <Link style={{ textDecoration: 'none' }} to={'/characters/' + this.props.character.id }>
             Back to full sheet
           </Link>
         </small>
-        <FlatButton style={{ float: 'right' }} label={ this.state.isEditing ? 'done' : 'edit' } onClick={ this.toggleEditor } />
+        <Button style={{ float: 'right' }} label={ this.state.isEditing ? 'done' : 'edit' } onClick={ this.toggleEditor } />
         { this.state.isEditing &&
-          <FlatButton label="Add Merit" icon={<ContentAddCircle />}
+          <Button label="Add Merit" icon={<ContentAddCircle />}
             onClick={ this.handleAdd }
             style={{ float: 'right' }}
           />
         }
-      </h1>
+      </Typography>
       { mts }
     </div>
   }

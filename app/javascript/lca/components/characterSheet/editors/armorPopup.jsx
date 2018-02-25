@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Select from 'material-ui/Select'
+import { MenuItem } from 'material-ui/Menu'
 import Checkbox from 'material-ui/Checkbox'
 
 import { updateCharacter } from '../../../ducks/actions.js'
@@ -71,7 +71,7 @@ class ArmorPopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleBlur, handleWeightChange } = this
 
     const actions = [
-      <FlatButton
+      <Button
         key="close"
         label="Close"
         primary={ true }
@@ -80,8 +80,8 @@ class ArmorPopup extends React.Component {
     ]
 
     // TODO show interesting calculated values here
-    return(<div className="editor-wrap ability-editor-wrap">
-      <FlatButton label="Edit" onClick={ handleOpen } />
+    return <span>
+      <Button onClick={ handleOpen }>Edit</Button>
       <Dialog
         title="Editing Armor"
         actions={ actions }
@@ -91,21 +91,21 @@ class ArmorPopup extends React.Component {
       >
         <div className="editor-popup editor-popup-armor">
           <div>
-            <TextField floatingLabelText="Name:"
+            <TextField label="Name:"
               name="armor_name" value={ character.armor_name }
               onChange={ handleChange } onBlur={ handleBlur } />
           </div>
           <div>
 
-            <SelectField name="weight" value={ character.armor_weight }
-              floatingLabelText="Weight:"
+            <Select name="weight" value={ character.armor_weight }
+              label="Weight:"
               onChange={ handleWeightChange }
             >
-              <MenuItem value="unarmored" primaryText="Unarmored" />
-              <MenuItem value="light" primaryText="Light" />
-              <MenuItem value="medium" primaryText="Medium" />
-              <MenuItem value="heavy" primaryText="Heavy" />
-            </SelectField>
+              <MenuItem value="unarmored" primarytext="Unarmored" />
+              <MenuItem value="light" primarytext="Light" />
+              <MenuItem value="medium" primarytext="Medium" />
+              <MenuItem value="heavy" primarytext="Heavy" />
+            </Select>
           </div>
 
           <Checkbox label="Artifact?" name="armor_is_artifact" checked={ character.armor_is_artifact }
@@ -113,13 +113,13 @@ class ArmorPopup extends React.Component {
 
           <div>
             <TextField name="armor_tags" value={ character.armor_tags }
-              floatingLabelText="Tags:"
+              label="Tags:"
               onChange={ handleChange } onBlur={ handleBlur } />
           </div>
 
         </div>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 ArmorPopup.propTypes = {

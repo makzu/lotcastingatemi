@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Button from 'material-ui/Button'
+import Select from 'material-ui/Select'
+import { MenuItem } from 'material-ui/Menu'
 
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 
@@ -53,7 +53,7 @@ export class ExaltEditorPopup extends React.Component {
     const { handleOpen, handleClose, onChange } = this
 
     const actions = [
-      <FlatButton
+      <Button
         key="close"
         label="Close"
         primary={ true }
@@ -61,8 +61,8 @@ export class ExaltEditorPopup extends React.Component {
       />
     ]
 
-    return(<div className="editor-wrap limit-editor-wrap">
-      <FlatButton label={ `Edit ${prettyExaltType(character)} traits` } onClick={ handleOpen } />
+    return <span>
+      <Button label={ `Edit ${prettyExaltType(character)} traits` } onClick={ handleOpen } />
       <Dialog
         title="Editing"
         actions={ actions }
@@ -71,26 +71,26 @@ export class ExaltEditorPopup extends React.Component {
         onRequestClose={ handleClose }
       >
         <div className="editor-popup editor-popup-basics">
-          <SelectField name="caste" value={ character.caste }
-            floatingLabelText="Caste"
+          <Select name="caste" value={ character.caste }
+            label="Caste"
             onChange={ onChange.bind(this, 'caste') }
           >
-            <MenuItem value="dawn" primaryText="Dawn" />
-            <MenuItem value="zenith" primaryText="Zenith" />
-            <MenuItem value="twilight" primaryText="Twilight" />
-            <MenuItem value="night" primaryText="Night" />
-            <MenuItem value="eclipse" primaryText="Eclipse" />
-          </SelectField>
+            <MenuItem value="dawn" primarytext="Dawn" />
+            <MenuItem value="zenith" primarytext="Zenith" />
+            <MenuItem value="twilight" primarytext="Twilight" />
+            <MenuItem value="night" primarytext="Night" />
+            <MenuItem value="eclipse" primarytext="Eclipse" />
+          </Select>
 
           <AbilitySelect name="supernal_ability"
-            floatingLabelText="Supernal Ability"
+            label="Supernal Ability"
             value={ character.supernal_ability }
             abilities={ SOLAR_CASTE_ABILITIES[character.caste] }
             onChange={ onChange.bind(this, 'supernal_ability') }
           />
           <br />
           <AbilitySelect name="caste_abilities"
-            floatingLabelText="Caste Abilities"
+            label="Caste Abilities"
             value={ character.caste_abilities }
             abilities={ SOLAR_CASTE_ABILITIES[character.caste] }
             onChange={ onChange.bind(this, 'caste_abilities') }
@@ -99,7 +99,7 @@ export class ExaltEditorPopup extends React.Component {
           />
           <br />
           <AbilitySelect name="favored_abilities"
-            floatingLabelText="Favored Abilities"
+            label="Favored Abilities"
             value={ character.favored_abilities }
             multiple={ true }
             onChange={ onChange.bind(this, 'favored_abilities') }
@@ -107,7 +107,7 @@ export class ExaltEditorPopup extends React.Component {
           />
         </div>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 

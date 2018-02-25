@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 
 import { updateCharacter } from '../../../ducks/actions.js'
 import { withSpecialties } from '../../../utils/propTypes'
@@ -67,7 +67,7 @@ class SpecialtyPopup extends React.Component {
     const { handleOpen, handleClose, onListChange, onListBlur } = this
 
     const actions = [
-      <FlatButton
+      <Button
         key="close"
         label="Close"
         primary={ true }
@@ -75,8 +75,8 @@ class SpecialtyPopup extends React.Component {
       />
     ]
 
-    return(<div className="editor-wrap ability-editor-wrap">
-      <FlatButton label="Edit" onClick={ handleOpen } />
+    return <span>
+      <Button label="Edit" onClick={ handleOpen }>Edit</Button>
       <Dialog
         title="Editing Specialties"
         actions={ actions }
@@ -90,7 +90,7 @@ class SpecialtyPopup extends React.Component {
           />
         </div>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 SpecialtyPopup.propTypes = {

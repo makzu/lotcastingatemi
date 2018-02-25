@@ -1,22 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
+import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
+import Grid from 'material-ui/Grid'
+import Typography from 'material-ui/Typography'
 
 import AttributePopup from './editors/attributePopup.jsx'
+
 import RatingDots from '../generic/ratingDots.jsx'
 import { withAttributes } from '../../utils/propTypes'
 
-function AttributeBlock(props) {
-  return(<div className="attributeBlock">
-    <span className="attributeName">{ props.attribute }:</span>
+const styles = theme => ({
+  attributeName: { ...theme.typography.body1,
+    textTransform: 'capitalize',
+  },
+})
+
+function _AttributeBlock(props) {
+  const { classes } = props
+  return <div>
+    <span className={ classes.attributeName }>
+      { props.attribute }:
+    </span>
+
     <RatingDots rating={ props.rating } />
-  </div>)
+    <Divider />
+  </div>
 }
 
-AttributeBlock.propTypes = {
+_AttributeBlock.propTypes = {
   attribute: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
+  classes: PropTypes.object,
 }
+
+const AttributeBlock = withStyles(styles)(_AttributeBlock)
 
 class FullAttributeBlock extends React.Component {
   constructor(props) {
@@ -41,39 +60,31 @@ class FullAttributeBlock extends React.Component {
   render() {
     const { character } = this.props
 
-    return (
-      <div className="fullAttributeBlock">
-        <h3>
-          Attributes
-          <AttributePopup character={ character }
-          />
-        </h3>
+    return <Grid item xs={ 12 } sm={ 6 } md={ 9 }>
+      <Typography variant="title">
+        Attributes
+        <AttributePopup character={ character } />
+      </Typography>
 
-        <div className="attrContainer physical">
-          <AttributeBlock attribute="Strength" rating={ character.attr_strength} />
-          <Divider />
-          <AttributeBlock attribute="Dexterity" rating={ character.attr_dexterity} />
-          <Divider />
-          <AttributeBlock attribute="Stamina" rating={ character.attr_stamina} />
-        </div>
+      <Grid container>
+      <Grid item xs={ 12 } md={ 4 }>
+        <AttributeBlock attribute="Strength"     rating={ character.attr_strength} />
+        <AttributeBlock attribute="Dexterity"    rating={ character.attr_dexterity} />
+        <AttributeBlock attribute="Stamina"      rating={ character.attr_stamina} />
+      </Grid>
 
-        <div className="attrContainer social">
-          <AttributeBlock attribute="Charisma" rating={ character.attr_charisma} />
-          <Divider />
-          <AttributeBlock attribute="Manipulation" rating={ character.attr_manipulation} />
-          <Divider />
-          <AttributeBlock attribute="Appearance" rating={ character.attr_appearance} />
-        </div>
+      <Grid item xs={ 12 } md={ 4 }>
+        <AttributeBlock attribute="Charisma"     rating={ character.attr_charisma} />
+        <AttributeBlock attribute="Manipulation" rating={ character.attr_manipulation} />
+        <AttributeBlock attribute="Appearance"   rating={ character.attr_appearance} />
+      </Grid>
 
-        <div className="attrContainer mental">
-          <AttributeBlock attribute="Perception" rating={ character.attr_perception} />
-          <Divider />
-          <AttributeBlock attribute="Intelligence" rating={ character.attr_intelligence} />
-          <Divider />
-          <AttributeBlock attribute="Wits" rating={ character.attr_wits} />
-        </div>
-      </div>
-    )
+      <Grid item xs={ 12 } md={ 4 }>
+        <AttributeBlock attribute="Perception"   rating={ character.attr_perception} />
+        <AttributeBlock attribute="Intelligence" rating={ character.attr_intelligence} />
+        <AttributeBlock attribute="Wits"         rating={ character.attr_wits} />
+      </Grid>
+    </Grid></Grid>
   }
 }
 

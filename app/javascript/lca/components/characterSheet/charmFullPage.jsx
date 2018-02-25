@@ -2,15 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Divider from 'material-ui/Divider'
-import FlatButton from 'material-ui/FlatButton'
-import IconButton from 'material-ui/IconButton'
-import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
-import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
-import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
 
+import Divider from 'material-ui/Divider'
+import Button from 'material-ui/Button'
+import IconButton from 'material-ui/Button'
+import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import ContentAddCircle from 'material-ui-icons/AddCircle'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
+import Select from 'material-ui/Select'
+import { MenuItem } from 'material-ui/Menu'
+
+import BlockPaper from './blocks/blockPaper.jsx'
 import AbilitySelect from '../generic/abilitySelect.jsx'
 import { updateCharm, createCharm, destroyCharm } from '../../ducks/actions.js'
 import { clamp } from '../../utils'
@@ -25,9 +28,11 @@ function SingleCharm(props) {
   const artifactBlock = charm.type == 'Evocation' ? <span><strong>Artifact:</strong> {charm.artifact_name}<br/></span> : ''
   const abilitySpan = isAbilityCharm(charm) ? <span>{ ability } { charm.min_ability }, </span> : ''
 
-  return <div className="singleCharm">
-    <h3>{ charm.name }</h3>
-    <p>
+  return <BlockPaper>
+    <Typography variant="title">
+      { charm.name }
+    </Typography>
+    <Typography paragraph>
       { styleBlock }
       { artifactBlock }
       <strong>Cost:</strong> { charm.cost }; {' '}
@@ -36,10 +41,10 @@ function SingleCharm(props) {
       <strong>Keywords:</strong> { charm.keywords.join(', ') }<br />
       <strong>Duration:</strong> { charm.duration }<br />
       <strong>Prerequisite Charms:</strong> { charm.prereqs }
-    </p>
-    <p>{ charm.body }</p>
-    <Divider />
-  </div>
+    </Typography>
+    <Typography>{ charm.body }</Typography>
+    <Typography variant="caption">Reference: { charm.ref }</Typography>
+  </BlockPaper>
 }
 SingleCharm.propTypes = {
   charm: PropTypes.object,
@@ -105,18 +110,18 @@ class SingleCharmEditor extends React.Component {
     return <div className="singleCharm">
       <TextField name="name" value={ charm.name }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
-        floatingLabelText="Name:"
+        label="Name:"
       />
       { charm.type == 'Evocation' &&
         <TextField name="artifact_name" value={ charm.artifact_name }
           onChange={ this.handleChange } onBlur={ this.handleBlur }
-          floatingLabelText="Artifact Name:"
+          label="Artifact Name:"
         />
       }
       { charm.type == 'MartialArtsCharm' &&
         <TextField name="style" value={ charm.style }
           onChange={ this.handleChange } onBlur={ this.handleBlur }
-          floatingLabelText="Style:"
+          label="Style:"
         />
       }
       <br />
@@ -134,53 +139,53 @@ class SingleCharmEditor extends React.Component {
           type="number" min={ 1 } max={ 5 }
           className="editor-rating-field"
           onChange={ this.handleChange } onBlur={ this.handleBlur }
-          floatingLabelText="Ability:"
+          label="Ability:"
         />
       }
       <TextField name="min_essence" value={ charm.min_essence }
         type="number" min={ 1 } max={ 10 }
         className="editor-rating-field"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
-        floatingLabelText="Essence:"
+        label="Essence:"
       />
       <br />
-      <SelectField
-        floatingLabelText="Type:"
+      <Select
+        label="Type:"
         value={ charm.timing }
         onChange={ this.handleTimingChange }
       >
-        <MenuItem value="reflexive" primaryText="Reflexive" />
-        <MenuItem value="supplemental" primaryText="Supplemental" />
-        <MenuItem value="simple" primaryText="Simple" />
-        <MenuItem value="permanent" primaryText="Permanent" />
-      </SelectField>
+        <MenuItem value="reflexive" primarytext="Reflexive" />
+        <MenuItem value="supplemental" primarytext="Supplemental" />
+        <MenuItem value="simple" primarytext="Simple" />
+        <MenuItem value="permanent" primarytext="Permanent" />
+      </Select>
       <TextField name="duration" value={ charm.duration }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
-        floatingLabelText="Duration:"
+        label="Duration:"
       />
       <br />
       <TextField name="keywords" value={ charm.keywords }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         fullWidth={ true }
-        floatingLabelText="Keywords:"
+        label="Keywords:"
       />
       <br />
       <TextField name="prereqs" value={ charm.prereqs }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         fullWidth={ true }
-        floatingLabelText="Prerequisite Charms:"
+        label="Prerequisite Charms:"
       />
       <br />
       <TextField name="body" value={ charm.body }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         className="editor-description-field" multiLine={ true } fullWidth={ true }
-        floatingLabelText="Effect:"
+        label="Effect:"
       />
       <br />
       <TextField name="ref" value={ charm.ref }
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         fullWidth={ true }
-        floatingLabelText="Ref:"
+        label="Ref:"
       />
       <IconButton onClick={ this.handleRemove } label="Remove"
         style={{ float: 'right' }}
@@ -278,32 +283,25 @@ class CharmFullPage extends React.Component {
         <SingleCharm key={ c.id } charm={ c } character={ character } />
       )
     }
-    return <div className="charmPage page">
-      <h1>
+    return <div>
+      <Typography variant="headline">
         Charms
-        <small style={{ fontSize: '60%', marginLeft: '5em' }}>
-          <Link style={{ textDecoration: 'none' }} to={`/characters/${character.id}` }>
-            Back to full sheet
-          </Link>
-        </small>
-        <FlatButton style={{ float: 'right' }} label={ this.state.isEditing ? 'done' : 'edit' } onClick={ this.toggleEditor } />
-        { this.state.isEditing &&
-          <FlatButton onClick={ this.handleAddNative } label="Add Native Charm"
-            style={{ float: 'right' }}
-
-            icon={<ContentAddCircle />}
-          />
-        }
-      </h1>
+        <Button component={ Link } to={ `/characters/${character.id}` }>
+          Back to full sheet
+        </Button>
+      </Typography>
       { natives }
+
+      <Typography variant="headline">Martial Arts</Typography>
       { this.state.isEditing &&
-        <FlatButton onClick={ this.handleAddMA } label="Add MA Charm"
+        <Button onClick={ this.handleAddMA } label="Add MA Charm"
           style={{ float: 'right' }}
           icon={<ContentAddCircle />}
         />
       }
       { maCharms }
-      <h1>
+
+      <Typography variant="headline">
         Evocations
         { this.state.isEditing &&
           <IconButton onClick={ this.handleAddEvocation } label="Add Evocation"
@@ -312,7 +310,7 @@ class CharmFullPage extends React.Component {
             <ContentAddCircle />
           </IconButton>
         }
-      </h1>
+      </Typography>
       { evo }
     </div>
   }

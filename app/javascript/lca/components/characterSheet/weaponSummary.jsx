@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
-import FlatButton from 'material-ui/FlatButton'
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table'
+import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
-import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle'
-import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
+import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import ContentAddCircle from 'material-ui-icons/AddCircle'
 import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Select from 'material-ui/Select'
+import { MenuItem } from 'material-ui/Menu'
 import Checkbox from 'material-ui/Checkbox'
 
 import { updateWeapon, createWeapon, destroyWeapon } from '../../ducks/actions.js'
@@ -17,42 +17,42 @@ import { withAttributes, withAbilities, fullWeapon } from '../../utils/propTypes
 
 function WeaponHeader() {
   return <TableRow>
-    <TableHeaderColumn>Weapon Name</TableHeaderColumn>
-    <TableHeaderColumn className="attackPoolColumn">Attack Pool</TableHeaderColumn>
-    <TableHeaderColumn className="damageColumn">Damage</TableHeaderColumn>
-    <TableHeaderColumn className="parryColumn">Parry</TableHeaderColumn>
-    <TableHeaderColumn className="overwhelmingColumn"><abbr title="Overwhelming">Ovw</abbr></TableHeaderColumn>
-    <TableHeaderColumn>Tags</TableHeaderColumn>
-    <TableHeaderColumn>Ability</TableHeaderColumn>
+    <TableCell>Weapon Name</TableCell>
+    <TableCell numeric>Attack Pool</TableCell>
+    <TableCell numeric>Damage</TableCell>
+    <TableCell numeric>Parry</TableCell>
+    <TableCell numeric><abbr title="Overwhelming">Ovw</abbr></TableCell>
+    <TableCell>Tags</TableCell>
+    <TableCell>Ability</TableCell>
   </TableRow>
 }
 
 function WeaponData(props) {
   const { weapon, character } = props
 
-  return(<TableRow>
-    <TableRowColumn>{ weapon.name }</TableRowColumn>
-    <TableRowColumn className="attackPoolColumn">
+  return <TableRow>
+    <TableCell>{ weapon.name }</TableCell>
+    <TableCell numeric>
       { calc.witheringAttackPool(character, weapon) }{' '}
-      ({ calc.decisiveAttackPool(character, weapon) } decisive)
-    </TableRowColumn>
-    <TableRowColumn className="damageColumn">
+      ({ calc.decisiveAttackPool(character, weapon) } D)
+    </TableCell>
+    <TableCell numeric>
       { calc.weaponDamage(character, weapon) }
       { calc.weaponDamageType(weapon) }
-    </TableRowColumn>
-    <TableRowColumn className="parryColumn">
+    </TableCell>
+    <TableCell numeric>
       { calc.weaponParry(character, weapon) }
-    </TableRowColumn>
-    <TableRowColumn className="overwhelmingColumn">
+    </TableCell>
+    <TableCell numeric>
       { calc.weaponOverwhelming(weapon) }
-    </TableRowColumn>
-    <TableRowColumn className="tagsColumn">
+    </TableCell>
+    <TableCell>
       { weapon.tags.join(', ') }
-    </TableRowColumn>
-    <TableRowColumn className="abilityColumn">
+    </TableCell>
+    <TableCell>
       { weapon.ability }
-    </TableRowColumn>
-  </TableRow>)
+    </TableCell>
+  </TableRow>
 }
 WeaponData.propTypes = {
   weapon: PropTypes.shape(fullWeapon),
@@ -61,25 +61,25 @@ WeaponData.propTypes = {
 
 function WeaponEditHeader() {
   return <TableRow>
-    <TableHeaderColumn>Weapon Name</TableHeaderColumn>
-    <TableHeaderColumn style={{ width: '5em' }}>Weight</TableHeaderColumn>
-    <TableHeaderColumn style={{ width: '2em' }}>Artifact?</TableHeaderColumn>
-    <TableHeaderColumn>Tags</TableHeaderColumn>
-    <TableHeaderColumn>Ability</TableHeaderColumn>
-    <TableHeaderColumn style={{ width: '2em' }}>Pool</TableHeaderColumn>
-    <TableHeaderColumn style={{ width: '2em' }}>Dmg</TableHeaderColumn>
-    <TableHeaderColumn style={{ width: '2em' }}>-</TableHeaderColumn>
+    <TableCell>Weapon Name</TableCell>
+    <TableCell style={{ width: '5em' }}>Weight</TableCell>
+    <TableCell style={{ width: '2em' }}>Artifact?</TableCell>
+    <TableCell>Tags</TableCell>
+    <TableCell>Ability</TableCell>
+    <TableCell style={{ width: '2em' }}>Pool</TableCell>
+    <TableCell style={{ width: '2em' }}>Dmg</TableCell>
+    <TableCell style={{ width: '2em' }}>-</TableCell>
   </TableRow>
 }
 
 function WeightSelect(props) {
   return(
-    <SelectField name="weight" value={ props.weapon.weight }
+    <Select name="weight" value={ props.weapon.weight }
       onChange={ props.onChange } style={{ width: '4em' }}>
-      <MenuItem value="light" label="L" primaryText="Light" />
-      <MenuItem value="medium" label="M" primaryText="Medium" />
-      <MenuItem value="heavy" label="H" primaryText="Heavy" />
-    </SelectField>
+      <MenuItem value="light" label="L" primarytext="Light" />
+      <MenuItem value="medium" label="M" primarytext="Medium" />
+      <MenuItem value="heavy" label="H" primarytext="Heavy" />
+    </Select>
   )
 }
 WeightSelect.propTypes = {
@@ -89,13 +89,13 @@ WeightSelect.propTypes = {
 
 function AbilitySelect(props) {
   const options = calc.attackAbilities(props.character).map((abil) =>
-    <MenuItem key={ abil.abil } value={abil.abil} primaryText={ abil.abil + '(' + abil.rating + ')' } />
+    <MenuItem key={ abil.abil } value={abil.abil} primarytext={ abil.abil + '(' + abil.rating + ')' } />
   )
   return(
-    <SelectField name="ability" value={ props.weapon.ability }
+    <Select name="ability" value={ props.weapon.ability }
       onChange={ props.onChange }>
       {options}
-    </SelectField>
+    </Select>
   )
 }
 AbilitySelect.propTypes = {
@@ -162,38 +162,38 @@ class WeaponFieldset extends React.Component {
     const weapon = this.state.weapon
 
     return <TableRow>
-      <TableRowColumn style={{ verticalAlign: 'bottom' }}>
+      <TableCell style={{ verticalAlign: 'bottom' }}>
         <TextField name="name" value={ weapon.name }
           onBlur={ handleBlur } onChange={ handleChange } />
-      </TableRowColumn>
-      <TableRowColumn style={{ width: '5em', verticalAlign: 'baseline' }}>
+      </TableCell>
+      <TableCell style={{ width: '5em', verticalAlign: 'baseline' }}>
         <WeightSelect weapon={ weapon } onChange={ handleWeightChange }/>
-      </TableRowColumn>
-      <TableRowColumn style={{ width: '2em' }}>
+      </TableCell>
+      <TableCell style={{ width: '2em' }}>
         <Checkbox name="is_artifact" checked={ weapon.is_artifact }
           onCheck={ handleChange }
         />
-      </TableRowColumn>
-      <TableRowColumn style={{ verticalAlign: 'bottom' }}>
+      </TableCell>
+      <TableCell style={{ verticalAlign: 'bottom' }}>
         <TextField name="tags" value={ weapon.tags }
           onBlur={ handleBlur } onChange={ handleChange } />
-      </TableRowColumn>
-      <TableRowColumn style={{ verticalAlign: 'bottom' }}>
+      </TableCell>
+      <TableCell style={{ verticalAlign: 'bottom' }}>
         <AbilitySelect character={ character } weapon={ weapon }
           onChange={ handleAbilityChange }
         />
-      </TableRowColumn>
-      <TableRowColumn style={{ width: '2em' }}>
+      </TableCell>
+      <TableCell style={{ width: '2em' }}>
         { calc.witheringAttackPool(character, weapon) }
-      </TableRowColumn>
-      <TableRowColumn style={{ width: '2em' }}>
+      </TableCell>
+      <TableCell style={{ width: '2em' }}>
         { calc.weaponDamage(character, weapon) }
-      </TableRowColumn>
-      <TableRowColumn style={{ width: '2em' }}>
+      </TableCell>
+      <TableCell style={{ width: '2em' }}>
         <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
           <ContentRemoveCircle />
         </IconButton>
-      </TableRowColumn>
+      </TableCell>
     </TableRow>
   }
 }
@@ -237,7 +237,7 @@ class WeaponSummary extends React.Component {
     const { character, weapons } = this.props
 
     const weaps = weapons.map((weapon) =>
-      <WeaponData key={weapon.id} character={character} weapon={weapon} />
+      <WeaponData key={ weapon.id } character={ character } weapon={ weapon } />
     )
     const weapEdits = weapons.map((weapon) =>
       <WeaponFieldset key={weapon.id} character={character} weapon={weapon}
@@ -245,27 +245,16 @@ class WeaponSummary extends React.Component {
       />
     )
 
-    return (<div className="weaponSummaryBlock">
-      <h3>Weapons
-        <FlatButton label={this.state.isEditing ? 'done' : 'edit' }
-          onClick={ this.toggleEditor }
-          style={{ float: 'right' }}
-        />
-        { this.state.isEditing &&
-          <IconButton onClick={ this.handleAdd } style={{ float: 'right' }}>
-            <ContentAddCircle />
-          </IconButton>
-        }
-      </h3>
-      <Table className="weaponTable" selectable={ false }>
-        <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>
-          { this.state.isEditing ? <WeaponEditHeader /> : <WeaponHeader /> }
-        </TableHeader>
+    return <div>
+      <Table>
+        <TableHead>
+          <WeaponHeader />
+        </TableHead>
         <TableBody>
           { this.state.isEditing ? weapEdits : weaps }
         </TableBody>
       </Table>
-    </div>)
+    </div> // */
   }
 }
 WeaponSummary.propTypes = {

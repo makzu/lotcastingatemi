@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 
 import { clamp } from '../../../utils/'
@@ -55,7 +55,7 @@ class WillpowerPopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleBlur } = this
 
     const actions = [
-      <FlatButton
+      <Button
         key="close"
         label="Close"
         primary={ true }
@@ -63,8 +63,8 @@ class WillpowerPopup extends React.Component {
       />
     ]
 
-    return(<div className="editor-wrap ability-editor-wrap">
-      <FlatButton label="Edit" onClick={ handleOpen } />
+    return <span>
+      <Button label="Edit" onClick={ handleOpen } />
       <Dialog
         title="Editing Willpower"
         actions={ actions }
@@ -74,19 +74,19 @@ class WillpowerPopup extends React.Component {
       >
         <div className="editor-popup editor-popup-specialties">
           <TextField name="willpower_temporary" value={ character.willpower_temporary }
-            floatingLabelText="Temp"
+            label="Temp"
             type="number" min={ 0 } max={ 10 }
             className="editor-rating-field"
             onChange={ handleChange } onBlur={ handleBlur } />
           /
           <TextField name="willpower_permanent" value={ character.willpower_permanent }
-            floatingLabelText="Perm"
+            label="Perm"
             type="number" min={ 0 } max={ 10 }
             className="editor-rating-field"
             onChange={ handleChange } onBlur={ handleBlur } />
         </div>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 WillpowerPopup.propTypes = {

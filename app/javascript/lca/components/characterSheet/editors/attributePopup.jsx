@@ -2,9 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
+
+import RatingField from '../../generic/ratingField.jsx'
 
 import { ATTRIBUTE_MIN, ATTRIBUTE_MAX } from '../../../utils/constants.js'
 import { clamp } from '../../../utils'
@@ -36,14 +42,12 @@ class AttributePopup extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
     const val = clamp(parseInt(e.target.value), ATTRIBUTE_MIN, ATTRIBUTE_MAX)
 
     this.setState({ character: { ... this.state.character, [e.target.name]: val }})
   }
 
   handleBlur(e) {
-    e.preventDefault()
     const trait = e.target.name
     if (this.state.character[trait] == this.props.character[trait])
       return
@@ -55,40 +59,29 @@ class AttributePopup extends React.Component {
     const character = this.state.character
     const { handleOpen, handleClose, handleChange, handleBlur } = this
 
-    const actions = [
-      <FlatButton
-        key="close"
-        label="Close"
-        primary={ true }
-        onClick={ handleClose }
-      />
-    ]
-
-    return(<div className="editor-wrap attribute-editor-wrap">
-      <FlatButton label="Edit" onClick={ handleOpen } />
+    return <span>
+      <Button onClick={ handleOpen }>Edit</Button>
       <Dialog
-        title="Editing Attributes"
-        className="editor-popup"
-        actions={ actions }
         open={ this.state.open }
-        onRequestClose={ handleClose }
+        onClose={ handleClose }
       >
+        <DialogTitle>Editing Attributes</DialogTitle>
         <div className="editor-popup editor-popup-attributes">
           <div className="attribute-set attribute-set-physical">
             <h3>Physical</h3>
-            <TextField name="attr_strength" floatingLabelText="Strength"
+            <RatingField trait="attr_strength" label="Strength"
               className="attribute-field"
               value={ character.attr_strength }
               type="number" min={ 1 } max={ 5 }
               onChange={ handleChange } onBlur={ handleBlur }
             />
-            <TextField name="attr_dexterity" floatingLabelText="Dexterity"
+            <TextField name="attr_dexterity" label="Dexterity"
               className="attribute-field"
               value={ character.attr_dexterity }
               type="number" min={ 1 } max={ 5 }
               onChange={ handleChange } onBlur={ handleBlur }
             />
-            <TextField name="attr_stamina" floatingLabelText="Stamina"
+            <TextField name="attr_stamina" label="Stamina"
               className="attribute-field"
               value={ character.attr_stamina }
               type="number" min={ 1 } max={ 5 }
@@ -98,19 +91,19 @@ class AttributePopup extends React.Component {
 
           <div className="attribute-set attribute-set-social">
             <h3>Social</h3>
-            <TextField name="attr_charisma" floatingLabelText="Charisma"
+            <TextField name="attr_charisma" label="Charisma"
               className="attribute-field"
               value={ character.attr_charisma }
               type="number" min={ 1 } max={ 5 }
               onChange={ handleChange } onBlur={ handleBlur }
             />
-            <TextField name="attr_manipulation" floatingLabelText="Manipulation"
+            <TextField name="attr_manipulation" label="Manipulation"
               className="attribute-field"
               value={ character.attr_manipulation }
               type="number" min={ 1 } max={ 5 }
               onChange={ handleChange } onBlur={ handleBlur }
             />
-            <TextField name="attr_appearance" floatingLabelText="Appearance"
+            <TextField name="attr_appearance" label="Appearance"
               className="attribute-field"
               value={ character.attr_appearance }
               type="number" min={ 1 } max={ 5 }
@@ -120,19 +113,19 @@ class AttributePopup extends React.Component {
 
           <div className="attribute-set attribute-set-mental">
             <h3>Mental</h3>
-            <TextField name="attr_perception" floatingLabelText="Perception"
+            <TextField name="attr_perception" label="Perception"
               className="attribute-field"
               value={ character.attr_perception }
               type="number" min={ 1 } max={ 5 }
               onChange={ handleChange } onBlur={ handleBlur }
             />
-            <TextField name="attr_intelligence" floatingLabelText="Intelligence"
+            <TextField name="attr_intelligence" label="Intelligence"
               className="attribute-field"
               value={ character.attr_intelligence }
               type="number" min={ 1 } max={ 5 }
               onChange={ handleChange } onBlur={ handleBlur }
             />
-            <TextField name="attr_wits" floatingLabelText="Wits"
+            <TextField name="attr_wits" label="Wits"
               className="attribute-field"
               value={ character.attr_wits }
               type="number" min={ 1 } max={ 5 }
@@ -141,7 +134,7 @@ class AttributePopup extends React.Component {
           </div>
         </div>
       </Dialog>
-    </div>)
+    </span>
   }
 }
 AttributePopup.propTypes = {

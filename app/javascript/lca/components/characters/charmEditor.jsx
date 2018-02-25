@@ -1,20 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
-import IconButton from 'material-ui/Button'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
-import Select from 'material-ui/Select'
 import { MenuItem } from 'material-ui/Menu'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import AbilitySelect from '../generic/abilitySelect.jsx'
+import RatingField from '../generic/ratingField.jsx'
 import { updateCharm, createCharm, destroyCharm } from '../../ducks/actions.js'
 import { clamp } from '../../utils'
 import { isAbilityCharm, abilitiesWithRatings } from '../../utils/calculated'
@@ -28,9 +26,14 @@ class SingleCharmEditor extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleRatingChange = this.handleRatingChange.bind(this)
     this.handleAbilityChange = this.handleAbilityChange.bind(this)
     this.handleTimingChange = this.handleTimingChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ charm: newProps.charm })
   }
 
   handleChange(e) {
@@ -54,6 +57,13 @@ class SingleCharmEditor extends React.Component {
     }
   }
 
+  handleRatingChange(e) {
+    const { name, value } = e.target
+    const { charm } = this.state
+
+    this.props.onUpdate(charm.id, charm.character_id, name, value)
+  }
+
   handleTimingChange(e, key, value) {
     const { charm } = this.state
 
@@ -75,94 +85,95 @@ class SingleCharmEditor extends React.Component {
   render() {
     const { character } = this.props
     const { charm } = this.state
+    const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
+
     const showAbility = charm.type == 'SolarCharm'
     const showMinAbility = isAbilityCharm(charm)
 
     return <BlockPaper>
+      <Button onClick={ handleRemove } style={{ float: 'right' }}>
+        Remove
+        <ContentRemoveCircle />
+      </Button>
+
       <TextField name="name" value={ charm.name }
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-        label="Name:"
+        onChange={ handleChange } onBlur={ handleBlur }
+        label="Name:" margin="dense"
       />
       { charm.type == 'Evocation' &&
         <TextField name="artifact_name" value={ charm.artifact_name }
-          onChange={ this.handleChange } onBlur={ this.handleBlur }
-          label="Artifact Name:"
+          onChange={ handleChange } onBlur={ handleBlur }
+          label="Artifact Name:" margin="dense"
         />
       }
       { charm.type == 'MartialArtsCharm' &&
         <TextField name="style" value={ charm.style }
-          onChange={ this.handleChange } onBlur={ this.handleBlur }
-          label="Style:"
+          onChange={ handleChange } onBlur={ handleBlur }
+          label="Style:" margin="dense"
         />
       }
       <br />
-      Mins:
+
       { showAbility &&
-        <AbilitySelect name="ability"
+        <AbilitySelect name="ability" label="Ability:" margin="dense"
           abilities={ abilitiesWithRatings(character) }
           value={ charm.ability }
-          onChange={ this.handleAbilityChange }
+          onChange={ handleRatingChange }
           multiple={ false }
         />
       }
       { showMinAbility &&
-        <TextField name="min_ability" value={ charm.min_ability }
-          type="number" min={ 1 } max={ 5 }
-          className="editor-rating-field"
-          onChange={ this.handleChange } onBlur={ this.handleBlur }
-          label="Ability:"
+        <RatingField trait="min_ability" value={ charm.min_ability }
+          min={ 1 } max={ ABILITY_MAX }
+          onChange={ handleRatingChange }
+          label="Ability:" margin="dense"
         />
       }
-      <TextField name="min_essence" value={ charm.min_essence }
-        type="number" min={ 1 } max={ 10 }
-        className="editor-rating-field"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-        label="Essence:"
+      <RatingField trait="min_essence" value={ charm.min_essence }
+        min={ ESSENCE_MIN } max={ ESSENCE_MAX }
+        onChange={ handleRatingChange }
+        label="Essence:" margin="dense"
       />
       <br />
-      <Select
-        label="Type:"
+      <TextField select name="timing"
+        label="Type:" margin="dense"
         value={ charm.timing }
-        onChange={ this.handleTimingChange }
+        onChange={ handleRatingChange }
       >
-        <MenuItem value="reflexive" primarytext="Reflexive" />
-        <MenuItem value="supplemental" primarytext="Supplemental" />
-        <MenuItem value="simple" primarytext="Simple" />
-        <MenuItem value="permanent" primarytext="Permanent" />
-      </Select>
+        <MenuItem value="reflexive">Reflexive</MenuItem>
+        <MenuItem value="supplemental">Supplemental</MenuItem>
+        <MenuItem value="simple">Simple</MenuItem>
+        <MenuItem value="permanent">Permanent</MenuItem>
+      </TextField>
+
       <TextField name="duration" value={ charm.duration }
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
-        label="Duration:"
+        onChange={ handleChange } onBlur={ handleBlur }
+        label="Duration:" margin="dense"
       />
       <br />
       <TextField name="keywords" value={ charm.keywords }
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Keywords:"
+        label="Keywords:" margin="dense"
       />
       <br />
       <TextField name="prereqs" value={ charm.prereqs }
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Prerequisite Charms:"
+        label="Prerequisite Charms:" margin="dense"
       />
       <br />
       <TextField name="body" value={ charm.body }
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
         className="editor-description-field" multiLine={ true } fullWidth={ true }
-        label="Effect:"
+        label="Effect:" margin="dense"
       />
       <br />
       <TextField name="ref" value={ charm.ref }
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Ref:"
+        label="Ref:" margin="dense"
       />
-      <IconButton onClick={ this.handleRemove } label="Remove"
-        style={{ float: 'right' }}
-      >
-        <ContentRemoveCircle />
-      </IconButton>
     </BlockPaper>
   }
 }
@@ -173,21 +184,15 @@ SingleCharmEditor.propTypes = {
   onRemove: PropTypes.func.isRequired,
 }
 
-class CharmFullPage extends React.Component {
+class CharmEditor extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { isEditing: false }
 
-    this.toggleEditor = this.toggleEditor.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleAddNative = this.handleAddNative.bind(this)
     this.handleAddMA = this.handleAddMA.bind(this)
     this.handleAddEvocation = this.handleAddEvocation.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
-  }
-
-  toggleEditor() {
-    this.setState({ isEditing: !this.state.isEditing })
   }
 
   handleUpdate(id, charId, trait, value) {
@@ -226,6 +231,10 @@ class CharmFullPage extends React.Component {
       </div>
 
     const { character, nativeCharms, martialArtsCharms, evocations } = this.props
+    const {
+      handleUpdate, handleRemove,
+      handleAddNative, handleAddMA, handleAddEvocation,
+    } = this
 
     let natives = []
     let maCharms = []
@@ -233,46 +242,61 @@ class CharmFullPage extends React.Component {
     natives = nativeCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SingleCharmEditor charm={ c } character={ character }
-          onUpdate={ this.handleUpdate } onRemove={ this.handleRemove }
+          onUpdate={ handleUpdate } onRemove={ handleRemove }
         />
       </Grid>
     )
     maCharms = martialArtsCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SingleCharmEditor charm={ c } character={ character }
-          onUpdate={ this.handleUpdate } onRemove={ this.handleRemove }
+          onUpdate={ handleUpdate } onRemove={ handleRemove }
         />
       </Grid>
     )
     evo = evocations.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SingleCharmEditor charm={ c } character={ character }
-          onUpdate={ this.handleUpdate } onRemove={ this.handleRemove }
+          onUpdate={ handleUpdate } onRemove={ handleRemove }
         />
       </Grid>
     )
 
     return <div>
       <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 }>
+        <Grid item xs={ 10 }>
           <Typography variant="headline">Charms</Typography>
+        </Grid>
+        <Grid item xs={ 2 }>
+          <Button onClick={ handleAddNative }>
+            <ContentAddCircle /> Add Native Charm
+          </Button>
         </Grid>
         { natives }
 
-        <Grid item xs={ 12 }>
+        <Grid item xs={ 10 }>
           <Typography variant="headline">Martial Arts</Typography>
+        </Grid>
+        <Grid item xs={ 2 }>
+          <Button onClick={ handleAddMA }>
+            <ContentAddCircle /> Add MA Charm
+          </Button>
         </Grid>
         { maCharms }
 
-        <Grid item xs={ 12 }>
+        <Grid item xs={ 10 }>
           <Typography variant="headline">Evocations</Typography>
+        </Grid>
+        <Grid item xs={ 2 }>
+          <Button onClick={ handleAddEvocation }>
+            <ContentAddCircle /> Add Evocation
+          </Button>
         </Grid>
         { evo }
       </Grid>
     </div>
   }
 }
-CharmFullPage.propTypes = {
+CharmEditor.propTypes = {
   character: PropTypes.object,
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
@@ -330,4 +354,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CharmFullPage)
+)(CharmEditor)

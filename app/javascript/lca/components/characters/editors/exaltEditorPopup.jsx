@@ -43,6 +43,8 @@ export class ExaltEditorPopup extends React.Component {
   }
 
   render() {
+    return <span />
+    /*
     const character = this.state.character
 
     // Mortals don't have 'exalt traits'
@@ -107,7 +109,7 @@ export class ExaltEditorPopup extends React.Component {
           />
         </div>
       </Dialog>
-    </span>
+    </span>*/
   }
 }
 

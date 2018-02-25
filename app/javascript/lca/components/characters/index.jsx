@@ -61,7 +61,7 @@ export function IntimacySummary(props) {
   </BlockPaper>
 }
 IntimacySummary.propTypes = {
-  character: PropTypes.shape(withIntimacies)
+  character: PropTypes.shape(withIntimacies),
 }
 
 export function WillpowerBlock(props) {
@@ -82,7 +82,7 @@ export function WillpowerBlock(props) {
   </BlockPaper>
 }
 WillpowerBlock.propTypes = {
-  character: PropTypes.shape(withWillpower)
+  character: PropTypes.shape(withWillpower),
 }
 
 export function MotePoolBlock(props) {
@@ -123,7 +123,7 @@ export function LimitTrackBlock(props) {
   </BlockPaper>
 }
 LimitTrackBlock.propTypes = {
-  character: PropTypes.object
+  character: PropTypes.object,
 }
 
 export function CraftBlock(props) {
@@ -137,6 +137,9 @@ export function CraftBlock(props) {
       Craft XP: { character.xp_craft_silver } silver, { character.xp_craft_gold } gold, { character.xp_craft_white } white
     </Typography>
   </BlockPaper>
+}
+CraftBlock.propTypes = {
+  character: PropTypes.object,
 }
 
 export class CharacterSheet extends React.Component {

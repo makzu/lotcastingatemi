@@ -12,7 +12,6 @@ const styles = theme => ({
     textTransform: 'capitalize',
   },
   meritName: { ...theme.typography.caption,
-
   }
 })
 
@@ -21,8 +20,8 @@ export function MeritSummaryBlock(props) {
 
   const merits = props.merits.map((merit) =>
     <div key={ merit.id } className={ classes.meritLine }>
-      { merit.name }
-      { merit.name.toUpperCase() != merit.merit_name.toUpperCase() &&
+      { merit.name || merit.merit_name }
+      { merit.name &&
         <span className={ classes.meritName }> ({ merit.merit_name })</span>
       }
       <RatingDots rating={merit.rating} dontFill />

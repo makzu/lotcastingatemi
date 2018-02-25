@@ -11,9 +11,9 @@ import Select from 'material-ui/Select'
 import { MenuItem } from 'material-ui/Menu'
 import Checkbox from 'material-ui/Checkbox'
 
-import { updateWeapon, createWeapon, destroyWeapon } from '../../ducks/actions.js'
-import * as calc from '../../utils/calculated'
-import { withAttributes, withAbilities, fullWeapon } from '../../utils/propTypes'
+import { updateWeapon, createWeapon, destroyWeapon } from '../../../ducks/actions.js'
+import * as calc from '../../../utils/calculated'
+import { withAttributes, withAbilities, fullWeapon } from '../../../utils/propTypes'
 
 function WeaponHeader() {
   return <TableRow>

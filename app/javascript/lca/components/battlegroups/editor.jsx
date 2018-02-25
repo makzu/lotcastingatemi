@@ -79,8 +79,6 @@ class BattlegroupEditor extends React.Component {
     this.props.updateBattlegroup(this.state.battlegroup.id, trait, value)
   }
 
-  /* TODO: Clean this up. Yikes. */
-  /* TODO also: replace popup with an editor that appears in-place */
   render() {
     /* Escape hatch */
     if (this.props.battlegroup == undefined)
@@ -98,11 +96,10 @@ class BattlegroupEditor extends React.Component {
         <Button component={ Link } to={ `/battlegroups/${battlegroup.id}` }>Done</Button>
       </Typography>
 
-      <Typography>
-        <small>
-          (For attacks, defenses, etc, do not include size/might/drill bonuses - those are added automatically)
-        </small>
-      </Typography>
+      <Typography><small>(
+        Use the stats of an average member of the group - bonuses from
+        drill/might/etc are added automatically
+      )</small></Typography>
 
       <TextField name="name" value={ battlegroup.name }
         label="Name:" className={ classes.nameField } margin="dense"

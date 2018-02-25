@@ -158,6 +158,20 @@ export function prettyIntimacyRating(rating) {
   }
 }
 
+export function prettyAnimaLevel(rating) {
+  switch(rating) {
+  case 3:
+    return 'Bonfire'
+  case 2:
+    return 'Burning'
+  case 1:
+    return 'Glowing'
+  case 0:
+  default:
+    return 'Dim'
+  }
+}
+
 export function isCasteAbility(character, ability) {
   return character.caste_abilities && includes(character.caste_abilities, ability)
 }

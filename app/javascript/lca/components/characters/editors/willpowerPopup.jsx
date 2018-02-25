@@ -64,7 +64,7 @@ class WillpowerPopup extends React.Component {
     ]
 
     return <span>
-      <Button label="Edit" onClick={ handleOpen } />
+      <Button onClick={ handleOpen }>Edit</Button>
       <Dialog
         title="Editing Willpower"
         actions={ actions }

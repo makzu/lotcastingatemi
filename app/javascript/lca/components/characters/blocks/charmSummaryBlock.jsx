@@ -30,7 +30,7 @@ SingleCharm.propTypes = {
   charm: PropTypes.object,
 }
 
-function CharmSummary(props) {
+function CharmSummaryBlock(props) {
   const { character, nativeCharms, martialArtsCharms, evocations } = props
 
   // Mortals don't need Charms displayed
@@ -60,7 +60,7 @@ function CharmSummary(props) {
     { evocations.length > 0 && evo }
   </BlockPaper>
 }
-CharmSummary.propTypes = {
+CharmSummaryBlock.propTypes = {
   character: PropTypes.shape(fullChar),
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
@@ -94,4 +94,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps
-)(CharmSummary)
+)(CharmSummaryBlock)

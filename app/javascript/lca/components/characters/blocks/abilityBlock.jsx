@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
-import RatingDots from '../generic/ratingDots.jsx'
-import { withAbilities, fullChar } from '../../utils/propTypes'
-import { isCasteAbility, isFavoredAbility, isSupernalAbility } from '../../utils/calculated'
+
+import RatingDots from '../../generic/ratingDots.jsx'
+import { withAbilities, fullChar } from '../../../utils/propTypes'
+import { isCasteAbility, isFavoredAbility, isSupernalAbility } from '../../../utils/calculated'
 
 const styles = theme => ({
   abilityName: { ...theme.typography.body1,
@@ -15,7 +16,7 @@ const styles = theme => ({
   },
 })
 
-function _AbilityBlock(props) {
+function _AbilityLine(props) {
   const { classes } = props
   const rating = props.rating != undefined ? props.rating : props.character[`abil_${props.ability}`]
   const supernal = isSupernalAbility(props.character, props.ability)
@@ -36,15 +37,15 @@ function _AbilityBlock(props) {
     <Divider />
   </div>
 }
-_AbilityBlock.propTypes = {
+_AbilityLine.propTypes = {
   ability: PropTypes.string.isRequired,
   rating: PropTypes.number,
   character: PropTypes.shape(fullChar),
   classes: PropTypes.object,
 }
-const AbilityBlock = withStyles(styles)(_AbilityBlock)
+const AbilityLine = withStyles(styles)(_AbilityLine)
 
-function _CraftAbilityBlock(props) {
+function _CraftAbilityLine(props) {
   const { classes } = props
   const supernal = isSupernalAbility(props.character, 'craft')
   const caste = isCasteAbility(props.character, 'craft')
@@ -64,15 +65,15 @@ function _CraftAbilityBlock(props) {
     <Divider />
   </div>
 }
-_CraftAbilityBlock.propTypes = {
+_CraftAbilityLine.propTypes = {
   context: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   character: PropTypes.shape(fullChar),
   classes: PropTypes.object,
 }
-const CraftAbilityBlock = withStyles(styles)(_CraftAbilityBlock)
+const CraftAbilityLine = withStyles(styles)(_CraftAbilityLine)
 
-function _MartialArtsAbilityBlock(props) {
+function _MartialArtsAbilityLine(props) {
   const { classes } = props
   const supernal = isSupernalAbility(props.character, 'brawl')
   const caste = isCasteAbility(props.character, 'brawl')
@@ -92,65 +93,65 @@ function _MartialArtsAbilityBlock(props) {
     <Divider />
   </div>
 }
-_MartialArtsAbilityBlock.propTypes = {
+_MartialArtsAbilityLine.propTypes = {
   style: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   character: PropTypes.shape(fullChar),
   classes: PropTypes.object,
 }
-const MartialArtsAbilityBlock = withStyles(styles)(_MartialArtsAbilityBlock)
+const MartialArtsAbilityLine = withStyles(styles)(_MartialArtsAbilityLine)
 
-export default function FullAbilityBlock(props) {
+export default function AbilityBlock(props) {
   const { character } = props
 
   let craft = ''
   if (character.abil_craft.length == 0) {
-    craft = <AbilityBlock ability="craft" rating={ 0 } character={ character } />
+    craft = <AbilityLine ability="craft" rating={ 0 } character={ character } />
   } else {
     craft = character.abil_craft.map((craft) =>
-      <CraftAbilityBlock key={craft.craft} context={ craft.craft } rating={craft.rating} character={ character } />
+      <CraftAbilityLine key={craft.craft} context={ craft.craft } rating={craft.rating} character={ character } />
     )
   }
 
   let ma = ''
   if (character.abil_martial_arts.length == 0) {
-    ma = <AbilityBlock ability="Martial Arts" rating={ 0 } character={ character } />
+    ma = <AbilityLine ability="Martial Arts" rating={ 0 } character={ character } />
   } else {
     ma = character.abil_martial_arts.map((ma) =>
-      <MartialArtsAbilityBlock key={ma.style} style={ ma.style } rating={ma.rating} character={ character } />
+      <MartialArtsAbilityLine key={ma.style} style={ ma.style } rating={ma.rating} character={ character } />
     )
   }
 
   return <div>
-    <AbilityBlock ability="archery"       character={ character } />
-    <AbilityBlock ability="athletics"     character={ character } />
-    <AbilityBlock ability="awareness"     character={ character } />
-    <AbilityBlock ability="brawl"         character={ character } />
-    <AbilityBlock ability="bureaucracy"   character={ character } />
+    <AbilityLine ability="archery"       character={ character } />
+    <AbilityLine ability="athletics"     character={ character } />
+    <AbilityLine ability="awareness"     character={ character } />
+    <AbilityLine ability="brawl"         character={ character } />
+    <AbilityLine ability="bureaucracy"   character={ character } />
     { craft }
-    <AbilityBlock ability="dodge"         character={ character } />
-    <AbilityBlock ability="integrity"     character={ character } />
-    <AbilityBlock ability="investigation" character={ character } />
-    <AbilityBlock ability="larceny"       character={ character } />
-    <AbilityBlock ability="linguistics"   character={ character } />
-    <AbilityBlock ability="lore"          character={ character } />
+    <AbilityLine ability="dodge"         character={ character } />
+    <AbilityLine ability="integrity"     character={ character } />
+    <AbilityLine ability="investigation" character={ character } />
+    <AbilityLine ability="larceny"       character={ character } />
+    <AbilityLine ability="linguistics"   character={ character } />
+    <AbilityLine ability="lore"          character={ character } />
     { ma }
-    <AbilityBlock ability="medicine"      character={ character } />
-    <AbilityBlock ability="melee"         character={ character } />
-    <AbilityBlock ability="occult"        character={ character } />
-    <AbilityBlock ability="performance"   character={ character } />
-    <AbilityBlock ability="presence"      character={ character } />
-    <AbilityBlock ability="resistance"    character={ character } />
-    <AbilityBlock ability="ride"          character={ character } />
-    <AbilityBlock ability="sail"          character={ character } />
-    <AbilityBlock ability="socialize"     character={ character } />
-    <AbilityBlock ability="stealth"       character={ character } />
-    <AbilityBlock ability="survival"      character={ character } />
-    <AbilityBlock ability="thrown"        character={ character } />
-    <AbilityBlock ability="war"           character={ character } />
+    <AbilityLine ability="medicine"      character={ character } />
+    <AbilityLine ability="melee"         character={ character } />
+    <AbilityLine ability="occult"        character={ character } />
+    <AbilityLine ability="performance"   character={ character } />
+    <AbilityLine ability="presence"      character={ character } />
+    <AbilityLine ability="resistance"    character={ character } />
+    <AbilityLine ability="ride"          character={ character } />
+    <AbilityLine ability="sail"          character={ character } />
+    <AbilityLine ability="socialize"     character={ character } />
+    <AbilityLine ability="stealth"       character={ character } />
+    <AbilityLine ability="survival"      character={ character } />
+    <AbilityLine ability="thrown"        character={ character } />
+    <AbilityLine ability="war"           character={ character } />
   </div>
 }
 
-FullAbilityBlock.propTypes = {
+AbilityBlock.propTypes = {
   character: PropTypes.shape(withAbilities)
 }

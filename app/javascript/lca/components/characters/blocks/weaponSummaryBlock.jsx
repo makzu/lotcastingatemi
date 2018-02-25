@@ -204,7 +204,7 @@ WeaponFieldset.propTypes = {
   onRemove: PropTypes.func.isRequired
 }
 
-class WeaponSummary extends React.Component {
+class WeaponSummaryBlock extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -257,7 +257,7 @@ class WeaponSummary extends React.Component {
     </div> // */
   }
 }
-WeaponSummary.propTypes = {
+WeaponSummaryBlock.propTypes = {
   weapons: PropTypes.arrayOf(PropTypes.shape(fullWeapon)),
   character: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
   _handleUpdate: PropTypes.func,
@@ -282,4 +282,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(WeaponSummary)
+)(WeaponSummaryBlock)

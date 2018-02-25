@@ -4,21 +4,20 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Button from 'material-ui/Button'
-import Grid from 'material-ui/Grid'
 import Divider from 'material-ui/Divider'
+import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
-import AttributeBlock from './blocks/attributeBlock.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
-import MeritSummaryBlock from './blocks/meritSummaryBlock.jsx'
-import SpecialtyBlock from './blocks/specialtyBlock.jsx'
-import CombatBlock from './blocks/combatBlock.jsx'
-import SocialBlock from './blocks/socialBlock.jsx'
-import FullAbilityBlock from './fullAbilityBlock.jsx'
-import WeaponSummary from './weaponSummary.jsx'
+import AbilityBlock from './blocks/abilityBlock.jsx'
 import ArmorSummary from './blocks/armorSummary.jsx'
+import AttributeBlock from './blocks/attributeBlock.jsx'
+import CharmSummaryBlock from './blocks/charmSummaryBlock.jsx'
+import CombatBlock from './blocks/combatBlock.jsx'
 import HealthLevelBlock from './blocks/healthLevelBlock.jsx'
-import CharmSummary from './charmSummary.jsx'
+import MeritSummaryBlock from './blocks/meritSummaryBlock.jsx'
+import SocialBlock from './blocks/socialBlock.jsx'
+import SpecialtyBlock from './blocks/specialtyBlock.jsx'
+import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
 import AbilityPopup from './editors/abilityPopup.jsx'
 import IntimacyPopup from './editors/intimacyPopup.jsx'
@@ -27,9 +26,10 @@ import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
 import LimitPopup from './editors/limitPopup.jsx'
 import ExaltEditorPopup from './editors/exaltEditorPopup.jsx'
 
+import BlockPaper from '../generic/blockPaper.jsx'
 import RatingDots from '../generic/ratingDots.jsx'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
-import { prettyFullExaltType } from '../../utils/calculated'
+import { prettyFullExaltType, prettyAnimaLevel } from '../../utils/calculated'
 
 export function IntimacySummary(props) {
   const principles = props.character.principles.map((p, index) =>
@@ -88,23 +88,21 @@ WillpowerBlock.propTypes = {
 export function MotePoolBlock(props) {
   const { character } = props
   return <BlockPaper>
-    { character.motes_personal_total > 0 &&
-      <div>
-        <Typography variant="title">
-          Mote Pool
-        </Typography>
+    <Typography variant="title">
+      Mote Pool
+    </Typography>
 
-        <Typography>
-          Personal: { character.motes_personal_current } / { character.motes_personal_total }
-        </Typography>
-        <Typography>
-          Peripheral: { character.motes_peripheral_current } / { character.motes_peripheral_total }
-        </Typography>
-      </div>
-    }
+    <Typography>
+      Personal: { character.motes_personal_current } / { character.motes_personal_total }
+    </Typography>
+    <Typography paragraph>
+      Peripheral: { character.motes_peripheral_current } / { character.motes_peripheral_total }
+    </Typography>
+    <Typography>
+      Anima banner: { prettyAnimaLevel(character.anima_level) }
+    </Typography>
   </BlockPaper>
 }
-
 MotePoolBlock.propTypes = {
   character: PropTypes.shape(fullChar),
 }
@@ -126,6 +124,19 @@ export function LimitTrackBlock(props) {
 }
 LimitTrackBlock.propTypes = {
   character: PropTypes.object
+}
+
+export function CraftBlock(props) {
+  const { character } = props
+  return <BlockPaper>
+    <Typography variant="title">
+      Crafting
+    </Typography>
+
+    <Typography>
+      Craft XP: { character.xp_craft_silver } silver, { character.xp_craft_gold } gold, { character.xp_craft_white } white
+    </Typography>
+  </BlockPaper>
 }
 
 export class CharacterSheet extends React.Component {
@@ -169,9 +180,11 @@ export class CharacterSheet extends React.Component {
           <HealthLevelBlock character={ character } />
         </Grid>
 
-        <Grid item xs={ 12 } md={ 2 }>
-          <MotePoolBlock character={ character } />
-        </Grid>
+        { character.type != 'Character' &&
+          <Grid item xs={ 12 } md={ 2 }>
+            <MotePoolBlock character={ character } />
+          </Grid>
+        }
 
         <Grid item xs={ 12 } sm={ 6 } md={ 3 }>
           <BlockPaper>
@@ -180,7 +193,7 @@ export class CharacterSheet extends React.Component {
               <AbilityPopup character={ character } />
             </Typography>
 
-            <FullAbilityBlock character={ character } />
+            <AbilityBlock character={ character } />
           </BlockPaper>
         </Grid>
 
@@ -210,12 +223,11 @@ export class CharacterSheet extends React.Component {
                 <Typography variant="title">
                   Weapons
                 </Typography>
-                <WeaponSummary character={ character } weapons={ weapons } />
+                <WeaponSummaryBlock character={ character } weapons={ weapons } />
               </BlockPaper>
             </Grid>
           </Grid>
         </Grid>
-
 
         <Grid item xs={ 12 } md={ 8 }>
           <BlockPaper>
@@ -246,7 +258,7 @@ export class CharacterSheet extends React.Component {
 
         { character.type != 'Character' &&
           <Grid item xs={ 12 }>
-            <CharmSummary character={ character } />
+            <CharmSummaryBlock character={ character } />
           </Grid>
         }
       </Grid>

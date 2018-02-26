@@ -2,28 +2,37 @@ import { FETCH_SUCCESS as PLAYER_FETCH_SUCCESS } from './entities/player.js'
 
 export const LOGOUT =         'lca/session/LOGOUT'
 
+function isAuthFailure(action) {
+  return (action.error && action.payload.status == 401)
+}
+
 const defaultState = {
   authenticated: !!sessionStorage.jwt || false,
   id: 0,
-  fetching: false,
-  error: {},
+  error: '',
 }
 
 export default function SessionReducer(state = defaultState, action) {
-  switch(action.type) {
+  if (isAuthFailure(action)) {
+    return { ...state,
+      authenticated: false,
+      id: 0,
+      error: action.payload.status,
+    }
+  }
 
+  switch(action.type) {
   case LOGOUT:
     return { ...state,
-      authenticated: !!sessionStorage.jwt,
-      fetching: false,
+      authenticated: false,
       id: 0,
-      error: {},
-      errorMessage: '',
+      error: '',
     }
 
   case PLAYER_FETCH_SUCCESS:
     return { ...state,
-      id: action.payload.result
+      id: action.payload.result,
+      error: ''
     }
 
   default:

@@ -70,7 +70,7 @@ export function attackAbilities(character) {
 export function abilitiesWithRatings(character) {
   const abils = ABILITIES_ALL.filter((a) => {
     if (a.abil == 'abil_craft' || a.abil == 'abil_martial_arts')
-      return character[a.abil].length >0
+      return character[a.abil].length > 0
     else
       return character[a.abil] > 0
   })

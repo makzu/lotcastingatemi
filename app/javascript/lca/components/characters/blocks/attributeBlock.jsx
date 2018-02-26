@@ -8,7 +8,6 @@ import BlockPaper from '../../generic/blockPaper.jsx'
 import AttributeBlockPhysical from './attributeBlockPhysical.jsx'
 import AttributeBlockSocial from './attributeBlockSocial.jsx'
 import AttributeBlockMental from './attributeBlockMental.jsx'
-import AttributePopup from '../editors/attributePopup.jsx'
 import { withAttributes } from '../../../utils/propTypes'
 
 function AttributeBlock(props) {
@@ -17,7 +16,6 @@ function AttributeBlock(props) {
   return <BlockPaper>
     <Typography variant="title">
       Attributes
-      <AttributePopup character={ character } />
     </Typography>
     <Grid container spacing={ 24 }>
       <Grid item xs={ 4 }>

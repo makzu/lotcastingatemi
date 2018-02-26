@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import HealthLevelPopup from '../editors/healthLevelPopup.jsx'
 import HealthLevelBoxes from '../../generic/HealthLevelBoxes.jsx'
 
 import { woundPenalty } from '../../../utils/calculated'
@@ -16,7 +15,6 @@ export default function HealthLevelBlock(props) {
   return <BlockPaper>
     <Typography variant="title">
       Health Levels
-      <HealthLevelPopup character={ character } />
     </Typography>
 
     <HealthLevelBoxes character={ character } />

@@ -37,8 +37,6 @@ class BattlegroupEditor extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
-    this.onListChange = this.onListChange.bind(this)
-    this.onListBlur = this.onListBlur.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -46,37 +44,25 @@ class BattlegroupEditor extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
-    let val = e.target.value
+    let { name, value } = e.target
 
-    this.setState({ battlegroup: { ... this.state.battlegroup, [e.target.name]: val }})
+    this.setState({ battlegroup: { ... this.state.battlegroup, [name]: value }})
   }
 
   handleBlur(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    if (this.state.battlegroup[trait] == this.props.battlegroup[trait])
+    const { name } = e.target
+    const { battlegroup } = this.state
+    if (battlegroup[name] == this.props.battlegroup[name])
       return
 
-    this.props.updateBattlegroup(this.state.battlegroup.id, trait, this.state.battlegroup[trait])
+    this.props.updateBattlegroup(battlegroup.id, name, battlegroup[name])
   }
 
   handleRatingChange(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    const value = e.target.value
-    this.setState({ battlegroup: { ... this.state.battlegroup, [trait]: value }})
-    this.props.updateBattlegroup(this.state.battlegroup.id, trait, value)
-  }
+    const { name, value } = e.target
 
-  onListChange(trait, value) {
-    this.setState({ battlegroup: { ...this.state.battlegroup, [trait]: value }})
-    this.props.updateBattlegroup(this.state.battlegroup.id, trait, value)
-  }
-
-  onListBlur(trait, value) {
-    this.setState({ battlegroup: { ...this.state.battlegroup, [trait]: value }})
-    this.props.updateBattlegroup(this.state.battlegroup.id, trait, value)
+    this.setState({ battlegroup: { ...this.state.battlegroup, [name]: value }})
+    this.props.updateBattlegroup(this.state.battlegroup.id, name, value)
   }
 
   render() {

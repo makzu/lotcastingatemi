@@ -19,13 +19,6 @@ import SocialBlock from './blocks/socialBlock.jsx'
 import SpecialtyBlock from './blocks/specialtyBlock.jsx'
 import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
-import AbilityPopup from './editors/abilityPopup.jsx'
-import IntimacyPopup from './editors/intimacyPopup.jsx'
-import WillpowerPopup from './editors/willpowerPopup.jsx'
-import BasicsEditorPopup from './editors/basicsEditorPopup.jsx'
-import LimitPopup from './editors/limitPopup.jsx'
-import ExaltEditorPopup from './editors/exaltEditorPopup.jsx'
-
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingDots from '../generic/ratingDots.jsx'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
@@ -50,7 +43,6 @@ export function IntimacySummary(props) {
   return <BlockPaper>
     <Typography variant="title">
       Intimacies
-      <IntimacyPopup character={ props.character } />
     </Typography>
 
     <Typography variant="subheading">Principles</Typography>
@@ -70,7 +62,6 @@ export function WillpowerBlock(props) {
   return <BlockPaper>
     <Typography variant="title">
       Willpower
-      <WillpowerPopup character={ character } />
     </Typography>
 
     <Typography component="div">
@@ -113,7 +104,6 @@ export function LimitTrackBlock(props) {
   return <BlockPaper>
     <Typography variant="title">
       Limit
-      <LimitPopup character={ character } />
     </Typography>
 
     <Typography component="div">
@@ -161,12 +151,10 @@ export class CharacterSheet extends React.Component {
           <BlockPaper>
             <Typography variant="headline">
               { character.name }
-              <BasicsEditorPopup character={ character } />
             </Typography>
 
             <Typography variant="subheading">
               Essence { character.essence } { prettyFullExaltType(character) }
-              <ExaltEditorPopup character={ character } />
             </Typography>
 
             <Typography paragraph>
@@ -193,7 +181,6 @@ export class CharacterSheet extends React.Component {
           <BlockPaper>
             <Typography variant="title">
               Abilities
-              <AbilityPopup character={ character } />
             </Typography>
 
             <AbilityBlock character={ character } />

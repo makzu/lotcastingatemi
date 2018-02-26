@@ -58,9 +58,10 @@ class SingleCharmEditor extends React.Component {
   }
 
   handleRatingChange(e) {
-    const { name, value } = e.target
+    let { name, value } = e.target
     const { charm } = this.state
 
+    this.setState({ charm: { ...charm, [name]: value }})
     this.props.onUpdate(charm.id, charm.character_id, name, value)
   }
 
@@ -165,7 +166,7 @@ class SingleCharmEditor extends React.Component {
       <br />
       <TextField name="body" value={ charm.body }
         onChange={ handleChange } onBlur={ handleBlur }
-        className="editor-description-field" multiLine={ true } fullWidth={ true }
+        className="editor-description-field" multiline fullWidth
         label="Effect:" margin="dense"
       />
       <br />

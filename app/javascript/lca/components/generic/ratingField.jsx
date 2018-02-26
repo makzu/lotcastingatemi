@@ -3,25 +3,55 @@ import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 import { withStyles } from 'material-ui/styles'
 
+import { clamp } from '../../utils/'
+
 const styles = theme => ({
   field: {
-    width: '3.5em',
-    //marginLeft: theme.spacing.unit,
+    width: '4em',
     marginRight: theme.spacing.unit,
   }
 })
 
 // TODO Special fields for x/y resources like mote/willpower pools
-function RatingField(props) {
-  const { trait, label, onChange, value, classes } = props
-  const min = props.min || 0
-  const max = props.max || Infinity
+class RatingField extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: this.props.value,
+      min: this.props.min || 0,
+      max: this.props.max || Infinity,
+    }
 
-  return <TextField className={ classes.field }
-    type="number" inputProps={{ min: min, max: max }}
-    name={ trait } label={ label } value={ value }
-    onChange={ onChange } margin={ props.margin || 'none' }
-  />
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      value: newProps.value,
+      min: newProps.min || 0,
+      max: newProps.max || Infinity,
+    })
+  }
+
+  handleChange(e) {
+    const { min, max } = this.state
+    let value = clamp(parseInt(e.target.value), min, max)
+    const fakeE = { target: { name: e.target.name, value: value }}
+
+    this.props.onChange(fakeE)
+  }
+
+  render() {
+    const { trait, label, classes } = this.props
+    const { handleChange } = this
+    const { value, min, max } = this.state
+
+    return <TextField className={ classes.field }
+      type="number" inputProps={{ min: min, max: max }}
+      name={ trait } label={ label } value={ value }
+      onChange={ handleChange } margin={ this.props.margin || 'none' }
+    />
+  }
 }
 
 RatingField.propTypes = {

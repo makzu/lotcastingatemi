@@ -15,10 +15,8 @@ export default class QcMeritFields extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
-    this.handleRangeChange = this.handleRangeChange.bind(this)
-    this.handleCheck = this.handleCheck.bind(this)
-    this.handleRatingChange = this.handleRatingChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleCheck = this.handleCheck.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
 
@@ -32,47 +30,29 @@ export default class QcMeritFields extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
-    let val = e.target.value
-    if (e.target.name == 'tags') {
-      val = val.split(',')
-    }
+    let { name, value } = e.target
+    if (name == 'tags')
+      value = value.split(',')
 
-    this.setState({ merit: { ...this.state.merit, [e.target.name]: val }})
-  }
-
-  handleRangeChange(e) {
-    const value = e.target.value
-
-    this.setState({ merit: { ...this.state.merit, range: value }})
-    this.props.onMeritChange(this.state.merit.id, 'range', value)
-  }
-
-  handleCheck(e) {
-    const trait = e.target.value
-    let value = !this.state.merit[trait]
-    this.setState({ merit: { ...this.state.merit, [trait]: value }})
-    this.props.onMeritChange(this.state.merit.id, [trait], value)
-  }
-
-  handleRatingChange(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    const value = e.target.value
-    this.setState({ merit: { ...this.state.merit, [trait]: value }})
-    this.props.onMeritChange(this.state.merit.id, trait, value)
+    this.setState({ merit: { ...this.state.merit, [name]: value }})
   }
 
   handleBlur(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    let value = e.target.value
-    if (trait == 'tags') {
-      value = value.split(',')
-    }
+    const { name } = e.target
+    const { merit } = this.state
+    if (merit[name] == this.props.merit[name])
+      return
 
-    if (this.state.merit[trait] != this.props.merit[trait])
-      this.props.onMeritChange(this.state.merit.id, trait, value)
+    this.props.onMeritChange(merit.id, name, merit[name])
+  }
+
+  handleCheck(e) {
+    const { name } = e.target
+    const { merit } = this.state
+    const value = !merit[name]
+
+    this.setState({ merit: { ...merit, [name]: value }})
+    this.props.onMeritChange(merit.id, name, value)
   }
 
   handleRemove(e) {
@@ -88,36 +68,37 @@ export default class QcMeritFields extends React.Component {
         label="Name:"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
+
       <FormControlLabel
         label="Latent"
         control={
-          <Checkbox
-            checked={ merit.latent }
+          <Checkbox name="latent" checked={ merit.latent }
             onChange={ this.handleCheck }
-            value="latent"
           />
         }
       />
+
       <FormControlLabel
         label="Magical"
         control={
-          <Checkbox
-            checked={ merit.magical }
+          <Checkbox name="magical" checked={ merit.magical }
             onChange={ this.handleCheck }
-            value="magical"
           />
         }
       />
+
       <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
         <ContentRemoveCircle />
       </IconButton>
       <br />
+
       <TextField name="body" value={ merit.body }
         label="Text:"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         fullWidth={ true } multiline
       />
       <br />
+
       <TextField name="ref" value={ merit.ref }
         label="Reference:"
         onChange={ this.handleChange } onBlur={ this.handleBlur }

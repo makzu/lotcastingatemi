@@ -51,9 +51,10 @@ export class MeritFields extends React.Component {
   }
 
   handleRatingChange(e) {
-    const { name, value } = e.target
+    let { name, value } = e.target
     const { merit } = this.state
 
+    this.setState({ merit: { ...merit, [name]: value }})
     this.props.onUpdate(merit.id, merit.character_id, name, value)
   }
 
@@ -108,8 +109,7 @@ export class MeritFields extends React.Component {
 
         <FormControlLabel
           control={
-            <Checkbox
-              name="supernatural" checked={ merit.supernatural }
+            <Checkbox name="supernatural" checked={ merit.supernatural }
               onChange={ handleCheck }
             />
           }

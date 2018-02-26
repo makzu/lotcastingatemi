@@ -15,8 +15,6 @@ export default class QcCharmFields extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
-    this.handleRangeChange = this.handleRangeChange.bind(this)
-    this.handleCheck = this.handleCheck.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
@@ -32,47 +30,28 @@ export default class QcCharmFields extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
-    let val = e.target.value
-    if (e.target.name == 'tags') {
-      val = val.split(',')
-    }
+    let { name, value } = e.target
+    if (name == 'tags')
+      value = value.split(',')
 
-    this.setState({ charm: { ...this.state.charm, [e.target.name]: val }})
-  }
-
-  handleRangeChange(e) {
-    const value = e.target.value
-
-    this.setState({ charm: { ...this.state.charm, range: value }})
-    this.props.onCharmChange(this.state.charm.id, 'range', value)
-  }
-
-  handleCheck(e) {
-    const trait = e.target.value
-    let value = !this.state.charm[trait]
-    this.setState({ charm: { ...this.state.charm, [trait]: value }})
-    this.props.onCharmChange(this.state.charm.id, [trait], value)
-  }
-
-  handleRatingChange(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    const value = e.target.value
-    this.setState({ charm: { ...this.state.charm, [trait]: value }})
-    this.props.onCharmChange(this.state.charm.id, trait, value)
+    this.setState({ charm: { ...this.state.charm, [name]: value }})
   }
 
   handleBlur(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    let value = e.target.value
-    if (trait == 'tags') {
-      value = value.split(',')
-    }
+    const { name, value } = e.target
+    const { charm } = this.state
+    if (charm[name] == this.props.charm[name])
+      return
 
-    if (this.state.charm[trait] != this.props.charm[trait])
-      this.props.onCharmChange(this.state.charm.id, trait, value)
+    this.props.onCharmChange(charm.id, name, value)
+  }
+
+  handleRatingChange(e) {
+    let { name, value } = e.target
+    const { charm } = this.state
+
+    this.setState({ charm: { ...charm, [name]: value }})
+    this.props.onCharmChange(charm.id, name, value)
   }
 
   handleRemove(e) {
@@ -82,28 +61,29 @@ export default class QcCharmFields extends React.Component {
 
   render() {
     const { charm } = this.state
+    const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
 
     return <div style={{ marginBottom: '0.5em' }}>
       <TextField name="name" value={ charm.name }
         label="Name:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
       />
       <RatingField trait="min_essence" value={ charm.min_essence }
         label="Essence:"
-        onChange={ this.handleRatingChange }
+        onChange={ handleRatingChange }
       />
       <TextField name="cost" value={ charm.cost }
         label="Cost:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
       />
-      <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
+      <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>
         <ContentRemoveCircle />
       </IconButton>
       <br />
 
       <TextField select name="timing" value={ charm.timing }
         label="Type:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleRatingChange }
       >
         <MenuItem key="simple" value="simple">Simple</MenuItem>
         <MenuItem key="supplemental" value="supplemental">Supplemental</MenuItem>
@@ -112,19 +92,19 @@ export default class QcCharmFields extends React.Component {
       </TextField>
       <TextField name="keywords" value={ charm.keywords }
         label="Keywords:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
       />
       <br />
 
       <TextField name="body" value={ charm.body }
         label="Text:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true } multiline
       />
       <br />
       <TextField name="ref" value={ charm.ref }
         label="Reference:"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
       />
     </div>
   }

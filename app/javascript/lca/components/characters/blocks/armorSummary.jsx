@@ -5,7 +5,6 @@ import Table, { TableBody, TableHead, TableRow, TableCell } from 'material-ui/Ta
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import ArmorPopup from '../editors/armorPopup.jsx'
 import * as calc from '../../../utils/calculated'
 import { withArmorStats } from '../../../utils/propTypes'
 
@@ -17,7 +16,6 @@ export default function ArmorSummary(props) {
   return <BlockPaper>
     <Typography variant="title">
       Armor &amp; Defense
-      <ArmorPopup character={ character } />
     </Typography>
 
     <Table>

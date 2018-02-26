@@ -6,7 +6,6 @@ import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import SpecialtyPopup from '../editors/specialtyPopup.jsx'
 import { withSpecialties } from '../../../utils/propTypes'
 
 const styles = theme => ({
@@ -36,7 +35,6 @@ function FullSpecialtyBlock(props) {
   return <BlockPaper>
     <Typography variant="title">
       Specialties
-      <SpecialtyPopup character={ props.character } />
     </Typography>
 
     { spec }

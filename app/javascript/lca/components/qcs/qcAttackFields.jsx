@@ -30,9 +30,8 @@ class QcAttackFields extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
-    this.handleRangeChange = this.handleRangeChange.bind(this)
-    this.handleRatingChange = this.handleRatingChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleRatingChange = this.handleRatingChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
 
@@ -55,50 +54,40 @@ class QcAttackFields extends React.Component {
     this.setState({ attack: { ...this.state.attack, [e.target.name]: val }})
   }
 
-  handleRangeChange(e) {
-    const value = e.target.value
+  handleBlur(e) {
+    let { name } = e.target
+    const { attack } = this.state
+    if (attack[name] == this.props.attack[name])
+      return
 
-    this.setState({ attack: { ...this.state.attack, range: value }})
-    this.props.onAttackChange(this.state.attack.id, 'range', value)
+    this.props.onAttackChange(attack.id, name, attack[name])
   }
 
   handleRatingChange(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    const value = e.target.value
-    this.setState({ attack: { ...this.state.attack, [trait]: value }})
-    this.props.onAttackChange(this.state.attack.id, trait, value)
+    let { name, value } = e.target
+    const { attack } = this.state
+
+    this.setState({ attack: { ...attack, [name]: value }})
+    this.props.onAttackChange(attack.id, name, value)
   }
 
-  handleBlur(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    let value = e.target.value
-    if (trait == 'tags') {
-      value = value.split(',')
-    }
-
-    if (this.state.attack[trait] != this.props.attack[trait])
-      this.props.onAttackChange(this.state.attack.id, trait, value)
-  }
-
-  handleRemove(e) {
-    e.preventDefault()
+  handleRemove() {
     this.props.onRemoveClick(this.state.attack.id)
   }
 
   render() {
     const { attack } = this.state
     const { battlegroup, fakeBg, classes } = this.props
+    const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
 
     return <div>
       <TextField name="name" value={ attack.name }
         label="Name:" className={ classes.nameField } margin="dense"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
       />
       <RatingField trait="pool" value={ attack.pool }
         label="Pool:" min={ 1 } margin="dense"
-        onChange={ this.handleRatingChange }
+        onChange={ handleRatingChange }
       />
       { battlegroup &&
         <span className={ classes.bgBonus }>
@@ -107,7 +96,7 @@ class QcAttackFields extends React.Component {
       }
       <RatingField trait="damage" value={ attack.damage }
         label="Damage:" min={ 1 } margin="dense"
-        onChange={ this.handleRatingChange }
+        onChange={ handleRatingChange }
       />
       { battlegroup &&
         <span className={ classes.bgBonus }>
@@ -116,15 +105,15 @@ class QcAttackFields extends React.Component {
       }
       <RatingField trait="overwhelming" value={ attack.overwhelming }
         label="Ovw.:" min={ 1 } margin="dense"
-        onChange={ this.handleRatingChange }
+        onChange={ handleRatingChange }
       />
       <TextField name="tags" value={ attack.tags }
         label="Tags:" className={ classes.tagsField } margin="dense"
-        onChange={ this.handleChange } onBlur={ this.handleBlur }
+        onChange={ handleChange } onBlur={ handleBlur }
       />
       <TextField select name="range" value={ attack.range }
         label="Range:" margin="dense"
-        onChange={ this.handleRangeChange }
+        onChange={ handleRatingChange }
       >
         <MenuItem key="close" value="close">Close</MenuItem>
         <MenuItem key="short" value="short">Short</MenuItem>
@@ -133,7 +122,7 @@ class QcAttackFields extends React.Component {
         <MenuItem key="extreme" value="extreme">Extreme</MenuItem>
       </TextField>
 
-      <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
+      <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>
         <ContentRemoveCircle />
       </IconButton>
     </div>

@@ -35,26 +35,24 @@ class QcEditor extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
-
     this.setState({ qc: { ... this.state.qc, [e.target.name]: e.target.value }})
   }
 
   handleBlur(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    if (this.state.qc[trait] == this.props.qc[trait])
+    const { name } = e.target
+    const { qc } = this.state
+    if (qc[name] == this.props.qc[name])
       return
 
-    this.props.updateQc(this.state.qc.id, trait, this.state.qc[trait])
+    this.props.updateQc(qc.id, name, qc[name])
   }
 
   handleRatingChange(e) {
-    e.preventDefault()
-    const trait = e.target.name
-    const value = e.target.value
-    this.setState({ qc: { ... this.state.qc, [trait]: value }})
-    this.props.updateQc(this.state.qc.id, trait, value)
+    let { name, value } = e.target
+    const { qc } = this.state
+
+    this.setState({ qc: { ...qc, [name]: value }})
+    this.props.updateQc(qc.id, name, value)
   }
 
   handleListChange(trait, value) {

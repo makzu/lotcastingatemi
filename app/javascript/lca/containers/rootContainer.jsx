@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { hot } from 'react-hot-loader'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 
 import App from './App.jsx'
@@ -25,4 +26,4 @@ RootContainer.propTypes = {
   store: PropTypes.object.isRequired
 }
 
-export default RootContainer
+export default hot(module)(RootContainer)

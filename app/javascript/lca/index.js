@@ -30,20 +30,4 @@ const store = createStore(
 
 store.dispatch(lcaInit())
 
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Component store={ store } />
-    </AppContainer>,
-    document.getElementById('root')
-  )
-}
-
-render(RootContainer)
-
-if (module.hot) {
-  module.hot.accept('./containers/rootContainer.jsx', () => {
-    const NextRoot = require('./containers/rootContainer.jsx').default
-    render(NextRoot)
-  })
-}
+ReactDOM.render(<RootContainer store={ store } />, document.getElementById('root'))

@@ -9,7 +9,7 @@ export {
   updateQcMerit, createQcMerit, destroyQcMerit,
   updateQcCharm, createQcCharm, destroyQcCharm,
   createBattlegroup, updateBattlegroup, destroyBattlegroup,
-  fetchCurrentPlayer
+  fetchCurrentPlayer, updatePlayer,
 } from './entities'
 
 export { logout } from './account.js'

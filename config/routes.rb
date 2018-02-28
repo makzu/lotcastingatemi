@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'player_token' => 'player_token#create'
-      resources :players, only: %i[index create show]
+      resources :players, only: %i[index show update]
 
       resources :chronicles, only: %i[create show update destroy]
 

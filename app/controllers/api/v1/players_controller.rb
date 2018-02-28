@@ -3,8 +3,8 @@
 module Api
   module V1
     class PlayersController < Api::V1::BaseController
-      before_action :authenticate_player, except: [:create]
-      before_action :set_player, only: [:show]
+      before_action :authenticate_player
+      before_action :set_player, only: %i[show update]
 
       # Show the currently logged-in player
       def index
@@ -18,12 +18,10 @@ module Api
         render json: @player, include: %w[characters.* qcs.* battlegroups]
       end
 
-      def create
-        @player = Player.new(player_params)
-
-        if @player.save
-          t = Knock::AuthToken.new payload: { sub: @player.id }
-          render json: t, status: :created
+      def update
+        authorize @player
+        if @player.update_attributes(player_params)
+          render json: @player
         else
           render json: @player.errors.details, status: :bad_request
         end
@@ -36,7 +34,7 @@ module Api
       end
 
       def player_params
-        params.require(:player).permit(:email, :display_name)
+        params.require(:player).permit(:display_name)
       end
     end
   end

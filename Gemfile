@@ -14,9 +14,6 @@ gem 'puma', '~> 3.7'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Used for grid layout and that's pretty much it
-gem 'bourbon'
-gem 'neat'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -52,7 +49,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'capybara', '~> 2.16.0'
+  gem 'capybara', '~> 2.18.0'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false

@@ -5,14 +5,6 @@ import { withRouter, NavLink } from 'react-router-dom'
 
 import Divider from 'material-ui/Divider'
 import List, { ListItem, ListItemText } from 'material-ui/List'
-import styled from 'styled-components'
-
-import { fullChar, fullQc } from '../utils/propTypes'
-
-const NavPanelHeader = styled.div`
-  width: 100%;
-  height: 55px;
-`
 
 export class NavPanel extends React.Component {
   render() {
@@ -20,7 +12,6 @@ export class NavPanel extends React.Component {
 
     return(
       <div>
-        <NavPanelHeader> </NavPanelHeader>
         <List component="nav">
           <ListItem button component={ NavLink } to="/lca">
             <ListItemText primary="Home" />

@@ -1,4 +1,4 @@
-import { CALL_API } from 'redux-api-middleware'
+import { RSAA } from 'redux-api-middleware'
 
 export function nonAuthHeaders() {
   return new Headers({ 'Content-Type': 'application/json' })
@@ -12,7 +12,7 @@ export function authHeaders () {
 
 export function callApi(callBody) {
   return {
-    [CALL_API]: {
+    [RSAA]: {
       ...callBody,
       headers: authHeaders
     }
@@ -21,7 +21,7 @@ export function callApi(callBody) {
 
 export function callApiNoAuth(callBody) {
   return {
-    [CALL_API]: {
+    [RSAA]: {
       ...callBody,
       headers: nonAuthHeaders
     }

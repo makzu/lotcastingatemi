@@ -57,7 +57,7 @@ class BattlegroupCreatePopup extends React.Component {
         <DialogTitle>Create New Battlegroup</DialogTitle>
         <DialogContent>
           <TextField name="name" value={ battlegroup.name }
-            label="Name:" margin="normal"
+            label="Name" margin="normal"
             onChange={ handleChange }
           />
         </DialogContent>

@@ -14,9 +14,8 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import AbilitySelect from '../generic/abilitySelect.jsx'
 import RatingField from '../generic/ratingField.jsx'
 import { updateCharm, createCharm, destroyCharm } from '../../ducks/actions.js'
-import { clamp } from '../../utils'
 import { isAbilityCharm, abilitiesWithRatings } from '../../utils/calculated'
-import { ABILITY_MIN, ABILITY_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../utils/constants.js'
+import { ABILITY_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../utils/constants.js'
 
 
 class SingleCharmEditor extends React.Component {
@@ -27,7 +26,6 @@ class SingleCharmEditor extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
-    this.handleAbilityChange = this.handleAbilityChange.bind(this)
     this.handleTimingChange = this.handleTimingChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
   }
@@ -37,23 +35,17 @@ class SingleCharmEditor extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
-    let val = e.target.value
-    if (e.target.name == 'min_ability') {
-      val = clamp(parseInt(val), ABILITY_MIN, ABILITY_MAX)
-    } else if (e.target.name == 'min_essence') {
-      val = clamp(parseInt(val), ESSENCE_MIN, ESSENCE_MAX)
-    }
+    let { name, value } = e.target
 
-    this.setState({ charm: { ...this.state.charm, [e.target.name]: val }})
+    this.setState({ charm: { ...this.state.charm, [name]: value }})
   }
 
   handleBlur(e) {
-    const trait = e.target.name
+    const { name } = e.target
     const { charm } = this.state
 
-    if (charm[trait] != this.props.charm[trait]) {
-      this.props.onUpdate(charm.id, charm.character_id, trait, charm[trait])
+    if (charm[name] != this.props.charm[name]) {
+      this.props.onUpdate(charm.id, charm.character_id, name, charm[name])
     }
   }
 
@@ -70,13 +62,6 @@ class SingleCharmEditor extends React.Component {
 
     this.setState({ charm: { ...charm, timing: value }})
     this.props.onUpdate(charm.id, charm.character_id, 'timing', value)
-  }
-
-  handleAbilityChange(e, key, value) {
-    const { charm } = this.state
-
-    this.setState({ charm: { ...charm, ability: value }})
-    this.props.onUpdate(charm.id, charm.character_id, 'ability', value)
   }
 
   handleRemove() {
@@ -99,24 +84,24 @@ class SingleCharmEditor extends React.Component {
 
       <TextField name="name" value={ charm.name }
         onChange={ handleChange } onBlur={ handleBlur }
-        label="Name:" margin="dense"
+        label="Name" margin="dense"
       />
       { charm.type == 'Evocation' &&
         <TextField name="artifact_name" value={ charm.artifact_name }
           onChange={ handleChange } onBlur={ handleBlur }
-          label="Artifact Name:" margin="dense"
+          label="Artifact Name" margin="dense"
         />
       }
       { charm.type == 'MartialArtsCharm' &&
         <TextField name="style" value={ charm.style }
           onChange={ handleChange } onBlur={ handleBlur }
-          label="Style:" margin="dense"
+          label="Style" margin="dense"
         />
       }
       <br />
 
       { showAbility &&
-        <AbilitySelect name="ability" label="Ability:" margin="dense"
+        <AbilitySelect name="ability" label="Ability" margin="dense"
           abilities={ abilitiesWithRatings(character) }
           value={ charm.ability }
           onChange={ handleRatingChange }
@@ -127,17 +112,18 @@ class SingleCharmEditor extends React.Component {
         <RatingField trait="min_ability" value={ charm.min_ability }
           min={ 1 } max={ ABILITY_MAX }
           onChange={ handleRatingChange }
-          label="Ability:" margin="dense"
+          label="Ability" margin="dense"
         />
       }
       <RatingField trait="min_essence" value={ charm.min_essence }
         min={ ESSENCE_MIN } max={ ESSENCE_MAX }
         onChange={ handleRatingChange }
-        label="Essence:" margin="dense"
+        label="Essence" margin="dense"
       />
       <br />
+
       <TextField select name="timing"
-        label="Type:" margin="dense"
+        label="Type" margin="dense"
         value={ charm.timing }
         onChange={ handleRatingChange }
       >
@@ -149,31 +135,35 @@ class SingleCharmEditor extends React.Component {
 
       <TextField name="duration" value={ charm.duration }
         onChange={ handleChange } onBlur={ handleBlur }
-        label="Duration:" margin="dense"
+        label="Duration" margin="dense"
       />
       <br />
+
       <TextField name="keywords" value={ charm.keywords }
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Keywords:" margin="dense"
+        label="Keywords" margin="dense"
       />
       <br />
+
       <TextField name="prereqs" value={ charm.prereqs }
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Prerequisite Charms:" margin="dense"
+        label="Prerequisite Charms" margin="dense"
       />
       <br />
+
       <TextField name="body" value={ charm.body }
         onChange={ handleChange } onBlur={ handleBlur }
         className="editor-description-field" multiline fullWidth
-        label="Effect:" margin="dense"
+        label="Effect" margin="dense"
       />
       <br />
+
       <TextField name="ref" value={ charm.ref }
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Ref:" margin="dense"
+        label="Ref" margin="dense"
       />
     </BlockPaper>
   }

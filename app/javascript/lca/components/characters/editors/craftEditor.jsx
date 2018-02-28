@@ -2,39 +2,54 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
 import RatingField from '../../generic/ratingField.jsx'
+import { ABILITY_MAX as MAX, ABILITY_MIN as MIN } from '../../../utils/constants.js'
 import { withIntimacies } from '../../../utils/propTypes'
 
-function CraftFields(props) {
-  const { onCraftChange, onCraftBlur, onRatingChange, onRemove } = props
+const styles = theme => ({
+  fieldContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  nameField: {
+    flex: 1,
+    marginRight: theme.spacing.unit,
+  },
+})
+
+function _CraftFields(props) {
+  const { onCraftChange, onCraftBlur, onRatingChange, onRemove, classes } = props
   const { craft, rating } = props.craft
 
-  return <div>
-    <TextField name="craft" value={ craft }
-      label="Craft:"
+  return <div className={ classes.fieldContainer }>
+    <TextField name="craft" value={ craft } className={ classes.nameField }
+      label="Craft" margin="dense"
       onChange={ onCraftChange } onBlur={ onCraftBlur }
     />
     <RatingField trait="rating" value={ rating }
-      label="Rating:" max={ 5 }
+      label="Rating" min={ MIN } max={ MAX } margin="dense"
       onChange={ onRatingChange }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
   </div>
 }
-CraftFields.propTypes = {
+_CraftFields.propTypes = {
   craft: PropTypes.object,
   onCraftChange: PropTypes.func,
   onCraftBlur: PropTypes.func,
   onRatingChange: PropTypes.func,
   onRemove: PropTypes.func,
+  classes: PropTypes.object,
 }
+const CraftFields = withStyles(styles)(_CraftFields)
 
 class CraftEditor extends React.Component {
   constructor(props) {

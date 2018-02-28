@@ -2,34 +2,35 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
 import RatingField from '../../generic/ratingField.jsx'
 
-import { ESSENCE_MIN, ESSENCE_MAX } from '../../../utils/constants.js'
+import { LIMIT_MAX } from '../../../utils/constants.js'
 
-function BasicsEditor(props) {
+function LimitEditor(props) {
   const { character, onChange, onBlur, onRatingChange } = props
 
   return <BlockPaper>
-    <TextField name="name" value={ character.name }
-      label="Name" margin="dense"
-      onChange={ onChange } onBlur={ onBlur } />
+    <Typography variant="title">
+      Limit
+    </Typography>
 
-    <RatingField trait="essence" value={ character.essence }
-      label="Essence" min={ ESSENCE_MIN } max={ ESSENCE_MAX }
+    <RatingField trait="limit" value={ character.limit }
+      label="Current" max={ LIMIT_MAX }
       onChange={ onRatingChange } margin="dense"
     />
     <br />
 
-    <TextField name="description" value={ character.description }
-      label="Description" margin="dense"
+    <TextField name="limit_trigger" value={ character.limit_trigger }
+      label="Trigger" margin="dense"
       multiline fullWidth
       onChange={ onChange } onBlur={ onBlur } />
   </BlockPaper>
 
 }
-BasicsEditor.propTypes = {
+LimitEditor.propTypes = {
   character: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
@@ -37,4 +38,4 @@ BasicsEditor.propTypes = {
 }
 
 
-export default BasicsEditor
+export default LimitEditor

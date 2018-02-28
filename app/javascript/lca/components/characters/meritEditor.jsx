@@ -84,10 +84,10 @@ export class MeritFields extends React.Component {
 
       <TextField name="merit_name" value={ merit.merit_name }
         onChange={ handleChange } onBlur={ handleBlur }
-        label="Merit:" margin="dense"
+        label="Merit" margin="dense"
       />
       <RatingField trait="rating" value={ merit.rating }
-        label="Rating:" margin="dense"
+        label="Rating" margin="dense"
         min={ MERIT_RATING_MIN } max={ MERIT_RATING_MAX }
         onChange={ handleRatingChange }
       />
@@ -95,12 +95,12 @@ export class MeritFields extends React.Component {
       <div>
         <TextField name="name" value={ merit.name }
           onChange={ handleChange } onBlur={ handleBlur }
-          label="Summary (optional):" margin="dense"
+          label="Summary (optional)" margin="dense"
         />
 
         <TextField select name="merit_cat" value={ merit.merit_cat }
           onChange={ handleRatingChange }
-          label="Type:"
+          label="Type"
         >
           <MenuItem value="story">Story</MenuItem>
           <MenuItem value="innate">Innate</MenuItem>
@@ -120,14 +120,14 @@ export class MeritFields extends React.Component {
       <div>
         <TextField name="description" value={ merit.description }
           onChange={ handleChange } onBlur={ handleBlur }
-          label="Description:" margin="dense"
+          label="Description" margin="dense"
           multiline style={{ width: '100%' }}
         />
       </div>
       <div>
         <TextField name="ref" value={ merit.ref }
           onChange={ handleChange } onBlur={ handleBlur }
-          label="Ref:" margin="dense"
+          label="Ref" margin="dense"
         />
       </div>
     </BlockPaper>

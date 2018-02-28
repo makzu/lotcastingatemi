@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 import { ABILITIES_ALL } from '../../utils/constants.js'
 
 const styles = theme => ({
-  select: {
+  root: {
     width: '8em',
     marginRight: theme.spacing.unit,
   }
@@ -25,7 +25,7 @@ class AbilitySelect extends React.Component {
     )
 
     return (
-      <TextField select className={ classes.select } { ...this.props }
+      <TextField select className={ classes.root } { ...this.props }
       >
         { menuItems }
       </TextField>

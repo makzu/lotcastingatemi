@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
@@ -9,16 +10,22 @@ import RatingField from '../../generic/ratingField.jsx'
 import { ATTRIBUTE_MIN as MIN, ATTRIBUTE_MAX as MAX } from '../../../utils/constants.js'
 import { withAttributes } from '../../../utils/propTypes'
 
+const styles = theme => ({
+  fieldSet: {
+    marginBottom: theme.spacing.unit * 2,
+  },
+})
+
 function AttributeField(props) {
   return <RatingField min={ MIN } max={ MAX } margin="dense" { ...props } />
 }
 
 function AttributeEditor(props) {
-  const { character, onRatingChange } = props
+  const { character, onRatingChange, classes } = props
 
   return <BlockPaper>
     <Typography variant="title">Attributes</Typography>
-    <div>
+    <div className={ classes.fieldSet }>
       <Typography variant="subheading">Physical</Typography>
       <AttributeField trait="attr_strength" value={ character.attr_strength }
         label="Strength"
@@ -34,7 +41,7 @@ function AttributeEditor(props) {
       />
     </div>
 
-    <div>
+    <div className={ classes.fieldSet }>
       <Typography variant="subheading">Social</Typography>
 
       <AttributeField trait="attr_charisma" value={ character.attr_charisma }
@@ -51,7 +58,7 @@ function AttributeEditor(props) {
       />
     </div>
 
-    <div>
+    <div className={ classes.fieldSet }>
       <Typography variant="subheading">Mental</Typography>
 
       <AttributeField trait="attr_perception" value={ character.attr_perception }
@@ -73,7 +80,8 @@ function AttributeEditor(props) {
 
 AttributeEditor.propTypes = {
   character: PropTypes.shape(withAttributes).isRequired,
-  onRatingChange: PropTypes.func,
+  onRatingChange: PropTypes.func.isRequired,
+  classes: PropTypes.object,
 }
 
-export default AttributeEditor
+export default withStyles(styles)(AttributeEditor)

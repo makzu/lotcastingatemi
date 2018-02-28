@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import TextField from 'material-ui/TextField'
 import { withStyles } from 'material-ui/styles'
 
@@ -7,9 +8,13 @@ import { clamp } from '../../utils/'
 
 const styles = theme => ({
   field: {
-    width: '4em',
     marginRight: theme.spacing.unit,
-  }
+    width: '4em',
+  },
+  narrow: {
+    marginRight: theme.spacing.unit,
+    width: '3em',
+  },
 })
 
 // TODO Special fields for x/y resources like mote/willpower pools
@@ -42,11 +47,11 @@ class RatingField extends React.Component {
   }
 
   render() {
-    const { trait, label, classes } = this.props
+    const { trait, label, classes, narrow } = this.props
     const { handleChange } = this
     const { value, min, max } = this.state
 
-    return <TextField className={ classes.field }
+    return <TextField className={ narrow ? classes.narrow : classes.field }
       type="number" inputProps={{ min: min, max: max }}
       name={ trait } label={ label } value={ value }
       onChange={ handleChange } margin={ this.props.margin || 'none' }
@@ -62,7 +67,8 @@ RatingField.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   margin: PropTypes.string,
-  classes: PropTypes.object.isRequired,
+  narrow: PropTypes.bool,
+  classes: PropTypes.object,
 }
 
 export default withStyles(styles)(RatingField)

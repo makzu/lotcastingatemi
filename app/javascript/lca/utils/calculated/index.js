@@ -56,12 +56,20 @@ export function woundPenalty(character) {
 export function attackAbilities(character) {
   let abils = ATTACK_ABILITIES.filter((abil) => character[abil] > 0).map(function(abil) {
     let name = abil.substring(5)
-    return { abil: name, rating: character[abil], specialties: character.specialties.filter((spec) => spec.ability == name) }
+    return {
+      abil: name,
+      rating: character[abil],
+      specialties: character.specialties.filter((spec) => spec.ability == name),
+    }
   })
 
   let mas = character.abil_martial_arts.map((abil)=> {
-    let name = 'martial arts (' + abil.style + ')'
-    return { abil: name, rating: abil.rating }
+    let name = abil.style
+    return {
+      abil: name,
+      rating: abil.rating,
+      specialties: character.specialties.filter((spec) => spec.ability == 'martial arts'),
+    }
   })
 
   return abils.concat(mas)

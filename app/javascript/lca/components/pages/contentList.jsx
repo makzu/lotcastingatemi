@@ -14,7 +14,7 @@ import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
 import { fullQc, fullChar } from '../../utils/propTypes'
 
 const styles = theme => ({
-  nthTitle: { marginTop: theme.spacing.unit * 3 }
+  nthTitle: { marginTop: theme.spacing.unit * 3 },
 })
 
 class ContentList extends React.Component {
@@ -53,7 +53,7 @@ ContentList.propTypes = {
   characters: PropTypes.arrayOf(PropTypes.shape(fullChar)),
   qcs: PropTypes.arrayOf(PropTypes.shape(fullQc)),
   battlegroups: PropTypes.arrayOf(PropTypes.object),
-  classes: PropTypes.object
+  classes: PropTypes.object,
 }
 
 function mapStateToProps(state) {

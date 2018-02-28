@@ -88,51 +88,51 @@ class BattlegroupEditor extends React.Component {
       )</small></Typography>
 
       <TextField name="name" value={ battlegroup.name }
-        label="Name:" className={ classes.nameField } margin="dense"
+        label="Name" className={ classes.nameField } margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
 
       />
       <RatingField trait="essence" value={ battlegroup.essence }
-        label="Essence:" min={ 1 } max={ 10 } margin="dense"
+        label="Essence" min={ 1 } max={ 10 } margin="dense"
         onChange={ handleRatingChange }
       />
 
       <RatingField trait="willpower_temporary" value={ battlegroup.willpower_temporary }
-        label="Temp WP:" margin="dense"
+        label="Temp WP" margin="dense"
         onChange={ handleRatingChange }
       />
       /
       <RatingField trait="willpower_permanent" value={ battlegroup.willpower_permanent }
-        label="Perm WP:" min={ 1 } max={ 10 } margin="dense"
+        label="Perm WP" min={ 1 } max={ 10 } margin="dense"
         onChange={ handleRatingChange }
       />
       <br />
 
       <RatingField trait="initiative" value={ battlegroup.initiative }
-        label="Initiative:" min={ -Infinity } margin="dense"
+        label="Initiative" min={ -Infinity } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="onslaught" value={ battlegroup.onslaught }
-        label="Onslaught:" margin="dense"
+        label="Onslaught" margin="dense"
         onChange={ handleRatingChange }
       />
       <br />
 
       <RatingField trait="size" value={ battlegroup.size }
-        label="Size:" max={ 5 } margin="dense"
+        label="Size" max={ 5 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="magnitude_current" value={ battlegroup.magnitude_current }
-        label="Mag.:" margin="dense"
+        label="Mag." margin="dense"
         onChange={ handleRatingChange }
       />
       <span> / </span>
       <RatingField trait="magnitude" value={ battlegroup.magnitude }
-        label="Total:" margin="dense"
+        label="Total" margin="dense"
         onChange={ handleRatingChange }
       />
       <TextField select name="drill" value={ battlegroup.drill }
-        label="Drill:" className={ classes.drill } margin="dense"
+        label="Drill" className={ classes.drill } margin="dense"
         onChange={ handleRatingChange }
       >
         <MenuItem key="poor" value={ 0 }>Poor</MenuItem>
@@ -141,25 +141,25 @@ class BattlegroupEditor extends React.Component {
       </TextField>
 
       <RatingField trait="might" value={ battlegroup.might }
-        label="Might:" max={ 3 } margin="dense"
+        label="Might" max={ 3 } margin="dense"
         onChange={ handleRatingChange }
       />
       <br />
 
       <RatingField trait="resolve" value={ battlegroup.resolve }
-        label="Resolve:" min={ 1 }
+        label="Resolve" min={ 1 }
         onChange={ handleRatingChange }
       />
       <RatingField trait="guile" value={ battlegroup.guile }
-        label="Guile:" min={ 1 } margin="dense"
+        label="Guile" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="appearance" value={ battlegroup.appearance }
-        label="Appearance:" min={ 1 } margin="dense"
+        label="Appearance" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="senses" value={ battlegroup.senses }
-        label="Senses:" min={ 1 } margin="dense"
+        label="Senses" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
 
@@ -167,40 +167,40 @@ class BattlegroupEditor extends React.Component {
         Combat stats
       </Typography>
       <RatingField trait="join_battle" value={ battlegroup.join_battle }
-        label="JB:" min={ 1 } margin="dense"
+        label="JB" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="movement" value={ battlegroup.movement }
-        label="Move:" min={ 1 } margin="dense"
+        label="Move" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="parry" value={ battlegroup.parry }
-        label="Parry:" min={ 1 } margin="dense"
+        label="Parry" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <span className={ classes.bgBonus }>
         ({ battlegroup.parry + bgDefenseBonus(battlegroup) } total)
       </span>
       <RatingField trait="evasion" value={ battlegroup.evasion }
-        label="Evasion:" min={ 1 } margin="dense"
+        label="Evasion" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <span className={ classes.bgBonus }>
         ({ battlegroup.evasion + bgDefenseBonus(battlegroup) } total)
       </span>
       <RatingField trait="soak" value={ battlegroup.soak }
-        label="Soak:" min={ 1 } margin="dense"
+        label="Soak" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <span className={ classes.bgBonus }>
         ({ bgSoak(battlegroup) } total)
       </span>
       <RatingField trait="hardness" value={ battlegroup.hardness }
-        label="Hardness:" min={ 1 } margin="dense"
+        label="Hardness" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <TextField name="armor_name" value={ battlegroup.armor_name }
-        label="Armor Name:" margin="dense"
+        label="Armor Name" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
 

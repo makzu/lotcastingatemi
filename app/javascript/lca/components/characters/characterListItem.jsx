@@ -14,7 +14,7 @@ const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
   })
 })
 
@@ -44,7 +44,7 @@ function CharacterListItem(props) {
 }
 CharacterListItem.propTypes = {
   character: PropTypes.shape(fullChar).isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object,
 }
 
 export default withStyles(styles)(CharacterListItem)

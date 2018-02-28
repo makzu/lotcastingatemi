@@ -1,39 +1,55 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TextField from 'material-ui/TextField'
+
+import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
 import RatingField from './ratingField.jsx'
+import { INTIMACY_RATING_MAX as MAX, INTIMACY_RATING_MIN as MIN } from '../../utils/constants.js'
 import { withIntimacies } from '../../utils/propTypes'
 
-function IntimacyFields(props) {
-  const { onSubjectChange, onSubjectBlur, onRatingChange, onRemove } = props
+const styles = theme => ({
+  fieldContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  nameField: {
+    flex: 1,
+    marginRight: theme.spacing.unit,
+  },
+})
+
+function _IntimacyFields(props) {
+  const { onSubjectChange, onSubjectBlur, onRatingChange, onRemove, classes } = props
   const { subject, rating } = props.intimacy
   const label = props.type == 'tie' ? 'Tie:' : 'Principle:'
 
-  return <div>
-    <TextField name="subject" value={ subject }
-      label={ label }
+  return <div className={ classes.fieldContainer }>
+    <TextField name="subject" value={ subject } className={ classes.nameField }
+      label={ label } margin="dense"
       onChange={ onSubjectChange } onBlur={ onSubjectBlur }
     />
     <RatingField trait="rating" value={ rating }
-      label="Rating:" max={ 3 }
+      label="Rating" min={ MIN } max={ MAX } margin="dense"
       onChange={ onRatingChange }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
   </div>
 }
-IntimacyFields.propTypes = {
+_IntimacyFields.propTypes = {
   intimacy: PropTypes.object,
   type: PropTypes.string,
   onSubjectChange: PropTypes.func,
   onSubjectBlur: PropTypes.func,
   onRatingChange: PropTypes.func,
   onRemove: PropTypes.func,
+  classes: PropTypes.object,
 }
+const IntimacyFields = withStyles(styles)(_IntimacyFields)
 
 class IntimacyEditor extends React.Component {
   constructor(props) {
@@ -58,26 +74,30 @@ class IntimacyEditor extends React.Component {
     if (this.state[type][index].subject == this.props.character[type][index])
       return
 
-    this.props.onChange(type, this.state[type])
+    this.onChange(type, this.state[type])
   }
 
   onRatingChange(type, index, e) {
     var newIntimacies = [...this.state[type]]
-    newIntimacies[index].rating = parseInt(e.target.value)
+    newIntimacies[index].rating = e.target.value
 
-    this.props.onChange(type, newIntimacies)
+    this.onChange(type, newIntimacies)
   }
 
   onAdd(type) {
     var newIntimacies = [...this.state[type], { subject: `New ${type.slice(0, -1)}`, rating: 1 }]
-    this.props.onChange(type, newIntimacies)
+    this.onChange(type, newIntimacies)
   }
 
   onRemove(type, index) {
     var newIntimacies = [...this.state[type]]
     newIntimacies.splice(index, 1)
 
-    this.props.onChange(type, newIntimacies)
+    this.onChange(type, newIntimacies)
+  }
+
+  onChange(type, newIntimacies) {
+    this.props.onChange({ target: { name: type, value: newIntimacies }})
   }
 
   render() {

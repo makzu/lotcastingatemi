@@ -146,5 +146,7 @@ export const INTIMACY_RATING_MIN = 1
 export const MERIT_RATING_MAX = 5
 export const MERIT_RATING_MIN = 0
 
+export const LIMIT_MAX = 0
+
 // 7 health levels + 5 Stamina 5 Ox-Bodies:
 export const HEALTH_LEVEL_MAX = 22

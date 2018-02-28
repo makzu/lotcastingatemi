@@ -21,7 +21,7 @@ function AbilityEditor(props) {
   return <BlockPaper>
     <Typography variant="title">Abilities</Typography>
 
-    <div className="ability-set">
+    <div>
       <AbilityField label="Archery"
         trait="abil_archery" value={ character.abil_archery }
         onChange={ onRatingChange }
@@ -43,7 +43,8 @@ function AbilityEditor(props) {
         onChange={ onRatingChange }
       />
     </div>
-    <div className="ability-set">
+
+    <div>
       <AbilityField label="Dodge" trait="abil_dodge" value={ character.abil_dodge }
         onChange={ onRatingChange }
       />
@@ -60,7 +61,8 @@ function AbilityEditor(props) {
         onChange={ onRatingChange }
       />
     </div>
-    <div className="ability-set">
+
+    <div>
       <AbilityField label="Lore" trait="abil_lore" value={ character.abil_lore }
         onChange={ onRatingChange }
       />
@@ -77,7 +79,8 @@ function AbilityEditor(props) {
         onChange={ onRatingChange }
       />
     </div>
-    <div className="ability-set">
+
+    <div>
       <AbilityField label="Presence" trait="abil_presence" value={ character.abil_presence }
         onChange={ onRatingChange }
       />
@@ -94,7 +97,8 @@ function AbilityEditor(props) {
         onChange={ onRatingChange }
       />
     </div>
-    <div className="ability-set">
+
+    <div>
       <AbilityField label="Stealth" trait="abil_stealth" value={ character.abil_stealth }
         onChange={ onRatingChange }
       />
@@ -111,7 +115,6 @@ function AbilityEditor(props) {
 
     <CraftEditor character={ character } onChange={ onRatingChange } />
     <MartialArtsEditor character={ character } onChange={ onRatingChange } />
-
 
   </BlockPaper>
 }

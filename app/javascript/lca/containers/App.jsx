@@ -98,7 +98,7 @@ App.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object,
 }
 
 function mapStateToProps(state) {

@@ -10,7 +10,6 @@ import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 
 import { qcMerit } from '../../utils/propTypes'
 
-
 export default class QcMeritFields extends React.Component {
   constructor(props) {
     super(props)
@@ -55,8 +54,7 @@ export default class QcMeritFields extends React.Component {
     this.props.onMeritChange(merit.id, name, value)
   }
 
-  handleRemove(e) {
-    e.preventDefault()
+  handleRemove() {
     this.props.onRemoveClick(this.state.merit.id)
   }
 
@@ -65,7 +63,7 @@ export default class QcMeritFields extends React.Component {
 
     return <div style={{ marginBottom: '0.5em' }}>
       <TextField name="name" value={ merit.name }
-        label="Name:"
+        label="Name"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
 
@@ -93,14 +91,14 @@ export default class QcMeritFields extends React.Component {
       <br />
 
       <TextField name="body" value={ merit.body }
-        label="Text:"
+        label="Text"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         fullWidth={ true } multiline
       />
       <br />
 
       <TextField name="ref" value={ merit.ref }
-        label="Reference:"
+        label="Reference"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
     </div>

@@ -69,7 +69,7 @@ class QcEditor extends React.Component {
 
     const { qc } = this.state
     const {
-      handleChange, handleBlur, handleRatingChange, handleListChange,
+      handleChange, handleBlur, handleRatingChange, handleListChange
     } = this
 
     return <div>
@@ -83,17 +83,17 @@ class QcEditor extends React.Component {
       </Typography>
 
       <TextField name="name" value={ qc.name }
-        label="Name:" margin="dense"
+        label="Name" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <br />
 
       <RatingField trait="essence" value={ qc.essence }
-        label="Essence:" min={ 1 } max={ 10 } margin="dense"
+        label="Essence" min={ 1 } max={ 10 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="willpower_temporary" value={ qc.willpower_temporary }
-        label="Willpower:" margin="dense"
+        label="Willpower" margin="dense"
         onChange={ handleRatingChange }
       />
       /
@@ -102,7 +102,7 @@ class QcEditor extends React.Component {
         onChange={ handleRatingChange }
       />
       <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
-        label="Personal:" max={ qc.motes_personal_total } margin="dense"
+        label="Personal" max={ qc.motes_personal_total } margin="dense"
         onChange={ handleRatingChange }
       />
       /
@@ -111,7 +111,7 @@ class QcEditor extends React.Component {
         onChange={ handleRatingChange }
       />
       <RatingField trait="motes_peripheral_current" value={ qc.motes_peripheral_current }
-        label="Peripheral:" max={ qc.motes_peripheral_total } margin="dense"
+        label="Peripheral" max={ qc.motes_peripheral_total } margin="dense"
         onChange={ handleRatingChange }
       />
       /
@@ -159,15 +159,15 @@ class QcEditor extends React.Component {
         Social
       </Typography>
       <RatingField trait="resolve" value={ qc.resolve }
-        label="Resolve:" min={ 1 } margin="dense"
+        label="Resolve" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="guile" value={ qc.guile }
-        label="Guile:" min={ 1 } margin="dense"
+        label="Guile" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="appearance" value={ qc.appearance }
-        label="Appearance:" min={ 1 } max={ 10 } margin="dense"
+        label="Appearance" min={ 1 } max={ 10 } margin="dense"
         onChange={ handleRatingChange }
       />
 
@@ -175,11 +175,11 @@ class QcEditor extends React.Component {
         Combat
       </Typography>
       <RatingField trait="join_battle" value={ qc.join_battle }
-        label="JB:" min={ 1 } margin="dense"
+        label="JB" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="movement" value={ qc.movement }
-        label="Move:" min={ 1 } margin="dense"
+        label="Move" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <RatingField trait="parry" value={ qc.parry }
@@ -199,7 +199,7 @@ class QcEditor extends React.Component {
         onChange={ handleRatingChange }
       />
       <TextField name="armor_name" value={ qc.armor_name }
-        label="Armor Name:" margin="dense"
+        label="Armor Name" margin="dense"
         type="text"
         onChange={ handleChange } onBlur={ handleBlur }
       />
@@ -215,7 +215,7 @@ class QcEditor extends React.Component {
         Intimacies
       </Typography>
       <IntimacyEditor character={ qc } characterType="qc"
-        onChange={ handleListChange }
+        onChange={ handleRatingChange }
       />
 
       <QcMeritEditor qc={ qc } />

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 import { ListItem } from 'material-ui/List'
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
+import { RadioButton, RadioButtonGroup } from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
-import ActionNoteAdd from 'material-ui/svg-icons/action/note-add'
+import ActionNoteAdd from 'material-ui-icons/NoteAdd'
 
 import { createCharacter } from '../../ducks/actions.js'
 
@@ -47,20 +47,20 @@ class NewCharacterPopup extends React.Component {
     const { character } = this.state
 
     const actions = [
-      <FlatButton
+      <Button
         key="close"
         label="Cancel"
         primary={ true }
         onClick={ handleClose }
       />,
-      <FlatButton
+      <Button
         key="save"
         label="Create"
         onClick={ handleSubmit }
       />
     ]
     return <div>
-      <ListItem primaryText="New Character"
+      <ListItem primarytext="New Character"
         rightIcon={ <ActionNoteAdd /> }
         onClick={ handleOpen }
       />
@@ -70,7 +70,7 @@ class NewCharacterPopup extends React.Component {
         onRequestClose={ handleClose }
       >
         <TextField name="name" value={ character.name }
-          floatingLabelText="Name:"
+          label="Name"
           className="editor-name-field"
           onChange={ handleChange }
         />

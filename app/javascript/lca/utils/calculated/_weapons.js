@@ -1,5 +1,9 @@
 import { attackAbilities } from './index.js'
 
+// Mortal melee/ma weapons: p.580
+// Mortal thrown weapons:   p.587
+// Mortal archery weapons:  p.588
+
 export function weaponAccuracyBonus(weapon) {
   // TODO: thrown/archery
   switch(weapon.weight) {
@@ -12,21 +16,82 @@ export function weaponAccuracyBonus(weapon) {
   }
 }
 
+export function archeryAccuracyBonus(weapon, range) {
+  // close -2, short +4, medium +2, long +0, extreme -2
+  // close -1, short +5, medium +3, long +1, extreme -1
+  let bonus = 0
+  switch(range) {
+  case 'extreme':
+    bonus = -2
+    break
+  case 'long':
+    bonus = 0
+    break
+  case 'medium':
+    bonus = 2
+    break
+  case 'short':
+    bonus = 4
+    break
+  case 'close':
+  default:
+    bonus = -2
+    break
+  }
+
+  if (weapon.is_artifact)
+    bonus += 1
+
+  return bonus
+}
+
+export function thrownAccuracyBonus(weapon, range) {
+  // regular  close +4, short +3, medium +2, long -1, extreme -3
+  // artifact close +5, short +4, medium +3, long +0, extreme -2
+  let bonus = 0
+  switch(range) {
+  case 'extreme':
+    bonus = -3
+    break
+  case 'long':
+    bonus = -1
+    break
+  case 'medium':
+    bonus = 2
+    break
+  case 'short':
+    bonus = 3
+    break
+  case 'close':
+  default:
+    bonus = +4
+    break
+  }
+
+  if (weapon.is_artifact)
+    bonus += 1
+
+  return bonus
+}
+
 export function weaponDamageBonus(weapon) {
-  // TODO: thrown/archery
   let damage = 0
 
   switch(weapon.weight) {
-  case 'light':
-    damage = weapon.is_artifact ? 10 : 7
-    break
   case 'medium':
-    damage = weapon.is_artifact ? 12 : 9
+    damage = 9
     break
   case 'heavy':
-    damage = weapon.is_artifact ? 14 : 11
+    damage = 11
+    break
+  case 'light':
+  default:
+    damage = 7
     break
   }
+
+  if (weapon.is_artifact)
+    damage += 3
 
   if (weapon.tags.includes('shield'))
     damage -= 2

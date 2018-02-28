@@ -45,13 +45,12 @@ class QcAttackFields extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault()
-    let val = e.target.value
-    if (e.target.name == 'tags') {
-      val = val.split(',')
+    let { name, value } = e.target
+    if (name == 'tags') {
+      value = value.split(',')
     }
 
-    this.setState({ attack: { ...this.state.attack, [e.target.name]: val }})
+    this.setState({ attack: { ...this.state.attack, [name]: value }})
   }
 
   handleBlur(e) {
@@ -82,11 +81,11 @@ class QcAttackFields extends React.Component {
 
     return <div>
       <TextField name="name" value={ attack.name }
-        label="Name:" className={ classes.nameField } margin="dense"
+        label="Name" className={ classes.nameField } margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <RatingField trait="pool" value={ attack.pool }
-        label="Pool:" min={ 1 } margin="dense"
+        label="Pool" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       { battlegroup &&
@@ -95,7 +94,7 @@ class QcAttackFields extends React.Component {
         </span>
       }
       <RatingField trait="damage" value={ attack.damage }
-        label="Damage:" min={ 1 } margin="dense"
+        label="Damage" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       { battlegroup &&
@@ -104,15 +103,15 @@ class QcAttackFields extends React.Component {
         </span>
       }
       <RatingField trait="overwhelming" value={ attack.overwhelming }
-        label="Ovw.:" min={ 1 } margin="dense"
+        label="Ovw." min={ 1 } margin="dense"
         onChange={ handleRatingChange }
       />
       <TextField name="tags" value={ attack.tags }
-        label="Tags:" className={ classes.tagsField } margin="dense"
+        label="Tags" className={ classes.tagsField } margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <TextField select name="range" value={ attack.range }
-        label="Range:" margin="dense"
+        label="Range" margin="dense"
         onChange={ handleRatingChange }
       >
         <MenuItem key="close" value="close">Close</MenuItem>

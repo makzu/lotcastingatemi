@@ -2,39 +2,54 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
 import RatingField from '../../generic/ratingField.jsx'
+import { ABILITY_MAX as MAX, ABILITY_MIN as MIN } from '../../../utils/constants.js'
 import { withIntimacies } from '../../../utils/propTypes'
 
-function MAFields(props) {
-  const { onStyleChange, onStyleBlur, onRatingChange, onRemove } = props
+const styles = theme => ({
+  fieldContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  nameField: {
+    flex: 1,
+    marginRight: theme.spacing.unit,
+  },
+})
+
+function _MAFields(props) {
+  const { onStyleChange, onStyleBlur, onRatingChange, onRemove, classes } = props
   const { style, rating } = props.art
 
-  return <div>
-    <TextField name="style" value={ style }
-      label="Style:"
+  return <div className={ classes.fieldContainer }>
+    <TextField name="style" value={ style } className={ classes.nameField }
+      label="Style" margin="dense"
       onChange={ onStyleChange } onBlur={ onStyleBlur }
     />
     <RatingField trait="rating" value={ rating }
-      label="Rating:" max={ 5 }
+      label="Rating" min={ MIN } max={ MAX } margin="dense"
       onChange={ onRatingChange }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
   </div>
 }
-MAFields.propTypes = {
+_MAFields.propTypes = {
   art: PropTypes.object,
   onStyleChange: PropTypes.func,
   onStyleBlur: PropTypes.func,
   onRatingChange: PropTypes.func,
   onRemove: PropTypes.func,
+  classes: PropTypes.object,
 }
+const MAFields = withStyles(styles)(_MAFields)
 
 class MAEditor extends React.Component {
   constructor(props) {

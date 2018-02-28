@@ -15,11 +15,11 @@ function ActionFields(props) {
 
   return <div>
     <TextField name="action" value={ action }
-      label="Action:" margin="dense"
+      label="Action" margin="dense"
       onChange={ onActionChange } onBlur={ onActionBlur }
     />
     <RatingField trait="pool" value={ pool }
-      label="Pool:" min={ 1 } margin="dense"
+      label="Pool" min={ 1 } margin="dense"
       onChange={ onRatingChange }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>

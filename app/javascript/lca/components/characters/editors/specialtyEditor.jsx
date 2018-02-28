@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
@@ -14,31 +15,44 @@ import BlockPaper from '../../generic/blockPaper.jsx'
 import { withIntimacies } from '../../../utils/propTypes'
 import * as calc from '../../../utils/calculated'
 
-function SpecialtyFields(props) {
-  const { onSpecialtyChange, onSpecialtyBlur, onRatingChange, onRemove, character } = props
+const styles = theme => ({
+  fieldContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  nameField: {
+    flex: 1,
+    marginRight: theme.spacing.unit,
+  },
+})
+
+function _SpecialtyFields(props) {
+  const { onSpecialtyChange, onSpecialtyBlur, onRatingChange, onRemove, character, classes } = props
   const { ability, context } = props.specialty
 
-  return <div>
+  return <div className={ classes.fieldContainer }>
     <AbilitySelect name="ability" value={ ability }
       label="Ability"
       onChange={ onRatingChange }
       abilities={ calc.abilitiesWithRatings(character) }
     />
-    <TextField name="context" value={ context }
-      label="Specialty:"
+    <TextField name="context" value={ context } className={ classes.nameField }
+      label="Specialty" margin="dense"
       onChange={ onSpecialtyChange } onBlur={ onSpecialtyBlur }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
   </div>
 }
-SpecialtyFields.propTypes = {
+_SpecialtyFields.propTypes = {
   specialty: PropTypes.object,
   character: PropTypes.object,
   onSpecialtyChange: PropTypes.func,
   onSpecialtyBlur: PropTypes.func,
   onRatingChange: PropTypes.func,
   onRemove: PropTypes.func,
+  classes: PropTypes.object,
 }
+const SpecialtyFields = withStyles(styles)(_SpecialtyFields)
 
 class SpecialtyEditor extends React.Component {
   constructor(props) {
@@ -90,7 +104,7 @@ class SpecialtyEditor extends React.Component {
 
   render() {
     const { onSpecialtyChange, onSpecialtyBlur, onRatingChange, onAdd, onRemove } = this
-    const { character, classes } = this.props
+    const { character } = this.props
 
     const crafts = this.state.specialties.map((specialty, index) =>
       <SpecialtyFields specialty={ specialty } key={ index }
@@ -104,7 +118,7 @@ class SpecialtyEditor extends React.Component {
 
     return <BlockPaper>
       <Typography variant="title">
-        Specialties:
+        Specialties
         <Button onClick={ onAdd.bind(this) }>
           Add &nbsp;
           <ContentAddCircle />
@@ -119,7 +133,7 @@ class SpecialtyEditor extends React.Component {
 }
 SpecialtyEditor.propTypes = {
   character: PropTypes.shape(withIntimacies),
-  onRatingChange: PropTypes.func
+  onRatingChange: PropTypes.func,
 }
 
 export default SpecialtyEditor

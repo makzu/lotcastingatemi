@@ -55,7 +55,6 @@ export default class QcCharmFields extends React.Component {
   }
 
   handleRemove(e) {
-    e.preventDefault()
     this.props.onRemoveClick(this.state.charm.id)
   }
 
@@ -65,15 +64,15 @@ export default class QcCharmFields extends React.Component {
 
     return <div style={{ marginBottom: '0.5em' }}>
       <TextField name="name" value={ charm.name }
-        label="Name:"
+        label="Name"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <RatingField trait="min_essence" value={ charm.min_essence }
-        label="Essence:"
+        label="Essence"
         onChange={ handleRatingChange }
       />
       <TextField name="cost" value={ charm.cost }
-        label="Cost:"
+        label="Cost"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>
@@ -82,7 +81,7 @@ export default class QcCharmFields extends React.Component {
       <br />
 
       <TextField select name="timing" value={ charm.timing }
-        label="Type:"
+        label="Type"
         onChange={ handleRatingChange }
       >
         <MenuItem key="simple" value="simple">Simple</MenuItem>
@@ -91,19 +90,19 @@ export default class QcCharmFields extends React.Component {
         <MenuItem key="permanant" value="permanant">Permanant</MenuItem>
       </TextField>
       <TextField name="keywords" value={ charm.keywords }
-        label="Keywords:"
+        label="Keywords"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <br />
 
       <TextField name="body" value={ charm.body }
-        label="Text:"
+        label="Text"
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true } multiline
       />
       <br />
       <TextField name="ref" value={ charm.ref }
-        label="Reference:"
+        label="Reference"
         onChange={ handleChange } onBlur={ handleBlur }
       />
     </div>

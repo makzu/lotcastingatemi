@@ -3,7 +3,7 @@ export {
   updateWeapon, createWeapon, destroyWeapon,
   updateMerit, createMerit, destroyMerit,
   updateCharm, createCharm, destroyCharm,
-  fetchChronicle,
+  fetchChronicle, updateChronicle, createChronicle,
   fetchQc, updateQc, createQc,
   updateQcAttack, createQcAttack, destroyQcAttack,
   updateQcMerit, createQcMerit, destroyQcMerit,

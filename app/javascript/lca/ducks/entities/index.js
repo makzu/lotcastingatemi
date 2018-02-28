@@ -31,9 +31,11 @@ export const defaultState = {
     '0': {
       id: 0,
       name: 'Anonymous Player',
+      chronicles: [],
+      own_chronicles: [],
       characters: [],
       qcs: [],
-      battlegroups: []
+      battlegroups: [],
     }
   },
   chronicles:   {},

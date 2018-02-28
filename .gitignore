@@ -23,7 +23,7 @@
 # Don't bother tracking test coverage data from simplecov
 /coverage
 
-config/secrets.yml
+/config/secrets.yml
 
 /public/packs
 /node_modules
@@ -38,4 +38,4 @@ Session.vim
 /node_modules
 
 # Ignore encrypted secrets key file.
-config/secrets.yml.key
+/config/secrets.yml.key

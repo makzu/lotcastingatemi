@@ -14,6 +14,7 @@ import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
 import MotePoolEditor from './editors/motePoolEditor.jsx'
 import SpecialtyEditor from './editors/specialtyEditor.jsx'
+import SolarExaltEditor from './editors/solarExaltEditor.jsx'
 import WeaponEditor from './editors/weaponEditor.jsx'
 import WillpowerEditor from './editors/willpowerEditor.jsx'
 import XpEditor from './editors/xpEditor.jsx'
@@ -84,12 +85,21 @@ class CharacterEditor extends React.Component {
 
     return <div>
       <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 } md={ 6 }>
+        <Grid item xs={ 12 } md={ character.type == 'Character' ? 12 : 6 }>
           <BasicsEditor character={ character }
             onChange={ handleChange } onBlur={ handleBlur }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
+
+        { character.type != 'Character' &&
+          <Grid item xs={ 12 } md={ 6 }>
+            <SolarExaltEditor character={ character }
+              onChange={ handleChange } onBlur={ handleBlur }
+              onRatingChange={ handleRatingChange }
+            />
+          </Grid>
+        }
 
         <Grid item xs={ 12 } lg={ 3 }>
           <HealthLevelEditor character={ character }
@@ -104,26 +114,17 @@ class CharacterEditor extends React.Component {
           />
         </Grid>
 
-        <Grid item xs={ 12 } lg={ 2 }>
+        <Grid item xs={ 12 } lg={ 3 }>
           <XpEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } lg={ 2 }>
+        <Grid item xs={ 12 } lg={ 3 }>
           <MotePoolEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
-
-        { character.type != 'Character' &&
-          <Grid item xs={ 12 } md={ 6 }>
-            <LimitEditor character={ character }
-              onChange={ handleChange } onBlur={ handleBlur }
-              onRatingChange={ handleRatingChange }
-            />
-          </Grid>
-        }
 
         <Grid item xs={ 12 } md={ 3 }>
           <AttributeEditor character={ character }
@@ -137,7 +138,7 @@ class CharacterEditor extends React.Component {
           />
         </Grid>
 
-        <Grid item xs={ 12 } md={ 6 }>
+        <Grid item xs={ 12 } md={ 5 }>
           <SpecialtyEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
@@ -149,13 +150,23 @@ class CharacterEditor extends React.Component {
           />
         </Grid>
 
-        <Grid item xs={ 12 } md={ 6 }>
+        { character.type != 'Character' &&
+          <Grid item xs={ 12 } md={ 3 }>
+            <LimitEditor character={ character }
+              onChange={ handleChange } onBlur={ handleBlur }
+              onRatingChange={ handleRatingChange }
+            />
+          </Grid>
+        }
+
+        <Grid item xs={ 12 } md={ 3 }>
           <ArmorEditor character={ character }
             onChange={ handleChange } onBlur={ handleBlur }
             onCheck={ handleCheck }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
+
         <Grid item xs={ 12 }>
           <WeaponEditor character={ character } />
         </Grid>

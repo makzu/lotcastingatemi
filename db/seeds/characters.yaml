@@ -90,6 +90,10 @@
     - socialize
     - medicine
   supernal_ability: awareness
+  motes_personal_total: 13
+  motes_personal_current: 13
+  motes_peripheral_total: 33
+  motes_peripheral_current: 33
   limit: 2
   limit_trigger: Her combat prowess is called into question
   specialties:

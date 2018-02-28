@@ -11,13 +11,17 @@ const styles = theme => ({
   root: {
     width: '8em',
     marginRight: theme.spacing.unit,
-  }
+  },
+  multiple: {
+    marginRight: theme.spacing.unit,
+  },
 })
 
 class AbilitySelect extends React.Component {
   render() {
-    const { classes } = this.props
-    const abils = this.props.abilities || ABILITIES_ALL
+    const { props } = this
+    const { classes } = props
+    const abils = props.abilities || ABILITIES_ALL
     const menuItems = abils.map((a) =>
       <MenuItem key={ a.abil } value={ a.pretty.toLowerCase() }>
         { a.pretty }
@@ -25,7 +29,11 @@ class AbilitySelect extends React.Component {
     )
 
     return (
-      <TextField select className={ classes.root } { ...this.props }
+      <TextField select className={ props.multiple ? classes.multiple : classes.root }
+        name={ props.name } value={ props.value } label={ props.label }
+        onChange={ props.onChange }
+        margin={ props.margin || 'none' } fullWidth={ props.fullWidth }
+        SelectProps={{ multiple: props.multiple }}
       >
         { menuItems }
       </TextField>

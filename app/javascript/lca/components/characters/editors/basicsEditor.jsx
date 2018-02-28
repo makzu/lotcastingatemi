@@ -36,5 +36,4 @@ BasicsEditor.propTypes = {
   onRatingChange: PropTypes.func.isRequired,
 }
 
-
 export default BasicsEditor

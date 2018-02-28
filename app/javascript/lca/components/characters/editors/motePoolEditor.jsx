@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
+import { MenuItem } from 'material-ui/Menu'
+import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
@@ -45,6 +47,17 @@ function MotePoolEditor(props) {
           label="Total" margin="dense"
           onChange={ onRatingChange }
         />
+      </div>,
+      <div key="anima">
+        <TextField select name="anima_level" value={ character.anima_level }
+          label="Anima" margin="dense"
+          onChange={ onRatingChange }
+        >
+          <MenuItem value={ 0 }>Dim</MenuItem>
+          <MenuItem value={ 1 }>Glowing</MenuItem>
+          <MenuItem value={ 2 }>Burning</MenuItem>
+          <MenuItem value={ 3 }>Bonfire</MenuItem>
+        </TextField>
       </div>
     ] }
 

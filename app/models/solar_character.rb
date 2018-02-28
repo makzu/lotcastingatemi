@@ -38,7 +38,8 @@ class SolarCharacter < Character
   end
 
   def abils_are_blank?
-    caste.blank? || caste_abilities.length < 5 || favored_abilities.length < 5
+    # caste.blank? || caste_abilities.length < 5 || favored_abilities.length < 5
+    true
   end
 
   def caste_and_favored_dont_overlap

@@ -147,7 +147,7 @@ export function prettyFullExaltType(character) {
 
   switch (character.type) {
   case 'SolarCharacter':
-    type = `${capitalize(character.caste || '_____')} Caste ${type}`
+    type = `${capitalize(character.caste || '?')} Caste ${type}`
   }
 
   return type

@@ -17,8 +17,8 @@ import WelcomePage from './components/pages/welcomePage.jsx'
 export default function Routes() {
   return (
     <div>
-      <Route exact path="/" component={ ContentList } />
-      <Route path="/lca" component={ WelcomePage } />
+      <Route exact path="/" component={ WelcomePage } />
+      <Route path="/content" component={ ContentList } />
 
       <Route exact path="/characters/:characterId" component={ CharacterSheet } />
       <Route path="/characters/:characterId/merits" component={ MeritFullPage } />

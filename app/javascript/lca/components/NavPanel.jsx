@@ -13,7 +13,7 @@ export class NavPanel extends React.Component {
     return(
       <div>
         <List component="nav">
-          <ListItem button component={ NavLink } to="/lca">
+          <ListItem button component={ NavLink } to="/">
             <ListItemText primary="Home" />
           </ListItem>
 
@@ -25,7 +25,7 @@ export class NavPanel extends React.Component {
           }
 
           { authenticated &&
-            <ListItem button component={ NavLink } to="/">
+            <ListItem button component={ NavLink } to="/content">
               <ListItemText primary="Characters" />
             </ListItem>
           }

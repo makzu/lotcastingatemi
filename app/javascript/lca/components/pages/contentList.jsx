@@ -6,6 +6,7 @@ import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
 import CharacterListItem from '../characters/characterListItem.jsx'
+import CharacterCreatePopup from '../characters/characterCreatePopup.jsx'
 import QcListItem from '../qcs/qcListItem.jsx'
 import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
 import BattlegroupListItem from '../battlegroups/battlegroupListItem'
@@ -31,7 +32,10 @@ class ContentList extends React.Component {
     )
     return <div>
 
-      <Typography variant="headline">Characters</Typography>
+      <Typography variant="headline">
+        Characters
+        <CharacterCreatePopup />
+      </Typography>
       { chars }
 
       <Typography variant="headline" className={ classes.nthTitle }>

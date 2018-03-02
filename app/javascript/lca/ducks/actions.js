@@ -13,7 +13,7 @@ export {
 } from './entities'
 
 export { logout } from './account.js'
-export { toggleDrawer } from './app.js'
+export { toggleDrawer, switchTheme } from './app.js'
 
 import { fetchCurrentPlayer, fetchChronicle } from './entities'
 

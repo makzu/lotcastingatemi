@@ -8,16 +8,20 @@ import Divider from 'material-ui/Divider'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 
 import DisplayNamePopup from './generic/displayNamePopup.jsx'
+import { switchTheme } from '../ducks/actions.js'
 
 const styles = theme => ({
   loggedInHeader: { ...theme.typography.subheading,
     padding: `${theme.spacing.unit * 2}px`,
   },
+  themeLabel: {
+    textTransform: 'capitalize',
+  },
 })
 
 export class NavPanel extends React.Component {
   render() {
-    const { authenticated, displayName, classes } = this.props
+    const { authenticated, displayName, theme, classes } = this.props
 
     return <div>
       <List component="nav">
@@ -45,12 +49,11 @@ export class NavPanel extends React.Component {
           </ListItem>
         }
 
-        <Divider />
-        <ListItem>
-          <ListItemText primary="Resources" />
+        <ListItem button onClick={ this.props.switchTheme }>
+          <ListItemText primary={ `Current Theme: ${ theme }` } />
         </ListItem>
-
         <Divider />
+
         <ListItem button component="a"
           href="https://github.com/makzu/lotcastingatemi"
           target="_blank" rel="noopener noreferrer"
@@ -66,18 +69,30 @@ NavPanel.propTypes = {
   authenticated: PropTypes.bool,
   displayName: PropTypes.string,
   history: PropTypes.object,
+  theme: PropTypes.string,
+  switchTheme: PropTypes.func,
+  classes: PropTypes.object,
 }
 
 function mapStateToProps(state) {
   const { authenticated, id } = state.session
   const displayName = state.entities.players[id].display_name || ''
+  const { theme } = state.app
 
   return {
     authenticated,
     displayName,
+    theme,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    switchTheme: () => dispatch(switchTheme()),
   }
 }
 
 export default withStyles(styles)(withRouter(connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(NavPanel)))

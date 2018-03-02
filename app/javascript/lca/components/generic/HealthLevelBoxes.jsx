@@ -13,7 +13,7 @@ const styles = theme => ({
     marginRight: '0.25em',
   },
   healthLevelBox: {
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.background.paper,
     width: '1.25em',
     height: '1.25em',
     border: '0.2em solid black'

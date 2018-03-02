@@ -3,22 +3,20 @@ import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 
 import App from './App.jsx'
+import ThemeContainer from './themeContainer.jsx'
 import Routes from '../routes.jsx'
-
-const theme = createMuiTheme()
 
 const RootContainer = ({ store }) => (
   <Provider store={ store }>
-    <MuiThemeProvider theme={ theme }>
+    <ThemeContainer>
       <Router>
         <App>
           <Routes />
         </App>
       </Router>
-    </MuiThemeProvider>
+    </ThemeContainer>
   </Provider>
 )
 

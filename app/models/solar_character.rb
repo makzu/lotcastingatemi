@@ -4,6 +4,11 @@
 class SolarCharacter < Character
   include MotePool
 
+  attribute :motes_personal_total,     :integer, default: 13
+  attribute :motes_personal_current,   :integer, default: 13
+  attribute :motes_peripheral_total,   :integer, default: 33
+  attribute :motes_peripheral_current, :integer, default: 33
+
   has_many :evocations,          as: :character, dependent: :destroy
   has_many :martial_arts_charms, as: :character, dependent: :destroy
   has_many :solar_charms,        as: :character, dependent: :destroy

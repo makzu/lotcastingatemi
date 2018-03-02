@@ -9,6 +9,8 @@ import Typography from 'material-ui/Typography'
 
 import LcaDrawerButton from './generic/lcaDrawerButton.jsx'
 import CharacterHeader from './characterHeader.jsx'
+import QcHeader from './qcHeader.jsx'
+import BattlegroupHeader from './battlegroupHeader.jsx'
 
 const drawerWidth = 240
 const styles = theme => ({
@@ -38,6 +40,8 @@ function LcaHeader(props) {
   return <AppBar className={ classes.appBar } component="header">
     <Switch>
       <Route path="/characters/:characterId" component={ CharacterHeader } />
+      <Route path="/qcs/:qcId" component={ QcHeader} />
+      <Route path="/battlegroups/:battlegroupId" component={ BattlegroupHeader } />
       <Route component={ GenericHeader } />
     </Switch>
   </AppBar>

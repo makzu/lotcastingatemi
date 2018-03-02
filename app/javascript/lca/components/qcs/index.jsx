@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 
+import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 
 import { fullQc, withMotePool, qcMerit, qcAttack } from '../../utils/propTypes'
@@ -75,10 +76,9 @@ class QcSheet extends React.PureComponent {
       </div>
     )
 
-    return <div>
-      <Typography variant="headline" gutterBottom>
-        { qc.name }
-        <Button component={ Link } to={`/qcs/${qc.id}/edit`}>Edit</Button>
+    return <BlockPaper>
+      <Typography paragraph style={{ whiteSpace: 'pre-line', }}>
+        { qc.description }
       </Typography>
 
       <Typography component="div">
@@ -130,7 +130,7 @@ class QcSheet extends React.PureComponent {
         { charms }
       </Typography> }
 
-    </div>
+    </BlockPaper>
   }
 }
 

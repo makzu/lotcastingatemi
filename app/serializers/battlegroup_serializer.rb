@@ -3,6 +3,7 @@
 # app/serializers/battlegroup_serializer.rb
 class BattlegroupSerializer < ActiveModel::Serializer
   attributes :id, :name, :size, :might, :drill, :perfect_morale,
+             :description,
              :magnitude, :magnitude_current,
              :essence, :willpower_temporary, :willpower_permanent, :armor_name,
              :soak, :hardness, :evasion, :parry, :resolve, :guile, :appearance,

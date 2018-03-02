@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 
+import BlockPaper from '../generic/blockPaper.jsx'
 import { qcAttack } from '../../utils/propTypes'
 import * as calc from '../../utils/calculated'
 
@@ -17,9 +18,9 @@ class BattlegroupSheet extends React.PureComponent {
   render() {
     /* Escape hatch */
     if (this.props.battlegroup == undefined)
-      return <div>
+      return <BlockPaper>
         <Typography paragraph>This QC has not yet loaded.</Typography>
-      </div>
+      </BlockPaper>
 
     const { battlegroup, qc_attacks } = this.props
 
@@ -30,10 +31,14 @@ class BattlegroupSheet extends React.PureComponent {
       </div>
     )
 
-    return <div>
+    return <BlockPaper>
       <Typography variant="headline" gutterBottom>
         { battlegroup.name }
         <Button component={ Link } to={`/battlegroups/${battlegroup.id}/edit`}>Edit</Button>
+      </Typography>
+
+      <Typography paragraph style={{ whiteSpace: 'pre-line' }}>
+        { battlegroup.description }
       </Typography>
 
       <Typography component="div">
@@ -69,7 +74,7 @@ class BattlegroupSheet extends React.PureComponent {
         <strong> Appearance:</strong> { battlegroup.appearance }<br />
         <strong>Senses: </strong> { battlegroup.senses }
       </Typography>
-    </div>
+    </BlockPaper>
   }
 }
 

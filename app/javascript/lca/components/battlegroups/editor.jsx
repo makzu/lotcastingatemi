@@ -9,6 +9,7 @@ import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
+import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/ratingField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
@@ -68,19 +69,15 @@ class BattlegroupEditor extends React.Component {
   render() {
     /* Escape hatch */
     if (this.props.battlegroup == undefined)
-      return <div>
+      return <BlockPaper>
         <Typography paragraph>This QC has not yet loaded.</Typography>
-      </div>
+      </BlockPaper>
 
     const { battlegroup } = this.state
     const { handleChange, handleBlur, handleRatingChange } = this
     const { classes } = this.props
 
-    return <div>
-      <Typography variant="headline">
-        Editing { battlegroup.name }
-        <Button component={ Link } to={ `/battlegroups/${battlegroup.id}` }>Done</Button>
-      </Typography>
+    return <BlockPaper>
 
       <Typography><small>(
         Use the stats of an average member of the group - bonuses from
@@ -92,6 +89,14 @@ class BattlegroupEditor extends React.Component {
         onChange={ handleChange } onBlur={ handleBlur }
 
       />
+      <br />
+
+      <TextField name="description" value={ battlegroup.description }
+        label="Description" margin="dense" multiline
+        onChange={ handleChange } onBlur={ handleBlur }
+      />
+      <br />
+
       <RatingField trait="essence" value={ battlegroup.essence }
         label="Essence" min={ 1 } max={ 10 } margin="dense"
         onChange={ handleRatingChange }
@@ -205,7 +210,7 @@ class BattlegroupEditor extends React.Component {
       />
 
       <QcAttackEditor qc={ battlegroup } battlegroup />
-    </div>
+    </BlockPaper>
   }
 }
 BattlegroupEditor.propTypes = {

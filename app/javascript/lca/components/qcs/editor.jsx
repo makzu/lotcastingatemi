@@ -1,18 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Button from 'material-ui/Button'
-import TextField from 'material-ui/TextField'
 
+import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import QcActionEditor from './qcActionEditor.jsx'
 import QcAttackEditor from './qcAttackEditor.jsx'
 import QcMeritEditor from './qcMeritEditor.jsx'
 import QcCharmEditor from './qcCharmEditor.jsx'
-import RatingField from '../generic/ratingField.jsx'
+import BlockPaper from '../generic/blockPaper.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
+import RatingField from '../generic/ratingField.jsx'
 
 import { updateQc } from '../../ducks/actions.js'
 
@@ -63,27 +62,28 @@ class QcEditor extends React.Component {
   render() {
     /* Escape hatch */
     if (this.props.qc == undefined)
-      return <div>
+      return <BlockPaper>
         <Typography paragraph>This QC has not yet loaded.</Typography>
-      </div>
+      </BlockPaper>
 
     const { qc } = this.state
     const {
       handleChange, handleBlur, handleRatingChange, handleListChange
     } = this
 
-    return <div>
-      <Typography variant="headline">
-        Editing { qc.name }
-        <Button component={ Link } to={ `/qcs/${qc.id}` }>Done</Button>
-      </Typography>
-
+    return <BlockPaper>
       <Typography variant="subheading">
         Basics
       </Typography>
 
       <TextField name="name" value={ qc.name }
         label="Name" margin="dense"
+        onChange={ handleChange } onBlur={ handleBlur }
+      />
+      <br />
+
+      <TextField name="description" value={ qc.description }
+        label="Description" margin="dense" multiline
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <br />
@@ -221,7 +221,7 @@ class QcEditor extends React.Component {
       <QcMeritEditor qc={ qc } />
 
       <QcCharmEditor qc={ qc } />
-    </div>
+    </BlockPaper>
   }
 }
 QcEditor.propTypes = {

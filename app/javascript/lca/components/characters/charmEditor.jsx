@@ -26,7 +26,6 @@ class SingleCharmEditor extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
-    this.handleTimingChange = this.handleTimingChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
   }
 
@@ -55,13 +54,6 @@ class SingleCharmEditor extends React.Component {
 
     this.setState({ charm: { ...charm, [name]: value }})
     this.props.onUpdate(charm.id, charm.character_id, name, value)
-  }
-
-  handleTimingChange(e, key, value) {
-    const { charm } = this.state
-
-    this.setState({ charm: { ...charm, timing: value }})
-    this.props.onUpdate(charm.id, charm.character_id, 'timing', value)
   }
 
   handleRemove() {
@@ -100,6 +92,10 @@ class SingleCharmEditor extends React.Component {
       }
       <br />
 
+      <TextField name="cost" value={ charm.cost }
+        onChange={ handleChange } onBlur={ handleBlur }
+        label="Cost" margin="dense"
+      />
       { showAbility &&
         <AbilitySelect name="ability" label="Ability" margin="dense"
           abilities={ abilitiesWithRatings(character) }

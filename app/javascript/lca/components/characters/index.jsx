@@ -20,22 +20,24 @@ import SpecialtyBlock from './blocks/specialtyBlock.jsx'
 import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
 import BlockPaper from '../generic/blockPaper.jsx'
-import RatingDots from '../generic/ratingDots.jsx'
+import RatingLine from '../generic/ratingLine.jsx'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
 import { prettyFullExaltType, prettyAnimaLevel } from '../../utils/calculated'
 
 export function IntimacySummary(props) {
   const principles = props.character.principles.map((p, index) =>
-    <Typography component="div" key={index}>
-      { p.subject }
-      <RatingDots rating={ p.rating } fillTo={ 3 } />
+    <Typography key={ index } component="div">
+      <RatingLine rating={ p.rating } fillTo={ 3 }>
+        { p.subject }
+      </RatingLine>
       <Divider />
     </Typography>
   )
   const ties = props.character.ties.map((p, index) =>
-    <Typography component="div" key={index}>
-      { p.subject }
-      <RatingDots rating={ p.rating } fillTo={ 3 } />
+    <Typography key={ index } component="div">
+      <RatingLine rating={ p.rating } fillTo={ 3 }>
+        { p.subject }
+      </RatingLine>
       <Divider />
     </Typography>
   )
@@ -65,10 +67,14 @@ export function WillpowerBlock(props) {
     </Typography>
 
     <Typography component="div">
-      Current: <RatingDots rating={ character.willpower_temporary } fillTo={10} />
+      <RatingLine rating={ character.willpower_temporary } fillTo={10}>
+        Current
+      </RatingLine>
     </Typography>
     <Typography component="div">
-      Permanent: <RatingDots rating={ character.willpower_permanent } fillTo={10} />
+      <RatingLine rating={ character.willpower_permanent } fillTo={10}>
+        Permanent
+      </RatingLine>
     </Typography>
   </BlockPaper>
 }
@@ -107,7 +113,9 @@ export function LimitTrackBlock(props) {
     </Typography>
 
     <Typography component="div">
-      Current: <RatingDots rating={ character.limit } fillTo={10} />
+      <RatingLine rating={ character.limit } fillTo={10}>
+        Current
+      </RatingLine>
     </Typography>
     <Typography>Limit Trigger: { character.limit_trigger }</Typography>
   </BlockPaper>

@@ -7,7 +7,7 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
-import RatingDots from '../generic/ratingDots.jsx'
+import RatingLine from '../generic/ratingLine.jsx'
 import { fullMerit } from '../../utils/propTypes'
 
 const styles = theme => ({
@@ -26,17 +26,18 @@ function _SingleMerit(props) {
   const { merit, classes } = props
 
   return <BlockPaper>
-    <RatingDots rating={ merit.rating } dontFill />
-    <Typography variant="title">
-      <span className={ classes.name }>
-        { merit.name || merit.merit_name }
-      </span>
-      { merit.name &&
-        <span className={ classes.meritName}>
-          &nbsp;&nbsp;({ merit.merit_name })
+    <RatingLine rating={ merit.rating } dontFill>
+      <Typography variant="title">
+        <span className={ classes.name }>
+          { merit.name || merit.merit_name }
         </span>
-      }
-    </Typography>
+        { merit.name &&
+          <span className={ classes.meritName}>
+            &nbsp;&nbsp;({ merit.merit_name })
+          </span>
+        }
+      </Typography>
+    </RatingLine>
 
     <Typography className={ classes.categoryLine } variant="caption" gutterBottom>
       { merit.supernatural && 'Supernatural '}

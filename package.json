@@ -52,7 +52,6 @@
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.19.0",
-    "styled-components": "^2.0.0",
     "webpack": "^3.6.0",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0"

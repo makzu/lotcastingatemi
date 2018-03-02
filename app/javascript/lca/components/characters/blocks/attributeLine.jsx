@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 
-import RatingDots from '../../generic/ratingDots.jsx'
+import RatingLine from '../../generic/ratingLine.jsx'
 
 const styles = theme => ({
   attributeName: { ...theme.typography.body1,
@@ -15,11 +15,12 @@ const styles = theme => ({
 function AttributeLine(props) {
   const { classes } = props
   return <div>
-    <span className={ classes.attributeName }>
-      { props.attribute }:
-    </span>
+    <RatingLine rating={ props.rating }>
+      <span className={ classes.attributeName }>
+        { props.attribute }:
+      </span>
+    </RatingLine>
 
-    <RatingDots rating={ props.rating } />
     <Divider />
   </div>
 }

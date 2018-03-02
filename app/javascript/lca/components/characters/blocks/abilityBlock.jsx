@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 
-import RatingDots from '../../generic/ratingDots.jsx'
+import RatingLine from '../../generic/ratingLine.jsx'
 import { withAbilities, fullChar } from '../../../utils/propTypes'
 import { isCasteAbility, isFavoredAbility, isSupernalAbility } from '../../../utils/calculated'
 
@@ -24,16 +24,16 @@ function _AbilityLine(props) {
   const favored = isFavoredAbility(props.character, props.ability)
 
   return <div>
-    <span className={ classes.abilityName }>
-      { props.ability }:
-    </span>
-    <span className={ classes.abilityFavored }>
-      { supernal && ' (s)' }
-      { caste && !supernal && ' (c)' }
-      { favored && ' (f)' }
-    </span>
-
-    <RatingDots rating={ rating } />
+    <RatingLine rating={ rating }>
+      <span className={ classes.abilityName }>
+        { props.ability }:
+      </span>
+      <span className={ classes.abilityFavored }>
+        { supernal && ' (s)' }
+        { caste && !supernal && ' (c)' }
+        { favored && ' (f)' }
+      </span>
+    </RatingLine>
     <Divider />
   </div>
 }
@@ -52,16 +52,17 @@ function _CraftAbilityLine(props) {
   const favored = isFavoredAbility(props.character, 'craft')
 
   return <div>
-    <span className={ classes.abilityName }>
-      Craft ({ props.context }):
-    </span>
-    <span className={ classes.abilityFavored }>
-      { supernal && ' (s)' }
-      { caste && !supernal && ' (c)' }
-      { favored && ' (f)' }
-    </span>
+    <RatingLine rating={ props.rating }>
+      <span className={ classes.abilityName }>
+        Craft ({ props.context }):
+      </span>
+      <span className={ classes.abilityFavored }>
+        { supernal && ' (s)' }
+        { caste && !supernal && ' (c)' }
+        { favored && ' (f)' }
+      </span>
+    </RatingLine>
 
-    <RatingDots rating={ props.rating } />
     <Divider />
   </div>
 }
@@ -80,16 +81,17 @@ function _MartialArtsAbilityLine(props) {
   const favored = isFavoredAbility(props.character, 'brawl')
 
   return <div>
-    <span className={ classes.abilityName }>
-      Martial Arts ({ props.style }):
-    </span>
-    <span className={ classes.abilityFavored }>
-      { supernal && ' (s)' }
-      { caste && !supernal && ' (c)' }
-      { favored && ' (f)' }
-    </span>
+    <RatingLine rating={ props.rating }>
+      <span className={ classes.abilityName }>
+        Martial Arts ({ props.style }):
+      </span>
+      <span className={ classes.abilityFavored }>
+        { supernal && ' (s)' }
+        { caste && !supernal && ' (c)' }
+        { favored && ' (f)' }
+      </span>
+    </RatingLine>
 
-    <RatingDots rating={ props.rating } />
     <Divider />
   </div>
 }

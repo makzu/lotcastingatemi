@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 
-import RatingDots from '../../generic/ratingDots.jsx'
+import RatingLine from '../../generic/ratingLine.jsx'
 import { fullMerit, fullChar } from '../../../utils/propTypes'
 
 const styles = theme => ({
@@ -20,11 +20,12 @@ export function MeritSummaryBlock(props) {
 
   const merits = props.merits.map((merit) =>
     <div key={ merit.id } className={ classes.meritLine }>
-      { merit.name || merit.merit_name }
-      { merit.name &&
-        <span className={ classes.meritName }> ({ merit.merit_name })</span>
-      }
-      <RatingDots rating={merit.rating} dontFill />
+      <RatingLine rating={ merit.rating } dontFill>
+        { merit.name || merit.merit_name }
+        { merit.name &&
+          <span className={ classes.meritName }> ({ merit.merit_name })</span>
+        }
+      </RatingLine>
       <Divider />
     </div>
   )

@@ -68,7 +68,7 @@ describe('Calculated values', () => {
   })
 
   it('should give correct info for weapons', () => {
-    const light = { weight: 'light', is_artifact: false, tags: [], ability: 'melee' }
+    const light = { weight: 'light', is_artifact: false, tags: [], ability: 'melee', attr: 'dexterity', }
     const medium = { ...light, weight: 'medium' }
     const heavy =  { ...light, weight: 'heavy' }
     const shield = { ...medium, tags: ['shield'] }

@@ -19,7 +19,7 @@ const styles = theme => ({
 function WeightSelect(props) {
   return <TextField select label="Weight" name={ props.name } value={ props.value }
     className={ props.armor ? props.classes.armor : props.classes.field }
-    onChange={ props.onChange }
+    onChange={ props.onChange } margin={ props.margin || 'none' }
   >
     { props.armor &&
       <MenuItem value="unarmored">Unarmored</MenuItem>
@@ -35,7 +35,7 @@ WeightSelect.propTypes = {
   armor: PropTypes.bool,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  narrow: PropTypes.bool,
+  margin: PropTypes.string,
   classes: PropTypes.object,
 }
 

@@ -16,14 +16,13 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+yarn-error.log
 
 # Ignore Byebug command history file.
 .byebug_history
 
 # Don't bother tracking test coverage data from simplecov
 /coverage
-
-/config/secrets.yml
 
 /public/packs
 /node_modules

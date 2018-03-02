@@ -1,5 +1,4 @@
 # Lot-Casting Atemi
+## Harmonious Exalted character management for a new age
 
-Online collaborative character and chronicle manager for Exalted Third Edition.
-
-Coming soon.
+Manage your Exalted Third Edition characters, quick characters, and battlegroups.

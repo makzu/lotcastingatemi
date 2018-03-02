@@ -1,103 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HealthLevelBoxes renders at all 1`] = `
-<div
-  className="healthLevelBoxes"
->
+<div>
   <div
-    className="sc-ifAKCX bUkNeg"
+    className="HealthLevelBoxes-boxWrap-1"
   >
     <div
-      className="sc-bxivhb jjDCoK sc-bdVaJa fmVsgK"
+      className="HealthLevelBoxes-healthLevelBox-2"
     >
-      ◼
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
     </div>
     <div
-      className="sc-EHOje kLDnfe"
+      className="HealthLevelBoxes-healthLevelLabel-3"
     >
       0
     </div>
   </div>
   <div
-    className="sc-ifAKCX bUkNeg"
+    className="HealthLevelBoxes-boxWrap-1"
   >
     <div
-      className="sc-htpNat gqjEYj sc-bdVaJa fmVsgK"
+      className="HealthLevelBoxes-healthLevelBox-2"
     >
-      ◩
+      <span
+        className="HealthLevelBoxes-lethalDamage-5"
+      >
+        ❌
+      </span>
     </div>
     <div
-      className="sc-EHOje kLDnfe"
+      className="HealthLevelBoxes-healthLevelLabel-3"
     >
       -1
     </div>
   </div>
   <div
-    className="sc-ifAKCX bUkNeg"
+    className="HealthLevelBoxes-boxWrap-1"
   >
     <div
-      className="sc-bwzfXH jVnPlJ sc-bdVaJa fmVsgK"
+      className="HealthLevelBoxes-healthLevelBox-2"
     >
-      ◫
+      <span
+        className="HealthLevelBoxes-bashingDamage-4"
+      >
+        ╲
+      </span>
     </div>
     <div
-      className="sc-EHOje kLDnfe"
+      className="HealthLevelBoxes-healthLevelLabel-3"
     >
       -1
     </div>
   </div>
   <div
-    className="sc-ifAKCX bUkNeg"
+    className="HealthLevelBoxes-boxWrap-1"
   >
     <div
-      className="sc-bdVaJa fmVsgK"
+      className="HealthLevelBoxes-healthLevelBox-2"
     >
-      ◻
+       
     </div>
     <div
-      className="sc-EHOje kLDnfe"
+      className="HealthLevelBoxes-healthLevelLabel-3"
     >
       -2
     </div>
   </div>
   <div
-    className="sc-ifAKCX bUkNeg"
+    className="HealthLevelBoxes-boxWrap-1"
   >
     <div
-      className="sc-bdVaJa fmVsgK"
+      className="HealthLevelBoxes-healthLevelBox-2"
     >
-      ◻
+       
     </div>
     <div
-      className="sc-EHOje kLDnfe"
+      className="HealthLevelBoxes-healthLevelLabel-3"
     >
       -2
     </div>
   </div>
   <div
-    className="sc-ifAKCX bUkNeg"
+    className="HealthLevelBoxes-boxWrap-1"
   >
     <div
-      className="sc-bdVaJa fmVsgK"
+      className="HealthLevelBoxes-healthLevelBox-2"
     >
-      ◻
+       
     </div>
     <div
-      className="sc-EHOje kLDnfe"
+      className="HealthLevelBoxes-healthLevelLabel-3"
     >
       -4
     </div>
   </div>
   <div
-    className="sc-ifAKCX bUkNeg"
+    className="HealthLevelBoxes-boxWrap-1"
   >
     <div
-      className="sc-bdVaJa fmVsgK"
+      className="HealthLevelBoxes-healthLevelBox-2"
     >
-      ◻
+       
     </div>
     <div
-      className="sc-EHOje kLDnfe"
+      className="HealthLevelBoxes-healthLevelLabel-3"
     >
       in
     </div>

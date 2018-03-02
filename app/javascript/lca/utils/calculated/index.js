@@ -4,7 +4,7 @@ export * from './_pools.js'
 export * from './_weapons.js'
 
 import { capitalize, includes } from 'lodash'
-import { ATTACK_ABILITIES, ABILITIES_ALL } from '../constants.js'
+import { ATTACK_ABILITIES, NON_ATTACK_ABILITIES, ABILITIES_ALL } from '../constants.js'
 
 /* Defense values (Parry is per-weapon) */
 export function evasionRaw(character) {
@@ -64,7 +64,7 @@ export function attackAbilities(character) {
   })
 
   let mas = character.abil_martial_arts.map((abil)=> {
-    let name = abil.style
+    let name = `martial arts (${ abil.style })`
     return {
       abil: name,
       rating: abil.rating,
@@ -73,6 +73,28 @@ export function attackAbilities(character) {
   })
 
   return abils.concat(mas)
+}
+
+export function nonAttackAbilities(character) {
+  let abils = NON_ATTACK_ABILITIES.filter((abil) => character[abil] > 0).map(function(abil) {
+    let name = abil.substring(5)
+    return {
+      abil: name,
+      rating: character[abil],
+      specialties: character.specialties.filter((spec) => spec.ability == name),
+    }
+  })
+
+  let crafts = character.abil_craft.map((abil)=> {
+    let name = `craft (${ abil.craft })`
+    return {
+      abil: name,
+      rating: abil.rating,
+      specialties: character.specialties.filter((spec) => spec.ability == 'craft'),
+    }
+  })
+
+  return abils.concat(crafts)
 }
 
 export function abilitiesWithRatings(character) {

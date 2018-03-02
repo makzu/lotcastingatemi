@@ -1,11 +1,8 @@
-import { attackAbilities } from './index.js'
-
 // Mortal melee/ma weapons: p.580
 // Mortal thrown weapons:   p.587
 // Mortal archery weapons:  p.588
 
 export function weaponAccuracyBonus(weapon) {
-  // TODO: thrown/archery
   switch(weapon.weight) {
   case 'light':
     return weapon.is_artifact ? 5 : 4
@@ -146,6 +143,20 @@ export function weaponOverwhelming(weapon) {
   }
 }
 
+export function weaponAttributeRating(character, weapon) {
+  return character[`attr_${ weapon.attr }`]
+}
+
+export function weaponAbilityRating(character, weapon) {
+  if (weapon.ability.startsWith('martial arts')) {
+    return character.abil_martial_arts.find((art) => `martial arts (${art.style})` == weapon.ability).rating
+  } else if (weapon.ability.startsWith('craft')) {
+    return character.abil_craft.find((craft) => `craft (${craft.craft})` == weapon.ability).rating
+  } else {
+    return character[`abil_${ weapon.ability }`]
+  }
+}
+
 export function witheringAttackPool(character, weapon) {
   // TODO specialties
   // TODO penalties
@@ -155,13 +166,10 @@ export function witheringAttackPool(character, weapon) {
 export function decisiveAttackPool(character, weapon) {
   // TODO specialties
   // TODO penalties
-  const ability = attackAbilities(character).find((abil) =>
-    abil.abil == weapon.ability
-  )
-  if (ability == undefined)
-    return character.attr_dexterity
+  const attribute = weaponAttributeRating(character, weapon)
+  const ability = weaponAbilityRating(character, weapon)
 
-  return character.attr_dexterity + ability.rating
+  return attribute + ability
 }
 
 export function weaponParry(character, weapon) {

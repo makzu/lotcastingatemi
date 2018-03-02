@@ -77,6 +77,29 @@ export const ATTACK_ABILITIES = [
   'abil_thrown'
 ]
 
+export const NON_ATTACK_ABILITIES = [
+  'abil_athletics',
+  'abil_awareness',
+  'abil_bureaucracy',
+  'abil_dodge',
+  'abil_integrity',
+  'abil_investigation',
+  'abil_larceny',
+  'abil_linguistics',
+  'abil_lore',
+  'abil_medicine',
+  'abil_occult',
+  'abil_performance',
+  'abil_presence',
+  'abil_resistance',
+  'abil_ride',
+  'abil_sail',
+  'abil_socialize',
+  'abil_stealth',
+  'abil_survival',
+  'abil_war',
+]
+
 export const SOLAR_CASTE_ABILITIES = {
   'dawn': [
     { abil: 'abil_archery',       pretty: 'Archery'       },
@@ -146,7 +169,7 @@ export const INTIMACY_RATING_MIN = 1
 export const MERIT_RATING_MAX = 5
 export const MERIT_RATING_MIN = 0
 
-export const LIMIT_MAX = 0
+export const LIMIT_MAX = 10
 
 // 7 health levels + 5 Stamina 5 Ox-Bodies:
 export const HEALTH_LEVEL_MAX = 22

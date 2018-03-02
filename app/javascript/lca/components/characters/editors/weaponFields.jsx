@@ -5,13 +5,12 @@ import { withStyles } from 'material-ui/styles'
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
 import IconButton from 'material-ui/IconButton'
-import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 
+import WeaponAbilitySelect from './weaponAbilitySelect.jsx'
+import WeaponAttributeSelect from './weaponAttributeSelect.jsx'
 import WeightSelect from '../../generic/weightSelect.jsx'
-import * as calc from '../../../utils/calculated'
 import { fullWeapon } from '../../../utils/propTypes'
 
 const styles = theme => ({
@@ -33,30 +32,6 @@ const styles = theme => ({
     textTransform: 'capitalize',
   },
 })
-
-function _AbilitySelect(props) {
-  const { character, weapon, onChange, classes } = props
-
-  const options = calc.attackAbilities(character).map((abil) =>
-    <MenuItem key={ abil.abil } value={ abil.abil }>
-      { abil.abil } ({ abil.rating })
-    </MenuItem>
-  )
-
-  return <TextField select value={ weapon.ability } className={ classes.abilitySelect }
-    name="ability" label="Ability"
-    onChange={ onChange }
-  >
-    { options }
-  </TextField>
-}
-_AbilitySelect.propTypes = {
-  character: PropTypes.object.isRequired,
-  weapon: PropTypes.shape(fullWeapon).isRequired,
-  classes: PropTypes.object,
-  onChange: PropTypes.func.isRequired,
-}
-const AbilitySelect = withStyles(styles)(_AbilitySelect)
 
 /* TODO: handle ranged weapons properly
  * TODO: allow unusual weapons like that given by The Burning Name
@@ -102,6 +77,8 @@ class WeaponFields extends React.Component {
   handleRatingChange(e) {
     let { name, value } = e.target
     const { weapon } = this.state
+    if (value == 'header')
+      return
 
     this.setState({ weapon: { ...weapon, [name]: value }})
     this.props.onChange(weapon.id, name, value)
@@ -131,7 +108,7 @@ class WeaponFields extends React.Component {
         />
 
         <WeightSelect name="weight" value={ weapon.weight }
-          onChange={ handleRatingChange }
+          onChange={ handleRatingChange } margin="dense"
         />
 
         <FormControlLabel
@@ -143,12 +120,16 @@ class WeaponFields extends React.Component {
           }
         />
 
-        <AbilitySelect character={ character } weapon={ weapon }
+        <WeaponAttributeSelect character={ character } weapon={ weapon }
+          onChange={ handleRatingChange }
+        />
+
+        <WeaponAbilitySelect character={ character } weapon={ weapon }
           onChange={ handleRatingChange }
         />
 
         <TextField label="tags" name="tags" value={ weapon.tags }
-          className={ classes.tagsField }
+          className={ classes.tagsField } margin="dense"
           onBlur={ handleBlur } onChange={ handleChange }
         />
         <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>

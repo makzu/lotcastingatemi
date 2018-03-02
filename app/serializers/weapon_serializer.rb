@@ -2,5 +2,7 @@
 
 # app/serializers/chronicle_serializer.rb
 class WeaponSerializer < ActiveModel::Serializer
-  attributes :id, :character_id, :name, :ability, :weight, :tags, :is_artifact
+  attributes :id, :character_id, :name,
+             :weight, :tags, :is_artifact,
+             :ability, :attr
 end

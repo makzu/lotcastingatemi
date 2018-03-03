@@ -8,5 +8,6 @@ class SessionsController < ApplicationController
     @identity = Identity.find_or_create_with_omniauth(auth)
 
     @player = @identity.player
+    @referer = request.referer
   end
 end

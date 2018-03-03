@@ -1,4 +1,4 @@
 <script type="text/javascript">
   window.sessionStorage.jwt = "<%= @player.token %>"
-  window.location.replace("/")
+  window.location.replace("<%= @referer %>")
 </script>

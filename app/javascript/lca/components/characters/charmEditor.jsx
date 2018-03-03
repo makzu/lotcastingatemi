@@ -10,13 +10,16 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import { MenuItem } from 'material-ui/Menu'
 
+import SpellEditorBlock from './editors/spellEditorBlock.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import AbilitySelect from '../generic/abilitySelect.jsx'
 import RatingField from '../generic/ratingField.jsx'
-import { updateCharm, createCharm, destroyCharm } from '../../ducks/actions.js'
+import {
+  updateCharm, createCharm, destroyCharm,
+  updateSpell, createSpell, destroySpell,
+} from '../../ducks/actions.js'
 import { isAbilityCharm, abilitiesWithRatings } from '../../utils/calculated'
 import { ABILITY_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../utils/constants.js'
-
 
 class SingleCharmEditor extends React.Component {
   constructor(props) {
@@ -180,10 +183,17 @@ class CharmEditor extends React.Component {
     this.handleAddMA = this.handleAddMA.bind(this)
     this.handleAddEvocation = this.handleAddEvocation.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleUpdateSpell = this.handleUpdateSpell.bind(this)
+    this.handleAddSpell = this.handleAddSpell.bind(this)
+    this.handleRemoveSpell = this.handleRemoveSpell.bind(this)
   }
 
   handleUpdate(id, charId, trait, value) {
     this.props._handleUpdate(id, charId, trait, value)
+  }
+
+  handleUpdateSpell(id, charId, trait, value) {
+    this.props._handleUpdateSpell(id, charId, trait, value)
   }
 
   handleAddNative() {
@@ -206,8 +216,16 @@ class CharmEditor extends React.Component {
     this.props._handleCreate(this.props.character.id, 'Evocation')
   }
 
+  handleAddSpell() {
+    this.props._handleCreateSpell(this.props.character.id)
+  }
+
   handleRemove(id) {
     this.props._handleDestroy(id, this.props.character.id)
+  }
+
+  handleRemoveSpell(id){
+    this.props._handleDestroySpell(id, this.props.character.id)
   }
 
   render() {
@@ -217,15 +235,16 @@ class CharmEditor extends React.Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { character, nativeCharms, martialArtsCharms, evocations } = this.props
+    const { character, nativeCharms, martialArtsCharms, evocations, spells } = this.props
     const {
-      handleUpdate, handleRemove,
-      handleAddNative, handleAddMA, handleAddEvocation,
+      handleUpdate, handleRemove, handleUpdateSpell, handleRemoveSpell,
+      handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell
     } = this
 
     let natives = []
     let maCharms = []
     let evo = []
+    let spl = []
     natives = nativeCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SingleCharmEditor charm={ c } character={ character }
@@ -244,6 +263,13 @@ class CharmEditor extends React.Component {
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SingleCharmEditor charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
+        />
+      </Grid>
+    )
+    spl = spells.map((c) =>
+      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+        <SpellEditorBlock spell={ c } character={ character }
+          onUpdate={ handleUpdateSpell } onRemove={ handleRemoveSpell }
         />
       </Grid>
     )
@@ -279,6 +305,17 @@ class CharmEditor extends React.Component {
           </Button>
         </Grid>
         { evo }
+
+        <Grid item xs={ 10 }>
+          <Typography variant="headline">Spells</Typography>
+        </Grid>
+        <Grid item xs={ 2 }>
+          <Button onClick={ handleAddSpell }>
+            <ContentAddCircle /> Add Spell
+          </Button>
+        </Grid>
+        { spl }
+
       </Grid>
     </div>
   }
@@ -288,9 +325,13 @@ CharmEditor.propTypes = {
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
+  spells: PropTypes.arrayOf(PropTypes.object),
   _handleCreate: PropTypes.func,
   _handleUpdate: PropTypes.func,
   _handleDestroy: PropTypes.func,
+  _handleCreateSpell: PropTypes.func,
+  _handleUpdateSpell: PropTypes.func,
+  _handleDestroySpell: PropTypes.func,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -300,6 +341,7 @@ function mapStateToProps(state, ownProps) {
   let martialArtsCharms = []
   let evocations = []
   let artifacts = []
+  let spells = []
 
   switch (character.type) {
   case 'SolarCharacter':
@@ -313,7 +355,10 @@ function mapStateToProps(state, ownProps) {
     martialArtsCharms = character.martial_arts_charms.map((id) => state.entities.charms[id])
   }
   if (character.weapons != undefined) {
-    artifacts = character.weapons.map((id) => state.entities.weapons[id]).filter((w) => w.is_artifact )
+    artifacts = character.merits.map((id) => state.entities.merits[id]).filter((m) => m.merit_name == 'artifact' )
+  }
+  if (character.spells != undefined) {
+    spells = character.spells.map((id) => state.entities.spells[id])
   }
 
   return {
@@ -322,6 +367,7 @@ function mapStateToProps(state, ownProps) {
     martialArtsCharms,
     evocations,
     artifacts,
+    spells,
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -334,7 +380,16 @@ function mapDispatchToProps(dispatch) {
     },
     _handleCreate: (charId, type) => {
       dispatch(createCharm(charId, type))
-    }
+    },
+    _handleUpdateSpell: (id, charId, trait, value) => {
+      dispatch(updateSpell(id, charId, trait, value))
+    },
+    _handleDestroySpell: (id, charId) => {
+      dispatch(destroySpell(id, charId))
+    },
+    _handleCreateSpell: (charId) => {
+      dispatch(createSpell(charId))
+    },
   }
 }
 

@@ -3,12 +3,14 @@ import { schema } from 'normalizr'
 const weapon = new schema.Entity('weapons')
 const merit = new schema.Entity('merits')
 const charm = new schema.Entity('charms')
+const spell = new schema.Entity('spells')
 export const character = new schema.Entity('characters', {
   evocations: [ charm ],
   solar_charms: [ charm ],
   martial_arts_charms: [ charm ],
   weapons: [ weapon ],
   merits: [ merit ],
+  spells: [ spell ],
 })
 
 const qcMerit = new schema.Entity('qcMerits')

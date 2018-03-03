@@ -10,7 +10,7 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
-import LcaDrawerButton from './generic/lcaDrawerButton.jsx'
+import LcaDrawerButton from './lcaDrawerButton.jsx'
 
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   tabs: {
@@ -19,6 +19,29 @@ const styles = theme => ({ //eslint-disable-line no-unused-vars
   title: {
   },
 })
+
+function CharmTab({ character, isEditing }) {
+  let tabLabel = 'Charms'
+  let disabled = false
+
+  const tabPath = isEditing
+    ? `/characters/${ character.id }/edit/charms`
+    : `/characters/${ character.id }/charms`
+
+  if (character.type == 'Character' && character.is_sorcerer) {
+    tabLabel = 'Spells'
+  } else if (character.type == 'Character') {
+    disabled = true
+  } else if (character.is_sorcerer) {
+    tabLabel = 'Charms/Spells'
+  }
+
+  return <Tab label={ tabLabel } disabled={ disabled } component={ Link } to={ tabPath } />
+}
+CharmTab.propTypes = {
+  character: PropTypes.object.isRequired,
+  isEditing: PropTypes.bool,
+}
 
 function CharacterHeader(props) {
   if (props.character == undefined)
@@ -66,9 +89,7 @@ function CharacterHeader(props) {
       >
         <Tab label="Basics" component={ Link } to={ tabBasePath } />
         <Tab label="Merits" component={ Link } to={ tabBasePath + '/merits' } />
-        <Tab label="Charms" component={ Link } to={ tabBasePath + '/charms'}
-          disabled={ character.type == 'Character' /* Mortals cannot have Charms */ }
-        />
+        <CharmTab character={ character } isEditing={ editing } />
       </Tabs>
     </Toolbar>
 

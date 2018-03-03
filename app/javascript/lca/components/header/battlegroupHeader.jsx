@@ -9,7 +9,7 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
-import LcaDrawerButton from './generic/lcaDrawerButton.jsx'
+import LcaDrawerButton from './lcaDrawerButton.jsx'
 
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   tabs: {
@@ -20,13 +20,13 @@ const styles = theme => ({ //eslint-disable-line no-unused-vars
 })
 
 function CharacterHeader(props) {
-  if (props.qc == undefined)
+  if (props.battlegroup == undefined)
     return <GenericHeader />
 
-  const { id, qc, path, classes } = props
+  const { id, battlegroup, path, classes } = props
   const editing = path.includes('/edit')
 
-  let editButtonPath = `/qcs/${id}`
+  let editButtonPath = `/battlegroups/${id}`
 
   if (!editing){
     editButtonPath += '/edit'
@@ -38,7 +38,7 @@ function CharacterHeader(props) {
 
       <Typography variant="title" color="inherit" className={ classes.title }>
         { editing && 'Editing ' }
-        { qc.name }
+        { battlegroup.name }
       </Typography>
 
       <Button component={ Link } to={ editButtonPath } color="inherit">
@@ -50,19 +50,19 @@ function CharacterHeader(props) {
 }
 CharacterHeader.propTypes = {
   id: PropTypes.string,
-  qc: PropTypes.object,
+  battlegroup: PropTypes.object,
   path: PropTypes.string,
   classes: PropTypes.object,
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.qcId
-  const qc = state.entities.qcs[id]
+  const id = ownProps.match.params.battlegroupId
+  const battlegroup = state.entities.battlegroups[id]
   const path = ownProps.location.pathname
 
   return {
     id,
-    qc,
+    battlegroup,
     path,
   }
 }

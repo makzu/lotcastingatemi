@@ -9,7 +9,7 @@ import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import Hidden from 'material-ui/Hidden'
 
-import LcaHeader from '../components/header.jsx'
+import LcaHeader from '../components/header/header.jsx'
 import NavPanel from '../components/NavPanel.jsx'
 import { toggleDrawer } from '../ducks/actions.js'
 

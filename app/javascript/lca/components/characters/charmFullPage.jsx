@@ -66,8 +66,12 @@ function _SingleCharm(props) {
 
       <strong>Prerequisite Charms:</strong> { charm.prereqs || 'None' }
     </Typography>
+
     <Typography>{ charm.body }</Typography>
-    <Typography variant="caption">Ref: { charm.ref }</Typography>
+
+    { charm.ref != '' &&
+      <Typography variant="caption">Ref: { charm.ref }</Typography>
+    }
   </BlockPaper>
 }
 _SingleCharm.propTypes = {
@@ -126,6 +130,10 @@ class CharmFullPage extends React.Component {
           </Grid>
         }
         { evo }
+
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">Spells</Typography>
+        </Grid>
       </Grid>
     </div>
   }
@@ -144,6 +152,7 @@ function mapStateToProps(state, ownProps) {
   let martialArtsCharms = []
   let evocations = []
   let artifacts = []
+  let spells = []
 
   switch (character.type) {
   case 'SolarCharacter':
@@ -157,7 +166,10 @@ function mapStateToProps(state, ownProps) {
     martialArtsCharms = character.martial_arts_charms.map((id) => state.entities.charms[id])
   }
   if (character.weapons != undefined) {
-    artifacts = character.weapons.map((id) => state.entities.weapons[id]).filter((w) => w.is_artifact )
+    artifacts = character.merits.map((id) => state.entities.merits[id]).filter((m) => m.merit_name == 'artifact' )
+  }
+  if (character.spells != undefined) {
+    spells = character.spells.map((id) => state.entities.spells[id])
   }
 
   return {
@@ -166,6 +178,7 @@ function mapStateToProps(state, ownProps) {
     martialArtsCharms,
     evocations,
     artifacts,
+    spells,
   }
 }
 

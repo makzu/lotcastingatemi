@@ -7,7 +7,7 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 
-import LcaDrawerButton from './generic/lcaDrawerButton.jsx'
+import LcaDrawerButton from './lcaDrawerButton.jsx'
 import CharacterHeader from './characterHeader.jsx'
 import QcHeader from './qcHeader.jsx'
 import BattlegroupHeader from './battlegroupHeader.jsx'

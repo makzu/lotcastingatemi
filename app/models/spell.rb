@@ -9,5 +9,4 @@ class Spell < ApplicationRecord
   validates :circle, inclusion: { in: CIRCLES }
   validates :cost, presence: true
   validates :duration, presence: true
-  validates :ref, presence: true
 end

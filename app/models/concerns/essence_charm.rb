@@ -4,7 +4,7 @@
 module EssenceCharm
   extend ActiveSupport::Concern
 
-  CHARM_TIMINGS = %w[ simple supplemental reflexive permanant ].freeze
+  CHARM_TIMINGS = %w[ simple supplemental reflexive permanent ].freeze
 
   included do
     # Essence above 5 is explicitly mentioned in the book

@@ -49,6 +49,10 @@ export class NavPanel extends React.Component {
           </ListItem>
         }
 
+        <ListItem button component={ NavLink } to="/resources">
+          <ListItemText primary="Resources" />
+        </ListItem>
+
         <ListItem button onClick={ this.props.switchTheme }>
           <ListItemText primary={ `Current Theme: ${ theme }` } />
         </ListItem>

@@ -13,11 +13,13 @@ import QcEditor from './components/qcs/editor.jsx'
 import BattlegroupSheet from './components/battlegroups/index.jsx'
 import BattlegroupEditor from './components/battlegroups/editor.jsx'
 import WelcomePage from './components/pages/welcomePage.jsx'
+import ResourcesPage from './components/pages/resourcesPage.jsx'
 
 export default function Routes() {
   return (
     <div>
       <Route exact path="/" component={ WelcomePage } />
+      <Route path="/resources" component={ ResourcesPage } />
       <Route path="/content" component={ ContentList } />
 
       <Route exact path="/characters/:characterId" component={ CharacterSheet } />

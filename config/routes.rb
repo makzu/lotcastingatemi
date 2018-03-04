@@ -9,7 +9,11 @@ Rails.application.routes.draw do
       post 'player_token' => 'player_token#create'
       resources :players, only: %i[index show update]
 
-      resources :chronicles, only: %i[create show update destroy]
+      resources :chronicles, only: %i[index create show update destroy] do
+        member do
+          post 'regen_invite_code'
+        end
+      end
 
       resources :characters, only: %i[create show update destroy] do
         resources :merits, :weapons, :charms, :spells, only: %i[create show update destroy]

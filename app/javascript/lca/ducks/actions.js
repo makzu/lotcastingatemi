@@ -16,19 +16,14 @@ export {
 export { logout } from './account.js'
 export { toggleDrawer, switchTheme } from './app.js'
 
-import { fetchCurrentPlayer, fetchChronicle } from './entities'
+import { fetchCurrentPlayer, fetchAllChronicles } from './entities'
 
 export const INIT = 'lca/app/INIT'
 
 export function fetchAll() {
   return (dispatch, getState) => {
     dispatch(fetchCurrentPlayer())
-      .then(() => {
-        let ids = Reflect.ownKeys(getState().entities.chronicles)
-        for (let id of ids) {
-          dispatch(fetchChronicle(id))
-        }
-      })
+      .then(() => dispatch(fetchAllChronicles()))
   }
 }
 

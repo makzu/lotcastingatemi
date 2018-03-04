@@ -43,3 +43,5 @@ export const chronicle = new schema.Entity('chronicles', {
   qcs: [ qc ],
   battlegroups: [ battlegroup ],
 })
+
+export const chronicleList = new schema.Array(chronicle)

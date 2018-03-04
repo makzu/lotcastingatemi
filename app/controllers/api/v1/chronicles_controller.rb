@@ -8,6 +8,12 @@ module Api
       before_action :set_chronicle_from_token, only: %i[join]
       serialization_scope :current_player
 
+      def index
+        authorize current_player
+        @chronicles = current_player.own_chronicles + current_player.chronicles
+        render json: @chronicles
+      end
+
       def show
         authorize @chronicle
         render json: @chronicle
@@ -25,7 +31,7 @@ module Api
         end
       end
 
-      def regen_token
+      def regen_invite_code
         authorize @chronicle
         @chronicle.regenerate_invite_code
         if @chronicle.save

@@ -77,6 +77,23 @@ export function createChronicle(chron) {
   })
 }
 
+export function fetchAllChronicles() {
+  return callApi({
+    endpoint: '/api/v1/chronicles',
+    method: 'GET',
+    types: [
+      CHN_FETCH,
+      {
+        type: CHN_FETCH_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.chronicleList))
+        }
+      },
+      CHN_FETCH_FAILURE
+    ]
+  })
+}
+
 export function fetchChronicle(id) {
   return callApi({
     endpoint: `/api/v1/chronicles/${id}`,

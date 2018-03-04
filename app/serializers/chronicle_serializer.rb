@@ -2,13 +2,18 @@
 
 # app/serializers/chronicle_serializer.rb
 class ChronicleSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :invite_code
+  attribute :invite_code, if: :st?
 
   belongs_to :st, type: 'Player'
   has_many :players
   has_many :characters
   has_many :qcs
   has_many :battlegroups
+
+  def st?
+    current_player.id == object.st_id
+  end
 
   # We don't need the full associations duplicated under Player, because they're
   #   already included above.

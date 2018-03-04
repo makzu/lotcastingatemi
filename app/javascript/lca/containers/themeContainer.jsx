@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 
 const themes = {
-  light: createMuiTheme(),
+  light: createMuiTheme({
+  }),
   dark: createMuiTheme({
     palette: {
       type: 'dark',
-    }
+    },
   })
 }
 

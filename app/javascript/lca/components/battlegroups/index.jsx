@@ -19,7 +19,7 @@ class BattlegroupSheet extends React.PureComponent {
     /* Escape hatch */
     if (this.props.battlegroup == undefined)
       return <BlockPaper>
-        <Typography paragraph>This QC has not yet loaded.</Typography>
+        <Typography paragraph>This Battlegroup has not yet loaded.</Typography>
       </BlockPaper>
 
     const { battlegroup, qc_attacks } = this.props

@@ -16,7 +16,8 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     width: '1.25em',
     height: '1.25em',
-    border: '0.2em solid black'
+    border: '0.2em solid black',
+    overflow: 'hidden',
   },
   healthLevelLabel: { ...theme.typography.caption,
     textAlign: 'center',

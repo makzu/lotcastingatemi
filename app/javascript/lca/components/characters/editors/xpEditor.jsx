@@ -23,15 +23,15 @@ function XpEditor(props) {
     <Typography variant="title">XP:</Typography>
 
     <div>
-      <RatingField trait="xp_total" value={ character.xp_total }
-        label="Total" margin="dense"
+      <RatingField trait="xp_spent" value={ character.xp_spent }
+        label="Spent" max={ character.xp_total } margin="dense"
         onChange={ onRatingChange }
       />
       <span className={ classes.separator }>
         /
       </span>
-      <RatingField trait="xp_spent" value={ character.xp_spent }
-        label="Spent" max={ character.xp_total } margin="dense"
+      <RatingField trait="xp_total" value={ character.xp_total }
+        label="Total" margin="dense"
         onChange={ onRatingChange }
       />
     </div>
@@ -40,15 +40,15 @@ function XpEditor(props) {
       Solar XP:
     </Typography>
     <div>
-      <RatingField trait="xp_solar_total" value={ character.xp_solar_total }
-        label="Total" margin="dense"
+      <RatingField trait="xp_solar_spent" value={ character.xp_solar_spent }
+        label="Spent" max={ character.xp_solar_total } margin="dense"
         onChange={ onRatingChange }
       />
       <span className={ classes.separator }>
         /
       </span>
-      <RatingField trait="xp_solar_spent" value={ character.xp_solar_spent }
-        label="Spent" max={ character.xp_solar_total } margin="dense"
+      <RatingField trait="xp_solar_total" value={ character.xp_solar_total }
+        label="Total" margin="dense"
         onChange={ onRatingChange }
       />
     </div>

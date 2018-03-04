@@ -92,7 +92,7 @@ class CharacterEditor extends React.Component {
           />
         </Grid>
 
-        { character.type != 'Character' &&
+        { character.type == 'SolarCharacter' &&
           <Grid item xs={ 12 } md={ 6 }>
             <SolarExaltEditor character={ character }
               onChange={ handleChange } onBlur={ handleBlur }

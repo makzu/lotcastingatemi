@@ -23,7 +23,7 @@ class BlockPaper extends React.PureComponent {
 }
 BlockPaper.propTypes = {
   classes: PropTypes.object,
-  children: PropTypes.array,
+  children: PropTypes.node,
 }
 
 export default withStyles(styles)(BlockPaper)

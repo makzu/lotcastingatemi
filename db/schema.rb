@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180301071949) do
+ActiveRecord::Schema.define(version: 20180304015956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,8 @@ ActiveRecord::Schema.define(version: 20180301071949) do
     t.string "name", default: "New Chronicle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "invite_code"
+    t.index ["invite_code"], name: "index_chronicles_on_invite_code", unique: true
     t.index ["st_id"], name: "index_chronicles_on_st_id"
   end
 

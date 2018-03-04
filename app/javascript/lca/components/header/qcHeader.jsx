@@ -52,6 +52,7 @@ CharacterHeader.propTypes = {
   id: PropTypes.string,
   qc: PropTypes.object,
   path: PropTypes.string,
+  canIEdit: PropTypes.bool,
   classes: PropTypes.object,
 }
 
@@ -60,10 +61,18 @@ function mapStateToProps(state, ownProps) {
   const qc = state.entities.qcs[id]
   const path = ownProps.location.pathname
 
+  let canIEdit = false
+  if (qc != undefined) {
+    canIEdit = state.session.id == qc.player_id || false
+    if (qc.chronicle && state.entities.chronicles[qc.chronicle].st == state.session.id)
+      canIEdit = true
+  }
+
   return {
     id,
     qc,
     path,
+    canIEdit,
   }
 }
 

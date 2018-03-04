@@ -23,7 +23,7 @@ function CharacterHeader(props) {
   if (props.battlegroup == undefined)
     return <GenericHeader />
 
-  const { id, battlegroup, path, classes } = props
+  const { id, battlegroup, path, canIEdit, classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/battlegroups/${id}`
@@ -41,9 +41,11 @@ function CharacterHeader(props) {
         { battlegroup.name }
       </Typography>
 
-      <Button component={ Link } to={ editButtonPath } color="inherit">
-        { editing ? 'Done' : 'Edit' }
-      </Button>
+      { canIEdit &&
+        <Button component={ Link } to={ editButtonPath } color="inherit">
+          { editing ? 'Done' : 'Edit' }
+        </Button>
+      }
     </Toolbar>
 
   </div>
@@ -52,6 +54,7 @@ CharacterHeader.propTypes = {
   id: PropTypes.string,
   battlegroup: PropTypes.object,
   path: PropTypes.string,
+  canIEdit: PropTypes.bool,
   classes: PropTypes.object,
 }
 
@@ -60,10 +63,18 @@ function mapStateToProps(state, ownProps) {
   const battlegroup = state.entities.battlegroups[id]
   const path = ownProps.location.pathname
 
+  let canIEdit = false
+  if (battlegroup != undefined) {
+    canIEdit = state.session.id == battlegroup.player_id || false
+    if (battlegroup.chronicle && state.entities.chronicles[battlegroup.chronicle].st == state.session.id)
+      canIEdit = true
+  }
+
   return {
     id,
     battlegroup,
     path,
+    canIEdit,
   }
 }
 

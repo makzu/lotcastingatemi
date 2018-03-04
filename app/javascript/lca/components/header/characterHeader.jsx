@@ -47,7 +47,7 @@ function CharacterHeader(props) {
   if (props.character == undefined)
     return <GenericHeader />
 
-  const { id, character, path, classes } = props
+  const { id, character, path, canIEdit, classes } = props
   const editing = path.includes('/edit')
 
   let tabValue = 0
@@ -78,9 +78,6 @@ function CharacterHeader(props) {
         { character.name }
       </Typography>
 
-      <Button component={ Link } to={ editButtonPath } color="inherit">
-        { editing ? 'Done' : 'Edit' }
-      </Button>
 
       <Tabs
         className={ classes.tabs }
@@ -91,6 +88,11 @@ function CharacterHeader(props) {
         <Tab label="Merits" component={ Link } to={ tabBasePath + '/merits' } />
         <CharmTab character={ character } isEditing={ editing } />
       </Tabs>
+      { canIEdit &&
+        <Button component={ Link } to={ editButtonPath } color="inherit">
+          { editing ? 'Done' : 'Edit' }
+        </Button>
+      }
     </Toolbar>
 
   </div>
@@ -99,6 +101,7 @@ CharacterHeader.propTypes = {
   id: PropTypes.string,
   character: PropTypes.object,
   path: PropTypes.string,
+  canIEdit: PropTypes.bool,
   classes: PropTypes.object,
 }
 
@@ -107,10 +110,19 @@ function mapStateToProps(state, ownProps) {
   const character = state.entities.characters[id]
   const path = ownProps.location.pathname
 
+  let canIEdit = false
+  if (character != undefined) {
+    canIEdit = state.session.id == character.player_id
+
+    if (character.chronicle && state.entities.chronicles[character.chronicle].st == state.session.id)
+      canIEdit = true
+  }
+
   return {
     id,
     character,
     path,
+    canIEdit,
   }
 }
 

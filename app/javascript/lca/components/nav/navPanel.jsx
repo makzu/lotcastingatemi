@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, NavLink } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
-import List, { ListItem, ListItemText } from 'material-ui/List'
+import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
+import Switch from 'material-ui/Switch'
 
+import ChronicleNavList from './chronicleNavList.jsx'
 import DisplayNamePopup from '../generic/displayNamePopup.jsx'
 import { switchTheme } from '../../ducks/actions.js'
 
@@ -43,18 +45,24 @@ export class NavPanel extends React.Component {
           </ListItem>
         }
 
-        { authenticated &&
+        { authenticated && <Fragment>
           <ListItem button component={ NavLink } to="/content">
             <ListItemText primary="Characters" />
           </ListItem>
-        }
+
+          <ChronicleNavList />
+        </Fragment>}
 
         <ListItem button component={ NavLink } to="/resources">
           <ListItemText primary="Resources" />
         </ListItem>
 
         <ListItem button onClick={ this.props.switchTheme }>
-          <ListItemText primary={ `Current Theme: ${ theme }` } />
+          <ListItemText primary={ `Current Theme: ${ theme }` }
+          />
+          <ListItemSecondaryAction>
+            <Switch checked={ theme == 'dark' } onChange={ this.props.switchTheme }/>
+          </ListItemSecondaryAction>
         </ListItem>
         <Divider />
 

@@ -5,6 +5,7 @@ export {
   updateCharm, createCharm, destroyCharm,
   updateSpell, createSpell, destroySpell,
   fetchChronicle, updateChronicle, createChronicle,
+  joinChronicle, regenChronicleInviteCode,
   fetchQc, updateQc, createQc,
   updateQcAttack, createQcAttack, destroyQcAttack,
   updateQcMerit, createQcMerit, destroyQcMerit,

@@ -14,6 +14,12 @@ export const CHN_CREATE_FAILURE = 'lca/chronicle/CREATE_FAILURE'
 export const CHN_UPDATE =         'lca/chronicle/UPDATE'
 export const CHN_UPDATE_SUCCESS = 'lca/chronicle/UPDATE_SUCCESS'
 export const CHN_UPDATE_FAILURE = 'lca/chronicle/UPDATE_FAILURE'
+export const CHN_JOIN =           'lca/chronicle/JOIN'
+export const CHN_JOIN_SUCCESS =   'lca/chronicle/JOIN_SUCCESS'
+export const CHN_JOIN_FAILURE =   'lca/chronicle/JOIN_FAILURE'
+export const INVITE_CODE_UPDATE         = 'lca/chronicle/INVITE_CODE_UPDATE'
+export const INVITE_CODE_UPDATE_SUCCESS = 'lca/chronicle/INVITE_CODE_UPDATE_SUCCESS'
+export const INVITE_CODE_UPDATE_FAILURE = 'lca/chronicle/INVITE_CODE_UPDATE_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
@@ -32,7 +38,10 @@ export default function reducer(state, action) {
       },
       chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   ),
     }
+
+  case CHN_JOIN_SUCCESS:
   case CHN_FETCH_SUCCESS:
+  case INVITE_CODE_UPDATE_SUCCESS:
     return {
       ...state,
       players:      merge({ ...state.players      }, _entities.players      ),
@@ -48,12 +57,14 @@ export default function reducer(state, action) {
       battlegroups: merge({ ...state.battlegroups }, _entities.battlegroups ),
       chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   ),
     }
+
   case CHN_UPDATE_SUCCESS:
     return { ...state, chronicles: {
       ...state.chronicles, [_id]: {
         ...state.chronicles[_id], [_trait]: action.payload[_trait]
       }
     }}
+
   default:
     return state
   }
@@ -120,6 +131,41 @@ export function updateChronicle(id, trait, value) {
       CHN_UPDATE,
       { type: CHN_UPDATE_SUCCESS, meta: { trait: trait }},
       CHN_UPDATE_FAILURE
+    ]
+  })
+}
+
+export function joinChronicle(code) {
+  return callApi({
+    endpoint: '/api/v1/chronicles/join',
+    method: 'POST',
+    body: JSON.stringify({ invite_code: code }),
+    types: [
+      CHN_JOIN,
+      {
+        type: CHN_JOIN_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+        }
+      },
+      CHN_JOIN_FAILURE
+    ]
+  })
+}
+
+export function regenChronicleInviteCode(id) {
+  return callApi({
+    endpoint: `/api/v1/chronicles/${id}/regen_invite_code`,
+    method: 'POST',
+    types: [
+      INVITE_CODE_UPDATE,
+      {
+        type: INVITE_CODE_UPDATE_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+        }
+      },
+      INVITE_CODE_UPDATE_FAILURE
     ]
   })
 }

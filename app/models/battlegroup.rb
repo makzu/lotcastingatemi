@@ -2,10 +2,8 @@
 
 # Holds traits specific to Battlegroups, as defined starting at Core p.205.
 class Battlegroup < ApplicationRecord
+  include BelongsToPlayer
   include Willpower
-
-  belongs_to :player
-  belongs_to :chronicle, optional: true
 
   has_many :qc_attacks, as: :qc_attackable, dependent: :destroy
 

@@ -8,13 +8,10 @@
 # limit on the total number of rows allowed in the database before they start
 # charging extra.
 class Character < ApplicationRecord
+  include BelongsToPlayer
   include HealthLevels
   include Willpower
   include Intimacies
-
-  belongs_to :player
-  # TODO: validate that if a character is in a chronicle, the player must be too
-  belongs_to :chronicle, optional: true
 
   has_many :merits,  dependent: :destroy
   has_many :weapons, dependent: :destroy

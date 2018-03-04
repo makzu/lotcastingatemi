@@ -4,7 +4,7 @@ module Api
   module V1
     class ChroniclesController < Api::V1::BaseController
       before_action :authenticate_player
-      before_action :set_chronicle, only: %i[show update regen_token destroy]
+      before_action :set_chronicle, only: %i[show update regen_invite_code destroy]
       before_action :set_chronicle_from_token, only: %i[join]
       serialization_scope :current_player
 
@@ -42,6 +42,7 @@ module Api
       end
 
       def join
+        authorize current_player
         @chronicle.players << current_player
 
         if @chronicle.save
@@ -71,8 +72,8 @@ module Api
         @chronicle = Chronicle.find(params[:id])
       end
 
-      def check_token
-        @chronicle = Chronicle.find_by(invite_code: params[:invite_code])
+      def set_chronicle_from_token
+        @chronicle = Chronicle.find_by!(invite_code: params[:invite_code])
       end
 
       def chronicle_params

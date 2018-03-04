@@ -2,17 +2,15 @@
 
 # Traits for QCs.  A QC can serve as the base for any number of battlegroups.
 class Qc < ApplicationRecord
+  include BelongsToPlayer
   include HealthLevels
   include Willpower
   include Intimacies
   include MotePool
 
-  has_many :qc_attacks,   dependent: :destroy, as: :qc_attackable
+  has_many :qc_attacks,   dependent: :destroy, as: :qc_attackable # rubocop:disable Rails/InverseOf
   has_many :qc_charms,    dependent: :destroy
   has_many :qc_merits,    dependent: :destroy
-
-  belongs_to :player
-  belongs_to :chronicle, optional: true
 
   # Essence above 5 is explicitly mentioned in the book
   validates :essence, numericality: {

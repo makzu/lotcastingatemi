@@ -21,6 +21,10 @@ class ChroniclePolicy < ApplicationPolicy
     player_is_st?
   end
 
+  def regen_invite_code?
+    update?
+  end
+
   def destroy?
     player_is_st?
   end

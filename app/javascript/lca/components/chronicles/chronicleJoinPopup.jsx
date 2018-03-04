@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -8,17 +8,20 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
+import { ListItem, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
-import { createChronicle } from '../../ducks/actions.js'
+import ContentAddCircle from 'material-ui-icons/AddCircle'
 
-class ChronicleCreatePopup extends React.Component {
+import { joinChronicle } from '../../ducks/actions.js'
+
+class ChronicleJoinPopup extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       open: false,
-      chronicle: { name: '' },
+      code: '',
     }
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
@@ -35,46 +38,46 @@ class ChronicleCreatePopup extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ chronicle: { ...this.state.chronicle, name: e.target.value }})
+    this.setState({ code: e.target.value })
   }
 
   handleSubmit() {
     this.setState({ open: false })
-    this.props.createChronicle(this.state.chronicle)
+    this.props.joinChronicle(this.state.code)
   }
 
   render() {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { chronicle } = this.state
+    const { code } = this.state
 
-    const actions = [
+    return <Fragment>
+      <ListItem button onClick={ handleOpen }>
+        <ListItemText inset primary="Join" />
+        <ContentAddCircle />
+      </ListItem>
 
-    ]
-    return <span>
-      <Button onClick={ handleOpen }>Create New</Button>
       <Dialog
         open={ this.state.open }
-        actions={ actions }
         onClose={ handleClose }
       >
-        <DialogTitle>Create New Chronicle</DialogTitle>
+        <DialogTitle>Join a Chronicle</DialogTitle>
         <DialogContent>
-          <TextField name="name" value={ chronicle.name }
-            label="Name" margin="normal"
+          <TextField name="code" value={ code }
+            label="Invite Code" margin="normal" fullWidth
             onChange={ handleChange }
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } color="primary">Create</Button>
+          <Button onClick={ handleSubmit } variant="raised" color="primary">Join</Button>
         </DialogActions>
       </Dialog>
-    </span>
+    </Fragment>
   }
 }
-ChronicleCreatePopup.propTypes = {
+ChronicleJoinPopup.propTypes = {
   id: PropTypes.number.isRequired,
-  createChronicle: PropTypes.func.isRequired,
+  joinChronicle: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -85,10 +88,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    createChronicle: (chronicle) => {
-      dispatch(createChronicle(chronicle))
+    joinChronicle: (code) => {
+      dispatch(joinChronicle(code))
     },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChronicleCreatePopup)
+export default connect(mapStateToProps, mapDispatchToProps)(ChronicleJoinPopup)

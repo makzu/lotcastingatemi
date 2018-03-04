@@ -4,12 +4,12 @@
 class Player < ApplicationRecord
   has_many :identities, dependent: :destroy
 
-  has_many :own_chronicles, class_name: 'Chronicle', foreign_key: 'st_id', dependent: :destroy
+  has_many :own_chronicles, class_name: 'Chronicle', foreign_key: 'st_id', inverse_of: :st, dependent: :destroy
   has_many :characters,   dependent: :destroy
   has_many :qcs,          dependent: :destroy
   has_many :battlegroups, dependent: :destroy
 
-  has_many :chronicle_players
+  has_many :chronicle_players, dependent: :destroy
   has_many :chronicles, through: :chronicle_players
 
   validates :email, uniqueness: true, email: true, allow_nil: true

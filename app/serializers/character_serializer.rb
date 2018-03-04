@@ -2,6 +2,7 @@
 
 # app/serializers/character_serializer.rb
 class CharacterSerializer < ActiveModel::Serializer
+  # rubocop:disable Layout/EmptyLinesAroundArguments
   attributes :id, :name, :essence, :description, :type,
              :willpower_temporary, :willpower_permanent,
              :health_level_0s, :health_level_1s, :health_level_2s,
@@ -35,9 +36,22 @@ class CharacterSerializer < ActiveModel::Serializer
 
              :xp_total, :xp_spent, :xp_solar_total, :xp_solar_spent,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white
+  # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id
+  attribute :pinned, if: :owner?
+  attribute :hidden, if: :owner_or_st?
+
   has_many :merits
   has_many :weapons
   has_many :spells
+
+  def owner?
+    object.player == current_player
+  end
+
+  def owner_or_st?
+    owner? ||
+      (object.chronicle && object.storyteller == current_player)
+  end
 end

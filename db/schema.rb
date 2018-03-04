@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304015956) do
+ActiveRecord::Schema.define(version: 20180304213900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20180304015956) do
     t.integer "senses", default: 1
     t.integer "initiative", default: 0
     t.integer "onslaught", default: 0
+    t.boolean "pinned", default: false
+    t.boolean "hidden", default: false
     t.index ["chronicle_id"], name: "index_battlegroups_on_chronicle_id"
     t.index ["player_id"], name: "index_battlegroups_on_player_id"
   end
@@ -134,6 +136,8 @@ ActiveRecord::Schema.define(version: 20180304015956) do
     t.integer "motes_peripheral_current", default: 0
     t.integer "limit"
     t.string "limit_trigger"
+    t.boolean "pinned", default: false
+    t.boolean "hidden", default: false
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -299,6 +303,8 @@ ActiveRecord::Schema.define(version: 20180304015956) do
     t.integer "grapple_control", default: 0
     t.json "ties", default: []
     t.json "principles", default: []
+    t.boolean "pinned", default: false
+    t.boolean "hidden", default: false
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end

@@ -8,6 +8,13 @@ module BelongsToPlayer
 
     # TODO: validate that if a character is in a chronicle, the player must be too
     belongs_to :chronicle, optional: true
-    scope :in_chronicle, ->(chronicle) { where(chronicle_id: chronicle.id) }
+    delegate :storyteller, to: :chronicle
+  end
+
+  # avoid needing BattlegroupPolicy and QcPolicy
+  module ClassMethods
+    def policy_class
+      CharacterPolicy
+    end
   end
 end

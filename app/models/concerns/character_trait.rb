@@ -4,10 +4,11 @@
 module CharacterTrait
   extend ActiveSupport::Concern
   included do
-    belongs_to :character, foreign_key: :character_id
+    belongs_to :character, foreign_key: :character_id # rubocop:disable Rails/InverseOf
 
-    delegate :player,    to: :character
-    delegate :chronicle, to: :character
+    delegate :player,      to: :character
+    delegate :chronicle,   to: :character
+    delegate :storyteller, to: :character
   end
 
   # Ensure the correct Pundit policy is used (to prevent needing CharmPolicy, MeritPolicy, et al)

@@ -5,7 +5,7 @@ class Battlegroup < ApplicationRecord
   include BelongsToPlayer
   include Willpower
 
-  has_many :qc_attacks, as: :qc_attackable, dependent: :destroy
+  has_many :qc_attacks, dependent: :destroy, as: :qc_attackable # rubocop:disable Rails/InverseOf
 
   validates :size, zero_thru_five_stat: true
 

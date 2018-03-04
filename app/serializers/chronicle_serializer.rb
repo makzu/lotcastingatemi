@@ -25,11 +25,11 @@ class ChronicleSerializer < ActiveModel::Serializer
     end
 
     def qcs
-      QcPolicy::Scope.new(scope, Qc).resolve.where(player: object).pluck(:id)
+      CharacterPolicy::Scope.new(scope, Qc).resolve.where(player: object).pluck(:id)
     end
 
     def battlegroups
-      BattlegroupPolicy::Scope.new(scope, Battlegroup).resolve.where(player: object).pluck(:id)
+      CharacterPolicy::Scope.new(scope, Battlegroup).resolve.where(player: object).pluck(:id)
     end
   end
 end

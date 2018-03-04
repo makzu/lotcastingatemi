@@ -6,7 +6,6 @@ module Api
       before_action :authenticate_player
       before_action :set_chronicle, only: %i[show update regen_invite_code destroy]
       before_action :set_chronicle_from_token, only: %i[join]
-      serialization_scope :current_player
 
       def index
         authorize current_player

@@ -15,7 +15,7 @@ export {
 } from './entities'
 
 export { logout } from './account.js'
-export { toggleDrawer, switchTheme } from './app.js'
+export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
 
 import { fetchCurrentPlayer, fetchAllChronicles } from './entities'
 

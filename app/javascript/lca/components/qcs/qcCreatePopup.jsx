@@ -48,17 +48,13 @@ class QcCreatePopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { qc } = this.state
 
-    const actions = [
-
-    ]
     return <span>
       <Button onClick={ handleOpen }>Create New</Button>
       <Dialog
         open={ this.state.open }
-        actions={ actions }
         onClose={ handleClose }
       >
-        <DialogTitle>Create New Qc</DialogTitle>
+        <DialogTitle>Create New Quick Character</DialogTitle>
         <DialogContent>
           <TextField name="name" value={ qc.name }
             label="Name" margin="normal"

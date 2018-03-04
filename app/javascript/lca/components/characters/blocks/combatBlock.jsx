@@ -7,33 +7,32 @@ import { withAttributes, withAbilities } from '../../../utils/propTypes'
 
 export function CombatBlock(props) {
   const { character } = props
+  const padding = 'dense'
 
   return <div>
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell numeric>Evasion</TableCell>
-
-          <TableCell numeric>Join Battle</TableCell>
-          <TableCell numeric>Rush</TableCell>
-          <TableCell numeric>Disengage</TableCell>
-          <TableCell numeric>Rise/Prone</TableCell>
-          <TableCell numeric>Take Cover</TableCell>
-          <TableCell numeric>Withdraw</TableCell>
+          <TableCell numeric padding={ padding }>Evasion</TableCell>
+          <TableCell numeric padding={ padding }>Join Battle</TableCell>
+          <TableCell numeric padding={ padding }>Rush</TableCell>
+          <TableCell numeric padding={ padding }>Disengage</TableCell>
+          <TableCell numeric padding={ padding }>Rise/Prone</TableCell>
+          <TableCell numeric padding={ padding }>Take Cover</TableCell>
+          <TableCell numeric padding={ padding }>Withdraw</TableCell>
 
         </TableRow>
       </TableHead>
 
       <TableBody>
         <TableRow>
-          <TableCell numeric>{ calc.evasionRaw(character) }</TableCell>
-
-          <TableCell numeric>{ calc.joinBattlePool(character) }</TableCell>
-          <TableCell numeric>{ calc.rushPool(character) }</TableCell>
-          <TableCell numeric>{ calc.disengagePool(character) }</TableCell>
-          <TableCell numeric>{ calc.riseFromPronePool(character) }</TableCell>
-          <TableCell numeric>{ calc.takeCoverPool(character) }</TableCell>
-          <TableCell numeric>{ calc.withdrawPool(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.evasionRaw(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.joinBattlePool(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.rushPool(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.disengagePool(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.riseFromPronePool(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.takeCoverPool(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.withdrawPool(character) }</TableCell>
 
         </TableRow>
       </TableBody>

@@ -11,6 +11,7 @@ import { withAttributes, withAbilities } from '../../../utils/propTypes'
 
 export default function SocialBlock(props) {
   const { character } = props
+  const padding = 'dense'
 
   return <BlockPaper>
     <Typography variant="title">
@@ -20,17 +21,17 @@ export default function SocialBlock(props) {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell numeric>Resolve</TableCell>
-          <TableCell numeric>Guile</TableCell>
-          <TableCell numeric>Read Int</TableCell>
+          <TableCell numeric padding={ padding }>Resolve</TableCell>
+          <TableCell numeric padding={ padding }>Guile</TableCell>
+          <TableCell numeric padding={ padding }>Read Int</TableCell>
         </TableRow>
       </TableHead>
 
       <TableBody>
         <TableRow>
-          <TableCell numeric>{ calc.resolveRaw(character) }</TableCell>
-          <TableCell numeric>{ calc.guileRaw(character) }</TableCell>
-          <TableCell numeric>{ calc.readIntentionsPool(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.resolveRaw(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.guileRaw(character) }</TableCell>
+          <TableCell numeric padding={ padding }>{ calc.readIntentionsPool(character) }</TableCell>
         </TableRow>
       </TableBody>
     </Table>

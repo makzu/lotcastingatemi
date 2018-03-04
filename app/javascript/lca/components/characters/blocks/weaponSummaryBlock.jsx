@@ -7,40 +7,43 @@ import * as calc from '../../../utils/calculated'
 import { withAttributes, withAbilities, fullWeapon } from '../../../utils/propTypes'
 
 function WeaponHeader() {
+  const padding = 'dense'
+
   return <TableRow>
-    <TableCell>Weapon Name</TableCell>
-    <TableCell numeric>Attack Pool</TableCell>
-    <TableCell numeric>Damage</TableCell>
-    <TableCell numeric>Parry</TableCell>
-    <TableCell numeric><abbr title="Overwhelming">Ovw</abbr></TableCell>
-    <TableCell>Tags</TableCell>
-    <TableCell>Ability</TableCell>
+    <TableCell padding={ padding }>Weapon Name</TableCell>
+    <TableCell numeric padding={ padding }>Attack Pool</TableCell>
+    <TableCell numeric padding={ padding }>Damage</TableCell>
+    <TableCell numeric padding={ padding }>Parry</TableCell>
+    <TableCell numeric padding={ padding }><abbr title="Overwhelming">Ovw</abbr></TableCell>
+    <TableCell padding={ padding }>Tags</TableCell>
+    <TableCell padding={ padding }>Ability</TableCell>
   </TableRow>
 }
 
 function WeaponData(props) {
   const { weapon, character } = props
+  const padding = 'dense'
 
   return <TableRow>
-    <TableCell>{ weapon.name }</TableCell>
-    <TableCell numeric>
+    <TableCell padding={ padding }>{ weapon.name }</TableCell>
+    <TableCell numeric padding={ padding }>
       { calc.witheringAttackPool(character, weapon) }{' '}
       ({ calc.decisiveAttackPool(character, weapon) } D)
     </TableCell>
-    <TableCell numeric>
+    <TableCell numeric padding={ padding }>
       { calc.weaponDamage(character, weapon) }
       { calc.weaponDamageType(weapon) }
     </TableCell>
-    <TableCell numeric>
+    <TableCell numeric padding={ padding }>
       { calc.weaponParry(character, weapon) }
     </TableCell>
-    <TableCell numeric>
+    <TableCell numeric padding={ padding }>
       { calc.weaponOverwhelming(weapon) }
     </TableCell>
-    <TableCell>
+    <TableCell padding={ padding }>
       { weapon.tags.join(', ') }
     </TableCell>
-    <TableCell>
+    <TableCell padding={ padding }>
       { weapon.ability }
     </TableCell>
   </TableRow>

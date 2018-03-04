@@ -24,7 +24,7 @@ function LimitEditor(props) {
     <br />
 
     <TextField name="limit_trigger" value={ character.limit_trigger }
-      label="Trigger" margin="dense"
+      label="Limit Trigger" margin="dense"
       multiline fullWidth
       onChange={ onChange } onBlur={ onBlur } />
   </BlockPaper>

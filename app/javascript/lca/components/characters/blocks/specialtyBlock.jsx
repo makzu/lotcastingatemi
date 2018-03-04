@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
@@ -9,27 +9,31 @@ import BlockPaper from '../../generic/blockPaper.jsx'
 import { withSpecialties } from '../../../utils/propTypes'
 
 const styles = theme => ({
+  specialtyWrap: {
+    display: 'flex',
+  },
   specialtyAbility: { ...theme.typography.body1,
     textTransform: 'capitalize',
-    display: 'inline-block',
     width: '7em',
   },
   specialtyContext: { ...theme.typography.body1,
-
+    flex: 1,
   }
 })
 
-function FullSpecialtyBlock(props) {
-  const spec = props.character.specialties.map((s) =>
-    <div key={s.ability + s.context}>
-      <span className={ props.classes.specialtyAbility }>
-        { s.ability }
-      </span>
-      <span className={ props.classes.specialtyContext }>
-        { s.context }
-      </span>
+function FullSpecialtyBlock({ character, classes }) {
+  const spec = character.specialties.map((s) =>
+    <Fragment key={s.ability + s.context}>
+      <div className={ classes.specialtyWrap }>
+        <div className={ classes.specialtyAbility }>
+          { s.ability }
+        </div>
+        <div className={ classes.specialtyContext }>
+          { s.context }
+        </div>
+      </div>
       <Divider />
-    </div>
+    </Fragment>
   )
 
   return <BlockPaper>

@@ -10,7 +10,7 @@ import Switch from 'material-ui/Switch'
 
 import ChronicleNavList from './chronicleNavList.jsx'
 import DisplayNamePopup from '../generic/displayNamePopup.jsx'
-import { switchTheme } from '../../ducks/actions.js'
+import { closeDrawer, switchTheme } from '../../ducks/actions.js'
 
 const styles = theme => ({
   loggedInHeader: { ...theme.typography.subheading,
@@ -23,7 +23,9 @@ const styles = theme => ({
 
 export class NavPanel extends React.Component {
   render() {
-    const { authenticated, displayName, theme, classes } = this.props
+    const {
+      authenticated, displayName, theme, closeDrawer, switchTheme, classes,
+    } = this.props
 
     return <div>
       <List component="nav">
@@ -34,7 +36,7 @@ export class NavPanel extends React.Component {
         }
         <Divider />
 
-        <ListItem button component={ NavLink } to="/">
+        <ListItem button component={ NavLink } to="/" onClick={ closeDrawer }>
           <ListItemText primary="Home" />
         </ListItem>
 
@@ -46,14 +48,14 @@ export class NavPanel extends React.Component {
         }
 
         { authenticated && <Fragment>
-          <ListItem button component={ NavLink } to="/content">
+          <ListItem button component={ NavLink } to="/content" onClick={ closeDrawer }>
             <ListItemText primary="Characters" />
           </ListItem>
 
           <ChronicleNavList />
         </Fragment>}
 
-        <ListItem button component={ NavLink } to="/resources">
+        <ListItem button component={ NavLink } to="/resources" onClick={ closeDrawer }>
           <ListItemText primary="Resources" />
         </ListItem>
 
@@ -61,7 +63,7 @@ export class NavPanel extends React.Component {
           <ListItemText primary={ `Current Theme: ${ theme }` }
           />
           <ListItemSecondaryAction>
-            <Switch checked={ theme == 'dark' } onChange={ this.props.switchTheme }/>
+            <Switch checked={ theme == 'dark' } onChange={ switchTheme } />
           </ListItemSecondaryAction>
         </ListItem>
         <Divider />
@@ -69,6 +71,7 @@ export class NavPanel extends React.Component {
         <ListItem button component="a"
           href="https://github.com/makzu/lotcastingatemi"
           target="_blank" rel="noopener noreferrer"
+          onClick={ closeDrawer }
         >
           <ListItemText primary="View on GitHub" />
         </ListItem>
@@ -83,6 +86,7 @@ NavPanel.propTypes = {
   history: PropTypes.object,
   theme: PropTypes.string,
   switchTheme: PropTypes.func,
+  closeDrawer: PropTypes.func,
   classes: PropTypes.object,
 }
 
@@ -100,6 +104,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    closeDrawer: () => dispatch(closeDrawer()),
     switchTheme: () => dispatch(switchTheme()),
   }
 }

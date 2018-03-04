@@ -18,13 +18,13 @@ function AttributeBlock(props) {
       Attributes
     </Typography>
     <Grid container spacing={ 24 }>
-      <Grid item xs={ 4 }>
+      <Grid item xs={ 12 } md={ 4 }>
         <AttributeBlockPhysical character={ character } />
       </Grid>
-      <Grid item xs={ 4 }>
+      <Grid item xs={ 12 } md={ 4 }>
         <AttributeBlockSocial character={ character } />
       </Grid>
-      <Grid item xs={ 4 }>
+      <Grid item xs={ 12 } md={ 4 }>
         <AttributeBlockMental character={ character } />
       </Grid>
     </Grid>

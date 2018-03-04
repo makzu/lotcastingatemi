@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash'
 
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
+import Divider from 'material-ui/Divider'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
@@ -35,7 +36,7 @@ function _CraftFields(props) {
       onChange={ onCraftChange } onBlur={ onCraftBlur }
     />
     <RatingField trait="rating" value={ rating }
-      label="Rating" min={ MIN } max={ MAX } margin="dense"
+      label="Rating" min={ MIN } max={ MAX } margin="dense" narrow
       onChange={ onRatingChange }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
@@ -112,6 +113,8 @@ class CraftEditor extends React.Component {
     )
 
     return <div>
+      <Divider style={{ marginTop: '0.5em' }}/>
+
       <Typography variant="subheading">
         Crafts:
         <Button onClick={ onAdd.bind(this) }>

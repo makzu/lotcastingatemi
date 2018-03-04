@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Divider from 'material-ui/Divider'
 import Grid from 'material-ui/Grid'
+import Hidden from 'material-ui/Hidden'
 import Typography from 'material-ui/Typography'
 
 import AbilityBlock from './blocks/abilityBlock.jsx'
@@ -92,9 +93,18 @@ export function MotePoolBlock(props) {
     <Typography>
       Personal: { character.motes_personal_current } / { character.motes_personal_total }
     </Typography>
-    <Typography paragraph>
-      Peripheral: { character.motes_peripheral_current } / { character.motes_peripheral_total }
-    </Typography>
+    { character.motes_peripheral_total > 0 &&
+      <Typography>
+        Peripheral: { character.motes_peripheral_current } / { character.motes_peripheral_total }
+      </Typography>
+    }
+    { character.is_sorcerer &&
+      <Typography>
+        Sorcerous : { character.sorcerous_motes }
+      </Typography>
+    }
+    <br />
+
     <Typography>
       Anima banner: { prettyAnimaLevel(character.anima_level) }
     </Typography>
@@ -154,6 +164,10 @@ export class CharacterSheet extends React.Component {
 
     const { character, weapons, merits } = this.props
     return <div>
+      <Hidden smUp>
+        <div style={{ height: '2.5em', }}>&nbsp;</div>
+      </Hidden>
+
       <Grid container spacing={ 24 }>
         <Grid item xs={ 12 } md={ 4 }>
           <BlockPaper>
@@ -171,11 +185,11 @@ export class CharacterSheet extends React.Component {
           </BlockPaper>
         </Grid>
 
-        <Grid item xs={ 12 } md={ 3 }>
+        <Grid item xs={ 12 } sm={ 6 } md={ 3 }>
           <WillpowerBlock character={ character } />
         </Grid>
 
-        <Grid item xs={ 12 } md={ 3 }>
+        <Grid item xs={ 12 } sm={ 6 } md={ 3 }>
           <HealthLevelBlock character={ character } />
         </Grid>
 
@@ -201,11 +215,11 @@ export class CharacterSheet extends React.Component {
               <AttributeBlock character={ character } />
             </Grid>
 
-            <Grid item xs={ 4 }>
+            <Grid item xs={ 12 } md={ 5 }>
               <SpecialtyBlock character={ character } />
             </Grid>
 
-            <Grid item xs={ 8 }>
+            <Grid item xs={ 12 } md={ 7 }>
               <BlockPaper>
                 <Typography variant="title">
                   Merits
@@ -216,7 +230,7 @@ export class CharacterSheet extends React.Component {
               </BlockPaper>
             </Grid>
 
-            <Grid item xs={ 12 }>
+            <Grid item xs={ 12 } hidden={{ mdDown: true }}>
               <BlockPaper>
                 <Typography variant="title">
                   Weapons
@@ -225,6 +239,15 @@ export class CharacterSheet extends React.Component {
               </BlockPaper>
             </Grid>
           </Grid>
+        </Grid>
+
+        <Grid item xs={ 12 } hidden={{ lgUp: true }}>
+          <BlockPaper>
+            <Typography variant="title">
+              Weapons
+            </Typography>
+            <WeaponSummaryBlock character={ character } weapons={ weapons } />
+          </BlockPaper>
         </Grid>
 
         <Grid item xs={ 12 } md={ 8 }>

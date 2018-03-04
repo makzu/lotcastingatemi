@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import Checkbox from 'material-ui/Checkbox'
+import Divider from 'material-ui/Divider'
 import { FormControlLabel } from 'material-ui/Form'
+import Hidden from 'material-ui/Hidden'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
@@ -101,7 +103,22 @@ class WeaponFields extends React.Component {
     const { character, classes } = this.props
     const { handleChange, handleBlur, handleRatingChange, handleCheck, handleRemove } = this
 
-    return <div>
+    const secondLine = <Fragment>
+      <WeaponAttributeSelect character={ character } weapon={ weapon }
+        onChange={ handleRatingChange }
+      />
+
+      <WeaponAbilitySelect character={ character } weapon={ weapon }
+        onChange={ handleRatingChange }
+      />
+
+      <TextField label="tags" name="tags" value={ weapon.tags }
+        className={ classes.tagsField } margin="dense"
+        onBlur={ handleBlur } onChange={ handleChange }
+      />
+    </Fragment>
+
+    return <Fragment>
       <div className={ classes.fieldContainer }>
         <TextField name="name" value={ weapon.name } label="Name" className={ classes.nameField }
           onBlur={ handleBlur } onChange={ handleChange } margin="dense"
@@ -120,23 +137,22 @@ class WeaponFields extends React.Component {
           }
         />
 
-        <WeaponAttributeSelect character={ character } weapon={ weapon }
-          onChange={ handleRatingChange }
-        />
+        <Hidden mdDown>
+          { secondLine }
+        </Hidden>
 
-        <WeaponAbilitySelect character={ character } weapon={ weapon }
-          onChange={ handleRatingChange }
-        />
-
-        <TextField label="tags" name="tags" value={ weapon.tags }
-          className={ classes.tagsField } margin="dense"
-          onBlur={ handleBlur } onChange={ handleChange }
-        />
         <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>
           <ContentRemoveCircle />
         </IconButton>
       </div>
-    </div>
+
+      <Hidden lgUp>
+        <div className={ classes.fieldContainer }>
+          { secondLine }
+        </div>
+        <Divider />
+      </Hidden>
+    </Fragment>
   }
 }
 WeaponFields.propTypes = {

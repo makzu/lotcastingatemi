@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Grid from 'material-ui/Grid'
+import Hidden from 'material-ui/Hidden'
 import Typography from 'material-ui/Typography'
 
 import AbilityEditor from './editors/abilityEditor.jsx'
@@ -84,6 +85,10 @@ class CharacterEditor extends React.Component {
     const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
 
     return <div>
+      <Hidden smUp>
+        <div style={{ height: '2.5em', }}>&nbsp;</div>
+      </Hidden>
+
       <Grid container spacing={ 24 }>
         <Grid item xs={ 12 } md={ character.type == 'Character' ? 12 : 6 }>
           <BasicsEditor character={ character }
@@ -101,44 +106,44 @@ class CharacterEditor extends React.Component {
           </Grid>
         }
 
-        <Grid item xs={ 12 } lg={ 3 }>
+        <Grid item xs={ 12 } md={ 6 } lg={ 3 }>
           <HealthLevelEditor character={ character }
             onChange={ handleChange } onBlur={ handleBlur }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } lg={ 2 }>
+        <Grid item xs={ 12 } md={ 6 } lg={ 3 }>
           <WillpowerEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } lg={ 3 }>
+        <Grid item xs={ 12 } md={ 6 } lg={ 3 }>
           <XpEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } lg={ 3 }>
+        <Grid item xs={ 12 } md={ 6 } lg={ 3 }>
           <MotePoolEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } md={ 3 }>
+        <Grid item xs={ 12 } md={ 6 } lg={ 3 }>
           <AttributeEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } md={ 4 }>
+        <Grid item xs={ 12 } md={ 6 } lg={ 4 }>
           <AbilityEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } md={ 5 }>
+        <Grid item xs={ 12 } md={ 6 } lg={ 5 }>
           <SpecialtyEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
@@ -159,7 +164,7 @@ class CharacterEditor extends React.Component {
           </Grid>
         }
 
-        <Grid item xs={ 12 } md={ 3 }>
+        <Grid item xs={ 12 } lg={ 3 }>
           <ArmorEditor character={ character }
             onChange={ handleChange } onBlur={ handleBlur }
             onCheck={ handleCheck }

@@ -17,7 +17,7 @@ function AttributeLine(props) {
   return <div>
     <RatingLine rating={ props.rating }>
       <span className={ classes.attributeName }>
-        { props.attribute }:
+        { props.attribute }
       </span>
     </RatingLine>
 

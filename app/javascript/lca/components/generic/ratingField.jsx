@@ -52,8 +52,8 @@ class RatingField extends React.Component {
     const { value, min, max } = this.state
 
     return <TextField className={ narrow ? classes.narrow : classes.field }
-      type="number" inputProps={{ min: min, max: max }}
-      name={ trait } label={ label } value={ value }
+      type="number" name={ trait } label={ label } value={ value }
+      inputProps={{ min: min, max: max }}
       onChange={ handleChange } margin={ this.props.margin || 'none' }
     />
   }

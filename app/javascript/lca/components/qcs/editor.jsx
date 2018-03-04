@@ -63,7 +63,7 @@ class QcEditor extends React.Component {
     /* Escape hatch */
     if (this.props.qc == undefined)
       return <BlockPaper>
-        <Typography paragraph>This QC has not yet loaded.</Typography>
+        <Typography paragraph>This Quick Character has not yet loaded.</Typography>
       </BlockPaper>
 
     const { qc } = this.state
@@ -72,6 +72,11 @@ class QcEditor extends React.Component {
     } = this
 
     return <BlockPaper>
+      <Typography paragraph variant="caption">
+        Rules for Quick Characters can be found in the core book starting at
+        page 494.
+      </Typography>
+
       <Typography variant="subheading">
         Basics
       </Typography>
@@ -89,34 +94,34 @@ class QcEditor extends React.Component {
       <br />
 
       <RatingField trait="essence" value={ qc.essence }
-        label="Essence" min={ 1 } max={ 10 } margin="dense"
+        label="Essence" min={ 1 } max={ 10 } margin="dense" narrow
         onChange={ handleRatingChange }
       />
       <RatingField trait="willpower_temporary" value={ qc.willpower_temporary }
-        label="Willpower" margin="dense"
+        label="Willpower" margin="dense" narrow
         onChange={ handleRatingChange }
       />
       /
       <RatingField trait="willpower_permanent" value={ qc.willpower_permanent }
-        label="" min={ 1 } max={ 10 } margin="dense"
+        label="" min={ 1 } max={ 10 } margin="dense" narrow
         onChange={ handleRatingChange }
       />
       <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
-        label="Personal" max={ qc.motes_personal_total } margin="dense"
+        label="Personal" max={ qc.motes_personal_total } margin="dense" narrow
         onChange={ handleRatingChange }
       />
       /
       <RatingField trait="motes_personal_total" value={ qc.motes_personal_total }
-        label="" margin="dense"
+        label="Motes" margin="dense" narrow
         onChange={ handleRatingChange }
       />
       <RatingField trait="motes_peripheral_current" value={ qc.motes_peripheral_current }
-        label="Peripheral" max={ qc.motes_peripheral_total } margin="dense"
+        label="Peripheral" max={ qc.motes_peripheral_total } margin="dense" narrow
         onChange={ handleRatingChange }
       />
       /
       <RatingField trait="motes_peripheral_total" value={ qc.motes_peripheral_total }
-        label="" margin="dense"
+        label="Motes" margin="dense" narrow
         onChange={ handleRatingChange }
       />
       <br />

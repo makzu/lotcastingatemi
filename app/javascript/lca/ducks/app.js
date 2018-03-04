@@ -1,3 +1,4 @@
+export const CLOSE_DRAWER = 'lca/app/CLOSE_DRAWER'
 export const TOGGLE_DRAWER = 'lca/app/TOGGLE_DRAWER'
 export const SWITCH_THEME  = 'lca/app/SWITCH_THEME'
 
@@ -8,6 +9,11 @@ const defaultState = {
 
 export default function AppReducer(state = defaultState, action) {
   switch(action.type) {
+
+  case CLOSE_DRAWER:
+    return { ...state,
+      drawerOpen: false,
+    }
 
   case TOGGLE_DRAWER:
     return { ...state,
@@ -24,10 +30,6 @@ export default function AppReducer(state = defaultState, action) {
   }
 }
 
-export function toggleDrawer() {
-  return { type: TOGGLE_DRAWER }
-}
-
-export function switchTheme() {
-  return { type: SWITCH_THEME }
-}
+export const toggleDrawer = () => ({ type: TOGGLE_DRAWER })
+export const closeDrawer  = () => ({ type: CLOSE_DRAWER  })
+export const switchTheme  = () => ({ type: SWITCH_THEME  })

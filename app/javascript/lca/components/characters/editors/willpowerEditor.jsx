@@ -23,14 +23,14 @@ function WillpowerEditor(props) {
 
     <div>
       <RatingField trait="willpower_temporary" value={ character.willpower_temporary }
-        label="Current" margin="dense"
+        label="Current" margin="dense" narrow
         onChange={ onRatingChange }
       />
       <span className={ classes.separator }>
         /
       </span>
       <RatingField trait="willpower_permanent" value={ character.willpower_permanent }
-        label="Total" max={ WILLPOWER_MAX } margin="dense"
+        label="Total" max={ WILLPOWER_MAX } margin="dense" narrow
         onChange={ onRatingChange }
       />
     </div>

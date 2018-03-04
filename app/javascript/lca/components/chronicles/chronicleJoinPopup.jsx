@@ -11,7 +11,7 @@ import Button from 'material-ui/Button'
 import { ListItem, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
-import ContentAddCircle from 'material-ui-icons/AddCircle'
+import GroupAdd from 'material-ui-icons/GroupAdd'
 
 import { joinChronicle } from '../../ducks/actions.js'
 
@@ -53,7 +53,7 @@ class ChronicleJoinPopup extends React.Component {
     return <Fragment>
       <ListItem button onClick={ handleOpen }>
         <ListItemText inset primary="Join" />
-        <ContentAddCircle />
+        <GroupAdd />
       </ListItem>
 
       <Dialog

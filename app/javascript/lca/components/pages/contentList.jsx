@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Divider from 'material-ui/Divider'
+import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
@@ -20,37 +22,59 @@ const styles = theme => ({
 
 class ContentList extends React.Component {
   render() {
-    const { classes } = this.props
     const chars = this.props.characters.map((c) =>
-      <CharacterListItem character={ c } key={ c.id } />
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 }  key={ c.id }>
+        <CharacterListItem character={ c } />
+      </Grid>
     )
     const qcs = this.props.qcs.map((q) =>
-      <QcListItem qc={ q } key={ q.id } />
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 }  key={ q.id }>
+        <QcListItem qc={ q } />
+      </Grid>
     )
     const bgs = this.props.battlegroups.map((b) =>
-      <BattlegroupListItem battlegroup={ b } key={ b.id } />
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 } key={ b.id }>
+        <BattlegroupListItem battlegroup={ b } />
+      </Grid>
     )
-    return <div>
 
-      <Typography variant="headline">
-        Characters
+    return <Grid container spacing={ 24 }>
+      <Grid item xs={ 9 }>
+        <Typography variant="headline">
+          Characters
+        </Typography>
+      </Grid>
+      <Grid item xs={ 3 }>
         <CharacterCreatePopup />
-      </Typography>
+      </Grid>
       { chars }
 
-      <Typography variant="headline" className={ classes.nthTitle }>
-        QCs
+      <Grid item xs={ 12 }>
+        <Divider />
+      </Grid>
+
+      <Grid item xs={ 9 }>
+        <Typography variant="headline">
+          Quick Characters
+        </Typography>
+      </Grid>
+      <Grid item xs={ 3 }>
         <QcCreatePopup />
-      </Typography>
+      </Grid>
       { qcs }
 
-      <Typography variant="headline" className={ classes.nthTitle }>
-        Battlegroups
+      <Grid item xs={ 9 }>
+        <Typography variant="headline">
+          Battlegroups
+        </Typography>
+      </Grid>
+      <Grid item xs={ 3 }>
         <BattlegroupCreatePopup />
-      </Typography>
+      </Grid>
+
       { bgs }
 
-    </div>
+    </Grid>
   }
 }
 ContentList.propTypes = {

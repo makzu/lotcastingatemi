@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
+import Hidden from 'material-ui/Hidden'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -68,6 +69,15 @@ function CharacterHeader(props) {
     tabValue = 2
     editButtonPath += '/charms'
   }
+  const tabs = <Tabs
+    className={ classes.tabs }
+    value={ tabValue }
+    centered
+  >
+    <Tab label="Basics" component={ Link } to={ tabBasePath } />
+    <Tab label="Merits" component={ Link } to={ tabBasePath + '/merits' } />
+    <CharmTab character={ character } isEditing={ editing } />
+  </Tabs>
 
   return <div>
     <Toolbar>
@@ -78,23 +88,19 @@ function CharacterHeader(props) {
         { character.name }
       </Typography>
 
-
-      <Tabs
-        className={ classes.tabs }
-        value={ tabValue }
-        centered
-      >
-        <Tab label="Basics" component={ Link } to={ tabBasePath } />
-        <Tab label="Merits" component={ Link } to={ tabBasePath + '/merits' } />
-        <CharmTab character={ character } isEditing={ editing } />
-      </Tabs>
       { canIEdit &&
         <Button component={ Link } to={ editButtonPath } color="inherit">
           { editing ? 'Done' : 'Edit' }
         </Button>
       }
+      <Hidden xsDown>
+        { tabs }
+      </Hidden>
     </Toolbar>
 
+    <Hidden smUp>
+      { tabs }
+    </Hidden>
   </div>
 }
 CharacterHeader.propTypes = {

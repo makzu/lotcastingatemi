@@ -34,7 +34,7 @@ function _IntimacyFields(props) {
       onChange={ onSubjectChange } onBlur={ onSubjectBlur }
     />
     <RatingField trait="rating" value={ rating }
-      label="Rating" min={ MIN } max={ MAX } margin="dense"
+      label="Rating" min={ MIN } max={ MAX } margin="dense" narrow
       onChange={ onRatingChange }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>

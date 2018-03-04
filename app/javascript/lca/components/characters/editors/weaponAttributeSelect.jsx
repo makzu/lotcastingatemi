@@ -9,6 +9,11 @@ import TextField from 'material-ui/TextField'
 const styles = theme => ({
   root: {
     marginRight: theme.spacing.unit,
+    width: '5.5em',
+  },
+  abilityRating: {
+    float: 'right',
+    display: 'inline-block',
   },
 })
 
@@ -22,34 +27,61 @@ function WeaponAttributeSelect(props) {
     onChange={ onChange }
   >
     <MenuItem value="dexterity">
-      Dexterity ({ character.attr_dexterity })
+      Dex&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_dexterity })
+      </span>
     </MenuItem>
     <Divider />
 
     <MenuItem value="intelligence">
-      Intelligence ({ character.attr_intelligence })
+      Int&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_intelligence })
+      </span>
     </MenuItem>
 
     <MenuItem value="strength">
-      Strength ({ character.attr_strength })
+      Str&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_strength })
+      </span>
     </MenuItem>
     <MenuItem value="stamina">
-      Stamina ({ character.attr_stamina })
+      Sta&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_stamina })
+      </span>
     </MenuItem>
     <MenuItem value="charisma">
-      Charisma ({ character.attr_charisma })
+      Cha&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_charisma })
+      </span>
     </MenuItem>
     <MenuItem value="manipulation">
-      Manipulation ({ character.attr_manipulation })
+      Man&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_manipulation })
+      </span>
     </MenuItem>
     <MenuItem value="appearance">
-      Appearance ({ character.attr_appearance })
+      App&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_appearance })
+      </span>
     </MenuItem>
     <MenuItem value="perception">
-      Perception ({ character.attr_perception })
+      Per&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_perception })
+      </span>
     </MenuItem>
     <MenuItem value="wits">
-      Wits ({ character.attr_wits })
+      Wits&nbsp;
+      <span className={ classes.abilityRating }>
+        ({ character.attr_wits })
+      </span>
     </MenuItem>
   </TextField>
 }

@@ -26,7 +26,7 @@ function _AbilityLine(props) {
   return <div>
     <RatingLine rating={ rating }>
       <span className={ classes.abilityName }>
-        { props.ability }:
+        { props.ability }
       </span>
       <span className={ classes.abilityFavored }>
         { supernal && ' (s)' }

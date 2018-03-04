@@ -10,7 +10,7 @@ import Drawer from 'material-ui/Drawer'
 import Hidden from 'material-ui/Hidden'
 
 import LcaHeader from '../components/header/header.jsx'
-import NavPanel from '../components/NavPanel.jsx'
+import NavPanel from '../components/nav/navPanel.jsx'
 import { toggleDrawer } from '../ducks/actions.js'
 
 // Shamelessly stolen from the material-ui drawer demo

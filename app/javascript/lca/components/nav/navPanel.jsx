@@ -7,8 +7,8 @@ import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 
-import DisplayNamePopup from './generic/displayNamePopup.jsx'
-import { switchTheme } from '../ducks/actions.js'
+import DisplayNamePopup from '../generic/displayNamePopup.jsx'
+import { switchTheme } from '../../ducks/actions.js'
 
 const styles = theme => ({
   loggedInHeader: { ...theme.typography.subheading,

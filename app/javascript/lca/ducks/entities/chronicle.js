@@ -23,6 +23,9 @@ export const INVITE_CODE_UPDATE_FAILURE = 'lca/chronicle/INVITE_CODE_UPDATE_FAIL
 export const CHN_REMOVE_PLAYER         = 'lca/chronicle/REMOVE_PLAYER'
 export const CHN_REMOVE_PLAYER_SUCCESS = 'lca/chronicle/REMOVE_PLAYER_SUCCESS'
 export const CHN_REMOVE_PLAYER_FAILURE = 'lca/chronicle/REMOVE_PLAYER_FAILURE'
+export const CHN_ADD_THING =           'lca/chronicle/ADD_THING'
+export const CHN_ADD_THING_SUCCESS =   'lca/chronicle/ADD_THING_SUCCESS'
+export const CHN_ADD_THING_FAILURE =   'lca/chronicle/ADD_THING_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
@@ -45,6 +48,7 @@ export default function reducer(state, action) {
   case CHN_JOIN_SUCCESS:
   case CHN_FETCH_SUCCESS:
   case INVITE_CODE_UPDATE_SUCCESS:
+  case CHN_ADD_THING_SUCCESS:
     return {
       ...state,
       players:      merge({ ...state.players      }, _entities.players      ),
@@ -203,6 +207,23 @@ export function removePlayerFromChronicle(id, playerId) {
         }
       },
       CHN_REMOVE_PLAYER_FAILURE
+    ]
+  })
+}
+
+export function addThingToChronicle(id, thingId, thingType) {
+  return callApi({
+    endpoint: `/api/v1/chronicles/${id}/add_${thingType}/${thingId}`,
+    method: 'POST',
+    types: [
+      CHN_ADD_THING,
+      {
+        type: CHN_ADD_THING_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+        }
+      },
+      CHN_ADD_THING_FAILURE
     ]
   })
 }

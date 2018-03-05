@@ -12,6 +12,10 @@ export const getMyPinnedCharacters = createSelector(
   [getMyCharacters],
   (characters) => characters.filter((c) => c.pinned)
 )
+export const getMyCharactersWithoutChronicles = createSelector(
+  [getMyCharacters],
+  (characters) => characters.filter((c) => c.chronicle_id == undefined)
+)
 
 const getQCs = (state) => state.entities.qcs
 export const getMyQCs = createSelector(
@@ -19,10 +23,13 @@ export const getMyQCs = createSelector(
   (currentPlayer, qcs) =>
     currentPlayer.qcs.map((c) => qcs[c] )
 )
-
 export const getMyPinnedQCs = createSelector(
   [getMyQCs],
   (qcs) => qcs.filter((c) => c.pinned)
+)
+export const getMyQcsWithoutChronicles = createSelector(
+  [getMyQCs],
+  (qcs) => qcs.filter((c) => c.chronicle_id == undefined)
 )
 
 const getBattlegroups = (state) => state.entities.battlegroups
@@ -34,6 +41,10 @@ export const getMyBattlegroups = createSelector(
 export const getMyPinnedBattlegroups = createSelector(
   [getMyBattlegroups],
   (battlegroups) => battlegroups.filter((c) => c.pinned)
+)
+export const getMyBattlegroupsWithoutChronicles = createSelector(
+  [getMyBattlegroups],
+  (battlegroups) => battlegroups.filter((c) => c.chronicle_id == undefined)
 )
 
 const getChronicles = (state) => state.entities.chronicles

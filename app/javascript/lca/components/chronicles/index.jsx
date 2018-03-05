@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
+import CharacterAddPopup from './characterAddPopup.jsx'
 import CharacterCard from './characterCard.jsx'
+import QcAddPopup from './qcAddPopup.jsx'
 import QcCard from './qcCard.jsx'
+import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from './battlegroupCard.jsx'
-import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
 class ChronicleDashboard extends React.PureComponent {
@@ -23,7 +25,7 @@ class ChronicleDashboard extends React.PureComponent {
         <Typography paragraph>This Chronicle has not yet loaded.</Typography>
       </BlockPaper>
 
-    const { chronicle, st, is_st, players, characters, qcs, battlegroups } = this.props
+    const { chronicle, characters, qcs, battlegroups } = this.props
 
     const characterList = characters.map((c) =>
       <Grid item xs={ 6 } key={ c.id }>
@@ -43,9 +45,10 @@ class ChronicleDashboard extends React.PureComponent {
 
     return <Grid container spacing={ 24 }>
 
-      <Grid item xs={ 9 }>
+      <Grid item xs={ 12 }>
         <Typography variant="headline">
           Characters
+          <CharacterAddPopup chronicleId={ chronicle.id } />
         </Typography>
       </Grid>
       { characterList }
@@ -58,6 +61,7 @@ class ChronicleDashboard extends React.PureComponent {
       <Grid item xs={ 12 }>
         <Typography variant="headline">
           Quick Characters
+          <QcAddPopup chronicleId={ chronicle.id } />
         </Typography>
       </Grid>
       { qcList }
@@ -70,6 +74,7 @@ class ChronicleDashboard extends React.PureComponent {
       <Grid item xs={ 12 }>
         <Typography variant="headline">
           Battlegroups
+          <BattlegroupAddPopup chronicleId={ chronicle.id } />
         </Typography>
       </Grid>
       { bgList }
@@ -86,7 +91,6 @@ ChronicleDashboard.propTypes = {
   id: PropTypes.string,
   st: PropTypes.object,
   is_st: PropTypes.bool,
-  players: PropTypes.arrayOf(PropTypes.object),
   characters: PropTypes.arrayOf(PropTypes.object),
   qcs: PropTypes.arrayOf(PropTypes.object),
   battlegroups: PropTypes.arrayOf(PropTypes.object),
@@ -107,7 +111,6 @@ function mapStateToProps(state, ownProps) {
   if (chronicle != undefined && chronicle.name != undefined) {
     is_st = chronicle.st_id == state.session.id
     st = state.entities.players[chronicle.st_id]
-    players = chronicle.players.map((c) => state.entities.players[c])
     characters = chronicle.characters.map((c) => state.entities.characters[c])
     qcs = chronicle.qcs.map((c) => state.entities.qcs[c])
     battlegroups = chronicle.battlegroups.map((c) => state.entities.battlegroups[c])

@@ -31,7 +31,7 @@ module Api
       end
 
       def regen_invite_code
-        authorize @chronicle
+        authorize @chronicle, :update?
         @chronicle.regenerate_invite_code
         if @chronicle.save
           render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
@@ -41,7 +41,7 @@ module Api
       end
 
       def join
-        authorize current_player
+        authorize current_player, :update?
         @chronicle.players << current_player
 
         if @chronicle.save
@@ -52,7 +52,7 @@ module Api
       end
 
       def remove_player
-        authorize @chronicle
+        authorize @chronicle, :update?
         @player = Player.find_by!(id: params[:player_id])
         check_player @player
 
@@ -67,7 +67,7 @@ module Api
 
       def add_character
         @character = Character.find(params[:character_id])
-        authorize @character
+        authorize @character, :update?
         check_player @character.player
 
         @chronicle.characters << @character
@@ -76,7 +76,7 @@ module Api
 
       def remove_character
         @character = Character.find(params[:character_id])
-        authorize @character
+        authorize @character, :update?
         check_player @character.player
 
         @chronicle.characters.delete(@character)
@@ -85,7 +85,11 @@ module Api
 
       def add_qc
         @qc = Qc.find(params[:qc_id])
-        authorize @qc
+        authorize @qc, :update?
+        check_player @qc.player
+
+        @chronicle.qcs << @qc
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
       def remove_qc
@@ -95,7 +99,11 @@ module Api
 
       def add_battlegroup
         @battlegroup = Battlegroup.find(params[:battlegroup_id])
-        authorize @battlegroup
+        authorize @battlegroup, :update?
+        check_player @battlegroup.player
+
+        @chronicle.battlegroups << @battlegroup
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
       def remove_battlegroup
@@ -120,7 +128,7 @@ module Api
       private
 
       def set_chronicle
-        @chronicle = Chronicle.find(params[:id])
+        @chronicle = policy_scope(Chronicle).find(params[:id])
       end
 
       def set_chronicle_from_token

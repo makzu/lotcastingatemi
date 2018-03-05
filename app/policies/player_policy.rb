@@ -21,10 +21,6 @@ class PlayerPolicy < ApplicationPolicy
     self?
   end
 
-  def join?
-    self?
-  end
-
   def destroy?
     self?
   end

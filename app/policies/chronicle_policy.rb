@@ -21,14 +21,6 @@ class ChroniclePolicy < ApplicationPolicy
     player_is_storyteller?
   end
 
-  def regen_invite_code?
-    update?
-  end
-
-  def remove_player?
-    update?
-  end
-
   def destroy?
     player_is_storyteller?
   end

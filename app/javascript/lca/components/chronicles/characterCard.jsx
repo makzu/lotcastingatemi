@@ -7,6 +7,7 @@ import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import * as calc from '../../utils/calculated'
 import { fullChar } from '../../utils/propTypes'
@@ -15,7 +16,12 @@ const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
-  })
+  }),
+  hiddenLabel: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    marginLeft: theme.spacing.unit
+  },
 })
 
 function CharacterCard(props) {
@@ -28,6 +34,12 @@ function CharacterCard(props) {
 
       <Typography variant="title">
         { character.name }
+        { character.hidden &&
+          <div className={ classes.hiddenLabel }>
+            <VisibilityOff />
+            Hidden
+          </div>
+        }
 
         <Button component={ Link } to={ `/characters/${character.id}` } style={{ float: 'right', }}>
           Full Sheet

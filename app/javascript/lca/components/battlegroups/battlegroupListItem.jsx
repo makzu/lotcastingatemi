@@ -8,6 +8,7 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 
+import HideButton from '../generic/hideButton'
 import PinButton from '../generic/pinButton.jsx'
 import { prettyDrillRating } from '../../utils/calculated'
 
@@ -25,6 +26,8 @@ function BattlegroupListItem(props) {
     <Paper className={ classes.root }>
       <Typography variant="title">
         { battlegroup.name }
+
+        <HideButton characterType="battlegroups" id={ battlegroup.id } />
         <PinButton characterType="battlegroups" id={ battlegroup.id } />
       </Typography>
 

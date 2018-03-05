@@ -39,6 +39,7 @@ class CharacterSerializer < ActiveModel::Serializer
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id
+  attribute :chronicle_id
   attribute :pinned, if: :owner?
   attribute :hidden, if: :owner_or_st?
 

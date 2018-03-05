@@ -8,9 +8,18 @@ class ChronicleSerializer < ActiveModel::Serializer
   belongs_to :st, class: Player
 
   has_many :players
-  has_many :characters
-  has_many :qcs
-  has_many :battlegroups
+  attributes :characters, :qcs, :battlegroups
+  def characters
+    CharacterPolicy::Scope.new(scope, Character).resolve.where(chronicle: object)
+  end
+
+  def qcs
+    CharacterPolicy::Scope.new(scope, Qc).resolve.where(chronicle: object)
+  end
+
+  def battlegroups
+    CharacterPolicy::Scope.new(scope, Battlegroup).resolve.where(chronicle: object)
+  end
 
   def storyteller?
     current_player.id == object.st_id

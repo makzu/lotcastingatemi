@@ -10,6 +10,8 @@ class BattlegroupSerializer < ActiveModel::Serializer
              :movement, :senses, :join_battle, :initiative, :onslaught
 
   attribute :player_id
+  attribute :chronicle_id
+
   has_many :qc_attacks
 
   attribute :pinned, if: :owner?

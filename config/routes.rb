@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       resources :players, only: %i[index show update]
 
       resources :chronicles, only: %i[index create show update destroy] do
+        member do
+          post 'regen_invite_code'
+          post 'remove_player/:player_id', action: :remove_player
+        end
         post 'regen_invite_code', on: :member
         post 'join', on: :collection
       end

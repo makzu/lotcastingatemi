@@ -25,6 +25,10 @@ class ChroniclePolicy < ApplicationPolicy
     update?
   end
 
+  def remove_player?
+    update?
+  end
+
   def destroy?
     player_is_storyteller?
   end
@@ -35,5 +39,19 @@ class ChroniclePolicy < ApplicationPolicy
 
   def player_in_chronicle?
     chronicle.players.include? player
+  end
+
+  # Authorization scope:
+  class Scope < Scope
+    attr_reader :player, :scope
+
+    def initialize(player, scope)
+      @player = player
+      @scope = scope
+    end
+
+    def resolve
+      scope.where(st: @player).or(scope.where(id: @player.chronicle_ids))
+    end
   end
 end

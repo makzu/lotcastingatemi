@@ -2,23 +2,24 @@
 
 # app/serializers/chronicle_serializer.rb
 class ChronicleSerializer < ActiveModel::Serializer
-  attributes :id, :name, :invite_code
-  attribute :invite_code, if: :st?
+  attributes :id, :st_id, :name
+  attribute :invite_code, if: :storyteller?
 
-  belongs_to :st, type: 'Player'
+  belongs_to :st, class: Player
+
   has_many :players
   has_many :characters
   has_many :qcs
   has_many :battlegroups
 
-  def st?
+  def storyteller?
     current_player.id == object.st_id
   end
 
   # We don't need the full associations duplicated under Player, because they're
   #   already included above.
   class PlayerSerializer < ActiveModel::Serializer
-    attributes :id, :display_name, :characters, :qcs, :battlegroups
+    attributes :id, :display_name, :characters, :qcs, :battlegroups, :chronicles, :own_chronicles
 
     def characters
       CharacterPolicy::Scope.new(scope, Character).resolve.where(player: object).pluck(:id)
@@ -30,6 +31,14 @@ class ChronicleSerializer < ActiveModel::Serializer
 
     def battlegroups
       CharacterPolicy::Scope.new(scope, Battlegroup).resolve.where(player: object).pluck(:id)
+    end
+
+    def chronicles
+      ChroniclePolicy::Scope.new(scope, Chronicle).resolve.where(id: object.chronicle_ids).pluck(:id)
+    end
+
+    def own_chronicles
+      ChroniclePolicy::Scope.new(scope, Chronicle).resolve.where(st: object).pluck(:id)
     end
   end
 end

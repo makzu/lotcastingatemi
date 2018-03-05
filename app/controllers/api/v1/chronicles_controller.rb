@@ -4,13 +4,13 @@ module Api
   module V1
     class ChroniclesController < Api::V1::BaseController
       before_action :authenticate_player
-      before_action :set_chronicle, only: %i[show update regen_invite_code destroy]
+      before_action :set_chronicle, except: %i[index create join]
       before_action :set_chronicle_from_token, only: %i[join]
 
       def index
         authorize current_player
         @chronicles = current_player.own_chronicles + current_player.chronicles
-        render json: @chronicles
+        render json: @chronicles, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
       def show
@@ -24,7 +24,7 @@ module Api
         authorize @chronicle
 
         if @chronicle.save
-          render json: @chronicle
+          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -34,7 +34,7 @@ module Api
         authorize @chronicle
         @chronicle.regenerate_invite_code
         if @chronicle.save
-          render json: @chronicle
+          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -45,10 +45,62 @@ module Api
         @chronicle.players << current_player
 
         if @chronicle.save
-          render json: @chronicle
+          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
+      end
+
+      def remove_player
+        authorize @chronicle
+        @player = Player.find_by!(id: params[:player_id])
+        check_player @player
+
+        @chronicle.remove_player(@player)
+
+        if @chronicle.save
+          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        else
+          render json: @chronicle.errors.details, status: :bad_request
+        end
+      end
+
+      def add_character
+        @character = Character.find(params[:character_id])
+        authorize @character
+        check_player @character.player
+
+        @chronicle.characters << @character
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+      end
+
+      def remove_character
+        @character = Character.find(params[:character_id])
+        authorize @character
+        check_player @character.player
+
+        @chronicle.characters.delete(@character)
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+      end
+
+      def add_qc
+        @qc = Qc.find(params[:qc_id])
+        authorize @qc
+      end
+
+      def remove_qc
+        @qc = Qc.find(params[:qc_id])
+        authorize @qc
+      end
+
+      def add_battlegroup
+        @battlegroup = Battlegroup.find(params[:battlegroup_id])
+        authorize @battlegroup
+      end
+
+      def remove_battlegroup
+        @battlegroup = Battlegroup.find(params[:battlegroup_id])
+        authorize @battlegroup
       end
 
       def destroy
@@ -73,6 +125,12 @@ module Api
 
       def set_chronicle_from_token
         @chronicle = Chronicle.find_by!(invite_code: params[:invite_code])
+      end
+
+      def check_player(player)
+        raise ActiveRecord::RecordNotFound unless # TODO: use a better error
+          player.chronicles.include?(@chronicle) ||
+          player.own_chronicles.include?(@chronicle)
       end
 
       def chronicle_params

@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 import ChronicleDashboard from './components/chronicles/index.jsx'
+import ChroniclePlayerPage from './components/chronicles/playerPage.jsx'
 import ContentList from './components/pages/contentList.jsx'
 import CharacterSheet from './components/characters/index.jsx'
 import MeritFullPage from './components/characters/MeritFullPage.jsx'
@@ -24,6 +25,7 @@ export default function Routes() {
       <Route path="/content" component={ ContentList } />
 
       <Route exact path="/chronicles/:chronicleId" component={ ChronicleDashboard } />
+      <Route path="/chronicles/:chronicleId/players" component={ ChroniclePlayerPage } />
 
       <Route exact path="/characters/:characterId" component={ CharacterSheet } />
       <Route path="/characters/:characterId/merits" component={ MeritFullPage } />

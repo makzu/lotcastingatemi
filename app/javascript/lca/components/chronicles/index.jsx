@@ -18,7 +18,7 @@ class ChronicleDashboard extends React.PureComponent {
 
   render() {
     /* Escape hatch */
-    if (this.props.chronicle == undefined || this.props.chronicle.st == undefined)
+    if (this.props.chronicle == undefined || this.props.chronicle.name == undefined)
       return <BlockPaper>
         <Typography paragraph>This Chronicle has not yet loaded.</Typography>
       </BlockPaper>
@@ -41,11 +41,6 @@ class ChronicleDashboard extends React.PureComponent {
       </Grid>
     )
 
-    const playerList = players.map((p) =>
-      <Typography key={ p.id }>
-        { p.display_name }
-      </Typography>
-    )
     return <Grid container spacing={ 24 }>
 
       <Grid item xs={ 9 }>
@@ -83,26 +78,6 @@ class ChronicleDashboard extends React.PureComponent {
           <Typography>None yet</Typography>
         </Grid>
       }
-
-      <Grid item xs={ 9 }>
-        <Typography variant="headline">
-          Players
-        </Typography>
-      </Grid>
-      { is_st &&
-        <Grid item xs={ 3 }>
-          <ChronicleInvitePopup chronicleId={ chronicle.id } />
-        </Grid>
-      }
-
-      <Grid item xs={ 12 }>
-        <BlockPaper>
-          <Typography variant="subheading" gutterBottom>
-            Storyteller: { st.display_name }
-          </Typography>
-          { playerList }
-        </BlockPaper>
-      </Grid>
     </Grid>
   }
 }
@@ -129,9 +104,9 @@ function mapStateToProps(state, ownProps) {
   let qcs = []
   let battlegroups = []
 
-  if (chronicle != undefined && chronicle.st != undefined) {
-    is_st = chronicle.st == state.session.id
-    st = state.entities.players[chronicle.st]
+  if (chronicle != undefined && chronicle.name != undefined) {
+    is_st = chronicle.st_id == state.session.id
+    st = state.entities.players[chronicle.st_id]
     players = chronicle.players.map((c) => state.entities.players[c])
     characters = chronicle.characters.map((c) => state.entities.characters[c])
     qcs = chronicle.qcs.map((c) => state.entities.qcs[c])

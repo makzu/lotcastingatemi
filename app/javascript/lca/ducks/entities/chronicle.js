@@ -20,6 +20,9 @@ export const CHN_JOIN_FAILURE =   'lca/chronicle/JOIN_FAILURE'
 export const INVITE_CODE_UPDATE         = 'lca/chronicle/INVITE_CODE_UPDATE'
 export const INVITE_CODE_UPDATE_SUCCESS = 'lca/chronicle/INVITE_CODE_UPDATE_SUCCESS'
 export const INVITE_CODE_UPDATE_FAILURE = 'lca/chronicle/INVITE_CODE_UPDATE_FAILURE'
+export const CHN_REMOVE_PLAYER         = 'lca/chronicle/REMOVE_PLAYER'
+export const CHN_REMOVE_PLAYER_SUCCESS = 'lca/chronicle/REMOVE_PLAYER_SUCCESS'
+export const CHN_REMOVE_PLAYER_FAILURE = 'lca/chronicle/REMOVE_PLAYER_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
@@ -56,6 +59,22 @@ export default function reducer(state, action) {
       qc_attacks:   merge({ ...state.qc_attacks   }, _entities.qcAttacks    ),
       battlegroups: merge({ ...state.battlegroups }, _entities.battlegroups ),
       chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   ),
+    }
+  case CHN_REMOVE_PLAYER_SUCCESS:
+    return {
+      ...state,
+      players:      { ...state.players     , ..._entities.players      },
+      characters:   { ...state.characters  , ..._entities.characters   },
+      merits:       { ...state.merits      , ..._entities.merits       },
+      weapons:      { ...state.weapons     , ..._entities.weapons      },
+      charms:       { ...state.charms      , ..._entities.charms       },
+      spells:       { ...state.spells      , ..._entities.spells       },
+      qcs:          { ...state.qcs         , ..._entities.qcs          },
+      qc_merits:    { ...state.qc_merits   , ..._entities.qcMerits     },
+      qc_charms:    { ...state.qc_charms   , ..._entities.qcCharms     },
+      qc_attacks:   { ...state.qc_attacks  , ..._entities.qcAttacks    },
+      battlegroups: { ...state.battlegroups, ..._entities.battlegroups },
+      chronicles:   { ...state.chronicles  , ..._entities.chronicles   },
     }
 
   case CHN_UPDATE_SUCCESS:
@@ -166,6 +185,24 @@ export function regenChronicleInviteCode(id) {
         }
       },
       INVITE_CODE_UPDATE_FAILURE
+    ]
+  })
+}
+
+// TODO: Flush the store of the removed player's data
+export function removePlayerFromChronicle(id, playerId) {
+  return callApi({
+    endpoint: `/api/v1/chronicles/${id}/remove_player/${playerId}`,
+    method: 'POST',
+    types: [
+      CHN_REMOVE_PLAYER,
+      {
+        type: CHN_REMOVE_PLAYER_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+        }
+      },
+      CHN_REMOVE_PLAYER_FAILURE
     ]
   })
 }

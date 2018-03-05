@@ -24,7 +24,7 @@ const styles = theme => ({
 })
 
 function BattlegroupCard(props) {
-  const { battlegroup, player, classes } = props
+  const { battlegroup, playerName, classes } = props
 
   return <div>
     <Paper className={ classes.root }>
@@ -44,7 +44,7 @@ function BattlegroupCard(props) {
       </Typography>
 
       <Typography variant="subheading">
-        Player: { player.display_name }
+        Player: { playerName }
       </Typography>
 
       <Typography>
@@ -66,17 +66,21 @@ function BattlegroupCard(props) {
 BattlegroupCard.propTypes = {
   battlegroupId: PropTypes.number.isRequired,
   battlegroup: PropTypes.object.isRequired,
-  player: PropTypes.object,
+  playerName: PropTypes.string,
   classes: PropTypes.object,
 }
 
 function mapStateToProps(state, ownProps) {
   const battlegroup = state.entities.battlegroups[ownProps.battlegroupId]
-  const player = state.entities.players[battlegroup.player_id]
+  let playerName = 'unknown player'
+
+  if (battlegroup != undefined){
+    playerName = state.entities.players[battlegroup.player_id].display_name
+  }
 
   return {
     battlegroup,
-    player
+    playerName,
   }
 }
 

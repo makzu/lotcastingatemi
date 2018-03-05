@@ -51,7 +51,6 @@ class CharacterSerializer < ActiveModel::Serializer
   end
 
   def owner_or_st?
-    owner? ||
-      (object.chronicle && object.storyteller == current_player)
+    owner? || (object.chronicle && object.storyteller == current_player)
   end
 end

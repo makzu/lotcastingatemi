@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { ListSubheader, ListItem, ListItemText } from 'material-ui/List'
 import Collapse from 'material-ui/transitions/Collapse'
@@ -12,6 +12,7 @@ import ExpandMore from 'material-ui-icons/ExpandMore'
 
 import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
+import { getMyChronicles, getMyOwnChronicles } from '../../selectors'
 
 class ChronicleNavList extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class ChronicleNavList extends React.Component {
   render() {
     const ownChronicleList = this.props.ownChronicles.map((c) =>
       <ListItem key={ c.id } button
-        component={ Link } to={ `/chronicles/${c.id}` }
+        component={ NavLink } to={ `/chronicles/${c.id}` }
       >
         <ListItemText inset
           primary={ c.name }
@@ -39,7 +40,7 @@ class ChronicleNavList extends React.Component {
     )
     const chronicleList = this.props.chronicles.map((c) =>
       <ListItem key={ c.id } button
-        component={ Link } to={ `/chronicles/${c.id}` }
+        component={ NavLink } to={ `/chronicles/${c.id}` }
       >
         <ListItemText inset
           primary={ c.name }
@@ -73,10 +74,9 @@ ChronicleNavList.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const id = state.session.id
   return {
-    ownChronicles: state.entities.players[id].own_chronicles.map((c) => state.entities.chronicles[c]),
-    chronicles: state.entities.players[id].chronicles.map((c) => state.entities.chronicles[c]),
+    ownChronicles: getMyOwnChronicles(state),
+    chronicles: getMyChronicles(state),
   }
 }
 

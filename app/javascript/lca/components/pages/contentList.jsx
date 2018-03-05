@@ -14,6 +14,7 @@ import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
 import BattlegroupListItem from '../battlegroups/battlegroupListItem'
 import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
 
+import { getMyCharacters, getMyQCs, getMyBattlegroups } from '../../selectors'
 import { fullQc, fullChar } from '../../utils/propTypes'
 
 const styles = theme => ({
@@ -85,20 +86,10 @@ ContentList.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const player = state.entities.players[state.session.id]
-  let characters = []
-  let qcs = []
-  let battlegroups = []
-
-  if(player != undefined) {
-    characters = player.characters.map((id) => state.entities.characters[id])
-    qcs = player.qcs.map((id) => state.entities.qcs[id])
-    battlegroups = player.battlegroups.map((id) => state.entities.battlegroups[id])
-  }
   return {
-    characters,
-    qcs,
-    battlegroups,
+    characters: getMyCharacters(state),
+    qcs: getMyQCs(state),
+    battlegroups: getMyBattlegroups(state),
   }
 }
 

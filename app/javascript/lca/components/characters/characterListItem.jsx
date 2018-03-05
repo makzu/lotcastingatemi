@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import Paper from 'material-ui/Paper'
-import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
 
+import PinButton from '../generic/pinButton.jsx'
 import { prettyFullExaltType } from '../../utils/calculated'
 import { fullChar } from '../../utils/propTypes'
 
@@ -25,6 +26,8 @@ function CharacterListItem(props) {
 
       <Typography variant="title">
         { character.name }
+
+        <PinButton characterType="characters" id={ character.id } />
       </Typography>
 
       <Typography paragraph>

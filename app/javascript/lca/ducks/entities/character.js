@@ -19,7 +19,6 @@ export const CHA_DESTROY_FAILURE = 'lca/character/DESTROY_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
-  const _trait = action.meta != undefined ? action.meta.trait : null
   const _entities = action.payload != undefined ? action.payload.entities : undefined
 
   switch(action.type) {
@@ -35,11 +34,10 @@ export default function reducer(state, action) {
       spells:     { ...state.spells,     ..._entities.spells     },
     }
   case CHA_UPDATE_SUCCESS:
-    return { ...state, characters: {
-      ...state.characters, [_id]: {
-        ...state.characters[_id], [_trait]: action.payload[_trait]
-      }
-    }}
+    return {
+      ...state,
+      characters: { ...state.characters, ..._entities.characters },
+    }
   case CHA_DESTROY_SUCCESS:
     return _destroy_char(state, _id)
   default:
@@ -65,7 +63,7 @@ export function fetchCharacter(id) {
       {
         type: CHA_FETCH_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.player))
+          return getJSON(res).then((json) => normalize(json, schemas.character))
         }
       },
       CHA_FETCH_FAILURE
@@ -80,7 +78,13 @@ export function updateCharacter(id, trait, value) {
     body: JSON.stringify({ character: { [trait]: value }}),
     types: [
       CHA_UPDATE,
-      { type: CHA_UPDATE_SUCCESS, meta: { trait: trait }},
+      {
+        type: CHA_UPDATE_SUCCESS,
+        meta: { trait: trait },
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.character))
+        }
+      },
       CHA_UPDATE_FAILURE
     ]
   })

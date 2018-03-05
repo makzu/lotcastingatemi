@@ -11,4 +11,15 @@ class BattlegroupSerializer < ActiveModel::Serializer
 
   attribute :player_id
   has_many :qc_attacks
+
+  attribute :pinned, if: :owner?
+  attribute :hidden, if: :owner_or_st?
+
+  def owner?
+    object.player == current_player
+  end
+
+  def owner_or_st?
+    owner? || (object.chronicle && object.storyteller == current_player)
+  end
 end

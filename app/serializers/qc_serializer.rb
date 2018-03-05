@@ -2,6 +2,7 @@
 
 # app/serializers/qc_serializer.rb
 class QcSerializer < ActiveModel::Serializer
+  # rubocop:disable Layout/EmptyLinesAroundArguments
   attributes :id, :name, :essence, :description,
              :willpower_temporary, :willpower_permanent,
              :health_level_0s, :health_level_1s, :health_level_2s,
@@ -18,9 +19,21 @@ class QcSerializer < ActiveModel::Serializer
              :ties, :principles,
 
              :initiative, :onslaught
+  # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id
   has_many :qc_attacks
   has_many :qc_charms
   has_many :qc_merits
+
+  attribute :pinned, if: :owner?
+  attribute :hidden, if: :owner_or_st?
+
+  def owner?
+    object.player == current_player
+  end
+
+  def owner_or_st?
+    owner? || (object.chronicle && object.storyteller == current_player)
+  end
 end

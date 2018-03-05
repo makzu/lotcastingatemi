@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 
-import Paper from 'material-ui/Paper'
-import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
 
+import PinButton from '../generic/pinButton.jsx'
 import { prettyDrillRating } from '../../utils/calculated'
 
 const styles = theme => ({
@@ -24,6 +25,7 @@ function BattlegroupListItem(props) {
     <Paper className={ classes.root }>
       <Typography variant="title">
         { battlegroup.name }
+        <PinButton characterType="battlegroups" id={ battlegroup.id } />
       </Typography>
 
       <Typography paragraph>

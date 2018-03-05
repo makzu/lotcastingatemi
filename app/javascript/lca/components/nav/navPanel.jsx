@@ -8,6 +8,7 @@ import Divider from 'material-ui/Divider'
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
 import Switch from 'material-ui/Switch'
 
+import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
 import DisplayNamePopup from '../generic/displayNamePopup.jsx'
 import { closeDrawer, switchTheme } from '../../ducks/actions.js'
@@ -48,11 +49,9 @@ export class NavPanel extends React.Component {
         }
 
         { authenticated && <Fragment>
-          <ListItem button component={ NavLink } to="/content" onClick={ closeDrawer }>
-            <ListItemText primary="Characters" />
-          </ListItem>
+          <CharacterNavList closeDrawer={ closeDrawer } />
 
-          <ChronicleNavList />
+          <ChronicleNavList closeDrawer={ closeDrawer } />
         </Fragment>}
 
         <ListItem button component={ NavLink } to="/resources" onClick={ closeDrawer }>

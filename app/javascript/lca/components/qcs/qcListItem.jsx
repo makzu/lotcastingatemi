@@ -8,6 +8,7 @@ import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
+import PinButton from '../generic/pinButton.jsx'
 import { fullQc } from '../../utils/propTypes'
 
 const styles = theme => ({
@@ -24,6 +25,8 @@ function QcListItem(props) {
     <Paper className={ classes.root }>
       <Typography variant="title">
         { qc.name }
+
+        <PinButton characterType="qcs" id={ qc.id } />
       </Typography>
 
       <Button component={ Link } to={ `/qcs/${qc.id}` }>

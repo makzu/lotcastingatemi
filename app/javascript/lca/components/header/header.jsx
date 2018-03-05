@@ -8,6 +8,7 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 
 import LcaDrawerButton from './lcaDrawerButton.jsx'
+import ChronicleHeader from './chronicleHeader.jsx'
 import CharacterHeader from './characterHeader.jsx'
 import QcHeader from './qcHeader.jsx'
 import BattlegroupHeader from './battlegroupHeader.jsx'
@@ -39,6 +40,7 @@ function LcaHeader(props) {
   const { classes } = props
   return <AppBar className={ classes.appBar } component="header">
     <Switch>
+      <Route path="/chronicles/:chronicleId" component={ ChronicleHeader } />
       <Route path="/characters/:characterId" component={ CharacterHeader } />
       <Route path="/qcs/:qcId" component={ QcHeader} />
       <Route path="/battlegroups/:battlegroupId" component={ BattlegroupHeader } />

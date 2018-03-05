@@ -2,8 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
+import CharacterCard from './characterCard.jsx'
+import QcCard from './qcCard.jsx'
+import BattlegroupCard from './battlegroupCard.jsx'
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
@@ -19,26 +23,87 @@ class ChronicleDashboard extends React.PureComponent {
         <Typography paragraph>This Chronicle has not yet loaded.</Typography>
       </BlockPaper>
 
-    const { chronicle, st, is_st, players, } = this.props
+    const { chronicle, st, is_st, players, characters, qcs, battlegroups } = this.props
+
+    const characterList = characters.map((c) =>
+      <Grid item xs={ 6 } key={ c.id }>
+        <CharacterCard characterId={ c.id } />
+      </Grid>
+    )
+    const qcList = qcs.map((c) =>
+      <Grid item xs={ 6 } key={ c.id }>
+        <QcCard qcId={ c.id } />
+      </Grid>
+    )
+    const bgList = battlegroups.map((c) =>
+      <Grid item xs={ 6 } key={ c.id }>
+        <BattlegroupCard battlegroupId={ c.id } />
+      </Grid>
+    )
 
     const playerList = players.map((p) =>
-      <div key={ p.id }>{ p.display_name }</div>
+      <Typography key={ p.id }>
+        { p.display_name }
+      </Typography>
     )
-    return <div>
-      <Typography variant="headline">
-        { chronicle.name }
+    return <Grid container spacing={ 24 }>
 
-        { is_st &&
+      <Grid item xs={ 9 }>
+        <Typography variant="headline">
+          Characters
+        </Typography>
+      </Grid>
+      { characterList }
+      { characterList.length == 0 &&
+        <Grid item xs={ 12 }>
+          <Typography>None yet</Typography>
+        </Grid>
+      }
+
+      <Grid item xs={ 12 }>
+        <Typography variant="headline">
+          Quick Characters
+        </Typography>
+      </Grid>
+      { qcList }
+      { qcList.length == 0 &&
+        <Grid item xs={ 12 }>
+          <Typography>None yet</Typography>
+        </Grid>
+      }
+
+      <Grid item xs={ 12 }>
+        <Typography variant="headline">
+          Battlegroups
+        </Typography>
+      </Grid>
+      { bgList }
+      { bgList.length == 0 &&
+        <Grid item xs={ 12 }>
+          <Typography>None yet</Typography>
+        </Grid>
+      }
+
+      <Grid item xs={ 9 }>
+        <Typography variant="headline">
+          Players
+        </Typography>
+      </Grid>
+      { is_st &&
+        <Grid item xs={ 3 }>
           <ChronicleInvitePopup chronicleId={ chronicle.id } />
-        }
-      </Typography>
+        </Grid>
+      }
 
-      <Typography component="div">
-        Storyteller: { st.display_name }<br />
-        Players:
-        { playerList }
-      </Typography>
-    </div>
+      <Grid item xs={ 12 }>
+        <BlockPaper>
+          <Typography variant="subheading" gutterBottom>
+            Storyteller: { st.display_name }
+          </Typography>
+          { playerList }
+        </BlockPaper>
+      </Grid>
+    </Grid>
   }
 }
 
@@ -48,6 +113,8 @@ ChronicleDashboard.propTypes = {
   is_st: PropTypes.bool,
   players: PropTypes.arrayOf(PropTypes.object),
   characters: PropTypes.arrayOf(PropTypes.object),
+  qcs: PropTypes.arrayOf(PropTypes.object),
+  battlegroups: PropTypes.arrayOf(PropTypes.object),
   chronicle: PropTypes.object,
 }
 

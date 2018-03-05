@@ -19,7 +19,7 @@ const styles = theme => ({ //eslint-disable-line no-unused-vars
   },
 })
 
-function CharacterHeader(props) {
+function QcHeader(props) {
   if (props.qc == undefined)
     return <GenericHeader />
 
@@ -48,7 +48,7 @@ function CharacterHeader(props) {
 
   </div>
 }
-CharacterHeader.propTypes = {
+QcHeader.propTypes = {
   id: PropTypes.string,
   qc: PropTypes.object,
   path: PropTypes.string,
@@ -77,4 +77,4 @@ function mapStateToProps(state, ownProps) {
 }
 
 
-export default withStyles(styles)(connect(mapStateToProps)(CharacterHeader))
+export default withStyles(styles)(connect(mapStateToProps)(QcHeader))

@@ -8,6 +8,7 @@ import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
+import HideButton from '../generic/hideButton'
 import PinButton from '../generic/pinButton.jsx'
 import { fullQc } from '../../utils/propTypes'
 
@@ -26,6 +27,7 @@ function QcListItem(props) {
       <Typography variant="title">
         { qc.name }
 
+        <HideButton characterType="qcs" id={ qc.id } />
         <PinButton characterType="qcs" id={ qc.id } />
       </Typography>
 

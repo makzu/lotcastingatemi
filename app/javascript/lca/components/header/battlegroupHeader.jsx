@@ -19,7 +19,7 @@ const styles = theme => ({ //eslint-disable-line no-unused-vars
   },
 })
 
-function CharacterHeader(props) {
+function BattlegroupHeader(props) {
   if (props.battlegroup == undefined)
     return <GenericHeader />
 
@@ -50,7 +50,7 @@ function CharacterHeader(props) {
 
   </div>
 }
-CharacterHeader.propTypes = {
+BattlegroupHeader.propTypes = {
   id: PropTypes.string,
   battlegroup: PropTypes.object,
   path: PropTypes.string,
@@ -79,4 +79,4 @@ function mapStateToProps(state, ownProps) {
 }
 
 
-export default withStyles(styles)(connect(mapStateToProps)(CharacterHeader))
+export default withStyles(styles)(connect(mapStateToProps)(BattlegroupHeader))

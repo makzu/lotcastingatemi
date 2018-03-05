@@ -55,12 +55,14 @@ class ChronicleNavList extends React.Component {
         { this.state.open ? <ExpandLess /> : <ExpandMore /> }
       </ListItem>
       <Collapse in={ this.state.open }>
-        { ownChronicleList &&
+        { ownChronicleList.length > 0 &&
           <ListSubheader inset>Your Chronicles</ListSubheader>
         }
         { ownChronicleList }
-        <ListSubheader inset>Joined Chronicles</ListSubheader>
-        { chronicleList || <ListItem><ListItemText primary="None" /></ListItem> }
+        { chronicleList.length > 0 &&
+          <ListSubheader inset>Joined Chronicles</ListSubheader>
+        }
+        { chronicleList }
 
         <ChronicleJoinPopup />
         <ChronicleCreatePopup />

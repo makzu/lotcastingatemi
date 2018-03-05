@@ -32,10 +32,6 @@ class BattlegroupSheet extends React.PureComponent {
     )
 
     return <BlockPaper>
-      <Typography variant="headline" gutterBottom>
-        { battlegroup.name }
-        <Button component={ Link } to={`/battlegroups/${battlegroup.id}/edit`}>Edit</Button>
-      </Typography>
 
       <Typography paragraph style={{ whiteSpace: 'pre-line' }}>
         { battlegroup.description }

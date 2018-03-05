@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'

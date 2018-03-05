@@ -4,14 +4,13 @@
 # and add their own bonuses.
 class QcAttack < ApplicationRecord
   belongs_to :qc_attackable, polymorphic: true
-  delegate :player,    to: :qc_attackable
-  delegate :chronicle, to: :qc_attackable
+  alias_attribute :character, :qc_attackable
+
+  delegate :player,      to: :qc_attackable
+  delegate :chronicle,   to: :qc_attackable
+  delegate :storyteller, to: :qc_attackable
 
   validates :pool, :damage, :overwhelming, numericality: { greater_than: 0 }
-
-  def character
-    qc_attackable
-  end
 
   def self.policy_class
     CharacterTraitPolicy

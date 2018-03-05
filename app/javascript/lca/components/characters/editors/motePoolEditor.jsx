@@ -18,6 +18,8 @@ const styles = theme => ({
 function MotePoolEditor(props) {
   const { character, onRatingChange, classes } = props
 
+  const showMoteTotalEditors = false
+
   return <BlockPaper>
     <Typography variant="title">Mote Pools:</Typography>
 
@@ -30,10 +32,17 @@ function MotePoolEditor(props) {
         <span className={ classes.separator }>
           /
         </span>
-        <RatingField trait="motes_personal_total" value={ character.motes_personal_total }
-          label="Total" margin="dense"
-          onChange={ onRatingChange }
-        />
+        { showMoteTotalEditors &&
+          <RatingField trait="motes_personal_total" value={ character.motes_personal_total }
+            label="Total" margin="dense"
+            onChange={ onRatingChange }
+          />
+        }
+        { !showMoteTotalEditors &&
+          <span className={ classes.separator }>
+            { character.motes_personal_total }
+          </span>
+        }
       </div>,
       <div key="peripheral">
         <RatingField trait="motes_peripheral_current" value={ character.motes_peripheral_current }
@@ -43,10 +52,17 @@ function MotePoolEditor(props) {
         <span className={ classes.separator }>
           /
         </span>
-        <RatingField trait="motes_peripheral_total" value={ character.motes_peripheral_total }
-          label="Total" margin="dense"
-          onChange={ onRatingChange }
-        />
+        { showMoteTotalEditors &&
+          <RatingField trait="motes_peripheral_total" value={ character.motes_peripheral_total }
+            label="Total" margin="dense"
+            onChange={ onRatingChange }
+          />
+        }
+        { !showMoteTotalEditors &&
+          <span className={ classes.separator }>
+            { character.motes_peripheral_total }
+          </span>
+        }
       </div>,
       <div key="anima">
         <TextField select name="anima_level" value={ character.anima_level }

@@ -8,6 +8,8 @@ class SolarCharacter < Character
   attribute :motes_personal_current,   :integer, default: 13
   attribute :motes_peripheral_total,   :integer, default: 33
   attribute :motes_peripheral_current, :integer, default: 33
+  attribute :limit,                    :integer, default: 0
+  attribute :limit_trigger,            :string,  default: ''
 
   has_many :evocations,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
   has_many :martial_arts_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
@@ -22,6 +24,8 @@ class SolarCharacter < Character
     "eclipse":  %w[ bureaucracy larceny linguistics occult presence ride sail socialize ]
   }.freeze
 
+  before_validation :set_mote_pool_totals
+
   validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :abils_are_blank?
   validate :caste_abilities_are_valid,               unless: :abils_are_blank?
   validate :caste_and_favored_dont_overlap,          unless: :abils_are_blank?
@@ -33,13 +37,13 @@ class SolarCharacter < Character
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10
   }
 
-  after_initialize :set_defaults
-
   private
 
-  def set_defaults
-    self.limit ||= 0
-    self.limit_trigger ||= ''
+  def set_mote_pool_totals
+    return unless will_save_change_to_attribute? :essence
+
+    self.motes_personal_total   = (essence * 3) + 10
+    self.motes_peripheral_total = (essence * 7) + 26
   end
 
   def abils_are_blank?
@@ -54,6 +58,7 @@ class SolarCharacter < Character
     end
   end
 
+  # rubocop:disable Style/IfUnlessModifier
   def caste_abilities_are_valid
     caste_abilities.each do |a|
       unless CASTE_ABILITIES[caste.to_sym].include? a
@@ -84,4 +89,5 @@ class SolarCharacter < Character
       errors.add(:favored_abilities, 'Must have exactly 5 favored abilities')
     end
   end
+  # rubocop:enable Style/IfUnlessModifier
 end

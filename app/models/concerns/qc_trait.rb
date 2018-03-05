@@ -5,12 +5,11 @@ module QcTrait
   extend ActiveSupport::Concern
   included do
     belongs_to :qc
-    delegate :player,    to: :qc
-    delegate :chronicle, to: :qc
+    alias_attribute :character, :qc
 
-    def character
-      qc
-    end
+    delegate :player,      to: :qc
+    delegate :chronicle,   to: :qc
+    delegate :storyteller, to: :qc
   end
 
   # Ensure the correct Pundit policy is used (to prevent needing QcCharmPolicy, QcMeritPolicy, et al)

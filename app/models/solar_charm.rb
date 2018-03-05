@@ -5,15 +5,11 @@ class SolarCharm < Charm
   validates :ability, inclusion: { in: ABILITIES }, unless: :ability_blank?
   validates :min_ability, one_thru_five_stat: true
 
-  after_initialize :set_defaults
+  attribute :min_ability, :integer, default: 1
 
   private
 
   def ability_blank?
     ability.blank?
-  end
-
-  def set_defaults
-    self.min_ability ||= 1
   end
 end

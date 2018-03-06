@@ -5,12 +5,12 @@ export const merit = new schema.Entity('merits')
 export const charm = new schema.Entity('charms')
 export const spell = new schema.Entity('spells')
 export const character = new schema.Entity('characters', {
-  evocations: [ charm ],
-  solar_charms: [ charm ],
-  martial_arts_charms: [ charm ],
   weapons: [ weapon ],
   merits: [ merit ],
   spells: [ spell ],
+  charms: [ charm ],
+  martial_arts_charms: [ charm ],
+  evocations: [ charm ],
 })
 
 export const qc_merit = new schema.Entity('qcMerits')

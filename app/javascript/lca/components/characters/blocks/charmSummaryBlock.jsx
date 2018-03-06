@@ -55,8 +55,6 @@ function CharmSummaryBlock(props) {
     </Typography>
     { natives }
     { maCharms }
-
-    { evocations.length > 0 && <h3>Evocations</h3> }
     { evocations.length > 0 && evo }
   </BlockPaper>
 }
@@ -73,11 +71,9 @@ function mapStateToProps(state, ownProps) {
   let martialArtsCharms = []
   let nativeCharms = []
 
-  switch (character.type) {
-  case 'SolarCharacter':
-    nativeCharms = character.solar_charms.map((id) => state.entities.charms[id])
+  if (character.charms != undefined) {
+    nativeCharms = character.charms.map((id) => state.entities.charms[id])
   }
-
   if (character.evocations != undefined) {
     evocations = character.evocations.map((id) => state.entities.charms[id])
   }

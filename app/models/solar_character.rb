@@ -2,18 +2,16 @@
 
 # Traits and Validations specific to Solars.
 class SolarCharacter < Character
-  include MotePool
+  include AbilityExalt
 
   attribute :motes_personal_total,     :integer, default: 13
   attribute :motes_personal_current,   :integer, default: 13
   attribute :motes_peripheral_total,   :integer, default: 33
   attribute :motes_peripheral_current, :integer, default: 33
-  attribute :limit,                    :integer, default: 0
-  attribute :limit_trigger,            :string,  default: ''
+  attribute :exalt_type,               :string,  default: 'Solar'
 
-  has_many :evocations,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :martial_arts_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :solar_charms,        foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :solar_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  alias_attribute :charms, :solar_charms
 
   SOLAR_CASTES = %w[ dawn zenith twilight night eclipse ].freeze
   CASTE_ABILITIES = {
@@ -26,10 +24,11 @@ class SolarCharacter < Character
 
   before_validation :set_mote_pool_totals
 
+  # TODO: re-enable these validations once they can be refactored to not throw
+  #  errors on new, empty SolarCharacters
   validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :abils_are_blank?
-  validate :caste_abilities_are_valid,               unless: :abils_are_blank?
+  validate :caste_abilities_are_valid_solar,         unless: :abils_are_blank?
   validate :caste_and_favored_dont_overlap,          unless: :abils_are_blank?
-  validate :favored_abilities_are_valid,             unless: :abils_are_blank?
   validate :five_caste_and_five_favored_abilities,   unless: :abils_are_blank?
   validate :supernal_ability_is_caste,               unless: :abils_are_blank?
 
@@ -59,18 +58,10 @@ class SolarCharacter < Character
   end
 
   # rubocop:disable Style/IfUnlessModifier
-  def caste_abilities_are_valid
+  def caste_abilities_are_valid_solar
     caste_abilities.each do |a|
       unless CASTE_ABILITIES[caste.to_sym].include? a
         errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s")
-      end
-    end
-  end
-
-  def favored_abilities_are_valid
-    favored_abilities.each do |a|
-      unless ABILITIES.include? a
-        errors.add(:favored_abilities, "#{a} is not a valid ability")
       end
     end
   end

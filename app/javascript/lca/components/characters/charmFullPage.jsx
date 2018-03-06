@@ -154,11 +154,9 @@ function mapStateToProps(state, ownProps) {
   let artifacts = []
   let spells = []
 
-  switch (character.type) {
-  case 'SolarCharacter':
-    nativeCharms = character.solar_charms.map((id) => state.entities.charms[id])
+  if ( character.charms != undefined) {
+    nativeCharms = character.charms.map((id) => state.entities.charms[id])
   }
-
   if (character.evocations != undefined) {
     evocations = character.evocations.map((id) => state.entities.charms[id])
   }

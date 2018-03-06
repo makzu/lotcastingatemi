@@ -18,7 +18,7 @@ const styles = theme => ({
 function MotePoolEditor(props) {
   const { character, onRatingChange, classes } = props
 
-  const showMoteTotalEditors = false
+  const showMoteTotalEditors = character.type == 'CustomAttributeCharacter' || character.type == 'CustomAbilityCharacter'
 
   return <BlockPaper>
     <Typography variant="title">Mote Pools:</Typography>

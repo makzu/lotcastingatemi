@@ -2,6 +2,7 @@
 
 # Validations and methods specific to Solar Charms.
 class SolarCharm < Charm
+<<<<<<< HEAD
   validates :ability, inclusion: { in: ABILITIES }, unless: :ability_blank?
   validates :min_ability, one_thru_five_stat: true
 
@@ -16,4 +17,7 @@ class SolarCharm < Charm
   def ability_blank?
     ability.blank?
   end
+=======
+  include AbilityCharm
+>>>>>>> Lay groundwork for custom Attribute/Ability Exalts
 end

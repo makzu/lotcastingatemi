@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304213900) do
+ActiveRecord::Schema.define(version: 20180305084715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,10 @@ ActiveRecord::Schema.define(version: 20180304213900) do
     t.string "limit_trigger"
     t.boolean "pinned", default: false
     t.boolean "hidden", default: false
+    t.string "exalt_type", default: "Mortal"
+    t.string "caste_attributes", default: [], array: true
+    t.string "favored_attributes", default: [], array: true
+    t.boolean "aspect", default: false
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end

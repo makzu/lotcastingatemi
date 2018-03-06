@@ -18,8 +18,8 @@ import {
   updateCharm, createCharm, destroyCharm,
   updateSpell, createSpell, destroySpell,
 } from '../../ducks/actions.js'
-import { isAbilityCharm, abilitiesWithRatings } from '../../utils/calculated'
-import { ABILITY_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../utils/constants.js'
+import { isAbilityCharm, isAttributeCharm, abilitiesWithRatings } from '../../utils/calculated'
+import { ABILITY_MAX, ATTRIBUTE_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../utils/constants.js'
 
 class SingleCharmEditor extends React.Component {
   constructor(props) {
@@ -70,6 +70,7 @@ class SingleCharmEditor extends React.Component {
 
     const showAbility = charm.type == 'SolarCharm'
     const showMinAbility = isAbilityCharm(charm)
+    const showAttribute = isAttributeCharm(charm)
 
     return <BlockPaper>
       <Button onClick={ handleRemove } style={{ float: 'right' }}>
@@ -110,6 +111,14 @@ class SingleCharmEditor extends React.Component {
       { showMinAbility &&
         <RatingField trait="min_ability" value={ charm.min_ability }
           min={ 1 } max={ ABILITY_MAX }
+          onChange={ handleRatingChange }
+          label="Ability" margin="dense"
+        />
+      }
+
+      { showAttribute &&
+        <RatingField trait="min_ability" value={ charm.min_ability }
+          min={ 1 } max={ ATTRIBUTE_MAX }
           onChange={ handleRatingChange }
           label="Ability" margin="dense"
         />
@@ -343,9 +352,8 @@ function mapStateToProps(state, ownProps) {
   let artifacts = []
   let spells = []
 
-  switch (character.type) {
-  case 'SolarCharacter':
-    nativeCharms = character.solar_charms.map((id) => state.entities.charms[id])
+  if (character.charms != undefined) {
+    nativeCharms = character.charms.map((id) => state.entities.charms[id])
   }
 
   if (character.evocations != undefined) {

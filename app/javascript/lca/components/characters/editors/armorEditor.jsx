@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
-import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
@@ -43,7 +42,7 @@ function ArmorEditor(props) {
     <br />
 
     <TextField name="armor_tags" value={ character.armor_tags }
-      label="Tags" margin="dense"
+      label="Tags (comma separated)" margin="dense"
       onChange={ onChange } onBlur={ onBlur }
     />
 

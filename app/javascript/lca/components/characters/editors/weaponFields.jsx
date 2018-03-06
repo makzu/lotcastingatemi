@@ -112,7 +112,7 @@ class WeaponFields extends React.Component {
         onChange={ handleRatingChange }
       />
 
-      <TextField label="tags" name="tags" value={ weapon.tags }
+      <TextField label="Tags (comma separated)" name="tags" value={ weapon.tags }
         className={ classes.tagsField } margin="dense"
         onBlur={ handleBlur } onChange={ handleChange }
       />

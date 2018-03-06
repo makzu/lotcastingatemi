@@ -107,7 +107,7 @@ class QcAttackFields extends React.Component {
         onChange={ handleRatingChange }
       />
       <TextField name="tags" value={ attack.tags }
-        label="Tags" className={ classes.tagsField } margin="dense"
+        label="Tags (comma separated)" className={ classes.tagsField } margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <TextField select name="range" value={ attack.range }

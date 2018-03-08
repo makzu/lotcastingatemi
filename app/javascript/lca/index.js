@@ -9,6 +9,7 @@ import thunk from 'redux-thunk'
 import { apiMiddleware } from 'redux-api-middleware'
 
 import authCookieMiddleware from './middleware/authCookieMiddleware.js'
+import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
 
 import reducer from './ducks'
 import { lcaInit } from './ducks/actions.js'
@@ -18,7 +19,7 @@ import RootContainer from './containers/rootContainer.jsx'
 const makeEnhancer = (process.env.NODE_ENV === 'production') ? compose : composeWithDevTools
 
 const enhancer = makeEnhancer(
-  applyMiddleware(thunk, apiMiddleware, authCookieMiddleware)
+  applyMiddleware(thunk, apiMiddleware, authCookieMiddleware, themeSaverMiddleware)
 )
 
 const store = createStore(

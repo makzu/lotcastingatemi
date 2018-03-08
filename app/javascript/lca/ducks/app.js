@@ -4,7 +4,7 @@ export const SWITCH_THEME  = 'lca/app/SWITCH_THEME'
 
 const defaultState = {
   drawerOpen: false,
-  theme: 'light',
+  theme: localStorage.theme || 'light',
 }
 
 export default function AppReducer(state = defaultState, action) {

@@ -10,6 +10,7 @@ class QcAttack < ApplicationRecord
   delegate :player,      to: :qc_attackable
   delegate :chronicle,   to: :qc_attackable
   delegate :storyteller, to: :qc_attackable
+  delegate :hidden,      to: :qc_attackable
 
   validates :pool, :damage, :overwhelming, numericality: { greater_than: 0 }
 

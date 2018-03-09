@@ -13,17 +13,17 @@ export const character = new schema.Entity('characters', {
   spells: [ spell ],
 })
 
-export const qcMerit = new schema.Entity('qcMerits')
-export const qcAttack = new schema.Entity('qcAttacks')
-export const qcCharm = new schema.Entity('qcCharms')
+export const qc_merit = new schema.Entity('qcMerits')
+export const qc_attack = new schema.Entity('qcAttacks')
+export const qc_charm = new schema.Entity('qcCharms')
 export const qc = new schema.Entity('qcs', {
-  qc_merits: [ qcMerit ],
-  qc_attacks: [ qcAttack ],
-  qc_charms: [ qcCharm ],
+  qc_merits: [ qc_merit ],
+  qc_attacks: [ qc_attack ],
+  qc_charms: [ qc_charm ],
 })
 
 export const battlegroup = new schema.Entity('battlegroups', {
-  qc_attacks: [ qcAttack ],
+  qc_attacks: [ qc_attack ],
 })
 
 const chronicleId = new schema.Entity('chronicles')

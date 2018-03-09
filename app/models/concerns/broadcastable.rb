@@ -4,22 +4,36 @@
 module Broadcastable
   extend ActiveSupport::Concern
   included do
-    after_commit :broadcast_update
+    after_create :broadcast_parent
+    after_destroy :broadcast_parent
+    after_save :broadcast_update
 
     # TODO: Factor this out into a job
     def broadcast_update
       # Do not broadcast if the parent character is being deleted
       # This is to prevent Charms, Merits, etc from sending their own individual
       # destroy messages when a whole character is being deleted
-      return if !is_a?(Character) && character.destroyed?
-
-      which = which_to_broadcast
+      return if trait? && character.destroyed?
 
       all_ids.each do |id|
         ActionCable.server.broadcast(
           "entity-update-#{id}",
-          type: which.entity_type,
-          entity: Api::V1::BaseController.renderer.render(json: which)
+          type: entity_type,
+          entity: Api::V1::BaseController.renderer.render(json: self)
+        )
+      end
+    end
+
+    def broadcast_parent
+      return if trait? && character.destroyed?
+
+      parent = which_parent
+
+      all_ids.each do |id|
+        ActionCable.server.broadcast(
+          "entity-update-#{id}",
+          type: parent.entity_type,
+          entity: Api::V1::BaseController.renderer.render(json: parent)
         )
       end
     end
@@ -33,18 +47,14 @@ module Broadcastable
       ([player.id] + [chronicle.st_id] + chronicle.players.pluck(:id)).uniq
     end
 
-    def which_to_broadcast
-      if new_record? || destroyed?
-        if is_a?(Character) && chronicle.present?
-          chronicle
-        elsif is_a?(Character)
-          player
-        else
-          character
-        end
-      else
-        self
-      end
+    def which_parent
+      return character if trait?
+      return chronicle if chronicle.present?
+      player
+    end
+
+    def trait?
+      !is_a?(Character) && !is_a?(Qc) && !is_a?(Battlegroup)
     end
 
   end

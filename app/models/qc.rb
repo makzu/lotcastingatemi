@@ -2,6 +2,7 @@
 
 # Traits for QCs.  A QC can serve as the base for any number of battlegroups.
 class Qc < ApplicationRecord
+  include Broadcastable
   include BelongsToPlayer
   include HealthLevels
   include Willpower
@@ -28,4 +29,8 @@ class Qc < ApplicationRecord
             numericality: { greater_than: 0 }
 
   validates :actions, json: { schema: Schemas::QC_ACTION }
+
+  def entity_type
+    'qc'
+  end
 end

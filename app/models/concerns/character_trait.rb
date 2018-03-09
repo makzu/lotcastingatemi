@@ -9,6 +9,7 @@ module CharacterTrait
     delegate :player,      to: :character
     delegate :chronicle,   to: :character
     delegate :storyteller, to: :character
+    delegate :hidden,      to: :character
   end
 
   # Ensure the correct Pundit policy is used (to prevent needing CharmPolicy, MeritPolicy, et al)

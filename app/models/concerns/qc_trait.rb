@@ -10,6 +10,7 @@ module QcTrait
     delegate :player,      to: :qc
     delegate :chronicle,   to: :qc
     delegate :storyteller, to: :qc
+    delegate :hidden,      to: :qc
   end
 
   # Ensure the correct Pundit policy is used (to prevent needing QcCharmPolicy, QcMeritPolicy, et al)

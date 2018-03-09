@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  mount ActionCable.server, at: '/cable'
+
   # All other routes go to the frontend:
   root to: 'site#index'
   get '*path', to: 'site#index'

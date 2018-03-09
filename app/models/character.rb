@@ -8,6 +8,7 @@
 # limit on the total number of rows allowed in the database before they start
 # charging extra.
 class Character < ApplicationRecord
+  include Broadcastable
   include BelongsToPlayer
   include HealthLevels
   include Willpower
@@ -55,4 +56,8 @@ class Character < ApplicationRecord
 
   validates :sorcerous_motes, numericality: { greater_than_or_equal_to: 0 }
   validates :onslaught,       numericality: { greater_than_or_equal_to: 0 }
+
+  def entity_type
+    'character'
+  end
 end

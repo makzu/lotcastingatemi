@@ -2,6 +2,11 @@
 
 # Individual Charms for QCs.
 class QcCharm < ApplicationRecord
+  include Broadcastable
   include QcTrait
   include EssenceCharm
+
+  def entity_type
+    'qc_charm'
+  end
 end

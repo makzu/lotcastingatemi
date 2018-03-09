@@ -3,6 +3,7 @@
 # Represents individual attack pools for QCs.  Battlegroups take these numbers
 # and add their own bonuses.
 class QcAttack < ApplicationRecord
+  include Broadcastable
   belongs_to :qc_attackable, polymorphic: true
   alias_attribute :character, :qc_attackable
 
@@ -11,6 +12,10 @@ class QcAttack < ApplicationRecord
   delegate :storyteller, to: :qc_attackable
 
   validates :pool, :damage, :overwhelming, numericality: { greater_than: 0 }
+
+  def entity_type
+    'qc_attack'
+  end
 
   def self.policy_class
     CharacterTraitPolicy

@@ -2,5 +2,10 @@
 
 # Individual merits for QCs.
 class QcMerit < ApplicationRecord
+  include Broadcastable
   include QcTrait
+
+  def entity_type
+    'qc_merit'
+  end
 end

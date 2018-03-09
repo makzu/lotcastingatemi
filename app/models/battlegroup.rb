@@ -2,6 +2,7 @@
 
 # Holds traits specific to Battlegroups, as defined starting at Core p.205.
 class Battlegroup < ApplicationRecord
+  include Broadcastable
   include BelongsToPlayer
   include Willpower
 
@@ -25,4 +26,8 @@ class Battlegroup < ApplicationRecord
             :join_battle, :evasion, :parry, :soak,
             :movement, :senses,
             numericality: { greater_than: 0 }
+
+  def entity_type
+    'battlegroup'
+  end
 end

@@ -6,7 +6,7 @@ export function nonAuthHeaders() {
 export function authHeaders () {
   return new Headers({
     'Content-Type': 'application/json',
-    'AUTHORIZATION': `Bearer ${sessionStorage.jwt}`
+    'AUTHORIZATION': `Bearer ${localStorage.jwt}`
   })
 }
 

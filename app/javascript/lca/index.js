@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { apiMiddleware } from 'redux-api-middleware'
 
-import authCookieMiddleware from './middleware/authCookieMiddleware.js'
+import authTokenMiddleware from './middleware/authTokenMiddleware.js'
 import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
 
 import reducer from './ducks'
@@ -19,7 +19,7 @@ import RootContainer from './containers/rootContainer.jsx'
 const makeEnhancer = (process.env.NODE_ENV === 'production') ? compose : composeWithDevTools
 
 const enhancer = makeEnhancer(
-  applyMiddleware(thunk, apiMiddleware, authCookieMiddleware, themeSaverMiddleware)
+  applyMiddleware(thunk, apiMiddleware, authTokenMiddleware, themeSaverMiddleware)
 )
 
 const store = createStore(

@@ -7,7 +7,7 @@ function isAuthFailure(action) {
 }
 
 const defaultState = {
-  authenticated: !!sessionStorage.jwt || false,
+  authenticated: !!localStorage.jwt || false,
   id: 0,
   error: '',
 }

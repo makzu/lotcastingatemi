@@ -1,3 +1,7 @@
+import { merge } from 'lodash'
+import { normalize } from 'normalizr'
+
+import * as schemas from './_schemas.js'
 export * from './player.js'
 export * from './chronicle.js'
 export * from './character.js'
@@ -52,6 +56,28 @@ export const defaultState = {
 }
 
 export default function EntityReducer(state = defaultState, action) {
+  let _entities
+
+  if (action.type == 'lca/cable/RECEIVED') {
+    _entities = normalize(JSON.parse(action.payload.entity), schemas[action.payload.type]).entities
+
+    return {
+      ...state,
+      players:      merge({ ...state.players      }, _entities.players      ),
+      characters:   merge({ ...state.characters   }, _entities.characters   ),
+      merits:       merge({ ...state.merits       }, _entities.merits       ),
+      weapons:      merge({ ...state.weapons      }, _entities.weapons      ),
+      charms:       merge({ ...state.charms       }, _entities.charms       ),
+      spells:       merge({ ...state.spells       }, _entities.spells       ),
+      qcs:          merge({ ...state.qcs          }, _entities.qcs          ),
+      qc_merits:    merge({ ...state.qc_merits    }, _entities.qcMerits     ),
+      qc_charms:    merge({ ...state.qc_charms    }, _entities.qcCharms     ),
+      qc_attacks:   merge({ ...state.qc_attacks   }, _entities.qcAttacks    ),
+      battlegroups: merge({ ...state.battlegroups }, _entities.battlegroups ),
+      chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   ),
+    }
+  }
+
   // Entity actions are expected to be in format 'lca/<entity name>/<ACTION>'
   const act = action.type.split('/')
   if (act[0] !== 'lca')
@@ -65,6 +91,7 @@ export default function EntityReducer(state = defaultState, action) {
   case 'chronicle':
     return ChronicleReducer(state, action)
 
+  /*
   case 'character':
     return CharacterReducer(state, action)
   case 'merit':
@@ -87,7 +114,7 @@ export default function EntityReducer(state = defaultState, action) {
 
   case 'battlegroup':
     return BattlegroupReducer(state, action)
-
+  // */
   default:
     return state
   }

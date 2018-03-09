@@ -8,16 +8,16 @@ class ChronicleSerializer < ActiveModel::Serializer
   belongs_to :st, class: Player
 
   has_many :players
-  attributes :characters, :qcs, :battlegroups
-  def characters
+
+  has_many :characters do
     CharacterPolicy::Scope.new(scope, Character).resolve.where(chronicle: object)
   end
 
-  def qcs
+  has_many :qcs do
     CharacterPolicy::Scope.new(scope, Qc).resolve.where(chronicle: object)
   end
 
-  def battlegroups
+  has_many :battlegroups do
     CharacterPolicy::Scope.new(scope, Battlegroup).resolve.where(chronicle: object)
   end
 

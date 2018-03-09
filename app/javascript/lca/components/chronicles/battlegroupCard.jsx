@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
@@ -9,6 +8,7 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
+import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import { prettyDrillRating } from '../../utils/calculated'
 
 const styles = theme => ({
@@ -23,67 +23,45 @@ const styles = theme => ({
   },
 })
 
-function BattlegroupCard(props) {
-  const { battlegroup, playerName, classes } = props
+function BattlegroupCard({ battlegroup, classes }) {
 
-  return <div>
-    <Paper className={ classes.root }>
+  return <Paper className={ classes.root }>
 
-      <Typography variant="title">
-        { battlegroup.name }
-        { battlegroup.hidden &&
-          <div className={ classes.hiddenLabel }>
-            <VisibilityOff />
-            Hidden
-          </div>
-        }
+    <Typography variant="title">
+      { battlegroup.name }
+      { battlegroup.hidden &&
+        <div className={ classes.hiddenLabel }>
+          <VisibilityOff />
+          Hidden
+        </div>
+      }
 
-        <Button component={ Link } to={ `/battlegroups/${battlegroup.id}` } style={{ float: 'right', }}>
-          Full Sheet
-        </Button>
-      </Typography>
+      <Button component={ Link } to={ `/battlegroups/${battlegroup.id}` } style={{ float: 'right', }}>
+        Full Sheet
+      </Button>
+    </Typography>
 
-      <Typography variant="subheading">
-        Player: { playerName }
-      </Typography>
+    <PlayerNameSubtitle playerId={ battlegroup.player_id } />
 
-      <Typography>
-        Size { battlegroup.size },&nbsp;
-        { prettyDrillRating(battlegroup) } Drill
-        { battlegroup.might > 0 &&
-          <span>, Might { battlegroup.might }</span>
-        }
-      </Typography>
+    <Typography>
+      Size { battlegroup.size },&nbsp;
+      { prettyDrillRating(battlegroup) } Drill
+      { battlegroup.might > 0 &&
+        <span>, Might { battlegroup.might }</span>
+      }
+    </Typography>
 
-      <Typography paragraph>
-        <strong>Penalties:</strong>&nbsp;
+    <Typography paragraph>
+      <strong>Penalties:</strong>&nbsp;
 
-        Onslaught -{ battlegroup.onslaught }
-      </Typography>
-    </Paper>
-  </div>
+      Onslaught -{ battlegroup.onslaught }
+    </Typography>
+  </Paper>
 }
 BattlegroupCard.propTypes = {
-  battlegroupId: PropTypes.number.isRequired,
   battlegroup: PropTypes.object.isRequired,
   playerName: PropTypes.string,
   classes: PropTypes.object,
 }
 
-function mapStateToProps(state, ownProps) {
-  const battlegroup = state.entities.battlegroups[ownProps.battlegroupId]
-  let playerName = 'unknown player'
-
-  if (battlegroup != undefined){
-    playerName = state.entities.players[battlegroup.player_id].display_name
-  }
-
-  return {
-    battlegroup,
-    playerName,
-  }
-}
-
-export default connect(mapStateToProps)(
-  withStyles(styles)(BattlegroupCard)
-)
+export default withStyles(styles)(BattlegroupCard)

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
@@ -9,6 +8,7 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
+import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import { woundPenalty } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
@@ -24,70 +24,51 @@ const styles = theme => ({
   },
 })
 
-function CharacterCard(props) {
-  const { qc, player, classes } = props
+function QcCard({ qc, classes }) {
+  return <Paper className={ classes.root }>
 
-  return <div>
-    <Paper className={ classes.root }>
+    <Typography variant="title">
+      { qc.name }
+      { qc.hidden &&
+        <div className={ classes.hiddenLabel }>
+          <VisibilityOff />
+          Hidden
+        </div>
+      }
 
-      <Typography variant="title">
-        { qc.name }
-        { qc.hidden &&
-          <div className={ classes.hiddenLabel }>
-            <VisibilityOff />
-            Hidden
-          </div>
-        }
+      <Button component={ Link } to={ `/qcs/${qc.id}` } style={{ float: 'right', }}>
+        Full Sheet
+      </Button>
+    </Typography>
 
-        <Button component={ Link } to={ `/qcs/${qc.id}` } style={{ float: 'right', }}>
-          Full Sheet
-        </Button>
-      </Typography>
+    <PlayerNameSubtitle playerId={ qc.player_id } />
 
-      <Typography variant="subheading">
-        Player: { player.display_name }
-      </Typography>
+    <Typography>
+      { qc.motes_personal_total > 0 &&
+        <span>
+          Motes: { qc.motes_personal_current }/{ qc.motes_personal_total } Personal,&nbsp;
+        </span>
+      }
+      { qc.motes_peripheral_total > 0 &&
+        <span>
+          { qc.motes_peripheral_current }/{ qc.motes_peripheral_total } Peripheral,&nbsp;
+        </span>
+      }
+      Willpower: { qc.willpower_temporary }/{ qc.willpower_permanent }
+    </Typography>
 
-      <Typography>
-        { qc.motes_personal_total > 0 &&
-          <span>
-            Motes: { qc.motes_personal_current }/{ qc.motes_personal_total } Personal,&nbsp;
-          </span>
-        }
-        { qc.motes_peripheral_total > 0 &&
-          <span>
-            { qc.motes_peripheral_current }/{ qc.motes_peripheral_total } Peripheral,&nbsp;
-          </span>
-        }
-        Willpower: { qc.willpower_temporary }/{ qc.willpower_permanent }
-      </Typography>
+    <Typography paragraph>
+      <strong>Penalties:</strong>&nbsp;
 
-      <Typography paragraph>
-        <strong>Penalties:</strong>&nbsp;
-
-        Onslaught -{ qc.onslaught },&nbsp;
-        Wound -{ woundPenalty(qc) }
-      </Typography>
-    </Paper>
-  </div>
+      Onslaught -{ qc.onslaught },&nbsp;
+      Wound -{ woundPenalty(qc) }
+    </Typography>
+  </Paper>
 }
-CharacterCard.propTypes = {
-  qcId: PropTypes.number.isRequired,
+QcCard.propTypes = {
   qc: PropTypes.shape(fullQc).isRequired,
   player: PropTypes.object,
   classes: PropTypes.object,
 }
 
-function mapStateToProps(state, ownProps) {
-  const qc = state.entities.qcs[ownProps.qcId]
-  const player = state.entities.players[qc.player_id]
-
-  return {
-    qc,
-    player
-  }
-}
-
-export default connect(mapStateToProps)(
-  withStyles(styles)(CharacterCard)
-)
+export default withStyles(styles)(QcCard)

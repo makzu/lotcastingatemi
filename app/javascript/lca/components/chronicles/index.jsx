@@ -13,11 +13,7 @@ import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from './battlegroupCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
-class ChronicleDashboard extends React.PureComponent {
-  constructor(props) {
-    super(props)
-  }
-
+class ChronicleDashboard extends React.Component {
   render() {
     /* Escape hatch */
     if (this.props.chronicle == undefined || this.props.chronicle.name == undefined)
@@ -29,17 +25,17 @@ class ChronicleDashboard extends React.PureComponent {
 
     const characterList = characters.map((c) =>
       <Grid item xs={ 6 } key={ c.id }>
-        <CharacterCard characterId={ c.id } />
+        <CharacterCard character={ c } />
       </Grid>
     )
     const qcList = qcs.map((c) =>
       <Grid item xs={ 6 } key={ c.id }>
-        <QcCard qcId={ c.id } />
+        <QcCard qc={ c } />
       </Grid>
     )
     const bgList = battlegroups.map((c) =>
       <Grid item xs={ 6 } key={ c.id }>
-        <BattlegroupCard battlegroupId={ c.id } />
+        <BattlegroupCard battlegroup={ c } />
       </Grid>
     )
 
@@ -91,6 +87,7 @@ ChronicleDashboard.propTypes = {
   id: PropTypes.string,
   st: PropTypes.object,
   is_st: PropTypes.bool,
+  players: PropTypes.arrayOf(PropTypes.object),
   characters: PropTypes.arrayOf(PropTypes.object),
   qcs: PropTypes.arrayOf(PropTypes.object),
   battlegroups: PropTypes.arrayOf(PropTypes.object),

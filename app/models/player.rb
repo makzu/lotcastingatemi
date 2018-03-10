@@ -22,6 +22,10 @@ class Player < ApplicationRecord
     Knock::AuthToken.new(payload: { sub: id }).token
   end
 
+  def entity_type
+    'player'
+  end
+
   def self.create_from_oauth(auth)
     create(
       display_name: auth['info']['name'],

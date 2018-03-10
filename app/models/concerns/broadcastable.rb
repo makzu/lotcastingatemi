@@ -8,25 +8,28 @@ module Broadcastable
     after_destroy :broadcast_parent
     after_update_commit :broadcast_update
 
-    # TODO: Factor this out into a job
     def broadcast_update
       # Do not broadcast if the parent character is being deleted
       # This is to prevent Charms, Merits, etc from sending their own individual
       # destroy messages when a whole character is being deleted
       return if trait? && character.destroyed?
 
-      UpdateBroadcastJob.perform_later all_ids, self
+      UpdateBroadcastJob.perform_later(
+        all_ids,
+        self,
+        saved_changes.delete_if { |k| k == 'updated_at' }
+      )
     end
 
     def broadcast_parent
       return if trait? && character.destroyed?
 
-      UpdateBroadcastJob.perform_later all_ids, which_parent
+      UpdateBroadcastJob.perform_later all_ids, which_parent, (saved_changes.delete_if { |k| k == 'updated_at' })
     end
 
     private
 
-    def all_ids
+    def all_ids # rubocop:disable Metrics/AbcSize
       return [player.id] if chronicle.blank?
       return ([player.id] + [chronicle.st_id]).uniq if hidden
 

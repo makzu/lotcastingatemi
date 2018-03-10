@@ -1,8 +1,5 @@
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 
-import { normalize } from 'normalizr'
-
-import * as schemas from './_schemas.js'
 export * from './player.js'
 export * from './chronicle.js'
 export * from './character.js'
@@ -47,25 +44,17 @@ export const defaultState = {
 }
 
 export default function EntityReducer(state = defaultState, action) {
-  let _entities
-
-  if (action.type == 'lca/cable/RECEIVED') {
-    _entities = normalize(JSON.parse(action.payload.entity), schemas[action.payload.type]).entities
-
+  // TODO: Make this more readable
+  if (action.type == 'lca/cable/RECEIVED' && action.payload.event == 'update') {
     return {
       ...state,
-      players:      { ...state.players     , ..._entities.players      },
-      characters:   { ...state.characters  , ..._entities.characters   },
-      merits:       { ...state.merits      , ..._entities.merits       },
-      weapons:      { ...state.weapons     , ..._entities.weapons      },
-      charms:       { ...state.charms      , ..._entities.charms       },
-      spells:       { ...state.spells      , ..._entities.spells       },
-      qcs:          { ...state.qcs         , ..._entities.qcs          },
-      qc_merits:    { ...state.qc_merits   , ..._entities.qcMerits     },
-      qc_charms:    { ...state.qc_charms   , ..._entities.qcCharms     },
-      qc_attacks:   { ...state.qc_attacks  , ..._entities.qcAttacks    },
-      battlegroups: { ...state.battlegroups, ..._entities.battlegroups },
-      chronicles:   { ...state.chronicles  , ..._entities.chronicles   },
+      [action.payload.type]: {
+        ...state[action.payload.type],
+        [action.payload.id]: {
+          ...state[action.payload.type][action.payload.id],
+          ...action.payload.changes
+        }
+      }
     }
   }
 

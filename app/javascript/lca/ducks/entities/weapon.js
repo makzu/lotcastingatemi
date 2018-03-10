@@ -10,32 +10,6 @@ const WEP_DESTROY =            'lca/weapon/DESTROY'
 const WEP_DESTROY_SUCCESS =    'lca/weapon/DESTROY_SUCCESS'
 const WEP_DESTROY_FAILURE =    'lca/weapon/DESTROY_FAILURE'
 
-export default function reducer(state, action) {
-  const _id = action.payload != undefined ? action.payload.id : null
-  const _charId = action.payload != undefined ? action.payload.character_id : null
-  const _trait = action.meta != undefined ? action.meta.trait : null
-
-  switch(action.type) {
-  case WEP_CREATE_SUCCESS:
-    return { ...state,
-      weapons: { ...state.weapons, [_id]: action.payload },
-      characters: {
-        ...state.characters,
-        [_charId]: { ...state.characters[_charId], weapons: [...state.characters[_charId].weapons, _id] }
-      }
-    }
-  case WEP_UPDATE_SUCCESS:
-    return { ...state, weapons: {
-      ...state.weapons, [_id]: {
-        ...state.weapons[_id], [_trait]: action.payload[_trait] }}
-    }
-  case WEP_DESTROY_SUCCESS:
-    return _destroy_weapon(state, action)
-  default:
-    return state
-  }
-}
-
 export function createWeapon(charId) {
   let weapon = { weapon: { character_id: charId }}
 
@@ -56,7 +30,7 @@ export function updateWeapon(id, charId, trait, value) {
     body: JSON.stringify(weapon),
     types: [
       WEP_UPDATE,
-      { type: WEP_UPDATE_SUCCESS, meta: { trait: trait }},
+      { type: WEP_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
       WEP_UPDATE_FAILURE
     ]
   })
@@ -72,18 +46,4 @@ export function destroyWeapon(id, charId) {
       WEP_DESTROY_FAILURE
     ]
   })
-}
-
-function _destroy_weapon(state, action) {
-  const id = action.meta.id
-  const charId = action.meta.charId
-
-  const newWeapons = { ...state.weapons }
-
-  delete newWeapons[id]
-
-  const char = { ...state.characters[charId] }
-  char.weapons = char.weapons.filter((e) => e != id)
-
-  return { ...state, weapons: newWeapons, characters: { ...state.characters, [charId]: char }}
 }

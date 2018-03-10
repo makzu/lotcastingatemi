@@ -6,7 +6,7 @@ module Broadcastable
   included do
     after_create :broadcast_parent
     after_destroy :broadcast_parent
-    after_save :broadcast_update
+    after_update_commit :broadcast_update
 
     # TODO: Factor this out into a job
     def broadcast_update
@@ -15,27 +15,13 @@ module Broadcastable
       # destroy messages when a whole character is being deleted
       return if trait? && character.destroyed?
 
-      all_ids.each do |id|
-        ActionCable.server.broadcast(
-          "entity-update-#{id}",
-          type: entity_type,
-          entity: Api::V1::BaseController.renderer.render(json: self)
-        )
-      end
+      UpdateBroadcastJob.perform_later all_ids, self
     end
 
     def broadcast_parent
       return if trait? && character.destroyed?
 
-      parent = which_parent
-
-      all_ids.each do |id|
-        ActionCable.server.broadcast(
-          "entity-update-#{id}",
-          type: parent.entity_type,
-          entity: Api::V1::BaseController.renderer.render(json: parent)
-        )
-      end
+      UpdateBroadcastJob.perform_later all_ids, which_parent
     end
 
     private
@@ -56,6 +42,5 @@ module Broadcastable
     def trait?
       !is_a?(Character) && !is_a?(Qc) && !is_a?(Battlegroup)
     end
-
   end
 end

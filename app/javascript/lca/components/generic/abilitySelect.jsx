@@ -35,6 +35,7 @@ class AbilitySelect extends React.Component {
         margin={ props.margin || 'none' } fullWidth={ props.fullWidth }
         SelectProps={{ multiple: props.multiple }}
       >
+        <MenuItem value="" disabled>Ability</MenuItem>
         { menuItems }
       </TextField>
     )

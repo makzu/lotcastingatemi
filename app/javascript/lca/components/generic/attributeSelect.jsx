@@ -35,6 +35,7 @@ class AttributeSelect extends React.Component {
         margin={ props.margin || 'none' } fullWidth={ props.fullWidth }
         SelectProps={{ multiple: props.multiple }}
       >
+        <MenuItem value="" disabled>Attribute</MenuItem>
         { menuItems }
       </TextField>
     )

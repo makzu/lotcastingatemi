@@ -7,7 +7,7 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
-import { isAbilityCharm } from '../../utils/calculated'
+import { isAbilityCharm, isAttributeCharm } from '../../utils/calculated'
 
 const styles = theme => ({
   capitalize: {
@@ -19,12 +19,13 @@ const styles = theme => ({
   maStyleLine: {
 
   },
+  charmBody: {
+    whiteSpace: 'pre-line',
+  },
 })
 
 function _SingleCharm(props) {
   const { charm, classes } = props
-
-  const ability = charm.type == 'MartialArtsCharm' ? `Martial Arts (${charm.style} style)` : charm.ability
 
   return <BlockPaper>
     <Typography variant="title">
@@ -45,9 +46,14 @@ function _SingleCharm(props) {
     <Typography paragraph>
       <strong>Cost:</strong> { charm.cost };&nbsp;
       <strong>Mins:</strong>&nbsp;
-      { isAbilityCharm(charm) &&
+      { isAbilityCharm(charm) || isAttributeCharm(charm) &&
         <span className={ classes.capitalize }>
-          { ability } { charm.min_ability},&nbsp;
+          { charm.ability } { charm.min_ability},&nbsp;
+        </span>
+      }
+      { charm.type == 'MartialArtsCharm' &&
+        <span className={ classes.capitalize }>
+          Martial Arts ({ charm.style } style) { charm.min_ability},&nbsp;
         </span>
       }
       Essence { charm.min_essence }
@@ -67,7 +73,7 @@ function _SingleCharm(props) {
       <strong>Prerequisite Charms:</strong> { charm.prereqs || 'None' }
     </Typography>
 
-    <Typography>{ charm.body }</Typography>
+    <Typography className={ classes.charmBody }>{ charm.body }</Typography>
 
     { charm.ref != '' &&
       <Typography variant="caption">Ref: { charm.ref }</Typography>

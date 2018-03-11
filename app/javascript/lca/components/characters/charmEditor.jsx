@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
+import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
-import { MenuItem } from 'material-ui/Menu'
+import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import ContentAddCircle from 'material-ui-icons/AddCircle'
 
-import SpellEditorBlock from './editors/spellEditorBlock.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
 import AbilitySelect from '../generic/abilitySelect.jsx'
+import AttributeSelect from '../generic/attributeSelect.jsx'
+import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/ratingField.jsx'
+import SpellEditorBlock from './editors/spellEditorBlock.jsx'
 import {
   updateCharm, createCharm, destroyCharm,
   updateSpell, createSpell, destroySpell,
@@ -38,6 +39,8 @@ class SingleCharmEditor extends React.Component {
 
   handleChange(e) {
     let { name, value } = e.target
+    if (name == 'keywords')
+      value = value.split(',')
 
     this.setState({ charm: { ...this.state.charm, [name]: value }})
   }
@@ -68,8 +71,8 @@ class SingleCharmEditor extends React.Component {
     const { charm } = this.state
     const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
 
-    const showAbility = charm.type == 'SolarCharm'
-    const showMinAbility = isAbilityCharm(charm)
+    const showAbility = isAbilityCharm(charm)
+    const showMinAbility = showAbility || charm.type == 'MartialArtsCharm'
     const showAttribute = isAttributeCharm(charm)
 
     return <BlockPaper>
@@ -81,7 +84,7 @@ class SingleCharmEditor extends React.Component {
       <TextField name="name" value={ charm.name }
         onChange={ handleChange } onBlur={ handleBlur }
         label="Name" margin="dense"
-      />
+      />&nbsp;&nbsp;
       { charm.type == 'Evocation' &&
         <TextField name="artifact_name" value={ charm.artifact_name }
           onChange={ handleChange } onBlur={ handleBlur }
@@ -99,7 +102,8 @@ class SingleCharmEditor extends React.Component {
       <TextField name="cost" value={ charm.cost }
         onChange={ handleChange } onBlur={ handleBlur }
         label="Cost" margin="dense"
-      />
+      />&nbsp;&nbsp;
+
       { showAbility &&
         <AbilitySelect name="ability" label="Ability" margin="dense"
           abilities={ abilitiesWithRatings(character) }
@@ -116,13 +120,19 @@ class SingleCharmEditor extends React.Component {
         />
       }
 
-      { showAttribute &&
+      { showAttribute && <Fragment>
+        <AttributeSelect name="ability" label="Attribute" margin="dense"
+          value={ charm.ability }
+          onChange={ handleRatingChange }
+          multiple={ false }
+        />
         <RatingField trait="min_ability" value={ charm.min_ability }
           min={ 1 } max={ ATTRIBUTE_MAX }
           onChange={ handleRatingChange }
-          label="Ability" margin="dense"
+          label="Attribute" margin="dense"
         />
-      }
+      </Fragment> }
+
       <RatingField trait="min_essence" value={ charm.min_essence }
         min={ ESSENCE_MIN } max={ ESSENCE_MAX }
         onChange={ handleRatingChange }
@@ -139,7 +149,7 @@ class SingleCharmEditor extends React.Component {
         <MenuItem value="supplemental">Supplemental</MenuItem>
         <MenuItem value="simple">Simple</MenuItem>
         <MenuItem value="permanent">Permanent</MenuItem>
-      </TextField>
+      </TextField>&nbsp;&nbsp;
 
       <TextField name="duration" value={ charm.duration }
         onChange={ handleChange } onBlur={ handleBlur }
@@ -164,7 +174,7 @@ class SingleCharmEditor extends React.Component {
       <TextField name="body" value={ charm.body }
         onChange={ handleChange } onBlur={ handleBlur }
         className="editor-description-field" multiline fullWidth
-        label="Effect" margin="dense"
+        label="Effect" margin="dense" rows={ 3 }
       />
       <br />
 
@@ -210,6 +220,12 @@ class CharmEditor extends React.Component {
     switch(this.props.character.type) {
     case 'SolarCharacter':
       type = 'SolarCharm'
+      break
+    case 'CustomAbilityCharacter':
+      type = 'CustomAbilityCharm'
+      break
+    case 'CustomAttributeCharacter':
+      type = 'CustomAttributeCharm'
       break
     default:
       type = ''

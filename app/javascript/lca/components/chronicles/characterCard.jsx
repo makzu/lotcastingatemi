@@ -51,7 +51,7 @@ function CharacterCard({ character, classes }) {
 
     { character.type != 'Character' &&
       <Typography>
-        Animal Level: { calc.prettyAnimaLevel(character) }
+        Anima Level: { calc.prettyAnimaLevel(character) }
       </Typography>
     }
 

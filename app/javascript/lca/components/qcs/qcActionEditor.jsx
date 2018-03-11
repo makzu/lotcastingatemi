@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TextField from 'material-ui/TextField'
+
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
@@ -17,7 +19,7 @@ function ActionFields(props) {
     <TextField name="action" value={ action }
       label="Action" margin="dense"
       onChange={ onActionChange } onBlur={ onActionBlur }
-    />
+    />&nbsp; &nbsp;
     <RatingField trait="pool" value={ pool }
       label="Pool" min={ 1 } margin="dense"
       onChange={ onRatingChange }
@@ -92,12 +94,16 @@ class QcActionEditor extends React.Component {
     )
 
     return <div>
-      { actions }
+      <Typography variant="subheading">
+        Actions
 
-      <Button onClick={ onAdd }>
-        Add Action &nbsp;
-        <ContentAddCircle />
-      </Button>
+        <Button onClick={ onAdd }>
+          Add Action &nbsp;
+          <ContentAddCircle />
+        </Button>
+      </Typography>
+
+      { actions }
     </div>
   }
 }

@@ -40,17 +40,17 @@ class QcMeritEditor extends React.Component {
       />
     )
 
-    return <div>
+    return <div style={{ marginTop: '1em' }}>
       <Typography variant="subheading">
         Merits
+
+        <Button onClick={ handleAdd }>
+          Add Merit
+          <ContentAddCircle  />
+        </Button>
       </Typography>
 
       { qcMerits }
-
-      <Button variant="raised" onClick={ handleAdd }>
-        Add Merit
-        <ContentAddCircle  />
-      </Button>
     </div>
   }
 }

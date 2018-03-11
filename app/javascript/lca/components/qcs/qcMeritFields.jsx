@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Checkbox from 'material-ui/Checkbox'
+import Divider from 'material-ui/Divider'
 import { FormControlLabel } from 'material-ui/Form'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
@@ -30,8 +31,6 @@ export default class QcMeritFields extends React.Component {
 
   handleChange(e) {
     let { name, value } = e.target
-    if (name == 'tags')
-      value = value.split(',')
 
     this.setState({ merit: { ...this.state.merit, [name]: value }})
   }
@@ -61,9 +60,9 @@ export default class QcMeritFields extends React.Component {
   render() {
     const { merit } = this.state
 
-    return <div style={{ marginBottom: '0.5em' }}>
+    return <div style={{ marginBottom: '0.75em' }}>
       <TextField name="name" value={ merit.name }
-        label="Name"
+        label="Name" margin="dense"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
 
@@ -91,16 +90,18 @@ export default class QcMeritFields extends React.Component {
       <br />
 
       <TextField name="body" value={ merit.body }
-        label="Text"
+        label="Text" margin="dense"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
         fullWidth={ true } multiline
       />
       <br />
 
       <TextField name="ref" value={ merit.ref }
-        label="Reference"
+        label="Reference" margin="dense"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
       />
+
+      <Divider style={{ marginTop: '0.5em' }} />
     </div>
   }
 }

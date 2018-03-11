@@ -40,17 +40,17 @@ class QcCharmEditor extends React.Component {
       />
     )
 
-    return <div>
+    return <div style={{ marginTop: '1em' }}>
       <Typography variant="subheading">
         Charms
+
+        <Button onClick={ handleAdd }>
+          Add Charm
+          <ContentAddCircle  />
+        </Button>
       </Typography>
 
       { qcCharms }
-
-      <Button variant="raised" onClick={ handleAdd }>
-        Add Charm
-        <ContentAddCircle  />
-      </Button>
     </div>
   }
 }

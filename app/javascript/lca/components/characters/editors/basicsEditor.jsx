@@ -14,7 +14,7 @@ function BasicsEditor(props) {
   return <BlockPaper>
     <TextField name="name" value={ character.name }
       label="Name" margin="dense"
-      onChange={ onChange } onBlur={ onBlur } />
+      onChange={ onChange } onBlur={ onBlur } />&nbsp;&nbsp;
 
     <RatingField trait="essence" value={ character.essence }
       label="Essence" min={ ESSENCE_MIN } max={ ESSENCE_MAX }

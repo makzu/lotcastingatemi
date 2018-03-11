@@ -121,7 +121,7 @@ export class MeritFields extends React.Component {
         <TextField name="description" value={ merit.description }
           onChange={ handleChange } onBlur={ handleBlur }
           label="Description" margin="dense"
-          multiline style={{ width: '100%' }}
+          multiline style={{ width: '100%' }} rows={ 3 }
         />
       </div>
       <div>

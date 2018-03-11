@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Divider from 'material-ui/Divider'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import QcActionEditor from './qcActionEditor.jsx'
 import QcAttackEditor from './qcAttackEditor.jsx'
-import QcMeritEditor from './qcMeritEditor.jsx'
 import QcCharmEditor from './qcCharmEditor.jsx'
+import QcMeritEditor from './qcMeritEditor.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/ratingField.jsx'
@@ -74,7 +75,8 @@ class QcEditor extends React.Component {
     return <BlockPaper>
       <Typography paragraph variant="caption">
         Rules for Quick Characters can be found in the core book starting at
-        page 494.
+        page 494. Sample QCs are also available in the <em>Adversaries of the
+        Righteous</em> and <em>Hundred Devils Night Parade</em> supplements.
       </Typography>
 
       <Typography variant="subheading">
@@ -88,43 +90,45 @@ class QcEditor extends React.Component {
       <br />
 
       <TextField name="description" value={ qc.description }
-        label="Description" margin="dense" multiline
+        label="Description" margin="dense" multiline fullWidth
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <br />
 
-      <RatingField trait="essence" value={ qc.essence }
-        label="Essence" min={ 1 } max={ 10 } margin="dense" narrow
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="willpower_temporary" value={ qc.willpower_temporary }
-        label="Willpower" margin="dense" narrow
-        onChange={ handleRatingChange }
-      />
-      /
-      <RatingField trait="willpower_permanent" value={ qc.willpower_permanent }
-        label="" min={ 1 } max={ 10 } margin="dense" narrow
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
-        label="Personal" max={ qc.motes_personal_total } margin="dense" narrow
-        onChange={ handleRatingChange }
-      />
-      /
-      <RatingField trait="motes_personal_total" value={ qc.motes_personal_total }
-        label="Motes" margin="dense" narrow
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="motes_peripheral_current" value={ qc.motes_peripheral_current }
-        label="Peripheral" max={ qc.motes_peripheral_total } margin="dense" narrow
-        onChange={ handleRatingChange }
-      />
-      /
-      <RatingField trait="motes_peripheral_total" value={ qc.motes_peripheral_total }
-        label="Motes" margin="dense" narrow
-        onChange={ handleRatingChange }
-      />
-      <br />
+      <Typography>
+        <RatingField trait="essence" value={ qc.essence }
+          label="Essence" min={ 1 } max={ 10 } margin="dense" narrow
+          onChange={ handleRatingChange }
+        />
+        <RatingField trait="willpower_temporary" value={ qc.willpower_temporary }
+          label="Willpower" margin="dense" narrow
+          onChange={ handleRatingChange }
+        />
+        /
+        <RatingField trait="willpower_permanent" value={ qc.willpower_permanent }
+          label="" min={ 1 } max={ 10 } margin="dense" narrow
+          onChange={ handleRatingChange }
+        />
+        <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
+          label="Personal" max={ qc.motes_personal_total } margin="dense" narrow
+          onChange={ handleRatingChange }
+        />
+        /
+        <RatingField trait="motes_personal_total" value={ qc.motes_personal_total }
+          label="Motes" margin="dense" narrow
+          onChange={ handleRatingChange }
+        />
+        <RatingField trait="motes_peripheral_current" value={ qc.motes_peripheral_current }
+          label="Peripheral" max={ qc.motes_peripheral_total } margin="dense" narrow
+          onChange={ handleRatingChange }
+        />
+        /
+        <RatingField trait="motes_peripheral_total" value={ qc.motes_peripheral_total }
+          label="Motes" margin="dense" narrow
+          onChange={ handleRatingChange }
+        />
+      </Typography>
+
       <RatingField trait="health_level_0s" value={ qc.health_level_0s }
         label="-0 HLs" margin="dense"
         onChange={ handleRatingChange }
@@ -211,9 +215,6 @@ class QcEditor extends React.Component {
 
       <QcAttackEditor qc={ qc } />
 
-      <Typography variant="subheading">
-        Actions
-      </Typography>
       <QcActionEditor qc={ qc } onChange={ handleListChange } />
 
       <Typography variant="subheading">
@@ -222,6 +223,7 @@ class QcEditor extends React.Component {
       <IntimacyEditor character={ qc } characterType="qc"
         onChange={ handleRatingChange }
       />
+      <Divider style={{ marginTop: '0.5em' }} />
 
       <QcMeritEditor qc={ qc } />
 

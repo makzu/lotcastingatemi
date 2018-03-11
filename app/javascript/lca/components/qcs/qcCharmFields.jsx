@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Divider from 'material-ui/Divider'
 import IconButton from 'material-ui/IconButton'
-import TextField from 'material-ui/TextField'
 import { MenuItem } from 'material-ui/Menu'
-
+import TextField from 'material-ui/TextField'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 
 import RatingField from '../generic/ratingField.jsx'
@@ -54,7 +54,7 @@ export default class QcCharmFields extends React.Component {
     this.props.onCharmChange(charm.id, name, value)
   }
 
-  handleRemove(e) {
+  handleRemove() {
     this.props.onRemoveClick(this.state.charm.id)
   }
 
@@ -62,17 +62,17 @@ export default class QcCharmFields extends React.Component {
     const { charm } = this.state
     const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
 
-    return <div style={{ marginBottom: '0.5em' }}>
+    return <div style={{ marginBottom: '0.75em' }}>
       <TextField name="name" value={ charm.name }
-        label="Name"
+        label="Name" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
-      />
+      />&nbsp;&nbsp;
       <RatingField trait="min_essence" value={ charm.min_essence }
-        label="Essence"
+        label="Essence" margin="dense"
         onChange={ handleRatingChange }
       />
       <TextField name="cost" value={ charm.cost }
-        label="Cost"
+        label="Cost" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>
@@ -81,30 +81,34 @@ export default class QcCharmFields extends React.Component {
       <br />
 
       <TextField select name="timing" value={ charm.timing }
-        label="Type"
+        label="Type" margin="dense"
         onChange={ handleRatingChange }
       >
         <MenuItem key="simple" value="simple">Simple</MenuItem>
         <MenuItem key="supplemental" value="supplemental">Supplemental</MenuItem>
         <MenuItem key="reflexive" value="reflexive">Reflexive</MenuItem>
         <MenuItem key="permanant" value="permanant">Permanant</MenuItem>
-      </TextField>
+      </TextField>&nbsp;&nbsp;
+
       <TextField name="keywords" value={ charm.keywords }
-        label="Keywords"
+        label="Keywords (comma separated)" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
+        fullWidth
       />
       <br />
 
       <TextField name="body" value={ charm.body }
-        label="Text"
+        label="Text" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true } multiline
       />
       <br />
       <TextField name="ref" value={ charm.ref }
-        label="Reference"
+        label="Reference" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
+
+      <Divider style={{ marginTop: '0.5em' }} />
     </div>
   }
 }

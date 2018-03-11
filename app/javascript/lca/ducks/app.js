@@ -22,7 +22,7 @@ export default function AppReducer(state = defaultState, action) {
 
   case SWITCH_THEME:
     return { ...state,
-      theme: state.theme == 'light' ? 'dark' : 'light'
+      theme: action.theme,
     }
 
   default:
@@ -32,4 +32,4 @@ export default function AppReducer(state = defaultState, action) {
 
 export const toggleDrawer = () => ({ type: TOGGLE_DRAWER })
 export const closeDrawer  = () => ({ type: CLOSE_DRAWER  })
-export const switchTheme  = () => ({ type: SWITCH_THEME  })
+export const switchTheme  = (theme) => ({ type: SWITCH_THEME, theme: theme  })

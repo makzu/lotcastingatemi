@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 
+import { switchTheme } from '../ducks/actions.js'
+
 const themes = {
   light: createMuiTheme({
   }),
@@ -14,17 +16,38 @@ const themes = {
   })
 }
 
-function ThemeContainer(props) {
-  const { theme, children } = props
+class ThemeContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleStorageChange = this.handleStorageChange.bind(this)
+  }
+  componentDidMount() {
+    window.addEventListener('storage', this.handleStorageChange)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('storage', this.handleStorageChange)
+  }
 
-  return <MuiThemeProvider theme={ themes[theme] }>
-    { children }
-  </MuiThemeProvider>
+  handleStorageChange(e) {
+    if (e.key != 'theme')
+      return
+
+    this.props.switchTheme(e.newValue)
+  }
+
+  render() {
+    const { theme, children } = this.props
+
+    return <MuiThemeProvider theme={ themes[theme] }>
+      { children }
+    </MuiThemeProvider>
+  }
 }
 
 ThemeContainer.propTypes = {
   theme: PropTypes.string,
   children: PropTypes.node,
+  switchTheme: PropTypes.func,
 }
 
 function mapStateToProps(state) {
@@ -33,4 +56,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(ThemeContainer)
+function mapDispatchToProps(dispatch) {
+  return {
+    switchTheme: (theme) => dispatch(switchTheme(theme))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThemeContainer)

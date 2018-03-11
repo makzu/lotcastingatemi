@@ -62,7 +62,7 @@ export class NavPanel extends React.Component {
           <ListItemText primary={ `Current Theme: ${ theme }` }
           />
           <ListItemSecondaryAction>
-            <Switch checked={ theme == 'dark' } onChange={ switchTheme } />
+            <Switch checked={ theme == 'dark' } onChange={ () => switchTheme(theme == 'light' ? 'dark' : 'light') } />
           </ListItemSecondaryAction>
         </ListItem>
         <Divider />
@@ -104,7 +104,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     closeDrawer: () => dispatch(closeDrawer()),
-    switchTheme: () => dispatch(switchTheme()),
+    switchTheme: (theme) => dispatch(switchTheme(theme)),
   }
 }
 

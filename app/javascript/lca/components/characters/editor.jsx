@@ -11,6 +11,7 @@ import ArmorEditor from './editors/armorEditor.jsx'
 import AttributeEditor from './editors/attributeEditor.jsx'
 import BasicsEditor from './editors/basicsEditor.jsx'
 import CustomAbilityExaltEditor from './editors/customAbilityExaltEditor.jsx'
+import CustomAttributeExaltEditor from './editors/customAttributeExaltEditor.jsx'
 import HealthLevelEditor from './editors/healthLevelEditor.jsx'
 import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
@@ -109,6 +110,15 @@ class CharacterEditor extends React.Component {
         { character.type == 'CustomAbilityCharacter' &&
           <Grid item xs={ 12 } md={ 6 }>
             <CustomAbilityExaltEditor character={ character }
+              onChange={ handleChange } onBlur={ handleBlur }
+              onRatingChange={ handleRatingChange }
+              onCheck={ handleCheck }
+            />
+          </Grid>
+        }
+        { character.type == 'CustomAttributeCharacter' &&
+          <Grid item xs={ 12 } md={ 6 }>
+            <CustomAttributeExaltEditor character={ character }
               onChange={ handleChange } onBlur={ handleBlur }
               onRatingChange={ handleRatingChange }
               onCheck={ handleCheck }

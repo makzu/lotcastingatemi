@@ -49,6 +49,9 @@ function BattlegroupCard({ battlegroup, classes }) {
       { battlegroup.might > 0 &&
         <span>, Might { battlegroup.might }</span>
       }
+      { battlegroup.perfect_morale  &&
+        <span>, Perfect Morale</span>
+      }
     </Typography>
 
     <Typography paragraph>

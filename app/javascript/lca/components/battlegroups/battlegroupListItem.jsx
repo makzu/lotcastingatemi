@@ -37,6 +37,9 @@ function BattlegroupListItem(props) {
         { battlegroup.might > 0 &&
           <span>, Might { battlegroup.might }</span>
         }
+        { battlegroup.perfect_morale &&
+          <span>, Perfect Morale</span>
+        }
       </Typography>
 
       <Button component={ Link } to={ `/battlegroups/${battlegroup.id}` }>

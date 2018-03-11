@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
+import Checkbox from 'material-ui/Checkbox'
+import { FormControlLabel } from 'material-ui/Form'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
@@ -33,9 +35,11 @@ class BattlegroupEditor extends React.Component {
     this.state = {
       battlegroup: this.props.battlegroup,
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
+    this.handleCheck = this.handleCheck.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -64,6 +68,14 @@ class BattlegroupEditor extends React.Component {
     this.props.updateBattlegroup(this.state.battlegroup.id, name, value)
   }
 
+  handleCheck(e) {
+    const { name } = e.target
+    const value = !this.state.battlegroup[name]
+
+    this.setState({ battlegroup: { ...this.state.battlegroup, [name]: value }})
+    this.props.updateBattlegroup(this.state.battlegroup.id, name, value)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.battlegroup == undefined)
@@ -72,7 +84,7 @@ class BattlegroupEditor extends React.Component {
       </BlockPaper>
 
     const { battlegroup } = this.state
-    const { handleChange, handleBlur, handleRatingChange } = this
+    const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
     const { classes } = this.props
 
     return <BlockPaper>
@@ -147,6 +159,15 @@ class BattlegroupEditor extends React.Component {
         label="Might" max={ 3 } margin="dense"
         onChange={ handleRatingChange }
       />
+
+      <FormControlLabel
+        label="Perfect Morale"
+        control={
+          <Checkbox name="perfect_morale" checked={ battlegroup.perfect_morale }
+            onChange={ handleCheck }
+          />
+        }
+      />
       <br />
 
       <RatingField trait="resolve" value={ battlegroup.resolve }
@@ -212,7 +233,7 @@ class BattlegroupEditor extends React.Component {
   }
 }
 BattlegroupEditor.propTypes = {
-  battlegroup: PropTypes.object.isRequired,
+  battlegroup: PropTypes.object,
   attacks: PropTypes.arrayOf(PropTypes.object),
   classes: PropTypes.object,
   updateBattlegroup: PropTypes.func,

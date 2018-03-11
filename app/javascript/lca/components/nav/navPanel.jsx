@@ -58,7 +58,7 @@ export class NavPanel extends React.Component {
           <ListItemText primary="Resources" />
         </ListItem>
 
-        <ListItem button onClick={ this.props.switchTheme }>
+        <ListItem button onClick={ () => switchTheme(theme == 'light' ? 'dark' : 'light') }>
           <ListItemText primary={ `Current Theme: ${ theme }` }
           />
           <ListItemSecondaryAction>

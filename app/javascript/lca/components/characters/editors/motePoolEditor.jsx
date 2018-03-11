@@ -77,12 +77,12 @@ function MotePoolEditor(props) {
       </div>
     ] }
 
-    <div>
+    { character.is_sorcerer && <div>
       <RatingField trait="sorcerous_motes" value={ character.sorcerous_motes }
         label="Sorcerous" margin="dense"
         onChange={ onRatingChange }
       />
-    </div>
+    </div> }
   </BlockPaper>
 
 }

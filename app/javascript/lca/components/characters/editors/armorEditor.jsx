@@ -24,11 +24,13 @@ function ArmorEditor(props) {
       name="armor_name" value={ character.armor_name }
       onChange={ onChange } onBlur={ onBlur }
     />
+    <br />
 
     <WeightSelect armor name="armor_weight" value={ character.armor_weight }
       onChange={ onRatingChange }
       margin="dense"
     />
+    <br />
 
     <FormControlLabel
       label="Artifact"
@@ -38,7 +40,6 @@ function ArmorEditor(props) {
         />
       }
     />
-
     <br />
 
     <TextField name="armor_tags" value={ character.armor_tags }

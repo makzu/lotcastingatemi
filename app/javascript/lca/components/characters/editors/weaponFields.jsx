@@ -150,7 +150,7 @@ class WeaponFields extends React.Component {
         <div className={ classes.fieldContainer }>
           { secondLine }
         </div>
-        <Divider />
+        <Divider style={{ marginBottom: '1em' }}/>
       </Hidden>
     </Fragment>
   }

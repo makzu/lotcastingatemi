@@ -25,8 +25,8 @@ import RatingLine from '../generic/ratingLine.jsx'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
 import { prettyFullExaltType, prettyAnimaLevel } from '../../utils/calculated'
 
-export function IntimacySummary(props) {
-  const principles = props.character.principles.map((p, index) =>
+export function IntimacySummary({ character }) {
+  const principles = character.principles.map((p, index) =>
     <Typography key={ index } component="div">
       <RatingLine rating={ p.rating } fillTo={ 3 }>
         { p.subject }
@@ -34,7 +34,7 @@ export function IntimacySummary(props) {
       <Divider />
     </Typography>
   )
-  const ties = props.character.ties.map((p, index) =>
+  const ties = character.ties.map((p, index) =>
     <Typography key={ index } component="div">
       <RatingLine rating={ p.rating } fillTo={ 3 }>
         { p.subject }
@@ -59,9 +59,7 @@ IntimacySummary.propTypes = {
   character: PropTypes.shape(withIntimacies),
 }
 
-export function WillpowerBlock(props) {
-  const { character } = props
-
+export function WillpowerBlock({ character }) {
   return <BlockPaper>
     <Typography variant="title">
       Willpower
@@ -83,8 +81,7 @@ WillpowerBlock.propTypes = {
   character: PropTypes.shape(withWillpower),
 }
 
-export function MotePoolBlock(props) {
-  const { character } = props
+export function MotePoolBlock({ character }) {
   return <BlockPaper>
     <Typography variant="title">
       Mote Pool
@@ -114,9 +111,7 @@ MotePoolBlock.propTypes = {
   character: PropTypes.shape(fullChar),
 }
 
-export function LimitTrackBlock(props) {
-  const { character } = props
-
+export function LimitTrackBlock({ character }) {
   return <BlockPaper>
     <Typography variant="title">
       Limit
@@ -134,19 +129,26 @@ LimitTrackBlock.propTypes = {
   character: PropTypes.object,
 }
 
-export function CraftBlock(props) {
-  const { character } = props
+export function SorceryBlock({ character }) {
   return <BlockPaper>
     <Typography variant="title">
-      Crafting
+      Sorcery
+    </Typography>
+
+    <Typography paragraph>
+      Sorcerous Motes: { character.sorcerous_motes }
     </Typography>
 
     <Typography>
-      Craft XP: { character.xp_craft_silver } silver, { character.xp_craft_gold } gold, { character.xp_craft_white } white
+      Shaping Rituals:
+    </Typography>
+
+    <Typography>
+      { character.shaping_rituals }
     </Typography>
   </BlockPaper>
 }
-CraftBlock.propTypes = {
+SorceryBlock.propTypes = {
   character: PropTypes.object,
 }
 
@@ -274,6 +276,12 @@ export class CharacterSheet extends React.Component {
         { character.limit != undefined &&
           <Grid item xs={ 12 } md={ 2 }>
             <LimitTrackBlock character={ character } />
+          </Grid>
+        }
+
+        { character.is_sorcerer &&
+          <Grid item xs={ 12 } md={ 2 }>
+            <SorceryBlock character={ character } />
           </Grid>
         }
 

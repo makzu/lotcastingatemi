@@ -3,12 +3,19 @@
 # Generic Charms for Custom Attribute Exalts
 class CustomAttributeCharm < Charm
   include Constants
+  attribute :min_ability, :integer, default: 1
+  attribute :ability,     :string,  default: ''
+
   alias_attribute :attr, :ability
   alias_attribute :min_attr, :min_ability
 
-  attribute :min_attr, :integer, default: 1
+  validates :min_ability, one_thru_five_stat: true
 
-  validates :min_attr, one_thru_five_stat: true
+  validates :ability, inclusion: { in: Constants::ATTRIBUTES }, unless: :ability_blank?
 
-  validates :attr, inclusion: { in: Constants::ATTRIBUTES }
+  private
+
+  def ability_blank?
+    ability.blank?
+  end
 end

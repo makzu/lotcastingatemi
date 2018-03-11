@@ -6,10 +6,11 @@ module AbilityCharm
   include Constants
 
   included do
+    attribute :ability,     :string,  default: ''
+    attribute :min_ability, :integer, default: 1
+
     validates :ability, inclusion: { in: Constants::ABILITIES }, unless: :ability_blank?
     validates :min_ability, one_thru_five_stat: true
-
-    attribute :min_ability, :integer, default: 1
 
     private
 

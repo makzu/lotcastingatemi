@@ -23,6 +23,7 @@ class SolarCharacter < Character
   }.freeze
 
   before_validation :set_mote_pool_totals
+  before_validation :set_exalt_type
 
   # TODO: re-enable these validations once they can be refactored to not throw
   #  errors on new, empty SolarCharacters
@@ -43,6 +44,10 @@ class SolarCharacter < Character
 
     self.motes_personal_total   = (essence * 3) + 10
     self.motes_peripheral_total = (essence * 7) + 26
+  end
+
+  def set_exalt_type
+    self.exalt_type = 'Solar'
   end
 
   def abils_are_blank?

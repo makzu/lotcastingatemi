@@ -9,4 +9,8 @@ class Charm < ApplicationRecord
   def entity_type
     'charm'
   end
+
+  def entity_assoc
+    'charm'
+  end
 end

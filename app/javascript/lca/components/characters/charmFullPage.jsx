@@ -98,7 +98,7 @@ class CharmFullPage extends React.Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { character, nativeCharms, martialArtsCharms, evocations } = this.props
+    const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms } = this.props
 
     const natives = nativeCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
@@ -111,6 +111,11 @@ class CharmFullPage extends React.Component {
       </Grid>
     )
     const evo = evocations.map((c) =>
+      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+        <SingleCharm charm={ c } character={ character } />
+      </Grid>
+    )
+    const spirit = spiritCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SingleCharm charm={ c } character={ character } />
       </Grid>
@@ -137,6 +142,13 @@ class CharmFullPage extends React.Component {
         }
         { evo }
 
+        { spirit.length > 0 &&
+          <Grid item xs={ 12 }>
+            <Typography variant="headline">Spirit Charms</Typography>
+          </Grid>
+        }
+        { spirit }
+
         <Grid item xs={ 12 }>
           <Typography variant="headline">Spells</Typography>
         </Grid>
@@ -149,6 +161,7 @@ CharmFullPage.propTypes = {
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
+  spiritCharms: PropTypes.arrayOf(PropTypes.object),
 }
 
 function mapStateToProps(state, ownProps) {
@@ -158,6 +171,7 @@ function mapStateToProps(state, ownProps) {
   let martialArtsCharms = []
   let evocations = []
   let artifacts = []
+  let spiritCharms = []
   let spells = []
 
   if ( character.charms != undefined) {
@@ -175,6 +189,9 @@ function mapStateToProps(state, ownProps) {
   if (character.spells != undefined) {
     spells = character.spells.map((id) => state.entities.spells[id])
   }
+  if (character.spirit_charms != undefined) {
+    spiritCharms = character.spirit_charms.map((id) => state.entities.charms[id])
+  }
 
   return {
     character,
@@ -183,6 +200,7 @@ function mapStateToProps(state, ownProps) {
     evocations,
     artifacts,
     spells,
+    spiritCharms,
   }
 }
 

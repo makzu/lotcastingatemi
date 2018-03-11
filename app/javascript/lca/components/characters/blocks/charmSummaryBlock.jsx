@@ -31,7 +31,7 @@ SingleCharm.propTypes = {
 }
 
 function CharmSummaryBlock(props) {
-  const { character, nativeCharms, martialArtsCharms, evocations } = props
+  const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms } = props
 
   // Mortals don't need Charms displayed
   if (character.type == 'Character' ) {
@@ -47,6 +47,9 @@ function CharmSummaryBlock(props) {
   const evo = evocations.map((c) =>
     <SingleCharm key={ c.id } charm={ c } character={ character } />
   )
+  const spirit = spiritCharms.map((c) =>
+    <SingleCharm key={ c.id } charm={ c } character={ character } />
+  )
 
 
   return <BlockPaper>
@@ -55,7 +58,8 @@ function CharmSummaryBlock(props) {
     </Typography>
     { natives }
     { maCharms }
-    { evocations.length > 0 && evo }
+    { evo }
+    { spirit }
   </BlockPaper>
 }
 CharmSummaryBlock.propTypes = {
@@ -63,6 +67,7 @@ CharmSummaryBlock.propTypes = {
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
+  spiritCharms: PropTypes.arrayOf(PropTypes.object),
 }
 
 function mapStateToProps(state, ownProps) {
@@ -70,6 +75,7 @@ function mapStateToProps(state, ownProps) {
   let evocations = []
   let martialArtsCharms = []
   let nativeCharms = []
+  let spiritCharms = []
 
   if (character.charms != undefined) {
     nativeCharms = character.charms.map((id) => state.entities.charms[id])
@@ -80,11 +86,15 @@ function mapStateToProps(state, ownProps) {
   if (character.martial_arts_charms != undefined) {
     martialArtsCharms = character.martial_arts_charms.map((id) => state.entities.charms[id])
   }
+  if (character.spirit_charms != undefined) {
+    spiritCharms = character.spirit_charms.map((id) => state.entities.charms[id])
+  }
 
   return {
     nativeCharms,
     martialArtsCharms,
     evocations,
+    spiritCharms
   }
 }
 

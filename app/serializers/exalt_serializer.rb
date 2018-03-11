@@ -10,4 +10,5 @@ class ExaltSerializer < CharacterSerializer
   has_many :charms
   has_many :martial_arts_charms
   has_many :evocations
+  has_many :spirit_charms
 end

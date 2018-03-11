@@ -11,6 +11,7 @@ export const character = new schema.Entity('characters', {
   charms: [ charm ],
   martial_arts_charms: [ charm ],
   evocations: [ charm ],
+  spirit_charms: [ charm ],
 })
 
 export const qc_merit = new schema.Entity('qcMerits')

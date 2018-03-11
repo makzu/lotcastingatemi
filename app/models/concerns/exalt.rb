@@ -9,6 +9,7 @@ module Exalt
 
     has_many :evocations,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
     has_many :martial_arts_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+    has_many :spirit_charms,       foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
 
     attribute :limit,         :integer, default: 0
     attribute :limit_trigger, :string,  default: ''

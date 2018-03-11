@@ -201,6 +201,7 @@ class CharmEditor extends React.Component {
     this.handleAddNative = this.handleAddNative.bind(this)
     this.handleAddMA = this.handleAddMA.bind(this)
     this.handleAddEvocation = this.handleAddEvocation.bind(this)
+    this.handleAddSpirit = this.handleAddSpirit.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.handleUpdateSpell = this.handleUpdateSpell.bind(this)
     this.handleAddSpell = this.handleAddSpell.bind(this)
@@ -241,6 +242,10 @@ class CharmEditor extends React.Component {
     this.props._handleCreate(this.props.character.id, 'Evocation')
   }
 
+  handleAddSpirit() {
+    this.props._handleCreate(this.props.character.id, 'SpiritCharm')
+  }
+
   handleAddSpell() {
     this.props._handleCreateSpell(this.props.character.id)
   }
@@ -260,15 +265,16 @@ class CharmEditor extends React.Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { character, nativeCharms, martialArtsCharms, evocations, spells } = this.props
+    const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms, spells } = this.props
     const {
       handleUpdate, handleRemove, handleUpdateSpell, handleRemoveSpell,
-      handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell
+      handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell, handleAddSpirit
     } = this
 
     let natives = []
     let maCharms = []
     let evo = []
+    let spirit = []
     let spl = []
     natives = nativeCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
@@ -291,6 +297,13 @@ class CharmEditor extends React.Component {
         />
       </Grid>
     )
+    spirit = spiritCharms.map((c) =>
+      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+        <SingleCharmEditor charm={ c } character={ character }
+          onUpdate={ handleUpdate } onRemove={ handleRemove }
+        />
+      </Grid>
+    )
     spl = spells.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SpellEditorBlock spell={ c } character={ character }
@@ -306,7 +319,7 @@ class CharmEditor extends React.Component {
         </Grid>
         <Grid item xs={ 2 }>
           <Button onClick={ handleAddNative }>
-            <ContentAddCircle /> Add Native Charm
+            <ContentAddCircle /> Add Charm
           </Button>
         </Grid>
         { natives }
@@ -332,6 +345,16 @@ class CharmEditor extends React.Component {
         { evo }
 
         <Grid item xs={ 10 }>
+          <Typography variant="headline">Spirit Charms</Typography>
+        </Grid>
+        <Grid item xs={ 2 }>
+          <Button onClick={ handleAddSpirit }>
+            <ContentAddCircle /> Add Spirit Charm
+          </Button>
+        </Grid>
+        { spirit }
+
+        <Grid item xs={ 10 }>
           <Typography variant="headline">Spells</Typography>
         </Grid>
         <Grid item xs={ 2 }>
@@ -351,6 +374,7 @@ CharmEditor.propTypes = {
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
   spells: PropTypes.arrayOf(PropTypes.object),
+  spiritCharms: PropTypes.arrayOf(PropTypes.object),
   _handleCreate: PropTypes.func,
   _handleUpdate: PropTypes.func,
   _handleDestroy: PropTypes.func,
@@ -367,6 +391,7 @@ function mapStateToProps(state, ownProps) {
   let evocations = []
   let artifacts = []
   let spells = []
+  let spiritCharms = []
 
   if (character.charms != undefined) {
     nativeCharms = character.charms.map((id) => state.entities.charms[id])
@@ -384,6 +409,9 @@ function mapStateToProps(state, ownProps) {
   if (character.spells != undefined) {
     spells = character.spells.map((id) => state.entities.spells[id])
   }
+  if (character.spirit_charms != undefined) {
+    spiritCharms = character.spirit_charms.map((id) => state.entities.charms[id])
+  }
 
   return {
     character,
@@ -392,6 +420,7 @@ function mapStateToProps(state, ownProps) {
     evocations,
     artifacts,
     spells,
+    spiritCharms,
   }
 }
 function mapDispatchToProps(dispatch) {

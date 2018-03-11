@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 
 import AttributeLine from './attributeLine.jsx'
 
-function AttributeBlockMental(props) {
-  const { character } = props
+function AttributeBlockMental({ character }) {
   return <div>
-    <AttributeLine attribute="Perception"   rating={ character.attr_perception }   />
-    <AttributeLine attribute="Intelligence" rating={ character.attr_intelligence } />
-    <AttributeLine attribute="Wits"         rating={ character.attr_wits }         />
+    <AttributeLine attribute="perception"   rating={ character.attr_perception }   character={ character } />
+    <AttributeLine attribute="intelligence" rating={ character.attr_intelligence } character={ character } />
+    <AttributeLine attribute="wits"         rating={ character.attr_wits }         character={ character } />
   </div>
 }
 

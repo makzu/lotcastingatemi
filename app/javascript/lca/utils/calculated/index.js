@@ -211,3 +211,11 @@ export function isSupernalAbility(character, ability) {
 export function isFavoredAbility(character, ability) {
   return character.favored_abilities && includes(character.favored_abilities, ability)
 }
+
+export function isCasteAttribute(character, attribute) {
+  return character.caste_attributes && includes(character.caste_attributes, attribute)
+}
+
+export function isFavoredAttribute(character, attribute) {
+  return character.favored_attributes && includes(character.favored_attributes, attribute)
+}

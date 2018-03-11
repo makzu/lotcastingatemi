@@ -17,16 +17,16 @@ const styles = theme => ({
 })
 
 function _AbilityLine(props) {
-  const { classes } = props
-  const rating = props.rating != undefined ? props.rating : props.character[`abil_${props.ability}`]
-  const supernal = isSupernalAbility(props.character, props.ability)
-  const caste = isCasteAbility(props.character, props.ability)
-  const favored = isFavoredAbility(props.character, props.ability)
+  const { classes, character, ability } = props
+  const rating = props.rating != undefined ? props.rating : character[`abil_${ability}`]
+  const supernal = isSupernalAbility(character, ability)
+  const caste = isCasteAbility(character, ability)
+  const favored = isFavoredAbility(character, ability)
 
   return <div>
     <RatingLine rating={ rating }>
       <span className={ classes.abilityName }>
-        { props.ability }
+        { ability }
       </span>
       <span className={ classes.abilityFavored }>
         { supernal && ' (s)' }
@@ -46,15 +46,15 @@ _AbilityLine.propTypes = {
 const AbilityLine = withStyles(styles)(_AbilityLine)
 
 function _CraftAbilityLine(props) {
-  const { classes } = props
-  const supernal = isSupernalAbility(props.character, 'craft')
-  const caste = isCasteAbility(props.character, 'craft')
-  const favored = isFavoredAbility(props.character, 'craft')
+  const { classes, character } = props
+  const supernal = isSupernalAbility(character, 'craft')
+  const caste = isCasteAbility(character, 'craft')
+  const favored = isFavoredAbility(character, 'craft')
 
   return <div>
     <RatingLine rating={ props.rating }>
       <span className={ classes.abilityName }>
-        Craft ({ props.context }):
+        Craft ({ props.context })
       </span>
       <span className={ classes.abilityFavored }>
         { supernal && ' (s)' }
@@ -75,15 +75,15 @@ _CraftAbilityLine.propTypes = {
 const CraftAbilityLine = withStyles(styles)(_CraftAbilityLine)
 
 function _MartialArtsAbilityLine(props) {
-  const { classes } = props
-  const supernal = isSupernalAbility(props.character, 'brawl')
-  const caste = isCasteAbility(props.character, 'brawl')
-  const favored = isFavoredAbility(props.character, 'brawl')
+  const { classes, character } = props
+  const supernal = isSupernalAbility(character, 'brawl')
+  const caste = isCasteAbility(character, 'brawl')
+  const favored = isFavoredAbility(character, 'brawl')
 
   return <div>
     <RatingLine rating={ props.rating }>
       <span className={ classes.abilityName }>
-        Martial Arts ({ props.style }):
+        Martial Arts ({ props.style })
       </span>
       <span className={ classes.abilityFavored }>
         { supernal && ' (s)' }

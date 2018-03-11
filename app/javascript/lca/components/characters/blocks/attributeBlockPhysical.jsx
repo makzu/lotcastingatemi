@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 
 import AttributeLine from './attributeLine.jsx'
 
-function AttributeBlockPhysical(props) {
-  const { character } = props
+function AttributeBlockPhysical({ character }) {
   return <div>
-    <AttributeLine attribute="Strength"  rating={ character.attr_strength }  />
-    <AttributeLine attribute="Dexterity" rating={ character.attr_dexterity } />
-    <AttributeLine attribute="Stamina"   rating={ character.attr_stamina }   />
+    <AttributeLine attribute="strength"  rating={ character.attr_strength }  character={ character } />
+    <AttributeLine attribute="dexterity" rating={ character.attr_dexterity } character={ character } />
+    <AttributeLine attribute="stamina"   rating={ character.attr_stamina }   character={ character } />
   </div>
 }
 

@@ -5,19 +5,29 @@ import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 
 import RatingLine from '../../generic/ratingLine.jsx'
+import { isCasteAttribute, isFavoredAttribute } from '../../../utils/calculated'
 
 const styles = theme => ({
   attributeName: { ...theme.typography.body1,
     textTransform: 'capitalize',
   },
+  attributeFavored: { ...theme.typography.caption,
+  },
 })
 
 function AttributeLine(props) {
-  const { classes } = props
+  const { rating, attribute, character, classes } = props
+  const caste = isCasteAttribute(character, attribute)
+  const favored = isFavoredAttribute(character, attribute)
+
   return <div>
-    <RatingLine rating={ props.rating }>
+    <RatingLine rating={ rating }>
       <span className={ classes.attributeName }>
-        { props.attribute }
+        { attribute }
+      </span>
+      <span className={ classes.attributeFavored }>
+        { caste && ' (c)' }
+        { favored && ' (f)' }
       </span>
     </RatingLine>
 
@@ -28,6 +38,7 @@ function AttributeLine(props) {
 AttributeLine.propTypes = {
   attribute: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  character: PropTypes.object,
   classes: PropTypes.object,
 }
 

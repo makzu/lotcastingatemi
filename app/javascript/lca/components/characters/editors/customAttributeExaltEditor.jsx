@@ -22,7 +22,7 @@ function CustomAttributeExaltEditor(props) {
     <Typography>
       <TextField name="caste" value={ character.caste }
         label={ character.aspect ? 'Aspect' : 'Caste' } onChange={ onChange } onBlur={ onBlur } margin="dense"
-      />&nbsp;
+      />&nbsp;&nbsp;
       <TextField name="exalt_type" value={ character.exalt_type }
         label="Type" onChange={ onChange } onBlur={ onBlur } margin="dense"
       /><br />

@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography'
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 
-function CustomAbilityExaltEditor(props) {
+function CustomEssenceExaltEditor(props) {
   const { character, onChange, onBlur, onCheck, onRatingChange } = props
 
   // Mortals don't have 'exalt traits'
@@ -25,6 +25,7 @@ function CustomAbilityExaltEditor(props) {
       <TextField name="exalt_type" value={ character.exalt_type }
         label="Type" onChange={ onChange } onBlur={ onBlur } margin="dense"
       /><br />
+
       Has Castes&nbsp;&nbsp;&nbsp;
       <FormControlLabel
         control={
@@ -34,14 +35,6 @@ function CustomAbilityExaltEditor(props) {
       />
     </Typography>
 
-
-    <AbilitySelect name="caste_abilities"
-      label="Caste Abilities"
-      value={ character.caste_abilities }
-      onChange={ onRatingChange }
-      multiple fullWidth margin="dense"
-    />
-    <br />
     <AbilitySelect name="favored_abilities"
       label="Favored Abilities"
       value={ character.favored_abilities }
@@ -50,7 +43,7 @@ function CustomAbilityExaltEditor(props) {
     />
   </BlockPaper>
 }
-CustomAbilityExaltEditor.propTypes = {
+CustomEssenceExaltEditor.propTypes = {
   character: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
@@ -58,4 +51,4 @@ CustomAbilityExaltEditor.propTypes = {
   onCheck: PropTypes.func.isRequired,
 }
 
-export default CustomAbilityExaltEditor
+export default CustomEssenceExaltEditor

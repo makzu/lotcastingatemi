@@ -28,7 +28,7 @@ function SolarExaltEditor(props) {
       <MenuItem value="night">Night</MenuItem>
       <MenuItem value="eclipse">Eclipse</MenuItem>
     </TextField>
-    &nbsp;
+    &nbsp;&nbsp;
 
     <AbilitySelect name="supernal_ability"
       label="Supernal Ability"

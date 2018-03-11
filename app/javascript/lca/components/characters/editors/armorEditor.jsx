@@ -22,7 +22,7 @@ function ArmorEditor(props) {
 
     <TextField label="Name" margin="dense"
       name="armor_name" value={ character.armor_name }
-      onChange={ onChange } onBlur={ onBlur }
+      onChange={ onChange } onBlur={ onBlur } fullWidth
     />
     <br />
 
@@ -43,7 +43,7 @@ function ArmorEditor(props) {
     <br />
 
     <TextField name="armor_tags" value={ character.armor_tags }
-      label="Tags (comma separated)" margin="dense"
+      label="Tags (comma separated)" margin="dense" fullWidth
       onChange={ onChange } onBlur={ onBlur }
     />
 

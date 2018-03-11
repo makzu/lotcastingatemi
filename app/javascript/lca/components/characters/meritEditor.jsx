@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
-import Grid from 'material-ui/Grid'
+import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
+import Grid from 'material-ui/Grid'
+import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
-import { MenuItem } from 'material-ui/Menu'
-import Checkbox from 'material-ui/Checkbox'
+import ContentAddCircle from 'material-ui-icons/AddCircle'
+import Delete from 'material-ui-icons/Delete'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/ratingField.jsx'
@@ -78,8 +78,8 @@ export class MeritFields extends React.Component {
       <Button onClick={ this.handleRemove }
         style={{ float: 'right' }}
       >
-        Delete
-        <ContentRemoveCircle />
+        Delete&nbsp;
+        <Delete />
       </Button>
 
       <TextField name="merit_name" value={ merit.merit_name }
@@ -184,16 +184,15 @@ class MeritEditor extends React.Component {
 
     return <div>
       <Grid container spacing={ 24 }>
-        <Grid item xs={ 10 }>
+        <Grid item xs={ 12 }>
           <Typography variant="headline">
             Merits
+            &nbsp;&nbsp;
+            <Button onClick={ handleAdd }>
+              Add Merit&nbsp;
+              <ContentAddCircle />
+            </Button>
           </Typography>
-        </Grid>
-        <Grid item xs={ 2 }>
-          <Button onClick={ handleAdd }>
-            Add Merit
-            <ContentAddCircle />
-          </Button>
         </Grid>
         { mts }
       </Grid>

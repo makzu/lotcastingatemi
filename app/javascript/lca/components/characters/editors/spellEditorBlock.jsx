@@ -7,7 +7,7 @@ import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import Delete from 'material-ui-icons/Delete'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
 
@@ -38,6 +38,8 @@ class SpellEditorBlock extends React.Component {
 
   handleChange(e) {
     let { name, value } = e.target
+    if (name == 'keywords')
+      value = value.split(',')
 
     this.setState({ spell: { ...this.state.spell, [name]: value }})
   }
@@ -78,8 +80,8 @@ class SpellEditorBlock extends React.Component {
 
     return <BlockPaper>
       <Button onClick={ handleRemove } style={{ float: 'right' }}>
-       Remove
-        <ContentRemoveCircle />
+       Delete&nbsp;
+        <Delete />
       </Button>
 
       <TextField name="name" value={ spell.name }
@@ -124,7 +126,7 @@ class SpellEditorBlock extends React.Component {
       <TextField name="keywords" value={ spell.keywords }
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Keywords" margin="dense"
+        label="Keywords (comma separated)" margin="dense"
       />
       <br />
 

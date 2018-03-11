@@ -7,8 +7,8 @@ import Grid from 'material-ui/Grid'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
+import Delete from 'material-ui-icons/Delete'
 
 import AbilitySelect from '../generic/abilitySelect.jsx'
 import AttributeSelect from '../generic/attributeSelect.jsx'
@@ -77,8 +77,8 @@ class SingleCharmEditor extends React.Component {
 
     return <BlockPaper>
       <Button onClick={ handleRemove } style={{ float: 'right' }}>
-        Remove
-        <ContentRemoveCircle />
+        Delete&nbsp;
+        <Delete />
       </Button>
 
       <TextField name="name" value={ charm.name }
@@ -160,7 +160,7 @@ class SingleCharmEditor extends React.Component {
       <TextField name="keywords" value={ charm.keywords }
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Keywords" margin="dense"
+        label="Keywords (comma separated)" margin="dense"
       />
       <br />
 
@@ -227,6 +227,9 @@ class CharmEditor extends React.Component {
       break
     case 'CustomAttributeCharacter':
       type = 'CustomAttributeCharm'
+      break
+    case 'CustomEssenceCharacter':
+      type = 'CustomEssenceCharm'
       break
     default:
       type = ''
@@ -314,53 +317,68 @@ class CharmEditor extends React.Component {
 
     return <div>
       <Grid container spacing={ 24 }>
-        <Grid item xs={ 10 }>
-          <Typography variant="headline">Charms</Typography>
-        </Grid>
-        <Grid item xs={ 2 }>
-          <Button onClick={ handleAddNative }>
-            <ContentAddCircle /> Add Charm
-          </Button>
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">
+            Charms
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddNative }>
+              Add Charm&nbsp;
+              <ContentAddCircle />
+            </Button>
+          </Typography>
         </Grid>
         { natives }
 
-        <Grid item xs={ 10 }>
-          <Typography variant="headline">Martial Arts</Typography>
-        </Grid>
-        <Grid item xs={ 2 }>
-          <Button onClick={ handleAddMA }>
-            <ContentAddCircle /> Add MA Charm
-          </Button>
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">
+            Martial Arts
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddMA }>
+              Add MA Charm&nbsp;
+              <ContentAddCircle />
+            </Button>
+          </Typography>
         </Grid>
         { maCharms }
 
-        <Grid item xs={ 10 }>
-          <Typography variant="headline">Evocations</Typography>
-        </Grid>
-        <Grid item xs={ 2 }>
-          <Button onClick={ handleAddEvocation }>
-            <ContentAddCircle /> Add Evocation
-          </Button>
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">
+            Evocations
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddEvocation }>
+              Add Evocation&nbsp;
+              <ContentAddCircle />
+            </Button>
+          </Typography>
         </Grid>
         { evo }
 
-        <Grid item xs={ 10 }>
-          <Typography variant="headline">Spirit Charms</Typography>
-        </Grid>
-        <Grid item xs={ 2 }>
-          <Button onClick={ handleAddSpirit }>
-            <ContentAddCircle /> Add Spirit Charm
-          </Button>
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">
+            Spirit Charms
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddSpirit }>
+              Add Spirit Charm&nbsp;
+              <ContentAddCircle />
+            </Button>
+          </Typography>
         </Grid>
         { spirit }
 
-        <Grid item xs={ 10 }>
-          <Typography variant="headline">Spells</Typography>
-        </Grid>
-        <Grid item xs={ 2 }>
-          <Button onClick={ handleAddSpell }>
-            <ContentAddCircle /> Add Spell
-          </Button>
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">
+            Spells
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddSpell }>
+              Add Spell&nbsp;
+              <ContentAddCircle />
+            </Button>
+          </Typography>
         </Grid>
         { spl }
 

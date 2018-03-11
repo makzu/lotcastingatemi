@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import Button from 'material-ui/Button'
 import Divider from 'material-ui/Divider'
 import Grid from 'material-ui/Grid'
 import Hidden from 'material-ui/Hidden'
 import Typography from 'material-ui/Typography'
+import Launch from 'material-ui-icons/Launch'
 
 import AbilityBlock from './blocks/abilityBlock.jsx'
 import ArmorSummary from './blocks/armorSummary.jsx'
@@ -223,9 +223,12 @@ export class CharacterSheet extends React.Component {
 
             <Grid item xs={ 12 } md={ 7 }>
               <BlockPaper>
-                <Typography variant="title">
-                  Merits
-                  <Button component={ Link } to={ `/characters/${character.id}/merits` }>Full</Button>
+                <Typography variant="title"
+                  component={ Link } to={ `/characters/${character.id}/merits` }
+                  style={{ textDecoration: 'none' }}
+                >
+                  Merits&nbsp;&nbsp;
+                  <Launch style={{ verticalAlign: 'bottom', }} />
                 </Typography>
 
                 <MeritSummaryBlock character={ character } merits={ merits } />

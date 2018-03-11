@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
+import Launch from 'material-ui-icons/Launch'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
 import { fullChar } from '../../../utils/propTypes'
@@ -77,8 +78,12 @@ function CharmSummaryBlock(props) {
 
 
   return <BlockPaper>
-    <Typography variant="title" gutterBottom>
-      <Link to={ `/characters/${character.id}/charms` }>Charms</Link>
+    <Typography variant="title" gutterBottom
+      component={ Link } to={ `/characters/${character.id}/charms` }
+      style={{ textDecoration: 'none', }}
+    >
+      Charms&nbsp;&nbsp;
+      <Launch style={{ verticalAlign: 'bottom' }} />
     </Typography>
     { natives }
     { maCharms }

@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { Link } from 'react-router-dom'
 
-import Paper from 'material-ui/Paper'
-import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
+import Launch from 'material-ui-icons/Launch'
+import ModeEdit from 'material-ui-icons/ModeEdit'
 
+import DeleteButton from '../generic/deleteButton'
 import HideButton from '../generic/hideButton'
 import PinButton from '../generic/pinButton.jsx'
 import { fullQc } from '../../utils/propTypes'
@@ -16,27 +18,34 @@ const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
-  })
+  }),
+  qcName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing.unit,
+  },
 })
 
-function QcListItem(props) {
-  const { qc, classes } = props
-
+function QcListItem({ qc, classes }) {
   return <div>
     <Paper className={ classes.root }>
-      <Typography variant="title">
+      <Typography variant="title" className={ classes.qcName }
+        component={ Link } to={ `/qcs/${qc.id}` }
+      >
         { qc.name }
-
-        <HideButton characterType="qcs" id={ qc.id } />
-        <PinButton characterType="qcs" id={ qc.id } />
+        <Launch className={ classes.icon } />
       </Typography>
 
-      <Button component={ Link } to={ `/qcs/${qc.id}` }>
-        Full Sheet
-      </Button>
       <Button component={ Link } to={ `/qcs/${qc.id}/edit` }>
         Edit
+        <ModeEdit />
       </Button>
+
+      <HideButton characterType="qcs" id={ qc.id } />
+      <PinButton characterType="qcs" id={ qc.id } />
+      <DeleteButton characterType="qcs" id={ qc.id } />
     </Paper>
   </div>
 }

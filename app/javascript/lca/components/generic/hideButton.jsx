@@ -25,7 +25,6 @@ function HideButton(props) {
   if (props.isHidden) {
     return <Button
       onClick={() => action(props.id, 'hidden', false)}
-      style={{ float: 'right', }}
     >
       Unhide&nbsp;
       <Visibility />
@@ -33,7 +32,6 @@ function HideButton(props) {
   } else {
     return <Button
       onClick={() => action(props.id, 'hidden', true)}
-      style={{ float: 'right', }}
     >
       Hide&nbsp;
       <VisibilityOff />
@@ -44,6 +42,9 @@ HideButton.propTypes = {
   id: PropTypes.number.isRequired,
   characterType: PropTypes.string.isRequired,
   isHidden: PropTypes.bool,
+  updateCharacter: PropTypes.func,
+  updateQc: PropTypes.func,
+  updateBattlegroup: PropTypes.func,
 }
 function mapStateToProps(state, ownProps) {
   return {

@@ -24,7 +24,7 @@ const styles = theme => ({
 class ContentList extends React.Component {
   render() {
     const chars = this.props.characters.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } lg={ 4 }  key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 } xl={ 4 }  key={ c.id }>
         <CharacterListItem character={ c } />
       </Grid>
     )

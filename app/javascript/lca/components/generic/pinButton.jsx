@@ -25,7 +25,6 @@ function PinButton(props) {
   if (props.isPinned) {
     return <Button
       onClick={() => action(props.id, 'pinned', false)}
-      style={{ float: 'right', }}
     >
       Unpin&nbsp;
       <Bookmark />
@@ -33,7 +32,6 @@ function PinButton(props) {
   } else {
     return <Button
       onClick={() => action(props.id, 'pinned', true)}
-      style={{ float: 'right', }}
     >
       Pin&nbsp;
       <BookmarkBorder />
@@ -44,6 +42,9 @@ PinButton.propTypes = {
   id: PropTypes.number.isRequired,
   characterType: PropTypes.string.isRequired,
   isPinned: PropTypes.bool,
+  updateCharacter: PropTypes.func,
+  updateQc: PropTypes.func,
+  updateBattlegroup: PropTypes.func,
 }
 function mapStateToProps(state, ownProps) {
   return {

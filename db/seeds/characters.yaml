@@ -76,6 +76,7 @@
   chronicle_id: 1
   name: Donna Dawn
   type: SolarCharacter
+  essence: 2
   caste: dawn
   caste_abilities:
     - awareness
@@ -91,9 +92,7 @@
     - medicine
   supernal_ability: awareness
   motes_personal_total: 13
-  motes_personal_current: 13
   motes_peripheral_total: 33
-  motes_peripheral_current: 33
   limit: 2
   limit_trigger: Her combat prowess is called into question
   specialties:
@@ -119,26 +118,18 @@
   damage_bashing: 2
   damage_lethal: 1
   damage_aggravated: 1
-  health_level_0s: 1
-  health_level_1s: 2
-  health_level_2s: 2
-  health_level_4s: 1
-  health_level_incap: 1
   abil_melee: 5
-  abil_archery: 0
   abil_awareness: 3
   abil_brawl: 1
   abil_bureaucracy: 2
   abil_dodge: 4
   abil_integrity: 3
   abil_investigation: 2
-  abil_larceny: 0
   abil_linguistics: 2
   abil_lore: 1
   abil_ride: 1
   abil_sail: 1
   abil_medicine: 1
-  abil_occult: 0
   abil_resistance: 2
   abil_presence: 2
   abil_socialize: 1
@@ -153,12 +144,28 @@
       rating: 1
   armor_weight: heavy
   armor_is_artifact: true
-  onslaught: 0
-  initiative: 0
+  initiative: 5
 - id: 3
   player_id: 2
   chronicle_id: 1
-  name: Example Mortal number 2
-  type: Character
+  name: Nellins Faruk
+  type: CustomAbilityCharacter
+  exalt_type: Dragon-Blood
+  aspect: true
+  caste: Fire
   attr_dexterity: 3
   abil_brawl: 3
+  abil_lore: 3
+- id: 4
+  player_id: 2
+  chronicle_id: 1
+  name: Strength of Many
+  type: CustomAttributeCharacter
+  exalt_type: Lunar
+  caste: Full Moon
+  caste_attributes:
+    - strength
+  favored_attributes:
+    - wits
+  attr_strength: 5
+  abil_brawl: 5

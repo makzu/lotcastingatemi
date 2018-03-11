@@ -123,14 +123,18 @@ function handleDestroyAction(state, payload) {
     },
   } : {}
 
-  return { ...state,
-    [payload.type]: omit(state[payload.type], [payload.entity]),
+  const parent = state[payload.parent_type][payload.parent_id] ? {
     [payload.parent_type]: {
       ...state[payload.parent_type],
       [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
         [payload.type]: state[payload.parent_type][payload.parent_id][payload.type].filter((e) => e !== payload.id)
       },
-      ...chrons,
     },
+  } : {}
+
+  return { ...state,
+    [payload.type]: omit(state[payload.type], [payload.id]),
+    ...parent,
+    ...chrons,
   }
 }

@@ -9,19 +9,19 @@ import Typography from 'material-ui/Typography'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import { fullChar } from '../../../utils/propTypes'
 
-function SingleCharm(props) {
+function SingleCharm({ charm }) {
   return <div>
     <Typography>
       <strong>
-        { props.charm.name }:
+        { charm.name }:
       </strong>&nbsp;
       (
-      { props.charm.cost }
-      , { props.charm.timing }
-      , duration: { props.charm.duration }
-      , keywords: { props.charm.keywords || 'none'}
+      { charm.cost }
+      , { charm.timing }
+      , duration: { charm.duration }
+      , keywords: { charm.keywords || 'none'}
       )&nbsp;
-      { props.charm.body }
+      { charm.body }
     </Typography>
     <Divider />
   </div>
@@ -30,8 +30,29 @@ SingleCharm.propTypes = {
   charm: PropTypes.object,
 }
 
+function SingleSpell({ spell }) {
+  return <div>
+    <Typography>
+      <strong>
+        { spell.name }
+        { spell.control && ' (Control Spell)' }:
+      </strong>&nbsp;
+      (
+      { spell.cost }
+      , duration: { spell.duration }
+      , keywords: { spell.keywords || 'none'}
+      )&nbsp;
+      { spell.body }
+    </Typography>
+    <Divider />
+  </div>
+}
+SingleSpell.propTypes = {
+  spell: PropTypes.object,
+}
+
 function CharmSummaryBlock(props) {
-  const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms } = props
+  const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms, spells } = props
 
   // Mortals don't need Charms displayed
   if (character.type == 'Character' ) {
@@ -50,6 +71,9 @@ function CharmSummaryBlock(props) {
   const spirit = spiritCharms.map((c) =>
     <SingleCharm key={ c.id } charm={ c } character={ character } />
   )
+  const spl = spells.map((c) =>
+    <SingleSpell key={ c.id } spell={ c } character={ character } />
+  )
 
 
   return <BlockPaper>
@@ -60,6 +84,7 @@ function CharmSummaryBlock(props) {
     { maCharms }
     { evo }
     { spirit }
+    { spl }
   </BlockPaper>
 }
 CharmSummaryBlock.propTypes = {
@@ -68,6 +93,7 @@ CharmSummaryBlock.propTypes = {
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
   spiritCharms: PropTypes.arrayOf(PropTypes.object),
+  spells: PropTypes.arrayOf(PropTypes.object),
 }
 
 function mapStateToProps(state, ownProps) {
@@ -76,6 +102,7 @@ function mapStateToProps(state, ownProps) {
   let martialArtsCharms = []
   let nativeCharms = []
   let spiritCharms = []
+  let spells = []
 
   if (character.charms != undefined) {
     nativeCharms = character.charms.map((id) => state.entities.charms[id])
@@ -89,12 +116,16 @@ function mapStateToProps(state, ownProps) {
   if (character.spirit_charms != undefined) {
     spiritCharms = character.spirit_charms.map((id) => state.entities.charms[id])
   }
+  if (character.spells != undefined) {
+    spells = character.spells.map((id) => state.entities.spells[id])
+  }
 
   return {
     nativeCharms,
     martialArtsCharms,
     evocations,
-    spiritCharms
+    spiritCharms,
+    spells,
   }
 }
 

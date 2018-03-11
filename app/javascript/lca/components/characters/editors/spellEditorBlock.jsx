@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
+import Checkbox from 'material-ui/Checkbox'
+import { FormControlLabel } from 'material-ui/Form'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
@@ -26,6 +28,7 @@ class SpellEditorBlock extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
+    this.handleCheck = this.handleCheck.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
   }
 
@@ -56,13 +59,21 @@ class SpellEditorBlock extends React.Component {
     this.props.onUpdate(charm.id, charm.character_id, name, value)
   }
 
+  handleCheck(e) {
+    const { name } = e.target
+    const value = !this.state.spell[name]
+
+    this.setState({ spell: { ...this.state.spell, [name]: value }})
+    this.props.onUpdate(this.state.spell.id, this.state.spell.character_id, name, value)
+  }
+
   handleRemove() {
     this.props.onRemove(this.state.spell.id)
   }
 
   render() {
     const { spell } = this.state
-    const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
+    const { handleChange, handleBlur, handleRatingChange, handleRemove, handleCheck } = this
     const { classes } = this.props
 
     return <BlockPaper>
@@ -86,8 +97,17 @@ class SpellEditorBlock extends React.Component {
         <MenuItem value="sapphire">Celestial</MenuItem>
         <MenuItem value="adamant">Solar</MenuItem>
       </TextField>
-      <br />
+      &nbsp;&nbsp;
 
+      <FormControlLabel
+        label="Control Spell"
+        control={
+          <Checkbox name="control" checked={ spell.control }
+            onChange={ handleCheck }
+          />
+        }
+      />
+      <br />
 
       <TextField name="cost" value={ spell.cost } spellCheck={ false }
         className={ classes.costField }

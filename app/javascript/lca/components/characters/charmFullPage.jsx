@@ -24,9 +24,7 @@ const styles = theme => ({
   },
 })
 
-function _SingleCharm(props) {
-  const { charm, classes } = props
-
+function _SingleCharm({ charm, classes }) {
   return <BlockPaper>
     <Typography variant="title">
       { charm.name }
@@ -86,6 +84,40 @@ _SingleCharm.propTypes = {
 }
 const SingleCharm = withStyles(styles)(_SingleCharm)
 
+function _SingleSpell({ spell, classes }) {
+  return <BlockPaper>
+    <Typography variant="title">
+      { spell.name }
+      { spell.control && ' (Control Spell)'}
+    </Typography>
+
+    <Typography paragraph>
+      <strong>Cost:</strong> { spell.cost };&nbsp;
+      <br />
+
+      <strong>Keywords:</strong> { spell.keywords.join(', ') || 'None' }
+      <br />
+
+      <strong>Duration:</strong>&nbsp;
+      <span className={ classes.capitalize }>{ spell.duration }</span>
+      <br />
+
+      <strong>Prerequisite Charms:</strong> { spell.prereqs || 'None' }
+    </Typography>
+
+    <Typography className={ classes.charmBody }>{ spell.body }</Typography>
+
+    { spell.ref != '' &&
+      <Typography variant="caption">Ref: { spell.ref }</Typography>
+    }
+  </BlockPaper>
+}
+_SingleSpell.propTypes = {
+  spell: PropTypes.object,
+  classes: PropTypes.object,
+}
+const SingleSpell = withStyles(styles)(_SingleSpell)
+
 class CharmFullPage extends React.Component {
   constructor(props) {
     super(props)
@@ -98,7 +130,7 @@ class CharmFullPage extends React.Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms } = this.props
+    const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms, spells } = this.props
 
     const natives = nativeCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
@@ -118,6 +150,11 @@ class CharmFullPage extends React.Component {
     const spirit = spiritCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SingleCharm charm={ c } character={ character } />
+      </Grid>
+    )
+    const spl = spells.map((c) =>
+      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+        <SingleSpell spell={ c } character={ character } />
       </Grid>
     )
 
@@ -149,9 +186,13 @@ class CharmFullPage extends React.Component {
         }
         { spirit }
 
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">Spells</Typography>
-        </Grid>
+        { spl.length > 0 &&
+          <Grid item xs={ 12 }>
+            <Typography variant="headline">Spells</Typography>
+          </Grid>
+        }
+        { spl }
+
       </Grid>
     </div>
   }
@@ -161,6 +202,7 @@ CharmFullPage.propTypes = {
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
+  spells: PropTypes.arrayOf(PropTypes.object),
   spiritCharms: PropTypes.arrayOf(PropTypes.object),
 }
 

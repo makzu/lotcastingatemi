@@ -1,4 +1,5 @@
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
+import { omit } from 'lodash'
 
 export * from './player.js'
 export * from './chronicle.js'
@@ -44,17 +45,30 @@ export const defaultState = {
 }
 
 export default function EntityReducer(state = defaultState, action) {
+  let { payload } = action
+
   // TODO: Make this more readable
-  if (action.type == 'lca/cable/RECEIVED' && action.payload.event == 'update') {
-    return {
-      ...state,
-      [action.payload.type]: {
-        ...state[action.payload.type],
-        [action.payload.id]: {
-          ...state[action.payload.type][action.payload.id],
-          ...action.payload.changes
+  if (action.type == 'lca/cable/RECEIVED') {
+    switch (payload.event) {
+    case 'create':
+      return handleCreateAction(state, payload)
+
+    case 'update':
+      return { ...state,
+        [payload.type]: {
+          ...state[payload.type],
+          [payload.id]: {
+            ...state[payload.type][payload.id],
+            ...payload.changes,
+          }
         }
       }
+
+    case 'destroy':
+      return handleDestroyAction(state, payload)
+
+    default:
+      return state
     }
   }
 
@@ -71,5 +85,52 @@ export default function EntityReducer(state = defaultState, action) {
 
   default:
     return state
+  }
+}
+
+function handleCreateAction(state, payload) {
+  let entity = JSON.parse(payload.entity)
+
+  const chrons = entity.chronicle_id ? {
+    chronicles: { ...state.chronicles,
+      [entity.chronicle_id]: { ...state.chronicles[entity.chronicle_id],
+        [payload.type]: [...state.chronicles[entity.chronicle_id][payload.type], entity.id]
+      }
+    },
+  } : {}
+
+  return { ...state,
+    [payload.type]: {
+      ...state[payload.type],
+      [payload.id]: entity,
+    },
+    [payload.parent_type]: { ...state[payload.parent_type],
+      [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
+        [payload.type]: [ ...state[payload.parent_type][payload.parent_id][payload.type], entity.id]
+      },
+    },
+    ...chrons,
+  }
+}
+
+function handleDestroyAction(state, payload) {
+  const chronicle_id = state[payload.type][payload.id].chronicle_id
+  const chrons = chronicle_id ? {
+    chronicles: { ...state.chronicles,
+      [chronicle_id]: { ...state.chronicles[chronicle_id],
+        [payload.type]: state.chronicles[chronicle_id][payload.type].filter((e) => e !== payload.id)
+      }
+    },
+  } : {}
+
+  return { ...state,
+    [payload.type]: omit(state[payload.type], [payload.entity]),
+    [payload.parent_type]: {
+      ...state[payload.parent_type],
+      [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
+        [payload.type]: state[payload.parent_type][payload.parent_id][payload.type].filter((e) => e !== payload.id)
+      },
+      ...chrons,
+    },
   }
 }

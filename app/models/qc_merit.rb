@@ -8,4 +8,8 @@ class QcMerit < ApplicationRecord
   def entity_type
     'qc_merit'
   end
+
+  def entity_assoc
+    entity_type
+  end
 end

@@ -10,4 +10,8 @@ class MartialArtsCharm < Charm
   def set_defaults
     self.min_ability ||= 1
   end
+
+  def entity_assoc
+    'martial_arts_charm'
+  end
 end

@@ -4,16 +4,11 @@
 module Broadcastable
   extend ActiveSupport::Concern
   included do
-    after_create :broadcast_parent
-    after_destroy :broadcast_parent
+    after_create_commit :broadcast_create
+    before_destroy :broadcast_destroy
     after_update_commit :broadcast_update
 
     def broadcast_update
-      # Do not broadcast if the parent character is being deleted
-      # This is to prevent Charms, Merits, etc from sending their own individual
-      # destroy messages when a whole character is being deleted
-      return if trait? && character.destroyed?
-
       UpdateBroadcastJob.perform_later(
         all_ids,
         self,
@@ -21,10 +16,12 @@ module Broadcastable
       )
     end
 
-    def broadcast_parent
-      return if trait? && character.destroyed?
+    def broadcast_create
+      CreateBroadcastJob.perform_later(all_ids, self, parent)
+    end
 
-      UpdateBroadcastJob.perform_later all_ids, which_parent, (saved_changes.delete_if { |k| k == 'updated_at' })
+    def broadcast_destroy
+      DestroyBroadcastJob.perform_later(all_ids, self, parent.entity_type, parent.id)
     end
 
     private
@@ -36,14 +33,9 @@ module Broadcastable
       ([player.id] + [chronicle.st_id] + chronicle.players.pluck(:id)).uniq
     end
 
-    def which_parent
-      return character if trait?
-      return chronicle if chronicle.present?
-      player
-    end
-
-    def trait?
-      !is_a?(Character) && !is_a?(Qc) && !is_a?(Battlegroup)
+    def parent
+      return player if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup)
+      character
     end
   end
 end

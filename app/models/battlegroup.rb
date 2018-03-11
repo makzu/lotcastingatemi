@@ -30,4 +30,8 @@ class Battlegroup < ApplicationRecord
   def entity_type
     'battlegroup'
   end
+
+  def entity_assoc
+    entity_type
+  end
 end

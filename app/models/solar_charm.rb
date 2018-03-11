@@ -7,6 +7,10 @@ class SolarCharm < Charm
 
   attribute :min_ability, :integer, default: 1
 
+  def entity_assoc
+    'solar_charm'
+  end
+
   private
 
   def ability_blank?

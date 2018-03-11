@@ -94,7 +94,7 @@ class QcActionEditor extends React.Component {
     )
 
     return <div>
-      <Typography variant="subheading">
+      <Typography variant="title">
         Actions
 
         <Button onClick={ onAdd }>

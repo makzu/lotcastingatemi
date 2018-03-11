@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import Checkbox from 'material-ui/Checkbox'
 import Divider from 'material-ui/Divider'
 import { FormControlLabel } from 'material-ui/Form'
-import IconButton from 'material-ui/IconButton'
+import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import Delete from 'material-ui-icons/Delete'
 
 import { qcMerit } from '../../utils/propTypes'
 
@@ -84,9 +84,10 @@ export default class QcMeritFields extends React.Component {
         }
       />
 
-      <IconButton onClick={ this.handleRemove } style={{ minWidth: '2em' }}>
-        <ContentRemoveCircle />
-      </IconButton>
+      <Button onClick={ this.handleRemove } style={{ float: 'right' }}>
+        Delete&nbsp;
+        <Delete />
+      </Button>
       <br />
 
       <TextField name="body" value={ merit.body }

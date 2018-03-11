@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Button from 'material-ui/Button'
 import Divider from 'material-ui/Divider'
-import IconButton from 'material-ui/IconButton'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import Delete from 'material-ui-icons/Delete'
 
 import RatingField from '../generic/ratingField.jsx'
 import { qcCharm } from '../../utils/propTypes'
@@ -75,9 +75,10 @@ export default class QcCharmFields extends React.Component {
         label="Cost" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
-      <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>
-        <ContentRemoveCircle />
-      </IconButton>
+      <Button onClick={ handleRemove } style={{ float: 'right' }}>
+        Delete&nbsp;
+        <Delete />
+      </Button>
       <br />
 
       <TextField select name="timing" value={ charm.timing }
@@ -89,6 +90,11 @@ export default class QcCharmFields extends React.Component {
         <MenuItem key="reflexive" value="reflexive">Reflexive</MenuItem>
         <MenuItem key="permanant" value="permanant">Permanant</MenuItem>
       </TextField>&nbsp;&nbsp;
+
+      <TextField name="duration" value={ charm.duration }
+        label="Duration" margin="dense"
+        onChange={ handleChange } onBlur={ handleBlur }
+      />
 
       <TextField name="keywords" value={ charm.keywords }
         label="Keywords (comma separated)" margin="dense"

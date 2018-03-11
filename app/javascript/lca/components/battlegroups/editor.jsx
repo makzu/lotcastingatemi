@@ -89,10 +89,14 @@ class BattlegroupEditor extends React.Component {
 
     return <BlockPaper>
 
-      <Typography><small>(
-        Use the stats of an average member of the group - bonuses from
-        drill/might/etc are added automatically
-      )</small></Typography>
+      <Typography variant="caption">
+        Rules for battlegroups can be found in the Core book starting at page
+        205.
+      </Typography>
+      <Typography variant="caption">
+        (Use the stats of an average member of the group - bonuses from
+        drill/might/etc are added automatically)
+      </Typography>
 
       <TextField name="name" value={ battlegroup.name }
         label="Name" className={ classes.nameField } margin="dense"

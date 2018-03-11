@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Divider from 'material-ui/Divider'
+import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
@@ -11,11 +11,12 @@ import QcAttackEditor from './qcAttackEditor.jsx'
 import QcCharmEditor from './qcCharmEditor.jsx'
 import QcMeritEditor from './qcMeritEditor.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
+import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/ratingField.jsx'
 
 import { updateQc } from '../../ducks/actions.js'
-
+import { woundPenalty } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
 class QcEditor extends React.Component {
@@ -72,163 +73,195 @@ class QcEditor extends React.Component {
       handleChange, handleBlur, handleRatingChange, handleListChange
     } = this
 
-    return <BlockPaper>
-      <Typography paragraph variant="caption">
-        Rules for Quick Characters can be found in the core book starting at
-        page 494. Sample QCs are also available in the <em>Adversaries of the
-        Righteous</em> and <em>Hundred Devils Night Parade</em> supplements.
-      </Typography>
+    return <Grid container spacing={ 24 }>
+      <Grid item xs={ 12 }>
+        <BlockPaper>
+          <Typography paragraph variant="caption">
+            Rules for Quick Characters can be found in the core book starting at
+            page 494. Sample QCs are also available in <em>Adversaries of the
+            Righteous</em> and <em>Hundred Devils Night Parade</em>.
+          </Typography>
 
-      <Typography variant="subheading">
-        Basics
-      </Typography>
+          <Typography variant="title">
+            Basics
+          </Typography>
 
-      <TextField name="name" value={ qc.name }
-        label="Name" margin="dense"
-        onChange={ handleChange } onBlur={ handleBlur }
-      />
-      <br />
+          <TextField name="name" value={ qc.name }
+            label="Name" margin="dense"
+            onChange={ handleChange } onBlur={ handleBlur }
+          />
+          <br />
 
-      <TextField name="description" value={ qc.description }
-        label="Description" margin="dense" multiline fullWidth
-        onChange={ handleChange } onBlur={ handleBlur }
-      />
-      <br />
+          <TextField name="description" value={ qc.description }
+            label="Description" margin="dense" multiline fullWidth
+            onChange={ handleChange } onBlur={ handleBlur }
+          />
+          <br />
 
-      <Typography>
-        <RatingField trait="essence" value={ qc.essence }
-          label="Essence" min={ 1 } max={ 10 } margin="dense" narrow
-          onChange={ handleRatingChange }
-        />
-        <RatingField trait="willpower_temporary" value={ qc.willpower_temporary }
-          label="Willpower" margin="dense" narrow
-          onChange={ handleRatingChange }
-        />
-        /
-        <RatingField trait="willpower_permanent" value={ qc.willpower_permanent }
-          label="" min={ 1 } max={ 10 } margin="dense" narrow
-          onChange={ handleRatingChange }
-        />
-        <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
-          label="Personal" max={ qc.motes_personal_total } margin="dense" narrow
-          onChange={ handleRatingChange }
-        />
-        /
-        <RatingField trait="motes_personal_total" value={ qc.motes_personal_total }
-          label="Motes" margin="dense" narrow
-          onChange={ handleRatingChange }
-        />
-        <RatingField trait="motes_peripheral_current" value={ qc.motes_peripheral_current }
-          label="Peripheral" max={ qc.motes_peripheral_total } margin="dense" narrow
-          onChange={ handleRatingChange }
-        />
-        /
-        <RatingField trait="motes_peripheral_total" value={ qc.motes_peripheral_total }
-          label="Motes" margin="dense" narrow
-          onChange={ handleRatingChange }
-        />
-      </Typography>
+          <Typography component="div">
+            <RatingField trait="essence" value={ qc.essence }
+              label="Essence" min={ 1 } max={ 10 } margin="dense" narrow
+              onChange={ handleRatingChange }
+            />
+            &nbsp;&nbsp;
 
-      <RatingField trait="health_level_0s" value={ qc.health_level_0s }
-        label="-0 HLs" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="health_level_1s" value={ qc.health_level_1s }
-        label="-1 HLs" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="health_level_2s" value={ qc.health_level_2s }
-        label="-2 HLs" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="health_level_4s" value={ qc.health_level_4s }
-        label="-4 HLs" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="health_level_incap" value={ qc.health_level_incap }
-        label="Incap" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <br />
+            <RatingField trait="willpower_temporary" value={ qc.willpower_temporary }
+              label="Willpower" margin="dense" narrow
+              onChange={ handleRatingChange }
+            />
+            /
+            <RatingField trait="willpower_permanent" value={ qc.willpower_permanent }
+              label="" min={ 1 } max={ 10 } margin="dense" narrow
+              onChange={ handleRatingChange }
+            />
+            &nbsp;&nbsp;
 
-      <RatingField trait="damage_bashing" value={ qc.damage_bashing }
-        label="Bashing" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="damage_lethal" value={ qc.damage_lethal }
-        label="Lethal" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="damage_aggravated" value={ qc.damage_aggravated }
-        label="Aggravated" margin="dense"
-        onChange={ handleRatingChange }
-      />
+            <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
+              label="Personal" max={ qc.motes_personal_total } margin="dense" narrow
+              onChange={ handleRatingChange }
+            />
+            /
+            <RatingField trait="motes_personal_total" value={ qc.motes_personal_total }
+              label="Motes" margin="dense" narrow
+              onChange={ handleRatingChange }
+            />
+            <RatingField trait="motes_peripheral_current" value={ qc.motes_peripheral_current }
+              label="Peripheral" max={ qc.motes_peripheral_total } margin="dense" narrow
+              onChange={ handleRatingChange }
+            />
+            /
+            <RatingField trait="motes_peripheral_total" value={ qc.motes_peripheral_total }
+              label="Motes" margin="dense" narrow
+              onChange={ handleRatingChange }
+            />
+          </Typography>
 
-      <Typography variant="subheading">
-        Social
-      </Typography>
-      <RatingField trait="resolve" value={ qc.resolve }
-        label="Resolve" min={ 1 } margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="guile" value={ qc.guile }
-        label="Guile" min={ 1 } margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="appearance" value={ qc.appearance }
-        label="Appearance" min={ 1 } max={ 10 } margin="dense"
-        onChange={ handleRatingChange }
-      />
+          <div style={{ marginTop: '0.5em' }}>
+            <HealthLevelBoxes character={ qc } />
+            <Typography>
+              Current wound penalty: -{ woundPenalty(qc) }
+            </Typography>
+          </div>
 
-      <Typography variant="subheading">
-        Combat
-      </Typography>
-      <RatingField trait="join_battle" value={ qc.join_battle }
-        label="JB" min={ 1 } margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="movement" value={ qc.movement }
-        label="Move" min={ 1 } margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="parry" value={ qc.parry }
-        label="Parry" min={ 1 } margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="evasion" value={ qc.evasion }
-        label="Evasion" min={ 1 } margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="soak" value={ qc.soak }
-        label="Soak" min={ 1 } margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <RatingField trait="hardness" value={ qc.hardness }
-        label="Hardness" margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <TextField name="armor_name" value={ qc.armor_name }
-        label="Armor Name" margin="dense"
-        type="text"
-        onChange={ handleChange } onBlur={ handleBlur }
-      />
+          <RatingField trait="health_level_0s" value={ qc.health_level_0s }
+            label="-0 HLs" margin="dense" narrow
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="health_level_1s" value={ qc.health_level_1s }
+            label="-1 HLs" margin="dense" narrow
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="health_level_2s" value={ qc.health_level_2s }
+            label="-2 HLs" margin="dense" narrow
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="health_level_4s" value={ qc.health_level_4s }
+            label="-4 HLs" margin="dense" narrow
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="health_level_incap" value={ qc.health_level_incap }
+            label="Incap" margin="dense" narrow
+            onChange={ handleRatingChange }
+          />
+          <br />
 
-      <QcAttackEditor qc={ qc } />
+          <RatingField trait="damage_bashing" value={ qc.damage_bashing }
+            label="Bashing" margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="damage_lethal" value={ qc.damage_lethal }
+            label="Lethal" margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="damage_aggravated" value={ qc.damage_aggravated }
+            label="Aggravated" margin="dense"
+            onChange={ handleRatingChange }
+          />
 
-      <QcActionEditor qc={ qc } onChange={ handleListChange } />
+          <Typography variant="title" style={{ marginTop: '1em' }}>
+            Social
+          </Typography>
+          <RatingField trait="resolve" value={ qc.resolve }
+            label="Resolve" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="guile" value={ qc.guile }
+            label="Guile" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="appearance" value={ qc.appearance }
+            label="Appearance" min={ 1 } max={ 10 } margin="dense"
+            onChange={ handleRatingChange }
+          />
 
-      <Typography variant="subheading">
-        Intimacies
-      </Typography>
-      <IntimacyEditor character={ qc } characterType="qc"
-        onChange={ handleRatingChange }
-      />
-      <Divider style={{ marginTop: '0.5em' }} />
+          <Typography variant="title" style={{ marginTop: '1em' }}>
+            Combat
+          </Typography>
+          <RatingField trait="join_battle" value={ qc.join_battle }
+            label="JB" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="movement" value={ qc.movement }
+            label="Move" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="parry" value={ qc.parry }
+            label="Parry" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="evasion" value={ qc.evasion }
+            label="Evasion" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="soak" value={ qc.soak }
+            label="Soak" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="hardness" value={ qc.hardness }
+            label="Hardness" margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <TextField name="armor_name" value={ qc.armor_name }
+            label="Armor Name" margin="dense"
+            type="text"
+            onChange={ handleChange } onBlur={ handleBlur }
+          />
 
-      <QcMeritEditor qc={ qc } />
+          <QcAttackEditor qc={ qc } />
 
-      <QcCharmEditor qc={ qc } />
-    </BlockPaper>
+        </BlockPaper>
+      </Grid>
+
+      <Grid item xs={ 12 } md={ 6 }>
+        <BlockPaper>
+          <QcActionEditor qc={ qc } onChange={ handleListChange } />
+        </BlockPaper>
+      </Grid>
+
+      <Grid item xs={ 12 } md={ 6 }>
+        <BlockPaper>
+          <Typography variant="title">
+            Intimacies
+          </Typography>
+
+          <IntimacyEditor character={ qc } characterType="qc"
+            onChange={ handleRatingChange }
+          />
+        </BlockPaper>
+      </Grid>
+
+      <Grid item xs={ 12 } md={ 6 }>
+        <BlockPaper>
+          <QcMeritEditor qc={ qc } />
+        </BlockPaper>
+      </Grid>
+
+      <Grid item xs={ 12 } md={ 6 }>
+        <BlockPaper>
+          <QcCharmEditor qc={ qc } />
+        </BlockPaper>
+      </Grid>
+    </Grid>
   }
 }
 QcEditor.propTypes = {

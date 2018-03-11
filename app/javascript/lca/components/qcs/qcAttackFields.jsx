@@ -85,7 +85,7 @@ class QcAttackFields extends React.Component {
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <RatingField trait="pool" value={ attack.pool }
-        label="Pool" min={ 1 } margin="dense"
+        label="Pool" min={ 1 } narrow margin="dense"
         onChange={ handleRatingChange }
       />
       { battlegroup &&
@@ -103,7 +103,7 @@ class QcAttackFields extends React.Component {
         </span>
       }
       <RatingField trait="overwhelming" value={ attack.overwhelming }
-        label="Ovw." min={ 1 } margin="dense"
+        label="Ovw." min={ 1 } narrow margin="dense"
         onChange={ handleRatingChange }
       />
       <TextField name="tags" value={ attack.tags }

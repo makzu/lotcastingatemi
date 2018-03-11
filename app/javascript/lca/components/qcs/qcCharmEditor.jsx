@@ -40,8 +40,8 @@ class QcCharmEditor extends React.Component {
       />
     )
 
-    return <div style={{ marginTop: '1em' }}>
-      <Typography variant="subheading">
+    return <div>
+      <Typography variant="title">
         Charms
 
         <Button onClick={ handleAdd }>

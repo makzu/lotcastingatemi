@@ -40,8 +40,8 @@ class QcMeritEditor extends React.Component {
       />
     )
 
-    return <div style={{ marginTop: '1em' }}>
-      <Typography variant="subheading">
+    return <div>
+      <Typography variant="title">
         Merits
 
         <Button onClick={ handleAdd }>

@@ -9,4 +9,8 @@ class QcCharm < ApplicationRecord
   def entity_type
     'qc_charm'
   end
+
+  def entity_assoc
+    entity_type
+  end
 end

@@ -2,6 +2,8 @@
 
 # Represents an individual game.
 class Chronicle < ApplicationRecord
+  after_update_commit :broadcast_update
+
   belongs_to :st, class_name: 'Player'
   alias_attribute :storyteller, :st
 
@@ -20,5 +22,22 @@ class Chronicle < ApplicationRecord
     battlegroups.delete(player.battlegroups.where(chronicle_id: id))
     players.delete(player)
     save!
+  end
+
+  # TODO: Merge this into Broadcastable?
+  def broadcast_update
+    UpdateBroadcastJob.perform_later(
+      ([st_id] + player_ids),
+      self,
+      saved_changes.delete_if { |k| k == 'updated_at' }
+    )
+  end
+
+  def entity_type
+    'chronicle'
+  end
+
+  def entity_assoc
+    entity_type
   end
 end

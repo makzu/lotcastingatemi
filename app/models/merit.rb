@@ -13,4 +13,8 @@ class Merit < ApplicationRecord
   def entity_type
     'merit'
   end
+
+  def entity_assoc
+    entity_type
+  end
 end

@@ -1,3 +1,4 @@
+// TODO: replace this with redux-cablecar or something
 const UpdatesCable = {
   subscribe(getState, received) {
     this.unsubscribe()

@@ -60,4 +60,8 @@ class Character < ApplicationRecord
   def entity_type
     'character'
   end
+
+  def entity_assoc
+    entity_type
+  end
 end

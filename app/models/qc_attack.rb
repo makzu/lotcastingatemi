@@ -18,6 +18,10 @@ class QcAttack < ApplicationRecord
     'qc_attack'
   end
 
+  def entity_assoc
+    entity_type
+  end
+
   def self.policy_class
     CharacterTraitPolicy
   end

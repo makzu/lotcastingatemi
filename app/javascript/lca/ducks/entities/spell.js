@@ -10,32 +10,6 @@ const SPL_DESTROY =            'lca/spell/DESTROY'
 const SPL_DESTROY_SUCCESS =    'lca/spell/DESTROY_SUCCESS'
 const SPL_DESTROY_FAILURE =    'lca/spell/DESTROY_FAILURE'
 
-export default function reducer(state, action) {
-  const _id = action.payload != undefined ? action.payload.id : null
-  const _charId = action.payload != undefined ? action.payload.character_id : null
-  const _trait = action.meta != undefined ? action.meta.trait : null
-
-  switch(action.type) {
-  case SPL_CREATE_SUCCESS:
-    return { ...state,
-      spells: { ...state.spells, [_id]: action.payload },
-      characters: {
-        ...state.characters,
-        [_charId]: { ...state.characters[_charId], spells: [...state.characters[_charId].spells, _id] }
-      }
-    }
-  case SPL_UPDATE_SUCCESS:
-    return { ...state, spells: {
-      ...state.spells, [_id]: {
-        ...state.spells[_id], [_trait]: action.payload[_trait] }}
-    }
-  case SPL_DESTROY_SUCCESS:
-    return _destroy_spell(state, action)
-  default:
-    return state
-  }
-}
-
 export function createSpell(charId) {
   let spell = { spell: { character_id: charId }}
 
@@ -56,7 +30,7 @@ export function updateSpell(id, charId, trait, value) {
     body: JSON.stringify(spell),
     types: [
       SPL_UPDATE,
-      { type: SPL_UPDATE_SUCCESS, meta: { trait: trait }},
+      { type: SPL_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
       SPL_UPDATE_FAILURE
     ]
   })
@@ -72,18 +46,4 @@ export function destroySpell(id, charId) {
       SPL_DESTROY_FAILURE
     ]
   })
-}
-
-function _destroy_spell(state, action) {
-  const id = action.meta.id
-  const charId = action.meta.charId
-
-  const newSpells = { ...state.spells }
-
-  delete newSpells[id]
-
-  const char = { ...state.characters[charId] }
-  char.spells = char.spells.filter((e) => e != id)
-
-  return { ...state, spells: newSpells, characters: { ...state.characters, [charId]: char }}
 }

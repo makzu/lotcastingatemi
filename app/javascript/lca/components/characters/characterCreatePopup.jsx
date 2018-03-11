@@ -10,6 +10,7 @@ import Dialog, {
 } from 'material-ui/Dialog'
 import Divider from 'material-ui/Divider'
 import { FormControlLabel } from 'material-ui/Form'
+import { ListSubheader } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
 import Switch from 'material-ui/Switch'
 import TextField from 'material-ui/TextField'
@@ -46,8 +47,11 @@ class CharacterCreatePopup extends React.Component {
     let exaltType = {}
 
     if (name == 'type') {
-      if (value == 'Character')
-        exaltType = { exalt_type: 'Mortal' }
+      if (value == '') {
+        e.preventDefault()
+        return
+      } else if (value == 'Character')
+        exaltType = { exalt_type: 'Mortal', aspect: false }
       else if (value == 'SolarCharacter')
         exaltType = { exalt_type: 'Solar', aspect: false }
       else
@@ -88,15 +92,17 @@ class CharacterCreatePopup extends React.Component {
           <div>
             <TextField select name="type" value={ character.type }
               label={ character.type == 'Character' ? 'Character Type' : 'Exalt Type ' }
-              onChange={ handleChange } fullWidth margin="normal"
+              onChange={ handleChange } fullWidth autoWidth margin="normal"
             >
+              <ListSubheader disabled value="">Canon/Published Exalts</ListSubheader>
               <MenuItem value="Character">Mortal</MenuItem>
               <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
 
-              <Divider />
+              <ListSubheader disabled value="">Custom Exalts</ListSubheader>
 
-              <MenuItem value="CustomAbilityCharacter">Custom Ability Exalt</MenuItem>
-              <MenuItem value="CustomAttributeCharacter">Custom Attribute Exalt</MenuItem>
+              <MenuItem value="CustomAbilityCharacter">Custom Ability-Based Exalt</MenuItem>
+              <MenuItem value="CustomAttributeCharacter">Custom Attribute-Based Exalt</MenuItem>
+              <MenuItem value="CustomEssenceCharacter">Custom Essence-Based Exalt</MenuItem>
             </TextField>
           </div>
 
@@ -114,12 +120,14 @@ class CharacterCreatePopup extends React.Component {
               </TextField>
             </div>
           }
-          { (character.type == 'CustomAttributeCharacter' || character.type == 'CustomAbilityCharacter') &&
-            <Typography>
-              <TextField name="caste" value={ character.caste }
+          { ( character.type == 'CustomAttributeCharacter' ||
+              character.type == 'CustomAbilityCharacter'   ||
+              character.type == 'CustomEssenceCharacter'      ) &&
+            <Typography component="div">
+              <TextField name="caste" value={ character.caste } fullWidth
                 label={ character.aspect ? 'Aspect' : 'Caste' } onChange={ handleChange } margin="dense"
               /><br />
-              <TextField name="exalt_type" value={ character.exalt_type }
+              <TextField name="exalt_type" value={ character.exalt_type } fullWidth
                 label="Type" onChange={ handleChange } margin="dense"
               /><br />
               Has Castes&nbsp;&nbsp;&nbsp;

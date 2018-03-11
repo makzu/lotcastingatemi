@@ -1,0 +1,2 @@
+class CustomEssenceCharm < Charm
+end

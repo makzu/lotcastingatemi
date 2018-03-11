@@ -49,7 +49,7 @@ class CharacterCreatePopup extends React.Component {
       if (value == 'Character')
         exaltType = { exalt_type: 'Mortal' }
       else if (value == 'SolarCharacter')
-        exaltType = { exalt_type: 'Solar' }
+        exaltType = { exalt_type: 'Solar', aspect: false }
       else
         exaltType = { exalt_type: 'Exalt' }
     }

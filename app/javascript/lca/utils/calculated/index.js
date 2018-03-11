@@ -150,6 +150,8 @@ export function hardness(character) {
     return 7
   case 'heavy':
     return 10
+  default:
+    return 0
   }
 }
 
@@ -165,14 +167,10 @@ export function prettyExaltType(character) {
 }
 
 export function prettyFullExaltType(character) {
-  let type = prettyExaltType(character)
+  if (character.type == 'Character')
+    return 'Mortal'
 
-  switch (character.type) {
-  case 'SolarCharacter':
-    type = `${capitalize(character.caste || '?')} Caste ${type}`
-  }
-
-  return type
+  return `${capitalize(character.caste || '?')} ${character.aspect ? 'Aspect' : 'Caste'} ${character.exalt_type || 'Exalt'}`
 }
 
 export function prettyIntimacyRating(rating) {

@@ -49,6 +49,12 @@ function CharacterCard({ character, classes }) {
       Essence { character.essence } { calc.prettyFullExaltType(character) }
     </Typography>
 
+    { character.type != 'Character' &&
+      <Typography>
+        Animal Level: { calc.prettyAnimaLevel(character) }
+      </Typography>
+    }
+
     <Typography>
       { character.motes_personal_total > 0 &&
         <span>

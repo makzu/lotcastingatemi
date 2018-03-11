@@ -24,17 +24,17 @@ class ChronicleDashboard extends React.Component {
     const { chronicle, characters, qcs, battlegroups } = this.props
 
     const characterList = characters.map((c) =>
-      <Grid item xs={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } lg={ 6 } xl={ 4 } key={ c.id }>
         <CharacterCard character={ c } />
       </Grid>
     )
     const qcList = qcs.map((c) =>
-      <Grid item xs={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 } key={ c.id }>
         <QcCard qc={ c } />
       </Grid>
     )
     const bgList = battlegroups.map((c) =>
-      <Grid item xs={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 } key={ c.id }>
         <BattlegroupCard battlegroup={ c } />
       </Grid>
     )

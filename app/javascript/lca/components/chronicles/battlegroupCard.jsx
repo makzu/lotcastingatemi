@@ -6,6 +6,7 @@ import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
@@ -19,7 +20,15 @@ const styles = theme => ({
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
-    marginLeft: theme.spacing.unit
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  battlegroupName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing.unit,
   },
 })
 
@@ -27,18 +36,18 @@ function BattlegroupCard({ battlegroup, classes }) {
 
   return <Paper className={ classes.root }>
 
-    <Typography variant="title">
+    <Typography variant="title" className={ classes.battlegroupName }
+      component={ Link } to={ `/battlegroups/${battlegroup.id}` }
+    >
       { battlegroup.name }
+      <Launch className={ classes.icon } />
+
       { battlegroup.hidden &&
         <div className={ classes.hiddenLabel }>
-          <VisibilityOff />
+          <VisibilityOff className={ classes.icon } />
           Hidden
         </div>
       }
-
-      <Button component={ Link } to={ `/battlegroups/${battlegroup.id}` } style={{ float: 'right', }}>
-        Full Sheet
-      </Button>
     </Typography>
 
     <PlayerNameSubtitle playerId={ battlegroup.player_id } />

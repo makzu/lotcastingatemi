@@ -6,6 +6,7 @@ import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
@@ -20,25 +21,33 @@ const styles = theme => ({
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
-    marginLeft: theme.spacing.unit
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  qcName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing.unit,
   },
 })
 
 function QcCard({ qc, classes }) {
   return <Paper className={ classes.root }>
 
-    <Typography variant="title">
+    <Typography variant="title" className={ classes.qcName }
+      component={ Link } to={ `/qcs/${qc.id}` }
+    >
       { qc.name }
+
+      <Launch className={ classes.icon } />
       { qc.hidden &&
         <div className={ classes.hiddenLabel }>
-          <VisibilityOff />
+          <VisibilityOff className={ classes.icon } />
           Hidden
         </div>
       }
-
-      <Button component={ Link } to={ `/qcs/${qc.id}` } style={{ float: 'right', }}>
-        Full Sheet
-      </Button>
     </Typography>
 
     <PlayerNameSubtitle playerId={ qc.player_id } />

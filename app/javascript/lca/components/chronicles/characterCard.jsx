@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
@@ -20,7 +20,15 @@ const styles = theme => ({
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
-    marginLeft: theme.spacing.unit
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  characterName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing.unit,
   },
 })
 
@@ -29,18 +37,18 @@ function CharacterCard({ character, classes }) {
 
   return <Paper className={ classes.root }>
 
-    <Typography variant="title">
+    <Typography variant="title" className={ classes.characterName }
+      component={ Link } to={ `/characters/${character.id}` }
+    >
       { character.name }
+      <Launch className={ classes.icon } />
+
       { character.hidden &&
         <div className={ classes.hiddenLabel }>
-          <VisibilityOff />
+          <VisibilityOff className={ classes.icon } />&nbsp;
           Hidden
         </div>
       }
-
-      <Button component={ Link } to={ `/characters/${character.id}` } style={{ float: 'right', }}>
-        Full Sheet
-      </Button>
     </Typography>
 
     <PlayerNameSubtitle playerId={ character.player_id } />

@@ -106,7 +106,7 @@ function handleCreateAction(state, payload) {
     },
     [payload.parent_type]: { ...state[payload.parent_type],
       [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
-        [payload.type]: [ ...state[payload.parent_type][payload.parent_id][payload.type], entity.id]
+        [payload.assoc]: [ ...state[payload.parent_type][payload.parent_id][payload.assoc], entity.id]
       },
     },
     ...chrons,
@@ -127,7 +127,7 @@ function handleDestroyAction(state, payload) {
     [payload.parent_type]: {
       ...state[payload.parent_type],
       [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
-        [payload.type]: state[payload.parent_type][payload.parent_id][payload.type].filter((e) => e !== payload.id)
+        [payload.assoc]: state[payload.parent_type][payload.parent_id][payload.assoc].filter((e) => e !== payload.id)
       },
     },
   } : {}

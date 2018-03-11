@@ -7,6 +7,7 @@ class ApplicationJob < ActiveJob::Base
       "entity-update-#{id}",
       event: 'create',
       type: entity.entity_type + 's',
+      assoc: entity.entity_assoc + 's',
       id: entity.id,
       entity: json,
       parent_type: parent_type + 's',
@@ -29,6 +30,7 @@ class ApplicationJob < ActiveJob::Base
       "entity-update-#{id}",
       event: 'destroy',
       type: entity.entity_type + 's',
+      assoc: entity.entity_assoc + 's',
       id: entity.id,
       parent_type: parent_type + 's',
       parent_id: parent_id

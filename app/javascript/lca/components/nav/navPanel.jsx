@@ -23,10 +23,21 @@ const styles = theme => ({
 })
 
 export class NavPanel extends React.Component {
+  constructor(props) {
+    super(props)
+    this.closeCheck = this.closeCheck.bind(this)
+  }
+
+  closeCheck() {
+    if (this.props.drawerOpen)
+      this.props.closeDrawer()
+  }
+
   render() {
     const {
-      authenticated, displayName, theme, closeDrawer, switchTheme, classes,
+      authenticated, displayName, theme, switchTheme, classes,
     } = this.props
+    const { closeCheck } = this
 
     return <div>
       <List component="nav">
@@ -37,7 +48,7 @@ export class NavPanel extends React.Component {
         }
         <Divider />
 
-        <ListItem button component={ NavLink } to="/" onClick={ closeDrawer }>
+        <ListItem button component={ NavLink } to="/" onClick={ closeCheck }>
           <ListItemText primary="Home" />
         </ListItem>
 
@@ -49,12 +60,12 @@ export class NavPanel extends React.Component {
         }
 
         { authenticated && <Fragment>
-          <CharacterNavList closeDrawer={ closeDrawer } />
+          <CharacterNavList closeDrawer={ closeCheck } />
 
-          <ChronicleNavList closeDrawer={ closeDrawer } />
-        </Fragment>}
+          <ChronicleNavList closeDrawer={ closeCheck } />
+        </Fragment> }
 
-        <ListItem button component={ NavLink } to="/resources" onClick={ closeDrawer }>
+        <ListItem button component={ NavLink } to="/resources" onClick={ closeCheck }>
           <ListItemText primary="Resources" />
         </ListItem>
 
@@ -70,7 +81,7 @@ export class NavPanel extends React.Component {
         <ListItem button component="a"
           href="https://github.com/makzu/lotcastingatemi"
           target="_blank" rel="noopener noreferrer"
-          onClick={ closeDrawer }
+          onClick={ closeCheck }
         >
           <ListItemText primary="View on GitHub" />
         </ListItem>
@@ -86,18 +97,20 @@ NavPanel.propTypes = {
   theme: PropTypes.string,
   switchTheme: PropTypes.func,
   closeDrawer: PropTypes.func,
+  drawerOpen: PropTypes.bool,
   classes: PropTypes.object,
 }
 
 function mapStateToProps(state) {
   const { authenticated, id } = state.session
   const displayName = state.entities.players[id].display_name || ''
-  const { theme } = state.app
+  const { theme, drawerOpen } = state.app
 
   return {
     authenticated,
     displayName,
     theme,
+    drawerOpen,
   }
 }
 

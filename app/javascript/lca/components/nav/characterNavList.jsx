@@ -29,7 +29,7 @@ class CharacterNavList extends React.Component {
     const showExpando = !!characters.length || !!qcs.length || !!battlegroups.length
 
     const characterList = characters.map((c) =>
-      <ListItem key={ c.id } button
+      <ListItem key={ c.id } button onClick={ closeDrawer }
         component={ NavLink } to={ `/characters/${c.id}` }
       >
         <ListItemText inset
@@ -38,7 +38,7 @@ class CharacterNavList extends React.Component {
       </ListItem>
     )
     const qcList = qcs.map((c) =>
-      <ListItem key={ c.id } button
+      <ListItem key={ c.id } button onClick={ closeDrawer }
         component={ NavLink } to={ `/qcs/${c.id}` }
       >
         <ListItemText inset
@@ -47,7 +47,7 @@ class CharacterNavList extends React.Component {
       </ListItem>
     )
     const bgList = battlegroups.map((c) =>
-      <ListItem key={ c.id } button
+      <ListItem key={ c.id } button onClick={ closeDrawer }
         component={ NavLink } to={ `/battlegroups/${c.id}` }
       >
         <ListItemText inset
@@ -80,7 +80,7 @@ CharacterNavList.propTypes = {
   characters: PropTypes.arrayOf(PropTypes.object),
   qcs: PropTypes.arrayOf(PropTypes.object),
   battlegroups: PropTypes.arrayOf(PropTypes.object),
-  closeDrawer: PropTypes.func,
+  closeDrawer: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

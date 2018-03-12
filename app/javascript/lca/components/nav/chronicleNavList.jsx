@@ -27,8 +27,10 @@ class ChronicleNavList extends React.Component {
   }
 
   render() {
+    const { closeDrawer } = this.props
+
     const ownChronicleList = this.props.ownChronicles.map((c) =>
-      <ListItem key={ c.id } button
+      <ListItem key={ c.id } button onClick={ closeDrawer }
         component={ NavLink } to={ `/chronicles/${c.id}` }
       >
         <ListItemText inset
@@ -38,7 +40,7 @@ class ChronicleNavList extends React.Component {
       </ListItem>
     )
     const chronicleList = this.props.chronicles.map((c) =>
-      <ListItem key={ c.id } button
+      <ListItem key={ c.id } button onClick={ closeDrawer }
         component={ NavLink } to={ `/chronicles/${c.id}` }
       >
         <ListItemText inset
@@ -78,6 +80,7 @@ class ChronicleNavList extends React.Component {
 ChronicleNavList.propTypes = {
   ownChronicles: PropTypes.arrayOf(PropTypes.object),
   chronicles: PropTypes.arrayOf(PropTypes.object),
+  closeDrawer: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

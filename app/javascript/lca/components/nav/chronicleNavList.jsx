@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { ListSubheader, ListItem, ListItemText } from 'material-ui/List'
+import IconButton from 'material-ui/IconButton'
+import { ListSubheader, ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
 import Collapse from 'material-ui/transitions/Collapse'
 
-import StarBorder from 'material-ui-icons/StarBorder'
 import ExpandLess from 'material-ui-icons/ExpandLess'
 import ExpandMore from 'material-ui-icons/ExpandMore'
 
@@ -35,7 +35,6 @@ class ChronicleNavList extends React.Component {
           primary={ c.name }
           secondary={ `${(c.players || '').length} Player${(c.players || '').length == 1 ? '' : 's'}` }
         />
-        <StarBorder />
       </ListItem>
     )
     const chronicleList = this.props.chronicles.map((c) =>
@@ -52,8 +51,14 @@ class ChronicleNavList extends React.Component {
     return <Fragment>
       <ListItem button onClick={ this.handleClick }>
         <ListItemText primary="Chronicles" />
-        { this.state.open ? <ExpandLess /> : <ExpandMore /> }
+
+        <ListItemSecondaryAction>
+          <IconButton onClick={ this.handleClick }>
+            { this.state.open ? <ExpandLess /> : <ExpandMore /> }
+          </IconButton>
+        </ListItemSecondaryAction>
       </ListItem>
+
       <Collapse in={ this.state.open }>
         { ownChronicleList.length > 0 &&
           <ListSubheader inset>Your Chronicles</ListSubheader>

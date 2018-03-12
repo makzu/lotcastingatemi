@@ -14,17 +14,6 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
     @merit = FactoryBot.create(:merit, character_id: @character.id)
   end
 
-  describe 'GET #show' do
-    it 'returns http success' do
-      request.headers['Authorization'] = authenticated_header(@player)
-      get :show, params: { character_id: @merit.character_id, id: @merit.id, format: :json }
-
-      expect(response).to have_http_status(:success)
-    end
-
-    it_behaves_like 'respond_to_unauthenticated', 'show'
-  end
-
   describe 'POST #create' do
     context 'With valid attributes' do
       it 'Increases merit count by 1' do
@@ -43,8 +32,6 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
         expect { post :create, params: { character_id: @character.id, merit: @invalid_merit_params }, format: :json }.to change(Merit, :count).by(0)
       end
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'create'
   end
 
   describe 'DELETE #destroy' do
@@ -53,8 +40,6 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
 
       expect { delete :destroy, params: { character_id: @merit.character_id, id: @merit.id, format: :json } }.to change(Merit, :count).by(-1)
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'destroy'
   end
 
   describe 'PATCH #update' do
@@ -85,7 +70,5 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
         expect(@merit.merit_cat).to eq('story')
       end
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'update'
   end
 end

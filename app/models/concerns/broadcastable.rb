@@ -12,7 +12,7 @@ module Broadcastable
       UpdateBroadcastJob.perform_later(
         all_ids,
         self,
-        saved_changes.delete_if { |k| k == 'updated_at' }
+        saved_changes.delete_if { |k| k == 'updated_at' || k == 'created_at' }
       )
     end
 

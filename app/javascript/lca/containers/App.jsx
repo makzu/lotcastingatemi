@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import Reboot from 'material-ui/Reboot'
+import CssBaseline from 'material-ui/CssBaseline'
 
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
@@ -59,7 +59,7 @@ class App extends React.Component {
     const { children, classes } = this.props
 
     return <div className={ classes.appFrame }>
-      <Reboot />
+      <CssBaseline />
 
       <LcaHeader />
 

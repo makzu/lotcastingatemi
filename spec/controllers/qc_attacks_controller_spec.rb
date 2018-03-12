@@ -14,18 +14,6 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
     @qc_attack = FactoryBot.create(:qc_attack, qc_attackable: @qc)
   end
 
-  describe 'GET #show' do
-    it 'returns http success' do
-      request.headers['Authorization'] = authenticated_header(@player)
-
-      get :show, params: { qc_id: @qc.id, id: @qc_attack.id }
-
-      expect(response).to have_http_status(:success)
-    end
-
-    it_behaves_like 'respond_to_unauthenticated', 'show'
-  end
-
   describe 'POST #create' do
     context 'With valid attributes' do
       it 'Increases attack count by 1' do
@@ -44,8 +32,6 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
         expect { post :create, params: { qc_id: @qc.id, qc_attack: @invalid_attack_params }, format: :json }.to change(QcAttack, :count).by(0)
       end
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'create'
   end
 
   describe 'DELETE #destroy' do
@@ -53,8 +39,6 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
       request.headers['Authorization'] = authenticated_header(@player)
       expect { delete :destroy, params: { qc_id: @qc_attack.qc_attackable_id, id: @qc_attack.id, format: :json } }.to change(QcAttack, :count).by(-1)
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'destroy'
   end
 
   describe 'PATCH #update' do
@@ -69,7 +53,5 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
 
       expect(@qc_attack.name).to eq('test1')
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'update'
   end
 end

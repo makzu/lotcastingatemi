@@ -59,7 +59,7 @@ function CharacterCard({ character, classes }) {
 
     { character.type != 'Character' &&
       <Typography>
-        Anima Level: { calc.prettyAnimaLevel(character) }
+        Anima Level: { calc.prettyAnimaLevel(character.anima_level) }
       </Typography>
     }
 

@@ -19,7 +19,7 @@ function CustomAttributeExaltEditor(props) {
   }
 
   return <BlockPaper>
-    <Typography>
+    <Typography component="div">
       <TextField name="caste" value={ character.caste }
         label={ character.aspect ? 'Aspect' : 'Caste' } onChange={ onChange } onBlur={ onBlur } margin="dense"
       />&nbsp;&nbsp;

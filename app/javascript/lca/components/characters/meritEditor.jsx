@@ -86,6 +86,8 @@ export class MeritFields extends React.Component {
         onChange={ handleChange } onBlur={ handleBlur }
         label="Merit" margin="dense"
       />
+      &nbsp;
+
       <RatingField trait="rating" value={ merit.rating }
         label="Rating" margin="dense"
         min={ MERIT_RATING_MIN } max={ MERIT_RATING_MAX }
@@ -97,6 +99,7 @@ export class MeritFields extends React.Component {
           onChange={ handleChange } onBlur={ handleBlur }
           label="Summary (optional)" margin="dense"
         />
+        &nbsp;
 
         <TextField select name="merit_cat" value={ merit.merit_cat }
           onChange={ handleRatingChange }
@@ -121,7 +124,7 @@ export class MeritFields extends React.Component {
         <TextField name="description" value={ merit.description }
           onChange={ handleChange } onBlur={ handleBlur }
           label="Description" margin="dense"
-          multiline style={{ width: '100%' }} rows={ 3 }
+          multiline fullWidth rows={ 2 } rowsMax={ 10 }
         />
       </div>
       <div>

@@ -174,7 +174,7 @@ class SingleCharmEditor extends React.Component {
       <TextField name="body" value={ charm.body }
         onChange={ handleChange } onBlur={ handleBlur }
         className="editor-description-field" multiline fullWidth
-        label="Effect" margin="dense" rows={ 3 }
+        label="Effect" margin="dense" rows={ 2 } rowsMax={ 15 }
       />
       <br />
 

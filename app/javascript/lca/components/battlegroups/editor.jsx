@@ -106,7 +106,7 @@ class BattlegroupEditor extends React.Component {
       <br />
 
       <TextField name="description" value={ battlegroup.description }
-        label="Description" margin="dense" multiline fullWidth
+        label="Description" margin="dense" multiline fullWidth rowsMax={ 5 }
         onChange={ handleChange } onBlur={ handleBlur }
       />
       <br />

@@ -95,6 +95,7 @@ class QcEditor extends React.Component {
           <TextField name="description" value={ qc.description }
             label="Description" margin="dense" multiline fullWidth
             onChange={ handleChange } onBlur={ handleBlur }
+            rowsMax={ 5 }
           />
           <br />
 

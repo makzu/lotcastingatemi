@@ -24,7 +24,7 @@ function BasicsEditor(props) {
 
     <TextField name="description" value={ character.description }
       label="Description" margin="dense"
-      multiline fullWidth
+      multiline fullWidth rows={ 2 } rowsMax={ 10 }
       onChange={ onChange } onBlur={ onBlur } />
   </BlockPaper>
 

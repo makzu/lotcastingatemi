@@ -35,7 +35,7 @@ function SorceryEditor(props) {
 
       <TextField name="shaping_rituals" value={ character.shaping_rituals }
         label="Rituals" margin="dense"
-        multiline fullWidth
+        multiline fullWidth rows={ 2 } rowsMax={ 10 }
         onChange={ onChange } onBlur={ onBlur } />
     </Fragment> }
   </BlockPaper>

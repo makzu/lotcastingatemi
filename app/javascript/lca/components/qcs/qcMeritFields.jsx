@@ -93,7 +93,7 @@ export default class QcMeritFields extends React.Component {
       <TextField name="body" value={ merit.body }
         label="Text" margin="dense"
         onChange={ this.handleChange } onBlur={ this.handleBlur }
-        fullWidth={ true } multiline
+        fullWidth={ true } multiline rowsMax={ 5 }
       />
       <br />
 

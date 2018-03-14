@@ -106,7 +106,7 @@ export default class QcCharmFields extends React.Component {
       <TextField name="body" value={ charm.body }
         label="Text" margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
-        fullWidth={ true } multiline
+        fullWidth={ true } multiline rowsMax={ 5 }
       />
       <br />
       <TextField name="ref" value={ charm.ref }

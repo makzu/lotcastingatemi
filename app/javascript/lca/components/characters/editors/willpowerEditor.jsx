@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
+import ResourceEditor from './resourceEditor.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import RatingField from '../../generic/ratingField.jsx'
 
@@ -34,6 +35,8 @@ function WillpowerEditor(props) {
         onChange={ onRatingChange }
       />
     </div>
+
+    <ResourceEditor character={ character } onChange={ onRatingChange } />
   </BlockPaper>
 }
 WillpowerEditor.propTypes = {

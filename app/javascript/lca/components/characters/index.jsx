@@ -60,6 +60,11 @@ IntimacySummary.propTypes = {
 }
 
 export function WillpowerBlock({ character }) {
+  const res = character.resources.map((r, index) =>
+    <Typography key={ index }>
+      { r.resource }: { r.value }
+    </Typography>
+  )
   return <BlockPaper>
     <Typography variant="title">
       Willpower
@@ -75,6 +80,10 @@ export function WillpowerBlock({ character }) {
         Permanent
       </RatingLine>
     </Typography>
+    { res && <Typography variant="subheading">
+      Misc. Resources
+    </Typography>}
+    { res }
   </BlockPaper>
 }
 WillpowerBlock.propTypes = {

@@ -4,7 +4,10 @@ export * from './_pools.js'
 export * from './_weapons.js'
 
 import { capitalize, includes } from 'lodash'
-import { ATTACK_ABILITIES, NON_ATTACK_ABILITIES, ABILITIES_ALL } from '../constants.js'
+import {
+  ATTRIBUTES, ABILITIES_ALL, ABILITIES_ALL_NO_MA,
+  ATTACK_ABILITIES, NON_ATTACK_ABILITIES,
+} from '../constants.js'
 
 /* Defense values (Parry is per-weapon) */
 export function evasionRaw(character) {
@@ -106,6 +109,22 @@ export function abilitiesWithRatings(character) {
   })
 
   return abils
+}
+
+export function nonCasteAbilities(character) {
+  const abils = ABILITIES_ALL_NO_MA.filter((a) => {
+    return !character.caste_abilities.includes(a.pretty.toLowerCase())
+  })
+
+  return abils
+}
+
+export function nonCasteAttributes(character) {
+  const attrs = ATTRIBUTES.filter((a) => {
+    return !character.caste_attributes.includes(a.pretty.toLowerCase())
+  })
+
+  return attrs
 }
 
 export function mobilityPenalty(character) {

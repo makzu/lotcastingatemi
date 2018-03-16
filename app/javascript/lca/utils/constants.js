@@ -69,6 +69,34 @@ export const ABILITIES_ALL = [
   { abil: 'abil_war',           pretty: 'War'           }
 ]
 
+export const ABILITIES_ALL_NO_MA = [
+  { abil: 'abil_archery',       pretty: 'Archery'       },
+  { abil: 'abil_athletics',     pretty: 'Athletics'     },
+  { abil: 'abil_awareness',     pretty: 'Awareness'     },
+  { abil: 'abil_brawl',         pretty: 'Brawl'         },
+  { abil: 'abil_bureaucracy',   pretty: 'Bureaucracy'   },
+  { abil: 'abil_craft',         pretty: 'Craft'         },
+  { abil: 'abil_dodge',         pretty: 'Dodge'         },
+  { abil: 'abil_integrity',     pretty: 'Integrity'     },
+  { abil: 'abil_investigation', pretty: 'Investigation' },
+  { abil: 'abil_larceny',       pretty: 'Larceny'       },
+  { abil: 'abil_linguistics',   pretty: 'Linguistics'   },
+  { abil: 'abil_lore',          pretty: 'Lore'          },
+  { abil: 'abil_medicine',      pretty: 'Medicine'      },
+  { abil: 'abil_melee',         pretty: 'Melee'         },
+  { abil: 'abil_occult',        pretty: 'Occult'        },
+  { abil: 'abil_performance',   pretty: 'Performance'   },
+  { abil: 'abil_presence',      pretty: 'Presence'      },
+  { abil: 'abil_resistance',    pretty: 'Resistance'    },
+  { abil: 'abil_ride',          pretty: 'Ride'          },
+  { abil: 'abil_sail',          pretty: 'Sail'          },
+  { abil: 'abil_socialize',     pretty: 'Socialize'     },
+  { abil: 'abil_stealth',       pretty: 'Stealth'       },
+  { abil: 'abil_survival',      pretty: 'Survival'      },
+  { abil: 'abil_thrown',        pretty: 'Thrown'        },
+  { abil: 'abil_war',           pretty: 'War'           }
+]
+
 // Does not include Martial Arts, which gets its own handling
 export const ATTACK_ABILITIES = [
   'abil_archery',

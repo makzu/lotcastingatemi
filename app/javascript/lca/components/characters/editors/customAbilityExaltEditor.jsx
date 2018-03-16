@@ -8,6 +8,7 @@ import Typography from 'material-ui/Typography'
 
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
+import { nonCasteAbilities } from '../../../utils/calculated'
 
 function CustomAbilityExaltEditor(props) {
   const { character, onChange, onBlur, onCheck, onRatingChange } = props
@@ -45,6 +46,7 @@ function CustomAbilityExaltEditor(props) {
     <AbilitySelect name="favored_abilities"
       label="Favored Abilities"
       value={ character.favored_abilities }
+      abilities={ nonCasteAbilities(character) }
       onChange={ onRatingChange }
       multiple fullWidth margin="dense"
     />

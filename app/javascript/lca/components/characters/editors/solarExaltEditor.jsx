@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField'
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 
+import { nonCasteAbilities } from '../../../utils/calculated'
 import { SOLAR_CASTE_ABILITIES } from '../../../utils/constants.js'
 
 function SolarExaltEditor(props) {
@@ -49,6 +50,7 @@ function SolarExaltEditor(props) {
     <AbilitySelect name="favored_abilities"
       label="Favored Abilities"
       value={ character.favored_abilities }
+      abilities={ nonCasteAbilities(character) }
       onChange={ onRatingChange }
       multiple fullWidth margin="dense"
     />

@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography'
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import AttributeSelect from '../../generic/attributeSelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
+import { nonCasteAttributes } from '../../../utils/calculated'
 
 function CustomAttributeExaltEditor(props) {
   const { character, onChange, onBlur, onCheck, onRatingChange } = props
@@ -46,6 +47,7 @@ function CustomAttributeExaltEditor(props) {
     <AttributeSelect name="favored_attributes"
       label="Favored Attributes"
       value={ character.favored_attributes }
+      attributes={ nonCasteAttributes(character) }
       onChange={ onRatingChange }
       multiple fullWidth margin="dense"
     />

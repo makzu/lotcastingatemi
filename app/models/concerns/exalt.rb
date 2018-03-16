@@ -15,5 +15,9 @@ module Exalt
     attribute :limit_trigger, :string,  default: ''
 
     validates :anima_level, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 3 }
+
+    validates :motes_committed, json: { schema: Schemas::MOTE_COMMITTMENT }
+
+    validates :resources, json: { schema: Schemas::RESOURCE }
   end
 end

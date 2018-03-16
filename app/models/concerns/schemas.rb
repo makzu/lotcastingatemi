@@ -41,6 +41,33 @@ module Schemas
     }
   }.freeze
 
+  MOTE_COMMITTMENT = {
+    "type": 'array',
+    "items": {
+      "type": 'object',
+      "required": %w[pool label motes],
+      "properties": {
+        "pool": { "type": 'string', "enum": %w[personal peripheral] },
+        "label": { "type": 'string' },
+        "motes": { "type": 'integer', "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  }.freeze
+
+  RESOURCE = {
+    "type": 'array',
+    "items": {
+      "type": 'object',
+      "required": %w[resource value],
+      "properties": {
+        "resource": { "type": 'string' },
+        "value": { "type": 'integer', "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  }.freeze
+
   SPECIALTY = {
     "type": 'array',
     "items": {
@@ -70,7 +97,7 @@ module Schemas
       "required": %w[action pool],
       "properties": {
         "action": { "type": 'string' },
-        "pool": { "type": 'integer', "minimum": 0, "maximum": 99 }
+        "pool": { "type": 'integer', "minimum": 0 }
       },
       "additionalProperties": false
     }

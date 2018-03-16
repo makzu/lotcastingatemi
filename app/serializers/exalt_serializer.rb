@@ -4,8 +4,9 @@
 class ExaltSerializer < CharacterSerializer
   attributes :motes_personal_current,   :motes_personal_total,
              :motes_peripheral_current, :motes_peripheral_total,
-             :anima_level, :caste, :exalt_type, :aspect,
-             :limit_trigger, :limit
+             :motes_committed,
+             :anima_level, :caste, :exalt_type, :aspect, :anima_display,
+             :limit_trigger, :limit, :resources
 
   has_many :charms
   has_many :martial_arts_charms

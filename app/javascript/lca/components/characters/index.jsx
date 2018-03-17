@@ -63,7 +63,8 @@ IntimacySummary.propTypes = {
 }
 
 export function WillpowerBlock({ character }) {
-  const res = character.resources.map((r, index) =>
+  const re = character.resources || []
+  const res = re.map((r, index) =>
     <Typography key={ index }>
       { r.resource }: { r.value }
     </Typography>

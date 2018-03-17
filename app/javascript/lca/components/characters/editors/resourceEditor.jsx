@@ -100,6 +100,9 @@ class ResourceEditor extends React.Component {
   }
 
   render() {
+    if (this.props.character.resources == undefined)
+      return <div />
+
     const { onResourcesChange, onResourcesBlur, onValueChange, onAdd, onRemove } = this
 
     const resources = this.state.resources.map((resource, index) =>

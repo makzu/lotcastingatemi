@@ -36,7 +36,9 @@ function WillpowerEditor(props) {
       />
     </div>
 
-    <ResourceEditor character={ character } onChange={ onRatingChange } />
+    { character.type != 'Character' &&
+      <ResourceEditor character={ character } onChange={ onRatingChange } />
+    }
   </BlockPaper>
 }
 WillpowerEditor.propTypes = {

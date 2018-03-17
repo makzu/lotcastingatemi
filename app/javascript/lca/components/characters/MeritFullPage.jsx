@@ -73,7 +73,7 @@ class MeritFullPage extends React.Component {
       </div>
 
     const mts = this.props.merits.map((m) =>
-      <Grid item xs={ 12 } md={ 6 } key={ m.id }>
+      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ m.id }>
         <SingleMerit merit={ m } />
       </Grid>
     )

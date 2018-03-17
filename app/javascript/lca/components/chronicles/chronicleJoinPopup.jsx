@@ -8,7 +8,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
-import { ListItem, ListItemText } from 'material-ui/List'
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
 import GroupAdd from 'material-ui-icons/GroupAdd'
@@ -52,8 +52,11 @@ class ChronicleJoinPopup extends React.Component {
 
     return <Fragment>
       <ListItem button onClick={ handleOpen }>
-        <ListItemText inset primary="Join" />
-        <GroupAdd />
+        <ListItemIcon>
+          <GroupAdd />
+        </ListItemIcon>
+
+        <ListItemText primary="Join" />
       </ListItem>
 
       <Dialog

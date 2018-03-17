@@ -30,7 +30,7 @@ function _SingleCharm({ charm, classes }) {
       { charm.name }
     </Typography>
 
-    { charm.type == 'Evocation' &&
+    { charm.type == 'Evocation' && charm.artifact_name != '' &&
       <Typography variant="caption" className={ classes.capitalize }>
         Evocation of { charm.artifact_name }
       </Typography>

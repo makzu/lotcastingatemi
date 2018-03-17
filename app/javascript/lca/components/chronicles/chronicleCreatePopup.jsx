@@ -8,7 +8,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
-import { ListItem, ListItemText } from 'material-ui/List'
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
 import ContentAddCircle from 'material-ui-icons/AddCircle'
@@ -52,8 +52,11 @@ class ChronicleCreatePopup extends React.Component {
 
     return <Fragment>
       <ListItem button onClick={ handleOpen }>
-        <ListItemText inset primary="Create New" />
-        <ContentAddCircle />
+        <ListItemIcon>
+          <ContentAddCircle />
+        </ListItemIcon>
+
+        <ListItemText primary="Create New" />
       </ListItem>
 
       <Dialog

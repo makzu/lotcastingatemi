@@ -18,7 +18,6 @@ import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'
 
-
 export class MeritFields extends React.Component {
   constructor(props) {
     super(props)
@@ -96,19 +95,20 @@ export class MeritFields extends React.Component {
 
       <div>
         <TextField name="name" value={ merit.name }
-          onChange={ handleChange } onBlur={ handleBlur }
           label="Summary (optional)" margin="dense"
+          onChange={ handleChange } onBlur={ handleBlur }
         />
         &nbsp;
 
         <TextField select name="merit_cat" value={ merit.merit_cat }
+          label="Type" margin="dense"
           onChange={ handleRatingChange }
-          label="Type"
         >
           <MenuItem value="story">Story</MenuItem>
           <MenuItem value="innate">Innate</MenuItem>
           <MenuItem value="purchased">Purchased</MenuItem>
         </TextField>
+        &nbsp;
 
         <FormControlLabel
           control={
@@ -122,9 +122,9 @@ export class MeritFields extends React.Component {
 
       <div>
         <TextField name="description" value={ merit.description }
-          onChange={ handleChange } onBlur={ handleBlur }
           label="Description" margin="dense"
           multiline fullWidth rows={ 2 } rowsMax={ 10 }
+          onChange={ handleChange } onBlur={ handleBlur }
         />
       </div>
       <div>
@@ -178,7 +178,7 @@ class MeritEditor extends React.Component {
     const { handleAdd, handleUpdate, handleRemove } = this
 
     const mts = this.props.merits.map((m) =>
-      <Grid item key={ m.id } xs={ 12 } lg={ 6 }>
+      <Grid item key={ m.id } xs={ 12 } md={ 6 } xl={ 4 }>
         <MeritFields merit={ m } character={ this.props.character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
         />

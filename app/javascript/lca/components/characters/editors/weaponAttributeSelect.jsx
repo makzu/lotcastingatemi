@@ -11,10 +11,6 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: '5.5em',
   },
-  abilityRating: {
-    float: 'right',
-    display: 'inline-block',
-  },
 })
 
 function WeaponAttributeSelect(props) {
@@ -27,61 +23,34 @@ function WeaponAttributeSelect(props) {
     onChange={ onChange }
   >
     <MenuItem value="dexterity">
-      Dex&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_dexterity })
-      </span>
+      Dex ({ character.attr_dexterity })
     </MenuItem>
     <Divider />
 
     <MenuItem value="intelligence">
-      Int&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_intelligence })
-      </span>
+      Int ({ character.attr_intelligence })
     </MenuItem>
 
     <MenuItem value="strength">
-      Str&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_strength })
-      </span>
+      Str ({ character.attr_strength })
     </MenuItem>
     <MenuItem value="stamina">
-      Sta&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_stamina })
-      </span>
+      Sta ({ character.attr_stamina })
     </MenuItem>
     <MenuItem value="charisma">
-      Cha&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_charisma })
-      </span>
+      Cha ({ character.attr_charisma })
     </MenuItem>
     <MenuItem value="manipulation">
-      Man&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_manipulation })
-      </span>
+      Man ({ character.attr_manipulation })
     </MenuItem>
     <MenuItem value="appearance">
-      App&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_appearance })
-      </span>
+      App ({ character.attr_appearance })
     </MenuItem>
     <MenuItem value="perception">
-      Per&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_perception })
-      </span>
+      Per ({ character.attr_perception })
     </MenuItem>
     <MenuItem value="wits">
-      Wits&nbsp;
-      <span className={ classes.abilityRating }>
-        ({ character.attr_wits })
-      </span>
+      Wits ({ character.attr_wits })
     </MenuItem>
   </TextField>
 }

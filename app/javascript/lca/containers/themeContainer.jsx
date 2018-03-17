@@ -9,7 +9,7 @@ import { switchTheme } from '../ducks/actions.js'
 const overrides = {
   MuiSelect: {
     selectMenu: {
-      overflow: 'hidden',
+      overflow: 'inherit',
     },
   },
 }

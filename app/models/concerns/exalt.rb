@@ -19,5 +19,24 @@ module Exalt
     validates :motes_committed, json: { schema: Schemas::MOTE_COMMITTMENT }
 
     validates :resources, json: { schema: Schemas::RESOURCE }
+
+    before_validation :set_max_available_motes
+
+    def set_max_available_motes
+      return unless will_save_change_to_attribute? :motes_committed
+
+      self.motes_personal_current =   [motes_personal_available,   motes_personal_current].min
+      self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
+    end
+
+    private
+
+    def motes_personal_available
+      motes_personal_total - motes_committed.select { |x| x['pool'] == 'personal' }.sum { |x| x['motes'] }
+    end
+
+    def motes_peripheral_available
+      motes_peripheral_total - motes_committed.select { |x| x['pool'] == 'peripheral' }.sum { |x| x['motes'] }
+    end
   end
 end

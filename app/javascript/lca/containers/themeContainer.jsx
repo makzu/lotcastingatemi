@@ -6,23 +6,13 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 
 import { switchTheme } from '../ducks/actions.js'
 
-const overrides = {
-  MuiSelect: {
-    selectMenu: {
-      overflow: 'inherit',
-    },
-  },
-}
-
 const themes = {
   light: createMuiTheme({
-    overrides: overrides,
   }),
   dark: createMuiTheme({
     palette: {
       type: 'dark',
     },
-    overrides: overrides
   })
 }
 

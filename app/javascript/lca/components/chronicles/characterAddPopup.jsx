@@ -6,12 +6,12 @@ import Button from 'material-ui/Button'
 import Dialog, {
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
 import Divider from 'material-ui/Divider'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
 
 import { addThingToChronicle } from '../../ducks/actions.js'
 import { getMyCharactersWithoutChronicles } from '../../selectors/'
@@ -84,10 +84,10 @@ class CharacterAddPopup extends React.Component {
             { options }
           </TextField>
           { currentCharacter && currentCharacter.hidden &&
-            <Typography>
+            <DialogContentText>
               This Character is hidden.  It will only be visible to you and the
               storyteller.
-            </Typography>
+            </DialogContentText>
           }
         </DialogContent>
         <DialogActions>

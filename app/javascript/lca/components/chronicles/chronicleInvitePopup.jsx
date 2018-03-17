@@ -6,9 +6,9 @@ import Button from 'material-ui/Button'
 import Dialog, {
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
-import Typography from 'material-ui/Typography'
 
 import { updateChronicle, regenChronicleInviteCode } from '../../ducks/actions.js'
 
@@ -58,19 +58,19 @@ class ChronicleInvitePopup extends React.Component {
         <DialogContent>
           { inviteCode &&
             <Fragment>
-              <Typography>
+              <DialogContentText paragraph>
                 Another player can join { chronicleName } if they have this code.
-              </Typography>
-              <Typography variant="display1" paragraph>
+              </DialogContentText>
+              <DialogContentText variant="display1">
                 { inviteCode }
-              </Typography>
+              </DialogContentText>
             </Fragment>
           }
           { !inviteCode &&
-            <Typography>
+            <DialogContentText>
               This Chronicle is currently closed to new players.  Click Make New
               Code to re-open.
-            </Typography>
+            </DialogContentText>
           }
 
         </DialogContent>

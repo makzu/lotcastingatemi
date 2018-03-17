@@ -8,7 +8,6 @@ import Dialog, {
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog'
-import Divider from 'material-ui/Divider'
 import { FormControlLabel } from 'material-ui/Form'
 import { ListSubheader } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'

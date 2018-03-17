@@ -6,9 +6,9 @@ import Button from 'material-ui/Button'
 import Dialog, {
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
-import Typography from 'material-ui/Typography'
 
 import { removePlayerFromChronicle } from '../../ducks/actions.js'
 
@@ -53,10 +53,11 @@ class RemovePlayerPopup extends React.Component {
       >
         <DialogTitle>Remove { playerName }?</DialogTitle>
         <DialogContent>
-          <Typography>
+          <DialogContentText>
             This will remove { playerName } and all of their characters from { chronicleName }.
-          </Typography>
+          </DialogContentText>
         </DialogContent>
+
         <DialogActions>
           <Button onClick={ handleClose }>Cancel</Button>
           <Button onClick={ handleSubmit } variant="raised" color="primary">Remove</Button>

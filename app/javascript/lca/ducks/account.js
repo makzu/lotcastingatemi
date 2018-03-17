@@ -40,6 +40,4 @@ export default function SessionReducer(state = defaultState, action) {
   }
 }
 
-export function logout() {
-  return { type: LOGOUT }
-}
+export const logout  = () => ({ type: LOGOUT  })

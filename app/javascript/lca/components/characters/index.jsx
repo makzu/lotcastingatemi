@@ -23,7 +23,10 @@ import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
-import { prettyFullExaltType, prettyAnimaLevel } from '../../utils/calculated'
+import {
+  prettyFullExaltType, prettyAnimaLevel,
+  committedPersonalMotes, committedPeripheralMotes,
+} from '../../utils/calculated'
 
 export function IntimacySummary({ character }) {
   const principles = character.principles.map((p, index) =>
@@ -80,7 +83,7 @@ export function WillpowerBlock({ character }) {
         Permanent
       </RatingLine>
     </Typography>
-    { res && <Typography variant="subheading">
+    { res.length > 0 && <Typography variant="subheading" style={{ marginTop: '0.5em' }}>
       Misc. Resources
     </Typography>}
     { res }
@@ -91,6 +94,9 @@ WillpowerBlock.propTypes = {
 }
 
 export function MotePoolBlock({ character }) {
+  const persCommit = committedPersonalMotes(character)
+  const periCommit = committedPeripheralMotes(character)
+
   return <BlockPaper>
     <Typography variant="title">
       Mote Pool
@@ -98,10 +104,16 @@ export function MotePoolBlock({ character }) {
 
     <Typography>
       Personal: { character.motes_personal_current } / { character.motes_personal_total }
+      { persCommit > 0 &&
+        <span> ({persCommit}c)</span>
+      }
     </Typography>
     { character.motes_peripheral_total > 0 &&
       <Typography>
         Peripheral: { character.motes_peripheral_current } / { character.motes_peripheral_total }
+        { periCommit > 0 &&
+          <span> ({periCommit}c)</span>
+        }
       </Typography>
     }
     { character.is_sorcerer &&
@@ -109,9 +121,8 @@ export function MotePoolBlock({ character }) {
         Sorcerous : { character.sorcerous_motes }
       </Typography>
     }
-    <br />
 
-    <Typography>
+    <Typography style={{ marginTop: '0.5em' }}>
       Anima banner: { prettyAnimaLevel(character.anima_level) }
     </Typography>
   </BlockPaper>

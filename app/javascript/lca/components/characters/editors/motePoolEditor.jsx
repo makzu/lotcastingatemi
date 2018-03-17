@@ -6,8 +6,10 @@ import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
+import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import RatingField from '../../generic/ratingField.jsx'
+import { committedPersonalMotes, committedPeripheralMotes } from '../../../utils/calculated'
 
 const styles = theme => ({
   separator: { ...theme.typography.body1,
@@ -26,7 +28,7 @@ function MotePoolEditor(props) {
     { character.type != 'Character' && [
       <div key="personal">
         <RatingField trait="motes_personal_current" value={ character.motes_personal_current }
-          label="Personal" max={ character.motes_personal_total } margin="dense"
+          label="Personal" max={ character.motes_personal_total - committedPersonalMotes(character) } margin="dense"
           onChange={ onRatingChange }
         />
         <span className={ classes.separator }>
@@ -46,7 +48,7 @@ function MotePoolEditor(props) {
       </div>,
       <div key="peripheral">
         <RatingField trait="motes_peripheral_current" value={ character.motes_peripheral_current }
-          label="Peripheral" max={ character.motes_peripheral_total } margin="dense"
+          label="Peripheral" max={ character.motes_peripheral_total - committedPeripheralMotes(character) } margin="dense"
           onChange={ onRatingChange }
         />
         <span className={ classes.separator }>
@@ -64,6 +66,9 @@ function MotePoolEditor(props) {
           </span>
         }
       </div>,
+      <MoteCommittmentEditor key="commit"
+        character={ character } onChange={ onRatingChange }
+      />,
       <div key="anima">
         <TextField select name="anima_level" value={ character.anima_level }
           label="Anima" margin="dense"

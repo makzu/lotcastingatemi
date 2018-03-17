@@ -238,3 +238,11 @@ export function isCasteAttribute(character, attribute) {
 export function isFavoredAttribute(character, attribute) {
   return character.favored_attributes && includes(character.favored_attributes, attribute)
 }
+
+export function committedPersonalMotes(character) {
+  return character.motes_committed.filter((c) => c.pool == 'personal' ).reduce((total, c) => total + c.motes, 0)
+}
+
+export function committedPeripheralMotes(character) {
+  return character.motes_committed.filter((c) => c.pool == 'peripheral' ).reduce((total, c) => total + c.motes, 0)
+}

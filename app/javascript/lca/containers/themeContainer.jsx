@@ -3,14 +3,23 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
+import green from 'material-ui/colors/green'
+import lightgreen from 'material-ui/colors/lightGreen'
+import teal from 'material-ui/colors/teal'
 
 import { switchTheme } from '../ducks/actions.js'
 
 const themes = {
   light: createMuiTheme({
+    palette: {
+      primary: { main: green[800], },
+      secondary: { main: lightgreen[400], },
+    },
   }),
   dark: createMuiTheme({
     palette: {
+      primary: { main: green[900], },
+      secondary: { main: teal[400], },
       type: 'dark',
     },
   })

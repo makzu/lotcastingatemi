@@ -10,7 +10,6 @@ module HealthLevels
               :health_level_2s,
               :health_level_4s,
               :health_level_incap,
-
               :damage_bashing,
               :damage_lethal,
               :damage_aggravated,

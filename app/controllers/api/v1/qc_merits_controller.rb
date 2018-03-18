@@ -30,7 +30,7 @@ module Api
 
       def update
         authorize @qc_merit
-        if @qc_merit.update_attributes(qc_merit_params)
+        if @qc_merit.update(qc_merit_params)
           render json: @qc_merit
         else
           render json: @qc_merit.errors.details, status: :bad_request

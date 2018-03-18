@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#
+# Main channel for broadcasting entity updates
 class ChronicleChannel < ApplicationCable::Channel
   def subscribed
     stream_from "entity-update-#{params[:id]}"

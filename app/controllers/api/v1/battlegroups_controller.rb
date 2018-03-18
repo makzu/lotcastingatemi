@@ -29,7 +29,7 @@ module Api
 
       def update
         authorize @battlegroup
-        if @battlegroup.update_attributes(battlegroup_params)
+        if @battlegroup.update(battlegroup_params)
           render json: @battlegroup
         else
           render json: @battlegroup.errors.details, status: :bad_request

@@ -29,7 +29,7 @@ module Api
 
       def update
         authorize @qc
-        if @qc.update_attributes(qc_params)
+        if @qc.update(qc_params)
           render json: @qc
         else
           render json: @qc.errors.details, status: :bad_request

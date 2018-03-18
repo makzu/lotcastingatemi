@@ -30,7 +30,7 @@ module Api
 
       def update
         authorize @spell
-        if @spell.update_attributes(spell_params)
+        if @spell.update(spell_params)
           render json: @spell
         else
           render json: @spell.errors.details, status: :bad_request

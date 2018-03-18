@@ -20,7 +20,7 @@ module Api
 
       def update
         authorize @player
-        if @player.update_attributes(player_params)
+        if @player.update(player_params)
           render json: @player
         else
           render json: @player.errors.details, status: :bad_request

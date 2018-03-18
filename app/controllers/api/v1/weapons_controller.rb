@@ -30,7 +30,7 @@ module Api
 
       def update
         authorize @weapon
-        if @weapon.update_attributes(weapon_params)
+        if @weapon.update(weapon_params)
           render json: @weapon
         else
           render json: @weapon.errors.details, status: :bad_request

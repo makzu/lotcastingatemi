@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#
+# Common validations for Ability Exalts
 module AbilityExalt
   extend ActiveSupport::Concern
   include Constants

@@ -30,7 +30,7 @@ module Api
 
       def update
         authorize @qc_charm
-        if @qc_charm.update_attributes(qc_charm_params)
+        if @qc_charm.update(qc_charm_params)
           render json: @qc_charm
         else
           render json: @qc_charm.errors.details, status: :bad_request

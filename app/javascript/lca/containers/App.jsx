@@ -111,6 +111,7 @@ class App extends React.Component {
 }
 App.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
   classes: PropTypes.object,

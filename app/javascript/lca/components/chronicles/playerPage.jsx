@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
 import Divider from 'material-ui/Divider'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'

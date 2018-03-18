@@ -24,4 +24,4 @@ RootContainer.propTypes = {
   store: PropTypes.object.isRequired
 }
 
-export default hot(module)(RootContainer)
+export default hot(module)(RootContainer) // eslint-disable-line no-undef

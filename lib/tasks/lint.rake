@@ -12,18 +12,16 @@ if %w[development test].include? Rails.env
         tsk.options = ['-DR']
         tsk.fail_on_error = false
       end
-    end
-  end
-end
 
-namespace :lca do
-  desc 'Lint frontend code with eslint'
-  task :frontend do
-    begin
-      sh './bin/yarn lint'
-    rescue RuntimeError => e
-      puts e.message
-      exit
+      desc 'Lint frontend code with eslint'
+      task :frontend do
+        begin
+          sh './bin/yarn lint'
+        rescue RuntimeError => e
+          puts e.message
+          exit
+        end
+      end
     end
   end
 end

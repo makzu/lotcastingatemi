@@ -78,6 +78,7 @@ DisplayNamePopup.propTypes = {
   displayName: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   updatePlayer: PropTypes.func.isRequired,
+  children: PropTypes.node,
 }
 
 function mapStateToProps(state) {

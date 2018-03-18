@@ -7,6 +7,6 @@ FactoryBot.define do
     email 'MyString'
     image 'MyString'
     uid 'MyString'
-    Player nil
+    player
   end
 end

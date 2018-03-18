@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'character trait' do |trait_type, parent_type|
+RSpec.shared_examples 'character' do |character_type|
   def authenticated_header(user)
     token = Knock::AuthToken.new(payload: { sub: user.id }).token
     { 'Authorization' => "Bearer #{token}" }
   end
 
-  let(:trait) { create(trait_type) }
+  let(:trait) { create(character_type) }
 
   context 'while logged in' do
     describe 'creating a record' do
       it 'succeeds' do
-        params = { trait.entity_type => FactoryBot.attributes_for(trait_type) }
+        params = { trait.entity_type => FactoryBot.attributes_for(character_type) }
         expect do
-          post "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/",
+          post "/api/v1/#{trait.entity_type}s/",
                params:  params,
                headers: authenticated_header(trait.player)
         end.to change { trait.class.count }.by 1
@@ -25,7 +25,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
 
     describe 'showing a record' do
       it 'succeeds' do
-        get "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}",
+        get "/api/v1/#{trait.entity_type}s/#{trait.id}",
             headers: authenticated_header(trait.player)
 
         expect(response.content_type).to eq 'application/json'
@@ -36,7 +36,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
     describe 'destroying a record' do
       it 'succeeds' do
         expect do
-          delete "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}",
+          delete "/api/v1/#{trait.entity_type}s/#{trait.id}",
                  headers: authenticated_header(trait.player)
         end.to change { trait.class.count }.by(-1)
 
@@ -49,25 +49,25 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
   context 'while not logged in' do
     describe 'creating a record' do
       it 'returns an auth failure' do
-        post "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/"
+        post "/api/v1/#{trait.entity_type}s/"
         expect(response.status).to eq 401
       end
     end
     describe 'showing a record' do
       it 'returns an auth failure' do
-        get "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}"
+        get "/api/v1/#{trait.entity_type}s/#{trait.id}"
         expect(response.status).to eq 401
       end
     end
     describe 'updating a record' do
       it 'returns an auth failure' do
-        patch "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}"
+        patch "/api/v1/#{trait.entity_type}s/#{trait.id}"
         expect(response.status).to eq 401
       end
     end
     describe 'destroying a record' do
       it 'returns an auth failure' do
-        delete "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}"
+        delete "/api/v1/#{trait.entity_type}s/#{trait.id}"
         expect(response.status).to eq 401
       end
     end

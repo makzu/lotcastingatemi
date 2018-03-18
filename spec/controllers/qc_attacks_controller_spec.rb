@@ -15,15 +15,6 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'With valid attributes' do
-      it 'Increases attack count by 1' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @qc_attack_params = FactoryBot.attributes_for(:qc_attack, qc_attackable_id: @qc.id)
-
-        expect { post :create, params: { qc_id: @qc.id, qc_attack: @qc_attack_params }, format: :json }.to change(QcAttack, :count).by(1)
-      end
-    end
-
     context 'With invalid attributes' do
       it 'Increases attack count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
@@ -31,13 +22,6 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
 
         expect { post :create, params: { qc_id: @qc.id, qc_attack: @invalid_attack_params }, format: :json }.to change(QcAttack, :count).by(0)
       end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    it 'Decreases attack count by 1' do
-      request.headers['Authorization'] = authenticated_header(@player)
-      expect { delete :destroy, params: { qc_id: @qc_attack.qc_attackable_id, id: @qc_attack.id, format: :json } }.to change(QcAttack, :count).by(-1)
     end
   end
 

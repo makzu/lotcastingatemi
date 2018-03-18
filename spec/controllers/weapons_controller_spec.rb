@@ -15,15 +15,6 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'With valid attributes' do
-      it 'Increases Weapon count by 1' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @weapon_params = FactoryBot.attributes_for(:weapon, character_id: @character.id)
-
-        expect { post :create, params: { character_id: @character.id, weapon: @weapon_params }, format: :json }.to change(Weapon, :count).by(1)
-      end
-    end
-
     context 'With invalid attributes' do
       it 'Increases Weapon count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
@@ -31,14 +22,6 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
 
         expect { post :create, params: { character_id: @character.id, weapon: @invalid_weapon_params }, format: :json }.to change(Weapon, :count).by(0)
       end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    it 'Decreases Weapon count by 1' do
-      request.headers['Authorization'] = authenticated_header(@player)
-
-      expect { delete :destroy, params: { character_id: @weapon.character_id, id: @weapon.id, format: :json } }.to change(Weapon, :count).by(-1)
     end
   end
 

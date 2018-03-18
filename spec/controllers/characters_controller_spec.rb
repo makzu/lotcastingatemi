@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require Rails.root.join('spec', 'controllers', 'shared_examples', 'respond_to_unauthenticated.rb')
 
 RSpec.describe Api::V1::CharactersController, type: :controller do
   def authenticated_header(user)
@@ -14,27 +13,7 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
     @character = FactoryBot.create(:character, player_id: @player.id)
   end
 
-  describe 'GET #show' do
-    it 'returns http success' do
-      request.headers['Authorization'] = authenticated_header(@player)
-      get :show, params: { id: @character, format: :json }
-      expect(response).to have_http_status(:success)
-    end
-
-    it_behaves_like 'respond_to_unauthenticated', 'show'
-  end
-
   describe 'POST #create' do
-    context 'With valid attributes' do
-      it 'Increases Character count by 1' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryBot.create(:chronicle)
-        @character_params = FactoryBot.attributes_for(:character, chronicle_id: @chronicle.id, player_id: @player.id)
-
-        expect { post :create, params: { character: @character_params }, format: :json }.to change(Character, :count).by(1)
-      end
-    end
-
     context 'With invalid attributes' do
       it 'Increases Character count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
@@ -44,17 +23,6 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
         expect { post :create, params: { character: @invalid_character_params }, format: :json }.to change(Character, :count).by(0)
       end
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'create'
-  end
-
-  describe 'DELETE #destroy' do
-    it 'Decreases Character count by 1' do
-      request.headers['Authorization'] = authenticated_header(@player)
-      expect { delete :destroy, params: { id: @character.id, format: :json } }.to change(Character, :count).by(-1)
-    end
-
-    it_behaves_like 'respond_to_unauthenticated', 'destroy'
   end
 
   describe 'PATCH #update' do
@@ -89,7 +57,5 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
         expect(@character.essence).not_to eq(-1)
       end
     end
-
-    it_behaves_like 'respond_to_unauthenticated', 'update'
   end
 end

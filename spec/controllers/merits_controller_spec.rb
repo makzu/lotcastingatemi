@@ -15,15 +15,6 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'With valid attributes' do
-      it 'Increases merit count by 1' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @merit_params = FactoryBot.attributes_for(:merit, character_id: @character.id)
-
-        expect { post :create, params: { character_id: @character.id, merit: @merit_params }, format: :json }.to change(Merit, :count).by(1)
-      end
-    end
-
     context 'With invalid attributes' do
       it 'Increases merit count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
@@ -31,14 +22,6 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
 
         expect { post :create, params: { character_id: @character.id, merit: @invalid_merit_params }, format: :json }.to change(Merit, :count).by(0)
       end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    it 'Decreases merit count by 1' do
-      request.headers['Authorization'] = authenticated_header(@player)
-
-      expect { delete :destroy, params: { character_id: @merit.character_id, id: @merit.id, format: :json } }.to change(Merit, :count).by(-1)
     end
   end
 

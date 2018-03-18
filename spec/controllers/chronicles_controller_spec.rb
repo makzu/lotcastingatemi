@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require Rails.root.join('spec', 'controllers', 'shared_examples', 'respond_to_unauthenticated.rb')
 
 RSpec.describe Api::V1::ChroniclesController, type: :controller do
   def authenticated_header(user)

@@ -3,5 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CustomAttributeCharacter, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has a valid factory' do
+    expect(FactoryBot.create(:custom_attribute_character)).to be_valid
+  end
 end

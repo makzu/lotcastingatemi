@@ -14,24 +14,6 @@ RSpec.describe Api::V1::QcCharmsController, type: :controller do
     @qc_charm = FactoryBot.create(:qc_charm, qc_id: @qc.id)
   end
 
-  describe 'POST #create' do
-    context 'With valid attributes' do
-      it 'Increases charm count by 1' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @qc_charm_params = FactoryBot.attributes_for(:qc_charm, qc_id: @qc.id)
-
-        expect { post :create, params: { qc_id: @qc.id, qc_charm: @qc_charm_params }, format: :json }.to change(QcCharm, :count).by(1)
-      end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    it 'Decreases charm count by 1' do
-      request.headers['Authorization'] = authenticated_header(@player)
-      expect { delete :destroy, params: { qc_id: @qc_charm.qc_id, id: @qc_charm.id, format: :json } }.to change(QcCharm, :count).by(-1)
-    end
-  end
-
   describe 'PATCH #update' do
     it 'Updates charm attributes' do
       request.headers['Authorization'] = authenticated_header(@player)

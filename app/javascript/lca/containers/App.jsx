@@ -99,13 +99,13 @@ class App extends React.Component {
 
       <main className={ classes.content }>
         { children }
-
-        <Slide direction="up" in={ loading } mountOnEnter unmountOnExit
-          style={{ transitionDelay: loading ? 250 : 0 }}
-        >
-          <LoadingSpinner />
-        </Slide>
       </main>
+
+      <Slide direction="up" in={ loading } mountOnEnter unmountOnExit
+        style={{ transitionDelay: loading ? 250 : 0 }}
+      >
+        <LoadingSpinner />
+      </Slide>
     </div>
   }
 }

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples 'character trait' do |trait_type, parent_type|
+  ActiveJob::Base.queue_adapter = :test
+
   def authenticated_header(user)
     token = Knock::AuthToken.new(payload: { sub: user.id }).token
     { 'Authorization' => "Bearer #{token}" }
@@ -11,7 +13,6 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
   context 'while logged in' do
     describe 'creating a record' do
       it 'succeeds' do
-        ActiveJob::Base.queue_adapter = :test
         params = { trait.entity_type => FactoryBot.attributes_for(trait_type) }
         expect do
           post "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/",

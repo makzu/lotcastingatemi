@@ -24,20 +24,25 @@ class SolarCharacter < Character
 
   before_validation :set_mote_pool_totals
   before_validation :set_exalt_type
+  before_validation :set_caste_ability
 
   # TODO: re-enable these validations once they can be refactored to not throw
   #  errors on new, empty SolarCharacters
-  validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :abils_are_blank?
-  validate :caste_abilities_are_valid_solar,         unless: :abils_are_blank?
-  validate :caste_and_favored_dont_overlap,          unless: :abils_are_blank?
-  validate :five_caste_and_five_favored_abilities,   unless: :abils_are_blank?
-  validate :supernal_ability_is_caste,               unless: :abils_are_blank?
+  validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :caste_is_blank?
+  validate :caste_abilities_are_valid_solar,         unless: :caste_is_blank?
+  validate :caste_and_favored_dont_overlap,          unless: :caste_is_blank?
+  validate :supernal_ability_is_caste,               unless: :caste_is_blank?
+  validate :five_caste_and_five_favored_abilities
 
   validates :limit, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10
   }
 
   private
+
+  def caste_is_blank?
+    caste.blank?
+  end
 
   def set_mote_pool_totals
     return unless will_save_change_to_attribute? :essence
@@ -50,9 +55,11 @@ class SolarCharacter < Character
     self.exalt_type = 'Solar'
   end
 
-  def abils_are_blank?
-    # caste.blank? || caste_abilities.length < 5 || favored_abilities.length < 5
-    true
+  def set_caste_ability
+    return unless will_save_change_to_attribute?(:supernal_ability) &&
+                  caste_abilities.length < 5
+
+    self.caste_abilities += [supernal_ability]
   end
 
   def caste_and_favored_dont_overlap
@@ -72,17 +79,18 @@ class SolarCharacter < Character
   end
 
   def supernal_ability_is_caste
-    unless CASTE_ABILITIES[caste.to_sym].include? supernal_ability # rubocop:disable Style/GuardClause
+    return if supernal_ability.blank?
+    unless caste_abilities.include? supernal_ability # rubocop:disable Style/GuardClause
       errors.add(:supernal_ability, "not a valid supernal ability for #{caste}s")
     end
   end
 
   def five_caste_and_five_favored_abilities
-    unless caste_abilities.length == 5
-      errors.add(:caste_abilities, 'Must have exactly 5 caste abilities')
+    unless caste_abilities.length <= 5
+      errors.add(:caste_abilities, 'Must have at most 5 caste abilities')
     end
-    unless favored_abilities.length == 5 # rubocop:disable Style/GuardClause
-      errors.add(:favored_abilities, 'Must have exactly 5 favored abilities')
+    unless favored_abilities.length <= 5 # rubocop:disable Style/GuardClause
+      errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
     end
   end
   # rubocop:enable Style/IfUnlessModifier

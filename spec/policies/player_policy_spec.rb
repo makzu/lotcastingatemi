@@ -3,27 +3,38 @@
 require 'rails_helper'
 
 RSpec.describe PlayerPolicy do
-  let(:user) { User.new }
+  subject { described_class.new(player, owner) }
 
-  subject { described_class }
+  let(:st) { FactoryBot.create(:player) }
+  let(:owner) { FactoryBot.create(:player) }
+  let(:other_player) { FactoryBot.create(:player) }
+  let(:chronicle) { FactoryBot.create(:chronicle, st: st, players: [other_player]) }
 
-  permissions '.scope' do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'for the owner of the character' do
+    let(:player) { owner }
+
+    it { is_expected.to permit_actions(%i[index update show destroy]) }
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'for the ST' do
+    let(:player) { st }
+
+    it { is_expected.to forbid_actions(%i[update show destroy]) }
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'for another player in a chronicle' do
+    let(:player) { other_player }
+
+    it { is_expected.to forbid_actions(%i[update show destroy]) }
   end
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'a user that has nothing to do with the character' do
+    let(:player) { FactoryBot.create(:player) }
+    it { is_expected.to forbid_actions(%i[update show destroy]) }
   end
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'a user that is not logged in' do
+    let(:player) { nil }
+    it { is_expected.to forbid_actions(%i[update show destroy]) }
   end
 end

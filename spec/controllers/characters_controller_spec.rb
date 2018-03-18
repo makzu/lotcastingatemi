@@ -42,20 +42,5 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
         expect(@character.attr_wits).to eq(5)
       end
     end
-
-    context 'With invalid attributes' do
-      it 'Updates character attributes' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryBot.create(:chronicle)
-        @invalid_updated_character_params = FactoryBot.attributes_for(:character, essence: -1)
-
-        expect(@character.essence).not_to eq(-1)
-
-        patch :update, params: { id: @character.id, character: @invalid_updated_character_params, format: :json }
-        @character.reload
-
-        expect(@character.essence).not_to eq(-1)
-      end
-    end
   end
 end

@@ -3,5 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe CreateBroadcastJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+  ActiveJob::Base.queue_adapter = :test
+
+  it 'enqueues while making a character' do
+    expect do
+      create(:character)
+    end.to have_enqueued_job(CreateBroadcastJob)
+  end
 end

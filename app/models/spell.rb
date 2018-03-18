@@ -5,7 +5,7 @@ class Spell < ApplicationRecord
   include Broadcastable
   include CharacterTrait
 
-  CIRCLES = %w[ emerald sapphire adamant ].freeze
+  CIRCLES = %w[ terrestrial celestial solar ].freeze
 
   validates :name, presence: true
   validates :circle, inclusion: { in: CIRCLES }

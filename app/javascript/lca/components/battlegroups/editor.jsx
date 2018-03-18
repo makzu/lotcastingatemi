@@ -14,7 +14,7 @@ import RatingField from '../generic/ratingField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
 import { updateBattlegroup } from '../../ducks/actions.js'
-import { bgDefenseBonus, bgSoak } from '../../utils/calculated/'
+import { bgDefenseBonus, bgSoak, totalMagnitude } from '../../utils/calculated/'
 
 const styles = theme => ({
   bgBonus: { ...theme.typography.caption,
@@ -116,6 +116,11 @@ class BattlegroupEditor extends React.Component {
         onChange={ handleRatingChange }
       />
 
+      <RatingField trait="health_levels" value={ battlegroup.health_levels }
+        label="Health Levels" margin="dense"
+        onChange={ handleRatingChange }
+      />
+
       <RatingField trait="willpower_temporary" value={ battlegroup.willpower_temporary }
         label="Temp WP" margin="dense"
         onChange={ handleRatingChange }
@@ -141,15 +146,12 @@ class BattlegroupEditor extends React.Component {
         label="Size" max={ 5 } margin="dense"
         onChange={ handleRatingChange }
       />
-      <RatingField trait="magnitude_current" value={ battlegroup.magnitude_current }
-        label="Mag." margin="dense"
-        onChange={ handleRatingChange }
-      />
-      <span> / </span>
+
       <RatingField trait="magnitude" value={ battlegroup.magnitude }
-        label="Total" margin="dense"
+        label="Magnitude" margin="dense"
         onChange={ handleRatingChange }
       />
+      <span className={ classes.bgBonus}> / { totalMagnitude(battlegroup) }</span>
       <TextField select name="drill" value={ battlegroup.drill }
         label="Drill" className={ classes.drill } margin="dense"
         onChange={ handleRatingChange }

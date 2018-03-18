@@ -95,9 +95,9 @@ class SpellEditorBlock extends React.Component {
         value={ spell.circle }
         onChange={ handleRatingChange }
       >
-        <MenuItem value="emerald">Terrestrial</MenuItem>
-        <MenuItem value="sapphire">Celestial</MenuItem>
-        <MenuItem value="adamant">Solar</MenuItem>
+        <MenuItem value="terrestrial">Terrestrial</MenuItem>
+        <MenuItem value="celestial">Celestial</MenuItem>
+        <MenuItem value="solar">Solar</MenuItem>
       </TextField>
       &nbsp;&nbsp;
 

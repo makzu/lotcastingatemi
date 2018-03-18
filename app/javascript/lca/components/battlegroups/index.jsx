@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
@@ -44,7 +42,7 @@ class BattlegroupSheet extends React.PureComponent {
       </Typography>
 
       <Typography component="div">
-        <strong>Magnitude:</strong> { battlegroup.magnitude_current } / { battlegroup.magnitude }
+        <strong>Magnitude:</strong> { battlegroup.magnitude } / { calc.totalMagnitude(battlegroup) }
       </Typography>
 
       <Typography component="div">

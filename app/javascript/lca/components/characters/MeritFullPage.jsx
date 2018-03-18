@@ -29,9 +29,9 @@ function _SingleMerit(props) {
     <RatingLine rating={ merit.rating } dontFill>
       <Typography variant="title">
         <span className={ classes.name }>
-          { merit.name || merit.merit_name }
+          { merit.label || merit.merit_name }
         </span>
-        { merit.name &&
+        { merit.label &&
           <span className={ classes.meritName}>
             &nbsp;&nbsp;({ merit.merit_name })
           </span>

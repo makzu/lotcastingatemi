@@ -37,7 +37,7 @@ puts 'Reloading merits'
 YAML.safe_load(File.read('db/seeds/merits.yaml')).each do |m|
   merit = Merit.find_or_initialize_by(id: m['id'])
   merit.update(m)
-  puts 'Updated merit ' + merit.name + ' for ' + merit.character.name
+  puts 'Updated merit ' + (merit.label || merit.merit_name) + ' for ' + merit.character.name
 end
 
 puts 'Reloading weapons'

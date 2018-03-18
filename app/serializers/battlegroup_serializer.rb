@@ -4,7 +4,7 @@
 class BattlegroupSerializer < ActiveModel::Serializer
   attributes :id, :name, :size, :might, :drill, :perfect_morale,
              :description,
-             :magnitude, :magnitude_current,
+             :magnitude, :health_levels,
              :essence, :willpower_temporary, :willpower_permanent, :armor_name,
              :soak, :hardness, :evasion, :parry, :resolve, :guile, :appearance,
              :movement, :senses, :join_battle, :initiative, :onslaught

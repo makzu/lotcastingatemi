@@ -1,6 +1,5 @@
 - id: 1
   character_id: 1
-  name: martial artist
   merit_name: martial artist
   rating: 4
   merit_cat: purchased
@@ -10,7 +9,7 @@
 
 - id: 2
   character_id: 1
-  name: royal stipend
+  label: royal stipend
   merit_name: resources
   rating: 2
   merit_cat: story
@@ -20,7 +19,6 @@
 
 - id: 3
   character_id: 1
-  name: Ambidextrous
   merit_name: ambidextrous
   rating: 1
   merit_cat: innate
@@ -30,7 +28,6 @@
 
 - id: 4
   character_id: 2
-  name: martial artist
   merit_name: martial artist
   rating: 4
   merit_cat: purchased

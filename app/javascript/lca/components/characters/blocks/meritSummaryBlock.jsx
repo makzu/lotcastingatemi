@@ -21,8 +21,8 @@ export function MeritSummaryBlock(props) {
   const merits = props.merits.map((merit) =>
     <div key={ merit.id } className={ classes.meritLine }>
       <RatingLine rating={ merit.rating } dontFill>
-        { merit.name || merit.merit_name }
-        { merit.name &&
+        { merit.label || merit.merit_name }
+        { merit.label &&
           <span className={ classes.meritName }> ({ merit.merit_name })</span>
         }
       </RatingLine>

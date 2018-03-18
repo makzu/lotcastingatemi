@@ -10,24 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316060338) do
+ActiveRecord::Schema.define(version: 20180318002106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "battlegroups", force: :cascade do |t|
-    t.integer "size", default: 0
+    t.integer "size", default: 1
     t.integer "might", default: 0
-    t.integer "drill", default: 0
+    t.integer "drill", default: 1
     t.boolean "perfect_morale", default: false
-    t.integer "magnitude_current", default: 7
+    t.integer "health_levels", default: 7
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", default: "New Battlegroup"
     t.bigint "player_id"
     t.bigint "chronicle_id"
     t.text "description", default: ""
-    t.integer "magnitude", default: 7
+    t.integer "magnitude", default: 8
     t.integer "essence", default: 1
     t.integer "willpower_temporary", default: 3
     t.integer "willpower_permanent", default: 3
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 20180316060338) do
     t.string "name", default: "New Character"
     t.text "description", default: ""
     t.integer "essence", default: 1
-    t.integer "willpower_temporary", default: 5
-    t.integer "willpower_permanent", default: 5
+    t.integer "willpower_temporary", default: 3
+    t.integer "willpower_permanent", default: 3
     t.integer "health_level_0s", default: 1
     t.integer "health_level_1s", default: 2
     t.integer "health_level_2s", default: 2
@@ -208,11 +208,11 @@ ActiveRecord::Schema.define(version: 20180316060338) do
   create_table "merits", id: :serial, force: :cascade do |t|
     t.integer "character_id"
     t.integer "rating", default: 1
-    t.string "name", default: "New Merit"
-    t.string "merit_name", default: ""
+    t.string "label", default: ""
+    t.string "merit_name", default: "New Merit"
     t.string "merit_cat", default: "story"
     t.text "description", default: ""
-    t.string "ref", default: "Core p.xyz"
+    t.string "ref", default: "Core p.157-169"
     t.boolean "supernatural", default: false
     t.string "prereqs", default: ""
     t.datetime "created_at", null: false
@@ -244,8 +244,8 @@ ActiveRecord::Schema.define(version: 20180316060338) do
   create_table "qc_charms", force: :cascade do |t|
     t.bigint "qc_id"
     t.string "name", default: "New QC Charm"
-    t.string "cost", default: ""
-    t.string "timing", default: "supplemental"
+    t.string "cost", default: "0m"
+    t.string "timing", default: "reflexive"
     t.string "duration", default: "instant"
     t.string "keywords", default: [], array: true
     t.integer "min_essence", default: 1
@@ -320,7 +320,7 @@ ActiveRecord::Schema.define(version: 20180316060338) do
     t.bigint "character_id"
     t.string "name", default: "New Spell"
     t.string "cost", default: "0sm, 1wp"
-    t.string "circle", default: "emerald"
+    t.string "circle", default: "terrestrial"
     t.string "keywords", default: [], array: true
     t.string "duration", default: "instant"
     t.text "body", default: ""
@@ -353,7 +353,6 @@ ActiveRecord::Schema.define(version: 20180316060338) do
   add_foreign_key "chronicle_players", "players"
   add_foreign_key "identities", "players"
   add_foreign_key "merits", "characters"
-  add_foreign_key "qc_attacks", "qcs", column: "qc_attackable_id"
   add_foreign_key "qc_charms", "qcs"
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "qcs", "chronicles"

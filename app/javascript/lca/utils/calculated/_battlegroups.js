@@ -35,3 +35,7 @@ export function prettyDrillRating(battlegroup) {
     return 'Elite'
   }
 }
+
+export function totalMagnitude(battlegroup) {
+  return battlegroup.health_levels + battlegroup.size + (battlegroup.perfect_morale ? 3 : 0)
+}

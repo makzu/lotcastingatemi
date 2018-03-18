@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :spell do
     character
     name "MyString"
-    circle 'emerald'
+    circle 'terrestrial'
     cost "MyString"
     keywords ["MyString"]
     body "MyText"

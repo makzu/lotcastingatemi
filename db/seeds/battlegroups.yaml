@@ -6,4 +6,5 @@
   might: 0
   drill: 1
   perfect_morale: false
-  magnitude_current: 7
+  health_levels: 7
+  magnitude: 9

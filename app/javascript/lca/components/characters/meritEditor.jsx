@@ -94,7 +94,7 @@ export class MeritFields extends React.Component {
       />
 
       <div>
-        <TextField name="name" value={ merit.name }
+        <TextField name="label" value={ merit.label }
           label="Summary (optional)" margin="dense"
           onChange={ handleChange } onBlur={ handleBlur }
         />

@@ -5,9 +5,36 @@ export const SWITCH_THEME  = 'lca/app/SWITCH_THEME'
 const defaultState = {
   drawerOpen: false,
   theme: localStorage.theme || 'light',
+  loading: false,
 }
 
 export default function AppReducer(state = defaultState, action) {
+  const act = action.type.split('/')
+  if (act[0] !== 'lca')
+    return state
+
+  switch(act[2]) {
+  case 'CREATE':
+  case 'FETCH':
+  case 'UPDATE':
+  case 'DESTROY':
+    return { ...state,
+      loading: true,
+    }
+
+  case 'CREATE_SUCCESS':
+  case 'FETCH_SUCCESS':
+  case 'UPDATE_SUCCESS':
+  case 'DESTROY_SUCCESS':
+  case 'CREATE_FAILURE':
+  case 'FETCH_FAILURE':
+  case 'UPDATE_FAILURE':
+  case 'DESTROY_FAILURE':
+    return { ...state,
+      loading: false,
+    }
+  }
+
   switch(action.type) {
 
   case CLOSE_DRAWER:

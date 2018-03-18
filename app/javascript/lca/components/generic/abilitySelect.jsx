@@ -28,17 +28,16 @@ class AbilitySelect extends React.Component {
       </MenuItem>
     )
 
-    return (
-      <TextField select className={ props.multiple ? classes.multiple : classes.root }
-        name={ props.name } value={ props.value } label={ props.label }
-        onChange={ props.onChange }
-        margin={ props.margin || 'none' } fullWidth={ props.fullWidth }
-        SelectProps={{ multiple: props.multiple }}
-      >
-        <MenuItem value="" disabled>Ability</MenuItem>
-        { menuItems }
-      </TextField>
-    )
+    return <TextField select
+      className={ props.multiple ? classes.multiple : classes.root }
+      name={ props.name } value={ props.value } label={ props.label }
+      onChange={ props.onChange }
+      margin={ props.margin || 'none' } fullWidth={ props.fullWidth }
+      SelectProps={{ multiple: props.multiple }}
+    >
+      <MenuItem value="" disabled>Ability</MenuItem>
+      { menuItems }
+    </TextField>
   }
 }
 AbilitySelect.propTypes = {

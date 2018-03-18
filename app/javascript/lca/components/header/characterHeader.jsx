@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -79,7 +79,7 @@ function CharacterHeader(props) {
     <CharmTab character={ character } isEditing={ editing } />
   </Tabs>
 
-  return <div>
+  return <Fragment>
     <Toolbar>
       <LcaDrawerButton />
 
@@ -101,7 +101,7 @@ function CharacterHeader(props) {
     <Hidden smUp>
       { tabs }
     </Hidden>
-  </div>
+  </Fragment>
 }
 CharacterHeader.propTypes = {
   id: PropTypes.string,

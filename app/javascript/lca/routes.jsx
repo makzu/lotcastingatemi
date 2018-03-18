@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
 import ChronicleDashboard from './components/chronicles/index.jsx'
@@ -18,28 +18,26 @@ import WelcomePage from './components/pages/welcomePage.jsx'
 import ResourcesPage from './components/pages/resourcesPage.jsx'
 
 export default function Routes() {
-  return (
-    <div>
-      <Route exact path="/" component={ WelcomePage } />
-      <Route path="/resources" component={ ResourcesPage } />
-      <Route path="/content" component={ ContentList } />
+  return <Fragment>
+    <Route exact path="/" component={ WelcomePage } />
+    <Route path="/resources" component={ ResourcesPage } />
+    <Route path="/content" component={ ContentList } />
 
-      <Route exact path="/chronicles/:chronicleId" component={ ChronicleDashboard } />
-      <Route path="/chronicles/:chronicleId/players" component={ ChroniclePlayerPage } />
+    <Route exact path="/chronicles/:chronicleId" component={ ChronicleDashboard } />
+    <Route path="/chronicles/:chronicleId/players" component={ ChroniclePlayerPage } />
 
-      <Route exact path="/characters/:characterId" component={ CharacterSheet } />
-      <Route path="/characters/:characterId/merits" component={ MeritFullPage } />
-      <Route path="/characters/:characterId/charms" component={ CharmFullPage } />
+    <Route exact path="/characters/:characterId" component={ CharacterSheet } />
+    <Route path="/characters/:characterId/merits" component={ MeritFullPage } />
+    <Route path="/characters/:characterId/charms" component={ CharmFullPage } />
 
-      <Route exact path="/characters/:characterId/edit" component={ CharacterEditor } />
-      <Route path="/characters/:characterId/edit/merits" component={ MeritEditor } />
-      <Route path="/characters/:characterId/edit/charms" component={ CharmEditor } />
+    <Route exact path="/characters/:characterId/edit" component={ CharacterEditor } />
+    <Route path="/characters/:characterId/edit/merits" component={ MeritEditor } />
+    <Route path="/characters/:characterId/edit/charms" component={ CharmEditor } />
 
-      <Route exact path="/qcs/:qcId" component={ QcSheet } />
-      <Route path="/qcs/:qcId/edit" component={ QcEditor } />
+    <Route exact path="/qcs/:qcId" component={ QcSheet } />
+    <Route path="/qcs/:qcId/edit" component={ QcEditor } />
 
-      <Route exact path="/battlegroups/:bgId" component={ BattlegroupSheet } />
-      <Route path="/battlegroups/:battlegroupId/edit" component={ BattlegroupEditor } />
-    </div>
-  )
+    <Route exact path="/battlegroups/:bgId" component={ BattlegroupSheet } />
+    <Route path="/battlegroups/:battlegroupId/edit" component={ BattlegroupEditor } />
+  </Fragment>
 }

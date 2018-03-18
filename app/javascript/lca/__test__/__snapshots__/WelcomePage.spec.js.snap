@@ -1,43 +1,177 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WelcomePage renders at all 1`] = `
-<div>
-  <h1
-    className="MuiTypography-root-1 MuiTypography-headline-6 MuiTypography-gutterBottom-18"
+<div
+  className="MuiGrid-typeContainer-1 MuiGrid-spacing-xs-24-24"
+>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-8-73"
   >
-    Lot-Casting Atemi
-  </h1>
-  <p
-    className="MuiTypography-root-1 MuiTypography-body1-10 MuiTypography-gutterBottom-18"
+    <div
+      className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"
+    >
+      <h1
+        className="MuiTypography-root-119 MuiTypography-headline-124 MuiTypography-gutterBottom-136"
+      >
+        Lot-Casting Atemi
+      </h1>
+      <p
+        className="MuiTypography-root-119 MuiTypography-body1-128 MuiTypography-gutterBottom-136"
+      >
+        <strong>
+          Cost:
+        </strong>
+         15m, 1wp, 
+        <strong>
+          Mins:
+        </strong>
+         Essence 2
+        <br />
+        <strong>
+          Type:
+        </strong>
+         Simple
+        <br />
+        <strong>
+          Keywords:
+        </strong>
+         None
+        <br />
+        <strong>
+          Duration:
+        </strong>
+         One scene
+      </p>
+      <p
+        className="MuiTypography-root-119 MuiTypography-body1-128"
+      >
+        The Solar Exalted have achieved such heights of skill that even their games become effortless.  When a Solar activates Lot-Casting Atemi she instantly becomes aware of her scores and those of the other players. She likewise never forgets the strength of her signature moves, or the number of dice required to play them. She can roll those dice with but a thought, and no matter how distant she is from the game, all participants become aware of her successes.
+      </p>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
   >
-    <strong>
-      Cost:
-    </strong>
-     15m, 1wp, 
-    <strong>
-      Mins:
-    </strong>
-     Essence 2
-    <br />
-    <strong>
-      Type:
-    </strong>
-     Simple
-    <br />
-    <strong>
-      Keywords:
-    </strong>
-     None
-    <br />
-    <strong>
-      Duration:
-    </strong>
-     One scene
-  </p>
-  <p
-    className="MuiTypography-root-1 MuiTypography-body1-10"
+    <div
+      style={
+        Object {
+          "height": "8em",
+        }
+      }
+    />
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-6-71"
   >
-    The Solar Exalted have achieved such heights of skill that even their games become effortless.  When a Solar activates Lot-Casting Atemi she instantly becomes aware of her scores and those of the other players. She likewise never forgets the strength of her signature moves, or the number of dice required to play them. She can roll those dice with but a thought, and no matter how distant she is from the game, all participants become aware of her successes.
-  </p>
+    <h1
+      className="MuiTypography-root-119 MuiTypography-display2-122"
+      style={
+        Object {
+          "textAlign": "right",
+        }
+      }
+    >
+      Harmonious Exalted 3e character management for a new age
+    </h1>
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
+  >
+    <div
+      className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"
+    >
+      <p
+        className="MuiTypography-root-119 MuiTypography-body1-128 MuiTypography-paragraph-137"
+      >
+        Keep track of your characters' attributes, abilities, charms, merits, and more all from one place, accessible from any device with an Internet connection. PC screens, phones, and tablets are all supported, and character sheets are synced in real-time across all devices.
+      </p>
+      <p
+        className="MuiTypography-root-119 MuiTypography-body1-128"
+      >
+        Mortal Characters and Solar Exalts are fully tracked, but for the impatient, Custom Attribute, Ability, and Essence exalt types are also supported.
+      </p>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
+  >
+    <div
+      style={
+        Object {
+          "height": "5em",
+        }
+      }
+    />
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
+  >
+    <h1
+      className="MuiTypography-root-119 MuiTypography-display2-122"
+      style={
+        Object {
+          "textAlign": "right",
+        }
+      }
+    >
+      Ideal Battle(group) Knowledge Prana
+    </h1>
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
+  >
+    <div
+      className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"
+    >
+      <p
+        className="MuiTypography-root-119 MuiTypography-body1-128"
+      >
+        Quick characters and Battlegroups are also fully supported, giving you full stat blocks for antagonists and any Command, Familiar, or Retainer merits you may need stats for.
+      </p>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
+  >
+    <div
+      style={
+        Object {
+          "height": "5em",
+        }
+      }
+    />
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-6-71"
+  >
+    <h1
+      className="MuiTypography-root-119 MuiTypography-display2-122"
+      style={
+        Object {
+          "textAlign": "right",
+        }
+      }
+    >
+      Excellent Friend Approach
+    </h1>
+  </div>
+  <div
+    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
+  >
+    <div
+      className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"
+    >
+      <p
+        className="MuiTypography-root-119 MuiTypography-body1-128 MuiTypography-paragraph-137"
+      >
+        Create or join a Chronicle to see other players' characters, qcs, and battlegroups, with access to a full sheet for each one and a summary page showing a subset of dice pools and defenses. Storytellers can even make edits to their players' characters, and all changes are synced in real-time with other players.
+      </p>
+      <p
+        className="MuiTypography-root-119 MuiTypography-body1-128"
+      >
+        Don't want to spoil a surprise? Mark a Character as Hidden and only the owner and Storyteller will be able to see it until the time is right.
+      </p>
+    </div>
+  </div>
 </div>
 `;

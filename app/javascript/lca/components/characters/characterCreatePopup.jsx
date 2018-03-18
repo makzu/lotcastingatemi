@@ -91,7 +91,7 @@ class CharacterCreatePopup extends React.Component {
           <div>
             <TextField select name="type" value={ character.type }
               label={ character.type == 'Character' ? 'Character Type' : 'Exalt Type ' }
-              onChange={ handleChange } fullWidth autoWidth margin="normal"
+              onChange={ handleChange } fullWidth margin="normal"
             >
               <ListSubheader disabled value="">Canon/Published Exalts</ListSubheader>
               <MenuItem value="Character">Mortal</MenuItem>

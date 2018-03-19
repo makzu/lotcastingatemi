@@ -23,7 +23,7 @@ class AbilitySelect extends React.Component {
     const { classes } = props
     const abils = props.abilities || ABILITIES_ALL
     const menuItems = abils.map((a) =>
-      <MenuItem key={ a.abil } value={ a.pretty.toLowerCase() }>
+      <MenuItem key={ a.abil } value={ a.abil.substring(5) }>
         { a.pretty }
       </MenuItem>
     )

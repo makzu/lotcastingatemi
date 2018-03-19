@@ -76,12 +76,13 @@ module Schemas
       "properties": {
         "ability": {
           "type": 'string',
-          "enum": %w[
+          "enum": %W[
             archery athletics awareness brawl bureaucracy craft
             dodge integrity investigation larceny linguistics
-            lore martial arts medicine melee occult performance
+            lore martial_arts medicine melee occult performance
             presence resistance ride sail socialize stealth
             survival thrown war
+            #{''}
           ]
         },
         "context": { "type": 'string' }

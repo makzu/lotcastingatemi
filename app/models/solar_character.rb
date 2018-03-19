@@ -47,8 +47,10 @@ class SolarCharacter < Character
   def set_mote_pool_totals
     return unless will_save_change_to_attribute? :essence
 
-    self.motes_personal_total   = (essence * 3) + 10
-    self.motes_peripheral_total = (essence * 7) + 26
+    self.motes_personal_total     = (essence * 3) + 10
+    self.motes_peripheral_total   = (essence * 7) + 26
+    self.motes_personal_current   = [motes_personal_available,   motes_personal_current].min
+    self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
   end
 
   def set_exalt_type

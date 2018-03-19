@@ -27,41 +27,46 @@ const styles = theme => ({
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
   },
+  controlGroup: {
+    display: 'inline-block',
+  },
 })
 
 function BattlegroupListItem(props) {
   const { battlegroup, classes } = props
 
-  return <div>
-    <Paper className={ classes.root }>
-      <Typography variant="title" className={ classes.bgName }
-        component={ Link } to={ `/battlegroups/${battlegroup.id}` }
-      >
-        { battlegroup.name }
-        <Launch className={ classes.icon } />
-      </Typography>
+  return <Paper className={ classes.root }>
+    <Typography variant="title" className={ classes.bgName }
+      component={ Link } to={ `/battlegroups/${battlegroup.id}` }
+    >
+      { battlegroup.name }
+      <Launch className={ classes.icon } />
+    </Typography>
 
-      <Typography paragraph>
-        Size { battlegroup.size },{' '}
-        { prettyDrillRating(battlegroup) } Drill
-        { battlegroup.might > 0 &&
-          <span>, Might { battlegroup.might }</span>
-        }
-        { battlegroup.perfect_morale &&
-          <span>, Perfect Morale</span>
-        }
-      </Typography>
+    <Typography paragraph>
+      Size { battlegroup.size },{' '}
+      { prettyDrillRating(battlegroup) } Drill
+      { battlegroup.might > 0 &&
+        <span>, Might { battlegroup.might }</span>
+      }
+      { battlegroup.perfect_morale &&
+        <span>, Perfect Morale</span>
+      }
+    </Typography>
 
+    <div className={ classes.controlGroup }>
       <Button component={ Link } to={ `/battlegroups/${battlegroup.id}/edit` }>
         Edit
         <ModeEdit />
       </Button>
+      <DeleteButton characterType="battlegroups" id={ battlegroup.id } />
+    </div>
 
+    <div className={ classes.controlGroup }>
       <HideButton characterType="battlegroups" id={ battlegroup.id } />
       <PinButton characterType="battlegroups" id={ battlegroup.id } />
-      <DeleteButton characterType="battlegroups" id={ battlegroup.id } />
-    </Paper>
-  </div>
+    </div>
+  </Paper>
 }
 
 BattlegroupListItem.propTypes = {

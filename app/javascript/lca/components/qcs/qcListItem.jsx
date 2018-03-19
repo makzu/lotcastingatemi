@@ -26,28 +26,33 @@ const styles = theme => ({
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
   },
+  controlGroup: {
+    display: 'inline-block',
+  },
 })
 
 function QcListItem({ qc, classes }) {
-  return <div>
-    <Paper className={ classes.root }>
-      <Typography variant="title" className={ classes.qcName }
-        component={ Link } to={ `/qcs/${qc.id}` }
-      >
-        { qc.name }
-        <Launch className={ classes.icon } />
-      </Typography>
+  return <Paper className={ classes.root }>
+    <Typography variant="title" className={ classes.qcName }
+      component={ Link } to={ `/qcs/${qc.id}` }
+    >
+      { qc.name }
+      <Launch className={ classes.icon } />
+    </Typography>
 
+    <div className={ classes.controlGroup }>
       <Button component={ Link } to={ `/qcs/${qc.id}/edit` }>
         Edit
         <ModeEdit />
       </Button>
+      <DeleteButton characterType="qcs" id={ qc.id } />
+    </div>
 
+    <div className={ classes.controlGroup }>
       <HideButton characterType="qcs" id={ qc.id } />
       <PinButton characterType="qcs" id={ qc.id } />
-      <DeleteButton characterType="qcs" id={ qc.id } />
-    </Paper>
-  </div>
+    </div>
+  </Paper>
 }
 
 QcListItem.propTypes = {

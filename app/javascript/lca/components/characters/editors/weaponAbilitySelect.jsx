@@ -32,7 +32,7 @@ function WeaponAbilitySelect(props) {
   )
 
   return <TextField select value={ weapon.ability } className={ classes.abilitySelect }
-    name="ability" label="Ability" margin="dense"
+    name="ability" label="Ability" margin="dense" style={{ overflow: 'hidden', }}
     onChange={ onChange }
   >
     <ListSubheader value="header">Combat Abilities</ListSubheader>

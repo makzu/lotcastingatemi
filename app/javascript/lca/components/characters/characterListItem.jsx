@@ -27,34 +27,36 @@ const styles = theme => ({
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
   },
+  controlGroup: {
+    display: 'inline-block',
+  },
 })
 
 function CharacterListItem({ character, classes }) {
-  return <div>
-    <Paper className={ classes.root }>
+  return <Paper className={ classes.root }>
+    <Typography variant="title" className={ classes.characterName }
+      component={ Link } to={ `/characters/${character.id}` }
+    >
+      { character.name }
+      <Launch className={ classes.icon } />
+    </Typography>
 
-      <Typography variant="title" className={ classes.characterName }
-        component={ Link } to={ `/characters/${character.id}` }
-      >
-        { character.name }
-        <Launch className={ classes.icon } />
-      </Typography>
+    <Typography paragraph>
+      Essence { character.essence } { prettyFullExaltType(character) }
+    </Typography>
 
-      <Typography paragraph>
-        Essence { character.essence } { prettyFullExaltType(character) }
-      </Typography>
-
-
+    <div className={ classes.controlGroup }>
       <Button component={ Link } to={ `/characters/${ character.id }/edit` }>
         Edit
         <ModeEdit />
       </Button>
-
+      <DeleteButton characterType="characters" id={ character.id } />
+    </div>
+    <div className={ classes.controlGroup }>
       <HideButton characterType="characters" id={ character.id } />
       <PinButton characterType="characters" id={ character.id } />
-      <DeleteButton characterType="characters" id={ character.id } />
-    </Paper>
-  </div>
+    </div>
+  </Paper>
 }
 CharacterListItem.propTypes = {
   character: PropTypes.shape(fullChar).isRequired,

@@ -20,7 +20,7 @@ function SingleCharm({ charm }) {
       { charm.cost }
       , { charm.timing }
       , duration: { charm.duration }
-      , keywords: { charm.keywords || 'none'}
+      , keywords: { charm.keywords.join(', ') || 'none'}
       )&nbsp;
       { charm.body }
     </Typography>
@@ -41,7 +41,7 @@ function SingleSpell({ spell }) {
       (
       { spell.cost }
       , duration: { spell.duration }
-      , keywords: { spell.keywords || 'none'}
+      , keywords: { spell.keywords.join(', ') || 'none'}
       )&nbsp;
       { spell.body }
     </Typography>

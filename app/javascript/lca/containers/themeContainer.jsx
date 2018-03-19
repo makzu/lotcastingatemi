@@ -13,12 +13,22 @@ import { switchTheme } from '../ducks/actions.js'
  * entries in /config/favicon.json from #2e7d32 to the new value,
  * and to re-run `rails g favicon`
  */
+const themeCommon = {
+  overrides: {
+    MuiSelect: {
+      selectMenu: {
+        overflow: 'inherit',
+      },
+    },
+  },
+}
 const themes = {
   light: createMuiTheme({
     palette: {
       primary: { main: green[800], },
       secondary: { main: lightgreen[400], },
     },
+    ...themeCommon,
   }),
   dark: createMuiTheme({
     palette: {
@@ -26,6 +36,7 @@ const themes = {
       secondary: { main: teal[400], },
       type: 'dark',
     },
+    ...themeCommon,
   })
 }
 

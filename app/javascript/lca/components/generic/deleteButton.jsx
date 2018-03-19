@@ -23,7 +23,6 @@ function DeleteButton(props) {
 
   return <Button
     onClick={() => action(props.id)}
-    style={{ float: 'right', }}
   >
     Delete&nbsp;
     <Delete />

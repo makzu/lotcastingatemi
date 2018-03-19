@@ -16,11 +16,13 @@ import BattlegroupSheet from './components/battlegroups/index.jsx'
 import BattlegroupEditor from './components/battlegroups/editor.jsx'
 import WelcomePage from './components/pages/welcomePage.jsx'
 import ResourcesPage from './components/pages/resourcesPage.jsx'
+import PrivacyPage from './components/pages/PrivacyPage.jsx'
 
 export default function Routes() {
   return <Fragment>
     <Route exact path="/" component={ WelcomePage } />
     <Route path="/resources" component={ ResourcesPage } />
+    <Route path="/privacy" component={ PrivacyPage } />
     <Route path="/content" component={ ContentList } />
 
     <Route exact path="/chronicles/:chronicleId" component={ ChronicleDashboard } />

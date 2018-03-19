@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import CssBaseline from 'material-ui/CssBaseline'
 
 import { withStyles } from 'material-ui/styles'
+import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
 import Hidden from 'material-ui/Hidden'
+import Typography from 'material-ui/Typography'
 import Slide from 'material-ui/transitions/Slide'
 
 import LoadingSpinner from '../components/generic/LoadingSpinner.jsx'
@@ -49,7 +51,16 @@ const styles = theme => ({
       height: 'calc(100% - 64px)',
       marginTop: 64,
     }
-  }
+  },
+  footer: {
+    marginTop: theme.spacing.unit * 6,
+    textAlign: 'center',
+  },
+  footerDivider: {
+    marginBottom: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 8,
+    marginRight: theme.spacing.unit * 8,
+  },
 })
 
 class App extends React.Component {
@@ -99,6 +110,17 @@ class App extends React.Component {
 
       <main className={ classes.content }>
         { children }
+
+        <footer className={ classes.footer }>
+          <Divider className={ classes.footerDivider } />
+          <Typography variant="caption">
+            Exalted is &copy; White Wolf AB and Onyx Path.
+          </Typography>
+
+          <Typography variant="caption" component={ Link } to="/privacy">
+            Privacy Policy / Legal Notice
+          </Typography>
+        </footer>
       </main>
 
       <Slide direction="up" in={ loading } mountOnEnter unmountOnExit

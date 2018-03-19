@@ -11,7 +11,6 @@ import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
 import RatingField from '../../generic/ratingField.jsx'
-import { ABILITY_MAX as MAX, ABILITY_MIN as MIN } from '../../../utils/constants.js'
 import { withIntimacies } from '../../../utils/propTypes'
 
 const styles = theme => ({
@@ -35,7 +34,7 @@ function _ResourceFields(props) {
       onChange={ onResourcesChange } onBlur={ onResourcesBlur }
     />
     <RatingField trait="value" value={ value }
-      label="Value" min={ MIN } max={ MAX } margin="dense" narrow
+      label="Value" min={ 0 } margin="dense" narrow
       onChange={ onValueChange }
     />
     <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>

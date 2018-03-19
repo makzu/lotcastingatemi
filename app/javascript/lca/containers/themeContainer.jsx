@@ -9,6 +9,10 @@ import teal from 'material-ui/colors/teal'
 
 import { switchTheme } from '../ducks/actions.js'
 
+/* When changing these colors, it's also important to change the theme_color
+ * entries in /config/favicon.json from #2e7d32 to the new value,
+ * and to re-run `rails g favicon`
+ */
 const themes = {
   light: createMuiTheme({
     palette: {

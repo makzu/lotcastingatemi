@@ -25,14 +25,14 @@ function XpEditor(props) {
     <div>
       <RatingField trait="xp_spent" value={ character.xp_spent }
         label="Spent" max={ character.xp_total } margin="dense"
-        onChange={ onRatingChange }
+        onChange={ onRatingChange } dontFocus
       />
       <span className={ classes.separator }>
         /
       </span>
       <RatingField trait="xp_total" value={ character.xp_total }
         label="Total" margin="dense"
-        onChange={ onRatingChange }
+        onChange={ onRatingChange } dontFocus
       />
     </div>
 
@@ -42,14 +42,14 @@ function XpEditor(props) {
     <div>
       <RatingField trait="xp_solar_spent" value={ character.xp_solar_spent }
         label="Spent" max={ character.xp_solar_total } margin="dense"
-        onChange={ onRatingChange }
+        onChange={ onRatingChange } dontFocus
       />
       <span className={ classes.separator }>
         /
       </span>
       <RatingField trait="xp_solar_total" value={ character.xp_solar_total }
         label="Total" margin="dense"
-        onChange={ onRatingChange }
+        onChange={ onRatingChange } dontFocus
       />
     </div>
 
@@ -59,21 +59,21 @@ function XpEditor(props) {
     <div>
       <RatingField trait="xp_craft_silver" value={ character.xp_craft_silver }
         label="Silver" margin="dense" narrow
-        onChange={ onRatingChange }
+        onChange={ onRatingChange } dontFocus
       />
       <span className={ classes.separator }>
         /
       </span>
       <RatingField trait="xp_craft_gold" value={ character.xp_craft_gold }
         label="Gold" margin="dense" narrow
-        onChange={ onRatingChange }
+        onChange={ onRatingChange } dontFocus
       />
       <span className={ classes.separator }>
         /
       </span>
       <RatingField trait="xp_craft_white" value={ character.xp_craft_white }
         label="White" margin="dense" narrow
-        onChange={ onRatingChange }
+        onChange={ onRatingChange } dontFocus
       />
     </div>
   </BlockPaper>

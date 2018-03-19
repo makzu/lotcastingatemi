@@ -148,10 +148,13 @@ export function weaponAttributeRating(character, weapon) {
 }
 
 export function weaponAbilityRating(character, weapon) {
+  let ability
   if (weapon.ability.startsWith('martial arts')) {
-    return character.abil_martial_arts.find((art) => `martial arts (${art.style})` == weapon.ability).rating
+    ability = character.abil_martial_arts.find((art) => `martial arts (${art.style})` == weapon.ability)
+    return ability != undefined ? ability.rating : 0
   } else if (weapon.ability.startsWith('craft')) {
-    return character.abil_craft.find((craft) => `craft (${craft.craft})` == weapon.ability).rating
+    ability = character.abil_craft.find((craft) => `craft (${craft.craft})` == weapon.ability).rating
+    return ability != undefined ? ability.rating : 0
   } else {
     return character[`abil_${ weapon.ability }`]
   }

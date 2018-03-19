@@ -28,6 +28,7 @@ class RatingField extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -46,15 +47,23 @@ class RatingField extends React.Component {
     this.props.onChange(fakeE)
   }
 
+  handleFocus(e) {
+    if (this.props.dontFocus)
+      return
+
+    e.target.select()
+  }
+
   render() {
     const { trait, label, classes, narrow } = this.props
-    const { handleChange } = this
+    const { handleChange, handleFocus } = this
     const { value, min, max } = this.state
 
     return <TextField className={ narrow ? classes.narrow : classes.field }
       type="number" name={ trait } label={ label } value={ value }
       inputProps={{ min: min, max: max }}
       onChange={ handleChange } margin={ this.props.margin || 'none' }
+      onFocus={ handleFocus }
     />
   }
 }
@@ -68,6 +77,7 @@ RatingField.propTypes = {
   max: PropTypes.number,
   margin: PropTypes.string,
   narrow: PropTypes.bool,
+  dontFocus: PropTypes.bool,
   classes: PropTypes.object,
 }
 

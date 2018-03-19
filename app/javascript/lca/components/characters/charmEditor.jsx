@@ -84,6 +84,7 @@ class SingleCharmEditor extends React.Component {
       <TextField name="name" value={ charm.name }
         onChange={ handleChange } onBlur={ handleBlur }
         label="Name" margin="dense"
+        style={{ width: '15em' }}
       />&nbsp;&nbsp;
       { charm.type == 'Evocation' &&
         <TextField name="artifact_name" value={ charm.artifact_name }
@@ -317,57 +318,59 @@ class CharmEditor extends React.Component {
 
     return <div>
       <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Charms
-            &nbsp;&nbsp;
+        { character.type != 'Character' && <Fragment>
+          <Grid item xs={ 12 }>
+            <Typography variant="headline">
+              Charms
+              &nbsp;&nbsp;
 
-            <Button onClick={ handleAddNative }>
-              Add Charm&nbsp;
-              <ContentAddCircle />
-            </Button>
-          </Typography>
-        </Grid>
-        { natives }
+              <Button onClick={ handleAddNative }>
+                Add Charm&nbsp;
+                <ContentAddCircle />
+              </Button>
+            </Typography>
+          </Grid>
+          { natives }
 
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Martial Arts
-            &nbsp;&nbsp;
+          <Grid item xs={ 12 }>
+            <Typography variant="headline">
+              Martial Arts
+              &nbsp;&nbsp;
 
-            <Button onClick={ handleAddMA }>
-              Add MA Charm&nbsp;
-              <ContentAddCircle />
-            </Button>
-          </Typography>
-        </Grid>
-        { maCharms }
+              <Button onClick={ handleAddMA }>
+                Add MA Charm&nbsp;
+                <ContentAddCircle />
+              </Button>
+            </Typography>
+          </Grid>
+          { maCharms }
 
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Evocations
-            &nbsp;&nbsp;
+          <Grid item xs={ 12 }>
+            <Typography variant="headline">
+              Evocations
+              &nbsp;&nbsp;
 
-            <Button onClick={ handleAddEvocation }>
-              Add Evocation&nbsp;
-              <ContentAddCircle />
-            </Button>
-          </Typography>
-        </Grid>
-        { evo }
+              <Button onClick={ handleAddEvocation }>
+                Add Evocation&nbsp;
+                <ContentAddCircle />
+              </Button>
+            </Typography>
+          </Grid>
+          { evo }
 
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Spirit Charms
-            &nbsp;&nbsp;
+          <Grid item xs={ 12 }>
+            <Typography variant="headline">
+              Spirit Charms
+              &nbsp;&nbsp;
 
-            <Button onClick={ handleAddSpirit }>
-              Add Spirit Charm&nbsp;
-              <ContentAddCircle />
-            </Button>
-          </Typography>
-        </Grid>
-        { spirit }
+              <Button onClick={ handleAddSpirit }>
+                Add Spirit Charm&nbsp;
+                <ContentAddCircle />
+              </Button>
+            </Typography>
+          </Grid>
+          { spirit }
+        </Fragment> }
 
         <Grid item xs={ 12 }>
           <Typography variant="headline">

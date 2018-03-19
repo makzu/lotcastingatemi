@@ -15,7 +15,7 @@ import { qcAttack } from '../../utils/propTypes'
 
 const styles = theme => ({
   bgBonus: { ...theme.typography.caption,
-    marginLeft: -theme.spacing.unit,
+    marginLeft: -theme.spacing.unit/2,
     marginRight: theme.spacing.unit,
   },
   nameField: {
@@ -84,6 +84,7 @@ class QcAttackFields extends React.Component {
         label="Name" className={ classes.nameField } margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
+
       <RatingField trait="pool" value={ attack.pool }
         label="Pool" min={ 1 } narrow margin="dense"
         onChange={ handleRatingChange }
@@ -93,6 +94,7 @@ class QcAttackFields extends React.Component {
           ({ bgAttackPool(fakeBg, attack) } total)
         </span>
       }
+
       <RatingField trait="damage" value={ attack.damage }
         label="Damage" min={ 1 } margin="dense"
         onChange={ handleRatingChange }
@@ -102,14 +104,17 @@ class QcAttackFields extends React.Component {
           ({ bgDamage(fakeBg, attack) } total)
         </span>
       }
+
       <RatingField trait="overwhelming" value={ attack.overwhelming }
         label="Ovw." min={ 1 } narrow margin="dense"
         onChange={ handleRatingChange }
       />
+
       <TextField name="tags" value={ attack.tags }
         label="Tags (comma separated)" className={ classes.tagsField } margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
       />
+
       <TextField select name="range" value={ attack.range }
         label="Range" margin="dense"
         onChange={ handleRatingChange }

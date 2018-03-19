@@ -10,18 +10,6 @@ import * as calc from '../../../utils/calculated'
 import { fullWeapon } from '../../../utils/propTypes'
 
 const styles = theme => ({
-  fieldContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  nameField: {
-    marginRight: theme.spacing.unit,
-    flex: 1,
-  },
-  tagsField: {
-    marginRight: theme.spacing.unit,
-    flex: 1,
-  },
   abilitySelect: {
     marginRight: theme.spacing.unit,
     width: '8em',

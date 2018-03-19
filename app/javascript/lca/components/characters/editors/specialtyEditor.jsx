@@ -106,7 +106,7 @@ class SpecialtyEditor extends React.Component {
     const { onSpecialtyChange, onSpecialtyBlur, onRatingChange, onAdd, onRemove } = this
     const { character } = this.props
 
-    const crafts = this.state.specialties.map((specialty, index) =>
+    const specialties = this.state.specialties.map((specialty, index) =>
       <SpecialtyFields specialty={ specialty } key={ index }
         character={ character }
         onSpecialtyChange={ onSpecialtyChange.bind(this, index) }
@@ -124,10 +124,10 @@ class SpecialtyEditor extends React.Component {
           <ContentAddCircle />
         </Button>
       </Typography>
-      { crafts.length == 0 &&
+      { specialties.length == 0 &&
         <Typography paragraph>None</Typography>
       }
-      { crafts }
+      { specialties }
     </BlockPaper>
   }
 }

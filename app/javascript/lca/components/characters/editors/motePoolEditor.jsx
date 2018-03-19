@@ -20,6 +20,9 @@ const styles = theme => ({
 function MotePoolEditor(props) {
   const { character, onRatingChange, classes } = props
 
+  if (character.type == 'Character' && !character.is_sorcerer)
+    return <div />
+
   const showMoteTotalEditors = character.type == 'CustomAttributeCharacter' || character.type == 'CustomAbilityCharacter' || character.type == 'CustomEssenceCharacter'
 
   return <BlockPaper>

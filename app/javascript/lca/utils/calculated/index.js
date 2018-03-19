@@ -177,19 +177,19 @@ export function hardness(character) {
 export function prettyExaltType(character) {
   switch (character.type) {
   case 'Character':
-    return 'Mortal'
+    return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
   case 'SolarCharacter':
     return 'Solar'
   default:
-    return 'Exalt'
+    return character.exalt_type
   }
 }
 
 export function prettyFullExaltType(character) {
   if (character.type == 'Character')
-    return 'Mortal'
+    return character.is_sorcerer ? 'Non-Exalt Sorcerer' : 'Mortal'
 
-  return `${capitalize(character.caste || '?')} ${character.aspect ? 'Aspect' : 'Caste'} ${character.exalt_type || 'Exalt'}`
+  return `${capitalize(character.caste || '?')} ${character.aspect ? 'Aspect' : 'Caste'} ${prettyExaltType(character) || 'Exalt'}`
 }
 
 export function prettyIntimacyRating(rating) {

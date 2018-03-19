@@ -18,7 +18,7 @@ import { bgDefenseBonus, bgSoak, totalMagnitude } from '../../utils/calculated/'
 
 const styles = theme => ({
   bgBonus: { ...theme.typography.caption,
-    marginLeft: -theme.spacing.unit,
+    marginLeft: -theme.spacing.unit/2,
     marginRight: theme.spacing.unit,
   },
   nameField: {

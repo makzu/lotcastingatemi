@@ -63,7 +63,7 @@ class BattlegroupCreatePopup extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } color="primary">Create</Button>
+          <Button onClick={ handleSubmit } variant="raised" color="primary">Create</Button>
         </DialogActions>
       </Dialog>
     </span>

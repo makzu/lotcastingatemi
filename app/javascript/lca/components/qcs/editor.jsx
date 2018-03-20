@@ -82,22 +82,21 @@ class QcEditor extends React.Component {
             Righteous</em> and <em>Hundred Devils Night Parade</em>.
           </Typography>
 
-          <Typography variant="title">
-            Basics
-          </Typography>
-
           <TextField name="name" value={ qc.name }
             label="Name" margin="dense"
             onChange={ handleChange } onBlur={ handleBlur }
           />
-          <br />
+          &nbsp;&nbsp;
+          <TextField name="ref" value={ qc.ref }
+            label="Reference" margin="dense"
+            onChange={ handleRatingChange }
+          />
 
           <TextField name="description" value={ qc.description }
             label="Description" margin="dense" multiline fullWidth
             onChange={ handleChange } onBlur={ handleBlur }
             rowsMax={ 5 }
           />
-          <br />
 
           <Typography component="div">
             <RatingField trait="essence" value={ qc.essence }
@@ -110,7 +109,7 @@ class QcEditor extends React.Component {
               label="Willpower" margin="dense" narrow
               onChange={ handleRatingChange }
             />
-            /
+            /&nbsp;
             <RatingField trait="willpower_permanent" value={ qc.willpower_permanent }
               label="" min={ 1 } max={ 10 } margin="dense" narrow
               onChange={ handleRatingChange }
@@ -179,7 +178,7 @@ class QcEditor extends React.Component {
             onChange={ handleRatingChange }
           />
 
-          <Typography variant="title" style={{ marginTop: '1em' }}>
+          <Typography variant="subheading" style={{ marginTop: '1em' }}>
             Social
           </Typography>
           <RatingField trait="resolve" value={ qc.resolve }
@@ -195,7 +194,9 @@ class QcEditor extends React.Component {
             onChange={ handleRatingChange }
           />
 
-          <Typography variant="title" style={{ marginTop: '1em' }}>
+          <QcActionEditor qc={ qc } onChange={ handleListChange } />
+
+          <Typography variant="subheading" style={{ marginTop: '1em' }}>
             Combat
           </Typography>
           <RatingField trait="join_battle" value={ qc.join_battle }
@@ -224,24 +225,20 @@ class QcEditor extends React.Component {
           />
           <TextField name="armor_name" value={ qc.armor_name }
             label="Armor Name" margin="dense"
-            type="text"
             onChange={ handleChange } onBlur={ handleBlur }
           />
+        </BlockPaper>
+      </Grid>
 
+      <Grid item xs={ 12 } md={ 6 }>
+        <BlockPaper>
           <QcAttackEditor qc={ qc } />
-
         </BlockPaper>
       </Grid>
 
       <Grid item xs={ 12 } md={ 6 }>
         <BlockPaper>
-          <QcActionEditor qc={ qc } onChange={ handleListChange } />
-        </BlockPaper>
-      </Grid>
-
-      <Grid item xs={ 12 } md={ 6 }>
-        <BlockPaper>
-          <Typography variant="title">
+          <Typography variant="subheading">
             Intimacies
           </Typography>
 

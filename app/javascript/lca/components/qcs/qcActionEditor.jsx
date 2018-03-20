@@ -43,6 +43,7 @@ class QcActionEditor extends React.Component {
     }
 
     this.onAdd = this.onAdd.bind(this)
+    this.onSensesChange = this.onSensesChange.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -81,8 +82,12 @@ class QcActionEditor extends React.Component {
     this.props.onChange('actions', newActions)
   }
 
+  onSensesChange(e) {
+    this.props.onChange('senses', e.target.value)
+  }
+
   render() {
-    const { onActionChange, onActionBlur, onRatingChange, onAdd, onRemove } = this
+    const { onActionChange, onActionBlur, onRatingChange, onAdd, onRemove, onSensesChange } = this
 
     const actions = this.state.actions.map((action, index) =>
       <ActionFields action={ action } key={ index }
@@ -94,7 +99,7 @@ class QcActionEditor extends React.Component {
     )
 
     return <div>
-      <Typography variant="title">
+      <Typography variant="subheading">
         Actions
 
         <Button onClick={ onAdd }>
@@ -102,6 +107,11 @@ class QcActionEditor extends React.Component {
           <ContentAddCircle />
         </Button>
       </Typography>
+      <div>
+        <RatingField label="Senses" name="senses" value={ this.props.qc.senses }
+          onChange={ onSensesChange }
+        />
+      </div>
 
       { actions }
     </div>

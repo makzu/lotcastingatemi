@@ -182,7 +182,7 @@ class SingleCharmEditor extends React.Component {
       <TextField name="ref" value={ charm.ref }
         onChange={ handleChange } onBlur={ handleBlur }
         fullWidth={ true }
-        label="Ref" margin="dense"
+        label="Reference" margin="dense"
       />
     </BlockPaper>
   }

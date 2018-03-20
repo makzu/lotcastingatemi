@@ -130,7 +130,7 @@ export class MeritFields extends React.Component {
       <div>
         <TextField name="ref" value={ merit.ref }
           onChange={ handleChange } onBlur={ handleBlur }
-          label="Ref" margin="dense"
+          label="Reference" margin="dense"
         />
       </div>
     </BlockPaper>

@@ -10,6 +10,7 @@ module AbilityExalt
 
     validate :caste_abilities_are_valid
     validate :favored_abilities_are_valid
+    validate :caste_and_favored_abilities_dont_overlap
 
     before_validation :ensure_uniqueness_of_caste_and_favored_abilities
 
@@ -22,6 +23,13 @@ module AbilityExalt
     def favored_abilities_are_valid
       favored_abilities.each do |a|
         errors.add(:favored_abilities, "#{a} is not a valid ability") unless Constants::ABILITIES.include? a
+      end
+    end
+
+    def caste_and_favored_abilities_dont_overlap
+      unless (caste_abilities & favored_abilities).empty? # rubocop:disable Style/GuardClause
+        errors.add(:caste_abilities, 'cannot have the same ability as both caste and favored')
+        errors.add(:favored_abilities, 'cannot have the same ability as both caste and favored')
       end
     end
 

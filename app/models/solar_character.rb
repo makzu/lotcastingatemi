@@ -26,12 +26,10 @@ class SolarCharacter < Character
   before_validation :set_exalt_type
   before_validation :set_caste_ability
 
-  # TODO: re-enable these validations once they can be refactored to not throw
-  #  errors on new, empty SolarCharacters
   validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :caste_is_blank?
-  validate :caste_abilities_are_valid_solar,         unless: :caste_is_blank?
-  validate :caste_and_favored_dont_overlap,          unless: :caste_is_blank?
+  validate :caste_abilities_are_valid,               unless: :caste_is_blank?
   validate :supernal_ability_is_caste,               unless: :caste_is_blank?
+
   validate :five_caste_and_five_favored_abilities
 
   validates :limit, numericality: {
@@ -55,6 +53,7 @@ class SolarCharacter < Character
 
   def set_exalt_type
     self.exalt_type = 'Solar'
+    self.aspect = false
   end
 
   def set_caste_ability
@@ -64,15 +63,8 @@ class SolarCharacter < Character
     self.caste_abilities += [supernal_ability]
   end
 
-  def caste_and_favored_dont_overlap
-    unless (caste_abilities & favored_abilities).empty? # rubocop:disable Style/GuardClause
-      errors.add(:caste_abilities, 'cannot have the same ability as both caste and favored')
-      errors.add(:favored_abilities, 'cannot have the same ability as both caste and favored')
-    end
-  end
-
   # rubocop:disable Style/IfUnlessModifier
-  def caste_abilities_are_valid_solar
+  def caste_abilities_are_valid
     caste_abilities.each do |a|
       unless CASTE_ABILITIES[caste.to_sym].include? a
         errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s")
@@ -82,9 +74,9 @@ class SolarCharacter < Character
 
   def supernal_ability_is_caste
     return if supernal_ability.blank?
-    unless caste_abilities.include? supernal_ability # rubocop:disable Style/GuardClause
-      errors.add(:supernal_ability, "not a valid supernal ability for #{caste}s")
-    end
+    return if caste_abilities.include? supernal_ability
+
+    errors.add(:supernal_ability, 'Must be a caste ability')
   end
 
   def five_caste_and_five_favored_abilities

@@ -223,6 +223,9 @@ class CharmEditor extends React.Component {
     case 'SolarCharacter':
       type = 'SolarCharm'
       break
+    case 'DragonbloodCharacter':
+      type = 'DragonbloodCharm'
+      break
     case 'CustomAbilityCharacter':
       type = 'CustomAbilityCharm'
       break

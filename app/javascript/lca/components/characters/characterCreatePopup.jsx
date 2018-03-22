@@ -17,7 +17,6 @@ import Typography from 'material-ui/Typography'
 
 import { createCharacter } from '../../ducks/actions.js'
 
-// TODO: Enable autofill for some example QCs?
 class CharacterCreatePopup extends React.Component {
   constructor(props) {
     super(props)
@@ -53,6 +52,8 @@ class CharacterCreatePopup extends React.Component {
         exaltType = { exalt_type: 'Mortal', aspect: false }
       else if (value == 'SolarCharacter')
         exaltType = { exalt_type: 'Solar', aspect: false }
+      else if (value == 'DragonbloodCharacter')
+        exaltType = { exalt_type: 'Dragonblood', aspect: true }
       else
         exaltType = { exalt_type: 'Exalt' }
     }
@@ -96,6 +97,9 @@ class CharacterCreatePopup extends React.Component {
               <ListSubheader disabled value="">Canon/Published Exalts</ListSubheader>
               <MenuItem value="Character">Mortal</MenuItem>
               <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
+              {/* Coming soon!
+              <MenuItem value="DragonbloodCharacter">Dragon-Blooded Exalt</MenuItem>
+              */}
 
               <ListSubheader disabled value="">Custom Exalts</ListSubheader>
 
@@ -116,6 +120,20 @@ class CharacterCreatePopup extends React.Component {
                 <MenuItem value="twilight">Twilight</MenuItem>
                 <MenuItem value="night">Night</MenuItem>
                 <MenuItem value="eclipse">Eclipse</MenuItem>
+              </TextField>
+            </div>
+          }
+          { character.type == 'DragonbloodCharacter' &&
+            <div>
+              <TextField select name="caste" value={ character.caste }
+                label="Caste" margin="dense" fullWidth
+                onChange={ handleChange }
+              >
+                <MenuItem value="air">Air</MenuItem>
+                <MenuItem value="Earth">Earth</MenuItem>
+                <MenuItem value="fire">Fire</MenuItem>
+                <MenuItem value="water">Water</MenuItem>
+                <MenuItem value="wood">Wood</MenuItem>
               </TextField>
             </div>
           }

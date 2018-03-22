@@ -180,6 +180,8 @@ export function prettyExaltType(character) {
     return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
   case 'SolarCharacter':
     return 'Solar'
+  case 'DragonbloodCharacter':
+    return 'Dragon-Blooded'
   default:
     return character.exalt_type
   }

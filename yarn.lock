@@ -7336,6 +7336,10 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+re-reselect@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/re-reselect/-/re-reselect-1.0.1.tgz#6d9ebac488bc4bac07bdcd3483f2d3dc76a437c2"
+
 react-dom@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"

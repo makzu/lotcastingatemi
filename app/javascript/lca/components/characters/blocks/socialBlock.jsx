@@ -1,42 +1,47 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Table, { TableBody, TableHead, TableRow, TableCell } from 'material-ui/Table'
+import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
+import PoolLine from '../PoolLine.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
-
-import * as calc from '../../../utils/calculated'
 import { withAttributes, withAbilities } from '../../../utils/propTypes'
 
-export default function SocialBlock(props) {
-  const { character } = props
-  const padding = 'dense'
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  poolBlock: {
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    width: '5.5rem',
+    maxHeight: '5rem',
+    textOverflow: 'ellipse',
+  },
+})
 
-  return <BlockPaper>
+const SocialBlock = ({ pools, classes }) =>
+  <BlockPaper>
     <Typography variant="title">
       Social Pools
     </Typography>
 
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell numeric padding={ padding }>Resolve</TableCell>
-          <TableCell numeric padding={ padding }>Guile</TableCell>
-          <TableCell numeric padding={ padding }>Read Int</TableCell>
-        </TableRow>
-      </TableHead>
+    <div className={ classes.container }>
+      <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.readIntentions } label="Read Intentions" classes={{ root: classes.poolBlock }} />
+    </div>
 
-      <TableBody>
-        <TableRow>
-          <TableCell numeric padding={ padding }>{ calc.resolveRaw(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.guileRaw(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.readIntentionsPool(character) }</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
   </BlockPaper>
-}
+
 SocialBlock.propTypes = {
-  character: PropTypes.shape({ ...withAttributes, ...withAbilities })
+  character: PropTypes.shape({ ...withAttributes, ...withAbilities }),
+  pools: PropTypes.object,
+  penalties: PropTypes.object,
+  classes: PropTypes.object,
 }
+
+export default withStyles(styles)(SocialBlock)

@@ -25,6 +25,7 @@ import WillpowerEditor from './editors/willpowerEditor.jsx'
 import XpEditor from './editors/xpEditor.jsx'
 
 import { updateCharacter } from '../../ducks/actions.js'
+import { getSpecificCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import { fullChar } from '../../utils/propTypes'
 
 class CharacterEditor extends React.Component {
@@ -87,6 +88,7 @@ class CharacterEditor extends React.Component {
 
     const { character } = this.state
     const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
+    const { pools, penalties } = this.props
 
     return <div>
       <Hidden smUp>
@@ -139,6 +141,7 @@ class CharacterEditor extends React.Component {
 
         <Grid item xs={ 12 } sm={ 6 } lg={ 3 }>
           <HealthLevelEditor character={ character }
+            penalties={ penalties }
             onChange={ handleChange } onBlur={ handleBlur }
             onRatingChange={ handleRatingChange }
           />
@@ -188,6 +191,7 @@ class CharacterEditor extends React.Component {
 
         <Grid item xs={ 12 } sm={ 6 }>
           <ArmorEditor character={ character }
+            pools={ pools }
             onChange={ handleChange } onBlur={ handleBlur }
             onCheck={ handleCheck }
             onRatingChange={ handleRatingChange }
@@ -220,27 +224,26 @@ class CharacterEditor extends React.Component {
 }
 CharacterEditor.propTypes = {
   character: PropTypes.shape(fullChar),
+  pools: PropTypes.object,
+  penalties: PropTypes.object,
   updateChar: PropTypes.func,
 }
 
-function mapStateToProps(state, ownProps) {
-  const character = state.entities.characters[ownProps.match.params.characterId]
-  let weapons = []
-  let merits = []
+function mapStateToProps(state, props) {
+  const id = props.match.params.characterId
+  const character = getSpecificCharacter(state, id)
+  let pools
+  let penalties
 
   if (character != undefined) {
-    if (character.weapons != undefined) {
-      weapons = character.weapons.map((id) => state.entities.weapons[id])
-    }
-    if (character.weapons != undefined) {
-      merits = character.merits.map((id) => state.entities.merits[id])
-    }
+    penalties = getPenalties(state, id)
+    pools = getPoolsAndRatings(state, id)
   }
 
   return {
     character,
-    weapons,
-    merits,
+    pools,
+    penalties,
   }
 }
 

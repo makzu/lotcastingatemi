@@ -7,7 +7,6 @@ import Typography from 'material-ui/Typography'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../../generic/HealthLevelBoxes.jsx'
 import RatingField from '../../generic/ratingField.jsx'
-import { woundPenalty } from '../../../utils/calculated'
 
 const styles = theme => ({
   subheading: {
@@ -23,7 +22,7 @@ const styles = theme => ({
 })
 
 function HealthLevelEditor(props) {
-  const { character, onRatingChange, classes } = props
+  const { character, penalties, onRatingChange, classes } = props
 
   return <BlockPaper>
     <Typography variant="title">
@@ -33,7 +32,7 @@ function HealthLevelEditor(props) {
     <div className={ classes.healthBoxesWrap }>
       <HealthLevelBoxes character={ character } />
       <Typography>
-        Current wound penalty: -{ woundPenalty(character) }
+        Current wound penalty: -{ penalties.wound }
       </Typography>
     </div>
 
@@ -77,6 +76,7 @@ function HealthLevelEditor(props) {
 }
 HealthLevelEditor.propTypes = {
   character: PropTypes.object.isRequired,
+  penalties: PropTypes.object,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   onRatingChange: PropTypes.func.isRequired,

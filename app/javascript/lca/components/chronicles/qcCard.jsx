@@ -69,7 +69,7 @@ function QcCard({ qc, classes }) {
       <strong>Penalties:</strong>&nbsp;
 
       Onslaught -{ qc.onslaught },&nbsp;
-      Wound -{ woundPenalty(qc) }
+      Wound -{ woundPenalty(qc, []) }
     </Typography>
   </Paper>
 }

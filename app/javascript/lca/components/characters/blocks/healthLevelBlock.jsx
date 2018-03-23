@@ -6,12 +6,9 @@ import Typography from 'material-ui/Typography'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../../generic/HealthLevelBoxes.jsx'
 
-import { woundPenalty } from '../../../utils/calculated'
 import { withHealthLevels } from '../../../utils/propTypes'
 
-export default function HealthLevelBlock(props) {
-  const { character } = props
-
+export default function HealthLevelBlock({ character, penalties }) {
   return <BlockPaper>
     <Typography variant="title">
       Health Levels
@@ -21,10 +18,11 @@ export default function HealthLevelBlock(props) {
 
     <br />
     <Typography>
-      <strong>Wound Penalty:</strong> -{ woundPenalty(character) }
+      <strong>Wound Penalty:</strong> -{ penalties.wound }
     </Typography>
   </BlockPaper>
 }
 HealthLevelBlock.propTypes = {
-  character: PropTypes.shape(withHealthLevels)
+  character: PropTypes.shape(withHealthLevels),
+  penalties: PropTypes.object,
 }

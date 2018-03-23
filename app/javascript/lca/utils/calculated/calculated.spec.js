@@ -12,10 +12,10 @@ const mockChar = {
 
 describe('Calculated values', () => {
   it('should give correct defense values', () => {
-    expect(calc.evasionRaw(mockChar)).toEqual(4)
-    expect(calc.guileRaw(mockChar)).toEqual(4)
-    expect(calc.resolveRaw(mockChar)).toEqual(4)
-    expect(calc.naturalSoak(mockChar)).toEqual(3)
+    expect(calc.evasion(mockChar, [], {}).raw).toEqual(4)
+    expect(calc.guile(mockChar, [], {}).raw).toEqual(4)
+    expect(calc.resolve(mockChar, [], {}).raw).toEqual(4)
+    expect(calc.naturalSoak(mockChar, [], {})).toEqual(3)
   })
 
   it('should give correct stats for armor', () => {
@@ -49,16 +49,16 @@ describe('Calculated values', () => {
     let woundedCharacter = { ...mockChar, damage_bashing: 1 }
 
     expect(calc.totalHealthLevels(woundedCharacter)).toEqual(7)
-    expect(calc.woundPenalty(woundedCharacter)).toEqual(0)
+    expect(calc.woundPenalty(woundedCharacter, [])).toEqual(0)
 
     woundedCharacter.damage_bashing = 2
-    expect(calc.woundPenalty(woundedCharacter)).toEqual(1)
+    expect(calc.woundPenalty(woundedCharacter, [])).toEqual(1)
 
     woundedCharacter.damage_lethal = 2
-    expect(calc.woundPenalty(woundedCharacter)).toEqual(2)
+    expect(calc.woundPenalty(woundedCharacter, [])).toEqual(2)
 
     woundedCharacter.damage_aggravated = 2
-    expect(calc.woundPenalty(woundedCharacter)).toEqual(4)
+    expect(calc.woundPenalty(woundedCharacter, [])).toEqual(4)
   })
 
   it('should give correct values for abilities', () => {

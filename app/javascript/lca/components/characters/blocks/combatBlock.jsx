@@ -1,47 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table'
 
-import * as calc from '../../../utils/calculated'
+import { withStyles } from 'material-ui/styles'
+import Typography from 'material-ui/Typography'
+
+import PoolLine from '../PoolLine.jsx'
+import BlockPaper from '../../generic/blockPaper.jsx'
 import { withAttributes, withAbilities } from '../../../utils/propTypes'
 
-export function CombatBlock(props) {
-  const { character } = props
-  const padding = 'dense'
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  poolBlock: {
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    width: '5.5rem',
+    maxHeight: '5rem',
+    textOverflow: 'ellipse',
+  },
+})
 
-  return <div>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell numeric padding={ padding }>Evasion</TableCell>
-          <TableCell numeric padding={ padding }>Join Battle</TableCell>
-          <TableCell numeric padding={ padding }>Rush</TableCell>
-          <TableCell numeric padding={ padding }>Disengage</TableCell>
-          <TableCell numeric padding={ padding }>Rise/Prone</TableCell>
-          <TableCell numeric padding={ padding }>Take Cover</TableCell>
-          <TableCell numeric padding={ padding }>Withdraw</TableCell>
-
-        </TableRow>
-      </TableHead>
-
-      <TableBody>
-        <TableRow>
-          <TableCell numeric padding={ padding }>{ calc.evasionRaw(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.joinBattlePool(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.rushPool(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.disengagePool(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.riseFromPronePool(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.takeCoverPool(character) }</TableCell>
-          <TableCell numeric padding={ padding }>{ calc.withdrawPool(character) }</TableCell>
-
-        </TableRow>
-      </TableBody>
-    </Table>
-
-  </div>
+export function CombatBlock({ pools, classes }) {
+  return <BlockPaper>
+    <Typography variant="title">
+      Combat Pools
+    </Typography>
+    <div className={ classes.container }>
+      <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
+      { pools.hardness.total > 0 &&
+        <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
+      }
+      <PoolLine pool={ pools.joinBattle } label="Join Battle" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.rush } label="Rush" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.disengage } label="Disengage" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.withdraw } label="Withdraw" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.riseFromProne } label="Rise from Prone" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.takeCover } label="Take Cover" classes={{ root: classes.poolBlock }} />
+    </div>
+  </BlockPaper>
 }
 CombatBlock.propTypes = {
-  character: PropTypes.shape({ ...withAttributes, ...withAbilities })
+  character: PropTypes.shape({ ...withAttributes, ...withAbilities }),
+  pools: PropTypes.object,
+  penalties: PropTypes.object,
+  classes: PropTypes.object,
 }
 
-export default CombatBlock
+export default withStyles(styles)(CombatBlock)

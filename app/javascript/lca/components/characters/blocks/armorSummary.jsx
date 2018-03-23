@@ -9,10 +9,8 @@ import * as calc from '../../../utils/calculated'
 import { withArmorStats } from '../../../utils/propTypes'
 
 export default function ArmorSummary(props) {
-  const { character } = props
+  const { character, pools } = props
   const padding = 'dense'
-  const naturalSoak = calc.naturalSoak(character)
-  const armorSoak = calc.armorSoak(character)
 
   return <BlockPaper>
     <Typography variant="title">
@@ -35,9 +33,9 @@ export default function ArmorSummary(props) {
 
       <TableBody>
         <TableRow>
-          <TableCell padding={ padding } numeric>{ calc.evasionRaw(character) }</TableCell>
+          <TableCell padding={ padding } numeric>{ pools.evasion.total }</TableCell>
           <TableCell padding={ padding }>{ character.armor_name }</TableCell>
-          <TableCell padding={ padding } numeric>{ naturalSoak + armorSoak }</TableCell>
+          <TableCell padding={ padding } numeric>{ pools.soak.total }</TableCell>
           <TableCell padding={ padding } numeric>{ calc.hardness(character) }</TableCell>
           <TableCell padding={ padding } numeric>{ calc.mobilityPenalty(character) }</TableCell>
           <TableCell padding={ padding }>{ character.armor_tags.join(', ') }</TableCell>
@@ -47,5 +45,6 @@ export default function ArmorSummary(props) {
   </BlockPaper>
 }
 ArmorSummary.propTypes = {
-  character: PropTypes.shape(withArmorStats)
+  character: PropTypes.shape(withArmorStats),
+  pools: PropTypes.object,
 }

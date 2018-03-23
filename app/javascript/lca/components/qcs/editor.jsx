@@ -139,7 +139,7 @@ class QcEditor extends React.Component {
           <div style={{ marginTop: '0.5em' }}>
             <HealthLevelBoxes character={ qc } />
             <Typography>
-              Current wound penalty: -{ woundPenalty(qc) }
+              Current wound penalty: -{ woundPenalty(qc, []) }
             </Typography>
           </div>
 

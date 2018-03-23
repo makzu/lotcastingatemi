@@ -1,6 +1,7 @@
 export * from './_charms.js'
 export * from './_battlegroups.js'
 export * from './_pools.js'
+export * from './_ratings.js'
 export * from './_weapons.js'
 
 import { capitalize, includes } from 'lodash'
@@ -9,23 +10,8 @@ import {
   ATTACK_ABILITIES, NON_ATTACK_ABILITIES,
 } from '../constants.js'
 
-/* Defense values (Parry is per-weapon) */
-export function evasionRaw(character) {
-  // TODO specialties
-  // TODO penalties
-  return Math.ceil((character.attr_dexterity + character.abil_dodge) / 2)
-}
-
-export function guileRaw(character) {
-  // TODO specialties
-  // TODO penalties
-  return Math.ceil((character.attr_manipulation + character.abil_socialize) / 2)
-}
-
-export function resolveRaw(character) {
-  // TODO specialties
-  // TODO penalties
-  return Math.ceil((character.attr_wits + character.abil_integrity) / 2)
+export function specialtiesFor(character, ability) {
+  return character.specialties.filter((s) => s.ability == ability).map((s) => s.context )
 }
 
 /* Health */
@@ -35,22 +21,23 @@ export function totalHealthLevels(character) {
     character.health_level_incap
 }
 
-export function woundPenalty(character) {
+export function woundPenalty(character, merits) {
   // TODO merits that have an effect on wound penalties
   const totalDmg = character.damage_bashing + character.damage_lethal + character.damage_aggravated
   const lvl0 = character.health_level_0s
   const lvl1 = character.health_level_1s
   const lvl2 = character.health_level_2s
   const lvl4 = character.health_level_4s
+  const modifier = merits.some((m) => m.startsWith('pain tolerance')) ? 1 : 0
 
   if (totalDmg <= lvl0) {
     return 0
   } else if (totalDmg <= (lvl0 + lvl1)) {
     return 1
   } else if (totalDmg <= (lvl0 + lvl1 + lvl2)) {
-    return 2
+    return 2 - modifier
   } else if (totalDmg <= (lvl0 + lvl1 + lvl2 + lvl4)) {
-    return 4
+    return 4 - modifier
   } else {
     return -1
   }
@@ -140,38 +127,29 @@ export function mobilityPenalty(character) {
   }
 }
 
-export function armorSoak(character) {
-  switch(character.armor_weight) {
-  case 'light':
-    return character.armor_is_artifact ? 5 : 3
-  case 'medium':
-    return character.armor_is_artifact ? 8 : 5
-  case 'heavy':
-    return character.armor_is_artifact ? 11 : 7
-  case 'unarmored':
-  default:
-    return 0
-  }
-}
-
-export function naturalSoak(character) {
-  // TODO handle merits and other effects that modify natural soak
-  return character.attr_stamina
-}
-
 export function hardness(character) {
-  if (! character.armor_is_artifact)
-    return 0
-  switch(character.armor_weight) {
-  case 'light':
-    return 4
-  case 'medium':
-    return 7
-  case 'heavy':
-    return 10
-  default:
-    return 0
+  let hardness = 0
+  if (character.armor_is_artifact) {
+    switch(character.armor_weight) {
+    case 'light':
+      hardness = 4
+      break
+    case 'medium':
+      hardness = 7
+      break
+    case 'heavy':
+      hardness = 10
+    }
   }
+  // Twilight caste anima power grants 5 hardness at Bonfire/Iconic
+  if (
+    character.type === 'SolarCharacter' &&
+    character.caste === 'twilight' &&
+    character.anima_level === 3
+  )
+    hardness = Math.max(hardness, 5)
+
+  return hardness
 }
 
 export function prettyExaltType(character) {

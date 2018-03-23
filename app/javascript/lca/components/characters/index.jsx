@@ -22,6 +22,7 @@ import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
+import { getSpecificCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
 import {
   prettyFullExaltType, prettyAnimaLevel,
@@ -185,7 +186,7 @@ export class CharacterSheet extends React.Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { character, weapons, merits } = this.props
+    const { character, merits, weapons, pools, penalties } = this.props
     return <div>
       <Hidden smUp>
         <div style={{ height: '2.5em', }}>&nbsp;</div>
@@ -213,7 +214,7 @@ export class CharacterSheet extends React.Component {
         </Grid>
 
         <Grid item xs={ 12 } sm={ 6 } md={ 3 }>
-          <HealthLevelBlock character={ character } />
+          <HealthLevelBlock character={ character } penalties={ penalties } />
         </Grid>
 
         { character.type != 'Character' &&
@@ -277,20 +278,15 @@ export class CharacterSheet extends React.Component {
         </Grid>
 
         <Grid item xs={ 12 } md={ 8 }>
-          <BlockPaper>
-            <Typography variant="title">
-              Combat Pools
-            </Typography>
-            <CombatBlock character={ character } weapons={ weapons } merits={ merits } />
-          </BlockPaper>
+          <CombatBlock character={ character } weapons={ weapons } merits={ merits } penalties={ penalties } pools={ pools } />
         </Grid>
 
         <Grid item xs={ 12 } md={ 4 }>
-          <SocialBlock character={ character } />
+          <SocialBlock character={ character } penalties={ penalties } pools={ pools } />
         </Grid>
 
         <Grid item xs={ 12 } md={ 5 }>
-          <ArmorSummary character={ character } />
+          <ArmorSummary character={ character } pools={ pools } />
         </Grid>
 
         <Grid item xs={ 12 } md={ 3 }>
@@ -322,28 +318,32 @@ export class CharacterSheet extends React.Component {
 CharacterSheet.propTypes = {
   character: PropTypes.shape(fullChar),
   weapons: PropTypes.arrayOf(PropTypes.shape(fullWeapon)),
-  merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)).isRequired
+  merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)),
+  penalties: PropTypes.object,
+  pools: PropTypes.object,
 }
 
-function mapStateToProps(state, ownProps) {
-  const character = state.entities.characters[ownProps.match.params.characterId]
+function mapStateToProps(state, props) {
+  const id = props.match.params.characterId
+  const character = getSpecificCharacter(state, id)
   let weapons = []
   let merits = []
+  let pools
+  let penalties
 
   if (character != undefined) {
-    if (character.weapons != undefined) {
-      weapons = character.weapons.map((id) => state.entities.weapons[id])
-    }
-    if (character.weapons != undefined) {
-      merits = character.merits.map((id) => state.entities.merits[id])
-    }
+    weapons = character.weapons.map((w) => state.entities.weapons[w])
+    merits = character.merits.map((m) => state.entities.merits[m])
+    pools = getPoolsAndRatings(state, id)
+    penalties = getPenalties(state, id)
   }
-
 
   return {
     character,
     weapons,
     merits,
+    penalties,
+    pools,
   }
 }
 

@@ -9,7 +9,7 @@ import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
-import { prettyDrillRating } from '../../utils/calculated'
+import { prettyDrillRating, totalMagnitude } from '../../utils/calculated'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -50,6 +50,10 @@ function BattlegroupCard({ battlegroup, classes }) {
     </Typography>
 
     <PlayerNameSubtitle playerId={ battlegroup.player_id } />
+
+    <Typography>
+      Magnitude: { battlegroup.magnitude } / { totalMagnitude(battlegroup) }
+    </Typography>
 
     <Typography>
       Size { battlegroup.size },&nbsp;

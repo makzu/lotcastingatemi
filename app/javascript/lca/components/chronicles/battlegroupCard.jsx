@@ -9,6 +9,8 @@ import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
+import PoolLine from '../characters/PoolLine.jsx'
+import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { prettyDrillRating, totalMagnitude } from '../../utils/calculated'
 
 const styles = theme => ({
@@ -28,6 +30,22 @@ const styles = theme => ({
   icon: {
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
+  },
+  rowContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  statWrap: {
+    marginRight: theme.spacing.unit,
+  },
+  statLabel: { ...theme.typography.body1,
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    opacity: 0.7,
+  },
+  statValue: { ...theme.typography.body2,
+    fontSize: '1.25rem',
+    lineHeight: 'inherit',
   },
 })
 
@@ -51,20 +69,49 @@ function BattlegroupCard({ battlegroup, classes }) {
 
     <PlayerNameSubtitle playerId={ battlegroup.player_id } />
 
-    <Typography>
-      Magnitude: { battlegroup.magnitude } / { totalMagnitude(battlegroup) }
-    </Typography>
+    <div className={ classes.rowContainer }>
+      <ResourceDisplay
+        current={ battlegroup.magnitude }
+        total={ totalMagnitude(battlegroup) }
+        label="Magnitude"
+        className={ classes.statWrap }
+      />
 
-    <Typography>
-      Size { battlegroup.size },&nbsp;
-      { prettyDrillRating(battlegroup) } Drill
+      <PoolLine pool={{ total: battlegroup.size, specialties: [] }}
+        label="Size"
+        classes={{ root: classes.statWrap }}
+      />
+
+      <div className={ classes.statWrap }>
+        <div className={ classes.statLabel }>
+          Drill:
+        </div>
+        <div className={ classes.statValue }>
+          { prettyDrillRating(battlegroup) }
+        </div>
+      </div>
+
       { battlegroup.might > 0 &&
-        <span>, Might { battlegroup.might }</span>
+        <div className={ classes.statWrap }>
+          <div className={ classes.statLabel }>
+            Might:
+          </div>
+          <div className={ classes.statValue }>
+            { battlegroup.might }
+          </div>
+        </div>
       }
       { battlegroup.perfect_morale  &&
-        <span>, Perfect Morale</span>
+        <div className={ classes.statWrap }>
+          <div className={ classes.statLabel }>
+            Morale:
+          </div>
+          <div className={ classes.statValue }>
+            Perfect
+          </div>
+        </div>
       }
-    </Typography>
+    </div>
 
     <Typography paragraph>
       <strong>Penalties:</strong>&nbsp;

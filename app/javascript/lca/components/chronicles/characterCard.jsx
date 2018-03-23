@@ -54,7 +54,7 @@ const styles = theme => ({
     display: 'inline-block',
     verticalAlign: 'top',
   },
-  animaValue: {
+  animaValue: { ...theme.typography.body1,
     display: 'inline-block',
     verticalAlign: 'top',
     marginTop: '0.25em',
@@ -96,7 +96,6 @@ function CharacterCard({ character, penalties, pools, classes }) {
     </Typography>
 
     <Typography className={ classes.rowContainer } component="div">
-
       { character.motes_personal_total > 0 &&
         <ResourceDisplay className={ classes.moteWrap }
           current={ character.motes_personal_current }
@@ -114,7 +113,7 @@ function CharacterCard({ character, penalties, pools, classes }) {
       <ResourceDisplay className={ classes.moteWrap }
         current={ character.willpower_temporary }
         total={ character.willpower_permanent }
-        label="Peripheral:"
+        label="Willpower:"
       />
       { character.type != 'Character' &&
         <div className={ classes.moteWrap }>

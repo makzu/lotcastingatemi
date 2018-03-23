@@ -9,6 +9,9 @@ import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
+import PoolLine from '../characters/PoolLine.jsx'
+import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { woundPenalty } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
@@ -29,6 +32,13 @@ const styles = theme => ({
   icon: {
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
+  },
+  rowContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  moteWrap: {
+    marginRight: theme.spacing.unit,
   },
 })
 
@@ -51,19 +61,29 @@ function QcCard({ qc, classes }) {
 
     <PlayerNameSubtitle playerId={ qc.player_id } />
 
-    <Typography>
+    <div className={ classes.rowContainer }>
       { qc.motes_personal_total > 0 &&
-        <span>
-          Motes: { qc.motes_personal_current }/{ qc.motes_personal_total } Personal,&nbsp;
-        </span>
+        <ResourceDisplay className={ classes.moteWrap }
+          current={ qc.motes_personal_current }
+          total={ qc.motes_personal_total }
+          label="Personal:"
+        />
       }
       { qc.motes_peripheral_total > 0 &&
-        <span>
-          { qc.motes_peripheral_current }/{ qc.motes_peripheral_total } Peripheral,&nbsp;
-        </span>
+        <ResourceDisplay className={ classes.moteWrap }
+          current={ qc.motes_peripheral_current }
+          total={ qc.motes_peripheral_total }
+          label="Peripheral:"
+        />
       }
-      Willpower: { qc.willpower_temporary }/{ qc.willpower_permanent }
-    </Typography>
+      <ResourceDisplay className={ classes.moteWrap }
+        current={ qc.willpower_temporary }
+        total={ qc.willpower_permanent }
+        label="Willpower:"
+      />
+    </div>
+
+    <HealthLevelBoxes character={ qc } />
 
     <Typography paragraph>
       <strong>Penalties:</strong>&nbsp;

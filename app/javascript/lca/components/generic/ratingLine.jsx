@@ -8,6 +8,9 @@ import RatingDots from './ratingDots.jsx'
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   wrap: {
     display: 'flex',
+    marginBottom: theme.spacing.unit / 2,
+    marginTop: theme.spacing.unit / 2,
+    flexWrap: 'wrap',
   },
   label: {
     flex: 1,

@@ -100,24 +100,24 @@ function CharacterCard({ character, penalties, pools, classes }) {
         <ResourceDisplay className={ classes.moteWrap }
           current={ character.motes_personal_current }
           total={ character.motes_personal_total }
-          label="Personal:"
+          label="Personal"
         />
       }
       { character.motes_peripheral_total > 0 &&
         <ResourceDisplay className={ classes.moteWrap }
           current={ character.motes_peripheral_current }
           total={ character.motes_peripheral_total }
-          label="Peripheral:"
+          label="Peripheral"
         />
       }
       <ResourceDisplay className={ classes.moteWrap }
         current={ character.willpower_temporary }
         total={ character.willpower_permanent }
-        label="Willpower:"
+        label="Willpower"
       />
       { character.type != 'Character' &&
         <div className={ classes.moteWrap }>
-          <div className={ classes.animaLabel }>Anima:</div>
+          <div className={ classes.animaLabel }>Anima</div>
           <div>
             <span className={ classes.animaCurrent }>
               { calc.prettyAnimaLevel(character.anima_level) }

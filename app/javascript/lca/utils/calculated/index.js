@@ -22,7 +22,6 @@ export function totalHealthLevels(character) {
 }
 
 export function woundPenalty(character, merits) {
-  // TODO merits that have an effect on wound penalties
   const totalDmg = character.damage_bashing + character.damage_lethal + character.damage_aggravated
   const lvl0 = character.health_level_0s
   const lvl1 = character.health_level_1s

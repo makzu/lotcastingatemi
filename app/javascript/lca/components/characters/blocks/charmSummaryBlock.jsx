@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
@@ -10,47 +11,90 @@ import Launch from 'material-ui-icons/Launch'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import { fullChar } from '../../../utils/propTypes'
 
-function SingleCharm({ charm }) {
-  return <div>
-    <Typography>
-      <strong>
-        { charm.name }:
-      </strong>&nbsp;
-      (
-      { charm.cost }
-      , { charm.timing }
-      , duration: { charm.duration }
-      , keywords: { charm.keywords.join(', ') || 'none'}
-      )&nbsp;
-      { charm.body }
-    </Typography>
-    <Divider />
-  </div>
-}
-SingleCharm.propTypes = {
-  charm: PropTypes.object,
-}
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit / 2,
+    marginBottom: theme.spacing.unit / 2,
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'baseline',
+  },
+  bodyWrap: {
+  },
+  body: {
+    flex: 1,
+    minWidth: '10em',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'noWrap',
+    [theme.breakpoints.down('md')]: { minWidth: '100%' },
+  },
+  name: { ...theme.typography.body2,
+    fontSize: '1rem',
+    marginRight: theme.spacing.unit / 2,
 
-function SingleSpell({ spell }) {
-  return <div>
-    <Typography>
-      <strong>
+  },
+  info: { ...theme.typography.caption,
+    textTransform: 'capitalize',
+    marginRight: theme.spacing.unit / 2,
+  }
+})
+
+function _SingleCharm({ charm, classes }) {
+  return <React.Fragment>
+    <Typography component="div" className={ classes.root }>
+      <div className={ classes.name }>
+        { charm.name }
+      </div>
+      <div className={ classes.info }>(
+        { charm.cost && charm.cost != '-' &&
+          charm.cost + ', '
+        }
+        { charm.timing }
+        { charm.duration &&
+          ', ' + charm.duration
+        }
+        { charm.keywords.length > 0 &&
+          ', keywords: ' + charm.keywords.join(', ')
+        }
+      )</div>
+      <div className={ classes.body }>{ charm.body }</div>
+    </Typography>
+
+    <Divider />
+  </React.Fragment>
+}
+_SingleCharm.propTypes = {
+  charm: PropTypes.object,
+  classes: PropTypes.object,
+}
+const SingleCharm = withStyles(styles)(_SingleCharm)
+
+function _SingleSpell({ spell, classes }) {
+  return <React.Fragment>
+    <Typography className={ classes.root }>
+      <div className={ classes.name }>
         { spell.name }
-        { spell.control && ' (Control Spell)' }:
-      </strong>&nbsp;
-      (
-      { spell.cost }
-      , duration: { spell.duration }
-      , keywords: { spell.keywords.join(', ') || 'none'}
-      )&nbsp;
-      { spell.body }
+      </div>
+      <div className={ classes.info }>{ spell.control && '(Control Spell) ' }
+        (
+        { spell.cost },&nbsp;
+        { spell.duration }
+        { spell.keywords.length > 0 &&
+          ', keywords: ' + spell.keywords.join(', ')
+        }
+        )
+      </div>
+      <div className={ classes.body }>{ spell.body }</div>
     </Typography>
     <Divider />
-  </div>
+  </React.Fragment>
 }
-SingleSpell.propTypes = {
+_SingleSpell.propTypes = {
   spell: PropTypes.object,
+  classes: PropTypes.object,
 }
+const SingleSpell = withStyles(styles)(_SingleSpell)
 
 function CharmSummaryBlock(props) {
   const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms, spells } = props

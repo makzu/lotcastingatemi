@@ -55,7 +55,7 @@ export function IntimacySummary({ character }) {
     <Typography variant="subheading">Principles</Typography>
     { principles }
 
-    <Typography variant="subheading">Ties</Typography>
+    <Typography variant="subheading" style={{ marginTop: '0.5em' }}>Ties</Typography>
     { ties }
   </BlockPaper>
 }

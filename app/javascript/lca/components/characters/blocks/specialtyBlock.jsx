@@ -11,6 +11,8 @@ import { withSpecialties } from '../../../utils/propTypes'
 const styles = theme => ({
   specialtyWrap: {
     display: 'flex',
+    marginBottom: theme.spacing.unit / 2,
+    marginTop: theme.spacing.unit / 2,
   },
   specialtyAbility: { ...theme.typography.body1,
     textTransform: 'capitalize',
@@ -26,7 +28,7 @@ function FullSpecialtyBlock({ character, classes }) {
     <Fragment key={s.ability + s.context}>
       <div className={ classes.specialtyWrap }>
         <div className={ classes.specialtyAbility }>
-          { s.ability }
+          { s.ability === 'martial_arts' ? 'Martial Arts' : s.ability }
         </div>
         <div className={ classes.specialtyContext }>
           { s.context }

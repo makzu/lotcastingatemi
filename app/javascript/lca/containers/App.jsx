@@ -47,8 +47,9 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: 'calc(100% - 56px)',
     marginTop: 56,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       height: 'calc(100% - 64px)',
+      width: `calc(100% - ${drawerWidth}px)`,
       marginTop: 64,
     }
   },
@@ -61,6 +62,9 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 8,
     marginRight: theme.spacing.unit * 8,
   },
+  footerText: {
+    display: 'inline',
+  }
 })
 
 class App extends React.Component {
@@ -113,13 +117,17 @@ class App extends React.Component {
 
         <footer className={ classes.footer }>
           <Divider className={ classes.footerDivider } />
-          <Typography variant="caption">
-            Exalted is &copy; White Wolf AB and Onyx Path.
-          </Typography>
+          <div>
+            <Typography variant="caption" className={ classes.footerText }>
+              Exalted is &copy; White Wolf AB and Onyx Path.
+            </Typography>
+          </div>
 
-          <Typography variant="caption" component={ Link } to="/privacy">
-            Privacy Policy / Legal Notice
-          </Typography>
+          <div>
+            <Typography variant="caption" component={ Link } to="/privacy" className={ classes.footerText }>
+              Privacy Policy / Legal Notice
+            </Typography>
+          </div>
         </footer>
       </main>
 

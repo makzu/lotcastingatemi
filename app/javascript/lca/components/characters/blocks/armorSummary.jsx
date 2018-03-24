@@ -1,50 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Table, { TableBody, TableHead, TableRow, TableCell } from 'material-ui/Table'
+import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
+import PoolLine from '../PoolLine.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
-import * as calc from '../../../utils/calculated'
 import { withArmorStats } from '../../../utils/propTypes'
 
-export default function ArmorSummary(props) {
-  const { character, pools } = props
-  const padding = 'dense'
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  poolBlock: {
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    maxWidth: '5.5rem',
+    maxHeight: '5rem',
+    textOverflow: 'ellipse',
+  },
+})
 
+function ArmorSummary({ character, pools, classes }) {
   return <BlockPaper>
     <Typography variant="title">
       Armor &amp; Defense
     </Typography>
 
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell padding={ padding } numeric>Evasion</TableCell>
-          <TableCell padding={ padding }>Armor Name</TableCell>
-          <TableCell padding={ padding } numeric>Soak</TableCell>
-          <TableCell padding={ padding } numeric>Hardness</TableCell>
-          <TableCell padding={ padding } numeric>
-            <abbr title="Mobility Penalty">MP</abbr>
-          </TableCell>
-          <TableCell padding={ padding }>Tags</TableCell>
-        </TableRow>
-      </TableHead>
+    <div className={ classes.container }>
+      <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
+      { pools.hardness.total > 0 &&
+        <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
+      }
+      <PoolLine pool={{ total: character.armor_name, specialties: [] }} label="Armor Name" classes={{ root: classes.poolBlock }} />
+    </div>
 
-      <TableBody>
-        <TableRow>
-          <TableCell padding={ padding } numeric>{ pools.evasion.total }</TableCell>
-          <TableCell padding={ padding }>{ character.armor_name }</TableCell>
-          <TableCell padding={ padding } numeric>{ pools.soak.total }</TableCell>
-          <TableCell padding={ padding } numeric>{ calc.hardness(character) }</TableCell>
-          <TableCell padding={ padding } numeric>{ calc.mobilityPenalty(character) }</TableCell>
-          <TableCell padding={ padding }>{ character.armor_tags.join(', ') }</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
   </BlockPaper>
 }
 ArmorSummary.propTypes = {
   character: PropTypes.shape(withArmorStats),
   pools: PropTypes.object,
+  classes: PropTypes.object,
 }
+
+export default withStyles(styles)(ArmorSummary)

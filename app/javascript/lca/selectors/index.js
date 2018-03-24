@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 
 export * from './entities.js'
 export * from './character.js'
+export * from './weapon.js'
 
 export const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 

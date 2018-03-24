@@ -72,7 +72,7 @@ const SingleCharm = withStyles(styles)(_SingleCharm)
 
 function _SingleSpell({ spell, classes }) {
   return <React.Fragment>
-    <Typography className={ classes.root }>
+    <Typography component="div" className={ classes.root }>
       <div className={ classes.name }>
         { spell.name }
       </div>

@@ -12,6 +12,9 @@ const styles = theme => ({
     fontWeight: 500,
     opacity: 0.7,
   },
+  labelSpan: {
+
+  },
   pool: { ...theme.typography.body2,
     fontSize: '1.25rem',
     lineHeight: 'inherit',
@@ -35,14 +38,16 @@ const PoolLine = ({ label, pool, classes }) => {
     </div>
   )
   const sp = pool.specialties || []
+  /*
   const specialties = sp.map((s) =>
     <div key={ s } className={ classes.specialty }>
       +1 { s }
     </div>
   )
+  // */
   return <div className={ classes.root }>
     <div className={ classes.label }>
-      { label }
+      <span className={ classes.labelSpan }>{ label }</span>
     </div>
     <div>
       <span className={ classes.pool }>
@@ -53,9 +58,18 @@ const PoolLine = ({ label, pool, classes }) => {
           &nbsp;+{ pool.excellency }/{ pool.excellency }m
         </span>
       }
+      { pool.minimum &&
+        <span className={ classes.excellency }>
+          &nbsp;min { pool.minimum }
+        </span>
+      }
     </div>
     { merits }
-    { specialties }
+    { sp.length > 0 &&
+      <div className={ classes.specialty }>
+        +1 specialty
+      </div>
+    }
   </div>
 }
 PoolLine.propTypes = {

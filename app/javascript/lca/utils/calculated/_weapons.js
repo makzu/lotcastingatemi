@@ -1,3 +1,5 @@
+import { specialtiesFor, maxExcellency, attr, abil } from '.'
+
 // Mortal melee/ma weapons: p.580
 // Mortal thrown weapons:   p.587
 // Mortal archery weapons:  p.588
@@ -69,6 +71,51 @@ export function thrownAccuracyBonus(weapon, range) {
     bonus += 1
 
   return bonus
+}
+
+const rangeTag = (weapon) => (
+  weapon.tags.find((t) => (
+    t.toLowerCase().startsWith('thrown') ||
+    t.toLowerCase().startsWith('archery')
+  ))
+)
+
+const rangeValue = (weapon) => {
+  const tag = rangeTag(weapon)
+  if (tag == undefined)
+    return 0
+
+  const rangeRegex = /\(([^)]+)\)/.exec(tag)
+  let range
+  if (rangeRegex != null)
+    range = rangeRegex[1].toLowerCase()
+  switch(range) {
+  case 'extreme':
+    return 4
+  case 'long':
+    return 3
+  case 'medium':
+    return 2
+  case 'short':
+    return 1
+  case 'close':
+  default:
+    return 0
+  }
+}
+
+export function weaponIsRanged(weapon) {
+  const tag = rangeTag(weapon)
+  if(['archery', 'thrown'].includes(weapon.ability))
+    return true
+
+  if(['melee', 'brawl'].includes(weapon.ability))
+    return false
+
+  if (tag != undefined)
+    return true
+
+  return false
 }
 
 export function weaponDamageBonus(weapon) {
@@ -143,40 +190,123 @@ export function weaponOverwhelming(weapon) {
   }
 }
 
-export function weaponAttributeRating(character, weapon) {
-  return character[`attr_${ weapon.attr }`]
+function specialtiesForWeapon(character, weapon) {
+  if (weapon.ability.startsWith('martial arts'))
+    return specialtiesFor(character, 'martial_arts')
+  else if (weapon.ability.startsWith('craft'))
+    return specialtiesFor(character, 'craft')
+  else
+    return specialtiesFor(character, weapon.ability)
 }
 
-export function weaponAbilityRating(character, weapon) {
-  let ability
-  if (weapon.ability.startsWith('martial arts')) {
-    ability = character.abil_martial_arts.find((art) => `martial arts (${art.style})` == weapon.ability)
-    return ability != undefined ? ability.rating : 0
-  } else if (weapon.ability.startsWith('craft')) {
-    ability = character.abil_craft.find((craft) => `craft (${craft.craft})` == weapon.ability).rating
-    return ability != undefined ? ability.rating : 0
-  } else {
-    return character[`abil_${ weapon.ability }`]
+function excellencyForWeapon(character, weapon) {
+  if (weapon.ability.startsWith('martial arts'))
+    return maxExcellency(character, weapon.attr, 'martial arts')
+  else if (weapon.ability.startsWith('craft'))
+    return maxExcellency(character, weapon.attr, 'craft')
+  else
+    return maxExcellency(character, weapon.attr, weapon.ability)
+}
+
+export function witheringAttackPool(character, weapon, penalties) {
+  const rawPool = attr(character, weapon.attr) +
+                  abil(character, weapon.ability) +
+                  weaponAccuracyBonus(weapon)
+
+  return {
+    raw: rawPool,
+    specialties: specialtiesForWeapon(character, weapon),
+    excellency: excellencyForWeapon(character, weapon),
+    penalty: penalties.wound,
+    total: Math.max(rawPool - penalties.wound, 0),
   }
 }
 
-export function witheringAttackPool(character, weapon) {
-  // TODO specialties
-  // TODO penalties
-  return decisiveAttackPool(character, weapon) + weaponAccuracyBonus(weapon)
+export function rangedWitheringAttackPool(character, weapon, penalties) {
+  if (!weaponIsRanged(weapon))
+    return false
+
+  const tag = rangeTag(weapon)
+  const range = rangeValue(weapon)
+  const rangebonus = tag.toLowerCase().startsWith('archery') ? archeryAccuracyBonus : thrownAccuracyBonus
+
+  const rawPool = attr(character, weapon.attr) +
+                  abil(character, weapon.ability)
+
+  const penalty = penalties.wound
+  const poolBase = {
+    specialties: specialtiesForWeapon(character, weapon),
+    excellency: excellencyForWeapon(character, weapon),
+    penalty: penalty,
+  }
+
+  return {
+    close: { ...poolBase,
+      raw: rawPool + rangebonus(weapon, 'close'),
+      total: Math.max(rawPool + rangebonus(weapon, 'close') - penalty, 0),
+      available: true,
+    },
+    short: { ...poolBase,
+      raw: rawPool + rangebonus(weapon, 'short'),
+      total: Math.max(rawPool + rangebonus(weapon, 'short') - penalty, 0),
+      available: range >= 1,
+    },
+    medium: { ...poolBase,
+      raw: rawPool + rangebonus(weapon, 'medium'),
+      total: Math.max(rawPool + rangebonus(weapon, 'medium') - penalty, 0),
+      available: range >= 2,
+    },
+    long: { ...poolBase,
+      raw: rawPool + rangebonus(weapon, 'long'),
+      total: Math.max(rawPool + rangebonus(weapon, 'long') - penalty, 0),
+      available: range >= 3,
+    },
+    extreme: { ...poolBase,
+      raw: rawPool + rangebonus(weapon, 'extreme'),
+      total: Math.max(rawPool + rangebonus(weapon, 'extreme') - penalty, 0),
+      available: range >= 4,
+    },
+  }
 }
 
-export function decisiveAttackPool(character, weapon) {
-  // TODO specialties
-  // TODO penalties
-  const attribute = weaponAttributeRating(character, weapon)
-  const ability = weaponAbilityRating(character, weapon)
+export function witheringDamage(character, weapon) {
+  return { total: weaponDamage(character, weapon), minimum: weaponOverwhelming(weapon) }
+}
 
-  return attribute + ability
+export function decisiveAttackPool(character, weapon, penalties) {
+  const rawPool = attr(character, weapon.attr) +
+                  abil(character, weapon.ability)
+
+  return {
+    raw: rawPool,
+    specialties: specialtiesForWeapon(character, weapon),
+    excellency: maxExcellency(character, weapon.attr, weapon.ability),
+    penalty: penalties.wound,
+    total: Math.max(rawPool - penalties.wound, 0),
+  }
+}
+
+export function parry(character, weapon, penalties) {
+  if (weaponIsRanged(weapon))
+    return { raw: 0, total: 0 }
+  const rawPool = attr(character, weapon.attr) +
+                  abil(character, weapon.ability)
+  const specialties = specialtiesForWeapon(character, weapon)
+  const penalty = penalties.onslaught + penalties.wound
+  const rawRating = Math.ceil(rawPool / 2) + weaponDefenseBonus(weapon)
+
+  return {
+    raw: rawRating,
+    specialtyMatters: rawPool % 2 === 0 && specialties.length > 0,
+    specialties: specialties,
+    excellency: Math.floor(maxExcellency(character, weapon.attr, weapon.ability) / 2),
+    penalty: penalty,
+    total: Math.max(rawRating - penalty, 0),
+  }
 }
 
 export function weaponParry(character, weapon) {
-  // TODO handle archery and thrown
-  // TODO specialties
-  return Math.ceil(decisiveAttackPool(character, weapon) / 2) + weaponDefenseBonus(weapon)
+  // TODO: handle archery and thrown
+  // TODO: specialties
+  return Math.ceil(attr(character, weapon.attr) + abil(character, weapon.ability) / 2) + weaponDefenseBonus(weapon)
 }

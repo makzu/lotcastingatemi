@@ -22,6 +22,10 @@ export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) => character.spells.map((s) => spells[s])
 )(characterIdMemoizer)
+export const getControlSpellsForCharacter = createCachedSelector(
+  [getSpellsForCharacter],
+  (spells) => spells.filter((s) => s.control_spells)
+)
 
 
 export const getPenalties = createCachedSelector(
@@ -32,8 +36,6 @@ export const getPenalties = createCachedSelector(
       mobility: calc.mobilityPenalty(character, meritNames),
       onslaught: character.onslaught,
       wound: calc.woundPenalty(character, meritNames),
-      _evasion: calc.woundPenalty(character, meritNames) + calc.mobilityPenalty(character, meritNames) + character.onslaught,
-      _parry: calc.woundPenalty(character, meritNames) + character.onslaught
     }
   }
 )(characterIdMemoizer)
@@ -57,6 +59,9 @@ export const getPoolsAndRatings = createCachedSelector(
       withdraw: calc.withdraw(character, meritNames, penalties),
       riseFromProne: calc.riseFromProne(character, meritNames, penalties),
       takeCover: calc.takeCover(character, meritNames, penalties),
+
+      featOfStrength: calc.featOfStrength(character, meritNames, penalties),
+      shapeSorcery: calc.shapeSorcery(character, meritNames, penalties),
     }
   }
 )(characterIdMemoizer)

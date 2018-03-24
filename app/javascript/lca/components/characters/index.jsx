@@ -257,7 +257,7 @@ export class CharacterSheet extends React.Component {
               </BlockPaper>
             </Grid>
 
-            <Grid item xs={ 12 } hidden={{ mdDown: true }}>
+            <Grid item xs={ 12 } hidden={{ smDown: true }}>
               <BlockPaper>
                 <Typography variant="title">
                   Weapons
@@ -268,7 +268,7 @@ export class CharacterSheet extends React.Component {
           </Grid>
         </Grid>
 
-        <Grid item xs={ 12 } hidden={{ lgUp: true }}>
+        <Grid item xs={ 12 } hidden={{ mdUp: true }}>
           <BlockPaper>
             <Typography variant="title">
               Weapons

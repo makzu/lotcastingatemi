@@ -17,23 +17,18 @@ const styles = theme => ({
   poolBlock: {
     marginRight: theme.spacing.unit,
     marginTop: theme.spacing.unit,
-    width: '5.5rem',
+    maxWidth: '5.5rem',
     maxHeight: '5rem',
     textOverflow: 'ellipse',
   },
 })
 
-export function CombatBlock({ pools, classes }) {
+export function CombatBlock({ character, pools, classes }) {
   return <BlockPaper>
     <Typography variant="title">
       Combat Pools
     </Typography>
     <div className={ classes.container }>
-      <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
-      { pools.hardness.total > 0 &&
-        <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
-      }
       <PoolLine pool={ pools.joinBattle } label="Join Battle" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.rush } label="Rush" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.disengage } label="Disengage" classes={{ root: classes.poolBlock }} />

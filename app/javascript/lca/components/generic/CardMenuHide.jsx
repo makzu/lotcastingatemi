@@ -2,13 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Bookmark from 'material-ui-icons/Bookmark'
-import BookmarkBorder from 'material-ui-icons/BookmarkBorder'
+import { ListItemIcon, ListItemText } from 'material-ui/List'
+import { MenuItem } from 'material-ui/Menu'
+import Visibility from 'material-ui-icons/Visibility'
+import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import { updateCharacter, updateQc, updateBattlegroup } from '../../ducks/actions.js'
 
-function PinButton(props) {
+function CardMenuHide(props) {
+  if (!props.show)
+    return <div />
+
   let action
   switch(props.characterType) {
   case 'qcs':
@@ -22,33 +26,26 @@ function PinButton(props) {
     action = props.updateCharacter
   }
 
-  if (props.isPinned) {
-    return <Button
-      onClick={() => action(props.id, 'pinned', false)}
-    >
-      Unpin&nbsp;
-      <Bookmark />
-    </Button>
-  } else {
-    return <Button
-      onClick={() => action(props.id, 'pinned', true)}
-    >
-      Pin&nbsp;
-      <BookmarkBorder />
-    </Button>
-  }
+  return <MenuItem button onClick={ () => action(props.id, 'hidden', !props.isHidden) }>
+    <ListItemIcon>
+      { props.isHidden ? <Visibility /> : <VisibilityOff /> }
+    </ListItemIcon>
+    <ListItemText inset primary={ props.isHidden ? 'Unhide' : 'Hide from other players' } />
+  </MenuItem>
 }
-PinButton.propTypes = {
+CardMenuHide.propTypes = {
   id: PropTypes.number.isRequired,
   characterType: PropTypes.string.isRequired,
-  isPinned: PropTypes.bool,
+  isHidden: PropTypes.bool,
+  show: PropTypes.bool,
   updateCharacter: PropTypes.func,
   updateQc: PropTypes.func,
   updateBattlegroup: PropTypes.func,
 }
 function mapStateToProps(state, ownProps) {
   return {
-    isPinned: state.entities[ownProps.characterType][ownProps.id].pinned
+    isHidden: state.entities[ownProps.characterType][ownProps.id].hidden,
+    show: state.entities[ownProps.characterType][ownProps.id].chronicle_id != undefined,
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -58,4 +55,4 @@ function mapDispatchToProps(dispatch) {
     updateBattlegroup: (id, trait, value) => dispatch(updateBattlegroup(id, trait, value)),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PinButton)
+export default connect(mapStateToProps, mapDispatchToProps)(CardMenuHide)

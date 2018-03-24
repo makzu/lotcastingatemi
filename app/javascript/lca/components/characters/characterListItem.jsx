@@ -9,9 +9,7 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import ModeEdit from 'material-ui-icons/ModeEdit'
 
-import DeleteButton from '../generic/deleteButton.jsx'
-import HideButton from '../generic/hideButton.jsx'
-import PinButton from '../generic/pinButton.jsx'
+import ContentPageCardMenu from '../generic/ContentPageCardMenu.jsx'
 import { prettyFullExaltType } from '../../utils/calculated'
 import { fullChar } from '../../utils/propTypes'
 
@@ -20,7 +18,11 @@ const styles = theme => ({
     paddingTop: 16,
     paddingBottom: 16,
   }),
+  nameRow: {
+    display: 'flex',
+  },
   characterName: {
+    flex: 1,
     textDecoration: 'none',
   },
   icon: {
@@ -34,12 +36,16 @@ const styles = theme => ({
 
 function CharacterListItem({ character, classes }) {
   return <Paper className={ classes.root }>
-    <Typography variant="title" className={ classes.characterName }
-      component={ Link } to={ `/characters/${character.id}` }
-    >
-      { character.name }
-      <Launch className={ classes.icon } />
-    </Typography>
+    <div className={ classes.nameRow }>
+      <Typography variant="title" className={ classes.characterName }
+        component={ Link } to={ `/characters/${character.id}` }
+      >
+        { character.name }
+        <Launch className={ classes.icon } />
+      </Typography>
+
+      <ContentPageCardMenu characterType="characters" id={ character.id } />
+    </div>
 
     <Typography paragraph>
       Essence { character.essence } { prettyFullExaltType(character) }
@@ -50,11 +56,6 @@ function CharacterListItem({ character, classes }) {
         Edit
         <ModeEdit />
       </Button>
-      <DeleteButton characterType="characters" id={ character.id } />
-    </div>
-    <div className={ classes.controlGroup }>
-      <HideButton characterType="characters" id={ character.id } />
-      <PinButton characterType="characters" id={ character.id } />
     </div>
   </Paper>
 }

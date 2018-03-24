@@ -9,9 +9,7 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import ModeEdit from 'material-ui-icons/ModeEdit'
 
-import DeleteButton from '../generic/deleteButton'
-import HideButton from '../generic/hideButton'
-import PinButton from '../generic/pinButton.jsx'
+import ContentPageCardMenu from '../generic/ContentPageCardMenu.jsx'
 import { fullQc } from '../../utils/propTypes'
 
 const styles = theme => ({
@@ -19,7 +17,11 @@ const styles = theme => ({
     paddingTop: 16,
     paddingBottom: 16,
   }),
+  nameRow: {
+    display: 'flex',
+  },
   qcName: {
+    flex: 1,
     textDecoration: 'none',
   },
   icon: {
@@ -33,24 +35,22 @@ const styles = theme => ({
 
 function QcListItem({ qc, classes }) {
   return <Paper className={ classes.root }>
-    <Typography variant="title" className={ classes.qcName }
-      component={ Link } to={ `/qcs/${qc.id}` }
-    >
-      { qc.name }
-      <Launch className={ classes.icon } />
-    </Typography>
+    <div className={ classes.nameRow }>
+      <Typography variant="title" className={ classes.qcName }
+        component={ Link } to={ `/qcs/${qc.id}` }
+      >
+        { qc.name }
+        <Launch className={ classes.icon } />
+      </Typography>
+
+      <ContentPageCardMenu characterType="qcs" id={ qc.id } />
+    </div>
 
     <div className={ classes.controlGroup }>
       <Button component={ Link } to={ `/qcs/${qc.id}/edit` }>
         Edit
         <ModeEdit />
       </Button>
-      <DeleteButton characterType="qcs" id={ qc.id } />
-    </div>
-
-    <div className={ classes.controlGroup }>
-      <HideButton characterType="qcs" id={ qc.id } />
-      <PinButton characterType="qcs" id={ qc.id } />
     </div>
   </Paper>
 }

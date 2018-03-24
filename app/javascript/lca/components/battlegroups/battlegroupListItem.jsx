@@ -10,9 +10,7 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import ModeEdit from 'material-ui-icons/ModeEdit'
 
-import DeleteButton from '../generic/deleteButton.jsx'
-import HideButton from '../generic/hideButton.jsx'
-import PinButton from '../generic/pinButton.jsx'
+import ContentPageCardMenu from '../generic/ContentPageCardMenu.jsx'
 import { prettyDrillRating } from '../../utils/calculated'
 
 const styles = theme => ({
@@ -20,7 +18,11 @@ const styles = theme => ({
     paddingTop: 16,
     paddingBottom: 16,
   }),
+  nameRow: {
+    display: 'flex',
+  },
   bgName: {
+    flex: 1,
     textDecoration: 'none',
   },
   icon: {
@@ -36,12 +38,16 @@ function BattlegroupListItem(props) {
   const { battlegroup, classes } = props
 
   return <Paper className={ classes.root }>
-    <Typography variant="title" className={ classes.bgName }
-      component={ Link } to={ `/battlegroups/${battlegroup.id}` }
-    >
-      { battlegroup.name }
-      <Launch className={ classes.icon } />
-    </Typography>
+    <div className={ classes.nameRow }>
+      <Typography variant="title" className={ classes.bgName }
+        component={ Link } to={ `/battlegroups/${battlegroup.id}` }
+      >
+        { battlegroup.name }
+        <Launch className={ classes.icon } />
+      </Typography>
+
+      <ContentPageCardMenu characterType="battlegroups" id={ battlegroup.id } />
+    </div>
 
     <Typography paragraph>
       Size { battlegroup.size },{' '}
@@ -59,12 +65,6 @@ function BattlegroupListItem(props) {
         Edit
         <ModeEdit />
       </Button>
-      <DeleteButton characterType="battlegroups" id={ battlegroup.id } />
-    </div>
-
-    <div className={ classes.controlGroup }>
-      <HideButton characterType="battlegroups" id={ battlegroup.id } />
-      <PinButton characterType="battlegroups" id={ battlegroup.id } />
     </div>
   </Paper>
 }

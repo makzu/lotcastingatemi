@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Visibility from 'material-ui-icons/Visibility'
-import VisibilityOff from 'material-ui-icons/VisibilityOff'
+import { ListItemIcon, ListItemText } from 'material-ui/List'
+import { MenuItem } from 'material-ui/Menu'
+import Bookmark from 'material-ui-icons/Bookmark'
+import BookmarkBorder from 'material-ui-icons/BookmarkBorder'
 
 import { updateCharacter, updateQc, updateBattlegroup } from '../../ducks/actions.js'
 
-function HideButton(props) {
+function PinButton(props) {
   let action
   switch(props.characterType) {
   case 'qcs':
@@ -22,33 +23,24 @@ function HideButton(props) {
     action = props.updateCharacter
   }
 
-  if (props.isHidden) {
-    return <Button
-      onClick={() => action(props.id, 'hidden', false)}
-    >
-      Unhide&nbsp;
-      <Visibility />
-    </Button>
-  } else {
-    return <Button
-      onClick={() => action(props.id, 'hidden', true)}
-    >
-      Hide&nbsp;
-      <VisibilityOff />
-    </Button>
-  }
+  return <MenuItem button onClick={ () => action(props.id, 'pinned', !props.isPinned) }>
+    <ListItemIcon>
+      { props.isPinned ? <Bookmark /> : <BookmarkBorder /> }
+    </ListItemIcon>
+    <ListItemText inset primary={ props.isPinned ? 'Unpin' : 'Pin to Menu' } />
+  </MenuItem>
 }
-HideButton.propTypes = {
+PinButton.propTypes = {
   id: PropTypes.number.isRequired,
   characterType: PropTypes.string.isRequired,
-  isHidden: PropTypes.bool,
+  isPinned: PropTypes.bool,
   updateCharacter: PropTypes.func,
   updateQc: PropTypes.func,
   updateBattlegroup: PropTypes.func,
 }
 function mapStateToProps(state, ownProps) {
   return {
-    isHidden: state.entities[ownProps.characterType][ownProps.id].hidden
+    isPinned: state.entities[ownProps.characterType][ownProps.id].pinned
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -58,4 +50,4 @@ function mapDispatchToProps(dispatch) {
     updateBattlegroup: (id, trait, value) => dispatch(updateBattlegroup(id, trait, value)),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(HideButton)
+export default connect(mapStateToProps, mapDispatchToProps)(PinButton)

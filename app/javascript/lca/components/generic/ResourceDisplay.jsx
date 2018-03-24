@@ -35,8 +35,8 @@ const ResourceDisplay = ({ current, total, label, className, classes }) =>
     </div>
   </div>
 ResourceDisplay.propTypes = {
-  current: PropTypes.integer,
-  total: PropTypes.integer,
+  current: PropTypes.number,
+  total: PropTypes.number,
   label: PropTypes.string,
   className: PropTypes.string,
   classes: PropTypes.object,

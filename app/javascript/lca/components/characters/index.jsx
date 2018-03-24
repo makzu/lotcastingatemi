@@ -188,11 +188,11 @@ export class CharacterSheet extends React.Component {
 
     const { character, merits, weapons, pools, penalties } = this.props
     return <div>
-      <Hidden smUp>
-        <div style={{ height: '2.5em', }}>&nbsp;</div>
-      </Hidden>
-
       <Grid container spacing={ 24 }>
+        <Grid item hidden={{ smUp: true }} xs={ 12 }>
+          <div style={{ height: '1em', }}>&nbsp;</div>
+        </Grid>
+
         <Grid item xs={ 12 } md={ 4 }>
           <BlockPaper>
             <Typography variant="headline">

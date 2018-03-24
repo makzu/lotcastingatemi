@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Typography from 'material-ui/Typography'
 
 function PlayerNameSubtitle({ player }) {
-  return <Typography variant="subheading">
+  return <Typography variant="caption">
     Player: { player.display_name }
   </Typography>
 }

@@ -40,6 +40,9 @@ class ChronicleDashboard extends React.Component {
     )
 
     return <Grid container spacing={ 24 }>
+      <Grid item hidden={{ smUp: true }} xs={ 12 }>
+        <div style={{ height: '1em', }}>&nbsp;</div>
+      </Grid>
 
       <Grid item xs={ 12 }>
         <Typography variant="headline">

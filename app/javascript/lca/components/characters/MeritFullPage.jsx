@@ -78,17 +78,19 @@ class MeritFullPage extends React.Component {
       </Grid>
     )
 
-    return <div>
-      <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Merits
-          </Typography>
-        </Grid>
-
-        { mts }
+    return <Grid container spacing={ 24 }>
+      <Grid item hidden={{ smUp: true }} xs={ 12 }>
+        <div style={{ height: '1em', }}>&nbsp;</div>
       </Grid>
-    </div>
+
+      <Grid item xs={ 12 }>
+        <Typography variant="headline">
+          Merits
+        </Typography>
+      </Grid>
+
+      { mts }
+    </Grid>
   }
 }
 

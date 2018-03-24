@@ -158,43 +158,45 @@ class CharmFullPage extends React.Component {
       </Grid>
     )
 
-    return <div>
-      <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">Charms</Typography>
-        </Grid>
-        { natives }
-
-        { maCharms.length > 0 &&
-          <Grid item xs={ 12 }>
-            <Typography variant="headline">Martial Arts</Typography>
-          </Grid>
-        }
-        { maCharms }
-
-        { evo.length > 0 &&
-          <Grid item xs={ 12 }>
-            <Typography variant="headline">Evocations</Typography>
-          </Grid>
-        }
-        { evo }
-
-        { spirit.length > 0 &&
-          <Grid item xs={ 12 }>
-            <Typography variant="headline">Spirit Charms</Typography>
-          </Grid>
-        }
-        { spirit }
-
-        { spl.length > 0 &&
-          <Grid item xs={ 12 }>
-            <Typography variant="headline">Spells</Typography>
-          </Grid>
-        }
-        { spl }
-
+    return <Grid container spacing={ 24 }>
+      <Grid item hidden={{ smUp: true }} xs={ 12 }>
+        <div style={{ height: '1em', }}>&nbsp;</div>
       </Grid>
-    </div>
+
+      <Grid item xs={ 12 }>
+        <Typography variant="headline">Charms</Typography>
+      </Grid>
+      { natives }
+
+      { maCharms.length > 0 &&
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">Martial Arts</Typography>
+        </Grid>
+      }
+      { maCharms }
+
+      { evo.length > 0 &&
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">Evocations</Typography>
+        </Grid>
+      }
+      { evo }
+
+      { spirit.length > 0 &&
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">Spirit Charms</Typography>
+        </Grid>
+      }
+      { spirit }
+
+      { spl.length > 0 &&
+        <Grid item xs={ 12 }>
+          <Typography variant="headline">Spells</Typography>
+        </Grid>
+      }
+      { spl }
+
+    </Grid>
   }
 }
 CharmFullPage.propTypes = {

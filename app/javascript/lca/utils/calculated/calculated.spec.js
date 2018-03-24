@@ -69,6 +69,7 @@ describe('Calculated values', () => {
 
   it('should give correct info for weapons', () => {
     const light = { weight: 'light', is_artifact: false, tags: [], ability: 'melee', attr: 'dexterity', }
+    const mockPenalty = { wound: 0 }
     const medium = { ...light, weight: 'medium' }
     const heavy =  { ...light, weight: 'heavy' }
     const shield = { ...medium, tags: ['shield'] }
@@ -77,13 +78,13 @@ describe('Calculated values', () => {
     const medA =   { ...medium, is_artifact: true }
     const hvyA =   { ...heavy,  is_artifact: true }
 
-    expect(calc.witheringAttackPool(mockChar, light)).toEqual(9)
-    expect(calc.witheringAttackPool(mockChar, medium)).toEqual(7)
-    expect(calc.witheringAttackPool(mockChar, heavy)).toEqual(5)
+    expect(calc.witheringAttackPool(mockChar, light, mockPenalty).total).toEqual(9)
+    expect(calc.witheringAttackPool(mockChar, medium, mockPenalty).total).toEqual(7)
+    expect(calc.witheringAttackPool(mockChar, heavy, mockPenalty).total).toEqual(5)
 
-    expect(calc.witheringAttackPool(mockChar, lightA)).toEqual(10)
-    expect(calc.witheringAttackPool(mockChar, medA)).toEqual(8)
-    expect(calc.witheringAttackPool(mockChar, hvyA)).toEqual(6)
+    expect(calc.witheringAttackPool(mockChar, lightA, mockPenalty).total).toEqual(10)
+    expect(calc.witheringAttackPool(mockChar, medA, mockPenalty).total).toEqual(8)
+    expect(calc.witheringAttackPool(mockChar, hvyA, mockPenalty).total).toEqual(6)
 
     expect(calc.weaponDamage(mockChar, light)).toEqual(9)
     expect(calc.weaponDamage(mockChar, shield)).toEqual(9)

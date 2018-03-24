@@ -50,7 +50,7 @@ export const getPoolsAndRatings = createCachedSelector(
 
       evasion: calc.evasion(character, meritNames, penalties),
       soak: calc.soak(character, meritNames, penalties),
-      hardness: { total: calc.hardness(character), specialties: [] },
+      hardness: { total: calc.hardness(character) },
       joinBattle: calc.joinBattle(character, meritNames, penalties),
       rush: calc.rush(character, meritNames, penalties),
       disengage: calc.disengage(character, meritNames, penalties),

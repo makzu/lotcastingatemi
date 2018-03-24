@@ -17,13 +17,30 @@ const styles = theme => ({
     lineHeight: 'inherit',
   },
   specialty: { ...theme.typography.caption,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'noWrap',
   },
   excellency: { ...theme.typography.caption,
   },
 })
 
-const PoolLine = ({ label, pool, classes }) =>
-  <div className={ classes.root }>
+const PoolLine = ({ label, pool, classes }) => {
+  const mb = pool.meritBonus || []
+  const merits = mb.map((m) =>
+    <div key={ m.label } className={ classes.specialty }>
+      { m.situational &&
+        <span>+{ m.bonus } </span>
+      }{ m.label }
+    </div>
+  )
+  const sp = pool.specialties || []
+  const specialties = sp.map((s) =>
+    <div key={ s } className={ classes.specialty }>
+      +1 { s }
+    </div>
+  )
+  return <div className={ classes.root }>
     <div className={ classes.label }>
       { label }
     </div>
@@ -37,17 +54,10 @@ const PoolLine = ({ label, pool, classes }) =>
         </span>
       }
     </div>
-    { pool.meritBonus > 0 &&
-      <div className={ classes.specialty }>
-        &nbsp;+{ pool.meritBonus } { pool.meritName }
-      </div>
-    }
-    { pool.specialties.length > 0 &&
-      <div className={ classes.specialty }>
-        &nbsp;+1 { pool.specialties.join(', ') }
-      </div>
-    }
+    { merits }
+    { specialties }
   </div>
+}
 PoolLine.propTypes = {
   label: PropTypes.string,
   pool: PropTypes.object,

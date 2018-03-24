@@ -12,57 +12,67 @@ export function maxExcellency(character, attribute, ability) {
   }
 }
 
-export function pool(character, attribute, ability, meritBonus, meritName, penalty) {
-  const p = character[`attr_${attribute}`] + character[`abil_${ability}`]
+export function pool(character, attribute, ability, meritBonus, penalty) {
+  const pool = character[`attr_${attribute}`] + character[`abil_${ability}`]
+  let mb = 0
+  if (meritBonus.length > 1)
+    mb =  meritBonus.reduce((a, v) => v + a.situational ? 0 : a.bonus)
   return {
-    raw: p,
-    meritBonus: meritBonus || 0,
-    meritName: meritName,
+    raw: pool,
+    meritBonus: meritBonus || [],
     specialties: specialtiesFor(character, ability),
     excellency: maxExcellency(character, attribute, ability),
-    penalty: penalty,
-    total: Math.max(p + meritBonus - penalty, 0)
+    penalty: penalty || 0,
+    total: Math.max(pool + mb - penalty, 0)
   }
 }
 
 export function joinBattle(character, merits, penalties) {
-  const bonus = merits.some((m) => m.startsWith('fast reflexes')) ? 1 : 0
+  let bonus = []
+  if (merits.some((m) => m.startsWith('fast reflexes')))
+    bonus = [{ label: 'fast reflexes', bonus: 1 }]
   const penalty = penalties.wound
-  return pool(character, 'wits', 'awareness', bonus, 'fast reflexes', penalty)
+  return pool(character, 'wits', 'awareness', bonus, penalty)
 }
 
 export function rush(character, merits, penalties) {
-  const bonus = merits.some((m) => m.startsWith('fleet of foot')) ? 1 : 0
+  let bonus = []
+  if (merits.some((m) => m.startsWith('fleet of foot')))
+    bonus = [{ label: 'fleet of foot', bonus: 1 }]
   const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'athletics', bonus, 'fleet of foot', penalty)
+  return pool(character, 'dexterity', 'athletics', bonus, penalty)
 }
 
 export function disengage(character, merits, penalties) {
-  let bonus = merits.some((m) => m.startsWith('fleet of foot')) ? 1 : 0
+  let bonus = []
+  if (merits.some((m) => m.startsWith('fleet of foot')))
+    bonus = [{ label: 'fleet of foot', bonus: 1 }]
   const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'dodge', bonus, 'fleet of foot', penalty)
+  return pool(character, 'dexterity', 'dodge', bonus, penalty)
 }
 export const withdraw = disengage
 
 export function readIntentions(character, merits, penalties) {
-  let bonus = merits.some((m) => m.startsWith('danger sense')) ? 1 : 0
-  return pool(character, 'perception', 'socialize', bonus, 'danger sense', penalties.wound)
+  let bonus = []
+  if (merits.some((m) => m.startsWith('danger sense')))
+    bonus = [{ label: 'danger sense', bonus: 1, situational: true }]
+  return pool(character, 'perception', 'socialize', bonus, penalties.wound)
 }
 
 export function riseFromProne(character, merits, penalties) {
-  // TODO handle merits that affect pool
+  // TODO handle merits that affect pool?
   const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'dodge', 0, '', penalty)
+  return pool(character, 'dexterity', 'dodge', [], penalty)
 }
 
 export function takeCover(character, merits, penalties) {
-  // TODO handle merits that affect pool
+  // TODO handle merits that affect pool?
   const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'dodge', 0, '', penalty)
+  return pool(character, 'dexterity', 'dodge', [], penalty)
 }
 
 export function shapeSorcery(character, merits, penalties) {
   const vitalFocus = merits.some((m) => m.startsWith('vital focus cultivation'))
   const penalty = vitalFocus ? 0 : penalties.wound
-  return pool(character, 'intelligence', 'occult', 0, '', penalty)
+  return pool(character, 'intelligence', 'occult', [], penalty)
 }

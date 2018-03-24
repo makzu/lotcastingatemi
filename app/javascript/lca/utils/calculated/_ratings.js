@@ -29,17 +29,16 @@ export function guile(character, merits, penalties) {
 // TODO: factor in Invulnerable Skin of Bronze control spell bonus
 export function soak (character, merits) {
   let bonus = 0
-  let meritName = ''
+  let meritBonus = []
 
   let unusualHide = merits.find((m) => m.startsWith('unusual hide'))
   if (unusualHide != undefined) {
-    bonus += parseInt(unusualHide.substr(-1))
-    meritName = 'Unusual Hide'
+    bonus = parseInt(unusualHide.substr(-1))
+    meritBonus = [{ label: 'unusual hide', bonus: bonus }]
   }
   return {
     natural: character.attr_stamina,
-    meritBonus: bonus,
-    meritName: meritName,
+    meritBonus: meritBonus,
     armored: armorSoak(character),
     total: character.attr_stamina + bonus + armorSoak(character),
     specialties: [],

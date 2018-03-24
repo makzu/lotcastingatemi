@@ -62,7 +62,7 @@ describe('Calculated values', () => {
   })
 
   it('should give correct values for abilities', () => {
-    // TODO figure out why this doesn't work
+    // TODO: figure out why this doesn't work
     expect(calc.attackAbilities(mockChar)).toEqual([{ abil: 'melee', rating: 2, specialties: [] }])
     expect(calc.abilitiesWithRatings(mockChar).length).toEqual(4)
   })

@@ -12,7 +12,7 @@ import TextField from 'material-ui/TextField'
 
 import { createBattlegroup } from '../../ducks/actions.js'
 
-// TODO enable creating a battlegroup of a player's existing QC
+// TODO: enable creating a battlegroup of a player's existing QC
 class BattlegroupCreatePopup extends React.Component {
   constructor(props) {
     super(props)

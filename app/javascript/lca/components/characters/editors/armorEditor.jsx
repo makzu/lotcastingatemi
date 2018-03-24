@@ -14,7 +14,7 @@ import { withArmorStats } from '../../../utils/propTypes'
 function ArmorEditor(props) {
   const { character, onChange, onBlur, onRatingChange, onCheck } = props
 
-  // TODO show interesting calculated values here
+  // TODO: show interesting calculated values here
   return <BlockPaper>
     <Typography variant="title">
       Armor

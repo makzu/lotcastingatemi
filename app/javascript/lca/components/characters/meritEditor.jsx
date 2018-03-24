@@ -145,7 +145,7 @@ MeritFields.propTypes = {
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
  * ref pre-filled
- * TODO  See how kosher something like above would be
+ * TODO:  See how kosher something like above would be
  * */
 class MeritEditor extends React.Component {
   constructor(props) {

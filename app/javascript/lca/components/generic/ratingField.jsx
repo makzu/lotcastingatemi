@@ -17,7 +17,7 @@ const styles = theme => ({
   },
 })
 
-// TODO Special fields for x/y resources like mote/willpower pools
+// TODO: Special fields for x/y resources like mote/willpower pools
 class RatingField extends React.Component {
   constructor(props) {
     super(props)

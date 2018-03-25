@@ -1,7 +1,5 @@
 # Major Planned features
 
-* Excellency support on displayed pools
-* Support for Merits that affect dice pools, like Mighty Thew and Danger Sense
 * 'Dice Bag' of favorite/commonly used rolls, including Charm/Excellency selections
 * Dashboard page per character with quick access to spend motes, add damage, change initiative/onslaught/etc
 * Sortable merits/weapons/Charms/spells

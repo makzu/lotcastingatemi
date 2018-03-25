@@ -1,4 +1,5 @@
 export * from './_charms.js'
+export * from './_excellencies.js'
 export * from './_battlegroups.js'
 export * from './_pools.js'
 export * from './_ratings.js'

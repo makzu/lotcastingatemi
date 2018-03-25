@@ -199,30 +199,31 @@ function specialtiesForWeapon(character, weapon) {
     return specialtiesFor(character, weapon.ability)
 }
 
-function excellencyForWeapon(character, weapon) {
-  if (weapon.ability.startsWith('martial arts'))
-    return maxExcellency(character, weapon.attr, 'martial arts')
-  else if (weapon.ability.startsWith('craft'))
-    return maxExcellency(character, weapon.attr, 'craft')
-  else
-    return maxExcellency(character, weapon.attr, weapon.ability)
+function excellencyForWeapon(character, weapon, charmAbils, stunt = false) {
+  return maxExcellency(character, weapon.attr, weapon.ability, charmAbils, stunt)
 }
 
-export function witheringAttackPool(character, weapon, penalties) {
+export function witheringAttackPool(character, weapon, penalties, charmAbils) {
   const rawPool = attr(character, weapon.attr) +
                   abil(character, weapon.ability) +
                   weaponAccuracyBonus(weapon)
 
+  const excellency = excellencyForWeapon(character, weapon, charmAbils)
+  const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
+
   return {
     raw: rawPool,
     specialties: specialtiesForWeapon(character, weapon),
-    excellency: excellencyForWeapon(character, weapon),
+    excellency: excellency,
+    excellencyCost: excellency,
+    excellencyStunt: excellencyStunt,
+    excellencyStuntCost: excellencyStunt,
     penalty: penalties.wound,
     total: Math.max(rawPool - penalties.wound, 0),
   }
 }
 
-export function rangedWitheringAttackPool(character, weapon, penalties) {
+export function rangedWitheringAttackPool(character, weapon, penalties, charmAbils) {
   if (!weaponIsRanged(weapon))
     return false
 
@@ -233,10 +234,16 @@ export function rangedWitheringAttackPool(character, weapon, penalties) {
   const rawPool = attr(character, weapon.attr) +
                   abil(character, weapon.ability)
 
+  const excellency = excellencyForWeapon(character, weapon, charmAbils)
+  const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
+
   const penalty = penalties.wound
   const poolBase = {
     specialties: specialtiesForWeapon(character, weapon),
-    excellency: excellencyForWeapon(character, weapon),
+    excellency: excellency,
+    excellencyCost: excellency,
+    excellencyStunt: excellencyStunt,
+    excellencyStuntCost: excellencyStunt,
     penalty: penalty,
   }
 
@@ -273,20 +280,26 @@ export function witheringDamage(character, weapon) {
   return { total: weaponDamage(character, weapon), minimum: weaponOverwhelming(weapon) }
 }
 
-export function decisiveAttackPool(character, weapon, penalties) {
+export function decisiveAttackPool(character, weapon, penalties, charmAbils) {
   const rawPool = attr(character, weapon.attr) +
                   abil(character, weapon.ability)
+
+  const excellency = excellencyForWeapon(character, weapon, charmAbils)
+  const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
 
   return {
     raw: rawPool,
     specialties: specialtiesForWeapon(character, weapon),
-    excellency: maxExcellency(character, weapon.attr, weapon.ability),
+    excellency: excellency,
+    excellencyCost: excellency,
+    excellencyStunt: excellencyStunt,
+    excellencyStuntCost: excellencyStunt,
     penalty: penalties.wound,
     total: Math.max(rawPool - penalties.wound, 0),
   }
 }
 
-export function parry(character, weapon, penalties) {
+export function parry(character, weapon, penalties, charmAbils) {
   if (weaponIsRanged(weapon))
     return { raw: 0, total: 0 }
   const rawPool = attr(character, weapon.attr) +
@@ -294,12 +307,17 @@ export function parry(character, weapon, penalties) {
   const specialties = specialtiesForWeapon(character, weapon)
   const penalty = penalties.onslaught + penalties.wound
   const rawRating = Math.ceil(rawPool / 2) + weaponDefenseBonus(weapon)
+  const excellency = Math.floor(excellencyForWeapon(character, weapon, charmAbils) / 2)
+  const excellencyStunt = Math.floor(excellencyForWeapon(character, weapon, charmAbils, true) / 2)
 
   return {
     raw: rawRating,
     specialtyMatters: rawPool % 2 === 0 && specialties.length > 0,
     specialties: specialties,
-    excellency: Math.floor(maxExcellency(character, weapon.attr, weapon.ability) / 2),
+    excellency: excellency,
+    excellencyCost: excellency * 2,
+    excellencyStunt: excellencyStunt,
+    excellencyStuntCost: excellencyStunt * 2,
     penalty: penalty,
     total: Math.max(rawRating - penalty, 0),
   }

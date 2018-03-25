@@ -35,7 +35,7 @@ function ArmorSummary({ character, pools, classes }) {
       { pools.hardness.total > 0 &&
         <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
       }
-      <PoolLine pool={{ total: character.armor_name, specialties: [] }} label="Armor Name" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={{ total: character.armor_name }} label="Armor Name" classes={{ root: classes.poolBlock }} />
     </div>
 
   </BlockPaper>

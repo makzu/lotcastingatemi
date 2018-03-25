@@ -1,18 +1,38 @@
 import { attr, abil, specialtiesFor } from '.'
 import { ABILITIES, ATTRIBUTES } from '../constants.js'
 
-export const canUseExcellency = (character, attribute, ability) => {
-  const excellencies = character.excellencies_for
+export const canUseExcellency = (character, attribute, ability, charmAbils) => {
+  let excellencies = character.excellencies_for
+
+  switch(character.type) {
+  case 'Character':
+    return false
+  case 'SolarCharacter':
+    excellencies =
+      character.caste_abilities.filter((a) => abil(character, a) > 0) +
+      character.favored_abilities.filter((a) => abil(character, a) > 0)
+    if (excellencies.includes('brawl'))
+      excellencies += ['martial_arts']
+    excellencies += charmAbils
+    break
+  }
+
   if (excellencies.includes('*'))
     return true
   if (excellencies.includes(attribute) || excellencies.includes(ability))
+    return true
+  if (ability.startsWith('martial arts') && excellencies.includes('martial_arts'))
+    return true
+  if (ability.startsWith('craft') && excellencies.includes('craft'))
     return true
 
   return false
 }
 
 export const highestOtherAbility = (character, ability) => {
+  let result = ABILITIES.filter((a) => a.abil !== `abil_${ability}`).map((a) => character[a.abil])
 
+  return Math.max(...result)
 }
 
 export const highestOtherAttribute = (character, attribute) => {
@@ -69,15 +89,15 @@ export function maxCustomExcellency(character, attribute, ability, stunt = false
   return result
 }
 
-export function maxExcellency(character, attribute, ability, stunt = false) {
-  if (!canUseExcellency(character, attribute, ability))
+export function maxExcellency(character, attribute, ability, charmAbils, stunt = false) {
+  if (!canUseExcellency(character, attribute, ability, charmAbils))
     return 0
 
   switch (character.type) {
   case 'SolarCharacter':
-    return attr(character, attribute) + abil(character, ability)
+    return stunt ? 0 : attr(character, attribute) + abil(character, ability)
   case 'DragonbloodCharacter':
-    return abil(character, ability) + specialtiesFor(character, ability).length > 0 ? 1 : 0
+    return stunt ? 0 : abil(character, ability) + specialtiesFor(character, ability).length > 0 ? 1 : 0
   case 'CustomAttributeCharacter':
   case 'CustomAbilityCharacter':
   case 'CustomEssenceCharacter':

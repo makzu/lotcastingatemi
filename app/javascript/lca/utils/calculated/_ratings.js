@@ -1,41 +1,51 @@
 import { specialtiesFor, maxExcellency } from '.'
 
-export function rating(character, attribute, ability, penalty) {
+export function rating(character, attribute, ability, penalty, charmAbils) {
   const pool = character[`attr_${attribute}`] + character[`abil_${ability}`]
   const specialties = specialtiesFor(character, ability)
+
+  const excellency = Math.floor(maxExcellency(character, attribute, ability, charmAbils) / 2)
+  const excellencyStunt = Math.floor(maxExcellency(character, attribute, ability, charmAbils, true) / 2)
+
   return {
     raw: Math.ceil(pool / 2),
     specialtyMatters: pool % 2 === 0 && specialties.length > 0,
     specialties: specialties,
-    excellency: Math.floor(maxExcellency(character, attribute, ability) / 2),
+    excellency: excellency,
+    excellencyCost: excellency * 2,
+    excellencyStunt: excellencyStunt,
+    excellencyStuntCost: excellencyStunt * 2,
     penalty: penalty,
     total: Math.max(Math.ceil(pool / 2) - penalty, 0)
   }
 }
 
-export function evasion(character, merits, penalties) {
+export function evasion(character, merits, penalties, charmAbils) {
   let pen = penalties.wound + penalties.onslaught + penalties.mobility
-  return rating(character, 'dexterity', 'dodge', pen)
+  return rating(character, 'dexterity', 'dodge', pen, charmAbils)
 }
 
-export function resolve(character, merits, penalties) {
-  return rating(character, 'wits', 'integrity', penalties.wound)
+export function resolve(character, merits, penalties, charmAbils) {
+  return rating(character, 'wits', 'integrity', penalties.wound, charmAbils)
 }
 
-export function guile(character, merits, penalties) {
-  return rating(character, 'manipulation', 'socialize', penalties.wound)
+export function guile(character, merits, penalties, charmAbils) {
+  return rating(character, 'manipulation', 'socialize', penalties.wound, charmAbils)
 }
 
-// TODO: factor in Invulnerable Skin of Bronze control spell bonus
-export function soak (character, merits) {
+export function soak(character, merits, spells) {
   let bonus = 0
   let meritBonus = []
 
   let unusualHide = merits.find((m) => m.startsWith('unusual hide'))
   if (unusualHide != undefined) {
     bonus = parseInt(unusualHide.substr(-1))
-    meritBonus = [{ label: 'unusual hide', bonus: bonus }]
+    meritBonus = meritBonus.concat([{ label: 'unusual hide', bonus: bonus }])
   }
+  let isob = spells.find((s) => s.name == 'invulnerable skin of bronze')
+  if (isob != undefined && character.armor_weight === 'unarmored')
+    meritBonus = meritBonus.concat([{ label: 'invulnerable skin of bronze', bonus: 3 }])
+
   return {
     natural: character.attr_stamina,
     meritBonus: meritBonus,

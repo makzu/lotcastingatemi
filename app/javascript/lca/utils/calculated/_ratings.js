@@ -33,6 +33,19 @@ export function guile(character, merits, penalties, charmAbils) {
   return rating(character, 'manipulation', 'socialize', penalties.wound, charmAbils)
 }
 
+export function appearanceRating(character, merits, penalties, charmAbils) { // eslint-disable-line no-unused-vars
+  let meritBonus = []
+
+  let hideous = merits.find((m) => m.startsWith('hideous'))
+  if (hideous != undefined)
+    meritBonus = [{ label: 'hideous', bonus: 0 }]
+
+  return {
+    meritBonus: meritBonus,
+    total: character.attr_appearance,
+  }
+}
+
 export function soak(character, merits, spells) {
   let bonus = 0
   let meritBonus = []

@@ -145,7 +145,7 @@ function CharacterCard({ character, penalties, pools, classes }) {
     <div className={ classes.rowContainer }>
       <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={{ total: character.attr_appearance, specialties: [] }} label="Appearance" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
     </div>
 
     <Typography paragraph>

@@ -68,6 +68,7 @@ export const getPoolsAndRatings = createCachedSelector(
     return {
       guile: calc.guile(character, meritNames, penalties, charmAbils),
       resolve: calc.resolve(character, meritNames, penalties, charmAbils),
+      appearance: calc.appearanceRating(character, meritNames, penalties, charmAbils),
       readIntentions: calc.readIntentions(character, meritNames, penalties, charmAbils),
 
       evasion: calc.evasion(character, meritNames, penalties, charmAbils),

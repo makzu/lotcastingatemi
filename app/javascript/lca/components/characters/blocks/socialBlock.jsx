@@ -23,7 +23,7 @@ const styles = theme => ({
   },
 })
 
-const SocialBlock = ({ character, pools, classes }) =>
+const SocialBlock = ({ pools, classes }) =>
   <BlockPaper>
     <Typography variant="title">
       Social Pools
@@ -32,7 +32,7 @@ const SocialBlock = ({ character, pools, classes }) =>
     <div className={ classes.container }>
       <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={{ total: character.attr_appearance }} label="Appearance" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.readIntentions } label="Read Intentions" classes={{ root: classes.poolBlock }} />
     </div>
 

@@ -118,7 +118,7 @@ function mapStateToProps(state, ownProps) {
 
   let canIEdit = false
   if (character != undefined) {
-    canIEdit = state.session.id == character.player_id
+    canIEdit = state.session.id === character.player_id || state.session.id === state.entities.chronicles[character.chronicle_id].st_id
 
     if (character.chronicle && state.entities.chronicles[character.chronicle].st == state.session.id)
       canIEdit = true

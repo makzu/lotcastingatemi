@@ -11,6 +11,7 @@ import Switch from 'material-ui/Switch'
 import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
 import DisplayNamePopup from '../generic/displayNamePopup.jsx'
+import Discord from '../../icons/Discord-Logo.jsx'
 import OctoCat from '../../icons/OctoCat.jsx'
 import { closeDrawer, switchTheme } from '../../ducks/actions.js'
 
@@ -88,7 +89,17 @@ export class NavPanel extends React.Component {
             <OctoCat />
           </ListItemIcon>
 
-          <ListItemText primary="View on GitHub" />
+          <ListItemText primary="View Source on GitHub" />
+        </ListItem>
+        <ListItem button component="a"
+          href="https://discord.gg/zmpWyMv"
+          target="_blank" rel="noopener noreferrer"
+          onClick={ closeCheck }
+        >
+          <ListItemIcon>
+            <Discord />
+          </ListItemIcon>
+          <ListItemText primary="Discuss on Discord" />
         </ListItem>
 
       </List>

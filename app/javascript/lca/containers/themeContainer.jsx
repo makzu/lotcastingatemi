@@ -17,7 +17,7 @@ const themeCommon = {
   overrides: {
     MuiSelect: {
       selectMenu: {
-        overflow: 'inherit',
+        //overflow: 'inherit',
       },
     },
   },

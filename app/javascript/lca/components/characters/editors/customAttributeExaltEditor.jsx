@@ -36,7 +36,7 @@ function CustomAttributeExaltEditor(props) {
       />
     </Typography>
 
-    <AttributeSelect name="caste_attributes"
+    <AbilitySelect attributesOnly name="caste_attributes"
       label="Caste Attributes"
       value={ character.caste_attributes }
       onChange={ onRatingChange }
@@ -44,7 +44,7 @@ function CustomAttributeExaltEditor(props) {
     />
     <br />
 
-    <AttributeSelect name="favored_attributes"
+    <AbilitySelect name="favored_attributes"
       label="Favored Attributes"
       value={ character.favored_attributes }
       attributes={ nonCasteAttributes(character) }

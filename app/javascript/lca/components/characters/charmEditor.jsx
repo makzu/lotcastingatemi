@@ -11,7 +11,6 @@ import ContentAddCircle from 'material-ui-icons/AddCircle'
 import Delete from 'material-ui-icons/Delete'
 
 import AbilitySelect from '../generic/abilitySelect.jsx'
-import AttributeSelect from '../generic/attributeSelect.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/ratingField.jsx'
 import SpellEditorBlock from './editors/spellEditorBlock.jsx'
@@ -122,7 +121,7 @@ class SingleCharmEditor extends React.Component {
       }
 
       { showAttribute && <Fragment>
-        <AttributeSelect name="ability" label="Attribute" margin="dense"
+        <AbilitySelect attributesOnly name="ability" label="Attribute" margin="dense"
           value={ charm.ability }
           onChange={ handleRatingChange }
           multiple={ false }

@@ -26,7 +26,7 @@ module Exalt
 
     def excellencies_for_is_valid
       return if excellencies_for.blank?
-      attr_abil = Constants::ATTRIBUTES + Constants::ABILITIES
+      attr_abil = Constants::ATTRIBUTES + Constants::ABILITIES + ['*']
       excellencies_for.each do |e|
         errors.add(:excellencies_for, "#{e} is not a valid excellency target") unless attr_abil.include? e
       end

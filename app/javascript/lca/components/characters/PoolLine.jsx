@@ -55,7 +55,7 @@ const PoolLine = ({ label, pool, classes }) => {
       </span>
       { pool.excellency > 0 &&
         <span className={ classes.excellency }>
-          &nbsp;+{ pool.excellency }/{ pool.excellency }m
+          &nbsp;+{ pool.excellency }/{ pool.excellencyCost }m
         </span>
       }
       { pool.minimum &&
@@ -64,6 +64,11 @@ const PoolLine = ({ label, pool, classes }) => {
         </span>
       }
     </div>
+    { pool.excellencyStunt > 0 &&
+      <div className={ classes.excellency }>
+        stunt +{ pool.excellencyStunt }/{ pool.excellencyStuntCost }m
+      </div>
+    }
     { merits }
     { sp.length > 0 &&
       <div className={ classes.specialty }>

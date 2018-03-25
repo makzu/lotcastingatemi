@@ -33,7 +33,7 @@ class AbilitySelect extends React.Component {
 
   render() {
     const { props, checkChange } = this
-    const { attributes, abilities, multiple, withAttributes, attributesOnly, classes, } = props
+    const { attributes, abilities, multiple, withAttributes, attributesOnly, prependOptions, classes, } = props
 
     const abils = attributesOnly ? [] : abilities || ABILITIES_ALL
     const attrs = (attributesOnly || withAttributes || (attributes && attributes.length > 0)) ?
@@ -57,6 +57,7 @@ class AbilitySelect extends React.Component {
       margin={ props.margin || 'none' } fullWidth={ props.fullWidth }
       SelectProps={{ multiple: multiple }}
     >
+      { prependOptions}
       { abilItems.length > 0 && <ListSubheader value="-">Abilities</ListSubheader> }
       { abilItems }
       { attrItems.length > 0 && <ListSubheader value="-">Attributes</ListSubheader>}
@@ -67,6 +68,7 @@ class AbilitySelect extends React.Component {
 AbilitySelect.propTypes = {
   abilities: PropTypes.arrayOf(PropTypes.object),
   attributes: PropTypes.arrayOf(PropTypes.object),
+  prependOptions: PropTypes.node,
   withAttributes: PropTypes.bool,
   attributesOnly: PropTypes.bool,
   multiple: PropTypes.bool,

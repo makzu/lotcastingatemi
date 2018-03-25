@@ -6,6 +6,7 @@ import Switch from 'material-ui/Switch'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
+import ExcellencyEditor from './ExcellencyEditor.jsx'
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import { nonCasteAbilities } from '../../../utils/calculated'
@@ -23,9 +24,14 @@ function CustomAbilityExaltEditor(props) {
       <TextField name="caste" value={ character.caste }
         label={ character.aspect ? 'Aspect' : 'Caste' } onChange={ onChange } onBlur={ onBlur } margin="dense"
       />&nbsp;&nbsp;
+      <ExcellencyEditor character={ character } onChange={ onRatingChange } />
+      <br />
+
       <TextField name="exalt_type" value={ character.exalt_type }
         label="Type" onChange={ onChange } onBlur={ onBlur } margin="dense"
-      /><br />
+      />
+      <br />
+
       Has Castes&nbsp;&nbsp;&nbsp;
       <FormControlLabel
         control={

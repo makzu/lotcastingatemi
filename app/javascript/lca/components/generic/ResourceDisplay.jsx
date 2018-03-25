@@ -18,9 +18,15 @@ const styles = theme => ({
     verticalAlign: 'top',
     marginTop: '0.25em',
   },
+  committed: { ...theme.typography.caption,
+    display: 'inline-block',
+    marginLeft: '-1.3em',
+    verticalAlign: 'bottom',
+    paddingBottom: '0.25em',
+  },
 })
 
-const ResourceDisplay = ({ current, total, label, className, classes }) =>
+const ResourceDisplay = ({ current, total, committed, label, className, classes }) =>
   <div className={ className }>
     <div className={ classes.label }>
       { label }
@@ -32,12 +38,18 @@ const ResourceDisplay = ({ current, total, label, className, classes }) =>
       <span className={ classes.total }>
         /{ total }
       </span>
+      { committed != undefined && committed > 0 &&
+        <span className={ classes.committed }>
+          { committed }c
+        </span>
+      }
     </div>
   </div>
 ResourceDisplay.propTypes = {
-  current: PropTypes.number,
-  total: PropTypes.number,
-  label: PropTypes.string,
+  current: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  committed: PropTypes.number,
+  label: PropTypes.string.isRequired,
   className: PropTypes.string,
   classes: PropTypes.object,
 }

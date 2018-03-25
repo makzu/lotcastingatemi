@@ -100,6 +100,7 @@ function CharacterCard({ character, penalties, pools, classes }) {
         <ResourceDisplay className={ classes.moteWrap }
           current={ character.motes_personal_current }
           total={ character.motes_personal_total }
+          committed={ calc.committedPersonalMotes(character) }
           label="Personal"
         />
       }
@@ -107,6 +108,7 @@ function CharacterCard({ character, penalties, pools, classes }) {
         <ResourceDisplay className={ classes.moteWrap }
           current={ character.motes_peripheral_current }
           total={ character.motes_peripheral_total }
+          committed={ calc.committedPeripheralMotes(character) }
           label="Peripheral"
         />
       }

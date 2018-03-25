@@ -5,12 +5,13 @@ import { withRouter, NavLink } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
-import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
+import List, { ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
 import Switch from 'material-ui/Switch'
 
 import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
 import DisplayNamePopup from '../generic/displayNamePopup.jsx'
+import OctoCat from '../../icons/OctoCat.jsx'
 import { closeDrawer, switchTheme } from '../../ducks/actions.js'
 
 const styles = theme => ({
@@ -83,6 +84,10 @@ export class NavPanel extends React.Component {
           target="_blank" rel="noopener noreferrer"
           onClick={ closeCheck }
         >
+          <ListItemIcon>
+            <OctoCat />
+          </ListItemIcon>
+
           <ListItemText primary="View on GitHub" />
         </ListItem>
 

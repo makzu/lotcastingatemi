@@ -7,10 +7,19 @@ class Spell < ApplicationRecord
 
   CIRCLES = %w[ terrestrial celestial solar ].freeze
 
+  attribute :ref, :string, default: 'Core p.471-483'
+
   validates :name, presence: true
   validates :circle, inclusion: { in: CIRCLES }
   validates :cost, presence: true
   validates :duration, presence: true
+
+  before_validation :trim_keywords
+
+  def trim_keywords
+    return unless will_save_change_to_attribute? :keywords
+    self.keywords = keywords.reject(&:blank?).collect(&:strip)
+  end
 
   def entity_type
     'spell'

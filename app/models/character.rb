@@ -56,6 +56,13 @@ class Character < ApplicationRecord
   validates :sorcerous_motes, numericality: { greater_than_or_equal_to: 0 }
   validates :onslaught,       numericality: { greater_than_or_equal_to: 0 }
 
+  before_validation :trim_armor_tags
+
+  def trim_armor_tags
+    return unless will_save_change_to_attribute? :armor_tags
+    self.armor_tags = armor_tags.reject(&:blank?).collect(&:strip)
+  end
+
   def entity_type
     'character'
   end

@@ -2,5 +2,5 @@
 
 # app/serializers/qc_merit_serializer.rb
 class QcMeritSerializer < ActiveModel::Serializer
-  attributes :id, :qc_id, :name, :latent, :magical, :body, :ref
+  attributes :id, :qc_id, :name, :latent, :magical, :body, :ref, :sort_order
 end

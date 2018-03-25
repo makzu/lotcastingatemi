@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324231057) do
+ActiveRecord::Schema.define(version: 20180325075346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.integer "onslaught", default: 0
     t.boolean "pinned", default: false
     t.boolean "hidden", default: false
+    t.integer "sort_order", default: 0
+    t.integer "chronicle_sort_order", default: 0
     t.index ["chronicle_id"], name: "index_battlegroups_on_chronicle_id"
     t.index ["player_id"], name: "index_battlegroups_on_player_id"
   end
@@ -148,6 +150,8 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.string "excellency", default: ""
     t.string "excellency_stunt", default: ""
     t.string "excellencies_for", default: [], array: true
+    t.integer "sort_order", default: 0
+    t.integer "chronicle_sort_order", default: 0
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -171,6 +175,7 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.string "style"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sort_order", default: 0
     t.index ["character_id"], name: "index_charms_on_character_id"
   end
 
@@ -220,6 +225,7 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.string "prereqs", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sort_order", default: 0
     t.index ["character_id"], name: "index_merits_on_character_id"
   end
 
@@ -241,6 +247,7 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "qc_attackable_type"
+    t.integer "sort_order", default: 0
     t.index ["qc_attackable_id"], name: "index_qc_attacks_on_qc_attackable_id"
   end
 
@@ -257,6 +264,7 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.string "category", default: "miscellaneous"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sort_order", default: 0
     t.index ["qc_id"], name: "index_qc_charms_on_qc_id"
   end
 
@@ -269,6 +277,7 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.string "ref", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sort_order", default: 0
     t.index ["qc_id"], name: "index_qc_merits_on_qc_id"
   end
 
@@ -315,6 +324,8 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.json "principles", default: []
     t.boolean "pinned", default: false
     t.boolean "hidden", default: false
+    t.integer "sort_order", default: 0
+    t.integer "chronicle_sort_order", default: 0
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
@@ -331,6 +342,7 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "control", default: false
+    t.integer "sort_order", default: 0
     t.index ["character_id"], name: "index_spells_on_character_id"
   end
 
@@ -344,6 +356,7 @@ ActiveRecord::Schema.define(version: 20180324231057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "attr", default: "dexterity"
+    t.integer "sort_order", default: 0
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 

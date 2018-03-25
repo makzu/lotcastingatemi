@@ -18,7 +18,8 @@ class QcSerializer < ActiveModel::Serializer
 
              :ties, :principles,
 
-             :initiative, :onslaught
+             :initiative, :onslaught,
+             :sort_order, :chronicle_sort_order
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id

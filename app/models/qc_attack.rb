@@ -12,7 +12,13 @@ class QcAttack < ApplicationRecord
   delegate :storyteller, to: :qc_attackable
   delegate :hidden,      to: :qc_attackable
 
+  before_validation :trim_tags
   validates :pool, :damage, :overwhelming, numericality: { greater_than: 0 }
+
+  def trim_tags
+    return unless will_save_change_to_attribute? :tags
+    self.tags = tags.reject(&:blank?).collect(&:strip)
+  end
 
   def entity_type
     'qc_attack'

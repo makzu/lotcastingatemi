@@ -23,6 +23,7 @@ module Exalt
     validate :excellencies_for_is_valid
 
     before_validation :set_max_available_motes
+    before_validation :trim_array_attributes
 
     def excellencies_for_is_valid
       return if excellencies_for.blank?
@@ -39,6 +40,20 @@ module Exalt
 
       self.motes_personal_current =   [motes_personal_available,   motes_personal_current].min
       self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
+    end
+
+    def trim_array_attributes # rubocop:disable-line Metrics/AbcSize
+      return unless will_save_change_to_attribute?(:excellencies_for) ||
+                    will_save_change_to_attribute?(:caste_abilities) ||
+                    will_save_change_to_attribute?(:favored_abilities) ||
+                    will_save_change_to_attribute?(:caste_attributes) ||
+                    will_save_change_to_attribute?(:favored_attributes)
+
+      self.excellencies_for = excellencies_for.reject(&:blank?).collect(&:strip)
+      self.caste_abilities = caste_abilities.reject(&:blank?).collect(&:strip)
+      self.favored_abilities = favored_abilities.reject(&:blank?).collect(&:strip)
+      self.caste_attributes = caste_attributes.reject(&:blank?).collect(&:strip)
+      self.favored_attributes = favored_attributes.reject(&:blank?).collect(&:strip)
     end
 
     def motes_personal_available

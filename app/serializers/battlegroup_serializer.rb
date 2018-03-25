@@ -7,7 +7,8 @@ class BattlegroupSerializer < ActiveModel::Serializer
              :magnitude, :health_levels,
              :essence, :willpower_temporary, :willpower_permanent, :armor_name,
              :soak, :hardness, :evasion, :parry, :resolve, :guile, :appearance,
-             :movement, :senses, :join_battle, :initiative, :onslaught
+             :movement, :senses, :join_battle, :initiative, :onslaught,
+             :sort_order, :chronicle_sort_order
 
   attribute :player_id
   attribute :chronicle_id

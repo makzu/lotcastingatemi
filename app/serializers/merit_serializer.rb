@@ -3,5 +3,5 @@
 # app/serializers/merit_serializer.rb
 class MeritSerializer < ActiveModel::Serializer
   attributes :id, :character_id, :rating, :label, :merit_name, :merit_cat,
-             :description, :ref, :supernatural, :prereqs
+             :description, :ref, :supernatural, :prereqs, :sort_order
 end

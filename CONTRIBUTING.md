@@ -12,13 +12,12 @@ Rails 5.1.
 
 ### How can I run it?
 
-You'll need postgres installed on your system, along with all the other
-dependencies for Rails development. Make sure you have Ruby *2.4.2* installed.
-You'll also need [Yarn](https://yarnpkg.com/en/), which is a new dependency for
-Rails 5.1.
+Make sure you have Ruby *2.4.2*, along with a recent version of Postgres. You'll
+also need [Yarn](https://yarnpkg.com/en/) and Node.js installed
 
 Once you have the repo cloned, run `bin/setup` and it *should* get everything
-set up for you.  Then run `bin/server` to launch both halves of the server, and
-point your browser to `localhost:5000`.  Your mileage may vary.
+set up for you.  Then run `bin/server` to launch webpack-dev-server and the
+Rails backend, and point your browser to `localhost:5000`. Your mileage may
+vary.
 
 You can run the code's test suite with `rails lca:test`.

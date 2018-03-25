@@ -60,6 +60,12 @@ export class NavPanel extends React.Component {
             />
           </ListItem>
         }
+        { !authenticated && window.location.href.includes('localhost') &&
+          <ListItem button component="a" href="/auth/developer">
+            <ListItemText primary="Log in (Developer)"
+            />
+          </ListItem>
+        }
 
         { authenticated && <Fragment>
           <CharacterNavList closeDrawer={ closeCheck } />

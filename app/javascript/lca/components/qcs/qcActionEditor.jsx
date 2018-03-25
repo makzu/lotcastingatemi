@@ -108,7 +108,7 @@ class QcActionEditor extends React.Component {
         </Button>
       </Typography>
       <div>
-        <RatingField label="Senses" name="senses" value={ this.props.qc.senses }
+        <RatingField label="Senses" trait="senses" value={ this.props.qc.senses }
           onChange={ onSensesChange }
         />
       </div>

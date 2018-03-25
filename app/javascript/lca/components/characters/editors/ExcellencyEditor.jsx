@@ -79,17 +79,17 @@ class ExcellencyEditor extends React.Component {
             QC Sidereals (Core p.548): Essence
           </Typography>
           <Typography>
-            Qc Abyssals (Core p.549): Attribute + Ability
+            QC Abyssals (Core p.549): Attribute + Ability
           </Typography>
           <Typography>
-            Qc Liminals (Core p.550): Attribute + Essence(glowing+)
+            QC Liminals (Core p.550): Attribute + Essence(glowing+)
           </Typography>
 
           <Typography style={{ marginTop: '1em' }}>
             Some Exalts, like Lunars  and Revana Quin (Core p. 552)
             have different dice caps under certain stunts. You can set those
             here, and they will appear below relevant pools. Leave blank if
-            your excellency limits do not change on a stunt.
+            your excellency limits do not change based on stunts.
           </Typography>
 
           <TextField select

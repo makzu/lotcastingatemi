@@ -77,7 +77,7 @@ function BattlegroupCard({ battlegroup, classes }) {
         className={ classes.statWrap }
       />
 
-      <PoolLine pool={{ total: battlegroup.size, specialties: [] }}
+      <PoolLine pool={{ total: battlegroup.size }}
         label="Size"
         classes={{ root: classes.statWrap }}
       />

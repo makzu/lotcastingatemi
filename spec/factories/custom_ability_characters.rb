@@ -6,5 +6,6 @@ FactoryBot.define do
     aspect true
     caste 'custom'
     exalt_type 'custom'
+    excellencies_for %w[bureaucracy war]
   end
 end

@@ -9,7 +9,7 @@ module Constants
 
   ABILITIES = %w[
     archery athletics awareness brawl bureaucracy craft dodge integrity
-    investigation larceny linguistics lore martialarts medicine melee occult
+    investigation larceny linguistics lore martial_arts medicine melee occult
     performance presence resistance ride sail socialize stealth survival
     thrown war
   ].freeze

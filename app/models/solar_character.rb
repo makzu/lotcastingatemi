@@ -23,7 +23,7 @@ class SolarCharacter < Character
   }.freeze
 
   before_validation :set_mote_pool_totals
-  before_validation :set_exalt_type
+  before_validation :set_defaults
   before_validation :set_caste_ability
 
   validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :caste_is_blank?
@@ -38,10 +38,6 @@ class SolarCharacter < Character
 
   private
 
-  def caste_is_blank?
-    caste.blank?
-  end
-
   def set_mote_pool_totals
     return unless will_save_change_to_attribute? :essence
 
@@ -51,9 +47,12 @@ class SolarCharacter < Character
     self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
   end
 
-  def set_exalt_type
+  def set_defaults
     self.exalt_type = 'Solar'
     self.aspect = false
+    self.excellency = ''
+    self.excellency_stunt = ''
+    self.excellencies_for = []
   end
 
   def set_caste_ability

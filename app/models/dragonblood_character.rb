@@ -20,16 +20,12 @@ class DragonbloodCharacter < Character
   # TODO: caste ability validations
 
   before_validation :set_mote_pool_totals
-  before_validation :set_exalt_type
+  before_validation :set_defaults
 
   validates :caste, inclusion: { in: DRAGONBLOOD_ASPECTS }, unless: :caste_is_blank?
   validate :caste_abilities_are_valid,                      unless: :caste_is_blank?
 
   private
-
-  def caste_is_blank?
-    caste.blank?
-  end
 
   def set_mote_pool_totals
     return unless will_save_change_to_attribute? :essence
@@ -40,9 +36,12 @@ class DragonbloodCharacter < Character
     self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
   end
 
-  def set_exalt_type
+  def set_defaults
     self.exalt_type = 'Dragonblood'
     self.aspect = true
+    self.excellency = ''
+    self.excellency_stunt = ''
+    self.excellencies_for = []
   end
 
   def caste_abilities_are_valid

@@ -8,4 +8,8 @@ class CustomAbilityCharacter < Character
 
   has_many :custom_ability_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
   alias_attribute :charms, :custom_ability_charms
+
+  def custom_exalt?
+    true
+  end
 end

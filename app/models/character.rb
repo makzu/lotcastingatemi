@@ -63,4 +63,8 @@ class Character < ApplicationRecord
   def entity_assoc
     entity_type
   end
+
+  def custom_exalt?
+    false
+  end
 end

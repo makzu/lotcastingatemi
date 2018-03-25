@@ -19,10 +19,18 @@ module Exalt
     validates :anima_level, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 3 }
 
     validates :motes_committed, json: { schema: Schemas::MOTE_COMMITTMENT }
-
-    validates :resources, json: { schema: Schemas::RESOURCE }
+    validates :resources,       json: { schema: Schemas::RESOURCE }
+    validate :excellencies_for_is_valid
 
     before_validation :set_max_available_motes
+
+    def excellencies_for_is_valid
+      return if excellencies_for.blank?
+      attr_abil = Constants::ATTRIBUTES + Constants::ABILITIES
+      excellencies_for.each do |e|
+        errors.add(:excellencies_for, "#{e} is not a valid excellency target") unless attr_abil.include? e
+      end
+    end
 
     def set_max_available_motes
       return unless will_save_change_to_attribute?(:motes_committed) ||
@@ -39,6 +47,10 @@ module Exalt
 
     def motes_peripheral_available
       motes_peripheral_total - motes_committed.select { |x| x['pool'] == 'peripheral' }.sum { |x| x['motes'] }
+    end
+
+    def caste_is_blank?
+      caste.blank?
     end
   end
 end

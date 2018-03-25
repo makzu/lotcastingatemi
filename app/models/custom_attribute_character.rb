@@ -23,4 +23,8 @@ class CustomAttributeCharacter < Character
       errors.add(:favored_attributes, "#{a} is not a valid attribute") unless Constants::ATTRIBUTES.include? a
     end
   end
+
+  def custom_exalt?
+    true
+  end
 end

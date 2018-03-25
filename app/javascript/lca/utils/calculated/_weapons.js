@@ -227,9 +227,9 @@ export function rangedWitheringAttackPool(character, weapon, penalties, charmAbi
   if (!weaponIsRanged(weapon))
     return false
 
-  const tag = rangeTag(weapon)
+  const tag = rangeTag(weapon) || ''
   const range = rangeValue(weapon)
-  const rangebonus = tag.toLowerCase().startsWith('archery') ? archeryAccuracyBonus : thrownAccuracyBonus
+  const rangebonus = tag.toLowerCase().startsWith('thrown') ? thrownAccuracyBonus : archeryAccuracyBonus
 
   const rawPool = attr(character, weapon.attr) +
                   abil(character, weapon.ability)

@@ -11,14 +11,15 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import RatingField from './ratingField.jsx'
+import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendMotes } from '../../ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from '../../selectors'
 import { clamp } from '../../utils'
 import { prettyAnimaLevel, committedPersonalMotes, committedPeripheralMotes } from '../../utils/calculated'
 
 const WillRaiseAnima = ({ current, spending }) => {
-  if (spending < 5 || current == 3)
-    return <Typography>No change to anima</Typography>
+  if (spending < 5 || current === 3)
+    return <Typography>No change to anima{ current === 3 && ' (already at Bonfire)' }</Typography>
 
   const newLevel = Math.min(current + Math.floor(spending / 5), 3)
   return <Typography>
@@ -120,36 +121,47 @@ class MoteSpendWidget extends React.Component {
         </DialogTitle>
 
         <DialogContent>
-          <Button variant="raised" size="small" onClick={ () => handleAdd(-5) }>-5</Button>
-          <Button variant="raised" size="small" onClick={ () => handleAdd(-1) }>-1</Button>
-          &nbsp;&nbsp;
-          <RatingField trait="toSpend" value={ toSpend }
-            label="Motes" narrow margin="dense"
-            max={ max() } min={ min() }
-            onChange={ handleChange }
-          />
-
-          <Button variant="raised" size="small" onClick={ () => handleChange({ target: { name: 'toSpend', value: 0 }})}>
-            0
-          </Button>
-
-          <Button variant="raised" size="small" onClick={ () => handleAdd(1) }>+1</Button>
-          <Button variant="raised" size="small" onClick={ () => handleAdd(5) }>+5</Button>
-          <Button variant="raised" size="small" onClick={ () => handleAdd(10) }>+10</Button>
-
-          <div>
-            <FormControlLabel label="Commit?"
-              control={
-                <Checkbox checked={ commit } onChange={ handleCheck } />
-              }
+          <div style={{ textAlign: 'center' }}>
+            <ResourceDisplay
+              current={ peripheral ? character.motes_peripheral_current: character.motes_personal_current }
+              total={ peripheral ? character.motes_peripheral_total : character.motes_personal_total }
+              committed={ peripheral ? committedPeripheralMotes(character) : committedPersonalMotes(character) }
+              label="Current Pool"
             />
-            { commit &&
-              <TextField name="commitName" value={ commitName }
-                label="Commit label" margin="dense"
-                onChange={ handleChange }
-              />
-            }
           </div>
+          <div>
+            <Button size="small" onClick={ () => handleAdd(-5) }>-5</Button>
+            <Button size="small" onClick={ () => handleAdd(-1) }>-1</Button>
+            &nbsp;&nbsp;
+            <RatingField trait="toSpend" value={ toSpend }
+              label="Motes" narrow margin="dense"
+              max={ max() } min={ min() }
+              onChange={ handleChange }
+            />
+
+            <Button size="small" onClick={ () => handleChange({ target: { name: 'toSpend', value: 0 }})}>
+              0
+            </Button>
+            <Button size="small" onClick={ () => handleAdd(1) }>+1</Button>
+            <Button size="small" onClick={ () => handleAdd(5) }>+5</Button>
+            <Button size="small" onClick={ () => handleAdd(10) }>+10</Button>
+          </div>
+
+          { toSpend >= 0 &&
+            <div>
+              <FormControlLabel label="Commit motes?" style={{ marginTop: '1em' }}
+                control={
+                  <Checkbox checked={ commit } onChange={ handleCheck } />
+                }
+              />
+              { commit &&
+                <TextField name="commitName" value={ commitName }
+                  label="Commit label" margin="dense"
+                  onChange={ handleChange }
+                />
+              }
+            </div>
+          }
 
           { peripheral &&
             <WillRaiseAnima current={ character.anima_level } spending={ toSpend } />

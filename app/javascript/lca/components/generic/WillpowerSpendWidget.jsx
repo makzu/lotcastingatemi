@@ -7,6 +7,7 @@ import ButtonBase from 'material-ui/ButtonBase'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
 
 import RatingField from './ratingField.jsx'
+import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from '../../ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from '../../selectors'
 import { clamp } from '../../utils/'
@@ -68,7 +69,7 @@ class WillpowerSpendWidget extends React.Component {
       min, max,
       handleOpen, handleClose, handleAdd, handleChange, handleSubmit,
     } = this
-    const { canEdit, children } = this.props
+    const { character, canEdit, children } = this.props
 
     if (!canEdit) {
       return children
@@ -87,7 +88,15 @@ class WillpowerSpendWidget extends React.Component {
         </DialogTitle>
 
         <DialogContent>
-          <Button variant="raised" size="small" onClick={ () => handleAdd(-1) }>-1</Button>
+          <div style={{ textAlign: 'center' }}>
+            <ResourceDisplay
+              current={ character.willpower_temporary }
+              total={ character.willpower_permanent }
+              label="Current Willpower"
+            />
+          </div>
+
+          <Button size="small" onClick={ () => handleAdd(-1) }>-1</Button>
           &nbsp;&nbsp;
 
           <RatingField trait="toSpend" value={ toSpend }
@@ -96,11 +105,11 @@ class WillpowerSpendWidget extends React.Component {
             onChange={ handleChange }
           />
 
-          <Button variant="raised" size="small" onClick={ () => handleChange({ target: { name: 'toSpend', value: 0 }})}>
+          <Button size="small" onClick={ () => handleChange({ target: { name: 'toSpend', value: 0 }})}>
             0
           </Button>
 
-          <Button variant="raised" size="small" onClick={ () => handleAdd(1) }>+1</Button>
+          <Button size="small" onClick={ () => handleAdd(1) }>+1</Button>
         </DialogContent>
 
         <DialogActions>

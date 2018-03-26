@@ -11,6 +11,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff'
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { woundPenalty } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
@@ -63,18 +64,22 @@ function QcCard({ qc, classes }) {
 
     <div className={ classes.rowContainer }>
       { qc.motes_personal_total > 0 &&
-        <ResourceDisplay className={ classes.moteWrap }
-          current={ qc.motes_personal_current }
-          total={ qc.motes_personal_total }
-          label="Personal:"
-        />
+        <MoteSpendWidget qc character={ qc }>
+          <ResourceDisplay className={ classes.moteWrap }
+            current={ qc.motes_personal_current }
+            total={ qc.motes_personal_total }
+            label="Personal:"
+          />
+        </MoteSpendWidget>
       }
       { qc.motes_peripheral_total > 0 &&
-        <ResourceDisplay className={ classes.moteWrap }
-          current={ qc.motes_peripheral_current }
-          total={ qc.motes_peripheral_total }
-          label="Peripheral:"
-        />
+        <MoteSpendWidget qc peripheral character={ qc }>
+          <ResourceDisplay className={ classes.moteWrap }
+            current={ qc.motes_peripheral_current }
+            total={ qc.motes_peripheral_total }
+            label="Peripheral:"
+          />
+        </MoteSpendWidget>
       }
       <ResourceDisplay className={ classes.moteWrap }
         current={ qc.willpower_temporary }

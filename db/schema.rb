@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325075346) do
+ActiveRecord::Schema.define(version: 20180325234406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -326,6 +326,9 @@ ActiveRecord::Schema.define(version: 20180325075346) do
     t.boolean "hidden", default: false
     t.integer "sort_order", default: 0
     t.integer "chronicle_sort_order", default: 0
+    t.integer "anima_level", default: 0
+    t.string "excellency", default: ""
+    t.json "motes_committed", default: []
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end

@@ -8,8 +8,11 @@ class QcSerializer < ActiveModel::Serializer
              :health_level_0s, :health_level_1s, :health_level_2s,
              :health_level_4s, :health_level_incap,
              :damage_bashing, :damage_lethal, :damage_aggravated,
+
              :motes_personal_current,   :motes_personal_total,
              :motes_peripheral_current, :motes_peripheral_total,
+             :motes_committed,
+             :anima_level, :excellency,
 
              :movement, :appearance, :resolve, :guile, :evasion, :parry,
              :armor_name, :soak, :hardness, :join_battle,

@@ -31,6 +31,7 @@ function ArmorSummary({ character, pools, classes }) {
 
     <div className={ classes.container }>
       <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.bestParry } label="Best Parry" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
       { pools.hardness.total > 0 &&
         <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />

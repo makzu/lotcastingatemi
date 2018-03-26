@@ -1,6 +1,10 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
+
+import { getPoolsForWeapon } from '.'
 import * as calc from '../utils/calculated/'
+
+const getState = (state) => state
 
 export const getSpecificCharacter = (state, id) => state.entities.characters[id]
 
@@ -58,12 +62,22 @@ export const getPenalties = createCachedSelector(
   }
 )(characterIdMemoizer)
 
+export const getPoolsForAllWeaponsForCharacter = createSelector(
+  [getSpecificCharacter, getState],
+  (character, state) => character.weapons.map((id) => getPoolsForWeapon(state, id))
+)
+
 export const getPoolsAndRatings = createCachedSelector(
-  [getSpecificCharacter, getMeritsForCharacter, getAllCharmsForCharacter, getControlSpellsForCharacter, getPenalties],
-  (character, merits, charms, spells, penalties) => {
+  [getSpecificCharacter, getMeritsForCharacter, getAllCharmsForCharacter, getControlSpellsForCharacter, getPenalties, getPoolsForAllWeaponsForCharacter],
+  (character, merits, charms, spells, penalties, weaponPools) => {
     const meritNames = [ ...new Set(merits.map((m) => m.merit_name.toLowerCase() + m.rating)) ]
     const charmAbils = [ ...new Set(charms.map((c) => c.type === 'MartialArtsCharm' ? 'martial_arts' : c.ability)) ]
     const spellNames = [ ...new Set(spells.map((m) => m.name.toLowerCase())) ]
+    const bestParryWeapon = weaponPools.sort((a, b) => {
+      if (a.parry.total > b.parry.total) { return -1 }
+      else if (a.parry.total < b.parry.total) { return 1 }
+      else { return 0 }
+    })[0] || { parry: { total: 0 }}
 
     return {
       guile: calc.guile(character, meritNames, penalties, charmAbils),
@@ -72,6 +86,7 @@ export const getPoolsAndRatings = createCachedSelector(
       readIntentions: calc.readIntentions(character, meritNames, penalties, charmAbils),
 
       evasion: calc.evasion(character, meritNames, penalties, charmAbils),
+      bestParry: bestParryWeapon.parry,
       soak: calc.soak(character, meritNames, spellNames),
       hardness: { total: calc.hardness(character) },
       joinBattle: calc.joinBattle(character, meritNames, penalties, charmAbils),

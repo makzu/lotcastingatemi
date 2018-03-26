@@ -20,7 +20,7 @@ const styles = theme => ({
   },
   committed: { ...theme.typography.caption,
     display: 'inline-block',
-    marginLeft: '-1.3em',
+    marginLeft: '-1.31em',
     verticalAlign: 'bottom',
     paddingBottom: '0.25em',
   },

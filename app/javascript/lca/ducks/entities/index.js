@@ -45,6 +45,11 @@ export const defaultState = {
 }
 
 export default function EntityReducer(state = defaultState, action) {
+  // Entity actions are expected to be in format 'lca/<entity name>/<ACTION>'
+  const act = action.type.split('/')
+  if (act[0] !== 'lca')
+    return state
+
   let { payload } = action
 
   // TODO: Make this more readable
@@ -71,11 +76,6 @@ export default function EntityReducer(state = defaultState, action) {
       return state
     }
   }
-
-  // Entity actions are expected to be in format 'lca/<entity name>/<ACTION>'
-  const act = action.type.split('/')
-  if (act[0] !== 'lca')
-    return state
 
   switch(act[1]) {
   case 'player':

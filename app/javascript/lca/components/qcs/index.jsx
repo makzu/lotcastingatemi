@@ -1,31 +1,67 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
+import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
+import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
+import PoolLine from '../characters/PoolLine.jsx'
+import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import { getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
+import { fullQc, qcMerit, qcAttack } from '../../utils/propTypes'
+import { prettyIntimacyRating, qcPool } from '../../utils/calculated'
 
-import { fullQc, withMotePool, qcMerit, qcAttack } from '../../utils/propTypes'
-import { prettyIntimacyRating } from '../../utils/calculated'
+const styles = theme => ({
+  rowContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  moteWrap: {
+    marginRight: theme.spacing.unit,
+  },
+  poolBlock: {
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    width: '4.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
+  intimacy: { ...theme.typography.body1,
 
-function MotePool(props){
-  const { qc } = props
+  },
+  intimacyTypeLabel: { ...theme.typography.caption,
 
-  if (qc.motes_personal_total > 0) {
-    return <span>
-      <span>Personal motes: {qc.motes_personal_current}/{qc.motes_personal_total}</span>
-      {qc.motes_peripheral_total > 0 &&
-        <span>Peripheral motes: {qc.motes_peripheral_current}/{qc.motes_peripheral_total}</span>
-      }
-    </span>
-  } else {
-    return null
-  }
-}
-MotePool.propTypes = {
-  qc: PropTypes.shape(withMotePool)
-}
+  },
+  label: { ...theme.typography.body1,
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    opacity: 0.7,
+    width: '5em',
+    display: 'flex',
+  },
+  labelSpan: {
+    alignSelf: 'flex-end',
+  },
+  name: { ...theme.typography.body2,
+    width: '10rem',
+    margin: theme.spacing.unit,
+    marginLeft: 0,
+    maxHeight: '5rem',
+    textTransform: 'capitalize',
+    overflow: 'hidden',
+  },
+  tags: { ...theme.typography.body1,
+    margin: theme.spacing.unit,
+    marginLeft: 0,
+    textTransform: 'capitalize',
+    maxHeight: '5rem',
+    overflow: 'hidden',
+  },
+})
 
 class QcSheet extends React.PureComponent {
   constructor(props) {
@@ -39,28 +75,74 @@ class QcSheet extends React.PureComponent {
         <Typography paragraph>This QC has not yet loaded.</Typography>
       </div>
 
-    const { qc, qc_attacks, qc_charms, qc_merits } = this.props
+    const { qc, qc_attacks, qc_charms, qc_merits, pools, penalties, classes } = this.props
 
     const actions = qc.actions.map((action, index) =>
-      <span key={index}>, {action.action}: {action.pool}</span>
+      <PoolLine key={ index } label={ action.action }
+        pool={ qcPool(qc, action.pool, penalties.wound) }
+        classes={{ root: classes.poolBlock }}
+      />
     )
     const principles = qc.principles.map((p, index) =>
-      <div key={index}><small>Principle: </small>{ p.subject } ({ prettyIntimacyRating(p.rating) })</div>
+      <div key={index}>
+        <span className={ classes.intimacyTypeLabel }>Principle: </span>
+        <span className={ classes.intimacy }>
+          { p.subject } ({ prettyIntimacyRating(p.rating) })
+        </span>
+      </div>
     )
     const ties = qc.ties.map((tie, index) =>
-      <div key={index}><small>Tie:</small>{ tie.subject } ({ prettyIntimacyRating(tie.rating) })</div>
+      <div key={index}>
+        <span className={ classes.intimacyTypeLabel }>Tie: </span>
+        <span className={ classes.intimacy }>
+          { tie.subject } ({ prettyIntimacyRating(tie.rating) })
+        </span>
+      </div>
     )
     const attacks = qc_attacks.map((attack) =>
-      <div key={attack.id}>
-        {attack.name}: {attack.pool} dice
-        ({attack.damage} damage{ attack.overwhelming > 1 && <span>, minimum {attack.overwhelming}</span>})
-        , { attack.range } range
-        { attack.tags.length > 0 && <span>, tags: {attack.tags.join(', ')}</span>}
+      <div key={attack.id} className={ classes.rowContainer }>
+        <div className={ classes.name }>
+          <div className={ classes.label }>
+            <span className={ classes.labelSpan }>Name</span>
+          </div>
+          { attack.name }
+        </div>
+
+        <PoolLine label="Attack"
+          pool={ qcPool(qc, attack.pool, penalties.wound) }
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolLine label="damage"
+          pool={ qcPool(qc, attack.damage, 0, undefined, false) }
+          classes={{ root: classes.poolBlock }}
+        />
+        { attack.overwhelming > 1 &&
+          <PoolLine label="Minimum"
+            pool={ qcPool(qc, attack.overwhelming, 0, undefined, false) }
+            classes={{ root: classes.poolBlock }}
+          />
+        }
+
+        <div className={ classes.tags }>
+          <div className={ classes.label }>
+            <span className={ classes.labelSpan }>Range</span>
+          </div>
+          { attack.range }
+        </div>
+
+        { attack.tags.length > 0 &&
+          <div className={ classes.tags }>
+            <div className={ classes.label }>
+              <span className={ classes.labelSpan }>Tags</span>
+            </div>
+            { attack.tags.join(', ') || 'none' }
+          </div>
+        }
       </div>
     )
     const merits = qc_merits.map((merit) =>
       <div key={merit.id}>
-        <strong>{merit.name}: </strong>{ merit.body }
+        <strong>{merit.name} </strong>{ merit.body }
       </div>
     )
     const charms = qc_charms.map((charm) =>
@@ -79,77 +161,161 @@ class QcSheet extends React.PureComponent {
         { qc.description }
       </Typography>
 
-      <Typography component="div">
-        <strong>Essence:</strong> { qc.essence }, {' '}
-        <strong>Willpower</strong> { qc.willpower_temporary }/{ qc.willpower_permanent }, {' '}
-        <strong>Join Battle:</strong> { qc.join_battle } dice
-        <br />
-        <MotePool qc={ qc } />
-        <HealthLevelBoxes character={ qc } />
+      <div className={ classes.rowContainer }>
+        <PoolLine label="Essence"
+          pool={{ total: qc.essence }}
+          classes={{ root: classes.poolBlock }}
+        />
+        { qc.motes_personal_total > 0 &&
+          <MoteSpendWidget qc character={ qc }>
+            <ResourceDisplay className={ classes.moteWrap }
+              current={ qc.motes_personal_current }
+              total={ qc.motes_personal_total }
+              label="Personal"
+            />
+          </MoteSpendWidget>
+        }
+        { qc.motes_peripheral_total > 0 &&
+          <MoteSpendWidget qc peripheral character={ qc }>
+            <ResourceDisplay className={ classes.moteWrap }
+              current={ qc.motes_peripheral_current }
+              total={ qc.motes_peripheral_total }
+              label="Peripheral"
+            />
+          </MoteSpendWidget>
+        }
+        <WillpowerSpendWidget qc character={ qc }>
+          <ResourceDisplay className={ classes.moteWrap }
+            current={ qc.willpower_temporary }
+            total={ qc.willpower_permanent }
+            label="Willpower"
+          />
+        </WillpowerSpendWidget>
+      </div>
+
+      <HealthLevelBoxes character={ qc } />
+      <Typography paragraph>
+        Wound Penalty: { penalties.wound }
       </Typography>
 
-      <Typography component="div">
-        <strong>Combat Movement:</strong> { qc.movement } dice, {' '}
-        <strong>Soak:</strong> { qc.soak } ({ qc.armor_name || 'unarmored' }), {' '}
-        {qc.hardness > 0 &&
-          <span><strong>Hardness:</strong> { qc.hardness }, </span>
-        }
-        <strong>Parry:</strong> { qc.parry }, {' '}
-        <strong>Evasion:</strong> { qc.evasion }<br />
-        <strong>Attacks:</strong>
-        { qc.grapple > 0 &&
-          <div>Grapple: { qc.grapple } ({ qc.grapple_control} dice to control)</div>
-        }
-        { attacks }
+      <Typography variant="subheading">
+        Combat
       </Typography>
+      <div className={ classes.rowContainer }>
+        <PoolLine label="Join Battle"
+          pool={ qcPool(qc, qc.join_battle, penalties.wound) }
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolLine label="Movement"
+          pool={ qcPool(qc, qc.movement, penalties.wound) }
+          classes={{ root: classes.poolBlock }}
+        />
+      </div>
 
-      <Typography component="div">
-        <strong>Resolve:</strong> { qc.resolve }, {' '}
-        <strong>Guile:</strong> { qc.guile }, {' '}
-        <strong>Appearance:</strong> { qc.appearance }<br />
-        <strong>Actions: </strong>
-        Senses: { qc.senses }
+      <Typography variant="subheading">
+        Attacks
+      </Typography>
+      { attacks }
+      { qc.grapple > 0 &&
+        <div className={ classes.rowContainer }>
+          <div className={ classes.name }>
+            <div className={ classes.label }>
+              <span className={ classes.labelSpan }>Name</span>
+            </div>
+            Grapple
+          </div>
+          <PoolLine label="Grapple"
+            pool={ qcPool(qc, qc.grapple, penalties.wound) }
+            classes={{ root: classes.poolBlock }}
+          />
+          <PoolLine label="Control"
+            pool={ qcPool(qc, qc.grapple_control, penalties.wound) }
+            classes={{ root: classes.poolBlock }}
+          />
+        </div>
+      }
+
+      <Typography variant="subheading">
+        Defenses
+      </Typography>
+      <div className={ classes.rowContainer }>
+        <PoolLine label="Parry" pool={ pools.parry } classes={{ root: classes.poolBlock }} />
+        <PoolLine label="Evasion" pool={ pools.evasion } classes={{ root: classes.poolBlock }} />
+        <PoolLine label="Soak" pool={ qcPool(qc, qc.soak) } classes={{ root: classes.poolBlock }} />
+        { qc.hardness > 0 &&
+          <PoolLine label="Hardness" pool={ qcPool(qc, qc.hardness) } classes={{ root: classes.poolBlock }} />
+        }
+        <div className={ classes.tags }>
+          <div className={ classes.label }>
+            <span className={ classes.labelSpan }>Armor Name</span>
+          </div>
+          { qc.armor_name || 'unarmored' }
+        </div>
+      </div>
+
+      <Typography variant="subheading">
+        Actions
+      </Typography>
+      <div className={ classes.rowContainer }>
+        <PoolLine label="Senses" pool={ pools.senses } classes={{ root: classes.poolBlock }} />
         { actions }
-      </Typography>
+      </div>
 
-      <Typography component="div">
-        <h4 style={{ marginBottom: '0.25em' }}>Intimacies:</h4>
+      <Typography variant="subheading">
+        Social
+      </Typography>
+      <div className={ classes.rowContainer }>
+        <PoolLine label="Resolve" pool={ pools.resolve } classes={{ root: classes.poolBlock }} />
+        <PoolLine label="Guile" pool={ pools.guile } classes={{ root: classes.poolBlock }} />
+        <PoolLine label="Appearance" pool={ pools.appearance } classes={{ root: classes.poolBlock }} />
+      </div>
+
+      <Typography variant="subheading">
+        Intimacies
+      </Typography>
+      <Typography gutterBottom component="div">
         { principles }
         { ties }
       </Typography>
 
-      <Typography component="div">
-        <h4 style={{ marginBottom: '0.25em' }}>Merits:</h4>
+      <Typography variant="subheading">
+        Merits
+      </Typography>
+      <Typography gutterBottom component="div">
         { merits }
       </Typography>
 
-      { charms.length > 0 && <Typography component="div">
-        <h4 style={{ marginBottom: '0.25em' }}>Charms:</h4>
-        { charms }
-      </Typography> }
-
+      { charms.length > 0 &&
+        <React.Fragment>
+          <Typography variant="subheading">
+            Charms
+          </Typography>
+          <Typography component="div">
+            { charms }
+          </Typography>
+        </React.Fragment>
+      }
     </BlockPaper>
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.qcId
+function mapStateToProps(state, props) {
+  const id = props.match.params.qcId
   const qc = state.entities.qcs[id]
 
   let qc_attacks = []
   let qc_charms = []
   let qc_merits = []
+  let pools = {}
+  let penalties = {}
 
   if (qc != undefined) {
-    if (qc.qc_attacks != undefined) {
-      qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
-    }
-    if (qc.qc_charms != undefined) {
-      qc_charms = qc.qc_charms.map((id) => state.entities.qc_charms[id])
-    }
-    if (qc.qc_merits != undefined) {
-      qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
-    }
+    qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
+    qc_charms = qc.qc_charms.map((id) => state.entities.qc_charms[id])
+    qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
+
+    penalties = getPenaltiesForQc(state, qc.id)
+    pools = getPoolsAndRatingsForQc(state, qc.id)
   }
 
   return {
@@ -158,6 +324,8 @@ function mapStateToProps(state, ownProps) {
     qc_attacks,
     qc_charms,
     qc_merits,
+    penalties,
+    pools,
   }
 }
 QcSheet.propTypes = {
@@ -167,8 +335,11 @@ QcSheet.propTypes = {
   qc_charms: PropTypes.arrayOf(PropTypes.object),
   qc_attacks: PropTypes.arrayOf(PropTypes.shape(qcAttack)),
   battlegroups: PropTypes.arrayOf(PropTypes.object),
+  pools: PropTypes.object,
+  penalties: PropTypes.object,
+  classes: PropTypes.object,
 }
 
-export default connect(
+export default withStyles(styles)(connect(
   mapStateToProps
-)(QcSheet)
+)(QcSheet))

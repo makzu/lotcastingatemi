@@ -14,15 +14,23 @@ import { bgAttackPool, bgDamage } from '../../utils/calculated'
 import { qcAttack } from '../../utils/propTypes'
 
 const styles = theme => ({
+  wrap: {
+    display: 'flex',
+  },
   bgBonus: { ...theme.typography.caption,
     marginLeft: -theme.spacing.unit/2,
     marginRight: theme.spacing.unit,
   },
   nameField: {
+    flex: 2,
     marginRight: theme.spacing.unit,
   },
   tagsField: {
+    flex: 1,
     marginRight: theme.spacing.unit,
+  },
+  rangeField: {
+    width: '6em',
   },
 })
 
@@ -79,7 +87,7 @@ class QcAttackFields extends React.Component {
     const { battlegroup, fakeBg, classes } = this.props
     const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
 
-    return <div>
+    return <div className={ classes.wrap }>
       <TextField name="name" value={ attack.name }
         label="Name" className={ classes.nameField } margin="dense"
         onChange={ handleChange } onBlur={ handleBlur }
@@ -96,7 +104,7 @@ class QcAttackFields extends React.Component {
       }
 
       <RatingField trait="damage" value={ attack.damage }
-        label="Damage" min={ 1 } margin="dense"
+        label="Damage" min={ 1 } narrow margin="dense"
         onChange={ handleRatingChange }
       />
       { battlegroup &&
@@ -106,7 +114,7 @@ class QcAttackFields extends React.Component {
       }
 
       <RatingField trait="overwhelming" value={ attack.overwhelming }
-        label="Ovw." min={ 1 } narrow margin="dense"
+        label="Min" min={ 1 } narrow margin="dense"
         onChange={ handleRatingChange }
       />
 
@@ -118,6 +126,7 @@ class QcAttackFields extends React.Component {
       <TextField select name="range" value={ attack.range }
         label="Range" margin="dense"
         onChange={ handleRatingChange }
+        className={ classes.rangeField }
       >
         <MenuItem key="close" value="close">Close</MenuItem>
         <MenuItem key="short" value="short">Short</MenuItem>

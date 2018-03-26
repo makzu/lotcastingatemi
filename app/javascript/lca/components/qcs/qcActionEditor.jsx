@@ -15,11 +15,12 @@ function ActionFields(props) {
   const { onActionChange, onActionBlur, onRatingChange, onRemove } = props
   const { action, pool } = props.action
 
-  return <div>
+  return <div style={{ display: 'flex' }}>
     <TextField name="action" value={ action }
       label="Action" margin="dense"
       onChange={ onActionChange } onBlur={ onActionBlur }
-    />&nbsp; &nbsp;
+      style={{ flex: 1, marginRight: '.5em' }}
+    />
     <RatingField trait="pool" value={ pool }
       label="Pool" min={ 1 } margin="dense"
       onChange={ onRatingChange }

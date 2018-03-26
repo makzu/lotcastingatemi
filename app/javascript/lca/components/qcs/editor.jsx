@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Grid from 'material-ui/Grid'
+import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
@@ -10,6 +11,7 @@ import QcActionEditor from './qcActionEditor.jsx'
 import QcAttackEditor from './qcAttackEditor.jsx'
 import QcCharmEditor from './qcCharmEditor.jsx'
 import QcMeritEditor from './qcMeritEditor.jsx'
+import AnimaSelect from '../generic/AnimaSelect.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
@@ -97,7 +99,11 @@ class QcEditor extends React.Component {
             onChange={ handleChange } onBlur={ handleBlur }
             rowsMax={ 5 }
           />
+        </BlockPaper>
+      </Grid>
 
+      <Grid item xs={ 12 } sm={ 6 } lg={ 4 } xl={ 3 }>
+        <BlockPaper>
           <Typography component="div">
             <RatingField trait="essence" value={ qc.essence }
               label="Essence" min={ 1 } max={ 10 } margin="dense" narrow
@@ -114,8 +120,14 @@ class QcEditor extends React.Component {
               label="" min={ 1 } max={ 10 } margin="dense" narrow
               onChange={ handleRatingChange }
             />
-            &nbsp;&nbsp;
 
+          </Typography>
+
+          <Typography component="div">
+            Motes
+          </Typography>
+
+          <Typography component="div">
             <RatingField trait="motes_personal_current" value={ qc.motes_personal_current }
               label="Personal" max={ qc.motes_personal_total } margin="dense" narrow
               onChange={ handleRatingChange }
@@ -134,9 +146,28 @@ class QcEditor extends React.Component {
               label="Motes" margin="dense" narrow
               onChange={ handleRatingChange }
             />
+            <AnimaSelect character={ qc } onChange={ handleRatingChange } />
+            <div>
+              <TextField select value={ qc.excellency } name="excellency"
+                label="Excellency Type" margin="dense"
+                onChange={ handleRatingChange }
+                fullWidth
+              >
+                <MenuItem value="">No Excellency</MenuItem>
+                <MenuItem value="dragonblood">Dragon-Blood</MenuItem>
+                <MenuItem value="lunar">Lunar</MenuItem>
+                <MenuItem value="sidereal">Sidereal</MenuItem>
+                <MenuItem value="solar">Solar/Abyssal</MenuItem>
+                <MenuItem value="liminal">Liminal</MenuItem>
+              </TextField>
+            </div>
           </Typography>
+        </BlockPaper>
+      </Grid>
 
-          <div style={{ marginTop: '0.5em' }}>
+      <Grid item xs={ 12 } sm={ 6 } lg={ 4 } xl={ 3 }>
+        <BlockPaper>
+          <div style={{ textAlign: 'center' }}>
             <HealthLevelBoxes character={ qc } />
             <Typography>
               Current wound penalty: -{ woundPenalty(qc, []) }
@@ -177,26 +208,18 @@ class QcEditor extends React.Component {
             label="Aggravated" margin="dense"
             onChange={ handleRatingChange }
           />
+        </BlockPaper>
+      </Grid>
 
-          <Typography variant="subheading" style={{ marginTop: '1em' }}>
-            Social
-          </Typography>
-          <RatingField trait="resolve" value={ qc.resolve }
-            label="Resolve" min={ 1 } margin="dense"
-            onChange={ handleRatingChange }
-          />
-          <RatingField trait="guile" value={ qc.guile }
-            label="Guile" min={ 1 } margin="dense"
-            onChange={ handleRatingChange }
-          />
-          <RatingField trait="appearance" value={ qc.appearance }
-            label="Appearance" min={ 1 } max={ 10 } margin="dense"
-            onChange={ handleRatingChange }
-          />
-
+      <Grid item xs={ 12 } lg={ 6 }>
+        <BlockPaper>
           <QcActionEditor qc={ qc } onChange={ handleListChange } />
+        </BlockPaper>
+      </Grid>
 
-          <Typography variant="subheading" style={{ marginTop: '1em' }}>
+      <Grid item xs={ 12 }>
+        <BlockPaper>
+          <Typography variant="subheading">
             Combat
           </Typography>
           <RatingField trait="join_battle" value={ qc.join_battle }
@@ -227,17 +250,39 @@ class QcEditor extends React.Component {
             label="Armor Name" margin="dense"
             onChange={ handleChange } onBlur={ handleBlur }
           />
-        </BlockPaper>
-      </Grid>
+          <br />
 
-      <Grid item xs={ 12 } md={ 6 }>
-        <BlockPaper>
+          <RatingField trait="grapple" value={ qc.grapple }
+            label="Grapple" margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="grapple" value={ qc.grapple_control }
+            label="Grapple Control" margin="dense"
+            onChange={ handleRatingChange }
+          />
+
           <QcAttackEditor qc={ qc } />
         </BlockPaper>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 6 }>
+      <Grid item xs={ 12 } lg={ 6 }>
         <BlockPaper>
+          <Typography variant="subheading">
+            Social
+          </Typography>
+          <RatingField trait="resolve" value={ qc.resolve }
+            label="Resolve" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="guile" value={ qc.guile }
+            label="Guile" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="appearance" value={ qc.appearance }
+            label="Appearance" min={ 1 } max={ 10 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+
           <Typography variant="subheading">
             Intimacies
           </Typography>
@@ -248,13 +293,13 @@ class QcEditor extends React.Component {
         </BlockPaper>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 6 }>
+      <Grid item xs={ 12 } lg={ 6 }>
         <BlockPaper>
           <QcMeritEditor qc={ qc } />
         </BlockPaper>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 6 }>
+      <Grid item xs={ 12 } lg={ 6 }>
         <BlockPaper>
           <QcCharmEditor qc={ qc } />
         </BlockPaper>

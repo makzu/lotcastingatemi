@@ -31,12 +31,13 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
       undefined
 
     return {
-      guile: calc.qcRating(qc, qc.guile, undefined, penalties.wound),
-      resolve: calc.qcRating(qc, qc.resolve, undefined, penalties.wound),
+      guile: calc.qcRating(qc, qc.guile, penalties.wound),
+      resolve: calc.qcRating(qc, qc.resolve, penalties.wound),
       appearance: calc.appearanceRating({ attr_appearance: qc.appearance }, meritNames),
 
-      evasion: calc.qcRating(qc, qc.evasion, tiny, penalties.wound + penalties.onslaught),
-      parry: calc.qcRating(qc, qc.evasion, undefined, penalties.wound + penalties.onslaught),
+      evasion: calc.qcRating(qc, qc.evasion, penalties.wound + penalties.onslaught, tiny),
+      parry: calc.qcRating(qc, qc.evasion, penalties.wound + penalties.onslaught),
+      senses: calc.qcRating(qc, qc.senses, penalties.wound),
     }
   }
 )(qcIdMemoizer)

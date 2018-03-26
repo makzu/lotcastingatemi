@@ -55,7 +55,7 @@ const styles = theme => ({
     textTransform: 'capitalize',
     maxHeight: '5rem',
     overflow: 'hidden',
-  }
+  },
 })
 
 function RangedWeaponAttacks({ weaponPools, classes }) {

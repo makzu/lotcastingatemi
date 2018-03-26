@@ -3,6 +3,7 @@ import { createSelector } from 'reselect'
 export * from './entities.js'
 export * from './character.js'
 export * from './weapon.js'
+export * from './qc.js'
 
 import { getSpecificCharacter } from './character.js'
 import { getSpecificQc } from './qc.js'

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
@@ -14,7 +15,8 @@ import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { woundPenalty } from '../../utils/calculated'
+import { getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
+import { qcPool } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
 const styles = theme => ({
@@ -42,9 +44,16 @@ const styles = theme => ({
   moteWrap: {
     marginRight: theme.spacing.unit,
   },
+  poolBlock: {
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    width: '4.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
 })
 
-function QcCard({ qc, classes }) {
+function QcCard({ qc, penalties, pools, classes }) {
   return <Paper className={ classes.root }>
 
     <Typography variant="title" className={ classes.qcName }
@@ -93,18 +102,43 @@ function QcCard({ qc, classes }) {
 
     <HealthLevelBoxes character={ qc } />
 
+    <div className={ classes.rowContainer }>
+      <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.parry } label="Parry" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={{ total: qc.soak }} label="Soak" classes={{ root: classes.poolBlock }} />
+      { qc.hardness.total > 0 &&
+        <PoolLine pool={{ total: qc.hardness }} label="Hardness" classes={{ root: classes.poolBlock }} />
+      }
+      <PoolLine pool={ qcPool(qc, qc.join_battle, [], penalties.wound) } label="Join Battle" classes={{ root: classes.poolBlock }} />
+    </div>
+
+    <div className={ classes.rowContainer }>
+      <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ qcPool(qc, qc.senses, [], penalties.wound) } label="Senses" classes={{ root: classes.poolBlock }} />
+    </div>
+
     <Typography paragraph>
       <strong>Penalties:</strong>&nbsp;
 
-      Onslaught -{ qc.onslaught },&nbsp;
-      Wound -{ woundPenalty(qc, []) }
+      Onslaught -{ penalties.onslaught },&nbsp;
+      Wound -{ penalties.wound }
     </Typography>
   </Paper>
 }
 QcCard.propTypes = {
   qc: PropTypes.shape(fullQc).isRequired,
+  penalties: PropTypes.object,
+  pools: PropTypes.object,
   player: PropTypes.object,
   classes: PropTypes.object,
 }
+function mapStateToProps(state, props) {
+  return {
+    penalties: getPenaltiesForQc(state, props.qc.id),
+    pools: getPoolsAndRatingsForQc(state, props.qc.id),
+  }
+}
 
-export default withStyles(styles)(QcCard)
+export default withStyles(styles)(connect(mapStateToProps)(QcCard))

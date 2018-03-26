@@ -15,6 +15,7 @@ import PoolLine from '../characters/PoolLine.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import { getPenalties, getPoolsAndRatings } from '../../selectors'
 import * as calc from '../../utils/calculated'
 import { fullChar } from '../../utils/propTypes'
@@ -121,11 +122,13 @@ function CharacterCard({ character, penalties, pools, classes }) {
           />
         </MoteSpendWidget>
       }
-      <ResourceDisplay className={ classes.moteWrap }
-        current={ character.willpower_temporary }
-        total={ character.willpower_permanent }
-        label="Willpower"
-      />
+      <WillpowerSpendWidget character={ character }>
+        <ResourceDisplay className={ classes.moteWrap }
+          current={ character.willpower_temporary }
+          total={ character.willpower_permanent }
+          label="Willpower"
+        />
+      </WillpowerSpendWidget>
       { character.type != 'Character' &&
         <div className={ classes.moteWrap }>
           <div className={ classes.animaLabel }>Anima</div>

@@ -13,6 +13,7 @@ import PoolLine from '../characters/PoolLine.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import { woundPenalty } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
@@ -81,11 +82,13 @@ function QcCard({ qc, classes }) {
           />
         </MoteSpendWidget>
       }
-      <ResourceDisplay className={ classes.moteWrap }
-        current={ qc.willpower_temporary }
-        total={ qc.willpower_permanent }
-        label="Willpower:"
-      />
+      <WillpowerSpendWidget qc character={ qc }>
+        <ResourceDisplay className={ classes.moteWrap }
+          current={ qc.willpower_temporary }
+          total={ qc.willpower_permanent }
+          label="Willpower:"
+        />
+      </WillpowerSpendWidget>
     </div>
 
     <HealthLevelBoxes character={ qc } />

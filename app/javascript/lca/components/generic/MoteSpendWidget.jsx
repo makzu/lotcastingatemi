@@ -13,7 +13,8 @@ import Typography from 'material-ui/Typography'
 import RatingField from './ratingField.jsx'
 import { spendMotes } from '../../ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from '../../selectors'
-import { prettyAnimaLevel } from '../../utils/calculated'
+import { clamp } from '../../utils'
+import { prettyAnimaLevel, committedPersonalMotes, committedPeripheralMotes } from '../../utils/calculated'
 
 const WillRaiseAnima = ({ current, spending }) => {
   if (spending < 5 || current == 3)
@@ -32,6 +33,7 @@ class MoteSpendWidget extends React.Component {
     this.state = { open: false, toSpend: 0, commit: false, commitName: '' }
 
     this.max = this.max.bind(this)
+    this.min = this.min.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
@@ -43,7 +45,15 @@ class MoteSpendWidget extends React.Component {
 
   max() {
     const { peripheral, character } = this.props
-    return peripheral ? character.motes_personal_total : character.motes_personal_current
+    return peripheral ? character.motes_peripheral_current : character.motes_personal_current
+  }
+
+  min() {
+    const { peripheral, character } = this.props
+    if (peripheral)
+      return character.motes_peripheral_current - (character.motes_peripheral_total - committedPeripheralMotes(character))
+    else
+      return character.motes_personal_current - (character.motes_personal_total - committedPersonalMotes(character))
   }
 
   handleOpen() {
@@ -55,7 +65,7 @@ class MoteSpendWidget extends React.Component {
   }
 
   handleAdd(motes) {
-    this.setState({ toSpend: Math.min(this.state.toSpend + motes, this.max()) })
+    this.setState({ toSpend: clamp(this.state.toSpend + motes, this.min(), this.max()) })
   }
 
   handleChange(e) {
@@ -88,15 +98,14 @@ class MoteSpendWidget extends React.Component {
   render() {
     const { toSpend, commit, commitName, open } = this.state
     const {
-      handleOpen, handleClose, handleAdd, handleChange, handleCheck, handleSubmit
+      handleOpen, handleClose, handleAdd, handleChange, handleCheck, handleSubmit,
+      max, min
     } = this
     const { canEdit, children, character, peripheral } = this.props
 
     if (!canEdit) {
       return children
     }
-
-    const max =  peripheral ? character.motes_personal_total : character.motes_personal_current
 
     return <React.Fragment>
       <ButtonBase onClick={ handleOpen }>
@@ -107,13 +116,16 @@ class MoteSpendWidget extends React.Component {
         onClose={ handleClose }
       >
         <DialogTitle>
-          Spend { peripheral ? 'Peripheral' : 'Personal' } Motes
+          { toSpend >= 0 ? 'Spend' : 'Recover'} { peripheral ? 'Peripheral' : 'Personal' } Motes
         </DialogTitle>
 
         <DialogContent>
+          <Button variant="raised" size="small" onClick={ () => handleAdd(-5) }>-5</Button>
+          <Button variant="raised" size="small" onClick={ () => handleAdd(-1) }>-1</Button>
+          &nbsp;&nbsp;
           <RatingField trait="toSpend" value={ toSpend }
             label="Motes" narrow margin="dense"
-            max={ max }
+            max={ max() } min={ min() }
             onChange={ handleChange }
           />
 
@@ -149,7 +161,7 @@ class MoteSpendWidget extends React.Component {
             Cancel
           </Button>
           <Button variant="raised" color="primary" onClick={ handleSubmit }>
-            Spend
+            { toSpend >= 0 ? 'Spend' : 'Recover'}
           </Button>
         </DialogActions>
       </Dialog>
@@ -174,7 +186,6 @@ function mapDispatchToProps(dispatch) {
   return {
     spendMotes: (id, motes, pool, characterType, committments) => dispatch(spendMotes(id, motes, pool, characterType, committments)),
   }
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoteSpendWidget)

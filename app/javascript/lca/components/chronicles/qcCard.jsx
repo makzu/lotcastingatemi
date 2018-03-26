@@ -109,14 +109,14 @@ function QcCard({ qc, penalties, pools, classes }) {
       { qc.hardness.total > 0 &&
         <PoolLine pool={{ total: qc.hardness }} label="Hardness" classes={{ root: classes.poolBlock }} />
       }
-      <PoolLine pool={ qcPool(qc, qc.join_battle, [], penalties.wound) } label="Join Battle" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ qcPool(qc, qc.join_battle, penalties.wound) } label="Join Battle" classes={{ root: classes.poolBlock }} />
     </div>
 
     <div className={ classes.rowContainer }>
       <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ qcPool(qc, qc.senses, [], penalties.wound) } label="Senses" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ qcPool(qc, qc.senses, penalties.wound) } label="Senses" classes={{ root: classes.poolBlock }} />
     </div>
 
     <Typography paragraph>

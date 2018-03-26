@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
+import AnimaSelect from '../../generic/AnimaSelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import RatingField from '../../generic/ratingField.jsx'
 import { committedPersonalMotes, committedPeripheralMotes } from '../../../utils/calculated'
@@ -73,15 +74,7 @@ function MotePoolEditor(props) {
         character={ character } onChange={ onRatingChange }
       />,
       <div key="anima">
-        <TextField select name="anima_level" value={ character.anima_level }
-          label="Anima" margin="dense"
-          onChange={ onRatingChange }
-        >
-          <MenuItem value={ 0 }>Dim</MenuItem>
-          <MenuItem value={ 1 }>Glowing</MenuItem>
-          <MenuItem value={ 2 }>Burning</MenuItem>
-          <MenuItem value={ 3 }>Bonfire</MenuItem>
-        </TextField>
+        <AnimaSelect character={ character } onChange={ onRatingChange } />
       </div>
     ] }
 

@@ -31,10 +31,8 @@ const styles = theme => ({
     overflow: 'hidden',
   },
   intimacy: { ...theme.typography.body1,
-
   },
   intimacyTypeLabel: { ...theme.typography.caption,
-
   },
   label: { ...theme.typography.body1,
     fontSize: '0.75rem',
@@ -113,12 +111,12 @@ class QcSheet extends React.PureComponent {
           classes={{ root: classes.poolBlock }}
         />
         <PoolLine label="damage"
-          pool={ qcPool(qc, attack.damage, 0, undefined, false) }
+          pool={{ total: attack.damage }}
           classes={{ root: classes.poolBlock }}
         />
         { attack.overwhelming > 1 &&
           <PoolLine label="Minimum"
-            pool={ qcPool(qc, attack.overwhelming, 0, undefined, false) }
+            pool={{ total: attack.overwhelming }}
             classes={{ root: classes.poolBlock }}
           />
         }
@@ -158,7 +156,7 @@ class QcSheet extends React.PureComponent {
 
     return <BlockPaper>
       <Typography paragraph style={{ whiteSpace: 'pre-line', }}>
-        { qc.description }
+        { qc.description || 'No Description' }
       </Typography>
 
       <div className={ classes.rowContainer }>
@@ -215,6 +213,7 @@ class QcSheet extends React.PureComponent {
       <Typography variant="subheading">
         Attacks
       </Typography>
+      { attacks.length == 0 && <Typography paragraph>None</Typography> }
       { attacks }
       { qc.grapple > 0 &&
         <div className={ classes.rowContainer }>
@@ -274,6 +273,9 @@ class QcSheet extends React.PureComponent {
         Intimacies
       </Typography>
       <Typography gutterBottom component="div">
+        { principles.length == 0 && ties.length == 0 &&
+          'No Intimacies'
+        }
         { principles }
         { ties }
       </Typography>

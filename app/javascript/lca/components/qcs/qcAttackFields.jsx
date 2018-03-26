@@ -20,6 +20,8 @@ const styles = theme => ({
   bgBonus: { ...theme.typography.caption,
     marginLeft: -theme.spacing.unit/2,
     marginRight: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    alignSelf: 'flex-end',
   },
   nameField: {
     flex: 2,
@@ -98,9 +100,9 @@ class QcAttackFields extends React.Component {
         onChange={ handleRatingChange }
       />
       { battlegroup &&
-        <span className={ classes.bgBonus }>
+        <div className={ classes.bgBonus }>
           ({ bgAttackPool(fakeBg, attack) } total)
-        </span>
+        </div>
       }
 
       <RatingField trait="damage" value={ attack.damage }
@@ -108,9 +110,9 @@ class QcAttackFields extends React.Component {
         onChange={ handleRatingChange }
       />
       { battlegroup &&
-        <span className={ classes.bgBonus }>
+        <div className={ classes.bgBonus }>
           ({ bgDamage(fakeBg, attack) } total)
-        </span>
+        </div>
       }
 
       <RatingField trait="overwhelming" value={ attack.overwhelming }

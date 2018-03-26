@@ -8,10 +8,12 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
+import Whatshot from 'material-ui-icons/Whatshot'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { getPenalties, getPoolsAndRatings } from '../../selectors'
 import * as calc from '../../utils/calculated'
@@ -79,6 +81,9 @@ function CharacterCard({ character, penalties, pools, classes }) {
       component={ Link } to={ `/characters/${character.id}` }
     >
       { character.name }
+      { character.anima_level === 3 &&
+        <Whatshot className={ classes.icon } />
+      }
       <Launch className={ classes.icon } />
 
       { character.hidden &&
@@ -97,20 +102,24 @@ function CharacterCard({ character, penalties, pools, classes }) {
 
     <Typography className={ classes.rowContainer } component="div">
       { character.motes_personal_total > 0 &&
-        <ResourceDisplay className={ classes.moteWrap }
-          current={ character.motes_personal_current }
-          total={ character.motes_personal_total }
-          committed={ calc.committedPersonalMotes(character) }
-          label="Personal"
-        />
+        <MoteSpendWidget character={ character }>
+          <ResourceDisplay className={ classes.moteWrap }
+            current={ character.motes_personal_current }
+            total={ character.motes_personal_total }
+            committed={ calc.committedPersonalMotes(character) }
+            label="Personal"
+          />
+        </MoteSpendWidget>
       }
       { character.motes_peripheral_total > 0 &&
-        <ResourceDisplay className={ classes.moteWrap }
-          current={ character.motes_peripheral_current }
-          total={ character.motes_peripheral_total }
-          committed={ calc.committedPeripheralMotes(character) }
-          label="Peripheral"
-        />
+        <MoteSpendWidget character={ character } peripheral>
+          <ResourceDisplay className={ classes.moteWrap }
+            current={ character.motes_peripheral_current }
+            total={ character.motes_peripheral_total }
+            committed={ calc.committedPeripheralMotes(character) }
+            label="Peripheral"
+          />
+        </MoteSpendWidget>
       }
       <ResourceDisplay className={ classes.moteWrap }
         current={ character.willpower_temporary }
@@ -138,6 +147,7 @@ function CharacterCard({ character, penalties, pools, classes }) {
 
     <div className={ classes.rowContainer }>
       <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
+      <PoolLine pool={ pools.bestParry } label="Best Parry" classes={{ root: classes.poolBlock }} />
       <PoolLine pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
       { pools.hardness.total > 0 &&
         <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />

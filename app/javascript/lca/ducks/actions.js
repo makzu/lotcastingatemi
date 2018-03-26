@@ -17,6 +17,7 @@ export {
 
 export { logout } from './account.js'
 export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
+export { spendMotes } from './events.js'
 
 import { fetchCurrentPlayer, fetchAllChronicles } from './entities'
 import UpdatesCable from '../utils/cable.js'

@@ -25,7 +25,7 @@ export function updateCharacter(id, trait, value) {
     method: 'PATCH',
     body: JSON.stringify({ character: { [trait]: value }}),
     types: [
-      CHA_UPDATE,
+      { type: CHA_UPDATE, meta: { trait: trait }},
       { type: CHA_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
       CHA_UPDATE_FAILURE
     ]

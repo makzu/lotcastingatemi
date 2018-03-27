@@ -12,6 +12,8 @@ import { SOLAR_CASTE_ABILITIES } from '../../../utils/constants.js'
 
 function SolarExaltEditor(props) {
   const { character, onRatingChange } = props
+  const casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
+  const noOptionItem = character.caste == undefined ? <MenuItem disabled>Select a Caste</MenuItem> : undefined
 
   // Mortals don't have 'exalt traits'
   if (character.type == 'Character') {
@@ -19,10 +21,12 @@ function SolarExaltEditor(props) {
   }
 
   return <BlockPaper>
-    <TextField select name="caste" value={ character.caste }
-      label="Caste" margin="dense"
+    <TextField select name="caste" value={ character.caste || '' }
+      label="Caste"
+      margin="dense" style={{ width: '8em' }}
       onChange={ onRatingChange }
     >
+      <MenuItem value="" disabled>Select a Caste</MenuItem>
       <MenuItem value="dawn">Dawn</MenuItem>
       <MenuItem value="zenith">Zenith</MenuItem>
       <MenuItem value="twilight">Twilight</MenuItem>
@@ -33,8 +37,9 @@ function SolarExaltEditor(props) {
 
     <AbilitySelect name="supernal_ability"
       label="Supernal Ability"
-      value={ character.supernal_ability }
-      abilities={ SOLAR_CASTE_ABILITIES[character.caste] }
+      value={ character.supernal_ability || '' }
+      abilities={ casteAbilities }
+      prependOptions={ noOptionItem }
       onChange={ onRatingChange } margin="dense"
     />
     <br />
@@ -42,8 +47,9 @@ function SolarExaltEditor(props) {
     <AbilitySelect name="caste_abilities"
       label="Caste Abilities"
       value={ character.caste_abilities }
-      abilities={ SOLAR_CASTE_ABILITIES[character.caste] }
+      abilities={ casteAbilities }
       onChange={ onRatingChange }
+      prependOptions={ noOptionItem }
       multiple fullWidth margin="dense"
     />
     <br />

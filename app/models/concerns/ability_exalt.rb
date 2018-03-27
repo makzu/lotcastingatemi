@@ -8,11 +8,23 @@ module AbilityExalt
   included do
     include Exalt
 
+    before_validation :ensure_uniqueness_of_caste_and_favored_abilities
+    before_validation :check_favored_abilities_on_caste_ability_change
+
     validate :caste_abilities_are_valid
     validate :favored_abilities_are_valid
     validate :caste_and_favored_abilities_dont_overlap
 
-    before_validation :ensure_uniqueness_of_caste_and_favored_abilities
+    def ensure_uniqueness_of_caste_and_favored_abilities
+      self.caste_abilities   = caste_abilities.uniq
+      self.favored_abilities = favored_abilities.uniq
+    end
+
+    def check_favored_abilities_on_caste_ability_change
+      return unless will_save_change_to_attribute? :caste_abilities
+
+      self.favored_abilities = favored_abilities - caste_abilities
+    end
 
     def caste_abilities_are_valid
       caste_abilities.each do |a|
@@ -27,15 +39,10 @@ module AbilityExalt
     end
 
     def caste_and_favored_abilities_dont_overlap
-      unless (caste_abilities & favored_abilities).empty? # rubocop:disable Style/GuardClause
-        errors.add(:caste_abilities, 'cannot have the same ability as both caste and favored')
-        errors.add(:favored_abilities, 'cannot have the same ability as both caste and favored')
-      end
-    end
+      return if (caste_abilities & favored_abilities).empty?
 
-    def ensure_uniqueness_of_caste_and_favored_abilities
-      self.caste_abilities   = caste_abilities.uniq
-      self.favored_abilities = favored_abilities.uniq
+      errors.add(:caste_abilities, 'cannot have the same ability as both caste and favored')
+      errors.add(:favored_abilities, 'cannot have the same ability as both caste and favored')
     end
   end
 end

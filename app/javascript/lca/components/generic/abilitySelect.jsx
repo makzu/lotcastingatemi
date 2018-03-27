@@ -24,6 +24,7 @@ class AbilitySelect extends React.Component {
 
     this.checkChange = this.checkChange.bind(this)
   }
+
   checkChange(e) {
     if (e.target.value === '-')
       return

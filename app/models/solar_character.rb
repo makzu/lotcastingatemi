@@ -24,7 +24,8 @@ class SolarCharacter < Character
 
   before_validation :set_mote_pool_totals
   before_validation :set_defaults
-  before_validation :set_caste_ability
+  before_validation :set_caste_abilities_on_supernal_change
+  before_validation :set_caste_abilities_on_caste_change
 
   validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :caste_is_blank?
   validate :caste_abilities_are_valid,               unless: :caste_is_blank?
@@ -55,11 +56,25 @@ class SolarCharacter < Character
     self.excellencies_for = []
   end
 
-  def set_caste_ability
+  def set_caste_abilities_on_supernal_change
     return unless will_save_change_to_attribute?(:supernal_ability) &&
-                  caste_abilities.length < 5
+                  supernal_ability.present? &&
+                  !caste_abilities.include?(supernal_ability)
 
-    self.caste_abilities += [supernal_ability]
+    if caste_abilities.length < 5
+      self.caste_abilities += [supernal_ability]
+    else
+      self.caste_abilities[4] = supernal_ability
+    end
+
+    self.favored_abilities = favored_abilities - caste_abilities
+  end
+
+  def set_caste_abilities_on_caste_change
+    return unless will_save_change_to_attribute? :caste
+
+    self.supernal_ability = nil unless allowed_caste_abilities.include? supernal_ability
+    self.caste_abilities = caste_abilities.select { |a| allowed_caste_abilities.include? a }
   end
 
   # rubocop:disable Style/IfUnlessModifier
@@ -87,4 +102,8 @@ class SolarCharacter < Character
     end
   end
   # rubocop:enable Style/IfUnlessModifier
+
+  def allowed_caste_abilities
+    caste.blank? ? [] : CASTE_ABILITIES[caste.to_sym]
+  end
 end

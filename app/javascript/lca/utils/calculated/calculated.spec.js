@@ -1,6 +1,7 @@
 import * as calc from '.'
 
 const mockChar = {
+  type: 'Character',
   attr_dexterity: 3, attr_wits: 3, attr_manipulation: 3, attr_stamina: 3, attr_strength: 2,
   abil_dodge: 4,  abil_integrity: 4, abil_socialize: 4,
   abil_melee: 2,

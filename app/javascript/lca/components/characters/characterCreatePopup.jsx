@@ -74,7 +74,7 @@ class CharacterCreatePopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleAspectChange, handleSubmit } = this
     const { character } = this.state
 
-    return <span>
+    return <React.Fragment>
       <Button onClick={ handleOpen }>Create New</Button>
       <Dialog
         open={ this.state.open }
@@ -97,20 +97,25 @@ class CharacterCreatePopup extends React.Component {
               <ListSubheader disabled value="">Canon/Published Exalts</ListSubheader>
               <MenuItem value="Character">Mortal</MenuItem>
               <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
-              {/* Coming soon!
-              <MenuItem value="DragonbloodCharacter">Dragon-Blooded Exalt</MenuItem>
-              */}
+              <MenuItem value="DragonbloodCharacter" disabled>Dragon-Blooded Exalt</MenuItem>
 
               <ListSubheader disabled value="">Custom Exalts</ListSubheader>
 
-              <MenuItem value="CustomAbilityCharacter">Custom Ability-Based Exalt</MenuItem>
-              <MenuItem value="CustomAttributeCharacter">Custom Attribute-Based Exalt</MenuItem>
-              <MenuItem value="CustomEssenceCharacter">Custom Essence-Based Exalt</MenuItem>
+              <MenuItem value="CustomAbilityCharacter">Custom / Houserule Ability-Based Exalt</MenuItem>
+              <MenuItem value="CustomAttributeCharacter">Custom / Houserule Attribute-Based Exalt</MenuItem>
+              <MenuItem value="CustomEssenceCharacter">Custom / Houserule Essence-Based Exalt</MenuItem>
             </TextField>
           </div>
 
           { character.type == 'SolarCharacter' &&
             <div>
+              <Typography paragraph>
+                Selecting this option means the system will try to follow the
+                rules in the core book as closely as it can. If your group uses
+                house rules, especially ones that change available Caste or
+                Supernal abilities, choose Houserule Ability-based exalt
+                instead.
+              </Typography>
               <TextField select name="caste" value={ character.caste }
                 label="Caste" margin="dense" fullWidth
                 onChange={ handleChange }
@@ -130,7 +135,7 @@ class CharacterCreatePopup extends React.Component {
                 onChange={ handleChange }
               >
                 <MenuItem value="air">Air</MenuItem>
-                <MenuItem value="Earth">Earth</MenuItem>
+                <MenuItem value="earth">Earth</MenuItem>
                 <MenuItem value="fire">Fire</MenuItem>
                 <MenuItem value="water">Water</MenuItem>
                 <MenuItem value="wood">Wood</MenuItem>
@@ -163,7 +168,7 @@ class CharacterCreatePopup extends React.Component {
           <Button onClick={ handleSubmit } variant="raised" color="primary">Create</Button>
         </DialogActions>
       </Dialog>
-    </span>
+    </React.Fragment>
   }
 }
 CharacterCreatePopup.propTypes = {

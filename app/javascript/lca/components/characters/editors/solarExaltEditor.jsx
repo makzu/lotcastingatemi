@@ -12,13 +12,11 @@ import { SOLAR_CASTE_ABILITIES } from '../../../utils/constants.js'
 
 function SolarExaltEditor(props) {
   const { character, onRatingChange } = props
-  const casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
-  const noOptionItem = character.caste == undefined ? <MenuItem disabled>Select a Caste</MenuItem> : undefined
+  let casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
+  if (character.caste === 'dawn')
+    casteAbilities = casteAbilities.slice(0, 4).concat([{ abil: 'abil_martial_arts', pretty: 'Martial Arts' }]).concat(casteAbilities.slice(4))
 
-  // Mortals don't have 'exalt traits'
-  if (character.type == 'Character') {
-    return null
-  }
+  const noOptionItem = character.caste == undefined ? <MenuItem disabled>Select a Caste</MenuItem> : undefined
 
   return <BlockPaper>
     <TextField select name="caste" value={ character.caste || '' }

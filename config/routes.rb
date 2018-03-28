@@ -17,7 +17,6 @@ Rails.application.routes.draw do
           post 'add_character/:character_id', action: :add_character
           post 'add_qc/:qc_id', action: :add_qc
           post 'add_battlegroup/:battlegroup_id', action: :add_battlegroup
-          post 'remove_character/:character_id', action: :remove_character
         end
         post 'join', on: :collection
       end

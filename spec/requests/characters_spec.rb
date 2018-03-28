@@ -13,8 +13,8 @@ RSpec.describe 'Characters', type: :request do
 
   let(:character) { create(:character) }
 
-  describe 'updating a character' do
-    context 'with valid changes' do
+  context 'updating a character' do
+    describe 'with valid changes' do
       it 'updates attributes' do
         patch "/api/v1/characters/#{character.id}",
               headers: authenticated_header(character.player),
@@ -27,7 +27,7 @@ RSpec.describe 'Characters', type: :request do
       end
     end
 
-    context 'with invalid changes' do
+    describe 'with invalid changes' do
       it 'refuses negative essence' do
         patch "/api/v1/characters/#{character.id}",
               headers: authenticated_header(character.player),

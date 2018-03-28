@@ -74,15 +74,6 @@ module Api
         render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
-      def remove_character
-        @character = Character.find(params[:character_id])
-        authorize @character, :update?
-        check_player @character.player
-
-        @chronicle.characters.delete(@character)
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
-      end
-
       def add_qc
         @qc = Qc.find(params[:qc_id])
         authorize @qc, :update?
@@ -92,11 +83,6 @@ module Api
         render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
-      def remove_qc
-        @qc = Qc.find(params[:qc_id])
-        authorize @qc
-      end
-
       def add_battlegroup
         @battlegroup = Battlegroup.find(params[:battlegroup_id])
         authorize @battlegroup, :update?
@@ -104,11 +90,6 @@ module Api
 
         @chronicle.battlegroups << @battlegroup
         render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
-      end
-
-      def remove_battlegroup
-        @battlegroup = Battlegroup.find(params[:battlegroup_id])
-        authorize @battlegroup
       end
 
       def destroy

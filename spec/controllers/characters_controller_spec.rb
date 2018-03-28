@@ -24,23 +24,4 @@ RSpec.describe Api::V1::CharactersController, type: :controller do
       end
     end
   end
-
-  describe 'PATCH #update' do
-    context 'With valid attributes' do
-      it 'Updates character attributes' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryBot.create(:chronicle)
-        @updated_character_params = FactoryBot.attributes_for(:character, essence: 5, attr_wits: 5)
-
-        expect(@character.essence).not_to eq(5)
-        expect(@character.attr_wits).not_to eq(5)
-
-        patch :update, params: { id: @character.id, character: @updated_character_params, format: :json }
-        @character.reload
-
-        expect(@character.essence).to eq(5)
-        expect(@character.attr_wits).to eq(5)
-      end
-    end
-  end
 end

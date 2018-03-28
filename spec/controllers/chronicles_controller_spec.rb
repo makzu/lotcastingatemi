@@ -57,22 +57,4 @@ RSpec.describe Api::V1::ChroniclesController, type: :controller do
 
     it_behaves_like 'respond_to_unauthenticated', 'destroy'
   end
-
-  describe 'PATCH #update' do
-    context 'With valid attributes' do
-      it 'Updates character attributes' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        @updated_chronicle_params = FactoryBot.attributes_for(:chronicle, name: 'asdf asdf')
-
-        expect(@chronicle.name).not_to eq('asdf asdf')
-
-        patch :update, params: { id: @chronicle.id, chronicle: @updated_chronicle_params, format: :json }
-        @chronicle.reload
-
-        expect(@chronicle.name).to eq('asdf asdf')
-      end
-    end
-
-    it_behaves_like 'respond_to_unauthenticated', 'update'
-  end
 end

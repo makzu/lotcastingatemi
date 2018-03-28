@@ -16,9 +16,6 @@ import OctoCat from '../../icons/OctoCat.jsx'
 import { closeDrawer, switchTheme } from '../../ducks/actions.js'
 
 const styles = theme => ({
-  loggedInHeader: { ...theme.typography.subheading,
-    padding: `${theme.spacing.unit * 2}px`,
-  },
   themeLabel: {
     textTransform: 'capitalize',
   },
@@ -37,18 +34,13 @@ export class NavPanel extends React.Component {
 
   render() {
     const {
-      authenticated, displayName, theme, switchTheme, classes,
+      authenticated, theme, switchTheme, classes,
     } = this.props
     const { closeCheck } = this
 
     return <div>
       <List component="nav">
-        { authenticated &&
-          <div className={ classes.loggedInHeader }>
-            <DisplayNamePopup>Logged in as { displayName }</DisplayNamePopup>
-          </div>
-        }
-        <Divider />
+        { authenticated && <DisplayNamePopup /> }
 
         <ListItem button component={ NavLink } to="/" onClick={ closeCheck }>
           <ListItemText primary="Home" />
@@ -78,7 +70,7 @@ export class NavPanel extends React.Component {
         </ListItem>
 
         <ListItem button onClick={ () => switchTheme(theme == 'light' ? 'dark' : 'light') }>
-          <ListItemText primary={ `Current Theme: ${ theme }` }
+          <ListItemText primary={ `Current Theme: ${ theme }` } className={ classes.themeLabel }
           />
           <ListItemSecondaryAction>
             <Switch checked={ theme == 'dark' } onChange={ () => switchTheme(theme == 'light' ? 'dark' : 'light') } />
@@ -114,7 +106,6 @@ export class NavPanel extends React.Component {
 }
 NavPanel.propTypes = {
   authenticated: PropTypes.bool,
-  displayName: PropTypes.string,
   history: PropTypes.object,
   theme: PropTypes.string,
   switchTheme: PropTypes.func,
@@ -124,13 +115,11 @@ NavPanel.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { authenticated, id } = state.session
-  const displayName = state.entities.players[id].display_name || ''
+  const { authenticated } = state.session
   const { theme, drawerOpen } = state.app
 
   return {
     authenticated,
-    displayName,
     theme,
     drawerOpen,
   }

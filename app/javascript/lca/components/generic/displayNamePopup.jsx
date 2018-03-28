@@ -8,6 +8,7 @@ import Dialog, {
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog'
+import List, { ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
 import { updatePlayer } from '../../ducks/actions.js'
@@ -52,8 +53,12 @@ class DisplayNamePopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { player } = this.state
 
-    return <div>
-      <div onClick={ handleOpen }>{ this.props.children }</div>
+    return <React.Fragment>
+      <ListItem button onClick={ handleOpen }>
+        <ListItemText primary={ `Logged in as ${this.props.displayName}`}
+          secondary="(click to change name)"
+        />
+      </ListItem>
 
       <Dialog
         open={ this.state.open }
@@ -62,16 +67,16 @@ class DisplayNamePopup extends React.Component {
         <DialogTitle>Change Display Name</DialogTitle>
         <DialogContent>
           <TextField name="display_name" value={ player.display_name }
-            label="Name" margin="normal"
+            label="Name" margin="normal" style={{ minWidth: '30em' }}
             onChange={ handleChange }
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } color="primary">Update</Button>
+          <Button onClick={ handleSubmit } variant="raised" color="primary">Update</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </React.Fragment>
   }
 }
 DisplayNamePopup.propTypes = {

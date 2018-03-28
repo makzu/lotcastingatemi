@@ -11,7 +11,7 @@ function updateEvent(charType) {
     return updateCharacter
 }
 
-export function spendMotes(id, motes, pool = 'personal', charType = 'character', committments) {
+export function spendMotes(id, motes, pool = 'personal', charType = 'character', committments, mute = false) {
   let update = updateEvent(charType)
 
   return (dispatch, getState) => {
@@ -25,7 +25,7 @@ export function spendMotes(id, motes, pool = 'personal', charType = 'character',
       dispatch(update(id, 'motes_committed', committments))
 
     // Raise anima banner level if appropriate
-    if (pool == 'peripheral' && motes > 5) {
+    if (pool == 'peripheral' && motes > 5 && !mute) {
       let anima = getState().entities[charType + 's'][id].anima_level
       if (anima !== 3) { // Do not change Anima level if it's already at Bonfire
         const newLevel = Math.min(anima + Math.floor(motes / 5), 3)

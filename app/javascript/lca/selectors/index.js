@@ -14,6 +14,9 @@ export const getCurrentPlayer = (state) => state.entities.players[state.session.
 export const canIEditCharacter = createSelector(
   [getCurrentPlayer, getSpecificCharacter, getState],
   (player, character, state) => {
+    if (character === undefined)
+      return false
+
     if (player.id === character.player_id)
       return true
 
@@ -25,6 +28,15 @@ export const canIEditCharacter = createSelector(
       return true
 
     return false
+  }
+)
+export const canIDeleteCharacter = createSelector(
+  [getCurrentPlayer, getSpecificCharacter],
+  (player, character) => {
+    if (player.id === character.player_id)
+      return true
+    else
+      return false
   }
 )
 

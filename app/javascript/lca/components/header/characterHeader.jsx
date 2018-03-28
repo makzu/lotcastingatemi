@@ -12,6 +12,7 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
+import { getSpecificCharacter, canIEditCharacter } from '../../selectors/'
 
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   tabs: {
@@ -113,16 +114,10 @@ CharacterHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.characterId
-  const character = state.entities.characters[id]
+  const character = getSpecificCharacter(state, id)
   const path = ownProps.location.pathname
 
-  let canIEdit = false
-  if (character != undefined) {
-    canIEdit = state.session.id === character.player_id || state.session.id === state.entities.chronicles[character.chronicle_id].st_id
-
-    if (character.chronicle && state.entities.chronicles[character.chronicle].st == state.session.id)
-      canIEdit = true
-  }
+  let canIEdit = canIEditCharacter(state, id)
 
   return {
     id,
@@ -131,6 +126,5 @@ function mapStateToProps(state, ownProps) {
     canIEdit,
   }
 }
-
 
 export default withStyles(styles)(connect(mapStateToProps)(CharacterHeader))

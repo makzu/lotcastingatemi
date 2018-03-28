@@ -2,23 +2,22 @@ import { attr, abil, specialtiesFor } from '.'
 import { ABILITIES, ATTRIBUTES } from '../constants.js'
 
 export const canUseExcellency = (character, attribute, ability, charmAbils) => {
-  let excellencies = character.excellencies_for
-
-  switch(character.type) {
-  case 'Character':
+  if (character.type === 'Character')
     return false
-  case 'SolarCharacter':
-    excellencies =
+
+  let excellencies = character.excellencies_for || []
+  if (excellencies.includes('*'))
+    return true
+
+  if (character.type === 'SolarCharacter' || excellencies.includes('solar')) {
+    excellencies +=
       character.caste_abilities.filter((a) => abil(character, a) > 0) +
       character.favored_abilities.filter((a) => abil(character, a) > 0)
     if (excellencies.includes('brawl'))
       excellencies += ['martial_arts']
     excellencies += charmAbils
-    break
   }
 
-  if (excellencies.includes('*'))
-    return true
   if (excellencies.includes(attribute) || excellencies.includes(ability))
     return true
   if (ability.startsWith('martial arts') && excellencies.includes('martial_arts'))

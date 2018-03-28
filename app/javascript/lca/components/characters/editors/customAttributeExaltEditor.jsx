@@ -49,7 +49,7 @@ function CustomAttributeExaltEditor(props) {
     />
     <br />
 
-    <AbilitySelect name="favored_attributes"
+    <AbilitySelect attributesOnly name="favored_attributes"
       label="Favored Attributes"
       value={ character.favored_attributes }
       attributes={ nonCasteAttributes(character) }

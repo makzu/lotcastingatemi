@@ -26,6 +26,9 @@ export const CHN_REMOVE_PLAYER_FAILURE = 'lca/chronicle/REMOVE_PLAYER_FAILURE'
 export const CHN_ADD_THING =           'lca/chronicle/ADD_THING'
 export const CHN_ADD_THING_SUCCESS =   'lca/chronicle/ADD_THING_SUCCESS'
 export const CHN_ADD_THING_FAILURE =   'lca/chronicle/ADD_THING_FAILURE'
+export const CHN_REMOVE_THING =           'lca/chronicle/REMOVE_THING'
+export const CHN_REMOVE_THING_SUCCESS =   'lca/chronicle/REMOVE_THING_SUCCESS'
+export const CHN_REMOVE_THING_FAILURE =   'lca/chronicle/REMOVE_THING_FAILURE'
 
 export default function reducer(state, action) {
   const _id = action.payload != undefined ? action.payload.id : null
@@ -224,6 +227,24 @@ export function addThingToChronicle(id, thingId, thingType) {
         }
       },
       CHN_ADD_THING_FAILURE
+    ]
+  })
+}
+
+export function removeThingFromChronicle(chronId, id, type) {
+  return callApi({
+    endpoint: `/api/v1/chronicles/${chronId}/remove_${type}/${id}`,
+    method: 'POST',
+    types: [
+      CHN_REMOVE_THING,
+      {
+        type: CHN_REMOVE_THING_SUCCESS,
+        meta: { id: chronId, thingId: id, type: type },
+        payload: (action, state, res) => {
+          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+        }
+      },
+      CHN_REMOVE_THING_FAILURE
     ]
   })
 }

@@ -16,13 +16,13 @@ function PinButton(props) {
 
   let action
   switch(props.characterType) {
-  case 'qcs':
+  case 'qc':
     action = props.updateQc
     break
-  case 'battlegroups':
+  case 'battlegroup':
     action = props.updateBattlegroup
     break
-  case 'characters':
+  case 'character':
   default:
     action = props.updateCharacter
   }
@@ -45,7 +45,7 @@ PinButton.propTypes = {
 }
 function mapStateToProps(state, ownProps) {
   return {
-    isPinned: state.entities[ownProps.characterType][ownProps.id].pinned,
+    isPinned: state.entities[ownProps.characterType + 's'][ownProps.id].pinned,
     canEdit: canIEdit(state, ownProps.id, ownProps.characterType),
   }
 }

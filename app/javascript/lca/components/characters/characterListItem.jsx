@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import ModeEdit from 'material-ui-icons/ModeEdit'
 
-import ContentPageCardMenu from '../generic/CharacterCardMenu'
+import CharacterCardMenu from '../generic/CharacterCardMenu'
 import { prettyFullExaltType } from '../../utils/calculated'
 import { fullChar } from '../../utils/propTypes'
 
@@ -44,7 +44,7 @@ function CharacterListItem({ character, classes }) {
         <Launch className={ classes.icon } />
       </Typography>
 
-      <ContentPageCardMenu characterType="characters" id={ character.id } />
+      <CharacterCardMenu characterType="character" id={ character.id } />
     </div>
 
     <Typography paragraph>

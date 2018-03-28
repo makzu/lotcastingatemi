@@ -8,7 +8,7 @@ import { MenuItem } from 'material-ui/Menu'
 function CardMenuLinks(props) {
 
   return <React.Fragment>
-    <MenuItem button component={ Link } to={ '/'+props.characterType+'/'+props.id }>
+    <MenuItem button component={ Link } to={ '/'+props.characterType+'s/'+props.id }>
       <ListItemText primary="Full Sheet" />
     </MenuItem>
   </React.Fragment>

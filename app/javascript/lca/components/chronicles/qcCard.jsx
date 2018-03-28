@@ -11,7 +11,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
-import ContentPageCardMenu from '../generic/CharacterCardMenu'
+import CharacterCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
@@ -83,7 +83,7 @@ function QcCard({ qc, penalties, pools, canIEdit, classes }) {
       </div>
 
       { canIEdit &&
-        <ContentPageCardMenu characterType="qcs" id={ qc.id } />
+        <CharacterCardMenu characterType="qc" id={ qc.id } />
       }
     </div>
 

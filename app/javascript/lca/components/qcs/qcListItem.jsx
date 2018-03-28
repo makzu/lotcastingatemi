@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import ModeEdit from 'material-ui-icons/ModeEdit'
 
-import ContentPageCardMenu from '../generic/CharacterCardMenu'
+import CharacterCardMenu from '../generic/CharacterCardMenu'
 import { fullQc } from '../../utils/propTypes'
 
 const styles = theme => ({
@@ -43,7 +43,7 @@ function QcListItem({ qc, classes }) {
         <Launch className={ classes.icon } />
       </Typography>
 
-      <ContentPageCardMenu characterType="qcs" id={ qc.id } />
+      <CharacterCardMenu characterType="qc" id={ qc.id } />
     </div>
 
     <div className={ classes.controlGroup }>

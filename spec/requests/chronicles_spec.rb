@@ -48,9 +48,9 @@ RSpec.describe 'Chronciles', type: :request do
         let(:character) { create(char, player: not_the_st) }
 
         it 'works' do
-          patch "/api/v1/#{char}s/#{character.id}",
-                headers: authenticated_header(not_the_st),
-                params: { char.to_s => { chronicle_id: nil } }
+          post "/api/v1/chronicles/#{chronicle.id}/remove_#{char}/#{character.id}",
+               headers: authenticated_header(not_the_st),
+               params: { char.to_s => { chronicle_id: nil } }
 
           expect(response.status).to eq 200
           chronicle.reload

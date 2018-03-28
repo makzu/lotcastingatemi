@@ -8,20 +8,21 @@ import Visibility from 'material-ui-icons/Visibility'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import { updateCharacter, updateQc, updateBattlegroup } from '../../../ducks/actions.js'
+import { canIEdit } from '../../../selectors'
 
 function CardMenuHide(props) {
-  if (!props.show)
+  if (!props.canIEdit)
     return <div />
 
   let action
   switch(props.characterType) {
-  case 'qcs':
+  case 'qc':
     action = props.updateQc
     break
-  case 'battlegroups':
+  case 'battlegroup':
     action = props.updateBattlegroup
     break
-  case 'characters':
+  case 'character':
   default:
     action = props.updateCharacter
   }
@@ -37,15 +38,15 @@ CardMenuHide.propTypes = {
   id: PropTypes.number.isRequired,
   characterType: PropTypes.string.isRequired,
   isHidden: PropTypes.bool,
-  show: PropTypes.bool,
+  canIEdit: PropTypes.bool,
   updateCharacter: PropTypes.func,
   updateQc: PropTypes.func,
   updateBattlegroup: PropTypes.func,
 }
 function mapStateToProps(state, ownProps) {
   return {
-    isHidden: state.entities[ownProps.characterType][ownProps.id].hidden,
-    show: state.entities[ownProps.characterType][ownProps.id].chronicle_id != undefined,
+    isHidden: state.entities[ownProps.characterType + 's'][ownProps.id].hidden,
+    canIEdit: canIEdit(state, ownProps.id, ownProps.characterType),
   }
 }
 function mapDispatchToProps(dispatch) {

@@ -6,7 +6,7 @@ export {
   updateSpell, createSpell, destroySpell,
   updateChronicle, createChronicle,
   joinChronicle, regenChronicleInviteCode, removePlayerFromChronicle,
-  addThingToChronicle,
+  addThingToChronicle, removeThingFromChronicle,
   updateQc, createQc, destroyQc,
   updateQcAttack, createQcAttack, destroyQcAttack,
   updateQcMerit, createQcMerit, destroyQcMerit,

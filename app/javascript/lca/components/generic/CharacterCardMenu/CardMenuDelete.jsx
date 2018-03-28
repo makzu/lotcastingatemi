@@ -85,7 +85,7 @@ CardMenuDelete.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     canDelete: canIDelete(state, ownProps.id, ownProps.characterType),
-    name: state.entities[ownProps.characterType][ownProps.id].name,
+    name: state.entities[ownProps.characterType + 's'][ownProps.id].name,
   }
 }
 function mapDispatchToProps(dispatch) {

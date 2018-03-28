@@ -14,11 +14,11 @@ export const getCurrentPlayer = (state) => state.entities.players[state.session.
 
 export const canIEdit = (state, id, characterType) => {
   switch (characterType) {
-  case 'characters':
+  case 'character':
     return canIEditCharacter(state, id)
-  case 'qcs':
+  case 'qc':
     return canIEditQc(state, id)
-  case 'battlegroups':
+  case 'battlegroup':
     return canIEditBattlegroup(state, id)
   default:
     return false
@@ -27,11 +27,11 @@ export const canIEdit = (state, id, characterType) => {
 
 export const canIDelete = (state, id, characterType) => {
   switch (characterType) {
-  case 'characters':
+  case 'character':
     return canIDeleteCharacter(state, id)
-  case 'qcs':
+  case 'qc':
     return canIDeleteQc(state, id)
-  case 'battlegroups':
+  case 'battlegroup':
     return canIDeleteBattlegroup(state, id)
   default:
     return false

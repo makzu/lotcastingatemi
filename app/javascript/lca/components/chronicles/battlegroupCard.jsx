@@ -11,7 +11,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
-import ContentPageCardMenu from '../generic/CharacterCardMenu'
+import CharacterCardMenu from '../generic/CharacterCardMenu'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { canIEditBattlegroup } from '../../selectors'
 import { prettyDrillRating, totalMagnitude } from '../../utils/calculated'
@@ -82,7 +82,7 @@ function BattlegroupCard({ battlegroup, canIEdit, classes }) {
       </div>
 
       { canIEdit &&
-        <ContentPageCardMenu characterType="battlegroups" id={ battlegroup.id } />
+        <CharacterCardMenu characterType="battlegroup" id={ battlegroup.id } />
       }
     </div>
 

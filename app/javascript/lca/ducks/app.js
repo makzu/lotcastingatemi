@@ -18,6 +18,8 @@ export default function AppReducer(state = defaultState, action) {
   case 'FETCH':
   case 'UPDATE':
   case 'DESTROY':
+  case 'ADD_THING':
+  case 'REMOVE_THING':
     return { ...state,
       loading: true,
     }
@@ -26,10 +28,14 @@ export default function AppReducer(state = defaultState, action) {
   case 'FETCH_SUCCESS':
   case 'UPDATE_SUCCESS':
   case 'DESTROY_SUCCESS':
+  case 'ADD_THING_SUCCESS':
+  case 'REMOVE_THING_SUCCESS':
   case 'CREATE_FAILURE':
   case 'FETCH_FAILURE':
   case 'UPDATE_FAILURE':
   case 'DESTROY_FAILURE':
+  case 'ADD_THING_FAILURE':
+  case 'REMOVE_THING_FAILURE':
     return { ...state,
       loading: false,
     }

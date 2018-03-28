@@ -12,7 +12,7 @@ import Whatshot from 'material-ui-icons/Whatshot'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
-import ContentPageCardMenu from '../generic/CharacterCardMenu'
+import CharacterCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
@@ -111,7 +111,7 @@ function CharacterCard({ character, canEdit, penalties, pools, classes }) {
       </div>
 
       { canEdit &&
-        <ContentPageCardMenu characterType="characters" id={ character.id } />
+        <CharacterCardMenu characterType="character" id={ character.id } />
       }
     </div>
 

@@ -2,6 +2,7 @@
 ###### *Mar 27, 2018*
 - Dawn Caste Solars can now select Martial Arts as their Supernal ability
 - Custom Ability Exalts can now have a Supernal ability
+- Characters, QCs, and Battlegroups can now be removed form Chronicles
 
 ## v40
 ###### *Mar 26, 2018*

@@ -67,28 +67,55 @@ module Api
 
       def add_character
         @character = Character.find(params[:character_id])
-        authorize @character, :update?
-        check_player @character.player
+        check_auth @character
 
         @chronicle.characters << @character
+        broadcast_update(@character)
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+      end
+
+      def remove_character
+        @character = Character.find(params[:character_id])
+        check_auth @character
+
+        @chronicle.characters.delete(@character)
+        broadcast_update(@character)
         render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
       def add_qc
         @qc = Qc.find(params[:qc_id])
-        authorize @qc, :update?
-        check_player @qc.player
+        check_auth @qc
 
         @chronicle.qcs << @qc
+        broadcast_update(@qc)
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+      end
+
+      def remove_qc
+        @qc = Qc.find(params[:qc_id])
+        check_auth @qc
+
+        @chronicle.qcs.delete(@qc)
+        broadcast_update(@qc)
         render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
       def add_battlegroup
         @battlegroup = Battlegroup.find(params[:battlegroup_id])
-        authorize @battlegroup, :update?
-        check_player @battlegroup.player
+        check_auth @battlegroup
 
         @chronicle.battlegroups << @battlegroup
+        broadcast_update(@battlegroup)
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+      end
+
+      def remove_battlegroup
+        @battlegroup = Battlegroup.find(params[:battlegroup_id])
+        check_auth @battlegroup
+
+        @chronicle.battlegroups.delete(@battlegroup)
+        broadcast_update(@battlegroup)
         render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
@@ -116,14 +143,24 @@ module Api
         @chronicle = Chronicle.find_by!(invite_code: params[:invite_code])
       end
 
-      def check_player(player)
-        raise ActiveRecord::RecordNotFound unless # TODO: use a better error
-          player.chronicles.include?(@chronicle) ||
-          player.own_chronicles.include?(@chronicle)
+      def check_auth(char)
+        authorize char, :update?
+        raise ActiveRecord::NotAuthorized unless # TODO: use a better error
+          @chronicle.st == char.player ||
+          @chronicle.players.include?(char.player)
       end
 
       def chronicle_params
         params.require(:chronicle).permit!
+      end
+
+      def broadcast_update(thing)
+        ChronicleCharactersBroadcastJob.perform_later(
+          [@chronicle.st_id] + @chronicle.player_ids,
+          @chronicle,
+          thing.entity_type,
+          thing
+        )
       end
     end
   end

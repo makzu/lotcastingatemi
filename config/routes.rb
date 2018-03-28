@@ -14,9 +14,12 @@ Rails.application.routes.draw do
         member do
           post 'regen_invite_code'
           post 'remove_player/:player_id', action: :remove_player
-          post 'add_character/:character_id', action: :add_character
-          post 'add_qc/:qc_id', action: :add_qc
+          post 'add_character/:character_id',     action: :add_character
+          post 'add_qc/:qc_id',                   action: :add_qc
           post 'add_battlegroup/:battlegroup_id', action: :add_battlegroup
+          post 'remove_character/:character_id',     action: :remove_character
+          post 'remove_qc/:qc_id',                   action: :remove_qc
+          post 'remove_battlegroup/:battlegroup_id', action: :remove_battlegroup
         end
         post 'join', on: :collection
       end

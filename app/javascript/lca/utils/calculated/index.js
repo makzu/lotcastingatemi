@@ -143,9 +143,9 @@ export function hardness(character) {
     }
   }
   // Twilight caste anima power grants 5 hardness at Bonfire/Iconic
-  if (
-    character.type === 'SolarCharacter' &&
-    character.caste === 'twilight' &&
+  if ( character.type !== 'Character' &&
+    character.exalt_type.toLowerCase() === 'solar' &&
+    character.caste.toLowerCase() === 'twilight' &&
     character.anima_level === 3
   )
     hardness = Math.max(hardness, 5)

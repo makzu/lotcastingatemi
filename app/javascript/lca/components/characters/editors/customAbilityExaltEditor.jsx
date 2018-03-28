@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { FormControlLabel } from 'material-ui/Form'
+import { MenuItem } from 'material-ui/Menu'
 import Switch from 'material-ui/Switch'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
@@ -55,6 +56,12 @@ function CustomAbilityExaltEditor(props) {
       abilities={ nonCasteAbilities(character) }
       onChange={ onRatingChange }
       multiple fullWidth margin="dense"
+    />
+    <AbilitySelect name="supernal_ability"
+      label={ character.supernal_ability ? 'Supernal Ability' : 'No Supernal'}
+      prependOptions={ <MenuItem value="">No Supernal</MenuItem> }
+      value={ character.supernal_ability || '' }
+      onChange={ onRatingChange } margin="dense"
     />
   </BlockPaper>
 }

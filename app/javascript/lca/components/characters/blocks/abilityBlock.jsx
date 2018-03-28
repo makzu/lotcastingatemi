@@ -76,14 +76,15 @@ const CraftAbilityLine = withStyles(styles)(_CraftAbilityLine)
 
 function _MartialArtsAbilityLine(props) {
   const { classes, character } = props
-  const supernal = isSupernalAbility(character, 'brawl')
+  const supernal = isSupernalAbility(character, 'martial_arts')
   const caste = isCasteAbility(character, 'brawl')
   const favored = isFavoredAbility(character, 'brawl')
+  const style = props.style ? ' (' + props.style + ')' : ''
 
   return <div>
     <RatingLine rating={ props.rating }>
       <span className={ classes.abilityName }>
-        Martial Arts ({ props.style })
+        Martial Arts{ style }
       </span>
       <span className={ classes.abilityFavored }>
         { supernal && ' (s)' }
@@ -117,7 +118,7 @@ export default function AbilityBlock(props) {
 
   let ma = ''
   if (character.abil_martial_arts.length == 0) {
-    ma = <AbilityLine ability="Martial Arts" rating={ 0 } character={ character } />
+    ma = <MartialArtsAbilityLine rating={ 0 } character={ character } />
   } else {
     ma = character.abil_martial_arts.map((ma) =>
       <MartialArtsAbilityLine key={ma.style} style={ ma.style } rating={ma.rating} character={ character } />

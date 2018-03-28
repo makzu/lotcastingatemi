@@ -36,5 +36,25 @@ RSpec.describe SolarCharacter, type: :model do
       character.update(supernal_ability: 'war')
       expect(character.caste_abilities).to include 'war'
     end
+
+    it 'changes caste and favored abilities appropriately on caste change' do
+      character.update(caste: 'eclipse', supernal_ability: 'occult')
+      character.update(caste: 'twilight')
+      expect(character.supernal_ability).to eq 'occult'
+      expect(character.caste_abilities).to include 'occult'
+
+      character.update(caste: 'dawn')
+      expect(character.supernal_ability).to eq nil
+      expect(character.caste_abilities).not_to include 'occult'
+    end
+  end
+
+  describe 'exalt type' do
+    it 'does not change while the class type stays the same' do
+      character.update(aspect: true, exalt_type: 'abyssal', excellency: 'essence')
+      expect(character.aspect).to eq false
+      expect(character.exalt_type).to eq 'Solar'
+      expect(character.excellency).to be_blank
+    end
   end
 end

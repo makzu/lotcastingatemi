@@ -59,14 +59,8 @@ class SolarCharacter < Character
   def set_caste_abilities_on_supernal_change
     return unless will_save_change_to_attribute?(:supernal_ability) &&
                   supernal_ability.present? &&
-                  !caste_abilities.include?(supernal_ability)
-
-    if caste_abilities.length < 5
-      self.caste_abilities += [supernal_ability]
-    else
-      self.caste_abilities[4] = supernal_ability
-    end
-
+                  !caste_abilities.include?(supernal_or_brawl)
+    add_supernal_to_caste
     self.favored_abilities = favored_abilities - caste_abilities
   end
 
@@ -87,10 +81,13 @@ class SolarCharacter < Character
   end
 
   def supernal_ability_is_caste
-    return if supernal_ability.blank?
-    return if caste_abilities.include? supernal_ability
+    return if supernal_ability.blank? || caste_abilities.include?(supernal_ability)
 
-    errors.add(:supernal_ability, 'Must be a caste ability')
+    if supernal_ability == 'martial_arts'
+      errors.add(:supernal_ability, 'Brawl must be a caste ability for supernal martial artists') unless caste_abilities.include?('brawl')
+    else
+      errors.add(:supernal_ability, 'Must be a caste ability')
+    end
   end
 
   def five_caste_and_five_favored_abilities
@@ -105,5 +102,17 @@ class SolarCharacter < Character
 
   def allowed_caste_abilities
     caste.blank? ? [] : CASTE_ABILITIES[caste.to_sym]
+  end
+
+  def add_supernal_to_caste
+    if caste_abilities.length < 5
+      self.caste_abilities += [supernal_or_brawl]
+    else
+      self.caste_abilities[4] = supernal_or_brawl
+    end
+  end
+
+  def supernal_or_brawl
+    supernal_ability == 'martial_arts' ? 'brawl' : supernal_ability
   end
 end

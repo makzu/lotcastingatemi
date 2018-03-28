@@ -7,7 +7,7 @@ import { MenuItem } from 'material-ui/Menu'
 import Visibility from 'material-ui-icons/Visibility'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
-import { updateCharacter, updateQc, updateBattlegroup } from '../../ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from '../../../ducks/actions.js'
 
 function CardMenuHide(props) {
   if (!props.show)

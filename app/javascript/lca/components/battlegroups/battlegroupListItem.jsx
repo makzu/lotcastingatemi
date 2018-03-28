@@ -10,7 +10,7 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import ModeEdit from 'material-ui-icons/ModeEdit'
 
-import ContentPageCardMenu from '../generic/ContentPageCardMenu.jsx'
+import ContentPageCardMenu from '../generic/CharacterCardMenu'
 import { prettyDrillRating } from '../../utils/calculated'
 
 const styles = theme => ({

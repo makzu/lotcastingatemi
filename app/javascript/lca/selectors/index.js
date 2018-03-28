@@ -4,58 +4,39 @@ export * from './entities.js'
 export * from './character.js'
 export * from './weapon.js'
 export * from './qc.js'
+export * from './battlegroup.js'
 
-import { getSpecificCharacter } from './character.js'
-import { getSpecificQc } from './qc.js'
+import { canIEditCharacter, canIDeleteCharacter } from './character.js'
+import { canIEditQc, canIDeleteQc } from './qc.js'
+import { canIEditBattlegroup, canIDeleteBattlegroup } from './battlegroup.js'
 
-const getState = (state) => state
 export const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
-export const canIEditCharacter = createSelector(
-  [getCurrentPlayer, getSpecificCharacter, getState],
-  (player, character, state) => {
-    if (character === undefined)
-      return false
-
-    if (player.id === character.player_id)
-      return true
-
-    if (
-      character.chronicle_id &&
-      state.entities.chronicles[character.chronicle_id] &&
-      state.entities.chronicles[character.chronicle_id].st_id === player.id
-    )
-      return true
-
+export const canIEdit = (state, id, characterType) => {
+  switch (characterType) {
+  case 'characters':
+    return canIEditCharacter(state, id)
+  case 'qcs':
+    return canIEditQc(state, id)
+  case 'battlegroups':
+    return canIEditBattlegroup(state, id)
+  default:
     return false
   }
-)
-export const canIDeleteCharacter = createSelector(
-  [getCurrentPlayer, getSpecificCharacter],
-  (player, character) => {
-    if (player.id === character.player_id)
-      return true
-    else
-      return false
-  }
-)
+}
 
-export const canIEditQc = createSelector(
-  [getCurrentPlayer, getSpecificQc, getState],
-  (player, character, state) => {
-    if (player.id === character.player_id)
-      return true
-
-    if (
-      character.chronicle_id &&
-      state.entities.chronicles[character.chronicle_id] &&
-      state.entities.chronicles[character.chronicle_id].st_id === player.id
-    )
-      return true
-
+export const canIDelete = (state, id, characterType) => {
+  switch (characterType) {
+  case 'characters':
+    return canIDeleteCharacter(state, id)
+  case 'qcs':
+    return canIDeleteQc(state, id)
+  case 'battlegroups':
+    return canIDeleteBattlegroup(state, id)
+  default:
     return false
   }
-)
+}
 
 const getChronicles = (state) => state.entities.chronicles
 export const getMyOwnChronicles = createSelector(

@@ -11,11 +11,12 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
+import ContentPageCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
+import { canIEditQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
 import { qcPool } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
@@ -24,6 +25,12 @@ const styles = theme => ({
     paddingTop: 16,
     paddingBottom: 16,
   }),
+  nameRow: {
+    display: 'flex',
+  },
+  nameWrap: {
+    flex: 1,
+  },
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
@@ -53,24 +60,32 @@ const styles = theme => ({
   },
 })
 
-function QcCard({ qc, penalties, pools, classes }) {
+function QcCard({ qc, penalties, pools, canIEdit, classes }) {
   return <Paper className={ classes.root }>
 
-    <Typography variant="title" className={ classes.qcName }
-      component={ Link } to={ `/qcs/${qc.id}` }
-    >
-      { qc.name }
+    <div className={ classes.nameRow }>
+      <div className={ classes.nameWrap }>
+        <Typography variant="title" className={ classes.qcName }
+          component={ Link } to={ `/qcs/${qc.id}` }
+        >
+          { qc.name }
 
-      <Launch className={ classes.icon } />
-      { qc.hidden &&
-        <div className={ classes.hiddenLabel }>
-          <VisibilityOff className={ classes.icon } />
-          Hidden
-        </div>
+          <Launch className={ classes.icon } />
+          { qc.hidden &&
+            <div className={ classes.hiddenLabel }>
+              <VisibilityOff className={ classes.icon } />
+              Hidden
+            </div>
+          }
+        </Typography>
+
+        <PlayerNameSubtitle playerId={ qc.player_id } />
+      </div>
+
+      { canIEdit &&
+        <ContentPageCardMenu characterType="qcs" id={ qc.id } />
       }
-    </Typography>
-
-    <PlayerNameSubtitle playerId={ qc.player_id } />
+    </div>
 
     <div className={ classes.rowContainer }>
       { qc.motes_personal_total > 0 &&
@@ -132,12 +147,14 @@ QcCard.propTypes = {
   penalties: PropTypes.object,
   pools: PropTypes.object,
   player: PropTypes.object,
+  canIEdit: PropTypes.bool,
   classes: PropTypes.object,
 }
 function mapStateToProps(state, props) {
   return {
     penalties: getPenaltiesForQc(state, props.qc.id),
     pools: getPoolsAndRatingsForQc(state, props.qc.id),
+    canIEdit: canIEditQc(state, props.qc.id),
   }
 }
 

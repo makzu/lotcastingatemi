@@ -9,7 +9,8 @@ import { MenuItem } from 'material-ui/Menu'
 import Typography from 'material-ui/Typography'
 import Delete from 'material-ui-icons/Delete'
 
-import { destroyCharacter, destroyQc, destroyBattlegroup } from '../../ducks/actions.js'
+import { destroyCharacter, destroyQc, destroyBattlegroup } from '../../../ducks/actions.js'
+import { canIDelete } from '../../../selectors'
 
 class CardMenuDelete extends React.Component {
   constructor(props) {
@@ -29,6 +30,9 @@ class CardMenuDelete extends React.Component {
   }
 
   render() {
+    if (!this.props.canDelete)
+      return <span />
+
     let action
     switch(this.props.characterType) {
     case 'qcs':
@@ -72,6 +76,7 @@ class CardMenuDelete extends React.Component {
 CardMenuDelete.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string,
+  canDelete: PropTypes.bool,
   characterType: PropTypes.string.isRequired,
   destroyCharacter: PropTypes.func,
   destroyQc: PropTypes.func,
@@ -79,7 +84,8 @@ CardMenuDelete.propTypes = {
 }
 function mapStateToProps(state, ownProps) {
   return {
-    name: state.entities[ownProps.characterType][ownProps.id].name
+    canDelete: canIDelete(state, ownProps.id, ownProps.characterType),
+    name: state.entities[ownProps.characterType][ownProps.id].name,
   }
 }
 function mapDispatchToProps(dispatch) {

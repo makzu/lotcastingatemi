@@ -5,6 +5,7 @@ import { getPoolsForWeapon } from '.'
 import * as calc from '../utils/calculated/'
 
 const getState = (state) => state
+const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
 export const getSpecificCharacter = (state, id) => state.entities.characters[id]
 
@@ -101,3 +102,28 @@ export const getPoolsAndRatings = createCachedSelector(
     }
   }
 )(characterIdMemoizer)
+
+export const canIEditCharacter = createSelector(
+  [getCurrentPlayer, getSpecificCharacter, getState],
+  (player, character, state) => {
+    if (character === undefined)
+      return false
+
+    if (player.id === character.player_id)
+      return true
+
+    if (
+      character.chronicle_id &&
+      state.entities.chronicles[character.chronicle_id] &&
+      state.entities.chronicles[character.chronicle_id].st_id === player.id
+    )
+      return true
+
+    return false
+  }
+)
+
+export const canIDeleteCharacter = createSelector(
+  [getCurrentPlayer, getSpecificCharacter],
+  (player, character) => (player.id === character.player_id)
+)

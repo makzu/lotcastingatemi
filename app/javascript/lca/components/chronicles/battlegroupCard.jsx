@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
@@ -10,7 +11,9 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
+import ContentPageCardMenu from '../generic/CharacterCardMenu'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import { canIEditBattlegroup } from '../../selectors'
 import { prettyDrillRating, totalMagnitude } from '../../utils/calculated'
 
 const styles = theme => ({
@@ -23,6 +26,12 @@ const styles = theme => ({
     display: 'inline-block',
     verticalAlign: 'middle',
     lineHeight: 'inherit',
+  },
+  nameRow: {
+    display: 'flex',
+  },
+  nameWrap: {
+    flex: 1,
   },
   battlegroupName: {
     textDecoration: 'none',
@@ -49,25 +58,33 @@ const styles = theme => ({
   },
 })
 
-function BattlegroupCard({ battlegroup, classes }) {
+function BattlegroupCard({ battlegroup, canIEdit, classes }) {
 
   return <Paper className={ classes.root }>
 
-    <Typography variant="title" className={ classes.battlegroupName }
-      component={ Link } to={ `/battlegroups/${battlegroup.id}` }
-    >
-      { battlegroup.name }
-      <Launch className={ classes.icon } />
+    <div className={ classes.nameRow }>
+      <div className={ classes.nameWrap }>
+        <Typography variant="title" className={ classes.battlegroupName }
+          component={ Link } to={ `/battlegroups/${battlegroup.id}` }
+        >
+          { battlegroup.name }
+          <Launch className={ classes.icon } />
 
-      { battlegroup.hidden &&
-        <div className={ classes.hiddenLabel }>
-          <VisibilityOff className={ classes.icon } />
-          Hidden
-        </div>
+          { battlegroup.hidden &&
+            <div className={ classes.hiddenLabel }>
+              <VisibilityOff className={ classes.icon } />
+              Hidden
+            </div>
+          }
+        </Typography>
+
+        <PlayerNameSubtitle playerId={ battlegroup.player_id } />
+      </div>
+
+      { canIEdit &&
+        <ContentPageCardMenu characterType="battlegroups" id={ battlegroup.id } />
       }
-    </Typography>
-
-    <PlayerNameSubtitle playerId={ battlegroup.player_id } />
+    </div>
 
     <div className={ classes.rowContainer }>
       <ResourceDisplay
@@ -123,7 +140,13 @@ function BattlegroupCard({ battlegroup, classes }) {
 BattlegroupCard.propTypes = {
   battlegroup: PropTypes.object.isRequired,
   playerName: PropTypes.string,
+  canIEdit: PropTypes.bool,
   classes: PropTypes.object,
 }
+function mapStateToProps(state, props) {
+  return {
+    canIEdit: canIEditBattlegroup(state, props.battlegroup.id),
+  }
+}
 
-export default withStyles(styles)(BattlegroupCard)
+export default withStyles(styles)(connect(mapStateToProps)(BattlegroupCard))

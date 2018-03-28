@@ -7,9 +7,13 @@ import { MenuItem } from 'material-ui/Menu'
 import Bookmark from 'material-ui-icons/Bookmark'
 import BookmarkBorder from 'material-ui-icons/BookmarkBorder'
 
-import { updateCharacter, updateQc, updateBattlegroup } from '../../ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from '../../../ducks/actions.js'
+import { canIEdit } from '../../../selectors/'
 
 function PinButton(props) {
+  if(!canIEdit)
+    return <div />
+
   let action
   switch(props.characterType) {
   case 'qcs':
@@ -34,13 +38,15 @@ PinButton.propTypes = {
   id: PropTypes.number.isRequired,
   characterType: PropTypes.string.isRequired,
   isPinned: PropTypes.bool,
+  canIEdit: PropTypes.bool,
   updateCharacter: PropTypes.func,
   updateQc: PropTypes.func,
   updateBattlegroup: PropTypes.func,
 }
 function mapStateToProps(state, ownProps) {
   return {
-    isPinned: state.entities[ownProps.characterType][ownProps.id].pinned
+    isPinned: state.entities[ownProps.characterType][ownProps.id].pinned,
+    canEdit: canIEdit(state, ownProps.id, ownProps.characterType),
   }
 }
 function mapDispatchToProps(dispatch) {

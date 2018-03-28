@@ -1,8 +1,11 @@
+import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import * as calc from '../utils/calculated/'
 
-export const getSpecificQc = (state, id) => state.entities.qcs[id]
+const getState = (state) => state
+const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
+export const getSpecificQc = (state, id) => state.entities.qcs[id]
 const qcIdMemoizer = (state, id) => state.entities.qcs[id].id
 
 const getQcMerits = (state) => state.entities.qc_merits
@@ -41,3 +44,25 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
     }
   }
 )(qcIdMemoizer)
+
+export const canIEditQc = createSelector(
+  [getCurrentPlayer, getSpecificQc, getState],
+  (player, character, state) => {
+    if (player.id === character.player_id)
+      return true
+
+    if (
+      character.chronicle_id &&
+      state.entities.chronicles[character.chronicle_id] &&
+      state.entities.chronicles[character.chronicle_id].st_id === player.id
+    )
+      return true
+
+    return false
+  }
+)
+
+export const canIDeleteQc = createSelector(
+  [getCurrentPlayer, getSpecificQc],
+  (player, character) => (player.id === character.player_id)
+)

@@ -12,11 +12,12 @@ import Whatshot from 'material-ui-icons/Whatshot'
 
 import PlayerNameSubtitle from './playerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
+import ContentPageCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { getPenalties, getPoolsAndRatings } from '../../selectors'
+import { canIEditCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import * as calc from '../../utils/calculated'
 import { fullChar } from '../../utils/propTypes'
 
@@ -27,6 +28,12 @@ const styles = theme => ({
       paddingBottom: 16,
     }),
     height: '100%',
+  },
+  nameRow: {
+    display: 'flex',
+  },
+  nameWrap: {
+    flex: 1,
   },
   hiddenLabel: {
     ...theme.typography.caption,
@@ -75,31 +82,39 @@ const styles = theme => ({
   },
 })
 
-function CharacterCard({ character, penalties, pools, classes }) {
+function CharacterCard({ character, canEdit, penalties, pools, classes }) {
   return <Paper className={ classes.root }>
 
-    <Typography variant="title" className={ classes.characterName }
-      component={ Link } to={ `/characters/${character.id}` }
-    >
-      { character.name }
-      { character.anima_level === 3 &&
-        <Whatshot className={ classes.icon } />
+    <div className={ classes.nameRow }>
+      <div className={ classes.nameWrap }>
+        <Typography variant="title" className={ classes.characterName }
+          component={ Link } to={ `/characters/${character.id}` }
+        >
+          { character.name }
+          { character.anima_level === 3 &&
+            <Whatshot className={ classes.icon } />
+          }
+          <Launch className={ classes.icon } />
+
+          { character.hidden &&
+            <div className={ classes.hiddenLabel }>
+              <VisibilityOff className={ classes.icon } />&nbsp;
+              Hidden
+            </div>
+          }
+        </Typography>
+        <PlayerNameSubtitle playerId={ character.player_id } />
+
+        <Typography paragraph>
+          Essence { character.essence } { calc.prettyFullExaltType(character) }
+        </Typography>
+      </div>
+
+      { canEdit &&
+        <ContentPageCardMenu characterType="characters" id={ character.id } />
       }
-      <Launch className={ classes.icon } />
+    </div>
 
-      { character.hidden &&
-        <div className={ classes.hiddenLabel }>
-          <VisibilityOff className={ classes.icon } />&nbsp;
-          Hidden
-        </div>
-      }
-    </Typography>
-
-    <PlayerNameSubtitle playerId={ character.player_id } />
-
-    <Typography paragraph>
-      Essence { character.essence } { calc.prettyFullExaltType(character) }
-    </Typography>
 
     <Typography className={ classes.rowContainer } component="div">
       { character.motes_personal_total > 0 &&
@@ -173,12 +188,14 @@ function CharacterCard({ character, penalties, pools, classes }) {
 }
 CharacterCard.propTypes = {
   character: PropTypes.shape(fullChar).isRequired,
+  canEdit: PropTypes.bool,
   pools: PropTypes.object,
   penalties: PropTypes.object,
   classes: PropTypes.object,
 }
 function mapStateToProps(state, props) {
   return {
+    canEdit: canIEditCharacter(state, props.character.id),
     penalties: getPenalties(state, props.character.id),
     pools: getPoolsAndRatings(state, props.character.id),
   }

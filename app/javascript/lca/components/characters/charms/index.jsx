@@ -2,121 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from '../generic/blockPaper.jsx'
-import { isAbilityCharm, isAttributeCharm } from '../../utils/calculated'
-
-const styles = theme => ({
-  capitalize: {
-    textTransform: 'capitalize',
-  },
-  meritName: { ...theme.typography.caption,
-    textTransform: 'capitalize',
-  },
-  maStyleLine: {
-
-  },
-  charmBody: {
-    whiteSpace: 'pre-line',
-  },
-})
-
-function _SingleCharm({ charm, classes }) {
-  return <BlockPaper>
-    <Typography variant="title">
-      { charm.name }
-    </Typography>
-
-    { charm.type == 'Evocation' && charm.artifact_name != '' &&
-      <Typography variant="caption" className={ classes.capitalize }>
-        Evocation of { charm.artifact_name }
-      </Typography>
-    }
-    { charm.type == 'MartialArtsCharm' &&
-      <Typography variant="caption" className={ classes.capitalize }>
-        { charm.style } Style
-      </Typography>
-    }
-
-    <Typography paragraph>
-      <strong>Cost:</strong> { charm.cost };&nbsp;
-      <strong>Mins:</strong>&nbsp;
-      { isAbilityCharm(charm) || isAttributeCharm(charm) &&
-        <span className={ classes.capitalize }>
-          { charm.ability } { charm.min_ability},&nbsp;
-        </span>
-      }
-      { charm.type == 'MartialArtsCharm' &&
-        <span className={ classes.capitalize }>
-          Martial Arts ({ charm.style } style) { charm.min_ability},&nbsp;
-        </span>
-      }
-      Essence { charm.min_essence }
-      <br />
-
-      <strong>Type:</strong>&nbsp;
-      <span className={ classes.capitalize }>{ charm.timing }</span>
-      <br />
-
-      <strong>Keywords:</strong> { charm.keywords.join(', ') || 'None' }
-      <br />
-
-      <strong>Duration:</strong>&nbsp;
-      <span className={ classes.capitalize }>{ charm.duration }</span>
-      <br />
-
-      <strong>Prerequisite Charms:</strong> { charm.prereqs || 'None' }
-    </Typography>
-
-    <Typography className={ classes.charmBody }>{ charm.body }</Typography>
-
-    { charm.ref != '' &&
-      <Typography variant="caption">Ref: { charm.ref }</Typography>
-    }
-  </BlockPaper>
-}
-_SingleCharm.propTypes = {
-  charm: PropTypes.object,
-  classes: PropTypes.object,
-}
-const SingleCharm = withStyles(styles)(_SingleCharm)
-
-function _SingleSpell({ spell, classes }) {
-  return <BlockPaper>
-    <Typography variant="title">
-      { spell.name }
-      { spell.control && ' (Control Spell)'}
-    </Typography>
-
-    <Typography paragraph>
-      <strong>Cost:</strong> { spell.cost };&nbsp;
-      <br />
-
-      <strong>Keywords:</strong> { spell.keywords.join(', ') || 'None' }
-      <br />
-
-      <strong>Duration:</strong>&nbsp;
-      <span className={ classes.capitalize }>{ spell.duration }</span>
-      <br />
-
-      <strong>Prerequisite Charms:</strong> { spell.prereqs || 'None' }
-    </Typography>
-
-    <Typography className={ classes.charmBody }>{ spell.body }</Typography>
-
-    { spell.ref != '' &&
-      <Typography variant="caption">Ref: { spell.ref }</Typography>
-    }
-  </BlockPaper>
-}
-_SingleSpell.propTypes = {
-  spell: PropTypes.object,
-  classes: PropTypes.object,
-}
-const SingleSpell = withStyles(styles)(_SingleSpell)
+import CharmDisplay from './CharmDisplay.jsx'
+import SpellDisplay from './SpellDisplay.jsx'
 
 class CharmFullPage extends React.Component {
   constructor(props) {
@@ -134,27 +24,27 @@ class CharmFullPage extends React.Component {
 
     const natives = nativeCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-        <SingleCharm charm={ c } character={ character } />
+        <CharmDisplay charm={ c } character={ character } />
       </Grid>
     )
     const maCharms = martialArtsCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-        <SingleCharm charm={ c } character={ character } />
+        <CharmDisplay charm={ c } character={ character } />
       </Grid>
     )
     const evo = evocations.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-        <SingleCharm charm={ c } character={ character } />
+        <CharmDisplay charm={ c } character={ character } />
       </Grid>
     )
     const spirit = spiritCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-        <SingleCharm charm={ c } character={ character } />
+        <CharmDisplay charm={ c } character={ character } />
       </Grid>
     )
     const spl = spells.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-        <SingleSpell spell={ c } character={ character } />
+        <SpellDisplay spell={ c } character={ character } />
       </Grid>
     )
 

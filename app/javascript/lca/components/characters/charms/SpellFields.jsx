@@ -20,7 +20,7 @@ const styles = theme => ({
   },
 })
 
-class SpellEditorBlock extends React.Component {
+class SpellFields extends React.Component {
   constructor(props) {
     super(props)
     this.state = { spell: this.props.spell }
@@ -145,7 +145,7 @@ class SpellEditorBlock extends React.Component {
     </BlockPaper>
   }
 }
-SpellEditorBlock.propTypes = {
+SpellFields.propTypes = {
   spell: PropTypes.object.isRequired,
   character: PropTypes.object,
   onUpdate: PropTypes.func.isRequired,
@@ -153,4 +153,4 @@ SpellEditorBlock.propTypes = {
   classes: PropTypes.object,
 }
 
-export default withStyles(styles)(SpellEditorBlock)
+export default withStyles(styles)(SpellFields)

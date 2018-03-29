@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 import { ATTRIBUTE_MIN as MIN, ATTRIBUTE_MAX as MAX } from '../../../utils/constants.js'
 import { withAttributes } from '../../../utils/propTypes'

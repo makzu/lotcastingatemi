@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 import { LIMIT_MAX } from '../../../utils/constants.js'
 

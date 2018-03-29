@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography'
 
 import ResourceEditor from './resourceEditor.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 import { WILLPOWER_MAX } from '../../../utils/constants.js'
 

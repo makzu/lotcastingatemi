@@ -10,7 +10,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
-import RatingField from '../generic/ratingField.jsx'
+import RatingField from '../generic/RatingField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
 import { updateBattlegroup } from '../../ducks/actions.js'

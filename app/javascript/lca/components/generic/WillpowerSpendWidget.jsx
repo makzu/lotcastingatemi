@@ -6,7 +6,7 @@ import Button from 'material-ui/Button'
 import ButtonBase from 'material-ui/ButtonBase'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
 
-import RatingField from './ratingField.jsx'
+import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from '../../ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from '../../selectors'

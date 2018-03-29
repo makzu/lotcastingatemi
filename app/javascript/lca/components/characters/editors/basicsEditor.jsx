@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 import { ESSENCE_MIN, ESSENCE_MAX } from '../../../utils/constants.js'
 

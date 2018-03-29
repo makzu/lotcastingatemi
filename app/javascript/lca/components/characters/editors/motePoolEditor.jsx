@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography'
 import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import AnimaSelect from '../../generic/AnimaSelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 import { committedPersonalMotes, committedPeripheralMotes } from '../../../utils/calculated'
 
 const styles = theme => ({

@@ -11,7 +11,7 @@ import Typography from 'material-ui/Typography'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 import { ABILITY_MAX as MAX, ABILITY_MIN as MIN } from '../../../utils/constants.js'
 import { withIntimacies } from '../../../utils/propTypes'
 

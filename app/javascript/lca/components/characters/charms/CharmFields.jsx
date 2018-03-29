@@ -8,7 +8,7 @@ import Delete from 'material-ui-icons/Delete'
 
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 import { isAbilityCharm, isAttributeCharm, abilitiesWithRatings } from '../../../utils/calculated'
 import { ABILITY_MAX, ATTRIBUTE_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../../utils/constants.js'
 

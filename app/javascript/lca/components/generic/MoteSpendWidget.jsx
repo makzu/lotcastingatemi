@@ -10,7 +10,7 @@ import { FormControlLabel } from 'material-ui/Form'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
-import RatingField from './ratingField.jsx'
+import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendMotes } from '../../ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from '../../selectors'

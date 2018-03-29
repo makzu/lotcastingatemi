@@ -15,7 +15,7 @@ import AnimaSelect from '../generic/AnimaSelect.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
-import RatingField from '../generic/ratingField.jsx'
+import RatingField from '../generic/RatingField.jsx'
 
 import { updateQc } from '../../ducks/actions.js'
 import { woundPenalty } from '../../utils/calculated'

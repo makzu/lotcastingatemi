@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 function SorceryEditor(props) {
   const { character, onChange, onBlur, onCheck, onRatingChange } = props

@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
-import RatingField from './ratingField.jsx'
+import RatingField from './RatingField.jsx'
 import { INTIMACY_RATING_MAX as MAX, INTIMACY_RATING_MIN as MIN } from '../../utils/constants.js'
 import { withIntimacies } from '../../utils/propTypes'
 

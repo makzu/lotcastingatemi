@@ -13,7 +13,7 @@ import ContentAddCircle from 'material-ui-icons/AddCircle'
 import Delete from 'material-ui-icons/Delete'
 
 import BlockPaper from '../generic/blockPaper.jsx'
-import RatingField from '../generic/ratingField.jsx'
+import RatingField from '../generic/RatingField.jsx'
 import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'

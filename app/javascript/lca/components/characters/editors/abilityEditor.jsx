@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography'
 import CraftEditor from './craftEditor.jsx'
 import MartialArtsEditor from './martialArtsEditor.jsx'
 import BlockPaper from '../../generic/blockPaper'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 import { ABILITY_MAX as MAX, ABILITY_MIN as MIN } from '../../../utils/constants.js'
 import { withAbilities } from '../../../utils/propTypes'

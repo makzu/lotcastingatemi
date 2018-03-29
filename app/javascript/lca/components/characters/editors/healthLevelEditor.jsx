@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../../generic/HealthLevelBoxes.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 const styles = theme => ({
   subheading: {

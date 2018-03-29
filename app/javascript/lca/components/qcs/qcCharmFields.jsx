@@ -7,7 +7,7 @@ import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Delete from 'material-ui-icons/Delete'
 
-import RatingField from '../generic/ratingField.jsx'
+import RatingField from '../generic/RatingField.jsx'
 import { qcCharm } from '../../utils/propTypes'
 
 

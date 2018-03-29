@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/ratingField.jsx'
+import RatingField from '../../generic/RatingField.jsx'
 
 const styles = theme => ({
   separator: { ...theme.typography.body1,

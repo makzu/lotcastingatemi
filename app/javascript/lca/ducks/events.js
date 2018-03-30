@@ -1,4 +1,7 @@
-import { updateCharacter, updateQc } from './actions.js'
+import {
+  updateCharacter, updateCharacterMulti,
+  updateQc, updateQcMulti,
+} from './actions.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
 export const SPEND_WP    = 'lca/event/SPEND_WP'
@@ -11,27 +14,35 @@ function updateEvent(charType) {
     return updateCharacter
 }
 
+function updateEventMulti(charType) {
+  if (charType == 'qc')
+    return updateQcMulti
+  else
+    return updateCharacterMulti
+}
+
 export function spendMotes(id, motes, pool = 'personal', charType = 'character', committments, mute = false) {
-  let update = updateEvent(charType)
+  let update = updateEventMulti(charType)
 
   return (dispatch, getState) => {
     dispatch({ type: SPEND_MOTES, id: id, pool: pool })
-    let current_motes = getState().entities[charType + 's'][id][`motes_${pool}_current`]
-
-    dispatch(update(id, `motes_${pool}_current`, Math.max(current_motes - motes, 0)))
+    const entity = getState().entities[charType + 's'][id]
+    let current_motes = entity[`motes_${pool}_current`]
+    let updateObj = { [`motes_${pool}_current`]: Math.max(current_motes - motes, 0) }
 
     // Add to mote committments if specified
     if (committments != undefined)
-      dispatch(update(id, 'motes_committed', committments))
+      updateObj['motes_committed'] = committments
 
     // Raise anima banner level if appropriate
     if (pool == 'peripheral' && motes > 5 && !mute) {
-      let anima = getState().entities[charType + 's'][id].anima_level
+      let anima = entity.anima_level
       if (anima !== 3) { // Do not change Anima level if it's already at Bonfire
-        const newLevel = Math.min(anima + Math.floor(motes / 5), 3)
-        dispatch(update(id, 'anima_level', newLevel))
+        updateObj['anima_level'] = Math.min(anima + Math.floor(motes / 5), 3)
       }
     }
+
+    dispatch(update(id, updateObj))
   }
 }
 

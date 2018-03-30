@@ -20,13 +20,17 @@ export function createQc(qc) {
 }
 
 export function updateQc(id, trait, value) {
+  return updateQcMulti(id, { [trait]: value })
+}
+
+export function updateQcMulti(id, qc) {
   return callApi({
     endpoint: `/api/v1/qcs/${id}`,
     method: 'PATCH',
-    body: JSON.stringify({ qc: { [trait]: value }}),
+    body: JSON.stringify({ qc: qc }),
     types: [
-      QC_UPDATE,
-      { type: QC_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
+      { type: QC_UPDATE, meta: { id: id }},
+      { type: QC_UPDATE_SUCCESS, meta: { id: id }},
       QC_UPDATE_FAILURE
     ]
   })

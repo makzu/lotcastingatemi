@@ -20,13 +20,17 @@ export function createCharacter(char) {
 }
 
 export function updateCharacter(id, trait, value) {
+  return updateCharacterMulti(id, { [trait]: value })
+}
+
+export function updateCharacterMulti(id, character) {
   return callApi({
     endpoint: `/api/v1/characters/${id}`,
     method: 'PATCH',
-    body: JSON.stringify({ character: { [trait]: value }}),
+    body: JSON.stringify({ character: character }),
     types: [
-      { type: CHA_UPDATE, meta: { trait: trait }},
-      { type: CHA_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
+      { type: CHA_UPDATE, meta: { id: id }},
+      { type: CHA_UPDATE_SUCCESS, meta: { id: id, traits: character }},
       CHA_UPDATE_FAILURE
     ]
   })

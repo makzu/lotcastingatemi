@@ -13,8 +13,9 @@ import { SOLAR_CASTE_ABILITIES } from '../../../utils/constants.js'
 function SolarExaltEditor(props) {
   const { character, onRatingChange } = props
   let casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
+  let supernalAbilities = casteAbilities
   if (character.caste === 'dawn')
-    casteAbilities = casteAbilities.slice(0, 4).concat([{ abil: 'abil_martial_arts', pretty: 'Martial Arts' }]).concat(casteAbilities.slice(4))
+    supernalAbilities = casteAbilities.slice(0, 4).concat([{ abil: 'abil_martial_arts', pretty: 'Martial Arts' }]).concat(casteAbilities.slice(4))
 
   const noOptionItem = character.caste == undefined ? <MenuItem disabled>Select a Caste</MenuItem> : undefined
 
@@ -36,7 +37,7 @@ function SolarExaltEditor(props) {
     <AbilitySelect name="supernal_ability"
       label="Supernal Ability"
       value={ character.supernal_ability || '' }
-      abilities={ casteAbilities }
+      abilities={ supernalAbilities }
       prependOptions={ noOptionItem }
       onChange={ onRatingChange } margin="dense"
     />

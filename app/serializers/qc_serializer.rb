@@ -21,7 +21,7 @@ class QcSerializer < ActiveModel::Serializer
 
              :ties, :principles,
 
-             :initiative, :onslaught,
+             :initiative, :onslaught, :in_combat, :has_acted,
              :sort_order, :chronicle_sort_order
   # rubocop:enable Layout/EmptyLinesAroundArguments
 

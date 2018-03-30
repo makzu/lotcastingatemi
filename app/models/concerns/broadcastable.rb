@@ -34,7 +34,7 @@ module Broadcastable
     end
 
     def parent
-      return player if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup)
+      return player if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
       character
     end
   end

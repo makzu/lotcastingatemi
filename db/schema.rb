@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325234406) do
+ActiveRecord::Schema.define(version: 20180330043357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20180325234406) do
     t.boolean "hidden", default: false
     t.integer "sort_order", default: 0
     t.integer "chronicle_sort_order", default: 0
+    t.boolean "in_combat", default: false
+    t.boolean "has_acted", default: false
     t.index ["chronicle_id"], name: "index_battlegroups_on_chronicle_id"
     t.index ["player_id"], name: "index_battlegroups_on_player_id"
   end
@@ -152,6 +154,8 @@ ActiveRecord::Schema.define(version: 20180325234406) do
     t.string "excellencies_for", default: [], array: true
     t.integer "sort_order", default: 0
     t.integer "chronicle_sort_order", default: 0
+    t.boolean "in_combat", default: false
+    t.boolean "has_acted", default: false
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -196,6 +200,29 @@ ActiveRecord::Schema.define(version: 20180325234406) do
     t.string "invite_code"
     t.index ["invite_code"], name: "index_chronicles_on_invite_code", unique: true
     t.index ["st_id"], name: "index_chronicles_on_st_id"
+  end
+
+  create_table "combat_actors", force: :cascade do |t|
+    t.string "name", default: ""
+    t.integer "initiative", default: 0
+    t.integer "onslaught", default: 0
+    t.integer "damage_bashing", default: 0
+    t.integer "damage_lethal", default: 0
+    t.integer "damage_aggravated", default: 0
+    t.integer "motes_personal_current", default: 0
+    t.integer "motes_peripheral_current", default: 0
+    t.integer "willpower_temporary", default: 0
+    t.integer "anima_level", default: 0
+    t.boolean "has_acted", default: false
+    t.bigint "chronicle_id"
+    t.bigint "player_id"
+    t.string "actor_type"
+    t.bigint "actor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_type", "actor_id"], name: "index_combat_actors_on_actor_type_and_actor_id"
+    t.index ["chronicle_id"], name: "index_combat_actors_on_chronicle_id"
+    t.index ["player_id"], name: "index_combat_actors_on_player_id"
   end
 
   create_table "identities", force: :cascade do |t|
@@ -329,6 +356,8 @@ ActiveRecord::Schema.define(version: 20180325234406) do
     t.integer "anima_level", default: 0
     t.string "excellency", default: ""
     t.json "motes_committed", default: []
+    t.boolean "in_combat", default: false
+    t.boolean "has_acted", default: false
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
@@ -370,6 +399,8 @@ ActiveRecord::Schema.define(version: 20180325234406) do
   add_foreign_key "charms", "characters"
   add_foreign_key "chronicle_players", "chronicles"
   add_foreign_key "chronicle_players", "players"
+  add_foreign_key "combat_actors", "chronicles"
+  add_foreign_key "combat_actors", "players"
   add_foreign_key "identities", "players"
   add_foreign_key "merits", "characters"
   add_foreign_key "qc_charms", "qcs"

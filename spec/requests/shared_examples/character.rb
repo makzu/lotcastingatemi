@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'character' do |character_type|
+RSpec.shared_examples 'character' do |character_type, parent|
   ActiveJob::Base.queue_adapter = :test
 
   def authenticated_header(user)
@@ -14,6 +14,8 @@ RSpec.shared_examples 'character' do |character_type|
     describe 'creating a record' do
       it 'succeeds' do
         params = { trait.entity_type => FactoryBot.attributes_for(character_type) }
+        params["#{parent}_id"] = trait.actor_id if parent
+
         expect do
           post "/api/v1/#{trait.entity_type}s/",
                params:  params,

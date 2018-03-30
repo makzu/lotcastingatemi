@@ -32,7 +32,7 @@ class CharacterSerializer < ActiveModel::Serializer
 
              :native_language,
 
-             :initiative, :onslaught,
+             :initiative, :onslaught, :in_combat, :has_acted,
 
              :xp_total, :xp_spent, :xp_solar_total, :xp_solar_spent,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,

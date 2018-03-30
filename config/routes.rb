@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       resources :battlegroups, only: %i[create show update destroy] do
         resources :qc_attacks, only: %i[create show update destroy]
       end
+
+      resources :combat_actors, only: %i[create show update destroy]
     end
   end
 

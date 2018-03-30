@@ -7,6 +7,7 @@ class Battlegroup < ApplicationRecord
   include Willpower
 
   has_many :qc_attacks, dependent: :destroy, as: :qc_attackable # rubocop:disable Rails/InverseOf
+  has_many :combat_actors, dependent: :destroy, as: :actor # rubocop:disable Rails/InverseOf
 
   validates :size, zero_thru_five_stat: true
 

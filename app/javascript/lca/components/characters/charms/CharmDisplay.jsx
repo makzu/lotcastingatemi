@@ -6,7 +6,6 @@ import Typography from 'material-ui/Typography'
 
 import styles from './CharmStyles.js'
 import BlockPaper from '../../generic/blockPaper.jsx'
-import { isAbilityCharm, isAttributeCharm } from '../../../utils/calculated'
 
 function CharmDisplay({ charm, classes }) {
   return <BlockPaper>
@@ -28,7 +27,7 @@ function CharmDisplay({ charm, classes }) {
     <Typography paragraph>
       <strong>Cost:</strong> { charm.cost };&nbsp;
       <strong>Mins:</strong>&nbsp;
-      { isAbilityCharm(charm) || isAttributeCharm(charm) &&
+      { charm.ability &&
         <span className={ classes.capitalize }>
           { charm.ability } { charm.min_ability},&nbsp;
         </span>

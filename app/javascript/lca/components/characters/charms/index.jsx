@@ -6,11 +6,25 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
 import CharmDisplay from './CharmDisplay.jsx'
+import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
+import {
+  getSpecificCharacter, getMeritsForCharacter, getNativeCharmsForCharacter,
+  getMartialArtsCharmsForCharacter, getEvocationsForCharacter,
+  getSpellsForCharacter, getSpiritCharmsForCharacter,
+  getAllAbilitiesWithCharmsForCharacter,
+} from '../../../selectors/'
 
 class CharmFullPage extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = { charmFilter: '' }
+    this.setFilter = this.setFilter.bind(this)
+  }
+
+  setFilter(e) {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   render() {
@@ -20,30 +34,42 @@ class CharmFullPage extends React.Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { character, nativeCharms, martialArtsCharms, evocations, spiritCharms, spells } = this.props
+    const {
+      character, nativeCharms, abilities, martialArtsCharms, evocations,
+      spiritCharms, spells
+    } = this.props
+    const { charmFilter } = this.state
 
-    const natives = nativeCharms.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character } />
-      </Grid>
-    )
+    let natives
+    if (charmFilter === '')
+      natives = nativeCharms.map((c) =>
+        <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
+          <CharmDisplay charm={ c } character={ character } />
+        </Grid>
+      )
+    else
+      natives = nativeCharms.filter((c) => c.ability === charmFilter).map((c) =>
+        <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
+          <CharmDisplay charm={ c } character={ character } />
+        </Grid>
+      )
     const maCharms = martialArtsCharms.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <CharmDisplay charm={ c } character={ character } />
       </Grid>
     )
     const evo = evocations.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <CharmDisplay charm={ c } character={ character } />
       </Grid>
     )
     const spirit = spiritCharms.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <CharmDisplay charm={ c } character={ character } />
       </Grid>
     )
     const spl = spells.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <SpellDisplay spell={ c } character={ character } />
       </Grid>
     )
@@ -54,7 +80,12 @@ class CharmFullPage extends React.Component {
       </Grid>
 
       <Grid item xs={ 12 }>
-        <Typography variant="headline">Charms</Typography>
+        <Typography variant="headline">
+          Charms
+          <CharmFilter abilities={ abilities } filter={ charmFilter }
+            name="charmFilter" onChange={ this.setFilter }
+          />
+        </Typography>
       </Grid>
       { natives }
 
@@ -92,6 +123,7 @@ class CharmFullPage extends React.Component {
 CharmFullPage.propTypes = {
   character: PropTypes.object,
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
+  abilities: PropTypes.arrayOf(PropTypes.string),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
   spells: PropTypes.arrayOf(PropTypes.object),
@@ -99,37 +131,33 @@ CharmFullPage.propTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
-  const character = state.entities.characters[ownProps.match.params.characterId] || {}
+  const id = ownProps.match.params.characterId
+  const character = getSpecificCharacter(state, id)
 
   let nativeCharms = []
+  let abilities = []
   let martialArtsCharms = []
   let evocations = []
   let artifacts = []
   let spiritCharms = []
   let spells = []
 
-  if ( character.charms != undefined) {
-    nativeCharms = character.charms.map((id) => state.entities.charms[id])
-  }
-  if (character.evocations != undefined) {
-    evocations = character.evocations.map((id) => state.entities.charms[id])
-  }
-  if (character.martial_arts_charms != undefined) {
-    martialArtsCharms = character.martial_arts_charms.map((id) => state.entities.charms[id])
-  }
-  if (character.weapons != undefined) {
-    artifacts = character.merits.map((id) => state.entities.merits[id]).filter((m) => m.merit_name == 'artifact' )
-  }
-  if (character.spells != undefined) {
-    spells = character.spells.map((id) => state.entities.spells[id])
-  }
-  if (character.spirit_charms != undefined) {
-    spiritCharms = character.spirit_charms.map((id) => state.entities.charms[id])
+  if (character !== undefined) {
+    nativeCharms = getNativeCharmsForCharacter(state, id)
+    abilities = getAllAbilitiesWithCharmsForCharacter(state, id)
+    martialArtsCharms = getMartialArtsCharmsForCharacter(state, id)
+    evocations = getEvocationsForCharacter(state, id)
+    spells = getSpellsForCharacter(state, id)
+    spiritCharms = getSpiritCharmsForCharacter(state, id)
+    artifacts = getMeritsForCharacter(state, id).filter((m) =>
+      m.merit_name.toLowerCase() == 'artifact' || m.merit_name.toLowerCase() == 'hearthstone' || m.merit_name.toLowerCase() == 'warstrider'
+    )
   }
 
   return {
     character,
     nativeCharms,
+    abilities,
     martialArtsCharms,
     evocations,
     artifacts,

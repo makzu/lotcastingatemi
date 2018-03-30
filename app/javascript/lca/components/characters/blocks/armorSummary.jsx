@@ -13,13 +13,46 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+  },
+  label: { ...theme.typography.body1,
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    opacity: 0.7,
+    width: '5rem',
+    display: 'flex',
+  },
+  labelSpan: {
+    alignSelf: 'flex-end',
+  },
+  name: { ...theme.typography.body2,
+    minWidth: '8rem',
+    margin: theme.spacing.unit,
+    marginLeft: 0,
+    maxHeight: '5rem',
+    textTransform: 'capitalize',
+    overflow: 'hidden',
   },
   poolBlock: {
-    marginRight: theme.spacing.unit,
-    marginTop: theme.spacing.unit,
-    maxWidth: '5.5rem',
+    margin: theme.spacing.unit,
+    marginLeft: 0,
+    width: '5.5rem',
     maxHeight: '5rem',
-    textOverflow: 'ellipse',
+  },
+  narrowPoolBlock: {
+    margin: theme.spacing.unit,
+    marginLeft: 0,
+    width: '4.5rem',
+  },
+  tags: { ...theme.typography.body1,
+    margin: theme.spacing.unit,
+    marginLeft: 0,
+    flex: 1,
+    minWidth: '8rem',
+    textTransform: 'capitalize',
+    maxHeight: '5rem',
+    overflow: 'hidden',
   },
 })
 
@@ -36,7 +69,20 @@ function ArmorSummary({ character, pools, classes }) {
       { pools.hardness.total > 0 &&
         <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
       }
-      <PoolLine pool={{ total: character.armor_name }} label="Armor Name" classes={{ root: classes.poolBlock }} />
+
+      <div className={ classes.name }>
+        <div className={ classes.label }>
+          <span className={ classes.labelSpan }>Armor Name</span>
+        </div>
+        { character.armor_name }
+      </div>
+
+      <div className={ classes.tags }>
+        <div className={ classes.label }>
+          <span className={ classes.labelSpan }>Armor Tags</span>
+        </div>
+        { character.armor_tags.join(', ') || 'none' }
+      </div>
     </div>
 
   </BlockPaper>

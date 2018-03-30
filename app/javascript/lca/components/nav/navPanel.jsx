@@ -52,7 +52,7 @@ export class NavPanel extends React.Component {
             />
           </ListItem>
         }
-        { !authenticated && window.location.href.includes('localhost') &&
+        { !authenticated && window.location.hostname == 'localhost' &&
           <ListItem button component="a" href="/auth/developer">
             <ListItemText primary="Log in (Developer)"
             />

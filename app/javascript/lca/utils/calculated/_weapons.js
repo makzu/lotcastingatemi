@@ -312,6 +312,7 @@ export function parry(character, weapon, penalties, charmAbils) {
 
   return {
     raw: rawRating,
+    shield: weapon.tags.includes('shield') || weapon.tags.includes('Shield'),
     specialtyMatters: rawPool % 2 === 0 && specialties.length > 0,
     specialties: specialties,
     excellency: excellency,

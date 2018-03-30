@@ -1,12 +1,13 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
-import { getPoolsForWeapon } from '.'
+import { getPoolsForWeapon, sortByParry } from '.'
 import * as calc from '../utils/calculated/'
 
 const getState = (state) => state
 const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
+//const characterCount = (state) => state.entities.characters.length
 export const getSpecificCharacter = (state, id) => state.entities.characters[id]
 
 const characterIdMemoizer = (state, id) => state.entities.characters[id].id
@@ -16,6 +17,7 @@ export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],
   (character, merits) => character.merits.map((m) => merits[m])
 )(characterIdMemoizer)
+export const getMeritNamesForCharacter = (state, id) => getMeritsForCharacter(state, id).map((m) => m.merit_name.toLowerCase() + m.rating)
 
 const getWeapons = (state) => state.entities.weapons
 export const getWeaponsForCharacter = createCachedSelector(
@@ -24,19 +26,31 @@ export const getWeaponsForCharacter = createCachedSelector(
 )(characterIdMemoizer)
 
 const getCharms = (state) => state.entities.charms
-export const getAllCharmsForCharacter = createSelector(
+export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
-  (character, charms) => {
-    let ch = []
-    let maCh = []
+  (character, charms) => character.charms !== undefined ? character.charms.map((c) => charms[c]) : []
+)(characterIdMemoizer)
+export const getMartialArtsCharmsForCharacter = createCachedSelector(
+  [getSpecificCharacter, getCharms],
+  (character, charms) => character.martial_arts_charms !== undefined ? character.martial_arts_charms.map((c) => charms[c]) : []
+)(characterIdMemoizer)
+export const getEvocationsForCharacter = createCachedSelector(
+  [getSpecificCharacter, getCharms],
+  (character, charms) => character.evocations !== undefined ? character.evocations.map((c) => charms[c]) : []
+)(characterIdMemoizer)
+export const getSpiritCharmsForCharacter = createCachedSelector(
+  [getSpecificCharacter, getCharms],
+  (character, charms) => character.spirit_charms !== undefined ? character.spirit_charms.map((c) => charms[c]) : []
+)(characterIdMemoizer)
+export const getAllAbilitiesWithCharmsForCharacter = createSelector(
+  [getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter],
+  (charms, maCharms) => {
+    let abilities = [ ...new Set(charms.map((c) => c.ability))]
 
-    if (character.charms !== undefined && character.charms.length > 0)
-      ch = character.charms.map((c) => charms[c])
+    if (maCharms.length > 0)
+      abilities = abilities.concat(['martial_arts'])
 
-    if (character.martial_arts_charms !== undefined && character.martial_arts_charms.length > 0)
-      maCh = character.martial_arts_charms.map((c) => charms[c])
-
-    return ch.concat(maCh)
+    return abilities
   }
 )
 
@@ -45,11 +59,7 @@ export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) => character.spells.map((s) => spells[s])
 )(characterIdMemoizer)
-export const getControlSpellsForCharacter = createSelector(
-  [getSpellsForCharacter],
-  (spells) => spells.filter((s) => s.control_spells)
-)
-
+export const getControlSpellsForCharacter = (state, id) => getSpellsForCharacter(state, id).filter((s) => s.control)
 
 export const getPenalties = createCachedSelector(
   [getSpecificCharacter, getMeritsForCharacter],
@@ -69,16 +79,18 @@ export const getPoolsForAllWeaponsForCharacter = createSelector(
 )
 
 export const getPoolsAndRatings = createCachedSelector(
-  [getSpecificCharacter, getMeritsForCharacter, getAllCharmsForCharacter, getControlSpellsForCharacter, getPenalties, getPoolsForAllWeaponsForCharacter],
-  (character, merits, charms, spells, penalties, weaponPools) => {
-    const meritNames = [ ...new Set(merits.map((m) => m.merit_name.toLowerCase() + m.rating)) ]
-    const charmAbils = [ ...new Set(charms.map((c) => c.type === 'MartialArtsCharm' ? 'martial_arts' : c.ability)) ]
-    const spellNames = [ ...new Set(spells.map((m) => m.name.toLowerCase())) ]
-    const bestParryWeapon = weaponPools.sort((a, b) => {
-      if (a.parry.total > b.parry.total) { return -1 }
-      else if (a.parry.total < b.parry.total) { return 1 }
-      else { return 0 }
-    })[0] || { parry: { total: 0 }}
+  [
+    getSpecificCharacter,
+    getMeritNamesForCharacter,
+    getAllAbilitiesWithCharmsForCharacter,
+    getControlSpellsForCharacter,
+    getPenalties,
+    getPoolsForAllWeaponsForCharacter
+  ],
+  (character, meritNames, charmAbils, spells, penalties, weaponPools) => {
+    const spellNames = spells.map((m) => m.name.toLowerCase())
+
+    const bestParryWeapon = weaponPools.sort(sortByParry)[0] || { parry: { total: 0 }}
 
     return {
       guile: calc.guile(character, meritNames, penalties, charmAbils),

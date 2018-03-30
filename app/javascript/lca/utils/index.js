@@ -3,7 +3,7 @@ export function clamp(val, min, max) {
     if (max === 10 && val === 10) // Willpower, essence can be exactly 10
       val = 10
     else if (max <= 10)
-      val = val % 10
+      val = Math.min(val % 10, max)
     else
       val = max
   }

@@ -199,5 +199,5 @@ export const MERIT_RATING_MIN = 0
 
 export const LIMIT_MAX = 10
 
-// 7 health levels + 5 Stamina 5 Ox-Bodies:
-export const HEALTH_LEVEL_MAX = 22
+// 7 health levels + 5 Stamina 5 Ox-Bodies, +15 for good measure:
+export const HEALTH_LEVEL_MAX = 37

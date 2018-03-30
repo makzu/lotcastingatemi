@@ -13,7 +13,7 @@ import {
 } from '../constants.js'
 
 export function specialtiesFor(character, ability) {
-  return character.specialties.filter((s) => s.ability == ability).map((s) => s.context )
+  return character.specialties.filter((s) => s.ability == ability).map((s) => s.context ) || []
 }
 
 /* Health */

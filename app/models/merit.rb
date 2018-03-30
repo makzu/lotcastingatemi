@@ -7,8 +7,10 @@ class Merit < ApplicationRecord
 
   validates :merit_cat, inclusion: { in: %w[ story innate purchased ] }
 
-  # TODO: support for Artifact N/A or ratings above 5?
-  validates :rating, zero_thru_five_stat: true
+  # 6 is treated as N/A.
+  validates :rating, numericality: {
+    greater_than_or_equal_to: 0, less_than_or_equal_to: 6
+  }
 
   def entity_type
     'merit'

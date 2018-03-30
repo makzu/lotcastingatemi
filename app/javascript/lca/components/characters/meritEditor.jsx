@@ -81,17 +81,20 @@ export class MeritFields extends React.Component {
         <Delete />
       </Button>
 
-      <TextField name="merit_name" value={ merit.merit_name }
-        onChange={ handleChange } onBlur={ handleBlur }
-        label="Merit" margin="dense"
-      />
-      &nbsp;
+      <Typography>
+        <TextField name="merit_name" value={ merit.merit_name }
+          onChange={ handleChange } onBlur={ handleBlur }
+          label="Merit" margin="dense"
+        />
+        &nbsp;
 
-      <RatingField trait="rating" value={ merit.rating }
-        label="Rating" margin="dense"
-        min={ MERIT_RATING_MIN } max={ MERIT_RATING_MAX }
-        onChange={ handleRatingChange }
-      />
+        <RatingField trait="rating" value={ merit.rating }
+          label="Rating" margin="dense"
+          min={ MERIT_RATING_MIN } max={ MERIT_RATING_MAX }
+          onChange={ handleRatingChange }
+        />
+        { merit.rating === 6 && ' (N/A)' }
+      </Typography>
 
       <div>
         <TextField name="label" value={ merit.label }

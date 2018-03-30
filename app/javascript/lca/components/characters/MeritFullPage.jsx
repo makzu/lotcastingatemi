@@ -26,8 +26,9 @@ function _SingleMerit(props) {
   const { merit, classes } = props
 
   return <BlockPaper>
-    <RatingLine rating={ merit.rating } dontFill>
-      <Typography variant="title">
+
+    <Typography variant="title">
+      <RatingLine rating={ merit.rating } dontFill merit>
         <span className={ classes.name }>
           { merit.label || merit.merit_name }
         </span>
@@ -36,8 +37,8 @@ function _SingleMerit(props) {
             &nbsp;&nbsp;({ merit.merit_name })
           </span>
         }
-      </Typography>
-    </RatingLine>
+      </RatingLine>
+    </Typography>
 
     <Typography className={ classes.categoryLine } variant="caption" gutterBottom>
       { merit.supernatural && 'Supernatural '}

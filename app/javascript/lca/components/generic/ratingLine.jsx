@@ -17,14 +17,19 @@ const styles = theme => ({ //eslint-disable-line no-unused-vars
   },
 })
 
-function RatingLine(props) {
-  const { classes } = props
-
+function RatingLine({ classes, children, rating, fillTo, dontFill, merit }) {
   return <div className={ classes.wrap }>
     <div className={ classes.label }>
-      { props.children }
+      { children }
     </div>
-    <RatingDots rating={ props.rating } fillTo={ props.fillTo } dontFill={ props.dontFill } />
+    { merit && rating > 5 &&
+      <div className={ classes.na }>
+        N/A
+      </div>
+    }
+    { !(merit && rating > 5) &&
+      <RatingDots rating={ rating } fillTo={ fillTo } dontFill={ dontFill } />
+    }
   </div>
 }
 

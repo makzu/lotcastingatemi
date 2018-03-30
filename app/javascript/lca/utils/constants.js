@@ -194,7 +194,7 @@ export const WILLPOWER_MIN = 0
 export const INTIMACY_RATING_MAX = 3
 export const INTIMACY_RATING_MIN = 1
 
-export const MERIT_RATING_MAX = 5
+export const MERIT_RATING_MAX = 6 // 6 means N/A
 export const MERIT_RATING_MIN = 0
 
 export const LIMIT_MAX = 10

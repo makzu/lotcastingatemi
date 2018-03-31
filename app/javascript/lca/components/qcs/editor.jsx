@@ -256,7 +256,7 @@ class QcEditor extends React.Component {
             label="Grapple" margin="dense"
             onChange={ handleRatingChange }
           />
-          <RatingField trait="grapple" value={ qc.grapple_control }
+          <RatingField trait="grapple_control" value={ qc.grapple_control }
             label="Grapple Control" margin="dense"
             onChange={ handleRatingChange }
           />

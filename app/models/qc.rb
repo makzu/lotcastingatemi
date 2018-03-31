@@ -35,6 +35,10 @@ class Qc < ApplicationRecord
     'qc'
   end
 
+  def type
+    entity_type
+  end
+
   def entity_assoc
     entity_type
   end

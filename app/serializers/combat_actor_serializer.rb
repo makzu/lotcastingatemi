@@ -2,7 +2,7 @@
 
 # app/serializers/combat_actor_serializer.rb
 class CombatActorSerializer < ActiveModel::Serializer
-  attributes :id, :name,
+  attributes :id, :name, :type,
              :willpower_temporary,
              :damage_bashing, :damage_lethal, :damage_aggravated,
              :motes_personal_current,

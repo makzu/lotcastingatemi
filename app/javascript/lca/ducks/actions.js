@@ -1,5 +1,5 @@
 export {
-  updateCharacter, createCharacter, destroyCharacter,
+  updateCharacter, updateCharacterMulti, createCharacter, destroyCharacter,
   updateWeapon, createWeapon, destroyWeapon,
   updateMerit, createMerit, destroyMerit,
   updateCharm, createCharm, destroyCharm,
@@ -7,7 +7,7 @@ export {
   updateChronicle, createChronicle,
   joinChronicle, regenChronicleInviteCode, removePlayerFromChronicle,
   addThingToChronicle, removeThingFromChronicle,
-  updateQc, createQc, destroyQc,
+  updateQc, updateQcMulti, createQc, destroyQc,
   updateQcAttack, createQcAttack, destroyQcAttack,
   updateQcMerit, createQcMerit, destroyQcMerit,
   updateQcCharm, createQcCharm, destroyQcCharm,

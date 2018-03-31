@@ -25,6 +25,10 @@ class CombatActor < ApplicationRecord
     entity_type
   end
 
+  def type
+    entity_type
+  end
+
   def hidden
     false
   end

@@ -15,6 +15,7 @@ export * from './qc_merit.js'
 export * from './qc_charm.js'
 
 export * from './battlegroup.js'
+export * from './combat_actor.js'
 
 import PlayerReducer from './player.js'
 import ChronicleReducer from './chronicle.js'
@@ -41,7 +42,8 @@ export const defaultState = {
   qc_merits:    {},
   qc_charms:    {},
   qc_attacks:   {},
-  battlegroups: {}
+  battlegroups: {},
+  combat_actors:{},
 }
 
 export default function EntityReducer(state = defaultState, action) {

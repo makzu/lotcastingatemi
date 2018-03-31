@@ -43,7 +43,7 @@ module Exalt
       self.caste_attributes = caste_attributes.reject(&:blank?).collect(&:strip)
       self.favored_attributes = favored_attributes.reject(&:blank?).collect(&:strip)
     end
-    # rubocop:enable all
+    # rubocop:enable Metrics/AbcSize
 
     def caste_is_blank?
       caste.blank?

@@ -37,12 +37,14 @@ export const player = new schema.Entity('players', {
   battlegroups: [ battlegroup ],
 })
 
+export const combat_actor = new schema.Entity('combatActors')
 export const chronicle = new schema.Entity('chronicles', {
   st: player,
   players: [ player ],
   characters: [ character ],
   qcs: [ qc ],
   battlegroups: [ battlegroup ],
+  combatActors: [ combat_actor ],
 })
 
 export const chronicleList = new schema.Array(chronicle)

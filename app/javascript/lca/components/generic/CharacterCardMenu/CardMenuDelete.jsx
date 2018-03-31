@@ -35,13 +35,13 @@ class CardMenuDelete extends React.Component {
 
     let action
     switch(this.props.characterType) {
-    case 'qcs':
+    case 'qc':
       action = this.props.destroyQc
       break
-    case 'battlegroups':
+    case 'battlegroup':
       action = this.props.destroyBattlegroup
       break
-    case 'characters':
+    case 'character':
     default:
       action = this.props.destroyCharacter
     }
@@ -67,7 +67,7 @@ class CardMenuDelete extends React.Component {
 
         <DialogActions>
           <Button onClick={ this.handleClose }>Cancel</Button>
-          <Button onClick={ () => action(this.props.id) }>Delete</Button>
+          <Button onClick={ () => action(this.props.id) } color="primary" variant="raised">Delete</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

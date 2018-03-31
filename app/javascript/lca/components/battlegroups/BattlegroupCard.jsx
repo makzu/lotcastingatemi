@@ -9,9 +9,10 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
-import PlayerNameSubtitle from './playerNameSubtitle.jsx'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
+import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { canIEditBattlegroup } from '../../selectors'
 import { prettyDrillRating, totalMagnitude } from '../../utils/calculated'
@@ -58,7 +59,7 @@ const styles = theme => ({
   },
 })
 
-function BattlegroupCard({ battlegroup, canIEdit, classes }) {
+function BattlegroupCard({ battlegroup, combat, canIEdit, classes }) {
 
   return <Paper className={ classes.root }>
 
@@ -129,17 +130,21 @@ function BattlegroupCard({ battlegroup, canIEdit, classes }) {
         </div>
       }
     </div>
+    { battlegroup.onslaught > 0 &&
+      <Typography paragraph style={{ marginTop: '0.5em' }}>
+        <strong>Penalties:</strong>&nbsp;
 
-    <Typography paragraph>
-      <strong>Penalties:</strong>&nbsp;
-
-      Onslaught -{ battlegroup.onslaught }
-    </Typography>
+        Onslaught -{ battlegroup.onslaught }
+      </Typography>
+    }
+    { combat &&
+      <InitiativeWidget character={ battlegroup } />
+    }
   </Paper>
 }
 BattlegroupCard.propTypes = {
   battlegroup: PropTypes.object.isRequired,
-  playerName: PropTypes.string,
+  combat: PropTypes.bool,
   canIEdit: PropTypes.bool,
   classes: PropTypes.object,
 }

@@ -24,8 +24,8 @@ export const getPoolsForWeapon = createCachedSelector(
 export const sortByParry = (weaponA, weaponB) => {
   const parryA = weaponA.parry
   const parryB = weaponB.parry
-  const specialtiesA = parryA.specialties
-  const specialtiesB = parryB.specialties
+  const specialtiesA = parryA.specialties === undefined ? [] : parryA.specialties
+  const specialtiesB = parryB.specialties === undefined ? [] : parryB.specialties
 
   if      (parryA.total > parryB.total) { return -1 }
   else if (parryA.total < parryB.total) { return  1 }

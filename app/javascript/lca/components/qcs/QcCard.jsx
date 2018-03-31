@@ -9,10 +9,11 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
-import PlayerNameSubtitle from './playerNameSubtitle.jsx'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
@@ -60,7 +61,7 @@ const styles = theme => ({
   },
 })
 
-function QcCard({ qc, penalties, pools, canIEdit, classes }) {
+function QcCard({ qc, combat, penalties, pools, canIEdit, classes }) {
   return <Paper className={ classes.root }>
 
     <div className={ classes.nameRow }>
@@ -127,23 +128,40 @@ function QcCard({ qc, penalties, pools, canIEdit, classes }) {
       <PoolLine pool={ qcPool(qc, qc.join_battle, penalties.wound) } label="Join Battle" classes={{ root: classes.poolBlock }} />
     </div>
 
-    <div className={ classes.rowContainer }>
-      <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ qcPool(qc, qc.senses, penalties.wound) } label="Senses" classes={{ root: classes.poolBlock }} />
-    </div>
+    { !combat &&
+      <div className={ classes.rowContainer }>
+        <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
+        <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
+        <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
+        <PoolLine pool={ qcPool(qc, qc.senses, penalties.wound) } label="Senses" classes={{ root: classes.poolBlock }} />
+      </div>
+    }
 
-    <Typography paragraph>
-      <strong>Penalties:</strong>&nbsp;
 
-      Onslaught -{ penalties.onslaught },&nbsp;
-      Wound -{ penalties.wound }
-    </Typography>
+    { (penalties.mobility > 0 || penalties.onslaught > 0 || penalties.wound > 0) &&
+      <Typography paragraph style={{ marginTop: '0.5em' }}>
+        <strong>Penalties:</strong>&nbsp;
+        { penalties.mobility > 0 &&
+          <span>Mobility -{ penalties.mobility } </span>
+        }
+        { penalties.onslaught > 0 &&
+          <span>Onslaught -{ penalties.onslaught } </span>
+        }
+        { penalties.wound > 0 &&
+          <span>Wound -{ penalties.wound }</span>
+        }
+
+      </Typography>
+    }
+
+    { combat &&
+      <InitiativeWidget character={ qc } characterType="qc" />
+    }
   </Paper>
 }
 QcCard.propTypes = {
   qc: PropTypes.shape(fullQc).isRequired,
+  combat: PropTypes.bool,
   penalties: PropTypes.object,
   pools: PropTypes.object,
   player: PropTypes.object,

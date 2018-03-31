@@ -7,11 +7,11 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import { withStyles } from 'material-ui/styles'
 
-import CharacterListItem from '../characters/characterListItem.jsx'
+import CharacterCard from '../characters/CharacterCard.jsx'
 import CharacterCreatePopup from '../characters/characterCreatePopup.jsx'
-import QcListItem from '../qcs/qcListItem.jsx'
+import QcCard from '../qcs/QcCard.jsx'
 import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
-import BattlegroupListItem from '../battlegroups/battlegroupListItem'
+import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
 import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
 
 import { getMyCharacters, getMyQCs, getMyBattlegroups } from '../../selectors'
@@ -25,17 +25,17 @@ class ContentList extends React.Component {
   render() {
     const chars = this.props.characters.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 }  key={ c.id }>
-        <CharacterListItem character={ c } />
+        <CharacterCard character={ c } />
       </Grid>
     )
     const qcs = this.props.qcs.map((q) =>
       <Grid item xs={ 12 } md={ 6 } lg={ 4 }  key={ q.id }>
-        <QcListItem qc={ q } />
+        <QcCard qc={ q } />
       </Grid>
     )
     const bgs = this.props.battlegroups.map((b) =>
       <Grid item xs={ 12 } md={ 6 } lg={ 4 } key={ b.id }>
-        <BattlegroupListItem battlegroup={ b } />
+        <BattlegroupCard battlegroup={ b } />
       </Grid>
     )
 
@@ -72,7 +72,6 @@ class ContentList extends React.Component {
       <Grid item xs={ 3 }>
         <BattlegroupCreatePopup />
       </Grid>
-
       { bgs }
 
     </Grid>

@@ -7,6 +7,7 @@ import Menu from 'material-ui/Menu'
 import MoreVert from 'material-ui-icons/MoreVert'
 
 import CardMenuDelete from './CardMenuDelete.jsx'
+import CardMenuEdit from './CardMenuEdit.jsx'
 import CardMenuHide from './CardMenuHide.jsx'
 import CardMenuLinks from './CardMenuLinks.jsx'
 import CardMenuPin from './CardMenuPin.jsx'
@@ -41,8 +42,9 @@ class CharacterCardMenu extends React.Component {
         onClose={ this.handleClose }
       >
         <CardMenuLinks characterType={ this.props.characterType } id={ this.props.id } />
-        <CardMenuPin characterType={ this.props.characterType } id={ this.props.id } />
-        <CardMenuHide characterType={ this.props.characterType } id={ this.props.id } />
+        <CardMenuEdit  characterType={ this.props.characterType } id={ this.props.id } />
+        <CardMenuPin   characterType={ this.props.characterType } id={ this.props.id } />
+        <CardMenuHide  characterType={ this.props.characterType } id={ this.props.id } />
 
         <CardMenuRemoveFromChronicle characterType={ this.props.characterType } id={ this.props.id } />
 

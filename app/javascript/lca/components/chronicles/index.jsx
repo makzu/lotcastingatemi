@@ -6,11 +6,11 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
 import CharacterAddPopup from './characterAddPopup.jsx'
-import CharacterCard from './characterCard.jsx'
+import CharacterCard from '../characters/CharacterCard.jsx'
 import QcAddPopup from './qcAddPopup.jsx'
-import QcCard from './qcCard.jsx'
+import QcCard from '../qcs/QcCard.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
-import BattlegroupCard from './battlegroupCard.jsx'
+import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
 class ChronicleDashboard extends React.Component {

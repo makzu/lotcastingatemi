@@ -10,10 +10,11 @@ import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 import Whatshot from 'material-ui-icons/Whatshot'
 
-import PlayerNameSubtitle from './playerNameSubtitle.jsx'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
@@ -82,7 +83,7 @@ const styles = theme => ({
   },
 })
 
-function CharacterCard({ character, canEdit, penalties, pools, classes }) {
+function CharacterCard({ character, combat, canEdit, penalties, pools, classes }) {
   return <Paper className={ classes.root }>
 
     <div className={ classes.nameRow }>
@@ -104,10 +105,11 @@ function CharacterCard({ character, canEdit, penalties, pools, classes }) {
           }
         </Typography>
         <PlayerNameSubtitle playerId={ character.player_id } />
-
-        <Typography paragraph>
-          Essence { character.essence } { calc.prettyFullExaltType(character) }
-        </Typography>
+        { !combat &&
+          <Typography paragraph>
+            Essence { character.essence } { calc.prettyFullExaltType(character) }
+          </Typography>
+        }
       </div>
 
       { canEdit &&
@@ -172,22 +174,37 @@ function CharacterCard({ character, canEdit, penalties, pools, classes }) {
       }
     </div>
 
-    <div className={ classes.rowContainer }>
-      <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
-    </div>
+    {!combat &&
+      <div className={ classes.rowContainer }>
+        <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
+        <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
+        <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
+      </div>
+    }
 
-    <Typography paragraph>
-      <strong>Penalties:</strong>&nbsp;
-      Mobility -{ penalties.mobility },&nbsp;
-      Onslaught -{ character.onslaught },&nbsp;
-      Wound -{ penalties.wound }
-    </Typography>
+    { (penalties.mobility !== 0 || penalties.onslaught !== 0 || penalties.wound !== 0) &&
+      <Typography paragraph style={{ marginTop: '0.5em' }}>
+        <strong>Penalties:</strong>&nbsp;
+        { penalties.mobility > 0 &&
+          <span>Mobility -{ penalties.mobility } </span>
+        }
+        { penalties.onslaught > 0 &&
+          <span>Onslaught -{ character.onslaught } </span>
+        }
+        { penalties.wound > 0 &&
+          <span>Wound -{ penalties.wound }</span>
+        }
+
+      </Typography>
+    }
+    { combat &&
+      <InitiativeWidget character={ character } characterType="character" />
+    }
   </Paper>
 }
 CharacterCard.propTypes = {
   character: PropTypes.shape(fullChar).isRequired,
+  combat: PropTypes.bool,
   canEdit: PropTypes.bool,
   pools: PropTypes.object,
   penalties: PropTypes.object,

@@ -1,6 +1,6 @@
 inherit_from: .rubocop_todo.yml
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
   Include:
     - Rakefile
     - config.ru
@@ -9,8 +9,12 @@ AllCops:
     - db/schema.rb
     - db/migrate/**/*.rb
     - node_modules/**/*
+    - bin/bundle
+    - bin/rake
     - bin/rails
+    - bin/setup
     - bin/spring
+    - bin/update
     - bin/webpack
     - bin/webpack-dev-server
     - bin/webpack-watcher
@@ -29,11 +33,14 @@ Layout/SpaceInsidePercentLiteralDelimiters:
   Enabled: false
 
 Metrics/AbcSize:
-  Exclude:
-    - app/validators/**/*
+  Max: 20
 
 Metrics/LineLength:
   IgnoreCopDirectives: true
+
+Naming/FileName:
+  Exclude:
+    - 'Gemfile'
 
 Style/BlockComments:
   Exclude:
@@ -44,10 +51,6 @@ Style/Documentation:
     - app/controllers/**/*
     - app/mailers/**/*
     - config/**/*
-
-Style/FileName:
-  Exclude:
-    - 'Gemfile'
 
 Rails/Output:
   Exclude:

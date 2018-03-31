@@ -6,13 +6,11 @@ Reddit.
 
 ### What is this?
 
-This is a web app with a backend written in Ruby on Rails and a frontend written
-with React.  It's held together with wishes, dreams, and the webpacker gem in
-Rails 5.1.
+This is a web app written in React.js, with a backend written in Ruby on Rails. It uses the Webpacker gem to package everything up.
 
 ### How can I run it?
 
-Make sure you have Ruby *2.4.2*, along with a recent version of Postgres. You'll
+Make sure you have Ruby *2.5.1*, along with a recent version of Postgres. You'll
 also need [Yarn](https://yarnpkg.com/en/) and Node.js installed
 
 Once you have the repo cloned, run `bin/setup` and it *should* get everything

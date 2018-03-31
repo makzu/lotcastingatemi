@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 
 # Rails 5.1 for Webpacker
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.1.6'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '~> 3.2'
+gem 'webpacker', '~> 3.4'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.0'
@@ -58,6 +58,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'foreman'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'listen', '~> 3.1.0'
   gem 'web-console'
@@ -76,4 +77,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-ruby '2.4.2'
+ruby '2.5.1'

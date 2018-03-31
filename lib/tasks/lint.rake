@@ -15,12 +15,10 @@ if %w[development test].include? Rails.env
 
       desc 'Lint frontend code with eslint'
       task :frontend do
-        begin
-          sh './bin/yarn lint'
-        rescue RuntimeError => e
-          puts e.message
-          exit
-        end
+        sh './bin/yarn lint'
+      rescue RuntimeError => e
+        puts e.message
+        exit
       end
     end
   end

@@ -9,6 +9,7 @@ class Weapon < ApplicationRecord
 
   validates :weight, inclusion: { in: %w[ light medium heavy ] }
   validates :attr, inclusion: { in: Constants::ATTRIBUTES }
+  validates :damage_attr, inclusion: { in: Constants::ATTRIBUTES }
 
   def trim_tags
     return unless will_save_change_to_attribute? :tags

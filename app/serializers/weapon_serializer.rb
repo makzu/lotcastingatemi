@@ -4,5 +4,5 @@
 class WeaponSerializer < ActiveModel::Serializer
   attributes :id, :character_id, :name, :sort_order,
              :weight, :tags, :is_artifact,
-             :ability, :attr
+             :ability, :attr, :damage_attr
 end

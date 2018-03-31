@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330043357) do
+ActiveRecord::Schema.define(version: 20180331173633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,12 @@ ActiveRecord::Schema.define(version: 20180330043357) do
     t.integer "chronicle_sort_order", default: 0
     t.boolean "in_combat", default: false
     t.boolean "has_acted", default: false
+    t.string "portrait_link", default: ""
+    t.json "xp_log", default: []
+    t.json "xp_log_solar", default: []
+    t.string "rituals", default: [], array: true
+    t.text "notes", default: ""
+    t.boolean "houserules", default: false
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -180,6 +186,8 @@ ActiveRecord::Schema.define(version: 20180330043357) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sort_order", default: 0
+    t.string "categories", default: [], array: true
+    t.string "summary", default: ""
     t.index ["character_id"], name: "index_charms_on_character_id"
   end
 
@@ -198,6 +206,7 @@ ActiveRecord::Schema.define(version: 20180330043357) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "invite_code"
+    t.text "notes", default: ""
     t.index ["invite_code"], name: "index_chronicles_on_invite_code", unique: true
     t.index ["st_id"], name: "index_chronicles_on_st_id"
   end
@@ -358,6 +367,7 @@ ActiveRecord::Schema.define(version: 20180330043357) do
     t.json "motes_committed", default: []
     t.boolean "in_combat", default: false
     t.boolean "has_acted", default: false
+    t.text "notes", default: ""
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
@@ -389,6 +399,7 @@ ActiveRecord::Schema.define(version: 20180330043357) do
     t.datetime "updated_at", null: false
     t.string "attr", default: "dexterity"
     t.integer "sort_order", default: 0
+    t.string "damage_attr", default: "strength"
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 

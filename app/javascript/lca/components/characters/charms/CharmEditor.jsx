@@ -23,14 +23,13 @@ import {
   getSpecificCharacter, getEvokableMeritsForCharacter,
   getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter, getSpellsForCharacter, getSpiritCharmsForCharacter,
-  getAllAbilitiesWithCharmsForCharacter,
 } from '../../../selectors/'
 
 class CharmEditor extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { charmFilter: '' }
+    this.state = { abilityFilter: '', categoryFilter: '' }
 
     this.setFilter = this.setFilter.bind(this)
     this.setOpenCharm = this.setOpenCharm.bind(this)
@@ -119,19 +118,31 @@ class CharmEditor extends Component {
       </div>
 
     const {
-      character, nativeCharms, abilities, martialArtsCharms, evocations,
+      character, nativeCharms, martialArtsCharms, evocations,
       spiritCharms, spells, classes
     } = this.props
     const {
       handleUpdate, handleRemove, handleUpdateSpell, handleRemoveSpell,
       handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell, handleAddSpirit,
-      setOpenCharm,
+      setOpenCharm, setFilter,
     } = this
-    const { charmFilter, openCharm } = this.state
+    const { abilityFilter, categoryFilter, openCharm } = this.state
 
-    let filteredNatives = nativeCharms
-    if (charmFilter !== '')
-      filteredNatives = nativeCharms.filter((c) => c.ability === charmFilter)
+    let filteredNatives = nativeCharms,
+      filteredMA = martialArtsCharms,
+      filteredEvo = evocations,
+      filteredSpirit = spiritCharms,
+      filteredSpells = spells
+
+    if (abilityFilter !== '')
+      filteredNatives = filteredNatives.filter((c) => c.ability === abilityFilter)
+    if (categoryFilter !== '') {
+      filteredNatives = filteredNatives.filter((c) => c.categories.includes(categoryFilter))
+      filteredMA = filteredMA.filter((c) => c.categories.includes(categoryFilter))
+      filteredEvo = filteredEvo.filter((c) => c.categories.includes(categoryFilter))
+      filteredSpirit = filteredSpirit.filter((c) => c.categories.includes(categoryFilter))
+      filteredSpells = filteredSpells.filter((c) => c.categories.includes(categoryFilter))
+    }
 
 
     let natives = filteredNatives.map((c) =>
@@ -142,7 +153,7 @@ class CharmEditor extends Component {
         />
       </Grid>
     )
-    let maCharms = martialArtsCharms.map((c) =>
+    let maCharms = filteredMA.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
@@ -150,7 +161,7 @@ class CharmEditor extends Component {
         />
       </Grid>
     )
-    let evo = evocations.map((c) =>
+    let evo = filteredEvo.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
@@ -158,7 +169,7 @@ class CharmEditor extends Component {
         />
       </Grid>
     )
-    let spirit = spiritCharms.map((c) =>
+    let spirit = filteredSpirit.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
@@ -166,7 +177,7 @@ class CharmEditor extends Component {
         />
       </Grid>
     )
-    let spl = spells.map((c) =>
+    let spl = filteredSpells.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SpellFields spell={ c } character={ character }
           onUpdate={ handleUpdateSpell } onRemove={ handleRemoveSpell }
@@ -192,8 +203,9 @@ class CharmEditor extends Component {
                 <ContentAddCircle />
               </Button>
 
-              <CharmFilter abilities={ abilities } filter={ charmFilter }
-                name="charmFilter" onChange={ this.setFilter }
+              <CharmFilter id={ character.id }
+                currentAbility={ abilityFilter } currentCategory={ categoryFilter }
+                onChange={ setFilter }
               />
             </Typography>
           </Grid>
@@ -266,7 +278,6 @@ class CharmEditor extends Component {
 CharmEditor.propTypes = {
   character: PropTypes.object,
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
-  abilities: PropTypes.arrayOf(PropTypes.string),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
   spells: PropTypes.arrayOf(PropTypes.object),
@@ -285,7 +296,6 @@ function mapStateToProps(state, ownProps) {
   const character = getSpecificCharacter(state, id)
 
   let nativeCharms = []
-  let abilities = []
   let martialArtsCharms = []
   let evocations = []
   let artifacts = []
@@ -294,7 +304,6 @@ function mapStateToProps(state, ownProps) {
 
   if (character !== undefined) {
     nativeCharms = getNativeCharmsForCharacter(state, id)
-    abilities = getAllAbilitiesWithCharmsForCharacter(state, id)
     martialArtsCharms = getMartialArtsCharmsForCharacter(state, id)
     evocations = getEvocationsForCharacter(state, id)
     spells = getSpellsForCharacter(state, id)
@@ -305,7 +314,6 @@ function mapStateToProps(state, ownProps) {
   return {
     character,
     nativeCharms,
-    abilities,
     martialArtsCharms,
     evocations,
     artifacts,

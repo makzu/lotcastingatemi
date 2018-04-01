@@ -10,6 +10,7 @@ import TextField from 'material-ui/TextField'
 import Delete from 'material-ui-icons/Delete'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
+import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 
 const styles = theme => ({
   nameField: {
@@ -55,10 +56,10 @@ class SpellFields extends Component {
 
   handleRatingChange(e) {
     let { name, value } = e.target
-    const { charm } = this.state
+    const { spell } = this.state
 
-    this.setState({ charm: { ...charm, [name]: value }})
-    this.props.onUpdate(charm.id, charm.character_id, name, value)
+    this.setState({ spell: { ...spell, [name]: value }})
+    this.props.onUpdate(spell.id, spell.character_id, name, value)
   }
 
   handleCheck(e) {
@@ -76,7 +77,7 @@ class SpellFields extends Component {
   render() {
     const { spell } = this.state
     const { handleChange, handleBlur, handleRatingChange, handleRemove, handleCheck } = this
-    const { classes } = this.props
+    const { character, classes } = this.props
 
     return <BlockPaper>
       <Button onClick={ handleRemove } style={{ float: 'right' }}>
@@ -134,6 +135,10 @@ class SpellFields extends Component {
         onChange={ handleChange } onBlur={ handleBlur }
         className="editor-description-field" multiline fullWidth
         label="Effect" margin="dense"
+      />
+
+      <CharmCategoryAutocomplete value={ spell.categories } id={ character.id }
+        onChange={ handleRatingChange }
       />
       <br />
 

@@ -16,14 +16,13 @@ import {
   getSpecificCharacter, getMeritsForCharacter, getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter, getEvocationsForCharacter,
   getSpellsForCharacter, getSpiritCharmsForCharacter,
-  getAllAbilitiesWithCharmsForCharacter,
 } from '../../../selectors/'
 
 class CharmFullPage extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { charmFilter: '', openCharm: null }
+    this.state = { abilityFilter: '', categoryFilter: '', openCharm: null }
     this.setFilter = this.setFilter.bind(this)
     this.setOpenCharm = this.setOpenCharm.bind(this)
   }
@@ -44,15 +43,27 @@ class CharmFullPage extends Component {
       </div>
 
     const {
-      character, nativeCharms, abilities, martialArtsCharms, evocations,
+      character, nativeCharms, martialArtsCharms, evocations,
       spiritCharms, spells, classes
     } = this.props
-    const { charmFilter, openCharm } = this.state
+    const { abilityFilter, categoryFilter, openCharm } = this.state
     const { setFilter, setOpenCharm } = this
 
-    let filteredNatives = nativeCharms
-    if (charmFilter !== '')
-      filteredNatives = nativeCharms.filter((c) => c.ability === charmFilter)
+    let filteredNatives = nativeCharms,
+      filteredMA = martialArtsCharms,
+      filteredEvo = evocations,
+      filteredSpirit = spiritCharms,
+      filteredSpells = spells
+
+    if (abilityFilter !== '')
+      filteredNatives = filteredNatives.filter((c) => c.ability === abilityFilter)
+    if (categoryFilter !== '') {
+      filteredNatives = filteredNatives.filter((c) => c.categories.includes(categoryFilter))
+      filteredMA = filteredMA.filter((c) => c.categories.includes(categoryFilter))
+      filteredEvo = filteredEvo.filter((c) => c.categories.includes(categoryFilter))
+      filteredSpirit = filteredSpirit.filter((c) => c.categories.includes(categoryFilter))
+      filteredSpells = filteredSpells.filter((c) => c.categories.includes(categoryFilter))
+    }
 
     const natives = filteredNatives.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
@@ -61,28 +72,28 @@ class CharmFullPage extends Component {
         />
       </Grid>
     )
-    const maCharms = martialArtsCharms.map((c) =>
+    const maCharms = filteredMA.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <CharmDisplay charm={ c } character={ character }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
     )
-    const evo = evocations.map((c) =>
+    const evo = filteredEvo.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <CharmDisplay charm={ c } character={ character }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
     )
-    const spirit = spiritCharms.map((c) =>
+    const spirit = filteredSpirit.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <CharmDisplay charm={ c } character={ character }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
     )
-    const spl = spells.map((c) =>
+    const spl = filteredSpells.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
         <SpellDisplay spell={ c } character={ character } />
       </Grid>
@@ -96,8 +107,9 @@ class CharmFullPage extends Component {
       <Grid item xs={ 12 } className={ classes.stickyHeader }>
         <Typography variant="headline">
           Charms
-          <CharmFilter abilities={ abilities } filter={ charmFilter }
-            name="charmFilter" onChange={ setFilter }
+          <CharmFilter id={ character.id }
+            currentAbility={ abilityFilter } currentCategory={ categoryFilter }
+            onChange={ setFilter }
           />
         </Typography>
       </Grid>
@@ -137,7 +149,6 @@ class CharmFullPage extends Component {
 CharmFullPage.propTypes = {
   character: PropTypes.object,
   nativeCharms: PropTypes.arrayOf(PropTypes.object),
-  abilities: PropTypes.arrayOf(PropTypes.string),
   martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
   evocations: PropTypes.arrayOf(PropTypes.object),
   spells: PropTypes.arrayOf(PropTypes.object),
@@ -150,7 +161,6 @@ function mapStateToProps(state, ownProps) {
   const character = getSpecificCharacter(state, id)
 
   let nativeCharms = []
-  let abilities = []
   let martialArtsCharms = []
   let evocations = []
   let artifacts = []
@@ -159,7 +169,6 @@ function mapStateToProps(state, ownProps) {
 
   if (character !== undefined) {
     nativeCharms = getNativeCharmsForCharacter(state, id)
-    abilities = getAllAbilitiesWithCharmsForCharacter(state, id)
     martialArtsCharms = getMartialArtsCharmsForCharacter(state, id)
     evocations = getEvocationsForCharacter(state, id)
     spells = getSpellsForCharacter(state, id)
@@ -172,7 +181,6 @@ function mapStateToProps(state, ownProps) {
   return {
     character,
     nativeCharms,
-    abilities,
     martialArtsCharms,
     evocations,
     artifacts,

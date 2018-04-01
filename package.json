@@ -43,6 +43,7 @@
     "react-jss": "^8.1.0",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
+    "react-select": "^1.2.1",
     "redux": "^3.6.0",
     "redux-api-middleware": "^2.2.0",
     "redux-devtools-extension": "^2.13.2",

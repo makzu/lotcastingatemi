@@ -23,9 +23,6 @@ function SpellDisplay({ spell, classes }) {
 
       <strong>Duration:</strong>&nbsp;
       <span className={ classes.capitalize }>{ spell.duration }</span>
-      <br />
-
-      <strong>Prerequisite Charms:</strong> { spell.prereqs || 'None' }
     </Typography>
 
     <Typography className={ classes.charmBody }>{ spell.body }</Typography>

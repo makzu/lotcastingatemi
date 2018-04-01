@@ -13,6 +13,7 @@ import Delete from 'material-ui-icons/Delete'
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 
 import styles from './CharmStyles.js'
+import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 import { CharmSummaryBlock } from './CharmDisplay.jsx'
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import RatingField from '../../generic/RatingField.jsx'
@@ -131,6 +132,9 @@ class CharmFields extends Component {
               label="Style" margin="dense"
             />
           }
+          <CharmCategoryAutocomplete value={ charm.categories } id={ character.id }
+            onChange={ handleRatingChange }
+          />
           <br />
 
           <TextField name="cost" value={ charm.cost }

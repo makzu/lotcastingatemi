@@ -21,7 +21,7 @@ export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],
   (character, merits) => character.merits.map((m) => merits[m])
 )(characterIdMemoizer)
-export const getMeritNamesForCharacter = (state, id) => getMeritsForCharacter(state, id).map((m) => m.merit_name.toLowerCase() + m.rating)
+export const getMeritNamesForCharacter = (state, id) => getMeritsForCharacter(state, id).map((m) => m.merit_name.toLowerCase() + m.rating).sort()
 export const getEvokableMeritsForCharacter = createSelector(
   [getMeritsForCharacter],
   (merits) => merits.filter((m) =>
@@ -60,7 +60,23 @@ export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
     if (maCharms.length > 0)
       abilities = abilities.concat(['martial_arts'])
 
-    return abilities
+    return abilities.sort()
+  }
+)(characterIdMemoizer)
+export const getAllCharmCategoriesForCharacter = createCachedSelector(
+  [
+    getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter,
+    getEvocationsForCharacter, getSpiritCharmsForCharacter
+  ],
+  (natives, maCharms, evocations, spiritCharms) => {
+    let ch = natives.concat(maCharms)
+      .concat(evocations)
+      .concat(spiritCharms)
+      .reduce((a, charm) => [ ...a, ...charm.categories], [])
+      .concat(['Attack', 'Defense', 'Social'])
+      .sort()
+
+    return [ ...new Set(ch)]
   }
 )(characterIdMemoizer)
 

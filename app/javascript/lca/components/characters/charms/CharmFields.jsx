@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import scrollToElement from 'scroll-to-element'
 
@@ -25,7 +25,7 @@ function checkVisible(elm) {
   return !(rect.bottom < 0 || rect.top - viewHeight >= 0)
 }
 
-class CharmFields extends React.Component {
+class CharmFields extends Component {
   constructor(props) {
     super(props)
     this.state = {}

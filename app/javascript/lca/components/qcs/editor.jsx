@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -23,7 +23,7 @@ import { getSpecificQc } from '../../selectors'
 import { woundPenalty } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
-class QcEditor extends React.Component {
+class QcEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

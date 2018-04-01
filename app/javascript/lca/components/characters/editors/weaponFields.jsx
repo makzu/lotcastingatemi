@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
@@ -38,7 +38,7 @@ const styles = theme => ({
 /* TODO: handle ranged weapons properly
  * TODO: allow unusual weapons like that given by The Burning Name
  */
-class WeaponFields extends React.Component {
+class WeaponFields extends Component {
   constructor(props) {
     super(props)
 

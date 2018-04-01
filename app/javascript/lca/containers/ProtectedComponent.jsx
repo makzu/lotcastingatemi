@@ -1,18 +1,19 @@
-import React from 'react'
-//import PropTypes from 'prop-types'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
 import Typography from 'material-ui/Typography'
 
-class _LogoutPopup extends React.Component {
+class _LogoutPopup extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
   static getDerivedStateFromProps(props, state) { // eslint-disable-line no-unused-vars
+    if (state.open === !props.authenticated)
+      return null
     return({ open: !props.authenticated })
   }
 
@@ -45,10 +46,10 @@ const mapStateToProps = (state) => ({
 const LogoutPopup = connect(mapStateToProps)(_LogoutPopup)
 
 const ProtectedComponent = WrappedComponent => {
-  const protectedComponent = props => <React.Fragment>
+  const protectedComponent = props => <Fragment>
     <WrappedComponent { ...props } />
     <LogoutPopup />
-  </React.Fragment>
+  </Fragment>
   protectedComponent.displayName = 'Protected Component'
 
   return protectedComponent

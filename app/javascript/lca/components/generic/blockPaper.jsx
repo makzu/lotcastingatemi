@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
@@ -14,7 +14,7 @@ const styles = theme => ({
   }
 })
 
-class BlockPaper extends React.PureComponent {
+class BlockPaper extends Component {
   render() {
     return <Paper className={ this.props.classes.root }>
       { this.props.children }

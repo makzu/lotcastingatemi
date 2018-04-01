@@ -1,15 +1,12 @@
+import { isAuthFailure } from './app.js'
 import { FETCH_SUCCESS as PLAYER_FETCH_SUCCESS } from './entities/player.js'
 
-export const LOGOUT =         'lca/session/LOGOUT'
-
-function isAuthFailure(action) {
-  return (action.error && action.payload.status == 401)
-}
+export const LOGOUT       = 'lca/session/LOGOUT'
+export const AUTH_FAILURE = 'lca/session/AUTH_FAILURE'
 
 const defaultState = {
   authenticated: !!localStorage.jwt || false,
   id: 0,
-  error: '',
 }
 
 export default function SessionReducer(state = defaultState, action) {
@@ -17,7 +14,6 @@ export default function SessionReducer(state = defaultState, action) {
     return { ...state,
       authenticated: false,
       id: 0,
-      error: action.payload.status,
     }
   }
 
@@ -26,13 +22,11 @@ export default function SessionReducer(state = defaultState, action) {
     return { ...state,
       authenticated: false,
       id: 0,
-      error: '',
     }
 
   case PLAYER_FETCH_SUCCESS:
     return { ...state,
       id: action.payload.result,
-      error: ''
     }
 
   default:
@@ -41,3 +35,4 @@ export default function SessionReducer(state = defaultState, action) {
 }
 
 export const logout  = () => ({ type: LOGOUT  })
+export const authFailure = () => ({ type: AUTH_FAILURE })

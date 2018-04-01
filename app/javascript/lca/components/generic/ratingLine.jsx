@@ -37,6 +37,7 @@ RatingLine.propTypes = {
   rating: PropTypes.number.isRequired,
   fillTo: PropTypes.number,
   dontFill: PropTypes.bool,
+  merit: PropTypes.bool,
   children: PropTypes.node,
   classes: PropTypes.object,
 }

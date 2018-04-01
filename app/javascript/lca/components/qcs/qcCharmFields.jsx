@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'material-ui/Button'
@@ -11,7 +11,7 @@ import RatingField from '../generic/RatingField.jsx'
 import { qcCharm } from '../../utils/propTypes'
 
 
-export default class QcCharmFields extends React.Component {
+export default class QcCharmFields extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)

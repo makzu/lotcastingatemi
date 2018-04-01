@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,7 +13,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { getSpecificChronicle } from '../../selectors/'
 
-class ChroniclePlayerPage extends React.PureComponent {
+class ChroniclePlayerPage extends Component {
   constructor(props) {
     super(props)
   }

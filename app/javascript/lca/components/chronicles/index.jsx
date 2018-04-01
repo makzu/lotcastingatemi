@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -16,7 +16,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { getSpecificChronicle } from '../../selectors/'
 
-class ChronicleDashboard extends React.Component {
+class ChronicleDashboard extends Component {
   render() {
     /* Escape hatch */
     if (this.props.chronicle == undefined || this.props.chronicle.name == undefined)

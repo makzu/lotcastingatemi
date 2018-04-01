@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -64,7 +64,7 @@ _SingleMerit.propTypes = {
 }
 export const SingleMerit = withStyles(styles)(_SingleMerit)
 
-class MeritFullPage extends React.Component {
+class MeritFullPage extends Component {
   constructor(props) {
     super(props)
   }

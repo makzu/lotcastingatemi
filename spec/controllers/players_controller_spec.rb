@@ -5,8 +5,7 @@ require Rails.root.join('spec', 'controllers', 'shared_examples', 'respond_to_un
 
 RSpec.describe Api::V1::PlayersController, type: :controller do
   def authenticated_header(user)
-    token = Knock::AuthToken.new(payload: { sub: user.id }).token
-    "Bearer #{token}"
+    "Bearer #{user.token}"
   end
 
   before(:each) do

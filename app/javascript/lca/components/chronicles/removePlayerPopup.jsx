@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,7 +13,7 @@ import Dialog, {
 import { removePlayerFromChronicle } from '../../ducks/actions.js'
 import { getSpecificChronicle } from '../../selectors'
 
-class RemovePlayerPopup extends React.Component {
+class RemovePlayerPopup extends Component {
   constructor(props) {
     super(props)
 

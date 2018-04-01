@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
@@ -18,7 +18,7 @@ const styles = theme => ({
   },
 })
 
-class AbilitySelect extends React.Component {
+class AbilitySelect extends Component {
   constructor(props) {
     super(props)
 

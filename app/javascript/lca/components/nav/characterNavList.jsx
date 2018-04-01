@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
@@ -11,7 +11,7 @@ import ExpandMore from 'material-ui-icons/ExpandMore'
 
 import { getMyPinnedCharacters, getMyPinnedQCs, getMyPinnedBattlegroups } from '../../selectors'
 
-class CharacterNavList extends React.Component {
+class CharacterNavList extends Component {
   constructor(props) {
     super(props)
     this.state = { open: false }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -17,7 +17,7 @@ import Typography from 'material-ui/Typography'
 
 import { createCharacter } from '../../ducks/actions.js'
 
-class CharacterCreatePopup extends React.Component {
+class CharacterCreatePopup extends Component {
   constructor(props) {
     super(props)
 
@@ -74,7 +74,7 @@ class CharacterCreatePopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleAspectChange, handleSubmit } = this
     const { character } = this.state
 
-    return <React.Fragment>
+    return <Fragment>
       <Button onClick={ handleOpen }>Create New</Button>
       <Dialog
         open={ this.state.open }
@@ -168,7 +168,7 @@ class CharacterCreatePopup extends React.Component {
           <Button onClick={ handleSubmit } variant="raised" color="primary">Create</Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   }
 }
 CharacterCreatePopup.propTypes = {

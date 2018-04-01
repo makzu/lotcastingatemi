@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'material-ui/Button'
@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField'
 import Grow from 'material-ui/transitions/Grow'
 import Filter from 'material-ui-icons/FilterList'
 
-class CharmFilter extends React.Component {
+class CharmFilter extends Component {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -28,7 +28,7 @@ class CharmFilter extends React.Component {
           { abil }
         </MenuItem>
     )
-    return <React.Fragment>
+    return <Fragment>
       <Button onClick={ this.toggleOpen }>
         Filter <Hidden mdDown>Charms</Hidden>&nbsp;
         <Filter />
@@ -48,7 +48,7 @@ class CharmFilter extends React.Component {
           { options }
         </TextField>
       </Grow>
-    </React.Fragment>
+    </Fragment>
   }
 }
 CharmFilter.propTypes = {

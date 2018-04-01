@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
@@ -14,7 +14,7 @@ import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
 import { getMyChronicles, getMyOwnChronicles } from '../../selectors'
 
-class ChronicleNavList extends React.Component {
+class ChronicleNavList extends Component {
   constructor(props) {
     super(props)
     this.state = { open: false }

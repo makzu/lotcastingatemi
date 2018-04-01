@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'material-ui/Button'
@@ -10,7 +10,7 @@ import Typography from 'material-ui/Typography'
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import { fullChar } from '../../../utils/propTypes'
 
-class ExcellencyEditor extends React.Component {
+class ExcellencyEditor extends Component {
   constructor(props) {
     super(props)
 
@@ -54,7 +54,7 @@ class ExcellencyEditor extends React.Component {
       <MenuItem key="otherattribute" value="otherattribute">Another Attribute (will select highest available)</MenuItem>,
     ]
 
-    return <React.Fragment>
+    return <Fragment>
       <Button
         onClick={ handleOpen }
       >
@@ -133,7 +133,7 @@ class ExcellencyEditor extends React.Component {
           <Button onClick={ handleClose }>Done</Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   }
 }
 ExcellencyEditor.propTypes = {

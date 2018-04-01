@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -30,7 +30,7 @@ const WillRaiseAnima = ({ current, spending, mute }) => {
 }
 WillRaiseAnima.propTypes = { current: PropTypes.number, spending: PropTypes.number, mute: PropTypes.bool }
 
-class MoteSpendWidget extends React.Component {
+class MoteSpendWidget extends Component {
   constructor(props) {
     super(props)
     this.state = { open: false, toSpend: 0, commit: false, commitName: '', mute: false }
@@ -114,7 +114,7 @@ class MoteSpendWidget extends React.Component {
       return children
     }
 
-    return <React.Fragment>
+    return <Fragment>
       <ButtonBase onClick={ handleOpen }>
         { children }
       </ButtonBase>
@@ -168,7 +168,7 @@ class MoteSpendWidget extends React.Component {
           </div>
 
           { peripheral &&
-            <React.Fragment>
+            <Fragment>
               <div>
                 <FormControlLabel label="Mute"
                   control={
@@ -177,7 +177,7 @@ class MoteSpendWidget extends React.Component {
                 />
               </div>
               <WillRaiseAnima current={ character.anima_level } spending={ toSpend } mute={ mute } />
-            </React.Fragment>
+            </Fragment>
           }
         </DialogContent>
 
@@ -190,7 +190,7 @@ class MoteSpendWidget extends React.Component {
           </Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   }
 }
 MoteSpendWidget.propTypes = {

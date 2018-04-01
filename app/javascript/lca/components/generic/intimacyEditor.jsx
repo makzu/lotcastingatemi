@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
@@ -51,7 +51,7 @@ _IntimacyFields.propTypes = {
 }
 const IntimacyFields = withStyles(styles)(_IntimacyFields)
 
-class IntimacyEditor extends React.Component {
+class IntimacyEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

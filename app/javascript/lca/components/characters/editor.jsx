@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -28,7 +28,7 @@ import { updateCharacter } from '../../ducks/actions.js'
 import { getSpecificCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import { fullChar } from '../../utils/propTypes'
 
-class CharacterEditor extends React.Component {
+class CharacterEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

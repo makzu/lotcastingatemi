@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -178,7 +178,7 @@ SorceryBlock.propTypes = {
   character: PropTypes.object,
 }
 
-export class CharacterSheet extends React.Component {
+export class CharacterSheet extends Component {
   constructor(props) {
     super(props)
   }

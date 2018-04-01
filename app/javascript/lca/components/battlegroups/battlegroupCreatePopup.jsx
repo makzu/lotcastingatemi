@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,7 +13,7 @@ import TextField from 'material-ui/TextField'
 import { createBattlegroup } from '../../ducks/actions.js'
 
 // TODO: enable creating a battlegroup of a player's existing QC
-class BattlegroupCreatePopup extends React.Component {
+class BattlegroupCreatePopup extends Component {
   constructor(props) {
     super(props)
 

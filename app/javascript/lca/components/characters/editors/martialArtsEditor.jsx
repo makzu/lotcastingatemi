@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
@@ -52,7 +52,7 @@ _MAFields.propTypes = {
 }
 const MAFields = withStyles(styles)(_MAFields)
 
-class MAEditor extends React.Component {
+class MAEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

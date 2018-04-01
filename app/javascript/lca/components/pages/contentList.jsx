@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -22,7 +22,7 @@ const styles = theme => ({
   nthTitle: { marginTop: theme.spacing.unit * 3 },
 })
 
-class ContentList extends React.Component {
+class ContentList extends Component {
   render() {
     const chars = this.props.characters.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 }  key={ c.id }>

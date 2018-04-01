@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Typography from 'material-ui/Typography'
@@ -7,7 +7,7 @@ import { withIntimacies } from '../../../utils/propTypes'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import Editor from '../../generic/intimacyEditor.jsx'
 
-class IntimacyEditor extends React.Component {
+class IntimacyEditor extends Component {
   render() {
     const { character, onRatingChange } = this.props
 

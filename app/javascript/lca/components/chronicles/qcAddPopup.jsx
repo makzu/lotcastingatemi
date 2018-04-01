@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -16,7 +16,7 @@ import TextField from 'material-ui/TextField'
 import { addThingToChronicle } from '../../ducks/actions.js'
 import { getSpecificChronicle, getMyQcsWithoutChronicles } from '../../selectors/'
 
-class QcAddPopup extends React.Component {
+class QcAddPopup extends Component {
   constructor(props) {
     super(props)
 

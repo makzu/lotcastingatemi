@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -31,7 +31,7 @@ const styles = theme => ({
   }
 })
 
-class BattlegroupEditor extends React.Component {
+class BattlegroupEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

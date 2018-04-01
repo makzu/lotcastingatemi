@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,7 +13,7 @@ import TextField from 'material-ui/TextField'
 import { createQc } from '../../ducks/actions.js'
 
 // TODO: Enable autofill for some example QCs?
-class QcCreatePopup extends React.Component {
+class QcCreatePopup extends Component {
   constructor(props) {
     super(props)
 

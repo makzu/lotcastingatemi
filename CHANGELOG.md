@@ -17,8 +17,8 @@
 ## v40
 ###### *Mar 26, 2018*
 - Changing Solar Castes no longer throws an error if the new caste does not support your current caste/supernal selections (thanks /u/SparksMurphey)
-- Changing Supernal ability now adds the new Supernal to the list of Caste abilities
-- Changing Supernal ability with a full list of Caste abilities changes the last-selected ability to the new Supernal
+- Changing Solar Supernal ability now adds the new Supernal to the list of Caste abilities
+- Changing Solar Supernal ability with a full list of Caste abilities changes the last-selected ability to the new Supernal
 - Selecting a Favored Attribute/Ability as Caste "Promotes" it to Caste
 
 ## v39

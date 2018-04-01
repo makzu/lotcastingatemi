@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Divider from 'material-ui/Divider'
@@ -13,7 +13,7 @@ import CardMenuLinks from './CardMenuLinks.jsx'
 import CardMenuPin from './CardMenuPin.jsx'
 import CardMenuRemoveFromChronicle from './CardMenuRemoveFromChronicle.jsx'
 
-class CharacterCardMenu extends React.Component {
+class CharacterCardMenu extends Component {
   constructor(props) {
     super(props)
     this.state = { menuAnchor: null }

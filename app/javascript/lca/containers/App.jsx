@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
@@ -67,7 +67,7 @@ const styles = theme => ({
   }
 })
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props)
 

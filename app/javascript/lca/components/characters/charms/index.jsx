@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -19,7 +19,7 @@ import {
   getAllAbilitiesWithCharmsForCharacter,
 } from '../../../selectors/'
 
-class CharmFullPage extends React.Component {
+class CharmFullPage extends Component {
   constructor(props) {
     super(props)
 

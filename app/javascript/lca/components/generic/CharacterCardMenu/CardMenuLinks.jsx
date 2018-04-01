@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
@@ -7,11 +7,11 @@ import { MenuItem } from 'material-ui/Menu'
 
 function CardMenuLinks(props) {
 
-  return <React.Fragment>
+  return <Fragment>
     <MenuItem button component={ Link } to={ '/'+props.characterType+'s/'+props.id }>
       <ListItemText primary="Full Sheet" />
     </MenuItem>
-  </React.Fragment>
+  </Fragment>
 }
 CardMenuLinks.propTypes = {
   id: PropTypes.number.isRequired,

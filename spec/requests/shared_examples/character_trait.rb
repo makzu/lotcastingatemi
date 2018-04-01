@@ -4,8 +4,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
   ActiveJob::Base.queue_adapter = :test
 
   def authenticated_header(user)
-    token = Knock::AuthToken.new(payload: { sub: user.id }).token
-    { 'Authorization' => "Bearer #{token}" }
+    { 'Authorization' => "Bearer #{user.token}" }
   end
 
   let(:trait) { create(trait_type) }

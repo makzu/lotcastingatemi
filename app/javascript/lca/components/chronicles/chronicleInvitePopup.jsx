@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,7 +13,7 @@ import Dialog, {
 import { updateChronicle, regenChronicleInviteCode } from '../../ducks/actions.js'
 import { getSpecificChronicle } from '../../selectors'
 
-class ChronicleInvitePopup extends React.Component {
+class ChronicleInvitePopup extends Component {
   constructor(props) {
     super(props)
 

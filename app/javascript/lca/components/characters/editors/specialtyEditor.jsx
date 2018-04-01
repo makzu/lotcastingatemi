@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
@@ -54,7 +54,7 @@ _SpecialtyFields.propTypes = {
 }
 const SpecialtyFields = withStyles(styles)(_SpecialtyFields)
 
-class SpecialtyEditor extends React.Component {
+class SpecialtyEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

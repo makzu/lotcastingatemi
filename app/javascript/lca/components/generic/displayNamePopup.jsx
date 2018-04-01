@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -8,13 +8,12 @@ import Dialog, {
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog'
-import List, { ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
+import { ListItem, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
 import { updatePlayer } from '../../ducks/actions.js'
 
-// TODO: Enable autofill for some example QCs?
-class DisplayNamePopup extends React.Component {
+class DisplayNamePopup extends Component {
   constructor(props) {
     super(props)
 
@@ -53,7 +52,7 @@ class DisplayNamePopup extends React.Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { player } = this.state
 
-    return <React.Fragment>
+    return <Fragment>
       <ListItem button onClick={ handleOpen }>
         <ListItemText primary={ `Logged in as ${this.props.displayName}`}
           secondary="(click to change name)"
@@ -76,7 +75,7 @@ class DisplayNamePopup extends React.Component {
           <Button onClick={ handleSubmit } variant="raised" color="primary">Update</Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   }
 }
 DisplayNamePopup.propTypes = {

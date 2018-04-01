@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -12,7 +12,7 @@ import { spendWillpower } from '../../ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from '../../selectors'
 import { clamp } from '../../utils/'
 
-class WillpowerSpendWidget extends React.Component {
+class WillpowerSpendWidget extends Component {
   constructor(props) {
     super(props)
     this.state = { open: false, toSpend: 0, commit: false, commitName: '' }
@@ -75,7 +75,7 @@ class WillpowerSpendWidget extends React.Component {
       return children
     }
 
-    return <React.Fragment>
+    return <Fragment>
       <ButtonBase onClick={ handleOpen }>
         { children }
       </ButtonBase>
@@ -121,7 +121,7 @@ class WillpowerSpendWidget extends React.Component {
           </Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   }
 }
 WillpowerSpendWidget.propTypes = {

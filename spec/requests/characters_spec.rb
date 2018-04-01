@@ -5,8 +5,7 @@ require 'requests/shared_examples/character'
 
 RSpec.describe 'Characters', type: :request do
   def authenticated_header(user)
-    token = Knock::AuthToken.new(payload: { sub: user.id }).token
-    { 'Authorization' => "Bearer #{token}" }
+    { 'Authorization' => "Bearer #{user.token}" }
   end
 
   it_behaves_like 'character', :character

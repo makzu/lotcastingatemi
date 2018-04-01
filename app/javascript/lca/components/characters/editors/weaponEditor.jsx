@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,7 +13,7 @@ import { createWeapon, destroyWeapon, updateWeapon } from '../../../ducks/action
 import { getWeaponsForCharacter } from '../../../selectors'
 import { fullWeapon } from '../../../utils/propTypes'
 
-class WeaponEditor extends React.Component {
+class WeaponEditor extends Component {
   constructor(props) {
     super(props)
 

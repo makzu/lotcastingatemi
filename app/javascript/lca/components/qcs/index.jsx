@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -66,7 +66,7 @@ const styles = theme => ({
   },
 })
 
-class QcSheet extends React.PureComponent {
+class QcSheet extends Component {
   constructor(props) {
     super(props)
   }
@@ -293,14 +293,14 @@ class QcSheet extends React.PureComponent {
       </Typography>
 
       { charms.length > 0 &&
-        <React.Fragment>
+        <Fragment>
           <Typography variant="subheading">
             Charms
           </Typography>
           <Typography component="div">
             { charms }
           </Typography>
-        </React.Fragment>
+        </Fragment>
       }
     </BlockPaper>
   }

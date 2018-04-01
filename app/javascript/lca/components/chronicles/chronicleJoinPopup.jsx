@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -15,7 +15,7 @@ import GroupAdd from 'material-ui-icons/GroupAdd'
 
 import { joinChronicle } from '../../ducks/actions.js'
 
-class ChronicleJoinPopup extends React.Component {
+class ChronicleJoinPopup extends Component {
   constructor(props) {
     super(props)
 

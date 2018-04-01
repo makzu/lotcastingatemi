@@ -23,7 +23,7 @@ const styles = theme => ({
   },
 })
 
-export function CombatBlock({ character, pools, classes }) {
+export function CombatBlock({ pools, classes }) {
   return <BlockPaper>
     <Typography variant="title">
       Combat Pools

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -45,7 +45,7 @@ const styles = theme => ({
 })
 
 function _SingleCharm({ charm, classes }) {
-  return <React.Fragment>
+  return <Fragment>
     <Typography component="div" className={ classes.root }>
       <div className={ classes.name }>
         { charm.name }
@@ -66,7 +66,7 @@ function _SingleCharm({ charm, classes }) {
     </Typography>
 
     <Divider />
-  </React.Fragment>
+  </Fragment>
 }
 _SingleCharm.propTypes = {
   charm: PropTypes.object,
@@ -75,7 +75,7 @@ _SingleCharm.propTypes = {
 const SingleCharm = withStyles(styles)(_SingleCharm)
 
 function _SingleSpell({ spell, classes }) {
-  return <React.Fragment>
+  return <Fragment>
     <Typography component="div" className={ classes.root }>
       <div className={ classes.name }>
         { spell.name }
@@ -92,7 +92,7 @@ function _SingleSpell({ spell, classes }) {
       <div className={ classes.body }>{ spell.body }</div>
     </Typography>
     <Divider />
-  </React.Fragment>
+  </Fragment>
 }
 _SingleSpell.propTypes = {
   spell: PropTypes.object,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -12,7 +12,7 @@ import Delete from 'material-ui-icons/Delete'
 import { destroyCharacter, destroyQc, destroyBattlegroup } from '../../../ducks/actions.js'
 import { canIDelete } from '../../../selectors'
 
-class CardMenuDelete extends React.Component {
+class CardMenuDelete extends Component {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -46,7 +46,7 @@ class CardMenuDelete extends React.Component {
       action = this.props.destroyCharacter
     }
 
-    return <React.Fragment>
+    return <Fragment>
       <MenuItem button onClick={ this.handleOpen }>
         <ListItemIcon><Delete /></ListItemIcon>
         <ListItemText primary="Delete" />
@@ -70,7 +70,7 @@ class CardMenuDelete extends React.Component {
           <Button onClick={ () => action(this.props.id) } color="primary" variant="raised">Delete</Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   }
 }
 CardMenuDelete.propTypes = {

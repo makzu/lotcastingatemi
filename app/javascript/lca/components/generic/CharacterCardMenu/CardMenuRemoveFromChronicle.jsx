@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,12 +13,12 @@ function CardMenuHide({ id, chronId, characterType, canIEdit, removeThing }) {
   if (!canIEdit || chronId == undefined)
     return <div />
 
-  return <React.Fragment>
+  return <Fragment>
     <MenuItem button onClick={ () => removeThing(chronId, id, characterType)}>
       <ListItemIcon><RemoveCircle /></ListItemIcon>
       <ListItemText inset primary="Remove from Chronicle" />
     </MenuItem>
-  </React.Fragment>
+  </Fragment>
 }
 CardMenuHide.propTypes = {
   chronId: PropTypes.number,

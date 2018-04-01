@@ -6,8 +6,7 @@ require 'rails_helper'
 
 RSpec.describe 'Chronciles', type: :request do
   def authenticated_header(user)
-    token = Knock::AuthToken.new(payload: { sub: user.id }).token
-    { 'Authorization' => "Bearer #{token}" }
+    { 'Authorization' => "Bearer #{user.token}" }
   end
 
   let(:chronicle) { create(:chronicle) }

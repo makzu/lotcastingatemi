@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Checkbox from 'material-ui/Checkbox'
@@ -11,7 +11,7 @@ import Delete from 'material-ui-icons/Delete'
 
 import { qcMerit } from '../../utils/propTypes'
 
-export default class QcMeritFields extends React.Component {
+export default class QcMeritFields extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)

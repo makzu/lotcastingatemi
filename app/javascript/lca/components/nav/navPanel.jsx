@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link, NavLink } from 'react-router-dom'
@@ -21,7 +21,7 @@ const styles = theme => ({ // eslint-disable-line no-unused-vars
   },
 })
 
-export class NavPanel extends React.Component {
+export class NavPanel extends Component {
   constructor(props) {
     super(props)
     this.closeCheck = this.closeCheck.bind(this)
@@ -79,13 +79,13 @@ export class NavPanel extends React.Component {
 
         <Divider />
 
-        { authenticated && <React.Fragment>
+        { authenticated && <Fragment>
           <ListItem button component={ Link } to="/" onClick={ logout }>
             <ListItemText primary="Log Out" />
           </ListItem>
 
           <Divider />
-        </React.Fragment> }
+        </Fragment> }
 
         <ListItem button component="a"
           href="https://github.com/makzu/lotcastingatemi"

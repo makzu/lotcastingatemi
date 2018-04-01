@@ -4,8 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::QcsController, type: :controller do
   def authenticated_header(user)
-    token = Knock::AuthToken.new(payload: { sub: user.id }).token
-    "Bearer #{token}"
+    "Bearer #{user.token}"
   end
 
   before(:each) do

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -36,7 +36,7 @@ const styles = theme => ({
   },
 })
 
-class QcAttackFields extends React.Component {
+class QcAttackFields extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)

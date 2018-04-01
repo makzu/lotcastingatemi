@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'material-ui/Button'
@@ -36,7 +36,7 @@ ActionFields.propTypes = {
   onRemove: PropTypes.func,
 }
 
-class QcActionEditor extends React.Component {
+class QcActionEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

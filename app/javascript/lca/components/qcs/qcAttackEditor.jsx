@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -11,7 +11,7 @@ import { createQcAttack, destroyQcAttack, updateQcAttack } from '../../ducks/act
 import { getAttacksForBattlegroup, getAttacksForQc, } from '../../selectors'
 import { qcAttack } from '../../utils/propTypes'
 
-class QcAttackEditor extends React.Component {
+class QcAttackEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -21,7 +21,7 @@ import { getSpecificCharacter, getMeritsForCharacter } from '../../selectors'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'
 
-export class MeritFields extends React.Component {
+export class MeritFields extends Component {
   constructor(props) {
     super(props)
     this.state = { merit: this.props.merit }
@@ -84,7 +84,7 @@ export class MeritFields extends React.Component {
         <Delete />
       </Button>
 
-      <Typography>
+      <Typography component="div">
         <TextField name="merit_name" value={ merit.merit_name }
           onChange={ handleChange } onBlur={ handleBlur }
           label="Merit" margin="dense"
@@ -153,7 +153,7 @@ MeritFields.propTypes = {
  * ref pre-filled
  * TODO:  See how kosher something like above would be
  * */
-class MeritEditor extends React.Component {
+class MeritEditor extends Component {
   constructor(props) {
     super(props)
 

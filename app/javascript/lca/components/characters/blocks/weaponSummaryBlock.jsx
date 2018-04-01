@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -62,7 +62,7 @@ function RangedWeaponAttacks({ weaponPools, classes }) {
   const pool = weaponPools.rangedWitheringAttack
   const poolLineClasses = { root: classes.narrowPoolBlock, label: classes.label, labelSpan: classes.labelSpan }
 
-  return <React.Fragment>
+  return <Fragment>
     <PoolLine pool={ pool.close } label="Withering Close" classes={ poolLineClasses } />
     { pool.short.available &&
       <PoolLine pool={ pool.short } label="Withering Short" classes={ poolLineClasses } />
@@ -76,7 +76,7 @@ function RangedWeaponAttacks({ weaponPools, classes }) {
     { pool.extreme.available &&
       <PoolLine pool={ pool.extreme } label="Withering Extreme" classes={ poolLineClasses }  />
     }
-  </React.Fragment>
+  </Fragment>
 }
 RangedWeaponAttacks.propTypes = {
   weapon: PropTypes.shape(fullWeapon),
@@ -130,10 +130,10 @@ const WeaponLine = withStyles(styles)(connect(mapStateToProps)(_WeaponLine))
 
 function WeaponSummaryBlock({ character, weapons }) {
 
-  const weas = weapons.map((weapon) => <React.Fragment key={ weapon.id } >
+  const weas = weapons.map((weapon) => <Fragment key={ weapon.id } >
     <WeaponLine character={ character } weapon={ weapon } />
     <Divider />
-  </React.Fragment>)
+  </Fragment>)
 
   return <div>
     { weas }

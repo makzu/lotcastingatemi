@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -12,7 +12,7 @@ import { createQcMerit, destroyQcMerit, updateQcMerit } from '../../ducks/action
 import { getMeritsForQc } from '../../selectors'
 import { fullQc, qcMerit } from '../../utils/propTypes'
 
-class QcMeritEditor extends React.Component {
+class QcMeritEditor extends Component {
   constructor(props) {
     super(props)
 

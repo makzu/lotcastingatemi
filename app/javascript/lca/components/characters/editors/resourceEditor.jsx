@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
@@ -50,7 +50,7 @@ _ResourceFields.propTypes = {
 }
 const ResourceFields = withStyles(styles)(_ResourceFields)
 
-class ResourceEditor extends React.Component {
+class ResourceEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
@@ -52,7 +52,7 @@ _CraftFields.propTypes = {
 }
 const CraftFields = withStyles(styles)(_CraftFields)
 
-class CraftEditor extends React.Component {
+class CraftEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

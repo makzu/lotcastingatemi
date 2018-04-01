@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -12,7 +12,7 @@ import { createQcCharm, destroyQcCharm, updateQcCharm } from '../../ducks/action
 import { getCharmsForQc } from '../../selectors'
 import { fullQc, qcCharm } from '../../utils/propTypes'
 
-class QcCharmEditor extends React.Component {
+class QcCharmEditor extends Component {
   constructor(props) {
     super(props)
 

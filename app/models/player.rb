@@ -20,9 +20,10 @@ class Player < ApplicationRecord
     chronicle_ids + own_chronicle_ids
   end
 
-  def token
-    Knock::AuthToken.new(payload: { sub: id }).token
+  def token_payload
+    Knock::AuthToken.new(payload: { sub: id })
   end
+  delegate :token, to: :token_payload
 
   def entity_type
     'player'

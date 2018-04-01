@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { cloneDeep } from 'lodash'
 
@@ -61,7 +61,7 @@ _CommitFields.propTypes = {
 }
 const CommitFields = withStyles(styles)(_CommitFields)
 
-class MoteCommittmentEditor extends React.Component {
+class MoteCommittmentEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

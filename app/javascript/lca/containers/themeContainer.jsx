@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -40,7 +40,7 @@ const themes = {
   })
 }
 
-class ThemeContainer extends React.Component {
+class ThemeContainer extends Component {
   constructor(props) {
     super(props)
     this.handleStorageChange = this.handleStorageChange.bind(this)

@@ -17,6 +17,7 @@ import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
 
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { updateQc } from '../../ducks/actions.js'
 import { getSpecificQc } from '../../selectors'
 import { woundPenalty } from '../../utils/calculated'
@@ -331,7 +332,8 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(QcEditor)
+export default ProtectedComponent(
+  connect(mapStateToProps, mapDispatchToProps)(
+    QcEditor
+  )
+)

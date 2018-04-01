@@ -8,6 +8,8 @@ import Typography from 'material-ui/Typography'
 import PoolLine from '../characters/PoolLine.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { getSpecificBattlegroup, getAttacksForBattlegroup } from '../../selectors'
 import { qcAttack } from '../../utils/propTypes'
 import {
@@ -227,4 +229,10 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(BattlegroupSheet))
+export default ProtectedComponent(
+  withStyles(styles)(
+    connect(mapStateToProps)(
+      BattlegroupSheet
+    )
+  )
+)

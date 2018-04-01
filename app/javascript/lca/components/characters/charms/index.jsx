@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
@@ -11,6 +10,8 @@ import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
+
+import ProtectedComponent from '../../../containers/ProtectedComponent.jsx'
 import {
   getSpecificCharacter, getMeritsForCharacter, getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter, getEvocationsForCharacter,
@@ -180,4 +181,10 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(CharmFullPage))
+export default ProtectedComponent(
+  withStyles(styles)(
+    connect(mapStateToProps)(
+      CharmFullPage
+    )
+  )
+)

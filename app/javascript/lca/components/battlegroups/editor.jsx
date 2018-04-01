@@ -13,6 +13,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { updateBattlegroup } from '../../ducks/actions.js'
 import { getSpecificBattlegroup } from '../../selectors'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from '../../utils/calculated/'
@@ -264,6 +265,10 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withStyles(styles)(
-  connect( mapStateToProps, mapDispatchToProps)(BattlegroupEditor)
+export default ProtectedComponent(
+  withStyles(styles)(
+    connect(mapStateToProps, mapDispatchToProps)(
+      BattlegroupEditor
+    )
+  )
 )

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 import EntityReducer from './entities'
-import SessionReducer from './account.js'
+import SessionReducer from './session.js'
 import AppReducer from './app.js'
 
 const lcaApp = combineReducers({

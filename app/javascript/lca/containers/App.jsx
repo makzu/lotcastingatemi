@@ -151,7 +151,7 @@ function mapStateToProps(state) {
   const { drawerOpen, loading } = state.app
   return {
     drawerOpen,
-    loading
+    loading,
   }
 }
 

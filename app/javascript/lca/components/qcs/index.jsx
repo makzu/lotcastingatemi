@@ -11,6 +11,8 @@ import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import {
   getSpecificQc, getAttacksForQc, getMeritsForQc, getCharmsForQc,
   getPenaltiesForQc, getPoolsAndRatingsForQc,
@@ -345,6 +347,10 @@ QcSheet.propTypes = {
   classes: PropTypes.object,
 }
 
-export default withStyles(styles)(connect(
-  mapStateToProps
-)(QcSheet))
+export default ProtectedComponent(
+  withStyles(styles)(
+    connect(mapStateToProps)(
+      QcSheet
+    )
+  )
+)

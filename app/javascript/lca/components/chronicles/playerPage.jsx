@@ -9,6 +9,8 @@ import Typography from 'material-ui/Typography'
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
+
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { getSpecificChronicle } from '../../selectors/'
 
 class ChroniclePlayerPage extends React.PureComponent {
@@ -100,6 +102,8 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(ChroniclePlayerPage)
+export default ProtectedComponent(
+  connect(mapStateToProps)(
+    ChroniclePlayerPage
+  )
+)

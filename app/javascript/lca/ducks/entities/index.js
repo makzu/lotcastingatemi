@@ -19,6 +19,7 @@ export * from './combat_actor.js'
 
 import PlayerReducer from './player.js'
 import ChronicleReducer from './chronicle.js'
+import { LOGOUT } from '../session.js'
 
 export const defaultState = {
   players:    {
@@ -47,6 +48,9 @@ export const defaultState = {
 }
 
 export default function EntityReducer(state = defaultState, action) {
+  if (action.type === LOGOUT)
+    return defaultState
+
   // Entity actions are expected to be in format 'lca/<entity name>/<ACTION>'
   const act = action.type.split('/')
   if (act[0] !== 'lca')

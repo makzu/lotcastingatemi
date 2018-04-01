@@ -6,9 +6,22 @@ const defaultState = {
   drawerOpen: false,
   theme: localStorage.theme || 'light',
   loading: false,
+  error: false,
+  errorMessage: '',
 }
 
+export const isAuthFailure = (action) => action.error && action.payload.status == 401
+export const isForbidden   = (action) => action.error && action.payload.status == 403
+export const is404Error    = (action) => action.error && action.payload.status == 404
+
 export default function AppReducer(state = defaultState, action) {
+  if (isAuthFailure(action) || isForbidden(action) || is404Error(action)) {
+    return { ...state,
+      error: true,
+      errorMessage: action.payload.message,
+    }
+  }
+
   const act = action.type.split('/')
   if (act[0] !== 'lca')
     return state
@@ -22,6 +35,8 @@ export default function AppReducer(state = defaultState, action) {
   case 'REMOVE_THING':
     return { ...state,
       loading: true,
+      error: false,
+      errorMessage: '',
     }
 
   case 'CREATE_SUCCESS':
@@ -30,6 +45,12 @@ export default function AppReducer(state = defaultState, action) {
   case 'DESTROY_SUCCESS':
   case 'ADD_THING_SUCCESS':
   case 'REMOVE_THING_SUCCESS':
+    return { ...state,
+      loading: false,
+      error: false,
+      errorMessage: '',
+    }
+
   case 'CREATE_FAILURE':
   case 'FETCH_FAILURE':
   case 'UPDATE_FAILURE':
@@ -38,6 +59,8 @@ export default function AppReducer(state = defaultState, action) {
   case 'REMOVE_THING_FAILURE':
     return { ...state,
       loading: false,
+      error: true,
+      errorMessage: parseError(action),
     }
   }
 
@@ -66,3 +89,12 @@ export default function AppReducer(state = defaultState, action) {
 export const toggleDrawer = () => ({ type: TOGGLE_DRAWER })
 export const closeDrawer  = () => ({ type: CLOSE_DRAWER  })
 export const switchTheme  = (theme) => ({ type: SWITCH_THEME, theme: theme  })
+
+export const parseError = (action) => {
+  if (action.payload === undefined || action.payload.response === undefined) {
+    console.log('Easily Overlooked Error Method') // eslint-disable-line no-console
+    return 'Error'
+  }
+  let keys = Object.keys(action.payload.response)
+  return keys.map((k) => k + ': ' + action.payload.response[k][0].error).join(', ')
+}

@@ -12,6 +12,8 @@ import QcCard from '../qcs/QcCard.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
+
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { getSpecificChronicle } from '../../selectors/'
 
 class ChronicleDashboard extends React.Component {
@@ -129,6 +131,8 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(ChronicleDashboard)
+export default ProtectedComponent(
+  connect(mapStateToProps)(
+    ChronicleDashboard
+  )
+)

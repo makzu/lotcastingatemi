@@ -8,6 +8,8 @@ import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
+
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { getSpecificCharacter, getMeritsForCharacter } from '../../selectors'
 import { fullMerit } from '../../utils/propTypes'
 
@@ -115,6 +117,8 @@ MeritFullPage.propTypes = {
   merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)),
 }
 
-export default connect(
-  mapStateToProps
-)(MeritFullPage)
+export default ProtectedComponent(
+  connect(mapStateToProps)(
+    MeritFullPage
+  )
+)

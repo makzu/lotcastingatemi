@@ -13,6 +13,8 @@ import styles from './CharmStyles.js'
 import CharmFields from './CharmFields.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellFields from './SpellFields.jsx'
+
+import ProtectedComponent from '../../../containers/ProtectedComponent.jsx'
 import {
   updateCharm, createCharm, destroyCharm,
   updateSpell, createSpell, destroySpell,
@@ -334,4 +336,10 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CharmEditor))
+export default ProtectedComponent(
+  withStyles(styles)(
+    connect(mapStateToProps, mapDispatchToProps)(
+      CharmEditor
+    )
+  )
+)

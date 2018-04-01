@@ -14,6 +14,7 @@ import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
 import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
 
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { getMyCharacters, getMyQCs, getMyBattlegroups } from '../../selectors'
 import { fullQc, fullChar } from '../../utils/propTypes'
 
@@ -92,4 +93,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(ContentList))
+export default ProtectedComponent(
+  withStyles(styles)(
+    connect(mapStateToProps)(
+      ContentList
+    )
+  )
+)

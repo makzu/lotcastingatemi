@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, NavLink } from 'react-router-dom'
+import { withRouter, Link, NavLink } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
@@ -13,9 +13,9 @@ import ChronicleNavList from './chronicleNavList.jsx'
 import DisplayNamePopup from '../generic/displayNamePopup.jsx'
 import Discord from '../../icons/Discord-Logo.jsx'
 import OctoCat from '../../icons/OctoCat.jsx'
-import { closeDrawer, switchTheme } from '../../ducks/actions.js'
+import { logout, closeDrawer, switchTheme } from '../../ducks/actions.js'
 
-const styles = theme => ({
+const styles = theme => ({ // eslint-disable-line no-unused-vars
   themeLabel: {
     textTransform: 'capitalize',
   },
@@ -34,7 +34,7 @@ export class NavPanel extends React.Component {
 
   render() {
     const {
-      authenticated, theme, switchTheme, classes,
+      authenticated, theme, switchTheme, classes, logout
     } = this.props
     const { closeCheck } = this
 
@@ -52,7 +52,7 @@ export class NavPanel extends React.Component {
             />
           </ListItem>
         }
-        { !authenticated && window.location.hostname == 'localhost' &&
+        { !authenticated && window.location.hostname === 'localhost' &&
           <ListItem button component="a" href="/auth/developer">
             <ListItemText primary="Log in (Developer)"
             />
@@ -76,7 +76,16 @@ export class NavPanel extends React.Component {
             <Switch checked={ theme == 'dark' } onChange={ () => switchTheme(theme == 'light' ? 'dark' : 'light') } />
           </ListItemSecondaryAction>
         </ListItem>
+
         <Divider />
+
+        { authenticated && <React.Fragment>
+          <ListItem button component={ Link } to="/" onClick={ logout }>
+            <ListItemText primary="Log Out" />
+          </ListItem>
+
+          <Divider />
+        </React.Fragment> }
 
         <ListItem button component="a"
           href="https://github.com/makzu/lotcastingatemi"
@@ -108,6 +117,7 @@ NavPanel.propTypes = {
   authenticated: PropTypes.bool,
   history: PropTypes.object,
   theme: PropTypes.string,
+  logout: PropTypes.func,
   switchTheme: PropTypes.func,
   closeDrawer: PropTypes.func,
   drawerOpen: PropTypes.bool,
@@ -127,6 +137,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    logout: () => dispatch(logout()),
     closeDrawer: () => dispatch(closeDrawer()),
     switchTheme: (theme) => dispatch(switchTheme(theme)),
   }

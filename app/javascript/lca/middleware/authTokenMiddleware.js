@@ -1,14 +1,14 @@
-import { LOGOUT } from '../ducks/account.js'
+import { LOGOUT, authFailure } from '../ducks/session.js'
+import { isAuthFailure } from '../ducks/app.js'
 
-function isAuthFailure(action) {
-  return (action.error && action.payload.status == 401)
-}
-
-// Intercepts LOGIN_SUCCESS action sent by redux-api-middleware and saves the
-//   token to localStorage
-const authToken = store => next => action => { //eslint-disable-line no-unused-vars
-  if (action.type === LOGOUT || isAuthFailure(action)) {
+// Intercepts Logout actions and auth failures and removes the JWT as needed
+const authToken = store => next => action => {
+  if (action.type === LOGOUT)
     localStorage.removeItem('jwt')
+
+  if (isAuthFailure(action)) {
+    localStorage.removeItem('jwt')
+    store.dispatch(authFailure())
   }
 
   return next(action)

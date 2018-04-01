@@ -14,6 +14,8 @@ import Delete from 'material-ui-icons/Delete'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
+
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
 import { getSpecificCharacter, getMeritsForCharacter } from '../../selectors'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
@@ -243,7 +245,8 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MeritEditor)
+export default ProtectedComponent(
+  connect(mapStateToProps, mapDispatchToProps)(
+    MeritEditor
+  )
+)

@@ -23,7 +23,7 @@ import SorceryEditor from './editors/sorceryEditor.jsx'
 import WeaponEditor from './editors/weaponEditor.jsx'
 import WillpowerEditor from './editors/willpowerEditor.jsx'
 import XpEditor from './editors/xpEditor.jsx'
-
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { updateCharacter } from '../../ducks/actions.js'
 import { getSpecificCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import { fullChar } from '../../utils/propTypes'
@@ -255,4 +255,8 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterEditor)
+export default ProtectedComponent(
+  connect(mapStateToProps, mapDispatchToProps)(
+    CharacterEditor
+  )
+)

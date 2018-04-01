@@ -21,6 +21,8 @@ import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
+
+import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import {
   getSpecificCharacter, getPenalties, getPoolsAndRatings,
   getMeritsForCharacter, getWeaponsForCharacter,
@@ -349,6 +351,8 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(CharacterSheet)
+export default ProtectedComponent(
+  connect(mapStateToProps)(
+    CharacterSheet
+  )
+)

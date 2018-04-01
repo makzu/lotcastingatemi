@@ -15,7 +15,7 @@ export {
   fetchCurrentPlayer, updatePlayer,
 } from './entities'
 
-export { logout } from './account.js'
+export { logout } from './session.js'
 export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
 export { spendMotes, spendWillpower, takeDamage } from './events.js'
 

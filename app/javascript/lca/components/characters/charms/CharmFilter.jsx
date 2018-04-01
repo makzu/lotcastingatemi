@@ -8,25 +8,46 @@ import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Filter from 'material-ui-icons/FilterList'
 import {
-  getAllAbilitiesWithCharmsForCharacter, getAllCharmCategoriesForCharacter
+  getPoolsAndRatings,
+  getAllAbilitiesWithCharmsForCharacter, getAllCharmCategoriesForCharacter,
+  getAllMartialArtsCharmStylesForCharacter, getAllEvocationArtifactsForCharacter,
 } from '../../../selectors'
 
 class CharmFilter extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { open: false }
-    this.toggleOpen = this.toggleOpen.bind(this)
-  }
-
-  toggleOpen() {
-    this.setState({ open: !this.state.open })
-  }
-
   render() {
-    const { abilities, categories, currentAbility, currentCategory, onChange } = this.props
-    const { open } = this.state
-    const abilOptions = abilities.map((abil) =>
-      abil === 'martial_arts' ?
+    const {
+      abilities, styles, artifacts, currentAbility, charmType,
+      categories, currentCategory, exaltTypeBase,
+      open, toggleOpen, onChange
+    } = this.props
+    let filters = [], filterName = '', filterLabel = ''
+
+    switch(charmType) {
+    case 'native':
+      filters = abilities
+      filterName = 'abilityFilter'
+      filterLabel = 'Filter by ' + (exaltTypeBase === 'attribute' ? 'Attribute' : 'Ability')
+      break
+    case 'martial_arts':
+      filters = styles
+      filterName = 'styleFilter'
+      filterLabel = 'Filter by Style'
+      break
+    case 'evocation':
+      filters = artifacts
+      filterName = 'artifactFilter'
+      filterLabel = 'Filter by Artifact'
+      break
+    case 'spell':
+      filters = ['terrestrial','celestial','solar']
+      filterName = 'circleFilter'
+      filterLabel = 'Filter by Circle'
+      break
+    default:
+      filterLabel = 'derp'
+    }
+    const filterOptions = filters.map((abil) =>
+      abil === 'martial_arts' ? // Skip Martial Arts, it has its own handling
         <span key={abil} /> :
         <MenuItem key={ abil } value={ abil } style={{ textTransform: 'capitalize' }}>
           { abil }
@@ -38,32 +59,35 @@ class CharmFilter extends Component {
       </MenuItem>
     )
     return <Fragment>
-      <Button onClick={ this.toggleOpen }>
-        Filter <Hidden mdDown>Charms</Hidden>&nbsp;
+      <Button onClick={ toggleOpen }>
+        Filter <Hidden mdDown>{ charmType === 'spell' ? 'Spells' : 'Charms' }</Hidden>&nbsp;
         <Filter />
       </Button>
       { open &&
         <Fragment>
-          <TextField select
-            style={{ minWidth: open ? '8em' : 0, width: open ? undefined : 0, textTransform: 'capitalize' }}
-            name="abilityFilter"
-            label="Ability Filter"
-            value={ currentAbility || '' }
-            onChange={ onChange }
-          >
-            <MenuItem value="">No Filter</MenuItem>
-            { abilOptions }
-          </TextField>
-          &nbsp;&nbsp;
+          { charmType !== 'spirit' &&
+            (exaltTypeBase !== 'essence' || charmType !== 'native') && <Fragment>
+            <TextField select
+              style={{ minWidth: '8em', textTransform: 'capitalize', marginTop: '-16px', }}
+              name={ filterName }
+              label={ filterLabel }
+              value={ currentAbility || '' }
+              onChange={ onChange }
+            >
+              <MenuItem value="">No Filter</MenuItem>
+              { filterOptions }
+            </TextField>
+            &nbsp;&nbsp;
+          </Fragment>}
 
           <TextField select
-            style={{ minWidth: open ? '8em' : 0, width: open ? undefined : 0, textTransform: 'capitalize' }}
+            style={{ minWidth: '8em', textTransform: 'capitalize', marginTop: '-16px', }}
             name="categoryFilter"
-            label="Category Filter"
-            value={ currentCategory || '' }
+            label="Filter by Category"
+            value={ currentCategory || [] }
+            SelectProps={{ multiple: true }}
             onChange={ onChange }
           >
-            <MenuItem value="">No Filter</MenuItem>
             { catOptions }
           </TextField>
         </Fragment>
@@ -73,14 +97,23 @@ class CharmFilter extends Component {
 }
 CharmFilter.propTypes = {
   abilities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  styles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  artifacts: PropTypes.arrayOf(PropTypes.string).isRequired,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   currentAbility: PropTypes.string.isRequired,
-  currentCategory: PropTypes.string.isRequired,
+  currentCategory: PropTypes.arrayOf(PropTypes.string).isRequired,
+  charmType: PropTypes.string,
+  exaltTypeBase: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
   onChange: PropTypes.func,
 }
 
 const mapStateToProps = (state, props) => ({
   abilities: getAllAbilitiesWithCharmsForCharacter(state, props.id) || [],
+  styles: getAllMartialArtsCharmStylesForCharacter(state, props.id) || [],
+  artifacts: getAllEvocationArtifactsForCharacter(state, props.id) || [],
+  exaltTypeBase: getPoolsAndRatings(state, props.id).exaltTypeBase,
   categories: getAllCharmCategoriesForCharacter(state, props.id) || [],
 })
 

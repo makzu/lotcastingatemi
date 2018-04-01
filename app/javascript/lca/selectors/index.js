@@ -4,6 +4,7 @@ export * from './chronicle.js'
 export * from './entities.js'
 export * from './character.js'
 export * from './weapon.js'
+export * from './charm.js'
 export * from './qc.js'
 export * from './battlegroup.js'
 

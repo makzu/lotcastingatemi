@@ -13,7 +13,7 @@ import SpellDisplay from './SpellDisplay.jsx'
 
 import ProtectedComponent from '../../../containers/ProtectedComponent.jsx'
 import {
-  getSpecificCharacter, getMeritsForCharacter, getNativeCharmsForCharacter,
+  getSpecificCharacter, getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter, getEvocationsForCharacter,
   getSpellsForCharacter, getSpiritCharmsForCharacter,
 } from '../../../selectors/'
@@ -22,9 +22,24 @@ class CharmFullPage extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { abilityFilter: '', categoryFilter: '', openCharm: null }
+    this.state = {
+      filtersOpen: false,
+      abilityFilter: '',
+      styleFilter: '',
+      artifactFilter: '',
+      circleFilter: '',
+      categoryFilter: [],
+      openCharm: null,
+      openSpell: null,
+    }
     this.setFilter = this.setFilter.bind(this)
+    this.toggleFiltersOpen = this.toggleFiltersOpen.bind(this)
     this.setOpenCharm = this.setOpenCharm.bind(this)
+    this.setOpenSpell = this.setOpenSpell.bind(this)
+  }
+
+  toggleFiltersOpen() {
+    this.setState({ filtersOpen: !this.state.filtersOpen })
   }
 
   setFilter(e) {
@@ -33,6 +48,10 @@ class CharmFullPage extends Component {
 
   setOpenCharm(charm) {
     return (e, expanded) => this.setState({ openCharm: expanded ? charm : null })
+  }
+
+  setOpenSpell(charm) {
+    return (e, expanded) => this.setState({ openSpell: expanded ? charm : null })
   }
 
   render() {
@@ -46,8 +65,11 @@ class CharmFullPage extends Component {
       character, nativeCharms, martialArtsCharms, evocations,
       spiritCharms, spells, classes
     } = this.props
-    const { abilityFilter, categoryFilter, openCharm } = this.state
-    const { setFilter, setOpenCharm } = this
+    const {
+      abilityFilter, categoryFilter, styleFilter, artifactFilter, circleFilter,
+      openCharm, filtersOpen,
+    } = this.state
+    const { toggleFiltersOpen, setFilter, setOpenCharm } = this
 
     let filteredNatives = nativeCharms,
       filteredMA = martialArtsCharms,
@@ -55,14 +77,23 @@ class CharmFullPage extends Component {
       filteredSpirit = spiritCharms,
       filteredSpells = spells
 
+    const filterByCategory = (charm) => (
+      categoryFilter.every((cat) => charm.categories.includes(cat))
+    )
     if (abilityFilter !== '')
       filteredNatives = filteredNatives.filter((c) => c.ability === abilityFilter)
-    if (categoryFilter !== '') {
-      filteredNatives = filteredNatives.filter((c) => c.categories.includes(categoryFilter))
-      filteredMA = filteredMA.filter((c) => c.categories.includes(categoryFilter))
-      filteredEvo = filteredEvo.filter((c) => c.categories.includes(categoryFilter))
-      filteredSpirit = filteredSpirit.filter((c) => c.categories.includes(categoryFilter))
-      filteredSpells = filteredSpells.filter((c) => c.categories.includes(categoryFilter))
+    if (styleFilter !== '')
+      filteredMA = filteredMA.filter((c) => c.style === styleFilter)
+    if (artifactFilter !== '')
+      filteredEvo = filteredEvo.filter((c) => c.artifact_name === artifactFilter)
+    if (circleFilter !== '')
+      filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
+    if (categoryFilter.length > 0) {
+      filteredNatives = filteredNatives.filter(filterByCategory)
+      filteredMA = filteredMA.filter(filterByCategory)
+      filteredEvo = filteredEvo.filter(filterByCategory)
+      filteredSpirit = filteredSpirit.filter(filterByCategory)
+      filteredSpells = filteredSpells.filter(filterByCategory)
     }
 
     const natives = filteredNatives.map((c) =>
@@ -104,41 +135,72 @@ class CharmFullPage extends Component {
         <div style={{ height: '1em', }}>&nbsp;</div>
       </Grid>
 
-      <Grid item xs={ 12 } className={ classes.stickyHeader }>
-        <Typography variant="headline">
-          Charms
-          <CharmFilter id={ character.id }
-            currentAbility={ abilityFilter } currentCategory={ categoryFilter }
-            onChange={ setFilter }
-          />
-        </Typography>
-      </Grid>
+      { natives.length > 0 &&
+        <Grid item xs={ 12 } className={ classes.stickyHeader }>
+          <Typography variant="headline">
+            Charms
+            <CharmFilter id={ character.id } charmType="native"
+              currentAbility={ abilityFilter } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>
+        </Grid>
+      }
       { natives }
 
-      { maCharms.length > 0 &&
+      { martialArtsCharms.length > 0 &&
         <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">Martial Arts</Typography>
+          <Typography variant="headline">
+            Martial Arts
+            <CharmFilter id={ character.id } charmType="martial_arts"
+              currentAbility={ styleFilter } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>
         </Grid>
       }
       { maCharms }
 
-      { evo.length > 0 &&
+      { evocations.length > 0 &&
         <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">Evocations</Typography>
+          <Typography variant="headline">
+            Evocations
+            <CharmFilter id={ character.id } charmType="evocation"
+              currentAbility={ artifactFilter } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>
         </Grid>
       }
       { evo }
 
-      { spirit.length > 0 &&
+      { spiritCharms.length > 0 &&
         <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">Spirit Charms</Typography>
+          <Typography variant="headline">
+            Spirit Charms
+            <CharmFilter id={ character.id } charmType="spirit"
+              currentAbility={ '' } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>
         </Grid>
       }
       { spirit }
 
-      { spl.length > 0 &&
+      { spells.length > 0 || character.is_sorcerer &&
         <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">Spells</Typography>
+          <Typography variant="headline">
+            Spells
+            <CharmFilter id={ character.id } charmType="spell"
+              currentAbility={ circleFilter } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>
         </Grid>
       }
       { spl }
@@ -163,7 +225,6 @@ function mapStateToProps(state, ownProps) {
   let nativeCharms = []
   let martialArtsCharms = []
   let evocations = []
-  let artifacts = []
   let spiritCharms = []
   let spells = []
 
@@ -173,9 +234,6 @@ function mapStateToProps(state, ownProps) {
     evocations = getEvocationsForCharacter(state, id)
     spells = getSpellsForCharacter(state, id)
     spiritCharms = getSpiritCharmsForCharacter(state, id)
-    artifacts = getMeritsForCharacter(state, id).filter((m) =>
-      m.merit_name.toLowerCase() == 'artifact' || m.merit_name.toLowerCase() == 'hearthstone' || m.merit_name.toLowerCase() == 'warstrider'
-    )
   }
 
   return {
@@ -183,7 +241,6 @@ function mapStateToProps(state, ownProps) {
     nativeCharms,
     martialArtsCharms,
     evocations,
-    artifacts,
     spells,
     spiritCharms,
   }

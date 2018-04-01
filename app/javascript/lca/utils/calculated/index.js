@@ -173,6 +173,22 @@ export function prettyFullExaltType(character) {
   return `${capitalize(character.caste || '?')} ${character.aspect ? 'Aspect' : 'Caste'} ${prettyExaltType(character) || 'Exalt'}`
 }
 
+export function exaltTypeBase(character) {
+  switch (character.type) {
+  case 'SolarCharacter':
+  case 'DragonbloodCharacter':
+  case 'CustomAbilityCharacter':
+    return 'ability'
+  case 'CustomAttributeCharacter':
+    return 'attribute'
+  case 'CustomEssenceCharacter':
+    return 'essence'
+  case 'Character':
+  default:
+    return 'none'
+  }
+}
+
 export function prettyIntimacyRating(rating) {
   switch(rating) {
   case 3:

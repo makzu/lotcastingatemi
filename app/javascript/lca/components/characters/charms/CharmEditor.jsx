@@ -29,10 +29,21 @@ class CharmEditor extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { abilityFilter: '', categoryFilter: '' }
+    this.state = {
+      filtersOpen: false,
+      abilityFilter: '',
+      styleFilter: '',
+      artifactFilter: '',
+      circleFilter: '',
+      categoryFilter: [],
+      openCharm: null,
+      openSpell: null,
+    }
 
     this.setFilter = this.setFilter.bind(this)
+    this.toggleFiltersOpen = this.toggleFiltersOpen.bind(this)
     this.setOpenCharm = this.setOpenCharm.bind(this)
+    this.setOpenSpell = this.setOpenSpell.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleAddNative = this.handleAddNative.bind(this)
     this.handleAddMA = this.handleAddMA.bind(this)
@@ -48,10 +59,18 @@ class CharmEditor extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  toggleFiltersOpen() {
+    this.setState({ filtersOpen: !this.state.filtersOpen })
+  }
+
   setOpenCharm(charm) {
     return (e, expanded) => {
       this.setState({ openCharm: expanded ? charm : null })
     }
+  }
+
+  setOpenSpell(charm) {
+    return (e, expanded) => this.setState({ openSpell: expanded ? charm : null })
   }
 
   handleUpdate(id, charId, trait, value) {
@@ -122,11 +141,14 @@ class CharmEditor extends Component {
       spiritCharms, spells, classes
     } = this.props
     const {
+      abilityFilter, categoryFilter, styleFilter, artifactFilter, circleFilter,
+      openCharm, filtersOpen,
+    } = this.state
+    const {
       handleUpdate, handleRemove, handleUpdateSpell, handleRemoveSpell,
       handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell, handleAddSpirit,
-      setOpenCharm, setFilter,
+      setOpenCharm, setFilter, toggleFiltersOpen,
     } = this
-    const { abilityFilter, categoryFilter, openCharm } = this.state
 
     let filteredNatives = nativeCharms,
       filteredMA = martialArtsCharms,
@@ -134,14 +156,23 @@ class CharmEditor extends Component {
       filteredSpirit = spiritCharms,
       filteredSpells = spells
 
+    const filterByCategory = (charm) => (
+      categoryFilter.every((cat) => charm.categories.includes(cat))
+    )
     if (abilityFilter !== '')
       filteredNatives = filteredNatives.filter((c) => c.ability === abilityFilter)
-    if (categoryFilter !== '') {
-      filteredNatives = filteredNatives.filter((c) => c.categories.includes(categoryFilter))
-      filteredMA = filteredMA.filter((c) => c.categories.includes(categoryFilter))
-      filteredEvo = filteredEvo.filter((c) => c.categories.includes(categoryFilter))
-      filteredSpirit = filteredSpirit.filter((c) => c.categories.includes(categoryFilter))
-      filteredSpells = filteredSpells.filter((c) => c.categories.includes(categoryFilter))
+    if (styleFilter !== '')
+      filteredMA = filteredMA.filter((c) => c.style === styleFilter)
+    if (artifactFilter !== '')
+      filteredEvo = filteredEvo.filter((c) => c.artifact_name === artifactFilter)
+    if (circleFilter !== '')
+      filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
+    if (categoryFilter.length > 0) {
+      filteredNatives = filteredNatives.filter(filterByCategory)
+      filteredMA = filteredMA.filter(filterByCategory)
+      filteredEvo = filteredEvo.filter(filterByCategory)
+      filteredSpirit = filteredSpirit.filter(filterByCategory)
+      filteredSpells = filteredSpells.filter(filterByCategory)
     }
 
 
@@ -203,8 +234,9 @@ class CharmEditor extends Component {
                 <ContentAddCircle />
               </Button>
 
-              <CharmFilter id={ character.id }
+              <CharmFilter id={ character.id } charmType="native"
                 currentAbility={ abilityFilter } currentCategory={ categoryFilter }
+                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
                 onChange={ setFilter }
               />
             </Typography>
@@ -222,6 +254,12 @@ class CharmEditor extends Component {
                 Add <Hidden smDown>MA Charm</Hidden>&nbsp;
                 <ContentAddCircle />
               </Button>
+
+              <CharmFilter id={ character.id } charmType="martial_arts"
+                currentAbility={ styleFilter } currentCategory={ categoryFilter }
+                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+                onChange={ setFilter }
+              />
             </Typography>
           </Grid>
           { maCharms }
@@ -237,6 +275,12 @@ class CharmEditor extends Component {
                 Add <Hidden smDown>Evocation</Hidden>&nbsp;
                 <ContentAddCircle />
               </Button>
+
+              <CharmFilter id={ character.id } charmType="evocation"
+                currentAbility={ artifactFilter } currentCategory={ categoryFilter }
+                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+                onChange={ setFilter }
+              />
             </Typography>
           </Grid>
           { evo }
@@ -252,6 +296,12 @@ class CharmEditor extends Component {
                 Add <Hidden smDown>Spirit Charm</Hidden>&nbsp;
                 <ContentAddCircle />
               </Button>
+
+              <CharmFilter id={ character.id } charmType="spirit"
+                currentAbility={ '' } currentCategory={ categoryFilter }
+                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+                onChange={ setFilter }
+              />
             </Typography>
           </Grid>
           { spirit }
@@ -268,6 +318,12 @@ class CharmEditor extends Component {
               Add Spell&nbsp;
               <ContentAddCircle />
             </Button>
+
+            <CharmFilter id={ character.id } charmType="spell"
+              currentAbility={ circleFilter } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
           </Typography>
         </Grid>
         { spl }

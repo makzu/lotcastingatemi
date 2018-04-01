@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
-import { getPoolsForWeapon, sortByParry } from '.'
+import { getPoolsForWeapon, sortByParry, } from './weapon.js'
+import { getAllAbilitiesWithCharmsForCharacter } from './charm.js'
 import * as calc from '../utils/calculated/'
 
 const getState = (state) => state
@@ -35,50 +36,6 @@ export const getWeaponsForCharacter = createCachedSelector(
   (character, weapons) => character.weapons.map((w) => weapons[w])
 )(characterIdMemoizer)
 
-const getCharms = (state) => state.entities.charms
-export const getNativeCharmsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getCharms],
-  (character, charms) => character.charms !== undefined ? character.charms.map((c) => charms[c]) : []
-)(characterIdMemoizer)
-export const getMartialArtsCharmsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getCharms],
-  (character, charms) => character.martial_arts_charms !== undefined ? character.martial_arts_charms.map((c) => charms[c]) : []
-)(characterIdMemoizer)
-export const getEvocationsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getCharms],
-  (character, charms) => character.evocations !== undefined ? character.evocations.map((c) => charms[c]) : []
-)(characterIdMemoizer)
-export const getSpiritCharmsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getCharms],
-  (character, charms) => character.spirit_charms !== undefined ? character.spirit_charms.map((c) => charms[c]) : []
-)(characterIdMemoizer)
-export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
-  [getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter],
-  (charms, maCharms) => {
-    let abilities = [ ...new Set(charms.map((c) => c.ability))]
-
-    if (maCharms.length > 0)
-      abilities = abilities.concat(['martial_arts'])
-
-    return abilities.sort()
-  }
-)(characterIdMemoizer)
-export const getAllCharmCategoriesForCharacter = createCachedSelector(
-  [
-    getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter,
-    getEvocationsForCharacter, getSpiritCharmsForCharacter
-  ],
-  (natives, maCharms, evocations, spiritCharms) => {
-    let ch = natives.concat(maCharms)
-      .concat(evocations)
-      .concat(spiritCharms)
-      .reduce((a, charm) => [ ...a, ...charm.categories], [])
-      .concat(['Attack', 'Defense', 'Social'])
-      .sort()
-
-    return [ ...new Set(ch)]
-  }
-)(characterIdMemoizer)
 
 const getSpells = (state) => state.entities.spells
 export const getSpellsForCharacter = createCachedSelector(
@@ -119,6 +76,7 @@ export const getPoolsAndRatings = createCachedSelector(
     const bestParryWeapon = weaponPools.sort(sortByParry)[0] || { parry: { total: 0 }}
 
     return {
+      exaltTypeBase: calc.exaltTypeBase(character),
       guile: calc.guile(character, meritNames, penalties, charmAbils),
       resolve: calc.resolve(character, meritNames, penalties, charmAbils),
       appearance: calc.appearanceRating(character, meritNames, penalties, charmAbils),

@@ -11,6 +11,7 @@ import Dialog, {
 } from 'material-ui/Dialog'
 
 import { updateChronicle, regenChronicleInviteCode } from '../../ducks/actions.js'
+import { getSpecificChronicle } from '../../selectors'
 
 class ChronicleInvitePopup extends React.Component {
   constructor(props) {
@@ -93,7 +94,7 @@ ChronicleInvitePopup.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = state.session.id
-  const chronicle = state.entities.chronicles[ownProps.chronicleId]
+  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   let chronicleName = ''
   let inviteCode = ''
 

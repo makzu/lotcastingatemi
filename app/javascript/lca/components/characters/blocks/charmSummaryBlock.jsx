@@ -9,6 +9,10 @@ import Typography from 'material-ui/Typography'
 import Launch from 'material-ui-icons/Launch'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
+import {
+  getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter,
+  getEvocationsForCharacter, getSpiritCharmsForCharacter, getSpellsForCharacter,
+} from '../../../selectors'
 import { fullChar } from '../../../utils/propTypes'
 
 const styles = theme => ({
@@ -147,26 +151,20 @@ CharmSummaryBlock.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { character } = ownProps
-  let evocations = []
-  let martialArtsCharms = []
-  let nativeCharms = []
-  let spiritCharms = []
-  let spells = []
+  const { id } = character
 
-  if (character.charms != undefined) {
-    nativeCharms = character.charms.map((id) => state.entities.charms[id])
-  }
-  if (character.evocations != undefined) {
-    evocations = character.evocations.map((id) => state.entities.charms[id])
-  }
-  if (character.martial_arts_charms != undefined) {
-    martialArtsCharms = character.martial_arts_charms.map((id) => state.entities.charms[id])
-  }
-  if (character.spirit_charms != undefined) {
-    spiritCharms = character.spirit_charms.map((id) => state.entities.charms[id])
-  }
-  if (character.spells != undefined) {
-    spells = character.spells.map((id) => state.entities.spells[id])
+  let evocations = [],
+    martialArtsCharms = [],
+    nativeCharms = [],
+    spiritCharms = [],
+    spells = []
+
+  if (character !== undefined) {
+    nativeCharms = getNativeCharmsForCharacter(state, id)
+    martialArtsCharms = getMartialArtsCharmsForCharacter(state, id)
+    spiritCharms = getSpiritCharmsForCharacter(state, id)
+    evocations = getEvocationsForCharacter(state, id)
+    spells = getSpellsForCharacter(state, id)
   }
 
   return {

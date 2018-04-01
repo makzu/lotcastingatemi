@@ -11,6 +11,7 @@ import Dialog, {
 } from 'material-ui/Dialog'
 
 import { removePlayerFromChronicle } from '../../ducks/actions.js'
+import { getSpecificChronicle } from '../../selectors'
 
 class RemovePlayerPopup extends React.Component {
   constructor(props) {
@@ -77,7 +78,7 @@ RemovePlayerPopup.propTypes = {
 function mapStateToProps(state, ownProps) {
   let chronicleName, playerName = ''
 
-  const chronicle = state.entities.chronicles[ownProps.chronicleId]
+  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   if (chronicle != undefined && chronicle.name != undefined) {
     chronicleName = chronicle.name
     playerName = state.entities.players[ownProps.playerId].display_name

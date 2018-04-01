@@ -11,6 +11,7 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
+import { getSpecificChronicle } from '../../selectors/'
 
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   tabs: {
@@ -67,7 +68,7 @@ ChronicleHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.chronicleId
-  const chronicle = state.entities.chronicles[id]
+  const chronicle = getSpecificChronicle(state, id)
   const path = ownProps.location.pathname
 
   return {

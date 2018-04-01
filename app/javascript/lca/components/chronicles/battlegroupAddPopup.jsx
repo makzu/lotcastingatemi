@@ -14,7 +14,7 @@ import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
 import { addThingToChronicle } from '../../ducks/actions.js'
-import { getMyBattlegroupsWithoutChronicles } from '../../selectors/'
+import { getSpecificChronicle, getMyBattlegroupsWithoutChronicles } from '../../selectors/'
 
 class BattlegroupAddPopup extends React.Component {
   constructor(props) {
@@ -107,7 +107,7 @@ BattlegroupAddPopup.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = state.session.id
-  const chronicle = state.entities.chronicles[ownProps.chronicleId]
+  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   const battlegroups = getMyBattlegroupsWithoutChronicles(state)
   let chronicleName = ''
   let inviteCode = ''

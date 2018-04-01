@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography'
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
+import { getSpecificChronicle } from '../../selectors/'
 
 class ChroniclePlayerPage extends React.PureComponent {
   constructor(props) {
@@ -78,7 +79,7 @@ ChroniclePlayerPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.chronicleId
-  const chronicle = state.entities.chronicles[id]
+  const chronicle = getSpecificChronicle(state, id)
 
   let st
   let is_st = false

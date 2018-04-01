@@ -14,7 +14,7 @@ import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
 import { addThingToChronicle } from '../../ducks/actions.js'
-import { getMyCharactersWithoutChronicles } from '../../selectors/'
+import { getSpecificChronicle, getMyCharactersWithoutChronicles } from '../../selectors/'
 
 class CharacterAddPopup extends React.Component {
   constructor(props) {
@@ -107,7 +107,7 @@ CharacterAddPopup.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = state.session.id
-  const chronicle = state.entities.chronicles[ownProps.chronicleId]
+  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   const characters = getMyCharactersWithoutChronicles(state)
   let chronicleName = ''
   let inviteCode = ''

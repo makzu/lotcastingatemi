@@ -12,6 +12,7 @@ import QcCard from '../qcs/QcCard.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
+import { getSpecificChronicle } from '../../selectors/'
 
 class ChronicleDashboard extends React.Component {
   render() {
@@ -99,7 +100,7 @@ ChronicleDashboard.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.chronicleId
-  const chronicle = state.entities.chronicles[id]
+  const chronicle = getSpecificChronicle(state, id)
 
   let st
   let is_st = false

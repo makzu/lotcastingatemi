@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'material-ui/Button'
+import Hidden from 'material-ui/Hidden'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Grow from 'material-ui/transitions/Grow'
@@ -19,6 +20,7 @@ class CharmFilter extends React.Component {
   }
   render() {
     const { abilities, name, filter, onChange } = this.props
+    const { open } = this.state
     const options = abilities.map((abil) =>
       abil === 'martial_arts' ?
         <span key={abil} /> :
@@ -28,14 +30,15 @@ class CharmFilter extends React.Component {
     )
     return <React.Fragment>
       <Button onClick={ this.toggleOpen }>
-        Filter Charms&nbsp;
+        Filter <Hidden mdDown>Charms</Hidden>&nbsp;
         <Filter />
       </Button>
       <Grow
-        in={ this.state.open }
+        in={ open }
         style={{ transformOrigin: '0 0 0' }}
       >
-        <TextField select style={{ minWidth: '8em', textTransform: 'capitalize' }}
+        <TextField select
+          style={{ minWidth: open ? '8em' : 0, width: open ? undefined : 0, textTransform: 'capitalize' }}
           name={ name }
           label="Set Filter"
           value={ filter }

@@ -1,6 +1,7 @@
 ## v42
 ###### *Not yet released*
-- The Charms page can now be filtered by Ability / Attribute
+- Major overhaul of the Charms page and Edit Charms page
+- The Charms page and editor can now be filtered by Ability / Attribute
 - Improved Characters page
 - Rating fields for Attributes and Abilities now change to the number you expect instead of 5 if the cursor is not in the most auspicious spot (thanks /u/evilmegan)
 - Merits can now be ranked N/A, for all you Eye of Autochthon wielders out there

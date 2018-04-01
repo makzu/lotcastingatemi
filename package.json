@@ -51,6 +51,7 @@
     "reselect": "^3.0.0",
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.5",
+    "scroll-to-element": "^2.0.0",
     "style-loader": "^0.20.0",
     "webpack": "^3.6.0",
     "webpack-manifest-plugin": "^2.0.0-rc.2",

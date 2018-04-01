@@ -2,12 +2,14 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
+import Hidden from 'material-ui/Hidden'
 import Typography from 'material-ui/Typography'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
-import Filter from 'material-ui-icons/FilterList'
 
+import styles from './CharmStyles.js'
 import CharmFields from './CharmFields.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellFields from './SpellFields.jsx'
@@ -29,6 +31,7 @@ class CharmEditor extends React.Component {
     this.state = { charmFilter: '' }
 
     this.setFilter = this.setFilter.bind(this)
+    this.setOpenCharm = this.setOpenCharm.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleAddNative = this.handleAddNative.bind(this)
     this.handleAddMA = this.handleAddMA.bind(this)
@@ -42,6 +45,12 @@ class CharmEditor extends React.Component {
 
   setFilter(e) {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  setOpenCharm(charm) {
+    return (e, expanded) => {
+      this.setState({ openCharm: expanded ? charm : null })
+    }
   }
 
   handleUpdate(id, charId, trait, value) {
@@ -109,58 +118,53 @@ class CharmEditor extends React.Component {
 
     const {
       character, nativeCharms, abilities, martialArtsCharms, evocations,
-      spiritCharms, spells
+      spiritCharms, spells, classes
     } = this.props
     const {
       handleUpdate, handleRemove, handleUpdateSpell, handleRemoveSpell,
-      handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell, handleAddSpirit
+      handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell, handleAddSpirit,
+      setOpenCharm,
     } = this
-    const { charmFilter } = this.state
+    const { charmFilter, openCharm } = this.state
 
-    let natives = []
-    let maCharms = []
-    let evo = []
-    let spirit = []
-    let spl = []
+    let filteredNatives = nativeCharms
+    if (charmFilter !== '')
+      filteredNatives = nativeCharms.filter((c) => c.ability === charmFilter)
 
-    if (this.state.charmFilter === '')
-      natives = nativeCharms.map((c) =>
-        <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-          <CharmFields charm={ c } character={ character }
-            onUpdate={ handleUpdate } onRemove={ handleRemove }
-          />
-        </Grid>
-      )
-    else
-      natives = nativeCharms.filter((c) => c.ability === charmFilter).map((c) =>
-        <Grid item xs={ 12 } md={ 6 } key={ c.id }>
-          <CharmFields charm={ c } character={ character }
-            onUpdate={ handleUpdate } onRemove={ handleRemove }
-          />
-        </Grid>
-      )
-    maCharms = martialArtsCharms.map((c) =>
+
+    let natives = filteredNatives.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
     )
-    evo = evocations.map((c) =>
+    let maCharms = martialArtsCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
     )
-    spirit = spiritCharms.map((c) =>
+    let evo = evocations.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
     )
-    spl = spells.map((c) =>
+    let spirit = spiritCharms.map((c) =>
+      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+        <CharmFields charm={ c } character={ character }
+          onUpdate={ handleUpdate } onRemove={ handleRemove }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+        />
+      </Grid>
+    )
+    let spl = spells.map((c) =>
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SpellFields spell={ c } character={ character }
           onUpdate={ handleUpdateSpell } onRemove={ handleRemoveSpell }
@@ -169,18 +173,22 @@ class CharmEditor extends React.Component {
     )
 
     return <div>
-      <Grid container spacing={ 24 }>
-        { character.type != 'Character' && <Fragment>
-          <Grid item xs={ 12 }>
+      <Hidden smUp>
+        <div style={{ height: '1.5em', }}>&nbsp;</div>
+      </Hidden>
+
+      { character.type != 'Character' &&
+      <Fragment>
+        <Grid container spacing={ 24 }>
+          <Grid item xs={ 12 } className={ classes.stickyHeader }>
             <Typography variant="headline">
               Charms
               &nbsp;&nbsp;
 
               <Button onClick={ handleAddNative }>
-                Add Charm&nbsp;
+                Add <Hidden smDown>Charm</Hidden>&nbsp;
                 <ContentAddCircle />
               </Button>
-
 
               <CharmFilter abilities={ abilities } filter={ charmFilter }
                 name="charmFilter" onChange={ this.setFilter }
@@ -188,48 +196,56 @@ class CharmEditor extends React.Component {
             </Typography>
           </Grid>
           { natives }
+        </Grid>
 
-          <Grid item xs={ 12 }>
+        <Grid container spacing={ 24 }>
+          <Grid item xs={ 12 } className={ classes.stickyHeader }>
             <Typography variant="headline">
               Martial Arts
               &nbsp;&nbsp;
 
               <Button onClick={ handleAddMA }>
-                Add MA Charm&nbsp;
+                Add <Hidden smDown>MA Charm</Hidden>&nbsp;
                 <ContentAddCircle />
               </Button>
             </Typography>
           </Grid>
           { maCharms }
+        </Grid>
 
-          <Grid item xs={ 12 }>
+        <Grid container spacing={ 24 }>
+          <Grid item xs={ 12 } className={ classes.stickyHeader }>
             <Typography variant="headline">
               Evocations
               &nbsp;&nbsp;
 
               <Button onClick={ handleAddEvocation }>
-                Add Evocation&nbsp;
+                Add <Hidden smDown>Evocation</Hidden>&nbsp;
                 <ContentAddCircle />
               </Button>
             </Typography>
           </Grid>
           { evo }
+        </Grid>
 
-          <Grid item xs={ 12 }>
+        <Grid container spacing={ 24 }>
+          <Grid item xs={ 12 } className={ classes.stickyHeader }>
             <Typography variant="headline">
               Spirit Charms
               &nbsp;&nbsp;
 
               <Button onClick={ handleAddSpirit }>
-                Add Spirit Charm&nbsp;
+                Add <Hidden smDown>Spirit Charm</Hidden>&nbsp;
                 <ContentAddCircle />
               </Button>
             </Typography>
           </Grid>
           { spirit }
-        </Fragment> }
+        </Grid>
+      </Fragment> }
 
-        <Grid item xs={ 12 }>
+      <Grid container spacing={ 24 }>
+        <Grid item xs={ 12 } className={ classes.stickyHeader }>
           <Typography variant="headline">
             Spells
             &nbsp;&nbsp;
@@ -241,7 +257,6 @@ class CharmEditor extends React.Component {
           </Typography>
         </Grid>
         { spl }
-
       </Grid>
     </div>
   }
@@ -260,6 +275,7 @@ CharmEditor.propTypes = {
   _handleCreateSpell: PropTypes.func,
   _handleUpdateSpell: PropTypes.func,
   _handleDestroySpell: PropTypes.func,
+  classes: PropTypes.object,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -282,7 +298,7 @@ function mapStateToProps(state, ownProps) {
     spells = getSpellsForCharacter(state, id)
     spiritCharms = getSpiritCharmsForCharacter(state, id)
     artifacts = getMeritsForCharacter(state, id).filter((m) =>
-      m.merit_name.toLowerCase() == 'artifact' || m.merit_name.toLowerCase() == 'hearthstone' || m.merit_name.toLowerCase() == 'warstrider'
+      m.merit_name.toLowerCase() == 'artifact' || m.merit_name.toLowerCase() == 'hearthstone'
     )
   }
 
@@ -320,7 +336,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CharmEditor)
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CharmEditor))

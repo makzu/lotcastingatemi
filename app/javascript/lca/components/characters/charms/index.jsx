@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import scrollToElement from 'scroll-to-element'
 
+import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
+import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
@@ -19,12 +22,17 @@ class CharmFullPage extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { charmFilter: '' }
+    this.state = { charmFilter: '', openCharm: null }
     this.setFilter = this.setFilter.bind(this)
+    this.setOpenCharm = this.setOpenCharm.bind(this)
   }
 
   setFilter(e) {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  setOpenCharm(charm) {
+    return (e, expanded) => this.setState({ openCharm: expanded ? charm : null })
   }
 
   render() {
@@ -36,36 +44,41 @@ class CharmFullPage extends React.Component {
 
     const {
       character, nativeCharms, abilities, martialArtsCharms, evocations,
-      spiritCharms, spells
+      spiritCharms, spells, classes
     } = this.props
-    const { charmFilter } = this.state
+    const { charmFilter, openCharm } = this.state
+    const { setFilter, setOpenCharm } = this
 
-    let natives
-    if (charmFilter === '')
-      natives = nativeCharms.map((c) =>
-        <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-          <CharmDisplay charm={ c } character={ character } />
-        </Grid>
-      )
-    else
-      natives = nativeCharms.filter((c) => c.ability === charmFilter).map((c) =>
-        <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-          <CharmDisplay charm={ c } character={ character } />
-        </Grid>
-      )
+    let filteredNatives = nativeCharms
+    if (charmFilter !== '')
+      filteredNatives = nativeCharms.filter((c) => c.ability === charmFilter)
+
+    const natives = filteredNatives.map((c) =>
+      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
+        <CharmDisplay charm={ c } character={ character }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+        />
+      </Grid>
+    )
     const maCharms = martialArtsCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character } />
+        <CharmDisplay charm={ c } character={ character }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+        />
       </Grid>
     )
     const evo = evocations.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character } />
+        <CharmDisplay charm={ c } character={ character }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+        />
       </Grid>
     )
     const spirit = spiritCharms.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character } />
+        <CharmDisplay charm={ c } character={ character }
+          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+        />
       </Grid>
     )
     const spl = spells.map((c) =>
@@ -79,39 +92,39 @@ class CharmFullPage extends React.Component {
         <div style={{ height: '1em', }}>&nbsp;</div>
       </Grid>
 
-      <Grid item xs={ 12 }>
+      <Grid item xs={ 12 } className={ classes.stickyHeader }>
         <Typography variant="headline">
           Charms
           <CharmFilter abilities={ abilities } filter={ charmFilter }
-            name="charmFilter" onChange={ this.setFilter }
+            name="charmFilter" onChange={ setFilter }
           />
         </Typography>
       </Grid>
       { natives }
 
       { maCharms.length > 0 &&
-        <Grid item xs={ 12 }>
+        <Grid item xs={ 12 } className={ classes.stickyHeader }>
           <Typography variant="headline">Martial Arts</Typography>
         </Grid>
       }
       { maCharms }
 
       { evo.length > 0 &&
-        <Grid item xs={ 12 }>
+        <Grid item xs={ 12 } className={ classes.stickyHeader }>
           <Typography variant="headline">Evocations</Typography>
         </Grid>
       }
       { evo }
 
       { spirit.length > 0 &&
-        <Grid item xs={ 12 }>
+        <Grid item xs={ 12 } className={ classes.stickyHeader }>
           <Typography variant="headline">Spirit Charms</Typography>
         </Grid>
       }
       { spirit }
 
       { spl.length > 0 &&
-        <Grid item xs={ 12 }>
+        <Grid item xs={ 12 } className={ classes.stickyHeader }>
           <Typography variant="headline">Spells</Typography>
         </Grid>
       }
@@ -128,6 +141,7 @@ CharmFullPage.propTypes = {
   evocations: PropTypes.arrayOf(PropTypes.object),
   spells: PropTypes.arrayOf(PropTypes.object),
   spiritCharms: PropTypes.arrayOf(PropTypes.object),
+  classes: PropTypes.object,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -166,6 +180,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(CharmFullPage)
+export default withStyles(styles)(connect(mapStateToProps)(CharmFullPage))

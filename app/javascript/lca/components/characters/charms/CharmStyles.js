@@ -8,7 +8,7 @@ const styles = theme => ({
   charmAnchor: {
     display: 'hidden',
     position: 'absolute',
-    top: '-5em',
+    top: '-5.55em',
   },
   detailsWrap: {
     width: '100%',
@@ -18,6 +18,9 @@ const styles = theme => ({
   },
   expandedSummary: {
     marginBottom: '-20px',
+  },
+  expandedEditSummary: {
+    marginBottom: '-60px'
   },
   meritName: { ...theme.typography.caption,
     textTransform: 'capitalize',

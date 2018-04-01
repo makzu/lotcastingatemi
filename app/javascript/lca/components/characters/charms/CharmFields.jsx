@@ -8,6 +8,7 @@ import ExpansionPanel, { ExpansionPanelActions, ExpansionPanelDetails, Expansion
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
+import Collapse from 'material-ui/transitions/Collapse'
 import Delete from 'material-ui-icons/Delete'
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 
@@ -96,14 +97,17 @@ class CharmFields extends React.Component {
       CollapseProps={{ onEntered: scrollToPanel, mountOnEnter: true, unmountOnExit: true, }}
     >
       <ExpansionPanelSummary expandIcon={ <ExpandMoreIcon /> }
-        classes={{ expanded: classes.expandedSummary }}
+        classes={{ expanded: classes.expandedEditSummary }}
       >
         <div className={ classes.summaryWrap}>
           <div id={ `charm-editor-expando-${charm.id}` } className={ classes.charmAnchor }>&nbsp;</div>
-          <Typography variant="title">
-            { charm.name }
-          </Typography>
-
+          <Collapse
+            in={ !isOpen }
+          >
+            <Typography variant="title">
+              { charm.name }
+            </Typography>
+          </Collapse>
           <CharmSummaryBlock charm={ charm } isOpen={ isOpen } classes={ classes } />
         </div>
       </ExpansionPanelSummary>
@@ -113,7 +117,7 @@ class CharmFields extends React.Component {
           <TextField name="name" value={ charm.name }
             onChange={ handleChange } onBlur={ handleBlur }
             label="Name" margin="dense"
-            style={{ width: '15em' }}
+            style={{ width: '25em' }}
           />&nbsp;&nbsp;
           { charm.type == 'Evocation' &&
             <TextField name="artifact_name" value={ charm.artifact_name }

@@ -10,6 +10,7 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
+import { getSpecificBattlegroup, canIEditBattlegroup } from '../../selectors/'
 
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   tabs: {
@@ -60,15 +61,10 @@ BattlegroupHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.battlegroupId
-  const battlegroup = state.entities.battlegroups[id]
+  const battlegroup = getSpecificBattlegroup(state, id)
   const path = ownProps.location.pathname
 
-  let canIEdit = false
-  if (battlegroup != undefined) {
-    canIEdit = state.session.id == battlegroup.player_id || false
-    if (battlegroup.chronicle && state.entities.chronicles[battlegroup.chronicle].st == state.session.id)
-      canIEdit = true
-  }
+  let canIEdit = canIEditBattlegroup(state, id)
 
   return {
     id,

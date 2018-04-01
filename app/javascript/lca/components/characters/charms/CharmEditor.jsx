@@ -18,9 +18,9 @@ import {
   updateSpell, createSpell, destroySpell,
 } from '../../../ducks/actions.js'
 import {
-  getSpecificCharacter, getMeritsForCharacter, getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter, getEvocationsForCharacter,
-  getSpellsForCharacter, getSpiritCharmsForCharacter,
+  getSpecificCharacter, getEvokableMeritsForCharacter,
+  getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter,
+  getEvocationsForCharacter, getSpellsForCharacter, getSpiritCharmsForCharacter,
   getAllAbilitiesWithCharmsForCharacter,
 } from '../../../selectors/'
 
@@ -297,9 +297,7 @@ function mapStateToProps(state, ownProps) {
     evocations = getEvocationsForCharacter(state, id)
     spells = getSpellsForCharacter(state, id)
     spiritCharms = getSpiritCharmsForCharacter(state, id)
-    artifacts = getMeritsForCharacter(state, id).filter((m) =>
-      m.merit_name.toLowerCase() == 'artifact' || m.merit_name.toLowerCase() == 'hearthstone'
-    )
+    artifacts = getEvokableMeritsForCharacter(state, id)
   }
 
   return {

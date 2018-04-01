@@ -21,7 +21,10 @@ import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
-import { getSpecificCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
+import {
+  getSpecificCharacter, getPenalties, getPoolsAndRatings,
+  getMeritsForCharacter, getWeaponsForCharacter,
+} from '../../selectors'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
 import {
   prettyFullExaltType, prettyAnimaLevel,
@@ -331,8 +334,8 @@ function mapStateToProps(state, props) {
   let penalties
 
   if (character != undefined) {
-    weapons = character.weapons.map((w) => state.entities.weapons[w])
-    merits = character.merits.map((m) => state.entities.merits[m])
+    weapons = getWeaponsForCharacter(state, id)
+    merits = getMeritsForCharacter(state, id)
     pools = getPoolsAndRatings(state, id)
     penalties = getPenalties(state, id)
   }

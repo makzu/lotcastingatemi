@@ -14,6 +14,7 @@ import RatingField from '../generic/RatingField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
 import { updateBattlegroup } from '../../ducks/actions.js'
+import { getSpecificBattlegroup } from '../../selectors'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from '../../utils/calculated/'
 
 const styles = theme => ({
@@ -247,7 +248,7 @@ BattlegroupEditor.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.battlegroupId
-  const battlegroup = state.entities.battlegroups[id]
+  const battlegroup = getSpecificBattlegroup(state, id)
 
   return {
     id,

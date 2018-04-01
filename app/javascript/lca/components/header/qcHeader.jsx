@@ -10,6 +10,7 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
+import { getSpecificQc, canIEditQc } from '../../selectors/'
 
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   tabs: {
@@ -58,15 +59,10 @@ QcHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.qcId
-  const qc = state.entities.qcs[id]
+  const qc = getSpecificQc(state, id)
   const path = ownProps.location.pathname
 
-  let canIEdit = false
-  if (qc != undefined) {
-    canIEdit = state.session.id == qc.player_id || false
-    if (qc.chronicle && state.entities.chronicles[qc.chronicle].st == state.session.id)
-      canIEdit = true
-  }
+  const canIEdit = canIEditQc
 
   return {
     id,

@@ -8,6 +8,7 @@ import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
+import { getSpecificCharacter, getMeritsForCharacter } from '../../selectors'
 import { fullMerit } from '../../utils/propTypes'
 
 const styles = theme => ({
@@ -96,11 +97,12 @@ class MeritFullPage extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const character = state.entities.characters[ownProps.match.params.characterId]
+  const id = ownProps.match.params.characterId
+  const character = getSpecificCharacter(state, id)
   let merits = []
 
   if (character != undefined && character.merits != undefined) {
-    merits = character.merits.map((id) => state.entities.merits[id])
+    merits = getMeritsForCharacter(state, id)
   }
 
   return {

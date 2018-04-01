@@ -11,7 +11,10 @@ import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import PoolLine from '../characters/PoolLine.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
-import { getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
+import {
+  getSpecificQc, getAttacksForQc, getMeritsForQc, getCharmsForQc,
+  getPenaltiesForQc, getPoolsAndRatingsForQc,
+} from '../../selectors'
 import { fullQc, qcMerit, qcAttack } from '../../utils/propTypes'
 import { prettyIntimacyRating, qcPool } from '../../utils/calculated'
 
@@ -303,7 +306,7 @@ class QcSheet extends React.PureComponent {
 
 function mapStateToProps(state, props) {
   const id = props.match.params.qcId
-  const qc = state.entities.qcs[id]
+  const qc = getSpecificQc(state, id)
 
   let qc_attacks = []
   let qc_charms = []
@@ -312,12 +315,12 @@ function mapStateToProps(state, props) {
   let penalties = {}
 
   if (qc != undefined) {
-    qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
-    qc_charms = qc.qc_charms.map((id) => state.entities.qc_charms[id])
-    qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
+    qc_attacks = getAttacksForQc(state, id)
+    qc_charms = getCharmsForQc(state, id)
+    qc_merits = getMeritsForQc(state, id)
 
-    penalties = getPenaltiesForQc(state, qc.id)
-    pools = getPoolsAndRatingsForQc(state, qc.id)
+    penalties = getPenaltiesForQc(state, id)
+    pools = getPoolsAndRatingsForQc(state, id)
   }
 
   return {

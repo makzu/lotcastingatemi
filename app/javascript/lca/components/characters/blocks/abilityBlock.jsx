@@ -97,7 +97,7 @@ function _MartialArtsAbilityLine(props) {
   </div>
 }
 _MartialArtsAbilityLine.propTypes = {
-  style: PropTypes.string.isRequired,
+  style: PropTypes.string,
   rating: PropTypes.number.isRequired,
   character: PropTypes.shape(fullChar),
   classes: PropTypes.object,

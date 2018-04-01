@@ -9,6 +9,7 @@ import ContentAddCircle from 'material-ui-icons/AddCircle'
 import QcCharmFields from './qcCharmFields.jsx'
 
 import { createQcCharm, destroyQcCharm, updateQcCharm } from '../../ducks/actions.js'
+import { getCharmsForQc } from '../../selectors'
 import { fullQc, qcCharm } from '../../utils/propTypes'
 
 class QcCharmEditor extends React.Component {
@@ -66,11 +67,8 @@ function mapStateToProps(state, ownProps) {
   const qc = ownProps.qc
   let qc_charms = []
 
-  if (qc != undefined) {
-    if (qc.qc_charms != undefined) {
-      qc_charms = qc.qc_charms.map((id) => state.entities.qc_charms[id])
-    }
-  }
+  if (qc != undefined)
+    qc_charms = getCharmsForQc(state, qc.id)
 
   return {
     qc_charms

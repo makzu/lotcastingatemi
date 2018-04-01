@@ -27,7 +27,7 @@ function checkVisible(elm) {
 class CharmFields extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { charm: this.props.charm }
+    this.state = {}
 
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
@@ -36,8 +36,8 @@ class CharmFields extends React.Component {
     this.scrollToPanel = this.scrollToPanel.bind(this)
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ charm: newProps.charm })
+  static getDerivedStateFromProps(props) {
+    return { charm: props.charm }
   }
 
   handleChange(e) {

@@ -9,6 +9,7 @@ import ContentAddCircle from 'material-ui-icons/AddCircle'
 import QcMeritFields from './qcMeritFields.jsx'
 
 import { createQcMerit, destroyQcMerit, updateQcMerit } from '../../ducks/actions.js'
+import { getMeritsForQc } from '../../selectors'
 import { fullQc, qcMerit } from '../../utils/propTypes'
 
 class QcMeritEditor extends React.Component {
@@ -66,11 +67,8 @@ function mapStateToProps(state, ownProps) {
   const qc = ownProps.qc
   let qc_merits = []
 
-  if (qc != undefined) {
-    if (qc.qc_merits != undefined) {
-      qc_merits = qc.qc_merits.map((id) => state.entities.qc_merits[id])
-    }
-  }
+  if (qc != undefined)
+    qc_merits = getMeritsForQc(state, qc.id)
 
   return {
     qc_merits

@@ -6,12 +6,24 @@ const getState = (state) => state
 const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
 export const getSpecificQc = (state, id) => state.entities.qcs[id]
-const qcIdMemoizer = (state, id) => state.entities.qcs[id].id
+const qcIdMemoizer = (state, id) => id
 
 const getQcMerits = (state) => state.entities.qc_merits
 export const getMeritsForQc = createCachedSelector(
   [getSpecificQc, getQcMerits],
-  (character, merits) => character.qc_merits.map((m) => merits[m])
+  (qc, merits) => qc.qc_merits.map((m) => merits[m])
+)(qcIdMemoizer)
+
+export const getQcAttacks = (state) => state.entities.qc_attacks
+export const getAttacksForQc = createCachedSelector(
+  [getSpecificQc, getQcAttacks],
+  (qc, attacks) => qc.qc_attacks.map((m) => attacks[m])
+)(qcIdMemoizer)
+
+export const getQcCharms = (state) => state.entities.qc_charms
+export const getCharmsForQc = createCachedSelector(
+  [getSpecificQc, getQcCharms],
+  (qc, charms) => qc.qc_charms.map((m) => charms[m])
 )(qcIdMemoizer)
 
 export const getPenaltiesForQc = createCachedSelector(

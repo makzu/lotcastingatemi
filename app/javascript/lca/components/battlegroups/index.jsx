@@ -8,10 +8,10 @@ import Typography from 'material-ui/Typography'
 import PoolLine from '../characters/PoolLine.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import { getSpecificBattlegroup, getAttacksForBattlegroup } from '../../selectors'
 import { qcAttack } from '../../utils/propTypes'
 import {
-  totalMagnitude, prettyDrillRating, bgAttackPool, bgDamage,
-  bgDefenseBonus, bgSoak,
+  totalMagnitude, prettyDrillRating, bgAttackPool, bgDamage, bgSoak,
 } from '../../utils/calculated'
 
 const styles = theme => ({
@@ -212,12 +212,12 @@ BattlegroupSheet.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.bgId
-  const battlegroup = state.entities.battlegroups[id]
+  const battlegroup = getSpecificBattlegroup(state, id)
 
   let qc_attacks = []
 
   if (battlegroup != undefined) {
-    qc_attacks = battlegroup.qc_attacks.map((id) => state.entities.qc_attacks[id])
+    qc_attacks = getAttacksForBattlegroup(state, id)
   }
 
   return {

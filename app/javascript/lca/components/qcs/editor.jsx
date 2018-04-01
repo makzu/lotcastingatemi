@@ -18,6 +18,7 @@ import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
 
 import { updateQc } from '../../ducks/actions.js'
+import { getSpecificQc } from '../../selectors'
 import { woundPenalty } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
@@ -314,7 +315,7 @@ QcEditor.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.qcId
-  const qc = state.entities.qcs[id]
+  const qc = getSpecificQc(state, id)
 
   return {
     id,

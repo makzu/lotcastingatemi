@@ -18,7 +18,7 @@ export const getPoolsForWeapon = createCachedSelector(
     parry: calc.parry(character, weapon, penalties, charmAbils),
     rangedWitheringAttack: calc.rangedWitheringAttackPool(character, weapon, penalties, charmAbils),
   })
-)((state, id) => state.entities.weapons[id].id)
+)((state, id) => id)
 
 // This is absurd
 export const sortByParry = (weaponA, weaponB) => {

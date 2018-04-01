@@ -10,6 +10,7 @@ import WeaponFields from './weaponFields.jsx'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
 import { createWeapon, destroyWeapon, updateWeapon } from '../../../ducks/actions.js'
+import { getWeaponsForCharacter } from '../../../selectors'
 import { fullWeapon } from '../../../utils/propTypes'
 
 class WeaponEditor extends React.Component {
@@ -67,11 +68,8 @@ function mapStateToProps(state, ownProps) {
   const character = ownProps.character
   let weapons = []
 
-  if (character != undefined) {
-    if (character.weapons != undefined) {
-      weapons = character.weapons.map((id) => state.entities.weapons[id])
-    }
-  }
+  if (character != undefined)
+    weapons = getWeaponsForCharacter(state, character.id)
 
   return {
     weapons

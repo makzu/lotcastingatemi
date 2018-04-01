@@ -9,8 +9,12 @@ const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
 //const characterCount = (state) => state.entities.characters.length
 export const getSpecificCharacter = (state, id) => state.entities.characters[id]
+const characterIdMemoizer = (state, id) => id
+export const getCachedSpecificCharacter = createCachedSelector(
+  [getSpecificCharacter],
+  (character) => character
+)(characterIdMemoizer)
 
-const characterIdMemoizer = (state, id) => state.entities.characters[id].id
 
 const getMerits = (state) => state.entities.merits
 export const getMeritsForCharacter = createCachedSelector(
@@ -18,6 +22,12 @@ export const getMeritsForCharacter = createCachedSelector(
   (character, merits) => character.merits.map((m) => merits[m])
 )(characterIdMemoizer)
 export const getMeritNamesForCharacter = (state, id) => getMeritsForCharacter(state, id).map((m) => m.merit_name.toLowerCase() + m.rating)
+export const getEvokableMeritsForCharacter = createSelector(
+  [getMeritsForCharacter],
+  (merits) => merits.filter((m) =>
+    m.merit_name.toLowerCase() == 'artifact' || m.merit_name.toLowerCase() == 'hearthstone'
+  )
+)
 
 const getWeapons = (state) => state.entities.weapons
 export const getWeaponsForCharacter = createCachedSelector(
@@ -42,7 +52,7 @@ export const getSpiritCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) => character.spirit_charms !== undefined ? character.spirit_charms.map((c) => charms[c]) : []
 )(characterIdMemoizer)
-export const getAllAbilitiesWithCharmsForCharacter = createSelector(
+export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
   [getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter],
   (charms, maCharms) => {
     let abilities = [ ...new Set(charms.map((c) => c.ability))]
@@ -52,7 +62,7 @@ export const getAllAbilitiesWithCharmsForCharacter = createSelector(
 
     return abilities
   }
-)
+)(characterIdMemoizer)
 
 const getSpells = (state) => state.entities.spells
 export const getSpellsForCharacter = createCachedSelector(

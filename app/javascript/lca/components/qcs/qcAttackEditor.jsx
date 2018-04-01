@@ -7,8 +7,8 @@ import Typography from 'material-ui/Typography'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 
 import QcAttackFields from './qcAttackFields.jsx'
-
 import { createQcAttack, destroyQcAttack, updateQcAttack } from '../../ducks/actions.js'
+import { getAttacksForBattlegroup, getAttacksForQc, } from '../../selectors'
 import { qcAttack } from '../../utils/propTypes'
 
 class QcAttackEditor extends React.Component {
@@ -71,11 +71,8 @@ function mapStateToProps(state, ownProps) {
   const qc = ownProps.qc
   let qc_attacks = []
 
-  if (qc != undefined) {
-    if (qc.qc_attacks != undefined) {
-      qc_attacks = qc.qc_attacks.map((id) => state.entities.qc_attacks[id])
-    }
-  }
+  if (qc != undefined)
+    qc_attacks = qc.type === 'battlegroup' ? getAttacksForBattlegroup(state, qc.id) : getAttacksForQc(state, qc.id)
 
   return {
     qc_attacks

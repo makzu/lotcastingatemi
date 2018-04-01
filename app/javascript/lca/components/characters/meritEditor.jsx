@@ -15,6 +15,7 @@ import Delete from 'material-ui-icons/Delete'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
+import { getSpecificCharacter, getMeritsForCharacter } from '../../selectors'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'
 
@@ -207,11 +208,12 @@ class MeritEditor extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const character = state.entities.characters[ownProps.match.params.characterId]
+  const id = ownProps.match.params.characterId
+  const character = getSpecificCharacter(state, id)
   let merits = []
 
   if (character != undefined && character.merits != undefined) {
-    merits = character.merits.map((id) => state.entities.merits[id])
+    merits = getMeritsForCharacter(state, id)
   }
 
   return {

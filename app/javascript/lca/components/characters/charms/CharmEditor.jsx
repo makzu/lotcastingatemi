@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import {
+  SortableContainer,
+  SortableElement,
+} from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
@@ -24,6 +28,19 @@ import {
   getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter, getSpellsForCharacter, getSpiritCharmsForCharacter,
 } from '../../../selectors/'
+
+const filterByCategory = categoryFilter => charm => (
+  categoryFilter.every((cat) => charm.categories.includes(cat))
+)
+const SortableItem = SortableElement(({ children }) => children)
+const SortableGridList = SortableContainer(({ header, items, classes }) =>
+  <Grid container spacing={ 24 }>
+    <Grid item xs={ 12 } className={ classes.stickyHeader }>
+      { header }
+    </Grid>
+    { items }
+  </Grid>
+)
 
 class CharmEditor extends Component {
   constructor(props) {
@@ -53,6 +70,12 @@ class CharmEditor extends Component {
     this.handleUpdateSpell = this.handleUpdateSpell.bind(this)
     this.handleAddSpell = this.handleAddSpell.bind(this)
     this.handleRemoveSpell = this.handleRemoveSpell.bind(this)
+    this.filteredNativeCharms = this.filteredNativeCharms.bind(this)
+    this.filteredMACharms = this.filteredMACharms.bind(this)
+    this.filteredEvocations = this.filteredEvocations.bind(this)
+    this.filteredSpiritCharms = this.filteredSpiritCharms.bind(this)
+    this.filteredSpells = this.filteredSpells.bind(this)
+    this.handleSort = this.handleSort.bind(this)
   }
 
   setFilter(e) {
@@ -129,6 +152,101 @@ class CharmEditor extends Component {
     this.props._handleDestroySpell(id, this.props.character.id)
   }
 
+  filteredNativeCharms() {
+    const { nativeCharms } = this.props
+    const {
+      abilityFilter, categoryFilter,
+    } = this.state
+    let filteredNatives = nativeCharms
+
+    if (abilityFilter !== '')
+      filteredNatives = filteredNatives.filter((c) => c.ability === abilityFilter)
+    if (categoryFilter.length > 0)
+      filteredNatives = filteredNatives.filter(filterByCategory(categoryFilter))
+    return filteredNatives
+  }
+
+  filteredMACharms() {
+    const { martialArtsCharms } = this.props
+    const { categoryFilter, styleFilter } = this.state
+    let filteredMA = martialArtsCharms
+
+    if (styleFilter !== '')
+      filteredMA = filteredMA.filter((c) => c.style === styleFilter)
+    if (categoryFilter.length > 0)
+      filteredMA = filteredMA.filter(filterByCategory(categoryFilter))
+
+    return filteredMA
+  }
+
+  filteredEvocations() {
+    const { evocations } = this.props
+    const { categoryFilter, artifactFilter } = this.state
+    let filteredEvo = evocations
+
+    if (artifactFilter !== '')
+      filteredEvo = filteredEvo.filter((c) => c.artifact_name === artifactFilter)
+    if (categoryFilter.length > 0)
+      filteredEvo = filteredEvo.filter(filterByCategory(categoryFilter))
+
+    return filteredEvo
+  }
+
+  filteredSpiritCharms() {
+    const { spiritCharms } = this.props
+    const { categoryFilter } = this.state
+    let filteredSpirit = spiritCharms
+
+    if (categoryFilter.length > 0)
+      filteredSpirit = filteredSpirit.filter(filterByCategory(categoryFilter))
+
+    return filteredSpirit
+  }
+
+  filteredSpells() {
+    const { spells } = this.props
+    const { categoryFilter, circleFilter } = this.state
+    let filteredSpells = spells
+
+    if (circleFilter !== '')
+      filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
+    if (categoryFilter.length > 0)
+      filteredSpells = filteredSpells.filter(filterByCategory(categoryFilter))
+
+    return filteredSpells
+  }
+
+  handleSort({ oldIndex, newIndex, collection }) {
+    if (oldIndex === newIndex)
+      return
+
+    let charms
+    let update = this.handleUpdate
+    switch(collection) {
+    case 'native':
+      charms = this.filteredNativeCharms()
+      break
+    case 'martial_arts':
+      charms = this.filteredMACharms()
+      break
+    case 'evocation':
+      charms = this.filteredEvocations()
+      break
+    case 'spirit':
+      charms = this.filteredSpiritCharms()
+      break
+    case 'spell':
+      charms = this.filteredSpells()
+      update = this.handleUpdateSpell
+      break
+    }
+    const charId = this.props.character.id
+    const charmA = charms[oldIndex]
+    const charmB = charms[newIndex]
+    const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
+    update(charmA.id, charId, 'sort_order', charmB.sort_order + offset)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.character == undefined)
@@ -137,85 +255,60 @@ class CharmEditor extends Component {
       </div>
 
     const {
-      character, nativeCharms, martialArtsCharms, evocations,
-      spiritCharms, spells, classes
+      character, classes
     } = this.props
     const {
       abilityFilter, categoryFilter, styleFilter, artifactFilter, circleFilter,
-      openCharm, filtersOpen,
+      openCharm, openSpell, filtersOpen,
     } = this.state
     const {
       handleUpdate, handleRemove, handleUpdateSpell, handleRemoveSpell,
       handleAddNative, handleAddMA, handleAddEvocation, handleAddSpell, handleAddSpirit,
-      setOpenCharm, setFilter, toggleFiltersOpen,
+      setOpenCharm, setOpenSpell, setFilter, toggleFiltersOpen, handleSort,
+      filteredNativeCharms, filteredMACharms, filteredEvocations, filteredSpiritCharms, filteredSpells
     } = this
 
-    let filteredNatives = nativeCharms,
-      filteredMA = martialArtsCharms,
-      filteredEvo = evocations,
-      filteredSpirit = spiritCharms,
-      filteredSpells = spells
-
-    const filterByCategory = (charm) => (
-      categoryFilter.every((cat) => charm.categories.includes(cat))
-    )
-    if (abilityFilter !== '')
-      filteredNatives = filteredNatives.filter((c) => c.ability === abilityFilter)
-    if (styleFilter !== '')
-      filteredMA = filteredMA.filter((c) => c.style === styleFilter)
-    if (artifactFilter !== '')
-      filteredEvo = filteredEvo.filter((c) => c.artifact_name === artifactFilter)
-    if (circleFilter !== '')
-      filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
-    if (categoryFilter.length > 0) {
-      filteredNatives = filteredNatives.filter(filterByCategory)
-      filteredMA = filteredMA.filter(filterByCategory)
-      filteredEvo = filteredEvo.filter(filterByCategory)
-      filteredSpirit = filteredSpirit.filter(filterByCategory)
-      filteredSpells = filteredSpells.filter(filterByCategory)
-    }
-
-
-    let natives = filteredNatives.map((c) =>
+    let natives = filteredNativeCharms().map((c, i) => <SortableItem key={ c.id } index={ i } collection="native">
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
-    )
-    let maCharms = filteredMA.map((c) =>
+    </SortableItem>)
+    let maCharms = filteredMACharms().map((c, i) => <SortableItem key={ c.id } index={ i } collection="martial_arts">
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
-    )
-    let evo = filteredEvo.map((c) =>
+    </SortableItem>)
+    let evo = filteredEvocations().map((c, i) => <SortableItem key={ c.id } index={ i } collection="evocation">
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
-    )
-    let spirit = filteredSpirit.map((c) =>
+    </SortableItem>)
+    let spirit = filteredSpiritCharms().map((c, i) => <SortableItem key={ c.id } index={ i } collection="spirit">
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
         />
       </Grid>
-    )
-    let spl = filteredSpells.map((c) =>
+    </SortableItem>)
+    let spl = filteredSpells().map((c, i) => <SortableItem key={ c.id } index={ i } collection="spell">
       <Grid item xs={ 12 } md={ 6 } key={ c.id }>
         <SpellFields spell={ c } character={ character }
           onUpdate={ handleUpdateSpell } onRemove={ handleRemoveSpell }
+          openSpell={ openSpell } onOpenChange={ setOpenSpell }
         />
       </Grid>
-    )
-
+    </SortableItem>)
+    // */
     return <div>
       <Hidden smUp>
         <div style={{ height: '1.5em', }}>&nbsp;</div>
@@ -223,111 +316,117 @@ class CharmEditor extends Component {
 
       { character.type != 'Character' &&
       <Fragment>
-        <Grid container spacing={ 24 }>
-          <Grid item xs={ 12 } className={ classes.stickyHeader }>
-            <Typography variant="headline">
-              Charms
-              &nbsp;&nbsp;
-
-              <Button onClick={ handleAddNative }>
-                Add <Hidden smDown>Charm</Hidden>&nbsp;
-                <ContentAddCircle />
-              </Button>
-
-              <CharmFilter id={ character.id } charmType="native"
-                currentAbility={ abilityFilter } currentCategory={ categoryFilter }
-                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-                onChange={ setFilter }
-              />
-            </Typography>
-          </Grid>
-          { natives }
-        </Grid>
-
-        <Grid container spacing={ 24 }>
-          <Grid item xs={ 12 } className={ classes.stickyHeader }>
-            <Typography variant="headline">
-              Martial Arts
-              &nbsp;&nbsp;
-
-              <Button onClick={ handleAddMA }>
-                Add <Hidden smDown>MA Charm</Hidden>&nbsp;
-                <ContentAddCircle />
-              </Button>
-
-              <CharmFilter id={ character.id } charmType="martial_arts"
-                currentAbility={ styleFilter } currentCategory={ categoryFilter }
-                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-                onChange={ setFilter }
-              />
-            </Typography>
-          </Grid>
-          { maCharms }
-        </Grid>
-
-        <Grid container spacing={ 24 }>
-          <Grid item xs={ 12 } className={ classes.stickyHeader }>
-            <Typography variant="headline">
-              Evocations
-              &nbsp;&nbsp;
-
-              <Button onClick={ handleAddEvocation }>
-                Add <Hidden smDown>Evocation</Hidden>&nbsp;
-                <ContentAddCircle />
-              </Button>
-
-              <CharmFilter id={ character.id } charmType="evocation"
-                currentAbility={ artifactFilter } currentCategory={ categoryFilter }
-                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-                onChange={ setFilter }
-              />
-            </Typography>
-          </Grid>
-          { evo }
-        </Grid>
-
-        <Grid container spacing={ 24 }>
-          <Grid item xs={ 12 } className={ classes.stickyHeader }>
-            <Typography variant="headline">
-              Spirit Charms
-              &nbsp;&nbsp;
-
-              <Button onClick={ handleAddSpirit }>
-                Add <Hidden smDown>Spirit Charm</Hidden>&nbsp;
-                <ContentAddCircle />
-              </Button>
-
-              <CharmFilter id={ character.id } charmType="spirit"
-                currentAbility={ '' } currentCategory={ categoryFilter }
-                open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-                onChange={ setFilter }
-              />
-            </Typography>
-          </Grid>
-          { spirit }
-        </Grid>
-      </Fragment> }
-
-      <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">
-            Spells
+        <SortableGridList
+          header={<Typography variant="headline">
+            Charms
             &nbsp;&nbsp;
 
-            <Button onClick={ handleAddSpell }>
-              Add Spell&nbsp;
+            <Button onClick={ handleAddNative }>
+              Add <Hidden smDown>Charm</Hidden>&nbsp;
               <ContentAddCircle />
             </Button>
 
-            <CharmFilter id={ character.id } charmType="spell"
-              currentAbility={ circleFilter } currentCategory={ categoryFilter }
+            <CharmFilter id={ character.id } charmType="native"
+              currentAbility={ abilityFilter } currentCategory={ categoryFilter }
               open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
               onChange={ setFilter }
             />
-          </Typography>
-        </Grid>
-        { spl }
-      </Grid>
+          </Typography>}
+          items={ natives }
+          classes={ classes }
+          onSortEnd={ handleSort }
+          useDragHandle={ true }
+          axis="xy"
+        />
+        <SortableGridList
+          header={<Typography variant="headline">
+            Martial Arts
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddMA }>
+              Add <Hidden smDown>MA Charm</Hidden>&nbsp;
+              <ContentAddCircle />
+            </Button>
+
+            <CharmFilter id={ character.id } charmType="martial_arts"
+              currentAbility={ styleFilter } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>}
+          items={ maCharms }
+          classes={ classes }
+          onSortEnd={ handleSort }
+          useDragHandle={ true }
+          axis="xy"
+        />
+        <SortableGridList
+          header={<Typography variant="headline">
+            Evocations
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddEvocation }>
+              Add <Hidden smDown>Evocation</Hidden>&nbsp;
+              <ContentAddCircle />
+            </Button>
+
+            <CharmFilter id={ character.id } charmType="evocation"
+              currentAbility={ artifactFilter } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>}
+          items={ evo }
+          classes={ classes }
+          onSortEnd={ handleSort }
+          useDragHandle={ true }
+          axis="xy"
+        />
+        <SortableGridList
+          header={<Typography variant="headline">
+            Spirit Charms
+            &nbsp;&nbsp;
+
+            <Button onClick={ handleAddSpirit }>
+              Add <Hidden smDown>Spirit Charm</Hidden>&nbsp;
+              <ContentAddCircle />
+            </Button>
+
+            <CharmFilter id={ character.id } charmType="spirit"
+              currentAbility={ '' } currentCategory={ categoryFilter }
+              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+              onChange={ setFilter }
+            />
+          </Typography>}
+          items={ spirit }
+          classes={ classes }
+          onSortEnd={ handleSort }
+          useDragHandle={ true }
+          axis="xy"
+        />
+      </Fragment> }
+      <SortableGridList
+        header={<Typography variant="headline">
+          Spells
+          &nbsp;&nbsp;
+
+          <Button onClick={ handleAddSpell }>
+            Add Spell&nbsp;
+            <ContentAddCircle />
+          </Button>
+
+          <CharmFilter id={ character.id } charmType="spell"
+            currentAbility={ circleFilter } currentCategory={ categoryFilter }
+            open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
+            onChange={ setFilter }
+          />
+        </Typography>}
+        items={ spl }
+        classes={ classes }
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+        axis="xy"
+      />
     </div>
   }
 }

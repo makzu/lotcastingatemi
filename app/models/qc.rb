@@ -5,9 +5,11 @@ class Qc < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
   include HealthLevels
-  include Willpower
   include Intimacies
   include MotePool
+  include Sortable
+  include SortableBySt
+  include Willpower
 
   has_many :qc_attacks,   dependent: :destroy, as: :qc_attackable # rubocop:disable Rails/InverseOf
   has_many :qc_charms,    dependent: :destroy

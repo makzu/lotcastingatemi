@@ -50,8 +50,8 @@ class CharmFullPage extends Component {
     return (e, expanded) => this.setState({ openCharm: expanded ? charm : null })
   }
 
-  setOpenSpell(charm) {
-    return (e, expanded) => this.setState({ openSpell: expanded ? charm : null })
+  setOpenSpell(spell) {
+    return (e, expanded) => this.setState({ openSpell: expanded ? spell : null })
   }
 
   render() {
@@ -67,9 +67,9 @@ class CharmFullPage extends Component {
     } = this.props
     const {
       abilityFilter, categoryFilter, styleFilter, artifactFilter, circleFilter,
-      openCharm, filtersOpen,
+      openCharm, openSpell, filtersOpen,
     } = this.state
-    const { toggleFiltersOpen, setFilter, setOpenCharm } = this
+    const { toggleFiltersOpen, setFilter, setOpenCharm, setOpenSpell } = this
 
     let filteredNatives = nativeCharms,
       filteredMA = martialArtsCharms,
@@ -126,7 +126,9 @@ class CharmFullPage extends Component {
     )
     const spl = filteredSpells.map((c) =>
       <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <SpellDisplay spell={ c } character={ character } />
+        <SpellDisplay spell={ c } character={ character }
+          openSpell={ openSpell } onOpenChange={ setOpenSpell }
+        />
       </Grid>
     )
 
@@ -191,7 +193,7 @@ class CharmFullPage extends Component {
       }
       { spirit }
 
-      { spells.length > 0 || character.is_sorcerer &&
+      { (spells.length > 0 || character.is_sorcerer) &&
         <Grid item xs={ 12 } className={ classes.stickyHeader }>
           <Typography variant="headline">
             Spells

@@ -4,6 +4,8 @@
 module QcTrait
   extend ActiveSupport::Concern
   included do
+    include Sortable
+
     belongs_to :qc
     alias_attribute :character, :qc
 

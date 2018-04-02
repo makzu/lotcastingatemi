@@ -1,40 +1,48 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { SortableHandle } from 'react-sortable-hoc'
+import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import Checkbox from 'material-ui/Checkbox'
+import ExpansionPanel, { ExpansionPanelActions, ExpansionPanelDetails, ExpansionPanelSummary, } from 'material-ui/ExpansionPanel'
 import { FormControlLabel } from 'material-ui/Form'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
+import Collapse from 'material-ui/transitions/Collapse'
 import Delete from 'material-ui-icons/Delete'
+import DragHandleIcon from 'material-ui-icons/DragHandle'
+import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 
-import BlockPaper from '../../generic/blockPaper.jsx'
+import styles from './CharmStyles.js'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
+import { SpellSummaryBlock } from './SpellDisplay.jsx'
 
-const styles = theme => ({
-  nameField: {
-    marginRight: theme.spacing.unit,
-  },
-  costField: {
-    marginRight: theme.spacing.unit,
-  },
-})
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
+
+function checkVisible(elm) {
+  var rect = elm.getBoundingClientRect()
+  var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight)
+  return !(rect.bottom < 0 || rect.top - viewHeight >= 0)
+}
 
 class SpellFields extends Component {
   constructor(props) {
     super(props)
-    this.state = { spell: this.props.spell }
+    this.state = {}
 
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
     this.handleCheck = this.handleCheck.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.scrollToPanel = this.scrollToPanel.bind(this)
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ spell: newProps.spell })
+  static getDerivedStateFromProps(props) {
+    return { spell: props.spell }
   }
 
   handleChange(e) {
@@ -74,80 +82,115 @@ class SpellFields extends Component {
     this.props.onRemove(this.state.spell.id)
   }
 
+  scrollToPanel(e, appearing) {
+    if (appearing)
+      return false
+    const elem = document.getElementById(`spell-editor-expando-${this.state.spell.id}`)
+    if(!checkVisible(elem))
+      scrollToElement(elem)
+  }
+
   render() {
+    const { character, openSpell, onOpenChange, classes } = this.props
     const { spell } = this.state
-    const { handleChange, handleBlur, handleRatingChange, handleRemove, handleCheck } = this
-    const { character, classes } = this.props
+    const {
+      handleChange, handleBlur, handleRatingChange, handleCheck, handleRemove,
+      scrollToPanel,
+    } = this
 
-    return <BlockPaper>
-      <Button onClick={ handleRemove } style={{ float: 'right' }}>
-       Delete&nbsp;
-        <Delete />
-      </Button>
+    const isOpen = openSpell === spell.id
 
-      <TextField name="name" value={ spell.name }
-        className={ classes.nameField }
-        onChange={ handleChange } onBlur={ handleBlur }
-        label="Name" margin="dense"
-      />
-
-      <TextField select name="circle"
-        label="Circle" margin="dense"
-        value={ spell.circle }
-        onChange={ handleRatingChange }
+    return <ExpansionPanel
+      expanded={ isOpen }
+      onChange={ onOpenChange(spell.id) }
+      CollapseProps={{ onEntered: scrollToPanel, mountOnEnter: true, unmountOnExit: true, }}
+    >
+      <ExpansionPanelSummary expandIcon={ <ExpandMoreIcon /> }
+        classes={{ expanded: classes.expandedEditSummary }}
       >
-        <MenuItem value="terrestrial">Terrestrial</MenuItem>
-        <MenuItem value="celestial">Celestial</MenuItem>
-        <MenuItem value="solar">Solar</MenuItem>
-      </TextField>
-      &nbsp;&nbsp;
+        <div className={ classes.summaryWrap}>
+          <div id={ `spell-editor-expando-${spell.id}` } className={ classes.charmAnchor }>&nbsp;</div>
+          <Collapse
+            in={ !isOpen }
+          >
+            <Typography variant="title">
+              <Handle /> &nbsp;
+              { spell.name }
+            </Typography>
+            <SpellSummaryBlock spell={ spell } isOpen={ isOpen } classes={ classes } />
+          </Collapse>
+        </div>
+      </ExpansionPanelSummary>
 
-      <FormControlLabel
-        label="Control Spell"
-        control={
-          <Checkbox name="control" checked={ spell.control }
-            onChange={ handleCheck }
+      <ExpansionPanelDetails>
+        <div className={ classes.detailsWrap }>
+          <TextField name="name" value={ spell.name }
+            onChange={ handleChange } onBlur={ handleBlur }
+            label="Name" margin="dense"
+            style={{ width: '25em' }}
           />
-        }
-      />
-      <br />
+          <br />
 
-      <TextField name="cost" value={ spell.cost } spellCheck={ false }
-        className={ classes.costField }
-        onChange={ handleChange } onBlur={ handleBlur }
-        label="Cost" margin="dense"
-      />
+          <CharmCategoryAutocomplete value={ spell.categories } id={ character.id }
+            onChange={ handleRatingChange }
+          />
 
-      <TextField name="duration" value={ spell.duration }
-        onChange={ handleChange } onBlur={ handleBlur }
-        label="Duration" margin="dense"
-      />
-      <br />
+          <TextField name="cost" value={ spell.cost }
+            onChange={ handleChange } onBlur={ handleBlur }
+            label="Cost" margin="dense"
+          />&nbsp;&nbsp;
 
-      <TextField name="keywords" value={ spell.keywords }
-        onChange={ handleChange } onBlur={ handleBlur }
-        fullWidth={ true }
-        label="Keywords (comma separated)" margin="dense"
-      />
-      <br />
+          <TextField name="duration" value={ spell.duration }
+            onChange={ handleChange } onBlur={ handleBlur }
+            label="Duration" margin="dense"
+          />&nbsp;&nbsp;
 
-      <TextField name="body" value={ spell.body }
-        onChange={ handleChange } onBlur={ handleBlur }
-        className="editor-description-field" multiline fullWidth
-        label="Effect" margin="dense"
-      />
+          <TextField select name="circle"
+            label="Circle" margin="dense"
+            value={ spell.circle }
+            onChange={ handleRatingChange }
+          >
+            <MenuItem value="terrestrial">Terrestrial</MenuItem>
+            <MenuItem value="celestial">Celestial</MenuItem>
+            <MenuItem value="solar">Solar</MenuItem>
+          </TextField>&nbsp;&nbsp;
 
-      <CharmCategoryAutocomplete value={ spell.categories } id={ character.id }
-        onChange={ handleRatingChange }
-      />
-      <br />
+          <FormControlLabel
+            label="Control Spell"
+            control={
+              <Checkbox name="control" checked={ spell.control }
+                onChange={ handleCheck }
+              />
+            }
+          />
+          <br />
 
-      <TextField name="ref" value={ spell.ref }
-        onChange={ handleChange } onBlur={ handleBlur }
-        fullWidth={ true }
-        label="Reference" margin="dense"
-      />
-    </BlockPaper>
+          <TextField name="keywords" value={ spell.keywords }
+            onChange={ handleChange } onBlur={ handleBlur }
+            fullWidth={ true }
+            label="Keywords (comma separated)" margin="dense"
+          />
+
+          <TextField name="body" value={ spell.body }
+            onChange={ handleChange } onBlur={ handleBlur }
+            className="editor-description-field" multiline fullWidth
+            label="Effect" margin="dense" rows={ 2 } rowsMax={ 15 }
+          />
+          <br />
+
+          <TextField name="ref" value={ spell.ref } fullWidth
+            onChange={ handleChange } onBlur={ handleBlur }
+            label="Reference" margin="dense"
+          />
+        </div>
+      </ExpansionPanelDetails>
+      <ExpansionPanelActions>
+        <Button onClick={ handleRemove } style={{ float: 'right' }}>
+          Delete&nbsp;
+          <Delete />
+        </Button>
+      </ExpansionPanelActions>
+    </ExpansionPanel>
   }
 }
 SpellFields.propTypes = {
@@ -155,6 +198,8 @@ SpellFields.propTypes = {
   character: PropTypes.object,
   onUpdate: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  openSpell: PropTypes.number,
+  onOpenChange: PropTypes.func.isRequired,
   classes: PropTypes.object,
 }
 

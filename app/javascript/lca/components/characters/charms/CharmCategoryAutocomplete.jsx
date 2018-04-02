@@ -220,7 +220,7 @@ class CharmCategoryAutocomplete extends Component {
   }
 
   static getDerivedStateFromProps(props, state) { // eslint-disable-line no-unused-vars
-    return { categories: props.value.join(',') }
+    return { categories: props.value }
   }
 
   handleChange(e) {

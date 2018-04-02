@@ -4,6 +4,8 @@
 module CharacterTrait
   extend ActiveSupport::Concern
   included do
+    include Sortable
+
     belongs_to :character, foreign_key: :character_id # rubocop:disable Rails/InverseOf
 
     delegate :player,      to: :character

@@ -4,6 +4,8 @@
 class Battlegroup < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
+  include Sortable
+  include SortableBySt
   include Willpower
 
   has_many :qc_attacks, dependent: :destroy, as: :qc_attackable # rubocop:disable Rails/InverseOf

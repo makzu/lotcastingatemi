@@ -11,8 +11,10 @@ class Character < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
   include HealthLevels
-  include Willpower
   include Intimacies
+  include Sortable
+  include SortableBySt
+  include Willpower
 
   has_many :merits,  dependent: :destroy
   has_many :weapons, dependent: :destroy

@@ -4,6 +4,7 @@
 # and add their own bonuses.
 class QcAttack < ApplicationRecord
   include Broadcastable
+  include Sortable
   belongs_to :qc_attackable, polymorphic: true
   alias_attribute :character, :qc_attackable
 

@@ -40,7 +40,7 @@ export const getWeaponsForCharacter = createCachedSelector(
 const getSpells = (state) => state.entities.spells
 export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
-  (character, spells) => character.spells.map((s) => spells[s])
+  (character, spells) => character.spells.map((s) => spells[s]).sort((a, b) => a.sort_order - b.sort_order)
 )(characterIdMemoizer)
 export const getControlSpellsForCharacter = (state, id) => getSpellsForCharacter(state, id).filter((s) => s.control)
 

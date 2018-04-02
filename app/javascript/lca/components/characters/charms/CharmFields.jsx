@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from 'material-ui/styles'
@@ -10,6 +11,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import Collapse from 'material-ui/transitions/Collapse'
 import Delete from 'material-ui-icons/Delete'
+import DragHandleIcon from 'material-ui-icons/DragHandle'
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 
 import styles from './CharmStyles.js'
@@ -19,6 +21,8 @@ import AbilitySelect from '../../generic/abilitySelect.jsx'
 import RatingField from '../../generic/RatingField.jsx'
 import { isAbilityCharm, isAttributeCharm, abilitiesWithRatings } from '../../../utils/calculated'
 import { ABILITY_MAX, ATTRIBUTE_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../../utils/constants.js'
+
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
 
 function checkVisible(elm) {
   var rect = elm.getBoundingClientRect()
@@ -106,6 +110,7 @@ class CharmFields extends Component {
             in={ !isOpen }
           >
             <Typography variant="title">
+              <Handle /> &nbsp;
               { charm.name }
             </Typography>
           </Collapse>

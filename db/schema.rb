@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180401092507) do
+ActiveRecord::Schema.define(version: 20180401235315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20180401092507) do
     t.string "rituals", default: [], array: true
     t.text "notes", default: ""
     t.boolean "houserules", default: false
+    t.json "bp_log", default: []
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end

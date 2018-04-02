@@ -1,10 +1,8 @@
 ## v42
-###### *Not yet released*
+###### *Apr 2, 2018*
 - Major overhaul of the Charms page and Edit Charms page
-- The Charms page and editor can now be filtered by Ability / Attribute
-- Improved Characters page
-- Rating fields for Attributes and Abilities now change to the number you expect instead of 5 if the cursor is not in the most auspicious spot (thanks /u/evilmegan)
-- Charms and Spells now have zero or more custom Categories, like 'Attack,' 'Defense', or 'My Ultra One Hit KO Brawl Combo'
+- Charms and Spells can be manually sorted
+- Charms and Spells now have zero or more custom Categories, like 'Attack,' 'Defense', or 'My Ultra One Hit KO Wolf Fang Fist Combo'
 - Charms and Spells on the Charm list or editor can be filtered by category
 - Native Charms can be filtered by Ability / Attribute
 - Martial Arts Charms can be filtered by style
@@ -12,6 +10,10 @@
 - Spells can be filtered by Circle
 - Improved Character list page
 - Merits can now be ranked N/A, for all you Eye of Autochthon wielders out there
+- Added XP Log and Solar XP Log (pre-filled with values from Spent XP and Spent Solar Xp)
+- Added BP Log
+- Removed Spent XP and Spent Solar XP fields
+- Characters can have multiple shaping rituals
 - Rating fields for Attributes and Abilities now change to the number you expect instead of 5 if the cursor is not in the most auspicious spot (thanks /u/evilmegan)
 - Slightly better handling of auth token expiration
 - Bug fixes

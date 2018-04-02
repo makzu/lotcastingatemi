@@ -1,4 +1,4 @@
-## v42
+## v43
 ###### *Apr 2, 2018*
 - Major overhaul of the Charms page and Edit Charms page
 - Charms and Spells can be manually sorted
@@ -17,6 +17,7 @@
 - Rating fields for Attributes and Abilities now change to the number you expect instead of 5 if the cursor is not in the most auspicious spot (thanks /u/evilmegan)
 - Slightly better handling of auth token expiration
 - Bug fixes
+- Forget about v42
 
 ## v41
 ###### *Mar 28, 2018*

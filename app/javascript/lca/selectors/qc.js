@@ -51,7 +51,7 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
       appearance: calc.appearanceRating({ attr_appearance: qc.appearance }, meritNames),
 
       evasion: calc.qcRating(qc, qc.evasion, penalties.wound + penalties.onslaught, tiny),
-      parry: calc.qcRating(qc, qc.evasion, penalties.wound + penalties.onslaught),
+      parry: calc.qcRating(qc, qc.parry, penalties.wound + penalties.onslaught),
       senses: calc.qcRating(qc, qc.senses, penalties.wound),
     }
   }

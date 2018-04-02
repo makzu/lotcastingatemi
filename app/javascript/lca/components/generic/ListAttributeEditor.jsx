@@ -34,7 +34,10 @@ class ListAttributeEditor extends Component {
 
   onChange(index, e) {
     var newTrait = [ ...this.state.trait ]
-    newTrait[index][e.target.name] = e.target.value
+    if (this.props.nonObject)
+      newTrait[index] = e.target.value
+    else
+      newTrait[index][e.target.name] = e.target.value
     this.setState({ trait: newTrait })
   }
 
@@ -102,6 +105,7 @@ ListAttributeEditor.propTypes = {
   trait: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   newObject: PropTypes.object.isRequired,
+  nonObject: PropTypes.bool,
   Fields: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   classes: PropTypes.object,

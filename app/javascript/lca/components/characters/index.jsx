@@ -156,6 +156,7 @@ LimitTrackBlock.propTypes = {
 }
 
 export function SorceryBlock({ character }) {
+  const rituals = character.rituals.map((r, i) => <Typography paragraph key={ i }>{r}</Typography>)
   return <BlockPaper>
     <Typography variant="title">
       Sorcery
@@ -170,7 +171,7 @@ export function SorceryBlock({ character }) {
     </Typography>
 
     <Typography>
-      { character.shaping_rituals }
+      { rituals }
     </Typography>
   </BlockPaper>
 }

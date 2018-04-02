@@ -95,6 +95,9 @@ export const parseError = (action) => {
     console.log('Easily Overlooked Error Method') // eslint-disable-line no-console
     return 'Error'
   }
+  if (action.payload.status === 500)
+    return action.payload.message || 'Internal Server Error'
+
   let keys = Object.keys(action.payload.response)
   return keys.map((k) => k + ': ' + action.payload.response[k][0].error).join(', ')
 }

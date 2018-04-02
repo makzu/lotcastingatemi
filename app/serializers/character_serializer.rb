@@ -26,7 +26,7 @@ class CharacterSerializer < ActiveModel::Serializer
 
              :armor_name, :armor_weight, :armor_is_artifact, :armor_tags,
 
-             :is_sorcerer, :sorcerous_motes, :shaping_rituals,
+             :is_sorcerer, :sorcerous_motes, :rituals,
 
              :lore_background,
 

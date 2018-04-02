@@ -32,7 +32,7 @@ const XpFields = (props) => {
     <TextField name="label" value={ label } className={ classes.nameField }
       label="For" margin="dense"
       onChange={ onChange } onBlur={ onBlur }
-    />&nbsp;&nbsp;
+    />
 
     <RatingField trait="points" value={ points }
       label="Points" min={ 0 } margin="dense" narrow

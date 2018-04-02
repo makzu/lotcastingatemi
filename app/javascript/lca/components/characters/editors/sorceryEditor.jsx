@@ -7,10 +7,28 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
+import ListAttributeEditor from '../../generic/ListAttributeEditor.jsx'
 import RatingField from '../../generic/RatingField.jsx'
 
+const SorceryFields = (props) => {
+  const { onChange, onBlur, trait, classes } = props
+
+  return <Fragment>
+    <TextField value={ trait } className={ classes.nameField }
+      label="Ritual" margin="dense"
+      multiline fullWidth rowsMax={ 10 }
+      onChange={ onChange } onBlur={ onBlur } />
+  </Fragment>
+}
+SorceryFields.propTypes = {
+  trait: PropTypes.string,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  classes: PropTypes.object,
+}
+
 function SorceryEditor(props) {
-  const { character, onChange, onBlur, onCheck, onRatingChange } = props
+  const { character, onCheck, onRatingChange } = props
 
   return <BlockPaper>
     <Typography variant="title">
@@ -28,15 +46,17 @@ function SorceryEditor(props) {
 
     { character.is_sorcerer && <Fragment>
       <RatingField trait="sorcerous_motes" value={ character.sorcerous_motes }
-        label="S. Motes" margin="dense"
+        label="Sorcerous Motes" margin="dense"
         onChange={ onRatingChange }
       />
       <br />
-
-      <TextField name="shaping_rituals" value={ character.shaping_rituals }
-        label="Shaping Rituals" margin="dense"
-        multiline fullWidth rowsMax={ 10 }
-        onChange={ onChange } onBlur={ onBlur } />
+      <ListAttributeEditor label="Shaping Rituals"
+        character={ character } trait="rituals"
+        Fields={ SorceryFields }
+        newObject={ '' }
+        onChange={ onRatingChange }
+        nonObject
+      />
     </Fragment> }
   </BlockPaper>
 

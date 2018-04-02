@@ -63,6 +63,7 @@ class Character < ApplicationRecord
   before_validation :trim_armor_tags
   after_initialize :set_xp_log
   after_initialize :set_solar_xp_log
+  after_initialize :set_rituals
 
   def set_xp_log
     return if xp_spent.zero? || !xp_log.empty?
@@ -72,6 +73,11 @@ class Character < ApplicationRecord
   def set_solar_xp_log
     return if xp_solar_spent.zero? || !xp_log_solar.empty?
     self.xp_log_solar = [{ label: 'Spent Solar XP', points: xp_solar_spent }]
+  end
+
+  def set_rituals
+    return if shaping_rituals.blank? || !rituals.empty?
+    self.rituals = [shaping_rituals]
   end
 
   def trim_armor_tags

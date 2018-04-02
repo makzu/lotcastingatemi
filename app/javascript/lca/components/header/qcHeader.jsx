@@ -62,7 +62,7 @@ function mapStateToProps(state, ownProps) {
   const qc = getSpecificQc(state, id)
   const path = ownProps.location.pathname
 
-  const canIEdit = canIEditQc
+  const canIEdit = canIEditQc(state, id)
 
   return {
     id,

@@ -47,8 +47,10 @@ class Character < ApplicationRecord
 
   validates :abil_craft,        json: { schema: Schemas::CRAFT        }
   validates :abil_martial_arts, json: { schema: Schemas::MARTIAL_ARTS }
-
   validates :specialties,       json: { schema: Schemas::SPECIALTY    }
+  validates :xp_log,            json: { schema: Schemas::XP_LOG       }
+  validates :xp_log_solar,      json: { schema: Schemas::XP_LOG       }
+  validates :bp_log,            json: { schema: Schemas::XP_LOG       }
 
   validates :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
             numericality: { greater_than_or_equal_to: 0 }
@@ -59,6 +61,18 @@ class Character < ApplicationRecord
   validates :onslaught,       numericality: { greater_than_or_equal_to: 0 }
 
   before_validation :trim_armor_tags
+  after_initialize :set_xp_log
+  after_initialize :set_solar_xp_log
+
+  def set_xp_log
+    return if xp_spent.zero? || !xp_log.empty?
+    self.xp_log = [{ label: 'Spent XP', points: xp_spent }]
+  end
+
+  def set_solar_xp_log
+    return if xp_solar_spent.zero? || !xp_log_solar.empty?
+    self.xp_log_solar = [{ label: 'Spent Solar XP', points: xp_solar_spent }]
+  end
 
   def trim_armor_tags
     return unless will_save_change_to_attribute? :armor_tags

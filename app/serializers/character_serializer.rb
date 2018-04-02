@@ -34,7 +34,7 @@ class CharacterSerializer < ActiveModel::Serializer
 
              :initiative, :onslaught, :in_combat, :has_acted,
 
-             :xp_total, :xp_spent, :xp_solar_total, :xp_solar_spent,
+             :xp_total, :xp_solar_total, :xp_log, :xp_log_solar, :bp_log,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
              :sort_order, :chronicle_sort_order
   # rubocop:enable Layout/EmptyLinesAroundArguments

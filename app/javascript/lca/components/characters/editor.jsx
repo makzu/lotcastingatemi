@@ -147,19 +147,13 @@ class CharacterEditor extends Component {
           />
         </Grid>
 
-        <Grid item xs={ 12 } sm={ 6 } lg={ 3 }>
+        <Grid item xs={ 12 } sm={ 6 } lg={ 4 }>
           <WillpowerEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
         </Grid>
 
-        <Grid item xs={ 12 } sm={ 6 } lg={ 3 }>
-          <XpEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } sm={ 6 } lg={ 3 }>
+        <Grid item xs={ 12 } sm={ 6 } lg={ 4 }>
           <MotePoolEditor character={ character }
             onRatingChange={ handleRatingChange }
           />
@@ -217,6 +211,12 @@ class CharacterEditor extends Component {
 
         <Grid item xs={ 12 }>
           <WeaponEditor character={ character } />
+        </Grid>
+
+        <Grid item xs={ 12 } lg={ 6 }>
+          <XpEditor character={ character }
+            onRatingChange={ handleRatingChange }
+          />
         </Grid>
       </Grid>
     </div>

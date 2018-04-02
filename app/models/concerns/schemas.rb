@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
 # Validation schemas for the various json columns on characters and QCs.
 module Schemas
   CRAFT = {
@@ -89,6 +90,18 @@ module Schemas
     }
   }.freeze
 
+  XP_LOG = {
+    "type": 'array',
+    "items": {
+      "type": 'object',
+      "required": %w[label points],
+      "properties": {
+        "label": { "type": 'string' },
+        "points": { "type": 'integer', "minimum": 0 }
+      }
+    }
+  }.freeze
+
   QC_ACTION = {
     "type": 'array',
     "items": {
@@ -102,3 +115,4 @@ module Schemas
     }
   }.freeze
 end
+# rubocop:enable Metrics/ModuleLength

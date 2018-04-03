@@ -3,6 +3,7 @@ import createCachedSelector from 're-reselect'
 
 import { getPoolsForWeapon, sortByParry, } from './weapon.js'
 import { getAllAbilitiesWithCharmsForCharacter } from './charm.js'
+import { sortOrderSort } from '../utils'
 import * as calc from '../utils/calculated/'
 
 const getState = (state) => state
@@ -20,7 +21,7 @@ export const getCachedSpecificCharacter = createCachedSelector(
 const getMerits = (state) => state.entities.merits
 export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],
-  (character, merits) => character.merits.map((m) => merits[m])
+  (character, merits) => sortOrderSort(character.merits.map((m) => merits[m]))
 )(characterIdMemoizer)
 export const getMeritNamesForCharacter = (state, id) => getMeritsForCharacter(state, id).map((m) => m.merit_name.toLowerCase() + m.rating).sort()
 export const getEvokableMeritsForCharacter = createSelector(
@@ -33,14 +34,14 @@ export const getEvokableMeritsForCharacter = createSelector(
 const getWeapons = (state) => state.entities.weapons
 export const getWeaponsForCharacter = createCachedSelector(
   [getSpecificCharacter, getWeapons],
-  (character, weapons) => character.weapons.map((w) => weapons[w])
+  (character, weapons) => sortOrderSort(character.weapons.map((w) => weapons[w]))
 )(characterIdMemoizer)
 
 
 const getSpells = (state) => state.entities.spells
 export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
-  (character, spells) => character.spells.map((s) => spells[s]).sort((a, b) => a.sort_order - b.sort_order)
+  (character, spells) => sortOrderSort(character.spells.map((s) => spells[s]))
 )(characterIdMemoizer)
 export const getControlSpellsForCharacter = (state, id) => getSpellsForCharacter(state, id).filter((s) => s.control)
 

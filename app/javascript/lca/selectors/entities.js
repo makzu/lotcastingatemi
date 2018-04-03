@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import { sortOrderSort } from '../utils'
 
 const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
@@ -6,7 +7,7 @@ const getCharacters = (state) => state.entities.characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters.map((c) => characters[c] )
+    sortOrderSort(currentPlayer.characters.map((c) => characters[c] ))
 )
 export const getMyPinnedCharacters = createSelector(
   [getMyCharacters],
@@ -21,7 +22,7 @@ const getQCs = (state) => state.entities.qcs
 export const getMyQCs = createSelector(
   [getCurrentPlayer, getQCs],
   (currentPlayer, qcs) =>
-    currentPlayer.qcs.map((c) => qcs[c] )
+    sortOrderSort(currentPlayer.qcs.map((c) => qcs[c] ))
 )
 export const getMyPinnedQCs = createSelector(
   [getMyQCs],
@@ -36,7 +37,7 @@ const getBattlegroups = (state) => state.entities.battlegroups
 export const getMyBattlegroups = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>
-    currentPlayer.battlegroups.map((c) => battlegroups[c] )
+    sortOrderSort(currentPlayer.battlegroups.map((c) => battlegroups[c] ))
 )
 export const getMyPinnedBattlegroups = createSelector(
   [getMyBattlegroups],

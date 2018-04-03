@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Checkbox from 'material-ui/Checkbox'
@@ -8,6 +9,8 @@ import { FormControlLabel } from 'material-ui/Form'
 import Hidden from 'material-ui/Hidden'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
+import DragHandleIcon from 'material-ui-icons/DragHandle'
 import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 
 import WeaponAbilitySelect from './weaponAbilitySelect.jsx'
@@ -15,10 +18,15 @@ import WeaponAttributeSelect from './weaponAttributeSelect.jsx'
 import WeightSelect from '../../generic/weightSelect.jsx'
 import { fullWeapon } from '../../../utils/propTypes'
 
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
+
 const styles = theme => ({
   fieldContainer: {
     display: 'flex',
     alignItems: 'center',
+  },
+  grabHandle: {
+    marginRight: theme.spacing.unit,
   },
   nameField: {
     marginRight: theme.spacing.unit,
@@ -35,9 +43,6 @@ const styles = theme => ({
   },
 })
 
-/* TODO: handle ranged weapons properly
- * TODO: allow unusual weapons like that given by The Burning Name
- */
 class WeaponFields extends Component {
   constructor(props) {
     super(props)
@@ -120,6 +125,10 @@ class WeaponFields extends Component {
 
     return <Fragment>
       <div className={ classes.fieldContainer }>
+        <Typography component="div" className={ classes.grabHandle }>
+          <Handle />
+        </Typography>
+
         <TextField name="name" value={ weapon.name } label="Name" className={ classes.nameField }
           onBlur={ handleBlur } onChange={ handleChange } margin="dense"
         />

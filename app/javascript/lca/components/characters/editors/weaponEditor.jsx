@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import {
+  SortableContainer,
+  SortableElement,
+} from 'react-sortable-hoc'
 
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
@@ -13,6 +17,9 @@ import { createWeapon, destroyWeapon, updateWeapon } from '../../../ducks/action
 import { getWeaponsForCharacter } from '../../../selectors'
 import { fullWeapon } from '../../../utils/propTypes'
 
+const SortableItem = SortableElement(({ children }) => children)
+const SortableWeaponList = SortableContainer(({ items }) => <div>{ items }</div>)
+
 class WeaponEditor extends Component {
   constructor(props) {
     super(props)
@@ -20,6 +27,7 @@ class WeaponEditor extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleSort = this.handleSort.bind(this)
   }
 
   handleChange(id, trait, value) {
@@ -34,13 +42,22 @@ class WeaponEditor extends Component {
     this.props.removeWeapon(id, this.props.character.id)
   }
 
-  render() {
-    const { handleChange, handleAdd, handleRemove } = this
+  handleSort({ oldIndex, newIndex }) {
+    const weaponA = this.props.weapons[oldIndex]
+    const weaponB = this.props.weapons[newIndex]
+    const offset = weaponA.sort_order > weaponB.sort_order ? -1 : 1
+    this.props.updateWeapon(weaponA.id, this.props.character.id, 'sort_order', weaponB.sort_order + offset)
+  }
 
-    const weapons = this.props.weapons.map((weapon) =>
-      <WeaponFields key={ weapon.id } weapon={ weapon } character={ this.props.character }
-        onChange={ handleChange } onRemoveClick={ handleRemove }
-      />
+  render() {
+    const { handleChange, handleAdd, handleRemove, handleSort } = this
+
+    const weapons = this.props.weapons.map((weapon, i) =>
+      <SortableItem key={ weapon.id } index={ i }>
+        <WeaponFields weapon={ weapon } character={ this.props.character }
+          onChange={ handleChange } onRemoveClick={ handleRemove }
+        />
+      </SortableItem>
     )
 
     return <BlockPaper>
@@ -51,8 +68,11 @@ class WeaponEditor extends Component {
           <ContentAddCircle  />
         </Button>
       </Typography>
-
-      { weapons }
+      <SortableWeaponList
+        items={ weapons }
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+      />
     </BlockPaper>
   }
 }

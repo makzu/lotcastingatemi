@@ -6,8 +6,13 @@ class ChronicleCharactersBroadcastJob < ApplicationJob
 
   def perform(ids, chronicle, type, thing)
     ids.each do |id|
+      broadcast_create id, thing, json(thing), 'chronicle', thing.chronicle_id if thing.chronicle_id.present?
       broadcast_update id, chronicle, "#{type}s" => chronicle.send("#{type}_ids")
       broadcast_update id, thing, chronicle_id: nil if thing.chronicle_id.blank?
     end
+  end
+
+  def json(entity)
+    Api::V1::BaseController.render(json: entity)
   end
 end

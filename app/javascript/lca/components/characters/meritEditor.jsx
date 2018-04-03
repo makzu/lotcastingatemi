@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from 'react-sortable-hoc'
 
 import Button from 'material-ui/Button'
 import Checkbox from 'material-ui/Checkbox'
@@ -11,6 +16,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
 import Delete from 'material-ui-icons/Delete'
+import DragHandleIcon from 'material-ui-icons/DragHandle'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
@@ -20,6 +26,17 @@ import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
 import { getSpecificCharacter, getMeritsForCharacter } from '../../selectors'
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'
+
+const SortableItem = SortableElement(({ children }) => children)
+const SortableGridList = SortableContainer(({ header, items }) =>
+  <Grid container spacing={ 24 }>
+    <Grid item xs={ 12 }>
+      { header }
+    </Grid>
+    { items }
+  </Grid>
+)
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
 
 export class MeritFields extends Component {
   constructor(props) {
@@ -77,34 +94,20 @@ export class MeritFields extends Component {
     const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
 
     return <BlockPaper>
-      <Button onClick={ this.handleRemove }
-        style={{ float: 'right' }}
-      >
-        Delete&nbsp;
-        <Delete />
-      </Button>
-
       <Typography component="div">
         <TextField name="merit_name" value={ merit.merit_name }
           onChange={ handleChange } onBlur={ handleBlur }
           label="Merit" margin="dense"
-        />
-        &nbsp;
+        />&nbsp;&nbsp;
 
         <RatingField trait="rating" value={ merit.rating }
-          label="Rating" margin="dense"
+          label="Rating" margin="dense" narrow
           min={ MERIT_RATING_MIN } max={ MERIT_RATING_MAX }
           onChange={ handleRatingChange }
         />
-        { merit.rating === 6 && ' (N/A)' }
-      </Typography>
-
-      <div>
-        <TextField name="label" value={ merit.label }
-          label="Summary (optional)" margin="dense"
-          onChange={ handleChange } onBlur={ handleBlur }
-        />
-        &nbsp;
+        { merit.rating === 6 &&
+          <span>{'(N/A)'}&nbsp;&nbsp;</span>
+        }
 
         <TextField select name="merit_cat" value={ merit.merit_cat }
           label="Type" margin="dense"
@@ -124,20 +127,43 @@ export class MeritFields extends Component {
           }
           label="Supernatual"
         />
+
+        <div style={{ float: 'right' }}>
+          <Handle />
+        </div>
+      </Typography>
+
+      <div style={{ display: 'flex' }}>
+        <TextField name="label" value={ merit.label }
+          style={{ flex: 1 }}
+          label="Summary (optional)" margin="dense"
+          onChange={ handleChange } onBlur={ handleBlur }
+        />
+        &nbsp;
+
+
       </div>
 
       <div>
         <TextField name="description" value={ merit.description }
           label="Description" margin="dense"
-          multiline fullWidth rows={ 2 } rowsMax={ 10 }
+          multiline fullWidth rowsMax={ 10 }
           onChange={ handleChange } onBlur={ handleBlur }
         />
       </div>
+
       <div>
         <TextField name="ref" value={ merit.ref }
           onChange={ handleChange } onBlur={ handleBlur }
           label="Reference" margin="dense"
         />
+
+        <Button onClick={ this.handleRemove }
+          style={{ float: 'right' }}
+        >
+          Delete&nbsp;
+          <Delete />
+        </Button>
       </div>
     </BlockPaper>
   }
@@ -160,6 +186,7 @@ class MeritEditor extends Component {
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleSort = this.handleSort.bind(this)
   }
 
   handleUpdate(id, charId, trait, value) {
@@ -174,6 +201,13 @@ class MeritEditor extends Component {
     this.props._handleDestroy(id, this.props.character.id)
   }
 
+  handleSort({ oldIndex, newIndex }) {
+    const meritA = this.props.merits[oldIndex]
+    const meritB = this.props.merits[newIndex]
+    const offset = meritA.sort_order > meritB.sort_order ? -1 : 1
+    this.props._handleUpdate(meritA.id, this.props.character.id, 'sort_order', meritB.sort_order + offset)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.character == undefined)
@@ -181,30 +215,31 @@ class MeritEditor extends Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { handleAdd, handleUpdate, handleRemove } = this
+    const { handleAdd, handleUpdate, handleRemove, handleSort } = this
 
-    const mts = this.props.merits.map((m) =>
+    const mts = this.props.merits.map((m, i) => <SortableItem key={ m.id } index={ i }>
       <Grid item key={ m.id } xs={ 12 } md={ 6 } xl={ 4 }>
         <MeritFields merit={ m } character={ this.props.character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
         />
       </Grid>
-    )
+    </SortableItem>)
 
     return <div>
-      <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Merits
-            &nbsp;&nbsp;
-            <Button onClick={ handleAdd }>
-              Add Merit&nbsp;
-              <ContentAddCircle />
-            </Button>
-          </Typography>
-        </Grid>
-        { mts }
-      </Grid>
+      <SortableGridList
+        header={<Typography variant="headline">
+          Merits
+          &nbsp;&nbsp;
+          <Button onClick={ handleAdd }>
+            Add Merit&nbsp;
+            <ContentAddCircle />
+          </Button>
+        </Typography>}
+        items={ mts }
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+        axis="xy"
+      />
     </div>
   }
 }

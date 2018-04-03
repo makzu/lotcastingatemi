@@ -13,6 +13,7 @@ import Whatshot from 'material-ui-icons/Whatshot'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
+import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
@@ -163,7 +164,9 @@ function CharacterCard({ character, combat, canEdit, penalties, pools, classes }
       }
     </Typography>
 
-    <HealthLevelBoxes character={ character } />
+    <DamageWidget character={ character }>
+      <HealthLevelBoxes character={ character } />
+    </DamageWidget>
 
     <div className={ classes.rowContainer }>
       <PoolDisplay staticRating pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />

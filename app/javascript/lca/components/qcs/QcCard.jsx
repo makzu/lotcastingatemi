@@ -10,11 +10,12 @@ import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
+import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import { canIEditQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
@@ -116,7 +117,9 @@ function QcCard({ qc, combat, penalties, pools, canIEdit, classes }) {
       </WillpowerSpendWidget>
     </div>
 
-    <HealthLevelBoxes character={ qc } />
+    <DamageWidget qc character={ qc }>
+      <HealthLevelBoxes character={ qc } />
+    </DamageWidget>
 
     <div className={ classes.rowContainer }>
       <PoolDisplay staticRating qc pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />

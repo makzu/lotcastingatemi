@@ -10,7 +10,7 @@ import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import PoolLine from '../characters/PoolLine.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
@@ -95,7 +95,7 @@ function BattlegroupCard({ battlegroup, combat, canIEdit, classes }) {
         className={ classes.statWrap }
       />
 
-      <PoolLine pool={{ total: battlegroup.size }}
+      <PoolDisplay battlegroup staticRating pool={{ total: battlegroup.size }}
         label="Size"
         classes={{ root: classes.statWrap }}
       />

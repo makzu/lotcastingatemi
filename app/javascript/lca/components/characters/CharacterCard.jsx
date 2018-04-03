@@ -11,7 +11,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff'
 import Whatshot from 'material-ui-icons/Whatshot'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import PoolLine from '../characters/PoolLine.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
@@ -166,19 +166,19 @@ function CharacterCard({ character, combat, canEdit, penalties, pools, classes }
     <HealthLevelBoxes character={ character } />
 
     <div className={ classes.rowContainer }>
-      <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.bestParry } label="Best Parry" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay staticRating pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay staticRating pool={ pools.bestParry } label="Best Parry" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay staticRating pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
       { pools.hardness.total > 0 &&
-        <PoolLine pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
       }
     </div>
 
     {!combat &&
       <div className={ classes.rowContainer }>
-        <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
-        <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
-        <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
       </div>
     }
 

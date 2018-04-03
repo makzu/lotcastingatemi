@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 
-import PoolLine from '../PoolLine.jsx'
+import PoolDisplay from '../../generic/PoolDisplay.jsx'
 import { getPoolsForWeapon } from '../../../selectors'
 import { withAttributes, withAbilities, fullWeapon } from '../../../utils/propTypes'
 
@@ -63,18 +63,18 @@ function RangedWeaponAttacks({ weaponPools, classes }) {
   const poolLineClasses = { root: classes.narrowPoolBlock, label: classes.label, labelSpan: classes.labelSpan }
 
   return <Fragment>
-    <PoolLine pool={ pool.close } label="Withering Close" classes={ poolLineClasses } />
+    <PoolDisplay pool={ pool.close } label="Withering Close" classes={ poolLineClasses } />
     { pool.short.available &&
-      <PoolLine pool={ pool.short } label="Withering Short" classes={ poolLineClasses } />
+      <PoolDisplay pool={ pool.short } label="Withering Short" classes={ poolLineClasses } />
     }
     { pool.medium.available &&
-      <PoolLine pool={ pool.medium } label="Withering Medium" classes={poolLineClasses } />
+      <PoolDisplay pool={ pool.medium } label="Withering Medium" classes={poolLineClasses } />
     }
     { pool.long.available &&
-      <PoolLine pool={ pool.long } label="Withering Long" classes={ poolLineClasses } />
+      <PoolDisplay pool={ pool.long } label="Withering Long" classes={ poolLineClasses } />
     }
     { pool.extreme.available &&
-      <PoolLine pool={ pool.extreme } label="Withering Extreme" classes={ poolLineClasses }  />
+      <PoolDisplay pool={ pool.extreme } label="Withering Extreme" classes={ poolLineClasses }  />
     }
   </Fragment>
 }
@@ -92,7 +92,7 @@ function _WeaponLine({ weapon, weaponPools, classes }) {
   if (weaponPools.rangedWitheringAttack) {
     attackLine = <RangedWeaponAttacks weaponPools={ weaponPools } classes={ classes } />
   } else {
-    attackLine = <PoolLine pool={ weaponPools.witheringAttack } label="Withering Attack" classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }}  />
+    attackLine = <PoolDisplay pool={ weaponPools.witheringAttack } label="Withering Attack" classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }}  />
   }
   return <div className={ classes.container }>
     <div className={ classes.name }>
@@ -103,10 +103,10 @@ function _WeaponLine({ weapon, weaponPools, classes }) {
     </div>
 
     { attackLine }
-    <PoolLine pool={ weaponPools.witheringDamage } label="Withering Damage" classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }} />
-    <PoolLine pool={ weaponPools.decisiveAttack } label="Decisive Attack" classes={ poolLineClasses }  />
+    <PoolDisplay damage pool={ weaponPools.witheringDamage } label="Withering Damage" classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }} />
+    <PoolDisplay pool={ weaponPools.decisiveAttack } label="Decisive Attack" classes={ poolLineClasses }  />
     { !weaponPools.rangedWitheringAttack &&
-      <PoolLine pool={ weaponPools.parry } label="Parry" classes={ poolLineClasses }  />
+      <PoolDisplay staticRating pool={ weaponPools.parry } label="Parry" classes={ poolLineClasses }  />
     }
 
     <div className={ classes.tags }>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
-import PoolLine from '../PoolLine.jsx'
+import PoolDisplay from '../../generic/PoolDisplay.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import { withAttributes, withAbilities } from '../../../utils/propTypes'
 
@@ -29,12 +29,12 @@ export function CombatBlock({ pools, classes }) {
       Combat Pools
     </Typography>
     <div className={ classes.container }>
-      <PoolLine pool={ pools.joinBattle } label="Join Battle" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.rush } label="Rush" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.disengage } label="Disengage" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.withdraw } label="Withdraw" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.riseFromProne } label="Rise from Prone" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.takeCover } label="Take Cover" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay pool={ pools.joinBattle } label="Join Battle" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay pool={ pools.rush } label="Rush" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay pool={ pools.disengage } label="Disengage" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay pool={ pools.withdraw } label="Withdraw" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay pool={ pools.riseFromProne } label="Rise from Prone" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay pool={ pools.takeCover } label="Take Cover" classes={{ root: classes.poolBlock }} />
     </div>
   </BlockPaper>
 }

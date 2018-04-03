@@ -10,7 +10,7 @@ import Launch from 'material-ui-icons/Launch'
 import VisibilityOff from 'material-ui-icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import PoolLine from '../characters/PoolLine.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
@@ -119,21 +119,21 @@ function QcCard({ qc, combat, penalties, pools, canIEdit, classes }) {
     <HealthLevelBoxes character={ qc } />
 
     <div className={ classes.rowContainer }>
-      <PoolLine pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={ pools.parry } label="Parry" classes={{ root: classes.poolBlock }} />
-      <PoolLine pool={{ total: qc.soak }} label="Soak" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay staticRating qc pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay staticRating qc pool={ pools.parry } label="Parry" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay staticRating qc pool={{ total: qc.soak }} label="Soak" classes={{ root: classes.poolBlock }} />
       { qc.hardness.total > 0 &&
-        <PoolLine pool={{ total: qc.hardness }} label="Hardness" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating qc pool={{ total: qc.hardness }} label="Hardness" classes={{ root: classes.poolBlock }} />
       }
-      <PoolLine pool={ qcPool(qc, qc.join_battle, penalties.wound) } label="Join Battle" classes={{ root: classes.poolBlock }} />
+      <PoolDisplay qc pool={ qcPool(qc, qc.join_battle, penalties.wound) } label="Join Battle" classes={{ root: classes.poolBlock }} />
     </div>
 
     { !combat &&
       <div className={ classes.rowContainer }>
-        <PoolLine pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
-        <PoolLine pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
-        <PoolLine pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
-        <PoolLine pool={ qcPool(qc, qc.senses, penalties.wound) } label="Senses" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating qc pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating qc pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay staticRating qc pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay qc pool={ qcPool(qc, qc.senses, penalties.wound) } label="Senses" classes={{ root: classes.poolBlock }} />
       </div>
     }
 

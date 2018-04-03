@@ -28,7 +28,7 @@ const styles = theme => ({
   },
 })
 
-const PoolLine = ({ label, pool, classes }) => {
+const PoolDisplay = ({ label, pool, staticRating, qc, battlegroup, classes }) => {
   const mb = pool.meritBonus || []
   const merits = mb.map((m) =>
     <div key={ m.label } className={ classes.specialty }>
@@ -70,17 +70,20 @@ const PoolLine = ({ label, pool, classes }) => {
       </div>
     }
     { merits }
-    { sp.length > 0 &&
+    { sp.length > 0  && (staticRating ? pool.specialtyMatters : true) &&
       <div className={ classes.specialty }>
         +1 specialty
       </div>
     }
   </div>
 }
-PoolLine.propTypes = {
+PoolDisplay.propTypes = {
   label: PropTypes.string,
-  pool: PropTypes.object,
+  pool: PropTypes.object.isRequired,
+  qc: PropTypes.bool,
+  battlegroup: PropTypes.bool,
+  staticRating: PropTypes.bool,
   classes: PropTypes.object,
 }
 
-export default withStyles(styles)(PoolLine)
+export default withStyles(styles)(PoolDisplay)

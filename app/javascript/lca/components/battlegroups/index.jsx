@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 
-import PoolLine from '../characters/PoolLine.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 
@@ -73,16 +73,16 @@ class BattlegroupSheet extends Component {
           { attack.name }
         </div>
 
-        <PoolLine label="Attack"
+        <PoolDisplay battlegroup label="Attack"
           pool={{ total: bgAttackPool(battlegroup, attack) }}
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine label="damage"
+        <PoolDisplay battlegroup damage label="damage"
           pool={{ total: bgDamage(battlegroup, attack) }}
           classes={{ root: classes.poolBlock }}
         />
         { attack.overwhelming > 1 &&
-          <PoolLine label="Minimum"
+          <PoolDisplay battlegroup damage label="Minimum"
             pool={{ total: attack.overwhelming }}
             classes={{ root: classes.poolBlock }}
           />
@@ -120,23 +120,23 @@ class BattlegroupSheet extends Component {
           className={ classes.poolBlock }
         />
 
-        <PoolLine pool={{ total: battlegroup.size }}
+        <PoolDisplay battlegroup pool={{ total: battlegroup.size }}
           label="Size"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: prettyDrillRating(battlegroup) }}
+        <PoolDisplay battlegroup pool={{ total: prettyDrillRating(battlegroup) }}
           label="Drill"
           classes={{ root: classes.poolBlock }}
         />
 
         { battlegroup.might > 0 &&
-          <PoolLine pool={{ total: battlegroup.might }}
+          <PoolDisplay battlegroup pool={{ total: battlegroup.might }}
             label="Might"
             classes={{ root: classes.poolBlock }}
           />
         }
         { battlegroup.perfect_morale  &&
-          <PoolLine pool={{ total: 'Perfect' }}
+          <PoolDisplay battlegroup pool={{ total: 'Perfect' }}
             label="Morale"
             classes={{ root: classes.poolBlock }}
           />
@@ -144,28 +144,28 @@ class BattlegroupSheet extends Component {
       </div>
 
       <div className={ classes.rowContainer }>
-        <PoolLine pool={{ total: battlegroup.join_battle }}
+        <PoolDisplay battlegroup pool={{ total: battlegroup.join_battle }}
           label="Join Battle"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: battlegroup.movement }}
+        <PoolDisplay battlegroup pool={{ total: battlegroup.movement }}
           label="Movement"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: battlegroup.parry }}
+        <PoolDisplay battlegroup staticRating pool={{ total: battlegroup.parry }}
           label="Parry"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: battlegroup.evasion }}
+        <PoolDisplay battlegroup pool={{ total: battlegroup.evasion }}
           label="Evasion"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: bgSoak(battlegroup) }}
+        <PoolDisplay battlegroup pool={{ total: bgSoak(battlegroup) }}
           label="Soak"
           classes={{ root: classes.poolBlock }}
         />
         { battlegroup.hardness > 0 &&
-          <PoolLine pool={{ total: battlegroup.hardness }}
+          <PoolDisplay battlegroup pool={{ total: battlegroup.hardness }}
             label="Hardness"
             classes={{ root: classes.poolBlock }}
           />
@@ -184,19 +184,19 @@ class BattlegroupSheet extends Component {
       { attacks }
 
       <div className={ classes.rowContainer }>
-        <PoolLine pool={{ total: battlegroup.senses }}
+        <PoolDisplay battlegroup staticRating pool={{ total: battlegroup.senses }}
           label="Senses"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: battlegroup.resolve }}
+        <PoolDisplay battlegroupstaticRating pool={{ total: battlegroup.resolve }}
           label="Resolve"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: battlegroup.guile }}
+        <PoolDisplay battlegroup staticRating pool={{ total: battlegroup.guile }}
           label="Guile"
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine pool={{ total: battlegroup.appearance }}
+        <PoolDisplay battlegroup staticRating pool={{ total: battlegroup.appearance }}
           label="Appearance"
           classes={{ root: classes.poolBlock }}
         />

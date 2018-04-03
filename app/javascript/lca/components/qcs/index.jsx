@@ -9,7 +9,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import PoolLine from '../characters/PoolLine.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
@@ -81,7 +81,7 @@ class QcSheet extends Component {
     const { qc, qc_attacks, qc_charms, qc_merits, pools, penalties, classes } = this.props
 
     const actions = qc.actions.map((action, index) =>
-      <PoolLine key={ index } label={ action.action }
+      <PoolDisplay key={ index } label={ action.action }
         pool={ qcPool(qc, action.pool, penalties.wound) }
         classes={{ root: classes.poolBlock }}
       />
@@ -111,16 +111,18 @@ class QcSheet extends Component {
           { attack.name }
         </div>
 
-        <PoolLine label="Attack"
+        <PoolDisplay label="Attack"
           pool={ qcPool(qc, attack.pool, penalties.wound) }
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine label="damage"
+        <PoolDisplay label="damage"
+          damage
           pool={{ total: attack.damage }}
           classes={{ root: classes.poolBlock }}
         />
         { attack.overwhelming > 1 &&
-          <PoolLine label="Minimum"
+          <PoolDisplay label="Minimum"
+            damage
             pool={{ total: attack.overwhelming }}
             classes={{ root: classes.poolBlock }}
           />
@@ -165,7 +167,7 @@ class QcSheet extends Component {
       </Typography>
 
       <div className={ classes.rowContainer }>
-        <PoolLine label="Essence"
+        <PoolDisplay label="Essence"
           pool={{ total: qc.essence }}
           classes={{ root: classes.poolBlock }}
         />
@@ -205,11 +207,11 @@ class QcSheet extends Component {
         Combat
       </Typography>
       <div className={ classes.rowContainer }>
-        <PoolLine label="Join Battle"
+        <PoolDisplay label="Join Battle"
           pool={ qcPool(qc, qc.join_battle, penalties.wound) }
           classes={{ root: classes.poolBlock }}
         />
-        <PoolLine label="Movement"
+        <PoolDisplay label="Movement"
           pool={ qcPool(qc, qc.movement, penalties.wound) }
           classes={{ root: classes.poolBlock }}
         />
@@ -228,11 +230,11 @@ class QcSheet extends Component {
             </div>
             Grapple
           </div>
-          <PoolLine label="Grapple"
+          <PoolDisplay label="Grapple"
             pool={ qcPool(qc, qc.grapple, penalties.wound) }
             classes={{ root: classes.poolBlock }}
           />
-          <PoolLine label="Control"
+          <PoolDisplay label="Control"
             pool={ qcPool(qc, qc.grapple_control, penalties.wound) }
             classes={{ root: classes.poolBlock }}
           />
@@ -243,11 +245,11 @@ class QcSheet extends Component {
         Defenses
       </Typography>
       <div className={ classes.rowContainer }>
-        <PoolLine label="Parry" pool={ pools.parry } classes={{ root: classes.poolBlock }} />
-        <PoolLine label="Evasion" pool={ pools.evasion } classes={{ root: classes.poolBlock }} />
-        <PoolLine label="Soak" pool={ qcPool(qc, qc.soak) } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Parry" pool={ pools.parry } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Evasion" pool={ pools.evasion } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Soak" pool={ qcPool(qc, qc.soak) } classes={{ root: classes.poolBlock }} />
         { qc.hardness > 0 &&
-          <PoolLine label="Hardness" pool={ qcPool(qc, qc.hardness) } classes={{ root: classes.poolBlock }} />
+          <PoolDisplay label="Hardness" pool={ qcPool(qc, qc.hardness) } classes={{ root: classes.poolBlock }} />
         }
         <div className={ classes.tags }>
           <div className={ classes.label }>
@@ -261,7 +263,7 @@ class QcSheet extends Component {
         Actions
       </Typography>
       <div className={ classes.rowContainer }>
-        <PoolLine label="Senses" pool={ pools.senses } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Senses" pool={ pools.senses } classes={{ root: classes.poolBlock }} />
         { actions }
       </div>
 
@@ -269,9 +271,9 @@ class QcSheet extends Component {
         Social
       </Typography>
       <div className={ classes.rowContainer }>
-        <PoolLine label="Resolve" pool={ pools.resolve } classes={{ root: classes.poolBlock }} />
-        <PoolLine label="Guile" pool={ pools.guile } classes={{ root: classes.poolBlock }} />
-        <PoolLine label="Appearance" pool={ pools.appearance } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Resolve" pool={ pools.resolve } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Guile" pool={ pools.guile } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Appearance" pool={ pools.appearance } classes={{ root: classes.poolBlock }} />
       </div>
 
       <Typography variant="subheading">

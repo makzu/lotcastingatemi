@@ -74,7 +74,7 @@ export const getPoolsAndRatings = createCachedSelector(
   (character, meritNames, charmAbils, spells, penalties, weaponPools) => {
     const spellNames = spells.map((m) => m.name.toLowerCase())
 
-    const bestParryWeapon = weaponPools.sort(sortByParry)[0] || { parry: { total: 0 }}
+    const bestParryWeapon = weaponPools.sort(sortByParry)[0] || { parry: { total: 'None', noSummary: true }}
 
     return {
       exaltTypeBase: calc.exaltTypeBase(character),

@@ -67,7 +67,7 @@ function ArmorSummary({ character, pools, classes }) {
       <PoolDisplay staticRating pool={ pools.bestParry } label="Best Parry" classes={{ root: classes.poolBlock }} />
       <PoolDisplay staticRating pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
       { pools.hardness.total > 0 &&
-        <PoolDisplay staticRating pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
+        <PoolDisplay noSummary staticRating pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
       }
 
       <div className={ classes.name }>

@@ -1,13 +1,22 @@
 import { specialtiesFor, maxExcellency } from '.'
+import { attr, abil } from './_pools.js'
 
-export function rating(character, attribute, ability, penalty, charmAbils) {
-  const pool = character[`attr_${attribute}`] + character[`abil_${ability}`]
+export function rating(name, character, attribute, ability, penalties, charmAbils) {
+  const _attr = attr(character, attribute)
+  const _abil = abil(character, ability)
+  const pool = _attr + _abil
   const specialties = specialtiesFor(character, ability)
 
   const excellency = Math.floor(maxExcellency(character, attribute, ability, charmAbils) / 2)
   const excellencyStunt = Math.floor(maxExcellency(character, attribute, ability, charmAbils, true) / 2)
+  const penalty = penalties.reduce((a, p) => a + p.penalty, 0 )
 
   return {
+    name: name,
+    attribute: attribute,
+    attributeRating: _attr,
+    ability: ability,
+    abilityRating: _abil,
     raw: Math.ceil(pool / 2),
     specialtyMatters: pool % 2 === 0 && specialties.length > 0,
     specialties: specialties,
@@ -15,22 +24,29 @@ export function rating(character, attribute, ability, penalty, charmAbils) {
     excellencyCost: excellency * 2,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt * 2,
-    penalty: penalty,
-    total: Math.max(Math.ceil(pool / 2) - penalty, 0)
+    penalties: penalties.filter((p) => p.penalty > 0),
+    total: Math.max(Math.ceil(pool / 2) - penalty, 0),
+    rating: true,
   }
 }
 
 export function evasion(character, merits, penalties, charmAbils) {
-  let pen = penalties.wound + penalties.onslaught + penalties.mobility
-  return rating(character, 'dexterity', 'dodge', pen, charmAbils)
+  const pen = [
+    { label: 'wound', penalty: penalties.wound },
+    { label: 'mobility', penalty: penalties.mobility },
+    { label: 'onslaught', penalty: penalties.onslaught },
+  ]
+  return rating('Evasion', character, 'dexterity', 'dodge', pen, charmAbils)
 }
 
 export function resolve(character, merits, penalties, charmAbils) {
-  return rating(character, 'wits', 'integrity', penalties.wound, charmAbils)
+  const pen = [{ label: 'Wound', penalty: penalties.wound }]
+  return rating('Resolve', character, 'wits', 'integrity', pen, charmAbils)
 }
 
 export function guile(character, merits, penalties, charmAbils) {
-  return rating(character, 'manipulation', 'socialize', penalties.wound, charmAbils)
+  const pen = [{ label: 'Wound', penalty: penalties.wound }]
+  return rating('Guile', character, 'manipulation', 'socialize', pen, charmAbils)
 }
 
 export function appearanceRating(character, merits, penalties, charmAbils) { // eslint-disable-line no-unused-vars
@@ -41,6 +57,9 @@ export function appearanceRating(character, merits, penalties, charmAbils) { // 
     meritBonus = [{ label: 'hideous', bonus: 0 }]
 
   return {
+    name: 'Appearance',
+    attribute: 'Appearance',
+    attributeRating: character.attr_appearance,
     meritBonus: meritBonus,
     total: character.attr_appearance,
   }
@@ -52,19 +71,22 @@ export function soak(character, merits, spells) {
 
   let unusualHide = merits.find((m) => m.startsWith('unusual hide'))
   if (unusualHide != undefined) {
-    bonus = parseInt(unusualHide.substr(-1))
+    bonus += parseInt(unusualHide.substr(-1))
     meritBonus = meritBonus.concat([{ label: 'unusual hide', bonus: bonus }])
   }
-  let isob = spells.find((s) => s.name == 'invulnerable skin of bronze')
-  if (isob != undefined && character.armor_weight === 'unarmored')
+  let isob = spells.find((s) => s === 'invulnerable skin of bronze')
+  if (isob != undefined && character.armor_weight === 'unarmored') {
     meritBonus = meritBonus.concat([{ label: 'invulnerable skin of bronze', bonus: 3 }])
+    bonus += 3
+  }
 
   return {
+    name: 'Soak',
     natural: character.attr_stamina,
     meritBonus: meritBonus,
     armored: armorSoak(character),
     total: character.attr_stamina + bonus + armorSoak(character),
-    specialties: [],
+    soak: true,
   }
 }
 

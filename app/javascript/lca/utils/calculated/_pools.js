@@ -14,16 +14,24 @@ export const abil = (character, ability) => {
   }
 }
 
-export function pool(character, attribute, ability, meritBonus, penalty, charmAbils) {
-  const pool = attr(character, attribute) + abil(character, ability)
+export function pool(name, character, attribute, ability, meritBonus, penalties, charmAbils) {
+  const _attr = attr(character, attribute)
+  const _abil = abil(character, ability)
+  const pool = _attr + _abil
   let mb = 0
   if (meritBonus.length > 1)
     mb =  meritBonus.reduce((a, v) => v + a.situational ? 0 : a.bonus)
 
   const excellency = maxExcellency(character, attribute, ability, charmAbils)
   const excellencyStunt = maxExcellency(character, attribute, ability, charmAbils, true)
+  const penalty = penalties.reduce((a, p) => a + p.penalty, 0 )
 
   return {
+    name: name,
+    attribute: attribute,
+    attributeRating: _attr,
+    ability: ability,
+    abilityRating: _abil,
     raw: pool,
     meritBonus: meritBonus || [],
     specialties: specialtiesFor(character, ability),
@@ -31,7 +39,7 @@ export function pool(character, attribute, ability, meritBonus, penalty, charmAb
     excellencyCost: excellency,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt,
-    penalty: penalty || 0,
+    penalties: penalties.filter((p) => p.penalty > 0),
     total: Math.max(pool + mb - penalty, 0)
   }
 }
@@ -40,24 +48,24 @@ export function joinBattle(character, merits, penalties, charmAbils) {
   let bonus = []
   if (merits.some((m) => m.startsWith('fast reflexes')))
     bonus = [{ label: 'fast reflexes', bonus: 1 }]
-  const penalty = penalties.wound
-  return pool(character, 'wits', 'awareness', bonus, penalty, charmAbils)
+  const penalty = [{ label: 'wound', penalty: penalties.wound }]
+  return pool('Join Battle', character, 'wits', 'awareness', bonus, penalty, charmAbils)
 }
 
 export function rush(character, merits, penalties, charmAbils) {
   let bonus = []
   if (merits.some((m) => m.startsWith('fleet of foot')))
     bonus = [{ label: 'fleet of foot', bonus: 1 }]
-  const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'athletics', bonus, penalty, charmAbils)
+  const penalty = [{ label: 'wound', penalty: penalties.wound }, { label: 'mobility', penalty: penalties.mobility }]
+  return pool('Rush', character, 'dexterity', 'athletics', bonus, penalty, charmAbils)
 }
 
 export function disengage(character, merits, penalties, charmAbils) {
   let bonus = []
   if (merits.some((m) => m.startsWith('fleet of foot')))
     bonus = [{ label: 'fleet of foot', bonus: 1 }]
-  const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'dodge', bonus, penalty, charmAbils)
+  const penalty = [{ label: 'wound', penalty: penalties.wound }, { label: 'mobility', penalty: penalties.mobility }]
+  return pool('Disengage', character, 'dexterity', 'dodge', bonus, penalty, charmAbils)
 }
 export const withdraw = disengage
 
@@ -65,19 +73,20 @@ export function readIntentions(character, merits, penalties, charmAbils) {
   let bonus = []
   if (merits.some((m) => m.startsWith('danger sense')))
     bonus = [{ label: 'danger sense', bonus: 1, situational: true }]
-  return pool(character, 'perception', 'socialize', bonus, penalties.wound, charmAbils)
+  const penalty = [{ label: 'wound', penalty: penalties.wound }]
+  return pool('Read Intentions', character, 'perception', 'socialize', bonus, penalty, charmAbils)
 }
 
 export function riseFromProne(character, merits, penalties, charmAbils) {
   // TODO: handle merits that affect rise from prone pool?
-  const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'dodge', [], penalty, charmAbils)
+  const penalty = [{ label: 'wound', penalty: penalties.wound }, { label: 'mobility', penalty: penalties.mobility }]
+  return pool('Rise from Prone', character, 'dexterity', 'dodge', [], penalty, charmAbils)
 }
 
 export function takeCover(character, merits, penalties, charmAbils) {
   // TODO: handle merits that affect take cover pool?
-  const penalty = penalties.wound + penalties.mobility
-  return pool(character, 'dexterity', 'dodge', [], penalty, charmAbils)
+  const penalty = [{ label: 'wound', penalty: penalties.wound }, { label: 'mobility', penalty: penalties.mobility }]
+  return pool('Take Cover', character, 'dexterity', 'dodge', [], penalty, charmAbils)
 }
 
 export function featOfStrength(character, merits, penalties, charmAbils) {
@@ -86,11 +95,12 @@ export function featOfStrength(character, merits, penalties, charmAbils) {
   if (thew != undefined) {
     bonus = [{ label: 'mighty thew', bonus: parseInt(thew.substr(-1)) }]
   }
-  return pool(character, 'strength', 'athletics', bonus, penalties.wound, charmAbils)
+  const penalty = [{ label: 'wound', penalty: penalties.wound }]
+  return pool('Feat of Strength', character, 'strength', 'athletics', bonus, penalty, charmAbils)
 }
 
 export function shapeSorcery(character, merits, penalties, charmAbils) {
   const vitalFocus = merits.some((m) => m.startsWith('vital focus cultivation'))
-  const penalty = vitalFocus ? 0 : penalties.wound
-  return pool(character, 'intelligence', 'occult', [], penalty, charmAbils)
+  const penalty = vitalFocus ? [] : [{ label: 'wound', penalty: penalties.wound }]
+  return pool('Shape Sorcery', character, 'intelligence', 'occult', [], penalty, charmAbils)
 }

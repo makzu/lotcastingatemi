@@ -204,21 +204,28 @@ function excellencyForWeapon(character, weapon, charmAbils, stunt = false) {
 }
 
 export function witheringAttackPool(character, weapon, penalties, charmAbils) {
-  const rawPool = attr(character, weapon.attr) +
-                  abil(character, weapon.ability) +
-                  weaponAccuracyBonus(weapon)
+  const _attr = attr(character, weapon.attr)
+  const _abil = abil(character, weapon.ability)
+  const accuracy = weaponAccuracyBonus(weapon)
+  const rawPool = _attr + _abil + accuracy
 
   const excellency = excellencyForWeapon(character, weapon, charmAbils)
   const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
 
   return {
+    name: weapon.name + ' Withering Attack',
+    attribute: weapon.attr,
+    attributeRating: _attr,
+    ability: weapon.ability,
+    abilityRating: _abil,
+    accuracy: accuracy,
     raw: rawPool,
     specialties: specialtiesForWeapon(character, weapon),
     excellency: excellency,
     excellencyCost: excellency,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt,
-    penalty: penalties.wound,
+    penalties: [{ label: 'Wound', penalty: penalties.wound }],
     total: Math.max(rawPool - penalties.wound, 0),
   }
 }
@@ -231,44 +238,54 @@ export function rangedWitheringAttackPool(character, weapon, penalties, charmAbi
   const range = rangeValue(weapon)
   const rangebonus = tag.toLowerCase().startsWith('thrown') ? thrownAccuracyBonus : archeryAccuracyBonus
 
-  const rawPool = attr(character, weapon.attr) +
-                  abil(character, weapon.ability)
+  const _attr = attr(character, weapon.attr)
+  const _abil = abil(character, weapon.ability)
+  const rawPool = _attr + _abil
 
   const excellency = excellencyForWeapon(character, weapon, charmAbils)
   const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
 
   const penalty = penalties.wound
   const poolBase = {
+    attribute: weapon.attr,
+    attributeRating: _attr,
+    ability: weapon.ability,
+    abilityRating: _abil,
     specialties: specialtiesForWeapon(character, weapon),
     excellency: excellency,
     excellencyCost: excellency,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt,
-    penalty: penalty,
+    penalties: [{ label: 'Wound', penalty: penalties.wound }],
   }
 
   return {
     close: { ...poolBase,
+      name: weapon.name + ' Close Range Withering Attack',
       raw: rawPool + rangebonus(weapon, 'close'),
       total: Math.max(rawPool + rangebonus(weapon, 'close') - penalty, 0),
       available: true,
     },
     short: { ...poolBase,
+      name: weapon.name + ' Short Range Withering Attack',
       raw: rawPool + rangebonus(weapon, 'short'),
       total: Math.max(rawPool + rangebonus(weapon, 'short') - penalty, 0),
       available: range >= 1,
     },
     medium: { ...poolBase,
+      name: weapon.name + ' Medium Range Withering Attack',
       raw: rawPool + rangebonus(weapon, 'medium'),
       total: Math.max(rawPool + rangebonus(weapon, 'medium') - penalty, 0),
       available: range >= 2,
     },
     long: { ...poolBase,
+      name: weapon.name + ' Long Range Withering Attack',
       raw: rawPool + rangebonus(weapon, 'long'),
       total: Math.max(rawPool + rangebonus(weapon, 'long') - penalty, 0),
       available: range >= 3,
     },
     extreme: { ...poolBase,
+      name: weapon.name + ' Extreme Range Withering Attack',
       raw: rawPool + rangebonus(weapon, 'extreme'),
       total: Math.max(rawPool + rangebonus(weapon, 'extreme') - penalty, 0),
       available: range >= 4,
@@ -277,24 +294,48 @@ export function rangedWitheringAttackPool(character, weapon, penalties, charmAbi
 }
 
 export function witheringDamage(character, weapon) {
-  return { total: weaponDamage(character, weapon), minimum: weaponOverwhelming(weapon) }
+  let _attr = weapon.damage_attr
+  let attrRating = attr(character, weapon.damage_attr)
+
+  if (weapon.tags.some((t) => t.toLowerCase() === 'flame')) {
+    _attr = 'flame'
+    attrRating = 4
+  } else if (weapon.tags.some((t) => t.toLowerCase() === 'crossbow')) {
+    _attr = 'crossbow'
+    attrRating = 4
+  }
+  return {
+    name: weapon.name + ' Withering Damage',
+    attribute: _attr,
+    attributeRating: attrRating,
+    weaponDamage: weaponDamageBonus(weapon),
+    total: weaponDamage(character, weapon),
+    minimum: weaponOverwhelming(weapon),
+    witheringDamage: true,
+  }
 }
 
 export function decisiveAttackPool(character, weapon, penalties, charmAbils) {
-  const rawPool = attr(character, weapon.attr) +
-                  abil(character, weapon.ability)
+  const _attr = attr(character, weapon.attr)
+  const _abil = abil(character, weapon.ability)
+  const rawPool = _attr + _abil
 
   const excellency = excellencyForWeapon(character, weapon, charmAbils)
   const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
 
   return {
+    name: weapon.name + ' Decisive Attack',
+    attribute: weapon.attr,
+    attributeRating: _attr,
+    ability: weapon.ability,
+    abilityRating: _abil,
     raw: rawPool,
     specialties: specialtiesForWeapon(character, weapon),
     excellency: excellency,
     excellencyCost: excellency,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt,
-    penalty: penalties.wound,
+    penalties: [{ label: 'Wound', penalty: penalties.wound }],
     total: Math.max(rawPool - penalties.wound, 0),
   }
 }
@@ -302,8 +343,10 @@ export function decisiveAttackPool(character, weapon, penalties, charmAbils) {
 export function parry(character, weapon, penalties, charmAbils) {
   if (weaponIsRanged(weapon))
     return { raw: 0, total: 0 }
-  const rawPool = attr(character, weapon.attr) +
-                  abil(character, weapon.ability)
+
+  const _attr = attr(character, weapon.attr)
+  const _abil = abil(character, weapon.ability)
+  const rawPool = _attr + _abil
   const specialties = specialtiesForWeapon(character, weapon)
   const penalty = penalties.onslaught + penalties.wound
   const rawRating = Math.ceil(rawPool / 2) + weaponDefenseBonus(weapon)
@@ -311,6 +354,12 @@ export function parry(character, weapon, penalties, charmAbils) {
   const excellencyStunt = Math.floor(excellencyForWeapon(character, weapon, charmAbils, true) / 2)
 
   return {
+    name: weapon.name + ' Parry',
+    attribute: weapon.attr,
+    attributeRating: _attr,
+    ability: weapon.ability,
+    abilityRating: _abil,
+    defense: weaponDefenseBonus(weapon),
     raw: rawRating,
     shield: weapon.tags.includes('shield') || weapon.tags.includes('Shield'),
     specialtyMatters: rawPool % 2 === 0 && specialties.length > 0,
@@ -319,8 +368,10 @@ export function parry(character, weapon, penalties, charmAbils) {
     excellencyCost: excellency * 2,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt * 2,
-    penalty: penalty,
+    penalties: [{ label: 'Wound', penalty: penalties.wound }, { label: 'Onslaught', penalty: penalties.onslaught }],
     total: Math.max(rawRating - penalty, 0),
+    rating: true,
+    parry: true,
   }
 }
 

@@ -104,7 +104,7 @@ ListAttributeEditor.propTypes = {
   character: PropTypes.object.isRequired,
   trait: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  newObject: PropTypes.object.isRequired,
+  newObject: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   nonObject: PropTypes.bool,
   Fields: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,

@@ -11,6 +11,7 @@ const styles = theme => ({
       paddingBottom: 16,
     }),
     height: '100%',
+    position: 'relative',
   }
 })
 

@@ -169,10 +169,7 @@ export function SorceryBlock({ character }) {
     <Typography>
       Shaping Rituals:
     </Typography>
-
-    <Typography>
-      { rituals }
-    </Typography>
+    { rituals }
   </BlockPaper>
 }
 SorceryBlock.propTypes = {

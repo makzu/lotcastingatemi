@@ -5,6 +5,7 @@ class MartialArtsCharm < Charm
   attribute :min_ability, :integer, default: 1
   validates :min_ability, one_thru_five_stat: true
 
+  attribute :style, :string, default: ''
   attribute :ref, :string, default: 'Core p.426-464'
 
   def entity_assoc

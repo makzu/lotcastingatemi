@@ -106,6 +106,9 @@ class DamageWidget extends Component {
           </div>
 
           <div>
+            <Button size="small" onClick={ () => handleChange({ target: { name: 'bashing', value: min('bashing') }})}>
+              -All
+            </Button>
             <Button size="small" onClick={ () => handleAdd(-1, 'bashing') }>-1</Button>
             &nbsp;&nbsp;
             <RatingField trait="bashing" value={ bashing }
@@ -113,14 +116,13 @@ class DamageWidget extends Component {
               min={ min('bashing') }
               onChange={ handleChange }
             />
-
-            <Button size="small" onClick={ () => handleChange({ target: { name: 'bashing', value: min('bashing') }})}>
-              =0
-            </Button>
             <Button size="small" onClick={ () => handleAdd(1, 'bashing') }>+1</Button>
           </div>
 
           <div>
+            <Button size="small" onClick={ () => handleChange({ target: { name: 'lethal', value: min('lethal') }})}>
+              -All
+            </Button>
             <Button size="small" onClick={ () => handleAdd(-1, 'lethal') }>-1</Button>
             &nbsp;&nbsp;
             <RatingField trait="lethal" value={ lethal }
@@ -128,14 +130,13 @@ class DamageWidget extends Component {
               min={ min('lethal') }
               onChange={ handleChange }
             />
-
-            <Button size="small" onClick={ () => handleChange({ target: { name: 'lethal', value: min('lethal') }})}>
-              =0
-            </Button>
             <Button size="small" onClick={ () => handleAdd(1, 'lethal') }>+1</Button>
           </div>
 
           <div>
+            <Button size="small" onClick={ () => handleChange({ target: { name: 'aggravated', value: min('aggravated') }})}>
+              -All
+            </Button>
             <Button size="small" onClick={ () => handleAdd(-1, 'aggravated') }>-1</Button>
             &nbsp;&nbsp;
             <RatingField trait="aggravated" value={ aggravated }
@@ -143,10 +144,6 @@ class DamageWidget extends Component {
               min={ min('aggravated') }
               onChange={ handleChange }
             />
-
-            <Button size="small" onClick={ () => handleChange({ target: { name: 'aggravated', value: min('aggravated') }})}>
-              =0
-            </Button>
             <Button size="small" onClick={ () => handleAdd(1, 'aggravated') }>+1</Button>
           </div>
 

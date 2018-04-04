@@ -269,7 +269,7 @@ class CharmEditor extends Component {
     } = this
 
     let natives = filteredNativeCharms().map((c, i) => <SortableItem key={ c.id } index={ i } collection="native">
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
@@ -277,7 +277,7 @@ class CharmEditor extends Component {
       </Grid>
     </SortableItem>)
     let maCharms = filteredMACharms().map((c, i) => <SortableItem key={ c.id } index={ i } collection="martial_arts">
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
@@ -285,7 +285,7 @@ class CharmEditor extends Component {
       </Grid>
     </SortableItem>)
     let evo = filteredEvocations().map((c, i) => <SortableItem key={ c.id } index={ i } collection="evocation">
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
@@ -293,7 +293,7 @@ class CharmEditor extends Component {
       </Grid>
     </SortableItem>)
     let spirit = filteredSpiritCharms().map((c, i) => <SortableItem key={ c.id } index={ i } collection="spirit">
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 }>
         <CharmFields charm={ c } character={ character }
           onUpdate={ handleUpdate } onRemove={ handleRemove }
           openCharm={ openCharm } onOpenChange={ setOpenCharm }
@@ -301,7 +301,7 @@ class CharmEditor extends Component {
       </Grid>
     </SortableItem>)
     let spl = filteredSpells().map((c, i) => <SortableItem key={ c.id } index={ i } collection="spell">
-      <Grid item xs={ 12 } md={ 6 } key={ c.id }>
+      <Grid item xs={ 12 } md={ 6 }>
         <SpellFields spell={ c } character={ character }
           onUpdate={ handleUpdateSpell } onRemove={ handleRemoveSpell }
           openSpell={ openSpell } onOpenChange={ setOpenSpell }

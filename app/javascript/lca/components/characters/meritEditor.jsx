@@ -94,6 +94,17 @@ export class MeritFields extends Component {
     const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
 
     return <BlockPaper>
+      <Button onClick={ this.handleRemove }
+        style={{ position: 'absolute', bottom: '0.5em', right: '0.5em' }}
+      >
+        Delete&nbsp;
+        <Delete />
+      </Button>
+
+      <Typography component="div" style={{ position: 'absolute', top: '0.5em', right: '0.5em' }}>
+        <Handle />
+      </Typography>
+
       <Typography component="div">
         <TextField name="merit_name" value={ merit.merit_name }
           onChange={ handleChange } onBlur={ handleBlur }
@@ -128,9 +139,7 @@ export class MeritFields extends Component {
           label="Supernatual"
         />
 
-        <div style={{ float: 'right' }}>
-          <Handle />
-        </div>
+
       </Typography>
 
       <div style={{ display: 'flex' }}>
@@ -157,13 +166,6 @@ export class MeritFields extends Component {
           onChange={ handleChange } onBlur={ handleBlur }
           label="Reference" margin="dense"
         />
-
-        <Button onClick={ this.handleRemove }
-          style={{ float: 'right' }}
-        >
-          Delete&nbsp;
-          <Delete />
-        </Button>
       </div>
     </BlockPaper>
   }
@@ -202,6 +204,8 @@ class MeritEditor extends Component {
   }
 
   handleSort({ oldIndex, newIndex }) {
+    if (oldIndex === newIndex)
+      return
     const meritA = this.props.merits[oldIndex]
     const meritB = this.props.merits[newIndex]
     const offset = meritA.sort_order > meritB.sort_order ? -1 : 1

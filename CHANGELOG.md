@@ -1,3 +1,10 @@
+## v44
+###### *Not yet released*
+- STs can now rename Chronicles
+- Players can now leave Chronicles
+- Merits and weapons can be manually sorted
+- Bug Fixes (thanks Wern212, Lumi)
+
 ## v43
 ###### *Apr 2, 2018*
 - Major overhaul of the Charms page and Edit Charms page
@@ -10,7 +17,7 @@
 - Spells can be filtered by Circle
 - Improved Character list page
 - Merits can now be ranked N/A, for all you Eye of Autochthon wielders out there
-- Added XP Log and Solar XP Log (pre-filled with values from Spent XP and Spent Solar Xp)
+- Added XP Log and Solar XP Log (pre-filled with values from Spent XP and Spent Solar XP)
 - Added BP Log
 - Removed Spent XP and Spent Solar XP fields
 - Characters can have multiple shaping rituals

@@ -24,21 +24,21 @@ class ChronicleDashboard extends Component {
         <Typography paragraph>This Chronicle has not yet loaded.</Typography>
       </BlockPaper>
 
-    const { chronicle, characters, qcs, battlegroups } = this.props
+    const { chronicle, characters, qcs, battlegroups, is_st } = this.props
 
     const characterList = characters.map((c) =>
       <Grid item xs={ 12 } lg={ 6 } xl={ 4 } key={ c.id }>
-        <CharacterCard character={ c } />
+        <CharacterCard character={ c } chronicle st={ is_st } />
       </Grid>
     )
     const qcList = qcs.map((c) =>
       <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 } key={ c.id }>
-        <QcCard qc={ c } />
+        <QcCard qc={ c } chronicle st={ is_st } />
       </Grid>
     )
     const bgList = battlegroups.map((c) =>
       <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 } key={ c.id }>
-        <BattlegroupCard battlegroup={ c } />
+        <BattlegroupCard battlegroup={ c } chronicle st={ is_st } />
       </Grid>
     )
 

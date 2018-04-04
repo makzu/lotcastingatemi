@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import Divider from 'material-ui/Divider'
 import Grid from 'material-ui/Grid'
+import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
@@ -12,11 +13,32 @@ import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
+import { updateChronicle } from '../../ducks/actions.js'
 import { getSpecificChronicle } from '../../selectors/'
 
 class ChroniclePlayerPage extends Component {
   constructor(props) {
     super(props)
+    this.state = { }
+
+    this.onChange = this.onChange.bind(this)
+    this.onBlur = this.onBlur.bind(this)
+  }
+
+  static getDerivedStateFromProps(props) {
+    const { chronicle } = props
+    if (chronicle === undefined || chronicle.st_id === undefined)
+      return null
+    return { name: chronicle.name }
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  onBlur(e) {
+    const { chronicle, update } = this.props
+    update(chronicle.id, e.target.name, e.target.value)
   }
 
   render() {
@@ -27,11 +49,12 @@ class ChroniclePlayerPage extends Component {
       </BlockPaper>
 
     const { chronicle, st, is_st, players } = this.props
+    const { onChange, onBlur } = this
 
     const playerList = players.map((p) =>
       <Fragment key={ p.id }>
         <Typography>
-          { p.display_name }
+          { p.display_name }&nbsp;&nbsp;
           { is_st &&
             <RemovePlayerPopup chronicleId={ chronicle.id } playerId={ p.id } />
           }
@@ -62,12 +85,28 @@ class ChroniclePlayerPage extends Component {
           <Divider />
 
           { playerList }
+          { !is_st &&
+            <div style={{ marginTop: '1em' }}>
+              <ChronicleLeavePopup chronicleId={ chronicle.id } />
+            </div>
+          }
         </BlockPaper>
       </Grid>
-      { !is_st &&
+
+      { is_st &&
         <Grid item xs={ 12 }>
           <BlockPaper>
-            <ChronicleLeavePopup chronicleId={ chronicle.id } />
+            <Typography variant="subheading">
+              ST Controls
+            </Typography>
+
+            <div>
+              <TextField name="name" value={ this.state.name }
+                label="Chronicle Name"
+                style={{ width: '30em' }}
+                onChange={ onChange } onBlur={ onBlur }
+              />
+            </div>
           </BlockPaper>
         </Grid>
       }
@@ -84,6 +123,7 @@ ChroniclePlayerPage.propTypes = {
   qcs: PropTypes.arrayOf(PropTypes.object),
   battlegroups: PropTypes.arrayOf(PropTypes.object),
   chronicle: PropTypes.object,
+  update: PropTypes.func,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -109,8 +149,12 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  update: (id, trait, value) => dispatch(updateChronicle(id, trait, value))
+})
+
 export default ProtectedComponent(
-  connect(mapStateToProps)(
+  connect(mapStateToProps, mapDispatchToProps)(
     ChroniclePlayerPage
   )
 )

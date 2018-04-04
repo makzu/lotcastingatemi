@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # rubocop:disable Metrics/ClassLength
     class ChroniclesController < Api::V1::BaseController
       before_action :authenticate_player
       before_action :set_chronicle, except: %i[index create join]
@@ -52,9 +53,13 @@ module Api
       end
 
       def remove_player
-        authorize @chronicle, :update?
-        @player = Player.find_by!(id: params[:player_id])
-        check_player @player
+        if current_player.id.to_s == params[:player_id]
+          authorize current_player, :update?
+          @player = current_player
+        else
+          authorize @chronicle, :update?
+          @player = Player.find_by!(id: params[:player_id])
+        end
 
         @chronicle.remove_player(@player)
 
@@ -163,5 +168,6 @@ module Api
         )
       end
     end
+    # rubocop:enable Metrics/ClassLength
   end
 end

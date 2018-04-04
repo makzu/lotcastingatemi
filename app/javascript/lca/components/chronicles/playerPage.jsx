@@ -7,6 +7,7 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
+import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
@@ -52,7 +53,6 @@ class ChroniclePlayerPage extends Component {
         </Typography>
       </Grid>
 
-
       <Grid item xs={ 12 }>
         <BlockPaper>
           <Typography variant="subheading" gutterBottom>
@@ -64,6 +64,13 @@ class ChroniclePlayerPage extends Component {
           { playerList }
         </BlockPaper>
       </Grid>
+      { !is_st &&
+        <Grid item xs={ 12 }>
+          <BlockPaper>
+            <ChronicleLeavePopup chronicleId={ chronicle.id } />
+          </BlockPaper>
+        </Grid>
+      }
     </Grid>
   }
 }

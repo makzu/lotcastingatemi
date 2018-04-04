@@ -13,7 +13,7 @@ import Dialog, {
 import { removePlayerFromChronicle } from '../../ducks/actions.js'
 import { getSpecificChronicle } from '../../selectors'
 
-class RemovePlayerPopup extends Component {
+class ChronicleLeavePopup extends Component {
   constructor(props) {
     super(props)
 
@@ -41,56 +41,50 @@ class RemovePlayerPopup extends Component {
 
   render() {
     const { handleOpen, handleClose, handleSubmit } = this
-    const { chronicleName, playerName } = this.props
+    const { chronicleName } = this.props
 
     return <Fragment>
       <Button onClick={ handleOpen }>
-        Kick
+        Leave Chronicle
       </Button>
 
       <Dialog
         open={ this.state.open }
         onClose={ handleClose }
       >
-        <DialogTitle>Remove { playerName }?</DialogTitle>
+        <DialogTitle>Leave { chronicleName }?</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            This will remove { playerName } and all of their characters from { chronicleName }.
-          </DialogContentText>
-          <DialogContentText>
-            They will be able to re-join unless you generate a new invite code
-            or disable invitations.
+            This will remove you and all of your characters from { chronicleName }.
           </DialogContentText>
         </DialogContent>
 
         <DialogActions>
           <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } variant="raised" color="primary">Remove</Button>
+          <Button onClick={ handleSubmit } variant="raised" color="primary">Leave</Button>
         </DialogActions>
       </Dialog>
     </Fragment>
   }
 }
-RemovePlayerPopup.propTypes = {
+ChronicleLeavePopup.propTypes = {
   chronicleId: PropTypes.number.isRequired,
   playerId: PropTypes.number.isRequired,
   chronicleName: PropTypes.string,
-  playerName: PropTypes.string,
   removePlayer: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state, ownProps) {
-  let chronicleName, playerName = ''
+  let chronicleName = ''
 
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   if (chronicle != undefined && chronicle.name != undefined) {
     chronicleName = chronicle.name
-    playerName = state.entities.players[ownProps.playerId].display_name
   }
 
   return {
     chronicleName: chronicleName,
-    playerName: playerName
+    playerId: state.session.id,
   }
 }
 
@@ -102,4 +96,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RemovePlayerPopup)
+export default connect(mapStateToProps, mapDispatchToProps)(ChronicleLeavePopup)

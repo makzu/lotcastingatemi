@@ -19,8 +19,8 @@ export function pool(name, character, attribute, ability, meritBonus, penalties,
   const _abil = abil(character, ability)
   const pool = _attr + _abil
   let mb = 0
-  if (meritBonus.length > 1)
-    mb =  meritBonus.reduce((a, v) => v + a.situational ? 0 : a.bonus)
+  if (meritBonus.length > 0)
+    mb =  meritBonus.reduce((a, b) => a + (b.situational ? 0 : b.bonus), 0)
 
   const excellency = maxExcellency(character, attribute, ability, charmAbils)
   const excellencyStunt = maxExcellency(character, attribute, ability, charmAbils, true)

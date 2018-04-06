@@ -35,7 +35,7 @@ const XpFields = (props) => {
     />
 
     <RatingField trait="points" value={ points }
-      label="Points" min={ 0 } margin="dense" narrow
+      label="Points" min={ -Infinity } margin="dense" narrow
       onChange={ onRatingChange }
     />
   </Fragment>

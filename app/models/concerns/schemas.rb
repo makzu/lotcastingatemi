@@ -97,7 +97,7 @@ module Schemas
       "required": %w[label points],
       "properties": {
         "label": { "type": 'string' },
-        "points": { "type": 'integer', "minimum": 0 }
+        "points": { "type": 'integer' }
       }
     }
   }.freeze

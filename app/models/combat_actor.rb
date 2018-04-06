@@ -32,4 +32,8 @@ class CombatActor < ApplicationRecord
   def hidden
     false
   end
+
+  def public
+    false
+  end
 end

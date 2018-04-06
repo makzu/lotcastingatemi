@@ -59,8 +59,10 @@ RSpec.shared_examples 'character' do |character_type, parent|
     end
     describe 'showing a record' do
       it 'returns an auth failure' do
-        get "/api/v1/#{trait.entity_type}s/#{trait.id}"
-        expect(response.status).to eq 401
+        expect do
+          get "/api/v1/#{trait.entity_type}s/#{trait.id}"
+          expect(response.status).to eq 401
+        end.to raise_error Pundit::NotAuthorizedError
       end
     end
     describe 'updating a record' do

@@ -3,7 +3,7 @@
 module Api
   module V1
     class QcsController < Api::V1::BaseController
-      before_action :authenticate_player
+      before_action :authenticate_player, except: :show
       before_action :set_qc, only: %i[show update destroy]
 
       def show

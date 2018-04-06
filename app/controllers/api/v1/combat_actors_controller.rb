@@ -3,7 +3,7 @@
 module Api
   module V1
     class CombatActorsController < BaseController
-      before_action :authenticate_player
+      before_action :authenticate_player, except: :show
       before_action :set_combat_actor, only: %i[show update destroy]
       before_action :set_parent, only: :create
 

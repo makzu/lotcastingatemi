@@ -24,7 +24,7 @@ import RatingLine from '../generic/ratingLine.jsx'
 
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import {
-  getSpecificCharacter, getPenalties, getPoolsAndRatings,
+  canIEditCharacter, getSpecificCharacter, getPenalties, getPoolsAndRatings,
   getMeritsForCharacter, getWeaponsForCharacter,
 } from '../../selectors'
 import { withWillpower, withIntimacies, fullChar, fullWeapon, fullMerit } from '../../utils/propTypes'
@@ -33,8 +33,8 @@ import {
   committedPersonalMotes, committedPeripheralMotes,
 } from '../../utils/calculated'
 
-export function IntimacySummary({ character }) {
-  const principles = character.principles.map((p, index) =>
+export function IntimacySummary({ character, canEdit }) {
+  const principles = character.principles.map((p, index) => (p.hidden && !canEdit) ? <span key={ index } /> :
     <Typography key={ index } component="div">
       <RatingLine rating={ p.rating } fillTo={ 3 }>
         { p.subject }
@@ -42,7 +42,7 @@ export function IntimacySummary({ character }) {
       <Divider />
     </Typography>
   )
-  const ties = character.ties.map((p, index) =>
+  const ties = character.ties.map((p, index) => (p.hidden && !canEdit) ? <span key={ index } /> :
     <Typography key={ index } component="div">
       <RatingLine rating={ p.rating } fillTo={ 3 }>
         { p.subject }
@@ -65,6 +65,7 @@ export function IntimacySummary({ character }) {
 }
 IntimacySummary.propTypes = {
   character: PropTypes.shape(withIntimacies),
+  canEdit: PropTypes.bool,
 }
 
 export function WillpowerBlock({ character }) {
@@ -188,7 +189,7 @@ export class CharacterSheet extends Component {
         <Typography paragraph>This Character has not yet loaded.</Typography>
       </div>
 
-    const { character, merits, weapons, pools, penalties } = this.props
+    const { character, merits, weapons, pools, penalties, canEdit } = this.props
     return <div>
       <Grid container spacing={ 24 }>
         <Grid item hidden={{ smUp: true }} xs={ 12 }>
@@ -292,7 +293,7 @@ export class CharacterSheet extends Component {
         </Grid>
 
         <Grid item xs={ 12 } md={ 3 }>
-          <IntimacySummary character={ character } />
+          <IntimacySummary character={ character } canEdit={ canEdit } />
         </Grid>
 
         { character.limit != undefined &&
@@ -323,6 +324,7 @@ CharacterSheet.propTypes = {
   merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)),
   penalties: PropTypes.object,
   pools: PropTypes.object,
+  canEdit: PropTypes.bool,
 }
 
 function mapStateToProps(state, props) {
@@ -346,6 +348,7 @@ function mapStateToProps(state, props) {
     merits,
     penalties,
     pools,
+    canEdit: canIEditCharacter(state, id),
   }
 }
 

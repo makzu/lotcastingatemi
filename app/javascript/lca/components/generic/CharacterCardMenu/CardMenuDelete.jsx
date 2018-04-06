@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
+import Divider from 'material-ui/Divider'
 import { ListItemIcon, ListItemText } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
 import Typography from 'material-ui/Typography'
@@ -47,6 +48,8 @@ class CardMenuDelete extends Component {
     }
 
     return <Fragment>
+      <Divider />
+
       <MenuItem button onClick={ this.handleOpen }>
         <ListItemIcon><Delete /></ListItemIcon>
         <ListItemText primary="Delete" />

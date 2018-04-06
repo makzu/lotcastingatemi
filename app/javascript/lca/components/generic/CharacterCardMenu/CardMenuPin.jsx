@@ -8,10 +8,10 @@ import Bookmark from 'material-ui-icons/Bookmark'
 import BookmarkBorder from 'material-ui-icons/BookmarkBorder'
 
 import { updateCharacter, updateQc, updateBattlegroup } from '../../../ducks/actions.js'
-import { canIEdit } from '../../../selectors/'
+import { canIDelete } from '../../../selectors/'
 
 function PinButton(props) {
-  if(!canIEdit)
+  if(!props.canEdit)
     return <div />
 
   let action
@@ -38,7 +38,7 @@ PinButton.propTypes = {
   id: PropTypes.number.isRequired,
   characterType: PropTypes.string.isRequired,
   isPinned: PropTypes.bool,
-  canIEdit: PropTypes.bool,
+  canEdit: PropTypes.bool,
   updateCharacter: PropTypes.func,
   updateQc: PropTypes.func,
   updateBattlegroup: PropTypes.func,
@@ -46,7 +46,7 @@ PinButton.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     isPinned: state.entities[ownProps.characterType + 's'][ownProps.id].pinned,
-    canEdit: canIEdit(state, ownProps.id, ownProps.characterType),
+    canEdit: canIDelete(state, ownProps.id, ownProps.characterType),
   }
 }
 function mapDispatchToProps(dispatch) {

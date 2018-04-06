@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Divider from 'material-ui/Divider'
 import IconButton from 'material-ui/IconButton'
 import Menu from 'material-ui/Menu'
 import MoreVert from 'material-ui-icons/MoreVert'
@@ -47,8 +46,6 @@ class CharacterCardMenu extends Component {
         <CardMenuHide  characterType={ this.props.characterType } id={ this.props.id } />
 
         <CardMenuRemoveFromChronicle characterType={ this.props.characterType } id={ this.props.id } />
-
-        <Divider />
 
         <CardMenuDelete characterType={ this.props.characterType } id={ this.props.id } />
       </Menu>

@@ -20,16 +20,28 @@ const SortableItem = SortableElement(({ children }) => children)
 const SortableList = SortableContainer(({ items }) => <div>{ items }</div>)
 const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
 
+export const ListAttributeFieldsPropTypes = {
+  characater: PropTypes.object,
+  trait: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onRatingChange: PropTypes.func.isRequired,
+  classes: PropTypes.object,
+}
+
 const styles = theme => ({
   fieldContainer: {
     display: 'flex',
     alignItems: 'center',
   },
   grabHandle: {
-    marginRight: theme.spacing.unit / 2,
+    marginRight: theme.spacing.unit,
   },
   nameField: {
     flex: 1,
+    marginRight: theme.spacing.unit,
+  },
+  withMargin: {
     marginRight: theme.spacing.unit,
   },
 })
@@ -57,8 +69,9 @@ class ListAttributeEditor extends Component {
     this.setState({ trait: newTrait })
   }
 
-  onBlur(index) {
-    if (this.state.trait[index].craft == this.props.character[this.props.trait][index].craft)
+  onBlur(index, e) {
+    const { name } = e.target
+    if (this.state.trait[index][name] === this.props.character[this.props.trait][index][name])
       return
 
     this.handleChange(this.state.trait)

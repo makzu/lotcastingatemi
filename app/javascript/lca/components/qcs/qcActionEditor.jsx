@@ -1,126 +1,46 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import Button from 'material-ui/Button'
-import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
 
+import ListAttributeEditor, { ListAttributeFieldsPropTypes } from '../generic/ListAttributeEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import { fullQc } from '../../utils/propTypes'
 
-function ActionFields(props) {
-  const { onActionChange, onActionBlur, onRatingChange, onRemove } = props
-  const { action, pool } = props.action
+function ActionFields({ trait, onChange, onBlur, onRatingChange, classes }) {
+  const { action, pool } = trait
 
-  return <div style={{ display: 'flex' }}>
-    <TextField name="action" value={ action }
+  return <Fragment>
+    <TextField name="action" value={ action } className={ classes.nameField }
       label="Action" margin="dense"
-      onChange={ onActionChange } onBlur={ onActionBlur }
-      style={{ flex: 1, marginRight: '.5em' }}
+      onChange={ onChange } onBlur={ onBlur }
     />
+
     <RatingField trait="pool" value={ pool }
       label="Pool" min={ 1 } margin="dense"
       onChange={ onRatingChange }
     />
-    <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
+  </Fragment>
+}
+ActionFields.propTypes = ListAttributeFieldsPropTypes
+
+const QcActionEditor = ({ qc, onChange }) => {
+  return <div>
+    <RatingField label="Senses" trait="senses" value={ qc.senses }
+      onChange={ onChange }
+    />
+
+    <ListAttributeEditor label="Actions"
+      character={ qc } trait="actions"
+      Fields={ ActionFields }
+      newObject={{ action: 'New Action', pool: 2 }}
+      onChange={ onChange }
+    />
   </div>
-}
-ActionFields.propTypes = {
-  action: PropTypes.object,
-  onActionChange: PropTypes.func,
-  onActionBlur: PropTypes.func,
-  onRatingChange: PropTypes.func,
-  onRemove: PropTypes.func,
-}
-
-class QcActionEditor extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      actions: this.props.qc.actions
-    }
-
-    this.onAdd = this.onAdd.bind(this)
-    this.onSensesChange = this.onSensesChange.bind(this)
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({ actions: newProps.qc.actions })
-  }
-
-  onActionChange(index, e) {
-    var newActions = [...this.state.actions]
-    newActions[index].action = e.target.value
-    this.setState({ actions: newActions })
-  }
-
-  onActionBlur(index) {
-    if (this.state.actions[index].action == this.props.qc.actions[index].action)
-      return
-
-    this.props.onChange('actions', this.state.actions)
-  }
-
-  onRatingChange(index, e) {
-    var newActions = [...this.state.actions]
-    newActions[index].pool = parseInt(e.target.value)
-
-    this.props.onChange('actions', newActions)
-  }
-
-  onAdd() {
-    var newActions = [...this.state.actions, { action: 'New Action', pool: 1 }]
-    this.props.onChange('actions', newActions)
-  }
-
-  onRemove(index) {
-    var newActions = [...this.state.actions]
-    newActions.splice(index, 1)
-
-    this.props.onChange('actions', newActions)
-  }
-
-  onSensesChange(e) {
-    this.props.onChange('senses', e.target.value)
-  }
-
-  render() {
-    const { onActionChange, onActionBlur, onRatingChange, onAdd, onRemove, onSensesChange } = this
-
-    const actions = this.state.actions.map((action, index) =>
-      <ActionFields action={ action } key={ index }
-        onActionChange={ onActionChange.bind(this, index) }
-        onActionBlur={ onActionBlur.bind(this, index) }
-        onRatingChange={ onRatingChange.bind(this, index) }
-        onRemove={ onRemove.bind(this, index) }
-      />
-    )
-
-    return <div>
-      <Typography variant="subheading">
-        Actions
-
-        <Button onClick={ onAdd }>
-          Add Action &nbsp;
-          <ContentAddCircle />
-        </Button>
-      </Typography>
-      <div>
-        <RatingField label="Senses" trait="senses" value={ this.props.qc.senses }
-          onChange={ onSensesChange }
-        />
-      </div>
-
-      { actions }
-    </div>
-  }
 }
 QcActionEditor.propTypes = {
   qc: PropTypes.shape(fullQc),
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 }
 
 export default QcActionEditor

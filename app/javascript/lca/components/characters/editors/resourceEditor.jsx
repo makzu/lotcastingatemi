@@ -1,132 +1,35 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { cloneDeep } from 'lodash'
 
-import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
-import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
 
+import ListAttributeEditor, { ListAttributeFieldsPropTypes } from '../../generic/ListAttributeEditor.jsx'
 import RatingField from '../../generic/RatingField.jsx'
 import { withIntimacies } from '../../../utils/propTypes'
 
-const styles = theme => ({
-  fieldContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  nameField: {
-    flex: 1,
-    marginRight: theme.spacing.unit,
-  },
-})
+function ResourceFields({ trait, onChange, onBlur, onRatingChange, classes }) {
+  const { resource, value } = trait
 
-function _ResourceFields(props) {
-  const { onResourcesChange, onResourcesBlur, onValueChange, onRemove, classes } = props
-  const { resource, value } = props.resource
-
-  return <div className={ classes.fieldContainer }>
+  return <Fragment>
     <TextField name="resource" value={ resource } className={ classes.nameField }
       label="Resource" margin="dense"
-      onChange={ onResourcesChange } onBlur={ onResourcesBlur }
+      onChange={ onChange } onBlur={ onBlur }
     />
     <RatingField trait="value" value={ value }
       label="Value" min={ 0 } margin="dense" narrow
-      onChange={ onValueChange }
+      onChange={ onRatingChange }
     />
-    <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
-  </div>
+  </Fragment>
 }
-_ResourceFields.propTypes = {
-  resource: PropTypes.object,
-  onResourcesChange: PropTypes.func,
-  onResourcesBlur: PropTypes.func,
-  onValueChange: PropTypes.func,
-  onRemove: PropTypes.func,
-  classes: PropTypes.object,
-}
-const ResourceFields = withStyles(styles)(_ResourceFields)
+ResourceFields.propTypes = ListAttributeFieldsPropTypes
 
-class ResourceEditor extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      resources: cloneDeep(this.props.character.resources),
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({ resources: cloneDeep(newProps.character.resources) })
-  }
-
-  onResourcesChange(index, e) {
-    var newResourcess = [ ...this.state.resources ]
-    newResourcess[index].resource = e.target.value
-    this.setState({ resources: newResourcess })
-  }
-
-  onResourcesBlur(index) {
-    if (this.state.resources[index].resource == this.props.character.resources[index].resource)
-      return
-
-    this.onChange(this.state.resources)
-  }
-
-  onValueChange(index, e) {
-    var newResourcess = [...this.state.resources]
-    newResourcess[index].value = e.target.value
-
-    this.onChange(newResourcess)
-  }
-
-  onAdd() {
-    var newResourcess = [ ...this.state.resources, { resource: 'Resource', value: 0 }]
-    this.onChange(newResourcess)
-  }
-
-  onRemove(index) {
-    var newResourcess = [...this.state.resources]
-    newResourcess.splice(index, 1)
-
-    this.onChange(newResourcess)
-  }
-
-  onChange(newResourcess) {
-    this.props.onChange({ target: { name: 'resources', value: newResourcess }})
-  }
-
-  render() {
-    if (this.props.character.resources == undefined)
-      return <div />
-
-    const { onResourcesChange, onResourcesBlur, onValueChange, onAdd, onRemove } = this
-
-    const resources = this.state.resources.map((resource, index) =>
-      <ResourceFields resource={ resource } key={ index }
-        onResourcesChange={ onResourcesChange.bind(this, index) }
-        onResourcesBlur={ onResourcesBlur.bind(this, index) }
-        onValueChange={ onValueChange.bind(this, index) }
-        onRemove={ onRemove.bind(this, index) }
-      />
-    )
-
-    return <div>
-      <Typography variant="subheading">
-        Misc Resources:
-        <Button onClick={ onAdd.bind(this) }>
-          Add &nbsp;
-          <ContentAddCircle />
-        </Button>
-      </Typography>
-      { resources.length == 0 &&
-        <Typography paragraph>None</Typography>
-      }
-      { resources }
-    </div>
-  }
+const ResourceEditor = ({ character, onChange }) => {
+  return <ListAttributeEditor label="Misc Resources"
+    character={ character } trait="resources"
+    Fields={ ResourceFields }
+    newObject={{ context: 'New Resource', value: 0 }}
+    onChange={ onChange }
+  />
 }
 ResourceEditor.propTypes = {
   character: PropTypes.shape(withIntimacies),

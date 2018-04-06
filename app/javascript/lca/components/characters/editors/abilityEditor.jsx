@@ -1,19 +1,52 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
+import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
-import CraftEditor from './craftEditor.jsx'
-import MartialArtsEditor from './martialArtsEditor.jsx'
+import ListAttributeEditor, { ListAttributeFieldsPropTypes } from '../../generic/ListAttributeEditor.jsx'
 import BlockPaper from '../../generic/blockPaper'
 import RatingField from '../../generic/RatingField.jsx'
-
 import { ABILITY_MAX as MAX, ABILITY_MIN as MIN } from '../../../utils/constants.js'
 import { withAbilities } from '../../../utils/propTypes'
 
 function AbilityField(props) {
   return <RatingField min={ MIN } max={ MAX } margin="dense" { ...props } />
 }
+
+const CraftFields = ({ trait, onChange, onBlur, onRatingChange, classes }) => {
+  const { craft, rating } = trait
+
+  return <Fragment>
+    <TextField name="craft" value={ craft } className={ classes.nameField }
+      label="Craft" margin="dense"
+      onChange={ onChange } onBlur={ onBlur }
+    />
+
+    <RatingField trait="rating" value={ rating }
+      label="Rating" min={ MIN } max={ MAX } margin="dense" narrow
+      onChange={ onRatingChange }
+    />
+  </Fragment>
+}
+CraftFields.propTypes = ListAttributeFieldsPropTypes
+
+const MartialArtsFields = ({ trait, onChange, onBlur, onRatingChange, classes }) => {
+  const { style, rating } = trait
+
+  return <Fragment>
+    <TextField name="style" value={ style } className={ classes.nameField }
+      label="Style" margin="dense"
+      onChange={ onChange } onBlur={ onBlur }
+    />
+
+    <RatingField trait="rating" value={ rating }
+      label="Rating" min={ MIN } max={ MAX } margin="dense" narrow
+      onChange={ onRatingChange }
+    />
+  </Fragment>
+}
+MartialArtsFields.propTypes = ListAttributeFieldsPropTypes
 
 function AbilityEditor(props) {
   const { character, onRatingChange } = props
@@ -113,9 +146,19 @@ function AbilityEditor(props) {
       />
     </div>
 
-    <CraftEditor character={ character } onChange={ onRatingChange } />
-    <MartialArtsEditor character={ character } onChange={ onRatingChange } />
+    <ListAttributeEditor label="Craft"
+      character={ character } trait="abil_craft"
+      Fields={ CraftFields }
+      newObject={{ craft: 'New Craft', rating: 1 }}
+      onChange={ onRatingChange }
+    />
 
+    <ListAttributeEditor label="Martial Arts"
+      character={ character } trait="abil_martial_arts"
+      Fields={ MartialArtsFields }
+      newObject={{ style: 'New MA', rating: 1 }}
+      onChange={ onRatingChange }
+    />
   </BlockPaper>
 }
 AbilityEditor.propTypes = {

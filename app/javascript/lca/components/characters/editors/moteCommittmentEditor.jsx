@@ -1,37 +1,18 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { cloneDeep } from 'lodash'
 
-import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
-import IconButton from 'material-ui/IconButton'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
 
+import ListAttributeEditor, { ListAttributeFieldsPropTypes } from '../../generic/ListAttributeEditor.jsx'
 import RatingField from '../../generic/RatingField.jsx'
 import { fullChar } from '../../../utils/propTypes'
 
-const styles = theme => ({
-  fieldContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  labelField: {
-    flex: 1,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
-})
+function CommitFields({ trait, onChange, onBlur, onRatingChange, classes }) {
+  const { pool, label, motes } = trait
 
-function _CommitFields(props) {
-  const { onCommittmentChange, onCommittmentBlur, onRatingChange, onRemove, classes } = props
-  const { pool, label, motes } = props.committment
-
-  return <div className={ classes.fieldContainer }>
-    <TextField select name="pool" value={ pool }
+  return <Fragment>
+    <TextField select name="pool" value={ pool } className={ classes.withMargin }
       label="Pool" margin="dense"
       onChange={ onRatingChange }
     >
@@ -39,104 +20,26 @@ function _CommitFields(props) {
       <MenuItem value="peripheral">Peri</MenuItem>
     </TextField>
 
-    <TextField name="label" value={ label } className={ classes.labelField }
+    <TextField name="label" value={ label } className={ classes.nameField }
       label="For" margin="dense"
-      onChange={ onCommittmentChange } onBlur={ onCommittmentBlur }
+      onChange={ onChange } onBlur={ onBlur }
     />
 
     <RatingField trait="motes" value={ motes }
       label="Motes" min={ 0 } margin="dense" narrow
       onChange={ onRatingChange }
     />
-    <IconButton onClick={ onRemove }><ContentRemoveCircle /></IconButton>
-  </div>
+  </Fragment>
 }
-_CommitFields.propTypes = {
-  committment: PropTypes.object,
-  onCommittmentChange: PropTypes.func,
-  onCommittmentBlur: PropTypes.func,
-  onRatingChange: PropTypes.func,
-  onRemove: PropTypes.func,
-  classes: PropTypes.object,
-}
-const CommitFields = withStyles(styles)(_CommitFields)
+CommitFields.propTypes = ListAttributeFieldsPropTypes
 
-class MoteCommittmentEditor extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      motes_committed: cloneDeep(this.props.character.motes_committed),
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({ motes_committed: cloneDeep(newProps.character.motes_committed) })
-  }
-
-  onCommittmentChange(index, e) {
-    var newCommittments = [ ...this.state.motes_committed ]
-    newCommittments[index].label = e.target.value
-    this.setState({ motes_committed: newCommittments })
-  }
-
-  onCommittmentBlur(index) {
-    if (this.state.motes_committed[index].label == this.props.character.motes_committed[index].label)
-      return
-
-    this.onChange(this.state.motes_committed)
-  }
-
-  onRatingChange(index, e) {
-    var newCommittments = [...this.state.motes_committed]
-    newCommittments[index][e.target.name] = e.target.value
-
-    this.onChange(newCommittments)
-  }
-
-  onAdd() {
-    var newCommittments = [ ...this.state.motes_committed, {
-      pool: 'peripheral', label: '', motes: 0
-    }]
-    this.onChange(newCommittments)
-  }
-
-  onRemove(index) {
-    var newCommittments = [...this.state.motes_committed]
-    newCommittments.splice(index, 1)
-
-    this.onChange(newCommittments)
-  }
-
-  onChange(newCommittments) {
-    this.props.onChange({ target: { name: 'motes_committed', value: newCommittments }})
-  }
-
-  render() {
-    const { onCommittmentChange, onCommittmentBlur, onRatingChange, onAdd, onRemove } = this
-
-    const committments = this.state.motes_committed.map((committment, index) =>
-      <CommitFields committment={ committment } key={ index }
-        onCommittmentChange={ onCommittmentChange.bind(this, index) }
-        onCommittmentBlur={ onCommittmentBlur.bind(this, index) }
-        onRatingChange={ onRatingChange.bind(this, index) }
-        onRemove={ onRemove.bind(this, index) }
-      />
-    )
-
-    return <div>
-      <Typography variant="subheading">
-        Committments:
-        <Button onClick={ onAdd.bind(this) }>
-          Add &nbsp;
-          <ContentAddCircle />
-        </Button>
-      </Typography>
-      { committments.length == 0 &&
-        <Typography paragraph>None</Typography>
-      }
-      { committments }
-    </div>
-  }
+const MoteCommittmentEditor = ({ character, onChange }) => {
+  return <ListAttributeEditor label="Mote Committments"
+    character={ character } trait="motes_committed"
+    Fields={ CommitFields }
+    newObject={{ pool: 'peripheral', label: '', motes: 0 }}
+    onChange={ onChange }
+  />
 }
 MoteCommittmentEditor.propTypes = {
   character: PropTypes.shape(fullChar),

@@ -32,7 +32,6 @@ class QcEditor extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleRatingChange = this.handleRatingChange.bind(this)
-    this.handleListChange = this.handleListChange.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -60,11 +59,6 @@ class QcEditor extends Component {
     this.props.updateQc(qc.id, name, value)
   }
 
-  handleListChange(trait, value) {
-    this.setState({ qc: { ...this.state.qc, [trait]: value }})
-    this.props.updateQc(this.state.qc.id, trait, value)
-  }
-
   render() {
     /* Escape hatch */
     if (this.props.qc == undefined)
@@ -74,7 +68,7 @@ class QcEditor extends Component {
 
     const { qc } = this.state
     const {
-      handleChange, handleBlur, handleRatingChange, handleListChange
+      handleChange, handleBlur, handleRatingChange,
     } = this
 
     return <Grid container spacing={ 24 }>
@@ -215,7 +209,7 @@ class QcEditor extends Component {
 
       <Grid item xs={ 12 } lg={ 6 }>
         <BlockPaper>
-          <QcActionEditor qc={ qc } onChange={ handleListChange } />
+          <QcActionEditor qc={ qc } onChange={ handleRatingChange } />
         </BlockPaper>
       </Grid>
 
@@ -232,12 +226,12 @@ class QcEditor extends Component {
             label="Move" min={ 1 } margin="dense"
             onChange={ handleRatingChange }
           />
-          <RatingField trait="parry" value={ qc.parry }
-            label="Parry" min={ 1 } margin="dense"
-            onChange={ handleRatingChange }
-          />
           <RatingField trait="evasion" value={ qc.evasion }
             label="Evasion" min={ 1 } margin="dense"
+            onChange={ handleRatingChange }
+          />
+          <RatingField trait="parry" value={ qc.parry }
+            label="Parry" min={ 1 } margin="dense"
             onChange={ handleRatingChange }
           />
           <RatingField trait="soak" value={ qc.soak }

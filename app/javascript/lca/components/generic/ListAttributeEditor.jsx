@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+  arrayMove,
+} from 'react-sortable-hoc'
 import { cloneDeep } from 'lodash'
 
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import DragHandleIcon from 'material-ui-icons/DragHandle'
 import ContentAddCircle from 'material-ui-icons/AddCircle'
+import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+
+const SortableItem = SortableElement(({ children }) => children)
+const SortableList = SortableContainer(({ items }) => <div>{ items }</div>)
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
 
 const styles = theme => ({
   fieldContainer: {
     display: 'flex',
     alignItems: 'center',
+  },
+  grabHandle: {
+    marginRight: theme.spacing.unit / 2,
   },
   nameField: {
     flex: 1,
@@ -26,6 +40,8 @@ class ListAttributeEditor extends Component {
     this.state = {
       trait: cloneDeep(this.props.character[this.props.trait]),
     }
+
+    this.handleSort = this.handleSort.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -67,24 +83,36 @@ class ListAttributeEditor extends Component {
     this.handleChange(newTrait)
   }
 
+  handleSort({ oldIndex, newIndex }) {
+    var newTrait = arrayMove(this.state.trait, oldIndex, newIndex)
+    this.setState({ trait: newTrait })
+
+    this.handleChange(newTrait)
+  }
+
   handleChange(newTrait) {
     this.props.onChange({ target: { name: this.props.trait, value: newTrait }})
   }
 
   render() {
-    const { Fields, classes } = this.props
-    const { onChange, onBlur, onRatingChange, onAdd, onRemove } = this
+    const { character, Fields, classes } = this.props
+    const { onChange, onBlur, onRatingChange, onAdd, onRemove, handleSort, } = this
 
-    const rows = this.state.trait.map((t, index) => <div key={ index } className={ classes.fieldContainer }>
-      <Fields trait={ t }
-        onChange={ onChange.bind(this, index) }
-        onBlur={ onBlur.bind(this, index) }
-        onRatingChange={ onRatingChange.bind(this, index) }
-        classes={ classes }
-      />
-      <IconButton onClick={ onRemove.bind(this, index) }><ContentRemoveCircle /></IconButton>
-    </div>
-    )
+    const rows = this.state.trait.map((t, index) => <SortableItem key={ index } index={ index }>
+      <div className={ classes.fieldContainer }>
+        <Typography component="div" className={ classes.grabHandle }>
+          <Handle />
+        </Typography>
+        <Fields trait={ t } character={ character }
+          onChange={ onChange.bind(this, index) }
+          onBlur={ onBlur.bind(this, index) }
+          onRatingChange={ onRatingChange.bind(this, index) }
+          classes={ classes }
+        />
+        <IconButton onClick={ onRemove.bind(this, index) }><ContentRemoveCircle /></IconButton>
+      </div>
+    </SortableItem>)
+
     return <div>
       <Typography variant="subheading">
         { this.props.label }
@@ -96,7 +124,11 @@ class ListAttributeEditor extends Component {
       { rows.length == 0 &&
         <Typography paragraph>None</Typography>
       }
-      { rows }
+      <SortableList
+        items={ rows }
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+      />
     </div>
   }
 }

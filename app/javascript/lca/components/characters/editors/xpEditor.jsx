@@ -41,10 +41,10 @@ const XpFields = (props) => {
   </Fragment>
 }
 XpFields.propTypes = {
-  trait: PropTypes.object,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onRatingChange: PropTypes.func,
+  trait: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onRatingChange: PropTypes.func.isRequired,
   classes: PropTypes.object,
 }
 

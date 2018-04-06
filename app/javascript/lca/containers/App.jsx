@@ -118,10 +118,16 @@ class App extends Component {
         <footer className={ classes.footer }>
           <Divider className={ classes.footerDivider } />
           <div>
-            <Typography variant="caption" className={ classes.footerText }>
-              Exalted is &copy; White Wolf AB and Onyx Path.
+            <Typography variant="caption" className={ classes.footerText } component="a"
+              href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v44"
+            >
+              v44
             </Typography>
           </div>
+
+          <Typography variant="caption" className={ classes.footerText }>
+            Exalted is &copy; White Wolf AB and Onyx Path.
+          </Typography>
 
           <div>
             <Typography variant="caption" component={ Link } to="/privacy" className={ classes.footerText }>

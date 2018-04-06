@@ -3,6 +3,7 @@ import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 
 import * as schemas from './_schemas.js'
+import { CHA_FETCH_SUCCESS } from './character.js'
 import { callApi } from '../../utils/api.js'
 
 export const CHN_FETCH =         'lca/chronicle/FETCH'
@@ -52,6 +53,7 @@ export default function reducer(state, action) {
   case CHN_FETCH_SUCCESS:
   case INVITE_CODE_UPDATE_SUCCESS:
   case CHN_ADD_THING_SUCCESS:
+  case CHA_FETCH_SUCCESS:
     return {
       ...state,
       players:      merge({ ...state.players      }, _entities.players      ),

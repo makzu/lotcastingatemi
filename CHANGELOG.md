@@ -1,5 +1,6 @@
 ## v44
 ###### *Not yet released*
+- Characters, QCs, and Battlegroups can now be marked as Public. Public Characters are viewable, but not editable, by anyone with the URL.
 - STs can now rename Chronicles
 - Players can now leave Chronicles
 - Merits and weapons can be manually sorted

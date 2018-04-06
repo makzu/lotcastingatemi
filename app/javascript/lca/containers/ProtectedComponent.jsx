@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Button from 'material-ui/Button'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
 import Typography from 'material-ui/Typography'
+import { isPublicCharacterPage } from '../selectors'
 
 class _LogoutPopup extends Component {
   constructor(props) {
@@ -12,9 +13,10 @@ class _LogoutPopup extends Component {
   }
 
   static getDerivedStateFromProps(props, state) { // eslint-disable-line no-unused-vars
-    if (state.open === !props.authenticated)
+    const { authenticated, isPublic } = props
+    if (state.open === !(authenticated || isPublic))
       return null
-    return({ open: !props.authenticated })
+    return({ open: !(authenticated || isPublic) })
   }
 
   render() {
@@ -41,7 +43,8 @@ class _LogoutPopup extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  authenticated: state.session.authenticated
+  authenticated: state.session.authenticated,
+  isPublic: isPublicCharacterPage(state, window.location.pathname),
 })
 const LogoutPopup = connect(mapStateToProps)(_LogoutPopup)
 

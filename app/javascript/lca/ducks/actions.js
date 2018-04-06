@@ -19,7 +19,7 @@ export { logout } from './session.js'
 export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
 export { spendMotes, spendWillpower, takeDamage } from './events.js'
 
-import { fetchCurrentPlayer, fetchAllChronicles } from './entities'
+import { fetchCurrentPlayer, fetchAllChronicles, fetchCharacter, } from './entities'
 import UpdatesCable from '../utils/cable.js'
 
 export const INIT = 'lca/app/INIT'
@@ -43,5 +43,7 @@ export function lcaInit() {
     if (getState().session.authenticated) {
       dispatch(fetchAll())
     }
+    if (window.location.pathname.startsWith('/characters/'))
+      dispatch(fetchCharacter(window.location.pathname.split('/')[2]))
   }
 }

@@ -60,6 +60,9 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
 export const canIEditQc = createSelector(
   [getCurrentPlayer, getSpecificQc, getState],
   (player, character, state) => {
+    if (character === undefined)
+      return false
+
     if (player.id === character.player_id)
       return true
 

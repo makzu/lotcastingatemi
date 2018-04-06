@@ -36,7 +36,7 @@ class CharacterSerializer < ActiveModel::Serializer
 
              :xp_total, :xp_solar_total, :xp_log, :xp_log_solar, :bp_log,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
-             :sort_order, :chronicle_sort_order
+             :sort_order, :chronicle_sort_order, :public
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id

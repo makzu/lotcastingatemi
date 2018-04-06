@@ -100,6 +100,7 @@ class CharacterEditor extends Component {
           <BasicsEditor character={ character }
             onChange={ handleChange } onBlur={ handleBlur }
             onRatingChange={ handleRatingChange }
+            onCheck={ handleCheck }
           />
         </Grid>
 
@@ -213,7 +214,7 @@ class CharacterEditor extends Component {
           <WeaponEditor character={ character } />
         </Grid>
 
-        <Grid item xs={ 12 } lg={ 6 }>
+        <Grid item xs={ 12 }>
           <XpEditor character={ character }
             onRatingChange={ handleRatingChange }
           />

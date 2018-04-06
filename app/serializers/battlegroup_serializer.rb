@@ -9,7 +9,7 @@ class BattlegroupSerializer < ActiveModel::Serializer
              :soak, :hardness, :evasion, :parry, :resolve, :guile, :appearance,
              :movement, :senses, :join_battle, :initiative, :onslaught,
              :in_combat, :has_acted,
-             :sort_order, :chronicle_sort_order
+             :sort_order, :chronicle_sort_order, :public
 
   attribute :player_id
   attribute :chronicle_id

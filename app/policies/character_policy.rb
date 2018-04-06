@@ -11,7 +11,7 @@ class CharacterPolicy < ApplicationPolicy
   end
 
   def show?
-    player_is_owner? || player_is_storyteller? || player_in_chronicle?
+    character.public || player_is_owner? || player_is_storyteller? || player_in_chronicle?
   end
 
   def create?

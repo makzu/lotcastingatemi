@@ -45,6 +45,17 @@ export const canIDelete = (state, id, characterType) => {
   }
 }
 
+export const isPublicCharacterPage = (state, pathName) => {
+  const path = pathName.split('/')
+
+  if (['characters', 'qcs', 'battlegroups'].includes(path[1]) &&
+    state.entities[path[1]][path[2]] !== undefined
+  )
+    return state.entities[path[1]][path[2]].public
+
+  return false
+}
+
 const getChronicles = (state) => state.entities.chronicles
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],

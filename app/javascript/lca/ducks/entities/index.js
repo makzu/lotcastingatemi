@@ -86,6 +86,7 @@ export default function EntityReducer(state = defaultState, action) {
   switch(act[1]) {
   case 'player':
     return PlayerReducer(state, action)
+  case 'character':
   case 'chronicle':
     return ChronicleReducer(state, action)
 
@@ -104,17 +105,21 @@ function handleCreateAction(state, payload) {
       }
     },
   } : {}
+  const parent = payload.parent_type === 'chronicle' ?
+    {} : {
+      [payload.parent_type]: { ...state[payload.parent_type],
+        [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
+          [payload.assoc]: [ ...state[payload.parent_type][payload.parent_id][payload.assoc], entity.id]
+        },
+      }
+    }
 
   return { ...state,
     [payload.type]: {
       ...state[payload.type],
       [payload.id]: entity,
     },
-    [payload.parent_type]: { ...state[payload.parent_type],
-      [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
-        [payload.assoc]: [ ...state[payload.parent_type][payload.parent_id][payload.assoc], entity.id]
-      },
-    },
+    ...parent,
     ...chrons,
   }
 }

@@ -14,7 +14,7 @@ import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import {
-  getSpecificQc, getAttacksForQc, getMeritsForQc, getCharmsForQc,
+  canIEditQc, getSpecificQc, getAttacksForQc, getMeritsForQc, getCharmsForQc,
   getPenaltiesForQc, getPoolsAndRatingsForQc,
 } from '../../selectors'
 import { fullQc, qcMerit, qcAttack } from '../../utils/propTypes'
@@ -78,7 +78,7 @@ class QcSheet extends Component {
         <Typography paragraph>This QC has not yet loaded.</Typography>
       </div>
 
-    const { qc, qc_attacks, qc_charms, qc_merits, pools, penalties, classes } = this.props
+    const { qc, qc_attacks, qc_charms, qc_merits, pools, penalties, canEdit, classes } = this.props
 
     const actions = qc.actions.map((action, index) =>
       <PoolDisplay key={ index } label={ action.action }
@@ -86,7 +86,7 @@ class QcSheet extends Component {
         classes={{ root: classes.poolBlock }}
       />
     )
-    const principles = qc.principles.map((p, index) =>
+    const principles = qc.principles.map((p, index) => (p.hidden && !canEdit) ? <span key={ index } /> :
       <div key={index}>
         <span className={ classes.intimacyTypeLabel }>Principle: </span>
         <span className={ classes.intimacy }>
@@ -94,7 +94,7 @@ class QcSheet extends Component {
         </span>
       </div>
     )
-    const ties = qc.ties.map((tie, index) =>
+    const ties = qc.ties.map((tie, index) => (tie.hidden && !canEdit) ? <span key={ index } /> :
       <div key={index}>
         <span className={ classes.intimacyTypeLabel }>Tie: </span>
         <span className={ classes.intimacy }>
@@ -335,6 +335,7 @@ function mapStateToProps(state, props) {
     qc_merits,
     penalties,
     pools,
+    canEdit: canIEditQc(state, id),
   }
 }
 QcSheet.propTypes = {
@@ -347,6 +348,7 @@ QcSheet.propTypes = {
   pools: PropTypes.object,
   penalties: PropTypes.object,
   classes: PropTypes.object,
+  canEdit: PropTypes.bool,
 }
 
 export default ProtectedComponent(

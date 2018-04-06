@@ -36,7 +36,8 @@ module Schemas
       "required": %w[subject rating],
       "properties": {
         "subject": { "type": 'string' },
-        "rating": { "type": 'integer', "minimum": 0, "maximum": 3 }
+        "rating": { "type": 'integer', "minimum": 0, "maximum": 3 },
+        "hidden": { "type": 'boolean' }
       },
       "additionalProperties": false
     }

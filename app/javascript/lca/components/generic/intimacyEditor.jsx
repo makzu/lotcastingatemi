@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
+import Checkbox from 'material-ui/Checkbox'
 import TextField from 'material-ui/TextField'
 
 import ListAttributeEditor, { ListAttributeFieldsPropTypes } from './ListAttributeEditor.jsx'
@@ -20,6 +21,12 @@ function IntimacyFields({ trait, onChange, onBlur, onRatingChange, classes }) {
       label="Rating" min={ MIN } max={ MAX } margin="dense" narrow
       onChange={ onRatingChange }
     />
+    <div className={ classes.checkboxWrap }>
+      <div className={ classes.floatingLabel }>Hidden</div>
+      <Checkbox name="hidden" checked={ hidden } value={ hidden }
+        onChange={ onRatingChange }
+      />
+    </div>
   </Fragment>
 }
 IntimacyFields.propTypes = ListAttributeFieldsPropTypes

@@ -44,6 +44,13 @@ const styles = theme => ({
   withMargin: {
     marginRight: theme.spacing.unit,
   },
+  checkboxWrap: {
+    paddingTop: theme.spacing.unit,
+  },
+  floatingLabel: { ...theme.typography.caption,
+    marginBottom: -theme.spacing.unit * 1.25,
+    textAlign: 'center',
+  }
 })
 
 class ListAttributeEditor extends Component {
@@ -79,7 +86,12 @@ class ListAttributeEditor extends Component {
 
   onRatingChange(index, e) {
     var newTrait = [...this.state.trait]
-    newTrait[index][e.target.name] = e.target.value
+    let val
+    if (e.target.type === 'checkbox')
+      val = e.target.checked
+    else
+      val = e.target.value
+    newTrait[index][e.target.name] = val
 
     this.handleChange(newTrait)
   }

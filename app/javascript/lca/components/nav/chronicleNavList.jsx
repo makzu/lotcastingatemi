@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -14,22 +14,30 @@ import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
 import { getMyChronicles, getMyOwnChronicles } from '../../selectors'
 
-class ChronicleNavList extends Component {
-  constructor(props) {
+export type Props = {
+  ownChronicles: Array<Object>,
+  chronicles: Array<Object>,
+  closeDrawer: Function,
+}
+
+type State = {
+  open: boolean,
+}
+
+class ChronicleNavList extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = { open: false }
-
-    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() {
+  handleClick = () => {
     this.setState({ open: !this.state.open })
   }
 
   render() {
-    const { closeDrawer } = this.props
+    const { ownChronicles, chronicles, closeDrawer, } = this.props
 
-    const ownChronicleList = this.props.ownChronicles.map((c) =>
+    const ownChronicleList = ownChronicles.map((c) =>
       <ListItem key={ c.id } button onClick={ closeDrawer }
         component={ NavLink } to={ `/chronicles/${c.id}` }
       >
@@ -39,7 +47,7 @@ class ChronicleNavList extends Component {
         />
       </ListItem>
     )
-    const chronicleList = this.props.chronicles.map((c) =>
+    const chronicleList = chronicles.map((c) =>
       <ListItem key={ c.id } button onClick={ closeDrawer }
         component={ NavLink } to={ `/chronicles/${c.id}` }
       >
@@ -76,11 +84,6 @@ class ChronicleNavList extends Component {
       </Collapse>
     </Fragment>
   }
-}
-ChronicleNavList.propTypes = {
-  ownChronicles: PropTypes.arrayOf(PropTypes.object),
-  chronicles: PropTypes.arrayOf(PropTypes.object),
-  closeDrawer: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

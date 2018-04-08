@@ -8,6 +8,7 @@
       },
       "useBuiltIns": true
     }],
+    "flow",
     "react"
   ],
 

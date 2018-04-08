@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -11,15 +11,22 @@ import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import { getMyPinnedCharacters, getMyPinnedQCs, getMyPinnedBattlegroups } from '../../selectors'
 
-class CharacterNavList extends Component {
-  constructor(props) {
+export type Props = {
+  characters: Array<Object>,
+  qcs: Array<Object>,
+  battlegroups: Array<Object>,
+  closeDrawer: Function,
+};
+
+class CharacterNavList extends Component<Props, { open: boolean }> {
+  constructor(props: Props) {
     super(props)
     this.state = { open: false }
 
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() {
+  handleClick = () => {
     this.setState({ open: !this.state.open })
   }
 
@@ -75,12 +82,6 @@ class CharacterNavList extends Component {
       </Collapse>
     </Fragment>
   }
-}
-CharacterNavList.propTypes = {
-  characters: PropTypes.arrayOf(PropTypes.object),
-  qcs: PropTypes.arrayOf(PropTypes.object),
-  battlegroups: PropTypes.arrayOf(PropTypes.object),
-  closeDrawer: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

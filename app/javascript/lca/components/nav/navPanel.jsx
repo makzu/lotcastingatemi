@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link, NavLink } from 'react-router-dom'
 
@@ -21,13 +21,23 @@ const styles = theme => ({ // eslint-disable-line no-unused-vars
   },
 })
 
-export class NavPanel extends Component {
-  constructor(props) {
+export type Props = {
+  authenticated: boolean,
+  history?: Object,
+  theme: string,
+  logout: Function,
+  switchTheme: Function,
+  closeDrawer: Function,
+  drawerOpen: boolean,
+  classes: Object,
+}
+
+export class NavPanel extends Component<Props> {
+  constructor(props: Props) {
     super(props)
-    this.closeCheck = this.closeCheck.bind(this)
   }
 
-  closeCheck() {
+  closeCheck = () => {
     if (this.props.drawerOpen)
       this.props.closeDrawer()
   }
@@ -112,16 +122,6 @@ export class NavPanel extends Component {
       </List>
     </div>
   }
-}
-NavPanel.propTypes = {
-  authenticated: PropTypes.bool,
-  history: PropTypes.object,
-  theme: PropTypes.string,
-  logout: PropTypes.func,
-  switchTheme: PropTypes.func,
-  closeDrawer: PropTypes.func,
-  drawerOpen: PropTypes.bool,
-  classes: PropTypes.object,
 }
 
 function mapStateToProps(state) {

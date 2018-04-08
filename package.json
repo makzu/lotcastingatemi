@@ -60,11 +60,15 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
+    "babel-preset-flow": "^6.23.0",
     "enzyme": "^3.1.1",
     "eslint": "^4.0.0",
+    "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-react": "^7.0.0",
+    "flow-bin": "^0.69.0",
     "istanbul": "^0.4.5",
     "jest": "^22.2.1",
     "react-hot-loader": "^4.0.1",
@@ -74,6 +78,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
+    "flow": "flow",
     "test": "jest",
     "testcov": "jest --coverage",
     "lint": "eslint app/javascript/ --ext js,jsx"

@@ -12,6 +12,7 @@ import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
 import RatingField from '../generic/RatingField.jsx'
 import { bgAttackPool, bgDamage } from '../../utils/calculated'
 import { qcAttack } from '../../utils/propTypes'
+import { getSpecificBattlegroup } from '../../selectors'
 
 const styles = theme => ({
   wrap: {
@@ -155,7 +156,7 @@ QcAttackFields.propTypes = {
 function mapStateToProps(state, ownProps) {
   let fakeBg
   if (ownProps.battlegroup) {
-    let owner = state.entities.battlegroups[ownProps.attack.qc_attackable_id]
+    let owner = getSpecificBattlegroup(state, ownProps.attack.qc_attackable_id)
     fakeBg = {
       size: owner.size,
       might: owner.might,

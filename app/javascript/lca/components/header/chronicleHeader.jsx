@@ -11,7 +11,7 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
-import { getSpecificChronicle } from '../../selectors/'
+import { getSpecificChronicle, amIStOfChronicle } from '../../selectors/'
 
 const styles = theme => ({ //eslint-disable-line no-unused-vars
   tabs: {
@@ -38,7 +38,7 @@ function ChronicleHeader(props) {
     centered
   >
     <Tab label="Characters" component={ Link } to={ tabBasePath } />
-    <Tab label="Players" component={ Link } to={ tabBasePath + '/players' } />
+    <Tab label={ props.is_st ? 'ST' : 'Players' } component={ Link } to={ tabBasePath + '/players' } />
   </Tabs>
 
   return <div>
@@ -63,17 +63,20 @@ ChronicleHeader.propTypes = {
   id: PropTypes.string,
   chronicle: PropTypes.object,
   path: PropTypes.string,
+  is_st: PropTypes.bool,
   classes: PropTypes.object,
 }
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.chronicleId
   const chronicle = getSpecificChronicle(state, id)
+  const is_st = amIStOfChronicle(state, id)
   const path = ownProps.location.pathname
 
   return {
     id,
     chronicle,
+    is_st,
     path,
   }
 }

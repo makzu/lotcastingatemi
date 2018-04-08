@@ -15,7 +15,10 @@ import BlockPaper from '../generic/blockPaper.jsx'
 
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { updateChronicle } from '../../ducks/actions.js'
-import { getSpecificChronicle } from '../../selectors/'
+import {
+  getSpecificChronicle, getPlayersForChronicle,
+  getStorytellerForChronicle, amIStOfChronicle,
+} from '../../selectors'
 
 class ChroniclePlayerPage extends Component {
   constructor(props) {
@@ -132,24 +135,13 @@ ChroniclePlayerPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.chronicleId
-  const chronicle = getSpecificChronicle(state, id)
-
-  let st
-  let is_st = false
-  let players = []
-
-  if (chronicle != undefined && chronicle.name != undefined) {
-    is_st = chronicle.st_id == state.session.id
-    st = state.entities.players[chronicle.st_id]
-    players = chronicle.players.map((c) => state.entities.players[c])
-  }
 
   return {
     id,
-    st,
-    is_st,
-    players,
-    chronicle,
+    chronicle: getSpecificChronicle(state, id),
+    st: getStorytellerForChronicle(state, id),
+    is_st: amIStOfChronicle(state, id),
+    players: getPlayersForChronicle(state, id),
   }
 }
 

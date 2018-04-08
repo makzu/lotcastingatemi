@@ -14,7 +14,11 @@ import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
-import { getSpecificChronicle } from '../../selectors/'
+import {
+  getSpecificChronicle, getPlayersForChronicle,
+  getCharactersForChronicle, getQcsForChronicle, getBattlegroupsForChronicle,
+  getStorytellerForChronicle, amIStOfChronicle,
+} from '../../selectors'
 
 class ChronicleDashboard extends Component {
   render() {
@@ -102,32 +106,16 @@ ChronicleDashboard.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.chronicleId
-  const chronicle = getSpecificChronicle(state, id)
-
-  let st
-  let is_st = false
-  let players = []
-  let characters = []
-  let qcs = []
-  let battlegroups = []
-
-  if (chronicle != undefined && chronicle.name != undefined) {
-    is_st = chronicle.st_id == state.session.id
-    st = state.entities.players[chronicle.st_id]
-    characters = chronicle.characters.map((c) => state.entities.characters[c])
-    qcs = chronicle.qcs.map((c) => state.entities.qcs[c])
-    battlegroups = chronicle.battlegroups.map((c) => state.entities.battlegroups[c])
-  }
 
   return {
-    id,
-    st,
-    is_st,
-    players,
-    chronicle,
-    characters,
-    qcs,
-    battlegroups,
+    id: id,
+    chronicle: getSpecificChronicle(state, id),
+    st: getStorytellerForChronicle(state, id),
+    is_st: amIStOfChronicle(state, id),
+    players: getPlayersForChronicle(state, id),
+    characters: getCharactersForChronicle(state, id),
+    qcs: getQcsForChronicle(state, id),
+    battlegroups: getBattlegroupsForChronicle(state, id),
   }
 }
 

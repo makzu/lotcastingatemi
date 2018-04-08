@@ -7,7 +7,7 @@ import { FormControlLabel } from 'material-ui/Form'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 
-import Delete from 'material-ui-icons/Delete'
+import Delete from '@material-ui/icons/Delete'
 
 import { qcMerit } from '../../utils/propTypes'
 

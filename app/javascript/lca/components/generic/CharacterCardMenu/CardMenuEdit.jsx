@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { ListItemIcon, ListItemText } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
-import ModeEdit from 'material-ui-icons/ModeEdit'
+import ModeEdit from '@material-ui/icons/ModeEdit'
 
 import { canIEdit } from '../../../selectors'
 

@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
-import Bookmark from 'material-ui-icons/Bookmark'
-import BookmarkBorder from 'material-ui-icons/BookmarkBorder'
+import Bookmark from '@material-ui/icons/Bookmark'
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 
 import { updateCharacter, updateQc, updateBattlegroup } from '../../../ducks/actions.js'
 import { canIDelete } from '../../../selectors/'

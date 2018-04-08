@@ -6,7 +6,7 @@ import { withStyles } from 'material-ui/styles'
 import ExpansionPanel, { ExpansionPanelDetails, ExpansionPanelSummary, } from 'material-ui/ExpansionPanel'
 import Typography from 'material-ui/Typography'
 import Collapse from 'material-ui/transitions/Collapse'
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import styles from './CharmStyles.js'
 

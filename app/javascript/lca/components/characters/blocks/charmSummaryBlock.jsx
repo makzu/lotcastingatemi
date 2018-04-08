@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
-import Launch from 'material-ui-icons/Launch'
+import Launch from '@material-ui/icons/Launch'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
 import {

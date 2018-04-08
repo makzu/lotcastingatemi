@@ -9,7 +9,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
-import Delete from 'material-ui-icons/Delete'
+import Delete from '@material-ui/icons/Delete'
 
 import { destroyChronicle } from '../../ducks/actions.js'
 import { getSpecificChronicle } from '../../selectors'

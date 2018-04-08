@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import IconButton from 'material-ui/IconButton'
 import Menu from 'material-ui/Menu'
-import MoreVert from 'material-ui-icons/MoreVert'
+import MoreVert from '@material-ui/icons/MoreVert'
 
 import CardMenuDelete from './CardMenuDelete.jsx'
 import CardMenuEdit from './CardMenuEdit.jsx'

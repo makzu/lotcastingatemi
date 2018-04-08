@@ -11,7 +11,7 @@ import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Hidden from 'material-ui/Hidden'
 import Typography from 'material-ui/Typography'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
+import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import styles from './CharmStyles.js'
 import CharmFields from './CharmFields.jsx'

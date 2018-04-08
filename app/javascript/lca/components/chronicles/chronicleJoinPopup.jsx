@@ -11,7 +11,7 @@ import Button from 'material-ui/Button'
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
-import GroupAdd from 'material-ui-icons/GroupAdd'
+import GroupAdd from '@material-ui/icons/GroupAdd'
 
 import { joinChronicle } from '../../ducks/actions.js'
 

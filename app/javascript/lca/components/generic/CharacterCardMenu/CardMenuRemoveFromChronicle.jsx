@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
-import RemoveCircle from 'material-ui-icons/RemoveCircle'
+import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import { removeThingFromChronicle } from '../../../ducks/actions.js'
 import { canIEdit } from '../../../selectors/'

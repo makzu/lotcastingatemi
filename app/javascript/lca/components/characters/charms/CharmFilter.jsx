@@ -6,7 +6,7 @@ import Button from 'material-ui/Button'
 import Hidden from 'material-ui/Hidden'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
-import Filter from 'material-ui-icons/FilterList'
+import Filter from '@material-ui/icons/FilterList'
 import {
   getPoolsAndRatings,
   getAllAbilitiesWithCharmsForCharacter, getAllCharmCategoriesForCharacter,

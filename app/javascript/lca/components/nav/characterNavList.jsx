@@ -6,8 +6,8 @@ import { NavLink } from 'react-router-dom'
 import IconButton from 'material-ui/IconButton'
 import { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
 import Collapse from 'material-ui/transitions/Collapse'
-import ExpandLess from 'material-ui-icons/ExpandLess'
-import ExpandMore from 'material-ui-icons/ExpandMore'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import { getMyPinnedCharacters, getMyPinnedQCs, getMyPinnedBattlegroups } from '../../selectors'
 

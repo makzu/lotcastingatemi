@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
-import ContentAddCircle from 'material-ui-icons/AddCircle'
+import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import QcAttackFields from './qcAttackFields.jsx'
 import { createQcAttack, destroyQcAttack, updateQcAttack } from '../../ducks/actions.js'

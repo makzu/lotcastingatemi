@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
 import IconButton from 'material-ui/IconButton'
-import MenuIcon from 'material-ui-icons/Menu'
+import MenuIcon from '@material-ui/icons/Menu'
 
 import { toggleDrawer } from '../../ducks/actions.js'
 

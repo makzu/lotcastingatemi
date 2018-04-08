@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
-import Launch from 'material-ui-icons/Launch'
+import Launch from '@material-ui/icons/Launch'
 
 import AbilityBlock from './blocks/abilityBlock.jsx'
 import ArmorSummary from './blocks/armorSummary.jsx'

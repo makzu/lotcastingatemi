@@ -7,8 +7,8 @@ import IconButton from 'material-ui/IconButton'
 import { ListSubheader, ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List'
 import Collapse from 'material-ui/transitions/Collapse'
 
-import ExpandLess from 'material-ui-icons/ExpandLess'
-import ExpandMore from 'material-ui-icons/ExpandMore'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'

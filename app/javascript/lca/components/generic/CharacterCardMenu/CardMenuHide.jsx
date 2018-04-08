@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
-import Visibility from 'material-ui-icons/Visibility'
-import VisibilityOff from 'material-ui-icons/VisibilityOff'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import { updateCharacter, updateQc, updateBattlegroup } from '../../../ducks/actions.js'
 import { canIEdit } from '../../../selectors'

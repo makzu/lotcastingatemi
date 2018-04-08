@@ -8,7 +8,7 @@ import Divider from 'material-ui/Divider'
 import { ListItemIcon, ListItemText } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
 import Typography from 'material-ui/Typography'
-import Delete from 'material-ui-icons/Delete'
+import Delete from '@material-ui/icons/Delete'
 
 import { destroyCharacter, destroyQc, destroyBattlegroup } from '../../../ducks/actions.js'
 import { canIDelete } from '../../../selectors'

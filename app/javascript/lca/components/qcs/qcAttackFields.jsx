@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
 import { MenuItem } from 'material-ui/Menu'
 
-import ContentRemoveCircle from 'material-ui-icons/RemoveCircle'
+import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import RatingField from '../generic/RatingField.jsx'
 import { bgAttackPool, bgDamage } from '../../utils/calculated'

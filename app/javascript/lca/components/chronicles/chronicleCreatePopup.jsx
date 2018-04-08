@@ -11,7 +11,7 @@ import Button from 'material-ui/Button'
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
-import ContentAddCircle from 'material-ui-icons/AddCircle'
+import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import { createChronicle } from '../../ducks/actions.js'
 

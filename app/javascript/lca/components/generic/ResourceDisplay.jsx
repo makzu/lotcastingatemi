@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 
@@ -26,7 +26,15 @@ const styles = theme => ({
   },
 })
 
-const ResourceDisplay = ({ current, total, committed, label, className, classes }) =>
+type Props = {
+  current: number,
+  total: number,
+  committed?: number,
+  label: string,
+  className?: string,
+  classes: Object,
+}
+const ResourceDisplay = ({ current, total, committed, label, className, classes }: Props) =>
   <div className={ className }>
     <div className={ classes.label }>
       { label }
@@ -45,13 +53,5 @@ const ResourceDisplay = ({ current, total, committed, label, className, classes 
       }
     </div>
   </div>
-ResourceDisplay.propTypes = {
-  current: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-  committed: PropTypes.number,
-  label: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  classes: PropTypes.object,
-}
 
 export default withStyles(styles)(ResourceDisplay)

@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -9,7 +9,9 @@ import ModeEdit from '@material-ui/icons/ModeEdit'
 
 import { canIEdit } from '../../../selectors'
 
-function CardMenuHide({ id, characterType, canIEdit }) {
+type Props = { id: number, characterType: string, canIEdit: boolean, }
+
+function CardMenuHide({ id, characterType, canIEdit }: Props) {
   if (!canIEdit)
     return <div />
 
@@ -19,11 +21,6 @@ function CardMenuHide({ id, characterType, canIEdit }) {
     <ListItemIcon><ModeEdit /></ListItemIcon>
     <ListItemText inset primary="Edit" />
   </MenuItem>
-}
-CardMenuHide.propTypes = {
-  id: PropTypes.number.isRequired,
-  characterType: PropTypes.string.isRequired,
-  canIEdit: PropTypes.bool,
 }
 function mapStateToProps(state, ownProps) {
   return {

@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import IconButton from 'material-ui/IconButton'
 import Menu from 'material-ui/Menu'
@@ -12,20 +12,24 @@ import CardMenuLinks from './CardMenuLinks.jsx'
 import CardMenuPin from './CardMenuPin.jsx'
 import CardMenuRemoveFromChronicle from './CardMenuRemoveFromChronicle.jsx'
 
-class CharacterCardMenu extends Component {
-  constructor(props) {
+export type Props = {
+  id: number,
+  characterType: string,
+};
+
+class CharacterCardMenu extends Component<{ id: number, characterType: string }, { menuAnchor: ?Object }> {
+  constructor(props: Props) {
     super(props)
     this.state = { menuAnchor: null }
-
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
   }
 
-  handleOpen(e) {
+  props: Props;
+
+  handleOpen = (e: SyntheticEvent<>) => {
     this.setState({ menuAnchor: e.currentTarget })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ menuAnchor: null })
   }
 
@@ -51,10 +55,6 @@ class CharacterCardMenu extends Component {
       </Menu>
     </div>
   }
-}
-CharacterCardMenu.propTypes = {
-  id: PropTypes.number.isRequired,
-  characterType: PropTypes.string.isRequired,
 }
 
 export default CharacterCardMenu

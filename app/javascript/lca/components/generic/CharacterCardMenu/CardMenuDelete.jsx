@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
@@ -13,20 +13,29 @@ import Delete from '@material-ui/icons/Delete'
 import { destroyCharacter, destroyQc, destroyBattlegroup } from '../../../ducks/actions.js'
 import { canIDelete } from '../../../selectors'
 
-class CardMenuDelete extends Component {
-  constructor(props) {
+export type Props = {
+  id: number,
+  name: string,
+  canDelete: boolean,
+  characterType: string,
+  destroyCharacter: Function,
+  destroyQc: Function,
+  destroyBattlegroup: Function,
+}
+
+class CardMenuDelete extends Component<Props, { open: boolean }> {
+  constructor(props: Props) {
     super(props)
     this.state = { open: false }
-
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
   }
 
-  handleOpen() {
+  props: Props
+
+  handleOpen = () => {
     this.setState({ open: true })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false })
   }
 
@@ -75,15 +84,6 @@ class CardMenuDelete extends Component {
       </Dialog>
     </Fragment>
   }
-}
-CardMenuDelete.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  canDelete: PropTypes.bool,
-  characterType: PropTypes.string.isRequired,
-  destroyCharacter: PropTypes.func,
-  destroyQc: PropTypes.func,
-  destroyBattlegroup: PropTypes.func,
 }
 function mapStateToProps(state, ownProps) {
   return {

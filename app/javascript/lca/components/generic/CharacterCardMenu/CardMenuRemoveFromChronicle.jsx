@@ -1,5 +1,5 @@
+// @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText } from 'material-ui/List'
@@ -9,7 +9,15 @@ import RemoveCircle from '@material-ui/icons/RemoveCircle'
 import { removeThingFromChronicle } from '../../../ducks/actions.js'
 import { canIEdit } from '../../../selectors/'
 
-function CardMenuHide({ id, chronId, characterType, canIEdit, removeThing }) {
+export type Props = {
+  chronId: number,
+  id: number,
+  characterType: string,
+  canIEdit: boolean,
+  removeThing: Function,
+}
+
+function CardMenuHide({ id, chronId, characterType, canIEdit, removeThing }: Props) {
   if (!canIEdit || chronId == undefined)
     return <div />
 
@@ -19,13 +27,6 @@ function CardMenuHide({ id, chronId, characterType, canIEdit, removeThing }) {
       <ListItemText inset primary="Remove from Chronicle" />
     </MenuItem>
   </Fragment>
-}
-CardMenuHide.propTypes = {
-  chronId: PropTypes.number,
-  id: PropTypes.number.isRequired,
-  characterType: PropTypes.string.isRequired,
-  canIEdit: PropTypes.bool,
-  removeThing: PropTypes.func,
 }
 const  mapStateToProps = (state, ownProps) => ({
   canIEdit: canIEdit(state, ownProps.id, ownProps.characterType),

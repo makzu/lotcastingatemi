@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
@@ -30,9 +30,7 @@ const styles = theme => ({ // eslint-disable-line no-unused-vars
   },
 })
 
-function LoadingSpinner(props) {
-  const { classes } = props
-
+function LoadingSpinner({ classes }: { classes: Object } ) {
   return <div className={ classes.wrap }>
     <Paper square={ false } elevation={ 6 }
       classes={{ root: classes.paper }}
@@ -40,9 +38,6 @@ function LoadingSpinner(props) {
       <SvgIcon viewBox="0 0 51 51" className={ classes.icon }><DawnSpinner /></SvgIcon>
     </Paper>
   </div>
-}
-LoadingSpinner.propTypes = {
-  classes: PropTypes.object,
 }
 
 export default withStyles(styles)(LoadingSpinner)

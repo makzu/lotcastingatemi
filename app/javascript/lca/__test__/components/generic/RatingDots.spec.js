@@ -1,10 +1,10 @@
 import React from 'react'
-import WelcomePage from '../components/pages/welcomePage.jsx'
+import RatingDots from '../../../components/generic/ratingDots.jsx'
 import renderer from 'react-test-renderer'
 
-test('WelcomePage renders at all', () => {
+test('RatingDots renders at all', () => {
   const component = renderer.create(
-    <WelcomePage />
+    <RatingDots rating={3} />
   )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()

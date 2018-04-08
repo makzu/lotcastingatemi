@@ -1,5 +1,5 @@
 import React from 'react'
-import ResourcesPage from '../components/pages/resourcesPage.jsx'
+import ResourcesPage from '../../../components/pages/resourcesPage.jsx'
 import renderer from 'react-test-renderer'
 
 test('ResourcesPage renders at all', () => {

@@ -1,4 +1,4 @@
-import reducer, { defaultState } from './'
+import reducer, { defaultState } from '../../../ducks/entities'
 
 describe('entity reducer', () => {
   it('should return the initial state', () => {

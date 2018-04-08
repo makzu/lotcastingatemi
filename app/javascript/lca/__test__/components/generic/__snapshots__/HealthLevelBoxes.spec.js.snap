@@ -8,11 +8,7 @@ exports[`HealthLevelBoxes renders at all 1`] = `
     <div
       className="HealthLevelBoxes-healthLevelBox-2"
     >
-      <span
-        className="HealthLevelBoxes-aggDamage-6"
-      >
-        ✱
-      </span>
+       
     </div>
     <div
       className="HealthLevelBoxes-healthLevelLabel-3"
@@ -26,11 +22,7 @@ exports[`HealthLevelBoxes renders at all 1`] = `
     <div
       className="HealthLevelBoxes-healthLevelBox-2"
     >
-      <span
-        className="HealthLevelBoxes-lethalDamage-5"
-      >
-        ❌
-      </span>
+       
     </div>
     <div
       className="HealthLevelBoxes-healthLevelLabel-3"
@@ -44,11 +36,7 @@ exports[`HealthLevelBoxes renders at all 1`] = `
     <div
       className="HealthLevelBoxes-healthLevelBox-2"
     >
-      <span
-        className="HealthLevelBoxes-bashingDamage-4"
-      >
-        ╲
-      </span>
+       
     </div>
     <div
       className="HealthLevelBoxes-healthLevelLabel-3"

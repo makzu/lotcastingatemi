@@ -7,6 +7,7 @@ import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
+import ChronicleDeletePopup from './ChronicleDeletePopup.jsx'
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
@@ -107,6 +108,9 @@ class ChroniclePlayerPage extends Component {
                 onChange={ onChange } onBlur={ onBlur }
               />
             </div>
+            <div style={{ marginTop: '1em' }}>
+              <ChronicleDeletePopup chronicleId={ chronicle.id }/>
+            </div>
           </BlockPaper>
         </Grid>
       }
@@ -150,7 +154,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  update: (id, trait, value) => dispatch(updateChronicle(id, trait, value))
+  update: (id, trait, value) => dispatch(updateChronicle(id, trait, value)),
 })
 
 export default ProtectedComponent(

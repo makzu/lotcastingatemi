@@ -7,6 +7,7 @@ export {
   updateChronicle, createChronicle,
   joinChronicle, regenChronicleInviteCode, removePlayerFromChronicle,
   addThingToChronicle, removeThingFromChronicle,
+  destroyChronicle,
   updateQc, updateQcMulti, createQc, destroyQc,
   updateQcAttack, createQcAttack, destroyQcAttack,
   updateQcMerit, createQcMerit, destroyQcMerit,

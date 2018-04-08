@@ -24,6 +24,24 @@ RSpec.describe 'Chronciles', type: :request do
         expect(chronicle.name).to eq 'Mystic Quest'
       end
     end
+
+    describe 'deleting a chronicle' do
+      it 'works' do
+        character = create(:character, chronicle_id: chronicle.id)
+        qc = create(:qc, chronicle_id: chronicle.id)
+        battlegroup = create(:battlegroup, chronicle_id: chronicle.id)
+        delete "/api/v1/chronicles/#{chronicle.id}",
+               headers: authenticated_header(chronicle.st)
+
+        expect(response.status).to eq 200
+        character.reload
+        expect(character.chronicle_id).to eq nil
+        qc.reload
+        expect(qc.chronicle_id).to eq nil
+        battlegroup.reload
+        expect(battlegroup.chronicle_id).to eq nil
+      end
+    end
   end
 
   context 'while logged in as a player in the Chronicle' do

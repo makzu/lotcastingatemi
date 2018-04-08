@@ -39,7 +39,7 @@ export function fetchCharacter(id) {
       {
         type: CHA_FETCH_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.character))
+          return getJSON(res).then((json) => normalize(json, schemas.characters))
         }
       },
       CHA_FETCH_FAILURE

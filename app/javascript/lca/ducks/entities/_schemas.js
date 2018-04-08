@@ -1,50 +1,50 @@
 import { schema } from 'normalizr'
 
-export const weapon = new schema.Entity('weapons')
-export const merit = new schema.Entity('merits')
-export const charm = new schema.Entity('charms')
-export const spell = new schema.Entity('spells')
-export const character = new schema.Entity('characters', {
-  weapons: [ weapon ],
-  merits: [ merit ],
-  spells: [ spell ],
-  charms: [ charm ],
-  martial_arts_charms: [ charm ],
-  evocations: [ charm ],
-  spirit_charms: [ charm ],
+export const weapons = new schema.Entity('weapons')
+export const merits = new schema.Entity('merits')
+export const charms = new schema.Entity('charms')
+export const spells = new schema.Entity('spells')
+export const characters = new schema.Entity('characters', {
+  weapons: [ weapons ],
+  merits: [ merits ],
+  spells: [ spells ],
+  charms: [ charms ],
+  martial_arts_charms: [ charms ],
+  evocations: [ charms ],
+  spirit_charms: [ charms ],
 })
 
-export const qc_merit = new schema.Entity('qcMerits')
-export const qc_attack = new schema.Entity('qcAttacks')
-export const qc_charm = new schema.Entity('qcCharms')
-export const qc = new schema.Entity('qcs', {
-  qc_merits: [ qc_merit ],
-  qc_attacks: [ qc_attack ],
-  qc_charms: [ qc_charm ],
+export const qc_merits = new schema.Entity('qcMerits')
+export const qc_attacks = new schema.Entity('qcAttacks')
+export const qc_charms = new schema.Entity('qcCharms')
+export const qcs = new schema.Entity('qcs', {
+  qc_merits: [ qc_merits ],
+  qc_attacks: [ qc_attacks ],
+  qc_charms: [ qc_charms ],
 })
 
-export const battlegroup = new schema.Entity('battlegroups', {
-  qc_attacks: [ qc_attack ],
+export const battlegroups = new schema.Entity('battlegroups', {
+  qc_attacks: [ qc_attacks ],
 })
 
 const chronicleId = new schema.Entity('chronicles')
 
-export const player = new schema.Entity('players', {
+export const players = new schema.Entity('players', {
   chronicles: [ chronicleId ],
   own_chronicles: [ chronicleId ],
-  characters: [ character ],
-  qcs: [ qc ],
-  battlegroups: [ battlegroup ],
+  characters: [ characters ],
+  qcs: [ qcs ],
+  battlegroups: [ battlegroups ],
 })
 
-export const combat_actor = new schema.Entity('combatActors')
-export const chronicle = new schema.Entity('chronicles', {
-  st: player,
-  players: [ player ],
-  characters: [ character ],
-  qcs: [ qc ],
-  battlegroups: [ battlegroup ],
-  combatActors: [ combat_actor ],
+export const combat_actors = new schema.Entity('combatActors')
+export const chronicles = new schema.Entity('chronicles', {
+  st: players,
+  players: [ players ],
+  characters: [ characters ],
+  qcs: [ qcs ],
+  battlegroups: [ battlegroups ],
+  combatActors: [ combat_actors ],
 })
 
-export const chronicleList = new schema.Array(chronicle)
+export const chronicleList = new schema.Array(chronicles)

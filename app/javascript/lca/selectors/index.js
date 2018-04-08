@@ -60,10 +60,10 @@ const getChronicles = (state) => state.entities.chronicles
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
-    currentPlayer.own_chronicles.map((c) => chronicles[c])
+    currentPlayer.own_chronicles.map((c) => chronicles[c]).filter((c) => c !== undefined && c.name !== undefined)
 )
 export const getMyChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
-    currentPlayer.chronicles.map((c) => chronicles[c])
+    currentPlayer.chronicles.map((c) => chronicles[c]).filter((c) => c !== undefined && c.name !== undefined)
 )

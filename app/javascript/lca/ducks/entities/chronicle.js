@@ -2,6 +2,7 @@ import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 
+import { mergeStateWithNormalizedEntities } from '.'
 import * as schemas from './_schemas.js'
 import { CHA_FETCH_SUCCESS } from './character.js'
 import { callApi } from '../../utils/api.js'
@@ -15,6 +16,9 @@ export const CHN_CREATE_FAILURE = 'lca/chronicle/CREATE_FAILURE'
 export const CHN_UPDATE =         'lca/chronicle/UPDATE'
 export const CHN_UPDATE_SUCCESS = 'lca/chronicle/UPDATE_SUCCESS'
 export const CHN_UPDATE_FAILURE = 'lca/chronicle/UPDATE_FAILURE'
+export const CHN_DESTROY =         'lca/chronicle/DESTROY'
+export const CHN_DESTROY_SUCCESS = 'lca/chronicle/DESTROY_SUCCESS'
+export const CHN_DESTROY_FAILURE = 'lca/chronicle/DESTROY_FAILURE'
 export const CHN_JOIN =           'lca/chronicle/JOIN'
 export const CHN_JOIN_SUCCESS =   'lca/chronicle/JOIN_SUCCESS'
 export const CHN_JOIN_FAILURE =   'lca/chronicle/JOIN_FAILURE'
@@ -54,21 +58,7 @@ export default function reducer(state, action) {
   case INVITE_CODE_UPDATE_SUCCESS:
   case CHN_ADD_THING_SUCCESS:
   case CHA_FETCH_SUCCESS:
-    return {
-      ...state,
-      players:      merge({ ...state.players      }, _entities.players      ),
-      characters:   merge({ ...state.characters   }, _entities.characters   ),
-      merits:       merge({ ...state.merits       }, _entities.merits       ),
-      weapons:      merge({ ...state.weapons      }, _entities.weapons      ),
-      charms:       merge({ ...state.charms       }, _entities.charms       ),
-      spells:       merge({ ...state.spells       }, _entities.spells       ),
-      qcs:          merge({ ...state.qcs          }, _entities.qcs          ),
-      qc_merits:    merge({ ...state.qc_merits    }, _entities.qcMerits     ),
-      qc_charms:    merge({ ...state.qc_charms    }, _entities.qcCharms     ),
-      qc_attacks:   merge({ ...state.qc_attacks   }, _entities.qcAttacks    ),
-      battlegroups: merge({ ...state.battlegroups }, _entities.battlegroups ),
-      chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   ),
-    }
+    return mergeStateWithNormalizedEntities(state, _entities)
   case CHN_REMOVE_PLAYER_SUCCESS:
     return {
       ...state,
@@ -108,7 +98,7 @@ export function createChronicle(chron) {
       {
         type: CHN_CREATE_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+          return getJSON(res).then((json) => normalize(json, schemas.chronicles))
         }
       },
       CHN_CREATE_FAILURE
@@ -142,7 +132,7 @@ export function fetchChronicle(id) {
       {
         type: CHN_FETCH_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+          return getJSON(res).then((json) => normalize(json, schemas.chronicles))
         }
       },
       CHN_FETCH_FAILURE
@@ -173,7 +163,7 @@ export function joinChronicle(code) {
       {
         type: CHN_JOIN_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+          return getJSON(res).then((json) => normalize(json, schemas.chronicles))
         }
       },
       CHN_JOIN_FAILURE
@@ -190,7 +180,7 @@ export function regenChronicleInviteCode(id) {
       {
         type: INVITE_CODE_UPDATE_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+          return getJSON(res).then((json) => normalize(json, schemas.chronicles))
         }
       },
       INVITE_CODE_UPDATE_FAILURE
@@ -208,7 +198,7 @@ export function removePlayerFromChronicle(id, playerId) {
       {
         type: CHN_REMOVE_PLAYER_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+          return getJSON(res).then((json) => normalize(json, schemas.chronicles))
         }
       },
       CHN_REMOVE_PLAYER_FAILURE
@@ -225,7 +215,7 @@ export function addThingToChronicle(id, thingId, thingType) {
       {
         type: CHN_ADD_THING_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+          return getJSON(res).then((json) => normalize(json, schemas.chronicles))
         }
       },
       CHN_ADD_THING_FAILURE
@@ -243,10 +233,22 @@ export function removeThingFromChronicle(chronId, id, type) {
         type: CHN_REMOVE_THING_SUCCESS,
         meta: { id: chronId, thingId: id, type: type },
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.chronicle))
+          return getJSON(res).then((json) => normalize(json, schemas.chronicles))
         }
       },
       CHN_REMOVE_THING_FAILURE
+    ]
+  })
+}
+
+export function destroyChronicle(id) {
+  return callApi({
+    endpoint: `/api/v1/chronicles/${id}`,
+    method: 'DELETE',
+    types: [
+      CHN_DESTROY,
+      { type: CHN_DESTROY_SUCCESS, meta: { id: id }},
+      CHN_DESTROY_FAILURE
     ]
   })
 }

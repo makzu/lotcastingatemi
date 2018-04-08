@@ -1,5 +1,6 @@
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
-import { omit } from 'lodash'
+import { omit, merge } from 'lodash'
+import { normalize } from 'normalizr'
 
 export * from './player.js'
 export * from './chronicle.js'
@@ -17,6 +18,7 @@ export * from './qc_charm.js'
 export * from './battlegroup.js'
 export * from './combat_actor.js'
 
+import * as schemas from './_schemas.js'
 import PlayerReducer from './player.js'
 import ChronicleReducer from './chronicle.js'
 import { LOGOUT } from '../session.js'
@@ -96,32 +98,18 @@ export default function EntityReducer(state = defaultState, action) {
 }
 
 function handleCreateAction(state, payload) {
+  const { parent_type, parent_id, assoc } = payload
   let entity = JSON.parse(payload.entity)
+  let ppp = normalize(entity, schemas[assoc])
 
-  const chrons = entity.chronicle_id ? {
-    chronicles: { ...state.chronicles,
-      [entity.chronicle_id]: { ...state.chronicles[entity.chronicle_id],
-        [payload.type]: [...state.chronicles[entity.chronicle_id][payload.type], entity.id]
-      }
-    },
-  } : {}
-  const parent = payload.parent_type === 'chronicle' ?
-    {} : {
-      [payload.parent_type]: { ...state[payload.parent_type],
-        [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
-          [payload.assoc]: [ ...state[payload.parent_type][payload.parent_id][payload.assoc], entity.id]
-        },
-      }
+  const parent = {
+    [parent_type]: { ...state[parent_type],
+      [parent_id]: { ...state[parent_type][parent_id],
+        [assoc]: [ ...state[parent_type][parent_id][assoc], entity.id]
+      },
     }
-
-  return { ...state,
-    [payload.type]: {
-      ...state[payload.type],
-      [payload.id]: entity,
-    },
-    ...parent,
-    ...chrons,
   }
+  return mergeStateWithNormalizedEntities({ ...state, ...parent }, ppp.entities)
 }
 
 function handleDestroyAction(state, payload) {
@@ -134,11 +122,13 @@ function handleDestroyAction(state, payload) {
     },
   } : {}
 
-  const parent = state[payload.parent_type][payload.parent_id] ? {
-    [payload.parent_type]: {
-      ...state[payload.parent_type],
-      [payload.parent_id]: { ...state[payload.parent_type][payload.parent_id],
-        [payload.assoc]: state[payload.parent_type][payload.parent_id][payload.assoc].filter((e) => e !== payload.id)
+  const { parent_type, parent_id, assoc } = payload
+
+  const parent = (state[parent_type] && state[parent_type][parent_id]) ? {
+    [parent_type]: {
+      ...state[parent_type],
+      [parent_id]: { ...state[parent_type][parent_id],
+        [assoc]: state[parent_type][parent_id][assoc].filter((e) => e !== payload.id)
       },
     },
   } : {}
@@ -147,5 +137,23 @@ function handleDestroyAction(state, payload) {
     [payload.type]: omit(state[payload.type], [payload.id]),
     ...parent,
     ...chrons,
+  }
+}
+
+export function mergeStateWithNormalizedEntities(state, entities) {
+  return {
+    ...state,
+    players:      merge({ ...state.players      }, entities.players      ),
+    characters:   merge({ ...state.characters   }, entities.characters   ),
+    merits:       merge({ ...state.merits       }, entities.merits       ),
+    weapons:      merge({ ...state.weapons      }, entities.weapons      ),
+    charms:       merge({ ...state.charms       }, entities.charms       ),
+    spells:       merge({ ...state.spells       }, entities.spells       ),
+    qcs:          merge({ ...state.qcs          }, entities.qcs          ),
+    qc_merits:    merge({ ...state.qc_merits    }, entities.qcMerits     ),
+    qc_charms:    merge({ ...state.qc_charms    }, entities.qcCharms     ),
+    qc_attacks:   merge({ ...state.qc_attacks   }, entities.qcAttacks    ),
+    battlegroups: merge({ ...state.battlegroups }, entities.battlegroups ),
+    chronicles:   merge({ ...state.chronicles   }, entities.chronicles   ),
   }
 }

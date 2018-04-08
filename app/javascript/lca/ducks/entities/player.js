@@ -2,6 +2,7 @@ import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 
+import { mergeStateWithNormalizedEntities } from '.'
 import * as schemas from './_schemas.js'
 import { callApi } from '../../utils/api.js'
 
@@ -19,21 +20,7 @@ export default function reducer(state, action) {
 
   switch(action.type) {
   case FETCH_SUCCESS:
-    return {
-      ...state,
-      players:      merge({ ...state.players      }, _entities.players      ),
-      characters:   merge({ ...state.characters   }, _entities.characters   ),
-      merits:       merge({ ...state.merits       }, _entities.merits       ),
-      weapons:      merge({ ...state.weapons      }, _entities.weapons      ),
-      charms:       merge({ ...state.charms       }, _entities.charms       ),
-      spells:       merge({ ...state.spells       }, _entities.spells       ),
-      qcs:          merge({ ...state.qcs          }, _entities.qcs          ),
-      qc_merits:    merge({ ...state.qc_merits    }, _entities.qcMerits     ),
-      qc_charms:    merge({ ...state.qc_charms    }, _entities.qcCharms     ),
-      qc_attacks:   merge({ ...state.qc_attacks   }, _entities.qcAttacks    ),
-      battlegroups: merge({ ...state.battlegroups }, _entities.battlegroups ),
-      chronicles:   merge({ ...state.chronicles   }, _entities.chronicles   ),
-    }
+    return mergeStateWithNormalizedEntities(state, _entities)
 
   case PLY_UPDATE_SUCCESS:
     return { ...state, players: {
@@ -55,7 +42,7 @@ export function fetchCurrentPlayer() {
       {
         type: FETCH_SUCCESS,
         payload: (action, state, res) => {
-          return getJSON(res).then((json) => normalize(json, schemas.player))
+          return getJSON(res).then((json) => normalize(json, schemas.players))
         }
       },
       FETCH_FAILURE

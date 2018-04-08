@@ -7,7 +7,7 @@ module Willpower
 
   included do
     validates :willpower_temporary, numericality: {
-      less_than_or_equal_to: 10, greater_than_or_equal_to: 0
+      greater_than_or_equal_to: 0
     }
 
     validates :willpower_permanent, numericality: {

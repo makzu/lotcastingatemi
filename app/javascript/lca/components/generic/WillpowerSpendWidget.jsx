@@ -32,7 +32,7 @@ class WillpowerSpendWidget extends Component {
   }
 
   min() {
-    return this.props.character.willpower_temporary - 10
+    return -Infinity
   }
 
   handleOpen() {

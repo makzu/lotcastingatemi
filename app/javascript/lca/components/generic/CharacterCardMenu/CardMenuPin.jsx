@@ -48,7 +48,7 @@ const mapStateToProps = (state, ownProps) => ({
   isPinned: state.entities[ownProps.characterType + 's'][ownProps.id].pinned,
   canEdit: canIDelete(state, ownProps.id, ownProps.characterType),
 })
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   updateCharacter:   (id, trait, value) => dispatch(updateCharacter(id, trait, value)),
   updateQc:          (id, trait, value) => dispatch(updateQc(id, trait, value)),
   updateBattlegroup: (id, trait, value) => dispatch(updateBattlegroup(id, trait, value)),

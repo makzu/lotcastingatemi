@@ -1,6 +1,6 @@
 import { gen } from 'testcheck'
 import { ABILITY_NAMES } from '../../utils/constants.js'
-export const SEED = 684 /* Number of pages in the 3e core book */
+export const SEED = 5 * 684 /* Number of pages in the 3e core book */
 
 export const genHealthLevels = {
   health_level_0s: gen.posInt,
@@ -42,6 +42,7 @@ export const genAbilities = {
 }
 
 export const genCharacter = {
+  name: gen.string,
   ...genHealthLevels,
   type: 'Character',
   attr_strength: gen.sPosInt,
@@ -63,6 +64,8 @@ export const genCharacter = {
   armor_weight: gen.oneOf(['unarmored', 'light', 'medium', 'heavy']),
   armor_is_artifact: gen.boolean,
   armor_tags: gen.array(gen.string),
+  merits: gen.uniqueArray(gen.intWithin(1, 15), { minSize: 2 }),
+  spells: gen.uniqueArray(gen.intWithin(1, 5), { minSize: 1, maxSize: 3 }),
 }
 
 export const mockCharacter = {

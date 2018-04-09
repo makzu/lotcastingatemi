@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 
 import Dialog, { DialogTitle, DialogContent, DialogContentText } from 'material-ui/Dialog'
 import { withStyles } from 'material-ui/styles'
@@ -28,27 +28,39 @@ const styles = theme => ({
   excellency: { ...theme.typography.caption,
   },
 })
-class PoolDisplay extends Component {
-  constructor(props) {
+
+export type Props = {
+  label: string,
+  pool: Object,
+  noSummary?: boolean,
+  qc?: boolean,
+  battlegroup?: boolean,
+  classes: Object,
+}
+
+class PoolDisplay extends Component<Props, { open: boolean }> {
+  constructor(props: Props) {
     super (props)
     this.state = { open: false }
     this.setOpen = this.setOpen.bind(this)
     this.setClosed = this.setClosed.bind(this)
   }
 
-  setOpen() {
+  props: Props
+
+  setOpen = () => {
     if (this.props.noSummary || this.props.qc || this.props.battlegroup || this.props.pool.noSummary)
       return
 
     this.setState({ open: true })
   }
 
-  setClosed() {
+  setClosed = () => {
     this.setState({ open: false })
   }
 
   render() {
-    const { label, pool, staticRating, classes } = this.props
+    const { label, pool, classes } = this.props
     const { open, } = this.state
     const { setOpen, setClosed } = this
     const mb = pool.meritBonus || []
@@ -101,7 +113,7 @@ class PoolDisplay extends Component {
           </div>
         }
         { merits }
-        { sp.length > 0  && (staticRating ? pool.specialtyMatters : true) &&
+        { sp.length > 0  && (pool.rating ? pool.specialtyMatters : true) &&
           <div className={ classes.specialty }>
             +1 specialty
           </div>
@@ -157,7 +169,7 @@ class PoolDisplay extends Component {
             { fullMerits }
           </DialogContentText>
           { sp.length > 0 &&
-            <DialogContentText>
+            <DialogContentText component="div">
               { pool.specialtyMatters && <Fragment>
                 Specialties:&nbsp;
                 <span style={{ textTransform: 'capitalize' }}>
@@ -180,16 +192,6 @@ class PoolDisplay extends Component {
       </Dialog>
     </Fragment>
   }
-}
-
-PoolDisplay.propTypes = {
-  label: PropTypes.string,
-  pool: PropTypes.object.isRequired,
-  noSummary: PropTypes.bool,
-  qc: PropTypes.bool,
-  battlegroup: PropTypes.bool,
-  staticRating: PropTypes.bool,
-  classes: PropTypes.object,
 }
 
 export default withStyles(styles)(PoolDisplay)

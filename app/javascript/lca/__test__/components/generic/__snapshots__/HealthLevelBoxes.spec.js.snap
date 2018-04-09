@@ -1,7 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HealthLevelBoxes renders at all 1`] = `
+exports[`HealthLevelBoxes renders correctly 1`] = `<div />`;
+
+exports[`HealthLevelBoxes renders correctly 2`] = `
 <div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      0
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-bashingDamage-4"
+      >
+        ╲
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -2
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+       
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -4
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+       
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      in
+    </div>
+  </div>
+</div>
+`;
+
+exports[`HealthLevelBoxes renders correctly 3`] = `
+<div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      0
+    </div>
+  </div>
   <div
     className="HealthLevelBoxes-boxWrap-1"
   >
@@ -41,7 +130,7 @@ exports[`HealthLevelBoxes renders at all 1`] = `
     <div
       className="HealthLevelBoxes-healthLevelLabel-3"
     >
-      -1
+      -2
     </div>
   </div>
   <div
@@ -55,7 +144,7 @@ exports[`HealthLevelBoxes renders at all 1`] = `
     <div
       className="HealthLevelBoxes-healthLevelLabel-3"
     >
-      -2
+      -4
     </div>
   </div>
   <div
@@ -65,6 +154,264 @@ exports[`HealthLevelBoxes renders at all 1`] = `
       className="HealthLevelBoxes-healthLevelBox-2"
     >
        
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      in
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+       
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      in
+    </div>
+  </div>
+</div>
+`;
+
+exports[`HealthLevelBoxes renders correctly 4`] = `
+<div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -1
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -2
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-lethalDamage-5"
+      >
+        ❌
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -2
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-bashingDamage-4"
+      >
+        ╲
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -2
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-bashingDamage-4"
+      >
+        ╲
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -4
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-bashingDamage-4"
+      >
+        ╲
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -4
+    </div>
+  </div>
+</div>
+`;
+
+exports[`HealthLevelBoxes renders correctly 5`] = `
+<div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      0
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -1
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-aggDamage-6"
+      >
+        ✱
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -1
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-lethalDamage-5"
+      >
+        ❌
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -1
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-lethalDamage-5"
+      >
+        ❌
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -1
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-lethalDamage-5"
+      >
+        ❌
+      </span>
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -2
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+      <span
+        className="HealthLevelBoxes-bashingDamage-4"
+      >
+        ╲
+      </span>
     </div>
     <div
       className="HealthLevelBoxes-healthLevelLabel-3"
@@ -84,6 +431,62 @@ exports[`HealthLevelBoxes renders at all 1`] = `
       className="HealthLevelBoxes-healthLevelLabel-3"
     >
       -4
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+       
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      -4
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+       
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      in
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+       
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      in
+    </div>
+  </div>
+  <div
+    className="HealthLevelBoxes-boxWrap-1"
+  >
+    <div
+      className="HealthLevelBoxes-healthLevelBox-2"
+    >
+       
+    </div>
+    <div
+      className="HealthLevelBoxes-healthLevelLabel-3"
+    >
+      in
     </div>
   </div>
   <div

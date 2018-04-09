@@ -47,9 +47,11 @@ describe('Calculated values', () => {
 
     woundedCharacter.damage_lethal = 2
     expect(calc.woundPenalty(woundedCharacter, [])).toEqual(2)
+    expect(calc.woundPenalty(woundedCharacter, ['pain tolerance4'])).toEqual(1)
 
     woundedCharacter.damage_aggravated = 2
     expect(calc.woundPenalty(woundedCharacter, [])).toEqual(4)
+    expect(calc.woundPenalty(woundedCharacter, ['pain tolerance4'])).toEqual(3)
   })
 
   it('should give correct values for abilities', () => {

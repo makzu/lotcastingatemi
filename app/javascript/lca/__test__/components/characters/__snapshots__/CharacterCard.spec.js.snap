@@ -1,0 +1,2351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CharacterCard renders all pools correctly 1`] = `
+<WithStyles(Paper)
+  className={undefined}
+>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <WithStyles(Typography)
+        className={undefined}
+        component={[Function]}
+        to="/characters/undefined"
+        variant="title"
+      >
+        
+        <pure(Launch)
+          className={undefined}
+        />
+      </WithStyles(Typography)>
+      <Connect(PlayerNameSubtitle)
+        playerId={undefined}
+      />
+      <WithStyles(Typography)
+        paragraph={true}
+      >
+        Essence 
+         
+        Mortal
+      </WithStyles(Typography)>
+    </div>
+  </div>
+  <WithStyles(Typography)
+    className={undefined}
+    component="div"
+  >
+    <Connect(WillpowerSpendWidget)
+      character={
+        Object {
+          "abil_archery": 0,
+          "abil_athletics": 0,
+          "abil_awareness": 0,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [],
+          "abil_dodge": 0,
+          "abil_integrity": 0,
+          "abil_investigation": 0,
+          "abil_larceny": 0,
+          "abil_linguistics": 0,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 0,
+          "abil_melee": 0,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 0,
+          "abil_resistance": 0,
+          "abil_ride": 0,
+          "abil_sail": 0,
+          "abil_socialize": 0,
+          "abil_stealth": 0,
+          "abil_survival": 0,
+          "abil_thrown": 0,
+          "abil_war": 0,
+          "armor_is_artifact": true,
+          "armor_name": "",
+          "armor_tags": Array [],
+          "armor_weight": "unarmored",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 1,
+          "attr_intelligence": 1,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 1,
+          "attr_strength": 1,
+          "attr_wits": 1,
+          "damage_aggravated": 0,
+          "damage_bashing": 0,
+          "damage_lethal": 0,
+          "health_level_0s": 0,
+          "health_level_1s": 0,
+          "health_level_2s": 0,
+          "health_level_4s": 0,
+          "health_level_incap": 0,
+          "merits": Array [
+            10,
+            4,
+          ],
+          "name": "",
+          "specialties": Array [],
+          "spells": Array [
+            4,
+            3,
+            2,
+          ],
+          "type": "Character",
+        }
+      }
+    >
+      <WithStyles(ResourceDisplay)
+        className={undefined}
+        current={undefined}
+        label="Willpower"
+        total={undefined}
+      />
+    </Connect(WillpowerSpendWidget)>
+  </WithStyles(Typography)>
+  <Connect(DamageWidget)
+    character={
+      Object {
+        "abil_archery": 0,
+        "abil_athletics": 0,
+        "abil_awareness": 0,
+        "abil_brawl": 0,
+        "abil_bureaucracy": 0,
+        "abil_craft": Array [],
+        "abil_dodge": 0,
+        "abil_integrity": 0,
+        "abil_investigation": 0,
+        "abil_larceny": 0,
+        "abil_linguistics": 0,
+        "abil_lore": 0,
+        "abil_martial_arts": Array [],
+        "abil_medicine": 0,
+        "abil_melee": 0,
+        "abil_occult": 0,
+        "abil_performance": 0,
+        "abil_presence": 0,
+        "abil_resistance": 0,
+        "abil_ride": 0,
+        "abil_sail": 0,
+        "abil_socialize": 0,
+        "abil_stealth": 0,
+        "abil_survival": 0,
+        "abil_thrown": 0,
+        "abil_war": 0,
+        "armor_is_artifact": true,
+        "armor_name": "",
+        "armor_tags": Array [],
+        "armor_weight": "unarmored",
+        "attr_appearance": 1,
+        "attr_charisma": 1,
+        "attr_dexterity": 1,
+        "attr_intelligence": 1,
+        "attr_manipulation": 1,
+        "attr_perception": 1,
+        "attr_stamina": 1,
+        "attr_strength": 1,
+        "attr_wits": 1,
+        "damage_aggravated": 0,
+        "damage_bashing": 0,
+        "damage_lethal": 0,
+        "health_level_0s": 0,
+        "health_level_1s": 0,
+        "health_level_2s": 0,
+        "health_level_4s": 0,
+        "health_level_incap": 0,
+        "merits": Array [
+          10,
+          4,
+        ],
+        "name": "",
+        "specialties": Array [],
+        "spells": Array [
+          4,
+          3,
+          2,
+        ],
+        "type": "Character",
+      }
+    }
+  >
+    <WithStyles(HealthLevelBoxes)
+      character={
+        Object {
+          "abil_archery": 0,
+          "abil_athletics": 0,
+          "abil_awareness": 0,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [],
+          "abil_dodge": 0,
+          "abil_integrity": 0,
+          "abil_investigation": 0,
+          "abil_larceny": 0,
+          "abil_linguistics": 0,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 0,
+          "abil_melee": 0,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 0,
+          "abil_resistance": 0,
+          "abil_ride": 0,
+          "abil_sail": 0,
+          "abil_socialize": 0,
+          "abil_stealth": 0,
+          "abil_survival": 0,
+          "abil_thrown": 0,
+          "abil_war": 0,
+          "armor_is_artifact": true,
+          "armor_name": "",
+          "armor_tags": Array [],
+          "armor_weight": "unarmored",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 1,
+          "attr_intelligence": 1,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 1,
+          "attr_strength": 1,
+          "attr_wits": 1,
+          "damage_aggravated": 0,
+          "damage_bashing": 0,
+          "damage_lethal": 0,
+          "health_level_0s": 0,
+          "health_level_1s": 0,
+          "health_level_2s": 0,
+          "health_level_4s": 0,
+          "health_level_incap": 0,
+          "merits": Array [
+            10,
+            4,
+          ],
+          "name": "",
+          "specialties": Array [],
+          "spells": Array [
+            4,
+            3,
+            2,
+          ],
+          "type": "Character",
+        }
+      }
+    />
+  </Connect(DamageWidget)>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Evasion"
+      pool={
+        Object {
+          "ability": "dodge",
+          "abilityRating": 0,
+          "attribute": "dexterity",
+          "attributeRating": 1,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Evasion",
+          "penalties": Array [],
+          "rating": true,
+          "raw": 1,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Best Parry"
+      pool={
+        Object {
+          "noSummary": true,
+          "total": "None",
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Soak"
+      pool={
+        Object {
+          "armored": 0,
+          "meritBonus": Array [
+            Object {
+              "bonus": NaN,
+              "label": "unusual hide",
+            },
+          ],
+          "name": "Soak",
+          "natural": 1,
+          "soak": true,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Resolve"
+      pool={
+        Object {
+          "ability": "integrity",
+          "abilityRating": 0,
+          "attribute": "wits",
+          "attributeRating": 1,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Resolve",
+          "penalties": Array [],
+          "rating": true,
+          "raw": 1,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 1,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Guile"
+      pool={
+        Object {
+          "ability": "socialize",
+          "abilityRating": 0,
+          "attribute": "manipulation",
+          "attributeRating": 1,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Guile",
+          "penalties": Array [],
+          "rating": true,
+          "raw": 1,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 1,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Appearance"
+      pool={
+        Object {
+          "attribute": "Appearance",
+          "attributeRating": 1,
+          "meritBonus": Array [],
+          "name": "Appearance",
+          "total": 1,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <WithStyles(Typography)
+    paragraph={true}
+    style={
+      Object {
+        "marginTop": "0.5em",
+      }
+    }
+  >
+    <strong>
+      Penalties:
+    </strong>
+     
+  </WithStyles(Typography)>
+</WithStyles(Paper)>
+`;
+
+exports[`CharacterCard renders all pools correctly 2`] = `
+<WithStyles(Paper)
+  className={undefined}
+>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <WithStyles(Typography)
+        className={undefined}
+        component={[Function]}
+        to="/characters/undefined"
+        variant="title"
+      >
+        
+        <pure(Launch)
+          className={undefined}
+        />
+      </WithStyles(Typography)>
+      <Connect(PlayerNameSubtitle)
+        playerId={undefined}
+      />
+      <WithStyles(Typography)
+        paragraph={true}
+      >
+        Essence 
+         
+        Mortal
+      </WithStyles(Typography)>
+    </div>
+  </div>
+  <WithStyles(Typography)
+    className={undefined}
+    component="div"
+  >
+    <Connect(WillpowerSpendWidget)
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 1,
+          "abil_awareness": 1,
+          "abil_brawl": 1,
+          "abil_bureaucracy": 1,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 1,
+          "abil_integrity": 1,
+          "abil_investigation": 0,
+          "abil_larceny": 0,
+          "abil_linguistics": 1,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 1,
+          "abil_melee": 1,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 0,
+          "abil_resistance": 1,
+          "abil_ride": 1,
+          "abil_sail": 1,
+          "abil_socialize": 1,
+          "abil_stealth": 1,
+          "abil_survival": 1,
+          "abil_thrown": 1,
+          "abil_war": 0,
+          "armor_is_artifact": false,
+          "armor_name": "",
+          "armor_tags": Array [
+            "",
+          ],
+          "armor_weight": "light",
+          "attr_appearance": 2,
+          "attr_charisma": 2,
+          "attr_dexterity": 1,
+          "attr_intelligence": 2,
+          "attr_manipulation": 2,
+          "attr_perception": 2,
+          "attr_stamina": 2,
+          "attr_strength": 2,
+          "attr_wits": 2,
+          "damage_aggravated": 1,
+          "damage_bashing": 0,
+          "damage_lethal": 1,
+          "health_level_0s": 0,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 1,
+          "health_level_incap": 1,
+          "merits": Array [
+            10,
+            15,
+          ],
+          "name": "",
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "spells": Array [
+            1,
+          ],
+          "type": "Character",
+        }
+      }
+    >
+      <WithStyles(ResourceDisplay)
+        className={undefined}
+        current={undefined}
+        label="Willpower"
+        total={undefined}
+      />
+    </Connect(WillpowerSpendWidget)>
+  </WithStyles(Typography)>
+  <Connect(DamageWidget)
+    character={
+      Object {
+        "abil_archery": 1,
+        "abil_athletics": 1,
+        "abil_awareness": 1,
+        "abil_brawl": 1,
+        "abil_bureaucracy": 1,
+        "abil_craft": Array [
+          Object {
+            "craft": Object {},
+            "rating": Object {},
+          },
+        ],
+        "abil_dodge": 1,
+        "abil_integrity": 1,
+        "abil_investigation": 0,
+        "abil_larceny": 0,
+        "abil_linguistics": 1,
+        "abil_lore": 1,
+        "abil_martial_arts": Array [],
+        "abil_medicine": 1,
+        "abil_melee": 1,
+        "abil_occult": 0,
+        "abil_performance": 0,
+        "abil_presence": 0,
+        "abil_resistance": 1,
+        "abil_ride": 1,
+        "abil_sail": 1,
+        "abil_socialize": 1,
+        "abil_stealth": 1,
+        "abil_survival": 1,
+        "abil_thrown": 1,
+        "abil_war": 0,
+        "armor_is_artifact": false,
+        "armor_name": "",
+        "armor_tags": Array [
+          "",
+        ],
+        "armor_weight": "light",
+        "attr_appearance": 2,
+        "attr_charisma": 2,
+        "attr_dexterity": 1,
+        "attr_intelligence": 2,
+        "attr_manipulation": 2,
+        "attr_perception": 2,
+        "attr_stamina": 2,
+        "attr_strength": 2,
+        "attr_wits": 2,
+        "damage_aggravated": 1,
+        "damage_bashing": 0,
+        "damage_lethal": 1,
+        "health_level_0s": 0,
+        "health_level_1s": 1,
+        "health_level_2s": 1,
+        "health_level_4s": 1,
+        "health_level_incap": 1,
+        "merits": Array [
+          10,
+          15,
+        ],
+        "name": "",
+        "specialties": Array [
+          Object {
+            "ability": Object {},
+            "context": Object {},
+          },
+        ],
+        "spells": Array [
+          1,
+        ],
+        "type": "Character",
+      }
+    }
+  >
+    <WithStyles(HealthLevelBoxes)
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 1,
+          "abil_awareness": 1,
+          "abil_brawl": 1,
+          "abil_bureaucracy": 1,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 1,
+          "abil_integrity": 1,
+          "abil_investigation": 0,
+          "abil_larceny": 0,
+          "abil_linguistics": 1,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 1,
+          "abil_melee": 1,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 0,
+          "abil_resistance": 1,
+          "abil_ride": 1,
+          "abil_sail": 1,
+          "abil_socialize": 1,
+          "abil_stealth": 1,
+          "abil_survival": 1,
+          "abil_thrown": 1,
+          "abil_war": 0,
+          "armor_is_artifact": false,
+          "armor_name": "",
+          "armor_tags": Array [
+            "",
+          ],
+          "armor_weight": "light",
+          "attr_appearance": 2,
+          "attr_charisma": 2,
+          "attr_dexterity": 1,
+          "attr_intelligence": 2,
+          "attr_manipulation": 2,
+          "attr_perception": 2,
+          "attr_stamina": 2,
+          "attr_strength": 2,
+          "attr_wits": 2,
+          "damage_aggravated": 1,
+          "damage_bashing": 0,
+          "damage_lethal": 1,
+          "health_level_0s": 0,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 1,
+          "health_level_incap": 1,
+          "merits": Array [
+            10,
+            15,
+          ],
+          "name": "",
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "spells": Array [
+            1,
+          ],
+          "type": "Character",
+        }
+      }
+    />
+  </Connect(DamageWidget)>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Evasion"
+      pool={
+        Object {
+          "ability": "dodge",
+          "abilityRating": 1,
+          "attribute": "dexterity",
+          "attributeRating": 1,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Evasion",
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 2,
+            },
+          ],
+          "rating": true,
+          "raw": 1,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Best Parry"
+      pool={
+        Object {
+          "noSummary": true,
+          "total": "None",
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Soak"
+      pool={
+        Object {
+          "armored": 3,
+          "meritBonus": Array [
+            Object {
+              "bonus": NaN,
+              "label": "unusual hide",
+            },
+          ],
+          "name": "Soak",
+          "natural": 2,
+          "soak": true,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Resolve"
+      pool={
+        Object {
+          "ability": "integrity",
+          "abilityRating": 1,
+          "attribute": "wits",
+          "attributeRating": 2,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Resolve",
+          "penalties": Array [
+            Object {
+              "label": "Wound",
+              "penalty": 2,
+            },
+          ],
+          "rating": true,
+          "raw": 2,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 0,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Guile"
+      pool={
+        Object {
+          "ability": "socialize",
+          "abilityRating": 1,
+          "attribute": "manipulation",
+          "attributeRating": 2,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Guile",
+          "penalties": Array [
+            Object {
+              "label": "Wound",
+              "penalty": 2,
+            },
+          ],
+          "rating": true,
+          "raw": 2,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 0,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Appearance"
+      pool={
+        Object {
+          "attribute": "Appearance",
+          "attributeRating": 2,
+          "meritBonus": Array [],
+          "name": "Appearance",
+          "total": 2,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <WithStyles(Typography)
+    paragraph={true}
+    style={
+      Object {
+        "marginTop": "0.5em",
+      }
+    }
+  >
+    <strong>
+      Penalties:
+    </strong>
+     
+    <span>
+      Wound -
+      2
+    </span>
+  </WithStyles(Typography)>
+</WithStyles(Paper)>
+`;
+
+exports[`CharacterCard renders all pools correctly 3`] = `
+<WithStyles(Paper)
+  className={undefined}
+>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <WithStyles(Typography)
+        className={undefined}
+        component={[Function]}
+        to="/characters/undefined"
+        variant="title"
+      >
+        qÓ
+        <pure(Launch)
+          className={undefined}
+        />
+      </WithStyles(Typography)>
+      <Connect(PlayerNameSubtitle)
+        playerId={undefined}
+      />
+      <WithStyles(Typography)
+        paragraph={true}
+      >
+        Essence 
+         
+        Mortal
+      </WithStyles(Typography)>
+    </div>
+  </div>
+  <WithStyles(Typography)
+    className={undefined}
+    component="div"
+  >
+    <Connect(WillpowerSpendWidget)
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 1,
+          "abil_awareness": 0,
+          "abil_brawl": 2,
+          "abil_bureaucracy": 2,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 2,
+          "abil_integrity": 2,
+          "abil_investigation": 1,
+          "abil_larceny": 1,
+          "abil_linguistics": 1,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 2,
+          "abil_melee": 2,
+          "abil_occult": 0,
+          "abil_performance": 2,
+          "abil_presence": 1,
+          "abil_resistance": 2,
+          "abil_ride": 2,
+          "abil_sail": 0,
+          "abil_socialize": 2,
+          "abil_stealth": 2,
+          "abil_survival": 2,
+          "abil_thrown": 1,
+          "abil_war": 1,
+          "armor_is_artifact": true,
+          "armor_name": "Ã",
+          "armor_tags": Array [],
+          "armor_weight": "medium",
+          "attr_appearance": 3,
+          "attr_charisma": 1,
+          "attr_dexterity": 3,
+          "attr_intelligence": 2,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 2,
+          "attr_strength": 2,
+          "attr_wits": 3,
+          "damage_aggravated": 2,
+          "damage_bashing": 0,
+          "damage_lethal": 2,
+          "health_level_0s": 1,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 2,
+          "health_level_incap": 0,
+          "merits": Array [
+            14,
+            3,
+            9,
+          ],
+          "name": "qÓ",
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "spells": Array [
+            2,
+          ],
+          "type": "Character",
+        }
+      }
+    >
+      <WithStyles(ResourceDisplay)
+        className={undefined}
+        current={undefined}
+        label="Willpower"
+        total={undefined}
+      />
+    </Connect(WillpowerSpendWidget)>
+  </WithStyles(Typography)>
+  <Connect(DamageWidget)
+    character={
+      Object {
+        "abil_archery": 1,
+        "abil_athletics": 1,
+        "abil_awareness": 0,
+        "abil_brawl": 2,
+        "abil_bureaucracy": 2,
+        "abil_craft": Array [
+          Object {
+            "craft": Object {},
+            "rating": Object {},
+          },
+          Object {
+            "craft": Object {},
+            "rating": Object {},
+          },
+        ],
+        "abil_dodge": 2,
+        "abil_integrity": 2,
+        "abil_investigation": 1,
+        "abil_larceny": 1,
+        "abil_linguistics": 1,
+        "abil_lore": 0,
+        "abil_martial_arts": Array [
+          Object {
+            "rating": Object {},
+            "style": Object {},
+          },
+        ],
+        "abil_medicine": 2,
+        "abil_melee": 2,
+        "abil_occult": 0,
+        "abil_performance": 2,
+        "abil_presence": 1,
+        "abil_resistance": 2,
+        "abil_ride": 2,
+        "abil_sail": 0,
+        "abil_socialize": 2,
+        "abil_stealth": 2,
+        "abil_survival": 2,
+        "abil_thrown": 1,
+        "abil_war": 1,
+        "armor_is_artifact": true,
+        "armor_name": "Ã",
+        "armor_tags": Array [],
+        "armor_weight": "medium",
+        "attr_appearance": 3,
+        "attr_charisma": 1,
+        "attr_dexterity": 3,
+        "attr_intelligence": 2,
+        "attr_manipulation": 1,
+        "attr_perception": 1,
+        "attr_stamina": 2,
+        "attr_strength": 2,
+        "attr_wits": 3,
+        "damage_aggravated": 2,
+        "damage_bashing": 0,
+        "damage_lethal": 2,
+        "health_level_0s": 1,
+        "health_level_1s": 1,
+        "health_level_2s": 1,
+        "health_level_4s": 2,
+        "health_level_incap": 0,
+        "merits": Array [
+          14,
+          3,
+          9,
+        ],
+        "name": "qÓ",
+        "specialties": Array [
+          Object {
+            "ability": Object {},
+            "context": Object {},
+          },
+          Object {
+            "ability": Object {},
+            "context": Object {},
+          },
+        ],
+        "spells": Array [
+          2,
+        ],
+        "type": "Character",
+      }
+    }
+  >
+    <WithStyles(HealthLevelBoxes)
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 1,
+          "abil_awareness": 0,
+          "abil_brawl": 2,
+          "abil_bureaucracy": 2,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 2,
+          "abil_integrity": 2,
+          "abil_investigation": 1,
+          "abil_larceny": 1,
+          "abil_linguistics": 1,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 2,
+          "abil_melee": 2,
+          "abil_occult": 0,
+          "abil_performance": 2,
+          "abil_presence": 1,
+          "abil_resistance": 2,
+          "abil_ride": 2,
+          "abil_sail": 0,
+          "abil_socialize": 2,
+          "abil_stealth": 2,
+          "abil_survival": 2,
+          "abil_thrown": 1,
+          "abil_war": 1,
+          "armor_is_artifact": true,
+          "armor_name": "Ã",
+          "armor_tags": Array [],
+          "armor_weight": "medium",
+          "attr_appearance": 3,
+          "attr_charisma": 1,
+          "attr_dexterity": 3,
+          "attr_intelligence": 2,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 2,
+          "attr_strength": 2,
+          "attr_wits": 3,
+          "damage_aggravated": 2,
+          "damage_bashing": 0,
+          "damage_lethal": 2,
+          "health_level_0s": 1,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 2,
+          "health_level_incap": 0,
+          "merits": Array [
+            14,
+            3,
+            9,
+          ],
+          "name": "qÓ",
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "spells": Array [
+            2,
+          ],
+          "type": "Character",
+        }
+      }
+    />
+  </Connect(DamageWidget)>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Evasion"
+      pool={
+        Object {
+          "ability": "dodge",
+          "abilityRating": 2,
+          "attribute": "dexterity",
+          "attributeRating": 3,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Evasion",
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 4,
+            },
+            Object {
+              "label": "mobility",
+              "penalty": 1,
+            },
+          ],
+          "rating": true,
+          "raw": 3,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Best Parry"
+      pool={
+        Object {
+          "noSummary": true,
+          "total": "None",
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Soak"
+      pool={
+        Object {
+          "armored": 8,
+          "meritBonus": Array [],
+          "name": "Soak",
+          "natural": 2,
+          "soak": true,
+          "total": 10,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Hardness"
+      noSummary={true}
+      pool={
+        Object {
+          "total": 7,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Resolve"
+      pool={
+        Object {
+          "ability": "integrity",
+          "abilityRating": 2,
+          "attribute": "wits",
+          "attributeRating": 3,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Resolve",
+          "penalties": Array [
+            Object {
+              "label": "Wound",
+              "penalty": 4,
+            },
+          ],
+          "rating": true,
+          "raw": 3,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 0,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Guile"
+      pool={
+        Object {
+          "ability": "socialize",
+          "abilityRating": 2,
+          "attribute": "manipulation",
+          "attributeRating": 1,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Guile",
+          "penalties": Array [
+            Object {
+              "label": "Wound",
+              "penalty": 4,
+            },
+          ],
+          "rating": true,
+          "raw": 2,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 0,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Appearance"
+      pool={
+        Object {
+          "attribute": "Appearance",
+          "attributeRating": 3,
+          "meritBonus": Array [],
+          "name": "Appearance",
+          "total": 3,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <WithStyles(Typography)
+    paragraph={true}
+    style={
+      Object {
+        "marginTop": "0.5em",
+      }
+    }
+  >
+    <strong>
+      Penalties:
+    </strong>
+     
+    <span>
+      Mobility -
+      1
+       
+    </span>
+    <span>
+      Wound -
+      4
+    </span>
+  </WithStyles(Typography)>
+</WithStyles(Paper)>
+`;
+
+exports[`CharacterCard renders all pools correctly 4`] = `
+<WithStyles(Paper)
+  className={undefined}
+>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <WithStyles(Typography)
+        className={undefined}
+        component={[Function]}
+        to="/characters/undefined"
+        variant="title"
+      >
+        ÷È
+        <pure(Launch)
+          className={undefined}
+        />
+      </WithStyles(Typography)>
+      <Connect(PlayerNameSubtitle)
+        playerId={undefined}
+      />
+      <WithStyles(Typography)
+        paragraph={true}
+      >
+        Essence 
+         
+        Mortal
+      </WithStyles(Typography)>
+    </div>
+  </div>
+  <WithStyles(Typography)
+    className={undefined}
+    component="div"
+  >
+    <Connect(WillpowerSpendWidget)
+      character={
+        Object {
+          "abil_archery": 3,
+          "abil_athletics": 3,
+          "abil_awareness": 3,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 2,
+          "abil_integrity": 3,
+          "abil_investigation": 2,
+          "abil_larceny": 1,
+          "abil_linguistics": 2,
+          "abil_lore": 2,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 1,
+          "abil_melee": 1,
+          "abil_occult": 1,
+          "abil_performance": 2,
+          "abil_presence": 1,
+          "abil_resistance": 0,
+          "abil_ride": 3,
+          "abil_sail": 3,
+          "abil_socialize": 1,
+          "abil_stealth": 0,
+          "abil_survival": 1,
+          "abil_thrown": 3,
+          "abil_war": 3,
+          "armor_is_artifact": false,
+          "armor_name": ")",
+          "armor_tags": Array [],
+          "armor_weight": "medium",
+          "attr_appearance": 3,
+          "attr_charisma": 2,
+          "attr_dexterity": 2,
+          "attr_intelligence": 2,
+          "attr_manipulation": 3,
+          "attr_perception": 3,
+          "attr_stamina": 3,
+          "attr_strength": 4,
+          "attr_wits": 3,
+          "damage_aggravated": 3,
+          "damage_bashing": 1,
+          "damage_lethal": 3,
+          "health_level_0s": 1,
+          "health_level_1s": 3,
+          "health_level_2s": 2,
+          "health_level_4s": 0,
+          "health_level_incap": 3,
+          "merits": Array [
+            10,
+            7,
+            2,
+          ],
+          "name": "÷È",
+          "specialties": Array [],
+          "spells": Array [
+            2,
+          ],
+          "type": "Character",
+        }
+      }
+    >
+      <WithStyles(ResourceDisplay)
+        className={undefined}
+        current={undefined}
+        label="Willpower"
+        total={undefined}
+      />
+    </Connect(WillpowerSpendWidget)>
+  </WithStyles(Typography)>
+  <Connect(DamageWidget)
+    character={
+      Object {
+        "abil_archery": 3,
+        "abil_athletics": 3,
+        "abil_awareness": 3,
+        "abil_brawl": 0,
+        "abil_bureaucracy": 0,
+        "abil_craft": Array [
+          Object {
+            "craft": Object {},
+            "rating": Object {},
+          },
+          Object {
+            "craft": Object {},
+            "rating": Object {},
+          },
+        ],
+        "abil_dodge": 2,
+        "abil_integrity": 3,
+        "abil_investigation": 2,
+        "abil_larceny": 1,
+        "abil_linguistics": 2,
+        "abil_lore": 2,
+        "abil_martial_arts": Array [],
+        "abil_medicine": 1,
+        "abil_melee": 1,
+        "abil_occult": 1,
+        "abil_performance": 2,
+        "abil_presence": 1,
+        "abil_resistance": 0,
+        "abil_ride": 3,
+        "abil_sail": 3,
+        "abil_socialize": 1,
+        "abil_stealth": 0,
+        "abil_survival": 1,
+        "abil_thrown": 3,
+        "abil_war": 3,
+        "armor_is_artifact": false,
+        "armor_name": ")",
+        "armor_tags": Array [],
+        "armor_weight": "medium",
+        "attr_appearance": 3,
+        "attr_charisma": 2,
+        "attr_dexterity": 2,
+        "attr_intelligence": 2,
+        "attr_manipulation": 3,
+        "attr_perception": 3,
+        "attr_stamina": 3,
+        "attr_strength": 4,
+        "attr_wits": 3,
+        "damage_aggravated": 3,
+        "damage_bashing": 1,
+        "damage_lethal": 3,
+        "health_level_0s": 1,
+        "health_level_1s": 3,
+        "health_level_2s": 2,
+        "health_level_4s": 0,
+        "health_level_incap": 3,
+        "merits": Array [
+          10,
+          7,
+          2,
+        ],
+        "name": "÷È",
+        "specialties": Array [],
+        "spells": Array [
+          2,
+        ],
+        "type": "Character",
+      }
+    }
+  >
+    <WithStyles(HealthLevelBoxes)
+      character={
+        Object {
+          "abil_archery": 3,
+          "abil_athletics": 3,
+          "abil_awareness": 3,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 2,
+          "abil_integrity": 3,
+          "abil_investigation": 2,
+          "abil_larceny": 1,
+          "abil_linguistics": 2,
+          "abil_lore": 2,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 1,
+          "abil_melee": 1,
+          "abil_occult": 1,
+          "abil_performance": 2,
+          "abil_presence": 1,
+          "abil_resistance": 0,
+          "abil_ride": 3,
+          "abil_sail": 3,
+          "abil_socialize": 1,
+          "abil_stealth": 0,
+          "abil_survival": 1,
+          "abil_thrown": 3,
+          "abil_war": 3,
+          "armor_is_artifact": false,
+          "armor_name": ")",
+          "armor_tags": Array [],
+          "armor_weight": "medium",
+          "attr_appearance": 3,
+          "attr_charisma": 2,
+          "attr_dexterity": 2,
+          "attr_intelligence": 2,
+          "attr_manipulation": 3,
+          "attr_perception": 3,
+          "attr_stamina": 3,
+          "attr_strength": 4,
+          "attr_wits": 3,
+          "damage_aggravated": 3,
+          "damage_bashing": 1,
+          "damage_lethal": 3,
+          "health_level_0s": 1,
+          "health_level_1s": 3,
+          "health_level_2s": 2,
+          "health_level_4s": 0,
+          "health_level_incap": 3,
+          "merits": Array [
+            10,
+            7,
+            2,
+          ],
+          "name": "÷È",
+          "specialties": Array [],
+          "spells": Array [
+            2,
+          ],
+          "type": "Character",
+        }
+      }
+    />
+  </Connect(DamageWidget)>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Evasion"
+      pool={
+        Object {
+          "ability": "dodge",
+          "abilityRating": 2,
+          "attribute": "dexterity",
+          "attributeRating": 2,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Evasion",
+          "penalties": Array [
+            Object {
+              "label": "mobility",
+              "penalty": 1,
+            },
+          ],
+          "rating": true,
+          "raw": 2,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Best Parry"
+      pool={
+        Object {
+          "noSummary": true,
+          "total": "None",
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Soak"
+      pool={
+        Object {
+          "armored": 5,
+          "meritBonus": Array [
+            Object {
+              "bonus": NaN,
+              "label": "unusual hide",
+            },
+          ],
+          "name": "Soak",
+          "natural": 3,
+          "soak": true,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Resolve"
+      pool={
+        Object {
+          "ability": "integrity",
+          "abilityRating": 3,
+          "attribute": "wits",
+          "attributeRating": 3,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Resolve",
+          "penalties": Array [],
+          "rating": true,
+          "raw": 3,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 4,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Guile"
+      pool={
+        Object {
+          "ability": "socialize",
+          "abilityRating": 1,
+          "attribute": "manipulation",
+          "attributeRating": 3,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Guile",
+          "penalties": Array [],
+          "rating": true,
+          "raw": 2,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 3,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Appearance"
+      pool={
+        Object {
+          "attribute": "Appearance",
+          "attributeRating": 3,
+          "meritBonus": Array [],
+          "name": "Appearance",
+          "total": 3,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <WithStyles(Typography)
+    paragraph={true}
+    style={
+      Object {
+        "marginTop": "0.5em",
+      }
+    }
+  >
+    <strong>
+      Penalties:
+    </strong>
+     
+    <span>
+      Mobility -
+      1
+       
+    </span>
+  </WithStyles(Typography)>
+</WithStyles(Paper)>
+`;
+
+exports[`CharacterCard renders all pools correctly 5`] = `
+<WithStyles(Paper)
+  className={undefined}
+>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <WithStyles(Typography)
+        className={undefined}
+        component={[Function]}
+        to="/characters/undefined"
+        variant="title"
+      >
+        L
+        <pure(Launch)
+          className={undefined}
+        />
+      </WithStyles(Typography)>
+      <Connect(PlayerNameSubtitle)
+        playerId={undefined}
+      />
+      <WithStyles(Typography)
+        paragraph={true}
+      >
+        Essence 
+         
+        Mortal
+      </WithStyles(Typography)>
+    </div>
+  </div>
+  <WithStyles(Typography)
+    className={undefined}
+    component="div"
+  >
+    <Connect(WillpowerSpendWidget)
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 3,
+          "abil_awareness": 3,
+          "abil_brawl": 1,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 3,
+          "abil_integrity": 4,
+          "abil_investigation": 3,
+          "abil_larceny": 1,
+          "abil_linguistics": 2,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 0,
+          "abil_melee": 0,
+          "abil_occult": 4,
+          "abil_performance": 4,
+          "abil_presence": 4,
+          "abil_resistance": 1,
+          "abil_ride": 1,
+          "abil_sail": 0,
+          "abil_socialize": 3,
+          "abil_stealth": 2,
+          "abil_survival": 3,
+          "abil_thrown": 4,
+          "abil_war": 4,
+          "armor_is_artifact": false,
+          "armor_name": "n",
+          "armor_tags": Array [
+            "÷À6",
+          ],
+          "armor_weight": "light",
+          "attr_appearance": 3,
+          "attr_charisma": 3,
+          "attr_dexterity": 2,
+          "attr_intelligence": 2,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 3,
+          "attr_strength": 3,
+          "attr_wits": 3,
+          "damage_aggravated": 0,
+          "damage_bashing": 3,
+          "damage_lethal": 2,
+          "health_level_0s": 4,
+          "health_level_1s": 2,
+          "health_level_2s": 2,
+          "health_level_4s": 4,
+          "health_level_incap": 1,
+          "merits": Array [
+            6,
+            3,
+            10,
+            13,
+            7,
+          ],
+          "name": "L",
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "spells": Array [
+            3,
+          ],
+          "type": "Character",
+        }
+      }
+    >
+      <WithStyles(ResourceDisplay)
+        className={undefined}
+        current={undefined}
+        label="Willpower"
+        total={undefined}
+      />
+    </Connect(WillpowerSpendWidget)>
+  </WithStyles(Typography)>
+  <Connect(DamageWidget)
+    character={
+      Object {
+        "abil_archery": 1,
+        "abil_athletics": 3,
+        "abil_awareness": 3,
+        "abil_brawl": 1,
+        "abil_bureaucracy": 0,
+        "abil_craft": Array [
+          Object {
+            "craft": Object {},
+            "rating": Object {},
+          },
+          Object {
+            "craft": Object {},
+            "rating": Object {},
+          },
+        ],
+        "abil_dodge": 3,
+        "abil_integrity": 4,
+        "abil_investigation": 3,
+        "abil_larceny": 1,
+        "abil_linguistics": 2,
+        "abil_lore": 1,
+        "abil_martial_arts": Array [
+          Object {
+            "rating": Object {},
+            "style": Object {},
+          },
+          Object {
+            "rating": Object {},
+            "style": Object {},
+          },
+        ],
+        "abil_medicine": 0,
+        "abil_melee": 0,
+        "abil_occult": 4,
+        "abil_performance": 4,
+        "abil_presence": 4,
+        "abil_resistance": 1,
+        "abil_ride": 1,
+        "abil_sail": 0,
+        "abil_socialize": 3,
+        "abil_stealth": 2,
+        "abil_survival": 3,
+        "abil_thrown": 4,
+        "abil_war": 4,
+        "armor_is_artifact": false,
+        "armor_name": "n",
+        "armor_tags": Array [
+          "÷À6",
+        ],
+        "armor_weight": "light",
+        "attr_appearance": 3,
+        "attr_charisma": 3,
+        "attr_dexterity": 2,
+        "attr_intelligence": 2,
+        "attr_manipulation": 1,
+        "attr_perception": 1,
+        "attr_stamina": 3,
+        "attr_strength": 3,
+        "attr_wits": 3,
+        "damage_aggravated": 0,
+        "damage_bashing": 3,
+        "damage_lethal": 2,
+        "health_level_0s": 4,
+        "health_level_1s": 2,
+        "health_level_2s": 2,
+        "health_level_4s": 4,
+        "health_level_incap": 1,
+        "merits": Array [
+          6,
+          3,
+          10,
+          13,
+          7,
+        ],
+        "name": "L",
+        "specialties": Array [
+          Object {
+            "ability": Object {},
+            "context": Object {},
+          },
+          Object {
+            "ability": Object {},
+            "context": Object {},
+          },
+          Object {
+            "ability": Object {},
+            "context": Object {},
+          },
+          Object {
+            "ability": Object {},
+            "context": Object {},
+          },
+        ],
+        "spells": Array [
+          3,
+        ],
+        "type": "Character",
+      }
+    }
+  >
+    <WithStyles(HealthLevelBoxes)
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 3,
+          "abil_awareness": 3,
+          "abil_brawl": 1,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 3,
+          "abil_integrity": 4,
+          "abil_investigation": 3,
+          "abil_larceny": 1,
+          "abil_linguistics": 2,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 0,
+          "abil_melee": 0,
+          "abil_occult": 4,
+          "abil_performance": 4,
+          "abil_presence": 4,
+          "abil_resistance": 1,
+          "abil_ride": 1,
+          "abil_sail": 0,
+          "abil_socialize": 3,
+          "abil_stealth": 2,
+          "abil_survival": 3,
+          "abil_thrown": 4,
+          "abil_war": 4,
+          "armor_is_artifact": false,
+          "armor_name": "n",
+          "armor_tags": Array [
+            "÷À6",
+          ],
+          "armor_weight": "light",
+          "attr_appearance": 3,
+          "attr_charisma": 3,
+          "attr_dexterity": 2,
+          "attr_intelligence": 2,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 3,
+          "attr_strength": 3,
+          "attr_wits": 3,
+          "damage_aggravated": 0,
+          "damage_bashing": 3,
+          "damage_lethal": 2,
+          "health_level_0s": 4,
+          "health_level_1s": 2,
+          "health_level_2s": 2,
+          "health_level_4s": 4,
+          "health_level_incap": 1,
+          "merits": Array [
+            6,
+            3,
+            10,
+            13,
+            7,
+          ],
+          "name": "L",
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "spells": Array [
+            3,
+          ],
+          "type": "Character",
+        }
+      }
+    />
+  </Connect(DamageWidget)>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Evasion"
+      pool={
+        Object {
+          "ability": "dodge",
+          "abilityRating": 3,
+          "attribute": "dexterity",
+          "attributeRating": 2,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Evasion",
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 1,
+            },
+          ],
+          "rating": true,
+          "raw": 3,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Best Parry"
+      pool={
+        Object {
+          "noSummary": true,
+          "total": "None",
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Soak"
+      pool={
+        Object {
+          "armored": 3,
+          "meritBonus": Array [
+            Object {
+              "bonus": NaN,
+              "label": "unusual hide",
+            },
+          ],
+          "name": "Soak",
+          "natural": 3,
+          "soak": true,
+          "total": NaN,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <div
+    className={undefined}
+  >
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Resolve"
+      pool={
+        Object {
+          "ability": "integrity",
+          "abilityRating": 4,
+          "attribute": "wits",
+          "attributeRating": 3,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Resolve",
+          "penalties": Array [
+            Object {
+              "label": "Wound",
+              "penalty": 1,
+            },
+          ],
+          "rating": true,
+          "raw": 4,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 3,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Guile"
+      pool={
+        Object {
+          "ability": "socialize",
+          "abilityRating": 3,
+          "attribute": "manipulation",
+          "attributeRating": 1,
+          "excellency": 0,
+          "excellencyCost": 0,
+          "excellencyStunt": 0,
+          "excellencyStuntCost": 0,
+          "name": "Guile",
+          "penalties": Array [
+            Object {
+              "label": "Wound",
+              "penalty": 1,
+            },
+          ],
+          "rating": true,
+          "raw": 2,
+          "specialties": Array [],
+          "specialtyMatters": false,
+          "total": 1,
+        }
+      }
+      staticRating={true}
+    />
+    <WithStyles(PoolDisplay)
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      label="Appearance"
+      pool={
+        Object {
+          "attribute": "Appearance",
+          "attributeRating": 3,
+          "meritBonus": Array [],
+          "name": "Appearance",
+          "total": 3,
+        }
+      }
+      staticRating={true}
+    />
+  </div>
+  <WithStyles(Typography)
+    paragraph={true}
+    style={
+      Object {
+        "marginTop": "0.5em",
+      }
+    }
+  >
+    <strong>
+      Penalties:
+    </strong>
+     
+    <span>
+      Wound -
+      1
+    </span>
+  </WithStyles(Typography)>
+</WithStyles(Paper)>
+`;

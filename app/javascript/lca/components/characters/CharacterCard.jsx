@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -21,7 +21,7 @@ import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import * as calc from '../../utils/calculated'
-import { fullChar } from '../../utils/propTypes'
+import type { fullChar } from '../../utils/propTypes/flow.js'
 
 const styles = theme => ({
   root: {
@@ -84,7 +84,16 @@ const styles = theme => ({
   },
 })
 
-function CharacterCard({ character, combat, canEdit, penalties, pools, classes }) {
+type Props = {
+  character: fullChar,
+  combat?: boolean,
+  canEdit?: boolean,
+  pools: Object,
+  penalties: Object,
+  classes: Object,
+}
+
+export function CharacterCard({ character, combat, canEdit, penalties, pools, classes }: Props) {
   return <Paper className={ classes.root }>
 
     <div className={ classes.nameRow }>
@@ -204,14 +213,6 @@ function CharacterCard({ character, combat, canEdit, penalties, pools, classes }
       <InitiativeWidget character={ character } characterType="character" />
     }
   </Paper>
-}
-CharacterCard.propTypes = {
-  character: PropTypes.shape(fullChar).isRequired,
-  combat: PropTypes.bool,
-  canEdit: PropTypes.bool,
-  pools: PropTypes.object,
-  penalties: PropTypes.object,
-  classes: PropTypes.object,
 }
 function mapStateToProps(state, props) {
   return {

@@ -71,9 +71,12 @@ export type withSpecialties = {
 
 export type withBasicInfo = {
   id: number,
+  player_id: number,
   name: string,
   description: string,
   essence: number,
+  hidden: boolean,
+  pinned: boolean,
 }
 export type intimacy = {
   subject: string,
@@ -95,6 +98,7 @@ export type withMotePool = {
   motes_personal_current: number,
   motes_peripheral_total: number,
   motes_peripheral_current: number,
+  anima_level: number,
 }
 
 export type qcAttack = {
@@ -128,8 +132,12 @@ export type fullQc = {
 
 export type fullChar = {
   caste: ?string,
+  type: string,
+  is_sorcerer: boolean,
+  sorcererous_motes: number,
 } &
   withBasicInfo &
+  withMotePool &
   withWillpower &
   withHealthLevels &
   withCombatInfo &

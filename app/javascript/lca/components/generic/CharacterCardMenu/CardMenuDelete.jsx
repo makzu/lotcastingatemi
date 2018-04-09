@@ -91,7 +91,7 @@ function mapStateToProps(state, ownProps) {
     name: state.entities[ownProps.characterType + 's'][ownProps.id].name,
   }
 }
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Function) {
   return {
     destroyCharacter:   (id) => dispatch(destroyCharacter(id)),
     destroyQc:          (id) => dispatch(destroyQc(id)),

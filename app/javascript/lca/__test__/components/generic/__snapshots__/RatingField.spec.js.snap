@@ -7,21 +7,28 @@ exports[`RatingField renders at all 1`] = `
   onBlur={[Function]}
   onFocus={[Function]}
 >
+  <label
+    className="MuiFormLabel-root-12 MuiInputLabel-root-7 MuiInputLabel-formControl-8 MuiInputLabel-animated-11 MuiInputLabel-shrink-10"
+    data-shrink={true}
+    htmlFor={undefined}
+  >
+    asdf
+  </label>
   <div
-    className="MuiInput-root-7 MuiInput-formControl-8 MuiInput-underline-11"
+    className="MuiInput-root-18 MuiInput-formControl-19 MuiInput-underline-22"
   >
     <input
       aria-invalid={false}
       aria-required={false}
       autoComplete={undefined}
       autoFocus={undefined}
-      className="MuiInput-input-15 MuiInput-inputType-19"
+      className="MuiInput-input-26 MuiInput-inputType-30"
       defaultValue={undefined}
       disabled={false}
       id={undefined}
       max={Infinity}
       min={0}
-      name={undefined}
+      name="asdf"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
@@ -32,7 +39,7 @@ exports[`RatingField renders at all 1`] = `
       required={undefined}
       rows={undefined}
       type="number"
-      value={undefined}
+      value={5}
     />
   </div>
 </div>

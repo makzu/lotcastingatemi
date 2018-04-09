@@ -15,6 +15,7 @@
   "plugins": [
     "react-hot-loader/babel",
     "syntax-dynamic-import",
+    "syntax-flow",
     "transform-object-rest-spread",
     ["transform-class-properties", { "spec": true }]
   ],

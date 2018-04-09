@@ -1,3 +1,4 @@
+// @flow
 export * from './_battlegroups.js'
 export * from './_charms.js'
 export * from './_excellencies.js'
@@ -11,9 +12,10 @@ import {
   ATTRIBUTES, ABILITIES_ALL, ABILITIES_ALL_NO_MA,
   ATTACK_ABILITIES, NON_ATTACK_ABILITIES,
 } from '../constants.js'
+import type { fullChar } from '../propTypes/flow.js'
 
-export function specialtiesFor(character, ability) {
-  return character.specialties.filter((s) => s.ability == ability).map((s) => s.context ) || []
+export function specialtiesFor(character: fullChar, ability) {
+  return character.specialties.filter((s) => s.ability === ability).map((s) => s.context ) || []
 }
 
 /* Health */

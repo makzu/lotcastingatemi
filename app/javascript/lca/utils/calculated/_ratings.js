@@ -1,7 +1,17 @@
-import { specialtiesFor, maxExcellency } from '.'
+// @flow
+import { specialtiesFor } from '.'
+import { maxExcellency } from './_excellencies.js'
 import { attr, abil } from './_pools.js'
+import type { fullChar } from '../propTypes/flow.js'
 
-export function rating(name, character, attribute, ability, penalties, charmAbils) {
+export function rating(
+  name: string,
+  character: fullChar,
+  attribute: string,
+  ability: string,
+  penalties: Array<Object>,
+  charmAbils: Array<string>,
+) {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)
   const pool = _attr + _abil
@@ -30,7 +40,12 @@ export function rating(name, character, attribute, ability, penalties, charmAbil
   }
 }
 
-export function evasion(character, merits, penalties, charmAbils) {
+export function evasion(
+  character: fullChar,
+  merits: Array<string>,
+  penalties: Object,
+  charmAbils: Array<string>,
+) {
   const pen = [
     { label: 'wound', penalty: penalties.wound },
     { label: 'mobility', penalty: penalties.mobility },
@@ -39,17 +54,30 @@ export function evasion(character, merits, penalties, charmAbils) {
   return rating('Evasion', character, 'dexterity', 'dodge', pen, charmAbils)
 }
 
-export function resolve(character, merits, penalties, charmAbils) {
+export function resolve(
+  character: fullChar,
+  merits: Array<string>,
+  penalties: Object,
+  charmAbils: Array<string>,
+) {
   const pen = [{ label: 'Wound', penalty: penalties.wound }]
   return rating('Resolve', character, 'wits', 'integrity', pen, charmAbils)
 }
 
-export function guile(character, merits, penalties, charmAbils) {
+export function guile(
+  character: fullChar,
+  merits: Array<string>,
+  penalties: Object,
+  charmAbils: Array<string>,
+) {
   const pen = [{ label: 'Wound', penalty: penalties.wound }]
   return rating('Guile', character, 'manipulation', 'socialize', pen, charmAbils)
 }
 
-export function appearanceRating(character, merits, penalties, charmAbils) { // eslint-disable-line no-unused-vars
+export function appearanceRating(
+  character: { attr_appearance: number },
+  merits: Array<string>,
+) { // eslint-disable-line no-unused-vars
   let meritBonus = []
 
   let hideous = merits.find((m) => m.startsWith('hideous'))
@@ -65,7 +93,11 @@ export function appearanceRating(character, merits, penalties, charmAbils) { // 
   }
 }
 
-export function soak(character, merits, spells) {
+export function soak(
+  character: fullChar,
+  merits: Array<string>,
+  spells: Array<string>,
+) {
   let bonus = 0
   let meritBonus = []
 
@@ -90,9 +122,9 @@ export function soak(character, merits, spells) {
   }
 }
 
-export const naturalSoak = (character) => character.attr_stamina
+export const naturalSoak = (character: fullChar) => character.attr_stamina
 
-export function armorSoak(character) {
+export function armorSoak(character: fullChar) {
   switch(character.armor_weight) {
   case 'light':
     return character.armor_is_artifact ? 5 : 3

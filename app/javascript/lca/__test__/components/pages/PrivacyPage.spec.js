@@ -1,12 +1,10 @@
-// @flow
 import React from 'react'
+import PrivacyPage from '../../../components/pages/PrivacyPage.jsx'
 import renderer from 'react-test-renderer'
 
-import RatingDots from '../../../components/generic/ratingDots.jsx'
-
-test('RatingDots renders at all', () => {
+test('PrivacyPage renders at all', () => {
   const component = renderer.create(
-    <RatingDots rating={3} />
+    <PrivacyPage />
   )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()

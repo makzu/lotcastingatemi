@@ -2,11 +2,13 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import RatingDots from '../../../components/generic/ratingDots.jsx'
+import RatingField from '../../../components/generic/RatingField.jsx'
 
-test('RatingDots renders at all', () => {
+
+test('RatingField renders at all', () => {
   const component = renderer.create(
-    <RatingDots rating={3} />
+    <RatingField trait="asdf" label="asdf" value={ 5 }
+    />
   )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()

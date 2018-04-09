@@ -6,7 +6,7 @@ require('jasmine-check').install()
 
 import { genCharacter } from '../../_mocks/'
 import {
-  evasion, /*resolve, guile,*/ appearanceRating, soak,
+  evasion, resolve, guile, appearanceRating, soak,
 } from '../../../utils/calculated/_ratings.js'
 import type { fullChar } from '../../../utils/propTypes/flow.js'
 
@@ -37,6 +37,53 @@ describe('ratings', () => {
         expect(pool.rating).toBe(true)
       })
   })
+
+  describe('resolve', () => {
+    check.it('works', { times: 10 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
+      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
+        const pool = resolve(character, merits, penalties, charmAbils)
+        expect(pool.attributeRating).toEqual(character.attr_wits)
+        expect(pool.abilityRating).toEqual(character.abil_integrity)
+        expect(pool.raw).toBeGreaterThanOrEqual(1)
+        expect(pool.total).toBeGreaterThanOrEqual(0)
+        expect(pool.specialties).toBeDefined()
+        expect(pool.excellency).toBeDefined()
+        expect(pool.excellencyCost).toBeDefined()
+      })
+
+    check.it('includes names correctly', { times: 1 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
+      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
+        const pool = resolve(character, merits, penalties, charmAbils)
+        expect(pool.name).toEqual('Resolve')
+        expect(pool.attribute).toEqual('wits')
+        expect(pool.ability).toEqual('integrity')
+        expect(pool.rating).toBe(true)
+      })
+  })
+
+  describe('guile', () => {
+    check.it('works', { times: 10 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
+      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
+        const pool = guile(character, merits, penalties, charmAbils)
+        expect(pool.attributeRating).toEqual(character.attr_manipulation)
+        expect(pool.abilityRating).toEqual(character.abil_socialize)
+        expect(pool.raw).toBeGreaterThanOrEqual(1)
+        expect(pool.total).toBeGreaterThanOrEqual(0)
+        expect(pool.specialties).toBeDefined()
+        expect(pool.excellency).toBeDefined()
+        expect(pool.excellencyCost).toBeDefined()
+      })
+
+    check.it('includes names correctly', { times: 1 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
+      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
+        const pool = guile(character, merits, penalties, charmAbils)
+        expect(pool.name).toEqual('Guile')
+        expect(pool.attribute).toEqual('manipulation')
+        expect(pool.ability).toEqual('socialize')
+        expect(pool.rating).toBe(true)
+      })
+  })
+
   describe('appearanceRating', () => {
     check.it('works', { times: 10 }, mockCharacter, mockMerits,
       (character: fullChar, merits: Array<string>) => {

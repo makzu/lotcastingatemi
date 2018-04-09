@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrivacyPage renders at all 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3 BlockPaper-root-1"
+>
+  <h1
+    className="MuiTypography-root-29 MuiTypography-headline-34 MuiTypography-gutterBottom-46"
+  >
+    Privacy Policy and Legal Mumbo-Jumbo
+  </h1>
+  <h3
+    className="MuiTypography-root-29 MuiTypography-subheading-36"
+  >
+    Information collection and use
+  </h3>
+  <p
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+  >
+    Let's cut straight to the chase: Lot-Casting Atemi saves your email address when you use the 'log in with Google' link. It's needed for the login function to work. No other personal information is stored or collected. Addresses are not sent to other players.
+  </p>
+  <p
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+  >
+    I will never use your email address for anything other than authentication. Period. Your personal information will never be sold or otherwise transferred to anyone else, except in the case where LCA changes hosting providers (and then only as needed to facilitate that transfer), or when compelled to by a court order or something.
+  </p>
+  <h3
+    className="MuiTypography-root-29 MuiTypography-subheading-36"
+  >
+    Cookies
+  </h3>
+  <p
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+  >
+    Lot-Casting Atemi uses Cookies and similar techniques to help the site work better. If you have Cookies disabled, portions of the site might not work.
+  </p>
+  <h3
+    className="MuiTypography-root-29 MuiTypography-subheading-36"
+  >
+    Service Providers
+  </h3>
+  <a
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+    href="https://www.heroku.com/policy/security"
+  >
+    This data is stored on Heroku database servers. Heroku has its own set of security and privacy policies that apply to it.
+  </a>
+  <h3
+    className="MuiTypography-root-29 MuiTypography-subheading-36"
+  >
+    Links to Other Sites
+  </h3>
+  <p
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+  >
+    There are a few links to other sites in the app. Those other sites are not operated by me and have their own privacy policies and so on
+  </p>
+  <h3
+    className="MuiTypography-root-29 MuiTypography-subheading-36"
+  >
+    Changes to this Policy
+  </h3>
+  <p
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+  >
+    This privacy policy might update from time to time, so if you're concerned by these sorts of things you can periodically check this page for any changes.
+  </p>
+  <p
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+  >
+    Lot-Casting Atemi is a passion project, provided to the public for free. It comes with no warranty or guarantee or anything.
+  </p>
+  <p
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+  >
+    Exalted is owned by White Wolf Publishing AB and published by Onyx Path.
+  </p>
+</div>
+`;

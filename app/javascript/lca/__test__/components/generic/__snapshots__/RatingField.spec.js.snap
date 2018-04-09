@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RatingField renders at all 1`] = `
+<div
+  aria-describedby={undefined}
+  className="MuiFormControl-root-3 RatingField-field-1"
+  onBlur={[Function]}
+  onFocus={[Function]}
+>
+  <div
+    className="MuiInput-root-7 MuiInput-formControl-8 MuiInput-underline-11"
+  >
+    <input
+      aria-invalid={false}
+      aria-required={false}
+      autoComplete={undefined}
+      autoFocus={undefined}
+      className="MuiInput-input-15 MuiInput-inputType-19"
+      defaultValue={undefined}
+      disabled={false}
+      id={undefined}
+      max={Infinity}
+      min={0}
+      name={undefined}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={undefined}
+      onKeyUp={undefined}
+      placeholder={undefined}
+      readOnly={undefined}
+      required={undefined}
+      rows={undefined}
+      type="number"
+      value={undefined}
+    />
+  </div>
+</div>
+`;

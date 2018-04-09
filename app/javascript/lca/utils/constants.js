@@ -181,6 +181,14 @@ export const SOLAR_CASTE_ABILITIES = {
   ]
 }
 
+export const ABILITY_NAMES = [
+  'archery', 'athletics', 'awareness', 'brawl', 'bureaucracy', 'craft',
+  'dodge', 'integrity', 'investigation', 'larceny', 'linguistics', 'lore',
+  'martial_arts', 'medicine', 'melee', 'occult', 'performance', 'presence',
+  'resistance', 'ride', 'sail', 'socialize', 'stealth', 'survival',
+  'thrown', 'war'
+]
+
 /* Minimum and maximum */
 export const ESSENCE_MAX = 10
 export const ESSENCE_MIN = 1

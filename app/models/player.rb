@@ -2,7 +2,7 @@
 
 # User account.
 class Player < ApplicationRecord
-  after_save :broadcast_update, if: :saved_change_to_display_name?
+  after_update_commit :broadcast_update
 
   has_many :identities, dependent: :destroy
 
@@ -33,7 +33,7 @@ class Player < ApplicationRecord
     UpdateBroadcastJob.perform_later(
       (own_chronicles + chronicles).map { |x| x.player_ids + [x.st_id] }.flatten.uniq,
       self,
-      saved_changes.delete_if { |k| k == 'updated_at' || k == 'created_at' }
+      saved_changes.delete_if { |k| k == 'updated_at' || k == 'created_at' || k == 'email' }
     )
   end
 

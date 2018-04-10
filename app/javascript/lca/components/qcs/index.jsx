@@ -245,8 +245,8 @@ class QcSheet extends Component {
         Defenses
       </Typography>
       <div className={ classes.rowContainer }>
-        <PoolDisplay label="Parry" pool={ pools.parry } classes={{ root: classes.poolBlock }} />
         <PoolDisplay label="Evasion" pool={ pools.evasion } classes={{ root: classes.poolBlock }} />
+        <PoolDisplay label="Parry" pool={ pools.parry } classes={{ root: classes.poolBlock }} />
         <PoolDisplay label="Soak" pool={ qcPool(qc, qc.soak) } classes={{ root: classes.poolBlock }} />
         { qc.hardness > 0 &&
           <PoolDisplay label="Hardness" pool={ qcPool(qc, qc.hardness) } classes={{ root: classes.poolBlock }} />

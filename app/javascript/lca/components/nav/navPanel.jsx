@@ -1,5 +1,6 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
+const { Component, Fragment, } = React
 import { connect } from 'react-redux'
 import { withRouter, Link, NavLink } from 'react-router-dom'
 
@@ -135,7 +136,7 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Function) {
   return {
     logout: () => dispatch(logout()),
     closeDrawer: () => dispatch(closeDrawer()),

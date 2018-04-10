@@ -42,6 +42,7 @@ function RatingDots(props) {
   return <div>
     { fullDots }
     { emptyDots }
+    { !props.dontFill && props.fillTo && props.rating > props.fillTo && <strong> +</strong> }
   </div>
 }
 

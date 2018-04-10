@@ -38,7 +38,7 @@ class RatingField extends Component<Props, { value: number }> {
   }
 
   static defaultProps = { min: 0, max: Infinity, }
-  static getDerivedStateFromProps = (state, props) => ({ value: props.value })
+  static getDerivedStateFromProps = (props) => ({ value: props.value })
 
   handleChange = (e: SyntheticInputEvent<>) => {
     const { min, max } = this.props
@@ -48,7 +48,7 @@ class RatingField extends Component<Props, { value: number }> {
     this.props.onChange(fakeE)
   }
 
-  handleFocus(e) {
+  handleFocus = (e: SyntheticInputEvent<>) => {
     if (this.props.dontFocus)
       return
 

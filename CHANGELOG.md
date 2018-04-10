@@ -1,5 +1,13 @@
+## v45
+###### *Apr 10, 2018*
+- Dragon-Blooded characters are now fully supported
+- STs can now delete Chronicles
+- Temporary willpower can go above 10
+- Slightly more automated test coverage than before
+
 ## v44
 ###### *Apr 6, 2018*
+- Click on a dice pool to view a summary of what contributes to that pool
 - Characters, QCs, and Battlegroups can now be marked as Public. Public Characters are viewable, but not editable, by anyone with the URL.
 - Intimacies can now be hidden from other players in a Chronicle
 - STs can now rename Chronicles

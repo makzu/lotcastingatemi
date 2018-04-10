@@ -10,8 +10,9 @@ all from one place, accessible from any device with an Internet connection. PC
 screens, phones, and tablets are all supported, and character sheets are synced
 in real-time across all devices.
 
-Mortal Characters and Solar Exalts are fully tracked, but for the impatient,
-Custom Attribute, Ability, and Essence exalt types are also supported.
+Solar and Dragon-Blooded Exalts, as well as mortal characters, are fully
+supported. You can also create a custom Attribute-, Ability-, or Essence-based
+Exalt if you're playing with homebrew content or house rules.
 
 ### Quick Characters and Battlegroups
 Quick Characters are fully supported, and have their own merits, charms,

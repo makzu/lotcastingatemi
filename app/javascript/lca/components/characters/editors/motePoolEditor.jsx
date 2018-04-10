@@ -2,13 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
+import { MenuItem } from 'material-ui/Menu'
+import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import AnimaSelect from '../../generic/AnimaSelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import RatingField from '../../generic/RatingField.jsx'
-import { committedPersonalMotes, committedPeripheralMotes } from '../../../utils/calculated'
+import { committedPersonalMotes, committedPeripheralMotes, hasAura } from '../../../utils/calculated'
 
 const styles = theme => ({
   separator: { ...theme.typography.body1,
@@ -75,6 +77,21 @@ function MotePoolEditor(props) {
         <AnimaSelect character={ character } onChange={ onRatingChange } />
       </div>
     ] }
+    { hasAura(character) &&
+      <TextField select name="aura" value={ character.aura }
+        label="Aura"
+        margin="dense" style={{ width: '8em' }}
+        onChange={ onRatingChange }
+        SelectProps={{ showBlank: true }}
+      >
+        <MenuItem value="">No active Aura</MenuItem>
+        <MenuItem value="air">Air</MenuItem>
+        <MenuItem value="earth">Earth</MenuItem>
+        <MenuItem value="fire">Fire</MenuItem>
+        <MenuItem value="water">Water</MenuItem>
+        <MenuItem value="wood">Wood</MenuItem>
+      </TextField>
+    }
 
     { character.is_sorcerer && <div>
       <RatingField trait="sorcerous_motes" value={ character.sorcerous_motes }

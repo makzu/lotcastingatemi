@@ -218,6 +218,13 @@ export function prettyAnimaLevel(rating) {
   }
 }
 
+export function hasAura(character) {
+  return character.type === 'DragonbloodCharacter' ||
+    character.type === 'CustomAbilityCharacter' ||
+    character.type === 'CustomAttributeCharacter' ||
+    character.type === 'CustomEssenceCharacter'
+}
+
 export function isCasteAbility(character, ability) {
   return character.caste_abilities && includes(character.caste_abilities, ability)
 }

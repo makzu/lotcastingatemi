@@ -30,7 +30,8 @@ function _AbilityLine(props) {
       </span>
       <span className={ classes.abilityFavored }>
         { supernal && ' (s)' }
-        { caste && !supernal && ' (c)' }
+        { caste && !supernal && !character.aspect && ' (c)' }
+        { caste && character.aspect && ' (a)'}
         { favored && ' (f)' }
       </span>
     </RatingLine>

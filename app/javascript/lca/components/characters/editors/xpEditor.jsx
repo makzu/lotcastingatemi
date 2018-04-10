@@ -70,7 +70,7 @@ function XpEditor(props) {
       </div>
 
       <div className={ classes.xpCol }>
-        <ListAttributeEditor label="Solar XP Log"
+        <ListAttributeEditor label={character.exalt_type === 'Dragon-Blood' ? 'Dragon XP Log' : 'Solar XP Log'}
           character={ character } trait="xp_log_solar"
           Fields={ XpFields }
           newObject={{ label: '', points: 0 }}

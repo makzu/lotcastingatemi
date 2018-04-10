@@ -296,7 +296,7 @@ export class CharacterSheet extends Component {
           <IntimacySummary character={ character } canEdit={ canEdit } />
         </Grid>
 
-        { character.limit != undefined &&
+        { character.limit !== undefined && character.exalt_type.toLowerCase() !== 'dragon-blood' &&
           <Grid item xs={ 12 } md={ 2 }>
             <LimitTrackBlock character={ character } />
           </Grid>

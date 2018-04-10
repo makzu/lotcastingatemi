@@ -98,6 +98,7 @@ export type withMotePool = {
   motes_personal_current: number,
   motes_peripheral_total: number,
   motes_peripheral_current: number,
+  motes_committed: Array<Object>,
   anima_level: number,
 }
 
@@ -132,9 +133,16 @@ export type fullQc = {
 
 export type fullChar = {
   caste: ?string,
+  aspect: ?boolean,
+  aura: ?string,
   type: string,
+  exalt_type: string,
   is_sorcerer: boolean,
   sorcererous_motes: number,
+  caste_abilities: Array<string>,
+  favored_abilities: ?Array<string>,
+  caste_attributes: ?Array<string>,
+  favored_attributes: ?Array<string>,
 } &
   withBasicInfo &
   withMotePool &

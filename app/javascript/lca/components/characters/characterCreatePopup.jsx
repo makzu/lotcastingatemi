@@ -97,7 +97,7 @@ class CharacterCreatePopup extends Component {
               <ListSubheader disabled value="">Canon/Published Exalts</ListSubheader>
               <MenuItem value="Character">Mortal</MenuItem>
               <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
-              <MenuItem value="DragonbloodCharacter" disabled>Dragon-Blooded Exalt</MenuItem>
+              <MenuItem value="DragonbloodCharacter">Dragon-Blooded Exalt</MenuItem>
 
               <ListSubheader disabled value="">Custom Exalts</ListSubheader>
 
@@ -130,8 +130,15 @@ class CharacterCreatePopup extends Component {
           }
           { character.type == 'DragonbloodCharacter' &&
             <div>
+              <Typography paragraph>
+                Selecting this option means the system will try to follow the
+                rules in the core book as closely as it can. If your group uses
+                house rules, especially ones that change available Aspect
+                abilities or mote pools, choose Houserule Ability-based exalt
+                instead.
+              </Typography>
               <TextField select name="caste" value={ character.caste }
-                label="Caste" margin="dense" fullWidth
+                label="Aspect" margin="dense" fullWidth
                 onChange={ handleChange }
               >
                 <MenuItem value="air">Air</MenuItem>

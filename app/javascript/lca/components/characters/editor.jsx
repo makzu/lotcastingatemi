@@ -13,6 +13,7 @@ import BasicsEditor from './editors/basicsEditor.jsx'
 import CustomAbilityExaltEditor from './editors/customAbilityExaltEditor.jsx'
 import CustomAttributeExaltEditor from './editors/customAttributeExaltEditor.jsx'
 import CustomEssenceExaltEditor from './editors/customEssenceExaltEditor.jsx'
+import DragonbloodExaltEditor from './editors/DragonbloodExaltEditor.jsx'
 import HealthLevelEditor from './editors/healthLevelEditor.jsx'
 import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
@@ -112,6 +113,14 @@ class CharacterEditor extends Component {
             />
           </Grid>
         }
+        { character.type === 'DragonbloodCharacter' &&
+          <Grid item xs={ 12 } md={ 6 }>
+            <DragonbloodExaltEditor character={ character }
+              onChange={ handleChange } onBlur={ handleBlur }
+              onRatingChange={ handleRatingChange }
+            />
+          </Grid>
+        }
         { character.type == 'CustomAbilityCharacter' &&
           <Grid item xs={ 12 } md={ 6 }>
             <CustomAbilityExaltEditor character={ character }
@@ -193,7 +202,7 @@ class CharacterEditor extends Component {
           />
         </Grid>
 
-        { character.type != 'Character' &&
+        { character.type !== 'Character' && character.exalt_type.toLowerCase() !== 'dragon-blood' &&
           <Grid item xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 }>
             <LimitEditor character={ character }
               onChange={ handleChange } onBlur={ handleBlur }

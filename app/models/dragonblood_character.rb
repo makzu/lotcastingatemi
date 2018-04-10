@@ -27,6 +27,7 @@ class DragonbloodCharacter < Character
 
   before_validation :set_mote_pool_totals
   before_validation :set_defaults
+  before_validation :set_caste_abilities
 
   validates :caste, inclusion: { in: DRAGONBLOOD_ASPECTS }, unless: :caste_is_blank?
   validates :aura, inclusion:  { in: DRAGONBLOOD_ASPECTS + [''] }
@@ -44,15 +45,20 @@ class DragonbloodCharacter < Character
   end
 
   def set_defaults
-    self.exalt_type = 'Dragonblood'
+    self.exalt_type = 'Dragon-Blood'
     self.aspect = true
     self.excellency = ''
     self.excellency_stunt = ''
     self.excellencies_for = []
-    self.caste_abilities = ASPECT_ABILITIES[caste.to_sym] unless caste_is_blank?
+  end
+
+  def set_caste_abilities
+    return unless will_save_change_to_attribute? :caste
+    self.caste_abilities = ASPECT_ABILITIES[caste.to_sym]
+    self.favored_abilities = favored_abilities - ASPECT_ABILITIES[caste.to_sym]
   end
 
   def favored_ability_count
-    errors.add(:favored_abilities, 'Must have at most 5 favored abilities') unless favored_abilities.length <= 3
+    errors.add(:favored_abilities, 'Must have at most 5 favored abilities') unless favored_abilities.length <= 5
   end
 end

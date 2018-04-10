@@ -17,13 +17,20 @@ class DragonbloodCharacter < Character
   alias_attribute :charms, :dragonblood_charms
 
   DRAGONBLOOD_ASPECTS = %w[air earth fire water wood].freeze
-  # TODO: caste ability validations
+  ASPECT_ABILITIES = {
+    "air":   %w[ linguistics lore occult stealth thrown ],
+    "earth": %w[ awareness craft integrity resistance war ],
+    "fire":  %w[ athletics dodge melee presence socialize ],
+    "water": %w[ brawl bureaucracy investigation larceny sail ],
+    "wood":  %w[ archery medicine performance ride survival ]
+  }.freeze
 
   before_validation :set_mote_pool_totals
   before_validation :set_defaults
 
   validates :caste, inclusion: { in: DRAGONBLOOD_ASPECTS }, unless: :caste_is_blank?
-  validate :caste_abilities_are_valid,                      unless: :caste_is_blank?
+  validates :aura, inclusion:  { in: DRAGONBLOOD_ASPECTS + [''] }
+  validate  :favored_ability_count
 
   private
 
@@ -42,9 +49,10 @@ class DragonbloodCharacter < Character
     self.excellency = ''
     self.excellency_stunt = ''
     self.excellencies_for = []
+    self.caste_abilities = ASPECT_ABILITIES[caste.to_sym] unless caste_is_blank?
   end
 
-  def caste_abilities_are_valid
-    true
+  def favored_ability_count
+    errors.add(:favored_abilities, 'Must have at most 5 favored abilities') unless favored_abilities.length <= 3
   end
 end

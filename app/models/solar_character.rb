@@ -51,6 +51,7 @@ class SolarCharacter < Character
   def set_defaults
     self.exalt_type = 'Solar'
     self.aspect = false
+    self.aura = ''
     self.excellency = ''
     self.excellency_stunt = ''
     self.excellencies_for = []

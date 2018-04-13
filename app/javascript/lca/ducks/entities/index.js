@@ -98,9 +98,9 @@ export default function EntityReducer(state = defaultState, action) {
 }
 
 function handleCreateAction(state, payload) {
-  const { parent_type, parent_id, assoc } = payload
+  const { parent_type, parent_id, assoc, type } = payload
   let entity = JSON.parse(payload.entity)
-  let ppp = normalize(entity, schemas[assoc])
+  let ppp = normalize(entity, schemas[type])
 
   const parent = {
     [parent_type]: { ...state[parent_type],

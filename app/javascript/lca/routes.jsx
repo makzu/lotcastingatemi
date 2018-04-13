@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 
 import ChronicleDashboard from 'components/chronicles/index.jsx'
 import ChroniclePlayerPage from 'components/chronicles/playerPage.jsx'
+import ChronicleCombatDashboard from 'components/chronicles/combat.jsx'
 import ContentList from 'components/pages/contentList.jsx'
 import CharacterSheet from 'components/characters/index.jsx'
 import CharacterDashboard from 'components/characters/dashboard/'

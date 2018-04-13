@@ -36,11 +36,13 @@ function ChronicleHeader(props: Props) {
   const tabBasePath = `/chronicles/${chronicle.id}`
 
   let tabValue = 0
-  if (path.includes('/players')) tabValue = 1
+  if (path.includes('/combat')) tabValue = 1
+  else if (path.includes('/players')) tabValue = 2
 
   const tabs = (
     <Tabs className={classes.tabs} value={tabValue} centered>
       <Tab label="Characters" component={Link} to={tabBasePath} />
+      <Tab label="Combat" component={Link} to={tabBasePath + '/combat'} />
       <Tab
         label={props.is_st ? 'ST' : 'Players'}
         component={Link}

@@ -72,7 +72,7 @@ export type Props = {
   drawerOpen: boolean,
   loading: boolean,
   toggleDrawer: Function,
-  children: Object,
+  children: React.Node,
   classes: Object,
 }
 
@@ -157,17 +157,9 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    toggleDrawer: () => {
-      dispatch(toggleDrawer())
-    },
-  }
-}
-
 export default withStyles(styles, { withTheme: true })(
   withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(
+    connect(mapStateToProps, { toggleDrawer })(
       App
     )
   )

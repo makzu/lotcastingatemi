@@ -1,6 +1,10 @@
+## v46
+###### *Not yet released*
+- Bug fixes
+
 ## v45
 ###### *Apr 10, 2018*
-- Dragon-Blooded characters are now fully supported
+- Dragon-Blooded characters can now be created
 - STs can now delete Chronicles
 - Temporary willpower can go above 10
 - Slightly more automated test coverage than before

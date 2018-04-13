@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-  SortableElement,
-} from 'react-sortable-hoc'
+import { SortableElement } from 'react-sortable-hoc'
 
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
@@ -56,7 +54,7 @@ class ChronicleDashboard extends Component {
     const { handleSort } = this
 
     const characterList = characters.map((c, i) => <SortableItem key={ c.id } index={ i } collection="characters">
-      <Grid item xs={ 12 } lg={ 6 } xl={ 4 } key={ c.id }>
+      <Grid item xs={ 12 } lg={ 6 } xl={ 4 }>
         <CharacterCard character={ c } chronicle st={ is_st } />
       </Grid>
     </SortableItem>)

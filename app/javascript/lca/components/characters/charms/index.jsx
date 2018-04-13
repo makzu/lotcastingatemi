@@ -137,7 +137,7 @@ class CharmFullPage extends Component {
         <div style={{ height: '1em', }}>&nbsp;</div>
       </Grid>
 
-      { natives.length > 0 &&
+      { character.type !== 'Character' &&
         <Grid item xs={ 12 } className={ classes.stickyHeader }>
           <Typography variant="headline">
             Charms

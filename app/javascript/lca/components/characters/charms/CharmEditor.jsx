@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-  SortableContainer,
-  SortableElement,
-} from 'react-sortable-hoc'
+import { SortableElement } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
@@ -17,30 +14,23 @@ import styles from './CharmStyles.js'
 import CharmFields from './CharmFields.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellFields from './SpellFields.jsx'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
 
-import ProtectedComponent from '../../../containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import {
   updateCharm, createCharm, destroyCharm,
   updateSpell, createSpell, destroySpell,
-} from '../../../ducks/actions.js'
+} from 'ducks/actions.js'
 import {
   getSpecificCharacter, getEvokableMeritsForCharacter,
   getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter, getSpellsForCharacter, getSpiritCharmsForCharacter,
-} from '../../../selectors/'
+} from 'selectors/'
 
 const filterByCategory = categoryFilter => charm => (
   categoryFilter.every((cat) => charm.categories.includes(cat))
 )
 const SortableItem = SortableElement(({ children }) => children)
-const SortableGridList = SortableContainer(({ header, items, classes }) =>
-  <Grid container spacing={ 24 }>
-    <Grid item xs={ 12 } className={ classes.stickyHeader }>
-      { header }
-    </Grid>
-    { items }
-  </Grid>
-)
 
 class CharmEditor extends Component {
   constructor(props) {

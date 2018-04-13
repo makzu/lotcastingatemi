@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  SortableContainer,
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc'
@@ -11,6 +10,7 @@ import Button from 'material-ui/Button'
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
 import Grid from 'material-ui/Grid'
+import Hidden from 'material-ui/Hidden'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
@@ -20,6 +20,7 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
 import { updateMerit, createMerit, destroyMerit } from '../../ducks/actions.js'
@@ -28,14 +29,6 @@ import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '../../utils/constants.js'
 import { fullMerit } from '../../utils/propTypes'
 
 const SortableItem = SortableElement(({ children }) => children)
-const SortableGridList = SortableContainer(({ header, items }) =>
-  <Grid container spacing={ 24 }>
-    <Grid item xs={ 12 }>
-      { header }
-    </Grid>
-    { items }
-  </Grid>
-)
 const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
 
 export class MeritFields extends Component {
@@ -149,8 +142,6 @@ export class MeritFields extends Component {
           onChange={ handleChange } onBlur={ handleBlur }
         />
         &nbsp;
-
-
       </div>
 
       <div>
@@ -229,7 +220,11 @@ class MeritEditor extends Component {
       </Grid>
     </SortableItem>)
 
-    return <div>
+    return <Fragment>
+      <Hidden smUp>
+        <div style={{ height: '1.5em', }}>&nbsp;</div>
+      </Hidden>
+
       <SortableGridList
         header={<Typography variant="headline">
           Merits
@@ -240,11 +235,12 @@ class MeritEditor extends Component {
           </Button>
         </Typography>}
         items={ mts }
+        classes={{}}
         onSortEnd={ handleSort }
         useDragHandle={ true }
         axis="xy"
       />
-    </div>
+    </Fragment>
   }
 }
 

@@ -119,9 +119,9 @@ class App extends Component {
           <Divider className={ classes.footerDivider } />
           <div>
             <Typography variant="caption" className={ classes.footerText } component="a"
-              href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v44"
+              href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v46"
             >
-              v44
+              v46
             </Typography>
           </div>
 
@@ -150,7 +150,7 @@ App.propTypes = {
   loading: PropTypes.bool.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
-  classes: PropTypes.object,
+  classes: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {

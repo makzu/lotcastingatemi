@@ -17,6 +17,7 @@ export const is404Error    = (action) => action.error && action.payload.status =
 export default function AppReducer(state = defaultState, action) {
   if (isAuthFailure(action) || isForbidden(action) || is404Error(action)) {
     return { ...state,
+      loading: false,
       error: true,
       errorMessage: action.payload.message,
     }

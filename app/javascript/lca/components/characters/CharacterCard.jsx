@@ -21,7 +21,7 @@ import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { canIEditCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
+import { canIDeleteCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import * as calc from '../../utils/calculated'
 import type { fullChar } from '../../utils/propTypes/flow.js'
 
@@ -94,17 +94,17 @@ type Props = {
   chronicle?: boolean,
   st?: boolean,
   combat?: boolean,
-  canEdit?: boolean,
+  canDelete: boolean,
   pools: Object,
   penalties: Object,
   classes: Object,
 }
 
 export function CharacterCard(
-  { character, combat, canEdit, chronicle, st, penalties, pools, classes }: Props
+  { character, combat, canDelete, chronicle, st, penalties, pools, classes }: Props
 ) {
   return <Paper className={ classes.root }>
-    { (chronicle && st) &&
+    { ((chronicle && st) || (!chronicle && canDelete)) &&
       <Typography component="div"
         style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
       >
@@ -138,7 +138,7 @@ export function CharacterCard(
         }
       </div>
 
-      { canEdit &&
+      { (st || canDelete) &&
         <CharacterCardMenu characterType="character" id={ character.id } />
       }
     </div>
@@ -231,7 +231,7 @@ export function CharacterCard(
 }
 function mapStateToProps(state, props) {
   return {
-    canEdit: canIEditCharacter(state, props.character.id),
+    canDelete: canIDeleteCharacter(state, props.character.id),
     penalties: getPenalties(state, props.character.id),
     pools: getPoolsAndRatings(state, props.character.id),
   }

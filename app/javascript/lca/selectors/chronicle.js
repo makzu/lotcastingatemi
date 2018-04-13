@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
+import { chronicleSortOrderSort } from 'utils'
+
 const getState = (state) => state
 const getCurrentPlayer = (state) => state.entities.players[state.session.id]
 
@@ -27,7 +29,7 @@ export const getCharactersForChronicle = createCachedSelector(
   (chronicle, characters) =>
     ( chronicle &&
       chronicle.characters &&
-      chronicle.characters.map((c) => characters[c])
+      chronicleSortOrderSort(chronicle.characters.map((c) => characters[c]))
     ) || []
 )(idMemoizer)
 
@@ -37,7 +39,7 @@ export const getQcsForChronicle = createCachedSelector(
   (chronicle, qcs) =>
     ( chronicle &&
       chronicle.qcs &&
-      chronicle.qcs.map((c) => qcs[c])
+      chronicleSortOrderSort(chronicle.qcs.map((c) => qcs[c]))
     ) || []
 )(idMemoizer)
 
@@ -47,7 +49,7 @@ export const getBattlegroupsForChronicle = createCachedSelector(
   (chronicle, battlegroups) =>
     ( chronicle &&
       chronicle.battlegroups &&
-      chronicle.battlegroups.map((c) => battlegroups[c])
+      chronicleSortOrderSort(chronicle.battlegroups.map((c) => battlegroups[c]))
     ) || []
 )(idMemoizer)
 

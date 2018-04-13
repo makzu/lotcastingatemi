@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  SortableContainer,
   SortableElement,
 } from 'react-sortable-hoc'
 
@@ -16,15 +15,36 @@ import QcCard from 'components/qcs/QcCard.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import {
   getSpecificChronicle, getPlayersForChronicle,
   getCharactersForChronicle, getQcsForChronicle, getBattlegroupsForChronicle,
   getStorytellerForChronicle, amIStOfChronicle,
-} from '../../selectors'
+} from 'selectors'
+
+const SortableItem = SortableElement(({ children }) => children)
 
 class ChronicleDashboard extends Component {
+  handleSort = ({ oldIndex, newIndex, collection }) => {
+    if (oldIndex === newIndex)
+      return
+    let update
+    let coll = []
+    switch(collection) {
+    case 'characters':
+      update = this.props.updateCharacter
+      coll = this.props.characters
+      break
+    }
+    const charA = coll[oldIndex]
+    const charB = coll[newIndex]
+    const offset = charA.sort_order > charB.sort_order ? -1 : 1
+    update(charA.id, 'chronicle_sort_order', charB.sort_order + offset)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.chronicle == undefined || this.props.chronicle.name == undefined)
@@ -33,12 +53,13 @@ class ChronicleDashboard extends Component {
       </BlockPaper>
 
     const { chronicle, characters, qcs, battlegroups, is_st } = this.props
+    const { handleSort } = this
 
-    const characterList = characters.map((c) =>
+    const characterList = characters.map((c, i) => <SortableItem key={ c.id } index={ i } collection="characters">
       <Grid item xs={ 12 } lg={ 6 } xl={ 4 } key={ c.id }>
         <CharacterCard character={ c } chronicle st={ is_st } />
       </Grid>
-    )
+    </SortableItem>)
     const qcList = qcs.map((c) =>
       <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 } key={ c.id }>
         <QcCard qc={ c } chronicle st={ is_st } />
@@ -50,50 +71,52 @@ class ChronicleDashboard extends Component {
       </Grid>
     )
 
-    return <Grid container spacing={ 24 }>
-      <Grid item hidden={{ smUp: true }} xs={ 12 }>
-        <div style={{ height: '1em', }}>&nbsp;</div>
-      </Grid>
-
-      <Grid item xs={ 12 }>
-        <Typography variant="headline">
+    return <Fragment>
+      <SortableGridList
+        header={<Typography variant="headline">
           Characters
           <CharacterAddPopup chronicleId={ chronicle.id } />
-        </Typography>
-      </Grid>
-      { characterList }
-      { characterList.length == 0 &&
-        <Grid item xs={ 12 }>
-          <Typography>None yet</Typography>
-        </Grid>
-      }
+        </Typography>}
+        items={ characterList }
+        classes={{}}
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+        axis="xy"
+      />
+      <Grid container spacing={ 24 }>
+        { characterList.length == 0 &&
+          <Grid item xs={ 12 }>
+            <Typography>None yet</Typography>
+          </Grid>
+        }
 
-      <Grid item xs={ 12 }>
-        <Typography variant="headline">
-          Quick Characters
-          <QcAddPopup chronicleId={ chronicle.id } />
-        </Typography>
-      </Grid>
-      { qcList }
-      { qcList.length == 0 &&
         <Grid item xs={ 12 }>
-          <Typography>None yet</Typography>
+          <Typography variant="headline">
+            Quick Characters
+            <QcAddPopup chronicleId={ chronicle.id } />
+          </Typography>
         </Grid>
-      }
+        { qcList }
+        { qcList.length == 0 &&
+          <Grid item xs={ 12 }>
+            <Typography>None yet</Typography>
+          </Grid>
+        }
 
-      <Grid item xs={ 12 }>
-        <Typography variant="headline">
-          Battlegroups
-          <BattlegroupAddPopup chronicleId={ chronicle.id } />
-        </Typography>
-      </Grid>
-      { bgList }
-      { bgList.length == 0 &&
         <Grid item xs={ 12 }>
-          <Typography>None yet</Typography>
+          <Typography variant="headline">
+            Battlegroups
+            <BattlegroupAddPopup chronicleId={ chronicle.id } />
+          </Typography>
         </Grid>
-      }
-    </Grid>
+        { bgList }
+        { bgList.length == 0 &&
+          <Grid item xs={ 12 }>
+            <Typography>None yet</Typography>
+          </Grid>
+        }
+      </Grid>
+    </Fragment>
   }
 }
 
@@ -106,6 +129,9 @@ ChronicleDashboard.propTypes = {
   qcs: PropTypes.arrayOf(PropTypes.object),
   battlegroups: PropTypes.arrayOf(PropTypes.object),
   chronicle: PropTypes.object,
+  updateCharacter: PropTypes.func,
+  updateQc: PropTypes.func,
+  updateBattlegroup: PropTypes.func,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -124,7 +150,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps)(
+  connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
     ChronicleDashboard
   )
 )

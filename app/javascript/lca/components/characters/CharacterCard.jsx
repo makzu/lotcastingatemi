@@ -2,12 +2,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import DragHandleIcon from '@material-ui/icons/DragHandle'
 import Whatshot from '@material-ui/icons/Whatshot'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
@@ -23,6 +25,8 @@ import { canIEditCharacter, getPenalties, getPoolsAndRatings } from '../../selec
 import * as calc from '../../utils/calculated'
 import type { fullChar } from '../../utils/propTypes/flow.js'
 
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
+
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters({
@@ -30,6 +34,7 @@ const styles = theme => ({
       paddingBottom: 16,
     }),
     height: '100%',
+    position: 'relative',
   },
   nameRow: {
     display: 'flex',
@@ -86,6 +91,8 @@ const styles = theme => ({
 
 type Props = {
   character: fullChar,
+  chronicle?: boolean,
+  st?: boolean,
   combat?: boolean,
   canEdit?: boolean,
   pools: Object,
@@ -93,8 +100,17 @@ type Props = {
   classes: Object,
 }
 
-export function CharacterCard({ character, combat, canEdit, penalties, pools, classes }: Props) {
+export function CharacterCard(
+  { character, combat, canEdit, chronicle, st, penalties, pools, classes }: Props
+) {
   return <Paper className={ classes.root }>
+    { (chronicle && st) &&
+      <Typography component="div"
+        style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
+      >
+        <Handle />
+      </Typography>
+    }
 
     <div className={ classes.nameRow }>
       <div className={ classes.nameWrap }>
@@ -126,7 +142,6 @@ export function CharacterCard({ character, combat, canEdit, penalties, pools, cl
         <CharacterCardMenu characterType="character" id={ character.id } />
       }
     </div>
-
 
     <Typography className={ classes.rowContainer } component="div">
       { character.motes_personal_total > 0 &&

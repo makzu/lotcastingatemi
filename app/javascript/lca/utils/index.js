@@ -15,3 +15,4 @@ export function clamp(val, min, max) {
 }
 
 export const sortOrderSort = array => array.sort((a, b) => a.sort_order - b.sort_order)
+export const chronicleSortOrderSort = array => array.sort((a, b) => a.chronicle_sort_order - b.chronicle_sort_order)

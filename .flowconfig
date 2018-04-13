@@ -8,5 +8,7 @@ flow-typed
 [lints]
 
 [options]
+module.system.node.resolve_dirname=app/javascript/lca
+module.system.node.resolve_dirname=node_modules
 
 [strict]

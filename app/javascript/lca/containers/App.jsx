@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+const { Component } = React
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
@@ -12,10 +13,10 @@ import Hidden from 'material-ui/Hidden'
 import Typography from 'material-ui/Typography'
 import Slide from 'material-ui/transitions/Slide'
 
-import LoadingSpinner from '../components/generic/LoadingSpinner.jsx'
-import LcaHeader from '../components/header/header.jsx'
-import NavPanel from '../components/nav/navPanel.jsx'
-import { toggleDrawer } from '../ducks/actions.js'
+import LoadingSpinner from 'components/generic/LoadingSpinner.jsx'
+import LcaHeader from 'components/header/header.jsx'
+import NavPanel from 'components/nav/navPanel.jsx'
+import { toggleDrawer } from 'ducks/actions.js'
 
 // Shamelessly stolen from the material-ui drawer demo
 
@@ -67,14 +68,16 @@ const styles = theme => ({
   }
 })
 
-class App extends Component {
-  constructor(props) {
-    super(props)
+export type Props = {
+  drawerOpen: boolean,
+  loading: boolean,
+  toggleDrawer: Function,
+  children: Object,
+  classes: Object,
+}
 
-    this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
-  }
-
-  handleDrawerToggle() {
+class App extends Component<Props> {
+  handleDrawerToggle = () => {
     this.props.toggleDrawer()
   }
 
@@ -144,13 +147,6 @@ class App extends Component {
       </Slide>
     </div>
   }
-}
-App.propTypes = {
-  drawerOpen: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
-  children: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {

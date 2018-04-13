@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import {
+  SortableContainer,
+  SortableElement,
+} from 'react-sortable-hoc'
 
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
 import CharacterAddPopup from './characterAddPopup.jsx'
-import CharacterCard from '../characters/CharacterCard.jsx'
+import CharacterCard from 'components/characters/CharacterCard.jsx'
 import QcAddPopup from './qcAddPopup.jsx'
-import QcCard from '../qcs/QcCard.jsx'
+import QcCard from 'components/qcs/QcCard.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
-import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
+import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
+import BlockPaper from 'components/generic/blockPaper.jsx'
 
-import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import {
   getSpecificChronicle, getPlayersForChronicle,
   getCharactersForChronicle, getQcsForChronicle, getBattlegroupsForChronicle,

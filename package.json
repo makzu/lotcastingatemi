@@ -87,7 +87,10 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/app/javascript/"
+      "<rootDir>/app/javascript/lca/"
+    ],
+    "modulePaths": [
+      "<rootDir>/app/javascript/lca"
     ],
     "collectCoverageFrom": [
       "app/javascript/lca/**/*.js",

@@ -1,10 +1,13 @@
 ## v46
-###### *Not yet released*
+###### *Apr 14, 2018*
+- Characters, QCs, and Battlegroups on the Characters page can be manually sorted just like Charms.
+- STs can also sort Characters/etc on the Chronicle page
+- Fix newly created Martial Arts Charms / Evocations / Spirit Charms not appearing on screen until it is refreshed
 - Bug fixes
 
 ## v45
 ###### *Apr 10, 2018*
-- Dragon-Blooded characters can now be created
+- Dragon-Blooded characters can now be created. Excellency and anima power support will come in a future release.
 - STs can now delete Chronicles
 - Temporary willpower can go above 10
 - Slightly more automated test coverage than before

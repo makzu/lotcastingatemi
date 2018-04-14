@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-# Rails 5.1 for Webpacker
-gem 'rails', '~> 5.1.6'
+# Rails 5.1+ for Webpacker
+gem 'rails', '~> 5.2.0'
 # Webpacker allows React/Redux and friends to thrive:
 gem 'webpacker', '~> 3.4'
 
@@ -31,6 +31,8 @@ gem 'bcrypt', '~> 3.1.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'bootsnap', '~> 1.3.0', require: false
+
 # Authentication/Authorization
 gem 'knock'
 gem 'pundit'
@@ -50,7 +52,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'action-cable-testing'
   gem 'byebug', platform: :mri
-  gem 'capybara', '~> 2.18.0'
+  gem 'capybara', '~> 3.0.0'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false

@@ -37,6 +37,14 @@ class ContentList extends Component {
       update = this.props.updateCharacter
       coll = this.props.characters
       break
+    case 'qcs':
+      update = this.props.updateQc
+      coll = this.props.qcs
+      break
+    case 'battlegroups':
+      update = this.props.updateBattlegroup
+      coll = this.props.battlegroups
+      break
     }
     const charA = coll[oldIndex]
     const charB = coll[newIndex]
@@ -51,16 +59,16 @@ class ContentList extends Component {
         <CharacterCard character={ c } />
       </Grid>
     </SortableItem>)
-    const qcs = this.props.qcs.map((q) =>
-      <Grid item xs={ 12 } md={ 6 } lg={ 4 }  key={ q.id }>
+    const qcs = this.props.qcs.map((q, i) => <SortableItem key={ q.id } index={ i } collection="qcs">
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 }>
         <QcCard qc={ q } />
       </Grid>
-    )
-    const bgs = this.props.battlegroups.map((b) =>
-      <Grid item xs={ 12 } md={ 6 } lg={ 4 } key={ b.id }>
+    </SortableItem>)
+    const bgs = this.props.battlegroups.map((b, i) => <SortableItem key={ b.id } index={ i } collection="battlegroups">
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 }>
         <BattlegroupCard battlegroup={ b } />
       </Grid>
-    )
+    </SortableItem>)
 
     return <Fragment>
       <SortableGridList
@@ -77,28 +85,31 @@ class ContentList extends Component {
 
       <Divider style={{ margin: '1em 0' }} />
 
-      <Grid container spacing={ 24 }>
-        <Grid item xs={ 9 }>
-          <Typography variant="headline">
-            Quick Characters
-          </Typography>
-        </Grid>
-        <Grid item xs={ 3 }>
-          <QcCreatePopup />
-        </Grid>
-        { qcs }
+      <SortableGridList
+        header={<Typography variant="headline">
+          Quick Characters
+          &nbsp;<QcCreatePopup />
+        </Typography>}
+        items={ qcs }
+        classes={{}}
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+        axis="xy"
+      />
 
-        <Grid item xs={ 9 }>
-          <Typography variant="headline">
-            Battlegroups
-          </Typography>
-        </Grid>
-        <Grid item xs={ 3 }>
-          <BattlegroupCreatePopup />
-        </Grid>
-        { bgs }
+      <Divider style={{ margin: '1em 0' }} />
 
-      </Grid>
+      <SortableGridList
+        header={<Typography variant="headline">
+          Battlegroups
+          &nbsp;<BattlegroupCreatePopup />
+        </Typography>}
+        items={ bgs }
+        classes={{}}
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+        axis="xy"
+      />
     </Fragment>
   }
 }

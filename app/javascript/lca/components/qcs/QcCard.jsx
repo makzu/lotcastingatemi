@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import DragHandleIcon from '@material-ui/icons/DragHandle'
 import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
@@ -18,15 +20,21 @@ import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { canIEditQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
+import { canIDeleteQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
 import { qcPool } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
+
 const styles = theme => ({
-  root: theme.mixins.gutters({
-    paddingTop: 16,
-    paddingBottom: 16,
-  }),
+  root: {
+    ...theme.mixins.gutters({
+      paddingTop: 16,
+      paddingBottom: 16,
+    }),
+    height: '100%',
+    position: 'relative',
+  },
   nameRow: {
     display: 'flex',
   },
@@ -62,8 +70,15 @@ const styles = theme => ({
   },
 })
 
-function QcCard({ qc, combat, penalties, pools, canIEdit, classes }) {
+function QcCard({ qc, combat, chronicle, st, penalties, pools, canDelete, classes }) {
   return <Paper className={ classes.root }>
+    { ((chronicle && st) || (!chronicle && canDelete)) &&
+      <Typography component="div"
+        style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
+      >
+        <Handle />
+      </Typography>
+    }
 
     <div className={ classes.nameRow }>
       <div className={ classes.nameWrap }>
@@ -84,7 +99,7 @@ function QcCard({ qc, combat, penalties, pools, canIEdit, classes }) {
         <PlayerNameSubtitle playerId={ qc.player_id } />
       </div>
 
-      { canIEdit &&
+      { canDelete &&
         <CharacterCardMenu characterType="qc" id={ qc.id } />
       }
     </div>
@@ -165,17 +180,19 @@ function QcCard({ qc, combat, penalties, pools, canIEdit, classes }) {
 QcCard.propTypes = {
   qc: PropTypes.shape(fullQc).isRequired,
   combat: PropTypes.bool,
-  penalties: PropTypes.object,
-  pools: PropTypes.object,
-  player: PropTypes.object,
-  canIEdit: PropTypes.bool,
-  classes: PropTypes.object,
+  chronicle: PropTypes.bool,
+  st: PropTypes.bool,
+  penalties: PropTypes.object.isRequired,
+  pools: PropTypes.object.isRequired,
+  player: PropTypes.object.isRequired,
+  canDelete: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 function mapStateToProps(state, props) {
   return {
     penalties: getPenaltiesForQc(state, props.qc.id),
     pools: getPoolsAndRatingsForQc(state, props.qc.id),
-    canIEdit: canIEditQc(state, props.qc.id),
+    canDelete: canIDeleteQc(state, props.qc.id),
   }
 }
 

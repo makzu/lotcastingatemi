@@ -36,11 +36,19 @@ class ChronicleDashboard extends Component {
       update = this.props.updateCharacter
       coll = this.props.characters
       break
+    case 'qcs':
+      update = this.props.updateQc
+      coll = this.props.qcs
+      break
+    case 'battlegroups':
+      update = this.props.updateBattlegroup
+      coll = this.props.battlegroups
+      break
     }
     const charA = coll[oldIndex]
     const charB = coll[newIndex]
-    const offset = charA.sort_order > charB.sort_order ? -1 : 1
-    update(charA.id, 'chronicle_sort_order', charB.sort_order + offset)
+    const offset = charA.chronicle_sort_order > charB.chronicle_sort_order ? -1 : 1
+    update(charA.id, 'chronicle_sort_order', charB.chronicle_sort_order + offset)
   }
 
   render() {
@@ -58,16 +66,16 @@ class ChronicleDashboard extends Component {
         <CharacterCard character={ c } chronicle st={ is_st } />
       </Grid>
     </SortableItem>)
-    const qcList = qcs.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 } key={ c.id }>
+    const qcList = qcs.map((c, i) => <SortableItem key={ c.id } index={ i } collection="qcs">
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 }>
         <QcCard qc={ c } chronicle st={ is_st } />
       </Grid>
-    )
-    const bgList = battlegroups.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 } key={ c.id }>
+    </SortableItem>)
+    const bgList = battlegroups.map((c, i) => <SortableItem key={ c.id } index={ i } collection="battlegroups">
+      <Grid item xs={ 12 } md={ 6 } lg={ 4 } xl={ 3 }>
         <BattlegroupCard battlegroup={ c } chronicle st={ is_st } />
       </Grid>
-    )
+    </SortableItem>)
 
     return <Fragment>
       <SortableGridList
@@ -81,39 +89,51 @@ class ChronicleDashboard extends Component {
         useDragHandle={ true }
         axis="xy"
       />
-      <Grid container spacing={ 24 }>
-        { characterList.length == 0 &&
+      { characterList.length == 0 &&
+        <Grid container spacing={ 24 }>
           <Grid item xs={ 12 }>
             <Typography>None yet</Typography>
           </Grid>
-        }
-
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Quick Characters
-            <QcAddPopup chronicleId={ chronicle.id } />
-          </Typography>
         </Grid>
-        { qcList }
-        { qcList.length == 0 &&
-          <Grid item xs={ 12 }>
-            <Typography>None yet</Typography>
-          </Grid>
-        }
+      }
 
-        <Grid item xs={ 12 }>
-          <Typography variant="headline">
-            Battlegroups
-            <BattlegroupAddPopup chronicleId={ chronicle.id } />
-          </Typography>
-        </Grid>
-        { bgList }
-        { bgList.length == 0 &&
+      <SortableGridList
+        header={<Typography variant="headline">
+          Quick Characters
+          <QcAddPopup chronicleId={ chronicle.id } />
+        </Typography>}
+        items={ qcList }
+        classes={{}}
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+        axis="xy"
+      />
+      { qcList.length == 0 &&
+        <Grid container spacing={ 24 }>
           <Grid item xs={ 12 }>
             <Typography>None yet</Typography>
           </Grid>
-        }
-      </Grid>
+        </Grid>
+      }
+
+      <SortableGridList
+        header={<Typography variant="headline">
+          Battlegroups
+          <BattlegroupAddPopup chronicleId={ chronicle.id } />
+        </Typography>}
+        items={ bgList }
+        classes={{}}
+        onSortEnd={ handleSort }
+        useDragHandle={ true }
+        axis="xy"
+      />
+      { bgList.length == 0 &&
+        <Grid container spacing={ 24 }>
+          <Grid item xs={ 12 }>
+            <Typography>None yet</Typography>
+          </Grid>
+        </Grid>
+      }
     </Fragment>
   }
 }

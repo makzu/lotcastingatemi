@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import DragHandleIcon from '@material-ui/icons/DragHandle'
 import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
@@ -14,14 +16,20 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
-import { canIEditBattlegroup } from '../../selectors'
+import { canIDeleteBattlegroup } from '../../selectors'
 import { prettyDrillRating, totalMagnitude } from '../../utils/calculated'
 
+const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
+
 const styles = theme => ({
-  root: theme.mixins.gutters({
-    paddingTop: 16,
-    paddingBottom: 16,
-  }),
+  root: {
+    ...theme.mixins.gutters({
+      paddingTop: 16,
+      paddingBottom: 16,
+    }),
+    height: '100%',
+    position: 'relative',
+  },
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
@@ -59,9 +67,16 @@ const styles = theme => ({
   },
 })
 
-function BattlegroupCard({ battlegroup, combat, canIEdit, classes }) {
+function BattlegroupCard({ battlegroup, chronicle, st, combat, canDelete, classes }) {
 
   return <Paper className={ classes.root }>
+    { ((chronicle && st) || (!chronicle && canDelete)) &&
+      <Typography component="div"
+        style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
+      >
+        <Handle />
+      </Typography>
+    }
 
     <div className={ classes.nameRow }>
       <div className={ classes.nameWrap }>
@@ -82,7 +97,7 @@ function BattlegroupCard({ battlegroup, combat, canIEdit, classes }) {
         <PlayerNameSubtitle playerId={ battlegroup.player_id } />
       </div>
 
-      { canIEdit &&
+      { canDelete &&
         <CharacterCardMenu characterType="battlegroup" id={ battlegroup.id } />
       }
     </div>
@@ -144,14 +159,14 @@ function BattlegroupCard({ battlegroup, combat, canIEdit, classes }) {
 }
 BattlegroupCard.propTypes = {
   battlegroup: PropTypes.object.isRequired,
+  chronicle: PropTypes.bool,
+  st: PropTypes.bool,
   combat: PropTypes.bool,
-  canIEdit: PropTypes.bool,
+  canDelete: PropTypes.bool.isRequired,
   classes: PropTypes.object,
 }
-function mapStateToProps(state, props) {
-  return {
-    canIEdit: canIEditBattlegroup(state, props.battlegroup.id),
-  }
-}
+const mapStateToProps = (state, props) => ({
+  canDelete: canIDeleteBattlegroup(state, props.battlegroup.id),
+})
 
 export default withStyles(styles)(connect(mapStateToProps)(BattlegroupCard))

@@ -78,7 +78,10 @@ class ListAttributeEditor extends Component {
 
   onBlur(index, e) {
     const { name } = e.target
-    if (this.state.trait[index][name] === this.props.character[this.props.trait][index][name])
+    const { nonObject, character, trait } = this.props
+    if (!nonObject && this.state.trait[index][name] === character[trait][index][name])
+      return
+    if (nonObject && this.state.trait[index] === character[trait][index])
       return
 
     this.handleChange(this.state.trait)

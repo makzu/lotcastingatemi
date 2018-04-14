@@ -11,10 +11,11 @@ import Switch from 'material-ui/Switch'
 
 import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
-import DisplayNamePopup from '../generic/displayNamePopup.jsx'
-import Discord from '../../icons/Discord-Logo.jsx'
-import OctoCat from '../../icons/OctoCat.jsx'
-import { logout, closeDrawer, switchTheme } from '../../ducks/actions.js'
+import DisplayNamePopup from 'components/generic/displayNamePopup.jsx'
+import ErrorBoundary from 'containers/ErrorBoundary.jsx'
+import Discord from 'icons/Discord-Logo.jsx'
+import OctoCat from 'icons/OctoCat.jsx'
+import { logout, closeDrawer, switchTheme } from 'ducks/actions.js'
 
 const styles = theme => ({ // eslint-disable-line no-unused-vars
   themeLabel: {
@@ -49,7 +50,7 @@ export class NavPanel extends Component<Props> {
     } = this.props
     const { closeCheck } = this
 
-    return <div>
+    return <ErrorBoundary>
       <List component="nav">
         { authenticated && <DisplayNamePopup /> }
 
@@ -121,7 +122,7 @@ export class NavPanel extends Component<Props> {
         </ListItem>
 
       </List>
-    </div>
+    </ErrorBoundary>
   }
 }
 

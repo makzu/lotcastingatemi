@@ -16,6 +16,7 @@
     "react-hot-loader/babel",
     "syntax-dynamic-import",
     "syntax-flow",
+    "transform-react-jsx-source",
     "transform-object-rest-spread",
     ["transform-class-properties", { "spec": true }]
   ],

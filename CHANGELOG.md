@@ -1,3 +1,8 @@
+## v47
+###### *Not yet released*
+- An error message will now be displayed instead of a blank screen if an error is encountered
+- Bug fixes
+
 ## v46
 ###### *Apr 14, 2018*
 - Characters, QCs, and Battlegroups on the Characters page can be manually sorted just like Charms.

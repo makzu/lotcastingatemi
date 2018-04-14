@@ -16,6 +16,7 @@ import Slide from 'material-ui/transitions/Slide'
 import LoadingSpinner from 'components/generic/LoadingSpinner.jsx'
 import LcaHeader from 'components/header/header.jsx'
 import NavPanel from 'components/nav/navPanel.jsx'
+import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import { toggleDrawer } from 'ducks/actions.js'
 
 // Shamelessly stolen from the material-ui drawer demo
@@ -116,7 +117,9 @@ class App extends Component<Props> {
       </Hidden>
 
       <main className={ classes.content }>
-        { children }
+        <ErrorBoundary>
+          { children }
+        </ErrorBoundary>
 
         <footer className={ classes.footer }>
           <Divider className={ classes.footerDivider } />

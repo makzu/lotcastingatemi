@@ -3,8 +3,8 @@ import createCachedSelector from 're-reselect'
 
 import { getPoolsForWeapon, sortByParry, } from './weapon.js'
 import { getAllAbilitiesWithCharmsForCharacter } from './charm.js'
-import { sortOrderSort } from '../utils'
-import * as calc from '../utils/calculated/'
+import { sortOrderSort } from 'utils'
+import * as calc from 'utils/calculated/'
 
 const getState = (state) => state
 const getCurrentPlayer = (state) => state.entities.players[state.session.id]
@@ -17,11 +17,10 @@ export const getCachedSpecificCharacter = createCachedSelector(
   (character) => character
 )(characterIdMemoizer)
 
-
 const getMerits = (state) => state.entities.merits
 export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],
-  (character, merits) => sortOrderSort(character.merits.map((m) => merits[m]))
+  (character, merits) => character.merits.map((m) => merits[m]).sort(sortOrderSort)
 )(characterIdMemoizer)
 export const getMeritNamesForCharacter = (state, id) => getMeritsForCharacter(state, id).map((m) => m.merit_name.toLowerCase() + m.rating).sort()
 export const getEvokableMeritsForCharacter = createSelector(
@@ -34,14 +33,14 @@ export const getEvokableMeritsForCharacter = createSelector(
 const getWeapons = (state) => state.entities.weapons
 export const getWeaponsForCharacter = createCachedSelector(
   [getSpecificCharacter, getWeapons],
-  (character, weapons) => sortOrderSort(character.weapons.map((w) => weapons[w]))
+  (character, weapons) => character.weapons.map((w) => weapons[w]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
 
 const getSpells = (state) => state.entities.spells
 export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
-  (character, spells) => sortOrderSort(character.spells.map((s) => spells[s]))
+  (character, spells) => character.spells.map((s) => spells[s]).sort(sortOrderSort)
 )(characterIdMemoizer)
 export const getControlSpellsForCharacter = (state, id) => getSpellsForCharacter(state, id).filter((s) => s.control)
 
@@ -100,27 +99,31 @@ export const getPoolsAndRatings = createCachedSelector(
   }
 )(characterIdMemoizer)
 
-export const canIEditCharacter = createSelector(
+export const doIOwnCharacter = createSelector(
+  [getCurrentPlayer, getSpecificCharacter],
+  (player, character) => character !== undefined && player.id === character.player_id
+)
+
+export const amIStOfCharacter = createSelector(
   [getCurrentPlayer, getSpecificCharacter, getState],
-  (player, character, state) => {
-    if (character === undefined)
-      return false
+  (player, character, state) => (
+    character !== undefined &&
+    character.chronicle_id &&
+    state.entities.chronicles[character.chronicle_id] &&
+    state.entities.chronicles[character.chronicle_id].st_id === player.id
+  )
+)
+export const canISeeCharacter = createSelector(
+  [getSpecificCharacter, doIOwnCharacter, amIStOfCharacter],
+  (character, doI, amI) => !character.hidden || doI || amI
+)
 
-    if (player.id === character.player_id)
-      return true
-
-    if (
-      character.chronicle_id &&
-      state.entities.chronicles[character.chronicle_id] &&
-      state.entities.chronicles[character.chronicle_id].st_id === player.id
-    )
-      return true
-
-    return false
-  }
+export const canIEditCharacter = createSelector(
+  [doIOwnCharacter, amIStOfCharacter],
+  (doI, amI) => doI || amI
 )
 
 export const canIDeleteCharacter = createSelector(
-  [getCurrentPlayer, getSpecificCharacter],
-  (player, character) => (player.id === character.player_id)
+  [doIOwnCharacter],
+  (doI) => doI
 )

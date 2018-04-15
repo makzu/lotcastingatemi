@@ -20,7 +20,7 @@ import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { canIDeleteQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
+import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from '../../selectors'
 import { qcPool } from '../../utils/calculated'
 import { fullQc } from '../../utils/propTypes'
 
@@ -70,9 +70,9 @@ const styles = theme => ({
   },
 })
 
-function QcCard({ qc, combat, chronicle, st, penalties, pools, canDelete, classes }) {
+function QcCard({ qc, combat, chronicle, st, penalties, pools, isOwner, classes }) {
   return <Paper className={ classes.root }>
-    { ((chronicle && st) || (!chronicle && canDelete)) &&
+    { ((chronicle && st) || (!chronicle && isOwner)) &&
       <Typography component="div"
         style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
       >
@@ -99,7 +99,7 @@ function QcCard({ qc, combat, chronicle, st, penalties, pools, canDelete, classe
         <PlayerNameSubtitle playerId={ qc.player_id } />
       </div>
 
-      { canDelete &&
+      { isOwner &&
         <CharacterCardMenu characterType="qc" id={ qc.id } />
       }
     </div>
@@ -185,14 +185,14 @@ QcCard.propTypes = {
   penalties: PropTypes.object.isRequired,
   pools: PropTypes.object.isRequired,
   player: PropTypes.object.isRequired,
-  canDelete: PropTypes.bool.isRequired,
+  isOwner: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
 }
 function mapStateToProps(state, props) {
   return {
     penalties: getPenaltiesForQc(state, props.qc.id),
     pools: getPoolsAndRatingsForQc(state, props.qc.id),
-    canDelete: canIDeleteQc(state, props.qc.id),
+    isOwner: doIOwnQc(state, props.qc.id),
   }
 }
 

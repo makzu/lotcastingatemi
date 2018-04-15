@@ -1,3 +1,4 @@
+// @flow
 import { createSelector } from 'reselect'
 import { sortOrderSort } from '../utils'
 
@@ -7,7 +8,7 @@ const getCharacters = (state) => state.entities.characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    sortOrderSort(currentPlayer.characters.map((c) => characters[c] ))
+    currentPlayer.characters.map((c) => characters[c] ).sort(sortOrderSort)
 )
 export const getMyPinnedCharacters = createSelector(
   [getMyCharacters],
@@ -22,7 +23,7 @@ const getQCs = (state) => state.entities.qcs
 export const getMyQCs = createSelector(
   [getCurrentPlayer, getQCs],
   (currentPlayer, qcs) =>
-    sortOrderSort(currentPlayer.qcs.map((c) => qcs[c] ))
+    currentPlayer.qcs.map((c) => qcs[c] ).sort(sortOrderSort)
 )
 export const getMyPinnedQCs = createSelector(
   [getMyQCs],
@@ -37,7 +38,7 @@ const getBattlegroups = (state) => state.entities.battlegroups
 export const getMyBattlegroups = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>
-    sortOrderSort(currentPlayer.battlegroups.map((c) => battlegroups[c] ))
+    currentPlayer.battlegroups.map((c) => battlegroups[c] ).sort(sortOrderSort)
 )
 export const getMyPinnedBattlegroups = createSelector(
   [getMyBattlegroups],

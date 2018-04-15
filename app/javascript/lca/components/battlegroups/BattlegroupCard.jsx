@@ -16,8 +16,8 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
-import { canIDeleteBattlegroup } from '../../selectors'
-import { prettyDrillRating, totalMagnitude } from '../../utils/calculated'
+import { doIOwnBattlegroup } from 'selectors'
+import { prettyDrillRating, totalMagnitude } from 'utils/calculated'
 
 const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
 
@@ -67,10 +67,10 @@ const styles = theme => ({
   },
 })
 
-function BattlegroupCard({ battlegroup, chronicle, st, combat, canDelete, classes }) {
+function BattlegroupCard({ battlegroup, chronicle, st, combat, isOwner, classes }) {
 
   return <Paper className={ classes.root }>
-    { ((chronicle && st) || (!chronicle && canDelete)) &&
+    { ((chronicle && st) || (!chronicle && isOwner)) &&
       <Typography component="div"
         style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
       >
@@ -97,7 +97,7 @@ function BattlegroupCard({ battlegroup, chronicle, st, combat, canDelete, classe
         <PlayerNameSubtitle playerId={ battlegroup.player_id } />
       </div>
 
-      { canDelete &&
+      { isOwner &&
         <CharacterCardMenu characterType="battlegroup" id={ battlegroup.id } />
       }
     </div>
@@ -162,11 +162,11 @@ BattlegroupCard.propTypes = {
   chronicle: PropTypes.bool,
   st: PropTypes.bool,
   combat: PropTypes.bool,
-  canDelete: PropTypes.bool.isRequired,
+  isOwner: PropTypes.bool.isRequired,
   classes: PropTypes.object,
 }
 const mapStateToProps = (state, props) => ({
-  canDelete: canIDeleteBattlegroup(state, props.battlegroup.id),
+  isOwner: doIOwnBattlegroup(state, props.battlegroup.id),
 })
 
 export default withStyles(styles)(connect(mapStateToProps)(BattlegroupCard))

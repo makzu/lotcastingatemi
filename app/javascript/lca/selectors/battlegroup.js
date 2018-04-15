@@ -12,27 +12,31 @@ export const getAttacksForBattlegroup = createCachedSelector(
   (bg, attacks) => bg.qc_attacks.map((m) => attacks[m])
 )((state, id) => id)
 
-export const canIEditBattlegroup = createSelector(
+export const doIOwnBattlegroup = createSelector(
+  [getCurrentPlayer, getSpecificBattlegroup],
+  (player, battlegroup) => battlegroup !== undefined && player.id === battlegroup.player_id
+)
+
+export const amIStOfBattlegroup = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup, getState],
-  (player, character, state) => {
-    if (character === undefined)
-      return false
+  (player, battlegroup, state) => (
+    battlegroup !== undefined &&
+    battlegroup.chronicle_id &&
+    state.entities.chronicles[battlegroup.chronicle_id] &&
+    state.entities.chronicles[battlegroup.chronicle_id].st_id === player.id
+  )
+)
+export const canISeeBattlegroup = createSelector(
+  [getSpecificBattlegroup, doIOwnBattlegroup, amIStOfBattlegroup],
+  (battlegroup, doI, amI) => !battlegroup.hidden || doI || amI
+)
 
-    if (player.id === character.player_id)
-      return true
-
-    if (
-      character.chronicle_id &&
-      state.entities.chronicles[character.chronicle_id] &&
-      state.entities.chronicles[character.chronicle_id].st_id === player.id
-    )
-      return true
-
-    return false
-  }
+export const canIEditBattlegroup = createSelector(
+  [doIOwnBattlegroup, amIStOfBattlegroup],
+  (doI, amI) => doI || amI
 )
 
 export const canIDeleteBattlegroup = createSelector(
-  [getCurrentPlayer, getSpecificBattlegroup],
-  (player, character) => (player.id === character.player_id)
+  [doIOwnBattlegroup],
+  (doI) => doI
 )

@@ -57,27 +57,31 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
   }
 )(qcIdMemoizer)
 
-export const canIEditQc = createSelector(
+export const doIOwnQc = createSelector(
+  [getCurrentPlayer, getSpecificQc],
+  (player, qc) => qc !== undefined && player.id === qc.player_id
+)
+
+export const amIStOfQc = createSelector(
   [getCurrentPlayer, getSpecificQc, getState],
-  (player, character, state) => {
-    if (character === undefined)
-      return false
+  (player, qc, state) => (
+    qc !== undefined &&
+    qc.chronicle_id &&
+    state.entities.chronicles[qc.chronicle_id] &&
+    state.entities.chronicles[qc.chronicle_id].st_id === player.id
+  )
+)
+export const canISeeQc = createSelector(
+  [getSpecificQc, doIOwnQc, amIStOfQc],
+  (qc, doI, amI) => !qc.hidden || doI || amI
+)
 
-    if (player.id === character.player_id)
-      return true
-
-    if (
-      character.chronicle_id &&
-      state.entities.chronicles[character.chronicle_id] &&
-      state.entities.chronicles[character.chronicle_id].st_id === player.id
-    )
-      return true
-
-    return false
-  }
+export const canIEditQc = createSelector(
+  [doIOwnQc, amIStOfQc],
+  (doI, amI) => doI || amI
 )
 
 export const canIDeleteQc = createSelector(
-  [getCurrentPlayer, getSpecificQc],
-  (player, character) => (player.id === character.player_id)
+  [doIOwnQc],
+  (doI) => doI
 )

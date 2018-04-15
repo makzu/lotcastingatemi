@@ -1,4 +1,5 @@
-export function clamp(val, min, max) {
+// @flow
+export function clamp(val: number, min: number, max: number): number {
   if (val > max) {
     if (max === 10 && val === 10) // Willpower, essence can be exactly 10
       val = 10
@@ -14,5 +15,5 @@ export function clamp(val, min, max) {
   return val
 }
 
-export const sortOrderSort = array => array.sort((a, b) => a.sort_order - b.sort_order)
-export const chronicleSortOrderSort = array => array.sort((a, b) => a.chronicle_sort_order - b.chronicle_sort_order)
+export const sortOrderSort = (a: Object, b: Object) => a.sort_order - b.sort_order
+export const chronicleSortOrderSort = (a: Object, b: Object) => a.chronicle_sort_order - b.chronicle_sort_order

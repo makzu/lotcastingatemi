@@ -12,11 +12,9 @@ const errorNames = [
   'Keen Error and Bug Technique',
   'One Error, Two Bugs',
 ]
-
-class ErrorBoundary extends React.Component<
-  { children: React.Node},
-  { error?: Object, errorInfo?: Object }
-> {
+type Props = { children: React.Node }
+type State = { error?: Object, errorInfo?: Object }
+class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Object) {
     super(props)
     this.state = { error: undefined, errorInfo: undefined }
@@ -31,6 +29,7 @@ class ErrorBoundary extends React.Component<
     if (error) {
       return <div>
         <Typography variant="title">{ sample(errorNames) }</Typography>
+        <Typography>Something went wrong.</Typography>
         <Typography>{ error && error.message }</Typography>
       </div>
     }

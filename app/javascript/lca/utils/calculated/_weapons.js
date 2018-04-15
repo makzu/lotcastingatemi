@@ -199,18 +199,18 @@ function specialtiesForWeapon(character, weapon) {
     return specialtiesFor(character, weapon.ability)
 }
 
-function excellencyForWeapon(character, weapon, charmAbils, stunt = false) {
-  return maxExcellency(character, weapon.attr, weapon.ability, charmAbils, stunt)
+function excellencyForWeapon(character, weapon, excellencyAbils, staticRating = false, stunt = false) {
+  return maxExcellency(character, weapon.attr, weapon.ability, excellencyAbils, staticRating, stunt)
 }
 
-export function witheringAttackPool(character, weapon, penalties, charmAbils) {
+export function witheringAttackPool(character, weapon, penalties, excellencyAbils) {
   const _attr = attr(character, weapon.attr)
   const _abil = abil(character, weapon.ability)
   const accuracy = weaponAccuracyBonus(weapon)
   const rawPool = _attr + _abil + accuracy
 
-  const excellency = excellencyForWeapon(character, weapon, charmAbils)
-  const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
+  const excellency = excellencyForWeapon(character, weapon, excellencyAbils)
+  const excellencyStunt = excellencyForWeapon(character, weapon, excellencyAbils, false, true)
 
   return {
     name: weapon.name + ' Withering Attack',
@@ -230,7 +230,7 @@ export function witheringAttackPool(character, weapon, penalties, charmAbils) {
   }
 }
 
-export function rangedWitheringAttackPool(character, weapon, penalties, charmAbils) {
+export function rangedWitheringAttackPool(character, weapon, penalties, excellencyAbils) {
   if (!weaponIsRanged(weapon))
     return false
 
@@ -242,8 +242,8 @@ export function rangedWitheringAttackPool(character, weapon, penalties, charmAbi
   const _abil = abil(character, weapon.ability)
   const rawPool = _attr + _abil
 
-  const excellency = excellencyForWeapon(character, weapon, charmAbils)
-  const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
+  const excellency = excellencyForWeapon(character, weapon, excellencyAbils)
+  const excellencyStunt = excellencyForWeapon(character, weapon, excellencyAbils, false, true)
 
   const penalty = penalties.wound
   const poolBase = {
@@ -315,13 +315,13 @@ export function witheringDamage(character, weapon) {
   }
 }
 
-export function decisiveAttackPool(character, weapon, penalties, charmAbils) {
+export function decisiveAttackPool(character, weapon, penalties, excellencyAbils) {
   const _attr = attr(character, weapon.attr)
   const _abil = abil(character, weapon.ability)
   const rawPool = _attr + _abil
 
-  const excellency = excellencyForWeapon(character, weapon, charmAbils)
-  const excellencyStunt = excellencyForWeapon(character, weapon, charmAbils, true)
+  const excellency = excellencyForWeapon(character, weapon, excellencyAbils)
+  const excellencyStunt = excellencyForWeapon(character, weapon, excellencyAbils, false, true)
 
   return {
     name: weapon.name + ' Decisive Attack',
@@ -340,7 +340,7 @@ export function decisiveAttackPool(character, weapon, penalties, charmAbils) {
   }
 }
 
-export function parry(character, weapon, penalties, charmAbils) {
+export function parry(character, weapon, penalties, excellencyAbils) {
   if (weaponIsRanged(weapon))
     return { raw: 0, total: 0 }
 
@@ -350,8 +350,8 @@ export function parry(character, weapon, penalties, charmAbils) {
   const specialties = specialtiesForWeapon(character, weapon)
   const penalty = penalties.onslaught + penalties.wound
   const rawRating = Math.ceil(rawPool / 2) + weaponDefenseBonus(weapon)
-  const excellency = Math.floor(excellencyForWeapon(character, weapon, charmAbils) / 2)
-  const excellencyStunt = Math.floor(excellencyForWeapon(character, weapon, charmAbils, true) / 2)
+  const excellency = excellencyForWeapon(character, weapon, excellencyAbils, true)
+  const excellencyStunt = excellencyForWeapon(character, weapon, excellencyAbils, true, true)
 
   return {
     name: weapon.name + ' Parry',

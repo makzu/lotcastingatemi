@@ -41,7 +41,7 @@ export const genAbilities = {
   abil_martial_arts: gen.array({ style: gen.string, rating: gen.posInt }),
 }
 
-export const genCharacter = {
+export const genMortal = {
   name: gen.string,
   ...genHealthLevels,
   type: 'Character',
@@ -64,8 +64,25 @@ export const genCharacter = {
   armor_weight: gen.oneOf(['unarmored', 'light', 'medium', 'heavy']),
   armor_is_artifact: gen.boolean,
   armor_tags: gen.array(gen.string),
-  merits: gen.uniqueArray(gen.intWithin(1, 15), { minSize: 2 }),
-  spells: gen.uniqueArray(gen.intWithin(1, 5), { minSize: 1, maxSize: 3 }),
+  onslaught: gen.posInt,
+}
+
+export const genAbilityExalt = {
+  ...genMortal,
+  caste_abilities: gen.array(gen.oneOf(ABILITY_NAMES)),
+  favored_abilities: gen.array(gen.oneOf(ABILITY_NAMES)),
+  anima_level: 3,
+}
+
+export const genSolar = {
+  ...genAbilityExalt,
+  type: 'SolarCharacter',
+  exalt_type: 'solar',
+  excellency: 'solar',
+  supernal_ability: gen.oneOf(ABILITY_NAMES),
+  caste: gen.oneOf(['dawn', 'zenith', 'twilight', 'night', 'eclipse']),
+  charms: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+  martial_arts_charms: [26],
 }
 
 export const mockCharacter = {

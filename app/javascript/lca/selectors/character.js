@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
 import { getPoolsForWeapon, sortByParry, } from './weapon.js'
-import { getAllAbilitiesWithCharmsForCharacter } from './charm.js'
+import { getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter } from './charm.js'
 import { sortOrderSort } from 'utils'
 import * as calc from 'utils/calculated/'
 
@@ -36,7 +36,6 @@ export const getWeaponsForCharacter = createCachedSelector(
   (character, weapons) => character.weapons.map((w) => weapons[w]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
-
 const getSpells = (state) => state.entities.spells
 export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
@@ -65,36 +64,39 @@ export const getPoolsAndRatings = createCachedSelector(
   [
     getSpecificCharacter,
     getMeritNamesForCharacter,
-    getAllAbilitiesWithCharmsForCharacter,
+    getNativeCharmsForCharacter,
+    getMartialArtsCharmsForCharacter,
     getControlSpellsForCharacter,
     getPenalties,
     getPoolsForAllWeaponsForCharacter
   ],
-  (character, meritNames, charmAbils, spells, penalties, weaponPools) => {
+  (character, meritNames, nativeCharms, maCharms, spells, penalties, weaponPools) => {
     const spellNames = spells.map((m) => m.name.toLowerCase())
+    const excellencyAbils = calc.excellencyAbils(character, nativeCharms.concat(maCharms))
 
     const bestParryWeapon = weaponPools.sort(sortByParry)[0] || { parry: { total: 'None', noSummary: true }}
 
     return {
       exaltTypeBase: calc.exaltTypeBase(character),
-      guile: calc.guile(character, meritNames, penalties, charmAbils),
-      resolve: calc.resolve(character, meritNames, penalties, charmAbils),
-      appearance: calc.appearanceRating(character, meritNames, penalties, charmAbils),
-      readIntentions: calc.readIntentions(character, meritNames, penalties, charmAbils),
+      excellencyAbils: excellencyAbils,
+      guile: calc.guile(character, meritNames, penalties, excellencyAbils),
+      resolve: calc.resolve(character, meritNames, penalties, excellencyAbils),
+      appearance: calc.appearanceRating(character, meritNames, penalties, excellencyAbils),
+      readIntentions: calc.readIntentions(character, meritNames, penalties, excellencyAbils),
 
-      evasion: calc.evasion(character, meritNames, penalties, charmAbils),
+      evasion: calc.evasion(character, meritNames, penalties, excellencyAbils),
       bestParry: bestParryWeapon.parry,
       soak: calc.soak(character, meritNames, spellNames),
       hardness: { total: calc.hardness(character) },
-      joinBattle: calc.joinBattle(character, meritNames, penalties, charmAbils),
-      rush: calc.rush(character, meritNames, penalties, charmAbils),
-      disengage: calc.disengage(character, meritNames, penalties, charmAbils),
-      withdraw: calc.withdraw(character, meritNames, penalties, charmAbils),
-      riseFromProne: calc.riseFromProne(character, meritNames, penalties, charmAbils),
-      takeCover: calc.takeCover(character, meritNames, penalties, charmAbils),
+      joinBattle: calc.joinBattle(character, meritNames, penalties, excellencyAbils),
+      rush: calc.rush(character, meritNames, penalties, excellencyAbils),
+      disengage: calc.disengage(character, meritNames, penalties, excellencyAbils),
+      withdraw: calc.withdraw(character, meritNames, penalties, excellencyAbils),
+      riseFromProne: calc.riseFromProne(character, meritNames, penalties, excellencyAbils),
+      takeCover: calc.takeCover(character, meritNames, penalties, excellencyAbils),
 
-      featOfStrength: calc.featOfStrength(character, meritNames, penalties, charmAbils),
-      shapeSorcery: calc.shapeSorcery(character, meritNames, penalties, charmAbils),
+      featOfStrength: calc.featOfStrength(character, meritNames, penalties, excellencyAbils),
+      shapeSorcery: calc.shapeSorcery(character, meritNames, penalties, excellencyAbils),
     }
   }
 )(characterIdMemoizer)

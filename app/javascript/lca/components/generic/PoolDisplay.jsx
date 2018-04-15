@@ -63,20 +63,20 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     const { label, pool, classes } = this.props
     const { open, } = this.state
     const { setOpen, setClosed } = this
-    const mb = pool.meritBonus || []
+    const mb = pool.bonus || []
     const pen = pool.penalties || []
     const sp = pool.specialties || []
 
     const merits = mb.map((m) =>
       <div key={ m.label } className={ classes.specialty }>
         { m.situational &&
-          <span>+{ m.bonus } </span>
+          <span>{ m.bonus > 0 && '+' }{ m.bonus } </span>
         }{ m.label }
       </div>
     )
     const fullMerits = mb.map((m) =>
       <div key={ m.label }>
-        +{ m.bonus } { m.label }
+        { m.situational && '(conditional) '}{ m.bonus > 0 && '+' }{ m.bonus } { m.label }
       </div>
     )
     const fullPen = pen.map((p) =>
@@ -137,19 +137,23 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               { pool.ability &&
                 <span> + { pool.ability } { pool.abilityRating }</span>
               }
-              { pool.accuracy &&
+              )
+              { pool.name.endsWith('Withering Attack') &&
                 <span> + { pool.accuracy } from weapon</span>
               }
               { pool.witheringDamage &&
                 <span> + { pool.weaponDamage } from weapon</span>
               }
               { pool.rating && ' /2'}
-              )
               { pool.parry &&
                 <span> + { pool.defense } from weapon</span>
               }
+              { pool.raw &&
+                <span> = { pool.raw }</span>
+              }
             </DialogContentText>
           }
+
           { pool.witheringDamage &&
             <DialogContentText>
               + Threshhold Successes<br />
@@ -157,6 +161,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               Minimum { pool.minimum }
             </DialogContentText>
           }
+
           { pool.soak &&
             <DialogContentText>
               { pool.natural } Natural
@@ -165,24 +170,45 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               }
             </DialogContentText>
           }
-          <DialogContentText component="div" style={{ textTransform: 'capitalize' }}>
-            { fullMerits }
-          </DialogContentText>
-          { sp.length > 0 &&
-            <DialogContentText component="div">
-              { pool.specialtyMatters && <Fragment>
-                Specialties:&nbsp;
-                <span style={{ textTransform: 'capitalize' }}>
-                  { pool.specialties.join(', ') }
-                </span>
-                <p>Specialties <strong>will</strong> affect rating</p>
-              </Fragment>}
 
-              { pool.rating && !pool.specialtyMatters && <p>Specialties will <strong>not</strong> affect rating</p>}
+          { pool.excellency > 0 &&
+            <DialogContentText component="div" style={{ marginTop: '0.5em' }}>
+              Can add up to { pool.excellency }{ !pool.rating && ' dice'} for { pool.excellencyCost }m
+              { pool.excellencyStunt > 0 &&
+                `( ${pool.excellencyStunt} for ${pool.excellencyStuntCost}m on stunt)`
+              }
+            </DialogContentText>
+          }
+          { fullMerits.length > 0 &&
+            <DialogContentText component="div" style={{ textTransform: 'capitalize', marginTop: '0.5em' }}>
+              <div>Bonuses:</div>
+              { fullMerits }
+            </DialogContentText>
+          }
+
+          { sp.length > 0 &&
+            <DialogContentText component="div" style={{ marginTop: '0.5em' }}>
+              Specialties:&nbsp;
+              <span style={{ textTransform: 'capitalize' }}>
+                { pool.specialties.join(', ') }
+              </span>
+              { pool.rating && pool.specialtyMatters &&
+                <div>
+                  Specialt{ pool.specialties.length === 1 ? 'y ' : 'ies ' }
+                  <strong>will</strong> increase rating by 1
+                </div>
+              }
+
+              { pool.rating && !pool.specialtyMatters &&
+                <div>
+                  Specialt{ pool.specialties.length === 1 ? 'y ' : 'ies ' }
+                  <strong>will not</strong> affect rating
+                </div>
+              }
             </DialogContentText>
           }
           { pen.length > 0 &&
-            <DialogContentText style={{ textTransform: 'capitalize' }}>
+            <DialogContentText style={{ textTransform: 'capitalize', marginTop: '0.5em' }}>
               Penalties:<br />
               { fullPen }
             </DialogContentText>

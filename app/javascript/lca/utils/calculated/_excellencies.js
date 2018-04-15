@@ -1,31 +1,33 @@
 import { attr, abil, specialtiesFor } from '.'
 import { ABILITIES, ATTRIBUTES } from '../constants.js'
 
-export const canUseExcellency = (character, attribute, ability, charmAbils) => {
+export const excellencyAbils = (character, charms) => {
   if (character.type === 'Character')
-    return false
+    return []
 
   let excellencies = character.excellencies_for || []
-  if (excellencies.includes('*'))
-    return true
 
-  if (character.type === 'SolarCharacter' || excellencies.includes('solar')) {
-    excellencies +=
-      character.caste_abilities.filter((a) => abil(character, a) > 0) +
-      character.favored_abilities.filter((a) => abil(character, a) > 0)
+  if (character.type === 'SolarCharacter' || character.excellency === 'solar') {
+    excellencies = excellencies
+      .concat(character.caste_abilities.filter((a) => abil(character, a) > 0))
+      .concat(character.favored_abilities.filter((a) => abil(character, a) > 0))
+
+    if (excellencies.includes('brawl') && character.abil_martial_arts.length > 0)
+      excellencies = excellencies.concat(['martial_arts'])
+
+    excellencies = excellencies.concat(
+      charms.map((c) => c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability)
+    )
+
+  } else if (character.type === 'DragonbloodCharacter' || character.excellency.startsWith('dragon')) {
+    excellencies = excellencies
+      .concat(charms.filter((c) => c.keywords.includes('excellency') || c.keywords.includes('Excellency')).map((c) => c.ability))
+
     if (excellencies.includes('brawl'))
-      excellencies += ['martial_arts']
-    excellencies += charmAbils
+      excellencies = excellencies.concat(['martial_arts'])
   }
 
-  if (excellencies.includes(attribute) || excellencies.includes(ability))
-    return true
-  if (ability.startsWith('martial arts') && excellencies.includes('martial_arts'))
-    return true
-  if (ability.startsWith('craft') && excellencies.includes('craft'))
-    return true
-
-  return false
+  return [ ...new Set(excellencies)]
 }
 
 export const highestOtherAbility = (character, ability) => {
@@ -40,7 +42,7 @@ export const highestOtherAttribute = (character, attribute) => {
   return Math.max(...result)
 }
 
-export function maxCustomExcellency(character, attribute, ability, stunt = false) {
+export function maxCustomExcellency(character, attribute, ability, staticRating, stunt = false) {
   let excellency
   if (stunt)
     excellency = character.excellency_stunt
@@ -85,24 +87,43 @@ export function maxCustomExcellency(character, attribute, ability, stunt = false
     }
   }
 
-  return result
+  if (!staticRating)
+    return result
+  if (exArray.includes('roundup'))
+    return Math.ceil(result / 2)
+  return Math.floor(result / 2)
 }
 
-export function maxExcellency(character, attribute, ability, charmAbils, stunt = false) {
-  if (!canUseExcellency(character, attribute, ability, charmAbils))
+export function maxExcellency(character, attribute, ability, excellencyAbils, staticRating, stunt = false) {
+  let abili = ability
+  if (abili.startsWith('craft'))
+    abili = 'craft'
+  if (abili.startsWith('martial arts'))
+    abili = 'martial_arts'
+
+  if (
+    character.type === 'Character' ||
+    (stunt && character.excellency_stunt === undefined) ||
+    (stunt && character.excellency_stunt === '') ||
+    !(
+      excellencyAbils.includes(attribute) ||
+      excellencyAbils.includes(abili) ||
+      excellencyAbils.includes('*'))
+  )
     return 0
 
-  switch (character.type) {
-  case 'SolarCharacter':
-    return stunt ? 0 : attr(character, attribute) + abil(character, ability)
-  case 'DragonbloodCharacter':
-    return stunt ? 0 : abil(character, ability) + specialtiesFor(character, ability).length > 0 ? 1 : 0
-  case 'CustomAttributeCharacter':
-  case 'CustomAbilityCharacter':
-  case 'CustomEssenceCharacter':
-    return maxCustomExcellency(character, attribute, ability, stunt)
-  case 'Character':
-  default:
-    return 0
-  }
+  const attr_rating = attr(character, attribute)
+  const abil_rating = abil(character, ability)
+
+  if (character.type === 'SolarCharacter' || character.excellency === 'solar')
+    return Math.floor((attr_rating + abil_rating) / (staticRating ? 2 : 1))
+  if (character.type === 'DragonbloodCharacter' || character.excellency.startsWith('dragon'))
+    return Math.ceil(
+      (abil_rating + (specialtiesFor(character, abili).length > 0 ? 1 : 0)) /
+        (staticRating ? 2 : 1)
+    )
+  if (character.type === 'SiderealCharacter' || character.excellency === 'sidereal')
+    return character.essence
+
+  return maxCustomExcellency(character, attribute, ability, staticRating, stunt)
 }

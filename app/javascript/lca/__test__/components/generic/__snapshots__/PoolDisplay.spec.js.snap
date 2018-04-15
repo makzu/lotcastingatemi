@@ -1,7 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PoolDisplay renders all pools correctly 1`] = `
+exports[`PoolDisplay renders all pools correctly for Solars 1`] = `
 <div>
+  <div
+    className="PoolDisplay-root-1"
+    onClick={[Function]}
+  >
+    <div
+      className="PoolDisplay-label-2"
+    >
+      <span
+        className="PoolDisplay-labelSpan-3"
+      />
+    </div>
+    <div>
+      <span
+        className="PoolDisplay-pool-4"
+      />
+    </div>
+  </div>
   <div
     className="PoolDisplay-root-1"
     onClick={[Function]}
@@ -294,8 +311,25 @@ exports[`PoolDisplay renders all pools correctly 1`] = `
 </div>
 `;
 
-exports[`PoolDisplay renders all pools correctly 2`] = `
+exports[`PoolDisplay renders all pools correctly for Solars 2`] = `
 <div>
+  <div
+    className="PoolDisplay-root-1"
+    onClick={[Function]}
+  >
+    <div
+      className="PoolDisplay-label-2"
+    >
+      <span
+        className="PoolDisplay-labelSpan-3"
+      />
+    </div>
+    <div>
+      <span
+        className="PoolDisplay-pool-4"
+      />
+    </div>
+  </div>
   <div
     className="PoolDisplay-root-1"
     onClick={[Function]}
@@ -588,8 +622,25 @@ exports[`PoolDisplay renders all pools correctly 2`] = `
 </div>
 `;
 
-exports[`PoolDisplay renders all pools correctly 3`] = `
+exports[`PoolDisplay renders all pools correctly for Solars 3`] = `
 <div>
+  <div
+    className="PoolDisplay-root-1"
+    onClick={[Function]}
+  >
+    <div
+      className="PoolDisplay-label-2"
+    >
+      <span
+        className="PoolDisplay-labelSpan-3"
+      />
+    </div>
+    <div>
+      <span
+        className="PoolDisplay-pool-4"
+      />
+    </div>
+  </div>
   <div
     className="PoolDisplay-root-1"
     onClick={[Function]}
@@ -882,8 +933,25 @@ exports[`PoolDisplay renders all pools correctly 3`] = `
 </div>
 `;
 
-exports[`PoolDisplay renders all pools correctly 4`] = `
+exports[`PoolDisplay renders all pools correctly for Solars 4`] = `
 <div>
+  <div
+    className="PoolDisplay-root-1"
+    onClick={[Function]}
+  >
+    <div
+      className="PoolDisplay-label-2"
+    >
+      <span
+        className="PoolDisplay-labelSpan-3"
+      />
+    </div>
+    <div>
+      <span
+        className="PoolDisplay-pool-4"
+      />
+    </div>
+  </div>
   <div
     className="PoolDisplay-root-1"
     onClick={[Function]}
@@ -1176,8 +1244,25 @@ exports[`PoolDisplay renders all pools correctly 4`] = `
 </div>
 `;
 
-exports[`PoolDisplay renders all pools correctly 5`] = `
+exports[`PoolDisplay renders all pools correctly for Solars 5`] = `
 <div>
+  <div
+    className="PoolDisplay-root-1"
+    onClick={[Function]}
+  >
+    <div
+      className="PoolDisplay-label-2"
+    >
+      <span
+        className="PoolDisplay-labelSpan-3"
+      />
+    </div>
+    <div>
+      <span
+        className="PoolDisplay-pool-4"
+      />
+    </div>
+  </div>
   <div
     className="PoolDisplay-root-1"
     onClick={[Function]}

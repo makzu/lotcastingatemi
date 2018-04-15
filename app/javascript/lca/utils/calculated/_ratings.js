@@ -11,15 +11,16 @@ export function rating(
   ability: string,
   penalties: Array<Object>,
   charmAbils: Array<string>,
+  bonus: Array<Object> = [],
 ) {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)
   const pool = _attr + _abil
   const specialties = specialtiesFor(character, ability)
 
-  const excellency = Math.floor(maxExcellency(character, attribute, ability, charmAbils) / 2)
-  const excellencyStunt = Math.floor(maxExcellency(character, attribute, ability, charmAbils, true) / 2)
-  const penalty = penalties.reduce((a, p) => a + p.penalty, 0 )
+  const excellency = maxExcellency(character, attribute, ability, charmAbils, true)
+  const excellencyStunt = maxExcellency(character, attribute, ability, charmAbils, true, true)
+  const penalty = penalties.reduce((a, p) => a + p.penalty, 0)
 
   return {
     name: name,
@@ -36,6 +37,7 @@ export function rating(
     excellencyStuntCost: excellencyStunt * 2,
     penalties: penalties.filter((p) => p.penalty > 0),
     total: Math.max(Math.ceil(pool / 2) - penalty, 0),
+    bonus: bonus,
     rating: true,
   }
 }
@@ -61,7 +63,16 @@ export function resolve(
   charmAbils: Array<string>,
 ) {
   const pen = [{ label: 'Wound', penalty: penalties.wound }]
-  return rating('Resolve', character, 'wits', 'integrity', pen, charmAbils)
+  let bonus = []
+  let wellBred = merits.find((m) => m.startsWith('well-bred'))
+  if (wellBred !== undefined)
+    bonus = bonus.concat([{ label: 'well-bred', bonus: 1, situational: true }])
+
+  let thinBlood = merits.find((m) => m.startsWith('thin-blooded'))
+  if (thinBlood !== undefined)
+    bonus = bonus.concat([{ label: 'thin-blooded', bonus: -1, situational: true }])
+
+  return rating('Resolve', character, 'wits', 'integrity', pen, charmAbils, bonus)
 }
 
 export function guile(
@@ -78,47 +89,18 @@ export function appearanceRating(
   character: { attr_appearance: number },
   merits: Array<string>,
 ) { // eslint-disable-line no-unused-vars
-  let meritBonus = []
+  let bonus = []
 
   let hideous = merits.find((m) => m.startsWith('hideous'))
   if (hideous != undefined)
-    meritBonus = [{ label: 'hideous', bonus: 0 }]
+    bonus = [{ label: 'hideous', bonus: 0 }]
 
   return {
     name: 'Appearance',
     attribute: 'Appearance',
     attributeRating: character.attr_appearance,
-    meritBonus: meritBonus,
+    bonus: bonus,
     total: character.attr_appearance,
-  }
-}
-
-export function soak(
-  character: fullChar,
-  merits: Array<string>,
-  spells: Array<string>,
-) {
-  let bonus = 0
-  let meritBonus = []
-
-  let unusualHide = merits.find((m) => m.startsWith('unusual hide'))
-  if (unusualHide != undefined) {
-    bonus += parseInt(unusualHide.substr(-1))
-    meritBonus = meritBonus.concat([{ label: 'unusual hide', bonus: bonus }])
-  }
-  let isob = spells.find((s) => s === 'invulnerable skin of bronze')
-  if (isob != undefined && character.armor_weight === 'unarmored') {
-    meritBonus = meritBonus.concat([{ label: 'invulnerable skin of bronze', bonus: 3 }])
-    bonus += 3
-  }
-
-  return {
-    name: 'Soak',
-    natural: character.attr_stamina,
-    meritBonus: meritBonus,
-    armored: armorSoak(character),
-    total: character.attr_stamina + bonus + armorSoak(character),
-    soak: true,
   }
 }
 
@@ -135,5 +117,34 @@ export function armorSoak(character: fullChar) {
   case 'unarmored':
   default:
     return 0
+  }
+}
+
+export function soak(
+  character: fullChar,
+  merits: Array<string>,
+  spells: Array<string>,
+) {
+  let b = 0
+  let bonus = []
+
+  let unusualHide = merits.find((m) => m.startsWith('unusual hide'))
+  if (unusualHide != undefined) {
+    b += parseInt(unusualHide.substr(-1))
+    bonus = bonus.concat([{ label: 'unusual hide', bonus: bonus }])
+  }
+  let isob = spells.find((s) => s === 'invulnerable skin of bronze')
+  if (isob != undefined && character.armor_weight === 'unarmored') {
+    b += 3
+    bonus = bonus.concat([{ label: 'invulnerable skin of bronze', bonus: 3 }])
+  }
+
+  return {
+    name: 'Soak',
+    natural: naturalSoak(character),
+    bonus: bonus,
+    armored: armorSoak(character),
+    total: naturalSoak(character) + armorSoak(character) + b,
+    soak: true,
   }
 }

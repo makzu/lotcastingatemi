@@ -49,7 +49,7 @@ class SolarCharacter < Character
     self.exalt_type = 'Solar'
     self.aspect = false
     self.aura = ''
-    self.excellency = ''
+    self.excellency = 'solar'
     self.excellency_stunt = ''
     self.excellencies_for = []
   end

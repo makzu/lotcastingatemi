@@ -44,7 +44,7 @@ class DragonbloodCharacter < Character
   def set_defaults
     self.exalt_type = 'Dragon-Blood'
     self.aspect = true
-    self.excellency = ''
+    self.excellency = 'dragonblood'
     self.excellency_stunt = ''
     self.excellencies_for = []
   end

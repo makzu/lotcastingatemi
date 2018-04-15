@@ -54,7 +54,7 @@ RSpec.describe SolarCharacter, type: :model do
       character.update(aspect: true, exalt_type: 'abyssal', excellency: 'essence')
       expect(character.aspect).to eq false
       expect(character.exalt_type).to eq 'Solar'
-      expect(character.excellency).to be_blank
+      expect(character.excellency).to eq 'solar'
     end
   end
 end

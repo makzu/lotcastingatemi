@@ -16,9 +16,10 @@ const styles = theme => ({
 })
 
 function AttributeLine(props) {
-  const { rating, attribute, character, classes } = props
+  const { rating, attribute, character, pools, classes } = props
   const caste = isCasteAttribute(character, attribute)
   const favored = isFavoredAttribute(character, attribute)
+  const excellency = pools.excellencyAbils.includes('*') || pools.excellencyAbils.includes(attribute)
 
   return <div>
     <RatingLine rating={ rating }>
@@ -26,6 +27,7 @@ function AttributeLine(props) {
         { attribute }
       </span>
       <span className={ classes.attributeFavored }>
+        { excellency && ' *' }
         { caste && ' (c)' }
         { favored && ' (f)' }
       </span>
@@ -38,8 +40,9 @@ function AttributeLine(props) {
 AttributeLine.propTypes = {
   attribute: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
-  character: PropTypes.object,
-  classes: PropTypes.object,
+  character: PropTypes.object.isRequired,
+  pools: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(AttributeLine)

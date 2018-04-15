@@ -52,6 +52,8 @@ export type withAbilities = {
   abil_survival: number,
   abil_thrown: number,
   abil_war: number,
+  abil_martial_arts: Array<{ style: string, rating: number }>,
+  abil_craft: Array<{ craft: string, rating: number }>
 }
 
 export type withArmorStats = {
@@ -137,12 +139,16 @@ export type fullChar = {
   aura: ?string,
   type: string,
   exalt_type: string,
+  excellency: string,
+  excellency_stunt: string,
+  excellencies_for: Array<string>,
   is_sorcerer: boolean,
   sorcererous_motes: number,
   caste_abilities: Array<string>,
-  favored_abilities: ?Array<string>,
-  caste_attributes: ?Array<string>,
-  favored_attributes: ?Array<string>,
+  favored_abilities: Array<string>,
+  caste_attributes?: Array<string>,
+  favored_attributes?: Array<string>,
+  supernal_ability?: string,
 } &
   withBasicInfo &
   withMotePool &

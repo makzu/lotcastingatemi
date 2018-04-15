@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
+/* @flow */
+import * as React from 'react'
+const { Component, Fragment } = React
 
 import Button from 'material-ui/Button'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
@@ -8,10 +9,13 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import AbilitySelect from '../../generic/abilitySelect.jsx'
-import { fullChar } from '../../../utils/propTypes'
+import type { fullChar } from 'utils/propTypes/flow.js'
 
-class ExcellencyEditor extends Component {
-  constructor(props) {
+type Props = { character: fullChar, onChange: Function }
+type State = { open: boolean, excellency: Array<string>, excellency_stunt: Array<string> }
+
+class ExcellencyEditor extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -19,23 +23,25 @@ class ExcellencyEditor extends Component {
       excellency: this.props.character.excellency.split('+') || [],
       excellency_stunt: this.props.character.excellency_stunt.split('+') || [],
     }
-
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
     this.handleExcellencyChange = this.handleExcellencyChange.bind(this)
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ excellency: newProps.character.excellency.split('+') || [], excellency_stunt: this.props.character.excellency_stunt.split('+') || [], })
+  componentWillReceiveProps(newProps: Props) {
+    this.setState({
+      excellency: newProps.character.excellency.split('+') || [],
+      excellency_stunt: this.props.character.excellency_stunt.split('+') || [],
+    })
   }
 
-  handleExcellencyChange(e) {
-    const value = e.target.value.filter((e) => e !== '').join('+')
-    this.props.onChange({ target: { name: e.target.name, value: value }})
+  handleExcellencyChange = (e: Object) => { // Not ideal but Flow complains if I have this set to SyntheticEvent<>
+    // TODO: remove other entries on the list with *
+    const { name, value } = e.target
+    let val = value.filter((e) => e !== '').join('+')
+    this.props.onChange({ target: { name: name, value: val }})
   }
 
-  handleOpen()  { this.setState({ open: true  }) }
-  handleClose() { this.setState({ open: false }) }
+  handleOpen  = () => { this.setState({ open: true  }) }
+  handleClose = () => { this.setState({ open: false }) }
 
   render() {
     const { character, onChange } = this.props
@@ -43,6 +49,7 @@ class ExcellencyEditor extends Component {
     const { excellency, excellency_stunt } = this.state
 
     let excellencyOptions = [
+      <MenuItem key="solar" value="solar">Solar (Attribute + Ability)</MenuItem>,
       <MenuItem key="attribute" value="attribute">Attribute</MenuItem>,
       <MenuItem key="ability" value="ability">Ability</MenuItem>,
       <MenuItem key="specialty" value="specialty">Specialty</MenuItem>,
@@ -52,6 +59,7 @@ class ExcellencyEditor extends Component {
       <MenuItem key="essenceonanima" value="essenceonanima">Essence (while anima is glowing+)</MenuItem>,
       <MenuItem key="otherability" value="otherability">Another Ability (will select highest available)</MenuItem>,
       <MenuItem key="otherattribute" value="otherattribute">Another Attribute (will select highest available)</MenuItem>,
+      <MenuItem key="roundup" value="roundup">Round cap up for static ratings</MenuItem>
     ]
 
     return <Fragment>
@@ -126,7 +134,11 @@ class ExcellencyEditor extends Component {
             onChange={ onChange }
             multiple fullWidth margin="dense"
             withAttributes
-            prependOptions={[<MenuItem value="*" key="*">All Attribute + Ability rolls</MenuItem>]}
+            prependOptions={[
+              <MenuItem value="*" key="*">All Attribute + Ability rolls</MenuItem>,
+              <MenuItem value="solar" key="solar">As Solars (caste/favored abilities &gt; 0, abilities with Charms)</MenuItem>,
+              <MenuItem value="dragonblood" key="dragonblood">As Dragon-Blooded (all abilities with excellency keyworded Charm)</MenuItem>
+            ]}
           />
         </DialogContent>
         <DialogActions>
@@ -135,10 +147,6 @@ class ExcellencyEditor extends Component {
       </Dialog>
     </Fragment>
   }
-}
-ExcellencyEditor.propTypes = {
-  character: PropTypes.shape(fullChar),
-  onChange: PropTypes.func,
 }
 
 export default ExcellencyEditor

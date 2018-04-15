@@ -1,5 +1,7 @@
 ## v47
 ###### *Not yet released*
+- Basic Excellency support for Dragon-Blooded exalts. This shows dice adding only - it does not include automatic success adders or any other bonuses. Ratings including Athletics, etc will be slightly off
+- Resolve ratings now take Well-Bred and Thin-Blooded into account
 - The number of database queries needed while first logging in have been reduced, resulting in slightly quicker load times
 - An error message will now be displayed instead of a blank screen if an error is encountered
 - Bug fixes

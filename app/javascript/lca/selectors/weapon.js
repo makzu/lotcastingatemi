@@ -1,22 +1,32 @@
+import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
-import { getPenalties, getAllAbilitiesWithCharmsForCharacter } from '.'
-import * as calc from '../utils/calculated'
+import { getPenalties } from './character.js'
+import { getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter } from './charm.js'
+import * as calc from 'utils/calculated'
 
+const getState = state => state
 const getWeapon = (state, id) => state.entities.weapons[id]
 const getCharacterForWeapon = (state, id) => state.entities.characters[getWeapon(state, id).character_id]
 const getPenaltiesForWeapon = (state, id) => getPenalties(state, state.entities.characters[state.entities.weapons[id].character_id].id)
-const getCharmsForWeapon = (state, id) => getAllAbilitiesWithCharmsForCharacter(state, getCharacterForWeapon(state, id).id)
+
+const getExcellencyAbilsForWeapon = createSelector(
+  [getCharacterForWeapon, getState], (character, state) =>
+    calc.excellencyAbils(
+      character,
+      getNativeCharmsForCharacter(state, character.id)
+        .concat(getMartialArtsCharmsForCharacter(state, character.id)))
+)
 
 export const getPoolsForWeapon = createCachedSelector(
-  [getCharacterForWeapon, getWeapon, getPenaltiesForWeapon, getCharmsForWeapon],
-  (character, weapon, penalties, charmAbils) => ({
+  [getCharacterForWeapon, getWeapon, getPenaltiesForWeapon, getExcellencyAbilsForWeapon],
+  (character, weapon, penalties, excellencyAbils) => ({
     name: weapon.name,
-    witheringAttack: calc.witheringAttackPool(character, weapon, penalties, charmAbils),
+    witheringAttack: calc.witheringAttackPool(character, weapon, penalties, excellencyAbils),
     witheringDamage: calc.witheringDamage(character, weapon),
-    decisiveAttack: calc.decisiveAttackPool(character, weapon, penalties, charmAbils),
-    parry: calc.parry(character, weapon, penalties, charmAbils),
-    rangedWitheringAttack: calc.rangedWitheringAttackPool(character, weapon, penalties, charmAbils),
+    decisiveAttack: calc.decisiveAttackPool(character, weapon, penalties, excellencyAbils),
+    parry: calc.parry(character, weapon, penalties, excellencyAbils),
+    rangedWitheringAttack: calc.rangedWitheringAttackPool(character, weapon, penalties, excellencyAbils),
   })
 )((state, id) => id)
 

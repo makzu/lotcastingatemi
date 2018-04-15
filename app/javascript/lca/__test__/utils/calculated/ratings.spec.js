@@ -4,21 +4,17 @@ declare var check: Function
 
 require('jasmine-check').install()
 
-import { genCharacter } from '../../_mocks/'
-import {
-  evasion, resolve, guile, appearanceRating, soak,
-} from '../../../utils/calculated/_ratings.js'
-import type { fullChar } from '../../../utils/propTypes/flow.js'
+import { genSolar } from '../../_mocks/'
+import { mockGetPoolsAndRatings } from '../../_mocks/selectors.js'
+import type { fullChar } from 'utils/propTypes/flow.js'
 
-const mockCharacter = gen.object(genCharacter)
-const mockMerits = gen.array(gen.string)
-const mockPenalties = gen.object({ mobility: gen.posInt, wound: gen.posInt, onslaught: gen.posInt })
+const mockCharacter = gen.object(genSolar)
 
 describe('ratings', () => {
   describe('evasion', () => {
-    check.it('works', { times: 10 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
-      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
-        const pool = evasion(character, merits, penalties, charmAbils)
+    check.it('works', { times: 10 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).evasion
         expect(pool.attributeRating).toEqual(character.attr_dexterity)
         expect(pool.abilityRating).toEqual(character.abil_dodge)
         expect(pool.raw).toBeGreaterThanOrEqual(1)
@@ -28,9 +24,9 @@ describe('ratings', () => {
         expect(pool.excellencyCost).toBeDefined()
       })
 
-    check.it('includes names correctly', { times: 1 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
-      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
-        const pool = evasion(character, merits, penalties, charmAbils)
+    check.it('includes names correctly', { times: 1 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).evasion
         expect(pool.name).toEqual('Evasion')
         expect(pool.attribute).toEqual('dexterity')
         expect(pool.ability).toEqual('dodge')
@@ -39,9 +35,9 @@ describe('ratings', () => {
   })
 
   describe('resolve', () => {
-    check.it('works', { times: 10 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
-      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
-        const pool = resolve(character, merits, penalties, charmAbils)
+    check.it('works', { times: 10 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).resolve
         expect(pool.attributeRating).toEqual(character.attr_wits)
         expect(pool.abilityRating).toEqual(character.abil_integrity)
         expect(pool.raw).toBeGreaterThanOrEqual(1)
@@ -51,9 +47,9 @@ describe('ratings', () => {
         expect(pool.excellencyCost).toBeDefined()
       })
 
-    check.it('includes names correctly', { times: 1 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
-      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
-        const pool = resolve(character, merits, penalties, charmAbils)
+    check.it('includes names correctly', { times: 1 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).resolve
         expect(pool.name).toEqual('Resolve')
         expect(pool.attribute).toEqual('wits')
         expect(pool.ability).toEqual('integrity')
@@ -62,9 +58,9 @@ describe('ratings', () => {
   })
 
   describe('guile', () => {
-    check.it('works', { times: 10 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
-      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
-        const pool = guile(character, merits, penalties, charmAbils)
+    check.it('works', { times: 10 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).guile
         expect(pool.attributeRating).toEqual(character.attr_manipulation)
         expect(pool.abilityRating).toEqual(character.abil_socialize)
         expect(pool.raw).toBeGreaterThanOrEqual(1)
@@ -74,9 +70,9 @@ describe('ratings', () => {
         expect(pool.excellencyCost).toBeDefined()
       })
 
-    check.it('includes names correctly', { times: 1 }, mockCharacter, mockMerits, mockPenalties, mockMerits,
-      (character: fullChar, merits: Array<string>, penalties: Object, charmAbils: Array<string>) => {
-        const pool = guile(character, merits, penalties, charmAbils)
+    check.it('includes names correctly', { times: 1 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).guile
         expect(pool.name).toEqual('Guile')
         expect(pool.attribute).toEqual('manipulation')
         expect(pool.ability).toEqual('socialize')
@@ -85,44 +81,39 @@ describe('ratings', () => {
   })
 
   describe('appearanceRating', () => {
-    check.it('works', { times: 10 }, mockCharacter, mockMerits,
-      (character: fullChar, merits: Array<string>) => {
-        const pool = appearanceRating(character, merits)
+    check.it('works', { times: 10 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).appearance
         expect(pool.attributeRating).toEqual(character.attr_appearance)
         expect(pool.total).toEqual(character.attr_appearance)
-        expect(pool.meritBonus).toBeDefined()
+        expect(pool.bonus).toBeDefined()
       })
 
-    check.it('includes names correctly', { times: 1 }, mockCharacter, mockMerits,
-      (character: fullChar, merits: Array<string>) => {
-        const pool = appearanceRating(character, merits)
+    check.it('includes names correctly', { times: 1 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).appearance
         expect(pool.name).toEqual('Appearance')
         expect(pool.attribute).toEqual('Appearance')
-      })
-
-    check.it('includes Hideous', { times: 2 }, mockCharacter, mockMerits,
-      (character: fullChar, merits: Array<string>) => {
-        const pool = appearanceRating(character, merits.concat('hideous0'))
-        expect(pool.meritBonus).toEqual([{ label: 'hideous', bonus: 0 }])
+        expect(pool.bonus).toEqual([{ label: 'hideous', bonus: 0 }])
       })
   })
 
   describe('soak', () => {
-    check.it('works', { times: 10 }, mockCharacter, mockMerits, gen.array(gen.string),
-      (character: fullChar, merits: Array<string>, spells: Array<string>) => {
-        const pool = soak(character, merits, spells)
+    check.it('works', { times: 10 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).soak
         expect(pool.name).toEqual('Soak')
         expect(pool.soak).toBe(true)
         expect(pool.natural).toEqual(character.attr_stamina)
         expect(pool.armored).toBeGreaterThanOrEqual(0)
         expect(pool.armored).toBeLessThanOrEqual(11)
         expect(pool.total).toBeGreaterThanOrEqual(character.attr_stamina)
-        expect(pool.meritBonus).toBeDefined()
+        expect(pool.bonus).toBeDefined()
       })
 
-    check.it('includes names correctly', { times: 1 }, mockCharacter, mockMerits, gen.array(gen.string),
-      (character: fullChar, merits: Array<string>, spells: Array<string>) => {
-        const pool = soak(character, merits, spells)
+    check.it('includes names correctly', { times: 1 }, mockCharacter,
+      (character: fullChar) => {
+        const pool = mockGetPoolsAndRatings(character).soak
         expect(pool.name).toEqual('Soak')
         expect(pool.soak).toBe(true)
       })

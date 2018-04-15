@@ -8,12 +8,12 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 
 import PoolDisplay from '../../../components/generic/PoolDisplay.jsx'
-import { SEED, genCharacter } from '../../_mocks'
+import { SEED, genSolar } from '../../_mocks'
 import { mockGetPoolsAndRatings } from '../../_mocks/selectors.js'
 
 describe('PoolDisplay', () => {
-  check.it('renders all pools correctly', { times: 5, seed: SEED },
-    gen.object(genCharacter), (mockCharacter) => {
+  check.it('renders all pools correctly for Solars', { times: 5, seed: SEED },
+    gen.object(genSolar), (mockCharacter) => {
       const pools = mockGetPoolsAndRatings(mockCharacter)
       const component = renderer.create(
         <div>

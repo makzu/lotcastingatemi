@@ -78,7 +78,7 @@ export function qcPool(qc, pool, penalties = 0, merits = [], addExcellency = tru
   const excellencyStunt = addExcellency ? qcExcellencyPoolCap(qc, pool, true) : 0
   return {
     raw: pool,
-    meritBonus: merits,
+    bonus: merits,
     excellency: excellency,
     excellencyCost: excellency,
     excellencyStunt: excellencyStunt,
@@ -93,7 +93,7 @@ export function qcRating(qc, rating, penalties = 0, merits = [], addExcellency =
   const excellencyStunt = addExcellency ? qcExcellencyRatingCap(qc, rating, true): 0
   return {
     raw: rating,
-    meritBonus: merits,
+    bonus: merits,
     excellency: excellency,
     excellencyCost: excellency * 2,
     excellencyStunt: excellencyStunt,

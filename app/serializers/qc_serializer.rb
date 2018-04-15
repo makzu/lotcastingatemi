@@ -36,7 +36,7 @@ class QcSerializer < ActiveModel::Serializer
   attribute :hidden, if: :owner_or_st?
 
   def owner?
-    object.player == current_player
+    object.player_id == current_player.id
   end
 
   def owner_or_st?

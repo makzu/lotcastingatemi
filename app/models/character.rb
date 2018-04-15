@@ -20,6 +20,15 @@ class Character < ApplicationRecord
   has_many :weapons, dependent: :destroy
   has_many :spells,  dependent: :destroy
 
+  has_many :evocations,              foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :martial_arts_charms,     foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :spirit_charms,           foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :solar_charms,            foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :dragonblood_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :custom_ability_charms,   foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :custom_attribute_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :custom_essence_charms,   foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+
   validates :name, presence: true
 
   # Essence above 5 is explicitly mentioned in the book
@@ -95,5 +104,14 @@ class Character < ApplicationRecord
 
   def custom_exalt?
     false
+  end
+
+  def self.association_types
+    %i[
+      solar_charms dragonblood_charms
+      custom_attribute_charms custom_ability_charms custom_essence_charms
+      martial_arts_charms evocations spirit_charms
+      weapons merits spells
+    ]
   end
 end

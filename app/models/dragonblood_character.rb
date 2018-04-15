@@ -13,7 +13,6 @@ class DragonbloodCharacter < Character
   attribute :motes_peripheral_current, :integer, default: 31
   attribute :exalt_type,               :string,  default: 'Dragonblood'
 
-  has_many :dragonblood_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
   alias_attribute :charms, :dragonblood_charms
 
   DRAGONBLOOD_ASPECTS = %w[air earth fire water wood].freeze

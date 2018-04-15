@@ -9,17 +9,9 @@ class ChronicleSerializer < ActiveModel::Serializer
 
   has_many :players
 
-  has_many :characters do
-    CharacterPolicy::Scope.new(scope, Character).resolve.where(chronicle: object)
-  end
-
-  has_many :qcs do
-    CharacterPolicy::Scope.new(scope, Qc).resolve.where(chronicle: object)
-  end
-
-  has_many :battlegroups do
-    CharacterPolicy::Scope.new(scope, Battlegroup).resolve.where(chronicle: object)
-  end
+  has_many :characters
+  has_many :qcs
+  has_many :battlegroups
 
   def storyteller?
     current_player.id == object.st_id
@@ -28,26 +20,17 @@ class ChronicleSerializer < ActiveModel::Serializer
   # We don't need the full associations duplicated under Player, because they're
   #   already included above.
   class PlayerSerializer < ActiveModel::Serializer
-    attributes :id, :display_name, :characters, :qcs, :battlegroups, :chronicles, :own_chronicles
+    attributes :id, :display_name # , :characters, :qcs, :battlegroups, :chronicles, :own_chronicles
 
-    def characters
-      CharacterPolicy::Scope.new(scope, Character).resolve.where(player: object).pluck(:id)
+    # Give just the IDs of the associations, that's all we need
+    class IdSerializer < ActiveModel::Serializer
+      attribute :id
     end
 
-    def qcs
-      CharacterPolicy::Scope.new(scope, Qc).resolve.where(player: object).pluck(:id)
-    end
-
-    def battlegroups
-      CharacterPolicy::Scope.new(scope, Battlegroup).resolve.where(player: object).pluck(:id)
-    end
-
-    def chronicles
-      ChroniclePolicy::Scope.new(scope, Chronicle).resolve.where(id: object.chronicle_ids).pluck(:id)
-    end
-
-    def own_chronicles
-      ChroniclePolicy::Scope.new(scope, Chronicle).resolve.where(st: object).pluck(:id)
-    end
+    class CharacterSerializer < IdSerializer; end
+    class QcSerializer < IdSerializer; end
+    class BattlegroupSerializer < IdSerializer; end
+    class ChronicleSerializer < IdSerializer; end
+    class OwnChronicleSerializer < IdSerializer; end
   end
 end

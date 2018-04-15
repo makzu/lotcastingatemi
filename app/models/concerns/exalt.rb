@@ -7,10 +7,6 @@ module Exalt
   included do
     include MotePool
 
-    has_many :evocations,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-    has_many :martial_arts_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-    has_many :spirit_charms,       foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-
     before_validation :trim_array_attributes
 
     attribute :willpower_temporary, :integer, default: 5

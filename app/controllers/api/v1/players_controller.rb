@@ -9,7 +9,8 @@ module Api
       # Show the currently logged-in player
       def index
         authorize current_player
-        render json: current_player, include: %w[chronicles.* own_chronicles.* characters.* qcs.* battlegroups.*]
+        render json: Player.includes(include_hash).find(current_player.id),
+               include: %w[chronicles.* own_chronicles.* characters.* qcs.* battlegroups.*]
       end
 
       # Show a single player
@@ -30,11 +31,21 @@ module Api
       private
 
       def set_player
-        @player = Player.find(params[:id])
+        @player = Player.includes(include_hash).find(params[:id])
       end
 
       def player_params
         params.require(:player).permit(:display_name)
+      end
+
+      def include_hash
+        {
+          characters: Character.association_types,
+          qcs: %i[qc_attacks qc_merits qc_attacks qc_charms],
+          battlegroups: [:qc_attacks],
+          chronicles: [],
+          own_chronicles: []
+        }
       end
     end
   end

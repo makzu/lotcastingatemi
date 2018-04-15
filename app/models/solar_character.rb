@@ -10,7 +10,6 @@ class SolarCharacter < Character
   attribute :motes_peripheral_current, :integer, default: 33
   attribute :exalt_type,               :string,  default: 'Solar'
 
-  has_many :solar_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
   alias_attribute :charms, :solar_charms
 
   SOLAR_CASTES = %w[ dawn zenith twilight night eclipse ].freeze

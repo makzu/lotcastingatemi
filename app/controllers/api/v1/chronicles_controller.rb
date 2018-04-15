@@ -10,8 +10,11 @@ module Api
 
       def index
         authorize current_player
-        @chronicles = current_player.own_chronicles + current_player.chronicles
-        render json: @chronicles, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        @own_chronicles = Chronicle.includes(include_hash).where(st_id: current_player.id)
+        @chronicles = Chronicle.joins(chronicle_players: :player).includes(include_hash).where(chronicle_players: { player_id: current_player.id })
+        render json: @own_chronicles +
+                     @chronicles,
+               include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
       def show
@@ -141,11 +144,11 @@ module Api
       private
 
       def set_chronicle
-        @chronicle = policy_scope(Chronicle).find(params[:id])
+        @chronicle = policy_scope(Chronicle).includes(include_hash).find(params[:id])
       end
 
       def set_chronicle_from_token
-        @chronicle = Chronicle.find_by!(invite_code: params[:invite_code])
+        @chronicle = Chronicle.includes(include_hash).find_by!(invite_code: params[:invite_code])
       end
 
       def check_auth(char)
@@ -157,6 +160,16 @@ module Api
 
       def chronicle_params
         params.require(:chronicle).permit!
+      end
+
+      def include_hash
+        {
+          characters: Character.association_types,
+          qcs: %i[qc_attacks qc_merits qc_attacks qc_charms],
+          battlegroups: %i[qc_attacks],
+          players: [],
+          st: []
+        }
       end
 
       def broadcast_update(thing)

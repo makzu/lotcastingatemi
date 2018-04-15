@@ -49,7 +49,7 @@ class CharacterSerializer < ActiveModel::Serializer
   has_many :spells
 
   def owner?
-    object.player == current_player
+    object.player_id == current_player.id
   end
 
   def owner_or_st?

@@ -51,7 +51,7 @@ puts 'Reloading Charms'
 YAML.safe_load(File.read('db/seeds/charms.yaml')).each do |c|
   charm = Charm.find_or_initialize_by(id: c['id'])
   charm.update(c)
-  puts "Updated #{charm.type} #{charm.name} for #{charm.character.name}"
+  puts "Updated #{charm.charm_type} Charm #{charm.name} for #{charm.character.name}"
 end
 
 puts 'Reloading QCs'

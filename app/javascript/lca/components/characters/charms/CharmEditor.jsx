@@ -98,19 +98,15 @@ class CharmEditor extends Component {
     let type
     switch(this.props.character.type) {
     case 'SolarCharacter':
-      type = 'SolarCharm'
-      break
     case 'DragonbloodCharacter':
-      type = 'DragonbloodCharm'
-      break
     case 'CustomAbilityCharacter':
-      type = 'CustomAbilityCharm'
+      type = 'Charms::AbilityCharm'
       break
     case 'CustomAttributeCharacter':
-      type = 'CustomAttributeCharm'
+      type = 'Charms::AttributeCharm'
       break
     case 'CustomEssenceCharacter':
-      type = 'CustomEssenceCharm'
+      type = 'Charms::EssenceCharm'
       break
     default:
       type = ''
@@ -119,15 +115,15 @@ class CharmEditor extends Component {
   }
 
   handleAddMA() {
-    this.props._handleCreate(this.props.character.id, 'MartialArtsCharm')
+    this.props._handleCreate(this.props.character.id, 'Charms::MartialArtsCharm')
   }
 
   handleAddEvocation() {
-    this.props._handleCreate(this.props.character.id, 'Evocation')
+    this.props._handleCreate(this.props.character.id, 'Charms::Evocation')
   }
 
   handleAddSpirit() {
-    this.props._handleCreate(this.props.character.id, 'SpiritCharm')
+    this.props._handleCreate(this.props.character.id, 'Charms::SpiritCharm')
   }
 
   handleAddSpell() {

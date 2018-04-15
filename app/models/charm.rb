@@ -6,6 +6,10 @@ class Charm < ApplicationRecord
   include CharacterTrait
   include EssenceCharm
 
+  def charm_type
+    'Charm'
+  end
+
   def entity_type
     'charm'
   end

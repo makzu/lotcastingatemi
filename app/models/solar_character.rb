@@ -10,8 +10,6 @@ class SolarCharacter < Character
   attribute :motes_peripheral_current, :integer, default: 33
   attribute :exalt_type,               :string,  default: 'Solar'
 
-  alias_attribute :charms, :solar_charms
-
   SOLAR_CASTES = %w[ dawn zenith twilight night eclipse ].freeze
   CASTE_ABILITIES = {
     "dawn":     %w[ archery awareness brawl dodge melee resistance thrown war ],

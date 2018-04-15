@@ -11,4 +11,5 @@
 * Dice rolling, with rolls permanently saved (for play-by-post games)
 * Better feedback on errors
 * Character generation assistance, with suggestions and page references
-* Character import/export
+* Character/QC/Battlegroup import/export
+* Exalt type switching

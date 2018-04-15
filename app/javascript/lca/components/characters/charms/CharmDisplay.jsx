@@ -26,7 +26,7 @@ function scrollToPanel(e, appearing, id) {
 
 export const PrereqSummaryLine = ({ charm, classes }) =>
   <Typography variant="caption">
-    { charm.type === 'Evocation' && charm.artifact_name !== '' &&
+    { charm.charm_type === 'Evocation' && charm.artifact_name !== '' &&
       <span className={ classes.capitalize }>
         Evocation of { charm.artifact_name },&nbsp;
       </span>
@@ -36,7 +36,7 @@ export const PrereqSummaryLine = ({ charm, classes }) =>
         { charm.ability } { charm.min_ability},&nbsp;
       </span>
     }
-    { charm.type === 'MartialArtsCharm' &&
+    { charm.charm_type === 'MartialArts' &&
       <span className={ classes.capitalize }>
         { charm.style } style { charm.min_ability},&nbsp;
       </span>
@@ -100,7 +100,7 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }) {
               { charm.ability } { charm.min_ability},&nbsp;
             </span>
           }
-          { charm.type == 'MartialArtsCharm' &&
+          { charm.charm_type === 'MartialArts' &&
             <span className={ classes.capitalize }>
               Martial Arts ({ charm.style } style) { charm.min_ability},&nbsp;
             </span>

@@ -1,6 +1,6 @@
 - id: 1
   character_id: 2
-  type: SolarCharm
+  type: Charms::AbilityCharm
   name: Excellent Strike
   character_type: Character
   ability: melee
@@ -16,7 +16,7 @@
 - id: 2
   character_id: 2
   character_type: Character
-  type: MartialArtsCharm
+  type: Charms::MartialArtsCharm
   name: Naked Fang Draw
   style: steel devil
   min_ability: 2
@@ -29,7 +29,7 @@
   ref: core p.461
 - id: 3
   character_id: 2
-  type: Evocation
+  type: Charms::Evocation
   character_type: Character
   name: Excellent-er Strike
   min_essence: 2
@@ -40,7 +40,7 @@
   body: Can also reroll one 2 when using Excellent Strike with this artifact
 - id: 4
   character_id: 3
-  type: CustomAbilityCharm
+  type: Charms::AbilityCharm
   ability: lore
   min_ability: 3
   character_type: Character

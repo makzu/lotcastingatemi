@@ -1,5 +1,6 @@
 ## v47
 ###### *Not yet released*
+- The number of database queries needed while first logging in have been reduced, resulting in slightly quicker load times
 - An error message will now be displayed instead of a blank screen if an error is encountered
 - Bug fixes
 

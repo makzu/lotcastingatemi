@@ -6,8 +6,6 @@ class CustomAbilityCharacter < Character
 
   attribute :exalt_type, :string, default: 'Ability Exalt'
 
-  alias_attribute :charms, :custom_ability_charms
-
   def custom_exalt?
     true
   end

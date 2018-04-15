@@ -19,7 +19,7 @@ import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 import { CharmSummaryBlock } from './CharmDisplay.jsx'
 import AbilitySelect from '../../generic/abilitySelect.jsx'
 import RatingField from '../../generic/RatingField.jsx'
-import { isAbilityCharm, isAttributeCharm, abilitiesWithRatings } from '../../../utils/calculated'
+import { abilitiesWithRatings } from '../../../utils/calculated'
 import { ABILITY_MAX, ATTRIBUTE_MAX, ESSENCE_MIN, ESSENCE_MAX } from '../../../utils/constants.js'
 
 const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
@@ -91,9 +91,6 @@ class CharmFields extends Component {
       scrollToPanel,
     } = this
 
-    const showAbility = isAbilityCharm(charm)
-    const showMinAbility = showAbility || charm.type == 'MartialArtsCharm'
-    const showAttribute = isAttributeCharm(charm)
     const isOpen = openCharm === charm.id
 
     return <ExpansionPanel
@@ -125,13 +122,13 @@ class CharmFields extends Component {
             label="Name" margin="dense"
             style={{ width: '25em' }}
           />&nbsp;&nbsp;
-          { charm.type == 'Evocation' &&
+          { charm.charm_type === 'Evocation' &&
             <TextField name="artifact_name" value={ charm.artifact_name }
               onChange={ handleChange } onBlur={ handleBlur }
               label="Artifact Name" margin="dense"
             />
           }
-          { charm.type == 'MartialArtsCharm' &&
+          { charm.charm_type === 'MartialArts' &&
             <TextField name="style" value={ charm.style }
               onChange={ handleChange } onBlur={ handleBlur }
               label="Style" margin="dense"
@@ -147,7 +144,7 @@ class CharmFields extends Component {
             label="Cost" margin="dense"
           />&nbsp;&nbsp;
 
-          { showAbility &&
+          { charm.charm_type === 'Ability' &&
             <AbilitySelect name="ability" label="Ability" margin="dense"
               abilities={ abilitiesWithRatings(character) }
               value={ charm.ability }
@@ -155,7 +152,7 @@ class CharmFields extends Component {
               multiple={ false }
             />
           }
-          { showMinAbility &&
+          { (charm.charm_type === 'Ability' || charm.charm_type === 'MartialArts') &&
             <RatingField trait="min_ability" value={ charm.min_ability }
               min={ 1 } max={ ABILITY_MAX }
               onChange={ handleRatingChange }
@@ -163,7 +160,7 @@ class CharmFields extends Component {
             />
           }
 
-          { showAttribute && <Fragment>
+          { charm.charm_type === 'Attribute' && <Fragment>
             <AbilitySelect attributesOnly name="ability" label="Attribute" margin="dense"
               value={ charm.ability }
               onChange={ handleRatingChange }

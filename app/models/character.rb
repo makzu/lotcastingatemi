@@ -20,9 +20,13 @@ class Character < ApplicationRecord
   has_many :weapons, dependent: :destroy
   has_many :spells,  dependent: :destroy
 
-  has_many :evocations,              foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :martial_arts_charms,     foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :spirit_charms,           foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :ability_charms,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AbilityCharm'
+  has_many :attribute_charms,        foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AttributeCharm'
+  has_many :essence_charms,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::EssenceCharm'
+  has_many :martial_arts_charms,     foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::MartialArtsCharm'
+  has_many :spirit_charms,           foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::SpiritCharm'
+  has_many :evocations,              foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::Evocation'
+
   has_many :solar_charms,            foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
   has_many :dragonblood_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
   has_many :custom_ability_charms,   foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
@@ -108,8 +112,7 @@ class Character < ApplicationRecord
 
   def self.association_types
     %i[
-      solar_charms dragonblood_charms
-      custom_attribute_charms custom_ability_charms custom_essence_charms
+      ability_charms attribute_charms essence_charms
       martial_arts_charms evocations spirit_charms
       weapons merits spells
     ]

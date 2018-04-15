@@ -160,7 +160,9 @@ export type fullChar = {
 export type Charm = {
   id: number,
   name: string,
-  type: string,
+  charm_type: string,
+  style?: string,
+  artifact_name?: string,
   cost: string,
   timing: string,
   duration: string,

@@ -6,7 +6,7 @@ class CustomEssenceCharacter < Character
 
   attribute :exalt_type, :string, default: 'Essence Exalt'
 
-  alias_attribute :charms, :custom_essence_charms
+  alias_attribute :charms, :essence_charms
 
   def custom_exalt?
     true

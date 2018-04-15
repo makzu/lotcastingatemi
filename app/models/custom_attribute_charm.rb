@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Generic Charms for Custom Attribute Exalts
+# This class is DEPRECATED
 class CustomAttributeCharm < Charm
   include Constants
   attribute :min_ability, :integer, default: 1

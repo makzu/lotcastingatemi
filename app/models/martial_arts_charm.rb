@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Validatitions and methods specific to Martial Arts Charms.
+# This class is DEPRECATED
 class MartialArtsCharm < Charm
   attribute :min_ability, :integer, default: 1
   validates :min_ability, one_thru_five_stat: true

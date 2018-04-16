@@ -134,7 +134,7 @@ export type fullQc = {
   withIntimacies
 
 export type fullChar = {
-  caste: ?string,
+  caste: string,
   aspect: ?boolean,
   aura: ?string,
   type: string,
@@ -161,7 +161,6 @@ export type fullChar = {
   withArmorStats &
   withCombatInfo &
   withIntimacies
-
 
 export type Charm = {
   id: number,

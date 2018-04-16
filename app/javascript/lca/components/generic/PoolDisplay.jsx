@@ -76,7 +76,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     )
     const fullMerits = mb.map((m) =>
       <div key={ m.label }>
-        { m.situational && '(conditional) '}{ m.bonus > 0 && '+' }{ m.bonus } { m.label }
+        { m.situational && '(conditional) '}{ m.bonus > 0 && '+' }{ m.bonus !== 0 && m.bonus } { m.label }
       </div>
     )
     const fullPen = pen.map((p) =>
@@ -129,7 +129,20 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
         <DialogContent>
           <DialogContentText>
             Total: <strong>{ pool.total }</strong>
+            { pool.excellency > 0 &&
+              <span>&nbsp;&nbsp;&nbsp;
+                Can add up to { pool.excellency }&nbsp;
+                { !pool.rating &&
+                  <span>di{ pool.excellency === 1 ? 'e' : 'ce' } </span>
+                }
+                for { pool.excellencyCost }m
+                { pool.excellencyStunt > 0 &&
+                  `( ${pool.excellencyStunt} for ${pool.excellencyStuntCost}m on stunt)`
+                }
+              </span>
+            }
           </DialogContentText>
+
           { pool.attribute &&
             <DialogContentText style={{ textTransform: 'capitalize' }}>
               (
@@ -153,7 +166,6 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               }
             </DialogContentText>
           }
-
           { pool.witheringDamage &&
             <DialogContentText>
               + Threshhold Successes<br />
@@ -161,21 +173,11 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               Minimum { pool.minimum }
             </DialogContentText>
           }
-
           { pool.soak &&
             <DialogContentText>
               { pool.natural } Natural
               { pool.armored > 0 &&
                 <span> + { pool.armored } from Armor</span>
-              }
-            </DialogContentText>
-          }
-
-          { pool.excellency > 0 &&
-            <DialogContentText component="div" style={{ marginTop: '0.5em' }}>
-              Can add up to { pool.excellency }{ !pool.rating && ' dice'} for { pool.excellencyCost }m
-              { pool.excellencyStunt > 0 &&
-                `( ${pool.excellencyStunt} for ${pool.excellencyStuntCost}m on stunt)`
               }
             </DialogContentText>
           }
@@ -185,7 +187,6 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               { fullMerits }
             </DialogContentText>
           }
-
           { sp.length > 0 &&
             <DialogContentText component="div" style={{ marginTop: '0.5em' }}>
               Specialties:&nbsp;
@@ -213,7 +214,6 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               { fullPen }
             </DialogContentText>
           }
-
         </DialogContent>
       </Dialog>
     </Fragment>

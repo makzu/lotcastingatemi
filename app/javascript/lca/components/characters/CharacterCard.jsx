@@ -196,8 +196,8 @@ export function CharacterCard(
       <PoolDisplay staticRating pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
       <PoolDisplay staticRating pool={ pools.bestParry } label="Best Parry" classes={{ root: classes.poolBlock }} />
       <PoolDisplay staticRating pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
-      { pools.hardness.total > 0 &&
-        <PoolDisplay staticRating noSummary pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
+      { (pools.hardness.total > 0 || pools.hardness.bonus.length > 0) &&
+        <PoolDisplay staticRating pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
       }
     </div>
 

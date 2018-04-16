@@ -9,6 +9,9 @@ const styles = theme => ({
     fontWeight: 500,
     opacity: 0.7,
   },
+  value: {
+    position: 'relative',
+  },
   current: { ...theme.typography.display1,
     display: 'inline-block',
     verticalAlign: 'top',
@@ -20,9 +23,9 @@ const styles = theme => ({
   },
   committed: { ...theme.typography.caption,
     display: 'inline-block',
-    marginLeft: '-1.31em',
-    verticalAlign: 'bottom',
-    paddingBottom: '0.25em',
+    position: 'absolute',
+    bottom: '0.25em',
+    right: '0.2em',
   },
 })
 
@@ -39,7 +42,7 @@ const ResourceDisplay = ({ current, total, committed, label, className, classes 
     <div className={ classes.label }>
       { label }
     </div>
-    <div>
+    <div className={ classes.value }>
       <span className={classes.current }>
         { current }
       </span>

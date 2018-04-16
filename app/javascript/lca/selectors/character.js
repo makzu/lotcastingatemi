@@ -6,7 +6,7 @@ import { getPoolsForWeapon, sortByParry, } from './weapon.js'
 import { getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter } from './charm.js'
 import { sortOrderSort } from 'utils'
 import {
-  woundPenalty, mobilityPenalty, hardness, exaltTypeBase
+  woundPenalty, mobilityPenalty, exaltTypeBase
 } from 'utils/calculated/'
 import { excellencyAbils as excellencies } from 'utils/calculated/_excellencies.js'
 import * as pools from 'utils/calculated/_pools.js'
@@ -94,7 +94,7 @@ export const getPoolsAndRatings = createCachedSelector(
       evasion: ratings.evasion(character, meritNames, penalties, excellencyAbils),
       bestParry: bestParryWeapon.parry,
       soak: ratings.soak(character, meritNames, spellNames),
-      hardness: { total: hardness(character) },
+      hardness: ratings.hardness(character),
       joinBattle: pools.joinBattle(character, meritNames, penalties, excellencyAbils),
       rush: pools.rush(character, meritNames, penalties, excellencyAbils),
       disengage: pools.disengage(character, meritNames, penalties, excellencyAbils),

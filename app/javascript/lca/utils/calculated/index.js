@@ -129,31 +129,6 @@ export function mobilityPenalty(character) {
   }
 }
 
-export function hardness(character) {
-  let hardness = 0
-  if (character.armor_is_artifact) {
-    switch(character.armor_weight) {
-    case 'light':
-      hardness = 4
-      break
-    case 'medium':
-      hardness = 7
-      break
-    case 'heavy':
-      hardness = 10
-    }
-  }
-  // Twilight caste anima power grants 5 hardness at Bonfire/Iconic
-  if ( character.type !== 'Character' &&
-    character.exalt_type.toLowerCase() === 'solar' &&
-    character.caste.toLowerCase() === 'twilight' &&
-    character.anima_level === 3
-  )
-    hardness = Math.max(hardness, 5)
-
-  return hardness
-}
-
 export function prettyExaltType(character) {
   switch (character.type) {
   case 'Character':

@@ -17,10 +17,10 @@ describe('Calculated values', () => {
     const medA =   { ...med,   armor_is_artifact: true   }
     const hvyA =   { ...hvy,   armor_is_artifact: true   }
 
-    expect(calc.hardness(mockChar)).toEqual(0)
-    expect(calc.hardness(lightA)).toEqual(4)
-    expect(calc.hardness(medA)).toEqual(7)
-    expect(calc.hardness(hvyA)).toEqual(10)
+    expect(calc.hardness(mockChar).total).toEqual(0)
+    expect(calc.hardness(lightA).total).toEqual(4)
+    expect(calc.hardness(medA).total).toEqual(7)
+    expect(calc.hardness(hvyA).total).toEqual(10)
 
     expect(calc.armorSoak(mockChar)).toEqual(0)
     expect(calc.armorSoak(light)).toEqual(3)

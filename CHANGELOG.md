@@ -1,6 +1,8 @@
 ## v47
 ###### *Not yet released*
 - Basic Excellency support for Dragon-Blooded exalts. This shows dice adding only - it does not include automatic success adders or any other bonuses. Ratings including Athletics, etc will be slightly off
+- Soak and Hardness ratings now factor in Twilight caste and Earth and Fire aspect anima powers
+- Withdraw/Disengage ratings now factor in Water aspect anima powers
 - Resolve ratings now take Well-Bred and Thin-Blooded into account
 - Rating fields are a lot less janky when deleting contents or entering a negative number
 - Character traits no longer flash back to their previous value after an edit

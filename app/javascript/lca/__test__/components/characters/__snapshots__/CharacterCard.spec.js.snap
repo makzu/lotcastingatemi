@@ -454,7 +454,7 @@ exports[`CharacterCard works for Solars 1`] = `
           "armored": 0,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
             Object {
@@ -1058,7 +1058,7 @@ exports[`CharacterCard works for Solars 2`] = `
           "armored": 3,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],
@@ -1077,9 +1077,15 @@ exports[`CharacterCard works for Solars 2`] = `
         }
       }
       label="Hardness"
-      noSummary={true}
       pool={
         Object {
+          "armored": 0,
+          "bonus": Array [
+            Object {
+              "label": "5 anima",
+            },
+          ],
+          "name": "Hardness",
           "total": 5,
         }
       }
@@ -1753,7 +1759,7 @@ exports[`CharacterCard works for Solars 3`] = `
           "armored": 8,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],
@@ -1772,9 +1778,15 @@ exports[`CharacterCard works for Solars 3`] = `
         }
       }
       label="Hardness"
-      noSummary={true}
       pool={
         Object {
+          "armored": 7,
+          "bonus": Array [
+            Object {
+              "label": "5 anima",
+            },
+          ],
+          "name": "Hardness",
           "total": 7,
         }
       }
@@ -2403,7 +2415,7 @@ exports[`CharacterCard works for Solars 4`] = `
           "armored": 5,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],
@@ -2422,9 +2434,15 @@ exports[`CharacterCard works for Solars 4`] = `
         }
       }
       label="Hardness"
-      noSummary={true}
       pool={
         Object {
+          "armored": 0,
+          "bonus": Array [
+            Object {
+              "label": "5 anima",
+            },
+          ],
+          "name": "Hardness",
           "total": 5,
         }
       }
@@ -3137,7 +3155,7 @@ exports[`CharacterCard works for Solars 5`] = `
           "armored": 3,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],
@@ -3587,7 +3605,7 @@ exports[`CharacterCard works for mortals 1`] = `
           "armored": 0,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
             Object {
@@ -4050,7 +4068,7 @@ exports[`CharacterCard works for mortals 2`] = `
           "armored": 3,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],
@@ -4577,7 +4595,7 @@ exports[`CharacterCard works for mortals 3`] = `
           "armored": 8,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],
@@ -4596,9 +4614,11 @@ exports[`CharacterCard works for mortals 3`] = `
         }
       }
       label="Hardness"
-      noSummary={true}
       pool={
         Object {
+          "armored": 7,
+          "bonus": Array [],
+          "name": "Hardness",
           "total": 7,
         }
       }
@@ -5079,7 +5099,7 @@ exports[`CharacterCard works for mortals 4`] = `
           "armored": 5,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],
@@ -5635,7 +5655,7 @@ exports[`CharacterCard works for mortals 5`] = `
           "armored": 3,
           "bonus": Array [
             Object {
-              "bonus": Array [],
+              "bonus": 2,
               "label": "unusual hide",
             },
           ],

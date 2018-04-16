@@ -9,16 +9,10 @@ class BattlegroupSerializer < ActiveModel::Serializer
              :soak, :hardness, :evasion, :parry, :resolve, :guile, :appearance,
              :movement, :senses, :join_battle, :initiative, :onslaught,
              :in_combat, :has_acted,
-             :hidden, :sort_order, :chronicle_sort_order, :public
+             :hidden, :pinned, :sort_order, :chronicle_sort_order, :public
 
   attribute :player_id
   attribute :chronicle_id
 
   has_many :qc_attacks
-
-  attribute :pinned, if: :owner?
-
-  def owner?
-    object.player_id == current_player.id
-  end
 end

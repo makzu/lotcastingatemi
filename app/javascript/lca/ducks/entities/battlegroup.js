@@ -1,4 +1,6 @@
-import { callApi } from '../../utils/api.js'
+// @flow
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { callApi } from 'utils/api.js'
 
 const CREATE =           'lca/battlegroup/CREATE'
 const CREATE_SUCCESS =   'lca/battlegroup/CREATE_SUCCESS'
@@ -10,7 +12,21 @@ const DESTROY =          'lca/battlegroup/DESTROY'
 const DESTROY_SUCCESS =  'lca/battlegroup/DESTROY_SUCCESS'
 const DESTROY_FAILURE =  'lca/battlegroup/DESTROY_FAILURE'
 
-export function createBattlegroup(bg) {
+export default (state: Object, action: Object) => {
+  // Optimistic update
+  if (action.type === UPDATE) {
+    return { ...state,
+      battlegroups: {
+        ...state.battlegroups,
+        [action.meta.id]: {
+          ...state.battlegroups[action.meta.id],
+          ...action.payload,
+        }}}}
+
+  return state
+}
+
+export function createBattlegroup(bg: Object) {
   return callApi({
     endpoint: `/api/v1/battlegroups`,
     method: 'POST',
@@ -19,22 +35,37 @@ export function createBattlegroup(bg) {
   })
 }
 
-export function updateBattlegroup(id, trait, value) {
-  let group = { battlegroup: { [trait]: value }}
 
+export function updateBattlegroup(id: number, trait: string, value: string) {
+  return updateBattlegroupMulti(id, { [trait]: value })
+}
+
+let nextTransactionId = 0
+export function updateBattlegroupMulti(id: number, battlegroup: Object) {
+  let transactionId = 'battlegroup' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/battlegroups/${id}`,
     method: 'PATCH',
-    body: JSON.stringify(group),
+    body: JSON.stringify({ battlegroup: battlegroup }),
     types: [
-      UPDATE,
-      { type: UPDATE_SUCCESS, meta: { id: id, trait: trait }},
-      UPDATE_FAILURE
+      {
+        type: UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: battlegroup,
+      },
+      {
+        type: UPDATE_SUCCESS,
+        meta: { id: id, traits: battlegroup, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function destroyBattlegroup(id) {
+export function destroyBattlegroup(id: number) {
   return callApi({
     endpoint: `/api/v1/battlegroups/${id}`,
     method: 'DELETE',

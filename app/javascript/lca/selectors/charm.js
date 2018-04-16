@@ -1,10 +1,13 @@
+// @flow
 import createCachedSelector from 're-reselect'
+
 import { sortOrderSort } from 'utils'
 
+const entities = (state) => state.entities.current
 const characterIdMemoizer = (state, id) => id
-const getSpecificCharacter = (state, id) => state.entities.characters[id]
+const getSpecificCharacter = (state, id) => entities(state).characters[id]
 
-const getCharms = (state) => state.entities.charms
+const getCharms = (state) => entities(state).charms
 export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
@@ -33,7 +36,7 @@ export const getSpiritCharmsForCharacter = createCachedSelector(
       character.spirit_charms.map((c) => charms[c]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
-const getSpells = (state) => state.entities.spells
+const getSpells = (state) => entities(state).spells
 const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>

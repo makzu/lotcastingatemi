@@ -2,25 +2,25 @@ import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import * as calc from '../utils/calculated/'
 
-const getState = (state) => state
-const getCurrentPlayer = (state) => state.entities.players[state.session.id]
+const entities = (state) => state.entities.current
+const getCurrentPlayer = (state) => entities(state).players[state.session.id]
 
-export const getSpecificQc = (state, id) => state.entities.qcs[id]
+export const getSpecificQc = (state, id) => entities(state).qcs[id]
 const qcIdMemoizer = (state, id) => id
 
-const getQcMerits = (state) => state.entities.qc_merits
+const getQcMerits = (state) => entities(state).qc_merits
 export const getMeritsForQc = createCachedSelector(
   [getSpecificQc, getQcMerits],
   (qc, merits) => qc.qc_merits.map((m) => merits[m])
 )(qcIdMemoizer)
 
-export const getQcAttacks = (state) => state.entities.qc_attacks
+export const getQcAttacks = (state) => entities(state).qc_attacks
 export const getAttacksForQc = createCachedSelector(
   [getSpecificQc, getQcAttacks],
   (qc, attacks) => qc.qc_attacks.map((m) => attacks[m])
 )(qcIdMemoizer)
 
-export const getQcCharms = (state) => state.entities.qc_charms
+export const getQcCharms = (state) => entities(state).qc_charms
 export const getCharmsForQc = createCachedSelector(
   [getSpecificQc, getQcCharms],
   (qc, charms) => qc.qc_charms.map((m) => charms[m])
@@ -63,12 +63,12 @@ export const doIOwnQc = createSelector(
 )
 
 export const amIStOfQc = createSelector(
-  [getCurrentPlayer, getSpecificQc, getState],
-  (player, qc, state) => (
+  [getCurrentPlayer, getSpecificQc, entities],
+  (player, qc, ents) => (
     qc !== undefined &&
     qc.chronicle_id &&
-    state.entities.chronicles[qc.chronicle_id] &&
-    state.entities.chronicles[qc.chronicle_id].st_id === player.id
+    ents.chronicles[qc.chronicle_id] &&
+    ents.chronicles[qc.chronicle_id].st_id === player.id
   )
 )
 export const canISeeQc = createSelector(

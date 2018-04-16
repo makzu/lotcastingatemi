@@ -13,12 +13,12 @@ import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
-import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
-import { updateChronicle } from '../../ducks/actions.js'
+import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import { updateChronicle } from 'ducks/actions.js'
 import {
   getSpecificChronicle, getPlayersForChronicle,
   getStorytellerForChronicle, amIStOfChronicle,
-} from '../../selectors'
+} from 'selectors'
 
 class ChroniclePlayerPage extends Component {
   constructor(props) {

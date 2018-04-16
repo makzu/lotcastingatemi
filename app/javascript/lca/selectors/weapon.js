@@ -5,10 +5,11 @@ import { getPenalties } from './character.js'
 import { getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter } from './charm.js'
 import * as calc from 'utils/calculated'
 
+const entities = (state) => state.entities.current
 const getState = state => state
-const getWeapon = (state, id) => state.entities.weapons[id]
-const getCharacterForWeapon = (state, id) => state.entities.characters[getWeapon(state, id).character_id]
-const getPenaltiesForWeapon = (state, id) => getPenalties(state, state.entities.characters[state.entities.weapons[id].character_id].id)
+const getWeapon = (state, id) => entities(state).weapons[id]
+const getCharacterForWeapon = (state, id) => entities(state).characters[getWeapon(state, id).character_id]
+const getPenaltiesForWeapon = (state, id) => getPenalties(state, entities(state).characters[entities(state).weapons[id].character_id].id)
 
 const getExcellencyAbilsForWeapon = createSelector(
   [getCharacterForWeapon, getState], (character, state) =>

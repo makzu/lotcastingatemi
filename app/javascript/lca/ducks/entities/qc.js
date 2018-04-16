@@ -1,4 +1,6 @@
-import { callApi } from '../../utils/api.js'
+// @flow
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { callApi } from 'utils/api.js'
 
 const QC_CREATE =          'lca/qc/CREATE'
 const QC_CREATE_SUCCESS =  'lca/qc/CREATE_SUCCESS'
@@ -10,7 +12,21 @@ const QC_DESTROY =         'lca/qc/DESTROY'
 const QC_DESTROY_SUCCESS = 'lca/qc/DESTROY_SUCCESS'
 const QC_DESTROY_FAILURE = 'lca/qc/DESTROY_FAILURE'
 
-export function createQc(qc) {
+export default (state: Object, action: Object) => {
+  // Optimistic update
+  if (action.type === QC_UPDATE) {
+    return { ...state,
+      qcs: {
+        ...state.qcs,
+        [action.meta.id]: {
+          ...state.qcs[action.meta.id],
+          ...action.payload,
+        }}}}
+
+  return state
+}
+
+export function createQc(qc: Object) {
   return callApi({
     endpoint: '/api/v1/qcs',
     method: 'POST',
@@ -19,24 +35,36 @@ export function createQc(qc) {
   })
 }
 
-export function updateQc(id, trait, value) {
+export function updateQc(id: number, trait: string, value: string) {
   return updateQcMulti(id, { [trait]: value })
 }
 
-export function updateQcMulti(id, qc) {
+let nextTransactionId = 0
+export function updateQcMulti(id: number, qc: Object) {
+  let transactionId = 'qc' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/qcs/${id}`,
     method: 'PATCH',
     body: JSON.stringify({ qc: qc }),
     types: [
-      { type: QC_UPDATE, meta: { id: id }},
-      { type: QC_UPDATE_SUCCESS, meta: { id: id }},
-      QC_UPDATE_FAILURE
+      {
+        type: QC_UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: qc,
+      },
+      {
+        type: QC_UPDATE_SUCCESS,
+        meta: { id: id, traits: qc, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: QC_UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function destroyQc(id) {
+export function destroyQc(id: number) {
   return callApi({
     endpoint: `/api/v1/qcs/${id}`,
     method: 'DELETE',

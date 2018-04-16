@@ -1,3 +1,4 @@
+// @flow
 import { isAuthFailure } from './app.js'
 import { FETCH_SUCCESS as PLAYER_FETCH_SUCCESS } from './entities/player.js'
 
@@ -5,11 +6,11 @@ export const LOGOUT       = 'lca/session/LOGOUT'
 export const AUTH_FAILURE = 'lca/session/AUTH_FAILURE'
 
 const defaultState = {
-  authenticated: !!localStorage.jwt || false,
+  authenticated: !!(localStorage: Object).jwt || false,
   id: 0,
 }
 
-export default function SessionReducer(state = defaultState, action) {
+export default function SessionReducer(state: Object = defaultState, action: Object) {
   if (isAuthFailure(action)) {
     return { ...state,
       authenticated: false,

@@ -88,7 +88,7 @@ class CardMenuDelete extends Component<Props, { open: boolean }> {
 function mapStateToProps(state, ownProps) {
   return {
     canDelete: canIDelete(state, ownProps.id, ownProps.characterType),
-    name: state.entities[ownProps.characterType + 's'][ownProps.id].name,
+    name: state.entities.current[ownProps.characterType + 's'][ownProps.id].name,
   }
 }
 function mapDispatchToProps(dispatch: Function) {

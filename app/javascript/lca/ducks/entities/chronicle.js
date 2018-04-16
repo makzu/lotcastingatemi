@@ -1,11 +1,13 @@
+// @flow
 import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
 import { mergeStateWithNormalizedEntities } from '.'
 import * as schemas from './_schemas.js'
 import { CHA_FETCH_SUCCESS } from './character.js'
-import { callApi } from '../../utils/api.js'
+import { callApi } from 'utils/api.js'
 
 export const CHN_FETCH =         'lca/chronicle/FETCH'
 export const CHN_FETCH_SUCCESS = 'lca/chronicle/FETCH_SUCCESS'
@@ -35,13 +37,15 @@ export const CHN_REMOVE_THING =           'lca/chronicle/REMOVE_THING'
 export const CHN_REMOVE_THING_SUCCESS =   'lca/chronicle/REMOVE_THING_SUCCESS'
 export const CHN_REMOVE_THING_FAILURE =   'lca/chronicle/REMOVE_THING_FAILURE'
 
-export default function reducer(state, action) {
+export default function reducer(state: Object, action: Object) {
   const _id = action.payload != undefined ? action.payload.id : null
   const _trait = action.meta != undefined ? action.meta.trait : null
-  const _entities = action.payload != undefined ? action.payload.entities : undefined
+  let _entities
+  _entities = action.payload != undefined ? action.payload.entities : undefined
 
   switch(action.type) {
   case CHN_CREATE_SUCCESS:
+    _entities = action.payload.entities
     return {
       ...state,
       players: { ...state.players,
@@ -58,8 +62,10 @@ export default function reducer(state, action) {
   case INVITE_CODE_UPDATE_SUCCESS:
   case CHN_ADD_THING_SUCCESS:
   case CHA_FETCH_SUCCESS:
+    _entities = action.payload.entities
     return mergeStateWithNormalizedEntities(state, _entities)
   case CHN_REMOVE_PLAYER_SUCCESS:
+    _entities = action.payload.entities
     return {
       ...state,
       players:      { ...state.players     , ..._entities.players      },
@@ -76,7 +82,7 @@ export default function reducer(state, action) {
       chronicles:   { ...state.chronicles  , ..._entities.chronicles   },
     }
 
-  case CHN_UPDATE_SUCCESS:
+  case CHN_UPDATE:
     return { ...state, chronicles: {
       ...state.chronicles, [_id]: {
         ...state.chronicles[_id], [_trait]: action.payload[_trait]
@@ -88,7 +94,7 @@ export default function reducer(state, action) {
   }
 }
 
-export function createChronicle(chron) {
+export function createChronicle(chron: Object) {
   return callApi({
     endpoint: '/api/v1/chronicles',
     method: 'POST',
@@ -123,7 +129,7 @@ export function fetchAllChronicles() {
   })
 }
 
-export function fetchChronicle(id) {
+export function fetchChronicle(id: number) {
   return callApi({
     endpoint: `/api/v1/chronicles/${id}`,
     method: 'GET',
@@ -140,20 +146,33 @@ export function fetchChronicle(id) {
   })
 }
 
-export function updateChronicle(id, trait, value) {
+let nextTransactionId = 0
+export function updateChronicle(id: number, trait: string, value: string) {
+  let transactionId = 'chronicle' + nextTransactionId++
+  let chronicle = { [trait]: value }
   return callApi({
     endpoint: `/api/v1/chronicles/${id}`,
     method: 'PATCH',
-    body: JSON.stringify({ chronicle: { [trait]: value }}),
+    body: JSON.stringify({ chronicle: chronicle }),
     types: [
-      CHN_UPDATE,
-      { type: CHN_UPDATE_SUCCESS, meta: { trait: trait }},
-      CHN_UPDATE_FAILURE
+      {
+        type: CHN_UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: chronicle,
+      },
+      {
+        type: CHN_UPDATE_SUCCESS,
+        meta: { id: id, traits: chronicle, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: CHN_UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function joinChronicle(code) {
+export function joinChronicle(code: string) {
   return callApi({
     endpoint: '/api/v1/chronicles/join',
     method: 'POST',
@@ -171,7 +190,7 @@ export function joinChronicle(code) {
   })
 }
 
-export function regenChronicleInviteCode(id) {
+export function regenChronicleInviteCode(id: number) {
   return callApi({
     endpoint: `/api/v1/chronicles/${id}/regen_invite_code`,
     method: 'POST',
@@ -189,7 +208,7 @@ export function regenChronicleInviteCode(id) {
 }
 
 // TODO: Flush the store of the removed player's data
-export function removePlayerFromChronicle(id, playerId) {
+export function removePlayerFromChronicle(id: number, playerId: number) {
   return callApi({
     endpoint: `/api/v1/chronicles/${id}/remove_player/${playerId}`,
     method: 'POST',
@@ -206,7 +225,7 @@ export function removePlayerFromChronicle(id, playerId) {
   })
 }
 
-export function addThingToChronicle(id, thingId, thingType) {
+export function addThingToChronicle(id: number, thingId: number, thingType: string) {
   return callApi({
     endpoint: `/api/v1/chronicles/${id}/add_${thingType}/${thingId}`,
     method: 'POST',
@@ -223,7 +242,7 @@ export function addThingToChronicle(id, thingId, thingType) {
   })
 }
 
-export function removeThingFromChronicle(chronId, id, type) {
+export function removeThingFromChronicle(chronId: number, id: number, type: string) {
   return callApi({
     endpoint: `/api/v1/chronicles/${chronId}/remove_${type}/${id}`,
     method: 'POST',
@@ -241,7 +260,7 @@ export function removeThingFromChronicle(chronId, id, type) {
   })
 }
 
-export function destroyChronicle(id) {
+export function destroyChronicle(id: number) {
   return callApi({
     endpoint: `/api/v1/chronicles/${id}`,
     method: 'DELETE',

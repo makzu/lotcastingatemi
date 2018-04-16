@@ -1,8 +1,10 @@
+// @flow
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
 import * as schemas from './_schemas.js'
-import { callApi } from '../../utils/api.js'
+import { callApi } from 'utils/api.js'
 
 export const CHA_CREATE =          'lca/character/CREATE'
 export const CHA_CREATE_SUCCESS =  'lca/character/CREATE_SUCCESS'
@@ -17,7 +19,21 @@ export const CHA_DESTROY =         'lca/character/DESTROY'
 export const CHA_DESTROY_SUCCESS = 'lca/character/DESTROY_SUCCESS'
 export const CHA_DESTROY_FAILURE = 'lca/character/DESTROY_FAILURE'
 
-export function createCharacter(char) {
+export default (state: Object, action: Object) => {
+  // Optimistic update
+  if (action.type === CHA_UPDATE) {
+    return { ...state,
+      characters: {
+        ...state.characters,
+        [action.meta.id]: {
+          ...state.characters[action.meta.id],
+          ...action.payload,
+        }}}}
+
+  return state
+}
+
+export function createCharacter(char: Object) {
   return callApi({
     endpoint: '/api/v1/characters',
     method: 'POST',
@@ -26,11 +42,7 @@ export function createCharacter(char) {
   })
 }
 
-export function updateCharacter(id, trait, value) {
-  return updateCharacterMulti(id, { [trait]: value })
-}
-
-export function fetchCharacter(id) {
+export function fetchCharacter(id: number) {
   return callApi({
     endpoint: `/api/v1/characters/${id}`,
     method: 'GET',
@@ -47,20 +59,36 @@ export function fetchCharacter(id) {
   })
 }
 
-export function updateCharacterMulti(id, character) {
+export function updateCharacter(id: number, trait: string, value: string) {
+  return updateCharacterMulti(id, { [trait]: value })
+}
+
+let nextTransactionId = 0
+export function updateCharacterMulti(id: number, character: Object) {
+  let transactionId = 'character' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/characters/${id}`,
     method: 'PATCH',
     body: JSON.stringify({ character: character }),
     types: [
-      { type: CHA_UPDATE, meta: { id: id }},
-      { type: CHA_UPDATE_SUCCESS, meta: { id: id, traits: character }},
-      CHA_UPDATE_FAILURE
+      {
+        type: CHA_UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: character,
+      },
+      {
+        type: CHA_UPDATE_SUCCESS,
+        meta: { id: id, traits: character, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: CHA_UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function destroyCharacter(id) {
+export function destroyCharacter(id: number) {
   return callApi({
     endpoint: `/api/v1/characters/${id}`,
     method: 'DELETE',

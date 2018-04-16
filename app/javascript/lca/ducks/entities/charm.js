@@ -1,4 +1,6 @@
-import { callApi } from '../../utils/api.js'
+// @flow
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { callApi } from 'utils/api.js'
 
 const CHM_CREATE =             'lca/charm/CREATE'
 const CHM_CREATE_SUCCESS =     'lca/charm/CREATE_SUCCESS'
@@ -10,7 +12,21 @@ const CHM_DESTROY =            'lca/charm/DESTROY'
 const CHM_DESTROY_SUCCESS =    'lca/charm/DESTROY_SUCCESS'
 const CHM_DESTROY_FAILURE =    'lca/charm/DESTROY_FAILURE'
 
-export function createCharm(charId, type) {
+export default (state: Object, action: Object) => {
+  // Optimistic update
+  if (action.type === CHM_UPDATE) {
+    return { ...state,
+      charms: {
+        ...state.charms,
+        [action.meta.id]: {
+          ...state.charms[action.meta.id],
+          ...action.payload,
+        }}}}
+
+  return state
+}
+
+export function createCharm(charId: number, type: string) {
   let charm = { charm: { character_id: charId, type: type }}
 
   return callApi({
@@ -21,22 +37,36 @@ export function createCharm(charId, type) {
   })
 }
 
-export function updateCharm(id, charId, trait, value) {
-  let charm = { charm: { [trait]: value }}
+export function updateCharm(id: number, charId: number, trait: string, value: string) {
+  return updateCharmMulti(id, charId, { [trait]: value })
+}
 
+let nextTransactionId = 0
+export function updateCharmMulti(id: number, charId: number, charm: Object) {
+  let transactionId = 'charm' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/characters/${charId}/charms/${id}`,
     method: 'PATCH',
     body: JSON.stringify(charm),
     types: [
-      CHM_UPDATE,
-      { type: CHM_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
-      CHM_UPDATE_FAILURE
+      {
+        type: CHM_UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: charm,
+      },
+      {
+        type: CHM_UPDATE_SUCCESS,
+        meta: { id: id, traits: charm, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: CHM_UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function destroyCharm(id, charId) {
+export function destroyCharm(id: number, charId: number) {
   return callApi({
     endpoint: `/api/v1/characters/${charId}/charms/${id}`,
     method: 'DELETE',

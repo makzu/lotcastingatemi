@@ -2,9 +2,12 @@
 import { createSelector } from 'reselect'
 import { sortOrderSort } from '../utils'
 
-const getCurrentPlayer = (state) => state.entities.players[state.session.id]
+const entities = (state) => state.entities.current
 
-const getCharacters = (state) => state.entities.characters
+export const getSpecificPlayer = (state: Object, id: number) => entities(state).players[id]
+const getCurrentPlayer = (state) => getSpecificPlayer(state, state.session.id)
+
+const getCharacters = (state) => entities(state).characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
@@ -19,7 +22,7 @@ export const getMyCharactersWithoutChronicles = createSelector(
   (characters) => characters.filter((c) => c.chronicle_id == undefined)
 )
 
-const getQCs = (state) => state.entities.qcs
+const getQCs = (state) => entities(state).qcs
 export const getMyQCs = createSelector(
   [getCurrentPlayer, getQCs],
   (currentPlayer, qcs) =>
@@ -34,7 +37,7 @@ export const getMyQcsWithoutChronicles = createSelector(
   (qcs) => qcs.filter((c) => c.chronicle_id == undefined)
 )
 
-const getBattlegroups = (state) => state.entities.battlegroups
+const getBattlegroups = (state) => entities(state).battlegroups
 export const getMyBattlegroups = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>

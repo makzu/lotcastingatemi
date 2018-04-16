@@ -22,7 +22,7 @@ class QcSerializer < ActiveModel::Serializer
              :ties, :principles,
 
              :initiative, :onslaught, :in_combat, :has_acted,
-             :hidden, :sort_order, :chronicle_sort_order, :public
+             :hidden, :pinned, :sort_order, :chronicle_sort_order, :public
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id
@@ -31,10 +31,4 @@ class QcSerializer < ActiveModel::Serializer
   has_many :qc_attacks
   has_many :qc_charms
   has_many :qc_merits
-
-  attribute :pinned, if: :owner?
-
-  def owner?
-    object.player_id == current_player.id
-  end
 end

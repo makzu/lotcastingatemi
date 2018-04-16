@@ -11,7 +11,8 @@ import Dialog, {
 import { ListItem, ListItemText } from 'material-ui/List'
 import TextField from 'material-ui/TextField'
 
-import { updatePlayer } from '../../ducks/actions.js'
+import { updatePlayer } from 'ducks/actions.js'
+import { getSpecificPlayer } from 'selectors'
 
 class DisplayNamePopup extends Component {
   constructor(props) {
@@ -87,7 +88,7 @@ DisplayNamePopup.propTypes = {
 
 function mapStateToProps(state) {
   const id = state.session.id
-  const displayName = state.entities.players[id].display_name || ''
+  const displayName = getSpecificPlayer(state, id).display_name || ''
 
   return {
     displayName,

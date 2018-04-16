@@ -1,4 +1,6 @@
-import { callApi } from '../../utils/api.js'
+// @flow
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { callApi } from 'utils/api.js'
 
 export const QCM_CREATE =            'lca/qc_merit/CREATE'
 export const QCM_CREATE_SUCCESS =    'lca/qc_merit/CREATE_SUCCESS'
@@ -10,7 +12,21 @@ export const QCM_DESTROY =           'lca/qc_merit/DESTROY'
 export const QCM_DESTROY_SUCCESS =   'lca/qc_merit/DESTROY_SUCCESS'
 export const QCM_DESTROY_FAILURE =   'lca/qc_merit/DESTROY_FAILURE'
 
-export function createQcMerit(qcId) {
+export default (state: Object, action: Object) => {
+  // Optimistic update
+  if (action.type === QCM_UPDATE) {
+    return { ...state,
+      qc_merits: {
+        ...state.qc_merits,
+        [action.meta.id]: {
+          ...state.qc_merits[action.meta.id],
+          ...action.payload,
+        }}}}
+
+  return state
+}
+
+export function createQcMerit(qcId: number) {
   let merit = { qc_merit: { qc_id: qcId }}
 
   return callApi({
@@ -21,22 +37,36 @@ export function createQcMerit(qcId) {
   })
 }
 
-export function updateQcMerit(id, qcId, trait, value) {
-  let merit = { qc_merit: { [trait]: value }}
+export function updateQcMerit(id: number, qcId: number, trait: string, value: string) {
+  return updateQcMeritMulti(id, qcId, { [trait]: value })
+}
 
+let nextTransactionId = 0
+export function updateQcMeritMulti(id: number, qcId: number, merit: Object) {
+  let transactionId = 'QCmerit' + nextTransactionId++
   return callApi({
-    endpoint: `/api/v1/qcs/${qcId}/qc_merits/${id}`,
+    endpoint: `/api/v1/characters/${qcId}/merits/${id}`,
     method: 'PATCH',
     body: JSON.stringify(merit),
     types: [
-      QCM_UPDATE,
-      { type: QCM_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
-      QCM_UPDATE_FAILURE
+      {
+        type: QCM_UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: merit,
+      },
+      {
+        type: QCM_UPDATE_SUCCESS,
+        meta: { id: id, traits: merit, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: QCM_UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function destroyQcMerit(id, qcId) {
+export function destroyQcMerit(id: number, qcId: number) {
   return callApi({
     endpoint: `/api/v1/qcs/${qcId}/qc_merits/${id}`,
     method: 'DELETE',

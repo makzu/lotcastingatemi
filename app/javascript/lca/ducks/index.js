@@ -1,4 +1,6 @@
+// @flow
 import { combineReducers } from 'redux'
+import { optimistic } from 'redux-optimistic-ui'
 
 import EntityReducer from './entities'
 import SessionReducer from './session.js'
@@ -6,7 +8,7 @@ import AppReducer from './app.js'
 
 const lcaApp = combineReducers({
   app:              AppReducer,
-  entities:         EntityReducer,
+  entities:         optimistic(EntityReducer),
   session:          SessionReducer,
 })
 

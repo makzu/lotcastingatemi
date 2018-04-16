@@ -1,4 +1,6 @@
-import { callApi } from '../../utils/api.js'
+// @flow
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { callApi } from 'utils/api.js'
 
 const SPL_CREATE =             'lca/spell/CREATE'
 const SPL_CREATE_SUCCESS =     'lca/spell/CREATE_SUCCESS'
@@ -10,7 +12,21 @@ const SPL_DESTROY =            'lca/spell/DESTROY'
 const SPL_DESTROY_SUCCESS =    'lca/spell/DESTROY_SUCCESS'
 const SPL_DESTROY_FAILURE =    'lca/spell/DESTROY_FAILURE'
 
-export function createSpell(charId) {
+export default (state: Object, action: Object) => {
+  // Optimistic update
+  if (action.type === SPL_UPDATE) {
+    return { ...state,
+      spells: {
+        ...state.spells,
+        [action.meta.id]: {
+          ...state.spells[action.meta.id],
+          ...action.payload,
+        }}}}
+
+  return state
+}
+
+export function createSpell(charId: number) {
   let spell = { spell: { character_id: charId }}
 
   return callApi({
@@ -21,22 +37,36 @@ export function createSpell(charId) {
   })
 }
 
-export function updateSpell(id, charId, trait, value) {
-  let spell = { spell: { [trait]: value }}
+export function updateSpell(id: number, charId: number, trait: string, value: string) {
+  return updateSpellMulti(id, charId, { [trait]: value })
+}
 
+let nextTransactionId = 0
+export function updateSpellMulti(id: number, charId: number, spell: Object) {
+  let transactionId = 'spell' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/characters/${charId}/spells/${id}`,
     method: 'PATCH',
     body: JSON.stringify(spell),
     types: [
-      SPL_UPDATE,
-      { type: SPL_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
-      SPL_UPDATE_FAILURE
+      {
+        type: SPL_UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: spell,
+      },
+      {
+        type: SPL_UPDATE_SUCCESS,
+        meta: { id: id, traits: spell, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: SPL_UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function destroySpell(id, charId) {
+export function destroySpell(id: number, charId: number) {
   return callApi({
     endpoint: `/api/v1/characters/${charId}/spells/${id}`,
     method: 'DELETE',

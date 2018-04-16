@@ -10,8 +10,8 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 
-import { removePlayerFromChronicle } from '../../ducks/actions.js'
-import { getSpecificChronicle } from '../../selectors'
+import { removePlayerFromChronicle } from 'ducks/actions.js'
+import { getSpecificChronicle, getSpecificPlayer } from 'selectors'
 
 class RemovePlayerPopup extends Component {
   constructor(props) {
@@ -85,7 +85,7 @@ function mapStateToProps(state, ownProps) {
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   if (chronicle != undefined && chronicle.name != undefined) {
     chronicleName = chronicle.name
-    playerName = state.entities.players[ownProps.playerId].display_name
+    playerName = (getSpecificPlayer(state, ownProps.playerId) || {}).display_name
   }
 
   return {

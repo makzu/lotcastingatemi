@@ -30,7 +30,7 @@ function CardMenuHide({ id, chronId, characterType, canIEdit, removeThing }: Pro
 }
 const  mapStateToProps = (state, ownProps) => ({
   canIEdit: canIEdit(state, ownProps.id, ownProps.characterType),
-  chronId: state.entities[ownProps.characterType + 's'][ownProps.id].chronicle_id
+  chronId: state.entities.current[ownProps.characterType + 's'][ownProps.id].chronicle_id
 })
 const mapDispatchToProps = (dispatch) => ({
   removeThing: (chronId, id, type) => dispatch(removeThingFromChronicle(chronId, id, type)),

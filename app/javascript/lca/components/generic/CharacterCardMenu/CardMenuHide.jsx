@@ -45,7 +45,7 @@ function CardMenuHide(props: Props) {
   </MenuItem>
 }
 const mapStateToProps = (state, ownProps) => ({
-  isHidden: state.entities[ownProps.characterType + 's'][ownProps.id].hidden,
+  isHidden: state.entities.current[ownProps.characterType + 's'][ownProps.id].hidden,
   canIEdit: canIEdit(state, ownProps.id, ownProps.characterType),
 })
 const mapDispatchToProps = dispatch => ({

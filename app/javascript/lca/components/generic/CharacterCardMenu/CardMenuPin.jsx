@@ -45,7 +45,7 @@ function PinButton(props: Props) {
   </MenuItem>
 }
 const mapStateToProps = (state, ownProps) => ({
-  isPinned: state.entities[ownProps.characterType + 's'][ownProps.id].pinned,
+  isPinned: state.entities.current[ownProps.characterType + 's'][ownProps.id].pinned,
   canEdit: canIDelete(state, ownProps.id, ownProps.characterType),
 })
 const mapDispatchToProps = (dispatch: Function) => ({

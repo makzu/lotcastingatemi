@@ -36,18 +36,13 @@ class CharacterSerializer < ActiveModel::Serializer
 
              :xp_total, :xp_solar_total, :xp_log, :xp_log_solar, :bp_log,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
-             :hidden, :sort_order, :chronicle_sort_order, :public
+             :hidden, :pinned, :sort_order, :chronicle_sort_order, :public
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id
-  attribute :chronicle_id
-  attribute :pinned, if: :owner?
+  attribute :chronicle_id?
 
   has_many :merits
   has_many :weapons
   has_many :spells
-
-  def owner?
-    object.player_id == current_player.id
-  end
 end

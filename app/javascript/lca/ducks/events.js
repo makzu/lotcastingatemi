@@ -26,7 +26,7 @@ export function spendMotes(id, motes, pool = 'personal', charType = 'character',
 
   return (dispatch, getState) => {
     dispatch({ type: SPEND_MOTES, id: id, pool: pool })
-    const entity = getState().entities[charType + 's'][id]
+    const entity = getState().entities.current[charType + 's'][id]
     let current_motes = entity[`motes_${pool}_current`]
     let updateObj = { [`motes_${pool}_current`]: Math.max(current_motes - motes, 0) }
 
@@ -51,7 +51,7 @@ export function spendWillpower(id, willpower, charType = 'character') {
 
   return (dispatch, getState) => {
     dispatch({ type: SPEND_WP, id: id })
-    let current_wp = getState().entities[charType + 's'][id].willpower_temporary
+    let current_wp = getState().entities.current[charType + 's'][id].willpower_temporary
     dispatch(update(id, 'willpower_temporary', Math.max(current_wp - willpower, 0)))
   }
 }
@@ -61,7 +61,7 @@ export function takeDamage(id, damage, damageType = 'bashing', charType = 'chara
 
   return (dispatch, getState) => {
     dispatch({ type: TAKE_DAMAGE, id: id, damageType: damageType })
-    let current_dmg = getState().entities[charType + 's'][id][`damage_${damageType}`]
+    let current_dmg = getState().entities.current[charType + 's'][id][`damage_${damageType}`]
     dispatch(update(id, `damage_${damageType}`, current_dmg + damage))
   }
 }

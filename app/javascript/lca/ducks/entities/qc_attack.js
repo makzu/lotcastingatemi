@@ -1,4 +1,6 @@
-import { callApi } from '../../utils/api.js'
+// @flow
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { callApi } from 'utils/api.js'
 
 const QCA_CREATE =           'lca/qc_attack/CREATE'
 const QCA_CREATE_SUCCESS =   'lca/qc_attack/CREATE_SUCCESS'
@@ -10,7 +12,21 @@ const QCA_DESTROY =          'lca/qc_attack/DESTROY'
 const QCA_DESTROY_SUCCESS =  'lca/qc_attack/DESTROY_SUCCESS'
 const QCA_DESTROY_FAILURE =  'lca/qc_attack/DESTROY_FAILURE'
 
-export function createQcAttack(qcId, qcType) {
+export default (state: Object, action: Object) => {
+  // Optimistic update
+  if (action.type === QCA_UPDATE) {
+    return { ...state,
+      qc_attacks: {
+        ...state.qc_attacks,
+        [action.meta.id]: {
+          ...state.qc_attacks[action.meta.id],
+          ...action.payload,
+        }}}}
+
+  return state
+}
+
+export function createQcAttack(qcId: number, qcType: string) {
   let attack = { qc_attack: { qc_attackable_id: qcId, qc_attackable_type: qcType }}
 
   return callApi({
@@ -21,22 +37,36 @@ export function createQcAttack(qcId, qcType) {
   })
 }
 
-export function updateQcAttack(id, qcId, qcType, trait, value) {
-  let attack = { qc_attack: { [trait]: value }}
+export function updateQcAttack(id: number, qcId: number, qcType: string, trait: string, value: string) {
+  return updateQcAttackMulti(id, qcId, qcType, { [trait]: value })
+}
 
+let nextTransactionId = 0
+export function updateQcAttackMulti(id: number, qcId: number, qcType: string, attack: Object) {
+  let transactionId = 'QCattack' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/${qcType.toLowerCase()}s/${qcId}/qc_attacks/${id}`,
     method: 'PATCH',
     body: JSON.stringify(attack),
     types: [
-      QCA_UPDATE,
-      { type: QCA_UPDATE_SUCCESS, meta: { id: id, trait: trait }},
-      QCA_UPDATE_FAILURE
+      {
+        type: QCA_UPDATE,
+        meta: { id: id, optimistic: { type: BEGIN, id: transactionId }},
+        payload: attack,
+      },
+      {
+        type: QCA_UPDATE_SUCCESS,
+        meta: { id: id, traits: attack, optimistic: { type: COMMIT, id: transactionId }},
+      },
+      {
+        type: QCA_UPDATE_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId }},
+      },
     ]
   })
 }
 
-export function destroyQcAttack(id, qcId, qcType) {
+export function destroyQcAttack(id: number, qcId: number, qcType: string) {
   return callApi({
     endpoint: `/api/v1/${qcType.toLowerCase()}s/${qcId}/qc_attacks/${id}`,
     method: 'DELETE',

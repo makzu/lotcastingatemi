@@ -2,8 +2,8 @@
 import { getPoolsAndRatings, getPenalties } from '../../selectors'
 import type { fullChar } from '../../utils/propTypes/flow.js'
 
-export const mockStateForCharacter = (character: fullChar) => ({
-  entities: {
+export const mockStateForCharacter = (character: fullChar) => ({ entities: {
+  current: {
     characters: {
       [0]: {
         id: 0,
@@ -67,7 +67,7 @@ export const mockStateForCharacter = (character: fullChar) => ({
       [26]: { charm_type: 'MartialArts' },
     }
   }
-})
+}})
 
 export const mockGetPoolsAndRatings = (character: fullChar) =>
   getPoolsAndRatings(mockStateForCharacter(character), 0)

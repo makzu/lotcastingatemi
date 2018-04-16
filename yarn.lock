@@ -7638,9 +7638,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-reselect@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/re-reselect/-/re-reselect-1.0.1.tgz#6d9ebac488bc4bac07bdcd3483f2d3dc76a437c2"
+re-reselect@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/re-reselect/-/re-reselect-2.0.0.tgz#594193f073ff80e90887d7a96251ba97e044720b"
 
 react-dom@^16.3.0:
   version "16.3.1"
@@ -7951,6 +7951,10 @@ redux-mock-store@^1.2.1:
   resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.5.1.tgz#fca4335392e66605420b5559fe02fc5b8bb6d63c"
   dependencies:
     lodash.isplainobject "^4.0.6"
+
+redux-optimistic-ui@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/redux-optimistic-ui/-/redux-optimistic-ui-3.1.0.tgz#efd07bb8483185db221b50f3d0ea42ce93b12d6d"
 
 redux-responsive@^4.3.2:
   version "4.3.6"

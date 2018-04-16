@@ -13,7 +13,8 @@ import { canIEditQc, canIDeleteQc } from './qc.js'
 import { canIEditBattlegroup, canIDeleteBattlegroup } from './battlegroup.js'
 import { amIStOfChronicle } from './chronicle.js'
 
-export const getCurrentPlayer = (state) => state.entities.players[state.session.id]
+const entities = (state) => state.entities.current
+export const getCurrentPlayer = (state) => entities(state).players[state.session.id]
 
 export const canIEdit = (state, id, characterType) => {
   switch (characterType) {
@@ -49,14 +50,14 @@ export const isPublicCharacterPage = (state, pathName) => {
   const path = pathName.split('/')
 
   if (['characters', 'qcs', 'battlegroups'].includes(path[1]) &&
-    state.entities[path[1]][path[2]] !== undefined
+    entities(state)[path[1]][path[2]] !== undefined
   )
-    return state.entities[path[1]][path[2]].public
+    return entities(state)[path[1]][path[2]].public
 
   return false
 }
 
-const getChronicles = (state) => state.entities.chronicles
+const getChronicles = (state) => entities(state).chronicles
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>

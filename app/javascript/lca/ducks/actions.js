@@ -1,3 +1,4 @@
+// @flow
 export {
   updateCharacter, updateCharacterMulti, createCharacter, destroyCharacter,
   updateWeapon, createWeapon, destroyWeapon,
@@ -26,7 +27,7 @@ import UpdatesCable from '../utils/cable.js'
 export const INIT = 'lca/app/INIT'
 
 export function fetchAll() {
-  return (dispatch, getState) => {
+  return (dispatch: Function, getState: Function) => {
     dispatch(fetchCurrentPlayer())
       .then(() => dispatch(fetchAllChronicles()))
       .then(() => {
@@ -38,7 +39,7 @@ export function fetchAll() {
 }
 
 export function lcaInit() {
-  return (dispatch, getState) => {
+  return (dispatch: Function, getState: Function) => {
     dispatch({ type: INIT })
 
     if (getState().session.authenticated) {

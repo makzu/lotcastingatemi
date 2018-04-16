@@ -1,3 +1,4 @@
+// @flow
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 import { omit, merge } from 'lodash'
 import { normalize } from 'normalizr'
@@ -21,6 +22,17 @@ export * from './combat_actor.js'
 import * as schemas from './_schemas.js'
 import PlayerReducer from './player.js'
 import ChronicleReducer from './chronicle.js'
+import CharacterReducer from './character.js'
+import MeritReducer from './merit.js'
+import WeaponReducer from './weapon.js'
+import SpellReducer from './spell.js'
+import CharmReducer from './charm.js'
+import QcReducer from './qc.js'
+import QcAttackReducer from './qc_attack.js'
+import QcMeritReducer from './qc_merit.js'
+import QcCharmReducer from './qc_charm.js'
+import BattlegroupReducer from './battlegroup.js'
+import CombatActorReducer from './combat_actor.js'
 import { LOGOUT } from '../session.js'
 
 export const defaultState = {
@@ -49,18 +61,17 @@ export const defaultState = {
   combat_actors:{},
 }
 
-export default function EntityReducer(state = defaultState, action) {
+export function EntityReducer(state = defaultState, action) {
   if (action.type === LOGOUT)
     return defaultState
 
-  // Entity actions are expected to be in format 'lca/<entity name>/<ACTION>'
-  const act = action.type.split('/')
-  if (act[0] !== 'lca')
-    return state
+  return state
+}
 
+const CableReducer = (state, action) => {
+  // TODO: Make this more readable
   let { payload } = action
 
-  // TODO: Make this more readable
   if (action.type == 'lca/cable/RECEIVED') {
     switch (payload.event) {
     case 'create':
@@ -79,23 +90,20 @@ export default function EntityReducer(state = defaultState, action) {
 
     case 'destroy':
       return handleDestroyAction(state, payload)
-
-    default:
-      return state
     }
   }
 
-  switch(act[1]) {
-  case 'player':
-    return PlayerReducer(state, action)
-  case 'character':
-  case 'chronicle':
-    return ChronicleReducer(state, action)
-
-  default:
-    return state
-  }
+  return state
 }
+
+const compose = (...fns) => fns.reduce((f, g) => (arg1, arg2) => (f(g(arg1, arg2), arg2)))
+export default (state, action) => compose(
+  CableReducer, PlayerReducer, ChronicleReducer,
+  CharacterReducer, MeritReducer, WeaponReducer, CharmReducer, SpellReducer,
+  QcReducer, QcAttackReducer, QcCharmReducer, QcMeritReducer,
+  BattlegroupReducer, CombatActorReducer,
+  EntityReducer // EntityReducer MUST be last, as it has the default State
+)(state, action)
 
 function handleCreateAction(state, payload) {
   const { parent_type, parent_id, assoc, type } = payload
@@ -140,7 +148,7 @@ function handleDestroyAction(state, payload) {
   }
 }
 
-export function mergeStateWithNormalizedEntities(state, entities) {
+export function mergeStateWithNormalizedEntities(state: Object, entities: Object) {
   return {
     ...state,
     players:      merge({ ...state.players      }, entities.players      ),

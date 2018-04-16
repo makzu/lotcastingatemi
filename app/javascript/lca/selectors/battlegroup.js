@@ -1,11 +1,13 @@
+// @flow
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { getQcAttacks } from './qc.js'
 
-const getState = (state) => state
-const getCurrentPlayer = (state) => state.entities.players[state.session.id]
+const entities = (state) => state.entities.current
 
-export const getSpecificBattlegroup = (state, id) => state.entities.battlegroups[id]
+const getCurrentPlayer = (state) => entities(state).players[state.session.id]
+
+export const getSpecificBattlegroup = (state: Object, id: number) => entities(state).battlegroups[id]
 
 export const getAttacksForBattlegroup = createCachedSelector(
   [getSpecificBattlegroup, getQcAttacks],
@@ -18,12 +20,12 @@ export const doIOwnBattlegroup = createSelector(
 )
 
 export const amIStOfBattlegroup = createSelector(
-  [getCurrentPlayer, getSpecificBattlegroup, getState],
-  (player, battlegroup, state) => (
+  [getCurrentPlayer, getSpecificBattlegroup, entities],
+  (player, battlegroup, ents) => (
     battlegroup !== undefined &&
     battlegroup.chronicle_id &&
-    state.entities.chronicles[battlegroup.chronicle_id] &&
-    state.entities.chronicles[battlegroup.chronicle_id].st_id === player.id
+    ents.chronicles[battlegroup.chronicle_id] &&
+    ents.chronicles[battlegroup.chronicle_id].st_id === player.id
   )
 )
 export const canISeeBattlegroup = createSelector(

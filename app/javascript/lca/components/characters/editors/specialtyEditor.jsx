@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
+import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
 import AbilitySelect from '../../generic/abilitySelect.jsx'
@@ -11,12 +12,15 @@ import * as calc from '../../../utils/calculated'
 
 function SpecialtyFields({ trait, character, onChange, onBlur, onRatingChange, classes }) {
   const { ability, context } = trait
+  const abilities = calc.abilitiesWithRatings(character)
+  const options = abilities.length === 0 ? [<MenuItem key="1" disabled>No Abilities with ratings &gt; 0</MenuItem>] : undefined
 
   return <Fragment>
     <AbilitySelect name="ability" value={ ability }
       label="Ability"
       onChange={ onRatingChange }
-      abilities={ calc.abilitiesWithRatings(character) }
+      abilities={ abilities }
+      prependOptions={ options }
     />
 
     <TextField name="context" value={ context } className={ classes.nameField }

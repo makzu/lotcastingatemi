@@ -93,6 +93,9 @@ class CharmFields extends Component {
 
     const isOpen = openCharm === charm.id
 
+    const abilities = abilitiesWithRatings(character)
+    const options = abilities.length === 0 ? [<MenuItem key="1" disabled>No Abilities with ratings &gt; 0</MenuItem>] : undefined
+
     return <ExpansionPanel
       expanded={ isOpen }
       onChange={ onOpenChange(charm.id) }
@@ -146,7 +149,7 @@ class CharmFields extends Component {
 
           { charm.charm_type === 'Ability' &&
             <AbilitySelect name="ability" label="Ability" margin="dense"
-              abilities={ abilitiesWithRatings(character) }
+              abilities={ abilities } prependOptions={ options }
               value={ charm.ability }
               onChange={ handleRatingChange }
               multiple={ false }

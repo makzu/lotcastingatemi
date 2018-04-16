@@ -10,5 +10,6 @@ flow-typed
 [options]
 module.system.node.resolve_dirname=app/javascript/lca
 module.system.node.resolve_dirname=node_modules
+suppress_comment=\\(.\\|\n\\)*\\$FlowThisIsOkayISwear
 
 [strict]

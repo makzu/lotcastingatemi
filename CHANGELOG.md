@@ -2,8 +2,12 @@
 ###### *Not yet released*
 - Basic Excellency support for Dragon-Blooded exalts. This shows dice adding only - it does not include automatic success adders or any other bonuses. Ratings including Athletics, etc will be slightly off
 - Resolve ratings now take Well-Bred and Thin-Blooded into account
-- The number of database queries needed while first logging in have been reduced, resulting in slightly quicker load times
+- Rating fields are a lot less janky when deleting contents or entering a negative number
+- Character traits no longer flash back to their previous value after an edit
+- Objects no longer jump around oddly before sorting
+- The number of database queries needed while first logging in have been greatly reduced, resulting in slightly quicker load times
 - An error message will now be displayed instead of a blank screen if an error is encountered
+- Improved automated test coverage
 - Bug fixes
 
 ## v46

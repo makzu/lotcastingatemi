@@ -45,7 +45,7 @@ let nextTransactionId = 0
 export function updateQcCharmMulti(id: number, qcId: number, charm: Object) {
   let transactionId = 'QCcharm' + nextTransactionId++
   return callApi({
-    endpoint: `/api/v1/characters/${qcId}/charms/${id}`,
+    endpoint: `/api/v1/qcs/${qcId}/qc_charms/${id}`,
     method: 'PATCH',
     body: JSON.stringify(charm),
     types: [

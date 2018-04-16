@@ -31,19 +31,19 @@ export default class QcCharmFields extends Component {
 
   handleChange(e) {
     let { name, value } = e.target
-    if (name == 'tags')
+    if (name === 'keywords')
       value = value.split(',')
 
     this.setState({ charm: { ...this.state.charm, [name]: value }})
   }
 
   handleBlur(e) {
-    const { name, value } = e.target
+    const { name } = e.target
     const { charm } = this.state
     if (charm[name] == this.props.charm[name])
       return
 
-    this.props.onCharmChange(charm.id, name, value)
+    this.props.onCharmChange(charm.id, name, this.state.charm[name])
   }
 
   handleRatingChange(e) {

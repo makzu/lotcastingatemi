@@ -45,7 +45,7 @@ let nextTransactionId = 0
 export function updateQcMeritMulti(id: number, qcId: number, merit: Object) {
   let transactionId = 'QCmerit' + nextTransactionId++
   return callApi({
-    endpoint: `/api/v1/characters/${qcId}/merits/${id}`,
+    endpoint: `/api/v1/qcs/${qcId}/qc_merits/${id}`,
     method: 'PATCH',
     body: JSON.stringify(merit),
     types: [

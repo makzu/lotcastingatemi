@@ -1,52 +1,47 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true,
-    'jest': true
+  env: {
+    browser: true,
+    es6: true,
+    jest: true,
   },
-  'extends': ['eslint:recommended', 'plugin:react/recommended', 'plugin:flowtype/recommended'],
-  'parser': 'babel-eslint',
-  'parserOptions': {
-    'ecmaVersion': 6,
-    'ecmaFeatures': {
-      'experimentalObjectRestSpread': true,
-      'jsx': true
-    },
-    'sourceType': 'module'
-  },
-  'plugins': [
-    'react',
-    'flowtype',
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:flowtype/recommended',
+    'plugin:prettier/recommended',
   ],
-  'rules': {
-    'indent': [
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaVersion: 6,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+      jsx: true,
+    },
+    sourceType: 'module',
+  },
+  plugins: ['react', 'flowtype', 'prettier'],
+  rules: {
+    'prettier/prettier': [
       'error',
-      2
+      {
+        semi: false,
+        singleQuote: true,
+        trailingComma: 'es5',
+      },
     ],
-    'linebreak-style': [
+    indent: [
       'error',
-      'unix'
+      2,
+      {
+        SwitchCase: 1,
+      },
     ],
-    'no-trailing-spaces': [
-      'error'
-    ],
-    'no-duplicate-imports': [
-      'warn'
-    ],
-    'quotes': [
-      'warn',
-      'single',
-      { 'allowTemplateLiterals': true }
-    ],
-    'object-curly-spacing': [
-      'error',
-      'always',
-      { 'objectsInObjects': false }
-    ],
-    'jsx-quotes': [
-      'warn',
-      'prefer-double'
-    ],
-    'semi': [ 'error', 'never' ]
-  }
+    'linebreak-style': ['error', 'unix'],
+    'no-trailing-spaces': ['error'],
+    'no-duplicate-imports': ['warn'],
+    quotes: ['warn', 'single', { allowTemplateLiterals: true }],
+    'object-curly-spacing': ['error', 'always', { objectsInObjects: false }],
+    'jsx-quotes': ['warn', 'prefer-double'],
+    semi: ['error', 'never'],
+  },
 }

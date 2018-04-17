@@ -5,6 +5,7 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
 import * as schemas from './_schemas.js'
 import { callApi } from 'utils/api.js'
+import type { Character } from 'utils/flow-types'
 
 export const CHA_CREATE =          'lca/character/CREATE'
 export const CHA_CREATE_SUCCESS =  'lca/character/CREATE_SUCCESS'
@@ -33,7 +34,7 @@ export default (state: Object, action: Object) => {
   return state
 }
 
-export function createCharacter(char: Object) {
+export function createCharacter(char: Character) {
   return callApi({
     endpoint: '/api/v1/characters',
     method: 'POST',

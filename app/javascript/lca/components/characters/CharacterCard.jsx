@@ -23,7 +23,7 @@ import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import { canIDeleteCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
 import * as calc from '../../utils/calculated'
-import type { fullChar } from '../../utils/propTypes/flow.js'
+import type { Character } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
 
@@ -90,7 +90,7 @@ const styles = theme => ({
 })
 
 type Props = {
-  character: fullChar,
+  character: Character,
   chronicle?: boolean,
   st?: boolean,
   combat?: boolean,

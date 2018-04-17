@@ -6,7 +6,7 @@ require('jasmine-check').install()
 
 import { genSolar } from '../../_mocks/'
 import { mockGetPoolsAndRatings } from '../../_mocks/selectors.js'
-import type { fullChar } from 'utils/propTypes/flow.js'
+import type { Character } from 'utils/flow-types'
 
 const mockCharacter = gen.object(genSolar)
 
@@ -25,7 +25,7 @@ describe('ratings', () => {
       })
 
     check.it('includes names correctly', { times: 1 }, mockCharacter,
-      (character: fullChar) => {
+      (character: Character) => {
         const pool = mockGetPoolsAndRatings(character).evasion
         expect(pool.name).toEqual('Evasion')
         expect(pool.attribute).toEqual('dexterity')

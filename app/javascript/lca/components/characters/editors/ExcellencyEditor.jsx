@@ -9,9 +9,9 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import AbilitySelect from '../../generic/abilitySelect.jsx'
-import type { fullChar } from 'utils/propTypes/flow.js'
+import type { Character } from 'utils/flow-types'
 
-type Props = { character: fullChar, onChange: Function }
+type Props = { character: Character, onChange: Function }
 type State = { open: boolean, excellency: Array<string>, excellency_stunt: Array<string> }
 
 class ExcellencyEditor extends Component<Props, State> {

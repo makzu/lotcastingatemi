@@ -10,9 +10,9 @@ import AbilitySelect from '../../generic/abilitySelect.jsx'
 import BlockPaper from '../../generic/blockPaper.jsx'
 
 import { nonCasteAbilities } from '../../../utils/calculated'
-import type { fullChar } from '../../../utils/propTypes/flow.js'
+import type { Character } from 'utils/flow-types'
 
-function SolarExaltEditor({ character, onRatingChange }: { character: fullChar, onRatingChange: Function }) {
+function DragonbloodExaltEditor({ character, onRatingChange }: { character: Character, onRatingChange: Function }) {
   let caste_abilities = character.caste_abilities
   if (character.caste === 'water') {
     caste_abilities = caste_abilities.concat('martial arts').sort()
@@ -45,9 +45,9 @@ function SolarExaltEditor({ character, onRatingChange }: { character: fullChar, 
     />
   </BlockPaper>
 }
-SolarExaltEditor.propTypes = {
+DragonbloodExaltEditor.propTypes = {
   character: PropTypes.object.isRequired,
   onRatingChange: PropTypes.func,
 }
 
-export default SolarExaltEditor
+export default DragonbloodExaltEditor

@@ -1,3 +1,5 @@
+// @flow
+// prettier-ignore-start
 import PropTypes from 'prop-types'
 
 export const withHealthLevels = {

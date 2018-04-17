@@ -8,7 +8,7 @@ import Typography from 'material-ui/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingLine from '../../generic/ratingLine.jsx'
-import type { fullChar } from 'utils/propTypes/flow.js'
+import type { Character } from 'utils/flow-types'
 import { isCasteAbility, isFavoredAbility, isSupernalAbility } from 'utils/calculated'
 
 const styles = theme => ({
@@ -22,7 +22,7 @@ const styles = theme => ({
 export type _AbilityLineProps = {
   ability: string,
   rating: number,
-  character: fullChar,
+  character: Character,
   pools: Object,
   classes: Object,
 }
@@ -56,7 +56,7 @@ const AbilityLine = withStyles(styles)(_AbilityLine)
 export type _CraftAbilityLineProps = {
   context: string,
   rating: number,
-  character: fullChar,
+  character: Character,
   pools: Object,
   classes: Object,
 }
@@ -88,7 +88,7 @@ const CraftAbilityLine = withStyles(styles)(_CraftAbilityLine)
 export type _MartialArtsAbilityLineProps = {
   style: string,
   rating: number,
-  character: fullChar,
+  character: Character,
   pools: Object,
   classes: Object,
 }
@@ -119,7 +119,7 @@ function _MartialArtsAbilityLine({ character, style, rating, pools, classes }: _
 const MartialArtsAbilityLine = withStyles(styles)(_MartialArtsAbilityLine)
 
 export type AbilityBlockProps = {
-  character: fullChar,
+  character: Character,
   pools: Object,
 };
 

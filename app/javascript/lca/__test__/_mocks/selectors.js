@@ -1,6 +1,6 @@
 // @flow
 import { getPoolsAndRatings, getPenalties } from '../../selectors'
-import type { fullChar } from '../../utils/propTypes/flow.js'
+import type { Character } from 'utils/flow-types'
 
 export const mockStateForCharacter = (character: fullChar) => ({ entities: {
   current: {
@@ -69,8 +69,8 @@ export const mockStateForCharacter = (character: fullChar) => ({ entities: {
   }
 }})
 
-export const mockGetPoolsAndRatings = (character: fullChar) =>
+export const mockGetPoolsAndRatings = (character: Character) =>
   getPoolsAndRatings(mockStateForCharacter(character), 0)
 
-export const mockGetPenalties = (character: fullChar) =>
+export const mockGetPenalties = (character: Character) =>
   getPenalties(mockStateForCharacter(character), 0)

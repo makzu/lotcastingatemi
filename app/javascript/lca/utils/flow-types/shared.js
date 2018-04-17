@@ -1,0 +1,52 @@
+// @flow
+// Type defs for traits shared between characters and QCs
+
+export type withBasicInfo = {
+  id: number,
+  player_id: number,
+  name: string,
+  description: string,
+  essence: number,
+  hidden: boolean,
+  pinned: boolean,
+}
+
+export type withCombatInfo = {
+  initiative: number,
+  onslaught: number,
+}
+
+export type withHealthLevels = {
+  health_level_0s: number,
+  health_level_1s: number,
+  health_level_2s: number,
+  health_level_4s: number,
+  health_level_incap: number,
+  damage_bashing: number,
+  damage_lethal: number,
+  damage_aggravated: number,
+}
+
+export type intimacy = {
+  subject: string,
+  rating: number,
+  hidden: ?boolean,
+}
+export type withIntimacies = {
+  principles: Array<intimacy>,
+  ties: Array<intimacy>,
+}
+
+export type withMotePool = {
+  motes_personal_total: number,
+  motes_personal_current: number,
+  motes_peripheral_total: number,
+  motes_peripheral_current: number,
+  motes_committed: Array<Object>,
+  anima_level: number,
+}
+
+export type withWillpower = {
+  willpower_temporary: number,
+  willpower_permanent: number,
+}

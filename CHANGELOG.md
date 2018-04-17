@@ -4,6 +4,7 @@
 - Soak and Hardness ratings now factor in Twilight caste and Earth and Fire aspect anima powers
 - Withdraw/Disengage ratings now factor in Water aspect anima powers
 - Resolve ratings now take Well-Bred and Thin-Blooded into account
+- Weapons can be assigned a different attribute than Strength for damage calculations
 - Rating fields are a lot less janky when deleting contents or entering a negative number
 - Character traits no longer flash back to their previous value after an edit
 - Objects no longer jump around oddly before sorting

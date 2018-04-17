@@ -1,8 +1,10 @@
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+const { Component, Fragment } = React
 import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
 import Checkbox from 'material-ui/Checkbox'
 import Divider from 'material-ui/Divider'
 import { FormControlLabel } from 'material-ui/Form'
@@ -10,15 +12,20 @@ import Hidden from 'material-ui/Hidden'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
+import Collapse from 'material-ui/transitions/Collapse'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
-import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import WeaponAbilitySelect from './weaponAbilitySelect.jsx'
 import WeaponAttributeSelect from './weaponAttributeSelect.jsx'
 import WeightSelect from '../../generic/weightSelect.jsx'
-import { fullWeapon } from '../../../utils/propTypes'
+import type { Character, fullWeapon } from 'utils/flow-types'
 
-const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
+const Handle = SortableHandle(() => (
+  <DragHandleIcon onClick={e => e.preventDefault()} />
+))
 
 const styles = theme => ({
   fieldContainer: {
@@ -30,11 +37,11 @@ const styles = theme => ({
   },
   nameField: {
     marginRight: theme.spacing.unit,
-    flex: 1,
+    flex: 3,
   },
   tagsField: {
     marginRight: theme.spacing.unit,
-    flex: 1,
+    flex: 5,
   },
   abilitySelect: {
     marginRight: theme.spacing.unit,
@@ -43,133 +50,186 @@ const styles = theme => ({
   },
 })
 
-class WeaponFields extends Component {
+type Props = {
+  weapon: fullWeapon,
+  character: Character,
+  classes: Object,
+  onChange: Function,
+  onRemoveClick: Function,
+}
+type State = { weapon: Object, expandoOpen: boolean }
+class WeaponFields extends Component<Props, State> {
   constructor(props) {
     super(props)
 
     this.state = {
-      weapon: this.props.weapon
+      weapon: this.props.weapon,
+      expandoOpen: false,
     }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-    this.handleRatingChange = this.handleRatingChange.bind(this)
-    this.handleCheck = this.handleCheck.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     this.setState({ weapon: newProps.weapon })
   }
 
-  handleChange(e) {
+  handleChange = e => {
     let { name, value } = e.target
     if (name == 'tags') {
       value = value.split(',')
     }
 
-    this.setState({ weapon: { ...this.state.weapon, [name]: value }})
+    this.setState({ weapon: { ...this.state.weapon, [name]: value } })
   }
 
-  handleBlur(e) {
+  handleBlur = e => {
     let { name } = e.target
     const { weapon } = this.state
-    if (weapon[name] == this.props.weapon[name])
-      return
+    if (weapon[name] == this.props.weapon[name]) return
 
     this.props.onChange(weapon.id, name, weapon[name])
   }
 
-  handleRatingChange(e) {
+  handleRatingChange = e => {
     let { name, value } = e.target
     const { weapon } = this.state
-    if (value == 'header')
-      return
+    if (value == 'header') return
 
-    this.setState({ weapon: { ...weapon, [name]: value }})
+    this.setState({ weapon: { ...weapon, [name]: value } })
     this.props.onChange(weapon.id, name, value)
   }
 
-  handleCheck(e) {
+  handleCheck = e => {
     const { name } = e.target
     const { weapon } = this.state
-    const value = ! weapon[name]
+    const value = !weapon[name]
 
     this.props.onChange(weapon.id, name, value)
   }
 
-  handleRemove() {
+  handleRemove = () => {
     this.props.onRemoveClick(this.state.weapon.id)
+  }
+
+  toggleExpando = () => {
+    this.setState({ expandoOpen: !this.state.expandoOpen })
   }
 
   render() {
     const { weapon } = this.state
     const { character, classes } = this.props
-    const { handleChange, handleBlur, handleRatingChange, handleCheck, handleRemove } = this
+    const {
+      handleChange,
+      handleBlur,
+      handleRatingChange,
+      handleCheck,
+      handleRemove,
+    } = this
 
-    const secondLine = <Fragment>
-      <WeaponAttributeSelect character={ character } weapon={ weapon }
-        onChange={ handleRatingChange }
-      />
-
-      <WeaponAbilitySelect character={ character } weapon={ weapon }
-        onChange={ handleRatingChange }
-      />
-
-      <TextField label="Tags (comma separated)" name="tags" value={ weapon.tags }
-        className={ classes.tagsField } margin="dense"
-        onBlur={ handleBlur } onChange={ handleChange }
-      />
-    </Fragment>
-
-    return <Fragment>
-      <div className={ classes.fieldContainer }>
-        <Typography component="div" className={ classes.grabHandle }>
-          <Handle />
-        </Typography>
-
-        <TextField name="name" value={ weapon.name } label="Name" className={ classes.nameField }
-          onBlur={ handleBlur } onChange={ handleChange } margin="dense"
+    const secondLine = (
+      <Fragment>
+        <WeaponAbilitySelect
+          character={character}
+          weapon={weapon}
+          onChange={handleRatingChange}
         />
 
-        <WeightSelect name="weight" value={ weapon.weight }
-          onChange={ handleRatingChange } margin="dense"
+        <TextField
+          label="Tags (comma separated)"
+          name="tags"
+          value={weapon.tags}
+          className={classes.tagsField}
+          margin="dense"
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
+      </Fragment>
+    )
 
-        <FormControlLabel
-          label="Artifact"
-          control={
-            <Checkbox name="is_artifact" checked={ weapon.is_artifact }
-              onChange={ handleCheck }
-            />
-          }
-        />
+    return (
+      <Fragment>
+        <div className={classes.fieldContainer}>
+          <Typography component="div" className={classes.grabHandle}>
+            <Handle />
+          </Typography>
 
-        <Hidden mdDown>
-          { secondLine }
+          <Hidden mdDown>
+            <Button size="small" onClick={this.toggleExpando}>
+              {this.state.expandoOpen ? <ExpandLess /> : <ExpandMore />}
+            </Button>
+          </Hidden>
+
+          <TextField
+            name="name"
+            value={weapon.name}
+            label="Name"
+            className={classes.nameField}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            margin="dense"
+          />
+
+          <WeightSelect
+            name="weight"
+            value={weapon.weight}
+            onChange={handleRatingChange}
+            margin="dense"
+          />
+
+          <FormControlLabel
+            label="Artifact"
+            control={
+              <Checkbox
+                name="is_artifact"
+                checked={weapon.is_artifact}
+                onChange={handleCheck}
+              />
+            }
+          />
+
+          <Hidden mdDown>{secondLine}</Hidden>
+
+          <IconButton onClick={handleRemove} style={{ minWidth: '2em' }}>
+            <RemoveCircle />
+          </IconButton>
+        </div>
+
+        <Hidden lgUp>
+          <div className={classes.fieldContainer}>
+            <Button size="small" onClick={this.toggleExpando}>
+              {this.state.expandoOpen ? <ExpandLess /> : <ExpandMore />}
+            </Button>
+            {secondLine}
+          </div>
         </Hidden>
 
-        <IconButton onClick={ handleRemove } style={{ minWidth: '2em' }}>
-          <ContentRemoveCircle />
-        </IconButton>
-      </div>
+        <Collapse in={this.state.expandoOpen}>
+          <div className={classes.fieldContainer}>
+            <WeaponAttributeSelect
+              character={character}
+              weapon={weapon}
+              onChange={handleRatingChange}
+            />
 
-      <Hidden lgUp>
-        <div className={ classes.fieldContainer }>
-          { secondLine }
-        </div>
-        <Divider style={{ marginBottom: '1em' }}/>
-      </Hidden>
-    </Fragment>
+            <WeaponAbilitySelect
+              character={character}
+              weapon={weapon}
+              extended
+              onChange={handleRatingChange}
+            />
+
+            <WeaponAttributeSelect
+              character={character}
+              weapon={weapon}
+              damage
+              onChange={handleRatingChange}
+            />
+          </div>
+        </Collapse>
+
+        <Divider style={{ margin: '1em' }} />
+      </Fragment>
+    )
   }
-}
-WeaponFields.propTypes = {
-  character: PropTypes.object.isRequired,
-  weapon: PropTypes.shape(fullWeapon).isRequired,
-  classes: PropTypes.object,
-  onChange: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(WeaponFields)

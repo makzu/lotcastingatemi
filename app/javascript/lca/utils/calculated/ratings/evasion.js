@@ -6,13 +6,20 @@ export function evasion(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  charmAbils: Array<string>
+  excellencyAbils: Array<string>
 ) {
   const pen = [
     { label: 'wound', penalty: penalties.wound },
     { label: 'mobility', penalty: penalties.mobility },
     { label: 'onslaught', penalty: penalties.onslaught },
   ]
-  return rating('Evasion', character, 'dexterity', 'dodge', pen, charmAbils)
+  return rating(
+    'Evasion',
+    character,
+    'dexterity',
+    'dodge',
+    pen,
+    excellencyAbils
+  )
 }
 export default evasion

@@ -2,10 +2,10 @@
 
 exports[`WelcomePage renders at all 1`] = `
 <div
-  className="MuiGrid-typeContainer-1 MuiGrid-spacing-xs-24-24"
+  className="MuiGrid-container-1 MuiGrid-spacing-xs-24-24"
 >
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-8-73"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-8-73"
   >
     <div
       className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"
@@ -50,7 +50,7 @@ exports[`WelcomePage renders at all 1`] = `
     </div>
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38"
   >
     <div
       style={
@@ -61,7 +61,7 @@ exports[`WelcomePage renders at all 1`] = `
     />
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-6-71"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-6-71"
   >
     <h1
       className="MuiTypography-root-119 MuiTypography-display2-122"
@@ -75,7 +75,7 @@ exports[`WelcomePage renders at all 1`] = `
     </h1>
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
   >
     <div
       className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"
@@ -93,7 +93,7 @@ exports[`WelcomePage renders at all 1`] = `
     </div>
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38"
   >
     <div
       style={
@@ -104,7 +104,7 @@ exports[`WelcomePage renders at all 1`] = `
     />
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38"
   >
     <h1
       className="MuiTypography-root-119 MuiTypography-display2-122"
@@ -118,7 +118,7 @@ exports[`WelcomePage renders at all 1`] = `
     </h1>
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
   >
     <div
       className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"
@@ -131,7 +131,7 @@ exports[`WelcomePage renders at all 1`] = `
     </div>
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38"
   >
     <div
       style={
@@ -142,7 +142,7 @@ exports[`WelcomePage renders at all 1`] = `
     />
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-6-71"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-6-71"
   >
     <h1
       className="MuiTypography-root-119 MuiTypography-display2-122"
@@ -156,7 +156,7 @@ exports[`WelcomePage renders at all 1`] = `
     </h1>
   </div>
   <div
-    className="MuiGrid-typeItem-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-38 MuiGrid-grid-lg-5-70"
   >
     <div
       className="MuiPaper-root-92 MuiPaper-elevation2-96 MuiPaper-rounded-93 BlockPaper-root-91"

@@ -7,9 +7,9 @@ import SessionReducer from './session.js'
 import AppReducer from './app.js'
 
 const lcaApp = combineReducers({
-  app:              AppReducer,
-  entities:         optimistic(EntityReducer),
-  session:          SessionReducer,
+  app: AppReducer,
+  entities: optimistic(EntityReducer),
+  session: SessionReducer,
 })
 
 export default lcaApp

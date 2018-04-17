@@ -195,8 +195,8 @@ function excellencyForWeapon(
 export function rangedWitheringAttackPool(
   character: Character,
   weapon: fullWeapon,
-  penalties,
-  excellencyAbils
+  penalties: Object,
+  excellencyAbils: Array<string>
 ) {
   if (!weaponIsRanged(weapon)) return false
 

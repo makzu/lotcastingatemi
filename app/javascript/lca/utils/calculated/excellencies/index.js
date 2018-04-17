@@ -3,10 +3,13 @@ import { attr, abil, specialtiesFor } from '..'
 import { ABILITIES, ATTRIBUTES } from 'utils/constants.js'
 import type { Character, Charm } from 'utils/flow-types'
 
-export const excellencyAbils = (character: Character, charms: Array<Charm>) => {
+export const excellencyAbils = (
+  character: Character,
+  charms: Array<Charm>
+): Array<string> => {
   if (character.type === 'Character') return []
 
-  let excellencies = character.excellencies_for || []
+  let excellencies: Array<string> = character.excellencies_for || []
 
   if (character.type === 'SolarCharacter' || character.excellency === 'solar') {
     excellencies = excellencies

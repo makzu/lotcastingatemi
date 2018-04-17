@@ -2,52 +2,50 @@
 import { createSelector } from 'reselect'
 import { sortOrderSort } from '../utils'
 
-const entities = (state) => state.entities.current
+const entities = state => state.entities.current
 
-export const getSpecificPlayer = (state: Object, id: number) => entities(state).players[id]
-const getCurrentPlayer = (state) => getSpecificPlayer(state, state.session.id)
+export const getSpecificPlayer = (state: Object, id: number) =>
+  entities(state).players[id]
+const getCurrentPlayer = state => getSpecificPlayer(state, state.session.id)
 
-const getCharacters = (state) => entities(state).characters
+const getCharacters = state => entities(state).characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters.map((c) => characters[c] ).sort(sortOrderSort)
+    currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
 )
 export const getMyPinnedCharacters = createSelector(
   [getMyCharacters],
-  (characters) => characters.filter((c) => c.pinned)
+  characters => characters.filter(c => c.pinned)
 )
 export const getMyCharactersWithoutChronicles = createSelector(
   [getMyCharacters],
-  (characters) => characters.filter((c) => c.chronicle_id == undefined)
+  characters => characters.filter(c => c.chronicle_id == undefined)
 )
 
-const getQCs = (state) => entities(state).qcs
+const getQCs = state => entities(state).qcs
 export const getMyQCs = createSelector(
   [getCurrentPlayer, getQCs],
-  (currentPlayer, qcs) =>
-    currentPlayer.qcs.map((c) => qcs[c] ).sort(sortOrderSort)
+  (currentPlayer, qcs) => currentPlayer.qcs.map(c => qcs[c]).sort(sortOrderSort)
 )
-export const getMyPinnedQCs = createSelector(
-  [getMyQCs],
-  (qcs) => qcs.filter((c) => c.pinned)
+export const getMyPinnedQCs = createSelector([getMyQCs], qcs =>
+  qcs.filter(c => c.pinned)
 )
-export const getMyQcsWithoutChronicles = createSelector(
-  [getMyQCs],
-  (qcs) => qcs.filter((c) => c.chronicle_id == undefined)
+export const getMyQcsWithoutChronicles = createSelector([getMyQCs], qcs =>
+  qcs.filter(c => c.chronicle_id == undefined)
 )
 
-const getBattlegroups = (state) => entities(state).battlegroups
+const getBattlegroups = state => entities(state).battlegroups
 export const getMyBattlegroups = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>
-    currentPlayer.battlegroups.map((c) => battlegroups[c] ).sort(sortOrderSort)
+    currentPlayer.battlegroups.map(c => battlegroups[c]).sort(sortOrderSort)
 )
 export const getMyPinnedBattlegroups = createSelector(
   [getMyBattlegroups],
-  (battlegroups) => battlegroups.filter((c) => c.pinned)
+  battlegroups => battlegroups.filter(c => c.pinned)
 )
 export const getMyBattlegroupsWithoutChronicles = createSelector(
   [getMyBattlegroups],
-  (battlegroups) => battlegroups.filter((c) => c.chronicle_id == undefined)
+  battlegroups => battlegroups.filter(c => c.chronicle_id == undefined)
 )

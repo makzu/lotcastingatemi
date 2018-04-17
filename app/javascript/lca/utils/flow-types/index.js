@@ -9,7 +9,7 @@ export type Charm = {
   charm_type: string,
   style?: string,
   artifact_name?: string,
-  ability?: string,
+  ability: string,
   cost: string,
   timing: string,
   duration: string,
@@ -23,10 +23,13 @@ export type Charm = {
 export type fullWeapon = {
   id: number,
   character_id: number,
+  name: string,
   weight: 'light' | 'medium' | 'heavy',
   is_artifact: boolean,
   tags: Array<string>,
   ability: string,
+  attr: string,
+  damage_attr: string
 }
 
 export type fullMerit = {

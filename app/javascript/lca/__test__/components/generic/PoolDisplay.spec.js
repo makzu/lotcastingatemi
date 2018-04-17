@@ -12,15 +12,19 @@ import { SEED, genSolar } from '../../_mocks'
 import { mockGetPoolsAndRatings } from '../../_mocks/selectors.js'
 
 describe('PoolDisplay', () => {
-  check.it('renders all pools correctly for Solars', { times: 5, seed: SEED },
-    gen.object(genSolar), (mockCharacter) => {
+  check.it(
+    'renders all pools correctly for Solars',
+    { times: 5, seed: SEED },
+    gen.object(genSolar),
+    mockCharacter => {
       const pools = mockGetPoolsAndRatings(mockCharacter)
       const component = renderer.create(
         <div>
-          { Object.keys(pools).map((p, i) => <PoolDisplay pool={ p } key={ i } />) }
+          {Object.keys(pools).map((p, i) => <PoolDisplay pool={p} key={i} />)}
         </div>
       )
       let tree = component.toJSON()
       expect(tree).toMatchSnapshot()
-    })
+    }
+  )
 })

@@ -1,5 +1,6 @@
+// @flow
 // Common styling and theming elements used by most things
-const commonStyles = theme => ({
+const commonStyles = (theme: Object) => ({
   stickyHeader: {
     position: 'sticky',
     top: '-10px',

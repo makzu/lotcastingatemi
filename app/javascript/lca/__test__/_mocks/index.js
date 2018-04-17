@@ -1,3 +1,4 @@
+// @flow
 import { gen } from 'testcheck'
 import { ABILITY_NAMES } from '../../utils/constants.js'
 export const SEED = 5 * 684 /* Number of pages in the 3e core book */
@@ -37,8 +38,10 @@ export const genAbilities = {
   abil_survival: gen.posInt,
   abil_thrown: gen.posInt,
   abil_war: gen.posInt,
-  abil_craft: gen.array({ craft: gen.string, rating: gen.posInt }),
-  abil_martial_arts: gen.array({ style: gen.string, rating: gen.posInt }),
+  abil_craft: gen.array(({ craft: gen.string, rating: gen.posInt }: Object)),
+  abil_martial_arts: gen.array(
+    ({ style: gen.string, rating: gen.posInt }: Object)
+  ),
 }
 
 export const genMortal = {
@@ -55,10 +58,12 @@ export const genMortal = {
   attr_intelligence: gen.sPosInt,
   attr_wits: gen.sPosInt,
   ...genAbilities,
-  specialties: gen.array({
-    context: gen.string,
-    ability: gen.oneOf([''].concat(ABILITY_NAMES))
-  }),
+  specialties: gen.array(
+    ({
+      context: gen.string,
+      ability: gen.oneOf([''].concat(ABILITY_NAMES)),
+    }: Object)
+  ),
 
   armor_name: gen.string,
   armor_weight: gen.oneOf(['unarmored', 'light', 'medium', 'heavy']),
@@ -81,17 +86,81 @@ export const genSolar = {
   excellency: 'solar',
   supernal_ability: gen.oneOf(ABILITY_NAMES),
   caste: gen.oneOf(['dawn', 'zenith', 'twilight', 'night', 'eclipse']),
-  charms: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+  charms: [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+  ],
   martial_arts_charms: [26],
 }
 
 export const mockCharacter = {
   type: 'Character',
-  attr_dexterity: 3, attr_wits: 3, attr_manipulation: 3, attr_stamina: 3, attr_strength: 2,
-  abil_dodge: 4,  abil_integrity: 4, abil_socialize: 4,
+  exalt_type: 'mortal',
+  attr_dexterity: 3,
+  attr_wits: 3,
+  attr_manipulation: 3,
+  attr_stamina: 3,
+  attr_strength: 2,
+  abil_archery: 0,
+  abil_athletics: 0,
+  abil_awareness: 0,
+  abil_brawl: 0,
+  abil_bureaucracy: 0,
+  abil_dodge: 4,
+  abil_integrity: 4,
+  abil_investigation: 0,
+  abil_larceny: 0,
+  abil_linguistics: 0,
+  abil_lore: 0,
+  abil_medicine: 0,
   abil_melee: 2,
-  abil_craft: [], abil_martial_arts: [], specialties: [],
-  armor_weight: 'unarmored', armor_is_artifact: false,
-  health_level_0s: 1, health_level_1s: 2, health_level_2s: 2, health_level_4s: 1, health_level_incap: 1,
-  damage_bashing: 0, damage_lethal: 0, damage_aggravated: 0
+  abil_occult: 0,
+  abil_performance: 0,
+  abil_presence: 0,
+  abil_resistance: 0,
+  abil_ride: 0,
+  abil_sail: 0,
+  abil_socialize: 4,
+  abil_stealth: 0,
+  abil_survival: 0,
+  abil_thrown: 0,
+  abil_war: 0,
+  abil_craft: [],
+  abil_martial_arts: [],
+  specialties: [],
+  armor_weight: 'unarmored',
+  armor_is_artifact: false,
+  health_level_0s: 1,
+  health_level_1s: 2,
+  health_level_2s: 2,
+  health_level_4s: 1,
+  health_level_incap: 1,
+  damage_bashing: 0,
+  damage_lethal: 0,
+  damage_aggravated: 0,
+  initiative: 0,
+  onslaught: 0,
 }

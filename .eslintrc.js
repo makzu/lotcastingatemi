@@ -40,7 +40,7 @@ module.exports = {
     'no-trailing-spaces': ['error'],
     'no-duplicate-imports': ['warn'],
     quotes: ['warn', 'single', { allowTemplateLiterals: true }],
-    'object-curly-spacing': ['error', 'always', { objectsInObjects: false }],
+    'object-curly-spacing': ['error', 'always'],
     'jsx-quotes': ['warn', 'prefer-double'],
     semi: ['error', 'never'],
   },

@@ -20,6 +20,7 @@ export type fullQc = {
   evasion: number,
   parry: number,
   armor_name: string,
+  excellency: string,
   ref: string,
 } & withWillpower &
   withHealthLevels &

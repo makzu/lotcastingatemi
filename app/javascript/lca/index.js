@@ -16,18 +16,23 @@ import { lcaInit } from './ducks/actions.js'
 
 import RootContainer from './containers/rootContainer.jsx'
 
-const makeEnhancer = (process.env.NODE_ENV === 'production') ? compose : composeWithDevTools
+const makeEnhancer =
+  process.env.NODE_ENV === 'production' ? compose : composeWithDevTools
 
 const enhancer = makeEnhancer(
-  applyMiddleware(thunk, apiMiddleware, authTokenMiddleware, themeSaverMiddleware)
+  applyMiddleware(
+    thunk,
+    apiMiddleware,
+    authTokenMiddleware,
+    themeSaverMiddleware
+  )
 )
 
-const store = createStore(
-  reducer,
-  undefined,
-  enhancer
-)
+const store = createStore(reducer, undefined, enhancer)
 
 store.dispatch(lcaInit())
 
-ReactDOM.render(<RootContainer store={ store } />, document.getElementById('root'))
+ReactDOM.render(
+  <RootContainer store={store} />,
+  document.getElementById('root')
+)

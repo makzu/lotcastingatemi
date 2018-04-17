@@ -2,35 +2,63 @@ import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
 import { getPenalties } from './character.js'
-import { getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter } from './charm.js'
+import {
+  getNativeCharmsForCharacter,
+  getMartialArtsCharmsForCharacter,
+} from './charm.js'
 import * as calc from 'utils/calculated'
 import decisiveAttack from 'utils/calculated/pools/combat/decisiveAttack.js'
 import witheringAttack from 'utils/calculated/pools/combat/witheringAttack.js'
 import parry from 'utils/calculated/ratings/parry.js'
 
-const entities = (state) => state.entities.current
+const entities = state => state.entities.current
 const getState = state => state
 const getWeapon = (state, id) => entities(state).weapons[id]
-const getCharacterForWeapon = (state, id) => entities(state).characters[getWeapon(state, id).character_id]
-const getPenaltiesForWeapon = (state, id) => getPenalties(state, getCharacterForWeapon(state, id).id)
+const getCharacterForWeapon = (state, id) =>
+  entities(state).characters[getWeapon(state, id).character_id]
+const getPenaltiesForWeapon = (state, id) =>
+  getPenalties(state, getCharacterForWeapon(state, id).id)
 
 const getExcellencyAbilsForWeapon = createSelector(
-  [getCharacterForWeapon, getState], (character, state) =>
+  [getCharacterForWeapon, getState],
+  (character, state) =>
     calc.excellencyAbils(
       character,
-      getNativeCharmsForCharacter(state, character.id)
-        .concat(getMartialArtsCharmsForCharacter(state, character.id)))
+      getNativeCharmsForCharacter(state, character.id).concat(
+        getMartialArtsCharmsForCharacter(state, character.id)
+      )
+    )
 )
 
 export const getPoolsForWeapon = createCachedSelector(
-  [getCharacterForWeapon, getWeapon, getPenaltiesForWeapon, getExcellencyAbilsForWeapon],
+  [
+    getCharacterForWeapon,
+    getWeapon,
+    getPenaltiesForWeapon,
+    getExcellencyAbilsForWeapon,
+  ],
   (character, weapon, penalties, excellencyAbils) => ({
     name: weapon.name,
-    witheringAttack: witheringAttack(character, weapon, penalties, excellencyAbils),
+    witheringAttack: witheringAttack(
+      character,
+      weapon,
+      penalties,
+      excellencyAbils
+    ),
     witheringDamage: calc.witheringDamage(character, weapon),
-    decisiveAttack: decisiveAttack(character, weapon, penalties, excellencyAbils),
+    decisiveAttack: decisiveAttack(
+      character,
+      weapon,
+      penalties,
+      excellencyAbils
+    ),
     parry: parry(character, weapon, penalties, excellencyAbils),
-    rangedWitheringAttack: calc.rangedWitheringAttackPool(character, weapon, penalties, excellencyAbils),
+    rangedWitheringAttack: calc.rangedWitheringAttackPool(
+      character,
+      weapon,
+      penalties,
+      excellencyAbils
+    ),
   })
 )((state, id) => id)
 
@@ -38,16 +66,28 @@ export const getPoolsForWeapon = createCachedSelector(
 export const sortByParry = (weaponA, weaponB) => {
   const parryA = weaponA.parry
   const parryB = weaponB.parry
-  const specialtiesA = parryA.specialties === undefined ? [] : parryA.specialties
-  const specialtiesB = parryB.specialties === undefined ? [] : parryB.specialties
+  const specialtiesA =
+    parryA.specialties === undefined ? [] : parryA.specialties
+  const specialtiesB =
+    parryB.specialties === undefined ? [] : parryB.specialties
 
-  if      (parryA.total > parryB.total) { return -1 }
-  else if (parryA.total < parryB.total) { return  1 }
-  else if (parryA.excellency > parryB.excellency) { return -1 }
-  else if (parryA.excellency < parryB.excellency) { return  1 }
-  else if (specialtiesA.length > specialtiesB.length) { return -1 }
-  else if (specialtiesA.length < specialtiesB.length) { return  1 }
-  else if ( parryA.shield && !parryB.shield) { return -1 }
-  else if (!parryA.shield &&  parryB.shield) { return  1 }
-  else { return 0 }
+  if (parryA.total > parryB.total) {
+    return -1
+  } else if (parryA.total < parryB.total) {
+    return 1
+  } else if (parryA.excellency > parryB.excellency) {
+    return -1
+  } else if (parryA.excellency < parryB.excellency) {
+    return 1
+  } else if (specialtiesA.length > specialtiesB.length) {
+    return -1
+  } else if (specialtiesA.length < specialtiesB.length) {
+    return 1
+  } else if (parryA.shield && !parryB.shield) {
+    return -1
+  } else if (!parryA.shield && parryB.shield) {
+    return 1
+  } else {
+    return 0
+  }
 }

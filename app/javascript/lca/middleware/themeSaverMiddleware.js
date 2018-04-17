@@ -1,11 +1,13 @@
-import { SWITCH_THEME } from '../ducks/app.js'
+// @flow
+import { SWITCH_THEME } from 'ducks/app.js'
 
 // Saves changes to the theme to LocalStorage
-const themeSaver = store => next => action => { //eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+const themeSaver = (store: Object) => (next: Function) => (action: Object) => {
   switch (action.type) {
-  case SWITCH_THEME:
-    localStorage.theme = action.theme
-    break
+    case SWITCH_THEME:
+      localStorage.setItem('theme', action.theme)
+      break
   }
 
   return next(action)

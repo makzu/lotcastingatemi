@@ -1,4 +1,6 @@
 // @flow
+import type { fullQc } from 'utils/flow-types'
+
 function qcExcellencyPoolCap(qc, pool, stunt = false) {
   if (stunt && qc.excellency != 'lunar') return 0
 
@@ -62,11 +64,11 @@ function qcExcellencyRatingCap(qc, rating, stunt = false) {
 }
 
 export function qcPool(
-  qc,
-  pool,
-  penalties = 0,
-  merits = [],
-  addExcellency = true
+  qc: fullQc,
+  pool: number,
+  penalties: number = 0,
+  merits: Array<string> = [],
+  addExcellency: boolean = true
 ) {
   const excellency = addExcellency ? qcExcellencyPoolCap(qc, pool) : 0
   const excellencyStunt = addExcellency
@@ -85,11 +87,11 @@ export function qcPool(
 }
 
 export function qcRating(
-  qc,
-  rating,
-  penalties = 0,
-  merits = [],
-  addExcellency = true
+  qc: fullQc,
+  rating: number,
+  penalties: number = 0,
+  merits: Array<string> = [],
+  addExcellency: boolean = true
 ) {
   const excellency = addExcellency ? qcExcellencyRatingCap(qc, rating) : 0
   const excellencyStunt = addExcellency

@@ -1,29 +1,26 @@
+// @flow
 import { RSAA } from 'redux-api-middleware'
 
-export function nonAuthHeaders() {
+export const nonAuthHeaders = () => {
   return new Headers({ 'Content-Type': 'application/json' })
 }
-export function authHeaders () {
+export const authHeaders = () => {
   return new Headers({
     'Content-Type': 'application/json',
-    'AUTHORIZATION': `Bearer ${localStorage.jwt}`
+    AUTHORIZATION: `Bearer ${(localStorage: Object).jwt}`,
   })
 }
 
-export function callApi(callBody) {
-  return {
-    [RSAA]: {
-      ...callBody,
-      headers: authHeaders
-    }
-  }
-}
+export const callApi = (callBody: Object) => ({
+  [RSAA]: {
+    ...callBody,
+    headers: authHeaders,
+  },
+})
 
-export function callApiNoAuth(callBody) {
-  return {
-    [RSAA]: {
-      ...callBody,
-      headers: nonAuthHeaders
-    }
-  }
-}
+export const callApiNoAuth = (callBody: Object) => ({
+  [RSAA]: {
+    ...callBody,
+    headers: nonAuthHeaders,
+  },
+})

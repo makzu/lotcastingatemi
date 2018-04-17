@@ -3,6 +3,7 @@ export * from './_battlegroups.js'
 export * from './_qcs.js'
 export * from './_weapons.js'
 export * from './excellencies'
+
 export * from './pools'
 export * from './ratings'
 
@@ -40,24 +41,18 @@ export const abil = (character: Character, ability: string) => {
   }
 }
 
-export function specialtiesFor(character: Character, ability) {
-  return (
-    character.specialties
-      .filter(s => s.ability === ability)
-      .map(s => s.context) || []
-  )
-}
+export const specialtiesFor = (character: Character, ability) =>
+  character.specialties
+    .filter(s => s.ability === ability)
+    .map(s => s.context) || []
 
 /* Health */
-export function totalHealthLevels(character) {
-  return (
-    character.health_level_0s +
-    character.health_level_1s +
-    character.health_level_2s +
-    character.health_level_4s +
-    character.health_level_incap
-  )
-}
+export const totalHealthLevels = character =>
+  character.health_level_0s +
+  character.health_level_1s +
+  character.health_level_2s +
+  character.health_level_4s +
+  character.health_level_incap
 
 export function woundPenalty(character, merits) {
   const totalDmg =
@@ -89,7 +84,7 @@ export function attackAbilities(character) {
     return {
       abil: name,
       label: name,
-      rating: character[abil],
+      rating: character[abil] || 0,
       specialties: character.specialties.filter(spec => spec.ability == name),
     }
   })
@@ -116,7 +111,7 @@ export function nonAttackAbilities(character) {
       return {
         abil: name,
         label: name,
-        rating: character[abil],
+        rating: character[abil] || 0,
         specialties: character.specialties.filter(spec => spec.ability == name),
       }
     }
@@ -139,7 +134,7 @@ export function nonAttackAbilities(character) {
 
 export function abilitiesWithRatings(character) {
   const abils = ABILITIES_ALL.filter(a => {
-    if (a.abil == 'abil_craft' || a.abil == 'abil_martial_arts')
+    if (a.abil === 'abil_craft' || a.abil === 'abil_martial_arts')
       return character[a.abil].length > 0
     else return character[a.abil] > 0
   })
@@ -147,21 +142,15 @@ export function abilitiesWithRatings(character) {
   return abils
 }
 
-export function nonCasteAbilities(character) {
-  const abils = ABILITIES_ALL_NO_MA.filter(a => {
+export const nonCasteAbilities = character =>
+  ABILITIES_ALL_NO_MA.filter(a => {
     return !character.caste_abilities.includes(a.pretty.toLowerCase())
   })
 
-  return abils
-}
-
-export function nonCasteAttributes(character) {
-  const attrs = ATTRIBUTES.filter(a => {
+export const nonCasteAttributes = character =>
+  ATTRIBUTES.filter(a => {
     return !character.caste_attributes.includes(a.pretty.toLowerCase())
   })
-
-  return attrs
-}
 
 export function mobilityPenalty(character) {
   switch (character.armor_weight) {
@@ -241,54 +230,37 @@ export function prettyAnimaLevel(rating) {
   }
 }
 
-export function hasAura(character) {
-  return (
-    character.type === 'DragonbloodCharacter' ||
-    character.type === 'CustomAbilityCharacter' ||
-    character.type === 'CustomAttributeCharacter' ||
-    character.type === 'CustomEssenceCharacter'
-  )
+export const hasAura = character =>
+  character.type === 'DragonbloodCharacter' ||
+  character.type === 'CustomAbilityCharacter' ||
+  character.type === 'CustomAttributeCharacter' ||
+  character.type === 'CustomEssenceCharacter'
+
+export const isCasteAbility = (character, ability) =>
+  character.caste_abilities && includes(character.caste_abilities, ability)
+
+export const isSupernalAbility = (character, ability) =>
+  character.supernal_ability === ability
+
+export const isFavoredAbility = (character, ability) => {
+  character.favored_abilities && includes(character.favored_abilities, ability)
 }
 
-export function isCasteAbility(character, ability) {
-  return (
-    character.caste_abilities && includes(character.caste_abilities, ability)
-  )
+export const isCasteAttribute = (character, attribute) => {
+  character.caste_attributes && includes(character.caste_attributes, attribute)
 }
 
-export function isSupernalAbility(character, ability) {
-  return character.supernal_ability === ability
-}
-
-export function isFavoredAbility(character, ability) {
-  return (
-    character.favored_abilities &&
-    includes(character.favored_abilities, ability)
-  )
-}
-
-export function isCasteAttribute(character, attribute) {
-  return (
-    character.caste_attributes &&
-    includes(character.caste_attributes, attribute)
-  )
-}
-
-export function isFavoredAttribute(character, attribute) {
-  return (
-    character.favored_attributes &&
+export const isFavoredAttribute = (character, attribute) => {
+  character.favored_attributes &&
     includes(character.favored_attributes, attribute)
-  )
 }
 
-export function committedPersonalMotes(character) {
-  return character.motes_committed
+export const committedPersonalMotes = character =>
+  character.motes_committed
     .filter(c => c.pool == 'personal')
     .reduce((total, c) => total + c.motes, 0)
-}
 
-export function committedPeripheralMotes(character) {
-  return character.motes_committed
+export const committedPeripheralMotes = character =>
+  character.motes_committed
     .filter(c => c.pool == 'peripheral')
     .reduce((total, c) => total + c.motes, 0)
-}

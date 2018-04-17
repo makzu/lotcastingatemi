@@ -1,3 +1,4 @@
+// @flow
 /* Constants: exactly what it says on the tin */
 
 export const ATTRIBUTES = [

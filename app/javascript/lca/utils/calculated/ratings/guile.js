@@ -6,7 +6,7 @@ export function guile(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  charmAbils: Array<string>
+  excellencyAbils: Array<string>
 ) {
   const pen = [{ label: 'Wound', penalty: penalties.wound }]
   return rating(
@@ -15,7 +15,7 @@ export function guile(
     'manipulation',
     'socialize',
     pen,
-    charmAbils
+    excellencyAbils
   )
 }
 export default guile

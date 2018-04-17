@@ -6,7 +6,7 @@ export function resolve(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  charmAbils: Array<string>
+  excellencyAbils: Array<string>
 ) {
   const pen = [{ label: 'Wound', penalty: penalties.wound }]
   let bonus = []
@@ -26,7 +26,7 @@ export function resolve(
     'wits',
     'integrity',
     pen,
-    charmAbils,
+    excellencyAbils,
     bonus
   )
 }

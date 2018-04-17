@@ -4,12 +4,15 @@ import createCachedSelector from 're-reselect'
 import { getPenalties } from './character.js'
 import { getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter } from './charm.js'
 import * as calc from 'utils/calculated'
+import decisiveAttack from 'utils/calculated/pools/combat/decisiveAttack.js'
+import witheringAttack from 'utils/calculated/pools/combat/witheringAttack.js'
+import parry from 'utils/calculated/ratings/parry.js'
 
 const entities = (state) => state.entities.current
 const getState = state => state
 const getWeapon = (state, id) => entities(state).weapons[id]
 const getCharacterForWeapon = (state, id) => entities(state).characters[getWeapon(state, id).character_id]
-const getPenaltiesForWeapon = (state, id) => getPenalties(state, entities(state).characters[entities(state).weapons[id].character_id].id)
+const getPenaltiesForWeapon = (state, id) => getPenalties(state, getCharacterForWeapon(state, id).id)
 
 const getExcellencyAbilsForWeapon = createSelector(
   [getCharacterForWeapon, getState], (character, state) =>
@@ -23,10 +26,10 @@ export const getPoolsForWeapon = createCachedSelector(
   [getCharacterForWeapon, getWeapon, getPenaltiesForWeapon, getExcellencyAbilsForWeapon],
   (character, weapon, penalties, excellencyAbils) => ({
     name: weapon.name,
-    witheringAttack: calc.witheringAttackPool(character, weapon, penalties, excellencyAbils),
+    witheringAttack: witheringAttack(character, weapon, penalties, excellencyAbils),
     witheringDamage: calc.witheringDamage(character, weapon),
-    decisiveAttack: calc.decisiveAttackPool(character, weapon, penalties, excellencyAbils),
-    parry: calc.parry(character, weapon, penalties, excellencyAbils),
+    decisiveAttack: decisiveAttack(character, weapon, penalties, excellencyAbils),
+    parry: parry(character, weapon, penalties, excellencyAbils),
     rangedWitheringAttack: calc.rangedWitheringAttackPool(character, weapon, penalties, excellencyAbils),
   })
 )((state, id) => id)

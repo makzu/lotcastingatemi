@@ -8,9 +8,9 @@ import { sortOrderSort } from 'utils'
 import {
   woundPenalty, mobilityPenalty, exaltTypeBase
 } from 'utils/calculated/'
-import { excellencyAbils as excellencies } from 'utils/calculated/_excellencies.js'
-import * as pools from 'utils/calculated/_pools.js'
-import * as ratings from 'utils/calculated/_ratings.js'
+import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
+import * as pools from 'utils/calculated/pools'
+import * as ratings from 'utils/calculated/ratings'
 
 const entities = (state) => state.entities.current
 

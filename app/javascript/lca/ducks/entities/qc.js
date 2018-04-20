@@ -1,6 +1,7 @@
 // @flow
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 
 const QC_CREATE = 'lca/qc/CREATE'
 const QC_CREATE_SUCCESS = 'lca/qc/CREATE_SUCCESS'
@@ -12,7 +13,7 @@ const QC_DESTROY = 'lca/qc/DESTROY'
 const QC_DESTROY_SUCCESS = 'lca/qc/DESTROY_SUCCESS'
 const QC_DESTROY_FAILURE = 'lca/qc/DESTROY_FAILURE'
 
-export default (state: Object, action: Object) => {
+export default (state: EntityState, action: Object) => {
   // Optimistic update
   if (action.type === QC_UPDATE) {
     return {

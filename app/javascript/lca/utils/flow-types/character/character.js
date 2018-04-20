@@ -78,9 +78,19 @@ export type Character = {
   sorcererous_motes: number,
   caste_abilities: Array<string>,
   favored_abilities: Array<string>,
-  caste_attributes?: Array<string>,
-  favored_attributes?: Array<string>,
-  supernal_ability?: string,
+  caste_attributes: Array<string>,
+  favored_attributes: Array<string>,
+  supernal_ability: string,
+  sorcerous_motes: number,
+  rituals: Array<string>,
+  xp_total: number,
+  xp_solar_total: number,
+  xp_craft_silver: number,
+  xp_craft_gold: number,
+  xp_craft_white: number,
+  limit: number,
+  limit_trigger: string,
+  resources: Array<{ resource: string, value: number }>,
 } & withBasicInfo &
   withMotePool &
   withWillpower &

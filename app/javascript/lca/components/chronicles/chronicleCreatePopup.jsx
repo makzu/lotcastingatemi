@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog, {
@@ -13,9 +13,11 @@ import TextField from 'material-ui/TextField'
 
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import { createChronicle } from '../../ducks/actions.js'
+import { createChronicle } from 'ducks/actions.js'
 
-class ChronicleCreatePopup extends Component {
+type Props = { createChronicle: Function }
+type State = { open: boolean, chronicle: { name: string } }
+class ChronicleCreatePopup extends Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -29,19 +31,21 @@ class ChronicleCreatePopup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({ open: true })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false })
   }
 
-  handleChange(e) {
-    this.setState({ chronicle: { ...this.state.chronicle, name: e.target.value }})
+  handleChange = e => {
+    this.setState({
+      chronicle: { ...this.state.chronicle, name: e.target.value },
+    })
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.setState({ open: false })
     this.props.createChronicle(this.state.chronicle)
   }
@@ -50,51 +54,38 @@ class ChronicleCreatePopup extends Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicle } = this.state
 
-    return <Fragment>
-      <ListItem button onClick={ handleOpen }>
-        <ListItemIcon>
-          <ContentAddCircle />
-        </ListItemIcon>
+    return (
+      <Fragment>
+        <ListItem button onClick={handleOpen}>
+          <ListItemIcon>
+            <ContentAddCircle />
+          </ListItemIcon>
 
-        <ListItemText primary="Create New" />
-      </ListItem>
+          <ListItemText primary="Create New" />
+        </ListItem>
 
-      <Dialog
-        open={ this.state.open }
-        onClose={ handleClose }
-      >
-        <DialogTitle>Be the Storyteller of a new Chronicle</DialogTitle>
-        <DialogContent>
-          <TextField name="name" value={ chronicle.name }
-            label="Name" margin="normal" fullWidth
-            onChange={ handleChange }
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } variant="raised" color="primary">Create</Button>
-        </DialogActions>
-      </Dialog>
-    </Fragment>
-  }
-}
-ChronicleCreatePopup.propTypes = {
-  id: PropTypes.number.isRequired,
-  createChronicle: PropTypes.func.isRequired,
-}
-
-function mapStateToProps(state) {
-  const id = state.session.id
-
-  return { id }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    createChronicle: (chronicle) => {
-      dispatch(createChronicle(chronicle))
-    },
+        <Dialog open={this.state.open} onClose={handleClose}>
+          <DialogTitle>Be the Storyteller of a new Chronicle</DialogTitle>
+          <DialogContent>
+            <TextField
+              name="name"
+              value={chronicle.name}
+              label="Name"
+              margin="normal"
+              fullWidth
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSubmit} variant="raised" color="primary">
+              Create
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChronicleCreatePopup)
+export default connect(undefined, { createChronicle })(ChronicleCreatePopup)

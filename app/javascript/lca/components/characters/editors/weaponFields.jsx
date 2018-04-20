@@ -20,7 +20,7 @@ import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import WeaponAbilitySelect from './weaponAbilitySelect.jsx'
 import WeaponAttributeSelect from './weaponAttributeSelect.jsx'
-import WeightSelect from '../../generic/weightSelect.jsx'
+import WeightSelect from 'components/generic/weightSelect.jsx'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (

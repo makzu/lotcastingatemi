@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
@@ -13,10 +13,21 @@ import Divider from 'material-ui/Divider'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
-import { addThingToChronicle } from '../../ducks/actions.js'
-import { getSpecificChronicle, getMyBattlegroupsWithoutChronicles } from '../../selectors/'
+import { addThingToChronicle } from 'ducks/actions.js'
+import {
+  getSpecificChronicle,
+  getMyBattlegroupsWithoutChronicles,
+} from 'selectors'
+import type { Battlegroup } from 'utils/flow-types'
 
-class BattlegroupAddPopup extends Component {
+type Props = {
+  battlegroups: Array<Battlegroup>,
+  chronicleId: number,
+  chronicleName: string,
+  handleSubmit: Function,
+}
+type State = { open: boolean, battlegroupId: number }
+class BattlegroupAddPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -24,28 +35,23 @@ class BattlegroupAddPopup extends Component {
       open: false,
       battlegroupId: 0,
     }
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(e) {
+  handleChange = e => {
     let { name, value } = e.target
     this.setState({ [name]: value })
   }
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({ open: true })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false })
   }
 
-  handleSubmit() {
-    if (this.state.battlegroupId == 0)
-      return
+  handleSubmit = () => {
+    if (this.state.battlegroupId == 0) return
 
     this.setState({ open: false })
     this.props.handleSubmit(this.props.chronicleId, this.state.battlegroupId)
@@ -55,54 +61,52 @@ class BattlegroupAddPopup extends Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, battlegroups } = this.props
 
-    const options = battlegroups.map((c) =>
-      <MenuItem key={ c.id } value={ c.id }>
-        { c.name }
+    const options = battlegroups.map(c => (
+      <MenuItem key={c.id} value={c.id}>
+        {c.name}
       </MenuItem>
+    ))
+
+    const currentBattlegroup = battlegroups.find(
+      c => c.id == this.state.battlegroupId
     )
+    const hidden = currentBattlegroup && currentBattlegroup.hidden
+    return (
+      <Fragment>
+        <Button onClick={handleOpen}>Add Battlegroup</Button>
 
-    const currentBattlegroup = battlegroups.find((c) => c.id == this.state.battlegroupId)
-
-    return <Fragment>
-      <Button onClick={ handleOpen }>
-        Add Battlegroup
-      </Button>
-
-      <Dialog
-        open={ this.state.open }
-        onClose={ handleClose }
-      >
-        <DialogTitle>Add a Battlegroup to { chronicleName }</DialogTitle>
-        <DialogContent>
-          <TextField select value={ this.state.battlegroupId }
-            name="battlegroupId"
-            onChange={ handleChange }
-            fullWidth margin="dense"
-          >
-            <MenuItem value={ 0 }>Select a Battlegroup</MenuItem>
-            <Divider />
-            { options }
-          </TextField>
-          { currentBattlegroup && currentBattlegroup.hidden &&
-            <DialogContentText>
-              This Battlegroup is hidden.  It will only be visible to you and the
-              storyteller.
-            </DialogContentText>
-          }
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } variant="raised" color="primary">Add</Button>
-        </DialogActions>
-      </Dialog>
-    </Fragment>
+        <Dialog open={this.state.open} onClose={handleClose}>
+          <DialogTitle>Add a Battlegroup to {chronicleName}</DialogTitle>
+          <DialogContent>
+            <TextField
+              select
+              value={this.state.battlegroupId}
+              name="battlegroupId"
+              onChange={handleChange}
+              fullWidth
+              margin="dense"
+            >
+              <MenuItem value={0}>Select a Battlegroup</MenuItem>
+              <Divider />
+              {options}
+            </TextField>
+            {hidden && (
+              <DialogContentText>
+                This Battlegroup is hidden. It will only be visible to you and
+                the storyteller.
+              </DialogContentText>
+            )}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSubmit} variant="raised" color="primary">
+              Add
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    )
   }
-}
-BattlegroupAddPopup.propTypes = {
-  battlegroups: PropTypes.arrayOf(PropTypes.object),
-  chronicleId: PropTypes.number.isRequired,
-  chronicleName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -127,7 +131,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleSubmit: (id, battlegroupId) => dispatch(addThingToChronicle(id, battlegroupId, 'battlegroup'))
+    handleSubmit: (id, battlegroupId) =>
+      dispatch(addThingToChronicle(id, battlegroupId, 'battlegroup')),
   }
 }
 

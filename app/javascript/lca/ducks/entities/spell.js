@@ -1,6 +1,7 @@
 // @flow
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 
 const SPL_CREATE = 'lca/spell/CREATE'
 const SPL_CREATE_SUCCESS = 'lca/spell/CREATE_SUCCESS'
@@ -12,7 +13,7 @@ const SPL_DESTROY = 'lca/spell/DESTROY'
 const SPL_DESTROY_SUCCESS = 'lca/spell/DESTROY_SUCCESS'
 const SPL_DESTROY_FAILURE = 'lca/spell/DESTROY_FAILURE'
 
-export default (state: Object, action: Object) => {
+export default (state: EntityState, action: Object) => {
   // Optimistic update
   if (action.type === SPL_UPDATE) {
     return {

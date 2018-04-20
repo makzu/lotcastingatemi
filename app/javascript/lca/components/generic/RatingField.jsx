@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
 import { withStyles } from 'material-ui/styles'
 
-import { clamp } from '../../utils/'
+import { clamp } from 'utils/'
 
 const styles = theme => ({
   field: {
@@ -17,7 +17,7 @@ const styles = theme => ({
   },
 })
 
-export type Props = {
+type Props = {
   trait: string,
   label: string,
   value: number,
@@ -29,20 +29,19 @@ export type Props = {
   dontFocus?: boolean,
   classes: Object,
 }
-
+type State = { value: number, oldValue: number }
 // TODO: Special fields for x/y resources like mote/willpower pools
-class RatingField extends Component<Props, { value: number, oldValue: number }> {
+class RatingField extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = { value: this.props.value, oldValue: this.props.value }
   }
 
-  static defaultProps = { min: 0, max: Infinity, }
+  static defaultProps = { min: 0, max: Infinity }
   static getDerivedStateFromProps = (props, state) => {
-    if (state.oldValue === props.value)
-      return null
+    if (state.oldValue === props.value) return null
 
-    return({ value: props.value, oldValue: props.value })
+    return { value: props.value, oldValue: props.value }
   }
 
   handleChange = (e: SyntheticInputEvent<>) => {
@@ -55,7 +54,7 @@ class RatingField extends Component<Props, { value: number, oldValue: number }> 
     }
 
     let value = clamp(parseInt(e.target.value), min, max)
-    const fakeE = { target: { name: e.target.name, value: value }}
+    const fakeE = { target: { name: e.target.name, value: value } }
 
     if (isNaN(parseInt(this.state.value)))
       this.setState({ oldValue: this.state.value })
@@ -64,8 +63,7 @@ class RatingField extends Component<Props, { value: number, oldValue: number }> 
   }
 
   handleFocus = (e: SyntheticInputEvent<>) => {
-    if (this.props.dontFocus)
-      return
+    if (this.props.dontFocus) return
 
     e.target.select()
   }
@@ -73,7 +71,9 @@ class RatingField extends Component<Props, { value: number, oldValue: number }> 
   handleBlur = (e: SyntheticInputEvent<>) => {
     if (isNaN(parseInt(this.state.value))) {
       this.setState({ value: Math.max(0, this.props.min) })
-      this.props.onChange({ target: { name: e.target.name, value: Math.max(0, this.props.min) }})
+      this.props.onChange({
+        target: { name: e.target.name, value: Math.max(0, this.props.min) },
+      })
     }
   }
 
@@ -82,12 +82,20 @@ class RatingField extends Component<Props, { value: number, oldValue: number }> 
     const { handleChange, handleFocus, handleBlur } = this
     const { value } = this.state
 
-    return <TextField className={ narrow ? classes.narrow : classes.field }
-      type="number" name={ trait } label={ label } value={ value }
-      inputProps={{ min: min, max: max }}
-      onChange={ handleChange } margin={ this.props.margin || 'none' }
-      onFocus={ handleFocus } onBlur={ handleBlur }
-    />
+    return (
+      <TextField
+        className={narrow ? classes.narrow : classes.field}
+        type="number"
+        name={trait}
+        label={label}
+        value={value}
+        inputProps={{ min: min, max: max }}
+        onChange={handleChange}
+        margin={this.props.margin || 'none'}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      />
+    )
   }
 }
 

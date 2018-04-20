@@ -7,10 +7,10 @@ import { MenuItem } from 'material-ui/Menu'
 import Bookmark from '@material-ui/icons/Bookmark'
 import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 
-import { updateCharacter, updateQc, updateBattlegroup } from '../../../ducks/actions.js'
-import { canIDelete } from '../../../selectors/'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { canIDelete } from 'selectors'
 
-export type Props = {
+type Props = {
   id: number,
   characterType: string,
   isPinned: boolean,
@@ -21,36 +21,39 @@ export type Props = {
 }
 
 function PinButton(props: Props) {
-  if(!props.canEdit)
-    return <div />
+  if (!props.canEdit) return <div />
 
   let action
-  switch(props.characterType) {
-  case 'qc':
-    action = props.updateQc
-    break
-  case 'battlegroup':
-    action = props.updateBattlegroup
-    break
-  case 'character':
-  default:
-    action = props.updateCharacter
+  switch (props.characterType) {
+    case 'qc':
+      action = props.updateQc
+      break
+    case 'battlegroup':
+      action = props.updateBattlegroup
+      break
+    case 'character':
+    default:
+      action = props.updateCharacter
   }
 
-  return <MenuItem button onClick={ () => action(props.id, 'pinned', !props.isPinned) }>
-    <ListItemIcon>
-      { props.isPinned ? <Bookmark /> : <BookmarkBorder /> }
-    </ListItemIcon>
-    <ListItemText inset primary={ props.isPinned ? 'Unpin' : 'Pin to Menu' } />
-  </MenuItem>
+  return (
+    <MenuItem
+      button
+      onClick={() => action(props.id, 'pinned', !props.isPinned)}
+    >
+      <ListItemIcon>
+        {props.isPinned ? <Bookmark /> : <BookmarkBorder />}
+      </ListItemIcon>
+      <ListItemText inset primary={props.isPinned ? 'Unpin' : 'Pin to Menu'} />
+    </MenuItem>
+  )
 }
-const mapStateToProps = (state, ownProps) => ({
-  isPinned: state.entities.current[ownProps.characterType + 's'][ownProps.id].pinned,
-  canEdit: canIDelete(state, ownProps.id, ownProps.characterType),
+const mapStateToProps = (state, props) => ({
+  isPinned: state.entities.current[props.characterType + 's'][props.id].pinned,
+  canEdit: canIDelete(state, props.id, props.characterType),
 })
-const mapDispatchToProps = (dispatch: Function) => ({
-  updateCharacter:   (id, trait, value) => dispatch(updateCharacter(id, trait, value)),
-  updateQc:          (id, trait, value) => dispatch(updateQc(id, trait, value)),
-  updateBattlegroup: (id, trait, value) => dispatch(updateBattlegroup(id, trait, value)),
-})
-export default connect(mapStateToProps, mapDispatchToProps)(PinButton)
+export default connect(mapStateToProps, {
+  updateCharacter,
+  updateQc,
+  updateBattlegroup,
+})(PinButton)

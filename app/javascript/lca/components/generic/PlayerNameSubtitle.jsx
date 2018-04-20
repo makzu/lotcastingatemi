@@ -6,13 +6,11 @@ import Typography from 'material-ui/Typography'
 
 import { getSpecificPlayer } from 'selectors'
 
-function PlayerNameSubtitle({ player }: { player: Object }) {
-  return <Typography variant="caption">
-    Player: { player.display_name }
-  </Typography>
+function PlayerNameSubtitle({ name }: { name: string }) {
+  return <Typography variant="caption">Player: {name}</Typography>
 }
 const mapStateToProps = (state, props) => ({
-  player: getSpecificPlayer(state, props.playerId),
+  name: getSpecificPlayer(state, props.playerId).display_name,
 })
 
 export default connect(mapStateToProps)(PlayerNameSubtitle)

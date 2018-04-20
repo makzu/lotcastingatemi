@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Grid from 'material-ui/Grid'
@@ -24,219 +24,249 @@ import SorceryEditor from './editors/sorceryEditor.jsx'
 import WeaponEditor from './editors/weaponEditor.jsx'
 import WillpowerEditor from './editors/willpowerEditor.jsx'
 import XpEditor from './editors/xpEditor.jsx'
-import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
-import { updateCharacter } from '../../ducks/actions.js'
-import { getSpecificCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
-import { fullChar } from '../../utils/propTypes'
+import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import { updateCharacter } from 'ducks/actions.js'
+import {
+  getSpecificCharacter,
+  getPenalties,
+  getPoolsAndRatings,
+} from 'selectors'
+import type { Character } from 'utils/flow-types'
 
-class CharacterEditor extends Component {
+type Props = {
+  character: Character,
+  pools: Object,
+  penalties: Object,
+  updateCharacter: Function,
+}
+type State = { character: Character }
+class CharacterEditor extends Component<Props, State> {
   constructor(props) {
     super(props)
-    this.state = {
-      character: this.props.character,
-    }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-    this.handleRatingChange = this.handleRatingChange.bind(this)
-    this.handleCheck = this.handleCheck.bind(this)
+    this.state = { character: this.props.character }
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     this.setState({ character: newProps.character })
   }
 
-  handleChange(e) {
+  handleChange = (e: SyntheticInputEvent<>) => {
     let { name, value } = e.target
-    if (name == 'armor_tags')
-      value = value.split(',')
+    if (name === 'armor_tags') value = value.split(',')
 
-    this.setState({ character: { ...this.state.character, [name]: value }})
+    this.setState({ character: { ...this.state.character, [name]: value } })
   }
 
-  handleBlur(e) {
+  handleBlur = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
     const { character } = this.state
 
-    if (character[name] == this.props.character[name])
-      return
+    if (character[name] === this.props.character[name]) return
 
-    this.props.updateChar(character.id, name, character[name])
+    this.props.updateCharacter(character.id, name, character[name])
   }
 
-  handleRatingChange(e) {
+  handleRatingChange = (e: SyntheticInputEvent<>) => {
     let { name, value } = e.target
     const { character } = this.state
 
-    this.setState({ character: { ...character, [name]: value }})
-    this.props.updateChar(character.id, name, value)
+    this.setState({ character: { ...character, [name]: value } })
+    this.props.updateCharacter(character.id, name, value)
   }
 
-  handleCheck(e) {
+  handleCheck = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
     const { character } = this.state
-    const value = ! character[name]
+    const value = !character[name]
 
-    this.props.updateChar(character.id, name, value)
+    this.props.updateCharacter(character.id, name, value)
   }
 
   render() {
     /* Escape hatch */
     if (this.props.character == undefined)
-      return <div>
-        <Typography paragraph>This Character has not yet loaded.</Typography>
-      </div>
+      return (
+        <div>
+          <Typography paragraph>This Character has not yet loaded.</Typography>
+        </div>
+      )
 
     const { character } = this.state
     const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
     const { pools, penalties } = this.props
+    const showLimit =
+      character.type !== 'Character' &&
+      character.exalt_type.toLowerCase() !== 'dragon-blood'
 
-    return <div>
-      <Hidden smUp>
-        <div style={{ height: '2.5em', }}>&nbsp;</div>
-      </Hidden>
+    return (
+      <div>
+        <Hidden smUp>
+          <div style={{ height: '2.5em' }}>&nbsp;</div>
+        </Hidden>
 
-      <Grid container spacing={ 24 }>
-        <Grid item xs={ 12 } md={ character.type == 'Character' ? 12 : 6 }>
-          <BasicsEditor character={ character }
-            onChange={ handleChange } onBlur={ handleBlur }
-            onRatingChange={ handleRatingChange }
-            onCheck={ handleCheck }
-          />
-        </Grid>
-
-        { character.type == 'SolarCharacter' &&
-          <Grid item xs={ 12 } md={ 6 }>
-            <SolarExaltEditor character={ character }
-              onChange={ handleChange } onBlur={ handleBlur }
-              onRatingChange={ handleRatingChange }
+        <Grid container spacing={24}>
+          <Grid item xs={12} md={character.type === 'Character' ? 12 : 6}>
+            <BasicsEditor
+              character={character}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onRatingChange={handleRatingChange}
+              onCheck={handleCheck}
             />
           </Grid>
-        }
-        { character.type === 'DragonbloodCharacter' &&
-          <Grid item xs={ 12 } md={ 6 }>
-            <DragonbloodExaltEditor character={ character }
-              onChange={ handleChange } onBlur={ handleBlur }
-              onRatingChange={ handleRatingChange }
+
+          {character.type === 'SolarCharacter' && (
+            <Grid item xs={12} md={6}>
+              <SolarExaltEditor
+                character={character}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onRatingChange={handleRatingChange}
+              />
+            </Grid>
+          )}
+          {character.type === 'DragonbloodCharacter' && (
+            <Grid item xs={12} md={6}>
+              <DragonbloodExaltEditor
+                character={character}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onRatingChange={handleRatingChange}
+              />
+            </Grid>
+          )}
+          {character.type === 'CustomAbilityCharacter' && (
+            <Grid item xs={12} md={6}>
+              <CustomAbilityExaltEditor
+                character={character}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onRatingChange={handleRatingChange}
+                onCheck={handleCheck}
+              />
+            </Grid>
+          )}
+          {character.type === 'CustomAttributeCharacter' && (
+            <Grid item xs={12} md={6}>
+              <CustomAttributeExaltEditor
+                character={character}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onRatingChange={handleRatingChange}
+                onCheck={handleCheck}
+              />
+            </Grid>
+          )}
+          {character.type === 'CustomEssenceCharacter' && (
+            <Grid item xs={12} md={6}>
+              <CustomEssenceExaltEditor
+                character={character}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onRatingChange={handleRatingChange}
+                onCheck={handleCheck}
+              />
+            </Grid>
+          )}
+
+          <Grid item xs={12} sm={6} lg={3}>
+            <HealthLevelEditor
+              character={character}
+              penalties={penalties}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onRatingChange={handleRatingChange}
             />
           </Grid>
-        }
-        { character.type == 'CustomAbilityCharacter' &&
-          <Grid item xs={ 12 } md={ 6 }>
-            <CustomAbilityExaltEditor character={ character }
-              onChange={ handleChange } onBlur={ handleBlur }
-              onRatingChange={ handleRatingChange }
-              onCheck={ handleCheck }
+
+          <Grid item xs={12} sm={6} lg={4}>
+            <WillpowerEditor
+              character={character}
+              onRatingChange={handleRatingChange}
             />
           </Grid>
-        }
-        { character.type == 'CustomAttributeCharacter' &&
-          <Grid item xs={ 12 } md={ 6 }>
-            <CustomAttributeExaltEditor character={ character }
-              onChange={ handleChange } onBlur={ handleBlur }
-              onRatingChange={ handleRatingChange }
-              onCheck={ handleCheck }
+
+          <Grid item xs={12} sm={6} lg={5}>
+            <MotePoolEditor
+              character={character}
+              onRatingChange={handleRatingChange}
             />
           </Grid>
-        }
-        { character.type == 'CustomEssenceCharacter' &&
-          <Grid item xs={ 12 } md={ 6 }>
-            <CustomEssenceExaltEditor character={ character }
-              onChange={ handleChange } onBlur={ handleBlur }
-              onRatingChange={ handleRatingChange }
-              onCheck={ handleCheck }
+
+          <Grid item xs={12} md={6} lg={3}>
+            <AttributeEditor
+              character={character}
+              onRatingChange={handleRatingChange}
             />
           </Grid>
-        }
 
-        <Grid item xs={ 12 } sm={ 6 } lg={ 3 }>
-          <HealthLevelEditor character={ character }
-            penalties={ penalties }
-            onChange={ handleChange } onBlur={ handleBlur }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } sm={ 6 } lg={ 4 }>
-          <WillpowerEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } sm={ 6 } lg={ 5 }>
-          <MotePoolEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } md={ 6 } lg={ 3 }>
-          <AttributeEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } md={ 6 } lg={ 4 }>
-          <AbilityEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } md={ 6 } lg={ 5 }>
-          <SpecialtyEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } md={ 6 }>
-          <IntimacyEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        <Grid item xs={ 12 } sm={ 6 }>
-          <ArmorEditor character={ character }
-            pools={ pools }
-            onChange={ handleChange } onBlur={ handleBlur }
-            onCheck={ handleCheck }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
-
-        { character.type !== 'Character' && character.exalt_type.toLowerCase() !== 'dragon-blood' &&
-          <Grid item xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 }>
-            <LimitEditor character={ character }
-              onChange={ handleChange } onBlur={ handleBlur }
-              onRatingChange={ handleRatingChange }
+          <Grid item xs={12} md={6} lg={4}>
+            <AbilityEditor
+              character={character}
+              onRatingChange={handleRatingChange}
             />
           </Grid>
-        }
 
-        <Grid item xs={ 12 } md={ 4 }>
-          <SorceryEditor character={ character }
-            onChange={ handleChange } onBlur={ handleBlur }
-            onCheck={ handleCheck }
-            onRatingChange={ handleRatingChange }
-          />
-        </Grid>
+          <Grid item xs={12} md={6} lg={5}>
+            <SpecialtyEditor
+              character={character}
+              onRatingChange={handleRatingChange}
+            />
+          </Grid>
 
-        <Grid item xs={ 12 }>
-          <WeaponEditor character={ character } />
-        </Grid>
+          <Grid item xs={12} md={6}>
+            <IntimacyEditor
+              character={character}
+              onRatingChange={handleRatingChange}
+            />
+          </Grid>
 
-        <Grid item xs={ 12 }>
-          <XpEditor character={ character }
-            onRatingChange={ handleRatingChange }
-          />
+          <Grid item xs={12} sm={6}>
+            <ArmorEditor
+              character={character}
+              pools={pools}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onCheck={handleCheck}
+              onRatingChange={handleRatingChange}
+            />
+          </Grid>
+
+          {showLimit && (
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <LimitEditor
+                character={character}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onRatingChange={handleRatingChange}
+              />
+            </Grid>
+          )}
+
+          <Grid item xs={12} md={4}>
+            <SorceryEditor
+              character={character}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onCheck={handleCheck}
+              onRatingChange={handleRatingChange}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <WeaponEditor character={character} />
+          </Grid>
+
+          <Grid item xs={12}>
+            <XpEditor
+              character={character}
+              onRatingChange={handleRatingChange}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    )
   }
-}
-CharacterEditor.propTypes = {
-  character: PropTypes.shape(fullChar),
-  pools: PropTypes.object,
-  penalties: PropTypes.object,
-  updateChar: PropTypes.func,
 }
 
 function mapStateToProps(state, props) {
@@ -257,16 +287,6 @@ function mapStateToProps(state, props) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    updateChar: (id, trait, value) => {
-      dispatch(updateCharacter(id, trait, value))
-    },
-  }
-}
-
 export default ProtectedComponent(
-  connect(mapStateToProps, mapDispatchToProps)(
-    CharacterEditor
-  )
+  connect(mapStateToProps, { updateCharacter })(CharacterEditor)
 )

@@ -34,10 +34,23 @@ import QcCharmReducer from './qc_charm.js'
 import BattlegroupReducer from './battlegroup.js'
 import CombatActorReducer from './combat_actor.js'
 import { LOGOUT } from '../session.js'
+import type {
+  Character,
+  Charm,
+  Spell,
+  fullWeapon as Weapon,
+  fullMerit as Merit,
+  fullQc as Qc,
+  QcMerit,
+  QcCharm,
+  QcAttack,
+  Battlegroup,
+  CombatActor,
+} from 'utils/flow-types'
 
 export const defaultState = {
   players: {
-    '0': {
+    [0]: {
       id: 0,
       name: 'Anonymous Player',
       chronicles: [],
@@ -60,14 +73,29 @@ export const defaultState = {
   battlegroups: {},
   combat_actors: {},
 }
+export type EntityState = {
+  +players: { [id: number]: Object },
+  +chronicles: { [id: number]: Object },
+  +characters: { [id: number]: Character },
+  +weapons: { [id: number]: Weapon },
+  +merits: { [id: number]: Merit },
+  +charms: { [id: number]: Charm },
+  +spells: { [id: number]: Spell },
+  +qcs: { [id: number]: Qc },
+  +qc_merits: { [id: number]: QcMerit },
+  +qc_charms: { [id: number]: QcCharm },
+  +qc_attacks: { [id: number]: QcAttack },
+  +battlegroups: { [id: number]: Battlegroup },
+  +combat_actors: { [id: number]: CombatActor },
+}
 
-export function EntityReducer(state = defaultState, action) {
+export function EntityReducer(state: EntityState = defaultState, action) {
   if (action.type === LOGOUT) return defaultState
 
   return state
 }
 
-const CableReducer = (state, action: Object) => {
+const CableReducer = (state: EntityState, action: Object) => {
   // TODO: Make this more readable
   let { payload } = action
 
@@ -98,7 +126,7 @@ const CableReducer = (state, action: Object) => {
 
 const compose = (...fns) =>
   fns.reduce((f, g) => (arg1, arg2) => f(g(arg1, arg2), arg2))
-export default (state: Object, action: Object) =>
+export default (state: EntityState, action: Object) =>
   compose(
     CableReducer,
     PlayerReducer,
@@ -117,7 +145,7 @@ export default (state: Object, action: Object) =>
     EntityReducer // EntityReducer MUST be last, as it has the default State
   )(state, action)
 
-function handleCreateAction(state, payload) {
+function handleCreateAction(state: EntityState, payload) {
   const { parent_type, parent_id, assoc, type } = payload
   let entity = JSON.parse(payload.entity)
   let ppp = normalize(entity, schemas[type])
@@ -134,7 +162,7 @@ function handleCreateAction(state, payload) {
   return mergeStateWithNormalizedEntities({ ...state, ...parent }, ppp.entities)
 }
 
-function handleDestroyAction(state, payload) {
+function handleDestroyAction(state: EntityState, payload) {
   const chronicle_id = state[payload.type][payload.id].chronicle_id
   let chrons = {}
   if (chronicle_id)
@@ -175,7 +203,7 @@ function handleDestroyAction(state, payload) {
 }
 
 export function mergeStateWithNormalizedEntities(
-  state: Object,
+  state: EntityState,
   entities: Object
 ) {
   return {

@@ -5,9 +5,8 @@ export { hardness } from './hardness.js'
 export { resolve } from './resolve.js'
 export { soak, naturalSoak, armorSoak } from './soak.js'
 
-import type { Character } from 'utils/flow-types'
-
-export function appearanceRating(character: Character, merits: Array<string>) {
+type withApp = { attr_appearance: number }
+export function appearanceRating(character: withApp, merits: Array<string>) {
   // eslint-disable-line no-unused-vars
   let bonus = []
 

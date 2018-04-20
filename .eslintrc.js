@@ -22,7 +22,7 @@ module.exports = {
   plugins: ['react', 'flowtype', 'prettier'],
   rules: {
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         semi: false,
         singleQuote: true,

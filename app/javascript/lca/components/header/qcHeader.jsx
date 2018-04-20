@@ -1,5 +1,6 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -10,51 +11,46 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
-import { getSpecificQc, canIEditQc } from '../../selectors/'
+import { getSpecificQc, canIEditQc } from 'selectors'
+import type { fullQc } from 'utils/flow-types'
 
-const styles = theme => ({ //eslint-disable-line no-unused-vars
+//eslint-disable-next-line no-unused-vars
+const styles = theme => ({
   tabs: {
     flex: 1,
   },
-  title: {
-  },
+  title: {},
 })
 
-function QcHeader(props) {
-  if (props.qc == undefined)
-    return <GenericHeader />
+type Props = { qc: fullQc, id: number, path: string, classes: Object }
+function QcHeader(props: Props) {
+  if (props.qc == undefined) return <GenericHeader />
 
   const { id, qc, path, classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/qcs/${id}`
 
-  if (!editing){
+  if (!editing) {
     editButtonPath += '/edit'
   }
 
-  return <div>
-    <Toolbar>
-      <LcaDrawerButton />
+  return (
+    <div>
+      <Toolbar>
+        <LcaDrawerButton />
 
-      <Typography variant="title" color="inherit" className={ classes.title }>
-        { editing && 'Editing ' }
-        { qc.name }
-      </Typography>
+        <Typography variant="title" color="inherit" className={classes.title}>
+          {editing && 'Editing '}
+          {qc.name}
+        </Typography>
 
-      <Button component={ Link } to={ editButtonPath } color="inherit">
-        { editing ? 'Done' : 'Edit' }
-      </Button>
-    </Toolbar>
-
-  </div>
-}
-QcHeader.propTypes = {
-  id: PropTypes.string,
-  qc: PropTypes.object,
-  path: PropTypes.string,
-  canIEdit: PropTypes.bool,
-  classes: PropTypes.object,
+        <Button component={Link} to={editButtonPath} color="inherit">
+          {editing ? 'Done' : 'Edit'}
+        </Button>
+      </Toolbar>
+    </div>
+  )
 }
 
 function mapStateToProps(state, ownProps) {
@@ -71,6 +67,5 @@ function mapStateToProps(state, ownProps) {
     canIEdit,
   }
 }
-
 
 export default withStyles(styles)(connect(mapStateToProps)(QcHeader))

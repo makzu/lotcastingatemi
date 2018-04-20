@@ -1,10 +1,10 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 
-import * as calc from '../../utils/calculated'
-import { withHealthLevels } from '../../utils/propTypes'
+import * as calc from 'utils/calculated'
+import type { withHealthLevels } from 'utils/flow-types'
 
 const styles = theme => ({
   boxWrap: {
@@ -19,7 +19,8 @@ const styles = theme => ({
     border: '0.2em solid black',
     overflow: 'hidden',
   },
-  healthLevelLabel: { ...theme.typography.caption,
+  healthLevelLabel: {
+    ...theme.typography.caption,
     textAlign: 'center',
   },
   bashingDamage: {
@@ -44,8 +45,8 @@ const styles = theme => ({
   },
 })
 
-function HealthLevelBoxes(props) {
-  const { character, classes } = props
+type Props = { character: withHealthLevels, classes: Object }
+function HealthLevelBoxes({ character, classes }: Props) {
   const totalHealthLevels = calc.totalHealthLevels(character)
 
   let hlBoxes = []
@@ -83,57 +84,48 @@ function HealthLevelBoxes(props) {
     }
 
     if (aggDamage > 0) {
-      box = <div className={ classes.boxWrap } key={ i }>
-        <div className={ classes.healthLevelBox }>
-          <span className={ classes.aggDamage }>✱</span>
+      box = (
+        <div className={classes.boxWrap} key={i}>
+          <div className={classes.healthLevelBox}>
+            <span className={classes.aggDamage}>✱</span>
+          </div>
+          <div className={classes.healthLevelLabel}>{level}</div>
         </div>
-        <div className={ classes.healthLevelLabel }>
-          { level }
-        </div>
-      </div>
+      )
       aggDamage--
     } else if (lthDamage > 0) {
-      box = <div className={ classes.boxWrap } key={ i }>
-        <div className={ classes.healthLevelBox }>
-          <span className={ classes.lethalDamage }>❌</span>
+      box = (
+        <div className={classes.boxWrap} key={i}>
+          <div className={classes.healthLevelBox}>
+            <span className={classes.lethalDamage}>❌</span>
+          </div>
+          <div className={classes.healthLevelLabel}>{level}</div>
         </div>
-        <div className={ classes.healthLevelLabel }>
-          { level }
-        </div>
-      </div>
+      )
       lthDamage--
     } else if (bshDamage > 0) {
-      box = <div className={ classes.boxWrap } key={ i }>
-        <div className={ classes.healthLevelBox }>
-          <span className={ classes.bashingDamage }>╲</span>
+      box = (
+        <div className={classes.boxWrap} key={i}>
+          <div className={classes.healthLevelBox}>
+            <span className={classes.bashingDamage}>╲</span>
+          </div>
+          <div className={classes.healthLevelLabel}>{level}</div>
         </div>
-        <div className={ classes.healthLevelLabel }>
-          { level }
-        </div>
-      </div>
+      )
       bshDamage--
     } else {
-      box = <div className={ classes.boxWrap } key={ i }>
-        <div className={ classes.healthLevelBox }>
-          &nbsp;
+      box = (
+        <div className={classes.boxWrap} key={i}>
+          <div className={classes.healthLevelBox}>&nbsp;</div>
+          <div className={classes.healthLevelLabel}>{level}</div>
         </div>
-        <div className={ classes.healthLevelLabel }>
-          { level }
-        </div>
-      </div>
+      )
     }
 
     hlBoxes.push(box)
   }
 
-  return <div>
-    { hlBoxes }
-  </div>
-}
-
-HealthLevelBoxes.propTypes = {
-  character: PropTypes.shape(withHealthLevels),
-  classes: PropTypes.object,
+  return <div>{hlBoxes}</div>
 }
 
 export default withStyles(styles)(HealthLevelBoxes)

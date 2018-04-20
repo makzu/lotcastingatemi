@@ -1,45 +1,46 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Button from 'material-ui/Button'
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog'
-import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 
-import { createQc } from '../../ducks/actions.js'
+import { createQc } from 'ducks/actions.js'
 
+type Props = {
+  id: number,
+  createQc: Function,
+}
 // TODO: Enable autofill for some example QCs?
-class QcCreatePopup extends Component {
-  constructor(props) {
+class QcCreatePopup extends Component<Props, { open: boolean, qc: Object }> {
+  constructor(props: Props) {
     super(props)
-
     this.state = {
       open: false,
       qc: { name: '' },
     }
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleOpen() {
+  props: Props
+
+  handleOpen = () => {
     this.setState({ open: true })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false })
   }
 
-  handleChange(e) {
-    this.setState({ qc: { ...this.state.qc, name: e.target.value }})
+  handleChange = e => {
+    this.setState({ qc: { ...this.state.qc, name: e.target.value } })
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.setState({ open: false })
     this.props.createQc(this.state.qc)
   }
@@ -48,44 +49,31 @@ class QcCreatePopup extends Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { qc } = this.state
 
-    return <span>
-      <Button onClick={ handleOpen }>Create New</Button>
-      <Dialog
-        open={ this.state.open }
-        onClose={ handleClose }
-      >
-        <DialogTitle>Create New Quick Character</DialogTitle>
-        <DialogContent>
-          <TextField name="name" value={ qc.name }
-            label="Name" margin="normal" fullWidth
-            onChange={ handleChange }
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } variant="raised" color="primary">Create</Button>
-        </DialogActions>
-      </Dialog>
-    </span>
+    return (
+      <span>
+        <Button onClick={handleOpen}>Create New</Button>
+        <Dialog open={this.state.open} onClose={handleClose}>
+          <DialogTitle>Create New Quick Character</DialogTitle>
+          <DialogContent>
+            <TextField
+              name="name"
+              value={qc.name}
+              label="Name"
+              margin="normal"
+              fullWidth
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSubmit} variant="raised" color="primary">
+              Create
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </span>
+    )
   }
 }
-QcCreatePopup.propTypes = {
-  id: PropTypes.number.isRequired,
-  createQc: PropTypes.func.isRequired,
-}
-
-function mapStateToProps(state) {
-  const id = state.session.id
-
-  return { id }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    createQc: (qc) => {
-      dispatch(createQc(qc))
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(QcCreatePopup)
+const mapStateToProps = state => ({ id: state.session.id })
+export default connect(mapStateToProps, { createQc })(QcCreatePopup)

@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Switch, Route } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
@@ -19,37 +19,34 @@ const styles = theme => ({
     position: 'absolute',
     marginLeft: drawerWidth,
     [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
 })
 
-export function GenericHeader() {
-  return <div>
-    <Toolbar>
-      <LcaDrawerButton />
+export const GenericHeader = () => (
+  <Toolbar>
+    <LcaDrawerButton />
 
-      <Typography variant="title" color="inherit">
-        Lot-Casting Atemi
-      </Typography>
-    </Toolbar>
-  </div>
-}
+    <Typography variant="title" color="inherit">
+      Lot-Casting Atemi
+    </Typography>
+  </Toolbar>
+)
 
-function LcaHeader(props) {
-  const { classes } = props
-  return <AppBar className={ classes.appBar } component="header">
+const LcaHeader = ({ classes }: { classes: Object }) => (
+  <AppBar className={classes.appBar} component="header">
     <Switch>
-      <Route path="/chronicles/:chronicleId" component={ ChronicleHeader } />
-      <Route path="/characters/:characterId" component={ CharacterHeader } />
-      <Route path="/qcs/:qcId" component={ QcHeader} />
-      <Route path="/battlegroups/:battlegroupId" component={ BattlegroupHeader } />
-      <Route component={ GenericHeader } />
+      <Route path="/chronicles/:chronicleId" component={ChronicleHeader} />
+      <Route path="/characters/:characterId" component={CharacterHeader} />
+      <Route path="/qcs/:qcId" component={QcHeader} />
+      <Route
+        path="/battlegroups/:battlegroupId"
+        component={BattlegroupHeader}
+      />
+      <Route component={GenericHeader} />
     </Switch>
   </AppBar>
-}
-LcaHeader.propTypes = {
-  classes: PropTypes.object,
-}
+)
 
 export default withStyles(styles)(LcaHeader)

@@ -1,62 +1,74 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from '../../generic/blockPaper.jsx'
-import WeightSelect from '../../generic/weightSelect.jsx'
+import BlockPaper from 'components/generic/blockPaper.jsx'
+import WeightSelect from 'components/generic/weightSelect.jsx'
 
-import { withArmorStats } from '../../../utils/propTypes'
+import type { withArmorStats as Character } from 'utils/flow-types'
 
-function ArmorEditor(props) {
+type Props = {
+  character: Character,
+  onChange: Function,
+  onBlur: Function,
+  onRatingChange: Function,
+  onCheck: Function,
+}
+function ArmorEditor(props: Props) {
   const { character, onChange, onBlur, onRatingChange, onCheck } = props
 
   // TODO: show interesting calculated values here
-  return <BlockPaper>
-    <Typography variant="title">
-      Armor
-    </Typography>
+  return (
+    <BlockPaper>
+      <Typography variant="title">Armor</Typography>
 
-    <TextField label="Name" margin="dense"
-      name="armor_name" value={ character.armor_name }
-      onChange={ onChange } onBlur={ onBlur } fullWidth
-    />
-    <br />
+      <TextField
+        label="Name"
+        margin="dense"
+        name="armor_name"
+        value={character.armor_name}
+        onChange={onChange}
+        onBlur={onBlur}
+        fullWidth
+      />
+      <br />
 
-    <WeightSelect armor name="armor_weight" value={ character.armor_weight }
-      onChange={ onRatingChange }
-      margin="dense"
-    />
-    <br />
+      <WeightSelect
+        armor
+        name="armor_weight"
+        value={character.armor_weight}
+        onChange={onRatingChange}
+        margin="dense"
+      />
+      <br />
 
-    <FormControlLabel
-      label="Artifact"
-      control={
-        <Checkbox name="armor_is_artifact" checked={ character.armor_is_artifact }
-          onChange={ onCheck }
-        />
-      }
-    />
-    <br />
+      <FormControlLabel
+        label="Artifact"
+        control={
+          <Checkbox
+            name="armor_is_artifact"
+            checked={character.armor_is_artifact}
+            onChange={onCheck}
+          />
+        }
+      />
+      <br />
 
-    <TextField name="armor_tags" value={ character.armor_tags }
-      label="Tags (comma separated)" margin="dense" fullWidth
-      onChange={ onChange } onBlur={ onBlur }
-    />
-
-  </BlockPaper>
-}
-
-
-ArmorEditor.propTypes = {
-  character: PropTypes.shape(withArmorStats).isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  onRatingChange: PropTypes.func.isRequired,
-  onCheck: PropTypes.func.isRequired,
+      <TextField
+        name="armor_tags"
+        value={character.armor_tags}
+        label="Tags (comma separated)"
+        margin="dense"
+        fullWidth
+        onChange={onChange}
+        onBlur={onBlur}
+      />
+    </BlockPaper>
+  )
 }
 
 export default ArmorEditor

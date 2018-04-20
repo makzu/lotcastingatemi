@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+const { Component } = React
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
@@ -12,19 +13,15 @@ const styles = theme => ({
     }),
     height: '100%',
     position: 'relative',
-  }
+  },
 })
 
-class BlockPaper extends Component {
+class BlockPaper extends Component<{ children: React.Node, classes: Object }> {
   render() {
-    return <Paper className={ this.props.classes.root }>
-      { this.props.children }
-    </Paper>
+    return (
+      <Paper className={this.props.classes.root}>{this.props.children}</Paper>
+    )
   }
-}
-BlockPaper.propTypes = {
-  classes: PropTypes.object,
-  children: PropTypes.node,
 }
 
 export default withStyles(styles)(BlockPaper)

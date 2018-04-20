@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 
 import Grid from 'material-ui/Grid'
@@ -5,11 +6,11 @@ import Typography from 'material-ui/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 
-export default function WelcomePage() {
-  return <Grid container spacing={ 24 }>
-    <Grid item xs={ 2 } hidden={{ mdDown: true }}></Grid>
+const WelcomePage = () => (
+  <Grid container spacing={24}>
+    <Grid item xs={2} hidden={{ mdDown: true }} />
 
-    <Grid item xs={ 12 } lg={ 8 }>
+    <Grid item xs={12} lg={8}>
       <BlockPaper>
         <Typography variant="headline" gutterBottom>
           Lot-Casting Atemi
@@ -22,27 +23,27 @@ export default function WelcomePage() {
         </Typography>
         <Typography>
           The Solar Exalted have achieved such heights of skill that even their
-          games become effortless.  When a Solar activates Lot-Casting Atemi she
-          instantly becomes aware of her scores and those of the other players. She
-          likewise never forgets the strength of her signature moves, or the number
-          of dice required to play them. She can roll those dice with but a
-          thought, and no matter how distant she is from the game, all participants
-          become aware of her successes.
+          games become effortless. When a Solar activates Lot-Casting Atemi she
+          instantly becomes aware of her scores and those of the other players.
+          She likewise never forgets the strength of her signature moves, or the
+          number of dice required to play them. She can roll those dice with but
+          a thought, and no matter how distant she is from the game, all
+          participants become aware of her successes.
         </Typography>
       </BlockPaper>
     </Grid>
 
-    <Grid item xs={ 12 }>
+    <Grid item xs={12}>
       <div style={{ height: '8em' }} />
     </Grid>
 
-    <Grid item xs={ 1 } hidden={{ mdDown: true }}></Grid>
-    <Grid item xs={ 12 } lg={ 6 }>
+    <Grid item xs={1} hidden={{ mdDown: true }} />
+    <Grid item xs={12} lg={6}>
       <Typography variant="display2" style={{ textAlign: 'right' }}>
         Harmonious Exalted 3e character management for a new age
       </Typography>
     </Grid>
-    <Grid item xs={ 12 } lg={ 5 }>
+    <Grid item xs={12} lg={5}>
       <BlockPaper>
         <Typography paragraph>
           Keep track of your characters&apos; attributes, abilities, charms,
@@ -60,16 +61,16 @@ export default function WelcomePage() {
       </BlockPaper>
     </Grid>
 
-    <Grid item xs={ 12 }>
+    <Grid item xs={12}>
       <div style={{ height: '5em' }} />
     </Grid>
 
-    <Grid item xs={ 12 } hidden={{ lgUp: true }}>
+    <Grid item xs={12} hidden={{ lgUp: true }}>
       <Typography variant="display2" style={{ textAlign: 'right' }}>
         Ideal Battle(group) Knowledge Prana
       </Typography>
     </Grid>
-    <Grid item xs={ 12 } lg={ 5 }>
+    <Grid item xs={12} lg={5}>
       <BlockPaper>
         <Typography>
           Quick characters and Battlegroups are also fully supported, giving you
@@ -78,22 +79,22 @@ export default function WelcomePage() {
         </Typography>
       </BlockPaper>
     </Grid>
-    <Grid item lg={ 6 } hidden={{ mdDown: true }}>
+    <Grid item lg={6} hidden={{ mdDown: true }}>
       <Typography variant="display2">
         Ideal Battle(group) Knowledge Prana
       </Typography>
     </Grid>
 
-    <Grid item xs={ 12 }>
+    <Grid item xs={12}>
       <div style={{ height: '5em' }} />
     </Grid>
-    <Grid item xs={ 1 } hidden={{ mdDown: true }}></Grid>
-    <Grid item xs={ 12 } lg={ 6 }>
+    <Grid item xs={1} hidden={{ mdDown: true }} />
+    <Grid item xs={12} lg={6}>
       <Typography variant="display2" style={{ textAlign: 'right' }}>
         Excellent Friend Approach
       </Typography>
     </Grid>
-    <Grid item xs={ 12 } lg={ 5 }>
+    <Grid item xs={12} lg={5}>
       <BlockPaper>
         <Typography paragraph>
           Create or join a Chronicle to see other players&apos; characters, qcs,
@@ -104,11 +105,12 @@ export default function WelcomePage() {
         </Typography>
 
         <Typography>
-          Don&apos;t want to spoil a surprise? Mark a Character as Hidden
-          and only the owner and Storyteller will be able to see it until the
-          time is right.
+          Don&apos;t want to spoil a surprise? Mark a Character as Hidden and
+          only the owner and Storyteller will be able to see it until the time
+          is right.
         </Typography>
       </BlockPaper>
     </Grid>
   </Grid>
-}
+)
+export default WelcomePage

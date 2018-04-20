@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Dialog, {
@@ -10,36 +10,39 @@ import Dialog, {
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 
-import { createBattlegroup } from '../../ducks/actions.js'
+import { createBattlegroup } from 'ducks/actions.js'
+
+type Props = {
+  id: number,
+  createBattlegroup: Function,
+}
+type State = {
+  open: boolean,
+  battlegroup: Object,
+}
 
 // TODO: enable creating a battlegroup of a player's existing QC
-class BattlegroupCreatePopup extends Component {
-  constructor(props) {
+class BattlegroupCreatePopup extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
 
-    this.state = {
-      open: false,
-      battlegroup: { name: '' },
-    }
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = { open: false, battlegroup: { name: '' } }
   }
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({ open: true })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false })
   }
 
-  handleChange(e) {
-    this.setState({ battlegroup: { ...this.state.battlegroup, [e.target.name]: e.target.value }})
+  handleChange = (e: SyntheticInputEvent<>) => {
+    const { name, value } = e.target
+    this.setState({ battlegroup: { ...this.state.battlegroup, [name]: value } })
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.setState({ open: false })
     this.props.createBattlegroup(this.state.battlegroup)
   }
@@ -48,44 +51,35 @@ class BattlegroupCreatePopup extends Component {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { battlegroup } = this.state
 
-    return <span>
-      <Button onClick={ handleOpen }>Create New</Button>
-      <Dialog
-        open={ this.state.open }
-        onClose={ handleClose }
-      >
-        <DialogTitle>Create New Battlegroup</DialogTitle>
-        <DialogContent>
-          <TextField name="name" value={ battlegroup.name }
-            label="Name" margin="normal" fullWidth
-            onChange={ handleChange }
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } variant="raised" color="primary">Create</Button>
-        </DialogActions>
-      </Dialog>
-    </span>
-  }
-}
-BattlegroupCreatePopup.propTypes = {
-  id: PropTypes.number.isRequired,
-  createBattlegroup: PropTypes.func.isRequired,
-}
-
-function mapStateToProps(state) {
-  const id = state.session.id
-
-  return { id }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    createBattlegroup: (char) => {
-      dispatch(createBattlegroup(char))
-    },
+    return (
+      <span>
+        <Button onClick={handleOpen}>Create New</Button>
+        <Dialog open={this.state.open} onClose={handleClose}>
+          <DialogTitle>Create New Battlegroup</DialogTitle>
+          <DialogContent>
+            <TextField
+              name="name"
+              value={battlegroup.name}
+              label="Name"
+              margin="normal"
+              fullWidth
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSubmit} variant="raised" color="primary">
+              Create
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </span>
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BattlegroupCreatePopup)
+const mapStateToProps = state => ({ id: state.session.id })
+
+export default connect(mapStateToProps, { createBattlegroup })(
+  BattlegroupCreatePopup
+)

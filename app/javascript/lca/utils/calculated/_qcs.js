@@ -90,7 +90,7 @@ export function qcRating(
   qc: fullQc,
   rating: number,
   penalties: number = 0,
-  merits: Array<string> = [],
+  merits: Array<Object> = [],
   addExcellency: boolean = true
 ) {
   const excellency = addExcellency ? qcExcellencyRatingCap(qc, rating) : 0

@@ -5,6 +5,7 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
 import * as schemas from './_schemas.js'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 import type { Character } from 'utils/flow-types'
 
 export const CHA_CREATE = 'lca/character/CREATE'
@@ -20,7 +21,7 @@ export const CHA_DESTROY = 'lca/character/DESTROY'
 export const CHA_DESTROY_SUCCESS = 'lca/character/DESTROY_SUCCESS'
 export const CHA_DESTROY_FAILURE = 'lca/character/DESTROY_FAILURE'
 
-export default (state: Object, action: Object) => {
+export default (state: EntityState, action: Object) => {
   // Optimistic update
   if (action.type === CHA_UPDATE) {
     return {

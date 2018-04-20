@@ -16,7 +16,7 @@ const styles = theme => ({
   },
 })
 
-export type Props = {
+type Props = {
   character: Object,
   weapon: fullWeapon,
   damage?: boolean,

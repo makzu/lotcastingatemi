@@ -1,11 +1,13 @@
+// @flow
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
-import * as calc from '../utils/calculated/'
+import * as calc from 'utils/calculated/'
 
 const entities = state => state.entities.current
 const getCurrentPlayer = state => entities(state).players[state.session.id]
 
-export const getSpecificQc = (state, id) => entities(state).qcs[id]
+export const getSpecificQc = (state: Object, id: number) =>
+  entities(state).qcs[id]
 const qcIdMemoizer = (state, id) => id
 
 const getQcMerits = state => entities(state).qc_merits
@@ -14,13 +16,13 @@ export const getMeritsForQc = createCachedSelector(
   (qc, merits) => qc.qc_merits.map(m => merits[m])
 )(qcIdMemoizer)
 
-export const getQcAttacks = state => entities(state).qc_attacks
+export const getQcAttacks = (state: Object) => entities(state).qc_attacks
 export const getAttacksForQc = createCachedSelector(
   [getSpecificQc, getQcAttacks],
   (qc, attacks) => qc.qc_attacks.map(m => attacks[m])
 )(qcIdMemoizer)
 
-export const getQcCharms = state => entities(state).qc_charms
+export const getQcCharms = (state: Object) => entities(state).qc_charms
 export const getCharmsForQc = createCachedSelector(
   [getSpecificQc, getQcCharms],
   (qc, charms) => qc.qc_charms.map(m => charms[m])

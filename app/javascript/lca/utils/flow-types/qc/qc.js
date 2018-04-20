@@ -9,7 +9,7 @@ import type {
   withWillpower,
 } from '../shared.js'
 
-export type fullQc = {
+export type withQcStats = {
   join_battle: number,
   movement: number,
   soak: number,
@@ -19,10 +19,18 @@ export type fullQc = {
   guile: number,
   evasion: number,
   parry: number,
+  senses: number,
   armor_name: string,
+}
+
+export type fullQc = {
   excellency: string,
+  grapple: number,
+  grapple_control: number,
+  actions: Array<{ action: string, pool: number }>,
   ref: string,
-} & withWillpower &
+} & withQcStats &
+  withWillpower &
   withHealthLevels &
   withBasicInfo &
   withCombatInfo &
@@ -30,14 +38,22 @@ export type fullQc = {
   withIntimacies
 
 export type QcAttack = {
+  id: number,
   name: string,
   pool: number,
   damage: number,
+  overwhelming: number,
+  range: string,
+  tags: Array<string>,
 }
 
 export type QcMerit = {
+  id: number,
   name: string,
   body: string,
+  latent: boolean,
+  magical: boolean,
+  ref: string,
 }
 
 export type QcCharm = {

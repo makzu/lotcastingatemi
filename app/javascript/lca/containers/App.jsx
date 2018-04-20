@@ -27,12 +27,12 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     width: '100%',
-    minHeight: '100vh'
+    minHeight: '100vh',
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
       height: '100%',
-    }
+    },
   },
   drawerPaper: {
     width: 250,
@@ -41,7 +41,7 @@ const styles = theme => ({
       position: 'relative',
       minHeight: '100vh',
       height: '100%',
-    }
+    },
   },
   content: {
     backgroundColor: theme.palette.background.default,
@@ -53,7 +53,7 @@ const styles = theme => ({
       height: 'calc(100% - 64px)',
       width: `calc(100% - ${drawerWidth}px)`,
       marginTop: 64,
-    }
+    },
   },
   footer: {
     marginTop: theme.spacing.unit * 6,
@@ -66,7 +66,7 @@ const styles = theme => ({
   },
   footerText: {
     display: 'inline',
-  }
+  },
 })
 
 export type Props = {
@@ -85,70 +85,82 @@ class App extends Component<Props> {
   render() {
     const { children, drawerOpen, loading, classes } = this.props
 
-    return <div className={ classes.appFrame }>
-      <CssBaseline />
+    return (
+      <div className={classes.appFrame}>
+        <CssBaseline />
 
-      <LcaHeader />
+        <LcaHeader />
 
-      <Hidden mdUp>
-        <Drawer
-          variant="temporary"
-          open={ drawerOpen }
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          onClose={ this.handleDrawerToggle }
-          ModalProps={{ keepMounted: true }}
-        >
-          <NavPanel />
-        </Drawer>
-      </Hidden>
-      <Hidden smDown implementation="css">
-        <Drawer
-          variant="permanent"
-          open
-          classes={{
-            docked: classes.drawer,
-            paper: classes.drawerPaper,
-          }}
-        >
-          <NavPanel />
-        </Drawer>
-      </Hidden>
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            open={drawerOpen}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            onClose={this.handleDrawerToggle}
+            ModalProps={{ keepMounted: true }}
+          >
+            <NavPanel />
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            variant="permanent"
+            open
+            classes={{
+              docked: classes.drawer,
+              paper: classes.drawerPaper,
+            }}
+          >
+            <NavPanel />
+          </Drawer>
+        </Hidden>
 
-      <main className={ classes.content }>
-        <ErrorBoundary>
-          { children }
-        </ErrorBoundary>
+        <main className={classes.content}>
+          <ErrorBoundary>{children}</ErrorBoundary>
 
-        <footer className={ classes.footer }>
-          <Divider className={ classes.footerDivider } />
-          <div>
-            <Typography variant="caption" className={ classes.footerText } component="a"
-              href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v46"
-            >
-              v46
+          <footer className={classes.footer}>
+            <Divider className={classes.footerDivider} />
+            <div>
+              <Typography
+                variant="caption"
+                className={classes.footerText}
+                component="a"
+                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v47"
+              >
+                v47
+              </Typography>
+            </div>
+
+            <Typography variant="caption" className={classes.footerText}>
+              Exalted is &copy; White Wolf AB and Onyx Path.
             </Typography>
-          </div>
 
-          <Typography variant="caption" className={ classes.footerText }>
-            Exalted is &copy; White Wolf AB and Onyx Path.
-          </Typography>
+            <div>
+              <Typography
+                variant="caption"
+                component={Link}
+                to="/privacy"
+                className={classes.footerText}
+              >
+                Privacy Policy / Legal Notice
+              </Typography>
+            </div>
+          </footer>
+        </main>
 
-          <div>
-            <Typography variant="caption" component={ Link } to="/privacy" className={ classes.footerText }>
-              Privacy Policy / Legal Notice
-            </Typography>
-          </div>
-        </footer>
-      </main>
-
-      <Slide direction="up" in={ loading } mountOnEnter unmountOnExit
-        style={{ transitionDelay: loading ? 250 : 0 }}
-      >
-        <LoadingSpinner />
-      </Slide>
-    </div>
+        <Slide
+          direction="up"
+          in={loading}
+          mountOnEnter
+          unmountOnExit
+          style={{ transitionDelay: loading ? 250 : 0 }}
+        >
+          <LoadingSpinner />
+        </Slide>
+      </div>
+    )
   }
 }
 
@@ -161,9 +173,5 @@ function mapStateToProps(state) {
 }
 
 export default withStyles(styles, { withTheme: true })(
-  withRouter(
-    connect(mapStateToProps, { toggleDrawer })(
-      App
-    )
-  )
+  withRouter(connect(mapStateToProps, { toggleDrawer })(App))
 )

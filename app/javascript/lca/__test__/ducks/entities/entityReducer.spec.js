@@ -1,5 +1,5 @@
 // @flow
-import reducer, { defaultState } from '../../../ducks/entities'
+import reducer, { defaultState } from 'ducks/entities'
 
 describe('entity reducer', () => {
   it('should return the initial state', () => {

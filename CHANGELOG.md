@@ -10,6 +10,7 @@
 - Objects no longer jump around oddly before sorting
 - The number of database queries needed while first logging in have been greatly reduced, resulting in slightly quicker load times
 - An error message will now be displayed instead of a blank screen if an error is encountered
+- Flow type checking has been added to every JS and JSX file, which should hopefully prevent certain types of bugs in the future
 - Improved automated test coverage
 - Bug fixes
 

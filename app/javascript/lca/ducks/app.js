@@ -10,6 +10,13 @@ const defaultState = {
   error: false,
   errorMessage: '',
 }
+type AppState = {
+  +drawerOpen: boolean,
+  +theme: 'dark' | 'light',
+  +loading: boolean,
+  +error: boolean,
+  +errorMessage: string,
+}
 
 export const isAuthFailure = (action: Object) =>
   action.error && action.payload.status == 401
@@ -19,7 +26,7 @@ export const is404Error = (action: Object) =>
   action.error && action.payload.status == 404
 
 export default function AppReducer(
-  state: Object = defaultState,
+  state: AppState = defaultState,
   action: Object
 ) {
   if (isAuthFailure(action) || isForbidden(action) || is404Error(action)) {
@@ -106,7 +113,7 @@ export const switchTheme = (theme: string) => ({
   theme: theme,
 })
 
-export const parseError = (action: Object) => {
+export const parseError = (action: Object): string => {
   if (action.payload === undefined || action.payload.response === undefined) {
     console.log('Easily Overlooked Error Method') // eslint-disable-line no-console
     return 'Error'

@@ -11,14 +11,25 @@ export const authHeaders = () => {
   })
 }
 
-export const callApi = (callBody: Object) => ({
+export type ApiAction = {
+  [RSAA]: {},
+}
+
+export type ApiCall = {
+  endpoint: string,
+  method: 'GET' | 'POST' | 'PATCH' | 'DELETE',
+  body?: any,
+  types: Array<string | Object>,
+}
+
+export const callApi = (callBody: ApiCall): ApiAction => ({
   [RSAA]: {
     ...callBody,
     headers: authHeaders,
   },
 })
 
-export const callApiNoAuth = (callBody: Object) => ({
+export const callApiNoAuth = (callBody: ApiCall) => ({
   [RSAA]: {
     ...callBody,
     headers: nonAuthHeaders,

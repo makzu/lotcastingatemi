@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -16,34 +17,44 @@ const dot = {
 }
 
 const styles = theme => ({
-  emptyDot: { ...dot,
+  emptyDot: {
+    ...dot,
     backgroundColor: theme.palette.background.paper,
   },
-  fullDot: { ...dot,
+  fullDot: {
+    ...dot,
     backgroundColor: 'black',
   },
 })
 
 function RatingDots(props) {
-  const emptyCount = ( props.fillTo || 5 ) - props.rating
+  const emptyCount = (props.fillTo || 5) - props.rating
 
   const fc = new Array(props.rating).fill('●')
-  const fullDots = fc.map((dot, index) =>
-    <div key={ index } className={ props.classes.fullDot }>{ dot }</div>
-  )
+  const fullDots = fc.map((dot, index) => (
+    <div key={index} className={props.classes.fullDot}>
+      {dot}
+    </div>
+  ))
 
   let emptyDots = ''
   if (props.dontFill == null && emptyCount >= 0) {
     let ec = new Array(emptyCount).fill('○')
-    emptyDots = ec.map((dot, index) =>
-      <div key={ index } className={ props.classes.emptyDot }>{ dot }</div>
-    )
+    emptyDots = ec.map((dot, index) => (
+      <div key={index} className={props.classes.emptyDot}>
+        {dot}
+      </div>
+    ))
   }
-  return <div>
-    { fullDots }
-    { emptyDots }
-    { !props.dontFill && props.fillTo && props.rating > props.fillTo && <strong> +</strong> }
-  </div>
+  return (
+    <div>
+      {fullDots}
+      {emptyDots}
+      {!props.dontFill &&
+        props.fillTo &&
+        props.rating > props.fillTo && <strong> +</strong>}
+    </div>
+  )
 }
 
 RatingDots.propTypes = {

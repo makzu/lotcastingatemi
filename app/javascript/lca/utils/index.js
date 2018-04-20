@@ -13,6 +13,16 @@ export function clamp(val: number, min: number, max: number): number {
   return val
 }
 
+export function checkVisible(elm: Object | null) {
+  if (elm == null) return
+  var rect = elm.getBoundingClientRect()
+  var viewHeight = Math.max(
+    document.documentElement ? document.documentElement.clientHeight : 0,
+    window.innerHeight
+  )
+  return !(rect.bottom < 0 || rect.top - viewHeight >= 0)
+}
+
 type Sortable = {
   sort_order: number,
 }

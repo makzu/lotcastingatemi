@@ -9,11 +9,15 @@ export type withBasicInfo = {
   essence: number,
   hidden: boolean,
   pinned: boolean,
+  public: boolean,
+  sort_order: number,
+  chronicle_sort_order: number,
 }
 
 export type withCombatInfo = {
   initiative: number,
   onslaught: number,
+  has_acted: boolean,
 }
 
 export type withHealthLevels = {

@@ -6,7 +6,7 @@ import { ListSubheader } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
-import * as calc from '../../../utils/calculated'
+import * as calc from 'utils/calculated'
 import type { fullWeapon } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -17,7 +17,7 @@ const styles = theme => ({
   },
 })
 
-export type Props = {
+type Props = {
   character: Object,
   weapon: fullWeapon,
   extended?: boolean,

@@ -79,10 +79,10 @@ export function maxCustomExcellency(
   else excellency = character.excellency
 
   let result = 0
-  let i
-  const exArray = excellency.split('+')
-  for (i in exArray) {
-    switch (exArray[i]) {
+
+  const exArray = excellency.split('+') || []
+  for (let ex of exArray) {
+    switch (ex) {
       case 'attribute':
         result += attr(character, attribute)
         break

@@ -4,7 +4,7 @@ import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
-import { mergeStateWithNormalizedEntities } from '.'
+import { mergeStateWithNormalizedEntities, type EntityState } from '.'
 import * as schemas from './_schemas.js'
 import { CHA_FETCH_SUCCESS } from './character.js'
 import { callApi } from 'utils/api.js'
@@ -39,9 +39,9 @@ export const CHN_REMOVE_THING = 'lca/chronicle/REMOVE_THING'
 export const CHN_REMOVE_THING_SUCCESS = 'lca/chronicle/REMOVE_THING_SUCCESS'
 export const CHN_REMOVE_THING_FAILURE = 'lca/chronicle/REMOVE_THING_FAILURE'
 
-export default function reducer(state: Object, action: Object) {
-  const _id = action.payload != undefined ? action.payload.id : null
-  const _trait = action.meta != undefined ? action.meta.trait : null
+export default function reducer(state: EntityState, action: Object) {
+  let _id
+  let _trait
   let _entities
   _entities = action.payload != undefined ? action.payload.entities : undefined
 
@@ -90,6 +90,8 @@ export default function reducer(state: Object, action: Object) {
       }
 
     case CHN_UPDATE:
+      _id = action.payload.id
+      _trait = action.meta.trait
       return {
         ...state,
         chronicles: {

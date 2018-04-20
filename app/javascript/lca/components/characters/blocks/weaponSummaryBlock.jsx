@@ -1,13 +1,13 @@
+// @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 
-import PoolDisplay from '../../generic/PoolDisplay.jsx'
-import { getPoolsForWeapon } from '../../../selectors'
-import { withAttributes, withAbilities, fullWeapon } from '../../../utils/propTypes'
+import PoolDisplay from 'components/generic/PoolDisplay.jsx'
+import { getPoolsForWeapon } from 'selectors'
+import type { Character, fullWeapon } from 'utils/flow-types'
 
 const styles = theme => ({
   container: {
@@ -17,7 +17,8 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
   },
-  label: { ...theme.typography.body1,
+  label: {
+    ...theme.typography.body1,
     fontSize: '0.75rem',
     fontWeight: 500,
     opacity: 0.7,
@@ -28,7 +29,8 @@ const styles = theme => ({
   labelSpan: {
     alignSelf: 'flex-end',
   },
-  name: { ...theme.typography.body2,
+  name: {
+    ...theme.typography.body2,
     width: '10rem',
     margin: theme.spacing.unit,
     marginLeft: 0,
@@ -47,7 +49,8 @@ const styles = theme => ({
     marginLeft: 0,
     width: '4.5rem',
   },
-  tags: { ...theme.typography.body1,
+  tags: {
+    ...theme.typography.body1,
     margin: theme.spacing.unit,
     marginLeft: 0,
     flex: 1,
@@ -58,90 +61,134 @@ const styles = theme => ({
   },
 })
 
-function RangedWeaponAttacks({ weaponPools, classes }) {
+type RangedAttacksProps = { weaponPools: Object, classes: Object }
+function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
   const pool = weaponPools.rangedWitheringAttack
-  const poolLineClasses = { root: classes.narrowPoolBlock, label: classes.label, labelSpan: classes.labelSpan }
+  const poolLineClasses = {
+    root: classes.narrowPoolBlock,
+    label: classes.label,
+    labelSpan: classes.labelSpan,
+  }
 
-  return <Fragment>
-    <PoolDisplay pool={ pool.close } label="Withering Close" classes={ poolLineClasses } />
-    { pool.short.available &&
-      <PoolDisplay pool={ pool.short } label="Withering Short" classes={ poolLineClasses } />
-    }
-    { pool.medium.available &&
-      <PoolDisplay pool={ pool.medium } label="Withering Medium" classes={poolLineClasses } />
-    }
-    { pool.long.available &&
-      <PoolDisplay pool={ pool.long } label="Withering Long" classes={ poolLineClasses } />
-    }
-    { pool.extreme.available &&
-      <PoolDisplay pool={ pool.extreme } label="Withering Extreme" classes={ poolLineClasses }  />
-    }
-  </Fragment>
-}
-RangedWeaponAttacks.propTypes = {
-  weapon: PropTypes.shape(fullWeapon),
-  character: PropTypes.shape({ ...withAttributes, ...withAbilities }),
-  weaponPools: PropTypes.object,
-  classes: PropTypes.object,
+  return (
+    <Fragment>
+      <PoolDisplay
+        pool={pool.close}
+        label="Withering Close"
+        classes={poolLineClasses}
+      />
+      {pool.short.available && (
+        <PoolDisplay
+          pool={pool.short}
+          label="Withering Short"
+          classes={poolLineClasses}
+        />
+      )}
+      {pool.medium.available && (
+        <PoolDisplay
+          pool={pool.medium}
+          label="Withering Medium"
+          classes={poolLineClasses}
+        />
+      )}
+      {pool.long.available && (
+        <PoolDisplay
+          pool={pool.long}
+          label="Withering Long"
+          classes={poolLineClasses}
+        />
+      )}
+      {pool.extreme.available && (
+        <PoolDisplay
+          pool={pool.extreme}
+          label="Withering Extreme"
+          classes={poolLineClasses}
+        />
+      )}
+    </Fragment>
+  )
 }
 
-function _WeaponLine({ weapon, weaponPools, classes }) {
-  const poolLineClasses = { root: classes.poolBlock, label: classes.label, labelSpan: classes.labelSpan }
+type WeaponLineProps = {
+  weapon: fullWeapon,
+  weaponPools: Object,
+  classes: Object,
+}
+function _WeaponLine({ weapon, weaponPools, classes }: WeaponLineProps) {
+  const poolLineClasses = {
+    root: classes.poolBlock,
+    label: classes.label,
+    labelSpan: classes.labelSpan,
+  }
 
   let attackLine
   if (weaponPools.rangedWitheringAttack) {
-    attackLine = <RangedWeaponAttacks weaponPools={ weaponPools } classes={ classes } />
+    attackLine = (
+      <RangedWeaponAttacks weaponPools={weaponPools} classes={classes} />
+    )
   } else {
-    attackLine = <PoolDisplay pool={ weaponPools.witheringAttack } label="Withering Attack" classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }}  />
+    attackLine = (
+      <PoolDisplay
+        pool={weaponPools.witheringAttack}
+        label="Withering Attack"
+        classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }}
+      />
+    )
   }
-  return <div className={ classes.container }>
-    <div className={ classes.name }>
-      <div className={ classes.label }>
-        <span className={ classes.labelSpan }>Name</span>
+  return (
+    <div className={classes.container}>
+      <div className={classes.name}>
+        <div className={classes.label}>
+          <span className={classes.labelSpan}>Name</span>
+        </div>
+        {weapon.name}
       </div>
-      { weapon.name }
-    </div>
 
-    { attackLine }
-    <PoolDisplay damage pool={ weaponPools.witheringDamage } label="Withering Damage" classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }} />
-    <PoolDisplay pool={ weaponPools.decisiveAttack } label="Decisive Attack" classes={ poolLineClasses }  />
-    { !weaponPools.rangedWitheringAttack &&
-      <PoolDisplay staticRating pool={ weaponPools.parry } label="Parry" classes={ poolLineClasses }  />
-    }
+      {attackLine}
+      <PoolDisplay
+        damage
+        pool={weaponPools.witheringDamage}
+        label="Withering Damage"
+        classes={{ ...poolLineClasses, root: classes.narrowPoolBlock }}
+      />
+      <PoolDisplay
+        pool={weaponPools.decisiveAttack}
+        label="Decisive Attack"
+        classes={poolLineClasses}
+      />
+      {!weaponPools.rangedWitheringAttack && (
+        <PoolDisplay
+          staticRating
+          pool={weaponPools.parry}
+          label="Parry"
+          classes={poolLineClasses}
+        />
+      )}
 
-    <div className={ classes.tags }>
-      <div className={ classes.label }>
-        <span className={ classes.labelSpan }>Tags</span>
+      <div className={classes.tags}>
+        <div className={classes.label}>
+          <span className={classes.labelSpan}>Tags</span>
+        </div>
+        {weapon.tags.join(', ') || 'none'}
       </div>
-      { weapon.tags.join(', ') || 'none' }
     </div>
-  </div>
-}
-_WeaponLine.propTypes = {
-  weapon: PropTypes.shape(fullWeapon),
-  character: PropTypes.shape({ ...withAttributes, ...withAbilities }),
-  weaponPools: PropTypes.object,
-  classes: PropTypes.object,
+  )
 }
 const mapStateToProps = (state, props) => ({
-  weaponPools: getPoolsForWeapon(state, props.weapon.id)
+  weaponPools: getPoolsForWeapon(state, props.weapon.id),
 })
 const WeaponLine = withStyles(styles)(connect(mapStateToProps)(_WeaponLine))
 
-function WeaponSummaryBlock({ character, weapons }) {
+type Props = { character: Character, weapons: Array<fullWeapon> }
+function WeaponSummaryBlock({ character, weapons }: Props) {
+  const weas = weapons.map(weapon => (
+    <Fragment key={weapon.id}>
+      <WeaponLine character={character} weapon={weapon} />
+      <Divider />
+    </Fragment>
+  ))
 
-  const weas = weapons.map((weapon) => <Fragment key={ weapon.id } >
-    <WeaponLine character={ character } weapon={ weapon } />
-    <Divider />
-  </Fragment>)
-
-  return <div>
-    { weas }
-  </div>
-}
-WeaponSummaryBlock.propTypes = {
-  weapons: PropTypes.arrayOf(PropTypes.shape(fullWeapon)),
-  character: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+  return <div>{weas}</div>
 }
 
 export default WeaponSummaryBlock

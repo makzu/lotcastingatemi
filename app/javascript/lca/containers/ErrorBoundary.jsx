@@ -27,11 +27,13 @@ class ErrorBoundary extends React.Component<Props, State> {
   render() {
     const { error } = this.state
     if (error) {
-      return <div>
-        <Typography variant="title">{ sample(errorNames) }</Typography>
-        <Typography>Something went wrong.</Typography>
-        <Typography>{ error && error.message }</Typography>
-      </div>
+      return (
+        <div>
+          <Typography variant="title">{sample(errorNames)}</Typography>
+          <Typography>Something went wrong.</Typography>
+          <Typography>{error && error.message}</Typography>
+        </div>
+      )
     }
     return this.props.children
   }

@@ -1,6 +1,7 @@
 // @flow
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 
 const CHM_CREATE = 'lca/charm/CREATE'
 const CHM_CREATE_SUCCESS = 'lca/charm/CREATE_SUCCESS'
@@ -12,7 +13,7 @@ const CHM_DESTROY = 'lca/charm/DESTROY'
 const CHM_DESTROY_SUCCESS = 'lca/charm/DESTROY_SUCCESS'
 const CHM_DESTROY_FAILURE = 'lca/charm/DESTROY_FAILURE'
 
-export default (state: Object, action: Object) => {
+export default (state: EntityState, action: Object) => {
   // Optimistic update
   if (action.type === CHM_UPDATE) {
     return {

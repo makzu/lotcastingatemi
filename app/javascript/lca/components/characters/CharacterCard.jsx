@@ -21,11 +21,17 @@ import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { canIDeleteCharacter, getPenalties, getPoolsAndRatings } from '../../selectors'
-import * as calc from '../../utils/calculated'
+import {
+  canIDeleteCharacter,
+  getPenalties,
+  getPoolsAndRatings,
+} from 'selectors'
+import * as calc from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-const Handle = SortableHandle(() => <DragHandleIcon onClick={ (e) => e.preventDefault() } />)
+const Handle = SortableHandle(() => (
+  <DragHandleIcon onClick={e => e.preventDefault()} />
+))
 
 const styles = theme => ({
   root: {
@@ -58,7 +64,8 @@ const styles = theme => ({
   moteWrap: {
     marginRight: theme.spacing.unit,
   },
-  animaLabel: { ...theme.typography.body1,
+  animaLabel: {
+    ...theme.typography.body1,
     fontSize: '0.75rem',
     fontWeight: 500,
     opacity: 0.7,
@@ -71,7 +78,8 @@ const styles = theme => ({
     display: 'inline-block',
     verticalAlign: 'top',
   },
-  animaValue: { ...theme.typography.body1,
+  animaValue: {
+    ...theme.typography.body1,
     display: 'inline-block',
     verticalAlign: 'top',
     marginTop: '0.25em',
@@ -100,141 +108,188 @@ type Props = {
   classes: Object,
 }
 
-export function CharacterCard(
-  { character, combat, canDelete, chronicle, st, penalties, pools, classes }: Props
-) {
-  return <Paper className={ classes.root }>
-    { ((chronicle && st) || (!chronicle && canDelete)) &&
-      <Typography component="div"
-        style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
-      >
-        <Handle />
-      </Typography>
-    }
-
-    <div className={ classes.nameRow }>
-      <div className={ classes.nameWrap }>
-        <Typography variant="title" className={ classes.characterName }
-          component={ Link } to={ `/characters/${character.id}` }
+export function CharacterCard({
+  character,
+  combat,
+  canDelete,
+  chronicle,
+  st,
+  penalties,
+  pools,
+  classes,
+}: Props) {
+  return (
+    <Paper className={classes.root}>
+      {((chronicle && st) || (!chronicle && canDelete)) && (
+        <Typography
+          component="div"
+          style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
         >
-          { character.name }
-          { character.anima_level === 3 &&
-            <Whatshot className={ classes.icon } />
-          }
-          <Launch className={ classes.icon } />
-
-          { character.hidden &&
-            <div className={ classes.hiddenLabel }>
-              <VisibilityOff className={ classes.icon } />&nbsp;
-              Hidden
-            </div>
-          }
+          <Handle />
         </Typography>
-        <PlayerNameSubtitle playerId={ character.player_id } />
-        { !combat &&
-          <Typography paragraph>
-            Essence { character.essence } { calc.prettyFullExaltType(character) }
+      )}
+
+      <div className={classes.nameRow}>
+        <div className={classes.nameWrap}>
+          <Typography
+            variant="title"
+            className={classes.characterName}
+            component={Link}
+            to={`/characters/${character.id}`}
+          >
+            {character.name}
+            {character.anima_level === 3 && (
+              <Whatshot className={classes.icon} />
+            )}
+            <Launch className={classes.icon} />
+
+            {character.hidden && (
+              <div className={classes.hiddenLabel}>
+                <VisibilityOff className={classes.icon} />&nbsp; Hidden
+              </div>
+            )}
           </Typography>
-        }
-      </div>
-
-      { (st || canDelete) &&
-        <CharacterCardMenu characterType="character" id={ character.id } />
-      }
-    </div>
-
-    <Typography className={ classes.rowContainer } component="div">
-      { character.motes_personal_total > 0 &&
-        <MoteSpendWidget character={ character }>
-          <ResourceDisplay className={ classes.moteWrap }
-            current={ character.motes_personal_current }
-            total={ character.motes_personal_total }
-            committed={ calc.committedPersonalMotes(character) }
-            label="Personal"
-          />
-        </MoteSpendWidget>
-      }
-      { character.motes_peripheral_total > 0 &&
-        <MoteSpendWidget character={ character } peripheral>
-          <ResourceDisplay className={ classes.moteWrap }
-            current={ character.motes_peripheral_current }
-            total={ character.motes_peripheral_total }
-            committed={ calc.committedPeripheralMotes(character) }
-            label="Peripheral"
-          />
-        </MoteSpendWidget>
-      }
-      <WillpowerSpendWidget character={ character }>
-        <ResourceDisplay className={ classes.moteWrap }
-          current={ character.willpower_temporary }
-          total={ character.willpower_permanent }
-          label="Willpower"
-        />
-      </WillpowerSpendWidget>
-      { character.type != 'Character' &&
-        <div className={ classes.moteWrap }>
-          <div className={ classes.animaLabel }>Anima</div>
-          <div>
-            <span className={ classes.animaCurrent }>
-              { calc.prettyAnimaLevel(character.anima_level) }
-            </span>
-            { character.anima_level > 0 &&
-              <span className={ classes.animaValue }>
-                &nbsp;({ character.anima_level })
-              </span>
-            }
-          </div>
+          <PlayerNameSubtitle playerId={character.player_id} />
+          {!combat && (
+            <Typography paragraph>
+              Essence {character.essence} {calc.prettyFullExaltType(character)}
+            </Typography>
+          )}
         </div>
-      }
-    </Typography>
 
-    <DamageWidget character={ character }>
-      <HealthLevelBoxes character={ character } />
-    </DamageWidget>
-
-    <div className={ classes.rowContainer }>
-      <PoolDisplay staticRating pool={ pools.evasion } label="Evasion" classes={{ root: classes.poolBlock }} />
-      <PoolDisplay staticRating pool={ pools.bestParry } label="Best Parry" classes={{ root: classes.poolBlock }} />
-      <PoolDisplay staticRating pool={ pools.soak } label="Soak" classes={{ root: classes.poolBlock }} />
-      { (pools.hardness.total > 0 || pools.hardness.bonus.length > 0) &&
-        <PoolDisplay staticRating pool={ pools.hardness } label="Hardness" classes={{ root: classes.poolBlock }} />
-      }
-    </div>
-
-    {!combat &&
-      <div className={ classes.rowContainer }>
-        <PoolDisplay staticRating pool={ pools.resolve } label="Resolve" classes={{ root: classes.poolBlock }} />
-        <PoolDisplay staticRating pool={ pools.guile } label="Guile" classes={{ root: classes.poolBlock }} />
-        <PoolDisplay staticRating pool={ pools.appearance } label="Appearance" classes={{ root: classes.poolBlock }} />
+        {(st || canDelete) && (
+          <CharacterCardMenu characterType="character" id={character.id} />
+        )}
       </div>
-    }
 
-    { (penalties.mobility !== 0 || penalties.onslaught !== 0 || penalties.wound !== 0) &&
-      <Typography paragraph style={{ marginTop: '0.5em' }}>
-        <strong>Penalties:</strong>&nbsp;
-        { penalties.mobility > 0 &&
-          <span>Mobility -{ penalties.mobility } </span>
-        }
-        { penalties.onslaught > 0 &&
-          <span>Onslaught -{ character.onslaught } </span>
-        }
-        { penalties.wound > 0 &&
-          <span>Wound -{ penalties.wound }</span>
-        }
-
+      <Typography className={classes.rowContainer} component="div">
+        {character.motes_personal_total > 0 && (
+          <MoteSpendWidget character={character}>
+            <ResourceDisplay
+              className={classes.moteWrap}
+              current={character.motes_personal_current}
+              total={character.motes_personal_total}
+              committed={calc.committedPersonalMotes(character)}
+              label="Personal"
+            />
+          </MoteSpendWidget>
+        )}
+        {character.motes_peripheral_total > 0 && (
+          <MoteSpendWidget character={character} peripheral>
+            <ResourceDisplay
+              className={classes.moteWrap}
+              current={character.motes_peripheral_current}
+              total={character.motes_peripheral_total}
+              committed={calc.committedPeripheralMotes(character)}
+              label="Peripheral"
+            />
+          </MoteSpendWidget>
+        )}
+        <WillpowerSpendWidget character={character}>
+          <ResourceDisplay
+            className={classes.moteWrap}
+            current={character.willpower_temporary}
+            total={character.willpower_permanent}
+            label="Willpower"
+          />
+        </WillpowerSpendWidget>
+        {character.type != 'Character' && (
+          <div className={classes.moteWrap}>
+            <div className={classes.animaLabel}>Anima</div>
+            <div>
+              <span className={classes.animaCurrent}>
+                {calc.prettyAnimaLevel(character.anima_level)}
+              </span>
+              {character.anima_level > 0 && (
+                <span className={classes.animaValue}>
+                  &nbsp;({character.anima_level})
+                </span>
+              )}
+            </div>
+          </div>
+        )}
       </Typography>
-    }
-    { combat &&
-      <InitiativeWidget character={ character } characterType="character" />
-    }
-  </Paper>
+
+      <DamageWidget character={character}>
+        <HealthLevelBoxes character={character} />
+      </DamageWidget>
+
+      <div className={classes.rowContainer}>
+        <PoolDisplay
+          staticRating
+          pool={pools.evasion}
+          label="Evasion"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          staticRating
+          pool={pools.bestParry}
+          label="Best Parry"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          staticRating
+          pool={pools.soak}
+          label="Soak"
+          classes={{ root: classes.poolBlock }}
+        />
+        {(pools.hardness.total > 0 || pools.hardness.bonus.length > 0) && (
+          <PoolDisplay
+            staticRating
+            pool={pools.hardness}
+            label="Hardness"
+            classes={{ root: classes.poolBlock }}
+          />
+        )}
+      </div>
+
+      {!combat && (
+        <div className={classes.rowContainer}>
+          <PoolDisplay
+            staticRating
+            pool={pools.resolve}
+            label="Resolve"
+            classes={{ root: classes.poolBlock }}
+          />
+          <PoolDisplay
+            staticRating
+            pool={pools.guile}
+            label="Guile"
+            classes={{ root: classes.poolBlock }}
+          />
+          <PoolDisplay
+            staticRating
+            pool={pools.appearance}
+            label="Appearance"
+            classes={{ root: classes.poolBlock }}
+          />
+        </div>
+      )}
+
+      {(penalties.mobility !== 0 ||
+        penalties.onslaught !== 0 ||
+        penalties.wound !== 0) && (
+        <Typography paragraph style={{ marginTop: '0.5em' }}>
+          <strong>Penalties:</strong>&nbsp;
+          {penalties.mobility > 0 && (
+            <span>Mobility -{penalties.mobility} </span>
+          )}
+          {penalties.onslaught > 0 && (
+            <span>Onslaught -{character.onslaught} </span>
+          )}
+          {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
+        </Typography>
+      )}
+      {combat && (
+        <InitiativeWidget character={character} characterType="character" />
+      )}
+    </Paper>
+  )
 }
-function mapStateToProps(state, props) {
-  return {
-    canDelete: canIDeleteCharacter(state, props.character.id),
-    penalties: getPenalties(state, props.character.id),
-    pools: getPoolsAndRatings(state, props.character.id),
-  }
-}
+const mapStateToProps = (state, props) => ({
+  canDelete: canIDeleteCharacter(state, props.character.id),
+  penalties: getPenalties(state, props.character.id),
+  pools: getPoolsAndRatings(state, props.character.id),
+})
 
 export default withStyles(styles)(connect(mapStateToProps)(CharacterCard))

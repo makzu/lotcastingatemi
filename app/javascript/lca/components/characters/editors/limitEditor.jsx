@@ -1,34 +1,54 @@
+// @flow
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingField from '../../generic/RatingField.jsx'
+import BlockPaper from 'components/generic/blockPaper.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import { LIMIT_MAX } from 'utils/constants.js'
+import type { Character } from 'utils/flow-types'
 
-import { LIMIT_MAX } from '../../../utils/constants.js'
+function LimitEditor({
+  character,
+  onChange,
+  onBlur,
+  onRatingChange,
+}: {
+  character: Character,
+  onChange: Function,
+  onBlur: Function,
+  onRatingChange: Function,
+}) {
+  return (
+    <BlockPaper>
+      <Typography variant="title">Limit</Typography>
 
-function LimitEditor(props) {
-  const { character, onChange, onBlur, onRatingChange } = props
+      <RatingField
+        trait="limit"
+        value={character.limit}
+        label="Current"
+        max={LIMIT_MAX}
+        onChange={onRatingChange}
+        margin="dense"
+      />
+      <br />
 
-  return <BlockPaper>
-    <Typography variant="title">
-      Limit
-    </Typography>
-
-    <RatingField trait="limit" value={ character.limit }
-      label="Current" max={ LIMIT_MAX }
-      onChange={ onRatingChange } margin="dense"
-    />
-    <br />
-
-    <TextField name="limit_trigger" value={ character.limit_trigger }
-      label="Limit Trigger" margin="dense"
-      multiline fullWidth rows={ 2 } rowsMax={ 5 }
-      onChange={ onChange } onBlur={ onBlur } />
-  </BlockPaper>
-
+      <TextField
+        name="limit_trigger"
+        value={character.limit_trigger}
+        label="Limit Trigger"
+        margin="dense"
+        multiline
+        fullWidth
+        rows={2}
+        rowsMax={5}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
+    </BlockPaper>
+  )
 }
 LimitEditor.propTypes = {
   character: PropTypes.object.isRequired,
@@ -36,6 +56,5 @@ LimitEditor.propTypes = {
   onBlur: PropTypes.func.isRequired,
   onRatingChange: PropTypes.func.isRequired,
 }
-
 
 export default LimitEditor

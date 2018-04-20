@@ -12,18 +12,15 @@ import CardMenuLinks from './CardMenuLinks.jsx'
 import CardMenuPin from './CardMenuPin.jsx'
 import CardMenuRemoveFromChronicle from './CardMenuRemoveFromChronicle.jsx'
 
-export type Props = {
+type Props = {
   id: number,
   characterType: string,
-};
-
-class CharacterCardMenu extends Component<{ id: number, characterType: string }, { menuAnchor: ?Object }> {
+}
+class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
   constructor(props: Props) {
     super(props)
     this.state = { menuAnchor: null }
   }
-
-  props: Props;
 
   handleOpen = (e: SyntheticEvent<>) => {
     this.setState({ menuAnchor: e.currentTarget })
@@ -34,26 +31,46 @@ class CharacterCardMenu extends Component<{ id: number, characterType: string },
   }
 
   render() {
-    return <div style={{ marginTop: '-1em', marginRight: '-1em', }}>
-      <IconButton onClick={ this.handleOpen }>
-        <MoreVert />
-      </IconButton>
+    return (
+      <div style={{ marginTop: '-1em', marginRight: '-1em' }}>
+        <IconButton onClick={this.handleOpen}>
+          <MoreVert />
+        </IconButton>
 
-      <Menu
-        anchorEl={ this.state.menuAnchor }
-        open={ !!this.state.menuAnchor }
-        onClose={ this.handleClose }
-      >
-        <CardMenuLinks characterType={ this.props.characterType } id={ this.props.id } />
-        <CardMenuEdit  characterType={ this.props.characterType } id={ this.props.id } />
-        <CardMenuPin   characterType={ this.props.characterType } id={ this.props.id } />
-        <CardMenuHide  characterType={ this.props.characterType } id={ this.props.id } />
+        <Menu
+          anchorEl={this.state.menuAnchor}
+          open={!!this.state.menuAnchor}
+          onClose={this.handleClose}
+        >
+          <CardMenuLinks
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
+          <CardMenuEdit
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
+          <CardMenuPin
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
+          <CardMenuHide
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
 
-        <CardMenuRemoveFromChronicle characterType={ this.props.characterType } id={ this.props.id } />
+          <CardMenuRemoveFromChronicle
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
 
-        <CardMenuDelete characterType={ this.props.characterType } id={ this.props.id } />
-      </Menu>
-    </div>
+          <CardMenuDelete
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
+        </Menu>
+      </div>
+    )
   }
 }
 

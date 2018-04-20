@@ -5,9 +5,9 @@ import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import SvgIcon from 'material-ui/SvgIcon'
 
-import DawnSpinner from '../../icons/DawnSpinner'
+import DawnSpinner from 'icons/DawnSpinner'
 
-const styles = theme => ({ // eslint-disable-line no-unused-vars
+const styles = theme => ({
   wrap: {
     display: 'block',
     position: 'fixed',
@@ -30,14 +30,16 @@ const styles = theme => ({ // eslint-disable-line no-unused-vars
   },
 })
 
-function LoadingSpinner({ classes }: { classes: Object } ) {
-  return <div className={ classes.wrap }>
-    <Paper square={ false } elevation={ 6 }
-      classes={{ root: classes.paper }}
-    >
-      <SvgIcon viewBox="0 0 51 51" className={ classes.icon }><DawnSpinner /></SvgIcon>
-    </Paper>
-  </div>
+function LoadingSpinner({ classes }: { classes: Object }) {
+  return (
+    <div className={classes.wrap}>
+      <Paper square={false} elevation={6} classes={{ root: classes.paper }}>
+        <SvgIcon viewBox="0 0 51 51" className={classes.icon}>
+          <DawnSpinner />
+        </SvgIcon>
+      </Paper>
+    </div>
+  )
 }
 
 export default withStyles(styles)(LoadingSpinner)

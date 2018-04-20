@@ -1,6 +1,6 @@
 // @flow
 import { gen } from 'testcheck'
-import { ABILITY_NAMES } from '../../utils/constants.js'
+import { ABILITY_NAMES } from 'utils/constants.js'
 export const SEED = 5 * 684 /* Number of pages in the 3e core book */
 
 export const genHealthLevels = {

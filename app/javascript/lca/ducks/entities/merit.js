@@ -1,6 +1,7 @@
 // @flow
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 
 const MRT_CREATE = 'lca/merit/CREATE'
 const MRT_CREATE_SUCCESS = 'lca/merit/CREATE_SUCCESS'
@@ -12,7 +13,7 @@ const MRT_DESTROY = 'lca/merit/DESTROY'
 const MRT_DESTROY_SUCCESS = 'lca/merit/DESTROY_SUCCESS'
 const MRT_DESTROY_FAILURE = 'lca/merit/DESTROY_FAILURE'
 
-export default (state: Object, action: Object) => {
+export default (state: EntityState, action: Object) => {
   // Optimistic update
   if (action.type === MRT_UPDATE) {
     return {

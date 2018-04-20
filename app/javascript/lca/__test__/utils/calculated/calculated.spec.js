@@ -1,5 +1,5 @@
 // @flow
-import * as calc from '../../../utils/calculated'
+import * as calc from 'utils/calculated'
 import { mockCharacter as mockChar } from '../../_mocks'
 
 describe('Calculated values', () => {

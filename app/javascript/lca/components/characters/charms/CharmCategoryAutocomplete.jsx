@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+const { Component } = React
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
@@ -14,19 +15,27 @@ import ClearIcon from '@material-ui/icons/Clear'
 import { Creatable } from 'react-select'
 import 'react-select/dist/react-select.css'
 
-import { getAllCharmCategoriesForCharacter } from '../../../selectors'
+import { getAllCharmCategoriesForCharacter } from 'selectors'
 
+type OptionProps = {
+  children: number | string | React.Element<> | Array<any>,
+  option?: string,
+  isFocused?: boolean,
+  isSelected?: boolean,
+  onFocus: Function,
+  onSelect: Function,
+}
 /* Shamelessly stolen and crudely reshaped from the Material-ui react-select
  * Autocomplete example
  */
-class Option extends Component {
-  constructor(props) {
+class Option extends Component<OptionProps> {
+  constructor(props: OptionProps) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(event) {
-    this.props.onSelect(this.props.option, event)
+  handleClick = e => {
+    this.props.onSelect(this.props.option, e)
   }
 
   render() {
@@ -34,9 +43,9 @@ class Option extends Component {
 
     return (
       <MenuItem
-        onFocus={ onFocus }
-        selected={ isFocused }
-        onClick={ this.handleClick }
+        onFocus={onFocus}
+        selected={isFocused}
+        onClick={this.handleClick}
         component="div"
         style={{
           fontWeight: isSelected ? 500 : 400,
@@ -47,16 +56,9 @@ class Option extends Component {
     )
   }
 }
-Option.propTypes = {
-  children: PropTypes.node,
-  option: PropTypes.string,
-  isFocused: PropTypes.bool,
-  isSelected: PropTypes.bool,
-  onFocus: PropTypes.func,
-  onSelect: PropTypes.func,
-}
+type SelectWrappedProps = { classes: Object }
 
-function SelectWrapped(props) {
+function SelectWrapped(props: SelectWrappedProps) {
   const { classes, ...other } = props
 
   return (
@@ -94,7 +96,6 @@ function SelectWrapped(props) {
     />
   )
 }
-SelectWrapped.propTypes = { classes: PropTypes.object, }
 
 const ITEM_HEIGHT = 48
 
@@ -212,32 +213,41 @@ const styles = theme => ({
   }, // */
 })
 
-class CharmCategoryAutocomplete extends Component {
+type CCAProps = {
+  categories: Array<string>,
+  value: Array<string>,
+  classes: Object,
+  onChange: Function,
+}
+type CCAState = { categories: Array<string> }
+class CharmCategoryAutocomplete extends Component<CCAProps, CCAState> {
   constructor(props) {
     super(props)
-    this.state = { }
-    this.handleChange = this.handleChange.bind(this)
+    this.state = { categories: this.props.value }
   }
 
-  static getDerivedStateFromProps(props, state) { // eslint-disable-line no-unused-vars
+  static getDerivedStateFromProps(props) {
+    // eslint-disable-line no-unused-vars
     return { categories: props.value }
   }
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({ categories: e })
-    this.props.onChange({ target: { name: 'categories', value: e.length === 0 ? [] : e.split(',') }})
+    this.props.onChange({
+      target: { name: 'categories', value: e.length === 0 ? [] : e.split(',') },
+    })
   }
 
   render() {
     const { categories, classes } = this.props
-    const suggestions = categories.map((c) => ({ value: c, label: c }))
+    const suggestions = categories.map(c => ({ value: c, label: c }))
 
     return (
       <div className={classes.root}>
         <TextField
           fullWidth
-          value={ this.state.categories }
-          onChange={ this.handleChange }
+          value={this.state.categories}
+          onChange={this.handleChange}
           placeholder="Select or start typing to create one or more categories"
           name="categories"
           label="Categories"
@@ -261,15 +271,9 @@ class CharmCategoryAutocomplete extends Component {
   }
 }
 
-CharmCategoryAutocomplete.propTypes = {
-  value: PropTypes.arrayOf(PropTypes.string).isRequired,
-  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onChange: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-}
-
 const mapStateToProps = (state, props) => ({
-  categories: getAllCharmCategoriesForCharacter(state, props.id)
+  categories: getAllCharmCategoriesForCharacter(state, props.id),
 })
-
-export default withStyles(styles)(connect(mapStateToProps)(CharmCategoryAutocomplete))
+export default withStyles(styles)(
+  connect(mapStateToProps)(CharmCategoryAutocomplete)
+)

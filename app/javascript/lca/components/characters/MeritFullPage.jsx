@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
@@ -9,9 +9,9 @@ import Typography from 'material-ui/Typography'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
 
-import ProtectedComponent from '../../containers/ProtectedComponent.jsx'
-import { getSpecificCharacter, getMeritsForCharacter } from '../../selectors'
-import { fullMerit } from '../../utils/propTypes'
+import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
+import type { Character, fullMerit as Merit } from 'utils/flow-types'
 
 const styles = theme => ({
   name: {
@@ -20,81 +20,68 @@ const styles = theme => ({
   categoryLine: {
     textTransform: 'capitalize',
   },
-  meritName: { ...theme.typography.caption,
+  meritName: {
+    ...theme.typography.caption,
     textTransform: 'capitalize',
   },
 })
 
-function _SingleMerit(props) {
-  const { merit, classes } = props
-
-  return <BlockPaper>
-
+type _SingleMeritProps = { merit: Merit, classes: Object }
+const _SingleMerit = ({ merit, classes }: _SingleMeritProps) => (
+  <BlockPaper>
     <Typography variant="title">
-      <RatingLine rating={ merit.rating } dontFill merit>
-        <span className={ classes.name }>
-          { merit.label || merit.merit_name }
-        </span>
-        { merit.label &&
-          <span className={ classes.meritName}>
-            &nbsp;&nbsp;({ merit.merit_name })
+      <RatingLine rating={merit.rating} dontFill merit>
+        <span className={classes.name}>{merit.label || merit.merit_name}</span>
+        {merit.label && (
+          <span className={classes.meritName}>
+            &nbsp;&nbsp;({merit.merit_name})
           </span>
-        }
+        )}
       </RatingLine>
     </Typography>
 
-    <Typography className={ classes.categoryLine } variant="caption" gutterBottom>
-      { merit.supernatural && 'Supernatural '}
-      { merit.merit_cat } Merit
+    <Typography className={classes.categoryLine} variant="caption" gutterBottom>
+      {merit.supernatural && 'Supernatural '}
+      {merit.merit_cat} Merit
     </Typography>
 
-    <Typography>
-      { merit.description }
-    </Typography>
+    <Typography>{merit.description}</Typography>
 
-    <Typography variant="caption">
-      Ref: { merit.ref }
-    </Typography>
+    <Typography variant="caption">Ref: {merit.ref}</Typography>
   </BlockPaper>
-}
-
-_SingleMerit.propTypes = {
-  merit: PropTypes.shape(fullMerit),
-  classes: PropTypes.object,
-}
+)
 export const SingleMerit = withStyles(styles)(_SingleMerit)
 
-class MeritFullPage extends Component {
-  constructor(props) {
-    super(props)
-  }
-
+type Props = { character: Character, merits: Array<Merit> }
+class MeritFullPage extends Component<Props> {
   render() {
     /* Escape hatch */
     if (this.props.character == undefined)
-      return <div>
-        <Typography paragraph>This Character has not yet loaded.</Typography>
-      </div>
+      return (
+        <div>
+          <Typography paragraph>This Character has not yet loaded.</Typography>
+        </div>
+      )
 
-    const mts = this.props.merits.map((m) =>
-      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ m.id }>
-        <SingleMerit merit={ m } />
+    const mts = this.props.merits.map(m => (
+      <Grid item xs={12} md={6} xl={4} key={m.id}>
+        <SingleMerit merit={m} />
+      </Grid>
+    ))
+
+    return (
+      <Grid container spacing={24}>
+        <Grid item hidden={{ smUp: true }} xs={12}>
+          <div style={{ height: '1em' }}>&nbsp;</div>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="headline">Merits</Typography>
+        </Grid>
+
+        {mts}
       </Grid>
     )
-
-    return <Grid container spacing={ 24 }>
-      <Grid item hidden={{ smUp: true }} xs={ 12 }>
-        <div style={{ height: '1em', }}>&nbsp;</div>
-      </Grid>
-
-      <Grid item xs={ 12 }>
-        <Typography variant="headline">
-          Merits
-        </Typography>
-      </Grid>
-
-      { mts }
-    </Grid>
   }
 }
 
@@ -112,13 +99,5 @@ function mapStateToProps(state, ownProps) {
     merits,
   }
 }
-MeritFullPage.propTypes = {
-  character: PropTypes.shape({ id: PropTypes.number.isRequired }),
-  merits: PropTypes.arrayOf(PropTypes.shape(fullMerit)),
-}
 
-export default ProtectedComponent(
-  connect(mapStateToProps)(
-    MeritFullPage
-  )
-)
+export default ProtectedComponent(connect(mapStateToProps)(MeritFullPage))

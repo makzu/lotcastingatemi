@@ -1,5 +1,5 @@
+// @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -12,23 +12,30 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
-import { getSpecificCharacter, canIEditCharacter } from '../../selectors/'
+import { getSpecificCharacter, canIEditCharacter } from 'selectors'
+import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({ //eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+const styles = theme => ({
   tabs: {
     flex: 1,
   },
-  title: {
-  },
+  title: {},
 })
 
-function CharmTab({ character, isEditing }) {
+function CharmTab({
+  character,
+  isEditing,
+}: {
+  character: Character,
+  isEditing: boolean,
+}) {
   let tabLabel = 'Charms'
   let disabled = false
 
   const tabPath = isEditing
-    ? `/characters/${ character.id }/edit/charms`
-    : `/characters/${ character.id }/charms`
+    ? `/characters/${character.id}/edit/charms`
+    : `/characters/${character.id}/charms`
 
   if (character.type == 'Character' && character.is_sorcerer) {
     tabLabel = 'Spells'
@@ -38,16 +45,20 @@ function CharmTab({ character, isEditing }) {
     tabLabel = 'Charms/Spells'
   }
 
-  return <Tab label={ tabLabel } disabled={ disabled } component={ Link } to={ tabPath } />
-}
-CharmTab.propTypes = {
-  character: PropTypes.object.isRequired,
-  isEditing: PropTypes.bool,
+  return (
+    <Tab label={tabLabel} disabled={disabled} component={Link} to={tabPath} />
+  )
 }
 
-function CharacterHeader(props) {
-  if (props.character == undefined)
-    return <GenericHeader />
+type Props = {
+  id: number,
+  character: Character,
+  path: string,
+  canIEdit: boolean,
+  classes: Object,
+}
+function CharacterHeader(props: Props) {
+  if (props.character == null) return <GenericHeader />
 
   const { id, character, path, canIEdit, classes } = props
   const editing = path.includes('/edit')
@@ -57,7 +68,7 @@ function CharacterHeader(props) {
   let editButtonPath = `/characters/${id}`
   let tabBasePath = `/characters/${id}`
 
-  if (editing){
+  if (editing) {
     tabBasePath += '/edit'
   } else {
     editButtonPath += '/edit'
@@ -70,60 +81,45 @@ function CharacterHeader(props) {
     tabValue = 2
     editButtonPath += '/charms'
   }
-  const tabs = <Tabs
-    className={ classes.tabs }
-    value={ tabValue }
-    centered
-  >
-    <Tab label="Basics" component={ Link } to={ tabBasePath } />
-    <Tab label="Merits" component={ Link } to={ tabBasePath + '/merits' } />
-    <CharmTab character={ character } isEditing={ editing } />
-  </Tabs>
+  const tabs = (
+    <Tabs className={classes.tabs} value={tabValue} centered>
+      <Tab label="Basics" component={Link} to={tabBasePath} />
+      <Tab label="Merits" component={Link} to={tabBasePath + '/merits'} />
+      <CharmTab character={character} isEditing={editing} />
+    </Tabs>
+  )
 
-  return <Fragment>
-    <Toolbar>
-      <LcaDrawerButton />
+  return (
+    <Fragment>
+      <Toolbar>
+        <LcaDrawerButton />
 
-      <Typography variant="title" color="inherit" className={ classes.title }>
-        { editing && 'Editing ' }
-        { character.name }
-      </Typography>
+        <Typography variant="title" color="inherit" className={classes.title}>
+          {editing && 'Editing '}
+          {character.name}
+        </Typography>
 
-      { canIEdit &&
-        <Button component={ Link } to={ editButtonPath } color="inherit">
-          { editing ? 'Done' : 'Edit' }
-        </Button>
-      }
-      <Hidden xsDown>
-        { tabs }
-      </Hidden>
-    </Toolbar>
+        {canIEdit && (
+          <Button component={Link} to={editButtonPath} color="inherit">
+            {editing ? 'Done' : 'Edit'}
+          </Button>
+        )}
+        <Hidden xsDown>{tabs}</Hidden>
+      </Toolbar>
 
-    <Hidden smUp>
-      { tabs }
-    </Hidden>
-  </Fragment>
-}
-CharacterHeader.propTypes = {
-  id: PropTypes.string,
-  character: PropTypes.object,
-  path: PropTypes.string,
-  canIEdit: PropTypes.bool,
-  classes: PropTypes.object,
+      <Hidden smUp>{tabs}</Hidden>
+    </Fragment>
+  )
 }
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.characterId
-  const character = getSpecificCharacter(state, id)
-  const path = ownProps.location.pathname
-
-  let canIEdit = canIEditCharacter(state, id)
 
   return {
     id,
-    character,
-    path,
-    canIEdit,
+    character: getSpecificCharacter(state, id),
+    path: ownProps.location.pathname,
+    canIEdit: canIEditCharacter(state, id),
   }
 }
 

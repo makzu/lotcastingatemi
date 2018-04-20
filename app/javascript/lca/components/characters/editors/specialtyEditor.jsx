@@ -1,49 +1,66 @@
+// @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
-import AbilitySelect from '../../generic/abilitySelect.jsx'
-import BlockPaper from '../../generic/blockPaper.jsx'
-import ListAttributeEditor, { ListAttributeFieldsPropTypes } from '../../generic/ListAttributeEditor.jsx'
-import { withIntimacies } from '../../../utils/propTypes'
-import * as calc from '../../../utils/calculated'
+import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import BlockPaper from 'components/generic/blockPaper.jsx'
 
-function SpecialtyFields({ trait, character, onChange, onBlur, onRatingChange, classes }) {
+import ListAttributeEditor, {
+  type ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
+import * as calc from 'utils/calculated'
+import type { withIntimacies as Character } from 'utils/flow-types'
+
+function SpecialtyFields(props: ListAttributeFieldTypes) {
+  const { trait, character, onChange, onBlur, onRatingChange, classes } = props
   const { ability, context } = trait
   const abilities = calc.abilitiesWithRatings(character)
-  const options = abilities.length === 0 ? [<MenuItem key="1" disabled>No Abilities with ratings &gt; 0</MenuItem>] : undefined
+  const options = [
+    <MenuItem key="1" disabled>
+      No Abilities with ratings &gt; 0
+    </MenuItem>,
+  ]
 
-  return <Fragment>
-    <AbilitySelect name="ability" value={ ability }
-      label="Ability"
-      onChange={ onRatingChange }
-      abilities={ abilities }
-      prependOptions={ options }
-    />
+  return (
+    <Fragment>
+      <AbilitySelect
+        name="ability"
+        value={ability}
+        label="Ability"
+        onChange={onRatingChange}
+        abilities={abilities}
+        prependOptions={abilities.length === 0 && options}
+      />
 
-    <TextField name="context" value={ context } className={ classes.nameField }
-      label="Specialty" margin="dense"
-      onChange={ onChange } onBlur={ onBlur }
-    />
-  </Fragment>
+      <TextField
+        name="context"
+        value={context}
+        className={classes.nameField}
+        label="Specialty"
+        margin="dense"
+        onChange={onChange}
+        onBlur={onBlur}
+      />
+    </Fragment>
+  )
 }
-SpecialtyFields.propTypes = ListAttributeFieldsPropTypes
 
-const SpecialtyEditor = ({ character, onRatingChange }) => {
-  return <BlockPaper>
-    <ListAttributeEditor label="Specialties"
-      character={ character } trait="specialties"
-      Fields={ SpecialtyFields }
-      newObject={{ context: 'New Specialty', ability: '' }}
-      onChange={ onRatingChange }
-    />
-  </BlockPaper>
-}
-SpecialtyEditor.propTypes = {
-  character: PropTypes.shape(withIntimacies),
-  onRatingChange: PropTypes.func,
+type Props = { character: Character, onRatingChange: Function }
+const SpecialtyEditor = ({ character, onRatingChange }: Props) => {
+  return (
+    <BlockPaper>
+      <ListAttributeEditor
+        label="Specialties"
+        character={character}
+        trait="specialties"
+        Fields={SpecialtyFields}
+        newObject={{ context: 'New Specialty', ability: '' }}
+        onChange={onRatingChange}
+      />
+    </BlockPaper>
+  )
 }
 
 export default SpecialtyEditor

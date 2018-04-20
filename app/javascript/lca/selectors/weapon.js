@@ -1,3 +1,4 @@
+// @flow
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
@@ -63,7 +64,7 @@ export const getPoolsForWeapon = createCachedSelector(
 )((state, id) => id)
 
 // This is absurd
-export const sortByParry = (weaponA, weaponB) => {
+export const sortByParry = (weaponA: Object, weaponB: Object) => {
   const parryA = weaponA.parry
   const parryB = weaponB.parry
   const specialtiesA =

@@ -13,7 +13,13 @@ exports[`ResourcesPage renders at all 1`] = `
     className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
     href="https://www.reddit.com/r/exalted/comments/4yby39/madletters_charm_cascades_version_3_including/"
   >
-    Charm Cascades and other resources by MadLetter (On Reddit)
+    Solar / Martial Arts Charm Cascades and other resources by MadLetter (Reddit)
+  </a>
+  <a
+    className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
+    href="https://www.reddit.com/r/exalted/comments/8barde/madletters_dragonblooded_cascades/"
+  >
+    Dragon-Blooded Charm Cascades by MadLetter (Reddit)
   </a>
   <a
     className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
@@ -25,7 +31,7 @@ exports[`ResourcesPage renders at all 1`] = `
     className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"
     href="http://forum.theonyxpath.com/forum/main-category/exalted/1180122-ex3-social-system-cheat-sheet-and-flowchart"
   >
-    Social system cheat sheet by Redthorn (Opp Forums)
+    Social system cheat sheet by Redthorn (OPP Forums)
   </a>
   <a
     className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-paragraph-47"

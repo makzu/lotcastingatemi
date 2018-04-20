@@ -1,5 +1,5 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Divider from 'material-ui/Divider'
@@ -16,121 +16,125 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateChronicle } from 'ducks/actions.js'
 import {
-  getSpecificChronicle, getPlayersForChronicle,
-  getStorytellerForChronicle, amIStOfChronicle,
+  getSpecificChronicle,
+  getPlayersForChronicle,
+  getStorytellerForChronicle,
+  amIStOfChronicle,
 } from 'selectors'
+import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
 
-class ChroniclePlayerPage extends Component {
+type Props = {
+  id: number,
+  st: Object,
+  is_st: boolean,
+  players: Array<Object>,
+  characters: Array<Character>,
+  qcs: Array<fullQc>,
+  battlegroups: Array<Battlegroup>,
+  chronicle: Object,
+  updateChronicle: Function,
+}
+class ChroniclePlayerPage extends Component<Props, { name?: string }> {
   constructor(props) {
     super(props)
-    this.state = { }
-
-    this.onChange = this.onChange.bind(this)
-    this.onBlur = this.onBlur.bind(this)
+    this.state = {}
   }
 
   static getDerivedStateFromProps(props) {
     const { chronicle } = props
-    if (chronicle === undefined || chronicle.st_id === undefined)
-      return null
+    if (chronicle === undefined || chronicle.st_id === undefined) return null
     return { name: chronicle.name }
   }
 
-  onChange(e) {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  onBlur(e) {
-    const { chronicle, update } = this.props
-    update(chronicle.id, e.target.name, e.target.value)
+  onBlur = e => {
+    const { chronicle, updateChronicle } = this.props
+    updateChronicle(chronicle.id, e.target.name, e.target.value)
   }
 
   render() {
     /* Escape hatch */
-    if (this.props.chronicle == undefined || this.props.chronicle.st_id == undefined)
-      return <BlockPaper>
-        <Typography paragraph>This Chronicle has not yet loaded.</Typography>
-      </BlockPaper>
+    if (
+      this.props.chronicle == undefined ||
+      this.props.chronicle.st_id == undefined
+    )
+      return (
+        <BlockPaper>
+          <Typography paragraph>This Chronicle has not yet loaded.</Typography>
+        </BlockPaper>
+      )
 
     const { chronicle, st, is_st, players } = this.props
     const { onChange, onBlur } = this
 
-    const playerList = players.map((p) =>
-      <Fragment key={ p.id }>
+    const playerList = players.map(p => (
+      <Fragment key={p.id}>
         <Typography>
-          { p.display_name }&nbsp;&nbsp;
-          { is_st &&
-            <RemovePlayerPopup chronicleId={ chronicle.id } playerId={ p.id } />
-          }
+          {p.display_name}&nbsp;&nbsp;
+          {is_st && (
+            <RemovePlayerPopup chronicleId={chronicle.id} playerId={p.id} />
+          )}
         </Typography>
         <Divider />
       </Fragment>
-    )
-    return <Grid container spacing={ 24 }>
-      <Grid item hidden={{ smUp: true }} xs={ 12 }>
-        <div style={{ height: '1.0em', }}>&nbsp;</div>
-      </Grid>
+    ))
+    return (
+      <Grid container spacing={24}>
+        <Grid item hidden={{ smUp: true }} xs={12}>
+          <div style={{ height: '1.0em' }}>&nbsp;</div>
+        </Grid>
 
-      <Grid item xs={ 12 }>
-        <Typography variant="headline">
-          Players
-          { is_st &&
-            <ChronicleInvitePopup chronicleId={ chronicle.id } />
-          }
-        </Typography>
-      </Grid>
-
-      <Grid item xs={ 12 }>
-        <BlockPaper>
-          <Typography variant="subheading" gutterBottom>
-            Storyteller: { st.display_name }
+        <Grid item xs={12}>
+          <Typography variant="headline">
+            Players
+            {is_st && <ChronicleInvitePopup chronicleId={chronicle.id} />}
           </Typography>
+        </Grid>
 
-          <Divider />
-
-          { playerList }
-          { !is_st &&
-            <div style={{ marginTop: '1em' }}>
-              <ChronicleLeavePopup chronicleId={ chronicle.id } />
-            </div>
-          }
-        </BlockPaper>
-      </Grid>
-
-      { is_st &&
-        <Grid item xs={ 12 }>
+        <Grid item xs={12}>
           <BlockPaper>
-            <Typography variant="subheading">
-              ST Controls
+            <Typography variant="subheading" gutterBottom>
+              Storyteller: {st.display_name}
             </Typography>
 
-            <div>
-              <TextField name="name" value={ this.state.name }
-                label="Chronicle Name"
-                style={{ width: '30em' }}
-                onChange={ onChange } onBlur={ onBlur }
-              />
-            </div>
-            <div style={{ marginTop: '1em' }}>
-              <ChronicleDeletePopup chronicleId={ chronicle.id }/>
-            </div>
+            <Divider />
+
+            {playerList}
+            {!is_st && (
+              <div style={{ marginTop: '1em' }}>
+                <ChronicleLeavePopup chronicleId={chronicle.id} />
+              </div>
+            )}
           </BlockPaper>
         </Grid>
-      }
-    </Grid>
-  }
-}
 
-ChroniclePlayerPage.propTypes = {
-  id: PropTypes.string,
-  st: PropTypes.object,
-  is_st: PropTypes.bool,
-  players: PropTypes.arrayOf(PropTypes.object),
-  characters: PropTypes.arrayOf(PropTypes.object),
-  qcs: PropTypes.arrayOf(PropTypes.object),
-  battlegroups: PropTypes.arrayOf(PropTypes.object),
-  chronicle: PropTypes.object,
-  update: PropTypes.func,
+        {is_st && (
+          <Grid item xs={12}>
+            <BlockPaper>
+              <Typography variant="subheading">ST Controls</Typography>
+
+              <div>
+                <TextField
+                  name="name"
+                  value={this.state.name}
+                  label="Chronicle Name"
+                  style={{ width: '30em' }}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                />
+              </div>
+              <div style={{ marginTop: '1em' }}>
+                <ChronicleDeletePopup chronicleId={chronicle.id} />
+              </div>
+            </BlockPaper>
+          </Grid>
+        )}
+      </Grid>
+    )
+  }
 }
 
 function mapStateToProps(state, ownProps) {
@@ -145,12 +149,6 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  update: (id, trait, value) => dispatch(updateChronicle(id, trait, value)),
-})
-
 export default ProtectedComponent(
-  connect(mapStateToProps, mapDispatchToProps)(
-    ChroniclePlayerPage
-  )
+  connect(mapStateToProps, { updateChronicle })(ChroniclePlayerPage)
 )

@@ -6,6 +6,7 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { mergeStateWithNormalizedEntities } from '.'
 import * as schemas from './_schemas.js'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 
 export const FETCH = 'lca/player/FETCH'
 export const FETCH_SUCCESS = 'lca/player/FETCH_SUCCESS'
@@ -14,9 +15,9 @@ export const PLY_UPDATE = 'lca/player/UPDATE'
 export const PLY_UPDATE_SUCCESS = 'lca/player/UPDATE_SUCCESS'
 export const PLY_UPDATE_FAILURE = 'lca/player/UPDATE_FAILURE'
 
-export default function reducer(state: Object, action: Object) {
-  const _id = action.payload != undefined ? action.payload.id : null
-  const _trait = action.meta != undefined ? action.meta.trait : null
+export default (state: EntityState, action: Object) => {
+  let _id
+  let _trait
   let _entities
 
   switch (action.type) {
@@ -25,6 +26,8 @@ export default function reducer(state: Object, action: Object) {
       return mergeStateWithNormalizedEntities(state, _entities)
 
     case PLY_UPDATE:
+      _id = action.payload.id
+      _trait = action.meta.trait
       return {
         ...state,
         players: {

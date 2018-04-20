@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -11,14 +12,14 @@ import Typography from 'material-ui/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
-import { getSpecificChronicle, amIStOfChronicle } from '../../selectors/'
+import { getSpecificChronicle, amIStOfChronicle } from 'selectors'
 
-const styles = theme => ({ //eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+const styles = theme => ({
   tabs: {
     flex: 1,
   },
-  title: {
-  },
+  title: {},
 })
 
 function ChronicleHeader(props) {
@@ -29,35 +30,34 @@ function ChronicleHeader(props) {
   const tabBasePath = `/chronicles/${chronicle.id}`
 
   let tabValue = 0
-  if (path.includes('/players'))
-    tabValue = 1
+  if (path.includes('/players')) tabValue = 1
 
-  const tabs = <Tabs
-    className={ classes.tabs }
-    value={ tabValue }
-    centered
-  >
-    <Tab label="Characters" component={ Link } to={ tabBasePath } />
-    <Tab label={ props.is_st ? 'ST' : 'Players' } component={ Link } to={ tabBasePath + '/players' } />
-  </Tabs>
+  const tabs = (
+    <Tabs className={classes.tabs} value={tabValue} centered>
+      <Tab label="Characters" component={Link} to={tabBasePath} />
+      <Tab
+        label={props.is_st ? 'ST' : 'Players'}
+        component={Link}
+        to={tabBasePath + '/players'}
+      />
+    </Tabs>
+  )
 
-  return <div>
-    <Toolbar>
-      <LcaDrawerButton />
+  return (
+    <div>
+      <Toolbar>
+        <LcaDrawerButton />
 
-      <Typography variant="title" color="inherit" className={ classes.title }>
-        { chronicle.name }
-      </Typography>
+        <Typography variant="title" color="inherit" className={classes.title}>
+          {chronicle.name}
+        </Typography>
 
-      <Hidden xsDown>
-        { tabs }
-      </Hidden>
-    </Toolbar>
+        <Hidden xsDown>{tabs}</Hidden>
+      </Toolbar>
 
-    <Hidden smUp>
-      { tabs }
-    </Hidden>
-  </div>
+      <Hidden smUp>{tabs}</Hidden>
+    </div>
+  )
 }
 ChronicleHeader.propTypes = {
   id: PropTypes.string,

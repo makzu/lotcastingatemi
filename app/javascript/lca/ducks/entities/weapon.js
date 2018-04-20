@@ -1,6 +1,7 @@
 // @flow
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 
 const WEP_CREATE = 'lca/weapon/CREATE'
 const WEP_CREATE_SUCCESS = 'lca/weapon/CREATE_SUCCESS'
@@ -12,7 +13,7 @@ const WEP_DESTROY = 'lca/weapon/DESTROY'
 const WEP_DESTROY_SUCCESS = 'lca/weapon/DESTROY_SUCCESS'
 const WEP_DESTROY_FAILURE = 'lca/weapon/DESTROY_FAILURE'
 
-export default (state: Object, action: Object) => {
+export default (state: EntityState, action: Object) => {
   // Optimistic update
   if (action.type === WEP_UPDATE) {
     return {

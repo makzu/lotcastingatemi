@@ -1,5 +1,6 @@
+// @flow
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
+
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
@@ -11,10 +12,15 @@ import Dialog, {
 } from 'material-ui/Dialog'
 import Delete from '@material-ui/icons/Delete'
 
-import { destroyChronicle } from '../../ducks/actions.js'
-import { getSpecificChronicle } from '../../selectors'
+import { destroyChronicle } from 'ducks/actions.js'
+import { getSpecificChronicle } from 'selectors'
 
-class ChronicleLeavePopup extends Component {
+type Props = {
+  chronicleId: number,
+  chronicleName: string,
+  destroyChronicle: Function,
+}
+class ChronicleLeavePopup extends Component<Props, { open: boolean }> {
   constructor(props) {
     super(props)
 
@@ -26,16 +32,15 @@ class ChronicleLeavePopup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({ open: true })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false })
   }
 
-
-  handleSubmit() {
+  handleSubmit = () => {
     this.setState({ open: false })
     this.props.destroyChronicle(this.props.chronicleId)
   }
@@ -44,35 +49,28 @@ class ChronicleLeavePopup extends Component {
     const { handleOpen, handleClose, handleSubmit } = this
     const { chronicleName } = this.props
 
-    return <Fragment>
-      <Button onClick={ handleOpen }>
-        Delete Chronicle
-        &nbsp;<Delete />
-      </Button>
+    return (
+      <Fragment>
+        <Button onClick={handleOpen}>
+          Delete Chronicle &nbsp;<Delete />
+        </Button>
 
-      <Dialog
-        open={ this.state.open }
-        onClose={ handleClose }
-      >
-        <DialogTitle>Delete { chronicleName }?</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            This cannot be undone!
-          </DialogContentText>
-        </DialogContent>
+        <Dialog open={this.state.open} onClose={handleClose}>
+          <DialogTitle>Delete {chronicleName}?</DialogTitle>
+          <DialogContent>
+            <DialogContentText>This cannot be undone!</DialogContentText>
+          </DialogContent>
 
-        <DialogActions>
-          <Button onClick={ handleClose }>Cancel</Button>
-          <Button onClick={ handleSubmit } variant="raised" color="primary">Delete</Button>
-        </DialogActions>
-      </Dialog>
-    </Fragment>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSubmit} variant="raised" color="primary">
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    )
   }
-}
-ChronicleLeavePopup.propTypes = {
-  chronicleId: PropTypes.number.isRequired,
-  chronicleName: PropTypes.string,
-  destroyChronicle: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -88,12 +86,6 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    destroyChronicle: (chronicleId) => {
-      dispatch(destroyChronicle(chronicleId))
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChronicleLeavePopup)
+export default connect(mapStateToProps, { destroyChronicle })(
+  ChronicleLeavePopup
+)

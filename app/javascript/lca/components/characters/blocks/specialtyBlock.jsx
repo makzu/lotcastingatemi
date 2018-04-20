@@ -1,12 +1,12 @@
+// @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 
-import BlockPaper from '../../generic/blockPaper.jsx'
-import { withSpecialties } from '../../../utils/propTypes'
+import BlockPaper from 'components/generic/blockPaper.jsx'
+import type { withSpecialties } from 'utils/flow-types'
 
 const styles = theme => ({
   specialtyWrap: {
@@ -14,41 +14,38 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit / 2,
     marginTop: theme.spacing.unit / 2,
   },
-  specialtyAbility: { ...theme.typography.body1,
+  specialtyAbility: {
+    ...theme.typography.body1,
     textTransform: 'capitalize',
     width: '7em',
   },
-  specialtyContext: { ...theme.typography.body1,
+  specialtyContext: {
+    ...theme.typography.body1,
     flex: 1,
-  }
+  },
 })
 
-function FullSpecialtyBlock({ character, classes }) {
-  const spec = character.specialties.map((s) =>
+type Props = { character: withSpecialties, classes: Object }
+function FullSpecialtyBlock({ character, classes }: Props) {
+  const spec = character.specialties.map(s => (
     <Fragment key={s.ability + s.context}>
-      <div className={ classes.specialtyWrap }>
-        <div className={ classes.specialtyAbility }>
-          { s.ability === 'martial_arts' ? 'Martial Arts' : s.ability }
+      <div className={classes.specialtyWrap}>
+        <div className={classes.specialtyAbility}>
+          {s.ability === 'martial_arts' ? 'Martial Arts' : s.ability}
         </div>
-        <div className={ classes.specialtyContext }>
-          { s.context }
-        </div>
+        <div className={classes.specialtyContext}>{s.context}</div>
       </div>
       <Divider />
     </Fragment>
+  ))
+
+  return (
+    <BlockPaper>
+      <Typography variant="title">Specialties</Typography>
+
+      {spec}
+    </BlockPaper>
   )
-
-  return <BlockPaper>
-    <Typography variant="title">
-      Specialties
-    </Typography>
-
-    { spec }
-  </BlockPaper>
-}
-FullSpecialtyBlock.propTypes = {
-  character: PropTypes.shape(withSpecialties).isRequired,
-  classes: PropTypes.object,
 }
 
 export default withStyles(styles)(FullSpecialtyBlock)

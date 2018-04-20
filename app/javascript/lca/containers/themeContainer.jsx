@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
@@ -7,7 +7,7 @@ import green from 'material-ui/colors/green'
 import lightgreen from 'material-ui/colors/lightGreen'
 import teal from 'material-ui/colors/teal'
 
-import { switchTheme } from '../ducks/actions.js'
+import { switchTheme } from 'ducks/actions.js'
 
 /* When changing these colors, it's also important to change the theme_color
  * entries in /config/favicon.json from #2e7d32 to the new value,
@@ -25,26 +25,22 @@ const themeCommon = {
 const themes = {
   light: createMuiTheme({
     palette: {
-      primary: { main: green[800], },
-      secondary: { main: lightgreen[400], },
+      primary: { main: green[800] },
+      secondary: { main: lightgreen[400] },
     },
     ...themeCommon,
   }),
   dark: createMuiTheme({
     palette: {
-      primary: { main: green[900], },
-      secondary: { main: teal[400], },
+      primary: { main: green[900] },
+      secondary: { main: teal[400] },
       type: 'dark',
     },
     ...themeCommon,
-  })
+  }),
 }
-
-class ThemeContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.handleStorageChange = this.handleStorageChange.bind(this)
-  }
+type Props = { theme: string, children: Node, switchTheme: Function }
+class ThemeContainer extends Component<Props> {
   componentDidMount() {
     window.addEventListener('storage', this.handleStorageChange)
   }
@@ -52,9 +48,8 @@ class ThemeContainer extends Component {
     window.removeEventListener('storage', this.handleStorageChange)
   }
 
-  handleStorageChange(e) {
-    if (e.key != 'theme')
-      return
+  handleStorageChange = e => {
+    if (e.key != 'theme') return
 
     this.props.switchTheme(e.newValue)
   }
@@ -62,28 +57,8 @@ class ThemeContainer extends Component {
   render() {
     const { theme, children } = this.props
 
-    return <MuiThemeProvider theme={ themes[theme] }>
-      { children }
-    </MuiThemeProvider>
+    return <MuiThemeProvider theme={themes[theme]}>{children}</MuiThemeProvider>
   }
 }
-
-ThemeContainer.propTypes = {
-  theme: PropTypes.string,
-  children: PropTypes.node,
-  switchTheme: PropTypes.func,
-}
-
-function mapStateToProps(state) {
-  return {
-    theme: state.app.theme,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    switchTheme: (theme) => dispatch(switchTheme(theme))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ThemeContainer)
+const mapStateToProps = state => ({ theme: state.app.theme })
+export default connect(mapStateToProps, { switchTheme })(ThemeContainer)

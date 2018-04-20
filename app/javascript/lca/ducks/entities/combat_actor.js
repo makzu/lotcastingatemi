@@ -1,6 +1,7 @@
 // @flow
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
+import type { EntityState } from './'
 
 const CA_CREATE = 'lca/combat_actor/CREATE'
 const CA_CREATE_SUCCESS = 'lca/combat_actor/CREATE_SUCCESS'
@@ -12,7 +13,7 @@ const CA_DESTROY = 'lca/combat_actor/DESTROY'
 const CA_DESTROY_SUCCESS = 'lca/combat_actor/DESTROY_SUCCESS'
 const CA_DESTROY_FAILURE = 'lca/combat_actor/DESTROY_FAILURE'
 
-export default (state: Object, action: Object) => {
+export default (state: EntityState, action: Object) => {
   // Optimistic update
   if (action.type === CA_UPDATE) {
     return {

@@ -1,5 +1,5 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
@@ -11,15 +11,38 @@ import CharmDisplay from './CharmDisplay.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
 
-import ProtectedComponent from '../../../containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import {
-  getSpecificCharacter, getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter, getEvocationsForCharacter,
-  getSpellsForCharacter, getSpiritCharmsForCharacter,
-} from '../../../selectors/'
+  getSpecificCharacter,
+  getNativeCharmsForCharacter,
+  getMartialArtsCharmsForCharacter,
+  getEvocationsForCharacter,
+  getSpellsForCharacter,
+  getSpiritCharmsForCharacter,
+} from 'selectors'
+import type { Character, Charm, Spell } from 'utils/flow-types'
 
-class CharmFullPage extends Component {
-  constructor(props) {
+type Props = {
+  character: Character,
+  nativeCharms: Array<Charm>,
+  martialArtsCharms: Array<Charm>,
+  evocations: Array<Charm>,
+  spells: Array<Spell>,
+  spiritCharms: Array<Charm>,
+  classes: Object,
+}
+type State = {
+  filtersOpen: boolean,
+  abilityFilter: string,
+  styleFilter: string,
+  artifactFilter: string,
+  circleFilter: string,
+  categoryFilter: Array<string>,
+  openCharm: number | null,
+  openSpell: number | null,
+}
+class CharmFullPage extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -38,36 +61,47 @@ class CharmFullPage extends Component {
     this.setOpenSpell = this.setOpenSpell.bind(this)
   }
 
-  toggleFiltersOpen() {
+  toggleFiltersOpen = () => {
     this.setState({ filtersOpen: !this.state.filtersOpen })
   }
 
-  setFilter(e) {
+  setFilter = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  setOpenCharm(charm) {
-    return (e, expanded) => this.setState({ openCharm: expanded ? charm : null })
-  }
+  setOpenCharm = charm => (e, expanded) =>
+    this.setState({ openCharm: expanded ? charm : null })
 
-  setOpenSpell(spell) {
-    return (e, expanded) => this.setState({ openSpell: expanded ? spell : null })
-  }
+  setOpenSpell = spell => (e, expanded) =>
+    this.setState({ openSpell: expanded ? spell : null })
 
   render() {
     /* Escape hatch */
     if (this.props.character == undefined)
-      return <div>
-        <Typography paragraph>This Character has not yet loaded.</Typography>
-      </div>
+      return (
+        <div>
+          <Typography paragraph>This Character has not yet loaded.</Typography>
+        </div>
+      )
 
     const {
-      character, nativeCharms, martialArtsCharms, evocations,
-      spiritCharms, spells, classes
+      character,
+      nativeCharms,
+      martialArtsCharms,
+      evocations,
+      spiritCharms,
+      spells,
+      classes,
     } = this.props
     const {
-      abilityFilter, categoryFilter, styleFilter, artifactFilter, circleFilter,
-      openCharm, openSpell, filtersOpen,
+      abilityFilter,
+      categoryFilter,
+      styleFilter,
+      artifactFilter,
+      circleFilter,
+      openCharm,
+      openSpell,
+      filtersOpen,
     } = this.state
     const { toggleFiltersOpen, setFilter, setOpenCharm, setOpenSpell } = this
 
@@ -77,17 +111,16 @@ class CharmFullPage extends Component {
       filteredSpirit = spiritCharms,
       filteredSpells = spells
 
-    const filterByCategory = (charm) => (
-      categoryFilter.every((cat) => charm.categories.includes(cat))
-    )
+    const filterByCategory = charm =>
+      categoryFilter.every(cat => charm.categories.includes(cat))
     if (abilityFilter !== '')
-      filteredNatives = filteredNatives.filter((c) => c.ability === abilityFilter)
+      filteredNatives = filteredNatives.filter(c => c.ability === abilityFilter)
     if (styleFilter !== '')
-      filteredMA = filteredMA.filter((c) => c.style === styleFilter)
+      filteredMA = filteredMA.filter(c => c.style === styleFilter)
     if (artifactFilter !== '')
-      filteredEvo = filteredEvo.filter((c) => c.artifact_name === artifactFilter)
+      filteredEvo = filteredEvo.filter(c => c.artifact_name === artifactFilter)
     if (circleFilter !== '')
-      filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
+      filteredSpells = filteredSpells.filter(c => c.circle === circleFilter)
     if (categoryFilter.length > 0) {
       filteredNatives = filteredNatives.filter(filterByCategory)
       filteredMA = filteredMA.filter(filterByCategory)
@@ -96,128 +129,155 @@ class CharmFullPage extends Component {
       filteredSpells = filteredSpells.filter(filterByCategory)
     }
 
-    const natives = filteredNatives.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character }
-          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+    const natives = filteredNatives.map(c => (
+      <Grid item xs={12} md={6} xl={4} key={c.id}>
+        <CharmDisplay
+          charm={c}
+          character={character}
+          openCharm={openCharm}
+          onOpenChange={setOpenCharm}
         />
       </Grid>
-    )
-    const maCharms = filteredMA.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character }
-          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+    ))
+    const maCharms = filteredMA.map(c => (
+      <Grid item xs={12} md={6} xl={4} key={c.id}>
+        <CharmDisplay
+          charm={c}
+          character={character}
+          openCharm={openCharm}
+          onOpenChange={setOpenCharm}
         />
       </Grid>
-    )
-    const evo = filteredEvo.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character }
-          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+    ))
+    const evo = filteredEvo.map(c => (
+      <Grid item xs={12} md={6} xl={4} key={c.id}>
+        <CharmDisplay
+          charm={c}
+          character={character}
+          openCharm={openCharm}
+          onOpenChange={setOpenCharm}
         />
       </Grid>
-    )
-    const spirit = filteredSpirit.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <CharmDisplay charm={ c } character={ character }
-          openCharm={ openCharm } onOpenChange={ setOpenCharm }
+    ))
+    const spirit = filteredSpirit.map(c => (
+      <Grid item xs={12} md={6} xl={4} key={c.id}>
+        <CharmDisplay
+          charm={c}
+          character={character}
+          openCharm={openCharm}
+          onOpenChange={setOpenCharm}
         />
       </Grid>
-    )
-    const spl = filteredSpells.map((c) =>
-      <Grid item xs={ 12 } md={ 6 } xl={ 4 } key={ c.id }>
-        <SpellDisplay spell={ c } character={ character }
-          openSpell={ openSpell } onOpenChange={ setOpenSpell }
+    ))
+    const spl = filteredSpells.map(c => (
+      <Grid item xs={12} md={6} xl={4} key={c.id}>
+        <SpellDisplay
+          spell={c}
+          character={character}
+          openSpell={openSpell}
+          onOpenChange={setOpenSpell}
         />
       </Grid>
-    )
+    ))
 
-    return <Grid container spacing={ 24 }>
-      <Grid item hidden={{ smUp: true }} xs={ 12 }>
-        <div style={{ height: '1em', }}>&nbsp;</div>
+    return (
+      <Grid container spacing={24}>
+        <Grid item hidden={{ smUp: true }} xs={12}>
+          <div style={{ height: '1em' }}>&nbsp;</div>
+        </Grid>
+
+        {character.type !== 'Character' && (
+          <Grid item xs={12} className={classes.stickyHeader}>
+            <Typography variant="headline">
+              Charms
+              <CharmFilter
+                id={character.id}
+                charmType="native"
+                currentAbility={abilityFilter}
+                currentCategory={categoryFilter}
+                open={filtersOpen}
+                toggleOpen={toggleFiltersOpen}
+                onChange={setFilter}
+              />
+            </Typography>
+          </Grid>
+        )}
+        {natives}
+
+        {martialArtsCharms.length > 0 && (
+          <Grid item xs={12} className={classes.stickyHeader}>
+            <Typography variant="headline">
+              Martial Arts
+              <CharmFilter
+                id={character.id}
+                charmType="martial_arts"
+                currentAbility={styleFilter}
+                currentCategory={categoryFilter}
+                open={filtersOpen}
+                toggleOpen={toggleFiltersOpen}
+                onChange={setFilter}
+              />
+            </Typography>
+          </Grid>
+        )}
+        {maCharms}
+
+        {evocations.length > 0 && (
+          <Grid item xs={12} className={classes.stickyHeader}>
+            <Typography variant="headline">
+              Evocations
+              <CharmFilter
+                id={character.id}
+                charmType="evocation"
+                currentAbility={artifactFilter}
+                currentCategory={categoryFilter}
+                open={filtersOpen}
+                toggleOpen={toggleFiltersOpen}
+                onChange={setFilter}
+              />
+            </Typography>
+          </Grid>
+        )}
+        {evo}
+
+        {spiritCharms.length > 0 && (
+          <Grid item xs={12} className={classes.stickyHeader}>
+            <Typography variant="headline">
+              Spirit Charms
+              <CharmFilter
+                id={character.id}
+                charmType="spirit"
+                currentAbility={''}
+                currentCategory={categoryFilter}
+                open={filtersOpen}
+                toggleOpen={toggleFiltersOpen}
+                onChange={setFilter}
+              />
+            </Typography>
+          </Grid>
+        )}
+        {spirit}
+
+        {(spells.length > 0 || character.is_sorcerer) && (
+          <Grid item xs={12} className={classes.stickyHeader}>
+            <Typography variant="headline">
+              Spells
+              <CharmFilter
+                id={character.id}
+                charmType="spell"
+                currentAbility={circleFilter}
+                currentCategory={categoryFilter}
+                open={filtersOpen}
+                toggleOpen={toggleFiltersOpen}
+                onChange={setFilter}
+              />
+            </Typography>
+          </Grid>
+        )}
+        {spl}
       </Grid>
-
-      { character.type !== 'Character' &&
-        <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">
-            Charms
-            <CharmFilter id={ character.id } charmType="native"
-              currentAbility={ abilityFilter } currentCategory={ categoryFilter }
-              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-              onChange={ setFilter }
-            />
-          </Typography>
-        </Grid>
-      }
-      { natives }
-
-      { martialArtsCharms.length > 0 &&
-        <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">
-            Martial Arts
-            <CharmFilter id={ character.id } charmType="martial_arts"
-              currentAbility={ styleFilter } currentCategory={ categoryFilter }
-              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-              onChange={ setFilter }
-            />
-          </Typography>
-        </Grid>
-      }
-      { maCharms }
-
-      { evocations.length > 0 &&
-        <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">
-            Evocations
-            <CharmFilter id={ character.id } charmType="evocation"
-              currentAbility={ artifactFilter } currentCategory={ categoryFilter }
-              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-              onChange={ setFilter }
-            />
-          </Typography>
-        </Grid>
-      }
-      { evo }
-
-      { spiritCharms.length > 0 &&
-        <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">
-            Spirit Charms
-            <CharmFilter id={ character.id } charmType="spirit"
-              currentAbility={ '' } currentCategory={ categoryFilter }
-              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-              onChange={ setFilter }
-            />
-          </Typography>
-        </Grid>
-      }
-      { spirit }
-
-      { (spells.length > 0 || character.is_sorcerer) &&
-        <Grid item xs={ 12 } className={ classes.stickyHeader }>
-          <Typography variant="headline">
-            Spells
-            <CharmFilter id={ character.id } charmType="spell"
-              currentAbility={ circleFilter } currentCategory={ categoryFilter }
-              open={ filtersOpen } toggleOpen={ toggleFiltersOpen }
-              onChange={ setFilter }
-            />
-          </Typography>
-        </Grid>
-      }
-      { spl }
-
-    </Grid>
+    )
   }
-}
-CharmFullPage.propTypes = {
-  character: PropTypes.object,
-  nativeCharms: PropTypes.arrayOf(PropTypes.object),
-  martialArtsCharms: PropTypes.arrayOf(PropTypes.object),
-  evocations: PropTypes.arrayOf(PropTypes.object),
-  spells: PropTypes.arrayOf(PropTypes.object),
-  spiritCharms: PropTypes.arrayOf(PropTypes.object),
-  classes: PropTypes.object,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -249,9 +309,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(
-    connect(mapStateToProps)(
-      CharmFullPage
-    )
-  )
+  withStyles(styles)(connect(mapStateToProps)(CharmFullPage))
 )

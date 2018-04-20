@@ -1,6 +1,8 @@
-import commonStyles from '../../../styles'
+// @flow
 
-const styles = theme => ({
+import commonStyles from 'styles'
+
+const styles = (theme: Object) => ({
   ...commonStyles(theme),
   summaryWrap: {
     position: 'relative',
@@ -20,14 +22,13 @@ const styles = theme => ({
     marginBottom: '-20px',
   },
   expandedEditSummary: {
-    marginBottom: '-60px'
+    marginBottom: '-60px',
   },
-  meritName: { ...theme.typography.caption,
+  meritName: {
+    ...theme.typography.caption,
     textTransform: 'capitalize',
   },
-  maStyleLine: {
-
-  },
+  maStyleLine: {},
   charmBody: {
     whiteSpace: 'pre-line',
   },

@@ -1,49 +1,69 @@
+// @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
-import ListAttributeEditor, { ListAttributeFieldsPropTypes } from '../../generic/ListAttributeEditor.jsx'
-import RatingField from '../../generic/RatingField.jsx'
-import { fullChar } from '../../../utils/propTypes'
+import ListAttributeEditor, {
+  type ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import type { Character } from 'utils/flow-types'
 
-function CommitFields({ trait, onChange, onBlur, onRatingChange, classes }) {
+function CommitFields(props: ListAttributeFieldTypes) {
+  const { trait, onChange, onBlur, onRatingChange, classes } = props
   const { pool, label, motes } = trait
 
-  return <Fragment>
-    <TextField select name="pool" value={ pool } className={ classes.withMargin }
-      label="Pool" margin="dense"
-      onChange={ onRatingChange }
-    >
-      <MenuItem value="personal">Pers</MenuItem>
-      <MenuItem value="peripheral">Peri</MenuItem>
-    </TextField>
+  return (
+    <Fragment>
+      <TextField
+        select
+        name="pool"
+        value={pool}
+        className={classes.withMargin}
+        label="Pool"
+        margin="dense"
+        onChange={onRatingChange}
+      >
+        <MenuItem value="personal">Pers</MenuItem>
+        <MenuItem value="peripheral">Peri</MenuItem>
+      </TextField>
 
-    <TextField name="label" value={ label } className={ classes.nameField }
-      label="For" margin="dense"
-      onChange={ onChange } onBlur={ onBlur }
-    />
+      <TextField
+        name="label"
+        value={label}
+        className={classes.nameField}
+        label="For"
+        margin="dense"
+        onChange={onChange}
+        onBlur={onBlur}
+      />
 
-    <RatingField trait="motes" value={ motes }
-      label="Motes" min={ 0 } margin="dense" narrow
-      onChange={ onRatingChange }
-    />
-  </Fragment>
+      <RatingField
+        trait="motes"
+        value={motes}
+        label="Motes"
+        min={0}
+        margin="dense"
+        narrow
+        onChange={onRatingChange}
+      />
+    </Fragment>
+  )
 }
-CommitFields.propTypes = ListAttributeFieldsPropTypes
 
-const MoteCommittmentEditor = ({ character, onChange }) => {
-  return <ListAttributeEditor label="Mote Committments"
-    character={ character } trait="motes_committed"
-    Fields={ CommitFields }
-    newObject={{ pool: 'peripheral', label: '', motes: 0 }}
-    onChange={ onChange }
-  />
-}
-MoteCommittmentEditor.propTypes = {
-  character: PropTypes.shape(fullChar),
-  onChange: PropTypes.func
+type Props = { character: Character, onChange: Function }
+const MoteCommittmentEditor = ({ character, onChange }: Props) => {
+  return (
+    <ListAttributeEditor
+      label="Mote Committments"
+      character={character}
+      trait="motes_committed"
+      Fields={CommitFields}
+      newObject={{ pool: 'peripheral', label: '', motes: 0 }}
+      onChange={onChange}
+    />
+  )
 }
 
 export default MoteCommittmentEditor

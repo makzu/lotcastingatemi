@@ -1,6 +1,6 @@
 // @flow
 import { createSelector } from 'reselect'
-import { sortOrderSort } from '../utils'
+import { sortOrderSort } from 'utils'
 
 const entities = state => state.entities.current
 

@@ -22,7 +22,7 @@ module Api
       def update
         authorize @player
         if @player.update(player_params)
-          render json: @player
+          render json: @player, include: []
         else
           render json: @player.errors.details, status: :bad_request
         end

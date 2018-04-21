@@ -38,7 +38,7 @@ module Api
         authorize @chronicle, :update?
         @chronicle.regenerate_invite_code
         if @chronicle.save
-          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+          render json: @chronicle, include: []
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -135,7 +135,7 @@ module Api
       def update
         authorize @chronicle
         if @chronicle.update(chronicle_params)
-          render json: @chronicle
+          render json: @chronicle, include: []
         else
           render json: @chronicle.errors.details, status: :bad_request
         end

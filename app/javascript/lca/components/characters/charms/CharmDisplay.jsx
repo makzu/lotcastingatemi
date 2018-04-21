@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from 'material-ui/styles'
@@ -70,12 +69,7 @@ export const CharmSummaryBlock = ({ charm, isOpen, classes }: BlockProps) => (
   </Collapse>
 )
 
-type dProps = {
-  charm: Charm,
-  openCharm: number,
-  onOpenChange: Function,
-  classes: Object,
-}
+type dProps = Props & { openCharm: number, onOpenChange: Function }
 function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
   const isOpen = openCharm === charm.id
   return (
@@ -135,11 +129,5 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
       </ExpansionPanelDetails>
     </ExpansionPanel>
   )
-}
-CharmDisplay.propTypes = {
-  charm: PropTypes.object.isRequired,
-  openCharm: PropTypes.number,
-  onOpenChange: PropTypes.func.isRequired,
-  classes: PropTypes.object,
 }
 export default withStyles(styles)(CharmDisplay)

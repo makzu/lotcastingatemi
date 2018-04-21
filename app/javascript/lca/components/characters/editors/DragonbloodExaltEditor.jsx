@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
@@ -62,9 +61,4 @@ function DragonbloodExaltEditor({
     </BlockPaper>
   )
 }
-DragonbloodExaltEditor.propTypes = {
-  character: PropTypes.object.isRequired,
-  onRatingChange: PropTypes.func,
-}
-
 export default DragonbloodExaltEditor

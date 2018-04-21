@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
@@ -50,11 +49,4 @@ function LimitEditor({
     </BlockPaper>
   )
 }
-LimitEditor.propTypes = {
-  character: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  onRatingChange: PropTypes.func.isRequired,
-}
-
 export default LimitEditor

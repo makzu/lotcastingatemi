@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import {
   SortableContainer,
   SortableElement,
@@ -23,15 +22,6 @@ const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={e => e.preventDefault()} />
 ))
 
-// TODO: fully replace with ListAttributeFieldTypes
-export const ListAttributeFieldsPropTypes = {
-  characater: PropTypes.object,
-  trait: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  onRatingChange: PropTypes.func.isRequired,
-  classes: PropTypes.object,
-}
 export type ListAttributeFieldTypes = {
   character: Object,
   trait: Object,

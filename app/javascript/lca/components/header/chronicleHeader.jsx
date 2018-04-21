@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -22,7 +21,14 @@ const styles = theme => ({
   title: {},
 })
 
-function ChronicleHeader(props) {
+type Props = {
+  id: number,
+  chronicle: Object,
+  path: string,
+  is_st: boolean,
+  classes: Object,
+}
+function ChronicleHeader(props: Props) {
   if (props.chronicle == undefined || props.chronicle.name == undefined)
     return <GenericHeader />
 
@@ -58,13 +64,6 @@ function ChronicleHeader(props) {
       <Hidden smUp>{tabs}</Hidden>
     </div>
   )
-}
-ChronicleHeader.propTypes = {
-  id: PropTypes.string,
-  chronicle: PropTypes.object,
-  path: PropTypes.string,
-  is_st: PropTypes.bool,
-  classes: PropTypes.object,
 }
 
 function mapStateToProps(state, ownProps) {

@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 
@@ -27,7 +26,13 @@ const styles = theme => ({
   },
 })
 
-function RatingDots(props) {
+type Props = {
+  rating: number,
+  fillTo?: number,
+  dontFill?: boolean,
+  classes: Object,
+}
+function RatingDots(props: Props) {
   const emptyCount = (props.fillTo || 5) - props.rating
 
   const fc = new Array(props.rating).fill('●')
@@ -56,12 +61,4 @@ function RatingDots(props) {
     </div>
   )
 }
-
-RatingDots.propTypes = {
-  rating: PropTypes.number.isRequired,
-  fillTo: PropTypes.number,
-  dontFill: PropTypes.bool,
-  classes: PropTypes.object,
-}
-
 export default withStyles(styles)(RatingDots)

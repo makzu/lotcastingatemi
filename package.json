@@ -34,7 +34,6 @@
     "postcss-loader": "^2.0.5",
     "postcss-smart-import": "^0.7.4",
     "precss": "^3.1.0",
-    "prop-types": "^15.6.1",
     "rails-erb-loader": "^5.0.1",
     "re-reselect": "^2.0.0",
     "react": "^16.3.2",

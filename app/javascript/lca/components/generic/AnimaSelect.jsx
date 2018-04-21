@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
@@ -23,9 +22,5 @@ const AnimaSelect = ({ character, onChange }: Props) => {
       <MenuItem value={3}>Bonfire</MenuItem>
     </TextField>
   )
-}
-AnimaSelect.propTypes = {
-  character: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 }
 export default AnimaSelect

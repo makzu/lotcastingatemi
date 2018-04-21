@@ -1,6 +1,5 @@
 // @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -69,10 +68,6 @@ function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
     </Fragment>
   )
 }
-_SingleCharm.propTypes = {
-  charm: PropTypes.object,
-  classes: PropTypes.object,
-}
 const SingleCharm = withStyles(styles)(_SingleCharm)
 
 function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
@@ -94,10 +89,6 @@ function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
       <Divider />
     </Fragment>
   )
-}
-_SingleSpell.propTypes = {
-  spell: PropTypes.object,
-  classes: PropTypes.object,
 }
 const SingleSpell = withStyles(styles)(_SingleSpell)
 

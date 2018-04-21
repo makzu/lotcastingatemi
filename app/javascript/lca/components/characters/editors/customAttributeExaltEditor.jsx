@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { FormControlLabel } from 'material-ui/Form'
 import Switch from 'material-ui/Switch'
@@ -103,12 +102,4 @@ function CustomAttributeExaltEditor({
     </BlockPaper>
   )
 }
-CustomAttributeExaltEditor.propTypes = {
-  character: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  onRatingChange: PropTypes.func.isRequired,
-  onCheck: PropTypes.func.isRequired,
-}
-
 export default CustomAttributeExaltEditor

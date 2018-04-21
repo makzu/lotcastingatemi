@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import { MenuItem } from 'material-ui/Menu'
@@ -137,12 +136,4 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
     </BlockPaper>
   )
 }
-MotePoolEditor.propTypes = {
-  character: PropTypes.object.isRequired,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onRatingChange: PropTypes.func.isRequired,
-  classes: PropTypes.object,
-}
-
 export default withStyles(styles)(MotePoolEditor)

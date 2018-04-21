@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { sample } from 'lodash'
 import Typography from 'material-ui/Typography'
 
@@ -38,8 +37,4 @@ class ErrorBoundary extends React.Component<Props, State> {
     return this.props.children
   }
 }
-ErrorBoundary.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
 export default ErrorBoundary

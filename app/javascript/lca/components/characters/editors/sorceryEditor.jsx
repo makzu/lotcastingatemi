@@ -1,6 +1,5 @@
 // @flow
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
@@ -81,12 +80,4 @@ function SorceryEditor(props: Props) {
     </BlockPaper>
   )
 }
-SorceryEditor.propTypes = {
-  character: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  onCheck: PropTypes.func.isRequired,
-  onRatingChange: PropTypes.func.isRequired,
-}
-
 export default SorceryEditor

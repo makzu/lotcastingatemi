@@ -14,6 +14,6 @@ class PlayerSerializer < ActiveModel::Serializer
   # We only really need the ID for Chronicles, as each Chronicle will be fetched
   #   later by the client anyway.
   class ChronicleSerializer < ActiveModel::Serializer
-    attribute :id
+    attributes :id, :st_id, :name
   end
 end

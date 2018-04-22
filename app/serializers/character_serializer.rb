@@ -42,7 +42,7 @@ class CharacterSerializer < ActiveModel::Serializer
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   attribute :player_id
-  attribute :chronicle_id?
+  attribute :chronicle_id
 
   has_many :merits
   has_many :weapons

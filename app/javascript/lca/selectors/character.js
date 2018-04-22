@@ -208,4 +208,4 @@ export const canIEditCharacter = createSelector(
   (doI, amI) => doI || amI
 )
 
-export const canIDeleteCharacter = createSelector([doIOwnCharacter], doI => doI)
+export const canIDeleteCharacter = doIOwnCharacter

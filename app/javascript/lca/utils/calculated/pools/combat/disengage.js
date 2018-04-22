@@ -13,7 +13,7 @@ export function disengage(
     bonus = [{ label: 'fleet of foot', bonus: 1 }]
   if (character.type !== 'Character' && character.caste === 'water')
     bonus = bonus.concat([
-      { label: 'sx/3m anima', bonus: 1, situational: true },
+      { label: 'sux/3m anima', bonus: 1, situational: true },
     ])
 
   const penalty = [

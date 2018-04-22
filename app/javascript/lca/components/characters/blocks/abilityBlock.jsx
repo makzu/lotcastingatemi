@@ -201,7 +201,7 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
     ))
   const groupA = line(ABILITY_NAMES.slice(0, 5))
   const groupB = line(ABILITY_NAMES.slice(6, 12))
-  const groupC = line(ABILITY_NAMES.slice(7, 26))
+  const groupC = line(ABILITY_NAMES.slice(13, 26))
 
   return (
     <BlockPaper>

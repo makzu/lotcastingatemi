@@ -49,7 +49,7 @@ function IntimacyFields({
         <Checkbox
           name="hidden"
           checked={hidden}
-          value={hidden}
+          value={(hidden || false).toString()}
           onChange={onRatingChange}
         />
       </div>

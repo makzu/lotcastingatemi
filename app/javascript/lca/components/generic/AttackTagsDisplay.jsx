@@ -8,7 +8,9 @@ const style = { marginTop: '0.25em' }
 
 type Props = { pool: Object }
 const AttackTagsDisplay = ({ pool }: Props) => {
-  const { specialAttacks } = pool
+  let { specialAttacks } = pool
+  specialAttacks = specialAttacks || []
+
   const showFire = pool.attack === 'decisive' && specialAttacks.includes('fire')
   const showDisarming =
     specialAttacks.includes('disarming') || specialAttacks.includes('water')

@@ -43,7 +43,7 @@
     "react-router-dom": "^4.1.1",
     "react-select": "^1.2.1",
     "react-sortable-hoc": "^0.6.8",
-    "redux": "^3.6.0",
+    "redux": "^4.0.0",
     "redux-api-middleware": "^2.2.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-optimistic-ui": "^3.1.0",
@@ -53,7 +53,7 @@
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^7.0.1",
     "scroll-to-element": "^2.0.0",
-    "style-loader": "^0.20.0",
+    "style-loader": "^0.21.0",
     "webpack": "^3.6.0",
     "webpack-manifest-plugin": "^2.0.0",
     "webpack-merge": "^4.1.0"

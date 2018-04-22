@@ -1,4 +1,4 @@
-## v48
+## v47
 ###### *Apr 22, 2018*
 - Basic Excellency support for Dragon-Blooded exalts. This shows dice adding only - it does not include automatic success adders or any other bonuses. Ratings including Athletics, etc will be slightly off. This will be corrected in future updates
 - Elemental Bolt Attack is now supported as a weapon. Add 'elemental bolt' and the specific aspect as tags to get correct range, tags, and bonuses calculated
@@ -16,7 +16,6 @@
 - Flow type checking has been added to every JS and JSX file, which should hopefully prevent certain types of bugs in the future
 - Improved automated test coverage
 - Bug fixes
-- v47 sealed by order of the Maiden of Secrets
 
 ## v46
 ###### *Apr 14, 2018*

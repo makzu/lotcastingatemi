@@ -7677,7 +7677,7 @@ re-reselect@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/re-reselect/-/re-reselect-2.0.0.tgz#594193f073ff80e90887d7a96251ba97e044720b"
 
-react-dom@^16.3.0:
+react-dom@^16.3.2:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.2.tgz#cb90f107e09536d683d84ed5d4888e9640e0e4df"
   dependencies:
@@ -7695,7 +7695,7 @@ react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
-react-hot-loader@^4.0.1:
+react-hot-loader@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.1.1.tgz#693499a6414b6dc6880287e254322a9d3155e944"
   dependencies:

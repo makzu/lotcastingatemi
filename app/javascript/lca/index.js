@@ -1,6 +1,4 @@
 /* eslint-disable no-undef */
-require('react-hot-loader/patch')
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'

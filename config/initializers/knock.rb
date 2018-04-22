@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Knock.setup do |config|
+  # Use Rails 5.2 Credentials instead of 5.1 Secrets:
+  # https://github.com/nsarno/knock/issues/205
+  config.token_secret_signature_key = -> { Rails.application.credentials.read }
+
   ## Expiration claim
   ## ----------------
   ##
@@ -8,7 +12,7 @@ Knock.setup do |config|
   ## last forever.
   ##
   ## Default:
-  # config.token_lifetime = 1.day
+  config.token_lifetime = 1.week
 
   ## Audience claim
   ## --------------

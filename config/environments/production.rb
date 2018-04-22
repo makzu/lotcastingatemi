@@ -21,12 +21,14 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  # This is the new Rails 5.2 way
+  config.require_master_key = true
 
   # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
   # Requires an encryption key in `ENV['RAILS_MASTER_KEY']` or
   # `config/secrets.yml.key`.
-  config.read_encrypted_secrets = true
+  # This is the old Rails 5.1 way
+  # config.read_encrypted_secrets = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.

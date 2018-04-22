@@ -103,6 +103,9 @@ const AttackTagsDisplay = ({ pool }: Props) => {
       {specialAttacks.includes('powerful') && (
         <DialogContentText style={style}>
           Powerful: At close range, deals damage like a heavy weapon.
+          {pool.powerfulDamage > 0 && (
+            <span> ({pool.powerfulDamage} damage)</span>
+          )}
           <Typography variant="caption">tag: core p.590</Typography>
         </DialogContentText>
       )}
@@ -134,6 +137,13 @@ const AttackTagsDisplay = ({ pool }: Props) => {
             {specialAttacks.includes('earth') && ' wfhw preview 4 p.26, '}
             tag: core p.586
           </Typography>
+        </DialogContentText>
+      )}
+
+      {specialAttacks.includes('subtle') && (
+        <DialogContentText style={style}>
+          Subtle: This weapon does not do any damage.
+          <Typography variant="caption">tag: core p.586</Typography>
         </DialogContentText>
       )}
 

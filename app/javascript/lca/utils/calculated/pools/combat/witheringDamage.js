@@ -28,17 +28,19 @@ function weaponDamageBonus(weapon: fullWeapon) {
 
 export function witheringDamage(character: Character, weapon: fullWeapon) {
   const damage = weaponDamageBonus(weapon)
-  const powDamage = weaponDamageBonus({ ...weapon, weight: 'heavy' })
   let _attr = weapon.damage_attr
   let attrRating = attr(character, _attr)
 
   let bonus = []
+  let specialAttacks = []
   let b = 0
+  let powDamage
 
   if (weapon.tags.includes('subtle')) {
-    bonus = bonus.concat([{ label: 'subtle' }])
+    bonus = bonus.concat([{ label: 'subtle', noFull: true }])
     _attr = 'subtle'
     attrRating = 0
+    specialAttacks = specialAttacks.concat(['subtle'])
   } else if (weapon.tags.includes('flame')) {
     bonus = bonus.concat([{ label: 'flame', noFull: true }])
     _attr = 'flame'
@@ -56,6 +58,13 @@ export function witheringDamage(character: Character, weapon: fullWeapon) {
     bonus = bonus.concat([{ label: 'shield', bonus: -2 }])
     b -= 2
   }
+  if (weapon.tags.includes('powerful')) {
+    specialAttacks = specialAttacks.concat(['powerful'])
+    powDamage =
+      attrRating + weaponDamageBonus({ ...weapon, weight: 'heavy' }) + b
+  }
+  if (weapon.tags.includes('poisonable'))
+    specialAttacks = specialAttacks.concat(['poisonable'])
 
   return {
     name: weapon.name + ' Withering Damage',
@@ -67,7 +76,7 @@ export function witheringDamage(character: Character, weapon: fullWeapon) {
     totalPenalty: -b,
     total: attrRating + damage + b,
     minimum: weaponOverwhelming(character, weapon),
-    specialAttacks: weapon.tags.includes('poisonable') ? ['poisonable'] : [],
+    specialAttacks: specialAttacks,
     bonus: bonus,
   }
 }

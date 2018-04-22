@@ -11,6 +11,7 @@ const supportedTags = [
   'piercing',
   'poisonable',
   'smashing',
+  'subtle',
   'two-handed',
   'powerful',
   'slow',

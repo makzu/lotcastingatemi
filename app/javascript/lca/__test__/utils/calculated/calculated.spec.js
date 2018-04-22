@@ -86,6 +86,7 @@ describe('Calculated values', () => {
       tags: [],
       ability: 'melee',
       attr: 'dexterity',
+      damage_attr: 'strength',
     }
     const mockPenalty = { wound: 0 }
     const medium = { ...light, weight: 'medium' }
@@ -112,20 +113,20 @@ describe('Calculated values', () => {
     expect(calc.witheringAttack(mockChar, hvyA, mockPenalty).total).toEqual(6)
 
     // $FlowThisIsOkayISwear
-    expect(calc.weaponDamage(mockChar, light)).toEqual(9)
+    expect(calc.witheringDamage(mockChar, light).total).toEqual(9)
     // $FlowThisIsOkayISwear
-    expect(calc.weaponDamage(mockChar, shield)).toEqual(9)
+    expect(calc.witheringDamage(mockChar, shield).total).toEqual(9)
     // $FlowThisIsOkayISwear
-    expect(calc.weaponDamage(mockChar, heavy)).toEqual(13)
+    expect(calc.witheringDamage(mockChar, heavy).total).toEqual(13)
 
     // $FlowThisIsOkayISwear
-    expect(calc.weaponDamage(mockChar, lightA)).toEqual(12)
+    expect(calc.witheringDamage(mockChar, lightA).total).toEqual(12)
     // $FlowThisIsOkayISwear
-    expect(calc.weaponDamage(mockChar, medA)).toEqual(14)
+    expect(calc.witheringDamage(mockChar, medA).total).toEqual(14)
     // $FlowThisIsOkayISwear
-    expect(calc.weaponDamage(mockChar, hvyA)).toEqual(16)
+    expect(calc.witheringDamage(mockChar, hvyA).total).toEqual(16)
 
     // $FlowThisIsOkayISwear
-    expect(calc.weaponOverwhelming(light)).toEqual(1)
+    expect(calc.weaponOverwhelming(mockChar, light)).toEqual(1)
   })
 })

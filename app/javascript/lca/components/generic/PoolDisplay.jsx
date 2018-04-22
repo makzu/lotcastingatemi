@@ -8,6 +8,8 @@ import Dialog, {
 } from 'material-ui/Dialog'
 import { withStyles } from 'material-ui/styles'
 
+import AttackTagsDisplay from './AttackTagsDisplay.jsx'
+
 const styles = theme => ({
   root: {},
   label: {
@@ -86,13 +88,16 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
         {m.label}
       </div>
     ))
-    const fullMerits = mb.map(m => (
+    const fullMerits = mb.filter(m => !m.noFull).map(m => (
       <div key={m.label}>
-        {m.situational && '(conditional) '}
+        {m.situational && (
+          <span className={classes.excellency}>(conditional)</span>
+        )}
         {m.bonus > 0 && '+'}
         {m.bonus !== 0 && m.bonus} {m.label}
       </div>
     ))
+
     const fullPen = pen.map(
       p =>
         p.penalty > 0 ? (
@@ -119,7 +124,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                 &nbsp;+{pool.excellency}/{pool.excellencyCost}m
               </span>
             )}
-            {pool.minimum && (
+            {pool.minimum > 0 && (
               <span className={classes.excellency}>
                 &nbsp;min {pool.minimum}
               </span>
@@ -135,11 +140,12 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
             <div className={classes.specialty}>+1 specialty</div>
           )}
         </div>
+
         <Dialog open={open} onClose={setClosed}>
           <DialogTitle>{pool.name} Summary</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Total: <strong>{pool.total}</strong>
+              Total: <span className={classes.pool}>{pool.total}</span>
               {pool.excellency > 0 && (
                 <span>
                   &nbsp;&nbsp;&nbsp; Can add up to {pool.excellency}&nbsp;
@@ -157,48 +163,58 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
 
             {pool.attribute && (
               <DialogContentText style={{ textTransform: 'capitalize' }}>
-                (
+                {pool.ability && '('}
                 {pool.attribute} {pool.attributeRating}
                 {pool.ability && (
                   <span>
                     {' '}
-                    + {pool.ability} {pool.abilityRating}
+                    + {pool.ability} {pool.abilityRating})
                   </span>
                 )}
-                )
-                {pool.name.endsWith('Withering Attack') && (
-                  <span> + {pool.accuracy} from weapon</span>
+                {pool.attack === 'withering' && (
+                  <span> + {pool.accuracy} weapon accuracy</span>
                 )}
-                {pool.witheringDamage && (
-                  <span> + {pool.weaponDamage} from weapon</span>
+                {pool.weaponDamage > 0 && (
+                  <span> + {pool.weaponDamage} weapon damage</span>
                 )}
                 {pool.rating && ' /2'}
-                {pool.parry && <span> + {pool.defense} from weapon</span>}
-                {pool.raw && <span> = {pool.raw}</span>}
+                {pool.parry && <span> + {pool.defense} weapon defense</span>}
+                {pool.raw > 0 && <span> = {pool.raw}</span>}
               </DialogContentText>
             )}
-            {pool.witheringDamage && (
+
+            {pool.damageType && (
               <DialogContentText>
-                + Threshhold Successes<br />
-                - Enemy Soak<br />
-                Minimum {pool.minimum}
+                Attacks will deal {pool.damageType} damage
               </DialogContentText>
             )}
+
             {pool.soak && (
               <DialogContentText>
                 {pool.natural} Natural
                 {pool.armored > 0 && <span> + {pool.armored} from Armor</span>}
               </DialogContentText>
             )}
-            {fullMerits.length > 0 && (
+
+            {pool.totalPenalty > 0 && (
+              <DialogContentText>
+                -{pool.totalPenalty} Penalties
+              </DialogContentText>
+            )}
+
+            <AttackTagsDisplay pool={pool} />
+
+            {fullMerits.length + fullPen.length > 0 && (
               <DialogContentText
                 component="div"
                 style={{ textTransform: 'capitalize', marginTop: '0.5em' }}
               >
-                <div>Bonuses:</div>
+                <div>Bonuses / Penalties:</div>
                 {fullMerits}
+                {fullPen}
               </DialogContentText>
             )}
+
             {sp.length > 0 && (
               <DialogContentText component="div" style={{ marginTop: '0.5em' }}>
                 Specialties:&nbsp;
@@ -223,12 +239,19 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                 )}
               </DialogContentText>
             )}
-            {pen.length > 0 && (
-              <DialogContentText
-                style={{ textTransform: 'capitalize', marginTop: '0.5em' }}
-              >
-                Penalties:<br />
-                {fullPen}
+
+            {pool.witheringDamage && (
+              <DialogContentText component="div">
+                <div>
+                  Add Threshhold Successes from the attack roll to get Raw
+                  Damage
+                </div>
+                <div>
+                  Subtract enemy soak from Raw Damage to get your total
+                  withering damage pool
+                </div>
+                Minimum pool
+                <span className={classes.pool}> {pool.minimum}</span>
               </DialogContentText>
             )}
           </DialogContent>

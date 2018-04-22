@@ -1,6 +1,9 @@
 ## v47
 ###### *Not yet released*
-- Basic Excellency support for Dragon-Blooded exalts. This shows dice adding only - it does not include automatic success adders or any other bonuses. Ratings including Athletics, etc will be slightly off
+- Basic Excellency support for Dragon-Blooded exalts. This shows dice adding only - it does not include automatic success adders or any other bonuses. Ratings including Athletics, etc will be slightly off. This will be corrected in future updates
+- Elemental Bolt Attack can be created as a light Artifact Thrown or Archery weapon and the 'elemental bolt' tag
+- Added support for other weapon tags like balanced
+- Attributes/Abilities with Excellencies now show a * symbol on the character sheet
 - Soak and Hardness ratings now factor in Twilight caste and Earth and Fire aspect anima powers
 - Withdraw/Disengage ratings now factor in Water aspect anima powers
 - Resolve ratings now take Well-Bred and Thin-Blooded into account

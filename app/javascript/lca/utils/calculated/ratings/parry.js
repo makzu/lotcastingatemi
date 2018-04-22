@@ -1,6 +1,6 @@
 // @flow
 import rating from './_rating.js'
-import { weaponIsRanged } from '../_weapons.js'
+import { weaponIsRanged } from '../weapons'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
 export function weaponDefenseBonus(weapon: fullWeapon) {
@@ -43,7 +43,8 @@ export function parry(
     ...rat,
     defense: weaponDefenseBonus(weapon),
     raw: rawRating,
-    shield: weapon.tags.includes('shield') || weapon.tags.includes('Shield'),
+    shield: weapon.tags.includes('shield'),
+    bonus: weapon.tags.includes('shield') ? [{ label: 'shield' }] : [],
     total: Math.max(rawRating - penalty, 0),
     parry: true,
   }

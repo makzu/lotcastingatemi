@@ -38,6 +38,9 @@ Metrics/AbcSize:
 Metrics/LineLength:
   IgnoreCopDirectives: true
 
+Metrics/MethodLength:
+  Max: 15
+
 Naming/FileName:
   Exclude:
     - 'Gemfile'

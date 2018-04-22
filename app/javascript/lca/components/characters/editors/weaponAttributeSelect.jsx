@@ -73,6 +73,9 @@ function WeaponAttributeSelect(props: Props) {
         Perception ({character.attr_perception})
       </MenuItem>
       <MenuItem value="wits">Wits ({character.attr_wits})</MenuItem>
+      {damage && (
+        <MenuItem value="essence">Essence ({character.essence})</MenuItem>
+      )}
     </TextField>
   )
 }

@@ -1,11 +1,10 @@
 // @flow
 export * from './_battlegroups.js'
 export * from './_qcs.js'
-export * from './_weapons.js'
 export * from './excellencies'
-
 export * from './pools'
 export * from './ratings'
+export * from './weapons'
 
 import { capitalize, includes } from 'lodash'
 import {
@@ -18,7 +17,7 @@ import {
 import type { Character } from '../flow-types'
 
 export const attr = (character: Character, attribute: string) =>
-  character[`attr_${attribute}`]
+  attribute === 'essence' ? character.essence : character[`attr_${attribute}`]
 export const abil = (character: Character, ability: string) => {
   let abil
   if (ability.startsWith('martial arts')) {

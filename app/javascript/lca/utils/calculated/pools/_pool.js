@@ -3,14 +3,22 @@ import { abil, attr, specialtiesFor } from '..'
 import { maxExcellency } from '../excellencies'
 import type { Character } from 'utils/flow-types'
 
+export type PoolBonus = {
+  label: string,
+  situational?: boolean,
+  noFull?: boolean,
+  bonus: number,
+}
+
 export default function pool(
   name: string,
   character: Character,
   attribute: string,
   ability: string,
-  bonus: Array<Object>,
+  bonus: Array<PoolBonus>,
   penalties: Array<Object>,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
+  specialAttacks?: Array<string> = []
 ) {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)
@@ -50,6 +58,8 @@ export default function pool(
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt,
     penalties: penalties.filter(p => p.penalty > 0),
+    totalPenalty: penalty,
     total: Math.max(pool + mb - penalty, 0),
+    specialAttacks: specialAttacks,
   }
 }

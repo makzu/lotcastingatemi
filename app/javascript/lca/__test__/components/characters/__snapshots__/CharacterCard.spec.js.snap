@@ -395,9 +395,11 @@ exports[`CharacterCard works for Solars 1`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -427,9 +429,11 @@ exports[`CharacterCard works for Solars 1`] = `
           "rating": true,
           "raw": 2,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 2,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -488,9 +492,11 @@ exports[`CharacterCard works for Solars 1`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -517,9 +523,11 @@ exports[`CharacterCard works for Solars 1`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -991,9 +999,11 @@ exports[`CharacterCard works for Solars 2`] = `
           ],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 2,
         }
       }
       staticRating={true}
@@ -1032,9 +1042,11 @@ exports[`CharacterCard works for Solars 2`] = `
           "rating": true,
           "raw": 1,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 2,
         }
       }
       staticRating={true}
@@ -1115,9 +1127,11 @@ exports[`CharacterCard works for Solars 2`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -1149,9 +1163,11 @@ exports[`CharacterCard works for Solars 2`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -1693,9 +1709,11 @@ exports[`CharacterCard works for Solars 3`] = `
           ],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 4,
         }
       }
       staticRating={true}
@@ -1730,9 +1748,11 @@ exports[`CharacterCard works for Solars 3`] = `
           "rating": true,
           "raw": 4,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -1813,9 +1833,11 @@ exports[`CharacterCard works for Solars 3`] = `
           ],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -1847,9 +1869,11 @@ exports[`CharacterCard works for Solars 3`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -2346,9 +2370,11 @@ exports[`CharacterCard works for Solars 4`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 2,
         }
       }
       staticRating={true}
@@ -2383,9 +2409,11 @@ exports[`CharacterCard works for Solars 4`] = `
           "rating": true,
           "raw": 3,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 2,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -2461,9 +2489,11 @@ exports[`CharacterCard works for Solars 4`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 4,
+          "totalPenalty": -1,
         }
       }
       staticRating={true}
@@ -2490,9 +2520,11 @@ exports[`CharacterCard works for Solars 4`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 3,
+          "totalPenalty": -1,
         }
       }
       staticRating={true}
@@ -3083,9 +3115,11 @@ exports[`CharacterCard works for Solars 5`] = `
           ],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 4,
         }
       }
       staticRating={true}
@@ -3124,9 +3158,11 @@ exports[`CharacterCard works for Solars 5`] = `
           "rating": true,
           "raw": 1,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 4,
         }
       }
       staticRating={true}
@@ -3186,9 +3222,11 @@ exports[`CharacterCard works for Solars 5`] = `
           ],
           "rating": true,
           "raw": 4,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 3,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -3220,9 +3258,11 @@ exports[`CharacterCard works for Solars 5`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -3534,9 +3574,11 @@ exports[`CharacterCard works for mortals 1`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -3566,9 +3608,11 @@ exports[`CharacterCard works for mortals 1`] = `
           "rating": true,
           "raw": 2,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 2,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -3627,9 +3671,11 @@ exports[`CharacterCard works for mortals 1`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -3656,9 +3702,11 @@ exports[`CharacterCard works for mortals 1`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -3989,9 +4037,11 @@ exports[`CharacterCard works for mortals 2`] = `
           ],
           "rating": true,
           "raw": 1,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -4026,9 +4076,11 @@ exports[`CharacterCard works for mortals 2`] = `
           "rating": true,
           "raw": 2,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -4088,9 +4140,11 @@ exports[`CharacterCard works for mortals 2`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -4122,9 +4176,11 @@ exports[`CharacterCard works for mortals 2`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -4513,9 +4569,11 @@ exports[`CharacterCard works for mortals 3`] = `
           ],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 5,
         }
       }
       staticRating={true}
@@ -4554,9 +4612,11 @@ exports[`CharacterCard works for mortals 3`] = `
           "rating": true,
           "raw": 3,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 4,
         }
       }
       staticRating={true}
@@ -4633,9 +4693,11 @@ exports[`CharacterCard works for mortals 3`] = `
           ],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -4667,9 +4729,11 @@ exports[`CharacterCard works for mortals 3`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -5018,9 +5082,11 @@ exports[`CharacterCard works for mortals 4`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 2,
+          "totalPenalty": 0,
         }
       }
       staticRating={true}
@@ -5050,9 +5116,11 @@ exports[`CharacterCard works for mortals 4`] = `
           "rating": true,
           "raw": 3,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 4,
+          "totalPenalty": -1,
         }
       }
       staticRating={true}
@@ -5107,9 +5175,11 @@ exports[`CharacterCard works for mortals 4`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 4,
+          "totalPenalty": -1,
         }
       }
       staticRating={true}
@@ -5136,9 +5206,11 @@ exports[`CharacterCard works for mortals 4`] = `
           "penalties": Array [],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 3,
+          "totalPenalty": -1,
         }
       }
       staticRating={true}
@@ -5566,9 +5638,11 @@ exports[`CharacterCard works for mortals 5`] = `
           ],
           "rating": true,
           "raw": 3,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -5607,9 +5681,11 @@ exports[`CharacterCard works for mortals 5`] = `
           "rating": true,
           "raw": 1,
           "shield": false,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -5669,9 +5745,11 @@ exports[`CharacterCard works for mortals 5`] = `
           ],
           "rating": true,
           "raw": 4,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 3,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}
@@ -5703,9 +5781,11 @@ exports[`CharacterCard works for mortals 5`] = `
           ],
           "rating": true,
           "raw": 2,
+          "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 1,
+          "totalPenalty": 1,
         }
       }
       staticRating={true}

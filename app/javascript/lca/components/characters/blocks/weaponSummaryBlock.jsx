@@ -38,6 +38,9 @@ const styles = theme => ({
     textTransform: 'capitalize',
     overflow: 'hidden',
   },
+  artifactLabel: {
+    ...theme.typography.caption,
+  },
   poolBlock: {
     margin: theme.spacing.unit,
     marginLeft: 0,
@@ -135,6 +138,12 @@ function _WeaponLine({ weapon, weaponPools, classes }: WeaponLineProps) {
       />
     )
   }
+  let artifactLabel
+  if (weapon.is_artifact && !weapon.tags.includes('elemental bolt'))
+    artifactLabel = <div className={classes.artifactLabel}>Artifact</div>
+  else if (weapon.tags.includes('elemental bolt'))
+    artifactLabel = <div className={classes.artifactLabel}>Elemental Bolt</div>
+
   return (
     <div className={classes.container}>
       <div className={classes.name}>
@@ -142,6 +151,7 @@ function _WeaponLine({ weapon, weaponPools, classes }: WeaponLineProps) {
           <span className={classes.labelSpan}>Name</span>
         </div>
         {weapon.name}
+        {artifactLabel}
       </div>
 
       {attackLine}

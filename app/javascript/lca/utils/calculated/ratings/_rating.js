@@ -48,8 +48,10 @@ export default function rating(
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt * 2,
     penalties: penalties.filter(p => p.penalty > 0),
+    totalPenalty: penalty,
     total: Math.max(Math.ceil(pool / 2) - penalty, 0),
     bonus: bonus,
     rating: true,
+    specialAttacks: [],
   }
 }

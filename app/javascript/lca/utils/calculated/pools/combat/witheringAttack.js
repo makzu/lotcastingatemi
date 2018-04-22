@@ -1,6 +1,6 @@
 // @flow
 import decisiveAttack from './decisiveAttack.js'
-import { weaponAccuracyBonus } from '../../_weapons.js'
+import { weaponAccuracyBonus } from '../../weapons'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
 export function witheringAttack(
@@ -20,6 +20,8 @@ export function witheringAttack(
     accuracy: accuracy,
     raw: rawPool,
     total: Math.max(rawPool - penalties.wound, 0),
+    attack: 'withering',
+    damageType: undefined,
   }
 }
 

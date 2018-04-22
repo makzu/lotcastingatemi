@@ -54,9 +54,17 @@ const WelcomePage = () => (
         </Typography>
 
         <Typography>
-          Mortal Characters and Solar Exalts are fully tracked, but for the
-          impatient, Custom Attribute, Ability, and Essence exalt types are also
-          supported.
+          Supports Solar and Dragon-Blooded Exalts and Mortal Characters, with
+          automatic tracking of Caste/Aspect/Favored Abilities, and
+          Excellencies. Or forge your own path with Custom Attribute, Ability,
+          or Essence Exalt types.
+        </Typography>
+
+        <Typography>
+          Bonuses and penalties from a growing list of merits, flaws, and
+          control spells are automatically included in dice pools. Nearly every
+          weapon tag is supported, even for esoteric weapons like The Burning
+          Name and Elemental Bolt Attack.
         </Typography>
       </BlockPaper>
     </Grid>
@@ -75,7 +83,9 @@ const WelcomePage = () => (
         <Typography>
           Quick characters and Battlegroups are also fully supported, giving you
           full stat blocks for antagonists and any Command, Familiar, or
-          Retainer merits you may need stats for.
+          Retainer merits you may need stats for. Size, drill, might, and morale
+          bonuses for Battlegroups are automatically factored into the relevant
+          pools.
         </Typography>
       </BlockPaper>
     </Grid>
@@ -107,7 +117,9 @@ const WelcomePage = () => (
         <Typography>
           Don&apos;t want to spoil a surprise? Mark a Character as Hidden and
           only the owner and Storyteller will be able to see it until the time
-          is right.
+          is right. You can also hide individual Principles and Ties on your
+          sheet to control exactly how much of a mysterious stranger your
+          character is.
         </Typography>
       </BlockPaper>
     </Grid>

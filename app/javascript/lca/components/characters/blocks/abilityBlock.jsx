@@ -56,8 +56,7 @@ function _AbilityLine({
         <span className={classes.abilityFavored}>
           {excellency && ' *'}
           {supernal && ' (s)'}
-          {caste && !supernal && !character.aspect && ' (c)'}
-          {caste && character.aspect && ' (a)'}
+          {caste && !supernal && (character.aspect ? ' (a)' : ' (c)')}
           {favored && ' (f)'}
         </span>
       </RatingLine>
@@ -96,7 +95,7 @@ function _CraftAbilityLine({
         <span className={classes.abilityFavored}>
           {excellency && ' *'}
           {supernal && ' (s)'}
-          {caste && !supernal && ' (c)'}
+          {caste && !supernal && (character.aspect ? ' (a)' : ' (c)')}
           {favored && ' (f)'}
         </span>
       </RatingLine>
@@ -136,7 +135,7 @@ function _MartialArtsAbilityLine({
         <span className={classes.abilityFavored}>
           {excellency && ' *'}
           {supernal && ' (s)'}
-          {caste && !supernal && ' (c)'}
+          {caste && !supernal && (character.aspect ? ' (a)' : ' (c)')}
           {favored && ' (f)'}
         </span>
       </RatingLine>

@@ -39,7 +39,7 @@ function AttributeLine(props: Props) {
         <span className={classes.attributeName}>{attribute}</span>
         <span className={classes.attributeFavored}>
           {excellency && ' *'}
-          {caste && ' (c)'}
+          {caste && (character.aspect ? ' (a)' : ' (c)')}
           {favored && ' (f)'}
         </span>
       </RatingLine>

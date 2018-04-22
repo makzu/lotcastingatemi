@@ -236,23 +236,20 @@ export const hasAura = character =>
   character.type === 'CustomEssenceCharacter'
 
 export const isCasteAbility = (character, ability) =>
-  character.caste_abilities && includes(character.caste_abilities, ability)
+  character.caste_abilities && character.caste_abilities.includes(ability)
 
 export const isSupernalAbility = (character, ability) =>
   character.supernal_ability === ability
 
-export const isFavoredAbility = (character, ability) => {
-  character.favored_abilities && includes(character.favored_abilities, ability)
-}
+export const isFavoredAbility = (character, ability) =>
+  character.favored_abilities && character.favored_abilities.includes(ability)
 
-export const isCasteAttribute = (character, attribute) => {
-  character.caste_attributes && includes(character.caste_attributes, attribute)
-}
+export const isCasteAttribute = (character, attribute) =>
+  character.caste_attributes && character.caste_attributes.includes(attribute)
 
-export const isFavoredAttribute = (character, attribute) => {
+export const isFavoredAttribute = (character, attribute) =>
   character.favored_attributes &&
-    includes(character.favored_attributes, attribute)
-}
+  character.favored_attributes.includes(attribute)
 
 export const committedPersonalMotes = character =>
   character.motes_committed

@@ -3,7 +3,9 @@
 # app/serializers/qc_serializer.rb
 class QcSerializer < ActiveModel::Serializer
   # rubocop:disable Layout/EmptyLinesAroundArguments
-  attributes :id, :name, :essence, :description, :type,
+  attributes :id, :player_id, :chronicle_id,
+             :hidden, :pinned, :sort_order, :chronicle_sort_order, :public,
+             :name, :essence, :description, :type,
              :willpower_temporary, :willpower_permanent,
              :health_level_0s, :health_level_1s, :health_level_2s,
              :health_level_4s, :health_level_incap,
@@ -21,12 +23,8 @@ class QcSerializer < ActiveModel::Serializer
 
              :ties, :principles,
 
-             :initiative, :onslaught, :in_combat, :has_acted,
-             :hidden, :pinned, :sort_order, :chronicle_sort_order, :public
+             :initiative, :onslaught, :in_combat, :has_acted
   # rubocop:enable Layout/EmptyLinesAroundArguments
-
-  attribute :player_id
-  attribute :chronicle_id
 
   has_many :qc_attacks
   has_many :qc_charms

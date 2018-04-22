@@ -10,9 +10,8 @@ class Identity < ApplicationRecord
     iden.image = auth['info']['image']
     iden.token = auth['credentials']['token']
     iden.expires_at = auth['credentials']['expires_at']
-    if iden.player.nil?
-      iden.player = Player.create_from_oauth(auth)
-    end
+
+    iden.player ||= Player.create_from_oauth(auth)
 
     iden.save
     iden

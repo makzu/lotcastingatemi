@@ -19,6 +19,7 @@ AllCops:
     - bin/webpack-dev-server
     - bin/webpack-watcher
     - bin/yarn
+    - spec/spec_helper.rb
     - test/test_helper.rb
 
 Layout/IndentationWidth:
@@ -44,10 +45,6 @@ Metrics/MethodLength:
 Naming/FileName:
   Exclude:
     - 'Gemfile'
-
-Style/BlockComments:
-  Exclude:
-    - 'spec/spec_helper.rb'
 
 Style/Documentation:
   Exclude:

@@ -20,18 +20,12 @@ class Character < ApplicationRecord
   has_many :weapons, dependent: :destroy
   has_many :spells,  dependent: :destroy
 
-  has_many :ability_charms,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AbilityCharm'
-  has_many :attribute_charms,        foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AttributeCharm'
-  has_many :essence_charms,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::EssenceCharm'
-  has_many :martial_arts_charms,     foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::MartialArtsCharm'
-  has_many :spirit_charms,           foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::SpiritCharm'
-  has_many :evocations,              foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::Evocation'
-
-  has_many :solar_charms,            foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :dragonblood_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :custom_ability_charms,   foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :custom_attribute_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
-  has_many :custom_essence_charms,   foreign_key: 'character_id', inverse_of: :character, dependent: :destroy
+  has_many :ability_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AbilityCharm'
+  has_many :attribute_charms,    foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AttributeCharm'
+  has_many :essence_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::EssenceCharm'
+  has_many :martial_arts_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::MartialArtsCharm'
+  has_many :spirit_charms,       foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::SpiritCharm'
+  has_many :evocations,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::Evocation'
 
   validates :name, presence: true
 

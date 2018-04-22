@@ -11,10 +11,10 @@ class Qc < ApplicationRecord
   include SortableBySt
   include Willpower
 
-  has_many :qc_attacks,   dependent: :destroy, as: :qc_attackable # rubocop:disable Rails/InverseOf
+  has_many :qc_attacks,   dependent: :destroy, as: :qc_attackable
   has_many :qc_charms,    dependent: :destroy
   has_many :qc_merits,    dependent: :destroy
-  has_many :combat_actors, dependent: :destroy, as: :actor # rubocop:disable Rails/InverseOf
+  has_many :combat_actors, dependent: :destroy, as: :actor
 
   # Essence above 5 is explicitly mentioned in the book
   validates :essence, numericality: {

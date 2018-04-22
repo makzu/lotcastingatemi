@@ -6,7 +6,7 @@ export * from './pools'
 export * from './ratings'
 export * from './weapons'
 
-import { capitalize, includes } from 'lodash'
+import { capitalize } from 'lodash'
 import {
   ATTRIBUTES,
   ABILITIES_ALL,

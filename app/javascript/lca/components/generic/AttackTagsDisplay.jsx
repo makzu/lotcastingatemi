@@ -4,9 +4,11 @@ import React, { Fragment } from 'react'
 import { DialogContentText } from 'material-ui/Dialog'
 import Typography from 'material-ui/Typography'
 
+import type { Pool } from 'utils/flow-types'
+
 const style = { marginTop: '0.25em' }
 
-type Props = { pool: Object }
+type Props = { pool: Pool }
 const AttackTagsDisplay = ({ pool }: Props) => {
   let { specialAttacks } = pool
   specialAttacks = specialAttacks || []
@@ -105,7 +107,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
       {specialAttacks.includes('powerful') && (
         <DialogContentText style={style}>
           Powerful: At close range, deals damage like a heavy weapon.
-          {pool.powerfulDamage > 0 && (
+          {pool.powerfulDamage != null && (
             <span> ({pool.powerfulDamage} damage)</span>
           )}
           <Typography variant="caption">tag: core p.590</Typography>

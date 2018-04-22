@@ -12,9 +12,14 @@ namespace :lca do
       send_yarn_command('test -- -u')
     end
 
-    desc 'Run the Jest test suite with optional (time-consuming) coverage report'
+    desc 'Run the Jest test suite with (time-consuming) coverage report'
     task :testcov do
       send_yarn_command('testcov')
+    end
+
+    desc 'Type-Check code with Flow'
+    task :flow do
+      send_yarn_command('flow')
     end
   end
 end

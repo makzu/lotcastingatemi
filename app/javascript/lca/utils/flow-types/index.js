@@ -2,6 +2,7 @@
 export * from './character'
 export * from './qc'
 export * from './shared.js'
+export * from './pool.js'
 import type { withBasicInfo, withCombatInfo, withWillpower } from './shared.js'
 import type { withQcStats } from './qc'
 

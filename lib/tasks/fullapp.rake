@@ -10,5 +10,5 @@ namespace :lca do
   end
 
   desc 'Run full test suite and lint suite'
-  task everything: ['lca:test', 'lca:lint']
+  task everything: ['lca:test', 'lca:lint', 'lca:frontend:flow']
 end

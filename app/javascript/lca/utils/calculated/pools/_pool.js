@@ -1,14 +1,7 @@
 // @flow
 import { abil, attr, specialtiesFor } from '..'
 import { maxExcellency } from '../excellencies'
-import type { Character } from 'utils/flow-types'
-
-export type PoolBonus = {
-  label: string,
-  situational?: boolean,
-  noFull?: boolean,
-  bonus: number,
-}
+import type { Character, Pool, PoolBonus } from 'utils/flow-types'
 
 export default function pool(
   name: string,
@@ -19,7 +12,7 @@ export default function pool(
   penalties: Array<Object>,
   excellencyAbils: Array<string>,
   specialAttacks?: Array<string> = []
-) {
+): Pool {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)
   const pool = _attr + _abil

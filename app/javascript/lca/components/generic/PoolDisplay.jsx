@@ -1,6 +1,8 @@
 // @flow
 import React, { Component, Fragment } from 'react'
 
+import type { Pool } from 'utils/flow-types'
+
 import Dialog, {
   DialogTitle,
   DialogContent,
@@ -37,7 +39,7 @@ const styles = theme => ({
 
 type Props = {
   label: string,
-  pool: Object,
+  pool: Pool,
   noSummary?: boolean,
   qc?: boolean,
   battlegroup?: boolean,
@@ -81,7 +83,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
       <div key={m.label} className={classes.specialty}>
         {m.situational && (
           <span>
-            {m.bonus > 0 && '+'}
+            {m.bonus != null && m.bonus > 0 && '+'}
             {m.bonus}{' '}
           </span>
         )}
@@ -93,7 +95,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
         {m.situational && (
           <span className={classes.excellency}>(conditional)</span>
         )}
-        {m.bonus > 0 && '+'}
+        {m.bonus != null && m.bonus > 0 && '+'}
         {m.bonus !== 0 && m.bonus} {m.label}
       </div>
     ))
@@ -119,18 +121,18 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
           </div>
           <div>
             <span className={classes.pool}>{pool.total}</span>
-            {pool.excellency > 0 && (
+            {(pool.excellency || 0) > 0 && (
               <span className={classes.excellency}>
                 &nbsp;+{pool.excellency}/{pool.excellencyCost}m
               </span>
             )}
-            {pool.minimum > 0 && (
+            {(pool.minimum || 0) > 0 && (
               <span className={classes.excellency}>
                 &nbsp;min {pool.minimum}
               </span>
             )}
           </div>
-          {pool.excellencyStunt > 0 && (
+          {(pool.excellencyStunt || 0) > 0 && (
             <div className={classes.excellency}>
               stunt +{pool.excellencyStunt}/{pool.excellencyStuntCost}m
             </div>
@@ -146,17 +148,19 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
           <DialogContent>
             <DialogContentText>
               Total: <span className={classes.pool}>{pool.total}</span>
-              {pool.excellency > 0 && (
+              {(pool.excellency || 0) > 0 && (
                 <span>
                   &nbsp;&nbsp;&nbsp; Can add up to {pool.excellency}&nbsp;
                   {!pool.rating && (
                     <span>di{pool.excellency === 1 ? 'e' : 'ce'} </span>
                   )}
                   for {pool.excellencyCost}m
-                  {pool.excellencyStunt > 0 &&
-                    `( ${pool.excellencyStunt} for ${
-                      pool.excellencyStuntCost
-                    }m on stunt)`}
+                  {(pool.excellencyStunt || 0) > 0 && (
+                    <span>
+                      ({pool.excellencyStunt} for {pool.excellencyStuntCost}
+                      m on stunt)
+                    </span>
+                  )}
                 </span>
               )}
             </DialogContentText>
@@ -174,12 +178,12 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                 {pool.attack === 'withering' && (
                   <span> + {pool.accuracy} weapon accuracy</span>
                 )}
-                {pool.weaponDamage > 0 && (
+                {(pool.weaponDamage || 0) > 0 && (
                   <span> + {pool.weaponDamage} weapon damage</span>
                 )}
                 {pool.rating && ' /2'}
                 {pool.parry && <span> + {pool.defense} weapon defense</span>}
-                {pool.raw > 0 && <span> = {pool.raw}</span>}
+                {(pool.raw || 0) > 0 && <span> = {pool.raw}</span>}
               </DialogContentText>
             )}
 
@@ -192,11 +196,13 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
             {pool.soak && (
               <DialogContentText>
                 {pool.natural} Natural
-                {pool.armored > 0 && <span> + {pool.armored} from Armor</span>}
+                {(pool.armored || 0) > 0 && (
+                  <span> + {pool.armored} from Armor</span>
+                )}
               </DialogContentText>
             )}
 
-            {pool.totalPenalty > 0 && (
+            {(pool.totalPenalty || 0) > 0 && (
               <DialogContentText>
                 -{pool.totalPenalty} Penalties
               </DialogContentText>
@@ -219,19 +225,19 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               <DialogContentText component="div" style={{ marginTop: '0.5em' }}>
                 Specialties:&nbsp;
                 <span style={{ textTransform: 'capitalize' }}>
-                  {pool.specialties.join(', ')}
+                  {sp.join(', ')}
                 </span>
                 {pool.rating && (
                   <Fragment>
                     {pool.specialtyMatters && (
                       <div>
-                        Specialt{pool.specialties.length === 1 ? 'y ' : 'ies '}
+                        Specialt{sp.length === 1 ? 'y ' : 'ies '}
                         <strong>will</strong> increase rating by 1
                       </div>
                     )}
                     {!pool.specialtyMatters && (
                       <div>
-                        Specialt{pool.specialties.length === 1 ? 'y ' : 'ies '}
+                        Specialt{sp.length === 1 ? 'y ' : 'ies '}
                         <strong>will not</strong> affect rating
                       </div>
                     )}

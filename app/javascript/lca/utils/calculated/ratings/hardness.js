@@ -1,7 +1,7 @@
 // @flow
-import type { Character } from 'utils/flow-types'
+import type { Character, Pool } from 'utils/flow-types'
 
-export function hardness(character: Character) {
+export function hardness(character: Character): Pool {
   let armor = 0
   let b = 0
   let altTotal = 0

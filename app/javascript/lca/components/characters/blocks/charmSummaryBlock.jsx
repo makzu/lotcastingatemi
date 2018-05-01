@@ -61,7 +61,10 @@ function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
             ', keywords: ' + charm.keywords.join(', ')}
           )
         </div>
-        <div className={classes.body}>{charm.body}</div>
+        <div className={classes.body}>
+          {charm.summary.length > 0 && charm.summary}
+          {charm.summary.length === 0 && charm.body}
+        </div>
       </Typography>
 
       <Divider />

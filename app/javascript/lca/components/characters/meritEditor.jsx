@@ -91,6 +91,9 @@ export class MeritFields extends Component<FieldsProps, State> {
       <MenuItem key="p" value="purchased">
         Purchased
       </MenuItem>,
+      <MenuItem key="f" value="flaw">
+        Flaw
+      </MenuItem>,
     ]
     return (
       <BlockPaper>
@@ -115,7 +118,7 @@ export class MeritFields extends Component<FieldsProps, State> {
             value={merit.merit_name}
             onChange={handleChange}
             onBlur={handleBlur}
-            label="Merit"
+            label={merit.merit_cat === 'flaw' ? 'Flaw' : 'Merit'}
             margin="dense"
           />&nbsp;&nbsp;
           <RatingField

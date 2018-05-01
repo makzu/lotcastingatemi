@@ -42,7 +42,7 @@ const _SingleMerit = ({ merit, classes }: _SingleMeritProps) => (
 
     <Typography className={classes.categoryLine} variant="caption" gutterBottom>
       {merit.supernatural && 'Supernatural '}
-      {merit.merit_cat} Merit
+      {merit.merit_cat} {merit.merit_cat !== 'flaw' && 'Merit'}
     </Typography>
 
     <Typography>{merit.description}</Typography>

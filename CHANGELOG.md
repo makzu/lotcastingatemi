@@ -1,5 +1,6 @@
 ## v49
 ###### *Not yet released*
+* Added 'Flaw' to the list of merit categories
 * Bug fixes
 
 ## v48

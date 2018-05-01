@@ -5,7 +5,7 @@ class Merit < ApplicationRecord
   include Broadcastable
   include CharacterTrait
 
-  validates :merit_cat, inclusion: { in: %w[ story innate purchased ] }
+  validates :merit_cat, inclusion: { in: %w[ story innate purchased flaw ] }
 
   # 6 is treated as N/A.
   validates :rating, numericality: {

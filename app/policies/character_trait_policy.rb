@@ -23,7 +23,7 @@ class CharacterTraitPolicy < ApplicationPolicy
   end
 
   def destroy?
-    player_is_owner?
+    player_is_owner? || player_is_st?
   end
 
   def player_is_owner?

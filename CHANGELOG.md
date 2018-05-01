@@ -1,6 +1,7 @@
 ## v49
 ###### *Not yet released*
 * Added 'Flaw' to the list of merit categories
+* Storytellers can now delete Merits, Weapons, Charms of Characters/QCs/BGs in their groups
 * Bug fixes
 
 ## v48

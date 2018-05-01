@@ -10,12 +10,12 @@ class CharacterPolicy < ApplicationPolicy
     @character = character
   end
 
-  def show?
-    character.public || player_is_owner? || player_is_storyteller? || player_in_chronicle?
-  end
-
   def create?
     player_is_owner? || player_is_storyteller?
+  end
+
+  def show?
+    character.public || player_is_owner? || player_is_storyteller? || player_in_chronicle?
   end
 
   def update?

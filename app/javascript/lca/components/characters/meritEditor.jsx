@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 const { Component, Fragment } = React
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 
@@ -265,6 +266,10 @@ class MeritEditor extends Component<Props> {
 
     return (
       <Fragment>
+        <DocumentTitle
+          title={`${this.props.character.name} Merits | Lot-Casting Atemi`}
+        />
+
         <Hidden smUp>
           <div style={{ height: '1.5em' }}>&nbsp;</div>
         </Hidden>

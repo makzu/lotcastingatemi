@@ -1,5 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -364,6 +365,8 @@ class CharmEditor extends Component<Props, State> {
     // */
     return (
       <div>
+        <DocumentTitle title={`${character.name} Charms | Lot-Casting Atemi`} />
+
         <Hidden smUp>
           <div style={{ height: '1.5em' }}>&nbsp;</div>
         </Hidden>

@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -208,6 +209,8 @@ export class CharacterSheet extends Component<Props> {
       character.exalt_type.toLowerCase() !== 'dragon-blood'
     return (
       <div>
+        <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />
+
         <Grid container spacing={24}>
           <Grid item hidden={{ smUp: true }} xs={12}>
             <div style={{ height: '1em' }}>&nbsp;</div>

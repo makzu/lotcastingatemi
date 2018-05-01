@@ -1,6 +1,6 @@
 // @flow
-import React from 'react'
-
+import React, { Fragment } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -36,7 +36,9 @@ function QcHeader(props: Props) {
   }
 
   return (
-    <div>
+    <Fragment>
+      <DocumentTitle title={`${qc.name} | Lot-Casting Atemi`} />
+
       <Toolbar>
         <LcaDrawerButton />
 
@@ -49,7 +51,7 @@ function QcHeader(props: Props) {
           {editing ? 'Done' : 'Edit'}
         </Button>
       </Toolbar>
-    </div>
+    </Fragment>
   )
 }
 

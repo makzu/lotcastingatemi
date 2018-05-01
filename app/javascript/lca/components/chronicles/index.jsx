@@ -1,5 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -114,6 +115,8 @@ class ChronicleDashboard extends Component<Props> {
 
     return (
       <Fragment>
+        <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
+
         <SortableGridList
           header={
             <Typography variant="headline">

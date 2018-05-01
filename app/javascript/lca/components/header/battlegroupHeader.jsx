@@ -1,5 +1,6 @@
 // @flow
-import React from 'react'
+import React, { Fragment } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -41,7 +42,9 @@ function BattlegroupHeader(props: Props) {
   }
 
   return (
-    <div>
+    <Fragment>
+      <DocumentTitle title={`${battlegroup.name} | Lot-Casting Atemi`} />
+
       <Toolbar>
         <LcaDrawerButton />
 
@@ -56,7 +59,7 @@ function BattlegroupHeader(props: Props) {
           </Button>
         )}
       </Toolbar>
-    </div>
+    </Fragment>
   )
 }
 

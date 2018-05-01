@@ -1,5 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import Divider from 'material-ui/Divider'
@@ -83,6 +84,8 @@ class ChroniclePlayerPage extends Component<Props, { name?: string }> {
     ))
     return (
       <Grid container spacing={24}>
+        <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
+
         <Grid item hidden={{ smUp: true }} xs={12}>
           <div style={{ height: '1.0em' }}>&nbsp;</div>
         </Grid>

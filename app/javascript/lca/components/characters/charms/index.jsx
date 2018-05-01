@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
@@ -182,6 +183,8 @@ class CharmFullPage extends Component<Props, State> {
 
     return (
       <Grid container spacing={24}>
+        <DocumentTitle title={`${character.name} Charms | Lot-Casting Atemi`} />
+
         <Grid item hidden={{ smUp: true }} xs={12}>
           <div style={{ height: '1em' }}>&nbsp;</div>
         </Grid>

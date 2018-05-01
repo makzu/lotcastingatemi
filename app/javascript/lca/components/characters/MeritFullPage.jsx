@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
@@ -71,6 +72,10 @@ class MeritFullPage extends Component<Props> {
 
     return (
       <Grid container spacing={24}>
+        <DocumentTitle
+          title={`${this.props.character.name} Merits | Lot-Casting Atemi`}
+        />
+
         <Grid item hidden={{ smUp: true }} xs={12}>
           <div style={{ height: '1em' }}>&nbsp;</div>
         </Grid>

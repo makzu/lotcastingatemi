@@ -41,7 +41,7 @@ export function spendMotes(
     if (committments != undefined) updateObj['motes_committed'] = committments
 
     // Raise anima banner level if appropriate
-    if (pool == 'peripheral' && motes > 5 && !mute) {
+    if (pool == 'peripheral' && motes >= 5 && !mute) {
       let anima = entity.anima_level
       if (anima !== 3) {
         // Do not change Anima level if it's already at Bonfire

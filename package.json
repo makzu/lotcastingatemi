@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.43",
-    "@rails/webpacker": "^3.4.3",
+    "@rails/webpacker": "^3.5.2",
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.24.1",
     "babel-loader": "7.x",
@@ -37,9 +37,11 @@
     "rails-erb-loader": "^5.0.1",
     "re-reselect": "^2.0.0",
     "react": "^16.3.2",
+    "react-document-title": "^2.0.3",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^4.1.1",
     "react-jss": "^8.1.0",
+    "react-markdown": "^3.3.0",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "react-select": "^1.2.1",
@@ -72,7 +74,7 @@
     "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.70.0",
+    "flow-bin": "^0.71.0",
     "istanbul": "^0.4.5",
     "jest": "^22.2.1",
     "prettier": "^1.12.1",
@@ -89,8 +91,12 @@
     "lint": "eslint app/javascript/ --ext js,jsx"
   },
   "jest": {
-    "roots": ["<rootDir>/app/javascript/lca/"],
-    "modulePaths": ["<rootDir>/app/javascript/lca"],
+    "roots": [
+      "<rootDir>/app/javascript/lca/"
+    ],
+    "modulePaths": [
+      "<rootDir>/app/javascript/lca"
+    ],
     "collectCoverageFrom": [
       "app/javascript/lca/**/*.js",
       "app/javascript/lca/**/*.jsx"

@@ -1,3 +1,7 @@
+## v49
+###### *Not yet released*
+* Bug fixes
+
 ## v48
 ###### *Apr 22, 2018*
 * Bug fixes

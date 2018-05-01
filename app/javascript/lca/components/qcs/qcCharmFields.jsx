@@ -3,11 +3,11 @@ import React, { Component } from 'react'
 
 import Button from 'material-ui/Button'
 import Divider from 'material-ui/Divider'
-import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Delete from '@material-ui/icons/Delete'
 
-import RatingField from '../generic/RatingField.jsx'
+import CharmTimingSelect from 'components/generic/CharmTimingSelect'
+import RatingField from 'components/generic/RatingField.jsx'
 import type { QcCharm } from 'utils/flow-types'
 
 type Props = {
@@ -89,27 +89,11 @@ export default class QcCharmFields extends Component<Props, State> {
           <Delete />
         </Button>
         <br />
-        <TextField
-          select
+        <CharmTimingSelect
           name="timing"
           value={charm.timing}
-          label="Type"
-          margin="dense"
           onChange={handleRatingChange}
-        >
-          <MenuItem key="simple" value="simple">
-            Simple
-          </MenuItem>
-          <MenuItem key="supplemental" value="supplemental">
-            Supplemental
-          </MenuItem>
-          <MenuItem key="reflexive" value="reflexive">
-            Reflexive
-          </MenuItem>
-          <MenuItem key="permanant" value="permanant">
-            Permanant
-          </MenuItem>
-        </TextField>&nbsp;&nbsp;
+        />&nbsp;&nbsp;
         <TextField
           name="duration"
           value={charm.duration}
@@ -120,14 +104,13 @@ export default class QcCharmFields extends Component<Props, State> {
         />
         <TextField
           name="keywords"
-          value={charm.keywords}
+          value={charm.keywords.join(',')}
           label="Keywords (comma separated)"
           margin="dense"
           onChange={handleChange}
           onBlur={handleBlur}
           fullWidth
         />
-        <br />
         <TextField
           name="body"
           value={charm.body}

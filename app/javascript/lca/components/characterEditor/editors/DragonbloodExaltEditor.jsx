@@ -1,10 +1,9 @@
 // @flow
 import React from 'react'
 
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
+import DbAspectSelect from '../exaltTraits/DbAspectSelect.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 
@@ -18,31 +17,14 @@ function DragonbloodExaltEditor({
   character: Character,
   onRatingChange: Function,
 }) {
-  let caste_abilities = character.caste_abilities
+  let caste_abilities = character.caste_abilities || []
   if (character.caste === 'water') {
-    caste_abilities = caste_abilities.concat('martial arts').sort()
+    caste_abilities = [...caste_abilities, 'martial arts'].sort()
   }
 
   return (
     <BlockPaper>
-      <TextField
-        select
-        name="caste"
-        value={character.caste || ''}
-        label="Aspect"
-        margin="dense"
-        style={{ width: '8em' }}
-        onChange={onRatingChange}
-      >
-        <MenuItem value="" disabled>
-          Select an Aspect
-        </MenuItem>
-        <MenuItem value="air">Air</MenuItem>
-        <MenuItem value="earth">Earth</MenuItem>
-        <MenuItem value="fire">Fire</MenuItem>
-        <MenuItem value="water">Water</MenuItem>
-        <MenuItem value="wood">Wood</MenuItem>
-      </TextField>
+      <DbAspectSelect value={character.caste} onChange={onRatingChange} />
 
       <Typography style={{ marginTop: '0.5em', textTransform: 'capitalize' }}>
         Aspect Abilities: {caste_abilities.join(', ')}

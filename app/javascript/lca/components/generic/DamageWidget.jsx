@@ -20,7 +20,7 @@ import { clamp } from 'utils'
 type Props = {
   children: React.Node,
   character: Object,
-  qc: boolean,
+  qc?: boolean,
   canEdit: boolean,
   takeDamage: Function,
 }

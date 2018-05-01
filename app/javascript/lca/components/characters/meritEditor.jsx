@@ -1,5 +1,6 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
+const { Component, Fragment } = React
 import { connect } from 'react-redux'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 
@@ -80,7 +81,17 @@ export class MeritFields extends Component<FieldsProps, State> {
   render() {
     const { merit } = this.state
     const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
-
+    const meritCatOptions: React.Node = [
+      <MenuItem key="s" value="story">
+        Story
+      </MenuItem>,
+      <MenuItem key="i" value="innate">
+        Innate
+      </MenuItem>,
+      <MenuItem key="p" value="purchased">
+        Purchased
+      </MenuItem>,
+    ]
     return (
       <BlockPaper>
         <Button
@@ -126,9 +137,7 @@ export class MeritFields extends Component<FieldsProps, State> {
             margin="dense"
             onChange={handleRatingChange}
           >
-            <MenuItem value="story">Story</MenuItem>
-            <MenuItem value="innate">Innate</MenuItem>
-            <MenuItem value="purchased">Purchased</MenuItem>
+            {meritCatOptions}
           </TextField>
           &nbsp;
           <FormControlLabel

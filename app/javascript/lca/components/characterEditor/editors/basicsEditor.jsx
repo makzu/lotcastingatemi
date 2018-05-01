@@ -25,7 +25,6 @@ const BasicsEditor = ({
   onBlur: Function,
   onRatingChange: Function,
   onCheck: Function,
-  classes: Object,
   showPublicCheckbox: boolean,
 }) => (
   <BlockPaper>

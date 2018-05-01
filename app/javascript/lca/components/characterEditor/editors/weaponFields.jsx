@@ -136,7 +136,7 @@ class WeaponFields extends Component<Props, State> {
         <TextField
           label="Tags (comma separated)"
           name="tags"
-          value={weapon.tags}
+          value={weapon.tags.join(', ')}
           className={classes.tagsField}
           margin="dense"
           onBlur={handleBlur}

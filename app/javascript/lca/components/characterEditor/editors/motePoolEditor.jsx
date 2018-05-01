@@ -106,7 +106,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
         <TextField
           select
           name="aura"
-          value={character.aura}
+          value={character.aura || ''}
           label="Aura"
           margin="dense"
           style={{ width: '8em' }}

@@ -76,7 +76,7 @@ export type Character = {
   excellencies_for: Array<string>,
   is_sorcerer: boolean,
   sorcererous_motes: number,
-  caste_abilities: Array<string>,
+  caste_abilities?: Array<string>,
   favored_abilities: Array<string>,
   caste_attributes: Array<string>,
   favored_attributes: Array<string>,

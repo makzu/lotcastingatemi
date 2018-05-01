@@ -55,7 +55,7 @@ function CustomEssenceExaltEditor({
         <FormControlLabel
           control={
             <Switch
-              checked={character.aspect}
+              checked={character.aspect || false}
               name="aspect"
               onChange={onCheck}
             />

@@ -10,7 +10,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 
-import { removePlayerFromChronicle } from 'ducks/actions.js'
+import { removePlayerFromChronicle as removePlayer } from 'ducks/actions.js'
 import { getSpecificChronicle, getSpecificPlayer } from 'selectors'
 
 type State = {
@@ -79,6 +79,7 @@ function mapStateToProps(state, ownProps) {
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   if (chronicle != undefined && chronicle.name != undefined) {
     chronicleName = chronicle.name
+    // TODO add some kind of error here if it can't find a player
     playerName = (getSpecificPlayer(state, ownProps.playerId) || {})
       .display_name
   }
@@ -89,12 +90,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    removePlayer: (chronicleId, playerId) => {
-      dispatch(removePlayerFromChronicle(chronicleId, playerId))
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RemovePlayerPopup)
+export default connect(mapStateToProps, { removePlayer })(RemovePlayerPopup)

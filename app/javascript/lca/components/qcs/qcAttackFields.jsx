@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
-import { MenuItem } from 'material-ui/Menu'
 
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 
+import RangeSelect from 'components/generic/RangeSelect.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
@@ -146,7 +146,7 @@ class QcAttackFields extends Component<Props, State> {
 
         <TextField
           name="tags"
-          value={attack.tags}
+          value={attack.tags.join(', ')}
           label="Tags (comma separated)"
           className={classes.tagsField}
           margin="dense"
@@ -154,31 +154,12 @@ class QcAttackFields extends Component<Props, State> {
           onBlur={handleBlur}
         />
 
-        <TextField
-          select
+        <RangeSelect
           name="range"
           value={attack.range}
-          label="Range"
-          margin="dense"
           onChange={handleRatingChange}
           className={classes.rangeField}
-        >
-          <MenuItem key="close" value="close">
-            Close
-          </MenuItem>
-          <MenuItem key="short" value="short">
-            Short
-          </MenuItem>
-          <MenuItem key="medium" value="medium">
-            Medium
-          </MenuItem>
-          <MenuItem key="long" value="long">
-            Long
-          </MenuItem>
-          <MenuItem key="extreme" value="extreme">
-            Extreme
-          </MenuItem>
-        </TextField>
+        />
 
         <IconButton onClick={handleRemove} style={{ minWidth: '2em' }}>
           <ContentRemoveCircle />

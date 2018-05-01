@@ -33,8 +33,9 @@ const AttackTagsDisplay = ({ pool }: Props) => {
     <Fragment>
       {specialAttacks.includes('air') && (
         <DialogContentText style={style}>
-          {pool.attack == 'withering' && 'Ignore higher of Essence or 3 soak '}
-          {pool.attack == 'decisive' && 'Ignore (Essence) hardness '}
+          Air:
+          {pool.attack == 'withering' && ' Ignore higher of Essence or 3 soak '}
+          {pool.attack == 'decisive' && ' Ignore (Essence) hardness '}
           from metal armor
           <Typography variant="caption">wfhw preview 4 p. 26</Typography>
         </DialogContentText>
@@ -78,7 +79,8 @@ const AttackTagsDisplay = ({ pool }: Props) => {
 
       {showFlexible && (
         <DialogContentText style={style}>
-          Flexible: Ignores the Defense bonus granted by Full Defense actions
+          {specialAttacks.includes('water') ? 'Water: ' : 'Flexible: '}
+          Ignores the Defense bonus granted by Full Defense actions
           <Typography variant="caption">
             {specialAttacks.includes('water') && 'wfhw preview 4 p.26, '}tag:
             core p.586
@@ -137,8 +139,8 @@ const AttackTagsDisplay = ({ pool }: Props) => {
           until your next action, if the attack connects the enemy is knocked
           back one range band, or prone.
           <Typography variant="caption">
-            prone: core p.202,
-            {specialAttacks.includes('earth') && ' wfhw preview 4 p.26, '}
+            prone: core p.202,&nbsp;
+            {specialAttacks.includes('earth') && 'wfhw preview 4 p.26, '}
             tag: core p.586
           </Typography>
         </DialogContentText>

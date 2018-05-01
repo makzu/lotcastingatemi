@@ -3,13 +3,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Grid from 'material-ui/Grid'
-import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import QcActionEditor from './qcActionEditor.jsx'
 import QcAttackEditor from './qcAttackEditor.jsx'
 import QcCharmEditor from './qcCharmEditor.jsx'
+import QcExcellencySelect from './QcExcellencySelect.jsx'
 import QcMeritEditor from './qcMeritEditor.jsx'
 import AnimaSelect from '../generic/AnimaSelect.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
@@ -80,9 +80,9 @@ class QcEditor extends Component<Props, State> {
           <BlockPaper>
             <Typography paragraph variant="caption">
               Rules for Quick Characters can be found in the core book starting
-              at page 494. Sample QCs are also available in{' '}
-              <em>Adversaries of the Righteous</em> and{' '}
-              <em>Hundred Devils Night Parade</em>.
+              at page 494. Sample QCs are also available in
+              <em> Adversaries of the Righteous</em> and
+              <em> Hundred Devils Night Parade</em>.
             </Typography>
             <TextField
               name="name"
@@ -190,22 +190,11 @@ class QcEditor extends Component<Props, State> {
               />
               <AnimaSelect character={qc} onChange={handleRatingChange} />
               <div>
-                <TextField
-                  select
-                  value={qc.excellency}
+                <QcExcellencySelect
                   name="excellency"
-                  label="Excellency Type"
-                  margin="dense"
+                  value={qc.excellency}
                   onChange={handleRatingChange}
-                  fullWidth
-                >
-                  <MenuItem value="">No Excellency</MenuItem>
-                  <MenuItem value="dragonblood">Dragon-Blood</MenuItem>
-                  <MenuItem value="lunar">Lunar</MenuItem>
-                  <MenuItem value="sidereal">Sidereal</MenuItem>
-                  <MenuItem value="solar">Solar/Abyssal</MenuItem>
-                  <MenuItem value="liminal">Liminal</MenuItem>
-                </TextField>
+                />
               </div>
             </Typography>
           </BlockPaper>

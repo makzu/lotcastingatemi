@@ -13,7 +13,7 @@ import ListAttributeEditor, {
 import RatingField from 'components/generic/RatingField.jsx'
 import type { Character } from 'utils/flow-types'
 
-const SorceryFields = (props: ListAttributeFieldTypes) => {
+const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
   const { onChange, onBlur, trait, classes } = props
 
   return (

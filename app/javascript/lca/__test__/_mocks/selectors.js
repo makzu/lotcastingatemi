@@ -28,6 +28,8 @@ export const mockStateForCharacter = (character: Character) => ({
         [11]: { merit_name: 'living spirit cultivation' },
         [12]: { merit_name: 'vital focus cultivation' },
         [13]: { merit_name: 'hideous' },
+        [14]: { merit_name: 'well-bred' },
+        [15]: { merit_name: 'thin-blooded' },
       },
       spells: {
         [1]: { name: 'invulnerable skin of bronze', control: true },

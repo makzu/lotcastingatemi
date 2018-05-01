@@ -162,7 +162,9 @@ function BattlegroupCard(props: Props) {
           <strong>Penalties:</strong>&nbsp; Onslaught -{battlegroup.onslaught}
         </Typography>
       )}
-      {combat && <InitiativeWidget character={battlegroup} />}
+      {combat && (
+        <InitiativeWidget character={battlegroup} characterType="battlegroup" />
+      )}
     </Paper>
   )
 }

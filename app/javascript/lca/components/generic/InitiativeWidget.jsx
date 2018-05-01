@@ -12,9 +12,9 @@ import { canIEdit } from 'selectors'
 import type { withCombatInfo } from 'utils/flow-types'
 
 type Props = {
-  character: withCombatInfo & { id: string },
+  character: withCombatInfo & { id: number },
   characterType: string,
-  canIEdit: boolean,
+  canEdit: boolean,
   update: Function,
 }
 class InitiativeWidget extends Component<Props> {
@@ -82,13 +82,13 @@ class InitiativeWidget extends Component<Props> {
     )
   }
 }
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state, props: Object) => ({
   canEdit: canIEdit(state, props.id, props.characterType),
 })
 
-function mapDispatchToProps(dispatch, props) {
+function mapDispatchToProps(dispatch: Function, props: Object) {
   let action
-  switch (props.character.type) {
+  switch (props.characterType) {
     case 'qc':
       action = updateQc
       break
@@ -104,4 +104,5 @@ function mapDispatchToProps(dispatch, props) {
     update: (id, trait, value) => dispatch(action(id, trait, value)),
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(InitiativeWidget)

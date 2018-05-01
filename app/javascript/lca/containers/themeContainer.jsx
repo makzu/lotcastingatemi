@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
@@ -39,8 +39,8 @@ const themes = {
     ...themeCommon,
   }),
 }
-type Props = { theme: string, children: Node, switchTheme: Function }
-class ThemeContainer extends Component<Props> {
+type Props = { theme: string, children: React.Node, switchTheme: Function }
+class ThemeContainer extends React.Component<Props> {
   componentDidMount() {
     window.addEventListener('storage', this.handleStorageChange)
   }

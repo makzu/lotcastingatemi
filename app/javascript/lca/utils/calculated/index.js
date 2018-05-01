@@ -14,7 +14,7 @@ import {
   ATTACK_ABILITIES,
   NON_ATTACK_ABILITIES,
 } from '../constants.js'
-import type { Character } from '../flow-types'
+import type { Character, withHealthLevels, withArmorStats } from '../flow-types'
 
 export const attr = (character: Character, attribute: string) =>
   attribute === 'essence' ? character.essence : character[`attr_${attribute}`]
@@ -46,7 +46,7 @@ export const specialtiesFor = (character: Character, ability) =>
     .map(s => s.context) || []
 
 /* Health */
-export const totalHealthLevels = character =>
+export const totalHealthLevels = (character: withHealthLevels) =>
   character.health_level_0s +
   character.health_level_1s +
   character.health_level_2s +
@@ -59,18 +59,18 @@ export function woundPenalty(character, merits) {
     character.damage_lethal +
     character.damage_aggravated
   const lvl0 = character.health_level_0s
-  const lvl1 = character.health_level_1s
-  const lvl2 = character.health_level_2s
-  const lvl4 = character.health_level_4s
+  const lvl1 = lvl0 + character.health_level_1s
+  const lvl2 = lvl1 + character.health_level_2s
+  const lvl4 = lvl2 + character.health_level_4s
   const modifier = merits.some(m => m.startsWith('pain tolerance')) ? 1 : 0
 
   if (totalDmg <= lvl0) {
     return 0
-  } else if (totalDmg <= lvl0 + lvl1) {
+  } else if (totalDmg <= lvl1) {
     return 1
-  } else if (totalDmg <= lvl0 + lvl1 + lvl2) {
+  } else if (totalDmg <= lvl2) {
     return 2 - modifier
-  } else if (totalDmg <= lvl0 + lvl1 + lvl2 + lvl4) {
+  } else if (totalDmg <= lvl4) {
     return 4 - modifier
   } else {
     return -1
@@ -141,17 +141,17 @@ export function abilitiesWithRatings(character) {
   return abils
 }
 
-export const nonCasteAbilities = character =>
+export const nonCasteAbilities = (character: Character) =>
   ABILITIES_ALL_NO_MA.filter(a => {
-    return !character.caste_abilities.includes(a.pretty.toLowerCase())
+    return !(character.caste_abilities || []).includes(a.pretty.toLowerCase())
   })
 
-export const nonCasteAttributes = character =>
+export const nonCasteAttributes = (character: Character) =>
   ATTRIBUTES.filter(a => {
-    return !character.caste_attributes.includes(a.pretty.toLowerCase())
+    return !(character.caste_attributes || []).includes(a.pretty.toLowerCase())
   })
 
-export function mobilityPenalty(character) {
+export function mobilityPenalty(character: withArmorStats) {
   switch (character.armor_weight) {
     case 'heavy':
       return 2

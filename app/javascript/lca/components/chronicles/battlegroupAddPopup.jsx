@@ -1,5 +1,6 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
+const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
@@ -61,11 +62,17 @@ class BattlegroupAddPopup extends Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, battlegroups } = this.props
 
-    const options = battlegroups.map(c => (
-      <MenuItem key={c.id} value={c.id}>
-        {c.name}
-      </MenuItem>
-    ))
+    const options: React.Node = [
+      <MenuItem key={0} value={0} disabled>
+        Select a Qc
+      </MenuItem>,
+      <Divider key="div" />,
+      ...battlegroups.map(c => (
+        <MenuItem key={c.id} value={c.id}>
+          {c.name}
+        </MenuItem>
+      )),
+    ]
 
     const currentBattlegroup = battlegroups.find(
       c => c.id == this.state.battlegroupId
@@ -86,8 +93,6 @@ class BattlegroupAddPopup extends Component<Props, State> {
               fullWidth
               margin="dense"
             >
-              <MenuItem value={0}>Select a Battlegroup</MenuItem>
-              <Divider />
               {options}
             </TextField>
             {hidden && (
@@ -129,11 +134,9 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    handleSubmit: (id, battlegroupId) =>
-      dispatch(addThingToChronicle(id, battlegroupId, 'battlegroup')),
-  }
-}
+const mapDispatchToProps: Object = dispatch => ({
+  handleSubmit: (id, battlegroupId) =>
+    dispatch(addThingToChronicle(id, battlegroupId, 'battlegroup')),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(BattlegroupAddPopup)

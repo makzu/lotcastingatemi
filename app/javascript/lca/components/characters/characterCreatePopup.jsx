@@ -1,5 +1,6 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
+const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
@@ -15,6 +16,8 @@ import Switch from 'material-ui/Switch'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
+import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
+import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect.jsx'
 import { createCharacter } from 'ducks/actions.js'
 
 type Props = { id: number, createCharacter: Function }
@@ -93,7 +96,33 @@ class CharacterCreatePopup extends Component<Props, State> {
       handleSubmit,
     } = this
     const { character } = this.state
+    const exaltTypeOptions: React.Node = [
+      <ListSubheader key="header" disabled value="">
+        Canon/Published Exalts
+      </ListSubheader>,
+      <MenuItem key="mortal" value="Character">
+        Mortal
+      </MenuItem>,
+      <MenuItem key="solar" value="SolarCharacter">
+        Solar Exalt
+      </MenuItem>,
+      <MenuItem key="deeb" value="DragonbloodCharacter">
+        Dragon-Blooded Exalt
+      </MenuItem>,
 
+      <ListSubheader key="customheader" disabled value="">
+        Custom / Houserule Exalts
+      </ListSubheader>,
+      <MenuItem key="customabil" value="CustomAbilityCharacter">
+        Ability-Based Exalt
+      </MenuItem>,
+      <MenuItem key="customatt" value="CustomAttributeCharacter">
+        Attribute-Based Exalt
+      </MenuItem>,
+      <MenuItem key="customess" value="CustomEssenceCharacter">
+        Essence-Based Exalt
+      </MenuItem>,
+    ]
     return (
       <Fragment>
         <Button onClick={handleOpen}>Create New</Button>
@@ -125,28 +154,7 @@ class CharacterCreatePopup extends Component<Props, State> {
                 fullWidth
                 margin="normal"
               >
-                <ListSubheader disabled value="">
-                  Canon/Published Exalts
-                </ListSubheader>
-                <MenuItem value="Character">Mortal</MenuItem>
-                <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
-                <MenuItem value="DragonbloodCharacter">
-                  Dragon-Blooded Exalt
-                </MenuItem>
-
-                <ListSubheader disabled value="">
-                  Custom Exalts
-                </ListSubheader>
-
-                <MenuItem value="CustomAbilityCharacter">
-                  Custom / Houserule Ability-Based Exalt
-                </MenuItem>
-                <MenuItem value="CustomAttributeCharacter">
-                  Custom / Houserule Attribute-Based Exalt
-                </MenuItem>
-                <MenuItem value="CustomEssenceCharacter">
-                  Custom / Houserule Essence-Based Exalt
-                </MenuItem>
+                {exaltTypeOptions}
               </TextField>
             </div>
 
@@ -159,21 +167,11 @@ class CharacterCreatePopup extends Component<Props, State> {
                   or Supernal abilities, choose Houserule Ability-based exalt
                   instead.
                 </Typography>
-                <TextField
-                  select
-                  name="caste"
+                <SolarCasteSelect
                   value={character.caste}
-                  label="Caste"
-                  margin="dense"
-                  fullWidth
                   onChange={handleChange}
-                >
-                  <MenuItem value="dawn">Dawn</MenuItem>
-                  <MenuItem value="zenith">Zenith</MenuItem>
-                  <MenuItem value="twilight">Twilight</MenuItem>
-                  <MenuItem value="night">Night</MenuItem>
-                  <MenuItem value="eclipse">Eclipse</MenuItem>
-                </TextField>
+                  fullWidth
+                />
               </div>
             )}
             {character.type == 'DragonbloodCharacter' && (
@@ -185,21 +183,11 @@ class CharacterCreatePopup extends Component<Props, State> {
                   abilities or mote pools, choose Houserule Ability-based exalt
                   instead.
                 </Typography>
-                <TextField
-                  select
-                  name="caste"
+                <DbAspectSelect
                   value={character.caste}
-                  label="Aspect"
-                  margin="dense"
-                  fullWidth
                   onChange={handleChange}
-                >
-                  <MenuItem value="air">Air</MenuItem>
-                  <MenuItem value="earth">Earth</MenuItem>
-                  <MenuItem value="fire">Fire</MenuItem>
-                  <MenuItem value="water">Water</MenuItem>
-                  <MenuItem value="wood">Wood</MenuItem>
-                </TextField>
+                  fullWidth
+                />
               </div>
             )}
             {(character.type == 'CustomAttributeCharacter' ||

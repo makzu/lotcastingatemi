@@ -1,120 +1,32 @@
 // @flow
-import { attr, abil, specialtiesFor } from '..'
-import { ABILITIES, ATTRIBUTES } from 'utils/constants.js'
+import SolarExcellency, {
+  solarExcellencyAbils,
+  hasSolarExcellency,
+} from './solar.js'
+import DbExcellency, {
+  dbExcellencyAbils,
+  hasDbExcellency,
+} from './dragonblooded.js'
+import CustomExcellency from './custom.js'
 import type { Character, Charm } from 'utils/flow-types'
 
 export const excellencyAbils = (
   character: Character,
   charms: Array<Charm>
 ): Array<string> => {
+  // Mortals do not have excellencies
   if (character.type === 'Character') return []
 
   let excellencies: Array<string> = character.excellencies_for || []
 
-  if (character.type === 'SolarCharacter' || character.excellency === 'solar') {
-    excellencies = excellencies
-      .concat(character.caste_abilities.filter(a => abil(character, a) > 0))
-      .concat(character.favored_abilities.filter(a => abil(character, a) > 0))
-
-    if (
-      excellencies.includes('brawl') &&
-      character.abil_martial_arts.length > 0
-    )
-      excellencies = excellencies.concat(['martial_arts'])
-
-    excellencies = excellencies.concat(
-      charms.map(
-        c => (c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability)
-      )
-    )
-  } else if (
-    character.type === 'DragonbloodCharacter' ||
-    character.excellency.startsWith('dragon')
-  ) {
-    excellencies = excellencies.concat(
-      charms
-        .filter(
-          c =>
-            c.keywords.includes('excellency') ||
-            c.keywords.includes('Excellency')
-        )
-        .map(c => c.ability)
-    )
-
-    if (excellencies.includes('brawl'))
-      excellencies = excellencies.concat(['martial_arts'])
+  if (hasSolarExcellency(character)) {
+    excellencies = excellencies.concat(solarExcellencyAbils(character, charms))
+  } else if (hasDbExcellency(character)) {
+    excellencies = excellencies.concat(dbExcellencyAbils(character, charms))
   }
 
+  // Because ES6 lacks a .uniq method:
   return [...new Set(excellencies)]
-}
-
-export const highestOtherAbility = (character: Character, ability: string) => {
-  let result = ABILITIES.filter(a => a.abil !== `abil_${ability}`).map(
-    a => character[a.abil]
-  )
-
-  return Math.max(...result)
-}
-
-export const highestOtherAttribute = (
-  character: Character,
-  attribute: string
-) => {
-  let result = ATTRIBUTES.filter(a => a.attr !== `attr_${attribute}`).map(
-    a => character[a.attr]
-  )
-
-  return Math.max(...result)
-}
-
-export function maxCustomExcellency(
-  character: Character,
-  attribute: string,
-  ability: string,
-  staticRating: boolean,
-  stunt: boolean = false
-) {
-  let excellency
-  if (stunt) excellency = character.excellency_stunt
-  else excellency = character.excellency
-
-  let result = 0
-
-  const exArray = excellency.split('+') || []
-  for (let ex of exArray) {
-    switch (ex) {
-      case 'attribute':
-        result += attr(character, attribute)
-        break
-      case 'attributeonanima':
-        if (character.anima_level > 0) result += attr(character, attribute)
-        break
-      case 'ability':
-        result += abil(character, ability)
-        break
-      case 'abilityonanima':
-        if (character.anima_level > 0) result += abil(character, ability)
-        break
-      case 'specialty':
-        if (specialtiesFor(character, ability).length > 0) result += 1
-        break
-      case 'essence':
-        result += character.essence
-        break
-      case 'essenceonanima':
-        if (character.anima_level > 0) result += character.essence
-        break
-      case 'otherability':
-        break
-      case 'otherattribute':
-        result += highestOtherAttribute(character, attribute)
-        break
-    }
-  }
-
-  if (!staticRating) return result
-  if (exArray.includes('roundup')) return Math.ceil(result / 2)
-  return Math.floor(result / 2)
 }
 
 export function maxExcellency(
@@ -141,24 +53,17 @@ export function maxExcellency(
   )
     return 0
 
-  const attr_rating = attr(character, attribute)
-  const abil_rating = abil(character, ability)
+  if (hasSolarExcellency(character))
+    return SolarExcellency(character, attribute, ability, staticRating)
+  if (hasDbExcellency(character))
+    return DbExcellency(character, attribute, ability, staticRating)
 
-  if (character.type === 'SolarCharacter' || character.excellency === 'solar')
-    return Math.floor((attr_rating + abil_rating) / (staticRating ? 2 : 1))
-  if (
-    character.type === 'DragonbloodCharacter' ||
-    character.excellency.startsWith('dragon')
-  )
-    return Math.ceil(
-      (abil_rating + (specialtiesFor(character, abili).length > 0 ? 1 : 0)) /
-        (staticRating ? 2 : 1)
-    )
+  // FEATURE: Setting excellency to 'sidereal' will set the excellency cap for pools and ratings to (Essence). You must still select which attrs/abils have excellencies.
   if (
     character.type === 'SiderealCharacter' ||
     character.excellency === 'sidereal'
   )
     return character.essence
 
-  return maxCustomExcellency(character, attribute, ability, staticRating, stunt)
+  return CustomExcellency(character, attribute, ability, staticRating, stunt)
 }

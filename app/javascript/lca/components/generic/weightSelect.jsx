@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 
 import { withStyles } from 'material-ui/styles'
 import { MenuItem } from 'material-ui/Menu'
@@ -20,11 +20,29 @@ type Props = {
   name: string,
   armor?: boolean,
   value: string,
-  margin?: string,
+  margin?: 'none' | 'dense' | 'normal',
   classes: Object,
   onChange: Function,
 }
 function WeightSelect(props: Props) {
+  let options = []
+  if (props.armor)
+    options = options.concat([
+      <MenuItem key="unarmored" value="unarmored">
+        Unarmored
+      </MenuItem>,
+    ])
+  options = options.concat([
+    <MenuItem key="light" value="light">
+      Light
+    </MenuItem>,
+    <MenuItem key="medium" value="medium">
+      Medium
+    </MenuItem>,
+    <MenuItem key="heavy" value="heavy">
+      Heavy
+    </MenuItem>,
+  ])
   return (
     <TextField
       select
@@ -33,12 +51,9 @@ function WeightSelect(props: Props) {
       value={props.value}
       className={props.armor ? props.classes.armor : props.classes.field}
       onChange={props.onChange}
-      margin={props.margin || 'none'}
+      margin={props.margin}
     >
-      {props.armor && <MenuItem value="unarmored">Unarmored</MenuItem>}
-      <MenuItem value="light">Light</MenuItem>
-      <MenuItem value="medium">Medium</MenuItem>
-      <MenuItem value="heavy">Heavy</MenuItem>
+      {options}
     </TextField>
   )
 }

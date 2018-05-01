@@ -20,7 +20,7 @@ import { clamp } from 'utils/'
 type Props = {
   children: React.Node,
   character: Object,
-  qc: boolean,
+  qc?: boolean,
   canEdit: boolean,
   spendWillpower: Function,
 }
@@ -140,7 +140,7 @@ class WillpowerSpendWidget extends Component<Props, State> {
     )
   }
 }
-function mapStateToProps(state, props) {
+function mapStateToProps(state: Object, props: Object) {
   return {
     canEdit: props.qc
       ? canIEditQc(state, props.character.id)

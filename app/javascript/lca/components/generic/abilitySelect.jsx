@@ -30,7 +30,7 @@ type Props = {
   value: string | Array<String>,
   label: string,
   fullWidth: boolean,
-  margin: string,
+  margin: 'none' | 'dense' | 'normal',
   classes: Object,
   onChange: Function,
 }

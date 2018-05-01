@@ -1,5 +1,6 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
+const { Component } = React
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
@@ -112,7 +113,17 @@ class SpellFields extends Component<Props, State> {
     } = this
 
     const isOpen = openSpell === spell.id
-
+    const circles: React.Node = [
+      <MenuItem key="t" value="terrestrial">
+        Terrestrial
+      </MenuItem>,
+      <MenuItem key="c" value="celestial">
+        Celestial
+      </MenuItem>,
+      <MenuItem key="s" value="solar">
+        Solar
+      </MenuItem>,
+    ]
     return (
       <ExpansionPanel
         expanded={isOpen}
@@ -189,9 +200,7 @@ class SpellFields extends Component<Props, State> {
               value={spell.circle}
               onChange={handleRatingChange}
             >
-              <MenuItem value="terrestrial">Terrestrial</MenuItem>
-              <MenuItem value="celestial">Celestial</MenuItem>
-              <MenuItem value="solar">Solar</MenuItem>
+              {circles}
             </TextField>&nbsp;&nbsp;
             <FormControlLabel
               label="Control Spell"
@@ -206,7 +215,7 @@ class SpellFields extends Component<Props, State> {
             <br />
             <TextField
               name="keywords"
-              value={spell.keywords}
+              value={spell.keywords.join(',')}
               onChange={handleChange}
               onBlur={handleBlur}
               fullWidth={true}

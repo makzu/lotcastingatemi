@@ -1,5 +1,6 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
+const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
@@ -73,20 +74,25 @@ class CharmFilter extends Component<Props> {
       default:
         filterLabel = 'derp'
     }
-    const filterOptions = filters.map(
-      abil =>
-        abil === 'martial_arts' ? ( // Skip Martial Arts, it has its own handling
-          <span key={abil} />
-        ) : (
-          <MenuItem
-            key={abil}
-            value={abil}
-            style={{ textTransform: 'capitalize' }}
-          >
-            {abil}
-          </MenuItem>
-        )
-    )
+    const filterOptions: React.Node = [
+      <MenuItem key="none" value="">
+        No Filter
+      </MenuItem>,
+      ...filters.map(
+        abil =>
+          abil === 'martial_arts' ? ( // Skip Martial Arts, it has its own handling
+            <span key={abil} />
+          ) : (
+            <MenuItem
+              key={abil}
+              value={abil}
+              style={{ textTransform: 'capitalize' }}
+            >
+              {abil}
+            </MenuItem>
+          )
+      ),
+    ]
     const catOptions = categories.map(cat => (
       <MenuItem key={cat} value={cat} style={{ textTransform: 'capitalize' }}>
         {cat}
@@ -119,7 +125,6 @@ class CharmFilter extends Component<Props> {
                   value={currentAbility || ''}
                   onChange={onChange}
                 >
-                  <MenuItem value="">No Filter</MenuItem>
                   {filterOptions}
                 </TextField>
                 &nbsp;&nbsp;

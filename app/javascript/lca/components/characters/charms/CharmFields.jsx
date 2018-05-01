@@ -22,6 +22,7 @@ import styles from './CharmStyles.js'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 import { CharmSummaryBlock } from './CharmDisplay.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import CharmTimingSelect from 'components/generic/CharmTimingSelect.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { checkVisible } from 'utils'
 import { abilitiesWithRatings } from 'utils/calculated'
@@ -250,19 +251,11 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               margin="dense"
             />
             <br />
-            <TextField
-              select
+            <CharmTimingSelect
               name="timing"
-              label="Type"
-              margin="dense"
               value={charm.timing}
               onChange={handleRatingChange}
-            >
-              <MenuItem value="reflexive">Reflexive</MenuItem>
-              <MenuItem value="supplemental">Supplemental</MenuItem>
-              <MenuItem value="simple">Simple</MenuItem>
-              <MenuItem value="permanent">Permanent</MenuItem>
-            </TextField>&nbsp;&nbsp;
+            />&nbsp;&nbsp;
             <TextField
               name="duration"
               value={charm.duration}
@@ -274,7 +267,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
             <br />
             <TextField
               name="keywords"
-              value={charm.keywords}
+              value={charm.keywords.join(',')}
               onChange={handleChange}
               onBlur={handleBlur}
               fullWidth={true}

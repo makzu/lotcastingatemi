@@ -60,7 +60,7 @@ function ArmorEditor(props: Props) {
 
       <TextField
         name="armor_tags"
-        value={character.armor_tags}
+        value={character.armor_tags.join(',')}
         label="Tags (comma separated)"
         margin="dense"
         fullWidth

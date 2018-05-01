@@ -1,5 +1,6 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
+const { Component } = React
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
@@ -18,6 +19,18 @@ import { updateBattlegroup } from 'ducks/actions.js'
 import { getSpecificBattlegroup } from 'selectors'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
+
+const drillOptions: React.Node = [
+  <MenuItem key="poor" value={0}>
+    Poor
+  </MenuItem>,
+  <MenuItem key="average" value={1}>
+    Average
+  </MenuItem>,
+  <MenuItem key="elite" value={2}>
+    Elite
+  </MenuItem>,
+]
 
 const styles = theme => ({
   bgBonus: {
@@ -204,15 +217,7 @@ class BattlegroupEditor extends Component<Props, State> {
           margin="dense"
           onChange={handleRatingChange}
         >
-          <MenuItem key="poor" value={0}>
-            Poor
-          </MenuItem>
-          <MenuItem key="average" value={1}>
-            Average
-          </MenuItem>
-          <MenuItem key="elite" value={2}>
-            Elite
-          </MenuItem>
+          {drillOptions}
         </TextField>
         <RatingField
           trait="might"

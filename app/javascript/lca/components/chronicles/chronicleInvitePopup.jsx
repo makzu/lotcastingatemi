@@ -83,8 +83,8 @@ class ChronicleInvitePopup extends Component<Props, { open: boolean }> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = state.session.id
-  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
+  const id = ownProps.chronicleId
+  const chronicle = getSpecificChronicle(state, id)
   let chronicleName = ''
   let inviteCode = ''
 

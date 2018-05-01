@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
@@ -7,6 +7,20 @@ import type { withMotePool } from 'utils/flow-types'
 
 type Props = { character: withMotePool, onChange: Function }
 const AnimaSelect = ({ character, onChange }: Props) => {
+  const options: React.Node = [
+    <MenuItem key={0} value={0}>
+      Dim
+    </MenuItem>,
+    <MenuItem key={1} value={1}>
+      Glowing
+    </MenuItem>,
+    <MenuItem key={2} value={2}>
+      Burning
+    </MenuItem>,
+    <MenuItem key={3} value={3}>
+      Bonfire
+    </MenuItem>,
+  ]
   return (
     <TextField
       select
@@ -16,10 +30,7 @@ const AnimaSelect = ({ character, onChange }: Props) => {
       margin="dense"
       onChange={onChange}
     >
-      <MenuItem value={0}>Dim</MenuItem>
-      <MenuItem value={1}>Glowing</MenuItem>
-      <MenuItem value={2}>Burning</MenuItem>
-      <MenuItem value={3}>Bonfire</MenuItem>
+      {options}
     </TextField>
   )
 }

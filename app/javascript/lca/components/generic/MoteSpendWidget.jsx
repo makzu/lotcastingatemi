@@ -49,8 +49,8 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
 type Props = {
   children: React.Node,
   character: withMotePool & { id: number },
-  peripheral: boolean,
-  qc: boolean,
+  peripheral?: boolean,
+  qc?: boolean,
   canEdit: boolean,
   spendMotes: Function,
 }
@@ -122,9 +122,10 @@ class MoteSpendWidget extends Component<Props, State> {
 
   handleChange = e => {
     const { name, value } = e.target
+    const val = parseInt(value)
     let commit = this.state.commit
-    if (name === 'toSpend') commit = this.state.toSpend + value >= 0
-    this.setState({ [name]: value, commit: commit })
+    if (name === 'toSpend') commit = this.state.toSpend + val >= 0
+    this.setState({ [name]: val, commit: commit })
   }
 
   handleCheck = e => {

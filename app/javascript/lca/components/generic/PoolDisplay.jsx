@@ -246,15 +246,15 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               </DialogContentText>
             )}
 
-            {pool.witheringDamage && (
+            {pool.minimum != null && (
               <DialogContentText component="div">
                 <div>
                   Add Threshhold Successes from the attack roll to get Raw
                   Damage
                 </div>
                 <div>
-                  Subtract enemy soak from Raw Damage to get your total
-                  withering damage pool
+                  Subtract enemy soak from Raw Damage to get your total damage
+                  pool
                 </div>
                 Minimum pool
                 <span className={classes.pool}> {pool.minimum}</span>

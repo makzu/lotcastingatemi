@@ -2,8 +2,8 @@
 import React from 'react'
 
 import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
 
+import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 
@@ -16,10 +16,11 @@ function SolarExaltEditor({ character, onRatingChange }: Props) {
   let casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
   let supernalAbilities = casteAbilities
   if (character.caste === 'dawn')
-    supernalAbilities = casteAbilities
-      .slice(0, 4)
-      .concat([{ abil: 'abil_martial_arts', pretty: 'Martial Arts' }])
-      .concat(casteAbilities.slice(4))
+    supernalAbilities = [
+      ...casteAbilities.slice(0, 4),
+      { abil: 'abil_martial_arts', pretty: 'Martial Arts' },
+      ...casteAbilities.slice(4),
+    ]
 
   const noOptionItem =
     character.caste == undefined ? (
@@ -30,24 +31,12 @@ function SolarExaltEditor({ character, onRatingChange }: Props) {
 
   return (
     <BlockPaper>
-      <TextField
-        select
-        name="caste"
-        value={character.caste || ''}
-        label="Caste"
+      <SolarCasteSelect
+        value={character.caste}
         margin="dense"
         style={{ width: '8em' }}
         onChange={onRatingChange}
-      >
-        <MenuItem value="" disabled>
-          Select a Caste
-        </MenuItem>
-        <MenuItem value="dawn">Dawn</MenuItem>
-        <MenuItem value="zenith">Zenith</MenuItem>
-        <MenuItem value="twilight">Twilight</MenuItem>
-        <MenuItem value="night">Night</MenuItem>
-        <MenuItem value="eclipse">Eclipse</MenuItem>
-      </TextField>
+      />
       &nbsp;&nbsp;
       <AbilitySelect
         name="supernal_ability"

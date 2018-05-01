@@ -13,10 +13,10 @@ import {
   updateQcAttack,
 } from 'ducks/actions.js'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
-import type { fullQc, QcAttack } from 'utils/flow-types'
+import type { QcAttack } from 'utils/flow-types'
 
 type Props = {
-  qc: fullQc,
+  qc: Object,
   battlegroup?: boolean,
   qc_attacks: Array<QcAttack>,
   updateQcAttack: Function,

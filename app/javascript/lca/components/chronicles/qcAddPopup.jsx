@@ -1,5 +1,6 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
+const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from 'material-ui/Button'
@@ -58,11 +59,17 @@ class QcAddPopup extends Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, qcs } = this.props
 
-    const options = qcs.map(c => (
-      <MenuItem key={c.id} value={c.id}>
-        {c.name}
-      </MenuItem>
-    ))
+    const options: React.Node = [
+      <MenuItem key={0} value={0} disabled>
+        Select a Qc
+      </MenuItem>,
+      <Divider key="div" />,
+      ...qcs.map(c => (
+        <MenuItem key={c.id} value={c.id}>
+          {c.name}
+        </MenuItem>
+      )),
+    ]
 
     const currentQc = qcs.find(c => c.id == this.state.qcId)
     const hidden = currentQc && currentQc.hidden
@@ -81,8 +88,6 @@ class QcAddPopup extends Component<Props, State> {
               fullWidth
               margin="dense"
             >
-              <MenuItem value={0}>Select a Qc</MenuItem>
-              <Divider />
               {options}
             </TextField>
             {hidden && (
@@ -124,10 +129,8 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    handleSubmit: (id, qcId) => dispatch(addThingToChronicle(id, qcId, 'qc')),
-  }
-}
+const mapDispatchToProps: Object = dispatch => ({
+  handleSubmit: (id, qcId) => dispatch(addThingToChronicle(id, qcId, 'qc')),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(QcAddPopup)

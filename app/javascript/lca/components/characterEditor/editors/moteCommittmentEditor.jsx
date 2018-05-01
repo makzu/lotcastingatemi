@@ -1,6 +1,6 @@
 // @flow
-import React, { Fragment } from 'react'
-
+import * as React from 'react'
+const { Fragment } = React
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
@@ -13,7 +13,14 @@ import type { Character } from 'utils/flow-types'
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, onBlur, onRatingChange, classes } = props
   const { pool, label, motes } = trait
-
+  const poolOptions: React.Node = [
+    <MenuItem key="personal" value="personal">
+      Pers
+    </MenuItem>,
+    <MenuItem key="peripheral" value="peripheral">
+      Peri
+    </MenuItem>,
+  ]
   return (
     <Fragment>
       <TextField
@@ -25,8 +32,7 @@ function CommitFields(props: ListAttributeFieldTypes) {
         margin="dense"
         onChange={onRatingChange}
       >
-        <MenuItem value="personal">Pers</MenuItem>
-        <MenuItem value="peripheral">Peri</MenuItem>
+        {poolOptions}
       </TextField>
 
       <TextField

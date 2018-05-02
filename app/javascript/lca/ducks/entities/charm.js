@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -23,6 +24,21 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.charms[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  } else if (action.type === CHM_DESTROY) {
+    const assoc = getCharmAssoc(state, action.meta.id)
+    return {
+      ...state,
+      charms: omit(state.charms, action.meta.id),
+      characters: {
+        ...state.characters,
+        [action.meta.charId]: {
+          ...state.characters[action.meta.charId],
+          [assoc]: state.characters[action.meta.charId][assoc].filter(
+            w => w != action.meta.id
+          ),
         },
       },
     }
@@ -81,13 +97,45 @@ export function updateCharmMulti(id: number, charId: number, charm: Object) {
 }
 
 export function destroyCharm(id: number, charId: number) {
+  let transactionId = 'charm' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/characters/${charId}/charms/${id}`,
     method: 'DELETE',
     types: [
-      CHM_DESTROY,
-      { type: CHM_DESTROY_SUCCESS, meta: { id: id, charId: charId } },
-      CHM_DESTROY_FAILURE,
+      {
+        type: CHM_DESTROY,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: BEGIN, id: transactionId },
+        },
+      },
+      {
+        type: CHM_DESTROY_SUCCESS,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: COMMIT, id: transactionId },
+        },
+      },
+      {
+        type: CHM_DESTROY_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
+      },
     ],
   })
+}
+
+const getCharmAssoc = (state: EntityState, id: number) => {
+  const charm = state.charms[id]
+  switch (charm.charm_type) {
+    case 'MartialArts':
+      return 'martial_arts_charms'
+    case 'Spirit':
+      return 'spirit_charms'
+    case 'Evocation':
+      return 'evocations'
+    default:
+      return 'charms'
+  }
 }

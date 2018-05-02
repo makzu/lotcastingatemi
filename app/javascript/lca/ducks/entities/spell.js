@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -23,6 +24,20 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.spells[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  } else if (action.type === SPL_DESTROY) {
+    return {
+      ...state,
+      spells: omit(state.spells, action.meta.id),
+      characters: {
+        ...state.characters,
+        [action.meta.charId]: {
+          ...state.characters[action.meta.charId],
+          spells: state.characters[action.meta.charId].spells.filter(
+            w => w != action.meta.id
+          ),
         },
       },
     }
@@ -81,13 +96,31 @@ export function updateSpellMulti(id: number, charId: number, spell: Object) {
 }
 
 export function destroySpell(id: number, charId: number) {
+  let transactionId = 'spell' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/characters/${charId}/spells/${id}`,
     method: 'DELETE',
     types: [
-      SPL_DESTROY,
-      { type: SPL_DESTROY_SUCCESS, meta: { id: id, charId: charId } },
-      SPL_DESTROY_FAILURE,
+      {
+        type: SPL_DESTROY,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: BEGIN, id: transactionId },
+        },
+      },
+      {
+        type: SPL_DESTROY_SUCCESS,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: COMMIT, id: transactionId },
+        },
+      },
+      {
+        type: SPL_DESTROY_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
+      },
     ],
   })
 }

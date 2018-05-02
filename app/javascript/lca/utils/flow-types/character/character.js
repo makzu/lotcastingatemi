@@ -91,6 +91,13 @@ export type Character = {
   limit: number,
   limit_trigger: string,
   resources: Array<{ resource: string, value: number }>,
+  weapons: Array<number>,
+  merits: Array<number>,
+  charms: Array<number>,
+  evocations: Array<number>,
+  martial_arts_charms: Array<number>,
+  spirit_charms: Array<number>,
+  spells: Array<number>,
 } & withBasicInfo &
   withMotePool &
   withWillpower &

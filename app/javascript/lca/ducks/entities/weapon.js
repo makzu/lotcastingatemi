@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -23,6 +24,20 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.weapons[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  } else if (action.type === WEP_DESTROY) {
+    return {
+      ...state,
+      weapons: omit(state.weapons, action.meta.id),
+      characters: {
+        ...state.characters,
+        [action.meta.charId]: {
+          ...state.characters[action.meta.charId],
+          weapons: state.characters[action.meta.charId].weapons.filter(
+            w => w != action.meta.id
+          ),
         },
       },
     }
@@ -81,13 +96,31 @@ export function updateWeaponMulti(id: number, charId: number, weapon: Object) {
 }
 
 export function destroyWeapon(id: number, charId: number) {
+  let transactionId = 'weapon' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/characters/${charId}/weapons/${id}`,
     method: 'DELETE',
     types: [
-      WEP_DESTROY,
-      { type: WEP_DESTROY_SUCCESS, meta: { id: id, charId: charId } },
-      WEP_DESTROY_FAILURE,
+      {
+        type: WEP_DESTROY,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: BEGIN, id: transactionId },
+        },
+      },
+      {
+        type: WEP_DESTROY_SUCCESS,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: COMMIT, id: transactionId },
+        },
+      },
+      {
+        type: WEP_DESTROY_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
+      },
     ],
   })
 }

@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -23,6 +24,20 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.qc_merits[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  } else if (action.type === QCM_DESTROY) {
+    return {
+      ...state,
+      qc_merits: omit(state.qc_merits, action.meta.id),
+      qcs: {
+        ...state.qcs,
+        [action.meta.qcId]: {
+          ...state.qcs[action.meta.qcId],
+          qc_merits: state.qcs[action.meta.qcId].qc_merits.filter(
+            w => w != action.meta.id
+          ),
         },
       },
     }
@@ -81,13 +96,31 @@ export function updateQcMeritMulti(id: number, qcId: number, merit: Object) {
 }
 
 export function destroyQcMerit(id: number, qcId: number) {
+  let transactionId = 'QCmerit' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/qcs/${qcId}/qc_merits/${id}`,
     method: 'DELETE',
     types: [
-      QCM_DESTROY,
-      { type: QCM_DESTROY_SUCCESS, meta: { id: id, qcId: qcId } },
-      QCM_DESTROY_FAILURE,
+      {
+        type: QCM_DESTROY,
+        meta: {
+          id: id,
+          qcId: qcId,
+          optimistic: { type: BEGIN, id: transactionId },
+        },
+      },
+      {
+        type: QCM_DESTROY_SUCCESS,
+        meta: {
+          id: id,
+          qcId: qcId,
+          optimistic: { type: COMMIT, id: transactionId },
+        },
+      },
+      {
+        type: QCM_DESTROY_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
+      },
     ],
   })
 }

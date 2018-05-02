@@ -29,6 +29,9 @@ export type fullQc = {
   grapple_control: number,
   actions: Array<{ action: string, pool: number }>,
   ref: string,
+  qc_attacks: Array<string>,
+  qc_charms: Array<string>,
+  qc_merits: Array<string>,
 } & withQcStats &
   withWillpower &
   withHealthLevels &
@@ -45,6 +48,7 @@ export type QcAttack = {
   overwhelming: number,
   range: string,
   tags: Array<string>,
+  qc_attackable_type: 'Qc' | 'Battlegroup',
 }
 
 export type QcMerit = {

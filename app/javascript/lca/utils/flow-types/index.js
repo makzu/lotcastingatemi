@@ -76,6 +76,7 @@ export type Battlegroup = {
   soak: number,
   health_levels: number,
   perfect_morale: boolean,
+  qc_attacks: Array<string>,
 } & withBasicInfo &
   withQcStats &
   withWillpower &

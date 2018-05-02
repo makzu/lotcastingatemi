@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -23,6 +24,21 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.qc_attacks[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  } else if (action.type === QCA_DESTROY) {
+    const parent = getQcAttackParent(state, action.meta.id)
+    return {
+      ...state,
+      qc_attacks: omit(state.qc_attacks, action.meta.id),
+      [parent]: {
+        ...state[parent],
+        [action.meta.qcId]: {
+          ...state[parent][action.meta.qcId],
+          qc_attacks: state[parent][action.meta.qcId].qc_attacks.filter(
+            w => w != action.meta.id
+          ),
         },
       },
     }
@@ -89,16 +105,37 @@ export function updateQcAttackMulti(
 }
 
 export function destroyQcAttack(id: number, qcId: number, qcType: string) {
+  let transactionId = 'QCattack' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/${qcType.toLowerCase()}s/${qcId}/qc_attacks/${id}`,
     method: 'DELETE',
     types: [
-      QCA_DESTROY,
+      {
+        type: QCA_DESTROY,
+        meta: {
+          id: id,
+          qcId: qcId,
+          optimistic: { type: BEGIN, id: transactionId },
+        },
+      },
       {
         type: QCA_DESTROY_SUCCESS,
-        meta: { id: id, qcId: qcId, qcType: qcType },
+        meta: {
+          id: id,
+          qcId: qcId,
+          optimistic: { type: COMMIT, id: transactionId },
+        },
       },
-      QCA_DESTROY_FAILURE,
+      {
+        type: QCA_DESTROY_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
+      },
     ],
   })
+}
+
+const getQcAttackParent = (state: EntityState, id: number) => {
+  const attack = state.qc_attacks[id]
+  if (attack.qc_attackable_type === 'Qc') return 'qcs'
+  else return 'battlegroups'
 }

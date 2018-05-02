@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -23,6 +24,20 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.qc_charms[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  } else if (action.type === QCC_DESTROY) {
+    return {
+      ...state,
+      qc_charms: omit(state.qc_charms, action.meta.id),
+      qcs: {
+        ...state.qcs,
+        [action.meta.qcId]: {
+          ...state.qcs[action.meta.qcId],
+          qc_charms: state.qcs[action.meta.qcId].qc_charms.filter(
+            w => w != action.meta.id
+          ),
         },
       },
     }
@@ -81,13 +96,31 @@ export function updateQcCharmMulti(id: number, qcId: number, charm: Object) {
 }
 
 export function destroyQcCharm(id: number, qcId: number) {
+  let transactionId = 'QCattack' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/qcs/${qcId}/qc_charms/${id}`,
     method: 'DELETE',
     types: [
-      QCC_DESTROY,
-      { type: QCC_DESTROY_SUCCESS, meta: { id: id, qcId: qcId } },
-      QCC_DESTROY_FAILURE,
+      {
+        type: QCC_DESTROY,
+        meta: {
+          id: id,
+          qcId: qcId,
+          optimistic: { type: BEGIN, id: transactionId },
+        },
+      },
+      {
+        type: QCC_DESTROY_SUCCESS,
+        meta: {
+          id: id,
+          qcId: qcId,
+          optimistic: { type: COMMIT, id: transactionId },
+        },
+      },
+      {
+        type: QCC_DESTROY_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
+      },
     ],
   })
 }

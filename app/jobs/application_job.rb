@@ -25,7 +25,7 @@ class ApplicationJob < ActiveJob::Base
     )
   end
 
-  def broadcast_destroy(id, entity, parent_type, parent_id)
+  def broadcast_destroy(id, entity, parent_type, parent_id, chronicle_id)
     ActionCable.server.broadcast(
       "entity-update-#{id}",
       event: 'destroy',
@@ -33,7 +33,8 @@ class ApplicationJob < ActiveJob::Base
       assoc: "#{entity.entity_assoc}s",
       id: entity.id,
       parent_type: "#{parent_type}s",
-      parent_id: parent_id
+      parent_id: parent_id,
+      chronicle_id: chronicle_id
     )
   end
 end

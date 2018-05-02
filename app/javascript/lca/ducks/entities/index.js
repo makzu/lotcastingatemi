@@ -163,7 +163,7 @@ function handleCreateAction(state: EntityState, payload) {
 }
 
 function handleDestroyAction(state: EntityState, payload) {
-  const chronicle_id = state[payload.type][payload.id].chronicle_id
+  const { chronicle_id } = payload
   let chrons = {}
   if (chronicle_id)
     chrons = {

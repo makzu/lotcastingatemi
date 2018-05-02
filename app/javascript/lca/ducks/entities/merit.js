@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -23,6 +24,20 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.merits[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  } else if (action.type === MRT_DESTROY) {
+    return {
+      ...state,
+      merits: omit(state.merits, action.meta.id),
+      characters: {
+        ...state.characters,
+        [action.meta.charId]: {
+          ...state.characters[action.meta.charId],
+          merits: state.characters[action.meta.charId].merits.filter(
+            w => w != action.meta.id
+          ),
         },
       },
     }
@@ -81,13 +96,31 @@ export function updateMeritMulti(id: number, charId: number, merit: Object) {
 }
 
 export function destroyMerit(id: number, charId: number) {
+  let transactionId = 'merit' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/characters/${charId}/merits/${id}`,
     method: 'DELETE',
     types: [
-      MRT_DESTROY,
-      { type: MRT_DESTROY_SUCCESS, meta: { id: id, charId: charId } },
-      MRT_DESTROY_FAILURE,
+      {
+        type: MRT_DESTROY,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: BEGIN, id: transactionId },
+        },
+      },
+      {
+        type: MRT_DESTROY_SUCCESS,
+        meta: {
+          id: id,
+          charId: charId,
+          optimistic: { type: COMMIT, id: transactionId },
+        },
+      },
+      {
+        type: MRT_DESTROY_FAILURE,
+        meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
+      },
     ],
   })
 }

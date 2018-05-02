@@ -2,6 +2,7 @@
 ###### *May 1, 2018*
 * Added 'Flaw' to the list of merit categories
 * Storytellers can now delete Merits, Weapons, Charms of Characters/QCs/BGs in their Chronicles
+* Page titles now include the name of the Character/QC/BG you're looking at
 * Deleting Merits/Weapons/Charms is now more reliable
 * Bug fixes
 

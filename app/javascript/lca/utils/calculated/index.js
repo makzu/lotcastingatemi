@@ -40,10 +40,16 @@ export const abil = (character: Character, ability: string) => {
   }
 }
 
-export const specialtiesFor = (character: Character, ability) =>
-  character.specialties
-    .filter(s => s.ability === ability)
-    .map(s => s.context) || []
+export const specialtiesFor = (character: Character, ability) => {
+  let abili = ability
+  if (abili.startsWith('martial arts')) abili = 'martial_arts'
+  else if (abili.startsWith('craft')) abili = 'craft'
+  return (
+    character.specialties
+      .filter(s => s.ability === abili)
+      .map(s => s.context) || []
+  )
+}
 
 /* Health */
 export const totalHealthLevels = (character: withHealthLevels) =>

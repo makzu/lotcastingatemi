@@ -26,7 +26,7 @@ RSpec.describe ApplicationJob, type: :job do
 
   it 'broadcast_destroy works' do
     expect do
-      ApplicationJob.new.broadcast_destroy(character.player_id, character, 'player', character.player_id)
+      ApplicationJob.new.broadcast_destroy(character.player_id, character, 'player', character.player_id, nil)
     end.to(have_broadcasted_to("entity-update-#{character.player_id}").with do |msg|
       expect(msg['event']).to eq 'destroy'
       expect(msg['type']).to eq character.entity_type + 's'

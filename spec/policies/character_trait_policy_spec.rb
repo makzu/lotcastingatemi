@@ -21,8 +21,7 @@ RSpec.describe CharacterTraitPolicy do
   context 'for the ST' do
     let(:player) { st }
 
-    it { is_expected.to permit_actions(%i[update show]) }
-    it { is_expected.to forbid_action(:destroy) }
+    it { is_expected.to permit_actions(%i[update show destroy]) }
   end
 
   context 'for another player in a chronicle' do

@@ -14,6 +14,9 @@ import AttackTagsDisplay from './AttackTagsDisplay.jsx'
 
 const styles = theme => ({
   root: {},
+  clickable: {
+    cursor: 'pointer',
+  },
   label: {
     ...theme.typography.body1,
     fontSize: '0.75rem',
@@ -113,34 +116,45 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     const showSpecialties =
       sp.length > 0 && ((pool.rating && pool.specialtyMatters) || !pool.rating)
 
+    const hideCursor =
+      this.props.noSummary ||
+      this.props.qc ||
+      this.props.battlegroup ||
+      this.props.pool.noSummary
+
     return (
       <Fragment>
+        {
+          // TODO: add ButtonBase here
+        }
         <div className={classes.root} onClick={setOpen}>
-          <div className={classes.label}>
-            <span className={classes.labelSpan}>{label}</span>
-          </div>
-          <div>
-            <span className={classes.pool}>{pool.total}</span>
-            {(pool.excellency || 0) > 0 && (
-              <span className={classes.excellency}>
-                &nbsp;+{pool.excellency}/{pool.excellencyCost}m
-              </span>
-            )}
-            {(pool.minimum || 0) > 0 && (
-              <span className={classes.excellency}>
-                &nbsp;min {pool.minimum}
-              </span>
-            )}
-          </div>
-          {(pool.excellencyStunt || 0) > 0 && (
-            <div className={classes.excellency}>
-              stunt +{pool.excellencyStunt}/{pool.excellencyStuntCost}m
+          <div className={hideCursor ? undefined : classes.clickable}>
+            <div className={classes.label}>
+              <span className={classes.labelSpan}>{label}</span>
             </div>
-          )}
-          {merits}
-          {showSpecialties && (
-            <div className={classes.specialty}>+1 specialty</div>
-          )}
+            <div>
+              <span className={classes.pool}>{pool.total}</span>
+              {(pool.excellency || 0) > 0 && (
+                <span className={classes.excellency}>
+                  &nbsp;+{pool.excellency}/{pool.excellencyCost}m
+                </span>
+              )}
+              {(pool.minimum || 0) > 0 && (
+                <span className={classes.excellency}>
+                  &nbsp;min {pool.minimum}
+                </span>
+              )}
+            </div>
+            {(pool.excellencyStunt || 0) > 0 && (
+              <div className={classes.excellency}>
+                stunt +{pool.excellencyStunt}/{pool.excellencyStuntCost}m
+              </div>
+            )}
+            {merits}
+            {showSpecialties && (
+              <div className={classes.specialty}>+1 specialty</div>
+            )}
+          </div>
         </div>
 
         <Dialog open={open} onClose={setClosed}>

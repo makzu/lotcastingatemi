@@ -21,7 +21,7 @@ module Broadcastable
     end
 
     def broadcast_destroy
-      DestroyBroadcastJob.perform_later(all_ids, self, parent.entity_type, parent.id)
+      DestroyBroadcastJob.perform_later(all_ids, self, parent.entity_type, parent.id, chron_id)
     end
 
     private
@@ -36,6 +36,11 @@ module Broadcastable
     def parent
       return player if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
       character
+    end
+
+    def chron_id
+      return chronicle_id if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
+      nil
     end
   end
 end

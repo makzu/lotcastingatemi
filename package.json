@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.43",
-    "@rails/webpacker": "^3.5.2",
+    "@rails/webpacker": "^3.5.3",
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.24.1",
     "babel-loader": "7.x",
@@ -46,6 +46,7 @@
     "react-router-dom": "^4.1.1",
     "react-select": "^1.2.1",
     "react-sortable-hoc": "^0.6.8",
+    "recompose": "^0.27.0",
     "redux": "^4.0.0",
     "redux-api-middleware": "^2.2.0",
     "redux-devtools-extension": "^2.13.2",
@@ -62,9 +63,12 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
+    "babel-plugin-lodash": "^3.3.2",
     "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "babel-preset-flow": "^6.23.0",
     "enzyme": "^3.1.1",

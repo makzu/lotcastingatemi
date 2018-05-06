@@ -21,7 +21,6 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
-import { qcPool } from 'utils/calculated'
 import type { fullQc } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
@@ -200,7 +199,7 @@ function QcCard(props: Props) {
         )}
         <PoolDisplay
           qc
-          pool={qcPool(qc, qc.join_battle, penalties.wound)}
+          pool={pools.joinBattle}
           label="Join Battle"
           classes={{ root: classes.poolBlock }}
         />

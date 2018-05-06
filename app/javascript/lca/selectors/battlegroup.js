@@ -2,6 +2,7 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { getQcAttacks } from './qc.js'
+import { qcPool } from 'utils/calculated'
 
 const entities = state => state.entities.current
 
@@ -42,4 +43,11 @@ export const canIEditBattlegroup = createSelector(
 export const canIDeleteBattlegroup = createSelector(
   [doIOwnBattlegroup],
   doI => doI
+)
+
+export const getPoolsAndRatingsForBattlegroup = createSelector(
+  [getSpecificBattlegroup],
+  battlegroup => ({
+    joinBattle: qcPool(battlegroup, battlegroup.join_battle, 0),
+  })
 )

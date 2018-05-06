@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
@@ -49,13 +50,10 @@ type Props = {
   chronicle: Chronicle,
 }
 
-class ChronicleCombatDashboard extends Component<Props> {
+class CombatDashboard extends Component<Props> {
   render() {
     /* Escape hatch */
-    if (
-      this.props.chronicle == undefined ||
-      this.props.chronicle.name == undefined
-    )
+    if (this.props.chronicle == null || this.props.chronicle.name == null)
       return (
         <BlockPaper>
           <Typography paragraph>This Chronicle has not yet loaded.</Typography>
@@ -63,26 +61,15 @@ class ChronicleCombatDashboard extends Component<Props> {
       )
 
     const { characters, qcs, battlegroups } = this.props
+    const entities = [...characters, ...qcs, ...battlegroups]
 
-    const characterList = characters.filter(c => !c.in_combat).map(c => (
-      <Grid item xs={6} lg={4} xl={3} key={c.id}>
-        <OutOfCombatCard character={c} />
-      </Grid>
-    ))
-    const qcList = qcs.filter(c => !c.in_combat).map(c => (
-      <Grid item xs={6} lg={4} xl={3} key={c.id}>
-        <OutOfCombatCard character={c} />
-      </Grid>
-    ))
-    const bgList = battlegroups.filter(c => !c.in_combat).map(c => (
-      <Grid item xs={6} lg={4} xl={3} key={c.id}>
+    const outOfCombatList = entities.filter(c => !c.in_combat).map(c => (
+      <Grid item xs={6} lg={4} xl={3} key={c.type + c.id}>
         <OutOfCombatCard character={c} />
       </Grid>
     ))
 
-    const inCombatEntities = characters
-      .concat(qcs)
-      .concat(battlegroups)
+    const inCombatEntities = entities
       .filter(c => c.in_combat)
       .sort(initiativeSort)
 
@@ -114,9 +101,7 @@ class ChronicleCombatDashboard extends Component<Props> {
           <Typography variant="headline">Out of Combat</Typography>
         </Grid>
 
-        {characterList}
-        {qcList}
-        {bgList}
+        {outOfCombatList}
       </Grid>
     )
   }
@@ -137,6 +122,6 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default ProtectedComponent(
-  connect(mapStateToProps)(ChronicleCombatDashboard)
+export default compose(ProtectedComponent, connect(mapStateToProps))(
+  CombatDashboard
 )

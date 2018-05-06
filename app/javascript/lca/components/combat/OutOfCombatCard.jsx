@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
@@ -9,9 +8,12 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
+import JoinBattlePopup from './JoinBattlePopup.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
-import { canIEdit } from 'selectors'
+import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
+import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
 
 const styles = theme => ({
   root: {
@@ -76,7 +78,22 @@ const styles = theme => ({
   },
 })
 
-function OutOfCombatCard({ character, canEdit, update, classes }) {
+type Props = {
+  character: Character | fullQc | Battlegroup,
+  canEdit: boolean,
+  update: Function,
+  pools: Object,
+  classes: Object,
+}
+
+function OutOfCombatCard({
+  character,
+  canEdit,
+  //eslint-disable-next-line no-unused-vars
+  update,
+  pools,
+  classes,
+}: Props) {
   return (
     <Paper className={classes.root}>
       <div className={classes.nameRow}>
@@ -94,24 +111,19 @@ function OutOfCombatCard({ character, canEdit, update, classes }) {
         </div>
       </div>
 
-      {canEdit && (
-        <div>
-          <Button onClick={() => update(character.id, 'in_combat', true)}>
-            Add to Combat
-          </Button>
-          {(character.type === 'qc' || character.type === 'battlegroup') && (
-            <Button disabled>Add Clone</Button>
-          )}
-        </div>
-      )}
+      <div>
+        <PoolDisplay
+          qc={character.type === 'qc' || character.type === 'battlegroup'}
+          pool={pools.joinBattle}
+          label="Join Battle"
+          classes={{ root: classes.poolBlock }}
+        />
+        {canEdit && (
+          <JoinBattlePopup character={character} pool={pools.joinBattle} />
+        )}
+      </div>
     </Paper>
   )
-}
-OutOfCombatCard.propTypes = {
-  character: PropTypes.object.isRequired,
-  canEdit: PropTypes.bool,
-  update: PropTypes.func,
-  classes: PropTypes.object,
 }
 function mapStateToProps(state, props) {
   let type
@@ -121,6 +133,7 @@ function mapStateToProps(state, props) {
 
   return {
     canEdit: canIEdit(state, props.character.id, type),
+    pools: getPoolsAndRatingsGeneric(state, props.character.id, type),
   }
 }
 function mapDispatchToProps(dispatch: Function, props) {

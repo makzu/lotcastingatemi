@@ -48,6 +48,7 @@ export const genMortal = {
   name: gen.string,
   ...genHealthLevels,
   type: 'Character',
+  essence: gen.sPosInt,
   attr_strength: gen.sPosInt,
   attr_dexterity: gen.sPosInt,
   attr_stamina: gen.sPosInt,

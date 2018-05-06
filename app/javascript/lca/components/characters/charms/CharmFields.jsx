@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import React, { Component, Fragment } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
@@ -24,6 +25,7 @@ import { CharmSummaryBlock } from './CharmDisplay.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import CharmTimingSelect from 'components/generic/CharmTimingSelect.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
 import { checkVisible } from 'utils'
 import { abilitiesWithRatings } from 'utils/calculated'
 import {
@@ -59,18 +61,17 @@ class CharmFields extends Component<Props, { charm: Charm }> {
 
   handleChange = e => {
     let { name, value } = e.target
-    if (name == 'keywords') value = value.split(',')
 
     this.setState({ charm: { ...this.state.charm, [name]: value } })
   }
 
   handleBlur = e => {
-    const { name } = e.target
-    const { charm } = this.state
+    const { name, value } = e.target
+    const { charm } = this.props
 
-    if (charm[name] != this.props.charm[name]) {
-      this.props.onUpdate(charm.id, charm.character_id, name, charm[name])
-    }
+    if (isEqual(charm[name], value)) return
+
+    this.props.onUpdate(charm.id, charm.character_id, name, value)
   }
 
   handleRatingChange = e => {
@@ -265,9 +266,9 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               margin="dense"
             />
             <br />
-            <TextField
-              name="keywords"
-              value={charm.keywords.join(',')}
+            <TagsField
+              trait="keywords"
+              value={charm.keywords}
               onChange={handleChange}
               onBlur={handleBlur}
               fullWidth={true}

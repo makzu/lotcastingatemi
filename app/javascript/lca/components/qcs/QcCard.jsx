@@ -231,7 +231,7 @@ function QcCard(props: Props) {
           />
           <PoolDisplay
             qc
-            pool={qcPool(qc, qc.senses, penalties.wound)}
+            pool={pools.senses}
             label="Senses"
             classes={{ root: classes.poolBlock }}
           />

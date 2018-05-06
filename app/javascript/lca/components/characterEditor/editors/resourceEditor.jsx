@@ -45,7 +45,7 @@ const ResourceEditor = ({ character, onChange }: Props) => {
       character={character}
       trait="resources"
       Fields={ResourceFields}
-      newObject={{ context: 'New Resource', value: 0 }}
+      newObject={{ resource: 'New Resource', value: 0 }}
       onChange={onChange}
     />
   )

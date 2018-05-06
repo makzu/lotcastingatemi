@@ -39,6 +39,7 @@ export {
   destroyQcCharm,
   createBattlegroup,
   updateBattlegroup,
+  updateBattlegroupMulti,
   destroyBattlegroup,
   fetchCurrentPlayer,
   updatePlayer,

@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
@@ -10,6 +11,7 @@ import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import RangeSelect from 'components/generic/RangeSelect.jsx'
 import RatingField from '../generic/RatingField.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
 import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack } from 'utils/flow-types'
@@ -60,19 +62,17 @@ class QcAttackFields extends Component<Props, State> {
 
   handleChange = e => {
     let { name, value } = e.target
-    if (name == 'tags') {
-      value = value.split(',')
-    }
 
     this.setState({ attack: { ...this.state.attack, [name]: value } })
   }
 
   handleBlur = e => {
-    let { name } = e.target
-    const { attack } = this.state
-    if (attack[name] == this.props.attack[name]) return
+    let { name, value } = e.target
+    const { attack } = this.props
 
-    this.props.onAttackChange(attack.id, name, attack[name])
+    if (isEqual(this.props.attack[name], value)) return
+
+    this.props.onAttackChange(attack.id, name, value)
   }
 
   handleRatingChange = e => {
@@ -144,9 +144,9 @@ class QcAttackFields extends Component<Props, State> {
           onChange={handleRatingChange}
         />
 
-        <TextField
-          name="tags"
-          value={attack.tags.join(', ')}
+        <TagsField
+          trait="tags"
+          value={attack.tags}
           label="Tags (comma separated)"
           className={classes.tagsField}
           margin="dense"

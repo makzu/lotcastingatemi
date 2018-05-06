@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import * as React from 'react'
 const { Component } = React
 import { SortableHandle } from 'react-sortable-hoc'
@@ -24,6 +25,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import styles from './CharmStyles.js'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 import { SpellSummaryBlock } from './SpellDisplay.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
 import { checkVisible } from 'utils'
 import type { Character, Spell } from 'utils/flow-types'
 
@@ -53,18 +55,17 @@ class SpellFields extends Component<Props, State> {
 
   handleChange = e => {
     let { name, value } = e.target
-    if (name == 'keywords') value = value.split(',')
 
     this.setState({ spell: { ...this.state.spell, [name]: value } })
   }
 
   handleBlur = e => {
-    const { name } = e.target
-    const { spell } = this.state
+    const { name, value } = e.target
+    const { spell } = this.props
 
-    if (spell[name] != this.props.spell[name]) {
-      this.props.onUpdate(spell.id, spell.character_id, name, spell[name])
-    }
+    if (isEqual(spell[name], value)) return
+
+    this.props.onUpdate(spell.id, spell.character_id, name, value)
   }
 
   handleRatingChange = e => {
@@ -213,9 +214,9 @@ class SpellFields extends Component<Props, State> {
               }
             />
             <br />
-            <TextField
-              name="keywords"
-              value={spell.keywords.join(',')}
+            <TagsField
+              trait="keywords"
+              value={spell.keywords}
               onChange={handleChange}
               onBlur={handleBlur}
               fullWidth={true}

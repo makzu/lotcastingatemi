@@ -35,8 +35,10 @@ export function soak(
   }
   let isob = spells.find(s => s === 'invulnerable skin of bronze')
   if (isob != undefined && character.armor_weight === 'unarmored') {
-    b += 3
-    bonus = bonus.concat([{ label: 'invulnerable skin of bronze', bonus: 3 }])
+    b += character.essence
+    bonus = bonus.concat([
+      { label: 'invulnerable skin of bronze', bonus: character.essence },
+    ])
   }
 
   // Earth aspect DBs gain higher of 3 or (essence) to soak generally
@@ -54,23 +56,25 @@ export function soak(
             { label: 'anima', bonus: Math.max(character.essence, 3) },
           ])
         } else {
-          bonus = bonus.concat([
+          bonus = [
+            ...bonus,
             {
               label: '/3m anima',
               bonus: Math.max(character.essence, 3),
               situational: true,
             },
-          ])
+          ]
         }
         break
       case 'fire':
-        bonus = bonus.concat([
+        bonus = [
+          ...bonus,
           {
             label: `${bonfire ? '' : '/5m '}vs heat`,
             bonus: character.essence,
             situational: true,
           },
-        ])
+        ]
         break
     }
   }

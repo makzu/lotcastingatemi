@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
 import WeightSelect from 'components/generic/weightSelect.jsx'
 
 import type { withArmorStats as Character } from 'utils/flow-types'
@@ -58,12 +59,11 @@ function ArmorEditor(props: Props) {
       />
       <br />
 
-      <TextField
-        name="armor_tags"
-        value={character.armor_tags.join(',')}
-        label="Tags (comma separated)"
-        margin="dense"
+      <TagsField
+        trait="armor_tags"
+        label="Tags"
         fullWidth
+        value={character.armor_tags}
         onChange={onChange}
         onBlur={onBlur}
       />

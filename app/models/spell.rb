@@ -18,7 +18,7 @@ class Spell < ApplicationRecord
 
   def trim_keywords
     return unless will_save_change_to_attribute? :keywords
-    self.keywords = keywords.reject(&:blank?).collect(&:strip)
+    self.keywords = keywords.reject(&:blank?).collect(&:strip).collect(&:downcase)
   end
 
   def entity_type

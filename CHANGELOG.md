@@ -1,3 +1,7 @@
+## v50
+###### *Not yet released*
+* Bug fixes (thanks Everspace, Madletter, Artirian_Legacy)
+
 ## v49
 ###### *May 1, 2018*
 * Added 'Flaw' to the list of merit categories

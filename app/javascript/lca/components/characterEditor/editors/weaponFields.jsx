@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import * as React from 'react'
 const { Component, Fragment } = React
 import { SortableHandle } from 'react-sortable-hoc'
@@ -20,6 +21,7 @@ import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import WeaponAbilitySelect from './weaponAbilitySelect.jsx'
 import WeaponAttributeSelect from './weaponAttributeSelect.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
 import WeightSelect from 'components/generic/weightSelect.jsx'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
@@ -74,19 +76,16 @@ class WeaponFields extends Component<Props, State> {
 
   handleChange = e => {
     let { name, value } = e.target
-    if (name == 'tags') {
-      value = value.split(',')
-    }
 
     this.setState({ weapon: { ...this.state.weapon, [name]: value } })
   }
 
   handleBlur = e => {
-    let { name } = e.target
-    const { weapon } = this.state
-    if (weapon[name] == this.props.weapon[name]) return
+    let { name, value } = e.target
+    const { weapon } = this.props
+    if (isEqual(weapon[name], value)) return
 
-    this.props.onChange(weapon.id, name, weapon[name])
+    this.props.onChange(weapon.id, name, value)
   }
 
   handleRatingChange = e => {
@@ -133,10 +132,10 @@ class WeaponFields extends Component<Props, State> {
           onChange={handleRatingChange}
         />
 
-        <TextField
+        <TagsField
           label="Tags (comma separated)"
-          name="tags"
-          value={weapon.tags.join(', ')}
+          trait="tags"
+          value={weapon.tags}
           className={classes.tagsField}
           margin="dense"
           onBlur={handleBlur}

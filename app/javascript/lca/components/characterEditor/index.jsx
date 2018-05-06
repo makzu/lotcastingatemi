@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
@@ -52,18 +53,16 @@ class CharacterEditor extends Component<Props, State> {
 
   handleChange = (e: SyntheticInputEvent<>) => {
     let { name, value } = e.target
-    if (name === 'armor_tags') value = value.split(',')
-
     this.setState({ character: { ...this.state.character, [name]: value } })
   }
 
   handleBlur = (e: SyntheticInputEvent<>) => {
-    const { name } = e.target
-    const { character } = this.state
+    const { name, value } = e.target
+    const { character } = this.props
 
-    if (character[name] === this.props.character[name]) return
+    if (isEqual(character[name], value)) return
 
-    this.props.updateCharacter(character.id, name, character[name])
+    this.props.updateCharacter(character.id, name, value)
   }
 
   handleRatingChange = (e: SyntheticInputEvent<>) => {

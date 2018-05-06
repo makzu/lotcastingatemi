@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 
 import Button from 'material-ui/Button'
@@ -8,6 +9,7 @@ import Delete from '@material-ui/icons/Delete'
 
 import CharmTimingSelect from 'components/generic/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
 import type { QcCharm } from 'utils/flow-types'
 
 type Props = {
@@ -30,17 +32,17 @@ export default class QcCharmFields extends Component<Props, State> {
 
   handleChange = (e: SyntheticInputEvent<>) => {
     let { name, value } = e.target
-    if (name === 'keywords') value = value.split(',')
 
     this.setState({ charm: { ...this.state.charm, [name]: value } })
   }
 
   handleBlur = (e: SyntheticInputEvent<>) => {
-    const { name } = e.target
-    const { charm } = this.state
-    if (charm[name] == this.props.charm[name]) return
+    const { name, value } = e.target
+    const { charm } = this.props
 
-    this.props.onCharmChange(charm.id, name, this.state.charm[name])
+    if (isEqual(charm[name], value)) return
+
+    this.props.onCharmChange(charm.id, name, value)
   }
 
   handleRatingChange = (e: SyntheticInputEvent<>) => {
@@ -102,9 +104,9 @@ export default class QcCharmFields extends Component<Props, State> {
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        <TextField
-          name="keywords"
-          value={charm.keywords.join(',')}
+        <TagsField
+          trait="keywords"
+          value={charm.keywords}
           label="Keywords (comma separated)"
           margin="dense"
           onChange={handleChange}

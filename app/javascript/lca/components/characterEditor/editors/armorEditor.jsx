@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import { shouldUpdate } from 'recompose'
 
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
@@ -9,7 +10,7 @@ import Typography from 'material-ui/Typography'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import WeightSelect from 'components/generic/weightSelect.jsx'
-
+import { isUnequalByKeys } from 'utils'
 import type { withArmorStats as Character } from 'utils/flow-types'
 
 type Props = {
@@ -71,4 +72,11 @@ function ArmorEditor(props: Props) {
   )
 }
 
-export default ArmorEditor
+export default shouldUpdate((props, newProps) =>
+  isUnequalByKeys(props.character, newProps.character, [
+    'armor_name',
+    'armor_weight',
+    'armor_tags',
+    'armor_is_artifact',
+  ])
+)(ArmorEditor)

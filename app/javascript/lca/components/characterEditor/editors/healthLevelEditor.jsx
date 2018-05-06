@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import { compose, shouldUpdate } from 'recompose'
 
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
@@ -7,6 +8,7 @@ import Typography from 'material-ui/Typography'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import { isUnequalByKeys } from 'utils'
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -118,4 +120,19 @@ function HealthLevelEditor({
     </BlockPaper>
   )
 }
-export default withStyles(styles)(HealthLevelEditor)
+
+export default compose(
+  withStyles(styles),
+  shouldUpdate((props, nextProps) =>
+    isUnequalByKeys(props.character, nextProps.character, [
+      'damage_bashing',
+      'damage_lethal',
+      'damage_aggravated',
+      'health_level_0s',
+      'health_level_1s',
+      'health_level_2s',
+      'health_level_4s',
+      'health_level_incap',
+    ])
+  )
+)(HealthLevelEditor)

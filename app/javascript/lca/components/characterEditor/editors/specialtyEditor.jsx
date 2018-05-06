@@ -1,5 +1,6 @@
 // @flow
 import React, { Fragment } from 'react'
+import { shouldUpdate } from 'recompose'
 
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
@@ -10,6 +11,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
+import { isUnequalByKeys } from 'utils'
 import * as calc from 'utils/calculated'
 import type { withIntimacies as Character } from 'utils/flow-types'
 
@@ -63,4 +65,6 @@ const SpecialtyEditor = ({ character, onRatingChange }: Props) => {
   )
 }
 
-export default SpecialtyEditor
+export default shouldUpdate((props, newProps) =>
+  isUnequalByKeys(props.character, newProps.character, ['specialties'])
+)(SpecialtyEditor)

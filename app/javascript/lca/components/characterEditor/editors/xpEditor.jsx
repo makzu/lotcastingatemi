@@ -1,5 +1,6 @@
 // @flow
 import React, { Fragment } from 'react'
+import { compose, shouldUpdate } from 'recompose'
 
 import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
@@ -10,6 +11,7 @@ import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import { isUnequalByKeys } from 'utils'
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -160,4 +162,17 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
   </BlockPaper>
 )
 
-export default withStyles(styles)(XpEditor)
+export default compose(
+  withStyles(styles),
+  shouldUpdate((props, nextProps) =>
+    isUnequalByKeys(props.character, nextProps.character, [
+      'xp_log',
+      'xp_log_solar',
+      'xp_total',
+      'xp_solar_total',
+      'xp_craft_silver',
+      'xp_craft_gold',
+      'xp_craft_white',
+    ])
+  )
+)(XpEditor)

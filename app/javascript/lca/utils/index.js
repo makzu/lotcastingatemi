@@ -1,4 +1,6 @@
 // @flow
+import { isEqual } from 'lodash'
+
 export function clamp(val: number, min: number, max: number): number {
   if (val > max) {
     if (max === 10 && val === 10)
@@ -33,3 +35,9 @@ export const sortOrderSort = (a: Sortable, b: Sortable) =>
   a.sort_order - b.sort_order
 export const chronicleSortOrderSort = (a: ChSortable, b: ChSortable) =>
   a.chronicle_sort_order - b.chronicle_sort_order
+
+export const isUnequalByKeys = (
+  obj1: Object,
+  obj2: Object,
+  keys: Array<string>
+) => keys.some(key => !isEqual(obj1[key], obj2[key]))

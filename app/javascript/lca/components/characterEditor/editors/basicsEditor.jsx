@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose, shouldUpdate } from 'recompose'
 
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
@@ -9,6 +10,7 @@ import TextField from 'material-ui/TextField'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { canIDeleteCharacter } from 'selectors'
+import { isUnequalByKeys } from 'utils'
 import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.js'
 import type { Character } from 'utils/flow-types'
 
@@ -77,4 +79,14 @@ const mapStateToProps = (state, props) => ({
   showPublicCheckbox: canIDeleteCharacter(state, props.character.id),
 })
 
-export default connect(mapStateToProps)(BasicsEditor)
+export default compose(
+  connect(mapStateToProps),
+  shouldUpdate((props, nextProps) =>
+    isUnequalByKeys(props.character, nextProps.character, [
+      'name',
+      'essence',
+      'description',
+      'public',
+    ])
+  )
+)(BasicsEditor)

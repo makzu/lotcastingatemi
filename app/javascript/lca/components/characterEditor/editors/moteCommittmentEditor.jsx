@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 const { Fragment } = React
+import { shouldUpdate } from 'recompose'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
@@ -8,6 +9,7 @@ import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import { isUnequalByKeys } from 'utils'
 import type { Character } from 'utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
@@ -72,4 +74,6 @@ const MoteCommittmentEditor = ({ character, onChange }: Props) => {
   )
 }
 
-export default MoteCommittmentEditor
+export default shouldUpdate((props, newProps) =>
+  isUnequalByKeys(props.character, newProps.character, ['motes_committed'])
+)(MoteCommittmentEditor)

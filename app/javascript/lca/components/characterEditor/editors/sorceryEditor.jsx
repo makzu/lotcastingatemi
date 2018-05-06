@@ -1,5 +1,6 @@
 // @flow
 import React, { Fragment } from 'react'
+import { shouldUpdate } from 'recompose'
 
 import Checkbox from 'material-ui/Checkbox'
 import { FormControlLabel } from 'material-ui/Form'
@@ -11,6 +12,7 @@ import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import { isUnequalByKeys } from 'utils'
 import type { Character } from 'utils/flow-types'
 
 const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
@@ -80,4 +82,10 @@ function SorceryEditor(props: Props) {
     </BlockPaper>
   )
 }
-export default SorceryEditor
+export default shouldUpdate((props, newProps) =>
+  isUnequalByKeys(props.character, newProps.character, [
+    'is_sorcerer',
+    'sorcerous_motes',
+    'rituals',
+  ])
+)(SorceryEditor)

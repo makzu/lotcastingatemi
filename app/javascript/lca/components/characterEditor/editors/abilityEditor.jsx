@@ -1,5 +1,6 @@
 // @flow
 import React, { Fragment } from 'react'
+import { shouldUpdate } from 'recompose'
 
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
@@ -9,7 +10,12 @@ import ListAttributeEditor, {
 } from 'components/generic/ListAttributeEditor.jsx'
 import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField.jsx'
-import { ABILITY_MAX as MAX, ABILITY_MIN as MIN } from 'utils/constants.js'
+import { isUnequalByKeys } from 'utils'
+import {
+  ABILITY_MAX as MAX,
+  ABILITY_MIN as MIN,
+  ABILITIES_ALL,
+} from 'utils/constants.js'
 import type { withAbilities as Character } from 'utils/flow-types'
 
 function AbilityField(props) {
@@ -264,4 +270,10 @@ function AbilityEditor(props: Props) {
   )
 }
 
-export default AbilityEditor
+export default shouldUpdate((props, newProps) =>
+  isUnequalByKeys(
+    props.character,
+    newProps.character,
+    ABILITIES_ALL.map(a => a.abil)
+  )
+)(AbilityEditor)

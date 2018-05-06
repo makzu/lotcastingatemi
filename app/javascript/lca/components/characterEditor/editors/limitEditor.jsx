@@ -1,11 +1,13 @@
 // @flow
 import React from 'react'
+import { shouldUpdate } from 'recompose'
 
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import { isUnequalByKeys } from 'utils'
 import { LIMIT_MAX } from 'utils/constants.js'
 import type { Character } from 'utils/flow-types'
 
@@ -49,4 +51,9 @@ function LimitEditor({
     </BlockPaper>
   )
 }
-export default LimitEditor
+export default shouldUpdate((props, newProps) =>
+  isUnequalByKeys(props.character, newProps.character, [
+    'limit',
+    'limit_trigger',
+  ])
+)(LimitEditor)

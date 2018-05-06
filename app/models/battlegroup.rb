@@ -33,12 +33,6 @@ class Battlegroup < ApplicationRecord
   def entity_type
     'battlegroup'
   end
-
-  def type
-    entity_type
-  end
-
-  def entity_assoc
-    entity_type
-  end
+  alias_attribute :entity_assoc, :entity_type
+  alias_attribute :type, :entity_type
 end

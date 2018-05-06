@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 # app/serializers/qc_serializer.rb
-class QcSerializer < ActiveModel::Serializer
+class QcSerializer < PlayerAssetSerializer
   # rubocop:disable Layout/EmptyLinesAroundArguments
-  attributes :id, :player_id, :chronicle_id,
-             :hidden, :pinned, :sort_order, :chronicle_sort_order, :public,
-             :name, :essence, :description, :type,
+  attributes :name, :essence, :description,
              :willpower_temporary, :willpower_permanent,
              :health_level_0s, :health_level_1s, :health_level_2s,
              :health_level_4s, :health_level_incap,
@@ -22,8 +20,7 @@ class QcSerializer < ActiveModel::Serializer
              :actions, :senses, :grapple, :grapple_control,
 
              :ties, :principles,
-
-             :initiative, :onslaught, :in_combat, :has_acted
+             :notes
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   has_many :qc_attacks

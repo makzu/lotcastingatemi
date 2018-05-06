@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # app/serializers/character_serializer.rb
-class CharacterSerializer < ActiveModel::Serializer
+class CharacterSerializer < PlayerAssetSerializer
   # rubocop:disable Layout/EmptyLinesAroundArguments
-  attributes :id, :name, :essence, :description, :type,
+  attributes :name, :essence, :description,
              :willpower_temporary, :willpower_permanent,
              :health_level_0s, :health_level_1s, :health_level_2s,
              :health_level_4s, :health_level_incap,
@@ -28,21 +28,14 @@ class CharacterSerializer < ActiveModel::Serializer
 
              :is_sorcerer, :sorcerous_motes, :rituals,
 
-             :lore_background,
-
-             :native_language,
+             :lore_background, :native_language,
 
              :resources,
 
-             :initiative, :onslaught, :in_combat, :has_acted,
-
              :xp_total, :xp_solar_total, :xp_log, :xp_log_solar, :bp_log,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
-             :hidden, :pinned, :sort_order, :chronicle_sort_order, :public
+             :notes, :portrait_link
   # rubocop:enable Layout/EmptyLinesAroundArguments
-
-  attribute :player_id
-  attribute :chronicle_id
 
   has_many :merits
   has_many :weapons

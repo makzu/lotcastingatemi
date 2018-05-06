@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # app/serializers/player_serializer.rb
-class PlayerSerializer < ActiveModel::Serializer
-  attributes :id, :display_name
+class PlayerSerializer < BaseSerializer
+  attribute :display_name
 
   has_many :characters
   has_many :qcs
@@ -13,7 +13,7 @@ class PlayerSerializer < ActiveModel::Serializer
 
   # We only really need the ID for Chronicles, as each Chronicle will be fetched
   #   later by the client anyway.
-  class ChronicleSerializer < ActiveModel::Serializer
-    attributes :id, :st_id, :name
+  class ChronicleSerializer < BaseSerializer
+    attributes :st_id, :name
   end
 end

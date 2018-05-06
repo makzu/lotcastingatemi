@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # app/serializers/charm_serializer.rb
-class CharmSerializer < ActiveModel::Serializer
-  attributes :id, :character_id, :charm_type, :name, :cost, :timing, :duration,
-             :keywords, :min_essence, :prereqs, :body, :ref, :sort_order,
+class CharmSerializer < CharacterTraitSerializer
+  attributes :name, :charm_type, :cost, :timing, :duration,
+             :keywords, :min_essence, :prereqs, :body, :ref,
              :categories, :summary
 end

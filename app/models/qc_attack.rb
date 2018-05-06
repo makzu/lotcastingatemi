@@ -24,10 +24,7 @@ class QcAttack < ApplicationRecord
   def entity_type
     'qc_attack'
   end
-
-  def entity_assoc
-    entity_type
-  end
+  alias_attribute :entity_assoc, :entity_type
 
   def self.policy_class
     CharacterTraitPolicy

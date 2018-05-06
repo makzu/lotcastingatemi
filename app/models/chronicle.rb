@@ -48,8 +48,5 @@ class Chronicle < ApplicationRecord
   def entity_type
     'chronicle'
   end
-
-  def entity_assoc
-    entity_type
-  end
+  alias_attribute :entity_assoc, :entity_type
 end

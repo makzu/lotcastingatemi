@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # app/serializers/chronicle_serializer.rb
-class ChronicleSerializer < ActiveModel::Serializer
-  attributes :id, :st_id, :name
+class ChronicleSerializer < BaseSerializer
+  attributes :st_id, :name, :notes
   attribute :invite_code, if: :storyteller?
 
   belongs_to :st, class: Player
@@ -19,8 +19,8 @@ class ChronicleSerializer < ActiveModel::Serializer
 
   # We don't need the full associations duplicated under Player, because they're
   #   already included above.
-  class PlayerSerializer < ActiveModel::Serializer
-    attributes :id, :display_name # , :characters, :qcs, :battlegroups, :chronicles, :own_chronicles
+  class PlayerSerializer < BaseSerializer
+    attribute :display_name # , :characters, :qcs, :battlegroups, :chronicles, :own_chronicles
 
     # Give just the IDs of the associations, that's all we need
     class IdSerializer < ActiveModel::Serializer

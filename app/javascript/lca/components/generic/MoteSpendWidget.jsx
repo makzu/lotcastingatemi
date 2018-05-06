@@ -60,6 +60,7 @@ type State = {
   commit: boolean,
   commitName: string,
   mute: boolean,
+  scenelong: boolean,
 }
 class MoteSpendWidget extends Component<Props, State> {
   constructor(props) {
@@ -70,6 +71,7 @@ class MoteSpendWidget extends Component<Props, State> {
       commit: false,
       commitName: '',
       mute: false,
+      scenelong: false,
     }
 
     this.max = this.max.bind(this)
@@ -121,11 +123,16 @@ class MoteSpendWidget extends Component<Props, State> {
   }
 
   handleChange = e => {
-    const { name, value } = e.target
-    const val = parseInt(value)
-    let commit = this.state.commit
-    if (name === 'toSpend') commit = this.state.toSpend + val >= 0
-    this.setState({ [name]: val, commit: commit })
+    let { name, value } = e.target
+    let { commit } = this.state
+
+    if (name === 'toSpend') {
+      let val = parseInt(value)
+      commit = this.state.toSpend + val >= 0
+      this.setState({ toSpend: val, commit: commit })
+    } else {
+      this.setState({ [name]: value })
+    }
   }
 
   handleCheck = e => {
@@ -133,20 +140,22 @@ class MoteSpendWidget extends Component<Props, State> {
   }
 
   handleSubmit = () => {
-    const { toSpend, commit, commitName, mute } = this.state
+    const { toSpend, commit, commitName, mute, scenelong } = this.state
     const { character, qc, peripheral } = this.props
     const pool = peripheral ? 'peripheral' : 'personal'
 
     const characterType = qc ? 'qc' : 'character'
     let committments
     if (commit) {
-      committments = this.props.character.motes_committed.concat([
+      committments = [
+        ...this.props.character.motes_committed,
         {
           pool: pool,
           label: commitName,
           motes: toSpend,
+          scenelong: scenelong,
         },
-      ])
+      ]
     }
 
     this.props.spendMotes(
@@ -164,11 +173,12 @@ class MoteSpendWidget extends Component<Props, State> {
       commit: false,
       commitName: '',
       mute: false,
+      scenelong: false,
     })
   }
 
   render() {
-    const { toSpend, commit, commitName, open, mute } = this.state
+    const { toSpend, commit, commitName, open, mute, scenelong } = this.state
     const {
       handleOpen,
       handleClose,
@@ -266,13 +276,26 @@ class MoteSpendWidget extends Component<Props, State> {
                 }
               />
               {commit && (
-                <TextField
-                  name="commitName"
-                  value={commitName}
-                  label="Commit label"
-                  margin="dense"
-                  onChange={handleChange}
-                />
+                <Fragment>
+                  <TextField
+                    name="commitName"
+                    value={commitName}
+                    label="Commit label"
+                    margin="dense"
+                    onChange={handleChange}
+                  />
+                  &nbsp;&nbsp;
+                  <FormControlLabel
+                    label="Scenelong"
+                    control={
+                      <Checkbox
+                        name="scenelong"
+                        checked={scenelong}
+                        onChange={handleCheck}
+                      />
+                    }
+                  />
+                </Fragment>
               )}
             </div>
 

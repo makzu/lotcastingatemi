@@ -2,6 +2,8 @@
 import * as React from 'react'
 const { Fragment } = React
 import { shouldUpdate } from 'recompose'
+
+import Checkbox from 'material-ui/Checkbox'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
@@ -14,7 +16,7 @@ import type { Character } from 'utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, onBlur, onRatingChange, classes } = props
-  const { pool, label, motes } = trait
+  const { pool, label, motes, scenelong } = trait
   const poolOptions: React.Node = [
     <MenuItem key="personal" value="personal">
       Pers
@@ -56,6 +58,15 @@ function CommitFields(props: ListAttributeFieldTypes) {
         narrow
         onChange={onRatingChange}
       />
+      <div className={classes.checkboxWrap}>
+        <div className={classes.floatingLabel}>Scene</div>
+        <Checkbox
+          name="scenelong"
+          checked={scenelong}
+          value={(scenelong || false).toString()}
+          onChange={onRatingChange}
+        />
+      </div>
     </Fragment>
   )
 }

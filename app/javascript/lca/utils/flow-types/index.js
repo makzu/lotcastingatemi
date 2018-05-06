@@ -83,3 +83,13 @@ export type Battlegroup = {
   withCombatInfo
 
 export type CombatActor = {}
+
+export type Player = {
+  id: number,
+  display_name: string,
+}
+
+export type Chronicle = {
+  st_id: number,
+  name: string,
+}

@@ -1,21 +1,24 @@
 // @flow
+import { isEqual } from 'lodash'
 import {
   updateCharacter,
   updateCharacterMulti,
   updateQc,
   updateQcMulti,
-} from './actions.js'
+} from '../actions.js'
+import { getCharactersForChronicle, getQcsForChronicle } from 'selectors'
+export * from './chronicle.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
 export const SPEND_WP = 'lca/event/SPEND_WP'
 export const TAKE_DAMAGE = 'lca/event/TAKE_DAMAGE'
 
-function updateEvent(charType) {
+export function updateEvent(charType: string) {
   if (charType == 'qc') return updateQc
   else return updateCharacter
 }
 
-function updateEventMulti(charType) {
+export function updateEventMulti(charType: string) {
   if (charType == 'qc') return updateQcMulti
   else return updateCharacterMulti
 }
@@ -38,7 +41,7 @@ export function spendMotes(
     updateObj[`motes_${pool}_current`] = Math.max(current_motes - motes, 0)
 
     // Add to mote committments if specified
-    if (committments != undefined) updateObj['motes_committed'] = committments
+    if (committments != null) updateObj['motes_committed'] = committments
 
     // Raise anima banner level if appropriate
     if (pool == 'peripheral' && motes >= 5 && !mute) {
@@ -84,5 +87,23 @@ export function takeDamage(
       `damage_${damageType}`
     ]
     dispatch(update(id, `damage_${damageType}`, current_dmg + damage))
+  }
+}
+
+export function endScene(id: number) {
+  return (dispatch: Function, getState: Function) => {
+    const state = getState()
+
+    let chars = [
+      ...getCharactersForChronicle(state, id),
+      ...getQcsForChronicle(state, id),
+    ]
+    chars.forEach(c => {
+      const commits = c.motes_committed.filter(m => !m.scenelong)
+      const update = updateEvent(c.type)
+
+      if (!isEqual(commits, c.motes_committed))
+        dispatch(update(c.id, 'motes_committed', commits))
+    })
   }
 }

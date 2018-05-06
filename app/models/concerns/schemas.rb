@@ -51,7 +51,8 @@ module Schemas
       "properties": {
         "pool": { "type": 'string', "enum": %w[personal peripheral] },
         "label": { "type": 'string' },
-        "motes": { "type": 'integer', "minimum": 0 }
+        "motes": { "type": 'integer', "minimum": 0 },
+        "scenelong": { "type": 'boolean' }
       },
       "additionalProperties": false
     }

@@ -41,12 +41,19 @@ export type withIntimacies = {
   ties: Array<intimacy>,
 }
 
+export type committment = {
+  pool: 'Personal' | 'Peripheral',
+  label: string,
+  motes: number,
+  scenelong?: boolean,
+}
+
 export type withMotePool = {
   motes_personal_total: number,
   motes_personal_current: number,
   motes_peripheral_total: number,
   motes_peripheral_current: number,
-  motes_committed: Array<Object>,
+  motes_committed: Array<committment>,
   anima_level: number,
 }
 

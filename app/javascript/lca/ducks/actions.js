@@ -47,7 +47,7 @@ export {
 
 export { logout } from './session.js'
 export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
-export { spendMotes, spendWillpower, takeDamage } from './events.js'
+export { spendMotes, spendWillpower, takeDamage } from './events'
 
 import {
   fetchCurrentPlayer,

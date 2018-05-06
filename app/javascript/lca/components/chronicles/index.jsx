@@ -7,6 +7,7 @@ import { SortableElement } from 'react-sortable-hoc'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
+import STControls from './StControls.jsx'
 import CharacterAddPopup from './characterAddPopup.jsx'
 import CharacterCard from 'components/characters/CharacterCard.jsx'
 import QcAddPopup from './qcAddPopup.jsx'
@@ -116,6 +117,8 @@ class ChronicleDashboard extends Component<Props> {
     return (
       <Fragment>
         <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
+
+        {is_st && <STControls chronicleId={chronicle.id} />}
 
         <SortableGridList
           header={

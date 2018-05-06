@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -9,8 +10,9 @@ import Typography from 'material-ui/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import { updateCharacter, updateQc, updateBattlegroup } from '../../ducks/actions.js'
-import { canIEdit } from '../../selectors'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { canIEdit } from 'selectors'
+
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters({
@@ -41,7 +43,8 @@ const styles = theme => ({
   moteWrap: {
     marginRight: theme.spacing.unit,
   },
-  animaLabel: { ...theme.typography.body1,
+  animaLabel: {
+    ...theme.typography.body1,
     fontSize: '0.75rem',
     fontWeight: 500,
     opacity: 0.7,
@@ -54,7 +57,8 @@ const styles = theme => ({
     display: 'inline-block',
     verticalAlign: 'top',
   },
-  animaValue: { ...theme.typography.body1,
+  animaValue: {
+    ...theme.typography.body1,
     display: 'inline-block',
     verticalAlign: 'top',
     marginTop: '0.25em',
@@ -73,37 +77,35 @@ const styles = theme => ({
 })
 
 function OutOfCombatCard({ character, canEdit, update, classes }) {
-  return <Paper className={ classes.root }>
-    <div className={ classes.nameRow }>
-      <div className={ classes.nameWrap }>
-        <Typography variant="title" className={ classes.characterName }
-        >
-          { character.name }
+  return (
+    <Paper className={classes.root}>
+      <div className={classes.nameRow}>
+        <div className={classes.nameWrap}>
+          <Typography variant="title" className={classes.characterName}>
+            {character.name}
 
-          { character.hidden &&
-            <div className={ classes.hiddenLabel }>
-              <VisibilityOff className={ classes.icon } />&nbsp;
-              Hidden
-            </div>
-          }
-        </Typography>
-        <PlayerNameSubtitle playerId={ character.player_id } />
+            {character.hidden && (
+              <div className={classes.hiddenLabel}>
+                <VisibilityOff className={classes.icon} />&nbsp; Hidden
+              </div>
+            )}
+          </Typography>
+          <PlayerNameSubtitle playerId={character.player_id} />
+        </div>
       </div>
-    </div>
 
-    { canEdit &&
-      <div>
-        <Button onClick={ () => update(character.id, 'in_combat', true) }>
-          Add to Combat
-        </Button>
-        { (character.type === 'qc'|| character.type === 'battlegroup') &&
-          <Button disabled>
-            Add Clone
+      {canEdit && (
+        <div>
+          <Button onClick={() => update(character.id, 'in_combat', true)}>
+            Add to Combat
           </Button>
-        }
-      </div>
-    }
-  </Paper>
+          {(character.type === 'qc' || character.type === 'battlegroup') && (
+            <Button disabled>Add Clone</Button>
+          )}
+        </div>
+      )}
+    </Paper>
+  )
 }
 OutOfCombatCard.propTypes = {
   character: PropTypes.object.isRequired,
@@ -113,29 +115,26 @@ OutOfCombatCard.propTypes = {
 }
 function mapStateToProps(state, props) {
   let type
-  if (props.character.type === 'qc')
-    type = 'qc'
-  else if (props.character.type === 'battlegroup')
-    type = 'battlegroup'
-  else
-    type = 'character'
+  if (props.character.type === 'qc') type = 'qc'
+  else if (props.character.type === 'battlegroup') type = 'battlegroup'
+  else type = 'character'
 
   return {
     canEdit: canIEdit(state, props.character.id, type),
   }
 }
-function mapDispatchToProps(dispatch, props) {
+function mapDispatchToProps(dispatch: Function, props) {
   let action
-  switch(props.character.type) {
-  case 'qc':
-    action = updateQc
-    break
-  case 'battlegroup':
-    action = updateBattlegroup
-    break
-  case 'character':
-  default:
-    action = updateCharacter
+  switch (props.character.type) {
+    case 'qc':
+      action = updateQc
+      break
+    case 'battlegroup':
+      action = updateBattlegroup
+      break
+    case 'character':
+    default:
+      action = updateCharacter
   }
 
   return {
@@ -143,4 +142,6 @@ function mapDispatchToProps(dispatch, props) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OutOfCombatCard))
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(OutOfCombatCard)
+)

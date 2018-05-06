@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 
 import ChronicleDashboard from 'components/chronicles/index.jsx'
 import ChroniclePlayerPage from 'components/chronicles/playerPage.jsx'
-import ChronicleCombatDashboard from 'components/chronicles/combat.jsx'
+import CombatDashboard from 'components/combat/index.jsx'
 import ContentList from 'components/pages/contentList.jsx'
 import CharacterSheet from 'components/characters/index.jsx'
 import CharacterDashboard from 'components/characters/dashboard/'
@@ -33,6 +33,10 @@ export default function Routes() {
         exact
         path="/chronicles/:chronicleId"
         component={ChronicleDashboard}
+      />
+      <Route
+        path="/chronicles/:chronicleId/combat"
+        component={CombatDashboard}
       />
       <Route
         path="/chronicles/:chronicleId/players"

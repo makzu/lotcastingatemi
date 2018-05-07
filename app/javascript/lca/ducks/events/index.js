@@ -1,12 +1,10 @@
 // @flow
-import { isEqual } from 'lodash'
 import {
   updateCharacter,
   updateCharacterMulti,
   updateQc,
   updateQcMulti,
 } from '../actions.js'
-import { getCharactersForChronicle, getQcsForChronicle } from 'selectors'
 export * from './chronicle.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
@@ -87,23 +85,5 @@ export function takeDamage(
       `damage_${damageType}`
     ]
     dispatch(update(id, `damage_${damageType}`, current_dmg + damage))
-  }
-}
-
-export function endScene(id: number) {
-  return (dispatch: Function, getState: Function) => {
-    const state = getState()
-
-    let chars = [
-      ...getCharactersForChronicle(state, id),
-      ...getQcsForChronicle(state, id),
-    ]
-    chars.forEach(c => {
-      const commits = c.motes_committed.filter(m => !m.scenelong)
-      const update = updateEvent(c.type)
-
-      if (!isEqual(commits, c.motes_committed))
-        dispatch(update(c.id, 'motes_committed', commits))
-    })
   }
 }

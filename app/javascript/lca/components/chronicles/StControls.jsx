@@ -10,6 +10,7 @@ import ExpansionPanel, {
 import Typography from 'material-ui/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
+import Downtime from './controls/Downtime.jsx'
 import RecoverMotes from './controls/RecoverMotes.jsx'
 import RecoverWillpower from './controls/RecoverWillpower.jsx'
 import { endScene } from 'ducks/events'
@@ -27,6 +28,7 @@ const StControls = ({ chronicleId, endScene }: Props) => {
 
         <RecoverMotes id={chronicleId} />
         <RecoverWillpower id={chronicleId} />
+        <Downtime id={chronicleId} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
   )

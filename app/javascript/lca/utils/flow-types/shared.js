@@ -12,6 +12,7 @@ export type withBasicInfo = {
   public: boolean,
   sort_order: number,
   chronicle_sort_order: number,
+  type: string,
 }
 
 export type withCombatInfo = {

@@ -43,6 +43,7 @@ class DbAspectSelect extends React.PureComponent<Props> {
         label="Aspect"
         margin="dense"
         onChange={onChange}
+        SelectProps={{ displayEmpty: true }}
       >
         {options}
       </TextField>

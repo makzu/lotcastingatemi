@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react'
 
+import { ListSubheader } from 'material-ui/List'
 import { MenuItem } from 'material-ui/Menu'
 import TextField from 'material-ui/TextField'
 
 const options: React.Node = [
-  <MenuItem key="none" value="" disabled>
+  <ListSubheader key="none" value="" disabled>
     Select a Caste
-  </MenuItem>,
+  </ListSubheader>,
   <MenuItem key="d" value="dawn">
     Dawn
   </MenuItem>,
@@ -42,6 +43,7 @@ class SolarCasteSelect extends React.PureComponent<Props> {
         label="Caste"
         margin="dense"
         onChange={onChange}
+        SelectProps={{ displayEmpty: true }}
       >
         {options}
       </TextField>

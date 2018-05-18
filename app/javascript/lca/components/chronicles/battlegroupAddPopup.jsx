@@ -64,7 +64,7 @@ class BattlegroupAddPopup extends Component<Props, State> {
 
     const options: React.Node = [
       <MenuItem key={0} value={0} disabled>
-        Select a Qc
+        Select a Battlegroup
       </MenuItem>,
       <Divider key="div" />,
       ...battlegroups.map(c => (

@@ -111,7 +111,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
           margin="dense"
           style={{ width: '8em' }}
           onChange={onRatingChange}
-          SelectProps={{ showBlank: true }}
+          SelectProps={{ displayEmpty: true }}
         >
           <MenuItem value="">No active Aura</MenuItem>
           <MenuItem value="air">Air</MenuItem>

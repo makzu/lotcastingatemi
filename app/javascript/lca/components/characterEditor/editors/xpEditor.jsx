@@ -12,6 +12,7 @@ import ListAttributeEditor, {
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { isUnequalByKeys } from 'utils'
+import { spentXp, spentSolarXp, spentBp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -75,14 +76,18 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           onChange={onRatingChange}
         />
 
-        <RatingField
-          trait="xp_total"
-          value={character.xp_total}
-          label="Earned"
-          margin="dense"
-          onChange={onRatingChange}
-          dontFocus
-        />
+        <Typography>
+          <RatingField
+            trait="xp_total"
+            value={character.xp_total}
+            label="Earned"
+            margin="dense"
+            onChange={onRatingChange}
+            dontFocus
+          />
+          Total: {spentXp(character)}, Remaining:{' '}
+          {character.xp_total - spentXp(character)}
+        </Typography>
       </div>
 
       <div className={classes.xpCol}>
@@ -99,14 +104,18 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           onChange={onRatingChange}
         />
 
-        <RatingField
-          trait="xp_solar_total"
-          value={character.xp_solar_total}
-          label="Earned"
-          margin="dense"
-          onChange={onRatingChange}
-          dontFocus
-        />
+        <Typography>
+          <RatingField
+            trait="xp_solar_total"
+            value={character.xp_solar_total}
+            label="Earned"
+            margin="dense"
+            onChange={onRatingChange}
+            dontFocus
+          />
+          Total: {spentSolarXp(character)}, Remaining:{' '}
+          {character.xp_total - spentSolarXp(character)}
+        </Typography>
       </div>
     </div>
 
@@ -157,6 +166,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           newObject={{ label: '', points: 0 }}
           onChange={onRatingChange}
         />
+        <Typography>Total: {spentBp(character)}</Typography>
       </div>
     </div>
   </BlockPaper>

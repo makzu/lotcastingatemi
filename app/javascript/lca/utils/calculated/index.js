@@ -266,3 +266,12 @@ export const committedPeripheralMotes = character =>
   character.motes_committed
     .filter(c => c.pool == 'peripheral')
     .reduce((total, c) => total + c.motes, 0)
+
+export const spentXp = character =>
+  character.xp_log.reduce((total, c) => total + c.points, 0)
+
+export const spentSolarXp = character =>
+  character.xp_log_solar.reduce((total, c) => total + c.points, 0)
+
+export const spentBp = character =>
+  character.bp_log.reduce((total, c) => total + c.points, 0)

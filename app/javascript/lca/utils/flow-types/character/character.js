@@ -65,6 +65,11 @@ export type withSpecialties = {
   specialties: Array<specialty>,
 }
 
+export type xpLog = {
+  label: string,
+  points: number,
+}
+
 export type Character = {
   caste: string,
   aspect: ?boolean,
@@ -88,6 +93,9 @@ export type Character = {
   xp_craft_silver: number,
   xp_craft_gold: number,
   xp_craft_white: number,
+  xp_log: Array<xpLog>,
+  xp_log_solar: Array<xpLog>,
+  bp_log: Array<xpLog>,
   limit: number,
   limit_trigger: string,
   resources: Array<{ resource: string, value: number }>,

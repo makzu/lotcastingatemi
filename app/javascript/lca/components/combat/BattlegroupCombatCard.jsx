@@ -2,25 +2,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
 import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
+import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { doIOwnBattlegroup } from 'selectors'
 import { prettyDrillRating, totalMagnitude } from 'utils/calculated'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
-))
 
 const styles = theme => ({
   root: {
@@ -72,26 +67,15 @@ const styles = theme => ({
 
 type Props = {
   battlegroup: Object,
-  chronicle?: boolean,
-  st?: boolean,
   isOwner: boolean,
   classes: Object,
 }
 
 function BattlegroupCard(props: Props) {
-  const { battlegroup, chronicle, st, isOwner, classes } = props
+  const { battlegroup, isOwner, classes } = props
 
   return (
     <Paper className={classes.root}>
-      {((chronicle && st) || (!chronicle && isOwner)) && (
-        <Typography
-          component="div"
-          style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
-        >
-          <Handle />
-        </Typography>
-      )}
-
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
@@ -160,6 +144,8 @@ function BattlegroupCard(props: Props) {
           <strong>Penalties:</strong>&nbsp; Onslaught -{battlegroup.onslaught}
         </Typography>
       )}
+
+      <InitiativeWidget character={battlegroup} characterType="battlegroup" />
     </Paper>
   )
 }

@@ -7,9 +7,9 @@ import { compose } from 'recompose'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
-import CharacterCard from '../characters/CharacterCard.jsx'
-import QcCard from '../qcs/QcCard.jsx'
-import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
+import CharacterCard from './CharacterCombatCard.jsx'
+import QcCard from './QcCombatCard.jsx'
+import BattlegroupCard from './BattlegroupCombatCard.jsx'
 import OutOfCombatCard from './OutOfCombatCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
@@ -76,9 +76,9 @@ class CombatDashboard extends Component<Props> {
 
     const combatCards = inCombatEntities.map(c => (
       <Grid item xs={12} md={6} key={c.id + c.name}>
-        {c.type.includes('Character') && <CharacterCard character={c} combat />}
-        {c.type === 'qc' && <QcCard qc={c} combat />}
-        {c.type === 'battlegroup' && <BattlegroupCard battlegroup={c} combat />}
+        {c.type.includes('Character') && <CharacterCard character={c} />}
+        {c.type === 'qc' && <QcCard qc={c} />}
+        {c.type === 'battlegroup' && <BattlegroupCard battlegroup={c} />}
       </Grid>
     ))
 

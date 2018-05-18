@@ -2,12 +2,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
 import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
@@ -15,16 +13,13 @@ import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc } from 'utils/flow-types'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
-))
 
 const styles = theme => ({
   root: {
@@ -72,8 +67,6 @@ const styles = theme => ({
 
 type Props = {
   qc: fullQc,
-  chronicle?: boolean,
-  st?: boolean,
   penalties: Object,
   pools: Object,
   player: Object,
@@ -82,19 +75,10 @@ type Props = {
 }
 
 function QcCard(props: Props) {
-  const { qc, chronicle, st, penalties, pools, isOwner, classes } = props
+  const { qc, penalties, pools, isOwner, classes } = props
 
   return (
     <Paper className={classes.root}>
-      {((chronicle && st) || (!chronicle && isOwner)) && (
-        <Typography
-          component="div"
-          style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
-        >
-          <Handle />
-        </Typography>
-      )}
-
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
@@ -186,42 +170,6 @@ function QcCard(props: Props) {
             classes={{ root: classes.poolBlock }}
           />
         )}
-        <PoolDisplay
-          qc
-          pool={pools.joinBattle}
-          label="Join Battle"
-          classes={{ root: classes.poolBlock }}
-        />
-      </div>
-
-      <div className={classes.rowContainer}>
-        <PoolDisplay
-          staticRating
-          qc
-          pool={pools.resolve}
-          label="Resolve"
-          classes={{ root: classes.poolBlock }}
-        />
-        <PoolDisplay
-          staticRating
-          qc
-          pool={pools.guile}
-          label="Guile"
-          classes={{ root: classes.poolBlock }}
-        />
-        <PoolDisplay
-          staticRating
-          qc
-          pool={pools.appearance}
-          label="Appearance"
-          classes={{ root: classes.poolBlock }}
-        />
-        <PoolDisplay
-          qc
-          pool={pools.senses}
-          label="Senses"
-          classes={{ root: classes.poolBlock }}
-        />
       </div>
 
       {(penalties.mobility > 0 ||
@@ -238,6 +186,8 @@ function QcCard(props: Props) {
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
+
+      <InitiativeWidget character={qc} characterType="qc" />
     </Paper>
   )
 }

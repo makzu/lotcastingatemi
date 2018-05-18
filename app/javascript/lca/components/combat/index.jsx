@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -95,7 +96,7 @@ class CombatDashboard extends Component<Props> {
           </Typography>
         </Grid>
 
-        {combatCards}
+        <FlipMove typeName={null}>{combatCards}</FlipMove>
 
         <Grid item xs={12}>
           <Typography variant="headline">Out of Combat</Typography>

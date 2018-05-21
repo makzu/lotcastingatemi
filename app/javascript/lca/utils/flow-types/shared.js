@@ -12,12 +12,13 @@ export type withBasicInfo = {
   public: boolean,
   sort_order: number,
   chronicle_sort_order: number,
-  type: string,
+  type: string, // TODO: constrain this, e.g. 'qc' | 'battlegroup' | 'Character' | 'SolarCharacter'
 }
 
 export type withCombatInfo = {
   initiative: number,
   onslaught: number,
+  in_combat: boolean,
   has_acted: boolean,
 }
 

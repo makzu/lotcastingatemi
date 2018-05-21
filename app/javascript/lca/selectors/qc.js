@@ -63,6 +63,7 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
       ),
       parry: calc.qcRating(qc, qc.parry, penalties.wound + penalties.onslaught),
       senses: calc.qcRating(qc, qc.senses, penalties.wound),
+      joinBattle: calc.qcPool(qc, qc.join_battle, penalties.wound),
     }
   }
 )(qcIdMemoizer)

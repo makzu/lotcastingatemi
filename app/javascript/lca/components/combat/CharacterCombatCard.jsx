@@ -2,13 +2,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Launch from '@material-ui/icons/Launch'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Whatshot from '@material-ui/icons/Whatshot'
 
@@ -17,20 +15,13 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
 import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import {
-  canIDeleteCharacter,
-  getPenalties,
-  getPoolsAndRatings,
-} from 'selectors'
+import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import * as calc from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
-))
 
 const styles = theme => ({
   root: {
@@ -98,9 +89,7 @@ const styles = theme => ({
 
 type Props = {
   character: Character,
-  chronicle?: boolean,
-  st?: boolean,
-  canDelete: boolean,
+  canEdit: boolean,
   pools: Object,
   penalties: Object,
   classes: Object,
@@ -108,24 +97,13 @@ type Props = {
 
 export function CharacterCard({
   character,
-  canDelete,
-  chronicle,
-  st,
+  canEdit,
   penalties,
   pools,
   classes,
 }: Props) {
   return (
     <Paper className={classes.root}>
-      {((chronicle && st) || (!chronicle && canDelete)) && (
-        <Typography
-          component="div"
-          style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
-        >
-          <Handle />
-        </Typography>
-      )}
-
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
@@ -147,13 +125,9 @@ export function CharacterCard({
             )}
           </Typography>
           <PlayerNameSubtitle playerId={character.player_id} />
-
-          <Typography paragraph>
-            Essence {character.essence} {calc.prettyFullExaltType(character)}
-          </Typography>
         </div>
 
-        {(st || canDelete) && (
+        {canEdit && (
           <CharacterCardMenu characterType="character" id={character.id} />
         )}
       </div>
@@ -239,27 +213,6 @@ export function CharacterCard({
         )}
       </div>
 
-      <div className={classes.rowContainer}>
-        <PoolDisplay
-          staticRating
-          pool={pools.resolve}
-          label="Resolve"
-          classes={{ root: classes.poolBlock }}
-        />
-        <PoolDisplay
-          staticRating
-          pool={pools.guile}
-          label="Guile"
-          classes={{ root: classes.poolBlock }}
-        />
-        <PoolDisplay
-          staticRating
-          pool={pools.appearance}
-          label="Appearance"
-          classes={{ root: classes.poolBlock }}
-        />
-      </div>
-
       {(penalties.mobility !== 0 ||
         penalties.onslaught !== 0 ||
         penalties.wound !== 0) && (
@@ -274,11 +227,16 @@ export function CharacterCard({
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
+      <InitiativeWidget
+        character={character}
+        characterType="character"
+        canEdit={canEdit}
+      />
     </Paper>
   )
 }
 const mapStateToProps = (state, props) => ({
-  canDelete: canIDeleteCharacter(state, props.character.id),
+  canEdit: canIEditCharacter(state, props.character.id),
   penalties: getPenalties(state, props.character.id),
   pools: getPoolsAndRatings(state, props.character.id),
 })

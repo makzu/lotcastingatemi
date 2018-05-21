@@ -9,9 +9,17 @@ export * from './charm.js'
 export * from './qc.js'
 export * from './battlegroup.js'
 
-import { canIEditCharacter, canIDeleteCharacter } from './character.js'
-import { canIEditQc, canIDeleteQc } from './qc.js'
-import { canIEditBattlegroup, canIDeleteBattlegroup } from './battlegroup.js'
+import {
+  getPoolsAndRatings,
+  canIEditCharacter,
+  canIDeleteCharacter,
+} from './character.js'
+import { getPoolsAndRatingsForQc, canIEditQc, canIDeleteQc } from './qc.js'
+import {
+  getPoolsAndRatingsForBattlegroup,
+  canIEditBattlegroup,
+  canIDeleteBattlegroup,
+} from './battlegroup.js'
 import { amIStOfChronicle } from './chronicle.js'
 
 const entities = state => state.entities.current
@@ -75,3 +83,14 @@ export const getMyChronicles = createSelector(
       .map(c => chronicles[c])
       .filter(c => c !== undefined && c.name !== undefined)
 )
+
+export const getPoolsAndRatingsGeneric = (state, id, characterType) => {
+  switch (characterType) {
+    case 'qc':
+      return getPoolsAndRatingsForQc(state, id)
+    case 'battlegroup':
+      return getPoolsAndRatingsForBattlegroup(state, id)
+    default:
+      return getPoolsAndRatings(state, id)
+  }
+}

@@ -10,12 +10,21 @@ This is a web app written in React.js, with a backend written in Ruby on Rails. 
 
 ### How can I run it?
 
-Make sure you have Ruby *2.5.1*, along with a recent version of Postgres. You'll
-also need [Yarn](https://yarnpkg.com/en/) and Node.js installed
+1. Install docker.
+1. `docker-compose up -d`
+1. wait for containers to warm up
+1. if first time setup, run `docker-compose exec ruby ./bin/setup`
+1. Browse to http://localhost:5000/
 
-Once you have the repo cloned, run `bin/setup` and it *should* get everything
-set up for you.  Then run `bin/server` to launch webpack-dev-server and the
-Rails backend, and point your browser to `localhost:5000`. Your mileage may
-vary.
+You can run the code's test suite with
 
-You can run the code's test suite with `rails lca:test`.
+```shell
+docker-compose exec ruby bundle exec rails lca:test
+```
+
+Your mileage may vary.
+
+If it fails to start up, try...
+
+* Stopping the containers and removing the db stuff with `docker-compose down -v`
+* Running `docker-compose exec ruby ./bin/setup` again. It's finnicky.

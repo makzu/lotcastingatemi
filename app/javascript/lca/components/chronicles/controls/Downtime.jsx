@@ -26,7 +26,7 @@ type State = {
   days: boolean,
   endScene: boolean,
 }
-class MoteRespirePopup extends Component<Props, State> {
+class DowntimePopup extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -190,4 +190,4 @@ class MoteRespirePopup extends Component<Props, State> {
   }
 }
 
-export default connect(null, { downtime })(MoteRespirePopup)
+export default connect(null, { downtime })(DowntimePopup)

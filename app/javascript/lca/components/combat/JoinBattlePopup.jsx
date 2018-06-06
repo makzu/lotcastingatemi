@@ -21,6 +21,7 @@ import {
 } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
+
 // eslint-disable-next-line no-unused-vars
 const styles = theme => ({})
 

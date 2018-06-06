@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
@@ -11,10 +10,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
-import CharacterCardMenu from '../generic/CharacterCardMenu'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
-import { doIOwnBattlegroup } from 'selectors'
 import { prettyDrillRating, totalMagnitude } from 'utils/calculated'
 
 const styles = theme => ({
@@ -67,12 +64,11 @@ const styles = theme => ({
 
 type Props = {
   battlegroup: Object,
-  isOwner: boolean,
   classes: Object,
 }
 
 function BattlegroupCard(props: Props) {
-  const { battlegroup, isOwner, classes } = props
+  const { battlegroup, classes } = props
 
   return (
     <Paper className={classes.root}>
@@ -97,10 +93,6 @@ function BattlegroupCard(props: Props) {
 
           <PlayerNameSubtitle playerId={battlegroup.player_id} />
         </div>
-
-        {isOwner && (
-          <CharacterCardMenu characterType="battlegroup" id={battlegroup.id} />
-        )}
       </div>
 
       <div className={classes.rowContainer}>
@@ -149,8 +141,5 @@ function BattlegroupCard(props: Props) {
     </Paper>
   )
 }
-const mapStateToProps = (state, props) => ({
-  isOwner: doIOwnBattlegroup(state, props.battlegroup.id),
-})
 
-export default withStyles(styles)(connect(mapStateToProps)(BattlegroupCard))
+export default withStyles(styles)(BattlegroupCard)

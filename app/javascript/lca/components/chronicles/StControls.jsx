@@ -34,8 +34,4 @@ const StControls = ({ chronicleId, endScene }: Props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: Function): Object => ({
-  endScene: id => dispatch(endScene(id)),
-})
-
-export default connect(null, mapDispatchToProps)(StControls)
+export default connect(null, { endScene })(StControls)

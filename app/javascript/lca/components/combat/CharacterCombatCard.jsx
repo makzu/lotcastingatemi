@@ -126,10 +126,6 @@ export function CharacterCard({
           </Typography>
           <PlayerNameSubtitle playerId={character.player_id} />
         </div>
-
-        {canEdit && (
-          <CharacterCardMenu characterType="character" id={character.id} />
-        )}
       </div>
 
       <Typography className={classes.rowContainer} component="div">
@@ -227,11 +223,7 @@ export function CharacterCard({
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
-      <InitiativeWidget
-        character={character}
-        characterType="character"
-        canEdit={canEdit}
-      />
+      <InitiativeWidget character={character} characterType="character" />
     </Paper>
   )
 }

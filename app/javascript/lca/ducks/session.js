@@ -5,13 +5,18 @@ import { FETCH_SUCCESS as PLAYER_FETCH_SUCCESS } from './entities/player.js'
 export const LOGOUT = 'lca/session/LOGOUT'
 export const AUTH_FAILURE = 'lca/session/AUTH_FAILURE'
 
-const defaultState = {
+type sessionState = {
+  +authenticated: boolean,
+  +id: number,
+}
+
+const defaultState: sessionState = {
   authenticated: !!localStorage.getItem('jwt') || false,
   id: 0,
 }
 
 export default function SessionReducer(
-  state: Object = defaultState,
+  state: sessionState = defaultState,
   action: Object
 ) {
   if (isAuthFailure(action)) {

@@ -11,7 +11,6 @@ import {
   committedPersonalMotes,
   committedPeripheralMotes,
 } from 'utils/calculated'
-import type { DowntimeOptions } from 'utils/flow-types'
 
 const endSceneObject = c => {
   let obj = {}

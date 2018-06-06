@@ -10,7 +10,6 @@ import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import CharacterCardMenu from '../generic/CharacterCardMenu'
 import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import InitiativeWidget from '../generic/InitiativeWidget.jsx'
@@ -18,7 +17,7 @@ import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
-import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
+import { getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -70,12 +69,11 @@ type Props = {
   penalties: Object,
   pools: Object,
   player: Object,
-  isOwner: boolean,
   classes: Object,
 }
 
 function QcCard(props: Props) {
-  const { qc, penalties, pools, isOwner, classes } = props
+  const { qc, penalties, pools, classes } = props
 
   return (
     <Paper className={classes.root}>
@@ -100,8 +98,6 @@ function QcCard(props: Props) {
 
           <PlayerNameSubtitle playerId={qc.player_id} />
         </div>
-
-        {isOwner && <CharacterCardMenu characterType="qc" id={qc.id} />}
       </div>
 
       <div className={classes.rowContainer}>
@@ -195,7 +191,6 @@ function mapStateToProps(state, props) {
   return {
     penalties: getPenaltiesForQc(state, props.qc.id),
     pools: getPoolsAndRatingsForQc(state, props.qc.id),
-    isOwner: doIOwnQc(state, props.qc.id),
   }
 }
 

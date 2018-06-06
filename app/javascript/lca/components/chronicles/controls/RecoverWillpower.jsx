@@ -24,7 +24,7 @@ type State = {
   exceed: boolean,
   qcs: boolean,
 }
-class MoteRespirePopup extends Component<Props, State> {
+class WillpowerRecoveryPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -147,4 +147,4 @@ class MoteRespirePopup extends Component<Props, State> {
   }
 }
 
-export default connect(null, { recoverWillpower })(MoteRespirePopup)
+export default connect(null, { recoverWillpower })(WillpowerRecoveryPopup)

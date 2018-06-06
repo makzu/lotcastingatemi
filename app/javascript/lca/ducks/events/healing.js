@@ -1,8 +1,8 @@
 // @flow
 import { woundPenalty } from 'utils/calculated'
-import type { DowntimeOptions, Character, fullQc } from 'utils/flow-types'
+import type { Character, fullQc } from 'utils/flow-types'
 
-const timeInHours = (time: DowntimeOptions): number => {
+const timeInHours = (time: string): number => {
   switch (time) {
     case 'hour':
       return 1

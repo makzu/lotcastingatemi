@@ -1,8 +1,8 @@
 // @flow
 import React, { Fragment } from 'react'
 
-import { DialogContentText } from 'material-ui/Dialog'
-import Typography from 'material-ui/Typography'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import Typography from '@material-ui/core/Typography'
 
 import type { Pool } from 'utils/flow-types'
 

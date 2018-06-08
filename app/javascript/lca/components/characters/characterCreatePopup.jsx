@@ -3,18 +3,17 @@ import * as React from 'react'
 const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
-import { FormControlLabel } from 'material-ui/Form'
-import { ListSubheader } from 'material-ui/List'
-import { MenuItem } from 'material-ui/Menu'
-import Switch from 'material-ui/Switch'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import ListSubheader from '@material-ui/core/ListSubheader'
+import MenuItem from '@material-ui/core/MenuItem'
+import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
 import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect.jsx'
@@ -239,6 +238,7 @@ class CharacterCreatePopup extends Component<Props, State> {
 }
 
 const mapStateToProps = state => ({ id: state.session.id })
-export default connect(mapStateToProps, { createCharacter })(
-  CharacterCreatePopup
-)
+export default connect(
+  mapStateToProps,
+  { createCharacter }
+)(CharacterCreatePopup)

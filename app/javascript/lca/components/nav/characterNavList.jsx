@@ -3,13 +3,11 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import IconButton from 'material-ui/IconButton'
-import {
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-} from 'material-ui/List'
-import Collapse from 'material-ui/transitions/Collapse'
+import IconButton from '@material-ui/core/IconButton'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 

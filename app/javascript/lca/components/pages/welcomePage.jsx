@@ -1,14 +1,17 @@
 // @flow
 import React from 'react'
 
-import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 
 const WelcomePage = () => (
   <Grid container spacing={24}>
-    <Grid item xs={2} hidden={{ mdDown: true }} />
+    <Hidden mdDown>
+      <Grid item xs={2} />
+    </Hidden>
 
     <Grid item xs={12} lg={8}>
       <BlockPaper>
@@ -37,7 +40,9 @@ const WelcomePage = () => (
       <div style={{ height: '8em' }} />
     </Grid>
 
-    <Grid item xs={1} hidden={{ mdDown: true }} />
+    <Hidden mdDown>
+      <Grid item xs={1} />
+    </Hidden>
     <Grid item xs={12} lg={6}>
       <Typography variant="display2" style={{ textAlign: 'right' }}>
         Harmonious Exalted 3e character management for a new age
@@ -73,11 +78,13 @@ const WelcomePage = () => (
       <div style={{ height: '5em' }} />
     </Grid>
 
-    <Grid item xs={12} hidden={{ lgUp: true }}>
-      <Typography variant="display2" style={{ textAlign: 'right' }}>
-        Ideal Battle(group) Knowledge Prana
-      </Typography>
-    </Grid>
+    <Hidden lgUp>
+      <Grid item xs={12}>
+        <Typography variant="display2" style={{ textAlign: 'right' }}>
+          Ideal Battle(group) Knowledge Prana
+        </Typography>
+      </Grid>
+    </Hidden>
     <Grid item xs={12} lg={5}>
       <BlockPaper>
         <Typography>
@@ -89,16 +96,20 @@ const WelcomePage = () => (
         </Typography>
       </BlockPaper>
     </Grid>
-    <Grid item lg={6} hidden={{ mdDown: true }}>
-      <Typography variant="display2">
-        Ideal Battle(group) Knowledge Prana
-      </Typography>
-    </Grid>
+    <Hidden mdDown>
+      <Grid item lg={6}>
+        <Typography variant="display2">
+          Ideal Battle(group) Knowledge Prana
+        </Typography>
+      </Grid>
+    </Hidden>
 
     <Grid item xs={12}>
       <div style={{ height: '5em' }} />
     </Grid>
-    <Grid item xs={1} hidden={{ mdDown: true }} />
+    <Hidden mdDown>
+      <Grid item xs={1} />
+    </Hidden>
     <Grid item xs={12} lg={6}>
       <Typography variant="display2" style={{ textAlign: 'right' }}>
         Excellent Friend Approach

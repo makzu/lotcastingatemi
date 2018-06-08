@@ -2,8 +2,8 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
-import { ListItemText } from 'material-ui/List'
-import { MenuItem } from 'material-ui/Menu'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuItem from '@material-ui/core/MenuItem'
 
 type Props = { id: number, characterType: string }
 function CardMenuLinks({ id, characterType }: Props) {

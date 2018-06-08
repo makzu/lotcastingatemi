@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
@@ -75,10 +76,11 @@ class MeritFullPage extends Component<Props> {
         <DocumentTitle
           title={`${this.props.character.name} Merits | Lot-Casting Atemi`}
         />
-
-        <Grid item hidden={{ smUp: true }} xs={12}>
-          <div style={{ height: '1em' }}>&nbsp;</div>
-        </Grid>
+        <Hidden smUp>
+          <Grid item xs={12}>
+            <div style={{ height: '1em' }}>&nbsp;</div>
+          </Grid>
+        </Hidden>
 
         <Grid item xs={12}>
           <Typography variant="headline">Merits</Typography>

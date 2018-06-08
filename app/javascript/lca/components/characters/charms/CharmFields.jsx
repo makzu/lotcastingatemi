@@ -4,17 +4,16 @@ import React, { Component, Fragment } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
-import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
-import ExpansionPanel, {
-  ExpansionPanelActions,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
-} from 'material-ui/ExpansionPanel'
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
-import Collapse from 'material-ui/transitions/Collapse'
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
+import Collapse from '@material-ui/core/Collapse'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'

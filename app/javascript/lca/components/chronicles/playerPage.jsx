@@ -3,10 +3,11 @@ import React, { Component, Fragment } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
-import Divider from 'material-ui/Divider'
-import Grid from 'material-ui/Grid'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import Divider from '@material-ui/core/Divider'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import ChronicleDeletePopup from './ChronicleDeletePopup.jsx'
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
@@ -86,9 +87,11 @@ class ChroniclePlayerPage extends Component<Props, { name?: string }> {
       <Grid container spacing={24}>
         <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
 
-        <Grid item hidden={{ smUp: true }} xs={12}>
-          <div style={{ height: '1.0em' }}>&nbsp;</div>
-        </Grid>
+        <Hidden smUp>
+          <Grid item xs={12}>
+            <div style={{ height: '1.0em' }}>&nbsp;</div>
+          </Grid>
+        </Hidden>
 
         <Grid item xs={12}>
           <Typography variant="headline">
@@ -153,5 +156,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps, { updateChronicle })(ChroniclePlayerPage)
+  connect(
+    mapStateToProps,
+    { updateChronicle }
+  )(ChroniclePlayerPage)
 )

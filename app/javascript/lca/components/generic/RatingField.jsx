@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 
-import TextField from 'material-ui/TextField'
-import { withStyles } from 'material-ui/styles'
+import TextField from '@material-ui/core/TextField'
+import { withStyles } from '@material-ui/core/styles'
 
 import { clamp } from 'utils/'
 

@@ -2,8 +2,8 @@
 import React, { Fragment } from 'react'
 import { shouldUpdate } from 'recompose'
 
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'

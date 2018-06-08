@@ -3,10 +3,10 @@ import * as React from 'react'
 const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Hidden from 'material-ui/Hidden'
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
+import Button from '@material-ui/core/Button'
+import Hidden from '@material-ui/core/Hidden'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 import Filter from '@material-ui/icons/FilterList'
 import {
   getPoolsAndRatings,

@@ -4,9 +4,10 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import Divider from 'material-ui/Divider'
-import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
+import Divider from '@material-ui/core/Divider'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
 
 import AbilityBlock from './blocks/abilityBlock.jsx'
@@ -212,9 +213,11 @@ export class CharacterSheet extends Component<Props> {
         <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />
 
         <Grid container spacing={24}>
-          <Grid item hidden={{ smUp: true }} xs={12}>
-            <div style={{ height: '1em' }}>&nbsp;</div>
-          </Grid>
+          <Hidden smUp>
+            <Grid item xs={12}>
+              <div style={{ height: '1em' }}>&nbsp;</div>
+            </Grid>
+          </Hidden>
 
           <Grid item xs={12} md={4}>
             <BlockPaper>
@@ -272,21 +275,28 @@ export class CharacterSheet extends Component<Props> {
                 </BlockPaper>
               </Grid>
 
-              <Grid item xs={12} hidden={{ smDown: true }}>
-                <BlockPaper>
-                  <Typography variant="title">Weapons</Typography>
-                  <WeaponSummaryBlock character={character} weapons={weapons} />
-                </BlockPaper>
-              </Grid>
+              <Hidden smDown>
+                <Grid item xs={12}>
+                  <BlockPaper>
+                    <Typography variant="title">Weapons</Typography>
+                    <WeaponSummaryBlock
+                      character={character}
+                      weapons={weapons}
+                    />
+                  </BlockPaper>
+                </Grid>
+              </Hidden>
             </Grid>
           </Grid>
 
-          <Grid item xs={12} hidden={{ mdUp: true }}>
-            <BlockPaper>
-              <Typography variant="title">Weapons</Typography>
-              <WeaponSummaryBlock character={character} weapons={weapons} />
-            </BlockPaper>
-          </Grid>
+          <Hidden mdUp>
+            <Grid item xs={12}>
+              <BlockPaper>
+                <Typography variant="title">Weapons</Typography>
+                <WeaponSummaryBlock character={character} weapons={weapons} />
+              </BlockPaper>
+            </Grid>
+          </Hidden>
 
           <Grid item xs={12} md={8}>
             <CombatBlock

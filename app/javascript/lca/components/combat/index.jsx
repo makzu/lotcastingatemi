@@ -4,9 +4,10 @@ import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import Button from 'material-ui/Button'
-import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 
 import CharacterCard from './CharacterCombatCard.jsx'
 import QcCard from './QcCombatCard.jsx'
@@ -97,9 +98,12 @@ class CombatDashboard extends Component<Props> {
 
     return (
       <Grid container spacing={24} style={{ position: 'relative' }}>
-        <Grid item hidden={{ smUp: true }} xs={12}>
-          <div style={{ height: '1em' }}>&nbsp;</div>
-        </Grid>
+        <Hidden smUp>
+          <Grid item xs={12}>
+            <div style={{ height: '1em' }}>&nbsp;</div>
+          </Grid>
+        </Hidden>
+
         <Grid item xs={12}>
           <Typography variant="subheading">
             Current Initiative: {nextCharacter ? nextCharacter.initiative : 0}&nbsp;
@@ -144,5 +148,8 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
-  connect(mapStateToProps, { nextRound, endCombat })
+  connect(
+    mapStateToProps,
+    { nextRound, endCombat }
+  )
 )(CombatDashboard)

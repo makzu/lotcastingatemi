@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react'
 
-import { withStyles } from 'material-ui/styles'
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
+import { withStyles } from '@material-ui/core/styles'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 
 const styles = theme => ({
   field: {

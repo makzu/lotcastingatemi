@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
-import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import WeaponFields from './weaponFields.jsx'
@@ -94,8 +94,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, {
-  updateWeapon,
-  createWeapon,
-  destroyWeapon,
-})(WeaponEditor)
+export default connect(
+  mapStateToProps,
+  {
+    updateWeapon,
+    createWeapon,
+    destroyWeapon,
+  }
+)(WeaponEditor)

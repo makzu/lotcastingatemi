@@ -4,10 +4,10 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import Divider from 'material-ui/Divider'
-import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
-import { withStyles } from 'material-ui/styles'
+import Divider from '@material-ui/core/Divider'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 import CharacterCard from '../characters/CharacterCard.jsx'
 import CharacterCreatePopup from '../characters/characterCreatePopup.jsx'
@@ -145,8 +145,9 @@ function mapStateToProps(state) {
 
 export default ProtectedComponent(
   withStyles(styles)(
-    connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
-      ContentList
-    )
+    connect(
+      mapStateToProps,
+      { updateCharacter, updateQc, updateBattlegroup }
+    )(ContentList)
   )
 )

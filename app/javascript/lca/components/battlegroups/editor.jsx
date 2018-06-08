@@ -3,12 +3,12 @@ import * as React from 'react'
 const { Component } = React
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import Checkbox from 'material-ui/Checkbox'
-import { FormControlLabel } from 'material-ui/Form'
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
@@ -351,6 +351,9 @@ function mapStateToProps(state, ownProps) {
 
 export default ProtectedComponent(
   withStyles(styles)(
-    connect(mapStateToProps, { updateBattlegroup })(BattlegroupEditor)
+    connect(
+      mapStateToProps,
+      { updateBattlegroup }
+    )(BattlegroupEditor)
   )
 )

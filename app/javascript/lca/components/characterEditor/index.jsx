@@ -3,9 +3,9 @@ import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Grid from 'material-ui/Grid'
-import Hidden from 'material-ui/Hidden'
-import Typography from 'material-ui/Typography'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 
 import AbilityEditor from './editors/abilityEditor.jsx'
 import ArmorEditor from './editors/armorEditor.jsx'
@@ -287,5 +287,8 @@ function mapStateToProps(state, props) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps, { updateCharacter })(CharacterEditor)
+  connect(
+    mapStateToProps,
+    { updateCharacter }
+  )(CharacterEditor)
 )

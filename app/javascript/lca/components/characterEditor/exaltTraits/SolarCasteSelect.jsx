@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react'
 
-import { ListSubheader } from 'material-ui/List'
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
+import ListSubheader from '@material-ui/core/ListSubheader'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 
 const options: React.Node = [
   <ListSubheader key="none" value="" disabled>

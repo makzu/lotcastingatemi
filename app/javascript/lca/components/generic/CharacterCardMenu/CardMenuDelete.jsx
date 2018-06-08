@@ -2,16 +2,16 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
-import Divider from 'material-ui/Divider'
-import { ListItemIcon, ListItemText } from 'material-ui/List'
-import { MenuItem } from 'material-ui/Menu'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Divider from '@material-ui/core/Divider'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuItem from '@material-ui/core/MenuItem'
+import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 
 import {
@@ -99,8 +99,11 @@ const mapStateToProps = (state, props) => ({
   name: state.entities.current[props.characterType + 's'][props.id].name,
 })
 
-export default connect(mapStateToProps, {
-  destroyCharacter,
-  destroyQc,
-  destroyBattlegroup,
-})(CardMenuDelete)
+export default connect(
+  mapStateToProps,
+  {
+    destroyCharacter,
+    destroyQc,
+    destroyBattlegroup,
+  }
+)(CardMenuDelete)

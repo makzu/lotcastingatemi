@@ -5,14 +5,14 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 
-import Button from 'material-ui/Button'
-import Checkbox from 'material-ui/Checkbox'
-import { FormControlLabel } from 'material-ui/Form'
-import Grid from 'material-ui/Grid'
-import Hidden from 'material-ui/Hidden'
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
@@ -311,7 +311,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps, { updateMerit, destroyMerit, createMerit })(
-    MeritEditor
-  )
+  connect(
+    mapStateToProps,
+    { updateMerit, destroyMerit, createMerit }
+  )(MeritEditor)
 )

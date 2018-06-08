@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 
-import { withStyles } from 'material-ui/styles'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'

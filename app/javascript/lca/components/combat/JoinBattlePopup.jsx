@@ -3,14 +3,13 @@ import * as React from 'react'
 const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog'
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
@@ -124,5 +123,8 @@ function mapDispatchToProps(dispatch: Function, props) {
 }
 
 export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(JoinBattlePopup)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(JoinBattlePopup)
 )

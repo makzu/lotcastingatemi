@@ -3,12 +3,11 @@ import React, { Component, Fragment } from 'react'
 
 import type { Pool } from 'utils/flow-types'
 
-import Dialog, {
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-} from 'material-ui/Dialog'
-import { withStyles } from 'material-ui/styles'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import { withStyles } from '@material-ui/core/styles'
 
 import AttackTagsDisplay from './AttackTagsDisplay.jsx'
 

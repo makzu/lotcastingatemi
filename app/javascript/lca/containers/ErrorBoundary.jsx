@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import { sample } from 'lodash'
-import Typography from 'material-ui/Typography'
+import Typography from '@material-ui/core/Typography'
 
 const errorNames = [
   'Easily-Overlooked Error Method',

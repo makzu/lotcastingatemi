@@ -3,17 +3,16 @@ import * as React from 'react'
 const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import ButtonBase from 'material-ui/ButtonBase'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
-import Checkbox from 'material-ui/Checkbox'
-import { FormControlLabel } from 'material-ui/Form'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import ButtonBase from '@material-ui/core/ButtonBase'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
@@ -341,4 +340,7 @@ function mapStateToProps(state, props) {
       : canIEditCharacter(state, props.character.id),
   }
 }
-export default connect(mapStateToProps, { spendMotes })(MoteSpendWidget)
+export default connect(
+  mapStateToProps,
+  { spendMotes }
+)(MoteSpendWidget)

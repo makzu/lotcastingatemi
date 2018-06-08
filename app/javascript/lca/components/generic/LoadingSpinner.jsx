@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 
-import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper'
-import SvgIcon from 'material-ui/SvgIcon'
+import { withStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import SvgIcon from '@material-ui/core/SvgIcon'
 
 import DawnSpinner from 'icons/DawnSpinner'
 

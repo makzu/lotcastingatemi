@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 
 import * as calc from 'utils/calculated'
 import type { withHealthLevels } from 'utils/flow-types'

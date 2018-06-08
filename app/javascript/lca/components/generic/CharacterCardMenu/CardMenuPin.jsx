@@ -2,8 +2,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText } from 'material-ui/List'
-import { MenuItem } from 'material-ui/Menu'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuItem from '@material-ui/core/MenuItem'
 import Bookmark from '@material-ui/icons/Bookmark'
 import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 
@@ -52,8 +53,11 @@ const mapStateToProps = (state, props) => ({
   isPinned: state.entities.current[props.characterType + 's'][props.id].pinned,
   canEdit: canIDelete(state, props.id, props.characterType),
 })
-export default connect(mapStateToProps, {
-  updateCharacter,
-  updateQc,
-  updateBattlegroup,
-})(PinButton)
+export default connect(
+  mapStateToProps,
+  {
+    updateCharacter,
+    updateQc,
+    updateBattlegroup,
+  }
+)(PinButton)

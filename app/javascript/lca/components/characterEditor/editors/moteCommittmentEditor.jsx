@@ -3,9 +3,9 @@ import * as React from 'react'
 const { Fragment } = React
 import { shouldUpdate } from 'recompose'
 
-import Checkbox from 'material-ui/Checkbox'
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
+import Checkbox from '@material-ui/core/Checkbox'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,

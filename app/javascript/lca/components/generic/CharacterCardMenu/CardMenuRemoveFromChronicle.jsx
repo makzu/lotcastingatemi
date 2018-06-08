@@ -2,8 +2,9 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText } from 'material-ui/List'
-import { MenuItem } from 'material-ui/Menu'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuItem from '@material-ui/core/MenuItem'
 import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import { removeThingFromChronicle as removeThing } from 'ducks/actions.js'
@@ -41,4 +42,7 @@ const mapStateToProps = (state, props) => ({
   chronId:
     state.entities.current[props.characterType + 's'][props.id].chronicle_id,
 })
-export default connect(mapStateToProps, { removeThing })(CardMenuHide)
+export default connect(
+  mapStateToProps,
+  { removeThing }
+)(CardMenuHide)

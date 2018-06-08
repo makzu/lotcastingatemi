@@ -4,15 +4,14 @@ const { PureComponent, Fragment } = React
 import { connect } from 'react-redux'
 import { withRouter, Link, NavLink } from 'react-router-dom'
 
-import { withStyles } from 'material-ui/styles'
-import Divider from 'material-ui/Divider'
-import List, {
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListItemSecondaryAction,
-} from 'material-ui/List'
-import Switch from 'material-ui/Switch'
+import { withStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import Switch from '@material-ui/core/Switch'
 
 import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
@@ -174,6 +173,9 @@ function mapStateToProps(state) {
 
 export default withStyles(styles)(
   withRouter(
-    connect(mapStateToProps, { logout, closeDrawer, switchTheme })(NavPanel)
+    connect(
+      mapStateToProps,
+      { logout, closeDrawer, switchTheme }
+    )(NavPanel)
   )
 )

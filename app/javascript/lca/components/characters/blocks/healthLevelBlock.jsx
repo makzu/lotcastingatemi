@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import Typography from 'material-ui/Typography'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'

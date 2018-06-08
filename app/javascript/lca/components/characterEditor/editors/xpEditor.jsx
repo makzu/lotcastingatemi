@@ -2,9 +2,9 @@
 import React, { Fragment } from 'react'
 import { compose, shouldUpdate } from 'recompose'
 
-import { withStyles } from 'material-ui/styles'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import ListAttributeEditor, {

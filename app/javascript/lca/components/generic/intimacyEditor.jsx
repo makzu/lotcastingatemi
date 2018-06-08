@@ -1,8 +1,8 @@
 // @flow
 import React, { Fragment } from 'react'
 
-import Checkbox from 'material-ui/Checkbox'
-import TextField from 'material-ui/TextField'
+import Checkbox from '@material-ui/core/Checkbox'
+import TextField from '@material-ui/core/TextField'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,

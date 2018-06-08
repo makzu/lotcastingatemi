@@ -2,8 +2,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'

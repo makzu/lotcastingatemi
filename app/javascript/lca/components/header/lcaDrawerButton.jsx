@@ -2,8 +2,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import IconButton from 'material-ui/IconButton'
+import { withStyles } from '@material-ui/core/styles'
+import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 
 import { toggleDrawer } from 'ducks/actions.js'
@@ -33,5 +33,8 @@ const LcaDrawerButton = ({
 )
 
 export default withStyles(styles)(
-  connect(null, { toggleDrawer })(LcaDrawerButton)
+  connect(
+    null,
+    { toggleDrawer }
+  )(LcaDrawerButton)
 )

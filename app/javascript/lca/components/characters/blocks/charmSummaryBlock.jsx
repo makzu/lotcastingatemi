@@ -3,9 +3,9 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { withStyles } from 'material-ui/styles'
-import Divider from 'material-ui/Divider'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'

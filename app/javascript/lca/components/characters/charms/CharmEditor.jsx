@@ -4,11 +4,11 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
-import Grid from 'material-ui/Grid'
-import Hidden from 'material-ui/Hidden'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import styles from './CharmStyles.js'
@@ -538,13 +538,16 @@ function mapStateToProps(state, ownProps) {
 
 export default ProtectedComponent(
   withStyles(styles)(
-    connect(mapStateToProps, {
-      createCharm,
-      updateCharm,
-      destroyCharm,
-      createSpell,
-      updateSpell,
-      destroySpell,
-    })(CharmEditor)
+    connect(
+      mapStateToProps,
+      {
+        createCharm,
+        updateCharm,
+        destroyCharm,
+        createSpell,
+        updateSpell,
+        destroySpell,
+      }
+    )(CharmEditor)
   )
 )

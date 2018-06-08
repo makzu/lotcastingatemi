@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
 
-import { FormControlLabel } from 'material-ui/Form'
-import Switch from 'material-ui/Switch'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import ExcellencyEditor from './ExcellencyEditor.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'

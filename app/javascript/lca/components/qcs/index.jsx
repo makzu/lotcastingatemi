@@ -2,8 +2,8 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import DamageWidget from '../generic/DamageWidget.jsx'
@@ -200,9 +200,9 @@ class QcSheet extends Component<Props> {
       <div key={charm.id}>
         <strong>{charm.name} </strong>
         (
-        {charm.cost}; {charm.timing}; {charm.duration}; Essence{' '}
+        {charm.cost}; {charm.timing}; {charm.duration}; Essence&nbsp;
         {charm.min_essence}
-        )
+        )&nbsp;
         {charm.body}
       </div>
     ))

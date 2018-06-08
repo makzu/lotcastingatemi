@@ -2,8 +2,8 @@
 import React from 'react'
 import { compose, shouldUpdate } from 'recompose'
 
-import { withStyles } from 'material-ui/styles'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'

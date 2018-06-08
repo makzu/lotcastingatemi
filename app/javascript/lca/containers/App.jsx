@@ -4,14 +4,14 @@ const { Component } = React
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
-import CssBaseline from 'material-ui/CssBaseline'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
-import { withStyles } from 'material-ui/styles'
-import Divider from 'material-ui/Divider'
-import Drawer from 'material-ui/Drawer'
-import Hidden from 'material-ui/Hidden'
-import Typography from 'material-ui/Typography'
-import Slide from 'material-ui/transitions/Slide'
+import { withStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
+import Slide from '@material-ui/core/Slide'
 
 import LoadingSpinner from 'components/generic/LoadingSpinner.jsx'
 import LcaHeader from 'components/header/header.jsx'
@@ -173,5 +173,10 @@ function mapStateToProps(state) {
 }
 
 export default withStyles(styles, { withTheme: true })(
-  withRouter(connect(mapStateToProps, { toggleDrawer })(App))
+  withRouter(
+    connect(
+      mapStateToProps,
+      { toggleDrawer }
+    )(App)
+  )
 )

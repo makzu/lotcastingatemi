@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import Typography from 'material-ui/Typography'
+import Typography from '@material-ui/core/Typography'
 
 import DbAspectSelect from '../exaltTraits/DbAspectSelect.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'

@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 
 import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay.jsx'
@@ -185,9 +186,11 @@ class CharmFullPage extends Component<Props, State> {
       <Grid container spacing={24}>
         <DocumentTitle title={`${character.name} Charms | Lot-Casting Atemi`} />
 
-        <Grid item hidden={{ smUp: true }} xs={12}>
-          <div style={{ height: '1em' }}>&nbsp;</div>
-        </Grid>
+        <Hidden smUp>
+          <Grid item xs={12}>
+            <div style={{ height: '1em' }}>&nbsp;</div>
+          </Grid>
+        </Hidden>
 
         {character.type !== 'Character' && (
           <Grid item xs={12} className={classes.stickyHeader}>

@@ -2,9 +2,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Grid from 'material-ui/Grid'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import QcActionEditor from './qcActionEditor.jsx'
 import QcAttackEditor from './qcAttackEditor.jsx'
@@ -425,5 +425,8 @@ function mapStateToProps(state, ownProps) {
   }
 }
 export default ProtectedComponent(
-  connect(mapStateToProps, { updateQc })(QcEditor)
+  connect(
+    mapStateToProps,
+    { updateQc }
+  )(QcEditor)
 )

@@ -2,8 +2,8 @@
 import React from 'react'
 import { shouldUpdate } from 'recompose'
 
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'

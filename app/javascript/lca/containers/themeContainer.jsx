@@ -2,10 +2,10 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
-import green from 'material-ui/colors/green'
-import lightgreen from 'material-ui/colors/lightGreen'
-import teal from 'material-ui/colors/teal'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import green from '@material-ui/core/colors/green'
+import lightgreen from '@material-ui/core/colors/lightGreen'
+import teal from '@material-ui/core/colors/teal'
 
 import { switchTheme } from 'ducks/actions.js'
 
@@ -61,4 +61,7 @@ class ThemeContainer extends React.Component<Props> {
   }
 }
 const mapStateToProps = state => ({ theme: state.app.theme })
-export default connect(mapStateToProps, { switchTheme })(ThemeContainer)
+export default connect(
+  mapStateToProps,
+  { switchTheme }
+)(ThemeContainer)

@@ -2,14 +2,14 @@
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
-import { ListItem, ListItemText } from 'material-ui/List'
-import TextField from 'material-ui/TextField'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItem from '@material-ui/core/ListItem'
+import TextField from '@material-ui/core/TextField'
 
 import { updatePlayer } from 'ducks/actions.js'
 import { getSpecificPlayer } from 'selectors'
@@ -101,4 +101,7 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { updatePlayer })(DisplayNamePopup)
+export default connect(
+  mapStateToProps,
+  { updatePlayer }
+)(DisplayNamePopup)

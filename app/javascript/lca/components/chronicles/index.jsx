@@ -4,8 +4,9 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 
 import STControls from './StControls.jsx'
 import CharacterAddPopup from './characterAddPopup.jsx'
@@ -118,6 +119,12 @@ class ChronicleDashboard extends Component<Props> {
       <Fragment>
         <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
 
+        <Hidden smUp>
+          <Grid item xs={12}>
+            <div style={{ height: '1em' }}>&nbsp;</div>
+          </Grid>
+        </Hidden>
+
         {is_st && <STControls chronicleId={chronicle.id} />}
 
         <SortableGridList
@@ -203,7 +210,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
-    ChronicleDashboard
-  )
+  connect(
+    mapStateToProps,
+    { updateCharacter, updateQc, updateBattlegroup }
+  )(ChronicleDashboard)
 )

@@ -3,13 +3,12 @@ import * as React from 'react'
 const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import ButtonBase from 'material-ui/ButtonBase'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
+import Button from '@material-ui/core/Button'
+import ButtonBase from '@material-ui/core/ButtonBase'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 import HealthLevelBoxes from './HealthLevelBoxes.jsx'
 import RatingField from './RatingField.jsx'
@@ -231,4 +230,7 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default connect(mapStateToProps, { takeDamage })(DamageWidget)
+export default connect(
+  mapStateToProps,
+  { takeDamage }
+)(DamageWidget)

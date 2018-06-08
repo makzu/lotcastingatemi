@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react'
 
-import Checkbox from 'material-ui/Checkbox'
-import Divider from 'material-ui/Divider'
-import { FormControlLabel } from 'material-ui/Form'
-import Button from 'material-ui/Button'
-import TextField from 'material-ui/TextField'
+import Checkbox from '@material-ui/core/Checkbox'
+import Divider from '@material-ui/core/Divider'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 
 import Delete from '@material-ui/icons/Delete'
 

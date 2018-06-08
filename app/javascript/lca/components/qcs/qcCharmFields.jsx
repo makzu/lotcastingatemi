@@ -2,9 +2,9 @@
 import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 
-import Button from 'material-ui/Button'
-import Divider from 'material-ui/Divider'
-import TextField from 'material-ui/TextField'
+import Button from '@material-ui/core/Button'
+import Divider from '@material-ui/core/Divider'
+import TextField from '@material-ui/core/TextField'
 import Delete from '@material-ui/icons/Delete'
 
 import CharmTimingSelect from 'components/generic/CharmTimingSelect'

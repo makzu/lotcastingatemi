@@ -2,8 +2,8 @@
 import React, { Fragment } from 'react'
 import { shouldUpdate } from 'recompose'
 
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,

@@ -2,10 +2,10 @@
 import React, { Fragment } from 'react'
 import { shouldUpdate } from 'recompose'
 
-import Checkbox from 'material-ui/Checkbox'
-import { FormControlLabel } from 'material-ui/Form'
-import TextField from 'material-ui/TextField'
-import Typography from 'material-ui/Typography'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import ListAttributeEditor, {

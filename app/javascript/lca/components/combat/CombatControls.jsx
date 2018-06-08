@@ -2,9 +2,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import Checkbox from 'material-ui/Checkbox'
-import Button from 'material-ui/Button'
-import { FormControlLabel } from 'material-ui/Form'
+import Checkbox from '@material-ui/core/Checkbox'
+import Button from '@material-ui/core/Button'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import RatingField from '../generic/RatingField.jsx'
 import InitiativeField from './InitiativeField.jsx'
@@ -125,4 +125,7 @@ function mapDispatchToProps(dispatch: Function, props: Object) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CombatControls)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CombatControls)

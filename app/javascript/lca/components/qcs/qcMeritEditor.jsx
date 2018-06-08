@@ -2,8 +2,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import QcMeritFields from './qcMeritFields.jsx'
@@ -70,8 +70,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, {
-  updateQcMerit,
-  createQcMerit,
-  destroyQcMerit,
-})(QcMeritEditor)
+export default connect(
+  mapStateToProps,
+  {
+    updateQcMerit,
+    createQcMerit,
+    destroyQcMerit,
+  }
+)(QcMeritEditor)

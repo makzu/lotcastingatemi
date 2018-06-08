@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react'
 
-import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 
 type Props = {
   value: string,

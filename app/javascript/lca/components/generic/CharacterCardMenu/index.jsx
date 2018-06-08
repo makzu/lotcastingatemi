@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 
-import IconButton from 'material-ui/IconButton'
-import Menu from 'material-ui/Menu'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
 import MoreVert from '@material-ui/icons/MoreVert'
 
 import CardMenuDelete from './CardMenuDelete.jsx'

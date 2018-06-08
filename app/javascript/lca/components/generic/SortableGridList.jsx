@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { SortableContainer } from 'react-sortable-hoc'
-import Grid from 'material-ui/Grid'
+import Grid from '@material-ui/core/Grid'
 
 const SortableGridList = SortableContainer(({ header, items, classes }) => (
   <Grid container spacing={24}>

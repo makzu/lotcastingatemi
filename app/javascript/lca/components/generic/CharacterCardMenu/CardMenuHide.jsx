@@ -2,8 +2,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText } from 'material-ui/List'
-import { MenuItem } from 'material-ui/Menu'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuItem from '@material-ui/core/MenuItem'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
@@ -54,8 +55,11 @@ const mapStateToProps = (state, props) => ({
   isHidden: state.entities.current[props.characterType + 's'][props.id].hidden,
   canIEdit: canIEdit(state, props.id, props.characterType),
 })
-export default connect(mapStateToProps, {
-  updateCharacter,
-  updateQc,
-  updateBattlegroup,
-})(CardMenuHide)
+export default connect(
+  mapStateToProps,
+  {
+    updateCharacter,
+    updateQc,
+    updateBattlegroup,
+  }
+)(CardMenuHide)

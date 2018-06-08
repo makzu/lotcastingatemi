@@ -3,9 +3,9 @@ import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import IconButton from 'material-ui/IconButton'
-import TextField from 'material-ui/TextField'
+import { withStyles } from '@material-ui/core/styles'
+import IconButton from '@material-ui/core/IconButton'
+import TextField from '@material-ui/core/TextField'
 
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 

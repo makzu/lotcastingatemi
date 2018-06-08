@@ -2,9 +2,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper'
-import Typography from 'material-ui/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import JoinBattlePopup from './JoinBattlePopup.jsx'
@@ -155,5 +155,8 @@ function mapDispatchToProps(dispatch: Function, props) {
 }
 
 export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(OutOfCombatCard)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(OutOfCombatCard)
 )

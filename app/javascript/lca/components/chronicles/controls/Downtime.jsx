@@ -3,17 +3,16 @@ import * as React from 'react'
 const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import Checkbox from 'material-ui/Checkbox'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog'
-import { FormControlLabel } from 'material-ui/Form'
-import Switch from 'material-ui/Switch'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
+import Typography from '@material-ui/core/Typography'
 
 import RatingField from 'components/generic/RatingField.jsx'
 import { downtime } from 'ducks/events'
@@ -190,4 +189,7 @@ class DowntimePopup extends Component<Props, State> {
   }
 }
 
-export default connect(null, { downtime })(DowntimePopup)
+export default connect(
+  null,
+  { downtime }
+)(DowntimePopup)

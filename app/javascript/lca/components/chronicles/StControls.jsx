@@ -2,12 +2,11 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import Button from 'material-ui/Button'
-import ExpansionPanel, {
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
-} from 'material-ui/ExpansionPanel'
-import Typography from 'material-ui/Typography'
+import Button from '@material-ui/core/Button'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import Downtime from './controls/Downtime.jsx'
@@ -34,4 +33,7 @@ const StControls = ({ chronicleId, endScene }: Props) => {
   )
 }
 
-export default connect(null, { endScene })(StControls)
+export default connect(
+  null,
+  { endScene }
+)(StControls)

@@ -1,5 +1,6 @@
 ## v50
 ###### *Not yet released*
+* **Initiative Tracker**: A pared-down view of the character list with characters displayed in initiative order. Quick access to editing initiative and onslaught penalties.
 * **ST controls**: A simple control panel on the Chronicle dashboard enables STs to end all scenelong effects, recover motes or willpower, and more
 * Mote committments can be marked as scenelong, causing them to lapse when the ST uses the 'end scene' control
 * Better performance in the Character editor

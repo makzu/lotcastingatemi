@@ -4,6 +4,7 @@ import {
   updateCharacterMulti,
   updateQc,
   updateQcMulti,
+  updateBattlegroupMulti,
 } from '../actions.js'
 export * from './chronicle.js'
 
@@ -17,7 +18,8 @@ export function updateEvent(charType: string) {
 }
 
 export function updateEventMulti(charType: string) {
-  if (charType == 'qc') return updateQcMulti
+  if (charType === 'qc') return updateQcMulti
+  else if (charType === 'battlegroup') return updateBattlegroupMulti
   else return updateCharacterMulti
 }
 

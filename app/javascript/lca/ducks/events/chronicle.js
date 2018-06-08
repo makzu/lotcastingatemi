@@ -6,6 +6,7 @@ import {
   getCharactersForChronicle,
   getMeritNamesForCharacter,
   getQcsForChronicle,
+  getBattlegroupsForChronicle,
 } from 'selectors'
 import {
   committedPersonalMotes,
@@ -18,6 +19,10 @@ const endSceneObject = c => {
 
   if (!isEqual(commits, c.motes_committed)) obj.motes_committed = commits
   if (c.aura != null && c.aura != '') obj.aura = ''
+
+  if (c.in_combat) obj.in_combat = false
+  if (c.has_acted) obj.has_acted = false
+  if (c.onslaught !== 0) obj.onslaught = 0
 
   return obj
 }
@@ -37,6 +42,16 @@ export function endScene(id: number) {
       const obj = endSceneObject(c)
 
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
+    })
+    getBattlegroupsForChronicle(state, id).forEach(bg => {
+      const update = updateEventMulti(bg.type)
+      let obj = {}
+
+      if (bg.in_combat) obj.in_combat = false
+      if (bg.has_acted) obj.has_acted = false
+      if (bg.onslaught !== 0) obj.onslaught = 0
+
+      if (Object.keys(obj).length > 0) dispatch(update(bg.id, obj))
     })
   }
 }
@@ -174,6 +189,46 @@ export function downtime(id: number, time: number, endScene: boolean) {
       obj = { ...obj, ...willpowerRecoveryObject({ ...c, ...obj }, willpower) }
 
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
+    })
+  }
+}
+
+export const NEXT_ROUND = 'lca/event/COMBAT_NEXT_ROUND'
+export function nextRound(id: number) {
+  return (dispatch: Function, getState: Function) => {
+    const state = getState()
+    let chars = [
+      ...getCharactersForChronicle(state, id),
+      ...getQcsForChronicle(state, id),
+      ...getBattlegroupsForChronicle(state, id),
+    ].filter(c => c.in_combat)
+
+    chars.forEach(c => {
+      const update = updateEventMulti(c.type)
+      let obj = { has_acted: false }
+      if (c.type !== 'battlegroup')
+        obj = { ...obj, ...moteRecoveryObject(c, 5) }
+
+      if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
+    })
+  }
+}
+
+export const END_COMBAT = 'lca/event/COMBAT_END'
+export function endCombat(id: number) {
+  return (dispatch: Function, getState: Function) => {
+    const state = getState()
+    let chars = [
+      ...getCharactersForChronicle(state, id),
+      ...getQcsForChronicle(state, id),
+      ...getBattlegroupsForChronicle(state, id),
+    ].filter(c => c.in_combat)
+
+    chars.forEach(c => {
+      const update = updateEventMulti(c.type)
+      let obj = { in_combat: false, has_acted: false, onslaught: 0 }
+
+      dispatch(update(c.id, obj))
     })
   }
 }

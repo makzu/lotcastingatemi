@@ -12,10 +12,9 @@ import Whatshot from '@material-ui/icons/Whatshot'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
-import CharacterCardMenu from '../generic/CharacterCardMenu'
 import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
-import InitiativeWidget from '../generic/InitiativeWidget.jsx'
+import CombatControls from './CombatControls.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
@@ -223,7 +222,7 @@ export function CharacterCard({
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
-      <InitiativeWidget character={character} characterType="character" />
+      <CombatControls character={character} characterType="character" />
     </Paper>
   )
 }

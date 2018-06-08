@@ -1,9 +1,10 @@
 // @flow
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
+import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
@@ -14,6 +15,7 @@ import OutOfCombatCard from './OutOfCombatCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import { nextRound, endCombat } from 'ducks/events'
 import {
   getSpecificChronicle,
   getPlayersForChronicle,
@@ -49,9 +51,18 @@ type Props = {
   qcs: Array<fullQc>,
   battlegroups: Array<Battlegroup>,
   chronicle: Chronicle,
+  nextRound: Function,
+  endCombat: Function,
 }
 
 class CombatDashboard extends Component<Props> {
+  onClickNextTurn = () => {
+    this.props.nextRound(this.props.id)
+  }
+  onClickEndCombat = () => {
+    this.props.endCombat(this.props.id)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.chronicle == null || this.props.chronicle.name == null)
@@ -85,7 +96,7 @@ class CombatDashboard extends Component<Props> {
     const nextCharacter = inCombatEntities.filter(c => !c.has_acted)[0]
 
     return (
-      <Grid container spacing={24}>
+      <Grid container spacing={24} style={{ position: 'relative' }}>
         <Grid item hidden={{ smUp: true }} xs={12}>
           <div style={{ height: '1em' }}>&nbsp;</div>
         </Grid>
@@ -93,6 +104,14 @@ class CombatDashboard extends Component<Props> {
           <Typography variant="subheading">
             Current Initiative: {nextCharacter ? nextCharacter.initiative : 0}&nbsp;
             Next up: {nextCharacter ? nextCharacter.name : 'Round over!'}
+            &nbsp;
+            {this.props.is_st && (
+              <Fragment>
+                <Button onClick={this.onClickNextTurn}>Next Turn</Button>
+                &nbsp;
+                <Button onClick={this.onClickEndCombat}>End Combat</Button>
+              </Fragment>
+            )}
           </Typography>
         </Grid>
 
@@ -123,6 +142,7 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default compose(ProtectedComponent, connect(mapStateToProps))(
-  CombatDashboard
-)
+export default compose(
+  ProtectedComponent,
+  connect(mapStateToProps, { nextRound, endCombat })
+)(CombatDashboard)

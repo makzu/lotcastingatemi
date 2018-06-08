@@ -12,7 +12,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
-import InitiativeWidget from '../generic/InitiativeWidget.jsx'
+import CombatControls from './CombatControls.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
@@ -183,7 +183,7 @@ function QcCard(props: Props) {
         </Typography>
       )}
 
-      <InitiativeWidget character={qc} characterType="qc" />
+      <CombatControls character={qc} characterType="qc" />
     </Paper>
   )
 }

@@ -3,7 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
-import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
@@ -111,7 +110,7 @@ function OutOfCombatCard({
         </div>
       </div>
 
-      <div>
+      <div className={classes.rowContainer}>
         <PoolDisplay
           qc={character.type === 'qc' || character.type === 'battlegroup'}
           pool={pools.joinBattle}

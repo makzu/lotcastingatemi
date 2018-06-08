@@ -6,8 +6,13 @@ import Checkbox from 'material-ui/Checkbox'
 import Button from 'material-ui/Button'
 import { FormControlLabel } from 'material-ui/Form'
 
-import RatingField from './RatingField.jsx'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import RatingField from '../generic/RatingField.jsx'
+import InitiativeField from './InitiativeField.jsx'
+import {
+  updateCharacterMulti,
+  updateQcMulti,
+  updateBattlegroupMulti,
+} from 'ducks/actions.js'
 import { canIEdit } from 'selectors'
 import type { withCombatInfo } from 'utils/flow-types'
 
@@ -17,34 +22,38 @@ type Props = {
   canEdit: boolean,
   update: Function,
 }
-class InitiativeWidget extends Component<Props> {
+class CombatControls extends Component<Props> {
   onChange = e => {
-    this.props.update(this.props.character.id, e.target.name, e.target.value)
+    this.props.update(this.props.character.id, {
+      [e.target.name]: e.target.value,
+    })
   }
 
   onCheck = () => {
-    this.props.update(
-      this.props.character.id,
-      'has_acted',
-      !this.props.character.has_acted
-    )
+    this.props.update(this.props.character.id, {
+      ['has_acted']: !this.props.character.has_acted,
+    })
   }
 
   onClickSetOnslaught(value) {
-    this.props.update(this.props.character.id, 'onslaught', value)
+    this.props.update(this.props.character.id, { ['onslaught']: value })
+  }
+
+  onClickRemoveFromBattle = () => {
+    this.props.update(this.props.character.id, {
+      in_combat: false,
+      has_acted: false,
+      onslaught: 0,
+    })
   }
 
   render() {
-    const { character } = this.props
+    const { character, canEdit } = this.props
     return (
       <Fragment>
         <div>
-          <RatingField
-            trait="initiative"
-            label="Initiative"
+          <InitiativeField
             value={character.initiative}
-            margin="dense"
-            narrow
             onChange={this.onChange}
           />
           <FormControlLabel
@@ -54,12 +63,17 @@ class InitiativeWidget extends Component<Props> {
                 name="has_acted"
                 checked={character.has_acted}
                 onChange={this.onCheck}
+                disabled={!canEdit}
               />
             }
           />
         </div>
         <div>
-          <Button size="small" onClick={() => this.onClickSetOnslaught(0)}>
+          <Button
+            size="small"
+            onClick={() => this.onClickSetOnslaught(0)}
+            disabled={!canEdit}
+          >
             =0
           </Button>
           <RatingField
@@ -74,8 +88,14 @@ class InitiativeWidget extends Component<Props> {
           <Button
             size="small"
             onClick={() => this.onClickSetOnslaught(character.onslaught + 1)}
+            disabled={!canEdit}
           >
             +1
+          </Button>
+        </div>
+        <div>
+          <Button onClick={this.onClickRemoveFromBattle} disabled={!canEdit}>
+            Remove from Combat
           </Button>
         </div>
       </Fragment>
@@ -83,26 +103,26 @@ class InitiativeWidget extends Component<Props> {
   }
 }
 const mapStateToProps = (state, props: Object) => ({
-  canEdit: canIEdit(state, props.id, props.characterType),
+  canEdit: canIEdit(state, props.character.id, props.characterType),
 })
 
 function mapDispatchToProps(dispatch: Function, props: Object) {
   let action
   switch (props.characterType) {
     case 'qc':
-      action = updateQc
+      action = updateQcMulti
       break
     case 'battlegroup':
-      action = updateBattlegroup
+      action = updateBattlegroupMulti
       break
     case 'character':
     default:
-      action = updateCharacter
+      action = updateCharacterMulti
   }
 
   return {
-    update: (id, trait, value) => dispatch(action(id, trait, value)),
+    update: (id, obj) => dispatch(action(id, obj)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InitiativeWidget)
+export default connect(mapStateToProps, mapDispatchToProps)(CombatControls)

@@ -10,7 +10,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
-import InitiativeWidget from '../generic/InitiativeWidget.jsx'
+import CombatControls from './CombatControls.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import { prettyDrillRating, totalMagnitude } from 'utils/calculated'
 
@@ -137,7 +137,7 @@ function BattlegroupCard(props: Props) {
         </Typography>
       )}
 
-      <InitiativeWidget character={battlegroup} characterType="battlegroup" />
+      <CombatControls character={battlegroup} characterType="battlegroup" />
     </Paper>
   )
 }

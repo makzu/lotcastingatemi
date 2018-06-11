@@ -87,7 +87,7 @@ class CombatDashboard extends Component<Props> {
       .sort(initiativeSort)
 
     const combatCards = inCombatEntities.map(c => (
-      <Grid item xs={12} md={6} key={c.id + c.name}>
+      <Grid item xs={12} md={6} xl={4} key={c.id + c.name}>
         {c.type.includes('Character') && <CharacterCard character={c} />}
         {c.type === 'qc' && <QcCard qc={c} />}
         {c.type === 'battlegroup' && <BattlegroupCard battlegroup={c} />}
@@ -105,18 +105,25 @@ class CombatDashboard extends Component<Props> {
         </Hidden>
 
         <Grid item xs={12}>
-          <Typography variant="subheading">
-            Current Initiative: {nextCharacter ? nextCharacter.initiative : 0}&nbsp;
-            Next up: {nextCharacter ? nextCharacter.name : 'Round over!'}
-            &nbsp;
-            {this.props.is_st && (
-              <Fragment>
-                <Button onClick={this.onClickNextTurn}>Next Turn</Button>
-                &nbsp;
-                <Button onClick={this.onClickEndCombat}>End Combat</Button>
-              </Fragment>
-            )}
-          </Typography>
+          {inCombatEntities.length === 0 && (
+            <Typography variant="subheading">
+              No characters are in combat
+            </Typography>
+          )}
+          {inCombatEntities.length > 0 && (
+            <Typography variant="subheading">
+              Current Initiative: {nextCharacter ? nextCharacter.initiative : 0}&nbsp;
+              Next up: {nextCharacter ? nextCharacter.name : 'Round over!'}
+              &nbsp;
+              {this.props.is_st && (
+                <Fragment>
+                  <Button onClick={this.onClickNextTurn}>Next Turn</Button>
+                  &nbsp;
+                  <Button onClick={this.onClickEndCombat}>End Combat</Button>
+                </Fragment>
+              )}
+            </Typography>
+          )}
         </Grid>
 
         <FlipMove typeName={null}>{combatCards}</FlipMove>

@@ -53,7 +53,7 @@ const ResourceDisplay = ({
     <div className={classes.label}>{label}</div>
     <div className={classes.value}>
       <span className={classes.current}>{current}</span>
-      <span className={classes.total}>/{total}</span>
+      {total != null && <span className={classes.total}>/{total}</span>}
       {(committed || 0) > 0 && (
         <span className={classes.committed}>{committed}c</span>
       )}

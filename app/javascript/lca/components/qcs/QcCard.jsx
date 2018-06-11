@@ -13,12 +13,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
-import DamageWidget from '../generic/DamageWidget.jsx'
-import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
-import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
-import ResourceDisplay from '../generic/ResourceDisplay.jsx'
-import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc } from 'utils/flow-types'
 
@@ -57,9 +53,6 @@ const styles = theme => ({
   rowContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  moteWrap: {
-    marginRight: theme.spacing.unit,
   },
   poolBlock: {
     marginRight: theme.spacing.unit,
@@ -120,40 +113,7 @@ function QcCard(props: Props) {
         {isOwner && <CharacterCardMenu characterType="qc" id={qc.id} />}
       </div>
 
-      <div className={classes.rowContainer}>
-        {qc.motes_personal_total > 0 && (
-          <MoteSpendWidget qc character={qc}>
-            <ResourceDisplay
-              className={classes.moteWrap}
-              current={qc.motes_personal_current}
-              total={qc.motes_personal_total}
-              label="Personal:"
-            />
-          </MoteSpendWidget>
-        )}
-        {qc.motes_peripheral_total > 0 && (
-          <MoteSpendWidget qc peripheral character={qc}>
-            <ResourceDisplay
-              className={classes.moteWrap}
-              current={qc.motes_peripheral_current}
-              total={qc.motes_peripheral_total}
-              label="Peripheral:"
-            />
-          </MoteSpendWidget>
-        )}
-        <WillpowerSpendWidget qc character={qc}>
-          <ResourceDisplay
-            className={classes.moteWrap}
-            current={qc.willpower_temporary}
-            total={qc.willpower_permanent}
-            label="Willpower:"
-          />
-        </WillpowerSpendWidget>
-      </div>
-
-      <DamageWidget qc character={qc}>
-        <HealthLevelBoxes character={qc} />
-      </DamageWidget>
+      <SpendableBlock character={qc} qc />
 
       <div className={classes.rowContainer}>
         <PoolDisplay

@@ -15,10 +15,11 @@ import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils/'
+import type { Character, fullQc } from 'utils/flow-types'
 
 type Props = {
   children: React.Node,
-  character: Object,
+  character: Character | fullQc,
   qc?: boolean,
   canEdit: boolean,
   spendWillpower: Function,

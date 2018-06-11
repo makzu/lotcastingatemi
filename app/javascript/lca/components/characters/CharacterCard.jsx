@@ -15,11 +15,7 @@ import Whatshot from '@material-ui/icons/Whatshot'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
-import DamageWidget from '../generic/DamageWidget.jsx'
-import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
-import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
-import ResourceDisplay from '../generic/ResourceDisplay.jsx'
-import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
 import {
   canIDeleteCharacter,
   getPenalties,
@@ -158,57 +154,7 @@ export function CharacterCard({
         )}
       </div>
 
-      <Typography className={classes.rowContainer} component="div">
-        {character.motes_personal_total > 0 && (
-          <MoteSpendWidget character={character}>
-            <ResourceDisplay
-              className={classes.moteWrap}
-              current={character.motes_personal_current}
-              total={character.motes_personal_total}
-              committed={calc.committedPersonalMotes(character)}
-              label="Personal"
-            />
-          </MoteSpendWidget>
-        )}
-        {character.motes_peripheral_total > 0 && (
-          <MoteSpendWidget character={character} peripheral>
-            <ResourceDisplay
-              className={classes.moteWrap}
-              current={character.motes_peripheral_current}
-              total={character.motes_peripheral_total}
-              committed={calc.committedPeripheralMotes(character)}
-              label="Peripheral"
-            />
-          </MoteSpendWidget>
-        )}
-        <WillpowerSpendWidget character={character}>
-          <ResourceDisplay
-            className={classes.moteWrap}
-            current={character.willpower_temporary}
-            total={character.willpower_permanent}
-            label="Willpower"
-          />
-        </WillpowerSpendWidget>
-        {character.type != 'Character' && (
-          <div className={classes.moteWrap}>
-            <div className={classes.animaLabel}>Anima</div>
-            <div>
-              <span className={classes.animaCurrent}>
-                {calc.prettyAnimaLevel(character.anima_level)}
-              </span>
-              {character.anima_level > 0 && (
-                <span className={classes.animaValue}>
-                  &nbsp;({character.anima_level})
-                </span>
-              )}
-            </div>
-          </div>
-        )}
-      </Typography>
-
-      <DamageWidget character={character}>
-        <HealthLevelBoxes character={character} />
-      </DamageWidget>
+      <SpendableBlock character={character} />
 
       <div className={classes.rowContainer}>
         <PoolDisplay

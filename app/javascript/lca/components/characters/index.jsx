@@ -15,7 +15,6 @@ import ArmorSummary from './blocks/armorSummary.jsx'
 import AttributeBlock from './blocks/attributeBlock.jsx'
 import CharmSummaryBlock from './blocks/charmSummaryBlock.jsx'
 import CombatBlock from './blocks/combatBlock.jsx'
-import HealthLevelBlock from './blocks/healthLevelBlock.jsx'
 import MeritSummaryBlock from './blocks/meritSummaryBlock.jsx'
 import SocialBlock from './blocks/socialBlock.jsx'
 import SpecialtyBlock from './blocks/specialtyBlock.jsx'
@@ -23,6 +22,7 @@ import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import {
@@ -33,12 +33,7 @@ import {
   getMeritsForCharacter,
   getWeaponsForCharacter,
 } from 'selectors'
-import {
-  prettyFullExaltType,
-  prettyAnimaLevel,
-  committedPersonalMotes,
-  committedPeripheralMotes,
-} from 'utils/calculated'
+import { prettyFullExaltType } from 'utils/calculated'
 import type {
   Character,
   fullMerit as Merit,
@@ -46,7 +41,7 @@ import type {
 } from 'utils/flow-types'
 
 type IntProps = { character: Character, canEdit: boolean }
-export function IntimacySummary({ character, canEdit }: IntProps) {
+function IntimacySummary({ character, canEdit }: IntProps) {
   const principles = character.principles.map(
     (p, index) =>
       p.hidden && !canEdit ? (
@@ -89,7 +84,7 @@ export function IntimacySummary({ character, canEdit }: IntProps) {
   )
 }
 
-export function WillpowerBlock({ character }: { character: Character }) {
+export function ResourceBlock({ character }: { character: Character }) {
   const re = character.resources || []
   const res = re.map((r, index) => (
     <Typography key={index}>
@@ -98,55 +93,13 @@ export function WillpowerBlock({ character }: { character: Character }) {
   ))
   return (
     <BlockPaper>
-      <Typography variant="title">Willpower</Typography>
-
-      <Typography component="div">
-        <RatingLine rating={character.willpower_temporary} fillTo={10}>
-          Current
-        </RatingLine>
-      </Typography>
-      <Typography component="div">
-        <RatingLine rating={character.willpower_permanent} fillTo={10}>
-          Permanent
-        </RatingLine>
-      </Typography>
+      <SpendableBlock character={character} />
       {res.length > 0 && (
         <Typography variant="subheading" style={{ marginTop: '0.5em' }}>
           Misc. Resources
         </Typography>
       )}
       {res}
-    </BlockPaper>
-  )
-}
-
-export function MotePoolBlock({ character }: { character: Character }) {
-  const persCommit = committedPersonalMotes(character)
-  const periCommit = committedPeripheralMotes(character)
-
-  return (
-    <BlockPaper>
-      <Typography variant="title">Mote Pool</Typography>
-
-      <Typography>
-        Personal: {character.motes_personal_current} /{' '}
-        {character.motes_personal_total}
-        {persCommit > 0 && <span> ({persCommit}c)</span>}
-      </Typography>
-      {character.motes_peripheral_total > 0 && (
-        <Typography>
-          Peripheral: {character.motes_peripheral_current} /{' '}
-          {character.motes_peripheral_total}
-          {periCommit > 0 && <span> ({periCommit}c)</span>}
-        </Typography>
-      )}
-      {character.is_sorcerer && (
-        <Typography>Sorcerous : {character.sorcerous_motes}</Typography>
-      )}
-
-      <Typography style={{ marginTop: '0.5em' }}>
-        Anima banner: {prettyAnimaLevel(character.anima_level)}
-      </Typography>
     </BlockPaper>
   )
 }
@@ -219,7 +172,7 @@ export class CharacterSheet extends Component<Props> {
             </Grid>
           </Hidden>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <BlockPaper>
               <Typography variant="headline">{character.name}</Typography>
 
@@ -230,20 +183,9 @@ export class CharacterSheet extends Component<Props> {
               <Typography paragraph>{character.description}</Typography>
             </BlockPaper>
           </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <WillpowerBlock character={character} />
+          <Grid item xs={12} md={6}>
+            <ResourceBlock character={character} />
           </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <HealthLevelBlock character={character} penalties={penalties} />
-          </Grid>
-
-          {character.type != 'Character' && (
-            <Grid item xs={12} md={2}>
-              <MotePoolBlock character={character} />
-            </Grid>
-          )}
 
           <Grid item xs={12} sm={6} md={3}>
             <AbilityBlock character={character} pools={pools} />

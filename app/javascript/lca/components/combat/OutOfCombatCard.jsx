@@ -117,9 +117,7 @@ function OutOfCombatCard({
           label="Join Battle"
           classes={{ root: classes.poolBlock }}
         />
-        {canEdit && (
-          <JoinBattlePopup character={character} pool={pools.joinBattle} />
-        )}
+        {canEdit && <JoinBattlePopup character={character} />}
       </div>
     </Paper>
   )

@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import ButtonBase from '@material-ui/core/ButtonBase'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Divider from '@material-ui/core/Divider'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
@@ -19,87 +20,120 @@ import {
   updateBattlegroupMulti,
 } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
-import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
+import type { Character, fullQc } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
 const styles = theme => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
-    marginBottom: theme.spacing.unit,
   },
   col: {
     flex: 1,
   },
+  divider: {
+    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+  },
+  content: {
+    minWidth: '15em',
+  },
 })
 
 type Props = {
-  character: Character | fullQc | Battlegroup,
+  children: React.Node,
+  character: Character | fullQc,
   canEdit: boolean,
   update: Function,
   pools: Object,
   classes: Object,
 }
-type State = { open: boolean, initiative: number }
-class JoinBattlePopup extends Component<Props, State> {
+type State = { open: boolean, roll: number, total: number }
+class ShapeSorceryWidget extends Component<Props, State> {
   constructor(props) {
     super(props)
 
-    this.state = { open: false, initiative: 0 }
+    this.state = {
+      open: false,
+      roll: 0,
+      total: this.props.character.sorcerous_motes || 0,
+    }
   }
 
-  handleChange = e => {
-    let { name, value } = e.target
-    this.setState({ [name]: value })
+  handleChangeRoll = e => {
+    let { value } = e.target
+    this.setState({
+      roll: value,
+      total: value + this.props.character.sorcerous_motes,
+    })
+  }
+  handleChangeTotal = e => {
+    let { value } = e.target
+    this.setState({
+      roll: value - this.props.character.sorcerous_motes,
+      total: value,
+    })
   }
 
   handleOpen = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false, initiative: 0 })
+  handleClose = () => this.setState({ open: false, roll: 0 })
 
   handleSubmit = () => {
     this.setState({ open: false })
-    this.props.update(this.props.character.id, this.state.initiative)
+    this.props.update(this.props.character.id, this.state.total)
   }
 
   render() {
-    const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { character, pools, classes } = this.props
-
+    const {
+      handleOpen,
+      handleClose,
+      handleChangeRoll,
+      handleChangeTotal,
+      handleSubmit,
+    } = this
+    const { character, pools, canEdit, children, classes } = this.props
+    if (!canEdit) {
+      return children
+    }
     return (
       <Fragment>
-        <Button onClick={handleOpen}>Roll Join Battle</Button>
+        <ButtonBase onClick={handleOpen}>{children}</ButtonBase>
 
         <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Join Battle</DialogTitle>
-          <DialogContent>
+          <DialogTitle>Shape Sorcery</DialogTitle>
+          <DialogContent className={classes.content}>
             <div className={classes.wrap}>
               <div className={classes.col}>
                 <PoolDisplay
-                  qc={
-                    character.type === 'qc' || character.type === 'battlegroup'
-                  }
+                  qc={character.type === 'qc'}
                   pool={pools.joinBattle}
-                  label="Join Battle Pool"
+                  label="Pool"
                 />
               </div>
               <div className={classes.col}>
                 <RatingField
-                  trait="initiative"
-                  label="Result"
-                  value={this.state.initiative}
-                  onChange={handleChange}
+                  trait="roll"
+                  label="Roll"
+                  value={this.state.roll}
+                  onChange={handleChangeRoll}
+                  min={-Infinity}
                 />
               </div>
             </div>
-            <DialogContentText>
-              {character.name} will join combat with {this.state.initiative + 3}{' '}
-              initiative.
-            </DialogContentText>
+            <Divider className={classes.divider} />
+            <center>
+              <RatingField
+                trait="total"
+                label="Total"
+                value={this.state.total}
+                onChange={handleChangeTotal}
+              />
+            </center>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
             <Button onClick={handleSubmit} variant="raised" color="primary">
-              Join Battle
+              Shape
             </Button>
           </DialogActions>
         </Dialog>
@@ -133,8 +167,7 @@ function mapDispatchToProps(dispatch: Function, props) {
   }
 
   return {
-    update: (id, value) =>
-      dispatch(action(id, { in_combat: true, initiative: 3 + value })),
+    update: (id, value) => dispatch(action(id, { sorcerous_motes: value })),
   }
 }
 
@@ -142,5 +175,5 @@ export default withStyles(styles)(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(JoinBattlePopup)
+  )(ShapeSorceryWidget)
 )

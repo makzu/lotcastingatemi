@@ -241,14 +241,12 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="resolve"
           value={battlegroup.resolve}
-          min={1}
           label="Resolve"
           onChange={handleRatingChange}
         />
         <RatingField
           trait="guile"
           value={battlegroup.guile}
-          min={1}
           label="Guile"
           margin="dense"
           onChange={handleRatingChange}
@@ -256,7 +254,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="appearance"
           value={battlegroup.appearance}
-          min={1}
           label="Appearance"
           margin="dense"
           onChange={handleRatingChange}
@@ -264,7 +261,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="senses"
           value={battlegroup.senses}
-          min={1}
           label="Senses"
           margin="dense"
           onChange={handleRatingChange}
@@ -273,7 +269,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="join_battle"
           value={battlegroup.join_battle}
-          min={1}
           label="JB"
           margin="dense"
           onChange={handleRatingChange}
@@ -281,7 +276,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="movement"
           value={battlegroup.movement}
-          min={1}
           label="Move"
           margin="dense"
           onChange={handleRatingChange}
@@ -289,7 +283,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="parry"
           value={battlegroup.parry}
-          min={1}
           label="Parry"
           margin="dense"
           onChange={handleRatingChange}
@@ -300,7 +293,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="evasion"
           value={battlegroup.evasion}
-          min={1}
           label="Evasion"
           margin="dense"
           onChange={handleRatingChange}
@@ -311,7 +303,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="soak"
           value={battlegroup.soak}
-          min={1}
           label="Soak"
           margin="dense"
           onChange={handleRatingChange}
@@ -320,7 +311,6 @@ class BattlegroupEditor extends Component<Props, State> {
         <RatingField
           trait="hardness"
           value={battlegroup.hardness}
-          min={1}
           label="Hardness"
           margin="dense"
           onChange={handleRatingChange}

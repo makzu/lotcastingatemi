@@ -21,14 +21,11 @@ class Battlegroup < ApplicationRecord
     greater_than_or_equal_to: 1, less_than_or_equal_to: 10
   }
 
-  validates :hardness,
-            :onslaught,
-            numericality: { greater_than_or_equal_to: 0 }
-
   validates :resolve, :guile, :appearance,
             :join_battle, :evasion, :parry, :soak,
             :movement, :senses,
-            numericality: { greater_than: 0 }
+            :hardness, :onslaught,
+            numericality: { greater_than_or_equal_to: 0 }
 
   def entity_type
     'battlegroup'

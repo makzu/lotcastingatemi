@@ -288,7 +288,6 @@ class QcEditor extends Component<Props, State> {
               trait="join_battle"
               value={qc.join_battle}
               label="JB"
-              min={1}
               margin="dense"
               onChange={handleRatingChange}
             />
@@ -296,7 +295,6 @@ class QcEditor extends Component<Props, State> {
               trait="movement"
               value={qc.movement}
               label="Move"
-              min={1}
               margin="dense"
               onChange={handleRatingChange}
             />
@@ -304,7 +302,6 @@ class QcEditor extends Component<Props, State> {
               trait="evasion"
               value={qc.evasion}
               label="Evasion"
-              min={1}
               margin="dense"
               onChange={handleRatingChange}
             />
@@ -312,7 +309,6 @@ class QcEditor extends Component<Props, State> {
               trait="parry"
               value={qc.parry}
               label="Parry"
-              min={1}
               margin="dense"
               onChange={handleRatingChange}
             />
@@ -320,7 +316,6 @@ class QcEditor extends Component<Props, State> {
               trait="soak"
               value={qc.soak}
               label="Soak"
-              min={1}
               margin="dense"
               onChange={handleRatingChange}
             />
@@ -367,7 +362,6 @@ class QcEditor extends Component<Props, State> {
               trait="resolve"
               value={qc.resolve}
               label="Resolve"
-              min={1}
               margin="dense"
               onChange={handleRatingChange}
             />
@@ -375,7 +369,6 @@ class QcEditor extends Component<Props, State> {
               trait="guile"
               value={qc.guile}
               label="Guile"
-              min={1}
               margin="dense"
               onChange={handleRatingChange}
             />
@@ -383,7 +376,6 @@ class QcEditor extends Component<Props, State> {
               trait="appearance"
               value={qc.appearance}
               label="Appearance"
-              min={1}
               max={10}
               margin="dense"
               onChange={handleRatingChange}

@@ -72,7 +72,7 @@ group :development do
 end
 
 group :test do
-  gem 'pundit-matchers', '~> 1.4.1'
+  gem 'pundit-matchers', '~> 1.4'
   gem 'simplecov', require: false
 end
 

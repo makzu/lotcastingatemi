@@ -157,13 +157,12 @@ GEM
     parser (2.5.1.0)
       ast (~> 2.4.0)
     pg (1.0.0)
-    powerpack (0.1.1)
+    powerpack (0.1.2)
     public_suffix (3.0.2)
     puma (3.11.4)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    pundit-matchers (1.4.1)
-      pundit (~> 1.1, >= 1.1.0)
+    pundit-matchers (1.6.0)
       rspec-rails (>= 3.0.0)
     rack (2.0.5)
     rack-cors (1.0.2)
@@ -227,7 +226,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.57.1)
+    rubocop (0.57.2)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5)
@@ -315,7 +314,7 @@ DEPENDENCIES
   pg (~> 1.0)
   puma (~> 3.7)
   pundit
-  pundit-matchers (~> 1.4.1)
+  pundit-matchers (~> 1.4)
   rack-cors
   rails (~> 5.2.0)
   rails_real_favicon

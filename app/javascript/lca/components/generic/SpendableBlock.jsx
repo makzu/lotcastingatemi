@@ -4,6 +4,8 @@ import React, { Fragment } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import AnimaDisplay from '../generic/AnimaDisplay.jsx'
+import AuraDisplay from '../generic/AuraDisplay.jsx'
 import DamageWidget from '../generic/DamageWidget.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
@@ -16,23 +18,6 @@ import type { Character, fullQc } from 'utils/flow-types'
 const styles = theme => ({
   moteWrap: {
     marginRight: theme.spacing.unit,
-  },
-  animaLabel: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-  },
-  animaCurrent: {
-    ...theme.typography.display1,
-    display: 'inline-block',
-    verticalAlign: 'top',
-  },
-  animaValue: {
-    ...theme.typography.body1,
-    display: 'inline-block',
-    verticalAlign: 'top',
-    marginTop: '0.25em',
   },
   rowContainer: {
     display: 'flex',
@@ -88,21 +73,10 @@ export function SpendableBlock({ character, classes, qc }: Props) {
             label="Willpower"
           />
         </WillpowerSpendWidget>
-        {character.type != 'Character' && (
-          <div className={classes.moteWrap}>
-            <div className={classes.animaLabel}>Anima</div>
-            <div>
-              <span className={classes.animaCurrent}>
-                {calc.prettyAnimaLevel(character.anima_level)}
-              </span>
-              {character.anima_level > 0 && (
-                <span className={classes.animaValue}>
-                  &nbsp;({character.anima_level})
-                </span>
-              )}
-            </div>
-          </div>
-        )}
+        <div className={classes.moteWrap}>
+          <AuraDisplay character={character} qc={qc} />
+          <AnimaDisplay character={character} qc={qc} />
+        </div>
       </Typography>
 
       <DamageWidget character={character} qc={qc}>

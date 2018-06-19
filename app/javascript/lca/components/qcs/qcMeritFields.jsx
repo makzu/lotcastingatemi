@@ -5,10 +5,9 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Divider from '@material-ui/core/Divider'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-
 import Delete from '@material-ui/icons/Delete'
 
+import TextField from 'components/generic/TextField.jsx'
 import type { QcMerit } from 'utils/flow-types'
 
 type Props = {
@@ -38,7 +37,7 @@ export default class QcMeritFields extends Component<Props, State> {
   handleBlur = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
     const { merit } = this.state
-    if (merit[name] == this.props.merit[name]) return
+    if (merit[name] === this.props.merit[name]) return
 
     this.props.onMeritChange(merit.id, name, merit[name])
   }

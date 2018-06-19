@@ -15,20 +15,28 @@ import { updatePlayer } from 'ducks/actions.js'
 import { getSpecificPlayer } from 'selectors'
 
 type Props = { displayName: string, id: number, updatePlayer: Function }
-type State = { open: boolean, player: { display_name: string } }
+type State = {
+  open: boolean,
+  player: { display_name: string },
+  oldName: string,
+}
 class DisplayNamePopup extends PureComponent<Props, State> {
   constructor(props) {
     super(props)
 
     this.state = {
       open: false,
+      oldName: this.props.displayName,
       player: { display_name: this.props.displayName },
     }
   }
 
   static getDerivedStateFromProps(props: Props, state: State) {
-    if (props.displayName === state.player.display_name) return null
-    return { player: { display_name: props.displayName } }
+    if (props.displayName === state.oldName) return null
+    return {
+      player: { display_name: props.displayName },
+      oldName: props.displayName,
+    }
   }
 
   handleOpen = () => {

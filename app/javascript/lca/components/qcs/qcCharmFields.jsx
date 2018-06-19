@@ -4,12 +4,12 @@ import React, { Component } from 'react'
 
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
-import TextField from '@material-ui/core/TextField'
 import Delete from '@material-ui/icons/Delete'
 
 import CharmTimingSelect from 'components/generic/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import type { QcCharm } from 'utils/flow-types'
 
 type Props = {
@@ -70,7 +70,7 @@ export default class QcCharmFields extends Component<Props, State> {
           margin="dense"
           onChange={handleChange}
           onBlur={handleBlur}
-        />&nbsp;&nbsp;
+        />
         <RatingField
           trait="min_essence"
           value={charm.min_essence}

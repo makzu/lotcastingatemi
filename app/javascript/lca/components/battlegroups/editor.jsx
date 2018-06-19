@@ -7,11 +7,12 @@ import { withStyles } from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
+import TextField from '../generic/TextField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
@@ -208,7 +209,7 @@ class BattlegroupEditor extends Component<Props, State> {
           {' '}
           / {totalMagnitude(battlegroup)}
         </span>
-        <TextField
+        <MuiTextField
           select
           name="drill"
           value={battlegroup.drill}
@@ -218,7 +219,7 @@ class BattlegroupEditor extends Component<Props, State> {
           onChange={handleRatingChange}
         >
           {drillOptions}
-        </TextField>
+        </MuiTextField>
         <RatingField
           trait="might"
           value={battlegroup.might}

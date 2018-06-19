@@ -5,74 +5,69 @@ import TextField from '@material-ui/core/TextField'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
-  field: {
+  root: {
     marginRight: theme.spacing.unit,
   },
 })
 
 type Props = {
-  trait: string,
+  name: string,
   label: string,
-  value: Array<string>,
+  value: string,
   onChange: Function,
   onBlur: Function,
   margin?: 'none' | 'dense' | 'normal',
-  fullWidth?: boolean,
+  className?: string,
   classes: Object,
 }
 type State = { value: string, oldValue: string }
-class TagsField extends Component<Props, State> {
+class LcaTextField extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
-      value: this.props.value.join(', '),
-      oldValue: this.props.value.join(', '),
+      value: this.props.value,
+      oldValue: this.props.value,
     }
   }
 
   static defaultProps = { min: 0, max: Infinity }
   static getDerivedStateFromProps = (props, state) => {
-    const val = props.value.join(', ')
-    if (state.oldValue === val) return null
+    if (state.oldValue === props.value) return null
 
-    return { value: val, oldValue: val }
+    return { value: props.value, oldValue: props.value }
   }
 
   handleChange = (e: SyntheticInputEvent<>) => {
-    const { value } = e.target
-    this.setState({ value: value.toLowerCase() })
+    this.setState({ value: e.target.value })
   }
 
   handleBlur = (e: SyntheticInputEvent<>) => {
     let val = e.target.value
-      .split(',')
-      .map(e => e.trim())
-      .filter(e => e !== '')
 
-    this.setState({ value: val.join(', ') })
+    this.setState({ value: val })
     const updateObj = { target: { name: e.target.name, value: val } }
     this.props.onChange(updateObj)
     this.props.onBlur(updateObj)
   }
 
   render() {
-    const { trait, label, classes, fullWidth } = this.props
+    const { name, label, classes, className } = this.props
     const { handleChange, handleBlur } = this
     const { value } = this.state
 
     return (
       <TextField
-        className={classes.field}
-        name={trait}
+        {...this.props}
+        className={className || classes.root}
+        name={name}
         label={label}
         value={value}
         onChange={handleChange}
         margin={this.props.margin || 'none'}
         onBlur={handleBlur}
-        fullWidth={fullWidth}
       />
     )
   }
 }
 
-export default withStyles(styles)(TagsField)
+export default withStyles(styles)(LcaTextField)

@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
-import TextField from '@material-ui/core/TextField'
 
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import RangeSelect from 'components/generic/RangeSelect.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack } from 'utils/flow-types'
@@ -51,7 +51,6 @@ type State = { attack: QcAttack }
 class QcAttackFields extends Component<Props, State> {
   constructor(props) {
     super(props)
-
     this.state = {
       attack: this.props.attack,
     }

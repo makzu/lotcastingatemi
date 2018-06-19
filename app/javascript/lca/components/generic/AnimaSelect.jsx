@@ -29,6 +29,7 @@ const AnimaSelect = ({ character, onChange }: Props) => {
       label="Anima"
       margin="dense"
       onChange={onChange}
+      style={{ minWidth: '8em' }}
     >
       {options}
     </TextField>

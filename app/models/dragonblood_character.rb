@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 # Traits and validations specific to Terrestrial Exalted
-# TODO: replace mote counts as needed to reflect numbers in the hardback once
-#      that chapter is released
 class DragonbloodCharacter < Character
   include AbilityExalt
 
@@ -12,6 +10,7 @@ class DragonbloodCharacter < Character
   attribute :motes_peripheral_total,   :integer, default: 31
   attribute :motes_peripheral_current, :integer, default: 31
   attribute :exalt_type,               :string,  default: 'Dragonblood'
+  attribute :aura,                     :string,  default: 'none'
 
   DRAGONBLOOD_ASPECTS = %w[air earth fire water wood].freeze
   ASPECT_ABILITIES = {
@@ -27,7 +26,7 @@ class DragonbloodCharacter < Character
   before_validation :set_caste_abilities
 
   validates :caste, inclusion: { in: DRAGONBLOOD_ASPECTS }, unless: :caste_is_blank?
-  validates :aura, inclusion:  { in: DRAGONBLOOD_ASPECTS + [''] }
+  validates :aura, inclusion:  { in: DRAGONBLOOD_ASPECTS + ['none'] }
   validate  :favored_ability_count
 
   private

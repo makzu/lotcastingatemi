@@ -133,8 +133,6 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
               margin="dense"
               style={{ width: '8em' }}
               onChange={onRatingChange}
-              SelectProps={{ displayEmpty: true }}
-              InputLabelProps={{ focused: true }}
             >
               {character.type !== 'DragonbloodCharacter' && (
                 <MenuItem value="">Does not use Aura</MenuItem>
@@ -150,11 +148,13 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
         )}
       </div>
 
-      <MoteCommittmentEditor
-        key="commit"
-        character={character}
-        onChange={onRatingChange}
-      />
+      {character.type !== 'Character' && (
+        <MoteCommittmentEditor
+          key="commit"
+          character={character}
+          onChange={onRatingChange}
+        />
+      )}
     </BlockPaper>
   )
 }

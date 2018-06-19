@@ -136,7 +136,7 @@ class QcEditor extends Component<Props, State> {
                 narrow
                 onChange={handleRatingChange}
               />
-              /&nbsp;
+              {' / '}
               <RatingField
                 trait="willpower_permanent"
                 value={qc.willpower_permanent}
@@ -161,7 +161,7 @@ class QcEditor extends Component<Props, State> {
                 narrow
                 onChange={handleRatingChange}
               />
-              /
+              {' / '}
               <RatingField
                 trait="motes_personal_total"
                 value={qc.motes_personal_total}
@@ -179,7 +179,7 @@ class QcEditor extends Component<Props, State> {
                 narrow
                 onChange={handleRatingChange}
               />
-              /
+              {' / '}
               <RatingField
                 trait="motes_peripheral_total"
                 value={qc.motes_peripheral_total}

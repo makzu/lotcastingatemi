@@ -143,17 +143,6 @@ export class MeritFields extends Component<FieldsProps, State> {
           >
             {meritCatOptions}
           </TextField>
-          &nbsp;
-          <FormControlLabel
-            control={
-              <Checkbox
-                name="supernatural"
-                checked={merit.supernatural}
-                onChange={handleCheck}
-              />
-            }
-            label="Supernatual"
-          />
         </Typography>
 
         <div style={{ display: 'flex' }}>
@@ -191,6 +180,16 @@ export class MeritFields extends Component<FieldsProps, State> {
             onBlur={handleBlur}
             label="Reference"
             margin="dense"
+          />&nbsp;&nbsp;
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="supernatural"
+                checked={merit.supernatural}
+                onChange={handleCheck}
+              />
+            }
+            label="Supernatual"
           />
         </div>
       </BlockPaper>

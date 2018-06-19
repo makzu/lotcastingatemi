@@ -43,7 +43,6 @@ class SolarCasteSelect extends React.PureComponent<Props> {
         label="Caste"
         margin="dense"
         onChange={onChange}
-        SelectProps={{ displayEmpty: true }}
       >
         {options}
       </TextField>

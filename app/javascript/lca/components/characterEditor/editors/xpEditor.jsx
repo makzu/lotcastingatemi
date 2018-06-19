@@ -76,7 +76,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           onChange={onRatingChange}
         />
 
-        <Typography>
+        <Typography component="div">
           <RatingField
             trait="xp_total"
             value={character.xp_total}
@@ -104,7 +104,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           onChange={onRatingChange}
         />
 
-        <Typography>
+        <Typography component="div">
           <RatingField
             trait="xp_solar_total"
             value={character.xp_solar_total}

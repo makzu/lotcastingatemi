@@ -43,6 +43,7 @@ class RangeSelect extends React.PureComponent<Props> {
         margin="dense"
         onChange={onChange}
         className={className}
+        fullWidth
       >
         {options}
       </TextField>

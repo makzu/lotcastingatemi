@@ -142,7 +142,7 @@ export function CharacterCard({
               </div>
             )}
           </Typography>
-          <PlayerNameSubtitle playerId={character.player_id} />
+          {chronicle && <PlayerNameSubtitle playerId={character.player_id} />}
 
           <Typography paragraph>
             Essence {character.essence} {calc.prettyFullExaltType(character)}

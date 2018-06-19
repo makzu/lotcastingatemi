@@ -14,7 +14,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Collapse from '@material-ui/core/Collapse'
 import Delete from '@material-ui/icons/Delete'
@@ -25,6 +25,7 @@ import styles from './CharmStyles.js'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 import { SpellSummaryBlock } from './SpellDisplay.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { checkVisible } from 'utils'
 import type { Character, Spell } from 'utils/flow-types'
 
@@ -183,7 +184,7 @@ class SpellFields extends Component<Props, State> {
               onBlur={handleBlur}
               label="Cost"
               margin="dense"
-            />&nbsp;&nbsp;
+            />
             <TextField
               name="duration"
               value={spell.duration}
@@ -191,8 +192,8 @@ class SpellFields extends Component<Props, State> {
               onBlur={handleBlur}
               label="Duration"
               margin="dense"
-            />&nbsp;&nbsp;
-            <TextField
+            />
+            <MuiTextField
               select
               name="circle"
               label="Circle"
@@ -201,7 +202,7 @@ class SpellFields extends Component<Props, State> {
               onChange={handleRatingChange}
             >
               {circles}
-            </TextField>&nbsp;&nbsp;
+            </MuiTextField>&nbsp;&nbsp;
             <FormControlLabel
               label="Control Spell"
               control={

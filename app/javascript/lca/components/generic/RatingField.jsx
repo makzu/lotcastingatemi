@@ -64,7 +64,6 @@ class RatingField extends Component<Props, State> {
 
   handleFocus = (e: SyntheticInputEvent<>) => {
     if (this.props.dontFocus) return
-
     e.target.select()
   }
 

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -39,19 +39,11 @@ class CombatControls extends Component<Props> {
     this.props.update(this.props.character.id, { ['onslaught']: value })
   }
 
-  onClickRemoveFromBattle = () => {
-    this.props.update(this.props.character.id, {
-      in_combat: false,
-      has_acted: false,
-      onslaught: 0,
-    })
-  }
-
   render() {
     const { character, canEdit } = this.props
     return (
-      <Fragment>
-        <div>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{ flex: 1 }}>
           <InitiativeField
             value={character.initiative}
             onChange={this.onChange}
@@ -93,12 +85,7 @@ class CombatControls extends Component<Props> {
             +1
           </Button>
         </div>
-        <div>
-          <Button onClick={this.onClickRemoveFromBattle} disabled={!canEdit}>
-            Remove from Combat
-          </Button>
-        </div>
-      </Fragment>
+      </div>
     )
   }
 }

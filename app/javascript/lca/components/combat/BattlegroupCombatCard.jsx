@@ -11,6 +11,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import BattlegroupHealthDisplay from '../battlegroups/BattlegroupHealthDisplay.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CombatControls from './CombatControls.jsx'
+import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
 import sharedStyles from 'styles/'
 import { prettyDrillRating } from 'utils/calculated'
 
@@ -74,7 +75,9 @@ function BattlegroupCard(props: Props) {
         <div className={classes.nameWrap}>
           <Typography
             variant="title"
-            className={classes.battlegroupName}
+            className={
+              battlegroup.has_acted ? classes.hasActed : classes.battlegroupName
+            }
             component={Link}
             to={`/battlegroups/${battlegroup.id}`}
           >
@@ -127,6 +130,10 @@ function BattlegroupCard(props: Props) {
         </Typography>
       )}
 
+      <RemoveFromCombatButton
+        character={battlegroup}
+        characterType="battlegroup"
+      />
     </Paper>
   )
 }

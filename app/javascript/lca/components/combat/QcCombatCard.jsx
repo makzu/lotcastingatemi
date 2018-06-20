@@ -12,6 +12,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CombatControls from './CombatControls.jsx'
+import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import sharedStyles from 'styles/'
@@ -39,6 +40,10 @@ const styles = theme => ({
   },
   qcName: {
     textDecoration: 'none',
+  },
+  hasActed: {
+    textDecoration: 'none',
+    opacity: 0.5,
   },
   icon: {
     verticalAlign: 'bottom',
@@ -70,7 +75,7 @@ function QcCard(props: Props) {
         <div className={classes.nameWrap}>
           <Typography
             variant="title"
-            className={classes.qcName}
+            className={qc.has_acted ? classes.hasActed : classes.qcName}
             component={Link}
             to={`/qcs/${qc.id}`}
           >
@@ -88,6 +93,8 @@ function QcCard(props: Props) {
           <PlayerNameSubtitle playerId={qc.player_id} />
         </div>
       </div>
+
+      <CombatControls character={qc} characterType="qc" />
 
       <SpendableBlock character={qc} qc />
 
@@ -133,7 +140,7 @@ function QcCard(props: Props) {
         </Typography>
       )}
 
-      <CombatControls character={qc} characterType="qc" />
+      <RemoveFromCombatButton character={qc} characterType="qc" />
     </Paper>
   )
 }

@@ -15,6 +15,7 @@ import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import CombatControls from './CombatControls.jsx'
+import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character } from 'utils/flow-types'
 
@@ -41,6 +42,10 @@ const styles = theme => ({
   },
   characterName: {
     textDecoration: 'none',
+  },
+  hasActed: {
+    textDecoration: 'none',
+    opacity: 0.5,
   },
   icon: {
     verticalAlign: 'bottom',
@@ -69,6 +74,7 @@ type Props = {
 
 export function CharacterCard({
   character,
+  // eslint-disable-next-line no-unused-vars
   canEdit,
   penalties,
   pools,
@@ -80,7 +86,9 @@ export function CharacterCard({
         <div className={classes.nameWrap}>
           <Typography
             variant="title"
-            className={classes.characterName}
+            className={
+              character.has_acted ? classes.hasActed : classes.characterName
+            }
             component={Link}
             to={`/characters/${character.id}`}
           >
@@ -99,6 +107,8 @@ export function CharacterCard({
           <PlayerNameSubtitle playerId={character.player_id} />
         </div>
       </div>
+
+      <CombatControls character={character} characterType="character" />
 
       <SpendableBlock character={character} />
 
@@ -145,7 +155,8 @@ export function CharacterCard({
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
-      <CombatControls character={character} characterType="character" />
+
+      <RemoveFromCombatButton character={character} characterType="character" />
     </Paper>
   )
 }

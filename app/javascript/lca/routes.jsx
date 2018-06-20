@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
 import ChronicleDashboard from 'components/chronicles/index.jsx'
-import ChroniclePlayerPage from 'components/chronicles/playerPage.jsx'
+import ChronicleDetailsPage from 'components/chronicles/DetailsPage.jsx'
 import CombatDashboard from 'components/combat/index.jsx'
 import ContentList from 'components/pages/contentList.jsx'
 import CharacterSheet from 'components/characters/index.jsx'
@@ -39,8 +39,8 @@ export default function Routes() {
         component={CombatDashboard}
       />
       <Route
-        path="/chronicles/:chronicleId/players"
-        component={ChroniclePlayerPage}
+        path="/chronicles/:chronicleId/details"
+        component={ChronicleDetailsPage}
       />
 
       <Route exact path="/characters/:characterId" component={CharacterSheet} />

@@ -2,18 +2,22 @@
 import React, { Component, Fragment } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
+import ReactMarkdown from 'react-markdown'
+import { compose } from 'recompose'
 
+import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import ChronicleDeletePopup from './ChronicleDeletePopup.jsx'
 import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/blockPaper.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import commonStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateChronicle } from 'ducks/actions.js'
@@ -34,9 +38,10 @@ type Props = {
   qcs: Array<fullQc>,
   battlegroups: Array<Battlegroup>,
   chronicle: Object,
+  classes: Object,
   updateChronicle: Function,
 }
-class ChroniclePlayerPage extends Component<Props, { name?: string }> {
+class ChronicleDetailsPage extends Component<Props, { name?: string }> {
   constructor(props) {
     super(props)
     this.state = {}
@@ -69,7 +74,7 @@ class ChroniclePlayerPage extends Component<Props, { name?: string }> {
         </BlockPaper>
       )
 
-    const { chronicle, st, is_st, players } = this.props
+    const { chronicle, st, is_st, players, classes } = this.props
     const { onChange, onBlur } = this
 
     const playerList = players.map(p => (
@@ -93,15 +98,25 @@ class ChroniclePlayerPage extends Component<Props, { name?: string }> {
           </Grid>
         </Hidden>
 
-        <Grid item xs={12}>
-          <Typography variant="headline">
-            Players
-            {is_st && <ChronicleInvitePopup chronicleId={chronicle.id} />}
-          </Typography>
-        </Grid>
+        {chronicle.notes !== '' && (
+          <Grid item xs={12} md={8}>
+            <BlockPaper>
+              <Typography component="div">
+                <ReactMarkdown
+                  source={chronicle.notes}
+                  className={classes.markdown}
+                />
+              </Typography>
+            </BlockPaper>
+          </Grid>
+        )}
 
-        <Grid item xs={12}>
+        <Grid item xs={12} md={4}>
           <BlockPaper>
+            <Typography variant="headline">
+              Players
+              {is_st && <ChronicleInvitePopup chronicleId={chronicle.id} />}
+            </Typography>
             <Typography variant="subheading" gutterBottom>
               Storyteller: {st.display_name}
             </Typography>
@@ -125,13 +140,25 @@ class ChroniclePlayerPage extends Component<Props, { name?: string }> {
               <div>
                 <TextField
                   name="name"
-                  value={this.state.name}
+                  value={chronicle.name}
                   label="Chronicle Name"
                   style={{ width: '30em' }}
                   onChange={onChange}
                   onBlur={onBlur}
+                  margin="dense"
                 />
               </div>
+
+              <TextField
+                name="notes"
+                label="Chronicle Notes"
+                value={chronicle.notes}
+                margin="dense"
+                onChange={onChange}
+                onBlur={onBlur}
+                fullWidth
+                multiline
+              />
               <div style={{ marginTop: '1em' }}>
                 <ChronicleDeletePopup chronicleId={chronicle.id} />
               </div>
@@ -155,9 +182,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default ProtectedComponent(
+export default compose(
+  ProtectedComponent,
+  withStyles(commonStyles),
   connect(
     mapStateToProps,
     { updateChronicle }
-  )(ChroniclePlayerPage)
-)
+  )
+)(ChronicleDetailsPage)

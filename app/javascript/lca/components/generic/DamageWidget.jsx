@@ -222,13 +222,11 @@ class DamageWidget extends Component<Props, State> {
     )
   }
 }
-function mapStateToProps(state, props) {
-  return {
-    canEdit: props.qc
-      ? canIEditQc(state, props.character.id)
-      : canIEditCharacter(state, props.character.id),
-  }
-}
+const mapStateToProps = (state, props) => ({
+  canEdit: props.qc
+    ? canIEditQc(state, props.character.id)
+    : canIEditCharacter(state, props.character.id),
+})
 
 export default connect(
   mapStateToProps,

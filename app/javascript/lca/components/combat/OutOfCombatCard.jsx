@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -10,20 +11,19 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import JoinBattlePopup from './JoinBattlePopup.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
+import sharedStyles from 'styles/'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
 
 const styles = theme => ({
+  ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
       paddingTop: 16,
       paddingBottom: 16,
     }),
     height: '100%',
-  },
-  nameRow: {
-    display: 'flex',
   },
   nameWrap: {
     flex: 1,
@@ -40,33 +40,6 @@ const styles = theme => ({
   icon: {
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
-  },
-  moteWrap: {
-    marginRight: theme.spacing.unit,
-  },
-  animaLabel: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-  },
-  penaltyLabel: {
-    ...theme.typography.caption,
-  },
-  animaCurrent: {
-    ...theme.typography.display1,
-    display: 'inline-block',
-    verticalAlign: 'top',
-  },
-  animaValue: {
-    ...theme.typography.body1,
-    display: 'inline-block',
-    verticalAlign: 'top',
-    marginTop: '0.25em',
-  },
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
   },
   poolBlock: {
     marginRight: theme.spacing.unit,
@@ -95,7 +68,7 @@ function OutOfCombatCard({
 }: Props) {
   return (
     <Paper className={classes.root}>
-      <div className={classes.nameRow}>
+      <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography variant="title" className={classes.characterName}>
             {character.name}
@@ -110,7 +83,7 @@ function OutOfCombatCard({
         </div>
       </div>
 
-      <div className={classes.rowContainer}>
+      <div className={classes.flexContainer}>
         <PoolDisplay
           qc={character.type === 'qc' || character.type === 'battlegroup'}
           pool={pools.joinBattle}
@@ -152,9 +125,10 @@ function mapDispatchToProps(dispatch: Function, props) {
   }
 }
 
-export default withStyles(styles)(
+export default compose(
+  withStyles(styles),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(OutOfCombatCard)
-)
+  )
+)(OutOfCombatCard)

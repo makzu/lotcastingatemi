@@ -117,37 +117,29 @@ function QcCard(props: Props) {
 
       <div className={classes.rowContainer}>
         <PoolDisplay
-          staticRating
-          qc
           pool={pools.evasion}
           label="Evasion"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
-          staticRating
-          qc
           pool={pools.parry}
           label="Parry"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
-          staticRating
-          qc
           pool={{ total: qc.soak }}
           label="Soak"
           classes={{ root: classes.poolBlock }}
         />
         {qc.hardness > 0 && (
           <PoolDisplay
-            staticRating
-            qc
+            noSummary
             pool={{ total: qc.hardness }}
             label="Hardness"
             classes={{ root: classes.poolBlock }}
           />
         )}
         <PoolDisplay
-          qc
           pool={pools.joinBattle}
           label="Join Battle"
           classes={{ root: classes.poolBlock }}
@@ -156,28 +148,21 @@ function QcCard(props: Props) {
 
       <div className={classes.rowContainer}>
         <PoolDisplay
-          staticRating
-          qc
           pool={pools.resolve}
           label="Resolve"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
-          staticRating
-          qc
           pool={pools.guile}
           label="Guile"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
-          staticRating
-          qc
           pool={pools.appearance}
           label="Appearance"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
-          qc
           pool={pools.senses}
           label="Senses"
           classes={{ root: classes.poolBlock }}

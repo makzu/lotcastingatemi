@@ -45,6 +45,14 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
   )
 }
 
+const defaultState = {
+  open: false,
+  toSpend: 0,
+  commit: false,
+  commitName: '',
+  mute: false,
+  scenelong: false,
+}
 type Props = {
   children: React.Node,
   character: withMotePool & { id: number },
@@ -64,14 +72,7 @@ type State = {
 class MoteSpendWidget extends Component<Props, State> {
   constructor(props) {
     super(props)
-    this.state = {
-      open: false,
-      toSpend: 0,
-      commit: false,
-      commitName: '',
-      mute: false,
-      scenelong: false,
-    }
+    this.state = defaultState
 
     this.max = this.max.bind(this)
     this.min = this.min.bind(this)
@@ -110,7 +111,7 @@ class MoteSpendWidget extends Component<Props, State> {
   }
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.setState(defaultState)
   }
 
   handleAdd = motes => {
@@ -204,7 +205,7 @@ class MoteSpendWidget extends Component<Props, State> {
           </DialogTitle>
 
           <DialogContent>
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <ResourceDisplay
                 current={
                   peripheral

@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -154,4 +155,7 @@ const mapStateToProps = (state, props) => ({
   pools: getPoolsAndRatings(state, props.character.id),
 })
 
-export default withStyles(styles)(connect(mapStateToProps)(CharacterCard))
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(CharacterCard)

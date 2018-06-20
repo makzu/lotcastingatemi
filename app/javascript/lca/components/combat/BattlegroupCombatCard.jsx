@@ -70,7 +70,7 @@ function BattlegroupCard(props: Props) {
 
   return (
     <Paper className={classes.root}>
-      <div className={classes.nameRow}>
+      <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
             variant="title"

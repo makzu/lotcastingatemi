@@ -169,6 +169,7 @@ class QcSheet extends Component<Props> {
         />
         {attack.overwhelming > 1 && (
           <PoolDisplay
+            noSummary
             label="Minimum"
             damage
             pool={{ total: attack.overwhelming }}
@@ -312,14 +313,16 @@ class QcSheet extends Component<Props> {
             classes={{ root: classes.poolBlock }}
           />
           <PoolDisplay
+            noSummary
             label="Soak"
-            pool={qcPool(qc, qc.soak)}
+            pool={{ total: qc.soak }}
             classes={{ root: classes.poolBlock }}
           />
           {qc.hardness > 0 && (
             <PoolDisplay
+              noSummary
               label="Hardness"
-              pool={qcPool(qc, qc.hardness)}
+              pool={{ total: qc.hardness }}
               classes={{ root: classes.poolBlock }}
             />
           )}

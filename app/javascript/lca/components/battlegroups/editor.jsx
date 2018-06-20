@@ -2,6 +2,7 @@
 import * as React from 'react'
 const { Component } = React
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -340,11 +341,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default ProtectedComponent(
-  withStyles(styles)(
-    connect(
-      mapStateToProps,
-      { updateBattlegroup }
-    )(BattlegroupEditor)
+export default compose(
+  ProtectedComponent,
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    { updateBattlegroup }
   )
-)
+)(BattlegroupEditor)

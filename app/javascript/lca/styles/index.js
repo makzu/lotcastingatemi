@@ -15,6 +15,14 @@ const commonStyles = (theme: Object) => ({
       maxWidth: '100%',
     },
   },
+  flexContainer: {
+    display: 'flex',
+  },
+  flexContainerWrap: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  flexCol: {},
 })
 
 export default commonStyles

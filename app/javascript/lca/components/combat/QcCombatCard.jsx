@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -13,10 +14,12 @@ import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CombatControls from './CombatControls.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
+import sharedStyles from 'styles/'
 import { getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc } from 'utils/flow-types'
 
 const styles = theme => ({
+  ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
       paddingTop: 16,
@@ -24,9 +27,6 @@ const styles = theme => ({
     }),
     height: '100%',
     position: 'relative',
-  },
-  nameRow: {
-    display: 'flex',
   },
   nameWrap: {
     flex: 1,
@@ -43,10 +43,6 @@ const styles = theme => ({
   icon: {
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
-  },
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
   },
   poolBlock: {
     marginRight: theme.spacing.unit,
@@ -70,7 +66,7 @@ function QcCard(props: Props) {
 
   return (
     <Paper className={classes.root}>
-      <div className={classes.nameRow}>
+      <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
             variant="title"
@@ -95,32 +91,26 @@ function QcCard(props: Props) {
 
       <SpendableBlock character={qc} qc />
 
-      <div className={classes.rowContainer}>
+      <div className={classes.flexContainerWrap}>
         <PoolDisplay
-          staticRating
-          qc
           pool={pools.evasion}
           label="Evasion"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
-          staticRating
-          qc
           pool={pools.parry}
           label="Parry"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
-          staticRating
-          qc
+          noSummary
           pool={{ total: qc.soak }}
           label="Soak"
           classes={{ root: classes.poolBlock }}
         />
         {qc.hardness > 0 && (
           <PoolDisplay
-            staticRating
-            qc
+            noSummary
             pool={{ total: qc.hardness }}
             label="Hardness"
             classes={{ root: classes.poolBlock }}
@@ -154,4 +144,7 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(QcCard))
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(QcCard)

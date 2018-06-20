@@ -69,13 +69,13 @@ class AuraDisplay extends Component<Props, State> {
   render() {
     const { anchor } = this.state
     const { handleOpen, handleClose, handleChange } = this
-    const { character, classes } = this.props
+    const { character, canEdit, classes } = this.props
 
     if (character.aura == null || character.aura === '') return null
 
     return (
       <Fragment>
-        <ButtonBase onClick={handleOpen}>
+        <ButtonBase onClick={handleOpen} disabled={!canEdit}>
           <div className={classes.wrap}>
             <div className={classes.label}>Aura</div>
             <div>

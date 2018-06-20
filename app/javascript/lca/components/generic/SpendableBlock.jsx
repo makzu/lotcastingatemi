@@ -12,16 +12,14 @@ import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import ShapeSorceryWidget from '../generic/ShapeSorceryWidget.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
+import sharedStyles from 'styles/'
 import * as calc from 'utils/calculated'
 import type { Character, fullQc } from 'utils/flow-types'
 
 const styles = theme => ({
+  ...sharedStyles(theme),
   moteWrap: {
     marginRight: theme.spacing.unit,
-  },
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
   },
 })
 
@@ -33,7 +31,7 @@ type Props = {
 export function SpendableBlock({ character, classes, qc }: Props) {
   return (
     <Fragment>
-      <Typography className={classes.rowContainer} component="div">
+      <Typography className={classes.flexContainerWrap} component="div">
         {character.motes_personal_total > 0 && (
           <MoteSpendWidget character={character} qc={qc}>
             <ResourceDisplay

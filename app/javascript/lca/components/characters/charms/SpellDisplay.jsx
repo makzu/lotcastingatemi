@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -28,9 +29,15 @@ export const SpellSummaryLine = (props: SpellSummaryLineProps) => {
   const { spell, classes } = props
 
   return (
-    <Typography className={classes.summary}>
-      {spell.body.substring(0, 160)}
-      {spell.body.length > 160 && '...'}
+    <Typography className={classes.summary} component="div">
+      <ReactMarkdown
+        source={
+          spell.body.substring(0, 200) + (spell.body.length > 200 ? '...' : '')
+        }
+        allowedTypes={['strong', 'emphasis', 'delete']}
+        unwrapDisallowed
+        className={classes.markdown}
+      />
     </Typography>
   )
 }
@@ -103,7 +110,9 @@ function SpellDisplay(props: SpellDisplayProps) {
             <span className={classes.capitalize}>{spell.duration}</span>
           </Typography>
 
-          <Typography className={classes.spellBody}>{spell.body}</Typography>
+          <Typography className={classes.spellBody} component="div">
+            <ReactMarkdown source={spell.body} />
+          </Typography>
 
           {spell.ref != '' && (
             <Typography variant="caption">Ref: {spell.ref}</Typography>

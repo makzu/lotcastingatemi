@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import DocumentTitle from 'react-document-title'
+import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -12,10 +13,12 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import sharedStyles from 'styles/'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
 import type { Character, fullMerit as Merit } from 'utils/flow-types'
 
 const styles = theme => ({
+  ...sharedStyles(theme),
   name: {
     textTransform: 'capitalize',
   },
@@ -47,7 +50,9 @@ const _SingleMerit = ({ merit, classes }: _SingleMeritProps) => (
       {merit.merit_cat} {merit.merit_cat !== 'flaw' && 'Merit'}
     </Typography>
 
-    <Typography>{merit.description}</Typography>
+    <Typography component="div">
+      <ReactMarkdown source={merit.description} className={classes.markdown} />
+    </Typography>
 
     <Typography variant="caption">Ref: {merit.ref}</Typography>
   </BlockPaper>

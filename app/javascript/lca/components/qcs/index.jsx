@@ -1,5 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -12,6 +13,7 @@ import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import {
@@ -27,6 +29,7 @@ import { prettyIntimacyRating, qcPool } from 'utils/calculated'
 import type { fullQc, QcMerit, QcAttack, QcCharm } from 'utils/flow-types'
 
 const styles = theme => ({
+  ...sharedStyles(theme),
   rowContainer: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -193,7 +196,7 @@ class QcSheet extends Component<Props> {
     const merits = qc_merits.map(merit => (
       <div key={merit.id}>
         <strong>{merit.name} </strong>
-        {merit.body}
+        <ReactMarkdown source={merit.body} className={classes.markdown} />
       </div>
     ))
     const charms = qc_charms.map(charm => (
@@ -203,14 +206,17 @@ class QcSheet extends Component<Props> {
         {charm.cost}; {charm.timing}; {charm.duration}; Essence&nbsp;
         {charm.min_essence}
         )&nbsp;
-        {charm.body}
+        <ReactMarkdown source={charm.body} className={classes.markdown} />
       </div>
     ))
 
     return (
       <BlockPaper>
-        <Typography paragraph style={{ whiteSpace: 'pre-line' }}>
-          {qc.description || 'No Description'}
+        <Typography component="div">
+          <ReactMarkdown
+            source={qc.description || 'No Description'}
+            className={classes.markdown}
+          />
         </Typography>
 
         <div className={classes.rowContainer}>

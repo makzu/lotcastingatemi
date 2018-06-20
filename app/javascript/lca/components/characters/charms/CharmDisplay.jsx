@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -46,14 +47,18 @@ export const PrereqSummaryLine = ({ charm, classes }: Props) => (
 )
 
 export const CharmSummaryLine = ({ charm, classes }: Props) => (
-  <Typography className={classes.summary}>
-    {charm.summary.length > 0 && charm.summary}
-    {charm.summary.length === 0 && (
-      <span>
-        {charm.body.substring(0, 160)}
-        {charm.body.length > 160 && '...'}
-      </span>
-    )}
+  <Typography className={classes.summary} component="div">
+    <ReactMarkdown
+      source={
+        charm.summary.length === 0
+          ? charm.body.substring(0, 200) +
+            (charm.body.length > 200 ? '...' : '')
+          : charm.summary
+      }
+      allowedTypes={['strong', 'emphasis', 'delete']}
+      unwrapDisallowed
+      className={classes.markdown}
+    />
   </Typography>
 )
 
@@ -93,7 +98,7 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
 
       <ExpansionPanelDetails>
         <div className={classes.detailsWrap}>
-          <Typography paragraph>
+          <Typography>
             <strong>Cost:</strong> {charm.cost};&nbsp;
             <strong>Mins:</strong>&nbsp;
             {charm.ability && (
@@ -119,7 +124,9 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
             <strong>Prerequisite Charms:</strong> {charm.prereqs || 'None'}
           </Typography>
 
-          <Typography className={classes.charmBody}>{charm.body}</Typography>
+          <Typography className={classes.charmBody} component="div">
+            <ReactMarkdown source={charm.body} />
+          </Typography>
 
           {charm.ref != '' && (
             <Typography variant="caption">Ref: {charm.ref}</Typography>

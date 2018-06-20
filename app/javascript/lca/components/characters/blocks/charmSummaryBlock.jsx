@@ -1,5 +1,6 @@
 // @flow
 import React, { Fragment } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -62,8 +63,11 @@ function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
           )
         </div>
         <div className={classes.body}>
-          {charm.summary.length > 0 && charm.summary}
-          {charm.summary.length === 0 && charm.body}
+          <ReactMarkdown
+            source={charm.summary.length > 0 ? charm.summary : charm.body}
+            allowedTypes={['strong', 'emphasis', 'delete']}
+            unwrapDisallowed
+          />
         </div>
       </Typography>
 

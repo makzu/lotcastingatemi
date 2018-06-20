@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -8,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
@@ -22,6 +24,7 @@ import {
 } from 'utils/calculated'
 
 const styles = theme => ({
+  ...sharedStyles(theme),
   rowContainer: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -134,8 +137,11 @@ class BattlegroupSheet extends Component<Props> {
 
     return (
       <BlockPaper>
-        <Typography paragraph style={{ whiteSpace: 'pre-line' }}>
-          {battlegroup.description}
+        <Typography component="div">
+          <ReactMarkdown
+            source={battlegroup.description}
+            className={classes.markdown}
+          />
         </Typography>
 
         <div className={classes.rowContainer}>

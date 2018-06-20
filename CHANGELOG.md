@@ -2,6 +2,7 @@
 ###### *Not yet released*
 * **Initiative Tracker**: A pared-down version of the Characters page, showing Characters/QCs/Battlegroups in Initiative order. Includes quick access to controls for editing initiative and onslaught penalties.
 * **ST controls**: A simple control panel on the Chronicle dashboard enables STs to end all scenelong effects, recover motes or willpower, and more
+* Certain fields like Character descriptions, Charm/Spell/Merit bodies, and charm summaries now support Markdown formatting, which enables things like images, tables, and lists.
 * Added Elemental Aura display to character cards
 * Anima and Elemental Aura can be changed without going into the full Character editor
 * Mote committments can be marked as scenelong, causing them to lapse when the ST uses the 'end scene' control

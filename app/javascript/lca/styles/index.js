@@ -7,6 +7,14 @@ const commonStyles = (theme: Object) => ({
     zIndex: '2',
     backgroundColor: theme.palette.background.default,
   },
+  markdown: {
+    '& a': {
+      color: theme.typography.body1.color,
+    },
+    '& img': {
+      maxWidth: '100%',
+    },
+  },
 })
 
 export default commonStyles

@@ -13,6 +13,7 @@ import Launch from '@material-ui/icons/Launch'
 import AbilityBlock from './blocks/abilityBlock.jsx'
 import ArmorSummary from './blocks/armorSummary.jsx'
 import AttributeBlock from './blocks/attributeBlock.jsx'
+import BasicsBlock from './blocks/BasicsBlock.jsx'
 import CharmSummaryBlock from './blocks/charmSummaryBlock.jsx'
 import CombatBlock from './blocks/combatBlock.jsx'
 import MeritSummaryBlock from './blocks/meritSummaryBlock.jsx'
@@ -33,7 +34,6 @@ import {
   getMeritsForCharacter,
   getWeaponsForCharacter,
 } from 'selectors'
-import { prettyFullExaltType } from 'utils/calculated'
 import type {
   Character,
   fullMerit as Merit,
@@ -173,15 +173,7 @@ export class CharacterSheet extends Component<Props> {
           </Hidden>
 
           <Grid item xs={12} md={6}>
-            <BlockPaper>
-              <Typography variant="headline">{character.name}</Typography>
-
-              <Typography variant="subheading">
-                Essence {character.essence} {prettyFullExaltType(character)}
-              </Typography>
-
-              <Typography paragraph>{character.description}</Typography>
-            </BlockPaper>
+            <BasicsBlock character={character} />
           </Grid>
           <Grid item xs={12} md={6}>
             <ResourceBlock character={character} />

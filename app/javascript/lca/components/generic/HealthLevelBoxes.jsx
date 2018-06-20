@@ -31,11 +31,11 @@ const styles = theme => ({
     left: '-0.05em',
   },
   lethalDamage: {
-    fontSize: '180%',
+    fontSize: '170%',
     fontWeight: '100',
     position: 'relative',
-    top: '-0.35em',
-    left: '-0.1em',
+    top: '-0.3em',
+    left: '-0.15em',
   },
   aggDamage: {
     fontSize: '150%',
@@ -97,7 +97,7 @@ function HealthLevelBoxes({ character, classes }: Props) {
       box = (
         <div className={classes.boxWrap} key={i}>
           <div className={classes.healthLevelBox}>
-            <span className={classes.lethalDamage}>❌</span>
+            <span className={classes.lethalDamage}>✖</span>
           </div>
           <div className={classes.healthLevelLabel}>{level}</div>
         </div>

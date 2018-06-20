@@ -225,7 +225,7 @@ exports[`HealthLevelBoxes renders correctly 4`] = `
       <span
         className="HealthLevelBoxes-lethalDamage-5"
       >
-        ❌
+        ✖
       </span>
     </div>
     <div
@@ -356,7 +356,7 @@ exports[`HealthLevelBoxes renders correctly 5`] = `
       <span
         className="HealthLevelBoxes-lethalDamage-5"
       >
-        ❌
+        ✖
       </span>
     </div>
     <div
@@ -374,7 +374,7 @@ exports[`HealthLevelBoxes renders correctly 5`] = `
       <span
         className="HealthLevelBoxes-lethalDamage-5"
       >
-        ❌
+        ✖
       </span>
     </div>
     <div
@@ -392,7 +392,7 @@ exports[`HealthLevelBoxes renders correctly 5`] = `
       <span
         className="HealthLevelBoxes-lethalDamage-5"
       >
-        ❌
+        ✖
       </span>
     </div>
     <div

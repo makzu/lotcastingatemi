@@ -2,15 +2,11 @@
 
 exports[`RatingField renders at all 1`] = `
 <div
-  aria-describedby={undefined}
   className="MuiFormControl-root-3 RatingField-field-1"
-  onBlur={[Function]}
-  onFocus={[Function]}
 >
   <label
     className="MuiFormLabel-root-12 MuiInputLabel-root-7 MuiInputLabel-formControl-8 MuiInputLabel-animated-11 MuiInputLabel-shrink-10"
     data-shrink={true}
-    htmlFor={undefined}
   >
     asdf
   </label>
@@ -20,24 +16,14 @@ exports[`RatingField renders at all 1`] = `
     <input
       aria-invalid={false}
       aria-required={false}
-      autoComplete={undefined}
-      autoFocus={undefined}
       className="MuiInput-input-25 MuiInput-inputType-28"
-      defaultValue={undefined}
       disabled={false}
-      id={undefined}
       max={Infinity}
       min={0}
       name="asdf"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
-      onKeyDown={undefined}
-      onKeyUp={undefined}
-      placeholder={undefined}
-      readOnly={undefined}
-      required={undefined}
-      rows={undefined}
       type="number"
       value={5}
     />

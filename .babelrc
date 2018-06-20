@@ -13,7 +13,6 @@
   ],
 
   "plugins": [
-    ["lodash", { "id": ["lodash", "recompose"] }],
     "react-hot-loader/babel",
     "syntax-dynamic-import",
     "syntax-flow",

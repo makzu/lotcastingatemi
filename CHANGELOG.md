@@ -1,5 +1,5 @@
 ## v50
-###### *Not yet released*
+###### *June 20, 2018*
 * **Initiative Tracker**: A pared-down version of the Characters page, showing Characters/QCs/Battlegroups in Initiative order. Includes quick access to controls for editing initiative and onslaught penalties.
 * **ST controls**: A simple control panel on the Chronicle dashboard enables STs to end all scenelong effects, recover motes or willpower, and more
 * Certain fields like Character descriptions, Charm/Spell/Merit bodies, and charm summaries now support Markdown formatting, which enables things like images, tables, and lists.
@@ -7,7 +7,9 @@
 * Anima and Elemental Aura can be changed without going into the full Character editor
 * Mote committments can be marked as scenelong, causing them to lapse when the ST uses the 'end scene' control
 * Battlegroups' Magnitude and Size can be adjusted without going into the full Battlegroup editor
+* QCs and Battlegroups can now have 0s in pool ratings
 * Better performance in the Character editor
+* API responses now include created_at and updated_at timestamps
 * Bug fixes (thanks Everspace, Madletter, Artirian_Legacy)
 
 ## v49

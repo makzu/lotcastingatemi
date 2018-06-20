@@ -8,13 +8,14 @@ import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
+import BattlegroupHealthDisplay from '../battlegroups/BattlegroupHealthDisplay.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CombatControls from './CombatControls.jsx'
-import ResourceDisplay from '../generic/ResourceDisplay.jsx'
-import { prettyDrillRating, totalMagnitude } from 'utils/calculated'
+import sharedStyles from 'styles/'
+import { prettyDrillRating } from 'utils/calculated'
 
 const styles = theme => ({
+  ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
       paddingTop: 16,
@@ -29,22 +30,19 @@ const styles = theme => ({
     verticalAlign: 'middle',
     lineHeight: 'inherit',
   },
-  nameRow: {
-    display: 'flex',
-  },
   nameWrap: {
     flex: 1,
   },
   battlegroupName: {
     textDecoration: 'none',
   },
+  hasActed: {
+    textDecoration: 'none',
+    opacity: 0.5,
+  },
   icon: {
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
-  },
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
   },
   statWrap: {
     marginRight: theme.spacing.unit,
@@ -95,24 +93,16 @@ function BattlegroupCard(props: Props) {
         </div>
       </div>
 
-      <div className={classes.rowContainer}>
-        <ResourceDisplay
-          current={battlegroup.magnitude}
-          total={totalMagnitude(battlegroup)}
-          label="Magnitude"
+      <CombatControls character={battlegroup} characterType="battlegroup" />
+
+      <div className={classes.flexContainerWrap}>
+        <BattlegroupHealthDisplay
+          battlegroup={battlegroup}
           className={classes.statWrap}
         />
 
-        <PoolDisplay
-          battlegroup
-          staticRating
-          pool={{ total: battlegroup.size }}
-          label="Size"
-          classes={{ root: classes.statWrap }}
-        />
-
         <div className={classes.statWrap}>
-          <div className={classes.statLabel}>Drill:</div>
+          <div className={classes.statLabel}>Drill</div>
           <div className={classes.statValue}>
             {prettyDrillRating(battlegroup)}
           </div>
@@ -120,13 +110,13 @@ function BattlegroupCard(props: Props) {
 
         {battlegroup.might > 0 && (
           <div className={classes.statWrap}>
-            <div className={classes.statLabel}>Might:</div>
+            <div className={classes.statLabel}>Might</div>
             <div className={classes.statValue}>{battlegroup.might}</div>
           </div>
         )}
         {battlegroup.perfect_morale && (
           <div className={classes.statWrap}>
-            <div className={classes.statLabel}>Morale:</div>
+            <div className={classes.statLabel}>Morale</div>
             <div className={classes.statValue}>Perfect</div>
           </div>
         )}
@@ -137,7 +127,6 @@ function BattlegroupCard(props: Props) {
         </Typography>
       )}
 
-      <CombatControls character={battlegroup} characterType="battlegroup" />
     </Paper>
   )
 }

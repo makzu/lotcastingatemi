@@ -2,10 +2,12 @@
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
@@ -25,12 +27,10 @@ import {
 
 const styles = theme => ({
   ...sharedStyles(theme),
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  moteWrap: {
+  healthBlock: {
+    paddingTop: -theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    paddingRight: -theme.spacing.unit,
   },
   poolBlock: {
     marginRight: theme.spacing.unit,
@@ -86,7 +86,7 @@ class BattlegroupSheet extends Component<Props> {
     const { battlegroup, qc_attacks, classes } = this.props
 
     const attacks = qc_attacks.map(attack => (
-      <div key={attack.id} className={classes.rowContainer}>
+      <div key={attack.id} className={classes.flexContainerWrap}>
         <div className={classes.tags}>
           <div className={classes.label}>
             <span className={classes.labelSpan}>Name</span>
@@ -144,20 +144,13 @@ class BattlegroupSheet extends Component<Props> {
           />
         </Typography>
 
-        <div className={classes.rowContainer}>
-          <ResourceDisplay
-            current={battlegroup.magnitude}
-            total={totalMagnitude(battlegroup)}
-            label="Magnitude"
-            className={classes.poolBlock}
+        <div className={classes.flexContainerWrap}>
+          <BattlegroupHealthDisplay
+            battlegroup={battlegroup}
+            className={classes.healthBlock}
+            DisplayClassName={classes.poolBlock}
           />
 
-          <PoolDisplay
-            battlegroup
-            pool={{ total: battlegroup.size }}
-            label="Size"
-            classes={{ root: classes.poolBlock }}
-          />
           <PoolDisplay
             battlegroup
             pool={{ total: prettyDrillRating(battlegroup) }}
@@ -183,7 +176,7 @@ class BattlegroupSheet extends Component<Props> {
           )}
         </div>
 
-        <div className={classes.rowContainer}>
+        <div className={classes.flexContainerWrap}>
           <PoolDisplay
             battlegroup
             pool={{ total: battlegroup.join_battle }}
@@ -234,7 +227,7 @@ class BattlegroupSheet extends Component<Props> {
         <Typography variant="subheading">Attacks</Typography>
         {attacks}
 
-        <div className={classes.rowContainer}>
+        <div className={classes.flexContainerWrap}>
           <PoolDisplay
             battlegroup
             staticRating
@@ -243,7 +236,8 @@ class BattlegroupSheet extends Component<Props> {
             classes={{ root: classes.poolBlock }}
           />
           <PoolDisplay
-            battlegroupstaticRating
+            battlegroup
+            staticRating
             pool={{ total: battlegroup.resolve }}
             label="Resolve"
             classes={{ root: classes.poolBlock }}
@@ -285,6 +279,8 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default ProtectedComponent(
-  withStyles(styles)(connect(mapStateToProps)(BattlegroupSheet))
-)
+export default compose(
+  ProtectedComponent,
+  withStyles(styles),
+  connect(mapStateToProps)
+)(BattlegroupSheet)

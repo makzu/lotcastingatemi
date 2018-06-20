@@ -6,6 +6,7 @@
 * Added Elemental Aura display to character cards
 * Anima and Elemental Aura can be changed without going into the full Character editor
 * Mote committments can be marked as scenelong, causing them to lapse when the ST uses the 'end scene' control
+* Battlegroups' Magnitude and Size can be adjusted without going into the full Battlegroup editor
 * Better performance in the Character editor
 * Bug fixes (thanks Everspace, Madletter, Artirian_Legacy)
 

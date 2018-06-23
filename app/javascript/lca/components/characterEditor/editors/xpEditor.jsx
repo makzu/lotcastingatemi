@@ -114,7 +114,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
             dontFocus
           />
           Total: {spentSolarXp(character)}, Remaining:{' '}
-          {character.xp_total - spentSolarXp(character)}
+          {character.xp_solar_total - spentSolarXp(character)}
         </Typography>
       </div>
     </div>
@@ -183,6 +183,7 @@ export default compose(
       'xp_craft_silver',
       'xp_craft_gold',
       'xp_craft_white',
+      'bp_log',
     ])
   )
 )(XpEditor)

@@ -1,3 +1,7 @@
+## v55
+###### *Not yet released*
+* Bug fixes (Thanks Havoc)
+
 ## v50
 ###### *June 20, 2018*
 * **Initiative Tracker**: A pared-down version of the Characters page, showing Characters/QCs/Battlegroups in Initiative order. Includes quick access to controls for editing initiative and onslaught penalties.
@@ -8,6 +12,7 @@
 * Mote committments can be marked as scenelong, causing them to lapse when the ST uses the 'end scene' control
 * Battlegroups' Magnitude and Size can be adjusted without going into the full Battlegroup editor
 * QCs and Battlegroups can now have 0s in pool ratings
+* Total Spent XP/SXP/BP and Remaining XP/SXP are now displayed in the Character editor
 * Better performance in the Character editor
 * API responses now include created_at and updated_at timestamps
 * Bug fixes (thanks Everspace, Madletter, Artirian_Legacy)

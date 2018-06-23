@@ -81,7 +81,11 @@ class AnimaDisplay extends Component<Props, State> {
     const { handleOpen, handleClose, handleChange } = this
     const { character, qc, classes, canEdit } = this.props
 
-    if (qc && character.motes_personal_total === 0) return null
+    if (
+      (qc && character.motes_personal_total === 0) ||
+      character.type === 'Character'
+    )
+      return null
 
     return (
       <Fragment>

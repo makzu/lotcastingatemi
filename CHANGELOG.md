@@ -1,5 +1,5 @@
 ## v55
-###### *Not yet released*
+###### *June 23, 2018*
 * Bug fixes (Thanks Havoc)
 
 ## v50

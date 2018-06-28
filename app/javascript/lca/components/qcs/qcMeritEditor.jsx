@@ -32,6 +32,7 @@ class QcMeritEditor extends Component<Props> {
   handleRemove = id => {
     this.props.destroyQcMerit(id, this.props.qc.id)
   }
+
   render() {
     const { handleChange, handleAdd, handleRemove } = this
 

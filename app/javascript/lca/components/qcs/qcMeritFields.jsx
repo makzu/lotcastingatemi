@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -15,48 +16,30 @@ type Props = {
   onMeritChange: Function,
   onRemoveClick: Function,
 }
-type State = { merit: QcMerit }
-export default class QcMeritFields extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      merit: this.props.merit,
-    }
-  }
-
-  static getDerivedStateFromProps(props: Props) {
-    return { merit: props.merit }
-  }
-
-  handleChange = (e: SyntheticInputEvent<>) => {
-    let { name, value } = e.target
-
-    this.setState({ merit: { ...this.state.merit, [name]: value } })
-  }
-
+export default class QcMeritFields extends Component<Props> {
   handleBlur = (e: SyntheticInputEvent<>) => {
-    const { name } = e.target
-    const { merit } = this.state
-    if (merit[name] === this.props.merit[name]) return
+    const { name, value } = e.target
+    const { merit } = this.props
 
-    this.props.onMeritChange(merit.id, name, merit[name])
+    if (isEqual(merit[name], value)) return
+
+    this.props.onMeritChange(merit.id, name, value)
   }
 
   handleCheck = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
-    const { merit } = this.state
+    const { merit } = this.props
     const value = !merit[name]
 
-    this.setState({ merit: { ...merit, [name]: value } })
     this.props.onMeritChange(merit.id, name, value)
   }
 
   handleRemove = () => {
-    this.props.onRemoveClick(this.state.merit.id)
+    this.props.onRemoveClick(this.props.merit.id)
   }
 
   render() {
-    const { merit } = this.state
+    const { merit } = this.props
 
     return (
       <div style={{ marginBottom: '0.75em' }}>
@@ -65,7 +48,6 @@ export default class QcMeritFields extends Component<Props, State> {
           value={merit.name}
           label="Name"
           margin="dense"
-          onChange={this.handleChange}
           onBlur={this.handleBlur}
         />
 
@@ -102,7 +84,6 @@ export default class QcMeritFields extends Component<Props, State> {
           value={merit.body}
           label="Text"
           margin="dense"
-          onChange={this.handleChange}
           onBlur={this.handleBlur}
           fullWidth={true}
           multiline
@@ -115,7 +96,6 @@ export default class QcMeritFields extends Component<Props, State> {
           value={merit.ref}
           label="Reference"
           margin="dense"
-          onChange={this.handleChange}
           onBlur={this.handleBlur}
         />
 

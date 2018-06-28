@@ -30,7 +30,6 @@ class LcaTextField extends Component<Props, State> {
     }
   }
 
-  static defaultProps = { min: 0, max: Infinity }
   static getDerivedStateFromProps = (props, state) => {
     if (state.oldValue === props.value) return null
 

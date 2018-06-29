@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import * as React from 'react'
 const { Component } = React
 import { connect } from 'react-redux'
@@ -56,47 +57,25 @@ type State = {
   battlegroup: Battlegroup,
 }
 class BattlegroupEditor extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      battlegroup: this.props.battlegroup,
-    }
-  }
-
-  componentWillReceiveProps = newProps => {
-    this.setState({ battlegroup: newProps.battlegroup })
-  }
-
   handleChange = (e: SyntheticInputEvent<>) => {
-    let { name, value } = e.target
-
-    this.setState({ battlegroup: { ...this.state.battlegroup, [name]: value } })
-  }
-
-  handleBlur = (e: SyntheticInputEvent<>) => {
-    const { name } = e.target
-    const { battlegroup } = this.state
-    if (battlegroup[name] == this.props.battlegroup[name]) return
-
-    this.props.updateBattlegroup(battlegroup.id, name, battlegroup[name])
-  }
-
-  handleRatingChange = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
+    const { battlegroup } = this.props
 
-    this.setState({ battlegroup: { ...this.state.battlegroup, [name]: value } })
-    this.props.updateBattlegroup(this.state.battlegroup.id, name, value)
+    if (isEqual(battlegroup[name], value)) return
+
+    this.props.updateBattlegroup(battlegroup.id, name, value)
   }
 
   handleCheck = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
-    const value = !this.state.battlegroup[name]
+    const value = !this.props.battlegroup[name]
 
-    this.setState({ battlegroup: { ...this.state.battlegroup, [name]: value } })
-    this.props.updateBattlegroup(this.state.battlegroup.id, name, value)
+    this.props.updateBattlegroup(this.props.battlegroup.id, name, value)
   }
 
   render() {
+    const { battlegroup } = this.props
+
     /* Escape hatch */
     if (this.props.battlegroup == undefined)
       return (
@@ -105,8 +84,7 @@ class BattlegroupEditor extends Component<Props, State> {
         </BlockPaper>
       )
 
-    const { battlegroup } = this.state
-    const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
+    const { handleChange, handleCheck } = this
     const { classes } = this.props
 
     return (
@@ -126,7 +104,7 @@ class BattlegroupEditor extends Component<Props, State> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
+          onBlur={handleChange}
         />
         <br />
         <TextField
@@ -138,7 +116,7 @@ class BattlegroupEditor extends Component<Props, State> {
           fullWidth
           rowsMax={5}
           onChange={handleChange}
-          onBlur={handleBlur}
+          onBlur={handleChange}
         />
         <br />
         <RatingField
@@ -148,21 +126,21 @@ class BattlegroupEditor extends Component<Props, State> {
           max={10}
           label="Essence"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="health_levels"
           value={battlegroup.health_levels}
           label="Health Levels"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="willpower_temporary"
           value={battlegroup.willpower_temporary}
           label="Temp WP"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         /
         <RatingField
@@ -172,7 +150,7 @@ class BattlegroupEditor extends Component<Props, State> {
           max={10}
           label="Perm WP"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <br />
         <RatingField
@@ -181,14 +159,14 @@ class BattlegroupEditor extends Component<Props, State> {
           min={-Infinity}
           label="Initiative"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="onslaught"
           value={battlegroup.onslaught}
           label="Onslaught"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <br />
         <RatingField
@@ -197,14 +175,14 @@ class BattlegroupEditor extends Component<Props, State> {
           max={5}
           label="Size"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="magnitude"
           value={battlegroup.magnitude}
           label="Magnitude"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <span className={classes.bgBonus}>
           {' '}
@@ -217,7 +195,7 @@ class BattlegroupEditor extends Component<Props, State> {
           label="Drill"
           className={classes.drill}
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         >
           {drillOptions}
         </MuiTextField>
@@ -227,7 +205,7 @@ class BattlegroupEditor extends Component<Props, State> {
           max={3}
           label="Might"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <FormControlLabel
           label="Perfect Morale"
@@ -244,28 +222,28 @@ class BattlegroupEditor extends Component<Props, State> {
           trait="resolve"
           value={battlegroup.resolve}
           label="Resolve"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="guile"
           value={battlegroup.guile}
           label="Guile"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="appearance"
           value={battlegroup.appearance}
           label="Appearance"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="senses"
           value={battlegroup.senses}
           label="Senses"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <Typography variant="subheading">Combat stats</Typography>
         <RatingField
@@ -273,21 +251,21 @@ class BattlegroupEditor extends Component<Props, State> {
           value={battlegroup.join_battle}
           label="JB"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="movement"
           value={battlegroup.movement}
           label="Move"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <RatingField
           trait="parry"
           value={battlegroup.parry}
           label="Parry"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <span className={classes.bgBonus}>
           ({battlegroup.parry + bgDefenseBonus(battlegroup)} total)
@@ -297,7 +275,7 @@ class BattlegroupEditor extends Component<Props, State> {
           value={battlegroup.evasion}
           label="Evasion"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <span className={classes.bgBonus}>
           ({battlegroup.evasion + bgDefenseBonus(battlegroup)} total)
@@ -307,7 +285,7 @@ class BattlegroupEditor extends Component<Props, State> {
           value={battlegroup.soak}
           label="Soak"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <span className={classes.bgBonus}>({bgSoak(battlegroup)} total)</span>
         <RatingField
@@ -315,7 +293,7 @@ class BattlegroupEditor extends Component<Props, State> {
           value={battlegroup.hardness}
           label="Hardness"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <TextField
           name="armor_name"
@@ -323,7 +301,7 @@ class BattlegroupEditor extends Component<Props, State> {
           label="Armor Name"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
+          onBlur={handleChange}
         />
         <QcAttackEditor qc={battlegroup} battlegroup />
       </BlockPaper>

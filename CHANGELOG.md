@@ -1,5 +1,6 @@
 ## v56
 ###### *Not yet released*
+* Battlegroup cards now include the same pools and ratings as QC cards
 * Bug fixes (Thanks Maudova, Yukizawa)
 
 ## v55

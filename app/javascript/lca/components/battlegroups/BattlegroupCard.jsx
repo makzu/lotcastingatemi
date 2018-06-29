@@ -14,9 +14,10 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import sharedStyles from 'styles/'
 import { doIOwnBattlegroup } from 'selectors'
-import { prettyDrillRating } from 'utils/calculated'
+import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={e => e.preventDefault()} />
@@ -48,19 +49,9 @@ const styles = theme => ({
     verticalAlign: 'bottom',
     marginLeft: theme.spacing.unit,
   },
-  statWrap: {
+  poolBlock: {
     marginRight: theme.spacing.unit,
-  },
-  statLabel: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-  },
-  statValue: {
-    ...theme.typography.body2,
-    fontSize: '1.25rem',
-    lineHeight: 'inherit',
+    minWidth: '3rem',
   },
 })
 
@@ -116,29 +107,101 @@ function BattlegroupCard(props: Props) {
       <div className={classes.flexContainerWrap}>
         <BattlegroupHealthDisplay
           battlegroup={battlegroup}
-          className={classes.statWrap}
+          className={classes.poolBlock}
         />
 
-        <div className={classes.statWrap}>
-          <div className={classes.statLabel}>Drill</div>
-          <div className={classes.statValue}>
-            {prettyDrillRating(battlegroup)}
-          </div>
-        </div>
+        <PoolDisplay
+          battlegroup
+          pool={{ total: prettyDrillRating(battlegroup) }}
+          label="Drill"
+          classes={{ root: classes.poolBlock }}
+        />
 
         {battlegroup.might > 0 && (
-          <div className={classes.statWrap}>
-            <div className={classes.statLabel}>Might</div>
-            <div className={classes.statValue}>{battlegroup.might}</div>
-          </div>
+          <PoolDisplay
+            battlegroup
+            pool={{ total: battlegroup.might }}
+            label="Might"
+            classes={{ root: classes.poolBlock }}
+          />
         )}
         {battlegroup.perfect_morale && (
-          <div className={classes.statWrap}>
-            <div className={classes.statLabel}>Morale</div>
-            <div className={classes.statValue}>Perfect</div>
-          </div>
+          <PoolDisplay
+            battlegroup
+            pool={{ total: 'Perfect' }}
+            label="Morale"
+            classes={{ root: classes.poolBlock }}
+          />
         )}
       </div>
+
+      <div className={classes.flexContainerWrap}>
+        <PoolDisplay
+          battlegroup
+          pool={{ total: battlegroup.join_battle }}
+          label="Join Battle"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          battlegroup
+          pool={{ total: battlegroup.evasion + bgDefenseBonus(battlegroup) }}
+          label="Evasion"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          battlegroup
+          staticRating
+          pool={{ total: battlegroup.parry + bgDefenseBonus(battlegroup) }}
+          label="Parry"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          battlegroup
+          pool={{ total: bgSoak(battlegroup) }}
+          label="Soak"
+          classes={{ root: classes.poolBlock }}
+        />
+        {battlegroup.hardness > 0 && (
+          <PoolDisplay
+            battlegroup
+            pool={{ total: battlegroup.hardness }}
+            label="Hardness"
+            classes={{ root: classes.poolBlock }}
+          />
+        )}
+      </div>
+
+      <div className={classes.flexContainerWrap}>
+        <PoolDisplay
+          battlegroup
+          staticRating
+          pool={{ total: battlegroup.senses }}
+          label="Senses"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          battlegroup
+          staticRating
+          pool={{ total: battlegroup.resolve }}
+          label="Resolve"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          battlegroup
+          staticRating
+          pool={{ total: battlegroup.guile }}
+          label="Guile"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
+          battlegroup
+          staticRating
+          pool={{ total: battlegroup.appearance }}
+          label="Appearance"
+          classes={{ root: classes.poolBlock }}
+        />
+      </div>
+
       {battlegroup.onslaught > 0 && (
         <Typography paragraph style={{ marginTop: '0.5em' }}>
           <strong>Penalties:</strong>&nbsp; Onslaught -{battlegroup.onslaught}

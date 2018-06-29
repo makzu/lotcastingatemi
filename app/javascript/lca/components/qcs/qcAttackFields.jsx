@@ -49,36 +49,12 @@ type Props = {
 }
 type State = { attack: QcAttack }
 class QcAttackFields extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      attack: this.props.attack,
-    }
-  }
-  static getDerivedStateFromProps(props) {
-    return { attack: props.attack }
-  }
-
   handleChange = e => {
-    let { name, value } = e.target
-
-    this.setState({ attack: { ...this.state.attack, [name]: value } })
-  }
-
-  handleBlur = e => {
     let { name, value } = e.target
     const { attack } = this.props
 
     if (isEqual(this.props.attack[name], value)) return
 
-    this.props.onAttackChange(attack.id, name, value)
-  }
-
-  handleRatingChange = e => {
-    let { name, value } = e.target
-    const { attack } = this.state
-
-    this.setState({ attack: { ...attack, [name]: value } })
     this.props.onAttackChange(attack.id, name, value)
   }
 
@@ -89,7 +65,7 @@ class QcAttackFields extends Component<Props, State> {
   render() {
     const { attack } = this.state
     const { battlegroup, fakeBg, classes } = this.props
-    const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
+    const { handleChange, handleRemove } = this
 
     return (
       <div className={classes.wrap}>
@@ -100,7 +76,6 @@ class QcAttackFields extends Component<Props, State> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
         />
 
         <RatingField
@@ -110,7 +85,7 @@ class QcAttackFields extends Component<Props, State> {
           min={1}
           narrow
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         {battlegroup && (
           <div className={classes.bgBonus}>
@@ -125,7 +100,7 @@ class QcAttackFields extends Component<Props, State> {
           min={1}
           narrow
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         {battlegroup && (
           <div className={classes.bgBonus}>
@@ -140,7 +115,7 @@ class QcAttackFields extends Component<Props, State> {
           min={1}
           narrow
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
 
         <TagsField
@@ -150,13 +125,12 @@ class QcAttackFields extends Component<Props, State> {
           className={classes.tagsField}
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
         />
 
         <RangeSelect
           name="range"
           value={attack.range}
-          onChange={handleRatingChange}
+          onChange={handleChange}
           className={classes.rangeField}
         />
 

@@ -1,4 +1,5 @@
 // @flow
+import { isEqual } from 'lodash'
 import * as React from 'react'
 const { Component, Fragment } = React
 import DocumentTitle from 'react-document-title'
@@ -11,7 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import Delete from '@material-ui/icons/Delete'
@@ -20,6 +21,7 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
+import TextField from 'components/generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateMerit, createMerit, destroyMerit } from 'ducks/actions.js'
@@ -33,69 +35,32 @@ const Handle = SortableHandle(() => (
 ))
 
 type FieldsProps = { merit: Merit, onUpdate: Function, onRemove: Function }
-type State = { merit: Merit }
-export class MeritFields extends Component<FieldsProps, State> {
-  constructor(props: FieldsProps) {
-    super(props)
-    this.state = { merit: this.props.merit }
-  }
-
-  componentWillReceiveProps = (newProps: FieldsProps) => {
-    this.setState({ merit: newProps.merit })
-  }
-
+export class MeritFields extends Component<FieldsProps> {
   handleChange = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
+    const { merit } = this.props
 
-    this.setState({ merit: { ...this.state.merit, [name]: value } })
-  }
+    if (isEqual(merit[name], value)) return
 
-  handleBlur = (e: SyntheticInputEvent<>) => {
-    const { name } = e.target
-    const { merit } = this.state
-
-    if (merit[name] != this.props.merit[name]) {
-      this.props.onUpdate(merit.id, merit.character_id, name, merit[name])
-    }
-  }
-
-  handleRatingChange = (e: SyntheticInputEvent<>) => {
-    let { name, value } = e.target
-    const { merit } = this.state
-
-    this.setState({ merit: { ...merit, [name]: value } })
     this.props.onUpdate(merit.id, merit.character_id, name, value)
   }
 
   handleCheck = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
-    const { merit } = this.state
+    const { merit } = this.props
     const value = !merit[name]
 
     this.props.onUpdate(merit.id, merit.character_id, name, value)
   }
 
   handleRemove = () => {
-    this.props.onRemove(this.state.merit.id)
+    this.props.onRemove(this.props.merit.id)
   }
 
   render() {
-    const { merit } = this.state
-    const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
-    const meritCatOptions: React.Node = [
-      <MenuItem key="s" value="story">
-        Story
-      </MenuItem>,
-      <MenuItem key="i" value="innate">
-        Innate
-      </MenuItem>,
-      <MenuItem key="p" value="purchased">
-        Purchased
-      </MenuItem>,
-      <MenuItem key="f" value="flaw">
-        Flaw
-      </MenuItem>,
-    ]
+    const { merit } = this.props
+    const { handleChange, handleCheck } = this
+
     return (
       <BlockPaper>
         <Button
@@ -118,7 +83,6 @@ export class MeritFields extends Component<FieldsProps, State> {
             name="merit_name"
             value={merit.merit_name}
             onChange={handleChange}
-            onBlur={handleBlur}
             label={merit.merit_cat === 'flaw' ? 'Flaw' : 'Merit'}
             margin="dense"
           />&nbsp;&nbsp;
@@ -130,19 +94,22 @@ export class MeritFields extends Component<FieldsProps, State> {
             narrow
             min={MERIT_RATING_MIN}
             max={MERIT_RATING_MAX}
-            onChange={handleRatingChange}
+            onChange={handleChange}
           />
           {merit.rating === 6 && <span>{'(N/A)'}&nbsp;&nbsp;</span>}
-          <TextField
+          <MuiTextField
             select
             name="merit_cat"
             value={merit.merit_cat}
             label="Type"
             margin="dense"
-            onChange={handleRatingChange}
+            onChange={handleChange}
           >
-            {meritCatOptions}
-          </TextField>
+            <MenuItem value="story">Story</MenuItem>
+            <MenuItem value="innate">Innate</MenuItem>
+            <MenuItem value="purchased">Purchased</MenuItem>
+            <MenuItem value="flaw">Flaw</MenuItem>
+          </MuiTextField>
         </Typography>
 
         <div style={{ display: 'flex' }}>
@@ -153,7 +120,6 @@ export class MeritFields extends Component<FieldsProps, State> {
             label="Summary (optional)"
             margin="dense"
             onChange={handleChange}
-            onBlur={handleBlur}
           />
           &nbsp;
         </div>
@@ -168,7 +134,6 @@ export class MeritFields extends Component<FieldsProps, State> {
             fullWidth
             rowsMax={10}
             onChange={handleChange}
-            onBlur={handleBlur}
           />
         </div>
 
@@ -177,7 +142,6 @@ export class MeritFields extends Component<FieldsProps, State> {
             name="ref"
             value={merit.ref}
             onChange={handleChange}
-            onBlur={handleBlur}
             label="Reference"
             margin="dense"
           />&nbsp;&nbsp;
@@ -209,10 +173,6 @@ type Props = {
   createMerit: Function,
 }
 class MeritEditor extends Component<Props> {
-  constructor(props) {
-    super(props)
-  }
-
   handleUpdate = (id, charId, trait, value) => {
     this.props.updateMerit(id, charId, trait, value)
   }

@@ -42,24 +42,8 @@ type Props = {
   onOpenChange: Function,
   classes: Object,
 }
-type State = { spell: Spell }
-class SpellFields extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = { spell: this.props.spell }
-  }
-
-  static getDerivedStateFromProps(props) {
-    return { spell: props.spell }
-  }
-
+class SpellFields extends Component<Props> {
   handleChange = e => {
-    let { name, value } = e.target
-
-    this.setState({ spell: { ...this.state.spell, [name]: value } })
-  }
-
-  handleBlur = e => {
     const { name, value } = e.target
     const { spell } = this.props
 
@@ -68,63 +52,30 @@ class SpellFields extends Component<Props, State> {
     this.props.onUpdate(spell.id, spell.character_id, name, value)
   }
 
-  handleRatingChange = e => {
-    let { name, value } = e.target
-    const { spell } = this.state
-
-    this.setState({ spell: { ...spell, [name]: value } })
-    this.props.onUpdate(spell.id, spell.character_id, name, value)
-  }
-
   handleCheck = e => {
-    const { name } = e.target
-    const value = !this.state.spell[name]
+    const { name, checked } = e.target
+    const { spell } = this.props
 
-    this.setState({ spell: { ...this.state.spell, [name]: value } })
-    this.props.onUpdate(
-      this.state.spell.id,
-      this.state.spell.character_id,
-      name,
-      value
-    )
+    this.props.onUpdate(spell.id, spell.character_id, name, checked)
   }
 
   handleRemove = () => {
-    this.props.onRemove(this.state.spell.id)
+    this.props.onRemove(this.props.spell.id)
   }
 
   scrollToPanel = (e, appearing) => {
     if (appearing) return false
     const elem = document.getElementById(
-      `spell-editor-expando-${this.state.spell.id}`
+      `spell-editor-expando-${this.props.spell.id}`
     )
     if (!checkVisible(elem)) scrollToElement(elem)
   }
 
   render() {
-    const { character, openSpell, onOpenChange, classes } = this.props
-    const { spell } = this.state
-    const {
-      handleChange,
-      handleBlur,
-      handleRatingChange,
-      handleCheck,
-      handleRemove,
-      scrollToPanel,
-    } = this
-
+    const { spell, character, openSpell, onOpenChange, classes } = this.props
+    const { handleChange, handleCheck, handleRemove, scrollToPanel } = this
     const isOpen = openSpell === spell.id
-    const circles: React.Node = [
-      <MenuItem key="t" value="terrestrial">
-        Terrestrial
-      </MenuItem>,
-      <MenuItem key="c" value="celestial">
-        Celestial
-      </MenuItem>,
-      <MenuItem key="s" value="solar">
-        Solar
-      </MenuItem>,
-    ]
+
     return (
       <ExpansionPanel
         expanded={isOpen}
@@ -166,7 +117,6 @@ class SpellFields extends Component<Props, State> {
               name="name"
               value={spell.name}
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Name"
               margin="dense"
               style={{ width: '25em' }}
@@ -175,13 +125,12 @@ class SpellFields extends Component<Props, State> {
             <CharmCategoryAutocomplete
               value={spell.categories}
               id={character.id}
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <TextField
               name="cost"
               value={spell.cost}
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Cost"
               margin="dense"
             />
@@ -189,7 +138,6 @@ class SpellFields extends Component<Props, State> {
               name="duration"
               value={spell.duration}
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Duration"
               margin="dense"
             />
@@ -199,9 +147,11 @@ class SpellFields extends Component<Props, State> {
               label="Circle"
               margin="dense"
               value={spell.circle}
-              onChange={handleRatingChange}
+              onChange={handleChange}
             >
-              {circles}
+              <MenuItem value="terrestrial">Terrestrial</MenuItem>
+              <MenuItem value="celestial">Celestial</MenuItem>
+              <MenuItem value="solar">Solar</MenuItem>
             </MuiTextField>&nbsp;&nbsp;
             <FormControlLabel
               label="Control Spell"
@@ -218,7 +168,6 @@ class SpellFields extends Component<Props, State> {
               trait="keywords"
               value={spell.keywords}
               onChange={handleChange}
-              onBlur={handleBlur}
               fullWidth={true}
               label="Keywords (comma separated)"
               margin="dense"
@@ -227,7 +176,6 @@ class SpellFields extends Component<Props, State> {
               name="body"
               value={spell.body}
               onChange={handleChange}
-              onBlur={handleBlur}
               className="editor-description-field"
               multiline
               fullWidth
@@ -242,7 +190,6 @@ class SpellFields extends Component<Props, State> {
               value={spell.ref}
               fullWidth
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Reference"
               margin="dense"
             />

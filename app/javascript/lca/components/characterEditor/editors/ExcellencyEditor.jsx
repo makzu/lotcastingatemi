@@ -15,29 +15,14 @@ import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, onChange: Function }
-type State = {
-  open: boolean,
-  excellency: Array<string>,
-  excellency_stunt: Array<string>,
-}
-
+type State = { open: boolean }
 class ExcellencyEditor extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
     this.state = {
       open: false,
-      excellency: this.props.character.excellency.split('+') || [],
-      excellency_stunt: this.props.character.excellency_stunt.split('+') || [],
     }
-    this.handleExcellencyChange = this.handleExcellencyChange.bind(this)
-  }
-
-  componentWillReceiveProps(newProps: Props) {
-    this.setState({
-      excellency: newProps.character.excellency.split('+') || [],
-      excellency_stunt: this.props.character.excellency_stunt.split('+') || [],
-    })
   }
 
   handleExcellencyChange = (e: Object) => {
@@ -58,7 +43,7 @@ class ExcellencyEditor extends Component<Props, State> {
   render() {
     const { character, onChange } = this.props
     const { handleOpen, handleClose, handleExcellencyChange } = this
-    const { excellency, excellency_stunt } = this.state
+    const { excellency, excellency_stunt } = this.props.character
 
     let excellencyOptions = [
       <MenuItem key="solar" value="solar">
@@ -132,7 +117,7 @@ class ExcellencyEditor extends Component<Props, State> {
               label="Excellency Cap"
               name="excellency"
               SelectProps={{ multiple: true }}
-              value={excellency}
+              value={excellency.split('+') || []}
               onChange={handleExcellencyChange}
               margin="dense"
               fullWidth
@@ -150,7 +135,7 @@ class ExcellencyEditor extends Component<Props, State> {
               label="Stunt Excellency cap"
               name="excellency_stunt"
               SelectProps={{ multiple: true }}
-              value={excellency_stunt}
+              value={excellency_stunt.split('+') || []}
               onChange={handleExcellencyChange}
               margin="dense"
               fullWidth

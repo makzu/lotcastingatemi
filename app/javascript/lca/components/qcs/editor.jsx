@@ -1,9 +1,9 @@
 // @flow
+import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import QcActionEditor from './qcActionEditor.jsx'
@@ -16,6 +16,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
+import TextField from '../generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateQc } from 'ducks/actions.js'
@@ -24,45 +25,22 @@ import { woundPenalty } from 'utils/calculated'
 import type { fullQc } from 'utils/flow-types'
 
 type Props = { qc: fullQc, updateQc: Function }
-type State = { qc: fullQc }
-class QcEditor extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      qc: this.props.qc,
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-    this.handleRatingChange = this.handleRatingChange.bind(this)
-  }
-
-  componentWillReceiveProps = newProps => {
-    this.setState({ qc: newProps.qc })
-  }
-
+class QcEditor extends Component<Props> {
   handleChange = e => {
-    this.setState({ qc: { ...this.state.qc, [e.target.name]: e.target.value } })
-  }
+    const { name, value } = e.target
+    const { qc } = this.props
 
-  handleBlur = e => {
-    const { name } = e.target
-    const { qc } = this.state
-    if (qc[name] == this.props.qc[name]) return
+    if (isEqual(qc[name], value)) return
 
-    this.props.updateQc(qc.id, name, qc[name])
-  }
-
-  handleRatingChange = e => {
-    let { name, value } = e.target
-    const { qc } = this.state
-
-    this.setState({ qc: { ...qc, [name]: value } })
     this.props.updateQc(qc.id, name, value)
   }
 
   render() {
+    const { qc } = this.props
+    const { handleChange } = this
+
     /* Escape hatch */
-    if (this.props.qc == undefined)
+    if (qc == undefined)
       return (
         <BlockPaper>
           <Typography paragraph>
@@ -71,12 +49,9 @@ class QcEditor extends Component<Props, State> {
         </BlockPaper>
       )
 
-    const { qc } = this.state
-    const { handleChange, handleBlur, handleRatingChange } = this
-
     return (
       <Grid container spacing={24}>
-        <Grid item xs={12}>
+        <Grid item xs={12} xl={6}>
           <BlockPaper>
             <Typography paragraph variant="caption">
               Rules for Quick Characters can be found in the core book starting
@@ -90,15 +65,15 @@ class QcEditor extends Component<Props, State> {
               label="Name"
               margin="dense"
               onChange={handleChange}
-              onBlur={handleBlur}
+              onBlur={handleChange}
             />
-            &nbsp;&nbsp;
             <TextField
               name="ref"
               value={qc.ref}
               label="Reference"
               margin="dense"
-              onChange={handleRatingChange}
+              onChange={handleChange}
+              onBlur={handleChange}
             />
             <TextField
               name="description"
@@ -108,13 +83,13 @@ class QcEditor extends Component<Props, State> {
               multiline
               fullWidth
               onChange={handleChange}
-              onBlur={handleBlur}
+              onBlur={handleChange}
               rowsMax={5}
             />
           </BlockPaper>
         </Grid>
 
-        <Grid item xs={12} sm={6} lg={4} xl={3}>
+        <Grid item xs={12} sm={6} xl={3}>
           <BlockPaper>
             <Typography component="div">
               <RatingField
@@ -124,19 +99,17 @@ class QcEditor extends Component<Props, State> {
                 min={1}
                 max={10}
                 margin="dense"
-                narrow
-                onChange={handleRatingChange}
+                onChange={handleChange}
               />
-              &nbsp;&nbsp;
               <RatingField
                 trait="willpower_temporary"
                 value={qc.willpower_temporary}
                 label="Willpower"
                 margin="dense"
                 narrow
-                onChange={handleRatingChange}
+                onChange={handleChange}
               />
-              {' / '}
+              {'/ '}
               <RatingField
                 trait="willpower_permanent"
                 value={qc.willpower_permanent}
@@ -145,7 +118,7 @@ class QcEditor extends Component<Props, State> {
                 max={10}
                 margin="dense"
                 narrow
-                onChange={handleRatingChange}
+                onChange={handleChange}
               />
             </Typography>
 
@@ -159,16 +132,16 @@ class QcEditor extends Component<Props, State> {
                 max={qc.motes_personal_total}
                 margin="dense"
                 narrow
-                onChange={handleRatingChange}
+                onChange={handleChange}
               />
-              {' / '}
+              {'/ '}
               <RatingField
                 trait="motes_personal_total"
                 value={qc.motes_personal_total}
                 label="Motes"
                 margin="dense"
                 narrow
-                onChange={handleRatingChange}
+                onChange={handleChange}
               />
               <RatingField
                 trait="motes_peripheral_current"
@@ -177,30 +150,30 @@ class QcEditor extends Component<Props, State> {
                 max={qc.motes_peripheral_total}
                 margin="dense"
                 narrow
-                onChange={handleRatingChange}
+                onChange={handleChange}
               />
-              {' / '}
+              {'/ '}
               <RatingField
                 trait="motes_peripheral_total"
                 value={qc.motes_peripheral_total}
                 label="Motes"
                 margin="dense"
                 narrow
-                onChange={handleRatingChange}
+                onChange={handleChange}
               />
-              <AnimaSelect character={qc} onChange={handleRatingChange} />
+              <AnimaSelect character={qc} onChange={handleChange} />
               <div>
                 <QcExcellencySelect
                   name="excellency"
                   value={qc.excellency}
-                  onChange={handleRatingChange}
+                  onChange={handleChange}
                 />
               </div>
             </Typography>
           </BlockPaper>
         </Grid>
 
-        <Grid item xs={12} sm={6} lg={4} xl={3}>
+        <Grid item xs={12} sm={6} xl={3}>
           <BlockPaper>
             <div style={{ textAlign: 'center' }}>
               <HealthLevelBoxes character={qc} />
@@ -215,7 +188,7 @@ class QcEditor extends Component<Props, State> {
               label="-0 HLs"
               margin="dense"
               narrow
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="health_level_1s"
@@ -223,7 +196,7 @@ class QcEditor extends Component<Props, State> {
               label="-1 HLs"
               margin="dense"
               narrow
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="health_level_2s"
@@ -231,7 +204,7 @@ class QcEditor extends Component<Props, State> {
               label="-2 HLs"
               margin="dense"
               narrow
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="health_level_4s"
@@ -239,7 +212,7 @@ class QcEditor extends Component<Props, State> {
               label="-4 HLs"
               margin="dense"
               narrow
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="health_level_incap"
@@ -247,7 +220,7 @@ class QcEditor extends Component<Props, State> {
               label="Incap"
               margin="dense"
               narrow
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <br />
 
@@ -256,102 +229,28 @@ class QcEditor extends Component<Props, State> {
               value={qc.damage_bashing}
               label="Bashing"
               margin="dense"
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="damage_lethal"
               value={qc.damage_lethal}
               label="Lethal"
               margin="dense"
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="damage_aggravated"
               value={qc.damage_aggravated}
               label="Aggravated"
               margin="dense"
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
           </BlockPaper>
         </Grid>
 
         <Grid item xs={12} lg={6}>
           <BlockPaper>
-            <QcActionEditor qc={qc} onChange={handleRatingChange} />
-          </BlockPaper>
-        </Grid>
-
-        <Grid item xs={12}>
-          <BlockPaper>
-            <Typography variant="subheading">Combat</Typography>
-            <RatingField
-              trait="join_battle"
-              value={qc.join_battle}
-              label="JB"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-            <RatingField
-              trait="movement"
-              value={qc.movement}
-              label="Move"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-            <RatingField
-              trait="evasion"
-              value={qc.evasion}
-              label="Evasion"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-            <RatingField
-              trait="parry"
-              value={qc.parry}
-              label="Parry"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-            <RatingField
-              trait="soak"
-              value={qc.soak}
-              label="Soak"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-            <RatingField
-              trait="hardness"
-              value={qc.hardness}
-              label="Hardness"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-            <TextField
-              name="armor_name"
-              value={qc.armor_name}
-              label="Armor Name"
-              margin="dense"
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <br />
-
-            <RatingField
-              trait="grapple"
-              value={qc.grapple}
-              label="Grapple"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-            <RatingField
-              trait="grapple_control"
-              value={qc.grapple_control}
-              label="Grapple Control"
-              margin="dense"
-              onChange={handleRatingChange}
-            />
-
-            <QcAttackEditor qc={qc} />
+            <QcActionEditor qc={qc} onChange={handleChange} />
           </BlockPaper>
         </Grid>
 
@@ -363,14 +262,14 @@ class QcEditor extends Component<Props, State> {
               value={qc.resolve}
               label="Resolve"
               margin="dense"
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="guile"
               value={qc.guile}
               label="Guile"
               margin="dense"
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <RatingField
               trait="appearance"
@@ -378,7 +277,7 @@ class QcEditor extends Component<Props, State> {
               label="Appearance"
               max={10}
               margin="dense"
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
 
             <Typography variant="subheading">Intimacies</Typography>
@@ -386,8 +285,82 @@ class QcEditor extends Component<Props, State> {
             <IntimacyEditor
               character={qc}
               characterType="qc"
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
+          </BlockPaper>
+        </Grid>
+
+        <Grid item xs={12}>
+          <BlockPaper>
+            <Typography variant="subheading">Combat</Typography>
+            <RatingField
+              trait="join_battle"
+              value={qc.join_battle}
+              label="JB"
+              margin="dense"
+              onChange={handleChange}
+            />
+            <RatingField
+              trait="movement"
+              value={qc.movement}
+              label="Move"
+              margin="dense"
+              onChange={handleChange}
+            />
+            <RatingField
+              trait="evasion"
+              value={qc.evasion}
+              label="Evasion"
+              margin="dense"
+              onChange={handleChange}
+            />
+            <RatingField
+              trait="parry"
+              value={qc.parry}
+              label="Parry"
+              margin="dense"
+              onChange={handleChange}
+            />
+            <RatingField
+              trait="soak"
+              value={qc.soak}
+              label="Soak"
+              margin="dense"
+              onChange={handleChange}
+            />
+            <RatingField
+              trait="hardness"
+              value={qc.hardness}
+              label="Hardness"
+              margin="dense"
+              onChange={handleChange}
+            />
+            <TextField
+              name="armor_name"
+              value={qc.armor_name}
+              label="Armor Name"
+              margin="dense"
+              onChange={handleChange}
+              onBlur={handleChange}
+            />
+            <br />
+
+            <RatingField
+              trait="grapple"
+              value={qc.grapple}
+              label="Grapple"
+              margin="dense"
+              onChange={handleChange}
+            />
+            <RatingField
+              trait="grapple_control"
+              value={qc.grapple_control}
+              label="Grapple Control"
+              margin="dense"
+              onChange={handleChange}
+            />
+
+            <QcAttackEditor qc={qc} />
           </BlockPaper>
         </Grid>
 

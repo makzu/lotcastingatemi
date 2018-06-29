@@ -17,26 +17,8 @@ type Props = {
   onCharmChange: Function,
   onRemoveClick: Function,
 }
-type State = { charm: QcCharm }
-export default class QcCharmFields extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-
-    this.state = {
-      charm: this.props.charm,
-    }
-  }
-  static getDerivedStateFromProps(props: Object) {
-    return { charm: props.charm }
-  }
-
+export default class QcCharmFields extends Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
-    let { name, value } = e.target
-
-    this.setState({ charm: { ...this.state.charm, [name]: value } })
-  }
-
-  handleBlur = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
     const { charm } = this.props
 
@@ -45,21 +27,13 @@ export default class QcCharmFields extends Component<Props, State> {
     this.props.onCharmChange(charm.id, name, value)
   }
 
-  handleRatingChange = (e: SyntheticInputEvent<>) => {
-    let { name, value } = e.target
-    const { charm } = this.state
-
-    this.setState({ charm: { ...charm, [name]: value } })
-    this.props.onCharmChange(charm.id, name, value)
-  }
-
   handleRemove = () => {
-    this.props.onRemoveClick(this.state.charm.id)
+    this.props.onRemoveClick(this.props.charm.id)
   }
 
   render() {
-    const { charm } = this.state
-    const { handleChange, handleBlur, handleRatingChange, handleRemove } = this
+    const { charm } = this.props
+    const { handleChange, handleRemove } = this
 
     return (
       <div style={{ marginBottom: '0.75em' }}>
@@ -69,14 +43,13 @@ export default class QcCharmFields extends Component<Props, State> {
           label="Name"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         <RatingField
           trait="min_essence"
           value={charm.min_essence}
           label="Essence"
           margin="dense"
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
         <TextField
           name="cost"
@@ -84,7 +57,6 @@ export default class QcCharmFields extends Component<Props, State> {
           label="Cost"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         <Button onClick={handleRemove} style={{ float: 'right' }}>
           Delete&nbsp;
@@ -94,7 +66,7 @@ export default class QcCharmFields extends Component<Props, State> {
         <CharmTimingSelect
           name="timing"
           value={charm.timing}
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />&nbsp;&nbsp;
         <TextField
           name="duration"
@@ -102,7 +74,6 @@ export default class QcCharmFields extends Component<Props, State> {
           label="Duration"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         <TagsField
           trait="keywords"
@@ -110,7 +81,6 @@ export default class QcCharmFields extends Component<Props, State> {
           label="Keywords (comma separated)"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
           fullWidth
         />
         <TextField
@@ -119,7 +89,6 @@ export default class QcCharmFields extends Component<Props, State> {
           label="Text"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
           fullWidth={true}
           multiline
           rowsMax={5}
@@ -131,7 +100,6 @@ export default class QcCharmFields extends Component<Props, State> {
           label="Reference"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleBlur}
         />
         <Divider style={{ marginTop: '0.5em' }} />
       </div>

@@ -49,35 +49,12 @@ type Props = {
   classes: Object,
 }
 class CharmFields extends Component<Props, { charm: Charm }> {
-  constructor(props) {
-    super(props)
-    this.state = { charm: this.props.charm }
-  }
-
-  static getDerivedStateFromProps(props) {
-    return { charm: props.charm }
-  }
-
   handleChange = e => {
-    let { name, value } = e.target
-
-    this.setState({ charm: { ...this.state.charm, [name]: value } })
-  }
-
-  handleBlur = e => {
     const { name, value } = e.target
     const { charm } = this.props
 
     if (isEqual(charm[name], value)) return
 
-    this.props.onUpdate(charm.id, charm.character_id, name, value)
-  }
-
-  handleRatingChange = e => {
-    let { name, value } = e.target
-    const { charm } = this.state
-
-    this.setState({ charm: { ...charm, [name]: value } })
     this.props.onUpdate(charm.id, charm.character_id, name, value)
   }
 
@@ -94,16 +71,8 @@ class CharmFields extends Component<Props, { charm: Charm }> {
   }
 
   render() {
-    const { character, openCharm, onOpenChange, classes } = this.props
-    const { charm } = this.state
-    const {
-      handleChange,
-      handleBlur,
-      handleRatingChange,
-      handleRemove,
-      scrollToPanel,
-    } = this
-
+    const { charm, character, openCharm, onOpenChange, classes } = this.props
+    const { handleChange, handleRemove, scrollToPanel } = this
     const isOpen = openCharm === charm.id
 
     const abilities = abilitiesWithRatings(character)
@@ -154,7 +123,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               name="name"
               value={charm.name}
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Name"
               margin="dense"
               style={{ width: '25em' }}
@@ -164,7 +132,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                 name="artifact_name"
                 value={charm.artifact_name}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 label="Artifact Name"
                 margin="dense"
               />
@@ -174,7 +141,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                 name="style"
                 value={charm.style}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 label="Style"
                 margin="dense"
               />
@@ -182,14 +148,13 @@ class CharmFields extends Component<Props, { charm: Charm }> {
             <CharmCategoryAutocomplete
               value={charm.categories}
               id={character.id}
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
             <br />
             <TextField
               name="cost"
               value={charm.cost}
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Cost"
               margin="dense"
             />&nbsp;&nbsp;
@@ -203,7 +168,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                   abilities.length === 0 ? [abilOptions] : undefined
                 }
                 value={charm.ability}
-                onChange={handleRatingChange}
+                onChange={handleChange}
                 multiple={false}
               />
             )}
@@ -214,7 +179,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                 value={charm.min_ability}
                 min={1}
                 max={ABILITY_MAX}
-                onChange={handleRatingChange}
+                onChange={handleChange}
                 label="Ability"
                 margin="dense"
               />
@@ -227,7 +192,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                   label="Attribute"
                   margin="dense"
                   value={charm.ability}
-                  onChange={handleRatingChange}
+                  onChange={handleChange}
                   multiple={false}
                 />
                 <RatingField
@@ -235,7 +200,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                   value={charm.min_ability}
                   min={1}
                   max={ATTRIBUTE_MAX}
-                  onChange={handleRatingChange}
+                  onChange={handleChange}
                   label="Attribute"
                   margin="dense"
                 />
@@ -246,7 +211,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               value={charm.min_essence}
               min={ESSENCE_MIN}
               max={ESSENCE_MAX}
-              onChange={handleRatingChange}
+              onChange={handleChange}
               label="Essence"
               margin="dense"
             />
@@ -254,13 +219,12 @@ class CharmFields extends Component<Props, { charm: Charm }> {
             <CharmTimingSelect
               name="timing"
               value={charm.timing}
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />&nbsp;&nbsp;
             <TextField
               name="duration"
               value={charm.duration}
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Duration"
               margin="dense"
             />
@@ -269,7 +233,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               trait="keywords"
               value={charm.keywords}
               onChange={handleChange}
-              onBlur={handleBlur}
               fullWidth={true}
               label="Keywords (comma separated)"
               margin="dense"
@@ -278,7 +241,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               name="prereqs"
               value={charm.prereqs}
               onChange={handleChange}
-              onBlur={handleBlur}
               fullWidth={true}
               label="Prerequisite Charms"
               margin="dense"
@@ -287,7 +249,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               name="body"
               value={charm.body}
               onChange={handleChange}
-              onBlur={handleBlur}
               className="editor-description-field"
               multiline
               fullWidth
@@ -301,7 +262,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               value={charm.summary}
               fullWidth
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Summary (optional)"
               margin="dense"
             />
@@ -311,7 +271,6 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               value={charm.ref}
               fullWidth
               onChange={handleChange}
-              onBlur={handleBlur}
               label="Reference"
               margin="dense"
             />

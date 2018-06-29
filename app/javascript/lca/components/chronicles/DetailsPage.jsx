@@ -54,10 +54,6 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  onBlur = e => {
     const { chronicle, updateChronicle } = this.props
     updateChronicle(chronicle.id, e.target.name, e.target.value)
   }
@@ -75,7 +71,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
       )
 
     const { chronicle, st, is_st, players, classes } = this.props
-    const { onChange, onBlur } = this
+    const { onChange } = this
 
     const playerList = players.map(p => (
       <Fragment key={p.id}>
@@ -101,12 +97,11 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
         {chronicle.notes !== '' && (
           <Grid item xs={12} md={8}>
             <BlockPaper>
-              <Typography component="div">
-                <ReactMarkdown
-                  source={chronicle.notes}
-                  className={classes.markdown}
-                />
-              </Typography>
+              <Typography
+                component={ReactMarkdown}
+                source={chronicle.notes}
+                className={classes.markdown}
+              />
             </BlockPaper>
           </Grid>
         )}
@@ -144,7 +139,6 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
                   label="Chronicle Name"
                   style={{ width: '30em' }}
                   onChange={onChange}
-                  onBlur={onBlur}
                   margin="dense"
                 />
               </div>
@@ -155,7 +149,6 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
                 value={chronicle.notes}
                 margin="dense"
                 onChange={onChange}
-                onBlur={onBlur}
                 fullWidth
                 multiline
               />

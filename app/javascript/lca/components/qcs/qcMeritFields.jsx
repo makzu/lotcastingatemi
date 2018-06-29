@@ -17,7 +17,7 @@ type Props = {
   onRemoveClick: Function,
 }
 export default class QcMeritFields extends Component<Props> {
-  handleBlur = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
     const { merit } = this.props
 
@@ -40,6 +40,7 @@ export default class QcMeritFields extends Component<Props> {
 
   render() {
     const { merit } = this.props
+    const { handleChange, handleCheck } = this
 
     return (
       <div style={{ marginBottom: '0.75em' }}>
@@ -48,7 +49,7 @@ export default class QcMeritFields extends Component<Props> {
           value={merit.name}
           label="Name"
           margin="dense"
-          onBlur={this.handleBlur}
+          onChange={handleChange}
         />
 
         <FormControlLabel
@@ -57,7 +58,7 @@ export default class QcMeritFields extends Component<Props> {
             <Checkbox
               name="latent"
               checked={merit.latent}
-              onChange={this.handleCheck}
+              onChange={handleCheck}
             />
           }
         />
@@ -68,7 +69,7 @@ export default class QcMeritFields extends Component<Props> {
             <Checkbox
               name="magical"
               checked={merit.magical}
-              onChange={this.handleCheck}
+              onChange={handleCheck}
             />
           }
         />
@@ -84,7 +85,7 @@ export default class QcMeritFields extends Component<Props> {
           value={merit.body}
           label="Text"
           margin="dense"
-          onBlur={this.handleBlur}
+          onChange={handleChange}
           fullWidth={true}
           multiline
           rowsMax={5}
@@ -96,7 +97,7 @@ export default class QcMeritFields extends Component<Props> {
           value={merit.ref}
           label="Reference"
           margin="dense"
-          onBlur={this.handleBlur}
+          onChange={handleChange}
         />
 
         <Divider style={{ marginTop: '0.5em' }} />

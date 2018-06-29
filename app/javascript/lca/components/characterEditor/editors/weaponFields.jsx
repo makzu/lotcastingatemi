@@ -11,7 +11,6 @@ import Divider from '@material-ui/core/Divider'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Collapse from '@material-ui/core/Collapse'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
@@ -22,6 +21,7 @@ import RemoveCircle from '@material-ui/icons/RemoveCircle'
 import WeaponAbilitySelect from './weaponAbilitySelect.jsx'
 import WeaponAttributeSelect from './weaponAttributeSelect.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import WeightSelect from 'components/generic/weightSelect.jsx'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
@@ -59,54 +59,35 @@ type Props = {
   onChange: Function,
   onRemoveClick: Function,
 }
-type State = { weapon: Object, expandoOpen: boolean }
+type State = { expandoOpen: boolean }
 class WeaponFields extends Component<Props, State> {
   constructor(props) {
     super(props)
 
     this.state = {
-      weapon: this.props.weapon,
       expandoOpen: false,
     }
   }
 
-  componentWillReceiveProps = newProps => {
-    this.setState({ weapon: newProps.weapon })
-  }
-
   handleChange = e => {
-    let { name, value } = e.target
-
-    this.setState({ weapon: { ...this.state.weapon, [name]: value } })
-  }
-
-  handleBlur = e => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     const { weapon } = this.props
+
     if (isEqual(weapon[name], value)) return
 
     this.props.onChange(weapon.id, name, value)
   }
 
-  handleRatingChange = e => {
-    let { name, value } = e.target
-    const { weapon } = this.state
-    if (value == 'header') return
-
-    this.setState({ weapon: { ...weapon, [name]: value } })
-    this.props.onChange(weapon.id, name, value)
-  }
-
   handleCheck = e => {
     const { name } = e.target
-    const { weapon } = this.state
+    const { weapon } = this.props
     const value = !weapon[name]
 
     this.props.onChange(weapon.id, name, value)
   }
 
   handleRemove = () => {
-    this.props.onRemoveClick(this.state.weapon.id)
+    this.props.onRemoveClick(this.props.weapon.id)
   }
 
   toggleExpando = () => {
@@ -114,22 +95,16 @@ class WeaponFields extends Component<Props, State> {
   }
 
   render() {
-    const { weapon } = this.state
+    const { weapon } = this.props
     const { character, classes } = this.props
-    const {
-      handleChange,
-      handleBlur,
-      handleRatingChange,
-      handleCheck,
-      handleRemove,
-    } = this
+    const { handleChange, handleCheck, handleRemove } = this
 
     const secondLine = (
       <Fragment>
         <WeaponAbilitySelect
           character={character}
           weapon={weapon}
-          onChange={handleRatingChange}
+          onChange={handleChange}
         />
 
         <TagsField
@@ -138,7 +113,7 @@ class WeaponFields extends Component<Props, State> {
           value={weapon.tags}
           className={classes.tagsField}
           margin="dense"
-          onBlur={handleBlur}
+          onBlur={handleChange}
           onChange={handleChange}
         />
       </Fragment>
@@ -162,7 +137,7 @@ class WeaponFields extends Component<Props, State> {
             value={weapon.name}
             label="Name"
             className={classes.nameField}
-            onBlur={handleBlur}
+            onBlur={handleChange}
             onChange={handleChange}
             margin="dense"
           />
@@ -170,7 +145,7 @@ class WeaponFields extends Component<Props, State> {
           <WeightSelect
             name="weight"
             value={weapon.weight}
-            onChange={handleRatingChange}
+            onChange={handleChange}
             margin="dense"
           />
 
@@ -206,21 +181,21 @@ class WeaponFields extends Component<Props, State> {
             <WeaponAttributeSelect
               character={character}
               weapon={weapon}
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
 
             <WeaponAbilitySelect
               character={character}
               weapon={weapon}
               extended
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
 
             <WeaponAttributeSelect
               character={character}
               weapon={weapon}
               damage
-              onChange={handleRatingChange}
+              onChange={handleChange}
             />
           </div>
         </Collapse>

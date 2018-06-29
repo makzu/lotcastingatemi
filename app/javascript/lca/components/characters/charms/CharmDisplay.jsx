@@ -125,7 +125,7 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
           </Typography>
 
           <Typography className={classes.charmBody} component="div">
-            <ReactMarkdown source={charm.body} />
+            <ReactMarkdown source={charm.body} className={classes.markdown} />
           </Typography>
 
           {charm.ref != '' && (

@@ -24,12 +24,11 @@ const BasicsBlock = ({ character, classes }: Props) => (
       Essence {character.essence} {prettyFullExaltType(character)}
     </Typography>
 
-    <Typography component="div">
-      <ReactMarkdown
-        source={character.description}
-        className={classes.markdown}
-      />
-    </Typography>
+    <Typography
+      component={ReactMarkdown}
+      source={character.description}
+      className={classes.markdown}
+    />
   </BlockPaper>
 )
 

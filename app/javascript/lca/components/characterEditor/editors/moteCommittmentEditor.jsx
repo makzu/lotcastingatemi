@@ -17,14 +17,7 @@ import type { Character } from 'utils/flow-types'
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, onBlur, onRatingChange, classes } = props
   const { pool, label, motes, scenelong } = trait
-  const poolOptions: React.Node = [
-    <MenuItem key="personal" value="personal">
-      Pers
-    </MenuItem>,
-    <MenuItem key="peripheral" value="peripheral">
-      Peri
-    </MenuItem>,
-  ]
+
   return (
     <Fragment>
       <TextField
@@ -36,7 +29,8 @@ function CommitFields(props: ListAttributeFieldTypes) {
         margin="dense"
         onChange={onRatingChange}
       >
-        {poolOptions}
+        <MenuItem value="personal">Pers</MenuItem>
+        <MenuItem value="peripheral">Peri</MenuItem>
       </TextField>
 
       <TextField

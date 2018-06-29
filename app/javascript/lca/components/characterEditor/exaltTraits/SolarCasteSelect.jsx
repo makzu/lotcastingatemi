@@ -5,31 +5,7 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-const options: React.Node = [
-  <ListSubheader key="none" value="" disabled>
-    Select a Caste
-  </ListSubheader>,
-  <MenuItem key="d" value="dawn">
-    Dawn
-  </MenuItem>,
-  <MenuItem key="z" value="zenith">
-    Zenith
-  </MenuItem>,
-  <MenuItem key="t" value="twilight">
-    Twilight
-  </MenuItem>,
-  <MenuItem key="n" value="night">
-    Night
-  </MenuItem>,
-  <MenuItem key="e" value="eclipse">
-    Eclipse
-  </MenuItem>,
-]
-
-type Props = {
-  value: string,
-  onChange: Function,
-}
+type Props = { value: string, onChange: Function }
 class SolarCasteSelect extends React.PureComponent<Props> {
   render() {
     const { value, onChange } = this.props
@@ -44,7 +20,14 @@ class SolarCasteSelect extends React.PureComponent<Props> {
         margin="dense"
         onChange={onChange}
       >
-        {options}
+        <ListSubheader key="none" value="" disabled>
+          Select a Caste
+        </ListSubheader>
+        <MenuItem value="dawn">Dawn</MenuItem>
+        <MenuItem value="zenith">Zenith</MenuItem>
+        <MenuItem value="twilight">Twilight</MenuItem>
+        <MenuItem value="night">Night</MenuItem>
+        <MenuItem value="eclipse">Eclipse</MenuItem>
       </TextField>
     )
   }

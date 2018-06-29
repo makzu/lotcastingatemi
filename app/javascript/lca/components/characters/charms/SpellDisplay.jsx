@@ -111,7 +111,7 @@ function SpellDisplay(props: SpellDisplayProps) {
           </Typography>
 
           <Typography className={classes.spellBody} component="div">
-            <ReactMarkdown source={spell.body} />
+            <ReactMarkdown source={spell.body} className={classes.markdown} />
           </Typography>
 
           {spell.ref != '' && (

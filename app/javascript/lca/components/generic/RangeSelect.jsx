@@ -13,23 +13,6 @@ type Props = {
 class RangeSelect extends React.PureComponent<Props> {
   render() {
     const { name, value, onChange, className } = this.props
-    const options: React.Node = [
-      <MenuItem key="close" value="close">
-        Close
-      </MenuItem>,
-      <MenuItem key="short" value="short">
-        Short
-      </MenuItem>,
-      <MenuItem key="medium" value="medium">
-        Medium
-      </MenuItem>,
-      <MenuItem key="long" value="long">
-        Long
-      </MenuItem>,
-      <MenuItem key="extreme" value="extreme">
-        Extreme
-      </MenuItem>,
-    ]
 
     return (
       <TextField
@@ -41,7 +24,11 @@ class RangeSelect extends React.PureComponent<Props> {
         onChange={onChange}
         className={className}
       >
-        {options}
+        <MenuItem value="close">Close</MenuItem>
+        <MenuItem value="short">Short</MenuItem>
+        <MenuItem value="medium">Medium</MenuItem>
+        <MenuItem value="long">Long</MenuItem>
+        <MenuItem value="extreme">Extreme</MenuItem>
       </TextField>
     )
   }

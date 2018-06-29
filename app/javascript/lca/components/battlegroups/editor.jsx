@@ -23,18 +23,6 @@ import { getSpecificBattlegroup } from 'selectors'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
 
-const drillOptions: React.Node = [
-  <MenuItem key="poor" value={0}>
-    Poor
-  </MenuItem>,
-  <MenuItem key="average" value={1}>
-    Average
-  </MenuItem>,
-  <MenuItem key="elite" value={2}>
-    Elite
-  </MenuItem>,
-]
-
 const styles = theme => ({
   bgBonus: {
     ...theme.typography.caption,
@@ -53,10 +41,7 @@ type Props = {
   classes: Object,
   updateBattlegroup: Function,
 }
-type State = {
-  battlegroup: Battlegroup,
-}
-class BattlegroupEditor extends Component<Props, State> {
+class BattlegroupEditor extends Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
     const { battlegroup } = this.props
@@ -104,7 +89,6 @@ class BattlegroupEditor extends Component<Props, State> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
-          onBlur={handleChange}
         />
         <br />
         <TextField
@@ -116,7 +100,6 @@ class BattlegroupEditor extends Component<Props, State> {
           fullWidth
           rowsMax={5}
           onChange={handleChange}
-          onBlur={handleChange}
         />
         <br />
         <RatingField
@@ -197,7 +180,10 @@ class BattlegroupEditor extends Component<Props, State> {
           margin="dense"
           onChange={handleChange}
         >
-          {drillOptions}
+          {' '}
+          <MenuItem value={0}>Poor</MenuItem>
+          <MenuItem value={1}>Average</MenuItem>
+          <MenuItem value={2}>Elite</MenuItem>
         </MuiTextField>
         <RatingField
           trait="might"
@@ -301,7 +287,6 @@ class BattlegroupEditor extends Component<Props, State> {
           label="Armor Name"
           margin="dense"
           onChange={handleChange}
-          onBlur={handleChange}
         />
         <QcAttackEditor qc={battlegroup} battlegroup />
       </BlockPaper>

@@ -46,7 +46,7 @@ const styles = theme => ({
 })
 
 type Props = {
-  character: withMotePool & { id: number },
+  character: withMotePool & { id: number, type?: string },
   qc: boolean,
   canEdit: boolean,
   update: Function,

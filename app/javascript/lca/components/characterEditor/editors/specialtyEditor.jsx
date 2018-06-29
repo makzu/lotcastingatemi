@@ -19,11 +19,6 @@ function SpecialtyFields(props: ListAttributeFieldTypes) {
   const { trait, character, onChange, onBlur, onRatingChange, classes } = props
   const { ability, context } = trait
   const abilities = calc.abilitiesWithRatings(character)
-  const options = [
-    <MenuItem key="1" disabled>
-      No Abilities with ratings &gt; 0
-    </MenuItem>,
-  ]
 
   return (
     <Fragment>
@@ -33,7 +28,11 @@ function SpecialtyFields(props: ListAttributeFieldTypes) {
         label="Ability"
         onChange={onRatingChange}
         abilities={abilities}
-        prependOptions={abilities.length === 0 && options}
+        prependOptions={
+          abilities.length === 0 && (
+            <MenuItem disabled>No Abilities with ratings &gt; 0</MenuItem>
+          )
+        }
       />
 
       <TextField

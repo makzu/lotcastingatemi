@@ -15,7 +15,6 @@ type Props = {
   label: string,
   value: string,
   onChange: Function,
-  onBlur: Function,
   margin?: 'none' | 'dense' | 'normal',
   className?: string,
   classes: Object,
@@ -46,7 +45,6 @@ class LcaTextField extends Component<Props, State> {
     this.setState({ value: val })
     const updateObj = { target: { name: e.target.name, value: val } }
     this.props.onChange(updateObj)
-    this.props.onBlur(updateObj)
   }
 
   render() {
@@ -60,7 +58,7 @@ class LcaTextField extends Component<Props, State> {
         className={className || classes.root}
         name={name}
         label={label}
-        value={value}
+        value={value || ''}
         onChange={handleChange}
         margin={this.props.margin || 'none'}
         onBlur={handleBlur}

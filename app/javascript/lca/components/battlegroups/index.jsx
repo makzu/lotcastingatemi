@@ -136,12 +136,11 @@ class BattlegroupSheet extends Component<Props> {
 
     return (
       <BlockPaper>
-        <Typography component="div">
-          <ReactMarkdown
-            source={battlegroup.description}
-            className={classes.markdown}
-          />
-        </Typography>
+        <Typography
+          component={ReactMarkdown}
+          source={battlegroup.description}
+          className={classes.markdown}
+        />
 
         <div className={classes.flexContainerWrap}>
           <BattlegroupHealthDisplay

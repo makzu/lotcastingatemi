@@ -10,13 +10,8 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import { nonCasteAbilities } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-function DragonbloodExaltEditor({
-  character,
-  onRatingChange,
-}: {
-  character: Character,
-  onRatingChange: Function,
-}) {
+type Props = { character: Character, onRatingChange: Function }
+function DragonbloodExaltEditor({ character, onRatingChange }: Props) {
   let caste_abilities = character.caste_abilities || []
   if (character.caste === 'water') {
     caste_abilities = [...caste_abilities, 'martial arts'].sort()

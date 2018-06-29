@@ -117,6 +117,11 @@ function QcCard(props: Props) {
 
       <div className={classes.rowContainer}>
         <PoolDisplay
+          pool={pools.joinBattle}
+          label="Join Battle"
+          classes={{ root: classes.poolBlock }}
+        />
+        <PoolDisplay
           pool={pools.evasion}
           label="Evasion"
           classes={{ root: classes.poolBlock }}
@@ -139,14 +144,14 @@ function QcCard(props: Props) {
             classes={{ root: classes.poolBlock }}
           />
         )}
-        <PoolDisplay
-          pool={pools.joinBattle}
-          label="Join Battle"
-          classes={{ root: classes.poolBlock }}
-        />
       </div>
 
       <div className={classes.rowContainer}>
+        <PoolDisplay
+          pool={pools.senses}
+          label="Senses"
+          classes={{ root: classes.poolBlock }}
+        />
         <PoolDisplay
           pool={pools.resolve}
           label="Resolve"
@@ -160,11 +165,6 @@ function QcCard(props: Props) {
         <PoolDisplay
           pool={pools.appearance}
           label="Appearance"
-          classes={{ root: classes.poolBlock }}
-        />
-        <PoolDisplay
-          pool={pools.senses}
-          label="Senses"
           classes={{ root: classes.poolBlock }}
         />
       </div>

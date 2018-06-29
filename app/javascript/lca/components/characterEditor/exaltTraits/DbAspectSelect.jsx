@@ -5,31 +5,7 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-const options: React.Node = [
-  <ListSubheader key="none" value="" disabled>
-    Select an Aspect
-  </ListSubheader>,
-  <MenuItem key="d" value="air">
-    Air
-  </MenuItem>,
-  <MenuItem key="z" value="earth">
-    Earth
-  </MenuItem>,
-  <MenuItem key="t" value="fire">
-    Fire
-  </MenuItem>,
-  <MenuItem key="n" value="water">
-    Water
-  </MenuItem>,
-  <MenuItem key="e" value="wood">
-    Wood
-  </MenuItem>,
-]
-
-type Props = {
-  value: string,
-  onChange: Function,
-}
+type Props = { value: string, onChange: Function }
 class DbAspectSelect extends React.PureComponent<Props> {
   render() {
     const { value, onChange } = this.props
@@ -44,7 +20,14 @@ class DbAspectSelect extends React.PureComponent<Props> {
         margin="dense"
         onChange={onChange}
       >
-        {options}
+        <ListSubheader key="none" value="" disabled>
+          Select an Aspect
+        </ListSubheader>
+        <MenuItem value="air">Air</MenuItem>
+        <MenuItem value="earth">Earth</MenuItem>
+        <MenuItem value="fire">Fire</MenuItem>
+        <MenuItem value="water">Water</MenuItem>
+        <MenuItem value="wood">Wood</MenuItem>
       </TextField>
     )
   }

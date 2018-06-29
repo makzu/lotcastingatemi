@@ -12,20 +12,7 @@ type Props = {
 class CharmTimingSelect extends React.PureComponent<Props> {
   render() {
     const { name, value, onChange } = this.props
-    const options: React.Node = [
-      <MenuItem key="simple" value="simple">
-        Simple
-      </MenuItem>,
-      <MenuItem key="supplemental" value="supplemental">
-        Supplemental
-      </MenuItem>,
-      <MenuItem key="reflexive" value="reflexive">
-        Reflexive
-      </MenuItem>,
-      <MenuItem key="permanent" value="permanent">
-        Permanent
-      </MenuItem>,
-    ]
+
     return (
       <TextField
         select
@@ -35,7 +22,10 @@ class CharmTimingSelect extends React.PureComponent<Props> {
         margin="dense"
         onChange={onChange}
       >
-        {options}
+        <MenuItem value="simple">Simple</MenuItem>
+        <MenuItem value="supplemental">Supplemental</MenuItem>
+        <MenuItem value="reflexive">Reflexive</MenuItem>
+        <MenuItem value="permanent">Permanent</MenuItem>
       </TextField>
     )
   }

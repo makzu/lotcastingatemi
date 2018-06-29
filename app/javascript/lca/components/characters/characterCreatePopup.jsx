@@ -95,33 +95,7 @@ class CharacterCreatePopup extends Component<Props, State> {
       handleSubmit,
     } = this
     const { character } = this.state
-    const exaltTypeOptions: React.Node = [
-      <ListSubheader key="header" disabled value="">
-        Canon/Published Exalts
-      </ListSubheader>,
-      <MenuItem key="mortal" value="Character">
-        Mortal
-      </MenuItem>,
-      <MenuItem key="solar" value="SolarCharacter">
-        Solar Exalt
-      </MenuItem>,
-      <MenuItem key="deeb" value="DragonbloodCharacter">
-        Dragon-Blooded Exalt
-      </MenuItem>,
 
-      <ListSubheader key="customheader" disabled value="">
-        Custom / Houserule Exalts
-      </ListSubheader>,
-      <MenuItem key="customabil" value="CustomAbilityCharacter">
-        Ability-Based Exalt
-      </MenuItem>,
-      <MenuItem key="customatt" value="CustomAttributeCharacter">
-        Attribute-Based Exalt
-      </MenuItem>,
-      <MenuItem key="customess" value="CustomEssenceCharacter">
-        Essence-Based Exalt
-      </MenuItem>,
-    ]
     return (
       <Fragment>
         <Button onClick={handleOpen}>Create New</Button>
@@ -153,7 +127,26 @@ class CharacterCreatePopup extends Component<Props, State> {
                 fullWidth
                 margin="normal"
               >
-                {exaltTypeOptions}
+                <ListSubheader disabled value="">
+                  Canon/Published Exalts
+                </ListSubheader>,
+                <MenuItem value="Character">Mortal</MenuItem>,
+                <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
+                <MenuItem value="DragonbloodCharacter">
+                  Dragon-Blooded Exalt
+                </MenuItem>
+                <ListSubheader disabled value="">
+                  Custom / Houserule Exalts
+                </ListSubheader>
+                <MenuItem value="CustomAbilityCharacter">
+                  Ability-Based Exalt
+                </MenuItem>,
+                <MenuItem value="CustomAttributeCharacter">
+                  Attribute-Based Exalt
+                </MenuItem>
+                <MenuItem value="CustomEssenceCharacter">
+                  Essence-Based Exalt
+                </MenuItem>
               </TextField>
             </div>
 

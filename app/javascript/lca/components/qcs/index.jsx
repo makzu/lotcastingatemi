@@ -7,12 +7,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
-import DamageWidget from '../generic/DamageWidget.jsx'
-import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
-import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
-import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
-import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
 import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
@@ -227,40 +223,9 @@ class QcSheet extends Component<Props> {
             noSummary
             classes={{ root: classes.poolBlock }}
           />
-          {qc.motes_personal_total > 0 && (
-            <MoteSpendWidget qc character={qc}>
-              <ResourceDisplay
-                className={classes.moteWrap}
-                current={qc.motes_personal_current}
-                total={qc.motes_personal_total}
-                label="Personal"
-              />
-            </MoteSpendWidget>
-          )}
-          {qc.motes_peripheral_total > 0 && (
-            <MoteSpendWidget qc peripheral character={qc}>
-              <ResourceDisplay
-                className={classes.moteWrap}
-                current={qc.motes_peripheral_current}
-                total={qc.motes_peripheral_total}
-                label="Peripheral"
-              />
-            </MoteSpendWidget>
-          )}
-          <WillpowerSpendWidget qc character={qc}>
-            <ResourceDisplay
-              className={classes.moteWrap}
-              current={qc.willpower_temporary}
-              total={qc.willpower_permanent}
-              label="Willpower"
-            />
-          </WillpowerSpendWidget>
-        </div>
 
-        <DamageWidget qc character={qc}>
-          <HealthLevelBoxes character={qc} />
-        </DamageWidget>
-        <Typography paragraph>Wound Penalty: {penalties.wound}</Typography>
+          <SpendableBlock character={qc} qc />
+        </div>
 
         <Typography variant="subheading">Combat</Typography>
         <div className={classes.rowContainer}>

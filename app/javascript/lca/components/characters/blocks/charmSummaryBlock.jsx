@@ -62,13 +62,12 @@ function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
             ', keywords: ' + charm.keywords.join(', ')}
           )
         </div>
-        <div className={classes.body}>
-          <ReactMarkdown
-            source={charm.summary.length > 0 ? charm.summary : charm.body}
-            allowedTypes={['strong', 'emphasis', 'delete']}
-            unwrapDisallowed
-          />
-        </div>
+        <ReactMarkdown
+          className={classes.body}
+          source={charm.summary.length > 0 ? charm.summary : charm.body}
+          allowedTypes={['strong', 'emphasis', 'delete']}
+          unwrapDisallowed
+        />
       </Typography>
 
       <Divider />

@@ -1,5 +1,5 @@
 ## v56
-###### *Not yet released*
+###### *June 28, 2018*
 * Battlegroup cards now include the same pools and ratings as QC cards
 * Bug fixes (Thanks Maudova, Yukizawa)
 * Added Patreon link

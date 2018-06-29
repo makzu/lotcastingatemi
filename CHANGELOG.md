@@ -2,6 +2,7 @@
 ###### *Not yet released*
 * Battlegroup cards now include the same pools and ratings as QC cards
 * Bug fixes (Thanks Maudova, Yukizawa)
+* Added Patreon link
 
 ## v55
 ###### *June 23, 2018*

@@ -18,6 +18,7 @@ import ChronicleNavList from './chronicleNavList.jsx'
 import DisplayNamePopup from './DisplayNamePopup.jsx'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import Discord from 'icons/Discord-Logo.jsx'
+import Patreon from 'icons/Patreon-Logo.jsx'
 import OctoCat from 'icons/OctoCat.jsx'
 import { logout, closeDrawer, switchTheme } from 'ducks/actions.js'
 
@@ -153,6 +154,20 @@ export class NavPanel extends PureComponent<Props> {
               <Discord />
             </ListItemIcon>
             <ListItemText primary="Discuss on Discord" />
+          </ListItem>
+
+          <ListItem
+            button
+            component="a"
+            href="https://www.patreon.com/hushnowquietnow"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeCheck}
+          >
+            <ListItemIcon>
+              <Patreon />
+            </ListItemIcon>
+            <ListItemText primary="Support on Patreon" />
           </ListItem>
         </List>
       </ErrorBoundary>

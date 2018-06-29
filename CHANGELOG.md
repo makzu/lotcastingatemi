@@ -1,3 +1,7 @@
+## v58
+###### *June 28, 2018*
+* Crash fix (Thanks Blaque)
+
 ## v56
 ###### *June 28, 2018*
 * Battlegroup cards now include the same pools and ratings as QC cards

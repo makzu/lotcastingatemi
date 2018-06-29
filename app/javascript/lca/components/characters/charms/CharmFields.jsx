@@ -59,13 +59,13 @@ class CharmFields extends Component<Props, { charm: Charm }> {
   }
 
   handleRemove = () => {
-    this.props.onRemove(this.state.charm.id)
+    this.props.onRemove(this.props.charm.id)
   }
 
   scrollToPanel = (e, appearing) => {
     if (appearing) return false
     const elem = document.getElementById(
-      `charm-editor-expando-${this.state.charm.id}`
+      `charm-editor-expando-${this.props.charm.id}`
     )
     if (!checkVisible(elem)) scrollToElement(elem)
   }

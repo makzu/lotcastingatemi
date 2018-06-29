@@ -1,6 +1,6 @@
 ## v56
 ###### *Not yet released*
-* Bug fixes (Thanks Maudova)
+* Bug fixes (Thanks Maudova, Yukizawa)
 
 ## v55
 ###### *June 23, 2018*

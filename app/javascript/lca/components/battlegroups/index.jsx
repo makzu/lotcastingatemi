@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
-import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
@@ -18,10 +17,10 @@ import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
 
 import {
-  totalMagnitude,
   prettyDrillRating,
   bgAttackPool,
   bgDamage,
+  bgDefenseBonus,
   bgSoak,
 } from 'utils/calculated'
 
@@ -191,15 +190,15 @@ class BattlegroupSheet extends Component<Props> {
           />
           <PoolDisplay
             battlegroup
-            staticRating
-            pool={{ total: battlegroup.parry }}
-            label="Parry"
+            pool={{ total: battlegroup.evasion + bgDefenseBonus(battlegroup) }}
+            label="Evasion"
             classes={{ root: classes.poolBlock }}
           />
           <PoolDisplay
             battlegroup
-            pool={{ total: battlegroup.evasion }}
-            label="Evasion"
+            staticRating
+            pool={{ total: battlegroup.parry + bgDefenseBonus(battlegroup) }}
+            label="Parry"
             classes={{ root: classes.poolBlock }}
           />
           <PoolDisplay

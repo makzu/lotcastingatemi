@@ -59,11 +59,11 @@ class QcAttackFields extends Component<Props, State> {
   }
 
   handleRemove = () => {
-    this.props.onRemoveClick(this.state.attack.id)
+    this.props.onRemoveClick(this.props.attack.id)
   }
 
   render() {
-    const { attack } = this.state
+    const { attack } = this.props
     const { battlegroup, fakeBg, classes } = this.props
     const { handleChange, handleRemove } = this
 

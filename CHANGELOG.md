@@ -1,6 +1,6 @@
-## v58
-###### *June 28, 2018*
-* Crash fix (Thanks Blaque)
+## v58-v59
+###### *June 29, 2018*
+* Crash fixes (Thanks Blaque, KaneMotri)
 
 ## v56
 ###### *June 28, 2018*

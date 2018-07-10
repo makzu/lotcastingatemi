@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
     jest: true,
+    'cypress/globals': true,
   },
   extends: [
     'eslint:recommended',
@@ -19,7 +20,7 @@ module.exports = {
     },
     sourceType: 'module',
   },
-  plugins: ['react', 'flowtype', 'prettier'],
+  plugins: ['cypress', 'react', 'flowtype', 'prettier'],
   rules: {
     'prettier/prettier': [
       'warn',

@@ -83,6 +83,7 @@ class RatingField extends Component<Props, State> {
 
     return (
       <TextField
+        {...this.props}
         className={narrow ? classes.narrow : classes.field}
         type="number"
         name={trait}

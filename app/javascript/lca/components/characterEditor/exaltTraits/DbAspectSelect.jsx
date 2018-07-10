@@ -19,6 +19,7 @@ class DbAspectSelect extends React.PureComponent<Props> {
         label="Aspect"
         margin="dense"
         onChange={onChange}
+        data-cy="select-db-aspect"
       >
         <ListSubheader key="none" value="" disabled>
           Select an Aspect

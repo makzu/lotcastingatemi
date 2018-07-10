@@ -33,6 +33,7 @@ function IntimacyFields({
         margin="dense"
         onChange={onChange}
         onBlur={onBlur}
+        inputProps={{ ['data-cy']: 'intimacy-subject' }}
       />
       <RatingField
         trait="rating"

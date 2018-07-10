@@ -50,7 +50,9 @@ class QcCreatePopup extends Component<Props, { open: boolean, qc: Object }> {
 
     return (
       <span>
-        <Button onClick={handleOpen}>Create New</Button>
+        <Button onClick={handleOpen} data-cy="create-qc">
+          Create New
+        </Button>
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Create New Quick Character</DialogTitle>
           <DialogContent>
@@ -65,7 +67,12 @@ class QcCreatePopup extends Component<Props, { open: boolean, qc: Object }> {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button
+              onClick={handleSubmit}
+              variant="raised"
+              color="primary"
+              data-cy="submit"
+            >
               Create
             </Button>
           </DialogActions>

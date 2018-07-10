@@ -10,4 +10,8 @@ class SessionsController < ApplicationController
     @player = @identity.player
     @referer = request.referer
   end
+
+  def cypress_token
+    render plain: Player.first.token
+  end
 end

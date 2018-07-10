@@ -165,10 +165,13 @@ class ListAttributeEditor extends Component<Props, State> {
     ))
 
     return (
-      <div>
+      <div data-cy={`${this.props.trait}-list-editor`}>
         <Typography variant="subheading">
           {this.props.label}
-          <Button onClick={onAdd.bind(this)}>
+          <Button
+            onClick={onAdd.bind(this)}
+            data-cy={`add-${this.props.trait}`}
+          >
             Add &nbsp;
             <ContentAddCircle />
           </Button>

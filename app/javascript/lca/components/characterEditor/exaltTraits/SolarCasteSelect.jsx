@@ -19,6 +19,7 @@ class SolarCasteSelect extends React.PureComponent<Props> {
         label="Caste"
         margin="dense"
         onChange={onChange}
+        data-cy="select-solar-caste"
       >
         <ListSubheader key="none" value="" disabled>
           Select a Caste

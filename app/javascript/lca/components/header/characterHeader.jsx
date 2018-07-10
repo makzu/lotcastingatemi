@@ -101,7 +101,12 @@ function CharacterHeader(props: Props) {
         </Typography>
 
         {canIEdit && (
-          <Button component={Link} to={editButtonPath} color="inherit">
+          <Button
+            component={Link}
+            to={editButtonPath}
+            color="inherit"
+            id="edit-character-button"
+          >
             {editing ? 'Done' : 'Edit'}
           </Button>
         )}

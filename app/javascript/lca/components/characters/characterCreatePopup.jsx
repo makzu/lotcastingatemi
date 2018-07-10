@@ -98,7 +98,9 @@ class CharacterCreatePopup extends Component<Props, State> {
 
     return (
       <Fragment>
-        <Button onClick={handleOpen}>Create New</Button>
+        <Button onClick={handleOpen} data-cy="create-character">
+          Create New
+        </Button>
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Create New Character</DialogTitle>
           <DialogContent>
@@ -119,13 +121,14 @@ class CharacterCreatePopup extends Component<Props, State> {
                 name="type"
                 value={character.type}
                 label={
-                  character.type == 'Character'
+                  character.type === 'Character'
                     ? 'Character Type'
                     : 'Exalt Type '
                 }
                 onChange={handleChange}
                 fullWidth
                 margin="normal"
+                data-cy="select-exalt-type"
               >
                 <ListSubheader disabled value="">
                   Canon/Published Exalts
@@ -220,7 +223,12 @@ class CharacterCreatePopup extends Component<Props, State> {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button
+              onClick={handleSubmit}
+              variant="raised"
+              color="primary"
+              data-cy="submit"
+            >
               Create
             </Button>
           </DialogActions>

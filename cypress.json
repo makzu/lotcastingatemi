@@ -1,0 +1,9 @@
+{
+  "baseUrl": "http://localhost:5002",
+  "fixturesFolder": "spec/cypress/fixtures",
+  "integrationFolder": "spec/cypress/integration",
+  "pluginsFile": "spec/cypress/plugins/index.js",
+  "screenshotsFolder": "spec/cypress/screenshots",
+  "supportFile": "spec/cypress/support",
+  "videosFolder": "spec/cypress/videos"
+}

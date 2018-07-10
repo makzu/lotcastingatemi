@@ -1,0 +1,2 @@
+web: bundle exec rails s -e cypress -p 5002
+cypress: yarn run cypress open

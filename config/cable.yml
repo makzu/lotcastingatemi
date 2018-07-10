@@ -4,5 +4,8 @@ development:
 test:
   adapter: test
 
+cypress:
+  adapter: postgresql
+
 production:
   adapter: postgresql

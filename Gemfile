@@ -48,15 +48,15 @@ group :production do
   gem 'rails_serve_static_assets'
 end
 
-group :development, :test do
+group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'action-cable-testing'
   gem 'byebug', platform: :mri
-  gem 'capybara', '~> 3.0.0'
+  gem 'cypress-on-rails'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
-  gem 'selenium-webdriver'
 end
 
 group :development do

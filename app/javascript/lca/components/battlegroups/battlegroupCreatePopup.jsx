@@ -52,7 +52,9 @@ class BattlegroupCreatePopup extends Component<Props, State> {
 
     return (
       <span>
-        <Button onClick={handleOpen}>Create New</Button>
+        <Button onClick={handleOpen} data-cy="create-battlegroup">
+          Create New
+        </Button>
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Create New Battlegroup</DialogTitle>
           <DialogContent>
@@ -67,7 +69,12 @@ class BattlegroupCreatePopup extends Component<Props, State> {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button
+              onClick={handleSubmit}
+              variant="raised"
+              color="primary"
+              data-cy="submit"
+            >
               Create
             </Button>
           </DialogActions>

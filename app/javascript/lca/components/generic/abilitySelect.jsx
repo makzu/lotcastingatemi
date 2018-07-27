@@ -27,7 +27,7 @@ type Props = {
   attributesOnly: boolean,
   multiple: boolean,
   name: string,
-  value: string | Array<String>,
+  value: string | Array<string>,
   label: string,
   fullWidth: boolean,
   margin: 'none' | 'dense' | 'normal',

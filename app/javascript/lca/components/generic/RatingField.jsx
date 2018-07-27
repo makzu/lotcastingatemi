@@ -77,13 +77,23 @@ class RatingField extends Component<Props, State> {
   }
 
   render() {
-    const { trait, label, classes, narrow, min, max } = this.props
+    const {
+      trait,
+      label,
+      classes,
+      narrow,
+      min,
+      max,
+      // eslint-disable-next-line no-unused-vars
+      dontFocus,
+      ...fProps
+    } = this.props
     const { handleChange, handleFocus, handleBlur } = this
     const { value } = this.state
 
     return (
       <TextField
-        {...this.props}
+        {...fProps}
         className={narrow ? classes.narrow : classes.field}
         type="number"
         name={trait}

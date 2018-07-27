@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
@@ -36,16 +36,14 @@ function WeaponAttributeSelect(props: Props) {
       value={damage ? weapon.damage_attr : weapon.attr}
       onChange={onChange}
     >
-      {damage && (
-        <Fragment>
-          <ListSubheader value="flame" disabled>
-            Crossbow/Flame tagged weapons ignore this
-          </ListSubheader>
-          <MenuItem value="strength">
-            Strength ({character.attr_strength})
-          </MenuItem>
-        </Fragment>
-      )}
+      {damage && [
+        <ListSubheader value="flame" disabled key="flame">
+          Crossbow/Flame tagged weapons ignore this
+        </ListSubheader>,
+        <MenuItem value="strength" key="strength">
+          Strength ({character.attr_strength})
+        </MenuItem>,
+      ]}
       {!damage && (
         <MenuItem value="dexterity">
           Dexterity ({character.attr_dexterity})

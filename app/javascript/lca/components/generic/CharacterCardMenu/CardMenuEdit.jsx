@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuItem from '@material-ui/core/MenuItem'
-import ModeEdit from '@material-ui/icons/ModeEdit'
+import Edit from '@material-ui/icons/Edit'
 
 import { canIEdit } from 'selectors'
 
@@ -17,7 +17,7 @@ function CardMenuHide({ id, characterType, canIEdit }: Props) {
   return (
     <MenuItem button component={Link} to={`/${characterType}s/${id}/edit`}>
       <ListItemIcon>
-        <ModeEdit />
+        <Edit />
       </ListItemIcon>
       <ListItemText inset primary="Edit" />
     </MenuItem>

@@ -2,8 +2,8 @@
   "name": "lotcastingatemi",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^1.2.0",
-    "@material-ui/icons": "^1.0.0-beta.43",
+    "@material-ui/core": "^1.4.1",
+    "@material-ui/icons": "^2.0.0",
     "@rails/webpacker": "^3.5.3",
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.24.1",
@@ -80,7 +80,7 @@
     "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.76.0",
+    "flow-bin": "^0.77.0",
     "istanbul": "^0.4.5",
     "jest": "^23.1.0",
     "prettier": "^1.12.1",
@@ -111,6 +111,6 @@
   },
   "engines": {
     "node": "^8.11.0",
-    "yarn": "^1.6.0"
+    "yarn": "^1.7.0"
   }
 }

@@ -1,5 +1,5 @@
-// flow-typed signature: af174982d985b2943b4231404d106049
-// flow-typed version: 7de00493aa/@material-ui/core_v1.x.x/flow_>=v0.58.x
+// flow-typed signature: 48242bb9a517db0ed0e1cdaa5111119e
+// flow-typed version: 9c34110c61/@material-ui/core_v1.x.x/flow_>=v0.58.x
 
 declare module "@material-ui/core/AppBar/AppBar" {
   declare type Color = "inherit" | "primary" | "secondary" | "default";
@@ -38,7 +38,7 @@ declare module "@material-ui/core/Avatar" {
 }
 
 declare module "@material-ui/core/Badge/Badge" {
-  declare type Color = "default" | "primary" | "accent";
+  declare type Color = "default" | "primary" | "secondary" | "error";
 
   declare module.exports: React$ComponentType<{
     badgeContent: React$Node,
@@ -475,6 +475,15 @@ declare module "@material-ui/core/withMobileDialog" {
 }
 
 declare module "@material-ui/core/withWidth" {
+  import type { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+  declare export var isWidthUp: (
+    matchWidth: Breakpoint,
+    currentWidth: Breakpoint
+  ) => boolean;
+  declare export var isWidthDown: (
+    matchWidth: Breakpoint,
+    currentWidth: Breakpoint
+  ) => boolean;
   declare export default $Exports<"@material-ui/core/withWidth/withWidth">;
 }
 
@@ -888,8 +897,7 @@ declare module "@material-ui/core/IconButton/IconButton" {
     | "default"
     | "inherit"
     | "primary"
-    | "contrast"
-    | "accent";
+    | "secondary";
 
   declare module.exports: React$ComponentType<{
     buttonRef?: Function,
@@ -1293,7 +1301,7 @@ declare module "@material-ui/core/Modal/Modal" {
     disableBackdrop?: boolean,
     ignoreBackdropClick?: boolean,
     ignoreEscapeKeyUp?: boolean,
-    modalManager: Object,
+    modalManager?: Object,
     onBackdropClick?: Function,
     onEnter?: TransitionCallback,
     onEntering?: TransitionCallback,
@@ -2189,7 +2197,7 @@ declare module "@material-ui/core/TextField/TextField" {
     select?: boolean,
     SelectProps?: Object,
     type?: string,
-    value?: string | number,
+    value?: string | number | Array<string> | Array<number>,
     margin?: "none" | "dense" | "normal"
   }>;
 }
@@ -2393,7 +2401,7 @@ declare module "@material-ui/core/Typography/Typography" {
     | "inherit"
     | "primary"
     | "secondary"
-    | "accent"
+    | "textSecondary"
     | "error"
     | "default";
   declare type Type =
@@ -2495,11 +2503,15 @@ declare module "@material-ui/core/utils/requirePropFactory" {
 }
 
 declare module "@material-ui/core/withWidth/withWidth" {
-  declare module.exports: (
-    options: Object
-  ) => <Props: {}>(
+  import type { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+  declare module.exports: (options?: {|
+    withTheme?: boolean,
+    noSSR?: boolean,
+    initialWidth?: Breakpoint,
+    resizeInterval?: number
+  |}) => <Props: { width: Breakpoint }>(
     Component: React$ComponentType<Props>
-  ) => React$ComponentType<Props>;
+  ) => React$ComponentType<$Diff<Props, { width: Breakpoint }>>;
 }
 
 declare module "@material-ui/core/colors" {

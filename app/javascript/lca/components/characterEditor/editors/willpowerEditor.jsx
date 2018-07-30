@@ -17,8 +17,8 @@ const styles = theme => ({
   },
 })
 
-type Props = { character: Character, onRatingChange: Function, classes: Object }
-const WillpowerEditor = ({ character, onRatingChange, classes }: Props) => (
+type Props = { character: Character, onChange: Function, classes: Object }
+const WillpowerEditor = ({ character, onChange, classes }: Props) => (
   <BlockPaper>
     <Typography variant="title">Willpower:</Typography>
 
@@ -29,7 +29,7 @@ const WillpowerEditor = ({ character, onRatingChange, classes }: Props) => (
         label="Current"
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
       <span className={classes.separator}>/</span>
       <RatingField
@@ -39,12 +39,12 @@ const WillpowerEditor = ({ character, onRatingChange, classes }: Props) => (
         max={WILLPOWER_MAX}
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </div>
 
-    {character.type != 'Character' && (
-      <ResourceEditor character={character} onChange={onRatingChange} />
+    {character.type !== 'Character' && (
+      <ResourceEditor character={character} onChange={onChange} />
     )}
   </BlockPaper>
 )

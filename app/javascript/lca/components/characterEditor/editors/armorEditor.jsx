@@ -4,26 +4,21 @@ import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import WeightSelect from 'components/generic/weightSelect.jsx'
 import { isUnequalByKeys } from 'utils'
 import type { withArmorStats as Character } from 'utils/flow-types'
 
-type Props = {
-  character: Character,
-  onChange: Function,
-  onBlur: Function,
-  onRatingChange: Function,
-  onCheck: Function,
-}
+type Props = { character: Character, onChange: Function, onCheck: Function }
 function ArmorEditor(props: Props) {
-  const { character, onChange, onBlur, onRatingChange, onCheck } = props
+  const { character, onChange, onCheck } = props
 
   // TODO: show interesting calculated values here
+  // TODO: Enable customized soak/hardness/mobility penalty values
   return (
     <BlockPaper>
       <Typography variant="title">Armor</Typography>
@@ -34,7 +29,6 @@ function ArmorEditor(props: Props) {
         name="armor_name"
         value={character.armor_name}
         onChange={onChange}
-        onBlur={onBlur}
         fullWidth
       />
       <br />
@@ -43,7 +37,7 @@ function ArmorEditor(props: Props) {
         armor
         name="armor_weight"
         value={character.armor_weight}
-        onChange={onRatingChange}
+        onChange={onChange}
         margin="dense"
       />
       <br />
@@ -66,7 +60,6 @@ function ArmorEditor(props: Props) {
         fullWidth
         value={character.armor_tags}
         onChange={onChange}
-        onBlur={onBlur}
       />
     </BlockPaper>
   )

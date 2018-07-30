@@ -25,17 +25,13 @@ const styles = theme => ({
   },
 })
 
-function HealthLevelEditor({
-  character,
-  penalties,
-  onRatingChange,
-  classes,
-}: {
+type Props = {
   character: Character,
   penalties: Object,
-  onRatingChange: Function,
+  onChange: Function,
   classes: Object,
-}) {
+}
+function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
   return (
     <BlockPaper>
       <Typography variant="title">Health</Typography>
@@ -54,21 +50,21 @@ function HealthLevelEditor({
           value={character.damage_bashing}
           label="Bashing"
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <RatingField
           trait="damage_lethal"
           value={character.damage_lethal}
           label="Lethal"
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <RatingField
           trait="damage_aggravated"
           value={character.damage_aggravated}
           label="Aggravated"
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -82,7 +78,7 @@ function HealthLevelEditor({
           label="0"
           narrow
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <RatingField
           trait="health_level_1s"
@@ -90,7 +86,7 @@ function HealthLevelEditor({
           label="-1"
           narrow
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <RatingField
           trait="health_level_2s"
@@ -98,7 +94,7 @@ function HealthLevelEditor({
           label="-2"
           narrow
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <RatingField
           trait="health_level_4s"
@@ -106,7 +102,7 @@ function HealthLevelEditor({
           label="-4"
           narrow
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <RatingField
           trait="health_level_incap"
@@ -114,7 +110,7 @@ function HealthLevelEditor({
           label="Incap"
           narrow
           margin="dense"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
     </BlockPaper>

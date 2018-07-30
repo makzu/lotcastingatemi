@@ -31,8 +31,8 @@ const styles = theme => ({
   },
 })
 
-type Props = { character: Character, onRatingChange: Function, classes: Object }
-function MotePoolEditor({ character, onRatingChange, classes }: Props) {
+type Props = { character: Character, onChange: Function, classes: Object }
+function MotePoolEditor({ character, onChange, classes }: Props) {
   if (character.type == 'Character' && !character.is_sorcerer) return <div />
 
   const showMoteTotalEditors =
@@ -56,7 +56,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
                   committedPersonalMotes(character)
                 }
                 margin="dense"
-                onChange={onRatingChange}
+                onChange={onChange}
               />
               <span className={classes.separator}>/</span>
               {showMoteTotalEditors && (
@@ -65,7 +65,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
                   value={character.motes_personal_total}
                   label="Total"
                   margin="dense"
-                  onChange={onRatingChange}
+                  onChange={onChange}
                 />
               )}
               {!showMoteTotalEditors && (
@@ -84,7 +84,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
                   committedPeripheralMotes(character)
                 }
                 margin="dense"
-                onChange={onRatingChange}
+                onChange={onChange}
               />
               <span className={classes.separator}>/</span>
               {showMoteTotalEditors && (
@@ -93,7 +93,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
                   value={character.motes_peripheral_total}
                   label="Total"
                   margin="dense"
-                  onChange={onRatingChange}
+                  onChange={onChange}
                 />
               )}
               {!showMoteTotalEditors && (
@@ -111,7 +111,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
               value={character.sorcerous_motes}
               label="Sorcerous"
               margin="dense"
-              onChange={onRatingChange}
+              onChange={onChange}
             />
           </div>
         )}
@@ -119,7 +119,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
       <div className={classes.flexRow}>
         {character.type !== 'Character' && (
           <div className={classes.flexCol}>
-            <AnimaSelect character={character} onChange={onRatingChange} />
+            <AnimaSelect character={character} onChange={onChange} />
           </div>
         )}
 
@@ -132,7 +132,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
               label="Aura"
               margin="dense"
               style={{ width: '8em' }}
-              onChange={onRatingChange}
+              onChange={onChange}
             >
               {character.type !== 'DragonbloodCharacter' && (
                 <MenuItem value="">Does not use Aura</MenuItem>
@@ -152,7 +152,7 @@ function MotePoolEditor({ character, onRatingChange, classes }: Props) {
         <MoteCommittmentEditor
           key="commit"
           character={character}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       )}
     </BlockPaper>

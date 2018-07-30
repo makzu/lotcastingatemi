@@ -5,10 +5,10 @@ import { compose, shouldUpdate } from 'recompose'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import TextField from '@material-ui/core/TextField'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { canIDeleteCharacter } from 'selectors'
 import { isUnequalByKeys } from 'utils'
 import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.js'
@@ -17,7 +17,6 @@ import type { Character } from 'utils/flow-types'
 const BasicsEditor = ({
   character,
   onChange,
-  onBlur,
   onRatingChange,
   onCheck,
   showPublicCheckbox,
@@ -36,8 +35,7 @@ const BasicsEditor = ({
       label="Name"
       margin="dense"
       onChange={onChange}
-      onBlur={onBlur}
-    />&nbsp;&nbsp;
+    />
     <RatingField
       trait="essence"
       value={character.essence}
@@ -46,19 +44,6 @@ const BasicsEditor = ({
       max={ESSENCE_MAX}
       onChange={onRatingChange}
       margin="dense"
-    />
-    <br />
-    <TextField
-      name="description"
-      value={character.description}
-      label="Description"
-      margin="dense"
-      multiline
-      fullWidth
-      rows={2}
-      rowsMax={10}
-      onChange={onChange}
-      onBlur={onBlur}
     />
     {showPublicCheckbox && (
       <FormControlLabel
@@ -72,6 +57,18 @@ const BasicsEditor = ({
         }
       />
     )}
+
+    <TextField
+      name="description"
+      value={character.description}
+      label="Description"
+      margin="dense"
+      multiline
+      fullWidth
+      rows={2}
+      rowsMax={10}
+      onChange={onChange}
+    />
   </BlockPaper>
 )
 
@@ -81,12 +78,13 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   connect(mapStateToProps),
-  shouldUpdate((props, nextProps) =>
-    isUnequalByKeys(props.character, nextProps.character, [
-      'name',
-      'essence',
-      'description',
-      'public',
-    ])
+  shouldUpdate(
+    (props, nextProps) =>
+      isUnequalByKeys(props.character, nextProps.character, [
+        'name',
+        'essence',
+        'description',
+        'public',
+      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox
   )
 )(BasicsEditor)

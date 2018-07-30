@@ -9,10 +9,10 @@ import Editor from 'components/generic/intimacyEditor.jsx'
 import { isUnequalByKeys } from 'utils'
 import type { withIntimacies as Character } from 'utils/flow-types'
 
-type Props = { character: Character, onRatingChange: Function }
+type Props = { character: Character, onChange: Function }
 class IntimacyEditor extends Component<Props> {
   render() {
-    const { character, onRatingChange } = this.props
+    const { character, onChange } = this.props
 
     return (
       <BlockPaper>
@@ -21,7 +21,7 @@ class IntimacyEditor extends Component<Props> {
         <Editor
           character={character}
           characterType="character"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </BlockPaper>
     )

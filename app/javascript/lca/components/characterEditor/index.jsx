@@ -40,23 +40,8 @@ type Props = {
   penalties: Object,
   updateCharacter: Function,
 }
-type State = { character: Character }
-class CharacterEditor extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = { character: this.props.character }
-  }
-
-  componentWillReceiveProps = newProps => {
-    this.setState({ character: newProps.character })
-  }
-
+class CharacterEditor extends Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
-    let { name, value } = e.target
-    this.setState({ character: { ...this.state.character, [name]: value } })
-  }
-
-  handleBlur = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
     const { character } = this.props
 
@@ -65,17 +50,9 @@ class CharacterEditor extends Component<Props, State> {
     this.props.updateCharacter(character.id, name, value)
   }
 
-  handleRatingChange = (e: SyntheticInputEvent<>) => {
-    let { name, value } = e.target
-    const { character } = this.state
-
-    this.setState({ character: { ...character, [name]: value } })
-    this.props.updateCharacter(character.id, name, value)
-  }
-
   handleCheck = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
-    const { character } = this.state
+    const { character } = this.props
     const value = !character[name]
 
     this.props.updateCharacter(character.id, name, value)
@@ -90,12 +67,14 @@ class CharacterEditor extends Component<Props, State> {
         </div>
       )
 
-    const { character } = this.state
-    const { handleChange, handleBlur, handleRatingChange, handleCheck } = this
+    const { character } = this.props
+    const { handleChange, handleCheck } = this
     const { pools, penalties } = this.props
     const showLimit =
       character.type !== 'Character' &&
       character.exalt_type.toLowerCase() !== 'dragon-blood'
+
+    const handleRatingChange = handleChange
 
     return (
       <div>
@@ -108,7 +87,6 @@ class CharacterEditor extends Component<Props, State> {
             <BasicsEditor
               character={character}
               onChange={handleChange}
-              onBlur={handleBlur}
               onRatingChange={handleRatingChange}
               onCheck={handleCheck}
             />
@@ -116,12 +94,7 @@ class CharacterEditor extends Component<Props, State> {
 
           {character.type === 'SolarCharacter' && (
             <Grid item xs={12} md={6}>
-              <SolarExaltEditor
-                character={character}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                onRatingChange={handleRatingChange}
-              />
+              <SolarExaltEditor character={character} onChange={handleChange} />
             </Grid>
           )}
           {character.type === 'DragonbloodCharacter' && (
@@ -129,8 +102,6 @@ class CharacterEditor extends Component<Props, State> {
               <DragonbloodExaltEditor
                 character={character}
                 onChange={handleChange}
-                onBlur={handleBlur}
-                onRatingChange={handleRatingChange}
               />
             </Grid>
           )}
@@ -139,8 +110,6 @@ class CharacterEditor extends Component<Props, State> {
               <CustomAbilityExaltEditor
                 character={character}
                 onChange={handleChange}
-                onBlur={handleBlur}
-                onRatingChange={handleRatingChange}
                 onCheck={handleCheck}
               />
             </Grid>
@@ -150,8 +119,6 @@ class CharacterEditor extends Component<Props, State> {
               <CustomAttributeExaltEditor
                 character={character}
                 onChange={handleChange}
-                onBlur={handleBlur}
-                onRatingChange={handleRatingChange}
                 onCheck={handleCheck}
               />
             </Grid>
@@ -161,8 +128,6 @@ class CharacterEditor extends Component<Props, State> {
               <CustomEssenceExaltEditor
                 character={character}
                 onChange={handleChange}
-                onBlur={handleBlur}
-                onRatingChange={handleRatingChange}
                 onCheck={handleCheck}
               />
             </Grid>
@@ -173,51 +138,31 @@ class CharacterEditor extends Component<Props, State> {
               character={character}
               penalties={penalties}
               onChange={handleChange}
-              onBlur={handleBlur}
-              onRatingChange={handleRatingChange}
             />
           </Grid>
 
           <Grid item xs={12} sm={6} lg={4}>
-            <WillpowerEditor
-              character={character}
-              onRatingChange={handleRatingChange}
-            />
+            <WillpowerEditor character={character} onChange={handleChange} />
           </Grid>
 
           <Grid item xs={12} sm={6} lg={5}>
-            <MotePoolEditor
-              character={character}
-              onRatingChange={handleRatingChange}
-            />
+            <MotePoolEditor character={character} onChange={handleChange} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={3}>
-            <AttributeEditor
-              character={character}
-              onRatingChange={handleRatingChange}
-            />
+            <AttributeEditor character={character} onChange={handleChange} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AbilityEditor
-              character={character}
-              onRatingChange={handleRatingChange}
-            />
+            <AbilityEditor character={character} onChange={handleChange} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={5}>
-            <SpecialtyEditor
-              character={character}
-              onRatingChange={handleRatingChange}
-            />
+            <SpecialtyEditor character={character} onChange={handleChange} />
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <IntimacyEditor
-              character={character}
-              onRatingChange={handleRatingChange}
-            />
+            <IntimacyEditor character={character} onChange={handleChange} />
           </Grid>
 
           <Grid item xs={12} sm={6}>
@@ -225,20 +170,13 @@ class CharacterEditor extends Component<Props, State> {
               character={character}
               pools={pools}
               onChange={handleChange}
-              onBlur={handleBlur}
               onCheck={handleCheck}
-              onRatingChange={handleRatingChange}
             />
           </Grid>
 
           {showLimit && (
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <LimitEditor
-                character={character}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                onRatingChange={handleRatingChange}
-              />
+              <LimitEditor character={character} onChange={handleChange} />
             </Grid>
           )}
 
@@ -246,7 +184,7 @@ class CharacterEditor extends Component<Props, State> {
             <SorceryEditor
               character={character}
               onChange={handleChange}
-              onBlur={handleBlur}
+              onBlur={handleChange}
               onCheck={handleCheck}
               onRatingChange={handleRatingChange}
             />
@@ -257,10 +195,7 @@ class CharacterEditor extends Component<Props, State> {
           </Grid>
 
           <Grid item xs={12}>
-            <XpEditor
-              character={character}
-              onRatingChange={handleRatingChange}
-            />
+            <XpEditor character={character} onChange={handleChange} />
           </Grid>
         </Grid>
       </div>

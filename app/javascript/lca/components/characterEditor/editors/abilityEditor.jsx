@@ -82,10 +82,8 @@ const MartialArtsFields = (props: ListAttributeFieldTypes) => {
   )
 }
 
-type Props = { character: Character, onRatingChange: Function }
-function AbilityEditor(props: Props) {
-  const { character, onRatingChange } = props
-
+type Props = { character: Character, onChange: Function }
+function AbilityEditor({ character, onChange }: Props) {
   return (
     <BlockPaper>
       <Typography variant="title">Abilities</Typography>
@@ -95,31 +93,31 @@ function AbilityEditor(props: Props) {
           label="Archery"
           trait="abil_archery"
           value={character.abil_archery}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Athletics"
           trait="abil_athletics"
           value={character.abil_athletics}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Awareness"
           trait="abil_awareness"
           value={character.abil_awareness}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Brawl"
           trait="abil_brawl"
           value={character.abil_brawl}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Bureaucracy"
           trait="abil_bureaucracy"
           value={character.abil_bureaucracy}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -128,31 +126,31 @@ function AbilityEditor(props: Props) {
           label="Dodge"
           trait="abil_dodge"
           value={character.abil_dodge}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Integrity"
           trait="abil_integrity"
           value={character.abil_integrity}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Investigation"
           trait="abil_investigation"
           value={character.abil_investigation}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Larceny"
           trait="abil_larceny"
           value={character.abil_larceny}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Linguistics"
           trait="abil_linguistics"
           value={character.abil_linguistics}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -161,31 +159,31 @@ function AbilityEditor(props: Props) {
           label="Lore"
           trait="abil_lore"
           value={character.abil_lore}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Medicine"
           trait="abil_medicine"
           value={character.abil_medicine}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Melee"
           trait="abil_melee"
           value={character.abil_melee}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Occult"
           trait="abil_occult"
           value={character.abil_occult}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Performance"
           trait="abil_performance"
           value={character.abil_performance}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -194,31 +192,31 @@ function AbilityEditor(props: Props) {
           label="Presence"
           trait="abil_presence"
           value={character.abil_presence}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Resistance"
           trait="abil_resistance"
           value={character.abil_resistance}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Ride"
           trait="abil_ride"
           value={character.abil_ride}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Sail"
           trait="abil_sail"
           value={character.abil_sail}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Socialize"
           trait="abil_socialize"
           value={character.abil_socialize}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -227,25 +225,25 @@ function AbilityEditor(props: Props) {
           label="Stealth"
           trait="abil_stealth"
           value={character.abil_stealth}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Survival"
           trait="abil_survival"
           value={character.abil_survival}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="Thrown"
           trait="abil_thrown"
           value={character.abil_thrown}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AbilityField
           label="War"
           trait="abil_war"
           value={character.abil_war}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -255,7 +253,7 @@ function AbilityEditor(props: Props) {
         trait="abil_craft"
         Fields={CraftFields}
         newObject={{ craft: 'New Craft', rating: 1 }}
-        onChange={onRatingChange}
+        onChange={onChange}
       />
 
       <ListAttributeEditor
@@ -264,7 +262,7 @@ function AbilityEditor(props: Props) {
         trait="abil_martial_arts"
         Fields={MartialArtsFields}
         newObject={{ style: 'New MA', rating: 1 }}
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </BlockPaper>
   )

@@ -3,32 +3,16 @@ import React from 'react'
 
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import ExcellencyEditor from './ExcellencyEditor.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import type { Character } from 'utils/flow-types'
 
-function CustomEssenceExaltEditor({
-  character,
-  onChange,
-  onBlur,
-  onRatingChange,
-  onCheck,
-}: {
-  character: Character,
-  onChange: Function,
-  onBlur: Function,
-  onRatingChange: Function,
-  onCheck: Function,
-}) {
-  // Mortals don't have 'exalt traits'
-  if (character.type == 'Character') {
-    return null
-  }
-
+type Props = { character: Character, onChange: Function, onCheck: Function }
+function CustomEssenceExaltEditor({ character, onChange, onCheck }: Props) {
   return (
     <BlockPaper>
       <Typography component="div">
@@ -37,17 +21,15 @@ function CustomEssenceExaltEditor({
           value={character.caste}
           label={character.aspect ? 'Aspect' : 'Caste'}
           onChange={onChange}
-          onBlur={onBlur}
           margin="dense"
-        />&nbsp;&nbsp;
-        <ExcellencyEditor character={character} onChange={onRatingChange} />
+        />
+        <ExcellencyEditor character={character} onChange={onChange} />
         <br />
         <TextField
           name="exalt_type"
           value={character.exalt_type}
           label="Type"
           onChange={onChange}
-          onBlur={onBlur}
           margin="dense"
         />
         <br />
@@ -68,7 +50,7 @@ function CustomEssenceExaltEditor({
         name="favored_abilities"
         label="Favored Abilities"
         value={character.favored_abilities}
-        onChange={onRatingChange}
+        onChange={onChange}
         multiple
         fullWidth
         margin="dense"

@@ -60,8 +60,8 @@ const XpFields = (props: ListAttributeFieldTypes) => {
   )
 }
 
-type Props = { character: Character, onRatingChange: Function, classes: Object }
-const XpEditor = ({ character, onRatingChange, classes }: Props) => (
+type Props = { character: Character, onChange: Function, classes: Object }
+const XpEditor = ({ character, onChange, classes }: Props) => (
   <BlockPaper>
     <Typography variant="title">XP:</Typography>
 
@@ -73,7 +73,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           trait="xp_log"
           Fields={XpFields}
           newObject={{ label: '', points: 0 }}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
 
         <Typography component="div">
@@ -82,7 +82,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
             value={character.xp_total}
             label="Earned"
             margin="dense"
-            onChange={onRatingChange}
+            onChange={onChange}
             dontFocus
           />
           Total: {spentXp(character)}, Remaining:{' '}
@@ -101,7 +101,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           trait="xp_log_solar"
           Fields={XpFields}
           newObject={{ label: '', points: 0 }}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
 
         <Typography component="div">
@@ -110,7 +110,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
             value={character.xp_solar_total}
             label="Earned"
             margin="dense"
-            onChange={onRatingChange}
+            onChange={onChange}
             dontFocus
           />
           Total: {spentSolarXp(character)}, Remaining:{' '}
@@ -131,7 +131,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
             label="Silver"
             margin="dense"
             narrow
-            onChange={onRatingChange}
+            onChange={onChange}
             dontFocus
           />
           <span className={classes.separator}>/</span>
@@ -141,7 +141,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
             label="Gold"
             margin="dense"
             narrow
-            onChange={onRatingChange}
+            onChange={onChange}
             dontFocus
           />
           <span className={classes.separator}>/</span>
@@ -151,7 +151,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
             label="White"
             margin="dense"
             narrow
-            onChange={onRatingChange}
+            onChange={onChange}
             dontFocus
           />
         </div>
@@ -164,7 +164,7 @@ const XpEditor = ({ character, onRatingChange, classes }: Props) => (
           trait="bp_log"
           Fields={XpFields}
           newObject={{ label: '', points: 0 }}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <Typography>Total: {spentBp(character)}</Typography>
       </div>

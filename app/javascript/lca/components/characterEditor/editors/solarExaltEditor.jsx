@@ -11,8 +11,8 @@ import { nonCasteAbilities } from 'utils/calculated'
 import { SOLAR_CASTE_ABILITIES } from 'utils/constants.js'
 import type { Character } from 'utils/flow-types'
 
-type Props = { character: Character, onRatingChange: Function }
-function SolarExaltEditor({ character, onRatingChange }: Props) {
+type Props = { character: Character, onChange: Function }
+function SolarExaltEditor({ character, onChange }: Props) {
   let casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
   let supernalAbilities = casteAbilities
   if (character.caste === 'dawn')
@@ -35,7 +35,7 @@ function SolarExaltEditor({ character, onRatingChange }: Props) {
         value={character.caste}
         margin="dense"
         style={{ width: '8em' }}
-        onChange={onRatingChange}
+        onChange={onChange}
       />
       &nbsp;&nbsp;
       <AbilitySelect
@@ -44,7 +44,7 @@ function SolarExaltEditor({ character, onRatingChange }: Props) {
         value={character.supernal_ability || ''}
         abilities={supernalAbilities}
         prependOptions={noOptionItem}
-        onChange={onRatingChange}
+        onChange={onChange}
         margin="dense"
       />
       <br />
@@ -53,7 +53,7 @@ function SolarExaltEditor({ character, onRatingChange }: Props) {
         label="Caste Abilities"
         value={character.caste_abilities}
         abilities={casteAbilities}
-        onChange={onRatingChange}
+        onChange={onChange}
         prependOptions={noOptionItem}
         multiple
         fullWidth
@@ -65,7 +65,7 @@ function SolarExaltEditor({ character, onRatingChange }: Props) {
         label="Favored Abilities"
         value={character.favored_abilities}
         abilities={nonCasteAbilities(character)}
-        onChange={onRatingChange}
+        onChange={onChange}
         multiple
         fullWidth
         margin="dense"

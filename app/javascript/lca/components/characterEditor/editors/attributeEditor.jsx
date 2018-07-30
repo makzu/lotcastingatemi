@@ -26,9 +26,9 @@ function AttributeField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />
 }
 
-type Props = { character: Character, onRatingChange: Function, classes: Object }
+type Props = { character: Character, onChange: Function, classes: Object }
 function AttributeEditor(props: Props) {
-  const { character, onRatingChange, classes } = props
+  const { character, onChange, classes } = props
 
   return (
     <BlockPaper>
@@ -39,19 +39,19 @@ function AttributeEditor(props: Props) {
           trait="attr_strength"
           value={character.attr_strength}
           label="Strength"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AttributeField
           trait="attr_dexterity"
           value={character.attr_dexterity}
           label="Dexterity"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AttributeField
           trait="attr_stamina"
           value={character.attr_stamina}
           label="Stamina"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -62,19 +62,19 @@ function AttributeEditor(props: Props) {
           trait="attr_charisma"
           value={character.attr_charisma}
           label="Charisma"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AttributeField
           trait="attr_manipulation"
           value={character.attr_manipulation}
           label="Manipulation"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AttributeField
           trait="attr_appearance"
           value={character.attr_appearance}
           label="Appearance"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
 
@@ -85,19 +85,19 @@ function AttributeEditor(props: Props) {
           trait="attr_perception"
           value={character.attr_perception}
           label="Perception"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AttributeField
           trait="attr_intelligence"
           value={character.attr_intelligence}
           label="Intelligence"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
         <AttributeField
           trait="attr_wits"
           value={character.attr_wits}
           label="Wits"
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
     </BlockPaper>

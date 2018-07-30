@@ -48,8 +48,8 @@ function SpecialtyFields(props: ListAttributeFieldTypes) {
   )
 }
 
-type Props = { character: Character, onRatingChange: Function }
-const SpecialtyEditor = ({ character, onRatingChange }: Props) => {
+type Props = { character: Character, onChange: Function }
+const SpecialtyEditor = ({ character, onChange }: Props) => {
   return (
     <BlockPaper>
       <ListAttributeEditor
@@ -58,7 +58,7 @@ const SpecialtyEditor = ({ character, onRatingChange }: Props) => {
         trait="specialties"
         Fields={SpecialtyFields}
         newObject={{ context: 'New Specialty', ability: '' }}
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </BlockPaper>
   )

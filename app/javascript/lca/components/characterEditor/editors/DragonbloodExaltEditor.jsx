@@ -10,8 +10,8 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import { nonCasteAbilities } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-type Props = { character: Character, onRatingChange: Function }
-function DragonbloodExaltEditor({ character, onRatingChange }: Props) {
+type Props = { character: Character, onChange: Function }
+function DragonbloodExaltEditor({ character, onChange }: Props) {
   let caste_abilities = character.caste_abilities || []
   if (character.caste === 'water') {
     caste_abilities = [...caste_abilities, 'martial arts'].sort()
@@ -19,7 +19,7 @@ function DragonbloodExaltEditor({ character, onRatingChange }: Props) {
 
   return (
     <BlockPaper>
-      <DbAspectSelect value={character.caste} onChange={onRatingChange} />
+      <DbAspectSelect value={character.caste} onChange={onChange} />
 
       <Typography style={{ marginTop: '0.5em', textTransform: 'capitalize' }}>
         Aspect Abilities: {caste_abilities.join(', ')}
@@ -30,7 +30,7 @@ function DragonbloodExaltEditor({ character, onRatingChange }: Props) {
         label="Favored Abilities"
         value={character.favored_abilities}
         abilities={nonCasteAbilities(character)}
-        onChange={onRatingChange}
+        onChange={onChange}
         multiple
         fullWidth
         margin="dense"

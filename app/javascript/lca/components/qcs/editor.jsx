@@ -55,9 +55,20 @@ class QcEditor extends Component<Props> {
           <BlockPaper>
             <Typography paragraph variant="caption">
               Rules for Quick Characters can be found in the core book starting
-              at page 494. Sample QCs are also available in
-              <em> Adversaries of the Righteous</em> and
-              <em> Hundred Devils Night Parade</em>.
+              at page 494. Sample QCs are also available in&nbsp;
+              <a
+                href="http://www.drivethrurpg.com/browse.php?keywords=Adversaries&cPath=8329_24225&sort=6a&x=19&y=22&author=&artist=&pfrom=&pto=&affiliate_id=286472"
+                style={{ color: 'inherit' }}
+              >
+                <em>Adversaries of the Righteous</em>
+              </a>
+              {' and '}
+              <a
+                href="http://www.drivethrurpg.com/browse.php?keywords=Night+Parade&cPath=8329_24225&sort=6a&x=0&y=0&author=&artist=&pfrom=&pto=&affiliate_id=286472"
+                style={{ color: 'inherit' }}
+              >
+                <em>Hundred Devils Night Parade</em>
+              </a>.
             </Typography>
             <TextField
               name="name"

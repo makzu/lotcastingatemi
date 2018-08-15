@@ -8,7 +8,22 @@ flow-typed
 [lints]
 
 [options]
-module.system.node.resolve_dirname=app/javascript/lca
+module.name_mapper='^components$' -> '<PROJECT_ROOT>/app/javascript/lca/components/'
+module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/components/\1'
+module.name_mapper='^containers$' -> '<PROJECT_ROOT>/app/javascript/lca/containers/'
+module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/containers/\1'
+module.name_mapper='^ducks$' -> '<PROJECT_ROOT>/app/javascript/lca/ducks/'
+module.name_mapper='^ducks\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/ducks/\1'
+module.name_mapper='^icons$' -> '<PROJECT_ROOT>/app/javascript/lca/icons/'
+module.name_mapper='^icons\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/icons/\1'
+module.name_mapper='^middleware$' -> '<PROJECT_ROOT>/app/javascript/lca/middleware/'
+module.name_mapper='^middleware\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/middleware/\1'
+module.name_mapper='^selectors$' -> '<PROJECT_ROOT>/app/javascript/lca/selectors/'
+module.name_mapper='^selectors\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/selectors/\1'
+module.name_mapper='^styles$' -> '<PROJECT_ROOT>/app/javascript/lca/styles/'
+module.name_mapper='^styles\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/styles/\1'
+module.name_mapper='^utils$' -> '<PROJECT_ROOT>/app/javascript/lca/utils/'
+module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/utils/\1'
 module.system.node.resolve_dirname=node_modules
 suppress_comment=\\(.\\|\n\\)*\\$FlowThisIsOkayISwear
 

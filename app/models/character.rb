@@ -39,7 +39,9 @@ class Character < ApplicationRecord
   validates :attr_strength,     :attr_dexterity,    :attr_stamina,
             :attr_charisma,     :attr_manipulation, :attr_appearance,
             :attr_intelligence, :attr_perception,   :attr_wits,
-            one_thru_five_stat: true
+            numericality: {
+              greater_than_or_equal_to: 1, less_than_or_equal_to: 10
+            }
 
   # Abilities can be zero through five
   validates :abil_archery,     :abil_athletics,      :abil_awareness,

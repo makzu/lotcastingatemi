@@ -1,3 +1,9 @@
+## v60
+###### *Not yet released*
+* The cap on Attributes has been raised to 10
+* Improved automated test suite
+* Bug fixes
+
 ## v58-v59
 ###### *June 29, 2018*
 * Crash fixes (Thanks Blaque, KaneMotri)

@@ -214,7 +214,7 @@ export const ABILITY_NAMES = [
 /* Minimum and maximum */
 export const ESSENCE_MAX = 10
 export const ESSENCE_MIN = 1
-export const ATTRIBUTE_MAX = 5
+export const ATTRIBUTE_MAX = 10
 export const ATTRIBUTE_MIN = 1
 export const ABILITY_MAX = 5
 export const ABILITY_MIN = 0

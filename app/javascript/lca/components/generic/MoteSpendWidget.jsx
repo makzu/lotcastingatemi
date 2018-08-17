@@ -14,6 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
+import MoteCommittmentPopup from './MoteCommittmentPopup.jsx'
 import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendMotes } from 'ducks/actions.js'
@@ -128,7 +129,7 @@ class MoteSpendWidget extends Component<Props, State> {
 
     if (name === 'toSpend') {
       let val = parseInt(value)
-      commit = this.state.toSpend + val >= 0
+      commit = this.state.toSpend + val <= 0 ? false : commit
       this.setState({ toSpend: val, commit: commit })
     } else {
       this.setState({ [name]: value })
@@ -323,6 +324,9 @@ class MoteSpendWidget extends Component<Props, State> {
           </DialogContent>
 
           <DialogActions>
+            <span style={{ flex: 1 }}>
+              <MoteCommittmentPopup character={character} qc={this.props.qc} />
+            </span>
             <Button onClick={handleClose}>Cancel</Button>
             <Button variant="raised" color="primary" onClick={handleSubmit}>
               {toSpend >= 0 ? 'Spend' : 'Recover'}

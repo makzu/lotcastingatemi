@@ -1,6 +1,7 @@
 // @flow
 import { isEqual } from 'lodash'
 import React, { Component } from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import Grid from '@material-ui/core/Grid'
@@ -78,6 +79,8 @@ class CharacterEditor extends Component<Props> {
 
     return (
       <div>
+        <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />
+
         <Hidden smUp>
           <div style={{ height: '2.5em' }}>&nbsp;</div>
         </Hidden>

@@ -10,9 +10,11 @@ import CharacterSheet from 'components/characters/index.jsx'
 import CharacterDashboard from 'components/characters/dashboard/'
 import MeritFullPage from 'components/characters/MeritFullPage.jsx'
 import CharmFullPage from 'components/characters/charms/index.jsx'
+import BioFullPage from 'components/characters/BioFullPage.jsx'
 import CharacterEditor from 'components/characterEditor/index.jsx'
 import MeritEditor from 'components/characters/meritEditor.jsx'
 import CharmEditor from 'components/characters/charms/CharmEditor.jsx'
+import BioEditor from 'components/characterEditor/bio.jsx'
 import QcSheet from 'components/qcs/index.jsx'
 import QcEditor from 'components/qcs/editor.jsx'
 import BattlegroupSheet from 'components/battlegroups/index.jsx'
@@ -50,6 +52,7 @@ export default function Routes() {
       />
       <Route path="/characters/:characterId/merits" component={MeritFullPage} />
       <Route path="/characters/:characterId/charms" component={CharmFullPage} />
+      <Route path="/characters/:characterId/bio" component={BioFullPage} />
 
       <Route
         exact
@@ -64,6 +67,7 @@ export default function Routes() {
         path="/characters/:characterId/edit/charms"
         component={CharmEditor}
       />
+      <Route path="/characters/:characterId/edit/bio" component={BioEditor} />
 
       <Route exact path="/qcs/:qcId" component={QcSheet} />
       <Route path="/qcs/:qcId/edit" component={QcEditor} />

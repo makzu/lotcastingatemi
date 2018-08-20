@@ -88,6 +88,10 @@ export type Character = {
   supernal_ability: string,
   sorcerous_motes: number,
   rituals: Array<string>,
+  native_language: string,
+  lore_background: string,
+  portrait_link: string,
+  notes: string,
   xp_total: number,
   xp_solar_total: number,
   xp_craft_silver: number,
@@ -115,5 +119,4 @@ export type Character = {
   withAbilities &
   withSpecialties &
   withArmorStats &
-  withCombatInfo &
   withIntimacies

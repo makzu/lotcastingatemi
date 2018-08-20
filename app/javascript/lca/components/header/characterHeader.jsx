@@ -81,12 +81,16 @@ function CharacterHeader(props: Props) {
   } else if (path.endsWith('charms') || path.endsWith('charms/')) {
     tabValue = 2
     editButtonPath += '/charms'
+  } else if (path.endsWith('bio') || path.endsWith('bio/')) {
+    tabValue = 3
+    editButtonPath += '/bio'
   }
   const tabs = (
     <Tabs className={classes.tabs} value={tabValue} centered>
       <Tab label="Basics" component={Link} to={tabBasePath} />
       <Tab label="Merits" component={Link} to={tabBasePath + '/merits'} />
       <CharmTab character={character} isEditing={editing} />
+      <Tab label="Bio" component={Link} to={tabBasePath + '/bio'} />
     </Tabs>
   )
 

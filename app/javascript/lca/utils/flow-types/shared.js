@@ -57,6 +57,7 @@ export type withMotePool = {
   motes_peripheral_current: number,
   motes_committed: Array<committment>,
   anima_level: number,
+  anima_display: string,
   is_sorcerer: boolean,
   sorcerous_motes: number,
 }

@@ -1,6 +1,9 @@
 ## v60
 ###### *Not yet released*
+* A new 'Bio' tab has been added to Character sheets with spots for Lore background, iconic Anima display, a portrait link, and generic notes
 * The cap on Attributes has been raised to 10
+* Added a button to edit mote committments from the Spend Motes pop-up
+* QCs can now be marked as public just like Characters
 * Improved automated test suite
 * Bug fixes
 

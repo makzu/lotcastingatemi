@@ -53,6 +53,7 @@ import {
   fetchCurrentPlayer,
   fetchAllChronicles,
   fetchCharacter,
+  fetchQc,
 } from './entities'
 import UpdatesCable from 'utils/cable.js'
 
@@ -77,7 +78,11 @@ export function lcaInit() {
     if (getState().session.authenticated) {
       dispatch(fetchAll())
     }
+
     if (window.location.pathname.startsWith('/characters/'))
       dispatch(fetchCharacter(window.location.pathname.split('/')[2]))
+
+    if (window.location.pathname.startsWith('/qcs/'))
+      dispatch(fetchQc(window.location.pathname.split('/')[2]))
   }
 }

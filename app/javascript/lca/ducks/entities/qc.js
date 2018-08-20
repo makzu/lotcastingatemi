@@ -1,11 +1,17 @@
 // @flow
+import { normalize } from 'normalizr'
+import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import * as schemas from './_schemas.js'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
 
 const QC_CREATE = 'lca/qc/CREATE'
 const QC_CREATE_SUCCESS = 'lca/qc/CREATE_SUCCESS'
 const QC_CREATE_FAILURE = 'lca/qc/CREATE_FAILURE'
+const QC_FETCH = 'lca/qc/FETCH'
+export const QC_FETCH_SUCCESS = 'lca/qc/FETCH_SUCCESS'
+const QC_FETCH_FAILURE = 'lca/qc/FETCH_FAILURE'
 const QC_UPDATE = 'lca/qc/UPDATE'
 const QC_UPDATE_SUCCESS = 'lca/qc/UPDATE_SUCCESS'
 const QC_UPDATE_FAILURE = 'lca/qc/UPDATE_FAILURE'
@@ -37,6 +43,23 @@ export function createQc(qc: Object) {
     method: 'POST',
     body: JSON.stringify({ qc: qc }),
     types: [QC_CREATE, QC_CREATE_SUCCESS, QC_CREATE_FAILURE],
+  })
+}
+
+export function fetchQc(id: number) {
+  return callApi({
+    endpoint: `/api/v1/qcs/${id}`,
+    method: 'GET',
+    types: [
+      QC_FETCH,
+      {
+        type: QC_FETCH_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then(json => normalize(json, schemas.qcs))
+        },
+      },
+      QC_FETCH_FAILURE,
+    ],
   })
 }
 

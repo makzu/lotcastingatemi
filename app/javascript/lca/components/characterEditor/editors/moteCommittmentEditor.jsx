@@ -12,7 +12,7 @@ import ListAttributeEditor, {
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { isUnequalByKeys } from 'utils'
-import type { Character } from 'utils/flow-types'
+import type { withMotePool } from 'utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, onBlur, onRatingChange, classes } = props
@@ -65,7 +65,7 @@ function CommitFields(props: ListAttributeFieldTypes) {
   )
 }
 
-type Props = { character: Character, onChange: Function }
+type Props = { character: withMotePool & { id: number }, onChange: Function }
 const MoteCommittmentEditor = ({ character, onChange }: Props) => {
   return (
     <ListAttributeEditor

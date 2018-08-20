@@ -150,7 +150,6 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
 
       {character.type !== 'Character' && (
         <MoteCommittmentEditor
-          key="commit"
           character={character}
           onChange={onChange}
         />

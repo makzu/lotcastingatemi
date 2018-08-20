@@ -3,6 +3,8 @@ import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
@@ -20,11 +22,11 @@ import TextField from '../generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateQc } from 'ducks/actions.js'
-import { getSpecificQc } from 'selectors'
+import { getSpecificQc, canIDeleteQc } from 'selectors'
 import { woundPenalty } from 'utils/calculated'
 import type { fullQc } from 'utils/flow-types'
 
-type Props = { qc: fullQc, updateQc: Function }
+type Props = { qc: fullQc, updateQc: Function, showPublicCheckbox: boolean }
 class QcEditor extends Component<Props> {
   handleChange = e => {
     const { name, value } = e.target
@@ -35,9 +37,17 @@ class QcEditor extends Component<Props> {
     this.props.updateQc(qc.id, name, value)
   }
 
-  render() {
+  handleCheck = e => {
+    const { name } = e.target
     const { qc } = this.props
-    const { handleChange } = this
+    const value = !qc[name]
+
+    this.props.updateQc(qc.id, name, value)
+  }
+
+  render() {
+    const { qc, showPublicCheckbox } = this.props
+    const { handleChange, handleCheck } = this
 
     /* Escape hatch */
     if (qc == undefined)
@@ -86,6 +96,20 @@ class QcEditor extends Component<Props> {
               onChange={handleChange}
               onBlur={handleChange}
             />
+
+            {showPublicCheckbox && (
+              <FormControlLabel
+                label="Publicly Viewable"
+                control={
+                  <Checkbox
+                    name="public"
+                    checked={qc.public}
+                    onChange={handleCheck}
+                  />
+                }
+              />
+            )}
+
             <TextField
               name="description"
               value={qc.description}
@@ -394,10 +418,12 @@ class QcEditor extends Component<Props> {
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.qcId
   const qc = getSpecificQc(state, id)
+  const showPublicCheckbox = canIDeleteQc(state, id)
 
   return {
     id,
     qc,
+    showPublicCheckbox,
   }
 }
 export default ProtectedComponent(

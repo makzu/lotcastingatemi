@@ -3,7 +3,6 @@ import React, { Fragment } from 'react'
 import { compose, shouldUpdate } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
@@ -11,6 +10,7 @@ import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
 import { spentXp, spentSolarXp, spentBp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
@@ -32,7 +32,7 @@ const styles = theme => ({
 })
 
 const XpFields = (props: ListAttributeFieldTypes) => {
-  const { onChange, onBlur, onRatingChange, classes } = props
+  const { onChange, classes } = props
   const { label, points } = props.trait
 
   return (
@@ -44,7 +44,6 @@ const XpFields = (props: ListAttributeFieldTypes) => {
         label="For"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
       />
 
       <RatingField
@@ -54,7 +53,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
         min={-Infinity}
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </Fragment>
   )

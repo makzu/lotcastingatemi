@@ -1,16 +1,15 @@
 // @flow
 import React, { Fragment } from 'react'
 
-import TextField from '@material-ui/core/TextField'
-
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import type { withIntimacies } from 'utils/flow-types'
 
 function ResourceFields(props: ListAttributeFieldTypes) {
-  const { trait, onChange, onBlur, onRatingChange, classes } = props
+  const { trait, onChange, classes } = props
   const { resource, value } = trait
 
   return (
@@ -22,7 +21,6 @@ function ResourceFields(props: ListAttributeFieldTypes) {
         label="Resource"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
       />
       <RatingField
         trait="value"
@@ -31,7 +29,7 @@ function ResourceFields(props: ListAttributeFieldTypes) {
         min={0}
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </Fragment>
   )

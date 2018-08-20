@@ -5,33 +5,34 @@ import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import MuiTextField from '@material-ui/core/TextField'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
 import type { withMotePool } from 'utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
-  const { trait, onChange, onBlur, onRatingChange, classes } = props
+  const { trait, onChange, classes } = props
   const { pool, label, motes, scenelong } = trait
 
   return (
     <Fragment>
-      <TextField
+      <MuiTextField
         select
         name="pool"
         value={pool}
         className={classes.withMargin}
         label="Pool"
         margin="dense"
-        onChange={onRatingChange}
+        onChange={onChange}
       >
         <MenuItem value="personal">Pers</MenuItem>
         <MenuItem value="peripheral">Peri</MenuItem>
-      </TextField>
+      </MuiTextField>
 
       <TextField
         name="label"
@@ -40,7 +41,6 @@ function CommitFields(props: ListAttributeFieldTypes) {
         label="For"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
       />
 
       <RatingField
@@ -50,7 +50,7 @@ function CommitFields(props: ListAttributeFieldTypes) {
         min={0}
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
       <div className={classes.checkboxWrap}>
         <div className={classes.floatingLabel}>Scene</div>
@@ -58,7 +58,7 @@ function CommitFields(props: ListAttributeFieldTypes) {
           name="scenelong"
           checked={scenelong}
           value={(scenelong || false).toString()}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
     </Fragment>

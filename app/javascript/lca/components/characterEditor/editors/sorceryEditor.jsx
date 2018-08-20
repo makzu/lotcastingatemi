@@ -4,7 +4,6 @@ import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
@@ -12,11 +11,12 @@ import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
 import type { Character } from 'utils/flow-types'
 
 const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
-  const { onChange, onBlur, trait, classes } = props
+  const { onChange, trait, classes } = props
 
   return (
     <Fragment>
@@ -29,7 +29,6 @@ const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
         fullWidth
         rowsMax={10}
         onChange={onChange}
-        onBlur={onBlur}
       />
     </Fragment>
   )

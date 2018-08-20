@@ -3,20 +3,19 @@ import React, { Fragment } from 'react'
 import { shouldUpdate } from 'recompose'
 
 import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
 
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
-
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
 import * as calc from 'utils/calculated'
 import type { withIntimacies as Character } from 'utils/flow-types'
 
 function SpecialtyFields(props: ListAttributeFieldTypes) {
-  const { trait, character, onChange, onBlur, onRatingChange, classes } = props
+  const { trait, character, onChange, classes } = props
   const { ability, context } = trait
   const abilities = calc.abilitiesWithRatings(character)
 
@@ -26,7 +25,7 @@ function SpecialtyFields(props: ListAttributeFieldTypes) {
         name="ability"
         value={ability}
         label="Ability"
-        onChange={onRatingChange}
+        onChange={onChange}
         abilities={abilities}
         prependOptions={
           abilities.length === 0 && (
@@ -42,7 +41,6 @@ function SpecialtyFields(props: ListAttributeFieldTypes) {
         label="Specialty"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
       />
     </Fragment>
   )

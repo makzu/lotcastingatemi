@@ -1,21 +1,14 @@
 // @flow
 import React, { Fragment } from 'react'
 
-import TextField from '@material-ui/core/TextField'
-
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import type { fullQc } from 'utils/flow-types'
 
-function ActionFields({
-  trait,
-  onChange,
-  onBlur,
-  onRatingChange,
-  classes,
-}: ListAttributeFieldTypes) {
+function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
   const { action, pool } = trait
 
   return (
@@ -27,7 +20,6 @@ function ActionFields({
         label="Action"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
       />
 
       <RatingField
@@ -36,7 +28,7 @@ function ActionFields({
         label="Pool"
         min={1}
         margin="dense"
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </Fragment>
   )

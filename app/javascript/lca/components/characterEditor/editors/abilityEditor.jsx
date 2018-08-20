@@ -2,7 +2,6 @@
 import React, { Fragment } from 'react'
 import { shouldUpdate } from 'recompose'
 
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import ListAttributeEditor, {
@@ -10,6 +9,7 @@ import ListAttributeEditor, {
 } from 'components/generic/ListAttributeEditor.jsx'
 import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
 import {
   ABILITY_MAX as MAX,
@@ -23,7 +23,7 @@ function AbilityField(props) {
 }
 
 const CraftFields = (props: ListAttributeFieldTypes) => {
-  const { trait, onChange, onBlur, onRatingChange, classes } = props
+  const { trait, onChange, classes } = props
   const { craft, rating } = trait
 
   return (
@@ -35,7 +35,6 @@ const CraftFields = (props: ListAttributeFieldTypes) => {
         label="Craft"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
       />
 
       <RatingField
@@ -46,14 +45,14 @@ const CraftFields = (props: ListAttributeFieldTypes) => {
         max={MAX}
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </Fragment>
   )
 }
 
 const MartialArtsFields = (props: ListAttributeFieldTypes) => {
-  const { trait, onChange, onBlur, onRatingChange, classes } = props
+  const { trait, onChange, classes } = props
   const { style, rating } = trait
 
   return (
@@ -65,7 +64,6 @@ const MartialArtsFields = (props: ListAttributeFieldTypes) => {
         label="Style"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
       />
 
       <RatingField
@@ -76,7 +74,7 @@ const MartialArtsFields = (props: ListAttributeFieldTypes) => {
         max={MAX}
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
     </Fragment>
   )

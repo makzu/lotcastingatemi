@@ -26,8 +26,6 @@ export type ListAttributeFieldTypes = {
   character: Object,
   trait: Object,
   onChange: Function,
-  onBlur: Function,
-  onRatingChange: Function,
   classes: Object,
 }
 
@@ -66,64 +64,35 @@ type Props = {
   onChange: Function,
   classes: Object,
 }
-type State = { trait: Object }
-class ListAttributeEditor extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      trait: cloneDeep(this.props.character[this.props.trait]),
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({ trait: cloneDeep(newProps.character[this.props.trait]) })
-  }
-
+class ListAttributeEditor extends Component<Props> {
   onChange = (index, e) => {
-    var newTrait = [...this.state.trait]
-    if (this.props.nonObject) newTrait[index] = e.target.value
-    else newTrait[index][e.target.name] = e.target.value
-    this.setState({ trait: newTrait })
-  }
+    const { character, trait, nonObject } = this.props
+    var newTrait = cloneDeep(character[trait])
 
-  onBlur = (index, e) => {
-    const { name } = e.target
-    const { nonObject, character, trait } = this.props
-    if (
-      !nonObject &&
-      this.state.trait[index][name] === character[trait][index][name]
-    )
-      return
-    if (nonObject && this.state.trait[index] === character[trait][index]) return
+    const val = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
-    this.handleChange(this.state.trait)
-  }
-
-  onRatingChange = (index, e) => {
-    var newTrait = [...this.state.trait]
-    let val
-    if (e.target.type === 'checkbox') val = e.target.checked
-    else val = e.target.value
-    newTrait[index][e.target.name] = val
+    if (nonObject) newTrait[index] = val
+    else newTrait[index][e.target.name] = val
 
     this.handleChange(newTrait)
   }
 
   onAdd() {
-    var newTrait = [...this.state.trait, this.props.newObject]
-    this.handleChange(newTrait)
+    const { character, trait } = this.props
+    this.handleChange([...character[trait], this.props.newObject])
   }
 
   onRemove(index) {
-    var newTrait = [...this.state.trait]
+    const { character, trait } = this.props
+    var newTrait = [...character[trait]]
     newTrait.splice(index, 1)
 
     this.handleChange(newTrait)
   }
 
   handleSort = ({ oldIndex, newIndex }) => {
-    var newTrait = arrayMove(this.state.trait, oldIndex, newIndex)
-    this.setState({ trait: newTrait })
+    const { character, trait } = this.props
+    var newTrait = arrayMove(character[trait], oldIndex, newIndex)
 
     this.handleChange(newTrait)
   }
@@ -133,17 +102,10 @@ class ListAttributeEditor extends Component<Props, State> {
   }
 
   render() {
-    const { character, Fields, classes } = this.props
-    const {
-      onChange,
-      onBlur,
-      onRatingChange,
-      onAdd,
-      onRemove,
-      handleSort,
-    } = this
+    const { character, trait, Fields, classes } = this.props
+    const { onChange, onAdd, onRemove, handleSort } = this
 
-    const rows = this.state.trait.map((t, index) => (
+    const rows = character[trait].map((t, index) => (
       <SortableItem key={index} index={index}>
         <div className={classes.fieldContainer}>
           <Typography component="div" className={classes.grabHandle}>
@@ -153,8 +115,6 @@ class ListAttributeEditor extends Component<Props, State> {
             trait={t}
             character={character}
             onChange={onChange.bind(this, index)}
-            onBlur={onBlur.bind(this, index)}
-            onRatingChange={onRatingChange.bind(this, index)}
             classes={classes}
           />
           <IconButton onClick={onRemove.bind(this, index)}>

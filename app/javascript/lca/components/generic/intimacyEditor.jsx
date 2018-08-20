@@ -2,25 +2,19 @@
 import React, { Fragment } from 'react'
 
 import Checkbox from '@material-ui/core/Checkbox'
-import TextField from '@material-ui/core/TextField'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from './RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import {
   INTIMACY_RATING_MAX as MAX,
   INTIMACY_RATING_MIN as MIN,
 } from 'utils/constants.js'
 import type { withIntimacies } from 'utils/flow-types'
 
-function IntimacyFields({
-  trait,
-  onChange,
-  onBlur,
-  onRatingChange,
-  classes,
-}: ListAttributeFieldTypes) {
+function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
   const { subject, rating, hidden } = trait
 
   return (
@@ -32,7 +26,6 @@ function IntimacyFields({
         label="Subject"
         margin="dense"
         onChange={onChange}
-        onBlur={onBlur}
         inputProps={{ ['data-cy']: 'intimacy-subject' }}
       />
       <RatingField
@@ -43,7 +36,7 @@ function IntimacyFields({
         max={MAX}
         margin="dense"
         narrow
-        onChange={onRatingChange}
+        onChange={onChange}
       />
       <div className={classes.checkboxWrap}>
         <div className={classes.floatingLabel}>Hidden</div>
@@ -51,7 +44,7 @@ function IntimacyFields({
           name="hidden"
           checked={hidden}
           value={(hidden || false).toString()}
-          onChange={onRatingChange}
+          onChange={onChange}
         />
       </div>
     </Fragment>

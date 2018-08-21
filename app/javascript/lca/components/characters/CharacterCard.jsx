@@ -7,11 +7,11 @@ import { SortableHandle } from 'react-sortable-hoc'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import Launch from '@material-ui/icons/Launch'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Whatshot from '@material-ui/icons/Whatshot'
 
+import NotesPopup from './NotesPopup.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterCardMenu from '../generic/CharacterCardMenu'
@@ -134,7 +134,6 @@ export function CharacterCard({
             {character.anima_level === 3 && (
               <Whatshot className={classes.icon} />
             )}
-            <Launch className={classes.icon} />
 
             {character.hidden && (
               <div className={classes.hiddenLabel}>
@@ -148,6 +147,8 @@ export function CharacterCard({
             Essence {character.essence} {calc.prettyFullExaltType(character)}
           </Typography>
         </div>
+
+        <NotesPopup character={character} />
 
         {(st || canDelete) && (
           <CharacterCardMenu characterType="character" id={character.id} />

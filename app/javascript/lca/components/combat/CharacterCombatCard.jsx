@@ -7,7 +7,6 @@ import { compose } from 'recompose'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Whatshot from '@material-ui/icons/Whatshot'
 
@@ -16,6 +15,7 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import CombatControls from './CombatControls.jsx'
 import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
+import NotesPopup from 'components/characters/NotesPopup.jsx'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character } from 'utils/flow-types'
 
@@ -96,7 +96,6 @@ export function CharacterCard({
             {character.anima_level === 3 && (
               <Whatshot className={classes.icon} />
             )}
-            <Launch className={classes.icon} />
 
             {character.hidden && (
               <div className={classes.hiddenLabel}>
@@ -106,6 +105,8 @@ export function CharacterCard({
           </Typography>
           <PlayerNameSubtitle playerId={character.player_id} />
         </div>
+
+        <NotesPopup character={character} />
       </div>
 
       <CombatControls character={character} characterType="character" />

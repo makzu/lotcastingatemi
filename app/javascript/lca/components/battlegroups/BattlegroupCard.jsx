@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
-import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
@@ -86,7 +85,6 @@ function BattlegroupCard(props: Props) {
             to={`/battlegroups/${battlegroup.id}`}
           >
             {battlegroup.name}
-            <Launch className={classes.icon} />
 
             {battlegroup.hidden && (
               <div className={classes.hiddenLabel}>

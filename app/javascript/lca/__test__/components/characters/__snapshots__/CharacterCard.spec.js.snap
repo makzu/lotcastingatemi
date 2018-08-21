@@ -23,7 +23,6 @@ exports[`CharacterCard works for Solars 1`] = `
       >
         
         <pure(Whatshot) />
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -34,7 +33,102 @@ exports[`CharacterCard works for Solars 1`] = `
         Zenith Caste Solar
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 0,
+          "abil_athletics": 0,
+          "abil_awareness": 0,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [],
+          "abil_dodge": 0,
+          "abil_integrity": 0,
+          "abil_investigation": 0,
+          "abil_larceny": 0,
+          "abil_linguistics": 0,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 0,
+          "abil_melee": 0,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 0,
+          "abil_resistance": 0,
+          "abil_ride": 0,
+          "abil_sail": 0,
+          "abil_socialize": 0,
+          "abil_stealth": 0,
+          "abil_survival": 0,
+          "abil_thrown": 0,
+          "abil_war": 0,
+          "anima_level": 3,
+          "armor_is_artifact": true,
+          "armor_name": "",
+          "armor_tags": Array [],
+          "armor_weight": "medium",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 1,
+          "attr_intelligence": 1,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 1,
+          "attr_strength": 1,
+          "attr_wits": 1,
+          "caste": "zenith",
+          "caste_abilities": Array [],
+          "charms": Array [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+          ],
+          "damage_aggravated": 0,
+          "damage_bashing": 0,
+          "damage_lethal": 0,
+          "essence": 1,
+          "exalt_type": "solar",
+          "excellency": "solar",
+          "favored_abilities": Array [],
+          "health_level_0s": 0,
+          "health_level_1s": 0,
+          "health_level_2s": 0,
+          "health_level_4s": 0,
+          "health_level_incap": 0,
+          "martial_arts_charms": Array [
+            26,
+          ],
+          "name": "",
+          "onslaught": 0,
+          "specialties": Array [],
+          "supernal_ability": "integrity",
+          "type": "SolarCharacter",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -377,7 +471,6 @@ exports[`CharacterCard works for Solars 2`] = `
       >
         
         <pure(Whatshot) />
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -388,7 +481,107 @@ exports[`CharacterCard works for Solars 2`] = `
         Eclipse Caste Solar
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 1,
+          "abil_awareness": 1,
+          "abil_brawl": 1,
+          "abil_bureaucracy": 1,
+          "abil_craft": Array [],
+          "abil_dodge": 1,
+          "abil_integrity": 0,
+          "abil_investigation": 0,
+          "abil_larceny": 1,
+          "abil_linguistics": 1,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 1,
+          "abil_melee": 0,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 1,
+          "abil_resistance": 1,
+          "abil_ride": 1,
+          "abil_sail": 1,
+          "abil_socialize": 1,
+          "abil_stealth": 1,
+          "abil_survival": 1,
+          "abil_thrown": 0,
+          "abil_war": 1,
+          "anima_level": 3,
+          "armor_is_artifact": true,
+          "armor_name": "",
+          "armor_tags": Array [],
+          "armor_weight": "light",
+          "attr_appearance": 2,
+          "attr_charisma": 2,
+          "attr_dexterity": 2,
+          "attr_intelligence": 2,
+          "attr_manipulation": 2,
+          "attr_perception": 2,
+          "attr_stamina": 2,
+          "attr_strength": 1,
+          "attr_wits": 2,
+          "caste": "eclipse",
+          "caste_abilities": Array [],
+          "charms": Array [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+          ],
+          "damage_aggravated": 1,
+          "damage_bashing": 0,
+          "damage_lethal": 1,
+          "essence": 2,
+          "exalt_type": "solar",
+          "excellency": "solar",
+          "favored_abilities": Array [],
+          "health_level_0s": 0,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 1,
+          "health_level_incap": 1,
+          "martial_arts_charms": Array [
+            26,
+          ],
+          "name": "",
+          "onslaught": 0,
+          "specialties": Array [],
+          "supernal_ability": "martial_arts",
+          "type": "SolarCharacter",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -750,7 +943,6 @@ exports[`CharacterCard works for Solars 3`] = `
       >
         qÓ
         <pure(Whatshot) />
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -761,7 +953,128 @@ exports[`CharacterCard works for Solars 3`] = `
         Twilight Caste Solar
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 0,
+          "abil_awareness": 2,
+          "abil_brawl": 2,
+          "abil_bureaucracy": 2,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 2,
+          "abil_integrity": 1,
+          "abil_investigation": 1,
+          "abil_larceny": 1,
+          "abil_linguistics": 0,
+          "abil_lore": 2,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 2,
+          "abil_melee": 0,
+          "abil_occult": 2,
+          "abil_performance": 1,
+          "abil_presence": 2,
+          "abil_resistance": 2,
+          "abil_ride": 0,
+          "abil_sail": 2,
+          "abil_socialize": 2,
+          "abil_stealth": 2,
+          "abil_survival": 1,
+          "abil_thrown": 1,
+          "abil_war": 2,
+          "anima_level": 3,
+          "armor_is_artifact": false,
+          "armor_name": "",
+          "armor_tags": Array [
+            "à",
+          ],
+          "armor_weight": "medium",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 2,
+          "attr_intelligence": 3,
+          "attr_manipulation": 3,
+          "attr_perception": 2,
+          "attr_stamina": 1,
+          "attr_strength": 3,
+          "attr_wits": 2,
+          "caste": "twilight",
+          "caste_abilities": Array [
+            "medicine",
+            "presence",
+          ],
+          "charms": Array [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+          ],
+          "damage_aggravated": 2,
+          "damage_bashing": 0,
+          "damage_lethal": 2,
+          "essence": 2,
+          "exalt_type": "solar",
+          "excellency": "solar",
+          "favored_abilities": Array [
+            "presence",
+          ],
+          "health_level_0s": 1,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 2,
+          "health_level_incap": 0,
+          "martial_arts_charms": Array [
+            26,
+          ],
+          "name": "qÓ",
+          "onslaught": 2,
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "supernal_ability": "medicine",
+          "type": "SolarCharacter",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -1170,7 +1483,6 @@ exports[`CharacterCard works for Solars 4`] = `
       >
         ÷È
         <pure(Whatshot) />
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -1181,7 +1493,116 @@ exports[`CharacterCard works for Solars 4`] = `
         Zenith Caste Solar
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 3,
+          "abil_athletics": 3,
+          "abil_awareness": 0,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 2,
+          "abil_craft": Array [],
+          "abil_dodge": 3,
+          "abil_integrity": 2,
+          "abil_investigation": 1,
+          "abil_larceny": 2,
+          "abil_linguistics": 2,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 1,
+          "abil_melee": 1,
+          "abil_occult": 2,
+          "abil_performance": 1,
+          "abil_presence": 0,
+          "abil_resistance": 3,
+          "abil_ride": 3,
+          "abil_sail": 1,
+          "abil_socialize": 0,
+          "abil_stealth": 1,
+          "abil_survival": 3,
+          "abil_thrown": 3,
+          "abil_war": 3,
+          "anima_level": 3,
+          "armor_is_artifact": false,
+          "armor_name": "¸",
+          "armor_tags": Array [
+            "f",
+          ],
+          "armor_weight": "unarmored",
+          "attr_appearance": 3,
+          "attr_charisma": 3,
+          "attr_dexterity": 3,
+          "attr_intelligence": 3,
+          "attr_manipulation": 3,
+          "attr_perception": 2,
+          "attr_stamina": 2,
+          "attr_strength": 2,
+          "attr_wits": 4,
+          "caste": "zenith",
+          "caste_abilities": Array [
+            "stealth",
+            "sail",
+            "brawl",
+          ],
+          "charms": Array [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+          ],
+          "damage_aggravated": 3,
+          "damage_bashing": 1,
+          "damage_lethal": 3,
+          "essence": 4,
+          "exalt_type": "solar",
+          "excellency": "solar",
+          "favored_abilities": Array [
+            "craft",
+            "ride",
+          ],
+          "health_level_0s": 1,
+          "health_level_1s": 3,
+          "health_level_2s": 2,
+          "health_level_4s": 0,
+          "health_level_incap": 3,
+          "martial_arts_charms": Array [
+            26,
+          ],
+          "name": "÷È",
+          "onslaught": 0,
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "supernal_ability": "medicine",
+          "type": "SolarCharacter",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -1515,7 +1936,6 @@ exports[`CharacterCard works for Solars 5`] = `
       >
         L
         <pure(Whatshot) />
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -1526,7 +1946,154 @@ exports[`CharacterCard works for Solars 5`] = `
         Dawn Caste Solar
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 3,
+          "abil_athletics": 3,
+          "abil_awareness": 1,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 3,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 4,
+          "abil_integrity": 3,
+          "abil_investigation": 1,
+          "abil_larceny": 2,
+          "abil_linguistics": 1,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 0,
+          "abil_melee": 4,
+          "abil_occult": 4,
+          "abil_performance": 4,
+          "abil_presence": 1,
+          "abil_resistance": 1,
+          "abil_ride": 0,
+          "abil_sail": 3,
+          "abil_socialize": 2,
+          "abil_stealth": 3,
+          "abil_survival": 4,
+          "abil_thrown": 4,
+          "abil_war": 4,
+          "anima_level": 3,
+          "armor_is_artifact": false,
+          "armor_name": "{",
+          "armor_tags": Array [
+            "¹",
+            "4
+",
+            "",
+          ],
+          "armor_weight": "unarmored",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 3,
+          "attr_intelligence": 3,
+          "attr_manipulation": 3,
+          "attr_perception": 2,
+          "attr_stamina": 3,
+          "attr_strength": 2,
+          "attr_wits": 2,
+          "caste": "dawn",
+          "caste_abilities": Array [
+            "athletics",
+            "linguistics",
+            "lore",
+          ],
+          "charms": Array [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+          ],
+          "damage_aggravated": 0,
+          "damage_bashing": 3,
+          "damage_lethal": 2,
+          "essence": 3,
+          "exalt_type": "solar",
+          "excellency": "solar",
+          "favored_abilities": Array [
+            "martial_arts",
+            "craft",
+            "awareness",
+          ],
+          "health_level_0s": 4,
+          "health_level_1s": 2,
+          "health_level_2s": 2,
+          "health_level_4s": 4,
+          "health_level_incap": 1,
+          "martial_arts_charms": Array [
+            26,
+          ],
+          "name": "L",
+          "onslaught": 2,
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "supernal_ability": "survival",
+          "type": "SolarCharacter",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -1934,7 +2501,6 @@ exports[`CharacterCard works for mortals 1`] = `
         variant="title"
       >
         
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -1945,7 +2511,65 @@ exports[`CharacterCard works for mortals 1`] = `
         Mortal
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 0,
+          "abil_athletics": 0,
+          "abil_awareness": 0,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 0,
+          "abil_craft": Array [],
+          "abil_dodge": 0,
+          "abil_integrity": 0,
+          "abil_investigation": 0,
+          "abil_larceny": 0,
+          "abil_linguistics": 0,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 0,
+          "abil_melee": 0,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 0,
+          "abil_resistance": 0,
+          "abil_ride": 0,
+          "abil_sail": 0,
+          "abil_socialize": 0,
+          "abil_stealth": 0,
+          "abil_survival": 0,
+          "abil_thrown": 0,
+          "abil_war": 0,
+          "armor_is_artifact": true,
+          "armor_name": "",
+          "armor_tags": Array [],
+          "armor_weight": "medium",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 1,
+          "attr_intelligence": 1,
+          "attr_manipulation": 1,
+          "attr_perception": 1,
+          "attr_stamina": 1,
+          "attr_strength": 1,
+          "attr_wits": 1,
+          "damage_aggravated": 0,
+          "damage_bashing": 0,
+          "damage_lethal": 0,
+          "essence": 1,
+          "health_level_0s": 0,
+          "health_level_1s": 0,
+          "health_level_2s": 0,
+          "health_level_4s": 0,
+          "health_level_incap": 0,
+          "name": "",
+          "onslaught": 0,
+          "specialties": Array [],
+          "type": "Character",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -2250,7 +2874,6 @@ exports[`CharacterCard works for mortals 2`] = `
         variant="title"
       >
         
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -2261,7 +2884,70 @@ exports[`CharacterCard works for mortals 2`] = `
         Mortal
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 1,
+          "abil_awareness": 1,
+          "abil_brawl": 1,
+          "abil_bureaucracy": 1,
+          "abil_craft": Array [],
+          "abil_dodge": 1,
+          "abil_integrity": 0,
+          "abil_investigation": 0,
+          "abil_larceny": 1,
+          "abil_linguistics": 1,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 1,
+          "abil_melee": 0,
+          "abil_occult": 0,
+          "abil_performance": 0,
+          "abil_presence": 1,
+          "abil_resistance": 1,
+          "abil_ride": 1,
+          "abil_sail": 1,
+          "abil_socialize": 1,
+          "abil_stealth": 1,
+          "abil_survival": 1,
+          "abil_thrown": 0,
+          "abil_war": 1,
+          "armor_is_artifact": true,
+          "armor_name": "",
+          "armor_tags": Array [],
+          "armor_weight": "light",
+          "attr_appearance": 2,
+          "attr_charisma": 2,
+          "attr_dexterity": 2,
+          "attr_intelligence": 2,
+          "attr_manipulation": 2,
+          "attr_perception": 2,
+          "attr_stamina": 2,
+          "attr_strength": 1,
+          "attr_wits": 2,
+          "damage_aggravated": 1,
+          "damage_bashing": 0,
+          "damage_lethal": 1,
+          "essence": 2,
+          "health_level_0s": 0,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 1,
+          "health_level_incap": 1,
+          "name": "",
+          "onslaught": 0,
+          "specialties": Array [],
+          "type": "Character",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -2585,7 +3271,6 @@ exports[`CharacterCard works for mortals 3`] = `
         variant="title"
       >
         qÓ
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -2596,7 +3281,86 @@ exports[`CharacterCard works for mortals 3`] = `
         Mortal
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 1,
+          "abil_athletics": 0,
+          "abil_awareness": 2,
+          "abil_brawl": 2,
+          "abil_bureaucracy": 2,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 2,
+          "abil_integrity": 1,
+          "abil_investigation": 1,
+          "abil_larceny": 1,
+          "abil_linguistics": 0,
+          "abil_lore": 2,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 2,
+          "abil_melee": 0,
+          "abil_occult": 2,
+          "abil_performance": 1,
+          "abil_presence": 2,
+          "abil_resistance": 2,
+          "abil_ride": 0,
+          "abil_sail": 2,
+          "abil_socialize": 2,
+          "abil_stealth": 2,
+          "abil_survival": 1,
+          "abil_thrown": 1,
+          "abil_war": 2,
+          "armor_is_artifact": false,
+          "armor_name": "",
+          "armor_tags": Array [
+            "à",
+          ],
+          "armor_weight": "medium",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 2,
+          "attr_intelligence": 3,
+          "attr_manipulation": 3,
+          "attr_perception": 2,
+          "attr_stamina": 1,
+          "attr_strength": 3,
+          "attr_wits": 2,
+          "damage_aggravated": 2,
+          "damage_bashing": 0,
+          "damage_lethal": 2,
+          "essence": 2,
+          "health_level_0s": 1,
+          "health_level_1s": 1,
+          "health_level_2s": 1,
+          "health_level_4s": 2,
+          "health_level_incap": 0,
+          "name": "qÓ",
+          "onslaught": 1,
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "type": "Character",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -2941,7 +3705,6 @@ exports[`CharacterCard works for mortals 4`] = `
         variant="title"
       >
         ÷È
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -2952,7 +3715,72 @@ exports[`CharacterCard works for mortals 4`] = `
         Mortal
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 3,
+          "abil_athletics": 3,
+          "abil_awareness": 0,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 2,
+          "abil_craft": Array [],
+          "abil_dodge": 3,
+          "abil_integrity": 2,
+          "abil_investigation": 1,
+          "abil_larceny": 2,
+          "abil_linguistics": 2,
+          "abil_lore": 1,
+          "abil_martial_arts": Array [],
+          "abil_medicine": 1,
+          "abil_melee": 1,
+          "abil_occult": 2,
+          "abil_performance": 1,
+          "abil_presence": 0,
+          "abil_resistance": 3,
+          "abil_ride": 3,
+          "abil_sail": 1,
+          "abil_socialize": 0,
+          "abil_stealth": 1,
+          "abil_survival": 3,
+          "abil_thrown": 3,
+          "abil_war": 3,
+          "armor_is_artifact": false,
+          "armor_name": "¸",
+          "armor_tags": Array [
+            "f",
+          ],
+          "armor_weight": "unarmored",
+          "attr_appearance": 3,
+          "attr_charisma": 3,
+          "attr_dexterity": 3,
+          "attr_intelligence": 3,
+          "attr_manipulation": 3,
+          "attr_perception": 2,
+          "attr_stamina": 2,
+          "attr_strength": 2,
+          "attr_wits": 4,
+          "damage_aggravated": 3,
+          "damage_bashing": 1,
+          "damage_lethal": 3,
+          "essence": 4,
+          "health_level_0s": 1,
+          "health_level_1s": 3,
+          "health_level_2s": 2,
+          "health_level_4s": 0,
+          "health_level_incap": 3,
+          "name": "÷È",
+          "onslaught": 3,
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "type": "Character",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>
@@ -3256,7 +4084,6 @@ exports[`CharacterCard works for mortals 5`] = `
         variant="title"
       >
         L
-        <pure(Launch) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -3267,7 +4094,109 @@ exports[`CharacterCard works for mortals 5`] = `
         Mortal
       </WithStyles(Typography)>
     </div>
-    <CharacterCardMenu
+    <WithStyles(Connect(NotesPopup))
+      character={
+        Object {
+          "abil_archery": 3,
+          "abil_athletics": 3,
+          "abil_awareness": 1,
+          "abil_brawl": 0,
+          "abil_bureaucracy": 3,
+          "abil_craft": Array [
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+            Object {
+              "craft": Object {},
+              "rating": Object {},
+            },
+          ],
+          "abil_dodge": 4,
+          "abil_integrity": 3,
+          "abil_investigation": 1,
+          "abil_larceny": 2,
+          "abil_linguistics": 1,
+          "abil_lore": 0,
+          "abil_martial_arts": Array [
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+            Object {
+              "rating": Object {},
+              "style": Object {},
+            },
+          ],
+          "abil_medicine": 0,
+          "abil_melee": 4,
+          "abil_occult": 4,
+          "abil_performance": 4,
+          "abil_presence": 1,
+          "abil_resistance": 1,
+          "abil_ride": 0,
+          "abil_sail": 3,
+          "abil_socialize": 2,
+          "abil_stealth": 3,
+          "abil_survival": 4,
+          "abil_thrown": 4,
+          "abil_war": 4,
+          "armor_is_artifact": false,
+          "armor_name": "{",
+          "armor_tags": Array [
+            "¹",
+            "4
+",
+            "",
+          ],
+          "armor_weight": "unarmored",
+          "attr_appearance": 1,
+          "attr_charisma": 1,
+          "attr_dexterity": 3,
+          "attr_intelligence": 3,
+          "attr_manipulation": 3,
+          "attr_perception": 2,
+          "attr_stamina": 3,
+          "attr_strength": 2,
+          "attr_wits": 2,
+          "damage_aggravated": 0,
+          "damage_bashing": 3,
+          "damage_lethal": 2,
+          "essence": 3,
+          "health_level_0s": 4,
+          "health_level_1s": 2,
+          "health_level_2s": 2,
+          "health_level_4s": 4,
+          "health_level_incap": 1,
+          "name": "L",
+          "onslaught": 4,
+          "specialties": Array [
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+            Object {
+              "ability": Object {},
+              "context": Object {},
+            },
+          ],
+          "type": "Character",
+        }
+      }
+    />
+    <WithStyles(CharacterCardMenu)
       characterType="character"
     />
   </div>

@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
-import Launch from '@material-ui/icons/Launch'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
@@ -98,7 +97,6 @@ function QcCard(props: Props) {
           >
             {qc.name}
 
-            <Launch className={classes.icon} />
             {qc.hidden && (
               <div className={classes.hiddenLabel}>
                 <VisibilityOff className={classes.icon} />

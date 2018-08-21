@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
+import { withStyles } from '@material-ui/core/styles'
 import MoreVert from '@material-ui/icons/MoreVert'
 
 import CardMenuDelete from './CardMenuDelete.jsx'
@@ -12,10 +13,14 @@ import CardMenuLinks from './CardMenuLinks.jsx'
 import CardMenuPin from './CardMenuPin.jsx'
 import CardMenuRemoveFromChronicle from './CardMenuRemoveFromChronicle.jsx'
 
-type Props = {
-  id: number,
-  characterType: string,
-}
+//eslint-disable-next-line no-unused-vars
+const styles = theme => ({
+  wrapper: {
+    margin: '-0.75em -1em 0 1.5em',
+  },
+})
+
+type Props = { id: number, characterType: string, classes: Object }
 class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
   constructor(props: Props) {
     super(props)
@@ -32,7 +37,7 @@ class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
 
   render() {
     return (
-      <div style={{ marginTop: '-1em', marginRight: '-1em' }}>
+      <div className={this.props.classes.wrapper}>
         <IconButton onClick={this.handleOpen}>
           <MoreVert />
         </IconButton>
@@ -74,4 +79,4 @@ class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
   }
 }
 
-export default CharacterCardMenu
+export default withStyles(styles)(CharacterCardMenu)

@@ -2,21 +2,21 @@
 
 exports[`WelcomePage renders at all 1`] = `
 <div
-  className="MuiGrid-container-1 MuiGrid-spacing-xs-24-24"
+  className="MuiGrid-container-1 MuiGrid-spacing-xs-24-25"
 >
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40 MuiGrid-grid-lg-8-78"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-lg-8-79"
   >
     <div
-      className="MuiPaper-root-98 MuiPaper-elevation2-102 MuiPaper-rounded-99 BlockPaper-root-97"
+      className="MuiPaper-root-99 MuiPaper-elevation2-103 MuiPaper-rounded-100 BlockPaper-root-98"
     >
       <h1
-        className="MuiTypography-root-125 MuiTypography-headline-130 MuiTypography-gutterBottom-142"
+        className="MuiTypography-root-126 MuiTypography-headline-131 MuiTypography-gutterBottom-143"
       >
         Lot-Casting Atemi
       </h1>
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134 MuiTypography-gutterBottom-142"
+        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-gutterBottom-143"
       >
         <strong>
           Cost:
@@ -43,14 +43,14 @@ exports[`WelcomePage renders at all 1`] = `
          One scene
       </p>
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134"
+        className="MuiTypography-root-126 MuiTypography-body1-135"
       >
         The Solar Exalted have achieved such heights of skill that even their games become effortless. When a Solar activates Lot-Casting Atemi she instantly becomes aware of her scores and those of the other players. She likewise never forgets the strength of her signature moves, or the number of dice required to play them. She can roll those dice with but a thought, and no matter how distant she is from the game, all participants become aware of her successes.
       </p>
     </div>
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41"
   >
     <div
       style={
@@ -61,10 +61,10 @@ exports[`WelcomePage renders at all 1`] = `
     />
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40 MuiGrid-grid-lg-6-76"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-lg-6-77"
   >
     <h1
-      className="MuiTypography-root-125 MuiTypography-display2-128"
+      className="MuiTypography-root-126 MuiTypography-display2-129"
       style={
         Object {
           "textAlign": "right",
@@ -75,30 +75,30 @@ exports[`WelcomePage renders at all 1`] = `
     </h1>
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40 MuiGrid-grid-lg-5-75"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-lg-5-76"
   >
     <div
-      className="MuiPaper-root-98 MuiPaper-elevation2-102 MuiPaper-rounded-99 BlockPaper-root-97"
+      className="MuiPaper-root-99 MuiPaper-elevation2-103 MuiPaper-rounded-100 BlockPaper-root-98"
     >
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134 MuiTypography-paragraph-143"
+        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-paragraph-144"
       >
         Keep track of your characters' attributes, abilities, charms, merits, and more all from one place, accessible from any device with an Internet connection. PC screens, phones, and tablets are all supported, and character sheets are synced in real-time across all devices.
       </p>
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134"
+        className="MuiTypography-root-126 MuiTypography-body1-135"
       >
         Supports Solar and Dragon-Blooded Exalts and Mortal Characters, with automatic tracking of Caste/Aspect/Favored Abilities, and Excellencies. Or forge your own path with Custom Attribute, Ability, or Essence Exalt types.
       </p>
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134"
+        className="MuiTypography-root-126 MuiTypography-body1-135"
       >
         Bonuses and penalties from a growing list of merits, flaws, and control spells are automatically included in dice pools. Nearly every weapon tag is supported, even for esoteric weapons like The Burning Name and Elemental Bolt Attack.
       </p>
     </div>
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41"
   >
     <div
       style={
@@ -109,10 +109,10 @@ exports[`WelcomePage renders at all 1`] = `
     />
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41"
   >
     <h1
-      className="MuiTypography-root-125 MuiTypography-display2-128"
+      className="MuiTypography-root-126 MuiTypography-display2-129"
       style={
         Object {
           "textAlign": "right",
@@ -123,20 +123,20 @@ exports[`WelcomePage renders at all 1`] = `
     </h1>
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40 MuiGrid-grid-lg-5-75"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-lg-5-76"
   >
     <div
-      className="MuiPaper-root-98 MuiPaper-elevation2-102 MuiPaper-rounded-99 BlockPaper-root-97"
+      className="MuiPaper-root-99 MuiPaper-elevation2-103 MuiPaper-rounded-100 BlockPaper-root-98"
     >
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134"
+        className="MuiTypography-root-126 MuiTypography-body1-135"
       >
         Quick characters and Battlegroups are also fully supported, giving you full stat blocks for antagonists and any Command, Familiar, or Retainer merits you may need stats for. Size, drill, might, and morale bonuses for Battlegroups are automatically factored into the relevant pools.
       </p>
     </div>
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41"
   >
     <div
       style={
@@ -147,10 +147,10 @@ exports[`WelcomePage renders at all 1`] = `
     />
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40 MuiGrid-grid-lg-6-76"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-lg-6-77"
   >
     <h1
-      className="MuiTypography-root-125 MuiTypography-display2-128"
+      className="MuiTypography-root-126 MuiTypography-display2-129"
       style={
         Object {
           "textAlign": "right",
@@ -161,18 +161,18 @@ exports[`WelcomePage renders at all 1`] = `
     </h1>
   </div>
   <div
-    className="MuiGrid-item-2 MuiGrid-grid-xs-12-40 MuiGrid-grid-lg-5-75"
+    className="MuiGrid-item-2 MuiGrid-grid-xs-12-41 MuiGrid-grid-lg-5-76"
   >
     <div
-      className="MuiPaper-root-98 MuiPaper-elevation2-102 MuiPaper-rounded-99 BlockPaper-root-97"
+      className="MuiPaper-root-99 MuiPaper-elevation2-103 MuiPaper-rounded-100 BlockPaper-root-98"
     >
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134 MuiTypography-paragraph-143"
+        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-paragraph-144"
       >
         Create or join a Chronicle to see other players' characters, qcs, and battlegroups, with access to a full sheet for each one and a summary page showing a subset of dice pools and defenses. Storytellers can even make edits to their players' characters, and all changes are synced in real-time with other players.
       </p>
       <p
-        className="MuiTypography-root-125 MuiTypography-body1-134"
+        className="MuiTypography-root-126 MuiTypography-body1-135"
       >
         Don't want to spoil a surprise? Mark a Character as Hidden and only the owner and Storyteller will be able to see it until the time is right. You can also hide individual Principles and Ties on your sheet to control exactly how much of a mysterious stranger your character is.
       </p>

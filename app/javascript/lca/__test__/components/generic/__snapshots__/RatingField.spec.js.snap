@@ -5,18 +5,17 @@ exports[`RatingField renders at all 1`] = `
   className="MuiFormControl-root-3 RatingField-field-1"
 >
   <label
-    className="MuiFormLabel-root-12 MuiInputLabel-root-7 MuiInputLabel-formControl-8 MuiInputLabel-animated-11 MuiInputLabel-shrink-10"
+    className="MuiFormLabel-root-12 MuiFormLabel-filled-16 MuiInputLabel-root-7 MuiInputLabel-formControl-8 MuiInputLabel-animated-11 MuiInputLabel-shrink-10"
     data-shrink={true}
   >
     asdf
   </label>
   <div
-    className="MuiInput-root-17 MuiInput-formControl-18 MuiInput-underline-21"
+    className="MuiInput-root-19 MuiInput-formControl-20 MuiInput-underline-23"
   >
     <input
       aria-invalid={false}
-      aria-required={false}
-      className="MuiInput-input-25 MuiInput-inputType-28"
+      className="MuiInput-input-27 MuiInput-inputType-30"
       disabled={false}
       max={Infinity}
       min={0}
@@ -24,6 +23,7 @@ exports[`RatingField renders at all 1`] = `
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
+      required={false}
       type="number"
       value={5}
     />

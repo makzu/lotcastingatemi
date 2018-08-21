@@ -5,6 +5,7 @@
 * Added a button to edit mote committments from the Spend Motes pop-up
 * QCs can now be marked as public just like Characters
 * Improved automated test suite
+* Better support for older browsers via [Polyfill.io](https://polyfill.io/)
 * Bug fixes
 
 ## v58-v59

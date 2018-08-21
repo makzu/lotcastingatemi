@@ -22,8 +22,8 @@ type Props = {
   label: string,
   value: number,
   onChange: Function,
-  min: number,
-  max: number,
+  min?: number,
+  max?: number,
   margin?: 'none' | 'dense' | 'normal',
   narrow?: boolean,
   dontFocus?: boolean,
@@ -53,6 +53,7 @@ class RatingField extends Component<Props, State> {
       return
     }
 
+    // $FlowThisIsOkayISwear
     let value = clamp(parseInt(e.target.value), min, max)
     const fakeE = { target: { name: e.target.name, value: value } }
 
@@ -69,8 +70,10 @@ class RatingField extends Component<Props, State> {
 
   handleBlur = (e: SyntheticInputEvent<>) => {
     if (isNaN(parseInt(this.state.value))) {
+      // $FlowThisIsOkayISwear
       this.setState({ value: Math.max(0, this.props.min) })
       this.props.onChange({
+        // $FlowThisIsOkayISwear
         target: { name: e.target.name, value: Math.max(0, this.props.min) },
       })
     }

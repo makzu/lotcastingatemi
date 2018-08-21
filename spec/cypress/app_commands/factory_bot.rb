@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Array.wrap(command_options).each do |factory_options|
   factory_method = factory_options.shift
   begin

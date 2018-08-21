@@ -15,7 +15,6 @@ type Props = {
   label: string,
   value: Array<string>,
   onChange: Function,
-  onBlur: Function,
   margin?: 'none' | 'dense' | 'normal',
   fullWidth?: boolean,
   classes: Object,
@@ -52,7 +51,6 @@ class TagsField extends Component<Props, State> {
     this.setState({ value: val.join(', ') })
     const updateObj = { target: { name: e.target.name, value: val } }
     this.props.onChange(updateObj)
-    this.props.onBlur(updateObj)
   }
 
   render() {

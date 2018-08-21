@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :charms_essence_charm, parent: :charm, class: 'Charms::EssenceCharm' do
-    type 'Charms::EssenceCharm'
+    type { 'Charms::EssenceCharm' }
   end
 end

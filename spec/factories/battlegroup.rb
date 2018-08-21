@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :battlegroup do
-    name 'Legion'
+    name { 'Legion' }
     chronicle
     player
   end

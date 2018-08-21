@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :charms_ability_charm, parent: :charm, class: 'Charms::AbilityCharm' do
-    type 'Charms::AbilityCharm'
-    ability 'bureaucracy'
-    min_ability 2
+    type { 'Charms::AbilityCharm' }
+    ability { 'bureaucracy' }
+    min_ability { 2 }
   end
 end

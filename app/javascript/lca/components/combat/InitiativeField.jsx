@@ -12,8 +12,6 @@ const styles = theme => ({
 })
 
 type Props = {
-  trait: string,
-  label: string,
   value: number,
   onChange: Function,
   classes: Object,

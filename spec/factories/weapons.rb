@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :weapon do
     character
-    weight 'light'
+    weight { 'light' }
   end
 end

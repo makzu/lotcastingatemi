@@ -35,7 +35,7 @@ const styles = theme => ({
 
 type Props = {
   current: number,
-  total: number,
+  total?: number,
   committed?: number,
   label: string,
   className?: string,

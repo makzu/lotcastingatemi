@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This is loaded once before the first command is executed
 
 begin

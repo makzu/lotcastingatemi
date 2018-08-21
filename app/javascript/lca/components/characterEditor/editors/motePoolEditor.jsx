@@ -149,10 +149,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
       </div>
 
       {character.type !== 'Character' && (
-        <MoteCommittmentEditor
-          character={character}
-          onChange={onChange}
-        />
+        <MoteCommittmentEditor character={character} onChange={onChange} />
       )}
     </BlockPaper>
   )

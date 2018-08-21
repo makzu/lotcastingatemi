@@ -12,7 +12,7 @@ export type Charm = traitBasics & {
   style?: string,
   artifact_name?: string,
   ability: string,
-  min_ability: string,
+  min_ability: number,
   cost: string,
   timing: string,
   duration: string,

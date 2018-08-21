@@ -21,6 +21,7 @@ const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
   return (
     <Fragment>
       <TextField
+        name="ritual"
         value={trait}
         className={classes.nameField}
         label="Ritual"

@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :charm do
     character
-    min_essence 1
+    min_essence { 1 }
   end
 end

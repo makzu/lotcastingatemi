@@ -59,7 +59,7 @@ type Props = {
   trait: string,
   label: string,
   newObject: Object | string,
-  nonObject: boolean,
+  nonObject?: boolean,
   Fields: Function,
   onChange: Function,
   classes: Object,

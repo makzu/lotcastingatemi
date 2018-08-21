@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :chronicle do
-    name 'Chronicle'
+    name { 'Chronicle' }
     st
   end
 end

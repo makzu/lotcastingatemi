@@ -3,12 +3,12 @@
 FactoryBot.define do
   factory :spell do
     character
-    name 'MyString'
-    circle 'terrestrial'
-    cost 'MyString'
-    keywords ['MyString']
-    body 'MyText'
-    ref 'MyString'
-    duration 'MyString'
+    name { 'MyString' }
+    circle { 'terrestrial' }
+    cost { 'MyString' }
+    keywords { ['MyString'] }
+    body { 'MyText' }
+    ref { 'MyString' }
+    duration { 'MyString' }
   end
 end

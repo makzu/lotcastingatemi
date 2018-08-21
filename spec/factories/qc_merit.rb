@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :qc_merit do
     qc
-    name 'Qc Merit'
+    name { 'Qc Merit' }
   end
 end

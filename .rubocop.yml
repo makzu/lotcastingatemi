@@ -2,6 +2,8 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   TargetRubyVersion: 2.5
   Include:
+    - app/**/*.rb
+    - spec/**/*.rb
     - Rakefile
     - config.ru
     - lib/**/*.rake

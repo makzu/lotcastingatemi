@@ -28,7 +28,7 @@ const styles = theme => ({
 
 type _AbilityLineProps = {
   ability: string,
-  rating: number,
+  rating?: number,
   character: Character,
   pools: Object,
   classes: Object,
@@ -107,7 +107,7 @@ function _CraftAbilityLine({
 const CraftAbilityLine = withStyles(styles)(_CraftAbilityLine)
 
 type _MartialArtsAbilityLineProps = {
-  style: string,
+  style?: string,
   rating: number,
   character: Character,
   pools: Object,

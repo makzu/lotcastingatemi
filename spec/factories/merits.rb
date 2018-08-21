@@ -3,9 +3,9 @@
 FactoryBot.define do
   factory :merit do
     character
-    rating 3
-    merit_name 'Merit'
-    merit_cat 'story'
+    rating { 3 }
+    merit_name { 'Merit' }
+    merit_cat { 'story' }
   end
 
   factory :invalid_merit, class: Merit do

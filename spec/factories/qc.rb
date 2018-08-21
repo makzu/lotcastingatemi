@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :qc do
-    name 'Prince'
+    name { 'Prince' }
     chronicle
     player
   end

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :dragonblood_character, parent: :character, class: DragonbloodCharacter do
-    type 'DragonbloodCharacter'
-    caste 'water'
+    type { 'DragonbloodCharacter' }
+    caste { 'water' }
   end
 end

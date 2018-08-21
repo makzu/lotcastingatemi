@@ -20,17 +20,17 @@ const styles = theme => ({
 })
 
 type Props = {
-  abilities: Array<Object>,
-  attributes: Array<Object>,
-  prependOptions: React.Node,
-  withAttributes: boolean,
-  attributesOnly: boolean,
-  multiple: boolean,
+  abilities?: Array<Object>,
+  attributes?: Array<Object>,
+  prependOptions?: React.Node,
+  withAttributes?: boolean,
+  attributesOnly?: boolean,
+  multiple?: boolean,
   name: string,
   value: string | Array<string>,
   label: string,
-  fullWidth: boolean,
-  margin: 'none' | 'dense' | 'normal',
+  fullWidth?: boolean,
+  margin?: 'none' | 'dense' | 'normal',
   classes: Object,
   onChange: Function,
 }

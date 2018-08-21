@@ -34,7 +34,7 @@ type StaticRating = {
 export type Pool = SoakPool &
   AttackPool &
   StaticRating & {
-    name: string,
+    name?: string,
     attribute?: string,
     attributeRating?: number,
     ability?: string,
@@ -48,7 +48,7 @@ export type Pool = SoakPool &
     penalties?: Array<Object>,
     totalPenalty?: number,
     total: number,
-    bonus: Array<PoolBonus>,
+    bonus?: Array<PoolBonus>,
     specialAttacks?: Array<string>,
     noSummary?: boolean,
   }

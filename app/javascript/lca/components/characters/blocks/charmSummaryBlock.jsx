@@ -104,7 +104,7 @@ type Props = {
   martialArtsCharms: Array<Charm>,
   evocations: Array<Charm>,
   spiritCharms: Array<Charm>,
-  spells: Array<Charm>,
+  spells: Array<Spell>,
 }
 function CharmSummaryBlock(props: Props) {
   const {

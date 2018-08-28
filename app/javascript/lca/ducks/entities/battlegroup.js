@@ -4,7 +4,7 @@ import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
 
 const CREATE = 'lca/battlegroup/CREATE'
-const CREATE_SUCCESS = 'lca/battlegroup/CREATE_SUCCESS'
+export const BG_CREATE_SUCCESS = 'lca/battlegroup/CREATE_SUCCESS'
 const CREATE_FAILURE = 'lca/battlegroup/CREATE_FAILURE'
 const UPDATE = 'lca/battlegroup/UPDATE'
 const UPDATE_SUCCESS = 'lca/battlegroup/UPDATE_SUCCESS'
@@ -36,7 +36,7 @@ export function createBattlegroup(bg: Object) {
     endpoint: `/api/v1/battlegroups`,
     method: 'POST',
     body: JSON.stringify({ battlegroup: bg }),
-    types: [CREATE, CREATE_SUCCESS, CREATE_FAILURE],
+    types: [CREATE, BG_CREATE_SUCCESS, CREATE_FAILURE],
   })
 }
 

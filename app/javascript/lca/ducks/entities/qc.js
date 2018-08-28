@@ -7,7 +7,7 @@ import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
 
 const QC_CREATE = 'lca/qc/CREATE'
-const QC_CREATE_SUCCESS = 'lca/qc/CREATE_SUCCESS'
+export const QC_CREATE_SUCCESS = 'lca/qc/CREATE_SUCCESS'
 const QC_CREATE_FAILURE = 'lca/qc/CREATE_FAILURE'
 const QC_FETCH = 'lca/qc/FETCH'
 export const QC_FETCH_SUCCESS = 'lca/qc/FETCH_SUCCESS'

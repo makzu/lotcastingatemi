@@ -8,6 +8,7 @@ import { apiMiddleware } from 'redux-api-middleware'
 
 import authTokenMiddleware from './middleware/authTokenMiddleware.js'
 import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
+import navigatorMiddleware from './middleware/navigatorMiddleware.js'
 
 import reducer from './ducks'
 import { lcaInit } from './ducks/actions.js'
@@ -22,7 +23,8 @@ const enhancer = makeEnhancer(
     thunk,
     apiMiddleware,
     authTokenMiddleware,
-    themeSaverMiddleware
+    themeSaverMiddleware,
+    navigatorMiddleware
   )
 )
 

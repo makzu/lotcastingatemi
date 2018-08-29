@@ -58,9 +58,16 @@ export default (
         if (character.anima_level > 0) result += character.essence
         break
       case 'otherability':
+        // TODO: add a highestOtherAbility() here
         break
       case 'otherattribute':
         result += highestOtherAttribute(character, attribute)
+        break
+      case 'anima':
+        result += character.anima_level
+        break
+      case 'subtleanima':
+        result += 3 - character.anima_level
         break
     }
   }

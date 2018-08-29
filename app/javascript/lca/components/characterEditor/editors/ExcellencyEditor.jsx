@@ -76,6 +76,12 @@ class ExcellencyEditor extends Component<Props, State> {
       <MenuItem key="otherattribute" value="otherattribute">
         Another Attribute (will select highest available)
       </MenuItem>,
+      <MenuItem key="anima" value="anima">
+        Anima (Dim: 0, Glowing: 1, Burning: 2, Bonfire: 3)
+      </MenuItem>,
+      <MenuItem key="subtleanima" value="subtleanima">
+        3 - Anima value (Dim: 3, Glowing: 2, Burning: 1, Bonfire: 0)
+      </MenuItem>,
       <MenuItem key="roundup" value="roundup">
         Round cap up for static ratings
       </MenuItem>,

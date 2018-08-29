@@ -51,7 +51,7 @@ function SolarExaltEditor({ character, onChange }: Props) {
       <AbilitySelect
         name="caste_abilities"
         label="Caste Abilities"
-        value={character.caste_abilities}
+        value={character.caste_abilities || []}
         abilities={casteAbilities}
         onChange={onChange}
         prependOptions={noOptionItem}

@@ -66,7 +66,7 @@ export const SpellSummaryBlock = (props: SpellSummaryBlockProps) => {
 
 export type SpellDisplayProps = {
   spell: Spell,
-  openSpell: number,
+  openSpell: number | null,
   onOpenChange: Function,
   classes: Object,
 }
@@ -100,13 +100,15 @@ function SpellDisplay(props: SpellDisplayProps) {
             <strong>Circle:</strong>{' '}
             <span className={classes.capitalize}>{spell.circle}</span>
             <br />
-            <strong>Cost:</strong> {spell.cost};&nbsp;
+            <strong>Cost:</strong> {spell.cost}
+            ;&nbsp;
             <strong>Keywords:</strong>{' '}
             <span className={classes.capitalize}>
               {spell.keywords.join(', ') || 'None'}
             </span>
             <br />
-            <strong>Duration:</strong>&nbsp;
+            <strong>Duration:</strong>
+            &nbsp;
             <span className={classes.capitalize}>{spell.duration}</span>
           </Typography>
 

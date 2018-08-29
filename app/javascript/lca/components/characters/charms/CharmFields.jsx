@@ -44,7 +44,7 @@ type Props = {
   character: Character,
   onUpdate: Function,
   onRemove: Function,
-  openCharm: number,
+  openCharm: number | null,
   onOpenChange: Function,
   classes: Object,
 }
@@ -130,7 +130,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
             {charm.charm_type === 'Evocation' && (
               <TextField
                 name="artifact_name"
-                value={charm.artifact_name}
+                value={charm.artifact_name || ''}
                 onChange={handleChange}
                 label="Artifact Name"
                 margin="dense"
@@ -139,7 +139,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
             {charm.charm_type === 'MartialArts' && (
               <TextField
                 name="style"
-                value={charm.style}
+                value={charm.style || ''}
                 onChange={handleChange}
                 label="Style"
                 margin="dense"
@@ -157,7 +157,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               onChange={handleChange}
               label="Cost"
               margin="dense"
-            />&nbsp;&nbsp;
+            />
             {charm.charm_type === 'Ability' && (
               <AbilitySelect
                 name="ability"
@@ -220,7 +220,8 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               name="timing"
               value={charm.timing}
               onChange={handleChange}
-            />&nbsp;&nbsp;
+            />
+            &nbsp;&nbsp;
             <TextField
               name="duration"
               value={charm.duration}

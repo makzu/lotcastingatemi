@@ -14,6 +14,7 @@ import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import sharedStyles from 'styles/'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
+import type { Battlegroup } from 'utils/flow-types'
 
 const styles = theme => ({
   ...sharedStyles(theme),
@@ -52,13 +53,11 @@ const styles = theme => ({
 })
 
 type Props = {
-  battlegroup: Object,
+  battlegroup: Battlegroup,
   classes: Object,
 }
 
-function BattlegroupCard(props: Props) {
-  const { battlegroup, classes } = props
-
+function BattlegroupCard({ battlegroup, classes }: Props) {
   return (
     <Paper className={classes.root}>
       <div className={classes.flexContainer}>
@@ -150,7 +149,8 @@ function BattlegroupCard(props: Props) {
 
       {battlegroup.onslaught > 0 && (
         <Typography paragraph style={{ marginTop: '0.5em' }}>
-          <strong>Penalties:</strong>&nbsp; Onslaught -{battlegroup.onslaught}
+          <strong>Penalties:</strong>
+          &nbsp; Onslaught -{battlegroup.onslaught}
         </Typography>
       )}
 

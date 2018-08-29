@@ -32,7 +32,8 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
   if (spending < 5 || current === 3)
     return (
       <Typography>
-        No change to anima{current === 3 && ' (already at Bonfire)'}
+        No change to anima
+        {current === 3 && ' (already at Bonfire)'}
       </Typography>
     )
   if (mute) return <Typography>Will not change anima (mute)</Typography>

@@ -78,7 +78,8 @@ class QcEditor extends Component<Props> {
                 style={{ color: 'inherit' }}
               >
                 <em>Hundred Devils Night Parade</em>
-              </a>.
+              </a>
+              .
             </Typography>
             <TextField
               name="name"

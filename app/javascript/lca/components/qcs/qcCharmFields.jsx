@@ -67,7 +67,8 @@ export default class QcCharmFields extends Component<Props> {
           name="timing"
           value={charm.timing}
           onChange={handleChange}
-        />&nbsp;&nbsp;
+        />
+        &nbsp;&nbsp;
         <TextField
           name="duration"
           value={charm.duration}

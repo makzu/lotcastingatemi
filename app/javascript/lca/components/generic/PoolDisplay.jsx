@@ -135,7 +135,8 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               <span className={classes.pool}>{pool.total}</span>
               {(pool.excellency || 0) > 0 && (
                 <span className={classes.excellency}>
-                  &nbsp;+{pool.excellency}/{pool.excellencyCost}m
+                  &nbsp;+
+                  {pool.excellency}/{pool.excellencyCost}m
                 </span>
               )}
               {(pool.minimum || 0) > 0 && (
@@ -163,15 +164,20 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               Total: <span className={classes.pool}>{pool.total}</span>
               {(pool.excellency || 0) > 0 && (
                 <span>
-                  &nbsp;&nbsp;&nbsp; Can add up to {pool.excellency}&nbsp;
+                  &nbsp;&nbsp;&nbsp; Can add up to {pool.excellency}
+                  &nbsp;
                   {!pool.rating && (
-                    <span>di{pool.excellency === 1 ? 'e' : 'ce'} </span>
+                    <span>
+                      di
+                      {pool.excellency === 1 ? 'e ' : 'ce '}
+                    </span>
                   )}
                   for {pool.excellencyCost}m
                   {(pool.excellencyStunt || 0) > 0 && (
                     <span>
-                      ({pool.excellencyStunt} for {pool.excellencyStuntCost}
-                      m on stunt)
+                      &nbsp;(
+                      {pool.excellencyStunt} for {pool.excellencyStuntCost}m on
+                      stunt)
                     </span>
                   )}
                 </span>
@@ -244,13 +250,15 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                   <Fragment>
                     {pool.specialtyMatters && (
                       <div>
-                        Specialt{sp.length === 1 ? 'y ' : 'ies '}
+                        Specialt
+                        {sp.length === 1 ? 'y ' : 'ies '}
                         <strong>will</strong> increase rating by 1
                       </div>
                     )}
                     {!pool.specialtyMatters && (
                       <div>
-                        Specialt{sp.length === 1 ? 'y ' : 'ies '}
+                        Specialt
+                        {sp.length === 1 ? 'y ' : 'ies '}
                         <strong>will not</strong> affect rating
                       </div>
                     )}

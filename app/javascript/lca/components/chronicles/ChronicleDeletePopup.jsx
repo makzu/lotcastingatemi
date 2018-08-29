@@ -51,7 +51,8 @@ class ChronicleLeavePopup extends Component<Props, { open: boolean }> {
     return (
       <Fragment>
         <Button onClick={handleOpen}>
-          Delete Chronicle &nbsp;<Delete />
+          Delete Chronicle &nbsp;
+          <Delete />
         </Button>
 
         <Dialog open={this.state.open} onClose={handleClose}>

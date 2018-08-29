@@ -106,7 +106,8 @@ class CharmFilter extends Component<Props> {
       <Fragment>
         <Button onClick={toggleOpen}>
           Filter{' '}
-          <Hidden mdDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>&nbsp;
+          <Hidden mdDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
+          &nbsp;
           <Filter />
         </Button>
         {open && (

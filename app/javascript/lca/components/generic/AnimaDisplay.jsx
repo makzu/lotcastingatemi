@@ -42,6 +42,7 @@ const styles = theme => ({
     display: 'inline-block',
     verticalAlign: 'top',
     marginTop: '0.25em',
+    marginLeft: '0.25em',
   },
 })
 
@@ -98,7 +99,7 @@ class AnimaDisplay extends Component<Props, State> {
               </span>
               {character.anima_level > 0 && (
                 <span className={classes.animaValue}>
-                  &nbsp;({character.anima_level})
+                  ({character.anima_level})
                 </span>
               )}
             </div>
@@ -149,9 +150,9 @@ const mapDispatchToProps = (dispatch: Function, props) => ({
 })
 
 export default compose(
-  withStyles(styles),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  withStyles(styles)
 )(AnimaDisplay)

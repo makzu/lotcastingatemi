@@ -38,7 +38,7 @@ type Props = {
   character: Character,
   onUpdate: Function,
   onRemove: Function,
-  openSpell: number,
+  openSpell: number | null,
   onOpenChange: Function,
   classes: Object,
 }
@@ -152,7 +152,8 @@ class SpellFields extends Component<Props> {
               <MenuItem value="terrestrial">Terrestrial</MenuItem>
               <MenuItem value="celestial">Celestial</MenuItem>
               <MenuItem value="solar">Solar</MenuItem>
-            </MuiTextField>&nbsp;&nbsp;
+            </MuiTextField>
+            &nbsp;&nbsp;
             <FormControlLabel
               label="Control Spell"
               control={

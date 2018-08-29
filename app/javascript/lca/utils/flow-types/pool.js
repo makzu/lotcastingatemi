@@ -47,7 +47,7 @@ export type Pool = SoakPool &
     excellencyStuntCost?: number,
     penalties?: Array<Object>,
     totalPenalty?: number,
-    total: number,
+    total: number | string,
     bonus?: Array<PoolBonus>,
     specialAttacks?: Array<string>,
     noSummary?: boolean,

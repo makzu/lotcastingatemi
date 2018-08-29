@@ -2,6 +2,7 @@
 import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
@@ -156,4 +157,7 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(QcAttackFields))
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles)
+)(QcAttackFields)

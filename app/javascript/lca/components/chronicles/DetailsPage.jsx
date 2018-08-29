@@ -76,7 +76,8 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
     const playerList = players.map(p => (
       <Fragment key={p.id}>
         <Typography>
-          {p.display_name}&nbsp;&nbsp;
+          {p.display_name}
+          &nbsp;&nbsp;
           {is_st && (
             <RemovePlayerPopup chronicleId={chronicle.id} playerId={p.id} />
           )}

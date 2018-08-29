@@ -73,7 +73,7 @@ export const CharmSummaryBlock = ({ charm, isOpen, classes }: BlockProps) => (
   </Collapse>
 )
 
-type dProps = Props & { openCharm: number, onOpenChange: Function }
+type dProps = Props & { openCharm: number | null, onOpenChange: Function }
 function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
   const isOpen = openCharm === charm.id
   return (

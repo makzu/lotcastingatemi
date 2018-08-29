@@ -378,7 +378,8 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="headline">
                   Charms &nbsp;&nbsp;
                   <Button onClick={handleAddNative}>
-                    Add <Hidden smDown>Charm</Hidden>&nbsp;
+                    Add <Hidden smDown>Charm</Hidden>
+                    &nbsp;
                     <ContentAddCircle />
                   </Button>
                   <CharmFilter
@@ -403,7 +404,8 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="headline">
                   Martial Arts &nbsp;&nbsp;
                   <Button onClick={handleAddMA}>
-                    Add <Hidden smDown>MA Charm</Hidden>&nbsp;
+                    Add <Hidden smDown>MA Charm</Hidden>
+                    &nbsp;
                     <ContentAddCircle />
                   </Button>
                   <CharmFilter
@@ -428,7 +430,8 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="headline">
                   Evocations &nbsp;&nbsp;
                   <Button onClick={handleAddEvocation}>
-                    Add <Hidden smDown>Evocation</Hidden>&nbsp;
+                    Add <Hidden smDown>Evocation</Hidden>
+                    &nbsp;
                     <ContentAddCircle />
                   </Button>
                   <CharmFilter
@@ -453,7 +456,8 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="headline">
                   Spirit Charms &nbsp;&nbsp;
                   <Button onClick={handleAddSpirit}>
-                    Add <Hidden smDown>Spirit Charm</Hidden>&nbsp;
+                    Add <Hidden smDown>Spirit Charm</Hidden>
+                    &nbsp;
                     <ContentAddCircle />
                   </Button>
                   <CharmFilter

@@ -131,7 +131,10 @@ function _MartialArtsAbilityLine({
   return (
     <Fragment>
       <RatingLine rating={rating}>
-        <span className={classes.abilityName}>Martial Arts{s}</span>
+        <span className={classes.abilityName}>
+          Martial Arts
+          {s}
+        </span>
         <span className={classes.abilityFavored}>
           {excellency && ' *'}
           {supernal && ' (s)'}

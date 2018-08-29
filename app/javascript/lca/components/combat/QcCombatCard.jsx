@@ -127,7 +127,8 @@ function QcCard(props: Props) {
         penalties.onslaught > 0 ||
         penalties.wound > 0) && (
         <Typography paragraph style={{ marginTop: '0.5em' }}>
-          <strong>Penalties:</strong>&nbsp;
+          <strong>Penalties:</strong>
+          &nbsp;
           {penalties.mobility > 0 && (
             <span>Mobility -{penalties.mobility} </span>
           )}
@@ -150,6 +151,6 @@ function mapStateToProps(state, props) {
 }
 
 export default compose(
-  withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  withStyles(styles)
 )(QcCard)

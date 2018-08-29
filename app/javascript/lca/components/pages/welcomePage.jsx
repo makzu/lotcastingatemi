@@ -19,9 +19,12 @@ const WelcomePage = () => (
           Lot-Casting Atemi
         </Typography>
         <Typography gutterBottom>
-          <strong>Cost:</strong> 15m, 1wp, <strong>Mins:</strong> Essence 2<br />
-          <strong>Type:</strong> Simple<br />
-          <strong>Keywords:</strong> None<br />
+          <strong>Cost:</strong> 15m, 1wp, <strong>Mins:</strong> Essence 2
+          <br />
+          <strong>Type:</strong> Simple
+          <br />
+          <strong>Keywords:</strong> None
+          <br />
           <strong>Duration:</strong> One scene
         </Typography>
         <Typography>

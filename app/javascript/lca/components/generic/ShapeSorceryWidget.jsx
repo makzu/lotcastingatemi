@@ -2,6 +2,7 @@
 import * as React from 'react'
 const { Component, Fragment } = React
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -171,9 +172,10 @@ function mapDispatchToProps(dispatch: Function, props) {
   }
 }
 
-export default withStyles(styles)(
+export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(ShapeSorceryWidget)
-)
+  ),
+  withStyles(styles)
+)(ShapeSorceryWidget)

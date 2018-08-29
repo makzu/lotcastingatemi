@@ -7,7 +7,6 @@ export { soak, naturalSoak, armorSoak } from './soak.js'
 
 type withApp = { attr_appearance: number }
 export function appearanceRating(character: withApp, merits: Array<string>) {
-  // eslint-disable-line no-unused-vars
   let bonus = []
 
   let hideous = merits.find(m => m.startsWith('hideous'))

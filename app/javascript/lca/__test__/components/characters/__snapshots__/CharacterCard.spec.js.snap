@@ -22,7 +22,7 @@ exports[`CharacterCard works for Solars 1`] = `
         variant="title"
       >
         
-        <pure(Whatshot) />
+        <pure(WhatshotIcon) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -470,7 +470,7 @@ exports[`CharacterCard works for Solars 2`] = `
         variant="title"
       >
         
-        <pure(Whatshot) />
+        <pure(WhatshotIcon) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -942,7 +942,7 @@ exports[`CharacterCard works for Solars 3`] = `
         variant="title"
       >
         qÓ
-        <pure(Whatshot) />
+        <pure(WhatshotIcon) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -1482,7 +1482,7 @@ exports[`CharacterCard works for Solars 4`] = `
         variant="title"
       >
         ÷È
-        <pure(Whatshot) />
+        <pure(WhatshotIcon) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}
@@ -1935,7 +1935,7 @@ exports[`CharacterCard works for Solars 5`] = `
         variant="title"
       >
         L
-        <pure(Whatshot) />
+        <pure(WhatshotIcon) />
       </WithStyles(Typography)>
       <WithStyles(Typography)
         paragraph={true}

@@ -198,9 +198,8 @@ class QcSheet extends Component<Props> {
     ))
     const charms = qc_charms.map(charm => (
       <div key={charm.id}>
-        <strong>{charm.name} </strong>
-        (
-        {charm.cost}; {charm.timing}; {charm.duration}; Essence&nbsp;
+        <strong>{charm.name} </strong>({charm.cost}; {charm.timing};{' '}
+        {charm.duration}; Essence&nbsp;
         {charm.min_essence}
         )&nbsp;
         <ReactMarkdown source={charm.body} className={classes.markdown} />

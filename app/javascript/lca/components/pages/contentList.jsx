@@ -91,7 +91,8 @@ class ContentList extends Component<Props> {
         <SortableGridList
           header={
             <Typography variant="headline">
-              Characters &nbsp;<CharacterCreatePopup />
+              Characters &nbsp;
+              <CharacterCreatePopup />
             </Typography>
           }
           items={chars}
@@ -106,7 +107,8 @@ class ContentList extends Component<Props> {
         <SortableGridList
           header={
             <Typography variant="headline">
-              Quick Characters &nbsp;<QcCreatePopup />
+              Quick Characters &nbsp;
+              <QcCreatePopup />
             </Typography>
           }
           items={qcs}
@@ -121,7 +123,8 @@ class ContentList extends Component<Props> {
         <SortableGridList
           header={
             <Typography variant="headline">
-              Battlegroups &nbsp;<BattlegroupCreatePopup />
+              Battlegroups &nbsp;
+              <BattlegroupCreatePopup />
             </Typography>
           }
           items={bgs}

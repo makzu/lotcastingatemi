@@ -140,9 +140,9 @@ const mapDispatchToProps = (dispatch: Function, props) => ({
 })
 
 export default compose(
-  withStyles(styles),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  withStyles(styles)
 )(AuraDisplay)

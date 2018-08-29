@@ -1,5 +1,5 @@
 // @flow
-import type { fullQc } from 'utils/flow-types'
+import type { fullQc, PoolBonus } from 'utils/flow-types'
 
 function qcExcellencyPoolCap(qc, pool, stunt = false) {
   if (stunt && qc.excellency != 'lunar') return 0
@@ -67,7 +67,7 @@ export function qcPool(
   qc: fullQc,
   pool: number,
   penalties: number = 0,
-  merits: Array<string> = [],
+  merits: Array<PoolBonus> = [],
   addExcellency: boolean = true
 ) {
   const excellency = addExcellency ? qcExcellencyPoolCap(qc, pool) : 0

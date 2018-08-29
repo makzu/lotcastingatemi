@@ -51,7 +51,7 @@ function CustomAbilityExaltEditor({ character, onChange, onCheck }: Props) {
       <AbilitySelect
         name="caste_abilities"
         label="Caste Abilities"
-        value={character.caste_abilities}
+        value={character.caste_abilities || []}
         onChange={onChange}
         multiple
         fullWidth

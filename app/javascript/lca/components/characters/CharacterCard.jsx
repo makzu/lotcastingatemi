@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -137,7 +138,8 @@ export function CharacterCard({
 
             {character.hidden && (
               <div className={classes.hiddenLabel}>
-                <VisibilityOff className={classes.icon} />&nbsp; Hidden
+                <VisibilityOff className={classes.icon} />
+                &nbsp; Hidden
               </div>
             )}
           </Typography>
@@ -211,7 +213,8 @@ export function CharacterCard({
         penalties.onslaught !== 0 ||
         penalties.wound !== 0) && (
         <Typography paragraph style={{ marginTop: '0.5em' }}>
-          <strong>Penalties:</strong>&nbsp;
+          <strong>Penalties:</strong>
+          &nbsp;
           {penalties.mobility > 0 && (
             <span>Mobility -{penalties.mobility} </span>
           )}
@@ -230,4 +233,7 @@ const mapStateToProps = (state, props) => ({
   pools: getPoolsAndRatings(state, props.character.id),
 })
 
-export default withStyles(styles)(connect(mapStateToProps)(CharacterCard))
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles)
+)(CharacterCard)

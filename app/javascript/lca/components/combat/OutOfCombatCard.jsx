@@ -75,7 +75,8 @@ function OutOfCombatCard({
 
             {character.hidden && (
               <div className={classes.hiddenLabel}>
-                <VisibilityOff className={classes.icon} />&nbsp; Hidden
+                <VisibilityOff className={classes.icon} />
+                &nbsp; Hidden
               </div>
             )}
           </Typography>
@@ -126,9 +127,9 @@ function mapDispatchToProps(dispatch: Function, props) {
 }
 
 export default compose(
-  withStyles(styles),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  withStyles(styles)
 )(OutOfCombatCard)

@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -202,7 +203,8 @@ function BattlegroupCard(props: Props) {
 
       {battlegroup.onslaught > 0 && (
         <Typography paragraph style={{ marginTop: '0.5em' }}>
-          <strong>Penalties:</strong>&nbsp; Onslaught -{battlegroup.onslaught}
+          <strong>Penalties:</strong>
+          &nbsp;Onslaught -{battlegroup.onslaught}
         </Typography>
       )}
     </Paper>
@@ -212,4 +214,7 @@ const mapStateToProps = (state, props) => ({
   isOwner: doIOwnBattlegroup(state, props.battlegroup.id),
 })
 
-export default withStyles(styles)(connect(mapStateToProps)(BattlegroupCard))
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles)
+)(BattlegroupCard)

@@ -33,6 +33,8 @@ export function prettyDrillRating(battlegroup: Battlegroup) {
       return 'Average'
     case 2:
       return 'Elite'
+    default:
+      return 'N/A'
   }
 }
 

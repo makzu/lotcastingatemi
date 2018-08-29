@@ -90,6 +90,7 @@ class CombatDashboard extends Component<Props> {
       <Grid item xs={12} md={6} xl={4} key={c.id + c.name}>
         {c.type.includes('Character') && <CharacterCard character={c} />}
         {c.type === 'qc' && <QcCard qc={c} />}
+        {/* $FlowThisIsOkayISwear */}
         {c.type === 'battlegroup' && <BattlegroupCard battlegroup={c} />}
       </Grid>
     ))
@@ -112,8 +113,9 @@ class CombatDashboard extends Component<Props> {
           )}
           {inCombatEntities.length > 0 && (
             <Typography variant="subheading">
-              Current Initiative: {nextCharacter ? nextCharacter.initiative : 0}&nbsp;
-              Next up: {nextCharacter ? nextCharacter.name : 'Round over!'}
+              Current Initiative: {nextCharacter ? nextCharacter.initiative : 0}
+              &nbsp; Next up:{' '}
+              {nextCharacter ? nextCharacter.name : 'Round over!'}
               &nbsp;
               {this.props.is_st && (
                 <Fragment>

@@ -28,6 +28,7 @@ const styles = theme => ({
   meritName: {
     ...theme.typography.caption,
     textTransform: 'capitalize',
+    marginLeft: theme.spacing.unit,
   },
 })
 
@@ -38,9 +39,7 @@ const _SingleMerit = ({ merit, classes }: _SingleMeritProps) => (
       <RatingLine rating={merit.rating} dontFill merit>
         <span className={classes.name}>{merit.label || merit.merit_name}</span>
         {merit.label && (
-          <span className={classes.meritName}>
-            &nbsp;&nbsp;({merit.merit_name})
-          </span>
+          <span className={classes.meritName}>({merit.merit_name})</span>
         )}
       </RatingLine>
     </Typography>

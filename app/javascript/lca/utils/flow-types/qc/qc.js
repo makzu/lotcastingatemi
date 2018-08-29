@@ -49,6 +49,7 @@ export type QcAttack = {
   range: string,
   tags: Array<string>,
   qc_attackable_type: 'Qc' | 'Battlegroup',
+  qc_attackable_id: number,
 }
 
 export type QcMerit = {

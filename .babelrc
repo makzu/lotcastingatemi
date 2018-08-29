@@ -1,29 +1,35 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": "> 1%",
-        "uglify": true
-      },
-      "useBuiltIns": true
-    }],
-    "flow",
-    "react"
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": "> 1%",
+          "uglify": true
+        },
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-flow"
   ],
-
   "plugins": [
     "react-hot-loader/babel",
-    "syntax-dynamic-import",
-    "syntax-flow",
-    "transform-react-jsx-source",
-    "transform-object-rest-spread",
-    ["transform-class-properties", { "spec": true }]
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-syntax-flow",
+    "@babel/plugin-transform-react-jsx-source",
+    "@babel/plugin-proposal-object-rest-spread",
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "spec": true
+      }
+    ]
   ],
-
   "env": {
     "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
     }
   }
 }

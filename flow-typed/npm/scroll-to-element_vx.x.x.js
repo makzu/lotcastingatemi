@@ -1,4 +1,4 @@
-// flow-typed signature: 89ba5affabf07ab453d928ae362ca36a
+// flow-typed signature: 040678a3a73e0b5c23a46e888675352a
 // flow-typed version: <<STUB>>/scroll-to-element_v^2.0.0/flow_v0.79.1
 
 /**
@@ -22,17 +22,52 @@ declare module 'scroll-to-element' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'scroll-to-element/example' {
+declare module 'scroll-to-element/build/scrollToElement' {
+  declare module.exports: any;
+}
+
+declare module 'scroll-to-element/ease' {
+  declare module.exports: any;
+}
+
+declare module 'scroll-to-element/emitter' {
+  declare module.exports: any;
+}
+
+declare module 'scroll-to-element/examples/example' {
+  declare module.exports: any;
+}
+
+declare module 'scroll-to-element/scroll-to' {
+  declare module.exports: any;
+}
+
+declare module 'scroll-to-element/tween' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'scroll-to-element/example.js' {
-  declare module.exports: $Exports<'scroll-to-element/example'>;
+declare module 'scroll-to-element/build/scrollToElement.js' {
+  declare module.exports: $Exports<'scroll-to-element/build/scrollToElement'>;
+}
+declare module 'scroll-to-element/ease.js' {
+  declare module.exports: $Exports<'scroll-to-element/ease'>;
+}
+declare module 'scroll-to-element/emitter.js' {
+  declare module.exports: $Exports<'scroll-to-element/emitter'>;
+}
+declare module 'scroll-to-element/examples/example.js' {
+  declare module.exports: $Exports<'scroll-to-element/examples/example'>;
 }
 declare module 'scroll-to-element/index' {
   declare module.exports: $Exports<'scroll-to-element'>;
 }
 declare module 'scroll-to-element/index.js' {
   declare module.exports: $Exports<'scroll-to-element'>;
+}
+declare module 'scroll-to-element/scroll-to.js' {
+  declare module.exports: $Exports<'scroll-to-element/scroll-to'>;
+}
+declare module 'scroll-to-element/tween.js' {
+  declare module.exports: $Exports<'scroll-to-element/tween'>;
 }

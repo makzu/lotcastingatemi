@@ -1,3 +1,7 @@
+## v61
+###### *Not yet released*
+No changes (yet)
+
 ## v60
 ###### *Aug 20, 2018*
 * A new 'Bio' tab has been added to Character sheets with spots for Lore background, iconic Anima display, a portrait link, and generic notes

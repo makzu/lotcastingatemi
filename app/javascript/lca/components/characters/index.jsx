@@ -10,6 +10,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
 
+import CharacterLoadError from './CharacterLoadError.jsx'
 import AbilityBlock from './blocks/abilityBlock.jsx'
 import ArmorSummary from './blocks/armorSummary.jsx'
 import AttributeBlock from './blocks/attributeBlock.jsx'
@@ -150,12 +151,7 @@ type Props = {
 export class CharacterSheet extends Component<Props> {
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined)
-      return (
-        <div>
-          <Typography paragraph>This Character has not yet loaded.</Typography>
-        </div>
-      )
+    if (this.props.character == undefined) return <CharacterLoadError />
 
     const { character, merits, weapons, pools, penalties, canEdit } = this.props
     const showLimit =

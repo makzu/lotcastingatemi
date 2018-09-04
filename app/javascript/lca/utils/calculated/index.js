@@ -187,9 +187,13 @@ export function prettyFullExaltType(character) {
   if (character.type == 'Character')
     return character.is_sorcerer ? 'Non-Exalt Sorcerer' : 'Mortal'
 
-  return `${capitalize(character.caste || '?')} ${
-    character.aspect ? 'Aspect' : 'Caste'
-  } ${prettyExaltType(character) || 'Exalt'}`
+  let caste =
+    character.caste === ''
+      ? ''
+      : capitalize(character.caste) +
+        (character.aspect ? ' Aspect ' : ' Caste ')
+
+  return `${caste}${prettyExaltType(character) || 'Exalt'}`
 }
 
 export function exaltTypeBase(character) {

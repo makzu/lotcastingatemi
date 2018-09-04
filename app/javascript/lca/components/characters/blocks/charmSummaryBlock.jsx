@@ -54,8 +54,7 @@ function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
       <Typography component="div" className={classes.root}>
         <div className={classes.name}>{charm.name}</div>
         <div className={classes.info}>
-          (
-          {charm.cost && charm.cost != '-' && charm.cost + ', '}
+          ({charm.cost && charm.cost != '-' && charm.cost + ', '}
           {charm.timing}
           {charm.duration && ', ' + charm.duration}
           {charm.keywords.length > 0 &&
@@ -82,9 +81,8 @@ function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
       <Typography component="div" className={classes.root}>
         <div className={classes.name}>{spell.name}</div>
         <div className={classes.info}>
-          {spell.control && '(Control Spell) '}
-          (
-          {spell.cost},&nbsp;
+          {spell.control && '(Control Spell) '}({spell.cost}
+          ,&nbsp;
           {spell.duration}
           {spell.keywords.length > 0 &&
             ', keywords: ' + spell.keywords.join(', ')}

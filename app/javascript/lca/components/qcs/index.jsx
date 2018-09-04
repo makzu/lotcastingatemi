@@ -86,6 +86,7 @@ type Props = {
   penalties: Object,
   classes: Object,
   canEdit: boolean,
+  loading: boolean,
 }
 
 class QcSheet extends Component<Props> {
@@ -93,9 +94,11 @@ class QcSheet extends Component<Props> {
     /* Escape hatch */
     if (this.props.qc == undefined)
       return (
-        <div>
-          <Typography paragraph>This QC has not yet loaded.</Typography>
-        </div>
+        <Typography paragraph>
+          {this.props.loading
+            ? 'This QC has not yet loaded.'
+            : 'Could not load QC. It may not be publicly viewable.'}
+        </Typography>
       )
 
     const {
@@ -378,6 +381,7 @@ function mapStateToProps(state, props) {
     penalties,
     pools,
     canEdit: canIEditQc(state, id),
+    loading: state.app.loading,
   }
 }
 

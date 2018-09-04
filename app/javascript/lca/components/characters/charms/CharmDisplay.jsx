@@ -29,17 +29,20 @@ export const PrereqSummaryLine = ({ charm, classes }: Props) => (
   <Typography variant="caption">
     {showEvo(charm) && (
       <span className={classes.capitalize}>
-        Evocation of {charm.artifact_name},&nbsp;
+        Evocation of {charm.artifact_name}
+        ,&nbsp;
       </span>
     )}
     {charm.ability && (
       <span className={classes.capitalize}>
-        {charm.ability} {charm.min_ability},&nbsp;
+        {charm.ability} {charm.min_ability}
+        ,&nbsp;
       </span>
     )}
     {charm.charm_type === 'MartialArts' && (
       <span className={classes.capitalize}>
-        {charm.style} style {charm.min_ability},&nbsp;
+        {charm.style} style {charm.min_ability}
+        ,&nbsp;
       </span>
     )}
     Essence {charm.min_essence}
@@ -99,26 +102,32 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
       <ExpansionPanelDetails>
         <div className={classes.detailsWrap}>
           <Typography>
-            <strong>Cost:</strong> {charm.cost};&nbsp;
-            <strong>Mins:</strong>&nbsp;
+            <strong>Cost:</strong> {charm.cost}
+            ;&nbsp;
+            <strong>Mins:</strong>
+            &nbsp;
             {charm.ability && (
               <span className={classes.capitalize}>
-                {charm.ability} {charm.min_ability},&nbsp;
+                {charm.ability} {charm.min_ability}
+                ,&nbsp;
               </span>
             )}
             {charm.charm_type === 'MartialArts' && (
               <span className={classes.capitalize}>
-                Martial Arts ({charm.style} style) {charm.min_ability},&nbsp;
+                Martial Arts ({charm.style} style) {charm.min_ability}
+                ,&nbsp;
               </span>
             )}
             Essence {charm.min_essence}
             <br />
-            <strong>Type:</strong>&nbsp;
+            <strong>Type:</strong>
+            &nbsp;
             <span className={classes.capitalize}>{charm.timing}</span>
             <br />
             <strong>Keywords:</strong> {charm.keywords.join(', ') || 'None'}
             <br />
-            <strong>Duration:</strong>&nbsp;
+            <strong>Duration:</strong>
+            &nbsp;
             <span className={classes.capitalize}>{charm.duration}</span>
             <br />
             <strong>Prerequisite Charms:</strong> {charm.prereqs || 'None'}

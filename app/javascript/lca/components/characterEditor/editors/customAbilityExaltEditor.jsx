@@ -22,6 +22,7 @@ function CustomAbilityExaltEditor({ character, onChange, onCheck }: Props) {
           name="caste"
           value={character.caste}
           label={character.aspect ? 'Aspect' : 'Caste'}
+          helperText="(Optional)"
           onChange={onChange}
           margin="dense"
         />

@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
+import CharacterLoadError from './CharacterLoadError.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
 
@@ -62,12 +63,7 @@ type Props = { character: Character, merits: Array<Merit> }
 class MeritFullPage extends Component<Props> {
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined)
-      return (
-        <div>
-          <Typography paragraph>This Character has not yet loaded.</Typography>
-        </div>
-      )
+    if (this.props.character == undefined) return <CharacterLoadError />
 
     const mts = this.props.merits.map(m => (
       <Grid item xs={12} md={6} xl={4} key={m.id}>

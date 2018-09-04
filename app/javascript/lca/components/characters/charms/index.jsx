@@ -12,6 +12,7 @@ import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
+import CharacterLoadError from '../CharacterLoadError.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import {
@@ -79,12 +80,7 @@ class CharmFullPage extends Component<Props, State> {
 
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined)
-      return (
-        <div>
-          <Typography paragraph>This Character has not yet loaded.</Typography>
-        </div>
-      )
+    if (this.props.character == undefined) return <CharacterLoadError />
 
     const {
       character,

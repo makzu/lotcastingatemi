@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
+import CharacterLoadError from './CharacterLoadError.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import sharedStyles from 'styles/'
@@ -32,12 +33,7 @@ type Props = { character: Character, classes: Object }
 class BioFullPage extends Component<Props> {
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined)
-      return (
-        <div>
-          <Typography paragraph>This Character has not yet loaded.</Typography>
-        </div>
-      )
+    if (this.props.character == undefined) return <CharacterLoadError />
 
     const { character, classes } = this.props
 

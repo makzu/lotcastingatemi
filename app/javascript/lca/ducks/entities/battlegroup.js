@@ -6,6 +6,13 @@ import type { EntityState } from './'
 const CREATE = 'lca/battlegroup/CREATE'
 export const BG_CREATE_SUCCESS = 'lca/battlegroup/CREATE_SUCCESS'
 const CREATE_FAILURE = 'lca/battlegroup/CREATE_FAILURE'
+const CREATE_FROM_QC = 'lca/battlegroup/CREATE_FROM_QC'
+export const BG_CREATE_FROM_QC_SUCCESS =
+  'lca/battlegroup/CREATE_FROM_QC_SUCCESS'
+const CREATE_FROM_QC_FAILURE = 'lca/battlegroup/CREATE_FROM_QC_FAILURE'
+const BG_DUPE = 'lca/qc/DUPE'
+export const BG_DUPE_SUCCESS = 'lca/qc/DUPE_SUCCESS'
+const BG_DUPE_FAILURE = 'lca/qc/DUPE_FAILURE'
 const UPDATE = 'lca/battlegroup/UPDATE'
 const UPDATE_SUCCESS = 'lca/battlegroup/UPDATE_SUCCESS'
 const UPDATE_FAILURE = 'lca/battlegroup/UPDATE_FAILURE'
@@ -37,6 +44,22 @@ export function createBattlegroup(bg: Object) {
     method: 'POST',
     body: JSON.stringify({ battlegroup: bg }),
     types: [CREATE, BG_CREATE_SUCCESS, CREATE_FAILURE],
+  })
+}
+
+export function createBattlegroupFromQc(id: number) {
+  return callApi({
+    endpoint: `/api/v1/battlegroups/create_from_qc/${id}`,
+    method: 'POST',
+    types: [CREATE_FROM_QC, BG_CREATE_FROM_QC_SUCCESS, CREATE_FROM_QC_FAILURE],
+  })
+}
+
+export function duplicateBattlegroup(id: number) {
+  return callApi({
+    endpoint: `/api/v1/battlegroups/${id}/duplicate`,
+    method: 'POST',
+    types: [BG_DUPE, BG_DUPE_SUCCESS, BG_DUPE_FAILURE],
   })
 }
 

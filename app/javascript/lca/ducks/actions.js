@@ -39,6 +39,8 @@ export {
   createQcCharm,
   destroyQcCharm,
   createBattlegroup,
+  createBattlegroupFromQc,
+  duplicateBattlegroup,
   updateBattlegroup,
   updateBattlegroupMulti,
   destroyBattlegroup,

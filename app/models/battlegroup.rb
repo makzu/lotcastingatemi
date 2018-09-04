@@ -32,4 +32,22 @@ class Battlegroup < ApplicationRecord
   end
   alias_attribute :entity_assoc, :entity_type
   alias_attribute :type, :entity_type
+
+  # Creates a battlegroup with the stats of a particular QC and all of its
+  # attacks.
+  # Does not save the record to the database.
+  def self.new_from_qc(qc) # rubocop:disable Naming/UncommunicativeMethodParamName
+    qc_copy = qc.deep_clone include: :qc_attacks
+
+    battlegroup = Battlegroup.new qc_copy.slice %i[
+      name description essence willpower_temporary willpower_permanent soak
+      hardness evasion parry movement resolve guile appearance join_battle
+      armor_name senses
+    ]
+    battlegroup.health_levels = qc_copy.total_health_levels
+    battlegroup.magnitude = battlegroup.health_levels + 1
+    battlegroup.qc_attacks = qc_copy.qc_attacks
+    battlegroup.name = battlegroup.name + ' (Battlegroup)'
+    battlegroup
+  end
 end

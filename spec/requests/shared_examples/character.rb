@@ -27,6 +27,22 @@ RSpec.shared_examples 'character' do |character_type, parent|
       end
     end
 
+    describe 'duplicating a record' do
+      it 'succeeds' do
+        if %i[qc battlegroup].include? character_type
+          to_dupe = create(character_type, player: trait.player)
+          expect do
+            post "/api/v1/#{trait.entity_type}s/#{to_dupe.id}/duplicate",
+                headers: authenticated_header(trait.player)
+          end.to have_enqueued_job(CreateBroadcastJob)
+            .and change { trait.class.count }.by 1
+
+          expect(response.content_type).to eq 'application/json'
+          expect(response.status).to eq 200
+        end
+      end
+    end
+
     describe 'showing a record' do
       it 'succeeds' do
         get "/api/v1/#{trait.entity_type}s/#{trait.id}",

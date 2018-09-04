@@ -2,8 +2,9 @@
 
 ###### _Not yet released_
 
-- Added option to duplicate QCs
 - Added Anima level to Excellency builder, to support Odara, Chosen of Ash
+- Added option to duplicate QCs
+- Added option to create a battlegroup of a specific QC
 - Creating a Character/QC/BG and joining a Chronicle will now bring you immediately to the relevant page
 
 ## v60

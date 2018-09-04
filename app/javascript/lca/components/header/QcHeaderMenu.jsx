@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles'
 import MoreVert from '@material-ui/icons/MoreVert'
 
-import { duplicateQc } from 'ducks/actions.js'
+import { duplicateQc, createBattlegroupFromQc } from 'ducks/actions.js'
 import type { fullQc } from 'utils/flow-types'
 
 //eslint-disable-next-line no-unused-vars
@@ -20,7 +20,12 @@ const styles = theme => ({
   },
 })
 
-type Props = { qc: fullQc, classes: Object, duplicateQc: Function }
+type Props = {
+  qc: fullQc,
+  classes: Object,
+  duplicateQc: Function,
+  createBattlegroupFromQc: Function,
+}
 class QcHeaderMenu extends Component<Props, { menuAnchor: ?Object }> {
   constructor(props: Props) {
     super(props)
@@ -39,6 +44,10 @@ class QcHeaderMenu extends Component<Props, { menuAnchor: ?Object }> {
     this.props.duplicateQc(this.props.qc.id)
   }
 
+  handleClickBg = () => {
+    this.props.createBattlegroupFromQc(this.props.qc.id)
+  }
+
   render() {
     return (
       <div className={this.props.classes.wrapper}>
@@ -54,6 +63,10 @@ class QcHeaderMenu extends Component<Props, { menuAnchor: ?Object }> {
           <MenuItem onClick={this.handleClickDupe}>
             <ListItemText primary="Duplicate QC" />
           </MenuItem>
+
+          <MenuItem onClick={this.handleClickBg}>
+            <ListItemText primary="Create Battlegroup of QC" />
+          </MenuItem>
         </Menu>
       </div>
     )
@@ -64,6 +77,6 @@ export default compose(
   withStyles(styles),
   connect(
     null,
-    { duplicateQc }
+    { duplicateQc, createBattlegroupFromQc }
   )
 )(QcHeaderMenu)

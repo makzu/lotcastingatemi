@@ -31,13 +31,13 @@ Rails.application.routes.draw do
       end
 
       resources :qcs, only: %i[create show update destroy] do
-        member do
-          post 'duplicate'
-        end
+        post 'duplicate', on: :member
         resources :qc_merits, :qc_attacks, :qc_charms, only: %i[create show update destroy]
       end
 
       resources :battlegroups, only: %i[create show update destroy] do
+        post 'create_from_qc/:qc_id', on: :collection, action: :create_from_qc
+        post 'duplicate', on: :member
         resources :qc_attacks, only: %i[create show update destroy]
       end
 

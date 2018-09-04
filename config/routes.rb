@@ -31,6 +31,9 @@ Rails.application.routes.draw do
       end
 
       resources :qcs, only: %i[create show update destroy] do
+        member do
+          post 'duplicate'
+        end
         resources :qc_merits, :qc_attacks, :qc_charms, only: %i[create show update destroy]
       end
 

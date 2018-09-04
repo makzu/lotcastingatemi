@@ -9,6 +9,9 @@ import type { EntityState } from './'
 const QC_CREATE = 'lca/qc/CREATE'
 export const QC_CREATE_SUCCESS = 'lca/qc/CREATE_SUCCESS'
 const QC_CREATE_FAILURE = 'lca/qc/CREATE_FAILURE'
+const QC_DUPE = 'lca/qc/DUPE'
+export const QC_DUPE_SUCCESS = 'lca/qc/DUPE_SUCCESS'
+const QC_DUPE_FAILURE = 'lca/qc/DUPE_FAILURE'
 const QC_FETCH = 'lca/qc/FETCH'
 export const QC_FETCH_SUCCESS = 'lca/qc/FETCH_SUCCESS'
 const QC_FETCH_FAILURE = 'lca/qc/FETCH_FAILURE'
@@ -43,6 +46,14 @@ export function createQc(qc: Object) {
     method: 'POST',
     body: JSON.stringify({ qc: qc }),
     types: [QC_CREATE, QC_CREATE_SUCCESS, QC_CREATE_FAILURE],
+  })
+}
+
+export function duplicateQc(id: number) {
+  return callApi({
+    endpoint: `/api/v1/qcs/${id}/duplicate`,
+    method: 'POST',
+    types: [QC_DUPE, QC_DUPE_SUCCESS, QC_DUPE_FAILURE],
   })
 }
 

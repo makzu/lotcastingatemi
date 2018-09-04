@@ -4,8 +4,7 @@ import {
   CHN_CREATE_SUCCESS,
 } from 'ducks/entities/chronicle.js'
 import { CHA_CREATE_SUCCESS } from 'ducks/entities/character.js'
-import { BG_CREATE_SUCCESS } from 'ducks/entities/battlegroup.js'
-import { QC_CREATE_SUCCESS } from 'ducks/entities/qc.js'
+import { QC_CREATE_SUCCESS, QC_DUPE_SUCCESS } from 'ducks/entities/qc.js'
 import { history } from 'containers/rootContainer.jsx'
 
 /* On successfully creating an entity or joining a Chronicle, navigate to that
@@ -26,6 +25,7 @@ const Navigator = (store: Object) => (next: Function) => (action: Object) => {
       history.push(`/battlegroups/${action.payload.id}`)
       break
     case QC_CREATE_SUCCESS:
+    case QC_DUPE_SUCCESS:
       history.push(`/qcs/${action.payload.id}`)
       break
   }

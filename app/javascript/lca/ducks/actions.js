@@ -27,6 +27,7 @@ export {
   updateQc,
   updateQcMulti,
   createQc,
+  duplicateQc,
   destroyQc,
   updateQcAttack,
   createQcAttack,

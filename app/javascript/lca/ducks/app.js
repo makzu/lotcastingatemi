@@ -48,6 +48,7 @@ export default function AppReducer(
     case 'DESTROY':
     case 'ADD_THING':
     case 'REMOVE_THING':
+    case 'DUPE':
       return {
         ...state,
         loading: true,
@@ -61,6 +62,7 @@ export default function AppReducer(
     case 'DESTROY_SUCCESS':
     case 'ADD_THING_SUCCESS':
     case 'REMOVE_THING_SUCCESS':
+    case 'DUPE_SUCCESS':
       return {
         ...state,
         loading: false,
@@ -74,6 +76,7 @@ export default function AppReducer(
     case 'DESTROY_FAILURE':
     case 'ADD_THING_FAILURE':
     case 'REMOVE_THING_FAILURE':
+    case 'DUPE_FAILURE':
       return {
         ...state,
         loading: false,

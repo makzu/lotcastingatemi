@@ -4,7 +4,7 @@ module Api
   module V1
     class QcsController < Api::V1::BaseController
       before_action :authenticate_player, except: :show
-      before_action :set_qc, only: %i[show update destroy]
+      before_action :set_qc, only: %i[show update destroy duplicate]
 
       def show
         authorize @qc
@@ -33,6 +33,22 @@ module Api
           render json: @qc, include: []
         else
           render json: @qc.errors.details, status: :bad_request
+        end
+      end
+
+      def duplicate
+        authorize @qc, :show?
+
+        @new_qc = @qc.deep_clone include: %i[qc_attacks qc_charms qc_merits],
+                                 except: %i[chronicle_id sort_order chronicle_sort_order pinned hidden public]
+
+        @new_qc.name = @new_qc.name + " (Duplicate)"
+        @new_qc.player = current_player
+
+        if @new_qc.save
+          render json: @new_qc.reload
+        else
+          render json @new_qc.errors.details, status: :bad_request
         end
       end
 

@@ -1,6 +1,12 @@
-## v61
+## v62
 
 ###### _Not yet released_
+
+- No changes (yet)
+
+## v61
+
+###### _Sep 4, 2018_
 
 - Added Anima level to Excellency builder, to support Odara, Chosen of Ash
 - Added option to duplicate QCs and Battlegroups

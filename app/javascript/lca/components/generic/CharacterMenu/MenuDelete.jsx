@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -46,7 +46,7 @@ class CardMenuDelete extends Component<Props, { open: boolean }> {
   }
 
   render() {
-    if (!this.props.canDelete) return <span />
+    if (!this.props.canDelete) return null
 
     let action
     switch (this.props.characterType) {
@@ -62,7 +62,7 @@ class CardMenuDelete extends Component<Props, { open: boolean }> {
     }
 
     return (
-      <Fragment>
+      <>
         <Divider />
 
         <MenuItem button onClick={this.handleOpen}>
@@ -90,7 +90,7 @@ class CardMenuDelete extends Component<Props, { open: boolean }> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

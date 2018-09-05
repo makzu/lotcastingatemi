@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
-import QcHeaderMenu from './QcHeaderMenu.jsx'
+import CharacterMenu from 'components/generic/CharacterMenu/'
 import { getSpecificQc, canIEditQc } from 'selectors'
 import type { fullQc } from 'utils/flow-types'
 
@@ -61,7 +61,7 @@ function QcHeader(props: Props) {
           </Button>
         )}
         <div className={classes.tabs} />
-        <QcHeaderMenu qc={qc} />
+        <CharacterMenu id={qc.id} characterType="qc" header />
       </Toolbar>
     </>
   )

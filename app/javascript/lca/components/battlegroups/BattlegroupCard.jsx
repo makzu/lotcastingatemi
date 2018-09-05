@@ -13,7 +13,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import CharacterCardMenu from '../generic/CharacterCardMenu'
+import CharacterMenu from '../generic/CharacterMenu'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import sharedStyles from 'styles/'
 import { doIOwnBattlegroup } from 'selectors'
@@ -99,7 +99,7 @@ function BattlegroupCard(props: Props) {
         </div>
 
         {isOwner && (
-          <CharacterCardMenu characterType="battlegroup" id={battlegroup.id} />
+          <CharacterMenu characterType="battlegroup" id={battlegroup.id} />
         )}
       </div>
 

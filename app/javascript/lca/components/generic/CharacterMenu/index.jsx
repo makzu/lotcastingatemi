@@ -6,22 +6,30 @@ import Menu from '@material-ui/core/Menu'
 import { withStyles } from '@material-ui/core/styles'
 import MoreVert from '@material-ui/icons/MoreVert'
 
-import CardMenuDelete from './CardMenuDelete.jsx'
-import CardMenuEdit from './CardMenuEdit.jsx'
-import CardMenuHide from './CardMenuHide.jsx'
-import CardMenuLinks from './CardMenuLinks.jsx'
-import CardMenuPin from './CardMenuPin.jsx'
-import CardMenuRemoveFromChronicle from './CardMenuRemoveFromChronicle.jsx'
+import MenuDelete from './MenuDelete.jsx'
+import MenuEdit from './MenuEdit.jsx'
+import MenuHide from './MenuHide.jsx'
+import MenuLinks from './MenuLinks.jsx'
+import MenuPin from './MenuPin.jsx'
+import MenuRemoveFromChronicle from './MenuRemoveFromChronicle.jsx'
+import MenuDuplicate from './MenuDuplicate.jsx'
+import MenuBattlegroupFromQc from './MenuBattlegroupFromQc.jsx'
 
 //eslint-disable-next-line no-unused-vars
 const styles = theme => ({
   wrapper: {
     margin: '-0.75em -1em 0 1.5em',
   },
+  headerWrapper: {},
 })
 
-type Props = { id: number, characterType: string, classes: Object }
-class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
+type Props = {
+  id: number,
+  characterType: string,
+  header?: boolean,
+  classes: Object,
+}
+class CharacterMenu extends Component<Props, { menuAnchor: ?Object }> {
   constructor(props: Props) {
     super(props)
     this.state = { menuAnchor: null }
@@ -36,8 +44,9 @@ class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
   }
 
   render() {
+    const { header, classes } = this.props
     return (
-      <div className={this.props.classes.wrapper}>
+      <div className={header ? classes.headerWrapper : classes.wrapper}>
         <IconButton onClick={this.handleOpen}>
           <MoreVert />
         </IconButton>
@@ -47,29 +56,44 @@ class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
           open={!!this.state.menuAnchor}
           onClose={this.handleClose}
         >
-          <CardMenuLinks
+          {!this.props.header && (
+            <>
+              <MenuLinks
+                characterType={this.props.characterType}
+                id={this.props.id}
+              />
+              <MenuEdit
+                characterType={this.props.characterType}
+                id={this.props.id}
+              />
+            </>
+          )}
+
+          <MenuPin
             characterType={this.props.characterType}
             id={this.props.id}
           />
-          <CardMenuEdit
-            characterType={this.props.characterType}
-            id={this.props.id}
-          />
-          <CardMenuPin
-            characterType={this.props.characterType}
-            id={this.props.id}
-          />
-          <CardMenuHide
+          <MenuHide
             characterType={this.props.characterType}
             id={this.props.id}
           />
 
-          <CardMenuRemoveFromChronicle
+          <MenuRemoveFromChronicle
             characterType={this.props.characterType}
             id={this.props.id}
           />
 
-          <CardMenuDelete
+          <MenuDuplicate
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
+
+          <MenuBattlegroupFromQc
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
+
+          <MenuDelete
             characterType={this.props.characterType}
             id={this.props.id}
           />
@@ -79,4 +103,4 @@ class CharacterCardMenu extends Component<Props, { menuAnchor: ?Object }> {
   }
 }
 
-export default withStyles(styles)(CharacterCardMenu)
+export default withStyles(styles)(CharacterMenu)

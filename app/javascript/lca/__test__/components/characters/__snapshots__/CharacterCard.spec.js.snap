@@ -128,7 +128,7 @@ exports[`CharacterCard works for Solars 1`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -581,7 +581,7 @@ exports[`CharacterCard works for Solars 2`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -1074,7 +1074,7 @@ exports[`CharacterCard works for Solars 3`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -1602,7 +1602,7 @@ exports[`CharacterCard works for Solars 4`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -2093,7 +2093,7 @@ exports[`CharacterCard works for Solars 5`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -2569,7 +2569,7 @@ exports[`CharacterCard works for mortals 1`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -2947,7 +2947,7 @@ exports[`CharacterCard works for mortals 2`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -3360,7 +3360,7 @@ exports[`CharacterCard works for mortals 3`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -3780,7 +3780,7 @@ exports[`CharacterCard works for mortals 4`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>
@@ -4196,7 +4196,7 @@ exports[`CharacterCard works for mortals 5`] = `
         }
       }
     />
-    <WithStyles(CharacterCardMenu)
+    <WithStyles(CharacterMenu)
       characterType="character"
     />
   </div>

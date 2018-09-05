@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import React from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
+import CharacterMenu from 'components/generic/CharacterMenu'
 import { getSpecificBattlegroup, canIEditBattlegroup } from 'selectors'
 import type { Battlegroup } from 'utils/flow-types'
 
@@ -42,7 +43,7 @@ function BattlegroupHeader(props: Props) {
   }
 
   return (
-    <Fragment>
+    <>
       <DocumentTitle title={`${battlegroup.name} | Lot-Casting Atemi`} />
 
       <Toolbar>
@@ -58,8 +59,10 @@ function BattlegroupHeader(props: Props) {
             {editing ? 'Done' : 'Edit'}
           </Button>
         )}
+        <div className={classes.tabs} />
+        <CharacterMenu id={battlegroup.id} characterType="battlegroup" header />
       </Toolbar>
-    </Fragment>
+    </>
   )
 }
 

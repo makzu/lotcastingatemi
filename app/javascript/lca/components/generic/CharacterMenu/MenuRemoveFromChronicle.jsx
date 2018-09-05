@@ -24,7 +24,7 @@ function CardMenuHide({
   canIEdit,
   removeThing,
 }: Props) {
-  if (!canIEdit || chronId == undefined) return <div />
+  if (!canIEdit || chronId == undefined) return null
 
   return (
     <Fragment>

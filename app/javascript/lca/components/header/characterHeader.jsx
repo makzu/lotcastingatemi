@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
+import CharacterMenu from 'components/generic/CharacterMenu'
 import { getSpecificCharacter, canIEditCharacter } from 'selectors'
 import type { Character } from 'utils/flow-types'
 
@@ -115,6 +116,10 @@ function CharacterHeader(props: Props) {
           </Button>
         )}
         <Hidden xsDown>{tabs}</Hidden>
+        <Hidden smUp>
+          <div className={classes.tabs} />
+        </Hidden>
+        <CharacterMenu id={character.id} characterType="character" header />
       </Toolbar>
 
       <Hidden smUp>{tabs}</Hidden>

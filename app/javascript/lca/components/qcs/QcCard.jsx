@@ -12,7 +12,7 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import CharacterCardMenu from '../generic/CharacterCardMenu'
+import CharacterMenu from '../generic/CharacterMenu'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
@@ -109,7 +109,7 @@ function QcCard(props: Props) {
           <PlayerNameSubtitle playerId={qc.player_id} />
         </div>
 
-        {isOwner && <CharacterCardMenu characterType="qc" id={qc.id} />}
+        {isOwner && <CharacterMenu characterType="qc" id={qc.id} />}
       </div>
 
       <SpendableBlock character={qc} qc />

@@ -15,7 +15,7 @@ import Whatshot from '@material-ui/icons/Whatshot'
 import NotesPopup from './NotesPopup.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
-import CharacterCardMenu from '../generic/CharacterCardMenu'
+import CharacterMenu from '../generic/CharacterMenu'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import {
   canIDeleteCharacter,
@@ -153,7 +153,7 @@ export function CharacterCard({
         <NotesPopup character={character} />
 
         {(st || canDelete) && (
-          <CharacterCardMenu characterType="character" id={character.id} />
+          <CharacterMenu characterType="character" id={character.id} />
         )}
       </div>
 

@@ -48,6 +48,7 @@ const Control = props => (
         ...props.innerProps,
       },
     }}
+    helperText="Select a category or start typing to create a new one"
     {...props.selectProps.textFieldProps}
   />
 )
@@ -109,6 +110,7 @@ const Menu = props => (
   <Paper
     square
     className={props.selectProps.classes.paper}
+    elevation={8}
     {...props.innerProps}
   >
     {props.children}
@@ -143,6 +145,10 @@ const styles = theme => ({
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
+    height: '1.75em',
+    '& svg': {
+      marginRight: '-1px',
+    },
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -165,6 +171,9 @@ const styles = theme => ({
   },
   paper: {
     marginTop: theme.spacing.unit,
+    position: 'absolute',
+    zIndex: '10',
+    width: '100%',
   },
   divider: {
     height: theme.spacing.unit * 2,

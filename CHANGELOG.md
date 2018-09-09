@@ -2,7 +2,7 @@
 
 ###### _Not yet released_
 
-- No changes (yet)
+- Bug fixes (Thanks Vejuz)
 
 ## v61
 

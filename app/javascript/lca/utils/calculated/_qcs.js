@@ -11,12 +11,12 @@ function qcExcellencyPoolCap(qc, pool, stunt = false) {
       caps = [0, 2, 4, 6]
       break
     case 'lunar':
-      caps = stunt ? [1, 4, 7, 10] : [0, 2, 4, 5]
+      caps = stunt ? [1, 4, 7, 10] : [1, 2, 4, 5]
       break
     case 'sidereal':
       return qc.essence
     case 'solar':
-      caps = [0, 1, 3, 5]
+      caps = [2, 5, 7, 10]
       break
     case 'liminal':
       if (qc.anima_level > 1) bonus = qc.essence
@@ -42,7 +42,7 @@ function qcExcellencyRatingCap(qc, rating, stunt = false) {
       caps = [0, 1, 2, 3]
       break
     case 'lunar':
-      caps = stunt ? [1, 3, 4, 5] : [0, 2, 2, 2]
+      caps = stunt ? [1, 2, 4, 5] : [0, 1, 2, 2]
       break
     case 'sidereal':
       return qc.essence

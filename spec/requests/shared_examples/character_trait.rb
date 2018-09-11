@@ -9,7 +9,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
 
   let(:trait) { create(trait_type) }
 
-  context 'while logged in' do
+  context 'when logged in' do
     describe 'creating a record' do
       it 'succeeds' do
         params = { trait.entity_type => FactoryBot.attributes_for(trait_type) }
@@ -48,25 +48,28 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
     end
   end
 
-  context 'while not logged in' do
+  context 'when not logged in' do
     describe 'creating a record' do
       it 'returns an auth failure' do
         post "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/"
         expect(response.status).to eq 401
       end
     end
+
     describe 'showing a record' do
       it 'returns an auth failure' do
         get "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}"
         expect(response.status).to eq 401
       end
     end
+
     describe 'updating a record' do
       it 'returns an auth failure' do
         patch "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}"
         expect(response.status).to eq 401
       end
     end
+
     describe 'destroying a record' do
       it 'returns an auth failure' do
         delete "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}"

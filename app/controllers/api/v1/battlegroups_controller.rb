@@ -40,7 +40,7 @@ module Api
         authorize @battlegroup, :show?
 
         @new_bg = @battlegroup.deep_clone include: %i[qc_attacks],
-                                 except: %i[chronicle_id sort_order chronicle_sort_order pinned hidden public]
+                                          except: %i[chronicle_id sort_order chronicle_sort_order pinned hidden public]
 
         @new_bg.name = @new_bg.name + ' (Duplicate)'
         @new_bg.player = current_player

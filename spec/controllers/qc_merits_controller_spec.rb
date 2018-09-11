@@ -7,7 +7,7 @@ RSpec.describe Api::V1::QcMeritsController, type: :controller do
     "Bearer #{user.token}"
   end
 
-  before(:each) do
+  before do
     @player = FactoryBot.create(:player)
     @qc = FactoryBot.create(:qc, player_id: @player.id)
     @qc_merit = FactoryBot.create(:qc_merit, qc_id: @qc.id)

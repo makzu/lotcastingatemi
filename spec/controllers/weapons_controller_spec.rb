@@ -7,14 +7,14 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
     "Bearer #{user.token}"
   end
 
-  before(:each) do
+  before do
     @player = FactoryBot.create(:player)
     @character = FactoryBot.create(:character, player_id: @player.id)
     @weapon = FactoryBot.create(:weapon, character_id: @character.id)
   end
 
   describe 'POST #create' do
-    context 'With invalid attributes' do
+    context 'with invalid attributes' do
       it 'Increases Weapon count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_weapon_params = FactoryBot.attributes_for(:weapon, weight: 'extra heavy')
@@ -25,7 +25,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'With valid attributes' do
+    context 'with valid attributes' do
       it 'Updates weapon attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
 
@@ -40,7 +40,7 @@ RSpec.describe Api::V1::WeaponsController, type: :controller do
       end
     end
 
-    context 'With invalid attributes' do
+    context 'with invalid attributes' do
       it 'Updates weapon attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_updated_weapon_params = FactoryBot.attributes_for(:weapon, character_id: @character.id, weight: 'Invalid Weight')

@@ -33,7 +33,7 @@ class Player < ApplicationRecord
     UpdateBroadcastJob.perform_later(
       (own_chronicles + chronicles).map { |x| x.player_ids + [x.st_id] }.flatten.uniq,
       self,
-      saved_changes.delete_if { |k| k == 'updated_at' || k == 'created_at' || k == 'email' }
+      saved_changes.delete_if { |k| %w[email updated_at created_at].include? k }
     )
   end
 

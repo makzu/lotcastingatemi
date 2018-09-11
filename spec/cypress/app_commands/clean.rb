@@ -5,5 +5,5 @@ if defined?(DatabaseCleaner)
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
 else
-  logger.warn "add database_cleaner or update clean_db"
+  logger.warn 'add database_cleaner or update clean_db'
 end

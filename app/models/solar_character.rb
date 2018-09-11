@@ -58,6 +58,7 @@ class SolarCharacter < Character
     return unless will_save_change_to_attribute?(:supernal_ability) &&
                   supernal_ability.present? &&
                   !caste_abilities.include?(supernal_or_brawl)
+
     add_supernal_to_caste
     self.favored_abilities = favored_abilities - caste_abilities
   end

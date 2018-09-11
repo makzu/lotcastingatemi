@@ -8,7 +8,7 @@ RSpec.describe Api::V1::ChroniclesController, type: :controller do
     "Bearer #{user.token}"
   end
 
-  before(:each) do
+  before do
     @player = FactoryBot.create(:player)
     @chronicle = FactoryBot.create(:chronicle, st_id: @player.id)
   end
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::ChroniclesController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'With valid attributes' do
+    context 'with valid attributes' do
       it 'Increases Chronicle count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle_params = FactoryBot.attributes_for(:chronicle, st_id: @player.id)
@@ -35,7 +35,7 @@ RSpec.describe Api::V1::ChroniclesController, type: :controller do
       end
     end
 
-    # context 'With invalid attributes' do
+    # context 'with invalid attributes' do
     #   it 'Increases Chronicle count by 0' do
     #     request.headers['Authorization'] = authenticated_header(@player)
     #     @invalid_chronicle_params = FactoryBot.attributes_for(:chronicle, st_id: 'Invalid Attribute')

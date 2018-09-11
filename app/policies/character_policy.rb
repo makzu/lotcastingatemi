@@ -32,11 +32,13 @@ class CharacterPolicy < ApplicationPolicy
 
   def player_in_chronicle?
     return false unless character.chronicle
+
     character.chronicle.players.include?(player) && !character.hidden
   end
 
   def player_is_storyteller?
     return false unless character.chronicle
+
     character.storyteller == player
   end
 

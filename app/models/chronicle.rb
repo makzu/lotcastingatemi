@@ -31,7 +31,7 @@ class Chronicle < ApplicationRecord
     UpdateBroadcastJob.perform_later(
       ([st_id] + player_ids),
       self,
-      saved_changes.delete_if { |k| k == 'updated_at' || k == 'created_at' }
+      saved_changes.delete_if { |k| %w[created_at updated_at].include? k }
     )
   end
 

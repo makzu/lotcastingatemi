@@ -7,14 +7,14 @@ RSpec.describe Api::V1::QcAttacksController, type: :controller do
     "Bearer #{user.token}"
   end
 
-  before(:each) do
+  before do
     @player = FactoryBot.create(:player)
     @qc = FactoryBot.create(:qc, player_id: @player.id)
     @qc_attack = FactoryBot.create(:qc_attack, qc_attackable: @qc)
   end
 
   describe 'POST #create' do
-    context 'With invalid attributes' do
+    context 'with invalid attributes' do
       it 'Increases attack count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_attack_params = FactoryBot.attributes_for(:qc_attack, pool: -1)

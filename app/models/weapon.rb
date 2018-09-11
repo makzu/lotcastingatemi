@@ -14,11 +14,13 @@ class Weapon < ApplicationRecord
 
   def trim_tags
     return unless will_save_change_to_attribute? :tags
+
     self.tags = tags.reject(&:blank?).collect(&:strip).collect(&:downcase)
   end
 
   def set_damage_for_elemental_bolt
     return unless will_save_change_to_attribute? :tags
+
     self.damage_attr = 'essence' if tags.include? 'elemental bolt'
   end
 

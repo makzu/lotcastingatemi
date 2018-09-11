@@ -76,21 +76,25 @@ class Character < ApplicationRecord
 
   def set_xp_log
     return if xp_spent.zero? || !xp_log.empty?
+
     self.xp_log = [{ label: 'Spent XP', points: xp_spent }]
   end
 
   def set_solar_xp_log
     return if xp_solar_spent.zero? || !xp_log_solar.empty?
+
     self.xp_log_solar = [{ label: 'Spent Solar XP', points: xp_solar_spent }]
   end
 
   def set_rituals
     return if shaping_rituals.blank? || !rituals.empty?
+
     self.rituals = [shaping_rituals]
   end
 
   def trim_armor_tags
     return unless will_save_change_to_attribute? :armor_tags
+
     self.armor_tags = armor_tags.reject(&:blank?).collect(&:strip).collect(&:downcase)
   end
 

@@ -18,6 +18,7 @@ module EssenceCharm
 
     def trim_keywords
       return unless will_save_change_to_attribute? :keywords
+
       self.keywords = keywords.reject(&:blank?).collect(&:strip).collect(&:downcase)
     end
   end

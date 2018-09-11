@@ -42,9 +42,12 @@ RSpec.describe DragonbloodCharacter, type: :model do
   describe 'exalt type' do
     it 'does not change while the class type stays the same' do
       character.update(aspect: false, exalt_type: 'abyssal', excellency: 'essence')
-      expect(character.aspect).to eq true
-      expect(character.exalt_type).to eq 'Dragon-Blood'
-      expect(character.excellency).to eq 'dragonblood'
+
+      expect(character).to have_attributes(
+        aspect: true,
+        exalt_type: 'Dragon-Blood',
+        excellency: 'dragonblood'
+      )
     end
   end
 end

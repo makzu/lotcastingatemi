@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Common methods for models attached to QCs (merits, Charms, etc)
+# Common methods for "top-level" models - Characters, QCs, and Battlegroups
 module BelongsToPlayer
   extend ActiveSupport::Concern
   included do

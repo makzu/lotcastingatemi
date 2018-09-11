@@ -50,6 +50,7 @@ class DragonbloodCharacter < Character
 
   def set_caste_abilities
     return unless will_save_change_to_attribute? :caste
+
     self.caste_abilities = ASPECT_ABILITIES[caste.to_sym]
     self.favored_abilities = favored_abilities - ASPECT_ABILITIES[caste.to_sym]
   end

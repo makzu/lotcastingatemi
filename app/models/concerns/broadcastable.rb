@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Common methods for models attached to QCs (merits, Charms, etc)
+# Methods to broadcast changes to other sessions (and players) via ActionCable
 module Broadcastable
   extend ActiveSupport::Concern
   included do
@@ -12,7 +12,7 @@ module Broadcastable
       UpdateBroadcastJob.perform_later(
         all_ids,
         self,
-        saved_changes.delete_if { |k| k == 'updated_at' || k == 'created_at' }
+        saved_changes.delete_if { |k| %w[updated_at created_at].include? k }
       )
     end
 
@@ -35,11 +35,13 @@ module Broadcastable
 
     def parent
       return player if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
+
       character
     end
 
     def chron_id
       return chronicle_id if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
+
       nil
     end
   end

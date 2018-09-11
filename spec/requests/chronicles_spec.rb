@@ -11,7 +11,7 @@ RSpec.describe 'Chronciles', type: :request do
 
   let(:chronicle) { create(:chronicle) }
 
-  context 'while logged in as ST' do
+  context 'when logged in as ST' do
     describe 'renaming a chronicle' do
       it 'works' do
         patch "/api/v1/chronicles/#{chronicle.id}",
@@ -44,7 +44,7 @@ RSpec.describe 'Chronciles', type: :request do
     end
   end
 
-  context 'while logged in as a player in the Chronicle' do
+  context 'when logged in as a player in the Chronicle' do
     let(:not_the_st) { create(:player, chronicles: [chronicle]) }
 
     %i[character qc battlegroup].each do |char|
@@ -77,25 +77,28 @@ RSpec.describe 'Chronciles', type: :request do
     end
   end
 
-  context 'while not logged in' do
+  context 'when not logged in' do
     describe 'creating a record' do
       it 'returns an auth failure' do
         post '/api/v1/chronicles/'
         expect(response.status).to eq 401
       end
     end
+
     describe 'showing a record' do
       it 'returns an auth failure' do
         get "/api/v1/chronicles/#{chronicle.id}"
         expect(response.status).to eq 401
       end
     end
+
     describe 'updating a record' do
       it 'returns an auth failure' do
         patch "/api/v1/chronicles/#{chronicle.id}"
         expect(response.status).to eq 401
       end
     end
+
     describe 'destroying a record' do
       it 'returns an auth failure' do
         delete "/api/v1/chronicles/#{chronicle.id}"

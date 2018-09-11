@@ -7,6 +7,7 @@ RSpec.describe 'QcAttacks', type: :request do
   describe 'for QCs' do
     it_behaves_like 'character trait', :qc_attack, 'qcs'
   end
+
   describe 'for Battlegroups' do
     it_behaves_like 'character trait', :battlegroup_qc_attack, 'battlegroups'
   end

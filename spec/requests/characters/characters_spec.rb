@@ -8,11 +8,11 @@ RSpec.describe 'Characters', type: :request do
     { 'Authorization' => "Bearer #{user.token}" }
   end
 
-  it_behaves_like 'character', :character
-
   let(:character) { create(:character) }
 
-  context 'updating a character' do
+  it_behaves_like 'character', :character
+
+  context 'when updating a character' do
     describe 'with valid changes' do
       it 'updates attributes' do
         patch "/api/v1/characters/#{character.id}",

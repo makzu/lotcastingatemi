@@ -7,14 +7,14 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
     "Bearer #{user.token}"
   end
 
-  before(:each) do
+  before do
     @player = FactoryBot.create(:player)
     @character = FactoryBot.create(:character, player_id: @player.id)
     @merit = FactoryBot.create(:merit, character_id: @character.id)
   end
 
   describe 'POST #create' do
-    context 'With invalid attributes' do
+    context 'with invalid attributes' do
       it 'Increases merit count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_merit_params = FactoryBot.attributes_for(:merit, rating: 9)
@@ -25,7 +25,7 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'With valid attributes' do
+    context 'with valid attributes' do
       it 'Updates merit attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
         @updated_merit_params = FactoryBot.attributes_for(:merit, character_id: @character.id, merit_cat: 'innate')
@@ -39,7 +39,7 @@ RSpec.describe Api::V1::MeritsController, type: :controller do
       end
     end
 
-    context 'With invalid attributes' do
+    context 'with invalid attributes' do
       it 'Updates merit attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_updated_merit_params = FactoryBot.attributes_for(:merit, character_id: @character.id, merit_cat: 'Invalid merit_cat')

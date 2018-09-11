@@ -18,6 +18,7 @@ class QcAttack < ApplicationRecord
 
   def trim_tags
     return unless will_save_change_to_attribute? :tags
+
     self.tags = tags.reject(&:blank?).collect(&:strip).collect(&:downcase)
   end
 

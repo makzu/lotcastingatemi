@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Traits for QCs.  A QC can serve as the base for any number of battlegroups.
+# Traits for QCs.
 class Qc < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer

@@ -8,7 +8,7 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
     "Bearer #{user.token}"
   end
 
-  before(:each) do
+  before do
     @player = FactoryBot.create(:player)
   end
 

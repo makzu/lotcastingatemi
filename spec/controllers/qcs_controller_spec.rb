@@ -7,13 +7,13 @@ RSpec.describe Api::V1::QcsController, type: :controller do
     "Bearer #{user.token}"
   end
 
-  before(:each) do
+  before do
     @player = FactoryBot.create(:player)
     @qc = FactoryBot.create(:qc, player_id: @player.id)
   end
 
   describe 'POST #create' do
-    context 'With invalid attributes' do
+    context 'with invalid attributes' do
       it 'Increases qc count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryBot.create(:chronicle)
@@ -25,7 +25,7 @@ RSpec.describe Api::V1::QcsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'With valid attributes' do
+    context 'with valid attributes' do
       it 'Updates qc attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryBot.create(:chronicle)
@@ -40,7 +40,7 @@ RSpec.describe Api::V1::QcsController, type: :controller do
       end
     end
 
-    context 'With invalid attributes' do
+    context 'with invalid attributes' do
       it 'Updates qc attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle = FactoryBot.create(:chronicle)

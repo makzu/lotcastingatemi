@@ -11,9 +11,8 @@ import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
-import Slide from '@material-ui/core/Slide'
 
-import LoadingSpinner from 'components/generic/LoadingSpinner.jsx'
+import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
 import LcaHeader from 'components/header/header.jsx'
 import NavPanel from 'components/nav/navPanel.jsx'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
@@ -71,7 +70,6 @@ const styles = theme => ({
 
 export type Props = {
   drawerOpen: boolean,
-  loading: boolean,
   toggleDrawer: Function,
   children: React.Node,
   classes: Object,
@@ -83,7 +81,7 @@ class App extends Component<Props> {
   }
 
   render() {
-    const { children, drawerOpen, loading, classes } = this.props
+    const { children, drawerOpen, classes } = this.props
 
     return (
       <div className={classes.appFrame}>
@@ -150,25 +148,16 @@ class App extends Component<Props> {
           </footer>
         </main>
 
-        <Slide
-          direction="up"
-          in={loading}
-          mountOnEnter
-          unmountOnExit
-          style={{ transitionDelay: loading ? 250 : 0 }}
-        >
-          <LoadingSpinner />
-        </Slide>
+        <LoadingIndicator />
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  const { drawerOpen, loading } = state.app
+  const { drawerOpen } = state.app
   return {
     drawerOpen,
-    loading,
   }
 }
 

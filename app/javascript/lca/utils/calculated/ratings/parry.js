@@ -38,11 +38,12 @@ export function parry(
   )
   const rawRating =
     Math.ceil((rat.attributeRating + rat.abilityRating) / 2) +
-    weaponDefenseBonus(weapon)
+    weaponDefenseBonus(weapon) +
+    weapon.bonus_defense
   return {
     ...rat,
     defense: weaponDefenseBonus(weapon),
-    raw: rawRating,
+    raw: Math.max(rawRating, 0),
     shield: weapon.tags.includes('shield'),
     bonus: weapon.tags.includes('shield') ? [{ label: 'shield' }] : [],
     total: Math.max(rawRating - penalty, 0),

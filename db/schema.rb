@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_17_060038) do
+ActiveRecord::Schema.define(version: 2018_10_01_200806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -407,6 +407,11 @@ ActiveRecord::Schema.define(version: 2018_04_17_060038) do
     t.string "attr", default: "dexterity"
     t.integer "sort_order", default: 0
     t.string "damage_attr", default: "strength"
+    t.integer "bonus_accuracy", default: 0
+    t.integer "bonus_damage", default: 0
+    t.integer "bonus_defense", default: 0
+    t.integer "bonus_overwhelming", default: 0
+    t.text "notes", default: ""
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 

@@ -2,10 +2,12 @@
 import type { Character, fullWeapon } from 'utils/flow-types'
 
 export function weaponOverwhelming(character: Character, weapon: fullWeapon) {
-  if (weapon.tags.includes('subtle')) return 0
-  if (weapon.tags.includes('elemental bolt')) return 1 + character.essence
+  let bonus = weapon.bonus_overwhelming
 
-  let bonus = 0
+  if (weapon.tags.includes('subtle')) return 0 + bonus
+  if (weapon.tags.includes('elemental bolt'))
+    return 1 + character.essence + bonus
+
   if (weapon.tags.includes('balanced')) bonus += 1
 
   const overwhelmingTag = weapon.tags.find(t => t.startsWith('overwhelming+'))
@@ -25,4 +27,6 @@ export function weaponOverwhelming(character: Character, weapon: fullWeapon) {
     case 'heavy':
       return Math.max(5 + bonus, 0)
   }
+
+  return 0
 }

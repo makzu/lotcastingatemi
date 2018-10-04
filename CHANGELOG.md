@@ -2,6 +2,7 @@
 
 ###### _Not yet released_
 
+- Weapons can now have arbitrary bonuses added to accuracy, damage, defense, and/or overwhelming
 - Bug fixes (Thanks Vejuz)
 
 ## v61

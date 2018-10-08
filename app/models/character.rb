@@ -95,7 +95,7 @@ class Character < ApplicationRecord
   def trim_armor_tags
     return unless will_save_change_to_attribute? :armor_tags
 
-    self.armor_tags = armor_tags.reject(&:blank?).collect(&:strip).collect(&:downcase)
+    self.armor_tags = armor_tags.reject(&:blank?).collect(&:strip).collect(&:downcase).uniq
   end
 
   def entity_type

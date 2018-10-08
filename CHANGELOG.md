@@ -2,6 +2,7 @@
 
 ###### _Not yet released_
 
+- Added an option to delete your account and all associated data
 - Bug fixes (Thanks Vejuz)
 
 ## v61

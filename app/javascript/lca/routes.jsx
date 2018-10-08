@@ -6,6 +6,8 @@ import ChronicleDashboard from 'components/chronicles/index.jsx'
 import ChronicleDetailsPage from 'components/chronicles/DetailsPage.jsx'
 import CombatDashboard from 'components/combat/index.jsx'
 import ContentList from 'components/pages/contentList.jsx'
+import GoodbyePage from 'components/pages/GoodbyePage.jsx'
+import SettingsPage from 'components/pages/SettingsPage.jsx'
 import CharacterSheet from 'components/characters/index.jsx'
 import CharacterDashboard from 'components/characters/dashboard/'
 import MeritFullPage from 'components/characters/MeritFullPage.jsx'
@@ -27,6 +29,8 @@ export default function Routes() {
   return (
     <Fragment>
       <Route exact path="/" component={WelcomePage} />
+      <Route path="/settings" component={SettingsPage} />
+      <Route path="/deleted" component={GoodbyePage} />
       <Route path="/resources" component={ResourcesPage} />
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/content" component={ContentList} />

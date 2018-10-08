@@ -19,7 +19,6 @@
 
 - Auto-fill for sample QCs/Battlegroups
 - Tagging and filtering for QCs/BGs (similar to Charm filtering)
-- Create Battlegroup of existing QC
 - Import/Export QC/BG to/from YAML
 
 #### Combat Tracker
@@ -36,7 +35,6 @@
 
 - Additional login providers (Discord, Facebook, Twitter, perhaps more)
 - Chronicle/Character/etc ownership transfers
-- "Delete Account" button
 - Documentation
 - Better feedback on errors
 - Optimization: faster load times, better performance while editing

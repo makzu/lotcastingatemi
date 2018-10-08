@@ -3,6 +3,7 @@
 ###### _Not yet released_
 
 - Weapons can now have arbitrary bonuses added to accuracy, damage, defense, and/or overwhelming
+- Added an option to delete your account and all associated data
 - Bug fixes (Thanks Vejuz)
 
 ## v61

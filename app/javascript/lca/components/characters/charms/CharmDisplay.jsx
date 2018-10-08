@@ -58,7 +58,7 @@ export const CharmSummaryLine = ({ charm, classes }: Props) => (
             (charm.body.length > 200 ? '...' : '')
           : charm.summary
       }
-      allowedTypes={['strong', 'emphasis', 'delete']}
+      allowedTypes={['text', 'strong', 'emphasis', 'delete']}
       unwrapDisallowed
       className={classes.markdown}
     />

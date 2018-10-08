@@ -1,8 +1,10 @@
 // @flow
 import * as React from 'react'
 const { Component } = React
+import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import { compose } from 'recompose'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 
@@ -125,9 +127,9 @@ class App extends Component<Props> {
                 variant="caption"
                 className={classes.footerText}
                 component="a"
-                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v61"
+                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v62"
               >
-                v61
+                v62
               </Typography>
             </div>
 
@@ -148,24 +150,22 @@ class App extends Component<Props> {
           </footer>
         </main>
 
+        {/* $FlowFixMe */}
         <LoadingIndicator />
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  const { drawerOpen } = state.app
-  return {
-    drawerOpen,
-  }
-}
+const mapStateToProps = state => ({ drawerOpen: state.app.drawerOpen })
 
-export default withStyles(styles, { withTheme: true })(
-  withRouter(
-    connect(
-      mapStateToProps,
-      { toggleDrawer }
-    )(App)
-  )
-)
+export default compose(
+  withRouter,
+  withStyles(styles, { withTheme: true }),
+  connect(
+    mapStateToProps,
+    { toggleDrawer }
+  ),
+  // eslint-disable-next-line no-undef
+  hot(module)
+)(App)

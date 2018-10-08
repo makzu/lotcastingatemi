@@ -3,7 +3,6 @@ import React from 'react'
 import DocumentTitle from 'react-document-title'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
-import { hot } from 'react-hot-loader'
 import { createBrowserHistory } from 'history'
 
 import App from './App.jsx'
@@ -26,4 +25,4 @@ const RootContainer = ({ store }: { store: Object }) => (
   </Provider>
 )
 
-export default hot(module)(RootContainer) // eslint-disable-line no-undef
+export default RootContainer

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # Common validations for entities with willpower ratings.
-# TODO: check if temporary willpower can be raised above 10.
 module Willpower
   extend ActiveSupport::Concern
 

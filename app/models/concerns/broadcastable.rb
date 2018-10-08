@@ -9,11 +9,18 @@ module Broadcastable
     after_update_commit :broadcast_update
 
     def broadcast_update
-      UpdateBroadcastJob.perform_later(
-        all_ids,
-        self,
-        saved_changes.delete_if { |k| %w[updated_at created_at].include? k }
-      )
+      changes = saved_changes.dup
+
+      # To prevent an ActiveJob::SerializationError, the timestamps must be
+      #  strings and not Time objects
+      if changes['updated_at']
+        changes['updated_at'].map!(&:to_s)
+      else
+        changes['updated_at'] = ['', updated_at.to_s]
+      end
+      changes['created_at']&.map!(&:to_s)
+
+      UpdateBroadcastJob.perform_later all_ids, self, changes
     end
 
     def broadcast_create

@@ -25,6 +25,7 @@ module.name_mapper='^styles\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/styl
 module.name_mapper='^utils$' -> '<PROJECT_ROOT>/app/javascript/lca/utils/'
 module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/utils/\1'
 module.system.node.resolve_dirname=node_modules
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowThisIsOkayISwear
 
 [strict]

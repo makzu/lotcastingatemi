@@ -15,7 +15,6 @@ import Switch from '@material-ui/core/Switch'
 
 import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
-import DisplayNamePopup from './DisplayNamePopup.jsx'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import Discord from 'icons/Discord-Logo.jsx'
 import Patreon from 'icons/Patreon-Logo.jsx'
@@ -33,7 +32,6 @@ const styles = theme => ({
 type Props = {
   authenticated: boolean,
   displayName: string,
-  history?: Object,
   theme: string,
   logout: Function,
   switchTheme: Function,
@@ -43,15 +41,6 @@ type Props = {
 }
 
 export class NavPanel extends PureComponent<Props> {
-  shouldComponentUPdate = (nextProps: Props) => {
-    const { theme, authenticated, drawerOpen } = this.props
-    return (
-      theme !== nextProps.theme ||
-      authenticated !== nextProps.authenticated ||
-      drawerOpen !== nextProps.drawerOpen
-    )
-  }
-
   closeCheck = () => {
     if (this.props.drawerOpen) this.props.closeDrawer()
   }

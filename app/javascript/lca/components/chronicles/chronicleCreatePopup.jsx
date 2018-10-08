@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Dialog from '@material-ui/core/Dialog'
@@ -18,18 +18,10 @@ import { createChronicle } from 'ducks/actions.js'
 
 type Props = { createChronicle: Function }
 type State = { open: boolean, chronicle: { name: string } }
-class ChronicleCreatePopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      open: false,
-      chronicle: { name: '' },
-    }
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+class ChronicleCreatePopup extends PureComponent<Props, State> {
+  state = {
+    open: false,
+    chronicle: { name: '' },
   }
 
   handleOpen = () => {

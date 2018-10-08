@@ -34,7 +34,7 @@ export const SpellSummaryLine = (props: SpellSummaryLineProps) => {
         source={
           spell.body.substring(0, 200) + (spell.body.length > 200 ? '...' : '')
         }
-        allowedTypes={['strong', 'emphasis', 'delete']}
+        allowedTypes={['text', 'strong', 'emphasis', 'delete', 'link']}
         unwrapDisallowed
         className={classes.markdown}
       />

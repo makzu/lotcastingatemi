@@ -64,7 +64,7 @@ function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
         <ReactMarkdown
           className={classes.body}
           source={charm.summary.length > 0 ? charm.summary : charm.body}
-          allowedTypes={['strong', 'emphasis', 'delete']}
+          allowedTypes={['text', 'strong', 'emphasis', 'delete']}
           unwrapDisallowed
         />
       </Typography>

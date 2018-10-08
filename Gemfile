@@ -60,8 +60,8 @@ group :development, :test, :cypress do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'rubocop', require: false
-  gem 'rubocop-rspec'
+  gem 'rubocop', '~> 0.59', require: false
+  gem 'rubocop-rspec', '~> 1.30', require: false
 end
 
 group :development do

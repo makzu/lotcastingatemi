@@ -2008,7 +2008,7 @@ declare module "@material-ui/core/styles/createTypography" {
 
   declare export type Typography = { [style: Style]:  $Shape<TypographyStyle> } & FontStyle & TypographyUtils;
 
-  declare export type TypographyOptions = $Shape<{ [style: Style]:  $Shape<TypographyStyle> } & FontStyle>;
+  declare export type TypographyOptions = $Shape<{ [style: Style]:  $Shape<TypographyStyle> } & FontStyle & {useNextVariants: boolean}>;
 
   declare module.exports: (
     palette: Palette,
@@ -2725,6 +2725,13 @@ declare module "@material-ui/core/Typography/Typography" {
     | "error"
     | "default";
   declare type Variant =
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "subtitle1"
     | "display4"
     | "display3"
     | "display2"

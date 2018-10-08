@@ -3,7 +3,7 @@
 # app/serializers/qc_serializer.rb
 class QcSerializer < PlayerAssetSerializer
   # rubocop:disable Layout/EmptyLinesAroundArguments
-  attributes :name, :essence, :description,
+  attributes :name, :essence, :description, :portrait_link,
              :willpower_temporary, :willpower_permanent,
              :health_level_0s, :health_level_1s, :health_level_2s,
              :health_level_4s, :health_level_incap,

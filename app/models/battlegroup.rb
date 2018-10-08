@@ -42,7 +42,7 @@ class Battlegroup < ApplicationRecord
     battlegroup = Battlegroup.new qc_copy.slice %i[
       name description essence willpower_temporary willpower_permanent soak
       hardness evasion parry movement resolve guile appearance join_battle
-      armor_name senses
+      armor_name senses portrait_link
     ]
     battlegroup.health_levels = qc_copy.total_health_levels
     battlegroup.magnitude = battlegroup.health_levels + 1

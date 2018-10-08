@@ -87,7 +87,6 @@ class QcEditor extends Component<Props> {
               label="Name"
               margin="dense"
               onChange={handleChange}
-              onBlur={handleChange}
             />
             <TextField
               name="ref"
@@ -95,7 +94,6 @@ class QcEditor extends Component<Props> {
               label="Reference"
               margin="dense"
               onChange={handleChange}
-              onBlur={handleChange}
             />
 
             {showPublicCheckbox && (
@@ -119,8 +117,16 @@ class QcEditor extends Component<Props> {
               multiline
               fullWidth
               onChange={handleChange}
-              onBlur={handleChange}
               rowsMax={5}
+            />
+
+            <TextField
+              name="portrait_link"
+              value={qc.portrait_link}
+              label="Portrait Link"
+              margin="dense"
+              onChange={handleChange}
+              fullWidth
             />
           </BlockPaper>
         </Grid>
@@ -292,7 +298,7 @@ class QcEditor extends Component<Props> {
 
         <Grid item xs={12} lg={6}>
           <BlockPaper>
-            <Typography variant="subheading">Social</Typography>
+            <Typography variant="title">Social</Typography>
             <RatingField
               trait="resolve"
               value={qc.resolve}
@@ -316,8 +322,6 @@ class QcEditor extends Component<Props> {
               onChange={handleChange}
             />
 
-            <Typography variant="subheading">Intimacies</Typography>
-
             <IntimacyEditor
               character={qc}
               characterType="qc"
@@ -328,7 +332,7 @@ class QcEditor extends Component<Props> {
 
         <Grid item xs={12}>
           <BlockPaper>
-            <Typography variant="subheading">Combat</Typography>
+            <Typography variant="title">Combat</Typography>
             <RatingField
               trait="join_battle"
               value={qc.join_battle}
@@ -377,7 +381,6 @@ class QcEditor extends Component<Props> {
               label="Armor Name"
               margin="dense"
               onChange={handleChange}
-              onBlur={handleChange}
             />
             <br />
 

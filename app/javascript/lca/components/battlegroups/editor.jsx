@@ -89,6 +89,7 @@ class BattlegroupEditor extends Component<Props> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
+          fullWidth
         />
         <br />
         <TextField
@@ -100,6 +101,14 @@ class BattlegroupEditor extends Component<Props> {
           fullWidth
           rowsMax={5}
           onChange={handleChange}
+        />
+        <TextField
+          name="portrait_link"
+          value={battlegroup.portrait_link}
+          label="Portrait Link"
+          margin="dense"
+          onChange={handleChange}
+          fullWidth
         />
         <br />
         <RatingField

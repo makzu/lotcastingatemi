@@ -32,6 +32,7 @@ export type fullQc = {
   qc_attacks: Array<string>,
   qc_charms: Array<string>,
   qc_merits: Array<string>,
+  portrait_link: string,
 } & withQcStats &
   withWillpower &
   withHealthLevels &

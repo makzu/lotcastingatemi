@@ -34,7 +34,7 @@ class CharacterSerializer < PlayerAssetSerializer
 
              :xp_total, :xp_solar_total, :xp_log, :xp_log_solar, :bp_log,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
-             :notes, :portrait_link
+             :notes, :equipment, :portrait_link
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   has_many :merits

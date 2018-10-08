@@ -57,6 +57,14 @@ const styles = theme => ({
     maxHeight: '5rem',
     overflow: 'hidden',
   },
+  portrait: {
+    maxWidth: '100%',
+    display: 'block',
+    margin: 'auto',
+  },
+  portraitWrap: {
+    //textAlign: 'center',
+  },
 })
 
 type Props = {
@@ -254,6 +262,16 @@ class BattlegroupSheet extends Component<Props> {
             label="Appearance"
             classes={{ root: classes.poolBlock }}
           />
+        </div>
+
+        <div className={classes.portraitWrap}>
+          <a
+            href={battlegroup.portrait_link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={battlegroup.portrait_link} className={classes.portrait} />
+          </a>
         </div>
       </BlockPaper>
     )

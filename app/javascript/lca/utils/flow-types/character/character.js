@@ -92,6 +92,7 @@ export type Character = {
   lore_background: string,
   portrait_link: string,
   notes: string,
+  equipment: string,
   xp_total: number,
   xp_solar_total: number,
   xp_craft_silver: number,

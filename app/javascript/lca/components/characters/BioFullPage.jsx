@@ -95,6 +95,14 @@ class BioFullPage extends Component<Props> {
 
           <Grid item xs={12}>
             <BlockPaper>
+              <Typography variant="subheading">
+                Inventory/Other Equipment
+              </Typography>
+              <Typography
+                component={ReactMarkdown}
+                className={classes.markdown}
+                source={character.equipment || 'None'}
+              />
               <Typography variant="subheading">Notes</Typography>
               <Typography
                 component={ReactMarkdown}

@@ -114,6 +114,19 @@ class BioEditor extends Component<Props> {
                 rowsMax={100}
                 onChange={handleChange}
               />
+
+              <TextField
+                name="equipment"
+                value={character.equipment}
+                label="Inventory and Equipment"
+                helperText="(Supports Markdown)"
+                margin="dense"
+                multiline
+                fullWidth
+                rows={2}
+                rowsMax={100}
+                onChange={handleChange}
+              />
             </BlockPaper>
           </Grid>
 

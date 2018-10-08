@@ -21,6 +21,7 @@ type Props = {
   armor?: boolean,
   value: string,
   margin?: 'none' | 'dense' | 'normal',
+  style?: Object,
   classes: Object,
   onChange: Function,
 }
@@ -33,6 +34,7 @@ const WeightSelect = (props: Props) => (
     className={props.armor ? props.classes.armor : props.classes.field}
     onChange={props.onChange}
     margin={props.margin}
+    style={props.style}
   >
     {props.armor && <MenuItem value="unarmored">Unarmored</MenuItem>}
     <MenuItem value="light">Light</MenuItem>

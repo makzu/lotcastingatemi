@@ -29,7 +29,7 @@ export function rangedWitheringAttackPool(
     attack: 'withering',
     damageType: undefined,
   }
-  const rawPool = poolBase.raw
+  const rawPool = poolBase.raw + weapon.bonus_accuracy
 
   return {
     close: {

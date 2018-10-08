@@ -2,7 +2,10 @@
 
 ###### _Not yet released_
 
+- The weapon editor has been rebuilt from the ground up as a pop-up.
 - Weapons can now have arbitrary bonuses added to accuracy, damage, defense, and/or overwhelming
+- Weapons can also have short notes or descriptions added
+- Added Essence to the list of attributes for attack rolls
 - Added an option to delete your account and all associated data
 - Bug fixes (Thanks Vejuz)
 

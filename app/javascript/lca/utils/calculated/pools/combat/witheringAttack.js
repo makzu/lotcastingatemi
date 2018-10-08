@@ -11,14 +11,14 @@ export function witheringAttack(
 ) {
   const pool = decisiveAttack(character, weapon, penalties, excellencyAbils)
 
-  const accuracy = weaponAccuracyBonus(weapon)
+  const accuracy = weaponAccuracyBonus(weapon) + weapon.bonus_accuracy
   const rawPool = pool.attributeRating + pool.abilityRating + accuracy
 
   return {
     ...pool,
     name: weapon.name + ' Withering Attack',
     accuracy: accuracy,
-    raw: rawPool,
+    raw: Math.max(rawPool, 0),
     total: Math.max(rawPool - penalties.wound, 0),
     attack: 'withering',
     damageType: undefined,

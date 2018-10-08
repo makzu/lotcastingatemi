@@ -30,7 +30,7 @@ export function witheringDamage(
   character: Character,
   weapon: fullWeapon
 ): Pool {
-  const damage = weaponDamageBonus(weapon)
+  const damage = weaponDamageBonus(weapon) + weapon.bonus_damage
   let _attr = weapon.damage_attr
   let attrRating = attr(character, _attr)
 
@@ -69,6 +69,8 @@ export function witheringDamage(
   if (weapon.tags.includes('poisonable'))
     specialAttacks = specialAttacks.concat(['poisonable'])
 
+  const overwhelming = weaponOverwhelming(character, weapon)
+
   return {
     name: weapon.name + ' Withering Damage',
     attribute: _attr,
@@ -77,8 +79,8 @@ export function witheringDamage(
     powerfulDamage: weapon.tags.includes('powerful') ? powDamage : undefined,
     raw: attrRating + damage,
     totalPenalty: -b,
-    total: attrRating + damage + b,
-    minimum: weaponOverwhelming(character, weapon),
+    total: Math.max(attrRating + damage + b, overwhelming),
+    minimum: overwhelming,
     specialAttacks: specialAttacks,
     bonus: bonus,
   }

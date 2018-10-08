@@ -12,7 +12,7 @@ import type { fullWeapon } from 'utils/flow-types'
 const styles = theme => ({
   abilitySelect: {
     marginRight: theme.spacing.unit,
-    width: '8em',
+    flex: 2,
     textTransform: 'capitalize',
   },
 })
@@ -20,13 +20,12 @@ const styles = theme => ({
 type Props = {
   character: Object,
   weapon: fullWeapon,
-  extended?: boolean,
   classes: Object,
   onChange: Function,
 }
 
 function WeaponAbilitySelect(props: Props) {
-  const { character, weapon, extended, onChange, classes } = props
+  const { character, weapon, onChange, classes } = props
 
   const options = calc.attackAbilities(character).map(abil => (
     <MenuItem
@@ -34,7 +33,7 @@ function WeaponAbilitySelect(props: Props) {
       value={abil.abil}
       style={{ textTransform: 'capitalize' }}
     >
-      {abil.label} ({abil.rating})
+      {abil.abil} ({abil.rating})
     </MenuItem>
   ))
   const nonAttackOptions = calc.nonAttackAbilities(character).map(abil => (
@@ -43,7 +42,7 @@ function WeaponAbilitySelect(props: Props) {
       value={abil.abil}
       style={{ textTransform: 'capitalize' }}
     >
-      {abil.label} ({abil.rating})
+      {abil.abil} ({abil.rating})
     </MenuItem>
   ))
 
@@ -53,9 +52,8 @@ function WeaponAbilitySelect(props: Props) {
       value={weapon.ability}
       className={classes.abilitySelect}
       name="ability"
-      label={extended ? 'Attack Ability (full list)' : 'Attack Ability'}
+      label="Attack Ability"
       margin="dense"
-      style={extended ? { width: '15em' } : { width: '10em' }}
       onChange={onChange}
     >
       <ListSubheader value="header">Current Ability</ListSubheader>
@@ -63,13 +61,16 @@ function WeaponAbilitySelect(props: Props) {
         {weapon.ability} ({calc.abil(character, weapon.ability)})
       </MenuItem>
 
-      <ListSubheader value="header">Combat Abilities</ListSubheader>
+      <ListSubheader value="header" disabled>
+        Combat Abilities
+      </ListSubheader>
       {options}
-
-      {extended && (
-        <ListSubheader value="header">Other Abilities</ListSubheader>
+      {character.abil_martial_arts.length === 0 && (
+        <ListSubheader value="header">No Martial Arts ratings</ListSubheader>
       )}
-      {extended && nonAttackOptions}
+
+      <ListSubheader value="header">Other Abilities</ListSubheader>
+      {nonAttackOptions}
     </TextField>
   )
 }

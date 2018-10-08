@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import WeaponFields from './weaponFields.jsx'
+import WeaponFields from './WeaponFields.jsx'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import { createWeapon, destroyWeapon, updateWeapon } from 'ducks/actions.js'
@@ -26,6 +26,8 @@ type Props = {
 }
 class WeaponEditor extends Component<Props> {
   handleChange = (id, trait, value) => {
+    if (value === 'header') return
+
     this.props.updateWeapon(id, this.props.character.id, trait, value)
   }
 

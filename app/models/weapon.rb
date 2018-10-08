@@ -9,7 +9,7 @@ class Weapon < ApplicationRecord
   before_validation :set_traits_for_elemental_bolt
 
   validates :weight, inclusion: { in: %w[ light medium heavy ] }
-  validates :attr, inclusion: { in: Constants::ATTRIBUTES }
+  validates :attr, inclusion: { in: Constants::ATTRIBUTES + ['essence'] }
   validates :damage_attr, inclusion: { in: Constants::ATTRIBUTES + ['essence'] }
 
   def trim_tags

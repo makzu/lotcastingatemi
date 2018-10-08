@@ -88,7 +88,6 @@ export function attackAbilities(character) {
     let name = abil.substring(5)
     return {
       abil: name,
-      label: name,
       rating: character[abil] || 0,
       specialties: character.specialties.filter(spec => spec.ability == name),
     }
@@ -98,7 +97,6 @@ export function attackAbilities(character) {
     let name = `martial arts (${abil.style})`
     return {
       abil: name,
-      label: abil.style,
       rating: abil.rating,
       specialties: character.specialties.filter(
         spec => spec.ability == 'martial arts'
@@ -115,7 +113,6 @@ export function nonAttackAbilities(character) {
       let name = abil.substring(5)
       return {
         abil: name,
-        label: name,
         rating: character[abil] || 0,
         specialties: character.specialties.filter(spec => spec.ability == name),
       }
@@ -126,7 +123,6 @@ export function nonAttackAbilities(character) {
     let name = `craft (${abil.craft})`
     return {
       abil: name,
-      label: abil.craft,
       rating: abil.rating,
       specialties: character.specialties.filter(
         spec => spec.ability == 'craft'

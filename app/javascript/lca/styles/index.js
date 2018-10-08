@@ -22,6 +22,11 @@ const commonStyles = (theme: Object) => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  flexContainerSpread: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
   flexCol: {},
 })
 

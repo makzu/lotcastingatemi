@@ -25,10 +25,11 @@ type Props = {
 }
 
 function WeaponAttributeSelect(props: Props) {
-  const { character, weapon, damage, onChange, classes } = props
+  const { character, weapon, damage, onChange, classes, ...otherProps } = props
 
   return (
     <TextField
+      {...otherProps}
       select
       name={damage ? 'damage_attr' : 'attr'}
       className={classes.root}
@@ -49,11 +50,8 @@ function WeaponAttributeSelect(props: Props) {
           Dexterity ({character.attr_dexterity})
         </MenuItem>
       )}
-      <Divider />
 
-      <MenuItem value="intelligence">
-        Intelligence ({character.attr_intelligence})
-      </MenuItem>
+      <Divider style={{ margin: '0.5em 0' }} />
 
       <MenuItem value="strength">Strength ({character.attr_strength})</MenuItem>
       <MenuItem value="dexterity">
@@ -70,10 +68,14 @@ function WeaponAttributeSelect(props: Props) {
       <MenuItem value="perception">
         Perception ({character.attr_perception})
       </MenuItem>
+      <MenuItem value="intelligence">
+        Intelligence ({character.attr_intelligence})
+      </MenuItem>
       <MenuItem value="wits">Wits ({character.attr_wits})</MenuItem>
-      {damage && (
-        <MenuItem value="essence">Essence ({character.essence})</MenuItem>
-      )}
+
+      <Divider style={{ margin: '0.5em 0' }} />
+
+      <MenuItem value="essence">Essence ({character.essence})</MenuItem>
     </TextField>
   )
 }

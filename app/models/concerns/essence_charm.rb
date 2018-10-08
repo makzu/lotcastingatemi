@@ -4,7 +4,7 @@
 module EssenceCharm
   extend ActiveSupport::Concern
 
-  CHARM_TIMINGS = %w[ simple supplemental reflexive permanent ].freeze
+  CHARM_TIMINGS = %w[ simple supplemental reflexive permanent supplemental/reflexive ].freeze
 
   included do
     before_validation :trim_keywords

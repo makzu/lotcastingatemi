@@ -25,6 +25,9 @@ class CharmTimingSelect extends React.PureComponent<Props> {
         <MenuItem value="simple">Simple</MenuItem>
         <MenuItem value="supplemental">Supplemental</MenuItem>
         <MenuItem value="reflexive">Reflexive</MenuItem>
+        <MenuItem value="supplemental/reflexive">
+          Supplemental or Reflexive
+        </MenuItem>
         <MenuItem value="permanent">Permanent</MenuItem>
       </TextField>
     )

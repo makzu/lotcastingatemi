@@ -1,6 +1,9 @@
 // @flow
 import { isAuthFailure } from './app.js'
-import { FETCH_SUCCESS as PLAYER_FETCH_SUCCESS } from './entities/player.js'
+import {
+  FETCH_SUCCESS as PLAYER_FETCH_SUCCESS,
+  PLY_DESTROY_SUCCESS,
+} from './entities/player.js'
 
 export const LOGOUT = 'lca/session/LOGOUT'
 export const AUTH_FAILURE = 'lca/session/AUTH_FAILURE'
@@ -13,6 +16,7 @@ type sessionState = {
 const defaultState: sessionState = {
   authenticated: !!localStorage.getItem('jwt') || false,
   id: 0,
+  deleted: false,
 }
 
 export default function SessionReducer(
@@ -33,6 +37,14 @@ export default function SessionReducer(
         ...state,
         authenticated: false,
         id: 0,
+      }
+
+    case PLY_DESTROY_SUCCESS:
+      return {
+        ...state,
+        authenticated: false,
+        id: 0,
+        deleted: true,
       }
 
     case PLAYER_FETCH_SUCCESS:

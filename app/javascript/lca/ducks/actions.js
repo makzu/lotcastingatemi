@@ -46,6 +46,7 @@ export {
   destroyBattlegroup,
   fetchCurrentPlayer,
   updatePlayer,
+  destroyAccount,
 } from './entities'
 
 export { logout } from './session.js'

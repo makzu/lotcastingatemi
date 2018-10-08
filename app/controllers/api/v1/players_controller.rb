@@ -16,7 +16,7 @@ module Api
       # Show a single player
       def show
         authorize @player
-        render json: @player, include: %w[characters.* qcs.* battlegroups]
+        render json: @player, include: %w[characters.* qcs.* battlegroups.*]
       end
 
       def update
@@ -26,6 +26,11 @@ module Api
         else
           render json: @player.errors.details, status: :bad_request
         end
+      end
+
+      def destroy
+        authorize current_player
+        render json: current_player.destroy
       end
 
       private

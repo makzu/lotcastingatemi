@@ -21,6 +21,7 @@ import Discord from 'icons/Discord-Logo.jsx'
 import Patreon from 'icons/Patreon-Logo.jsx'
 import OctoCat from 'icons/OctoCat.jsx'
 import { logout, closeDrawer, switchTheme } from 'ducks/actions.js'
+import { getCurrentPlayer } from 'selectors'
 
 // eslint-disable-next-line no-unused-vars
 const styles = theme => ({
@@ -31,6 +32,7 @@ const styles = theme => ({
 
 type Props = {
   authenticated: boolean,
+  displayName: string,
   history?: Object,
   theme: string,
   logout: Function,
@@ -55,13 +57,29 @@ export class NavPanel extends PureComponent<Props> {
   }
 
   render() {
-    const { authenticated, theme, switchTheme, classes, logout } = this.props
+    const {
+      authenticated,
+      displayName,
+      theme,
+      switchTheme,
+      classes,
+      logout,
+    } = this.props
     const { closeCheck } = this
 
     return (
       <ErrorBoundary>
         <List component="nav">
-          {authenticated && <DisplayNamePopup />}
+          {authenticated && (
+            <ListItem
+              button
+              component={NavLink}
+              to="/settings"
+              onClick={closeCheck}
+            >
+              <ListItemText primary={`Logged in as ${displayName}`} />
+            </ListItem>
+          )}
 
           <ListItem button component={NavLink} to="/" onClick={closeCheck}>
             <ListItemText primary="Home" />
@@ -98,6 +116,16 @@ export class NavPanel extends PureComponent<Props> {
             <ListItemText primary="Resources" />
           </ListItem>
 
+          {authenticated && (
+            <ListItem
+              button
+              component={NavLink}
+              to="/settings"
+              onClick={closeCheck}
+            >
+              <ListItemText primary="Settings" />
+            </ListItem>
+          )}
           <ListItem
             button
             onClick={() => switchTheme(theme == 'light' ? 'dark' : 'light')}
@@ -178,11 +206,12 @@ export class NavPanel extends PureComponent<Props> {
 function mapStateToProps(state) {
   const { authenticated } = state.session
   const { theme, drawerOpen } = state.app
-
+  const displayName = getCurrentPlayer(state).display_name || ''
   return {
     authenticated,
     theme,
     drawerOpen,
+    displayName,
   }
 }
 

@@ -20,7 +20,7 @@ export * from './battlegroup.js'
 export * from './combat_actor.js'
 
 import * as schemas from './_schemas.js'
-import PlayerReducer from './player.js'
+import PlayerReducer, { PLY_DESTROY_SUCCESS } from './player.js'
 import ChronicleReducer from './chronicle.js'
 import CharacterReducer from './character.js'
 import MeritReducer from './merit.js'
@@ -90,7 +90,11 @@ export type EntityState = {
 }
 
 export function EntityReducer(state: EntityState = defaultState, action) {
-  if (action.type === LOGOUT) return defaultState
+  switch (action.type) {
+    case LOGOUT:
+    case PLY_DESTROY_SUCCESS:
+      return defaultState
+  }
 
   return state
 }

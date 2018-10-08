@@ -14,6 +14,9 @@ export const FETCH_FAILURE = 'lca/player/FETCH_FAILURE'
 export const PLY_UPDATE = 'lca/player/UPDATE'
 export const PLY_UPDATE_SUCCESS = 'lca/player/UPDATE_SUCCESS'
 export const PLY_UPDATE_FAILURE = 'lca/player/UPDATE_FAILURE'
+export const PLY_DESTROY = 'lca/player/DESTROY'
+export const PLY_DESTROY_SUCCESS = 'lca/player/DESTROY_SUCCESS'
+export const PLY_DESTROY_FAILURE = 'lca/player/DESTROY_FAILURE'
 
 export default (state: EntityState, action: Object) => {
   let _id
@@ -87,5 +90,13 @@ export function updatePlayer(id: number, trait: string, value: string) {
         meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
       },
     ],
+  })
+}
+
+export function destroyAccount() {
+  return callApi({
+    endpoint: '/api/v1/players/',
+    method: 'DELETE',
+    types: [PLY_DESTROY, PLY_DESTROY_SUCCESS, PLY_DESTROY_FAILURE],
   })
 }

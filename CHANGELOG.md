@@ -1,6 +1,12 @@
-## v62
+## v63
 
 ###### _Not yet released_
+
+- Nothing (yet)
+
+## v62
+
+###### _Oct 8, 2018_
 
 - The weapon editor has been rebuilt from the ground up as a pop-up.
 - Weapons can now have arbitrary bonuses added to accuracy, damage, defense, and/or overwhelming

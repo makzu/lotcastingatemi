@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_212356) do
+ActiveRecord::Schema.define(version: 2018_10_16_042112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -277,6 +277,26 @@ ActiveRecord::Schema.define(version: 2018_10_08_212356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
+  end
+
+  create_table "poisons", force: :cascade do |t|
+    t.string "name", default: ""
+    t.integer "penalty", default: 0
+    t.string "interval", default: "rounds"
+    t.integer "damage", default: 1
+    t.string "damage_type", default: "i"
+    t.string "crash_damage_type", default: "x"
+    t.string "vector", default: ""
+    t.integer "duration", default: 1
+    t.string "duration_type", default: "rounds"
+    t.text "notes", default: ""
+    t.integer "sort_order", default: 0
+    t.string "ref", default: ""
+    t.string "poisonable_type"
+    t.bigint "poisonable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poisonable_type", "poisonable_id"], name: "index_poisons_on_poisonable_type_and_poisonable_id"
   end
 
   create_table "qc_attacks", force: :cascade do |t|

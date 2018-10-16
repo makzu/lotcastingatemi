@@ -28,21 +28,23 @@ Rails.application.routes.draw do
       end
 
       resources :characters, only: %i[create show update destroy] do
-        resources :merits, :weapons, :charms, :spells, only: %i[create show update destroy]
+        resources :merits, :weapons, :charms, :spells, :poisons, only: %i[create show update destroy]
       end
 
       resources :qcs, only: %i[create show update destroy] do
         post 'duplicate', on: :member
-        resources :qc_merits, :qc_attacks, :qc_charms, only: %i[create show update destroy]
+        resources :qc_merits, :qc_attacks, :qc_charms, :poisons, only: %i[create show update destroy]
       end
 
       resources :battlegroups, only: %i[create show update destroy] do
         post 'create_from_qc/:qc_id', on: :collection, action: :create_from_qc
         post 'duplicate', on: :member
-        resources :qc_attacks, only: %i[create show update destroy]
+        resources :qc_attacks, :poisons, only: %i[create show update destroy]
       end
 
-      resources :combat_actors, only: %i[create show update destroy]
+      resources :combat_actors, only: %i[create show update destroy] do
+        resources :poisons, only: %i[create show update destroy]
+      end
     end
   end
 

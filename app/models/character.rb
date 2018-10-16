@@ -2,11 +2,6 @@
 
 # The central model for characters, holding stats that are common to all PCs.
 # Traits specific to exalts will be in separate models, one per exalt type.
-#
-# Traits that Characters share in common with QCs, like health tracks, willpower
-# pools, etc may eventually be split into separate classes, but Heroku has a
-# limit on the total number of rows allowed in the database before they start
-# charging extra.
 class Character < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
@@ -26,6 +21,8 @@ class Character < ApplicationRecord
   has_many :martial_arts_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::MartialArtsCharm'
   has_many :spirit_charms,       foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::SpiritCharm'
   has_many :evocations,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::Evocation'
+
+  has_many :poisons, as: :poisonable, dependent: :destroy
 
   validates :name, presence: true
 
@@ -109,9 +106,8 @@ class Character < ApplicationRecord
 
   def self.association_types
     %i[
-      ability_charms attribute_charms essence_charms
-      martial_arts_charms evocations spirit_charms
-      weapons merits spells
+      ability_charms attribute_charms essence_charms martial_arts_charms
+      evocations spirit_charms weapons merits spells poisons
     ]
   end
 end

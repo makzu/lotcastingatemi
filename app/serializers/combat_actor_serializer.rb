@@ -10,4 +10,5 @@ class CombatActorSerializer < PlayerAssetSerializer
              :anima_level
 
   attribute :actor_id
+  has_many :poisons
 end

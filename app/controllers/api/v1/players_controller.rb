@@ -46,8 +46,8 @@ module Api
       def include_hash
         {
           characters: Character.association_types,
-          qcs: %i[qc_attacks qc_merits qc_attacks qc_charms],
-          battlegroups: [:qc_attacks],
+          qcs: %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
+          battlegroups: [:qc_attacks, :poisons],
           chronicles: [],
           own_chronicles: []
         }

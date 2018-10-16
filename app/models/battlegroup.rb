@@ -10,6 +10,7 @@ class Battlegroup < ApplicationRecord
 
   has_many :qc_attacks, dependent: :destroy, as: :qc_attackable
   has_many :combat_actors, dependent: :destroy, as: :actor
+  has_many :poisons, as: :poisonable, dependent: :destroy
 
   validates :size, zero_thru_five_stat: true
 

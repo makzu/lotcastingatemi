@@ -7,6 +7,8 @@ class CombatActor < ApplicationRecord
   include BelongsToPlayer
   belongs_to :actor, polymorphic: true
 
+  has_many :poisons, as: :poisonable, dependent: :destroy
+
   validates :onslaught, numericality: { greater_than_or_equal_to: 0 }
   validates :damage_bashing,
             :damage_lethal,

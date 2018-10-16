@@ -26,4 +26,5 @@ class QcSerializer < PlayerAssetSerializer
   has_many :qc_attacks
   has_many :qc_charms
   has_many :qc_merits
+  has_many :poisons
 end

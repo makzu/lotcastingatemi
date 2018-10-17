@@ -11,6 +11,9 @@ import type { Character } from 'utils/flow-types'
 export const CHA_CREATE = 'lca/character/CREATE'
 export const CHA_CREATE_SUCCESS = 'lca/character/CREATE_SUCCESS'
 export const CHA_CREATE_FAILURE = 'lca/character/CREATE_FAILURE'
+export const CHA_DUPE = 'lca/cahracter/DUPE'
+export const CHA_DUPE_SUCCESS = 'lca/cahracter/DUPE_SUCCESS'
+export const CHA_DUPE_FAILURE = 'lca/cahracter/DUPE_FAILURE'
 export const CHA_FETCH = 'lca/character/FETCH'
 export const CHA_FETCH_SUCCESS = 'lca/character/FETCH_SUCCESS'
 export const CHA_FETCH_FAILURE = 'lca/character/FETCH_FAILURE'
@@ -45,6 +48,14 @@ export function createCharacter(char: Character) {
     method: 'POST',
     body: JSON.stringify({ character: char }),
     types: [CHA_CREATE, CHA_CREATE_SUCCESS, CHA_CREATE_FAILURE],
+  })
+}
+
+export function duplicateCharacter(id: number) {
+  return callApi({
+    endpoint: `/api/v1/characters/${id}/duplicate`,
+    method: 'POST',
+    types: [CHA_DUPE, CHA_DUPE_SUCCESS, CHA_DUPE_FAILURE],
   })
 }
 

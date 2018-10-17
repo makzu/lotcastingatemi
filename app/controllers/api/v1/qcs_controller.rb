@@ -48,7 +48,7 @@ module Api
         if @new_qc.save
           render json: @new_qc.reload
         else
-          render json @new_qc.errors.details, status: :bad_request
+          render json: @new_qc.errors.details, status: :bad_request
         end
       end
 

@@ -159,7 +159,10 @@ function handleCreateAction(state: EntityState, payload) {
       ...state[parent_type],
       [parent_id]: {
         ...state[parent_type][parent_id],
-        [assoc]: [...state[parent_type][parent_id][assoc], entity.id],
+        [assoc]: [
+          // Remove/prevent duplicate association IDs
+          ...new Set([...state[parent_type][parent_id][assoc], entity.id]),
+        ],
       },
     },
   }

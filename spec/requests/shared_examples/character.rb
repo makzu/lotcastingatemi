@@ -29,7 +29,7 @@ RSpec.shared_examples 'character' do |character_type, parent|
 
     describe 'duplicating a record' do
       it 'succeeds' do
-        if %i[qc battlegroup].include? character_type
+        if %i[combat_actor battlegroup_combat_actor].exclude? character_type
           to_dupe = create(character_type, player: trait.player)
           expect do
             post "/api/v1/#{trait.entity_type}s/#{to_dupe.id}/duplicate",

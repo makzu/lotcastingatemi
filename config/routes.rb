@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       end
 
       resources :characters, only: %i[create show update destroy] do
+        post 'duplicate', on: :member
         resources :merits, :weapons, :charms, :spells, only: %i[create show update destroy]
       end
 

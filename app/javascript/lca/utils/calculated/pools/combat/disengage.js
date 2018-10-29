@@ -1,5 +1,6 @@
 // @flow
 import pool from '../_pool.js'
+import { penaltyObject } from '../../index.js'
 import type { Character } from 'utils/flow-types'
 
 export function disengage(
@@ -16,17 +17,13 @@ export function disengage(
       { label: 'sux/3m anima', bonus: 1, situational: true },
     ])
 
-  const penalty = [
-    { label: 'wound', penalty: penalties.wound },
-    { label: 'mobility', penalty: penalties.mobility },
-  ]
   return pool(
     'Disengage',
     character,
     'dexterity',
     'dodge',
     bonus,
-    penalty,
+    penaltyObject(penalties, { useMobility: true }),
     excellencyAbils
   )
 }

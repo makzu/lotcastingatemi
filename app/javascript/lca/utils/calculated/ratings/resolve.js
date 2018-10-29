@@ -1,6 +1,7 @@
 // @flow
-import type { Character } from 'utils/flow-types'
 import rating from './_rating.js'
+import { penaltyObject } from '../index.js'
+import type { Character } from 'utils/flow-types'
 
 export function resolve(
   character: Character,
@@ -8,7 +9,6 @@ export function resolve(
   penalties: Object,
   excellencyAbils: Array<string>
 ) {
-  const pen = [{ label: 'Wound', penalty: penalties.wound }]
   let bonus = []
   let wellBred = merits.find(m => m.startsWith('well-bred'))
   if (wellBred !== undefined)
@@ -25,7 +25,7 @@ export function resolve(
     character,
     'wits',
     'integrity',
-    pen,
+    penaltyObject(penalties),
     excellencyAbils,
     bonus
   )

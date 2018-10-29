@@ -275,3 +275,29 @@ export const spentSolarXp = character =>
 
 export const spentBp = character =>
   character.bp_log.reduce((total, c) => total + c.points, 0)
+
+export const penaltyObject = (
+  penalties,
+  {
+    useWound = true,
+    useMobility = false,
+    usePoison = true,
+    useOnslaught = false,
+  }: {
+    useWound?: boolean,
+    useMobility?: boolean,
+    usePoison?: boolean,
+    useOnslaught?: boolean,
+  } = {}
+) => {
+  let penalty = []
+  if (useWound)
+    penalty = [...penalty, { label: 'wound', penalty: penalties.wound }]
+  if (useMobility)
+    penalty = [...penalty, { label: 'mobility', penalty: penalties.mobility }]
+  if (usePoison)
+    penalty = [...penalty, { label: 'poison', penalty: penalties.poisonTotal }]
+  if (useOnslaught)
+    penalty = [...penalty, { label: 'onslaught', penalty: penalties.onslaught }]
+  return penalty
+}

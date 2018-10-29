@@ -1,5 +1,6 @@
 // @flow
 import pool from '../_pool.js'
+import { penaltyObject } from '../../index.js'
 import type { Character } from 'utils/flow-types'
 
 export function riseFromProne(
@@ -9,17 +10,13 @@ export function riseFromProne(
   excellencyAbils: Array<string>
 ) {
   // TODO: handle merits that affect rise from prone pool?
-  const penalty = [
-    { label: 'wound', penalty: penalties.wound },
-    { label: 'mobility', penalty: penalties.mobility },
-  ]
   return pool(
     'Rise from Prone',
     character,
     'dexterity',
     'dodge',
     [],
-    penalty,
+    penaltyObject(penalties, { useMobility: true }),
     excellencyAbils
   )
 }

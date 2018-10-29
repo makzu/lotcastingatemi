@@ -1,6 +1,8 @@
 // @flow
-import type { Character } from 'utils/flow-types'
+
 import rating from './_rating.js'
+import { penaltyObject } from '../index.js'
+import type { Character } from 'utils/flow-types'
 
 export function guile(
   character: Character,
@@ -8,13 +10,12 @@ export function guile(
   penalties: Object,
   excellencyAbils: Array<string>
 ) {
-  const pen = [{ label: 'Wound', penalty: penalties.wound }]
   return rating(
     'Guile',
     character,
     'manipulation',
     'socialize',
-    pen,
+    penaltyObject(penalties),
     excellencyAbils
   )
 }

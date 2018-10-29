@@ -1,6 +1,14 @@
 // @flow
 // Type defs for traits shared between characters and QCs
 
+export type Poison = {
+  name: string,
+  penalty: number,
+  id: number,
+  poisonable_type: string,
+  poisonable_id: number,
+}
+
 export type withBasicInfo = {
   id: number,
   player_id: number,
@@ -20,6 +28,7 @@ export type withCombatInfo = {
   onslaught: number,
   in_combat: boolean,
   has_acted: boolean,
+  poisons: Array<Poison>,
 }
 
 export type withHealthLevels = {

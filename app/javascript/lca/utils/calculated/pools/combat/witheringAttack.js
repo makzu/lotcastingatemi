@@ -19,7 +19,7 @@ export function witheringAttack(
     name: weapon.name + ' Withering Attack',
     accuracy: accuracy,
     raw: Math.max(rawPool, 0),
-    total: Math.max(rawPool - penalties.wound, 0),
+    total: Math.max(rawPool - pool.totalPenalty, 0),
     attack: 'withering',
     damageType: undefined,
   }

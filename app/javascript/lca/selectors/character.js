@@ -17,6 +17,7 @@ const entities = state => state.entities.current
 
 const getState = state => state
 const getCurrentPlayer = state => entities(state).players[state.session.id]
+const getPoisons = state => entities(state).poisons
 
 export const getSpecificCharacter = (state: Object, id: number) =>
   entities(state).characters[id]
@@ -62,14 +63,20 @@ export const getSpellsForCharacter = createCachedSelector(
 export const getControlSpellsForCharacter = (state: Object, id: number) =>
   getSpellsForCharacter(state, id).filter(s => s.control)
 
+export const getPoisonsForCharacter = createCachedSelector(
+  [getSpecificCharacter, getPoisons],
+  (character, poisons) =>
+    character.poisons.map(p => poisons[p]).sort(sortOrderSort)
+)(characterIdMemoizer)
+
 export const getPenalties = createCachedSelector(
-  [getSpecificCharacter, getMeritsForCharacter],
-  (character, merits) => {
-    const meritNames = merits.map(m => m.merit_name.toLowerCase() + m.rating)
+  [getSpecificCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],
+  (character, meritNames, poisons) => {
     return {
       mobility: mobilityPenalty(character),
       onslaught: character.onslaught,
       wound: woundPenalty(character, meritNames),
+      poisonTotal: poisons.reduce((a, p) => a + p.penalty, 0),
     }
   }
 )(characterIdMemoizer)

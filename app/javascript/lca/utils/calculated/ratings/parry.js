@@ -1,5 +1,6 @@
 // @flow
 import rating from './_rating.js'
+import { penaltyObject } from '../index.js'
 import { weaponIsRanged } from '../weapons'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
@@ -22,17 +23,12 @@ export function parry(
 ) {
   if (weaponIsRanged(weapon)) return { raw: 0, total: 0 }
 
-  const penalty = penalties.onslaught + penalties.wound
-
   const rat = rating(
     weapon.name + ' Parry',
     character,
     weapon.attr,
     weapon.ability,
-    [
-      { label: 'Wound', penalty: penalties.wound },
-      { label: 'Onslaught', penalty: penalties.onslaught },
-    ],
+    penaltyObject(penalties, { useOnslaught: true }),
     excellencyAbils,
     []
   )
@@ -46,7 +42,8 @@ export function parry(
     raw: Math.max(rawRating, 0),
     shield: weapon.tags.includes('shield'),
     bonus: weapon.tags.includes('shield') ? [{ label: 'shield' }] : [],
-    total: Math.max(rawRating - penalty, 0),
+    //$FlowThisIsOkayISwear
+    total: Math.max(rawRating - rat.totalPenalty, 0),
     parry: true,
   }
 }

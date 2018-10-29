@@ -1,5 +1,6 @@
 // @flow
 import pool from './_pool.js'
+import { penaltyObject } from '../index.js'
 import type { Character } from 'utils/flow-types'
 
 export function featOfStrength(
@@ -13,14 +14,13 @@ export function featOfStrength(
   if (thew != undefined) {
     bonus = [{ label: 'mighty thew', bonus: parseInt(thew.substr(-1)) }]
   }
-  const penalty = [{ label: 'wound', penalty: penalties.wound }]
   return pool(
     'Feat of Strength',
     character,
     'strength',
     'athletics',
     bonus,
-    penalty,
+    penaltyObject(penalties),
     excellencyAbils
   )
 }

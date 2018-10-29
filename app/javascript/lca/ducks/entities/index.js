@@ -46,6 +46,7 @@ import type {
   QcAttack,
   Battlegroup,
   CombatActor,
+  Poison,
 } from 'utils/flow-types'
 
 export const defaultState = {
@@ -72,6 +73,7 @@ export const defaultState = {
   qc_attacks: {},
   battlegroups: {},
   combat_actors: {},
+  poisons: {},
 }
 export type EntityState = {
   +players: { [id: number]: Object },
@@ -87,6 +89,7 @@ export type EntityState = {
   +qc_attacks: { [id: number]: QcAttack },
   +battlegroups: { [id: number]: Battlegroup },
   +combat_actors: { [id: number]: CombatActor },
+  +poisons: { [id: number]: Poison },
 }
 
 export function EntityReducer(state: EntityState = defaultState, action) {
@@ -227,5 +230,6 @@ export function mergeStateWithNormalizedEntities(
     qc_attacks: merge({ ...state.qc_attacks }, entities.qcAttacks),
     battlegroups: merge({ ...state.battlegroups }, entities.battlegroups),
     chronicles: merge({ ...state.chronicles }, entities.chronicles),
+    poisons: merge({ ...state.poisons }, entities.poisons),
   }
 }

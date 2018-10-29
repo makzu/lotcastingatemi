@@ -39,8 +39,11 @@ module Api
       def duplicate
         authorize @qc, :show?
 
-        @new_qc = @qc.deep_clone include: %i[qc_attacks qc_charms qc_merits],
-                                 except: %i[chronicle_id sort_order chronicle_sort_order pinned hidden public]
+        @new_qc = @qc.deep_clone include: %i[
+          qc_attacks qc_charms qc_merits poisons
+        ], except: %i[
+          chronicle_id sort_order chronicle_sort_order pinned hidden public
+        ]
 
         @new_qc.name = @new_qc.name + ' (Duplicate)'
         @new_qc.player = current_player

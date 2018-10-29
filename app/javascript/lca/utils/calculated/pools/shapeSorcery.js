@@ -1,5 +1,6 @@
 // @flow
 import pool from './_pool.js'
+import { penaltyObject } from '../index.js'
 import type { Character } from 'utils/flow-types'
 
 export function shapeSorcery(
@@ -9,16 +10,14 @@ export function shapeSorcery(
   excellencyAbils: Array<string>
 ) {
   const vitalFocus = merits.some(m => m.startsWith('vital focus cultivation'))
-  const penalty = vitalFocus
-    ? []
-    : [{ label: 'wound', penalty: penalties.wound }]
+
   return pool(
     'Shape Sorcery',
     character,
     'intelligence',
     'occult',
     [],
-    penalty,
+    penaltyObject(penalties, { useWound: !vitalFocus }),
     excellencyAbils
   )
 }

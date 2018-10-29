@@ -39,8 +39,12 @@ module Api
       def duplicate
         authorize @character, :show?
 
-        @new_character = @character.deep_clone include: %i[attribute_charms ability_charms essence_charms weapons merits evocations martial_arts_charms spirit_charms spells],
-                                               except: %i[chronicle_id sort_order chronicle_sort_order pinned hidden public]
+        @new_character = @character.deep_clone include: %i[
+          attribute_charms ability_charms essence_charms evocations
+          martial_arts_charms weapons merits spirit_charms spells poisons
+        ], except: %i[
+          chronicle_id sort_order chronicle_sort_order pinned hidden public
+        ]
 
         @new_character.name = @new_character.name + ' (Duplicate)'
         @new_character.player = current_player

@@ -1,5 +1,6 @@
 // @flow
 import rating from './_rating.js'
+import { penaltyObject } from '../index.js'
 import type { Character } from 'utils/flow-types'
 
 export function evasion(
@@ -8,17 +9,12 @@ export function evasion(
   penalties: Object,
   excellencyAbils: Array<string>
 ) {
-  const pen = [
-    { label: 'wound', penalty: penalties.wound },
-    { label: 'mobility', penalty: penalties.mobility },
-    { label: 'onslaught', penalty: penalties.onslaught },
-  ]
   return rating(
     'Evasion',
     character,
     'dexterity',
     'dodge',
-    pen,
+    penaltyObject(penalties, { useMobility: true, useOnslaught: true }),
     excellencyAbils
   )
 }

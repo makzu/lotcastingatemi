@@ -1,5 +1,6 @@
 // @flow
 import pool from '../_pool.js'
+import { penaltyObject } from '../../index.js'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
 const supportedTags = [
@@ -64,7 +65,7 @@ export function decisiveAttack(
       weapon.attr,
       weapon.ability,
       bonus,
-      [{ label: 'Wound', penalty: penalties.wound }],
+      penaltyObject(penalties),
       excellencyAbils,
       specialAttacks
     ),

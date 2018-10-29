@@ -3,6 +3,7 @@ export {
   updateCharacter,
   updateCharacterMulti,
   createCharacter,
+  duplicateCharacter,
   destroyCharacter,
   updateWeapon,
   createWeapon,

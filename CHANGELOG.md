@@ -3,6 +3,8 @@
 ###### _Not yet released_
 
 - Nothing (yet)
+- Character sheets can now be duplicated just like QC/BG sheets
+- Bug fixes
 
 ## v62
 

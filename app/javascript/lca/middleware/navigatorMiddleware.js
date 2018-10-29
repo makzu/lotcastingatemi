@@ -3,6 +3,7 @@ import {
   CHN_JOIN_SUCCESS,
   CHN_CREATE_SUCCESS,
   CHA_CREATE_SUCCESS,
+  CHA_DUPE_SUCCESS,
   BG_CREATE_SUCCESS,
   BG_CREATE_FROM_QC_SUCCESS,
   BG_DUPE_SUCCESS,
@@ -24,6 +25,7 @@ const Navigator = (store: Object) => (next: Function) => (action: Object) => {
       history.push(`/chronicles/${action.payload.result}`)
       break
     case CHA_CREATE_SUCCESS:
+    case CHA_DUPE_SUCCESS:
       history.push(`/characters/${action.payload.id}`)
       break
     case BG_CREATE_SUCCESS:

@@ -48,7 +48,7 @@ module Api
         if @new_bg.save
           render json: @new_bg.reload
         else
-          render json @new_bg.errors.details, status: :bad_request
+          render json: @new_bg.errors.details, status: :bad_request
         end
       end
 

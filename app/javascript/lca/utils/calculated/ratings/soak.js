@@ -33,8 +33,11 @@ export function soak(
       { label: 'unusual hide', bonus: parseInt(unusualHide.substr(-1)) },
     ])
   }
+
+  // ISoB control spell bonus applies even while wearing armor:
+  // http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1187120#post1187120
   let isob = spells.find(s => s === 'invulnerable skin of bronze')
-  if (isob != undefined && character.armor_weight === 'unarmored') {
+  if (isob != undefined) {
     b += character.essence
     bonus = bonus.concat([
       { label: 'invulnerable skin of bronze', bonus: character.essence },

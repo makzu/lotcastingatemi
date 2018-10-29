@@ -2,8 +2,8 @@
 
 ###### _Not yet released_
 
-- Nothing (yet)
 - Character sheets can now be duplicated just like QC/BG sheets
+- ISoB control spell soak bonus now correctly applies to characters with armor (thanks Yukizawa)
 - Bug fixes
 
 ## v62

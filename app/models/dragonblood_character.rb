@@ -29,10 +29,27 @@ class DragonbloodCharacter < Character
   validates :aura, inclusion:  { in: DRAGONBLOOD_ASPECTS + ['none'] }
   validate  :favored_ability_count
 
+  def self.from_character!(character)
+    new_cha = character.becomes(DragonbloodCharacter)
+    new_cha.type = 'DragonbloodCharacter'
+    new_cha.caste_attributes = []
+    new_cha.favored_attributes = []
+    new_cha.supernal_ability = nil
+    new_cha.caste = (new_cha.caste || '').downcase
+    new_cha.caste = '' unless DRAGONBLOOD_ASPECTS.include? new_cha.caste
+    new_cha.aura = 'none' unless (DRAGONBLOOD_ASPECTS + []).include? new_cha.aura
+
+    new_cha.save!
+    (new_cha.attribute_charms + new_cha.essence_charms).each do |charm|
+      AbilityCharm.from_charm!(charm)
+    end
+    new_cha
+  end
+
   private
 
   def set_mote_pool_totals
-    return unless will_save_change_to_attribute? :essence
+    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
 
     self.motes_personal_total     = essence + 11
     self.motes_peripheral_total   = (essence * 4) + 23
@@ -46,13 +63,14 @@ class DragonbloodCharacter < Character
     self.excellency = 'dragonblood'
     self.excellency_stunt = ''
     self.excellencies_for = []
+    self.limit = nil
   end
 
   def set_caste_abilities
-    return unless will_save_change_to_attribute? :caste
+    return unless will_save_change_to_attribute?(:caste) || will_save_change_to_attribute?(:type)
 
-    self.caste_abilities = ASPECT_ABILITIES[caste.to_sym]
-    self.favored_abilities = favored_abilities - ASPECT_ABILITIES[caste.to_sym]
+    self.caste_abilities = ASPECT_ABILITIES[caste.to_sym] || []
+    self.favored_abilities = favored_abilities - (ASPECT_ABILITIES[caste.to_sym] || [])
   end
 
   def favored_ability_count

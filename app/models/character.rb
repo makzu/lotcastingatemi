@@ -110,4 +110,21 @@ class Character < ApplicationRecord
       evocations spirit_charms weapons merits spells poisons
     ]
   end
+
+  def self.from_character!(character)
+    new_cha = character.becomes(Character)
+    new_cha.type = 'Character'
+    new_cha.caste_attributes = new_cha.favored_attributes = new_cha.caste_abilities = new_cha.favored_abilities = new_cha.motes_committed = new_cha.anima_powers = new_cha.excellencies_for = []
+    new_cha.supernal_ability = new_cha.limit = new_cha.limit_trigger = nil
+    new_cha.caste = new_cha.aura = new_cha.anima_display = new_cha.excellency = new_cha.excellency_stunt = ''
+    new_cha.motes_personal_current = new_cha.motes_personal_total = new_cha.motes_peripheral_current = new_cha.motes_peripheral_total = new_cha.anima_level = 0
+    new_cha.aspect = false
+    new_cha.exalt_type = 'Mortal'
+    new_cha.save!
+    (
+      new_cha.attribute_charms + new_cha.ability_charms + new_cha.essence_charms +
+      new_cha.spirit_charms + new_cha.evocations + new_cha.martial_arts_charms
+    ).each(&:destroy)
+    new_cha
+  end
 end

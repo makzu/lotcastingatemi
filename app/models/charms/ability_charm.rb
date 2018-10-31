@@ -16,6 +16,17 @@ module Charms
       'Ability'
     end
 
+    def self.from_charm!(charm)
+      return charm if charm.type == 'Charms::AbilityCharm'
+
+      new_charm = charm.becomes(Charms::AbilityCharm)
+      new_charm.type = 'Charms::AbilityCharm'
+      new_charm.ability = ''
+      new_charm.min_ability = 1 if new_charm.min_ability.blank?
+      new_charm.save!
+      new_charm
+    end
+
     private
 
     def ability_blank?

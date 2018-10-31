@@ -5,10 +5,6 @@ require 'rails_helper'
 RSpec.describe DragonbloodCharacter, type: :model do
   let(:character) { create(:dragonblood_character) }
 
-  it 'has a valid factory' do
-    expect(character).to be_valid
-  end
-
   describe 'mote pool' do
     it 'starts with the right number of motes' do
       expect(character.motes_personal_total).to eq 13
@@ -48,6 +44,19 @@ RSpec.describe DragonbloodCharacter, type: :model do
         exalt_type: 'Dragon-Blood',
         excellency: 'dragonblood'
       )
+    end
+  end
+
+  describe 'converting types' do
+    %i[
+      character solar_character
+      custom_ability_character custom_attribute_character custom_essence_character
+    ].each do |char|
+      it "works for #{char}" do
+        g = create(char)
+        m = DragonbloodCharacter.from_character!(g)
+        expect(m).to be_valid
+      end
     end
   end
 end

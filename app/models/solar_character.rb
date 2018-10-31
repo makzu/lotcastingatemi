@@ -34,10 +34,27 @@ class SolarCharacter < Character
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10
   }
 
+  def self.from_character!(character)
+    new_cha = character.becomes(SolarCharacter)
+    new_cha.type = 'SolarCharacter'
+    new_cha.caste_attributes = []
+    new_cha.favored_attributes = []
+    new_cha.caste = (new_cha.caste || '').downcase
+    new_cha.caste = '' unless SOLAR_CASTES.include? new_cha.caste
+    new_cha.caste_abilities = new_cha.caste_abilities & (CASTE_ABILITIES[new_cha.caste.to_sym] || [])
+    new_cha.limit = 0 if new_cha.limit.blank?
+
+    new_cha.save!
+    (new_cha.attribute_charms + new_cha.essence_charms).each do |charm|
+      AbilityCharm.from_charm!(charm)
+    end
+    new_cha
+  end
+
   private
 
   def set_mote_pool_totals
-    return unless will_save_change_to_attribute? :essence
+    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
 
     self.motes_personal_total     = (essence * 3) + 10
     self.motes_peripheral_total   = (essence * 7) + 26
@@ -73,7 +90,7 @@ class SolarCharacter < Character
   # rubocop:disable Style/IfUnlessModifier
   def caste_abilities_are_valid
     caste_abilities.each do |a|
-      unless CASTE_ABILITIES[caste.to_sym].include? a
+      unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
         errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s")
       end
     end

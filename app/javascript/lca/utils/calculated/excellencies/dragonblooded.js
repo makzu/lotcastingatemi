@@ -2,12 +2,7 @@
 import { abil, specialtiesFor } from '..'
 import type { Character, Charm } from 'utils/flow-types'
 
-/* Dragon-Blooded Excellencies: WFHW preview 3 p.26 */
-
-// FEATURE: set excellency to 'dragon-blooded' to use purchased excellencies like DBs, and calculate dice caps like DBs
-export const hasDbExcellency = (character: Character) =>
-  character.type === 'DragonbloodCharacter' ||
-  character.excellency.startsWith('dragon')
+/* Dragon-Blooded Excellencies: WFHW preview p.173 */
 
 // All abilities that have an 'Excellency' keyworded Charm
 export const dbExcellencyAbils = (

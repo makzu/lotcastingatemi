@@ -4,10 +4,6 @@ import type { Character, Charm } from 'utils/flow-types'
 
 /* Solar Excellencies: Core p.255 */
 
-// FEATURE: set excellency to 'solar' to get free excellencies the way Solars do, and calculate dice caps like Solars too
-export const hasSolarExcellency = (character: Character) =>
-  character.type === 'SolarCharacter' || character.excellency === 'solar'
-
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
 export const solarExcellencyAbils = (
   character: Character,
@@ -23,8 +19,8 @@ export const solarExcellencyAbils = (
     excellencies = excellencies.concat(['martial_arts'])
 
   excellencies = excellencies.concat(
-    charms.map(
-      c => (c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability)
+    charms.map(c =>
+      c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability
     )
   )
 

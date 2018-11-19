@@ -5,14 +5,24 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
 
-import ExcellencyEditor from './ExcellencyEditor.jsx'
+import ExcellencyEditor from '../excellencies/'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import type { Character } from 'utils/flow-types'
 
-type Props = { character: Character, onChange: Function, onCheck: Function }
-function CustomEssenceExaltEditor({ character, onChange, onCheck }: Props) {
+type Props = {
+  character: Character,
+  onChange: Function,
+  onCheck: Function,
+  onChangeMulti: Function,
+}
+function CustomEssenceExaltEditor({
+  character,
+  onChange,
+  onCheck,
+  onChangeMulti,
+}: Props) {
   return (
     <BlockPaper>
       <Typography component="div">
@@ -24,7 +34,11 @@ function CustomEssenceExaltEditor({ character, onChange, onCheck }: Props) {
           onChange={onChange}
           margin="dense"
         />
-        <ExcellencyEditor character={character} onChange={onChange} />
+        <ExcellencyEditor
+          character={character}
+          onChange={onChange}
+          onChangeMulti={onChangeMulti}
+        />
         <br />
         <TextField
           name="exalt_type"

@@ -36,6 +36,13 @@ export default (
   const exArray = excellency.split('+') || []
   for (let ex of exArray) {
     switch (ex) {
+      case 'solar':
+        result += attr(character, attribute) + abil(character, ability)
+        break
+      case 'dragonblood':
+        result += abil(character, ability)
+        if (specialtiesFor(character, ability).length > 0) result += 1
+        break
       case 'attribute':
         result += attr(character, attribute)
         break
@@ -58,7 +65,7 @@ export default (
         if (character.anima_level > 0) result += character.essence
         break
       case 'otherability':
-        // TODO: add a highestOtherAbility() here
+        result += highestOtherAbility(character, ability)
         break
       case 'otherattribute':
         result += highestOtherAttribute(character, attribute)
@@ -72,7 +79,8 @@ export default (
     }
   }
 
-  if (!staticRating) return result
-  if (exArray.includes('roundup')) return Math.ceil(result / 2)
-  return Math.floor(result / 2)
+  if (!staticRating || exArray.includes('nohalf')) return result
+  if (exArray.includes('roundup') || exArray.includes('dragonblood'))
+    return Math.ceil(result / 2)
+  else return Math.floor(result / 2)
 }

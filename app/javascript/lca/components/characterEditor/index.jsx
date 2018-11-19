@@ -27,7 +27,7 @@ import WillpowerEditor from './editors/willpowerEditor.jsx'
 import XpEditor from './editors/xpEditor.jsx'
 import WeaponEditor from './weapons/WeaponEditor.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
-import { updateCharacter } from 'ducks/actions.js'
+import { updateCharacter, updateCharacterMulti } from 'ducks/actions.js'
 import { getSpecificCharacter, getPenalties } from 'selectors'
 import type { Character } from 'utils/flow-types'
 
@@ -35,6 +35,7 @@ type Props = {
   character: Character,
   penalties: Object,
   updateCharacter: Function,
+  updateCharacterMulti: Function,
 }
 class CharacterEditor extends Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
@@ -54,6 +55,10 @@ class CharacterEditor extends Component<Props> {
     this.props.updateCharacter(character.id, name, value)
   }
 
+  handleChangeMulti = (changes: Object) => {
+    this.props.updateCharacterMulti(this.props.character.id, changes)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.character == undefined)
@@ -64,7 +69,7 @@ class CharacterEditor extends Component<Props> {
       )
 
     const { character } = this.props
-    const { handleChange, handleCheck } = this
+    const { handleChange, handleCheck, handleChangeMulti } = this
     const { penalties } = this.props
     const showLimit =
       character.type !== 'Character' &&
@@ -109,6 +114,7 @@ class CharacterEditor extends Component<Props> {
                 character={character}
                 onChange={handleChange}
                 onCheck={handleCheck}
+                onChangeMulti={handleChangeMulti}
               />
             </Grid>
           )}
@@ -118,6 +124,7 @@ class CharacterEditor extends Component<Props> {
                 character={character}
                 onChange={handleChange}
                 onCheck={handleCheck}
+                onChangeMulti={handleChangeMulti}
               />
             </Grid>
           )}
@@ -127,6 +134,7 @@ class CharacterEditor extends Component<Props> {
                 character={character}
                 onChange={handleChange}
                 onCheck={handleCheck}
+                onChangeMulti={handleChangeMulti}
               />
             </Grid>
           )}
@@ -218,6 +226,6 @@ function mapStateToProps(state, props) {
 export default ProtectedComponent(
   connect(
     mapStateToProps,
-    { updateCharacter }
+    { updateCharacter, updateCharacterMulti }
   )(CharacterEditor)
 )

@@ -3,6 +3,8 @@
 ###### _Not yet released_
 
 - Character sheets can now be duplicated just like QC/BG sheets
+- The Excellency builder now includes a convenience menu for quickly duplicating Excellencies from the core book, _What Fire has Wrought_, and _Adversaries of the Righteous_.
+- 'As Solars' and 'As Dragon-Blooded' options in the excellency builder now work again (thanks Grifftofer, Vejuz)
 - ISoB control spell soak bonus now correctly applies to characters with armor (thanks Yukizawa)
 - Bug fixes
 

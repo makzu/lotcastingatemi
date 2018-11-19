@@ -1,12 +1,6 @@
 // @flow
-import SolarExcellency, {
-  solarExcellencyAbils,
-  hasSolarExcellency,
-} from './solar.js'
-import DbExcellency, {
-  dbExcellencyAbils,
-  hasDbExcellency,
-} from './dragonblooded.js'
+import SolarExcellency, { solarExcellencyAbils } from './solar.js'
+import DbExcellency, { dbExcellencyAbils } from './dragonblooded.js'
 import CustomExcellency from './custom.js'
 import type { Character, Charm } from 'utils/flow-types'
 
@@ -19,9 +13,13 @@ export const excellencyAbils = (
 
   let excellencies: Array<string> = character.excellencies_for || []
 
-  if (hasSolarExcellency(character)) {
+  if (character.type === 'SolarCharacter' || excellencies.includes('solar')) {
     excellencies = excellencies.concat(solarExcellencyAbils(character, charms))
-  } else if (hasDbExcellency(character)) {
+  }
+  if (
+    character.type === 'DragonbloodCharacter' ||
+    excellencies.includes('dragonblood')
+  ) {
     excellencies = excellencies.concat(dbExcellencyAbils(character, charms))
   }
 
@@ -53,17 +51,10 @@ export function maxExcellency(
   )
     return 0
 
-  if (hasSolarExcellency(character))
+  if (character.type === 'SolarCharacter')
     return SolarExcellency(character, attribute, ability, staticRating)
-  if (hasDbExcellency(character))
+  else if (character.type === 'DragonbloodCharacter')
     return DbExcellency(character, attribute, ability, staticRating)
-
-  // FEATURE: Setting excellency to 'sidereal' will set the excellency cap for pools and ratings to (Essence). You must still select which attrs/abils have excellencies.
-  if (
-    character.type === 'SiderealCharacter' ||
-    character.excellency === 'sidereal'
-  )
-    return character.essence
 
   return CustomExcellency(character, attribute, ability, staticRating, stunt)
 }

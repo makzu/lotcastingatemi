@@ -7,23 +7,20 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
+import CanonExcellencyCopy from './CanonExcellencyCopy.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import type { Character } from 'utils/flow-types'
 
-type Props = { character: Character, onChange: Function }
-type State = { open: boolean }
-class ExcellencyEditor extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-
-    this.state = {
-      open: false,
-    }
-  }
+class ExcellencyEditor extends Component<
+  { character: Character, onChange: Function, onChangeMulti: Function },
+  { open: boolean }
+> {
+  state = { open: false }
 
   handleExcellencyChange = (e: Object) => {
     // Not ideal but Flow complains if I have this set to SyntheticEvent<>
@@ -41,7 +38,7 @@ class ExcellencyEditor extends Component<Props, State> {
   }
 
   render() {
-    const { character, onChange } = this.props
+    const { character, onChange, onChangeMulti } = this.props
     const { handleOpen, handleClose, handleExcellencyChange } = this
     const { excellency, excellency_stunt } = this.props.character
 
@@ -49,6 +46,10 @@ class ExcellencyEditor extends Component<Props, State> {
       <MenuItem key="solar" value="solar">
         Solar (Attribute + Ability)
       </MenuItem>,
+      <MenuItem key="dragonblood" value="dragonblood">
+        Dragon-Blooded (Attribute + Specialty, static ratings round up)
+      </MenuItem>,
+      <Divider key="div1" style={{ margin: '0.125em 0' }} />,
       <MenuItem key="attribute" value="attribute">
         Attribute
       </MenuItem>,
@@ -82,8 +83,12 @@ class ExcellencyEditor extends Component<Props, State> {
       <MenuItem key="subtleanima" value="subtleanima">
         3 - Anima value (Dim: 3, Glowing: 2, Burning: 1, Bonfire: 0)
       </MenuItem>,
+      <Divider key="div2" style={{ margin: '0.125em 0' }} />,
       <MenuItem key="roundup" value="roundup">
         Round cap up for static ratings
+      </MenuItem>,
+      <MenuItem key="nohalf" value="nohalf">
+        Don&apos;t halve cap for static ratings
       </MenuItem>,
     ]
 
@@ -128,7 +133,7 @@ class ExcellencyEditor extends Component<Props, State> {
               margin="dense"
               fullWidth
             >
-              {excellency[0] == '' && (
+              {excellency === '' && (
                 <MenuItem key="blank" value="" disabled>
                   No Excellency
                 </MenuItem>
@@ -146,7 +151,7 @@ class ExcellencyEditor extends Component<Props, State> {
               margin="dense"
               fullWidth
             >
-              {excellency_stunt[0] == '' && (
+              {excellency_stunt === '' && (
                 <MenuItem key="blank" value="" disabled>
                   No change to caps on stunt
                 </MenuItem>
@@ -179,6 +184,12 @@ class ExcellencyEditor extends Component<Props, State> {
             />
           </DialogContent>
           <DialogActions>
+            <div style={{ flex: 1 }}>
+              <CanonExcellencyCopy
+                character={character}
+                onChangeMulti={onChangeMulti}
+              />
+            </div>
             <Button onClick={handleClose}>Done</Button>
           </DialogActions>
         </Dialog>

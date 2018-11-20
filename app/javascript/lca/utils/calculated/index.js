@@ -79,7 +79,8 @@ export function woundPenalty(character, merits) {
   } else if (totalDmg <= lvl4) {
     return 4 - modifier
   } else {
-    return -1
+    // TODO: change penalty or pools on incap?
+    return 4 - modifier
   }
 }
 

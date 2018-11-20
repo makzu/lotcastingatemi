@@ -14,6 +14,9 @@ const commonStyles = (theme: Object) => ({
     '& img': {
       maxWidth: '100%',
     },
+    '& code': {
+      opacity: 0.7,
+    },
   },
   flexContainer: {
     display: 'flex',

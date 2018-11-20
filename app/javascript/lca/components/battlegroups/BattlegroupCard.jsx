@@ -51,7 +51,7 @@ const styles = theme => ({
   },
   poolBlock: {
     marginRight: theme.spacing.unit,
-    minWidth: '3rem',
+    minWidth: '4rem',
   },
 })
 

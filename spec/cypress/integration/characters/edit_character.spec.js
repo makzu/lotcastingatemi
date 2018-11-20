@@ -4,6 +4,13 @@ context('Editing a Character', () => {
   beforeEach(() => {
     cy.appScenario('basic')
     cy.login()
+    cy.appFactories([
+      [
+        'create',
+        'solar_character',
+        { player_id: 1, name: 'Testy McTesterson' },
+      ],
+    ])
   })
 
   // TODO: replace [type=text] with real data-cy (or other) attributes

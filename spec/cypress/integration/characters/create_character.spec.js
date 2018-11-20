@@ -15,7 +15,7 @@ context('Creating Characters', () => {
     cy.get('[data-value=Character]').click()
     cy.get('[data-cy=submit]').click()
 
-    cy.contains('Test Mortal').click()
+    cy.contains('Test Mortal')
     cy.contains('Essence 1 Mortal')
   })
 
@@ -27,7 +27,7 @@ context('Creating Characters', () => {
 
     cy.get('[data-cy=submit]').click()
 
-    cy.contains('Test Solar').click()
+    cy.contains('Test Solar')
     cy.contains('Essence 1 Twilight Caste Solar')
   })
 
@@ -39,7 +39,7 @@ context('Creating Characters', () => {
     cy.get('[data-value=air]').click()
     cy.get('[data-cy=submit]').click()
 
-    cy.contains('Test DB').click()
+    cy.contains('Test DB')
     cy.contains('Essence 2 Air Aspect Dragon-Blooded')
   })
 
@@ -53,7 +53,7 @@ context('Creating Characters', () => {
       .type('Ability Exigent')
     cy.get('[data-cy=submit]').click()
 
-    cy.contains('Test Ability Exigent').click()
+    cy.contains('Test Ability Exigent')
     cy.contains('Essence 1 Exemplar Caste Ability Exigent')
   })
 
@@ -67,7 +67,7 @@ context('Creating Characters', () => {
       .type('Attribute Exigent')
     cy.get('[data-cy=submit]').click()
 
-    cy.contains('Test Attribute Exigent').click()
+    cy.contains('Test Attribute Exigent')
     cy.contains('Essence 1 Exemplar Caste Attribute Exigent')
   })
 })

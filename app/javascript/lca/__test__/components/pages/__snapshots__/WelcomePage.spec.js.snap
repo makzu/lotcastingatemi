@@ -11,12 +11,12 @@ exports[`WelcomePage renders at all 1`] = `
       className="MuiPaper-root-99 MuiPaper-elevation2-103 MuiPaper-rounded-100 BlockPaper-root-98"
     >
       <h1
-        className="MuiTypography-root-126 MuiTypography-headline-131 MuiTypography-gutterBottom-143"
+        className="MuiTypography-root-126 MuiTypography-headline-131 MuiTypography-gutterBottom-153"
       >
         Lot-Casting Atemi
       </h1>
       <p
-        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-gutterBottom-143"
+        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-gutterBottom-153"
       >
         <strong>
           Cost:
@@ -81,7 +81,7 @@ exports[`WelcomePage renders at all 1`] = `
       className="MuiPaper-root-99 MuiPaper-elevation2-103 MuiPaper-rounded-100 BlockPaper-root-98"
     >
       <p
-        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-paragraph-144"
+        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-paragraph-154"
       >
         Keep track of your characters' attributes, abilities, charms, merits, and more all from one place, accessible from any device with an Internet connection. PC screens, phones, and tablets are all supported, and character sheets are synced in real-time across all devices.
       </p>
@@ -167,7 +167,7 @@ exports[`WelcomePage renders at all 1`] = `
       className="MuiPaper-root-99 MuiPaper-elevation2-103 MuiPaper-rounded-100 BlockPaper-root-98"
     >
       <p
-        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-paragraph-144"
+        className="MuiTypography-root-126 MuiTypography-body1-135 MuiTypography-paragraph-154"
       >
         Create or join a Chronicle to see other players' characters, qcs, and battlegroups, with access to a full sheet for each one and a summary page showing a subset of dice pools and defenses. Storytellers can even make edits to their players' characters, and all changes are synced in real-time with other players.
       </p>

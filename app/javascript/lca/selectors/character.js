@@ -1,6 +1,7 @@
 // @flow
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
+import { isEmpty, max } from 'underscore'
 
 import { getPoolsForWeapon, sortByParry } from './weapon.js'
 import {
@@ -72,11 +73,12 @@ export const getPoisonsForCharacter = createCachedSelector(
 export const getPenalties = createCachedSelector(
   [getSpecificCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],
   (character, meritNames, poisons) => {
+    let poisonMax = isEmpty(poisons) ? 0 : max(poisons, p => p.penalty).penalty
     return {
       mobility: mobilityPenalty(character),
       onslaught: character.onslaught,
       wound: woundPenalty(character, meritNames),
-      poisonTotal: poisons.reduce((a, p) => a + p.penalty, 0),
+      poisonTotal: poisonMax,
     }
   }
 )(characterIdMemoizer)

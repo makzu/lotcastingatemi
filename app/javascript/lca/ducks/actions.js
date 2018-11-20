@@ -2,6 +2,7 @@
 export {
   updateCharacter,
   updateCharacterMulti,
+  changeCharacterType,
   createCharacter,
   duplicateCharacter,
   destroyCharacter,

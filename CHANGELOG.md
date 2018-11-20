@@ -2,6 +2,7 @@
 
 ###### _Not yet released_
 
+- Added option to change a character's exalt type. Characters can be converted from any type to any type
 - Character sheets can now be duplicated just like QC/BG sheets
 - The Excellency builder now includes a convenience menu for quickly duplicating Excellencies from the core book, _What Fire has Wrought_, and _Adversaries of the Righteous_.
 - 'As Solars' and 'As Dragon-Blooded' options in the excellency builder now work again (thanks Grifftofer, Vejuz)

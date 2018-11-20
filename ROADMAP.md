@@ -5,7 +5,6 @@
 - 'Dashboard' pages containing stats relevant to combat or social influence
 - Auto-fill for merits/weapons/Charms/spells
 - Character generation assistance (dot counts, BP costs, etc), with suggestions and page references
-- Exalt type switching (Mortal -> Exalt, Custom -> Canon, Canon -> Custom)
 - 'Dice Bag' of favorite/commonly used rolls, including Charm/Excellency selections
 - Poison/Disease tracking
 - Sorcerous Working / Crafting / Project / extended roll trackers

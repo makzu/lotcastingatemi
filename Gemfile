@@ -22,7 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'jbuilder', '~> 2.5'
 
 # For JSON responses
-gem 'active_model_serializers', '~> 0.10.6'
+gem 'active_model_serializers', '~> 0.10.8'
 
 # For duplicating QCs and Battlegroups
 gem 'deep_cloneable', '~> 2.3'
@@ -60,7 +60,7 @@ group :development, :test, :cypress do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'rubocop', '~> 0.59', require: false
+  gem 'rubocop', '~> 0.60', require: false
   gem 'rubocop-rspec', '~> 1.30', require: false
 end
 

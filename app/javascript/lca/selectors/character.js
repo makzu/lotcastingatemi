@@ -14,13 +14,15 @@ import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
 import * as pools from 'utils/calculated/pools'
 import * as ratings from 'utils/calculated/ratings'
 
+import type { Character } from 'utils/flow-types'
+
 const entities = state => state.entities.current
 
 const getState = state => state
 const getCurrentPlayer = state => entities(state).players[state.session.id]
 const getPoisons = state => entities(state).poisons
 
-export const getSpecificCharacter = (state: Object, id: number) =>
+export const getSpecificCharacter = (state: Object, id: number): Character =>
   entities(state).characters[id]
 const characterIdMemoizer = (state, id) => id
 export const getCachedSpecificCharacter = createCachedSelector(

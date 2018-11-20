@@ -28,11 +28,13 @@ export const getMyQCs = createSelector(
   [getCurrentPlayer, getQCs],
   (currentPlayer, qcs) => currentPlayer.qcs.map(c => qcs[c]).sort(sortOrderSort)
 )
-export const getMyPinnedQCs = createSelector([getMyQCs], qcs =>
-  qcs.filter(c => c.pinned)
+export const getMyPinnedQCs = createSelector(
+  [getMyQCs],
+  qcs => qcs.filter(c => c.pinned)
 )
-export const getMyQcsWithoutChronicles = createSelector([getMyQCs], qcs =>
-  qcs.filter(c => c.chronicle_id == undefined)
+export const getMyQcsWithoutChronicles = createSelector(
+  [getMyQCs],
+  qcs => qcs.filter(c => c.chronicle_id == undefined)
 )
 
 const getBattlegroups = state => entities(state).battlegroups

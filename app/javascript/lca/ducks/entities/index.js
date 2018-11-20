@@ -92,7 +92,10 @@ export type EntityState = {
   +poisons: { [id: number]: Poison },
 }
 
-export function EntityReducer(state: EntityState = defaultState, action) {
+export function EntityReducer(
+  state: EntityState = defaultState,
+  action: Object
+) {
   switch (action.type) {
     case LOGOUT:
     case PLY_DESTROY_SUCCESS:

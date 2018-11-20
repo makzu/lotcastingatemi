@@ -14,10 +14,10 @@ import parry from 'utils/calculated/ratings/parry.js'
 
 const entities = state => state.entities.current
 const getState = state => state
-const getWeapon = (state, id) => entities(state).weapons[id]
-const getCharacterForWeapon = (state, id) =>
+const getWeapon = (state, id: number) => entities(state).weapons[id]
+const getCharacterForWeapon = (state, id: number) =>
   entities(state).characters[getWeapon(state, id).character_id]
-const getPenaltiesForWeapon = (state, id) =>
+const getPenaltiesForWeapon = (state, id: number) =>
   getPenalties(state, getCharacterForWeapon(state, id).id)
 
 const getExcellencyAbilsForWeapon = createSelector(

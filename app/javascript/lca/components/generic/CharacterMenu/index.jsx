@@ -47,7 +47,7 @@ class CharacterMenu extends Component<Props, { menuAnchor: ?Object }> {
     const { header, classes } = this.props
     return (
       <div className={header ? classes.headerWrapper : classes.wrapper}>
-        <IconButton onClick={this.handleOpen}>
+        <IconButton onClick={this.handleOpen} data-cy="character-menu">
           <MoreVert />
         </IconButton>
 

@@ -35,3 +35,42 @@ export type Chronicle = {
   st_id: number,
   name: string,
 }
+
+export type Ability =
+  | 'archery'
+  | 'athletics'
+  | 'awareness'
+  | 'brawl'
+  | 'bureaucracy'
+  | 'craft'
+  | 'dodge'
+  | 'integrity'
+  | 'investigation'
+  | 'larceny'
+  | 'linguistics'
+  | 'lore'
+  | 'martial_arts'
+  | 'medicine'
+  | 'melee'
+  | 'occult'
+  | 'performance'
+  | 'presence'
+  | 'resistance'
+  | 'ride'
+  | 'sail'
+  | 'socialize'
+  | 'stealth'
+  | 'survival'
+  | 'thrown'
+  | 'war'
+
+export type Attribute =
+  | 'strength'
+  | 'dexterity'
+  | 'stamina'
+  | 'charisma'
+  | 'manipulation'
+  | 'appearance'
+  | 'perception'
+  | 'intelligence'
+  | 'wits'

@@ -50,7 +50,7 @@ export default function pool(
     excellencyCost: excellency,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt,
-    penalties: penalties.filter(p => p.penalty > 0),
+    penalties: penalties,
     totalPenalty: penalty,
     total: Math.max(pool + mb - penalty, 0),
     specialAttacks: specialAttacks,

@@ -32,6 +32,8 @@ class CharacterSerializer < PlayerAssetSerializer
 
              :resources,
 
+             :bonus_hardness, :bonus_soak, :bonus_mobility_penalty,
+
              :xp_total, :xp_solar_total, :xp_log, :xp_log_solar, :bp_log,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
              :notes, :equipment, :portrait_link

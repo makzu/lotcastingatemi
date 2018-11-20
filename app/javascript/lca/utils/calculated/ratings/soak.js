@@ -29,9 +29,10 @@ export function soak(
   let unusualHide = merits.find(m => m.startsWith('unusual hide'))
   if (unusualHide != undefined) {
     b += parseInt(unusualHide.substr(-1))
-    bonus = bonus.concat([
+    bonus = [
+      ...bonus,
       { label: 'unusual hide', bonus: parseInt(unusualHide.substr(-1)) },
-    ])
+    ]
   }
 
   // ISoB control spell bonus applies even while wearing armor:
@@ -39,9 +40,10 @@ export function soak(
   let isob = spells.find(s => s === 'invulnerable skin of bronze')
   if (isob != undefined) {
     b += character.essence
-    bonus = bonus.concat([
+    bonus = [
+      ...bonus,
       { label: 'invulnerable skin of bronze', bonus: character.essence },
-    ])
+    ]
   }
 
   // Earth aspect DBs gain higher of 3 or (essence) to soak generally
@@ -55,9 +57,10 @@ export function soak(
       case 'earth':
         if (bonfire) {
           b += Math.max(character.essence, 3)
-          bonus = bonus.concat([
+          bonus = [
+            ...bonus,
             { label: 'anima', bonus: Math.max(character.essence, 3) },
-          ])
+          ]
         } else {
           bonus = [
             ...bonus,
@@ -86,8 +89,11 @@ export function soak(
     name: 'Soak',
     natural: naturalSoak(character),
     bonus: bonus,
-    armored: armorSoak(character),
-    total: naturalSoak(character) + armorSoak(character) + b,
+    armored: armorSoak(character) + character.bonus_soak,
+    total: Math.max(
+      naturalSoak(character) + armorSoak(character) + character.bonus_soak + b,
+      0
+    ),
     soak: true,
   }
 }

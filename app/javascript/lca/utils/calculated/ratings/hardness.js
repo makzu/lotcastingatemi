@@ -11,13 +11,16 @@ export function hardness(character: Character): Pool {
   if (character.armor_is_artifact) {
     switch (character.armor_weight) {
       case 'light':
-        armor = 4
+        armor = 4 + character.bonus_hardness
         break
       case 'medium':
-        armor = 7
+        armor = 7 + character.bonus_hardness
         break
       case 'heavy':
-        armor = 10
+        armor = 10 + character.bonus_hardness
+        break
+      default:
+        armor = character.bonus_hardness
     }
   }
 

@@ -55,6 +55,9 @@ export type withArmorStats = {
   armor_weight: 'unarmored' | 'light' | 'medium' | 'heavy',
   armor_is_artifact: boolean,
   armor_tags: Array<string>,
+  bonus_soak: number,
+  bonus_hardness: number,
+  bonus_mobility_penalty: number,
 }
 
 export type specialty = {

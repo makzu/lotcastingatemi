@@ -156,13 +156,13 @@ export const nonCasteAttributes = (character: Character) =>
 export function mobilityPenalty(character: withArmorStats) {
   switch (character.armor_weight) {
     case 'heavy':
-      return 2
+      return 2 + character.bonus_mobility_penalty
     case 'medium':
-      return 1
+      return 1 + character.bonus_mobility_penalty
     case 'light':
     case 'unarmored':
     default:
-      return 0
+      return 0 + character.bonus_mobility_penalty
   }
 }
 

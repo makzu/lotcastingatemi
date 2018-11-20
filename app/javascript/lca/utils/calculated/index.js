@@ -14,7 +14,13 @@ import {
   ATTACK_ABILITIES,
   NON_ATTACK_ABILITIES,
 } from '../constants.js'
-import type { Character, withHealthLevels, withArmorStats } from '../flow-types'
+import type {
+  Character,
+  withHealthLevels,
+  withMotePool,
+  withArmorStats,
+  specialty,
+} from '../flow-types'
 
 export const attr = (character: Character, attribute: string) =>
   attribute === 'essence' ? character.essence : character[`attr_${attribute}`]
@@ -40,7 +46,10 @@ export const abil = (character: Character, ability: string) => {
   }
 }
 
-export const specialtiesFor = (character: Character, ability) => {
+export const specialtiesFor = (
+  character: Character,
+  ability: string
+): Array<string> => {
   let abili = ability
   if (abili.startsWith('martial arts')) abili = 'martial_arts'
   else if (abili.startsWith('craft')) abili = 'craft'
@@ -59,7 +68,10 @@ export const totalHealthLevels = (character: withHealthLevels) =>
   character.health_level_4s +
   character.health_level_incap
 
-export function woundPenalty(character, merits) {
+export function woundPenalty(
+  character: withHealthLevels,
+  merits: Array<string>
+) {
   const totalDmg =
     character.damage_bashing +
     character.damage_lethal +
@@ -84,7 +96,9 @@ export function woundPenalty(character, merits) {
   }
 }
 
-export function attackAbilities(character) {
+export function attackAbilities(
+  character: Character
+): Array<{ abil: string, rating: number, specialties: Array<specialty> }> {
   let abils = ATTACK_ABILITIES.map(abil => {
     let name = abil.substring(5)
     return {
@@ -108,7 +122,9 @@ export function attackAbilities(character) {
   return abils.concat(mas)
 }
 
-export function nonAttackAbilities(character) {
+export function nonAttackAbilities(
+  character: Character
+): Array<{ abil: string, rating: number, specialties: Array<specialty> }> {
   let abils = NON_ATTACK_ABILITIES.filter(abil => character[abil] > 0).map(
     function(abil) {
       let name = abil.substring(5)
@@ -134,7 +150,7 @@ export function nonAttackAbilities(character) {
   return abils.concat(crafts)
 }
 
-export function abilitiesWithRatings(character) {
+export function abilitiesWithRatings(character: Character): Array<Object> {
   const abils = ABILITIES_ALL.filter(a => {
     if (a.abil === 'abil_craft' || a.abil === 'abil_martial_arts')
       return character[a.abil].length > 0
@@ -144,12 +160,12 @@ export function abilitiesWithRatings(character) {
   return abils
 }
 
-export const nonCasteAbilities = (character: Character) =>
+export const nonCasteAbilities = (character: Character): Array<Object> =>
   ABILITIES_ALL_NO_MA.filter(a => {
     return !(character.caste_abilities || []).includes(a.pretty.toLowerCase())
   })
 
-export const nonCasteAttributes = (character: Character) =>
+export const nonCasteAttributes = (character: Character): Array<Object> =>
   ATTRIBUTES.filter(a => {
     return !(character.caste_attributes || []).includes(a.pretty.toLowerCase())
   })
@@ -167,7 +183,7 @@ export function mobilityPenalty(character: withArmorStats) {
   }
 }
 
-export function prettyExaltType(character) {
+export function prettyExaltType(character: Character) {
   switch (character.type) {
     case 'Character':
       return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
@@ -180,8 +196,8 @@ export function prettyExaltType(character) {
   }
 }
 
-export function prettyFullExaltType(character) {
-  if (character.type == 'Character')
+export function prettyFullExaltType(character: Character) {
+  if (character.type === 'Character')
     return character.is_sorcerer ? 'Non-Exalt Sorcerer' : 'Mortal'
 
   let caste =
@@ -193,7 +209,7 @@ export function prettyFullExaltType(character) {
   return `${caste}${prettyExaltType(character) || 'Exalt'}`
 }
 
-export function exaltTypeBase(character) {
+export function exaltTypeBase(character: Character) {
   switch (character.type) {
     case 'SolarCharacter':
     case 'DragonbloodCharacter':
@@ -209,7 +225,7 @@ export function exaltTypeBase(character) {
   }
 }
 
-export function prettyIntimacyRating(rating) {
+export function prettyIntimacyRating(rating: number) {
   switch (rating) {
     case 3:
       return 'Defining'
@@ -222,7 +238,7 @@ export function prettyIntimacyRating(rating) {
   }
 }
 
-export function prettyAnimaLevel(rating) {
+export function prettyAnimaLevel(rating: number) {
   switch (rating) {
     case 3:
       return 'Bonfire'
@@ -236,49 +252,49 @@ export function prettyAnimaLevel(rating) {
   }
 }
 
-export const hasAura = character =>
+export const hasAura = (character: Character) =>
   character.type === 'DragonbloodCharacter' ||
   character.type === 'CustomAbilityCharacter' ||
   character.type === 'CustomAttributeCharacter' ||
   character.type === 'CustomEssenceCharacter'
 
-export const isCasteAbility = (character, ability) =>
+export const isCasteAbility = (character: Character, ability: string) =>
   character.caste_abilities && character.caste_abilities.includes(ability)
 
-export const isSupernalAbility = (character, ability) =>
+export const isSupernalAbility = (character: Character, ability: string) =>
   character.supernal_ability === ability
 
-export const isFavoredAbility = (character, ability) =>
+export const isFavoredAbility = (character: Character, ability: string) =>
   character.favored_abilities && character.favored_abilities.includes(ability)
 
-export const isCasteAttribute = (character, attribute) =>
+export const isCasteAttribute = (character: Character, attribute: string) =>
   character.caste_attributes && character.caste_attributes.includes(attribute)
 
-export const isFavoredAttribute = (character, attribute) =>
+export const isFavoredAttribute = (character: Character, attribute: string) =>
   character.favored_attributes &&
   character.favored_attributes.includes(attribute)
 
-export const committedPersonalMotes = character =>
+export const committedPersonalMotes = (character: withMotePool) =>
   character.motes_committed
-    .filter(c => c.pool == 'personal')
+    .filter(c => c.pool === 'personal')
     .reduce((total, c) => total + c.motes, 0)
 
-export const committedPeripheralMotes = character =>
+export const committedPeripheralMotes = (character: withMotePool) =>
   character.motes_committed
-    .filter(c => c.pool == 'peripheral')
+    .filter(c => c.pool === 'peripheral')
     .reduce((total, c) => total + c.motes, 0)
 
-export const spentXp = character =>
+export const spentXp = (character: Character) =>
   character.xp_log.reduce((total, c) => total + c.points, 0)
 
-export const spentSolarXp = character =>
+export const spentSolarXp = (character: Character) =>
   character.xp_log_solar.reduce((total, c) => total + c.points, 0)
 
-export const spentBp = character =>
+export const spentBp = (character: Character) =>
   character.bp_log.reduce((total, c) => total + c.points, 0)
 
 export const penaltyObject = (
-  penalties,
+  penalties: Object,
   {
     useWound = true,
     useMobility = false,

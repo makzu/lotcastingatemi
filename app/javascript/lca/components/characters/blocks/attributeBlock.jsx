@@ -35,8 +35,9 @@ function AttributeBlock({ character, pools }: Props) {
             f: Favored
           </span>
         )}
-        {pools.exaltTypeBase !== 'attribute' &&
-          false && <span>p: Primary, s: Secondary</span>}
+        {pools.exaltTypeBase !== 'attribute' && false && (
+          <span>p: Primary, s: Secondary</span>
+        )}
       </Typography>
     </BlockPaper>
   )

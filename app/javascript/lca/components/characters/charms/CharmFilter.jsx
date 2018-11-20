@@ -78,19 +78,18 @@ class CharmFilter extends Component<Props> {
       <MenuItem key="none" value="">
         No Filter
       </MenuItem>,
-      ...filters.map(
-        abil =>
-          abil === 'martial_arts' ? ( // Skip Martial Arts, it has its own handling
-            <span key={abil} />
-          ) : (
-            <MenuItem
-              key={abil}
-              value={abil}
-              style={{ textTransform: 'capitalize' }}
-            >
-              {abil}
-            </MenuItem>
-          )
+      ...filters.map(abil =>
+        abil === 'martial_arts' ? ( // Skip Martial Arts, it has its own handling
+          <span key={abil} />
+        ) : (
+          <MenuItem
+            key={abil}
+            value={abil}
+            style={{ textTransform: 'capitalize' }}
+          >
+            {abil}
+          </MenuItem>
+        )
       ),
     ]
     const catOptions = categories.map(cat => (

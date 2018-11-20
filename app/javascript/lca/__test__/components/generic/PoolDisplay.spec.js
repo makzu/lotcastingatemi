@@ -21,6 +21,7 @@ describe('PoolDisplay', () => {
       const component = renderer.create(
         <div>
           {Object.keys(pools).map((p, i) => (
+            // $FlowFixMe
             <PoolDisplay label="test" pool={p} key={i} />
           ))}
         </div>

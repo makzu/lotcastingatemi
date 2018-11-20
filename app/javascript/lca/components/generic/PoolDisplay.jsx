@@ -92,25 +92,26 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
         {m.label}
       </div>
     ))
-    const fullMerits = mb.filter(m => !m.noFull).map(m => (
-      <div key={m.label}>
-        {m.situational && (
-          <span className={classes.excellency}>(conditional)</span>
-        )}
-        {m.bonus != null && m.bonus > 0 && '+'}
-        {m.bonus !== 0 && m.bonus} {m.label}
-      </div>
-    ))
+    const fullMerits = mb
+      .filter(m => !m.noFull)
+      .map(m => (
+        <div key={m.label}>
+          {m.situational && (
+            <span className={classes.excellency}>(conditional) </span>
+          )}
+          {m.bonus != null && m.bonus > 0 && '+'}
+          {m.bonus !== 0 && m.bonus} {m.label}
+        </div>
+      ))
 
-    const fullPen = pen.map(
-      p =>
-        p.penalty > 0 ? (
-          <div key={p.label}>
-            -{p.penalty} {p.label}
-          </div>
-        ) : (
-          <span key={p.label} />
-        )
+    const fullPen = pen.map(p =>
+      p.penalty !== 0 ? (
+        <div key={p.label}>
+          -{p.penalty} {p.label}
+        </div>
+      ) : (
+        <span key={p.label} />
+      )
     )
     const showSpecialties =
       sp.length > 0 && ((pool.rating && pool.specialtyMatters) || !pool.rating)
@@ -221,7 +222,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               </DialogContentText>
             )}
 
-            {(pool.totalPenalty || 0) > 0 && (
+            {(pool.totalPenalty || 0) !== 0 && (
               <DialogContentText>
                 -{pool.totalPenalty} Penalties
               </DialogContentText>

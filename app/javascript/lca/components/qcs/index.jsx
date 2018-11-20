@@ -128,31 +128,29 @@ class QcSheet extends Component<Props> {
         classes={{ root: classes.poolBlock }}
       />
     ))
-    const principles = qc.principles.map(
-      (p, index) =>
-        p.hidden && !canEdit ? (
-          <span key={index} />
-        ) : (
-          <div key={index}>
-            <span className={classes.intimacyTypeLabel}>Principle: </span>
-            <span className={classes.intimacy}>
-              {p.subject} ({prettyIntimacyRating(p.rating)})
-            </span>
-          </div>
-        )
+    const principles = qc.principles.map((p, index) =>
+      p.hidden && !canEdit ? (
+        <span key={index} />
+      ) : (
+        <div key={index}>
+          <span className={classes.intimacyTypeLabel}>Principle: </span>
+          <span className={classes.intimacy}>
+            {p.subject} ({prettyIntimacyRating(p.rating)})
+          </span>
+        </div>
+      )
     )
-    const ties = qc.ties.map(
-      (tie, index) =>
-        tie.hidden && !canEdit ? (
-          <span key={index} />
-        ) : (
-          <div key={index}>
-            <span className={classes.intimacyTypeLabel}>Tie: </span>
-            <span className={classes.intimacy}>
-              {tie.subject} ({prettyIntimacyRating(tie.rating)})
-            </span>
-          </div>
-        )
+    const ties = qc.ties.map((tie, index) =>
+      tie.hidden && !canEdit ? (
+        <span key={index} />
+      ) : (
+        <div key={index}>
+          <span className={classes.intimacyTypeLabel}>Tie: </span>
+          <span className={classes.intimacy}>
+            {tie.subject} ({prettyIntimacyRating(tie.rating)})
+          </span>
+        </div>
+      )
     )
     const attacks = qc_attacks.map(attack => (
       <div key={attack.id} className={classes.rowContainer}>

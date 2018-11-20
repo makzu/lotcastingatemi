@@ -76,11 +76,13 @@ class CombatDashboard extends Component<Props> {
     const { characters, qcs, battlegroups } = this.props
     const entities = [...characters, ...qcs, ...battlegroups]
 
-    const outOfCombatList = entities.filter(c => !c.in_combat).map(c => (
-      <Grid item xs={6} lg={4} xl={3} key={c.type + c.id}>
-        <OutOfCombatCard character={c} />
-      </Grid>
-    ))
+    const outOfCombatList = entities
+      .filter(c => !c.in_combat)
+      .map(c => (
+        <Grid item xs={6} lg={4} xl={3} key={c.type + c.id}>
+          <OutOfCombatCard character={c} />
+        </Grid>
+      ))
 
     const inCombatEntities = entities
       .filter(c => c.in_combat)

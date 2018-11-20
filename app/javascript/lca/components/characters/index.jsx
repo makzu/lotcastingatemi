@@ -43,31 +43,29 @@ import type {
 
 type IntProps = { character: Character, canEdit: boolean }
 function IntimacySummary({ character, canEdit }: IntProps) {
-  const principles = character.principles.map(
-    (p, index) =>
-      p.hidden && !canEdit ? (
-        <span key={index} />
-      ) : (
-        <Typography key={index} component="div">
-          <RatingLine rating={p.rating} fillTo={3}>
-            {p.subject}
-          </RatingLine>
-          <Divider />
-        </Typography>
-      )
+  const principles = character.principles.map((p, index) =>
+    p.hidden && !canEdit ? (
+      <span key={index} />
+    ) : (
+      <Typography key={index} component="div">
+        <RatingLine rating={p.rating} fillTo={3}>
+          {p.subject}
+        </RatingLine>
+        <Divider />
+      </Typography>
+    )
   )
-  const ties = character.ties.map(
-    (p, index) =>
-      p.hidden && !canEdit ? (
-        <span key={index} />
-      ) : (
-        <Typography key={index} component="div">
-          <RatingLine rating={p.rating} fillTo={3}>
-            {p.subject}
-          </RatingLine>
-          <Divider />
-        </Typography>
-      )
+  const ties = character.ties.map((p, index) =>
+    p.hidden && !canEdit ? (
+      <span key={index} />
+    ) : (
+      <Typography key={index} component="div">
+        <RatingLine rating={p.rating} fillTo={3}>
+          {p.subject}
+        </RatingLine>
+        <Divider />
+      </Typography>
+    )
   )
 
   return (

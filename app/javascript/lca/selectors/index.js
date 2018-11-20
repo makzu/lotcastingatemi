@@ -23,10 +23,11 @@ import {
 import { amIStOfChronicle } from './chronicle.js'
 
 const entities = state => state.entities.current
-export const getCurrentPlayer = state =>
+export const getCurrentPlayer = (state: Object) =>
   entities(state).players[state.session.id]
 
-export const canIEdit = (state, id, characterType) => {
+type CT = 'chronicle' | 'character' | 'qc' | 'battlegroup'
+export const canIEdit = (state: Object, id: number, characterType: CT) => {
   switch (characterType) {
     case 'chronicle':
       return amIStOfChronicle(state, id)
@@ -41,7 +42,7 @@ export const canIEdit = (state, id, characterType) => {
   }
 }
 
-export const canIDelete = (state, id, characterType) => {
+export const canIDelete = (state: Object, id: number, characterType: CT) => {
   switch (characterType) {
     case 'chronicle':
       return amIStOfChronicle(state, id)
@@ -56,7 +57,7 @@ export const canIDelete = (state, id, characterType) => {
   }
 }
 
-export const isPublicCharacterPage = (state, pathName) => {
+export const isPublicCharacterPage = (state: Object, pathName: string) => {
   const path = pathName.split('/')
 
   if (
@@ -84,7 +85,11 @@ export const getMyChronicles = createSelector(
       .filter(c => c !== undefined && c.name !== undefined)
 )
 
-export const getPoolsAndRatingsGeneric = (state, id, characterType) => {
+export const getPoolsAndRatingsGeneric = (
+  state: Object,
+  id: number,
+  characterType: CT
+) => {
   switch (characterType) {
     case 'qc':
       return getPoolsAndRatingsForQc(state, id)
@@ -94,3 +99,5 @@ export const getPoolsAndRatingsGeneric = (state, id, characterType) => {
       return getPoolsAndRatings(state, id)
   }
 }
+
+export const getPoisons = state => entities(state).poisons

@@ -16,7 +16,7 @@ import { history } from 'containers/rootContainer.jsx'
 /* On successfully creating an entity or joining a Chronicle, navigate to that
  * entity or Chronicle's page. Uses Push, so that the back button will work
  * as expected.
-*/
+ */
 // eslint-disable-next-line no-unused-vars
 const Navigator = (store: Object) => (next: Function) => (action: Object) => {
   switch (action.type) {

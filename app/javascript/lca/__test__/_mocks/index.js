@@ -71,6 +71,10 @@ export const genMortal = {
   armor_is_artifact: gen.boolean,
   armor_tags: gen.array(gen.string),
   onslaught: gen.posInt,
+  poisons: [],
+  bonus_hardness: 0,
+  bonus_soak: 0,
+  bonus_mobility_penalty: 0,
 }
 
 export const genAbilityExalt = {
@@ -166,4 +170,7 @@ export const mockCharacter = {
   damage_aggravated: 0,
   initiative: 0,
   onslaught: 0,
+  bonus_hardness: 0,
+  bonus_soak: 0,
+  bonus_mobility_penalty: 0,
 }

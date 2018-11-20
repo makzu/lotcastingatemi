@@ -91,4 +91,7 @@ export const canIEditQc = createSelector(
   (doI, amI) => doI || amI
 )
 
-export const canIDeleteQc = createSelector([doIOwnQc], doI => doI)
+export const canIDeleteQc = createSelector(
+  [doIOwnQc],
+  doI => doI
+)

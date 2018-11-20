@@ -28,11 +28,16 @@ import XpEditor from './editors/xpEditor.jsx'
 import WeaponEditor from './weapons/WeaponEditor.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateCharacter, updateCharacterMulti } from 'ducks/actions.js'
-import { getSpecificCharacter, getPenalties } from 'selectors'
+import {
+  getSpecificCharacter,
+  getPoolsAndRatings,
+  getPenalties,
+} from 'selectors'
 import type { Character } from 'utils/flow-types'
 
 type Props = {
   character: Character,
+  pools: Object,
   penalties: Object,
   updateCharacter: Function,
   updateCharacterMulti: Function,
@@ -68,9 +73,8 @@ class CharacterEditor extends Component<Props> {
         </div>
       )
 
-    const { character } = this.props
+    const { character, pools, penalties } = this.props
     const { handleChange, handleCheck, handleChangeMulti } = this
-    const { penalties } = this.props
     const showLimit =
       character.type !== 'Character' &&
       character.exalt_type.toLowerCase() !== 'dragon-blood'
@@ -174,6 +178,8 @@ class CharacterEditor extends Component<Props> {
           <Grid item xs={12} sm={6}>
             <ArmorEditor
               character={character}
+              pools={pools}
+              penalties={penalties}
               onChange={handleChange}
               onCheck={handleCheck}
             />
@@ -211,14 +217,16 @@ class CharacterEditor extends Component<Props> {
 function mapStateToProps(state, props) {
   const id = props.match.params.characterId
   const character = getSpecificCharacter(state, id)
-  let penalties
+  let pools, penalties
 
   if (character != undefined) {
+    pools = getPoolsAndRatings(state, id)
     penalties = getPenalties(state, id)
   }
 
   return {
     character,
+    pools,
     penalties,
   }
 }

@@ -71,9 +71,11 @@ describe('Calculated values', () => {
   })
 
   it('should give correct values for abilities', () => {
+    // $FlowThisIsOkayISwear
     expect(calc.attackAbilities(mockChar)).toEqual(
       expect.arrayContaining([{ abil: 'melee', rating: 2, specialties: [] }])
     )
+    // $FlowThisIsOkayISwear
     expect(calc.abilitiesWithRatings(mockChar).length).toEqual(4)
   })
 
@@ -85,6 +87,10 @@ describe('Calculated values', () => {
       ability: 'melee',
       attr: 'dexterity',
       damage_attr: 'strength',
+      bonus_accuracy: 0,
+      bonus_defense: 0,
+      bonus_overwhelming: 0,
+      bonus_damage: 0,
     }
     const mockPenalty = { wound: 0 }
     const medium = { ...light, weight: 'medium' }

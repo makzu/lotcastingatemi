@@ -43,6 +43,7 @@ module Api
           qc_attacks qc_charms qc_merits poisons
         ], except: %i[
           chronicle_id sort_order chronicle_sort_order pinned hidden public
+          in_combat has_acted
         ]
 
         @new_qc.name = @new_qc.name + ' (Duplicate)'

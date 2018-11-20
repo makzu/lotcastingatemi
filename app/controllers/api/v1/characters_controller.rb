@@ -44,6 +44,7 @@ module Api
           martial_arts_charms weapons merits spirit_charms spells poisons
         ], except: %i[
           chronicle_id sort_order chronicle_sort_order pinned hidden public
+          in_combat has_acted
         ]
 
         @new_character.name = @new_character.name + ' (Duplicate)'

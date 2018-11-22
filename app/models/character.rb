@@ -127,4 +127,8 @@ class Character < ApplicationRecord
     ).each(&:destroy)
     new_cha
   end
+
+  def charms
+    []
+  end
 end

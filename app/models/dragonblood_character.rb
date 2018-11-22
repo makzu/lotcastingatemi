@@ -14,11 +14,11 @@ class DragonbloodCharacter < Character
 
   DRAGONBLOOD_ASPECTS = %w[air earth fire water wood].freeze
   ASPECT_ABILITIES = {
-    "air":   %w[ linguistics lore occult stealth thrown ],
-    "earth": %w[ awareness craft integrity resistance war ],
-    "fire":  %w[ athletics dodge melee presence socialize ],
-    "water": %w[ brawl bureaucracy investigation larceny sail ],
-    "wood":  %w[ archery medicine performance ride survival ]
+    "air":   %w[ linguistics lore        occult        stealth    thrown    ],
+    "earth": %w[ awareness   craft       integrity     resistance war       ],
+    "fire":  %w[ athletics   dodge       melee         presence   socialize ],
+    "water": %w[ brawl       bureaucracy investigation larceny    sail      ],
+    "wood":  %w[ archery     medicine    performance   ride       survival  ]
   }.freeze
 
   before_validation :set_mote_pool_totals
@@ -53,8 +53,13 @@ class DragonbloodCharacter < Character
 
     self.motes_personal_total     = essence + 11
     self.motes_peripheral_total   = (essence * 4) + 23
-    self.motes_personal_current   = [motes_personal_available,   motes_personal_current].min
-    self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
+    if type_was == 'Character'
+      self.motes_personal_current   = motes_personal_available
+      self.motes_peripheral_current = motes_peripheral_available
+    else
+      self.motes_personal_current   = [motes_personal_available,   motes_personal_current].min
+      self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
+    end
   end
 
   def set_defaults
@@ -62,7 +67,7 @@ class DragonbloodCharacter < Character
     self.aspect = true
     self.excellency = 'dragonblood'
     self.excellency_stunt = ''
-    self.excellencies_for = []
+    self.excellencies_for = ['dragonblood']
     self.limit = nil
   end
 

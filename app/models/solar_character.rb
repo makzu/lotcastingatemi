@@ -58,8 +58,13 @@ class SolarCharacter < Character
 
     self.motes_personal_total     = (essence * 3) + 10
     self.motes_peripheral_total   = (essence * 7) + 26
-    self.motes_personal_current   = [motes_personal_available,   motes_personal_current].min
-    self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
+    if type_was == 'Character'
+      self.motes_personal_current   = motes_personal_available
+      self.motes_peripheral_current = motes_peripheral_available
+    else
+      self.motes_personal_current   = [motes_personal_available,   motes_personal_current].min
+      self.motes_peripheral_current = [motes_peripheral_available, motes_peripheral_current].min
+    end
   end
 
   def set_defaults
@@ -68,7 +73,7 @@ class SolarCharacter < Character
     self.aura = ''
     self.excellency = 'solar'
     self.excellency_stunt = ''
-    self.excellencies_for = []
+    self.excellencies_for = ['solar']
   end
 
   def set_caste_abilities_on_supernal_change

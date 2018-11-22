@@ -35,6 +35,21 @@ class CharacterSerializer < PlayerAssetSerializer
              :xp_total, :xp_solar_total, :xp_log, :xp_log_solar, :bp_log,
              :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
              :notes, :equipment, :portrait_link
+
+  attributes :motes_personal_current,   :motes_personal_total,
+             :motes_peripheral_current, :motes_peripheral_total,
+             :motes_committed,
+             :anima_level, :anima_powers, :anima_display,
+             :caste, :aspect, :exalt_type,
+             :limit_trigger, :limit,
+             :caste_abilities, :favored_abilities, :supernal_ability, :aura,
+             :caste_attributes, :favored_attributes,
+             :excellency, :excellency_stunt, :excellencies_for
+
+  has_many :charms
+  has_many :martial_arts_charms
+  has_many :evocations
+  has_many :spirit_charms
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   has_many :merits

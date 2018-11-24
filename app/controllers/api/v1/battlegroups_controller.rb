@@ -43,6 +43,7 @@ module Api
           qc_attacks poisons
         ], except: %i[
           chronicle_id sort_order chronicle_sort_order pinned hidden public
+          in_combat has_acted
         ]
 
         @new_bg.name = @new_bg.name + ' (Duplicate)'

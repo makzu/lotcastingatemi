@@ -39,4 +39,28 @@ RSpec.describe 'Characters', type: :request do
       end
     end
   end
+
+  context 'changing types' do
+    describe 'with valid types' do
+      %w[SolarCharacter DragonbloodCharacter CustomAbilityCharacter CustomAttributeCharacter CustomEssenceCharacter].each do |type|
+        it "works for #{type}" do
+          post "/api/v1/characters/#{character.id}/change_type",
+               headers: authenticated_header(character.player),
+               params: { type: type }
+
+          expect(response.status).to eq 200
+        end
+      end
+    end
+
+    describe 'with an invalid type' do
+      it 'throws an error' do
+        post "/api/v1/characters/#{character.id}/change_type",
+             headers: authenticated_header(character.player),
+             params: { type: 'NotAType' }
+
+        expect(response.status).to eq 400
+      end
+    end
+  end
 end

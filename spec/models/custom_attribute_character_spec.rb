@@ -3,7 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe CustomAttributeCharacter, type: :model do
-  it 'has a valid factory' do
-    expect(FactoryBot.create(:custom_attribute_character)).to be_valid
+  describe 'converting types' do
+    %i[
+      character solar_character dragonblood_character
+      custom_ability_character custom_essence_character
+    ].each do |char|
+      it "works for #{char}" do
+        g = create(char)
+        m = CustomAttributeCharacter.from_character!(g)
+        expect(m).to be_valid
+      end
+    end
   end
 end

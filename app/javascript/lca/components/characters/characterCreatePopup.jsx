@@ -9,12 +9,11 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import MenuItem from '@material-ui/core/MenuItem'
 import Switch from '@material-ui/core/Switch'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
+import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect.jsx'
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
 import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect.jsx'
 import { createCharacter } from 'ducks/actions.js'
@@ -113,42 +112,7 @@ class CharacterCreatePopup extends Component<Props, State> {
             </div>
 
             <div>
-              <TextField
-                select
-                name="type"
-                value={character.type}
-                label={
-                  character.type === 'Character'
-                    ? 'Character Type'
-                    : 'Exalt Type '
-                }
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                data-cy="select-exalt-type"
-              >
-                <ListSubheader disabled value="">
-                  Canon/Published Exalts
-                </ListSubheader>
-                <MenuItem value="Character">Mortal</MenuItem>
-                <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
-                <MenuItem value="DragonbloodCharacter">
-                  Dragon-Blooded Exalt
-                </MenuItem>
-
-                <ListSubheader disabled value="">
-                  Custom / Houserule / Exigent Exalts
-                </ListSubheader>
-                <MenuItem value="CustomAbilityCharacter">
-                  Ability-Based Exalt
-                </MenuItem>
-                <MenuItem value="CustomAttributeCharacter">
-                  Attribute-Based Exalt
-                </MenuItem>
-                <MenuItem value="CustomEssenceCharacter">
-                  Essence-Based Exalt / Spirit
-                </MenuItem>
-              </TextField>
+              <ExaltTypeSelect value={character.type} onChange={handleChange} />
             </div>
 
             {character.type === 'SolarCharacter' && (

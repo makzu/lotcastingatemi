@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
       resources :characters, only: %i[create show update destroy] do
         post 'duplicate', on: :member
+        post 'change_type', on: :member
         resources :merits, :weapons, :charms, :spells, :poisons, only: %i[create show update destroy]
       end
 

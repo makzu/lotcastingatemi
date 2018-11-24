@@ -2,6 +2,7 @@
 
 ###### _Nov 19, 2018_
 
+- Added option to change a character's exalt type. Characters can be converted from any type to any type
 - Character sheets can now be duplicated just like QC/BG sheets
 - The Excellency builder now includes a convenience menu for quickly duplicating Excellencies from the core book, _What Fire has Wrought_, and _Adversaries of the Righteous_
 - The soak, hardness, and mobility penalty of armor can now have modifiers added to them

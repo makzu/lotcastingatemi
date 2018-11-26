@@ -5,10 +5,6 @@ require 'rails_helper'
 RSpec.describe SolarCharacter, type: :model do
   let(:character) { create(:solar_character) }
 
-  it 'has a valid factory' do
-    expect(character).to be_valid
-  end
-
   describe 'mote pool' do
     it 'starts with the right number of motes' do
       expect(character.motes_personal_total).to eq 13
@@ -55,6 +51,19 @@ RSpec.describe SolarCharacter, type: :model do
       expect(character.aspect).to eq false
       expect(character.exalt_type).to eq 'Solar'
       expect(character.excellency).to eq 'solar'
+    end
+  end
+
+  describe 'converting types' do
+    %i[
+      character dragonblood_character
+      custom_ability_character custom_attribute_character custom_essence_character
+    ].each do |char|
+      it "works for #{char}" do
+        g = create(char)
+        m = SolarCharacter.from_character!(g)
+        expect(m).to be_valid
+      end
     end
   end
 end

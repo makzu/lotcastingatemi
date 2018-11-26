@@ -20,6 +20,9 @@ export const CHA_FETCH_FAILURE = 'lca/character/FETCH_FAILURE'
 export const CHA_UPDATE = 'lca/character/UPDATE'
 export const CHA_UPDATE_SUCCESS = 'lca/character/UPDATE_SUCCESS'
 export const CHA_UPDATE_FAILURE = 'lca/character/UPDATE_FAILURE'
+export const CHA_CHANGE_TYPE = 'lca/character/CHANGE_TYPE'
+export const CHA_CHANGE_TYPE_SUCCESS = 'lca/character/CHANGE_TYPE_SUCCESS'
+export const CHA_CHANGE_TYPE_FAILURE = 'lca/character/CHANGE_TYPE_FAILURE'
 export const CHA_DESTROY = 'lca/character/DESTROY'
 export const CHA_DESTROY_SUCCESS = 'lca/character/DESTROY_SUCCESS'
 export const CHA_DESTROY_FAILURE = 'lca/character/DESTROY_FAILURE'
@@ -110,6 +113,15 @@ export function updateCharacterMulti(id: number, character: Object) {
         meta: { id: id, optimistic: { type: REVERT, id: transactionId } },
       },
     ],
+  })
+}
+
+export function changeCharacterType(id: number, type: string) {
+  return callApi({
+    endpoint: `/api/v1/characters/${id}/change_type`,
+    method: 'POST',
+    body: JSON.stringify({ type: type }),
+    types: [CHA_CHANGE_TYPE, CHA_CHANGE_TYPE_SUCCESS, CHA_CHANGE_TYPE_FAILURE],
   })
 }
 

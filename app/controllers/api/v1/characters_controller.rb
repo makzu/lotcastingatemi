@@ -4,7 +4,7 @@ module Api
   module V1
     class CharactersController < BaseController
       before_action :authenticate_player, except: :show
-      before_action :set_character, only: %i[show update destroy duplicate]
+      before_action :set_character, only: %i[show update destroy duplicate change_type]
 
       def show
         authorize @character
@@ -44,6 +44,7 @@ module Api
           martial_arts_charms weapons merits spirit_charms spells poisons
         ], except: %i[
           chronicle_id sort_order chronicle_sort_order pinned hidden public
+          in_combat has_acted
         ]
 
         @new_character.name = @new_character.name + ' (Duplicate)'
@@ -54,6 +55,23 @@ module Api
         else
           render json: @new_character.error.details, status: :bad_request
         end
+      end
+
+      def change_type
+        authorize @character, :update?
+        @new_type = params[:type].constantize
+
+        @new_character = @new_type.from_character!(@character)
+
+        if @new_character.save
+          render json: @new_character
+        else
+          render json: @new_character.errors.details, status: :bad_request
+        end
+
+      rescue NoMethodError, NameError
+        # TODO: Actually handle the error here
+        render json: {}, status: :bad_request
       end
 
       private

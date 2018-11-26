@@ -14,4 +14,8 @@ class Charm < ApplicationRecord
     'charm'
   end
   alias_attribute :entity_assoc, :entity_type
+
+  def self.from_charm!
+    raise NotImplementedError
+  end
 end

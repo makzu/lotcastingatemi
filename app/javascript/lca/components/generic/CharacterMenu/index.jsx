@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 import MoreVert from '@material-ui/icons/MoreVert'
 
 import MenuDelete from './MenuDelete.jsx'
+import MenuChangeExaltType from './MenuChangeExaltType.jsx'
 import MenuEdit from './MenuEdit.jsx'
 import MenuHide from './MenuHide.jsx'
 import MenuLinks from './MenuLinks.jsx'
@@ -89,6 +90,11 @@ class CharacterMenu extends Component<Props, { menuAnchor: ?Object }> {
           />
 
           <MenuBattlegroupFromQc
+            characterType={this.props.characterType}
+            id={this.props.id}
+          />
+
+          <MenuChangeExaltType
             characterType={this.props.characterType}
             id={this.props.id}
           />

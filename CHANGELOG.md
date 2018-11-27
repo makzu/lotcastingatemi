@@ -1,8 +1,8 @@
 ## v64
 
-###### _Not yet released_
+###### _Nov 27, 2018_
 
-- Added option to change a character's exalt type. Characters can be converted from any type to any type
+- Added option to change a character's exalt type. Characters can be converted from any type to any type, even in ways that RAW won't allow
 
 ## v63
 

@@ -70,4 +70,18 @@ context('Creating Characters', () => {
     cy.contains('Test Attribute Exigent')
     cy.contains('Essence 1 Exemplar Caste Attribute Exigent')
   })
+
+  it('is able to create Custom Essence Exalts', () => {
+    cy.get('[name=name]').type('Test Essence Exigent')
+    cy.get('[data-cy=select-exalt-type]').click()
+    cy.get('[data-value=CustomEssenceCharacter]').click()
+    cy.get('[name=caste]').type('Exemplar')
+    cy.get('[name=exalt_type]')
+      .clear()
+      .type('Essence Exigent')
+    cy.get('[data-cy=submit]').click()
+
+    cy.contains('Test Essence Exigent')
+    cy.contains('Essence 1 Exemplar Caste Essence Exigent')
+  })
 })

@@ -21,6 +21,11 @@ namespace :lca do
     task :flow do
       send_yarn_command('flow')
     end
+
+    desc 'Analyze the frontend bundle size'
+    task :analyze do
+      send_yarn_command('webpack:analyze')
+    end
   end
 end
 

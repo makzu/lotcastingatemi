@@ -17,6 +17,7 @@
 !/log/.keep
 !/tmp/.keep
 yarn-error.log
+yarn-debug.log*
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -25,16 +26,16 @@ yarn-error.log
 /coverage
 
 /public/packs
+/public/packs-test
 /node_modules
+
+.yarn-integrity
 
 # Vim
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
 *.un~
 Session.vim
-/public/packs
-/public/packs-test
-/node_modules
 
 # Ignore encrypted secrets key file.
 /config/secrets.yml.key

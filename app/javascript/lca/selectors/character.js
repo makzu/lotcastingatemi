@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
-import { isEmpty, max } from 'underscore'
+import { isEmpty, max } from 'lodash'
 
 import { getPoolsForWeapon, sortByParry } from './weapon.js'
 import {

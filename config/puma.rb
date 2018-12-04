@@ -30,7 +30,19 @@ workers ENV.fetch('WEB_CONCURRENCY') { 2 }
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
-# preload_app!
+preload_app!
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+# https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
+on_worker_boot do
+  # Valid on Rails 4.1+ using the `config/database.yml` method of setting `pool` size
+  ActiveRecord::Base.establish_connection
+end
+
+# https://devcenter.heroku.com/articles/language-runtime-metrics-ruby
+require 'barnes'
+before_fork do
+  Barnes.start
+end

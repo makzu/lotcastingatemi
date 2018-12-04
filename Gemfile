@@ -47,10 +47,18 @@ gem 'omniauth-google-oauth2'
 gem 'activerecord_json_validator'
 gem 'email_validator'
 
+# Profiling
+# gem 'derailed'
+# gem 'faker'
+# gem 'memory_profiler'
+# gem 'rack-mini-profiler'
+
 # For Heroku:
 group :production do
   gem 'rails_serve_static_assets'
 end
+
+gem 'barnes'
 
 group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

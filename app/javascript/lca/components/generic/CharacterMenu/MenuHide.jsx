@@ -10,16 +10,21 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { canIEdit } from 'selectors'
+import type { CharacterType } from './index.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   id: number,
-  characterType: string,
+  characterType: CharacterType,
+}
+type Props = ExposedProps & {
   isHidden: boolean,
   canIEdit: boolean,
   updateCharacter: Function,
   updateQc: Function,
   updateBattlegroup: Function,
 }
+
 function CardMenuHide(props: Props) {
   if (!props.canIEdit) return null
 
@@ -51,15 +56,19 @@ function CardMenuHide(props: Props) {
     </MenuItem>
   )
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   isHidden: state.entities.current[props.characterType + 's'][props.id].hidden,
   canIEdit: canIEdit(state, props.id, props.characterType),
 })
-export default connect(
+
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     updateCharacter,
     updateQc,
     updateBattlegroup,
   }
-)(CardMenuHide)
+)
+
+export default enhance(CardMenuHide)

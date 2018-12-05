@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -21,7 +20,7 @@ import {
   updateBattlegroupMulti,
 } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
-import type { Character, fullQc } from 'utils/flow-types'
+import type { Character, fullQc, Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
 const styles = theme => ({
@@ -41,24 +40,27 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   children: React.Node,
   character: Character | fullQc,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   update: Function,
   pools: Object,
   classes: Object,
 }
-type State = { open: boolean, roll: number, total: number }
-class ShapeSorceryWidget extends Component<Props, State> {
-  constructor(props) {
-    super(props)
+type State = {
+  open: boolean,
+  roll: number,
+  total: number,
+}
 
-    this.state = {
-      open: false,
-      roll: 0,
-      total: this.props.character.sorcerous_motes || 0,
-    }
+class ShapeSorceryWidget extends React.Component<Props, State> {
+  state = {
+    open: false,
+    roll: 0,
+    total: this.props.character.sorcerous_motes || 0,
   }
 
   handleChangeRoll = e => {
@@ -68,6 +70,7 @@ class ShapeSorceryWidget extends Component<Props, State> {
       total: value + this.props.character.sorcerous_motes,
     })
   }
+
   handleChangeTotal = e => {
     let { value } = e.target
     this.setState({
@@ -76,8 +79,14 @@ class ShapeSorceryWidget extends Component<Props, State> {
     })
   }
 
-  handleOpen = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false, roll: 0 })
+  handleOpen = () =>
+    this.setState({
+      open: true,
+      roll: 0,
+      total: this.props.character.sorcerous_motes || 0,
+    })
+
+  handleClose = () => this.setState({ open: false })
 
   handleSubmit = () => {
     this.setState({ open: false })
@@ -97,7 +106,7 @@ class ShapeSorceryWidget extends Component<Props, State> {
       return children
     }
     return (
-      <Fragment>
+      <>
         <ButtonBase onClick={handleOpen}>{children}</ButtonBase>
 
         <Dialog open={this.state.open} onClose={handleClose}>
@@ -138,10 +147,11 @@ class ShapeSorceryWidget extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
+
 function mapStateToProps(state, props) {
   let type
   if (props.character.type === 'qc') type = 'qc'
@@ -153,6 +163,7 @@ function mapStateToProps(state, props) {
     pools: getPoolsAndRatingsGeneric(state, props.character.id, type),
   }
 }
+
 function mapDispatchToProps(dispatch: Function, props) {
   let action
   switch (props.character.type) {
@@ -172,10 +183,12 @@ function mapDispatchToProps(dispatch: Function, props) {
   }
 }
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   withStyles(styles)
-)(ShapeSorceryWidget)
+)
+
+export default enhance(ShapeSorceryWidget)

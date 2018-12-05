@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -15,23 +14,25 @@ import TextField from '@material-ui/core/TextField'
 
 import { addThingToChronicle } from 'ducks/actions.js'
 import { getSpecificChronicle, getMyQcsWithoutChronicles } from 'selectors'
-import type { fullQc } from 'utils/flow-types'
+import type { fullQc, Enhancer } from 'utils/flow-types'
 
-type Props = {
-  qcs: Array<fullQc>,
+type ExposedProps = {
   chronicleId: number,
+}
+type Props = ExposedProps & {
+  qcs: Array<fullQc>,
   chronicleName: string,
   handleSubmit: Function,
 }
-type State = { open: boolean, qcId: number }
-class QcAddPopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
+type State = {
+  open: boolean,
+  qcId: number,
+}
 
-    this.state = {
-      open: false,
-      qcId: 0,
-    }
+class QcAddPopup extends React.Component<Props, State> {
+  state = {
+    open: false,
+    qcId: 0,
   }
 
   handleChange = e => {
@@ -73,7 +74,7 @@ class QcAddPopup extends Component<Props, State> {
     const currentQc = qcs.find(c => c.id == this.state.qcId)
     const hidden = currentQc && currentQc.hidden
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Add Qc</Button>
 
         <Dialog open={this.state.open} onClose={handleClose}>
@@ -103,28 +104,23 @@ class QcAddPopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = state.session.id
+function mapStateToProps(state, ownProps: ExposedProps) {
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   const qcs = getMyQcsWithoutChronicles(state)
   let chronicleName = ''
-  let inviteCode = ''
 
   if (chronicle.name != undefined) {
     chronicleName = chronicle.name
-    inviteCode = chronicle.invite_code
   }
 
   return {
-    id,
     qcs,
     chronicleName,
-    inviteCode,
   }
 }
 
@@ -132,7 +128,9 @@ const mapDispatchToProps: Object = dispatch => ({
   handleSubmit: (id, qcId) => dispatch(addThingToChronicle(id, qcId, 'qc')),
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   mapDispatchToProps
-)(QcAddPopup)
+)
+
+export default enhance(QcAddPopup)

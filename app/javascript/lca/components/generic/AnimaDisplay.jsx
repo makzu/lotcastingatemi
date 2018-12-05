@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -12,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { updateCharacter, updateQc } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { prettyAnimaLevel } from 'utils/calculated'
-import type { withMotePool } from 'utils/flow-types'
+import type { withMotePool, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   wrap: {
@@ -46,9 +45,11 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   character: withMotePool & { id: number, type?: string },
   qc?: boolean,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   update: Function,
   classes: Object,
@@ -56,12 +57,10 @@ type Props = {
 type State = {
   anchor: any,
 }
-class AnimaDisplay extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      anchor: null,
-    }
+
+class AnimaDisplay extends React.Component<Props, State> {
+  state = {
+    anchor: null,
   }
 
   handleOpen = e => {
@@ -89,7 +88,7 @@ class AnimaDisplay extends Component<Props, State> {
       return null
 
     return (
-      <Fragment>
+      <>
         <ButtonBase onClick={handleOpen} disabled={!canEdit}>
           <div className={classes.wrap}>
             <div className={classes.animaLabel}>Anima</div>
@@ -105,6 +104,7 @@ class AnimaDisplay extends Component<Props, State> {
             </div>
           </div>
         </ButtonBase>
+
         <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
           <MenuItem
             onClick={() => handleChange(0)}
@@ -131,28 +131,30 @@ class AnimaDisplay extends Component<Props, State> {
             Bonfire
           </MenuItem>
         </Menu>
-      </Fragment>
+      </>
     )
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state, props: ExposedProps) => ({
   canEdit: props.qc
     ? canIEditQc(state, props.character.id)
     : canIEditCharacter(state, props.character.id),
 })
 
-const mapDispatchToProps = (dispatch: Function, props) => ({
+const mapDispatchToProps = (dispatch: Function, props: ExposedProps) => ({
   update: (id, value) =>
     props.qc
       ? dispatch(updateQc(id, 'anima_level', value))
       : dispatch(updateCharacter(id, 'anima_level', value)),
 })
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   withStyles(styles)
-)(AnimaDisplay)
+)
+
+export default enhance(AnimaDisplay)

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -11,19 +11,23 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 import { updateChronicle, regenChronicleInviteCode } from 'ducks/actions.js'
 import { getSpecificChronicle } from 'selectors'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
-  id: number,
+type ExposedProps = {
+  chronicleId: number,
+}
+type Props = ExposedProps & {
   inviteCode: string,
-  chronicleName: String,
+  chronicleName: string,
   updateChronicle: Function,
   regenChronicleInviteCode: Function,
 }
-class ChronicleInvitePopup extends Component<Props, { open: boolean }> {
-  constructor(props) {
-    super(props)
-    this.state = { open: false }
-  }
+type State = {
+  open: boolean,
+}
+
+class ChronicleInvitePopup extends React.Component<Props, State> {
+  state = { open: false }
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -34,11 +38,11 @@ class ChronicleInvitePopup extends Component<Props, { open: boolean }> {
   }
 
   handleRegen = () => {
-    this.props.regenChronicleInviteCode(this.props.id)
+    this.props.regenChronicleInviteCode(this.props.chronicleId)
   }
 
   handleDisable = () => {
-    this.props.updateChronicle(this.props.id, 'invite_code', '')
+    this.props.updateChronicle(this.props.chronicleId, 'invite_code', '')
   }
 
   render() {
@@ -46,14 +50,14 @@ class ChronicleInvitePopup extends Component<Props, { open: boolean }> {
     const { chronicleName, inviteCode } = this.props
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Invite Player</Button>
 
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Invite a Player</DialogTitle>
           <DialogContent>
             {inviteCode && (
-              <Fragment>
+              <>
                 <DialogContentText paragraph>
                   Another player can join {chronicleName} if they have this
                   code.
@@ -61,7 +65,7 @@ class ChronicleInvitePopup extends Component<Props, { open: boolean }> {
                 <DialogContentText variant="display1">
                   {inviteCode}
                 </DialogContentText>
-              </Fragment>
+              </>
             )}
             {!inviteCode && (
               <DialogContentText>
@@ -76,14 +80,13 @@ class ChronicleInvitePopup extends Component<Props, { open: boolean }> {
             <Button onClick={handleRegen}>Make new Code</Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.chronicleId
-  const chronicle = getSpecificChronicle(state, id)
+function mapStateToProps(state, ownProps: ExposedProps) {
+  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   let chronicleName = ''
   let inviteCode = ''
 
@@ -93,16 +96,17 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    id,
     chronicleName,
     inviteCode,
   }
 }
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     updateChronicle,
     regenChronicleInviteCode,
   }
-)(ChronicleInvitePopup)
+)
+
+export default enhance(ChronicleInvitePopup)

@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import React from 'react'
 import { shouldUpdate } from 'recompose'
 
 import Typography from '@material-ui/core/Typography'
@@ -16,7 +16,7 @@ import {
   ABILITY_MIN as MIN,
   ABILITIES_ALL,
 } from 'utils/constants.js'
-import type { withAbilities as Character } from 'utils/flow-types'
+import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
 
 function AbilityField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />
@@ -27,7 +27,7 @@ const CraftFields = (props: ListAttributeFieldTypes) => {
   const { craft, rating } = trait
 
   return (
-    <Fragment>
+    <>
       <TextField
         name="craft"
         value={craft}
@@ -47,7 +47,7 @@ const CraftFields = (props: ListAttributeFieldTypes) => {
         narrow
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -56,7 +56,7 @@ const MartialArtsFields = (props: ListAttributeFieldTypes) => {
   const { style, rating } = trait
 
   return (
-    <Fragment>
+    <>
       <TextField
         name="style"
         value={style}
@@ -76,11 +76,15 @@ const MartialArtsFields = (props: ListAttributeFieldTypes) => {
         narrow
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
-type Props = { character: Character, onChange: Function }
+type Props = {
+  character: Character,
+  onChange: Function,
+}
+
 function AbilityEditor({ character, onChange }: Props) {
   return (
     <BlockPaper>
@@ -266,10 +270,12 @@ function AbilityEditor({ character, onChange }: Props) {
   )
 }
 
-export default shouldUpdate((props, newProps) =>
+const enhance: Enhancer<Props, Props> = shouldUpdate((props, newProps) =>
   isUnequalByKeys(
     props.character,
     newProps.character,
     ABILITIES_ALL.map(a => a.abil)
   )
-)(AbilityEditor)
+)
+
+export default enhance(AbilityEditor)

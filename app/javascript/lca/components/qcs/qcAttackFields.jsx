@@ -1,6 +1,6 @@
 // @flow
 import { isEqual } from 'lodash'
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -15,7 +15,7 @@ import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
-import type { QcAttack } from 'utils/flow-types'
+import type { QcAttack, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   wrap: {
@@ -40,16 +40,21 @@ const styles = theme => ({
     width: '6em',
   },
 })
-type Props = {
+type ExposedProps = {
   attack: QcAttack,
   onAttackChange: Function,
   onRemoveClick: Function,
   battlegroup?: boolean,
+}
+type Props = ExposedProps & {
   fakeBg: Object,
   classes: Object,
 }
-type State = { attack: QcAttack }
-class QcAttackFields extends Component<Props, State> {
+type State = {
+  attack: QcAttack,
+}
+
+class QcAttackFields extends React.Component<Props, State> {
   handleChange = e => {
     let { name, value } = e.target
     const { attack } = this.props
@@ -143,7 +148,7 @@ class QcAttackFields extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   let fakeBg
   if (ownProps.battlegroup) {
     let owner = getSpecificBattlegroup(state, ownProps.attack.qc_attackable_id)
@@ -157,7 +162,9 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   withStyles(styles)
-)(QcAttackFields)
+)
+
+export default enhance(QcAttackFields)

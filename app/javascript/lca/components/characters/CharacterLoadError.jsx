@@ -4,7 +4,13 @@ import { connect } from 'react-redux'
 
 import Typography from '@material-ui/core/Typography'
 
-const CharacterLoadError = ({ loading }: { loading: boolean }) => (
+import type { Enhancer } from 'utils/flow-types'
+
+type Props = {
+  loading: boolean,
+}
+
+const CharacterLoadError = ({ loading }: Props) => (
   <Typography paragraph>
     {loading
       ? 'This Character has not yet loaded.'
@@ -12,6 +18,8 @@ const CharacterLoadError = ({ loading }: { loading: boolean }) => (
   </Typography>
 )
 
-export default connect(state => ({ loading: state.app.loading }))(
-  CharacterLoadError
-)
+const enhance: Enhancer<Props, {}> = connect(state => ({
+  loading: state.app.loading,
+}))
+
+export default enhance(CharacterLoadError)

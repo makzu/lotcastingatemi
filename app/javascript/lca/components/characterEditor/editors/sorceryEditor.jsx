@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import React from 'react'
 import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -13,13 +13,13 @@ import ListAttributeEditor, {
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
-import type { Character } from 'utils/flow-types'
+import type { Character, Enhancer } from 'utils/flow-types'
 
 const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
   const { onChange, trait, classes } = props
 
   return (
-    <Fragment>
+    <>
       <TextField
         name="ritual"
         value={trait}
@@ -31,7 +31,7 @@ const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
         rowsMax={10}
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -40,6 +40,7 @@ type Props = {
   onCheck: Function,
   onRatingChange: Function,
 }
+
 function SorceryEditor(props: Props) {
   const { character, onCheck, onRatingChange } = props
 
@@ -59,7 +60,7 @@ function SorceryEditor(props: Props) {
       />
 
       {character.is_sorcerer && (
-        <Fragment>
+        <>
           <RatingField
             trait="sorcerous_motes"
             value={character.sorcerous_motes}
@@ -77,15 +78,19 @@ function SorceryEditor(props: Props) {
             onChange={onRatingChange}
             nonObject
           />
-        </Fragment>
+        </>
       )}
     </BlockPaper>
   )
 }
-export default shouldUpdate((props, newProps) =>
-  isUnequalByKeys(props.character, newProps.character, [
-    'is_sorcerer',
-    'sorcerous_motes',
-    'rituals',
-  ])
-)(SorceryEditor)
+
+const enhance: Enhancer<Props, Props> = shouldUpdate(
+  (props: Props, newProps: Props) =>
+    isUnequalByKeys(props.character, newProps.character, [
+      'is_sorcerer',
+      'sorcerous_motes',
+      'rituals',
+    ])
+)
+
+export default enhance(SorceryEditor)

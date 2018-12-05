@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -16,22 +16,21 @@ import ExpandMore from '@material-ui/icons/ExpandMore'
 import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
 import { getMyChronicles, getMyOwnChronicles } from 'selectors'
+import type { Chronicle, Enhancer } from 'utils/flow-types'
 
-type Props = {
-  ownChronicles: Array<Object>,
-  chronicles: Array<Object>,
+type ExposedProps = {
   closeDrawer: Function,
 }
-
+type Props = ExposedProps & {
+  ownChronicles: Array<Chronicle>,
+  chronicles: Array<Chronicle>,
+}
 type State = {
   open: boolean,
 }
 
-class ChronicleNavList extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = { open: false }
-  }
+class ChronicleNavList extends React.Component<Props, State> {
+  state = { open: false }
 
   handleClick = () => {
     this.setState({ open: !this.state.open })
@@ -76,7 +75,7 @@ class ChronicleNavList extends Component<Props, State> {
     ))
 
     return (
-      <Fragment>
+      <>
         <ListItem button onClick={this.handleClick}>
           <ListItemText primary="Chronicles" />
 
@@ -100,7 +99,7 @@ class ChronicleNavList extends Component<Props, State> {
           <ChronicleJoinPopup />
           <ChronicleCreatePopup />
         </Collapse>
-      </Fragment>
+      </>
     )
   }
 }
@@ -110,4 +109,6 @@ const mapStateToProps = state => ({
   chronicles: getMyChronicles(state),
 })
 
-export default connect(mapStateToProps)(ChronicleNavList)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps)
+
+export default enhance(ChronicleNavList)

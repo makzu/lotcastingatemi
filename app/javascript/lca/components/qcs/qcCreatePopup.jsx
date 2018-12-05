@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -10,22 +10,19 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 
 import { createQc } from 'ducks/actions.js'
+import type { Enhancer } from 'utils/flow-types'
 
 type Props = {
-  id: number,
   createQc: Function,
 }
-// TODO: Enable autofill for some example QCs?
-class QcCreatePopup extends Component<Props, { open: boolean, qc: Object }> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      open: false,
-      qc: { name: '' },
-    }
-  }
+type State = {
+  open: boolean,
+  qc: Object,
+}
 
-  props: Props
+// TODO: Enable autofill for some example QCs?
+class QcCreatePopup extends React.Component<Props, State> {
+  state = { open: false, qc: { name: '' } }
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -49,7 +46,7 @@ class QcCreatePopup extends Component<Props, { open: boolean, qc: Object }> {
     const { qc } = this.state
 
     return (
-      <span>
+      <>
         <Button onClick={handleOpen} data-cy="create-qc">
           Create New
         </Button>
@@ -77,12 +74,14 @@ class QcCreatePopup extends Component<Props, { open: boolean, qc: Object }> {
             </Button>
           </DialogActions>
         </Dialog>
-      </span>
+      </>
     )
   }
 }
-const mapStateToProps = state => ({ id: state.session.id })
-export default connect(
-  mapStateToProps,
+
+const enhance: Enhancer<Props, {}> = connect(
+  null,
   { createQc }
-)(QcCreatePopup)
+)
+
+export default enhance(QcCreatePopup)

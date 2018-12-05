@@ -15,22 +15,33 @@ import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSel
 
 import { changeCharacterType } from 'ducks/actions'
 import { canIEdit } from 'selectors'
+import type { CharacterType } from './index.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   id: number,
-  characterType: string,
+  characterType: CharacterType,
+}
+type Props = ExposedProps & {
   canIEdit: boolean,
   changeCharacterType: Function,
 }
-type State = { open: boolean, type: string }
+type State = {
+  open: boolean,
+  type: string,
+}
+
 class MenuchangeCharacterType extends React.PureComponent<Props, State> {
   state = { open: false, type: 'SolarCharacter' }
+
   handleOpen = () => {
     this.setState({ open: true })
   }
+
   handleClose = () => {
     this.setState({ open: false })
   }
+
   handleChange = e => {
     this.setState({ type: e.target.value })
   }
@@ -49,6 +60,7 @@ class MenuchangeCharacterType extends React.PureComponent<Props, State> {
         <MenuItem button onClick={this.handleOpen}>
           <ListItemText primary="Change Exalt Type" />
         </MenuItem>
+
         <Dialog open={this.state.open} onClose={this.handleClose}>
           <DialogTitle>Change Exalt Type (experimental)</DialogTitle>
           <DialogContent>
@@ -78,11 +90,14 @@ class MenuchangeCharacterType extends React.PureComponent<Props, State> {
     )
   }
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   canIEdit: canIEdit(state, props.id, props.characterType),
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { changeCharacterType }
-)(MenuchangeCharacterType)
+)
+
+export default enhance(MenuchangeCharacterType)

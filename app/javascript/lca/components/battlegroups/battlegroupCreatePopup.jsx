@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Dialog from '@material-ui/core/Dialog'
@@ -10,23 +10,16 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 import { createBattlegroup } from 'ducks/actions.js'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
-  id: number,
-  createBattlegroup: Function,
-}
+type Props = { createBattlegroup: Function }
 type State = {
   open: boolean,
   battlegroup: Object,
 }
 
-// TODO: enable creating a battlegroup of a player's existing QC
-class BattlegroupCreatePopup extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-
-    this.state = { open: false, battlegroup: { name: '' } }
-  }
+class BattlegroupCreatePopup extends React.Component<Props, State> {
+  state = { open: false, battlegroup: { name: '' } }
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -51,7 +44,7 @@ class BattlegroupCreatePopup extends Component<Props, State> {
     const { battlegroup } = this.state
 
     return (
-      <span>
+      <>
         <Button onClick={handleOpen} data-cy="create-battlegroup">
           Create New
         </Button>
@@ -79,14 +72,14 @@ class BattlegroupCreatePopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </span>
+      </>
     )
   }
 }
 
-const mapStateToProps = state => ({ id: state.session.id })
-
-export default connect(
-  mapStateToProps,
+const enhance: Enhancer<Props, {}> = connect(
+  null,
   { createBattlegroup }
-)(BattlegroupCreatePopup)
+)
+
+export default enhance(BattlegroupCreatePopup)

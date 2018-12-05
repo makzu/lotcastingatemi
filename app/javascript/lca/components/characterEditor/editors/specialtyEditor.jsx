@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import React from 'react'
 import { shouldUpdate } from 'recompose'
 
 import MenuItem from '@material-ui/core/MenuItem'
@@ -12,7 +12,7 @@ import ListAttributeEditor, {
 import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
 import * as calc from 'utils/calculated'
-import type { withIntimacies as Character } from 'utils/flow-types'
+import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
 
 function SpecialtyFields(props: ListAttributeFieldTypes) {
   const { trait, character, onChange, classes } = props
@@ -20,7 +20,7 @@ function SpecialtyFields(props: ListAttributeFieldTypes) {
   const abilities = calc.abilitiesWithRatings(character)
 
   return (
-    <Fragment>
+    <>
       <AbilitySelect
         name="ability"
         value={ability}
@@ -42,11 +42,15 @@ function SpecialtyFields(props: ListAttributeFieldTypes) {
         margin="dense"
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
-type Props = { character: Character, onChange: Function }
+type Props = {
+  character: Character,
+  onChange: Function,
+}
+
 const SpecialtyEditor = ({ character, onChange }: Props) => {
   return (
     <BlockPaper>
@@ -62,6 +66,9 @@ const SpecialtyEditor = ({ character, onChange }: Props) => {
   )
 }
 
-export default shouldUpdate((props, newProps) =>
-  isUnequalByKeys(props.character, newProps.character, ['specialties'])
-)(SpecialtyEditor)
+const enhance: Enhancer<Props, Props> = shouldUpdate(
+  (props: Props, newProps: Props) =>
+    isUnequalByKeys(props.character, newProps.character, ['specialties'])
+)
+
+export default enhance(SpecialtyEditor)

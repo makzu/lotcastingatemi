@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component } = React
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -17,6 +16,7 @@ import Typography from '@material-ui/core/Typography'
 import Select from 'react-select/lib/Creatable'
 
 import { getAllCharmCategoriesForCharacter } from 'selectors'
+import type { Enhancer } from 'utils/flow-types'
 
 /* Shamelessly stolen and crudely reshaped from the Material-ui react-select
  * Autocomplete example
@@ -180,15 +180,20 @@ const styles = theme => ({
   },
 })
 
-type CCAProps = {
-  categories: Array<string>,
+type ExposedProps = {
   value: Array<string>,
-  classes: Object,
-  theme: Object,
   onChange: Function,
 }
-type CCAState = { categories: Array<string> }
-class CharmCategoryAutocomplete extends Component<CCAProps, CCAState> {
+type Props = ExposedProps & {
+  categories: Array<string>,
+  classes: Object,
+  theme: Object,
+}
+type State = {
+  categories: Array<string>,
+}
+
+class CharmCategoryAutocomplete extends React.Component<Props, State> {
   handleChange = value => {
     this.props.onChange({
       target: {
@@ -240,7 +245,9 @@ const mapStateToProps = (state, props) => ({
   categories: getAllCharmCategoriesForCharacter(state, props.id),
 })
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   withStyles(styles, { withTheme: true })
-)(CharmCategoryAutocomplete)
+)
+
+export default enhance(CharmCategoryAutocomplete)

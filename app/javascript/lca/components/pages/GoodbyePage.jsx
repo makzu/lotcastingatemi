@@ -6,9 +6,13 @@ import { Redirect } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-// eslint-disable-next-line no-unused-vars
-const GoodbyePage = ({ shouldRedirect }: { shouldRedirect: boolean }) => {
+type Props = {
+  shouldRedirect: boolean,
+}
+
+const GoodbyePage = ({ shouldRedirect }: Props) => {
   // Do not show this page unless the account really is deleted
   if (shouldRedirect) return <Redirect to="/" />
 
@@ -18,7 +22,11 @@ const GoodbyePage = ({ shouldRedirect }: { shouldRedirect: boolean }) => {
     </BlockPaper>
   )
 }
+
 const mapState = state => ({
   shouldRedirect: !state.session.deleted && !state.app.loading,
 })
-export default connect(mapState)(GoodbyePage)
+
+const enhance: Enhancer<Props, {}> = connect(mapState)
+
+export default enhance(GoodbyePage)

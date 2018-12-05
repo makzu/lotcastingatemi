@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -9,19 +9,21 @@ import DialogContent from '@material-ui/core/DialogContent'
 
 import MoteCommittmentEditor from 'components/characterEditor/editors/moteCommittmentEditor.jsx'
 import { updateCharacter, updateQc } from 'ducks/actions.js'
-import type { withMotePool } from 'utils/flow-types'
+import type { withMotePool, Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   character: withMotePool & { id: number },
   qc?: boolean,
+}
+type Props = ExposedProps & {
   update: Function,
 }
-type State = { open: boolean }
-class MoteCommittmentPopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = { open: false }
-  }
+type State = {
+  open: boolean,
+}
+
+class MoteCommittmentPopup extends React.Component<Props, State> {
+  state = { open: false }
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -42,7 +44,7 @@ class MoteCommittmentPopup extends Component<Props, State> {
     const { open } = this.state
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Committments...</Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogContent>
@@ -55,18 +57,21 @@ class MoteCommittmentPopup extends Component<Props, State> {
             <Button onClick={handleClose}>Close</Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
-const mapDispatchToProps = (dispatch: Function, props: Object) => ({
-  update: (id, trait, value) =>
+
+const mapDispatchToProps = (dispatch: Function, props: ExposedProps) => ({
+  update: (id: number, trait: string, value: any): Function =>
     dispatch(
       props.qc ? updateQc(id, trait, value) : updateCharacter(id, trait, value)
     ),
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   null,
   mapDispatchToProps
-)(MoteCommittmentPopup)
+)
+
+export default enhance(MoteCommittmentPopup)

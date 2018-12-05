@@ -14,7 +14,7 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import sharedStyles from 'styles/'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
-import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
+import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   ...sharedStyles(theme),
@@ -50,11 +50,13 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   character: Character | fullQc | Battlegroup,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
-  update: Function,
   pools: Object,
+  update: Function,
   classes: Object,
 }
 
@@ -96,7 +98,8 @@ function OutOfCombatCard({
     </Paper>
   )
 }
-function mapStateToProps(state, props) {
+
+function mapStateToProps(state, props: ExposedProps) {
   let type
   if (props.character.type === 'qc') type = 'qc'
   else if (props.character.type === 'battlegroup') type = 'battlegroup'
@@ -107,7 +110,8 @@ function mapStateToProps(state, props) {
     pools: getPoolsAndRatingsGeneric(state, props.character.id, type),
   }
 }
-function mapDispatchToProps(dispatch: Function, props) {
+
+function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   let action
   switch (props.character.type) {
     case 'qc':
@@ -126,10 +130,12 @@ function mapDispatchToProps(dispatch: Function, props) {
   }
 }
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   withStyles(styles)
-)(OutOfCombatCard)
+)
+
+export default enhance(OutOfCombatCard)

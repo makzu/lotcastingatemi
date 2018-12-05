@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -11,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 import { updateCharacter, updateQc } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
-import type { Character } from 'utils/flow-types'
+import type { Character, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   wrap: {
@@ -36,8 +35,11 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   character: Character,
+  qc: boolean,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   update: Function,
   classes: Object,
@@ -45,7 +47,8 @@ type Props = {
 type State = {
   anchor: any,
 }
-class AuraDisplay extends Component<Props, State> {
+
+class AuraDisplay extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -74,7 +77,7 @@ class AuraDisplay extends Component<Props, State> {
     if (character.aura == null || character.aura === '') return null
 
     return (
-      <Fragment>
+      <>
         <ButtonBase onClick={handleOpen} disabled={!canEdit}>
           <div className={classes.wrap}>
             <div className={classes.label}>Aura</div>
@@ -121,28 +124,30 @@ class AuraDisplay extends Component<Props, State> {
             Wood
           </MenuItem>
         </Menu>
-      </Fragment>
+      </>
     )
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state, props: ExposedProps) => ({
   canEdit: props.qc
     ? canIEditQc(state, props.character.id)
     : canIEditCharacter(state, props.character.id),
 })
 
-const mapDispatchToProps = (dispatch: Function, props) => ({
+const mapDispatchToProps = (dispatch: Function, props: ExposedProps) => ({
   update: (id, value) =>
     props.qc
       ? dispatch(updateQc(id, 'aura', value))
       : dispatch(updateCharacter(id, 'aura', value)),
 })
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   withStyles(styles)
-)(AuraDisplay)
+)
+
+export default enhance(AuraDisplay)

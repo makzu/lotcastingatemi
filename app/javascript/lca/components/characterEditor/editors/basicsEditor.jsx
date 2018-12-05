@@ -12,7 +12,18 @@ import TextField from 'components/generic/TextField.jsx'
 import { canIDeleteCharacter } from 'selectors'
 import { isUnequalByKeys } from 'utils'
 import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.js'
-import type { Character } from 'utils/flow-types'
+import type { Character, Enhancer } from 'utils/flow-types'
+
+type ExposedProps = {
+  character: Character,
+  onChange: Function,
+  onBlur: Function,
+  onRatingChange: Function,
+  onCheck: Function,
+}
+type Props = ExposedProps & {
+  showPublicCheckbox: boolean,
+}
 
 const BasicsEditor = ({
   character,
@@ -20,14 +31,7 @@ const BasicsEditor = ({
   onRatingChange,
   onCheck,
   showPublicCheckbox,
-}: {
-  character: Character,
-  onChange: Function,
-  onBlur: Function,
-  onRatingChange: Function,
-  onCheck: Function,
-  showPublicCheckbox: boolean,
-}) => (
+}: Props) => (
   <BlockPaper>
     <TextField
       name="name"
@@ -36,6 +40,7 @@ const BasicsEditor = ({
       margin="dense"
       onChange={onChange}
     />
+
     <RatingField
       trait="essence"
       value={character.essence}
@@ -45,6 +50,7 @@ const BasicsEditor = ({
       onChange={onRatingChange}
       margin="dense"
     />
+
     {showPublicCheckbox && (
       <FormControlLabel
         label="Publicly Viewable"
@@ -76,7 +82,7 @@ const mapStateToProps = (state, props) => ({
   showPublicCheckbox: canIDeleteCharacter(state, props.character.id),
 })
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   shouldUpdate(
     (props, nextProps) =>
@@ -87,4 +93,6 @@ export default compose(
         'public',
       ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox
   )
-)(BasicsEditor)
+)
+
+export default enhance(BasicsEditor)

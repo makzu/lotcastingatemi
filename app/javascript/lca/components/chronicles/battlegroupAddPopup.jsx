@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -18,23 +17,25 @@ import {
   getSpecificChronicle,
   getMyBattlegroupsWithoutChronicles,
 } from 'selectors'
-import type { Battlegroup } from 'utils/flow-types'
+import type { Battlegroup, Enhancer } from 'utils/flow-types'
 
-type Props = {
-  battlegroups: Array<Battlegroup>,
+type ExposedProps = {
   chronicleId: number,
+}
+type Props = ExposedProps & {
+  battlegroups: Array<Battlegroup>,
   chronicleName: string,
   handleSubmit: Function,
 }
-type State = { open: boolean, battlegroupId: number }
-class BattlegroupAddPopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
+type State = {
+  open: boolean,
+  battlegroupId: number,
+}
 
-    this.state = {
-      open: false,
-      battlegroupId: 0,
-    }
+class BattlegroupAddPopup extends React.Component<Props, State> {
+  state = {
+    open: false,
+    battlegroupId: 0,
   }
 
   handleChange = e => {
@@ -78,7 +79,7 @@ class BattlegroupAddPopup extends Component<Props, State> {
     )
     const hidden = currentBattlegroup && currentBattlegroup.hidden
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Add Battlegroup</Button>
 
         <Dialog open={this.state.open} onClose={handleClose}>
@@ -108,28 +109,23 @@ class BattlegroupAddPopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = state.session.id
+function mapStateToProps(state, ownProps: ExposedProps) {
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   const battlegroups = getMyBattlegroupsWithoutChronicles(state)
   let chronicleName = ''
-  let inviteCode = ''
 
   if (chronicle.name != undefined) {
     chronicleName = chronicle.name
-    inviteCode = chronicle.invite_code
   }
 
   return {
-    id,
     battlegroups,
     chronicleName,
-    inviteCode,
   }
 }
 
@@ -138,7 +134,9 @@ const mapDispatchToProps: Object = dispatch => ({
     dispatch(addThingToChronicle(id, battlegroupId, 'battlegroup')),
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   mapDispatchToProps
-)(BattlegroupAddPopup)
+)
+
+export default enhance(BattlegroupAddPopup)

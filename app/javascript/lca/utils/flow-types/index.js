@@ -6,6 +6,10 @@ export * from './pool.js'
 import type { withBasicInfo, withCombatInfo, withWillpower } from './shared.js'
 import type { withQcStats } from './qc'
 
+export type Enhancer<P, EP> = (
+  component: React.ComponentType<P>
+) => React.ComponentType<EP>
+
 export type Battlegroup = {
   id: number,
   name: string,

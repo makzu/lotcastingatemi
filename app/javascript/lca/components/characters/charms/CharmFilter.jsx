@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -15,21 +14,26 @@ import {
   getAllMartialArtsCharmStylesForCharacter,
   getAllEvocationArtifactsForCharacter,
 } from 'selectors'
+import type { Enhancer } from 'utils/flow-types'
 
-export type Props = {
-  abilities: Array<string>,
-  styles: Array<string>,
-  artifacts: Array<string>,
-  categories: Array<string>,
+type ExposedProps = {
+  id: number,
+  open: boolean,
+  charmType: string,
   currentAbility: string,
   currentCategory: Array<string>,
-  charmType: string,
-  exaltTypeBase: string,
-  open: boolean,
   toggleOpen: Function,
   onChange: Function,
 }
-class CharmFilter extends Component<Props> {
+export type Props = ExposedProps & {
+  abilities: Array<string>,
+  styles: Array<string>,
+  artifacts: Array<string>,
+  exaltTypeBase: string,
+  categories: Array<string>,
+}
+
+class CharmFilter extends React.Component<Props> {
   render() {
     const {
       abilities,
@@ -102,7 +106,7 @@ class CharmFilter extends Component<Props> {
       (exaltTypeBase !== 'essence' || charmType !== 'native')
 
     return (
-      <Fragment>
+      <>
         <Button onClick={toggleOpen}>
           Filter{' '}
           <Hidden mdDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
@@ -110,9 +114,9 @@ class CharmFilter extends Component<Props> {
           <Filter />
         </Button>
         {open && (
-          <Fragment>
+          <>
             {showFilter && (
-              <Fragment>
+              <>
                 <TextField
                   select
                   style={{
@@ -128,7 +132,7 @@ class CharmFilter extends Component<Props> {
                   {filterOptions}
                 </TextField>
                 &nbsp;&nbsp;
-              </Fragment>
+              </>
             )}
 
             <TextField
@@ -146,9 +150,9 @@ class CharmFilter extends Component<Props> {
             >
               {catOptions}
             </TextField>
-          </Fragment>
+          </>
         )}
-      </Fragment>
+      </>
     )
   }
 }
@@ -161,4 +165,6 @@ const mapStateToProps = (state, props) => ({
   categories: getAllCharmCategoriesForCharacter(state, props.id) || [],
 })
 
-export default connect(mapStateToProps)(CharmFilter)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps)
+
+export default enhance(CharmFilter)

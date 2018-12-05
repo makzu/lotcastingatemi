@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -25,9 +24,13 @@ import {
   committedPersonalMotes,
   committedPeripheralMotes,
 } from 'utils/calculated'
-import type { withMotePool } from 'utils/flow-types'
+import type { withMotePool, Enhancer } from 'utils/flow-types'
 
-type wraProps = { current: number, spending: number, mute: boolean }
+type wraProps = {
+  current: number,
+  spending: number,
+  mute: boolean,
+}
 const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
   if (spending < 5 || current === 3)
     return (
@@ -47,19 +50,13 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
   )
 }
 
-const defaultState = {
-  open: false,
-  toSpend: 0,
-  commit: false,
-  commitName: '',
-  mute: false,
-  scenelong: false,
-}
-type Props = {
+type ExposedProps = {
   children: React.Node,
   character: withMotePool & { id: number },
   peripheral?: boolean,
   qc?: boolean,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   spendMotes: Function,
 }
@@ -71,21 +68,18 @@ type State = {
   mute: boolean,
   scenelong: boolean,
 }
-class MoteSpendWidget extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = defaultState
 
-    this.max = this.max.bind(this)
-    this.min = this.min.bind(this)
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleAdd = this.handleAdd.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleAdd = this.handleAdd.bind(this)
-    this.handleCheck = this.handleCheck.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+const defaultState: State = {
+  open: false,
+  toSpend: 0,
+  commit: false,
+  commitName: '',
+  mute: false,
+  scenelong: false,
+}
+
+class MoteSpendWidget extends React.Component<Props, State> {
+  state = defaultState
 
   max = () => {
     const { peripheral, character } = this.props
@@ -169,14 +163,7 @@ class MoteSpendWidget extends Component<Props, State> {
       mute
     )
 
-    this.setState({
-      open: false,
-      toSpend: 0,
-      commit: false,
-      commitName: '',
-      mute: false,
-      scenelong: false,
-    })
+    this.setState(defaultState)
   }
 
   render() {
@@ -198,7 +185,7 @@ class MoteSpendWidget extends Component<Props, State> {
     }
 
     return (
-      <Fragment>
+      <>
         <ButtonBase onClick={handleOpen}>{children}</ButtonBase>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>
@@ -278,7 +265,7 @@ class MoteSpendWidget extends Component<Props, State> {
                 }
               />
               {commit && (
-                <Fragment>
+                <>
                   <TextField
                     name="commitName"
                     value={commitName}
@@ -297,12 +284,12 @@ class MoteSpendWidget extends Component<Props, State> {
                       />
                     }
                   />
-                </Fragment>
+                </>
               )}
             </div>
 
             {peripheral && (
-              <Fragment>
+              <>
                 <div>
                   <FormControlLabel
                     label="Mute"
@@ -320,7 +307,7 @@ class MoteSpendWidget extends Component<Props, State> {
                   spending={toSpend}
                   mute={mute}
                 />
-              </Fragment>
+              </>
             )}
           </DialogContent>
 
@@ -334,19 +321,20 @@ class MoteSpendWidget extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-function mapStateToProps(state, props) {
-  return {
-    canEdit: props.qc
-      ? canIEditQc(state, props.character.id)
-      : canIEditCharacter(state, props.character.id),
-  }
-}
-export default connect(
+const mapStateToProps = (state, props: ExposedProps) => ({
+  canEdit: props.qc
+    ? canIEditQc(state, props.character.id)
+    : canIEditCharacter(state, props.character.id),
+})
+
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { spendMotes }
-)(MoteSpendWidget)
+)
+
+export default enhance(MoteSpendWidget)

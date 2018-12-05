@@ -9,14 +9,19 @@ import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import { removeThingFromChronicle as removeThing } from 'ducks/actions.js'
 import { canIEdit } from 'selectors'
+import type { CharacterType } from './index.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
-  chronId: number,
+type ExposedProps = {
   id: number,
-  characterType: string,
+  characterType: CharacterType,
+}
+type Props = ExposedProps & {
+  chronId: number,
   canIEdit: boolean,
   removeThing: Function,
 }
+
 function CardMenuHide({
   id,
   chronId,
@@ -27,22 +32,26 @@ function CardMenuHide({
   if (!canIEdit || chronId == undefined) return null
 
   return (
-    <Fragment>
+    <>
       <MenuItem button onClick={() => removeThing(chronId, id, characterType)}>
         <ListItemIcon>
           <RemoveCircle />
         </ListItemIcon>
         <ListItemText inset primary="Remove from Chronicle" />
       </MenuItem>
-    </Fragment>
+    </>
   )
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   canIEdit: canIEdit(state, props.id, props.characterType),
   chronId:
     state.entities.current[props.characterType + 's'][props.id].chronicle_id,
 })
-export default connect(
+
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { removeThing }
-)(CardMenuHide)
+)
+
+export default enhance(CardMenuHide)

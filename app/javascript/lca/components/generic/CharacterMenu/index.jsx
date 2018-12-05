@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
@@ -16,6 +16,8 @@ import MenuRemoveFromChronicle from './MenuRemoveFromChronicle.jsx'
 import MenuDuplicate from './MenuDuplicate.jsx'
 import MenuBattlegroupFromQc from './MenuBattlegroupFromQc.jsx'
 
+import type { Enhancer } from 'utils/flow-types'
+
 //eslint-disable-next-line no-unused-vars
 const styles = theme => ({
   wrapper: {
@@ -24,17 +26,22 @@ const styles = theme => ({
   headerWrapper: {},
 })
 
-type Props = {
+export type CharacterType = 'character' | 'qc' | 'battlegroup'
+
+type ExposedProps = {
   id: number,
-  characterType: string,
+  characterType: CharacterType,
   header?: boolean,
+}
+type Props = ExposedProps & {
   classes: Object,
 }
-class CharacterMenu extends Component<Props, { menuAnchor: ?Object }> {
-  constructor(props: Props) {
-    super(props)
-    this.state = { menuAnchor: null }
-  }
+type State = {
+  menuAnchor: ?Object,
+}
+
+class CharacterMenu extends React.Component<Props, State> {
+  state = { menuAnchor: null }
 
   handleOpen = (e: SyntheticEvent<>) => {
     this.setState({ menuAnchor: e.currentTarget })
@@ -109,4 +116,6 @@ class CharacterMenu extends Component<Props, { menuAnchor: ?Object }> {
   }
 }
 
-export default withStyles(styles)(CharacterMenu)
+const enhance: Enhancer<Props, ExposedProps> = withStyles(styles)
+
+export default enhance(CharacterMenu)

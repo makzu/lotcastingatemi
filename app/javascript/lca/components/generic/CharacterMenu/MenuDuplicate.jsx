@@ -10,10 +10,14 @@ import {
   duplicateQc,
   duplicateBattlegroup,
 } from 'ducks/actions.js'
+import type { CharacterType } from './index.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   id: number,
-  characterType: string,
+  characterType: CharacterType,
+}
+type Props = ExposedProps & {
   canDupe: boolean,
   duplicateCharacter: Function,
   duplicateQc: Function,
@@ -49,11 +53,14 @@ function DuplicateButton(props: Props) {
 const mapStateToProps = state => ({
   canDupe: state.session.authenticated,
 })
-export default connect(
+
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     duplicateCharacter,
     duplicateQc,
     duplicateBattlegroup,
   }
-)(DuplicateButton)
+)
+
+export default enhance(DuplicateButton)

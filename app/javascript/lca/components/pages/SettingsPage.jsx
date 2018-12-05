@@ -19,7 +19,7 @@ import TextField from 'components/generic/TextField.jsx'
 
 import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions.js'
 import { getSpecificPlayer } from 'selectors'
-import type { Player } from 'utils/flow-types'
+import type { Player, Enhancer } from 'utils/flow-types'
 
 type Props = {
   player: Player,
@@ -28,6 +28,7 @@ type Props = {
   switchTheme: Function,
   destroyAccount: Function,
 }
+
 class SettingsPage extends React.Component<Props, { open: boolean }> {
   constructor(props) {
     super(props)
@@ -133,9 +134,11 @@ const mapStateToProps = state => {
   return { player, theme }
 }
 
-export default compose(
+const enhance: Enhancer<Props, {}> = compose(
   connect(
     mapStateToProps,
     { updatePlayer, switchTheme, destroyAccount }
   )
-)(SettingsPage)
+)
+
+export default enhance(SettingsPage)

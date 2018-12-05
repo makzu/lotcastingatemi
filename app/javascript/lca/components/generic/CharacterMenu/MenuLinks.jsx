@@ -1,18 +1,24 @@
 // @flow
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuItem from '@material-ui/core/MenuItem'
 
-type Props = { id: number, characterType: string }
+import type { CharacterType } from './index.jsx'
+
+type Props = {
+  id: number,
+  characterType: CharacterType,
+}
+
 function CardMenuLinks({ id, characterType }: Props) {
   return (
-    <Fragment>
+    <>
       <MenuItem button component={Link} to={`/${characterType}s/${id}`}>
         <ListItemText primary="Full Sheet" />
       </MenuItem>
-    </Fragment>
+    </>
   )
 }
 

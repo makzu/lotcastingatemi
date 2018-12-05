@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -18,27 +17,25 @@ import {
   getSpecificChronicle,
   getMyCharactersWithoutChronicles,
 } from 'selectors'
-import type { Character } from 'utils/flow-types'
+import type { Character, Enhancer } from 'utils/flow-types'
 
-type Props = {
-  characters: Array<Character>,
+type ExposedProps = {
   chronicleId: number,
+}
+type Props = ExposedProps & {
+  characters: Array<Character>,
   chronicleName: string,
   handleSubmit: Function,
 }
-type State = { open: boolean, characterId: number }
-class CharacterAddPopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
+type State = {
+  open: boolean,
+  characterId: number,
+}
 
-    this.state = {
-      open: false,
-      characterId: 0,
-    }
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+class CharacterAddPopup extends React.Component<Props, State> {
+  state = {
+    open: false,
+    characterId: 0,
   }
 
   handleChange = e => {
@@ -83,7 +80,7 @@ class CharacterAddPopup extends Component<Props, State> {
     const hidden = currentCharacter && currentCharacter.hidden
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Add Character</Button>
 
         <Dialog open={this.state.open} onClose={handleClose}>
@@ -113,28 +110,23 @@ class CharacterAddPopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = state.session.id
+function mapStateToProps(state, ownProps: ExposedProps) {
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
   const characters = getMyCharactersWithoutChronicles(state)
   let chronicleName = ''
-  let inviteCode = ''
 
   if (chronicle.name != undefined) {
     chronicleName = chronicle.name
-    inviteCode = chronicle.invite_code
   }
 
   return {
-    id,
     characters,
     chronicleName,
-    inviteCode,
   }
 }
 
@@ -143,7 +135,9 @@ const mapDispatchToProps: Object = dispatch => ({
     dispatch(addThingToChronicle(id, charId, 'character')),
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CharacterAddPopup)
+)
+
+export default enhance(CharacterAddPopup)

@@ -23,7 +23,7 @@ import {
   getPoolsAndRatings,
 } from 'selectors'
 import * as calc from 'utils/calculated'
-import type { Character } from 'utils/flow-types'
+import type { Character, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={e => e.preventDefault()} />
@@ -93,10 +93,12 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   character: Character,
   chronicle?: boolean,
   st?: boolean,
+}
+type Props = ExposedProps & {
   canDelete: boolean,
   pools: Object,
   penalties: Object,
@@ -227,13 +229,16 @@ export function CharacterCard({
     </Paper>
   )
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   canDelete: canIDeleteCharacter(state, props.character.id),
   penalties: getPenalties(state, props.character.id),
   pools: getPoolsAndRatings(state, props.character.id),
 })
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   withStyles(styles)
-)(CharacterCard)
+)
+
+export default enhance(CharacterCard)

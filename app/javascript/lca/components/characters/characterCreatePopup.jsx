@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -17,6 +16,7 @@ import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSel
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
 import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect.jsx'
 import { createCharacter } from 'ducks/actions.js'
+import type { Enhancer } from 'utils/flow-types'
 
 const initialState = {
   open: false,
@@ -29,14 +29,17 @@ const initialState = {
   },
 }
 
-type Props = { id: number, createCharacter: Function }
-type State = { open: boolean, character: Object }
-class CharacterCreatePopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
+type Props = {
+  id: number,
+  createCharacter: Function,
+}
+type State = {
+  open: boolean,
+  character: Object,
+}
 
-    this.state = initialState
-  }
+class CharacterCreatePopup extends React.Component<Props, State> {
+  state = initialState
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -236,7 +239,10 @@ class CharacterCreatePopup extends Component<Props, State> {
 }
 
 const mapStateToProps = state => ({ id: state.session.id })
-export default connect(
+
+const enhance: Enhancer<Props, {}> = connect(
   mapStateToProps,
   { createCharacter }
-)(CharacterCreatePopup)
+)
+
+export default enhance(CharacterCreatePopup)

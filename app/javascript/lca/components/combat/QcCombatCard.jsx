@@ -16,7 +16,7 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import sharedStyles from 'styles/'
 import { getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
-import type { fullQc } from 'utils/flow-types'
+import type { fullQc, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   ...sharedStyles(theme),
@@ -57,11 +57,12 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   qc: fullQc,
+}
+type Props = ExposedProps & {
   penalties: Object,
   pools: Object,
-  player: Object,
   classes: Object,
 }
 
@@ -143,14 +144,15 @@ function QcCard(props: Props) {
     </Paper>
   )
 }
-function mapStateToProps(state, props) {
-  return {
-    penalties: getPenaltiesForQc(state, props.qc.id),
-    pools: getPoolsAndRatingsForQc(state, props.qc.id),
-  }
-}
 
-export default compose(
+const mapStateToProps = (state, props: ExposedProps) => ({
+  penalties: getPenaltiesForQc(state, props.qc.id),
+  pools: getPoolsAndRatingsForQc(state, props.qc.id),
+})
+
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   withStyles(styles)
-)(QcCard)
+)
+
+export default enhance(QcCard)

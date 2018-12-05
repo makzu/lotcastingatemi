@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -16,21 +16,22 @@ import {
   getMyPinnedQCs,
   getMyPinnedBattlegroups,
 } from 'selectors'
+import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
-type Props = {
-  characters: Array<Object>,
-  qcs: Array<Object>,
-  battlegroups: Array<Object>,
+type ExposedProps = {
   closeDrawer: Function,
 }
+type Props = ExposedProps & {
+  characters: Array<Character>,
+  qcs: Array<fullQc>,
+  battlegroups: Array<Battlegroup>,
+}
+type State = {
+  open: boolean,
+}
 
-class CharacterNavList extends Component<Props, { open: boolean }> {
-  constructor(props: Props) {
-    super(props)
-    this.state = { open: false }
-
-    this.handleClick = this.handleClick.bind(this)
-  }
+class CharacterNavList extends React.Component<Props, State> {
+  state = { open: false }
 
   handleClick = () => {
     this.setState({ open: !this.state.open })
@@ -77,7 +78,7 @@ class CharacterNavList extends Component<Props, { open: boolean }> {
     ))
 
     return (
-      <Fragment>
+      <>
         <ListItem
           button
           component={NavLink}
@@ -99,7 +100,7 @@ class CharacterNavList extends Component<Props, { open: boolean }> {
           {qcList}
           {bgList}
         </Collapse>
-      </Fragment>
+      </>
     )
   }
 }
@@ -110,4 +111,6 @@ const mapStateToProps = state => ({
   battlegroups: getMyPinnedBattlegroups(state),
 })
 
-export default connect(mapStateToProps)(CharacterNavList)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps)
+
+export default enhance(CharacterNavList)

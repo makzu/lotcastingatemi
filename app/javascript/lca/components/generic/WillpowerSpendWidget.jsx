@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -15,17 +14,23 @@ import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils/'
-import type { Character, fullQc } from 'utils/flow-types'
+import type { Character, fullQc, Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   children: React.Node,
   character: Character | fullQc,
   qc?: boolean,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   spendWillpower: Function,
 }
-type State = { open: boolean, toSpend: number }
-class WillpowerSpendWidget extends Component<Props, State> {
+type State = {
+  open: boolean,
+  toSpend: number,
+}
+
+class WillpowerSpendWidget extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = { open: false, toSpend: 0 }
@@ -87,7 +92,7 @@ class WillpowerSpendWidget extends Component<Props, State> {
     }
 
     return (
-      <Fragment>
+      <>
         <ButtonBase onClick={handleOpen}>{children}</ButtonBase>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>
@@ -136,10 +141,11 @@ class WillpowerSpendWidget extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
+
 function mapStateToProps(state: Object, props: Object) {
   return {
     canEdit: props.qc
@@ -147,7 +153,10 @@ function mapStateToProps(state: Object, props: Object) {
       : canIEditCharacter(state, props.character.id),
   }
 }
-export default connect(
+
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { spendWillpower }
-)(WillpowerSpendWidget)
+)
+
+export default enhance(WillpowerSpendWidget)

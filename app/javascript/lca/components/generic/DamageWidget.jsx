@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -15,11 +14,14 @@ import RatingField from './RatingField.jsx'
 import { takeDamage } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
+import type { Character, fullQc, Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   children: React.Node,
-  character: Object,
+  character: Character | fullQc,
   qc?: boolean,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   takeDamage: Function,
 }
@@ -28,13 +30,18 @@ type State = {
   bashing: number,
   lethal: number,
   aggravated: number,
-  commit?: boolean,
+  commit: boolean,
 }
-class DamageWidget extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = { open: false, bashing: 0, lethal: 0, aggravated: 0 }
-  }
+const defaultState: State = {
+  open: false,
+  bashing: 0,
+  lethal: 0,
+  aggravated: 0,
+  commit: false,
+}
+
+class DamageWidget extends React.Component<Props, State> {
+  state = defaultState
 
   min = type => {
     return -this.props.character[`damage_${type}`]
@@ -45,7 +52,7 @@ class DamageWidget extends Component<Props, State> {
   }
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.setState(defaultState)
   }
 
   handleAdd = (dmg, type) => {
@@ -82,7 +89,7 @@ class DamageWidget extends Component<Props, State> {
         characterType
       )
 
-    this.setState({ open: false, bashing: 0, lethal: 0, aggravated: 0 })
+    this.setState(defaultState)
   }
 
   render() {
@@ -102,7 +109,7 @@ class DamageWidget extends Component<Props, State> {
     }
 
     return (
-      <Fragment>
+      <>
         <ButtonBase onClick={handleOpen} style={{ fontSize: '1em' }}>
           {children}
         </ButtonBase>
@@ -218,17 +225,20 @@ class DamageWidget extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   canEdit: props.qc
     ? canIEditQc(state, props.character.id)
     : canIEditCharacter(state, props.character.id),
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { takeDamage }
-)(DamageWidget)
+)
+
+export default enhance(DamageWidget)

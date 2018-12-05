@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
 import Hidden from '@material-ui/core/Hidden'
@@ -13,6 +14,7 @@ import Typography from '@material-ui/core/Typography'
 import { GenericHeader } from './header.jsx'
 import LcaDrawerButton from './lcaDrawerButton.jsx'
 import { getSpecificChronicle, amIStOfChronicle } from 'selectors'
+import type { Chronicle, Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
 const styles = theme => ({
@@ -22,13 +24,18 @@ const styles = theme => ({
   title: {},
 })
 
-type Props = {
+type ExposedProps = {
+  match: { params: { chronicleId: number } },
+  location: { pathname: string },
+}
+type Props = ExposedProps & {
   id: number,
-  chronicle: Object,
+  chronicle: Chronicle,
   path: string,
   is_st: boolean,
   classes: Object,
 }
+
 function ChronicleHeader(props: Props) {
   if (props.chronicle == undefined || props.chronicle.name == undefined)
     return <GenericHeader />
@@ -65,7 +72,7 @@ function ChronicleHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   const id = ownProps.match.params.chronicleId
   const chronicle = getSpecificChronicle(state, id)
   const is_st = amIStOfChronicle(state, id)
@@ -79,4 +86,8 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(ChronicleHeader))
+const enhance: Enhancer<Props, ExposedProps> = compose(
+  connect(mapStateToProps),
+  withStyles(styles)
+)
+export default enhance(ChronicleHeader)

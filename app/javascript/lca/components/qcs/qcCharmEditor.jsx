@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -10,16 +10,19 @@ import QcCharmFields from './qcCharmFields.jsx'
 
 import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.js'
 import { getCharmsForQc } from 'selectors'
-import type { fullQc, QcCharm } from 'utils/flow-types'
+import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   qc: fullQc,
+}
+type Props = ExposedProps & {
   qc_charms: Array<QcCharm>,
   updateQcCharm: Function,
   createQcCharm: Function,
   destroyQcCharm: Function,
 }
-class QcCharmEditor extends Component<Props> {
+
+class QcCharmEditor extends React.Component<Props> {
   handleChange = (id, trait, value) => {
     this.props.updateQcCharm(id, this.props.qc.id, trait, value)
   }
@@ -60,7 +63,7 @@ class QcCharmEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   const qc = ownProps.qc
   let qc_charms = qc !== undefined ? getCharmsForQc(state, qc.id) : []
 
@@ -69,11 +72,13 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     updateQcCharm,
     createQcCharm,
     destroyQcCharm,
   }
-)(QcCharmEditor)
+)
+
+export default enhance(QcCharmEditor)

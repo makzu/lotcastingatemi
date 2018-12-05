@@ -20,22 +20,26 @@ import {
   destroyBattlegroup,
 } from 'ducks/actions.js'
 import { canIDelete } from 'selectors'
+import type { CharacterType } from './index.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   id: number,
-  name: string,
+  characterType: CharacterType,
+}
+type Props = ExposedProps & {
   canDelete: boolean,
-  characterType: string,
+  name: string,
   destroyCharacter: Function,
   destroyQc: Function,
   destroyBattlegroup: Function,
 }
+type State = {
+  open: boolean,
+}
 
-class CardMenuDelete extends Component<Props, { open: boolean }> {
-  constructor(props) {
-    super(props)
-    this.state = { open: false }
-  }
+class CardMenuDelete extends Component<Props, State> {
+  state = { open: false }
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -94,16 +98,19 @@ class CardMenuDelete extends Component<Props, { open: boolean }> {
     )
   }
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   canDelete: canIDelete(state, props.id, props.characterType),
   name: state.entities.current[props.characterType + 's'][props.id].name,
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     destroyCharacter,
     destroyQc,
     destroyBattlegroup,
   }
-)(CardMenuDelete)
+)
+
+export default enhance(CardMenuDelete)

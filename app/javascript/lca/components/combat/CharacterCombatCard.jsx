@@ -17,7 +17,7 @@ import CombatControls from './CombatControls.jsx'
 import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
 import NotesPopup from 'components/characters/NotesPopup.jsx'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
-import type { Character } from 'utils/flow-types'
+import type { Character, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   root: {
@@ -64,8 +64,10 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   character: Character,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   pools: Object,
   penalties: Object,
@@ -163,13 +165,15 @@ export function CharacterCard({
     </Paper>
   )
 }
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state, props: ExposedProps) => ({
   canEdit: canIEditCharacter(state, props.character.id),
   penalties: getPenalties(state, props.character.id),
   pools: getPoolsAndRatings(state, props.character.id),
 })
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   withStyles(styles)
-)(CharacterCard)
+)
+
+export default enhance(CharacterCard)

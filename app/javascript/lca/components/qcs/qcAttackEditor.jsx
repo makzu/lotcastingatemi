@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -13,18 +13,23 @@ import {
   updateQcAttack,
 } from 'ducks/actions.js'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
-import type { QcAttack } from 'utils/flow-types'
+import type { QcAttack, Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   qc: Object,
   battlegroup?: boolean,
+}
+type Props = ExposedProps & {
   qc_attacks: Array<QcAttack>,
   updateQcAttack: Function,
   createQcAttack: Function,
   destroyQcAttack: Function,
 }
+type State = {
+  type: string,
+}
 
-class QcAttackEditor extends Component<Props, { type: string }> {
+class QcAttackEditor extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -78,7 +83,7 @@ class QcAttackEditor extends Component<Props, { type: string }> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   const qc = ownProps.qc
   let qc_attacks = []
 
@@ -93,11 +98,13 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     updateQcAttack,
     createQcAttack,
     destroyQcAttack,
   }
-)(QcAttackEditor)
+)
+
+export default enhance(QcAttackEditor)

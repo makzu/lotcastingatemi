@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -11,15 +11,22 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 import { removePlayerFromChronicle as removePlayer } from 'ducks/actions.js'
 import { getSpecificChronicle, getSpecificPlayer } from 'selectors'
+import type { Enhancer } from 'utils/flow-types'
 
-type State = {
+type ExposedProps = {
   chronicleId: number,
   playerId: number,
+}
+type Props = ExposedProps & {
   chronicleName: string,
   playerName: string,
   removePlayer: Function,
 }
-class RemovePlayerPopup extends Component<State, { open: boolean }> {
+type State = {
+  open: boolean,
+}
+
+class RemovePlayerPopup extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -43,7 +50,7 @@ class RemovePlayerPopup extends Component<State, { open: boolean }> {
     const { chronicleName, playerName } = this.props
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Kick</Button>
 
         <Dialog open={this.state.open} onClose={handleClose}>
@@ -66,12 +73,12 @@ class RemovePlayerPopup extends Component<State, { open: boolean }> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   let chronicleName,
     playerName = ''
 
@@ -89,7 +96,9 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { removePlayer }
-)(RemovePlayerPopup)
+)
+
+export default enhance(RemovePlayerPopup)

@@ -6,10 +6,14 @@ import ListItemText from '@material-ui/core/ListItemText'
 import MenuItem from '@material-ui/core/MenuItem'
 
 import { createBattlegroupFromQc } from 'ducks/actions.js'
+import type { CharacterType } from './index.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   id: number,
-  characterType: string,
+  characterType: CharacterType,
+}
+type Props = ExposedProps & {
   canCreate: boolean,
   createBattlegroupFromQc: Function,
 }
@@ -23,13 +27,16 @@ function BattlegroupFromQc(props: Props) {
     </MenuItem>
   )
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   canCreate: state.session.authenticated && props.characterType === 'qc',
 })
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     createBattlegroupFromQc,
   }
-)(BattlegroupFromQc)
+)
+
+export default enhance(BattlegroupFromQc)

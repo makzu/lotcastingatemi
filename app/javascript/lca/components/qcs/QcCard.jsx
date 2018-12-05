@@ -16,7 +16,7 @@ import CharacterMenu from '../generic/CharacterMenu'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
-import type { fullQc } from 'utils/flow-types'
+import type { fullQc, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={e => e.preventDefault()} />
@@ -63,13 +63,14 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   qc: fullQc,
   chronicle?: boolean,
   st?: boolean,
+}
+type Props = ExposedProps & {
   penalties: Object,
   pools: Object,
-  player: Object,
   isOwner: boolean,
   classes: Object,
 }
@@ -186,15 +187,16 @@ function QcCard(props: Props) {
     </Paper>
   )
 }
-function mapStateToProps(state, props) {
-  return {
-    penalties: getPenaltiesForQc(state, props.qc.id),
-    pools: getPoolsAndRatingsForQc(state, props.qc.id),
-    isOwner: doIOwnQc(state, props.qc.id),
-  }
-}
 
-export default compose(
+const mapStateToProps = (state, props) => ({
+  penalties: getPenaltiesForQc(state, props.qc.id),
+  pools: getPoolsAndRatingsForQc(state, props.qc.id),
+  isOwner: doIOwnQc(state, props.qc.id),
+})
+
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   withStyles(styles)
-)(QcCard)
+)
+
+export default enhance(QcCard)

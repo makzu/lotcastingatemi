@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
@@ -12,19 +12,22 @@ import WeaponFields from './WeaponFields.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import { createWeapon, destroyWeapon, updateWeapon } from 'ducks/actions.js'
 import { getWeaponsForCharacter } from 'selectors'
-import type { Character, fullWeapon as Weapon } from 'utils/flow-types'
+import type { Character, fullWeapon, Enhancer } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)
 
-type Props = {
+type ExposedProps = {
   character: Character,
-  weapons: Array<Weapon>,
+}
+type Props = ExposedProps & {
+  weapons: Array<fullWeapon>,
   createWeapon: Function,
   updateWeapon: Function,
   destroyWeapon: Function,
 }
-class WeaponEditor extends Component<Props> {
+
+class WeaponEditor extends React.Component<Props> {
   handleChange = (id, trait, value) => {
     if (value === 'header') return
 
@@ -84,7 +87,7 @@ class WeaponEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   const character = ownProps.character
   let weapons = []
 
@@ -96,11 +99,13 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     updateWeapon,
     createWeapon,
     destroyWeapon,
   }
-)(WeaponEditor)
+)
+
+export default enhance(WeaponEditor)

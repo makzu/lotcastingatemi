@@ -18,6 +18,7 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import sharedStyles from 'styles/'
 import { doIOwnBattlegroup } from 'selectors'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
+import type { Battlegroup, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={e => e.preventDefault()} />
@@ -55,10 +56,12 @@ const styles = theme => ({
   },
 })
 
-type Props = {
-  battlegroup: Object,
+type ExposedProps = {
+  battlegroup: Battlegroup,
   chronicle?: boolean,
   st?: boolean,
+}
+type Props = ExposedProps & {
   isOwner: boolean,
   classes: Object,
 }
@@ -210,11 +213,14 @@ function BattlegroupCard(props: Props) {
     </Paper>
   )
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   isOwner: doIOwnBattlegroup(state, props.battlegroup.id),
 })
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
   withStyles(styles)
-)(BattlegroupCard)
+)
+
+export default enhance(BattlegroupCard)

@@ -20,7 +20,7 @@ import {
   updateBattlegroupMulti,
 } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
-import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
+import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
 const styles = theme => ({
@@ -34,20 +34,22 @@ const styles = theme => ({
   },
 })
 
-type Props = {
+type ExposedProps = {
   character: Character | fullQc | Battlegroup,
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   update: Function,
   pools: Object,
   classes: Object,
 }
-type State = { open: boolean, initiative: number }
-class JoinBattlePopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
+type State = {
+  open: boolean,
+  initiative: number,
+}
 
-    this.state = { open: false, initiative: 0 }
-  }
+class JoinBattlePopup extends React.Component<Props, State> {
+  state = { open: false, initiative: 0 }
 
   handleChange = e => {
     let { name, value } = e.target
@@ -55,6 +57,7 @@ class JoinBattlePopup extends Component<Props, State> {
   }
 
   handleOpen = () => this.setState({ open: true })
+
   handleClose = () => this.setState({ open: false, initiative: 0 })
 
   handleSubmit = () => {
@@ -67,7 +70,7 @@ class JoinBattlePopup extends Component<Props, State> {
     const { character, pools, classes } = this.props
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Roll Join Battle</Button>
 
         <Dialog open={this.state.open} onClose={handleClose}>
@@ -104,11 +107,12 @@ class JoinBattlePopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
-function mapStateToProps(state, props) {
+
+function mapStateToProps(state, props: ExposedProps) {
   let type
   if (props.character.type === 'qc') type = 'qc'
   else if (props.character.type === 'battlegroup') type = 'battlegroup'
@@ -119,7 +123,8 @@ function mapStateToProps(state, props) {
     pools: getPoolsAndRatingsGeneric(state, props.character.id, type),
   }
 }
-function mapDispatchToProps(dispatch: Function, props) {
+
+function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   let action
   switch (props.character.type) {
     case 'qc':
@@ -139,10 +144,12 @@ function mapDispatchToProps(dispatch: Function, props) {
   }
 }
 
-export default compose(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   withStyles(styles)
-)(JoinBattlePopup)
+)
+
+export default enhance(JoinBattlePopup)

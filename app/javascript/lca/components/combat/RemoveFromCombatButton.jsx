@@ -10,14 +10,17 @@ import {
   updateBattlegroupMulti,
 } from 'ducks/actions.js'
 import { canIEdit } from 'selectors'
-import type { withCombatInfo } from 'utils/flow-types'
+import type { withCombatInfo, Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   character: withCombatInfo & { id: number },
-  characterType: string,
+  characterType: 'character' | 'qc' | 'battlegroup',
+}
+type Props = ExposedProps & {
   canEdit: boolean,
   update: Function,
 }
+
 class RemoveFromCombatButton extends Component<Props> {
   onClickRemoveFromBattle = () => {
     this.props.update(this.props.character.id, {
@@ -36,11 +39,12 @@ class RemoveFromCombatButton extends Component<Props> {
     )
   }
 }
-const mapStateToProps = (state, props: Object) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   canEdit: canIEdit(state, props.character.id, props.characterType),
 })
 
-function mapDispatchToProps(dispatch: Function, props: Object) {
+function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   let action
   switch (props.characterType) {
     case 'qc':
@@ -59,7 +63,9 @@ function mapDispatchToProps(dispatch: Function, props: Object) {
   }
 }
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RemoveFromCombatButton)
+)
+
+export default enhance(RemoveFromCombatButton)

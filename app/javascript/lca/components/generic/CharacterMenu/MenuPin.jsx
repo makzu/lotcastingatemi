@@ -10,10 +10,14 @@ import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { canIDelete } from 'selectors'
+import type { CharacterType } from './index.jsx'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   id: number,
-  characterType: string,
+  characterType: CharacterType,
+}
+type Props = ExposedProps & {
   isPinned: boolean,
   canEdit: boolean,
   updateCharacter: Function,
@@ -49,15 +53,19 @@ function PinButton(props: Props) {
     </MenuItem>
   )
 }
-const mapStateToProps = (state, props) => ({
+
+const mapStateToProps = (state, props: ExposedProps) => ({
   isPinned: state.entities.current[props.characterType + 's'][props.id].pinned,
   canEdit: canIDelete(state, props.id, props.characterType),
 })
-export default connect(
+
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   {
     updateCharacter,
     updateQc,
     updateBattlegroup,
   }
-)(PinButton)
+)
+
+export default enhance(PinButton)

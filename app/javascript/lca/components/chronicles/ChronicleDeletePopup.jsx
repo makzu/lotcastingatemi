@@ -1,6 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
-
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -13,22 +12,22 @@ import Delete from '@material-ui/icons/Delete'
 
 import { destroyChronicle } from 'ducks/actions.js'
 import { getSpecificChronicle } from 'selectors'
+import type { Enhancer } from 'utils/flow-types'
 
-type Props = {
+type ExposedProps = {
   chronicleId: number,
+}
+type Props = ExposedProps & {
   chronicleName: string,
   destroyChronicle: Function,
 }
-class ChronicleLeavePopup extends Component<Props, { open: boolean }> {
-  constructor(props) {
-    super(props)
+type State = {
+  open: boolean,
+}
 
-    this.state = {
-      open: false,
-    }
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+class ChronicleLeavePopup extends React.Component<Props, State> {
+  state = {
+    open: false,
   }
 
   handleOpen = () => {
@@ -49,7 +48,7 @@ class ChronicleLeavePopup extends Component<Props, { open: boolean }> {
     const { chronicleName } = this.props
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>
           Delete Chronicle &nbsp;
           <Delete />
@@ -68,12 +67,12 @@ class ChronicleLeavePopup extends Component<Props, { open: boolean }> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   let chronicleName = ''
 
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
@@ -86,7 +85,9 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { destroyChronicle }
-)(ChronicleLeavePopup)
+)
+
+export default enhance(ChronicleLeavePopup)

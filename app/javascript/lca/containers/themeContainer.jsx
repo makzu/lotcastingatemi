@@ -8,6 +8,7 @@ import lightgreen from '@material-ui/core/colors/lightGreen'
 import teal from '@material-ui/core/colors/teal'
 
 import { switchTheme } from 'ducks/actions.js'
+import type { Enhancer } from 'utils/flow-types'
 
 /* When changing these colors, it's also important to change the theme_color
  * entries in /config/favicon.json from #2e7d32 to the new value,
@@ -39,7 +40,14 @@ const themes = {
     ...themeCommon,
   }),
 }
-type Props = { theme: string, children: React.Node, switchTheme: Function }
+type ExposedProps = {
+  children: React.Node,
+}
+type Props = ExposedProps & {
+  theme: string,
+  switchTheme: Function,
+}
+
 class ThemeContainer extends React.Component<Props> {
   componentDidMount() {
     window.addEventListener('storage', this.handleStorageChange)
@@ -60,8 +68,12 @@ class ThemeContainer extends React.Component<Props> {
     return <MuiThemeProvider theme={themes[theme]}>{children}</MuiThemeProvider>
   }
 }
+
 const mapStateToProps = state => ({ theme: state.app.theme })
-export default connect(
+
+const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
   { switchTheme }
-)(ThemeContainer)
+)
+
+export default enhance(ThemeContainer)

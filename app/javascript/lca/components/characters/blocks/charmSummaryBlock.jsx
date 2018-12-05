@@ -17,7 +17,7 @@ import {
   getSpiritCharmsForCharacter,
   getSpellsForCharacter,
 } from 'selectors'
-import type { Character, Charm, Spell } from 'utils/flow-types'
+import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   root: {
@@ -96,14 +96,17 @@ function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
 }
 const SingleSpell = withStyles(styles)(_SingleSpell)
 
-type Props = {
+type ExposedProps = {
   character: Character,
+}
+type Props = ExposedProps & {
   nativeCharms: Array<Charm>,
   martialArtsCharms: Array<Charm>,
   evocations: Array<Charm>,
   spiritCharms: Array<Charm>,
   spells: Array<Spell>,
 }
+
 function CharmSummaryBlock(props: Props) {
   const {
     character,
@@ -156,7 +159,7 @@ function CharmSummaryBlock(props: Props) {
   )
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   const { character } = ownProps
   const { id } = character
 
@@ -183,4 +186,6 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(CharmSummaryBlock)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps)
+
+export default enhance(CharmSummaryBlock)

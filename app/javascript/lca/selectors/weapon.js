@@ -31,6 +31,7 @@ const getExcellencyAbilsForWeapon = createSelector(
     )
 )
 
+// $FlowFixMe
 export const getPoolsForWeapon = createCachedSelector(
   [
     getCharacterForWeapon,

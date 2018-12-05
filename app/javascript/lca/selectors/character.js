@@ -3,6 +3,7 @@ import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { isEmpty, max } from 'lodash'
 
+import { entities, getCurrentPlayer, type entitySelector } from './entities.js'
 import { getPoolsForWeapon, sortByParry } from './weapon.js'
 import {
   getNativeCharmsForCharacter,
@@ -16,30 +17,33 @@ import * as ratings from 'utils/calculated/ratings'
 
 import type { Character } from 'utils/flow-types'
 
-const entities = state => state.entities.current
+// const entities = state => state.entities.current
 
 const getState = state => state
-const getCurrentPlayer = state => entities(state).players[state.session.id]
+// const getCurrentPlayer = state => entities(state).players[state.session.id]
 const getPoisons = state => entities(state).poisons
 
 export const getSpecificCharacter = (state: Object, id: number): Character =>
   entities(state).characters[id]
+
 const characterIdMemoizer = (state, id) => id
-export const getCachedSpecificCharacter = createCachedSelector(
-  [getSpecificCharacter],
-  character => character
-)(characterIdMemoizer)
 
 const getMerits = state => entities(state).merits
+
+// $FlowFixMe
 export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],
   (character, merits) =>
     character.merits.map(m => merits[m]).sort(sortOrderSort)
 )(characterIdMemoizer)
+
 export const getMeritNamesForCharacter = (state: Object, id: number) =>
+  // $FlowFixMe
   getMeritsForCharacter(state, id)
     .map(m => m.merit_name.toLowerCase() + m.rating)
     .sort()
+
+// $FlowFixMe
 export const getEvokableMeritsForCharacter = createSelector(
   [getMeritsForCharacter],
   merits =>
@@ -51,6 +55,7 @@ export const getEvokableMeritsForCharacter = createSelector(
 )
 
 const getWeapons = state => entities(state).weapons
+// $FlowFixMe
 export const getWeaponsForCharacter = createCachedSelector(
   [getSpecificCharacter, getWeapons],
   (character, weapons) =>
@@ -58,20 +63,25 @@ export const getWeaponsForCharacter = createCachedSelector(
 )(characterIdMemoizer)
 
 const getSpells = state => entities(state).spells
+// $FlowFixMe
 export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>
     character.spells.map(s => spells[s]).sort(sortOrderSort)
 )(characterIdMemoizer)
+
 export const getControlSpellsForCharacter = (state: Object, id: number) =>
+  // $FlowFixMe
   getSpellsForCharacter(state, id).filter(s => s.control)
 
+// $FlowFixMe
 export const getPoisonsForCharacter = createCachedSelector(
   [getSpecificCharacter, getPoisons],
   (character, poisons) =>
     character.poisons.map(p => poisons[p]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getPenalties = createCachedSelector(
   [getSpecificCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],
   (character, meritNames, poisons) => {
@@ -85,12 +95,14 @@ export const getPenalties = createCachedSelector(
   }
 )(characterIdMemoizer)
 
-export const getPoolsForAllWeaponsForCharacter = createSelector(
+// $FlowFixMe
+export const getPoolsForAllWeaponsForCharacter = createCachedSelector(
   [getSpecificCharacter, getState],
   (character, state) =>
     character.weapons.map(id => getPoolsForWeapon(state, id))
-)
+)(characterIdMemoizer)
 
+// $FlowFixMe
 export const getPoolsAndRatings = createCachedSelector(
   [
     getSpecificCharacter,
@@ -195,26 +207,27 @@ export const getPoolsAndRatings = createCachedSelector(
   }
 )(characterIdMemoizer)
 
-export const doIOwnCharacter = createSelector(
+export const doIOwnCharacter: entitySelector<boolean> = createSelector(
   [getCurrentPlayer, getSpecificCharacter],
   (player, character) =>
     character !== undefined && player.id === character.player_id
 )
 
-export const amIStOfCharacter = createSelector(
+export const amIStOfCharacter: entitySelector<boolean> = createSelector(
   [getCurrentPlayer, getSpecificCharacter, entities],
   (player, character, ents) =>
-    character !== undefined &&
-    character.chronicle_id &&
+    character != null &&
+    character.chronicle_id != null &&
     ents.chronicles[character.chronicle_id] &&
     ents.chronicles[character.chronicle_id].st_id === player.id
 )
-export const canISeeCharacter = createSelector(
+
+export const canISeeCharacter: entitySelector<boolean> = createSelector(
   [getSpecificCharacter, doIOwnCharacter, amIStOfCharacter],
   (character, doI, amI) => !character.hidden || doI || amI
 )
 
-export const canIEditCharacter = createSelector(
+export const canIEditCharacter: entitySelector<boolean> = createSelector(
   [doIOwnCharacter, amIStOfCharacter],
   (doI, amI) => doI || amI
 )

@@ -2776,7 +2776,7 @@ declare module "@material-ui/core/TextField/TextField" {
     select?: boolean,
     SelectProps?: Object,
     type?: string,
-    value?: string | number,
+    value?: string | number | Array<string>,
     margin?: "none" | "dense" | "normal"
   }>;
 }

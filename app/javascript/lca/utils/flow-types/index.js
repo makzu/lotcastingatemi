@@ -11,7 +11,6 @@ export type Enhancer<P, EP> = (
 ) => React.ComponentType<EP>
 
 export type Battlegroup = {
-  id: number,
   name: string,
   description: string,
   magnitude: number,
@@ -22,7 +21,6 @@ export type Battlegroup = {
   health_levels: number,
   perfect_morale: boolean,
   portrait_link: string,
-  qc_attacks: Array<string>,
 } & withBasicInfo &
   withQcStats &
   withWillpower &
@@ -33,11 +31,18 @@ export type CombatActor = {}
 export type Player = {
   id: number,
   display_name: string,
+  characters: Array<number>,
+  qcs: Array<number>,
+  battlegroups: Array<number>,
+  chronicles: Array<number>,
+  own_chronicles: Array<number>,
 }
 
 export type Chronicle = {
+  id: number,
   st_id: number,
   name: string,
+  players: Array<number>,
 }
 
 export type Ability =

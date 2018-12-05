@@ -21,6 +21,7 @@ export type withQcStats = {
   parry: number,
   senses: number,
   armor_name: string,
+  qc_attacks: Array<number>,
 }
 
 export type fullQc = {
@@ -29,9 +30,8 @@ export type fullQc = {
   grapple_control: number,
   actions: Array<{ action: string, pool: number }>,
   ref: string,
-  qc_attacks: Array<string>,
-  qc_charms: Array<string>,
-  qc_merits: Array<string>,
+  qc_charms: Array<number>,
+  qc_merits: Array<number>,
   portrait_link: string,
 } & withQcStats &
   withWillpower &

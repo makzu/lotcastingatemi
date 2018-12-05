@@ -15,6 +15,8 @@ export const getSpecificChronicle = (state: Object, id: number) =>
 const idMemoizer = (state, id) => id
 
 const getPlayers = state => entities(state).players
+
+// $FlowFixMe
 export const getPlayersForChronicle = createCachedSelector(
   [getSpecificChronicle, getPlayers],
   (chronicle, players) =>
@@ -23,6 +25,8 @@ export const getPlayersForChronicle = createCachedSelector(
       chronicle.players.map(c => players[c])) ||
     []
 )(idMemoizer)
+
+// $FlowFixMe
 export const getStorytellerForChronicle = createCachedSelector(
   [getSpecificChronicle, getPlayers],
   (chronicle, players) =>
@@ -30,6 +34,8 @@ export const getStorytellerForChronicle = createCachedSelector(
 )(idMemoizer)
 
 const getCharacters = state => entities(state).characters
+
+// $FlowFixMe
 export const getCharactersForChronicle = createCachedSelector(
   [getSpecificChronicle, getCharacters, getState],
   (chronicle, characters, state) =>
@@ -43,6 +49,8 @@ export const getCharactersForChronicle = createCachedSelector(
 )(idMemoizer)
 
 const getQcs = state => entities(state).qcs
+
+// $FlowFixMe
 export const getQcsForChronicle = createCachedSelector(
   [getSpecificChronicle, getQcs, getState],
   (chronicle, qcs, state) =>
@@ -56,6 +64,8 @@ export const getQcsForChronicle = createCachedSelector(
 )(idMemoizer)
 
 const getBattlegroups = state => entities(state).battlegroups
+
+// $FlowFixMe
 export const getBattlegroupsForChronicle = createCachedSelector(
   [getSpecificChronicle, getBattlegroups, getState],
   (chronicle, battlegroups, state) =>
@@ -68,6 +78,7 @@ export const getBattlegroupsForChronicle = createCachedSelector(
     []
 )(idMemoizer)
 
+// $FlowFixMe
 export const amIStOfChronicle = createCachedSelector(
   [getCurrentPlayer, getSpecificChronicle],
   (player, chronicle) =>

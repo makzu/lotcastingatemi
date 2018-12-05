@@ -70,6 +70,8 @@ export const isPublicCharacterPage = (state: Object, pathName: string) => {
 }
 
 const getChronicles = state => entities(state).chronicles
+
+// $FlowFixMe
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
@@ -77,6 +79,8 @@ export const getMyOwnChronicles = createSelector(
       .map(c => chronicles[c])
       .filter(c => c !== undefined && c.name !== undefined)
 )
+
+// $FlowFixMe
 export const getMyChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
@@ -100,4 +104,4 @@ export const getPoolsAndRatingsGeneric = (
   }
 }
 
-export const getPoisons = state => entities(state).poisons
+// export const getPoisons = state => entities(state).poisons

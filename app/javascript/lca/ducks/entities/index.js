@@ -92,6 +92,15 @@ export type EntityState = {
   +poisons: { [id: number]: Poison },
 }
 
+export type WrappedEntityState = {
+  entities: {
+    current: EntityState,
+  },
+  session: {
+    id: number,
+  },
+}
+
 export function EntityReducer(
   state: EntityState = defaultState,
   action: Object

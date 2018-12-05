@@ -74,7 +74,6 @@ class WeaponEditorPopup extends Component<Props, State> {
           <DialogTitle>Edit {weapon.name}</DialogTitle>
           <DialogContent>
             <div className={classes.flexContainerSpread}>
-              {/* $FlowFixMe */}
               <WeaponPoolDisplay weapon={weapon} />
             </div>
 

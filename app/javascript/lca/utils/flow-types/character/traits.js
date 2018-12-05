@@ -3,6 +3,7 @@ type traitBasics = {
   id: number,
   character_id: number,
   name: string,
+  sort_order: number,
 }
 
 export type Charm = traitBasics & {
@@ -61,4 +62,5 @@ export type fullMerit = {
   ref: string,
   supernatural: boolean,
   prereqs: string,
+  sort_order: number,
 }

@@ -2,52 +2,52 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { getQcAttacks } from './qc.js'
-import { qcPool } from 'utils/calculated'
+import { bgJoinBattlePool } from '../utils/calculated/_battlegroups.js'
+import { entities, getCurrentPlayer, type entitySelector } from './entities.js'
+import type { WrappedEntityState } from 'ducks/entities'
+import type { Player, Battlegroup } from 'utils/flow-types'
 
-const entities = state => state.entities.current
+export const getSpecificBattlegroup = (
+  state: WrappedEntityState,
+  id: number
+): Battlegroup => entities(state).battlegroups[id]
 
-const getCurrentPlayer = state => entities(state).players[state.session.id]
-
-export const getSpecificBattlegroup = (state: Object, id: number) =>
-  entities(state).battlegroups[id]
-
-export const getAttacksForBattlegroup = createCachedSelector(
+// $FlowFixMe
+export const getAttacksForBattlegroup: getAttacks = createCachedSelector(
   [getSpecificBattlegroup, getQcAttacks],
   (bg, attacks) => bg.qc_attacks.map(m => attacks[m])
 )((state, id) => id)
 
-export const doIOwnBattlegroup = createSelector(
+export const doIOwnBattlegroup: entitySelector<boolean> = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup],
-  (player, battlegroup) =>
+  (player: Player, battlegroup: Battlegroup) =>
     battlegroup !== undefined && player.id === battlegroup.player_id
 )
 
-export const amIStOfBattlegroup = createSelector(
+export const amIStOfBattlegroup: entitySelector<boolean> = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup, entities],
   (player, battlegroup, ents) =>
     battlegroup !== undefined &&
-    battlegroup.chronicle_id &&
+    battlegroup.chronicle_id != null &&
     ents.chronicles[battlegroup.chronicle_id] &&
     ents.chronicles[battlegroup.chronicle_id].st_id === player.id
 )
-export const canISeeBattlegroup = createSelector(
+
+export const canISeeBattlegroup: entitySelector<boolean> = createSelector(
   [getSpecificBattlegroup, doIOwnBattlegroup, amIStOfBattlegroup],
   (battlegroup, doI, amI) => !battlegroup.hidden || doI || amI
 )
 
-export const canIEditBattlegroup = createSelector(
+export const canIEditBattlegroup: entitySelector<boolean> = createSelector(
   [doIOwnBattlegroup, amIStOfBattlegroup],
   (doI, amI) => doI || amI
 )
 
-export const canIDeleteBattlegroup = createSelector(
-  [doIOwnBattlegroup],
-  doI => doI
-)
+export const canIDeleteBattlegroup = doIOwnBattlegroup
 
-export const getPoolsAndRatingsForBattlegroup = createSelector(
-  [getSpecificBattlegroup],
-  battlegroup => ({
-    joinBattle: qcPool(battlegroup, battlegroup.join_battle, 0),
-  })
-)
+export const getPoolsAndRatingsForBattlegroup = (
+  state: WrappedEntityState,
+  id: number
+) => ({
+  joinBattle: bgJoinBattlePool(getSpecificBattlegroup(state, id)),
+})

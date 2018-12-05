@@ -7,11 +7,13 @@ export type Poison = {
   id: number,
   poisonable_type: string,
   poisonable_id: number,
+  sort_order: number,
 }
 
 export type withBasicInfo = {
   id: number,
   player_id: number,
+  chronicle_id?: number,
   name: string,
   description: string,
   essence: number,
@@ -28,7 +30,7 @@ export type withCombatInfo = {
   onslaught: number,
   in_combat: boolean,
   has_acted: boolean,
-  poisons: Array<Poison>,
+  poisons: Array<number>,
 }
 
 export type withHealthLevels = {

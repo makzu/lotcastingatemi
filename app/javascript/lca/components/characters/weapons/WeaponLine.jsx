@@ -78,7 +78,6 @@ function WeaponLine({ weapon, classes }: Props) {
         {artifactLabel}
       </div>
 
-      {/* $FlowFixMe */}
       <WeaponPoolDisplay weapon={weapon} />
 
       <div className={classes.tags}>

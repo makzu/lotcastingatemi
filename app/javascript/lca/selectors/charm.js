@@ -8,6 +8,8 @@ const characterIdMemoizer = (state, id) => id
 const getSpecificCharacter = (state, id) => entities(state).characters[id]
 
 const getCharms = state => entities(state).charms
+
+// $FlowFixMe
 export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
@@ -16,6 +18,7 @@ export const getNativeCharmsForCharacter = createCachedSelector(
       : character.charms.map(c => charms[c]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getMartialArtsCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
@@ -24,6 +27,7 @@ export const getMartialArtsCharmsForCharacter = createCachedSelector(
       : character.martial_arts_charms.map(c => charms[c]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getEvocationsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
@@ -32,6 +36,7 @@ export const getEvocationsForCharacter = createCachedSelector(
       : character.evocations.map(c => charms[c]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getSpiritCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
@@ -41,6 +46,8 @@ export const getSpiritCharmsForCharacter = createCachedSelector(
 )(characterIdMemoizer)
 
 const getSpells = state => entities(state).spells
+
+// $FlowFixMe
 const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>
@@ -49,6 +56,7 @@ const getSpellsForCharacter = createCachedSelector(
       : character.spells.map(s => spells[s]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
   [getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter],
   (charms, maCharms) => {
@@ -60,6 +68,7 @@ export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
   }
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getAllMartialArtsCharmStylesForCharacter = createCachedSelector(
   [getMartialArtsCharmsForCharacter],
   charms => {
@@ -69,6 +78,7 @@ export const getAllMartialArtsCharmStylesForCharacter = createCachedSelector(
   }
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getAllEvocationArtifactsForCharacter = createCachedSelector(
   [getEvocationsForCharacter],
   evocations => {
@@ -78,6 +88,7 @@ export const getAllEvocationArtifactsForCharacter = createCachedSelector(
   }
 )(characterIdMemoizer)
 
+// $FlowFixMe
 export const getAllCharmCategoriesForCharacter = createCachedSelector(
   [
     getNativeCharmsForCharacter,

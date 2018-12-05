@@ -1,6 +1,6 @@
 // @flow
 /* See Core, p. 205 - 211 */
-import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import type { Battlegroup, QcAttack, Pool } from 'utils/flow-types'
 
 export function bgAttackPool(battlegroup: Battlegroup, qc_attack: QcAttack) {
   return qc_attack.pool + battlegroup.size + battlegroup.might
@@ -44,4 +44,12 @@ export function totalMagnitude(battlegroup: Battlegroup) {
     battlegroup.size +
     (battlegroup.perfect_morale ? 3 : 0)
   )
+}
+
+export function bgJoinBattlePool(bg: Battlegroup): Pool {
+  return {
+    raw: bg.join_battle,
+    penalty: bg.onslaught,
+    total: Math.max(bg.join_battle - bg.onslaught, 0),
+  }
 }

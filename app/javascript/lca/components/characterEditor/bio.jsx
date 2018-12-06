@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
+import XpEditor from './editors/xpEditor.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
@@ -145,6 +146,10 @@ class BioEditor extends Component<Props> {
                 <img src={character.portrait_link} />
               </div>
             </BlockPaper>
+          </Grid>
+
+          <Grid item xs={12}>
+            <XpEditor character={character} onChange={handleChange} />
           </Grid>
         </Grid>
       </div>

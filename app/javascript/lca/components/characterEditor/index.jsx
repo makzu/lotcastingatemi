@@ -24,7 +24,6 @@ import SpecialtyEditor from './editors/specialtyEditor.jsx'
 import SolarExaltEditor from './editors/solarExaltEditor.jsx'
 import SorceryEditor from './editors/sorceryEditor.jsx'
 import WillpowerEditor from './editors/willpowerEditor.jsx'
-import XpEditor from './editors/xpEditor.jsx'
 import WeaponEditor from './weapons/WeaponEditor.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateCharacter, updateCharacterMulti } from 'ducks/actions.js'
@@ -203,10 +202,6 @@ class CharacterEditor extends Component<Props> {
 
           <Grid item xs={12}>
             <WeaponEditor character={character} />
-          </Grid>
-
-          <Grid item xs={12}>
-            <XpEditor character={character} onChange={handleChange} />
           </Grid>
         </Grid>
       </div>

@@ -19,7 +19,7 @@ module Api
 
       def show
         authorize @chronicle
-        render json: @chronicle
+        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
       def create

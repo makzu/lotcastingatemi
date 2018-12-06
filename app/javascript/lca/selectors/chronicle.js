@@ -4,26 +4,27 @@ import createCachedSelector from 're-reselect'
 import { chronicleSortOrderSort } from 'utils'
 import { canISeeBattlegroup } from './battlegroup.js'
 import { canISeeCharacter } from './character.js'
+import { entities, getCurrentPlayer } from './entities.js'
 import { canISeeQc } from './qc.js'
+import type { WrappedEntityState } from 'ducks/entities'
 
-const entities = state => state.entities.current
 const getState = state => state
-const getCurrentPlayer = state => entities(state).players[state.session.id]
 
-export const getSpecificChronicle = (state: Object, id: number) =>
+export const getSpecificChronicle = (state: WrappedEntityState, id: number) =>
   entities(state).chronicles[id]
+
 const idMemoizer = (state, id) => id
 
 const getPlayers = state => entities(state).players
 
+export const isChronicleLoaded = (state: WrappedEntityState, id: number) =>
+  (getSpecificChronicle(state, id) || {}).st != null
+
 // $FlowFixMe
 export const getPlayersForChronicle = createCachedSelector(
-  [getSpecificChronicle, getPlayers],
-  (chronicle, players) =>
-    (chronicle &&
-      chronicle.players &&
-      chronicle.players.map(c => players[c])) ||
-    []
+  [getSpecificChronicle, isChronicleLoaded, getPlayers],
+  (chronicle, loaded, players) =>
+    loaded ? chronicle.players.map(c => players[c]) : []
 )(idMemoizer)
 
 // $FlowFixMe

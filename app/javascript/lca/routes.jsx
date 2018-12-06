@@ -1,10 +1,8 @@
 // @flow
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
 
-import ChronicleDashboard from 'components/chronicles/index.jsx'
-import ChronicleDetailsPage from 'components/chronicles/DetailsPage.jsx'
-import CombatDashboard from 'components/combat/index.jsx'
+import ChronicleWrapper from 'components/chronicles/ChronicleWrapper.jsx'
 import ContentList from 'components/pages/contentList.jsx'
 import GoodbyePage from 'components/pages/GoodbyePage.jsx'
 import SettingsPage from 'components/pages/SettingsPage.jsx'
@@ -27,7 +25,7 @@ import PrivacyPage from 'components/pages/PrivacyPage.jsx'
 
 export default function Routes() {
   return (
-    <Fragment>
+    <>
       <Route exact path="/" component={WelcomePage} />
       <Route path="/settings" component={SettingsPage} />
       <Route path="/deleted" component={GoodbyePage} />
@@ -35,19 +33,7 @@ export default function Routes() {
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/content" component={ContentList} />
 
-      <Route
-        exact
-        path="/chronicles/:chronicleId"
-        component={ChronicleDashboard}
-      />
-      <Route
-        path="/chronicles/:chronicleId/combat"
-        component={CombatDashboard}
-      />
-      <Route
-        path="/chronicles/:chronicleId/details"
-        component={ChronicleDetailsPage}
-      />
+      <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
 
       <Route exact path="/characters/:characterId" component={CharacterSheet} />
       <Route
@@ -81,6 +67,6 @@ export default function Routes() {
         path="/battlegroups/:battlegroupId/edit"
         component={BattlegroupEditor}
       />
-    </Fragment>
+    </>
   )
 }

@@ -14,6 +14,10 @@ class PlayerSerializer < BaseSerializer
   # We only really need the ID for Chronicles, as each Chronicle will be fetched
   #   later by the client anyway.
   class ChronicleSerializer < BaseSerializer
-    attributes :st_id, :name
+    attributes :st_id, :name, :players
+
+    def players
+      object.player_ids
+    end
   end
 end

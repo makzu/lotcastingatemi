@@ -98,7 +98,7 @@ function BattlegroupCard(props: Props) {
             )}
           </Typography>
 
-          <PlayerNameSubtitle playerId={battlegroup.player_id} />
+          {chronicle && <PlayerNameSubtitle playerId={battlegroup.player_id} />}
         </div>
 
         {isOwner && (

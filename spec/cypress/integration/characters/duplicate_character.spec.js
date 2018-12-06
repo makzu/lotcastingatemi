@@ -29,7 +29,7 @@ context('Duplicating Characters', () => {
     cy.contains('Test Solar (Duplicate)')
   })
 
-  it.only('works for DBs', () => {
+  it('works for DBs', () => {
     cy.appFactories([
       ['create', 'dragonblood_character', { player_id: 1, name: 'Test Deeb' }],
     ])

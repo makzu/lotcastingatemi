@@ -7,16 +7,19 @@ import {
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,
 } from './charm.js'
+import { entities } from './entities.js'
 import * as calc from 'utils/calculated'
 import decisiveAttack from 'utils/calculated/pools/combat/decisiveAttack.js'
 import witheringAttack from 'utils/calculated/pools/combat/witheringAttack.js'
 import parry from 'utils/calculated/ratings/parry.js'
 
-const entities = state => state.entities.current
 const getState = state => state
+
 const getWeapon = (state, id: number) => entities(state).weapons[id]
+
 const getCharacterForWeapon = (state, id: number) =>
   entities(state).characters[getWeapon(state, id).character_id]
+
 const getPenaltiesForWeapon = (state, id: number) =>
   getPenalties(state, getCharacterForWeapon(state, id).id)
 

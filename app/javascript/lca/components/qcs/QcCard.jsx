@@ -107,7 +107,7 @@ function QcCard(props: Props) {
             )}
           </Typography>
 
-          <PlayerNameSubtitle playerId={qc.player_id} />
+          {chronicle && <PlayerNameSubtitle playerId={qc.player_id} />}
         </div>
 
         {isOwner && <CharacterMenu characterType="qc" id={qc.id} />}

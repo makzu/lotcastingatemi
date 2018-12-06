@@ -68,10 +68,8 @@ module Api
         else
           render json: @new_character.errors.details, status: :bad_request
         end
-
-      rescue NoMethodError, NameError
-        # TODO: Actually handle the error here
-        render json: {}, status: :bad_request
+      rescue NameError => e
+        render json: { error: e.message }, status: :bad_request
       end
 
       private

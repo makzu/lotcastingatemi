@@ -10,21 +10,18 @@ export * from './qc.js'
 export * from './battlegroup.js'
 
 import {
-  getPoolsAndRatings,
-  canIEditCharacter,
-  canIDeleteCharacter,
-} from './character.js'
-import { getPoolsAndRatingsForQc, canIEditQc, canIDeleteQc } from './qc.js'
-import {
   getPoolsAndRatingsForBattlegroup,
   canIEditBattlegroup,
   canIDeleteBattlegroup,
 } from './battlegroup.js'
+import {
+  getPoolsAndRatings,
+  canIEditCharacter,
+  canIDeleteCharacter,
+} from './character.js'
 import { amIStOfChronicle } from './chronicle.js'
-
-const entities = state => state.entities.current
-export const getCurrentPlayer = (state: Object) =>
-  entities(state).players[state.session.id]
+import { entities, getCurrentPlayer } from './entities.js'
+import { getPoolsAndRatingsForQc, canIEditQc, canIDeleteQc } from './qc.js'
 
 type CT = 'chronicle' | 'character' | 'qc' | 'battlegroup'
 export const canIEdit = (state: Object, id: number, characterType: CT) => {

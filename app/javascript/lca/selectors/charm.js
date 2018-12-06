@@ -1,10 +1,11 @@
 // @flow
 import createCachedSelector from 're-reselect'
 
+import { entities } from './entities.js'
 import { sortOrderSort } from 'utils'
 
-const entities = state => state.entities.current
 const characterIdMemoizer = (state, id) => id
+
 const getSpecificCharacter = (state, id) => entities(state).characters[id]
 
 const getCharms = state => entities(state).charms

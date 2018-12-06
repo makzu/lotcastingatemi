@@ -47,7 +47,7 @@ module Api
         {
           characters: Character.association_types,
           qcs: %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
-          battlegroups: [:qc_attacks, :poisons],
+          battlegroups: %i[qc_attacks poisons],
           chronicles: [],
           own_chronicles: []
         }

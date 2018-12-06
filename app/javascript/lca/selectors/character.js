@@ -3,28 +3,28 @@ import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { isEmpty, max } from 'lodash'
 
-import { entities, getCurrentPlayer, type entitySelector } from './entities.js'
-import { getPoolsForWeapon, sortByParry } from './weapon.js'
 import {
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,
 } from './charm.js'
+import { entities, getCurrentPlayer, type entitySelector } from './entities.js'
+import { getPoolsForWeapon, sortByParry } from './weapon.js'
 import { sortOrderSort } from 'utils'
 import { woundPenalty, mobilityPenalty, exaltTypeBase } from 'utils/calculated/'
 import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
 import * as pools from 'utils/calculated/pools'
 import * as ratings from 'utils/calculated/ratings'
 
+import type { WrappedEntityState } from 'ducks/entities'
 import type { Character } from 'utils/flow-types'
 
-// const entities = state => state.entities.current
-
 const getState = state => state
-// const getCurrentPlayer = state => entities(state).players[state.session.id]
 const getPoisons = state => entities(state).poisons
 
-export const getSpecificCharacter = (state: Object, id: number): Character =>
-  entities(state).characters[id]
+export const getSpecificCharacter = (
+  state: WrappedEntityState,
+  id: number
+): Character => entities(state).characters[id]
 
 const characterIdMemoizer = (state, id) => id
 

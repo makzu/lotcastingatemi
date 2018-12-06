@@ -127,9 +127,9 @@ class App extends Component<Props> {
                 variant="caption"
                 className={classes.footerText}
                 component="a"
-                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v64"
+                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v69"
               >
-                v64
+                v69
               </Typography>
             </div>
 
@@ -150,7 +150,6 @@ class App extends Component<Props> {
           </footer>
         </main>
 
-        {/* $FlowFixMe */}
         <LoadingIndicator />
       </div>
     )

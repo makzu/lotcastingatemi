@@ -36,6 +36,16 @@ class BioFullPage extends Component<Props> {
     if (this.props.character == undefined) return <CharacterLoadError />
 
     const { character, classes } = this.props
+    const xp_log = character.xp_log.map(x => (
+      <Typography key={x.label}>
+        {x.label}: {x.points} points
+      </Typography>
+    ))
+    const solar_xp_log = character.xp_log_solar.map(x => (
+      <Typography key={x.label}>
+        {x.label}: {x.points} points
+      </Typography>
+    ))
 
     return (
       <div>
@@ -109,6 +119,22 @@ class BioFullPage extends Component<Props> {
                 className={classes.markdown}
                 source={character.notes}
               />
+            </BlockPaper>
+          </Grid>
+
+          <Grid item xs={12}>
+            <BlockPaper>
+              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div style={{ flex: 1 }}>
+                  <Typography variant="subheading">XP</Typography>
+                  {xp_log}
+                </div>
+
+                <div style={{ flex: 1 }}>
+                  <Typography variant="subheading">Solar XP</Typography>
+                  {solar_xp_log}
+                </div>
+              </div>
             </BlockPaper>
           </Grid>
         </Grid>

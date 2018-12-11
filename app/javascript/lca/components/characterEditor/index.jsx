@@ -76,7 +76,7 @@ class CharacterEditor extends Component<Props> {
     const { handleChange, handleCheck, handleChangeMulti } = this
     const showLimit =
       character.type !== 'Character' &&
-      character.exalt_type.toLowerCase() !== 'dragon-blood'
+      (character.exalt_type || '').toLowerCase() !== 'dragon-blood'
 
     const handleRatingChange = handleChange
 

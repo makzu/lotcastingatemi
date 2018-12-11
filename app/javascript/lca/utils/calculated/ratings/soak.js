@@ -51,9 +51,9 @@ export function soak(
   if (
     character.type !== 'Character' &&
     (character.type === 'DragonbloodCharacter' ||
-      character.exalt_type.toLowerCase().startsWith('dragon'))
+      (character.exalt_type || '').toLowerCase().startsWith('dragon'))
   ) {
-    switch (character.caste.toLowerCase()) {
+    switch ((character.caste || '').toLowerCase()) {
       case 'earth':
         if (bonfire) {
           b += Math.max(character.essence, 3)

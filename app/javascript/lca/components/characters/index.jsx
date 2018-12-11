@@ -154,7 +154,7 @@ export class CharacterSheet extends Component<Props> {
     const { character, merits, weapons, pools, penalties, canEdit } = this.props
     const showLimit =
       character.type !== 'Character' &&
-      character.exalt_type.toLowerCase() !== 'dragon-blood'
+      (character.exalt_type || '').toLowerCase() !== 'dragon-blood'
     return (
       <div>
         <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />

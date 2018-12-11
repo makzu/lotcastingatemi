@@ -201,7 +201,7 @@ export function prettyFullExaltType(character: Character) {
     return character.is_sorcerer ? 'Non-Exalt Sorcerer' : 'Mortal'
 
   let caste =
-    character.caste === ''
+    character.caste === '' || character.caste == null
       ? ''
       : capitalize(character.caste) +
         (character.aspect ? ' Aspect ' : ' Caste ')

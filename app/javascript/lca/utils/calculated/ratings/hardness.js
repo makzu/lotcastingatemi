@@ -7,6 +7,8 @@ export function hardness(character: Character): Pool {
   let altTotal = 0
   let bonus = []
   const bonfire = character.anima_level === 3
+  const type = (character.exalt_type || '').toLowerCase()
+  const caste = (character.caste || '').toLowerCase()
 
   if (character.armor_is_artifact) {
     switch (character.armor_weight) {
@@ -27,9 +29,8 @@ export function hardness(character: Character): Pool {
   if (character.type !== 'Character') {
     // Twilight caste anima power grants 5 hardness at Bonfire/Iconic
     if (
-      (character.type === 'SolarCharacter' ||
-        character.exalt_type.toLowerCase() === 'solar') &&
-      character.caste.toLowerCase() === 'twilight'
+      (character.type === 'SolarCharacter' || type === 'solar') &&
+      caste === 'twilight'
     ) {
       if (bonfire) {
         altTotal = 5
@@ -41,9 +42,9 @@ export function hardness(character: Character): Pool {
 
     if (
       character.type === 'DragonbloodCharacter' ||
-      character.exalt_type.toLowerCase().startsWith('dragon')
+      type.startsWith('dragon')
     ) {
-      switch (character.caste.toLowerCase()) {
+      switch (caste) {
         // Earth aspects get +1 hardness for 3m, or free at Bonfire
         case 'earth':
           if (bonfire) {

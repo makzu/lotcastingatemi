@@ -1,6 +1,3 @@
+<% @title = @character[0] if @character.present? %>
+<% @description = @character[1][0..260] if @character.present? && @character[1].present? %>
 <div id="root"></div>
-<noscript style="font-family: 'Roboto', 'Helvetica', 'Arial', 'sans-serif'; color: rgba(0,0,0,0.87)">
-  <p>
-    Lot-Casting Atemi is built using React.js and so requires JavaScript to function.
-  </p>
-</noscript>

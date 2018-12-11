@@ -7,6 +7,7 @@
 - API responses are now compressed by default, reducing data download size significantly
 - Unnecessary library code has been removed, further reducing download size
 - Some backend changes that will hopefully reduce server memory use
+- Public character and QC links now show the character's name and description on Discord instead of a generic LCA blurb
 
 ## v64
 

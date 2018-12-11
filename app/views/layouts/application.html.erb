@@ -10,8 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <title>Lot-Casting Atemi</title>
-    <meta name="description" content="Online Character and Chronicle manager for Exalted Third Edition. Supports Mortals, Solars, and custom Exalts. Also supports Quick Characters and Battlegroups.">
+    <title>
+      <%= if @title.present? then @title + ' | ' end %>
+      Lot-Casting Atemi
+    </title>
+
+    <meta name="description" content="<%= @description.present? ? @description : 'Online Character and Chronicle manager for Exalted Third Edition. Supports Solars, Dragon-Bloods, mortals, and homebrew exalt types.' %>">
 
     <%= render 'application/favicon' %>
   </head>
@@ -19,5 +23,11 @@
   <body>
     <%= yield %>
     <%= javascript_pack_tag 'lca' %>
+
+    <noscript style="font-family: 'Roboto', 'Helvetica', 'Arial', 'sans-serif'; color: rgba(0,0,0,0.87)">
+      <p>
+        Lot-Casting Atemi is built using React.js and so requires JavaScript to function.
+      </p>
+    </noscript>
   </body>
 </html>

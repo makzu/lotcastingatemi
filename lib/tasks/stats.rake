@@ -15,4 +15,22 @@ namespace :lca do
     puts "* #{Qc.count} QCs"
     puts "* #{Battlegroup.count} Battlegroups"
   end
+
+  namespace :stats do
+    desc 'Display CSV of how many characters/etc each player has'
+    task players: :environment do
+      puts 'id,chars,qcs,bgs,own_chronicles,chronicles'
+      Player.find_each(batch_size: 50) do |player|
+        puts "#{player.id},#{player.characters.count},#{player.qcs.count},#{player.battlegroups.count},#{player.own_chronicles.count},#{player.chronicles.count}"
+      end
+    end
+
+    desc 'Display CSV of how many characters/etc each chronicle has'
+    task chronicles: :environment do
+      puts 'id,chars,qcs,bgs'
+      Chronicle.find_each(batch_size: 50) do |chron|
+        puts "#{chron.id},#{chron.characters.count},#{chron.qcs.count},#{chron.battlegroups.count}"
+      end
+    end
+  end
 end

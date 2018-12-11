@@ -4,7 +4,9 @@ const { Component, Fragment } = React
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
+import { compose } from 'recompose'
 
+import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
@@ -17,21 +19,29 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateMerit, createMerit, destroyMerit } from 'ducks/actions.js'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
-import type { Character, fullMerit as Merit } from 'utils/flow-types'
+import commonStyles from 'styles'
+import type { Character, fullMerit as Merit, Enhancer } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
+
+const styles = theme => commonStyles(theme)
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
  * ref pre-filled
  * TODO:  See how kosher something like above would be
  * */
-type Props = {
+type ExposedProps = {
+  match: { params: { characterId: number } },
+}
+type Props = ExposedProps & {
   character: Character,
   merits: Array<Merit>,
   updateMerit: Function,
   destroyMerit: Function,
   createMerit: Function,
+  classes: Object,
 }
+
 class MeritEditor extends Component<Props> {
   handleUpdate = (id, charId, trait, value) => {
     this.props.updateMerit(id, charId, trait, value)
@@ -68,7 +78,7 @@ class MeritEditor extends Component<Props> {
       )
 
     const { handleAdd, handleRemove, handleSort } = this
-    const { updateMerit } = this.props
+    const { updateMerit, classes } = this.props
 
     const mts = this.props.merits.map((m, i) => (
       <SortableItem key={m.id} index={i}>
@@ -104,7 +114,7 @@ class MeritEditor extends Component<Props> {
             </Typography>
           }
           items={mts}
-          classes={{}}
+          classes={classes}
           onSortEnd={handleSort}
           useDragHandle={true}
           axis="xy"
@@ -114,7 +124,7 @@ class MeritEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   const id = ownProps.match.params.characterId
   const character = getSpecificCharacter(state, id)
   let merits = []
@@ -128,10 +138,13 @@ function mapStateToProps(state, ownProps) {
     merits,
   }
 }
-
-export default ProtectedComponent(
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(
     mapStateToProps,
     { updateMerit, destroyMerit, createMerit }
-  )(MeritEditor)
+  ),
+  withStyles(styles),
+  ProtectedComponent
 )
+
+export default enhance(MeritEditor)

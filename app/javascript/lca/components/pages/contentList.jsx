@@ -1,8 +1,8 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
+import { compose } from 'recompose'
 
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
@@ -19,10 +19,13 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getMyCharacters, getMyQCs, getMyBattlegroups } from 'selectors'
-import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
+import commonStyles from 'styles'
+import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
+
 const SortableItem = SortableElement(({ children }) => children)
 
 const styles = theme => ({
+  ...commonStyles(theme),
   nthTitle: { marginTop: theme.spacing.unit * 3 },
 })
 
@@ -64,6 +67,7 @@ class ContentList extends Component<Props> {
 
   render() {
     const { handleSort } = this
+    const { classes } = this.props
     const chars = this.props.characters.map((c, i) => (
       <SortableItem key={c.id} index={i} collection="characters">
         <Grid item xs={12} md={6} xl={4}>
@@ -96,7 +100,7 @@ class ContentList extends Component<Props> {
             </Typography>
           }
           items={chars}
-          classes={{}}
+          classes={classes}
           onSortEnd={handleSort}
           useDragHandle={true}
           axis="xy"
@@ -112,7 +116,7 @@ class ContentList extends Component<Props> {
             </Typography>
           }
           items={qcs}
-          classes={{}}
+          classes={classes}
           onSortEnd={handleSort}
           useDragHandle={true}
           axis="xy"
@@ -128,7 +132,7 @@ class ContentList extends Component<Props> {
             </Typography>
           }
           items={bgs}
-          classes={{}}
+          classes={classes}
           onSortEnd={handleSort}
           useDragHandle={true}
           axis="xy"
@@ -138,19 +142,19 @@ class ContentList extends Component<Props> {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    characters: getMyCharacters(state),
-    qcs: getMyQCs(state),
-    battlegroups: getMyBattlegroups(state),
-  }
-}
+const mapStateToProps = state => ({
+  characters: getMyCharacters(state),
+  qcs: getMyQCs(state),
+  battlegroups: getMyBattlegroups(state),
+})
 
-export default ProtectedComponent(
-  withStyles(styles)(
-    connect(
-      mapStateToProps,
-      { updateCharacter, updateQc, updateBattlegroup }
-    )(ContentList)
-  )
+const enhance: Enhancer<Props, {}> = compose(
+  connect(
+    mapStateToProps,
+    { updateCharacter, updateQc, updateBattlegroup }
+  ),
+  withStyles(styles),
+  ProtectedComponent
 )
+
+export default enhance(ContentList)

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
+import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -14,6 +15,9 @@ import {
 } from 'ducks/actions.js'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
+
+const SortableItem = SortableElement(({ children }) => children)
+const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)
 
 type ExposedProps = {
   qc: Object,
@@ -54,25 +58,43 @@ class QcAttackEditor extends React.Component<Props, State> {
   handleRemove = id => {
     this.props.destroyQcAttack(id, this.props.qc.id, this.state.type)
   }
-  render() {
-    const { handleChange, handleAdd, handleRemove } = this
 
-    const qcAttacks = this.props.qc_attacks.map(attack => (
-      <QcAttackFields
-        key={attack.id}
-        attack={attack}
-        qc={this.props.qc}
-        onAttackChange={handleChange}
-        onRemoveClick={handleRemove}
-        battlegroup={this.props.battlegroup}
-      />
+  handleSort = ({ oldIndex, newIndex }) => {
+    const attackA = this.props.qc_attacks[oldIndex]
+    const attackB = this.props.qc_attacks[newIndex]
+    const offset = attackA.sort_order > attackB.sort_order ? -1 : 1
+    this.props.updateQcAttack(
+      attackA.id,
+      this.props.qc.id,
+      this.state.type,
+      'sort_order',
+      attackB.sort_order + offset
+    )
+  }
+
+  render() {
+    const { handleChange, handleAdd, handleRemove, handleSort } = this
+
+    const qcAttacks = this.props.qc_attacks.map((attack, i) => (
+      <SortableItem index={i} key={attack.id}>
+        <QcAttackFields
+          attack={attack}
+          qc={this.props.qc}
+          onAttackChange={handleChange}
+          onRemoveClick={handleRemove}
+          battlegroup={this.props.battlegroup}
+        />
+      </SortableItem>
     ))
 
     return (
       <div>
         <Typography variant="subheading">Attacks</Typography>
-
-        {qcAttacks}
+        <SortableAttackList
+          items={qcAttacks}
+          onSortEnd={handleSort}
+          useDragHandle={true}
+        />
 
         <Button onClick={handleAdd}>
           Add Attack&nbsp;

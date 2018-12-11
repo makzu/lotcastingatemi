@@ -41,8 +41,11 @@ export type fullQc = {
   withMotePool &
   withIntimacies
 
-export type QcAttack = {
+type QcTrait = {
   id: number,
+  sort_order: number,
+}
+export type QcAttack = QcTrait & {
   name: string,
   pool: number,
   damage: number,
@@ -53,8 +56,7 @@ export type QcAttack = {
   qc_attackable_id: number,
 }
 
-export type QcMerit = {
-  id: number,
+export type QcMerit = QcTrait & {
   name: string,
   body: string,
   latent: boolean,
@@ -62,8 +64,7 @@ export type QcMerit = {
   ref: string,
 }
 
-export type QcCharm = {
-  id: number,
+export type QcCharm = QcTrait & {
   qc_id: number,
   name: string,
   cost: string,

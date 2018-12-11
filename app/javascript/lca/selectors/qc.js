@@ -3,6 +3,7 @@ import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 
 import { entities, getCurrentPlayer, type entitySelector } from './entities.js'
+import { sortOrderSort } from 'utils'
 import * as calc from 'utils/calculated/'
 
 export const getSpecificQc = (state: Object, id: number) =>
@@ -14,7 +15,7 @@ const getQcMerits = state => entities(state).qc_merits
 // $FlowFixMe
 export const getMeritsForQc = createCachedSelector(
   [getSpecificQc, getQcMerits],
-  (qc, merits) => qc.qc_merits.map(m => merits[m])
+  (qc, merits) => qc.qc_merits.map(m => merits[m]).sort(sortOrderSort)
 )(qcIdMemoizer)
 
 export const getQcAttacks = (state: Object) => entities(state).qc_attacks
@@ -22,7 +23,7 @@ export const getQcAttacks = (state: Object) => entities(state).qc_attacks
 // $FlowFixMe
 export const getAttacksForQc = createCachedSelector(
   [getSpecificQc, getQcAttacks],
-  (qc, attacks) => qc.qc_attacks.map(m => attacks[m])
+  (qc, attacks) => qc.qc_attacks.map(m => attacks[m]).sort(sortOrderSort)
 )(qcIdMemoizer)
 
 export const getQcCharms = (state: Object) => entities(state).qc_charms
@@ -30,7 +31,7 @@ export const getQcCharms = (state: Object) => entities(state).qc_charms
 // $FlowFixMe
 export const getCharmsForQc = createCachedSelector(
   [getSpecificQc, getQcCharms],
-  (qc, charms) => qc.qc_charms.map(m => charms[m])
+  (qc, charms) => qc.qc_charms.map(m => charms[m]).sort(sortOrderSort)
 )(qcIdMemoizer)
 
 // $FlowFixMe

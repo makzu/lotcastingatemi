@@ -2,8 +2,9 @@
 
 ###### _Not yet released_
 
+- QC Attacks, Merits, and Charms can now be sorted
 - Chronicle data is now downloaded as needed, rather than all at once when logging in
-- API responses are now compressed by default, reducing download size significantly
+- API responses are now compressed by default, reducing data download size significantly
 - Unnecessary library code has been removed, further reducing download size
 - Some backend changes that will hopefully reduce server memory use
 

@@ -2,7 +2,9 @@
 import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
+import { withStyles } from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
@@ -23,10 +25,24 @@ import TextField from '../generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateQc } from 'ducks/actions.js'
 import { getSpecificQc, canIDeleteQc } from 'selectors'
+import commonStyles from 'styles'
 import { woundPenalty } from 'utils/calculated'
-import type { fullQc } from 'utils/flow-types'
+import type { fullQc, Enhancer } from 'utils/flow-types'
 
-type Props = { qc: fullQc, updateQc: Function, showPublicCheckbox: boolean }
+const styles = theme => ({
+  ...commonStyles(theme),
+})
+
+type ExposedProps = {
+  match: { params: { qcId: number } },
+}
+type Props = ExposedProps & {
+  qc: fullQc,
+  showPublicCheckbox: boolean,
+  updateQc: Function,
+  classes: Object,
+}
+
 class QcEditor extends Component<Props> {
   handleChange = e => {
     const { name, value } = e.target
@@ -46,7 +62,7 @@ class QcEditor extends Component<Props> {
   }
 
   render() {
-    const { qc, showPublicCheckbox } = this.props
+    const { qc, showPublicCheckbox, classes } = this.props
     const { handleChange, handleCheck } = this
 
     /* Escape hatch */
@@ -133,7 +149,7 @@ class QcEditor extends Component<Props> {
 
         <Grid item xs={12} sm={6} xl={3}>
           <BlockPaper>
-            <Typography component="div">
+            <Typography component="div" className={classes.flexContainer}>
               <RatingField
                 trait="essence"
                 value={qc.essence}
@@ -151,11 +167,11 @@ class QcEditor extends Component<Props> {
                 narrow
                 onChange={handleChange}
               />
-              {'/ '}
+              <span className={classes.fieldSeparator}>{'/ '}</span>
               <RatingField
                 trait="willpower_permanent"
                 value={qc.willpower_permanent}
-                label=""
+                label="Total"
                 min={1}
                 max={10}
                 margin="dense"
@@ -166,7 +182,7 @@ class QcEditor extends Component<Props> {
 
             <Typography component="div">Motes</Typography>
 
-            <Typography component="div">
+            <Typography component="div" className={classes.flexContainerWrap}>
               <RatingField
                 trait="motes_personal_current"
                 value={qc.motes_personal_current}
@@ -176,7 +192,7 @@ class QcEditor extends Component<Props> {
                 narrow
                 onChange={handleChange}
               />
-              {'/ '}
+              <span className={classes.fieldSeparator}>{'/ '}</span>
               <RatingField
                 trait="motes_personal_total"
                 value={qc.motes_personal_total}
@@ -194,7 +210,7 @@ class QcEditor extends Component<Props> {
                 narrow
                 onChange={handleChange}
               />
-              {'/ '}
+              <span className={classes.fieldSeparator}>{'/ '}</span>
               <RatingField
                 trait="motes_peripheral_total"
                 value={qc.motes_peripheral_total}
@@ -204,7 +220,7 @@ class QcEditor extends Component<Props> {
                 onChange={handleChange}
               />
               <AnimaSelect character={qc} onChange={handleChange} />
-              <div>
+              <div style={{ flex: '1 1 100%' }}>
                 <QcExcellencySelect
                   name="excellency"
                   value={qc.excellency}
@@ -403,23 +419,19 @@ class QcEditor extends Component<Props> {
           </BlockPaper>
         </Grid>
 
-        <Grid item xs={12} lg={6}>
-          <BlockPaper>
-            <QcMeritEditor qc={qc} />
-          </BlockPaper>
+        <Grid item xs={12}>
+          <QcMeritEditor qc={qc} classes={classes} />
         </Grid>
 
-        <Grid item xs={12} lg={6}>
-          <BlockPaper>
-            <QcCharmEditor qc={qc} />
-          </BlockPaper>
+        <Grid item xs={12}>
+          <QcCharmEditor qc={qc} classes={classes} />
         </Grid>
       </Grid>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: ExposedProps) {
   const id = ownProps.match.params.qcId
   const qc = getSpecificQc(state, id)
   const showPublicCheckbox = canIDeleteQc(state, id)
@@ -430,9 +442,14 @@ function mapStateToProps(state, ownProps) {
     showPublicCheckbox,
   }
 }
-export default ProtectedComponent(
+
+const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(
     mapStateToProps,
     { updateQc }
-  )(QcEditor)
+  ),
+  withStyles(styles),
+  ProtectedComponent
 )
+
+export default enhance(QcEditor)

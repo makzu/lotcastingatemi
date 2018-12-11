@@ -1,35 +1,33 @@
 // @flow
 import { isEqual } from 'lodash'
-import React, { Component } from 'react'
+import React from 'react'
+import { SortableHandle } from 'react-sortable-hoc'
 
-import Checkbox from '@material-ui/core/Checkbox'
-import Divider from '@material-ui/core/Divider'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
+import DragHandleIcon from '@material-ui/icons/DragHandle'
 
+import BlockPaper from 'components/generic/blockPaper.jsx'
+import Checkbox from 'components/generic/Checkbox.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import type { QcMerit } from 'utils/flow-types'
+
+const Handle = SortableHandle(() => (
+  <DragHandleIcon onClick={e => e.preventDefault()} />
+))
 
 type Props = {
   merit: QcMerit,
   onMeritChange: Function,
   onRemoveClick: Function,
 }
-export default class QcMeritFields extends Component<Props> {
+export default class QcMeritFields extends React.Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
     const { merit } = this.props
 
     if (isEqual(merit[name], value)) return
-
-    this.props.onMeritChange(merit.id, name, value)
-  }
-
-  handleCheck = (e: SyntheticInputEvent<>) => {
-    const { name } = e.target
-    const { merit } = this.props
-    const value = !merit[name]
 
     this.props.onMeritChange(merit.id, name, value)
   }
@@ -40,45 +38,30 @@ export default class QcMeritFields extends Component<Props> {
 
   render() {
     const { merit } = this.props
-    const { handleChange, handleCheck } = this
+    const { handleChange } = this
 
     return (
-      <div style={{ marginBottom: '0.75em' }}>
+      <BlockPaper>
+        <Typography
+          component="div"
+          style={{
+            position: 'absolute',
+            top: '0.5em',
+            right: '0.5em',
+            marginRight: '1em',
+          }}
+        >
+          <Handle />
+        </Typography>
+
         <TextField
           name="name"
           value={merit.name}
           label="Name"
           margin="dense"
           onChange={handleChange}
+          fullWidth
         />
-
-        <FormControlLabel
-          label="Latent"
-          control={
-            <Checkbox
-              name="latent"
-              checked={merit.latent}
-              onChange={handleCheck}
-            />
-          }
-        />
-
-        <FormControlLabel
-          label="Magical"
-          control={
-            <Checkbox
-              name="magical"
-              checked={merit.magical}
-              onChange={handleCheck}
-            />
-          }
-        />
-
-        <Button onClick={this.handleRemove} style={{ float: 'right' }}>
-          Delete&nbsp;
-          <Delete />
-        </Button>
-        <br />
 
         <TextField
           name="body"
@@ -90,18 +73,43 @@ export default class QcMeritFields extends Component<Props> {
           multiline
           rowsMax={5}
         />
-        <br />
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          <TextField
+            name="ref"
+            value={merit.ref}
+            label="Reference"
+            margin="dense"
+            onChange={handleChange}
+            style={{ flex: 1, minWidth: '50%' }}
+          />
 
-        <TextField
-          name="ref"
-          value={merit.ref}
-          label="Reference"
-          margin="dense"
-          onChange={handleChange}
-        />
+          <div style={{}}>
+            <Checkbox
+              name="latent"
+              label="Latent"
+              value={merit.latent}
+              onChange={handleChange}
+            />
 
-        <Divider style={{ marginTop: '0.5em' }} />
-      </div>
+            <Checkbox
+              name="magical"
+              label="Magical"
+              value={merit.magical}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div style={{ flex: 1, textAlign: 'right' }}>
+            <Button
+              onClick={this.handleRemove}
+              style={{ margin: '1.5em -0.75em -1em 3em' }}
+            >
+              Delete&nbsp;
+              <Delete />
+            </Button>
+          </div>
+        </div>
+      </BlockPaper>
     )
   }
 }

@@ -27,6 +27,7 @@ function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
         value={pool}
         label="Pool"
         min={1}
+        narrow
         margin="dense"
         onChange={onChange}
       />

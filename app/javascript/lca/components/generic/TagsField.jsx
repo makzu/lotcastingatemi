@@ -17,6 +17,7 @@ type Props = {
   onChange: Function,
   margin?: 'none' | 'dense' | 'normal',
   fullWidth?: boolean,
+  className?: string,
   classes: Object,
 }
 type State = { value: string, oldValue: string }
@@ -54,13 +55,13 @@ class TagsField extends Component<Props, State> {
   }
 
   render() {
-    const { trait, label, classes, fullWidth } = this.props
+    const { trait, label, classes, fullWidth, className } = this.props
     const { handleChange, handleBlur } = this
     const { value } = this.state
 
     return (
       <TextField
-        className={classes.field}
+        className={className || classes.field}
         name={trait}
         label={label}
         value={value}

@@ -3,7 +3,7 @@
 const commonStyles = (theme: Object) => ({
   stickyHeader: {
     position: 'sticky',
-    top: '-10px',
+    top: '0px',
     zIndex: '2',
     backgroundColor: theme.palette.background.default,
   },
@@ -31,6 +31,11 @@ const commonStyles = (theme: Object) => ({
     justifyContent: 'space-between',
   },
   flexCol: {},
+  fieldSeparator: {
+    alignSelf: 'flex-end',
+    marginRight: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+  },
 })
 
 export default commonStyles

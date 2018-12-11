@@ -1,16 +1,28 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
+import { SortableElement } from 'react-sortable-hoc'
+import { compose } from 'recompose'
 
+import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import QcCharmFields from './qcCharmFields.jsx'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.js'
 import { getCharmsForQc } from 'selectors'
+import commonStyles from 'styles'
 import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'
+
+const SortableItem = SortableElement(({ children }) => children)
+
+const styles = theme => ({
+  ...commonStyles(theme),
+})
 
 type ExposedProps = {
   qc: fullQc,
@@ -20,6 +32,7 @@ type Props = ExposedProps & {
   updateQcCharm: Function,
   createQcCharm: Function,
   destroyQcCharm: Function,
+  classes: Object,
 }
 
 class QcCharmEditor extends React.Component<Props> {
@@ -34,31 +47,57 @@ class QcCharmEditor extends React.Component<Props> {
   handleRemove = id => {
     this.props.destroyQcCharm(id, this.props.qc.id)
   }
-  render() {
-    const { handleChange, handleAdd, handleRemove } = this
 
-    const qcCharms = this.props.qc_charms.map(charm => (
-      <QcCharmFields
-        key={charm.id}
-        charm={charm}
-        qc={this.props.qc}
-        onCharmChange={handleChange}
-        onRemoveClick={handleRemove}
-      />
+  handleSort = ({ oldIndex, newIndex }) => {
+    if (oldIndex === newIndex) return
+  }
+  handleSort = ({ oldIndex, newIndex }) => {
+    if (oldIndex === newIndex) return
+    const charmA = this.props.qc_charms[oldIndex]
+    const charmB = this.props.qc_charms[newIndex]
+    const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
+    this.props.updateQcCharm(
+      charmA.id,
+      this.props.qc.id,
+      'sort_order',
+      charmB.sort_order + offset
+    )
+  }
+  render() {
+    const { handleChange, handleAdd, handleRemove, handleSort } = this
+    const { classes } = this.props
+
+    const qcCharms = this.props.qc_charms.map((charm, i) => (
+      <SortableItem key={charm.id} index={i}>
+        <Grid item xs={12} md={6} lg={3} xl={4}>
+          <QcCharmFields
+            key={charm.id}
+            charm={charm}
+            qc={this.props.qc}
+            onCharmChange={handleChange}
+            onRemoveClick={handleRemove}
+          />
+        </Grid>
+      </SortableItem>
     ))
 
     return (
-      <div>
-        <Typography variant="title">
-          Charms
-          <Button onClick={handleAdd}>
-            Add Charm
-            <ContentAddCircle />
-          </Button>
-        </Typography>
-
-        {qcCharms}
-      </div>
+      <SortableGridList
+        header={
+          <Typography variant="title">
+            Charms
+            <Button onClick={handleAdd}>
+              Add Charm
+              <ContentAddCircle />
+            </Button>
+          </Typography>
+        }
+        items={qcCharms}
+        classes={classes}
+        onSortEnd={handleSort}
+        useDragHandle={true}
+        axis="x"
+      />
     )
   }
 }
@@ -72,13 +111,16 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  {
-    updateQcCharm,
-    createQcCharm,
-    destroyQcCharm,
-  }
+const enhance: Enhancer<Props, ExposedProps> = compose(
+  connect(
+    mapStateToProps,
+    {
+      updateQcCharm,
+      createQcCharm,
+      destroyQcCharm,
+    }
+  ),
+  withStyles(styles)
 )
 
 export default enhance(QcCharmEditor)

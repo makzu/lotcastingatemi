@@ -3,10 +3,15 @@ import { isEqual } from 'lodash'
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
+import { SortableHandle } from 'react-sortable-hoc'
 
 import { withStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
 
+import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import RangeSelect from 'components/generic/RangeSelect.jsx'
@@ -17,9 +22,18 @@ import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 
+const Handle = SortableHandle(() => (
+  <DragHandleIcon onClick={e => e.preventDefault()} />
+))
+
 const styles = theme => ({
   wrap: {
     display: 'flex',
+    flexWrap: 'wrap',
+  },
+  grabHandle: {
+    alignSelf: 'center',
+    marginRight: theme.spacing.unit,
   },
   bgBonus: {
     ...theme.typography.caption,
@@ -30,16 +44,29 @@ const styles = theme => ({
   },
   nameField: {
     flex: 2,
-    marginRight: theme.spacing.unit,
+    minWidth: '30%',
+    [theme.breakpoints.down('md')]: {
+      minWidth: '50%',
+    },
   },
   tagsField: {
     flex: 1,
     marginRight: theme.spacing.unit,
+    minWidth: '30%',
+
+    [theme.breakpoints.down('md')]: {
+      minWidth: '50%',
+    },
   },
   rangeField: {
     width: '6em',
   },
+  divider: {
+    minWidth: '100%',
+    margin: '0.5em 0 0.5em',
+  },
 })
+
 type ExposedProps = {
   attack: QcAttack,
   onAttackChange: Function,
@@ -50,11 +77,8 @@ type Props = ExposedProps & {
   fakeBg: Object,
   classes: Object,
 }
-type State = {
-  attack: QcAttack,
-}
 
-class QcAttackFields extends React.Component<Props, State> {
+class QcAttackFields extends React.Component<Props> {
   handleChange = e => {
     let { name, value } = e.target
     const { attack } = this.props
@@ -75,6 +99,10 @@ class QcAttackFields extends React.Component<Props, State> {
 
     return (
       <div className={classes.wrap}>
+        <Typography component="div" className={classes.grabHandle}>
+          <Handle />
+        </Typography>
+
         <TextField
           name="name"
           value={attack.name}
@@ -140,9 +168,13 @@ class QcAttackFields extends React.Component<Props, State> {
           className={classes.rangeField}
         />
 
-        <IconButton onClick={handleRemove} style={{ minWidth: '2em' }}>
+        <IconButton onClick={handleRemove} style={{}}>
           <ContentRemoveCircle />
         </IconButton>
+
+        <Hidden lgUp>
+          <Divider className={classes.divider} />
+        </Hidden>
       </div>
     )
   }

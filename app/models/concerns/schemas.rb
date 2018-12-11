@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/ModuleLength, Layout/AlignHash
 # Validation schemas for the various json columns on characters and QCs.
 module Schemas
   CRAFT = {
@@ -119,4 +119,4 @@ module Schemas
     }
   }.freeze
 end
-# rubocop:enable Metrics/ModuleLength
+# rubocop:enable Metrics/ModuleLength, Layout/AlignHash

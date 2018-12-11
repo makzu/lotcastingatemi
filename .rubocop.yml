@@ -25,6 +25,9 @@ AllCops:
     - spec/spec_helper.rb
     - test/test_helper.rb
 
+Layout/AlignHash:
+  EnforcedColonStyle: table
+
 Layout/IndentationWidth:
   Severity: warning
 
@@ -47,7 +50,7 @@ Metrics/MethodLength:
 
 Naming/FileName:
   Exclude:
-    - 'Gemfile'
+    - "Gemfile"
 
 Style/Documentation:
   Exclude:
@@ -57,4 +60,4 @@ Style/Documentation:
 
 Rails/Output:
   Exclude:
-    - 'db/seeds.rb'
+    - "db/seeds.rb"

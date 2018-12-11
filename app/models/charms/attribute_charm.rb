@@ -18,8 +18,6 @@ module Charms
       'Attribute'
     end
 
-    private
-
     def self.from_charm!(charm)
       return charm if charm.type == 'Charms::AttributeCharm'
 

@@ -12,8 +12,7 @@ module Api
         authorize current_player
         @own_chronicles = Chronicle.includes(include_hash).where(st_id: current_player.id)
         @chronicles = Chronicle.joins(chronicle_players: :player).includes(include_hash).where(chronicle_players: { player_id: current_player.id })
-        render json: @own_chronicles +
-                     @chronicles,
+        render json:    @own_chronicles + @chronicles,
                include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
@@ -164,11 +163,11 @@ module Api
 
       def include_hash
         {
-          characters: Character.association_types,
-          qcs: %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
+          characters:   Character.association_types,
+          qcs:          %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
           battlegroups: %i[qc_attacks poisons],
-          players: [],
-          st: []
+          players:      [],
+          st:           []
         }
       end
 

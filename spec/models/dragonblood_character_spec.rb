@@ -40,7 +40,7 @@ RSpec.describe DragonbloodCharacter, type: :model do
       character.update(aspect: false, exalt_type: 'abyssal', excellency: 'essence')
 
       expect(character).to have_attributes(
-        aspect: true,
+        aspect:     true,
         exalt_type: 'Dragon-Blood',
         excellency: 'dragonblood'
       )

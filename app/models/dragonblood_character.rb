@@ -14,11 +14,11 @@ class DragonbloodCharacter < Character
 
   DRAGONBLOOD_ASPECTS = %w[air earth fire water wood].freeze
   ASPECT_ABILITIES = {
-    "air":   %w[ linguistics lore        occult        stealth    thrown    ],
-    "earth": %w[ awareness   craft       integrity     resistance war       ],
-    "fire":  %w[ athletics   dodge       melee         presence   socialize ],
-    "water": %w[ brawl       bureaucracy investigation larceny    sail      ],
-    "wood":  %w[ archery     medicine    performance   ride       survival  ]
+    "air":   %w[linguistics lore occult stealth thrown],
+    "earth": %w[awareness craft integrity resistance war],
+    "fire":  %w[athletics dodge melee presence socialize],
+    "water": %w[brawl bureaucracy investigation larceny sail],
+    "wood":  %w[archery medicine performance ride survival]
   }.freeze
 
   before_validation :set_mote_pool_totals

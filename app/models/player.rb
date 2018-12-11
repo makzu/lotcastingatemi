@@ -40,7 +40,7 @@ class Player < ApplicationRecord
   def self.create_from_oauth(auth)
     create(
       display_name: auth['info']['name'],
-      email: auth['info']['email']
+      email:        auth['info']['email']
     )
   end
 end

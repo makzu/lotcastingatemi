@@ -9,7 +9,7 @@ module Api
       # Show the currently logged-in player
       def index
         authorize current_player
-        render json: Player.includes(include_hash).find(current_player.id),
+        render json:    Player.includes(include_hash).find(current_player.id),
                include: %w[chronicles.* own_chronicles.* characters.* qcs.* battlegroups.*]
       end
 
@@ -45,10 +45,10 @@ module Api
 
       def include_hash
         {
-          characters: Character.association_types,
-          qcs: %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
-          battlegroups: %i[qc_attacks poisons],
-          chronicles: [],
+          characters:     Character.association_types,
+          qcs:            %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
+          battlegroups:   %i[qc_attacks poisons],
+          chronicles:     [],
           own_chronicles: []
         }
       end

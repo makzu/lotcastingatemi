@@ -18,12 +18,12 @@ RSpec.describe 'Players', type: :request do
         expect do
           delete '/api/v1/players',
                  headers: authenticated_header(player)
-        end.to  change { Player.count      }.by(-1)
-           .and change { Identity.count    }.by(-1)
-           .and change { Chronicle.count   }.by(-1)
-           .and change { Character.count   }.by(-1)
-           .and change { Qc.count          }.by(-1)
-           .and change { Battlegroup.count }.by(-1)
+        end.to  change(Player,      :count).by(-1)
+           .and change(Identity,    :count).by(-1)
+           .and change(Chronicle,   :count).by(-1)
+           .and change(Character,   :count).by(-1)
+           .and change(Qc,          :count).by(-1)
+           .and change(Battlegroup, :count).by(-1)
       end
       # rubocop:enable Layout/MultilineMethodCallIndentation
     end

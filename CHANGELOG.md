@@ -1,6 +1,12 @@
-## v69
+## v70
 
 ###### _Not yet released_
+
+- Nothing (yet)
+
+## v69
+
+###### _Dec 11, 2018_
 
 - QC Attacks, Merits, and Charms can now be sorted
 - Chronicle data is now downloaded as needed, rather than all at once when logging in

@@ -41,6 +41,10 @@ context('Editing a Character', () => {
     cy.get('[data-cy=resources-list-editor] [type=text]')
       .clear()
       .type('Test Resource')
+    cy.get('[data-cy=resources-list-editor] [type=number]')
+      .clear()
+      .type('5')
+
     cy.get('[data-cy=add-specialties]').click()
     cy.get('[data-cy=specialties-list-editor] [type=text]')
       .clear()
@@ -48,11 +52,12 @@ context('Editing a Character', () => {
 
     cy.get('#edit-character-button').click()
 
+    cy.reload() // Make sure data was properly saved
     cy.contains('Test Craft')
     cy.contains('Test MA Style')
     cy.contains('Test Principle')
     cy.contains('Test Tie')
-    cy.contains('Test Resource')
+    cy.contains('Test Resource: 5')
     cy.contains('Test Specialty')
   })
 })

@@ -1,8 +1,14 @@
-## v70
+## v71
 
 ###### _Not yet released_
 
 - Nothing (yet)
+
+## v70
+
+###### _Dec 15, 2018_
+
+- Fixed broken editors for XP logs, mote committments, QC actions, and others (Thanks Maudova, Nirodha, Moonsword)
 
 ## v69
 

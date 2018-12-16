@@ -131,7 +131,11 @@ class BioFullPage extends Component<Props> {
                 </div>
 
                 <div style={{ flex: 1 }}>
-                  <Typography variant="subheading">Solar XP</Typography>
+                  <Typography variant="subheading">
+                    {character.exalt_type === 'Dragon-Blood'
+                      ? 'Dragon XP'
+                      : 'Solar XP'}
+                  </Typography>
                   {solar_xp_log}
                 </div>
               </div>

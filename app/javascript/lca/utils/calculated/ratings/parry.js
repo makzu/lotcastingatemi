@@ -23,6 +23,26 @@ export function parry(
 ) {
   if (weaponIsRanged(weapon)) return { raw: 0, total: 0 }
 
+  let bonus = weapon.tags.includes('shield') ? [{ label: 'shield' }] : []
+  const bonfire = character.anima_level === 3
+
+  // Earth aspect DBs gain +1 Defense vs Smashing and Grapple attacks at bonfire
+  if (
+    character.type !== 'Character' &&
+    (character.type === 'DragonbloodCharacter' ||
+      (character.exalt_type || '').toLowerCase().startsWith('dragon')) &&
+    (character.caste || '').toLowerCase() === 'earth'
+  ) {
+    bonus = [
+      ...bonus,
+      {
+        label: `${bonfire ? '' : '/5m '} vs smash/grapple (anima)`,
+        bonus: 1,
+        situational: true,
+      },
+    ]
+  }
+
   const rat = rating(
     weapon.name + ' Parry',
     character,
@@ -30,18 +50,19 @@ export function parry(
     weapon.ability,
     penaltyObject(penalties, { useOnslaught: true }),
     excellencyAbils,
-    []
+    bonus
   )
   const rawRating =
     Math.ceil((rat.attributeRating + rat.abilityRating) / 2) +
     weaponDefenseBonus(weapon) +
     weapon.bonus_defense
+
   return {
     ...rat,
     defense: weaponDefenseBonus(weapon),
     raw: Math.max(rawRating, 0),
     shield: weapon.tags.includes('shield'),
-    bonus: weapon.tags.includes('shield') ? [{ label: 'shield' }] : [],
+    bonus: bonus,
     //$FlowThisIsOkayISwear
     total: Math.max(rawRating - rat.totalPenalty, 0),
     parry: true,

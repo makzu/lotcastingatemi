@@ -9,13 +9,16 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="og:site_name" content="Lot-Casting Atemi">
 
-    <title>
-      <%= if @title.present? then @title + ' | ' end %>
-      Lot-Casting Atemi
-    </title>
-
-    <meta name="description" content="<%= @description.present? ? @description : 'Online Character and Chronicle manager for Exalted Third Edition. Supports Solars, Dragon-Bloods, mortals, and homebrew exalt types.' %>">
+  <% if @title.present? %>
+    <title><%= @title %> | Lot-Casting Atemi</title>
+    <meta name="og:title" content="<%= @title %>">
+    <% if @description.present? %><meta name="og:description" content="<%= @description %>"><% end %>
+  <% else %>
+    <title>Lot-Casting Atemi</title>
+    <meta name="description" content="Online Character and Chronicle manager for Exalted Third Edition. Supports Solars, Dragon-Bloods, mortals, and homebrew exalt types.">
+  <% end %>
 
     <%= render 'application/favicon' %>
   </head>

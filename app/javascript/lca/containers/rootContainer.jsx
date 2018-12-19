@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import DocumentTitle from 'react-document-title'
+import { hot } from 'react-hot-loader/root'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
@@ -25,4 +26,4 @@ const RootContainer = ({ store }: { store: Object }) => (
   </Provider>
 )
 
-export default RootContainer
+export default hot(RootContainer)

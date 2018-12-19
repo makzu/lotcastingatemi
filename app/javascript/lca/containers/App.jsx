@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 const { Component } = React
-import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
@@ -164,7 +163,5 @@ export default compose(
   connect(
     mapStateToProps,
     { toggleDrawer }
-  ),
-  // eslint-disable-next-line no-undef
-  hot(module)
+  )
 )(App)

@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Rails 5.1+ for Webpacker
 gem 'rails', '~> 5.2.2'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '>= 4.0.x'
+gem 'webpacker', '>= 4.0.0.rc.2'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -50,8 +50,6 @@ gem 'email_validator'
 # Profiling
 # gem 'derailed'
 # gem 'faker'
-# gem 'memory_profiler'
-# gem 'rack-mini-profiler'
 
 # For Heroku:
 group :production do
@@ -82,6 +80,14 @@ group :development do
   gem 'rails_real_favicon'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Performance metrics
+  # gem 'flamegraph'
+  # gem 'meta_request'
+  # gem 'memory_profiler'
+  # gem 'rack-mini-profiler'
+  # gem 'scout_apm'
+  # gem 'stackprof'
 end
 
 group :test do
@@ -92,4 +98,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-ruby '2.5.1'
+ruby '2.5.3'

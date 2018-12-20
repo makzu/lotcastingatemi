@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
     <%= csrf_meta_tags %>
@@ -26,6 +24,7 @@
   <body>
     <%= yield %>
     <%= javascript_pack_tag 'lca' %>
+    <%= stylesheet_pack_tag 'lca' %>
 
     <noscript style="font-family: 'Roboto', 'Helvetica', 'Arial', 'sans-serif'; color: rgba(0,0,0,0.87)">
       <p>

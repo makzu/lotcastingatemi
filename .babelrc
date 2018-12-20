@@ -27,7 +27,7 @@
     [
       "@babel/plugin-transform-runtime",
       {
-        "helpers": false,
+        "helpers": true,
         "regenerator": true
       }
     ],

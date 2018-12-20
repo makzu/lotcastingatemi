@@ -23,7 +23,7 @@ export function archeryAccuracyBonus(weapon: fullWeapon) {
   // close -1, short +5, medium +3, long +1, extreme -1
   const bonus = weapon.is_artifact ? 1 : 0
   return {
-    close: (weapon.tags.includes('flame') ? 0 : -1) + bonus,
+    close: (weapon.tags.includes('flame') ? 0 : -2) + bonus,
     short: 4 + bonus,
     medium: 2 + bonus,
     long: 0 + bonus,

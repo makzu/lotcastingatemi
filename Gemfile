@@ -88,8 +88,8 @@ group :development do
   # Performance metrics
   # gem 'flamegraph'
   # gem 'meta_request'
-  # gem 'memory_profiler'
-  # gem 'rack-mini-profiler'
+  gem 'memory_profiler'
+  gem 'rack-mini-profiler'
   # gem 'scout_apm'
   # gem 'stackprof'
 end

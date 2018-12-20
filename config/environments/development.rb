@@ -69,10 +69,12 @@ Rails.application.configure do
       origins 'localhost:5000', 'localhost:8080', '127.0.0.1:5000', '127.0.0.1:8080'
       resource '*',
                headers: :any,
-               expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+               expose:  ['access-token', 'expiry', 'token-type', 'uid', 'client'],
                methods: %i[get post options delete put]
     end
   end
 
   config.debug_exception_response_format = :api
+
+  Rack::MiniProfiler.config.position = 'bottom-left'
 end

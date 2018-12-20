@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+require('typeface-roboto')
+
 import { createBrowserHistory } from 'history'
 import React from 'react'
 import ReactDOM from 'react-dom'

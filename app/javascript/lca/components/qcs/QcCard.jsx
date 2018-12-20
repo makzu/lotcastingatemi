@@ -110,7 +110,9 @@ function QcCard(props: Props) {
           {chronicle && <PlayerNameSubtitle playerId={qc.player_id} />}
         </div>
 
-        {isOwner && <CharacterMenu characterType="qc" id={qc.id} />}
+        {isOwner && (
+          <CharacterMenu characterType="qc" id={qc.id} chronicle={chronicle} />
+        )}
       </div>
 
       <SpendableBlock character={qc} qc />

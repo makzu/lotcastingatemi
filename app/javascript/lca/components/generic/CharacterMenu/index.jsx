@@ -32,6 +32,7 @@ type ExposedProps = {
   id: number,
   characterType: CharacterType,
   header?: boolean,
+  chronicle?: boolean,
 }
 type Props = ExposedProps & {
   classes: Object,
@@ -100,16 +101,19 @@ class CharacterMenu extends React.Component<Props, State> {
             characterType={this.props.characterType}
             id={this.props.id}
           />
+          {!this.props.chronicle && (
+            <>
+              <MenuChangeExaltType
+                characterType={this.props.characterType}
+                id={this.props.id}
+              />
 
-          <MenuChangeExaltType
-            characterType={this.props.characterType}
-            id={this.props.id}
-          />
-
-          <MenuDelete
-            characterType={this.props.characterType}
-            id={this.props.id}
-          />
+              <MenuDelete
+                characterType={this.props.characterType}
+                id={this.props.id}
+              />
+            </>
+          )}
         </Menu>
       </div>
     )

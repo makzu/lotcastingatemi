@@ -102,7 +102,11 @@ function BattlegroupCard(props: Props) {
         </div>
 
         {isOwner && (
-          <CharacterMenu characterType="battlegroup" id={battlegroup.id} />
+          <CharacterMenu
+            characterType="battlegroup"
+            id={battlegroup.id}
+            chronicle={chronicle}
+          />
         )}
       </div>
 

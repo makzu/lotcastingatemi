@@ -155,7 +155,11 @@ export function CharacterCard({
         <NotesPopup character={character} />
 
         {(st || canDelete) && (
-          <CharacterMenu characterType="character" id={character.id} />
+          <CharacterMenu
+            characterType="character"
+            id={character.id}
+            chronicle={chronicle}
+          />
         )}
       </div>
 

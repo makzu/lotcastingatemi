@@ -66,16 +66,16 @@ class CharacterMenu extends React.Component<Props, State> {
           onClose={this.handleClose}
         >
           {!this.props.header && (
-            <>
-              <MenuLinks
-                characterType={this.props.characterType}
-                id={this.props.id}
-              />
-              <MenuEdit
-                characterType={this.props.characterType}
-                id={this.props.id}
-              />
-            </>
+            <MenuLinks
+              characterType={this.props.characterType}
+              id={this.props.id}
+            />
+          )}
+          {!this.props.header && (
+            <MenuEdit
+              characterType={this.props.characterType}
+              id={this.props.id}
+            />
           )}
 
           <MenuPin
@@ -101,18 +101,18 @@ class CharacterMenu extends React.Component<Props, State> {
             characterType={this.props.characterType}
             id={this.props.id}
           />
-          {!this.props.chronicle && (
-            <>
-              <MenuChangeExaltType
-                characterType={this.props.characterType}
-                id={this.props.id}
-              />
 
-              <MenuDelete
-                characterType={this.props.characterType}
-                id={this.props.id}
-              />
-            </>
+          {!this.props.chronicle && (
+            <MenuChangeExaltType
+              characterType={this.props.characterType}
+              id={this.props.id}
+            />
+          )}
+          {!this.props.chronicle && (
+            <MenuDelete
+              characterType={this.props.characterType}
+              id={this.props.id}
+            />
           )}
         </Menu>
       </div>

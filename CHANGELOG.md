@@ -1,8 +1,12 @@
 ## v71
 
-###### _Not yet released_
+###### _Dec 20, 2018_
 
-- Nothing (yet)
+- Page numbers for _What Fire has Wrought_ content are now updated to reflect the Backer PDF
+- Removed option to delete characters/qcs/etc from their cards on the Chronicle page.
+- Added Earth Aspect Anima bonus to defense vs smashing attaks and grapples
+- Close-ranged Archery attack pools now use the correct accuracy (Thanks, Quasi)
+- Tweaked Discord previews of public characters/qcs
 
 ## v70
 

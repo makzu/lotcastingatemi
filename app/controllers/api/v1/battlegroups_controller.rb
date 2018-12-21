@@ -6,6 +6,11 @@ module Api
       before_action :authenticate_player, except: :show
       before_action :set_battlegroup, only: %i[show update destroy duplicate]
 
+      def index
+        authorize current_player
+        render json: current_player.battlegroups
+      end
+
       def show
         authorize @battlegroup
         render json: @battlegroup

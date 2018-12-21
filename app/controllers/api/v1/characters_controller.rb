@@ -6,6 +6,12 @@ module Api
       before_action :authenticate_player, except: :show
       before_action :set_character, only: %i[show update destroy duplicate change_type]
 
+      def index
+        authorize current_player
+        @characters = Character.includes(Character.association_types).where(player_id: current_player.id)
+        render json: @characters
+      end
+
       def show
         authorize @character
         render json: @character

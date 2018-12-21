@@ -6,6 +6,11 @@ module Api
       before_action :authenticate_player, except: :show
       before_action :set_qc, only: %i[show update destroy duplicate]
 
+      def index
+        authorize current_player
+        render json: current_player.qcs
+      end
+
       def show
         authorize @qc
         render json: @qc

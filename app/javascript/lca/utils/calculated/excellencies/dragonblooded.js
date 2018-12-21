@@ -2,7 +2,7 @@
 import { abil, specialtiesFor } from '..'
 import type { Character, Charm } from 'utils/flow-types'
 
-/* Dragon-Blooded Excellencies: WFHW preview p.173 */
+/* Dragon-Blooded Excellencies: WFHW Backer PDF p.162 */
 
 // All abilities that have an 'Excellency' keyworded Charm
 export const dbExcellencyAbils = (

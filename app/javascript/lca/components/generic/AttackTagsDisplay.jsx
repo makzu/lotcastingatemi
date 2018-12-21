@@ -37,14 +37,14 @@ const AttackTagsDisplay = ({ pool }: Props) => {
           {pool.attack == 'withering' && ' Ignore higher of Essence or 3 soak '}
           {pool.attack == 'decisive' && ' Ignore (Essence) hardness '}
           from metal armor
-          <Typography variant="caption">wfhw preview p. 261</Typography>
+          <Typography variant="caption">wfhw Backer PDF p. 215</Typography>
         </DialogContentText>
       )}
 
       {showFire && (
         <DialogContentText style={style}>
           Fire: Double 10s on <strong>decisive</strong> damage roll
-          <Typography variant="caption">wfhw preview p. 261</Typography>
+          <Typography variant="caption">wfhw Backer PDF p. 215</Typography>
         </DialogContentText>
       )}
 
@@ -63,7 +63,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
           Disarming: Reduces the difficulty and initiative cost of a Disarm
           gambit by 1
           <Typography variant="caption">
-            {specialAttacks.includes('water') && 'wfhw preview p.261, '}
+            {specialAttacks.includes('water') && 'wfhw Backer PDF p. 215, '}
             tag: core p.586, disarm: core p.200
           </Typography>
         </DialogContentText>
@@ -82,7 +82,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
           {specialAttacks.includes('water') ? 'Water: ' : 'Flexible: '}
           Ignores the Defense bonus granted by Full Defense actions
           <Typography variant="caption">
-            {specialAttacks.includes('water') && 'wfhw preview p.261, '}
+            {specialAttacks.includes('water') && 'wfhw Backer PDF p. 215, '}
             tag: core p.586
           </Typography>
         </DialogContentText>
@@ -100,7 +100,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
           Can deliver poison on successfully dealing <strong>decisive </strong>
           damage.
           <Typography variant="caption">
-            {specialAttacks.includes('wood') && 'wfhw preview p.261, '}
+            {specialAttacks.includes('wood') && 'wfhw Backer PDF p. 215, '}
             poison: core p.232-234, tag: core p.586
           </Typography>
         </DialogContentText>
@@ -140,7 +140,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
           back one range band, or prone.
           <Typography variant="caption">
             prone: core p.202,&nbsp;
-            {specialAttacks.includes('earth') && 'wfhw preview p.261, '}
+            {specialAttacks.includes('earth') && 'wfhw Backer PDF p. 215, '}
             tag: core p.586
           </Typography>
         </DialogContentText>

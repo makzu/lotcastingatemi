@@ -44,6 +44,7 @@ export default function AppReducer(
   switch (act[2]) {
     case 'CREATE':
     case 'FETCH':
+    case 'FETCH_ALL':
     case 'UPDATE':
     case 'DESTROY':
     case 'ADD_THING':
@@ -58,6 +59,7 @@ export default function AppReducer(
 
     case 'CREATE_SUCCESS':
     case 'FETCH_SUCCESS':
+    case 'FETCH_ALL_SUCCESS':
     case 'UPDATE_SUCCESS':
     case 'DESTROY_SUCCESS':
     case 'ADD_THING_SUCCESS':

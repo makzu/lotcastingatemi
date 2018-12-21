@@ -25,7 +25,9 @@ const getCharacters = state => entities(state).characters
 export const getMyCharacters: CharacterListSelector = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
+    currentPlayer.characters == null
+      ? []
+      : currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
 )
 
 export const getMyPinnedCharacters: CharacterListSelector = createSelector(

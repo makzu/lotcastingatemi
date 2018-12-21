@@ -20,7 +20,10 @@ export * from './battlegroup.js'
 export * from './combat_actor.js'
 
 import * as schemas from './_schemas.js'
-import PlayerReducer, { PLY_DESTROY_SUCCESS } from './player.js'
+import PlayerReducer, {
+  PLY_DESTROY_SUCCESS,
+  FETCH_SUCCESS as PLY_FETCH_SUCCESS,
+} from './player.js'
 import ChronicleReducer from './chronicle.js'
 import CharacterReducer from './character.js'
 import MeritReducer from './merit.js'
@@ -50,6 +53,7 @@ import type {
 } from 'utils/flow-types'
 
 export const defaultState = {
+  currentPlayer: 0,
   players: {
     [0]: {
       id: 0,
@@ -76,6 +80,7 @@ export const defaultState = {
   poisons: {},
 }
 export type EntityState = {
+  +currentPlayer: number,
   +players: { [id: number]: Object },
   +chronicles: { [id: number]: Object },
   +characters: { [id: number]: Character },
@@ -106,6 +111,8 @@ export function EntityReducer(
   action: Object
 ) {
   switch (action.type) {
+    case PLY_FETCH_SUCCESS:
+      return { ...state, currentPlayer: action.payload.result }
     case LOGOUT:
     case PLY_DESTROY_SUCCESS:
       return defaultState

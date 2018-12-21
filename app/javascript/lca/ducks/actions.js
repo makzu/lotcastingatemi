@@ -56,7 +56,12 @@ export { logout } from './session.js'
 export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
 export { spendMotes, spendWillpower, takeDamage } from './events'
 
-import { fetchCurrentPlayer, fetchCharacter, fetchQc } from './entities'
+import {
+  fetchAllCharacters,
+  fetchCurrentPlayer,
+  fetchCharacter,
+  fetchQc,
+} from './entities'
 import UpdatesCable from 'utils/cable.js'
 
 export const INIT = 'lca/app/INIT'
@@ -64,7 +69,9 @@ export const INIT = 'lca/app/INIT'
 export function fetchAll() {
   return (dispatch: Function, getState: Function) => {
     dispatch(fetchCurrentPlayer())
-      //.then(() => dispatch(fetchAllChronicles()))
+      .then(() => {
+        dispatch(fetchAllCharacters())
+      })
       .then(() => {
         UpdatesCable.subscribe(getState, data =>
           dispatch({ type: 'lca/cable/RECEIVED', payload: data })

@@ -1,4 +1,5 @@
 // @flow
+import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
@@ -16,6 +17,7 @@ export const CHA_DUPE_SUCCESS = 'lca/cahracter/DUPE_SUCCESS'
 export const CHA_DUPE_FAILURE = 'lca/cahracter/DUPE_FAILURE'
 export const CHA_FETCH = 'lca/character/FETCH'
 export const CHA_FETCH_SUCCESS = 'lca/character/FETCH_SUCCESS'
+export const CHA_FETCH_ALL_SUCCESS = 'lca/character/FETCH_ALL_SUCCESS'
 export const CHA_FETCH_FAILURE = 'lca/character/FETCH_FAILURE'
 export const CHA_UPDATE = 'lca/character/UPDATE'
 export const CHA_UPDATE_SUCCESS = 'lca/character/UPDATE_SUCCESS'
@@ -41,7 +43,20 @@ export default (state: EntityState, action: Object) => {
       },
     }
   }
-
+  if (action.type === CHA_FETCH_ALL_SUCCESS) {
+    return {
+      ...state,
+      players: {
+        ...state.players,
+        [state.currentPlayer]: {
+          ...state.players[state.currentPlayer],
+          characters: (
+            state.players[state.currentPlayer].characters || []
+          ).concat(action.payload.result),
+        },
+      },
+    }
+  }
   return state
 }
 
@@ -72,6 +87,25 @@ export function fetchCharacter(id: number) {
         type: CHA_FETCH_SUCCESS,
         payload: (action, state, res) => {
           return getJSON(res).then(json => normalize(json, schemas.characters))
+        },
+      },
+      CHA_FETCH_FAILURE,
+    ],
+  })
+}
+
+export function fetchAllCharacters() {
+  return callApi({
+    endpoint: '/api/v1/characters/',
+    method: 'GET',
+    types: [
+      CHA_FETCH,
+      {
+        type: CHA_FETCH_ALL_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then(json =>
+            normalize(json, schemas.characterList)
+          )
         },
       },
       CHA_FETCH_FAILURE,

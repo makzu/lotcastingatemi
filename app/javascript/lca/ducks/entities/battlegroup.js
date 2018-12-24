@@ -1,8 +1,14 @@
 // @flow
+import { normalize } from 'normalizr'
+import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import * as schemas from './_schemas.js'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
 
+const FETCH = 'lca/battlegroup/FETCH'
+export const BG_FETCH_ALL_SUCCESS = 'lca/battlegroup/FETCH_ALL_SUCCESS'
+const FETCH_FAILURE = 'lca/battlegroup/FETCH_FAILURE'
 const CREATE = 'lca/battlegroup/CREATE'
 export const BG_CREATE_SUCCESS = 'lca/battlegroup/CREATE_SUCCESS'
 const CREATE_FAILURE = 'lca/battlegroup/CREATE_FAILURE'
@@ -34,8 +40,45 @@ export default (state: EntityState, action: Object) => {
       },
     }
   }
+  if (action.type === BG_FETCH_ALL_SUCCESS) {
+    return {
+      ...state,
+      players: {
+        ...state.players,
+        [state.currentPlayer]: {
+          ...state.players[state.currentPlayer],
+          battlegroups: [
+            ...new Set(
+              (state.players[state.currentPlayer].battlegroups || []).concat(
+                action.payload.result
+              )
+            ),
+          ],
+        },
+      },
+    }
+  }
 
   return state
+}
+
+export function fetchAllBattlegroups() {
+  return callApi({
+    endpoint: '/api/v1/battlegroups/',
+    method: 'GET',
+    types: [
+      FETCH,
+      {
+        type: BG_FETCH_ALL_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then(json =>
+            normalize(json, schemas.battlegroupList)
+          )
+        },
+      },
+      FETCH_FAILURE,
+    ],
+  })
 }
 
 export function createBattlegroup(bg: Object) {

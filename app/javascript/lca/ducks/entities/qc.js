@@ -15,6 +15,7 @@ const QC_DUPE_FAILURE = 'lca/qc/DUPE_FAILURE'
 const QC_FETCH = 'lca/qc/FETCH'
 export const QC_FETCH_SUCCESS = 'lca/qc/FETCH_SUCCESS'
 const QC_FETCH_FAILURE = 'lca/qc/FETCH_FAILURE'
+export const QC_FETCH_ALL_SUCCESS = 'lca/qc/FETCH_ALL_SUCCESS'
 const QC_UPDATE = 'lca/qc/UPDATE'
 const QC_UPDATE_SUCCESS = 'lca/qc/UPDATE_SUCCESS'
 const QC_UPDATE_FAILURE = 'lca/qc/UPDATE_FAILURE'
@@ -32,6 +33,24 @@ export default (state: EntityState, action: Object) => {
         [action.meta.id]: {
           ...state.qcs[action.meta.id],
           ...action.payload,
+        },
+      },
+    }
+  }
+  if (action.type === QC_FETCH_ALL_SUCCESS) {
+    return {
+      ...state,
+      players: {
+        ...state.players,
+        [state.currentPlayer]: {
+          ...state.players[state.currentPlayer],
+          qcs: [
+            ...new Set(
+              (state.players[state.currentPlayer].qcs || []).concat(
+                action.payload.result
+              )
+            ),
+          ],
         },
       },
     }
@@ -67,6 +86,23 @@ export function fetchQc(id: number) {
         type: QC_FETCH_SUCCESS,
         payload: (action, state, res) => {
           return getJSON(res).then(json => normalize(json, schemas.qcs))
+        },
+      },
+      QC_FETCH_FAILURE,
+    ],
+  })
+}
+
+export function fetchAllQcs() {
+  return callApi({
+    endpoint: '/api/v1/qcs/',
+    method: 'GET',
+    types: [
+      QC_FETCH,
+      {
+        type: QC_FETCH_ALL_SUCCESS,
+        payload: (action, state, res) => {
+          return getJSON(res).then(json => normalize(json, schemas.qcList))
         },
       },
       QC_FETCH_FAILURE,

@@ -7,7 +7,8 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { mergeStateWithNormalizedEntities, type EntityState } from '.'
 import * as schemas from './_schemas.js'
 import { CHA_FETCH_SUCCESS, CHA_FETCH_ALL_SUCCESS } from './character.js'
-import { QC_FETCH_SUCCESS } from './qc.js'
+import { QC_FETCH_SUCCESS, QC_FETCH_ALL_SUCCESS } from './qc.js'
+import { BG_FETCH_ALL_SUCCESS } from './battlegroup.js'
 import { callApi } from 'utils/api.js'
 
 export const CHN_FETCH = 'lca/chronicle/FETCH'
@@ -72,6 +73,8 @@ export default function reducer(state: EntityState, action: Object) {
     case CHA_FETCH_SUCCESS:
     case CHA_FETCH_ALL_SUCCESS:
     case QC_FETCH_SUCCESS:
+    case QC_FETCH_ALL_SUCCESS:
+    case BG_FETCH_ALL_SUCCESS:
       _entities = action.payload.entities
       return mergeStateWithNormalizedEntities(state, _entities)
     case CHN_REMOVE_PLAYER_SUCCESS:

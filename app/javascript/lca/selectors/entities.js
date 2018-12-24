@@ -15,7 +15,14 @@ export const entities = (state: WrappedEntityState): EntityState =>
 export const getSpecificPlayer = (
   state: WrappedEntityState,
   id: number
-): Player => entities(state).players[id]
+): Player => ({
+  characters: [],
+  qcs: [],
+  battlegroups: [],
+  chronicles: [],
+  own_chronicles: [],
+  ...entities(state).players[id],
+})
 
 export const getCurrentPlayer = (state: WrappedEntityState): Player =>
   getSpecificPlayer(state, state.session.id)
@@ -25,9 +32,7 @@ const getCharacters = state => entities(state).characters
 export const getMyCharacters: CharacterListSelector = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters == null
-      ? []
-      : currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
+    currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
 )
 
 export const getMyPinnedCharacters: CharacterListSelector = createSelector(

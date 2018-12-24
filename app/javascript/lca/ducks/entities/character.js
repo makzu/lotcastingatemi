@@ -1,5 +1,4 @@
 // @flow
-import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
@@ -50,9 +49,13 @@ export default (state: EntityState, action: Object) => {
         ...state.players,
         [state.currentPlayer]: {
           ...state.players[state.currentPlayer],
-          characters: (
-            state.players[state.currentPlayer].characters || []
-          ).concat(action.payload.result),
+          characters: [
+            ...new Set(
+              (state.players[state.currentPlayer].characters || []).concat(
+                action.payload.result
+              )
+            ),
+          ],
         },
       },
     }

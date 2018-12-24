@@ -4,9 +4,9 @@
 class PlayerSerializer < BaseSerializer
   attribute :display_name
 
-  has_many :characters
-  has_many :qcs
-  has_many :battlegroups
+  # has_many :characters
+  # has_many :qcs
+  # has_many :battlegroups
 
   has_many :own_chronicles, type: 'Chronicle'
   has_many :chronicles

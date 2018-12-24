@@ -3,7 +3,6 @@ import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
-import { mergeStateWithNormalizedEntities } from '.'
 import * as schemas from './_schemas.js'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
@@ -25,8 +24,23 @@ export default (state: EntityState, action: Object) => {
 
   switch (action.type) {
     case FETCH_SUCCESS:
-      _entities = action.payload.entities
-      return mergeStateWithNormalizedEntities(state, _entities)
+      _id = action.payload.result
+      _entities = action.payload.entities.chronicles
+
+      return {
+        ...state,
+        chronicles: {
+          ..._entities,
+          ...state.chronicles,
+        },
+        players: {
+          ...state.players,
+          [_id]: {
+            ...state.players[_id],
+            ...action.payload.entities.players[_id],
+          },
+        },
+      }
 
     case PLY_UPDATE:
       _id = action.payload.id

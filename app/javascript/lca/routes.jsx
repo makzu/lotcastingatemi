@@ -4,85 +4,77 @@ import { Route, Switch } from 'react-router-dom'
 
 import HelpPage from 'components/pages/Help.jsx'
 
-// import ChronicleWrapper from 'components/chronicles/ChronicleWrapper.jsx'
-const ChronicleWrapper = lazy(() =>
-  import('components/chronicles/ChronicleWrapper.jsx')
-)
-// import ContentList from 'components/pages/contentList.jsx'
-const ContentList = lazy(() =>
-  import('components/pages/contentList.jsx' /* webpackChunkName: 'ListPage' */)
-)
+import Placeholder from 'components/generic/Placeholder.jsx'
+
+import WelcomePage from 'components/pages/welcomePage.jsx'
+import PrivacyPage from 'components/pages/PrivacyPage.jsx'
 import GoodbyePage from 'components/pages/GoodbyePage.jsx'
-// const GoodbyePage = lazy(() =>
-//   import('components/pages/GoodbyePage.jsx' /* webpackChunkName: 'GoodbyePage' */)
-// )
-// import SettingsPage from 'components/pages/SettingsPage.jsx'
-const SettingsPage = lazy(() =>
-  import('components/pages/SettingsPage.jsx' /* webpackChunkName: 'SettingsPage' */)
+import SettingsPage from 'components/pages/SettingsPage.jsx'
+
+const ChronicleWrapper = lazy(() =>
+  import('components/chronicles/ChronicleWrapper.jsx' /* webpackChunkName: 'chronicle' */ /* webpackPrefetch: true */)
 )
-// import CharacterSheet from 'components/characters/index.jsx'
+
+const ContentList = lazy(() =>
+  import('components/pages/contentList.jsx' /* webpackChunkName: 'ListPage' */ /* webpackPrefetch: true */)
+)
+
 const CharacterSheet = lazy(() =>
-  import('components/characters/index.jsx' /* webpackChunkName: 'CharacterSheet' */)
+  import('components/characters/index.jsx' /* webpackChunkName: 'CharacterSheet' */ /* webpackPrefetch: true */)
 )
 import CharacterDashboard from 'components/characters/dashboard/'
-// import MeritFullPage from 'components/characters/MeritFullPage.jsx'
+
 const MeritFullPage = lazy(() =>
-  import('components/characters/MeritFullPage.jsx' /* webpackChunkName: 'MeritPage' */)
+  import('components/characters/MeritFullPage.jsx' /* webpackChunkName: 'MeritPage' */ /* webpackPrefetch: true */)
 )
-// import CharmFullPage from 'components/characters/charms/index.jsx'
+
 const CharmFullPage = lazy(() =>
-  import('components/characters/charms/index.jsx' /* webpackChunkName: 'CharmPage' */)
+  import('components/characters/charms/index.jsx' /* webpackChunkName: 'CharmPage' */ /* webpackPrefetch: true */)
 )
-// import BioFullPage from 'components/characters/BioFullPage.jsx'
+
 const BioFullPage = lazy(() =>
-  import('components/characters/BioFullPage.jsx' /* webpackChunkName: 'BioPage' */)
+  import('components/characters/BioFullPage.jsx' /* webpackChunkName: 'BioPage' */ /* webpackPrefetch: true */)
 )
-// import CharacterEditor from 'components/characterEditor/index.jsx'
+
 const CharacterEditor = lazy(() =>
-  import('components/characterEditor/index.jsx' /* webpackChunkName: 'CharacterEditor' */)
+  import('components/characterEditor/index.jsx' /* webpackChunkName: 'CharacterEditor' */ /* webpackPrefetch: true */)
 )
-// import MeritEditor from 'components/characterEditor/merits/MeritEditor.jsx'
+
 const MeritEditor = lazy(() =>
-  import('components/characterEditor/merits/MeritEditor.jsx' /* webpackChunkName: 'MeritEditor' */)
+  import('components/characterEditor/merits/MeritEditor.jsx' /* webpackChunkName: 'MeritEditor' */ /* webpackPrefetch: true */)
 )
-// import CharmEditor from 'components/characters/charms/CharmEditor.jsx'
+
 const CharmEditor = lazy(() =>
-  import('components/characters/charms/CharmEditor.jsx' /* webpackChunkName: 'CharmEditor' */)
+  import('components/characters/charms/CharmEditor.jsx' /* webpackChunkName: 'CharmEditor' */ /* webpackPrefetch: true */)
 )
-// import BioEditor from 'components/characterEditor/bio.jsx'
+
 const BioEditor = lazy(() =>
-  import('components/characterEditor/bio.jsx' /* webpackChunkName: 'BioEditor' */)
+  import('components/characterEditor/bio.jsx' /* webpackChunkName: 'BioEditor' */ /* webpackPrefetch: true */)
 )
-// import QcSheet from 'components/qcs/index.jsx'
+
 const QcSheet = lazy(() =>
-  import('components/qcs/index.jsx' /* webpackChunkName: 'QcSheet' */)
+  import('components/qcs/index.jsx' /* webpackChunkName: 'QcSheet' */ /* webpackPrefetch: true */)
 )
-// import QcEditor from 'components/qcs/editor.jsx'
+
 const QcEditor = lazy(() =>
-  import('components/qcs/editor.jsx' /* webpackChunkName: 'QcEditor' */)
+  import('components/qcs/editor.jsx' /* webpackChunkName: 'QcEditor' */ /* webpackPrefetch: true */)
 )
-// import BattlegroupSheet from 'components/battlegroups/index.jsx'
+
 const BattlegroupSheet = lazy(() =>
-  import('components/battlegroups/index.jsx' /* webpackChunkName: 'BgSheet' */)
+  import('components/battlegroups/index.jsx' /* webpackChunkName: 'BgSheet' */ /* webpackPrefetch: true */)
 )
-// import BattlegroupEditor from 'components/battlegroups/editor.jsx'
+
 const BattlegroupEditor = lazy(() =>
-  import('components/battlegroups/editor.jsx' /* webpackChunkName: 'BgEditor' */)
+  import('components/battlegroups/editor.jsx' /* webpackChunkName: 'BgEditor' */ /* webpackPrefetch: true */)
 )
-import WelcomePage from 'components/pages/welcomePage.jsx'
-import ResourcesPage from 'components/pages/resourcesPage.jsx'
-// const ResourcesPage = lazy(() =>
-//   import('components/pages/resourcesPage.jsx' /* webpackChunkName: 'Resources' */)
-// )
-import PrivacyPage from 'components/pages/PrivacyPage.jsx'
-// const PrivacyPage = lazy(() =>
-//   import('components/pages/PrivacyPage.jsx' /* webpackChunkName: 'Privacy' */)
-// )
+const ResourcesPage = lazy(() =>
+  import('components/pages/resourcesPage.jsx' /* webpackChunkName: 'ResourcesPage' */ /* webpackPrefetch: true */)
+)
 
 export default function Routes() {
   return (
     <Switch>
-      <Suspense fallback={'Loading...'}>
+      <Suspense fallback={<Placeholder />}>
         <Route exact path="/" component={WelcomePage} />
         <Route path="/settings" component={SettingsPage} />
         <Route path="/deleted" component={GoodbyePage} />

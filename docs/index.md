@@ -1,0 +1,2 @@
+- [Merit Documentation](./merits.md)
+- [Weapon Documentation](./weapons.md)

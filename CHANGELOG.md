@@ -1,3 +1,9 @@
+## v72
+
+###### _Dec 20, 2018_
+
+- Added a basic Help section
+
 ## v71
 
 ###### _Dec 20, 2018_

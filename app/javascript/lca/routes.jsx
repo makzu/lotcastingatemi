@@ -1,6 +1,8 @@
 // @flow
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+
+import HelpPage from 'components/pages/Help.jsx'
 
 import ChronicleWrapper from 'components/chronicles/ChronicleWrapper.jsx'
 import ContentList from 'components/pages/contentList.jsx'
@@ -25,7 +27,7 @@ import PrivacyPage from 'components/pages/PrivacyPage.jsx'
 
 export default function Routes() {
   return (
-    <>
+    <Switch>
       <Route exact path="/" component={WelcomePage} />
       <Route path="/settings" component={SettingsPage} />
       <Route path="/deleted" component={GoodbyePage} />
@@ -33,22 +35,11 @@ export default function Routes() {
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/content" component={ContentList} />
 
+      <Route path="/help/:doc.:ext?" component={HelpPage} />
+      <Route path="/help" component={HelpPage} />
+
       <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
 
-      <Route exact path="/characters/:characterId" component={CharacterSheet} />
-      <Route
-        path="/characters/:characterId/dashboard"
-        component={CharacterDashboard}
-      />
-      <Route path="/characters/:characterId/merits" component={MeritFullPage} />
-      <Route path="/characters/:characterId/charms" component={CharmFullPage} />
-      <Route path="/characters/:characterId/bio" component={BioFullPage} />
-
-      <Route
-        exact
-        path="/characters/:characterId/edit"
-        component={CharacterEditor}
-      />
       <Route
         path="/characters/:characterId/edit/merits"
         component={MeritEditor}
@@ -58,15 +49,25 @@ export default function Routes() {
         component={CharmEditor}
       />
       <Route path="/characters/:characterId/edit/bio" component={BioEditor} />
+      <Route path="/characters/:characterId/edit" component={CharacterEditor} />
 
-      <Route exact path="/qcs/:qcId" component={QcSheet} />
+      <Route
+        path="/characters/:characterId/dashboard"
+        component={CharacterDashboard}
+      />
+      <Route path="/characters/:characterId/merits" component={MeritFullPage} />
+      <Route path="/characters/:characterId/charms" component={CharmFullPage} />
+      <Route path="/characters/:characterId/bio" component={BioFullPage} />
+      <Route path="/characters/:characterId" component={CharacterSheet} />
+
       <Route path="/qcs/:qcId/edit" component={QcEditor} />
+      <Route path="/qcs/:qcId" component={QcSheet} />
 
-      <Route exact path="/battlegroups/:bgId" component={BattlegroupSheet} />
       <Route
         path="/battlegroups/:battlegroupId/edit"
         component={BattlegroupEditor}
       />
-    </>
+      <Route path="/battlegroups/:bgId" component={BattlegroupSheet} />
+    </Switch>
   )
 }

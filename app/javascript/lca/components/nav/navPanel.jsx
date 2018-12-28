@@ -99,6 +99,15 @@ export class NavPanel extends PureComponent<Props> {
           <ListItem
             button
             component={NavLink}
+            to="/help/index"
+            onClick={closeCheck}
+          >
+            <ListItemText primary="Help" />
+          </ListItem>
+
+          <ListItem
+            button
+            component={NavLink}
             to="/resources"
             onClick={closeCheck}
           >

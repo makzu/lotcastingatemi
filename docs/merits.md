@@ -1,0 +1,19 @@
+# Merits
+
+These merits are checked for while calculating pools, ratings, penalties, and recovery rates:
+
+- Exalted healing
+- Hearthstone
+- Fast Reflexes
+- Fleet of Foot
+- Fast Reflexes
+- Mighty Thew
+- Vital Focus Cultivation
+- Unusual Hide
+- Danger Sense
+- Hideous
+- Pain Tolerance
+- Well-Bred
+- Thin-Blooded
+
+It's not necessary to manually add bonuses from the above merits.

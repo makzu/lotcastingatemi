@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import { createBrowserHistory } from 'history'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -14,6 +15,8 @@ import reducer from './ducks'
 import { lcaInit } from './ducks/actions.js'
 
 import RootContainer from './containers/rootContainer.jsx'
+
+export const history = createBrowserHistory()
 
 const makeEnhancer =
   process.env.NODE_ENV === 'production' ? compose : composeWithDevTools
@@ -33,6 +36,6 @@ const store = createStore(reducer, undefined, enhancer)
 store.dispatch(lcaInit())
 
 ReactDOM.render(
-  <RootContainer store={store} />,
+  <RootContainer store={store} history={history} />,
   document.getElementById('root')
 )

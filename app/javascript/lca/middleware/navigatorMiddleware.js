@@ -11,7 +11,7 @@ import {
   QC_DUPE_SUCCESS,
   PLY_DESTROY_SUCCESS,
 } from 'ducks/entities'
-import { history } from 'containers/rootContainer.jsx'
+import { history } from '../index.js'
 
 /* On successfully creating an entity or joining a Chronicle, navigate to that
  * entity or Chronicle's page. Uses Push, so that the back button will work

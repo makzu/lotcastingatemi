@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -17,6 +18,7 @@ import Typography from '@material-ui/core/Typography'
 import Edit from '@material-ui/icons/Edit'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
+import HelpIcon from '@material-ui/icons/Help'
 
 import WeaponAbilitySelect from './WeaponAbilitySelect.jsx'
 import WeaponAttributeSelect from './WeaponAttributeSelect.jsx'
@@ -200,7 +202,13 @@ class WeaponEditorPopup extends Component<Props, State> {
               />
             </Collapse>
           </DialogContent>
+
           <DialogActions>
+            <div style={{ flex: 1 }}>
+              <IconButton component={Link} to={'/help/weapons'} size="small">
+                <HelpIcon />
+              </IconButton>
+            </div>
             <Button onClick={handleClose}>Done</Button>
           </DialogActions>
         </Dialog>

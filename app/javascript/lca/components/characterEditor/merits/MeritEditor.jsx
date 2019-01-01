@@ -3,6 +3,7 @@ import * as React from 'react'
 const { Component, Fragment } = React
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'
 import { compose } from 'recompose'
 
@@ -10,8 +11,10 @@ import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
+import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
+import HelpIcon from '@material-ui/icons/Help'
 
 import MeritFields from './MeritFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
@@ -105,12 +108,23 @@ class MeritEditor extends Component<Props> {
 
         <SortableGridList
           header={
-            <Typography variant="headline">
-              Merits &nbsp;&nbsp;
-              <Button onClick={handleAdd}>
-                Add Merit&nbsp;
-                <ContentAddCircle />
-              </Button>
+            <Typography
+              variant="headline"
+              component="div"
+              style={{ display: 'flex' }}
+            >
+              <div>
+                Merits &nbsp;&nbsp;
+                <Button onClick={handleAdd}>
+                  Add Merit&nbsp;
+                  <ContentAddCircle />
+                </Button>
+              </div>
+              <div style={{ flex: 1, textAlign: 'right' }}>
+                <IconButton component={Link} to="/help/merits">
+                  <HelpIcon />
+                </IconButton>
+              </div>
             </Typography>
           }
           items={mts}

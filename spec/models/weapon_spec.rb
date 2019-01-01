@@ -35,5 +35,7 @@ RSpec.describe Weapon, type: :model do
       weapon.update(tags: ['elemental bolt', 'fire'])
       expect(weapon.damage_attr).to eq('strength')
     end
+
+    pending 'It selects the higher of Thrown or Archery for attack pools'
   end
 end

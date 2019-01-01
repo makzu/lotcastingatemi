@@ -18,6 +18,7 @@ class Weapon < ApplicationRecord
     self.tags = tags.reject(&:blank?).collect(&:strip).collect(&:downcase).uniq
   end
 
+  # Elemental Bolt stats are in the WFHW backer PDF, page 215
   def set_traits_for_elemental_bolt
     return unless will_save_change_to_attribute? :tags
 
@@ -25,6 +26,12 @@ class Weapon < ApplicationRecord
 
     self.damage_attr = 'essence'
     self.is_artifact = true
+    self.weight = 'light'
+    if character.abil_archery > character.abil_thrown
+      self.ability = 'archery'
+    elsif character.abil_thrown >= character.abil_archery
+      self.ability = 'thrown'
+    end
   end
 
   def entity_type

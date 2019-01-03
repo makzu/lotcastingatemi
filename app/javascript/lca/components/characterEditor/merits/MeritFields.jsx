@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
+import MeritEffectBlurb from './MeritEffectBlurb.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
@@ -153,6 +154,7 @@ class MeritFields extends Component<FieldsProps> {
             label="Supernatual"
           />
         </div>
+        <MeritEffectBlurb name={merit.merit_name} rating={merit.rating} />
       </BlockPaper>
     )
   }

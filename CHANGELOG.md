@@ -3,6 +3,7 @@
 ###### _Not yet released_
 
 - Added a basic Help section
+- Short blurbs will appear in the Merit editor for Merits that have some sort of effect on calculations
 
 ## v71
 

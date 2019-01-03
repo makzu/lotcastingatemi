@@ -8,7 +8,8 @@ module Api
 
       def index
         authorize current_player
-        render json: current_player.qcs
+        @qcs = Qc.includes(%i[qc_attacks qc_charms qc_merits poisons]).where(player_id: current_player.id)
+        render json: @qcs
       end
 
       def show

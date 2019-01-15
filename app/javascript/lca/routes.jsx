@@ -2,8 +2,6 @@
 import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import HelpPage from 'components/pages/Help.jsx'
-
 import Placeholder from 'components/generic/Placeholder.jsx'
 
 import WelcomePage from 'components/pages/welcomePage.jsx'
@@ -12,7 +10,7 @@ import GoodbyePage from 'components/pages/GoodbyePage.jsx'
 import SettingsPage from 'components/pages/SettingsPage.jsx'
 
 const ChronicleWrapper = lazy(() =>
-  import('components/chronicles/ChronicleWrapper.jsx' /* webpackChunkName: 'chronicle' */ /* webpackPrefetch: true */)
+  import('components/chronicles/ChronicleWrapper.jsx' /* webpackChunkName: 'Chronicle' */ /* webpackPrefetch: true */)
 )
 
 const ContentList = lazy(() =>
@@ -67,8 +65,13 @@ const BattlegroupSheet = lazy(() =>
 const BattlegroupEditor = lazy(() =>
   import('components/battlegroups/editor.jsx' /* webpackChunkName: 'BgEditor' */ /* webpackPrefetch: true */)
 )
+
 const ResourcesPage = lazy(() =>
   import('components/pages/resourcesPage.jsx' /* webpackChunkName: 'ResourcesPage' */ /* webpackPrefetch: true */)
+)
+
+const HelpPage = lazy(() =>
+  import('components/pages/Help.jsx' /* webpackChunkName: 'Help' */ /* webpackPrefetch: true*/)
 )
 
 export default function Routes() {

@@ -10,6 +10,8 @@ import { lcaInit } from './ducks/actions.js'
 
 import RootContainer from './containers/rootContainer.jsx'
 
+export const history = createBrowserHistory()
+
 const store = configureStore()
 
 store.dispatch(lcaInit())

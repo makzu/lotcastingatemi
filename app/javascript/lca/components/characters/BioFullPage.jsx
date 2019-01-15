@@ -15,6 +15,7 @@ import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import sharedStyles from 'styles/'
 import { getSpecificCharacter } from 'selectors'
+import { spentXp, spentSolarXp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -128,6 +129,10 @@ class BioFullPage extends Component<Props> {
                 <div style={{ flex: 1 }}>
                   <Typography variant="subheading">XP</Typography>
                   {xp_log}
+                  <Typography>
+                    Earned: {character.xp_total}, Spent: {spentXp(character)},
+                    Remaining: {character.xp_total - spentXp(character)}
+                  </Typography>
                 </div>
 
                 <div style={{ flex: 1 }}>
@@ -137,6 +142,11 @@ class BioFullPage extends Component<Props> {
                       : 'Solar XP'}
                   </Typography>
                   {solar_xp_log}
+                  <Typography>
+                    Earned: {character.xp_solar_total}, Spent:{' '}
+                    {spentSolarXp(character)}, Remaining:{' '}
+                    {character.xp_solar_total - spentSolarXp(character)}
+                  </Typography>
                 </div>
               </div>
             </BlockPaper>

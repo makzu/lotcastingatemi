@@ -11,4 +11,15 @@ environment.loaders.append('md', {
   use: 'raw-loader',
 })
 
+const path = require('path')
+environment.config.merge({
+  resolve: {
+    alias: {
+      // eslint-disable-next-line no-undef
+      Docs: path.resolve(__dirname, '../../docs'),
+    },
+  },
+})
+
+// eslint-disable-next-line no-undef
 module.exports = environment

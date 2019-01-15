@@ -56,7 +56,11 @@ group :production do
   gem 'rails_serve_static_assets'
 end
 
+# For Heroku Ruby metrics
 gem 'barnes'
+
+# logging
+gem 'lograge'
 
 group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,5 +1,5 @@
 // @flow
-import { createSelector } from 'reselect'
+import { createSelector, type OutputSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { isEmpty, max } from 'lodash'
 
@@ -16,35 +16,44 @@ import * as pools from 'utils/calculated/pools'
 import * as ratings from 'utils/calculated/ratings'
 
 import type { WrappedEntityState } from 'ducks/entities'
-import type { Character } from 'utils/flow-types'
+import type {
+  Character,
+  fullMerit,
+  fullWeapon,
+  Spell,
+  Poison,
+} from 'utils/flow-types'
 
-const getState = state => state
-const getPoisons = state => entities(state).poisons
+const getState = (state: WrappedEntityState) => state
+const getPoisons = (state: WrappedEntityState) => entities(state).poisons
 
 export const getSpecificCharacter = (
   state: WrappedEntityState,
   id: number
 ): Character => entities(state).characters[id]
 
-const characterIdMemoizer = (state, id) => id
+const characterIdMemoizer = (state, id: number) => id
 
 const getMerits = state => entities(state).merits
 
-// $FlowFixMe
-export const getMeritsForCharacter = createCachedSelector(
+type CachedEntitySelector<T> = OutputSelector<WrappedEntityState, any, T>
+
+type gMFC = CachedEntitySelector<Array<fullMerit>>
+export const getMeritsForCharacter: gMFC = createCachedSelector(
   [getSpecificCharacter, getMerits],
   (character, merits) =>
     character.merits.map(m => merits[m]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
-export const getMeritNamesForCharacter = (state: Object, id: number) =>
-  // $FlowFixMe
+export const getMeritNamesForCharacter = (
+  state: WrappedEntityState,
+  id: number
+): Array<string> =>
   getMeritsForCharacter(state, id)
     .map(m => m.merit_name.toLowerCase() + m.rating)
     .sort()
 
-// $FlowFixMe
-export const getEvokableMeritsForCharacter = createSelector(
+export const getEvokableMeritsForCharacter: gMFC = createSelector(
   [getMeritsForCharacter],
   merits =>
     merits.filter(
@@ -55,27 +64,28 @@ export const getEvokableMeritsForCharacter = createSelector(
 )
 
 const getWeapons = state => entities(state).weapons
-// $FlowFixMe
-export const getWeaponsForCharacter = createCachedSelector(
+type gWFC = CachedEntitySelector<Array<fullWeapon>>
+export const getWeaponsForCharacter: gWFC = createCachedSelector(
   [getSpecificCharacter, getWeapons],
   (character, weapons) =>
     character.weapons.map(w => weapons[w]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
 const getSpells = state => entities(state).spells
-// $FlowFixMe
-export const getSpellsForCharacter = createCachedSelector(
+type gSFC = CachedEntitySelector<Array<Spell>>
+export const getSpellsForCharacter: gSFC = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>
     character.spells.map(s => spells[s]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
-export const getControlSpellsForCharacter = (state: Object, id: number) =>
-  // $FlowFixMe
-  getSpellsForCharacter(state, id).filter(s => s.control)
+export const getControlSpellsForCharacter = (
+  state: WrappedEntityState,
+  id: number
+): Array<Spell> => getSpellsForCharacter(state, id).filter(s => s.control)
 
-// $FlowFixMe
-export const getPoisonsForCharacter = createCachedSelector(
+type gPFC = CachedEntitySelector<Array<Poison>>
+export const getPoisonsForCharacter: gPFC = createCachedSelector(
   [getSpecificCharacter, getPoisons],
   (character, poisons) =>
     character.poisons.map(p => poisons[p]).sort(sortOrderSort)

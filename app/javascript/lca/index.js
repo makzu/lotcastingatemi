@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable no-undef */
 import { createBrowserHistory } from 'history'
 import React from 'react'
@@ -37,5 +38,6 @@ store.dispatch(lcaInit())
 
 ReactDOM.render(
   <RootContainer store={store} history={history} />,
+  // $FlowThisIsOkayISwear
   document.getElementById('root')
 )

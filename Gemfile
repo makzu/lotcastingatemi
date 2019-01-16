@@ -60,6 +60,7 @@ end
 gem 'barnes'
 
 # logging
+gem 'colorize'
 gem 'lograge'
 
 group :development, :test, :cypress do

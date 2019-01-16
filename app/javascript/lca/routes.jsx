@@ -76,9 +76,8 @@ const HelpPage = lazy(() =>
 
 export default function Routes() {
   return (
-    <Switch>
-      <Suspense fallback={<Placeholder />}>
-        <Route exact path="/" component={WelcomePage} />
+    <Suspense fallback={<Placeholder />}>
+      <Switch>
         <Route path="/settings" component={SettingsPage} />
         <Route path="/deleted" component={GoodbyePage} />
         <Route path="/resources" component={ResourcesPage} />
@@ -127,7 +126,9 @@ export default function Routes() {
           component={BattlegroupEditor}
         />
         <Route path="/battlegroups/:bgId" component={BattlegroupSheet} />
-      </Suspense>
-    </Switch>
+
+        <Route path="/" component={WelcomePage} />
+      </Switch>
+    </Suspense>
   )
 }

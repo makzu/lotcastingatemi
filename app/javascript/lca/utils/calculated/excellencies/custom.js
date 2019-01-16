@@ -80,7 +80,6 @@ export default (
   }
 
   if (!staticRating || exArray.includes('nohalf')) return result
-  if (exArray.includes('roundup') || exArray.includes('dragonblood'))
-    return Math.ceil(result / 2)
+  if (exArray.includes('roundup')) return Math.ceil(result / 2)
   else return Math.floor(result / 2)
 }

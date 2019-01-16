@@ -47,7 +47,7 @@ class ExcellencyEditor extends Component<
         Solar (Attribute + Ability)
       </MenuItem>,
       <MenuItem key="dragonblood" value="dragonblood">
-        Dragon-Blooded (Attribute + Specialty, static ratings round up)
+        Dragon-Blooded (Attribute + Specialty)
       </MenuItem>,
       <Divider key="div1" style={{ margin: '0.125em 0' }} />,
       <MenuItem key="attribute" value="attribute">

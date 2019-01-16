@@ -22,9 +22,12 @@ import type {
   specialty,
 } from '../flow-types'
 
-export const attr = (character: Character, attribute: string) =>
-  attribute === 'essence' ? character.essence : character[`attr_${attribute}`]
-export const abil = (character: Character, ability: string) => {
+export const attr = (character: Character, attribute: string): number =>
+  attribute === 'essence'
+    ? character.essence
+    : character[`attr_${attribute}`] || 0
+
+export const abil = (character: Character, ability: string): number => {
   let abil
   if (ability.startsWith('martial arts')) {
     abil = character.abil_martial_arts.find(
@@ -42,7 +45,7 @@ export const abil = (character: Character, ability: string) => {
     )
     return abil != undefined ? abil.rating : 0
   } else {
-    return character[`abil_${ability}`]
+    return character[`abil_${ability}`] || 0
   }
 }
 

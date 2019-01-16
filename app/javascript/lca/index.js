@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable no-undef */
 require('typeface-roboto')
 
@@ -18,5 +19,6 @@ store.dispatch(lcaInit())
 
 ReactDOM.render(
   <RootContainer store={store} history={history} />,
+  // $FlowThisIsOkayISwear
   document.getElementById('root')
 )

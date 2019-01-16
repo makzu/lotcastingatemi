@@ -1,13 +1,16 @@
 // @flow
 import { RSAA } from 'redux-api-middleware'
 
-export const nonAuthHeaders = () => {
-  return new Headers({ 'Content-Type': 'application/json' })
+const headersBase = {
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
 }
+
+export const nonAuthHeaders = () => new Headers(headersBase)
 export const authHeaders = () => {
   return new Headers({
-    'Content-Type': 'application/json',
-    AUTHORIZATION: `Bearer ${(localStorage: Object).jwt}`,
+    ...headersBase,
+    AUTHORIZATION: `Bearer ${localStorage.getItem('jwt') || ''}`,
   })
 }
 

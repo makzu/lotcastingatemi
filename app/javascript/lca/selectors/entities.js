@@ -4,7 +4,7 @@ import { sortOrderSort } from 'utils'
 import type { EntityState, WrappedEntityState } from 'ducks/entities'
 import type { Player, Character, fullQc, Battlegroup } from 'utils/flow-types'
 
-export type entitySelector<T> = OutputSelector<WrappedEntityState, number, T>
+export type entitySelector<T> = OutputSelector<WrappedEntityState, any, T>
 type CharacterListSelector = entitySelector<Array<Character>>
 type QcListSelector = entitySelector<Array<fullQc>>
 type BgListSelector = entitySelector<Array<Battlegroup>>

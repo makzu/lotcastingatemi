@@ -22,14 +22,15 @@ export const dbExcellencyAbils = (
   return excellencies
 }
 
-// Ability + 1 with relevant specialty, round up for static ratings
+// Ability + 1 with relevant specialty
+// DBs apparently round down now: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1275486#post1275486
 export default (
   character: Character,
   attribute: string,
   ability: string,
   staticRating: boolean = false
 ) =>
-  Math.ceil(
+  Math.floor(
     (abil(character, ability) +
       (specialtiesFor(character, ability).length > 0 ? 1 : 0)) /
       (staticRating ? 2 : 1)

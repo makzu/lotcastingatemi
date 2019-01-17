@@ -72,6 +72,7 @@
     "style-loader": "^0.23.1",
     "typeface-roboto": "^0.0.54",
     "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
     "webpack-manifest-plugin": "^2.0.0",
     "webpack-merge": "^4.2.1"
   },
@@ -98,7 +99,6 @@
     "react-test-renderer": "^16.7.0",
     "redux-mock-store": "^1.2.1",
     "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
   },
   "scripts": {

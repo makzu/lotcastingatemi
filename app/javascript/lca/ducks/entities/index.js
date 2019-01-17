@@ -116,9 +116,6 @@ export function EntityReducer(
     case LOGOUT:
     case PLY_DESTROY_SUCCESS:
       return defaultState
-    case 'persist/REHYDRATE':
-      // Replace default state with rehydrated state
-      return action.payload.entities.current
   }
 
   return state

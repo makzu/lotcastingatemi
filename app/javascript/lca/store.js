@@ -3,8 +3,6 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { apiMiddleware } from 'redux-api-middleware'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { offline } from '@redux-offline/redux-offline'
-import offlineConfig from '@redux-offline/redux-offline/lib/defaults'
 
 import authTokenMiddleware from './middleware/authTokenMiddleware.js'
 import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
@@ -25,14 +23,7 @@ export default function configureStore(preloadedState) {
   ]
   const middlewareEnhancer = applyMiddleware(...middlewares)
 
-  const lcaOfflineConfig = {
-    ...offlineConfig,
-    persistOptions: {
-      whitelist: ['entities'],
-    },
-  }
-
-  const enhancers = [middlewareEnhancer, offline(lcaOfflineConfig)]
+  const enhancers = [middlewareEnhancer]
 
   const makeEnhancer = isProduction() ? compose : composeWithDevTools
   const composedEnhancers = makeEnhancer(...enhancers)

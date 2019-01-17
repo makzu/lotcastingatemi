@@ -6,12 +6,12 @@ import * as schemas from './_schemas.js'
 import { callApi } from 'utils/api.js'
 import type { EntityState } from './'
 
-const QC_CREATE = 'lca/qc/CREATE'
+export const QC_CREATE = 'lca/qc/CREATE'
 export const QC_CREATE_SUCCESS = 'lca/qc/CREATE_SUCCESS'
-const QC_CREATE_FAILURE = 'lca/qc/CREATE_FAILURE'
-const QC_DUPE = 'lca/qc/DUPE'
+export const QC_CREATE_FAILURE = 'lca/qc/CREATE_FAILURE'
+export const QC_DUPE = 'lca/qc/DUPE'
 export const QC_DUPE_SUCCESS = 'lca/qc/DUPE_SUCCESS'
-const QC_DUPE_FAILURE = 'lca/qc/DUPE_FAILURE'
+export const QC_DUPE_FAILURE = 'lca/qc/DUPE_FAILURE'
 const QC_FETCH = 'lca/qc/FETCH'
 export const QC_FETCH_SUCCESS = 'lca/qc/FETCH_SUCCESS'
 const QC_FETCH_FAILURE = 'lca/qc/FETCH_FAILURE'
@@ -59,12 +59,19 @@ export default (state: EntityState, action: Object) => {
   return state
 }
 
+const massageQcPayload = (action, state, res) =>
+  getJSON(res).then(json => normalize(json, schemas.qcs))
+
 export function createQc(qc: Object) {
   return callApi({
     endpoint: '/api/v1/qcs',
     method: 'POST',
     body: JSON.stringify({ qc: qc }),
-    types: [QC_CREATE, QC_CREATE_SUCCESS, QC_CREATE_FAILURE],
+    types: [
+      QC_CREATE,
+      { type: QC_CREATE_SUCCESS, payload: massageQcPayload },
+      QC_CREATE_FAILURE,
+    ],
   })
 }
 
@@ -72,7 +79,11 @@ export function duplicateQc(id: number) {
   return callApi({
     endpoint: `/api/v1/qcs/${id}/duplicate`,
     method: 'POST',
-    types: [QC_DUPE, QC_DUPE_SUCCESS, QC_DUPE_FAILURE],
+    types: [
+      QC_DUPE,
+      { type: QC_DUPE_SUCCESS, payload: massageQcPayload },
+      QC_DUPE_FAILURE,
+    ],
   })
 }
 
@@ -84,9 +95,7 @@ export function fetchQc(id: number) {
       QC_FETCH,
       {
         type: QC_FETCH_SUCCESS,
-        payload: (action, state, res) => {
-          return getJSON(res).then(json => normalize(json, schemas.qcs))
-        },
+        payload: massageQcPayload,
       },
       QC_FETCH_FAILURE,
     ],

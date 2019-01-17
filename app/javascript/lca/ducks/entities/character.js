@@ -11,9 +11,9 @@ import type { Character } from 'utils/flow-types'
 export const CHA_CREATE = 'lca/character/CREATE'
 export const CHA_CREATE_SUCCESS = 'lca/character/CREATE_SUCCESS'
 export const CHA_CREATE_FAILURE = 'lca/character/CREATE_FAILURE'
-export const CHA_DUPE = 'lca/cahracter/DUPE'
-export const CHA_DUPE_SUCCESS = 'lca/cahracter/DUPE_SUCCESS'
-export const CHA_DUPE_FAILURE = 'lca/cahracter/DUPE_FAILURE'
+export const CHA_DUPE = 'lca/character/DUPE'
+export const CHA_DUPE_SUCCESS = 'lca/character/DUPE_SUCCESS'
+export const CHA_DUPE_FAILURE = 'lca/character/DUPE_FAILURE'
 export const CHA_FETCH = 'lca/character/FETCH'
 export const CHA_FETCH_SUCCESS = 'lca/character/FETCH_SUCCESS'
 export const CHA_FETCH_ALL_SUCCESS = 'lca/character/FETCH_ALL_SUCCESS'
@@ -63,12 +63,19 @@ export default (state: EntityState, action: Object) => {
   return state
 }
 
+const massageCharacterPayload = (action, state, res) =>
+  getJSON(res).then(json => normalize(json, schemas.characters))
+
 export function createCharacter(char: Character) {
   return callApi({
     endpoint: '/api/v1/characters',
     method: 'POST',
     body: JSON.stringify({ character: char }),
-    types: [CHA_CREATE, CHA_CREATE_SUCCESS, CHA_CREATE_FAILURE],
+    types: [
+      CHA_CREATE,
+      { type: CHA_CREATE_SUCCESS, payload: massageCharacterPayload },
+      CHA_CREATE_FAILURE,
+    ],
   })
 }
 
@@ -76,7 +83,11 @@ export function duplicateCharacter(id: number) {
   return callApi({
     endpoint: `/api/v1/characters/${id}/duplicate`,
     method: 'POST',
-    types: [CHA_DUPE, CHA_DUPE_SUCCESS, CHA_DUPE_FAILURE],
+    types: [
+      CHA_DUPE,
+      { type: CHA_DUPE_SUCCESS, payload: massageCharacterPayload },
+      CHA_DUPE_FAILURE,
+    ],
   })
 }
 
@@ -86,12 +97,7 @@ export function fetchCharacter(id: number) {
     method: 'GET',
     types: [
       CHA_FETCH,
-      {
-        type: CHA_FETCH_SUCCESS,
-        payload: (action, state, res) => {
-          return getJSON(res).then(json => normalize(json, schemas.characters))
-        },
-      },
+      { type: CHA_FETCH_SUCCESS, payload: massageCharacterPayload },
       CHA_FETCH_FAILURE,
     ],
   })

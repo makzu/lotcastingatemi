@@ -6,9 +6,24 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
 import { mergeStateWithNormalizedEntities, type EntityState } from '.'
 import * as schemas from './_schemas.js'
-import { CHA_FETCH_SUCCESS, CHA_FETCH_ALL_SUCCESS } from './character.js'
-import { QC_FETCH_SUCCESS, QC_FETCH_ALL_SUCCESS } from './qc.js'
-import { BG_FETCH_ALL_SUCCESS } from './battlegroup.js'
+import {
+  CHA_CREATE_SUCCESS,
+  CHA_DUPE_SUCCESS,
+  CHA_FETCH_SUCCESS,
+  CHA_FETCH_ALL_SUCCESS,
+} from './character.js'
+import {
+  QC_CREATE_SUCCESS,
+  QC_DUPE_SUCCESS,
+  QC_FETCH_SUCCESS,
+  QC_FETCH_ALL_SUCCESS,
+} from './qc.js'
+import {
+  BG_CREATE_SUCCESS,
+  BG_DUPE_SUCCESS,
+  BG_CREATE_FROM_QC_SUCCESS,
+  BG_FETCH_ALL_SUCCESS,
+} from './battlegroup.js'
 import { callApi } from 'utils/api.js'
 
 export const CHN_FETCH = 'lca/chronicle/FETCH'
@@ -70,10 +85,17 @@ export default function reducer(state: EntityState, action: Object) {
     case CHN_FETCH_SUCCESS:
     case INVITE_CODE_UPDATE_SUCCESS:
     case CHN_ADD_THING_SUCCESS:
+    case CHA_CREATE_SUCCESS:
+    case CHA_DUPE_SUCCESS:
     case CHA_FETCH_SUCCESS:
     case CHA_FETCH_ALL_SUCCESS:
+    case QC_CREATE_SUCCESS:
+    case QC_DUPE_SUCCESS:
     case QC_FETCH_SUCCESS:
     case QC_FETCH_ALL_SUCCESS:
+    case BG_CREATE_SUCCESS:
+    case BG_CREATE_FROM_QC_SUCCESS:
+    case BG_DUPE_SUCCESS:
     case BG_FETCH_ALL_SUCCESS:
       _entities = action.payload.entities
       return mergeStateWithNormalizedEntities(state, _entities)

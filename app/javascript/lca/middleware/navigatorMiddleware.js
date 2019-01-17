@@ -27,16 +27,16 @@ const Navigator = (store: Object) => (next: Function) => (action: Object) => {
       break
     case CHA_CREATE_SUCCESS:
     case CHA_DUPE_SUCCESS:
-      history.push(`/characters/${action.payload.id}`)
+      history.push(`/characters/${action.payload.result}`)
       break
     case BG_CREATE_SUCCESS:
     case BG_CREATE_FROM_QC_SUCCESS:
     case BG_DUPE_SUCCESS:
-      history.push(`/battlegroups/${action.payload.id}`)
+      history.push(`/battlegroups/${action.payload.result}`)
       break
     case QC_CREATE_SUCCESS:
     case QC_DUPE_SUCCESS:
-      history.push(`/qcs/${action.payload.id}`)
+      history.push(`/qcs/${action.payload.result}`)
       break
     case PLY_DESTROY_SUCCESS:
       history.push('/deleted')

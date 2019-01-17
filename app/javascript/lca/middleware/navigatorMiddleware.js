@@ -1,5 +1,6 @@
 // @flow
 import {
+  CABLE_RECEIVED,
   CHN_JOIN_SUCCESS,
   CHN_CREATE_SUCCESS,
   CHA_CREATE_SUCCESS,
@@ -39,6 +40,15 @@ const Navigator = (store: Object) => (next: Function) => (action: Object) => {
       break
     case PLY_DESTROY_SUCCESS:
       history.push('/deleted')
+      break
+    case CABLE_RECEIVED:
+      if (
+        action.payload.event === 'destroy' &&
+        window.location.pathname.startsWith(
+          `/${action.payload.type}/${action.payload.id}`
+        )
+      )
+        history.push('/content')
       break
   }
 

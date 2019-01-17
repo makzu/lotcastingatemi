@@ -121,11 +121,13 @@ export function EntityReducer(
   return state
 }
 
+export const CABLE_RECEIVED = 'lca/cable/RECEIVED'
+
 const CableReducer = (state: EntityState, action: Object) => {
   // TODO: Make this more readable
   let { payload } = action
 
-  if (action.type == 'lca/cable/RECEIVED') {
+  if (action.type === 'CABLE_RECEIVED') {
     switch (payload.event) {
       case 'create':
         return handleCreateAction(state, payload)

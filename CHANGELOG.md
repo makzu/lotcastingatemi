@@ -1,11 +1,16 @@
-## v72
+## v73
 
 ###### _Not yet released_
+
+## v72
+
+###### _Jan 17, 2019_
 
 - Added a basic Help section
 - Short blurbs will appear in the Merit editor for Merits that have some sort of effect on calculations
 - The Bio page for Characters now includes XP totals at the bottom of the xp log
 - Dragon-Blooded Excellency caps now round down for static ratings as per recent [errata](http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1275486#post1275486). Custom exalts still have the option to round up dice caps.
+- Fixed some issues with characters/qcs/bgs not loading after duplicating
 
 ## v71
 

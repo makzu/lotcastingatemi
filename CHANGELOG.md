@@ -1,6 +1,12 @@
-## v75
+## v76
 
 ###### _Not yet released_
+
+## v75
+
+###### _Jan 18, 2019_
+
+- Hotfix for newly-created Charms, etc not appearing until a full refresh (Thanks Nirodha)
 
 ## v74
 

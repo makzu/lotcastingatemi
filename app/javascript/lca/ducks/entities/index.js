@@ -127,7 +127,7 @@ const CableReducer = (state: EntityState, action: Object) => {
   // TODO: Make this more readable
   let { payload } = action
 
-  if (action.type === 'CABLE_RECEIVED') {
+  if (action.type === CABLE_RECEIVED) {
     switch (payload.event) {
       case 'create':
         return handleCreateAction(state, payload)

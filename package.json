@@ -21,7 +21,7 @@
     "@babel/preset-react": "^7.0.0",
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
-    "@rails/webpacker": "^4.0.0-rc.2",
+    "@rails/webpacker": "^4.0.0-rc.5",
     "autoprefixer": "^9.4.5",
     "babel-loader": "^8.0.5",
     "babel-plugin-lodash": "^3.3.4",
@@ -71,7 +71,7 @@
     "scroll-to-element": "^2.0.0",
     "style-loader": "^0.23.1",
     "typeface-roboto": "^0.0.54",
-    "webpack": "^4.28.4",
+    "webpack": "^4.29.0",
     "webpack-assets-manifest": "^3.1.1",
     "webpack-manifest-plugin": "^2.0.0",
     "webpack-merge": "^4.2.1"

@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Rails 5.1+ for Webpacker
 gem 'rails', '~> 5.2.2'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '>= 4.0.0.rc.2'
+gem 'webpacker', '>= 4.0.0.rc.5'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'

@@ -23,13 +23,14 @@
 
   <body>
     <%= yield %>
-    <%= javascript_pack_tag 'lca' %>
-    <%= stylesheet_pack_tag 'lca' %>
 
     <noscript style="font-family: 'Roboto', 'Helvetica', 'Arial', 'sans-serif'; color: rgba(0,0,0,0.87)">
       <p>
         Lot-Casting Atemi is built using React.js and so requires JavaScript to function.
       </p>
     </noscript>
+
+    <%= javascript_packs_with_chunks_tag 'lca' %>
+    <%= stylesheet_packs_with_chunks_tag 'lca' %>
   </body>
 </html>

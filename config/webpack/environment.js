@@ -2,18 +2,13 @@
 const { environment } = require('@rails/webpacker')
 
 environment.resolvedModules.append('vendor', 'vendor')
-const splitChunks = {
+
+environment.splitChunks(config => ({
+  ...config,
   output: {
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
-  optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
-}
-environment.config.merge(splitChunks)
+}))
 
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 environment.plugins.insert(

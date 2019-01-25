@@ -5,7 +5,7 @@ module Api
     # rubocop:disable Metrics/ClassLength
     class ChroniclesController < Api::V1::BaseController
       before_action :authenticate_player
-      before_action :set_chronicle, except: %i[index create join]
+      skip_before_action :setup_resource, only: %i[join]
       before_action :set_chronicle_from_token, only: %i[join]
 
       def index
@@ -22,7 +22,7 @@ module Api
       end
 
       def create
-        @chronicle = Chronicle.new(chronicle_params)
+        @chronicle = Chronicle.new(resource_params)
         @chronicle.st ||= current_player
         authorize @chronicle
 
@@ -126,25 +126,7 @@ module Api
         render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
       end
 
-      def destroy
-        authorize @chronicle
-        render json: @chronicle.destroy
-      end
-
-      def update
-        authorize @chronicle
-        if @chronicle.update(chronicle_params)
-          render json: @chronicle, include: []
-        else
-          render json: @chronicle.errors.details, status: :bad_request
-        end
-      end
-
       private
-
-      def set_chronicle
-        @chronicle = policy_scope(Chronicle).includes(include_hash).find(params[:id])
-      end
 
       def set_chronicle_from_token
         @chronicle = Chronicle.includes(include_hash).find_by!(invite_code: params[:invite_code])
@@ -155,10 +137,6 @@ module Api
         raise ActiveRecord::NotAuthorized unless # TODO: use a better error
           @chronicle.st == char.player ||
           @chronicle.players.include?(char.player)
-      end
-
-      def chronicle_params
-        params.require(:chronicle).permit!
       end
 
       def include_hash

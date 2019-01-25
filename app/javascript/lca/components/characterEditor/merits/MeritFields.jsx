@@ -33,7 +33,7 @@ class MeritFields extends Component<FieldsProps> {
 
     if (isEqual(merit[name], value)) return
 
-    this.props.onUpdate(merit.id, merit.character_id, name, value)
+    this.props.onUpdate(merit.id, merit.character_id, { [name]: value })
   }
 
   handleCheck = (e: SyntheticInputEvent<>) => {
@@ -41,7 +41,7 @@ class MeritFields extends Component<FieldsProps> {
     const { merit } = this.props
     const value = !merit[name]
 
-    this.props.onUpdate(merit.id, merit.character_id, name, value)
+    this.props.onUpdate(merit.id, merit.character_id, { [name]: value })
   }
 
   handleRemove = () => {

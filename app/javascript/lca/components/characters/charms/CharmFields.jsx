@@ -55,7 +55,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
 
     if (isEqual(charm[name], value)) return
 
-    this.props.onUpdate(charm.id, charm.character_id, name, value)
+    this.props.onUpdate(charm.id, charm.character_id, { [name]: value })
   }
 
   handleRemove = () => {

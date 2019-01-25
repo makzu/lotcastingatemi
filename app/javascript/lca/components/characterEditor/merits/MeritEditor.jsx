@@ -46,8 +46,8 @@ type Props = ExposedProps & {
 }
 
 class MeritEditor extends Component<Props> {
-  handleUpdate = (id, charId, trait, value) => {
-    this.props.updateMerit(id, charId, trait, value)
+  handleUpdate = (id, charId, trait) => {
+    this.props.updateMerit(id, charId, trait)
   }
 
   handleAdd = () => {
@@ -63,12 +63,9 @@ class MeritEditor extends Component<Props> {
     const meritA = this.props.merits[oldIndex]
     const meritB = this.props.merits[newIndex]
     const offset = meritA.sort_order > meritB.sort_order ? -1 : 1
-    this.props.updateMerit(
-      meritA.id,
-      this.props.character.id,
-      'sort_order',
-      meritB.sort_order + offset
-    )
+    this.props.updateMerit(meritA.id, this.props.character.id, {
+      sort_order: meritB.sort_order + offset,
+    })
   }
 
   render() {

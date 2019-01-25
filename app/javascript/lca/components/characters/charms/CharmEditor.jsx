@@ -105,12 +105,12 @@ class CharmEditor extends Component<Props, State> {
       this.setState({ openSpell: expanded ? charm : null })
   }
 
-  handleUpdate = (id, charId, trait, value) => {
-    this.props.updateCharm(id, charId, trait, value)
+  handleUpdate = (id, charId, trait) => {
+    this.props.updateCharm(id, charId, trait)
   }
 
-  handleUpdateSpell = (id, charId, trait, value) => {
-    this.props.updateSpell(id, charId, trait, value)
+  handleUpdateSpell = (id, charId, trait) => {
+    this.props.updateSpell(id, charId, trait)
   }
 
   handleAddNative = () => {
@@ -130,19 +130,25 @@ class CharmEditor extends Component<Props, State> {
       default:
         type = ''
     }
-    this.props.createCharm(this.props.character.id, type)
+    this.props.createCharm(this.props.character.id, { type })
   }
 
   handleAddMA = () => {
-    this.props.createCharm(this.props.character.id, 'Charms::MartialArtsCharm')
+    this.props.createCharm(this.props.character.id, {
+      type: 'Charms::MartialArtsCharm',
+    })
   }
 
   handleAddEvocation = () => {
-    this.props.createCharm(this.props.character.id, 'Charms::Evocation')
+    this.props.createCharm(this.props.character.id, {
+      type: 'Charms::Evocation',
+    })
   }
 
   handleAddSpirit = () => {
-    this.props.createCharm(this.props.character.id, 'Charms::SpiritCharm')
+    this.props.createCharm(this.props.character.id, {
+      type: 'Charms::SpiritCharm',
+    })
   }
 
   handleAddSpell = () => {
@@ -247,7 +253,7 @@ class CharmEditor extends Component<Props, State> {
     const charmA = charms[oldIndex]
     const charmB = charms[newIndex]
     const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
-    update(charmA.id, charId, 'sort_order', charmB.sort_order + offset)
+    update(charmA.id, charId, { sort_order: charmB.sort_order + offset })
   }
 
   render() {

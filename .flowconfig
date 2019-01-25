@@ -11,6 +11,8 @@ flow-typed
 module.file_ext=.md
 module.file_ext=.js
 module.file_ext=.jsx
+module.file_ext=.ts
+module.file_ext=.tsx
 module.name_mapper='^components$' -> '<PROJECT_ROOT>/app/javascript/lca/components/'
 module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/app/javascript/lca/components/\1'
 module.name_mapper='^containers$' -> '<PROJECT_ROOT>/app/javascript/lca/containers/'

@@ -6,6 +6,7 @@ require 'colorized_string'
 # https://dev.to/rhymes/logging-rails-requests-with-structure-and-colors--ing
 class LcaColorLog < Lograge::Formatters::KeyValue
   FIELDS_COLORS = {
+    default:    :cyan,
     method:     :red,
     path:       :red,
     format:     :red,
@@ -29,8 +30,12 @@ class LcaColorLog < Lograge::Formatters::KeyValue
   def format(key, value)
     line = super(key, value)
 
-    color = FIELDS_COLORS[key] || :default
-    ColorizedString.new(line).public_send(color)
+    color = FIELDS_COLORS[key] || FIELDS_COLORS[:default]
+    if key == :error
+      ColorizedString.new(line).white.on_red
+    else
+      ColorizedString.new(line).public_send(color)
+    end
   end
 end
 

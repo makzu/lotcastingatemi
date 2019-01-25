@@ -19,16 +19,16 @@ type AppState = {
 }
 
 export const isAuthFailure = (action: Object) =>
-  action.error && action.payload.status == 401
+  action.error && (action.payload || {}).status == 401
 export const isForbidden = (action: Object) =>
-  action.error && action.payload.status == 403
+  action.error && (action.payload || {}).status == 403
 export const is404Error = (action: Object) =>
-  action.error && action.payload.status == 404
+  action.error && (action.payload || {}).status == 404
 
 export default function AppReducer(
   state: AppState = defaultState,
   action: Object
-) {
+): AppState {
   if (isAuthFailure(action) || isForbidden(action) || is404Error(action)) {
     return {
       ...state,
@@ -120,7 +120,7 @@ export const switchTheme = (theme: string) => ({
 
 export const parseError = (action: Object): string => {
   if (action.payload === undefined || action.payload.response === undefined) {
-    console.log('Easily Overlooked Error Method') // eslint-disable-line no-console
+    console.log('Easily Overlooked Error Method', action) // eslint-disable-line no-console
     return 'Error'
   }
   if (action.payload.status === 500)

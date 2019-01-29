@@ -3,39 +3,37 @@
 import { omit, merge } from 'lodash'
 import { normalize } from 'normalizr'
 
-export * from './player.js'
-export * from './chronicle.js'
-export * from './character.js'
-export * from './merit.ts'
-export * from './weapon.ts'
-export * from './charm.ts'
-export * from './spell.ts'
+export * from './player'
+export * from './chronicle'
+export * from './character'
+export * from './merit'
+export * from './weapon'
+export * from './charm'
+export * from './spell'
 
-export * from './qc.js'
-export * from './qc_attack.ts'
-export * from './qc_merit.ts'
-export * from './qc_charm.ts'
+export * from './qc'
+export * from './qc_attack'
+export * from './qc_merit'
+export * from './qc_charm'
 
-export * from './battlegroup.js'
-export * from './combat_actor.js'
+export * from './battlegroup'
+export * from './combat_actor'
 
-import * as schemas from './_schemas.js'
-import PlayerReducer, {
-  PLY_DESTROY_SUCCESS,
-  FETCH_SUCCESS as PLY_FETCH_SUCCESS,
-} from './player.js'
-import ChronicleReducer from './chronicle.js'
-import CharacterReducer from './character.js'
-import MeritReducer from './merit.ts'
-import WeaponReducer from './weapon.ts'
-import SpellReducer from './spell.ts'
-import CharmReducer from './charm.ts'
-import QcReducer from './qc.js'
-import QcAttackReducer from './qc_attack.ts'
-import QcMeritReducer from './qc_merit.ts'
-import QcCharmReducer from './qc_charm.ts'
-import BattlegroupReducer from './battlegroup.js'
-import CombatActorReducer from './combat_actor.js'
+import * as schemas from './_schemas'
+import PlayerReducer from './player'
+import ChronicleReducer from './chronicle'
+import CharacterReducer from './character'
+import MeritReducer from './merit'
+import WeaponReducer from './weapon'
+import SpellReducer from './spell'
+import CharmReducer from './charm'
+import QcReducer from './qc'
+import QcAttackReducer from './qc_attack'
+import QcMeritReducer from './qc_merit'
+import QcCharmReducer from './qc_charm'
+import BattlegroupReducer from './battlegroup'
+import CombatActorReducer from './combat_actor'
+import { crudAction } from './_lib'
 import { LOGOUT } from '../session.js'
 import type {
   Character,
@@ -111,10 +109,10 @@ export function EntityReducer(
   action: Object
 ) {
   switch (action.type) {
-    case PLY_FETCH_SUCCESS:
+    case crudAction('player', 'FETCH').success.toString():
       return { ...state, currentPlayer: action.payload.result }
     case LOGOUT:
-    case PLY_DESTROY_SUCCESS:
+    case crudAction('player', 'DESTROY').success.toString():
       return defaultState
   }
 

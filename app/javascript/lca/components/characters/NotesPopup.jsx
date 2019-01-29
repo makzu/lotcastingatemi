@@ -62,7 +62,7 @@ class NotesPopup extends React.Component<Props, State> {
 
     if (isEqual(character[name], value)) return
 
-    this.props.updateCharacter(character.id, name, value)
+    this.props.updateCharacter(character.id, { [name]: value })
   }
 
   render() {

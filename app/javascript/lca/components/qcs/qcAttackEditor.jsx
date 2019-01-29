@@ -37,7 +37,7 @@ class QcAttackEditor extends React.Component<Props> {
   }
 
   handleAdd = () => {
-    this.props.createQcAttack(this.props.qc.id, this.props.type)
+    this.props.createQcAttack(this.props.qc.id, { parent: this.props.type })
   }
 
   handleRemove = id => {

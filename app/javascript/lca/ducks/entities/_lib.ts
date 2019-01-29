@@ -1,39 +1,11 @@
+import { normalize, schema } from 'normalizr'
+import { getJSON } from 'redux-api-middleware'
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+
 import { Action } from 'redux'
-import { PayloadAction } from 'redux-starter-kit'
+import { ActionFunctionAny, createAction } from 'redux-actions'
 
-interface PayloadMetaAction<P = any, M = any, T extends string = string>
-  extends PayloadAction<T> {
-  meta: M
-}
-interface PayloadMetaActionCreator<
-  P = any,
-  M = any,
-  T extends string = string
-> {
-  (): Action<T>
-  (payload: P, meta: M): PayloadMetaAction<P, M, T>
-  (payload: P): PayloadAction<P, T>
-}
-
-export function createActionWithMeta<
-  P = any,
-  M = any,
-  T extends string = string
->(type: T): PayloadMetaActionCreator<P> {
-  function actionCreator(): Action<T>
-  function actionCreator(payload: P): PayloadAction<P, T>
-  function actionCreator(payload: P, meta: M): PayloadMetaAction<P, M, T>
-  function actionCreator(
-    payload?: P,
-    meta?: M
-  ): Action<T> | PayloadAction<P, T> | PayloadMetaAction<P, M, T> {
-    return { type, payload, meta }
-  }
-
-  actionCreator.toString = () => `${type}`
-
-  return actionCreator
-}
+import * as schemas from './_schemas'
 
 export type characterTraitTypes =
   | 'charm'
@@ -44,12 +16,119 @@ export type characterTraitTypes =
   | 'qc_attack'
   | 'qc_charm'
   | 'qc_merit'
-type entityTypes = characterTraitTypes
-type crudActions = 'CREATE' | 'DESTROY' | 'FETCH' | 'UPDATE'
 
+export type characterTypes =
+  | 'character'
+  | 'qc'
+  | 'battlegroup'
+  | 'combat_actor'
+  | 'chronicle'
+  | 'player'
+
+export type listTypes = 'characterList' | 'qcList' | 'battlegroupList'
+
+type entityTypes = characterTraitTypes | characterTypes
+type crudActions =
+  | 'CREATE'
+  | 'DUPLICATE'
+  | 'FETCH'
+  | 'FETCH_ALL'
+  | 'UPDATE'
+  | 'DESTROY'
+  | 'CHANGE_TYPE'
+  | 'CREATE_FROM_QC'
+  | 'JOIN'
+  | 'REMOVE_PLAYER'
+  | 'REGEN_CODE'
+  | 'ADD_THING'
+  | 'REMOVE_THING'
+
+export const VERBS = {
+  DELETE: 'DELETE',
+  GET: 'GET',
+  PATCH: 'PATCH',
+  POST: 'POST',
+  PUT: 'PUT',
+}
+
+export const API = 'lca-api'
+
+export const START = 'START'
+export const SUCCESS = 'SUCCESS'
+export const FAILURE = 'FAILURE'
+
+export interface CrudActionGroup {
+  start: ActionFunctionAny<Action>
+  success: ActionFunctionAny<Action>
+  failure: ActionFunctionAny<Action>
+}
+
+export const massagePayload = (type: entityTypes | listTypes | string) => (
+  {} = {},
+  {} = {},
+  res
+) => getJSON(res.clone()).then(json => normalize(json, schemas[type]))
+
+/** Shorthand for a standardized 'types' array for redux-api-middleware actions */
+export const standardTypes = (
+  type: entityTypes | listTypes | string,
+  action: CrudActionGroup,
+  payloadFunc = massagePayload(type),
+  metaFunc?: any
+) => [
+  action.start(null, metaFunc),
+  action.success(payloadFunc, metaFunc),
+  action.failure(),
+]
+
+export const optimisticTypes = (
+  type: entityTypes,
+  action: CrudActionGroup,
+  id: number,
+  transactionId: string,
+  trait?: any,
+  successPayload?: any,
+  charId?: number,
+  parent?: characterTypes
+) => [
+  action.start(trait, {
+    charId,
+    id,
+    optimistic: { id: transactionId, type: BEGIN },
+    parent,
+  }),
+  action.success(successPayload, {
+    charId,
+    id,
+    optimistic: { id: transactionId, type: COMMIT },
+    parent,
+  }),
+  action.failure(null, {
+    charId,
+    id,
+    optimistic: { id: transactionId, type: REVERT },
+    parent,
+  }),
+]
+
+const meta = (unused: any, m: any) => m
 // tslint:disable object-literal-sort-keys
-export const crudAction = (type: entityTypes, action: crudActions) => ({
-  start: createActionWithMeta(`lca/${type}/${action}_START`),
-  success: createActionWithMeta(`lca/${type}/${action}_SUCCESS`),
-  failure: createActionWithMeta(`lca/${type}/${action}_FAILURE`),
+export const crudAction = (
+  type: entityTypes,
+  action: crudActions
+): CrudActionGroup => ({
+  start: createAction(`${API}/${type}/${action}/${START}`, null, meta),
+  success: createAction(`${API}/${type}/${action}/${SUCCESS}`, null, meta),
+  failure: createAction(`${API}/${type}/${action}/${FAILURE}`, null, meta),
 })
+// tslint:enable *
+
+export const reducerUpdateAction = (type: string) => (state, action) => {
+  const { id } = action.meta
+
+  for (const key in action.payload) {
+    if (action.payload.hasOwnProperty(key)) {
+      state[type][id][key] = action.payload[key]
+    }
+  }
+}

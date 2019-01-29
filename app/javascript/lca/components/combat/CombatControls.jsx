@@ -8,11 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import RatingField from '../generic/RatingField.jsx'
 import InitiativeField from './InitiativeField.jsx'
-import {
-  updateCharacterMulti,
-  updateQcMulti,
-  updateBattlegroupMulti,
-} from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { canIEdit } from 'selectors'
 import type { withCombatInfo, Enhancer } from 'utils/flow-types'
 
@@ -34,12 +30,12 @@ class CombatControls extends Component<Props> {
 
   onCheck = () => {
     this.props.update(this.props.character.id, {
-      ['has_acted']: !this.props.character.has_acted,
+      has_acted: !this.props.character.has_acted,
     })
   }
 
   onClickSetOnslaught(value) {
-    this.props.update(this.props.character.id, { ['onslaught']: value })
+    this.props.update(this.props.character.id, { onslaught: value })
   }
 
   render() {
@@ -101,14 +97,14 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   let action
   switch (props.characterType) {
     case 'qc':
-      action = updateQcMulti
+      action = updateQc
       break
     case 'battlegroup':
-      action = updateBattlegroupMulti
+      action = updateBattlegroup
       break
     case 'character':
     default:
-      action = updateCharacterMulti
+      action = updateCharacter
   }
 
   return {

@@ -44,7 +44,7 @@ function PinButton(props: Props) {
   return (
     <MenuItem
       button
-      onClick={() => action(props.id, 'pinned', !props.isPinned)}
+      onClick={() => action(props.id, { pinned: !props.isPinned })}
     >
       <ListItemIcon>
         {props.isPinned ? <Bookmark /> : <BookmarkBorder />}

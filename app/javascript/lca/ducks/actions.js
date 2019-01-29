@@ -1,7 +1,6 @@
 // @flow
 export {
   updateCharacter,
-  updateCharacterMulti,
   changeCharacterType,
   createCharacter,
   duplicateCharacter,
@@ -28,7 +27,6 @@ export {
   removeThingFromChronicle,
   destroyChronicle,
   updateQc,
-  updateQcMulti,
   createQc,
   duplicateQc,
   destroyQc,
@@ -45,7 +43,6 @@ export {
   createBattlegroupFromQc,
   duplicateBattlegroup,
   updateBattlegroup,
-  updateBattlegroupMulti,
   destroyBattlegroup,
   fetchCurrentPlayer,
   updatePlayer,

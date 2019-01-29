@@ -26,7 +26,7 @@ import SorceryEditor from './editors/sorceryEditor.jsx'
 import WillpowerEditor from './editors/willpowerEditor.jsx'
 import WeaponEditor from './weapons/WeaponEditor.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
-import { updateCharacter, updateCharacterMulti } from 'ducks/actions.js'
+import { updateCharacter } from 'ducks/actions.js'
 import {
   getSpecificCharacter,
   getPoolsAndRatings,
@@ -39,7 +39,6 @@ type Props = {
   pools: Object,
   penalties: Object,
   updateCharacter: Function,
-  updateCharacterMulti: Function,
 }
 class CharacterEditor extends Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
@@ -48,7 +47,7 @@ class CharacterEditor extends Component<Props> {
 
     if (isEqual(character[name], value)) return
 
-    this.props.updateCharacter(character.id, name, value)
+    this.props.updateCharacter(character.id, { [name]: value })
   }
 
   handleCheck = (e: SyntheticInputEvent<>) => {
@@ -56,11 +55,11 @@ class CharacterEditor extends Component<Props> {
     const { character } = this.props
     const value = !character[name]
 
-    this.props.updateCharacter(character.id, name, value)
+    this.props.updateCharacter(character.id, { [name]: value })
   }
 
-  handleChangeMulti = (changes: Object) => {
-    this.props.updateCharacterMulti(this.props.character.id, changes)
+  handleChangeMulti = changes => {
+    this.props.updateCharacter(this.props.character.id, changes)
   }
 
   render() {
@@ -229,6 +228,6 @@ function mapStateToProps(state, props) {
 export default ProtectedComponent(
   connect(
     mapStateToProps,
-    { updateCharacter, updateCharacterMulti }
+    { updateCharacter }
   )(CharacterEditor)
 )

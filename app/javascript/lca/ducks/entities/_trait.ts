@@ -3,7 +3,14 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { createReducer } from 'redux-starter-kit'
 
 import { callApi } from 'utils/api.js'
-import { characterTraitTypes as entityTypes, crudAction } from './_lib'
+import {
+  characterTraitTypes as entityTypes,
+  crudAction,
+  optimisticTypes,
+  reducerUpdateAction,
+  standardTypes,
+  VERBS,
+} from './_lib'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
 
@@ -13,33 +20,29 @@ export const createTraitReducer = (
   parentType: parentTypes = 'character'
 ) => {
   const pluralType = entityType + 's'
-  const parent = parentType + 's'
   return createReducer(undefined, {
     /* Create actions */
     [crudAction(entityType, 'CREATE').success.toString()]: (state, action) => {
-      const { character_id, id } = action.payload
-      const assoc = traitAssoc(state, entityType, id)
+      const { id } = action.payload
+      const { charId } = action.meta
+      const parent = (action.meta.parent || parentType) + 's'
+      const assoc = traitAssoc(entityType, action.payload)
 
-      state[parent][character_id][assoc].push(id)
+      state[parent][charId][assoc].push(id)
       state[pluralType][id] = action.payload
     },
 
     /* Update actions */
     /* redux-optimistic-ui has us updating the state on _START rather than _SUCCESS */
-    [crudAction(entityType, 'UPDATE').start.toString()]: (state, action) => {
-      const { id } = action.meta
-
-      for (const key in action.payload) {
-        if (action.payload.hasOwnProperty(key)) {
-          state[pluralType][id][key] = action.payload[key]
-        }
-      }
-    },
+    [crudAction(entityType, 'UPDATE').start.toString()]: reducerUpdateAction(
+      pluralType
+    ),
 
     /* Destroy actions */
     [crudAction(entityType, 'DESTROY').start.toString()]: (state, action) => {
       const { charId, id } = action.meta
-      const assoc = traitAssoc(state, entityType, id)
+      const parent = (action.meta.parent || parentType) + 's'
+      const assoc = traitAssoc(entityType, state[pluralType][id])
 
       state[parent][charId][assoc] = state[parent][charId][assoc].filter(
         (w: number) => w !== id
@@ -61,6 +64,8 @@ export const createApiActions = (
   createTraitDestroyAction(entityType, parentType),
 ]
 
+const justGetJSON = (_0: any, _1: any, response) => getJSON(response)
+
 interface CreateActionOptions {
   type?: string
   parent?: parentTypes
@@ -73,20 +78,19 @@ const createTraitCreateAction = (
 ) => (charId: number, options: CreateActionOptions = {}): CreateAction => {
   const action = crudAction(entityType, 'CREATE')
   const parent = options.parent || parentType
-  const createObj = {}
+  let createObj = {}
   if (options.type) {
-    createObj[entityType].type = options.type
+    createObj = { [entityType]: { type: options.type } }
+  }
+  const metaObj: { [x: string]: string | number } = { charId }
+  if (options.parent) {
+    metaObj.parent = options.parent
   }
 
   return callApi({
     body: JSON.stringify(createObj),
     endpoint: `/api/v1/${parent}s/${charId}/${entityType}s`,
-    method: 'POST',
-    types: [
-      action.start(),
-      action.success((_0: any, _1: any, res: any) => getJSON(res)),
-      action.failure(),
-    ],
+    types: standardTypes(entityType, action, justGetJSON, metaObj),
   })
 }
 
@@ -113,21 +117,17 @@ const createTraitUpdateAction = (
   return callApi({
     body: JSON.stringify(trait),
     endpoint: `/api/v1/${parent}s/${charId}/${entityType}s/${id}`,
-    method: 'PATCH',
-    types: [
-      action.start(trait, {
-        id,
-        optimistic: { id: transactionId, type: BEGIN },
-      }),
-      action.success((_0: any, _1: any, res: object) => getJSON(res), {
-        id,
-        optimistic: { id: transactionId, type: COMMIT },
-      }),
-      action.failure(null, {
-        id,
-        optimistic: { id: transactionId, type: REVERT },
-      }),
-    ],
+    method: VERBS.PATCH,
+    types: optimisticTypes(
+      entityType,
+      action,
+      id,
+      transactionId,
+      trait,
+      justGetJSON,
+      charId,
+      parent
+    ),
   })
 }
 
@@ -145,33 +145,26 @@ const createTraitDestroyAction = (
   const action = crudAction(entityType, 'DESTROY')
   return callApi({
     endpoint: `/api/v1/${parent}s/${charId}/${entityType}s/${id}`,
-    method: 'DELETE',
-    types: [
-      action.start(null, {
-        charId,
-        id,
-        optimistic: { id: transactionId, type: BEGIN },
-      }),
-      action.success(null, {
-        charId,
-        id,
-        optimistic: { id: transactionId, type: COMMIT },
-      }),
-      action.failure(null, {
-        id,
-        optimistic: { id: transactionId, type: REVERT },
-      }),
-    ],
+    method: VERBS.DELETE,
+    types: optimisticTypes(
+      entityType,
+      action,
+      id,
+      transactionId,
+      null,
+      null,
+      charId,
+      parent
+    ),
   })
 }
 
-const traitAssoc = (state, type: entityTypes, id: number) => {
+const traitAssoc = (type: string, payload: any) => {
   if (type !== 'charm') {
     return type + 's'
   }
 
-  const charm = state.charms[id]
-  switch (charm.charm_type) {
+  switch (payload.charm_type) {
     case 'MartialArts':
       return 'martial_arts_charms'
     case 'Spirit':

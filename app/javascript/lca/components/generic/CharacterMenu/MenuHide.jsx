@@ -44,7 +44,7 @@ function CardMenuHide(props: Props) {
   return (
     <MenuItem
       button
-      onClick={() => action(props.id, 'hidden', !props.isHidden)}
+      onClick={() => action(props.id, { hidden: !props.isHidden })}
     >
       <ListItemIcon>
         {props.isHidden ? <Visibility /> : <VisibilityOff />}

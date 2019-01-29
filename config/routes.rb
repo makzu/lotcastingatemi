@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'player_token' => 'player_token#create'
       delete 'players' => 'players#destroy'
-      resources :players, only: %i[index show update]
+      resources :players, only: %i[index update]
 
       resources :chronicles, only: %i[index create show update destroy] do
         member do

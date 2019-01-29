@@ -1,5 +1,6 @@
 // https://github.com/rails/webpacker/blob/master/docs/webpack.md
 const { environment } = require('@rails/webpacker')
+const typescript = require('./loaders/typescript')
 
 environment.resolvedModules.append('vendor', 'vendor')
 
@@ -40,6 +41,8 @@ environment.config.merge({
     },
   },
 })
+
+environment.loaders.prepend('typescript', typescript)
 
 // eslint-disable-next-line no-undef
 module.exports = environment

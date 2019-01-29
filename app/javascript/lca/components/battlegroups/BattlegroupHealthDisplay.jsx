@@ -17,7 +17,7 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import sharedStyles from 'styles/'
-import { updateBattlegroupMulti as update } from 'ducks/actions'
+import { updateBattlegroup as update } from 'ducks/actions'
 import { canIEditBattlegroup } from 'selectors'
 import { totalMagnitude } from 'utils/calculated'
 import type { Battlegroup } from 'utils/flow-types'
@@ -43,13 +43,10 @@ type Props = {
 }
 type State = { open: boolean, magnitude: number, size: number }
 class BattlegroupHealthDisplay extends React.Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-      magnitude: this.props.battlegroup.magnitude,
-      size: this.props.battlegroup.size,
-    }
+  state = {
+    open: false,
+    magnitude: this.props.battlegroup.magnitude,
+    size: this.props.battlegroup.size,
   }
 
   handleChange = e => {

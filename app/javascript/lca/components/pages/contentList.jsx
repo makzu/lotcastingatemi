@@ -62,7 +62,7 @@ class ContentList extends Component<Props> {
     const charA = coll[oldIndex]
     const charB = coll[newIndex]
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
-    update(charA.id, 'sort_order', charB.sort_order + offset)
+    update(charA.id, { sort_order: charB.sort_order + offset })
   }
 
   render() {

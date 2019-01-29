@@ -44,7 +44,7 @@ module Api
       end
 
       def qc_charm_params
-        params.require(:qc_charm).permit!
+        params.require(:qc_charm).permit(QcCharm.attribute_names - disallowed_attributes) if params[:qc_charm].present?
       end
     end
   end

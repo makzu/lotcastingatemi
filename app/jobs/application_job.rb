@@ -6,7 +6,7 @@ class ApplicationJob < ActiveJob::Base
     ActionCable.server.broadcast(
       "entity-update-#{id}",
       event:       'create',
-      type:        "#{entity.entity_type}s",
+      type:        entity.entity_type,
       assoc:       "#{entity.entity_assoc}s",
       id:          entity.id,
       entity:      json,
@@ -19,7 +19,7 @@ class ApplicationJob < ActiveJob::Base
     ActionCable.server.broadcast(
       "entity-update-#{id}",
       event:   'update',
-      type:    "#{entity.entity_type}s",
+      type:    entity.entity_type,
       id:      entity.id,
       changes: changes
     )
@@ -29,7 +29,7 @@ class ApplicationJob < ActiveJob::Base
     ActionCable.server.broadcast(
       "entity-update-#{id}",
       event:        'destroy',
-      type:         "#{entity.entity_type}s",
+      type:         entity.entity_type,
       assoc:        "#{entity.entity_assoc}s",
       id:           entity.id,
       parent_type:  "#{parent_type}s",

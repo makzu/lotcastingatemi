@@ -29,8 +29,8 @@ type Props = ExposedProps & {
 }
 
 class QcMeritEditor extends React.Component<Props> {
-  handleChange = (id, trait, value) => {
-    this.props.updateQcMerit(id, this.props.qc.id, trait, value)
+  handleChange = (id, trait) => {
+    this.props.updateQcMerit(id, this.props.qc.id, trait)
   }
 
   handleAdd = () => {
@@ -46,12 +46,9 @@ class QcMeritEditor extends React.Component<Props> {
     const meritA = this.props.qc_merits[oldIndex]
     const meritB = this.props.qc_merits[newIndex]
     const offset = meritA.sort_order > meritB.sort_order ? -1 : 1
-    this.props.updateQcMerit(
-      meritA.id,
-      this.props.qc.id,
-      'sort_order',
-      meritB.sort_order + offset
-    )
+    this.props.updateQcMerit(meritA.id, this.props.qc.id, {
+      sort_order: meritB.sort_order + offset,
+    })
   }
 
   render() {

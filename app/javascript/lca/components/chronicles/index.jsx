@@ -71,11 +71,9 @@ class ChronicleDashboard extends Component<Props> {
     const charB = coll[newIndex]
     const offset =
       charA.chronicle_sort_order > charB.chronicle_sort_order ? -1 : 1
-    update(
-      charA.id,
-      'chronicle_sort_order',
-      charB.chronicle_sort_order + offset
-    )
+    update(charA.id, {
+      chronicle_sort_order: charB.chronicle_sort_order + offset,
+    })
   }
 
   render() {

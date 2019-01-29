@@ -3,8 +3,7 @@
 module Api
   module V1
     class CharactersController < BaseController
-      before_action :authenticate_player, except: :show
-      before_action :set_character, only: %i[show update destroy duplicate change_type]
+      skip_before_action :authenticate_player, only: :show
 
       def index
         authorize current_player
@@ -12,31 +11,12 @@ module Api
         render json: @characters
       end
 
-      def show
-        authorize @character
-        render json: @character
-      end
-
       def create
-        @character = Character.new(character_params)
+        @character = Character.new(resource_params)
         @character.player ||= current_player
         authorize @character
         if @character.save
           render json: @character
-        else
-          render json: @character.errors.details, status: :bad_request
-        end
-      end
-
-      def destroy
-        authorize @character
-        render json: @character.destroy
-      end
-
-      def update
-        authorize @character
-        if @character.update(character_params)
-          render json: @character, include: []
         else
           render json: @character.errors.details, status: :bad_request
         end
@@ -76,16 +56,6 @@ module Api
         end
       rescue NameError => e
         render json: { error: e.message }, status: :bad_request
-      end
-
-      private
-
-      def set_character
-        @character = Character.find(params[:id])
-      end
-
-      def character_params
-        params.require(:character).permit!
       end
     end
   end

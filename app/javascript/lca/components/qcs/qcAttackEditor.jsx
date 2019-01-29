@@ -25,38 +25,23 @@ type ExposedProps = {
 }
 type Props = ExposedProps & {
   qc_attacks: Array<QcAttack>,
+  type: 'qc' | 'battlegroup',
   updateQcAttack: Function,
   createQcAttack: Function,
   destroyQcAttack: Function,
 }
-type State = {
-  type: string,
-}
 
-class QcAttackEditor extends React.Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      type: this.props.battlegroup ? 'Battlegroup' : 'Qc',
-    }
-  }
-
-  handleChange = (id, trait, value) => {
-    this.props.updateQcAttack(
-      id,
-      this.props.qc.id,
-      this.state.type,
-      trait,
-      value
-    )
+class QcAttackEditor extends React.Component<Props> {
+  handleChange = (id, trait) => {
+    this.props.updateQcAttack(id, this.props.qc.id, trait, this.props.type)
   }
 
   handleAdd = () => {
-    this.props.createQcAttack(this.props.qc.id, this.state.type)
+    this.props.createQcAttack(this.props.qc.id, { parent: this.props.type })
   }
 
   handleRemove = id => {
-    this.props.destroyQcAttack(id, this.props.qc.id, this.state.type)
+    this.props.destroyQcAttack(id, this.props.qc.id, this.props.type)
   }
 
   handleSort = ({ oldIndex, newIndex }) => {
@@ -66,9 +51,8 @@ class QcAttackEditor extends React.Component<Props, State> {
     this.props.updateQcAttack(
       attackA.id,
       this.props.qc.id,
-      this.state.type,
-      'sort_order',
-      attackB.sort_order + offset
+      { sort_order: attackB.sort_order + offset },
+      this.props.type
     )
   }
 
@@ -108,15 +92,20 @@ class QcAttackEditor extends React.Component<Props, State> {
 function mapStateToProps(state, ownProps: ExposedProps) {
   const qc = ownProps.qc
   let qc_attacks = []
+  let type = 'qc'
 
-  if (qc != undefined)
-    qc_attacks =
-      qc.type === 'battlegroup'
-        ? getAttacksForBattlegroup(state, qc.id)
-        : getAttacksForQc(state, qc.id)
+  if (qc != undefined) {
+    if (qc.type === 'battlegroup') {
+      type = 'battlegroup'
+      qc_attacks = getAttacksForBattlegroup(state, qc.id)
+    } else {
+      qc_attacks = getAttacksForQc(state, qc.id)
+    }
+  }
 
   return {
     qc_attacks,
+    type,
   }
 }
 

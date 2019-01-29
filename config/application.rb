@@ -19,7 +19,7 @@ module LotCastingAtemi
     # the framework and any gems in your application.
 
     config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
-    config.annotations.register_extensions('jsx') { |annotation| %r{//\s*(#{annotation}):?\s*(.*?)$} }
+    config.annotations.register_extensions('jsx', 'ts', 'tsx') { |annotation| %r{//\s*(#{annotation}):?\s*(.*?)$} }
     config.annotations.register_extensions('scss', 'sass') { |annotation| %r{//\s*(#{annotation}):?\s*(.*?)$} }
 
     # Compress API responses

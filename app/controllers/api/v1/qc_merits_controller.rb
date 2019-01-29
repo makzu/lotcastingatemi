@@ -44,7 +44,7 @@ module Api
       end
 
       def qc_merit_params
-        params.require(:qc_merit).permit!
+        params.require(:qc_merit).permit(QcMerit.attribute_names - disallowed_attributes) if params[:qc_merit].present?
       end
     end
   end

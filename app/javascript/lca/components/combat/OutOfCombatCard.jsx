@@ -126,7 +126,7 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   }
 
   return {
-    update: (id, trait, value) => dispatch(action(id, trait, value)),
+    update: (id, trait, value) => dispatch(action(id, { [trait]: value })),
   }
 }
 

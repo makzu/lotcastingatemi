@@ -48,14 +48,14 @@ class BattlegroupEditor extends Component<Props> {
 
     if (isEqual(battlegroup[name], value)) return
 
-    this.props.updateBattlegroup(battlegroup.id, name, value)
+    this.props.updateBattlegroup(battlegroup.id, { [name]: value })
   }
 
   handleCheck = (e: SyntheticInputEvent<>) => {
     const { name } = e.target
     const value = !this.props.battlegroup[name]
 
-    this.props.updateBattlegroup(this.props.battlegroup.id, name, value)
+    this.props.updateBattlegroup(this.props.battlegroup.id, { [name]: value })
   }
 
   render() {

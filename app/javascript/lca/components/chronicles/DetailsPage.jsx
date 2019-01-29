@@ -55,7 +55,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
 
   onChange = e => {
     const { chronicle, updateChronicle } = this.props
-    updateChronicle(chronicle.id, e.target.name, e.target.value)
+    updateChronicle(chronicle.id, { [e.target.name]: e.target.value })
   }
 
   render() {

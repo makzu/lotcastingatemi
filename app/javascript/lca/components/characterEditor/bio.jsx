@@ -26,7 +26,7 @@ class BioEditor extends Component<Props> {
 
     if (isEqual(character[name], value)) return
 
-    this.props.updateCharacter(character.id, name, value)
+    this.props.updateCharacter(character.id, { [name]: value })
   }
 
   render() {

@@ -1,11 +1,5 @@
 // @flow
-import {
-  updateCharacter,
-  updateCharacterMulti,
-  updateQc,
-  updateQcMulti,
-  updateBattlegroupMulti,
-} from '../actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from '../actions.js'
 export * from './chronicle.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
@@ -13,14 +7,9 @@ export const SPEND_WP = 'lca/event/SPEND_WP'
 export const TAKE_DAMAGE = 'lca/event/TAKE_DAMAGE'
 
 export function updateEvent(charType: string) {
-  if (charType == 'qc') return updateQc
+  if (charType === 'qc') return updateQc
+  else if (charType === 'battlegroup') return updateBattlegroup
   else return updateCharacter
-}
-
-export function updateEventMulti(charType: string) {
-  if (charType === 'qc') return updateQcMulti
-  else if (charType === 'battlegroup') return updateBattlegroupMulti
-  else return updateCharacterMulti
 }
 
 export function spendMotes(
@@ -31,7 +20,7 @@ export function spendMotes(
   committments: Object,
   mute: boolean = false
 ) {
-  let update = updateEventMulti(charType)
+  let update = updateEvent(charType)
 
   return (dispatch: Function, getState: Function) => {
     dispatch({ type: SPEND_MOTES, id: id, pool: pool })
@@ -68,7 +57,7 @@ export function spendWillpower(
     let current_wp = getState().entities.current[charType + 's'][id]
       .willpower_temporary
     dispatch(
-      update(id, 'willpower_temporary', Math.max(current_wp - willpower, 0))
+      update(id, { willpower_temporary: Math.max(current_wp - willpower, 0) })
     )
   }
 }
@@ -86,6 +75,6 @@ export function takeDamage(
     let current_dmg = getState().entities.current[charType + 's'][id][
       `damage_${damageType}`
     ]
-    dispatch(update(id, `damage_${damageType}`, current_dmg + damage))
+    dispatch(update(id, { [`damage_${damageType}`]: current_dmg + damage }))
   }
 }

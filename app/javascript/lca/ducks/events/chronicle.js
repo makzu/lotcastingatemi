@@ -1,6 +1,6 @@
 // @flow
 import { isEqual } from 'lodash'
-import { updateEventMulti } from '.'
+import { updateEvent } from '.'
 import { healthRecoverObject } from './healing.js'
 import {
   getCharactersForChronicle,
@@ -38,13 +38,13 @@ export function endScene(id: number) {
       ...getQcsForChronicle(state, id),
     ]
     chars.forEach(c => {
-      const update = updateEventMulti(c.type)
+      const update = updateEvent(c.type)
       const obj = endSceneObject(c)
 
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
     })
     getBattlegroupsForChronicle(state, id).forEach(bg => {
-      const update = updateEventMulti(bg.type)
+      const update = updateEvent(bg.type)
       let obj = {}
 
       if (bg.in_combat) obj.in_combat = false
@@ -90,7 +90,7 @@ export function respireMotes(id: number, motes: number, includeQcs: boolean) {
     let chars = [...getCharactersForChronicle(state, id)]
     if (includeQcs) chars = [...chars, ...getQcsForChronicle(state, id)]
     chars.forEach(c => {
-      const update = updateEventMulti(c.type)
+      const update = updateEvent(c.type)
       const obj = moteRecoveryObject(c, motes)
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
     })
@@ -120,7 +120,7 @@ export function recoverWillpower(
     let chars = [...getCharactersForChronicle(state, id)]
     if (includeQcs) chars = [...chars, ...getQcsForChronicle(state, id)]
     chars.forEach(c => {
-      const update = updateEventMulti(c.type)
+      const update = updateEvent(c.type)
       const obj = willpowerRecoveryObject(c, willpower, exceed)
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
     })
@@ -137,7 +137,7 @@ export function downtime(id: number, time: number, endScene: boolean) {
       ...getQcsForChronicle(state, id),
     ]
     chars.forEach(c => {
-      const update = updateEventMulti(c.type)
+      const update = updateEvent(c.type)
       let obj: { [string]: number } = {}
       let merits = []
       let exaltedHealing = true
@@ -204,7 +204,7 @@ export function nextRound(id: number) {
     ].filter(c => c.in_combat)
 
     chars.forEach(c => {
-      const update = updateEventMulti(c.type)
+      const update = updateEvent(c.type)
       let obj = { has_acted: false }
       if (c.type !== 'battlegroup')
         obj = { ...obj, ...moteRecoveryObject(c, 5) }
@@ -225,7 +225,7 @@ export function endCombat(id: number) {
     ].filter(c => c.in_combat)
 
     chars.forEach(c => {
-      const update = updateEventMulti(c.type)
+      const update = updateEvent(c.type)
       let obj = { in_combat: false, has_acted: false, onslaught: 0 }
 
       dispatch(update(c.id, obj))

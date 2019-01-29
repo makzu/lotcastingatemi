@@ -1,9 +1,6 @@
 // @flow
 import { isAuthFailure } from './app.js'
-import {
-  FETCH_SUCCESS as PLAYER_FETCH_SUCCESS,
-  PLY_DESTROY_SUCCESS,
-} from './entities/player.js'
+import { crudAction } from './entities/_lib'
 
 export const LOGOUT = 'lca/session/LOGOUT'
 export const AUTH_FAILURE = 'lca/session/AUTH_FAILURE'
@@ -39,7 +36,7 @@ export default function SessionReducer(
         id: 0,
       }
 
-    case PLY_DESTROY_SUCCESS:
+    case crudAction('player', 'DESTROY').success.toString():
       return {
         ...state,
         authenticated: false,
@@ -47,7 +44,7 @@ export default function SessionReducer(
         deleted: true,
       }
 
-    case PLAYER_FETCH_SUCCESS:
+    case crudAction('player', 'FETCH').success.toString():
       return {
         ...state,
         id: action.payload.result,

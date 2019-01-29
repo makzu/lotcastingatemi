@@ -35,7 +35,7 @@ class MoteCommittmentPopup extends React.Component<Props, State> {
 
   handleChange = e => {
     const { name, value } = e.target
-    this.props.update(this.props.character.id, name, value)
+    this.props.update(this.props.character.id, { [name]: value })
   }
 
   render() {

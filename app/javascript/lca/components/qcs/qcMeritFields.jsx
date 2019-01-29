@@ -29,7 +29,7 @@ export default class QcMeritFields extends React.Component<Props> {
 
     if (isEqual(merit[name], value)) return
 
-    this.props.onMeritChange(merit.id, name, value)
+    this.props.onMeritChange(merit.id, { [name]: value })
   }
 
   handleRemove = () => {

@@ -31,7 +31,7 @@ export default class QcCharmFields extends React.Component<Props> {
 
     if (isEqual(charm[name], value)) return
 
-    this.props.onCharmChange(charm.id, name, value)
+    this.props.onCharmChange(charm.id, { [name]: value })
   }
 
   handleRemove = () => {

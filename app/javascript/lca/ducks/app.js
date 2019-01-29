@@ -37,54 +37,35 @@ export default function AppReducer(
       errorMessage: action.payload.message,
     }
   }
+  if (action.error) {
+    return { ...state, error: true, errorMessage: action.payload }
+  }
 
   const act = action.type.split('/')
-  if (act[0] !== 'lca') return state
-
-  switch (act[2]) {
-    case 'CREATE':
-    case 'FETCH':
-    case 'FETCH_ALL':
-    case 'UPDATE':
-    case 'DESTROY':
-    case 'ADD_THING':
-    case 'REMOVE_THING':
-    case 'DUPE':
-      return {
-        ...state,
-        loading: true,
-        error: false,
-        errorMessage: '',
-      }
-
-    case 'CREATE_SUCCESS':
-    case 'FETCH_SUCCESS':
-    case 'FETCH_ALL_SUCCESS':
-    case 'UPDATE_SUCCESS':
-    case 'DESTROY_SUCCESS':
-    case 'ADD_THING_SUCCESS':
-    case 'REMOVE_THING_SUCCESS':
-    case 'DUPE_SUCCESS':
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        errorMessage: '',
-      }
-
-    case 'CREATE_FAILURE':
-    case 'FETCH_FAILURE':
-    case 'UPDATE_FAILURE':
-    case 'DESTROY_FAILURE':
-    case 'ADD_THING_FAILURE':
-    case 'REMOVE_THING_FAILURE':
-    case 'DUPE_FAILURE':
-      return {
-        ...state,
-        loading: false,
-        error: true,
-        errorMessage: parseError(action),
-      }
+  if (act[0] === 'lca-api') {
+    switch (act[4]) {
+      case 'START':
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          errorMessage: '',
+        }
+      case 'SUCCESS':
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          errorMessage: '',
+        }
+      case 'FAILURE':
+        return {
+          ...state,
+          loading: false,
+          error: true,
+          errorMessage: parseError(action),
+        }
+    }
   }
 
   switch (action.type) {

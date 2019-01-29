@@ -138,8 +138,8 @@ const mapStateToProps = (state, props: ExposedProps) => ({
 const mapDispatchToProps = (dispatch: Function, props: ExposedProps) => ({
   update: (id, value) =>
     props.qc
-      ? dispatch(updateQc(id, 'aura', value))
-      : dispatch(updateCharacter(id, 'aura', value)),
+      ? dispatch(updateQc(id, { aura: value }))
+      : dispatch(updateCharacter(id, { aura: value })),
 })
 
 const enhance: Enhancer<Props, ExposedProps> = compose(

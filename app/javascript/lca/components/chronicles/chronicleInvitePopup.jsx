@@ -42,7 +42,7 @@ class ChronicleInvitePopup extends React.Component<Props, State> {
   }
 
   handleDisable = () => {
-    this.props.updateChronicle(this.props.chronicleId, 'invite_code', '')
+    this.props.updateChronicle(this.props.chronicleId, { invite_code: '' })
   }
 
   render() {

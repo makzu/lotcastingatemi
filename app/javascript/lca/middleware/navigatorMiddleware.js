@@ -1,17 +1,7 @@
 // @flow
-import {
-  CABLE_RECEIVED,
-  CHN_JOIN_SUCCESS,
-  CHN_CREATE_SUCCESS,
-  CHA_CREATE_SUCCESS,
-  CHA_DUPE_SUCCESS,
-  BG_CREATE_SUCCESS,
-  BG_CREATE_FROM_QC_SUCCESS,
-  BG_DUPE_SUCCESS,
-  QC_CREATE_SUCCESS,
-  QC_DUPE_SUCCESS,
-  PLY_DESTROY_SUCCESS,
-} from 'ducks/entities'
+import { API, SUCCESS } from 'ducks/entities/_lib.ts'
+import { CABLE_RECEIVED } from 'ducks/entities'
+import { crudAction } from 'ducks/entities/_lib'
 import { history } from '../index.js'
 
 /* On successfully creating an entity or joining a Chronicle, navigate to that
@@ -20,25 +10,18 @@ import { history } from '../index.js'
  */
 // eslint-disable-next-line no-unused-vars
 const Navigator = (store: Object) => (next: Function) => (action: Object) => {
+  const act = action.type.split('/')
+  if (
+    act[0] === API &&
+    act[3] === SUCCESS &&
+    ['character', 'qc', 'battlegroup', 'chronicle'].includes(act[1]) &&
+    ['JOIN', 'CREATE', 'DUPLICATE', 'CREATE_FROM_QC'].includes(act[2])
+  ) {
+    history.push(`/${act[1]}s/${action.payload.result}`)
+  }
+
   switch (action.type) {
-    case CHN_JOIN_SUCCESS:
-    case CHN_CREATE_SUCCESS:
-      history.push(`/chronicles/${action.payload.result}`)
-      break
-    case CHA_CREATE_SUCCESS:
-    case CHA_DUPE_SUCCESS:
-      history.push(`/characters/${action.payload.result}`)
-      break
-    case BG_CREATE_SUCCESS:
-    case BG_CREATE_FROM_QC_SUCCESS:
-    case BG_DUPE_SUCCESS:
-      history.push(`/battlegroups/${action.payload.result}`)
-      break
-    case QC_CREATE_SUCCESS:
-    case QC_DUPE_SUCCESS:
-      history.push(`/qcs/${action.payload.result}`)
-      break
-    case PLY_DESTROY_SUCCESS:
+    case crudAction('player', 'DESTROY').success.toString():
       history.push('/deleted')
       break
     case CABLE_RECEIVED:

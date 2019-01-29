@@ -13,11 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
-import {
-  updateCharacterMulti,
-  updateQcMulti,
-  updateBattlegroupMulti,
-} from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
@@ -127,14 +123,14 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   let action
   switch (props.character.type) {
     case 'qc':
-      action = updateQcMulti
+      action = updateQc
       break
     case 'battlegroup':
-      action = updateBattlegroupMulti
+      action = updateBattlegroup
       break
     case 'character':
     default:
-      action = updateCharacterMulti
+      action = updateCharacter
   }
 
   return {

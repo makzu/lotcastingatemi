@@ -49,14 +49,14 @@ class SpellFields extends Component<Props> {
 
     if (isEqual(spell[name], value)) return
 
-    this.props.onUpdate(spell.id, spell.character_id, name, value)
+    this.props.onUpdate(spell.id, spell.character_id, { [name]: value })
   }
 
   handleCheck = e => {
     const { name, checked } = e.target
     const { spell } = this.props
 
-    this.props.onUpdate(spell.id, spell.character_id, name, checked)
+    this.props.onUpdate(spell.id, spell.character_id, { [name]: checked })
   }
 
   handleRemove = () => {

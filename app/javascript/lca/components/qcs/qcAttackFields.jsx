@@ -85,7 +85,7 @@ class QcAttackFields extends React.Component<Props> {
 
     if (isEqual(this.props.attack[name], value)) return
 
-    this.props.onAttackChange(attack.id, name, value)
+    this.props.onAttackChange(attack.id, { [name]: value })
   }
 
   handleRemove = () => {

@@ -1,4 +1,5 @@
 const { environment } = require('@rails/webpacker')
+const typescript = require('./loaders/typescript')
 
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 environment.plugins.prepend(
@@ -20,6 +21,8 @@ environment.config.merge({
     },
   },
 })
+
+environment.loaders.prepend('typescript', typescript)
 
 // eslint-disable-next-line no-undef
 module.exports = environment

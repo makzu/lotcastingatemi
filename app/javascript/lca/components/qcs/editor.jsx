@@ -50,7 +50,7 @@ class QcEditor extends Component<Props> {
 
     if (isEqual(qc[name], value)) return
 
-    this.props.updateQc(qc.id, name, value)
+    this.props.updateQc(qc.id, { [name]: value })
   }
 
   handleCheck = e => {
@@ -58,7 +58,7 @@ class QcEditor extends Component<Props> {
     const { qc } = this.props
     const value = !qc[name]
 
-    this.props.updateQc(qc.id, name, value)
+    this.props.updateQc(qc.id, { [name]: value })
   }
 
   render() {

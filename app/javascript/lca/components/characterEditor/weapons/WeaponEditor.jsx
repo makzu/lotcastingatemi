@@ -31,7 +31,7 @@ class WeaponEditor extends React.Component<Props> {
   handleChange = (id, trait, value) => {
     if (value === 'header') return
 
-    this.props.updateWeapon(id, this.props.character.id, trait, value)
+    this.props.updateWeapon(id, this.props.character.id, { [trait]: value })
   }
 
   handleAdd = () => {
@@ -46,12 +46,9 @@ class WeaponEditor extends React.Component<Props> {
     const weaponA = this.props.weapons[oldIndex]
     const weaponB = this.props.weapons[newIndex]
     const offset = weaponA.sort_order > weaponB.sort_order ? -1 : 1
-    this.props.updateWeapon(
-      weaponA.id,
-      this.props.character.id,
-      'sort_order',
-      weaponB.sort_order + offset
-    )
+    this.props.updateWeapon(weaponA.id, this.props.character.id, {
+      sort_order: weaponB.sort_order + offset,
+    })
   }
 
   render() {

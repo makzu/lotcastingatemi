@@ -36,8 +36,8 @@ type Props = ExposedProps & {
 }
 
 class QcCharmEditor extends React.Component<Props> {
-  handleChange = (id, trait, value) => {
-    this.props.updateQcCharm(id, this.props.qc.id, trait, value)
+  handleChange = (id, trait) => {
+    this.props.updateQcCharm(id, this.props.qc.id, trait)
   }
 
   handleAdd = () => {
@@ -56,12 +56,9 @@ class QcCharmEditor extends React.Component<Props> {
     const charmA = this.props.qc_charms[oldIndex]
     const charmB = this.props.qc_charms[newIndex]
     const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
-    this.props.updateQcCharm(
-      charmA.id,
-      this.props.qc.id,
-      'sort_order',
-      charmB.sort_order + offset
-    )
+    this.props.updateQcCharm(charmA.id, this.props.qc.id, {
+      sort_order: charmB.sort_order + offset,
+    })
   }
   render() {
     const { handleChange, handleAdd, handleRemove, handleSort } = this

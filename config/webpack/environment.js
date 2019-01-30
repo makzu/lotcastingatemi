@@ -24,7 +24,7 @@ environment.plugins.insert(
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 environment.plugins.prepend(
   'LodashModuleReplacement',
-  new LodashModuleReplacementPlugin({ cloning: true })
+  new LodashModuleReplacementPlugin()
 )
 
 environment.loaders.append('md', {

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Character, type: :model do
   describe 'converting types' do
     %i[
-      solar_character dragonblood_character
+      solar_character dragonblood_character lunar_character
       custom_ability_character custom_attribute_character custom_essence_character
     ].each do |char|
       it "works for #{char}" do

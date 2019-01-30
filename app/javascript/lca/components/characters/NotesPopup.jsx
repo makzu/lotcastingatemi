@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
@@ -60,7 +60,7 @@ class NotesPopup extends React.Component<Props, State> {
     const { name, value } = e.target
     const { character } = this.props
 
-    if (isEqual(character[name], value)) return
+    if (deepEqual(character[name], value)) return
 
     this.props.updateCharacter(character.id, { [name]: value })
   }

@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import React, { Component, Fragment } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
@@ -53,7 +53,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
     const { name, value } = e.target
     const { charm } = this.props
 
-    if (isEqual(charm[name], value)) return
+    if (deepEqual(charm[name], value)) return
 
     this.props.onUpdate(charm.id, charm.character_id, { [name]: value })
   }

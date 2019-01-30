@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import React from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
@@ -29,7 +29,7 @@ export default class QcCharmFields extends React.Component<Props> {
     const { name, value } = e.target
     const { charm } = this.props
 
-    if (isEqual(charm[name], value)) return
+    if (deepEqual(charm[name], value)) return
 
     this.props.onCharmChange(charm.id, { [name]: value })
   }

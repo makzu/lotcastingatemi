@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import React, { Component } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
@@ -45,7 +45,7 @@ class CharacterEditor extends Component<Props> {
     const { name, value } = e.target
     const { character } = this.props
 
-    if (isEqual(character[name], value)) return
+    if (deepEqual(character[name], value)) return
 
     this.props.updateCharacter(character.id, { [name]: value })
   }

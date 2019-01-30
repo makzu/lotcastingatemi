@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
@@ -83,7 +83,7 @@ class QcAttackFields extends React.Component<Props> {
     let { name, value } = e.target
     const { attack } = this.props
 
-    if (isEqual(this.props.attack[name], value)) return
+    if (deepEqual(this.props.attack[name], value)) return
 
     this.props.onAttackChange(attack.id, { [name]: value })
   }

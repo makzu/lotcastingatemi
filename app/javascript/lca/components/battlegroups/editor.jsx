@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import * as React from 'react'
 const { Component } = React
 import { connect } from 'react-redux'
@@ -46,7 +46,7 @@ class BattlegroupEditor extends Component<Props> {
     const { name, value } = e.target
     const { battlegroup } = this.props
 
-    if (isEqual(battlegroup[name], value)) return
+    if (deepEqual(battlegroup[name], value)) return
 
     this.props.updateBattlegroup(battlegroup.id, { [name]: value })
   }

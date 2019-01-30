@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import * as React from 'react'
 const { Component } = React
 import { SortableHandle } from 'react-sortable-hoc'
@@ -47,7 +47,7 @@ class SpellFields extends Component<Props> {
     const { name, value } = e.target
     const { spell } = this.props
 
-    if (isEqual(spell[name], value)) return
+    if (deepEqual(spell[name], value)) return
 
     this.props.onUpdate(spell.id, spell.character_id, { [name]: value })
   }

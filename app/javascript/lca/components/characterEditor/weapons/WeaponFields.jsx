@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import * as React from 'react'
 const { Component, Fragment } = React
 import { SortableHandle } from 'react-sortable-hoc'
@@ -58,7 +58,7 @@ class WeaponFields extends Component<Props, State> {
     const { name, value } = e.target
     const { weapon } = this.props
 
-    if (isEqual(weapon[name], value)) return
+    if (deepEqual(weapon[name], value)) return
 
     this.props.onChange(weapon.id, name, value)
   }

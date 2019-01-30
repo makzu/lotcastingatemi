@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import * as React from 'react'
 const { Component } = React
 import { SortableHandle } from 'react-sortable-hoc'
@@ -31,7 +31,7 @@ class MeritFields extends Component<FieldsProps> {
     const { name, value } = e.target
     const { merit } = this.props
 
-    if (isEqual(merit[name], value)) return
+    if (deepEqual(merit[name], value)) return
 
     this.props.onUpdate(merit.id, merit.character_id, { [name]: value })
   }

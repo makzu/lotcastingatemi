@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 
 export function clamp(val: number, min: number, max: number): number {
   if (val > max) {
@@ -40,4 +40,4 @@ export const isUnequalByKeys = (
   obj1: Object,
   obj2: Object,
   keys: Array<string>
-) => keys.some(key => !isEqual(obj1[key], obj2[key]))
+) => keys.some(key => !deepEqual(obj1[key], obj2[key]))

@@ -1,6 +1,5 @@
 import * as deepmerge from 'deepmerge'
 import { getJSON } from 'redux-api-middleware'
-import { createReducer } from 'redux-starter-kit'
 
 import { callApi } from 'utils/api.js'
 import {
@@ -24,21 +23,20 @@ export const createEntityReducer = (
 ) => {
   const pluralType = entityType + 's'
 
-  return createReducer(undefined, {
+  return {
     ...reducers,
     [crudAction(entityType, 'CREATE').success.toString()]: mergeEntity,
     [crudAction(entityType, 'DUPLICATE').success.toString()]: mergeEntity,
-    [crudAction(entityType, 'FETCH').start.toString()]: mergeEntity,
+    [crudAction(entityType, 'FETCH').success.toString()]: mergeEntity,
     [crudAction(entityType, 'FETCH_ALL').success.toString()]: (
       state,
       action
     ) => {
+      const myID = state.currentPlayer
       const newState = mergeEntity(state, action)
-      newState.players[state.currentPlayer][pluralType] = [
+      newState.players[myID][pluralType] = [
         ...new Set(
-          (state.players[state.currentPlayer][pluralType] || []).concat(
-            action.payload.result
-          )
+          (state.players[myID][pluralType] || []).concat(action.payload.result)
         ),
       ]
 
@@ -56,7 +54,7 @@ export const createEntityReducer = (
         i => i !== id
       )
     },
-  })
+  }
 }
 
 /** Returns an array of API actions, in this shape:

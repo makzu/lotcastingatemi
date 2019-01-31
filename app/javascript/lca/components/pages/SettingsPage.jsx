@@ -44,7 +44,9 @@ class SettingsPage extends React.Component<Props, { open: boolean }> {
   }
 
   handleChangeName = e => {
-    this.props.updatePlayer(this.props.player.id, e.target.name, e.target.value)
+    this.props.updatePlayer(this.props.player.id, {
+      [e.target.name]: e.target.value,
+    })
   }
 
   handleChangeTheme = e => {

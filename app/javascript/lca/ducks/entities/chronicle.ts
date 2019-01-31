@@ -1,27 +1,11 @@
 // @flow
-import { merge } from 'lodash'
-import { normalize } from 'normalizr'
-import { getJSON } from 'redux-api-middleware'
-import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
-import { createReducer } from 'redux-starter-kit'
-
-import { mergeStateWithNormalizedEntities } from '.'
-import * as schemas from './_schemas'
-
 import { callApi } from 'utils/api.js'
 import { createApiActions, mergeEntity } from './_entity'
-import {
-  crudAction,
-  CrudActionGroup,
-  massagePayload,
-  reducerUpdateAction,
-  standardTypes,
-} from './_lib'
-import player from './player'
+import { crudAction, reducerUpdateAction, standardTypes } from './_lib'
 
 const CHRONICLE = 'chronicle'
 
-export default createReducer(undefined, {
+export default {
   [crudAction(CHRONICLE, 'CREATE').success.toString()]: mergeEntity,
   [crudAction(CHRONICLE, 'FETCH').success.toString()]: mergeEntity,
   [crudAction(CHRONICLE, 'JOIN').success.toString()]: mergeEntity,
@@ -55,7 +39,7 @@ export default createReducer(undefined, {
     mergeEntity(state, action)
     // TODO: remove orphaned entities and traits from state
   },
-})
+}
 
 // tslint:disable variable-name
 export const [
@@ -67,8 +51,6 @@ export const [
   destroyChronicle,
 ] = createApiActions(CHRONICLE)
 // tslint:enable variable-name
-
-let nextTransactionId = 0
 
 export function joinChronicle(code: string) {
   const action = crudAction(CHRONICLE, 'JOIN')
@@ -90,7 +72,6 @@ export function regenChronicleInviteCode(id: number) {
 // TODO: Flush the store of the removed player's data
 export function removePlayerFromChronicle(id: number, playerId: number) {
   const action = crudAction(CHRONICLE, 'REMOVE_PLAYER')
-  const transactionId = CHRONICLE + '_' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/chronicles/${id}/remove_player/${playerId}`,
     types: standardTypes(CHRONICLE, action),
@@ -105,7 +86,6 @@ export function addThingToChronicle(
   const action = crudAction(CHRONICLE, 'ADD_THING')
   return callApi({
     endpoint: `/api/v1/chronicles/${id}/add_${thingType}/${thingId}`,
-    method: 'POST',
     types: standardTypes(CHRONICLE, action),
   })
 }
@@ -117,10 +97,8 @@ export function removeThingFromChronicle(
   type: string
 ) {
   const action = crudAction(CHRONICLE, 'REMOVE_THING')
-  const transactionId = CHRONICLE + '_' + nextTransactionId++
   return callApi({
     endpoint: `/api/v1/chronicles/${id}/remove_${type}/${thingId}`,
-    method: 'POST',
     types: standardTypes(CHRONICLE, action),
   })
 }

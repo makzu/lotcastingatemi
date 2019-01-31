@@ -1,6 +1,4 @@
 import { getJSON } from 'redux-api-middleware'
-import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
-import { createReducer } from 'redux-starter-kit'
 
 import { callApi } from 'utils/api.js'
 import {
@@ -20,7 +18,8 @@ export const createTraitReducer = (
   parentType: parentTypes = 'character'
 ) => {
   const pluralType = entityType + 's'
-  return createReducer(undefined, {
+
+  return {
     /* Create actions */
     [crudAction(entityType, 'CREATE').success.toString()]: (state, action) => {
       const { id } = action.payload
@@ -49,7 +48,7 @@ export const createTraitReducer = (
       )
       delete state[pluralType][id]
     },
-  })
+  }
 }
 
 /** Creates a tuple of API actions for array destructuring assignment

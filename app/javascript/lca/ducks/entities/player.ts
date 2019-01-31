@@ -1,23 +1,25 @@
 // @flow
-import { createReducer } from 'redux-starter-kit'
-
 import { callApi } from 'utils/api.js'
-import {
-  createFetchAllAction,
-  createUpdateAction,
-  mergeEntity,
-} from './_entity'
+import { defaultState } from './'
+import { createUpdateAction, mergeEntity } from './_entity'
 import { crudAction, reducerUpdateAction, standardTypes, VERBS } from './_lib'
 
 const PLAYER = 'player'
 const endpoint = '/api/v1/players'
 
-export default createReducer(undefined, {
+export default {
   [crudAction(PLAYER, 'UPDATE').start.toString()]: reducerUpdateAction(
     PLAYER + 's'
   ),
-  [crudAction(PLAYER, 'FETCH').success.toString()]: mergeEntity,
-})
+  [crudAction(PLAYER, 'FETCH').success.toString()]: (state, action) => {
+    const newState = mergeEntity(state, action)
+
+    newState.currentPlayer = action.payload.result
+
+    return newState
+  },
+  [crudAction(PLAYER, 'DESTROY').success.toString()]: () => defaultState,
+}
 
 export const updatePlayer = createUpdateAction(PLAYER)
 

@@ -1,7 +1,6 @@
 // @flow
 import { createSelector, type OutputSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
-import { isEmpty, max } from 'lodash'
 
 import {
   getNativeCharmsForCharacter,
@@ -95,12 +94,16 @@ export const getPoisonsForCharacter: gPFC = createCachedSelector(
 export const getPenalties = createCachedSelector(
   [getSpecificCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],
   (character, meritNames, poisons) => {
-    let poisonMax = isEmpty(poisons) ? 0 : max(poisons, p => p.penalty).penalty
+    let worstPoison = poisons.reduce(
+      (prev, current) => (prev.penalty > current.penalty ? prev : current),
+      0
+    )
+
     return {
       mobility: mobilityPenalty(character),
       onslaught: character.onslaught,
       wound: woundPenalty(character, meritNames),
-      poisonTotal: poisonMax,
+      poisonTotal: worstPoison.penalty,
     }
   }
 )(characterIdMemoizer)

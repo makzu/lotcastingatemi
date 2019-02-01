@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import { sample } from 'lodash'
 import Typography from '@material-ui/core/Typography'
 
 const errorNames = [
@@ -28,7 +27,9 @@ class ErrorBoundary extends React.Component<Props, State> {
     if (error) {
       return (
         <div>
-          <Typography variant="title">{sample(errorNames)}</Typography>
+          <Typography variant="title">
+            {errorNames[Math.floor(Math.random() * errorNames.length)]}
+          </Typography>
           <Typography>Something went wrong.</Typography>
           <Typography>{error && error.message}</Typography>
         </div>

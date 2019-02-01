@@ -4,29 +4,6 @@ const typescript = require('./loaders/typescript')
 
 environment.resolvedModules.append('vendor', 'vendor')
 
-environment.splitChunks(config => ({
-  ...config,
-  output: {
-    chunkFilename: '[name].[chunkhash].chunk.js',
-  },
-}))
-
-const WebpackAssetsManifest = require('webpack-assets-manifest')
-environment.plugins.insert(
-  'Manifest',
-  new WebpackAssetsManifest({
-    entrypoints: true,
-    writeToDisk: true,
-    publicPath: true,
-  })
-)
-
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-environment.plugins.prepend(
-  'LodashModuleReplacement',
-  new LodashModuleReplacementPlugin()
-)
-
 environment.loaders.append('md', {
   test: /\.md$/,
   use: 'raw-loader',

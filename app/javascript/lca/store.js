@@ -1,41 +1,32 @@
 // @flow
-import { applyMiddleware, compose, createStore } from 'redux'
 import { apiMiddleware } from 'redux-api-middleware'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { configureStore } from 'redux-starter-kit'
 import thunk from 'redux-thunk'
 
 import authTokenMiddleware from './middleware/authTokenMiddleware.js'
-import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
 import navigatorMiddleware from './middleware/navigatorMiddleware.js'
+import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
 
-import rootReducer from './ducks'
+import reducer from './ducks'
 
 // eslint-disable-next-line no-undef
-const isProduction = () => process.env.NODE_ENV === 'production'
+const PRODUCTION = process.env.NODE_ENV === 'production'
 
-export default function configureStore(preloadedState) {
-  const middlewares = [
-    thunk,
-    apiMiddleware,
-    authTokenMiddleware,
-    themeSaverMiddleware,
-    navigatorMiddleware,
-  ]
-  const middlewareEnhancer = applyMiddleware(...middlewares)
+let middleware = [
+  thunk,
+  apiMiddleware,
+  authTokenMiddleware,
+  navigatorMiddleware,
+  themeSaverMiddleware,
+]
+if (!PRODUCTION)
+  middleware = middleware.concat(
+    require('redux-immutable-state-invariant').default()
+  )
 
-  const enhancers = [middlewareEnhancer]
-
-  const makeEnhancer = isProduction() ? compose : composeWithDevTools
-  const composedEnhancers = makeEnhancer(...enhancers)
-
-  const store = createStore(rootReducer, preloadedState, composedEnhancers)
-
-  //*
-  // eslint-disable-next-line no-undef
-  if (process.env.NODE_ENV !== 'production' && module.hot) {
-    // eslint-disable-next-line no-undef
-    module.hot.accept('./ducks', () => store.replaceReducer(rootReducer))
-  }
-  // */
-  return store
-}
+export default () =>
+  configureStore({
+    reducer,
+    middleware,
+    devTools: !PRODUCTION,
+  })

@@ -17,37 +17,16 @@ const ContentList = lazy(() =>
   import('components/pages/contentList.jsx' /* webpackChunkName: 'ListPage' */ /* webpackPrefetch: true */)
 )
 
-const CharacterSheet = lazy(() =>
-  import('components/characters/index.jsx' /* webpackChunkName: 'CharacterSheet' */ /* webpackPrefetch: true */)
-)
-import CharacterDashboard from 'components/characters/dashboard/'
-
-const MeritFullPage = lazy(() =>
-  import('components/characters/MeritFullPage.jsx' /* webpackChunkName: 'MeritPage' */ /* webpackPrefetch: true */)
-)
-
-const CharmFullPage = lazy(() =>
-  import('components/characters/charms/index.jsx' /* webpackChunkName: 'CharmPage' */ /* webpackPrefetch: true */)
-)
-
-const BioFullPage = lazy(() =>
-  import('components/characters/BioFullPage.jsx' /* webpackChunkName: 'BioPage' */ /* webpackPrefetch: true */)
+const CharacterSheetWrap = lazy(() =>
+  import('components/characters/CharacterSheetWrapper.jsx' /* webpackChunkName: 'CharacterSheet' */ /* webpackPrefetch: true */)
 )
 
 const CharacterEditor = lazy(() =>
-  import('components/characterEditor/index.jsx' /* webpackChunkName: 'CharacterEditor' */ /* webpackPrefetch: true */)
-)
-
-const MeritEditor = lazy(() =>
-  import('components/characterEditor/merits/MeritEditor.jsx' /* webpackChunkName: 'MeritEditor' */ /* webpackPrefetch: true */)
+  import('components/characterEditor/CharacterEditorWrapper.jsx' /* webpackChunkName: 'CharacterEditor' */ /* webpackPrefetch: true */)
 )
 
 const CharmEditor = lazy(() =>
   import('components/characters/charms/CharmEditor.jsx' /* webpackChunkName: 'CharmEditor' */ /* webpackPrefetch: true */)
-)
-
-const BioEditor = lazy(() =>
-  import('components/characterEditor/bio.jsx' /* webpackChunkName: 'BioEditor' */ /* webpackPrefetch: true */)
 )
 
 const QcSheet = lazy(() =>
@@ -90,33 +69,19 @@ export default function Routes() {
         <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
 
         <Route
-          path="/characters/:characterId/edit/merits"
-          component={MeritEditor}
-        />
-        <Route
           path="/characters/:characterId/edit/charms"
           component={CharmEditor}
         />
-        <Route path="/characters/:characterId/edit/bio" component={BioEditor} />
+
         <Route
           path="/characters/:characterId/edit"
           component={CharacterEditor}
         />
 
         <Route
-          path="/characters/:characterId/dashboard"
-          component={CharacterDashboard}
+          path="/characters/:characterId/"
+          component={CharacterSheetWrap}
         />
-        <Route
-          path="/characters/:characterId/merits"
-          component={MeritFullPage}
-        />
-        <Route
-          path="/characters/:characterId/charms"
-          component={CharmFullPage}
-        />
-        <Route path="/characters/:characterId/bio" component={BioFullPage} />
-        <Route path="/characters/:characterId" component={CharacterSheet} />
 
         <Route path="/qcs/:qcId/edit" component={QcEditor} />
         <Route path="/qcs/:qcId" component={QcSheet} />

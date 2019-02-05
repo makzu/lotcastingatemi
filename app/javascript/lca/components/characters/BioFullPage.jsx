@@ -30,6 +30,14 @@ const styles = theme => ({
   },
 })
 
+const xpTable = log =>
+  log.map((l, i) => (
+    <tr key={`${l.label}_${i}`}>
+      <td style={{ width: '100%' }}>{l.label}</td>
+      <td>{l.points}</td>
+    </tr>
+  ))
+
 type Props = { character: Character, classes: Object }
 class BioFullPage extends Component<Props> {
   render() {
@@ -37,16 +45,6 @@ class BioFullPage extends Component<Props> {
     if (this.props.character == undefined) return <CharacterLoadError />
 
     const { character, classes } = this.props
-    const xp_log = character.xp_log.map(x => (
-      <Typography key={x.label}>
-        {x.label}: {x.points} points
-      </Typography>
-    ))
-    const solar_xp_log = character.xp_log_solar.map(x => (
-      <Typography key={x.label}>
-        {x.label}: {x.points} points
-      </Typography>
-    ))
 
     return (
       <div>
@@ -125,10 +123,12 @@ class BioFullPage extends Component<Props> {
 
           <Grid item xs={12}>
             <BlockPaper>
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              <div className={classes.flexContainerSpread}>
                 <div style={{ flex: 1 }}>
                   <Typography variant="subheading">XP</Typography>
-                  {xp_log}
+                  <Typography component="table">
+                    <tbody>{xpTable(character.xp_log)}</tbody>
+                  </Typography>
                   <Typography>
                     Earned: {character.xp_total}, Spent: {spentXp(character)},
                     Remaining: {character.xp_total - spentXp(character)}
@@ -141,7 +141,9 @@ class BioFullPage extends Component<Props> {
                       ? 'Dragon XP'
                       : 'Solar XP'}
                   </Typography>
-                  {solar_xp_log}
+                  <Typography component="table">
+                    <tbody>{xpTable(character.xp_log_solar)}</tbody>
+                  </Typography>
                   <Typography>
                     Earned: {character.xp_solar_total}, Spent:{' '}
                     {spentSolarXp(character)}, Remaining:{' '}

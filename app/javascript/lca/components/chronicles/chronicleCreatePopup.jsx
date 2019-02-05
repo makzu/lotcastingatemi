@@ -71,7 +71,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button onClick={handleSubmit} variant="contained" color="primary">
               Create
             </Button>
           </DialogActions>

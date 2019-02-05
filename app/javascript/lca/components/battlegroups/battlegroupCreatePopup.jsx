@@ -64,7 +64,7 @@ class BattlegroupCreatePopup extends React.Component<Props, State> {
             <Button onClick={handleClose}>Cancel</Button>
             <Button
               onClick={handleSubmit}
-              variant="raised"
+              variant="contained"
               color="primary"
               data-cy="submit"
             >

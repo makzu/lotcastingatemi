@@ -104,7 +104,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button onClick={handleSubmit} variant="contained" color="primary">
               Add
             </Button>
           </DialogActions>

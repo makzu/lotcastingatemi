@@ -179,7 +179,7 @@ class DowntimePopup extends Component<Props, State> {
 
           <DialogActions>
             <Button onClick={handleClose}>Close</Button>
-            <Button variant="raised" color="primary" onClick={handleSubmit}>
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
               Downtime
             </Button>
           </DialogActions>

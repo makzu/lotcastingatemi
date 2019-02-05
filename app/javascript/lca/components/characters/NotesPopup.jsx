@@ -109,7 +109,7 @@ class NotesPopup extends React.Component<Props, State> {
                 </Button>
               </span>
             )}
-            <Button variant="raised" color="primary" onClick={handleClose}>
+            <Button variant="contained" color="primary" onClick={handleClose}>
               Close
             </Button>
           </DialogActions>

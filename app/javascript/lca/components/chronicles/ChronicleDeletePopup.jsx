@@ -62,7 +62,7 @@ class ChronicleLeavePopup extends React.Component<Props, State> {
 
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button onClick={handleSubmit} variant="contained" color="primary">
               Delete
             </Button>
           </DialogActions>

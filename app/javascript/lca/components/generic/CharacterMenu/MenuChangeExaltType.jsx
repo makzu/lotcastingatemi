@@ -91,7 +91,8 @@ class MenuchangeCharacterType extends React.PureComponent<Props, State> {
           <DialogActions>
             <Button onClick={this.handleClose}>Cancel</Button>
             <Button
-              variant="raised"
+              variant="contained"
+              color="primary"
               onClick={this.handleSubmit}
               disabled={this.state.type === this.props.characterType}
             >

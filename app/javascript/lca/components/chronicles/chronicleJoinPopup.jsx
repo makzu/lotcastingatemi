@@ -69,7 +69,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button onClick={handleSubmit} variant="contained" color="primary">
               Join
             </Button>
           </DialogActions>

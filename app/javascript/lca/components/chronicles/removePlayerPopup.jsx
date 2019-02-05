@@ -68,7 +68,7 @@ class RemovePlayerPopup extends React.Component<Props, State> {
 
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="raised" color="primary">
+            <Button onClick={handleSubmit} variant="contained" color="primary">
               Remove
             </Button>
           </DialogActions>

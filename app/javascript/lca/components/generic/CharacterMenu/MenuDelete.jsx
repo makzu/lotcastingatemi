@@ -88,7 +88,7 @@ class CardMenuDelete extends Component<Props, State> {
             <Button
               onClick={() => action(this.props.id)}
               color="primary"
-              variant="raised"
+              variant="contained"
             >
               Delete
             </Button>

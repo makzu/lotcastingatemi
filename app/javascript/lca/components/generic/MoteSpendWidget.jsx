@@ -316,7 +316,7 @@ class MoteSpendWidget extends React.Component<Props, State> {
               <MoteCommittmentPopup character={character} qc={this.props.qc} />
             </span>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button variant="raised" color="primary" onClick={handleSubmit}>
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
               {toSpend >= 0 ? 'Spend' : 'Recover'}
             </Button>
           </DialogActions>

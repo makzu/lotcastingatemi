@@ -41,7 +41,7 @@ class _LogoutPopup extends Component<Props, { open: boolean }> {
             </Button>
           )}
           <Button
-            variant="raised"
+            variant="contained"
             color="primary"
             component="a"
             href="/auth/google_oauth2"

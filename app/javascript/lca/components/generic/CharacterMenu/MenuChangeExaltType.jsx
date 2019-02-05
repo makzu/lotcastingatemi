@@ -11,10 +11,12 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect.jsx'
+import ExaltTypeSelect, {
+  prettyType,
+} from 'components/characterEditor/exaltTraits/ExaltTypeSelect.jsx'
 
 import { changeCharacterType } from 'ducks/actions'
-import { canIEdit } from 'selectors'
+import { canIEdit, getSpecificCharacter } from 'selectors'
 import type { CharacterType } from './index.jsx'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -24,6 +26,7 @@ type ExposedProps = {
 }
 type Props = ExposedProps & {
   canIEdit: boolean,
+  currentType: string,
   changeCharacterType: Function,
 }
 type State = {
@@ -32,10 +35,10 @@ type State = {
 }
 
 class MenuchangeCharacterType extends React.PureComponent<Props, State> {
-  state = { open: false, type: 'SolarCharacter' }
+  state = { open: false, type: this.props.currentType }
 
   handleOpen = () => {
-    this.setState({ open: true })
+    this.setState({ open: true, type: this.props.currentType })
   }
 
   handleClose = () => {
@@ -55,6 +58,9 @@ class MenuchangeCharacterType extends React.PureComponent<Props, State> {
     if (!this.props.canIEdit || this.props.characterType !== 'character')
       return null
 
+    const showCharacterDisclaimer =
+      this.state.type === 'Character' && this.props.currentType !== 'Character'
+
     return (
       <>
         <MenuItem button onClick={this.handleOpen}>
@@ -64,24 +70,31 @@ class MenuchangeCharacterType extends React.PureComponent<Props, State> {
         <Dialog open={this.state.open} onClose={this.handleClose}>
           <DialogTitle>Change Exalt Type (experimental)</DialogTitle>
           <DialogContent>
+            <DialogContentText>
+              Current type: {prettyType(this.props.currentType)}
+            </DialogContentText>
+
             <ExaltTypeSelect
               value={this.state.type}
               onChange={this.handleChange}
             />
 
-            {this.state.type === 'Character' && (
-              <>
-                <DialogContentText>
-                  Switching your character type to Mortal will delete all Native
-                  Charms, Martial Arts Charms, Evocations, and Spirit Charms
-                  that this character may have. This cannot be undone!
-                </DialogContentText>
-              </>
+            {showCharacterDisclaimer && (
+              <DialogContentText>
+                Switching your character type to Mortal will delete all Native
+                Charms, Martial Arts Charms, Evocations, and Spirit Charms that
+                this character may have. This cannot be undone!
+              </DialogContentText>
             )}
           </DialogContent>
+
           <DialogActions>
             <Button onClick={this.handleClose}>Cancel</Button>
-            <Button variant="raised" onClick={this.handleSubmit}>
+            <Button
+              variant="raised"
+              onClick={this.handleSubmit}
+              disabled={this.state.type === this.props.characterType}
+            >
               Change type
             </Button>
           </DialogActions>
@@ -93,6 +106,10 @@ class MenuchangeCharacterType extends React.PureComponent<Props, State> {
 
 const mapStateToProps = (state, props: ExposedProps) => ({
   canIEdit: canIEdit(state, props.id, props.characterType),
+  currentType:
+    props.characterType === 'character'
+      ? getSpecificCharacter(state, props.id).type
+      : undefined,
 })
 
 const enhance: Enhancer<Props, ExposedProps> = connect(

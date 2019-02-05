@@ -6,17 +6,56 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
+export const prettyType = (type: string) => {
+  switch (type) {
+    case 'Character':
+      return 'Mortal'
+    case 'SolarCharacter':
+      return 'Solar Exalt'
+    case 'DragonbloodCharacter':
+      return 'Dragon-Blooded Exalt'
+    case 'LunarCharacter':
+      return 'Lunar Exalt'
+
+    case 'CustomAbilityCharacter':
+      return 'Ability-Based Exalt'
+    case 'CustomAttributeCharacter':
+      return 'Attribute-Based Exalt'
+    case 'CustomEssenceCharacter':
+      return 'Essence-Based Exalt / Spirit'
+  }
+}
+
 type Props = { value: string, onChange: Function }
 class ExaltTypeSelect extends PureComponent<Props> {
   render() {
     const { value, onChange } = this.props
+
+    const MenuItemMapping = t => (
+      <MenuItem key={t} value={t}>
+        {prettyType(t)}
+      </MenuItem>
+    )
+
+    const canonChoices = [
+      'Character',
+      'SolarCharacter',
+      'DragonbloodCharacter',
+      // 'LunarCharacter',
+    ].map(MenuItemMapping)
+
+    const customChoices = [
+      'CustomAbilityCharacter',
+      'CustomAttributeCharacter',
+      'CustomEssenceCharacter',
+    ].map(MenuItemMapping)
 
     return (
       <TextField
         select
         name="type"
         value={value}
-        label={value === 'Character' ? 'Character Type' : 'Exalt Type '}
+        label={value === 'Character' ? 'Character Type' : 'Exalt Type'}
         onChange={onChange}
         fullWidth
         margin="normal"
@@ -25,20 +64,12 @@ class ExaltTypeSelect extends PureComponent<Props> {
         <ListSubheader disabled value="">
           Canon/Published Exalts
         </ListSubheader>
-        <MenuItem value="Character">Mortal</MenuItem>
-        <MenuItem value="SolarCharacter">Solar Exalt</MenuItem>
-        <MenuItem value="DragonbloodCharacter">Dragon-Blooded Exalt</MenuItem>
+        {canonChoices}
 
         <ListSubheader disabled value="">
           Custom / Houserule / Exigent Exalts
         </ListSubheader>
-        <MenuItem value="CustomAbilityCharacter">Ability-Based Exalt</MenuItem>
-        <MenuItem value="CustomAttributeCharacter">
-          Attribute-Based Exalt
-        </MenuItem>
-        <MenuItem value="CustomEssenceCharacter">
-          Essence-Based Exalt / Spirit
-        </MenuItem>
+        {customChoices}
       </TextField>
     )
   }

@@ -3,7 +3,7 @@
 Knock.setup do |config|
   # Use Rails 5.2 Credentials instead of 5.1 Secrets:
   # https://github.com/nsarno/knock/issues/205
-  config.token_secret_signature_key = -> { Rails.application.credentials.read }
+  config.token_secret_signature_key = -> { Rails.application.credentials.secret_key_base }
 
   ## Expiration claim
   ## ----------------

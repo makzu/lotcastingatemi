@@ -38,10 +38,10 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'bootsnap', '~> 1.3.0', require: false
 
 # Authentication/Authorization
-gem 'knock'
+gem 'knock', '~> 2.2.0', git: 'https://github.com/makzu/knock'
 gem 'pundit'
 
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 0.6.0'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'

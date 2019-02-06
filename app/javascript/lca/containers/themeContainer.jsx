@@ -3,6 +3,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { light, dark } from '@material-ui/core/styles/createPalette'
 import green from '@material-ui/core/colors/green'
 import lightgreen from '@material-ui/core/colors/lightGreen'
 import teal from '@material-ui/core/colors/teal'
@@ -15,6 +16,9 @@ import type { Enhancer } from 'utils/flow-types'
  * and to re-run `rails g favicon`
  */
 const themeCommon = {
+  typography: {
+    useNextVariants: true,
+  },
   overrides: {
     MuiSelect: {
       selectMenu: {
@@ -30,6 +34,12 @@ const themes = {
       secondary: { main: lightgreen[400] },
     },
     ...themeCommon,
+    typography: {
+      ...themeCommon.typography,
+      caption: {
+        color: light.text.secondary,
+      },
+    },
   }),
   dark: createMuiTheme({
     palette: {
@@ -38,6 +48,12 @@ const themes = {
       type: 'dark',
     },
     ...themeCommon,
+    typography: {
+      ...themeCommon.typography,
+      caption: {
+        color: dark.text.secondary,
+      },
+    },
   }),
 }
 type ExposedProps = {

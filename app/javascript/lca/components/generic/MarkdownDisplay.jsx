@@ -14,7 +14,7 @@ type LinkRendererProps = {
 }
 // This won't work for mailto: links or any other non-http(/s) link.
 // Does it need to?
-const LinkRenderer = (props: LinkRendererProps) =>
+export const LinkRenderer = (props: LinkRendererProps) =>
   props.href.match(/^(https?:)?\/\//) ? (
     <a href={props.href}>{props.children}</a>
   ) : (
@@ -23,14 +23,17 @@ const LinkRenderer = (props: LinkRendererProps) =>
 
 type Props = {
   source: string,
+  noBlocks?: boolean,
   classes: Object,
 }
-const MarkdownDisplay = ({ source, classes }: Props) => (
+const MarkdownDisplay = ({ source, noBlocks, classes }: Props) => (
   <Typography
     component={ReactMarkdown}
     source={source}
     className={classes.markdown}
     renderers={{ link: LinkRenderer }}
+    allowedTypes={noBlocks && ['text', 'strong', 'emphasis', 'delete', 'link']}
+    unwrapDisallowed={noBlocks}
   />
 )
 

@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -12,6 +11,7 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import styles from './CharmStyles.js'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import { checkVisible } from 'utils'
 import type { Charm } from 'utils/flow-types'
 
@@ -49,20 +49,15 @@ export const PrereqSummaryLine = ({ charm, classes }: Props) => (
   </Typography>
 )
 
-export const CharmSummaryLine = ({ charm, classes }: Props) => (
-  <Typography className={classes.summary} component="div">
-    <ReactMarkdown
-      source={
-        charm.summary.length === 0
-          ? charm.body.substring(0, 200) +
-            (charm.body.length > 200 ? '...' : '')
-          : charm.summary
-      }
-      allowedTypes={['text', 'strong', 'emphasis', 'delete']}
-      unwrapDisallowed
-      className={classes.markdown}
-    />
-  </Typography>
+export const CharmSummaryLine = ({ charm }: { charm: Charm }) => (
+  <MarkdownDisplay
+    source={
+      charm.summary.length === 0
+        ? charm.body.substring(0, 200) + (charm.body.length > 200 ? '...' : '')
+        : charm.summary
+    }
+    noBlocks
+  />
 )
 
 type BlockProps = Props & { isOpen: boolean }
@@ -72,7 +67,7 @@ export const CharmSummaryBlock = ({ charm, isOpen, classes }: BlockProps) => (
     <Typography variant="caption" className={classes.capitalize}>
       {charm.cost}, {charm.timing}, {charm.duration}
     </Typography>
-    <CharmSummaryLine charm={charm} classes={classes} />
+    <CharmSummaryLine charm={charm} />
   </Collapse>
 )
 
@@ -133,9 +128,7 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
             <strong>Prerequisite Charms:</strong> {charm.prereqs || 'None'}
           </Typography>
 
-          <Typography className={classes.charmBody} component="div">
-            <ReactMarkdown source={charm.body} className={classes.markdown} />
-          </Typography>
+          <MarkdownDisplay source={charm.body} />
 
           {charm.ref != '' && (
             <Typography variant="caption">Ref: {charm.ref}</Typography>

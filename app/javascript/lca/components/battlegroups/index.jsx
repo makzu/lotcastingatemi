@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -10,12 +9,11 @@ import Typography from '@material-ui/core/Typography'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
+import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
-
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
-
 import {
   prettyDrillRating,
   bgAttackPool,
@@ -144,11 +142,7 @@ class BattlegroupSheet extends Component<Props> {
 
     return (
       <BlockPaper>
-        <Typography
-          component={ReactMarkdown}
-          source={battlegroup.description}
-          className={classes.markdown}
-        />
+        <MarkdownDisplay source={battlegroup.description} />
 
         <div className={classes.flexContainerWrap}>
           <BattlegroupHealthDisplay

@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react'
 import DocumentTitle from 'react-document-title'
-import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -13,6 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import CharacterLoadError from './CharacterLoadError.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 import { getSpecificCharacter } from 'selectors'
 import { spentXp, spentSolarXp } from 'utils/calculated'
@@ -61,11 +61,7 @@ class BioFullPage extends Component<Props> {
 
           <Grid item xs={12}>
             <BlockPaper>
-              <Typography
-                component={ReactMarkdown}
-                className={classes.markdown}
-                source={character.description}
-              />
+              <MarkdownDisplay source={character.description} />
             </BlockPaper>
           </Grid>
 
@@ -107,17 +103,9 @@ class BioFullPage extends Component<Props> {
               <Typography variant="subtitle1">
                 Inventory/Other Equipment
               </Typography>
-              <Typography
-                component={ReactMarkdown}
-                className={classes.markdown}
-                source={character.equipment || 'None'}
-              />
+              <MarkdownDisplay source={character.equipment || 'None'} />
               <Typography variant="subtitle1">Notes</Typography>
-              <Typography
-                component={ReactMarkdown}
-                className={classes.markdown}
-                source={character.notes}
-              />
+              <MarkdownDisplay source={character.notes} />
             </BlockPaper>
           </Grid>
 

@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography'
 import BlockPaper from '../generic/blockPaper.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
+import MarkdownDisplay, {
+  LinkRenderer,
+} from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
@@ -202,7 +205,11 @@ class QcSheet extends Component<Props> {
     const merits = qc_merits.map(merit => (
       <div key={merit.id}>
         <strong>{merit.name} </strong>
-        <ReactMarkdown source={merit.body} className={classes.markdown} />
+        <ReactMarkdown
+          source={merit.body}
+          className={classes.markdown}
+          renderers={{ link: LinkRenderer }}
+        />
       </div>
     ))
     const charms = qc_charms.map(charm => (
@@ -211,18 +218,17 @@ class QcSheet extends Component<Props> {
         {charm.duration}; Essence&nbsp;
         {charm.min_essence}
         )&nbsp;
-        <ReactMarkdown source={charm.body} className={classes.markdown} />
+        <ReactMarkdown
+          source={charm.body}
+          className={classes.markdown}
+          renderers={{ link: LinkRenderer }}
+        />
       </div>
     ))
 
     return (
       <BlockPaper>
-        <Typography component="div">
-          <ReactMarkdown
-            source={qc.description || 'No Description'}
-            className={classes.markdown}
-          />
-        </Typography>
+        <MarkdownDisplay source={qc.description || 'No Description'} />
 
         <div className={classes.rowContainer}>
           <PoolDisplay
@@ -351,7 +357,9 @@ class QcSheet extends Component<Props> {
         {charms.length > 0 && (
           <Fragment>
             <Typography variant="subtitle1">Charms</Typography>
-            <Typography component="div">{charms}</Typography>
+            <Typography gutterBottom component="div">
+              {charms}
+            </Typography>
           </Fragment>
         )}
 

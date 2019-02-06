@@ -2,10 +2,8 @@
 import React, { Component, Fragment } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import ReactMarkdown from 'react-markdown'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
@@ -16,8 +14,8 @@ import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import commonStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateChronicle } from 'ducks/actions.js'
@@ -70,7 +68,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
         </BlockPaper>
       )
 
-    const { chronicle, st, is_st, players, classes } = this.props
+    const { chronicle, st, is_st, players } = this.props
     const { onChange } = this
 
     const playerList = players.map(p => (
@@ -98,11 +96,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
         {chronicle.notes !== '' && (
           <Grid item xs={12} md={8}>
             <BlockPaper>
-              <Typography
-                component={ReactMarkdown}
-                source={chronicle.notes}
-                className={classes.markdown}
-              />
+              <MarkdownDisplay source={chronicle.notes} />
             </BlockPaper>
           </Grid>
         )}
@@ -178,7 +172,6 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
-  withStyles(commonStyles),
   connect(
     mapStateToProps,
     { updateChronicle }

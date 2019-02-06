@@ -1,22 +1,16 @@
 // @flow
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 
-import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import sharedStyles from 'styles/'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import { prettyFullExaltType } from 'utils/calculated'
 
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
-  ...sharedStyles(theme),
-})
-
-type Props = { character: Character, classes: Object }
-const BasicsBlock = ({ character, classes }: Props) => (
+type Props = { character: Character }
+const BasicsBlock = ({ character }: Props) => (
   <BlockPaper>
     <Typography variant="h5">{character.name}</Typography>
 
@@ -24,12 +18,8 @@ const BasicsBlock = ({ character, classes }: Props) => (
       Essence {character.essence} {prettyFullExaltType(character)}
     </Typography>
 
-    <Typography
-      component={ReactMarkdown}
-      source={character.description}
-      className={classes.markdown}
-    />
+    <MarkdownDisplay source={character.description} />
   </BlockPaper>
 )
 
-export default withStyles(styles)(BasicsBlock)
+export default BasicsBlock

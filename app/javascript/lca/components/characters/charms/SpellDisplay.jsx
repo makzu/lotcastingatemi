@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -12,6 +11,7 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import styles from './CharmStyles.js'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import { checkVisible } from 'utils'
 import type { Spell } from 'utils/flow-types'
 
@@ -23,24 +23,15 @@ function scrollToPanel(e, appearing, id) {
 
 export type SpellSummaryLineProps = {
   spell: Spell,
-  classes: Object,
 }
-export const SpellSummaryLine = (props: SpellSummaryLineProps) => {
-  const { spell, classes } = props
-
-  return (
-    <Typography className={classes.summary} component="div">
-      <ReactMarkdown
-        source={
-          spell.body.substring(0, 200) + (spell.body.length > 200 ? '...' : '')
-        }
-        allowedTypes={['text', 'strong', 'emphasis', 'delete', 'link']}
-        unwrapDisallowed
-        className={classes.markdown}
-      />
-    </Typography>
-  )
-}
+export const SpellSummaryLine = ({ spell }: SpellSummaryLineProps) => (
+  <MarkdownDisplay
+    source={
+      spell.body.substring(0, 200) + (spell.body.length > 200 ? '...' : '')
+    }
+    noBlocks
+  />
+)
 
 export type SpellSummaryBlockProps = {
   spell: Spell,
@@ -59,7 +50,7 @@ export const SpellSummaryBlock = (props: SpellSummaryBlockProps) => {
       <Typography variant="caption" className={classes.capitalize}>
         {spell.cost}, {spell.duration}
       </Typography>
-      <SpellSummaryLine spell={spell} classes={classes} />
+      <SpellSummaryLine spell={spell} />
     </Collapse>
   )
 }
@@ -112,9 +103,7 @@ function SpellDisplay(props: SpellDisplayProps) {
             <span className={classes.capitalize}>{spell.duration}</span>
           </Typography>
 
-          <Typography className={classes.spellBody} component="div">
-            <ReactMarkdown source={spell.body} className={classes.markdown} />
-          </Typography>
+          <MarkdownDisplay source={spell.body} />
 
           {spell.ref != '' && (
             <Typography variant="caption">Ref: {spell.ref}</Typography>

@@ -1,11 +1,10 @@
 // @flow
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 
 import WeaponPoolDisplay from '../weapons/WeaponPoolDisplay.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import commonStyles from 'styles'
 import type { fullWeapon } from 'utils/flow-types'
 
@@ -89,13 +88,7 @@ function WeaponLine({ weapon, classes }: Props) {
 
       {weapon.notes !== '' && (
         <div className={classes.notes}>
-          <Typography
-            component={ReactMarkdown}
-            source={weapon.notes}
-            className={classes.markdown}
-            allowedTypes={['text', 'strong', 'emphasis', 'delete', 'link']}
-            unwrapDisallowed
-          />
+          <MarkdownDisplay source={weapon.notes} noBlocks />
         </div>
       )}
     </div>

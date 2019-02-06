@@ -1,7 +1,6 @@
 // @flow
 import { isEqual } from 'lodash'
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -11,10 +10,10 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import DescriptionIcon from '@material-ui/icons/Description'
 
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
 import { updateCharacter } from 'ducks/actions.js'
@@ -94,11 +93,7 @@ class NotesPopup extends React.Component<Props, State> {
                 onChange={handleChange}
               />
             ) : (
-              <Typography
-                component={ReactMarkdown}
-                source={character.notes || 'No notes'}
-                styles={classes.markdown}
-              />
+              <MarkdownDisplay source={character.notes || 'No notes'} />
             )}
           </DialogContent>
           <DialogActions>

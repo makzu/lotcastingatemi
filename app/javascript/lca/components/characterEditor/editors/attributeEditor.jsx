@@ -32,9 +32,9 @@ function AttributeEditor(props: Props) {
 
   return (
     <BlockPaper>
-      <Typography variant="title">Attributes</Typography>
+      <Typography variant="h6">Attributes</Typography>
       <div className={classes.fieldSet}>
-        <Typography variant="subheading">Physical</Typography>
+        <Typography variant="subtitle1">Physical</Typography>
         <AttributeField
           trait="attr_strength"
           value={character.attr_strength}
@@ -56,7 +56,7 @@ function AttributeEditor(props: Props) {
       </div>
 
       <div className={classes.fieldSet}>
-        <Typography variant="subheading">Social</Typography>
+        <Typography variant="subtitle1">Social</Typography>
 
         <AttributeField
           trait="attr_charisma"
@@ -79,7 +79,7 @@ function AttributeEditor(props: Props) {
       </div>
 
       <div className={classes.fieldSet}>
-        <Typography variant="subheading">Mental</Typography>
+        <Typography variant="subtitle1">Mental</Typography>
 
         <AttributeField
           trait="attr_perception"

@@ -12,7 +12,7 @@ type Props = { character: withHealthLevels, penalties: Object }
 export default function HealthLevelBlock({ character, penalties }: Props) {
   return (
     <BlockPaper>
-      <Typography variant="title">Health Levels</Typography>
+      <Typography variant="h6">Health Levels</Typography>
 
       <HealthLevelBoxes character={character} />
 

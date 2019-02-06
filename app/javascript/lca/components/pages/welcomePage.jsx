@@ -15,7 +15,7 @@ const WelcomePage = () => (
 
     <Grid item xs={12} lg={8}>
       <BlockPaper>
-        <Typography variant="headline" gutterBottom>
+        <Typography variant="h5" gutterBottom>
           Lot-Casting Atemi
         </Typography>
         <Typography gutterBottom>
@@ -47,7 +47,7 @@ const WelcomePage = () => (
       <Grid item xs={1} />
     </Hidden>
     <Grid item xs={12} lg={6}>
-      <Typography variant="display2" style={{ textAlign: 'right' }}>
+      <Typography variant="h3" style={{ textAlign: 'right' }}>
         Harmonious Exalted 3e character management for a new age
       </Typography>
     </Grid>
@@ -83,7 +83,7 @@ const WelcomePage = () => (
 
     <Hidden lgUp>
       <Grid item xs={12}>
-        <Typography variant="display2" style={{ textAlign: 'right' }}>
+        <Typography variant="h3" style={{ textAlign: 'right' }}>
           Ideal Battle(group) Knowledge Prana
         </Typography>
       </Grid>
@@ -101,7 +101,7 @@ const WelcomePage = () => (
     </Grid>
     <Hidden mdDown>
       <Grid item lg={6}>
-        <Typography variant="display2">
+        <Typography variant="h3">
           Ideal Battle(group) Knowledge Prana
         </Typography>
       </Grid>
@@ -110,11 +110,12 @@ const WelcomePage = () => (
     <Grid item xs={12}>
       <div style={{ height: '5em' }} />
     </Grid>
+
     <Hidden mdDown>
       <Grid item xs={1} />
     </Hidden>
     <Grid item xs={12} lg={6}>
-      <Typography variant="display2" style={{ textAlign: 'right' }}>
+      <Typography variant="h3" style={{ textAlign: 'right' }}>
         Excellent Friend Approach
       </Typography>
     </Grid>

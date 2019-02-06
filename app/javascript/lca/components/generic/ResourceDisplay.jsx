@@ -14,7 +14,7 @@ const styles = theme => ({
     position: 'relative',
   },
   current: {
-    ...theme.typography.display1,
+    ...theme.typography.h4,
     display: 'inline-block',
     verticalAlign: 'top',
   },

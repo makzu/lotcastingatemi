@@ -87,7 +87,7 @@ export function CharacterCard({
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
-            variant="title"
+            variant="h6"
             className={
               character.has_acted ? classes.hasActed : classes.characterName
             }

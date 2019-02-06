@@ -41,7 +41,7 @@ function FullSpecialtyBlock({ character, classes }: Props) {
 
   return (
     <BlockPaper>
-      <Typography variant="title">Specialties</Typography>
+      <Typography variant="h6">Specialties</Typography>
 
       {spec}
     </BlockPaper>

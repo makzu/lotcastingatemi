@@ -240,7 +240,7 @@ class BattlegroupEditor extends Component<Props> {
           margin="dense"
           onChange={handleChange}
         />
-        <Typography variant="subheading">Combat stats</Typography>
+        <Typography variant="subtitle1">Combat stats</Typography>
         <RatingField
           trait="join_battle"
           value={battlegroup.join_battle}

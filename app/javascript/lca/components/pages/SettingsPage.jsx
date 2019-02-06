@@ -75,7 +75,7 @@ class SettingsPage extends React.Component<Props, { open: boolean }> {
 
     return (
       <BlockPaper>
-        <Typography variant="headline" gutterBottom>
+        <Typography variant="h5" gutterBottom>
           Settings
         </Typography>
 

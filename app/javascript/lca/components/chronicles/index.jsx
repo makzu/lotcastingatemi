@@ -127,7 +127,7 @@ class ChronicleDashboard extends Component<Props> {
 
         <SortableGridList
           header={
-            <Typography variant="headline">
+            <Typography variant="h5">
               Characters
               <CharacterAddPopup chronicleId={chronicle.id} />
             </Typography>
@@ -148,7 +148,7 @@ class ChronicleDashboard extends Component<Props> {
 
         <SortableGridList
           header={
-            <Typography variant="headline">
+            <Typography variant="h5">
               Quick Characters
               <QcAddPopup chronicleId={chronicle.id} />
             </Typography>
@@ -169,7 +169,7 @@ class ChronicleDashboard extends Component<Props> {
 
         <SortableGridList
           header={
-            <Typography variant="headline">
+            <Typography variant="h5">
               Battlegroups
               <BattlegroupAddPopup chronicleId={chronicle.id} />
             </Typography>

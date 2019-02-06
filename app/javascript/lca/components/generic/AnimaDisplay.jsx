@@ -31,7 +31,7 @@ const styles = theme => ({
     textAlign: 'left',
   },
   animaCurrent: {
-    ...theme.typography.display1,
+    ...theme.typography.h4,
     display: 'inline-block',
     fontSize: '1.75rem',
     verticalAlign: 'top',

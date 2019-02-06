@@ -106,7 +106,7 @@ class MeritEditor extends Component<Props> {
         <SortableGridList
           header={
             <Typography
-              variant="headline"
+              variant="h5"
               component="div"
               style={{ display: 'flex' }}
             >

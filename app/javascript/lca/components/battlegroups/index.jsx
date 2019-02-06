@@ -230,7 +230,7 @@ class BattlegroupSheet extends Component<Props> {
           </div>
         </div>
 
-        <Typography variant="subheading">Attacks</Typography>
+        <Typography variant="subtitle1">Attacks</Typography>
         {attacks}
 
         <div className={classes.flexContainerWrap}>

@@ -207,7 +207,7 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
 
   return (
     <BlockPaper>
-      <Typography variant="title">Abilities</Typography>
+      <Typography variant="h6">Abilities</Typography>
       {groupA}
       {craft}
       {groupB}

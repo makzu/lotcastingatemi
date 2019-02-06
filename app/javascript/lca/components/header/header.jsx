@@ -28,7 +28,7 @@ export const GenericHeader = () => (
   <Toolbar>
     <LcaDrawerButton />
 
-    <Typography variant="title" color="inherit">
+    <Typography variant="h6" color="inherit">
       Lot-Casting Atemi
     </Typography>
   </Toolbar>

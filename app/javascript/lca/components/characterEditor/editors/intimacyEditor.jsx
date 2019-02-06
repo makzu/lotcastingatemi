@@ -20,7 +20,7 @@ class IntimacyEditor extends React.Component<Props> {
 
     return (
       <BlockPaper>
-        <Typography variant="title">Intimacies</Typography>
+        <Typography variant="h6">Intimacies</Typography>
 
         <Editor
           character={character}

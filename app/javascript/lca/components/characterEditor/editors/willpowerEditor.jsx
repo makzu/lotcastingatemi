@@ -20,7 +20,7 @@ const styles = theme => ({
 type Props = { character: Character, onChange: Function, classes: Object }
 const WillpowerEditor = ({ character, onChange, classes }: Props) => (
   <BlockPaper>
-    <Typography variant="title">Willpower:</Typography>
+    <Typography variant="h6">Willpower:</Typography>
 
     <div>
       <RatingField

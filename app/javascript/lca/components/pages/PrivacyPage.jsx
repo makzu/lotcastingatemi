@@ -7,11 +7,11 @@ import BlockPaper from '../generic/blockPaper.jsx'
 
 const PrivacyPage = () => (
   <BlockPaper>
-    <Typography variant="headline" gutterBottom>
+    <Typography variant="h5" gutterBottom>
       Privacy Policy and Legal Mumbo-Jumbo
     </Typography>
 
-    <Typography variant="subheading">Information collection and use</Typography>
+    <Typography variant="subtitle1">Information collection and use</Typography>
     <Typography paragraph>
       Let&apos;s cut straight to the chase: Lot-Casting Atemi saves your email
       address when you use the &apos;log in with Google&apos; link. It&apos;s
@@ -26,14 +26,14 @@ const PrivacyPage = () => (
       or when compelled to by a court order or something.
     </Typography>
 
-    <Typography variant="subheading">Cookies</Typography>
+    <Typography variant="subtitle1">Cookies</Typography>
     <Typography paragraph>
       Lot-Casting Atemi uses Cookies and similar techniques to help the site
       work better. If you have Cookies disabled, portions of the site might not
       work.
     </Typography>
 
-    <Typography variant="subheading">Service Providers</Typography>
+    <Typography variant="subtitle1">Service Providers</Typography>
     <Typography
       paragraph
       component="a"
@@ -43,13 +43,13 @@ const PrivacyPage = () => (
       security and privacy policies that apply to it.
     </Typography>
 
-    <Typography variant="subheading">Links to Other Sites</Typography>
+    <Typography variant="subtitle1">Links to Other Sites</Typography>
     <Typography paragraph>
       There are a few links to other sites in the app. Those other sites are not
       operated by me and have their own privacy policies and so on
     </Typography>
 
-    <Typography variant="subheading">Changes to this Policy</Typography>
+    <Typography variant="subtitle1">Changes to this Policy</Typography>
     <Typography paragraph>
       This privacy policy might update from time to time, so if you&apos;re
       concerned by these sorts of things you can periodically check this page

@@ -88,7 +88,7 @@ function SpellDisplay(props: SpellDisplayProps) {
           <div id={`spell-expando-${spell.id}`} className={classes.charmAnchor}>
             &nbsp;
           </div>
-          <Typography variant="title">{spell.name}</Typography>
+          <Typography variant="h6">{spell.name}</Typography>
 
           <SpellSummaryBlock spell={spell} isOpen={isOpen} classes={classes} />
         </div>

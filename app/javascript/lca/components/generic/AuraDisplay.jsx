@@ -27,7 +27,7 @@ const styles = theme => ({
     paddingLeft: '0.25rem',
   },
   current: {
-    ...theme.typography.display1,
+    ...theme.typography.h4,
     fontSize: '1.75rem',
     display: 'inline-block',
     verticalAlign: 'top',

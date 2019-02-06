@@ -20,7 +20,7 @@ const StControls = ({ chronicleId, endScene }: Props) => {
   return (
     <ExpansionPanel>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="subheading">ST Controls</Typography>
+        <Typography variant="subtitle1">ST Controls</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <Button onClick={_endScene}>End Scene</Button>

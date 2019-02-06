@@ -63,7 +63,7 @@ function BattlegroupCard({ battlegroup, classes }: Props) {
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
-            variant="title"
+            variant="h6"
             className={
               battlegroup.has_acted ? classes.hasActed : classes.battlegroupName
             }

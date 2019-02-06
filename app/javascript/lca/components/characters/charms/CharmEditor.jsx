@@ -381,7 +381,7 @@ class CharmEditor extends Component<Props, State> {
           <Fragment>
             <SortableGridList
               header={
-                <Typography variant="headline">
+                <Typography variant="h5">
                   Charms &nbsp;&nbsp;
                   <Button onClick={handleAddNative}>
                     Add <Hidden smDown>Charm</Hidden>
@@ -407,7 +407,7 @@ class CharmEditor extends Component<Props, State> {
             />
             <SortableGridList
               header={
-                <Typography variant="headline">
+                <Typography variant="h5">
                   Martial Arts &nbsp;&nbsp;
                   <Button onClick={handleAddMA}>
                     Add <Hidden smDown>MA Charm</Hidden>
@@ -433,7 +433,7 @@ class CharmEditor extends Component<Props, State> {
             />
             <SortableGridList
               header={
-                <Typography variant="headline">
+                <Typography variant="h5">
                   Evocations &nbsp;&nbsp;
                   <Button onClick={handleAddEvocation}>
                     Add <Hidden smDown>Evocation</Hidden>
@@ -459,7 +459,7 @@ class CharmEditor extends Component<Props, State> {
             />
             <SortableGridList
               header={
-                <Typography variant="headline">
+                <Typography variant="h5">
                   Spirit Charms &nbsp;&nbsp;
                   <Button onClick={handleAddSpirit}>
                     Add <Hidden smDown>Spirit Charm</Hidden>
@@ -487,7 +487,7 @@ class CharmEditor extends Component<Props, State> {
         )}
         <SortableGridList
           header={
-            <Typography variant="headline">
+            <Typography variant="h5">
               Spells &nbsp;&nbsp;
               <Button onClick={handleAddSpell}>
                 Add Spell&nbsp;

@@ -7,7 +7,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 
 const ResourcesPage = () => (
   <BlockPaper>
-    <Typography variant="headline" gutterBottom>
+    <Typography variant="h5" gutterBottom>
       Resources
     </Typography>
 

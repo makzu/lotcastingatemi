@@ -51,7 +51,7 @@ class BioEditor extends Component<Props> {
 
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <Typography variant="headline">Bio/Misc</Typography>
+            <Typography variant="h5">Bio/Misc</Typography>
           </Grid>
 
           <Grid item xs={12} md={6}>

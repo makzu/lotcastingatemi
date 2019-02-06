@@ -14,7 +14,7 @@ export type Props = { character: Character, pools: Object }
 function AttributeBlock({ character, pools }: Props) {
   return (
     <BlockPaper>
-      <Typography variant="title">Attributes</Typography>
+      <Typography variant="h6">Attributes</Typography>
       <Grid container spacing={24}>
         <Grid item xs={12} md={4}>
           <AttributeBlockPhysical character={character} pools={pools} />

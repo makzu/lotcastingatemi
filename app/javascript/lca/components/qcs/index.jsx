@@ -235,7 +235,7 @@ class QcSheet extends Component<Props> {
           <SpendableBlock character={qc} qc />
         </div>
 
-        <Typography variant="subheading">Combat</Typography>
+        <Typography variant="subtitle1">Combat</Typography>
         <div className={classes.rowContainer}>
           <PoolDisplay
             label="Join Battle"
@@ -249,7 +249,7 @@ class QcSheet extends Component<Props> {
           />
         </div>
 
-        <Typography variant="subheading">Attacks</Typography>
+        <Typography variant="subtitle1">Attacks</Typography>
         {attacks.length == 0 && <Typography paragraph>None</Typography>}
         {attacks}
         {qc.grapple > 0 && (
@@ -273,7 +273,7 @@ class QcSheet extends Component<Props> {
           </div>
         )}
 
-        <Typography variant="subheading">Defenses</Typography>
+        <Typography variant="subtitle1">Defenses</Typography>
         <div className={classes.rowContainer}>
           <PoolDisplay
             label="Evasion"
@@ -307,7 +307,7 @@ class QcSheet extends Component<Props> {
           </div>
         </div>
 
-        <Typography variant="subheading">Actions</Typography>
+        <Typography variant="subtitle1">Actions</Typography>
         <div className={classes.rowContainer}>
           <PoolDisplay
             label="Senses"
@@ -317,7 +317,7 @@ class QcSheet extends Component<Props> {
           {actions}
         </div>
 
-        <Typography variant="subheading">Social</Typography>
+        <Typography variant="subtitle1">Social</Typography>
         <div className={classes.rowContainer}>
           <PoolDisplay
             label="Resolve"
@@ -336,21 +336,21 @@ class QcSheet extends Component<Props> {
           />
         </div>
 
-        <Typography variant="subheading">Intimacies</Typography>
+        <Typography variant="subtitle1">Intimacies</Typography>
         <Typography gutterBottom component="div">
           {principles.length == 0 && ties.length == 0 && 'No Intimacies'}
           {principles}
           {ties}
         </Typography>
 
-        <Typography variant="subheading">Merits</Typography>
+        <Typography variant="subtitle1">Merits</Typography>
         <Typography gutterBottom component="div">
           {merits}
         </Typography>
 
         {charms.length > 0 && (
           <Fragment>
-            <Typography variant="subheading">Charms</Typography>
+            <Typography variant="subtitle1">Charms</Typography>
             <Typography component="div">{charms}</Typography>
           </Fragment>
         )}

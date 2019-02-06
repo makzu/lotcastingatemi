@@ -70,7 +70,7 @@ const styles = theme => ({
     ...theme.typography.caption,
   },
   animaCurrent: {
-    ...theme.typography.display1,
+    ...theme.typography.h4,
     display: 'inline-block',
     verticalAlign: 'top',
   },
@@ -128,7 +128,7 @@ export function CharacterCard({
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
-            variant="title"
+            variant="h6"
             className={classes.characterName}
             component={Link}
             to={`/characters/${character.id}`}

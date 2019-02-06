@@ -56,7 +56,7 @@ class BioFullPage extends Component<Props> {
 
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <Typography variant="headline">Bio/Misc</Typography>
+            <Typography variant="h5">Bio/Misc</Typography>
           </Grid>
 
           <Grid item xs={12}>
@@ -104,7 +104,7 @@ class BioFullPage extends Component<Props> {
 
           <Grid item xs={12}>
             <BlockPaper>
-              <Typography variant="subheading">
+              <Typography variant="subtitle1">
                 Inventory/Other Equipment
               </Typography>
               <Typography
@@ -112,7 +112,7 @@ class BioFullPage extends Component<Props> {
                 className={classes.markdown}
                 source={character.equipment || 'None'}
               />
-              <Typography variant="subheading">Notes</Typography>
+              <Typography variant="subtitle1">Notes</Typography>
               <Typography
                 component={ReactMarkdown}
                 className={classes.markdown}
@@ -125,7 +125,7 @@ class BioFullPage extends Component<Props> {
             <BlockPaper>
               <div className={classes.flexContainerSpread}>
                 <div style={{ flex: 1 }}>
-                  <Typography variant="subheading">XP</Typography>
+                  <Typography variant="subtitle1">XP</Typography>
                   <Typography component="table">
                     <tbody>{xpTable(character.xp_log)}</tbody>
                   </Typography>
@@ -136,7 +136,7 @@ class BioFullPage extends Component<Props> {
                 </div>
 
                 <div style={{ flex: 1 }}>
-                  <Typography variant="subheading">
+                  <Typography variant="subtitle1">
                     {character.exalt_type === 'Dragon-Blood'
                       ? 'Dragon XP'
                       : 'Solar XP'}

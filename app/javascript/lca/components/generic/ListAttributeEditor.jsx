@@ -126,7 +126,7 @@ class ListAttributeEditor extends Component<Props> {
 
     return (
       <div data-cy={`${this.props.trait}-list-editor`}>
-        <Typography variant="subheading">
+        <Typography variant="subtitle1">
           {this.props.label}
           <Button
             onClick={onAdd.bind(this)}

@@ -67,7 +67,7 @@ class WeaponEditor extends React.Component<Props> {
 
     return (
       <BlockPaper>
-        <Typography variant="title">
+        <Typography variant="h6">
           Weapons
           <Button onClick={handleAdd}>
             Add&nbsp;

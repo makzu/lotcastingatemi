@@ -19,7 +19,7 @@ type Props = {
 function LimitEditor({ character, onChange }: Props) {
   return (
     <BlockPaper>
-      <Typography variant="title">Limit</Typography>
+      <Typography variant="h6">Limit</Typography>
 
       <RatingField
         trait="limit"

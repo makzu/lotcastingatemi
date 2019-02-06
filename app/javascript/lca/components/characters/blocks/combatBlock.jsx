@@ -26,7 +26,7 @@ type Props = { pools: Object, classes: Object }
 export function CombatBlock({ pools, classes }: Props) {
   return (
     <BlockPaper>
-      <Typography variant="title">Combat Pools</Typography>
+      <Typography variant="h6">Combat Pools</Typography>
       <div className={classes.container}>
         <PoolDisplay
           pool={pools.joinBattle}

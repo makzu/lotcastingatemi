@@ -25,7 +25,7 @@ const styles = theme => ({
 type Props = { pools: Object, classes: Object }
 const SocialBlock = ({ pools, classes }: Props) => (
   <BlockPaper>
-    <Typography variant="title">Social Pools</Typography>
+    <Typography variant="h6">Social Pools</Typography>
 
     <div className={classes.container}>
       <PoolDisplay

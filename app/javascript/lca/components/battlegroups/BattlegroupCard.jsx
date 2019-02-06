@@ -83,7 +83,7 @@ function BattlegroupCard(props: Props) {
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
-            variant="title"
+            variant="h6"
             className={classes.battlegroupName}
             component={Link}
             to={`/battlegroups/${battlegroup.id}`}

@@ -45,7 +45,7 @@ function ArmorEditor(props: Props) {
 
   return (
     <BlockPaper>
-      <Typography variant="title">Armor</Typography>
+      <Typography variant="h6">Armor</Typography>
 
       <TextField
         label="Name"

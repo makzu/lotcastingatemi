@@ -98,7 +98,7 @@ class SpellFields extends Component<Props> {
               &nbsp;
             </div>
             <Collapse in={!isOpen}>
-              <Typography variant="title">
+              <Typography variant="h6">
                 <Handle /> &nbsp;
                 {spell.name}
               </Typography>

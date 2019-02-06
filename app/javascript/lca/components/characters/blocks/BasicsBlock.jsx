@@ -18,9 +18,9 @@ const styles = theme => ({
 type Props = { character: Character, classes: Object }
 const BasicsBlock = ({ character, classes }: Props) => (
   <BlockPaper>
-    <Typography variant="headline">{character.name}</Typography>
+    <Typography variant="h5">{character.name}</Typography>
 
-    <Typography variant="subheading">
+    <Typography variant="subtitle1">
       Essence {character.essence} {prettyFullExaltType(character)}
     </Typography>
 

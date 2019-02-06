@@ -71,7 +71,7 @@ class QcMeritEditor extends React.Component<Props> {
     return (
       <SortableGridList
         header={
-          <Typography variant="title">
+          <Typography variant="h6">
             Merits
             <Button onClick={handleAdd}>
               Add Merit

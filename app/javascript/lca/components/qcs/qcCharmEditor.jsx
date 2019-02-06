@@ -81,7 +81,7 @@ class QcCharmEditor extends React.Component<Props> {
     return (
       <SortableGridList
         header={
-          <Typography variant="title">
+          <Typography variant="h6">
             Charms
             <Button onClick={handleAdd}>
               Add Charm

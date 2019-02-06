@@ -92,7 +92,7 @@ function QcCard(props: Props) {
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
-            variant="title"
+            variant="h6"
             className={classes.qcName}
             component={Link}
             to={`/qcs/${qc.id}`}

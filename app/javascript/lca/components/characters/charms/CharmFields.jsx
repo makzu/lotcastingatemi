@@ -104,7 +104,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               &nbsp;
             </div>
             <Collapse in={!isOpen}>
-              <Typography variant="title">
+              <Typography variant="h6">
                 <Handle /> &nbsp;
                 {charm.name}
               </Typography>

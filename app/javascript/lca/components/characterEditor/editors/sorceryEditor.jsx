@@ -46,7 +46,7 @@ function SorceryEditor(props: Props) {
 
   return (
     <BlockPaper>
-      <Typography variant="title">Sorcery</Typography>
+      <Typography variant="h6">Sorcery</Typography>
 
       <FormControlLabel
         label="Is sorcerer"

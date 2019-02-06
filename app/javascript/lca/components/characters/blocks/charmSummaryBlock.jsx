@@ -141,7 +141,7 @@ function CharmSummaryBlock(props: Props) {
   return (
     <BlockPaper>
       <Typography
-        variant="title"
+        variant="h6"
         gutterBottom
         component={Link}
         to={`/characters/${character.id}/charms`}

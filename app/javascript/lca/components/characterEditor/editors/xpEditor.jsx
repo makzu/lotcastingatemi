@@ -62,7 +62,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
 type Props = { character: Character, onChange: Function, classes: Object }
 const XpEditor = ({ character, onChange, classes }: Props) => (
   <BlockPaper>
-    <Typography variant="title">XP:</Typography>
+    <Typography variant="h6">XP:</Typography>
 
     <div className={classes.xpWrap}>
       <div className={classes.xpCol}>
@@ -120,7 +120,7 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
 
     <div className={classes.xpWrap}>
       <div className={classes.xpCol}>
-        <Typography variant="subheading" className={classes.subheading}>
+        <Typography variant="subtitle1" className={classes.subheading}>
           Craft XP:
         </Typography>
         <div>

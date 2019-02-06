@@ -28,7 +28,7 @@ class ErrorBoundary extends React.Component<Props, State> {
     if (error) {
       return (
         <div>
-          <Typography variant="title">{sample(errorNames)}</Typography>
+          <Typography variant="h6">{sample(errorNames)}</Typography>
           <Typography>Something went wrong.</Typography>
           <Typography>{error && error.message}</Typography>
         </div>

@@ -36,7 +36,7 @@ const styles = theme => ({
 type _SingleMeritProps = { merit: Merit, classes: Object }
 const _SingleMerit = ({ merit, classes }: _SingleMeritProps) => (
   <BlockPaper>
-    <Typography variant="title">
+    <Typography variant="h6">
       <RatingLine rating={merit.rating} dontFill merit>
         <span className={classes.name}>{merit.label || merit.merit_name}</span>
         {merit.label && (
@@ -83,7 +83,7 @@ class MeritFullPage extends Component<Props> {
         </Hidden>
 
         <Grid item xs={12}>
-          <Typography variant="headline">Merits</Typography>
+          <Typography variant="h5">Merits</Typography>
         </Grid>
 
         {mts}

@@ -314,7 +314,7 @@ class QcEditor extends Component<Props> {
 
         <Grid item xs={12} lg={6}>
           <BlockPaper>
-            <Typography variant="title">Social</Typography>
+            <Typography variant="h6">Social</Typography>
             <RatingField
               trait="resolve"
               value={qc.resolve}
@@ -348,7 +348,7 @@ class QcEditor extends Component<Props> {
 
         <Grid item xs={12}>
           <BlockPaper>
-            <Typography variant="title">Combat</Typography>
+            <Typography variant="h6">Combat</Typography>
             <RatingField
               trait="join_battle"
               value={qc.join_battle}

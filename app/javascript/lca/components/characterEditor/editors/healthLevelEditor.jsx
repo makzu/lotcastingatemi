@@ -34,14 +34,14 @@ type Props = {
 function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
   return (
     <BlockPaper>
-      <Typography variant="title">Health</Typography>
+      <Typography variant="h6">Health</Typography>
 
       <div className={classes.healthBoxesWrap}>
         <HealthLevelBoxes character={character} />
         <Typography>Current wound penalty: -{penalties.wound}</Typography>
       </div>
 
-      <Typography variant="subheading" className={classes.subheading}>
+      <Typography variant="subtitle1" className={classes.subheading}>
         Damage:
       </Typography>
       <div>
@@ -68,7 +68,7 @@ function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
         />
       </div>
 
-      <Typography variant="subheading" className={classes.subheading}>
+      <Typography variant="subtitle1" className={classes.subheading}>
         Levels:
       </Typography>
       <div>

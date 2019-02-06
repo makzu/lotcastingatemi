@@ -74,7 +74,7 @@ function QcCard(props: Props) {
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
-            variant="title"
+            variant="h6"
             className={qc.has_acted ? classes.hasActed : classes.qcName}
             component={Link}
             to={`/qcs/${qc.id}`}

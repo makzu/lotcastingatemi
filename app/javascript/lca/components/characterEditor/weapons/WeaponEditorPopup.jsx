@@ -129,7 +129,7 @@ class WeaponEditorPopup extends Component<Props, State> {
               fullWidth
             />
 
-            <Typography variant="subheading" className={classes.subheading}>
+            <Typography variant="subtitle1" className={classes.subheading}>
               <IconButton onClick={handleExpander}>
                 {this.state.advancedOpen ? <ExpandLess /> : <ExpandMore />}
               </IconButton>
@@ -155,7 +155,7 @@ class WeaponEditorPopup extends Component<Props, State> {
                 />
               </div>
 
-              <Typography variant="subheading" className={classes.subheading}>
+              <Typography variant="subtitle1" className={classes.subheading}>
                 Other Bonuses
               </Typography>
               <div className={classes.flexContainer}>

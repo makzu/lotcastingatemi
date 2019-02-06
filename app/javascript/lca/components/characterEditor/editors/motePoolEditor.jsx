@@ -42,7 +42,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
 
   return (
     <BlockPaper>
-      <Typography variant="title">Mote Pools:</Typography>
+      <Typography variant="h6">Mote Pools:</Typography>
       <div className={classes.flexRow}>
         {character.type !== 'Character' && (
           <Fragment>

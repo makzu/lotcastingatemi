@@ -93,7 +93,7 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
           <div id={`charm-expando-${charm.id}`} className={classes.charmAnchor}>
             &nbsp;
           </div>
-          <Typography variant="title">{charm.name}</Typography>
+          <Typography variant="h6">{charm.name}</Typography>
 
           <CharmSummaryBlock charm={charm} isOpen={isOpen} classes={classes} />
         </div>

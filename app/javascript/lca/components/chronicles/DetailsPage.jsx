@@ -109,11 +109,11 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
 
         <Grid item xs={12} md={4}>
           <BlockPaper>
-            <Typography variant="headline">
+            <Typography variant="h5">
               Players
               {is_st && <ChronicleInvitePopup chronicleId={chronicle.id} />}
             </Typography>
-            <Typography variant="subheading" gutterBottom>
+            <Typography variant="subtitle1" gutterBottom>
               Storyteller: {st.display_name}
             </Typography>
 
@@ -131,7 +131,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
         {is_st && (
           <Grid item xs={12}>
             <BlockPaper>
-              <Typography variant="subheading">ST Controls</Typography>
+              <Typography variant="subtitle1">ST Controls</Typography>
 
               <div>
                 <TextField

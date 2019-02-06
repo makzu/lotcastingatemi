@@ -109,12 +109,12 @@ class CombatDashboard extends Component<Props> {
 
         <Grid item xs={12}>
           {inCombatEntities.length === 0 && (
-            <Typography variant="subheading">
+            <Typography variant="subtitle1">
               No characters are in combat
             </Typography>
           )}
           {inCombatEntities.length > 0 && (
-            <Typography variant="subheading">
+            <Typography variant="subtitle1">
               Current Initiative: {nextCharacter ? nextCharacter.initiative : 0}
               &nbsp; Next up:{' '}
               {nextCharacter ? nextCharacter.name : 'Round over!'}
@@ -133,7 +133,7 @@ class CombatDashboard extends Component<Props> {
         <FlipMove typeName={null}>{combatCards}</FlipMove>
 
         <Grid item xs={12}>
-          <Typography variant="headline">Out of Combat</Typography>
+          <Typography variant="h5">Out of Combat</Typography>
         </Grid>
 
         {outOfCombatList}

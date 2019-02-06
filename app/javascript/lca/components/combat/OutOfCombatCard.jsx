@@ -72,7 +72,7 @@ function OutOfCombatCard({
     <Paper className={classes.root}>
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
-          <Typography variant="title" className={classes.characterName}>
+          <Typography variant="h6" className={classes.characterName}>
             {character.name}
 
             {character.hidden && (

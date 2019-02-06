@@ -67,7 +67,7 @@ type Props = {
 function ArmorSummary({ character, pools, classes }: Props) {
   return (
     <BlockPaper>
-      <Typography variant="title">Armor &amp; Defense</Typography>
+      <Typography variant="h6">Armor &amp; Defense</Typography>
 
       <div className={classes.container}>
         <PoolDisplay

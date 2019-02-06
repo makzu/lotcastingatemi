@@ -70,12 +70,12 @@ function IntimacySummary({ character, canEdit }: IntProps) {
 
   return (
     <BlockPaper>
-      <Typography variant="title">Intimacies</Typography>
+      <Typography variant="h6">Intimacies</Typography>
 
-      <Typography variant="subheading">Principles</Typography>
+      <Typography variant="subtitle1">Principles</Typography>
       {principles}
 
-      <Typography variant="subheading" style={{ marginTop: '0.5em' }}>
+      <Typography variant="subtitle1" style={{ marginTop: '0.5em' }}>
         Ties
       </Typography>
       {ties}
@@ -94,7 +94,7 @@ export function ResourceBlock({ character }: { character: Character }) {
     <BlockPaper>
       <SpendableBlock character={character} />
       {res.length > 0 && (
-        <Typography variant="subheading" style={{ marginTop: '0.5em' }}>
+        <Typography variant="subtitle1" style={{ marginTop: '0.5em' }}>
           Misc. Resources
         </Typography>
       )}
@@ -106,7 +106,7 @@ export function ResourceBlock({ character }: { character: Character }) {
 export function LimitTrackBlock({ character }: { character: Character }) {
   return (
     <BlockPaper>
-      <Typography variant="title">Limit</Typography>
+      <Typography variant="h6">Limit</Typography>
 
       <Typography component="div">
         <RatingLine rating={character.limit} fillTo={10}>
@@ -126,7 +126,7 @@ export function SorceryBlock({ character }: { character: Character }) {
   ))
   return (
     <BlockPaper>
-      <Typography variant="title">Sorcery</Typography>
+      <Typography variant="h6">Sorcery</Typography>
 
       <Typography paragraph>
         Sorcerous Motes: {character.sorcerous_motes}
@@ -190,7 +190,7 @@ export class CharacterSheet extends Component<Props> {
               <Grid item xs={12} md={7}>
                 <BlockPaper>
                   <Typography
-                    variant="title"
+                    variant="h6"
                     component={Link}
                     to={`/characters/${character.id}/merits`}
                     style={{ textDecoration: 'none' }}
@@ -206,7 +206,7 @@ export class CharacterSheet extends Component<Props> {
               <Hidden smDown>
                 <Grid item xs={12}>
                   <BlockPaper>
-                    <Typography variant="title">Weapons</Typography>
+                    <Typography variant="h6">Weapons</Typography>
                     <WeaponSummaryBlock
                       character={character}
                       weapons={weapons}
@@ -220,7 +220,7 @@ export class CharacterSheet extends Component<Props> {
           <Hidden mdUp>
             <Grid item xs={12}>
               <BlockPaper>
-                <Typography variant="title">Weapons</Typography>
+                <Typography variant="h6">Weapons</Typography>
                 <WeaponSummaryBlock character={character} weapons={weapons} />
               </BlockPaper>
             </Grid>

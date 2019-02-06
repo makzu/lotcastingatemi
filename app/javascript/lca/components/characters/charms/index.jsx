@@ -190,7 +190,7 @@ class CharmFullPage extends Component<Props, State> {
 
         {character.type !== 'Character' && (
           <Grid item xs={12} className={classes.stickyHeader}>
-            <Typography variant="headline">
+            <Typography variant="h5">
               Charms
               <CharmFilter
                 id={character.id}
@@ -208,7 +208,7 @@ class CharmFullPage extends Component<Props, State> {
 
         {martialArtsCharms.length > 0 && (
           <Grid item xs={12} className={classes.stickyHeader}>
-            <Typography variant="headline">
+            <Typography variant="h5">
               Martial Arts
               <CharmFilter
                 id={character.id}
@@ -226,7 +226,7 @@ class CharmFullPage extends Component<Props, State> {
 
         {evocations.length > 0 && (
           <Grid item xs={12} className={classes.stickyHeader}>
-            <Typography variant="headline">
+            <Typography variant="h5">
               Evocations
               <CharmFilter
                 id={character.id}
@@ -244,7 +244,7 @@ class CharmFullPage extends Component<Props, State> {
 
         {spiritCharms.length > 0 && (
           <Grid item xs={12} className={classes.stickyHeader}>
-            <Typography variant="headline">
+            <Typography variant="h5">
               Spirit Charms
               <CharmFilter
                 id={character.id}
@@ -262,7 +262,7 @@ class CharmFullPage extends Component<Props, State> {
 
         {(spells.length > 0 || character.is_sorcerer) && (
           <Grid item xs={12} className={classes.stickyHeader}>
-            <Typography variant="headline">
+            <Typography variant="h5">
               Spells
               <CharmFilter
                 id={character.id}

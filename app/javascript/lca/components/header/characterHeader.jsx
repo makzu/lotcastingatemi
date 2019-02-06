@@ -100,7 +100,7 @@ function CharacterHeader(props: Props) {
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="title" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit" className={classes.title}>
           {editing && 'Editing '}
           {character.name}
         </Typography>

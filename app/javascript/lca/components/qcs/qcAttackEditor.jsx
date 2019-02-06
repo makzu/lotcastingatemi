@@ -73,7 +73,7 @@ class QcAttackEditor extends React.Component<Props> {
 
     return (
       <div>
-        <Typography variant="subheading">Attacks</Typography>
+        <Typography variant="subtitle1">Attacks</Typography>
         <SortableAttackList
           items={qcAttacks}
           onSortEnd={handleSort}

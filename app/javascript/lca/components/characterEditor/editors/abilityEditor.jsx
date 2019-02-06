@@ -88,7 +88,7 @@ type Props = {
 function AbilityEditor({ character, onChange }: Props) {
   return (
     <BlockPaper>
-      <Typography variant="title">Abilities</Typography>
+      <Typography variant="h6">Abilities</Typography>
 
       <div>
         <AbilityField

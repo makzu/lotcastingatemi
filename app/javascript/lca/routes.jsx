@@ -1,73 +1,99 @@
 // @flow
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import HelpPage from 'components/pages/Help.jsx'
+import Placeholder from 'components/generic/Placeholder.jsx'
 
-import ChronicleWrapper from 'components/chronicles/ChronicleWrapper.jsx'
-import ContentList from 'components/pages/contentList.jsx'
+import WelcomePage from 'components/pages/welcomePage.jsx'
+import PrivacyPage from 'components/pages/PrivacyPage.jsx'
 import GoodbyePage from 'components/pages/GoodbyePage.jsx'
 import SettingsPage from 'components/pages/SettingsPage.jsx'
-import CharacterSheet from 'components/characters/index.jsx'
-import CharacterDashboard from 'components/characters/dashboard/'
-import MeritFullPage from 'components/characters/MeritFullPage.jsx'
-import CharmFullPage from 'components/characters/charms/index.jsx'
-import BioFullPage from 'components/characters/BioFullPage.jsx'
-import CharacterEditor from 'components/characterEditor/index.jsx'
-import MeritEditor from 'components/characterEditor/merits/MeritEditor.jsx'
-import CharmEditor from 'components/characters/charms/CharmEditor.jsx'
-import BioEditor from 'components/characterEditor/bio.jsx'
-import QcSheet from 'components/qcs/index.jsx'
-import QcEditor from 'components/qcs/editor.jsx'
-import BattlegroupSheet from 'components/battlegroups/index.jsx'
-import BattlegroupEditor from 'components/battlegroups/editor.jsx'
-import WelcomePage from 'components/pages/welcomePage.jsx'
-import ResourcesPage from 'components/pages/resourcesPage.jsx'
-import PrivacyPage from 'components/pages/PrivacyPage.jsx'
+
+const ChronicleWrapper = lazy(() =>
+  import('components/chronicles/ChronicleWrapper.jsx' /* webpackChunkName: 'Chronicle' */ /* webpackPrefetch: true */)
+)
+
+const ContentList = lazy(() =>
+  import('components/pages/contentList.jsx' /* webpackChunkName: 'ListPage' */ /* webpackPrefetch: true */)
+)
+
+const CharacterSheetWrap = lazy(() =>
+  import('components/characters/CharacterSheetWrapper.jsx' /* webpackChunkName: 'CharacterSheet' */ /* webpackPrefetch: true */)
+)
+
+const CharacterEditor = lazy(() =>
+  import('components/characterEditor/CharacterEditorWrapper.jsx' /* webpackChunkName: 'CharacterEditor' */ /* webpackPrefetch: true */)
+)
+
+const CharmEditor = lazy(() =>
+  import('components/characters/charms/CharmEditor.jsx' /* webpackChunkName: 'CharmEditor' */ /* webpackPrefetch: true */)
+)
+
+const QcSheet = lazy(() =>
+  import('components/qcs/index.jsx' /* webpackChunkName: 'QcSheet' */ /* webpackPrefetch: true */)
+)
+
+const QcEditor = lazy(() =>
+  import('components/qcs/editor.jsx' /* webpackChunkName: 'QcEditor' */ /* webpackPrefetch: true */)
+)
+
+const BattlegroupSheet = lazy(() =>
+  import('components/battlegroups/index.jsx' /* webpackChunkName: 'BgSheet' */ /* webpackPrefetch: true */)
+)
+
+const BattlegroupEditor = lazy(() =>
+  import('components/battlegroups/editor.jsx' /* webpackChunkName: 'BgEditor' */ /* webpackPrefetch: true */)
+)
+
+const ResourcesPage = lazy(() =>
+  import('components/pages/resourcesPage.jsx' /* webpackChunkName: 'ResourcesPage' */ /* webpackPrefetch: true */)
+)
+
+const HelpPage = lazy(() =>
+  import('components/pages/Help.jsx' /* webpackChunkName: 'Help' */ /* webpackPrefetch: true*/)
+)
 
 export default function Routes() {
   return (
-    <Switch>
-      <Route exact path="/" component={WelcomePage} />
-      <Route path="/settings" component={SettingsPage} />
-      <Route path="/deleted" component={GoodbyePage} />
-      <Route path="/resources" component={ResourcesPage} />
-      <Route path="/privacy" component={PrivacyPage} />
-      <Route path="/content" component={ContentList} />
+    <Suspense fallback={<Placeholder />}>
+      <Switch>
+        <Route path="/settings" component={SettingsPage} />
+        <Route path="/deleted" component={GoodbyePage} />
+        <Route path="/resources" component={ResourcesPage} />
+        <Route path="/privacy" component={PrivacyPage} />
+        <Route path="/content" component={ContentList} />
 
-      <Route path="/help/:doc.:ext?" component={HelpPage} />
-      <Route path="/help" component={HelpPage} />
+        <Route path="/help/:doc.:ext?" component={HelpPage} />
+        <Route path="/help" component={HelpPage} />
 
-      <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
+        <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
 
-      <Route
-        path="/characters/:characterId/edit/merits"
-        component={MeritEditor}
-      />
-      <Route
-        path="/characters/:characterId/edit/charms"
-        component={CharmEditor}
-      />
-      <Route path="/characters/:characterId/edit/bio" component={BioEditor} />
-      <Route path="/characters/:characterId/edit" component={CharacterEditor} />
+        <Route
+          path="/characters/:characterId/edit/charms"
+          component={CharmEditor}
+        />
 
-      <Route
-        path="/characters/:characterId/dashboard"
-        component={CharacterDashboard}
-      />
-      <Route path="/characters/:characterId/merits" component={MeritFullPage} />
-      <Route path="/characters/:characterId/charms" component={CharmFullPage} />
-      <Route path="/characters/:characterId/bio" component={BioFullPage} />
-      <Route path="/characters/:characterId" component={CharacterSheet} />
+        <Route
+          path="/characters/:characterId/edit"
+          component={CharacterEditor}
+        />
 
-      <Route path="/qcs/:qcId/edit" component={QcEditor} />
-      <Route path="/qcs/:qcId" component={QcSheet} />
+        <Route
+          path="/characters/:characterId/"
+          component={CharacterSheetWrap}
+        />
 
-      <Route
-        path="/battlegroups/:battlegroupId/edit"
-        component={BattlegroupEditor}
-      />
-      <Route path="/battlegroups/:bgId" component={BattlegroupSheet} />
-    </Switch>
+        <Route path="/qcs/:qcId/edit" component={QcEditor} />
+        <Route path="/qcs/:qcId" component={QcSheet} />
+
+        <Route
+          path="/battlegroups/:battlegroupId/edit"
+          component={BattlegroupEditor}
+        />
+        <Route path="/battlegroups/:bgId" component={BattlegroupSheet} />
+
+        <Route path="/" component={WelcomePage} />
+      </Switch>
+    </Suspense>
   )
 }

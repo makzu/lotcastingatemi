@@ -6,7 +6,6 @@ import {
   SortableHandle,
   arrayMove,
 } from 'react-sortable-hoc'
-import { cloneDeep } from 'lodash'
 
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -67,7 +66,7 @@ type Props = {
 class ListAttributeEditor extends Component<Props> {
   onChange = (index, e) => {
     const { character, trait, nonObject } = this.props
-    var newTrait = cloneDeep(character[trait])
+    var newTrait = JSON.parse(JSON.stringify(character[trait]))
 
     const val = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 

@@ -1,11 +1,33 @@
+// https://github.com/rails/webpacker/blob/master/docs/webpack.md
 const { environment } = require('@rails/webpacker')
+const webpack = require('webpack')
+const HashedChunkidsPlugin = require('webpack-hashed-chunkids')
 const typescript = require('./loaders/typescript')
 
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 environment.plugins.prepend(
-  'LodashModuleReplacement',
-  new LodashModuleReplacementPlugin({ cloning: true })
+  'HashedModuleIds',
+  new webpack.HashedModuleIdsPlugin({})
 )
+
+environment.plugins.append('HashedChunkIds', new HashedChunkidsPlugin())
+
+environment.resolvedModules.append('vendor', 'vendor')
+
+environment.splitChunks(() => ({
+  optimization: {
+    splitChunks: {
+      maxInitialRequests: Infinity,
+      maxAsyncRequests: Infinity,
+      minSize: 3000,
+      cacheGroups: {
+        react: {
+          name: 'react',
+          test: /\/node_modules\/(react|react-dom)\//,
+        },
+      },
+    },
+  },
+}))
 
 environment.loaders.append('md', {
   test: /\.md$/,

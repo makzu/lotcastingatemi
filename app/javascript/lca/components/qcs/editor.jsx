@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
@@ -48,7 +48,7 @@ class QcEditor extends Component<Props> {
     const { name, value } = e.target
     const { qc } = this.props
 
-    if (isEqual(qc[name], value)) return
+    if (deepEqual(qc[name], value)) return
 
     this.props.updateQc(qc.id, { [name]: value })
   }

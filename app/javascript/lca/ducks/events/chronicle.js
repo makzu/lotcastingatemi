@@ -1,5 +1,5 @@
 // @flow
-import { isEqual } from 'lodash'
+import { deepEqual } from 'fast-equals'
 import { updateEvent } from '.'
 import { healthRecoverObject } from './healing.js'
 import {
@@ -17,7 +17,7 @@ const endSceneObject = c => {
   let obj = {}
   const commits = c.motes_committed.filter(m => !m.scenelong)
 
-  if (!isEqual(commits, c.motes_committed)) obj.motes_committed = commits
+  if (!deepEqual(commits, c.motes_committed)) obj.motes_committed = commits
   if (c.aura != null && c.aura != '') obj.aura = ''
 
   if (c.in_combat) obj.in_combat = false

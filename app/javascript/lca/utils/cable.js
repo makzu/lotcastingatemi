@@ -1,10 +1,13 @@
 // @flow
-// TODO: replace this with redux-cablecar or something?
+
+const ActionCable = require('actioncable')
+const cable = ActionCable.createConsumer()
+
 const UpdatesCable = {
   subscribe(getState: Function, received: Object) {
     this.unsubscribe()
 
-    window.App.ChronicleCable = window.App.cable.subscriptions.create(
+    window.ChronicleCable = cable.subscriptions.create(
       {
         channel: 'ChronicleChannel',
         id: getState().session.id,
@@ -20,8 +23,8 @@ const UpdatesCable = {
       return false
     }
 
-    window.App.cable.subscriptions.remove(window.App.ChronicleCable)
-    delete window.App.ChronicleCable
+    cable.subscriptions.remove(window.ChronicleCable)
+    delete window.ChronicleCable
   },
 }
 

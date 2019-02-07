@@ -6,7 +6,6 @@ export * from './pools'
 export * from './ratings'
 export * from './weapons'
 
-import { capitalize } from 'lodash'
 import {
   ATTRIBUTES,
   ABILITIES_ALL,
@@ -186,14 +185,17 @@ export function mobilityPenalty(character: withArmorStats) {
   }
 }
 
+const capitalize = string =>
+  string.charAt(0).toUpperCase() + string.toLowerCase().slice(1)
+
 export function prettyExaltType(character: Character) {
   switch (character.type) {
-    case 'Character':
-      return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
     case 'SolarCharacter':
       return 'Solar'
     case 'DragonbloodCharacter':
       return 'Dragon-Blooded'
+    case 'LunarCharacter':
+      return 'Lunar'
     default:
       return character.exalt_type
   }
@@ -201,7 +203,7 @@ export function prettyExaltType(character: Character) {
 
 export function prettyFullExaltType(character: Character) {
   if (character.type === 'Character')
-    return character.is_sorcerer ? 'Non-Exalt Sorcerer' : 'Mortal'
+    return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
 
   let caste =
     character.caste === '' || character.caste == null
@@ -218,6 +220,7 @@ export function exaltTypeBase(character: Character) {
     case 'DragonbloodCharacter':
     case 'CustomAbilityCharacter':
       return 'ability'
+    case 'LunarCharacter':
     case 'CustomAttributeCharacter':
       return 'attribute'
     case 'CustomEssenceCharacter':

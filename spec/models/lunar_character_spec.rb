@@ -42,7 +42,7 @@ RSpec.describe LunarCharacter, type: :model do
     ].each do |char|
       it "works for #{char}" do
         g = create(char)
-        m = DragonbloodCharacter.from_character!(g)
+        m = LunarCharacter.from_character!(g)
         expect(m).to be_valid
       end
     end

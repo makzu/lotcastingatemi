@@ -57,6 +57,25 @@ module Api
       rescue NameError => e
         render json: { error: e.message }, status: :bad_request
       end
+
+      def character_params
+        params.require(:character).permit(
+          *base_attributes,
+          ties:              [Schemas::INTIMACY_PARAMS],
+          principles:        [Schemas::INTIMACY_PARAMS],
+          motes_committed:   [Schemas::MOTE_COMMITTMENT_PARAMS],
+          abil_craft:        [Schemas::CRAFT_PARAMS],
+          abil_martial_arts: [Schemas::MARTIAL_ARTS_PARAMS],
+          specialties:       [Schemas::SPECIALTY_PARAMS],
+          resources:         [Schemas::RESOURCE_PARAMS],
+          xp_log:            [Schemas::XP_LOG_PARAMS],
+          xp_log_solar:      [Schemas::XP_LOG_PARAMS],
+          bp_log:            [Schemas::XP_LOG_PARAMS],
+          rituals:           [],
+          anima_powers:      [],
+          armor_tags:        [],
+        )
+      end
     end
   end
 end

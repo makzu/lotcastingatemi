@@ -16,6 +16,10 @@ module Api
         end
       end
 
+      def qc_attack_params
+        params.require(:qc_attack).permit(*base_attributes, tags: []) if params[:qc_attack].present?
+      end
+
       private
 
       def set_parent

@@ -14,6 +14,10 @@ module Api
           render json: @spell.errors.details, status: :bad_request
         end
       end
+
+      def spell_params
+        params.require(:spell).permit(*base_attributes, keywords: [], categories: []) if params[:spell].present?
+      end
     end
   end
 end

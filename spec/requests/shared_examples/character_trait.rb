@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
+require 'support/auth_token'
+
 RSpec.shared_examples 'character trait' do |trait_type, parent_type|
   ActiveJob::Base.queue_adapter = :test
-
-  def authenticated_header(user)
-    { 'Authorization' => "Bearer #{user.token}" }
-  end
 
   let(:trait) { create(trait_type) }
 
@@ -22,6 +20,17 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
 
         expect(response.content_type).to eq 'application/json'
         expect(response.status).to eq 200
+      end
+
+      it 'succeeds when creating an empty record' do
+        unless trait.entity_type == 'charm'
+          expect do
+            post "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/",
+                 params:  {},
+                 headers: authenticated_header(trait.player)
+          end.to have_enqueued_job(CreateBroadcastJob)
+            .and change { trait.class.count }.by(1)
+        end
       end
     end
 

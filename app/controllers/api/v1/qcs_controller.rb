@@ -41,6 +41,16 @@ module Api
           render json: @new_qc.errors.details, status: :bad_request
         end
       end
+
+      def qc_params
+        params.require(:qc).permit(
+          *base_attributes,
+          ties:            [Schemas::INTIMACY_PARAMS],
+          principles:      [Schemas::INTIMACY_PARAMS],
+          qc_actions:      [Schemas::QC_ACTION_PARAMS],
+          motes_committed: [Schemas::MOTE_COMMITTMENT_PARAMS]
+        )
+      end
     end
   end
 end

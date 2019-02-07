@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 require 'requests/shared_examples/character'
+require 'support/auth_token'
 
 RSpec.describe 'Qcs', type: :request do
   it_behaves_like 'character', :qc

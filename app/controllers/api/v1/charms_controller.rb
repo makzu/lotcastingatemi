@@ -14,6 +14,10 @@ module Api
           render json: @charm.errors.details, status: :bad_request
         end
       end
+
+      def charm_params
+        params.require(:charm).permit(*base_attributes, keywords: [], categories: [])
+      end
     end
   end
 end

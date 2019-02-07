@@ -12,25 +12,6 @@
 Metrics/BlockLength:
   Max: 81
 
-# Offense count: 29
-# Configuration parameters: Max.
-RSpec/ExampleLength:
-  Exclude:
-    - "spec/controllers/merits_controller_spec.rb"
-    - "spec/controllers/qc_attacks_controller_spec.rb"
-    - "spec/controllers/qc_charms_controller_spec.rb"
-    - "spec/controllers/qc_merits_controller_spec.rb"
-    - "spec/controllers/qcs_controller_spec.rb"
-    - "spec/controllers/weapons_controller_spec.rb"
-    - "spec/jobs/application_job_spec.rb"
-    - "spec/models/dragonblood_character_spec.rb"
-    - "spec/models/solar_character_spec.rb"
-    - "spec/requests/battlegroups_spec.rb"
-    - "spec/requests/characters/characters_spec.rb"
-    - "spec/requests/chronicles_spec.rb"
-    - "spec/requests/shared_examples/character.rb"
-    - "spec/requests/shared_examples/character_trait.rb"
-
 # Offense count: 8
 # Configuration parameters: CustomTransform, IgnoreMethods.
 RSpec/FilePath:

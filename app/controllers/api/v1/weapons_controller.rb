@@ -14,6 +14,10 @@ module Api
           render json: @weapon.errors.details, status: :bad_request
         end
       end
+
+      def weapon_params
+        params.require(:weapon).permit(*base_attributes, tags: []) if params[:weapon].present?
+      end
     end
   end
 end

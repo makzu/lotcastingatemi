@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
+require 'support/auth_token'
+
 RSpec.shared_examples 'character' do |character_type, parent|
   ActiveJob::Base.queue_adapter = :test
-
-  def authenticated_header(user)
-    { 'Authorization' => "Bearer #{user.token}" }
-  end
 
   let(:trait) { create(character_type) }
 
@@ -24,6 +22,32 @@ RSpec.shared_examples 'character' do |character_type, parent|
 
         expect(response.content_type).to eq 'application/json'
         expect(response.status).to eq 200
+      end
+    end
+
+    describe 'updating a record' do
+      unless %i[battlegroup combat_actor battlegroup_combat_actor].include? character_type
+        it 'succeeds for ties' do
+          params = { trait.entity_type => { ties: [{ subject: 'Vincible Sword Princess (respect)', rating: 3, hidden: false }] } }
+          patch "/api/v1/#{trait.entity_type}s/#{trait.id}",
+                params:  params,
+                headers: authenticated_header(trait.player),
+                as:      :json
+
+          expect(response.status).to eq 200
+          expect(trait.class.find(trait.id).ties).to eq [{ 'subject' => 'Vincible Sword Princess (respect)', 'rating' => 3, 'hidden' => false }]
+        end
+
+        it 'succeeds for principles' do
+          params = { trait.entity_type => { principles: [{ subject: "I don't have any bugs", rating: 2 }] } }
+          patch "/api/v1/#{trait.entity_type}s/#{trait.id}",
+                params:  params,
+                headers: authenticated_header(trait.player),
+                as:      :json
+
+          expect(response.status).to eq 200
+          expect(trait.class.find(trait.id).principles).to eq [{ 'subject' => "I don't have any bugs", 'rating' => 2 }]
+        end
       end
     end
 
@@ -78,7 +102,6 @@ RSpec.shared_examples 'character' do |character_type, parent|
       it 'returns an auth failure' do
         expect do
           get "/api/v1/#{trait.entity_type}s/#{trait.id}"
-          expect(response.status).to eq 401
         end.to raise_error Pundit::NotAuthorizedError
       end
     end

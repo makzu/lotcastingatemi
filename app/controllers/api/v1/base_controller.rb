@@ -76,6 +76,10 @@ module Api
         resource_class.name.underscore.to_sym
       end
 
+      def base_attributes
+        resource_class.attribute_names - disallowed_attributes
+      end
+
       def disallowed_attributes
         %w[id character_id qc_id qc_attackable_id poisonable_id created_at updated_at]
       end

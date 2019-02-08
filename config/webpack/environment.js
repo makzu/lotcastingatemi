@@ -1,13 +1,7 @@
 // https://github.com/rails/webpacker/blob/master/docs/webpack.md
 const { environment } = require('@rails/webpacker')
-const webpack = require('webpack')
 
 const typescript = require('./loaders/typescript')
-
-environment.plugins.prepend(
-  'HashedModuleIds',
-  new webpack.HashedModuleIdsPlugin()
-)
 
 environment.resolvedModules.append('vendor', 'vendor')
 

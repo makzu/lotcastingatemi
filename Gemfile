@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Rails 5.1+ for Webpacker
 gem 'rails', '~> 5.2.2'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '>= 4.0.0.rc.5'
+gem 'webpacker', '>= 4.0.0.rc.7'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -39,7 +39,7 @@ gem 'bootsnap', '~> 1.3.0', require: false
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2.0', git: 'https://github.com/makzu/knock'
-gem 'pundit'
+gem 'pundit', '~> 2.0.1'
 
 gem 'omniauth-google-oauth2', '~> 0.6.0'
 
@@ -69,8 +69,8 @@ group :development, :test, :cypress do
   gem 'byebug', platform: :mri
   gem 'cypress-on-rails'
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
+  gem 'factory_bot_rails', '~> 5.0.0'
+  gem 'rspec-rails', '~> 3.8.2'
   gem 'rubocop', '~> 0.60', require: false
   gem 'rubocop-rspec', '~> 1.30', require: false
 end

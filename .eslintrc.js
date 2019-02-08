@@ -44,5 +44,6 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'jsx-quotes': ['warn', 'prefer-double'],
     semi: ['error', 'never'],
+    'react/jsx-boolean-value': ['warn', 'never'],
   },
 }

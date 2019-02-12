@@ -24,6 +24,7 @@ yarn-debug.log*
 
 # Don't bother tracking test coverage data from simplecov
 /coverage
+.jscpd
 
 /public/packs
 /public/packs-test
@@ -36,6 +37,9 @@ yarn-debug.log*
 [._]s[a-w][a-z]
 *.un~
 Session.vim
+
+# Visual Studio Code
+.vscode
 
 # Ignore encrypted secrets key file.
 /config/secrets.yml.key

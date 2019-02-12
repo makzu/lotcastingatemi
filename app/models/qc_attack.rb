@@ -8,6 +8,8 @@ class QcAttack < ApplicationRecord
   belongs_to :qc_attackable, polymorphic: true
   alias_attribute :character, :qc_attackable
 
+  has_many :poisons, as: :poisonable, dependent: :destroy
+
   delegate :player,      to: :qc_attackable
   delegate :chronicle,   to: :qc_attackable
   delegate :storyteller, to: :qc_attackable

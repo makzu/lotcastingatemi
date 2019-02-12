@@ -5,6 +5,8 @@ class Weapon < ApplicationRecord
   include Broadcastable
   include CharacterTrait
 
+  has_many :poisons, as: :poisonable, dependent: :destroy
+
   before_validation :trim_tags
   before_validation :set_traits_for_elemental_bolt
 

@@ -3,6 +3,6 @@ import { createApiActions, createTraitReducer } from './_trait'
 
 export default createTraitReducer('poison')
 
-export const [creatPoison, updatePoison, destroyPoison] = createApiActions(
+export const [createPoison, updatePoison, destroyPoison] = createApiActions(
   'poison'
 )

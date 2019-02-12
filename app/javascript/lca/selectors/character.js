@@ -96,7 +96,7 @@ export const getPenalties = createCachedSelector(
   (character, meritNames, poisons) => {
     let worstPoison = poisons.reduce(
       (prev, current) => (prev.penalty > current.penalty ? prev : current),
-      0
+      { name: 'not poisoned', penalty: 0 }
     )
 
     return {

@@ -1,11 +1,13 @@
 // tslint:disable object-literal-sort-keys variable-name
 import { schema } from 'normalizr'
 
-export const weapon = new schema.Entity('weapons')
 export const merit = new schema.Entity('merits')
 export const charm = new schema.Entity('charms')
 export const spell = new schema.Entity('spells')
 export const poison = new schema.Entity('poisons')
+export const weapon = new schema.Entity('weapons', {
+  poisons: [poison],
+})
 export const character = new schema.Entity('characters', {
   weapons: [weapon],
   merits: [merit],
@@ -18,8 +20,10 @@ export const character = new schema.Entity('characters', {
 })
 
 export const qc_merit = new schema.Entity('qc_merits')
-export const qc_attack = new schema.Entity('qc_attacks')
 export const qc_charm = new schema.Entity('qc_charms')
+export const qc_attack = new schema.Entity('qc_attacks', {
+  poisons: [poison],
+})
 export const qc = new schema.Entity('qcs', {
   qc_merits: [qc_merit],
   qc_attacks: [qc_attack],

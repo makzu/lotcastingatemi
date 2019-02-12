@@ -15,6 +15,7 @@ module Schemas
       "additionalProperties": false
     }
   }.freeze
+  CRAFT_PARAMS = %i[ craft rating ].freeze
 
   MARTIAL_ARTS = {
     "type": 'array',
@@ -28,6 +29,7 @@ module Schemas
       "additionalProperties": false
     }
   }.freeze
+  MARTIAL_ARTS_PARAMS = %i[ style rating ].freeze
 
   INTIMACY = {
     "type": 'array',
@@ -42,6 +44,7 @@ module Schemas
       "additionalProperties": false
     }
   }.freeze
+  INTIMACY_PARAMS = %i[ subject rating hidden ].freeze
 
   MOTE_COMMITTMENT = {
     "type": 'array',
@@ -57,6 +60,7 @@ module Schemas
       "additionalProperties": false
     }
   }.freeze
+  MOTE_COMMITTMENT_PARAMS = %i[ pool label motes scenelong ].freeze
 
   RESOURCE = {
     "type": 'array',
@@ -70,6 +74,7 @@ module Schemas
       "additionalProperties": false
     }
   }.freeze
+  RESOURCE_PARAMS = %i[ resource value ].freeze
 
   SPECIALTY = {
     "type": 'array',
@@ -93,6 +98,7 @@ module Schemas
       "additionalProperties": false
     }
   }.freeze
+  SPECIALTY_PARAMS = %i[ ability context ].freeze
 
   XP_LOG = {
     "type": 'array',
@@ -105,6 +111,7 @@ module Schemas
       }
     }
   }.freeze
+  XP_LOG_PARAMS = %i[ label points ].freeze
 
   QC_ACTION = {
     "type": 'array',
@@ -113,10 +120,11 @@ module Schemas
       "required": %w[action pool],
       "properties": {
         "action": { "type": 'string' },
-        "pool": { "type": 'integer', "minimum": 0 }
+        "pool":   { "type": 'integer', "minimum": 0 }
       },
       "additionalProperties": false
     }
   }.freeze
+  QC_ACTION_PARAMS = %i[ action pool ].freeze
 end
 # rubocop:enable Metrics/ModuleLength, Layout/AlignHash

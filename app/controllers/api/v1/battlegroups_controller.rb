@@ -8,7 +8,7 @@ module Api
 
       def index
         authorize current_player
-        @battlegroups = Battlegroup.includes(:qc_attacks, :poisons).where(player_id: current_player.id)
+        @battlegroups = Battlegroup.includes(:poisons, qc_attacks: :poisons).where(player_id: current_player.id)
         render json: @battlegroups
       end
 

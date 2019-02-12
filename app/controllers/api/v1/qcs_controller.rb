@@ -7,7 +7,7 @@ module Api
 
       def index
         authorize current_player
-        @qcs = Qc.includes(%i[qc_attacks qc_charms qc_merits poisons]).where(player_id: current_player.id)
+        @qcs = Qc.includes(%i[qc_charms qc_merits poisons] + [qc_attacks: :poisons]).where(player_id: current_player.id)
         render json: @qcs
       end
 

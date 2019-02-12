@@ -2,6 +2,10 @@
 
 # The central model for characters, holding stats that are common to all PCs.
 # Traits specific to exalts will be in separate models, one per exalt type.
+# DEPRECATED ATTRIBUTES:
+# shaping_rituals, in favor of rituals
+# xp_spent, in favor of xp_log
+# xp_solar_spent, in favor of xp_log_solar
 class Character < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer

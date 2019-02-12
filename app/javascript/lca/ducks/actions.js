@@ -47,6 +47,9 @@ export {
   fetchCurrentPlayer,
   updatePlayer,
   destroyAccount,
+  createPoison,
+  updatePoison,
+  destroyPoison,
 } from './entities'
 
 export { logout } from './session.js'

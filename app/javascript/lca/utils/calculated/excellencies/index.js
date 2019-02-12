@@ -1,6 +1,7 @@
 // @flow
 import SolarExcellency, { solarExcellencyAbils } from './solar.js'
 import DbExcellency, { dbExcellencyAbils } from './dragonblooded.js'
+import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 import CustomExcellency from './custom.js'
 import type { Character, Charm } from 'utils/flow-types'
 
@@ -22,6 +23,9 @@ export const excellencyAbils = (
   ) {
     excellencies = excellencies.concat(dbExcellencyAbils(character, charms))
   }
+  if (character.type === 'LunarCharacter' || excellencies.includes('lunar')) {
+    excellencies = excellencies.concat(lunarExcellencyAbils(character, charms))
+  }
 
   // Because ES6 lacks a .uniq method:
   return [...new Set(excellencies)]
@@ -41,8 +45,7 @@ export function maxExcellency(
 
   if (
     character.type === 'Character' ||
-    (stunt && character.excellency_stunt === undefined) ||
-    (stunt && character.excellency_stunt === '') ||
+    (stunt && [undefined, ''].includes(character.excellency_stunt)) ||
     !(
       excellencyAbils.includes(attribute) ||
       excellencyAbils.includes(abili) ||
@@ -51,10 +54,14 @@ export function maxExcellency(
   )
     return 0
 
-  if (character.type === 'SolarCharacter')
-    return SolarExcellency(character, attribute, ability, staticRating)
-  else if (character.type === 'DragonbloodCharacter')
-    return DbExcellency(character, attribute, ability, staticRating)
+  switch (character.type) {
+    case 'SolarCharacter':
+      return SolarExcellency(character, attribute, ability, staticRating)
+    case 'DragonbloodCharacter':
+      return DbExcellency(character, attribute, ability, staticRating)
+    case 'LunarCharacter':
+      return LunarExcellency(character, attribute, ability, staticRating, stunt)
+  }
 
   return CustomExcellency(character, attribute, ability, staticRating, stunt)
 }

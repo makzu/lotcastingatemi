@@ -24,6 +24,7 @@ class LunarCharacter < Character
 
   validates :caste, inclusion: { in: LUNAR_CASTES }, unless: :caste_is_blank?
   validate  :caste_attributes_are_valid,             unless: :caste_is_blank?
+  validate  :two_caste_and_two_favored_attributes
 
   def self.from_character!(character)
     new_cha = character.becomes(LunarCharacter)
@@ -71,7 +72,7 @@ class LunarCharacter < Character
     self.excellency_stunt = 'lunar'
     self.excellencies_for = ['lunar']
     self.caste_abilities = []
-    self.caste_attributes = []
+    self.favored_abilities = []
   end
 
   # rubocop:disable Style/IfUnlessModifier
@@ -83,6 +84,11 @@ class LunarCharacter < Character
     end
   end
   # rubocop:enable Style/IfUnlessModifier
+
+  def two_caste_and_two_favored_attributes
+    errors.add(:caste_attributes, 'Lunars can only have up to 2 caste attributes') if caste_attributes.count > 2
+    errors.add(:favored_attributes, 'Lunars can only have up to 2 favored attributes') if favored_attributes.count > 2
+  end
 
   def allowed_caste_attributes
     caste.blank? ? [] : CASTE_ATTRIBUTES[caste.to_sym]

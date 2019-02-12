@@ -43,6 +43,11 @@ export default (
         result += abil(character, ability)
         if (specialtiesFor(character, ability).length > 0) result += 1
         break
+      case 'lunar':
+        result +=
+          attr(character, attribute) +
+          highestOtherAttribute(character, attribute)
+        break
       case 'attribute':
         result += attr(character, attribute)
         break

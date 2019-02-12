@@ -182,6 +182,25 @@ export const SOLAR_CASTE_ABILITIES = {
   ],
 }
 
+export const LUNAR_CASTE_ATTRIBUTES = {
+  'full moon': [
+    { attr: 'attr_strength', pretty: 'Strength' },
+    { attr: 'attr_dexterity', pretty: 'Dexterity' },
+    { attr: 'attr_stamina', pretty: 'Stamina' },
+  ],
+  'changing moon': [
+    { attr: 'attr_charisma', pretty: 'Charisma' },
+    { attr: 'attr_manipulation', pretty: 'Manipulation' },
+    { attr: 'attr_appearance', pretty: 'Appearance' },
+  ],
+  'no moon': [
+    { attr: 'attr_perception', pretty: 'Perception' },
+    { attr: 'attr_intelligence', pretty: 'Intelligence' },
+    { attr: 'attr_wits', pretty: 'Wits' },
+  ],
+  casteless: [],
+}
+
 export const ABILITY_NAMES = [
   'archery',
   'athletics',

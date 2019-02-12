@@ -16,6 +16,7 @@ import CustomAbilityExaltEditor from './editors/customAbilityExaltEditor.jsx'
 import CustomAttributeExaltEditor from './editors/customAttributeExaltEditor.jsx'
 import CustomEssenceExaltEditor from './editors/customEssenceExaltEditor.jsx'
 import DragonbloodExaltEditor from './editors/DragonbloodExaltEditor.jsx'
+import LunarExaltEditor from './exaltTraits/LunarExaltEditor'
 import HealthLevelEditor from './editors/healthLevelEditor.jsx'
 import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
@@ -108,6 +109,11 @@ class CharacterEditor extends Component<Props> {
                 character={character}
                 onChange={handleChange}
               />
+            </Grid>
+          )}
+          {character.type === 'LunarCharacter' && (
+            <Grid item xs={12} md={6}>
+              <LunarExaltEditor character={character} onChange={handleChange} />
             </Grid>
           )}
           {character.type === 'CustomAbilityCharacter' && (

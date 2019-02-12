@@ -1,4 +1,3 @@
-// @flow
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 import { normalize } from 'normalizr'
 import { createReducer } from 'redux-starter-kit'
@@ -23,6 +22,7 @@ export * from './combat_actor'
 import { LOGOUT } from '../session.js'
 import { mergeEntity } from './_entity'
 import * as schemas from './_schemas'
+import { EntityState } from './_types'
 import BattlegroupReducer from './battlegroup'
 import CharacterReducer from './character'
 import CharmReducer from './charm'
@@ -65,32 +65,6 @@ export const defaultState: EntityState = {
   battlegroups: {},
   combat_actors: {},
   poisons: {},
-}
-export interface EntityState {
-  currentPlayer: number
-  players: { [id: number]: any }
-  chronicles: { [id: number]: any }
-  characters: { [id: number]: any }
-  weapons: { [id: number]: any }
-  merits: { [id: number]: any }
-  charms: { [id: number]: any }
-  spells: { [id: number]: any }
-  qcs: { [id: number]: any }
-  qc_merits: { [id: number]: any }
-  qc_charms: { [id: number]: any }
-  qc_attacks: { [id: number]: any }
-  battlegroups: { [id: number]: any }
-  combat_actors: { [id: number]: any }
-  poisons: { [id: number]: any }
-}
-
-export interface WrappedEntityState {
-  entities: {
-    current: EntityState
-  }
-  session: {
-    id: number
-  }
 }
 
 export const CABLE_RECEIVED = 'lca/cable/RECEIVED'

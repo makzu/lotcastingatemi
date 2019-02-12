@@ -28,7 +28,7 @@ export const solarExcellencyAbils = (
 }
 
 // Attribute + Ability, round down for static ratings
-export default (
+const solarExcellency = (
   character: Character,
   attribute: string,
   ability: string,
@@ -38,3 +38,4 @@ export default (
     (attr(character, attribute) + abil(character, ability)) /
       (staticRating ? 2 : 1)
   )
+export default solarExcellency

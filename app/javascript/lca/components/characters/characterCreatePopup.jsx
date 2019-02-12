@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography'
 import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect.jsx'
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
 import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect.jsx'
+import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -57,13 +58,23 @@ class CharacterCreatePopup extends React.Component<Props, State> {
       if (value == '') {
         e.preventDefault()
         return
-      } else if (value === 'Character')
-        exaltType = { exalt_type: 'Mortal', aspect: false }
-      else if (value === 'SolarCharacter')
-        exaltType = { exalt_type: 'Solar', aspect: false }
-      else if (value === 'DragonbloodCharacter')
-        exaltType = { exalt_type: 'Dragonblood', aspect: true }
-      else exaltType = { exalt_type: 'Exalt' }
+      }
+      switch (value) {
+        case 'Character':
+          exaltType = { exalt_type: 'Mortal', aspect: false }
+          break
+        case 'SolarCharacter':
+          exaltType = { exalt_type: 'Solar', aspect: false }
+          break
+        case 'DragonbloodCharacter':
+          exaltType = { exalt_type: 'Dragonblood', aspect: true }
+          break
+        case 'LunarCharacter':
+          exaltType = { exalt_type: 'Lunar', aspect: false }
+          break
+        default:
+          exaltType = { exalt_type: 'Exalt' }
+      }
     }
 
     this.setState({
@@ -144,6 +155,21 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                   instead.
                 </Typography>
                 <DbAspectSelect
+                  value={character.caste}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </>
+            )}
+            {character.type === 'LunarCharacter' && (
+              <>
+                <Typography paragraph>
+                  Selecting this option means the system will try to follow the
+                  rules in the core book as closely as it can. If your group
+                  uses house rules, especially ones that change available Caste
+                  Attributes, choose Houserule Attribute-based exalt instead.
+                </Typography>
+                <LunarCasteSelect
                   value={character.caste}
                   onChange={handleChange}
                   fullWidth

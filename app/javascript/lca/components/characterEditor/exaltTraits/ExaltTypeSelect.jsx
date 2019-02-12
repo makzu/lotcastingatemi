@@ -41,7 +41,7 @@ class ExaltTypeSelect extends PureComponent<Props> {
       'Character',
       'SolarCharacter',
       'DragonbloodCharacter',
-      // 'LunarCharacter',
+      'LunarCharacter',
     ].map(MenuItemMapping)
 
     const customChoices = [

@@ -24,7 +24,7 @@ export const dbExcellencyAbils = (
 
 // Ability + 1 with relevant specialty
 // DBs apparently round down now: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1275486#post1275486
-export default (
+const dbExcellency = (
   character: Character,
   attribute: string,
   ability: string,
@@ -35,3 +35,4 @@ export default (
       (specialtiesFor(character, ability).length > 0 ? 1 : 0)) /
       (staticRating ? 2 : 1)
   )
+export default dbExcellency

@@ -31,12 +31,7 @@ function SolarExaltEditor({ character, onChange }: Props) {
 
   return (
     <BlockPaper>
-      <SolarCasteSelect
-        value={character.caste}
-        margin="dense"
-        style={{ width: '8em' }}
-        onChange={onChange}
-      />
+      <SolarCasteSelect value={character.caste} onChange={onChange} />
       &nbsp;&nbsp;
       <AbilitySelect
         name="supernal_ability"

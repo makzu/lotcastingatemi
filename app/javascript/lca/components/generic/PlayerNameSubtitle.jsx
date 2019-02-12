@@ -15,7 +15,11 @@ type Props = ExposedProps & {
 }
 
 function PlayerNameSubtitle({ name }: Props) {
-  return <Typography variant="caption">Player: {name}</Typography>
+  return (
+    <Typography variant="caption" style={{ marginTop: '-0.25rem' }}>
+      Player: {name}
+    </Typography>
+  )
 }
 
 const mapStateToProps = (state, props: ExposedProps) => ({

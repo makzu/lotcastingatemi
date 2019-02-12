@@ -21,13 +21,32 @@ import { toggleDrawer } from 'ducks/actions.js'
 
 // Shamelessly stolen from the material-ui drawer demo
 
+const scrollbars = theme => ({
+  '::-webkit-scrollbar': {
+    height: '8px',
+    backgroundColor: theme.palette.background.default,
+    width: '8px',
+  },
+  '::-webkit-scrollbar-thumb': {
+    backgroundColor: theme.palette.divider,
+  },
+})
+
+const drawerScrollbars = theme => ({
+  '&::-webkit-scrollbar': {
+    backgroundColor: theme.palette.background.paper,
+  },
+})
+
 const drawerWidth = 240
 const styles = theme => ({
+  '@global': theme.disableScrollbars ? {} : scrollbars(theme),
   appFrame: {
     position: 'relative',
     display: 'flex',
     width: '100%',
     minHeight: '100vh',
+    overflowY: 'auto',
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
@@ -37,11 +56,15 @@ const styles = theme => ({
   drawerPaper: {
     width: 250,
     [theme.breakpoints.up('md')]: {
+      display: 'block',
       width: drawerWidth,
-      position: 'relative',
+      // position: 'relative',
       minHeight: '100vh',
       height: '100%',
+      position: 'fixed',
+      overflowY: 'auto',
     },
+    ...(theme.disableScrollbars ? {} : drawerScrollbars(theme)),
   },
   content: {
     backgroundColor: theme.palette.background.default,
@@ -52,6 +75,7 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       height: 'calc(100% - 64px)',
       width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
       marginTop: 64,
     },
   },

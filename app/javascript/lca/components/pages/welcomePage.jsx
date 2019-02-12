@@ -61,7 +61,7 @@ const WelcomePage = () => (
           devices.
         </Typography>
 
-        <Typography>
+        <Typography paragraph>
           Supports Solar and Dragon-Blooded Exalts and Mortal Characters, with
           automatic tracking of Caste/Aspect/Favored Abilities, and
           Excellencies. Or forge your own path with Custom Attribute, Ability,
@@ -140,4 +140,5 @@ const WelcomePage = () => (
     </Grid>
   </Grid>
 )
+
 export default WelcomePage

@@ -114,7 +114,7 @@ class MeritFields extends Component<FieldsProps> {
             name="label"
             value={merit.label}
             style={{ flex: 1 }}
-            label="Summary (optional)"
+            label="Display Name (optional)"
             margin="dense"
             onChange={handleChange}
           />

@@ -82,6 +82,7 @@ class CharacterMenu extends React.Component<Props, State> {
             characterType={this.props.characterType}
             id={this.props.id}
           />
+
           <MenuHide
             characterType={this.props.characterType}
             id={this.props.id}

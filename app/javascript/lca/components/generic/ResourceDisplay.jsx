@@ -22,14 +22,14 @@ const styles = theme => ({
     ...theme.typography.body1,
     display: 'inline-block',
     verticalAlign: 'top',
-    marginTop: '0.25em',
+    marginTop: '0.125em',
   },
   committed: {
     ...theme.typography.caption,
     display: 'inline-block',
     position: 'absolute',
     bottom: '0.25em',
-    right: '0.2em',
+    right: '0.25em',
   },
 })
 

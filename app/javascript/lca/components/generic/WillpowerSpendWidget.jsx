@@ -14,11 +14,11 @@ import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils/'
-import type { Character, fullQc, Enhancer } from 'utils/flow-types'
+import type { withWillpower, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {
   children: React.Node,
-  character: Character | fullQc,
+  character: withWillpower & { id: number },
   qc?: boolean,
 }
 type Props = ExposedProps & {

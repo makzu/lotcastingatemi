@@ -10,6 +10,7 @@ import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import AnimaSelect from 'components/generic/AnimaSelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import commonStyles from 'styles'
 import {
   committedPersonalMotes,
   committedPeripheralMotes,
@@ -18,15 +19,9 @@ import {
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
-  separator: {
-    ...theme.typography.body1,
-    marginRight: theme.spacing.unit,
-  },
-  flexRow: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
+  ...commonStyles(theme),
   flexCol: {
+    display: 'flex',
     flex: 1,
   },
 })
@@ -43,7 +38,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
   return (
     <BlockPaper>
       <Typography variant="h6">Mote Pools:</Typography>
-      <div className={classes.flexRow}>
+      <Typography component="div" className={classes.flexContainerWrap}>
         {character.type !== 'Character' && (
           <Fragment>
             <div className={classes.flexCol}>
@@ -58,7 +53,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
                 margin="dense"
                 onChange={onChange}
               />
-              <span className={classes.separator}>/</span>
+              <span className={classes.fieldSeparator}>/</span>
               {showMoteTotalEditors && (
                 <RatingField
                   trait="motes_personal_total"
@@ -69,7 +64,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
                 />
               )}
               {!showMoteTotalEditors && (
-                <span className={classes.separator}>
+                <span className={classes.fieldSeparator}>
                   {character.motes_personal_total}
                 </span>
               )}
@@ -86,8 +81,8 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
                 margin="dense"
                 onChange={onChange}
               />
-              <span className={classes.separator}>/</span>
-              {showMoteTotalEditors && (
+              <span className={classes.fieldSeparator}>/</span>
+              {showMoteTotalEditors ? (
                 <RatingField
                   trait="motes_peripheral_total"
                   value={character.motes_peripheral_total}
@@ -95,9 +90,8 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
                   margin="dense"
                   onChange={onChange}
                 />
-              )}
-              {!showMoteTotalEditors && (
-                <span className={classes.separator}>
+              ) : (
+                <span className={classes.fieldSeparator}>
                   {character.motes_peripheral_total}
                 </span>
               )}
@@ -115,8 +109,9 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
             />
           </div>
         )}
-      </div>
-      <div className={classes.flexRow}>
+      </Typography>
+
+      <Typography component="div" className={classes.flexContainerWrap}>
         {character.type !== 'Character' && (
           <div className={classes.flexCol}>
             <AnimaSelect character={character} onChange={onChange} />
@@ -146,7 +141,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
             </TextField>
           </div>
         )}
-      </div>
+      </Typography>
 
       {character.type !== 'Character' && (
         <MoteCommittmentEditor character={character} onChange={onChange} />

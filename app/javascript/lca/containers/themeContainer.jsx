@@ -16,6 +16,7 @@ import type { Enhancer } from 'utils/flow-types'
  * and to re-run `rails g favicon`
  */
 const themeCommon = {
+  disableScrollbars: false,
   typography: {
     useNextVariants: true,
   },

@@ -102,7 +102,6 @@ class WeaponEditorPopup extends Component<Props, State> {
                 value={weapon.weight}
                 onChange={handleChange}
                 margin="dense"
-                style={{ flex: 1 }}
               />
 
               <FormControlLabel
@@ -114,7 +113,6 @@ class WeaponEditorPopup extends Component<Props, State> {
                     onChange={handleCheck}
                   />
                 }
-                style={{ flex: 1, marginRight: 0 }}
               />
             </div>
 

@@ -7,22 +7,16 @@ import Typography from '@material-ui/core/Typography'
 import ResourceEditor from './resourceEditor.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import commonStyles from 'styles'
 import { WILLPOWER_MAX } from 'utils/constants.js'
 import type { Character } from 'utils/flow-types'
-
-const styles = theme => ({
-  separator: {
-    ...theme.typography.body1,
-    marginRight: theme.spacing.unit,
-  },
-})
 
 type Props = { character: Character, onChange: Function, classes: Object }
 const WillpowerEditor = ({ character, onChange, classes }: Props) => (
   <BlockPaper>
     <Typography variant="h6">Willpower:</Typography>
 
-    <div>
+    <Typography component="div" className={classes.flexContainer}>
       <RatingField
         trait="willpower_temporary"
         value={character.willpower_temporary}
@@ -31,7 +25,7 @@ const WillpowerEditor = ({ character, onChange, classes }: Props) => (
         narrow
         onChange={onChange}
       />
-      <span className={classes.separator}>/</span>
+      <span className={classes.fieldSeparator}>/</span>
       <RatingField
         trait="willpower_permanent"
         value={character.willpower_permanent}
@@ -41,7 +35,7 @@ const WillpowerEditor = ({ character, onChange, classes }: Props) => (
         narrow
         onChange={onChange}
       />
-    </div>
+    </Typography>
 
     {character.type !== 'Character' && (
       <ResourceEditor character={character} onChange={onChange} />
@@ -49,4 +43,4 @@ const WillpowerEditor = ({ character, onChange, classes }: Props) => (
   </BlockPaper>
 )
 
-export default withStyles(styles)(WillpowerEditor)
+export default withStyles(commonStyles)(WillpowerEditor)

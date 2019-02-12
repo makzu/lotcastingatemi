@@ -14,7 +14,11 @@ import ShapeSorceryWidget from '../generic/ShapeSorceryWidget.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import sharedStyles from 'styles/'
 import * as calc from 'utils/calculated'
-import type { Character, fullQc } from 'utils/flow-types'
+import type {
+  withMotePool,
+  withWillpower,
+  withHealthLevels,
+} from 'utils/flow-types'
 
 const styles = theme => ({
   ...sharedStyles(theme),
@@ -24,7 +28,9 @@ const styles = theme => ({
 })
 
 type Props = {
-  character: Character | fullQc,
+  character: withMotePool &
+    withWillpower &
+    withHealthLevels & { id: number, aura: string, type: string },
   classes: Object,
   qc?: boolean,
 }

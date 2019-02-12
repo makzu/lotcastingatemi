@@ -14,11 +14,11 @@ import RatingField from './RatingField.jsx'
 import { takeDamage } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
-import type { Character, fullQc, Enhancer } from 'utils/flow-types'
+import type { withHealthLevels, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {
   children: React.Node,
-  character: Character | fullQc,
+  character: withHealthLevels & { id: number },
   qc?: boolean,
 }
 type Props = ExposedProps & {

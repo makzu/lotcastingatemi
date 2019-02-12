@@ -17,7 +17,6 @@ import type { Character, Enhancer } from 'utils/flow-types'
 type ExposedProps = {
   character: Character,
   onChange: Function,
-  onBlur: Function,
   onRatingChange: Function,
   onCheck: Function,
 }

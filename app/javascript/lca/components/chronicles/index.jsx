@@ -135,7 +135,7 @@ class ChronicleDashboard extends Component<Props> {
           items={characterList}
           classes={{}}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
         {characterList.length == 0 && (
@@ -156,7 +156,7 @@ class ChronicleDashboard extends Component<Props> {
           items={qcList}
           classes={{}}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
         {qcList.length == 0 && (
@@ -177,7 +177,7 @@ class ChronicleDashboard extends Component<Props> {
           items={bgList}
           classes={{}}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
         {bgList.length == 0 && (

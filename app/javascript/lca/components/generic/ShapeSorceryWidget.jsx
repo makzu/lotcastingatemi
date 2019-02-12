@@ -16,7 +16,7 @@ import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
-import type { Character, fullQc, Enhancer } from 'utils/flow-types'
+import type { Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
 const styles = theme => ({
@@ -38,7 +38,7 @@ const styles = theme => ({
 
 type ExposedProps = {
   children: React.Node,
-  character: Character | fullQc,
+  character: { id: number, sorcerous_motes: number, type: 'qc' | string },
 }
 type Props = ExposedProps & {
   canEdit: boolean,
@@ -112,7 +112,7 @@ class ShapeSorceryWidget extends React.Component<Props, State> {
               <div className={classes.col}>
                 <PoolDisplay
                   qc={character.type === 'qc'}
-                  pool={pools.joinBattle}
+                  pool={pools.shapeSorcery}
                   label="Pool"
                 />
               </div>

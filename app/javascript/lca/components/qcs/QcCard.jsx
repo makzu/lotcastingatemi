@@ -115,6 +115,7 @@ function QcCard(props: Props) {
         )}
       </div>
 
+      {/* $FlowFixMe */}
       <SpendableBlock character={qc} qc />
 
       <div className={classes.rowContainer}>

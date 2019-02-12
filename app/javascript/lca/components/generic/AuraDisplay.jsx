@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 import { updateCharacter, updateQc } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
-import type { Character, Enhancer } from 'utils/flow-types'
+import type { Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   wrap: {
@@ -36,8 +36,8 @@ const styles = theme => ({
 })
 
 type ExposedProps = {
-  character: Character,
-  qc: boolean,
+  character: { id: number, aura: string },
+  qc?: boolean,
 }
 type Props = ExposedProps & {
   canEdit: boolean,

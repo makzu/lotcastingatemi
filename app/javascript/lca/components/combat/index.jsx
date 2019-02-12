@@ -90,9 +90,11 @@ class CombatDashboard extends Component<Props> {
 
     const combatCards = inCombatEntities.map(c => (
       <Grid item xs={12} md={6} xl={4} key={c.id + c.name}>
+        {/* $FlowFixMe */}
         {c.type.includes('Character') && <CharacterCard character={c} />}
+        {/* $FlowFixMe */}
         {c.type === 'qc' && <QcCard qc={c} />}
-        {/* $FlowThisIsOkayISwear */}
+        {/* $FlowFixMe */}
         {c.type === 'battlegroup' && <BattlegroupCard battlegroup={c} />}
       </Grid>
     ))

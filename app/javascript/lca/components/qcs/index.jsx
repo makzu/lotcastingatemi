@@ -238,6 +238,7 @@ class QcSheet extends Component<Props> {
             classes={{ root: classes.poolBlock }}
           />
 
+          {/* $FlowFixMe */}
           <SpendableBlock character={qc} qc />
         </div>
 

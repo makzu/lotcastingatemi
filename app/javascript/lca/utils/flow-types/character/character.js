@@ -76,7 +76,7 @@ export type xpLog = {
 export type Character = {
   caste: string,
   aspect: ?boolean,
-  aura: ?string,
+  aura: string,
   type: string,
   exalt_type: string,
   excellency: string,

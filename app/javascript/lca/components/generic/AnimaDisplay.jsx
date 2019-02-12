@@ -46,7 +46,7 @@ const styles = theme => ({
 })
 
 type ExposedProps = {
-  character: withMotePool & { id: number, type?: string },
+  character: withMotePool & { id: number, type: string },
   qc?: boolean,
 }
 type Props = ExposedProps & {

@@ -1,4 +1,5 @@
 // @flow
+import * as React from 'react'
 export * from './character'
 export * from './qc'
 export * from './shared.js'

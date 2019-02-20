@@ -18,6 +18,10 @@ export default function rating(
   const pool = _attr + _abil
   const specialties = specialtiesFor(character, ability)
 
+  let mb = 0
+  if (bonus.length > 0)
+    mb = bonus.reduce((a, b) => a + (b.situational ? 0 : b.bonus), 0)
+
   const excellency = maxExcellency(
     character,
     attribute,
@@ -50,7 +54,7 @@ export default function rating(
     excellencyStuntCost: excellencyStunt * 2,
     penalties: penalties.filter(p => p.penalty > 0),
     totalPenalty: penalty,
-    total: Math.max(halfRoundUp(pool) - penalty, 0),
+    total: Math.max(halfRoundUp(pool) + mb - penalty, 0),
     bonus: bonus,
     rating: true,
     specialAttacks: [],

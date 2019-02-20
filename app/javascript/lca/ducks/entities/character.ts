@@ -1,8 +1,13 @@
-// @flow
+import createCachedSelector from 're-reselect'
+
+import { ICharacter } from 'types'
+import { callApi } from 'utils/api.js'
 import { createApiActions, createEntityReducer, mergeEntity } from './_entity'
 import { crudAction, standardTypes } from './_lib'
+import { EntityState, WrappedEntityState } from './_types'
 
-import { callApi } from 'utils/api.js'
+const unwrapped = (state: WrappedEntityState): EntityState =>
+  state.entities.current
 
 const CHARACTER = 'character'
 
@@ -27,3 +32,13 @@ export function changeCharacterType(id: number, type: string) {
     types: standardTypes(CHARACTER, action),
   })
 }
+
+export const getSpecificCharacter = (state: WrappedEntityState, id: number) =>
+  unwrapped(state).characters[id]
+
+const getMerits = (state: WrappedEntityState) => unwrapped(state).merits
+
+export const getMeritsForCharacter = createCachedSelector(
+  [getSpecificCharacter, getMerits],
+  (character, merits) => character.merits.map(m => merits[m])
+)((state, id) => id)

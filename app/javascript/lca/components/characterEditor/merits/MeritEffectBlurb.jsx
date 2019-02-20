@@ -40,6 +40,9 @@ const MeritEffectBlurb = ({ name, rating }: Props) => {
     case 'thin-blooded':
       effect = 'Adding conditional penalty'
       break
+    case 'inhuman visage':
+      effect = 'Adding 1 to Guile'
+      break
     default:
       return null
   }

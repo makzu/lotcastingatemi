@@ -15,7 +15,6 @@ These merits are checked for while calculating pools, ratings, penalties, and re
 - Pain Tolerance
 - Well-Bred
 - Thin-Blooded
-- Carapace
 - Inhuman Visage
 
 It's not necessary to manually add bonuses from the above merits.

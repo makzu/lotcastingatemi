@@ -217,7 +217,8 @@ class QcSheet extends Component<Props> {
         <strong>{charm.name} </strong>({charm.cost}; {charm.timing};{' '}
         {charm.duration}; Essence&nbsp;
         {charm.min_essence}
-        )&nbsp;
+        )<br />
+        Keywords: {charm.keywords.join(', ') || 'none'}
         <ReactMarkdown
           source={charm.body}
           className={classes.markdown}

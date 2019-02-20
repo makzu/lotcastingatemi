@@ -33,7 +33,6 @@ RSpec.describe 'Characters', type: :request do
               params:  { character: { essence: -1 } }
 
         expect(response.status).to eq 400
-        expect(JSON.parse(response.body)).to have_key('essence')
         character.reload
         expect(character.essence).not_to eq(-1)
       end

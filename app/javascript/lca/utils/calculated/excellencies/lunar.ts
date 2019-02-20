@@ -1,4 +1,4 @@
-import { ICharacter, ICharm } from 'types'
+import { Ability, Attribute, ICharacter, ICharm } from 'types'
 import { ATTRIBUTES } from 'utils/constants.js'
 import { attr } from '..'
 import { highestOtherAttribute } from './custom.js'
@@ -16,18 +16,15 @@ export const lunarExcellencyAbils = (
   })
 
   const attributes = ATTRIBUTES.map(a => {
-    if (
-      (casteAndFav.includes(a.pretty.toLowerCase()) &&
-        character[a.attr] >= 3) ||
-      character[a.attr] >= 4
-    ) {
-      return a.pretty.toLowerCase()
-    }
-  })
+    const pretty = a.pretty.toLowerCase()
 
-  Object.keys(charmsPerAttribute).forEach(k => {
-    if (charmsPerAttribute[k] >= 2) {
-      attributes.push(k)
+    if (
+      character[a.attr] >= 4 ||
+      charmsPerAttribute[pretty] >= 2 ||
+      (casteAndFav.includes(pretty) &&
+        (character[a.attr] >= 3 || charmsPerAttribute[pretty] >= 1))
+    ) {
+      return pretty
     }
   })
 
@@ -36,15 +33,15 @@ export const lunarExcellencyAbils = (
 
 const LunarExcellency = (
   character: ICharacter,
-  attribute: string,
-  ability: string,
+  attribute: Attribute,
+  ability: Ability,
   staticRating: boolean,
   stunt: boolean = false
 ) =>
   Math.floor(
-    (attr(character, attribute) + stunt
-      ? highestOtherAttribute(character, ability)
-      : 0) / (staticRating ? 2 : 1)
+    (attr(character, attribute) +
+      (stunt ? highestOtherAttribute(character, attribute) : 0)) /
+      (staticRating ? 2 : 1)
   )
 
 export default LunarExcellency

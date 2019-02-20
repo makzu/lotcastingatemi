@@ -1,6 +1,7 @@
 // @flow
 import rating from './_rating.js'
 import { penaltyObject } from '../index.js'
+import { halfRoundUp } from 'utils'
 import type { Character } from 'utils/flow-types'
 
 export function resolve(
@@ -19,6 +20,22 @@ export function resolve(
     bonus = bonus.concat([
       { label: 'thin-blooded', bonus: -1, situational: true },
     ])
+
+  if ((character.caste || '').toLowerCase() === 'full moon') {
+    bonus = bonus.concat([
+      {
+        label: 'vs threaten/fear (anima)',
+        bonus: halfRoundUp(
+          Math.max(
+            character.attr_strength,
+            character.attr_dexterity,
+            character.attr_stamina
+          )
+        ),
+        situational: true,
+      },
+    ])
+  }
 
   return rating(
     'Resolve',

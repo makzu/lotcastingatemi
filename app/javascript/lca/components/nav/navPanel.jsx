@@ -1,8 +1,14 @@
 // @flow
 import * as React from 'react'
-const { PureComponent, Fragment } = React
+const { Fragment } = React
 import { connect } from 'react-redux'
-import { withRouter, Link, NavLink } from 'react-router-dom'
+import {
+  withRouter,
+  Link,
+  NavLink,
+  Route,
+  Switch as RouterSwitch,
+} from 'react-router-dom'
 
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
@@ -16,6 +22,7 @@ import Switch from '@material-ui/core/Switch'
 import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
+import CharacterNavigation from 'components/characters/SideNavigation.tsx'
 import Discord from 'icons/Discord-Logo.jsx'
 import Patreon from 'icons/Patreon-Logo.jsx'
 import OctoCat from 'icons/OctoCat.jsx'
@@ -27,7 +34,14 @@ const styles = theme => ({
   themeLabel: {
     textTransform: 'capitalize',
   },
+  navElement: {
+    '& .active': {
+      backgroundColor: theme.palette.action.selected,
+    },
+  },
 })
+
+const isOnHelpPage = (_, location) => location.pathname.startsWith('/help')
 
 type Props = {
   authenticated: boolean,
@@ -40,7 +54,7 @@ type Props = {
   classes: Object,
 }
 
-export class NavPanel extends PureComponent<Props> {
+export class NavPanel extends React.Component<Props> {
   closeCheck = () => {
     if (this.props.drawerOpen) this.props.closeDrawer()
   }
@@ -58,7 +72,7 @@ export class NavPanel extends PureComponent<Props> {
 
     return (
       <ErrorBoundary>
-        <List component="nav">
+        <List component="nav" className={classes.navElement}>
           {authenticated && (
             <ListItem
               button
@@ -70,7 +84,19 @@ export class NavPanel extends PureComponent<Props> {
             </ListItem>
           )}
 
-          <ListItem button component={NavLink} to="/" onClick={closeCheck}>
+          {false && (
+            <RouterSwitch>
+              <Route path="/characters/:id" component={CharacterNavigation} />
+            </RouterSwitch>
+          )}
+
+          <ListItem
+            button
+            component={NavLink}
+            to="/"
+            exact
+            onClick={closeCheck}
+          >
             <ListItemText primary="Home" />
           </ListItem>
 
@@ -99,8 +125,9 @@ export class NavPanel extends PureComponent<Props> {
           <ListItem
             button
             component={NavLink}
-            to="/help/index"
+            to="/help"
             onClick={closeCheck}
+            isActive={isOnHelpPage}
           >
             <ListItemText primary="Help" />
           </ListItem>
@@ -144,16 +171,6 @@ export class NavPanel extends PureComponent<Props> {
 
           <Divider />
 
-          {authenticated && (
-            <Fragment>
-              <ListItem button component={Link} to="/" onClick={logout}>
-                <ListItemText primary="Log Out" />
-              </ListItem>
-
-              <Divider />
-            </Fragment>
-          )}
-
           <ListItem
             button
             component="a"
@@ -168,6 +185,7 @@ export class NavPanel extends PureComponent<Props> {
 
             <ListItemText primary="View Source on GitHub" />
           </ListItem>
+
           <ListItem
             button
             component="a"
@@ -195,6 +213,15 @@ export class NavPanel extends PureComponent<Props> {
             </ListItemIcon>
             <ListItemText primary="Support on Patreon" />
           </ListItem>
+
+          {authenticated && (
+            <>
+              <Divider />
+              <ListItem button component={Link} to="/" onClick={logout}>
+                <ListItemText primary="Log Out" />
+              </ListItem>
+            </>
+          )}
         </List>
       </ErrorBoundary>
     )

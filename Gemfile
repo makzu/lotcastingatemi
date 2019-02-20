@@ -22,7 +22,7 @@ gem 'puma', '~> 3.7'
 # gem 'jbuilder', '~> 2.5'
 
 # For JSON responses
-gem 'active_model_serializers', '~> 0.10.8'
+gem 'active_model_serializers', '~> 0.10.9'
 
 # For duplicating QCs and Battlegroups
 gem 'deep_cloneable', '~> 2.3'
@@ -69,9 +69,9 @@ group :development, :test, :cypress do
   gem 'byebug', platform: :mri
   gem 'cypress-on-rails'
   gem 'database_cleaner'
-  gem 'factory_bot_rails', '~> 5.0.0'
+  gem 'factory_bot_rails', '~> 5.0.1'
   gem 'rspec-rails', '~> 3.8.2'
-  gem 'rubocop', '~> 0.60', require: false
+  gem 'rubocop', '~> 0.65', require: false
   gem 'rubocop-rspec', '~> 1.30', require: false
 end
 

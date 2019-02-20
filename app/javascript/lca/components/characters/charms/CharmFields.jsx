@@ -170,6 +170,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                 value={charm.ability}
                 onChange={handleChange}
                 multiple={false}
+                includeUniversal
               />
             )}
             {(charm.charm_type === 'Ability' ||
@@ -194,6 +195,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                   value={charm.ability}
                   onChange={handleChange}
                   multiple={false}
+                  includeUniversal
                 />
                 <RatingField
                   trait="min_ability"
@@ -234,7 +236,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               trait="keywords"
               value={charm.keywords}
               onChange={handleChange}
-              fullWidth={true}
+              fullWidth
               label="Keywords (comma separated)"
               margin="dense"
             />
@@ -242,7 +244,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               name="prereqs"
               value={charm.prereqs}
               onChange={handleChange}
-              fullWidth={true}
+              fullWidth
               label="Prerequisite Charms"
               margin="dense"
             />

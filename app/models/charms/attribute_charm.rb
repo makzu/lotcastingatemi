@@ -12,7 +12,7 @@ module Charms
 
     validates :min_ability, one_thru_ten_stat: true
 
-    validates :ability, inclusion: { in: Constants::ATTRIBUTES }, unless: :ability_blank?
+    validates :ability, inclusion: { in: Constants::ATTRIBUTES + %w[universal] }, unless: :ability_blank?
 
     def charm_type
       'Attribute'

@@ -82,6 +82,9 @@ class CharmFilter extends React.Component<Props> {
       <MenuItem key="none" value="">
         No Filter
       </MenuItem>,
+      <MenuItem key="universal" value="universal">
+        Universal
+      </MenuItem>,
       ...filters.map(abil =>
         abil === 'martial_arts' ? ( // Skip Martial Arts, it has its own handling
           <span key={abil} />

@@ -25,6 +25,7 @@ type Props = {
   prependOptions?: React.Node,
   withAttributes?: boolean,
   attributesOnly?: boolean,
+  includeUniversal?: boolean,
   multiple?: boolean,
   name: string,
   value: string | Array<string>,
@@ -50,6 +51,7 @@ class AbilitySelect extends Component<Props> {
       withAttributes,
       attributesOnly,
       prependOptions,
+      includeUniversal,
       classes,
     } = props
 
@@ -82,6 +84,11 @@ class AbilitySelect extends Component<Props> {
         fullWidth={props.fullWidth}
         SelectProps={{ multiple: multiple }}
       >
+        {includeUniversal && (
+          <MenuItem value="universal">
+            Universal (No {attributesOnly ? 'Attribute' : 'Ability'})
+          </MenuItem>
+        )}
         {prependOptions}
         {abilItems.length > 0 && (
           <ListSubheader value="-">Abilities</ListSubheader>

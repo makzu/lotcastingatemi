@@ -19,7 +19,7 @@ export const lunarExcellencyAbils = (
     const pretty = a.pretty.toLowerCase()
 
     if (
-      character[a.attr] >= 4 ||
+      character[a.attr] >= 5 ||
       charmsPerAttribute[pretty] >= 2 ||
       (casteAndFav.includes(pretty) &&
         (character[a.attr] >= 3 || charmsPerAttribute[pretty] >= 1))

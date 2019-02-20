@@ -1,3 +1,9 @@
+## v77
+
+###### _Feb 19, 2019_
+
+- Fixed Lunar excellency requirements for non-caste/non-favored Attributes (thanks, sigfriedmcwild)
+
 ## v76
 
 ###### _Feb 19, 2019_

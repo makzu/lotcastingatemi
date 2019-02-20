@@ -2,14 +2,20 @@
 import * as React from 'react'
 import Typography from '@material-ui/core/Typography'
 
+import { sample } from 'utils'
+
 const errorNames = [
   'Easily-Overlooked Error Method',
   'Friendship With Errors Approach',
-  'Error-mental Bolt Attack',
   'Heaven Thunder Error',
   'Keen Error and Bug Technique',
   'One Error, Two Bugs',
+  'Error-mental Bolt Attack',
+  'Wind-Carried Bugs',
+  'Hybrid Error Transformation',
+  'Crimson Bug Mantle',
 ]
+
 type Props = { children: React.Node }
 type State = { error?: Object, errorInfo?: Object }
 class ErrorBoundary extends React.Component<Props, State> {
@@ -27,9 +33,7 @@ class ErrorBoundary extends React.Component<Props, State> {
     if (error) {
       return (
         <div>
-          <Typography variant="h6">
-            {errorNames[Math.floor(Math.random() * errorNames.length)]}
-          </Typography>
+          <Typography variant="h6">{sample(errorNames)}</Typography>
           <Typography>Something went wrong.</Typography>
           <Typography>{error && error.message}</Typography>
         </div>

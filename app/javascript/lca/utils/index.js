@@ -1,19 +1,9 @@
 // @flow
+export * from './math'
 import { deepEqual } from 'fast-equals'
 
-export function clamp(val: number, min: number, max: number): number {
-  if (val > max) {
-    if (max === 10 && val === 10)
-      // Willpower, essence can be exactly 10
-      val = 10
-    else if (max <= 10) val = Math.min(val % 10, max)
-    else val = max
-  }
-
-  if (val < min) val = min
-
-  return val
-}
+export const sample = (array: Array<any>) =>
+  array[Math.floor(Math.random() * array.length)]
 
 export function checkVisible(elm: Object | null) {
   if (elm == null) return

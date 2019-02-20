@@ -1,6 +1,7 @@
 // @flow
 import { attr, abil, specialtiesFor } from '..'
 
+import { halfRoundUp, halfRoundDown } from 'utils'
 import { ABILITIES, ATTRIBUTES } from 'utils/constants.js'
 import type { Character } from 'utils/flow-types'
 
@@ -85,6 +86,6 @@ export default (
   }
 
   if (!staticRating || exArray.includes('nohalf')) return result
-  if (exArray.includes('roundup')) return Math.ceil(result / 2)
-  else return Math.floor(result / 2)
+  if (exArray.includes('roundup')) return halfRoundUp(result)
+  else return halfRoundDown(result)
 }

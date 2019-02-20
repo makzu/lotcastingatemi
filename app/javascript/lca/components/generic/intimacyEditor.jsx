@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment } from 'react'
 
-import Checkbox from '@material-ui/core/Checkbox'
+import Checkbox from 'components/generic/Checkbox.jsx'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
@@ -38,15 +38,13 @@ function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
         narrow
         onChange={onChange}
       />
-      <div className={classes.checkboxWrap}>
-        <div className={classes.floatingLabel}>Hidden</div>
-        <Checkbox
-          name="hidden"
-          checked={hidden}
-          value={(hidden || false).toString()}
-          onChange={onChange}
-        />
-      </div>
+
+      <Checkbox
+        name="hidden"
+        label="Hidden"
+        value={hidden || false}
+        onChange={onChange}
+      />
     </Fragment>
   )
 }

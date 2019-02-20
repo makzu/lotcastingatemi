@@ -1,6 +1,7 @@
 // @flow
 import { attr, abil, specialtiesFor } from '..'
 import { maxExcellency } from '../excellencies'
+import { halfRoundUp } from 'utils'
 import type { Character, Pool } from 'utils/flow-types'
 
 export default function rating(
@@ -40,7 +41,7 @@ export default function rating(
     attributeRating: _attr,
     ability: ability,
     abilityRating: _abil,
-    raw: Math.ceil(pool / 2),
+    raw: halfRoundUp(pool),
     specialtyMatters: pool % 2 === 0 && specialties.length > 0,
     specialties: specialties,
     excellency: excellency,
@@ -49,7 +50,7 @@ export default function rating(
     excellencyStuntCost: excellencyStunt * 2,
     penalties: penalties.filter(p => p.penalty > 0),
     totalPenalty: penalty,
-    total: Math.max(Math.ceil(pool / 2) - penalty, 0),
+    total: Math.max(halfRoundUp(pool) - penalty, 0),
     bonus: bonus,
     rating: true,
     specialAttacks: [],

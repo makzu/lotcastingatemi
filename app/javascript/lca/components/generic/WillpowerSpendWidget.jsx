@@ -13,7 +13,7 @@ import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from 'ducks/actions.js'
 import { canIEditCharacter, canIEditQc } from 'selectors'
-import { clamp } from 'utils/'
+import { clamp } from 'utils'
 import type { withWillpower, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {

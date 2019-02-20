@@ -2,6 +2,7 @@
 import rating from './_rating.js'
 import { penaltyObject } from '../index.js'
 import { weaponIsRanged } from '../weapons'
+import { halfRoundUp } from 'utils'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
 export function weaponDefenseBonus(weapon: fullWeapon) {
@@ -53,7 +54,7 @@ export function parry(
     bonus
   )
   const rawRating =
-    Math.ceil((rat.attributeRating + rat.abilityRating) / 2) +
+    halfRoundUp(rat.attributeRating + rat.abilityRating) +
     weaponDefenseBonus(weapon) +
     weapon.bonus_defense
 

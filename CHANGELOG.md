@@ -1,6 +1,13 @@
 ## v76
 
-###### _Not yet released_
+###### _Feb 19, 2019_
+
+- Lunar characters can now be created.
+- Charms can now be Universal, meaning there is no Attribute or Ability associated with them
+- The minimum Attribute for Lunar or Custom Attribute Exalt Charms can now be as high as 10
+- QCs excellencies for the Senses pool now use the correct numbers (thanks, Dark Lord Alan)
+- Major revamps to how the app works under the hood
+- Minor tweaks and polish
 
 ## v75
 
@@ -24,7 +31,7 @@
 
 - Page numbers for _What Fire has Wrought_ content are now updated to reflect the Backer PDF
 - Removed option to delete characters/qcs/etc from their cards on the Chronicle page.
-- Added Earth Aspect Anima bonus to defense vs smashing attaks and grapples
+- Added Earth Aspect Anima bonus to defense vs smashing attacks and grapples
 - Close-ranged Archery attack pools now use the correct accuracy (Thanks, Quasi)
 - Tweaked Discord previews of public characters/qcs
 

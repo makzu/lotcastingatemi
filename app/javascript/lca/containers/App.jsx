@@ -150,9 +150,9 @@ class App extends Component<Props> {
                 variant="caption"
                 className={classes.footerText}
                 component="a"
-                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v75"
+                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v76"
               >
-                v75
+                v76
               </Typography>
             </div>
 

@@ -10,7 +10,7 @@ module Charms
     alias_attribute :attr, :ability
     alias_attribute :min_attr, :min_ability
 
-    validates :min_ability, one_thru_five_stat: true
+    validates :min_ability, one_thru_ten_stat: true
 
     validates :ability, inclusion: { in: Constants::ATTRIBUTES }, unless: :ability_blank?
 

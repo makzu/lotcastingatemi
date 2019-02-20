@@ -31,18 +31,14 @@ class Character < ApplicationRecord
   validates :name, presence: true
 
   # Essence above 5 is explicitly mentioned in the book
-  validates :essence, numericality: {
-    greater_than_or_equal_to: 1, less_than_or_equal_to: 10
-  }
+  validates :essence, one_thru_ten_stat: true
 
-  # TODO: see if values above 5 are valid for attributes and abilities
-  # Attributes can be one through five
+  # Attributes can normally be one through five
+  # Increasing Strength Exercise and other Charms can increase this further
   validates :attr_strength,     :attr_dexterity,    :attr_stamina,
             :attr_charisma,     :attr_manipulation, :attr_appearance,
             :attr_intelligence, :attr_perception,   :attr_wits,
-            numericality: {
-              greater_than_or_equal_to: 1, less_than_or_equal_to: 10
-            }
+            one_thru_ten_stat: true
 
   # Abilities can be zero through five
   validates :abil_archery,     :abil_athletics,      :abil_awareness,

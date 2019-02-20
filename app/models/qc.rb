@@ -18,9 +18,7 @@ class Qc < ApplicationRecord
   has_many :poisons, as: :poisonable, dependent: :destroy
 
   # Essence above 5 is explicitly mentioned in the book
-  validates :essence, numericality: {
-    greater_than_or_equal_to: 1, less_than_or_equal_to: 10
-  }
+  validates :essence, one_thru_ten_stat: true
 
   validates :grapple, :grapple_control,
             :hardness,

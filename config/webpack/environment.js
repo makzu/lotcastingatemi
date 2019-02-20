@@ -32,6 +32,7 @@ environment.config.merge({
     alias: {
       // eslint-disable-next-line no-undef
       Docs: path.resolve(__dirname, '../../docs'),
+      'redux-api-middleware': 'redux-api-middleware/es',
     },
   },
 })

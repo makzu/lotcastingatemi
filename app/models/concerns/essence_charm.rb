@@ -10,9 +10,7 @@ module EssenceCharm
     before_validation :trim_keywords
 
     # Essence above 5 is explicitly mentioned in the book
-    validates :min_essence, numericality: {
-      greater_than_or_equal_to: 1, less_than_or_equal_to: 10
-    }
+    validates :min_essence, one_thru_ten_stat: true
 
     validates :timing, inclusion: { in: CHARM_TIMINGS }
 

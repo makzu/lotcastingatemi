@@ -18,9 +18,7 @@ class Battlegroup < ApplicationRecord
   validates :drill, inclusion: { in: 0..2, message: 'drill must be between 0 (poor) and 2 (elite)' }
 
   # Essence above 5 is explicitly mentioned in the book
-  validates :essence, numericality: {
-    greater_than_or_equal_to: 1, less_than_or_equal_to: 10
-  }
+  validates :essence, one_thru_ten_stat: true
 
   validates :resolve, :guile, :appearance,
             :join_battle, :evasion, :parry, :soak,

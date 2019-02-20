@@ -90,7 +90,7 @@ group :development do
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler'
-  gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler', require: false
   # gem 'scout_apm'
   # gem 'stackprof'
 end

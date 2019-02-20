@@ -173,12 +173,16 @@ class ExcellencyEditor extends Component<
                   All Attribute + Ability rolls
                 </MenuItem>,
                 <MenuItem value="solar" key="solar">
-                  As Solars (caste/favored abilities &gt; 0, abilities with
-                  Charms)
+                  As Solars (caste/favored attributes/abilities &gt; 0, other
+                  attributes/abilities with at least one Charm)
                 </MenuItem>,
                 <MenuItem value="dragonblood" key="dragonblood">
-                  As Dragon-Blooded (all abilities with excellency keyworded
-                  Charm)
+                  As Dragon-Blooded (all attributes/abilities with an excellency
+                  keyworded Charm)
+                </MenuItem>,
+                <MenuItem value="lunar" key="lunar">
+                  As Lunars (caste/favored attributes &ge; 3 or with &ge; 2
+                  Charms, other attributes &ge; 4 or with &ge; 3 Charms)
                 </MenuItem>,
               ]}
             />

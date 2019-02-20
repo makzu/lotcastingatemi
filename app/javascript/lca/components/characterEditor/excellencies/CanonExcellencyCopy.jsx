@@ -41,6 +41,7 @@ class CanonExcellencyCopier extends PureComponent<
         obj = {
           excellency: 'attribute',
           excellency_stunt: 'attribute+otherattribute',
+          excellencies_for: ['lunar'],
         }
         break
       case 'sidereal':

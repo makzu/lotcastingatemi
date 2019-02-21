@@ -50,10 +50,10 @@ class CharmFullPage extends Component<Props, State> {
 
     this.state = {
       filtersOpen: false,
-      abilityFilter: '',
-      styleFilter: '',
-      artifactFilter: '',
-      circleFilter: '',
+      abilityFilter: null,
+      styleFilter: null,
+      artifactFilter: null,
+      circleFilter: null,
       categoryFilter: [],
       openCharm: null,
       openSpell: null,
@@ -111,13 +111,13 @@ class CharmFullPage extends Component<Props, State> {
 
     const filterByCategory = charm =>
       categoryFilter.every(cat => charm.categories.includes(cat))
-    if (abilityFilter !== '')
+    if (abilityFilter !== null)
       filteredNatives = filteredNatives.filter(c => c.ability === abilityFilter)
-    if (styleFilter !== '')
+    if (styleFilter !== null)
       filteredMA = filteredMA.filter(c => c.style === styleFilter)
-    if (artifactFilter !== '')
+    if (artifactFilter !== null)
       filteredEvo = filteredEvo.filter(c => c.artifact_name === artifactFilter)
-    if (circleFilter !== '')
+    if (circleFilter !== null)
       filteredSpells = filteredSpells.filter(c => c.circle === circleFilter)
     if (categoryFilter.length > 0) {
       filteredNatives = filteredNatives.filter(filterByCategory)

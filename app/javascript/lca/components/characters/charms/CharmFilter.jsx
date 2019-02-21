@@ -52,13 +52,14 @@ class CharmFilter extends React.Component<Props> {
       filterName = '',
       filterLabel = ''
 
+    const attrLabel = exaltTypeBase === 'attribute' ? 'Attribute' : 'Ability'
+
     switch (charmType) {
       case 'native':
         filters = abilities
         filterName = 'abilityFilter'
-        filterLabel =
-          'Filter by ' +
-          (exaltTypeBase === 'attribute' ? 'Attribute' : 'Ability')
+        filterLabel = 'Filter by ' + attrLabel
+
         break
       case 'martial_arts':
         filters = styles
@@ -79,25 +80,36 @@ class CharmFilter extends React.Component<Props> {
         filterLabel = 'derp'
     }
     const filterOptions: React.Node = [
-      <MenuItem key="none" value="">
+      <MenuItem key="none" value={null}>
         No Filter
       </MenuItem>,
-      <MenuItem key="universal" value="universal">
-        Universal
-      </MenuItem>,
-      ...filters.map(abil =>
-        abil === 'martial_arts' ? ( // Skip Martial Arts, it has its own handling
-          <span key={abil} />
-        ) : (
-          <MenuItem
-            key={abil}
-            value={abil}
-            style={{ textTransform: 'capitalize' }}
-          >
-            {abil}
-          </MenuItem>
-        )
-      ),
+      charmType === 'native' ? (
+        <MenuItem key="universal" value="universal">
+          Universal
+        </MenuItem>
+      ) : null,
+      ...filters.map(abil => {
+        switch (abil) {
+          case '':
+            return (
+              <MenuItem key="blank" value="">
+                None
+              </MenuItem>
+            )
+          case 'martial_arts':
+            return <span key={abil} />
+          default:
+            return (
+              <MenuItem
+                key={abil}
+                value={abil}
+                style={{ textTransform: 'capitalize' }}
+              >
+                {abil}
+              </MenuItem>
+            )
+        }
+      }),
     ]
     const catOptions = categories.map(cat => (
       <MenuItem key={cat} value={cat} style={{ textTransform: 'capitalize' }}>
@@ -129,7 +141,7 @@ class CharmFilter extends React.Component<Props> {
                   }}
                   name={filterName}
                   label={filterLabel}
-                  value={currentAbility || ''}
+                  value={currentAbility}
                   onChange={onChange}
                 >
                   {filterOptions}

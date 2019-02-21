@@ -7,7 +7,7 @@ import {
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
-  VERBS,
+  VERBS
 } from './_lib'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
@@ -26,8 +26,9 @@ export const createTraitReducer = (
       const { charId } = action.meta
       const parent = (action.meta.parent || parentType) + 's'
       const assoc = traitAssoc(entityType, action.payload)
+      const newTraitIds = state[parent][charId][assoc].concat([id])
 
-      state[parent][charId][assoc].push(id)
+      state[parent][charId][assoc] = [...new Set(newTraitIds)]
       state[pluralType][id] = action.payload
     },
 

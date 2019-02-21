@@ -5,6 +5,21 @@ import { deepEqual } from 'fast-equals'
 export const sample = (array: Array<any>) =>
   array[Math.floor(Math.random() * array.length)]
 
+export const capitalize = (string: string) =>
+  string.charAt(0).toUpperCase() + string.toLowerCase().slice(1)
+
+const ARTICLES = ['a', 'an', 'and', 'at', 'by', 'from', 'of', 'the']
+
+export const titleCase = (string: string) =>
+  string
+    .split(' ')
+    .map((s, i, array) =>
+      ARTICLES.includes(s) && ![0, array.length - i].includes(i)
+        ? s
+        : capitalize(s)
+    )
+    .join(' ')
+
 export function checkVisible(elm: Object | null) {
   if (elm == null) return
   var rect = elm.getBoundingClientRect()

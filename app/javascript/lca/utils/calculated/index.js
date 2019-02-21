@@ -6,6 +6,7 @@ export * from './pools'
 export * from './ratings'
 export * from './weapons'
 
+import { capitalize, titleCase } from '..'
 import {
   ATTRIBUTES,
   ABILITIES_ALL,
@@ -197,7 +198,7 @@ export function prettyExaltType(character: Character) {
     case 'LunarCharacter':
       return 'Lunar'
     default:
-      return character.exalt_type
+      return titleCase(character.exalt_type)
   }
 }
 
@@ -205,11 +206,15 @@ export function prettyFullExaltType(character: Character) {
   if (character.type === 'Character')
     return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
 
+  let casteLabel = character.aspect ? ' Aspect ' : ' Caste '
+  if ((character.caste || '').toLowerCase() === 'casteless') {
+    casteLabel = ' '
+  }
+
   let caste =
     character.caste === '' || character.caste == null
       ? ''
-      : capitalize(character.caste) +
-        (character.aspect ? ' Aspect ' : ' Caste ')
+      : titleCase(character.caste) + casteLabel
 
   return `${caste}${prettyExaltType(character) || 'Exalt'}`
 }

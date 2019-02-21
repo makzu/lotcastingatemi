@@ -61,6 +61,7 @@ const SpecialtyEditor = ({ character, onChange }: Props) => {
         Fields={SpecialtyFields}
         newObject={{ context: 'New Specialty', ability: '' }}
         onChange={onChange}
+        showCount
       />
     </BlockPaper>
   )

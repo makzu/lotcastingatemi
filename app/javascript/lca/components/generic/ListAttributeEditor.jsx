@@ -51,6 +51,10 @@ const styles = theme => ({
     marginBottom: -theme.spacing.unit * 1.25,
     textAlign: 'center',
   },
+  countLabel: {
+    ...theme.typography.caption,
+    marginLeft: theme.spacing.unit,
+  },
 })
 
 type Props = {
@@ -59,6 +63,7 @@ type Props = {
   label: string,
   newObject: Object | string,
   nonObject?: boolean,
+  showCount?: boolean,
   Fields: Function,
   onChange: Function,
   classes: Object,
@@ -101,7 +106,7 @@ class ListAttributeEditor extends Component<Props> {
   }
 
   render() {
-    const { character, trait, Fields, classes } = this.props
+    const { character, trait, Fields, showCount, classes } = this.props
     const { onChange, onAdd, onRemove, handleSort } = this
 
     const rows = character[trait].map((t, index) => (
@@ -127,6 +132,11 @@ class ListAttributeEditor extends Component<Props> {
       <div data-cy={`${this.props.trait}-list-editor`}>
         <Typography variant="subtitle1">
           {this.props.label}
+          {showCount && (
+            <span className={classes.countLabel}>
+              ({character[trait].length} total)
+            </span>
+          )}
           <Button
             onClick={onAdd.bind(this)}
             data-cy={`add-${this.props.trait}`}
@@ -136,11 +146,7 @@ class ListAttributeEditor extends Component<Props> {
           </Button>
         </Typography>
         {rows.length == 0 && <Typography paragraph>None</Typography>}
-        <SortableList
-          items={rows}
-          onSortEnd={handleSort}
-          useDragHandle={true}
-        />
+        <SortableList items={rows} onSortEnd={handleSort} useDragHandle />
       </div>
     )
   }

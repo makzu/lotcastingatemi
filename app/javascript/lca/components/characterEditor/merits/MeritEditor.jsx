@@ -78,9 +78,9 @@ class MeritEditor extends Component<Props> {
       )
 
     const { handleAdd, handleRemove, handleSort } = this
-    const { updateMerit, classes } = this.props
+    const { merits, updateMerit, classes } = this.props
 
-    const mts = this.props.merits.map((m, i) => (
+    const mts = merits.map((m, i) => (
       <SortableItem key={m.id} index={i}>
         <Grid item key={m.id} xs={12} md={6} xl={4}>
           <MeritFields
@@ -92,6 +92,8 @@ class MeritEditor extends Component<Props> {
         </Grid>
       </SortableItem>
     ))
+
+    const totalDots = merits.reduce((acc, merit) => acc + merit.rating, 0)
 
     return (
       <Fragment>
@@ -127,9 +129,16 @@ class MeritEditor extends Component<Props> {
           items={mts}
           classes={classes}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
+
+        <Typography
+          variant="caption"
+          style={{ marginTop: '2.5em', marginBottom: '-1.5em' }}
+        >
+          {totalDots} dots of merits total
+        </Typography>
       </Fragment>
     )
   }

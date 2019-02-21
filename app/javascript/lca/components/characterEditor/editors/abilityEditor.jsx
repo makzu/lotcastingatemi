@@ -14,6 +14,7 @@ import { isUnequalByKeys } from 'utils'
 import {
   ABILITY_MAX as MAX,
   ABILITY_MIN as MIN,
+  ABILITIES,
   ABILITIES_ALL,
 } from 'utils/constants.js'
 import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
@@ -86,9 +87,36 @@ type Props = {
 }
 
 function AbilityEditor({ character, onChange }: Props) {
+  let totalDots = 0,
+    dotsOverThree = 0,
+    dotsUnderThree = 0
+
+  ABILITIES.forEach(a => {
+    const score = character[a.abil]
+    totalDots += score
+    dotsOverThree += Math.max(score - 3, 0)
+    dotsUnderThree += Math.min(score, 3)
+  })
+  character.abil_craft.concat(character.abil_martial_arts).forEach(a => {
+    const score = a.rating
+    totalDots += score
+    dotsOverThree += Math.max(score - 3, 0)
+    dotsUnderThree += Math.min(score, 3)
+  })
+
   return (
     <BlockPaper>
-      <Typography variant="h6">Abilities</Typography>
+      <Typography variant="h6" component="div">
+        Abilities&nbsp;
+        <Typography
+          variant="caption"
+          component="span"
+          style={{ display: 'inline' }}
+        >
+          ({totalDots} total, {dotsUnderThree} at or under 3, {dotsOverThree}{' '}
+          over 3)
+        </Typography>
+      </Typography>
 
       <div>
         <AbilityField

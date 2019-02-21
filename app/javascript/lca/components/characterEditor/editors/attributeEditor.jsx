@@ -20,6 +20,9 @@ const styles = theme => ({
   fieldSet: {
     marginBottom: theme.spacing.unit * 2,
   },
+  total: {
+    ...theme.typography.caption,
+  },
 })
 
 function AttributeField(props) {
@@ -30,11 +33,27 @@ type Props = { character: Character, onChange: Function, classes: Object }
 function AttributeEditor(props: Props) {
   const { character, onChange, classes } = props
 
+  const totalPhysical =
+    character.attr_strength + character.attr_dexterity + character.attr_stamina
+  const totalSocial =
+    character.attr_charisma +
+    character.attr_manipulation +
+    character.attr_appearance
+  const totalMental =
+    character.attr_perception +
+    character.attr_intelligence +
+    character.attr_wits
+
   return (
     <BlockPaper>
       <Typography variant="h6">Attributes</Typography>
       <div className={classes.fieldSet}>
-        <Typography variant="subtitle1">Physical</Typography>
+        <Typography variant="subtitle1">
+          Physical&nbsp;
+          <span className={classes.total}>
+            ({totalPhysical} total, {totalPhysical - 3} purchased)
+          </span>
+        </Typography>
         <AttributeField
           trait="attr_strength"
           value={character.attr_strength}
@@ -53,10 +72,16 @@ function AttributeEditor(props: Props) {
           label="Stamina"
           onChange={onChange}
         />
+        <Typography />
       </div>
 
       <div className={classes.fieldSet}>
-        <Typography variant="subtitle1">Social</Typography>
+        <Typography variant="subtitle1">
+          Social&nbsp;
+          <span className={classes.total}>
+            ({totalSocial} total, {totalSocial - 3} purchased)
+          </span>
+        </Typography>
 
         <AttributeField
           trait="attr_charisma"
@@ -79,7 +104,12 @@ function AttributeEditor(props: Props) {
       </div>
 
       <div className={classes.fieldSet}>
-        <Typography variant="subtitle1">Mental</Typography>
+        <Typography variant="subtitle1">
+          Mental&nbsp;
+          <span className={classes.total}>
+            ({totalMental} total, {totalMental - 3} purchased)
+          </span>
+        </Typography>
 
         <AttributeField
           trait="attr_perception"

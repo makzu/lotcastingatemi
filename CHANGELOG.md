@@ -1,3 +1,12 @@
+## v78
+
+###### _Feb 21, 2018_
+
+- The character editor now counts the number of dots you have in Attributes, Abilities, Specialties, and Merits, to help make character creation a little easier
+- Fixed newly created Merits, Weapons, Charms, etc sometimes appearing twice in the list
+- Solar XP is now labeled as Lunar XP for Lunars, and will make a best guess at its label for custom exalts
+- Charms with blank Attribute/Ability/Style/Artifact name can now be filtered
+
 ## v77
 
 ###### _Feb 19, 2019_

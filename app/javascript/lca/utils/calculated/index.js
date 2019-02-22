@@ -186,8 +186,8 @@ export function mobilityPenalty(character: withArmorStats) {
   }
 }
 
-const capitalize = string =>
-  string.charAt(0).toUpperCase() + string.toLowerCase().slice(1)
+export const solarXpName = (character: Character) =>
+  capitalize(character.exalt_type.split(/[ -]/)[0] || 'solar')
 
 export function prettyExaltType(character: Character) {
   switch (character.type) {

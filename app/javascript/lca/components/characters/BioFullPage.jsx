@@ -15,7 +15,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 import { getSpecificCharacter } from 'selectors'
-import { spentXp, spentSolarXp } from 'utils/calculated'
+import { solarXpName, spentXp, spentSolarXp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -33,8 +33,8 @@ const styles = theme => ({
 const xpTable = log =>
   log.map((l, i) => (
     <tr key={`${l.label}_${i}`}>
+      <td style={{ textAlign: 'right' }}>{l.points}:</td>
       <td style={{ width: '100%' }}>{l.label}</td>
-      <td>{l.points}</td>
     </tr>
   ))
 
@@ -109,36 +109,32 @@ class BioFullPage extends Component<Props> {
             </BlockPaper>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={12} lg={6}>
             <BlockPaper>
-              <div className={classes.flexContainerSpread}>
-                <div style={{ flex: 1 }}>
-                  <Typography variant="subtitle1">XP</Typography>
-                  <Typography component="table">
-                    <tbody>{xpTable(character.xp_log)}</tbody>
-                  </Typography>
-                  <Typography>
-                    Earned: {character.xp_total}, Spent: {spentXp(character)},
-                    Remaining: {character.xp_total - spentXp(character)}
-                  </Typography>
-                </div>
+              <Typography variant="subtitle1">XP</Typography>
+              <Typography component="table">
+                <tbody>{xpTable(character.xp_log)}</tbody>
+              </Typography>
+              <Typography>
+                Earned: {character.xp_total}, Spent: {spentXp(character)},
+                Remaining: {character.xp_total - spentXp(character)}
+              </Typography>
+            </BlockPaper>
+          </Grid>
 
-                <div style={{ flex: 1 }}>
-                  <Typography variant="subtitle1">
-                    {character.exalt_type === 'Dragon-Blood'
-                      ? 'Dragon XP'
-                      : 'Solar XP'}
-                  </Typography>
-                  <Typography component="table">
-                    <tbody>{xpTable(character.xp_log_solar)}</tbody>
-                  </Typography>
-                  <Typography>
-                    Earned: {character.xp_solar_total}, Spent:{' '}
-                    {spentSolarXp(character)}, Remaining:{' '}
-                    {character.xp_solar_total - spentSolarXp(character)}
-                  </Typography>
-                </div>
-              </div>
+          <Grid item xs={12} lg={6}>
+            <BlockPaper>
+              <Typography variant="subtitle1">
+                {solarXpName(character) + ' XP'}
+              </Typography>
+              <Typography component="table">
+                <tbody>{xpTable(character.xp_log_solar)}</tbody>
+              </Typography>
+              <Typography>
+                Earned: {character.xp_solar_total}, Spent:{' '}
+                {spentSolarXp(character)}, Remaining:{' '}
+                {character.xp_solar_total - spentSolarXp(character)}
+              </Typography>
             </BlockPaper>
           </Grid>
         </Grid>

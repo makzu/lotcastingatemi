@@ -12,7 +12,7 @@ import ListAttributeEditor, {
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
-import { spentXp, spentSolarXp, spentBp } from 'utils/calculated'
+import { solarXpName, spentXp, spentSolarXp, spentBp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
@@ -91,11 +91,7 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
 
       <div className={classes.xpCol}>
         <ListAttributeEditor
-          label={
-            character.exalt_type === 'Dragon-Blood'
-              ? 'Dragon XP Log'
-              : 'Solar XP Log'
-          }
+          label={solarXpName(character) + ' XP Log'}
           character={character}
           trait="xp_log_solar"
           Fields={XpFields}

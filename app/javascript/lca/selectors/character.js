@@ -90,6 +90,12 @@ export const getPoisonsForCharacter: gPFC = createCachedSelector(
     character.poisons.map(p => poisons[p]).sort(sortOrderSort)
 )(characterIdMemoizer)
 
+// TODO: Poison penalties stack: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1173001#post1173001 */
+// TODO: Poison penalties only effect static ratings:
+/* http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1207071#post1207071
+ * even though the DB Integrity excellency says it negates penalties from poison:
+ * http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1207986#post1207986
+ */
 // $FlowFixMe
 export const getPenalties = createCachedSelector(
   [getSpecificCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],

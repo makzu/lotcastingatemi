@@ -1,14 +1,13 @@
 import * as deepmerge from 'deepmerge'
 import { getJSON } from 'redux-api-middleware'
 
-import { callApi } from 'utils/api.js'
+import { callApi } from 'utils/api'
 import {
   characterTypes as entityTypes,
   crudAction,
   optimisticTypes,
   reducerUpdateAction,
-  standardTypes,
-  VERBS,
+  standardTypes
 } from './_lib'
 
 /* Overwrite arrays instead of concatenating them */
@@ -73,7 +72,7 @@ export const createFetchAction = (type: entityTypes) => (id: number) => {
   const action = crudAction(type, 'FETCH')
   return callApi({
     endpoint: `/api/v1/${type}s/${id}`,
-    method: VERBS.GET,
+    method: 'GET',
     types: standardTypes(type, action),
   })
 }
@@ -82,7 +81,7 @@ export const createFetchAllAction = (type: entityTypes) => () => {
   const action = crudAction(type, 'FETCH_ALL')
   return callApi({
     endpoint: `/api/v1/${type}s`,
-    method: VERBS.GET,
+    method: 'GET',
     types: standardTypes(`${type}List`, action),
   })
 }
@@ -116,7 +115,7 @@ export const createUpdateAction = (type: entityTypes) => (
   return callApi({
     body: JSON.stringify({ [type]: trait }),
     endpoint: `/api/v1/${type}s/${id}`,
-    method: VERBS.PATCH,
+    method: 'PATCH',
     types: optimisticTypes(
       type,
       action,
@@ -133,7 +132,7 @@ export const createDestroyAction = (type: entityTypes) => (id: number) => {
   const action = crudAction(type, 'DESTROY')
   return callApi({
     endpoint: `/api/v1/${type}s/${id}`,
-    method: VERBS.DELETE,
+    method: 'DELETE',
     types: optimisticTypes(type, action, id, transactionId),
   })
 }

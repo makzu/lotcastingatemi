@@ -1,9 +1,8 @@
-// @flow
 import { RSAA } from 'redux-api-middleware'
 
 const headersBase = {
-  'Content-Type': 'application/json',
   Accept: 'application/json',
+  'Content-Type': 'application/json',
 }
 
 export const nonAuthHeaders = () => new Headers(headersBase)
@@ -14,15 +13,15 @@ export const authHeaders = () => {
   })
 }
 
-export type ApiAction = {
-  [RSAA]: {},
+export interface ApiAction {
+  [RSAA: string]: {}
 }
 
-export type ApiCall = {
-  endpoint: string,
-  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE',
-  body?: any,
-  types: Array<string | Object>,
+export interface ApiCall {
+  endpoint: string
+  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE'
+  body?: any
+  types: string[] | object[]
 }
 
 /** Creates an RSAA to call an API endpoint using redux-api-middleware

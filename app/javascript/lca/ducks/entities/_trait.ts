@@ -1,13 +1,12 @@
 import { getJSON } from 'redux-api-middleware'
 
-import { callApi } from 'utils/api.js'
+import { callApi } from 'utils/api'
 import {
   characterTraitTypes as entityTypes,
   crudAction,
   optimisticTypes,
   reducerUpdateAction,
-  standardTypes,
-  VERBS
+  standardTypes
 } from './_lib'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
@@ -75,7 +74,7 @@ type CreateAction = (charId: number, options?: CreateActionOptions) => void
 const createTraitCreateAction = (
   entityType: entityTypes,
   parentType: parentTypes = 'character'
-) => (charId: number, options: CreateActionOptions = {}): CreateAction => {
+): CreateAction => (charId: number, options: CreateActionOptions = {}) => {
   const action = crudAction(entityType, 'CREATE')
   const parent = options.parent || parentType
   let createObj = {}
@@ -106,18 +105,18 @@ let nextTransactionId = 0
 const createTraitUpdateAction = (
   entityType: entityTypes,
   parentType: parentTypes = 'character'
-) => (
+): UpdateAction => (
   id: number,
   charId: number,
   trait: object,
   parent: parentTypes = parentType
-): UpdateAction => {
+) => {
   const transactionId = entityType + nextTransactionId++
   const action = crudAction(entityType, 'UPDATE')
   return callApi({
     body: JSON.stringify(trait),
     endpoint: `/api/v1/${parent}s/${charId}/${entityType}s/${id}`,
-    method: VERBS.PATCH,
+    method: 'PATCH',
     types: optimisticTypes(
       entityType,
       action,
@@ -136,16 +135,16 @@ type DestroyAction = (id: number, charId: number) => void
 const createTraitDestroyAction = (
   entityType: entityTypes,
   parentType: parentTypes = 'character'
-) => (
+): DestroyAction => (
   id: number,
   charId: number,
   parent: parentTypes = parentType
-): DestroyAction => {
+) => {
   const transactionId = entityType + nextTransactionId++
   const action = crudAction(entityType, 'DESTROY')
   return callApi({
     endpoint: `/api/v1/${parent}s/${charId}/${entityType}s/${id}`,
-    method: VERBS.DELETE,
+    method: 'DELETE',
     types: optimisticTypes(
       entityType,
       action,

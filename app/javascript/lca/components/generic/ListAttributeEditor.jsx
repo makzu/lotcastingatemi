@@ -53,7 +53,6 @@ const styles = theme => ({
   },
   countLabel: {
     ...theme.typography.caption,
-    marginLeft: theme.spacing.unit,
   },
 })
 
@@ -134,7 +133,7 @@ class ListAttributeEditor extends Component<Props> {
           {this.props.label}
           {showCount && (
             <span className={classes.countLabel}>
-              ({character[trait].length} total)
+              &nbsp;({character[trait].length} total)
             </span>
           )}
           <Button

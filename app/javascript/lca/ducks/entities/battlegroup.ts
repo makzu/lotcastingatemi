@@ -1,5 +1,5 @@
 // @flow
-import { callApi } from 'utils/api.js'
+import { callApi } from 'utils/api'
 import { createApiActions, createEntityReducer, mergeEntity } from './_entity'
 import { crudAction, standardTypes } from './_lib'
 

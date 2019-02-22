@@ -43,14 +43,6 @@ type crudActions =
   | 'ADD_THING'
   | 'REMOVE_THING'
 
-export const VERBS = {
-  DELETE: 'DELETE',
-  GET: 'GET',
-  PATCH: 'PATCH',
-  POST: 'POST',
-  PUT: 'PUT',
-}
-
 export const API = 'lca-api'
 
 export const START = 'START'

@@ -1,8 +1,8 @@
 // @flow
-import { callApi } from 'utils/api.js'
+import { callApi } from 'utils/api'
 import { defaultState } from './'
 import { createUpdateAction, mergeEntity } from './_entity'
-import { crudAction, reducerUpdateAction, standardTypes, VERBS } from './_lib'
+import { crudAction, reducerUpdateAction, standardTypes } from './_lib'
 
 const PLAYER = 'player'
 const endpoint = '/api/v1/players'
@@ -27,7 +27,7 @@ export function fetchCurrentPlayer() {
   const action = crudAction(PLAYER, 'FETCH')
   return callApi({
     endpoint,
-    method: VERBS.GET,
+    method: 'GET',
     types: standardTypes(PLAYER, action),
   })
 }
@@ -36,7 +36,7 @@ export function destroyAccount() {
   const action = crudAction(PLAYER, 'DESTROY')
   return callApi({
     endpoint,
-    method: VERBS.DELETE,
+    method: 'DELETE',
     types: standardTypes(PLAYER, action),
   })
 }

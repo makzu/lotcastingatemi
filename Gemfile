@@ -65,10 +65,10 @@ gem 'lograge'
 
 group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'action-cable-testing'
+  gem 'action-cable-testing', '~> 0.5.0'
   gem 'byebug', platform: :mri
-  gem 'cypress-on-rails'
-  gem 'database_cleaner'
+  gem 'cypress-on-rails', '~> 1.3.0'
+  gem 'database_cleaner', '~> 1.7.0'
   gem 'factory_bot_rails', '~> 5.0.1'
   gem 'rspec-rails', '~> 3.8.2'
   gem 'rubocop', '~> 0.65', require: false

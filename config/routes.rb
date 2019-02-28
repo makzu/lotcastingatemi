@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
       resources :qcs, only: %i[index create show update destroy] do
         post 'duplicate', on: :member
-        resources :qc_merits, :qc_attacks, :qc_charms, :poisons, only: %i[create show update destroy]
+        resources :qc_merits, :qc_attacks, :qc_charms, :poisons, :spells, only: %i[create show update destroy]
       end
 
       resources :battlegroups, only: %i[index create show update destroy] do

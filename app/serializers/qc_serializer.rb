@@ -12,7 +12,9 @@ class QcSerializer < PlayerAssetSerializer
              :motes_personal_current,   :motes_personal_total,
              :motes_peripheral_current, :motes_peripheral_total,
              :motes_committed,
-             :anima_level, :excellency,
+             :anima_level, :anima_display, :aura, :excellency,
+
+             :is_sorcerer, :shape_sorcery, :sorcerous_motes, :rituals,
 
              :movement, :appearance, :resolve, :guile, :evasion, :parry,
              :armor_name, :soak, :hardness, :join_battle,

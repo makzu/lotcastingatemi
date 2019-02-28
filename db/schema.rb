@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_022206) do
+ActiveRecord::Schema.define(version: 2019_02_22_023336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,9 @@ ActiveRecord::Schema.define(version: 2018_11_20_022206) do
     t.integer "bonus_hardness", default: 0
     t.integer "bonus_soak", default: 0
     t.integer "bonus_mobility_penalty", default: 0
+    t.string "tell", default: ""
+    t.string "totem", default: ""
+    t.string "forms", default: [], array: true
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -400,12 +403,19 @@ ActiveRecord::Schema.define(version: 2018_11_20_022206) do
     t.text "notes", default: ""
     t.boolean "public", default: false
     t.string "portrait_link"
+    t.json "resources", default: []
+    t.boolean "is_sorcerer", default: false
+    t.string "aura", default: ""
+    t.string "rituals", default: [], array: true
+    t.integer "sorcerous_motes", default: 0
+    t.integer "shape_sorcery", default: 0
+    t.string "anima_display", default: ""
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
 
   create_table "spells", force: :cascade do |t|
-    t.bigint "character_id"
+    t.bigint "sorcerer_id"
     t.string "name", default: "New Spell"
     t.string "cost", default: "0sm, 1wp"
     t.string "circle", default: "terrestrial"
@@ -418,7 +428,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_022206) do
     t.boolean "control", default: false
     t.integer "sort_order", default: 0
     t.string "categories", default: [], array: true
-    t.index ["character_id"], name: "index_spells_on_character_id"
+    t.string "sorcerer_type", default: "Character"
+    t.index ["sorcerer_id"], name: "index_spells_on_sorcerer_id"
   end
 
   create_table "weapons", id: :serial, force: :cascade do |t|
@@ -456,6 +467,6 @@ ActiveRecord::Schema.define(version: 2018_11_20_022206) do
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "qcs", "chronicles"
   add_foreign_key "qcs", "players"
-  add_foreign_key "spells", "characters"
+  add_foreign_key "spells", "characters", column: "sorcerer_id"
   add_foreign_key "weapons", "characters"
 end

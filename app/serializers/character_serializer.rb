@@ -45,6 +45,7 @@ class CharacterSerializer < PlayerAssetSerializer
              :caste, :aspect, :exalt_type,
              :limit_trigger, :limit,
              :caste_abilities, :favored_abilities, :supernal_ability, :aura,
+             :tell, :totem, :forms,
              :caste_attributes, :favored_attributes,
              :excellency, :excellency_stunt, :excellencies_for
 

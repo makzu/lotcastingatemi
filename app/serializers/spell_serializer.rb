@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # app/serializers/spell_serializer.rb
-class SpellSerializer < CharacterTraitSerializer
+class SpellSerializer < BaseSerializer
   attributes :name, :cost, :duration, :circle, :control,
-             :keywords, :body, :ref, :categories
+             :keywords, :body, :ref, :categories,
+             :sort_order
 end

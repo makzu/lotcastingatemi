@@ -15,6 +15,7 @@ class Qc < ApplicationRecord
   has_many :qc_charms,    dependent: :destroy
   has_many :qc_merits,    dependent: :destroy
   has_many :combat_actors, dependent: :destroy, as: :actor
+  has_many :spells,  as: :sorcerer, dependent: :destroy
   has_many :poisons, as: :poisonable, dependent: :destroy
 
   # Essence above 5 is explicitly mentioned in the book

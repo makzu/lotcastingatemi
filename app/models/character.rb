@@ -17,7 +17,7 @@ class Character < ApplicationRecord
 
   has_many :merits,  dependent: :destroy
   has_many :weapons, dependent: :destroy
-  has_many :spells,  dependent: :destroy
+  has_many :spells,  dependent: :destroy, as: :sorcerer
 
   has_many :ability_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AbilityCharm'
   has_many :attribute_charms,    foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AttributeCharm'

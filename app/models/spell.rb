@@ -3,7 +3,16 @@
 # Spells!  For sorcerers.
 class Spell < ApplicationRecord
   include Broadcastable
-  include CharacterTrait
+  include Sortable
+
+  belongs_to :sorcerer, polymorphic: true
+
+  alias_attribute :character, :sorcerer
+  alias_attribute :character_id, :sorcerer_id
+  delegate :player,      to: :character
+  delegate :chronicle,   to: :character
+  delegate :storyteller, to: :character
+  delegate :hidden,      to: :character
 
   CIRCLES = %w[ terrestrial celestial solar ].freeze
 
@@ -26,4 +35,8 @@ class Spell < ApplicationRecord
     'spell'
   end
   alias_attribute :entity_assoc, :entity_type
+
+  def policy_class
+    CharacterTraitPolicy
+  end
 end

@@ -1,4 +1,5 @@
 export * from './character'
+export * from './qc'
 
 import { Ability, Attribute } from './character'
 
@@ -7,6 +8,14 @@ interface WithId {
 }
 interface ISortable {
   sort_order: number
+}
+
+export interface IChronicle extends WithId {
+  name: string
+}
+
+export interface IBattlegroup extends WithId {
+  name: string
 }
 
 interface ICharacterTrait extends WithId, ISortable {
@@ -29,7 +38,6 @@ export interface ICharm extends ICharacterTrait {
 }
 
 export interface IPoison extends WithId, ISortable {
-  id: number
   poisonable_id: number
   poisonable_type: 'character' | 'qc' | 'battlegroup'
 }

@@ -14,11 +14,12 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
 import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
-import LcaHeader from 'components/header/header.jsx'
+import LcaHeader from 'components/header/Header'
 import NavPanel from 'components/nav/navPanel.jsx'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import { toggleDrawer } from 'ducks/actions.js'
 import VERSION from '../VERSION'
+import { drawerWidth } from './_drawerProperties'
 
 // Shamelessly stolen from the material-ui drawer demo
 
@@ -39,7 +40,6 @@ const drawerScrollbars = theme => ({
   },
 })
 
-const drawerWidth = 240
 const styles = theme => ({
   '@global': theme.disableScrollbars ? {} : scrollbars(theme),
   appFrame: {

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": false,
     "baseUrl": "app/javascript/lca",
     "declaration": false,
     "emitDecoratorMetadata": true,

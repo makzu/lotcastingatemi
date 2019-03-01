@@ -29,6 +29,7 @@
     "@types/react-dom": "^16.8.2",
     "@types/react-redux": "^7.0.1",
     "@types/react-router-dom": "^4.3.1",
+    "@types/recompose": "^0.30.5",
     "@types/redux-actions": "^2.3.2",
     "@types/redux-optimistic-ui": "^0.4.10",
     "actioncable": "^5.2.2",

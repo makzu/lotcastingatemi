@@ -1,12 +1,11 @@
-// @flow
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
+import { withStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 
-import { toggleDrawer } from 'ducks/actions.js'
+import { toggleDrawer  } from 'ducks/actions.js'
 
 const styles = theme => ({
   drawerButton: {
@@ -18,14 +17,14 @@ const styles = theme => ({
 
 const LcaDrawerButton = ({
   classes,
-  toggleDrawer,
+  toggle,
 }: {
-  toggleDrawer: Function,
-  classes: Object,
+  classes: any,
+  toggle(): void,
 }) => (
   <IconButton
     className={classes.drawerButton}
-    onClick={toggleDrawer}
+    onClick={toggle}
     color="inherit"
   >
     <MenuIcon />
@@ -35,6 +34,6 @@ const LcaDrawerButton = ({
 export default withStyles(styles)(
   connect(
     null,
-    { toggleDrawer }
+    { toggle: toggleDrawer }
   )(LcaDrawerButton)
 )

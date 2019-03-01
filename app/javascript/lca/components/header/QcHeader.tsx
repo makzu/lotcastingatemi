@@ -1,38 +1,32 @@
-// @flow
-import React from 'react'
+import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router'
 import { compose } from 'recompose'
 
+import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 
-import { GenericHeader } from './header.jsx'
-import LcaDrawerButton from './lcaDrawerButton.jsx'
 import CharacterMenu from 'components/generic/CharacterMenu/'
-import { getSpecificQc, canIEditQc } from 'selectors'
-import type { fullQc } from 'utils/flow-types'
+import { canIEditQc, getSpecificQc } from 'selectors'
+import { IQc } from 'types'
+import LcaDrawerButton from './DrawerButton'
+import { GenericHeader } from './Header'
+import { styles } from './HeaderStyles'
+import LinkButton from './LinkButton'
 
-//eslint-disable-next-line no-unused-vars
-const styles = theme => ({
-  tabs: {
-    flex: 1,
-  },
-  title: {},
-})
-
-type Props = {
-  qc: fullQc,
-  id: number,
-  path: string,
-  canIEdit: boolean,
-  classes: Object,
+interface Props {
+  qc: IQc
+  id: number
+  path: string
+  canIEdit: boolean
+  classes: any
 }
+
 function QcHeader(props: Props) {
-  if (props.qc == undefined) return <GenericHeader />
+  if (props.qc == null) {
+    return <GenericHeader />
+  }
 
   const { id, qc, path, classes } = props
   const editing = path.includes('/edit')
@@ -56,18 +50,20 @@ function QcHeader(props: Props) {
         </Typography>
 
         {props.canIEdit && (
-          <Button component={Link} to={editButtonPath} color="inherit">
+          <LinkButton to={editButtonPath} color="inherit">
             {editing ? 'Done' : 'Edit'}
-          </Button>
+          </LinkButton>
         )}
+
         <div className={classes.tabs} />
+
         <CharacterMenu id={qc.id} characterType="qc" header />
       </Toolbar>
     </>
   )
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
   const id = ownProps.match.params.qcId
   const qc = getSpecificQc(state, id)
   const path = ownProps.location.pathname
@@ -75,14 +71,14 @@ function mapStateToProps(state, ownProps) {
   const canIEdit = canIEditQc(state, id)
 
   return {
-    id,
-    qc,
-    path,
     canIEdit,
+    id,
+    path,
+    qc,
   }
 }
 
-export default compose(
+export default compose<Props, RouteComponentProps<any>>(
   withStyles(styles),
   connect(mapStateToProps)
 )(QcHeader)

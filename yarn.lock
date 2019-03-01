@@ -1511,6 +1511,13 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/recompose@^0.30.5":
+  version "0.30.5"
+  resolved "https://registry.yarnpkg.com/@types/recompose/-/recompose-0.30.5.tgz#09890e3c504546b38193479e610e427ac0888393"
+  integrity sha512-PEQvFmudB9n0+ZvD8l7lh0olGAWmVAuVwCM4eotzWouH8/Kcr8/EcZyLhYILqoTlqzi6ey/3kbKQzJ/h3KkyXw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/redux-actions@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/redux-actions/-/redux-actions-2.3.2.tgz#a141515f280d19fd53be7e8a9994985847423540"

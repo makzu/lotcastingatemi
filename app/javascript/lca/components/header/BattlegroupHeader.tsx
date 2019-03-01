@@ -1,37 +1,31 @@
-// @flow
-import React from 'react'
+import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router'
+import { compose } from 'recompose'
 
+import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 
-import { GenericHeader } from './header.jsx'
-import LcaDrawerButton from './lcaDrawerButton.jsx'
 import CharacterMenu from 'components/generic/CharacterMenu'
-import { getSpecificBattlegroup, canIEditBattlegroup } from 'selectors'
-import type { Battlegroup } from 'utils/flow-types'
+import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
+import { IBattlegroup } from 'types'
+import LcaDrawerButton from './DrawerButton'
+import { GenericHeader } from './Header'
+import { styles } from './HeaderStyles'
+import LinkButton from './LinkButton'
 
-//eslint-disable-next-line no-unused-vars
-const styles = theme => ({
-  tabs: {
-    flex: 1,
-  },
-  title: {},
-})
-
-type Props = {
-  id: number,
-  battlegroup: Battlegroup,
-  path: string,
-  canIEdit: boolean,
-  classes: Object,
+interface Props {
+  id: number
+  battlegroup: IBattlegroup
+  path: string
+  canIEdit: boolean
+  classes: any
 }
 function BattlegroupHeader(props: Props) {
-  if (props.battlegroup == undefined) return <GenericHeader />
+  if (props.battlegroup == null) {
+    return <GenericHeader />
+  }
 
   const { id, battlegroup, path, canIEdit, classes } = props
   const editing = path.includes('/edit')
@@ -55,9 +49,9 @@ function BattlegroupHeader(props: Props) {
         </Typography>
 
         {canIEdit && (
-          <Button component={Link} to={editButtonPath} color="inherit">
+          <LinkButton to={editButtonPath} color="inherit">
             {editing ? 'Done' : 'Edit'}
-          </Button>
+          </LinkButton>
         )}
         <div className={classes.tabs} />
         <CharacterMenu id={battlegroup.id} characterType="battlegroup" header />
@@ -66,19 +60,22 @@ function BattlegroupHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
   const id = ownProps.match.params.battlegroupId
   const battlegroup = getSpecificBattlegroup(state, id)
   const path = ownProps.location.pathname
 
-  let canIEdit = canIEditBattlegroup(state, id)
+  const canIEdit = canIEditBattlegroup(state, id)
 
   return {
-    id,
     battlegroup,
-    path,
     canIEdit,
+    id,
+    path,
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(BattlegroupHeader))
+export default compose<Props, RouteComponentProps<any>>(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(BattlegroupHeader)

@@ -56,7 +56,7 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: 250,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       display: 'block',
       width: drawerWidth,
       // position: 'relative',
@@ -73,7 +73,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: 'calc(100% - 56px)',
     marginTop: 56,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       height: 'calc(100% - 64px)',
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -115,7 +115,7 @@ class App extends Component<Props> {
 
         <LcaHeader />
 
-        <Hidden mdUp>
+        <Hidden lgUp>
           <Drawer
             variant="temporary"
             open={drawerOpen}
@@ -128,7 +128,7 @@ class App extends Component<Props> {
             <NavPanel />
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
+        <Hidden mdDown implementation="css">
           <Drawer
             variant="permanent"
             open

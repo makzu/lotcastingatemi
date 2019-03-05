@@ -21,7 +21,7 @@ const styles = (theme: Theme) =>
     bar: {
       marginLeft: drawerWidth,
       position: 'absolute',
-      [theme.breakpoints.up('md')]: {
+      [theme.breakpoints.up('lg')]: {
         width: `calc(100% - ${drawerWidth}px)`,
       },
     },

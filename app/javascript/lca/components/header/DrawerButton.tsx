@@ -9,7 +9,7 @@ import { toggleDrawer  } from 'ducks/actions.js'
 
 const styles = theme => ({
   drawerButton: {
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       display: 'none',
     },
   },

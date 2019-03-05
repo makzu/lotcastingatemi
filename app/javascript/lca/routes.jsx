@@ -18,7 +18,7 @@ const ContentList = lazy(() =>
 )
 
 const CharacterSheetWrap = lazy(() =>
-  import('components/characters/CharacterSheetWrapper.jsx' /* webpackChunkName: 'CharacterSheet' */ /* webpackPrefetch: true */)
+  import('components/CharacterSheet/' /* webpackPrefetch: 10, webpackChunkName: 'CharacterSheet' */)
 )
 
 const CharacterEditor = lazy(() =>

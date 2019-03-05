@@ -1,16 +1,15 @@
-// @flow
 import * as React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
-import BioFullPage from './BioFullPage'
-import CharmFullPage from './charms/'
-import CharacterSheet from './CharacterSheet'
-import MeritFullPage from './MeritFullPage'
+import BioFullPage from '../characters/BioFullPage'
+import CharacterSheet from '../characters/CharacterSheet'
+import CharmFullPage from '../characters/charms/'
+import MeritPage from './Merits'
 
 const characterSheetWrapper = () => {
   return (
     <Switch>
-      <Route path="/characters/:characterId/merits" component={MeritFullPage} />
+      <Route path="/characters/:characterId/merits" component={MeritPage} />
       <Route path="/characters/:characterId/charms" component={CharmFullPage} />
       <Route path="/characters/:characterId/bio" component={BioFullPage} />
       <Route path="/characters/:characterId" component={CharacterSheet} />

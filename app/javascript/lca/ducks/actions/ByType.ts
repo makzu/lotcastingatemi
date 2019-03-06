@@ -1,4 +1,7 @@
 import {
+  destroyBattlegroup,
+  destroyCharacter,
+  destroyQc,
   duplicateBattlegroup,
   duplicateCharacter,
   duplicateQc,
@@ -10,6 +13,12 @@ import {
   updateCharacter,
   updateQc
 } from './'
+
+export const destroy = {
+  battlegroup: destroyBattlegroup,
+  character: destroyCharacter,
+  qc: destroyQc,
+}
 
 export const duplicate = {
   battlegroup: duplicateBattlegroup,

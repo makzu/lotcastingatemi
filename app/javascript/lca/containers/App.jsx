@@ -18,6 +18,7 @@ import LcaHeader from 'components/header/header.jsx'
 import NavPanel from 'components/nav/navPanel.jsx'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import { toggleDrawer } from 'ducks/actions.js'
+import VERSION from '../VERSION'
 
 // Shamelessly stolen from the material-ui drawer demo
 
@@ -150,9 +151,9 @@ class App extends Component<Props> {
                 variant="caption"
                 className={classes.footerText}
                 component="a"
-                href="https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#v78"
+                href={`https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#${VERSION}`}
               >
-                v78
+                {VERSION}
               </Typography>
             </div>
 

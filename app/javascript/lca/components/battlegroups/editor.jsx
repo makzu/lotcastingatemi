@@ -73,7 +73,9 @@ class BattlegroupEditor extends Component<Props> {
     if (this.props.battlegroup == undefined)
       return (
         <BlockPaper>
-          <Typography paragraph>This QC has not yet loaded.</Typography>
+          <Typography paragraph>
+            This Battlegroup has not yet loaded.
+          </Typography>
         </BlockPaper>
       )
 

@@ -1,4 +1,3 @@
-// @flow
 export function clamp(val: number, min: number, max: number) {
   if (val > max) {
     if (max === 10 && val === 10) {

@@ -1,5 +1,5 @@
 // @flow
-import { LOGOUT, authFailure } from 'ducks/session.js'
+import { LOGOUT, authFailure } from 'ducks/session'
 import { crudAction } from 'ducks/entities/_lib'
 import { isAuthFailure } from 'ducks/app.js'
 

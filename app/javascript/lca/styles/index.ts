@@ -1,6 +1,8 @@
-// @flow
+// tslint:disable object-literal-sort-keys
+import { Theme } from '@material-ui/core/styles'
+
 // Common styling and theming elements used by most things
-const commonStyles = (theme: Object) => ({
+const commonStyles = (theme: Theme) => ({
   stickyHeader: {
     position: 'sticky',
     top: '0px',

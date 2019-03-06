@@ -1,24 +1,24 @@
-// @flow
 import { isAuthFailure } from './app.js'
 import { crudAction } from './entities/_lib'
 
 export const LOGOUT = 'lca/session/LOGOUT'
 export const AUTH_FAILURE = 'lca/session/AUTH_FAILURE'
 
-type sessionState = {
-  +authenticated: boolean,
-  +id: number,
+export interface ISessionState {
+  authenticated: boolean
+  id: number
+  deleted: boolean
 }
 
-const defaultState: sessionState = {
+const defaultState: ISessionState = {
   authenticated: !!localStorage.getItem('jwt') || false,
-  id: 0,
   deleted: false,
+  id: 0,
 }
 
 export default function SessionReducer(
-  state: sessionState = defaultState,
-  action: Object
+  state: ISessionState = defaultState,
+  action: any
 ) {
   if (isAuthFailure(action)) {
     return {
@@ -40,8 +40,8 @@ export default function SessionReducer(
       return {
         ...state,
         authenticated: false,
-        id: 0,
         deleted: true,
+        id: 0,
       }
 
     case crudAction('player', 'FETCH').success.toString():

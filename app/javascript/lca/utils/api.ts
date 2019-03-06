@@ -1,3 +1,4 @@
+import * as Redux from 'redux'
 import { RSAA } from 'redux-api-middleware'
 
 const headersBase = {
@@ -13,22 +14,25 @@ export const authHeaders = () => {
   })
 }
 
-export interface ApiAction {
-  [RSAA: string]: {}
+export interface ApiAction<R, S, F> {
+  [propName: string]: ApiCall<R, S, F>
 }
 
-export interface ApiCall {
+export interface ApiCall<R, S, F> {
   endpoint: string
   method?: 'GET' | 'POST' | 'PATCH' | 'DELETE'
   body?: any
-  types: string[] | object[]
+  types: [R, S, F]
+  headers?: () => Headers
 }
+export type AApiCall = ApiCall<Redux.Action, Redux.Action, Redux.Action>
+export type AApiAction = ApiAction<Redux.Action, Redux.Action, Redux.Action>
 
 /** Creates an RSAA to call an API endpoint using redux-api-middleware
  *
  * Method defaults to POST.
  */
-export const callApi = (callBody: ApiCall): ApiAction => ({
+export const callApi = (callBody: AApiCall): AApiAction => ({
   [RSAA]: {
     method: 'POST',
     ...callBody,
@@ -36,9 +40,11 @@ export const callApi = (callBody: ApiCall): ApiAction => ({
   },
 })
 
-export const callApiNoAuth = (callBody: ApiCall) => ({
+export const callApiNoAuth = (callBody: AApiCall) => ({
   [RSAA]: {
     ...callBody,
     headers: nonAuthHeaders,
   },
 })
+
+export type Dispatch<S> = (rsaa: AApiAction) => void

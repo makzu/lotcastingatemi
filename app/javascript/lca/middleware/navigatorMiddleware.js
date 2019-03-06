@@ -2,7 +2,7 @@
 import { API, SUCCESS } from 'ducks/entities/_lib.ts'
 import { CABLE_RECEIVED } from 'ducks/entities'
 import { crudAction } from 'ducks/entities/_lib'
-import { history } from '../index.js'
+import history from 'utils/history'
 
 /* On successfully creating an entity or joining a Chronicle, navigate to that
  * entity or Chronicle's page. Uses Push, so that the back button will work

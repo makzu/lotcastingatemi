@@ -1,9 +1,10 @@
 // @flow
 export {
-  updateCharacter,
-  changeCharacterType,
   createCharacter,
   duplicateCharacter,
+  fetchCharacter,
+  updateCharacter,
+  changeCharacterType,
   destroyCharacter,
   updateWeapon,
   createWeapon,
@@ -26,9 +27,10 @@ export {
   addThingToChronicle,
   removeThingFromChronicle,
   destroyChronicle,
-  updateQc,
   createQc,
+  updateQc,
   duplicateQc,
+  fetchQc,
   destroyQc,
   updateQcAttack,
   createQcAttack,
@@ -42,6 +44,7 @@ export {
   createBattlegroup,
   createBattlegroupFromQc,
   duplicateBattlegroup,
+  fetchBattlegroup,
   updateBattlegroup,
   destroyBattlegroup,
   fetchCurrentPlayer,
@@ -52,7 +55,7 @@ export {
   destroyPoison,
 } from './entities'
 
-export { logout } from './session.js'
+export { logout } from './session'
 export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
 export { spendMotes, spendWillpower, takeDamage } from './events'
 

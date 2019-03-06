@@ -42,7 +42,7 @@ export const getMyPinnedCharacters: CharacterListSelector = createSelector(
 
 export const getMyCharactersWithoutChronicles: CharacterListSelector = createSelector(
   [getMyCharacters],
-  characters => characters.filter(c => c.chronicle_id == undefined)
+  characters => characters.filter(c => c.chronicle_id == null)
 )
 
 const getQCs = state => entities(state).qcs
@@ -59,7 +59,7 @@ export const getMyPinnedQCs: QcListSelector = createSelector(
 
 export const getMyQcsWithoutChronicles: QcListSelector = createSelector(
   [getMyQCs],
-  qcs => qcs.filter(c => c.chronicle_id == undefined)
+  qcs => qcs.filter(c => c.chronicle_id == null)
 )
 
 const getBattlegroups = state => entities(state).battlegroups
@@ -77,5 +77,5 @@ export const getMyPinnedBattlegroups: BgListSelector = createSelector(
 
 export const getMyBattlegroupsWithoutChronicles: BgListSelector = createSelector(
   [getMyBattlegroups],
-  battlegroups => battlegroups.filter(c => c.chronicle_id == undefined)
+  battlegroups => battlegroups.filter(c => c.chronicle_id == null)
 )

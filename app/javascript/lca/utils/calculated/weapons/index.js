@@ -50,7 +50,7 @@ export const rangeTag = (weapon: fullWeapon) =>
 
 export const rangeValue = (weapon: fullWeapon) => {
   const tag = rangeTag(weapon)
-  if (tag == undefined) return 0
+  if (tag == null) return 0
 
   const rangeRegex = /\(([^)]+)\)/.exec(tag)
   let range

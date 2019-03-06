@@ -2,16 +2,14 @@
 /* eslint-disable no-undef */
 require('typeface-roboto')
 
-import { createBrowserHistory } from 'history'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 import configureStore from './store.js'
+import history from './utils/history'
 import { lcaInit } from './ducks/actions.js'
 
 import RootContainer from './containers/rootContainer.jsx'
-
-export const history = createBrowserHistory()
 
 const store = configureStore()
 

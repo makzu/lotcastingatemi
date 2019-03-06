@@ -1,12 +1,16 @@
-// @flow
 import { combineReducers } from 'redux'
 import { optimistic } from 'redux-optimistic-ui'
 
-import EntityReducer from './entities'
-import SessionReducer from './session.js'
 import AppReducer from './app.js'
+import EntityReducer, { EntityState } from './entities'
+import SessionReducer, { ISessionState } from './session'
 
-// $FlowFixMe
+export interface State {
+  app: {}
+  entities: { current: EntityState }
+  session: ISessionState
+}
+
 const lcaApp = combineReducers({
   app: AppReducer,
   entities: optimistic(EntityReducer),

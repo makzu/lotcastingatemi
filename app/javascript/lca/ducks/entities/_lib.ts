@@ -61,13 +61,15 @@ export const massagePayload = (type: entityTypes | listTypes | string) => (
   res
 ) => getJSON(res.clone()).then(json => normalize(json, schemas[type]))
 
+type TypesTuple = [Action, Action, Action]
+
 /** Shorthand for a standardized 'types' array for redux-api-middleware actions */
 export const standardTypes = (
   type: entityTypes | listTypes | string,
   action: CrudActionGroup,
   payloadFunc = massagePayload(type),
   metaFunc?: any
-) => [
+): TypesTuple => [
   action.start(null, metaFunc),
   action.success(payloadFunc, metaFunc),
   action.failure(),
@@ -82,7 +84,7 @@ export const optimisticTypes = (
   successPayload?: any,
   charId?: number,
   parent?: characterTypes
-) => [
+): TypesTuple => [
   action.start(trait, {
     charId,
     id,

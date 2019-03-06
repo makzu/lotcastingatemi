@@ -19,7 +19,9 @@ export * from './qc_charm'
 export * from './battlegroup'
 export * from './combat_actor'
 
-import { LOGOUT } from '../session.js'
+export { EntityState } from './_types'
+
+import { LOGOUT } from '../session'
 import { mergeEntity } from './_entity'
 import * as schemas from './_schemas'
 import { EntityState } from './_types'

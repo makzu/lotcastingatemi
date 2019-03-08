@@ -5,14 +5,14 @@ import { ListItemText, MenuItem } from '@material-ui/core/'
 
 import { State } from 'ducks'
 import { createBattlegroupFromQc } from 'ducks/actions.js'
-import { MenuItemProps as Props } from './CharacterMenu'
+import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canCreate: boolean
 }
 
 interface DispatchProps {
-  action(id: number): void
+  action: typeof createBattlegroupFromQc
 }
 
 interface InnerProps extends StateProps, DispatchProps, Props {}
@@ -30,7 +30,5 @@ const mapStateToProps = (state: State, props: Props): StateProps => ({
 
 export default connect<StateProps, DispatchProps, Props>(
   mapStateToProps,
-  {
-    action: createBattlegroupFromQc,
-  }
+  { action: createBattlegroupFromQc }
 )(BattlegroupFromQc)

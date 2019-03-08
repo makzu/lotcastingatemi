@@ -5,7 +5,7 @@ import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
 
 import { State } from 'ducks'
 import { duplicate } from 'ducks/actions/ByType'
-import { MenuItemProps as Props } from './CharacterMenu'
+import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canDupe: boolean

@@ -8,7 +8,7 @@ import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 import { State } from 'ducks'
 import { update } from 'ducks/actions/ByType'
 import { canIDelete } from 'selectors'
-import { MenuItemProps as Props } from './CharacterMenu'
+import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canEdit: boolean

@@ -2,13 +2,12 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import { Visibility, VisibilityOff } from '@material-ui/icons'
 
 import { State } from 'ducks'
 import { update } from 'ducks/actions/ByType'
 import { canIDelete } from 'selectors'
-import { MenuItemProps as Props } from './CharacterMenu'
+import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canEdit: boolean
@@ -16,7 +15,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  action(pinned: boolean): void
+  action(hidden: boolean): void
 }
 
 interface InnerProps extends StateProps, DispatchProps, Props {}

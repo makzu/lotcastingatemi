@@ -1,13 +1,12 @@
-//@flow
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 
 import Typography from '@material-ui/core/Typography'
 
-import type { Enhancer } from 'utils/flow-types'
+import { State } from 'ducks'
 
-type Props = {
-  loading: boolean,
+interface Props {
+  loading: boolean
 }
 
 const CharacterLoadError = ({ loading }: Props) => (
@@ -18,8 +17,6 @@ const CharacterLoadError = ({ loading }: Props) => (
   </Typography>
 )
 
-const enhance: Enhancer<Props, {}> = connect(state => ({
-  loading: state.app.loading,
-}))
+const mapState = ({ app }: State): Props => ({ loading: app.loading })
 
-export default enhance(CharacterLoadError)
+export default connect<Props>(mapState)(CharacterLoadError)

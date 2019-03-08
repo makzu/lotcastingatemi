@@ -12,7 +12,7 @@ import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
-import CharacterLoadError from '../CharacterLoadError.jsx'
+import CharacterLoadError from '../../CharacterSheet/CharacterLoadError'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import {

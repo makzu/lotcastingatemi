@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import BioFullPage from '../characters/BioFullPage'
 import CharacterSheet from '../characters/CharacterSheet'
 import CharmFullPage from '../characters/charms/'
+import BioFullPage from './Bio'
 import MeritPage from './Merits'
 
 const characterSheetWrapper = () => {

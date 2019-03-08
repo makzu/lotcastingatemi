@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router'
 
 import { Grid, Paper, Typography } from '@material-ui/core'
 
-import CharacterLoadError from '../../characters/CharacterLoadError.jsx'
+import CharacterLoadError from '../CharacterLoadError'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { State } from 'ducks'

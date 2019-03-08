@@ -11,9 +11,8 @@ import MenuChangeExaltType from './MenuChangeExaltType'
 import MenuDelete from './MenuDelete'
 import MenuDuplicate from './MenuDuplicate'
 import MenuEdit from './MenuEdit'
-import MenuHide from './MenuHide'
 import MenuLinks from './MenuLinks'
-import MenuPin from './MenuPin'
+import MenuPinHide from './MenuPinHide'
 import MenuRefresh from './MenuRefresh'
 import MenuRemoveFromChronicle from './MenuRemoveFromChronicle'
 
@@ -43,40 +42,31 @@ const CharacterMenu = (props: Props) => {
       </IconButton>
 
       <Menu anchorEl={menuAnchor} open={!!menuAnchor} onClose={handleClose}>
-        {!header && [
-          <MenuLinks key="links" characterType={characterType} id={id} />,
-          <MenuEdit key="edit" characterType={characterType} id={id} />,
-        ]}
+        <MenuRefresh characterType={characterType} id={id} />
 
-        <MenuPin characterType={characterType} id={id} />
-
-        <MenuHide characterType={characterType} id={id} />
-
-        <MenuRemoveFromChronicle characterType={characterType} id={id} />
-
+        <Divider />
         <MenuDuplicate characterType={characterType} id={id} />
 
         <MenuBattlegroupFromQc characterType={characterType} id={id} />
 
-        <Divider />
-        <MenuRefresh characterType={characterType} id={id} />
-
-        {!chronicle && [
-          <MenuChangeExaltType
-            key="change"
-            characterType={characterType}
-            id={id}
-          />,
-
+        {!header && [
           <Divider key="div" />,
-
-          <MenuDelete key="del" characterType={characterType} id={id} />,
+          <MenuLinks key="links" characterType={characterType} id={id} />,
+          <MenuEdit key="edit" characterType={characterType} id={id} />,
         ]}
+
+        <MenuPinHide characterType={characterType} id={id} />
+
+        {!chronicle && (
+          <MenuChangeExaltType characterType={characterType} id={id} />
+        )}
+
+        <MenuRemoveFromChronicle characterType={characterType} id={id} />
+
+        {!chronicle && <MenuDelete characterType={characterType} id={id} />}
       </Menu>
     </div>
   )
 }
 
-const enhance = withStyles(styles)
-
-export default enhance(CharacterMenu)
+export default withStyles(styles)(CharacterMenu)

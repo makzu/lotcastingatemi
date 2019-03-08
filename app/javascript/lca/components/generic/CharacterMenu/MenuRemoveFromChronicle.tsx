@@ -1,9 +1,12 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import MenuItem from '@material-ui/core/MenuItem'
+import {
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  MenuItem
+} from '@material-ui/core'
 import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import { State } from 'ducks'
@@ -24,12 +27,15 @@ interface InnerProps extends StateProps, DispatchProps, Props {}
 
 const CardMenuRemove = ({ chronId, canEdit, action }: InnerProps) =>
   canEdit && chronId ? (
-    <MenuItem button onClick={() => action(chronId)}>
-      <ListItemIcon>
-        <RemoveCircle />
-      </ListItemIcon>
-      <ListItemText inset primary="Remove from Chronicle" />
-    </MenuItem>
+    <>
+      <Divider />
+      <MenuItem button onClick={() => action(chronId)}>
+        <ListItemIcon>
+          <RemoveCircle />
+        </ListItemIcon>
+        <ListItemText inset primary="Remove from Chronicle" />
+      </MenuItem>
+    </>
   ) : null
 
 const mapState = (state: State, { id, characterType }: Props): StateProps => ({

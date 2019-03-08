@@ -125,7 +125,7 @@ export function CharacterCard({
         </Typography>
       )}
 
-      <div className={classes.nameRow}>
+      <Typography component="div" className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
             variant="h6"
@@ -154,14 +154,12 @@ export function CharacterCard({
 
         <NotesPopup character={character} />
 
-        {(st || canDelete) && (
-          <CharacterMenu
-            characterType="character"
-            id={character.id}
-            chronicle={chronicle}
-          />
-        )}
-      </div>
+        <CharacterMenu
+          characterType="character"
+          id={character.id}
+          chronicle={chronicle}
+        />
+      </Typography>
 
       <SpendableBlock character={character} />
 

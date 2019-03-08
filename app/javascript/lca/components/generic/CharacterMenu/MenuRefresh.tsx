@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { ListItemText, MenuItem } from '@material-ui/core'
+import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
+import { Refresh } from '@material-ui/icons'
 
 import { fetch } from 'ducks/actions/ByType'
 import { MenuItemProps as Props } from './CharacterMenuItem'
@@ -12,6 +13,9 @@ interface DispatchProps {
 
 const CardMenuRefresh = ({ action }: DispatchProps) => (
   <MenuItem button onClick={action}>
+    <ListItemIcon>
+      <Refresh />
+    </ListItemIcon>
     <ListItemText primary="Refresh Data" />
   </MenuItem>
 )

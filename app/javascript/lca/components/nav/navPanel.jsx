@@ -1,11 +1,9 @@
 // @flow
 import * as React from 'react'
-const { Fragment } = React
 import { connect } from 'react-redux'
 import {
   withRouter,
   Link,
-  NavLink,
   Route,
   Switch as RouterSwitch,
 } from 'react-router-dom'
@@ -21,6 +19,7 @@ import Switch from '@material-ui/core/Switch'
 
 import CharacterNavList from './characterNavList.jsx'
 import ChronicleNavList from './chronicleNavList.jsx'
+import NavLinkListItem from './NavLinkListItem'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import CharacterNavigation from 'components/characters/SideNavigation.tsx'
 import Discord from 'icons/Discord-Logo.jsx'
@@ -74,34 +73,31 @@ export class NavPanel extends React.Component<Props> {
       <ErrorBoundary>
         <List component="nav" className={classes.navElement}>
           {authenticated && (
-            <ListItem
-              button
-              component={NavLink}
-              to="/settings"
-              onClick={closeCheck}
-            >
+            <NavLinkListItem to="/settings" onClick={closeCheck}>
               <ListItemText primary={`Logged in as ${displayName}`} />
-            </ListItem>
+            </NavLinkListItem>
           )}
 
-          {false && (
-            <RouterSwitch>
-              <Route path="/characters/:id" component={CharacterNavigation} />
-            </RouterSwitch>
-          )}
+          <RouterSwitch>
+            <Route
+              path="/characters/:id/edit"
+              component={CharacterNavigation}
+            />
+            <Route path="/characters/:id" component={CharacterNavigation} />
+          </RouterSwitch>
 
-          <ListItem
-            button
-            component={NavLink}
-            to="/"
-            exact
-            onClick={closeCheck}
-          >
+          <NavLinkListItem to="/" exact onClick={closeCheck}>
             <ListItemText primary="Home" />
-          </ListItem>
+          </NavLinkListItem>
 
-          {!authenticated && (
-            <Fragment>
+          {authenticated ? (
+            <>
+              <CharacterNavList closeDrawer={closeCheck} />
+
+              <ChronicleNavList closeDrawer={closeCheck} />
+            </>
+          ) : (
+            <>
               <ListItem button component="a" href="/auth/google_oauth2">
                 <ListItemText primary="Log in with Google" />
               </ListItem>
@@ -111,46 +107,27 @@ export class NavPanel extends React.Component<Props> {
                   <ListItemText primary="Log in (Developer)" />
                 </ListItem>
               )}
-            </Fragment>
+            </>
           )}
 
-          {authenticated && (
-            <Fragment>
-              <CharacterNavList closeDrawer={closeCheck} />
-
-              <ChronicleNavList closeDrawer={closeCheck} />
-            </Fragment>
-          )}
-
-          <ListItem
-            button
-            component={NavLink}
+          <NavLinkListItem
             to="/help"
             onClick={closeCheck}
             isActive={isOnHelpPage}
           >
             <ListItemText primary="Help" />
-          </ListItem>
+          </NavLinkListItem>
 
-          <ListItem
-            button
-            component={NavLink}
-            to="/resources"
-            onClick={closeCheck}
-          >
+          <NavLinkListItem to="/resources" onClick={closeCheck}>
             <ListItemText primary="Resources" />
-          </ListItem>
+          </NavLinkListItem>
 
           {authenticated && (
-            <ListItem
-              button
-              component={NavLink}
-              to="/settings"
-              onClick={closeCheck}
-            >
+            <NavLinkListItem to="/settings" onClick={closeCheck}>
               <ListItemText primary="Settings" />
-            </ListItem>
+            </NavLinkListItem>
           )}
+
           <ListItem
             button
             onClick={() => switchTheme(theme == 'light' ? 'dark' : 'light')}

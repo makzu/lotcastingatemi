@@ -1,19 +1,20 @@
 // @flow
 import * as React from 'react'
-const { Component, Fragment } = React
 import { connect } from 'react-redux'
 
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Typography from '@material-ui/core/Typography'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from '@material-ui/core'
 import { isPublicCharacterPage } from 'selectors'
 
 type Props = { authenticated: boolean, isPublic: boolean }
 
-class _LogoutPopup extends Component<Props, { open: boolean }> {
+class LogoutPopup extends React.Component<Props, { open: boolean }> {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -57,15 +58,15 @@ const mapStateToProps = state => ({
   authenticated: state.session.authenticated,
   isPublic: isPublicCharacterPage(state, window.location.pathname),
 })
-const LogoutPopup = connect(mapStateToProps)(_LogoutPopup)
+const ConnectedLogoutPopup = connect(mapStateToProps)(LogoutPopup)
 
 // TODO: Better Flow typedef here
 const ProtectedComponent = (WrappedComponent: Object) => {
   const protectedComponent = (props: Object) => (
-    <Fragment>
+    <>
       <WrappedComponent {...props} />
-      <LogoutPopup />
-    </Fragment>
+      <ConnectedLogoutPopup />
+    </>
   )
   protectedComponent.displayName = 'Protected Component'
 

@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
 import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
-import { IBattlegroup } from 'types'
+import { Battlegroup } from 'types'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -17,7 +17,7 @@ import LinkButton from './LinkButton'
 
 interface Props {
   id: number
-  battlegroup: IBattlegroup
+  battlegroup: Battlegroup
   path: string
   canIEdit: boolean
   classes: any

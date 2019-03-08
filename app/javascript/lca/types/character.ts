@@ -39,15 +39,41 @@ export type Attribute =
   | 'intelligence'
   | 'wits'
 
+export interface XpLogEntry {
+  label: string
+  points: number
+}
+
+export type CharacterType =
+  | 'Character'
+  | 'SolarCharacter'
+  | 'DragonbloodCharacter'
+  | 'LunarCharacter'
+  | 'CustomAbilityCharacter'
+  | 'CustomAttributeCharacter'
+  | 'CustomEssenceCharacter'
+
 export interface Character extends PlayerAsset {
   name: string
+  description: string
+  anima_display: string
+  lore_background: string
+  portrait_link: string
+  native_language: string
   caste: string
-  merits: number[]
+  type: CharacterType
   caste_attributes: Attribute[]
   favored_attributes: Attribute[]
   caste_abilities: Ability[]
   favored_abilities: Ability[]
-  sort_order: number
+  xp_log: XpLogEntry[]
+  xp_total: number
+  xp_log_solar: XpLogEntry[]
+  xp_solar_total: number
+  equipment: string
+  notes: string
   pinned: boolean
   hidden: boolean
+  merits: number[]
+  weapons: number[]
 }

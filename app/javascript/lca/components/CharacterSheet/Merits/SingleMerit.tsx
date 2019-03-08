@@ -12,7 +12,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingLine from 'components/generic/ratingLine.jsx'
 
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
-import { IMerit } from 'types'
+import { Merit } from 'types'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -30,7 +30,7 @@ const styles = (theme: Theme) =>
   })
 
 interface Props extends WithStyles<typeof styles> {
-  merit: IMerit
+  merit: Merit
 }
 const SingleMerit = ({ merit, classes }: Props) => (
   <BlockPaper>

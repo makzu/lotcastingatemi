@@ -11,7 +11,7 @@ interface CharacterTrait extends WithId, Sortable {
   character_id: number
 }
 
-export interface IMerit extends CharacterTrait {
+export interface Merit extends CharacterTrait {
   merit: string
   label: string
   merit_name: string
@@ -22,21 +22,21 @@ export interface IMerit extends CharacterTrait {
   rating: 0 | 1 | 2 | 3 | 4 | 5 | 6
 }
 
-export interface ICharm extends CharacterTrait {
+export interface Charm extends CharacterTrait {
   ability: Ability | Attribute
 }
 
-export interface IPoison extends WithId, Sortable {
+export interface Poison extends WithId, Sortable {
   poisonable_id: number
   poisonable_type: 'character' | 'qc' | 'battlegroup'
 }
 
-export interface IPoolBase {
+export interface PoolBase {
   name: string
   ability: Ability
   attribute: Attribute
 }
 
-export interface IStaticRating extends IPoolBase {
+export interface StaticRating extends PoolBase {
   specialtyMatters: boolean
 }

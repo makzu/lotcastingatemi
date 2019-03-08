@@ -6,7 +6,7 @@ import EntityReducer, { EntityState } from './entities'
 import SessionReducer, { ISessionState } from './session'
 
 export interface State {
-  app: {}
+  app: any
   entities: { current: EntityState }
   session: ISessionState
 }

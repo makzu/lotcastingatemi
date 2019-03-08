@@ -9,14 +9,14 @@ import { withStyles } from '@material-ui/core/styles'
 
 import CharacterMenu from 'components/generic/CharacterMenu/'
 import { canIEditQc, getSpecificQc } from 'selectors'
-import { IQc } from 'types'
+import { QC } from 'types'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
 
 interface Props {
-  qc: IQc
+  qc: QC
   id: number
   path: string
   canIEdit: boolean

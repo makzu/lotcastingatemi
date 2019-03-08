@@ -36,10 +36,10 @@ type Props = {
 }
 type State = {
   filtersOpen: boolean,
-  abilityFilter: string,
-  styleFilter: string,
-  artifactFilter: string,
-  circleFilter: string,
+  abilityFilter: string | null,
+  styleFilter: string | null,
+  artifactFilter: string | null,
+  circleFilter: string | null,
   categoryFilter: Array<string>,
   openCharm: number | null,
   openSpell: number | null,

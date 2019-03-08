@@ -8,14 +8,14 @@ import { Hidden, Tab, Tabs, Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
 import { amIStOfChronicle, getSpecificChronicle } from 'selectors'
-import { IChronicle } from 'types'
+import { Chronicle } from 'types'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 
 interface Props extends RouteComponentProps<any> {
   id: number
-  chronicle: IChronicle
+  chronicle: Chronicle
   path: string
   isST: boolean
   classes: any

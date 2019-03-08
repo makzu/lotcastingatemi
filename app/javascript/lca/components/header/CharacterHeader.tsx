@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
 import { canIEditCharacter, getSpecificCharacter } from 'selectors'
-import { ICharacter } from 'types'
+import { Character } from 'types'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -16,7 +16,7 @@ import LinkButton from './LinkButton'
 
 interface Props {
   id: number
-  character: ICharacter
+  character: Character
   path: string
   canIEdit: boolean
   classes: any

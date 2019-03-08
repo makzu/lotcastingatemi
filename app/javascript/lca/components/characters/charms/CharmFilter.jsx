@@ -20,7 +20,7 @@ type ExposedProps = {
   id: number,
   open: boolean,
   charmType: string,
-  currentAbility: string,
+  currentAbility: string | null,
   currentCategory: Array<string>,
   toggleOpen: Function,
   onChange: Function,
@@ -141,6 +141,7 @@ class CharmFilter extends React.Component<Props> {
                   }}
                   name={filterName}
                   label={filterLabel}
+                  // $FlowFixMe
                   value={currentAbility}
                   onChange={onChange}
                 >

@@ -3,18 +3,19 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 
-import { Grid, Hidden, Paper, Typography } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 
 import CharacterLoadError from '../../characters/CharacterLoadError.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
-import { getMeritsForCharacter, getSpecificCharacter } from 'selectors'
-import { ICharacter, IMerit } from 'types'
+import { State } from 'ducks'
+import { getMeritsForCharacter, getSpecificCharacter } from 'ducks/selectors'
+import { Character, Merit } from 'types'
 import SingleMerit from './SingleMerit'
 
 interface Props {
-  character: ICharacter
-  merits: IMerit[]
+  character: Character
+  merits: Merit[]
 }
 
 const MeritFullPage = (props: Props) => {
@@ -50,7 +51,7 @@ const MeritFullPage = (props: Props) => {
   )
 }
 
-function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
+function mapStateToProps(state: State, ownProps: RouteComponentProps<any>) {
   const id = ownProps.match.params.characterId
   const character = getSpecificCharacter(state, id)
   let merits = []

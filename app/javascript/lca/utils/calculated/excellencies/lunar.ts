@@ -1,10 +1,10 @@
-import { Ability, Attribute, ICharacter, ICharm } from 'types'
+import { Ability, Attribute, Character, ICharm } from 'types'
 import { ATTRIBUTES } from 'utils/constants.js'
 import { attr } from '..'
 import { highestOtherAttribute } from './custom.js'
 
 export const lunarExcellencyAbils = (
-  character: ICharacter,
+  character: Character,
   charms: ICharm[]
 ) => {
   const charmsPerAttribute = {}
@@ -32,7 +32,7 @@ export const lunarExcellencyAbils = (
 }
 
 const LunarExcellency = (
-  character: ICharacter,
+  character: Character,
   attribute: Attribute,
   ability: Ability,
   staticRating: boolean,

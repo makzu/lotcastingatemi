@@ -5,8 +5,9 @@ import { Theme, withStyles, WithStyles } from '@material-ui/core/styles'
 import MoreVert from '@material-ui/icons/MoreVert'
 
 import { useMenuLogic } from 'hooks'
+import { CharacterType } from './CharacterMenuItem'
 import MenuBattlegroupFromQc from './MenuBattlegroupFromQc'
-import MenuChangeExaltType from './MenuChangeExaltType.jsx'
+import MenuChangeExaltType from './MenuChangeExaltType'
 import MenuDelete from './MenuDelete'
 import MenuDuplicate from './MenuDuplicate'
 import MenuEdit from './MenuEdit'
@@ -14,7 +15,7 @@ import MenuHide from './MenuHide'
 import MenuLinks from './MenuLinks'
 import MenuPin from './MenuPin'
 import MenuRefresh from './MenuRefresh'
-import MenuRemoveFromChronicle from './MenuRemoveFromChronicle.jsx'
+import MenuRemoveFromChronicle from './MenuRemoveFromChronicle'
 
 // eslint-disable-next-line no-unused-vars
 const styles = (theme: Theme) => ({
@@ -23,13 +24,6 @@ const styles = (theme: Theme) => ({
     margin: '-0.75em -1em 0 1.5em',
   },
 })
-
-export type CharacterType = 'character' | 'qc' | 'battlegroup'
-
-export interface MenuItemProps {
-  id: number
-  characterType: CharacterType
-}
 
 interface Props extends WithStyles<typeof styles> {
   id: number

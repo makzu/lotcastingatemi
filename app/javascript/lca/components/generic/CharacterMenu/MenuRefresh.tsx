@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { ListItemText, MenuItem } from '@material-ui/core'
 
 import { fetch } from 'ducks/actions/ByType'
-import { MenuItemProps as Props } from './CharacterMenu'
+import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface DispatchProps {
   action(): void

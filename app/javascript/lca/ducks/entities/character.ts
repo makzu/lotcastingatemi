@@ -1,20 +1,21 @@
 import createCachedSelector from 're-reselect'
+import { createSelector } from 'reselect'
 
-import { ICharacter } from 'types'
+import { State } from 'ducks'
+import { sortOrderSort } from 'utils'
 import { callApi } from 'utils/api'
 import { createApiActions, createEntityReducer, mergeEntity } from './_entity'
-import { crudAction, standardTypes } from './_lib'
-import { EntityState, WrappedEntityState } from './_types'
-
-const unwrapped = (state: WrappedEntityState): EntityState =>
-  state.entities.current
+import { crudAction, standardTypes, unwrapped } from './_lib'
+import { getCurrentPlayer } from './player'
 
 const CHARACTER = 'character'
 
+/* *** Reducer *** */
 export default createEntityReducer(CHARACTER, {
   [crudAction(CHARACTER, 'CHANGE_TYPE').success.toString()]: mergeEntity,
 })
 
+/* *** Actions *** */
 export const [
   createCharacter,
   duplicateCharacter,
@@ -33,12 +34,24 @@ export function changeCharacterType(id: number, type: string) {
   })
 }
 
-export const getSpecificCharacter = (state: WrappedEntityState, id: number) =>
+/* *** Selectors *** */
+const getCharacters = (state: State) => unwrapped(state).characters
+
+export const getMyCharacters = createSelector(
+  [getCurrentPlayer, getCharacters],
+  (currentPlayer, characters) =>
+    currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
+)
+
+export const getMyPinnedCharacters = createSelector(
+  [getMyCharacters],
+  characters => characters.filter(c => c.pinned)
+)
+
+export const getMyCharactersWithoutChronicles = createSelector(
+  [getMyCharacters],
+  characters => characters.filter(c => c.chronicle_id == null)
+)
+
+export const getSpecificCharacter = (state: State, id: number) =>
   unwrapped(state).characters[id]
-
-const getMerits = (state: WrappedEntityState) => unwrapped(state).merits
-
-export const getMeritsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getMerits],
-  (character, merits) => character.merits.map(m => merits[m])
-)((state, id) => id)

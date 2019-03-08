@@ -26,8 +26,8 @@ import {
   createSpell,
   destroySpell,
 } from 'ducks/actions.js'
+import { getSpecificCharacter } from 'ducks/selectors'
 import {
-  getSpecificCharacter,
   getEvokableMeritsForCharacter,
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,
@@ -403,7 +403,7 @@ class CharmEditor extends Component<Props, State> {
               items={natives}
               classes={classes}
               onSortEnd={handleSort}
-              useDragHandle={true}
+              useDragHandle
               axis="xy"
             />
             <SortableGridList
@@ -429,7 +429,7 @@ class CharmEditor extends Component<Props, State> {
               items={maCharms}
               classes={classes}
               onSortEnd={handleSort}
-              useDragHandle={true}
+              useDragHandle
               axis="xy"
             />
             <SortableGridList
@@ -455,7 +455,7 @@ class CharmEditor extends Component<Props, State> {
               items={evo}
               classes={classes}
               onSortEnd={handleSort}
-              useDragHandle={true}
+              useDragHandle
               axis="xy"
             />
             <SortableGridList
@@ -481,7 +481,7 @@ class CharmEditor extends Component<Props, State> {
               items={spirit}
               classes={classes}
               onSortEnd={handleSort}
-              useDragHandle={true}
+              useDragHandle
               axis="xy"
             />
           </Fragment>
@@ -508,7 +508,7 @@ class CharmEditor extends Component<Props, State> {
           items={spl}
           classes={classes}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
       </div>

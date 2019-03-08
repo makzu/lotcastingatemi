@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { ListItemText } from '@material-ui/core'
 
-import { MenuItemProps as Props } from './CharacterMenu'
+import { MenuItemProps as Props } from './CharacterMenuItem'
 import LinkMenuItem from './LinkMenuItem'
 
 const CardMenuLinks = ({ id, characterType }: Props) => (

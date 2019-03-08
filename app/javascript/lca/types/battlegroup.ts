@@ -1,5 +1,5 @@
 import { PlayerAsset } from './_lib'
 
-export interface QC extends PlayerAsset {
+export interface Battlegroup extends PlayerAsset {
   name: string
 }

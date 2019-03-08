@@ -1,14 +1,17 @@
 // @flow
+import { State } from 'ducks'
 import { callApi } from 'utils/api'
 import { createApiActions, createEntityReducer, mergeEntity } from './_entity'
-import { crudAction, standardTypes } from './_lib'
+import { crudAction, standardTypes, unwrapped } from './_lib'
 
 const BATTLEGROUP = 'battlegroup'
 
+/* *** Reducer *** */
 export default createEntityReducer('battlegroup', {
   [crudAction(BATTLEGROUP, 'CREATE_FROM_QC').success.toString()]: mergeEntity,
 })
 
+/* *** Actions *** */
 export const [
   createBattlegroup,
   duplicateBattlegroup,
@@ -25,3 +28,7 @@ export function createBattlegroupFromQc(id: number) {
     types: standardTypes(BATTLEGROUP, action),
   })
 }
+
+/* *** Selectors *** */
+export const getSpecificBattlegroup = (state: State, id: number) =>
+  unwrapped(state).battlegroups[id]

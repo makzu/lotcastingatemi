@@ -39,10 +39,10 @@ export function checkVisible(elm: HTMLElement | null) {
   return !(rect.bottom < 0 || rect.top - viewHeight >= 0)
 }
 
-interface Sortable {
+export interface Sortable {
   sort_order: number
 }
-interface ChSortable {
+export interface ChSortable {
   chronicle_sort_order: number
 }
 export const sortOrderSort = (a: Sortable, b: Sortable) =>

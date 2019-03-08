@@ -26,10 +26,7 @@ import type { Battlegroup } from 'utils/flow-types'
 
 const styles = theme => ({
   ...commonStyles(theme),
-  flexCol: {
-    display: 'flex',
-    flex: 1,
-  },
+
   bgBonus: {
     ...theme.typography.caption,
     marginLeft: -theme.spacing.unit / 2,

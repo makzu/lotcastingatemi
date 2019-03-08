@@ -32,7 +32,10 @@ const commonStyles = (theme: Theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
-  flexCol: {},
+  flexCol: {
+    display: 'flex',
+    flex: 1,
+  },
   fieldSeparator: {
     alignSelf: 'flex-end',
     marginRight: theme.spacing.unit,

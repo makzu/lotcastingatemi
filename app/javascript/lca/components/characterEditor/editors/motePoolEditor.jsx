@@ -20,10 +20,6 @@ import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
   ...commonStyles(theme),
-  flexCol: {
-    display: 'flex',
-    flex: 1,
-  },
 })
 
 type Props = { character: Character, onChange: Function, classes: Object }

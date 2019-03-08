@@ -65,6 +65,7 @@ import {
   fetchCharacter,
   fetchQc,
   fetchAllQcs,
+  fetchBattlegroup,
   fetchAllBattlegroups,
 } from './entities'
 import UpdatesCable from 'utils/cable.js'
@@ -93,10 +94,20 @@ export function lcaInit() {
       dispatch(fetchAll())
     }
 
-    if (window.location.pathname.startsWith('/characters/'))
-      dispatch(fetchCharacter(window.location.pathname.split('/')[2]))
+    const path = window.location.pathname.split('/')
 
-    if (window.location.pathname.startsWith('/qcs/'))
-      dispatch(fetchQc(window.location.pathname.split('/')[2]))
+    if (path[2]) {
+      switch (path[1]) {
+        case 'characters':
+          dispatch(fetchCharacter(path[2]))
+          break
+        case 'qcs':
+          dispatch(fetchQc(path[2]))
+          break
+        case 'battlegroups':
+          dispatch(fetchBattlegroup(path[2]))
+          break
+      }
+    }
   }
 }

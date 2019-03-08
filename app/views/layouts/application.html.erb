@@ -11,11 +11,15 @@
   <% if @title.present? %>
     <title><%= @title %> | Lot-Casting Atemi</title>
     <meta name="og:title" content="<%= @title %>">
-    <% if @description.present? %><meta name="og:description" content="<%= @description %>"><% end %>
   <% else %>
     <title>Lot-Casting Atemi</title>
-    <meta name="description" content="Online Character and Chronicle manager for Exalted Third Edition. Supports Solars, Dragon-Bloods, mortals, and homebrew exalt types.">
   <% end %>
+  <% if @description.present? %>
+    <meta name="og:description" content="<%= @description %>">
+  <% else %>
+    <meta name="description" content="Online Character and Chronicle manager for Exalted Third Edition. Supports all published Exalt types, mortals, and homebrew exalt types.">
+  <% end %>
+    <% if @image.present? %><meta name="og:image" content="<%= @image %>"><% end %>
 
     <%= render 'application/favicon' %>
   </head>

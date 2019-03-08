@@ -54,8 +54,7 @@ Rails.application.routes.draw do
 
   # All other routes go to the frontend:
   root to: 'site#index'
-  get 'characters/:id', to: 'site#index', character: true
-  get 'characters/:id/*path', to: 'site#index', character: true
-  get 'qcs/:id', to: 'site#index', qc: true
+  get '*char/:id', to: 'site#index'
+  get '*char/:id/*path', to: 'site#index'
   get '*path', to: 'site#index'
 end

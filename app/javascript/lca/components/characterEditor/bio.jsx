@@ -16,6 +16,7 @@ import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateCharacter } from 'ducks/actions.js'
 import { getSpecificCharacter } from 'ducks/selectors'
+import { showLunarTraits } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, updateCharacter: Function }
@@ -68,6 +69,28 @@ class BioEditor extends Component<Props> {
                 rowsMax={100}
                 onChange={handleChange}
               />
+
+              {showLunarTraits(character) && (
+                <>
+                  <TextField
+                    name="totem"
+                    value={character.totem}
+                    label="Totem/Spirit Shape"
+                    margin="dense"
+                    fullWidth
+                    onChange={handleChange}
+                  />
+
+                  <TextField
+                    name="tell"
+                    value={character.tell}
+                    label="Tell"
+                    margin="dense"
+                    fullWidth
+                    onChange={handleChange}
+                  />
+                </>
+              )}
 
               <TextField
                 name="anima_display"

@@ -14,7 +14,7 @@ import commonStyles from 'styles'
 import {
   committedPersonalMotes,
   committedPeripheralMotes,
-  hasAura,
+  showAuraTraits,
 } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
@@ -118,7 +118,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
           </div>
         )}
 
-        {hasAura(character) && (
+        {showAuraTraits(character) && (
           <div className={classes.flexCol}>
             <TextField
               select

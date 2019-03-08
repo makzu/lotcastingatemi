@@ -26,7 +26,7 @@ const styles = theme => ({
     margin: 'auto',
   },
   portraitWrap: {
-    //textAlign: 'center',
+    textAlign: 'center',
   },
 })
 
@@ -78,22 +78,32 @@ class BioFullPage extends Component<Props> {
               <Typography paragraph>
                 Native Language: {character.native_language}
               </Typography>
+              {character.tell && (
+                <Typography paragraph>Tell: {character.tell}</Typography>
+              )}
+              {character.totem && (
+                <Typography paragraph>Totem: {character.totem}</Typography>
+              )}
             </BlockPaper>
           </Grid>
 
           <Grid item xs={12} md={6}>
             <BlockPaper>
               <div className={classes.portraitWrap}>
-                <a
-                  href={character.portrait_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={character.portrait_link}
-                    className={classes.portrait}
-                  />
-                </a>
+                {character.portrait_link ? (
+                  <a
+                    href={character.portrait_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={character.portrait_link}
+                      className={classes.portrait}
+                    />
+                  </a>
+                ) : (
+                  <Typography>No portrait</Typography>
+                )}
               </div>
             </BlockPaper>
           </Grid>

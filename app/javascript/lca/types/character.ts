@@ -40,6 +40,7 @@ export type Attribute =
   | 'wits'
 
 export interface Character extends PlayerAsset {
+  type: string
   name: string
   caste: string
   merits: number[]
@@ -47,6 +48,8 @@ export interface Character extends PlayerAsset {
   favored_attributes: Attribute[]
   caste_abilities: Ability[]
   favored_abilities: Ability[]
+  totem: string
+  tell: string
   sort_order: number
   pinned: boolean
   hidden: boolean

@@ -89,6 +89,8 @@ export type Character = {
   caste_attributes: Array<string>,
   favored_attributes: Array<string>,
   supernal_ability: string,
+  totem: string,
+  tell: string,
   sorcerous_motes: number,
   rituals: Array<string>,
   native_language: string,

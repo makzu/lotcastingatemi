@@ -263,11 +263,16 @@ export function prettyAnimaLevel(rating: number) {
   }
 }
 
-export const hasAura = (character: Character) =>
-  character.type === 'DragonbloodCharacter' ||
+export const isCustomCharacter = (character: Character) =>
   character.type === 'CustomAbilityCharacter' ||
   character.type === 'CustomAttributeCharacter' ||
   character.type === 'CustomEssenceCharacter'
+
+export const showAuraTraits = (character: Character) =>
+  character.type === 'DragonbloodCharacter' || isCustomCharacter(character)
+
+export const showLunarTraits = (character: Character) =>
+  character.type === 'LunarCharacter' || isCustomCharacter(character)
 
 export const isCasteAbility = (character: Character, ability: string) =>
   character.caste_abilities && character.caste_abilities.includes(ability)

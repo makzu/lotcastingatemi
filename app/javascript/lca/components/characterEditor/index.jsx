@@ -28,11 +28,8 @@ import WillpowerEditor from './editors/willpowerEditor.jsx'
 import WeaponEditor from './weapons/WeaponEditor.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateCharacter } from 'ducks/actions.js'
-import {
-  getSpecificCharacter,
-  getPoolsAndRatings,
-  getPenalties,
-} from 'selectors'
+import { getSpecificCharacter } from 'ducks/selectors'
+import { getPoolsAndRatings, getPenalties } from 'selectors'
 import type { Character } from 'utils/flow-types'
 
 type Props = {

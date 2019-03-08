@@ -13,10 +13,10 @@ import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
 import NavLinkListItem from 'components/nav/NavLinkListItem'
 import { getSpecificCharacter } from 'ducks/entities'
-import { ICharacter } from 'types'
+import { Character } from 'types'
 
 interface Props {
-  character: ICharacter
+  character: Character
   id: number
 }
 

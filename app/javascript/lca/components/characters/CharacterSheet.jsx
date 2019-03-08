@@ -27,9 +27,9 @@ import RatingLine from '../generic/ratingLine.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import { getSpecificCharacter } from 'ducks/selectors'
 import {
   canIEditCharacter,
-  getSpecificCharacter,
   getPenalties,
   getPoolsAndRatings,
   getMeritsForCharacter,

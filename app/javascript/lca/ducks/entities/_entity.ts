@@ -1,7 +1,7 @@
 import * as deepmerge from 'deepmerge'
 import { getJSON } from 'redux-api-middleware'
 
-import { AApiAction, ApiAction, callApi } from 'utils/api'
+import { AApiAction, callApi } from 'utils/api'
 import {
   characterTypes as eTypes,
   crudAction,
@@ -9,11 +9,12 @@ import {
   reducerUpdateAction,
   standardTypes
 } from './_lib'
+import { EntityState } from './_types'
 
 /* Overwrite arrays instead of concatenating them */
-const arrayMerge = (_, sourceArray) => sourceArray
+const arrayMerge = (_: any[], sourceArray: any[]) => sourceArray
 
-export const mergeEntity = (state, action): any =>
+export const mergeEntity = (state: EntityState, action): any =>
   deepmerge(state, action.payload.entities || {}, { arrayMerge })
 
 export const createEntityReducer = (entityType: eTypes, reducers: {} = {}) => {
@@ -25,7 +26,7 @@ export const createEntityReducer = (entityType: eTypes, reducers: {} = {}) => {
     [crudAction(entityType, 'DUPLICATE').success.toString()]: mergeEntity,
     [crudAction(entityType, 'FETCH').success.toString()]: mergeEntity,
     [crudAction(entityType, 'FETCH_ALL').success.toString()]: (
-      state,
+      state: EntityState,
       action
     ) => {
       const myID = state.currentPlayer
@@ -41,13 +42,16 @@ export const createEntityReducer = (entityType: eTypes, reducers: {} = {}) => {
     [crudAction(entityType, 'UPDATE').start.toString()]: reducerUpdateAction(
       pluralType
     ),
-    [crudAction(entityType, 'DESTROY').start.toString()]: (state, action) => {
+    [crudAction(entityType, 'DESTROY').start.toString()]: (
+      state: EntityState,
+      action
+    ) => {
       const { id } = action.meta
       const myId = state.currentPlayer
 
       delete state[pluralType][id]
       state.players[myId][pluralType] = state.players[myId][pluralType].filter(
-        i => i !== id
+        (i: number) => i !== id
       )
     },
   }

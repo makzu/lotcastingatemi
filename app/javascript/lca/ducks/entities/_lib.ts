@@ -5,7 +5,9 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { Action } from 'redux'
 import { ActionFunctionAny, createAction } from 'redux-actions'
 
+import { State } from 'ducks'
 import * as schemas from './_schemas'
+import { EntityState } from './_types'
 
 export type characterTraitTypes =
   | 'charm'
@@ -105,7 +107,7 @@ export const optimisticTypes = (
   }),
 ]
 
-const meta = (unused: any, m: any) => m
+const meta = (_: any, m: any) => m
 // tslint:disable object-literal-sort-keys
 export const crudAction = (
   type: entityTypes,
@@ -117,7 +119,10 @@ export const crudAction = (
 })
 // tslint:enable *
 
-export const reducerUpdateAction = (type: string) => (state, action) => {
+export const reducerUpdateAction = (type: string) => (
+  state: EntityState,
+  action
+) => {
   const { id } = action.meta
 
   for (const key in action.payload) {
@@ -126,3 +131,6 @@ export const reducerUpdateAction = (type: string) => (state, action) => {
     }
   }
 }
+
+/** Simply unwraps the entity portion of the state */
+export const unwrapped = (state: State): EntityState => state.entities.current

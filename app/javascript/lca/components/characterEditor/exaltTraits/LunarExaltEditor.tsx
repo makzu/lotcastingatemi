@@ -6,12 +6,12 @@ import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import LunarCasteSelect from './LunarCasteSelect'
 
-import { ICharacter } from 'types'
+import { Character } from 'types'
 import { nonCasteAttributes } from 'utils/calculated'
 import { LUNAR_CASTE_ATTRIBUTES } from 'utils/constants.js'
 
 interface Props {
-  character: ICharacter
+  character: Character
   onChange(): void
 }
 

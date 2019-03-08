@@ -1,19 +1,17 @@
 export * from './character'
+export * from './qc'
+export * from './battlegroup'
+export * from './chronicle'
 
+import { Sortable } from 'utils'
+import { WithId } from './_lib'
 import { Ability, Attribute } from './character'
 
-interface WithId {
-  id: number
-}
-interface ISortable {
-  sort_order: number
-}
-
-interface ICharacterTrait extends WithId, ISortable {
+interface CharacterTrait extends WithId, Sortable {
   character_id: number
 }
 
-export interface IMerit extends ICharacterTrait {
+export interface IMerit extends CharacterTrait {
   merit: string
   label: string
   merit_name: string
@@ -24,12 +22,11 @@ export interface IMerit extends ICharacterTrait {
   rating: 0 | 1 | 2 | 3 | 4 | 5 | 6
 }
 
-export interface ICharm extends ICharacterTrait {
+export interface ICharm extends CharacterTrait {
   ability: Ability | Attribute
 }
 
-export interface IPoison extends WithId, ISortable {
-  id: number
+export interface IPoison extends WithId, Sortable {
   poisonable_id: number
   poisonable_type: 'character' | 'qc' | 'battlegroup'
 }

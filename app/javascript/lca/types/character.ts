@@ -1,3 +1,5 @@
+import { PlayerAsset } from './_lib'
+
 export type Ability =
   | 'archery'
   | 'athletics'
@@ -37,8 +39,7 @@ export type Attribute =
   | 'intelligence'
   | 'wits'
 
-export interface ICharacter {
-  readonly id: number
+export interface Character extends PlayerAsset {
   name: string
   caste: string
   merits: number[]
@@ -46,4 +47,7 @@ export interface ICharacter {
   favored_attributes: Attribute[]
   caste_abilities: Ability[]
   favored_abilities: Ability[]
+  sort_order: number
+  pinned: boolean
+  hidden: boolean
 }

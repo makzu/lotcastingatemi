@@ -15,7 +15,7 @@ import TextField from 'components/generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import { updateCharacter } from 'ducks/actions.js'
-import { getSpecificCharacter } from 'selectors'
+import { getSpecificCharacter } from 'ducks/selectors'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, updateCharacter: Function }

@@ -1,6 +1,11 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-react-hooks"
+  ],
   "jsRules": {},
   "rules": {
     "interface-name": [false],
@@ -13,6 +18,7 @@
       "avoid-escape",
       "avoid-template"
     ],
+    "react-hooks-nesting": "error",
     "semicolon": [true, "never"],
     "trailing-comma": [
       true,
@@ -25,6 +31,12 @@
         },
         "esSpecCompliant": true
       }
+    ],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
     ]
   },
   "rulesDirectory": []

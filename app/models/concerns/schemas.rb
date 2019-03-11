@@ -100,6 +100,19 @@ module Schemas
   }.freeze
   SPECIALTY_PARAMS = %i[ ability context ].freeze
 
+  FORM = {
+    type: 'array',
+    items: {
+      "type": 'object',
+      "required": %w[form],
+      "properties": {
+        "form": { "type": 'string' },
+        "qc_id": { "type": 'integer' }
+      }
+    }
+  }.freeze
+  FORM_PARAMS = %i[ form qc_id ].freeze
+
   XP_LOG = {
     "type": 'array',
     "items": {

@@ -10,6 +10,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
 import CharacterLoadError from './CharacterLoadError.jsx'
+import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import ProtectedComponent from 'containers/ProtectedComponent.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
@@ -45,6 +46,7 @@ class BioFullPage extends Component<Props> {
     if (this.props.character == undefined) return <CharacterLoadError />
 
     const { character, classes } = this.props
+    const forms = animalFormsList(character.forms)
 
     return (
       <div>
@@ -83,6 +85,9 @@ class BioFullPage extends Component<Props> {
               )}
               {character.totem && (
                 <Typography paragraph>Totem: {character.totem}</Typography>
+              )}
+              {forms.length && (
+                <Typography paragraph>Forms: {forms}</Typography>
               )}
             </BlockPaper>
           </Grid>

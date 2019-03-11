@@ -39,6 +39,11 @@ export type Attribute =
   | 'intelligence'
   | 'wits'
 
+export interface Form {
+  form: string
+  qc_id: number
+}
+
 export interface Character extends PlayerAsset {
   type: string
   name: string
@@ -50,6 +55,7 @@ export interface Character extends PlayerAsset {
   favored_abilities: Ability[]
   totem: string
   tell: string
+  forms: Form[]
   sort_order: number
   pinned: boolean
   hidden: boolean

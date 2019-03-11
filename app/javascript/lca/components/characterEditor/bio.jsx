@@ -10,6 +10,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
 import XpEditor from './editors/xpEditor.jsx'
+import AnimalFormsEditor from './editors/AnimalFormsEditor'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
@@ -113,6 +114,7 @@ class BioEditor extends Component<Props> {
                 fullWidth
                 onChange={handleChange}
               />
+
               <TextField
                 name="native_language"
                 value={character.native_language}
@@ -121,6 +123,13 @@ class BioEditor extends Component<Props> {
                 fullWidth
                 onChange={handleChange}
               />
+
+              {showLunarTraits(character) && (
+                <AnimalFormsEditor
+                  character={character}
+                  onChange={handleChange}
+                />
+              )}
             </BlockPaper>
           </Grid>
 

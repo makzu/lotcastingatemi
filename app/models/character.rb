@@ -57,6 +57,7 @@ class Character < ApplicationRecord
   validates :xp_log,            json: { schema: Schemas::XP_LOG       }
   validates :xp_log_solar,      json: { schema: Schemas::XP_LOG       }
   validates :bp_log,            json: { schema: Schemas::XP_LOG       }
+  validates :forms,             json: { schema: Schemas::FORM         }
 
   validates :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
             numericality: { greater_than_or_equal_to: 0 }

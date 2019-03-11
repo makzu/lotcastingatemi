@@ -73,6 +73,11 @@ export type xpLog = {
   points: number,
 }
 
+export type form = {
+  form: string,
+  qc_id: number,
+}
+
 export type Character = {
   caste: string,
   aspect: ?boolean,
@@ -91,6 +96,7 @@ export type Character = {
   supernal_ability: string,
   totem: string,
   tell: string,
+  forms: Array<form>,
   sorcerous_motes: number,
   rituals: Array<string>,
   native_language: string,

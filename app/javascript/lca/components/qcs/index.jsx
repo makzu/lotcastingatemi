@@ -15,6 +15,7 @@ import MarkdownDisplay, {
 import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import { fetchQcIfNecessary } from 'ducks/entities/qc'
 import {
   canIEditQc,
   getSpecificQc,
@@ -98,9 +99,14 @@ type Props = {
   classes: Object,
   canEdit: boolean,
   loading: boolean,
+  fetch: Function,
 }
 
 class QcSheet extends Component<Props> {
+  componentDidMount() {
+    this.props.fetch(this.props.id)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.qc == undefined)
@@ -408,5 +414,10 @@ function mapStateToProps(state, props) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(connect(mapStateToProps)(QcSheet))
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { fetch: fetchQcIfNecessary }
+    )(QcSheet)
+  )
 )

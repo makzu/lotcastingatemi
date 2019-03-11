@@ -2,12 +2,14 @@ import * as deepmerge from 'deepmerge'
 import { getJSON } from 'redux-api-middleware'
 
 import { AApiAction, callApi } from 'utils/api'
+import entities from '.'
 import {
   characterTypes as eTypes,
   crudAction,
   optimisticTypes,
   reducerUpdateAction,
-  standardTypes
+  standardTypes,
+  unwrapped
 } from './_lib'
 import { EntityState } from './_types'
 
@@ -137,4 +139,16 @@ export const createDestroyAction = (type: eTypes): AIdAction => id => {
     method: 'DELETE',
     types: optimisticTypes(type, action, id, transactionId),
   })
+}
+
+export const createConditionalFetchAction = (
+  type: eTypes,
+  fetchAction
+) => id => (dispatch, getState) => {
+  const state = getState()
+  const pluralType = type + 's'
+
+  if (unwrapped(state)[pluralType][id] == null) {
+    dispatch(fetchAction(id))
+  }
 }

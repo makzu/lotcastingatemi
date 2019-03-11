@@ -62,10 +62,7 @@ export { spendMotes, spendWillpower, takeDamage } from './events'
 import {
   fetchAllCharacters,
   fetchCurrentPlayer,
-  fetchCharacter,
-  fetchQc,
   fetchAllQcs,
-  fetchBattlegroup,
   fetchAllBattlegroups,
 } from './entities'
 import UpdatesCable from 'utils/cable.js'
@@ -92,22 +89,6 @@ export function lcaInit() {
 
     if (getState().session.authenticated) {
       dispatch(fetchAll())
-    }
-
-    const path = window.location.pathname.split('/')
-
-    if (path[2]) {
-      switch (path[1]) {
-        case 'characters':
-          dispatch(fetchCharacter(path[2]))
-          break
-        case 'qcs':
-          dispatch(fetchQc(path[2]))
-          break
-        case 'battlegroups':
-          dispatch(fetchBattlegroup(path[2]))
-          break
-      }
     }
   }
 }

@@ -12,6 +12,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
 import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
 import {
@@ -70,11 +71,12 @@ type Props = {
   battlegroup: Battlegroup,
   qc_attacks: Array<QcAttack>,
   classes: Object,
+  fetch: Function,
 }
 
 class BattlegroupSheet extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
+  componentDidMount() {
+    this.props.fetch(this.props.id)
   }
 
   render() {
@@ -292,5 +294,8 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   ProtectedComponent,
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    { fetch: fetchBattlegroupIfNecessary }
+  )
 )(BattlegroupSheet)

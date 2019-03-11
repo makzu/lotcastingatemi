@@ -1,6 +1,10 @@
 // @flow
 import { State } from 'ducks'
-import { createApiActions, createEntityReducer } from './_entity'
+import {
+  createApiActions,
+  createConditionalFetchAction,
+  createEntityReducer
+} from './_entity'
 import { unwrapped } from './_lib'
 
 /* *** Reducer *** */
@@ -15,6 +19,8 @@ export const [
   updateQc,
   destroyQc,
 ] = createApiActions('qc')
+
+export const fetchQcIfNecessary = createConditionalFetchAction('qc', fetchQc)
 
 /* *** Selectors *** */
 export const getSpecificQc = (state: State, id: number) =>

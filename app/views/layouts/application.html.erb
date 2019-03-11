@@ -15,7 +15,7 @@
     <title>Lot-Casting Atemi</title>
   <% end %>
   <% if @description.present? %>
-    <meta name="og:description" content="<%= @description %>">
+    <meta name="og:description" content="<%= @description[0..260] %>">
   <% else %>
     <meta name="description" content="Online Character and Chronicle manager for Exalted Third Edition. Supports all published Exalt types, mortals, and homebrew exalt types.">
   <% end %>

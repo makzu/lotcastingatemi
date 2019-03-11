@@ -14,7 +14,7 @@ import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
 import CharacterLoadError from '../CharacterLoadError.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import {
   getSpecificCharacter,
   getNativeCharmsForCharacter,

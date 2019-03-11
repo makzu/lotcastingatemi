@@ -17,7 +17,7 @@ import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateBattlegroup } from 'ducks/actions.js'
 import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
 import commonStyles from 'styles'

@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 
 import CharacterLoadError from './CharacterLoadError.jsx'
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'

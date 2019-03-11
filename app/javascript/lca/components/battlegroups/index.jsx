@@ -11,7 +11,7 @@ import PoolDisplay from '../generic/PoolDisplay.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
 import {

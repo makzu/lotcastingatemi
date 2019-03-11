@@ -26,7 +26,7 @@ import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { getSpecificCharacter } from 'ducks/selectors'
 import {
   canIEditCharacter,

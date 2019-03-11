@@ -22,7 +22,7 @@ import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateQc } from 'ducks/actions.js'
 import { getSpecificQc, canIDeleteQc } from 'selectors'
 import commonStyles from 'styles'

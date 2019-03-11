@@ -14,7 +14,7 @@ import AnimalFormsEditor from './editors/AnimalFormsEditor'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter } from 'ducks/actions.js'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { showLunarTraits } from 'utils/calculated'

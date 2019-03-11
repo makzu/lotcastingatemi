@@ -15,7 +15,7 @@ import BattlegroupCard from './BattlegroupCombatCard.jsx'
 import OutOfCombatCard from './OutOfCombatCard.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { nextRound, endCombat } from 'ducks/events'
 import {
   getSpecificChronicle,

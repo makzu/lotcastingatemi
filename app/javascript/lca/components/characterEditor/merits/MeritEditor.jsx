@@ -19,7 +19,7 @@ import HelpIcon from '@material-ui/icons/Help'
 import MeritFields from './MeritFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateMerit, createMerit, destroyMerit } from 'ducks/actions.js'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
 import commonStyles from 'styles'

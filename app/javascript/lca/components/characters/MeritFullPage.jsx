@@ -12,7 +12,7 @@ import CharacterLoadError from './CharacterLoadError.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingLine from '../generic/ratingLine.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'

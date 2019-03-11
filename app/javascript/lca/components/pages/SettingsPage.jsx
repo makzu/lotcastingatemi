@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 
 import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions.js'
 import { getSpecificPlayer } from 'selectors'

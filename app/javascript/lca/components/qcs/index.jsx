@@ -14,7 +14,7 @@ import MarkdownDisplay, {
 } from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import {
   canIEditQc,
   getSpecificQc,

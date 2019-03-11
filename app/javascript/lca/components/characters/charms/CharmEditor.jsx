@@ -17,7 +17,7 @@ import CharmFilter from './CharmFilter.jsx'
 import SpellFields from './SpellFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import {
   updateCharm,
   createCharm,

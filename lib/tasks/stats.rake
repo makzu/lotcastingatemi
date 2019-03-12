@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 namespace :lca do
   desc 'Display aggregate stats for Discord announcements'
   task stats: :environment do
@@ -61,46 +62,36 @@ namespace :lca do
     desc 'Display CSVs of craft ratings by craft and rating'
     task craft: :environment do
       craft_hash = {}
-      rating_hash = {}
       Character.find_each(batch_size: 50) do |character|
         character.abil_craft.each do |craft|
-          cr = craft['craft'].downcase.strip
+          cr = craft['craft'].downcase.strip.tr(',', ';')
           rating = craft['rating']
-          craft_hash[cr] = (craft_hash[cr] || 0) + 1
-          rating_hash[rating] = (rating_hash[rating] || 0) + 1
+          craft_hash[cr] ||= { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }
+          craft_hash[cr][rating.to_s.to_sym] += 1
         end
       end
-      puts 'craft,count'
-      craft_hash.each do |craft, count|
-        puts "#{craft},#{count}"
-      end
-      puts '------------------------------------'
-      puts 'rating,count'
-      rating_hash.each do |rating, count|
-        puts "#{rating},#{count}"
+
+      puts 'craft,0,1,2,3,4,5'
+      craft_hash.each do |craft, v|
+        puts "#{craft},#{v[:'0']},#{v[:'1']},#{v[:'2']},#{v[:'3']},#{v[:'4']},#{v[:'5']}"
       end
     end
 
     desc 'Display CSVs of martial ratings by style and rating'
     task ma: :environment do
       ma_hash = {}
-      rating_hash = {}
       Character.find_each(batch_size: 50) do |character|
         character.abil_martial_arts.each do |art|
-          ma = art['style'].downcase.strip
+          ma = art['style'].downcase.strip.tr(',', ';')
           rating = art['rating']
-          ma_hash[ma] = (ma_hash[ma] || 0) + 1
-          rating_hash[rating] = (rating_hash[rating] || 0) + 1
+          ma_hash[ma] = { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }
+          ma_hash[ma][rating.to_s.to_sym] += 1
         end
       end
-      puts 'style,count'
-      ma_hash.each do |style, count|
-        puts "#{style},#{count}"
-      end
-      puts '------------------------------------'
-      puts 'rating,count'
-      rating_hash.each do |rating, count|
-        puts "#{rating},#{count}"
+
+      puts 'style,0,1,2,3,4,5'
+      ma_hash.each do |style, v|
+        puts "#{style},#{v[:'0']},#{v[:'1']},#{v[:'2']},#{v[:'3']},#{v[:'4']},#{v[:'5']}"
       end
     end
 
@@ -109,7 +100,7 @@ namespace :lca do
       type_hash = {}
       [CustomAbilityCharacter, CustomAttributeCharacter, CustomEssenceCharacter].each do |custom|
         custom.find_each(batch_size: 50) do |character|
-          tipe = character.exalt_type.downcase.strip
+          tipe = character.exalt_type.downcase.strip.tr(',', ';')
           type_hash[tipe] = (type_hash[tipe] || 0) + 1
         end
       end
@@ -135,3 +126,4 @@ namespace :lca do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

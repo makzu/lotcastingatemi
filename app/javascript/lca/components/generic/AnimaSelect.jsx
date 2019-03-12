@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import type { withMotePool } from 'utils/flow-types'
 
 type Props = { character: withMotePool, onChange: Function }
-const AnimaSelect = ({ character, onChange }: Props) => (
+const AnimaSelect = ({ character, onChange, ...props }: Props) => (
   <TextField
     select
     name="anima_level"
@@ -15,6 +15,7 @@ const AnimaSelect = ({ character, onChange }: Props) => (
     margin="dense"
     onChange={onChange}
     style={{ minWidth: '8em' }}
+    {...props}
   >
     <MenuItem value={0}>Dim</MenuItem>
     <MenuItem value={1}>Glowing</MenuItem>

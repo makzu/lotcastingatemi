@@ -2,14 +2,13 @@
 import React, { Fragment } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import AnimaSelect from 'components/generic/AnimaSelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import AuraSelect from 'components/shared/selects/AuraSelect'
 import commonStyles from 'styles'
 import {
   committedPersonalMotes,
@@ -116,25 +115,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
 
         {showAuraTraits(character) && (
           <div className={classes.flexCol}>
-            <TextField
-              select
-              name="aura"
-              value={character.aura || ''}
-              label="Aura"
-              margin="dense"
-              style={{ width: '8em' }}
-              onChange={onChange}
-            >
-              {character.type !== 'DragonbloodCharacter' && (
-                <MenuItem value="">Does not use Aura</MenuItem>
-              )}
-              <MenuItem value="none">None</MenuItem>
-              <MenuItem value="air">Air</MenuItem>
-              <MenuItem value="earth">Earth</MenuItem>
-              <MenuItem value="fire">Fire</MenuItem>
-              <MenuItem value="water">Water</MenuItem>
-              <MenuItem value="wood">Wood</MenuItem>
-            </TextField>
+            <AuraSelect character={character} onChange={onChange} />
           </div>
         )}
       </Typography>

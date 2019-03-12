@@ -22,6 +22,7 @@ import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
+import AuraSelect from 'components/shared/selects/AuraSelect'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateQc } from 'ducks/actions.js'
@@ -220,15 +221,26 @@ class QcEditor extends Component<Props> {
                 narrow
                 onChange={handleChange}
               />
-              <AnimaSelect character={qc} onChange={handleChange} />
-              <div style={{ flex: '1 1 100%' }}>
-                <QcExcellencySelect
-                  name="excellency"
-                  value={qc.excellency}
-                  onChange={handleChange}
-                />
-              </div>
             </Typography>
+
+            <div className={classes.flexContainer}>
+              <AnimaSelect
+                character={qc}
+                onChange={handleChange}
+                style={{ flex: 1, marginRight: '0.5em' }}
+              />
+              <AuraSelect
+                character={qc}
+                onChange={handleChange}
+                style={{ flex: 1 }}
+              />
+            </div>
+
+            <QcExcellencySelect
+              name="excellency"
+              value={qc.excellency}
+              onChange={handleChange}
+            />
           </BlockPaper>
         </Grid>
 

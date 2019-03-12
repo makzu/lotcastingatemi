@@ -84,6 +84,7 @@ module Api
         %w[id character_id qc_id qc_attackable_id poisonable_id created_at updated_at]
       end
 
+      # rubocop:disable Metrics/AbcSize
       def set_parent
         if params[:character_id]
           @parent = Character.find(params[:character_id])
@@ -91,8 +92,11 @@ module Api
           @parent = Qc.find(params[:qc_id])
         elsif params[:battlegroup_id]
           @parent = Battlegroup.find(params[:battlegroup_id])
+        elsif params[:combat_actor_id]
+          @parent = CombatActor.find(params[:combat_actor_id])
         end
       end
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end

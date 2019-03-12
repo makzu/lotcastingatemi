@@ -27,9 +27,11 @@ class Qc < ApplicationRecord
             :resolve, :guile, :appearance,
             :join_battle, :evasion, :parry, :soak,
             :movement, :senses,
+            :feats_of_strength, :strength,
             numericality: { greater_than_or_equal_to: 0 }
 
   validates :actions, json: { schema: Schemas::QC_ACTION }
+  validates :resources, json: { schema: Schemas::RESOURCE }
 
   def entity_type
     'qc'

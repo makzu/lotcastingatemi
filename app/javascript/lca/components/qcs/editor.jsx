@@ -15,6 +15,7 @@ import QcAttackEditor from './qcAttackEditor.jsx'
 import QcCharmEditor from './qcCharmEditor.jsx'
 import QcExcellencySelect from './QcExcellencySelect.jsx'
 import QcMeritEditor from './qcMeritEditor.jsx'
+import QcSpellEditor from './QcSpellEditor'
 import AnimaSelect from '../generic/AnimaSelect.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
@@ -425,6 +426,10 @@ class QcEditor extends Component<Props> {
 
         <Grid item xs={12}>
           <QcCharmEditor qc={qc} classes={classes} />
+        </Grid>
+
+        <Grid item xs={12}>
+          <QcSpellEditor qc={qc} classes={classes} changeQc={handleChange} />
         </Grid>
       </Grid>
     )

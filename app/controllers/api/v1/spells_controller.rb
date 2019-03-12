@@ -3,10 +3,11 @@
 module Api
   module V1
     class SpellsController < Api::V1::BaseController
+      before_action :set_parent, only: :create
+
       def create
-        @character = Character.find(params[:character_id])
         @spell = Spell.new(resource_params)
-        @spell.character = @character
+        @spell.sorcerer = @parent
         authorize @spell
         if @spell.save
           render json: @spell

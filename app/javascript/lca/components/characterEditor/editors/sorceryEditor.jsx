@@ -15,7 +15,9 @@ import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
 import type { Character, Enhancer } from 'utils/flow-types'
 
-const SorceryFields = (props: { trait: string } & ListAttributeFieldTypes) => {
+export const SorceryFields = (
+  props: { trait: string } & ListAttributeFieldTypes
+) => {
   const { onChange, trait, classes } = props
 
   return (

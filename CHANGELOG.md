@@ -4,6 +4,7 @@
 
 - Added Forms for Lunars and custom characters. Forms can include a QC ID, which creates a link in the character sheet to a specific QC
 - Lunars and custom characters can now have tells and totem forms
+- QCs can now be sorcerers
 - Added a button to refresh a Character/QC/BG from the server
 - Battlegroups can now be marked as public just like characters and QCs
 - Improved lazy-loading for public Characters/QCs/BGs

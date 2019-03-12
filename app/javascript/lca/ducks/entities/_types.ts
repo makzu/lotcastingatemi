@@ -1,4 +1,4 @@
-import { Battlegroup, Character, IMerit, IPoison, QC } from 'types'
+import { Battlegroup, Character, IMerit, IPoison, QC, Spell } from 'types'
 import { Player } from './player'
 
 export interface EntityState {
@@ -9,7 +9,7 @@ export interface EntityState {
   weapons: { [id: number]: any }
   merits: { [id: number]: IMerit }
   charms: { [id: number]: any }
-  spells: { [id: number]: any }
+  spells: { [id: number]: Spell }
   qcs: { [id: number]: QC }
   qc_merits: { [id: number]: any }
   qc_charms: { [id: number]: any }

@@ -1,4 +1,5 @@
 import { PlayerAsset } from './_lib'
+import { WithSharedStats } from './shared'
 
 export type Ability =
   | 'archery'
@@ -44,9 +45,18 @@ export interface Form {
   qc_id: number
 }
 
-export interface Character extends PlayerAsset {
-  type: string
+export type ExaltType =
+  | 'Character'
+  | 'SolarCharacter'
+  | 'DragonbloodCharacter'
+  | 'LunarCharacter'
+  | 'CustomAbilityCharacter'
+  | 'CustomAttributeCharacter'
+  | 'CustomEssenceCharacter'
+
+export interface Character extends PlayerAsset, WithSharedStats {
   name: string
+  type: ExaltType
   caste: string
   merits: number[]
   caste_attributes: Attribute[]

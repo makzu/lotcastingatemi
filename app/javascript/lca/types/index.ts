@@ -2,10 +2,13 @@ export * from './character'
 export * from './qc'
 export * from './battlegroup'
 export * from './chronicle'
+export * from './spell'
 
 import { Sortable } from 'utils'
 import { WithId } from './_lib'
 import { Ability, Attribute } from './character'
+
+export type CharacterType = 'character' | 'qc' | 'battlegroup'
 
 interface CharacterTrait extends WithId, Sortable {
   character_id: number
@@ -28,7 +31,7 @@ export interface ICharm extends CharacterTrait {
 
 export interface IPoison extends WithId, Sortable {
   poisonable_id: number
-  poisonable_type: 'character' | 'qc' | 'battlegroup'
+  poisonable_type: CharacterType
 }
 
 export interface IPoolBase {

@@ -7,7 +7,7 @@ module Api
 
       def index
         authorize current_player
-        @qcs = Qc.includes(%i[qc_charms qc_merits poisons] + [qc_attacks: :poisons]).where(player_id: current_player.id)
+        @qcs = Qc.includes(%i[qc_charms qc_merits poisons spells] + [qc_attacks: :poisons]).where(player_id: current_player.id)
         render json: @qcs
       end
 
@@ -47,8 +47,11 @@ module Api
           *base_attributes,
           ties:            [Schemas::INTIMACY_PARAMS],
           principles:      [Schemas::INTIMACY_PARAMS],
-          qc_actions:      [Schemas::QC_ACTION_PARAMS],
-          motes_committed: [Schemas::MOTE_COMMITTMENT_PARAMS]
+          actions:         [Schemas::QC_ACTION_PARAMS],
+          motes_committed: [Schemas::MOTE_COMMITTMENT_PARAMS],
+          resources:       [Schemas::RESOURCE_PARAMS],
+          categories:      [],
+          rituals:         []
         )
       end
     end

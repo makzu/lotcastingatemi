@@ -28,6 +28,7 @@ export const qc = new schema.Entity('qcs', {
   qc_merits: [qc_merit],
   qc_attacks: [qc_attack],
   qc_charms: [qc_charm],
+  spells: [spell],
   poisons: [poison],
 })
 

@@ -66,7 +66,7 @@ class QcCharmEditor extends React.Component<Props> {
 
     const qcCharms = this.props.qc_charms.map((charm, i) => (
       <SortableItem key={charm.id} index={i}>
-        <Grid item xs={12} md={6} lg={3} xl={4}>
+        <Grid item xs={12} md={6} lg={4}>
           <QcCharmFields
             key={charm.id}
             charm={charm}
@@ -92,7 +92,7 @@ class QcCharmEditor extends React.Component<Props> {
         items={qcCharms}
         classes={classes}
         onSortEnd={handleSort}
-        useDragHandle={true}
+        useDragHandle
         axis="x"
       />
     )

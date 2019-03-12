@@ -7,7 +7,7 @@ import { Grid, Paper, Typography } from '@material-ui/core'
 
 import CharacterLoadError from '../CharacterLoadError'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMeritsForCharacter, getSpecificCharacter } from 'ducks/selectors'
 import { Character, Merit } from 'types'

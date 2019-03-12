@@ -4,7 +4,12 @@ import { createSelector } from 'reselect'
 import { State } from 'ducks'
 import { sortOrderSort } from 'utils'
 import { callApi } from 'utils/api'
-import { createApiActions, createEntityReducer, mergeEntity } from './_entity'
+import {
+  createApiActions,
+  createConditionalFetchAction,
+  createEntityReducer,
+  mergeEntity
+} from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
 
@@ -33,6 +38,11 @@ export function changeCharacterType(id: number, type: string) {
     types: standardTypes(CHARACTER, action),
   })
 }
+
+export const fetchCharacterIfNecessary = createConditionalFetchAction(
+  CHARACTER,
+  fetchCharacter
+)
 
 /* *** Selectors *** */
 const getCharacters = (state: State) => unwrapped(state).characters

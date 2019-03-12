@@ -8,6 +8,7 @@ import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import IndexDoc from 'Docs/README.md'
 import WeaponsDoc from 'Docs/weapons.md'
 import MeritsDoc from 'Docs/merits.md'
+import FormsDoc from 'Docs/forms.md'
 
 type Props = {
   match: { params: { doc: string } },
@@ -22,6 +23,9 @@ const HelpPage = ({ match }: Props) => {
       break
     case 'weapons':
       doc = WeaponsDoc
+      break
+    case 'forms':
+      doc = FormsDoc
       break
     default:
       doc = IndexDoc

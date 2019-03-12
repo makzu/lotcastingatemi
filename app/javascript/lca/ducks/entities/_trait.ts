@@ -130,7 +130,7 @@ const createTraitUpdateAction = (
   })
 }
 
-type DestroyAction = (id: number, charId: number) => void
+type DestroyAction = (id: number, charId: number, parent?: parentTypes) => void
 /** Creates an API-Calling Action to destroy the specified entity */
 const createTraitDestroyAction = (
   entityType: entityTypes,

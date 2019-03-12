@@ -58,6 +58,7 @@ module Api
         render json: { error: e.message }, status: :bad_request
       end
 
+      # rubocop:disable Metrics/MethodLength
       def character_params
         params.require(:character).permit(
           *base_attributes,
@@ -71,6 +72,7 @@ module Api
           xp_log:             [Schemas::XP_LOG_PARAMS],
           xp_log_solar:       [Schemas::XP_LOG_PARAMS],
           bp_log:             [Schemas::XP_LOG_PARAMS],
+          forms:              [Schemas::FORM_PARAMS],
           caste_attributes:   [],
           favored_attributes: [],
           caste_abilities:    [],
@@ -81,6 +83,7 @@ module Api
           armor_tags:         []
         )
       end
+      #rubocop:enable Metrics/MethodLength
     end
   end
 end

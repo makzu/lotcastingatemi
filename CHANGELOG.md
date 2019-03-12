@@ -1,6 +1,26 @@
+## v80
+
+###### _Not yet released_
+
+## v79
+
+###### _Mar 12, 2019_
+
+- Added Forms for Lunars and custom characters. Forms can include a QC ID, which creates a link in the character sheet to a specific QC
+- Lunars and custom characters can now have tells and totem forms
+- QCs can now be sorcerers
+- QCs can now have Aura
+- QCs now have a Feats of Strength pool and effective strength rating
+- Added a button to refresh a Character/QC/BG from the server
+- Battlegroups can now be marked as public just like characters and QCs
+- Improved lazy-loading for public Characters/QCs/BGs
+- Fixed QC actions not saving to the server properly (Thanks ɅLIΞN)
+- Fixed downtime not working for DBs (Thanks Vejuz)
+- Minor polish tweaks
+
 ## v78
 
-###### _Feb 21, 2018_
+###### _Feb 21, 2019_
 
 - The character editor now counts the number of dots you have in Attributes, Abilities, Specialties, and Merits, to help make character creation a little easier
 - Fixed newly created Merits, Weapons, Charms, etc sometimes appearing twice in the list
@@ -11,7 +31,7 @@
 
 ###### _Feb 19, 2019_
 
-- Fixed Lunar excellency requirements for non-caste/non-favored Attributes (thanks, sigfriedmcwild)
+- Fixed Lunar excellency requirements for non-caste/non-favored Attributes (Thanks sigfriedmcwild)
 
 ## v76
 
@@ -20,7 +40,7 @@
 - Lunar characters can now be created.
 - Charms can now be Universal, meaning there is no Attribute or Ability associated with them
 - The minimum Attribute for Lunar or Custom Attribute Exalt Charms can now be as high as 10
-- QCs excellencies for the Senses pool now use the correct numbers (thanks, Dark Lord Alan)
+- QCs excellencies for the Senses pool now use the correct numbers (Thanks Dark Lord Alan)
 - Major revamps to how the app works under the hood
 - Minor tweaks and polish
 
@@ -47,7 +67,7 @@
 - Page numbers for _What Fire has Wrought_ content are now updated to reflect the Backer PDF
 - Removed option to delete characters/qcs/etc from their cards on the Chronicle page.
 - Added Earth Aspect Anima bonus to defense vs smashing attacks and grapples
-- Close-ranged Archery attack pools now use the correct accuracy (Thanks, Quasi)
+- Close-ranged Archery attack pools now use the correct accuracy (Thanks Quasi)
 - Tweaked Discord previews of public characters/qcs
 
 ## v70
@@ -80,8 +100,8 @@
 - Character sheets can now be duplicated just like QC/BG sheets
 - The Excellency builder now includes a convenience menu for quickly duplicating Excellencies from the core book, _What Fire has Wrought_, and _Adversaries of the Righteous_
 - The soak, hardness, and mobility penalty of armor can now have modifiers added to them
-- 'As Solars' and 'As Dragon-Blooded' options in the excellency builder now work again (thanks Grifftofer, Vejuz)
-- ISoB control spell soak bonus now correctly applies to characters with armor (thanks Yukizawa)
+- 'As Solars' and 'As Dragon-Blooded' options in the excellency builder now work again (Thanks Grifftofer, Vejuz)
+- ISoB control spell soak bonus now correctly applies to characters with armor (Thanks Yukizawa)
 - Bug fixes
 
 ## v62
@@ -154,7 +174,7 @@
 - Total Spent XP/SXP/BP and Remaining XP/SXP are now displayed in the Character editor
 - Better performance in the Character editor
 - API responses now include created_at and updated_at timestamps
-- Bug fixes (thanks Everspace, Madletter, Artirian_Legacy)
+- Bug fixes (Thanks Everspace, Madletter, Artirian_Legacy)
 
 ## v49
 
@@ -221,7 +241,7 @@
 - STs can now rename Chronicles
 - Players can now leave Chronicles
 - Merits, weapons, and many other list traits can be manually sorted
-- Bug Fixes (thanks Wern212, Lumi)
+- Bug Fixes (Thanks Wern212, Lumi)
 
 ## v43
 
@@ -241,7 +261,7 @@
 - Added BP Log
 - Removed Spent XP and Spent Solar XP fields
 - Characters can have multiple shaping rituals
-- Rating fields for Attributes and Abilities now change to the number you expect instead of 5 if the cursor is not in the most auspicious spot (thanks /u/evilmegan)
+- Rating fields for Attributes and Abilities now change to the number you expect instead of 5 if the cursor is not in the most auspicious spot (Thanks /u/evilmegan)
 - Slightly better handling of auth token expiration
 - Bug fixes
 - Forget about v42
@@ -250,7 +270,7 @@
 
 ###### _Mar 28, 2018_
 
-- Dawn Caste Solars can now select Martial Arts as their Supernal ability (thanks /u/Ryoungoragla)
+- Dawn Caste Solars can now select Martial Arts as their Supernal ability (Thanks /u/Ryoungoragla)
 - Custom Ability Exalts can now have a Supernal ability
 - Characters, QCs, and Battlegroups can now be removed form Chronicles
 - Mute support for spending Peripheral motes
@@ -259,7 +279,7 @@
 
 ###### _Mar 26, 2018_
 
-- Changing Solar Castes no longer throws an error if the new caste does not support your current caste/supernal selections (thanks /u/SparksMurphey)
+- Changing Solar Castes no longer throws an error if the new caste does not support your current caste/supernal selections (Thanks /u/SparksMurphey)
 - Changing Solar Supernal ability now adds the new Supernal to the list of Caste abilities
 - Changing Solar Supernal ability with a full list of Caste abilities changes the last-selected ability to the new Supernal
 - Selecting a Favored Attribute/Ability as Caste "Promotes" it to Caste

@@ -80,7 +80,7 @@ function BattlegroupCard(props: Props) {
         </Typography>
       )}
 
-      <div className={classes.flexContainer}>
+      <Typography component="div" className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
             variant="h6"
@@ -101,14 +101,12 @@ function BattlegroupCard(props: Props) {
           {chronicle && <PlayerNameSubtitle playerId={battlegroup.player_id} />}
         </div>
 
-        {isOwner && (
-          <CharacterMenu
-            characterType="battlegroup"
-            id={battlegroup.id}
-            chronicle={chronicle}
-          />
-        )}
-      </div>
+        <CharacterMenu
+          characterType="battlegroup"
+          id={battlegroup.id}
+          chronicle={chronicle}
+        />
+      </Typography>
 
       <div className={classes.flexContainerWrap}>
         <BattlegroupHealthDisplay

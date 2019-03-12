@@ -1,4 +1,5 @@
 import { PlayerAsset } from './_lib'
+import { WithSharedStats } from './shared'
 
 export type Ability =
   | 'archery'
@@ -44,7 +45,12 @@ export interface XpLogEntry {
   points: number
 }
 
-export type CharacterType =
+export interface Form {
+  form: string
+  qc_id: number
+}
+
+export type ExaltType =
   | 'Character'
   | 'SolarCharacter'
   | 'DragonbloodCharacter'
@@ -53,15 +59,15 @@ export type CharacterType =
   | 'CustomAttributeCharacter'
   | 'CustomEssenceCharacter'
 
-export interface Character extends PlayerAsset {
+export interface Character extends PlayerAsset, WithSharedStats {
   name: string
   description: string
   anima_display: string
   lore_background: string
   portrait_link: string
   native_language: string
+  type: ExaltType
   caste: string
-  type: CharacterType
   caste_attributes: Attribute[]
   favored_attributes: Attribute[]
   caste_abilities: Ability[]
@@ -72,6 +78,10 @@ export interface Character extends PlayerAsset {
   xp_solar_total: number
   equipment: string
   notes: string
+  totem: string
+  tell: string
+  forms: Form[]
+  sort_order: number
   pinned: boolean
   hidden: boolean
   merits: number[]

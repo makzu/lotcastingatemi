@@ -26,6 +26,7 @@ export type Charm = traitBasics & {
 }
 
 export type Spell = traitBasics & {
+  sorcerer_id: number,
   cost: string,
   circle: string,
   control: boolean,

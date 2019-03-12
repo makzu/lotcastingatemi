@@ -18,7 +18,7 @@ import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import {
   getSpecificChronicle,

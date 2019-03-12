@@ -62,8 +62,6 @@ export { spendMotes, spendWillpower, takeDamage } from './events'
 import {
   fetchAllCharacters,
   fetchCurrentPlayer,
-  fetchCharacter,
-  fetchQc,
   fetchAllQcs,
   fetchAllBattlegroups,
 } from './entities'
@@ -92,11 +90,5 @@ export function lcaInit() {
     if (getState().session.authenticated) {
       dispatch(fetchAll())
     }
-
-    if (window.location.pathname.startsWith('/characters/'))
-      dispatch(fetchCharacter(window.location.pathname.split('/')[2]))
-
-    if (window.location.pathname.startsWith('/qcs/'))
-      dispatch(fetchQc(window.location.pathname.split('/')[2]))
   }
 }

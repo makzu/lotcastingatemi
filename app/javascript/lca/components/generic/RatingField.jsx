@@ -1,4 +1,5 @@
 // @flow
+import classnames from 'classnames'
 import React, { Component } from 'react'
 
 import TextField from '@material-ui/core/TextField'
@@ -27,6 +28,7 @@ type Props = {
   margin?: 'none' | 'dense' | 'normal',
   narrow?: boolean,
   dontFocus?: boolean,
+  className?: string,
   classes: Object,
 }
 type State = { value: number, oldValue: number }
@@ -93,11 +95,15 @@ class RatingField extends Component<Props, State> {
     } = this.props
     const { handleChange, handleFocus, handleBlur } = this
     const { value } = this.state
+    const className = classnames(
+      narrow ? classes.narrow : classes.field,
+      this.props.className
+    )
 
     return (
       <TextField
         {...otherProps}
-        className={narrow ? classes.narrow : classes.field}
+        className={className}
         type="number"
         name={trait}
         label={label}

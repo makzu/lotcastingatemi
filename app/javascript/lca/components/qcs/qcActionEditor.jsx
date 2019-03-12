@@ -1,6 +1,7 @@
 // @flow
 import React, { Fragment } from 'react'
 
+import { SorceryFields } from 'components/characterEditor/editors/sorceryEditor.jsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
@@ -46,6 +47,29 @@ const QcActionEditor = ({ qc, onChange }: Props) => {
         onChange={onChange}
       />
 
+      <RatingField
+        label="Feats of Strength"
+        trait="feats_of_strength"
+        value={qc.feats_of_strength}
+        onChange={onChange}
+        helperText="0 = hidden"
+      />
+      <RatingField
+        label="Strength"
+        trait="strength"
+        value={qc.strength}
+        onChange={onChange}
+      />
+
+      {qc.is_sorcerer && (
+        <RatingField
+          label="Shape Sorcery"
+          trait="shape_sorcery"
+          value={qc.shape_sorcery}
+          onChange={onChange}
+        />
+      )}
+
       <ListAttributeEditor
         label="Actions"
         character={qc}
@@ -54,6 +78,18 @@ const QcActionEditor = ({ qc, onChange }: Props) => {
         newObject={{ action: 'New Action', pool: 2 }}
         onChange={onChange}
       />
+
+      {qc.is_sorcerer && (
+        <ListAttributeEditor
+          label="Shaping Rituals"
+          character={qc}
+          trait="rituals"
+          Fields={SorceryFields}
+          newObject={''}
+          onChange={onChange}
+          nonObject
+        />
+      )}
     </div>
   )
 }

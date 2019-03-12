@@ -1,7 +1,12 @@
 // @flow
 import { State } from 'ducks'
 import { callApi } from 'utils/api'
-import { createApiActions, createEntityReducer, mergeEntity } from './_entity'
+import {
+  createApiActions,
+  createConditionalFetchAction,
+  createEntityReducer,
+  mergeEntity
+} from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 
 const BATTLEGROUP = 'battlegroup'
@@ -28,6 +33,11 @@ export function createBattlegroupFromQc(id: number) {
     types: standardTypes(BATTLEGROUP, action),
   })
 }
+
+export const fetchBattlegroupIfNecessary = createConditionalFetchAction(
+  BATTLEGROUP,
+  fetchBattlegroup
+)
 
 /* *** Selectors *** */
 export const getSpecificBattlegroup = (state: State, id: number) =>

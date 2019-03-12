@@ -89,7 +89,7 @@ function QcCard(props: Props) {
         </Typography>
       )}
 
-      <div className={classes.nameRow}>
+      <Typography component="div" className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
             variant="h6"
@@ -110,10 +110,8 @@ function QcCard(props: Props) {
           {chronicle && <PlayerNameSubtitle playerId={qc.player_id} />}
         </div>
 
-        {isOwner && (
-          <CharacterMenu characterType="qc" id={qc.id} chronicle={chronicle} />
-        )}
-      </div>
+        <CharacterMenu characterType="qc" id={qc.id} chronicle={chronicle} />
+      </Typography>
 
       {/* $FlowFixMe */}
       <SpendableBlock character={qc} qc />

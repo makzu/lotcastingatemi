@@ -49,14 +49,14 @@ class SpellFields extends Component<Props> {
 
     if (deepEqual(spell[name], value)) return
 
-    this.props.onUpdate(spell.id, spell.character_id, { [name]: value })
+    this.props.onUpdate(spell.id, spell.sorcerer_id, { [name]: value })
   }
 
   handleCheck = e => {
     const { name, checked } = e.target
     const { spell } = this.props
 
-    this.props.onUpdate(spell.id, spell.character_id, { [name]: checked })
+    this.props.onUpdate(spell.id, spell.sorcerer_id, { [name]: checked })
   }
 
   handleRemove = () => {
@@ -169,7 +169,7 @@ class SpellFields extends Component<Props> {
               trait="keywords"
               value={spell.keywords}
               onChange={handleChange}
-              fullWidth={true}
+              fullWidth
               label="Keywords (comma separated)"
               margin="dense"
             />

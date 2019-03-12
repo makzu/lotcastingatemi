@@ -10,12 +10,14 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
 import XpEditor from './editors/xpEditor.jsx'
+import AnimalFormsEditor from './editors/AnimalFormsEditor'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter } from 'ducks/actions.js'
 import { getSpecificCharacter } from 'ducks/selectors'
+import { showLunarTraits } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, updateCharacter: Function }
@@ -69,6 +71,28 @@ class BioEditor extends Component<Props> {
                 onChange={handleChange}
               />
 
+              {showLunarTraits(character) && (
+                <>
+                  <TextField
+                    name="totem"
+                    value={character.totem}
+                    label="Totem/Spirit Shape"
+                    margin="dense"
+                    fullWidth
+                    onChange={handleChange}
+                  />
+
+                  <TextField
+                    name="tell"
+                    value={character.tell}
+                    label="Tell"
+                    margin="dense"
+                    fullWidth
+                    onChange={handleChange}
+                  />
+                </>
+              )}
+
               <TextField
                 name="anima_display"
                 value={character.anima_display}
@@ -90,6 +114,7 @@ class BioEditor extends Component<Props> {
                 fullWidth
                 onChange={handleChange}
               />
+
               <TextField
                 name="native_language"
                 value={character.native_language}
@@ -98,6 +123,13 @@ class BioEditor extends Component<Props> {
                 fullWidth
                 onChange={handleChange}
               />
+
+              {showLunarTraits(character) && (
+                <AnimalFormsEditor
+                  character={character}
+                  onChange={handleChange}
+                />
+              )}
             </BlockPaper>
           </Grid>
 

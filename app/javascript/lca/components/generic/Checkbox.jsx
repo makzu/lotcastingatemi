@@ -42,8 +42,8 @@ class LcaCheckbox extends React.Component<Props> {
 
     return (
       <FormControlLabel
-        {...others}
         labelPlacement="top"
+        {...others}
         control={
           <Checkbox name={name} checked={value} onChange={handleCheck} />
         }

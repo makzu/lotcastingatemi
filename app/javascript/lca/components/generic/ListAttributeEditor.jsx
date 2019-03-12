@@ -54,6 +54,16 @@ const styles = theme => ({
   countLabel: {
     ...theme.typography.caption,
   },
+  idField: {
+    width: '3em',
+    '& input': {
+      '-moz-appearance': 'textfield',
+    },
+    '& ::-webkit-inner-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0,
+    },
+  },
 })
 
 type Props = {

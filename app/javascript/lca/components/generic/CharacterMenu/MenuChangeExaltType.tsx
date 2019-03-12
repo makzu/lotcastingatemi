@@ -8,9 +8,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
+  ListItemIcon,
   ListItemText,
   MenuItem
 } from '@material-ui/core'
+import { SwapHoriz } from '@material-ui/icons'
 
 import ExaltTypeSelect, {
   prettyType
@@ -56,7 +59,12 @@ const MenuChangeCharacterType = ({
 
   return (
     <>
+      <Divider />
+
       <MenuItem button onClick={handleOpen}>
+        <ListItemIcon>
+          <SwapHoriz />
+        </ListItemIcon>
         <ListItemText primary="Change Exalt Type" />
       </MenuItem>
 

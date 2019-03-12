@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Rails 5.1+ for Webpacker
 gem 'rails', '~> 5.2.2'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '>= 4.0.0.rc.7'
+gem 'webpacker', '~> 4.0.2'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -35,7 +35,7 @@ gem 'bcrypt', '~> 3.1.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'bootsnap', '~> 1.3.0', require: false
+gem 'bootsnap', '~> 1.4.0', require: false
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2.0', git: 'https://github.com/makzu/knock'

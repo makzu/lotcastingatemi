@@ -12,9 +12,10 @@ import {
   WithStyles
 } from '@material-ui/core/styles'
 
+import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks/index.js'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { Character, XpLogEntry } from 'types'
@@ -30,7 +31,7 @@ const styles = (theme: Theme) =>
       maxWidth: '100%',
     },
     portraitWrap: {
-      // textAlign: 'center',
+      textAlign: 'center',
     },
   })
 
@@ -51,6 +52,8 @@ const BioFullPage = ({ character, classes }: Props) => {
   if (character == null) {
     return <CharacterLoadError />
   }
+
+  const forms = animalFormsList(character.forms)
 
   return (
     <>
@@ -80,22 +83,34 @@ const BioFullPage = ({ character, classes }: Props) => {
             <Typography paragraph>
               Native Language: {character.native_language}
             </Typography>
+
+            {character.tell && (
+              <Typography paragraph>Tell: {character.tell}</Typography>
+            )}
+            {character.totem && (
+              <Typography paragraph>Totem: {character.totem}</Typography>
+            )}
+            {forms.length && <Typography paragraph>Forms: {forms}</Typography>}
           </BlockPaper>
         </Grid>
 
         <Grid item xs={12} md={6}>
           <BlockPaper>
             <div className={classes.portraitWrap}>
-              <a
-                href={character.portrait_link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={character.portrait_link}
-                  className={classes.portrait}
-                />
-              </a>
+              {character.portrait_link ? (
+                <a
+                  href={character.portrait_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={character.portrait_link}
+                    className={classes.portrait}
+                  />
+                </a>
+              ) : (
+                <Typography>No portrait</Typography>
+              )}
             </div>
           </BlockPaper>
         </Grid>

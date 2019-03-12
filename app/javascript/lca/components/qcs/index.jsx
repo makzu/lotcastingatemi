@@ -14,7 +14,9 @@ import MarkdownDisplay, {
 } from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { fetchQcIfNecessary } from 'ducks/entities/qc'
+import { getSpellsForQc } from 'ducks/selectors'
 import {
   canIEditQc,
   getSpecificQc,
@@ -93,14 +95,20 @@ type Props = {
   qc_merits: Array<QcMerit>,
   qc_charms: Array<QcCharm>,
   qc_attacks: Array<QcAttack>,
+  spells: Array<Object>,
   pools: Object,
   penalties: Object,
   classes: Object,
   canEdit: boolean,
   loading: boolean,
+  fetch: Function,
 }
 
 class QcSheet extends Component<Props> {
+  componentDidMount() {
+    this.props.fetch(this.props.id)
+  }
+
   render() {
     /* Escape hatch */
     if (this.props.qc == undefined)
@@ -117,6 +125,7 @@ class QcSheet extends Component<Props> {
       qc_attacks,
       qc_charms,
       qc_merits,
+      spells,
       pools,
       penalties,
       canEdit,
@@ -226,6 +235,25 @@ class QcSheet extends Component<Props> {
         />
       </div>
     ))
+    const spell_list = spells.map(spell => (
+      <div key="spell.id">
+        <strong>{spell.name} </strong>
+        {spell.control && '(Control Spell) '}({spell.cost}, {spell.duration})
+        {spell.keywords.length > 0 && (
+          <>Keywords: {spell.keywords.join(', ')}</>
+        )}
+        <ReactMarkdown
+          source={spell.body}
+          className={classes.markdown}
+          renderers={{ link: LinkRenderer }}
+        />
+      </div>
+    ))
+    const rituals = qc.rituals.map((ritual, i) => (
+      <Typography paragraph key={i}>
+        {ritual}
+      </Typography>
+    ))
 
     return (
       <BlockPaper>
@@ -322,6 +350,13 @@ class QcSheet extends Component<Props> {
             pool={pools.senses}
             classes={{ root: classes.poolBlock }}
           />
+          {qc.feats_of_strength > 0 && (
+            <PoolDisplay
+              label="Feats of Strength"
+              pool={pools.featsOfStrength}
+              classes={{ root: classes.poolBlock }}
+            />
+          )}
           {actions}
         </div>
 
@@ -365,6 +400,22 @@ class QcSheet extends Component<Props> {
           </Fragment>
         )}
 
+        {spells.length > 0 && (
+          <>
+            <Typography variant="subtitle1">Spells</Typography>
+            <Typography gutterBottom component="div">
+              {spell_list}
+            </Typography>
+          </>
+        )}
+
+        {qc.rituals.length > 0 && (
+          <>
+            <Typography variant="subtitle1">Shaping Rituals</Typography>
+            {rituals}
+          </>
+        )}
+
         <div className={classes.portraitWrap}>
           <a href={qc.portrait_link} target="_blank" rel="noopener noreferrer">
             <img src={qc.portrait_link} className={classes.portrait} />
@@ -384,11 +435,13 @@ function mapStateToProps(state, props) {
   let qc_merits = []
   let pools = {}
   let penalties = {}
+  let spells = {}
 
   if (qc != undefined) {
     qc_attacks = getAttacksForQc(state, id)
     qc_charms = getCharmsForQc(state, id)
     qc_merits = getMeritsForQc(state, id)
+    spells = getSpellsForQc(state, id)
 
     penalties = getPenaltiesForQc(state, id)
     pools = getPoolsAndRatingsForQc(state, id)
@@ -400,6 +453,7 @@ function mapStateToProps(state, props) {
     qc_attacks,
     qc_charms,
     qc_merits,
+    spells,
     penalties,
     pools,
     canEdit: canIEditQc(state, id),
@@ -408,5 +462,10 @@ function mapStateToProps(state, props) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(connect(mapStateToProps)(QcSheet))
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { fetch: fetchQcIfNecessary }
+    )(QcSheet)
+  )
 )

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_22_023336) do
+ActiveRecord::Schema.define(version: 2019_03_12_013733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2019_02_22_023336) do
     t.integer "bonus_mobility_penalty", default: 0
     t.string "tell", default: ""
     t.string "totem", default: ""
-    t.string "forms", default: [], array: true
+    t.json "forms", default: []
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -410,6 +410,9 @@ ActiveRecord::Schema.define(version: 2019_02_22_023336) do
     t.integer "sorcerous_motes", default: 0
     t.integer "shape_sorcery", default: 0
     t.string "anima_display", default: ""
+    t.string "categories", default: [], array: true
+    t.integer "feats_of_strength", default: 0
+    t.integer "strength", default: 0
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
@@ -428,7 +431,7 @@ ActiveRecord::Schema.define(version: 2019_02_22_023336) do
     t.boolean "control", default: false
     t.integer "sort_order", default: 0
     t.string "categories", default: [], array: true
-    t.string "sorcerer_type", default: "Character"
+    t.string "sorcerer_type"
     t.index ["sorcerer_id"], name: "index_spells_on_sorcerer_id"
   end
 
@@ -467,6 +470,5 @@ ActiveRecord::Schema.define(version: 2019_02_22_023336) do
   add_foreign_key "qc_merits", "qcs"
   add_foreign_key "qcs", "chronicles"
   add_foreign_key "qcs", "players"
-  add_foreign_key "spells", "characters", column: "sorcerer_id"
   add_foreign_key "weapons", "characters"
 end

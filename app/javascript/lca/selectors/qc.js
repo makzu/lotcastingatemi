@@ -72,6 +72,10 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
       parry: calc.qcRating(qc, qc.parry, penalties.wound + penalties.onslaught),
       senses: calc.qcPool(qc, qc.senses, penalties.wound),
       joinBattle: calc.qcPool(qc, qc.join_battle, penalties.wound),
+      shapeSorcery: calc.qcPool(qc, qc.shape_sorcery, penalties.wound),
+      featsOfStrength: calc.qcPool(qc, qc.feats_of_strength, penalties.wound, [
+        { label: `str ${qc.strength} feats`, bonus: 0 },
+      ]),
     }
   }
 )(qcIdMemoizer)

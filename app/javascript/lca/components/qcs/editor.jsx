@@ -15,14 +15,16 @@ import QcAttackEditor from './qcAttackEditor.jsx'
 import QcCharmEditor from './qcCharmEditor.jsx'
 import QcExcellencySelect from './QcExcellencySelect.jsx'
 import QcMeritEditor from './qcMeritEditor.jsx'
+import QcSpellEditor from './QcSpellEditor'
 import AnimaSelect from '../generic/AnimaSelect.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
+import AuraSelect from 'components/shared/selects/AuraSelect'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateQc } from 'ducks/actions.js'
 import { getSpecificQc, canIDeleteQc } from 'selectors'
 import commonStyles from 'styles'
@@ -219,15 +221,26 @@ class QcEditor extends Component<Props> {
                 narrow
                 onChange={handleChange}
               />
-              <AnimaSelect character={qc} onChange={handleChange} />
-              <div style={{ flex: '1 1 100%' }}>
-                <QcExcellencySelect
-                  name="excellency"
-                  value={qc.excellency}
-                  onChange={handleChange}
-                />
-              </div>
             </Typography>
+
+            <div className={classes.flexContainer}>
+              <AnimaSelect
+                character={qc}
+                onChange={handleChange}
+                style={{ flex: 1, marginRight: '0.5em' }}
+              />
+              <AuraSelect
+                character={qc}
+                onChange={handleChange}
+                style={{ flex: 1 }}
+              />
+            </div>
+
+            <QcExcellencySelect
+              name="excellency"
+              value={qc.excellency}
+              onChange={handleChange}
+            />
           </BlockPaper>
         </Grid>
 
@@ -425,6 +438,10 @@ class QcEditor extends Component<Props> {
 
         <Grid item xs={12}>
           <QcCharmEditor qc={qc} classes={classes} />
+        </Grid>
+
+        <Grid item xs={12}>
+          <QcSpellEditor qc={qc} classes={classes} changeQc={handleChange} />
         </Grid>
       </Grid>
     )

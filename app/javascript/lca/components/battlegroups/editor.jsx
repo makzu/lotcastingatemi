@@ -17,19 +17,16 @@ import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateBattlegroup } from 'ducks/actions.js'
-import { getSpecificBattlegroup } from 'selectors'
+import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
 import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
 
 const styles = theme => ({
   ...commonStyles(theme),
-  flexCol: {
-    display: 'flex',
-    flex: 1,
-  },
+
   bgBonus: {
     ...theme.typography.caption,
     marginLeft: -theme.spacing.unit / 2,
@@ -46,6 +43,7 @@ const styles = theme => ({
 })
 type Props = {
   battlegroup: Battlegroup,
+  showPublicCheckbox: boolean,
   classes: Object,
   updateBattlegroup: Function,
 }
@@ -67,7 +65,7 @@ class BattlegroupEditor extends Component<Props> {
   }
 
   render() {
-    const { battlegroup } = this.props
+    const { battlegroup, showPublicCheckbox } = this.props
 
     /* Escape hatch */
     if (this.props.battlegroup == undefined)
@@ -93,15 +91,31 @@ class BattlegroupEditor extends Component<Props> {
           drill/might/etc are added automatically)
         </Typography>
 
-        <TextField
-          name="name"
-          value={battlegroup.name}
-          label="Name"
-          className={classes.nameField}
-          margin="dense"
-          onChange={handleChange}
-          fullWidth
-        />
+        <div style={{ display: 'flex' }}>
+          <TextField
+            name="name"
+            value={battlegroup.name}
+            label="Name"
+            className={classes.nameField}
+            margin="dense"
+            onChange={handleChange}
+            style={{ flex: 1 }}
+          />
+
+          {showPublicCheckbox && (
+            <FormControlLabel
+              label="Publicly Viewable"
+              control={
+                <Checkbox
+                  name="public"
+                  checked={battlegroup.public}
+                  onChange={handleCheck}
+                />
+              }
+            />
+          )}
+        </div>
+
         <br />
         <TextField
           name="description"
@@ -327,10 +341,12 @@ class BattlegroupEditor extends Component<Props> {
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.battlegroupId
   const battlegroup = getSpecificBattlegroup(state, id)
+  const showPublicCheckbox = canIDeleteBattlegroup(state, id)
 
   return {
     id,
     battlegroup,
+    showPublicCheckbox,
   }
 }
 

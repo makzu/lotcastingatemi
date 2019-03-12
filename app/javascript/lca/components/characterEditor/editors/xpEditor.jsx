@@ -11,11 +11,13 @@ import ListAttributeEditor, {
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
+import commonStyles from 'styles'
 import { isUnequalByKeys } from 'utils'
 import { solarXpName, spentXp, spentSolarXp, spentBp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
+  ...commonStyles(theme),
   separator: {
     ...theme.typography.body1,
     marginRight: theme.spacing.unit,
@@ -119,37 +121,39 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
         <Typography variant="subtitle1" className={classes.subheading}>
           Craft XP:
         </Typography>
-        <div>
-          <RatingField
-            trait="xp_craft_silver"
-            value={character.xp_craft_silver}
-            label="Silver"
-            margin="dense"
-            narrow
-            onChange={onChange}
-            dontFocus
-          />
-          <span className={classes.separator}>/</span>
-          <RatingField
-            trait="xp_craft_gold"
-            value={character.xp_craft_gold}
-            label="Gold"
-            margin="dense"
-            narrow
-            onChange={onChange}
-            dontFocus
-          />
-          <span className={classes.separator}>/</span>
-          <RatingField
-            trait="xp_craft_white"
-            value={character.xp_craft_white}
-            label="White"
-            margin="dense"
-            narrow
-            onChange={onChange}
-            dontFocus
-          />
-        </div>
+        <Typography component="div" className={classes.flexContainerWrap}>
+          <div className={classes.flexCol}>
+            <RatingField
+              trait="xp_craft_silver"
+              value={character.xp_craft_silver}
+              label="Silver"
+              margin="dense"
+              narrow
+              onChange={onChange}
+              dontFocus
+            />
+            <span className={classes.fieldSeparator}>/</span>
+            <RatingField
+              trait="xp_craft_gold"
+              value={character.xp_craft_gold}
+              label="Gold"
+              margin="dense"
+              narrow
+              onChange={onChange}
+              dontFocus
+            />
+            <span className={classes.fieldSeparator}>/</span>
+            <RatingField
+              trait="xp_craft_white"
+              value={character.xp_craft_white}
+              label="White"
+              margin="dense"
+              narrow
+              onChange={onChange}
+              dontFocus
+            />
+          </div>
+        </Typography>
       </div>
 
       <div className={classes.xpCol}>

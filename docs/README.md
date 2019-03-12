@@ -1,5 +1,6 @@
 - [Merits](./merits.md)
 - [Weapons](./weapons.md)
+- [Animal Forms](./forms.md)
 
 ## FAQs
 

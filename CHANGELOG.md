@@ -1,10 +1,16 @@
-## v79
+## v80
 
 ###### _Not yet released_
+
+## v79
+
+###### _Mar 12, 2019_
 
 - Added Forms for Lunars and custom characters. Forms can include a QC ID, which creates a link in the character sheet to a specific QC
 - Lunars and custom characters can now have tells and totem forms
 - QCs can now be sorcerers
+- QCs can now have Aura
+- QCs now have a Feats of Strength pool and effective strength rating
 - Added a button to refresh a Character/QC/BG from the server
 - Battlegroups can now be marked as public just like characters and QCs
 - Improved lazy-loading for public Characters/QCs/BGs
@@ -14,7 +20,7 @@
 
 ## v78
 
-###### _Feb 21, 2018_
+###### _Feb 21, 2019_
 
 - The character editor now counts the number of dots you have in Attributes, Abilities, Specialties, and Merits, to help make character creation a little easier
 - Fixed newly created Merits, Weapons, Charms, etc sometimes appearing twice in the list

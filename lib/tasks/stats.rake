@@ -103,5 +103,35 @@ namespace :lca do
         puts "#{rating},#{count}"
       end
     end
+
+    desc 'Display CSV of exalt types by count'
+    task exalt_types: :environment do
+      type_hash = {}
+      [CustomAbilityCharacter, CustomAttributeCharacter, CustomEssenceCharacter].each do |custom|
+        custom.find_each(batch_size: 50) do |character|
+          tipe = character.exalt_type.downcase.strip
+          type_hash[tipe] = (type_hash[tipe] || 0) + 1
+        end
+      end
+
+      puts 'type,count'
+      type_hash.each do |type, count|
+        puts "#{type},#{count}"
+      end
+    end
+
+    desc 'Display CSV of Charm Attributes/Abilities by count'
+    task charm_abilities: :environment do
+      abil_hash = {}
+      Charm.find_each(batch_size: 50) do |charm|
+        abil = charm.ability
+        abil_hash[abil] = (abil_hash[abil] || 0) + 1 unless charm.ability.blank?
+      end
+
+      puts 'ability,count'
+      abil_hash.each do |abil, count|
+        puts "#{abil},#{count}"
+      end
+    end
   end
 end

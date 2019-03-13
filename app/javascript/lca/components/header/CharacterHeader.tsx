@@ -7,8 +7,10 @@ import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
-import { canIEditCharacter, getSpecificCharacter } from 'selectors'
+import { State } from 'ducks'
+import { canIEditCharacter, getSpecificCharacter } from 'ducks/selectors'
 import { Character } from 'types'
+import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -69,18 +71,18 @@ function CharacterHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
-  const id = ownProps.match.params.characterId
+function mapStateToProps(state: State, { location, match }: RouteProps) {
+  const id = parseInt(match.params.id, 10)
 
   return {
     canIEdit: canIEditCharacter(state, id),
     character: getSpecificCharacter(state, id),
     id,
-    path: ownProps.location.pathname,
+    path: location.pathname,
   }
 }
 
-export default compose<Props, RouteComponentProps<any>>(
+export default compose<Props, RouteProps>(
   withStyles(styles),
   connect(mapStateToProps)
 )(CharacterHeader)

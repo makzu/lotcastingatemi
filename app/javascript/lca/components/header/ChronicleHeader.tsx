@@ -7,8 +7,10 @@ import { compose } from 'recompose'
 import { Hidden, Tab, Tabs, Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
+import { State } from 'ducks'
 import { amIStOfChronicle, getSpecificChronicle } from 'selectors'
 import { Chronicle } from 'types'
+import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -64,11 +66,12 @@ function ChronicleHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
-  const id = ownProps.match.params.chronicleId
+function mapStateToProps(state: State, { match, location }: RouteProps) {
+  const id = parseInt(match.params.id, 10)
+
   const chronicle = getSpecificChronicle(state, id)
   const isST = amIStOfChronicle(state, id)
-  const path = ownProps.location.pathname
+  const path = location.pathname
 
   return {
     chronicle,
@@ -78,7 +81,7 @@ function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
   }
 }
 
-export default compose<Props, RouteComponentProps<any>>(
+export default compose<Props, RouteProps>(
   connect(mapStateToProps),
   withStyles(styles)
 )(ChronicleHeader)

@@ -9,6 +9,7 @@ import {
   WithStyles
 } from '@material-ui/core/styles'
 
+import CharacterListHeader from 'components/CharacterList/CharacterListHeader'
 import { drawerWidth } from 'containers/_drawerProperties'
 import BattlegroupHeader from './BattlegroupHeader'
 import CharacterHeader from './CharacterHeader'
@@ -40,13 +41,11 @@ export const GenericHeader = () => (
 const LcaHeader = ({ classes }: WithStyles<typeof styles>) => (
   <AppBar className={classes.bar} component="header">
     <Switch>
-      <Route path="/chronicles/:chronicleId" component={ChronicleHeader} />
-      <Route path="/characters/:characterId" component={CharacterHeader} />
-      <Route path="/qcs/:qcId" component={QcHeader} />
-      <Route
-        path="/battlegroups/:battlegroupId"
-        component={BattlegroupHeader}
-      />
+      <Route path="/chronicles/:id" component={ChronicleHeader} />
+      <Route path="/characters/:id" component={CharacterHeader} />
+      <Route path="/qcs/:id" component={QcHeader} />
+      <Route path="/battlegroups/:id" component={BattlegroupHeader} />
+      <Route path="/characters" component={CharacterListHeader} />
       <Route component={GenericHeader} />
     </Switch>
   </AppBar>

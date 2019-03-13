@@ -1,15 +1,16 @@
 import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
 import { compose } from 'recompose'
 
 import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
+import { State } from 'ducks'
 import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
 import { Battlegroup } from 'types'
+import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -60,10 +61,10 @@ function BattlegroupHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
-  const id = ownProps.match.params.battlegroupId
+function mapStateToProps(state: State, { location, match }: RouteProps) {
+  const id = parseInt(match.params.id, 10)
   const battlegroup = getSpecificBattlegroup(state, id)
-  const path = ownProps.location.pathname
+  const path = location.pathname
 
   const canIEdit = canIEditBattlegroup(state, id)
 
@@ -75,7 +76,7 @@ function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
   }
 }
 
-export default compose<Props, RouteComponentProps<any>>(
+export default compose<Props, RouteProps>(
   withStyles(styles),
   connect(mapStateToProps)
 )(BattlegroupHeader)

@@ -1,15 +1,16 @@
 import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
 import { compose } from 'recompose'
 
 import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
 import CharacterMenu from 'components/generic/CharacterMenu/'
+import { State } from 'ducks'
 import { canIEditQc, getSpecificQc } from 'selectors'
 import { QC } from 'types'
+import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -63,10 +64,10 @@ function QcHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
-  const id = ownProps.match.params.qcId
+function mapStateToProps(state: State, { location, match }: RouteProps) {
+  const id = parseInt(match.params.id, 10)
   const qc = getSpecificQc(state, id)
-  const path = ownProps.location.pathname
+  const path = location.pathname
 
   const canIEdit = canIEditQc(state, id)
 
@@ -78,7 +79,7 @@ function mapStateToProps(state, ownProps: RouteComponentProps<any>) {
   }
 }
 
-export default compose<Props, RouteComponentProps<any>>(
+export default compose<Props, RouteProps>(
   withStyles(styles),
   connect(mapStateToProps)
 )(QcHeader)

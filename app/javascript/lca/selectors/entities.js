@@ -35,11 +35,6 @@ export const getMyCharacters: CharacterListSelector = createSelector(
     currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
 )
 
-export const getMyPinnedCharacters: CharacterListSelector = createSelector(
-  [getMyCharacters],
-  characters => characters.filter(c => c.pinned)
-)
-
 export const getMyCharactersWithoutChronicles: CharacterListSelector = createSelector(
   [getMyCharacters],
   characters => characters.filter(c => c.chronicle_id == null)
@@ -50,11 +45,6 @@ const getQCs = state => entities(state).qcs
 export const getMyQCs: QcListSelector = createSelector(
   [getCurrentPlayer, getQCs],
   (currentPlayer, qcs) => currentPlayer.qcs.map(c => qcs[c]).sort(sortOrderSort)
-)
-
-export const getMyPinnedQCs: QcListSelector = createSelector(
-  [getMyQCs],
-  qcs => qcs.filter(c => c.pinned)
 )
 
 export const getMyQcsWithoutChronicles: QcListSelector = createSelector(
@@ -68,11 +58,6 @@ export const getMyBattlegroups: BgListSelector = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>
     currentPlayer.battlegroups.map(c => battlegroups[c]).sort(sortOrderSort)
-)
-
-export const getMyPinnedBattlegroups: BgListSelector = createSelector(
-  [getMyBattlegroups],
-  battlegroups => battlegroups.filter(c => c.pinned)
 )
 
 export const getMyBattlegroupsWithoutChronicles: BgListSelector = createSelector(

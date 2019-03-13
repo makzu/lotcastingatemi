@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography'
 
 import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
 import LcaHeader from 'components/header/Header'
-import NavPanel from 'components/nav/navPanel.jsx'
+import NavPanel from 'components/nav/NavPanel'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import { toggleDrawer } from 'ducks/actions.js'
 import VERSION from '../VERSION'

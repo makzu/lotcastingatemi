@@ -68,6 +68,8 @@ export interface Character extends PlayerAsset, WithSharedStats {
   native_language: string
   type: ExaltType
   caste: string
+  aspect: boolean
+  exalt_type: string
   caste_attributes: Attribute[]
   favored_attributes: Attribute[]
   caste_abilities: Ability[]
@@ -81,9 +83,6 @@ export interface Character extends PlayerAsset, WithSharedStats {
   totem: string
   tell: string
   forms: Form[]
-  sort_order: number
-  pinned: boolean
-  hidden: boolean
   merits: number[]
   weapons: number[]
 }

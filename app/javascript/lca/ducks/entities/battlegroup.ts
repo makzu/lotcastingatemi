@@ -1,6 +1,9 @@
-// @flow
+import { createSelector } from 'reselect'
+
 import { State } from 'ducks'
+import { sortOrderSort } from 'utils'
 import { callApi } from 'utils/api'
+import { getCurrentPlayer } from '.'
 import {
   createApiActions,
   createConditionalFetchAction,
@@ -40,5 +43,23 @@ export const fetchBattlegroupIfNecessary = createConditionalFetchAction(
 )
 
 /* *** Selectors *** */
+const getBattlegroups = (state: State) => unwrapped(state).battlegroups
+
+export const getMyBattlegroups = createSelector(
+  [getCurrentPlayer, getBattlegroups],
+  (currentPlayer, battlegroups) =>
+    currentPlayer.battlegroups.map(c => battlegroups[c]).sort(sortOrderSort)
+)
+
+export const getMyPinnedBattlegroups = createSelector(
+  [getMyBattlegroups],
+  battlegroups => battlegroups.filter(c => c.pinned)
+)
+
+export const getMyBattlegroupsWithoutChronicles = createSelector(
+  [getMyBattlegroups],
+  battlegroups => battlegroups.filter(c => c.chronicle_id == null)
+)
+
 export const getSpecificBattlegroup = (state: State, id: number) =>
   unwrapped(state).battlegroups[id]

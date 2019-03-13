@@ -5,8 +5,8 @@ export * from './excellencies'
 export * from './pools'
 export * from './ratings'
 export * from './weapons'
+export * from './pretty'
 
-import { capitalize, titleCase } from '..'
 import {
   ATTRIBUTES,
   ABILITIES_ALL,
@@ -183,83 +183,6 @@ export function mobilityPenalty(character: withArmorStats) {
     case 'unarmored':
     default:
       return 0 + character.bonus_mobility_penalty
-  }
-}
-
-export const solarXpName = (character: Character) =>
-  capitalize(character.exalt_type.split(/[ -]/)[0] || 'solar')
-
-export function prettyExaltType(character: Character) {
-  switch (character.type) {
-    case 'SolarCharacter':
-      return 'Solar'
-    case 'DragonbloodCharacter':
-      return 'Dragon-Blooded'
-    case 'LunarCharacter':
-      return 'Lunar'
-    default:
-      return titleCase(character.exalt_type)
-  }
-}
-
-export function prettyFullExaltType(character: Character) {
-  if (character.type === 'Character')
-    return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
-
-  let casteLabel = character.aspect ? ' Aspect ' : ' Caste '
-  if ((character.caste || '').toLowerCase() === 'casteless') {
-    casteLabel = ' '
-  }
-
-  let caste =
-    character.caste === '' || character.caste == null
-      ? ''
-      : titleCase(character.caste) + casteLabel
-
-  return `${caste}${prettyExaltType(character) || 'Exalt'}`
-}
-
-export function exaltTypeBase(character: Character) {
-  switch (character.type) {
-    case 'SolarCharacter':
-    case 'DragonbloodCharacter':
-    case 'CustomAbilityCharacter':
-      return 'ability'
-    case 'LunarCharacter':
-    case 'CustomAttributeCharacter':
-      return 'attribute'
-    case 'CustomEssenceCharacter':
-      return 'essence'
-    case 'Character':
-    default:
-      return 'none'
-  }
-}
-
-export function prettyIntimacyRating(rating: number) {
-  switch (rating) {
-    case 3:
-      return 'Defining'
-    case 2:
-      return 'Major'
-    case 1:
-      return 'Minor'
-    default:
-      return 'N/A'
-  }
-}
-
-export function prettyAnimaLevel(rating: number) {
-  switch (rating) {
-    case 3:
-      return 'Bonfire'
-    case 2:
-      return 'Burning'
-    case 1:
-      return 'Glowing'
-    case 0:
-    default:
-      return 'Dim'
   }
 }
 

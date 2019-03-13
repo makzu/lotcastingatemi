@@ -9,4 +9,6 @@ export interface WithId {
 export interface PlayerAsset extends WithId, ChSortable, Sortable {
   player_id: number
   chronicle_id: number
+  pinned: boolean
+  hidden: boolean
 }

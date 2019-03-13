@@ -19,4 +19,8 @@ environment.config.merge({
   },
 })
 
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+
+environment.plugins.append('fork-ts-checker', new ForkTsCheckerWebpackPlugin())
+
 module.exports = environment.toWebpackConfig()

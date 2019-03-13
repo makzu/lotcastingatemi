@@ -1,7 +1,6 @@
 import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
 
 import { Grid, Paper, Typography } from '@material-ui/core'
 
@@ -11,6 +10,7 @@ import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMeritsForCharacter, getSpecificCharacter } from 'ducks/selectors'
 import { Character, Merit } from 'types'
+import { RouteWithIdProps as RouteProps } from 'types/util'
 import SingleMerit from './SingleMerit'
 
 interface Props {
@@ -51,18 +51,12 @@ const MeritFullPage = (props: Props) => {
   )
 }
 
-function mapStateToProps(state: State, ownProps: RouteComponentProps<any>) {
-  const id = ownProps.match.params.characterId
-  const character = getSpecificCharacter(state, id)
-  let merits = []
-
-  if (character != null && character.merits != null) {
-    merits = getMeritsForCharacter(state, id)
-  }
+function mapStateToProps(state: State, { match }: RouteProps) {
+  const id = parseInt(match.params.id, 10)
 
   return {
-    character,
-    merits,
+    character: getSpecificCharacter(state, id),
+    merits: getMeritsForCharacter(state, id),
   }
 }
 

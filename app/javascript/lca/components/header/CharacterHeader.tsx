@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
 import { compose } from 'recompose'
 
 import { Toolbar, Typography } from '@material-ui/core'

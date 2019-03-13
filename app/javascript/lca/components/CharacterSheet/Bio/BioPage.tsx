@@ -1,7 +1,6 @@
 import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { RouteComponentProps as RouteProps } from 'react-router'
 import { compose } from 'recompose'
 
 import { Grid, Typography } from '@material-ui/core'
@@ -19,6 +18,7 @@ import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks/index.js'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { Character, XpLogEntry } from 'types'
+import { RouteWithIdProps as RouteProps } from 'types/util'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
 
@@ -159,11 +159,11 @@ const BioFullPage = ({ character, classes }: Props) => {
   )
 }
 
-const mapStateToProps = (state: State, { match }: RouteProps<any>) => ({
-  character: getSpecificCharacter(state, match.params.characterId),
+const mapStateToProps = (state: State, { match }: RouteProps) => ({
+  character: getSpecificCharacter(state, parseInt(match.params.id, 10)),
 })
 
-export default compose<Props, RouteProps<any>>(
+export default compose<Props, RouteProps>(
   ProtectedComponent,
   withStyles(styles),
   connect(mapStateToProps)

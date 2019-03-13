@@ -78,10 +78,7 @@ export default function Routes() {
           component={CharacterEditor}
         />
 
-        <Route
-          path="/characters/:characterId/"
-          component={CharacterSheetWrap}
-        />
+        <Route path="/characters/:id/" component={CharacterSheetWrap} />
 
         <Route path="/qcs/:qcId/edit" component={QcEditor} />
         <Route path="/qcs/:qcId" component={QcSheet} />

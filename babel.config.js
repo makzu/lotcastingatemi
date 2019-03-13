@@ -42,6 +42,7 @@ module.exports = function(api) {
           useBuiltIns: true,
         },
       ],
+      '@babel/preset-typescript',
     ].filter(Boolean),
     plugins: [
       'react-hot-loader/babel',

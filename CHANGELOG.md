@@ -2,6 +2,7 @@
 
 ###### _Not yet released_
 
+- Fix bug with onslaught not affecting battlegroup defense (Thanks Maudova)
 - Fix bug with stale sessions causing problems editing characters (Thanks Nirodha, Exthalion)
 
 ## v79

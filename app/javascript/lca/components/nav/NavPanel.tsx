@@ -9,7 +9,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from '@material-ui/core'
 import { Theme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/styles'
@@ -27,6 +27,7 @@ import { BattlegroupNavList, CharacterNavList, QcNavList } from './EntityLists/'
 import HtmlLinkListItem from './HtmlLinkListItem'
 import LinkListItem from './LinkListItem'
 import NavLinkListItem from './NavLinkListItem'
+import NavPanelLogout from './NavPanelLogout'
 import NavPanelThemeSwitch from './NavPanelThemeSwitch'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,16 +41,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const isOnHelpPage = (_: {}, location: Location) =>
   location.pathname.startsWith('/help')
 
-interface StateProps {
+interface Props {
   authenticated: boolean
   displayName: string
   drawerOpen: boolean
-}
-interface DispatchProps {
-  logout(): void
   closeDrawer(): void
 }
-interface Props extends StateProps, DispatchProps {}
 
 const NavPanel = (props: Props) => {
   const closeCheck = () => {
@@ -164,10 +161,7 @@ const NavPanel = (props: Props) => {
 
         {authenticated && (
           <>
-            <Divider />
-            <LinkListItem to="/" onClick={props.logout}>
-              <ListItemText primary="Log Out" />
-            </LinkListItem>
+            <NavPanelLogout />
           </>
         )}
       </List>
@@ -175,16 +169,4 @@ const NavPanel = (props: Props) => {
   )
 }
 
-const mapState = (state: State): StateProps => ({
-  authenticated: state.session.authenticated,
-  displayName: getCurrentPlayer(state).display_name || '',
-  drawerOpen: state.app.drawerOpen,
-})
-
-export default compose<Props, {}>(
-  withRouter,
-  connect(
-    mapState,
-    { logout, closeDrawer }
-  )
-)(NavPanel)
+export default NavPanel

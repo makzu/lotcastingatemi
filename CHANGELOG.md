@@ -1,6 +1,8 @@
-## v80
+## v81
 
 ###### _Not yet released_
+
+- Fix bug with stale sessions causing problems editing characters (Thanks Nirodha, Exthalion)
 
 ## v79
 

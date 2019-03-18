@@ -1,7 +1,7 @@
 // @flow
 import { LOGOUT, authFailure } from 'ducks/session'
 import { crudAction } from 'ducks/entities/_lib'
-import { isAuthFailure } from 'ducks/app.js'
+import { isNonFetchAuthIssue } from 'ducks/app.js'
 
 // Intercepts Logout actions and auth failures and removes the JWT as needed
 const authToken = (store: Object) => (next: Function) => (action: Object) => {
@@ -12,7 +12,7 @@ const authToken = (store: Object) => (next: Function) => (action: Object) => {
       break
   }
 
-  if (isAuthFailure(action)) {
+  if (isNonFetchAuthIssue(action)) {
     localStorage.removeItem('jwt')
     store.dispatch(authFailure())
   }

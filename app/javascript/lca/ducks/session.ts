@@ -1,4 +1,4 @@
-import { isAuthFailure } from './app.js'
+import { isNonFetchAuthIssue } from './app.js'
 import { crudAction } from './entities/_lib'
 
 export const LOGOUT = 'lca/session/LOGOUT'
@@ -20,7 +20,7 @@ export default function SessionReducer(
   state: ISessionState = defaultState,
   action: any
 ) {
-  if (isAuthFailure(action)) {
+  if (isNonFetchAuthIssue(action)) {
     return {
       ...state,
       authenticated: false,

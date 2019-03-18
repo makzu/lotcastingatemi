@@ -10,42 +10,45 @@ import { getSpecificCharacter, getSpellsForCharacter } from 'ducks/entities'
 import { Character, Spell } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import CharacterLoadError from '../CharacterLoadError'
-import SpellList from './SpellList'
+import SpellDisplay from './SpellDisplay'
 
 interface StateProps {
-  id: number
-  name: string
+  spells: Spell[]
 }
-
+interface OuterProps {
+  characterId: number
+}
 // interface Props extends StateProps {}
 
-const SorceryPage = ({ id, name }: StateProps) => {
-  /* Escape hatch */
-  if (name == null) {
-    return <CharacterLoadError />
-  }
+const mapSpells = s => (
+  <Grid item key={s.id}>
+    <BlockPaper />
+  </Grid>
+)
 
+const SpellList = ({ spells }: StateProps) => {
+  const spellList = spells.map(spell => (
+    <Grid item xs={12} md={6} xl={4} key={spell.id}>
+      <SpellDisplay spell={spell} />
+    </Grid>
+  ))
   return (
     <>
-      <DocumentTitle title={`${name} Sorcery | Lot-Casting Atemi`} />
-
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography variant="h5">Sorcery</Typography>
+          <Typography variant="h5">Spells</Typography>
         </Grid>
-      </Grid>
 
-      <SpellList characterId={id} />
+        {spellList}
+      </Grid>
     </>
   )
 }
 
-const mapState = (state: State, { match }: RouteProps): StateProps => {
-  const id = parseInt(match.params.id, 10)
+const mapState = (state: State, { characterId }: OuterProps): StateProps => {
   return {
-    id,
-    name: (getSpecificCharacter(state, id) || ({} as any)).name,
+    spells: getSpellsForCharacter(state, characterId),
   }
 }
 
-export default connect(mapState)(SorceryPage)
+export default connect(mapState)(SpellList)

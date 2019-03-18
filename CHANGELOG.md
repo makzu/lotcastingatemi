@@ -1,6 +1,6 @@
 ## v81
 
-###### _Not yet released_
+###### _Mar 17, 2019_
 
 - Fix bug with onslaught not affecting battlegroup defense (Thanks Maudova)
 - Fix bug with stale sessions causing problems editing characters (Thanks Nirodha, Exthalion)

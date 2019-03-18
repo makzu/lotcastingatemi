@@ -11,11 +11,11 @@ import {
 import { State } from 'ducks'
 import { switchTheme } from 'ducks/actions.js'
 
-const NavPanelThemeSwitch = ({ theme }) => {
+const NavPanelThemeSwitch = ({ theme, action }) => {
   return (
     <ListItem
       button
-      onClick={() => switchTheme(theme === 'light' ? 'dark' : 'light')}
+      onClick={() => action(theme === 'light' ? 'dark' : 'light')}
     >
       <ListItemText
         primary={`Current Theme: ${theme}`}
@@ -24,7 +24,7 @@ const NavPanelThemeSwitch = ({ theme }) => {
       <ListItemSecondaryAction>
         <Switch
           checked={theme === 'dark'}
-          onChange={() => switchTheme(theme === 'light' ? 'dark' : 'light')}
+          onChange={() => action(theme === 'light' ? 'dark' : 'light')}
         />
       </ListItemSecondaryAction>
     </ListItem>

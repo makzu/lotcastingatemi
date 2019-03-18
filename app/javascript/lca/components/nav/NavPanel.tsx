@@ -1,3 +1,4 @@
+import { Location } from 'history'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
@@ -10,18 +11,13 @@ import {
   ListItemIcon,
   ListItemText
 } from '@material-ui/core'
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-} from '@material-ui/core/styles'
+import { Theme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles'
 
 import CharacterNavigation from 'components/characters/SideNavigation'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import { closeDrawer, logout } from 'ducks/actions.js'
 import { State } from 'ducks/index.js'
-import { Location } from 'history'
 import Discord from 'icons/Discord-Logo.jsx'
 import OctoCat from 'icons/OctoCat.jsx'
 import Patreon from 'icons/Patreon-Logo.jsx'
@@ -33,15 +29,13 @@ import LinkListItem from './LinkListItem'
 import NavLinkListItem from './NavLinkListItem'
 import NavPanelThemeSwitch from './NavPanelThemeSwitch'
 
-// eslint-disable-next-line no-unused-vars
-const styles = (theme: Theme) =>
-  createStyles({
-    navElement: {
-      '& .active': {
-        backgroundColor: theme.palette.action.selected,
-      },
+const useStyles = makeStyles((theme: Theme) => ({
+  navElement: {
+    '& .active': {
+      backgroundColor: theme.palette.action.selected,
     },
-  })
+  },
+}))
 
 const isOnHelpPage = (_: {}, location: Location) =>
   location.pathname.startsWith('/help')
@@ -55,7 +49,7 @@ interface DispatchProps {
   logout(): void
   closeDrawer(): void
 }
-interface Props extends StateProps, DispatchProps, WithStyles<typeof styles> {}
+interface Props extends StateProps, DispatchProps {}
 
 const NavPanel = (props: Props) => {
   const closeCheck = () => {
@@ -64,7 +58,8 @@ const NavPanel = (props: Props) => {
     }
   }
 
-  const { authenticated, displayName, classes } = props
+  const { authenticated, displayName } = props
+  const classes = useStyles()
 
   return (
     <ErrorBoundary>
@@ -74,10 +69,6 @@ const NavPanel = (props: Props) => {
             <ListItemText primary={`Logged in as ${displayName}`} />
           </NavLinkListItem>
         )}
-
-        <NavLinkListItem to="/" onClick={closeCheck}>
-          <ListItemText primary="Home" />
-        </NavLinkListItem>
 
         <RouterSwitch>
           <Route path="/characters/:id/edit" component={CharacterNavigation} />
@@ -113,6 +104,10 @@ const NavPanel = (props: Props) => {
         )}
 
         <Divider />
+
+        <NavLinkListItem to="/" onClick={closeCheck}>
+          <ListItemText primary="Home" />
+        </NavLinkListItem>
 
         <NavLinkListItem
           to="/help"
@@ -187,10 +182,9 @@ const mapState = (state: State): StateProps => ({
 })
 
 export default compose<Props, {}>(
-  withStyles(styles),
+  withRouter,
   connect(
     mapState,
     { logout, closeDrawer }
-  ),
-  withRouter
+  )
 )(NavPanel)

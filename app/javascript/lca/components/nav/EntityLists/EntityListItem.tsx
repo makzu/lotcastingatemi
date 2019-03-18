@@ -10,7 +10,7 @@ interface Props {
   desc?: string
 }
 const EntityListItem = ({ link, name, desc }: Props) => (
-  <NavLinkListItem to={link}>
+  <NavLinkListItem to={link} exact={false}>
     <ListItemText primary={name} secondary={desc} />
   </NavLinkListItem>
 )

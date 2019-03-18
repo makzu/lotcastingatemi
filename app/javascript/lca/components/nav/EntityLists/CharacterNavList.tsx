@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { State } from 'ducks'
-import { getMyPinnedCharacters } from 'ducks/entities'
+import { getMyCharacters, getMyPinnedCharacters } from 'ducks/entities'
 import { Character } from 'types'
 import { prettyCompactExaltType } from 'utils/calculated'
 import EntityList from './EntityList'
@@ -10,6 +10,7 @@ import EntityListItem from './EntityListItem'
 
 interface StateProps {
   characters: Character[]
+  count: number
 }
 
 interface OuterProps {
@@ -27,11 +28,12 @@ const mapCharacterToListItem = (character: Character) => (
   />
 )
 
-const CharacterNavList = ({ characters, closeDrawer }: Props) => {
+const CharacterNavList = ({ characters, count, closeDrawer }: Props) => {
   return (
     <EntityList
       label="Characters"
       link="/characters"
+      count={count}
       children={characters.map(mapCharacterToListItem)}
       onClick={closeDrawer}
     />
@@ -40,6 +42,7 @@ const CharacterNavList = ({ characters, closeDrawer }: Props) => {
 
 const mapState = (state: State): StateProps => ({
   characters: getMyPinnedCharacters(state),
+  count: getMyCharacters(state).length,
 })
 
 export default connect(mapState)(CharacterNavList)

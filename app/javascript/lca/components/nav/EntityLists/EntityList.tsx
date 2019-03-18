@@ -13,18 +13,20 @@ import NavLinkListItem from '../NavLinkListItem'
 interface Props {
   label: string
   link: string
+  count: number
   children: React.ReactNodeArray
   onClick(): void
 }
 
-const EntityList = ({ label, link, children, onClick }: Props) => {
+const EntityList = ({ label, count, link, children, onClick }: Props) => {
   const [open, setOpen] = React.useState(false)
   const showExpando = !!children.length
 
   return (
     <>
       <NavLinkListItem to={link} onClick={onClick}>
-        <ListItemText primary={label} />
+        <ListItemText primary={label} secondary={`${count} total`} />
+
         {showExpando && (
           <ListItemSecondaryAction>
             <IconButton onClick={() => setOpen(!open)}>

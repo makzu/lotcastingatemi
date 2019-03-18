@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import {
   Collapse,
@@ -34,6 +35,8 @@ const SideNavigation = (props: Props) => {
 
   return (
     <>
+      <Divider />
+
       <LinkListItem to={`${prefix}`}>
         <ListItemText primary={character.name} />
         <ListItemSecondaryAction>
@@ -64,8 +67,6 @@ const SideNavigation = (props: Props) => {
           <ListItemText primary="Bio/Misc" />
         </NavLinkListItem>
       </Collapse>
-
-      <Divider />
     </>
   )
 }
@@ -79,4 +80,4 @@ const mapStateToProps = (state: State, { match }: RouteProps) => {
   }
 }
 
-export default connect(mapStateToProps)(SideNavigation)
+export default withRouter(connect(mapStateToProps)(SideNavigation))

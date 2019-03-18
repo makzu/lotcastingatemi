@@ -11,6 +11,7 @@ const LcaNavLink = ({ to, ...props }: any) => (
 const NavLinkListItem = (props: {
   to: string
   children: React.ReactNode
+  exact?: boolean
   isActive?(_: {}, location: Location): boolean
   onClick?(): void
 }) => <ListItem button component={LcaNavLink} {...props} />

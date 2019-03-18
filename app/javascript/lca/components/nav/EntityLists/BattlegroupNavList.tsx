@@ -2,13 +2,14 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { State } from 'ducks'
-import { getMyPinnedBattlegroups } from 'ducks/entities'
+import { getMyBattlegroups, getMyPinnedBattlegroups } from 'ducks/entities'
 import { Battlegroup } from 'types'
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
 
 interface StateProps {
   battlegroups: Battlegroup[]
+  count: number
 }
 
 interface OuterProps {
@@ -25,11 +26,12 @@ const mapBattlegroupToListItem = (battlegroup: Battlegroup) => (
   />
 )
 
-const BattlegroupNavList = ({ battlegroups, closeDrawer }: Props) => {
+const BattlegroupNavList = ({ battlegroups, count, closeDrawer }: Props) => {
   return (
     <EntityList
       label="Battlegroups"
       link="/battlegroups"
+      count={count}
       children={battlegroups.map(mapBattlegroupToListItem)}
       onClick={closeDrawer}
     />
@@ -38,6 +40,7 @@ const BattlegroupNavList = ({ battlegroups, closeDrawer }: Props) => {
 
 const mapState = (state: State): StateProps => ({
   battlegroups: getMyPinnedBattlegroups(state),
+  count: getMyBattlegroups(state).length,
 })
 
 export default connect(mapState)(BattlegroupNavList)

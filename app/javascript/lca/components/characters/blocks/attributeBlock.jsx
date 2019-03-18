@@ -15,7 +15,7 @@ function AttributeBlock({ character, pools }: Props) {
   return (
     <BlockPaper>
       <Typography variant="h6">Attributes</Typography>
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <AttributeBlockPhysical character={character} pools={pools} />
         </Grid>

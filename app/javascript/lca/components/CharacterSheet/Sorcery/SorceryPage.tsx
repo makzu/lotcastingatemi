@@ -28,7 +28,7 @@ const SorceryPage = ({ character, spells }: StateProps) => {
     <>
       <DocumentTitle title={`${character.name} Sorcery | Lot-Casting Atemi`} />
 
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h5">Sorcery</Typography>
         </Grid>

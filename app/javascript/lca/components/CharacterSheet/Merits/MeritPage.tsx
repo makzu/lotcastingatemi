@@ -44,7 +44,7 @@ const MeritFullPage = (props: Props) => {
         Merits
       </Typography>
 
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         {mts}
       </Grid>
     </>

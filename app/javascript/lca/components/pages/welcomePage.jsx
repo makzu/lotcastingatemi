@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import BlockPaper from '../generic/blockPaper.jsx'
 
 const WelcomePage = () => (
-  <Grid container spacing={24}>
+  <Grid container spacing={3}>
     <Hidden mdDown>
       <Grid item xs={2} />
     </Hidden>

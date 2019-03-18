@@ -84,7 +84,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
       </Fragment>
     ))
     return (
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
 
         <Hidden smUp>

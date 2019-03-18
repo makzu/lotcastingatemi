@@ -59,7 +59,7 @@ const BioFullPage = ({ character, classes }: Props) => {
     <>
       <DocumentTitle title={`${character.name} Bio | Lot-Casting Atemi`} />
 
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h5">Bio/Misc</Typography>
         </Grid>

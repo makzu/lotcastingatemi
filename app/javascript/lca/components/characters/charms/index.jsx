@@ -179,7 +179,7 @@ class CharmFullPage extends Component<Props, State> {
     ))
 
     return (
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         <DocumentTitle title={`${character.name} Charms | Lot-Casting Atemi`} />
 
         <Hidden smUp>

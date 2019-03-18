@@ -159,7 +159,7 @@ export class CharacterSheet extends Component<Props> {
       <div>
         <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />
 
-        <Grid container spacing={24}>
+        <Grid container spacing={3}>
           <Hidden smUp>
             <Grid item xs={12}>
               <div style={{ height: '1em' }}>&nbsp;</div>
@@ -178,7 +178,7 @@ export class CharacterSheet extends Component<Props> {
           </Grid>
 
           <Grid item xs={12} sm={6} md={9}>
-            <Grid container spacing={24}>
+            <Grid container spacing={3}>
               <Grid item xs={12}>
                 <AttributeBlock character={character} pools={pools} />
               </Grid>

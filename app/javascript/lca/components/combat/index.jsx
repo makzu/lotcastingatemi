@@ -102,7 +102,7 @@ class CombatDashboard extends Component<Props> {
     const nextCharacter = inCombatEntities.filter(c => !c.has_acted)[0]
 
     return (
-      <Grid container spacing={24} style={{ position: 'relative' }}>
+      <Grid container spacing={3} style={{ position: 'relative' }}>
         <Hidden smUp>
           <Grid item xs={12}>
             <div style={{ height: '1em' }}>&nbsp;</div>

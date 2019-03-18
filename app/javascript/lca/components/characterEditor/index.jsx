@@ -85,7 +85,7 @@ class CharacterEditor extends Component<Props> {
           <div style={{ height: '2.5em' }}>&nbsp;</div>
         </Hidden>
 
-        <Grid container spacing={24}>
+        <Grid container spacing={3}>
           <Grid item xs={12} md={character.type === 'Character' ? 12 : 6}>
             <BasicsEditor
               character={character}

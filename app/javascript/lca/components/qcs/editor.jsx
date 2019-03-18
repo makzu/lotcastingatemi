@@ -78,7 +78,7 @@ class QcEditor extends Component<Props> {
       )
 
     return (
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         <Grid item xs={12} xl={6}>
           <BlockPaper>
             <Typography paragraph variant="caption">

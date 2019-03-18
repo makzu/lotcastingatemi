@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 
 import App from './App.jsx'
-import ThemeContainer from './themeContainer.jsx'
+import ThemeContainer from './ThemeContainer'
 import Routes from '../routes.jsx'
 
 type Props = {

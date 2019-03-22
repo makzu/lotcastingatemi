@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 
-import NavLinkListItem from '../NavLinkListItem'
+import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
 
 interface Props {
   label: string

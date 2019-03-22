@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 
 import { Divider, ListItemText } from '@material-ui/core'
 
+import { LinkListItem } from 'components/shared/wrappers'
 import { logout } from 'ducks/actions.js'
-import LinkListItem from './LinkListItem'
 
 const NavPanelLogout = props => {
   return (

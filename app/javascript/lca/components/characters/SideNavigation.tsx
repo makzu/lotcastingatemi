@@ -11,8 +11,7 @@ import {
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
-import LinkListItem from 'components/nav/LinkListItem'
-import NavLinkListItem from 'components/nav/NavLinkListItem'
+import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import { State } from 'ducks'
 import { getSpecificCharacter } from 'ducks/entities'
 import { Character } from 'types'

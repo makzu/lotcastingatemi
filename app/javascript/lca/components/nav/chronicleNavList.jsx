@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 
 import IconButton from '@material-ui/core/IconButton'
 import ListSubheader from '@material-ui/core/ListSubheader'
@@ -15,6 +14,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
+import { NavLinkListItem } from 'components/shared/wrappers'
 import { getMyChronicles, getMyOwnChronicles } from 'selectors'
 import type { Chronicle, Enhancer } from 'utils/flow-types'
 
@@ -39,13 +39,11 @@ class ChronicleNavList extends React.Component<Props, State> {
   render() {
     const { ownChronicles, chronicles, closeDrawer } = this.props
 
-    const ownChronicleList = ownChronicles.map(c => (
-      <ListItem
+    const chronicleMap = (c: Chronicle) => (
+      <NavLinkListItem
         key={c.id}
-        button
-        onClick={closeDrawer}
-        component={NavLink}
         to={`/chronicles/${c.id}`}
+        onClick={closeDrawer}
       >
         <ListItemText
           inset
@@ -54,25 +52,11 @@ class ChronicleNavList extends React.Component<Props, State> {
             (c.players || '').length == 1 ? '' : 's'
           }`}
         />
-      </ListItem>
-    ))
-    const chronicleList = chronicles.map(c => (
-      <ListItem
-        key={c.id}
-        button
-        onClick={closeDrawer}
-        component={NavLink}
-        to={`/chronicles/${c.id}`}
-      >
-        <ListItemText
-          inset
-          primary={c.name}
-          secondary={`${(c.players || '').length} Player${
-            (c.players || '').length == 1 ? '' : 's'
-          }`}
-        />
-      </ListItem>
-    ))
+      </NavLinkListItem>
+    )
+
+    const ownChronicleList = ownChronicles.map(chronicleMap)
+    const chronicleList = chronicles.map(chronicleMap)
 
     return (
       <>

@@ -9,12 +9,13 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from '@material-ui/core'
 import { Theme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/styles'
 
 import CharacterNavigation from 'components/characters/SideNavigation'
+import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 import { closeDrawer, logout } from 'ducks/actions.js'
 import { State } from 'ducks/index.js'
@@ -25,8 +26,6 @@ import { getCurrentPlayer } from 'selectors'
 import ChronicleNavList from './chronicleNavList.jsx'
 import { BattlegroupNavList, CharacterNavList, QcNavList } from './EntityLists/'
 import HtmlLinkListItem from './HtmlLinkListItem'
-import LinkListItem from './LinkListItem'
-import NavLinkListItem from './NavLinkListItem'
 import NavPanelLogout from './NavPanelLogout'
 import NavPanelThemeSwitch from './NavPanelThemeSwitch'
 

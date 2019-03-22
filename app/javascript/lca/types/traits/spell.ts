@@ -1,13 +1,14 @@
-import { WithId } from './_lib'
+import { Sortable } from 'utils'
+import { Timing, WithId } from '../_lib'
 
-export interface Spell extends WithId {
+export interface Spell extends WithId, Sortable {
   name: string
   sorcerer_id: number
   sorcerer_type: 'character' | 'qc'
   cost: string
-  circle: string
+  circle: 'terrestrial' | 'celestial' | 'solar'
   control: boolean
-  timing: string
+  timing: Timing
   duration: string
   keywords: string[]
   body: string

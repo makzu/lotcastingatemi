@@ -6,7 +6,7 @@ import {
   crudAction,
   reducerUpdateAction,
   standardTypes,
-  unwrapped
+  unwrapped,
 } from './_lib'
 
 const PLAYER = 'player'
@@ -53,7 +53,7 @@ export function destroyAccount() {
 
 export interface Player {
   id: number
-  name: string
+  display_name: string
   characters: number[]
   qcs: number[]
   battlegroups: number[]

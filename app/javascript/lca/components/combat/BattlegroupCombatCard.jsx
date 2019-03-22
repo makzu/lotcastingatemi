@@ -120,14 +120,28 @@ function BattlegroupCard({ battlegroup, classes }: Props) {
       <div className={classes.flexContainerWrap}>
         <PoolDisplay
           battlegroup
-          pool={{ total: battlegroup.evasion + bgDefenseBonus(battlegroup) }}
+          pool={{
+            total: Math.max(
+              battlegroup.evasion +
+                bgDefenseBonus(battlegroup) -
+                battlegroup.onslaught,
+              0
+            ),
+          }}
           label="Evasion"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
           battlegroup
           staticRating
-          pool={{ total: battlegroup.parry + bgDefenseBonus(battlegroup) }}
+          pool={{
+            total: Math.max(
+              battlegroup.parry +
+                bgDefenseBonus(battlegroup) -
+                battlegroup.onslaught,
+              0
+            ),
+          }}
           label="Parry"
           classes={{ root: classes.poolBlock }}
         />

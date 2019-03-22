@@ -3,8 +3,8 @@
   "extends": [
     "tslint:recommended",
     "tslint-react",
-    "tslint-config-prettier",
-    "tslint-react-hooks"
+    "tslint-react-hooks",
+    "tslint-config-prettier"
   ],
   "jsRules": {},
   "rules": {

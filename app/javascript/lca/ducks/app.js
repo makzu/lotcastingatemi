@@ -25,6 +25,11 @@ export const isForbidden = (action: Object) =>
 export const is404Error = (action: Object) =>
   action.error && (action.payload || {}).status == 404
 
+export const isNonFetchAuthIssue = (action: Object) =>
+  action.error &&
+  [401, 401].includes((action.payload || {}).status) &&
+  action.type !== 'lca-api/character/FETCH/FAILURE'
+
 export default function AppReducer(
   state: AppState = defaultState,
   action: Object

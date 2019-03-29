@@ -7,7 +7,7 @@ import {
   Divider,
   IconButton,
   ListItemSecondaryAction,
-  ListItemText
+  ListItemText,
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
@@ -56,6 +56,10 @@ const SideNavigation = (props: Props) => {
 
         <NavLinkListItem to={`${prefix}/charms`}>
           <ListItemText primary="Charms" />
+        </NavLinkListItem>
+
+        <NavLinkListItem to={`${prefix}/charmss`}>
+          <ListItemText primary="New Charms page" />
         </NavLinkListItem>
 
         <NavLinkListItem to={`${prefix}/sorcery`}>

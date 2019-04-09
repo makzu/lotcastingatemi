@@ -2,6 +2,10 @@
   "compilerOptions": {
     "allowJs": false,
     "baseUrl": "app/javascript/lca",
+    "paths": {
+      "Docs": ["../../../docs"],
+      "Locales": ["../../../locales"]
+    },
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

@@ -1,3 +1,9 @@
+## v82
+
+###### _Not yet Released_
+
+- Fix bug with Exalt type changing
+
 ## v81
 
 ###### _Mar 17, 2019_

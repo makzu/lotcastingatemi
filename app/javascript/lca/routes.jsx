@@ -46,7 +46,7 @@ const BattlegroupEditor = lazy(() =>
 )
 
 const ResourcesPage = lazy(() =>
-  import('components/pages/resourcesPage.jsx' /* webpackChunkName: 'ResourcesPage' */ /* webpackPrefetch: true */)
+  import('components/pages/ResourcesPage' /* webpackChunkName: 'ResourcesPage' */ /* webpackPrefetch: true */)
 )
 
 const HelpPage = lazy(() =>

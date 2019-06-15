@@ -1,9 +1,8 @@
-// @flow
 import React from 'react'
 
+import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
-import ResourcesText from 'Docs'
+import ResourcesText from 'Docs/resources.md'
 
 const ResourcesPage = () => (
   <BlockPaper>

@@ -2,6 +2,7 @@
 
 ###### _Not yet Released_
 
+- Added a few links to the [Resources Page](./resources.md)
 - Fix bug with Exalt type changing
 
 ## v81

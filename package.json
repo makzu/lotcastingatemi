@@ -67,7 +67,7 @@
     "react-jss": "^8.6.1",
     "react-markdown": "^4.0.6",
     "react-redux": "^6.0.1",
-    "react-router-dom": "^4.4.0",
+    "react-router-dom": "^5.0.1",
     "react-select": "^2.4.2",
     "react-sortable-hoc": "^1.8.0",
     "recompose": "^0.30.0",

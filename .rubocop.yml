@@ -1,4 +1,6 @@
-require: rubocop-rspec
+require:
+  - rubocop-rspec
+  - rubocop-rails
 inherit_from: .rubocop_todo.yml
 AllCops:
   TargetRubyVersion: 2.5
@@ -50,7 +52,7 @@ Metrics/MethodLength:
 
 Naming/FileName:
   Exclude:
-    - "Gemfile"
+    - 'Gemfile'
 
 Style/Documentation:
   Exclude:
@@ -60,7 +62,7 @@ Style/Documentation:
 
 Rails/Output:
   Exclude:
-    - "db/seeds.rb"
+    - 'db/seeds.rb'
 
 RSpec/ExampleLength:
   Max: 15

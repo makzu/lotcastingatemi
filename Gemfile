@@ -72,6 +72,7 @@ group :development, :test, :cypress do
   gem 'factory_bot_rails', '~> 5.0.1'
   gem 'rspec-rails', '~> 3.8.2'
   gem 'rubocop', '~> 0.65', require: false
+  gem 'rubocop-rails', '~> 2.0.1', require: false
   gem 'rubocop-rspec', '~> 1.30', require: false
 end
 

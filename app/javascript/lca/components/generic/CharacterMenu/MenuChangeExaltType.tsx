@@ -11,12 +11,12 @@ import {
   Divider,
   ListItemIcon,
   ListItemText,
-  MenuItem
+  MenuItem,
 } from '@material-ui/core'
 import { SwapHoriz } from '@material-ui/icons'
 
 import ExaltTypeSelect, {
-  prettyType
+  prettyType,
 } from 'components/characterEditor/exaltTraits/ExaltTypeSelect.jsx'
 import { State } from 'ducks'
 import { changeCharacterType } from 'ducks/actions'
@@ -57,6 +57,14 @@ const MenuChangeCharacterType = ({
     handleClose()
   }
 
+  const actuallySet = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === '') {
+      return
+    }
+
+    setSelectedType(e.target.value)
+  }
+
   return (
     <>
       <Divider />
@@ -75,7 +83,7 @@ const MenuChangeCharacterType = ({
             Current type: {prettyType(currentType)}
           </DialogContentText>
 
-          <ExaltTypeSelect value={selectedType} onChange={setSelectedType} />
+          <ExaltTypeSelect value={selectedType} onChange={actuallySet} />
 
           {showCharacterDisclaimer && (
             <DialogContentText>

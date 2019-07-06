@@ -75,6 +75,32 @@ RSpec.describe 'Chronciles', type: :request do
         end
       end
     end
+
+    describe 'attempting to join again' do
+      it 'does not create a duplicate entry' do
+        post '/api/v1/chronicles/join',
+            headers: authenticated_header(not_the_st),
+            params:  { invite_code: chronicle.invite_code }
+
+        expect(ChroniclePlayer.count).to eq 1
+      end
+    end
+  end
+
+  context 'when logged in as a player not in the chronicle' do
+    let (:player) { create(:player) }
+
+    describe 'joining a chronicle open to new players' do
+      it 'works' do
+        post '/api/v1/chronicles/join',
+             headers: authenticated_header(player),
+             params:  { invite_code: chronicle.invite_code }
+
+        expect(response.status).to eq 200
+        chronicle.reload
+        expect(chronicle.players).to include player
+      end
+    end
   end
 
   context 'when not logged in' do

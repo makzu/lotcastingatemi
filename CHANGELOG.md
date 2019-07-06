@@ -1,9 +1,16 @@
+## v83
+
+###### _Not yet released_
+
+- Nothing (yet)
+
 ## v82
 
-###### _Not yet Released_
+###### _Jul 5, 2019_
 
 - Added a few links to the [Resources Page](./resources.md)
-- Fix bug with Exalt type changing
+- Fix bug with Exalt type changing (Thanks Maudova)
+- Players should no longer be able to join a Chronicle multiple times and create duplicate entries in the player list (this does not get rid of existing duplicates) (Thanks everyone who reported this!)
 
 ## v81
 

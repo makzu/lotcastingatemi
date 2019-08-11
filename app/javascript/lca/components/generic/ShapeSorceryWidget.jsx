@@ -28,8 +28,8 @@ const styles = theme => ({
     flex: 1,
   },
   divider: {
-    marginBottom: theme.spacing.unit,
-    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing(),
+    marginTop: theme.spacing(),
   },
   content: {
     minWidth: '15em',

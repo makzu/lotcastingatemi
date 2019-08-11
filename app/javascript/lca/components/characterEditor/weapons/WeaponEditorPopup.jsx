@@ -37,7 +37,7 @@ const styles = theme => ({
     marginRight: 0,
   },
   subheading: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(),
   },
 })
 

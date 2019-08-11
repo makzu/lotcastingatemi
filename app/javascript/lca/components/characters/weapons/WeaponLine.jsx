@@ -14,8 +14,8 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(),
+    marginBottom: theme.spacing(),
   },
   label: {
     ...theme.typography.body1,
@@ -32,7 +32,7 @@ const styles = theme => ({
   name: {
     ...theme.typography.body2,
     width: '10rem',
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     marginLeft: 0,
     maxHeight: '5rem',
     textTransform: 'capitalize',
@@ -43,7 +43,7 @@ const styles = theme => ({
   },
   tags: {
     ...theme.typography.body1,
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     marginLeft: 0,
     flex: 1,
     minWidth: '10rem',

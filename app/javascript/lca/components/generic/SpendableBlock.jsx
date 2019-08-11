@@ -23,7 +23,7 @@ import type {
 const styles = theme => ({
   ...sharedStyles(theme),
   moteWrap: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
 })
 

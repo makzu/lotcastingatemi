@@ -7,11 +7,11 @@ import TextField from '@material-ui/core/TextField'
 
 const styles = theme => ({
   field: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     width: '5.65em',
   },
   armor: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     width: '7em',
   },
 })

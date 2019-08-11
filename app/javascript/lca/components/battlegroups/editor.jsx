@@ -29,16 +29,16 @@ const styles = theme => ({
 
   bgBonus: {
     ...theme.typography.caption,
-    marginLeft: -theme.spacing.unit / 2,
-    marginRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginLeft: theme.spacing(0.5),
+    marginRight: theme.spacing(),
+    marginBottom: theme.spacing(),
     alignSelf: 'flex-end',
   },
   nameField: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   drill: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
 })
 type Props = {

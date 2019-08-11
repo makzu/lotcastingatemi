@@ -5,7 +5,7 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core/styles'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
@@ -21,7 +21,7 @@ const styles = (theme: Theme) =>
     },
     meritName: {
       ...theme.typography.caption,
-      marginLeft: theme.spacing.unit,
+      marginLeft: theme.spacing(),
       textTransform: 'capitalize',
     },
     name: {

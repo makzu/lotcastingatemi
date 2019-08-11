@@ -18,7 +18,7 @@ import type { withAttributes as Character } from 'utils/flow-types'
 
 const styles = theme => ({
   fieldSet: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
   },
   total: {
     ...theme.typography.caption,

@@ -20,10 +20,10 @@ const styles = theme => ({
   ...commonStyles(theme),
   separator: {
     ...theme.typography.body1,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   subheading: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(),
   },
   xpWrap: {
     display: 'flex',

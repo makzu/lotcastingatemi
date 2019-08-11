@@ -11,7 +11,7 @@ import type { fullWeapon } from 'utils/flow-types'
 
 const styles = theme => ({
   abilitySelect: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     flex: 2,
     textTransform: 'capitalize',
   },

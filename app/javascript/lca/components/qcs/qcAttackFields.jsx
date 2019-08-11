@@ -33,13 +33,13 @@ const styles = theme => ({
   },
   grabHandle: {
     alignSelf: 'center',
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   bgBonus: {
     ...theme.typography.caption,
-    marginLeft: -theme.spacing.unit / 2,
-    marginRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginLeft: -theme.spacing(0.5),
+    marginRight: theme.spacing(),
+    marginBottom: theme.spacing(),
     alignSelf: 'flex-end',
   },
   nameField: {
@@ -51,7 +51,7 @@ const styles = theme => ({
   },
   tagsField: {
     flex: 1,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     minWidth: '30%',
 
     [theme.breakpoints.down('md')]: {

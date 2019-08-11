@@ -21,8 +21,8 @@ import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   root: {
-    marginTop: theme.spacing.unit / 2,
-    marginBottom: theme.spacing.unit / 2,
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'baseline',
@@ -39,12 +39,12 @@ const styles = theme => ({
   name: {
     ...theme.typography.body2,
     fontSize: '1rem',
-    marginRight: theme.spacing.unit / 2,
+    marginRight: theme.spacing(0.5),
   },
   info: {
     ...theme.typography.caption,
     textTransform: 'capitalize',
-    marginRight: theme.spacing.unit / 2,
+    marginRight: theme.spacing(0.5),
   },
 })
 

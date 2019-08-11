@@ -26,7 +26,7 @@ const SortableItem = SortableElement(({ children }) => children)
 
 const styles = theme => ({
   ...commonStyles(theme),
-  nthTitle: { marginTop: theme.spacing.unit * 3 },
+  nthTitle: { marginTop: theme.spacing(3) },
 })
 
 type Props = {
@@ -102,7 +102,7 @@ class ContentList extends Component<Props> {
           items={chars}
           classes={classes}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
 
@@ -118,7 +118,7 @@ class ContentList extends Component<Props> {
           items={qcs}
           classes={classes}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
 
@@ -134,7 +134,7 @@ class ContentList extends Component<Props> {
           items={bgs}
           classes={classes}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
           axis="xy"
         />
       </Fragment>

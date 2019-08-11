@@ -48,10 +48,10 @@ const styles = theme => ({
   },
   icon: {
     verticalAlign: 'bottom',
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(),
   },
   poolBlock: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     minWidth: '4rem',
   },
 })

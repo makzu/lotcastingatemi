@@ -14,8 +14,8 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(),
+    marginBottom: theme.spacing(),
   },
   label: {
     ...theme.typography.body1,
@@ -30,13 +30,13 @@ const styles = theme => ({
     alignSelf: 'flex-end',
   },
   poolBlock: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     marginLeft: 0,
     width: '5.5rem',
     maxHeight: '5rem',
   },
   narrowPoolBlock: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     marginLeft: 0,
     width: '4.5rem',
   },

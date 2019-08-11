@@ -9,8 +9,8 @@ const styles = theme => ({
   //eslint-disable-line no-unused-vars
   wrap: {
     display: 'flex',
-    marginBottom: theme.spacing.unit / 2,
-    marginTop: theme.spacing.unit / 2,
+    marginBottom: theme.spacing(0.5),
+    marginTop: theme.spacing(0.5),
     flexWrap: 'wrap',
   },
   label: {

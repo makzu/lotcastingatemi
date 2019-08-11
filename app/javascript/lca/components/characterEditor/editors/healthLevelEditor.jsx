@@ -13,15 +13,15 @@ import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({
   subheading: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(),
   },
   separator: {
     ...theme.typography.body1,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   healthBoxesWrap: {
     textAlign: 'center',
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
   },
 })
 

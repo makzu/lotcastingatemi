@@ -14,8 +14,8 @@ const styles = theme => ({
     justifyContent: 'space-between',
   },
   poolBlock: {
-    marginRight: theme.spacing.unit,
-    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
     width: '5.5rem',
     maxHeight: '5rem',
     textOverflow: 'ellipse',

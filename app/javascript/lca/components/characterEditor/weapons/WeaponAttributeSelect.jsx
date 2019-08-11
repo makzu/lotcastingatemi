@@ -11,7 +11,7 @@ import type { fullWeapon } from 'utils/flow-types'
 
 const styles = theme => ({
   root: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     minWidth: '10em',
   },
 })

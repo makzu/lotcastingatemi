@@ -22,10 +22,11 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@hot-loader/react-dom": "^16.8.4",
-    "@material-ui/core": "^4.1.0",
-    "@material-ui/icons": "^4.1.0",
-    "@material-ui/styles": "^4.1.0",
-    "@material-ui/system": "^4.1.0",
+    "@material-ui/core": "^4.3.2",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.3.0",
+    "@material-ui/system": "^4.3.3",
+    "@material-ui/types": "^4.1.1",
     "@rails/webpacker": "^4.0.2",
     "@types/node": "^11.11.3",
     "@types/react": "^16.8.8",
@@ -154,6 +155,6 @@
   },
   "engines": {
     "node": "^10.x",
-    "yarn": "^1.15.x"
+    "yarn": "^1.17.x"
   }
 }

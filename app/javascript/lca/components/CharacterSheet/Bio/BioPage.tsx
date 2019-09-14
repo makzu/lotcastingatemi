@@ -8,7 +8,7 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core/styles'
 
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
@@ -90,7 +90,9 @@ const BioFullPage = ({ character, classes }: Props) => {
             {character.totem && (
               <Typography paragraph>Totem: {character.totem}</Typography>
             )}
-            {forms.length && <Typography paragraph>Forms: {forms}</Typography>}
+            {forms.length > 0 ? (
+              <Typography paragraph>Forms: {forms}</Typography>
+            ) : null}
           </BlockPaper>
         </Grid>
 

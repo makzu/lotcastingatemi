@@ -193,7 +193,7 @@ export class CharacterSheet extends Component<Props> {
                     variant="h6"
                     component={Link}
                     to={`/characters/${character.id}/merits`}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: 'none', color: 'unset' }}
                   >
                     Merits&nbsp;&nbsp;
                     <Launch style={{ verticalAlign: 'bottom' }} />

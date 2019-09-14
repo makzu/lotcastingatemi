@@ -145,7 +145,7 @@ function CharmSummaryBlock(props: Props) {
         gutterBottom
         component={Link}
         to={`/characters/${character.id}/charms`}
-        style={{ textDecoration: 'none' }}
+        style={{ textDecoration: 'none', color: 'unset' }}
       >
         Charms&nbsp;&nbsp;
         <Launch style={{ verticalAlign: 'bottom' }} />

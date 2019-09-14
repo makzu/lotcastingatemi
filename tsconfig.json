@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": false,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "app/javascript/lca",
     "paths": {
       "Docs": ["../../../docs"],

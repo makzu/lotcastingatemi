@@ -3,14 +3,14 @@
 source 'https://rubygems.org'
 
 # Rails 5.1+ for Webpacker
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 6.0.0'
 # Webpacker allows React/Redux and friends to thrive:
 gem 'webpacker', '~> 4.0.2'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.1'
 
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'
@@ -25,7 +25,7 @@ gem 'puma', '~> 3.7'
 gem 'active_model_serializers', '~> 0.10.9'
 
 # For duplicating QCs and Battlegroups
-gem 'deep_cloneable', '~> 2.3'
+gem 'deep_cloneable', '~> 3.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -39,9 +39,9 @@ gem 'bootsnap', '~> 1.4.0', require: false
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2.0', git: 'https://github.com/makzu/knock'
-gem 'pundit', '~> 2.0.1'
+gem 'pundit', '~> 2.1.0'
 
-gem 'omniauth-google-oauth2', '~> 0.6.0'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'
@@ -65,14 +65,14 @@ gem 'lograge'
 
 group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'action-cable-testing', '~> 0.5.0'
+  gem 'action-cable-testing', '~> 0.6.0'
   gem 'byebug', platform: :mri
-  gem 'cypress-on-rails', '~> 1.3.0'
+  gem 'cypress-on-rails', '~> 1.4.0'
   gem 'database_cleaner', '~> 1.7.0'
   gem 'factory_bot_rails', '~> 5.0.1'
   gem 'rspec-rails', '~> 3.8.2'
   gem 'rubocop', '~> 0.65', require: false
-  gem 'rubocop-rails', '~> 2.0.1', require: false
+  gem 'rubocop-rails', '~> 2.3.2', require: false
   gem 'rubocop-rspec', '~> 1.30', require: false
 end
 

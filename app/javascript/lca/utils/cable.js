@@ -1,7 +1,7 @@
 // @flow
 
-const ActionCable = require('actioncable')
-const cable = ActionCable.createConsumer()
+import { createConsumer } from '@rails/actioncable'
+const cable = createConsumer()
 
 const UpdatesCable = {
   subscribe(getState: Function, received: Object) {

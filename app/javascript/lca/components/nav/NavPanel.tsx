@@ -1,28 +1,24 @@
 import { Location } from 'history'
 import * as React from 'react'
-import { connect } from 'react-redux'
 import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
-import { compose } from 'recompose'
 
 import {
   Divider,
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from '@material-ui/core'
 import { Theme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/styles'
 
-import CharacterNavigation from 'components/characters/SideNavigation'
-import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
+import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'
+import CharacterSheetNav from 'components/CharacterSheet/CharacterSheetNav'
+import { NavLinkListItem } from 'components/shared/wrappers/'
 import ErrorBoundary from 'containers/ErrorBoundary.jsx'
-import { closeDrawer, logout } from 'ducks/actions.js'
-import { State } from 'ducks/index.js'
 import Discord from 'icons/Discord-Logo.jsx'
 import OctoCat from 'icons/OctoCat.jsx'
 import Patreon from 'icons/Patreon-Logo.jsx'
-import { getCurrentPlayer } from 'selectors'
 import ChronicleNavList from './chronicleNavList.jsx'
 import { BattlegroupNavList, CharacterNavList, QcNavList } from './EntityLists/'
 import HtmlLinkListItem from './HtmlLinkListItem'
@@ -67,8 +63,8 @@ const NavPanel = (props: Props) => {
         )}
 
         <RouterSwitch>
-          <Route path="/characters/:id/edit" component={CharacterNavigation} />
-          <Route path="/characters/:id" component={CharacterNavigation} />
+          <Route path="/characters/:id/edit" component={CharacterEditorNav} />
+          <Route path="/characters/:id" component={CharacterSheetNav} />
         </RouterSwitch>
 
         <Divider />

@@ -5,23 +5,23 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@material-ui/core'
 
-import CharacterCard from 'components/characters/CharacterCard.jsx'
-import CharacterCreatePopup from 'components/characters/characterCreatePopup.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
+import QcCard from 'components/qcs/QcCard.jsx'
+import QcCreatePopup from 'components/qcs/qcCreatePopup.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
-import { getMyCharacters, updateCharacter } from 'ducks/entities'
+import { getMyQcs, updateQc } from 'ducks/entities'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const CharacterList = () => {
-  const characters = useSelector((state: State) => getMyCharacters(state))
+const QcList = () => {
+  const qcs = useSelector((state: State) => getMyQcs(state))
   const dispatch = useDispatch()
 
-  const chars = characters.map((c, i) => (
-    <SortableItem key={c.id} index={i} collection="characters">
+  const chars = qcs.map((c, i) => (
+    <SortableItem key={c.id} index={i} collection="qcs">
       <Grid item xs={12} md={6} xl={4}>
-        <CharacterCard character={c} />
+        <QcCard qc={c} />
       </Grid>
     </SortableItem>
   ))
@@ -31,25 +31,23 @@ const CharacterList = () => {
       return
     }
 
-    const charA = characters[oldIndex]
-    const charB = characters[newIndex]
+    const charA = qcs[oldIndex]
+    const charB = qcs[newIndex]
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
-    dispatch(
-      updateCharacter(charA.id, { sort_order: charB.sort_order + offset })
-    )
+    dispatch(updateQc(charA.id, { sort_order: charB.sort_order + offset }))
   }
 
   const classes = {}
 
   return (
     <>
-      <DocumentTitle title="Characters | Lot-Casting Atemi" />
+      <DocumentTitle title="Qcs | Lot-Casting Atemi" />
 
       <SortableGridList
         header={
           <Typography variant="h5">
-            Characters &nbsp;
-            <CharacterCreatePopup />
+            Qcs &nbsp;
+            <QcCreatePopup />
           </Typography>
         }
         items={chars}
@@ -62,4 +60,4 @@ const CharacterList = () => {
   )
 }
 
-export default ProtectedComponent(CharacterList)
+export default ProtectedComponent(QcList)

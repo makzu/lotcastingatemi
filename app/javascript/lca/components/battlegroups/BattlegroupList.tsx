@@ -5,23 +5,23 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@material-ui/core'
 
-import CharacterCard from 'components/characters/CharacterCard.jsx'
-import CharacterCreatePopup from 'components/characters/characterCreatePopup.jsx'
+import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
+import BattlegroupCreatePopup from 'components/battlegroups/battlegroupCreatePopup.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
-import { getMyCharacters, updateCharacter } from 'ducks/entities'
+import { getMyBattlegroups, updateBattlegroup } from 'ducks/entities'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const CharacterList = () => {
-  const characters = useSelector((state: State) => getMyCharacters(state))
+const BattlegroupList = () => {
+  const battlegroups = useSelector((state: State) => getMyBattlegroups(state))
   const dispatch = useDispatch()
 
-  const chars = characters.map((c, i) => (
-    <SortableItem key={c.id} index={i} collection="characters">
+  const chars = battlegroups.map((c, i) => (
+    <SortableItem key={c.id} index={i} collection="battlegroups">
       <Grid item xs={12} md={6} xl={4}>
-        <CharacterCard character={c} />
+        <BattlegroupCard battlegroup={c} />
       </Grid>
     </SortableItem>
   ))
@@ -31,11 +31,11 @@ const CharacterList = () => {
       return
     }
 
-    const charA = characters[oldIndex]
-    const charB = characters[newIndex]
+    const charA = battlegroups[oldIndex]
+    const charB = battlegroups[newIndex]
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(
-      updateCharacter(charA.id, { sort_order: charB.sort_order + offset })
+      updateBattlegroup(charA.id, { sort_order: charB.sort_order + offset })
     )
   }
 
@@ -43,13 +43,13 @@ const CharacterList = () => {
 
   return (
     <>
-      <DocumentTitle title="Characters | Lot-Casting Atemi" />
+      <DocumentTitle title="Battlegroups | Lot-Casting Atemi" />
 
       <SortableGridList
         header={
           <Typography variant="h5">
-            Characters &nbsp;
-            <CharacterCreatePopup />
+            Battlegroups &nbsp;
+            <BattlegroupCreatePopup />
           </Typography>
         }
         items={chars}
@@ -62,4 +62,4 @@ const CharacterList = () => {
   )
 }
 
-export default ProtectedComponent(CharacterList)
+export default ProtectedComponent(BattlegroupList)

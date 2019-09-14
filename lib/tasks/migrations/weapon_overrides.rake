@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+namespace :lca do
+  namespace :migrate do
+    desc 'Move weapon pool data (attack attribute, etc) to new Overrides hash'
+    task weapon_overrides: :environment do
+      puts 'Migrating weapons...'
+      Weapon.find_each do |weapon|
+        weapon.overrides[:damage_attribute] = { use: weapon.damage_attr } unless weapon.damage_attr == 'strength'
+        unless weapon.attr == 'dexterity'
+          weapon.overrides[:attack_attribute] = { use: weapon.attr }
+          weapon.overrides[:attack_attribute][:base_only] = true if weapon.attr == 'strength'
+          weapon.overrides[:defense_attribute] = { use: weapon.attr }
+        end
+        weapon.save
+      end
+    end
+  end
+end

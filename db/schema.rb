@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_013733) do
+ActiveRecord::Schema.define(version: 2019_09_01_144810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,8 @@ ActiveRecord::Schema.define(version: 2019_03_12_013733) do
     t.string "tell", default: ""
     t.string "totem", default: ""
     t.json "forms", default: []
+    t.jsonb "base_pool_overrides", default: {}
+    t.jsonb "bonuses", default: []
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -452,6 +454,7 @@ ActiveRecord::Schema.define(version: 2019_03_12_013733) do
     t.integer "bonus_defense", default: 0
     t.integer "bonus_overwhelming", default: 0
     t.text "notes", default: ""
+    t.jsonb "overrides", default: {}
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 

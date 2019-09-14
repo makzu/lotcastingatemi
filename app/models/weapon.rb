@@ -20,13 +20,13 @@ class Weapon < ApplicationRecord
     self.tags = tags.reject(&:blank?).collect(&:strip).collect(&:downcase).uniq
   end
 
-  # Elemental Bolt stats are in the WFHW backer PDF, page 215
+  # Elemental Bolt stats are in WFHW, page 215
   def set_traits_for_elemental_bolt
     return unless will_save_change_to_attribute? :tags
 
     return unless tags.include?('elemental bolt') && !(tags_was.include? 'elemental bolt')
 
-    self.damage_attr = 'essence'
+    self.overrides[:damage_attribute] = 'essence'
     self.is_artifact = true
     self.weight = 'light'
     if character.abil_archery > character.abil_thrown

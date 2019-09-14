@@ -53,7 +53,7 @@ interface DispatchProps {
 interface Props extends StateProps, DispatchProps {}
 
 const NavPanelWrap = (props: Props) => {
-  const classes = useStyles()
+  const classes = useStyles({})
   const { authenticated, drawerOpen, displayName, close } = props
 
   const Panel = (

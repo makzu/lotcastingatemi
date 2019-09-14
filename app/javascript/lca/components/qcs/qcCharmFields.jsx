@@ -9,7 +9,7 @@ import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import CharmTimingSelect from 'components/generic/CharmTimingSelect'
+import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
@@ -105,7 +105,7 @@ export default class QcCharmFields extends React.Component<Props> {
           label="Text"
           margin="dense"
           onChange={handleChange}
-          fullWidth={true}
+          fullWidth
           multiline
           rowsMax={5}
         />

@@ -27,7 +27,9 @@ const SpellDisplay = ({ spell }: Props) => {
         {spell.name}
         {spell.control && ' (Control Spell)'}
       </Typography>
-      <Typography variant="caption">{spell.circle} circle</Typography>
+      <Typography variant="caption" className={classes.capitalize}>
+        {spell.circle} circle
+      </Typography>
       <div>
         <strong>Cost: </strong>
         {spell.cost}

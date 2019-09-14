@@ -1,19 +1,26 @@
 import * as React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, NavLinkProps } from 'react-router-dom'
 
 import ListItem from '@material-ui/core/ListItem'
+import { Omit } from '@material-ui/types'
+
 import { Location } from 'history'
 
-const LcaNavLink = ({ to, ...props }: any) => (
-  <NavLink exact to={to} {...props} />
-)
+const LcaNavLink = React.forwardRef<
+  HTMLAnchorElement,
+  Omit<NavLinkProps, 'innerRef'>
+>((props, ref) => <NavLink exact innerRef={ref as any} {...props} />)
 
-const NavLinkListItem = (props: {
+interface Props {
   to: string
   children: React.ReactNode
   exact?: boolean
   isActive?(_: {}, location: Location): boolean
   onClick?(): void
-}) => <ListItem button component={LcaNavLink} {...props} />
+}
+
+const NavLinkListItem = (props: Props) => (
+  <ListItem button component={LcaNavLink} {...props} />
+)
 
 export default NavLinkListItem

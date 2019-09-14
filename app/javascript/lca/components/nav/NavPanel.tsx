@@ -51,7 +51,7 @@ const NavPanel = (props: Props) => {
   }
 
   const { authenticated, displayName } = props
-  const classes = useStyles()
+  const classes = useStyles({})
 
   return (
     <ErrorBoundary>
@@ -73,7 +73,10 @@ const NavPanel = (props: Props) => {
           <>
             <CharacterNavList closeDrawer={closeCheck} />
 
+            <Divider />
             <QcNavList closeDrawer={closeCheck} />
+
+            <Divider />
 
             <BattlegroupNavList closeDrawer={closeCheck} />
 

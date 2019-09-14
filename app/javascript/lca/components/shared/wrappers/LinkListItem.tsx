@@ -1,9 +1,12 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, LinkProps } from 'react-router-dom'
 
-import ListItem from '@material-ui/core/ListItem'
+import { ListItem, Omit } from '@material-ui/core'
 
-const LcaLink = ({ to, ...props }: any) => <Link to={to} {...props} />
+const LcaLink = React.forwardRef<
+  HTMLAnchorElement,
+  Omit<LinkProps, 'innerRef'>
+>((props, ref) => <Link innerRef={ref as any} {...props} />)
 
 const LinkListItem = (props: {
   to: string

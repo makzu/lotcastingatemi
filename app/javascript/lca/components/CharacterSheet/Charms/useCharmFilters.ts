@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Ability, Attribute, Charm } from 'types'
+import { Charm } from 'types'
 import { Timing } from 'types/_lib'
 
 export interface CharmFilter {

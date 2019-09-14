@@ -1,4 +1,13 @@
-import { Battlegroup, Character, Merit, Poison, QC, Spell } from 'types'
+import {
+  Battlegroup,
+  Character,
+  Charm,
+  Merit,
+  Poison,
+  QC,
+  Spell,
+  Weapon,
+} from 'types'
 import { Player } from './player'
 
 export interface EntityState {
@@ -6,9 +15,9 @@ export interface EntityState {
   players: { [id: number]: Player }
   chronicles: { [id: number]: any }
   characters: { [id: number]: Character }
-  weapons: { [id: number]: any }
+  weapons: { [id: number]: Weapon }
   merits: { [id: number]: Merit }
-  charms: { [id: number]: any }
+  charms: { [id: number]: Charm }
   spells: { [id: number]: Spell }
   qcs: { [id: number]: QC }
   qc_merits: { [id: number]: any }

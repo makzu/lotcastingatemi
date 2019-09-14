@@ -45,9 +45,15 @@ const ExclusiveSwitch = props => (
       margin: '-0.5rem auto 0.5rem',
     }}
   >
-    Exclusive
-    <Switch name={props.name} value={props.value} onChange={props.onChange} />
-    Inclusive
+    All
+    <Switch
+      name={props.name}
+      value={props.value}
+      onChange={(e, checked) =>
+        props.onChange({ target: { name: props.name, value: checked } })
+      }
+    />
+    Any
   </div>
 )
 

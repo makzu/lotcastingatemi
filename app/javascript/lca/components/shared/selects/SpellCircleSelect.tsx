@@ -7,7 +7,7 @@ interface Props {
   spell: Spell
   handleChange: () => void
 }
-const SpellCircleSelect = ({ spell, handleChange }) => (
+const SpellCircleSelect = ({ spell, handleChange }: Props) => (
   <TextField
     select
     name="circle"

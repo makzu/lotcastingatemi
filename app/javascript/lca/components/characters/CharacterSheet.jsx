@@ -10,7 +10,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
 
-import CharacterLoadError from './CharacterLoadError.jsx'
+import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
 import AbilityBlock from './blocks/abilityBlock.jsx'
 import ArmorSummary from './blocks/armorSummary.jsx'
 import AttributeBlock from './blocks/attributeBlock.jsx'
@@ -159,7 +159,7 @@ export class CharacterSheet extends Component<Props> {
       <div>
         <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />
 
-        <Grid container spacing={24}>
+        <Grid container spacing={3}>
           <Hidden smUp>
             <Grid item xs={12}>
               <div style={{ height: '1em' }}>&nbsp;</div>
@@ -178,7 +178,7 @@ export class CharacterSheet extends Component<Props> {
           </Grid>
 
           <Grid item xs={12} sm={6} md={9}>
-            <Grid container spacing={24}>
+            <Grid container spacing={3}>
               <Grid item xs={12}>
                 <AttributeBlock character={character} pools={pools} />
               </Grid>
@@ -193,7 +193,7 @@ export class CharacterSheet extends Component<Props> {
                     variant="h6"
                     component={Link}
                     to={`/characters/${character.id}/merits`}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: 'none', color: 'unset' }}
                   >
                     Merits&nbsp;&nbsp;
                     <Launch style={{ verticalAlign: 'bottom' }} />

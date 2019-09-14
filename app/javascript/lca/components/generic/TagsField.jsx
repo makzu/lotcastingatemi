@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   field: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
 })
 

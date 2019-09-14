@@ -40,6 +40,11 @@ export type Attribute =
   | 'intelligence'
   | 'wits'
 
+export interface XpLogEntry {
+  label: string
+  points: number
+}
+
 export interface Form {
   form: string
   qc_id: number
@@ -56,9 +61,15 @@ export type ExaltType =
 
 export interface Character extends PlayerAsset, WithSharedStats {
   name: string
+  description: string
+  anima_display: string
+  lore_background: string
+  portrait_link: string
+  native_language: string
   type: ExaltType
   caste: string
-  merits: number[]
+  aspect: boolean
+  exalt_type: string
   caste_attributes: Attribute[]
   favored_attributes: Attribute[]
   caste_abilities: Ability[]

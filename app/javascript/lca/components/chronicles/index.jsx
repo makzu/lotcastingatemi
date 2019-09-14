@@ -139,7 +139,7 @@ class ChronicleDashboard extends Component<Props> {
           axis="xy"
         />
         {characterList.length == 0 && (
-          <Grid container spacing={24}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography>None yet</Typography>
             </Grid>
@@ -160,7 +160,7 @@ class ChronicleDashboard extends Component<Props> {
           axis="xy"
         />
         {qcList.length == 0 && (
-          <Grid container spacing={24}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography>None yet</Typography>
             </Grid>
@@ -181,7 +181,7 @@ class ChronicleDashboard extends Component<Props> {
           axis="xy"
         />
         {bgList.length == 0 && (
-          <Grid container spacing={24}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography>None yet</Typography>
             </Grid>

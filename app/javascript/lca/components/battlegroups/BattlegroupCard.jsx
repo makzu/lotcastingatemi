@@ -42,16 +42,19 @@ const styles = theme => ({
   },
   nameWrap: {
     flex: 1,
+    '& a': {
+      color: 'unset',
+    },
   },
   battlegroupName: {
     textDecoration: 'none',
   },
   icon: {
     verticalAlign: 'bottom',
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(),
   },
   poolBlock: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     minWidth: '4rem',
   },
 })

@@ -12,7 +12,7 @@ import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
-import CharacterLoadError from '../CharacterLoadError.jsx'
+import CharacterLoadError from '../../CharacterSheet/CharacterLoadError'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import {
@@ -36,10 +36,10 @@ type Props = {
 }
 type State = {
   filtersOpen: boolean,
-  abilityFilter: string,
-  styleFilter: string,
-  artifactFilter: string,
-  circleFilter: string,
+  abilityFilter: string | null,
+  styleFilter: string | null,
+  artifactFilter: string | null,
+  circleFilter: string | null,
   categoryFilter: Array<string>,
   openCharm: number | null,
   openSpell: number | null,
@@ -179,7 +179,7 @@ class CharmFullPage extends Component<Props, State> {
     ))
 
     return (
-      <Grid container spacing={24}>
+      <Grid container spacing={3}>
         <DocumentTitle title={`${character.name} Charms | Lot-Casting Atemi`} />
 
         <Hidden smUp>

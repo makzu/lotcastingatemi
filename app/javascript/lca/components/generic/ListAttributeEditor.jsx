@@ -34,21 +34,21 @@ const styles = theme => ({
     alignItems: 'center',
   },
   grabHandle: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   nameField: {
     flex: 1,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   withMargin: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   checkboxWrap: {
-    paddingTop: theme.spacing.unit,
+    paddingTop: theme.spacing(),
   },
   floatingLabel: {
     ...theme.typography.caption,
-    marginBottom: -theme.spacing.unit * 1.25,
+    marginBottom: theme.spacing(-1.25),
     textAlign: 'center',
   },
   countLabel: {

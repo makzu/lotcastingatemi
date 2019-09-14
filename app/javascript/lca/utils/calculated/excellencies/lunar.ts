@@ -1,12 +1,9 @@
-import { Ability, Attribute, Character, ICharm } from 'types'
+import { Ability, Attribute, Character, Charm } from 'types'
 import { ATTRIBUTES } from 'utils/constants.js'
 import { attr } from '..'
 import { highestOtherAttribute } from './custom.js'
 
-export const lunarExcellencyAbils = (
-  character: Character,
-  charms: ICharm[]
-) => {
+export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
   const charmsPerAttribute = {}
   const casteAndFav: string[] = character.caste_attributes.concat(
     character.favored_attributes

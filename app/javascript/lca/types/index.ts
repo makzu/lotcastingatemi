@@ -14,6 +14,6 @@ export interface PoolBase {
   attribute: Attribute
 }
 
-export interface IStaticRating extends IPoolBase {
+export interface StaticRating extends PoolBase {
   specialtyMatters: boolean
 }

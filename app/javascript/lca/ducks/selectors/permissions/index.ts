@@ -17,3 +17,4 @@ export const canIDelete = {
 export * from './battlegroup'
 export * from './character'
 export * from './qc'
+export { canIEditCharacter }

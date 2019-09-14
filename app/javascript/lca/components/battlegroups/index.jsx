@@ -26,13 +26,13 @@ import {
 const styles = theme => ({
   ...sharedStyles(theme),
   healthBlock: {
-    paddingTop: -theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    paddingRight: -theme.spacing.unit,
+    paddingTop: theme.spacing(-1),
+    marginRight: theme.spacing(),
+    paddingRight: theme.spacing(-1),
   },
   poolBlock: {
-    marginRight: theme.spacing.unit,
-    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
     width: '4.5rem',
     maxHeight: '5.5rem',
     overflow: 'hidden',
@@ -49,7 +49,7 @@ const styles = theme => ({
   },
   tags: {
     ...theme.typography.body1,
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     marginLeft: 0,
     textTransform: 'capitalize',
     minWidth: '5rem',

@@ -9,11 +9,11 @@ import { clamp } from 'utils/'
 
 const styles = theme => ({
   field: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     width: '4em',
   },
   narrow: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     width: '3em',
   },
 })

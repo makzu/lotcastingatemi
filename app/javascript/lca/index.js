@@ -5,6 +5,8 @@ require('typeface-roboto')
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import './i18n'
+
 import configureStore from './store.js'
 import history from './utils/history'
 import { lcaInit } from './ducks/actions.js'

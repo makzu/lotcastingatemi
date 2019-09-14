@@ -15,7 +15,7 @@ import type { withMotePool, Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   wrap: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     minWidth: '8em',
     textAlign: 'left',
   },

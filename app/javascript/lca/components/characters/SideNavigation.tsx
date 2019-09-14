@@ -1,19 +1,21 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import {
   Collapse,
   Divider,
   IconButton,
-  ListItem,
   ListItemSecondaryAction,
-  ListItemText
+  ListItemText,
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
-import NavLinkListItem from 'components/nav/NavLinkListItem'
+import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
+import { State } from 'ducks'
 import { getSpecificCharacter } from 'ducks/entities'
 import { Character } from 'types'
+import { RouteWithIdProps as RouteProps } from 'types/util'
 
 interface Props {
   character: Character
@@ -28,50 +30,57 @@ const SideNavigation = (props: Props) => {
     return null
   }
 
+  const prefix = `/characters/${id}`
+
   return (
     <>
       <Divider />
 
-      <NavLinkListItem to={`/characters/${id}`}>
+      <LinkListItem to={`${prefix}`}>
         <ListItemText primary={character.name} />
         <ListItemSecondaryAction>
           <IconButton onClick={() => setOpen(!isOpen)}>
             {isOpen ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
         </ListItemSecondaryAction>
-      </NavLinkListItem>
+      </LinkListItem>
 
       <Collapse in={isOpen}>
-        <NavLinkListItem to={`/characters/${id}`}>
-          <ListItemText inset primary="Overview" />
+        <NavLinkListItem to={`${prefix}`}>
+          <ListItemText primary="Overview" />
         </NavLinkListItem>
 
-        <NavLinkListItem to={`/characters/${id}/merits`}>
-          <ListItemText inset primary="Merits" />
+        <NavLinkListItem to={`${prefix}/merits`}>
+          <ListItemText primary="Merits" />
         </NavLinkListItem>
 
-        <NavLinkListItem to={`/characters/${id}/charms`}>
-          <ListItemText inset primary="Charms" />
+        <NavLinkListItem to={`${prefix}/charms`}>
+          <ListItemText primary="Charms" />
         </NavLinkListItem>
 
-        <NavLinkListItem to={`/characters/${id}/bio`}>
-          <ListItemText inset primary="Bio/Misc" />
+        <NavLinkListItem to={`${prefix}/charmss`}>
+          <ListItemText primary="New Charms page" />
+        </NavLinkListItem>
+
+        <NavLinkListItem to={`${prefix}/sorcery`}>
+          <ListItemText primary="Sorcery" />
+        </NavLinkListItem>
+
+        <NavLinkListItem to={`${prefix}/bio`}>
+          <ListItemText primary="Bio/Misc" />
         </NavLinkListItem>
       </Collapse>
-
-      <Divider />
     </>
   )
 }
 
-const mapStateToProps = (state, props) => {
-  const { id } = props.match.params
-  const character = getSpecificCharacter(state, id)
+const mapStateToProps = (state: State, { match }: RouteProps) => {
+  const id = parseInt(match.params.id, 10)
 
   return {
-    character,
+    character: getSpecificCharacter(state, id),
     id,
   }
 }
 
-export default connect(mapStateToProps)(SideNavigation)
+export default withRouter(connect(mapStateToProps)(SideNavigation))

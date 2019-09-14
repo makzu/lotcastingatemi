@@ -12,10 +12,10 @@ import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants.js'
 const styles = theme => ({
   root: {
     width: '8em',
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   multiple: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
 })
 

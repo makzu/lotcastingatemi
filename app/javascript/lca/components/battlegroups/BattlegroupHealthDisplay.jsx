@@ -25,11 +25,11 @@ import type { Battlegroup } from 'utils/flow-types'
 const styles = theme => ({
   ...sharedStyles(theme),
   display: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   rulesRef: {
     ...theme.typography.caption,
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(),
   },
 })
 

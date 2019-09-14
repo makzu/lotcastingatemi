@@ -36,6 +36,9 @@ const styles = theme => ({
   },
   nameWrap: {
     flex: 1,
+    '& a': {
+      color: 'unset',
+    },
   },
   hiddenLabel: {
     ...theme.typography.caption,
@@ -48,15 +51,15 @@ const styles = theme => ({
   },
   icon: {
     verticalAlign: 'bottom',
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(),
   },
   rowContainer: {
     display: 'flex',
     flexWrap: 'wrap',
   },
   poolBlock: {
-    marginRight: theme.spacing.unit,
-    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
     width: '4.5rem',
     maxHeight: '5.5rem',
     overflow: 'hidden',

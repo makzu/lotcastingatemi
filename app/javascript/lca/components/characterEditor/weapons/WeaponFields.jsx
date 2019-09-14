@@ -25,18 +25,18 @@ const styles = theme => ({
     alignItems: 'center',
   },
   grabHandle: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   nameField: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     flex: 3,
   },
   tagsField: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     flex: 5,
   },
   abilitySelect: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     width: '8em',
     textTransform: 'capitalize',
   },

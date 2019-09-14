@@ -22,7 +22,7 @@ const styles = theme => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
-    marginBottom: theme.spacing.unit,
+    marginBottom: theme.spacing(),
   },
   col: {
     flex: 1,

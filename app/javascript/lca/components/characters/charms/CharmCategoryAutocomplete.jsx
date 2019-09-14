@@ -144,7 +144,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   chip: {
-    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
+    margin: theme.spacing(0.5, 0.25),
     height: '1.75em',
     '& svg': {
       marginRight: '-1px',
@@ -159,7 +159,7 @@ const styles = theme => ({
     ),
   },
   noOptionsMessage: {
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    padding: theme.spacing(1, 2),
   },
   singleValue: {
     fontSize: 16,
@@ -170,13 +170,13 @@ const styles = theme => ({
     fontSize: 16,
   },
   paper: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(),
     position: 'absolute',
     zIndex: '10',
     width: '100%',
   },
   divider: {
-    height: theme.spacing.unit * 2,
+    height: theme.spacing(2),
   },
 })
 

@@ -14,7 +14,7 @@ import type { Enhancer } from 'utils/flow-types'
 
 const styles = theme => ({
   wrap: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
     minWidth: '5.5em',
     textAlign: 'left',
   },

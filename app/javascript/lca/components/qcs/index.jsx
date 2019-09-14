@@ -36,11 +36,11 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   moteWrap: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(),
   },
   poolBlock: {
-    marginRight: theme.spacing.unit,
-    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
     width: '4.5rem',
     maxHeight: '5.5rem',
     overflow: 'hidden',
@@ -65,7 +65,7 @@ const styles = theme => ({
   name: {
     ...theme.typography.body2,
     width: '10rem',
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     marginLeft: 0,
     maxHeight: '5rem',
     textTransform: 'capitalize',
@@ -73,7 +73,7 @@ const styles = theme => ({
   },
   tags: {
     ...theme.typography.body1,
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     marginLeft: 0,
     textTransform: 'capitalize',
     maxHeight: '5rem',

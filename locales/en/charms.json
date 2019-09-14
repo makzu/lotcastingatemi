@@ -1,0 +1,13 @@
+{
+  "cost": "Cost",
+
+  "type": "Type",
+  "simple": "Simple",
+  "supplemental": "Supplemental",
+  "reflexive": "Reflexive",
+  "supplemental/reflexive": "Supplemental or Reflexive",
+  "permanent": "Permanent",
+
+  "keywords": "Keywords",
+  "duration": "Duration"
+}

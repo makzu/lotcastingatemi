@@ -14,7 +14,7 @@ export interface Charm extends CharacterTrait {
   ref: string
   categories: string[]
   summary: string
-  ability?: Ability | Attribute
+  ability?: Ability | Attribute | 'universal' | ''
   min_ability?: number
   artifact_name?: string
   style?: string

@@ -43,13 +43,12 @@ export type fullWeapon = traitBasics & {
   is_artifact: boolean,
   tags: Array<string>,
   ability: string,
-  attr: string,
-  damage_attr: string,
   bonus_accuracy: number,
   bonus_damage: number,
   bonus_defense: number,
   bonus_overwhelming: number,
   notes: string,
+  overrides: Object,
 }
 
 export type fullMerit = {

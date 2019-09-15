@@ -31,7 +31,7 @@ export function witheringDamage(
   weapon: fullWeapon
 ): Pool {
   const damage = weaponDamageBonus(weapon) + weapon.bonus_damage
-  let _attr = weapon.damage_attr
+  let _attr = weapon.overrides?.damage_attribute?.use || 'strength'
   let attrRating = attr(character, _attr)
 
   let bonus = []

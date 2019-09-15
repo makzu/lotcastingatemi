@@ -47,7 +47,7 @@ export function parry(
   const rat = rating(
     weapon.name + ' Parry',
     character,
-    weapon.attr,
+    weapon.overrides?.defense_attribute?.use || 'dexterity',
     weapon.ability,
     penaltyObject(penalties, { useOnslaught: true }),
     excellencyAbils,

@@ -62,7 +62,7 @@ export function decisiveAttack(
     ...pool(
       weapon.name + ' Decisive Attack',
       character,
-      weapon.attr,
+      weapon.overrides?.attack_attribute?.use || 'dexterity',
       weapon.ability,
       bonus,
       penaltyObject(penalties),

@@ -140,4 +140,35 @@ module Schemas
   }.freeze
   QC_ACTION_PARAMS = %i[ action pool ].freeze
 end
+
+  WEAPON_OVERRIDES = {
+    "type": "object",
+    "properties": {
+      "attack_attribute": {
+        "type": 'object',
+        "required": %w[use],
+        "properties": {
+          "use": { "type": 'string' },
+          "base_only": { "type": 'boolean' }
+        }
+      },
+      "defense_attribute": {
+        "type": 'object',
+        "required": %w[use],
+        "properties": {
+          "use": { "type": 'string' },
+          "base_only": { "type": 'boolean' }
+        }
+      },
+      "damage_attribute": {
+        "type": 'object',
+        "required": %w[use],
+        "properties": {
+          "use": { "type": 'string' },
+          "base_only": { "type": 'boolean' }
+        }
+      },
+    }
+  }
+
 # rubocop:enable Metrics/ModuleLength, Layout/AlignHash

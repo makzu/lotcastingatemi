@@ -16,7 +16,15 @@ module Api
       end
 
       def weapon_params
-        params.require(:weapon).permit(*base_attributes, tags: []) if params[:weapon].present?
+        params.require(:weapon).permit(
+          *base_attributes,
+          tags:      [],
+          overrides: {
+            attack_attribute:  %i[use base_only],
+            defense_attribute: %i[use base_only],
+            damage_attribute:  %i[use base_only]
+          }
+        )
       end
     end
   end

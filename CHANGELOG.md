@@ -4,6 +4,7 @@
 
 - Weapons can now use a custom attribute for Defense
 - The weapon editor was rewritten from scratch and is much lighter in terms of code.
+- The Resources page now includes links to published 3e content.
 
 ## v82
 

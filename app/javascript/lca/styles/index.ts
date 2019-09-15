@@ -12,7 +12,7 @@ const commonStyles = (theme: Theme) =>
     },
     markdown: {
       '& a': {
-        color: theme.typography.body1.color,
+        color: 'unset',
       },
       '& img': {
         maxWidth: '100%',

@@ -83,7 +83,7 @@ module Api
           armor_tags:         []
         )
       end
-      #rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end

@@ -1,9 +1,7 @@
-import createCachedSelector from 're-reselect'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import { State } from 'ducks'
-import { Character } from 'types'
 import { sortOrderSort } from 'utils'
 import { callApi } from 'utils/api'
 import {
@@ -65,7 +63,7 @@ export const getMyCharactersWithoutChronicles = createSelector(
   characters => characters.filter(c => c.chronicle_id == null)
 )
 
-export const getSpecificCharacter = (state: State, id: number): Character =>
+export const getSpecificCharacter = (state: State, id: number) =>
   unwrapped(state).characters[id]
 
 export const useCharacterAttribute = (id: number, attribute: string) =>

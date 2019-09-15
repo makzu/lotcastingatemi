@@ -66,7 +66,7 @@ class TagsField extends Component<Props, State> {
         label={label}
         value={value}
         onChange={handleChange}
-        margin={this.props.margin || 'none'}
+        margin={this.props.margin || 'dense'}
         onBlur={handleBlur}
         fullWidth={fullWidth}
       />

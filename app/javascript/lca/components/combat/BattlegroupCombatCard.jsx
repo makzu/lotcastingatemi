@@ -34,6 +34,9 @@ const styles = theme => ({
   },
   nameWrap: {
     flex: 1,
+    '& a': {
+      color: 'unset',
+    },
   },
   battlegroupName: {
     textDecoration: 'none',

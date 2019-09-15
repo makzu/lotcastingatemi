@@ -16,7 +16,11 @@ type Props = ExposedProps & {
 
 function PlayerNameSubtitle({ name }: Props) {
   return (
-    <Typography variant="caption" style={{ marginTop: '-0.25rem' }}>
+    <Typography
+      variant="caption"
+      component="div"
+      style={{ marginTop: '-0.25rem' }}
+    >
       Player: {name}
     </Typography>
   )

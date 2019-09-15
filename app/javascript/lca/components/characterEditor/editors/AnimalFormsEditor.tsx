@@ -8,7 +8,7 @@ import {
   DialogActions,
   DialogContent,
   IconButton,
-  Typography
+  Typography,
 } from '@material-ui/core'
 import { Help as HelpIcon } from '@material-ui/icons'
 
@@ -17,13 +17,6 @@ import { useDialogLogic } from 'hooks'
 import { Character } from 'types'
 import AnimalFormFields from './AnimalFormFields'
 import animalFormsList from './AnimalFormsList'
-
-const LcaLink = ({ to, ...props }: any) => <Link to={to} {...props} />
-const LinkIconButton = (props: {
-  to: string
-  children: React.ReactNode
-  size: string
-}) => <IconButton component={LcaLink} {...props} />
 
 interface Props {
   character: Character
@@ -56,9 +49,9 @@ const AnimalFormsEditor = ({ character, onChange }: Props) => {
 
         <DialogActions>
           <div style={{ flex: 1 }}>
-            <LinkIconButton to={'/help/forms'} size="small">
+            <IconButton component={Link} to={'/help/forms'} size="small">
               <HelpIcon />
-            </LinkIconButton>
+            </IconButton>
           </div>
           <Button onClick={setClosed}>Done</Button>
         </DialogActions>

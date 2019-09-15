@@ -24,7 +24,7 @@ const CharacterEditorNav = ({ match }: RouteProps) => {
     return null
   }
 
-  const prefix = `/characters/${id}`
+  const prefix = `/characters/${id}/edit`
 
   return (
     <>

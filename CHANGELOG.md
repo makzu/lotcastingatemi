@@ -2,7 +2,8 @@
 
 ###### _Not yet released_
 
-- Nothing (yet)
+- Weapons can now use a custom attribute for Defense
+- The weapon editor was rewritten from scratch and is much lighter in terms of code.
 
 ## v82
 

@@ -12,7 +12,7 @@ import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import WeightSelect from 'components/generic/weightSelect.jsx'
+import WeightSelect from 'components/shared/selects/WeightSelect'
 import { isUnequalByKeys } from 'utils'
 import type { withArmorStats as Character } from 'utils/flow-types'
 

@@ -5,12 +5,10 @@ import { MenuItem, TextField } from '@material-ui/core'
 import { TextFieldProps } from '@material-ui/core/TextField'
 import { Timing } from 'types/_lib'
 
-interface Props {
+interface Props extends Pick<TextFieldProps, 'onChange' | 'fullWidth'> {
   value: Timing | Timing[]
   name: string
   SelectProps?: { multiple: true }
-  onChange: TextFieldProps['onChange']
-  fullWidth: TextFieldProps['fullWidth']
 }
 
 const CharmTimingSelect = (props: Props) => {

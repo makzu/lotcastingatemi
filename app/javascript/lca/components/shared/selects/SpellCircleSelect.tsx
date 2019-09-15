@@ -1,20 +1,21 @@
 import * as React from 'react'
 
 import { MenuItem, TextField } from '@material-ui/core'
+import { TextFieldProps } from '@material-ui/core/TextField'
+
 import { Spell } from 'types'
 
-interface Props {
+interface Props extends Pick<TextFieldProps, 'onChange' | 'margin'> {
   spell: Spell
-  handleChange: () => void
 }
-const SpellCircleSelect = ({ spell, handleChange }: Props) => (
+const SpellCircleSelect = ({ spell, onChange, margin }: Props) => (
   <TextField
     select
     name="circle"
     label="Circle"
-    margin="dense"
+    margin={margin || 'dense'}
     value={spell.circle}
-    onChange={handleChange}
+    onChange={onChange}
   >
     <MenuItem value="terrestrial">Terrestrial</MenuItem>
     <MenuItem value="celestial">Celestial</MenuItem>

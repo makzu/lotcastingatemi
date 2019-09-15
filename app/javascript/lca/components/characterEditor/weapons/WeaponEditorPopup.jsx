@@ -26,7 +26,7 @@ import WeaponPoolDisplay from 'components/characters/weapons/WeaponPoolDisplay.j
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import WeightSelect from 'components/generic/weightSelect.jsx'
+import WeightSelect from 'components/shared/selects/WeightSelect'
 import CommonStyles from 'styles'
 
 import type { Character, fullWeapon } from 'utils/flow-types'

@@ -67,7 +67,7 @@ const QcSpellFields = ({
           margin="dense"
           style={{ flex: 1 }}
         />
-        <SpellCircleSelect spell={spell} handleChange={onChange} />
+        <SpellCircleSelect spell={spell} onChange={onChange} />
       </div>
 
       <div className={classes.flexContainer}>
@@ -83,7 +83,7 @@ const QcSpellFields = ({
         <Checkbox
           name="control"
           label="Control Spell"
-          checked={spell.control}
+          value={spell.control}
           onChange={onChange}
         />
       </div>

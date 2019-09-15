@@ -33,8 +33,11 @@ Layout/AlignHash:
 Layout/IndentationWidth:
   Severity: warning
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   EnforcedStyle: consistent
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: compact
 
 # Make sure to include spaces in any percent literal expressions
 # e.g., %s{ a s d f }, not %s{a s d f}

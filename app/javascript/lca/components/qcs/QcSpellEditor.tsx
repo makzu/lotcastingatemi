@@ -8,7 +8,7 @@ import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
-import Checkbox from 'components/generic/Checkbox'
+import Checkbox from 'components/shared/inputs/Checkbox'
 import { State } from 'ducks'
 import { createSpell, destroySpell, updateSpell } from 'ducks/actions'
 import { getSpellsForQc } from 'ducks/selectors'

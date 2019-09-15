@@ -9,7 +9,7 @@ import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import Checkbox from 'components/generic/Checkbox.jsx'
+import Checkbox from 'components/shared/inputs/Checkbox'
 import TextField from 'components/generic/TextField.jsx'
 import type { QcMerit } from 'utils/flow-types'
 

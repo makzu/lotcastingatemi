@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment } from 'react'
 
-import Checkbox from 'components/generic/Checkbox.jsx'
+import Checkbox from 'components/shared/inputs/Checkbox'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,

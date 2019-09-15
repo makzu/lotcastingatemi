@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/styles'
-import Checkbox from 'components/generic/Checkbox'
+import Checkbox from 'components/shared/inputs/Checkbox'
 import ResponsiveFilterDrawer from 'components/shared/ResponsiveFilterDrawer'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import { State } from 'ducks'

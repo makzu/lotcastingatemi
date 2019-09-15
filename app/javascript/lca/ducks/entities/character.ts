@@ -1,14 +1,16 @@
 import createCachedSelector from 're-reselect'
+import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import { State } from 'ducks'
+import { Character } from 'types'
 import { sortOrderSort } from 'utils'
 import { callApi } from 'utils/api'
 import {
   createApiActions,
   createConditionalFetchAction,
   createEntityReducer,
-  mergeEntity
+  mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
@@ -63,5 +65,11 @@ export const getMyCharactersWithoutChronicles = createSelector(
   characters => characters.filter(c => c.chronicle_id == null)
 )
 
-export const getSpecificCharacter = (state: State, id: number) =>
+export const getSpecificCharacter = (state: State, id: number): Character =>
   unwrapped(state).characters[id]
+
+export const useCharacterAttribute = (id: number, attribute: string) =>
+  useSelector((state: State) => {
+    const character = getSpecificCharacter(state, id)
+    return character != null ? character[attribute] : null
+  })

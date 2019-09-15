@@ -34,5 +34,6 @@ module.name_mapper='^Docs\/\(.*\)$' -> '<PROJECT_ROOT>/docs/\1'
 module.system.node.resolve_dirname=node_modules
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowThisIsOkayISwear
+esproposal.optional_chaining=enable
 
 [strict]

@@ -28,12 +28,12 @@ import SpendableBlock from '../generic/SpendableBlock.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { getSpecificCharacter } from 'ducks/selectors'
+import { getWeaponsForCharacter } from 'ducks/entities/weapon'
 import {
   canIEditCharacter,
   getPenalties,
   getPoolsAndRatings,
   getMeritsForCharacter,
-  getWeaponsForCharacter,
 } from 'selectors'
 import type {
   Character,

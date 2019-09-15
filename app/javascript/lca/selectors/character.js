@@ -62,14 +62,6 @@ export const getEvokableMeritsForCharacter: gMFC = createSelector(
     )
 )
 
-const getWeapons = state => entities(state).weapons
-type gWFC = CachedEntitySelector<Array<fullWeapon>>
-export const getWeaponsForCharacter: gWFC = createCachedSelector(
-  [getSpecificCharacter, getWeapons],
-  (character, weapons) =>
-    character.weapons.map(w => weapons[w]).sort(sortOrderSort)
-)(characterIdMemoizer)
-
 const getSpells = state => entities(state).spells
 type gSFC = CachedEntitySelector<Array<Spell>>
 export const getSpellsForCharacter: gSFC = createCachedSelector(

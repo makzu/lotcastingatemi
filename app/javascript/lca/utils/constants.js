@@ -230,6 +230,18 @@ export const ABILITY_NAMES = [
   'war',
 ]
 
+export const ATTRIBUTE_NAMES = [
+  'strength',
+  'dexterity',
+  'stamina',
+  'charisma',
+  'manipulation',
+  'appearance',
+  'perception',
+  'intelligence',
+  'wits',
+]
+
 /* Minimum and maximum */
 export const ESSENCE_MAX = 10
 export const ESSENCE_MIN = 1

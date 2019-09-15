@@ -6,7 +6,7 @@ import {
   crudAction,
   optimisticTypes,
   reducerUpdateAction,
-  standardTypes
+  standardTypes,
 } from './_lib'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
@@ -77,9 +77,9 @@ const createTraitCreateAction = (
 ): CreateAction => (charId: number, options: CreateActionOptions = {}) => {
   const action = crudAction(entityType, 'CREATE')
   const parent = options.parent || parentType
-  let createObj = {}
+  const createObj = { [entityType]: { name: `new ${entityType}` } }
   if (options.type) {
-    createObj = { [entityType]: { type: options.type } }
+    createObj[entityType].type = options.type
   }
   const metaObj: { [x: string]: string | number } = { charId }
   if (options.parent) {

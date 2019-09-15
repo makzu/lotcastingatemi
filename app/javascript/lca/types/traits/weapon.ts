@@ -8,10 +8,22 @@ export interface Weapon extends CharacterTrait {
   is_artifact: boolean
   notes: string
   ability: Ability | string
-  attr: Attribute | 'essence'
-  damage_attr: Attribute | 'essence'
   bonus_accuracy: number
   bonus_damage: number
   bonus_defense: number
   bonus_overwhelming: number
+  overrides: WeaponOverrides
 }
+
+interface WeaponOverrides {
+  attack_attribute?: AttributeOverride
+  damage_attribute?: AttributeOverride
+  defense_attribute?: AttributeOverride
+}
+
+interface AttributeOverride {
+  use: AttributeOrEssence
+  base_only?: boolean
+}
+
+type AttributeOrEssence = Attribute | 'essence'

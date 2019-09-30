@@ -70,7 +70,7 @@ group :development, :test, :cypress do
   gem 'cypress-on-rails', '~> 1.4.0'
   gem 'database_cleaner', '~> 1.7.0'
   gem 'factory_bot_rails', '~> 5.0.1'
-  gem 'rspec-rails', '~> 3.8.2'
+  gem 'rspec-rails', '~> 4.0.0.beta2'
   gem 'rubocop', '~> 0.65', require: false
   gem 'rubocop-rails', '~> 2.3.2', require: false
   gem 'rubocop-rspec', '~> 1.30', require: false

@@ -16,6 +16,8 @@ module Api
       end
 
       def weapon_params
+        return if params[:weapon].blank?
+
         params.require(:weapon).permit(
           *base_attributes,
           tags:      [],

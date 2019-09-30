@@ -77,9 +77,9 @@ const createTraitCreateAction = (
 ): CreateAction => (charId: number, options: CreateActionOptions = {}) => {
   const action = crudAction(entityType, 'CREATE')
   const parent = options.parent || parentType
-  const createObj = { [entityType]: { name: `new ${entityType}` } }
+  let createObj = {}
   if (options.type) {
-    createObj[entityType].type = options.type
+    createObj = { [entityType]: { type: options.type } }
   }
   const metaObj: { [x: string]: string | number } = { charId }
   if (options.parent) {

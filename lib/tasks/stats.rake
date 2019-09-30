@@ -116,7 +116,7 @@ namespace :lca do
       abil_hash = {}
       Charm.find_each(batch_size: 50) do |charm|
         abil = charm.ability
-        abil_hash[abil] = (abil_hash[abil] || 0) + 1 unless charm.ability.blank?
+        abil_hash[abil] = (abil_hash[abil] || 0) + 1 if charm.ability.present?
       end
 
       puts 'ability,count'

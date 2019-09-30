@@ -5,7 +5,6 @@ namespace :lca do
     # Obsoleted columns: Weapon.attr, Weapon.damage_attr
     desc 'Move weapon pool data (attack attribute, etc) to new Overrides hash'
     task weapon_overrides: :environment do
-      puts 'Migrating weapons...'
       Weapon.find_each do |weapon|
         weapon.overrides[:damage_attribute] = { use: weapon.damage_attr } unless weapon.damage_attr == 'strength'
         unless weapon.attr == 'dexterity'

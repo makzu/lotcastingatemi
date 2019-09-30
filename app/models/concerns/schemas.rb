@@ -139,10 +139,9 @@ module Schemas
     }
   }.freeze
   QC_ACTION_PARAMS = %i[ action pool ].freeze
-end
 
   WEAPON_OVERRIDES = {
-    "type": "object",
+    "type": 'object',
     "properties": {
       "attack_attribute": {
         "type": 'object',
@@ -150,7 +149,8 @@ end
         "properties": {
           "use": { "type": 'string' },
           "base_only": { "type": 'boolean' }
-        }
+        },
+        "additionalProperties": false
       },
       "defense_attribute": {
         "type": 'object',
@@ -158,7 +158,8 @@ end
         "properties": {
           "use": { "type": 'string' },
           "base_only": { "type": 'boolean' }
-        }
+        },
+        "additionalProperties": false
       },
       "damage_attribute": {
         "type": 'object',
@@ -166,9 +167,11 @@ end
         "properties": {
           "use": { "type": 'string' },
           "base_only": { "type": 'boolean' }
-        }
+        },
+        "additionalProperties": false
       },
+      "additionalProperties": false
     }
-  }
-
+  }.freeze
+end
 # rubocop:enable Metrics/ModuleLength, Layout/AlignHash

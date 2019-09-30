@@ -12,7 +12,7 @@ RSpec.describe 'Weapons', type: :request do
   context 'when logged in' do
     describe 'updating a record' do
       it 'works for tags' do
-        params = { weapon: { tags: %w[lethal melee balanced] } }
+        params = { weapon: { tags: %w[lethal melee balanced] }}
         expect do
           patch "/api/v1/characters/#{weapon.character_id}/weapons/#{weapon.id}",
                 params:  params,

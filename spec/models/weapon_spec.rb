@@ -19,7 +19,7 @@ RSpec.describe Weapon, type: :model do
     it 'changes the damage attribute to essence when adding' do
       weapon = create(:weapon)
       weapon.update(tags: ['elemental bolt'])
-      expect(weapon.damage_attr).to eq('essence')
+      expect(weapon.overrides['damage_attribute']).to eq('use' => 'essence')
     end
 
     it 'sets the weapon as an artifact when adding' do
@@ -30,12 +30,12 @@ RSpec.describe Weapon, type: :model do
 
     it 'leaves the damage attr alone when its just there' do
       weapon = create(:weapon, tags: ['elemental bolt'])
-      weapon.update(damage_attr: 'strength')
+      weapon.update(overrides: { damage_attribute: { use: 'strength' }})
 
       weapon.update(tags: ['elemental bolt', 'fire'])
-      expect(weapon.damage_attr).to eq('strength')
+      expect(weapon.overrides['damage_attribute']).to eq('use' => 'strength')
     end
 
-    pending 'It selects the higher of Thrown or Archery for attack pools'
+    pending 'selects the higher of Thrown or Archery for attack pools'
   end
 end

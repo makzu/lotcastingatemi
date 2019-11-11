@@ -1,16 +1,18 @@
 ## v83
 
-###### _Not yet released_
+###### _Nov 11, 2019_
 
+- Revamped navigation - now character sheet sections use the main drawer for navigation instead of tabs at the top.
+- Characters, QCs, and Battlegroups now have their own independent list pages.
 - Weapons can now use a custom attribute for Defense
 - The weapon editor was rewritten from scratch and is much lighter in terms of code.
-- The Resources page now includes links to published 3e content.
+- The [Resources Page](./docs/resources.md) now includes links to published 3e content.
 
 ## v82
 
 ###### _Jul 5, 2019_
 
-- Added a few links to the [Resources Page](./resources.md)
+- Added a few links to the [Resources Page](./docs/resources.md)
 - Fix bug with Exalt type changing (Thanks Maudova)
 - Players should no longer be able to join a Chronicle multiple times and create duplicate entries in the player list (this does not get rid of existing duplicates) (Thanks everyone who reported this!)
 

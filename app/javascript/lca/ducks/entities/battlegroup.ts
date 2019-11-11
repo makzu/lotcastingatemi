@@ -3,14 +3,14 @@ import { createSelector } from 'reselect'
 import { State } from 'ducks'
 import { sortOrderSort } from 'utils'
 import { callApi } from 'utils/api'
-import { getCurrentPlayer } from '.'
 import {
   createApiActions,
   createConditionalFetchAction,
   createEntityReducer,
-  mergeEntity
+  mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
+import { getCurrentPlayer } from './player'
 
 const BATTLEGROUP = 'battlegroup'
 

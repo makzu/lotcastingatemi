@@ -30,7 +30,7 @@ const WeaponRow = (props: WeaponRowProps) => {
       <WeaponLine weapon={weapon} />
 
       <IconButton
-        onClick={() => dispatch(destroyWeapon(character.id, weapon.id))}
+        onClick={() => dispatch(destroyWeapon(weapon.id, character.id))}
       >
         <RemoveCircle />
       </IconButton>

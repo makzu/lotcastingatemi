@@ -45,7 +45,7 @@ export const PrereqSummaryLine = ({ charm, classes }: Props) => (
         ,&nbsp;
       </span>
     )}
-    Essence {charm.min_essence}
+    Essence {charm.min_essence},&nbsp;
   </Typography>
 )
 

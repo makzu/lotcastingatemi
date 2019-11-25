@@ -1,3 +1,10 @@
+## v85
+
+###### _Nov 25, 2019_
+
+- Fixed spacing between Charm Essence minimum and Charm cost (Thanks Vejuz, Jancarius, and Wolfblade)
+- Fixed weapons not being deletable (Thanks revmonty)
+
 ## v84
 
 ###### _Nov 11, 2019_

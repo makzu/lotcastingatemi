@@ -14,6 +14,12 @@ const loadingMessages = [
   'Reticulating Splines',
   'Rolling Strength+Bureaucracy',
   'Rolling Appearance+Sail',
+  'Waiting for the next splatbook Kickstarter',
+  'Cross-referencing Adversaries of the Righteous PDFs',
+  'Forgetting 2e lore',
+  'Avoiding the wyld hunt',
+  'Looking for anathema to slay',
+  'Introducing a fact',
 ]
 
 const Placeholder = () => <Typography>{sample(loadingMessages)}...</Typography>

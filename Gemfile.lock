@@ -181,7 +181,7 @@ GEM
       activesupport (>= 3.0.0)
     pundit-matchers (1.6.0)
       rspec-rails (>= 3.0.0)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-cors (1.0.5)
       rack (>= 1.6.0)
     rack-mini-profiler (1.0.2)

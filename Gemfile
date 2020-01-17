@@ -10,7 +10,7 @@ gem 'webpacker', '~> 4.0.2'
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'

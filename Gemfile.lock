@@ -151,7 +151,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-    nio4r (2.5.1)
+    nio4r (2.5.2)
     nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     oauth2 (1.4.1)
@@ -175,7 +175,7 @@ GEM
       ast (~> 2.4.0)
     pg (1.1.4)
     public_suffix (4.0.1)
-    puma (4.1.1)
+    puma (4.3.1)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -320,7 +320,7 @@ DEPENDENCIES
   memory_profiler
   omniauth-google-oauth2 (~> 0.8.0)
   pg (~> 1.1)
-  puma (~> 4.1)
+  puma (~> 4.3)
   pundit (~> 2.1.0)
   pundit-matchers (~> 1.4)
   rack-cors

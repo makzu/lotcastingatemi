@@ -62,10 +62,10 @@ const WelcomePage = () => (
         </Typography>
 
         <Typography paragraph>
-          Supports Solar and Dragon-Blooded Exalts and Mortal Characters, with
-          automatic tracking of Caste/Aspect/Favored Abilities, and
-          Excellencies. Or forge your own path with Custom Attribute, Ability,
-          or Essence Exalt types.
+          Supports Solar, Lunar, and Dragon-Blooded Exalts and Mortal
+          Characters, with automatic tracking of Caste/Aspect/Favored Abilities,
+          and Excellencies. Or forge your own path with Custom Attribute,
+          Ability, or Essence Exalt types.
         </Typography>
 
         <Typography>

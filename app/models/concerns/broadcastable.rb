@@ -20,6 +20,10 @@ module Broadcastable
       end
       changes['created_at']&.map!(&:to_s)
 
+      # Remove hidden intimacies from broadcasted changes
+      changes['principles'][1].reject! { |i| i['hidden'] } if changes['principles']
+      changes['ties'][1].reject! { |i| i['hidden'] } if changes['ties']
+
       UpdateBroadcastJob.perform_later all_ids, self, changes
     end
 

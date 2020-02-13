@@ -6,7 +6,12 @@ class UpdateBroadcastJob < ApplicationJob
 
   def perform(ids, entity, changes)
     ids.each do |id|
-      broadcast_update id, entity, changes.transform_values(&:last)
+      if [entity.player.id, entity&.storyteller&.id].include? id
+        broadcast_update id, entity, changes
+      else
+        # Remove hidden intimacies from broadcasted changes
+        broadcast_update id, entity.try(:without_secrets) || entity, changes
+      end
     end
   end
 end

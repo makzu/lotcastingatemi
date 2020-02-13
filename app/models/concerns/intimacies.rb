@@ -10,6 +10,7 @@ module Intimacies
 
     def without_secrets
       c = dup
+      c.id = id
       c.ties.reject! { |t| t['hidden'] }
       c.principles.reject! { |p| p['hidden'] }
       c

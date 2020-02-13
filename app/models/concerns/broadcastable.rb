@@ -9,20 +9,12 @@ module Broadcastable
     after_update_commit :broadcast_update
 
     def broadcast_update
-      changes = saved_changes.dup
+      changes = saved_changes.dup.transform_values(&:last)
 
       # To prevent an ActiveJob::SerializationError, the timestamps must be
       #  strings and not Time objects
-      if changes['updated_at']
-        changes['updated_at'].map!(&:to_s)
-      else
-        changes['updated_at'] = ['', updated_at.to_s]
-      end
-      changes['created_at']&.map!(&:to_s)
-
-      # Remove hidden intimacies from broadcasted changes
-      changes['principles'][1].reject! { |i| i['hidden'] } if changes['principles']
-      changes['ties'][1].reject! { |i| i['hidden'] } if changes['ties']
+      changes['updated_at'] = updated_at.to_s
+      changes['created_at'] = created_at.to_s if changes['created_at']
 
       UpdateBroadcastJob.perform_later all_ids, self, changes
     end

@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
 import AbilityBlock from './blocks/abilityBlock.jsx'
@@ -46,6 +47,13 @@ function IntimacySummary({ character, canEdit }: IntProps) {
   const principles = character.principles.map((p, index) =>
     p.hidden && !canEdit ? (
       <span key={index} />
+    ) : p.hidden ? (
+      <Typography key={index} component="div">
+        <RatingLine rating={p.rating} fillTo={3}>
+          <VisibilityOff /> {p.subject}
+        </RatingLine>
+        <Divider />
+      </Typography>
     ) : (
       <Typography key={index} component="div">
         <RatingLine rating={p.rating} fillTo={3}>
@@ -58,6 +66,13 @@ function IntimacySummary({ character, canEdit }: IntProps) {
   const ties = character.ties.map((p, index) =>
     p.hidden && !canEdit ? (
       <span key={index} />
+    ) : p.hidden ? (
+      <Typography key={index} component="div">
+        <RatingLine rating={p.rating} fillTo={3}>
+          <VisibilityOff /> {p.subject}
+        </RatingLine>
+        <Divider />
+      </Typography>
     ) : (
       <Typography key={index} component="div">
         <RatingLine rating={p.rating} fillTo={3}>

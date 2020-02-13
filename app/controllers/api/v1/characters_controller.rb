@@ -11,6 +11,16 @@ module Api
         render json: @characters
       end
 
+      def show
+        authorize @character
+
+        if policy(@character).update?
+          render json: @character
+        else
+          render json: @character.without_secrets
+        end
+      end
+
       def create
         @character = Character.new(resource_params)
         @character.player ||= current_player

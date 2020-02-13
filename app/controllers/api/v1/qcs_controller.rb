@@ -22,6 +22,16 @@ module Api
         end
       end
 
+      def show
+        authorize @qc
+
+        if policy(@qc).update?
+          render json: @qc
+        else
+          render json: @qc.without_secrets
+        end
+      end
+
       def duplicate
         authorize @qc, :show?
 

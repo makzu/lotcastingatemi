@@ -18,7 +18,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
         end.to have_enqueued_job(CreateBroadcastJob)
           .and change { trait.class.count }.by(1)
 
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
         expect(response.status).to eq 200
       end
 
@@ -39,7 +39,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
         get "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/#{trait.id}",
             headers: authenticated_header(trait.player)
 
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
         expect(response.status).to eq 200
       end
     end
@@ -51,7 +51,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
                  headers: authenticated_header(trait.player)
         end.to change { trait.class.count }.by(-1)
 
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
         expect(response.status).to eq 200
       end
     end

@@ -26,7 +26,7 @@ RSpec.describe 'Battlegroups', type: :request do
           .and(change(Battlegroup, :count).by(1))
           .and(change(QcAttack, :count).by(1))
 
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
         expect(response.status).to eq 200
       end
     end

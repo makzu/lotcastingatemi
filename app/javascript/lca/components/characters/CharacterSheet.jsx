@@ -268,7 +268,7 @@ export class CharacterSheet extends Component<Props> {
           </Grid>
 
           {showLimit && (
-            <Grid item xs={12} md={2}>
+            <Grid item xs={12} md={4}>
               <LimitTrackBlock character={character} />
             </Grid>
           )}

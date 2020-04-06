@@ -1,3 +1,9 @@
+## v86
+
+###### _Not yet released_
+
+- Fixed typo in the merit page (Thanks, Kallor!)
+
 ## v85
 
 ###### _Nov 25, 2019_

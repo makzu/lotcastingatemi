@@ -151,7 +151,7 @@ class MeritFields extends Component<FieldsProps> {
                 onChange={handleCheck}
               />
             }
-            label="Supernatual"
+            label="Supernatural"
           />
         </div>
         <MeritEffectBlurb name={merit.merit_name} rating={merit.rating} />

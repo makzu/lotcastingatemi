@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import Placeholder from 'components/generic/Placeholder.jsx'
 
-import WelcomePage from 'components/pages/welcomePage.jsx'
+import WelcomePage from 'components/pages/WelcomePage'
 import PrivacyPage from 'components/pages/PrivacyPage.jsx'
 import GoodbyePage from 'components/pages/GoodbyePage.jsx'
 import SettingsPage from 'components/pages/SettingsPage.jsx'

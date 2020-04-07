@@ -16,7 +16,9 @@ module Api
       end
 
       def qc_merit_params
-        params.require(:qc_merit).permit(*base_attributes, keywords: []) if params[:qc_merit].present?
+        if params[:qc_merit].present?
+          params.require(:qc_merit).permit(*base_attributes, keywords: [])
+        end
       end
     end
   end

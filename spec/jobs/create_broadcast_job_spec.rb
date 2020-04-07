@@ -8,6 +8,6 @@ RSpec.describe CreateBroadcastJob, type: :job do
   it 'enqueues while making a character' do
     expect do
       create(:character)
-    end.to have_enqueued_job(CreateBroadcastJob)
+    end.to have_enqueued_job(described_class)
   end
 end

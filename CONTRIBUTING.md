@@ -10,11 +10,11 @@ This is a web app written in React.js, with a backend written in Ruby on Rails. 
 
 ### How can I run it?
 
-Make sure you have Ruby *2.5.1*, along with a recent version of Postgres. You'll
+Make sure you have Ruby _2.7.1_, along with a recent version of Postgres. You'll
 also need [Yarn](https://yarnpkg.com/en/) and Node.js installed
 
-Once you have the repo cloned, run `bin/setup` and it *should* get everything
-set up for you.  Then run `bin/server` to launch webpack-dev-server and the
+Once you have the repo cloned, run `bin/setup` and it _should_ get everything
+set up for you. Then run `bin/server` to launch webpack-dev-server and the
 Rails backend, and point your browser to `localhost:5000`. Your mileage may
 vary.
 

@@ -37,7 +37,9 @@ class DragonbloodCharacter < Character
     new_cha.supernal_ability = nil
     new_cha.caste = (new_cha.caste || '').downcase
     new_cha.caste = '' unless DRAGONBLOOD_ASPECTS.include? new_cha.caste
-    new_cha.aura = 'none' unless (DRAGONBLOOD_ASPECTS + []).include? new_cha.aura
+    unless (DRAGONBLOOD_ASPECTS + []).include? new_cha.aura
+      new_cha.aura = 'none'
+    end
 
     new_cha.save!
     (new_cha.attribute_charms + new_cha.essence_charms).each do |charm|
@@ -49,7 +51,9 @@ class DragonbloodCharacter < Character
   private
 
   def set_mote_pool_totals
-    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
+    unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
+      return
+    end
 
     self.motes_personal_total     = essence + 11
     self.motes_peripheral_total   = (essence * 4) + 23
@@ -72,13 +76,17 @@ class DragonbloodCharacter < Character
   end
 
   def set_caste_abilities
-    return unless will_save_change_to_attribute?(:caste) || will_save_change_to_attribute?(:type)
+    unless will_save_change_to_attribute?(:caste) || will_save_change_to_attribute?(:type)
+      return
+    end
 
     self.caste_abilities = ASPECT_ABILITIES[caste.to_sym] || []
     self.favored_abilities = favored_abilities - (ASPECT_ABILITIES[caste.to_sym] || [])
   end
 
   def favored_ability_count
-    errors.add(:favored_abilities, 'Must have at most 5 favored abilities') unless favored_abilities.length <= 5
+    unless favored_abilities.length <= 5
+      errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
+    end
   end
 end

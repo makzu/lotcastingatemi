@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 
 # Rails 5.1+ for Webpacker
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.0.2.2'
 # Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '~> 4.0.2'
+gem 'webpacker', '~> 5.0.1'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -67,19 +67,19 @@ group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'action-cable-testing', '~> 0.6.0'
   gem 'byebug', platform: :mri
-  gem 'cypress-on-rails', '~> 1.4.0'
-  gem 'database_cleaner', '~> 1.7.0'
-  gem 'factory_bot_rails', '~> 5.0.1'
-  gem 'rspec-rails', '~> 4.0.0.beta2'
-  gem 'rubocop', '~> 0.65', require: false
-  gem 'rubocop-rails', '~> 2.3.2', require: false
+  gem 'cypress-on-rails', '~> 1.5.0'
+  gem 'database_cleaner', '~> 1.8.0'
+  gem 'factory_bot_rails', '~> 5.1.0'
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'rubocop', '~> 0.81', require: false
+  gem 'rubocop-rails', '~> 2.5.1', require: false
   gem 'rubocop-rspec', '~> 1.30', require: false
 end
 
 group :development do
   gem 'foreman'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'listen', '~> 3.1.0'
+  gem 'listen', '~> 3.2.0'
   gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rack-cors', require: 'rack/cors'
@@ -104,4 +104,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-ruby '2.6.0'
+ruby '2.7.1'

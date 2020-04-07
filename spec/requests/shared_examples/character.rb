@@ -28,7 +28,7 @@ RSpec.shared_examples 'character' do |character_type, parent|
     describe 'updating a record' do
       unless %i[battlegroup combat_actor battlegroup_combat_actor].include? character_type
         it 'succeeds for ties' do
-          params = { trait.entity_type => { ties: [{ subject: 'Vincible Sword Princess (respect)', rating: 3, hidden: false }] } }
+          params = { trait.entity_type => { ties: [{ subject: 'Vincible Sword Princess (respect)', rating: 3, hidden: false }] }}
           patch "/api/v1/#{trait.entity_type}s/#{trait.id}",
                 params:  params,
                 headers: authenticated_header(trait.player),
@@ -39,7 +39,7 @@ RSpec.shared_examples 'character' do |character_type, parent|
         end
 
         it 'succeeds for principles' do
-          params = { trait.entity_type => { principles: [{ subject: "I don't have any bugs", rating: 2 }] } }
+          params = { trait.entity_type => { principles: [{ subject: "I don't have any bugs", rating: 2 }] }}
           patch "/api/v1/#{trait.entity_type}s/#{trait.id}",
                 params:  params,
                 headers: authenticated_header(trait.player),

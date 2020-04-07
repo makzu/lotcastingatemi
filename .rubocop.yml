@@ -3,7 +3,7 @@ require:
   - rubocop-rails
 inherit_from: .rubocop_todo.yml
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
   Include:
     - app/**/*.rb
     - spec/**/*.rb
@@ -27,14 +27,17 @@ AllCops:
     - spec/spec_helper.rb
     - test/test_helper.rb
 
-Layout/AlignHash:
-  EnforcedColonStyle: table
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
 
 Layout/IndentationWidth:
   Severity: warning
 
-Layout/IndentFirstHashElement:
-  EnforcedStyle: consistent
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+
+Layout/LineLength:
+  IgnoreCopDirectives: true
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: compact
@@ -44,18 +47,22 @@ Layout/SpaceInsideHashLiteralBraces:
 Layout/SpaceInsidePercentLiteralDelimiters:
   Enabled: false
 
-Metrics/AbcSize:
-  Max: 20
+# Added by versioning
+Lint/RaiseException:
+  Enabled: true
 
-Metrics/LineLength:
-  IgnoreCopDirectives: true
+Lint/StructNewOverride:
+  Enabled: true
+
+Metrics/AbcSize:
+  Max: 25
 
 Metrics/MethodLength:
   Max: 15
 
 Naming/FileName:
   Exclude:
-    - 'Gemfile'
+    - "Gemfile"
 
 Style/Documentation:
   Exclude:
@@ -65,7 +72,16 @@ Style/Documentation:
 
 Rails/Output:
   Exclude:
-    - 'db/seeds.rb'
+    - "db/seeds.rb"
 
 RSpec/ExampleLength:
   Max: 15
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true

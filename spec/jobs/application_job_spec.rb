@@ -7,7 +7,7 @@ RSpec.describe ApplicationJob, type: :job do
 
   it 'broadcast_create works' do
     expect do
-      ApplicationJob.new.broadcast_create(character.player_id, character, {}, 'player', character.player_id)
+      described_class.new.broadcast_create(character.player_id, character, {}, 'player', character.player_id)
     end.to(have_broadcasted_to("entity-update-#{character.player_id}").with do |msg|
       expect(msg['event']).to eq 'create'
       expect(msg['type']).to eq character.entity_type
@@ -17,7 +17,7 @@ RSpec.describe ApplicationJob, type: :job do
 
   it 'broadcast_update works' do
     expect do
-      ApplicationJob.new.broadcast_update(character.player_id, character, attr_strength: 5)
+      described_class.new.broadcast_update(character.player_id, character, attr_strength: 5)
     end.to(have_broadcasted_to("entity-update-#{character.player_id}").with do |msg|
       expect(msg['event']).to eq 'update'
       expect(msg['type']).to eq character.entity_type
@@ -26,7 +26,7 @@ RSpec.describe ApplicationJob, type: :job do
 
   it 'broadcast_destroy works' do
     expect do
-      ApplicationJob.new.broadcast_destroy(character.player_id, character, 'player', character.player_id, nil)
+      described_class.new.broadcast_destroy(character.player_id, character, 'player', character.player_id, nil)
     end.to(have_broadcasted_to("entity-update-#{character.player_id}").with do |msg|
       expect(msg['event']).to eq 'destroy'
       expect(msg['type']).to eq character.entity_type

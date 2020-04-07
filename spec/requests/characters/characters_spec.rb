@@ -17,7 +17,7 @@ RSpec.describe 'Characters', type: :request do
       it 'updates attributes' do
         patch "/api/v1/characters/#{character.id}",
               headers: authenticated_header(character.player),
-              params:  { character: { attr_wits: 4 } }
+              params:  { character: { attr_wits: 4 }}
 
         expect(response.status).to eq 200
         expect(JSON.parse(response.body)['attr_wits']).to eq 4
@@ -30,7 +30,7 @@ RSpec.describe 'Characters', type: :request do
       it 'refuses negative essence' do
         patch "/api/v1/characters/#{character.id}",
               headers: authenticated_header(character.player),
-              params:  { character: { essence: -1 } }
+              params:  { character: { essence: -1 }}
 
         expect(response.status).to eq 400
         character.reload

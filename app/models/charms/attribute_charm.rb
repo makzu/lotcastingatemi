@@ -29,8 +29,6 @@ module Charms
       new_charm
     end
 
-    def ability_blank?
-      ability.blank?
-    end
+    delegate :blank?, to: :ability, prefix: true
   end
 end

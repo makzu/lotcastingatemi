@@ -7,7 +7,7 @@ FactoryBot.define do
     player
   end
 
-  factory :character_2, class: Character do
+  factory :character_2, class: 'Character' do
     name { 'Queen' }
     chronicle
     player

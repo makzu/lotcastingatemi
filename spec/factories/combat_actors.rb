@@ -13,7 +13,7 @@ FactoryBot.define do
     association :actor, factory: :qc
   end
 
-  factory :battlegroup_combat_actor, class: CombatActor do
+  factory :battlegroup_combat_actor, class: 'CombatActor' do
     initiative { 1 }
     onslaught { 1 }
     damage_bashing { 1 }

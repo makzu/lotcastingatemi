@@ -54,7 +54,9 @@ class SolarCharacter < Character
   private
 
   def set_mote_pool_totals
-    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
+    unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
+      return
+    end
 
     self.motes_personal_total     = (essence * 3) + 10
     self.motes_peripheral_total   = (essence * 7) + 26
@@ -88,11 +90,12 @@ class SolarCharacter < Character
   def set_caste_abilities_on_caste_change
     return unless will_save_change_to_attribute? :caste
 
-    self.supernal_ability = nil unless allowed_caste_abilities.include? supernal_ability
+    unless allowed_caste_abilities.include? supernal_ability
+      self.supernal_ability = nil
+    end
     self.caste_abilities = caste_abilities.select { |a| allowed_caste_abilities.include? a }
   end
 
-  # rubocop:disable Style/IfUnlessModifier
   def caste_abilities_are_valid
     caste_abilities.each do |a|
       unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
@@ -119,7 +122,6 @@ class SolarCharacter < Character
       errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
     end
   end
-  # rubocop:enable Style/IfUnlessModifier
 
   def allowed_caste_abilities
     caste.blank? ? [] : CASTE_ABILITIES[caste.to_sym]

@@ -10,7 +10,7 @@ RSpec.describe CustomEssenceCharacter, type: :model do
     ].each do |char|
       it "works for #{char}" do
         g = create(char)
-        m = CustomEssenceCharacter.from_character!(g)
+        m = described_class.from_character!(g)
         expect(m).to be_valid
       end
     end

@@ -16,7 +16,7 @@ RSpec.describe 'Chronciles', type: :request do
       it 'works' do
         patch "/api/v1/chronicles/#{chronicle.id}",
               headers: authenticated_header(chronicle.st),
-              params:  { chronicle: { name: 'Mystic Quest' } }
+              params:  { chronicle: { name: 'Mystic Quest' }}
 
         expect(response.status).to eq 200
         expect(JSON.parse(response.body)['name']).to eq 'Mystic Quest'
@@ -67,7 +67,7 @@ RSpec.describe 'Chronciles', type: :request do
         it 'works' do
           post "/api/v1/chronicles/#{chronicle.id}/remove_#{char}/#{character.id}",
                headers: authenticated_header(not_the_st),
-               params:  { char.to_s => { chronicle_id: nil } }
+               params:  { char.to_s => { chronicle_id: nil }}
 
           expect(response.status).to eq 200
           chronicle.reload
@@ -79,8 +79,8 @@ RSpec.describe 'Chronciles', type: :request do
     describe 'attempting to join again' do
       it 'does not create a duplicate entry' do
         post '/api/v1/chronicles/join',
-            headers: authenticated_header(not_the_st),
-            params:  { invite_code: chronicle.invite_code }
+             headers: authenticated_header(not_the_st),
+             params:  { invite_code: chronicle.invite_code }
 
         expect(ChroniclePlayer.count).to eq 1
       end

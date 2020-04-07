@@ -2,6 +2,7 @@
 
 ###### _Not yet released_
 
+- Hidden intimacies now show an icon to indicate they're hidden (Thanks for the PR, tyler569!)
 - Fixed typo in the merit page (Thanks, Kallor!)
 
 ## v85

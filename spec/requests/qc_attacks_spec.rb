@@ -12,7 +12,7 @@ RSpec.describe 'QcAttacks', type: :request do
   context 'when logged in' do
     describe 'updating a record' do
       it 'works for tags' do
-        params = { qc_attack: { tags: %w[lethal melee balanced] } }
+        params = { qc_attack: { tags: %w[lethal melee balanced] }}
         expect do
           patch "/api/v1/qcs/#{attack.qc_attackable_id}/qc_attacks/#{attack.id}",
                 params:  params,

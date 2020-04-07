@@ -134,9 +134,9 @@ class Character < ApplicationRecord
   end
 
   def without_secrets
-    c = self.dup
-    c.ties.reject!{|t| t["hidden"]}
-    c.principles.reject!{|p| p["hidden"]}
+    c = dup
+    c.ties.reject! { |t| t['hidden'] }
+    c.principles.reject! { |p| p['hidden'] }
     c
   end
 end

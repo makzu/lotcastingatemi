@@ -8,7 +8,7 @@ RSpec.shared_examples 'charm' do |trait_type, parent_type|
   context 'when logged in' do
     describe 'updating a record' do
       it 'works for keywords' do
-        params = { charm.entity_type => { keywords: %w[decisive-only] } }
+        params = { charm.entity_type => { keywords: %w[decisive-only] }}
 
         expect do
           patch "/api/v1/#{parent_type}/#{charm.character.id}/#{charm.entity_type}s/#{charm.id}",
@@ -21,7 +21,7 @@ RSpec.shared_examples 'charm' do |trait_type, parent_type|
       end
 
       it 'works for categories' do
-        params = { charm.entity_type => { categories: %w[attack supercool] } }
+        params = { charm.entity_type => { categories: %w[attack supercool] }}
         patch "/api/v1/#{parent_type}/#{charm.character_id}/#{charm.entity_type}s/#{charm.id}",
               params:  params,
               headers: authenticated_header(charm.player)

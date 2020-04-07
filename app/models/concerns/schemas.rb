@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ModuleLength, Layout/AlignHash
+# rubocop:disable Metrics/ModuleLength
 # Validation schemas for the various json columns on characters and QCs.
 module Schemas
   CRAFT = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[ craft rating ],
-      "properties": {
-        "craft": { "type": 'string' },
+      "type":                 'object',
+      "required":             %w[ craft rating ],
+      "properties":           {
+        "craft":  { "type": 'string' },
         "rating": { "type": 'integer', "minimum": 0, "maximum": 5 }
       },
       "additionalProperties": false
@@ -18,12 +18,12 @@ module Schemas
   CRAFT_PARAMS = %i[ craft rating ].freeze
 
   MARTIAL_ARTS = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[ style rating ],
-      "properties": {
-        "style": { "type": 'string' },
+      "type":                 'object',
+      "required":             %w[ style rating ],
+      "properties":           {
+        "style":  { "type": 'string' },
         "rating": { "type": 'integer', "minimum": 0, "maximum": 5 }
       },
       "additionalProperties": false
@@ -32,14 +32,14 @@ module Schemas
   MARTIAL_ARTS_PARAMS = %i[ style rating ].freeze
 
   INTIMACY = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[subject rating],
-      "properties": {
+      "type":                 'object',
+      "required":             %w[subject rating],
+      "properties":           {
         "subject": { "type": 'string' },
-        "rating": { "type": 'integer', "minimum": 0, "maximum": 3 },
-        "hidden": { "type": 'boolean' }
+        "rating":  { "type": 'integer', "minimum": 0, "maximum": 3 },
+        "hidden":  { "type": 'boolean' }
       },
       "additionalProperties": false
     }
@@ -47,14 +47,14 @@ module Schemas
   INTIMACY_PARAMS = %i[ subject rating hidden ].freeze
 
   MOTE_COMMITTMENT = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[pool label motes],
-      "properties": {
-        "pool": { "type": 'string', "enum": %w[personal peripheral] },
-        "label": { "type": 'string' },
-        "motes": { "type": 'integer', "minimum": 0 },
+      "type":                 'object',
+      "required":             %w[pool label motes],
+      "properties":           {
+        "pool":      { "type": 'string', "enum": %w[personal peripheral] },
+        "label":     { "type": 'string' },
+        "motes":     { "type": 'integer', "minimum": 0 },
         "scenelong": { "type": 'boolean' }
       },
       "additionalProperties": false
@@ -63,13 +63,13 @@ module Schemas
   MOTE_COMMITTMENT_PARAMS = %i[ pool label motes scenelong ].freeze
 
   RESOURCE = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[resource value],
-      "properties": {
+      "type":                 'object',
+      "required":             %w[resource value],
+      "properties":           {
         "resource": { "type": 'string' },
-        "value": { "type": 'integer', "minimum": 0 }
+        "value":    { "type": 'integer', "minimum": 0 }
       },
       "additionalProperties": false
     }
@@ -77,11 +77,11 @@ module Schemas
   RESOURCE_PARAMS = %i[ resource value ].freeze
 
   SPECIALTY = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[ ability context ],
-      "properties": {
+      "type":                 'object',
+      "required":             %w[ ability context ],
+      "properties":           {
         "ability": {
           "type": 'string',
           # rubocop:disable Lint/LiteralInInterpolation
@@ -101,12 +101,12 @@ module Schemas
   SPECIALTY_PARAMS = %i[ ability context ].freeze
 
   FORM = {
-    type: 'array',
+    type:  'array',
     items: {
-      "type": 'object',
-      "required": %w[form],
+      "type":       'object',
+      "required":   %w[form],
       "properties": {
-        "form": { "type": 'string' },
+        "form":  { "type": 'string' },
         "qc_id": { "type": 'integer' }
       }
     }
@@ -114,12 +114,12 @@ module Schemas
   FORM_PARAMS = %i[ form qc_id ].freeze
 
   XP_LOG = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[label points],
+      "type":       'object',
+      "required":   %w[label points],
       "properties": {
-        "label": { "type": 'string' },
+        "label":  { "type": 'string' },
         "points": { "type": 'integer' }
       }
     }
@@ -127,11 +127,11 @@ module Schemas
   XP_LOG_PARAMS = %i[ label points ].freeze
 
   QC_ACTION = {
-    "type": 'array',
+    "type":  'array',
     "items": {
-      "type": 'object',
-      "required": %w[action pool],
-      "properties": {
+      "type":                 'object',
+      "required":             %w[action pool],
+      "properties":           {
         "action": { "type": 'string' },
         "pool":   { "type": 'integer', "minimum": 0 }
       },
@@ -141,31 +141,31 @@ module Schemas
   QC_ACTION_PARAMS = %i[ action pool ].freeze
 
   WEAPON_OVERRIDES = {
-    "type": 'object',
+    "type":       'object',
     "properties": {
-      "attack_attribute": {
-        "type": 'object',
-        "required": %w[use],
-        "properties": {
-          "use": { "type": 'string' },
+      "attack_attribute":     {
+        "type":                 'object',
+        "required":             %w[use],
+        "properties":           {
+          "use":       { "type": 'string' },
           "base_only": { "type": 'boolean' }
         },
         "additionalProperties": false
       },
-      "defense_attribute": {
-        "type": 'object',
-        "required": %w[use],
-        "properties": {
-          "use": { "type": 'string' },
+      "defense_attribute":    {
+        "type":                 'object',
+        "required":             %w[use],
+        "properties":           {
+          "use":       { "type": 'string' },
           "base_only": { "type": 'boolean' }
         },
         "additionalProperties": false
       },
-      "damage_attribute": {
-        "type": 'object',
-        "required": %w[use],
-        "properties": {
-          "use": { "type": 'string' },
+      "damage_attribute":     {
+        "type":                 'object',
+        "required":             %w[use],
+        "properties":           {
+          "use":       { "type": 'string' },
           "base_only": { "type": 'boolean' }
         },
         "additionalProperties": false
@@ -174,4 +174,4 @@ module Schemas
     }
   }.freeze
 end
-# rubocop:enable Metrics/ModuleLength, Layout/AlignHash
+# rubocop:enable Metrics/ModuleLength

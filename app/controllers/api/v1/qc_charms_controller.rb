@@ -16,7 +16,9 @@ module Api
       end
 
       def qc_charm_params
-        params.require(:qc_charm).permit(*base_attributes, keywords: []) if params[:qc_charm].present?
+        if params[:qc_charm].present?
+          params.require(:qc_charm).permit(*base_attributes, keywords: [])
+        end
       end
     end
   end

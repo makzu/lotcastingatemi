@@ -25,9 +25,11 @@ class Weapon < ApplicationRecord
   def set_traits_for_elemental_bolt
     return unless will_save_change_to_attribute? :tags
 
-    return unless tags.include?('elemental bolt') && !(tags_was.include? 'elemental bolt')
+    unless tags.include?('elemental bolt') && !(tags_was.include? 'elemental bolt')
+      return
+    end
 
-    self.overrides[:damage_attribute] = { use: 'essence' }
+    overrides[:damage_attribute] = { use: 'essence' }
     self.is_artifact = true
     self.weight = 'light'
     if character.abil_archery > character.abil_thrown

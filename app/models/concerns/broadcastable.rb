@@ -33,7 +33,7 @@ module Broadcastable
 
     private
 
-    def all_ids # rubocop:disable Metrics/AbcSize
+    def all_ids
       return [player.id] if chronicle.blank?
       return ([player.id] + [chronicle.st_id]).uniq if hidden
 
@@ -41,13 +41,17 @@ module Broadcastable
     end
 
     def parent
-      return player if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
+      if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
+        return player
+      end
 
       character
     end
 
     def chron_id
-      return chronicle_id if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
+      if is_a?(Character) || is_a?(Qc) || is_a?(Battlegroup) || is_a?(CombatActor)
+        return chronicle_id
+      end
 
       nil
     end

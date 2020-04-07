@@ -35,7 +35,7 @@ class Battlegroup < ApplicationRecord
   # Creates a battlegroup with the stats of a particular QC and all of its
   # attacks.
   # Does not save the record to the database.
-  def self.new_from_qc(qc) # rubocop:disable Naming/UncommunicativeMethodParamName
+  def self.new_from_qc(qc)
     qc_copy = qc.deep_clone include: :qc_attacks
 
     battlegroup = Battlegroup.new qc_copy.slice %i[

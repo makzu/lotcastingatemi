@@ -30,13 +30,17 @@ module AttributeExalt
 
     def caste_attributes_are_valid
       caste_attributes.each do |a|
-        errors.add(:caste_attributes, "#{a} is not a valid attribute") unless Constants::ATTRIBUTES.include? a
+        unless Constants::ATTRIBUTES.include? a
+          errors.add(:caste_attributes, "#{a} is not a valid attribute")
+        end
       end
     end
 
     def favored_attributes_are_valid
       favored_attributes.each do |a|
-        errors.add(:favored_attributes, "#{a} is not a valid attribute") unless Constants::ATTRIBUTES.include? a
+        unless Constants::ATTRIBUTES.include? a
+          errors.add(:favored_attributes, "#{a} is not a valid attribute")
+        end
       end
     end
 

@@ -22,11 +22,12 @@ module Exalt
 
       attr_abil = Constants::ATTRIBUTES + Constants::ABILITIES + %w[* dragonblood solar lunar]
       excellencies_for.each do |e|
-        errors.add(:excellencies_for, "#{e} is not a valid excellency target") unless attr_abil.include? e
+        unless attr_abil.include? e
+          errors.add(:excellencies_for, "#{e} is not a valid excellency target")
+        end
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def trim_array_attributes
       return unless will_save_change_to_attribute?(:excellencies_for) ||
                     will_save_change_to_attribute?(:caste_abilities) ||
@@ -40,7 +41,6 @@ module Exalt
       self.caste_attributes = caste_attributes.reject(&:blank?).collect(&:strip)
       self.favored_attributes = favored_attributes.reject(&:blank?).collect(&:strip)
     end
-    # rubocop:enable Metrics/AbcSize
 
     def caste_is_blank?
       caste.blank?

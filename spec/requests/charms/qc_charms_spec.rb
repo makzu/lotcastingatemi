@@ -12,7 +12,7 @@ RSpec.describe 'Charms::QcCharms', type: :request do
   context 'when logged in' do
     describe 'updating a record' do
       it 'works for keywords' do
-        params = { qc_charm: { keywords: %w[simple perilous] } }
+        params = { qc_charm: { keywords: %w[simple perilous] }}
         expect do
           patch "/api/v1/qcs/#{charm.qc_id}/qc_charms/#{charm.id}",
                 params:  params,

@@ -4,12 +4,10 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
 import AbilityBlock from './blocks/abilityBlock.jsx'
@@ -18,6 +16,7 @@ import AttributeBlock from './blocks/attributeBlock.jsx'
 import BasicsBlock from './blocks/BasicsBlock.jsx'
 import CharmSummaryBlock from './blocks/charmSummaryBlock.jsx'
 import CombatBlock from './blocks/combatBlock.jsx'
+import IntimacySummary from './blocks/IntimacySummaryBlock'
 import MeritSummaryBlock from './blocks/meritSummaryBlock.jsx'
 import SocialBlock from './blocks/socialBlock.jsx'
 import SpecialtyBlock from './blocks/specialtyBlock.jsx'
@@ -41,62 +40,6 @@ import type {
   fullMerit as Merit,
   fullWeapon as Weapon,
 } from 'utils/flow-types'
-
-type IntProps = { character: Character, canEdit: boolean }
-function IntimacySummary({ character, canEdit }: IntProps) {
-  const principles = character.principles.map((p, index) =>
-    p.hidden && !canEdit ? (
-      <span key={index} />
-    ) : p.hidden ? (
-      <Typography key={index} component="div">
-        <RatingLine rating={p.rating} fillTo={3}>
-          <VisibilityOff /> {p.subject}
-        </RatingLine>
-        <Divider />
-      </Typography>
-    ) : (
-      <Typography key={index} component="div">
-        <RatingLine rating={p.rating} fillTo={3}>
-          {p.subject}
-        </RatingLine>
-        <Divider />
-      </Typography>
-    )
-  )
-  const ties = character.ties.map((p, index) =>
-    p.hidden && !canEdit ? (
-      <span key={index} />
-    ) : p.hidden ? (
-      <Typography key={index} component="div">
-        <RatingLine rating={p.rating} fillTo={3}>
-          <VisibilityOff /> {p.subject}
-        </RatingLine>
-        <Divider />
-      </Typography>
-    ) : (
-      <Typography key={index} component="div">
-        <RatingLine rating={p.rating} fillTo={3}>
-          {p.subject}
-        </RatingLine>
-        <Divider />
-      </Typography>
-    )
-  )
-
-  return (
-    <BlockPaper>
-      <Typography variant="h6">Intimacies</Typography>
-
-      <Typography variant="subtitle1">Principles</Typography>
-      {principles}
-
-      <Typography variant="subtitle1" style={{ marginTop: '0.5em' }}>
-        Ties
-      </Typography>
-      {ties}
-    </BlockPaper>
-  )
-}
 
 export function ResourceBlock({ character }: { character: Character }) {
   const re = character.resources || []

@@ -8,5 +8,7 @@
 # to asset_path in the _favicon.html.erb partial.
 
 Rails.application.config.assets.configure do |env|
+  # Tweaks here from https://github.com/RealFaviconGenerator/rails_real_favicon/issues/35
   env.register_mime_type('application/manifest+json', extensions: ['.webmanifest', '.webmanifest.erb'])
+  env.register_preprocessor('application/manifest+json', Sprockets::ERBProcessor)
 end

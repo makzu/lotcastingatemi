@@ -155,7 +155,7 @@
     "setupTestFrameworkScriptFile": "mock-local-storage"
   },
   "engines": {
-    "node": "^10.x",
-    "yarn": "^1.17.x"
+    "node": "^13.x",
+    "yarn": "^1.22.x"
   }
 }

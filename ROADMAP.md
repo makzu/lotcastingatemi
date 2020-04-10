@@ -1,4 +1,16 @@
-# Planned features
+# Current development priorities
+
+The current priority is to add a system for auto-completing Charms and Merits on a character page, to help speed up character creation.  To do this "right," however, it needs some groundwork done first:
+
+1. Update bonus/penalty system to incorporate the kinds of bonuses custom Charms can add (including Charms like Increasing Strength Exercise, Deadly Beastman Transformation, etc)
+2. Add page for custom bonuses/penalties, flexible enough to handle these kinds of bonuses
+3. Rewrite the calculation of default pools (Join Battle, Rush, etc) to support these penalties and bonuses, and to support Lunar Attribute-changing Charms
+4. Add DB of canon Charms and merits with these bonuses 'baked in'
+5. Rewrite Charm editor to enable linking new or existing Charms to this DB
+6. Reformat pool display widgets with a better summary of active bonuses/penalties
+
+
+# Other planned features
 
 #### Character Sheet
 

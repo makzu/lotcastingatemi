@@ -15,7 +15,7 @@ const dot = {
   marginLeft: '1px',
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   emptyDot: {
     ...dot,
     backgroundColor: theme.palette.background.paper,
@@ -52,7 +52,7 @@ function RatingDots(props: Props) {
     ))
   }
   return (
-    <div>
+    <div aria-label={props.rating}>
       {fullDots}
       {emptyDots}
       {!props.dontFill && props.fillTo && props.rating > props.fillTo && (

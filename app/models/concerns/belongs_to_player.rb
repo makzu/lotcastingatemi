@@ -8,7 +8,7 @@ module BelongsToPlayer
 
     # TODO: validate that if a character is in a chronicle, the player must be too
     belongs_to :chronicle, optional: true
-    delegate :storyteller, to: :chronicle
+    delegate :storyteller, to: :chronicle, allow_nil: true
   end
 
   # avoid needing BattlegroupPolicy and QcPolicy

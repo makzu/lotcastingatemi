@@ -3,6 +3,7 @@
 ###### _Not yet released_
 
 - Hidden intimacies now show an icon to indicate they're hidden (Thanks for the PR, tyler569!)
+- Made dot ratings slightly more accessible for screen reader users
 - Fixed typo in the merit page (Thanks, Kallor!)
 
 ## v85

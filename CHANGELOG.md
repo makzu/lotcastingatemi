@@ -4,6 +4,7 @@
 
 - Hidden intimacies now show an icon to indicate they're hidden (Thanks for the PR, tyler569!)
 - Made dot ratings slightly more accessible for screen reader users
+- Bonus hardness from armor is now shown even if the character does not have artifact armor
 - Fixed typo in the merit page (Thanks, Kallor!)
 
 ## v85

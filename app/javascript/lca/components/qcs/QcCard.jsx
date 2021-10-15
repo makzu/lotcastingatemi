@@ -109,6 +109,8 @@ function QcCard(props: Props) {
               </div>
             )}
           </Typography>
+          
+          {qc.description && <Typography variant="caption" component="div">{qc.description}</Typography>}
 
           {chronicle && <PlayerNameSubtitle playerId={qc.player_id} />}
         </div>

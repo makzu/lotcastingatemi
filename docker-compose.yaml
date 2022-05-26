@@ -33,7 +33,6 @@ services:
     build: .
     volumes:
       - .:/myapp
-      - /myapp/node_modules
     command: ./bin/webpack-dev-server --hot
     ports:
       - 3035:3035

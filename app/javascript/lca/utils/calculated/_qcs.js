@@ -57,9 +57,14 @@ function qcExcellencyRatingCap(qc, rating, stunt = false) {
       return 0
   }
 
-  if (rating <= 2) return caps[0]
-  else if (rating <= 6) return caps[1]
-  else if (rating <= 10) return caps[2]
+  // if (rating <= 2) return caps[0]
+  // else if (rating <= 6) return caps[1]
+  // else if (rating <= 10) return caps[2]
+  // else return caps[3]
+
+  if (rating <= 1) return caps[0]
+  else if (rating <= 3) return caps[1]
+  else if (rating <= 5) return caps[2]
   else return caps[3]
 }
 

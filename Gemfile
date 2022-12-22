@@ -41,7 +41,9 @@ gem 'bootsnap', '~> 1.4.0', require: false
 gem 'knock', '~> 2.2.0', git: 'https://github.com/makzu/knock'
 gem 'pundit', '~> 2.1.0'
 
-gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'omniauth', '~> 2.1.0'
+gem 'omniauth-google-oauth2', '~> 1.1.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator'

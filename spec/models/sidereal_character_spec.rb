@@ -2,23 +2,23 @@
 
 require 'rails_helper'
 
-RSpec.describe LunarCharacter, type: :model do
-  let(:character) { create(:lunar_character) }
+RSpec.describe SiderealCharacter, type: :model do
+  let(:character) { create(:sidereal_character) }
 
   describe 'mote pool' do
     it 'starts with the right number of motes' do
-      expect(character.motes_personal_total).to eq 16
-      expect(character.motes_peripheral_total).to eq 38
+      expect(character.motes_personal_total).to eq 11
+      expect(character.motes_peripheral_total).to eq 31
     end
 
     it 'updates as essence changes' do
       character.update(essence: 5)
-      expect(character.motes_personal_total).to eq 20
-      expect(character.motes_peripheral_total).to eq 54
+      expect(character.motes_personal_total).to eq 19
+      expect(character.motes_peripheral_total).to eq 55
 
       character.update(essence: 10)
-      expect(character.motes_personal_total).to eq 25
-      expect(character.motes_peripheral_total).to eq 74
+      expect(character.motes_personal_total).to eq 29
+      expect(character.motes_peripheral_total).to eq 85
     end
   end
 
@@ -37,7 +37,7 @@ RSpec.describe LunarCharacter, type: :model do
 
   describe 'converting types' do
     %i[
-      character solar_character dragonblood_character sidereal_character
+      character solar_character dragonblood_character lunar_character
       custom_ability_character custom_attribute_character custom_essence_character
     ].each do |char|
       it "works for #{char}" do

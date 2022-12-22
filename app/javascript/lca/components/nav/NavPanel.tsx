@@ -3,6 +3,7 @@ import * as React from 'react'
 import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
 
 import {
+  ButtonProps,
   Divider,
   List,
   ListItem,
@@ -33,8 +34,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
+const CsrfInput = () => {
+  const csrfToken = document.getElementsByTagName("meta")["csrf-token"].content
+  return <input type="hidden" name="authenticity_token" value={csrfToken} />
+}
+
+const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
+
+const LoginForm = ({ text, action }) => {
+  return (
+    <form action={action} method="POST">
+      <CsrfInput />
+      <ListItem button component={SubmitButton}>
+        <ListItemText primary={text} />
+      </ListItem>
+    </form>
+  )
+}
+
 const isOnHelpPage = (_: {}, location: Location) =>
   location.pathname.startsWith('/help')
+
+const isDeveloperMode = () => location.hostname === "localhost"
 
 interface Props {
   authenticated: boolean
@@ -69,7 +90,7 @@ const NavPanel = (props: Props) => {
 
         <Divider />
 
-        {authenticated ? (
+        {authenticated && (
           <>
             <CharacterNavList closeDrawer={closeCheck} />
 
@@ -84,17 +105,15 @@ const NavPanel = (props: Props) => {
 
             <ChronicleNavList closeDrawer={closeCheck} />
           </>
-        ) : (
+        )}
+        {(!authenticated && isDeveloperMode) && (
           <>
-            <ListItem button component="a" href="/auth/google_oauth2">
-              <ListItemText primary="Log in with Google" />
-            </ListItem>
-
-            {window.location.hostname === 'localhost' && (
-              <ListItem button component="a" href="/auth/developer">
-                <ListItemText primary="Log in (Developer)" />
-              </ListItem>
-            )}
+            <LoginForm action="/auth/developer" text="Log in (Developer)" />
+          </>
+        )}
+        {(!authenticated && !isDeveloperMode) && (
+          <>
+            <LoginForm action="/auth/google_oauth2" text="Log in with Google" />
           </>
         )}
 

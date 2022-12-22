@@ -7,11 +7,12 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:flowtype/recommended',
-    'plugin:prettier/recommended',
+    'prettier',
   ],
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 6,
     ecmaFeatures: {
@@ -20,14 +21,15 @@ module.exports = {
     },
     sourceType: 'module',
   },
-  plugins: ['cypress', 'react', 'flowtype', 'prettier'],
+  plugins: ['cypress', 'react', 'flowtype', 'prettier', '@typescript-eslint'],
+  root: true,
   rules: {
     'prettier/prettier': [
       'warn',
       {
         semi: false,
         singleQuote: true,
-        trailingComma: 'es5',
+        trailingComma: 'all',
       },
     ],
     indent: [
@@ -45,5 +47,10 @@ module.exports = {
     'jsx-quotes': ['warn', 'prefer-double'],
     semi: ['error', 'never'],
     'react/jsx-boolean-value': ['warn', 'never'],
+  },
+  settings: {
+    flowtype: {
+      onlyFilesWithFlowAnnotation: true,
+    },
   },
 }

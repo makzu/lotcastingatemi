@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   env: {
     browser: true,
@@ -21,17 +22,9 @@ module.exports = {
     },
     sourceType: 'module',
   },
-  plugins: ['cypress', 'react', 'flowtype', 'prettier', '@typescript-eslint'],
+  plugins: ['cypress', 'react', 'flowtype', '@typescript-eslint'],
   root: true,
   rules: {
-    'prettier/prettier': [
-      'warn',
-      {
-        semi: false,
-        singleQuote: true,
-        trailingComma: 'all',
-      },
-    ],
     indent: [
       'error',
       2,
@@ -46,6 +39,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'jsx-quotes': ['warn', 'prefer-double'],
     semi: ['error', 'never'],
+    'flowtype/no-types-missing-file-annotation': 0,
     'react/jsx-boolean-value': ['warn', 'never'],
   },
   settings: {

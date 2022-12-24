@@ -12,7 +12,7 @@ import { LUNAR_CASTE_ATTRIBUTES } from 'utils/constants.js'
 
 interface Props {
   character: Character
-  onChange(): void
+  onChange(): React.ChangeEventHandler
 }
 
 const LunarExaltEditor = ({ character, onChange }: Props) => {

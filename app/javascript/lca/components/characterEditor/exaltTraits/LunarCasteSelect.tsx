@@ -2,24 +2,16 @@ import * as React from 'react'
 
 import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 
-interface Props {
-  value: string
-  onChange: () => void
-  [x: string]: any
-}
-
-const LunarCasteSelect = ({ onChange, value, ...otherProps }: Props) => (
+const LunarCasteSelect = (props: TextFieldProps) => (
   <TextField
-    select={true}
-    {...otherProps}
+    select
+    {...props}
     data-cy="select-db-aspect"
     label="Caste"
     margin="dense"
     name="caste"
-    onChange={onChange}
-    value={value}
   >
     <ListSubheader key="none">Select a Caste</ListSubheader>
     <MenuItem value="full moon">Full Moon</MenuItem>

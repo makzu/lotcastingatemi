@@ -35,7 +35,7 @@ const CharacterList = () => {
     const charB = characters[newIndex]
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(
-      updateCharacter(charA.id, { sort_order: charB.sort_order + offset })
+      updateCharacter(charA.id, { sort_order: charB.sort_order + offset }),
     )
   }
 

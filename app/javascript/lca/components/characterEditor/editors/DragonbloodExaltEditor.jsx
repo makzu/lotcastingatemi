@@ -3,7 +3,7 @@ import React from 'react'
 
 import Typography from '@material-ui/core/Typography'
 
-import DbAspectSelect from '../exaltTraits/DbAspectSelect.jsx'
+import DbAspectSelect from '../exaltTraits/DbAspectSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 

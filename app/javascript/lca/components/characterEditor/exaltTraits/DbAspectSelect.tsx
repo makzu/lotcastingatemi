@@ -13,7 +13,7 @@ const DbAspectSelect = (props: TextFieldProps) => (
     margin="dense"
     data-cy="select-db-aspect"
   >
-    <ListSubheader key="none"> Select an Aspect </ListSubheader>
+    <ListSubheader key="none">Select an Aspect</ListSubheader>
     <MenuItem value="air">Air</MenuItem>
     <MenuItem value="earth">Earth</MenuItem>
     <MenuItem value="fire">Fire</MenuItem>

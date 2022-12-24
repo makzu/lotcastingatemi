@@ -118,7 +118,6 @@ const mapState = (state: State, { id, characterType }: Props): StateProps => ({
       : undefined,
 })
 
-export default connect<StateProps, DispatchProps, Props>(
-  mapState,
-  { action: changeCharacterType }
-)(MenuChangeCharacterType)
+export default connect<StateProps, DispatchProps, Props>(mapState, {
+  action: changeCharacterType,
+})(MenuChangeCharacterType)

@@ -6,8 +6,8 @@ import { ABILITIES, ATTRIBUTES } from 'utils/constants.js'
 import type { Character } from 'utils/flow-types'
 
 export const highestOtherAbility = (character: Character, ability: string) => {
-  let result = ABILITIES.filter(a => a.abil !== `abil_${ability}`).map(
-    a => character[a.abil]
+  let result = ABILITIES.filter((a) => a.abil !== `abil_${ability}`).map(
+    (a) => character[a.abil],
   )
 
   return Math.max(...result)
@@ -15,10 +15,10 @@ export const highestOtherAbility = (character: Character, ability: string) => {
 
 export const highestOtherAttribute = (
   character: Character,
-  attribute: string
+  attribute: string,
 ) => {
-  let result = ATTRIBUTES.filter(a => a.attr !== `attr_${attribute}`).map(
-    a => character[a.attr]
+  let result = ATTRIBUTES.filter((a) => a.attr !== `attr_${attribute}`).map(
+    (a) => character[a.attr],
   )
 
   return Math.max(...result)
@@ -29,7 +29,7 @@ export default (
   attribute: string,
   ability: string,
   staticRating: boolean,
-  stunt: boolean = false
+  stunt: boolean = false,
 ) => {
   let excellency = stunt ? character.excellency_stunt : character.excellency
   let result = 0
@@ -49,6 +49,8 @@ export default (
           attr(character, attribute) +
           highestOtherAttribute(character, attribute)
         break
+      case 'sidereal':
+        result += Math.max(character.essence, 3)
       case 'attribute':
         result += attr(character, attribute)
         break
@@ -85,7 +87,12 @@ export default (
     }
   }
 
-  if (!staticRating || exArray.includes('nohalf')) return result
+  if (
+    exArray.includes('sidereal') ||
+    !staticRating ||
+    exArray.includes('nohalf')
+  )
+    return result
   if (exArray.includes('roundup')) return halfRoundUp(result)
   else return halfRoundDown(result)
 }

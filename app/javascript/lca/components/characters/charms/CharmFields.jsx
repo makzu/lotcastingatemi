@@ -36,7 +36,7 @@ import {
 import type { Charm, Character } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type Props = {
@@ -49,7 +49,7 @@ type Props = {
   classes: Object,
 }
 class CharmFields extends Component<Props, { charm: Charm }> {
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     const { charm } = this.props
 
@@ -65,7 +65,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
   scrollToPanel = (e, appearing) => {
     if (appearing) return false
     const elem = document.getElementById(
-      `charm-editor-expando-${this.props.charm.id}`
+      `charm-editor-expando-${this.props.charm.id}`,
     )
     if (!checkVisible(elem)) scrollToElement(elem)
   }
@@ -76,11 +76,26 @@ class CharmFields extends Component<Props, { charm: Charm }> {
     const isOpen = openCharm === charm.id
 
     const abilities = abilitiesWithRatings(character)
-    const abilOptions = (
+    const houseOptions = [
+      'journeys',
+      'serenity',
+      'battles',
+      'secrets',
+      'endings',
+    ].map((h) => (
+      <MenuItem key={h} value={h} style={{ 'text-transform': 'capitalize' }}>
+        {h}
+      </MenuItem>
+    ))
+    const noAbils = [
       <MenuItem key="no-abils" disabled>
         No Abilities with ratings
-      </MenuItem>
-    )
+      </MenuItem>,
+    ]
+    let abilOptions = []
+    if (abilities.length === 0) abilOptions = abilOptions.concat(noAbils)
+    if (character.type === 'SiderealCharacter')
+      abilOptions = abilOptions.concat(houseOptions)
 
     return (
       <ExpansionPanel
@@ -164,9 +179,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
                 label="Ability"
                 margin="dense"
                 abilities={abilities}
-                prependOptions={
-                  abilities.length === 0 ? [abilOptions] : undefined
-                }
+                prependOptions={abilOptions}
                 value={charm.ability}
                 onChange={handleChange}
                 multiple={false}

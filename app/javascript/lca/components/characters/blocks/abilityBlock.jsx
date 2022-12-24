@@ -121,7 +121,7 @@ function _MartialArtsAbilityLine({
   classes,
 }: _MartialArtsAbilityLineProps) {
   const supernal = isSupernalAbility(character, 'martial_arts')
-  const caste = isCasteAbility(character, 'brawl')
+  const caste = isCasteAbility(character, 'brawl') || isCasteAbility(character, 'martial_arts')
   const favored = isFavoredAbility(character, 'brawl')
   const s = style ? ' (' + style + ')' : ''
   const excellency =
@@ -139,7 +139,7 @@ function _MartialArtsAbilityLine({
           {excellency && ' *'}
           {supernal && ' (s)'}
           {caste && !supernal && (character.aspect ? ' (a)' : ' (c)')}
-          {favored && ' (f)'}
+          {!caste && favored && ' (f)'}
         </span>
       </RatingLine>
 

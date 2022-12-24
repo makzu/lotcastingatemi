@@ -21,12 +21,10 @@ class SiderealCharacter < Character
 
   before_validation :set_mote_pool_totals
   before_validation :set_defaults
-  before_validation :set_caste_abilities_on_caste_change
+  before_validation :set_caste_abilities
 
   validates :caste, inclusion: { in: SIDEREAL_CASTES }, unless: :caste_is_blank?
-  validate :caste_abilities_are_valid,                  unless: :caste_is_blank?
-
-  validate :five_caste_and_five_favored_abilities
+  validate  :favored_ability_count
 
   validates :limit, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10
@@ -77,42 +75,18 @@ class SiderealCharacter < Character
     self.excellencies_for = ['sidereal']
   end
 
-  def set_caste_abilities_on_caste_change
-    return unless will_save_change_to_attribute? :caste
-
-    self.caste_abilities = caste_abilities.select { |a| allowed_caste_abilities.include? a }
-  end
-
-  def caste_abilities_are_valid
-    caste_abilities.each do |a|
-      unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
-        errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s")
-      end
+  def set_caste_abilities
+    unless will_save_change_to_caste? || will_save_change_to_type?
+      return
     end
+
+    self.caste_abilities = (CASTE_ABILITIES[caste.to_sym] || []) + ['martial_arts']
+    self.favored_abilities = favored_abilities - (CASTE_ABILITIES[caste.to_sym] || [])
   end
 
-  def five_caste_and_five_favored_abilities
-    unless caste_abilities.length <= 5
-      errors.add(:caste_abilities, 'Must have at most 5 caste abilities')
-    end
-    unless favored_abilities.length <= 5 # rubocop:disable Style/GuardClause
-      errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
-    end
-  end
+  def favored_ability_count
+    return if favored_abilities.length <= 5
 
-  def allowed_caste_abilities
-    caste.blank? ? [] : CASTE_ABILITIES[caste.to_sym]
-  end
-
-  def add_supernal_to_caste
-    if caste_abilities.length < 5
-      self.caste_abilities += [supernal_or_brawl]
-    else
-      self.caste_abilities[4] = supernal_or_brawl
-    end
-  end
-
-  def supernal_or_brawl
-    supernal_ability == 'martial_arts' ? 'brawl' : supernal_ability
+    errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
   end
 end

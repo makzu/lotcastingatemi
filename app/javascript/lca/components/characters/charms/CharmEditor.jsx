@@ -118,6 +118,7 @@ class CharmEditor extends Component<Props, State> {
     switch (this.props.character.type) {
       case 'SolarCharacter':
       case 'DragonbloodCharacter':
+      case 'SiderealCharacter':
       case 'CustomAbilityCharacter':
         type = 'Charms::AbilityCharm'
         break

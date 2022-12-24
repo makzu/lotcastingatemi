@@ -14,6 +14,8 @@ export const prettyType = (type: string) => {
       return 'Dragon-Blooded Exalt'
     case 'LunarCharacter':
       return 'Lunar Exalt'
+    case 'SiderealCharacter':
+      return 'Sidereal Exalt'
 
     case 'CustomAbilityCharacter':
       return 'Ability-Based Exalt'
@@ -62,10 +64,10 @@ const ExaltTypeSelect = (props: Props) => {
       margin="normal"
       data-cy="select-exalt-type"
     >
-      <ListSubheader> Canon/Published Exalts </ListSubheader>
+      <ListSubheader>Canon/Published Exalts</ListSubheader>
       {canonChoices}
 
-      <ListSubheader> Custom / Houserule / Exigent Exalts </ListSubheader>
+      <ListSubheader>Custom / Houserule / Exigent Exalts</ListSubheader>
       {customChoices}
     </TextField>
   )

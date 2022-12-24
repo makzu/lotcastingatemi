@@ -6,7 +6,7 @@ import { SortableElement } from 'react-sortable-hoc'
 import { Grid, Typography } from '@material-ui/core'
 
 import CharacterCard from 'components/characters/CharacterCard.jsx'
-import CharacterCreatePopup from 'components/characters/characterCreatePopup.jsx'
+import CharacterCreatePopup from 'components/characters/CharacterCreatePopup'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'

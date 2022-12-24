@@ -2,12 +2,13 @@
 import SolarExcellency, { solarExcellencyAbils } from './solar.js'
 import DbExcellency, { dbExcellencyAbils } from './dragonblooded.js'
 import LunarExcellency, { lunarExcellencyAbils } from './lunar'
+import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
 import CustomExcellency from './custom.js'
 import type { Character, Charm } from 'utils/flow-types'
 
 export const excellencyAbils = (
   character: Character,
-  charms: Array<Charm>
+  charms: Array<Charm>,
 ): Array<string> => {
   // Mortals do not have excellencies
   if (character.type === 'Character') return []
@@ -26,6 +27,14 @@ export const excellencyAbils = (
   if (character.type === 'LunarCharacter' || excellencies.includes('lunar')) {
     excellencies = excellencies.concat(lunarExcellencyAbils(character, charms))
   }
+  if (
+    character.type === 'SiderealCharacter' ||
+    excellencies.includes('sidereal')
+  ) {
+    excellencies = excellencies.concat(
+      siderealExcellencyAbils(character, charms),
+    )
+  }
 
   // Because ES6 lacks a .uniq method:
   return [...new Set(excellencies)]
@@ -37,7 +46,7 @@ export function maxExcellency(
   ability: string,
   excellencyAbils: Array<string>,
   staticRating: boolean = false,
-  stunt: boolean = false
+  stunt: boolean = false,
 ) {
   let abili = ability
   if (abili.startsWith('craft')) abili = 'craft'
@@ -61,6 +70,8 @@ export function maxExcellency(
       return DbExcellency(character, attribute, ability, staticRating)
     case 'LunarCharacter':
       return LunarExcellency(character, attribute, ability, staticRating, stunt)
+    case 'SiderealCharacter':
+      return SiderealExcellency(character, attribute, ability)
   }
 
   return CustomExcellency(character, attribute, ability, staticRating, stunt)

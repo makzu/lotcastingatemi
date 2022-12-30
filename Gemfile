@@ -12,28 +12,14 @@ gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 
-# Use SCSS for stylesheets
-# gem 'sass-rails', '~> 5.0'
-
-# Use Uglifier as compressor for JavaScript assets
-# gem 'uglifier', '>= 1.3.0'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
-
 # For JSON responses
 gem 'active_model_serializers', '~> 0.10.9'
 
 # For duplicating QCs and Battlegroups
 gem 'deep_cloneable', '~> 3.0'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.11'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 gem 'bootsnap', '~> 1.4.0', require: false
 
@@ -46,8 +32,8 @@ gem 'omniauth-google-oauth2', '~> 1.1.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Validate json fields like craft ratings, qc pools, etc
-gem 'activerecord_json_validator'
-gem 'email_validator'
+gem 'activerecord_json_validator', '~>1.3.0'
+gem 'email_validator', '~> 2.2.0'
 
 # Profiling
 # gem 'derailed'
@@ -55,15 +41,15 @@ gem 'email_validator'
 
 # For Heroku:
 group :production do
-  gem 'rails_serve_static_assets'
+  gem 'rails_serve_static_assets', '~> 0.0.5'
 end
 
 # For Heroku Ruby metrics
-gem 'barnes'
+gem 'barnes', '~>0.0.9'
 
 # logging
-gem 'colorize'
-gem 'lograge'
+gem 'colorize', '~> 0.8.0'
+gem 'lograge', '~> 0.12.0'
 
 group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

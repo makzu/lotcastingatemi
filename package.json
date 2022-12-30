@@ -54,7 +54,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jasmine-check": "^1.0.0-rc.0",
     "js-yaml": "^3.13.1",
-    "node-sass": "^7.0.0",
+    "node-sass": "^6.x",
     "normalizr": "^3.6.0",
     "path-complete-extname": "^1.0.0",
     "postcss-cssnext": "^3.1.0",
@@ -152,6 +152,6 @@
   },
   "engines": {
     "node": "^14.x",
-    "yarn": "^1.22.x"
+    "yarn": "^1.x"
   }
 }

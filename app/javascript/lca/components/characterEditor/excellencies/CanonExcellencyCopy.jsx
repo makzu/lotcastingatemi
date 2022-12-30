@@ -45,7 +45,7 @@ class CanonExcellencyCopier extends PureComponent<
         }
         break
       case 'sidereal':
-        obj = { excellency: 'essence+nohalf', excellency_stunt: '' }
+        obj = { excellency: 'sidereal', excellency_stunt: '', excellencies_for: ['sidereal'] }
         break
       case 'liminal':
         obj = { excellency: 'attribute+essenceonanima', excellency_stunt: '' }

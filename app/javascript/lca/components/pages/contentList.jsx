@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import CharacterCard from '../characters/CharacterCard.jsx'
-import CharacterCreatePopup from '../characters/characterCreatePopup.jsx'
+import CharacterCreatePopup from '../characters/CharacterCreatePopup'
 import QcCard from '../qcs/QcCard.jsx'
 import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'

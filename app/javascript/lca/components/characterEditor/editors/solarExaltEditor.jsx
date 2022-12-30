@@ -3,7 +3,7 @@ import React from 'react'
 
 import MenuItem from '@material-ui/core/MenuItem'
 
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
+import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 

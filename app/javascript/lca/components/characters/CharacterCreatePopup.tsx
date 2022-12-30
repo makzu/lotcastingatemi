@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react'
 import { connect } from 'react-redux'
 
@@ -12,10 +11,11 @@ import Switch from '@material-ui/core/Switch'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
-import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect.jsx'
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect.jsx'
-import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect.jsx'
+import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
+import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
+import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect'
 import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
+import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -31,12 +31,12 @@ const initialState = {
 }
 
 type Props = {
-  id: number,
-  createCharacter: Function,
+  id: number
+  createCharacter: Function
 }
 type State = {
-  open: boolean,
-  character: Object,
+  open: boolean
+  character: Object
 }
 
 class CharacterCreatePopup extends React.Component<Props, State> {
@@ -50,12 +50,12 @@ class CharacterCreatePopup extends React.Component<Props, State> {
     this.setState(initialState)
   }
 
-  handleChange = e => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     let exaltType = {}
 
-    if (name == 'type') {
-      if (value == '') {
+    if (name === 'type') {
+      if (value === '' || value == null) {
         e.preventDefault()
         return
       }
@@ -71,6 +71,9 @@ class CharacterCreatePopup extends React.Component<Props, State> {
           break
         case 'LunarCharacter':
           exaltType = { exalt_type: 'Lunar', aspect: false }
+          break
+        case 'SiderealCharacter':
+          exaltType = { exalt_type: 'Sidereal', aspect: false }
           break
         default:
           exaltType = { exalt_type: 'Exalt' }
@@ -176,6 +179,21 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                 />
               </>
             )}
+            {character.type === 'SiderealCharacter' && (
+              <>
+                <Typography paragraph>
+                  Selecting this option means the system will try to follow the
+                  rules in the core book as closely as it can. If your group
+                  uses house rules, especially ones that change available Caste
+                  Abilities, choose Houserule Ability-based exalt instead.
+                </Typography>
+                <SiderealCasteSelect
+                  value={character.caste}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </>
+            )}
             {(character.type === 'CustomAttributeCharacter' ||
               character.type === 'CustomAbilityCharacter' ||
               character.type === 'CustomEssenceCharacter') && (
@@ -264,11 +282,10 @@ class CharacterCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = state => ({ id: state.session.id })
+const mapStateToProps = (state) => ({ id: state.session.id })
 
-const enhance: Enhancer<Props, {}> = connect(
-  mapStateToProps,
-  { createCharacter }
-)
+const enhance: Enhancer<Props, {}> = connect(mapStateToProps, {
+  createCharacter,
+})
 
 export default enhance(CharacterCreatePopup)

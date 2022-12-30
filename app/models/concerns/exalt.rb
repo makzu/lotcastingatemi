@@ -20,7 +20,7 @@ module Exalt
     def excellencies_for_is_valid
       return if excellencies_for.blank?
 
-      attr_abil = Constants::ATTRIBUTES + Constants::ABILITIES + %w[* dragonblood solar lunar]
+      attr_abil = Constants::ATTRIBUTES + Constants::ABILITIES + %w[* dragonblood solar lunar sidereal]
       excellencies_for.each do |e|
         unless attr_abil.include? e
           errors.add(:excellencies_for, "#{e} is not a valid excellency target")

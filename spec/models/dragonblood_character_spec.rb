@@ -49,7 +49,7 @@ RSpec.describe DragonbloodCharacter, type: :model do
 
   describe 'converting types' do
     %i[
-      character solar_character lunar_character
+      character solar_character lunar_character sidereal_character
       custom_ability_character custom_attribute_character custom_essence_character
     ].each do |char|
       it "works for #{char}" do

@@ -9,13 +9,15 @@ import TextField from '@material-ui/core/TextField'
 
 import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants.js'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '8em',
     marginRight: theme.spacing(),
+    textTransform: 'capitalize',
   },
   multiple: {
     marginRight: theme.spacing(),
+    textTransform: 'capitalize',
   },
 })
 
@@ -36,7 +38,7 @@ type Props = {
   onChange: Function,
 }
 class AbilitySelect extends Component<Props> {
-  checkChange = e => {
+  checkChange = (e) => {
     if (e.target.value === '-') return
 
     this.props.onChange(e)
@@ -61,12 +63,12 @@ class AbilitySelect extends Component<Props> {
         ? props.attributes || ATTRIBUTES
         : []
 
-    const abilItems = abils.map(a => (
+    const abilItems = abils.map((a) => (
       <MenuItem key={a.abil} value={a.abil.substring(5)}>
         {a.pretty}
       </MenuItem>
     ))
-    const attrItems = attrs.map(a => (
+    const attrItems = attrs.map((a) => (
       <MenuItem key={a.attr} value={a.pretty.toLowerCase()}>
         {a.pretty}
       </MenuItem>

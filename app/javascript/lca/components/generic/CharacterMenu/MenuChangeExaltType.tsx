@@ -17,7 +17,7 @@ import { SwapHoriz } from '@material-ui/icons'
 
 import ExaltTypeSelect, {
   prettyType,
-} from 'components/characterEditor/exaltTraits/ExaltTypeSelect.jsx'
+} from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
 import { State } from 'ducks'
 import { changeCharacterType } from 'ducks/actions'
 import { useDialogLogic } from 'hooks'
@@ -118,7 +118,6 @@ const mapState = (state: State, { id, characterType }: Props): StateProps => ({
       : undefined,
 })
 
-export default connect<StateProps, DispatchProps, Props>(
-  mapState,
-  { action: changeCharacterType }
-)(MenuChangeCharacterType)
+export default connect<StateProps, DispatchProps, Props>(mapState, {
+  action: changeCharacterType,
+})(MenuChangeCharacterType)

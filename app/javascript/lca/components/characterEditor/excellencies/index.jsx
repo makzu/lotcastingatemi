@@ -49,6 +49,9 @@ class ExcellencyEditor extends Component<
       <MenuItem key="dragonblood" value="dragonblood">
         Dragon-Blooded (Attribute + Specialty)
       </MenuItem>,
+      <MenuItem key="sidereal" value="sidereal">
+        Sidereal (Higher of Essence or 3)
+      </MenuItem>,
       <Divider key="div1" style={{ margin: '0.125em 0' }} />,
       <MenuItem key="attribute" value="attribute">
         Attribute
@@ -173,7 +176,7 @@ class ExcellencyEditor extends Component<
                   All Attribute + Ability rolls
                 </MenuItem>,
                 <MenuItem value="solar" key="solar">
-                  As Solars (caste/favored attributes/abilities &gt; 0, other
+                  As Solars or Sidereals (caste/favored attributes/abilities &gt; 0, other
                   attributes/abilities with at least one Charm)
                 </MenuItem>,
                 <MenuItem value="dragonblood" key="dragonblood">

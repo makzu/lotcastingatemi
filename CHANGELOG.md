@@ -2,6 +2,7 @@
 
 ###### _Not yet released_
 
+- Sidereal PCs can now be created
 - Hidden intimacies now show an icon to indicate they're hidden (Thanks for the PR, tyler569!)
 - Made dot ratings slightly more accessible for screen reader users
 - Bonus hardness from armor is now shown even if the character does not have artifact armor

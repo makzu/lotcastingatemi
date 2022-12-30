@@ -6,7 +6,7 @@ import { SortableElement } from 'react-sortable-hoc'
 import { Grid, Typography } from '@material-ui/core'
 
 import CharacterCard from 'components/characters/CharacterCard.jsx'
-import CharacterCreatePopup from 'components/characters/characterCreatePopup.jsx'
+import CharacterCreatePopup from 'components/characters/CharacterCreatePopup'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
@@ -35,7 +35,7 @@ const CharacterList = () => {
     const charB = characters[newIndex]
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(
-      updateCharacter(charA.id, { sort_order: charB.sort_order + offset })
+      updateCharacter(charA.id, { sort_order: charB.sort_order + offset }),
     )
   }
 

@@ -15,6 +15,8 @@ export function prettyExaltType(character: Character) {
       return 'Dragon-Blooded'
     case 'LunarCharacter':
       return 'Lunar'
+    case 'SiderealCharacter':
+      return 'Sidereal'
     default:
       return titleCase(character.exalt_type)
   }
@@ -51,6 +53,7 @@ export function exaltTypeBase(character: Character) {
   switch (character.type) {
     case 'SolarCharacter':
     case 'DragonbloodCharacter':
+    case 'SiderealCharacter':
     case 'CustomAbilityCharacter':
       return 'ability'
     case 'LunarCharacter':

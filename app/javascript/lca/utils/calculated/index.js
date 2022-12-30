@@ -31,7 +31,7 @@ export const abil = (character: Character, ability: string): number => {
   let abil
   if (ability.startsWith('martial arts')) {
     abil = character.abil_martial_arts.find(
-      art => `martial arts (${art.style})` === ability
+      (art) => `martial arts (${art.style})` === ability,
     )
     return abil !== undefined ? abil.rating : 0
   } else if (ability === 'craft') {
@@ -41,7 +41,7 @@ export const abil = (character: Character, ability: string): number => {
     return 1
   } else if (ability.startsWith('craft')) {
     abil = character.abil_craft.find(
-      craft => `craft (${craft.craft})` == ability
+      (craft) => `craft (${craft.craft})` === ability,
     )
     return abil != undefined ? abil.rating : 0
   } else {
@@ -51,15 +51,15 @@ export const abil = (character: Character, ability: string): number => {
 
 export const specialtiesFor = (
   character: Character,
-  ability: string
+  ability: string,
 ): Array<string> => {
   let abili = ability
   if (abili.startsWith('martial arts')) abili = 'martial_arts'
   else if (abili.startsWith('craft')) abili = 'craft'
   return (
     character.specialties
-      .filter(s => s.ability === abili)
-      .map(s => s.context) || []
+      .filter((s) => s.ability === abili)
+      .map((s) => s.context) || []
   )
 }
 
@@ -73,7 +73,7 @@ export const totalHealthLevels = (character: withHealthLevels) =>
 
 export function woundPenalty(
   character: withHealthLevels,
-  merits: Array<string>
+  merits: Array<string>,
 ) {
   const totalDmg =
     character.damage_bashing +
@@ -83,7 +83,7 @@ export function woundPenalty(
   const lvl1 = lvl0 + character.health_level_1s
   const lvl2 = lvl1 + character.health_level_2s
   const lvl4 = lvl2 + character.health_level_4s
-  const modifier = merits.some(m => m.startsWith('pain tolerance')) ? 1 : 0
+  const modifier = merits.some((m) => m.startsWith('pain tolerance')) ? 1 : 0
 
   if (totalDmg <= lvl0) {
     return 0
@@ -100,24 +100,24 @@ export function woundPenalty(
 }
 
 export function attackAbilities(
-  character: Character
+  character: Character,
 ): Array<{ abil: string, rating: number, specialties: Array<specialty> }> {
-  let abils = ATTACK_ABILITIES.map(abil => {
+  let abils = ATTACK_ABILITIES.map((abil) => {
     let name = abil.substring(5)
     return {
       abil: name,
       rating: character[abil] || 0,
-      specialties: character.specialties.filter(spec => spec.ability == name),
+      specialties: character.specialties.filter((spec) => spec.ability == name),
     }
   })
 
-  let mas = character.abil_martial_arts.map(abil => {
+  let mas = character.abil_martial_arts.map((abil) => {
     let name = `martial arts (${abil.style})`
     return {
       abil: name,
       rating: abil.rating,
       specialties: character.specialties.filter(
-        spec => spec.ability == 'martial arts'
+        (spec) => spec.ability == 'martial arts',
       ),
     }
   })
@@ -126,26 +126,28 @@ export function attackAbilities(
 }
 
 export function nonAttackAbilities(
-  character: Character
+  character: Character,
 ): Array<{ abil: string, rating: number, specialties: Array<specialty> }> {
-  let abils = NON_ATTACK_ABILITIES.filter(abil => character[abil] > 0).map(
-    function(abil) {
+  let abils = NON_ATTACK_ABILITIES.filter((abil) => character[abil] > 0).map(
+    function (abil) {
       let name = abil.substring(5)
       return {
         abil: name,
         rating: character[abil] || 0,
-        specialties: character.specialties.filter(spec => spec.ability == name),
+        specialties: character.specialties.filter(
+          (spec) => spec.ability == name,
+        ),
       }
-    }
+    },
   )
 
-  let crafts = character.abil_craft.map(abil => {
+  let crafts = character.abil_craft.map((abil) => {
     let name = `craft (${abil.craft})`
     return {
       abil: name,
       rating: abil.rating,
       specialties: character.specialties.filter(
-        spec => spec.ability == 'craft'
+        (spec) => spec.ability == 'craft',
       ),
     }
   })
@@ -154,7 +156,7 @@ export function nonAttackAbilities(
 }
 
 export function abilitiesWithRatings(character: Character): Array<Object> {
-  const abils = ABILITIES_ALL.filter(a => {
+  const abils = ABILITIES_ALL.filter((a) => {
     if (a.abil === 'abil_craft' || a.abil === 'abil_martial_arts')
       return character[a.abil].length > 0
     else return character[a.abil] > 0
@@ -164,12 +166,12 @@ export function abilitiesWithRatings(character: Character): Array<Object> {
 }
 
 export const nonCasteAbilities = (character: Character): Array<Object> =>
-  ABILITIES_ALL_NO_MA.filter(a => {
+  ABILITIES_ALL_NO_MA.filter((a) => {
     return !(character.caste_abilities || []).includes(a.pretty.toLowerCase())
   })
 
 export const nonCasteAttributes = (character: Character): Array<Object> =>
-  ATTRIBUTES.filter(a => {
+  ATTRIBUTES.filter((a) => {
     return !(character.caste_attributes || []).includes(a.pretty.toLowerCase())
   })
 
@@ -215,12 +217,12 @@ export const isFavoredAttribute = (character: Character, attribute: string) =>
 
 export const committedPersonalMotes = (character: withMotePool) =>
   character.motes_committed
-    .filter(c => c.pool === 'personal')
+    .filter((c) => c.pool === 'personal')
     .reduce((total, c) => total + c.motes, 0)
 
 export const committedPeripheralMotes = (character: withMotePool) =>
   character.motes_committed
-    .filter(c => c.pool === 'peripheral')
+    .filter((c) => c.pool === 'peripheral')
     .reduce((total, c) => total + c.motes, 0)
 
 export const spentXp = (character: Character) =>
@@ -244,7 +246,7 @@ export const penaltyObject = (
     useMobility?: boolean,
     usePoison?: boolean,
     useOnslaught?: boolean,
-  } = {}
+  } = {},
 ) => {
   let penalty = []
   if (useWound)

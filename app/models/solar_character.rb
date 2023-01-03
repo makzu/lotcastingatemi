@@ -54,9 +54,7 @@ class SolarCharacter < Character
   private
 
   def set_mote_pool_totals
-    unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
-      return
-    end
+    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
 
     self.motes_personal_total     = (essence * 3) + 10
     self.motes_peripheral_total   = (essence * 7) + 26
@@ -76,6 +74,7 @@ class SolarCharacter < Character
     self.excellency = 'solar'
     self.excellency_stunt = ''
     self.excellencies_for = ['solar']
+    remove_caste_and_favored_attributes
   end
 
   def set_caste_abilities_on_supernal_change
@@ -90,17 +89,13 @@ class SolarCharacter < Character
   def set_caste_abilities_on_caste_change
     return unless will_save_change_to_attribute? :caste
 
-    unless allowed_caste_abilities.include? supernal_ability
-      self.supernal_ability = nil
-    end
+    self.supernal_ability = nil unless allowed_caste_abilities.include? supernal_ability
     self.caste_abilities = caste_abilities.select { |a| allowed_caste_abilities.include? a }
   end
 
   def caste_abilities_are_valid
     caste_abilities.each do |a|
-      unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
-        errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s")
-      end
+      errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s") unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
     end
   end
 
@@ -108,19 +103,18 @@ class SolarCharacter < Character
     return if supernal_ability.blank? || caste_abilities.include?(supernal_ability)
 
     if supernal_ability == 'martial_arts'
-      errors.add(:supernal_ability, 'Brawl must be a caste ability for supernal martial artists') unless caste_abilities.include?('brawl')
+      unless caste_abilities.include?('brawl')
+        errors.add(:supernal_ability,
+                   'Brawl must be a caste ability for supernal martial artists')
+      end
     else
       errors.add(:supernal_ability, 'Must be a caste ability')
     end
   end
 
   def five_caste_and_five_favored_abilities
-    unless caste_abilities.length <= 5
-      errors.add(:caste_abilities, 'Must have at most 5 caste abilities')
-    end
-    unless favored_abilities.length <= 5 # rubocop:disable Style/GuardClause
-      errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
-    end
+    errors.add(:caste_abilities, 'Must have at most 5 caste abilities') unless caste_abilities.length <= 5
+    errors.add(:favored_abilities, 'Must have at most 5 favored abilities') unless favored_abilities.length <= 5
   end
 
   def allowed_caste_abilities

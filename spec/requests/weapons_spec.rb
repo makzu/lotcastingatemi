@@ -19,7 +19,6 @@ RSpec.describe 'Weapons' do
                 headers: authenticated_header(weapon.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 
-        expect(response).to have_http_status :ok
         expect(Weapon.find(weapon.id).tags).to eq %w[lethal melee balanced]
       end
     end

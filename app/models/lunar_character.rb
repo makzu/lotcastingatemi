@@ -45,9 +45,7 @@ class LunarCharacter < Character
   private
 
   def set_mote_pool_totals
-    unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
-      return
-    end
+    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
 
     self.motes_personal_total = essence + 15
     self.motes_peripheral_total = (essence * 4) + 34
@@ -79,19 +77,15 @@ class LunarCharacter < Character
 
   def caste_attributes_are_valid
     caste_attributes.each do |a|
-      unless (CASTE_ATTRIBUTES[caste.to_sym] || []).include? a
-        errors.add(:caste_attributes, "#{a} is not a valid caste attribute for #{caste}s")
-      end
+      errors.add(:caste_attributes, "#{a} is not a valid caste attribute for #{caste}s") unless (CASTE_ATTRIBUTES[caste.to_sym] || []).include? a
     end
   end
 
   def two_caste_and_two_favored_attributes
-    if caste_attributes.count > 2
-      errors.add(:caste_attributes, 'Lunars can only have up to 2 caste attributes')
-    end
-    if favored_attributes.count > 2
-      errors.add(:favored_attributes, 'Lunars can only have up to 2 favored attributes')
-    end
+    errors.add(:caste_attributes, 'Lunars can only have up to 2 caste attributes') if caste_attributes.count > 2
+    return unless favored_attributes.count > 2
+
+    errors.add(:favored_attributes, 'Lunars can only have up to 2 favored attributes')
   end
 
   def allowed_caste_attributes

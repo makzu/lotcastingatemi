@@ -17,9 +17,9 @@ module Api
       end
 
       def spell_params
-        if params[:spell].present?
-          params.require(:spell).permit(*base_attributes, keywords: [], categories: [])
-        end
+        return if params[:spell].blank?
+
+        params.require(:spell).permit(*base_attributes, keywords: [], categories: [])
       end
     end
   end

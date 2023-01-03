@@ -32,14 +32,10 @@ class DragonbloodCharacter < Character
   def self.from_character!(character)
     new_cha = character.becomes(DragonbloodCharacter)
     new_cha.type = 'DragonbloodCharacter'
-    new_cha.caste_attributes = []
-    new_cha.favored_attributes = []
     new_cha.supernal_ability = nil
     new_cha.caste = (new_cha.caste || '').downcase
     new_cha.caste = '' unless DRAGONBLOOD_ASPECTS.include? new_cha.caste
-    unless (DRAGONBLOOD_ASPECTS + []).include? new_cha.aura
-      new_cha.aura = 'none'
-    end
+    new_cha.aura = 'none' unless (DRAGONBLOOD_ASPECTS + []).include? new_cha.aura
 
     new_cha.save!
     (new_cha.attribute_charms + new_cha.essence_charms).each do |charm|
@@ -51,9 +47,7 @@ class DragonbloodCharacter < Character
   private
 
   def set_mote_pool_totals
-    unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
-      return
-    end
+    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
 
     self.motes_personal_total     = essence + 11
     self.motes_peripheral_total   = (essence * 4) + 23
@@ -69,6 +63,7 @@ class DragonbloodCharacter < Character
   def set_defaults
     self.exalt_type = 'Dragon-Blood'
     self.aspect = true
+    remove_caste_and_favored_attributes
     self.excellency = 'dragonblood'
     self.excellency_stunt = ''
     self.excellencies_for = ['dragonblood']
@@ -76,17 +71,15 @@ class DragonbloodCharacter < Character
   end
 
   def set_caste_abilities
-    unless will_save_change_to_attribute?(:caste) || will_save_change_to_attribute?(:type)
-      return
-    end
+    return unless will_save_change_to_attribute?(:caste) || will_save_change_to_attribute?(:type)
 
     self.caste_abilities = ASPECT_ABILITIES[caste.to_sym] || []
     self.favored_abilities = favored_abilities - (ASPECT_ABILITIES[caste.to_sym] || [])
   end
 
   def favored_ability_count
-    unless favored_abilities.length <= 5
-      errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
-    end
+    return if favored_abilities.length <= 5
+
+    errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
   end
 end

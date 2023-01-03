@@ -19,7 +19,10 @@ RSpec.describe Api::V1::MeritsController do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_merit_params = attributes_for(:merit, rating: 9)
 
-        expect { post :create, params: { character_id: @character.id, merit: @invalid_merit_params }, format: :json }.not_to change(Merit, :count)
+        expect do
+          post :create, params: { character_id: @character.id, merit: @invalid_merit_params },
+                        format: :json
+        end.not_to change(Merit, :count)
       end
     end
   end

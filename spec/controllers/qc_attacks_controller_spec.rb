@@ -19,7 +19,10 @@ RSpec.describe Api::V1::QcAttacksController do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_attack_params = attributes_for(:qc_attack, pool: -1)
 
-        expect { post :create, params: { qc_id: @qc.id, qc_attack: @invalid_attack_params }, format: :json }.not_to change(QcAttack, :count)
+        expect do
+          post :create, params: { qc_id: @qc.id, qc_attack: @invalid_attack_params },
+                        format: :json
+        end.not_to change(QcAttack, :count)
       end
     end
   end

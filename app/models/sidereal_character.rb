@@ -33,9 +33,6 @@ class SiderealCharacter < Character
   def self.from_character!(character)
     new_cha = character.becomes(SiderealCharacter)
     new_cha.type = 'SiderealCharacter'
-    new_cha.caste_attributes = []
-    new_cha.favored_attributes = []
-    new_cha.supernal_ability = nil
     new_cha.caste = (new_cha.caste || '').downcase
     new_cha.caste = '' unless SIDEREAL_CASTES.include? new_cha.caste
     new_cha.caste_abilities = new_cha.caste_abilities & (CASTE_ABILITIES[new_cha.caste.to_sym] || [])
@@ -51,9 +48,7 @@ class SiderealCharacter < Character
   private
 
   def set_mote_pool_totals
-    unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
-      return
-    end
+    return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
 
     self.motes_personal_total     = (essence * 2) + 9
     self.motes_peripheral_total   = (essence * 6) + 25
@@ -73,12 +68,12 @@ class SiderealCharacter < Character
     self.excellency = 'sidereal'
     self.excellency_stunt = ''
     self.excellencies_for = ['sidereal']
+    self.supernal_ability = nil
+    remove_caste_and_favored_attributes
   end
 
   def set_caste_abilities
-    unless will_save_change_to_caste? || will_save_change_to_type?
-      return
-    end
+    return unless will_save_change_to_caste? || will_save_change_to_type?
 
     self.caste_abilities = (CASTE_ABILITIES[caste.to_sym] || []) + ['martial_arts']
     self.favored_abilities = favored_abilities - (CASTE_ABILITIES[caste.to_sym] || [])

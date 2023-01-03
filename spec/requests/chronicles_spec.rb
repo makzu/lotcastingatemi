@@ -86,7 +86,7 @@ RSpec.describe 'Chronciles' do
   end
 
   context 'when logged in as a player not in the chronicle' do
-    let (:player) { create(:player) }
+    let(:player) { create(:player) }
 
     describe 'joining a chronicle open to new players' do
       it 'works' do

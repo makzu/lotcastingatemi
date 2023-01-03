@@ -30,7 +30,9 @@ RSpec.describe Api::V1::ChroniclesController do
         request.headers['Authorization'] = authenticated_header(@player)
         @chronicle_params = attributes_for(:chronicle, st_id: @player.id)
 
-        expect { post :create, params: { chronicle: @chronicle_params }, format: :json }.to change(Chronicle, :count).by(1)
+        expect do
+          post :create, params: { chronicle: @chronicle_params }, format: :json
+        end.to change(Chronicle, :count).by(1)
       end
     end
 

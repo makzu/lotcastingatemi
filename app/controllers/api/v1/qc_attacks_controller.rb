@@ -17,9 +17,9 @@ module Api
       end
 
       def qc_attack_params
-        if params[:qc_attack].present?
-          params.require(:qc_attack).permit(*base_attributes, tags: [])
-        end
+        return if params[:qc_attack].blank?
+
+        params.require(:qc_attack).permit(*base_attributes, tags: [])
       end
     end
   end

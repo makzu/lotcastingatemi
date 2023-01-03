@@ -19,7 +19,10 @@ RSpec.describe Api::V1::WeaponsController do
         request.headers['Authorization'] = authenticated_header(@player)
         @invalid_weapon_params = attributes_for(:weapon, weight: 'extra heavy')
 
-        expect { post :create, params: { character_id: @character.id, weapon: @invalid_weapon_params }, format: :json }.not_to change(Weapon, :count)
+        expect do
+          post :create, params: { character_id: @character.id, weapon: @invalid_weapon_params },
+                        format: :json
+        end.not_to change(Weapon, :count)
       end
     end
   end

@@ -10,17 +10,16 @@ FROM ruby:2.7.7
 #         libpq-dev
 
 # Get package keys going
-# Nodejs 14
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+# Nodejs 16
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 # Install node and yarn
-RUN apt-get update \
-    && \
-    apt-get install -y \
-        nano \
-        nodejs \
-        python2
-        # yarn
+RUN apt-get update && \
+  apt-get install -y \
+  nano \
+  nodejs \
+  python2
+#   yarn
 
 RUN corepack enable
 # RUN corepack prepare yarn@stable --activate

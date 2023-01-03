@@ -16,7 +16,7 @@ RSpec.shared_examples 'charm' do |trait_type, parent_type|
                 headers: authenticated_header(charm.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
         expect(charm.class.find(charm.id).keywords).to eq %w[decisive-only]
       end
 

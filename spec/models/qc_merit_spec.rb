@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe QcMerit, type: :model do
+RSpec.describe QcMerit do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:qc_merit)).to be_valid
+    expect(create(:qc_merit)).to be_valid
   end
 end

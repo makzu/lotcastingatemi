@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CreateBroadcastJob, type: :job do
+RSpec.describe CreateBroadcastJob do
   ActiveJob::Base.queue_adapter = :test
 
   it 'enqueues while making a character' do

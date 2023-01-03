@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Charms::Evocation, type: :model do
+RSpec.describe Charms::Evocation do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:charms_evocation)).to be_valid
+    expect(create(:charms_evocation)).to be_valid
   end
 end

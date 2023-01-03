@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'requests/shared_examples/character'
 
-RSpec.describe 'CombatActors', type: :request do
+RSpec.describe 'CombatActors' do
   describe 'for QCs' do
     it_behaves_like 'character', :combat_actor, 'qc'
   end

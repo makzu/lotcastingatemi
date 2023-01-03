@@ -6,7 +6,7 @@ module CharacterTrait
   included do
     include Sortable
 
-    belongs_to :character, foreign_key: :character_id # rubocop:disable Rails/InverseOf
+    belongs_to :character
 
     delegate :player,      to: :character
     delegate :chronicle,   to: :character

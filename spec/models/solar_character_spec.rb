@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe SolarCharacter, type: :model do
+RSpec.describe SolarCharacter do
   let(:character) { create(:solar_character) }
 
   describe 'mote pool' do
@@ -40,7 +40,7 @@ RSpec.describe SolarCharacter, type: :model do
       expect(character.caste_abilities).to include 'occult'
 
       character.update(caste: 'dawn')
-      expect(character.supernal_ability).to eq nil
+      expect(character.supernal_ability).to be_nil
       expect(character.caste_abilities).not_to include 'occult'
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe SolarCharacter, type: :model do
   describe 'exalt type' do
     it 'does not change while the class type stays the same' do
       character.update(aspect: true, exalt_type: 'abyssal', excellency: 'essence')
-      expect(character.aspect).to eq false
+      expect(character.aspect).to be false
       expect(character.exalt_type).to eq 'Solar'
       expect(character.excellency).to eq 'solar'
     end

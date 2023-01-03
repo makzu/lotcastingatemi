@@ -2,21 +2,21 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::QcCharmsController, type: :controller do
+RSpec.describe Api::V1::QcCharmsController do
   def authenticated_header(user)
     "Bearer #{user.token}"
   end
 
   before do
-    @player = FactoryBot.create(:player)
-    @qc = FactoryBot.create(:qc, player_id: @player.id)
-    @qc_charm = FactoryBot.create(:qc_charm, qc_id: @qc.id)
+    @player = create(:player)
+    @qc = create(:qc, player_id: @player.id)
+    @qc_charm = create(:qc_charm, qc_id: @qc.id)
   end
 
   describe 'PATCH #update' do
     it 'Updates charm attributes' do
       request.headers['Authorization'] = authenticated_header(@player)
-      @updated_charm_params = FactoryBot.attributes_for(:qc_charm, qc_id: @qc.id, name: 'test1')
+      @updated_charm_params = attributes_for(:qc_charm, qc_id: @qc.id, name: 'test1')
 
       expect(@qc_charm.name).not_to eq('test1')
 

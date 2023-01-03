@@ -4,6 +4,7 @@ require:
 inherit_from: .rubocop_todo.yml
 AllCops:
   TargetRubyVersion: 2.7
+  NewCops: enable
   Include:
     - app/**/*.rb
     - spec/**/*.rb
@@ -47,13 +48,6 @@ Layout/SpaceInsideHashLiteralBraces:
 Layout/SpaceInsidePercentLiteralDelimiters:
   Enabled: false
 
-# Added by versioning
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
-  Enabled: true
-
 Metrics/AbcSize:
   Max: 25
 
@@ -62,7 +56,7 @@ Metrics/MethodLength:
 
 Naming/FileName:
   Exclude:
-    - "Gemfile"
+    - 'Gemfile'
 
 Style/Documentation:
   Exclude:
@@ -72,16 +66,7 @@ Style/Documentation:
 
 Rails/Output:
   Exclude:
-    - "db/seeds.rb"
+    - 'db/seeds.rb'
 
 RSpec/ExampleLength:
   Max: 15
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true

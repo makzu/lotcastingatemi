@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'requests/shared_examples/character'
 
-RSpec.describe 'DragonbloodCharacters', type: :request do
+RSpec.describe 'DragonbloodCharacters' do
   it_behaves_like 'character', :dragonblood_character
 end

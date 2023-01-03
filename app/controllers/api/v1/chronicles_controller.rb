@@ -62,7 +62,7 @@ module Api
           @player = current_player
         else
           authorize @chronicle, :update?
-          @player = Player.find_by!(id: params[:player_id])
+          @player = Player.find(params[:player_id])
         end
 
         @chronicle.remove_player(@player)

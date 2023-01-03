@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'requests/shared_examples/character_trait'
 require 'support/auth_token'
 
-RSpec.describe 'QcAttacks', type: :request do
+RSpec.describe 'QcAttacks' do
   ActiveJob::Base.queue_adapter = :test
 
   let(:attack) { create(:qc_attack) }
@@ -19,7 +19,7 @@ RSpec.describe 'QcAttacks', type: :request do
                 headers: authenticated_header(attack.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
         expect(QcAttack.find(attack.id).tags).to eq %w[lethal melee balanced]
       end
     end

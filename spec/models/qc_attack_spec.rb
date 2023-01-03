@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe QcAttack, type: :model do
+RSpec.describe QcAttack do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:qc_attack)).to be_valid
-    expect(FactoryBot.create(:battlegroup_qc_attack)).to be_valid
+    expect(create(:qc_attack)).to be_valid
+    expect(create(:battlegroup_qc_attack)).to be_valid
   end
 end

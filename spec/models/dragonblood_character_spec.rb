@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DragonbloodCharacter, type: :model do
+RSpec.describe DragonbloodCharacter do
   let(:character) { create(:dragonblood_character) }
 
   describe 'mote pool' do

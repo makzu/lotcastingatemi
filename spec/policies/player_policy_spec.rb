@@ -5,10 +5,10 @@ require 'rails_helper'
 RSpec.describe PlayerPolicy do
   subject { described_class.new(player, owner) }
 
-  let(:st) { FactoryBot.create(:player) }
-  let(:owner) { FactoryBot.create(:player) }
-  let(:other_player) { FactoryBot.create(:player) }
-  let(:chronicle) { FactoryBot.create(:chronicle, st: st, players: [other_player]) }
+  let(:st) { create(:player) }
+  let(:owner) { create(:player) }
+  let(:other_player) { create(:player) }
+  let(:chronicle) { create(:chronicle, st: st, players: [other_player]) }
 
   context 'when the owner of the character' do
     let(:player) { owner }
@@ -29,7 +29,7 @@ RSpec.describe PlayerPolicy do
   end
 
   context 'when a user that has nothing to do with the character' do
-    let(:player) { FactoryBot.create(:player) }
+    let(:player) { create(:player) }
 
     it { is_expected.to forbid_actions(%i[update show destroy]) }
   end

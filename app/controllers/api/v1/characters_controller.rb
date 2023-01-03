@@ -43,7 +43,7 @@ module Api
           in_combat has_acted
         ]
 
-        @new_character.name = @new_character.name + ' (Duplicate)'
+        @new_character.name = "#{@new_character.name} (Duplicate)"
         @new_character.player = current_player
 
         if @new_character.save

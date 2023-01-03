@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Battlegroup, type: :model do
+RSpec.describe Battlegroup do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:battlegroup)).to be_valid
+    expect(create(:battlegroup)).to be_valid
   end
 end

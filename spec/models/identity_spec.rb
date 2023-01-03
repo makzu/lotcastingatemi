@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Identity, type: :model do
+RSpec.describe Identity do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:identity)).to be_valid
+    expect(create(:identity)).to be_valid
   end
 end

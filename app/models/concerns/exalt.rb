@@ -35,11 +35,11 @@ module Exalt
                     will_save_change_to_attribute?(:caste_attributes) ||
                     will_save_change_to_attribute?(:favored_attributes)
 
-      self.excellencies_for = excellencies_for.reject(&:blank?).collect(&:strip)
-      self.caste_abilities = caste_abilities.reject(&:blank?).collect(&:strip)
-      self.favored_abilities = favored_abilities.reject(&:blank?).collect(&:strip)
-      self.caste_attributes = caste_attributes.reject(&:blank?).collect(&:strip)
-      self.favored_attributes = favored_attributes.reject(&:blank?).collect(&:strip)
+      self.excellencies_for = excellencies_for.compact_blank.collect(&:strip)
+      self.caste_abilities = caste_abilities.compact_blank.collect(&:strip)
+      self.favored_abilities = favored_abilities.compact_blank.collect(&:strip)
+      self.caste_attributes = caste_attributes.compact_blank.collect(&:strip)
+      self.favored_attributes = favored_attributes.compact_blank.collect(&:strip)
     end
 
     def caste_is_blank?

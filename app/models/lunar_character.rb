@@ -15,7 +15,7 @@ class LunarCharacter < Character
     'full moon':     %w[strength dexterity stamina],
     'changing moon': %w[charisma manipulation appearance],
     'no moon':       %w[intelligence perception wits],
-    'casteless':     %w[]
+    casteless:       %w[]
   }.freeze
 
   before_validation :set_mote_pool_totals

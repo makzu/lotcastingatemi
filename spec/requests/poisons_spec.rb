@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'requests/shared_examples/character_trait'
 
-RSpec.describe 'Poisons', type: :request do
+RSpec.describe 'Poisons' do
   describe 'for Characters' do
     it_behaves_like 'character trait', :poison, 'characters'
   end

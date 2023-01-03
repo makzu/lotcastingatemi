@@ -12,11 +12,11 @@ class SiderealCharacter < Character
 
   SIDEREAL_CASTES = %w[ journeys serenity battles secrets endings ].freeze
   CASTE_ABILITIES = {
-    "journeys": %w[ resistance ride sail survival thrown ],
-    "serenity": %w[ craft dodge linguistics performance socialize ],
-    "battles":  %w[ archery brawl melee presence war ],
-    "secrets":  %w[ investigation larceny lore occult stealth ],
-    "endings":  %w[ athletics awareness bureaucracy integrity medicine ]
+    journeys: %w[ resistance ride sail survival thrown ],
+    serenity: %w[ craft dodge linguistics performance socialize ],
+    battles:  %w[ archery brawl melee presence war ],
+    secrets:  %w[ investigation larceny lore occult stealth ],
+    endings:  %w[ athletics awareness bureaucracy integrity medicine ]
   }.freeze
 
   before_validation :set_mote_pool_totals

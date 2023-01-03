@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe CombatActor, type: :model do
+RSpec.describe CombatActor do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:combat_actor)).to be_valid
-    expect(FactoryBot.create(:battlegroup_combat_actor)).to be_valid
+    expect(create(:combat_actor)).to be_valid
+    expect(create(:battlegroup_combat_actor)).to be_valid
   end
 end

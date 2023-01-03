@@ -11,6 +11,16 @@ module Api
         render json: @qcs
       end
 
+      def show
+        authorize @qc
+
+        if policy(@qc).update?
+          render json: @qc
+        else
+          render json: @qc.without_secrets
+        end
+      end
+
       def create
         @qc = Qc.new(resource_params)
         @qc.player ||= current_player
@@ -19,16 +29,6 @@ module Api
           render json: @qc
         else
           render json: @qc.errors.details, status: :bad_request
-        end
-      end
-
-      def show
-        authorize @qc
-
-        if policy(@qc).update?
-          render json: @qc
-        else
-          render json: @qc.without_secrets
         end
       end
 
@@ -42,7 +42,7 @@ module Api
           in_combat has_acted
         ]
 
-        @new_qc.name = @new_qc.name + ' (Duplicate)'
+        @new_qc.name = "#{@new_qc.name} (Duplicate)"
         @new_qc.player = current_player
 
         if @new_qc.save

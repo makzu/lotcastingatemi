@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe SiderealCharacter, type: :model do
+RSpec.describe SiderealCharacter do
   let(:character) { create(:sidereal_character) }
 
   describe 'mote pool' do

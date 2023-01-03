@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Players', type: :request do
+RSpec.describe 'Players' do
   def authenticated_header(user)
     { 'Authorization' => "Bearer #{user.token}" }
   end
 
   context 'when logged in' do
     describe 'deleting an account' do
-      # rubocop:disable Layout/MultilineMethodCallIndentation
       it 'works and also deletes chronicles/characters/etc' do
         player = create(:player, identities: [create(:identity)])
         create(:chronicle, st: player)
@@ -25,7 +24,6 @@ RSpec.describe 'Players', type: :request do
            .and change(Qc,          :count).by(-1)
            .and change(Battlegroup, :count).by(-1)
       end
-      # rubocop:enable Layout/MultilineMethodCallIndentation
     end
   end
 end

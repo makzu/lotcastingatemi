@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 require 'rails_helper'
 
-RSpec.describe 'Chronciles', type: :request do
+RSpec.describe 'Chronciles' do
   def authenticated_header(user)
     { 'Authorization' => "Bearer #{user.token}" }
   end
@@ -18,7 +16,7 @@ RSpec.describe 'Chronciles', type: :request do
               headers: authenticated_header(chronicle.st),
               params:  { chronicle: { name: 'Mystic Quest' }}
 
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
         expect(JSON.parse(response.body)['name']).to eq 'Mystic Quest'
         chronicle.reload
         expect(chronicle.name).to eq 'Mystic Quest'
@@ -33,13 +31,13 @@ RSpec.describe 'Chronciles', type: :request do
         delete "/api/v1/chronicles/#{chronicle.id}",
                headers: authenticated_header(chronicle.st)
 
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
         character.reload
-        expect(character.chronicle_id).to eq nil
+        expect(character.chronicle_id).to be_nil
         qc.reload
-        expect(qc.chronicle_id).to eq nil
+        expect(qc.chronicle_id).to be_nil
         battlegroup.reload
-        expect(battlegroup.chronicle_id).to eq nil
+        expect(battlegroup.chronicle_id).to be_nil
       end
     end
   end
@@ -55,7 +53,7 @@ RSpec.describe 'Chronciles', type: :request do
           post "/api/v1/chronicles/#{chronicle.id}/add_#{char}/#{character.id}",
                headers: authenticated_header(not_the_st)
 
-          expect(response.status).to eq 200
+          expect(response).to have_http_status :ok
           chronicle.reload
           expect(chronicle.send("#{char}s")).to include character
         end
@@ -69,7 +67,7 @@ RSpec.describe 'Chronciles', type: :request do
                headers: authenticated_header(not_the_st),
                params:  { char.to_s => { chronicle_id: nil }}
 
-          expect(response.status).to eq 200
+          expect(response).to have_http_status :ok
           chronicle.reload
           expect(chronicle.send("#{char}s")).not_to include character
         end
@@ -96,7 +94,7 @@ RSpec.describe 'Chronciles', type: :request do
              headers: authenticated_header(player),
              params:  { invite_code: chronicle.invite_code }
 
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
         chronicle.reload
         expect(chronicle.players).to include player
       end
@@ -107,31 +105,29 @@ RSpec.describe 'Chronciles', type: :request do
     describe 'creating a record' do
       it 'returns an auth failure' do
         post '/api/v1/chronicles/'
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 
     describe 'showing a record' do
       it 'returns an auth failure' do
         get "/api/v1/chronicles/#{chronicle.id}"
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 
     describe 'updating a record' do
       it 'returns an auth failure' do
         patch "/api/v1/chronicles/#{chronicle.id}"
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
 
     describe 'destroying a record' do
       it 'returns an auth failure' do
         delete "/api/v1/chronicles/#{chronicle.id}"
-        expect(response.status).to eq 401
+        expect(response).to have_http_status :unauthorized
       end
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

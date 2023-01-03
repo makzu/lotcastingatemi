@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Weapon, type: :model do
+RSpec.describe Weapon do
   describe 'tags' do
     it 'rejects empty tags' do
       weapon = create(:weapon, tags: ['  ', '', '', ' ', '  bashing'])
@@ -25,7 +25,7 @@ RSpec.describe Weapon, type: :model do
     it 'sets the weapon as an artifact when adding' do
       weapon = create(:weapon)
       weapon.update(tags: ['elemental bolt'])
-      expect(weapon.is_artifact).to eq(true)
+      expect(weapon.is_artifact).to be(true)
     end
 
     it 'leaves the damage attr alone when its just there' do

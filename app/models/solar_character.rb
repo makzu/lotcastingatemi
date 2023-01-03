@@ -12,11 +12,11 @@ class SolarCharacter < Character
 
   SOLAR_CASTES = %w[ dawn zenith twilight night eclipse ].freeze
   CASTE_ABILITIES = {
-    "dawn":     %w[ archery awareness brawl dodge melee resistance thrown war ],
-    "zenith":   %w[ athletics integrity performance lore presence resistance survival war ],
-    "twilight": %w[ bureaucracy craft integrity investigation linguistics lore medicine occult ],
-    "night":    %w[ athletics awareness dodge investigation larceny ride stealth socialize ],
-    "eclipse":  %w[ bureaucracy larceny linguistics occult presence ride sail socialize ]
+    dawn:     %w[ archery awareness brawl dodge melee resistance thrown war ],
+    zenith:   %w[ athletics integrity performance lore presence resistance survival war ],
+    twilight: %w[ bureaucracy craft integrity investigation linguistics lore medicine occult ],
+    night:    %w[ athletics awareness dodge investigation larceny ride stealth socialize ],
+    eclipse:  %w[ bureaucracy larceny linguistics occult presence ride sail socialize ]
   }.freeze
 
   before_validation :set_mote_pool_totals
@@ -81,7 +81,7 @@ class SolarCharacter < Character
   def set_caste_abilities_on_supernal_change
     return unless will_save_change_to_attribute?(:supernal_ability) &&
                   supernal_ability.present? &&
-                  !caste_abilities.include?(supernal_or_brawl)
+                  caste_abilities.exclude?(supernal_or_brawl)
 
     add_supernal_to_caste
     self.favored_abilities = favored_abilities - caste_abilities

@@ -22,6 +22,7 @@ gem 'deep_cloneable', '~> 3.0'
 gem 'bcrypt', '~> 3.1.11'
 
 gem 'bootsnap', '~> 1.15.0', require: false
+gem 'uglifier'
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2.0', git: 'https://github.com/makzu/knock'

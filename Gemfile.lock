@@ -110,6 +110,7 @@ GEM
     email_validator (2.2.4)
       activemodel
     erubi (1.12.0)
+    execjs (2.8.1)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -318,6 +319,8 @@ GEM
     timeout (0.3.1)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     unicode-display_width (2.4.2)
     version_gem (1.1.1)
     web-console (4.2.0)
@@ -376,6 +379,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.1.0)
   tzinfo-data
+  uglifier
   web-console
   webpacker (~> 5.4.0)
 

@@ -106,12 +106,12 @@ const NavPanel = (props: Props) => {
             <ChronicleNavList closeDrawer={closeCheck} />
           </>
         )}
-        {(!authenticated && isDeveloperMode) && (
+        {(!authenticated && isDeveloperMode()) && (
           <>
             <LoginForm action="/auth/developer" text="Log in (Developer)" />
           </>
         )}
-        {(!authenticated && !isDeveloperMode) && (
+        {(!authenticated && !isDeveloperMode()) && (
           <>
             <LoginForm action="/auth/google_oauth2" text="Log in with Google" />
           </>

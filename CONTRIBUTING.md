@@ -26,5 +26,9 @@ Your mileage may vary.
 
 If it fails to start up, try...
 
-* Stopping the containers and removing the db stuff with `docker compose down -v`
-* Running `docker compose exec ruby ./bin/setup` again. It's finnicky.
+- Stopping the containers and removing the db stuff with `docker compose down -v`
+- Running `docker compose exec ruby ./bin/setup` again. It's finnicky.
+
+Log in using the Developer login with the email `iam@iam.iam` to get access to the basic seed characters.
+
+To debug Ruby code using byebug, run `docker attach lotcastingatemi-ruby-1` in a separate terminal.

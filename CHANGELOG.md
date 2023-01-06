@@ -1,12 +1,14 @@
-## v86
+## v90
 
-###### _Not yet released_
+###### _Jan 5, 2023_
 
 - Sidereal PCs can now be created
 - Hidden intimacies now show an icon to indicate they're hidden (Thanks for the PR, tyler569!)
 - Made dot ratings slightly more accessible for screen reader users
-- Bonus hardness from armor is now shown even if the character does not have artifact armor
+- Bonus hardness from armor is now shown even if the character does not have artifact armor (Thanks, Firepower!)
 - Fixed typo in the merit page (Thanks, Kallor!)
+- Improved new dev onboarding process using Docker (Thanks for the PR, Everspace!)
+- v86-v89 Sealed by order of the Maiden of Secrets
 
 ## v85
 

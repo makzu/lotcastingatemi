@@ -47,7 +47,7 @@ module Api
           in_combat has_acted
         ]
 
-        @new_bg.name = @new_bg.name + ' (Duplicate)'
+        @new_bg.name = "#{@new_bg.name} (Duplicate)"
         @new_bg.player = current_player
 
         if @new_bg.save

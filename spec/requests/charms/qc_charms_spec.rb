@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'requests/shared_examples/character_trait'
 require 'support/auth_token'
 
-RSpec.describe 'Charms::QcCharms', type: :request do
+RSpec.describe 'Charms::QcCharms' do
   ActiveJob::Base.queue_adapter = :test
 
   let(:charm) { create(:qc_charm) }
@@ -19,7 +19,7 @@ RSpec.describe 'Charms::QcCharms', type: :request do
                 headers: authenticated_header(charm.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
         expect(QcCharm.find(charm.id).keywords).to eq %w[simple perilous]
       end
     end

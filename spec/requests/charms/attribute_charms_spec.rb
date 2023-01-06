@@ -3,6 +3,6 @@
 require 'rails_helper'
 require 'requests/shared_examples/charm'
 
-RSpec.describe 'Charms::AttributeCharms', type: :request do
+RSpec.describe 'Charms::AttributeCharms' do
   it_behaves_like 'charm', :charms_attribute_charm, 'characters'
 end

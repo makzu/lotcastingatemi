@@ -19,12 +19,12 @@ class Character < ApplicationRecord
   has_many :weapons, dependent: :destroy
   has_many :spells,  dependent: :destroy, as: :sorcerer
 
-  has_many :ability_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AbilityCharm'
-  has_many :attribute_charms,    foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::AttributeCharm'
-  has_many :essence_charms,      foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::EssenceCharm'
-  has_many :martial_arts_charms, foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::MartialArtsCharm'
-  has_many :spirit_charms,       foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::SpiritCharm'
-  has_many :evocations,          foreign_key: 'character_id', inverse_of: :character, dependent: :destroy, class_name: '::Charms::Evocation'
+  has_many :ability_charms,      inverse_of: :character, dependent: :destroy, class_name: '::Charms::AbilityCharm'
+  has_many :attribute_charms,    inverse_of: :character, dependent: :destroy, class_name: '::Charms::AttributeCharm'
+  has_many :essence_charms,      inverse_of: :character, dependent: :destroy, class_name: '::Charms::EssenceCharm'
+  has_many :martial_arts_charms, inverse_of: :character, dependent: :destroy, class_name: '::Charms::MartialArtsCharm'
+  has_many :spirit_charms,       inverse_of: :character, dependent: :destroy, class_name: '::Charms::SpiritCharm'
+  has_many :evocations,          inverse_of: :character, dependent: :destroy, class_name: '::Charms::Evocation'
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 
@@ -67,10 +67,10 @@ class Character < ApplicationRecord
   validates :sorcerous_motes, numericality: { greater_than_or_equal_to: 0 }
   validates :onslaught,       numericality: { greater_than_or_equal_to: 0 }
 
-  before_validation :trim_armor_tags
   after_initialize :set_xp_log
   after_initialize :set_solar_xp_log
   after_initialize :set_rituals
+  before_validation :trim_armor_tags
 
   def set_xp_log
     return if xp_spent.zero? || !xp_log.empty?
@@ -93,7 +93,7 @@ class Character < ApplicationRecord
   def trim_armor_tags
     return unless will_save_change_to_attribute? :armor_tags
 
-    self.armor_tags = armor_tags.reject(&:blank?).collect(&:strip).collect(&:downcase).uniq
+    self.armor_tags = armor_tags.compact_blank.collect(&:strip).collect(&:downcase).uniq
   end
 
   def entity_type

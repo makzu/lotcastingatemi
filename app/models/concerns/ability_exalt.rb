@@ -30,17 +30,13 @@ module AbilityExalt
 
     def caste_abilities_are_valid
       caste_abilities.each do |a|
-        unless Constants::ABILITIES.include? a
-          errors.add(:caste_abilities, "#{a} is not a valid ability")
-        end
+        errors.add(:caste_abilities, "#{a} is not a valid ability") unless Constants::ABILITIES.include? a
       end
     end
 
     def favored_abilities_are_valid
       favored_abilities.each do |a|
-        unless Constants::ABILITIES.include? a
-          errors.add(:favored_abilities, "#{a} is not a valid ability")
-        end
+        errors.add(:favored_abilities, "#{a} is not a valid ability") unless Constants::ABILITIES.include? a
       end
     end
 

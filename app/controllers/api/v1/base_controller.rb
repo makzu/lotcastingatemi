@@ -4,7 +4,7 @@ module Api
   module V1
     class BaseController < ActionController::API
       include Knock::Authenticable
-      include Pundit
+      include Pundit::Authorization
       serialization_scope :current_player
 
       before_action :authenticate_player

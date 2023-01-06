@@ -22,28 +22,27 @@ module Exalt
 
       attr_abil = Constants::ATTRIBUTES + Constants::ABILITIES + %w[* dragonblood solar lunar sidereal]
       excellencies_for.each do |e|
-        unless attr_abil.include? e
-          errors.add(:excellencies_for, "#{e} is not a valid excellency target")
-        end
+        errors.add(:excellencies_for, "#{e} is not a valid excellency target") unless attr_abil.include? e
       end
     end
 
     def trim_array_attributes
-      return unless will_save_change_to_attribute?(:excellencies_for) ||
-                    will_save_change_to_attribute?(:caste_abilities) ||
-                    will_save_change_to_attribute?(:favored_abilities) ||
-                    will_save_change_to_attribute?(:caste_attributes) ||
-                    will_save_change_to_attribute?(:favored_attributes)
-
-      self.excellencies_for = excellencies_for.reject(&:blank?).collect(&:strip)
-      self.caste_abilities = caste_abilities.reject(&:blank?).collect(&:strip)
-      self.favored_abilities = favored_abilities.reject(&:blank?).collect(&:strip)
-      self.caste_attributes = caste_attributes.reject(&:blank?).collect(&:strip)
-      self.favored_attributes = favored_attributes.reject(&:blank?).collect(&:strip)
+      %i[excellencies_for caste_abilities favored_abilities caste_attributes
+         favored_attributes].each do |array_attribute|
+        if will_save_change_to_attribute?(array_attribute)
+          self[array_attribute] =
+            self[array_attribute].compact_blank.collect(&:strip)
+        end
+      end
     end
 
     def caste_is_blank?
       caste.blank?
+    end
+
+    def remove_caste_and_favored_attributes
+      self.caste_attributes = []
+      self.favored_attributes = []
     end
   end
 end

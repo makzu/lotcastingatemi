@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CustomAttributeCharacter, type: :model do
+RSpec.describe CustomAttributeCharacter do
   describe 'converting types' do
     %i[
       character solar_character dragonblood_character lunar_character sidereal_character

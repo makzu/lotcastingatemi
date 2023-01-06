@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Charms::MartialArtsCharm, type: :model do
+RSpec.describe Charms::MartialArtsCharm do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:charms_martial_arts_charm)).to be_valid
+    expect(create(:charms_martial_arts_charm)).to be_valid
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Charms::EssenceCharm, type: :model do
+RSpec.describe Charms::EssenceCharm do
   it 'can switch from AbilityCharm' do
     old_charm = create(:charms_ability_charm)
     new_charm = described_class.from_charm!(old_charm)

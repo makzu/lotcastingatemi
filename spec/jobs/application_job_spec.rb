@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ApplicationJob, type: :job do
+RSpec.describe ApplicationJob do
   let(:character) { create(:character) }
 
   it 'broadcast_create works' do
@@ -11,7 +11,7 @@ RSpec.describe ApplicationJob, type: :job do
     end.to(have_broadcasted_to("entity-update-#{character.player_id}").with do |msg|
       expect(msg['event']).to eq 'create'
       expect(msg['type']).to eq character.entity_type
-      expect(msg['assoc']).to eq character.entity_assoc + 's'
+      expect(msg['assoc']).to eq "#{character.entity_assoc}s"
     end)
   end
 
@@ -30,7 +30,7 @@ RSpec.describe ApplicationJob, type: :job do
     end.to(have_broadcasted_to("entity-update-#{character.player_id}").with do |msg|
       expect(msg['event']).to eq 'destroy'
       expect(msg['type']).to eq character.entity_type
-      expect(msg['assoc']).to eq character.entity_assoc + 's'
+      expect(msg['assoc']).to eq "#{character.entity_assoc}s"
     end)
   end
 end

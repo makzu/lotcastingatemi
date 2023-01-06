@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Chronicle, type: :model do
+RSpec.describe Chronicle do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:chronicle)).to be_valid
+    expect(create(:chronicle)).to be_valid
   end
 end

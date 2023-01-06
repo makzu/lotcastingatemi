@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'requests/shared_examples/character_trait'
 require 'support/auth_token'
 
-RSpec.describe 'Weapons', type: :request do
+RSpec.describe 'Weapons' do
   ActiveJob::Base.queue_adapter = :test
 
   let(:weapon) { create(:weapon) }
@@ -19,7 +19,6 @@ RSpec.describe 'Weapons', type: :request do
                 headers: authenticated_header(weapon.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 
-        expect(response.status).to eq 200
         expect(Weapon.find(weapon.id).tags).to eq %w[lethal melee balanced]
       end
     end

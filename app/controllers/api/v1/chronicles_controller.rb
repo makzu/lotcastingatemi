@@ -45,9 +45,7 @@ module Api
 
       def join
         authorize current_player, :update?
-        unless @chronicle.players.include? current_player
-          @chronicle.players << current_player
-        end
+        @chronicle.players << current_player unless @chronicle.players.include? current_player
 
         if @chronicle.save
           render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
@@ -62,7 +60,7 @@ module Api
           @player = current_player
         else
           authorize @chronicle, :update?
-          @player = Player.find_by!(id: params[:player_id])
+          @player = Player.find(params[:player_id])
         end
 
         @chronicle.remove_player(@player)

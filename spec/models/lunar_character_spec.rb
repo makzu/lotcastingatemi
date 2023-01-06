@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe LunarCharacter, type: :model do
+RSpec.describe LunarCharacter do
   let(:character) { create(:lunar_character) }
 
   describe 'mote pool' do

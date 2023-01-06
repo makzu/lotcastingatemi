@@ -6,6 +6,6 @@ RSpec.shared_examples 'respond_to_unauthenticated' do |action|
   end
 
   it 'responds with 401' do
-    expect(response.status).to eq 401
+    expect(response).to have_http_status :unauthorized
   end
 end

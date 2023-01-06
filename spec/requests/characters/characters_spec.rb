@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'requests/shared_examples/character'
 
-RSpec.describe 'Characters', type: :request do
+RSpec.describe 'Characters' do
   def authenticated_header(user)
     { 'Authorization' => "Bearer #{user.token}" }
   end
@@ -19,7 +19,7 @@ RSpec.describe 'Characters', type: :request do
               headers: authenticated_header(character.player),
               params:  { character: { attr_wits: 4 }}
 
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
         expect(JSON.parse(response.body)['attr_wits']).to eq 4
         character.reload
         expect(character.attr_wits).to eq(4)
@@ -32,7 +32,7 @@ RSpec.describe 'Characters', type: :request do
               headers: authenticated_header(character.player),
               params:  { character: { essence: -1 }}
 
-        expect(response.status).to eq 400
+        expect(response).to have_http_status :bad_request
         character.reload
         expect(character.essence).not_to eq(-1)
       end
@@ -47,7 +47,7 @@ RSpec.describe 'Characters', type: :request do
                headers: authenticated_header(character.player),
                params:  { type: type }
 
-          expect(response.status).to eq 200
+          expect(response).to have_http_status :ok
         end
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe 'Characters', type: :request do
              headers: authenticated_header(character.player),
              params:  { type: 'NotAType' }
 
-        expect(response.status).to eq 400
+        expect(response).to have_http_status :bad_request
       end
     end
   end

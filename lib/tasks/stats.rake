@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 namespace :lca do
   desc 'Display aggregate stats for Discord announcements'
   task stats: :environment do
@@ -126,4 +125,3 @@ namespace :lca do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

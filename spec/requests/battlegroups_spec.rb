@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'requests/shared_examples/character'
 
-RSpec.describe 'Battlegroups', type: :request do
+RSpec.describe 'Battlegroups' do
   it_behaves_like 'character', :battlegroup
 
   ActiveJob::Base.queue_adapter = :test
@@ -27,7 +27,7 @@ RSpec.describe 'Battlegroups', type: :request do
           .and(change(QcAttack, :count).by(1))
 
         expect(response.media_type).to eq 'application/json'
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
       end
     end
   end

@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::ChroniclesController, type: :controller do
+RSpec.describe Api::V1::ChroniclesController do
   def authenticated_header(user)
     "Bearer #{user.token}"
   end
 
   before do
-    @player = FactoryBot.create(:player)
-    @chronicle = FactoryBot.create(:chronicle, st_id: @player.id)
+    @player = create(:player)
+    @chronicle = create(:chronicle, st_id: @player.id)
   end
 
   describe 'GET show' do
@@ -28,9 +28,11 @@ RSpec.describe Api::V1::ChroniclesController, type: :controller do
     context 'with valid attributes' do
       it 'Increases Chronicle count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle_params = FactoryBot.attributes_for(:chronicle, st_id: @player.id)
+        @chronicle_params = attributes_for(:chronicle, st_id: @player.id)
 
-        expect { post :create, params: { chronicle: @chronicle_params }, format: :json }.to change(Chronicle, :count).by(1)
+        expect do
+          post :create, params: { chronicle: @chronicle_params }, format: :json
+        end.to change(Chronicle, :count).by(1)
       end
     end
 

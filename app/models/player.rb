@@ -37,6 +37,10 @@ class Player < ApplicationRecord
     )
   end
 
+  def self.find_or_create_from_oauth(auth)
+    find_by(email: auth['info']['email']) || create_from_oauth(auth)
+  end
+
   def self.create_from_oauth(auth)
     create(
       display_name: auth['info']['name'],

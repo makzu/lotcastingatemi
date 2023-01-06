@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Player, type: :model do
+RSpec.describe Player do
   it 'has a valid factory' do
-    expect(FactoryBot.create(:player)).to be_valid
+    expect(create(:player)).to be_valid
   end
 end

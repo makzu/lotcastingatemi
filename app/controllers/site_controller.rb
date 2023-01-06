@@ -8,7 +8,6 @@ class SiteController < ApplicationController
     @title, @description, @image =
       klass
       .where(id: params[:id], public: true)
-      .pluck(:name, :description, :portrait_link)
-      .first
+      .pick(:name, :description, :portrait_link)
   end
 end

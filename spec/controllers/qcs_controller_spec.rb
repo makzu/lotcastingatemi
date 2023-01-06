@@ -2,24 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::QcsController, type: :controller do
+RSpec.describe Api::V1::QcsController do
   def authenticated_header(user)
     "Bearer #{user.token}"
   end
 
   before do
-    @player = FactoryBot.create(:player)
-    @qc = FactoryBot.create(:qc, player_id: @player.id)
+    @player = create(:player)
+    @qc = create(:qc, player_id: @player.id)
   end
 
   describe 'POST #create' do
     context 'with invalid attributes' do
       it 'Increases qc count by 0' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryBot.create(:chronicle)
-        @invalid_qc_params = FactoryBot.attributes_for(:qc, essence: 11)
+        @chronicle = create(:chronicle)
+        @invalid_qc_params = attributes_for(:qc, essence: 11)
 
-        expect { post :create, params: { qc: @invalid_qc_params }, format: :json }.to change(Qc, :count).by(0)
+        expect { post :create, params: { qc: @invalid_qc_params }, format: :json }.not_to change(Qc, :count)
       end
     end
   end
@@ -28,8 +28,8 @@ RSpec.describe Api::V1::QcsController, type: :controller do
     context 'with valid attributes' do
       it 'Updates qc attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryBot.create(:chronicle)
-        @updated_qc_params = FactoryBot.attributes_for(:qc, essence: 5)
+        @chronicle = create(:chronicle)
+        @updated_qc_params = attributes_for(:qc, essence: 5)
 
         expect(@qc.essence).not_to eq(5)
 
@@ -43,8 +43,8 @@ RSpec.describe Api::V1::QcsController, type: :controller do
     context 'with invalid attributes' do
       it 'Updates qc attributes' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle = FactoryBot.create(:chronicle)
-        @invalid_updated_qc_params = FactoryBot.attributes_for(:qc, essence: -1)
+        @chronicle = create(:chronicle)
+        @invalid_updated_qc_params = attributes_for(:qc, essence: -1)
 
         expect(@qc.essence).not_to eq(-1)
 

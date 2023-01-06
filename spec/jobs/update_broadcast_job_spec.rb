@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe UpdateBroadcastJob, type: :job do
+RSpec.describe UpdateBroadcastJob do
   pending "add some examples to (or delete) #{__FILE__}"
 end

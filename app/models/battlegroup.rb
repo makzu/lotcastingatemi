@@ -46,7 +46,7 @@ class Battlegroup < ApplicationRecord
     battlegroup.health_levels = qc_copy.total_health_levels
     battlegroup.magnitude = battlegroup.health_levels + 1
     battlegroup.qc_attacks = qc_copy.qc_attacks
-    battlegroup.name = battlegroup.name + ' (Battlegroup)'
+    battlegroup.name = "#{battlegroup.name} (Battlegroup)"
     battlegroup
   end
 end

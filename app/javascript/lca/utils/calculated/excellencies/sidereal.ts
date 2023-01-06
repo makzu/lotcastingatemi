@@ -14,8 +14,7 @@ export const siderealExcellencyAbils = (
       (character.favored_abilities || []).filter(a => abil(character, a) > 0)
     )
 
-  if (excellencies.includes('brawl') && character.abil_martial_arts.length > 0)
-    excellencies = excellencies.concat(['martial_arts'])
+  excellencies = excellencies.concat(['martial_arts'])
 
   excellencies = excellencies.concat(
     charms.map(c =>

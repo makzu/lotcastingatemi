@@ -55,7 +55,6 @@ gem 'lograge', '~> 0.12.0'
 
 group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'action-cable-testing', '~> 0.6.0'
   gem 'byebug', platform: :mri
   gem 'cypress-on-rails', '~> 1.13.0'
   gem 'database_cleaner', '~> 2.0.0'

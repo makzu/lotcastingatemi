@@ -11,7 +11,7 @@ class Identity < ApplicationRecord
     iden.token = auth['credentials']['token']
     iden.expires_at = auth['credentials']['expires_at']
 
-    iden.player ||= Player.create_from_oauth(auth)
+    iden.player ||= Player.find_or_create_from_oauth(auth)
 
     iden.save
     iden

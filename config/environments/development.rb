@@ -19,7 +19,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
@@ -57,6 +57,9 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Rails web console on Docker
+  config.web_console.permissions = '172.0.0.0/24'
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
@@ -69,12 +72,12 @@ Rails.application.configure do
       origins 'localhost:5000', 'localhost:8080', '127.0.0.1:5000', '127.0.0.1:8080'
       resource '*',
                headers: :any,
-               expose:  ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+               expose:  %w[access-token expiry token-type uid client],
                methods: %i[get post options delete put]
     end
   end
 
   config.debug_exception_response_format = :api
 
-  Rack::MiniProfiler.config.position = 'bottom-left' if ::Rack.const_defined? 'MiniProfiler'
+  Rack::MiniProfiler.config.position = 'bottom-left' if Rack.const_defined? 'MiniProfiler'
 end

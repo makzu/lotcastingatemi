@@ -1,3 +1,10 @@
+## v94
+
+###### _Jan 6, 2023_
+
+- Fix sidereal caste selector not showing (Thanks, Definitely A Nerd!)
+- Fix publicly visable characters not being visable any more (Thanks, endwaar!)
+
 ## v91
 
 ###### _Jan 5, 2023_
@@ -13,6 +20,7 @@
 - Hidden intimacies now show an icon to indicate they're hidden (Thanks for the PR, tyler569!)
 - Bonus hardness from armor is now shown even if the character does not have artifact armor (Thanks, Firepower!)
 - Fixed typo in the merit page (Thanks, Kallor!)
+- QC cards now have description snippets added (Thanks for the PR, oakfang!)
 - Made dot ratings slightly more accessible for screen reader users
 - Improved new dev onboarding process using Docker (Thanks for the PR, Everspace!)
 - v86-v89 Sealed by order of the Maiden of Secrets

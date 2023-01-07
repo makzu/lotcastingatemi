@@ -13,7 +13,7 @@ const SiderealCasteSelect = (props: TextFieldProps) => (
     margin="dense"
     data-cy="select-sid-caste"
   >
-    <ListSubheader key="none">Select an Aspect</ListSubheader>
+    <ListSubheader key="none">Select a Caste</ListSubheader>
     <MenuItem value="journeys">Journeys</MenuItem>
     <MenuItem value="serenity">Serenity</MenuItem>
     <MenuItem value="battles">Battles</MenuItem>

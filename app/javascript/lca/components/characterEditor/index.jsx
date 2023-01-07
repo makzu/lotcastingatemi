@@ -44,6 +44,7 @@ class CharacterEditor extends Component<Props> {
     const { name, value } = e.target
     const { character } = this.props
 
+    if (value == null) return
     if (deepEqual(character[name], value)) return
 
     this.props.updateCharacter(character.id, { [name]: value })

@@ -19,10 +19,10 @@ import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     ...theme.mixins.gutters({
       paddingTop: 16,
@@ -109,8 +109,12 @@ function QcCard(props: Props) {
               </div>
             )}
           </Typography>
-          
-          {qc.description && <Typography variant="caption" component="div">{qc.description}</Typography>}
+
+          {qc.description && (
+            <Typography variant="caption" component="div">
+              {qc.description.substring(0, 160)}
+            </Typography>
+          )}
 
           {chronicle && <PlayerNameSubtitle playerId={qc.player_id} />}
         </div>
@@ -202,7 +206,7 @@ const mapStateToProps = (state, props) => ({
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )
 
 export default enhance(QcCard)

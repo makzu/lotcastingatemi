@@ -49,6 +49,7 @@ end
 
 # For Heroku Ruby metrics
 gem 'barnes', '~>0.0.9'
+gem 'scout_apm'
 
 # logging
 gem 'colorize', '~> 0.8.0'
@@ -64,6 +65,11 @@ group :development, :test, :cypress do
   gem 'rubocop', '~> 1.42.0', require: false
   gem 'rubocop-rails', '~> 2.17.0', require: false
   gem 'rubocop-rspec', '~> 2.16.0', require: false
+
+  # profiling
+  gem 'derailed_benchmarks'
+  gem 'faker'
+  gem 'stackprof'
 end
 
 group :development do

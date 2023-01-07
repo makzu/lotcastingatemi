@@ -132,11 +132,4 @@ class Character < ApplicationRecord
   def charms
     []
   end
-
-  def without_secrets
-    c = dup
-    c.ties.reject! { |t| t['hidden'] }
-    c.principles.reject! { |p| p['hidden'] }
-    c
-  end
 end

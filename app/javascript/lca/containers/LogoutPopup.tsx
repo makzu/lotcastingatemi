@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 
 import {
   Button,
+  ButtonProps,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Typography
+  Typography,
 } from '@material-ui/core'
 
 import { State } from 'ducks'
@@ -19,6 +20,13 @@ interface StateProps {
   isLoading: boolean
   isPublic: boolean
 }
+
+const CsrfInput = () => {
+  const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content
+  return <input type="hidden" name="authenticity_token" value={csrfToken} />
+}
+
+const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
 const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   const [isOpen, setOpen] = useDialogLogic()
@@ -42,18 +50,16 @@ const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
       </DialogContent>
       <DialogActions>
         {window.location.hostname === 'localhost' && (
-          <Button component="a" href="/auth/developer">
-            Log In (Developer)
-          </Button>
+          <form action="/auth/developer" method="POST">
+            <CsrfInput />
+            <Button component={SubmitButton}>Log In (Developer)</Button>
+          </form>
         )}
-        <Button
-          variant="contained"
-          color="primary"
-          component="a"
-          href="/auth/google_oauth2"
-        >
-          Log in with Google
-        </Button>
+        <form action="/auth/google_oauth2" method="POST">
+          <Button variant="contained" color="primary" component={SubmitButton}>
+            Log in with Google
+          </Button>
+        </form>
       </DialogActions>
     </Dialog>
   )

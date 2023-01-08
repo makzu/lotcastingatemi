@@ -1,7 +1,6 @@
 // @flow
 import { apiMiddleware } from 'redux-api-middleware'
-import { configureStore } from 'redux-starter-kit'
-import thunk from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
 
 import authTokenMiddleware from './middleware/authTokenMiddleware.js'
 import navigatorMiddleware from './middleware/navigatorMiddleware.js'
@@ -9,24 +8,26 @@ import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
 
 import reducer from './ducks'
 
-// eslint-disable-next-line no-undef
-const PRODUCTION = process.env.NODE_ENV === 'production'
-
-let middleware = [
-  thunk,
+const middleware = [
   apiMiddleware,
   authTokenMiddleware,
   navigatorMiddleware,
   themeSaverMiddleware,
 ]
-if (!PRODUCTION)
-  middleware = middleware.concat(
-    require('redux-immutable-state-invariant').default()
-  )
 
-export default () =>
-  configureStore({
+// export default () =>
+//   configureStore({
+//     reducer,
+//     middleware,
+//     devTools: !PRODUCTION,
+//   })
+
+export default function configureAppStore(preloadedState) {
+  const store = configureStore({
     reducer,
-    middleware,
-    devTools: !PRODUCTION,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleware),
+    preloadedState,
   })
+
+  return store
+}

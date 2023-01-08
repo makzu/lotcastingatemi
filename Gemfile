@@ -84,6 +84,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.1.0'
 
   # Performance metrics
+  gem 'bullet'
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler'
@@ -100,4 +101,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-ruby '2.7.7'
+ruby '3.2.0'

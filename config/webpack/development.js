@@ -12,11 +12,11 @@ environment.config.merge({
       name: true,
     },
   },
-  resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     'react-dom': '@hot-loader/react-dom',
+  //   },
+  // },
 })
 
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')

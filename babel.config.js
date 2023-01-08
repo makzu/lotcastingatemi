@@ -40,7 +40,7 @@ module.exports = function(api) {
       '@babel/preset-typescript',
     ].filter(Boolean),
     plugins: [
-      'react-hot-loader/babel',
+      // 'react-hot-loader/babel',
       'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
       isTestEnv && 'babel-plugin-dynamic-import-node',

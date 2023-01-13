@@ -57,11 +57,15 @@ export interface CrudActionGroup {
   failure: ActionFunctionAny<Action>
 }
 
-export const massagePayload = (type: entityTypes | listTypes | string) => (
-  {} = {},
-  {} = {},
-  res
-) => getJSON(res.clone()).then(json => normalize(json, schemas[type]))
+export const massagePayload =
+  (type: entityTypes | listTypes | string) =>
+  ({} = {}, {} = {}, res) =>
+    getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
+
+export const successMeta = (_: null, __: null, { headers }: Response) => ({
+  page: headers.get('current-page'),
+  lastPage: headers.get('total-pages'),
+})
 
 type TypesTuple = [Action, Action, Action]
 
@@ -70,7 +74,7 @@ export const standardTypes = (
   type: entityTypes | listTypes | string,
   action: CrudActionGroup,
   payloadFunc = massagePayload(type),
-  metaFunc?: any
+  metaFunc = successMeta,
 ): TypesTuple => [
   action.start(null, metaFunc),
   action.success(payloadFunc, metaFunc),
@@ -85,7 +89,7 @@ export const optimisticTypes = (
   trait?: any,
   successPayload?: any,
   charId?: number,
-  parent?: characterTypes
+  parent?: characterTypes,
 ): TypesTuple => [
   action.start(trait, {
     charId,
@@ -111,7 +115,7 @@ const meta = (_: any, m: any) => m
 // tslint:disable object-literal-sort-keys
 export const crudAction = (
   type: entityTypes,
-  action: crudActions
+  action: crudActions,
 ): CrudActionGroup => ({
   start: createAction(`${API}/${type}/${action}/${START}`, null, meta),
   success: createAction(`${API}/${type}/${action}/${SUCCESS}`, null, meta),
@@ -119,18 +123,16 @@ export const crudAction = (
 })
 // tslint:enable *
 
-export const reducerUpdateAction = (type: string) => (
-  state: EntityState,
-  action
-) => {
-  const { id } = action.meta
+export const reducerUpdateAction =
+  (type: string) => (state: EntityState, action) => {
+    const { id } = action.meta
 
-  for (const key in action.payload) {
-    if (action.payload.hasOwnProperty(key)) {
-      state[type][id][key] = action.payload[key]
+    for (const key in action.payload) {
+      if (action.payload.hasOwnProperty(key)) {
+        state[type][id][key] = action.payload[key]
+      }
     }
   }
-}
 
 /** Simply unwraps the entity portion of the state */
 export const unwrapped = (state: State): EntityState => state.entities.current

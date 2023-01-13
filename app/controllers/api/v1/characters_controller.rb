@@ -7,7 +7,8 @@ module Api
 
       def index
         authorize current_player
-        @characters = Character.includes(Character.association_types).where(player_id: current_player.id)
+        @pagy, @characters = pagy(Character.includes(Character.association_types).where(player_id: current_player.id))
+
         render json: @characters
       end
 

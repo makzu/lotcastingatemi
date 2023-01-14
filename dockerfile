@@ -1,16 +1,8 @@
 FROM ruby:3.2
 
-# RUN apk add \
-#   build-base \
-#   git \
-#   nodejs \
-#   npm \
-#   postgresql-dev \
-#   python3 \
-#   tzdata \
-#   yarn
-
+# Will be needed for Nodejs 18 until webpack/other packages are updated to use newer openssl code:
 # ENV NODE_OPTIONS=--openssl-legacy-provider
+
 # Get package keys going
 # Nodejs 16
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -

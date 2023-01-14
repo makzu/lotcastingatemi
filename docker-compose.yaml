@@ -13,31 +13,30 @@ services:
   # main rails blob
   ruby:
     build: .
-    command: foreman start -f Procfile.dev
+    command: bundle exec rails s --pid /tmp/server.pid -b 0.0.0.0 -p 3000
+    depends_on:
+      - postgres
+      - webpack
     volumes:
       - .:/myapp
-      - /myapp/node_modules
     ports:
       - 3000:3000
     environment:
       DATABASE_URL: postgres
-    depends_on:
-      - postgres
     stdin_open: true
     tty: true
-  # # Runs the webpack dev server, because foreman goes away.
-  # webpack:
-  #   build: .
-  #   volumes:
-  #     - .:/myapp
-  #   command: ./bin/webpack-dev-server --hot
-  #   depends_on:
-  #     - ruby
-  #   ports:
-  #     - 3035:3035
 
-  # Make a volume, because windows screws up the the permissions
-  # so postgres has a fit.
+  # Runs the webpack dev server
+  webpack:
+    build: .
+    volumes:
+      - .:/myapp
+    command: ./bin/webpack-dev-server
+    ports:
+      - 3035:3035
+
+# Make a volume, because windows screws up the the permissions
+# so postgres has a fit.
 volumes:
   postgres:
     driver: local

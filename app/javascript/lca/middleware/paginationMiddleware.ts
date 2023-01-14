@@ -1,7 +1,11 @@
 import { Middleware } from 'redux'
 
 import { State } from 'ducks'
-import { fetchAllCharacters } from 'ducks/entities'
+import {
+  fetchAllCharacters,
+  fetchAllQcs,
+  fetchAllBattlegroups,
+} from 'ducks/entities'
 import { crudAction } from 'ducks/entities/_lib'
 
 // Detects incomplete paginated requests and requests the next page
@@ -17,8 +21,10 @@ const pagyMiddleware: Middleware<object, State> =
           store.dispatch(fetchAllCharacters(page + 1))
           break
         case crudAction('qc', 'FETCH_ALL').success.toString():
+          store.dispatch(fetchAllQcs(page + 1))
           break
         case crudAction('battlegroup', 'FETCH_ALL').success.toString():
+          store.dispatch(fetchAllBattlegroups(page + 1))
           break
       }
     }

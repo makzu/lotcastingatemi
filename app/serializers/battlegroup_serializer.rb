@@ -10,5 +10,5 @@ class BattlegroupSerializer < PlayerAssetSerializer
              :movement, :senses, :join_battle
 
   has_many :qc_attacks
-  has_many :poisons
+  # has_many :poisons
 end

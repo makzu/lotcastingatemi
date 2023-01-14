@@ -32,5 +32,5 @@ class QcSerializer < PlayerAssetSerializer
   has_many :qc_charms
   has_many :qc_merits
   has_many :spells
-  has_many :poisons
+  # has_many :poisons
 end

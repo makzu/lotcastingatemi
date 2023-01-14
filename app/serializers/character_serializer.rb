@@ -58,5 +58,5 @@ class CharacterSerializer < PlayerAssetSerializer
   has_many :merits
   has_many :weapons
   has_many :spells
-  has_many :poisons
+  # has_many :poisons
 end

@@ -6,5 +6,5 @@ class WeaponSerializer < CharacterTraitSerializer
              :ability, :overrides,
              :bonus_accuracy, :bonus_damage, :bonus_defense, :bonus_overwhelming
 
-  has_many :poisons
+  # has_many :poisons
 end

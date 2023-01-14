@@ -4,12 +4,14 @@ module Api
   module V1
     class BaseController < ActionController::API
       include Knock::Authenticable
+      include Pagy::Backend
       include Pundit::Authorization
       serialization_scope :current_player
 
       before_action :authenticate_player
       before_action :setup_resource, except: %i[index create]
 
+      after_action { pagy_headers_merge(@pagy) if @pagy }
       after_action :verify_authorized
 
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found

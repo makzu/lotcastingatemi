@@ -8,7 +8,7 @@ module Api
 
       def index
         authorize current_player
-        @battlegroups = Battlegroup.includes(:poisons, qc_attacks: :poisons).where(player_id: current_player.id)
+        @pagy, @battlegroups = pagy(Battlegroup.includes(:qc_attacks).where(player_id: current_player.id))
         render json: @battlegroups
       end
 
@@ -41,7 +41,7 @@ module Api
         authorize @battlegroup, :show?
 
         @new_bg = @battlegroup.deep_clone include: %i[
-          qc_attacks poisons
+          qc_attacks
         ], except: %i[
           chronicle_id sort_order chronicle_sort_order pinned hidden public
           in_combat has_acted

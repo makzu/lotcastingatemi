@@ -1,6 +1,6 @@
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 import { normalize } from 'normalizr'
-import { createReducer } from 'redux-starter-kit'
+import { createReducer } from '@reduxjs/toolkit'
 
 export * from './player'
 export * from './chronicle'

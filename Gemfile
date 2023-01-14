@@ -15,6 +15,9 @@ gem 'puma', '~> 6.0.0'
 # For JSON responses
 gem 'active_model_serializers', '~> 0.10.9'
 
+# Pagination
+gem 'pagy', '~> 6.0'
+
 # For duplicating QCs and Battlegroups
 gem 'deep_cloneable', '~> 3.0'
 
@@ -55,6 +58,9 @@ gem 'scout_apm'
 gem 'colorize', '~> 0.8.0'
 gem 'lograge', '~> 0.12.0'
 
+# Force ruby 3.2 compatibile version
+# gem 'nokogiri', '~> 1.14'
+
 group :development, :test, :cypress do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -84,6 +90,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.1.0'
 
   # Performance metrics
+  gem 'bullet'
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler'
@@ -100,4 +107,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-ruby '2.7.7'
+ruby '3.2.0'

@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   postgres:
-    image: postgres:alpine
+    image: postgres
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
@@ -13,29 +13,26 @@ services:
   # main rails blob
   ruby:
     build: .
-    command: bundle exec rails s --pid /tmp/server.pid -b 0.0.0.0
-    volumes:
-      - .:/myapp
-      - /myapp/node_modules
-    ports:
-      - 3000:3000
-    links:
-      - postgres
-      - webpack
-    environment:
-      DATABASE_URL: postgres
+    command: bundle exec rails s --pid /tmp/server.pid -b 0.0.0.0 -p 3000
     depends_on:
       - postgres
       - webpack
+    volumes:
+      - .:/myapp
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_URL: postgres
+      WEBPACKER_DEV_SERVER_HOST: webpack
     stdin_open: true
     tty: true
 
-  # Runs the webpack dev server, because foreman goes away.
+  # Runs the webpack dev server
   webpack:
     build: .
     volumes:
       - .:/myapp
-    command: ./bin/webpack-dev-server --hot
+    command: ./bin/webpack-dev-server
     ports:
       - 3035:3035
 

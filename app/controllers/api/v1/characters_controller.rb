@@ -7,7 +7,8 @@ module Api
 
       def index
         authorize current_player
-        @characters = Character.includes(Character.association_types, weapons: :poisons).where(player_id: current_player.id)
+        @pagy, @characters = pagy(Character.includes(Character.association_types).where(player_id: current_player.id))
+
         render json: @characters
       end
 
@@ -37,8 +38,8 @@ module Api
 
         @new_character = @character.deep_clone include: %i[
           attribute_charms ability_charms essence_charms evocations
-          martial_arts_charms weapons merits spirit_charms spells poisons
-        ] + [{ weapons: :poisons }], except: %i[
+          martial_arts_charms weapons merits spirit_charms spells
+        ], except: %i[
           chronicle_id sort_order chronicle_sort_order pinned hidden public
           in_combat has_acted
         ]

@@ -13,12 +13,13 @@ module Api
         @own_chronicles = Chronicle.includes(include_hash).where(st_id: current_player.id)
         @chronicles = Chronicle.joins(chronicle_players: :player).includes(include_hash).where(chronicle_players: { player_id: current_player.id })
         render json:    @own_chronicles + @chronicles,
-               include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+               include: include_hash
       end
 
       def show
+        @chronicle = Chronicle.includes(include_hash).find(params[:id])
         authorize @chronicle
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        render json: @chronicle, include: include_hash
       end
 
       def create
@@ -27,7 +28,7 @@ module Api
         authorize @chronicle
 
         if @chronicle.save
-          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+          render json: @chronicle, include: include_hash
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -48,7 +49,7 @@ module Api
         @chronicle.players << current_player unless @chronicle.players.include? current_player
 
         if @chronicle.save
-          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+          render json: @chronicle, include: include_hash
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -66,7 +67,7 @@ module Api
         @chronicle.remove_player(@player)
 
         if @chronicle.save
-          render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+          render json: @chronicle, include: include_hash
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -78,7 +79,7 @@ module Api
 
         @chronicle.characters << @character
         broadcast_update(@character)
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        render json: @chronicle, include: include_hash
       end
 
       def remove_character
@@ -87,7 +88,7 @@ module Api
 
         @chronicle.characters.delete(@character)
         broadcast_update(@character)
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        render json: @chronicle, include: include_hash
       end
 
       def add_qc
@@ -96,7 +97,7 @@ module Api
 
         @chronicle.qcs << @qc
         broadcast_update(@qc)
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        render json: @chronicle, include: include_hash
       end
 
       def remove_qc
@@ -105,7 +106,7 @@ module Api
 
         @chronicle.qcs.delete(@qc)
         broadcast_update(@qc)
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        render json: @chronicle, include: include_hash
       end
 
       def add_battlegroup
@@ -114,7 +115,7 @@ module Api
 
         @chronicle.battlegroups << @battlegroup
         broadcast_update(@battlegroup)
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        render json: @chronicle, include: include_hash
       end
 
       def remove_battlegroup
@@ -123,7 +124,7 @@ module Api
 
         @chronicle.battlegroups.delete(@battlegroup)
         broadcast_update(@battlegroup)
-        render json: @chronicle, include: %w[characters.* qcs.* battlegroups.* players.* st.*]
+        render json: @chronicle, include: include_hash
       end
 
       private

@@ -108,7 +108,7 @@ class Character < ApplicationRecord
   def self.association_types
     %i[
       ability_charms attribute_charms essence_charms martial_arts_charms
-      evocations spirit_charms weapons merits spells poisons
+      evocations spirit_charms weapons merits spells
     ]
   end
 

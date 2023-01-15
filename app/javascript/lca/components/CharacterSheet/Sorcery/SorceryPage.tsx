@@ -1,5 +1,4 @@
 import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import { Grid, Typography } from '@material-ui/core'
@@ -11,6 +10,7 @@ import { Character, Spell } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import CharacterLoadError from '../CharacterLoadError'
 import SpellList from './SpellList'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 interface StateProps {
   id: number
@@ -20,6 +20,7 @@ interface StateProps {
 // interface Props extends StateProps {}
 
 const SorceryPage = ({ id, name }: StateProps) => {
+  useDocumentTitle(`${name} Sorcery | Lot-Casting Atemi`)
   /* Escape hatch */
   if (name == null) {
     return <CharacterLoadError />
@@ -27,8 +28,6 @@ const SorceryPage = ({ id, name }: StateProps) => {
 
   return (
     <>
-      <DocumentTitle title={`${name} Sorcery | Lot-Casting Atemi`} />
-
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h5">Sorcery</Typography>

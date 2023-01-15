@@ -1,6 +1,5 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -14,6 +13,7 @@ import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
 import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
@@ -51,7 +51,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
     return { name: chronicle.name }
   }
 
-  onChange = e => {
+  onChange = (e) => {
     const { chronicle, updateChronicle } = this.props
     updateChronicle(chronicle.id, { [e.target.name]: e.target.value })
   }
@@ -71,7 +71,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
     const { chronicle, st, is_st, players } = this.props
     const { onChange } = this
 
-    const playerList = players.map(p => (
+    const playerList = players.map((p) => (
       <Fragment key={p.id}>
         <Typography>
           {p.display_name}
@@ -172,8 +172,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
-  connect(
-    mapStateToProps,
-    { updateChronicle }
-  )
+  connect(mapStateToProps, { updateChronicle }),
 )(ChronicleDetailsPage)

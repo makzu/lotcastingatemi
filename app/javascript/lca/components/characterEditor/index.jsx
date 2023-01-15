@@ -1,7 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
 import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import Grid from '@material-ui/core/Grid'
@@ -27,6 +26,7 @@ import SolarExaltEditor from './editors/solarExaltEditor.jsx'
 import SorceryEditor from './editors/sorceryEditor.jsx'
 import WillpowerEditor from './editors/willpowerEditor.jsx'
 import WeaponEditor from './weapons/'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter } from 'ducks/actions.js'
 import { getSpecificCharacter } from 'ducks/selectors'
@@ -58,7 +58,7 @@ class CharacterEditor extends Component<Props> {
     this.props.updateCharacter(character.id, { [name]: value })
   }
 
-  handleChangeMulti = changes => {
+  handleChangeMulti = (changes) => {
     this.props.updateCharacter(this.props.character.id, changes)
   }
 
@@ -117,7 +117,10 @@ class CharacterEditor extends Component<Props> {
           )}
           {character.type === 'SiderealCharacter' && (
             <Grid item xs={12} md={6}>
-              <SiderealExaltEditor character={character} onChange={handleChange} />
+              <SiderealExaltEditor
+                character={character}
+                onChange={handleChange}
+              />
             </Grid>
           )}
           {character.type === 'CustomAbilityCharacter' && (
@@ -236,8 +239,5 @@ function mapStateToProps(state, props) {
 }
 
 export default ProtectedComponent(
-  connect(
-    mapStateToProps,
-    { updateCharacter }
-  )(CharacterEditor)
+  connect(mapStateToProps, { updateCharacter })(CharacterEditor),
 )

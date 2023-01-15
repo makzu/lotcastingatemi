@@ -1,6 +1,5 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -16,6 +15,7 @@ import QcCard from 'components/qcs/QcCard.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
@@ -208,8 +208,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(
-    mapStateToProps,
-    { updateCharacter, updateQc, updateBattlegroup }
-  )(ChronicleDashboard)
+  connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
+    ChronicleDashboard,
+  ),
 )

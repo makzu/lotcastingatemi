@@ -1,6 +1,5 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -15,6 +14,7 @@ import styles from './CharmStyles.js'
 import CharmFields from './CharmFields.jsx'
 import CharmFilter from './CharmFilter.jsx'
 import SpellFields from './SpellFields.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
@@ -37,8 +37,8 @@ import {
 } from 'selectors/'
 import type { Character, Charm, Spell } from 'utils/flow-types'
 
-const filterByCategory = categoryFilter => charm =>
-  categoryFilter.every(cat => charm.categories.includes(cat))
+const filterByCategory = (categoryFilter) => (charm) =>
+  categoryFilter.every((cat) => charm.categories.includes(cat))
 const SortableItem = SortableElement(({ children }) => children)
 
 export type Props = {
@@ -86,7 +86,7 @@ class CharmEditor extends Component<Props, State> {
 
   props: Props
 
-  setFilter = e => {
+  setFilter = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -94,13 +94,13 @@ class CharmEditor extends Component<Props, State> {
     this.setState({ filtersOpen: !this.state.filtersOpen })
   }
 
-  setOpenCharm = charm => {
+  setOpenCharm = (charm) => {
     return (e, expanded) => {
       this.setState({ openCharm: expanded ? charm : null })
     }
   }
 
-  setOpenSpell = charm => {
+  setOpenSpell = (charm) => {
     return (e, expanded) =>
       this.setState({ openSpell: expanded ? charm : null })
   }
@@ -157,11 +157,11 @@ class CharmEditor extends Component<Props, State> {
     this.props.createSpell(this.props.character.id)
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyCharm(id, this.props.character.id)
   }
 
-  handleRemoveSpell = id => {
+  handleRemoveSpell = (id) => {
     this.props.destroySpell(id, this.props.character.id)
   }
 
@@ -171,7 +171,9 @@ class CharmEditor extends Component<Props, State> {
     let filteredNatives = nativeCharms
 
     if (abilityFilter !== '')
-      filteredNatives = filteredNatives.filter(c => c.ability === abilityFilter)
+      filteredNatives = filteredNatives.filter(
+        (c) => c.ability === abilityFilter,
+      )
     if (categoryFilter.length > 0)
       filteredNatives = filteredNatives.filter(filterByCategory(categoryFilter))
     return filteredNatives
@@ -183,7 +185,7 @@ class CharmEditor extends Component<Props, State> {
     let filteredMA = martialArtsCharms
 
     if (styleFilter !== '')
-      filteredMA = filteredMA.filter(c => c.style === styleFilter)
+      filteredMA = filteredMA.filter((c) => c.style === styleFilter)
     if (categoryFilter.length > 0)
       filteredMA = filteredMA.filter(filterByCategory(categoryFilter))
 
@@ -196,7 +198,9 @@ class CharmEditor extends Component<Props, State> {
     let filteredEvo = evocations
 
     if (artifactFilter !== '')
-      filteredEvo = filteredEvo.filter(c => c.artifact_name === artifactFilter)
+      filteredEvo = filteredEvo.filter(
+        (c) => c.artifact_name === artifactFilter,
+      )
     if (categoryFilter.length > 0)
       filteredEvo = filteredEvo.filter(filterByCategory(categoryFilter))
 
@@ -220,7 +224,7 @@ class CharmEditor extends Component<Props, State> {
     let filteredSpells = spells
 
     if (circleFilter !== '')
-      filteredSpells = filteredSpells.filter(c => c.circle === circleFilter)
+      filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
     if (categoryFilter.length > 0)
       filteredSpells = filteredSpells.filter(filterByCategory(categoryFilter))
 
@@ -550,16 +554,13 @@ function mapStateToProps(state, ownProps) {
 
 export default ProtectedComponent(
   withStyles(styles)(
-    connect(
-      mapStateToProps,
-      {
-        createCharm,
-        updateCharm,
-        destroyCharm,
-        createSpell,
-        updateSpell,
-        destroySpell,
-      }
-    )(CharmEditor)
-  )
+    connect(mapStateToProps, {
+      createCharm,
+      updateCharm,
+      destroyCharm,
+      createSpell,
+      updateSpell,
+      destroySpell,
+    })(CharmEditor),
+  ),
 )

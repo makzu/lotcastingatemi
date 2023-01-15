@@ -1,5 +1,4 @@
 import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import { Button, Grid } from '@material-ui/core'
@@ -16,6 +15,7 @@ import CharacterLoadError from '../CharacterLoadError'
 import CharmFilter from './CharmFilter/'
 import CharmList from './CharmList'
 import { initialFilters, reducer } from './useCharmFilters'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 interface StateProps {
   id: number
@@ -24,6 +24,7 @@ interface StateProps {
 
 const CharmPage = (props: StateProps) => {
   const [filters, setfilters] = React.useReducer(reducer, initialFilters)
+  useDocumentTitle(`${props.name} Charms | Lot-Casting Atemi`)
 
   if (props.name == null) {
     return <CharacterLoadError />
@@ -31,8 +32,6 @@ const CharmPage = (props: StateProps) => {
 
   return (
     <DivWithFilterDrawer>
-      <DocumentTitle title={`${props.name} Charms | Lot-Casting Atemi`} />
-
       <div>
         Charms!{' '}
         <CharmFilter id={props.id} filters={filters} setfilters={setfilters} />

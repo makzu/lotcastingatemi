@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -23,6 +22,7 @@ import SpecialtyBlock from './blocks/specialtyBlock.jsx'
 import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
 import BlockPaper from '../generic/blockPaper.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import RatingLine from '../generic/ratingLine.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 

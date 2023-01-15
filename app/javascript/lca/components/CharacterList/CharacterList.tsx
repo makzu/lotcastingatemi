@@ -1,5 +1,4 @@
 import React from 'react'
-import DocumentTitle from 'react-document-title'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -11,10 +10,12 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyCharacters, updateCharacter } from 'ducks/entities'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 const SortableItem = SortableElement(({ children }) => children)
 
 const CharacterList = () => {
+  useDocumentTitle('Characters | Lot-Casting Atemi')
   const characters = useSelector((state: State) => getMyCharacters(state))
   const dispatch = useDispatch()
 
@@ -43,8 +44,6 @@ const CharacterList = () => {
 
   return (
     <>
-      <DocumentTitle title="Characters | Lot-Casting Atemi" />
-
       <SortableGridList
         header={
           <Typography variant="h5">

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -21,6 +20,7 @@ import { Character, XpLogEntry } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -48,6 +48,8 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 const BioFullPage = ({ character, classes }: Props) => {
+  useDocumentTitle(`${character?.name} Bio | Lot-Casting Atemi`)
+  ;('Characters | Lot-Casting Atemi')
   /* Escape hatch */
   if (character == null) {
     return <CharacterLoadError />
@@ -57,8 +59,6 @@ const BioFullPage = ({ character, classes }: Props) => {
 
   return (
     <>
-      <DocumentTitle title={`${character.name} Bio | Lot-Casting Atemi`} />
-
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h5">Bio/Misc</Typography>
@@ -168,5 +168,5 @@ const mapStateToProps = (state: State, { match }: RouteProps) => ({
 export default compose<Props, RouteProps>(
   ProtectedComponent,
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(BioFullPage)

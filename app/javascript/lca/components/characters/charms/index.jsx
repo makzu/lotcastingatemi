@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -14,6 +13,7 @@ import CharmFilter from './CharmFilter.jsx'
 import SpellDisplay from './SpellDisplay.jsx'
 import CharacterLoadError from '../../CharacterSheet/CharacterLoadError'
 
+import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import {
   getSpecificCharacter,
@@ -68,14 +68,14 @@ class CharmFullPage extends Component<Props, State> {
     this.setState({ filtersOpen: !this.state.filtersOpen })
   }
 
-  setFilter = e => {
+  setFilter = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  setOpenCharm = charm => (e, expanded) =>
+  setOpenCharm = (charm) => (e, expanded) =>
     this.setState({ openCharm: expanded ? charm : null })
 
-  setOpenSpell = spell => (e, expanded) =>
+  setOpenSpell = (spell) => (e, expanded) =>
     this.setState({ openSpell: expanded ? spell : null })
 
   render() {
@@ -109,16 +109,20 @@ class CharmFullPage extends Component<Props, State> {
       filteredSpirit = spiritCharms,
       filteredSpells = spells
 
-    const filterByCategory = charm =>
-      categoryFilter.every(cat => charm.categories.includes(cat))
+    const filterByCategory = (charm) =>
+      categoryFilter.every((cat) => charm.categories.includes(cat))
     if (abilityFilter !== null)
-      filteredNatives = filteredNatives.filter(c => c.ability === abilityFilter)
+      filteredNatives = filteredNatives.filter(
+        (c) => c.ability === abilityFilter,
+      )
     if (styleFilter !== null)
-      filteredMA = filteredMA.filter(c => c.style === styleFilter)
+      filteredMA = filteredMA.filter((c) => c.style === styleFilter)
     if (artifactFilter !== null)
-      filteredEvo = filteredEvo.filter(c => c.artifact_name === artifactFilter)
+      filteredEvo = filteredEvo.filter(
+        (c) => c.artifact_name === artifactFilter,
+      )
     if (circleFilter !== null)
-      filteredSpells = filteredSpells.filter(c => c.circle === circleFilter)
+      filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
     if (categoryFilter.length > 0) {
       filteredNatives = filteredNatives.filter(filterByCategory)
       filteredMA = filteredMA.filter(filterByCategory)
@@ -127,7 +131,7 @@ class CharmFullPage extends Component<Props, State> {
       filteredSpells = filteredSpells.filter(filterByCategory)
     }
 
-    const natives = filteredNatives.map(c => (
+    const natives = filteredNatives.map((c) => (
       <Grid item xs={12} md={6} xl={4} key={c.id}>
         <CharmDisplay
           charm={c}
@@ -137,7 +141,7 @@ class CharmFullPage extends Component<Props, State> {
         />
       </Grid>
     ))
-    const maCharms = filteredMA.map(c => (
+    const maCharms = filteredMA.map((c) => (
       <Grid item xs={12} md={6} xl={4} key={c.id}>
         <CharmDisplay
           charm={c}
@@ -147,7 +151,7 @@ class CharmFullPage extends Component<Props, State> {
         />
       </Grid>
     ))
-    const evo = filteredEvo.map(c => (
+    const evo = filteredEvo.map((c) => (
       <Grid item xs={12} md={6} xl={4} key={c.id}>
         <CharmDisplay
           charm={c}
@@ -157,7 +161,7 @@ class CharmFullPage extends Component<Props, State> {
         />
       </Grid>
     ))
-    const spirit = filteredSpirit.map(c => (
+    const spirit = filteredSpirit.map((c) => (
       <Grid item xs={12} md={6} xl={4} key={c.id}>
         <CharmDisplay
           charm={c}
@@ -167,7 +171,7 @@ class CharmFullPage extends Component<Props, State> {
         />
       </Grid>
     ))
-    const spl = filteredSpells.map(c => (
+    const spl = filteredSpells.map((c) => (
       <Grid item xs={12} md={6} xl={4} key={c.id}>
         <SpellDisplay
           spell={c}
@@ -311,5 +315,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(connect(mapStateToProps)(CharmFullPage))
+  withStyles(styles)(connect(mapStateToProps)(CharmFullPage)),
 )

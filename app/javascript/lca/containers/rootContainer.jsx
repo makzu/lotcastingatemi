@@ -1,29 +1,30 @@
 // @flow
 import React from 'react'
-import DocumentTitle from 'react-document-title'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 
 import App from './App'
 import ThemeContainer from './ThemeContainer'
 import Routes from '../routes.jsx'
+import useDocumentTitle from '../hooks/UseDocumentTitle'
 
 type Props = {
   store: any,
   history: any,
 }
-const RootContainer = ({ store, history }: Props) => (
-  <Provider store={store}>
-    <ThemeContainer>
-      <DocumentTitle title="Lot-Casting Atemi">
+const RootContainer = ({ store, history }: Props) => {
+  useDocumentTitle('Lot-Casting Atemi')
+  return (
+    <Provider store={store}>
+      <ThemeContainer>
         <Router history={history}>
           <App>
             <Routes />
           </App>
         </Router>
-      </DocumentTitle>
-    </ThemeContainer>
-  </Provider>
-)
+      </ThemeContainer>
+    </Provider>
+  )
+}
 
 export default RootContainer

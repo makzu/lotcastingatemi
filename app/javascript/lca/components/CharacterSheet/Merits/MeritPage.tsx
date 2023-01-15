@@ -1,5 +1,4 @@
 import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 
 import { Grid, Paper, Typography } from '@material-ui/core'
@@ -12,6 +11,7 @@ import { getMeritsForCharacter, getSpecificCharacter } from 'ducks/selectors'
 import { Character, Merit } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import SingleMerit from './SingleMerit'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 interface Props {
   character: Character
@@ -19,6 +19,7 @@ interface Props {
 }
 
 const MeritFullPage = (props: Props) => {
+  useDocumentTitle(`${props.character?.name} Merits | Lot-Casting Atemi`)
   /* Escape hatch */
   if (props.character == null) {
     return (
@@ -28,7 +29,7 @@ const MeritFullPage = (props: Props) => {
     )
   }
 
-  const mts = props.merits.map(m => (
+  const mts = props.merits.map((m) => (
     <Grid item xs={12} md={6} xl={4} key={m.id}>
       <SingleMerit merit={m} />
     </Grid>
@@ -36,10 +37,6 @@ const MeritFullPage = (props: Props) => {
 
   return (
     <>
-      <DocumentTitle
-        title={`${props.character.name} Merits | Lot-Casting Atemi`}
-      />
-
       <Typography variant="h5" gutterBottom>
         Merits
       </Typography>

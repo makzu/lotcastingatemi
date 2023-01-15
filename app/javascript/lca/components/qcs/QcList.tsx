@@ -1,5 +1,4 @@
 import React from 'react'
-import DocumentTitle from 'react-document-title'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -11,10 +10,12 @@ import QcCreatePopup from 'components/qcs/qcCreatePopup.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyQcs, updateQc } from 'ducks/entities'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 const SortableItem = SortableElement(({ children }) => children)
 
 const QcList = () => {
+  useDocumentTitle('Qcs | Lot-Casting Atemi')
   const qcs = useSelector((state: State) => getMyQcs(state))
   const dispatch = useDispatch()
 
@@ -41,8 +42,6 @@ const QcList = () => {
 
   return (
     <>
-      <DocumentTitle title="Qcs | Lot-Casting Atemi" />
-
       <SortableGridList
         header={
           <Typography variant="h5">

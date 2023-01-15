@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 const { Component, Fragment } = React
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'
@@ -17,6 +16,7 @@ import ContentAddCircle from '@material-ui/icons/AddCircle'
 import HelpIcon from '@material-ui/icons/Help'
 
 import MeritFields from './MeritFields.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
@@ -27,7 +27,7 @@ import type { Character, fullMerit as Merit, Enhancer } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const styles = theme => commonStyles(theme)
+const styles = (theme) => commonStyles(theme)
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
  * ref pre-filled
@@ -54,7 +54,7 @@ class MeritEditor extends Component<Props> {
     this.props.createMerit(this.props.character.id)
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyMerit(id, this.props.character.id)
   }
 
@@ -159,12 +159,9 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    { updateMerit, destroyMerit, createMerit }
-  ),
+  connect(mapStateToProps, { updateMerit, destroyMerit, createMerit }),
   withStyles(styles),
-  ProtectedComponent
+  ProtectedComponent,
 )
 
 export default enhance(MeritEditor)

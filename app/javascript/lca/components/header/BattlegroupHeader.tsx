@@ -1,5 +1,4 @@
 import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -15,6 +14,7 @@ import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 interface Props {
   id: number
@@ -24,6 +24,8 @@ interface Props {
   classes: any
 }
 function BattlegroupHeader(props: Props) {
+  useDocumentTitle(`${battlegroup?.name} | Lot-Casting Atemi`)
+
   if (props.battlegroup == null) {
     return <GenericHeader />
   }
@@ -39,8 +41,6 @@ function BattlegroupHeader(props: Props) {
 
   return (
     <>
-      <DocumentTitle title={`${battlegroup.name} | Lot-Casting Atemi`} />
-
       <Toolbar>
         <LcaDrawerButton />
 
@@ -78,5 +78,5 @@ function mapStateToProps(state: State, { location, match }: RouteProps) {
 
 export default compose<Props, RouteProps>(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(BattlegroupHeader)

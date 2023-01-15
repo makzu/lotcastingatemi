@@ -1,7 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
 import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -12,6 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import XpEditor from './editors/xpEditor.jsx'
 import AnimalFormsEditor from './editors/AnimalFormsEditor'
 import BlockPaper from 'components/generic/blockPaper.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import TextField from 'components/generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
@@ -195,8 +195,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   ProtectedComponent,
-  connect(
-    mapStateToProps,
-    { updateCharacter }
-  )
+  connect(mapStateToProps, { updateCharacter }),
 )(BioEditor)

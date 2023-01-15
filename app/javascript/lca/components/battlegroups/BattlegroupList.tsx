@@ -1,5 +1,4 @@
 import React from 'react'
-import DocumentTitle from 'react-document-title'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -11,10 +10,12 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyBattlegroups, updateBattlegroup } from 'ducks/entities'
+import useDocumentTitle from 'hooks/UseDocumentTitle'
 
 const SortableItem = SortableElement(({ children }) => children)
 
 const BattlegroupList = () => {
+  useDocumentTitle('Battlegroups | Lot-Casting Atemi')
   const battlegroups = useSelector((state: State) => getMyBattlegroups(state))
   const dispatch = useDispatch()
 
@@ -35,7 +36,7 @@ const BattlegroupList = () => {
     const charB = battlegroups[newIndex]
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(
-      updateBattlegroup(charA.id, { sort_order: charB.sort_order + offset })
+      updateBattlegroup(charA.id, { sort_order: charB.sort_order + offset }),
     )
   }
 
@@ -43,8 +44,6 @@ const BattlegroupList = () => {
 
   return (
     <>
-      <DocumentTitle title="Battlegroups | Lot-Casting Atemi" />
-
       <SortableGridList
         header={
           <Typography variant="h5">

@@ -24,14 +24,14 @@ export const LinkRenderer = (props: LinkRendererProps) =>
 type Props = {
   source: string,
   noBlocks?: boolean,
-  classes: Object,
+  classes: object,
 }
 const MarkdownDisplay = ({ source, noBlocks, classes }: Props) => (
   <Typography
     component={ReactMarkdown}
     source={source}
     className={classes.markdown}
-    renderers={{ link: LinkRenderer }}
+    renderers={{ a: LinkRenderer }}
     allowedTypes={noBlocks && ['text', 'strong', 'emphasis', 'delete', 'link']}
     unwrapDisallowed={noBlocks}
   />

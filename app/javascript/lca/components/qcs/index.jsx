@@ -95,13 +95,13 @@ type Props = {
   qc_merits: Array<QcMerit>,
   qc_charms: Array<QcCharm>,
   qc_attacks: Array<QcAttack>,
-  spells: Array<Object>,
-  pools: Object,
-  penalties: Object,
-  classes: Object,
+  spells: Array<object>,
+  pools: object,
+  penalties: object,
+  classes: object,
   canEdit: boolean,
   loading: boolean,
-  fetch: Function,
+  fetch: void,
 }
 
 class QcSheet extends Component<Props> {
@@ -217,7 +217,7 @@ class QcSheet extends Component<Props> {
         <ReactMarkdown
           source={merit.body}
           className={classes.markdown}
-          renderers={{ link: LinkRenderer }}
+          components={{ a: LinkRenderer }}
         />
       </div>
     ))
@@ -231,7 +231,7 @@ class QcSheet extends Component<Props> {
         <ReactMarkdown
           source={charm.body}
           className={classes.markdown}
-          renderers={{ link: LinkRenderer }}
+          renderers={{ a: LinkRenderer }}
         />
       </div>
     ))
@@ -245,7 +245,7 @@ class QcSheet extends Component<Props> {
         <ReactMarkdown
           source={spell.body}
           className={classes.markdown}
-          renderers={{ link: LinkRenderer }}
+          renderers={{ a: LinkRenderer }}
         />
       </div>
     ))

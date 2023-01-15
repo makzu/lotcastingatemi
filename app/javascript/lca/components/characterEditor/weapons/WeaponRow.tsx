@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 
-import { Box, IconButton, Theme } from '@material-ui/core'
-import { Edit, RemoveCircle } from '@material-ui/icons'
+import { Box, IconButton, Theme } from '@mui/material'
+import { Edit, RemoveCircle } from '@mui/icons-material'
 
 import WeaponLine from 'components/characters/weapons/WeaponLine.jsx'
 import Handle from 'components/shared/GrabHandle'
@@ -22,7 +22,7 @@ const WeaponRow = (props: WeaponRowProps) => {
     <Box display="flex" alignItems="center">
       <Handle />
 
-      <IconButton onClick={setId}>
+      <IconButton onClick={setId} size="large">
         <Edit />
       </IconButton>
 
@@ -30,7 +30,7 @@ const WeaponRow = (props: WeaponRowProps) => {
 
       <IconButton
         onClick={() => dispatch(destroyWeapon(weapon.id, character.id))}
-      >
+        size="large">
         <RemoveCircle />
       </IconButton>
     </Box>

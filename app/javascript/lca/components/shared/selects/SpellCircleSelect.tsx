@@ -1,5 +1,5 @@
-import { MenuItem, TextField } from '@material-ui/core'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { MenuItem, TextField } from '@mui/material'
+import { TextFieldProps } from '@mui/material/TextField'
 
 import { Spell } from 'types'
 

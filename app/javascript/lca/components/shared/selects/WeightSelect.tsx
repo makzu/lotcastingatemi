@@ -1,5 +1,6 @@
-import { makeStyles, MenuItem, TextField, Theme } from '@material-ui/core'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { MenuItem, TextField, Theme } from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
+import { TextFieldProps } from '@mui/material/TextField'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

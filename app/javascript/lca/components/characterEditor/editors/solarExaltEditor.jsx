@@ -1,5 +1,5 @@
 // @flow
-import MenuItem from '@material-ui/core/MenuItem'
+import MenuItem from '@mui/material/MenuItem'
 
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'

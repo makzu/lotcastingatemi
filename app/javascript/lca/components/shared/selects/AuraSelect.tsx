@@ -1,6 +1,6 @@
-import { MenuItem, TextField } from '@material-ui/core'
+import { MenuItem, TextField } from '@mui/material'
 
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { TextFieldProps } from '@mui/material/TextField'
 import { ExaltType } from 'types'
 import { WithAura } from 'types/shared'
 

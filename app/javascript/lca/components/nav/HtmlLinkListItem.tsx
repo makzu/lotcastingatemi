@@ -1,4 +1,4 @@
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem'
+import ListItem, { ListItemProps } from '@mui/material/ListItem'
 
 const HtmlLinkListItem = (props: ListItemProps & { href: string }) => (
   <ListItem

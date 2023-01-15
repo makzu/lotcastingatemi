@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { MenuItem } from '@material-ui/core'
+import { MenuItem } from '@mui/material'
 
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'

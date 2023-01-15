@@ -1,8 +1,8 @@
 // @flow
 import { Fragment } from 'react'
 
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
 
 import AnimaDisplay from '../generic/AnimaDisplay.jsx'
 import AuraDisplay from '../generic/AuraDisplay.jsx'

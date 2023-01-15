@@ -7,8 +7,8 @@ import {
   DialogContent,
   IconButton,
   Typography,
-} from '@material-ui/core'
-import { Help as HelpIcon } from '@material-ui/icons'
+} from '@mui/material'
+import { Help as HelpIcon } from '@mui/icons-material'
 
 import ListAttributeEditor from 'components/generic/ListAttributeEditor'
 import { useDialogLogic } from 'hooks'

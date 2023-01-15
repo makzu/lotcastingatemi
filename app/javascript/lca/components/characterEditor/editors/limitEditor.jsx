@@ -1,7 +1,7 @@
 // @flow
 import { shouldUpdate } from 'recompose'
 
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
@@ -37,7 +37,7 @@ function LimitEditor({ character, onChange }: Props) {
         multiline
         fullWidth
         rows={2}
-        rowsMax={5}
+        maxRows={5}
         onChange={onChange}
       />
     </BlockPaper>

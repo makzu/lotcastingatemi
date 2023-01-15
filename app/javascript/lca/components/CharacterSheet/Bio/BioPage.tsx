@@ -1,13 +1,12 @@
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import { Grid, Typography } from '@material-ui/core'
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core/styles'
+import { Grid, Typography } from '@mui/material'
+import { Theme } from '@mui/material/styles'
+
+import { WithStyles } from '@mui/styles'
+import createStyles from '@mui/styles/createStyles'
+import withStyles from '@mui/styles/withStyles'
 
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import BlockPaper from 'components/generic/blockPaper.jsx'

@@ -59,8 +59,8 @@ export interface CrudActionGroup {
 
 export const massagePayload =
   (type: entityTypes | listTypes | string) =>
-  ({} = {}, {} = {}, res) =>
-    getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
+    ({} = {}, {} = {}, res) =>
+      getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
 
 export const successMeta = (_: null, __: null, { headers }: Response) => ({
   page: headers.get('current-page'),

@@ -3,8 +3,8 @@ import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
 
-import { Hidden, Tab, Tabs, Toolbar, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import { Hidden, Tab, Tabs, Toolbar, Typography } from '@mui/material'
+import withStyles from '@mui/styles/withStyles'
 
 import { State } from 'ducks'
 import { amIStOfChronicle, getSpecificChronicle } from 'selectors'
@@ -48,21 +48,19 @@ function ChronicleHeader(props: Props) {
     </Tabs>
   )
 
-  return (
-    <>
-      <Toolbar>
-        <LcaDrawerButton />
+  return <>
+    <Toolbar>
+      <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
-          {chronicle.name}
-        </Typography>
+      <Typography variant="h6" color="inherit" className={classes.title}>
+        {chronicle.name}
+      </Typography>
 
-        <Hidden xsDown>{tabs}</Hidden>
-      </Toolbar>
+      <Hidden smDown>{tabs}</Hidden>
+    </Toolbar>
 
-      <Hidden smUp>{tabs}</Hidden>
-    </>
-  )
+    <Hidden smUp>{tabs}</Hidden>
+  </>
 }
 
 function mapStateToProps(state: State, { match, location }: RouteProps) {

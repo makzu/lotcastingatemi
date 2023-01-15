@@ -4,10 +4,10 @@ import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import Typography from '@material-ui/core/Typography'
-import Launch from '@material-ui/icons/Launch'
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
+import Launch from '@mui/icons-material/Launch'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import {
@@ -34,7 +34,7 @@ const styles = (theme) => ({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'noWrap',
-    [theme.breakpoints.down('md')]: { minWidth: '100%' },
+    [theme.breakpoints.down('lg')]: { minWidth: '100%' },
   },
   name: {
     ...theme.typography.body2,

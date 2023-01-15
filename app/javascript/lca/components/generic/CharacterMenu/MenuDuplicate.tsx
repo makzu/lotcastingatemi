@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
-import { PersonAdd } from '@material-ui/icons'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
+import { PersonAdd } from '@mui/icons-material'
 
 import { State } from 'ducks'
 import { duplicate } from 'ducks/actions/ByType'

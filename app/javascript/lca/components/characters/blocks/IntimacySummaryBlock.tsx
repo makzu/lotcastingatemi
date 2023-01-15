@@ -1,5 +1,5 @@
-import { VisibilityOff } from '@material-ui/icons'
-import { Typography, Divider } from '@material-ui/core'
+import { VisibilityOff } from '@mui/icons-material'
+import { Typography, Divider } from '@mui/material'
 
 import BlockPaper from '../../generic/blockPaper.jsx'
 import RatingLine from '../../generic/ratingLine.jsx'

@@ -4,10 +4,10 @@ import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Slide from '@material-ui/core/Slide'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import withStyles from '@mui/styles/withStyles'
+import Paper from '@mui/material/Paper'
+import Slide from '@mui/material/Slide'
+import SvgIcon from '@mui/material/SvgIcon'
 
 import DawnSpinner from 'icons/DawnSpinner'
 

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 
-import IconButton from '@material-ui/core/IconButton'
-import { withStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
+import IconButton from '@mui/material/IconButton'
+import withStyles from '@mui/styles/withStyles'
+import MenuIcon from '@mui/icons-material/Menu'
 
 import { toggleDrawer } from 'ducks/actions.js'
 
@@ -21,7 +21,12 @@ const LcaDrawerButton = ({
   classes: any
   toggle(): void
 }) => (
-  <IconButton className={classes.drawerButton} onClick={toggle} color="inherit">
+  <IconButton
+    className={classes.drawerButton}
+    onClick={toggle}
+    color="inherit"
+    size="large"
+  >
     <MenuIcon />
   </IconButton>
 )

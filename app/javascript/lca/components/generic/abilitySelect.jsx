@@ -2,10 +2,10 @@
 import * as React from 'react'
 const { Component } = React
 
-import { withStyles } from '@material-ui/core/styles'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import withStyles from '@mui/styles/withStyles'
+import ListSubheader from '@mui/material/ListSubheader'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
 
 import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants.js'
 

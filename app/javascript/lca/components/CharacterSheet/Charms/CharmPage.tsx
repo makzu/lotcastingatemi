@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid } from '@mui/material'
 
 import DivWithFilterDrawer from 'components/shared/DivWithFilterDrawer'
 import { State } from 'ducks'

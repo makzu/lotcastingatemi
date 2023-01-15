@@ -5,13 +5,13 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
-} from '@material-ui/core'
+} from '@mui/material'
 import {
   Bookmark,
   BookmarkBorder,
   Visibility,
   VisibilityOff,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 
 import { State } from 'ducks'
 import { update } from 'ducks/actions/ByType'

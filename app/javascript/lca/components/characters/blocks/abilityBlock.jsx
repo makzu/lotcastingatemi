@@ -2,9 +2,9 @@
 import * as React from 'react'
 const { Fragment } = React
 
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingLine from 'components/generic/ratingLine.jsx'

@@ -2,10 +2,10 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
 
 import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay.jsx'

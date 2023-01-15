@@ -1,8 +1,8 @@
 // @flow
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import Switch from '@material-ui/core/Switch'
-import Typography from '@material-ui/core/Typography'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import MenuItem from '@mui/material/MenuItem'
+import Switch from '@mui/material/Switch'
+import Typography from '@mui/material/Typography'
 
 import ExcellencyEditor from '../excellencies/'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'

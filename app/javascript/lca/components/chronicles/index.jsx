@@ -3,9 +3,9 @@ import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
 
 import STControls from './StControls.jsx'
 import CharacterAddPopup from './characterAddPopup.jsx'

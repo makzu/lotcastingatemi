@@ -7,9 +7,9 @@ import {
   Switch,
   TextField,
   Typography,
-} from '@material-ui/core'
+} from '@mui/material'
 
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import ResponsiveFilterDrawer from 'components/shared/ResponsiveFilterDrawer'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'

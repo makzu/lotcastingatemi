@@ -1,4 +1,4 @@
-import { ListItemText } from '@material-ui/core'
+import { ListItemText } from '@mui/material'
 
 import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
 

@@ -2,7 +2,7 @@
 import { Component } from 'react'
 import { shouldUpdate } from 'recompose'
 
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import Editor from 'components/generic/intimacyEditor.jsx'

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { Theme } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { Theme } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
 import { drawerWidth } from 'containers/_drawerProperties'
 

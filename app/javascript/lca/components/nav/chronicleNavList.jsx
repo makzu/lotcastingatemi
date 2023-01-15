@@ -2,15 +2,15 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import IconButton from '@material-ui/core/IconButton'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import Collapse from '@material-ui/core/Collapse'
+import IconButton from '@mui/material/IconButton'
+import ListSubheader from '@mui/material/ListSubheader'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+import Collapse from '@mui/material/Collapse'
 
-import ExpandLess from '@material-ui/icons/ExpandLess'
-import ExpandMore from '@material-ui/icons/ExpandMore'
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
 
 import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
@@ -58,33 +58,31 @@ class ChronicleNavList extends Component<Props, State> {
     const ownChronicleList = ownChronicles.map(chronicleMap)
     const chronicleList = chronicles.map(chronicleMap)
 
-    return (
-      <>
-        <ListItem button onClick={this.handleClick}>
-          <ListItemText primary="Chronicles" />
+    return <>
+      <ListItem button onClick={this.handleClick}>
+        <ListItemText primary="Chronicles" />
 
-          <ListItemSecondaryAction>
-            <IconButton onClick={this.handleClick}>
-              {this.state.open ? <ExpandLess /> : <ExpandMore />}
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+        <ListItemSecondaryAction>
+          <IconButton onClick={this.handleClick} size="large">
+            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
 
-        <Collapse in={this.state.open}>
-          {ownChronicleList.length > 0 && (
-            <ListSubheader inset>Your Chronicles</ListSubheader>
-          )}
-          {ownChronicleList}
-          {chronicleList.length > 0 && (
-            <ListSubheader inset>Joined Chronicles</ListSubheader>
-          )}
-          {chronicleList}
+      <Collapse in={this.state.open}>
+        {ownChronicleList.length > 0 && (
+          <ListSubheader inset>Your Chronicles</ListSubheader>
+        )}
+        {ownChronicleList}
+        {chronicleList.length > 0 && (
+          <ListSubheader inset>Joined Chronicles</ListSubheader>
+        )}
+        {chronicleList}
 
-          <ChronicleJoinPopup />
-          <ChronicleCreatePopup />
-        </Collapse>
-      </>
-    )
+        <ChronicleJoinPopup />
+        <ChronicleCreatePopup />
+      </Collapse>
+    </>
   }
 }
 

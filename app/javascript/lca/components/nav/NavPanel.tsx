@@ -8,9 +8,9 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@material-ui/core'
-import { Theme } from '@material-ui/core/styles'
-import { makeStyles } from '@material-ui/styles'
+} from '@mui/material'
+import { Theme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'
 import CharacterSheetNav from 'components/CharacterSheet/CharacterSheetNav'

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import BattlegroupCreatePopup from 'components/battlegroups/battlegroupCreatePopup.jsx'

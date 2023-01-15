@@ -2,11 +2,11 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@material-ui/core/Button'
-import Hidden from '@material-ui/core/Hidden'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-import Filter from '@material-ui/icons/FilterList'
+import Button from '@mui/material/Button'
+import Hidden from '@mui/material/Hidden'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import Filter from '@mui/icons-material/FilterList'
 import {
   getPoolsAndRatings,
   getAllAbilitiesWithCharmsForCharacter,
@@ -120,56 +120,54 @@ class CharmFilter extends React.Component<Props> {
       charmType !== 'spirit' &&
       (exaltTypeBase !== 'essence' || charmType !== 'native')
 
-    return (
-      <>
-        <Button onClick={toggleOpen}>
-          Filter{' '}
-          <Hidden mdDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
-          &nbsp;
-          <Filter />
-        </Button>
-        {open && (
-          <>
-            {showFilter && (
-              <>
-                <TextField
-                  select
-                  style={{
-                    minWidth: '8em',
-                    textTransform: 'capitalize',
-                    marginTop: '-16px',
-                  }}
-                  name={filterName}
-                  label={filterLabel}
-                  // $FlowFixMe
-                  value={currentAbility}
-                  onChange={onChange}
-                >
-                  {filterOptions}
-                </TextField>
-                &nbsp;&nbsp;
-              </>
-            )}
+    return <>
+      <Button onClick={toggleOpen}>
+        Filter{' '}
+        <Hidden lgDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
+        &nbsp;
+        <Filter />
+      </Button>
+      {open && (
+        <>
+          {showFilter && (
+            <>
+              <TextField
+                select
+                style={{
+                  minWidth: '8em',
+                  textTransform: 'capitalize',
+                  marginTop: '-16px',
+                }}
+                name={filterName}
+                label={filterLabel}
+                // $FlowFixMe
+                value={currentAbility}
+                onChange={onChange}
+              >
+                {filterOptions}
+              </TextField>
+              &nbsp;&nbsp;
+            </>
+          )}
 
-            <TextField
-              select
-              style={{
-                minWidth: '8em',
-                textTransform: 'capitalize',
-                marginTop: '-16px',
-              }}
-              name="categoryFilter"
-              label="Filter by Category"
-              value={currentCategory || []}
-              SelectProps={{ multiple: true }}
-              onChange={onChange}
-            >
-              {catOptions}
-            </TextField>
-          </>
-        )}
-      </>
-    )
+          <TextField
+            select
+            style={{
+              minWidth: '8em',
+              textTransform: 'capitalize',
+              marginTop: '-16px',
+            }}
+            name="categoryFilter"
+            label="Filter by Category"
+            value={currentCategory || []}
+            SelectProps={{ multiple: true }}
+            onChange={onChange}
+          >
+            {catOptions}
+          </TextField>
+        </>
+      )}
+    </>
   }
 }
 

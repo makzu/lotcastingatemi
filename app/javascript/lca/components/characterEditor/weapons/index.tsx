@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
-import { Button, Divider, Typography } from '@material-ui/core'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import { Button, Divider, Typography } from '@mui/material'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import { State } from 'ducks'

@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import withStyles from '@mui/styles/withStyles'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CombatControls from './CombatControls.jsx'
@@ -20,10 +20,8 @@ import type { fullQc, Enhancer } from 'utils/flow-types'
 const styles = (theme) => ({
   ...sharedStyles(theme),
   root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(2),
     height: '100%',
     position: 'relative',
   },
@@ -63,9 +61,9 @@ type ExposedProps = {
   qc: fullQc,
 }
 type Props = ExposedProps & {
-  penalties: Object,
-  pools: Object,
-  classes: Object,
+  penalties: object,
+  pools: object,
+  classes: object,
 }
 
 function QcCard(props: Props) {

@@ -1,5 +1,5 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles'
+import withStyles from '@mui/styles/withStyles'
 
 import WeaponPoolDisplay from '../weapons/WeaponPoolDisplay.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'

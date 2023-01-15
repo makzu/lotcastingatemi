@@ -7,8 +7,8 @@ import {
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
-} from '@material-ui/core/'
-import { ExpandLess, ExpandMore } from '@material-ui/icons/'
+} from '@mui/material/'
+import { ExpandLess, ExpandMore } from '@mui/icons-material/'
 
 import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import { useCharacterAttribute } from 'ducks/entities'
@@ -33,7 +33,7 @@ const CharacterEditorNav = ({ match }: RouteProps) => {
       <LinkListItem to={`${prefix}`}>
         <ListItemText primary={characterName} />
         <ListItemSecondaryAction>
-          <IconButton onClick={() => setOpen(!isOpen)}>
+          <IconButton onClick={() => setOpen(!isOpen)} size="large">
             {isOpen ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
         </ListItemSecondaryAction>
@@ -53,12 +53,12 @@ const CharacterEditorNav = ({ match }: RouteProps) => {
         </NavLinkListItem>
 
         {/* <NavLinkListItem to={`${prefix}/charmss`}>
-          <ListItemText primary="New Charms page" />
-        </NavLinkListItem>
+        <ListItemText primary="New Charms page" />
+      </NavLinkListItem>
 
-        <NavLinkListItem to={`${prefix}/sorcery`}>
-          <ListItemText primary="Sorcery" />
-        </NavLinkListItem> */}
+      <NavLinkListItem to={`${prefix}/sorcery`}>
+        <ListItemText primary="Sorcery" />
+      </NavLinkListItem> */}
 
         <NavLinkListItem to={`${prefix}/bio`}>
           <ListItemText primary="Bio/Misc" />

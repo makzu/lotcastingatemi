@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { Grid } from '@material-ui/core'
+import { Grid } from '@mui/material'
 import { State } from 'ducks'
 import { getCharmsForCharacterByType } from 'ducks/entities'
 import { Charm } from 'types'

@@ -1,6 +1,6 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
 
 import RatingLine from 'components/generic/ratingLine.jsx'
 import { isCasteAttribute, isFavoredAttribute } from 'utils/calculated'

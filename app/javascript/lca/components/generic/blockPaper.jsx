@@ -2,15 +2,13 @@
 import * as React from 'react'
 const { Component } = React
 
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
+import withStyles from '@mui/styles/withStyles'
+import Paper from '@mui/material/Paper'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(2),
     height: '100%',
     position: 'relative',
   },

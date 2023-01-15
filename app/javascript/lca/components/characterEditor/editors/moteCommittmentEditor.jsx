@@ -1,9 +1,9 @@
 // @flow
 import { shouldUpdate } from 'recompose'
 
-import Checkbox from '@material-ui/core/Checkbox'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiTextField from '@material-ui/core/TextField'
+import Checkbox from '@mui/material/Checkbox'
+import MenuItem from '@mui/material/MenuItem'
+import MuiTextField from '@mui/material/TextField'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,

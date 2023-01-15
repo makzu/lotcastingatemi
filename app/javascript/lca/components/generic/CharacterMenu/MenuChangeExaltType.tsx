@@ -12,8 +12,8 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
-} from '@material-ui/core'
-import { SwapHoriz } from '@material-ui/icons'
+} from '@mui/material'
+import { SwapHoriz } from '@mui/icons-material'
 
 import ExaltTypeSelect, {
   prettyType,

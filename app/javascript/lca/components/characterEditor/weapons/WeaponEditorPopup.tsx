@@ -12,11 +12,11 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  makeStyles,
   Theme,
   Typography,
-} from '@material-ui/core'
-import { ExpandLess, ExpandMore, Help } from '@material-ui/icons'
+} from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
+import { ExpandLess, ExpandMore, Help } from '@mui/icons-material'
 
 import WeaponPoolDisplay from 'components/characters/weapons/WeaponPoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
@@ -103,7 +103,7 @@ const WeaponEditorPopup = (props: Props) => {
         />
 
         <Typography>
-          <IconButton onClick={() => setAdvancedOpen(!advancedOpen)}>
+          <IconButton onClick={() => setAdvancedOpen(!advancedOpen)} size="large">
             {advancedOpen ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
           Advanced

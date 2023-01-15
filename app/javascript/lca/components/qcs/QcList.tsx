@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import QcCard from 'components/qcs/QcCard.jsx'

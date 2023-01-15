@@ -1,6 +1,6 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
 
 import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import AnimaSelect from 'components/generic/AnimaSelect.jsx'

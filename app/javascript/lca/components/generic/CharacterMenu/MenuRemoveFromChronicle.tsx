@@ -5,8 +5,8 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
-} from '@material-ui/core'
-import RemoveCircle from '@material-ui/icons/RemoveCircle'
+} from '@mui/material'
+import RemoveCircle from '@mui/icons-material/RemoveCircle'
 
 import { State } from 'ducks'
 import { removeThingFromChronicle as removeThing } from 'ducks/actions'

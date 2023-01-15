@@ -2,17 +2,17 @@
 import { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Button from '@material-ui/core/Button'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import TextField from '@material-ui/core/TextField'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Button from '@mui/material/Button'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import TextField from '@mui/material/TextField'
 
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import { createChronicle } from 'ducks/actions.js'
 

@@ -11,8 +11,8 @@ import {
   ListItemText,
   MenuItem,
   Typography,
-} from '@material-ui/core'
-import Delete from '@material-ui/icons/Delete'
+} from '@mui/material'
+import Delete from '@mui/icons-material/Delete'
 
 import { State } from 'ducks'
 import { destroy } from 'ducks/actions/ByType'

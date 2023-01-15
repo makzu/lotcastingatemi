@@ -7,13 +7,13 @@ import {
   arrayMove,
 } from 'react-sortable-hoc'
 
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
-import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
+import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
@@ -130,7 +130,7 @@ class ListAttributeEditor extends Component<Props> {
             onChange={onChange.bind(this, index)}
             classes={classes}
           />
-          <IconButton onClick={onRemove.bind(this, index)}>
+          <IconButton onClick={onRemove.bind(this, index)} size="large">
             <ContentRemoveCircle />
           </IconButton>
         </div>

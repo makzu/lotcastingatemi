@@ -1,8 +1,8 @@
 // @flow
 import { compose, shouldUpdate } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import ListAttributeEditor, {

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { CssBaseline, Divider, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { CssBaseline, Divider, Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
 import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
 import LcaHeader from 'components/header/Header'

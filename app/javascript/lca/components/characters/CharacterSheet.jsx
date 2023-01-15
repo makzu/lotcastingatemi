@@ -3,10 +3,10 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import Launch from '@material-ui/icons/Launch'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+import Launch from '@mui/icons-material/Launch'
 
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
 import AbilityBlock from './blocks/abilityBlock.jsx'
@@ -161,7 +161,7 @@ export class CharacterSheet extends Component<Props> {
                 </BlockPaper>
               </Grid>
 
-              <Hidden smDown>
+              <Hidden mdDown>
                 <Grid item xs={12}>
                   <BlockPaper>
                     <Typography variant="h6">Weapons</Typography>

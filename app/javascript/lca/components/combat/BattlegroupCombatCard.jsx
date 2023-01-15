@@ -1,10 +1,10 @@
 // @flow
 import { Link } from 'react-router-dom'
 
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import withStyles from '@mui/styles/withStyles'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 import CombatControls from './CombatControls.jsx'
 import BattlegroupHealthDisplay from '../battlegroups/BattlegroupHealthDisplay.jsx'
@@ -18,10 +18,8 @@ import type { Battlegroup } from 'utils/flow-types'
 const styles = (theme) => ({
   ...sharedStyles(theme),
   root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(2),
     height: '100%',
     position: 'relative',
   },

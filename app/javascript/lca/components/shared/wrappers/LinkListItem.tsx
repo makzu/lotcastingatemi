@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link, LinkProps } from 'react-router-dom'
 
-import { ListItem, Omit } from '@material-ui/core'
+import { ListItem, Omit } from '@mui/material'
 
 const LcaLink = React.forwardRef<
   HTMLAnchorElement,

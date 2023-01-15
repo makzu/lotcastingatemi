@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import { State } from 'ducks'

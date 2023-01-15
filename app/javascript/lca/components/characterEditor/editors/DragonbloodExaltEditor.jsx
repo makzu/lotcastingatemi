@@ -1,5 +1,5 @@
 // @flow
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import DbAspectSelect from '../exaltTraits/DbAspectSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'

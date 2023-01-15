@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core/'
-import { GroupAdd } from '@material-ui/icons'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material/'
+import { GroupAdd } from '@mui/icons-material'
 
 import { State } from 'ducks'
 import { createBattlegroupFromQc } from 'ducks/actions.js'

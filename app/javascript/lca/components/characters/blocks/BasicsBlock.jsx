@@ -1,5 +1,5 @@
 // @flow
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'

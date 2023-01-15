@@ -1,10 +1,10 @@
 // @flow
 import { compose, shouldUpdate } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'

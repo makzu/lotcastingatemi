@@ -1,6 +1,7 @@
-import { ListSubheader, MenuItem, TextField } from '@material-ui/core/'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { ListSubheader, MenuItem, TextField } from '@mui/material/'
+import { Theme } from '@mui/material/styles'
+import makeStyles from '@mui/styles/makeStyles'
+import { TextFieldProps } from '@mui/material/TextField'
 
 import { Character, Weapon } from 'types'
 import * as calc from 'utils/calculated'

@@ -1,5 +1,5 @@
 // @flow
-import SvgIcon from '@material-ui/core/SvgIcon'
+import SvgIcon from '@mui/material/SvgIcon'
 
 // Shamelessly stolen from material-ui docs
 const OctoCat = (props: Object) => (

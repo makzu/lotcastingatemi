@@ -3,8 +3,8 @@ import { Component, Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from '../generic/blockPaper.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'

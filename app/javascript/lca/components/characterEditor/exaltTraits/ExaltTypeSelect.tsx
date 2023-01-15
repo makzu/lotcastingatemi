@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import ListSubheader from '@material-ui/core/ListSubheader'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import ListSubheader from '@mui/material/ListSubheader'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
 
 export const prettyType = (type: string) => {
   switch (type) {

@@ -1,5 +1,5 @@
 // @flow
-import SvgIcon from '@material-ui/core/SvgIcon'
+import SvgIcon from '@mui/material/SvgIcon'
 
 const Logo = (props: Object) => (
   <SvgIcon viewBox="0 0 210 210" {...props}>

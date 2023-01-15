@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
-import HelpIcon from '@material-ui/icons/Help'
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
+import HelpIcon from '@mui/icons-material/Help'
 
 import MeritFields from './MeritFields.jsx'
 import DocumentTitle from 'components/generic/DocumentTitle'
@@ -120,7 +120,7 @@ class MeritEditor extends Component<Props> {
                 </Button>
               </div>
               <div style={{ flex: 1, textAlign: 'right' }}>
-                <IconButton component={Link} to="/help/merits">
+                <IconButton component={Link} to="/help/merits" size="large">
                   <HelpIcon />
                 </IconButton>
               </div>

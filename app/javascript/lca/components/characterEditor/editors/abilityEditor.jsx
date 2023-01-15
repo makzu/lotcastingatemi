@@ -1,7 +1,7 @@
 // @flow
 import { shouldUpdate } from 'recompose'
 
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,

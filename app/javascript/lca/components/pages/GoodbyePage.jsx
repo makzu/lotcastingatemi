@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import type { Enhancer } from 'utils/flow-types'

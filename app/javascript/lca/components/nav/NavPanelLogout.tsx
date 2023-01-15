@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { Divider, ListItemText } from '@material-ui/core'
+import { Divider, ListItemText } from '@mui/material'
 
 import { LinkListItem } from 'components/shared/wrappers'
 import { logout } from 'ducks/actions.js'

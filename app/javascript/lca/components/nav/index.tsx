@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
-import { Drawer, Hidden, Theme } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { Drawer, Hidden, Theme } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
 import { State } from 'ducks'
 import { closeDrawer } from 'ducks/actions.js'
@@ -64,35 +64,33 @@ const NavPanelWrap = (props: Props) => {
     />
   )
 
-  return (
-    <>
-      <Hidden lgUp>
-        <Drawer
-          variant="temporary"
-          open={drawerOpen}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          onClose={close}
-          ModalProps={{ keepMounted: true }}
-        >
-          {Panel}
-        </Drawer>
-      </Hidden>
-      <Hidden mdDown implementation="css">
-        <Drawer
-          variant="permanent"
-          open
-          classes={{
-            docked: classes.drawer,
-            paper: classes.drawerPaper,
-          }}
-        >
-          {Panel}
-        </Drawer>
-      </Hidden>
-    </>
-  )
+  return <>
+    <Hidden lgUp>
+      <Drawer
+        variant="temporary"
+        open={drawerOpen}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        onClose={close}
+        ModalProps={{ keepMounted: true }}
+      >
+        {Panel}
+      </Drawer>
+    </Hidden>
+    <Hidden lgDown implementation="css">
+      <Drawer
+        variant="permanent"
+        open
+        classes={{
+          docked: classes.drawer,
+          paper: classes.drawerPaper,
+        }}
+      >
+        {Panel}
+      </Drawer>
+    </Hidden>
+  </>
 }
 
 const mapState = (state: State): StateProps => ({

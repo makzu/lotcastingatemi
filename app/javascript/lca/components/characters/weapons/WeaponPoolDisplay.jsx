@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
+import withStyles from '@mui/styles/withStyles'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import { getPoolsForWeapon } from 'selectors'

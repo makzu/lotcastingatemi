@@ -2,7 +2,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@material-ui/core/Button'
+import Button from '@mui/material/Button'
 
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { canIEdit } from 'selectors'

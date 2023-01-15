@@ -5,7 +5,7 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   Switch,
-} from '@material-ui/core'
+} from '@mui/material'
 
 import { State } from 'ducks'
 import { switchTheme } from 'ducks/actions.js'

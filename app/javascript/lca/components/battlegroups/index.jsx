@@ -3,8 +3,8 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
 
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'

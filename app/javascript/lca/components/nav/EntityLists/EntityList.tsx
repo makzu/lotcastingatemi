@@ -5,8 +5,8 @@ import {
   IconButton,
   ListItemSecondaryAction,
   ListItemText
-} from '@material-ui/core'
-import { ExpandLess, ExpandMore } from '@material-ui/icons'
+} from '@mui/material'
+import { ExpandLess, ExpandMore } from '@mui/icons-material'
 
 import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
 
@@ -22,23 +22,21 @@ const EntityList = ({ label, count, link, children, onClick }: Props) => {
   const [open, setOpen] = React.useState(false)
   const showExpando = !!children.length
 
-  return (
-    <>
-      <NavLinkListItem to={link} onClick={onClick}>
-        <ListItemText primary={label} secondary={`${count} total`} />
+  return <>
+    <NavLinkListItem to={link} onClick={onClick}>
+      <ListItemText primary={label} secondary={`${count} total`} />
 
-        {showExpando && (
-          <ListItemSecondaryAction>
-            <IconButton onClick={() => setOpen(!open)}>
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </IconButton>
-          </ListItemSecondaryAction>
-        )}
-      </NavLinkListItem>
+      {showExpando && (
+        <ListItemSecondaryAction>
+          <IconButton onClick={() => setOpen(!open)} size="large">
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </IconButton>
+        </ListItemSecondaryAction>
+      )}
+    </NavLinkListItem>
 
-      <Collapse in={open}>{children}</Collapse>
-    </>
-  )
+    <Collapse in={open}>{children}</Collapse>
+  </>
 }
 
 export default EntityList

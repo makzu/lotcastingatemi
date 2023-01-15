@@ -2,8 +2,8 @@
 import { connect } from 'react-redux'
 import { compose, shouldUpdate } from 'recompose'
 
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
@@ -70,7 +70,7 @@ const BasicsEditor = ({
       multiline
       fullWidth
       rows={2}
-      rowsMax={10}
+      maxRows={10}
       onChange={onChange}
     />
   </BlockPaper>

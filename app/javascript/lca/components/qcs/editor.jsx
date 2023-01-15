@@ -4,11 +4,11 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
 import QcActionEditor from './qcActionEditor.jsx'
 import QcAttackEditor from './qcAttackEditor.jsx'
@@ -135,7 +135,7 @@ class QcEditor extends Component<Props> {
               multiline
               fullWidth
               onChange={handleChange}
-              rowsMax={5}
+              maxRows={5}
             />
 
             <TextField

@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
-import { emphasize } from '@material-ui/core/styles/colorManipulator'
-import Chip from '@material-ui/core/Chip'
-import MenuItem from '@material-ui/core/MenuItem'
-import NoSsr from '@material-ui/core/NoSsr'
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import { emphasize } from '@mui/material/styles'
+import withStyles from '@mui/styles/withStyles'
+import Chip from '@mui/material/Chip'
+import MenuItem from '@mui/material/MenuItem'
+import NoSsr from '@mui/material/NoSsr'
+import Paper from '@mui/material/Paper'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import Select from 'react-select/lib/Creatable'
 
@@ -152,7 +152,7 @@ const styles = theme => ({
   },
   chipFocused: {
     backgroundColor: emphasize(
-      theme.palette.type === 'light'
+      theme.palette.mode === 'light'
         ? theme.palette.grey[300]
         : theme.palette.grey[700],
       0.08

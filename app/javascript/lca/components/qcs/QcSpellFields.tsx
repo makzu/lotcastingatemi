@@ -4,22 +4,23 @@ const { Component } = React
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
-import Button from '@material-ui/core/Button'
-// import Checkbox from '@material-ui/core/Checkbox'
-import Collapse from '@material-ui/core/Collapse'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import { withStyles, WithStyles } from '@material-ui/core/styles'
-import MuiTextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import Delete from '@material-ui/icons/Delete'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
+import Button from '@mui/material/Button'
+// import Checkbox from '@mui/material/Checkbox'
+import Collapse from '@mui/material/Collapse'
+import Accordion from '@mui/material/Accordion'
+import AccordionActions from '@mui/material/AccordionActions'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import MenuItem from '@mui/material/MenuItem'
+import { WithStyles } from '@mui/styles'
+import withStyles from '@mui/styles/withStyles'
+import MuiTextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import Delete from '@mui/icons-material/Delete'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
 
-import { IconButton } from '@material-ui/core'
+import { IconButton } from '@mui/material'
 import BlockPaper from 'components/generic/blockPaper'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
@@ -106,7 +107,7 @@ const QcSpellFields = ({
         label="Effect"
         margin="dense"
         rows={2}
-        rowsMax={15}
+        maxRows={15}
       />
 
       <div className={classes.flexContainer}>

@@ -2,9 +2,9 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
-import { Theme } from '@material-ui/core/styles'
-import { makeStyles } from '@material-ui/styles'
+import { AppBar, Toolbar, Typography } from '@mui/material'
+import { Theme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 import { drawerWidth } from 'containers/_drawerProperties'
 import BattlegroupHeader from './BattlegroupHeader'
@@ -41,7 +41,7 @@ const LcaHeader = () => {
   const classes = useStyles({})
 
   return (
-    <AppBar className={classes.root} component="header">
+    <AppBar className={classes.root} component="header" enableColorOnDark>
       <React.Suspense fallback={<div />}>
         <Switch>
           <Route path="/chronicles/:id" component={ChronicleHeader} />

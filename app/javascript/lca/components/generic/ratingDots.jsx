@@ -1,5 +1,5 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles'
+import withStyles from '@mui/styles/withStyles'
 
 // TODO: Replace with SVG icons or something?
 const dot = {

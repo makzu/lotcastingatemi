@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import Whatshot from '@material-ui/icons/Whatshot'
+import withStyles from '@mui/styles/withStyles'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Whatshot from '@mui/icons-material/Whatshot'
 
 import NotesPopup from './NotesPopup.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
@@ -30,10 +30,8 @@ const Handle = SortableHandle(() => (
 
 const styles = (theme) => ({
   root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(2),
     height: '100%',
     position: 'relative',
   },

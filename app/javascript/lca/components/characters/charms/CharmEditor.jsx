@@ -3,12 +3,12 @@ import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import styles from './CharmStyles.js'
 import CharmFields from './CharmFields.jsx'
@@ -390,7 +390,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Charms &nbsp;&nbsp;
                   <Button onClick={handleAddNative}>
-                    Add <Hidden smDown>Charm</Hidden>
+                    Add <Hidden mdDown>Charm</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>
@@ -416,7 +416,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Martial Arts &nbsp;&nbsp;
                   <Button onClick={handleAddMA}>
-                    Add <Hidden smDown>MA Charm</Hidden>
+                    Add <Hidden mdDown>MA Charm</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>
@@ -442,7 +442,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Evocations &nbsp;&nbsp;
                   <Button onClick={handleAddEvocation}>
-                    Add <Hidden smDown>Evocation</Hidden>
+                    Add <Hidden mdDown>Evocation</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>
@@ -468,7 +468,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Spirit Charms &nbsp;&nbsp;
                   <Button onClick={handleAddSpirit}>
-                    Add <Hidden smDown>Spirit Charm</Hidden>
+                    Add <Hidden mdDown>Spirit Charm</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>

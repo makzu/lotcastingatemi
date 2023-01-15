@@ -1,5 +1,5 @@
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import { Description } from '@material-ui/icons'
+import { ListItemIcon, ListItemText } from '@mui/material'
+import { Description } from '@mui/icons-material'
 
 import { MenuItemProps as Props } from './CharacterMenuItem'
 import LinkMenuItem from './LinkMenuItem'

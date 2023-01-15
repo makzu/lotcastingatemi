@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Edit from '@material-ui/icons/Edit'
+import { ListItemIcon, ListItemText } from '@mui/material'
+import Edit from '@mui/icons-material/Edit'
 
 import { State } from 'ducks'
 import { canIEdit } from 'selectors'

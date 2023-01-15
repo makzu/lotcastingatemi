@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
-import { Refresh } from '@material-ui/icons'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
+import { Refresh } from '@mui/icons-material'
 
 import { fetch } from 'ducks/actions/ByType'
 import { MenuItemProps as Props } from './CharacterMenuItem'

@@ -1,6 +1,6 @@
 // @flow
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
 import type { withMotePool } from 'utils/flow-types'
 
 type Props = { character: withMotePool, onChange: Function }

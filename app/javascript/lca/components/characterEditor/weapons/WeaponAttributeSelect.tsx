@@ -1,15 +1,10 @@
 import { MouseEvent } from 'react'
 
-import {
-  Divider,
-  ListSubheader,
-  makeStyles,
-  MenuItem,
-  TextField,
-  Theme,
-} from '@material-ui/core'
+import { Divider, ListSubheader, MenuItem, TextField, Theme } from '@mui/material'
 
-import { TextFieldProps } from '@material-ui/core/TextField'
+import makeStyles from '@mui/styles/makeStyles'
+
+import { TextFieldProps } from '@mui/material/TextField'
 import { Character, Weapon } from 'types'
 import { ATTRIBUTE_NAMES } from 'utils/constants'
 

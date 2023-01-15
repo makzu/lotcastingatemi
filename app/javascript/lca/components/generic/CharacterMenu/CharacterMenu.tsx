@@ -1,6 +1,8 @@
-import { Divider, IconButton, Menu } from '@material-ui/core'
-import { Theme, withStyles, WithStyles } from '@material-ui/core/styles'
-import MoreVert from '@material-ui/icons/MoreVert'
+import { Divider, IconButton, Menu } from '@mui/material'
+import { Theme } from '@mui/material/styles'
+import { WithStyles } from '@mui/styles'
+import withStyles from '@mui/styles/withStyles'
+import MoreVert from '@mui/icons-material/MoreVert'
 
 import { useMenuLogic } from 'hooks'
 import { CharacterType } from './CharacterMenuItem'
@@ -35,7 +37,11 @@ const CharacterMenu = (props: Props) => {
 
   return (
     <div className={header ? classes.headerWrapper : classes.wrapper}>
-      <IconButton onClick={handleOpen} data-cy="character-menu" color="inherit">
+      <IconButton
+        onClick={handleOpen}
+        data-cy="character-menu"
+        color="inherit"
+        size="large">
         <MoreVert />
       </IconButton>
 

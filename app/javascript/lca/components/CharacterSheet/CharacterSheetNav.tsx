@@ -7,8 +7,8 @@ import {
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
-} from '@material-ui/core/'
-import { ExpandLess, ExpandMore } from '@material-ui/icons/'
+} from '@mui/material/'
+import { ExpandLess, ExpandMore } from '@mui/icons-material/'
 
 import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import { useCharacterAttribute } from 'ducks/entities'
@@ -26,46 +26,44 @@ const SideNavigation = ({ match }: RouteProps) => {
 
   const prefix = `/characters/${id}`
 
-  return (
-    <>
-      <Divider />
+  return <>
+    <Divider />
 
-      <LinkListItem to={`${prefix}`}>
-        <ListItemText primary={characterName} />
-        <ListItemSecondaryAction>
-          <IconButton onClick={() => setOpen(!isOpen)}>
-            {isOpen ? <ExpandLess /> : <ExpandMore />}
-          </IconButton>
-        </ListItemSecondaryAction>
-      </LinkListItem>
+    <LinkListItem to={`${prefix}`}>
+      <ListItemText primary={characterName} />
+      <ListItemSecondaryAction>
+        <IconButton onClick={() => setOpen(!isOpen)} size="large">
+          {isOpen ? <ExpandLess /> : <ExpandMore />}
+        </IconButton>
+      </ListItemSecondaryAction>
+    </LinkListItem>
 
-      <Collapse in={isOpen}>
-        <NavLinkListItem to={`${prefix}`}>
-          <ListItemText primary="Overview" />
-        </NavLinkListItem>
+    <Collapse in={isOpen}>
+      <NavLinkListItem to={`${prefix}`}>
+        <ListItemText primary="Overview" />
+      </NavLinkListItem>
 
-        <NavLinkListItem to={`${prefix}/merits`}>
-          <ListItemText primary="Merits" />
-        </NavLinkListItem>
+      <NavLinkListItem to={`${prefix}/merits`}>
+        <ListItemText primary="Merits" />
+      </NavLinkListItem>
 
-        <NavLinkListItem to={`${prefix}/charms`}>
-          <ListItemText primary="Charms" />
-        </NavLinkListItem>
+      <NavLinkListItem to={`${prefix}/charms`}>
+        <ListItemText primary="Charms" />
+      </NavLinkListItem>
 
-        {/* <NavLinkListItem to={`${prefix}/charmss`}>
-          <ListItemText primary="New Charms page" />
-        </NavLinkListItem>
+      {/* <NavLinkListItem to={`${prefix}/charmss`}>
+        <ListItemText primary="New Charms page" />
+      </NavLinkListItem>
 
-        <NavLinkListItem to={`${prefix}/sorcery`}>
-          <ListItemText primary="Sorcery" />
-        </NavLinkListItem> */}
+      <NavLinkListItem to={`${prefix}/sorcery`}>
+        <ListItemText primary="Sorcery" />
+      </NavLinkListItem> */}
 
-        <NavLinkListItem to={`${prefix}/bio`}>
-          <ListItemText primary="Bio/Misc" />
-        </NavLinkListItem>
-      </Collapse>
-    </>
-  )
+      <NavLinkListItem to={`${prefix}/bio`}>
+        <ListItemText primary="Bio/Misc" />
+      </NavLinkListItem>
+    </Collapse>
+  </>
 }
 
 export default withRouter(SideNavigation)

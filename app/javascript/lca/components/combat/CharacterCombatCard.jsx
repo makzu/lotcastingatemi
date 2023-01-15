@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import Whatshot from '@material-ui/icons/Whatshot'
+import withStyles from '@mui/styles/withStyles'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Whatshot from '@mui/icons-material/Whatshot'
 
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
@@ -20,10 +20,8 @@ import type { Character, Enhancer } from 'utils/flow-types'
 
 const styles = (theme) => ({
   root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(2),
     height: '100%',
     position: 'relative',
   },

@@ -3,9 +3,9 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import QcAttackFields from './qcAttackFields.jsx'
 import {

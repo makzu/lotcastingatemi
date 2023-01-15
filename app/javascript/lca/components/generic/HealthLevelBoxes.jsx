@@ -1,5 +1,5 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles'
+import withStyles from '@mui/styles/withStyles'
 
 import * as calc from 'utils/calculated'
 import type { withHealthLevels } from 'utils/flow-types'

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import { Button, Grid, Typography } from '@material-ui/core'
-import { WithStyles } from '@material-ui/core/styles'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import { Button, Grid, Typography } from '@mui/material'
+import { WithStyles } from '@mui/styles'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 

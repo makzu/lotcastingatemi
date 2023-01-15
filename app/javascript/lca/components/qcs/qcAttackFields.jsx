@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { SortableHandle } from 'react-sortable-hoc'
 
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
+import Hidden from '@mui/material/Hidden'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
 
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
 
 import RangeSelect from 'components/generic/RangeSelect.jsx'
 import RatingField from '../generic/RatingField.jsx'
@@ -45,7 +45,7 @@ const styles = (theme) => ({
   nameField: {
     flex: 2,
     minWidth: '30%',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       minWidth: '50%',
     },
   },
@@ -54,7 +54,7 @@ const styles = (theme) => ({
     marginRight: theme.spacing(),
     minWidth: '30%',
 
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       minWidth: '50%',
     },
   },
@@ -168,7 +168,7 @@ class QcAttackFields extends Component<Props> {
           className={classes.rangeField}
         />
 
-        <IconButton onClick={handleRemove} style={{}}>
+        <IconButton onClick={handleRemove} style={{}} size="large">
           <ContentRemoveCircle />
         </IconButton>
 

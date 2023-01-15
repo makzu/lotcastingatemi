@@ -1,7 +1,7 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import withStyles from '@mui/styles/withStyles'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
 
 const styles = (theme) => ({
   field: {

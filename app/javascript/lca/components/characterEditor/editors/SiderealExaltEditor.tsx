@@ -1,4 +1,4 @@
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'

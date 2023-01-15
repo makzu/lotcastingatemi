@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import { State } from 'ducks'
 

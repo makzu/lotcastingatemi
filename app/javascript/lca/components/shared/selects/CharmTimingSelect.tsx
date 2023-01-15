@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
-import { MenuItem, TextField } from '@material-ui/core'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { MenuItem, TextField } from '@mui/material'
+import { TextFieldProps } from '@mui/material/TextField'
 import { Timing } from 'types/_lib'
 
 interface Props extends Pick<TextFieldProps, 'onChange' | 'fullWidth'> {

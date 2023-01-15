@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 
-import ListItem from '@material-ui/core/ListItem'
-import { Omit } from '@material-ui/types'
+import ListItem from '@mui/material/ListItem'
+import { DistributiveOmit } from '@mui/types'
 
 import { Location } from 'history'
 
 const LcaNavLink = React.forwardRef<
   HTMLAnchorElement,
-  Omit<NavLinkProps, 'innerRef'>
+  DistributiveOmit<NavLinkProps, 'innerRef'>
 >((props, ref) => <NavLink exact innerRef={ref as any} {...props} />)
 
 interface Props {

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import { Toolbar, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import { Toolbar, Typography } from '@mui/material'
+import withStyles from '@mui/styles/withStyles'
 
 import CharacterMenu from 'components/generic/CharacterMenu/'
 import { State } from 'ducks'

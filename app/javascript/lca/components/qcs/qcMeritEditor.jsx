@@ -82,7 +82,7 @@ class QcMeritEditor extends Component<Props> {
         items={qcMerits}
         classes={classes}
         onSortEnd={handleSort}
-        useDragHandle={true}
+        useDragHandle
         axis="xy"
       />
     )

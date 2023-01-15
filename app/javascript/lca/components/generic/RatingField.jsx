@@ -1,13 +1,13 @@
 // @flow
 import classnames from 'classnames'
-import React, { Component } from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 
 import TextField from '@material-ui/core/TextField'
 import { withStyles } from '@material-ui/core/styles'
 
 import { clamp } from 'utils/'
 
-const styles = theme => ({
+const styles = (theme) => ({
   field: {
     marginRight: theme.spacing(),
     width: '4em',
@@ -97,7 +97,7 @@ class RatingField extends Component<Props, State> {
     const { value } = this.state
     const className = classnames(
       narrow ? classes.narrow : classes.field,
-      this.props.className
+      this.props.className,
     )
 
     return (

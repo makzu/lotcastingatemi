@@ -77,7 +77,7 @@ class QcAttackEditor extends Component<Props> {
         <SortableAttackList
           items={qcAttacks}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
         />
 
         <Button onClick={handleAdd}>

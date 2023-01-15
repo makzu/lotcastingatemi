@@ -117,7 +117,7 @@ function WeaponPoolDisplay({ weaponPools, classes }: WeaponPoolDisplayProps) {
   }
 
   return (
-    <Fragment>
+    <>
       {attackLine}
       <PoolDisplay
         damage
@@ -138,7 +138,7 @@ function WeaponPoolDisplay({ weaponPools, classes }: WeaponPoolDisplayProps) {
           classes={poolLineClasses}
         />
       )}
-    </Fragment>
+    </>
   )
 }
 const mapStateToProps = (state, props) => ({

@@ -26,7 +26,7 @@ describe('CharacterCard', () => {
           pools={mockGetPoolsAndRatings(mockCharacter)}
           penalties={mockGetPenalties(mockCharacter)}
           classes={{}}
-          canDelete={true}
+          canDelete
         />,
       )
       expect(component).toMatchSnapshot()
@@ -44,7 +44,7 @@ describe('CharacterCard', () => {
           pools={mockGetPoolsAndRatings(mockCharacter)}
           penalties={mockGetPenalties(mockCharacter)}
           classes={{}}
-          canDelete={true}
+          canDelete
         />,
       )
       expect(component).toMatchSnapshot()

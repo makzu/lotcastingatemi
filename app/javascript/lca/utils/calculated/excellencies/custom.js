@@ -29,7 +29,7 @@ export default (
   attribute: string,
   ability: string,
   staticRating: boolean,
-  stunt: boolean = false,
+  stunt = false,
 ) => {
   let excellency = stunt ? character.excellency_stunt : character.excellency
   let result = 0

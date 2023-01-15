@@ -28,12 +28,12 @@ const getPoisons = (state: WrappedEntityState) => entities(state).poisons
 
 export const getSpecificCharacter = (
   state: WrappedEntityState,
-  id: number
+  id: number,
 ): Character => entities(state).characters[id]
 
 const characterIdMemoizer = (state, id: number) => id
 
-const getMerits = state => entities(state).merits
+const getMerits = (state) => entities(state).merits
 
 type CachedEntitySelector<T> = OutputSelector<WrappedEntityState, any, T>
 
@@ -41,39 +41,39 @@ type gMFC = CachedEntitySelector<Array<fullMerit>>
 export const getMeritsForCharacter: gMFC = createCachedSelector(
   [getSpecificCharacter, getMerits],
   (character, merits) =>
-    character.merits.map(m => merits[m]).sort(sortOrderSort)
+    character.merits.map((m) => merits[m]).sort(sortOrderSort),
 )(characterIdMemoizer)
 
 export const getMeritNamesForCharacter = (
   state: WrappedEntityState,
-  id: number
+  id: number,
 ): Array<string> =>
   getMeritsForCharacter(state, id)
-    .map(m => m.merit_name.toLowerCase() + m.rating)
+    .map((m) => m.merit_name.toLowerCase() + m.rating)
     .sort()
 
 export const getEvokableMeritsForCharacter: gMFC = createSelector(
   [getMeritsForCharacter],
-  merits =>
+  (merits) =>
     merits.filter(
-      m =>
+      (m) =>
         m.merit_name.toLowerCase() == 'artifact' ||
-        m.merit_name.toLowerCase() == 'hearthstone'
-    )
+        m.merit_name.toLowerCase() == 'hearthstone',
+    ),
 )
 
-const getSpells = state => entities(state).spells
+const getSpells = (state) => entities(state).spells
 type gSFC = CachedEntitySelector<Array<Spell>>
 export const getSpellsForCharacter: gSFC = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>
-    character.spells.map(s => spells[s]).sort(sortOrderSort)
+    character.spells.map((s) => spells[s]).sort(sortOrderSort),
 )(characterIdMemoizer)
 
 export const getControlSpellsForCharacter = (
   state: WrappedEntityState,
-  id: number
-): Array<Spell> => getSpellsForCharacter(state, id).filter(s => s.control)
+  id: number,
+): Array<Spell> => getSpellsForCharacter(state, id).filter((s) => s.control)
 
 type gPFC = CachedEntitySelector<Array<Poison>>
 export const getPoisonsForCharacter: gPFC = () => []
@@ -90,7 +90,7 @@ export const getPenalties = createCachedSelector(
   (character, meritNames, poisons) => {
     let worstPoison = poisons.reduce(
       (prev, current) => (prev.penalty > current.penalty ? prev : current),
-      { name: 'not poisoned', penalty: 0 }
+      { name: 'not poisoned', penalty: 0 },
     )
 
     return {
@@ -99,14 +99,14 @@ export const getPenalties = createCachedSelector(
       wound: woundPenalty(character, meritNames),
       poisonTotal: worstPoison.penalty,
     }
-  }
+  },
 )(characterIdMemoizer)
 
 // $FlowFixMe
 export const getPoolsForAllWeaponsForCharacter = createCachedSelector(
   [getSpecificCharacter, getState],
   (character, state) =>
-    character.weapons.map(id => getPoolsForWeapon(state, id))
+    character.weapons.map((id) => getPoolsForWeapon(state, id)),
 )(characterIdMemoizer)
 
 // $FlowFixMe
@@ -127,12 +127,12 @@ export const getPoolsAndRatings = createCachedSelector(
     maCharms,
     spells,
     penalties,
-    weaponPools
+    weaponPools,
   ) => {
-    const spellNames = spells.map(m => m.name.toLowerCase())
+    const spellNames = spells.map((m) => m.name.toLowerCase())
     const excellencyAbils = excellencies(
       character,
-      nativeCharms.concat(maCharms)
+      nativeCharms.concat(maCharms),
     )
 
     const bestParryWeapon = weaponPools.sort(sortByParry)[0] || {
@@ -147,21 +147,21 @@ export const getPoolsAndRatings = createCachedSelector(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
       appearance: ratings.appearanceRating(character, meritNames),
       readIntentions: pools.readIntentions(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
 
       evasion: ratings.evasion(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
       bestParry: bestParryWeapon.parry,
       soak: ratings.soak(character, meritNames, spellNames),
@@ -170,54 +170,54 @@ export const getPoolsAndRatings = createCachedSelector(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
       rush: pools.rush(character, meritNames, penalties, excellencyAbils),
       disengage: pools.disengage(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
       withdraw: pools.withdraw(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
       riseFromProne: pools.riseFromProne(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
       takeCover: pools.takeCover(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
 
       featOfStrength: pools.featOfStrength(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
       shapeSorcery: pools.shapeSorcery(
         character,
         meritNames,
         penalties,
-        excellencyAbils
+        excellencyAbils,
       ),
     }
-  }
+  },
 )(characterIdMemoizer)
 
 export const doIOwnCharacter: entitySelector<boolean> = createSelector(
   [getCurrentPlayer, getSpecificCharacter],
   (player, character) =>
-    character !== undefined && player.id === character.player_id
+    character !== undefined && player.id === character.player_id,
 )
 
 export const amIStOfCharacter: entitySelector<boolean> = createSelector(
@@ -226,17 +226,17 @@ export const amIStOfCharacter: entitySelector<boolean> = createSelector(
     character != null &&
     character.chronicle_id != null &&
     ents.chronicles[character.chronicle_id] &&
-    ents.chronicles[character.chronicle_id].st_id === player.id
+    ents.chronicles[character.chronicle_id].st_id === player.id,
 )
 
 export const canISeeCharacter: entitySelector<boolean> = createSelector(
   [getSpecificCharacter, doIOwnCharacter, amIStOfCharacter],
-  (character, doI, amI) => !character.hidden || doI || amI
+  (character, doI, amI) => !character.hidden || doI || amI,
 )
 
 export const canIEditCharacter: entitySelector<boolean> = createSelector(
   [doIOwnCharacter, amIStOfCharacter],
-  (doI, amI) => doI || amI
+  (doI, amI) => doI || amI,
 )
 
 export const canIDeleteCharacter = doIOwnCharacter

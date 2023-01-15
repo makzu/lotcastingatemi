@@ -18,7 +18,7 @@ export function spendMotes(
   pool: 'personal' | 'peripheral' = 'personal',
   charType: 'character' | 'qc' = 'character',
   committments: Object,
-  mute: boolean = false
+  mute = false,
 ) {
   let update = updateEvent(charType)
 
@@ -48,16 +48,16 @@ export function spendMotes(
 export function spendWillpower(
   id: number,
   willpower: number,
-  charType: 'character' | 'qc' = 'character'
+  charType: 'character' | 'qc' = 'character',
 ) {
   let update = updateEvent(charType)
 
   return (dispatch: Function, getState: Function) => {
     dispatch({ type: SPEND_WP, id: id })
-    let current_wp = getState().entities.current[charType + 's'][id]
-      .willpower_temporary
+    let current_wp =
+      getState().entities.current[charType + 's'][id].willpower_temporary
     dispatch(
-      update(id, { willpower_temporary: Math.max(current_wp - willpower, 0) })
+      update(id, { willpower_temporary: Math.max(current_wp - willpower, 0) }),
     )
   }
 }
@@ -66,15 +66,14 @@ export function takeDamage(
   id: number,
   damage: number,
   damageType: 'bashing' | 'lethal' | 'aggravated' = 'bashing',
-  charType: 'character' | 'qc' = 'character'
+  charType: 'character' | 'qc' = 'character',
 ) {
   let update = updateEvent(charType)
 
   return (dispatch: Function, getState: Function) => {
     dispatch({ type: TAKE_DAMAGE, id: id, damageType: damageType })
-    let current_dmg = getState().entities.current[charType + 's'][id][
-      `damage_${damageType}`
-    ]
+    let current_dmg =
+      getState().entities.current[charType + 's'][id][`damage_${damageType}`]
     dispatch(update(id, { [`damage_${damageType}`]: current_dmg + damage }))
   }
 }

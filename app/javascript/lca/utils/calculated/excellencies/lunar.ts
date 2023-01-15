@@ -9,8 +9,7 @@ export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
     character.favored_attributes,
   )
   charms.forEach((ch) => {
-    charmsPerAttribute[ch.ability || ''] =
-      (charmsPerAttribute[ch.ability || ''] || 0) + 1
+    charmsPerAttribute[ch.ability] = (charmsPerAttribute[ch.ability] || 0) + 1
   })
 
   const attributes = ATTRIBUTES.map((a) => {

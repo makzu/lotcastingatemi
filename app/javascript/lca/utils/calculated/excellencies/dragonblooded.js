@@ -7,14 +7,14 @@ import type { Character, Charm } from 'utils/flow-types'
 // All abilities that have an 'Excellency' keyworded Charm
 export const dbExcellencyAbils = (
   character: Character,
-  charms: Array<Charm>
+  charms: Array<Charm>,
 ): Array<string> => {
   let excellencies = charms
     .filter(
-      c =>
-        c.keywords.includes('excellency') || c.keywords.includes('Excellency')
+      (c) =>
+        c.keywords.includes('excellency') || c.keywords.includes('Excellency'),
     )
-    .map(c => c.ability)
+    .map((c) => c.ability)
 
   if (excellencies.includes('brawl'))
     excellencies = excellencies.concat(['martial_arts'])
@@ -28,11 +28,11 @@ const dbExcellency = (
   character: Character,
   attribute: string,
   ability: string,
-  staticRating: boolean = false
+  staticRating = false,
 ) =>
   Math.floor(
     (abil(character, ability) +
       (specialtiesFor(character, ability).length > 0 ? 1 : 0)) /
-      (staticRating ? 2 : 1)
+      (staticRating ? 2 : 1),
   )
 export default dbExcellency

@@ -68,7 +68,7 @@ const WeaponEditor = (props: WeaponEditorProps) => {
         <SortableWeaponList
           items={WeaponElements}
           onSortEnd={handleSort}
-          useDragHandle={true}
+          useDragHandle
         />
       </BlockPaper>
 

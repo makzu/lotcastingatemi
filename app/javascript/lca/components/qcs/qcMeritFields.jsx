@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
 import Button from '@material-ui/core/Button'
@@ -14,7 +14,7 @@ import TextField from 'components/generic/TextField.jsx'
 import type { QcMerit } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
   onMeritChange: Function,
   onRemoveClick: Function,
 }
-export default class QcMeritFields extends React.Component<Props> {
+export default class QcMeritFields extends Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
     const { merit } = this.props
@@ -69,7 +69,7 @@ export default class QcMeritFields extends React.Component<Props> {
           label="Text"
           margin="dense"
           onChange={handleChange}
-          fullWidth={true}
+          fullWidth
           multiline
           rowsMax={5}
         />

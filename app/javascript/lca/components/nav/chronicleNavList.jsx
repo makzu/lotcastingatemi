@@ -1,5 +1,5 @@
 // @flow
-import { Component } from 'react';
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import IconButton from '@material-ui/core/IconButton'
@@ -88,7 +88,7 @@ class ChronicleNavList extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ownChronicles: getMyOwnChronicles(state),
   chronicles: getMyChronicles(state),
 })

@@ -39,8 +39,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
   },
   settings: {
-    flowtype: {
-      onlyFilesWithFlowAnnotation: true,
-    },
+    flowtype: { onlyFilesWithFlowAnnotation: true },
+    react: { version: 'detect' },
   },
 }

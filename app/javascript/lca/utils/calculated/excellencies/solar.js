@@ -7,21 +7,21 @@ import type { Character, Charm } from 'utils/flow-types'
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
 export const solarExcellencyAbils = (
   character: Character,
-  charms: Array<Charm>
+  charms: Array<Charm>,
 ): Array<string> => {
   let excellencies = (character.caste_abilities || [])
-    .filter(a => abil(character, a) > 0)
+    .filter((a) => abil(character, a) > 0)
     .concat(
-      (character.favored_abilities || []).filter(a => abil(character, a) > 0)
+      (character.favored_abilities || []).filter((a) => abil(character, a) > 0),
     )
 
   if (excellencies.includes('brawl') && character.abil_martial_arts.length > 0)
     excellencies = excellencies.concat(['martial_arts'])
 
   excellencies = excellencies.concat(
-    charms.map(c =>
-      c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability
-    )
+    charms.map((c) =>
+      c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability,
+    ),
   )
 
   return excellencies
@@ -32,10 +32,10 @@ const solarExcellency = (
   character: Character,
   attribute: string,
   ability: string,
-  staticRating: boolean = false
+  staticRating = false,
 ) =>
   Math.floor(
     (attr(character, attribute) + abil(character, ability)) /
-      (staticRating ? 2 : 1)
+      (staticRating ? 2 : 1),
   )
 export default solarExcellency

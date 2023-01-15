@@ -59,7 +59,7 @@ const timeToHealWorstMortal = (character: Character | fullQc) => {
 export const healthRecoverObject = (
   character: Character | fullQc,
   time: number,
-  exaltedHealing: boolean = true
+  exaltedHealing = true,
 ) => {
   let obj = {
     damage_bashing: character.damage_bashing,

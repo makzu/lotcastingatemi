@@ -45,8 +45,8 @@ export function maxExcellency(
   attribute: string,
   ability: string,
   excellencyAbils: Array<string>,
-  staticRating: boolean = false,
-  stunt: boolean = false,
+  staticRating = false,
+  stunt = false,
 ) {
   let abili = ability
   if (abili.startsWith('craft')) abili = 'craft'

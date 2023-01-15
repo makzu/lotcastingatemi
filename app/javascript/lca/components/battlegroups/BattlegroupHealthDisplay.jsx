@@ -38,7 +38,7 @@ type Props = {
   className?: string,
   DisplayClassName?: string,
   classes: Object,
-  canEdit: Boolean,
+  canEdit: boolean,
   update: Function,
 }
 type State = { open: boolean, magnitude: number, size: number }

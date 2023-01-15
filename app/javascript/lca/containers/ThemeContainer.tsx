@@ -1,15 +1,14 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import green from '@material-ui/core/colors/green'
 import lightgreen from '@material-ui/core/colors/lightGreen'
 import teal from '@material-ui/core/colors/teal'
-import { createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { dark, light } from '@material-ui/core/styles/createPalette'
-import { ThemeProvider } from '@material-ui/styles'
 
-import { State } from 'ducks'
-import { switchTheme } from 'ducks/actions.js'
+import { switchTheme } from 'ducks/app'
+import { ReactChildren, useEffect } from 'react'
+import { useAppSelector } from 'hooks'
 
 /* When changing these colors, it's also important to change the theme_color
  * entries in /config/favicon.json from #2e7d32 to the new value,
@@ -53,22 +52,12 @@ const themes = {
   }),
 }
 
-interface ExposedProps {
-  children: React.ReactNode
-}
+const ThemeContainer = ({ children }: { children: ReactChildren }) => {
+  const dispatch = useDispatch()
+  const theme = useAppSelector((state) => state.app.theme)
+  const change = dispatch(switchTheme)
 
-interface StateProps {
-  theme: State['app']['theme']
-}
-
-interface DispatchProps {
-  change(theme: State['app']['theme'] | string): void
-}
-
-interface Props extends ExposedProps, StateProps, DispatchProps {}
-
-const ThemeContainer = ({ theme, children, change }: Props) => {
-  React.useEffect(() => {
+  useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key !== 'theme') {
         return
@@ -85,11 +74,4 @@ const ThemeContainer = ({ theme, children, change }: Props) => {
   return <ThemeProvider theme={themes[theme]}>{children}</ThemeProvider>
 }
 
-const mapStateToProps = (state: State) => ({ theme: state.app.theme })
-
-const enhance = connect(
-  mapStateToProps,
-  { change: switchTheme }
-)
-
-export default enhance(ThemeContainer)
+export default ThemeContainer

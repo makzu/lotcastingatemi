@@ -1,4 +1,6 @@
-import { isNonFetchAuthIssue } from './app.js'
+import { AnyAction } from 'redux'
+
+import { isNonFetchAuthIssue } from './app'
 import { crudAction } from './entities/_lib'
 
 export const LOGOUT = 'lca/session/LOGOUT'
@@ -18,7 +20,7 @@ const defaultState: ISessionState = {
 
 export default function SessionReducer(
   state: ISessionState = defaultState,
-  action: any
+  action: AnyAction,
 ) {
   if (isNonFetchAuthIssue(action)) {
     return {

@@ -56,7 +56,7 @@ export {
 } from './entities'
 
 export { logout } from './session'
-export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
+export { closeDrawer, toggleDrawer, switchTheme } from './app'
 export { spendMotes, spendWillpower, takeDamage } from './events'
 
 import {
@@ -76,8 +76,8 @@ export function fetchAll() {
       .then(() => dispatch(fetchAllQcs()))
       .then(() => dispatch(fetchAllBattlegroups()))
       .then(() => {
-        UpdatesCable.subscribe(getState, data =>
-          dispatch({ type: 'lca/cable/RECEIVED', payload: data })
+        UpdatesCable.subscribe(getState, (data) =>
+          dispatch({ type: 'lca/cable/RECEIVED', payload: data }),
         )
       })
   }

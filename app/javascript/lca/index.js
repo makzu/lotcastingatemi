@@ -6,13 +6,11 @@ import ReactDOM from 'react-dom'
 
 import './i18n'
 
-import configureStore from './store'
+import store from './store'
 import history from './utils/history'
 import { lcaInit } from './ducks/actions.js'
 
 import RootContainer from './containers/rootContainer.jsx'
-
-const store = configureStore()
 
 store.dispatch(lcaInit())
 

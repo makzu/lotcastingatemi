@@ -51,9 +51,9 @@ export {
   destroyAccount,
   createPoison,
   updatePoison,
-  destroyPoison
+  destroyPoison,
 } from '../entities'
 
 export { logout } from '../session'
-export { closeDrawer, toggleDrawer, switchTheme } from '../app.js'
+export { closeDrawer, toggleDrawer, switchTheme } from '../app'
 export { spendMotes, spendWillpower, takeDamage } from '../events'

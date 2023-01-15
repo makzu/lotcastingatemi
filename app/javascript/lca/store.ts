@@ -16,20 +16,13 @@ const middleware = [
   paginationMiddleware,
 ]
 
-// export default () =>
-//   configureStore({
-//     reducer,
-//     middleware,
-//     devTools: !PRODUCTION,
-//   })
+const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
+})
 
-export default function configureAppStore(preloadedState) {
-  const store = configureStore({
-    reducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(middleware),
-    preloadedState,
-  })
+export default store
 
-  return store
-}
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

@@ -1,38 +1,40 @@
-// @flow
+// TODO: Move from AnyAction to a real typed action
+import { AnyAction } from 'redux'
+
 export const CLOSE_DRAWER = 'lca/app/CLOSE_DRAWER'
 export const TOGGLE_DRAWER = 'lca/app/TOGGLE_DRAWER'
 export const SWITCH_THEME = 'lca/app/SWITCH_THEME'
 
 const defaultState = {
   drawerOpen: false,
-  theme: (localStorage: Object).theme || 'light',
+  theme: localStorage.theme || 'light',
   loading: false,
   error: false,
   errorMessage: '',
 }
-type AppState = {
-  +drawerOpen: boolean,
-  +theme: 'dark' | 'light',
-  +loading: boolean,
-  +error: boolean,
-  +errorMessage: string,
+export type AppState = {
+  drawerOpen: boolean
+  theme: 'dark' | 'light'
+  loading: boolean
+  error: boolean
+  errorMessage: string
 }
 
-export const isAuthFailure = (action: Object) =>
+export const isAuthFailure = (action: AnyAction) =>
   action.error && (action.payload || {}).status == 401
-export const isForbidden = (action: Object) =>
+export const isForbidden = (action: AnyAction) =>
   action.error && (action.payload || {}).status == 403
-export const is404Error = (action: Object) =>
+export const is404Error = (action: AnyAction) =>
   action.error && (action.payload || {}).status == 404
 
-export const isNonFetchAuthIssue = (action: Object) =>
+export const isNonFetchAuthIssue = (action: AnyAction) =>
   action.error &&
   [401, 401].includes((action.payload || {}).status) &&
   action.type !== 'lca-api/character/FETCH/FAILURE'
 
 export default function AppReducer(
   state: AppState = defaultState,
-  action: Object
+  action: AnyAction,
 ): AppState {
   if (isAuthFailure(action) || isForbidden(action) || is404Error(action)) {
     return {
@@ -104,7 +106,7 @@ export const switchTheme = (theme: string) => ({
   theme: theme,
 })
 
-export const parseError = (action: Object): string => {
+export const parseError = (action: AnyAction): string => {
   if (action.payload === undefined || action.payload.response === undefined) {
     console.log('Easily Overlooked Error Method', action) // eslint-disable-line no-console
     return 'Error'
@@ -112,8 +114,8 @@ export const parseError = (action: Object): string => {
   if (action.payload.status === 500)
     return action.payload.message || 'Internal Server Error'
 
-  let keys = Object.keys(action.payload.response)
+  const keys = Object.keys(action.payload.response)
   return keys
-    .map(k => k + ': ' + action.payload.response[k][0].error)
+    .map((k) => k + ': ' + action.payload.response[k][0].error)
     .join(', ')
 }

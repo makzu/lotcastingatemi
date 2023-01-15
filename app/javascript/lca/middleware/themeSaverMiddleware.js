@@ -1,5 +1,5 @@
 // @flow
-import { SWITCH_THEME } from 'ducks/app.js'
+import { SWITCH_THEME } from 'ducks/app'
 
 // Saves changes to the theme to LocalStorage
 // eslint-disable-next-line no-unused-vars

@@ -23,7 +23,7 @@ interface Props {
   classes: any
 }
 function BattlegroupHeader(props: Props) {
-  useDocumentTitle(`${battlegroup?.name} | Lot-Casting Atemi`)
+  useDocumentTitle(`${props.battlegroup?.name} | Lot-Casting Atemi`)
 
   if (props.battlegroup == null) {
     return <GenericHeader />

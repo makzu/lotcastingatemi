@@ -24,7 +24,7 @@ interface Props {
 }
 
 function QcHeader(props: Props) {
-  useDocumentTitle(`${qc.name} | Lot-Casting Atemi`)
+  useDocumentTitle(`${props.qc?.name} | Lot-Casting Atemi`)
 
   if (props.qc == null) {
     return <GenericHeader />

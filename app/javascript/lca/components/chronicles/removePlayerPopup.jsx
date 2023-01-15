@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -26,7 +26,7 @@ type State = {
   open: boolean,
 }
 
-class RemovePlayerPopup extends React.Component<Props, State> {
+class RemovePlayerPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -96,9 +96,8 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  { removePlayer }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  removePlayer,
+})
 
 export default enhance(RemovePlayerPopup)

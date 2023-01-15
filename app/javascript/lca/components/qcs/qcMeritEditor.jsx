@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -28,7 +28,7 @@ type Props = ExposedProps & {
   destroyQcMerit: Function,
 }
 
-class QcMeritEditor extends React.Component<Props> {
+class QcMeritEditor extends Component<Props> {
   handleChange = (id, trait) => {
     this.props.updateQcMerit(id, this.props.qc.id, trait)
   }
@@ -37,7 +37,7 @@ class QcMeritEditor extends React.Component<Props> {
     this.props.createQcMerit(this.props.qc.id)
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyQcMerit(id, this.props.qc.id)
   }
 
@@ -98,13 +98,10 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  {
-    updateQcMerit,
-    createQcMerit,
-    destroyQcMerit,
-  }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  updateQcMerit,
+  createQcMerit,
+  destroyQcMerit,
+})
 
 export default enhance(QcMeritEditor)

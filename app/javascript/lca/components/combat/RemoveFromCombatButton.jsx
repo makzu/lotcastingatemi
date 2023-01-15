@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -61,7 +61,7 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
 
 const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )
 
 export default enhance(RemoveFromCombatButton)

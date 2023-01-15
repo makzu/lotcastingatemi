@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -21,7 +20,7 @@ function scrollToPanel(e, appearing, id) {
   if (!checkVisible(elem)) scrollToElement(elem)
 }
 
-const showEvo = charm =>
+const showEvo = (charm) =>
   charm.charm_type === 'Evocation' && charm.artifact_name !== ''
 
 type Props = { charm: Charm, classes: Object }

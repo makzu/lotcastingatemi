@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import Checkbox from 'components/shared/inputs/Checkbox'
 

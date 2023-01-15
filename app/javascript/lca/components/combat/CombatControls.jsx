@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -22,7 +22,7 @@ type Props = ExposedProps & {
 }
 
 class CombatControls extends Component<Props> {
-  onChange = e => {
+  onChange = (e) => {
     this.props.update(this.props.character.id, {
       [e.target.name]: e.target.value,
     })
@@ -114,7 +114,7 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
 
 const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )
 
 export default enhance(CombatControls)

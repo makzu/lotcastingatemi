@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import { ListItemIcon, ListItemText } from '@material-ui/core'
 import { Description } from '@material-ui/icons'
 

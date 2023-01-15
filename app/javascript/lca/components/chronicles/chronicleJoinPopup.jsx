@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -32,7 +32,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ code: e.target.value })
   }
 
@@ -79,7 +79,4 @@ class ChronicleJoinPopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  undefined,
-  { joinChronicle }
-)(ChronicleJoinPopup)
+export default connect(undefined, { joinChronicle })(ChronicleJoinPopup)

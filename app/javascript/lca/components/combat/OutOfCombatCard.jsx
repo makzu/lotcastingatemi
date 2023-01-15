@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -16,7 +15,7 @@ import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
@@ -131,11 +130,8 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
 )
 
 export default enhance(OutOfCombatCard)

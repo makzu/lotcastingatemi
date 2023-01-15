@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { shouldUpdate } from 'recompose'
 
 import Typography from '@material-ui/core/Typography'
@@ -50,7 +49,7 @@ const enhance: Enhancer<Props, Props> = shouldUpdate(
     isUnequalByKeys(props.character, newProps.character, [
       'limit',
       'limit_trigger',
-    ])
+    ]),
 )
 
 export default enhance(LimitEditor)

@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import { ListItemText } from '@material-ui/core'
 
 import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -83,5 +82,5 @@ function mapStateToProps(state: State, { location, match }: RouteProps) {
 
 export default compose<Props, RouteProps>(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(CharacterHeader)

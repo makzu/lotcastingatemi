@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
@@ -77,18 +77,18 @@ class CombatDashboard extends Component<Props> {
     const entities = [...characters, ...qcs, ...battlegroups]
 
     const outOfCombatList = entities
-      .filter(c => !c.in_combat)
-      .map(c => (
+      .filter((c) => !c.in_combat)
+      .map((c) => (
         <Grid item xs={6} lg={4} xl={3} key={c.type + c.id}>
           <OutOfCombatCard character={c} />
         </Grid>
       ))
 
     const inCombatEntities = entities
-      .filter(c => c.in_combat)
+      .filter((c) => c.in_combat)
       .sort(initiativeSort)
 
-    const combatCards = inCombatEntities.map(c => (
+    const combatCards = inCombatEntities.map((c) => (
       <Grid item xs={12} md={6} xl={4} key={c.id + c.name}>
         {/* $FlowFixMe */}
         {c.type.includes('Character') && <CharacterCard character={c} />}
@@ -99,7 +99,7 @@ class CombatDashboard extends Component<Props> {
       </Grid>
     ))
 
-    const nextCharacter = inCombatEntities.filter(c => !c.has_acted)[0]
+    const nextCharacter = inCombatEntities.filter((c) => !c.has_acted)[0]
 
     return (
       <Grid container spacing={3} style={{ position: 'relative' }}>
@@ -161,8 +161,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
-  connect(
-    mapStateToProps,
-    { nextRound, endCombat }
-  )
+  connect(mapStateToProps, { nextRound, endCombat }),
 )(CombatDashboard)

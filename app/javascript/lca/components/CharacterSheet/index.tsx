@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { compose } from 'recompose'
@@ -36,9 +35,6 @@ const characterSheetWrapper = ({ match, fetch }: Props) => {
 }
 
 export default compose<Props, RouteProps>(
-  connect(
-    null,
-    { fetch: fetchCharacterIfNecessary }
-  ),
-  ProtectedComponent
+  connect(null, { fetch: fetchCharacterIfNecessary }),
+  ProtectedComponent,
 )(characterSheetWrapper)

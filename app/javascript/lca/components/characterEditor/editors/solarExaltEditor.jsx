@@ -1,6 +1,4 @@
 // @flow
-import React from 'react'
-
 import MenuItem from '@material-ui/core/MenuItem'
 
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
@@ -25,9 +23,7 @@ function SolarExaltEditor({ character, onChange }: Props) {
   const noOptionItem =
     character.caste == undefined ? (
       <MenuItem disabled>Select a Caste</MenuItem>
-    ) : (
-      undefined
-    )
+    ) : undefined
 
   return (
     <BlockPaper>

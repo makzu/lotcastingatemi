@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -20,7 +20,7 @@ import type {
   withHealthLevels,
 } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   moteWrap: {
     marginRight: theme.spacing(),

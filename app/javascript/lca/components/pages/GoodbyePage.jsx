@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -23,7 +22,7 @@ const GoodbyePage = ({ shouldRedirect }: Props) => {
   )
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   shouldRedirect: !state.session.deleted && !state.app.loading,
 })
 

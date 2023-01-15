@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
@@ -21,10 +20,10 @@ import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 import type { Battlegroup, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
@@ -156,7 +155,7 @@ function BattlegroupCard(props: Props) {
               battlegroup.evasion +
                 bgDefenseBonus(battlegroup) -
                 battlegroup.onslaught,
-              0
+              0,
             ),
           }}
           label="Evasion"
@@ -170,7 +169,7 @@ function BattlegroupCard(props: Props) {
               battlegroup.parry +
                 bgDefenseBonus(battlegroup) -
                 battlegroup.onslaught,
-              0
+              0,
             ),
           }}
           label="Parry"
@@ -239,7 +238,7 @@ const mapStateToProps = (state, props: ExposedProps) => ({
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )
 
 export default enhance(BattlegroupCard)

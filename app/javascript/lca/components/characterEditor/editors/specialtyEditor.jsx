@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { shouldUpdate } from 'recompose'
 
 import MenuItem from '@material-ui/core/MenuItem'
@@ -69,7 +68,7 @@ const SpecialtyEditor = ({ character, onChange }: Props) => {
 
 const enhance: Enhancer<Props, Props> = shouldUpdate(
   (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, ['specialties'])
+    isUnequalByKeys(props.character, newProps.character, ['specialties']),
 )
 
 export default enhance(SpecialtyEditor)

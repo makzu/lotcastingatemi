@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { Grid } from '@material-ui/core'
@@ -20,7 +19,7 @@ const fullViewMap = (c: Charm) => (
   </Grid>
 )
 
-const CharmList = props => {
+const CharmList = (props) => {
   const mappedCharms = (
     <Grid container spacing={3}>
       {props.charms.map(fullViewMap)}

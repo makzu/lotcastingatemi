@@ -1,5 +1,5 @@
 import { deepEqual } from 'fast-equals'
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -44,7 +44,7 @@ const WeaponEditorPopup = (props: Props) => {
   const [advancedOpen, setAdvancedOpen] = useState(false)
 
   const weapon = useSelector((state: State) =>
-    getSpecificWeapon(state, openWeapon)
+    getSpecificWeapon(state, openWeapon),
   )
 
   const dispatch = useDispatch()

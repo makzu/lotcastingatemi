@@ -1,5 +1,4 @@
 import { Location } from 'history'
-import * as React from 'react'
 import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
 
 import {
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const CsrfInput = () => {
-  const csrfToken = document.getElementsByTagName("meta")["csrf-token"].content
+  const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content
   return <input type="hidden" name="authenticity_token" value={csrfToken} />
 }
 
@@ -55,7 +54,7 @@ const LoginForm = ({ text, action }) => {
 const isOnHelpPage = (_: {}, location: Location) =>
   location.pathname.startsWith('/help')
 
-const isDeveloperMode = () => location.hostname === "localhost"
+const isDeveloperMode = () => location.hostname === 'localhost'
 
 interface Props {
   authenticated: boolean
@@ -106,12 +105,12 @@ const NavPanel = (props: Props) => {
             <ChronicleNavList closeDrawer={closeCheck} />
           </>
         )}
-        {(!authenticated && isDeveloperMode()) && (
+        {!authenticated && isDeveloperMode() && (
           <>
             <LoginForm action="/auth/developer" text="Log in (Developer)" />
           </>
         )}
-        {(!authenticated && !isDeveloperMode()) && (
+        {!authenticated && !isDeveloperMode() && (
           <>
             <LoginForm action="/auth/google_oauth2" text="Log in with Google" />
           </>

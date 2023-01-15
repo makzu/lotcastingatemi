@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { Divider, ListItemText } from '@material-ui/core'
@@ -6,7 +5,7 @@ import { Divider, ListItemText } from '@material-ui/core'
 import { LinkListItem } from 'components/shared/wrappers'
 import { logout } from 'ducks/actions.js'
 
-const NavPanelLogout = props => {
+const NavPanelLogout = (props) => {
   return (
     <>
       <Divider />
@@ -18,7 +17,4 @@ const NavPanelLogout = props => {
   )
 }
 
-export default connect(
-  null,
-  { logout }
-)(NavPanelLogout)
+export default connect(null, { logout })(NavPanelLogout)

@@ -1,6 +1,4 @@
 // @flow
-import React from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 
@@ -8,7 +6,7 @@ import RatingLine from 'components/generic/ratingLine.jsx'
 import { isCasteAttribute, isFavoredAttribute } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   attributeName: {
     ...theme.typography.body1,
     textTransform: 'capitalize',

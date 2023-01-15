@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { compose, shouldUpdate } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -16,7 +15,7 @@ import WeightSelect from 'components/shared/selects/WeightSelect'
 import { isUnequalByKeys } from 'utils'
 import type { withArmorStats as Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -150,6 +149,6 @@ export default compose(
       'bonus_soak',
       'bonus_hardness',
       'bonus_mobility_penalty',
-    ])
-  )
+    ]),
+  ),
 )(ArmorEditor)

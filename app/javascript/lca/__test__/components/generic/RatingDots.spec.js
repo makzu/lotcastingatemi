@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import renderer from 'react-test-renderer'
 
 import RatingDots from '../../../components/generic/ratingDots.jsx'

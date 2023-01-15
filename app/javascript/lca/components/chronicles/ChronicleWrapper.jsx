@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ type Props = ExposedProps & {
   fetchChronicle: Function,
 }
 
-class ChronicleWrapper extends React.Component<Props> {
+class ChronicleWrapper extends Component<Props> {
   fetchStuff = () => {
     if (!this.props.isLoaded)
       this.props.fetchChronicle(this.props.match.params.chronicleId)
@@ -53,9 +53,8 @@ const mapStateToProps = (state, props: ExposedProps) => ({
   isLoaded: isChronicleLoaded(state, props.match.params.chronicleId),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  { fetchChronicle }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  fetchChronicle,
+})
 
 export default enhance(ChronicleWrapper)

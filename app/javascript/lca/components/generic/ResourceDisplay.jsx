@@ -1,9 +1,7 @@
 // @flow
-import React from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 
-const styles = theme => ({
+const styles = (theme) => ({
   label: {
     ...theme.typography.body1,
     fontSize: '0.75rem',

@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -16,7 +15,7 @@ import { isUnequalByKeys } from 'utils'
 import type { Character, Enhancer } from 'utils/flow-types'
 
 export const SorceryFields = (
-  props: { trait: string } & ListAttributeFieldTypes
+  props: { trait: string } & ListAttributeFieldTypes,
 ) => {
   const { onChange, trait, classes } = props
 
@@ -92,7 +91,7 @@ const enhance: Enhancer<Props, Props> = shouldUpdate(
       'is_sorcerer',
       'sorcerous_motes',
       'rituals',
-    ])
+    ]),
 )
 
 export default enhance(SorceryEditor)

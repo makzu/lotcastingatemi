@@ -1,5 +1,4 @@
 // @flow
-import * as React from 'react'
 import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@material-ui/core/Checkbox'
@@ -84,7 +83,7 @@ const MoteCommittmentEditor = ({ character, onChange }: Props) => {
 
 const enhance: Enhancer<Props, Props> = shouldUpdate(
   (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, ['motes_committed'])
+    isUnequalByKeys(props.character, newProps.character, ['motes_committed']),
 )
 
 export default enhance(MoteCommittmentEditor)

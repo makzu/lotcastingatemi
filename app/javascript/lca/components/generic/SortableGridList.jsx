@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { SortableContainer } from 'react-sortable-hoc'
 import Grid from '@material-ui/core/Grid'
 

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
@@ -29,7 +29,7 @@ import {
 import { prettyIntimacyRating, qcPool } from 'utils/calculated'
 import type { fullQc, QcMerit, QcAttack, QcCharm } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   rowContainer: {
     display: 'flex',
@@ -150,7 +150,7 @@ class QcSheet extends Component<Props> {
             {p.subject} ({prettyIntimacyRating(p.rating)})
           </span>
         </div>
-      )
+      ),
     )
     const ties = qc.ties.map((tie, index) =>
       tie.hidden && !canEdit ? (
@@ -162,9 +162,9 @@ class QcSheet extends Component<Props> {
             {tie.subject} ({prettyIntimacyRating(tie.rating)})
           </span>
         </div>
-      )
+      ),
     )
-    const attacks = qc_attacks.map(attack => (
+    const attacks = qc_attacks.map((attack) => (
       <div key={attack.id} className={classes.rowContainer}>
         <div className={classes.name}>
           <div className={classes.label}>
@@ -211,7 +211,7 @@ class QcSheet extends Component<Props> {
         )}
       </div>
     ))
-    const merits = qc_merits.map(merit => (
+    const merits = qc_merits.map((merit) => (
       <div key={merit.id}>
         <strong>{merit.name} </strong>
         <ReactMarkdown
@@ -221,7 +221,7 @@ class QcSheet extends Component<Props> {
         />
       </div>
     ))
-    const charms = qc_charms.map(charm => (
+    const charms = qc_charms.map((charm) => (
       <div key={charm.id}>
         <strong>{charm.name} </strong>({charm.cost}; {charm.timing};{' '}
         {charm.duration}; Essence&nbsp;
@@ -235,7 +235,7 @@ class QcSheet extends Component<Props> {
         />
       </div>
     ))
-    const spell_list = spells.map(spell => (
+    const spell_list = spells.map((spell) => (
       <div key="spell.id">
         <strong>{spell.name} </strong>
         {spell.control && '(Control Spell) '}({spell.cost}, {spell.duration})
@@ -463,9 +463,6 @@ function mapStateToProps(state, props) {
 
 export default ProtectedComponent(
   withStyles(styles)(
-    connect(
-      mapStateToProps,
-      { fetch: fetchQcIfNecessary }
-    )(QcSheet)
-  )
+    connect(mapStateToProps, { fetch: fetchQcIfNecessary })(QcSheet),
+  ),
 )

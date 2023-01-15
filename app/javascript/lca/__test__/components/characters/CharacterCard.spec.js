@@ -4,7 +4,6 @@ declare var check: Function
 
 require('jasmine-check').install()
 
-import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 const renderer = new ShallowRenderer()
 
@@ -20,7 +19,7 @@ describe('CharacterCard', () => {
     'works for mortals',
     { times: 5, seed: SEED },
     gen.object(genMortal),
-    mockCharacter => {
+    (mockCharacter) => {
       const component = renderer.render(
         <CharacterCard
           character={mockCharacter}
@@ -28,17 +27,17 @@ describe('CharacterCard', () => {
           penalties={mockGetPenalties(mockCharacter)}
           classes={{}}
           canDelete={true}
-        />
+        />,
       )
       expect(component).toMatchSnapshot()
-    }
+    },
   )
 
   check.it(
     'works for Solars',
     { times: 5, seed: SEED },
     gen.object(genSolar),
-    mockCharacter => {
+    (mockCharacter) => {
       const component = renderer.render(
         <CharacterCard
           character={mockCharacter}
@@ -46,9 +45,9 @@ describe('CharacterCard', () => {
           penalties={mockGetPenalties(mockCharacter)}
           classes={{}}
           canDelete={true}
-        />
+        />,
       )
       expect(component).toMatchSnapshot()
-    }
+    },
   )
 })

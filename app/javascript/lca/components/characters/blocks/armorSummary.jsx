@@ -1,6 +1,4 @@
 // @flow
-import React from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
@@ -8,7 +6,7 @@ import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import type { withArmorStats } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',

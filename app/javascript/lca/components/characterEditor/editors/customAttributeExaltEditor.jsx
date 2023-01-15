@@ -1,6 +1,4 @@
 // @flow
-import React from 'react'
-
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'

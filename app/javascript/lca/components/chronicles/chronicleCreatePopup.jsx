@@ -1,5 +1,5 @@
 // @flow
-import React, { PureComponent, Fragment } from 'react'
+import { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Dialog from '@material-ui/core/Dialog'
@@ -32,7 +32,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       chronicle: { ...this.state.chronicle, name: e.target.value },
     })
@@ -81,7 +81,4 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  undefined,
-  { createChronicle }
-)(ChronicleCreatePopup)
+export default connect(undefined, { createChronicle })(ChronicleCreatePopup)

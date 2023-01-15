@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
@@ -25,7 +25,7 @@ const WeaponEditor = (props: WeaponEditorProps) => {
 
   const { character } = props
   const weapons = useSelector((state: State) =>
-    getWeaponsForCharacter(state, character.id)
+    getWeaponsForCharacter(state, character.id),
   )
 
   const dispatch = useDispatch()
@@ -40,7 +40,7 @@ const WeaponEditor = (props: WeaponEditorProps) => {
     dispatch(
       updateWeapon(weaponA.id, character.id, {
         sort_order: weaponB.sort_order + offset,
-      })
+      }),
     )
   }
 

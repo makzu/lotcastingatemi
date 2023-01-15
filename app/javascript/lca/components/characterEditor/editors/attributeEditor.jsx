@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { compose, shouldUpdate } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -16,7 +15,7 @@ import {
 } from 'utils/constants.js'
 import type { withAttributes as Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   fieldSet: {
     marginBottom: theme.spacing(2),
   },
@@ -140,7 +139,7 @@ export default compose(
     isUnequalByKeys(
       props.character,
       newProps.character,
-      ATTRIBUTES.map(a => a.attr)
-    )
-  )
+      ATTRIBUTES.map((a) => a.attr),
+    ),
+  ),
 )(AttributeEditor)

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 import { compose } from 'recompose'
@@ -20,7 +20,7 @@ import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
@@ -35,7 +35,7 @@ type Props = ExposedProps & {
   classes: Object,
 }
 
-class QcCharmEditor extends React.Component<Props> {
+class QcCharmEditor extends Component<Props> {
   handleChange = (id, trait) => {
     this.props.updateQcCharm(id, this.props.qc.id, trait)
   }
@@ -44,7 +44,7 @@ class QcCharmEditor extends React.Component<Props> {
     this.props.createQcCharm(this.props.qc.id)
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyQcCharm(id, this.props.qc.id)
   }
 
@@ -109,15 +109,12 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    {
-      updateQcCharm,
-      createQcCharm,
-      destroyQcCharm,
-    }
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, {
+    updateQcCharm,
+    createQcCharm,
+    destroyQcCharm,
+  }),
+  withStyles(styles),
 )
 
 export default enhance(QcCharmEditor)

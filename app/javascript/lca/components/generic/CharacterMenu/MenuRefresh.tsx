@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
@@ -22,12 +21,12 @@ const CardMenuRefresh = ({ action }: DispatchProps) => (
 
 const mapDispatch = (
   dispatch,
-  { characterType, id }: Props
+  { characterType, id }: Props,
 ): DispatchProps => ({
   action: () => dispatch(fetch[characterType](id)),
 })
 
 export default connect<null, DispatchProps, Props>(
   null,
-  mapDispatch
+  mapDispatch,
 )(CardMenuRefresh)

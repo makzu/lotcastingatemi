@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
@@ -19,7 +18,7 @@ import NotesPopup from 'components/characters/NotesPopup.jsx'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character, Enhancer } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     ...theme.mixins.gutters({
       paddingTop: 16,
@@ -176,7 +175,7 @@ const mapStateToProps = (state, props: ExposedProps) => ({
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )
 
 export default enhance(CharacterCard)

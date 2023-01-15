@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -19,7 +19,7 @@ import {
 } from 'selectors'
 import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
@@ -122,19 +122,19 @@ function CharmSummaryBlock(props: Props) {
     return <div />
   }
 
-  const natives = nativeCharms.map(c => (
+  const natives = nativeCharms.map((c) => (
     <SingleCharm key={c.id} charm={c} character={character} />
   ))
-  const maCharms = martialArtsCharms.map(c => (
+  const maCharms = martialArtsCharms.map((c) => (
     <SingleCharm key={c.id} charm={c} character={character} />
   ))
-  const evo = evocations.map(c => (
+  const evo = evocations.map((c) => (
     <SingleCharm key={c.id} charm={c} character={character} />
   ))
-  const spirit = spiritCharms.map(c => (
+  const spirit = spiritCharms.map((c) => (
     <SingleCharm key={c.id} charm={c} character={character} />
   ))
-  const spl = spells.map(c => (
+  const spl = spells.map((c) => (
     <SingleSpell key={c.id} spell={c} character={character} />
   ))
 

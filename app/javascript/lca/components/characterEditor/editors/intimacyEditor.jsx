@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { shouldUpdate } from 'recompose'
 
 import Typography from '@material-ui/core/Typography'
@@ -14,7 +14,7 @@ type Props = {
   onChange: Function,
 }
 
-class IntimacyEditor extends React.Component<Props> {
+class IntimacyEditor extends Component<Props> {
   render() {
     const { character, onChange } = this.props
 
@@ -34,7 +34,10 @@ class IntimacyEditor extends React.Component<Props> {
 
 const enhance: Enhancer<Props, Props> = shouldUpdate(
   (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, ['principles', 'ties'])
+    isUnequalByKeys(props.character, newProps.character, [
+      'principles',
+      'ties',
+    ]),
 )
 
 export default enhance(IntimacyEditor)

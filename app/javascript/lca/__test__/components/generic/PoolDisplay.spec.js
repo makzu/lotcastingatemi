@@ -4,7 +4,6 @@ declare var check: Function
 
 require('jasmine-check').install()
 
-import React from 'react'
 import renderer from 'react-test-renderer'
 
 import PoolDisplay from '../../../components/generic/PoolDisplay.jsx'
@@ -16,7 +15,7 @@ describe('PoolDisplay', () => {
     'renders all pools correctly for Solars',
     { times: 5, seed: SEED },
     gen.object(genSolar),
-    mockCharacter => {
+    (mockCharacter) => {
       const pools = mockGetPoolsAndRatings(mockCharacter)
       const component = renderer.create(
         <div>
@@ -24,10 +23,10 @@ describe('PoolDisplay', () => {
             // $FlowFixMe
             <PoolDisplay label="test" pool={p} key={i} />
           ))}
-        </div>
+        </div>,
       )
       let tree = component.toJSON()
       expect(tree).toMatchSnapshot()
-    }
+    },
   )
 })

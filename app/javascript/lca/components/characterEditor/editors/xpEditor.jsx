@@ -1,5 +1,4 @@
 // @flow
-import React, { Fragment } from 'react'
 import { compose, shouldUpdate } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -16,7 +15,7 @@ import { isUnequalByKeys } from 'utils'
 import { solarXpName, spentXp, spentSolarXp, spentBp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
   separator: {
     ...theme.typography.body1,
@@ -38,7 +37,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
   const { label, points } = props.trait
 
   return (
-    <Fragment>
+    <>
       <TextField
         name="label"
         value={label}
@@ -57,7 +56,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
         narrow
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -183,6 +182,6 @@ export default compose(
       'xp_craft_gold',
       'xp_craft_white',
       'bp_log',
-    ])
-  )
+    ]),
+  ),
 )(XpEditor)

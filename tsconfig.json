@@ -15,7 +15,7 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es6",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],
   "compileOnSave": false

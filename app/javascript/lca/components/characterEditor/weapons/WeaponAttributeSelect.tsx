@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react'
+import { MouseEvent } from 'react'
 
 import {
   Divider,
@@ -45,7 +45,7 @@ const WeaponAttributeSelect = (props: Props) => {
   const defaultValue = isDamage ? 'strength' : 'dexterity'
   const fixedValue = value || 'null'
 
-  const attributeItems = ATTRIBUTE_NAMES.map(attr => (
+  const attributeItems = ATTRIBUTE_NAMES.map((attr) => (
     <MenuItem
       key={attr}
       value={attr === defaultValue ? null : attr}

@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import { Charm } from 'types'
 

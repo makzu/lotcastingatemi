@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { VisibilityOff } from '@material-ui/icons'
 import { Typography, Divider } from '@material-ui/core'
 

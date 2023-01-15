@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react';
 import { connect } from 'react-redux'
 
 import IconButton from '@material-ui/core/IconButton'
@@ -29,7 +29,7 @@ type State = {
   open: boolean,
 }
 
-class ChronicleNavList extends React.Component<Props, State> {
+class ChronicleNavList extends Component<Props, State> {
   state = { open: false }
 
   handleClick = () => {

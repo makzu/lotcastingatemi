@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import Divider from '@material-ui/core/Divider'
 
@@ -8,7 +8,7 @@ import type { Character, fullWeapon } from 'utils/flow-types'
 
 type Props = { character: Character, weapons: Array<fullWeapon> }
 function WeaponSummaryBlock({ weapons }: Props) {
-  const weas = weapons.map(weapon => (
+  const weas = weapons.map((weapon) => (
     <Fragment key={weapon.id}>
       <WeaponLine weapon={weapon} />
       <Divider />

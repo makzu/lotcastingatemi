@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { compose, shouldUpdate } from 'recompose'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -11,7 +10,7 @@ import RatingField from 'components/generic/RatingField.jsx'
 import { isUnequalByKeys } from 'utils'
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   subheading: {
     marginTop: theme.spacing(),
   },
@@ -129,6 +128,6 @@ export default compose(
       'health_level_2s',
       'health_level_4s',
       'health_level_incap',
-    ])
-  )
+    ]),
+  ),
 )(HealthLevelEditor)

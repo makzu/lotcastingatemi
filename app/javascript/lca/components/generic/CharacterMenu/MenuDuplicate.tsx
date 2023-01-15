@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
@@ -34,12 +33,12 @@ const mapState = (state: State): StateProps => ({
 
 const mapDispatch = (
   dispatch,
-  { characterType, id }: Props
+  { characterType, id }: Props,
 ): DispatchProps => ({
   action: () => dispatch(duplicate[characterType](id)),
 })
 
 export default connect<StateProps, DispatchProps, Props>(
   mapState,
-  mapDispatch
+  mapDispatch,
 )(DuplicateButton)

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { Box, Collapse, IconButton, Typography } from '@material-ui/core'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
@@ -8,7 +8,7 @@ import TextField from 'components/generic/TextField.jsx'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import WeaponAttributeSelect from './WeaponAttributeSelect'
 
-const WeaponOverrides = props => {
+const WeaponOverrides = (props) => {
   const { character, weapon, onChange } = props
   const { overrides } = weapon
 

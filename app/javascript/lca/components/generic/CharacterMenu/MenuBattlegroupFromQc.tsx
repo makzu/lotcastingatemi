@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core/'
@@ -32,7 +31,6 @@ const mapStateToProps = (state: State, props: Props): StateProps => ({
   canCreate: state.session.authenticated && props.characterType === 'qc',
 })
 
-export default connect<StateProps, DispatchProps, Props>(
-  mapStateToProps,
-  { action: createBattlegroupFromQc }
-)(BattlegroupFromQc)
+export default connect<StateProps, DispatchProps, Props>(mapStateToProps, {
+  action: createBattlegroupFromQc,
+})(BattlegroupFromQc)

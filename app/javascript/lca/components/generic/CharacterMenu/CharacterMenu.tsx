@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import { Divider, IconButton, Menu } from '@material-ui/core'
 import { Theme, withStyles, WithStyles } from '@material-ui/core/styles'
 import MoreVert from '@material-ui/icons/MoreVert'

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -30,7 +30,7 @@ type Props = {
   destroyAccount: Function,
 }
 
-class SettingsPage extends React.Component<Props, { open: boolean }> {
+class SettingsPage extends Component<Props, { open: boolean }> {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -44,13 +44,13 @@ class SettingsPage extends React.Component<Props, { open: boolean }> {
     this.setState({ open: false })
   }
 
-  handleChangeName = e => {
+  handleChangeName = (e) => {
     this.props.updatePlayer(this.props.player.id, {
       [e.target.name]: e.target.value,
     })
   }
 
-  handleChangeTheme = e => {
+  handleChangeTheme = (e) => {
     this.props.switchTheme(e.target.value)
   }
 
@@ -130,7 +130,7 @@ class SettingsPage extends React.Component<Props, { open: boolean }> {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const id = state.session.id
   const player = getSpecificPlayer(state, id)
   const { theme } = state.app
@@ -139,10 +139,7 @@ const mapStateToProps = state => {
 
 const enhance: Enhancer<Props, {}> = compose(
   ProtectedComponent,
-  connect(
-    mapStateToProps,
-    { updatePlayer, switchTheme, destroyAccount }
-  )
+  connect(mapStateToProps, { updatePlayer, switchTheme, destroyAccount }),
 )
 
 export default enhance(SettingsPage)

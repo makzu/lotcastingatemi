@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { MenuItem, TextField } from '@material-ui/core'

@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import { SorceryFields } from 'components/characterEditor/editors/sorceryEditor.jsx'
 import ListAttributeEditor, {

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Box, IconButton, Theme } from '@material-ui/core'

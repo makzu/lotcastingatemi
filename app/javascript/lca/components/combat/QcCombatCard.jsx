@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
@@ -18,7 +17,7 @@ import sharedStyles from 'styles/'
 import { getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
@@ -156,7 +155,7 @@ const mapStateToProps = (state, props: ExposedProps) => ({
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )
 
 export default enhance(QcCard)

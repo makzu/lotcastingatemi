@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import { MenuItem, TextField } from '@material-ui/core'
 
 import { TextFieldProps } from '@material-ui/core/TextField'

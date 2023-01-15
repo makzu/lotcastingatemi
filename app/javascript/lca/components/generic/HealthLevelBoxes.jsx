@@ -1,12 +1,10 @@
 // @flow
-import React from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 
 import * as calc from 'utils/calculated'
 import type { withHealthLevels } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   boxWrap: {
     display: 'inline-block',
     textAlign: 'center',

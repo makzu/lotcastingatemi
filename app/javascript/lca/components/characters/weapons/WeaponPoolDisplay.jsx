@@ -1,5 +1,4 @@
 // @flow
-import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -9,7 +8,7 @@ import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import { getPoolsForWeapon } from 'selectors'
 import type { fullWeapon } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -52,7 +51,7 @@ function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
   }
 
   return (
-    <Fragment>
+    <>
       <PoolDisplay
         pool={pool.close}
         label="Withering Close"
@@ -86,7 +85,7 @@ function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
           classes={poolLineClasses}
         />
       )}
-    </Fragment>
+    </>
   )
 }
 
@@ -147,5 +146,5 @@ const mapStateToProps = (state, props) => ({
 })
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(WeaponPoolDisplay)

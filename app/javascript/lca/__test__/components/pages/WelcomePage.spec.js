@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import WelcomePage from '../../../components/pages/WelcomePage.tsx'
 import renderer from 'react-test-renderer'
 

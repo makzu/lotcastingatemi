@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import DialogContentText from '@material-ui/core/DialogContentText'
 import Typography from '@material-ui/core/Typography'

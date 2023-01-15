@@ -4,7 +4,6 @@ declare var check: Function
 
 require('jasmine-check').install()
 
-import React from 'react'
 import renderer from 'react-test-renderer'
 
 import HealthLevelBoxes from '../../../components/generic/HealthLevelBoxes.jsx'
@@ -15,12 +14,12 @@ describe('HealthLevelBoxes', () => {
     'renders correctly',
     { times: 5, seed: SEED },
     gen.object(genHealthLevels),
-    mockCharacter => {
+    (mockCharacter) => {
       const component = renderer.create(
-        <HealthLevelBoxes character={mockCharacter} />
+        <HealthLevelBoxes character={mockCharacter} />,
       )
       let tree = component.toJSON()
       expect(tree).toMatchSnapshot()
-    }
+    },
   )
 })

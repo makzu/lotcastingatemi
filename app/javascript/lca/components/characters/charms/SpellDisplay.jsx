@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import scrollToElement from 'scroll-to-element'
 
 import { withStyles } from '@material-ui/core/styles'

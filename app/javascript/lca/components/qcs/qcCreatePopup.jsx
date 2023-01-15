@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -21,7 +21,7 @@ type State = {
 }
 
 // TODO: Enable autofill for some example QCs?
-class QcCreatePopup extends React.Component<Props, State> {
+class QcCreatePopup extends Component<Props, State> {
   state = { open: false, qc: { name: '' } }
 
   handleOpen = () => {
@@ -32,7 +32,7 @@ class QcCreatePopup extends React.Component<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ qc: { ...this.state.qc, name: e.target.value } })
   }
 
@@ -79,9 +79,6 @@ class QcCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, {}> = connect(
-  null,
-  { createQc }
-)
+const enhance: Enhancer<Props, {}> = connect(null, { createQc })
 
 export default enhance(QcCreatePopup)

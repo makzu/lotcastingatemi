@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import PrivacyPage from '../../../components/pages/PrivacyPage.jsx'
 import renderer from 'react-test-renderer'
 

@@ -1,11 +1,10 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
 import {
   Divider,
   ListItemIcon,
   ListItemText,
-  MenuItem
+  MenuItem,
 } from '@material-ui/core'
 import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
@@ -45,12 +44,12 @@ const mapState = (state: State, { id, characterType }: Props): StateProps => ({
 
 const mapDispatch = (
   dispatch,
-  { id, characterType }: Props
+  { id, characterType }: Props,
 ): DispatchProps => ({
-  action: chronId => dispatch(removeThing(chronId, id, characterType)),
+  action: (chronId) => dispatch(removeThing(chronId, id, characterType)),
 })
 
 export default connect<StateProps, DispatchProps, Props>(
   mapState,
-  mapDispatch
+  mapDispatch,
 )(CardMenuRemove)

@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { compose, shouldUpdate } from 'recompose'
 
@@ -90,8 +89,8 @@ const enhance: Enhancer<Props, ExposedProps> = compose(
         'essence',
         'description',
         'public',
-      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox
-  )
+      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox,
+  ),
 )
 
 export default enhance(BasicsEditor)

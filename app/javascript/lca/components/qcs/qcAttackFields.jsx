@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { SortableHandle } from 'react-sortable-hoc'
@@ -23,10 +23,10 @@ import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -78,8 +78,8 @@ type Props = ExposedProps & {
   classes: Object,
 }
 
-class QcAttackFields extends React.Component<Props> {
-  handleChange = e => {
+class QcAttackFields extends Component<Props> {
+  handleChange = (e) => {
     let { name, value } = e.target
     const { attack } = this.props
 
@@ -196,7 +196,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )
 
 export default enhance(QcAttackFields)

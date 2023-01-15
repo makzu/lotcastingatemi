@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -22,7 +22,7 @@ import { canIEditBattlegroup } from 'selectors'
 import { totalMagnitude } from 'utils/calculated'
 import type { Battlegroup } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   display: {
     marginRight: theme.spacing(),
@@ -42,14 +42,14 @@ type Props = {
   update: Function,
 }
 type State = { open: boolean, magnitude: number, size: number }
-class BattlegroupHealthDisplay extends React.Component<Props, State> {
+class BattlegroupHealthDisplay extends Component<Props, State> {
   state = {
     open: false,
     magnitude: this.props.battlegroup.magnitude,
     size: this.props.battlegroup.size,
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -82,13 +82,8 @@ class BattlegroupHealthDisplay extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      battlegroup,
-      className,
-      DisplayClassName,
-      canEdit,
-      classes,
-    } = this.props
+    const { battlegroup, className, DisplayClassName, canEdit, classes } =
+      this.props
     const { open, size, magnitude } = this.state
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
 
@@ -183,8 +178,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { update }
-  )
+  connect(mapStateToProps, { update }),
 )(BattlegroupHealthDisplay)

@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -11,7 +11,7 @@ import SvgIcon from '@material-ui/core/SvgIcon'
 
 import DawnSpinner from 'icons/DawnSpinner'
 
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     display: 'block',
     position: 'fixed',
@@ -35,7 +35,7 @@ const styles = theme => ({
 })
 
 type Props = { loading: boolean, classes: Object }
-class LoadingSpinner extends React.PureComponent<Props> {
+class LoadingSpinner extends PureComponent<Props> {
   render() {
     const { loading, classes } = this.props
     return (
@@ -58,11 +58,11 @@ class LoadingSpinner extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: state.app.loading,
 })
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(LoadingSpinner)

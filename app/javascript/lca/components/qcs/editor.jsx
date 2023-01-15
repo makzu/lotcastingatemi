@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -31,7 +31,7 @@ import commonStyles from 'styles'
 import { woundPenalty } from 'utils/calculated'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
@@ -46,7 +46,7 @@ type Props = ExposedProps & {
 }
 
 class QcEditor extends Component<Props> {
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     const { qc } = this.props
 
@@ -55,7 +55,7 @@ class QcEditor extends Component<Props> {
     this.props.updateQc(qc.id, { [name]: value })
   }
 
-  handleCheck = e => {
+  handleCheck = (e) => {
     const { name } = e.target
     const { qc } = this.props
     const value = !qc[name]
@@ -461,12 +461,9 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    { updateQc }
-  ),
+  connect(mapStateToProps, { updateQc }),
   withStyles(styles),
-  ProtectedComponent
+  ProtectedComponent,
 )
 
 export default enhance(QcEditor)

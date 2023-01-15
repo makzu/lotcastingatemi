@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import { Component } from 'react'
 import {
   SortableContainer,
   SortableElement,
@@ -18,7 +18,7 @@ import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 const SortableItem = SortableElement(({ children }) => children)
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 export type ListAttributeFieldTypes = {
@@ -28,7 +28,7 @@ export type ListAttributeFieldTypes = {
   classes: Object,
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   fieldContainer: {
     display: 'flex',
     alignItems: 'center',

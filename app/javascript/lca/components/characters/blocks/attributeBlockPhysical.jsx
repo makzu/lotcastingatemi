@@ -1,6 +1,4 @@
 // @flow
-import React from 'react'
-
 import AttributeLine from './attributeLine.jsx'
 import type { Props } from './attributeBlock.jsx'
 

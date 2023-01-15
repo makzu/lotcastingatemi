@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -16,7 +15,7 @@ import sharedStyles from 'styles/'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 import type { Battlegroup } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
@@ -128,7 +127,7 @@ function BattlegroupCard({ battlegroup, classes }: Props) {
               battlegroup.evasion +
                 bgDefenseBonus(battlegroup) -
                 battlegroup.onslaught,
-              0
+              0,
             ),
           }}
           label="Evasion"
@@ -142,7 +141,7 @@ function BattlegroupCard({ battlegroup, classes }: Props) {
               battlegroup.parry +
                 bgDefenseBonus(battlegroup) -
                 battlegroup.onslaught,
-              0
+              0,
             ),
           }}
           label="Parry"

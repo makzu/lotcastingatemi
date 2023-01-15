@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { Form } from 'types'

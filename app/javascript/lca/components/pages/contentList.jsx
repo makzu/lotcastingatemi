@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 import { compose } from 'recompose'
@@ -24,7 +24,7 @@ import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
   nthTitle: { marginTop: theme.spacing(3) },
 })
@@ -142,19 +142,16 @@ class ContentList extends Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   characters: getMyCharacters(state),
   qcs: getMyQCs(state),
   battlegroups: getMyBattlegroups(state),
 })
 
 const enhance: Enhancer<Props, {}> = compose(
-  connect(
-    mapStateToProps,
-    { updateCharacter, updateQc, updateBattlegroup }
-  ),
+  connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup }),
   withStyles(styles),
-  ProtectedComponent
+  ProtectedComponent,
 )
 
 export default enhance(ContentList)

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -23,7 +23,7 @@ import {
   bgSoak,
 } from 'utils/calculated'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   healthBlock: {
     paddingTop: theme.spacing(-1),
@@ -92,7 +92,7 @@ class BattlegroupSheet extends Component<Props> {
 
     const { battlegroup, qc_attacks, classes } = this.props
 
-    const attacks = qc_attacks.map(attack => (
+    const attacks = qc_attacks.map((attack) => (
       <div key={attack.id} className={classes.flexContainerWrap}>
         <div className={classes.tags}>
           <div className={classes.label}>
@@ -198,7 +198,7 @@ class BattlegroupSheet extends Component<Props> {
                 battlegroup.evasion +
                   bgDefenseBonus(battlegroup) -
                   battlegroup.onslaught,
-                0
+                0,
               ),
             }}
             label="Evasion"
@@ -212,7 +212,7 @@ class BattlegroupSheet extends Component<Props> {
                 battlegroup.parry +
                   bgDefenseBonus(battlegroup) -
                   battlegroup.onslaught,
-                0
+                0,
               ),
             }}
             label="Parry"
@@ -308,8 +308,5 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   ProtectedComponent,
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { fetch: fetchBattlegroupIfNecessary }
-  )
+  connect(mapStateToProps, { fetch: fetchBattlegroupIfNecessary }),
 )(BattlegroupSheet)

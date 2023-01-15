@@ -1,6 +1,4 @@
 // @flow
-import React, { Fragment } from 'react'
-
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
@@ -13,7 +11,7 @@ function ResourceFields(props: ListAttributeFieldTypes) {
   const { resource, value } = trait
 
   return (
-    <Fragment>
+    <>
       <TextField
         name="resource"
         value={resource}
@@ -31,7 +29,7 @@ function ResourceFields(props: ListAttributeFieldTypes) {
         narrow
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 

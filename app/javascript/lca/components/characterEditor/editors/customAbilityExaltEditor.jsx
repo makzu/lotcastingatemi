@@ -1,6 +1,4 @@
 // @flow
-import React from 'react'
-
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Switch from '@material-ui/core/Switch'

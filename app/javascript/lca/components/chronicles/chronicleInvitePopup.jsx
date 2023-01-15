@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
@@ -26,7 +26,7 @@ type State = {
   open: boolean,
 }
 
-class ChronicleInvitePopup extends React.Component<Props, State> {
+class ChronicleInvitePopup extends Component<Props, State> {
   state = { open: false }
 
   handleOpen = () => {
@@ -101,12 +101,9 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  {
-    updateChronicle,
-    regenChronicleInviteCode,
-  }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  updateChronicle,
+  regenChronicleInviteCode,
+})
 
 export default enhance(ChronicleInvitePopup)

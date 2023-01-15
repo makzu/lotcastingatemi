@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
@@ -31,7 +31,7 @@ type Props = ExposedProps & {
   destroyQcAttack: Function,
 }
 
-class QcAttackEditor extends React.Component<Props> {
+class QcAttackEditor extends Component<Props> {
   handleChange = (id, trait) => {
     this.props.updateQcAttack(id, this.props.qc.id, trait, this.props.type)
   }
@@ -40,7 +40,7 @@ class QcAttackEditor extends React.Component<Props> {
     this.props.createQcAttack(this.props.qc.id, { parent: this.props.type })
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyQcAttack(id, this.props.qc.id, this.props.type)
   }
 
@@ -52,7 +52,7 @@ class QcAttackEditor extends React.Component<Props> {
       attackA.id,
       this.props.qc.id,
       { sort_order: attackB.sort_order + offset },
-      this.props.type
+      this.props.type,
     )
   }
 
@@ -109,13 +109,10 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  {
-    updateQcAttack,
-    createQcAttack,
-    destroyQcAttack,
-  }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  updateQcAttack,
+  createQcAttack,
+  destroyQcAttack,
+})
 
 export default enhance(QcAttackEditor)

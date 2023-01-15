@@ -1,6 +1,4 @@
 // @flow
-import React, { Fragment } from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
@@ -17,7 +15,7 @@ import {
 } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
@@ -35,7 +33,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
       <Typography variant="h6">Mote Pools:</Typography>
       <Typography component="div" className={classes.flexContainerWrap}>
         {character.type !== 'Character' && (
-          <Fragment>
+          <>
             <div className={classes.flexCol}>
               <RatingField
                 trait="motes_personal_current"
@@ -91,7 +89,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
                 </span>
               )}
             </div>
-          </Fragment>
+          </>
         )}
         {character.is_sorcerer && (
           <div className={classes.flexCol}>

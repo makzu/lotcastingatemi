@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import { Redirect, Route } from 'react-router'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'

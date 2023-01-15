@@ -18,14 +18,7 @@ module.exports = function (api) {
 
   return {
     presets: [
-      isTestEnv && [
-        '@babel/preset-env',
-        {
-          targets: {
-            node: 'current',
-          },
-        },
-      ],
+      isTestEnv && ['@babel/preset-env', { targets: { node: 'current' } }],
       (isProductionEnv || isDevelopmentEnv) && [
         '@babel/preset-env',
         {
@@ -36,28 +29,17 @@ module.exports = function (api) {
           exclude: ['transform-typeof-symbol'],
         },
       ],
-      '@babel/preset-react',
+      ['@babel/preset-react', { runtime: 'automatic' }],
       '@babel/preset-flow',
       '@babel/preset-typescript',
     ].filter(Boolean),
     plugins: [
-      // 'react-hot-loader/babel',
       'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
       isTestEnv && 'babel-plugin-dynamic-import-node',
       '@babel/plugin-transform-destructuring',
-      [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true,
-        },
-      ],
-      [
-        '@babel/plugin-proposal-object-rest-spread',
-        {
-          useBuiltIns: true,
-        },
-      ],
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
       [
         '@babel/plugin-transform-runtime',
         {
@@ -66,12 +48,7 @@ module.exports = function (api) {
           corejs: false,
         },
       ],
-      [
-        '@babel/plugin-transform-regenerator',
-        {
-          async: false,
-        },
-      ],
+      ['@babel/plugin-transform-regenerator', { async: false }],
       '@babel/plugin-proposal-optional-chaining',
     ].filter(Boolean),
   }

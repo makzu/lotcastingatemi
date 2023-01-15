@@ -25,13 +25,7 @@ module.exports = {
   plugins: ['cypress', 'react', 'flowtype', '@typescript-eslint'],
   root: true,
   rules: {
-    indent: [
-      'error',
-      2,
-      {
-        SwitchCase: 1,
-      },
-    ],
+    indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
     'no-trailing-spaces': ['error'],
     'no-duplicate-imports': ['warn'],
@@ -41,6 +35,8 @@ module.exports = {
     semi: ['error', 'never'],
     'flowtype/no-types-missing-file-annotation': 0,
     'react/jsx-boolean-value': ['warn', 'never'],
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
   settings: {
     flowtype: {

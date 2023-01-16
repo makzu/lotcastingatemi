@@ -1,41 +1,27 @@
-import { connect } from 'react-redux'
-
-import { State } from 'ducks'
-import { getMyPinnedQcs, getMyQcs } from 'ducks/entities'
-import { QC } from 'types'
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
-
-interface StateProps {
-  qcs: QC[]
-  count: number
-}
-
-interface OuterProps {
-  closeDrawer(): void
-}
-
-interface Props extends StateProps, OuterProps {}
+import { getMyPinnedQcs, getMyQcs } from 'ducks/entities'
+import { useAppSelector } from 'hooks'
+import { QC } from 'types'
 
 const mapQcToListItem = (qc: QC) => (
   <EntityListItem key={qc.id} link={`/qcs/${qc.id}`} name={qc.name} />
 )
 
-const QcNavList = ({ qcs, count, closeDrawer }: Props) => {
+const QcNavList = ({ closeDrawer }: { closeDrawer(): void }) => {
+  const qcs = useAppSelector((state) => getMyPinnedQcs(state))
+  const count = useAppSelector((state) => getMyQcs(state).length)
+
   return (
     <EntityList
       label="Quick Characters"
       link="/qcs"
       count={count}
-      children={qcs.map(mapQcToListItem)}
       onClick={closeDrawer}
-    />
+    >
+      {qcs.map(mapQcToListItem)}
+    </EntityList>
   )
 }
 
-const mapState = (state: State): StateProps => ({
-  count: getMyQcs(state).length,
-  qcs: getMyPinnedQcs(state),
-})
-
-export default connect(mapState)(QcNavList)
+export default QcNavList

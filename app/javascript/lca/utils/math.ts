@@ -17,5 +17,7 @@ export function clamp(val: number, min: number, max: number) {
   return val
 }
 
+/** Halves a number, rounded up. */
 export const halfRoundUp = (val: number) => Math.ceil(val / 2)
+/** Halves a number, rounded down. */
 export const halfRoundDown = (val: number) => Math.floor(val / 2)

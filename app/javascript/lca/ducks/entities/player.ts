@@ -1,4 +1,3 @@
-import { State } from 'ducks'
 import { callApi } from 'utils/api'
 import { defaultState, EntityState } from './'
 import { createUpdateAction, mergeEntity } from './_entity'
@@ -8,17 +7,19 @@ import {
   standardTypes,
   unwrapped,
 } from './_lib'
+import { Player } from 'types'
+import { RootState } from 'store'
 
 const PLAYER = 'player'
 
 /* *** Reducer *** */
 export default {
   [crudAction(PLAYER, 'UPDATE').start.toString()]: reducerUpdateAction(
-    PLAYER + 's'
+    PLAYER + 's',
   ),
   [crudAction(PLAYER, 'FETCH').success.toString()]: (
     state: EntityState,
-    action
+    action,
   ) => {
     const newState = mergeEntity(state, action)
 
@@ -51,26 +52,10 @@ export function destroyAccount() {
   })
 }
 
-export interface Player {
-  id: number
-  display_name: string
-  characters: number[]
-  qcs: number[]
-  battlegroups: number[]
-  chronicles: number[]
-  own_chronicles: number[]
-}
-
 /* *** Selectors *** */
 // tslint:disable object-literal-sort-keys
-export const getSpecificPlayer = (state: State, id: number): Player => ({
-  characters: [],
-  qcs: [],
-  battlegroups: [],
-  chronicles: [],
-  own_chronicles: [],
-  ...unwrapped(state).players[id],
-})
+export const getSpecificPlayer = (state: RootState, id: number): Player =>
+  unwrapped(state).players[id]
 
-export const getCurrentPlayer = (state: State): Player =>
+export const getCurrentPlayer = (state: RootState): Player =>
   getSpecificPlayer(state, state.session.id)

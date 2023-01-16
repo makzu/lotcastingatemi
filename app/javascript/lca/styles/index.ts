@@ -1,6 +1,4 @@
-// tslint:disable object-literal-sort-keys
 import { Theme } from '@mui/material/styles'
-
 import createStyles from '@mui/styles/createStyles'
 
 // Common styling and theming elements used by most things

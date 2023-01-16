@@ -1,21 +1,9 @@
-import { connect } from 'react-redux'
-
-import { State } from 'ducks'
-import { getMyBattlegroups, getMyPinnedBattlegroups } from 'ducks/entities'
-import { Battlegroup } from 'types'
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
 
-interface StateProps {
-  battlegroups: Battlegroup[]
-  count: number
-}
-
-interface OuterProps {
-  closeDrawer(): void
-}
-
-interface Props extends StateProps, OuterProps {}
+import { getMyBattlegroups, getMyPinnedBattlegroups } from 'ducks/entities'
+import { useAppSelector } from 'hooks'
+import { Battlegroup } from 'types'
 
 const mapBattlegroupToListItem = (battlegroup: Battlegroup) => (
   <EntityListItem
@@ -25,21 +13,20 @@ const mapBattlegroupToListItem = (battlegroup: Battlegroup) => (
   />
 )
 
-const BattlegroupNavList = ({ battlegroups, count, closeDrawer }: Props) => {
+const BattlegroupNavList = ({ closeDrawer }: { closeDrawer(): void }) => {
+  const battlegroups = useAppSelector((state) => getMyPinnedBattlegroups(state))
+  const count = useAppSelector((state) => getMyBattlegroups(state).length)
+
   return (
     <EntityList
       label="Battlegroups"
       link="/battlegroups"
       count={count}
-      children={battlegroups.map(mapBattlegroupToListItem)}
       onClick={closeDrawer}
-    />
+    >
+      {battlegroups.map(mapBattlegroupToListItem)}
+    </EntityList>
   )
 }
 
-const mapState = (state: State): StateProps => ({
-  battlegroups: getMyPinnedBattlegroups(state),
-  count: getMyBattlegroups(state).length,
-})
-
-export default connect(mapState)(BattlegroupNavList)
+export default BattlegroupNavList

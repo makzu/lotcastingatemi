@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "attack_attribute": {
+      "type": "object",
+      "required": ["use"],
+      "properties": {
+        "use": { "type": "string" },
+        "base_only": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "defense_attribute": {
+      "type": "object",
+      "required": ["use"],
+      "properties": {
+        "use": { "type": "string" },
+        "base_only": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "damage_attribute": {
+      "type": "object",
+      "required": ["use"],
+      "properties": {
+        "use": { "type": "string" },
+        "base_only": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "additionalProperties": false
+  }
+}

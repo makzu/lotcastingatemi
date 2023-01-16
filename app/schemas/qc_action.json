@@ -1,0 +1,12 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["action", "pool"],
+    "properties": {
+      "action": { "type": "string" },
+      "pool": { "type": "integer", "minimum": 0 }
+    },
+    "additionalProperties": false
+  }
+}

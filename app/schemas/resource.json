@@ -1,0 +1,12 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["resource", "value"],
+    "properties": {
+      "resource": { "type": "string" },
+      "value": { "type": "integer", "minimum": 0 }
+    },
+    "additionalProperties": false
+  }
+}

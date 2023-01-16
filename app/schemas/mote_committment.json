@@ -1,0 +1,14 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["pool", "label", "motes"],
+    "properties": {
+      "pool": { "type": "string", "enum": ["personal", "peripheral"] },
+      "label": { "type": "string" },
+      "motes": { "type": "integer", "minimum": 0 },
+      "scenelong": { "type": "boolean" }
+    },
+    "additionalProperties": false
+  }
+}

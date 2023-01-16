@@ -1,0 +1,11 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["label", "points"],
+    "properties": {
+      "label": { "type": "string" },
+      "points": { "type": "integer" }
+    }
+  }
+}

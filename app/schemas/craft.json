@@ -1,0 +1,12 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["craft", "rating"],
+    "properties": {
+      "craft": { "type": "string" },
+      "rating": { "type": "integer", "minimum": 0, "maximum": 5 }
+    },
+    "additionalProperties": false
+  }
+}

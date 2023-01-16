@@ -1,0 +1,11 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["form"],
+    "properties": {
+      "form": { "type": "string" },
+      "qc_id": { "type": "integer" }
+    }
+  }
+}

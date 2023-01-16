@@ -1,0 +1,44 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["ability", "context"],
+    "properties": {
+      "ability": {
+        "type": "string",
+
+        "enum": [
+          "archery",
+          "athletics",
+          "awareness",
+          "brawl",
+          "bureaucracy",
+          "craft",
+          "dodge",
+          "integrity",
+          "investigation",
+          "larceny",
+          "linguistics",
+          "lore",
+          "martial_arts",
+          "medicine",
+          "melee",
+          "occult",
+          "performance",
+          "presence",
+          "resistance",
+          "ride",
+          "sail",
+          "socialize",
+          "stealth",
+          "survival",
+          "thrown",
+          "war",
+          ""
+        ]
+      },
+      "context": { "type": "string" }
+    },
+    "additionalProperties": false
+  }
+}

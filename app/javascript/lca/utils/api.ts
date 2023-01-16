@@ -47,4 +47,5 @@ export const callApiNoAuth = (callBody: AApiCall) => ({
   },
 })
 
+// TODO is this needed?
 export type Dispatch<S> = (rsaa: AApiAction) => void

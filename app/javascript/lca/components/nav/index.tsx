@@ -6,14 +6,15 @@ import { Drawer, Hidden, Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
 import { State } from 'ducks'
-import { closeDrawer } from 'ducks/actions.js'
 import { getCurrentPlayer } from 'ducks/entities'
+import { closeDrawer } from 'features/drawerSlice'
 import { drawerWidth } from '../../containers/_drawerProperties'
 import NavPanel from './NavPanel'
+import { useAppDispatch, useAppSelector } from 'hooks'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const drawerScrollbars = theme => ({
+const drawerScrollbars = (theme) => ({
   '&::-webkit-scrollbar': {
     backgroundColor: theme.palette.background.paper,
   },
@@ -38,71 +39,66 @@ const useStyles = makeStyles(
       },
       ...(theme.disableScrollbars ? {} : drawerScrollbars(theme)),
     },
-  })
+  }),
 )
 
 interface StateProps {
   authenticated: State['session']['authenticated']
   displayName: string
-  drawerOpen: State['app']['drawerOpen']
 }
-interface DispatchProps {
-  close(): void
-}
-interface Props extends StateProps, DispatchProps {}
+
+interface Props extends StateProps {}
 
 const NavPanelWrap = (props: Props) => {
   const classes = useStyles({})
-  const { authenticated, drawerOpen, displayName, close } = props
+  const { authenticated, displayName } = props
+
+  const drawerOpen = useAppSelector((state) => state.drawer.open)
+  const dispatch = useAppDispatch()
 
   const Panel = (
     <NavPanel
       authenticated={authenticated}
       displayName={displayName}
       drawerOpen={drawerOpen}
-      closeDrawer={close}
+      closeDrawer={() => dispatch(closeDrawer())}
     />
   )
 
-  return <>
-    <Hidden lgUp>
-      <Drawer
-        variant="temporary"
-        open={drawerOpen}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        onClose={close}
-        ModalProps={{ keepMounted: true }}
-      >
-        {Panel}
-      </Drawer>
-    </Hidden>
-    <Hidden lgDown implementation="css">
-      <Drawer
-        variant="permanent"
-        open
-        classes={{
-          docked: classes.drawer,
-          paper: classes.drawerPaper,
-        }}
-      >
-        {Panel}
-      </Drawer>
-    </Hidden>
-  </>
+  return (
+    <>
+      <Hidden lgUp>
+        <Drawer
+          variant="temporary"
+          open={drawerOpen}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          onClose={close}
+          ModalProps={{ keepMounted: true }}
+        >
+          {Panel}
+        </Drawer>
+      </Hidden>
+      <Hidden lgDown implementation="css">
+        <Drawer
+          variant="permanent"
+          open
+          classes={{
+            docked: classes.drawer,
+            paper: classes.drawerPaper,
+          }}
+        >
+          {Panel}
+        </Drawer>
+      </Hidden>
+    </>
+  )
 }
 
 const mapState = (state: State): StateProps => ({
   authenticated: state.session.authenticated,
   displayName: getCurrentPlayer(state).display_name || 'nobody',
-  drawerOpen: state.app.drawerOpen,
 })
 
-export default compose<Props, {}>(
-  withRouter,
-  connect(
-    mapState,
-    { close: closeDrawer }
-  )
-)(NavPanelWrap)
+export default compose<Props, {}>(withRouter, connect(mapState))(NavPanelWrap)

@@ -1,8 +1,6 @@
 // TODO: Move from AnyAction to a real typed action
 import { AnyAction } from 'redux'
 
-export const CLOSE_DRAWER = 'lca/app/CLOSE_DRAWER'
-export const TOGGLE_DRAWER = 'lca/app/TOGGLE_DRAWER'
 export const SWITCH_THEME = 'lca/app/SWITCH_THEME'
 
 const defaultState = {
@@ -45,7 +43,7 @@ export default function AppReducer(
     }
   }
   if (action.error) {
-    return { ...state, error: true, errorMessage: action.payload }
+    return { ...state, error: true, errorMessageAction: action.payload }
   }
 
   const act = action.type.split('/')
@@ -76,18 +74,6 @@ export default function AppReducer(
   }
 
   switch (action.type) {
-    case CLOSE_DRAWER:
-      return {
-        ...state,
-        drawerOpen: false,
-      }
-
-    case TOGGLE_DRAWER:
-      return {
-        ...state,
-        drawerOpen: !state.drawerOpen,
-      }
-
     case SWITCH_THEME:
       return {
         ...state,
@@ -99,8 +85,6 @@ export default function AppReducer(
   }
 }
 
-export const toggleDrawer = () => ({ type: TOGGLE_DRAWER })
-export const closeDrawer = () => ({ type: CLOSE_DRAWER })
 export const switchTheme = (theme: string) => ({
   type: SWITCH_THEME,
   theme: theme,

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import { Grid, Typography } from '@mui/material'
-import { Theme } from '@mui/material/styles'
+import { Theme } from '@mui/styles'
 
 import { WithStyles } from '@mui/styles'
 import createStyles from '@mui/styles/createStyles'

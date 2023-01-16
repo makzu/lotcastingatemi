@@ -1,5 +1,5 @@
 import { Divider, IconButton, Menu } from '@mui/material'
-import { Theme } from '@mui/material/styles'
+import { Theme } from '@mui/styles'
 import { WithStyles } from '@mui/styles'
 import withStyles from '@mui/styles/withStyles'
 import MoreVert from '@mui/icons-material/MoreVert'
@@ -41,7 +41,8 @@ const CharacterMenu = (props: Props) => {
         onClick={handleOpen}
         data-cy="character-menu"
         color="inherit"
-        size="large">
+        size="large"
+      >
         <MoreVert />
       </IconButton>
 

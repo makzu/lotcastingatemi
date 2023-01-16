@@ -4,14 +4,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import IconButton from '@material-ui/core/IconButton'
-import { withStyles } from '@material-ui/core/styles'
-import DescriptionIcon from '@material-ui/icons/Description'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import IconButton from '@mui/material/IconButton'
+import { withStyles } from '@mui/styles'
+import DescriptionIcon from '@mui/icons-material/Description'
 
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
@@ -21,7 +21,7 @@ import { canIEditCharacter } from 'selectors'
 import commonStyles from 'styles'
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
   wrapper: {
     margin: '-0.75em -1em 0 0',
@@ -42,7 +42,7 @@ class NotesPopup extends React.Component<Props, State> {
     this.state = { open: false, editing: false }
   }
 
-  handleOpen = e => {
+  handleOpen = (e) => {
     this.setState({ open: true })
     e.preventDefault()
   }
@@ -120,8 +120,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { updateCharacter }
-  )
+  connect(mapStateToProps, { updateCharacter }),
 )(NotesPopup)

@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react'
 
-import TextField from '@material-ui/core/TextField'
-import { withStyles } from '@material-ui/core/styles'
+import TextField from '@mui/material/TextField'
+import { withStyles } from '@mui/styles'
 
-const styles = theme => ({
+const styles = (theme) => ({
   field: {
     marginRight: theme.spacing(),
   },
@@ -46,8 +46,8 @@ class TagsField extends Component<Props, State> {
   handleBlur = (e: SyntheticInputEvent<>) => {
     let val = e.target.value
       .split(',')
-      .map(e => e.trim())
-      .filter(e => e !== '')
+      .map((e) => e.trim())
+      .filter((e) => e !== '')
 
     this.setState({ value: val.join(', ') })
     const updateObj = { target: { name: e.target.name, value: val } }

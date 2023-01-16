@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react'
 
-import TextField from '@material-ui/core/TextField'
-import { withStyles } from '@material-ui/core/styles'
+import TextField from '@mui/material/TextField'
+import { withStyles } from '@mui/styles'
 
-const styles = theme => ({
+const styles = (theme) => ({
   field: {
     marginRight: theme.spacing(),
     width: '3em',

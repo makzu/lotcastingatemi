@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
 import { AppBar, Toolbar, Typography } from '@mui/material'
-import { Theme } from '@mui/material/styles'
+import { Theme } from '@mui/styles'
 import { makeStyles } from '@mui/styles'
 
 import { drawerWidth } from 'containers/_drawerProperties'

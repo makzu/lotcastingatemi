@@ -1,13 +1,13 @@
 // @flow
 import React, { PureComponent } from 'react'
 
-import Button from '@material-ui/core/Button'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 class CanonExcellencyCopier extends PureComponent<
   { onChangeMulti: Function },
-  { anchor: any }
+  { anchor: any },
 > {
   state = { anchor: null }
 
@@ -45,7 +45,11 @@ class CanonExcellencyCopier extends PureComponent<
         }
         break
       case 'sidereal':
-        obj = { excellency: 'sidereal', excellency_stunt: '', excellencies_for: ['sidereal'] }
+        obj = {
+          excellency: 'sidereal',
+          excellency_stunt: '',
+          excellencies_for: ['sidereal'],
+        }
         break
       case 'liminal':
         obj = { excellency: 'attribute+essenceonanima', excellency_stunt: '' }

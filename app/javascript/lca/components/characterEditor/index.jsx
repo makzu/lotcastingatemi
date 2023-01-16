@@ -3,9 +3,9 @@ import { deepEqual } from 'fast-equals'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
 
 import AbilityEditor from './editors/abilityEditor.jsx'
 import ArmorEditor from './editors/armorEditor.jsx'

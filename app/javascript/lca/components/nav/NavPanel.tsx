@@ -9,7 +9,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
-import { Theme } from '@mui/material/styles'
+import { Theme } from '@mui/styles'
 import { makeStyles } from '@mui/styles'
 
 import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'

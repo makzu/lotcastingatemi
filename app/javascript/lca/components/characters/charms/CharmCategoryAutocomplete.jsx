@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import classNames from 'classnames'
-import { emphasize } from '@mui/material/styles'
+import { emphasize } from '@mui/styles'
 import withStyles from '@mui/styles/withStyles'
 import Chip from '@mui/material/Chip'
 import MenuItem from '@mui/material/MenuItem'

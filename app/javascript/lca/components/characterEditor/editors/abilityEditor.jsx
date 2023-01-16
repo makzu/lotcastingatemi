@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
-import BlockPaper from 'components/generic/blockPaper'
+import BlockPaper from 'components/shared/BlockPaper'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'

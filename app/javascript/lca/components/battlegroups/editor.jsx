@@ -5,12 +5,12 @@ const { Component } = React
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiTextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@mui/styles'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import MenuItem from '@mui/material/MenuItem'
+import MuiTextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'

@@ -21,7 +21,7 @@ import Delete from '@mui/icons-material/Delete'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 
 import { IconButton } from '@mui/material'
-import BlockPaper from 'components/generic/blockPaper'
+import BlockPaper from 'components/shared/BlockPaper'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import Checkbox from 'components/shared/inputs/Checkbox'
@@ -31,7 +31,7 @@ import { Spell } from 'types'
 import { checkVisible } from 'utils'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 interface Props extends WithStyles<typeof commonStyles> {

@@ -10,7 +10,7 @@ import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import { canIDeleteCharacter } from 'selectors'
 import { isUnequalByKeys } from 'utils'
-import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.js'
+import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants'
 import type { Character, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {

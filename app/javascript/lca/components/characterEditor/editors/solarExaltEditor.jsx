@@ -6,7 +6,7 @@ import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'
-import { SOLAR_CASTE_ABILITIES } from 'utils/constants.js'
+import { SOLAR_CASTE_ABILITIES } from 'utils/constants'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, onChange: Function }

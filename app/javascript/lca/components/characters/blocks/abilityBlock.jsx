@@ -15,7 +15,7 @@ import {
   isFavoredAbility,
   isSupernalAbility,
 } from 'utils/calculated'
-import { ABILITY_NAMES } from 'utils/constants.js'
+import { ABILITY_NAMES } from 'utils/constants'
 
 const styles = (theme) => ({
   abilityName: {

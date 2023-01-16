@@ -1,6 +1,6 @@
 // @flow
 import { gen } from 'testcheck'
-import { ABILITY_NAMES } from 'utils/constants.js'
+import { ABILITY_NAMES } from 'utils/constants'
 export const SEED = 5 * 684 /* Number of pages in the 3e core book */
 
 export const genHealthLevels = {
@@ -42,7 +42,7 @@ export const genAbilities = {
   abil_craft: gen.array(({ craft: gen.string, rating: gen.posInt }: Object)),
   // $FlowFixMe
   abil_martial_arts: gen.array(
-    ({ style: gen.string, rating: gen.posInt }: Object)
+    ({ style: gen.string, rating: gen.posInt }: Object),
   ),
 }
 
@@ -66,7 +66,7 @@ export const genMortal = {
     ({
       context: gen.string,
       ability: gen.oneOf([''].concat(ABILITY_NAMES)),
-    }: Object)
+    }: Object),
   ),
 
   armor_name: gen.string,
@@ -98,31 +98,8 @@ export const genSolar = {
   supernal_ability: gen.oneOf(ABILITY_NAMES),
   caste: gen.oneOf(['dawn', 'zenith', 'twilight', 'night', 'eclipse']),
   charms: [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25,
   ],
   martial_arts_charms: [26],
 }

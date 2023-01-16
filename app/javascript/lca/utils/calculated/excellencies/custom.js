@@ -2,7 +2,7 @@
 import { attr, abil, specialtiesFor } from '..'
 
 import { halfRoundUp, halfRoundDown } from 'utils'
-import { ABILITIES, ATTRIBUTES } from 'utils/constants.js'
+import { ABILITIES, ATTRIBUTES } from 'utils/constants'
 import type { Character } from 'utils/flow-types'
 
 export const highestOtherAbility = (character: Character, ability: string) => {

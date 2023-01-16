@@ -15,7 +15,7 @@ import {
   ABILITY_MIN as MIN,
   ABILITIES,
   ABILITIES_ALL,
-} from 'utils/constants.js'
+} from 'utils/constants'
 import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
 
 function AbilityField(props) {

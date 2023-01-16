@@ -11,7 +11,7 @@ import TextField from 'components/generic/TextField.jsx'
 import {
   INTIMACY_RATING_MAX as MAX,
   INTIMACY_RATING_MIN as MIN,
-} from 'utils/constants.js'
+} from 'utils/constants'
 import type { withIntimacies } from 'utils/flow-types'
 
 function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {

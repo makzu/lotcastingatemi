@@ -7,7 +7,7 @@ import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import { isUnequalByKeys } from 'utils'
-import { LIMIT_MAX } from 'utils/constants.js'
+import { LIMIT_MAX } from 'utils/constants'
 import type { Character, Enhancer } from 'utils/flow-types'
 
 type Props = {

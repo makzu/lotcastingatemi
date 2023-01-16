@@ -6,7 +6,7 @@ import ResourceEditor from './resourceEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
-import { WILLPOWER_MAX } from 'utils/constants.js'
+import { WILLPOWER_MAX } from 'utils/constants'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, onChange: Function, classes: Object }

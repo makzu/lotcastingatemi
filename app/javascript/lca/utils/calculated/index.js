@@ -13,7 +13,7 @@ import {
   ABILITIES_ALL_NO_MA,
   ATTACK_ABILITIES,
   NON_ATTACK_ABILITIES,
-} from '../constants.js'
+} from '../constants'
 import type {
   Character,
   withHealthLevels,

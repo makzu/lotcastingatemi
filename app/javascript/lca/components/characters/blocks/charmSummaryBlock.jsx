@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 import Launch from '@mui/icons-material/Launch'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import {
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,

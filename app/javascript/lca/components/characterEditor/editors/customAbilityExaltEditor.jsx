@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography'
 
 import ExcellencyEditor from '../excellencies/'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { nonCasteAbilities } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 

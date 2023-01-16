@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import TextField from 'components/generic/TextField.jsx'
 import type { QcMerit } from 'utils/flow-types'

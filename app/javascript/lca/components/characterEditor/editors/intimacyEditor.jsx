@@ -4,8 +4,8 @@ import { shouldUpdate } from 'recompose'
 
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import Editor from 'components/generic/intimacyEditor.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { isUnequalByKeys } from 'utils'
 import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
 

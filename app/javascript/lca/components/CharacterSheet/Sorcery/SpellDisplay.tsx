@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import SecondaryInfo from 'components/shared/SecondaryInfo'
 import { Spell } from 'types'

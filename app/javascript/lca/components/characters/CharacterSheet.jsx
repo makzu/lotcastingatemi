@@ -21,12 +21,12 @@ import SocialBlock from './blocks/socialBlock.jsx'
 import SpecialtyBlock from './blocks/specialtyBlock.jsx'
 import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
-import BlockPaper from '../generic/blockPaper.jsx'
 import DocumentTitle from 'components/generic/DocumentTitle'
 import RatingLine from '../generic/ratingLine.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
-
+import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
+
 import { getSpecificCharacter } from 'ducks/selectors'
 import { getWeaponsForCharacter } from 'ducks/entities/weapon'
 import {

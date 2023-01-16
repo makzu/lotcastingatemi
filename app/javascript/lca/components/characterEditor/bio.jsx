@@ -10,9 +10,9 @@ import Typography from '@material-ui/core/Typography'
 
 import XpEditor from './editors/xpEditor.jsx'
 import AnimalFormsEditor from './editors/AnimalFormsEditor'
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import DocumentTitle from 'components/generic/DocumentTitle'
 import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter } from 'ducks/actions.js'

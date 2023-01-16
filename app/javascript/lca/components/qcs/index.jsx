@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import MarkdownDisplay, {

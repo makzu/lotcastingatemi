@@ -3,9 +3,9 @@ import { shouldUpdate } from 'recompose'
 
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { isUnequalByKeys } from 'utils'
 import { LIMIT_MAX } from 'utils/constants.js'
 import type { Character, Enhancer } from 'utils/flow-types'

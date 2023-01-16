@@ -1,7 +1,7 @@
 // @flow
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 const PrivacyPage = () => (
   <BlockPaper>

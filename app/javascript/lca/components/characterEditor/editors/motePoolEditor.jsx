@@ -4,8 +4,8 @@ import Typography from '@mui/material/Typography'
 
 import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import AnimaSelect from 'components/generic/AnimaSelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import AuraSelect from 'components/shared/selects/AuraSelect'
 import commonStyles from 'styles'
 import {

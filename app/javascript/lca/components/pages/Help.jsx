@@ -1,7 +1,7 @@
 // @flow
 import { Redirect, Route } from 'react-router'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 
 import IndexDoc from 'Docs/README.md'

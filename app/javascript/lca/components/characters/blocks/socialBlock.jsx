@@ -3,7 +3,7 @@ import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 const styles = (theme) => ({
   container: {

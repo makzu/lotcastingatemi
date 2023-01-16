@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem'
 import MuiTextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 

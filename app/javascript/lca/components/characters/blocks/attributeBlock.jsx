@@ -2,10 +2,10 @@
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import AttributeBlockPhysical from './attributeBlockPhysical.jsx'
 import AttributeBlockSocial from './attributeBlockSocial.jsx'
 import AttributeBlockMental from './attributeBlockMental.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import type { Character } from 'utils/flow-types'
 
 export type Props = { character: Character, pools: Object }

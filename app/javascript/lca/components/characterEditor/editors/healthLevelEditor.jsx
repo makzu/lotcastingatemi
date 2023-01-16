@@ -4,9 +4,9 @@ import { compose, shouldUpdate } from 'recompose'
 import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { isUnequalByKeys } from 'utils'
 import type { Character } from 'utils/flow-types'
 

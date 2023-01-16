@@ -4,12 +4,12 @@ import { compose, shouldUpdate } from 'recompose'
 import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
 import { isUnequalByKeys } from 'utils'
 import { solarXpName, spentXp, spentSolarXp, spentBp } from 'utils/calculated'

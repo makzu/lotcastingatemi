@@ -13,7 +13,7 @@ import CharacterCard from './CharacterCombatCard.jsx'
 import QcCard from './QcCombatCard.jsx'
 import BattlegroupCard from './BattlegroupCombatCard.jsx'
 import OutOfCombatCard from './OutOfCombatCard.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { nextRound, endCombat } from 'ducks/events'

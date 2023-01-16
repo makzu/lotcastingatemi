@@ -14,15 +14,15 @@ import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
 import MeritEffectBlurb from './MeritEffectBlurb.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants.js'
 import type { fullMerit as Merit } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type FieldsProps = { merit: Merit, onUpdate: Function, onRemove: Function }

@@ -5,13 +5,14 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { Button, Divider, Typography } from '@mui/material'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import WeaponEditorPopup from './WeaponEditorPopup'
+import WeaponRow from './WeaponRow'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import { State } from 'ducks'
 import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
 import { Character } from 'types'
-import WeaponEditorPopup from './WeaponEditorPopup'
-import WeaponRow from './WeaponRow'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)

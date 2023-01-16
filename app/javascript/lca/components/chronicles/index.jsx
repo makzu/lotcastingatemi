@@ -14,7 +14,7 @@ import QcAddPopup from './qcAddPopup.jsx'
 import QcCard from 'components/qcs/QcCard.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import DocumentTitle from 'components/generic/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 

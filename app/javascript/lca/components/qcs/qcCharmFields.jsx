@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
@@ -16,7 +16,7 @@ import TextField from 'components/generic/TextField.jsx'
 import type { QcCharm } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type Props = {

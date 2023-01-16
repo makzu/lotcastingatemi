@@ -5,10 +5,10 @@ import { WithStyles } from '@mui/styles'
 import createStyles from '@mui/styles/createStyles'
 import withStyles from '@mui/styles/withStyles'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingLine from 'components/generic/ratingLine.jsx'
-
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import { Merit } from 'types'
 
 const styles = (theme: Theme) =>

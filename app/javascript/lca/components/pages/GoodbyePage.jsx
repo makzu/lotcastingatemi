@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import type { Enhancer } from 'utils/flow-types'
 
 type Props = {

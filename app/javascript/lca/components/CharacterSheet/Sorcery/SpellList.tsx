@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { Grid, Typography } from '@mui/material'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { State } from 'ducks'
 import { getSpecificCharacter, getSpellsForCharacter } from 'ducks/entities'
 import { Character, Spell } from 'types'

@@ -12,10 +12,10 @@ import MenuItem from '@material-ui/core/MenuItem'
 import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateBattlegroup } from 'ducks/actions.js'
@@ -24,7 +24,7 @@ import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
 
   bgBonus: {
@@ -353,8 +353,5 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   ProtectedComponent,
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { updateBattlegroup }
-  )
+  connect(mapStateToProps, { updateBattlegroup }),
 )(BattlegroupEditor)

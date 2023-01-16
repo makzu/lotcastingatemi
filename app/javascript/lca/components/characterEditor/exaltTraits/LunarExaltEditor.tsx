@@ -2,9 +2,9 @@ import * as React from 'react'
 
 import { MenuItem } from '@mui/material'
 
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import LunarCasteSelect from './LunarCasteSelect'
+import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 import { Character } from 'types'
 import { nonCasteAttributes } from 'utils/calculated'

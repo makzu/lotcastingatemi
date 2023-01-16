@@ -1,8 +1,8 @@
 // @flow
 import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { prettyFullExaltType } from 'utils/calculated'
 
 import type { Character } from 'utils/flow-types'

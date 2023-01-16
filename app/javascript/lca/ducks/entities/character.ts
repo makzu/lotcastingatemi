@@ -41,7 +41,7 @@ export function changeCharacterType(id: number, type: string) {
 
 export const fetchCharacterIfNecessary = createConditionalFetchAction(
   CHARACTER,
-  fetchCharacter
+  fetchCharacter,
 )
 
 /* *** Selectors *** */
@@ -50,17 +50,19 @@ const getCharacters = (state: State) => unwrapped(state).characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
+    (currentPlayer.characters || [])
+      .map((c) => characters[c])
+      .sort(sortOrderSort),
 )
 
 export const getMyPinnedCharacters = createSelector(
   [getMyCharacters],
-  characters => characters.filter(c => c.pinned)
+  (characters) => characters.filter((c) => c.pinned),
 )
 
 export const getMyCharactersWithoutChronicles = createSelector(
   [getMyCharacters],
-  characters => characters.filter(c => c.chronicle_id == null)
+  (characters) => characters.filter((c) => c.chronicle_id == null),
 )
 
 export const getSpecificCharacter = (state: State, id: number) =>

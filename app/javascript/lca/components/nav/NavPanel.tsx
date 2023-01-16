@@ -1,5 +1,5 @@
 import { Location } from 'history'
-import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
+import { Route, Switch as RouterSwitch } from 'react-router-dom'
 
 import {
   ButtonProps,
@@ -8,8 +8,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Theme,
 } from '@mui/material'
-import { Theme } from '@mui/styles'
 import { makeStyles } from '@mui/styles'
 
 import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'

@@ -88,7 +88,7 @@ class CharmFilter extends React.Component<Props> {
           Universal
         </MenuItem>
       ) : null,
-      ...filters.map(abil => {
+      ...filters.map((abil) => {
         switch (abil) {
           case '':
             return (
@@ -111,7 +111,7 @@ class CharmFilter extends React.Component<Props> {
         }
       }),
     ]
-    const catOptions = categories.map(cat => (
+    const catOptions = categories.map((cat) => (
       <MenuItem key={cat} value={cat} style={{ textTransform: 'capitalize' }}>
         {cat}
       </MenuItem>
@@ -120,54 +120,58 @@ class CharmFilter extends React.Component<Props> {
       charmType !== 'spirit' &&
       (exaltTypeBase !== 'essence' || charmType !== 'native')
 
-    return <>
-      <Button onClick={toggleOpen}>
-        Filter{' '}
-        <Hidden lgDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
-        &nbsp;
-        <Filter />
-      </Button>
-      {open && (
-        <>
-          {showFilter && (
-            <>
-              <TextField
-                select
-                style={{
-                  minWidth: '8em',
-                  textTransform: 'capitalize',
-                  marginTop: '-16px',
-                }}
-                name={filterName}
-                label={filterLabel}
-                // $FlowFixMe
-                value={currentAbility}
-                onChange={onChange}
-              >
-                {filterOptions}
-              </TextField>
-              &nbsp;&nbsp;
-            </>
-          )}
+    return (
+      <>
+        <Button onClick={toggleOpen}>
+          Filter{' '}
+          <Hidden lgDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
+          &nbsp;
+          <Filter />
+        </Button>
+        {open && (
+          <>
+            {showFilter && (
+              <>
+                <TextField
+                  variant="standard"
+                  select
+                  style={{
+                    minWidth: '8em',
+                    textTransform: 'capitalize',
+                    marginTop: '-16px',
+                  }}
+                  name={filterName}
+                  label={filterLabel}
+                  // $FlowFixMe
+                  value={currentAbility}
+                  onChange={onChange}
+                >
+                  {filterOptions}
+                </TextField>
+                &nbsp;&nbsp;
+              </>
+            )}
 
-          <TextField
-            select
-            style={{
-              minWidth: '8em',
-              textTransform: 'capitalize',
-              marginTop: '-16px',
-            }}
-            name="categoryFilter"
-            label="Filter by Category"
-            value={currentCategory || []}
-            SelectProps={{ multiple: true }}
-            onChange={onChange}
-          >
-            {catOptions}
-          </TextField>
-        </>
-      )}
-    </>
+            <TextField
+              variant="standard"
+              select
+              style={{
+                minWidth: '8em',
+                textTransform: 'capitalize',
+                marginTop: '-16px',
+              }}
+              name="categoryFilter"
+              label="Filter by Category"
+              value={currentCategory || []}
+              SelectProps={{ multiple: true }}
+              onChange={onChange}
+            >
+              {catOptions}
+            </TextField>
+          </>
+        )}
+      </>
+    )
   }
 }
 

@@ -20,6 +20,7 @@ function CommitFields(props: ListAttributeFieldTypes) {
   return (
     <>
       <MuiTextField
+        variant="standard"
         select
         name="pool"
         value={pool}

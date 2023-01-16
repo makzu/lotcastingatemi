@@ -59,6 +59,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
           <DialogTitle>Join a Chronicle</DialogTitle>
           <DialogContent>
             <TextField
+              variant="standard"
               name="code"
               value={code}
               label="Invite Code"

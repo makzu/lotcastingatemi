@@ -38,7 +38,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
     characterId: 0,
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -67,7 +67,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
         Select a Character
       </MenuItem>,
       <Divider key="div" />,
-      ...characters.map(c => (
+      ...characters.map((c) => (
         <MenuItem key={c.id} value={c.id}>
           {c.name}
         </MenuItem>
@@ -75,7 +75,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
     ]
 
     const currentCharacter = characters.find(
-      c => c.id == this.state.characterId
+      (c) => c.id == this.state.characterId,
     )
     const hidden = currentCharacter && currentCharacter.hidden
 
@@ -87,6 +87,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
           <DialogTitle>Add a Character to {chronicleName}</DialogTitle>
           <DialogContent>
             <TextField
+              variant="standard"
               select
               value={this.state.characterId}
               name="characterId"
@@ -130,14 +131,14 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Object = dispatch => ({
+const mapDispatchToProps: Object = (dispatch) => ({
   handleSubmit: (id, charId) =>
     dispatch(addThingToChronicle(id, charId, 'character')),
 })
 
 const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )
 
 export default enhance(CharacterAddPopup)

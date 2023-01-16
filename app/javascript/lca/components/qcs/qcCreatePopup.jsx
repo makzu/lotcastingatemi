@@ -54,6 +54,7 @@ class QcCreatePopup extends Component<Props, State> {
           <DialogTitle>Create New Quick Character</DialogTitle>
           <DialogContent>
             <TextField
+              variant="standard"
               name="name"
               value={qc.name}
               label="Name"

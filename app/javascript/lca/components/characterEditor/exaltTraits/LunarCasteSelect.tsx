@@ -4,6 +4,7 @@ import TextField, { TextFieldProps } from '@mui/material/TextField'
 
 const LunarCasteSelect = (props: TextFieldProps) => (
   <TextField
+    variant="standard"
     select
     {...props}
     data-cy="select-db-aspect"

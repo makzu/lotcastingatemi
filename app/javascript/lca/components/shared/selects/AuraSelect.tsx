@@ -13,6 +13,7 @@ interface Props extends Pick<TextFieldProps, 'onChange'> {
 
 const AuraSelect = ({ character, onChange, ...props }: Props) => (
   <TextField
+    variant="standard"
     select
     name="aura"
     value={character.aura}

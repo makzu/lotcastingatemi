@@ -15,6 +15,7 @@ class CharmTimingSelect extends React.PureComponent<Props> {
 
     return (
       <TextField
+        variant="standard"
         select
         name={name}
         value={value}

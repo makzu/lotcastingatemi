@@ -55,6 +55,7 @@ const ExaltTypeSelect = (props: Props) => {
 
   return (
     <TextField
+      variant="standard"
       select
       name="type"
       value={value}

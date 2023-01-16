@@ -35,7 +35,7 @@ class QcAddPopup extends React.Component<Props, State> {
     qcId: 0,
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -64,14 +64,14 @@ class QcAddPopup extends React.Component<Props, State> {
         Select a Qc
       </MenuItem>,
       <Divider key="div" />,
-      ...qcs.map(c => (
+      ...qcs.map((c) => (
         <MenuItem key={c.id} value={c.id}>
           {c.name}
         </MenuItem>
       )),
     ]
 
-    const currentQc = qcs.find(c => c.id == this.state.qcId)
+    const currentQc = qcs.find((c) => c.id == this.state.qcId)
     const hidden = currentQc && currentQc.hidden
     return (
       <>
@@ -81,6 +81,7 @@ class QcAddPopup extends React.Component<Props, State> {
           <DialogTitle>Add a Qc to {chronicleName}</DialogTitle>
           <DialogContent>
             <TextField
+              variant="standard"
               select
               value={this.state.qcId}
               name="qcId"
@@ -124,13 +125,13 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Object = dispatch => ({
+const mapDispatchToProps: Object = (dispatch) => ({
   handleSubmit: (id, qcId) => dispatch(addThingToChronicle(id, qcId, 'qc')),
 })
 
 const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )
 
 export default enhance(QcAddPopup)

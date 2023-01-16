@@ -6,6 +6,7 @@ import type { withMotePool } from 'utils/flow-types'
 type Props = { character: withMotePool, onChange: Function }
 const AnimaSelect = ({ character, onChange, ...props }: Props) => (
   <TextField
+    variant="standard"
     select
     name="anima_level"
     value={character.anima_level}

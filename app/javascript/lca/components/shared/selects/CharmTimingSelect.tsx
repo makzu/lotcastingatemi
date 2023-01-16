@@ -14,7 +14,13 @@ const CharmTimingSelect = (props: Props) => {
   const [t] = useTranslation()
 
   return (
-    <TextField select label={t('charms:type')} margin="dense" {...props}>
+    <TextField
+      variant="standard"
+      select
+      label={t('charms:type')}
+      margin="dense"
+      {...props}
+    >
       <MenuItem value="simple">{t('charms:simple')}</MenuItem>
       <MenuItem value="supplemental">{t('charms:supplemental')}</MenuItem>
       <MenuItem value="reflexive">{t('charms:reflexive')}</MenuItem>

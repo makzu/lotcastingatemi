@@ -30,7 +30,7 @@ import { checkVisible } from 'utils'
 import type { Character, Spell } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type Props = {
@@ -43,7 +43,7 @@ type Props = {
   classes: Object,
 }
 class SpellFields extends Component<Props> {
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     const { spell } = this.props
 
@@ -52,7 +52,7 @@ class SpellFields extends Component<Props> {
     this.props.onUpdate(spell.id, spell.sorcerer_id, { [name]: value })
   }
 
-  handleCheck = e => {
+  handleCheck = (e) => {
     const { name, checked } = e.target
     const { spell } = this.props
 
@@ -66,7 +66,7 @@ class SpellFields extends Component<Props> {
   scrollToPanel = (e, appearing) => {
     if (appearing) return false
     const elem = document.getElementById(
-      `spell-editor-expando-${this.props.spell.id}`
+      `spell-editor-expando-${this.props.spell.id}`,
     )
     if (!checkVisible(elem)) scrollToElement(elem)
   }
@@ -142,6 +142,7 @@ class SpellFields extends Component<Props> {
               margin="dense"
             />
             <MuiTextField
+              variant="standard"
               select
               name="circle"
               label="Circle"

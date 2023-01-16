@@ -1,6 +1,12 @@
 import { MouseEvent } from 'react'
 
-import { Divider, ListSubheader, MenuItem, TextField, Theme } from '@mui/material'
+import {
+  Divider,
+  ListSubheader,
+  MenuItem,
+  TextField,
+  Theme,
+} from '@mui/material'
 
 import makeStyles from '@mui/styles/makeStyles'
 
@@ -52,6 +58,7 @@ const WeaponAttributeSelect = (props: Props) => {
 
   return (
     <TextField
+      variant="standard"
       select
       className={classes.root}
       value={fixedValue}

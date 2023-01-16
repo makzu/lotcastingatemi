@@ -1,13 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import {
-  Button,
-  MenuItem,
-  Switch,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Button, MenuItem, Switch, TextField, Typography } from '@mui/material'
 
 import { makeStyles } from '@mui/styles'
 import Checkbox from 'components/shared/inputs/Checkbox'
@@ -37,7 +31,7 @@ interface Props {
   allKeywords: string[]
 }
 
-const ExclusiveSwitch = props => (
+const ExclusiveSwitch = (props) => (
   <div
     style={{
       alignItems: 'center',
@@ -58,7 +52,7 @@ const ExclusiveSwitch = props => (
 )
 
 const CharmFilterDrawer = (props: Props) => {
-  const handleChange = e =>
+  const handleChange = (e) =>
     void props.setfilters({ type: e.target.name, payload: e.target.value })
 
   const [filtersOpen, setOpen, setClosed] = useDialogLogic()
@@ -80,6 +74,7 @@ const CharmFilterDrawer = (props: Props) => {
         />
 
         <TextField
+          variant="standard"
           name="ability"
           label="Ability/Attribute"
           select
@@ -88,18 +83,19 @@ const CharmFilterDrawer = (props: Props) => {
           onChange={handleChange}
           margin="dense"
         >
-          {props.allAbilities.map(a =>
+          {props.allAbilities.map((a) =>
             a === 'martial_arts' ? (
               <span key={a} />
             ) : (
               <MenuItem key={a} value={a} className={classes.capitalize}>
                 {a === '' ? 'None' : a}
               </MenuItem>
-            )
+            ),
           )}
         </TextField>
 
         <TextField
+          variant="standard"
           name="keyword"
           label="Keyword"
           select
@@ -108,7 +104,7 @@ const CharmFilterDrawer = (props: Props) => {
           onChange={handleChange}
           margin="dense"
         >
-          {props.allKeywords.map(a => (
+          {props.allKeywords.map((a) => (
             <MenuItem key={a} value={a}>
               {a}
             </MenuItem>
@@ -121,6 +117,7 @@ const CharmFilterDrawer = (props: Props) => {
         />
 
         <TextField
+          variant="standard"
           name="category"
           label="Category"
           select
@@ -129,7 +126,7 @@ const CharmFilterDrawer = (props: Props) => {
           onChange={handleChange}
           margin="dense"
         >
-          {props.allCategories.map(a => (
+          {props.allCategories.map((a) => (
             <MenuItem key={a} value={a}>
               {a}
             </MenuItem>

@@ -61,6 +61,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
           <DialogTitle>Be the Storyteller of a new Chronicle</DialogTitle>
           <DialogContent>
             <TextField
+              variant="standard"
               name="name"
               value={chronicle.name}
               label="Name"

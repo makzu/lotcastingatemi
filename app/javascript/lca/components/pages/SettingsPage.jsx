@@ -94,6 +94,7 @@ class SettingsPage extends Component<Props, { open: boolean }> {
         <Divider style={{ margin: '1em 0' }} />
 
         <MuiTextField
+          variant="standard"
           select
           label="Theme"
           value={theme}

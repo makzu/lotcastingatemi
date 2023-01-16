@@ -25,6 +25,7 @@ type Props = {
 }
 const WeightSelect = (props: Props) => (
   <TextField
+    variant="standard"
     select
     label="Weight"
     name={props.name}

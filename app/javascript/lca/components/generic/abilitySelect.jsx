@@ -76,6 +76,7 @@ class AbilitySelect extends Component<Props> {
 
     return (
       <TextField
+        variant="standard"
         select
         className={multiple ? classes.multiple : classes.root}
         name={props.name}

@@ -110,7 +110,7 @@ class MoteSpendWidget extends React.Component<Props, State> {
     this.setState(defaultState)
   }
 
-  handleAdd = motes => {
+  handleAdd = (motes) => {
     let commit = this.state.toSpend + motes <= 0 ? false : this.state.commit
     this.setState({
       toSpend: clamp(this.state.toSpend + motes, this.min(), this.max()),
@@ -118,7 +118,7 @@ class MoteSpendWidget extends React.Component<Props, State> {
     })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
     let { commit } = this.state
 
@@ -131,7 +131,7 @@ class MoteSpendWidget extends React.Component<Props, State> {
     }
   }
 
-  handleCheck = e => {
+  handleCheck = (e) => {
     this.setState({ [e.target.name]: !this.state[e.target.name] })
   }
 
@@ -160,7 +160,7 @@ class MoteSpendWidget extends React.Component<Props, State> {
       pool,
       characterType,
       committments,
-      mute
+      mute,
     )
 
     this.setState(defaultState)
@@ -267,6 +267,7 @@ class MoteSpendWidget extends React.Component<Props, State> {
               {commit && (
                 <>
                   <TextField
+                    variant="standard"
                     name="commitName"
                     value={commitName}
                     label="Commit label"
@@ -332,9 +333,8 @@ const mapStateToProps = (state, props: ExposedProps) => ({
     : canIEditCharacter(state, props.character.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  { spendMotes }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  spendMotes,
+})
 
 export default enhance(MoteSpendWidget)

@@ -8,6 +8,7 @@ interface Props extends Pick<TextFieldProps, 'onChange' | 'margin'> {
 }
 const SpellCircleSelect = ({ spell, onChange, margin }: Props) => (
   <TextField
+    variant="standard"
     select
     name="circle"
     label="Circle"

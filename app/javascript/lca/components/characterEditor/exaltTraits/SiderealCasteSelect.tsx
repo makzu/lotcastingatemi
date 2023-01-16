@@ -4,6 +4,7 @@ import TextField, { TextFieldProps } from '@mui/material/TextField'
 
 const SiderealCasteSelect = (props: TextFieldProps) => (
   <TextField
+    variant="standard"
     select
     {...props}
     name="caste"

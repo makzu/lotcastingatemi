@@ -130,6 +130,7 @@ class ExcellencyEditor extends Component<
             </Typography>
 
             <TextField
+              variant="standard"
               select
               label="Excellency Cap"
               name="excellency"
@@ -148,6 +149,7 @@ class ExcellencyEditor extends Component<
             </TextField>
 
             <TextField
+              variant="standard"
               select
               label="Stunt Excellency cap"
               name="excellency_stunt"

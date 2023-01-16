@@ -22,7 +22,7 @@ import type { Enhancer } from 'utils/flow-types'
  * Autocomplete example
  */
 
-const NoOptionsMessage = props => (
+const NoOptionsMessage = (props) => (
   <Typography
     color="textSecondary"
     className={props.selectProps.classes.noOptionsMessage}
@@ -36,8 +36,9 @@ function inputComponent({ inputRef, ...props }) {
   return <div ref={inputRef} {...props} />
 }
 
-const Control = props => (
+const Control = (props) => (
   <TextField
+    variant="standard"
     fullWidth
     InputProps={{
       inputComponent,
@@ -53,7 +54,7 @@ const Control = props => (
   />
 )
 
-const Option = props => (
+const Option = (props) => (
   <MenuItem
     buttonRef={props.innerRef}
     selected={props.isFocused}
@@ -67,7 +68,7 @@ const Option = props => (
   </MenuItem>
 )
 
-const Placeholder = props => (
+const Placeholder = (props) => (
   <Typography
     color="textSecondary"
     className={props.selectProps.classes.placeholder}
@@ -77,7 +78,7 @@ const Placeholder = props => (
   </Typography>
 )
 
-const SingleValue = props => (
+const SingleValue = (props) => (
   <Typography
     className={props.selectProps.classes.singleValue}
     {...props.innerProps}
@@ -99,14 +100,14 @@ const MultiValue = (props: Object) => (
     className={classNames(props.selectProps.classes.chip, {
       [props.selectProps.classes.chipFocused]: props.isFocused,
     })}
-    onDelete={event => {
+    onDelete={(event) => {
       props.removeProps.onClick()
       props.removeProps.onMouseDown(event)
     }}
   />
 )
 
-const Menu = props => (
+const Menu = (props) => (
   <Paper
     square
     className={props.selectProps.classes.paper}
@@ -128,7 +129,7 @@ const components = {
   Menu,
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
     //height: 250,
@@ -155,7 +156,7 @@ const styles = theme => ({
       theme.palette.mode === 'light'
         ? theme.palette.grey[300]
         : theme.palette.grey[700],
-      0.08
+      0.08,
     ),
   },
   noOptionsMessage: {
@@ -194,22 +195,22 @@ type State = {
 }
 
 class CharmCategoryAutocomplete extends React.Component<Props, State> {
-  handleChange = value => {
+  handleChange = (value) => {
     this.props.onChange({
       target: {
         name: 'categories',
-        value: value.map(v => v.value),
+        value: value.map((v) => v.value),
       },
     })
   }
 
   render() {
     const { categories, classes, theme, value } = this.props
-    const suggestions = categories.map(c => ({ value: c, label: c }))
-    const val = value.map(c => ({ value: c, label: c }))
+    const suggestions = categories.map((c) => ({ value: c, label: c }))
+    const val = value.map((c) => ({ value: c, label: c }))
 
     const selectStyles = {
-      input: base => ({
+      input: (base) => ({
         ...base,
         color: theme.palette.text.primary,
       }),
@@ -247,7 +248,7 @@ const mapStateToProps = (state, props) => ({
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles, { withTheme: true })
+  withStyles(styles, { withTheme: true }),
 )
 
 export default enhance(CharmCategoryAutocomplete)

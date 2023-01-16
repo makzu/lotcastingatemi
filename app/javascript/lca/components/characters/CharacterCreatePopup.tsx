@@ -119,6 +119,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
           <DialogContent>
             <div>
               <TextField
+                variant="standard"
                 name="name"
                 value={character.name}
                 label="Name"
@@ -230,6 +231,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                 </Typography>
                 <div>
                   <TextField
+                    variant="standard"
                     name="caste"
                     value={character.caste}
                     fullWidth
@@ -241,6 +243,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                 </div>
                 <div>
                   <TextField
+                    variant="standard"
                     name="exalt_type"
                     value={character.exalt_type}
                     fullWidth

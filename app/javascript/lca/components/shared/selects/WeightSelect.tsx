@@ -18,6 +18,7 @@ const WeightSelect = (props: Props) => {
   const classes = useStyles(props)
   return (
     <TextField
+      variant="standard"
       select
       label="Weight"
       name={props.name}

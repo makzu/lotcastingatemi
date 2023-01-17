@@ -15,7 +15,7 @@ import CharacterLoadError from '../CharacterLoadError'
 import CharmFilter from './CharmFilter/'
 import CharmList from './CharmList'
 import { initialFilters, reducer } from './useCharmFilters'
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 interface StateProps {
   id: number

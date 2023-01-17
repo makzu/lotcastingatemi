@@ -9,7 +9,7 @@ import { Character, Spell } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import CharacterLoadError from '../CharacterLoadError'
 import SpellList from './SpellList'
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 interface StateProps {
   id: number

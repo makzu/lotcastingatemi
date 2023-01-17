@@ -9,7 +9,7 @@ import QcCreatePopup from 'components/qcs/qcCreatePopup.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyQcs, updateQc } from 'ducks/entities'
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 const SortableItem = SortableElement(({ children }) => children)
 

@@ -1,4 +1,4 @@
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 const DocumentTitle = ({ title }: { title: string }) => {
   useDocumentTitle(title)

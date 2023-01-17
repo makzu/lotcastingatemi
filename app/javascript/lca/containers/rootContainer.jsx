@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom'
 import App from './App'
 import ThemeContainer from './ThemeContainer'
 import Routes from '../routes.jsx'
-import useDocumentTitle from '../hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 type Props = {
   store: any,

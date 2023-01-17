@@ -9,7 +9,7 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyCharacters, updateCharacter } from 'ducks/entities'
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 const SortableItem = SortableElement(({ children }) => children)
 

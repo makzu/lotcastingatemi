@@ -13,7 +13,7 @@ import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 interface Props {
   qc: QC

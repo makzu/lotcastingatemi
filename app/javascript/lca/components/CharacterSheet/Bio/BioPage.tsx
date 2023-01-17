@@ -18,7 +18,7 @@ import { Character, XpLogEntry } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 const styles = (theme: Theme) =>
   createStyles({

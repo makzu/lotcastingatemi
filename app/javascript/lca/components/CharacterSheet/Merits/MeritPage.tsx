@@ -10,7 +10,7 @@ import { getMeritsForCharacter, getSpecificCharacter } from 'ducks/selectors'
 import { Character, Merit } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import SingleMerit from './SingleMerit'
-import useDocumentTitle from 'hooks/UseDocumentTitle'
+import { useDocumentTitle } from 'hooks'
 
 interface Props {
   character: Character

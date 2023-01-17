@@ -15,6 +15,7 @@ import MarkdownDisplay, {
 import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { fetchQcIfNecessary } from 'ducks/entities/qc'
 import { getSpellsForQc } from 'ducks/selectors'
 import {
@@ -427,7 +428,7 @@ class QcSheet extends Component<Props> {
 }
 
 function mapStateToProps(state, props) {
-  const id = props.match.params.qcId
+  const id = props.params.qcId
   const qc = getSpecificQc(state, id)
 
   let qc_attacks = []
@@ -461,8 +462,10 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default ProtectedComponent(
-  withStyles(styles)(
-    connect(mapStateToProps, { fetch: fetchQcIfNecessary })(QcSheet),
+export default withRouter(
+  ProtectedComponent(
+    withStyles(styles)(
+      connect(mapStateToProps, { fetch: fetchQcIfNecessary })(QcSheet),
+    ),
   ),
 )

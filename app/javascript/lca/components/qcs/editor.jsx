@@ -25,6 +25,7 @@ import TextField from '../generic/TextField.jsx'
 import AuraSelect from 'components/shared/selects/AuraSelect'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateQc } from 'ducks/actions.js'
 import { getSpecificQc, canIDeleteQc } from 'selectors'
 import commonStyles from 'styles'
@@ -449,7 +450,7 @@ class QcEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps: ExposedProps) {
-  const id = ownProps.match.params.qcId
+  const id = ownProps.params.qcId
   const qc = getSpecificQc(state, id)
   const showPublicCheckbox = canIDeleteQc(state, id)
 
@@ -461,6 +462,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
+  withRouter,
   connect(mapStateToProps, { updateQc }),
   withStyles(styles),
   ProtectedComponent,

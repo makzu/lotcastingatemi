@@ -35,15 +35,15 @@ class ChronicleWrapper extends Component<Props> {
   render() {
     return (
       <Switch>
-        <Route
-          path="/chronicles/:chronicleId/combat"
-          component={CombatDashboard}
-        />
-        <Route
-          path="/chronicles/:chronicleId/details"
-          component={ChronicleDetailsPage}
-        />
-        <Route path="/chronicles/:chronicleId" component={ChronicleDashboard} />
+        <Route path="/chronicles/:chronicleId/combat">
+          <CombatDashboard />
+        </Route>
+        <Route path="/chronicles/:chronicleId/details">
+          <ChronicleDetailsPage />
+        </Route>
+        <Route path="/chronicles/:chronicleId">
+          <ChronicleDashboard />
+        </Route>
       </Switch>
     )
   }

@@ -83,8 +83,12 @@ const NavPanel = (props: Props) => {
         )}
 
         <RouterSwitch>
-          <Route path="/characters/:id/edit" component={CharacterEditorNav} />
-          <Route path="/characters/:id" component={CharacterSheetNav} />
+          <Route path="/characters/:id/edit">
+            <CharacterEditorNav />
+          </Route>
+          <Route path="/characters/:id">
+            <CharacterSheetNav />
+          </Route>
         </RouterSwitch>
 
         <Divider />

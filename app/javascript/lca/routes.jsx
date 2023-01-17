@@ -80,43 +80,74 @@ export default function Routes() {
   return (
     <Suspense fallback={<Placeholder />}>
       <Switch>
-        <Route path="/settings" component={SettingsPage} />
-        <Route path="/deleted" component={GoodbyePage} />
-        <Route path="/resources" component={ResourcesPage} />
-        <Route path="/privacy" component={PrivacyPage} />
-        <Route path="/content" component={ContentList} />
+        <Route path="/settings">
+          <SettingsPage />
+        </Route>
 
-        <Route path="/help/:doc.:ext?" component={HelpPage} />
-        <Route path="/help" component={HelpPage} />
+        <Route path="/deleted">
+          <GoodbyePage />
+        </Route>
 
-        <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
+        <Route path="/resources">
+          <ResourcesPage />
+        </Route>
 
-        <Route
-          path="/characters/:characterId/edit/charms"
-          component={CharmEditor}
-        />
+        <Route path="/privacy">
+          <PrivacyPage />
+        </Route>
 
-        <Route
-          path="/characters/:characterId/edit"
-          component={CharacterEditor}
-        />
+        <Route path="/content">
+          <ContentList />
+        </Route>
 
-        <Route path="/characters/:id/" component={CharacterSheetWrap} />
+        <Route path="/help/:doc.:ext?">
+          <HelpPage />
+        </Route>
+        <Route path="/help">
+          <HelpPage />
+        </Route>
 
-        <Route path="/qcs/:qcId/edit" component={QcEditor} />
-        <Route path="/qcs/:qcId" component={QcSheet} />
+        <Route path="/chronicles/:chronicleId">
+          <ChronicleWrapper />
+        </Route>
 
-        <Route
-          path="/battlegroups/:battlegroupId/edit"
-          component={BattlegroupEditor}
-        />
-        <Route path="/battlegroups/:bgId" component={BattlegroupSheet} />
+        <Route path="/characters/:characterId/edit/charms">
+          <CharmEditor />
+        </Route>
+        <Route path="/characters/:characterId/edit">
+          <CharacterEditor />
+        </Route>
+        <Route path="/characters/:id/">
+          <CharacterSheetWrap />
+        </Route>
 
-        <Route path="/characters" component={CharacterList} />
-        <Route path="/qcs" component={QcList} />
-        <Route path="/battlegroups" component={BattlegroupList} />
+        <Route path="/qcs/:qcId/edit">
+          <QcEditor />
+        </Route>
+        <Route path="/qcs/:qcId">
+          <QcSheet />
+        </Route>
 
-        <Route path="/" component={WelcomePage} />
+        <Route path="/battlegroups/:battlegroupId/edit">
+          <BattlegroupEditor />
+        </Route>
+        <Route path="/battlegroups/:bgId">
+          <BattlegroupSheet />
+        </Route>
+
+        <Route path="/characters">
+          <CharacterList />
+        </Route>
+        <Route path="/qcs">
+          <QcList />
+        </Route>
+        <Route path="/battlegroups">
+          <BattlegroupList />
+        </Route>
+
+        <Route path="/">
+          <WelcomePage />
+        </Route>
       </Switch>
     </Suspense>
   )

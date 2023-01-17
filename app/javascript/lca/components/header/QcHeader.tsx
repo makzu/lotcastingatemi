@@ -1,36 +1,32 @@
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { useLocation } from 'react-router'
 
 import { Toolbar, Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
 import CharacterMenu from 'components/generic/CharacterMenu/'
-import { State } from 'ducks'
 import { canIEditQc, getSpecificQc } from 'selectors'
-import { QC } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
-import { useDocumentTitle } from 'hooks'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
 
 interface Props {
-  qc: QC
-  id: number
-  path: string
-  canIEdit: boolean
   classes: any
 }
 
 function QcHeader(props: Props) {
-  useDocumentTitle(`${props.qc?.name} | Lot-Casting Atemi`)
+  const id = useIdFromParams()
+  const qc = useAppSelector((state) => getSpecificQc(state, id))
+  const path = useLocation().pathname
+  const canIEdit = useAppSelector((state) => canIEditQc(state, id))
+  useDocumentTitle(`${qc?.name} | Lot-Casting Atemi`)
 
-  if (props.qc == null) {
+  if (qc == null) {
     return <GenericHeader />
   }
 
-  const { id, qc, path, classes } = props
+  const { classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/qcs/${id}`
@@ -49,7 +45,7 @@ function QcHeader(props: Props) {
           {qc.name}
         </Typography>
 
-        {props.canIEdit && (
+        {canIEdit && (
           <LinkButton to={editButtonPath} color="inherit">
             {editing ? 'Done' : 'Edit'}
           </LinkButton>
@@ -63,22 +59,4 @@ function QcHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state: State, { location, match }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-  const qc = getSpecificQc(state, id)
-  const path = location.pathname
-
-  const canIEdit = canIEditQc(state, id)
-
-  return {
-    canIEdit,
-    id,
-    path,
-    qc,
-  }
-}
-
-export default compose<Props, RouteProps>(
-  withStyles(styles),
-  connect(mapStateToProps),
-)(QcHeader)
+export default withStyles(styles)(QcHeader)

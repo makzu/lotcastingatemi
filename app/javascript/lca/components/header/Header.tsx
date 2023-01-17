@@ -44,12 +44,24 @@ const LcaHeader = () => {
     <AppBar className={classes.root} component="header" enableColorOnDark>
       <React.Suspense fallback={<div />}>
         <Switch>
-          <Route path="/chronicles/:id" component={ChronicleHeader} />
-          <Route path="/characters/:id" component={CharacterHeader} />
-          <Route path="/qcs/:id" component={QcHeader} />
-          <Route path="/battlegroups/:id" component={BattlegroupHeader} />
-          <Route path="/characters" component={GenericHeader} />
-          <Route component={GenericHeader} />
+          <Route path="/chronicles/:id">
+            <ChronicleHeader />
+          </Route>
+          <Route path="/characters/:id">
+            <CharacterHeader />
+          </Route>
+          <Route path="/qcs/:id">
+            <QcHeader />
+          </Route>
+          <Route path="/battlegroups/:id">
+            <BattlegroupHeader />
+          </Route>
+          <Route path="/characters">
+            <GenericHeader />
+          </Route>
+          <Route>
+            <GenericHeader />
+          </Route>
         </Switch>
       </React.Suspense>
     </AppBar>

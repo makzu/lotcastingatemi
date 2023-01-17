@@ -1,35 +1,33 @@
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { useLocation } from 'react-router'
 
 import { Toolbar, Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
-import { State } from 'ducks'
 import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
-import { Battlegroup } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
-import { useDocumentTitle } from 'hooks'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
 
 interface Props {
-  id: number
-  battlegroup: Battlegroup
-  path: string
-  canIEdit: boolean
   classes: any
 }
 function BattlegroupHeader(props: Props) {
-  useDocumentTitle(`${props.battlegroup?.name} | Lot-Casting Atemi`)
+  const id = useIdFromParams()
+  const battlegroup = useAppSelector((state) =>
+    getSpecificBattlegroup(state, id),
+  )
+  const canIEdit = useAppSelector((state) => canIEditBattlegroup(state, id))
+  const path = useLocation().pathname
+  useDocumentTitle(`${battlegroup?.name} | Lot-Casting Atemi`)
 
-  if (props.battlegroup == null) {
+  if (battlegroup == null) {
     return <GenericHeader />
   }
 
-  const { id, battlegroup, path, canIEdit, classes } = props
+  const { classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/battlegroups/${id}`
@@ -60,22 +58,4 @@ function BattlegroupHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state: State, { location, match }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-  const battlegroup = getSpecificBattlegroup(state, id)
-  const path = location.pathname
-
-  const canIEdit = canIEditBattlegroup(state, id)
-
-  return {
-    battlegroup,
-    canIEdit,
-    id,
-    path,
-  }
-}
-
-export default compose<Props, RouteProps>(
-  withStyles(styles),
-  connect(mapStateToProps),
-)(BattlegroupHeader)
+export default withStyles(styles)(BattlegroupHeader)

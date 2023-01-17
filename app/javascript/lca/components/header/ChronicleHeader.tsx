@@ -1,35 +1,31 @@
-import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
+import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
-import { compose } from 'recompose'
 
 import { Hidden, Tab, Tabs, Toolbar, Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
-import { State } from 'ducks'
-import { amIStOfChronicle, getSpecificChronicle } from 'selectors'
-import { Chronicle } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { getSpecificChronicle } from 'selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
+import { useAppSelector, useIdFromParams } from 'hooks'
 
-interface Props extends RouteComponentProps<any> {
-  id: number
-  chronicle: Chronicle
-  path: string
-  isST: boolean
+interface Props {
   classes: any
 }
 
 const LinkTab = (props) => <Tab {...props} component={Link as any} />
 
 function ChronicleHeader(props: Props) {
-  if (props.chronicle == null || props.chronicle.name == null) {
+  const id = useIdFromParams()
+  const chronicle = useAppSelector((state) => getSpecificChronicle(state, id))
+  const path = useLocation().pathname
+
+  if (chronicle == null || chronicle.name == null) {
     return <GenericHeader />
   }
 
-  const { chronicle, path, classes } = props
+  const { classes } = props
 
   const tabBasePath = `/chronicles/${chronicle.id}`
 
@@ -48,37 +44,21 @@ function ChronicleHeader(props: Props) {
     </Tabs>
   )
 
-  return <>
-    <Toolbar>
-      <LcaDrawerButton />
+  return (
+    <>
+      <Toolbar>
+        <LcaDrawerButton />
 
-      <Typography variant="h6" color="inherit" className={classes.title}>
-        {chronicle.name}
-      </Typography>
+        <Typography variant="h6" color="inherit" className={classes.title}>
+          {chronicle.name}
+        </Typography>
 
-      <Hidden smDown>{tabs}</Hidden>
-    </Toolbar>
+        <Hidden smDown>{tabs}</Hidden>
+      </Toolbar>
 
-    <Hidden smUp>{tabs}</Hidden>
-  </>
+      <Hidden smUp>{tabs}</Hidden>
+    </>
+  )
 }
 
-function mapStateToProps(state: State, { match, location }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-
-  const chronicle = getSpecificChronicle(state, id)
-  const isST = amIStOfChronicle(state, id)
-  const path = location.pathname
-
-  return {
-    chronicle,
-    id,
-    isST,
-    path,
-  }
-}
-
-export default compose<Props, RouteProps>(
-  connect(mapStateToProps),
-  withStyles(styles),
-)(ChronicleHeader)
+export default withStyles(styles)(ChronicleHeader)

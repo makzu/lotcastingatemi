@@ -12,6 +12,7 @@ import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import sharedStyles from 'styles/'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
 import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
@@ -289,7 +290,7 @@ class BattlegroupSheet extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.bgId
+  const id = ownProps.params.bgId
   const battlegroup = getSpecificBattlegroup(state, id)
 
   let qc_attacks = []
@@ -306,6 +307,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default compose(
+  withRouter,
   ProtectedComponent,
   withStyles(styles),
   connect(mapStateToProps, { fetch: fetchBattlegroupIfNecessary }),

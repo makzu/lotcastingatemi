@@ -1,5 +1,5 @@
 // @flow
-import { Redirect, Route } from 'react-router'
+import { Redirect, Route, useParams } from 'react-router'
 
 import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
@@ -9,33 +9,31 @@ import WeaponsDoc from 'Docs/weapons.md'
 import MeritsDoc from 'Docs/merits.md'
 import FormsDoc from 'Docs/forms.md'
 
-type Props = {
-  match: { params: { doc: string } },
-  classes: Object,
-}
-
-const HelpPage = ({ match }: Props) => {
-  let doc
-  switch (match.params.doc) {
+const HelpPage = () => {
+  const { doc } = useParams()
+  let md
+  switch (doc) {
     case 'merits':
-      doc = MeritsDoc
+      md = MeritsDoc
       break
     case 'weapons':
-      doc = WeaponsDoc
+      md = WeaponsDoc
       break
     case 'forms':
-      doc = FormsDoc
+      md = FormsDoc
       break
     default:
-      doc = IndexDoc
+      md = IndexDoc
   }
 
   return (
     <>
-      <Route exact path="/help" render={() => <Redirect to="/help/index" />} />
+      <Route exact path="/help">
+        {() => <Redirect to="/help/index" />}
+      </Route>
 
       <BlockPaper>
-        <MarkdownDisplay source={doc} />
+        <MarkdownDisplay source={md} />
       </BlockPaper>
     </>
   )

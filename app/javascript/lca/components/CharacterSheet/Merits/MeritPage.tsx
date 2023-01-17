@@ -1,26 +1,21 @@
-import { connect } from 'react-redux'
-
 import { Grid, Paper, Typography } from '@mui/material'
 
 import CharacterLoadError from '../CharacterLoadError'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks'
-import { getMeritsForCharacter, getSpecificCharacter } from 'ducks/selectors'
-import { Character, Merit } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { getMeritsForCharacter } from 'ducks/selectors'
 import SingleMerit from './SingleMerit'
-import { useDocumentTitle } from 'hooks'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
+import { useCharacterAttribute } from 'ducks/entities'
 
-interface Props {
-  character: Character
-  merits: Merit[]
-}
+const MeritFullPage = () => {
+  const id = useIdFromParams()
+  const characterName = useCharacterAttribute(id, 'name')
+  useDocumentTitle(`${characterName} Merits | Lot-Casting Atemi`)
+  const merits = useAppSelector((state) => getMeritsForCharacter(state, id))
 
-const MeritFullPage = (props: Props) => {
-  useDocumentTitle(`${props.character?.name} Merits | Lot-Casting Atemi`)
   /* Escape hatch */
-  if (props.character == null) {
+  if (characterName == null) {
     return (
       <Paper>
         <CharacterLoadError />
@@ -28,7 +23,7 @@ const MeritFullPage = (props: Props) => {
     )
   }
 
-  const mts = props.merits.map((m) => (
+  const mts = merits.map((m) => (
     <Grid item xs={12} md={6} xl={4} key={m.id}>
       <SingleMerit merit={m} />
     </Grid>
@@ -47,13 +42,4 @@ const MeritFullPage = (props: Props) => {
   )
 }
 
-function mapStateToProps(state: State, { match }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-
-  return {
-    character: getSpecificCharacter(state, id),
-    merits: getMeritsForCharacter(state, id),
-  }
-}
-
-export default ProtectedComponent(connect(mapStateToProps)(MeritFullPage))
+export default ProtectedComponent(MeritFullPage)

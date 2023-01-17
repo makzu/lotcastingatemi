@@ -18,6 +18,7 @@ import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateBattlegroup } from 'ducks/actions.js'
 import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
 import commonStyles from 'styles'
@@ -339,7 +340,7 @@ class BattlegroupEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.battlegroupId
+  const id = ownProps.params.battlegroupId
   const battlegroup = getSpecificBattlegroup(state, id)
   const showPublicCheckbox = canIDeleteBattlegroup(state, id)
 
@@ -351,6 +352,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default compose(
+  withRouter,
   ProtectedComponent,
   withStyles(styles),
   connect(mapStateToProps, { updateBattlegroup }),

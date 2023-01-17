@@ -35,10 +35,11 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     [theme.breakpoints.up('lg')]: {
-      height: 'calc(100% - 64px)',
-      marginLeft: drawerWidth,
-      marginTop: 64,
-      width: `calc(100% - ${drawerWidth}px)`,
+      //   height: 'calc(100% - 64px)',
+      //   marginLeft: drawerWidth,
+      marginLeft: theme.spacing(2),
+      //   marginTop: 64,
+      //   width: `calc(100% - ${drawerWidth}px)`,
     },
     backgroundColor: theme.palette.background.default,
     height: 'calc(100% - 56px)',

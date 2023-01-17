@@ -46,7 +46,7 @@ export const defaultState: EntityState = {
   players: {
     [0]: {
       id: 0,
-      name: 'Anonymous Player',
+      display_name: 'Anonymous Player',
       chronicles: [],
       own_chronicles: [],
       characters: [],
@@ -113,13 +113,13 @@ export default createReducer(defaultState, {
         if (chronicle_id && state.chronicles[chronicle_id]) {
           state.chronicles[chronicle_id][type] = state.chronicles[chronicle_id][
             type
-          ].filter(e => e !== id)
+          ].filter((e) => e !== id)
         }
 
         if (state[parent_type] && state[parent_type][parent_id]) {
           state[parent_type][parent_id][assoc] = state[parent_type][parent_id][
             assoc
-          ].filter(e => e !== id)
+          ].filter((e) => e !== id)
         }
 
         delete state[pluralType][id]

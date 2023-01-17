@@ -47,7 +47,7 @@ interface Props extends WithStyles<typeof styles> {
 
 const BioFullPage = ({ character, classes }: Props) => {
   useDocumentTitle(`${character?.name} Bio | Lot-Casting Atemi`)
-  ;('Characters | Lot-Casting Atemi')
+
   /* Escape hatch */
   if (character == null) {
     return <CharacterLoadError />

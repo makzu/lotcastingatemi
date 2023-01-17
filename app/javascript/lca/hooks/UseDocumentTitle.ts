@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
 
-const useDocumentTitle = (title: string) => {
+export const useDocumentTitle = (title: string) => {
   useEffect(() => {
     document.title = title
   }, [])
 }
-
-export default useDocumentTitle

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
 
 import {
   Collapse,
@@ -12,10 +11,11 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material/'
 
 import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import { useCharacterAttribute } from 'ducks/entities'
+import { useIdFromParams } from 'hooks'
 
 const CharacterEditorNav = () => {
-  const { id } = useParams<{ id: string }>()
-  const characterName = useCharacterAttribute(parseInt(id), 'name')
+  const id = useIdFromParams()
+  const characterName = useCharacterAttribute(id, 'name')
 
   const [isOpen, setOpen] = useState(true)
 

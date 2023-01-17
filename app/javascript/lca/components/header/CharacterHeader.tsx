@@ -1,33 +1,25 @@
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { useLocation } from 'react-router-dom'
 
 import { Toolbar, Typography } from '@mui/material'
-import withStyles from '@mui/styles/withStyles'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
-import { State } from 'ducks'
-import { canIEditCharacter, getSpecificCharacter } from 'ducks/selectors'
-import { Character } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
+import { canIEditCharacter, getSpecificCharacter } from 'ducks/selectors'
+import { useAppSelector, useIdFromParams } from 'hooks'
 
-interface Props {
-  id: number
-  character: Character
-  path: string
-  canIEdit: boolean
-  classes: any
-}
-function CharacterHeader(props: Props) {
-  if (props.character == null) {
+function CharacterHeader() {
+  const id = useIdFromParams()
+  const { pathname } = useLocation()
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
+  const canIEdit = useAppSelector((state) => canIEditCharacter(state, id))
+
+  if (character == null) {
     return <GenericHeader />
   }
 
-  const { id, character, path, canIEdit, classes } = props
-  const editing = path.includes('/edit')
+  const editing = pathname.includes('/edit')
 
   let editButtonPath = `/characters/${id}`
 
@@ -35,11 +27,11 @@ function CharacterHeader(props: Props) {
     editButtonPath += '/edit'
   }
 
-  if (path.endsWith('merits') || path.endsWith('merits/')) {
+  if (pathname.endsWith('merits') || pathname.endsWith('merits/')) {
     editButtonPath += '/merits'
-  } else if (path.endsWith('charms') || path.endsWith('charms/')) {
+  } else if (pathname.endsWith('charms') || pathname.endsWith('charms/')) {
     editButtonPath += '/charms'
-  } else if (path.endsWith('bio') || path.endsWith('bio/')) {
+  } else if (pathname.endsWith('bio') || pathname.endsWith('bio/')) {
     editButtonPath += '/bio'
   }
 
@@ -47,7 +39,7 @@ function CharacterHeader(props: Props) {
     <Toolbar>
       <LcaDrawerButton />
 
-      <Typography variant="h6" color="inherit" className={classes.title}>
+      <Typography variant="h6" color="inherit">
         {editing && 'Editing '}
         {character.name}
       </Typography>
@@ -62,25 +54,11 @@ function CharacterHeader(props: Props) {
         </LinkButton>
       )}
 
-      <div className={classes.tabs} />
+      <div style={{ flex: 1 }} />
 
       <CharacterMenu id={character.id} characterType="character" header />
     </Toolbar>
   )
 }
 
-function mapStateToProps(state: State, { location, match }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-
-  return {
-    canIEdit: canIEditCharacter(state, id),
-    character: getSpecificCharacter(state, id),
-    id,
-    path: location.pathname,
-  }
-}
-
-export default compose<Props, RouteProps>(
-  withStyles(styles),
-  connect(mapStateToProps),
-)(CharacterHeader)
+export default CharacterHeader

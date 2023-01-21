@@ -76,11 +76,7 @@ export const getControlSpellsForCharacter = (
 ): Array<Spell> => getSpellsForCharacter(state, id).filter(s => s.control)
 
 type gPFC = CachedEntitySelector<Array<Poison>>
-export const getPoisonsForCharacter: gPFC = createCachedSelector(
-  [getSpecificCharacter, getPoisons],
-  (character, poisons) =>
-    character.poisons.map(p => poisons[p]).sort(sortOrderSort)
-)(characterIdMemoizer)
+export const getPoisonsForCharacter: gPFC = () => []
 
 // TODO: Poison penalties stack: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1173001#post1173001 */
 // TODO: Poison penalties only effect static ratings:

@@ -28,10 +28,12 @@ class Chronicle < ApplicationRecord
 
   # TODO: Merge this into Broadcastable?
   def broadcast_update
+    changes = saved_changes.dup.transform_values(&:last)
+
     UpdateBroadcastJob.perform_later(
       ([st_id] + player_ids),
       self,
-      saved_changes.delete_if { |k| %w[created_at updated_at].include? k }
+      changes.delete_if { |k| %w[created_at updated_at].include? k }
     )
   end
 

@@ -50,6 +50,24 @@ module.exports = function (api) {
       ],
       ['@babel/plugin-transform-regenerator', { async: false }],
       '@babel/plugin-proposal-optional-chaining',
+      isDevelopmentEnv && [
+        'babel-plugin-import',
+        {
+          libraryName: '@mui/material',
+          libraryDirectory: '',
+          camel2DashComponentName: false,
+        },
+        'core',
+      ],
+      isDevelopmentEnv && [
+        'babel-plugin-import',
+        {
+          libraryName: '@mui/icons-material',
+          libraryDirectory: '',
+          camel2DashComponentName: false,
+        },
+        'icons',
+      ],
     ].filter(Boolean),
   }
 }

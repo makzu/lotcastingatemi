@@ -103,6 +103,7 @@
     "@typescript-eslint/parser": "^5.47.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^25.2.6",
+    "babel-plugin-import": "^1.13.6",
     "cypress": "^4.3.0",
     "enzyme": "^3.11.0",
     "eslint": "^8.32.0",
@@ -128,7 +129,7 @@
     "flow": "flow",
     "test": "jest",
     "testcov": "jest --coverage",
-    "lint": "eslint app/javascript/ --ext ts,tsx",
+    "lint": "eslint app/javascript/ --ext js,jsx,ts,tsx",
     "webpack:analyze": "mkdir -p public/packs && NODE_ENV=production node_modules/.bin/webpack --config config/webpack/production.js --profile --json > public/packs/stats.json && node_modules/.bin/webpack-bundle-analyzer public/packs/stats.json"
   },
   "jest": {
@@ -149,5 +150,8 @@
   "engines": {
     "node": "^16.x",
     "yarn": "^1.x"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.52"
   }
 }

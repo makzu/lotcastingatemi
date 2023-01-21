@@ -107,31 +107,31 @@ export default function Routes() {
           <HelpPage />
         </Route>
 
-        <Route path="/chronicles/:chronicleId">
+        <Route path="/chronicles/:id">
           <ChronicleWrapper />
         </Route>
 
-        <Route path="/characters/:characterId/edit/charms">
+        <Route path="/characters/:id/edit/charms">
           <CharmEditor />
         </Route>
-        <Route path="/characters/:characterId/edit">
+        <Route path="/characters/:id/edit">
           <CharacterEditor />
         </Route>
         <Route path="/characters/:id/">
           <CharacterSheetWrap />
         </Route>
 
-        <Route path="/qcs/:qcId/edit">
+        <Route path="/qcs/:id/edit">
           <QcEditor />
         </Route>
-        <Route path="/qcs/:qcId">
+        <Route path="/qcs/:id">
           <QcSheet />
         </Route>
 
-        <Route path="/battlegroups/:battlegroupId/edit">
+        <Route path="/battlegroups/:id/edit">
           <BattlegroupEditor />
         </Route>
-        <Route path="/battlegroups/:bgId">
+        <Route path="/battlegroups/:id">
           <BattlegroupSheet />
         </Route>
 

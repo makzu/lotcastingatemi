@@ -4,7 +4,7 @@ import { compose } from 'recompose'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchCharacterIfNecessary } from 'ducks/entities/character'
-import { useLazyFetch } from 'hooks'
+import { useAppDispatch, useIdFromParams, useLazyFetch } from 'hooks'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import CharacterSheet from '../characters/CharacterSheet'
 import CharmFullPage from '../characters/charms/'
@@ -13,23 +13,33 @@ import CharmPage from './Charms'
 import MeritPage from './Merits'
 import SorceryPage from './Sorcery'
 
-interface Props extends RouteProps {
-  fetch: typeof fetchCharacterIfNecessary
-}
-
-const characterSheetWrapper = ({ match, fetch }: Props) => {
-  const id = parseInt(match.params.id, 10)
+const characterSheetWrapper = () => {
+  const id = useIdFromParams()
   // tslint:disable:react-hooks-nesting
+  const dispatch = useAppDispatch()
+  const fetch = dispatch(fetchCharacterIfNecessary)
   useLazyFetch(id, fetch)
 
   return (
     <Switch>
-      <Route path="/characters/:id/merits" component={MeritPage} />
-      <Route path="/characters/:characterId/charms" component={CharmFullPage} />
-      <Route path="/characters/:id/charmss" component={CharmPage} />
-      <Route path="/characters/:id/sorcery" component={SorceryPage} />
-      <Route path="/characters/:id/bio" component={BioPage} />
-      <Route path="/characters/:characterId" component={CharacterSheet} />
+      <Route path="/characters/:id/merits">
+        <MeritPage />
+      </Route>
+      <Route path="/characters/:id/charms">
+        <CharmFullPage />
+      </Route>
+      {/* <Route path="/characters/:id/charmss">
+        <CharmPage />
+      </Route> */}
+      <Route path="/characters/:id/sorcery">
+        <SorceryPage />
+      </Route>
+      <Route path="/characters/:id/bio">
+        <BioPage />
+      </Route>
+      <Route path="/characters/:id">
+        <CharacterSheet />
+      </Route>
     </Switch>
   )
 }

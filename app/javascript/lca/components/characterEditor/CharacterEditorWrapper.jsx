@@ -7,13 +7,13 @@ import MeritEditor from './merits/MeritEditor'
 
 const CharacterEditorWrapper = () => (
   <Switch>
-    <Route path="/characters/:characterId/edit/merits">
+    <Route path="/characters/:id/edit/merits">
       <MeritEditor />
     </Route>
-    <Route path="/characters/:characterId/edit/bio">
+    <Route path="/characters/:id/edit/bio">
       <BioEditor />
     </Route>
-    <Route path="/characters/:characterId/edit">
+    <Route path="/characters/:id/edit">
       <CharacterEditor />
     </Route>
   </Switch>

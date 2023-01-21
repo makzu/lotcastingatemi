@@ -35,13 +35,13 @@ class ChronicleWrapper extends Component<Props> {
   render() {
     return (
       <Switch>
-        <Route path="/chronicles/:chronicleId/combat">
+        <Route path="/chronicles/:id/combat">
           <CombatDashboard />
         </Route>
-        <Route path="/chronicles/:chronicleId/details">
+        <Route path="/chronicles/:id/details">
           <ChronicleDetailsPage />
         </Route>
-        <Route path="/chronicles/:chronicleId">
+        <Route path="/chronicles/:id">
           <ChronicleDashboard />
         </Route>
       </Switch>
@@ -50,7 +50,7 @@ class ChronicleWrapper extends Component<Props> {
 }
 
 const mapStateToProps = (state, props: ExposedProps) => ({
-  isLoaded: isChronicleLoaded(state, props.match.params.chronicleId),
+  isLoaded: isChronicleLoaded(state, props.match.params.id),
 })
 
 const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {

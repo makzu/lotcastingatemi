@@ -1,4 +1,5 @@
-module.exports = function(api) {
+// eslint-disable-next-line no-undef
+module.exports = function (api) {
   var validEnv = ['development', 'test', 'production']
   var currentEnv = api.env()
   var isDevelopmentEnv = api.env('development')
@@ -11,7 +12,7 @@ module.exports = function(api) {
         '`BABEL_ENV` environment variables. Valid values are "development", ' +
         '"test", and "production". Instead, received: ' +
         JSON.stringify(currentEnv) +
-        '.'
+        '.',
     )
   }
 

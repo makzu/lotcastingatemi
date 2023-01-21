@@ -7,14 +7,11 @@ import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 
 import { nonCasteAbilities } from 'utils/calculated'
-import type { Character } from 'utils/flow-types'
+import { Character } from 'types'
 
 type Props = { character: Character; onChange: React.ChangeEventHandler }
 function SiderealExaltEditor({ character, onChange }: Props) {
-  let caste_abilities = character.caste_abilities || []
-  if (character.caste === 'water') {
-    caste_abilities = [...caste_abilities, 'martial arts'].sort()
-  }
+  const caste_abilities = character.caste_abilities || []
 
   return (
     <BlockPaper>

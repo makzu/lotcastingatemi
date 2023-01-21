@@ -18,7 +18,7 @@ import type { Character } from 'utils/flow-types'
 
 class ExcellencyEditor extends Component<
   { character: Character, onChange: Function, onChangeMulti: Function },
-  { open: boolean }
+  { open: boolean },
 > {
   state = { open: false }
 
@@ -26,7 +26,7 @@ class ExcellencyEditor extends Component<
     // Not ideal but Flow complains if I have this set to SyntheticEvent<>
     // TODO: remove other entries on the list with *
     const { name, value } = e.target
-    let val = value.filter(e => e !== '').join('+')
+    let val = value.filter((e) => e !== '').join('+')
     this.props.onChange({ target: { name: name, value: val } })
   }
 
@@ -50,7 +50,7 @@ class ExcellencyEditor extends Component<
         Dragon-Blooded (Attribute + Specialty)
       </MenuItem>,
       <MenuItem key="sidereal" value="sidereal">
-        Sidereal (Higher of Essence or 3)
+        Sidereal (Higher of Essence or 3, will not halve static values)
       </MenuItem>,
       <Divider key="div1" style={{ margin: '0.125em 0' }} />,
       <MenuItem key="attribute" value="attribute">
@@ -85,6 +85,9 @@ class ExcellencyEditor extends Component<
       </MenuItem>,
       <MenuItem key="subtleanima" value="subtleanima">
         3 - Anima value (Dim: 3, Glowing: 2, Burning: 1, Bonfire: 0)
+      </MenuItem>,
+      <MenuItem key="essenceor3" value="essenceor3">
+        Essence or 3 (whichever is higher)
       </MenuItem>,
       <Divider key="div2" style={{ margin: '0.125em 0' }} />,
       <MenuItem key="roundup" value="roundup">
@@ -176,8 +179,8 @@ class ExcellencyEditor extends Component<
                   All Attribute + Ability rolls
                 </MenuItem>,
                 <MenuItem value="solar" key="solar">
-                  As Solars or Sidereals (caste/favored attributes/abilities &gt; 0, other
-                  attributes/abilities with at least one Charm)
+                  As Solars or Sidereals (caste/favored attributes/abilities
+                  &gt; 0, other attributes/abilities with at least one Charm)
                 </MenuItem>,
                 <MenuItem value="dragonblood" key="dragonblood">
                   As Dragon-Blooded (all attributes/abilities with an excellency

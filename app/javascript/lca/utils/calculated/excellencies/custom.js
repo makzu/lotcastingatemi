@@ -49,8 +49,10 @@ export default (
           attr(character, attribute) +
           highestOtherAttribute(character, attribute)
         break
+      case 'essenceor3':
       case 'sidereal':
         result += Math.max(character.essence, 3)
+        break
       case 'attribute':
         result += attr(character, attribute)
         break
@@ -93,6 +95,7 @@ export default (
     exArray.includes('nohalf')
   )
     return result
+
   if (exArray.includes('roundup')) return halfRoundUp(result)
   else return halfRoundDown(result)
 }

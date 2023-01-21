@@ -1,3 +1,17 @@
+## v97
+
+###### _Unreleased_
+
+- Nothing (yet)
+
+## v96
+
+###### _Jan 20, 2023_
+
+- Added "Higher of Essence or 3" cap to excellencies that properly halves, for Soverigns and other Exigents/Custom Exalts
+- Fix Sidereal-duplicating custom excellencies being way too high
+- Fix Chronicle notes field duplicating data (Thanks, claycle!)
+
 ## v94
 
 ###### _Jan 6, 2023_

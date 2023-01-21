@@ -28,7 +28,7 @@
     "@material-ui/styles": "^4.9.6",
     "@material-ui/system": "^4.9.6",
     "@material-ui/types": "^5.0.0",
-    "@rails/actioncable": "^6.0.2-2",
+    "@rails/actioncable": "^6.1.7",
     "@rails/webpacker": "^5.4.3",
     "@reduxjs/toolkit": "1.9.1",
     "@types/node": "^13.11.0",

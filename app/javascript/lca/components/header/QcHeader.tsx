@@ -1,21 +1,15 @@
 import { useLocation } from 'react-router'
 
-import { Toolbar, Typography } from '@mui/material'
-import withStyles from '@mui/styles/withStyles'
+import { Button, Toolbar, Typography } from '@mui/material'
 
 import CharacterMenu from 'components/generic/CharacterMenu/'
 import { canIEditQc, getSpecificQc } from 'selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
-import LinkButton from './LinkButton'
 import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
+import { Link } from 'react-router-dom'
 
-interface Props {
-  classes: any
-}
-
-function QcHeader(props: Props) {
+function QcHeader() {
   const id = useIdFromParams()
   const qc = useAppSelector((state) => getSpecificQc(state, id))
   const path = useLocation().pathname
@@ -26,7 +20,6 @@ function QcHeader(props: Props) {
     return <GenericHeader />
   }
 
-  const { classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/qcs/${id}`
@@ -40,18 +33,18 @@ function QcHeader(props: Props) {
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit">
           {editing && 'Editing '}
           {qc.name}
         </Typography>
 
         {canIEdit && (
-          <LinkButton to={editButtonPath} color="inherit">
+          <Button component={Link} to={editButtonPath} color="inherit">
             {editing ? 'Done' : 'Edit'}
-          </LinkButton>
+          </Button>
         )}
 
-        <div className={classes.tabs} />
+        <div style={{ flex: 1 }} />
 
         <CharacterMenu id={qc.id} characterType="qc" header />
       </Toolbar>
@@ -59,4 +52,4 @@ function QcHeader(props: Props) {
   )
 }
 
-export default withStyles(styles)(QcHeader)
+export default QcHeader

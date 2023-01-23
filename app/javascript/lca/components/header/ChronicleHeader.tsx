@@ -1,31 +1,23 @@
-import { useLocation } from 'react-router'
-import { Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
-import { Hidden, Tab, Tabs, Toolbar, Typography } from '@mui/material'
-import withStyles from '@mui/styles/withStyles'
+import { Tab, Tabs, Toolbar, Typography, useMediaQuery } from '@mui/material'
 
 import { getSpecificChronicle } from 'selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
 import { useAppSelector, useIdFromParams } from 'hooks'
 
-interface Props {
-  classes: any
-}
+const LinkTab = (props) => <Tab {...props} component={Link} />
 
-const LinkTab = (props) => <Tab {...props} component={Link as any} />
-
-function ChronicleHeader(props: Props) {
+function ChronicleHeader() {
   const id = useIdFromParams()
   const chronicle = useAppSelector((state) => getSpecificChronicle(state, id))
   const path = useLocation().pathname
+  const smDown = useMediaQuery((theme) => theme.breakpoints.down('sm'))
 
   if (chronicle == null || chronicle.name == null) {
     return <GenericHeader />
   }
-
-  const { classes } = props
 
   const tabBasePath = `/chronicles/${chronicle.id}`
 
@@ -37,7 +29,7 @@ function ChronicleHeader(props: Props) {
   }
 
   const tabs = (
-    <Tabs className={classes.tabs} value={tabValue} centered>
+    <Tabs sx={{ flex: 1 }} value={tabValue} centered>
       <LinkTab label="Characters" to={tabBasePath} />
       <LinkTab label="Combat" to={tabBasePath + '/combat'} />
       <LinkTab label="Details" to={tabBasePath + '/details'} />
@@ -49,16 +41,16 @@ function ChronicleHeader(props: Props) {
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit">
           {chronicle.name}
         </Typography>
 
-        <Hidden smDown>{tabs}</Hidden>
+        {!smDown && tabs}
       </Toolbar>
 
-      <Hidden smUp>{tabs}</Hidden>
+      {smDown && tabs}
     </>
   )
 }
 
-export default withStyles(styles)(ChronicleHeader)
+export default ChronicleHeader

@@ -1,20 +1,14 @@
-import { useLocation } from 'react-router'
+import { Link, useLocation } from 'react-router-dom'
 
-import { Toolbar, Typography } from '@mui/material'
-import withStyles from '@mui/styles/withStyles'
+import { Button, Toolbar, Typography } from '@mui/material'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
 import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
-import LinkButton from './LinkButton'
 import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
 
-interface Props {
-  classes: any
-}
-function BattlegroupHeader(props: Props) {
+function BattlegroupHeader() {
   const id = useIdFromParams()
   const battlegroup = useAppSelector((state) =>
     getSpecificBattlegroup(state, id),
@@ -27,7 +21,6 @@ function BattlegroupHeader(props: Props) {
     return <GenericHeader />
   }
 
-  const { classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/battlegroups/${id}`
@@ -41,21 +34,23 @@ function BattlegroupHeader(props: Props) {
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit">
           {editing && 'Editing '}
           {battlegroup.name}
         </Typography>
 
         {canIEdit && (
-          <LinkButton to={editButtonPath} color="inherit">
+          <Button component={Link} to={editButtonPath} color="inherit">
             {editing ? 'Done' : 'Edit'}
-          </LinkButton>
+          </Button>
         )}
-        <div className={classes.tabs} />
+
+        <div style={{ flex: 1 }} />
+
         <CharacterMenu id={battlegroup.id} characterType="battlegroup" header />
       </Toolbar>
     </>
   )
 }
 
-export default withStyles(styles)(BattlegroupHeader)
+export default BattlegroupHeader

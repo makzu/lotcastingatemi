@@ -1,11 +1,10 @@
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-import { Toolbar, Typography } from '@mui/material'
+import { Button, Toolbar, Typography } from '@mui/material'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import LinkButton from './LinkButton'
 import { canIEditCharacter, getSpecificCharacter } from 'ducks/selectors'
 import { useAppSelector, useIdFromParams } from 'hooks'
 
@@ -45,13 +44,14 @@ function CharacterHeader() {
       </Typography>
 
       {canIEdit && (
-        <LinkButton
+        <Button
+          component={Link}
           color="inherit"
           id="edit-character-button"
           to={editButtonPath}
         >
           {editing ? 'Done' : 'Edit'}
-        </LinkButton>
+        </Button>
       )}
 
       <div style={{ flex: 1 }} />

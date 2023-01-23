@@ -4,15 +4,11 @@ import { AnyAction } from 'redux'
 export const SWITCH_THEME = 'lca/app/SWITCH_THEME'
 
 const defaultState = {
-  drawerOpen: false,
-  theme: localStorage.theme || 'light',
   loading: false,
   error: false,
   errorMessage: '',
 }
 export type AppState = {
-  drawerOpen: boolean
-  theme: 'dark' | 'light'
   loading: boolean
   error: boolean
   errorMessage: string
@@ -43,7 +39,7 @@ export default function AppReducer(
     }
   }
   if (action.error) {
-    return { ...state, error: true, errorMessageAction: action.payload }
+    return { ...state, error: true }
   }
 
   const act = action.type.split('/')
@@ -73,22 +69,8 @@ export default function AppReducer(
     }
   }
 
-  switch (action.type) {
-    case SWITCH_THEME:
-      return {
-        ...state,
-        theme: action.theme,
-      }
-
-    default:
-      return state
-  }
+  return state
 }
-
-export const switchTheme = (theme: string) => ({
-  type: SWITCH_THEME,
-  theme: theme,
-})
 
 export const parseError = (action: AnyAction): string => {
   if (action.payload === undefined || action.payload.response === undefined) {

@@ -1,11 +1,8 @@
-import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import { compose } from 'recompose'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchCharacterIfNecessary } from 'ducks/entities/character'
-import { useAppDispatch, useIdFromParams, useLazyFetch } from 'hooks'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { useAppDispatch, useIdFromParams } from 'hooks'
 import CharacterSheet from '../characters/CharacterSheet'
 import CharmFullPage from '../characters/charms/'
 import BioPage from './Bio'
@@ -15,10 +12,8 @@ import SorceryPage from './Sorcery'
 
 const characterSheetWrapper = () => {
   const id = useIdFromParams()
-  // tslint:disable:react-hooks-nesting
   const dispatch = useAppDispatch()
-  const fetch = dispatch(fetchCharacterIfNecessary)
-  useLazyFetch(id, fetch)
+  dispatch(fetchCharacterIfNecessary(id))
 
   return (
     <Switch>
@@ -44,7 +39,4 @@ const characterSheetWrapper = () => {
   )
 }
 
-export default compose<Props, RouteProps>(
-  connect(null, { fetch: fetchCharacterIfNecessary }),
-  ProtectedComponent,
-)(characterSheetWrapper)
+export default ProtectedComponent(characterSheetWrapper)

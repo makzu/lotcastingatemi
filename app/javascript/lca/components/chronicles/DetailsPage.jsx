@@ -18,6 +18,7 @@ import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateChronicle } from 'ducks/actions.js'
 import {
   getSpecificChronicle,
@@ -159,7 +160,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.chronicleId
+  const id = ownProps.params.id
 
   return {
     id,
@@ -172,5 +173,6 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
+  withRouter,
   connect(mapStateToProps, { updateChronicle }),
 )(ChronicleDetailsPage)

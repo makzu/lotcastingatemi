@@ -340,7 +340,7 @@ class BattlegroupEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.params.battlegroupId
+  const id = ownProps.params.id
   const battlegroup = getSpecificBattlegroup(state, id)
   const showPublicCheckbox = canIDeleteBattlegroup(state, id)
 

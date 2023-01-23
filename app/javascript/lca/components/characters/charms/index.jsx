@@ -15,6 +15,7 @@ import CharacterLoadError from '../../CharacterSheet/CharacterLoadError'
 
 import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import {
   getSpecificCharacter,
   getNativeCharmsForCharacter,
@@ -287,7 +288,7 @@ class CharmFullPage extends Component<Props, State> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.characterId
+  const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
 
   let nativeCharms = []
@@ -315,5 +316,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(connect(mapStateToProps)(CharmFullPage)),
+  withRouter(withStyles(styles)(connect(mapStateToProps)(CharmFullPage))),
 )

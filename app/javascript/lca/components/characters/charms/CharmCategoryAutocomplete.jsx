@@ -5,7 +5,6 @@ import { compose } from 'recompose'
 
 import classNames from 'classnames'
 import withStyles from '@mui/styles/withStyles'
-import { emphasize } from '@mui/material'
 import Chip from '@mui/material/Chip'
 import MenuItem from '@mui/material/MenuItem'
 import NoSsr from '@mui/material/NoSsr'
@@ -152,12 +151,12 @@ const styles = (theme) => ({
     },
   },
   chipFocused: {
-    backgroundColor: emphasize(
-      theme.palette.mode === 'light'
-        ? theme.palette.grey[300]
-        : theme.palette.grey[700],
-      0.08,
-    ),
+    //   backgroundColor: emphasize(
+    //     theme.palette.mode === 'light'
+    //       ? theme.palette.grey[300]
+    //       : theme.palette.grey[700],
+    //     0.08,
+    //   ),
   },
   noOptionsMessage: {
     padding: theme.spacing(1, 2),

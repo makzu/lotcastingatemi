@@ -16,6 +16,7 @@ import OutOfCombatCard from './OutOfCombatCard.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { nextRound, endCombat } from 'ducks/events'
 import {
   getSpecificChronicle,
@@ -145,7 +146,7 @@ class CombatDashboard extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.chronicleId
+  const id = ownProps.params.id
 
   return {
     id: id,
@@ -161,5 +162,6 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
+  withRouter,
   connect(mapStateToProps, { nextRound, endCombat }),
 )(CombatDashboard)

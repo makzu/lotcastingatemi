@@ -19,6 +19,7 @@ import DocumentTitle from 'components/generic/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import {
   getSpecificChronicle,
@@ -193,7 +194,7 @@ class ChronicleDashboard extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.chronicleId
+  const id = ownProps.params.id
 
   return {
     id: id,
@@ -208,7 +209,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
-    ChronicleDashboard,
+  withRouter(
+    connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
+      ChronicleDashboard,
+    ),
   ),
 )

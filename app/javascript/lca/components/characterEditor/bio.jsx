@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
+import React, { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
@@ -15,6 +15,7 @@ import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions.js'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { showLunarTraits } from 'utils/calculated'
@@ -190,10 +191,11 @@ class BioEditor extends Component<Props> {
 }
 
 const mapStateToProps = (state, props) => ({
-  character: getSpecificCharacter(state, props.match.params.characterId),
+  character: getSpecificCharacter(state, props.params.id),
 })
 
 export default compose(
   ProtectedComponent,
+  withRouter,
   connect(mapStateToProps, { updateCharacter }),
 )(BioEditor)

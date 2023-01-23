@@ -20,6 +20,7 @@ import DocumentTitle from 'components/generic/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateMerit, createMerit, destroyMerit } from 'ducks/actions.js'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
 import commonStyles from 'styles'
@@ -145,7 +146,7 @@ class MeritEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps: ExposedProps) {
-  const id = ownProps.match.params.characterId
+  const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
   let merits = []
 
@@ -159,6 +160,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 const enhance: Enhancer<Props, ExposedProps> = compose(
+  withRouter,
   connect(mapStateToProps, { updateMerit, destroyMerit, createMerit }),
   withStyles(styles),
   ProtectedComponent,

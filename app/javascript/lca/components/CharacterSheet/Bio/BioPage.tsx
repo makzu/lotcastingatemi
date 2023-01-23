@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import { Grid, Typography } from '@mui/material'
-import { Theme } from '@mui/styles'
 
 import { WithStyles } from '@mui/styles'
 import createStyles from '@mui/styles/createStyles'
@@ -12,15 +11,14 @@ import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks/index.js'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { Character, XpLogEntry } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
-import { useDocumentTitle } from 'hooks'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     // ...sharedStyles(theme),
     portrait: {
@@ -45,7 +43,9 @@ interface Props extends WithStyles<typeof styles> {
   character: Character
 }
 
-const BioFullPage = ({ character, classes }: Props) => {
+const BioFullPage = ({ classes }: Props) => {
+  const id = useIdFromParams()
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
   useDocumentTitle(`${character?.name} Bio | Lot-Casting Atemi`)
 
   /* Escape hatch */
@@ -159,12 +159,7 @@ const BioFullPage = ({ character, classes }: Props) => {
   )
 }
 
-const mapStateToProps = (state: State, { match }: RouteProps) => ({
-  character: getSpecificCharacter(state, parseInt(match.params.id, 10)),
-})
-
 export default compose<Props, RouteProps>(
   ProtectedComponent,
   withStyles(styles),
-  connect(mapStateToProps),
 )(BioFullPage)

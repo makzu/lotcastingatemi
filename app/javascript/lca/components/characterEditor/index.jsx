@@ -28,6 +28,7 @@ import WillpowerEditor from './editors/willpowerEditor.jsx'
 import WeaponEditor from './weapons/'
 import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions.js'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { getPoolsAndRatings, getPenalties } from 'selectors'
@@ -222,7 +223,7 @@ class CharacterEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, props) {
-  const id = props.match.params.characterId
+  const id = props.params.id
   const character = getSpecificCharacter(state, id)
   let pools, penalties
 
@@ -239,5 +240,5 @@ function mapStateToProps(state, props) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps, { updateCharacter })(CharacterEditor),
+  withRouter(connect(mapStateToProps, { updateCharacter })(CharacterEditor)),
 )

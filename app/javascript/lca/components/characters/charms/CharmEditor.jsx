@@ -18,6 +18,7 @@ import DocumentTitle from 'components/generic/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import {
   updateCharm,
   createCharm,
@@ -522,7 +523,7 @@ class CharmEditor extends Component<Props, State> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.characterId
+  const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
 
   let nativeCharms = []
@@ -553,14 +554,16 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(
-    connect(mapStateToProps, {
-      createCharm,
-      updateCharm,
-      destroyCharm,
-      createSpell,
-      updateSpell,
-      destroySpell,
-    })(CharmEditor),
+  withRouter(
+    withStyles(styles)(
+      connect(mapStateToProps, {
+        createCharm,
+        updateCharm,
+        destroyCharm,
+        createSpell,
+        updateSpell,
+        destroySpell,
+      })(CharmEditor),
+    ),
   ),
 )

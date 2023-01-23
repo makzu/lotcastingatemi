@@ -428,7 +428,7 @@ class QcSheet extends Component<Props> {
 }
 
 function mapStateToProps(state, props) {
-  const id = props.params.qcId
+  const id = props.params.id
   const qc = getSpecificQc(state, id)
 
   let qc_attacks = []

@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@mui/material'
@@ -7,16 +6,15 @@ import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import BattlegroupCreatePopup from 'components/battlegroups/battlegroupCreatePopup.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks'
 import { getMyBattlegroups, updateBattlegroup } from 'ducks/entities'
-import { useDocumentTitle } from 'hooks'
+import { useAppSelector, useAppDispatch, useDocumentTitle } from 'hooks'
 
 const SortableItem = SortableElement(({ children }) => children)
 
 const BattlegroupList = () => {
   useDocumentTitle('Battlegroups | Lot-Casting Atemi')
-  const battlegroups = useSelector((state: State) => getMyBattlegroups(state))
-  const dispatch = useDispatch()
+  const battlegroups = useAppSelector((state) => getMyBattlegroups(state))
+  const dispatch = useAppDispatch()
 
   const chars = battlegroups.map((c, i) => (
     <SortableItem key={c.id} index={i} collection="battlegroups">

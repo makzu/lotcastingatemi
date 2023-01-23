@@ -290,7 +290,7 @@ class BattlegroupSheet extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.params.bgId
+  const id = ownProps.params.id
   const battlegroup = getSpecificBattlegroup(state, id)
 
   let qc_attacks = []

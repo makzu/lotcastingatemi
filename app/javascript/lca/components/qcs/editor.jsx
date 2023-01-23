@@ -37,7 +37,7 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  match: { params: { qcId: number } },
+  match: { params: { id: number } },
 }
 type Props = ExposedProps & {
   qc: fullQc,
@@ -450,7 +450,7 @@ class QcEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps: ExposedProps) {
-  const id = ownProps.params.qcId
+  const id = ownProps.params.id
   const qc = getSpecificQc(state, id)
   const showPublicCheckbox = canIDeleteQc(state, id)
 

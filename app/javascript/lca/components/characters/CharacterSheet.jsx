@@ -26,6 +26,7 @@ import RatingLine from '../generic/ratingLine.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 
 import { getSpecificCharacter } from 'ducks/selectors'
 import { getWeaponsForCharacter } from 'ducks/entities/weapon'
@@ -234,7 +235,7 @@ export class CharacterSheet extends Component<Props> {
 }
 
 function mapStateToProps(state, props) {
-  const id = props.match.params.characterId
+  const id = props.params.id
   const character = getSpecificCharacter(state, id)
   let weapons = []
   let merits = []
@@ -258,4 +259,6 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default ProtectedComponent(connect(mapStateToProps)(CharacterSheet))
+export default ProtectedComponent(
+  withRouter(connect(mapStateToProps)(CharacterSheet)),
+)

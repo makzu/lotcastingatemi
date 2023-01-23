@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Button, Grid } from '@mui/material'
 
 import DivWithFilterDrawer from 'components/shared/DivWithFilterDrawer'
+import withRouter from 'containers/withRouter'
 import { State } from 'ducks'
 import {
   getNativeCharmsForCharacter,
@@ -49,9 +50,9 @@ const CharmPage = (props: StateProps) => {
 }
 
 const mapState = (state: State, props: RouteProps) => {
-  const id = parseInt(props.match.params.id, 10)
+  const id = parseInt(props.params.id, 10)
 
   return { id, name: (getSpecificCharacter(state, id) || { name: null }).name }
 }
 
-export default connect(mapState)(CharmPage)
+export default withRouter(connect(mapState)(CharmPage))

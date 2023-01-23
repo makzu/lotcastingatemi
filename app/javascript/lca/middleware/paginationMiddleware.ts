@@ -1,15 +1,15 @@
 import { Middleware } from 'redux'
 
-import { State } from 'ducks'
 import {
   fetchAllCharacters,
   fetchAllQcs,
   fetchAllBattlegroups,
 } from 'ducks/entities'
 import { crudAction } from 'ducks/entities/_lib'
+import { RootState } from 'store'
 
 // Detects incomplete paginated requests and requests the next page
-const pagyMiddleware: Middleware<object, State> =
+const pagyMiddleware: Middleware<object, RootState> =
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (store) => (next) => (action) => {
     const page = parseInt(action?.meta?.page)

@@ -1,17 +1,14 @@
-import { useDispatch } from 'react-redux'
-
+import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
 import {
   ThemeProvider,
   Theme,
   StyledEngineProvider,
   createTheme,
 } from '@mui/material/styles'
-import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
-// import { dark, light } from '@mui/material/styles/createPalette'
 
-import { switchTheme } from 'ducks/app'
+import { switchTheme } from 'features/themeSlice'
 import { ReactChildren, useEffect } from 'react'
-import { useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from 'hooks'
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -40,11 +37,6 @@ const darkTheme = createTheme({
     primary: { main: green[900] },
     secondary: { main: teal[400] },
   },
-  // typography: {
-  //   caption: {
-  //     color: dark.text.secondary,
-  //   },
-  // },
 })
 
 const lightTheme = createTheme({
@@ -54,24 +46,23 @@ const lightTheme = createTheme({
     primary: { main: green[800] },
     secondary: { main: lightgreen[400] },
   },
-  // typography: {
-  //   caption: {
-  //     color: light.text.secondary,
-  //   },
-  // },
 })
 
 const ThemeContainer = ({ children }: { children: ReactChildren }) => {
-  const dispatch = useDispatch()
-  const theme = useAppSelector((state) => state.app.theme)
-  const change = dispatch(switchTheme)
+  const dispatch = useAppDispatch()
+  const theme = useAppSelector((state) => state.theme)
 
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key !== 'theme') {
         return
       }
-      change(e.newValue)
+      if (
+        e.newValue !== theme &&
+        (e.newValue === 'light' || e.newValue === 'dark')
+      ) {
+        dispatch(switchTheme(e.newValue))
+      }
     }
     window.addEventListener('storage', handleStorageChange)
 

@@ -13,6 +13,8 @@
     "lib": ["es7", "dom"],    
     // "noImplicitAny": true,
     "noImplicitThis": true,
+    "noUnusedLocals": false, // eslint already warns us
+    "noUnusedParameters": false, // eslint already warns us
     "strictNullChecks": true,
     "module": "es6",
     "moduleResolution": "node",

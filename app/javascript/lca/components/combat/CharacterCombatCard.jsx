@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import withStyles from '@mui/styles/withStyles'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Whatshot from '@mui/icons-material/Whatshot'
@@ -15,16 +14,11 @@ import SpendableBlock from '../generic/SpendableBlock.jsx'
 import CombatControls from './CombatControls.jsx'
 import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
 import NotesPopup from 'components/characters/NotesPopup.jsx'
+import CardBase from 'components/shared/CardBase'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character, Enhancer } from 'utils/flow-types'
 
 const styles = (theme) => ({
-  root: {
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    height: '100%',
-    position: 'relative',
-  },
   nameRow: {
     display: 'flex',
   },
@@ -83,7 +77,7 @@ export function CharacterCard({
   classes,
 }: Props) {
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
@@ -162,7 +156,7 @@ export function CharacterCard({
       )}
 
       <RemoveFromCombatButton character={character} characterType="character" />
-    </Paper>
+    </CardBase>
   )
 }
 const mapStateToProps = (state, props: ExposedProps) => ({

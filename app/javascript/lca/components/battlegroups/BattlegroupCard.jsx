@@ -5,7 +5,7 @@ import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'recompose'
 
 import withStyles from '@mui/styles/withStyles'
-import { Paper, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
@@ -13,6 +13,7 @@ import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CharacterMenu from '../generic/CharacterMenu'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
+import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
 import { doIOwnBattlegroup } from 'selectors'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
@@ -24,12 +25,6 @@ const Handle = SortableHandle(() => (
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
-  root: {
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    height: '100%',
-    position: 'relative',
-  },
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
@@ -69,7 +64,7 @@ function BattlegroupCard(props: Props) {
   const { battlegroup, chronicle, st, isOwner, classes } = props
 
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       {((chronicle && st) || (!chronicle && isOwner)) && (
         <Typography
           component="div"
@@ -225,7 +220,7 @@ function BattlegroupCard(props: Props) {
           &nbsp;Onslaught -{battlegroup.onslaught}
         </Typography>
       )}
-    </Paper>
+    </CardBase>
   )
 }
 

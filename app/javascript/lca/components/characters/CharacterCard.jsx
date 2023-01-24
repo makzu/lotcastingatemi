@@ -5,7 +5,6 @@ import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'recompose'
 
 import withStyles from '@mui/styles/withStyles'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
@@ -16,6 +15,7 @@ import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterMenu from '../generic/CharacterMenu'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
+import CardBase from 'components/shared/CardBase'
 import {
   canIDeleteCharacter,
   getPenalties,
@@ -29,12 +29,6 @@ const Handle = SortableHandle(() => (
 ))
 
 const styles = (theme) => ({
-  root: {
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    height: '100%',
-    position: 'relative',
-  },
   nameRow: {
     display: 'flex',
   },
@@ -115,7 +109,7 @@ export function CharacterCard({
   classes,
 }: Props) {
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       {((chronicle && st) || (!chronicle && canDelete)) && (
         <Typography
           component="div"
@@ -228,7 +222,7 @@ export function CharacterCard({
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
-    </Paper>
+    </CardBase>
   )
 }
 

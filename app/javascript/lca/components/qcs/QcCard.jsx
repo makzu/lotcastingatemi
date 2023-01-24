@@ -5,7 +5,6 @@ import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'recompose'
 
 import withStyles from '@mui/styles/withStyles'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
@@ -14,6 +13,7 @@ import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CharacterMenu from '../generic/CharacterMenu'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
+import CardBase from 'components/shared/CardBase'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 
@@ -22,12 +22,6 @@ const Handle = SortableHandle(() => (
 ))
 
 const styles = (theme) => ({
-  root: {
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    height: '100%',
-    position: 'relative',
-  },
   nameRow: {
     display: 'flex',
   },
@@ -79,7 +73,7 @@ function QcCard(props: Props) {
   const { qc, chronicle, st, penalties, pools, isOwner, classes } = props
 
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       {((chronicle && st) || (!chronicle && isOwner)) && (
         <Typography
           component="div"
@@ -191,7 +185,7 @@ function QcCard(props: Props) {
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
-    </Paper>
+    </CardBase>
   )
 }
 

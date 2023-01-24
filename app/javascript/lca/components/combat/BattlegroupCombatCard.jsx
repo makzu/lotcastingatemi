@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom'
 
 import withStyles from '@mui/styles/withStyles'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
@@ -11,18 +10,13 @@ import BattlegroupHealthDisplay from '../battlegroups/BattlegroupHealthDisplay.j
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
+import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 import type { Battlegroup } from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
-  root: {
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    height: '100%',
-    position: 'relative',
-  },
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
@@ -59,7 +53,7 @@ type Props = {
 
 function BattlegroupCard({ battlegroup, classes }: Props) {
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
@@ -172,7 +166,7 @@ function BattlegroupCard({ battlegroup, classes }: Props) {
         character={battlegroup}
         characterType="battlegroup"
       />
-    </Paper>
+    </CardBase>
   )
 }
 

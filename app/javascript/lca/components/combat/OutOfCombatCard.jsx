@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import withStyles from '@mui/styles/withStyles'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 import JoinBattlePopup from './JoinBattlePopup.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
+import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
@@ -17,11 +17,6 @@ import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
-  root: {
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    height: '100%',
-  },
   nameWrap: {
     flex: 1,
   },
@@ -66,7 +61,7 @@ function OutOfCombatCard({
   classes,
 }: Props) {
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography variant="h6" className={classes.characterName}>
@@ -92,7 +87,7 @@ function OutOfCombatCard({
         />
         {canEdit && <JoinBattlePopup character={character} />}
       </div>
-    </Paper>
+    </CardBase>
   )
 }
 

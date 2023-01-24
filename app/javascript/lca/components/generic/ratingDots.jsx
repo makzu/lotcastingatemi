@@ -13,10 +13,10 @@ const dot = {
   marginLeft: '1px',
 }
 
-const styles = (theme) => ({
+const styles = () => ({
   emptyDot: {
     ...dot,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'transparent',
   },
   fullDot: {
     ...dot,

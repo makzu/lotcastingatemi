@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
 import { Button, Divider, Typography } from '@mui/material'
@@ -9,10 +8,10 @@ import WeaponEditorPopup from './WeaponEditorPopup'
 import WeaponRow from './WeaponRow'
 import BlockPaper from 'components/shared/BlockPaper'
 
-import { State } from 'ducks'
 import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
 import { Character } from 'types'
+import { useAppDispatch, useAppSelector } from 'hooks'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)
@@ -25,11 +24,11 @@ const WeaponEditor = (props: WeaponEditorProps) => {
   const [selectedWeaponId, setSelectedWeaponId] = useState<number | null>(null)
 
   const { character } = props
-  const weapons = useSelector((state: State) =>
+  const weapons = useAppSelector((state) =>
     getWeaponsForCharacter(state, character.id),
   )
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const onClickCreateWeapon = () => {
     dispatch(createWeapon(character.id))
   }

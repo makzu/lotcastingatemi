@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@mui/material'
@@ -7,16 +6,15 @@ import CharacterCard from 'components/characters/CharacterCard.jsx'
 import CharacterCreatePopup from 'components/characters/CharacterCreatePopup'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks'
 import { getMyCharacters, updateCharacter } from 'ducks/entities'
-import { useDocumentTitle } from 'hooks'
+import { useAppDispatch, useAppSelector, useDocumentTitle } from 'hooks'
 
 const SortableItem = SortableElement(({ children }) => children)
 
 const CharacterList = () => {
   useDocumentTitle('Characters | Lot-Casting Atemi')
-  const characters = useSelector((state: State) => getMyCharacters(state))
-  const dispatch = useDispatch()
+  const characters = useAppSelector((state) => getMyCharacters(state))
+  const dispatch = useAppDispatch()
 
   const chars = characters.map((c, i) => (
     <SortableItem key={c.id} index={i} collection="characters">

@@ -1,6 +1,5 @@
 import { deepEqual } from 'fast-equals'
 import { ChangeEvent, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import {
@@ -24,13 +23,11 @@ import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import WeightSelect from 'components/shared/selects/WeightSelect'
-import { State } from 'ducks'
-import { getSpecificWeapon, updateWeapon } from 'ducks/entities'
-import { Character } from 'types'
 import WeaponAbilitySelect from './WeaponAbilitySelect'
 import WeaponOverrides from './WeaponOverrides'
-
-const useStyles = makeStyles((theme: Theme) => ({}))
+import { getSpecificWeapon, updateWeapon } from 'ducks/entities'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { Character } from 'types'
 
 interface Props {
   character: Character
@@ -43,11 +40,9 @@ const WeaponEditorPopup = (props: Props) => {
   const setClosed = () => setId(null)
   const [advancedOpen, setAdvancedOpen] = useState(false)
 
-  const weapon = useSelector((state: State) =>
-    getSpecificWeapon(state, openWeapon),
-  )
+  const weapon = useAppSelector((state) => getSpecificWeapon(state, openWeapon))
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (deepEqual(weapon[name], value)) {
@@ -103,7 +98,10 @@ const WeaponEditorPopup = (props: Props) => {
         />
 
         <Typography>
-          <IconButton onClick={() => setAdvancedOpen(!advancedOpen)} size="large">
+          <IconButton
+            onClick={() => setAdvancedOpen(!advancedOpen)}
+            size="large"
+          >
             {advancedOpen ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
           Advanced

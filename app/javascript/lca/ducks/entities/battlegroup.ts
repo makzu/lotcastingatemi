@@ -1,8 +1,5 @@
 import { createSelector } from 'reselect'
 
-import { State } from 'ducks'
-import { sortOrderSort } from 'utils'
-import { callApi } from 'utils/api'
 import {
   createApiActions,
   createConditionalFetchAction,
@@ -11,6 +8,9 @@ import {
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
+import { RootState } from 'store'
+import { sortOrderSort } from 'utils'
+import { callApi } from 'utils/api'
 
 const BATTLEGROUP = 'battlegroup'
 
@@ -43,7 +43,7 @@ export const fetchBattlegroupIfNecessary = createConditionalFetchAction(
 )
 
 /* *** Selectors *** */
-const getBattlegroups = (state: State) => unwrapped(state).battlegroups
+const getBattlegroups = (state: RootState) => unwrapped(state).battlegroups
 
 export const getMyBattlegroups = createSelector(
   [getCurrentPlayer, getBattlegroups],
@@ -63,5 +63,5 @@ export const getMyBattlegroupsWithoutChronicles = createSelector(
   (battlegroups) => battlegroups.filter((c) => c.chronicle_id == null),
 )
 
-export const getSpecificBattlegroup = (state: State, id: number) =>
+export const getSpecificBattlegroup = (state: RootState, id: number) =>
   unwrapped(state).battlegroups[id]

@@ -1,9 +1,5 @@
-import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
-import { State } from 'ducks'
-import { sortOrderSort } from 'utils'
-import { callApi } from 'utils/api'
 import {
   createApiActions,
   createConditionalFetchAction,
@@ -12,6 +8,10 @@ import {
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
+import { useAppSelector } from 'hooks'
+import { RootState } from 'store'
+import { sortOrderSort } from 'utils'
+import { callApi } from 'utils/api'
 
 const CHARACTER = 'character'
 
@@ -45,7 +45,7 @@ export const fetchCharacterIfNecessary = createConditionalFetchAction(
 )
 
 /* *** Selectors *** */
-const getCharacters = (state: State) => unwrapped(state).characters
+const getCharacters = (state: RootState) => unwrapped(state).characters
 
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
@@ -65,11 +65,11 @@ export const getMyCharactersWithoutChronicles = createSelector(
   (characters) => characters.filter((c) => c.chronicle_id == null),
 )
 
-export const getSpecificCharacter = (state: State, id: number) =>
+export const getSpecificCharacter = (state: RootState, id: number) =>
   unwrapped(state).characters[id]
 
 export const useCharacterAttribute = (id: number, attribute: string) =>
-  useSelector((state: State) => {
+  useAppSelector((state) => {
     const character = getSpecificCharacter(state, id)
     return character != null ? character[attribute] : null
   })

@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import { Button, Grid, Typography } from '@mui/material'
-import { WithStyles } from '@mui/styles'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
+import { Button, Grid, Typography } from '@mui/material'
 
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import Checkbox from 'components/shared/inputs/Checkbox'
-import { State } from 'ducks'
 import { createSpell, destroySpell, updateSpell } from 'ducks/actions'
 import { getSpellsForQc } from 'ducks/selectors'
-import commonStyles from 'styles'
+import { useAppDispatch } from 'hooks'
+import { AppDispatch, RootState } from 'store'
 import { QC, Spell } from 'types'
 import QcSpellFields from './QcSpellFields'
 
@@ -21,7 +20,6 @@ interface StateProps {
   spells: Spell[]
 }
 interface DispatchProps {
-  create(): void
   destroy(id: number): void
   update(id: number, trait: any): void
 }
@@ -29,14 +27,13 @@ interface OuterProps {
   qc: QC
   changeQc(): void
 }
-interface Props
-  extends OuterProps,
-    StateProps,
-    DispatchProps,
-    WithStyles<typeof commonStyles> {}
+interface Props extends OuterProps, StateProps, DispatchProps {}
 
 const QcSpellEditor = (props: Props) => {
-  const { qc, classes, create, spells, update, destroy, changeQc } = props
+  const dispatch = useAppDispatch()
+  const create = () => dispatch(createSpell(qc.id, { parent: 'qc' }))
+
+  const { qc, spells, update, destroy, changeQc } = props
   const handleSort = () => undefined
 
   const spellList = spells.map((spell, i) => (
@@ -47,7 +44,6 @@ const QcSpellEditor = (props: Props) => {
           spell={spell}
           handleChange={update}
           handleDestroy={destroy}
-          classes={classes}
         />
       </Grid>
     </SortableItem>
@@ -67,15 +63,14 @@ const QcSpellEditor = (props: Props) => {
         &nbsp;&nbsp;
         {qc.is_sorcerer && (
           <Button onClick={create}>
-            Add Spell
-            <ContentAddCircle />
+            {' '}
+            Add Spell <ContentAddCircle />{' '}
           </Button>
         )}
       </Typography>
       {qc.is_sorcerer && (
         <SortableGridList
           items={spellList}
-          classes={classes}
           onSortEnd={handleSort}
           useDragHandle
           axis="x"
@@ -85,12 +80,11 @@ const QcSpellEditor = (props: Props) => {
   )
 }
 
-const mapState = (state: State, { qc }): StateProps => ({
+const mapState = (state: RootState, { qc }): StateProps => ({
   spells: getSpellsForQc(state, qc.id),
 })
 
-const mapDispatch = (dispatch, { qc }: OuterProps): DispatchProps => ({
-  create: () => dispatch(createSpell(qc.id, { parent: 'qc' })),
+const mapDispatch = (dispatch: AppDispatch, { qc }: OuterProps) => ({
   destroy: (id) => dispatch(destroySpell(id, qc.id, 'qc')),
   update: (id, trait) => dispatch(updateSpell(id, qc.id, trait, 'qc')),
 })

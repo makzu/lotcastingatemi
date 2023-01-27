@@ -1,35 +1,14 @@
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import { Grid, Typography } from '@mui/material'
-
-import { WithStyles } from '@mui/styles'
-import createStyles from '@mui/styles/createStyles'
-import withStyles from '@mui/styles/withStyles'
 
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { getSpecificCharacter } from 'ducks/selectors'
-import { Character, XpLogEntry } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
+import { XpLogEntry } from 'types'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
-import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
-
-const styles = () =>
-  createStyles({
-    // ...sharedStyles(theme),
-    portrait: {
-      display: 'block',
-      margin: 'auto',
-      maxWidth: '100%',
-    },
-    portraitWrap: {
-      textAlign: 'center',
-    },
-  })
 
 const xpTable = (log: XpLogEntry[]) =>
   log.map((l, i) => (
@@ -39,11 +18,7 @@ const xpTable = (log: XpLogEntry[]) =>
     </tr>
   ))
 
-interface Props extends WithStyles<typeof styles> {
-  character: Character
-}
-
-const BioFullPage = ({ classes }: Props) => {
+const BioFullPage = () => {
   const id = useIdFromParams()
   const character = useAppSelector((state) => getSpecificCharacter(state, id))
   useDocumentTitle(`${character?.name} Bio | Lot-Casting Atemi`)
@@ -96,7 +71,7 @@ const BioFullPage = ({ classes }: Props) => {
 
         <Grid item xs={12} md={6}>
           <BlockPaper>
-            <div className={classes.portraitWrap}>
+            <div style={{ textAlign: 'center' }}>
               {character.portrait_link ? (
                 <a
                   href={character.portrait_link}
@@ -105,7 +80,11 @@ const BioFullPage = ({ classes }: Props) => {
                 >
                   <img
                     src={character.portrait_link}
-                    className={classes.portrait}
+                    style={{
+                      display: 'block',
+                      margin: 'auto',
+                      maxWidth: '100%',
+                    }}
                   />
                 </a>
               ) : (
@@ -159,7 +138,4 @@ const BioFullPage = ({ classes }: Props) => {
   )
 }
 
-export default compose<Props, RouteProps>(
-  ProtectedComponent,
-  withStyles(styles),
-)(BioFullPage)
+export default ProtectedComponent(BioFullPage)

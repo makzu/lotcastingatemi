@@ -7,6 +7,8 @@ gem 'rails', '~> 6.1.0'
 # Webpacker allows React/Redux and friends to thrive:
 gem 'webpacker', '~> 5.4.0'
 
+gem 'vite_rails', '~> 3.0'
+
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.4'
 # Use Puma as the app server

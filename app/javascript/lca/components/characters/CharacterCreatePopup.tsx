@@ -1,21 +1,23 @@
-import * as React from 'react'
+import { ChangeEvent, Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  Switch,
+  TextField,
+  Typography,
+} from '@mui/material'
 
-import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect'
+import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
 import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
+import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -39,7 +41,7 @@ type State = {
   character: Object
 }
 
-class CharacterCreatePopup extends React.Component<Props, State> {
+class CharacterCreatePopup extends Component<Props, State> {
   state = initialState
 
   handleOpen = () => {
@@ -50,7 +52,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
     this.setState(initialState)
   }
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     let exaltType = {}
 

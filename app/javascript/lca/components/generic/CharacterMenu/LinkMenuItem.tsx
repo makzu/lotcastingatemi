@@ -5,7 +5,7 @@ import { MenuItem } from '@mui/material'
 
 const LcaLink = ({ to, ...props }: any) => <Link to={to} {...props} />
 const LinkMenuItem = (props: { to: string; children: React.ReactNode }) => (
-  <MenuItem button component={LcaLink} {...props} />
+  <MenuItem component={LcaLink} {...props} />
 )
 
 export default LinkMenuItem

@@ -1,12 +1,11 @@
 import { ListSubheader, MenuItem, TextField } from '@mui/material/'
-import { Theme } from '@mui/styles'
-import makeStyles from '@mui/styles/makeStyles'
 import { TextFieldProps } from '@mui/material/TextField'
+import makeStyles from '@mui/styles/makeStyles'
 
 import { Character, Weapon } from 'types'
 import * as calc from 'utils/calculated'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flex: 2,
     marginRight: theme.spacing(),

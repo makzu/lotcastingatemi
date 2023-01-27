@@ -56,7 +56,6 @@ export {
 } from './entities'
 
 export { logout } from './session'
-export { switchTheme } from './app'
 export { spendMotes, spendWillpower, takeDamage } from './events'
 
 import {

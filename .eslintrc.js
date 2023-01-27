@@ -8,10 +8,29 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:flowtype/recommended',
     'prettier',
+  ],
+  ignorePatterns: [
+    'postcss.config.js',
+    'config/**/*.js',
+    'coverage/**/*.js',
+    'flow-typed/**/*.js',
+    'public/**/*.js',
+  ],
+  overrides: [
+    {
+      files: ['**/*.ts', '**.*.tsx'],
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:flowtype/recommended',
+        'prettier',
+      ],
+      plugins: ['@typescript-eslint'],
+    },
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -22,7 +41,7 @@ module.exports = {
     },
     sourceType: 'module',
   },
-  plugins: ['cypress', 'react', 'flowtype', '@typescript-eslint'],
+  plugins: ['cypress', 'react', 'flowtype'],
   root: true,
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],

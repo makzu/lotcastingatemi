@@ -6,7 +6,6 @@ import { useAppDispatch, useIdFromParams } from 'hooks'
 import CharacterSheet from '../characters/CharacterSheet'
 import CharmFullPage from '../characters/charms/'
 import BioPage from './Bio'
-import CharmPage from './Charms'
 import MeritPage from './Merits'
 import SorceryPage from './Sorcery'
 

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { ListItemIcon, ListItemText, MenuItem } from '@mui/material/'
 import { GroupAdd } from '@mui/icons-material'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material/'
 
 import { State } from 'ducks'
 import { createBattlegroupFromQc } from 'ducks/actions.js'
@@ -19,7 +19,7 @@ interface InnerProps extends StateProps, DispatchProps, Props {}
 
 const BattlegroupFromQc = ({ canCreate, action, id }: InnerProps) =>
   canCreate ? (
-    <MenuItem button onClick={() => action(id)}>
+    <MenuItem onClick={() => action(id)}>
       <ListItemIcon>
         <GroupAdd />
       </ListItemIcon>

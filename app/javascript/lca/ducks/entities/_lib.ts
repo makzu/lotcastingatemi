@@ -1,13 +1,13 @@
-import { normalize, schema } from 'normalizr'
+import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
-
 import { Action } from 'redux'
 import { ActionFunctionAny, createAction } from 'redux-actions'
 
-import { State } from 'ducks'
 import * as schemas from './_schemas'
 import { EntityState } from './_types'
+import { RootState } from 'store'
+import { defaultState } from '.'
 
 export type characterTraitTypes =
   | 'charm'
@@ -58,9 +58,8 @@ export interface CrudActionGroup {
 }
 
 export const massagePayload =
-  (type: entityTypes | listTypes | string) =>
-    ({} = {}, {} = {}, res) =>
-      getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
+  (type: entityTypes | listTypes | string) => (_a: unknown, _b: unknown, res) =>
+    getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
 
 export const successMeta = (_: null, __: null, { headers }: Response) => ({
   page: headers.get('current-page'),
@@ -111,8 +110,7 @@ export const optimisticTypes = (
   }),
 ]
 
-const meta = (_: any, m: any) => m
-// tslint:disable object-literal-sort-keys
+const meta = (_: unknown, m) => m
 export const crudAction = (
   type: entityTypes,
   action: crudActions,
@@ -121,7 +119,6 @@ export const crudAction = (
   success: createAction(`${API}/${type}/${action}/${SUCCESS}`, null, meta),
   failure: createAction(`${API}/${type}/${action}/${FAILURE}`, null, meta),
 })
-// tslint:enable *
 
 export const reducerUpdateAction =
   (type: string) => (state: EntityState, action) => {
@@ -135,4 +132,5 @@ export const reducerUpdateAction =
   }
 
 /** Simply unwraps the entity portion of the state */
-export const unwrapped = (state: State): EntityState => state.entities.current
+export const unwrapped = (state: RootState): EntityState =>
+  state.entities.current || defaultState

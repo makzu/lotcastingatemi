@@ -3,8 +3,7 @@ import { ReactNode } from 'react'
 import Paper from '@mui/material/Paper'
 
 const style = {
-  paddingBottom: 2,
-  paddingTop: 2,
+  padding: 2,
   height: '100%',
   position: 'relative',
 }

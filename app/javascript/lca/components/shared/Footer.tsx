@@ -18,6 +18,7 @@ const Footer = ({ children }: { children?: ReactChildren }) => {
       <Divider variant="middle" />
 
       <Typography
+        component="div"
         sx={{
           '& a': {
             color: (theme) => theme.palette.text.secondary,

@@ -1,8 +1,7 @@
+import MoreVert from '@mui/icons-material/MoreVert'
 import { Divider, IconButton, Menu } from '@mui/material'
-import { Theme } from '@mui/styles'
 import { WithStyles } from '@mui/styles'
 import withStyles from '@mui/styles/withStyles'
-import MoreVert from '@mui/icons-material/MoreVert'
 
 import { useMenuLogic } from 'hooks'
 import { CharacterType } from './CharacterMenuItem'
@@ -17,7 +16,7 @@ import MenuRefresh from './MenuRefresh'
 import MenuRemoveFromChronicle from './MenuRemoveFromChronicle'
 
 // eslint-disable-next-line no-unused-vars
-const styles = (theme: Theme) => ({
+const styles = (theme) => ({
   headerWrapper: {},
   wrapper: {
     margin: '-0.75em -1em 0 1.5em',

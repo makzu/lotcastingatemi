@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 
+import Delete from '@mui/icons-material/Delete'
 import {
   Button,
   Dialog,
@@ -12,7 +13,6 @@ import {
   MenuItem,
   Typography,
 } from '@mui/material'
-import Delete from '@mui/icons-material/Delete'
 
 import { State } from 'ducks'
 import { destroy } from 'ducks/actions/ByType'
@@ -42,7 +42,7 @@ const MenuDelete = ({ canDelete, action, name }: InnerProps) => {
     <>
       <Divider />
 
-      <MenuItem button onClick={setOpen}>
+      <MenuItem onClick={setOpen}>
         <ListItemIcon>
           <Delete />
         </ListItemIcon>

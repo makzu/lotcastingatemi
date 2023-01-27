@@ -1,17 +1,12 @@
 import { connect } from 'react-redux'
 
 import {
-  Divider,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-} from '@mui/material'
-import {
   Bookmark,
   BookmarkBorder,
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material'
+import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
 import { State } from 'ducks'
 import { update } from 'ducks/actions/ByType'
@@ -35,14 +30,14 @@ const CardMenuPin = ({ isPinned, isHidden, canEdit, pin, hide }: InnerProps) =>
   canEdit ? (
     <>
       <Divider />
-      <MenuItem button onClick={() => pin(!isPinned)}>
+      <MenuItem onClick={() => pin(!isPinned)}>
         <ListItemIcon>
           {isPinned ? <Bookmark /> : <BookmarkBorder />}
         </ListItemIcon>
         <ListItemText inset primary={isPinned ? 'Unpin' : 'Pin to Menu'} />
       </MenuItem>
 
-      <MenuItem button onClick={() => hide(!isHidden)}>
+      <MenuItem onClick={() => hide(!isHidden)}>
         <ListItemIcon>
           {isHidden ? <Visibility /> : <VisibilityOff />}
         </ListItemIcon>

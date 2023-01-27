@@ -1,16 +1,16 @@
-import { ListItemIcon, ListItemText } from '@mui/material'
 import { Description } from '@mui/icons-material'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
+import { Link } from 'react-router-dom'
 import { MenuItemProps as Props } from './CharacterMenuItem'
-import LinkMenuItem from './LinkMenuItem'
 
 const CardMenuLinks = ({ id, characterType }: Props) => (
-  <LinkMenuItem to={`/${characterType}s/${id}`}>
+  <MenuItem component={Link} to={`/${characterType}s/${id}`}>
     <ListItemIcon>
       <Description />
     </ListItemIcon>
     <ListItemText primary="Full Sheet" />
-  </LinkMenuItem>
+  </MenuItem>
 )
 
 export default CardMenuLinks

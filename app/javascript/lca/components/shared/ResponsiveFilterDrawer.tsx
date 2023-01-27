@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { ReactNode } from 'react'
 
 import { Drawer, Theme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   open: boolean
   onClose(): void
 }

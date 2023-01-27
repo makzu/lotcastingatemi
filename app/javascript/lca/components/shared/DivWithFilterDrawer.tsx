@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { ReactNode } from 'react'
 
 import { Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const DivWithFilterDrawer = ({ children }: { children: React.ReactNode }) => {
+const DivWithFilterDrawer = ({ children }: { children: ReactNode }) => {
   const classes = useStyles()
   return <div className={classes.root}>{children}</div>
 }

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
@@ -36,7 +36,7 @@ const LcaHeader = () => {
         ml: { lg: `${drawerWidth}px` },
       }}
     >
-      <React.Suspense fallback={<div />}>
+      <Suspense fallback={<div />}>
         <Switch>
           <Route path="/chronicles/:id">
             <ChronicleHeader />
@@ -57,7 +57,7 @@ const LcaHeader = () => {
             <GenericHeader />
           </Route>
         </Switch>
-      </React.Suspense>
+      </Suspense>
     </AppBar>
   )
 }

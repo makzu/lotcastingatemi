@@ -14,7 +14,7 @@ import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
 import RemovePlayerPopup from './removePlayerPopup.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import DocumentTitle from 'components/generic/DocumentTitle'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import TextField from 'components/generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'

@@ -2,7 +2,7 @@
 import { Redirect, Route, useParams } from 'react-router'
 
 import BlockPaper from 'components/shared/BlockPaper'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 
 import IndexDoc from 'Docs/README.md'
 import WeaponsDoc from 'Docs/weapons.md'

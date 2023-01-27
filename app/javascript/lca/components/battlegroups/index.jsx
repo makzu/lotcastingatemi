@@ -3,26 +3,26 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
 
-import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
-import sharedStyles from 'styles/'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
 import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
-import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
-import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import { getAttacksForBattlegroup, getSpecificBattlegroup } from 'selectors'
+import sharedStyles from 'styles/'
 import {
-  prettyDrillRating,
   bgAttackPool,
   bgDamage,
   bgDefenseBonus,
   bgSoak,
+  prettyDrillRating,
 } from 'utils/calculated'
+import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

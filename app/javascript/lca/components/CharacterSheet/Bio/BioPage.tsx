@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { getSpecificCharacter } from 'ducks/selectors'

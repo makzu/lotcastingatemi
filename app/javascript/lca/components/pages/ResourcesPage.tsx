@@ -1,5 +1,5 @@
 import BlockPaper from 'components/shared/BlockPaper'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import ResourcesText from 'Docs/resources.md'
 
 const ResourcesPage = () => (

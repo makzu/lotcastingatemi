@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import RatingLine from 'components/generic/ratingLine.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 

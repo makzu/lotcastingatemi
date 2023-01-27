@@ -10,7 +10,7 @@ import Collapse from '@mui/material/Collapse'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import styles from './CharmStyles.js'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import { checkVisible } from 'utils'
 import type { Spell } from 'utils/flow-types'
 

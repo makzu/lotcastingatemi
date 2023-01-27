@@ -7,3 +7,17 @@
 .capitalize {
   text-transform: capitalize;
 }
+
+.markdown {
+  & a {
+    color: unset;
+  }
+
+  & img {
+    max-width: 100%;
+  }
+
+  & code {
+    opacity: 0.7;
+  }
+}

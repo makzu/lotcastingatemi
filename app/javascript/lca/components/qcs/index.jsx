@@ -3,32 +3,31 @@ import { Component, Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
-import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
 
 import BlockPaper from 'components/shared/BlockPaper'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import SpendableBlock from '../generic/SpendableBlock.jsx'
 import MarkdownDisplay, {
   LinkRenderer,
-} from 'components/generic/MarkdownDisplay.jsx'
-import sharedStyles from 'styles/'
-
+} from 'components/shared/MarkdownDisplay'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
 import { fetchQcIfNecessary } from 'ducks/entities/qc'
 import { getSpellsForQc } from 'ducks/selectors'
 import {
   canIEditQc,
-  getSpecificQc,
   getAttacksForQc,
-  getMeritsForQc,
   getCharmsForQc,
+  getMeritsForQc,
   getPenaltiesForQc,
   getPoolsAndRatingsForQc,
+  getSpecificQc,
 } from 'selectors'
+import sharedStyles from 'styles/'
 import { prettyIntimacyRating, qcPool } from 'utils/calculated'
-import type { fullQc, QcMerit, QcAttack, QcCharm } from 'utils/flow-types'
+import type { fullQc, QcAttack, QcCharm, QcMerit } from 'utils/flow-types'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

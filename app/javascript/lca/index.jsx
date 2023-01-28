@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-undef */
-require('typeface-roboto')
+import 'typeface-roboto'
 
 import React from 'react'
 import ReactDOM from 'react-dom'

@@ -1,6 +1,7 @@
 {
   "all": {
-    "sourceCodeDir": "app/javascript",
+    "sourceCodeDir": "app/javascript/lca",
+    "entrypointsDir": "../entrypoints",
     "watchAdditionalPaths": []
   },
   "development": {

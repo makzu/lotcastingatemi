@@ -1,4 +1,5 @@
 version: '3.7'
+name: lca
 services:
   postgres:
     image: postgres
@@ -16,28 +17,37 @@ services:
     command: bundle exec rails s --pid /tmp/server.pid -b 0.0.0.0 -p 3000
     depends_on:
       - postgres
-      - webpack
+      - vite
     volumes:
       - .:/myapp
+      - node_modules:/myapp/node_modules
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
     ports:
       - 3000:3000
     environment:
       DATABASE_URL: postgres
-      WEBPACKER_DEV_SERVER_HOST: webpack
+      VITE_HOST: vite
     stdin_open: true
     tty: true
 
   # Runs the webpack dev server
-  webpack:
+  vite:
     build: .
     volumes:
       - .:/myapp
-    command: ./bin/webpack-dev-server
+      - node_modules:/myapp/node_modules
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
+    command: ./bin/vite dev
     ports:
       - 3035:3035
 
 # Make a volume, because windows screws up the the permissions
 # so postgres has a fit.
 volumes:
+  node_modules:
   postgres:
     driver: local
+  vite_dev:
+  vite_test:

@@ -4,9 +4,8 @@ source 'https://rubygems.org'
 
 # Rails 5.1+ for Webpacker
 gem 'rails', '~> 6.1'
-# Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '~> 5.4'
 
+# Vite_Rails for more modern frontend bundling
 gem 'vite_rails', '~> 3.0'
 
 # Use postgres as the database for Active Record

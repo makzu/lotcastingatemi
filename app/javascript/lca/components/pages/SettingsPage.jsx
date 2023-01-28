@@ -18,7 +18,8 @@ import BlockPaper from 'components/shared/BlockPaper'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 
-import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions.js'
+import { updatePlayer, destroyAccount } from 'ducks/actions.js'
+import { switchTheme } from 'features/themeSlice'
 import { getSpecificPlayer } from 'selectors'
 import type { Player, Enhancer } from 'utils/flow-types'
 
@@ -134,7 +135,7 @@ class SettingsPage extends Component<Props, { open: boolean }> {
 const mapStateToProps = (state) => {
   const id = state.session.id
   const player = getSpecificPlayer(state, id)
-  const { theme } = state.app
+  const { theme } = state
   return { player, theme }
 }
 

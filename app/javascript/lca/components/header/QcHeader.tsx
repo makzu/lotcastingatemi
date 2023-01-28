@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router'
+import { useLocation, Link } from 'react-router-dom'
 
 import { Button, Toolbar, Typography } from '@mui/material'
 
@@ -7,7 +7,6 @@ import { canIEditQc, getSpecificQc } from 'selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
-import { Link } from 'react-router-dom'
 
 function QcHeader() {
   const id = useIdFromParams()

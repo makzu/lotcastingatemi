@@ -5,10 +5,10 @@ import { Redirect, Route } from 'react-router'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 
-import IndexDoc from 'Docs/README.md'
-import WeaponsDoc from 'Docs/weapons.md'
-import MeritsDoc from 'Docs/merits.md'
-import FormsDoc from 'Docs/forms.md'
+import IndexDoc from 'Docs/README.md?raw'
+import WeaponsDoc from 'Docs/weapons.md?raw'
+import MeritsDoc from 'Docs/merits.md?raw'
+import FormsDoc from 'Docs/forms.md?raw'
 
 type Props = {
   match: { params: { doc: string } },

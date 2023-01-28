@@ -102,11 +102,12 @@
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/eslint-parser": "^7.19.1",
+    "@bunchtogether/vite-plugin-flow": "^1.0.2",
     "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/rtk-codemods": "0.0.3",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
-    "@vitejs/plugin-react-swc": "^3.0.1",
+    "@vitejs/plugin-react": "^3.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^25.2.6",
     "cypress": "^4.3.0",
@@ -129,6 +130,7 @@
     "vite": "^4.0.0",
     "vite-plugin-rails": "^0.1.0",
     "vite-plugin-ruby": "^3.1.2",
+    "vite-tsconfig-paths": "^4.0.5",
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-dev-server": "^3.0.0"
   },

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import {
@@ -30,11 +30,13 @@ const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
 const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   const [isOpen, setOpen] = useDialogLogic()
-  const [timer, setTimer] = React.useState(null)
-  React.useEffect(() => {
+
+  let timer: ReturnType<typeof setTimeout>
+
+  useEffect(() => {
     if (!(authenticated || isLoading || isPublic)) {
-      setTimer(setTimeout(() => setOpen(), 500))
-    } else {
+      timer = setTimeout(() => setOpen(), 500)
+    } else if (timer != undefined) {
       clearTimeout(timer)
     }
     return () => {

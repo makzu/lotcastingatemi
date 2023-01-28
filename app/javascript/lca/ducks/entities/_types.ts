@@ -3,12 +3,12 @@ import {
   Character,
   Charm,
   Merit,
+  Player,
   Poison,
   QC,
   Spell,
   Weapon,
 } from 'types'
-import { Player } from './player'
 
 export interface EntityState {
   currentPlayer: number

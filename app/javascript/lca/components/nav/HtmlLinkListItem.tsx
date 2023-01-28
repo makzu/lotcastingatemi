@@ -1,9 +1,8 @@
-import ListItem, { ListItemProps } from '@mui/material/ListItem'
+import { Link, ListItemButton, ListItemButtonProps } from '@mui/material'
 
-const HtmlLinkListItem = (props: ListItemProps & { href: string }) => (
-  <ListItem
-    button
-    component="a"
+const HtmlLinkListItem = (props: ListItemButtonProps<'a'>) => (
+  <ListItemButton
+    component={Link}
     target="_blank"
     rel="noopener noreferrer"
     {...props}

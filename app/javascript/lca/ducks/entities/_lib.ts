@@ -133,4 +133,4 @@ export const reducerUpdateAction =
 
 /** Simply unwraps the entity portion of the state */
 export const unwrapped = (state: RootState): EntityState =>
-  state.entities.current || defaultState
+  state.entities.current

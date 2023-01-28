@@ -24,7 +24,7 @@ const EntityList = ({ label, count, link, children, onClick }: Props) => {
 
   return (
     <>
-      <NavLinkListItem to={link} onClick={onClick}>
+      <NavLinkListItem to={link} onClick={onClick} end>
         <ListItemText primary={label} secondary={`${count} total`} />
 
         {showExpando && (

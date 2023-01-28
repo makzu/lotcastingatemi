@@ -39,7 +39,7 @@ const CharacterEditorNav = () => {
       </LinkListItem>
 
       <Collapse in={isOpen}>
-        <NavLinkListItem to={`${prefix}`}>
+        <NavLinkListItem to={`${prefix}`} end>
           <ListItemText primary="Overview" />
         </NavLinkListItem>
 

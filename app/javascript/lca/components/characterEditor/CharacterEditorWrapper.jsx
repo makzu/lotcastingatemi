@@ -1,22 +1,16 @@
 // @flow
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
-import BioEditor from './bio'
 import CharacterEditor from './'
+import BioEditor from './bio'
 import MeritEditor from './merits/MeritEditor'
 
 const CharacterEditorWrapper = () => (
-  <Switch>
-    <Route path="/characters/:id/edit/merits">
-      <MeritEditor />
-    </Route>
-    <Route path="/characters/:id/edit/bio">
-      <BioEditor />
-    </Route>
-    <Route path="/characters/:id/edit">
-      <CharacterEditor />
-    </Route>
-  </Switch>
+  <Routes>
+    <Route path="merits" element={<MeritEditor />} />
+    <Route path="bio" element={<BioEditor />} />
+    <Route path="*" element={<CharacterEditor />} />
+  </Routes>
 )
 
 export default CharacterEditorWrapper

@@ -1,7 +1,7 @@
 // @flow
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import ChronicleDashboard from 'components/chronicles/index.jsx'
 import ChronicleDetailsPage from 'components/chronicles/DetailsPage.jsx'
@@ -34,17 +34,11 @@ class ChronicleWrapper extends Component<Props> {
 
   render() {
     return (
-      <Switch>
-        <Route path="/chronicles/:id/combat">
-          <CombatDashboard />
-        </Route>
-        <Route path="/chronicles/:id/details">
-          <ChronicleDetailsPage />
-        </Route>
-        <Route path="/chronicles/:id">
-          <ChronicleDashboard />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="combat" element={<CombatDashboard />} />
+        <Route          path="details"          element={<ChronicleDetailsPage />}        />
+        <Route path="*" element={<ChronicleDashboard />} />
+      </Routes>
     )
   }
 }

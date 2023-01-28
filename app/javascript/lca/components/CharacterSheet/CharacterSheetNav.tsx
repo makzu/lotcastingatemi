@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { ExpandLess, ExpandMore } from '@mui/icons-material/'
 import {
   Collapse,
   Divider,
@@ -7,7 +8,6 @@ import {
   ListItemSecondaryAction,
   ListItemText,
 } from '@mui/material/'
-import { ExpandLess, ExpandMore } from '@mui/icons-material/'
 
 import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import { useCharacterAttribute } from 'ducks/entities'
@@ -39,7 +39,7 @@ const SideNavigation = () => {
       </LinkListItem>
 
       <Collapse in={isOpen}>
-        <NavLinkListItem to={`${prefix}`}>
+        <NavLinkListItem to={`${prefix}`} end>
           <ListItemText primary="Overview" />
         </NavLinkListItem>
 

@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { AppBar, Toolbar, Typography } from '@mui/material'
 
@@ -37,26 +37,13 @@ const LcaHeader = () => {
       }}
     >
       <Suspense fallback={<div />}>
-        <Switch>
-          <Route path="/chronicles/:id">
-            <ChronicleHeader />
-          </Route>
-          <Route path="/characters/:id">
-            <CharacterHeader />
-          </Route>
-          <Route path="/qcs/:id">
-            <QcHeader />
-          </Route>
-          <Route path="/battlegroups/:id">
-            <BattlegroupHeader />
-          </Route>
-          <Route path="/characters">
-            <GenericHeader />
-          </Route>
-          <Route>
-            <GenericHeader />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/chronicles/:id/*" element={<ChronicleHeader />} />
+          <Route path="/characters/:id/*" element={<CharacterHeader />} />
+          <Route path="/qcs/:id/*" element={<QcHeader />} />
+          <Route path="/battlegroups/:id/*" element={<BattlegroupHeader />} />
+          <Route path="*" element={<GenericHeader />} />
+        </Routes>
       </Suspense>
     </AppBar>
   )

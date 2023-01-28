@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import Typography from '@mui/material/Typography'
 
@@ -13,7 +13,7 @@ type Props = {
 
 const GoodbyePage = ({ shouldRedirect }: Props) => {
   // Do not show this page unless the account really is deleted
-  if (shouldRedirect) return <Redirect to="/" />
+  if (shouldRedirect) return <Navigate to="/" />
 
   return (
     <BlockPaper>

@@ -1,3 +1,5 @@
+import { ReactNode, useEffect } from 'react'
+
 import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
 import {
   ThemeProvider,
@@ -7,11 +9,10 @@ import {
 } from '@mui/material/styles'
 
 import { switchTheme } from 'features/themeSlice'
-import { ReactChildren, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'hooks'
 
 declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface, no-unused-vars
   interface DefaultTheme extends Theme {}
 }
 
@@ -48,7 +49,7 @@ const lightTheme = createTheme({
   },
 })
 
-const ThemeContainer = ({ children }: { children: ReactChildren }) => {
+const ThemeContainer = ({ children }: { children: ReactNode }) => {
   const dispatch = useAppDispatch()
   const theme = useAppSelector((state) => state.theme)
 

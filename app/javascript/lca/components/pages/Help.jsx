@@ -1,17 +1,20 @@
 // @flow
-import { Redirect, Route, useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 
 import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 
+import FormsDoc from 'Docs/forms.md'
+import MeritsDoc from 'Docs/merits.md'
 import IndexDoc from 'Docs/README.md'
 import WeaponsDoc from 'Docs/weapons.md'
-import MeritsDoc from 'Docs/merits.md'
-import FormsDoc from 'Docs/forms.md'
 
 const HelpPage = () => {
-  const { doc } = useParams()
+  let { doc } = useParams()
   let md
+
+  doc = doc?.replace('.md', '')
+
   switch (doc) {
     case 'merits':
       md = MeritsDoc
@@ -27,15 +30,9 @@ const HelpPage = () => {
   }
 
   return (
-    <>
-      <Route exact path="/help">
-        {() => <Redirect to="/help/index" />}
-      </Route>
-
-      <BlockPaper>
-        <MarkdownDisplay source={md} />
-      </BlockPaper>
-    </>
+    <BlockPaper>
+      <MarkdownDisplay source={md} />
+    </BlockPaper>
   )
 }
 

@@ -16,7 +16,7 @@
     "noUnusedLocals": false, // eslint already warns us
     "noUnusedParameters": false, // eslint already warns us
     "strictNullChecks": true,
-    "module": "es6",
+    "module": "ES2020",
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es6",

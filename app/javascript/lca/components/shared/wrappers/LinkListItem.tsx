@@ -1,17 +1,9 @@
-import * as React from 'react'
-import { Link, LinkProps } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import { ListItem, Omit } from '@mui/material'
+import { ListItemButton, ListItemButtonProps } from '@mui/material'
 
-const LcaLink = React.forwardRef<
-  HTMLAnchorElement,
-  Omit<LinkProps, 'innerRef'>
->((props, ref) => <Link innerRef={ref as any} {...props} />)
-
-const LinkListItem = (props: {
-  to: string
-  children: React.ReactNode
-  onClick?(): void
-}) => <ListItem button component={LcaLink} {...props} />
+const LinkListItem = (props: ListItemButtonProps<typeof Link>) => (
+  <ListItemButton component={Link} {...props} />
+)
 
 export default LinkListItem

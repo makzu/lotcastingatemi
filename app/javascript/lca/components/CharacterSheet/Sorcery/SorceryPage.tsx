@@ -1,25 +1,15 @@
-import { connect } from 'react-redux'
-
 import { Grid, Typography } from '@mui/material'
 
-import BlockPaper from 'components/shared/BlockPaper'
-import { State } from 'ducks'
-import { getSpecificCharacter, getSpellsForCharacter } from 'ducks/entities'
-import { Character, Spell } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { useCharacterAttribute } from 'ducks/entities'
+import { useDocumentTitle, useIdFromParams } from 'hooks'
 import CharacterLoadError from '../CharacterLoadError'
 import SpellList from './SpellList'
-import { useDocumentTitle } from 'hooks'
 
-interface StateProps {
-  id: number
-  name: string
-}
-
-// interface Props extends StateProps {}
-
-const SorceryPage = ({ id, name }: StateProps) => {
+const SorceryPage = () => {
+  const id = useIdFromParams()
+  const name = useCharacterAttribute(id, 'name')
   useDocumentTitle(`${name} Sorcery | Lot-Casting Atemi`)
+
   /* Escape hatch */
   if (name == null) {
     return <CharacterLoadError />
@@ -33,17 +23,9 @@ const SorceryPage = ({ id, name }: StateProps) => {
         </Grid>
       </Grid>
 
-      <SpellList characterId={id} />
+      <SpellList />
     </>
   )
 }
 
-const mapState = (state: State, { match }: RouteProps): StateProps => {
-  const id = parseInt(match.params.id, 10)
-  return {
-    id,
-    name: (getSpecificCharacter(state, id) || ({} as any)).name,
-  }
-}
-
-export default connect(mapState)(SorceryPage)
+export default SorceryPage

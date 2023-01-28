@@ -1,11 +1,10 @@
-import { Location } from 'history'
-import { Route, Switch as RouterSwitch } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import {
   ButtonProps,
   Divider,
   List,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Theme,
@@ -40,19 +39,20 @@ const CsrfInput = () => {
 
 const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
-const LoginForm = ({ text, action }) => {
+interface LoginFormProps {
+  text: string
+  action: HTMLFormElement['action']
+}
+const LoginForm = ({ text, action }: LoginFormProps) => {
   return (
     <form action={action} method="POST">
       <CsrfInput />
-      <ListItem button component={SubmitButton}>
+      <ListItemButton component={SubmitButton}>
         <ListItemText primary={text} />
-      </ListItem>
+      </ListItemButton>
     </form>
   )
 }
-
-const isOnHelpPage = (_: {}, location: Location) =>
-  location.pathname.startsWith('/help')
 
 const isDeveloperMode = () => location.hostname === 'localhost'
 
@@ -82,14 +82,13 @@ const NavPanel = (props: Props) => {
           </NavLinkListItem>
         )}
 
-        <RouterSwitch>
-          <Route path="/characters/:id/edit">
-            <CharacterEditorNav />
-          </Route>
-          <Route path="/characters/:id">
-            <CharacterSheetNav />
-          </Route>
-        </RouterSwitch>
+        <Routes>
+          <Route
+            path="/characters/:id/edit/*"
+            element={<CharacterEditorNav />}
+          />
+          <Route path="/characters/:id/*" element={<CharacterSheetNav />} />
+        </Routes>
 
         <Divider />
 
@@ -126,11 +125,7 @@ const NavPanel = (props: Props) => {
           <ListItemText primary="Home" />
         </NavLinkListItem>
 
-        <NavLinkListItem
-          to="/help"
-          onClick={closeCheck}
-          isActive={isOnHelpPage}
-        >
+        <NavLinkListItem to="/help" onClick={closeCheck}>
           <ListItemText primary="Help" />
         </NavLinkListItem>
 

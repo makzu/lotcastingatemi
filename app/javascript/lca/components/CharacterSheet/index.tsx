@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchCharacterIfNecessary } from 'ducks/entities/character'
@@ -15,26 +15,14 @@ const characterSheetWrapper = () => {
   dispatch(fetchCharacterIfNecessary(id))
 
   return (
-    <Switch>
-      <Route path="/characters/:id/merits">
-        <MeritPage />
-      </Route>
-      <Route path="/characters/:id/charms">
-        <CharmFullPage />
-      </Route>
-      {/* <Route path="/characters/:id/charmss">
-        <CharmPage />
-      </Route> */}
-      <Route path="/characters/:id/sorcery">
-        <SorceryPage />
-      </Route>
-      <Route path="/characters/:id/bio">
-        <BioPage />
-      </Route>
-      <Route path="/characters/:id">
-        <CharacterSheet />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route path="merits" element={<MeritPage />} />
+      <Route path="charms" element={<CharmFullPage />} />
+      {/* <Route path="charmss" element={ <CharmPage /> } /> */}
+      <Route path="sorcery" element={<SorceryPage />} />
+      <Route path="bio" element={<BioPage />} />
+      <Route path="/" element={<CharacterSheet />} />
+    </Routes>
   )
 }
 

@@ -239,6 +239,8 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default ProtectedComponent(
-  withRouter(connect(mapStateToProps, { updateCharacter })(CharacterEditor)),
+export default withRouter(
+  ProtectedComponent(
+    connect(mapStateToProps, { updateCharacter })(CharacterEditor),
+  ),
 )

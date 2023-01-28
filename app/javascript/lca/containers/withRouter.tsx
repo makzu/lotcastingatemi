@@ -1,5 +1,6 @@
 /* https://whereisthemouse.com/how-to-use-withrouter-hoc-in-react-router-v6-with-typescript */
 
+import { ComponentType } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 
 /** @deprecated Use `React Router hooks` instead */
@@ -10,7 +11,7 @@ export interface WithRouterProps {
 
 /** @deprecated Use `React Router hooks` instead */
 export const withRouter = <Props extends WithRouterProps>(
-  Component: React.ComponentType<Props>,
+  Component: ComponentType<Props>,
 ) => {
   const ComponentWithRouterProps = (
     props: Omit<Props, keyof WithRouterProps>,

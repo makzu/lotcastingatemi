@@ -1,13 +1,11 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'store'
 
-import useDialogLogic from './UseDialogLogic'
-import useLazyFetch from './UseLazyFetch'
-import useMenuLogic from './UseMenuLogic'
-
-export { useDialogLogic, useMenuLogic, useLazyFetch }
-export * from './UseDocumentTitle'
-export * from './UseIdFromParams'
+export { default as useDialogLogic } from './UseDialogLogic'
+export { default as useLazyFetch } from './UseLazyFetch'
+export { default as useMenuLogic } from './UseMenuLogic'
+export { default as useDocumentTitle } from './UseDocumentTitle'
+export { default as useIdFromParams } from './UseIdFromParams'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

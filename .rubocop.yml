@@ -4,7 +4,7 @@ require:
   - rubocop-rspec
 inherit_from: .rubocop_todo.yml
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.2
   NewCops: enable
   Include:
     - app/**/*.rb
@@ -13,21 +13,13 @@ AllCops:
     - config.ru
     - lib/**/*.rake
   Exclude:
+    - bin/*
     - db/schema.rb
     - db/migrate/**/*.rb
     - node_modules/**/*
-    - bin/bundle
-    - bin/rake
-    - bin/rails
-    - bin/setup
-    - bin/spring
-    - bin/update
-    - bin/webpack
-    - bin/webpack-dev-server
-    - bin/webpack-watcher
-    - bin/yarn
     - spec/spec_helper.rb
     - test/test_helper.rb
+    - vendor/**/*
 
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent

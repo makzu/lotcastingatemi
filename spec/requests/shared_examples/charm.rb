@@ -12,7 +12,7 @@ RSpec.shared_examples 'charm' do |trait_type, parent_type|
 
         expect do
           patch "/api/v1/#{parent_type}/#{charm.character.id}/#{charm.entity_type}s/#{charm.id}",
-                params:  params,
+                params:,
                 headers: authenticated_header(charm.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 
@@ -23,7 +23,7 @@ RSpec.shared_examples 'charm' do |trait_type, parent_type|
       it 'works for categories' do
         params = { charm.entity_type => { categories: %w[attack supercool] }}
         patch "/api/v1/#{parent_type}/#{charm.character_id}/#{charm.entity_type}s/#{charm.id}",
-              params:  params,
+              params:,
               headers: authenticated_header(charm.player)
 
         expect(charm.class.find(charm.id).categories).to eq %w[attack supercool]

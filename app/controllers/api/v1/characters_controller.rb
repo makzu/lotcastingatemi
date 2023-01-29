@@ -70,7 +70,7 @@ module Api
         else
           render json: @new_character.errors.details, status: :bad_request
         end
-      rescue => e
+      rescue StandardError => e
         render json: { error: e.message }, status: :bad_request
       end
 

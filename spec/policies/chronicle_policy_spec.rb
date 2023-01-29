@@ -7,7 +7,7 @@ RSpec.describe ChroniclePolicy do
 
   let(:st) { create(:player) }
   let(:other_player) { create(:player) }
-  let(:chronicle) { create(:chronicle, st: st, players: [other_player]) }
+  let(:chronicle) { create(:chronicle, st:, players: [other_player]) }
 
   context 'when the ST' do
     let(:player) { st }

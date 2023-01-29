@@ -15,7 +15,7 @@ RSpec.describe 'Charms::QcCharms' do
         params = { qc_charm: { keywords: %w[simple perilous] }}
         expect do
           patch "/api/v1/qcs/#{charm.qc_id}/qc_charms/#{charm.id}",
-                params:  params,
+                params:,
                 headers: authenticated_header(charm.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 

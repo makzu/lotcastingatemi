@@ -15,7 +15,7 @@ RSpec.describe 'QcAttacks' do
         params = { qc_attack: { tags: %w[lethal melee balanced] }}
         expect do
           patch "/api/v1/qcs/#{attack.qc_attackable_id}/qc_attacks/#{attack.id}",
-                params:  params,
+                params:,
                 headers: authenticated_header(attack.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 

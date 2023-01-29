@@ -8,7 +8,7 @@ RSpec.describe PlayerPolicy do
   let(:st) { create(:player) }
   let(:owner) { create(:player) }
   let(:other_player) { create(:player) }
-  let(:chronicle) { create(:chronicle, st: st, players: [other_player]) }
+  let(:chronicle) { create(:chronicle, st:, players: [other_player]) }
 
   context 'when the owner of the character' do
     let(:player) { owner }

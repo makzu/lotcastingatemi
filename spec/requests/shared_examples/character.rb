@@ -15,7 +15,7 @@ RSpec.shared_examples 'character' do |character_type, parent|
 
         expect do
           post "/api/v1/#{trait.entity_type}s/",
-               params:  params,
+               params:,
                headers: authenticated_header(trait.player)
         end.to have_enqueued_job(CreateBroadcastJob)
           .and change { trait.class.count }.by 1
@@ -30,7 +30,7 @@ RSpec.shared_examples 'character' do |character_type, parent|
         it 'succeeds for ties' do
           params = { trait.entity_type => { ties: [{ subject: 'Vincible Sword Princess (respect)', rating: 3, hidden: false }] }}
           patch "/api/v1/#{trait.entity_type}s/#{trait.id}",
-                params:  params,
+                params:,
                 headers: authenticated_header(trait.player),
                 as:      :json
 
@@ -41,7 +41,7 @@ RSpec.shared_examples 'character' do |character_type, parent|
         it 'succeeds for principles' do
           params = { trait.entity_type => { principles: [{ subject: "I don't have any bugs", rating: 2 }] }}
           patch "/api/v1/#{trait.entity_type}s/#{trait.id}",
-                params:  params,
+                params:,
                 headers: authenticated_header(trait.player),
                 as:      :json
 

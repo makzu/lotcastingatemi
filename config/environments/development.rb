@@ -79,7 +79,7 @@ Rails.application.configure do
 
   config.debug_exception_response_format = :api
 
-  Rack::MiniProfiler.config.position = 'bottom-left' if Rack.const_defined? 'MiniProfiler'
+  Rack::MiniProfiler.config.position = 'bottom-left' if Rack.const_defined? :MiniProfiler
 
   # Bullet gem for snifing out n+1 queries
   config.after_initialize do

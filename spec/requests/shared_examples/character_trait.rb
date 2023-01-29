@@ -13,7 +13,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
         params = { trait.entity_type => attributes_for(trait_type) }
         expect do
           post "/api/v1/#{parent_type}/#{trait.character.id}/#{trait.entity_type}s/",
-               params:  params,
+               params:,
                headers: authenticated_header(trait.player)
         end.to have_enqueued_job(CreateBroadcastJob)
           .and change { trait.class.count }.by(1)

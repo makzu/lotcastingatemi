@@ -8,9 +8,9 @@ RSpec.describe CharacterTraitPolicy do
   let(:st) { create(:player) }
   let(:owner) { create(:player) }
   let(:other_player) { create(:player) }
-  let(:chronicle) { create(:chronicle, st: st, players: [other_player]) }
-  let(:character) { create(:character, chronicle: chronicle, player: owner) }
-  let(:trait) { create(:weapon, character: character) }
+  let(:chronicle) { create(:chronicle, st:, players: [other_player]) }
+  let(:character) { create(:character, chronicle:, player: owner) }
+  let(:trait) { create(:weapon, character:) }
 
   context 'when the owner of the character' do
     let(:player) { owner }

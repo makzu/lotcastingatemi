@@ -23,6 +23,7 @@ jobs:
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
     env:
+      CI: true
       RAILS_ENV: test
       DATABASE_URL: 'postgres://rails:password@localhost:5432/rails_test'
     steps:

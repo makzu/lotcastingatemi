@@ -4,12 +4,12 @@
 #
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
-name: "Ruby on Rails CI"
+name: 'Ruby on Rails CI'
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -17,14 +17,14 @@ jobs:
       postgres:
         image: postgres:11-alpine
         ports:
-          - "5432:5432"
+          - '5432:5432'
         env:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      DATABASE_URL: 'postgres://rails:password@localhost:5432/rails_test'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -52,7 +52,9 @@ jobs:
       # Add or replace any other lints here
       - name: Security audit dependencies
         run: bundle exec bundle audit --update
-      #- name: Security audit application code
-      #  run: bundle exec brakekman -q -w2
+      - name: Security audit Ruby and Rubygems
+        run: bundle exec ruby-audit
+      - name: Security audit application code
+       run: bundle exec brakeman -q -w2
       - name: Lint Ruby files
-        run: bundle exec --parallel
+        run: bundle exec rubocop --parallel

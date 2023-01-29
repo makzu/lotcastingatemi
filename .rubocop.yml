@@ -4,22 +4,29 @@ require:
   - rubocop-rspec
 inherit_from: .rubocop_todo.yml
 AllCops:
-  TargetRubyVersion: 3.2
   NewCops: enable
   Include:
     - app/**/*.rb
+    - bin/*
+    - config/**/*.rb
     - spec/**/*.rb
     - Rakefile
     - config.ru
     - lib/**/*.rake
   Exclude:
-    - bin/*
     - db/schema.rb
     - db/migrate/**/*.rb
     - node_modules/**/*
     - spec/spec_helper.rb
     - test/test_helper.rb
+    - tmp/**/*
     - vendor/**/*
+
+Bundler/GemVersion:
+  Enabled: true
+
+# Layout/ClassStructure:
+#   Enabled: true
 
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
@@ -51,15 +58,32 @@ Naming/FileName:
   Exclude:
     - 'Gemfile'
 
+Naming/InclusiveLanguage:
+  Enabled: true
+
 Style/Documentation:
   Exclude:
     - app/controllers/**/*
     - app/mailers/**/*
     - config/**/*
 
+Style/MixinUsage:
+  Exclude:
+    - bin/*
+
 Rails/Output:
   Exclude:
     - 'db/seeds.rb'
 
+Rails/UnknownEnv:
+  Environments:
+    - 'cypress'
+    - 'development'
+    - 'production'
+    - 'test'
+
 RSpec/ExampleLength:
   Max: 15
+
+Style/RequireOrder:
+  Enabled: true

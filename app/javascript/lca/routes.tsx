@@ -44,7 +44,7 @@ const CharacterSheetWrap = lazy(
 const CharacterEditor = lazy(
   () =>
     import(
-      'components/characterEditor/CharacterEditorWrapper.jsx' /* webpackChunkName: 'CharacterEditor' */
+      'components/characterEditor/CharacterEditorWrapper' /* webpackChunkName: 'CharacterEditor' */
     ),
 )
 

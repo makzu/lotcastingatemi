@@ -1,4 +1,3 @@
-// @flow
 import { Route, Routes } from 'react-router-dom'
 
 import CharacterEditor from './'

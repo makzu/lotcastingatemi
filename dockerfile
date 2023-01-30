@@ -19,7 +19,7 @@ RUN corepack enable
 RUN gem update --system
 
 WORKDIR /myapp
-COPY Gemfile Gemfile.lock package.json yarn.lock /myapp/
+COPY .ruby-version Gemfile Gemfile.lock package.json yarn.lock /myapp/
 RUN bundle install
 RUN yarn install --check-files
 EXPOSE 3000

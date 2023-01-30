@@ -41,7 +41,7 @@ module AttributeExalt
     end
 
     def caste_and_favored_attributes_dont_overlap
-      return if (caste_attributes & favored_attributes).empty?
+      return unless caste_attributes.intersect?(favored_attributes)
 
       errors.add(:caste_attributes, 'cannot have the same attribute as both caste and favored')
       errors.add(:favored_attributes, 'cannot have the same attribute as both caste and favored')

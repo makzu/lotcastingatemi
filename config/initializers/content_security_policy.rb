@@ -9,7 +9,7 @@
 Rails.application.config.content_security_policy do |policy|
   policy.connect_src :self, :https, "http://localhost:3035", "ws://localhost:3035" if Rails.env.development?
     # Allow @vite/client to hot reload changes in development
-#    policy.connect_src *policy.connect_src, "ws://#{ ViteRuby.config.host_with_port }" if Rails.env.development?
+   policy.connect_src *policy.connect_src, "ws://#{ ViteRuby.config.host_with_port }" if Rails.env.development?
 
 #   policy.default_src :self, :https
 #   policy.font_src    :self, :https, :data
@@ -27,8 +27,8 @@ Rails.application.config.content_security_policy do |policy|
 #    policy.style_src *policy.style_src, :unsafe_inline if Rails.env.development?
 
 
-#   # Specify URI for violation reports
-#   # policy.report_uri "/csp-violation-report-endpoint"
+  #   # Specify URI for violation reports
+  #   # policy.report_uri "/csp-violation-report-endpoint"
 end
 
 # If you are using UJS then enable automatic nonce generation

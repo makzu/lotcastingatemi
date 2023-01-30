@@ -56,7 +56,12 @@ module Api
 
       def change_type
         authorize @character, :update?
-        @new_type = params[:type].constantize
+        @new_type = Character.character_types.find do |type|
+          type == params[:type]
+        end
+        raise 'Unavailable type' if @new_type.nil?
+
+        @new_type = @new_type.constantize
 
         @new_character = @new_type.from_character!(@character)
 
@@ -65,7 +70,7 @@ module Api
         else
           render json: @new_character.errors.details, status: :bad_request
         end
-      rescue NameError => e
+      rescue StandardError => e
         render json: { error: e.message }, status: :bad_request
       end
 

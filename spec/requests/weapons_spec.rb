@@ -15,7 +15,7 @@ RSpec.describe 'Weapons' do
         params = { weapon: { tags: %w[lethal melee balanced] }}
         expect do
           patch "/api/v1/characters/#{weapon.character_id}/weapons/#{weapon.id}",
-                params:  params,
+                params:,
                 headers: authenticated_header(weapon.player)
         end.to have_enqueued_job(UpdateBroadcastJob)
 

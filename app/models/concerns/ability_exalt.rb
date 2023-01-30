@@ -41,7 +41,7 @@ module AbilityExalt
     end
 
     def caste_and_favored_abilities_dont_overlap
-      return if (caste_abilities & favored_abilities).empty?
+      return unless caste_abilities.intersect?(favored_abilities)
 
       errors.add(:caste_abilities, 'cannot have the same ability as both caste and favored')
       errors.add(:favored_abilities, 'cannot have the same ability as both caste and favored')

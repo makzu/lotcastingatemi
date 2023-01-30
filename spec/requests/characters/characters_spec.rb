@@ -45,7 +45,7 @@ RSpec.describe 'Characters' do
         it "works for #{type}" do
           post "/api/v1/characters/#{character.id}/change_type",
                headers: authenticated_header(character.player),
-               params:  { type: type }
+               params:  { type: }
 
           expect(response).to have_http_status :ok
         end

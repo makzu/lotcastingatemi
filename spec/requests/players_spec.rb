@@ -10,9 +10,9 @@ RSpec.describe 'Players' do
       it 'works and also deletes chronicles/characters/etc' do
         player = create(:player, identities: [create(:identity)])
         create(:chronicle, st: player)
-        create(:character, player: player)
-        create(:qc, player: player)
-        create(:battlegroup, player: player)
+        create(:character, player:)
+        create(:qc, player:)
+        create(:battlegroup, player:)
 
         expect do
           delete '/api/v1/players',

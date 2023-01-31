@@ -1,13 +1,15 @@
-// @flow
 import pool from '../_pool.js'
 import { penaltyObject } from '../../index.js'
-import type { Character } from 'utils/flow-types'
+import type { Character } from 'types'
 
-export function disengage(
+/** Withdraw pool, described in the core book, page 199 */
+export function withdraw(
   character: Character,
-  merits: Array<string>,
-  penalties: Object,
-  excellencyAbils: Array<string>
+  merits: string[],
+  // TODO: replace this any with a real type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  penalties: any,
+  excellencyAbils: string[]
 ) {
   let bonus = []
   if (merits.some(m => m.startsWith('fleet of foot')))
@@ -21,11 +23,11 @@ export function disengage(
     'Disengage',
     character,
     'dexterity',
-    'dodge',
+    'athletics',
     bonus,
     penaltyObject(penalties, { useMobility: true }),
     excellencyAbils
   )
 }
 
-export default disengage
+export default withdraw

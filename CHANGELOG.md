@@ -2,7 +2,7 @@
 
 ###### _Unreleased_
 
-- Nothing (yet)
+- The Withdraw pool is now correctly calculated using Athletics instead of dodge (Thanks, Kirisu🌹)
 
 ## v96
 

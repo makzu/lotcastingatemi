@@ -1,4 +1,4 @@
-import * as deepmerge from 'deepmerge'
+import deepmerge from 'deepmerge'
 import { getJSON } from 'redux-api-middleware'
 
 import { AApiAction, callApi } from 'utils/api'

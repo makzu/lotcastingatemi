@@ -17,7 +17,6 @@ import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
-// eslint-disable-next-line no-unused-vars
 const styles = (theme) => ({
   wrap: {
     display: 'flex',

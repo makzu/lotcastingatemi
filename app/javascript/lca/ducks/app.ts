@@ -74,7 +74,7 @@ export default function AppReducer(
 
 export const parseError = (action: AnyAction): string => {
   if (action.payload === undefined || action.payload.response === undefined) {
-    console.log('Easily Overlooked Error Method', action) // eslint-disable-line no-console
+    console.error('Easily Overlooked Error Method', action)
     return 'Error'
   }
   if (action.payload.status === 500)

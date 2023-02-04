@@ -50,11 +50,8 @@ export const sortOrderSort = (a: Sortable, b: Sortable) =>
 export const chronicleSortOrderSort = (a: ChSortable, b: ChSortable) =>
   a.chronicle_sort_order - b.chronicle_sort_order
 
-interface ObjectWithKeys {
-  [key: string]: unknown
-}
 export const isUnequalByKeys = (
-  obj1: ObjectWithKeys,
-  obj2: ObjectWithKeys,
+  obj1: Record<string, unknown>,
+  obj2: Record<string, unknown>,
   keys: string[],
 ) => keys.some((key) => !deepEqual(obj1[key], obj2[key]))

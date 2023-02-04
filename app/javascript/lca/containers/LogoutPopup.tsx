@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import {
@@ -11,9 +11,9 @@ import {
   Typography,
 } from '@mui/material'
 
-import { State } from 'ducks'
 import { useDialogLogic } from 'hooks'
 import { isPublicCharacterPage } from 'selectors'
+import { RootState } from 'store'
 
 interface StateProps {
   authenticated: boolean
@@ -31,18 +31,18 @@ const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   const [isOpen, setOpen] = useDialogLogic()
 
-  let timer: ReturnType<typeof setTimeout>
-
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | undefined = undefined
+
     if (!(authenticated || isLoading || isPublic)) {
       timer = setTimeout(() => setOpen(), 500)
-    } else if (timer != undefined) {
+    } else if (timer != null) {
       clearTimeout(timer)
     }
     return () => {
       clearTimeout(timer)
     }
-  }, [authenticated, isLoading, isPublic])
+  }, [authenticated, isLoading, isPublic, setOpen])
 
   return (
     <Dialog open={isOpen}>
@@ -67,7 +67,7 @@ const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   )
 }
 
-const mapState = (state: State): StateProps => ({
+const mapState = (state: RootState): StateProps => ({
   authenticated: state.session.authenticated,
   isLoading: state.app.loading,
   isPublic: isPublicCharacterPage(state, window.location.pathname),

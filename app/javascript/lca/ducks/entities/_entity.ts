@@ -13,7 +13,7 @@ import {
 import { EntityState } from './_types'
 
 /* Overwrite arrays instead of concatenating them */
-const arrayMerge = (_: null[], sourceArray: any[]) => sourceArray
+const arrayMerge = (_: null[], sourceArray: unknown[]) => sourceArray
 
 export const mergeEntity = (state: EntityState, action) =>
   deepmerge(state, action.payload.entities || {}, { arrayMerge })
@@ -125,7 +125,7 @@ let nextTransactionId = 0
 export const createUpdateAction =
   (type: eTypes): AUpdate =>
   (id, trait) => {
-    const transactionId = type + nextTransactionId++
+    const transactionId = `${type}${nextTransactionId++}`
     const action = crudAction(type, 'UPDATE')
     return callApi({
       body: JSON.stringify({ [type]: trait }),
@@ -145,7 +145,7 @@ export const createUpdateAction =
 export const createDestroyAction =
   (type: eTypes): AIdAction =>
   (id) => {
-    const transactionId = type + nextTransactionId++
+    const transactionId = `${type}${nextTransactionId++}`
     const action = crudAction(type, 'DESTROY')
     return callApi({
       endpoint: `/api/v1/${type}s/${id}`,

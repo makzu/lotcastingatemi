@@ -89,7 +89,7 @@ class RatingField extends Component<Props, State> {
       narrow,
       min,
       max,
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       dontFocus,
       ...otherProps
     } = this.props

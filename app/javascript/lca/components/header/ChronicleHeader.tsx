@@ -1,6 +1,13 @@
 import { useLocation, Link } from 'react-router-dom'
 
-import { Tab, Tabs, Toolbar, Typography, useMediaQuery } from '@mui/material'
+import {
+  Tab,
+  Tabs,
+  Theme,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
 
 import { getSpecificChronicle } from 'selectors'
 import LcaDrawerButton from './DrawerButton'
@@ -13,7 +20,7 @@ function ChronicleHeader() {
   const id = useIdFromParams()
   const chronicle = useAppSelector((state) => getSpecificChronicle(state, id))
   const path = useLocation().pathname
-  const smDown = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+  const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
   if (chronicle == null || chronicle.name == null) {
     return <GenericHeader />

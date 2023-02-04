@@ -6,7 +6,6 @@ import withStyles from '@mui/styles/withStyles'
 import RatingDots from './ratingDots.jsx'
 
 const styles = (theme) => ({
-  //eslint-disable-line no-unused-vars
   wrap: {
     display: 'flex',
     marginBottom: theme.spacing(0.5),

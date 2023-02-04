@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable no-undef */
 require('typeface-roboto')
 
 import ReactDOM from 'react-dom'

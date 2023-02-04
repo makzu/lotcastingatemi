@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Typography from '@mui/material/Typography'
 
-interface LinkRendererProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
+type LinkRendererProps = AnchorHTMLAttributes<HTMLAnchorElement>
 // This won't work for mailto: links or any other non-http(/s) link.
 // Does it need to?
 export const LinkRenderer = ({ href, ...props }: LinkRendererProps) =>

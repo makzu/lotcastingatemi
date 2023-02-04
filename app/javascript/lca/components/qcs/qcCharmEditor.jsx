@@ -50,9 +50,6 @@ class QcCharmEditor extends Component<Props> {
 
   handleSort = ({ oldIndex, newIndex }) => {
     if (oldIndex === newIndex) return
-  }
-  handleSort = ({ oldIndex, newIndex }) => {
-    if (oldIndex === newIndex) return
     const charmA = this.props.qc_charms[oldIndex]
     const charmB = this.props.qc_charms[newIndex]
     const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
@@ -60,6 +57,7 @@ class QcCharmEditor extends Component<Props> {
       sort_order: charmB.sort_order + offset,
     })
   }
+
   render() {
     const { handleChange, handleAdd, handleRemove, handleSort } = this
     const { classes } = this.props

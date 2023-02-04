@@ -39,11 +39,9 @@ export const genAbilities = {
   abil_thrown: gen.posInt,
   abil_war: gen.posInt,
   // $FlowFixMe
-  abil_craft: gen.array(({ craft: gen.string, rating: gen.posInt }: Object)),
+  abil_craft: gen.array({ craft: gen.string, rating: gen.posInt }),
   // $FlowFixMe
-  abil_martial_arts: gen.array(
-    ({ style: gen.string, rating: gen.posInt }: Object),
-  ),
+  abil_martial_arts: gen.array({ style: gen.string, rating: gen.posInt }),
 }
 
 export const genMortal = {
@@ -62,12 +60,10 @@ export const genMortal = {
   attr_wits: gen.sPosInt,
   ...genAbilities,
   // $FlowFixMe
-  specialties: gen.array(
-    ({
-      context: gen.string,
-      ability: gen.oneOf([''].concat(ABILITY_NAMES)),
-    }: Object),
-  ),
+  specialties: gen.array({
+    context: gen.string,
+    ability: gen.oneOf([''].concat(ABILITY_NAMES)),
+  }),
 
   armor_name: gen.string,
   armor_weight: gen.oneOf(['unarmored', 'light', 'medium', 'heavy']),

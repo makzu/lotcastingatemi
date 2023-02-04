@@ -20,13 +20,15 @@ import SiderealCasteSelect from 'components/characterEditor/exaltTraits/Sidereal
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
 import type { Enhancer } from 'utils/flow-types'
+import { Character, ExaltType } from 'types'
+import { RootState } from 'store'
 
 const initialState = {
   open: false,
   character: {
     name: '',
     caste: '',
-    type: 'SolarCharacter',
+    type: 'SolarCharacter' as ExaltType,
     exalt_type: '',
     aspect: false,
   },
@@ -34,11 +36,11 @@ const initialState = {
 
 type Props = {
   id: number
-  createCharacter: Function
+  createCharacter: typeof createCharacter
 }
 type State = {
   open: boolean
-  character: Object
+  character: Partial<Character>
 }
 
 class CharacterCreatePopup extends Component<Props, State> {
@@ -116,6 +118,7 @@ class CharacterCreatePopup extends Component<Props, State> {
         <Button onClick={handleOpen} data-cy="create-character">
           Create New
         </Button>
+
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Create New Character</DialogTitle>
           <DialogContent>
@@ -287,9 +290,9 @@ class CharacterCreatePopup extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state) => ({ id: state.session.id })
+const mapStateToProps = (state: RootState) => ({ id: state.session.id })
 
-const enhance: Enhancer<Props, {}> = connect(mapStateToProps, {
+const enhance: Enhancer<Props, null> = connect(mapStateToProps, {
   createCharacter,
 })
 

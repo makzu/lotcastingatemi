@@ -1,4 +1,5 @@
 import { getJSON } from 'redux-api-middleware'
+import { Charm } from 'types'
 
 import { callApi } from 'utils/api'
 import {
@@ -62,6 +63,7 @@ export const createApiActions = (
   createTraitDestroyAction(entityType, parentType),
 ]
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const justGetJSON = (_0: any, _1: any, response) => getJSON(response)
 
 interface CreateActionOptions {
@@ -159,7 +161,7 @@ const createTraitDestroyAction =
     })
   }
 
-const traitAssoc = (type: string, payload: any) => {
+const traitAssoc = (type: string, payload: Charm) => {
   if (type !== 'charm') {
     return type + 's'
   }

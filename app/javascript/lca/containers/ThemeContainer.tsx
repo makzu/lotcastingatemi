@@ -13,7 +13,7 @@ import { switchTheme } from 'features/themeSlice'
 import { useAppDispatch, useAppSelector } from 'hooks'
 
 declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface, no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 

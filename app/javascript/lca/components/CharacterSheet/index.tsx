@@ -9,7 +9,7 @@ import BioPage from './Bio'
 import MeritPage from './Merits'
 import SorceryPage from './Sorcery'
 
-const characterSheetWrapper = () => {
+const CharacterSheetWrapper = () => {
   const id = useIdFromParams()
   const dispatch = useAppDispatch()
   dispatch(fetchCharacterIfNecessary(id))
@@ -26,4 +26,4 @@ const characterSheetWrapper = () => {
   )
 }
 
-export default ProtectedComponent(characterSheetWrapper)
+export default ProtectedComponent(CharacterSheetWrapper)

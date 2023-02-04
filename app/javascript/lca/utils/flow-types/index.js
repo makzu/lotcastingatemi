@@ -7,7 +7,6 @@ export * from './pool.js'
 import type { withBasicInfo, withCombatInfo, withWillpower } from './shared.js'
 import type { withQcStats } from './qc'
 
-// eslint-disable-next-line no-unused-vars
 export type Enhancer<P, EP> = (component: ComponentType<P>) => ComponentType<EP>
 
 export type Battlegroup = {

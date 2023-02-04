@@ -10,7 +10,7 @@ import { RootState } from 'store'
  * as expected.
  */
 const Navigator: Middleware<object, RootState> =
-  (store) => (next) => (action) => {
+  (_store) => (next) => (action) => {
     const act = action.type.split('/')
     if (
       act[0] === API &&

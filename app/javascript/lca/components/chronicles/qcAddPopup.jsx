@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -29,7 +29,7 @@ type State = {
   qcId: number,
 }
 
-class QcAddPopup extends React.Component<Props, State> {
+class QcAddPopup extends Component<Props, State> {
   state = {
     open: false,
     qcId: 0,
@@ -59,7 +59,7 @@ class QcAddPopup extends React.Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, qcs } = this.props
 
-    const options: React.Node = [
+    const options: Node = [
       <MenuItem key={0} value={0} disabled>
         Select a Qc
       </MenuItem>,

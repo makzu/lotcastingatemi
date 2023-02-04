@@ -1,7 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import * as React from 'react'
-const { Component } = React
+import { Component, SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
 import Button from '@mui/material/Button'

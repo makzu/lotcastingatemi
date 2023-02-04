@@ -1,6 +1,5 @@
 // @flow
-import * as React from 'react'
-const { Component, Fragment } = React
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -49,7 +48,7 @@ class DowntimePopup extends Component<Props, State> {
 
   handleReset = () => this.setState({ time: 1 })
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { value } = e.target
     if (this.state.days) {
       this.setState({ time: value * 24, parsedTime: value })
@@ -71,12 +70,12 @@ class DowntimePopup extends Component<Props, State> {
     }
   }
 
-  handleCheck = e =>
+  handleCheck = (e) =>
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
-  handleSetHours = hours =>
+  handleSetHours = (hours) =>
     this.setState({ time: hours, parsedTime: hours, days: false })
-  handleSetDays = days =>
+  handleSetDays = (days) =>
     this.setState({ time: days * 24, parsedTime: days, days: true })
 
   handleSubmit = () => {
@@ -189,7 +188,4 @@ class DowntimePopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  { downtime }
-)(DowntimePopup)
+export default connect(null, { downtime })(DowntimePopup)

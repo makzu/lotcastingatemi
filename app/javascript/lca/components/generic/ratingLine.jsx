@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react'
+import { Node } from 'react'
 
 import withStyles from '@mui/styles/withStyles'
 
 import RatingDots from './ratingDots.jsx'
 
-const styles = theme => ({
+const styles = (theme) => ({
   //eslint-disable-line no-unused-vars
   wrap: {
     display: 'flex',
@@ -23,7 +23,7 @@ type Props = {
   fillTo?: number,
   dontFill?: boolean,
   merit?: boolean,
-  children: React.Node,
+  children: Node,
   classes: Object,
 }
 function RatingLine({

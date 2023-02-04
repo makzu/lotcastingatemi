@@ -1,5 +1,6 @@
 // @flow
-import * as React from 'react'
+import { Component, Node } from 'react'
+
 import Typography from '@mui/material/Typography'
 
 import { sample } from 'utils'
@@ -16,9 +17,9 @@ const errorNames = [
   'Crimson Bug Mantle',
 ]
 
-type Props = { children: React.Node }
+type Props = { children: Node }
 type State = { error?: Object, errorInfo?: Object }
-class ErrorBoundary extends React.Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   constructor(props: Object) {
     super(props)
     this.state = { error: undefined, errorInfo: undefined }

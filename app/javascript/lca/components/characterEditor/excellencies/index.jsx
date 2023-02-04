@@ -1,6 +1,5 @@
 // @flow
-import * as React from 'react'
-const { Component, Fragment } = React
+import { Component, Fragment } from 'react'
 
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'

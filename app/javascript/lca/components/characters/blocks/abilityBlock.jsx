@@ -1,6 +1,5 @@
 // @flow
-import * as React from 'react'
-const { Fragment } = React
+import { Fragment } from 'react'
 
 import withStyles from '@mui/styles/withStyles'
 import Divider from '@mui/material/Divider'

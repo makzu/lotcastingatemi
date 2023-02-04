@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { ComponentType } from 'react'
 export * from './character'
 export * from './qc'
 export * from './shared.js'
@@ -7,9 +7,8 @@ export * from './pool.js'
 import type { withBasicInfo, withCombatInfo, withWillpower } from './shared.js'
 import type { withQcStats } from './qc'
 
-export type Enhancer<P, EP> = (
-  component: React.ComponentType<P>
-) => React.ComponentType<EP>
+// eslint-disable-next-line no-unused-vars
+export type Enhancer<P, EP> = (component: ComponentType<P>) => ComponentType<EP>
 
 export type Battlegroup = {
   name: string,

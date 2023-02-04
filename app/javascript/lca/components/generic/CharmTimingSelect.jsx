@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { PureComponent } from 'react'
 
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
@@ -9,7 +9,7 @@ type Props = {
   name: string,
   onChange: Function,
 }
-class CharmTimingSelect extends React.PureComponent<Props> {
+class CharmTimingSelect extends PureComponent<Props> {
   render() {
     const { name, value, onChange } = this.props
 

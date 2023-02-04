@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -193,7 +193,7 @@ type State = {
   categories: Array<string>,
 }
 
-class CharmCategoryAutocomplete extends React.Component<Props, State> {
+class CharmCategoryAutocomplete extends Component<Props, State> {
   handleChange = (value) => {
     this.props.onChange({
       target: {

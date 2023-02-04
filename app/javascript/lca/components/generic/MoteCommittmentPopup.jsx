@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -22,7 +22,7 @@ type State = {
   open: boolean,
 }
 
-class MoteCommittmentPopup extends React.Component<Props, State> {
+class MoteCommittmentPopup extends Component<Props, State> {
   state = { open: false }
 
   handleOpen = () => {
@@ -33,7 +33,7 @@ class MoteCommittmentPopup extends React.Component<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     this.props.update(this.props.character.id, { [name]: value })
   }
@@ -65,13 +65,10 @@ class MoteCommittmentPopup extends React.Component<Props, State> {
 const mapDispatchToProps = (dispatch: Function, props: ExposedProps) => ({
   update: (id: number, trait: string, value: any): Function =>
     dispatch(
-      props.qc ? updateQc(id, trait, value) : updateCharacter(id, trait, value)
+      props.qc ? updateQc(id, trait, value) : updateCharacter(id, trait, value),
     ),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  null,
-  mapDispatchToProps
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(null, mapDispatchToProps)
 
 export default enhance(MoteCommittmentPopup)

@@ -1,6 +1,5 @@
 // @flow
-import * as React from 'react'
-const { Component, Fragment } = React
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -27,12 +26,12 @@ class MoteRespirePopup extends Component<Props, State> {
   handleOpen = () => this.setState({ open: true })
   handleClose = () => this.setState({ open: false, toRecover: 0, qcs: false })
 
-  handleAdd = motes =>
+  handleAdd = (motes) =>
     this.setState({ toRecover: Math.max(this.state.toRecover + motes, 0) })
 
   handleReset = () => this.setState({ toRecover: 0 })
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
 
     if (name === 'toRecover') {
@@ -43,7 +42,7 @@ class MoteRespirePopup extends Component<Props, State> {
     }
   }
 
-  handleCheck = e =>
+  handleCheck = (e) =>
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
   handleSubmit = () => {
@@ -131,7 +130,4 @@ class MoteRespirePopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  { respireMotes }
-)(MoteRespirePopup)
+export default connect(null, { respireMotes })(MoteRespirePopup)

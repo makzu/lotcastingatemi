@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -19,7 +19,7 @@ import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -37,7 +37,7 @@ const styles = theme => ({
 })
 
 type ExposedProps = {
-  children: React.Node,
+  children: Node,
   character: { id: number, sorcerous_motes: number, type: 'qc' | string },
 }
 type Props = ExposedProps & {
@@ -52,14 +52,14 @@ type State = {
   total: number,
 }
 
-class ShapeSorceryWidget extends React.Component<Props, State> {
+class ShapeSorceryWidget extends Component<Props, State> {
   state = {
     open: false,
     roll: 0,
     total: this.props.character.sorcerous_motes || 0,
   }
 
-  handleChangeRoll = e => {
+  handleChangeRoll = (e) => {
     let { value } = e.target
     this.setState({
       roll: value,
@@ -67,7 +67,7 @@ class ShapeSorceryWidget extends React.Component<Props, State> {
     })
   }
 
-  handleChangeTotal = e => {
+  handleChangeTotal = (e) => {
     let { value } = e.target
     this.setState({
       roll: value - this.props.character.sorcerous_motes,
@@ -180,11 +180,8 @@ function mapDispatchToProps(dispatch: Function, props) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
 )
 
 export default enhance(ShapeSorceryWidget)

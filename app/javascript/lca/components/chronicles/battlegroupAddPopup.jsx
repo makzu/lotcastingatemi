@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -32,7 +32,7 @@ type State = {
   battlegroupId: number,
 }
 
-class BattlegroupAddPopup extends React.Component<Props, State> {
+class BattlegroupAddPopup extends Component<Props, State> {
   state = {
     open: false,
     battlegroupId: 0,
@@ -62,7 +62,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, battlegroups } = this.props
 
-    const options: React.Node = [
+    const options: Node = [
       <MenuItem key={0} value={0} disabled>
         Select a Battlegroup
       </MenuItem>,

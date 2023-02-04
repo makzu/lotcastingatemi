@@ -1,6 +1,5 @@
 // @flow
-import * as React from 'react'
-const { Component, Fragment } = React
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -38,12 +37,12 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
   handleClose = () =>
     this.setState({ open: false, toRecover: 0, exceed: false, qcs: false })
 
-  handleAdd = wp =>
+  handleAdd = (wp) =>
     this.setState({ toRecover: Math.max(this.state.toRecover + wp, 0) })
 
   handleReset = () => this.setState({ toRecover: 0 })
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
 
     if (name === 'toRecover') {
@@ -54,7 +53,7 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
     }
   }
 
-  handleCheck = e =>
+  handleCheck = (e) =>
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
   handleSubmit = () => {
@@ -146,7 +145,4 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  { recoverWillpower }
-)(WillpowerRecoveryPopup)
+export default connect(null, { recoverWillpower })(WillpowerRecoveryPopup)

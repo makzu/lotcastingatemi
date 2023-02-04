@@ -1,6 +1,5 @@
 // @flow
-import * as React from 'react'
-const { Component, Fragment } = React
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'

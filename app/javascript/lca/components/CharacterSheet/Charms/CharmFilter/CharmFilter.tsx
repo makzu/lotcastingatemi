@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { Dispatch } from 'react'
 import { connect } from 'react-redux'
 
 import { Button, MenuItem, Switch, TextField, Typography } from '@mui/material'
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 
 interface Props {
   filters: CharmFilter
-  setfilters: React.Dispatch<CharmFilterAction>
+  setfilters: Dispatch<CharmFilterAction>
   allAbilities: Array<Charm['ability']>
   allCategories: string[]
   allKeywords: string[]

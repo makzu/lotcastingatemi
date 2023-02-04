@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -33,7 +33,7 @@ export type Props = ExposedProps & {
   categories: Array<string>,
 }
 
-class CharmFilter extends React.Component<Props> {
+class CharmFilter extends Component<Props> {
   render() {
     const {
       abilities,
@@ -79,7 +79,7 @@ class CharmFilter extends React.Component<Props> {
       default:
         filterLabel = 'derp'
     }
-    const filterOptions: React.Node = [
+    const filterOptions: Node = [
       <MenuItem key="none" value={null}>
         No Filter
       </MenuItem>,

@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -51,7 +51,7 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
 }
 
 type ExposedProps = {
-  children: React.Node,
+  children: Node,
   character: withMotePool & { id: number },
   peripheral?: boolean,
   qc?: boolean,
@@ -78,7 +78,7 @@ const defaultState: State = {
   scenelong: false,
 }
 
-class MoteSpendWidget extends React.Component<Props, State> {
+class MoteSpendWidget extends Component<Props, State> {
   state = defaultState
 
   max = () => {

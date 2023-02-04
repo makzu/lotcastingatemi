@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -17,7 +17,7 @@ import { clamp } from 'utils'
 import type { withWillpower, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {
-  children: React.Node,
+  children: Node,
   character: withWillpower & { id: number },
   qc?: boolean,
 }
@@ -30,7 +30,7 @@ type State = {
   toSpend: number,
 }
 
-class WillpowerSpendWidget extends React.Component<Props, State> {
+class WillpowerSpendWidget extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = { open: false, toSpend: 0 }
@@ -52,13 +52,13 @@ class WillpowerSpendWidget extends React.Component<Props, State> {
     this.setState({ open: false, toSpend: 0 })
   }
 
-  handleAdd = wp => {
+  handleAdd = (wp) => {
     this.setState({
       toSpend: clamp(this.state.toSpend + wp, this.min(), this.max()),
     })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -154,9 +154,8 @@ function mapStateToProps(state: Object, props: Object) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  { spendWillpower }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  spendWillpower,
+})
 
 export default enhance(WillpowerSpendWidget)

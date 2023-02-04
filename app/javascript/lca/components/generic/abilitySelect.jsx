@@ -1,6 +1,5 @@
 // @flow
-import * as React from 'react'
-const { Component } = React
+import { Component, Node } from 'react'
 
 import withStyles from '@mui/styles/withStyles'
 import ListSubheader from '@mui/material/ListSubheader'
@@ -24,7 +23,7 @@ const styles = (theme) => ({
 type Props = {
   abilities?: Array<Object>,
   attributes?: Array<Object>,
-  prependOptions?: React.Node,
+  prependOptions?: Node,
   withAttributes?: boolean,
   attributesOnly?: boolean,
   includeUniversal?: boolean,

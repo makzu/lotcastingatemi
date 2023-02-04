@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -18,7 +18,7 @@ import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -43,10 +43,10 @@ type State = {
   initiative: number,
 }
 
-class JoinBattlePopup extends React.Component<Props, State> {
+class JoinBattlePopup extends Component<Props, State> {
   state = { open: false, initiative: 0 }
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -140,11 +140,8 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
 )
 
 export default enhance(JoinBattlePopup)

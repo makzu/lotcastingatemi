@@ -23,5 +23,6 @@
     "jsx": "react-jsx"
   },
   "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],
+  "include": ["app/javascript/**/*", "./.eslintrc.js"],
   "compileOnSave": false
 }

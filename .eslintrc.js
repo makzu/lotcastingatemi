@@ -1,5 +1,7 @@
-// eslint-disable-next-line no-undef
-module.exports = {
+/**
+ * @type {import("eslint").Linter.Config}
+ */
+const config = {
   env: {
     browser: true,
     es6: true,
@@ -8,9 +10,12 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react/recommended',
-    'plugin:flowtype/recommended',
+    'plugin:react-hooks/recommended',
     'prettier',
+    'plugin:@eslint-community/eslint-comments/recommended',
   ],
   ignorePatterns: [
     'postcss.config.js',
@@ -21,39 +26,32 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['**/*.ts', '**.*.tsx'],
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-        'eslint:recommended',
-        'plugin:react/recommended',
-        'plugin:flowtype/recommended',
-        'prettier',
-      ],
-      plugins: ['@typescript-eslint'],
+      files: ['**/*.js', '**/*.jsx'],
+      rules: {
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        'no-undef': 'error',
+      },
     },
+    { files: ['.eslintrc.js'], rules: {} },
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 6,
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-      jsx: true,
-    },
-    sourceType: 'module',
+    project: './tsconfig.json',
   },
-  plugins: ['cypress', 'react', 'flowtype'],
+  plugins: ['@typescript-eslint', 'cypress', 'react', 'flowtype'],
   root: true,
   rules: {
-    indent: ['error', 2, { SwitchCase: 1 }],
+    '@eslint-community/eslint-comments/no-unused-disable': 'warn',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'flowtype/no-types-missing-file-annotation': 0,
-    'jsx-quotes': ['warn', 'prefer-double'],
-    'linebreak-style': ['error', 'unix'],
     'no-duplicate-imports': ['warn'],
-    'no-trailing-spaces': ['error'],
     'no-restricted-imports': ['error', { patterns: ['@mui/*/*/*'] }],
-    quotes: ['warn', 'single', { allowTemplateLiterals: true }],
-    'object-curly-spacing': ['error', 'always'],
-    semi: ['error', 'never'],
+    quotes: [
+      'warn',
+      'single',
+      { allowTemplateLiterals: true, avoidEscape: true },
+    ],
     'react/jsx-boolean-value': ['warn', 'never'],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
@@ -63,3 +61,6 @@ module.exports = {
     react: { version: 'detect' },
   },
 }
+
+// eslint-disable-next-line no-undef
+module.exports = config

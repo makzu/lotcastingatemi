@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -35,7 +35,7 @@ type Props = {
   updateCharacter: Function,
 }
 type State = { open: boolean, editing: boolean }
-class NotesPopup extends React.Component<Props, State> {
+class NotesPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
 

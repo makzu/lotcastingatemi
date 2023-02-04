@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 
 import Dialog from '@mui/material/Dialog'
@@ -18,7 +18,7 @@ type State = {
   battlegroup: Object,
 }
 
-class BattlegroupCreatePopup extends React.Component<Props, State> {
+class BattlegroupCreatePopup extends Component<Props, State> {
   state = { open: false, battlegroup: { name: '' } }
 
   handleOpen = () => {

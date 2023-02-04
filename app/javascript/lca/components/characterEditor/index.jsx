@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 
 import Grid from '@mui/material/Grid'

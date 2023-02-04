@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
 import Button from '@mui/material/Button'
@@ -24,7 +24,7 @@ type Props = {
   onCharmChange: Function,
   onRemoveClick: Function,
 }
-export default class QcCharmFields extends React.Component<Props> {
+export default class QcCharmFields extends Component<Props> {
   handleChange = (e: SyntheticInputEvent<>) => {
     const { name, value } = e.target
     const { charm } = this.props

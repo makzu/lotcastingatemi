@@ -1,6 +1,6 @@
 // @flow
 import { deepEqual } from 'fast-equals'
-import React, { Component, SyntheticInputEvent } from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 

@@ -1,11 +1,12 @@
-import { ReactNode, useEffect } from 'react'
+import { PropsWithChildren, useEffect, useMemo } from 'react'
 
+import { useMediaQuery } from '@mui/material'
 import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
 import {
-  ThemeProvider,
-  Theme,
-  StyledEngineProvider,
   createTheme,
+  StyledEngineProvider,
+  Theme,
+  ThemeProvider,
 } from '@mui/material/styles'
 
 import { switchTheme } from 'features/themeSlice'
@@ -16,50 +17,19 @@ declare module '@mui/styles/defaultTheme' {
   interface DefaultTheme extends Theme {}
 }
 
-/* When changing these colors, it's also important to change the theme_color
- * entries in /config/favicon.json from #2e7d32 to the new value,
- * and to re-run `rails g favicon`
- */
-const themeCommon = {
-  disableScrollbars: false,
-  overrides: {
-    MuiSelect: {
-      selectMenu: {
-        // overflow: 'inherit',
-      },
-    },
-  },
-}
-
-const darkTheme = createTheme({
-  ...themeCommon,
-  palette: {
-    mode: 'dark',
-    primary: { main: green[900] },
-    secondary: { main: teal[400] },
-  },
-})
-
-const lightTheme = createTheme({
-  ...themeCommon,
-  palette: {
-    mode: 'light',
-    primary: { main: green[800] },
-    secondary: { main: lightgreen[400] },
-  },
-})
-
-const ThemeContainer = ({ children }: { children: ReactNode }) => {
+const ThemeContainer = ({ children }: PropsWithChildren<null>) => {
   const dispatch = useAppDispatch()
-  const theme = useAppSelector((state) => state.theme)
+  const themeSetting = useAppSelector((state) => state.theme)
+  const defaultPreference = useMediaQuery('(prefers-color-scheme: dark)')
+    ? 'dark'
+    : 'light'
 
+  // Respond to changes to the theme in localstorage in case the theme is changed in another tab
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key !== 'theme') {
-        return
-      }
       if (
-        e.newValue !== theme &&
+        e.key === 'theme' &&
+        e.newValue !== themeSetting &&
         (e.newValue === 'light' || e.newValue === 'dark')
       ) {
         dispatch(switchTheme(e.newValue))
@@ -70,13 +40,46 @@ const ThemeContainer = ({ children }: { children: ReactNode }) => {
     return () => {
       window.removeEventListener('storage', handleStorageChange)
     }
-  }, [])
+  }, [dispatch, themeSetting])
+
+  // Set a default theme based on whether the user prefers light or dark mode
+  useEffect(() => {
+    if (themeSetting == null) {
+      dispatch(switchTheme(defaultPreference))
+    }
+  }, [defaultPreference, dispatch, themeSetting])
+
+  const theme = useMemo(() => {
+    /* When changing these colors, it's also important to change the theme_color
+     * entries in /config/favicon.json from #2e7d32 to the new value,
+     * and to re-run `rails g favicon`
+     */
+    return createTheme({
+      components: {
+        MuiTextField: {
+          defaultProps: {
+            variant: 'standard',
+          },
+        },
+      },
+      palette:
+        (themeSetting || defaultPreference) === 'dark'
+          ? {
+              mode: 'dark',
+              primary: { main: green[900] },
+              secondary: { main: teal[400] },
+            }
+          : {
+              mode: 'light',
+              primary: { main: green[800] },
+              secondary: { main: lightgreen[400] },
+            },
+    })
+  }, [defaultPreference, themeSetting])
 
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-        {children}
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </StyledEngineProvider>
   )
 }

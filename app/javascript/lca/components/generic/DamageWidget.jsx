@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 import HealthLevelBoxes from './HealthLevelBoxes.jsx'
 import RatingField from './RatingField.jsx'
-import { takeDamage } from 'ducks/actions.js'
+import { takeDamage } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withHealthLevels, Enhancer } from 'utils/flow-types'

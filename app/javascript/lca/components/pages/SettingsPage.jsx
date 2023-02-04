@@ -18,7 +18,7 @@ import BlockPaper from 'components/shared/BlockPaper'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 
-import { updatePlayer, destroyAccount } from 'ducks/actions.js'
+import { updatePlayer, destroyAccount } from 'ducks/actions'
 import { switchTheme } from 'features/themeSlice'
 import { getSpecificPlayer } from 'selectors'
 import type { Player, Enhancer } from 'utils/flow-types'

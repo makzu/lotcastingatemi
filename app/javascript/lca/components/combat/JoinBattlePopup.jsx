@@ -13,7 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 

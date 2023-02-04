@@ -12,7 +12,7 @@ import { Spell } from 'types'
 
 interface Props {
   spell: Spell
-  handleChange(id: number, trait: any): void
+  handleChange(id: number, trait: Partial<Spell>): void
   handleDestroy(id: number): void
 }
 

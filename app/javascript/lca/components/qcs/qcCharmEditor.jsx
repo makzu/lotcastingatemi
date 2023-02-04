@@ -13,7 +13,7 @@ import ContentAddCircle from '@mui/icons-material/AddCircle'
 import QcCharmFields from './qcCharmFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
-import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.js'
+import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions'
 import { getCharmsForQc } from 'selectors'
 import commonStyles from 'styles'
 import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'

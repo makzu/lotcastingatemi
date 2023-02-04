@@ -16,7 +16,7 @@ import { withStyles } from '@mui/styles'
 import TextField from 'components/generic/TextField.jsx'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 
-import { updateCharacter } from 'ducks/actions.js'
+import { updateCharacter } from 'ducks/actions'
 import { canIEditCharacter } from 'selectors'
 import commonStyles from 'styles'
 import type { Character } from 'utils/flow-types'

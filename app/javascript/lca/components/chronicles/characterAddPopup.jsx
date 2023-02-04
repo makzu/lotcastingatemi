@@ -12,7 +12,7 @@ import Divider from '@mui/material/Divider'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 
-import { addThingToChronicle } from 'ducks/actions.js'
+import { addThingToChronicle } from 'ducks/actions'
 import {
   getSpecificChronicle,
   getMyCharactersWithoutChronicles,

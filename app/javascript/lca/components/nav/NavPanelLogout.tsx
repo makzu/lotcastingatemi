@@ -1,20 +1,21 @@
-import { connect } from 'react-redux'
-
 import { Divider, ListItemText } from '@mui/material'
 
 import { LinkListItem } from 'components/shared/wrappers'
-import { logout } from 'ducks/actions.js'
+import { logout } from 'ducks/actions'
+import { useAppDispatch } from 'hooks'
 
-const NavPanelLogout = (props) => {
+const NavPanelLogout = () => {
+  const dispatch = useAppDispatch()
+  const click = () => dispatch(logout)
   return (
     <>
       <Divider />
 
-      <LinkListItem to="/" onClick={props.logout}>
+      <LinkListItem to="/" onClick={click}>
         <ListItemText primary="Log Out" />
       </LinkListItem>
     </>
   )
 }
 
-export default connect(null, { logout })(NavPanelLogout)
+export default NavPanelLogout

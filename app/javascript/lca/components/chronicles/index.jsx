@@ -20,7 +20,7 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import {
   getSpecificChronicle,
   getPlayersForChronicle,

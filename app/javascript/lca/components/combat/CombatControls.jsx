@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 
 import RatingField from '../generic/RatingField.jsx'
 import InitiativeField from './InitiativeField.jsx'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { canIEdit } from 'selectors'
 import type { withCombatInfo, Enhancer } from 'utils/flow-types'
 

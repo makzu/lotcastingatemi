@@ -16,7 +16,7 @@ import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
-import { updateCharacter } from 'ducks/actions.js'
+import { updateCharacter } from 'ducks/actions'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { showLunarTraits } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'

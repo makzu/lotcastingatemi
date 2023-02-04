@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
 
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { canIEdit } from 'selectors'
 import type { withCombatInfo, Enhancer } from 'utils/flow-types'
 

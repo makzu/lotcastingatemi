@@ -1,4 +1,5 @@
-// @flow
+import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
+
 export {
   createCharacter,
   duplicateCharacter,
@@ -65,11 +66,19 @@ import {
   fetchAllBattlegroups,
 } from './entities'
 import UpdatesCable from 'utils/cable.js'
+import store, { AppDispatch, RootState } from 'store'
 
 export const INIT = 'lca/app/INIT'
 
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  AnyAction
+>
+
 export function fetchAll() {
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch: AppDispatch, getState: typeof store.getState) => {
     dispatch(fetchCurrentPlayer())
       .then(() => dispatch(fetchAllCharacters()))
       .then(() => dispatch(fetchAllQcs()))
@@ -83,7 +92,7 @@ export function fetchAll() {
 }
 
 export function lcaInit() {
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch: AppDispatch, getState: typeof store.getState) => {
     dispatch({ type: INIT })
 
     if (getState().session.authenticated) {

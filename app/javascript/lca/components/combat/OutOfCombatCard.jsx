@@ -11,7 +11,7 @@ import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 

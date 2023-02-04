@@ -8,7 +8,7 @@ import ButtonBase from '@mui/material/ButtonBase'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
-import { updateCharacter, updateQc } from 'ducks/actions.js'
+import { updateCharacter, updateQc } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 

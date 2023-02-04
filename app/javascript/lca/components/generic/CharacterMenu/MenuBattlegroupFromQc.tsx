@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { GroupAdd } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material/'
 
-import { State } from 'ducks'
-import { createBattlegroupFromQc } from 'ducks/actions.js'
+import { createBattlegroupFromQc } from 'ducks/actions'
+import { RootState } from 'store'
 import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
@@ -27,7 +27,7 @@ const BattlegroupFromQc = ({ canCreate, action, id }: InnerProps) =>
     </MenuItem>
   ) : null
 
-const mapStateToProps = (state: State, props: Props): StateProps => ({
+const mapStateToProps = (state: RootState, props: Props): StateProps => ({
   canCreate: state.session.authenticated && props.characterType === 'qc',
 })
 

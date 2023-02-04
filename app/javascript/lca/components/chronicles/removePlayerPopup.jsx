@@ -9,7 +9,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 
-import { removePlayerFromChronicle as removePlayer } from 'ducks/actions.js'
+import { removePlayerFromChronicle as removePlayer } from 'ducks/actions'
 import { getSpecificChronicle, getSpecificPlayer } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 

@@ -19,7 +19,7 @@ import TextField from 'components/generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
-import { updateChronicle } from 'ducks/actions.js'
+import { updateChronicle } from 'ducks/actions'
 import {
   getSpecificChronicle,
   getPlayersForChronicle,

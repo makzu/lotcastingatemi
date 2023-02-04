@@ -10,7 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Delete from '@mui/icons-material/Delete'
 
-import { destroyChronicle } from 'ducks/actions.js'
+import { destroyChronicle } from 'ducks/actions'
 import { getSpecificChronicle } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 

@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography'
 import MoteCommittmentPopup from './MoteCommittmentPopup.jsx'
 import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
-import { spendMotes } from 'ducks/actions.js'
+import { spendMotes } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import {

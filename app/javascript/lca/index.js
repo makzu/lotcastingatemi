@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import './i18n'
 
 import store from './store'
-import { lcaInit } from './ducks/actions.js'
+import { lcaInit } from './ducks/actions'
 
 import RootContainer from './containers/RootContainer'
 

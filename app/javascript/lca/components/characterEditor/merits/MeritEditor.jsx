@@ -20,7 +20,7 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
-import { updateMerit, createMerit, destroyMerit } from 'ducks/actions.js'
+import { updateMerit, createMerit, destroyMerit } from 'ducks/actions'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
 import commonStyles from 'styles'
 import type { Character, fullMerit as Merit, Enhancer } from 'utils/flow-types'

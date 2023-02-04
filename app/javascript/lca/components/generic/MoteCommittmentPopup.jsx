@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 
 import MoteCommittmentEditor from 'components/characterEditor/editors/moteCommittmentEditor.jsx'
-import { updateCharacter, updateQc } from 'ducks/actions.js'
+import { updateCharacter, updateQc } from 'ducks/actions'
 import type { withMotePool, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {

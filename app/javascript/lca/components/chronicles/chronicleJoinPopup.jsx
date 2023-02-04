@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField'
 
 import GroupAdd from '@mui/icons-material/GroupAdd'
 
-import { joinChronicle } from 'ducks/actions.js'
+import { joinChronicle } from 'ducks/actions'
 
 type Props = { joinChronicle: Function }
 type State = { open: boolean, code: string }

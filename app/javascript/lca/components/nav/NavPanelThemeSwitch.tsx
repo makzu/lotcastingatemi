@@ -11,7 +11,8 @@ import { useAppDispatch, useAppSelector } from 'hooks'
 const NavPanelThemeSwitch = () => {
   const theme = useAppSelector((state) => state.theme)
   const dispatch = useAppDispatch()
-  const action = (theme) => dispatch(switchTheme(theme))
+  const action = (theme: Parameters<typeof switchTheme>[0]) =>
+    dispatch(switchTheme(theme))
 
   return (
     <ListItem

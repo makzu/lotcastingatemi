@@ -26,7 +26,7 @@ import {
   updateSpell,
   createSpell,
   destroySpell,
-} from 'ducks/actions.js'
+} from 'ducks/actions'
 import { getSpecificCharacter } from 'ducks/selectors'
 import {
   getEvokableMeritsForCharacter,

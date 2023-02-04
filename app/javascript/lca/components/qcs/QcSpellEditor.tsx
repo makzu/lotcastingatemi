@@ -21,7 +21,7 @@ interface StateProps {
 }
 interface DispatchProps {
   destroy(id: number): void
-  update(id: number, trait: any): void
+  update(id: number, trait: Partial<QC>): void
 }
 interface OuterProps {
   qc: QC
@@ -70,6 +70,7 @@ const QcSpellEditor = (props: Props) => {
       </Typography>
       {qc.is_sorcerer && (
         <SortableGridList
+          classes={{}}
           items={spellList}
           onSortEnd={handleSort}
           useDragHandle

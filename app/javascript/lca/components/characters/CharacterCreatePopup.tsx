@@ -18,7 +18,7 @@ import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSel
 import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
-import { createCharacter } from 'ducks/actions.js'
+import { createCharacter } from 'ducks/actions'
 import type { Enhancer } from 'utils/flow-types'
 import { Character, ExaltType } from 'types'
 import { RootState } from 'store'

@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 
-import { createBattlegroup } from 'ducks/actions.js'
+import { createBattlegroup } from 'ducks/actions'
 import type { Enhancer } from 'utils/flow-types'
 
 type Props = { createBattlegroup: Function }

@@ -18,7 +18,7 @@ import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
-import { updateBattlegroup } from 'ducks/actions.js'
+import { updateBattlegroup } from 'ducks/actions'
 import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
 import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'

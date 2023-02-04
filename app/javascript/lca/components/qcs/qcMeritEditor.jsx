@@ -11,7 +11,7 @@ import ContentAddCircle from '@mui/icons-material/AddCircle'
 import QcMeritFields from './qcMeritFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
-import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions.js'
+import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions'
 import { getMeritsForQc } from 'selectors'
 import type { fullQc, QcMerit, Enhancer } from 'utils/flow-types'
 

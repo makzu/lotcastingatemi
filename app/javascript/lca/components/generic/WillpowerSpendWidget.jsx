@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
-import { spendWillpower } from 'ducks/actions.js'
+import { spendWillpower } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withWillpower, Enhancer } from 'utils/flow-types'

@@ -8,11 +8,7 @@ import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import QcAttackFields from './qcAttackFields.jsx'
-import {
-  createQcAttack,
-  destroyQcAttack,
-  updateQcAttack,
-} from 'ducks/actions.js'
+import { createQcAttack, destroyQcAttack, updateQcAttack } from 'ducks/actions'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 

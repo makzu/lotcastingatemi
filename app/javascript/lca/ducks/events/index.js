@@ -1,5 +1,5 @@
 // @flow
-import { updateCharacter, updateQc, updateBattlegroup } from '../actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from '../actions'
 export * from './chronicle.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'

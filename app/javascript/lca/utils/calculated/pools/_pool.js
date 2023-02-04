@@ -11,7 +11,7 @@ export default function pool(
   bonus: Array<PoolBonus>,
   penalties: Array<Object>,
   excellencyAbils: Array<string>,
-  specialAttacks?: Array<string> = []
+  specialAttacks?: Array<string> = [],
 ): Pool {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)
@@ -25,7 +25,7 @@ export default function pool(
     attribute,
     ability,
     excellencyAbils,
-    false
+    false,
   )
   const excellencyStunt = maxExcellency(
     character,
@@ -33,7 +33,7 @@ export default function pool(
     ability,
     excellencyAbils,
     false,
-    true
+    true,
   )
   const penalty = penalties.reduce((a, p) => a + p.penalty, 0)
 

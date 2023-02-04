@@ -9,19 +9,19 @@ import type { Player, Battlegroup } from 'utils/flow-types'
 
 export const getSpecificBattlegroup = (
   state: WrappedEntityState,
-  id: number
+  id: number,
 ): Battlegroup => entities(state).battlegroups[id]
 
 // $FlowFixMe
 export const getAttacksForBattlegroup: getAttacks = createCachedSelector(
   [getSpecificBattlegroup, getQcAttacks],
-  (bg, attacks) => bg.qc_attacks.map(m => attacks[m])
+  (bg, attacks) => bg.qc_attacks.map((m) => attacks[m]),
 )((state, id) => id)
 
 export const doIOwnBattlegroup: entitySelector<boolean> = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup],
   (player: Player, battlegroup: Battlegroup) =>
-    battlegroup !== undefined && player.id === battlegroup.player_id
+    battlegroup !== undefined && player.id === battlegroup.player_id,
 )
 
 export const amIStOfBattlegroup: entitySelector<boolean> = createSelector(
@@ -30,24 +30,24 @@ export const amIStOfBattlegroup: entitySelector<boolean> = createSelector(
     battlegroup !== undefined &&
     battlegroup.chronicle_id != null &&
     ents.chronicles[battlegroup.chronicle_id] &&
-    ents.chronicles[battlegroup.chronicle_id].st_id === player.id
+    ents.chronicles[battlegroup.chronicle_id].st_id === player.id,
 )
 
 export const canISeeBattlegroup: entitySelector<boolean> = createSelector(
   [getSpecificBattlegroup, doIOwnBattlegroup, amIStOfBattlegroup],
-  (battlegroup, doI, amI) => !battlegroup.hidden || doI || amI
+  (battlegroup, doI, amI) => !battlegroup.hidden || doI || amI,
 )
 
 export const canIEditBattlegroup: entitySelector<boolean> = createSelector(
   [doIOwnBattlegroup, amIStOfBattlegroup],
-  (doI, amI) => doI || amI
+  (doI, amI) => doI || amI,
 )
 
 export const canIDeleteBattlegroup = doIOwnBattlegroup
 
 export const getPoolsAndRatingsForBattlegroup = (
   state: WrappedEntityState,
-  id: number
+  id: number,
 ) => ({
   joinBattle: bgJoinBattlePool(getSpecificBattlegroup(state, id)),
 })

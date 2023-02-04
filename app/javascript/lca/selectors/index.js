@@ -66,15 +66,15 @@ export const isPublicCharacterPage = (state: Object, pathName: string) => {
   return false
 }
 
-const getChronicles = state => entities(state).chronicles
+const getChronicles = (state) => entities(state).chronicles
 
 // $FlowFixMe
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
     currentPlayer.own_chronicles
-      .map(c => chronicles[c])
-      .filter(c => c !== undefined && c.name !== undefined)
+      .map((c) => chronicles[c])
+      .filter((c) => c !== undefined && c.name !== undefined),
 )
 
 // $FlowFixMe
@@ -82,14 +82,14 @@ export const getMyChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
     currentPlayer.chronicles
-      .map(c => chronicles[c])
-      .filter(c => c !== undefined && c.name !== undefined)
+      .map((c) => chronicles[c])
+      .filter((c) => c !== undefined && c.name !== undefined),
 )
 
 export const getPoolsAndRatingsGeneric = (
   state: Object,
   id: number,
-  characterType: CT
+  characterType: CT,
 ) => {
   switch (characterType) {
     case 'qc':

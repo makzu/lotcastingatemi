@@ -11,7 +11,7 @@ export default function rating(
   ability: string,
   penalties: Array<Object>,
   excellencyAbils: Array<string>,
-  bonus: Array<Object> = []
+  bonus: Array<Object> = [],
 ): Pool {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)
@@ -27,7 +27,7 @@ export default function rating(
     attribute,
     ability,
     excellencyAbils,
-    true
+    true,
   )
   const excellencyStunt = maxExcellency(
     character,
@@ -35,7 +35,7 @@ export default function rating(
     ability,
     excellencyAbils,
     true,
-    true
+    true,
   )
   const penalty = penalties.reduce((a, p) => a + p.penalty, 0)
 
@@ -52,7 +52,7 @@ export default function rating(
     excellencyCost: excellency * 2,
     excellencyStunt: excellencyStunt,
     excellencyStuntCost: excellencyStunt * 2,
-    penalties: penalties.filter(p => p.penalty > 0),
+    penalties: penalties.filter((p) => p.penalty > 0),
     totalPenalty: penalty,
     total: Math.max(halfRoundUp(pool) + mb - penalty, 0),
     bonus: bonus,

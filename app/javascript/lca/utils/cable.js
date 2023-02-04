@@ -14,7 +14,7 @@ const UpdatesCable = {
       },
       {
         received: received,
-      }
+      },
     )
   },
 

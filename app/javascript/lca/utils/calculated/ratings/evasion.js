@@ -7,7 +7,7 @@ export function evasion(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   const bonfire = character.anima_level === 3
   let bonus = []
@@ -35,7 +35,7 @@ export function evasion(
     'dodge',
     penaltyObject(penalties, { useMobility: true, useOnslaught: true }),
     excellencyAbils,
-    bonus
+    bonus,
   )
 }
 export default evasion

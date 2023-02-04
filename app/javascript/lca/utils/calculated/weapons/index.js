@@ -45,7 +45,7 @@ export function thrownAccuracyBonus(weapon: fullWeapon) {
 }
 
 export const rangeTag = (weapon: fullWeapon) =>
-  weapon.tags.find(t => t.startsWith('thrown') || t.startsWith('archery')) ||
+  weapon.tags.find((t) => t.startsWith('thrown') || t.startsWith('archery')) ||
   (weapon.tags.includes('elemental bolt') ? 'thrown (medium)' : undefined)
 
 export const rangeValue = (weapon: fullWeapon) => {

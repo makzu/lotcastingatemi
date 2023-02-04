@@ -12,11 +12,11 @@ export default {
   [crudAction(CHRONICLE, 'ADD_THING').success.toString()]: mergeEntity,
   [crudAction(CHRONICLE, 'REGEN_CODE').success.toString()]: mergeEntity,
   [crudAction(CHRONICLE, 'UPDATE').start.toString()]: reducerUpdateAction(
-    CHRONICLE + 's'
+    CHRONICLE + 's',
   ),
   [crudAction(CHRONICLE, 'REMOVE_PLAYER').success.toString()]: (
     state,
-    action
+    action,
   ) => {
     mergeEntity(state, action)
 
@@ -26,7 +26,7 @@ export default {
     if (playerId === myId) {
       // We are leaving a chronicle ourselves
       state.players[myId].chronicles = state.players[myId].chronicles.filter(
-        i => i !== id
+        (i) => i !== id,
       )
       delete state.chronicles[id]
     }
@@ -34,7 +34,7 @@ export default {
   },
   [crudAction(CHRONICLE, 'REMOVE_THING').success.toString()]: (
     state,
-    action
+    action,
   ) => {
     mergeEntity(state, action)
     // TODO: remove orphaned entities and traits from state
@@ -81,7 +81,7 @@ export function removePlayerFromChronicle(id: number, playerId: number) {
 export function addThingToChronicle(
   id: number,
   thingId: number,
-  thingType: 'character' | 'qc' | 'battlegroup'
+  thingType: 'character' | 'qc' | 'battlegroup',
 ) {
   const action = crudAction(CHRONICLE, 'ADD_THING')
   return callApi({
@@ -94,7 +94,7 @@ export function addThingToChronicle(
 export function removeThingFromChronicle(
   id: number,
   thingId: number,
-  type: string
+  type: string,
 ) {
   const action = crudAction(CHRONICLE, 'REMOVE_THING')
   return callApi({

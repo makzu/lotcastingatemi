@@ -7,7 +7,7 @@ export function riseFromProne(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   // TODO: handle merits that affect rise from prone pool?
   return pool(
@@ -17,7 +17,7 @@ export function riseFromProne(
     'dodge',
     [],
     penaltyObject(penalties, { useMobility: true }),
-    excellencyAbils
+    excellencyAbils,
   )
 }
 export default riseFromProne

@@ -13,9 +13,9 @@ import {
   committedPeripheralMotes,
 } from 'utils/calculated'
 
-const endSceneObject = c => {
+const endSceneObject = (c) => {
   let obj = {}
-  const commits = c.motes_committed.filter(m => !m.scenelong)
+  const commits = c.motes_committed.filter((m) => !m.scenelong)
 
   if (!deepEqual(commits, c.motes_committed)) obj.motes_committed = commits
   if (c.aura != null && c.aura !== '' && c.aura !== 'none') obj.aura = 'none'
@@ -37,13 +37,13 @@ export function endScene(id: number) {
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
     ]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       const obj = endSceneObject(c)
 
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
     })
-    getBattlegroupsForChronicle(state, id).forEach(bg => {
+    getBattlegroupsForChronicle(state, id).forEach((bg) => {
       const update = updateEvent(bg.type)
       let obj = {}
 
@@ -72,12 +72,12 @@ const moteRecoveryObject = (character, motes) => {
   if (spentPeripheral > 0)
     obj.motes_peripheral_current = Math.min(
       character.motes_peripheral_current + motes,
-      availablePeripheral
+      availablePeripheral,
     )
   if (spentPersonal > 0 && motes - spentPeripheral > 0)
     obj.motes_personal_current = Math.min(
       character.motes_personal_current + (motes - spentPeripheral),
-      availablePersonal
+      availablePersonal,
     )
   return obj
 }
@@ -89,7 +89,7 @@ export function respireMotes(id: number, motes: number, includeQcs: boolean) {
     const state = getState()
     let chars = [...getCharactersForChronicle(state, id)]
     if (includeQcs) chars = [...chars, ...getQcsForChronicle(state, id)]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       const obj = moteRecoveryObject(c, motes)
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
@@ -111,7 +111,7 @@ export function recoverWillpower(
   id: number,
   willpower: number,
   exceed: boolean,
-  includeQcs: boolean
+  includeQcs: boolean,
 ) {
   return (dispatch: Function, getState: Function) => {
     dispatch({ type: RECOVER_WILLPOWER, id: id, willpower: willpower })
@@ -119,7 +119,7 @@ export function recoverWillpower(
     const state = getState()
     let chars = [...getCharactersForChronicle(state, id)]
     if (includeQcs) chars = [...chars, ...getQcsForChronicle(state, id)]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       const obj = willpowerRecoveryObject(c, willpower, exceed)
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
@@ -136,7 +136,7 @@ export function downtime(id: number, time: number, endScene: boolean) {
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
     ]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       let obj: { [string]: number } = {}
       let merits = []
@@ -156,7 +156,7 @@ export function downtime(id: number, time: number, endScene: boolean) {
         // Mortals PCs can use the Exalted Healing merit to heal like Exalts
         exaltedHealing =
           c.type !== 'Character' ||
-          merits.some(m => m.startsWith('exalted healing'))
+          merits.some((m) => m.startsWith('exalted healing'))
       }
 
       obj = {
@@ -173,7 +173,7 @@ export function downtime(id: number, time: number, endScene: boolean) {
       )
         moteBonus = 4
       // 2-dot Hearthstones increase out-of-combat mote regen by 2
-      else if (merits.some(m => m.startsWith('hearthstone'))) moteBonus = 2
+      else if (merits.some((m) => m.startsWith('hearthstone'))) moteBonus = 2
       const motesPerDay = 8 * (10 + moteBonus) + 16 * (5 + moteBonus)
       const motesPerHour =
         time >= 8 ? Math.ceil(motesPerDay / 24) : 5 + moteBonus
@@ -201,9 +201,9 @@ export function nextRound(id: number) {
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
       ...getBattlegroupsForChronicle(state, id),
-    ].filter(c => c.in_combat)
+    ].filter((c) => c.in_combat)
 
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       let obj = { has_acted: false }
       if (c.type !== 'battlegroup')
@@ -222,9 +222,9 @@ export function endCombat(id: number) {
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
       ...getBattlegroupsForChronicle(state, id),
-    ].filter(c => c.in_combat)
+    ].filter((c) => c.in_combat)
 
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       let obj = { in_combat: false, has_acted: false, onslaught: 0 }
 

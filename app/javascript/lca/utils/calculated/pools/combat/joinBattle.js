@@ -7,10 +7,10 @@ export function joinBattle(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   let bonus = []
-  if (merits.some(m => m.startsWith('fast reflexes')))
+  if (merits.some((m) => m.startsWith('fast reflexes')))
     bonus = [{ label: 'fast reflexes', bonus: 1 }]
 
   return pool(
@@ -20,7 +20,7 @@ export function joinBattle(
     'awareness',
     bonus,
     penaltyObject(penalties),
-    excellencyAbils
+    excellencyAbils,
   )
 }
 export default joinBattle

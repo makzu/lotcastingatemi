@@ -7,7 +7,7 @@ export function takeCover(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   // TODO: handle merits that affect take cover pool?
   return pool(
@@ -17,7 +17,7 @@ export function takeCover(
     'dodge',
     [],
     penaltyObject(penalties, { useMobility: true }),
-    excellencyAbils
+    excellencyAbils,
   )
 }
 export default takeCover

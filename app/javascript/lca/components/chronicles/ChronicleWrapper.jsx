@@ -36,7 +36,7 @@ class ChronicleWrapper extends Component<Props> {
     return (
       <Routes>
         <Route path="combat" element={<CombatDashboard />} />
-        <Route          path="details"          element={<ChronicleDetailsPage />}        />
+        <Route path="details" element={<ChronicleDetailsPage />} />
         <Route path="*" element={<ChronicleDashboard />} />
       </Routes>
     )

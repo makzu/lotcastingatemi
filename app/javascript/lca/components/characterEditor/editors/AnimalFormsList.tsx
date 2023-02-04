@@ -11,7 +11,7 @@ const animalFormsList = (forms: Form[]) =>
         </Link>
       ) : (
         f.form
-      )
+      ),
     )
     .reduce((accu, curr, i) => (i === 0 ? [curr] : [...accu, ', ', curr]), [])
 

@@ -13,7 +13,7 @@ import decisiveAttack from 'utils/calculated/pools/combat/decisiveAttack.js'
 import witheringAttack from 'utils/calculated/pools/combat/witheringAttack.js'
 import parry from 'utils/calculated/ratings/parry.js'
 
-const getState = state => state
+const getState = (state) => state
 
 const getWeapon = (state, id: number) => entities(state).weapons[id]
 
@@ -29,9 +29,9 @@ const getExcellencyAbilsForWeapon = createSelector(
     calc.excellencyAbils(
       character,
       getNativeCharmsForCharacter(state, character.id).concat(
-        getMartialArtsCharmsForCharacter(state, character.id)
-      )
-    )
+        getMartialArtsCharmsForCharacter(state, character.id),
+      ),
+    ),
 )
 
 // $FlowFixMe
@@ -48,23 +48,23 @@ export const getPoolsForWeapon = createCachedSelector(
       character,
       weapon,
       penalties,
-      excellencyAbils
+      excellencyAbils,
     ),
     witheringDamage: calc.witheringDamage(character, weapon),
     decisiveAttack: decisiveAttack(
       character,
       weapon,
       penalties,
-      excellencyAbils
+      excellencyAbils,
     ),
     parry: parry(character, weapon, penalties, excellencyAbils),
     rangedWitheringAttack: calc.rangedWitheringAttackPool(
       character,
       weapon,
       penalties,
-      excellencyAbils
+      excellencyAbils,
     ),
-  })
+  }),
 )((state, id) => id)
 
 // This is absurd

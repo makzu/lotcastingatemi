@@ -8,14 +8,14 @@ export function resolve(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   let bonus = []
-  let wellBred = merits.find(m => m.startsWith('well-bred'))
+  let wellBred = merits.find((m) => m.startsWith('well-bred'))
   if (wellBred !== undefined)
     bonus = bonus.concat([{ label: 'well-bred', bonus: 1, situational: true }])
 
-  let thinBlood = merits.find(m => m.startsWith('thin-blooded'))
+  let thinBlood = merits.find((m) => m.startsWith('thin-blooded'))
   if (thinBlood !== undefined)
     bonus = bonus.concat([
       { label: 'thin-blooded', bonus: -1, situational: true },
@@ -29,8 +29,8 @@ export function resolve(
           Math.max(
             character.attr_strength,
             character.attr_dexterity,
-            character.attr_stamina
-          )
+            character.attr_stamina,
+          ),
         ),
         situational: true,
       },
@@ -44,7 +44,7 @@ export function resolve(
     'integrity',
     penaltyObject(penalties),
     excellencyAbils,
-    bonus
+    bonus,
   )
 }
 export default resolve

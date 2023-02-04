@@ -7,7 +7,7 @@ export function witheringAttack(
   character: Character,
   weapon: fullWeapon,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   const pool = decisiveAttack(character, weapon, penalties, excellencyAbils)
 

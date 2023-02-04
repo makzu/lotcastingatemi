@@ -20,7 +20,7 @@ export function parry(
   character: Character,
   weapon: fullWeapon,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   if (weaponIsRanged(weapon)) return { raw: 0, total: 0 }
 
@@ -51,7 +51,7 @@ export function parry(
     weapon.ability,
     penaltyObject(penalties, { useOnslaught: true }),
     excellencyAbils,
-    bonus
+    bonus,
   )
   const rawRating =
     halfRoundUp(rat.attributeRating + rat.abilityRating) +

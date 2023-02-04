@@ -58,31 +58,33 @@ class ChronicleNavList extends Component<Props, State> {
     const ownChronicleList = ownChronicles.map(chronicleMap)
     const chronicleList = chronicles.map(chronicleMap)
 
-    return <>
-      <ListItem button onClick={this.handleClick}>
-        <ListItemText primary="Chronicles" />
+    return (
+      <>
+        <ListItem button onClick={this.handleClick}>
+          <ListItemText primary="Chronicles" />
 
-        <ListItemSecondaryAction>
-          <IconButton onClick={this.handleClick} size="large">
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
+          <ListItemSecondaryAction>
+            <IconButton onClick={this.handleClick} size="large">
+              {this.state.open ? <ExpandLess /> : <ExpandMore />}
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
 
-      <Collapse in={this.state.open}>
-        {ownChronicleList.length > 0 && (
-          <ListSubheader inset>Your Chronicles</ListSubheader>
-        )}
-        {ownChronicleList}
-        {chronicleList.length > 0 && (
-          <ListSubheader inset>Joined Chronicles</ListSubheader>
-        )}
-        {chronicleList}
+        <Collapse in={this.state.open}>
+          {ownChronicleList.length > 0 && (
+            <ListSubheader inset>Your Chronicles</ListSubheader>
+          )}
+          {ownChronicleList}
+          {chronicleList.length > 0 && (
+            <ListSubheader inset>Joined Chronicles</ListSubheader>
+          )}
+          {chronicleList}
 
-        <ChronicleJoinPopup />
-        <ChronicleCreatePopup />
-      </Collapse>
-    </>
+          <ChronicleJoinPopup />
+          <ChronicleCreatePopup />
+        </Collapse>
+      </>
+    )
   }
 }
 

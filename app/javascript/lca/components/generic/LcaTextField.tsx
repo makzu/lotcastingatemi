@@ -4,7 +4,7 @@ import { TextField } from '@mui/material'
 
 const LcaTextField = () => {
   const value = useState()
-  return <TextField variant="standard" />;
+  return <TextField variant="standard" />
 }
 
 export default LcaTextField

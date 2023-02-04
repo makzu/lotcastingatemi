@@ -20,13 +20,13 @@ export function armorSoak(character: Character) {
 export function soak(
   character: Character,
   merits: Array<string>,
-  spells: Array<string>
+  spells: Array<string>,
 ): Pool {
   let b = 0
   let bonus = []
   const bonfire = character.anima_level === 3
 
-  let unusualHide = merits.find(m => m.startsWith('unusual hide'))
+  let unusualHide = merits.find((m) => m.startsWith('unusual hide'))
   if (unusualHide != undefined) {
     b += parseInt(unusualHide.substr(-1))
     bonus = [
@@ -37,7 +37,7 @@ export function soak(
 
   // ISoB control spell bonus applies even while wearing armor:
   // http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1187120#post1187120
-  let isob = spells.find(s => s === 'invulnerable skin of bronze')
+  let isob = spells.find((s) => s === 'invulnerable skin of bronze')
   if (isob != undefined) {
     b += character.essence
     bonus = [
@@ -92,7 +92,7 @@ export function soak(
     armored: armorSoak(character) + character.bonus_soak,
     total: Math.max(
       naturalSoak(character) + armorSoak(character) + character.bonus_soak + b,
-      0
+      0,
     ),
     soak: true,
   }

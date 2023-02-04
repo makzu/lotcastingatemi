@@ -14,7 +14,7 @@ export const entities = (state: WrappedEntityState): EntityState =>
 
 export const getSpecificPlayer = (
   state: WrappedEntityState,
-  id: number
+  id: number,
 ): Player => ({
   characters: [],
   qcs: [],
@@ -27,40 +27,41 @@ export const getSpecificPlayer = (
 export const getCurrentPlayer = (state: WrappedEntityState): Player =>
   getSpecificPlayer(state, state.session.id)
 
-const getCharacters = state => entities(state).characters
+const getCharacters = (state) => entities(state).characters
 
 export const getMyCharacters: CharacterListSelector = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
+    currentPlayer.characters.map((c) => characters[c]).sort(sortOrderSort),
 )
 
-export const getMyCharactersWithoutChronicles: CharacterListSelector = createSelector(
-  [getMyCharacters],
-  characters => characters.filter(c => c.chronicle_id == null)
-)
+export const getMyCharactersWithoutChronicles: CharacterListSelector =
+  createSelector([getMyCharacters], (characters) =>
+    characters.filter((c) => c.chronicle_id == null),
+  )
 
-const getQCs = state => entities(state).qcs
+const getQCs = (state) => entities(state).qcs
 
 export const getMyQCs: QcListSelector = createSelector(
   [getCurrentPlayer, getQCs],
-  (currentPlayer, qcs) => currentPlayer.qcs.map(c => qcs[c]).sort(sortOrderSort)
+  (currentPlayer, qcs) =>
+    currentPlayer.qcs.map((c) => qcs[c]).sort(sortOrderSort),
 )
 
 export const getMyQcsWithoutChronicles: QcListSelector = createSelector(
   [getMyQCs],
-  qcs => qcs.filter(c => c.chronicle_id == null)
+  (qcs) => qcs.filter((c) => c.chronicle_id == null),
 )
 
-const getBattlegroups = state => entities(state).battlegroups
+const getBattlegroups = (state) => entities(state).battlegroups
 
 export const getMyBattlegroups: BgListSelector = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>
-    currentPlayer.battlegroups.map(c => battlegroups[c]).sort(sortOrderSort)
+    currentPlayer.battlegroups.map((c) => battlegroups[c]).sort(sortOrderSort),
 )
 
-export const getMyBattlegroupsWithoutChronicles: BgListSelector = createSelector(
-  [getMyBattlegroups],
-  battlegroups => battlegroups.filter(c => c.chronicle_id == null)
-)
+export const getMyBattlegroupsWithoutChronicles: BgListSelector =
+  createSelector([getMyBattlegroups], (battlegroups) =>
+    battlegroups.filter((c) => c.chronicle_id == null),
+  )

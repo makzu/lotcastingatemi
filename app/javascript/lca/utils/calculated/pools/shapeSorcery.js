@@ -7,9 +7,9 @@ export function shapeSorcery(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
-  const vitalFocus = merits.some(m => m.startsWith('vital focus cultivation'))
+  const vitalFocus = merits.some((m) => m.startsWith('vital focus cultivation'))
 
   return pool(
     'Shape Sorcery',
@@ -18,7 +18,7 @@ export function shapeSorcery(
     'occult',
     [],
     penaltyObject(penalties, { useWound: !vitalFocus }),
-    excellencyAbils
+    excellencyAbils,
   )
 }
 export default shapeSorcery

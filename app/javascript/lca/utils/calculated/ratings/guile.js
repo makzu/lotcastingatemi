@@ -8,10 +8,10 @@ export function guile(
   character: Character,
   merits: Array<string>,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   let bonus = []
-  let wellBred = merits.find(m => m.startsWith('inhuman visage'))
+  let wellBred = merits.find((m) => m.startsWith('inhuman visage'))
   if (wellBred !== undefined)
     bonus = bonus.concat([{ label: 'inhuman visage', bonus: 1 }])
 
@@ -29,7 +29,7 @@ export function guile(
     'socialize',
     penaltyObject(penalties),
     excellencyAbils,
-    bonus
+    bonus,
   )
 }
 export default guile

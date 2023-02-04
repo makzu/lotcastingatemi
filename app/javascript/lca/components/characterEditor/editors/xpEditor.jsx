@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import withStyles from '@mui/styles/withStyles'
 
 import ListAttributeEditor, {
-  type ListAttributeFieldTypes
+  type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'

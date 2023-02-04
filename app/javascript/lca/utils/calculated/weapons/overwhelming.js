@@ -10,7 +10,7 @@ export function weaponOverwhelming(character: Character, weapon: fullWeapon) {
 
   if (weapon.tags.includes('balanced')) bonus += 1
 
-  const overwhelmingTag = weapon.tags.find(t => t.startsWith('overwhelming+'))
+  const overwhelmingTag = weapon.tags.find((t) => t.startsWith('overwhelming+'))
   if (overwhelmingTag) {
     let theBonus = overwhelmingTag.substr(13)
     bonus += theBonus.includes('essence')

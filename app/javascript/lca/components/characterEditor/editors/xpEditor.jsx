@@ -1,18 +1,16 @@
 // @flow
-import { compose, shouldUpdate } from 'recompose'
 
-import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
 
 import ListAttributeEditor, {
-  type ListAttributeFieldTypes,
+  type ListAttributeFieldTypes
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
-import { isUnequalByKeys } from 'utils'
-import { solarXpName, spentXp, spentSolarXp, spentBp } from 'utils/calculated'
+import { solarXpName, spentBp, spentSolarXp, spentXp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 const styles = (theme) => ({
@@ -170,18 +168,4 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
   </BlockPaper>
 )
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, nextProps) =>
-    isUnequalByKeys(props.character, nextProps.character, [
-      'xp_log',
-      'xp_log_solar',
-      'xp_total',
-      'xp_solar_total',
-      'xp_craft_silver',
-      'xp_craft_gold',
-      'xp_craft_white',
-      'bp_log',
-    ]),
-  ),
-)(XpEditor)
+export default withStyles(styles)(XpEditor)

@@ -1,18 +1,12 @@
 // @flow
-import { compose, shouldUpdate } from 'recompose'
 
-import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
 
 import RatingField from 'components/generic/RatingField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 
-import { isUnequalByKeys } from 'utils'
-import {
-  ATTRIBUTE_MIN as MIN,
-  ATTRIBUTE_MAX as MAX,
-  ATTRIBUTES,
-} from 'utils/constants'
+import { ATTRIBUTE_MAX as MAX, ATTRIBUTE_MIN as MIN } from 'utils/constants'
 import type { withAttributes as Character } from 'utils/flow-types'
 
 const styles = (theme) => ({
@@ -133,13 +127,4 @@ function AttributeEditor(props: Props) {
   )
 }
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, newProps) =>
-    isUnequalByKeys(
-      props.character,
-      newProps.character,
-      ATTRIBUTES.map((a) => a.attr),
-    ),
-  ),
-)(AttributeEditor)
+export default withStyles(styles)(AttributeEditor)

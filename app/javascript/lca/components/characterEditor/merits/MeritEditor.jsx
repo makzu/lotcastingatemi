@@ -4,7 +4,7 @@ const { Component, Fragment } = React
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
 import Button from '@mui/material/Button'

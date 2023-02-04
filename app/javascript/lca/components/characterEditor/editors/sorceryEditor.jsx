@@ -1,5 +1,4 @@
 // @flow
-import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -11,8 +10,7 @@ import ListAttributeEditor, {
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
-import { isUnequalByKeys } from 'utils'
-import type { Character, Enhancer } from 'utils/flow-types'
+import type { Character } from 'utils/flow-types'
 
 export const SorceryFields = (
   props: { trait: string } & ListAttributeFieldTypes,
@@ -85,13 +83,4 @@ function SorceryEditor(props: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'is_sorcerer',
-      'sorcerous_motes',
-      'rituals',
-    ]),
-)
-
-export default enhance(SorceryEditor)
+export default SorceryEditor

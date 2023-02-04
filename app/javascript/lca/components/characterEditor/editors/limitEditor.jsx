@@ -1,14 +1,12 @@
 // @flow
-import { shouldUpdate } from 'recompose'
 
 import Typography from '@mui/material/Typography'
 
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
-import { isUnequalByKeys } from 'utils'
 import { LIMIT_MAX } from 'utils/constants'
-import type { Character, Enhancer } from 'utils/flow-types'
+import type { Character } from 'utils/flow-types'
 
 type Props = {
   character: Character,
@@ -44,12 +42,4 @@ function LimitEditor({ character, onChange }: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'limit',
-      'limit_trigger',
-    ]),
-)
-
-export default enhance(LimitEditor)
+export default LimitEditor

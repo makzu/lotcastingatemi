@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import classNames from 'classnames'
 import withStyles from '@mui/styles/withStyles'

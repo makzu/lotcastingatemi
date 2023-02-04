@@ -2,7 +2,7 @@
 import { deepEqual } from 'fast-equals'
 import React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import DescriptionIcon from '@mui/icons-material/Description'
 import Button from '@mui/material/Button'

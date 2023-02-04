@@ -1,6 +1,5 @@
 // @flow
 import { connect } from 'react-redux'
-import { compose, shouldUpdate } from 'recompose'
 
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -9,9 +8,8 @@ import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import { canIDeleteCharacter } from 'selectors'
-import { isUnequalByKeys } from 'utils'
-import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants'
-import type { Character, Enhancer } from 'utils/flow-types'
+import { ESSENCE_MAX, ESSENCE_MIN } from 'utils/constants'
+import type { Character } from 'utils/flow-types'
 
 type ExposedProps = {
   character: Character,
@@ -80,17 +78,4 @@ const mapStateToProps = (state, props) => ({
   showPublicCheckbox: canIDeleteCharacter(state, props.character.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  shouldUpdate(
-    (props, nextProps) =>
-      isUnequalByKeys(props.character, nextProps.character, [
-        'name',
-        'essence',
-        'description',
-        'public',
-      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox,
-  ),
-)
-
-export default enhance(BasicsEditor)
+export default connect(mapStateToProps)(BasicsEditor)

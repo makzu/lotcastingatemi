@@ -2,7 +2,7 @@
 
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
 import Paper from '@mui/material/Paper'

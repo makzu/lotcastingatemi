@@ -1,10 +1,9 @@
 // @flow
-import { compose, shouldUpdate } from 'recompose'
 
-import withStyles from '@mui/styles/withStyles'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
@@ -12,7 +11,6 @@ import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import WeightSelect from 'components/shared/selects/WeightSelect'
-import { isUnequalByKeys } from 'utils'
 import type { withArmorStats as Character } from 'utils/flow-types'
 
 const styles = (theme) => ({
@@ -138,17 +136,4 @@ function ArmorEditor(props: Props) {
   )
 }
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, newProps) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'armor_name',
-      'armor_weight',
-      'armor_tags',
-      'armor_is_artifact',
-      'bonus_soak',
-      'bonus_hardness',
-      'bonus_mobility_penalty',
-    ]),
-  ),
-)(ArmorEditor)
+export default withStyles(styles)(ArmorEditor)

@@ -1,7 +1,7 @@
 // @flow
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import Button from '@mui/material/Button'
 import ButtonBase from '@mui/material/ButtonBase'

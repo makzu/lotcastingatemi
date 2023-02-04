@@ -2,7 +2,7 @@
 import { deepEqual } from 'fast-equals'
 import React, { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import Grid from '@mui/material/Grid'
 import Hidden from '@mui/material/Hidden'

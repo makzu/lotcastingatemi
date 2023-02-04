@@ -1,5 +1,4 @@
 // @flow
-import { shouldUpdate } from 'recompose'
 
 import MenuItem from '@mui/material/MenuItem'
 
@@ -9,9 +8,8 @@ import ListAttributeEditor, {
 } from 'components/generic/ListAttributeEditor.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
-import { isUnequalByKeys } from 'utils'
 import * as calc from 'utils/calculated'
-import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
+import type { withIntimacies as Character } from 'utils/flow-types'
 
 function SpecialtyFields(props: ListAttributeFieldTypes) {
   const { trait, character, onChange, classes } = props
@@ -66,9 +64,4 @@ const SpecialtyEditor = ({ character, onChange }: Props) => {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, ['specialties']),
-)
-
-export default enhance(SpecialtyEditor)
+export default SpecialtyEditor

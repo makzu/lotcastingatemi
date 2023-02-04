@@ -2,7 +2,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
 import Button from '@mui/material/Button'

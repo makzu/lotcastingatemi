@@ -1,5 +1,4 @@
 // @flow
-import { shouldUpdate } from 'recompose'
 
 import Checkbox from '@mui/material/Checkbox'
 import MenuItem from '@mui/material/MenuItem'
@@ -10,8 +9,7 @@ import ListAttributeEditor, {
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import { isUnequalByKeys } from 'utils'
-import type { withMotePool, Enhancer } from 'utils/flow-types'
+import type { withMotePool } from 'utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props
@@ -82,9 +80,4 @@ const MoteCommittmentEditor = ({ character, onChange }: Props) => {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, ['motes_committed']),
-)
-
-export default enhance(MoteCommittmentEditor)
+export default MoteCommittmentEditor

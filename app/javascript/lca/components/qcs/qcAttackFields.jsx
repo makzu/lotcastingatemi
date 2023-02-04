@@ -2,7 +2,7 @@
 import { deepEqual } from 'fast-equals'
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 import { SortableHandle } from 'react-sortable-hoc'
 
 import withStyles from '@mui/styles/withStyles'

@@ -2,7 +2,7 @@
 import { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'

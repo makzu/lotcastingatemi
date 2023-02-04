@@ -1,22 +1,19 @@
 // @flow
-import { shouldUpdate } from 'recompose'
 
 import Typography from '@mui/material/Typography'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
-import BlockPaper from 'components/shared/BlockPaper'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import { isUnequalByKeys } from 'utils'
+import BlockPaper from 'components/shared/BlockPaper'
 import {
+  ABILITIES,
   ABILITY_MAX as MAX,
   ABILITY_MIN as MIN,
-  ABILITIES,
-  ABILITIES_ALL,
 } from 'utils/constants'
-import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
+import type { withAbilities as Character } from 'utils/flow-types'
 
 function AbilityField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />
@@ -297,12 +294,4 @@ function AbilityEditor({ character, onChange }: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate((props, newProps) =>
-  isUnequalByKeys(
-    props.character,
-    newProps.character,
-    ABILITIES_ALL.map((a) => a.abil),
-  ),
-)
-
-export default enhance(AbilityEditor)
+export default AbilityEditor

@@ -2,7 +2,7 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'

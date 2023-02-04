@@ -3,7 +3,7 @@ import { deepEqual } from 'fast-equals'
 import * as React from 'react'
 const { Component } = React
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
 import { withStyles } from '@mui/styles'
 import Checkbox from '@mui/material/Checkbox'

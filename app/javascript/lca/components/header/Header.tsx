@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
@@ -24,14 +23,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 export const GenericHeader = () => {
-  const [t] = useTranslation()
-
   return (
     <Toolbar>
       <LcaDrawerButton />
 
       <Typography variant="h6" color="inherit">
-        {t('app name')}
+        Lot-Casting Atemi
       </Typography>
     </Toolbar>
   )

@@ -37,7 +37,6 @@ export default defineConfig({
   resolve: {
     alias: {
       Docs: resolve(__dirname, 'docs'),
-      Locales: resolve(__dirname, 'locales'),
     },
   },
 })

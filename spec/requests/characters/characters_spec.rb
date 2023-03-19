@@ -20,7 +20,7 @@ RSpec.describe 'Characters' do
               params:  { character: { attr_wits: 4 }}
 
         expect(response).to have_http_status :ok
-        expect(JSON.parse(response.body)['attr_wits']).to eq 4
+        expect(response.parsed_body['attr_wits']).to eq 4
         character.reload
         expect(character.attr_wits).to eq(4)
       end

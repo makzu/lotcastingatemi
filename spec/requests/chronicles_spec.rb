@@ -17,7 +17,7 @@ RSpec.describe 'Chronciles' do
               params:  { chronicle: { name: 'Mystic Quest' }}
 
         expect(response).to have_http_status :ok
-        expect(JSON.parse(response.body)['name']).to eq 'Mystic Quest'
+        expect(response.parsed_body['name']).to eq 'Mystic Quest'
         chronicle.reload
         expect(chronicle.name).to eq 'Mystic Quest'
       end

@@ -1,23 +1,12 @@
 import { esbuildFlowPlugin, flowPlugin } from '@bunchtogether/vite-plugin-flow'
-import React from '@vitejs/plugin-react'
+import React from '@vitejs/plugin-react-swc'
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
-import FullReload from 'vite-plugin-full-reload'
 import Rails from 'vite-plugin-rails'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import inject from '@rollup/plugin-inject'
 
 export default defineConfig({
   assetsInclude: ['**/*.md'],
-  build: {
-    rollupOptions: {
-      plugins: [
-        inject({
-          process: 'process',
-        }),
-      ],
-    },
-  },
   optimizeDeps: {
     esbuildOptions: {
       plugins: [esbuildFlowPlugin()],

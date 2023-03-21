@@ -14,7 +14,7 @@ services:
   # main rails blob
   ruby:
     build: .
-    command: bundle exec rails s --pid /tmp/server.pid -b 0.0.0.0 -p 3000
+    command: bundle exec rails s --pid tmp/server.pid -b 0.0.0.0 -p 3000
     depends_on:
       - postgres
       - vite

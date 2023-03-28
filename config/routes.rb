@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
 
-  get 'cypress_token', to: 'sessions#cypress_token' if Rails.env.cypress?
+  get 'cypress_token', to: 'sessions#cypress_token' if !Rails.env.production?
 
   namespace :api do
     namespace :v1 do

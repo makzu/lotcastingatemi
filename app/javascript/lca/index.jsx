@@ -1,9 +1,9 @@
 // @flow
-require('typeface-roboto')
+import 'typeface-roboto'
 
 import ReactDOM from 'react-dom'
 
-import './i18n'
+// import './i18n'
 
 import store from './store'
 import { lcaInit } from './ducks/actions'

@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Route, Routes } from 'react-router-dom'
 
 import { AppBar, Toolbar, Typography } from '@mui/material'
@@ -12,14 +11,12 @@ import LcaDrawerButton from './DrawerButton'
 import QcHeader from './QcHeader'
 
 export const GenericHeader = () => {
-  const [t] = useTranslation()
-
   return (
     <Toolbar>
       <LcaDrawerButton />
 
       <Typography variant="h6" color="inherit">
-        {t('app name')}
+        Lot-Casting Atemi
       </Typography>
     </Toolbar>
   )

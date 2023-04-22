@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom'
 import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 
-import FormsDoc from 'Docs/forms.md'
-import MeritsDoc from 'Docs/merits.md'
-import IndexDoc from 'Docs/README.md'
-import WeaponsDoc from 'Docs/weapons.md'
+import IndexDoc from 'Docs/README.md?raw'
+import WeaponsDoc from 'Docs/weapons.md?raw'
+import MeritsDoc from 'Docs/merits.md?raw'
+import FormsDoc from 'Docs/forms.md?raw'
 
 const HelpPage = () => {
   let { doc } = useParams()

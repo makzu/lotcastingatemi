@@ -153,15 +153,6 @@ Rails/LexicallyScopedActionFilter:
     - 'app/controllers/api/v1/battlegroups_controller.rb'
     - 'app/controllers/api/v1/combat_actors_controller.rb'
 
-# Offense count: 6
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: Include.
-# Include: **/Rakefile, **/*.rake
-Rails/RakeEnvironment:
-  Exclude:
-    - 'lib/tasks/frontend.rake'
-    - 'lib/tasks/lint.rake'
-
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb

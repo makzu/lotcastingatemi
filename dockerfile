@@ -1,4 +1,4 @@
-FROM ruby:3.2
+FROM ruby:3.2.0
 
 # Will be needed for Nodejs 18 until webpack/other packages are updated to use newer openssl code:
 # ENV NODE_OPTIONS=--openssl-legacy-provider
@@ -19,7 +19,7 @@ RUN corepack enable
 RUN gem update --system
 
 WORKDIR /myapp
-COPY Gemfile Gemfile.lock package.json yarn.lock /myapp/
+COPY .ruby-version Gemfile Gemfile.lock package.json yarn.lock /myapp/
 RUN bundle install
 RUN yarn install --check-files
 EXPOSE 3000

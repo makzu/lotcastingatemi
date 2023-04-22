@@ -105,6 +105,13 @@ class Character < ApplicationRecord
     false
   end
 
+  def self.character_types
+    %w[
+      Character SolarCharacter DragonbloodCharacter LunarCharacter SiderealCharacter
+      CustomAbilityCharacter CustomAttributeCharacter CustomEssenceCharacter
+    ]
+  end
+
   def self.association_types
     %i[
       ability_charms attribute_charms essence_charms martial_arts_charms

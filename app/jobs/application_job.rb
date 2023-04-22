@@ -12,7 +12,7 @@ class ApplicationJob < ActiveJob::Base
         id:          entity.id,
         entity:      json,
         parent_type: "#{parent_type}s",
-        parent_id:   parent_id
+        parent_id:
       }
     )
   end
@@ -24,7 +24,7 @@ class ApplicationJob < ActiveJob::Base
         event:   'update',
         type:    entity.entity_type,
         id:      entity.id,
-        changes: changes
+        changes:
       }
     )
   end
@@ -38,8 +38,8 @@ class ApplicationJob < ActiveJob::Base
         assoc:        "#{entity.entity_assoc}s",
         id:           entity.id,
         parent_type:  "#{parent_type}s",
-        parent_id:    parent_id,
-        chronicle_id: chronicle_id
+        parent_id:,
+        chronicle_id:
       }
     )
   end

@@ -1,0 +1,17 @@
+services:
+  ruby:
+    environment:
+      - RAILS_ENV=test
+  
+  cypress:
+    image: cypress/included:8.7.0
+    command: yarn cypress open --project /myapp/spec
+    volumes:
+      - .:/myapp
+      - node_modules:/myapp/node_modules
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
+    environment:
+      - CYPRESS_BASE_URL=http://ruby:3000
+    depends_on:
+      - ruby

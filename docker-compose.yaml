@@ -1,43 +1,57 @@
 version: '3.7'
+name: lca
 services:
   postgres:
     image: postgres
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
 
   # main rails blob
   ruby:
     build: .
-    command: bundle exec rails s --pid /tmp/server.pid -b 0.0.0.0 -p 3000
+    command: bundle exec rails s --pid tmp/server.pid -b 0.0.0.0 -p 3000
     depends_on:
       - postgres
-      - webpack
-    volumes:
-      - .:/myapp
-    ports:
-      - 3000:3000
+      - vite
     environment:
       DATABASE_URL: postgres
-      WEBPACKER_DEV_SERVER_HOST: webpack
+      RAILS_ENV: development
+      VITE_RUBY_HOST: vite
+    ports:
+      - 3000:3000
     stdin_open: true
     tty: true
-
-  # Runs the webpack dev server
-  webpack:
-    build: .
     volumes:
       - .:/myapp
-    command: ./bin/webpack-dev-server
+      - node_modules:/myapp/node_modules
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
+
+  # Runs the webpack dev server
+  vite:
+    build: .
+    command: ./bin/vite dev
+    environment:
+      RAILS_ENV: development
+      VITE_RUBY_HOST: 0.0.0.0
+    volumes:
+      - .:/myapp
+      - node_modules:/myapp/node_modules
+      - vite_dev:/app/public/vite-dev
+      - vite_test:/app/public/vite-test
     ports:
-      - 3035:3035
+      - 3036:3036
 
 # Make a volume, because windows screws up the the permissions
 # so postgres has a fit.
 volumes:
+  node_modules:
   postgres:
     driver: local
+  vite_dev:
+  vite_test:

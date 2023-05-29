@@ -2,6 +2,7 @@
 
 ###### _Unreleased_
 
+- Fix for Charms not appearing on other players' characters in a chronicle until the data is reloaded
 - The Withdraw pool is now correctly calculated using Athletics instead of dodge (Thanks, Kirisu🌹)
 
 ## v96

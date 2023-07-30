@@ -49,7 +49,7 @@ class CharacterSerializer < PlayerAssetSerializer
              :caste_attributes, :favored_attributes,
              :excellency, :excellency_stunt, :excellencies_for
 
-  has_many :charms
+  attributes :charms
   has_many :martial_arts_charms
   has_many :evocations
   has_many :spirit_charms

@@ -227,7 +227,7 @@ GEM
       racc
     pg (1.5.3)
     public_suffix (5.0.3)
-    puma (6.3.0)
+    puma (6.3.1)
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
@@ -417,7 +417,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection (~> 1.0)
   pagy (~> 6.0)
   pg (~> 1.4)
-  puma (~> 6.0)
+  puma (~> 6.3)
   pundit (~> 2.3)
   pundit-matchers (~> 1.4)
   rack-cors (~> 1.1)

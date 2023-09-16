@@ -3,5 +3,5 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController do
-  pending "add some examples to (or delete) #{__FILE__}" # rubocop:todo RSpec/PendingWithoutReason
+  pending "add some examples to (or delete) #{__FILE__}"
 end

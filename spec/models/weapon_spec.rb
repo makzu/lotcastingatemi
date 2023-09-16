@@ -36,6 +36,6 @@ RSpec.describe Weapon do
       expect(weapon.overrides['damage_attribute']).to eq('use' => 'strength')
     end
 
-    pending 'selects the higher of Thrown or Archery for attack pools' # rubocop:todo RSpec/PendingWithoutReason
+    pending 'selects the higher of Thrown or Archery for attack pools'
   end
 end

@@ -8,7 +8,7 @@ RSpec.describe 'Players' do
   context 'when logged in' do
     describe 'deleting an account' do
       it 'works and also deletes chronicles/characters/etc' do
-        player = create(:player, identities: [create(:identity)])
+        player = create(:player, identities: create_list(:identity, 1))
         create(:chronicle, st: player)
         create(:character, player:)
         create(:qc, player:)

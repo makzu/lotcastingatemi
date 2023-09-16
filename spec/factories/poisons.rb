@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :poison do
-    association :poisonable, factory: :character
+    poisonable factory: %i[character]
     name { 'MyString' }
     penalty { 1 }
     interval { 'MyString' }
@@ -16,14 +16,14 @@ FactoryBot.define do
   end
 
   factory :qc_poison, parent: :poison do
-    association :poisonable, factory: :qc
+    poisonable factory: %i[qc]
   end
 
   factory :battlegroup_poison, parent: :poison do
-    association :poisonable, factory: :battlegroup
+    poisonable factory: %i[battlegroup]
   end
 
   factory :combat_actor_poison, parent: :poison do
-    association :poisonable, factory: :combat_actor
+    poisonable factory: %i[combat_actor]
   end
 end

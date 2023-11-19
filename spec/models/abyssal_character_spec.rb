@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe SolarCharacter do
-  let(:character) { create(:solar_character) }
+RSpec.describe AbyssalCharacter do
+  let(:character) { create(:abyssal_character) }
 
   describe 'mote pool' do
     it 'starts with the right number of motes' do
@@ -34,12 +34,12 @@ RSpec.describe SolarCharacter do
     end
 
     it 'changes caste and favored abilities appropriately on caste change' do
-      character.update(caste: 'eclipse', supernal_ability: 'occult')
-      character.update(caste: 'twilight')
+      character.update(caste: 'moonshadow', supernal_ability: 'occult')
+      character.update(caste: 'daybreak')
       expect(character.supernal_ability).to eq 'occult'
       expect(character.caste_abilities).to include 'occult'
 
-      character.update(caste: 'dawn')
+      character.update(caste: 'dusk')
       expect(character.supernal_ability).to be_nil
       expect(character.caste_abilities).not_to include 'occult'
     end
@@ -47,12 +47,12 @@ RSpec.describe SolarCharacter do
 
   describe 'exalt type' do
     it 'does not change while the class type stays the same' do
-      character.update(aspect: true, exalt_type: 'abyssal', excellency: 'essence')
+      character.update(aspect: true, exalt_type: 'lunar', excellency: 'essence')
       expect(character.aspect).to be false
-      expect(character.exalt_type).to eq 'Solar'
+      expect(character.exalt_type).to eq 'Abyssal'
       expect(character.excellency).to eq 'solar'
     end
   end
 
-  include_examples 'convertable_character', :solar_character
+  include_examples 'convertable_character', :abyssal_character
 end

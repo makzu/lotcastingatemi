@@ -16,7 +16,7 @@ function SiderealExaltEditor({ character, onChange }: Props) {
   return (
     <BlockPaper>
       <SiderealCasteSelect value={character.caste} onChange={onChange} />
-      
+
       <Typography style={{ marginTop: '0.5em', textTransform: 'capitalize' }}>
         Caste Abilities: {caste_abilities.join(', ').replace('_', ' ')}
       </Typography>

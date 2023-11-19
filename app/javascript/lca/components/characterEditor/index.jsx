@@ -18,6 +18,7 @@ import CustomEssenceExaltEditor from './editors/customEssenceExaltEditor.jsx'
 import DragonbloodExaltEditor from './editors/DragonbloodExaltEditor.jsx'
 import LunarExaltEditor from './exaltTraits/LunarExaltEditor'
 import SiderealExaltEditor from './editors/SiderealExaltEditor'
+import AbyssalExaltEditor from './editors/AbyssalExaltEditor'
 import HealthLevelEditor from './editors/healthLevelEditor.jsx'
 import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
@@ -58,7 +59,7 @@ class CharacterEditor extends Component<Props> {
     this.props.updateCharacter(character.id, { [name]: value })
   }
 
-  handleChangeMulti = changes => {
+  handleChangeMulti = (changes) => {
     this.props.updateCharacter(this.props.character.id, changes)
   }
 
@@ -117,7 +118,18 @@ class CharacterEditor extends Component<Props> {
           )}
           {character.type === 'SiderealCharacter' && (
             <Grid item xs={12} md={6}>
-              <SiderealExaltEditor character={character} onChange={handleChange} />
+              <SiderealExaltEditor
+                character={character}
+                onChange={handleChange}
+              />
+            </Grid>
+          )}
+          {character.type === 'AbyssalCharacter' && (
+            <Grid item xs={12} md={6}>
+              <AbyssalExaltEditor
+                character={character}
+                onChange={handleChange}
+              />
             </Grid>
           )}
           {character.type === 'CustomAbilityCharacter' && (
@@ -236,8 +248,5 @@ function mapStateToProps(state, props) {
 }
 
 export default ProtectedComponent(
-  connect(
-    mapStateToProps,
-    { updateCharacter }
-  )(CharacterEditor)
+  connect(mapStateToProps, { updateCharacter })(CharacterEditor),
 )

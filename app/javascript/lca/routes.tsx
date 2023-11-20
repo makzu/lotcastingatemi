@@ -6,7 +6,7 @@ import Placeholder from 'components/generic/Placeholder.jsx'
 import WelcomePage from 'components/pages/WelcomePage'
 import PrivacyPage from 'components/pages/PrivacyPage.jsx'
 import GoodbyePage from 'components/pages/GoodbyePage.jsx'
-import SettingsPage from 'components/pages/SettingsPage.jsx'
+import SettingsPage from 'components/pages/SettingsPage'
 
 const ChronicleWrapper = lazy(
   () =>

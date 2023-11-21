@@ -20,6 +20,7 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es6",
+    "types": ["vitest/globals"],
     "jsx": "react-jsx"
   },
   "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],

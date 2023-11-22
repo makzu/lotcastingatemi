@@ -110,7 +110,11 @@ class QcAttackFields extends React.Component<Props> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
-          inputProps={{ autocomplete: 'off' }}
+          inputProps={{
+            autocomplete: 'off',
+            'data-1p-ignore': 'true',
+            'data-lp-ignore': 'true',
+          }}
         />
 
         <RatingField

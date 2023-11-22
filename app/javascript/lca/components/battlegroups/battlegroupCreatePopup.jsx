@@ -58,7 +58,11 @@ class BattlegroupCreatePopup extends React.Component<Props, State> {
               margin="normal"
               fullWidth
               onChange={handleChange}
-              inputProps={{ autocomplete: 'off' }}
+              inputProps={{
+                autocomplete: 'off',
+                'data-1p-ignore': 'true',
+                'data-lp-ignore': 'true',
+              }}
             />
           </DialogContent>
           <DialogActions>

@@ -100,7 +100,11 @@ class BattlegroupEditor extends Component<Props> {
             margin="dense"
             onChange={handleChange}
             style={{ flex: 1 }}
-            inputProps={{ autocomplete: 'off' }}
+            inputProps={{
+              autocomplete: 'off',
+              'data-1p-ignore': 'true',
+              'data-lp-ignore': 'true',
+            }}
           />
 
           {showPublicCheckbox && (

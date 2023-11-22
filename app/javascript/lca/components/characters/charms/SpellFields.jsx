@@ -120,7 +120,11 @@ class SpellFields extends Component<Props> {
               label="Name"
               margin="dense"
               style={{ width: '25em' }}
-              inputProps={{ autocomplete: 'off' }}
+              inputProps={{
+                autocomplete: 'off',
+                'data-1p-ignore': 'true',
+                'data-lp-ignore': 'true',
+              }}
             />
             <br />
             <CharmCategoryAutocomplete

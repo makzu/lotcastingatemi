@@ -57,7 +57,11 @@ const QcSpellFields = ({
         label="Name"
         margin="dense"
         fullWidth
-        inputProps={{ autocomplete: 'off' }}
+        inputProps={{
+          autocomplete: 'off',
+          'data-1p-ignore': 'true',
+          'data-lp-ignore': 'true',
+        }}
       />
       <div className={classes.flexContainer}>
         <TextField

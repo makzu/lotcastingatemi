@@ -61,7 +61,11 @@ export default class QcMeritFields extends React.Component<Props> {
           margin="dense"
           onChange={handleChange}
           fullWidth
-          inputProps={{ autocomplete: 'off' }}
+          inputProps={{
+            autocomplete: 'off',
+            'data-1p-ignore': 'true',
+            'data-lp-ignore': 'true',
+          }}
         />
 
         <TextField

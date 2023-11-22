@@ -38,7 +38,11 @@ const BasicsEditor = ({
       label="Name"
       margin="dense"
       onChange={onChange}
-      inputProps={{ autocomplete: 'off' }}
+      inputProps={{
+        autocomplete: 'off',
+        'data-1p-ignore': 'true',
+        'data-lp-ignore': 'true',
+      }}
     />
 
     <RatingField

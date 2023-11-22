@@ -105,7 +105,11 @@ class QcEditor extends Component<Props> {
               label="Name"
               margin="dense"
               onChange={handleChange}
-              inputProps={{ autocomplete: 'off' }}
+              inputProps={{
+                autocomplete: 'off',
+                'data-1p-ignore': 'true',
+                'data-lp-ignore': 'true',
+              }}
             />
             <TextField
               name="ref"

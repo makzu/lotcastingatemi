@@ -135,7 +135,11 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
                   style={{ width: '30em' }}
                   onChange={onChange}
                   margin="dense"
-                  inputProps={{ autocomplete: 'off' }}
+                  inputProps={{
+                    autocomplete: 'off',
+                    'data-1p-ignore': 'true',
+                    'data-lp-ignore': 'true',
+                  }}
                 />
               </div>
 

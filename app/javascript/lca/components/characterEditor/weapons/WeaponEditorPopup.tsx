@@ -70,7 +70,11 @@ const WeaponEditorPopup = (props: Props) => {
           value={weapon.name}
           fullWidth
           onChange={handleChange}
-          inputProps={{ autocomplete: 'off' }}
+          inputProps={{
+            autocomplete: 'off',
+            'data-1p-ignore': 'true',
+            'data-lp-ignore': 'true',
+          }}
         />
         <Box display="flex" justifyContent="space-between">
           <WeaponAbilitySelect

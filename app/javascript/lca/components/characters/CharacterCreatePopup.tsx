@@ -129,6 +129,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                 margin="normal"
                 fullWidth
                 onChange={handleChange}
+                inputProps={{ autocomplete: 'off' }}
               />
             </div>
 

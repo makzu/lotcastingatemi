@@ -24,7 +24,7 @@ import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
 
   bgBonus: {
@@ -100,6 +100,7 @@ class BattlegroupEditor extends Component<Props> {
             margin="dense"
             onChange={handleChange}
             style={{ flex: 1 }}
+            inputProps={{ autocomplete: 'off' }}
           />
 
           {showPublicCheckbox && (
@@ -353,8 +354,5 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   ProtectedComponent,
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { updateBattlegroup }
-  )
+  connect(mapStateToProps, { updateBattlegroup }),
 )(BattlegroupEditor)

@@ -16,7 +16,7 @@ import TextField from 'components/generic/TextField.jsx'
 import type { QcCharm } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type Props = {
@@ -61,6 +61,7 @@ export default class QcCharmFields extends React.Component<Props> {
           label="Name"
           margin="dense"
           onChange={handleChange}
+          inputProps={{ autocomplete: 'off' }}
         />
         <RatingField
           trait="min_essence"

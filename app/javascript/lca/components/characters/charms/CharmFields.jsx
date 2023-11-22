@@ -141,6 +141,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               label="Name"
               margin="dense"
               style={{ width: '25em' }}
+              inputProps={{ autocomplete: 'off' }}
             />
             {charm.charm_type === 'Evocation' && (
               <TextField

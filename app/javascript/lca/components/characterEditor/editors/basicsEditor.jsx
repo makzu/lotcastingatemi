@@ -38,6 +38,7 @@ const BasicsEditor = ({
       label="Name"
       margin="dense"
       onChange={onChange}
+      inputProps={{ autocomplete: 'off' }}
     />
 
     <RatingField
@@ -90,8 +91,8 @@ const enhance: Enhancer<Props, ExposedProps> = compose(
         'essence',
         'description',
         'public',
-      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox
-  )
+      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox,
+  ),
 )
 
 export default enhance(BasicsEditor)

@@ -32,7 +32,7 @@ class QcCreatePopup extends React.Component<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ qc: { ...this.state.qc, name: e.target.value } })
   }
 
@@ -60,6 +60,7 @@ class QcCreatePopup extends React.Component<Props, State> {
               margin="normal"
               fullWidth
               onChange={handleChange}
+              inputProps={{ autocomplete: 'off' }}
             />
           </DialogContent>
           <DialogActions>
@@ -79,9 +80,6 @@ class QcCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, {}> = connect(
-  null,
-  { createQc }
-)
+const enhance: Enhancer<Props, {}> = connect(null, { createQc })
 
 export default enhance(QcCreatePopup)

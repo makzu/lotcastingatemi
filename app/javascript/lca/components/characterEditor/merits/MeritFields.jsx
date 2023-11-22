@@ -134,7 +134,7 @@ class MeritFields extends Component<FieldsProps> {
           />
         </div>
 
-        <div>
+        <div style={{ display: 'flex' }}>
           <TextField
             name="ref"
             value={merit.ref}

@@ -32,7 +32,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       chronicle: { ...this.state.chronicle, name: e.target.value },
     })
@@ -67,6 +67,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
               margin="normal"
               fullWidth
               onChange={handleChange}
+              inputProps={{ autocomplete: 'off' }}
             />
           </DialogContent>
           <DialogActions>
@@ -81,7 +82,4 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  undefined,
-  { createChronicle }
-)(ChronicleCreatePopup)
+export default connect(undefined, { createChronicle })(ChronicleCreatePopup)

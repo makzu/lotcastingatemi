@@ -44,7 +44,7 @@ const WeaponEditorPopup = (props: Props) => {
   const [advancedOpen, setAdvancedOpen] = useState(false)
 
   const weapon = useSelector((state: State) =>
-    getSpecificWeapon(state, openWeapon)
+    getSpecificWeapon(state, openWeapon),
   )
 
   const dispatch = useDispatch()
@@ -70,6 +70,7 @@ const WeaponEditorPopup = (props: Props) => {
           value={weapon.name}
           fullWidth
           onChange={handleChange}
+          inputProps={{ autocomplete: 'off' }}
         />
         <Box display="flex" justifyContent="space-between">
           <WeaponAbilitySelect

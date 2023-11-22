@@ -58,6 +58,7 @@ class BattlegroupCreatePopup extends React.Component<Props, State> {
               margin="normal"
               fullWidth
               onChange={handleChange}
+              inputProps={{ autocomplete: 'off' }}
             />
           </DialogContent>
           <DialogActions>
@@ -77,9 +78,6 @@ class BattlegroupCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, {}> = connect(
-  null,
-  { createBattlegroup }
-)
+const enhance: Enhancer<Props, {}> = connect(null, { createBattlegroup })
 
 export default enhance(BattlegroupCreatePopup)

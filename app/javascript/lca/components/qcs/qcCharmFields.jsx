@@ -25,7 +25,7 @@ type Props = {
   onRemoveClick: Function,
 }
 export default class QcCharmFields extends Component<Props> {
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { charm } = this.props
 
@@ -107,7 +107,7 @@ export default class QcCharmFields extends Component<Props> {
           onChange={handleChange}
           fullWidth
           multiline
-          rowsMax={5}
+          maxRows={5}
         />
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <TextField

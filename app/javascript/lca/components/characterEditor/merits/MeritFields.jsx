@@ -26,7 +26,7 @@ const Handle = SortableHandle(() => (
 
 type FieldsProps = { merit: Merit, onUpdate: Function, onRemove: Function }
 class MeritFields extends Component<FieldsProps> {
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { merit } = this.props
 
@@ -35,7 +35,7 @@ class MeritFields extends Component<FieldsProps> {
     this.props.onUpdate(merit.id, merit.character_id, { [name]: value })
   }
 
-  handleCheck = (e: SyntheticInputEvent<>) => {
+  handleCheck = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name } = e.target
     const { merit } = this.props
     const value = !merit[name]
@@ -128,7 +128,7 @@ class MeritFields extends Component<FieldsProps> {
             margin="dense"
             multiline
             fullWidth
-            rowsMax={10}
+            maxRows={10}
             onChange={handleChange}
           />
         </div>

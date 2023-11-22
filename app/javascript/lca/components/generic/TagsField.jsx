@@ -38,12 +38,12 @@ class TagsField extends Component<Props, State> {
     return { value: val, oldValue: val }
   }
 
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { value } = e.target
     this.setState({ value: value.toLowerCase() })
   }
 
-  handleBlur = (e: SyntheticInputEvent<>) => {
+  handleBlur = (e: SyntheticInputEvent<HTMLInputElement>) => {
     let val = e.target.value
       .split(',')
       .map((e) => e.trim())

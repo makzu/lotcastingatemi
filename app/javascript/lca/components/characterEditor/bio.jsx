@@ -23,7 +23,7 @@ import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, updateCharacter: Function }
 class BioEditor extends Component<Props> {
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { character } = this.props
 
@@ -68,7 +68,7 @@ class BioEditor extends Component<Props> {
                 multiline
                 fullWidth
                 rows={2}
-                rowsMax={100}
+                maxRows={100}
                 onChange={handleChange}
               />
 
@@ -145,7 +145,7 @@ class BioEditor extends Component<Props> {
                 multiline
                 fullWidth
                 rows={2}
-                rowsMax={100}
+                maxRows={100}
                 onChange={handleChange}
               />
 
@@ -158,7 +158,7 @@ class BioEditor extends Component<Props> {
                 multiline
                 fullWidth
                 rows={2}
-                rowsMax={100}
+                maxRows={100}
                 onChange={handleChange}
               />
             </BlockPaper>

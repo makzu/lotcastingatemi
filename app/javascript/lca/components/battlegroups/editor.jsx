@@ -48,7 +48,7 @@ type Props = {
   updateBattlegroup: Function,
 }
 class BattlegroupEditor extends Component<Props> {
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { battlegroup } = this.props
 
@@ -57,7 +57,7 @@ class BattlegroupEditor extends Component<Props> {
     this.props.updateBattlegroup(battlegroup.id, { [name]: value })
   }
 
-  handleCheck = (e: SyntheticInputEvent<>) => {
+  handleCheck = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name } = e.target
     const value = !this.props.battlegroup[name]
 
@@ -124,7 +124,7 @@ class BattlegroupEditor extends Component<Props> {
           margin="dense"
           multiline
           fullWidth
-          rowsMax={5}
+          maxRows={5}
           onChange={handleChange}
         />
         <TextField

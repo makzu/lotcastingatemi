@@ -41,7 +41,7 @@ type Props = {
   updateCharacter: Function,
 }
 class CharacterEditor extends Component<Props> {
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { character } = this.props
 
@@ -51,7 +51,7 @@ class CharacterEditor extends Component<Props> {
     this.props.updateCharacter(character.id, { [name]: value })
   }
 
-  handleCheck = (e: SyntheticInputEvent<>) => {
+  handleCheck = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name } = e.target
     const { character } = this.props
     const value = !character[name]

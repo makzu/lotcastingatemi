@@ -11,7 +11,7 @@ class CanonExcellencyCopier extends PureComponent<
 > {
   state = { anchor: null }
 
-  handleOpen = (e: SyntheticEvent<>) => {
+  handleOpen = (e: SyntheticEvent<HTMLInputElement>) => {
     this.setState({ anchor: e.currentTarget })
   }
 

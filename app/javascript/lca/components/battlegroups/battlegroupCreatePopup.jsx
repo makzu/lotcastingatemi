@@ -29,7 +29,7 @@ class BattlegroupCreatePopup extends Component<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     this.setState({ battlegroup: { ...this.state.battlegroup, [name]: value } })
   }

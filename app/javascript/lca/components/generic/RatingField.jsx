@@ -46,7 +46,7 @@ class RatingField extends Component<Props, State> {
     return { value: props.value, oldValue: props.value }
   }
 
-  handleChange = (e: SyntheticInputEvent<>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { min, max } = this.props
 
     if (isNaN(parseInt(e.target.value))) {
@@ -65,12 +65,12 @@ class RatingField extends Component<Props, State> {
     this.props.onChange(fakeE)
   }
 
-  handleFocus = (e: SyntheticInputEvent<>) => {
+  handleFocus = (e: SyntheticInputEvent<HTMLInputElement>) => {
     if (this.props.dontFocus) return
     e.target.select()
   }
 
-  handleBlur = (e: SyntheticInputEvent<>) => {
+  handleBlur = (e: SyntheticInputEvent<HTMLInputElement>) => {
     if (isNaN(parseInt(this.state.value))) {
       // $FlowThisIsOkayISwear
       this.setState({ value: Math.max(0, this.props.min) })

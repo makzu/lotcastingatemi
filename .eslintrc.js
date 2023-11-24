@@ -42,6 +42,12 @@ module.exports = {
     'flowtype/no-types-missing-file-annotation': 0,
     'react/jsx-boolean-value': ['warn', 'never'],
   },
+  overrides: {
+    files: ['*.js', '*.jsx'],
+    rules: {
+      '@typescript-eslint/ban-types': 'off',
+    },
+  },
   settings: {
     flowtype: {
       onlyFilesWithFlowAnnotation: true,

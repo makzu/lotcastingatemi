@@ -8,7 +8,7 @@ import ResourceEditor from './resourceEditor.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import commonStyles from 'styles'
-import { WILLPOWER_MAX } from 'utils/constants.js'
+import { WILLPOWER_MAX } from 'utils/constants.ts'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, onChange: Function, classes: Object }

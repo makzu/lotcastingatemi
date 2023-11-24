@@ -18,11 +18,11 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
-import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants.js'
+import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants.ts'
 import type { fullMerit as Merit } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type FieldsProps = { merit: Merit, onUpdate: Function, onRemove: Function }

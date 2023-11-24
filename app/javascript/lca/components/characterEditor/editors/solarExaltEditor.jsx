@@ -8,7 +8,7 @@ import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 
 import { nonCasteAbilities } from 'utils/calculated'
-import { SOLAR_CASTE_ABILITIES } from 'utils/constants.js'
+import { SOLAR_CASTE_ABILITIES } from 'utils/constants.ts'
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, onChange: Function }
@@ -25,9 +25,7 @@ function SolarExaltEditor({ character, onChange }: Props) {
   const noOptionItem =
     character.caste == undefined ? (
       <MenuItem disabled>Select a Caste</MenuItem>
-    ) : (
-      undefined
-    )
+    ) : undefined
 
   return (
     <BlockPaper>

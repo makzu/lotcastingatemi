@@ -32,7 +32,7 @@ import {
   ATTRIBUTE_MAX,
   ESSENCE_MIN,
   ESSENCE_MAX,
-} from 'utils/constants.js'
+} from 'utils/constants.ts'
 import type { Charm, Character } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (

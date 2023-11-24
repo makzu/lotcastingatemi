@@ -12,11 +12,11 @@ class AbyssalCharacter < Character
 
   ABYSSAL_CASTES = %w[ dusk midnight daybreak day moonshadow ].freeze
   CASTE_ABILITIES = {
-    dusk:       %w[ archery awareness brawl dodge melee resistance thrown war ],
-    midnight:   %w[ athletics integrity performance lore presence resistance survival war ],
-    daybreak:   %w[ bureaucracy craft integrity investigation linguistics lore medicine occult ],
-    day:        %w[ athletics awareness dodge investigation larceny ride stealth socialize ],
-    moonshadow: %w[ bureaucracy larceny linguistics occult presence ride sail socialize ]
+    dusk:       %w[ archery athletics brawl melee resistance ride thrown war ],
+    midnight:   %w[ integrity larceny linguistics lore performance presence resistance survival ],
+    daybreak:   %w[ awareness bureaucracy craft investigation lore medicine occult sail ],
+    day:        %w[ athletics awareness investigation dodge larceny socialize stealth survival ],
+    moonshadow: %w[ bureaucracy integrity linguistics occult presence ride sail socialize ]
   }.freeze
 
   before_validation :set_mote_pool_totals

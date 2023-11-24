@@ -32,41 +32,43 @@ const BasicsEditor = ({
   showPublicCheckbox,
 }: Props) => (
   <BlockPaper>
-    <TextField
-      name="name"
-      value={character.name}
-      label="Name"
-      margin="dense"
-      onChange={onChange}
-      inputProps={{
-        autocomplete: 'off',
-        'data-1p-ignore': 'true',
-        'data-lp-ignore': 'true',
-      }}
-    />
-
-    <RatingField
-      trait="essence"
-      value={character.essence}
-      label="Essence"
-      min={ESSENCE_MIN}
-      max={ESSENCE_MAX}
-      onChange={onRatingChange}
-      margin="dense"
-    />
-
-    {showPublicCheckbox && (
-      <FormControlLabel
-        label="Publicly Viewable"
-        control={
-          <Checkbox
-            name="public"
-            checked={character.public}
-            onChange={onCheck}
-          />
-        }
+    <div style={{ display: 'flex' }}>
+      <TextField
+        name="name"
+        value={character.name}
+        label="Name"
+        margin="dense"
+        onChange={onChange}
+        inputProps={{
+          autocomplete: 'off',
+          'data-1p-ignore': 'true',
+          'data-lp-ignore': 'true',
+        }}
       />
-    )}
+
+      <RatingField
+        trait="essence"
+        value={character.essence}
+        label="Essence"
+        min={ESSENCE_MIN}
+        max={ESSENCE_MAX}
+        onChange={onRatingChange}
+        margin="dense"
+      />
+
+      {showPublicCheckbox && (
+        <FormControlLabel
+          label="Publicly Viewable"
+          control={
+            <Checkbox
+              name="public"
+              checked={character.public}
+              onChange={onCheck}
+            />
+          }
+        />
+      )}
+    </div>
 
     <TextField
       name="description"

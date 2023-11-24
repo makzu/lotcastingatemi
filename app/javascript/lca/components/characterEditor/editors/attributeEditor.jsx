@@ -13,10 +13,10 @@ import {
   ATTRIBUTE_MIN as MIN,
   ATTRIBUTE_MAX as MAX,
   ATTRIBUTES,
-} from 'utils/constants.js'
+} from 'utils/constants.ts'
 import type { withAttributes as Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   fieldSet: {
     marginBottom: theme.spacing(2),
   },
@@ -140,7 +140,7 @@ export default compose(
     isUnequalByKeys(
       props.character,
       newProps.character,
-      ATTRIBUTES.map(a => a.attr)
-    )
-  )
+      ATTRIBUTES.map((a) => a.attr),
+    ),
+  ),
 )(AttributeEditor)

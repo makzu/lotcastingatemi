@@ -30,7 +30,7 @@ import { Spell } from 'types'
 import { checkVisible } from 'utils'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 interface Props extends WithStyles<typeof commonStyles> {
@@ -57,6 +57,11 @@ const QcSpellFields = ({
         label="Name"
         margin="dense"
         fullWidth
+        inputProps={{
+          autocomplete: 'off',
+          'data-1p-ignore': 'true',
+          'data-lp-ignore': 'true',
+        }}
       />
       <div className={classes.flexContainer}>
         <TextField

@@ -16,7 +16,7 @@ import {
   ABILITY_MIN as MIN,
   ABILITIES,
   ABILITIES_ALL,
-} from 'utils/constants.js'
+} from 'utils/constants.ts'
 import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
 
 function AbilityField(props) {
@@ -91,13 +91,13 @@ function AbilityEditor({ character, onChange }: Props) {
     dotsOverThree = 0,
     dotsUnderThree = 0
 
-  ABILITIES.forEach(a => {
+  ABILITIES.forEach((a) => {
     const score = character[a.abil]
     totalDots += score
     dotsOverThree += Math.max(score - 3, 0)
     dotsUnderThree += Math.min(score, 3)
   })
-  character.abil_craft.concat(character.abil_martial_arts).forEach(a => {
+  character.abil_craft.concat(character.abil_martial_arts).forEach((a) => {
     const score = a.rating
     totalDots += score
     dotsOverThree += Math.max(score - 3, 0)
@@ -302,8 +302,8 @@ const enhance: Enhancer<Props, Props> = shouldUpdate((props, newProps) =>
   isUnequalByKeys(
     props.character,
     newProps.character,
-    ABILITIES_ALL.map(a => a.abil)
-  )
+    ABILITIES_ALL.map((a) => a.abil),
+  ),
 )
 
 export default enhance(AbilityEditor)

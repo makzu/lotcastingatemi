@@ -1,5 +1,5 @@
 import { Ability, Attribute, Character, Charm } from 'types'
-import { ATTRIBUTES } from 'utils/constants.js'
+import { ATTRIBUTES } from 'utils/constants'
 import { attr } from '..'
 import { highestOtherAttribute } from './custom.js'
 

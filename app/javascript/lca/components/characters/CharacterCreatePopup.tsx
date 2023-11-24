@@ -16,6 +16,7 @@ import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteS
 import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect'
 import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
+import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -75,6 +76,9 @@ class CharacterCreatePopup extends React.Component<Props, State> {
         case 'SiderealCharacter':
           exaltType = { exalt_type: 'Sidereal', aspect: false }
           break
+        case 'AbyssalCharacter':
+          exaltType = { exalt_type: 'Abyssal', aspect: false }
+          break
         default:
           exaltType = { exalt_type: 'Exalt' }
       }
@@ -125,6 +129,11 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                 margin="normal"
                 fullWidth
                 onChange={handleChange}
+                inputProps={{
+                  autocomplete: 'off',
+                  'data-1p-ignore': 'true',
+                  'data-lp-ignore': 'true',
+                }}
               />
             </div>
 
@@ -194,6 +203,22 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                 />
               </>
             )}
+            {character.type === 'AbyssalCharacter' && (
+              <>
+                <Typography paragraph>
+                  Selecting this option means the system will try to follow the
+                  rules in the core book as closely as it can. If your group
+                  uses house rules, especially ones that change available Caste
+                  or Apocalyptic abilities, choose Houserule Ability-based exalt
+                  instead.
+                </Typography>
+                <AbyssalCasteSelect
+                  value={character.caste}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </>
+            )}
             {(character.type === 'CustomAttributeCharacter' ||
               character.type === 'CustomAbilityCharacter' ||
               character.type === 'CustomEssenceCharacter') && (
@@ -212,7 +237,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                       An Ability-based Exalt, like Solars, Abyssals, Sidereals,
                       and the Dragon-Blooded. Their Charms are arranged by
                       Ability. They can have Caste and Favored Abilities, as
-                      well as a Supernal/Cthonic Ability.
+                      well as a Supernal/Apocalyptic Ability.
                     </>
                   )}
                   {character.type === 'CustomEssenceCharacter' && (

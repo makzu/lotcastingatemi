@@ -14,9 +14,9 @@ import {
   isFavoredAbility,
   isSupernalAbility,
 } from 'utils/calculated'
-import { ABILITY_NAMES } from 'utils/constants.js'
+import { ABILITY_NAMES } from 'utils/constants.ts'
 
-const styles = theme => ({
+const styles = (theme) => ({
   abilityName: {
     ...theme.typography.body1,
     textTransform: 'capitalize',
@@ -121,7 +121,9 @@ function _MartialArtsAbilityLine({
   classes,
 }: _MartialArtsAbilityLineProps) {
   const supernal = isSupernalAbility(character, 'martial_arts')
-  const caste = isCasteAbility(character, 'brawl') || isCasteAbility(character, 'martial_arts')
+  const caste =
+    isCasteAbility(character, 'brawl') ||
+    isCasteAbility(character, 'martial_arts')
   const favored = isFavoredAbility(character, 'brawl')
   const s = style ? ' (' + style + ')' : ''
   const excellency =
@@ -165,7 +167,7 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
       />
     )
   } else {
-    craft = character.abil_craft.map(craft => (
+    craft = character.abil_craft.map((craft) => (
       <CraftAbilityLine
         key={craft.craft}
         context={craft.craft}
@@ -182,7 +184,7 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
       <MartialArtsAbilityLine rating={0} character={character} pools={pools} />
     )
   } else {
-    ma = character.abil_martial_arts.map(ma => (
+    ma = character.abil_martial_arts.map((ma) => (
       <MartialArtsAbilityLine
         key={ma.style}
         style={ma.style}
@@ -192,8 +194,8 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
       />
     ))
   }
-  const line = array =>
-    array.map(abil => (
+  const line = (array) =>
+    array.map((abil) => (
       <AbilityLine
         key={abil}
         ability={abil}

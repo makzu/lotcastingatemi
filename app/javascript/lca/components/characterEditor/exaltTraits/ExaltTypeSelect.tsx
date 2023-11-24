@@ -16,6 +16,8 @@ export const prettyType = (type: string) => {
       return 'Lunar Exalt'
     case 'SiderealCharacter':
       return 'Sidereal Exalt'
+    case 'AbyssalCharacter':
+      return 'Abyssal Exalt'
 
     case 'CustomAbilityCharacter':
       return 'Ability-Based Exalt'
@@ -45,6 +47,7 @@ const ExaltTypeSelect = (props: Props) => {
     'DragonbloodCharacter',
     'LunarCharacter',
     'SiderealCharacter',
+    'AbyssalCharacter',
   ].map(MenuItemMapping)
 
   const customChoices = [

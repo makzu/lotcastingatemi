@@ -8,7 +8,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
-import { LIMIT_MAX } from 'utils/constants.js'
+import { LIMIT_MAX } from 'utils/constants.ts'
 import type { Character, Enhancer } from 'utils/flow-types'
 
 type Props = {
@@ -50,7 +50,7 @@ const enhance: Enhancer<Props, Props> = shouldUpdate(
     isUnequalByKeys(props.character, newProps.character, [
       'limit',
       'limit_trigger',
-    ])
+    ]),
 )
 
 export default enhance(LimitEditor)

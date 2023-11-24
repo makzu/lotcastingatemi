@@ -5,8 +5,8 @@ namespace :lca do
   task stats: :environment do
     puts '###################################################################'
     puts 'Today\'s LCA stats:'
-    puts "* #{Identity.count} Players \
-(#{Identity.where('updated_at < ?', 1.month.ago).count} recently logged in)"
+    puts "* #{Identity.count} Players #\
+  # (#{Identity.where('updated_at < ?', 1.month.ago).count} recently logged in)"
     puts "* #{Chronicle.count} Chronicles"
 
     puts "* #{Character.count} Characters (\
@@ -14,6 +14,8 @@ namespace :lca do
 #{SolarCharacter.count} Solars, \
 #{DragonbloodCharacter.count} DBs, \
 #{LunarCharacter.count} Lunars, \
+#{SiderealCharacter.count} Siderals, \
+#{AbyssalCharacter.count} Abyssals, \
 #{CustomAbilityCharacter.count} Ability Exalts, \
 #{CustomAttributeCharacter.count} Attribute Exalts, \
 #{CustomEssenceCharacter.count} Essence Exalts)"

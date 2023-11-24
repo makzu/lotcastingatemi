@@ -1,10 +1,18 @@
-## v97
+## v99
 
 ###### _Unreleased_
 
-- Added Abyssals
+- Nothing (so far)
+
+## v98
+
+###### Nov 24, 2023
+
+- Abyssal characters can now be created
 - Fix for Charms not appearing on other players' characters in a chronicle until the data is reloaded
 - The Withdraw pool is now correctly calculated using Athletics instead of dodge (Thanks, Kirisu🌹)
+- Disabled browser autocomplete on fields like character name, merit name, etc
+- v97 has been consigned to Oblivion
 
 ## v96
 

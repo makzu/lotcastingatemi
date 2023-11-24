@@ -2,7 +2,7 @@
 
 ## Charm Cascades
 
-The Incomparable MadLetter has created 2e-style [Charm Cascades for Solar, Dragon-Blooded, and Lunar Charms](https://www.reddit.com/r/exalted/comments/b0e9t5/madletters_charm_cascades_lunar_solar/), as well as the Martial Arts styles in the core book.
+The Incomparable MadLetter has created 2e-style [Charm Cascades for Solar, Dragon-Blooded, and Lunar Charms](https://www.reddit.com/r/exalted/comments/109gjn2/madletters_charm_cascades_sidereals_lunar_solar/), as well as the Martial Arts styles in the core book.
 
 ## Flowcharts and Guides
 
@@ -34,19 +34,33 @@ The Incomparable MadLetter has created 2e-style [Charm Cascades for Solar, Drago
 
 ## Official Published Materials
 
+### Character Splats
+
 [Core book](https://www.drivethrurpg.com/product/162759/Exalted-3rd-Edition?src=hottest_filtered&affiliate_id=286472)
-
-[Miracles of the Solar Exalted](https://www.drivethrurpg.com/product/184596/Miracles-of-the-Solar-Exalted?affiliate_id=286472)
-
-[Arms of the Chosen](https://www.drivethrurpg.com/product/226224/Arms-of-the-Chosen?affiliate_id=286472)
 
 [Dragon-Blooded: What Fire Has Wrought](https://www.drivethrurpg.com/product/261732/DragonBlooded-What-Fire-Has-Wrought?affiliate_id=286472)
 
+[Lunars: Fangs at the Gate](https://www.drivethrurpg.com/en/product/313271/lunars-fangs-at-the-gate?affiliate_id=286472)
+
+### Companion Books
+
+[Miracles of the Solar Exalted](https://www.drivethrurpg.com/product/184596/Miracles-of-the-Solar-Exalted?affiliate_id=286472)
+
+[Heirs to the Shogunate](https://preview.drivethrurpg.com/en/product/358947/heirs-to-the-shogunate?affiliate_id=286472)
+
+### Additional Material
+
+[Arms of the Chosen](https://www.drivethrurpg.com/product/226224/Arms-of-the-Chosen?affiliate_id=286472)
+
 [The Realm](https://www.drivethrurpg.com/product/276067/The-Realm?affiliate_id=286472)
 
-[Hundred Devils Night Parade](https://www.drivethrurpg.com/browse.php?keywords=Night+Parade&cPath=8329_24225&sort=6a&x=0&y=0&author=&artist=&pfrom=&pto=&affiliate_id=286472)
+[Crucible of Legend](https://www.drivethrurpg.com/en/product/448809/crucible-of-legend?affiliate_id=286472)
 
-[Adversaries of the Righteous](https://www.drivethrurpg.com/browse.php?keywords=Adversaries&cPath=8329_24225&sort=6a&x=0&y=0&author=&artist=&pfrom=&pto=&affiliate_id=286472)
+Hundred Devils Night Parade: [Collection](https://preview.drivethrurpg.com/en/product/374354/hundred-devils-night-parade-collected-edition?affiliate_id=286472) or [Individual parts](https://www.drivethrurpg.com/browse.php?keywords=Night+Parade&cPath=8329_24225&sort=6a&x=0&y=0&author=&artist=&pfrom=&pto=&affiliate_id=286472)
+
+Adversaries of the Righteous: [Collection](https://preview.drivethrurpg.com/en/product/416209/adversaries-of-the-righteous-collected-edition?affiliate_id=286472) or [Individual parts](https://www.drivethrurpg.com/browse.php?keywords=Adversaries&cPath=8329_24225&sort=6a&x=0&y=0&author=&artist=&pfrom=&pto=&affiliate_id=286472)
+
+[Tomb of Dreams](https://www.drivethrurpg.com/en/product/208891/tomb-of-dreams-an-exalted-3rd-edition-jumpstart?affiliate_id=286472) (Adventure module)
 
 [All Exalted 3e](https://www.drivethrurpg.com/browse/pub/4261/Onyx-Path-Publishing/subcategory/8329_24225/Exalted-3rd-Edition?test_epoch=0&page=1&sort=6a&affiliate_id=286472)
 

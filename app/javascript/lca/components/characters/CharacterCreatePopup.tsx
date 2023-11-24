@@ -209,7 +209,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                   Selecting this option means the system will try to follow the
                   rules in the core book as closely as it can. If your group
                   uses house rules, especially ones that change available Caste
-                  or Cthonic abilities, choose Houserule Ability-based exalt
+                  or Apocalyptic abilities, choose Houserule Ability-based exalt
                   instead.
                 </Typography>
                 <AbyssalCasteSelect
@@ -237,7 +237,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                       An Ability-based Exalt, like Solars, Abyssals, Sidereals,
                       and the Dragon-Blooded. Their Charms are arranged by
                       Ability. They can have Caste and Favored Abilities, as
-                      well as a Supernal/Cthonic Ability.
+                      well as a Supernal/Apocalyptic Ability.
                     </>
                   )}
                   {character.type === 'CustomEssenceCharacter' && (

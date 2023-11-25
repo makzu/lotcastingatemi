@@ -107,7 +107,7 @@ class Character < ApplicationRecord
 
   def self.character_types
     %w[
-      Character SolarCharacter DragonbloodCharacter LunarCharacter SiderealCharacter
+      Character SolarCharacter DragonbloodCharacter LunarCharacter SiderealCharacter AbyssalCharacter
       CustomAbilityCharacter CustomAttributeCharacter CustomEssenceCharacter
     ]
   end

@@ -1,8 +1,15 @@
-## v99
+## v100
 
 ###### _Unreleased_
 
 - Nothing (so far)
+
+## v99
+
+###### Nov 24, 2023
+
+- Fixed characters no longer being aware of Awareness (Thanks, Zergon!)
+- Fixed Charms not being assignable to Attributes or Abilities (Thanks, Zergon!)
 
 ## v98
 

@@ -72,6 +72,7 @@ export const ABILITIES_ALL = [
 export const ABILITIES_ALL_NO_MA = [
   { abil: 'abil_archery', pretty: 'Archery' },
   { abil: 'abil_athletics', pretty: 'Athletics' },
+  { abil: 'abil_awareness', pretty: 'Awareness' },
   { abil: 'abil_brawl', pretty: 'Brawl' },
   { abil: 'abil_bureaucracy', pretty: 'Bureaucracy' },
   { abil: 'abil_craft', pretty: 'Craft' },

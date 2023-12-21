@@ -15,6 +15,10 @@ module Api
           render json: @poison.errors.details, status: :bad_request
         end
       end
+
+      def poison_params
+        params.require(:poison).permit(*base_attributes, :sorting_position)
+      end
     end
   end
 end

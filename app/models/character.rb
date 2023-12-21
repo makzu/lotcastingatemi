@@ -11,22 +11,27 @@ class Character < ApplicationRecord
   include BelongsToPlayer
   include HealthLevels
   include Intimacies
-  include Sortable
-  include SortableBySt
+  include RankedModel
   include Willpower
 
-  has_many :merits,  dependent: :destroy
-  has_many :weapons, dependent: :destroy
-  has_many :spells,  dependent: :destroy, as: :sorcerer
+  ranks :sorting, with_same: :player_id, class_name: 'Character'
+  ranks :chronicle_sorting, with_same: :chronicle_id, class_name: 'Character'
 
-  has_many :ability_charms,      inverse_of: :character, dependent: :destroy, class_name: '::Charms::AbilityCharm'
-  has_many :attribute_charms,    inverse_of: :character, dependent: :destroy, class_name: '::Charms::AttributeCharm'
-  has_many :essence_charms,      inverse_of: :character, dependent: :destroy, class_name: '::Charms::EssenceCharm'
-  has_many :martial_arts_charms, inverse_of: :character, dependent: :destroy, class_name: '::Charms::MartialArtsCharm'
-  has_many :spirit_charms,       inverse_of: :character, dependent: :destroy, class_name: '::Charms::SpiritCharm'
-  has_many :evocations,          inverse_of: :character, dependent: :destroy, class_name: '::Charms::Evocation'
+  with_options inverse_of: :character, dependent: :destroy do
+    has_many :ability_charms,      -> { order(:sorting) }, class_name: '::Charms::AbilityCharm'
+    has_many :attribute_charms,    -> { order(:sorting) }, class_name: '::Charms::AttributeCharm'
+    has_many :essence_charms,      -> { order(:sorting) }, class_name: '::Charms::EssenceCharm'
+    has_many :martial_arts_charms, -> { order(:sorting) }, class_name: '::Charms::MartialArtsCharm'
+    has_many :spirit_charms,       -> { order(:sorting) }, class_name: '::Charms::SpiritCharm'
+    has_many :evocations,          -> { order(:sorting) }, class_name: '::Charms::Evocation'
+    has_many :merits,              -> { order(:sorting) }
+    has_many :weapons,             -> { order(:sorting) }
+  end
 
-  has_many :poisons, as: :poisonable, dependent: :destroy
+  with_options dependent: :destroy do
+    has_many :spells,  -> { order(:sorting) }, as: :sorcerer, inverse_of: :sorcerer
+    has_many :poisons, -> { order(:sorting) }, as: :poisonable, inverse_of: :poisonable
+  end
 
   normalizes :armor_tags, with: method(:trim_array_attribute)
 
@@ -69,27 +74,28 @@ class Character < ApplicationRecord
   validates :sorcerous_motes, numericality: { greater_than_or_equal_to: 0 }
   validates :onslaught,       numericality: { greater_than_or_equal_to: 0 }
 
-  after_initialize :set_xp_log
-  after_initialize :set_solar_xp_log
-  after_initialize :set_rituals
+  # after_initialize :set_xp_log
+  # after_initialize :set_solar_xp_log
+  # after_initialize :set_rituals
+  before_validation :trim_armor_tags
 
-  def set_xp_log
-    return if xp_spent.zero? || !xp_log.empty?
+  # def set_xp_log
+  #   return if xp_spent.zero? || !xp_log.empty?
 
-    self.xp_log = [{ label: 'Spent XP', points: xp_spent }]
-  end
+  #   self.xp_log = [{ label: 'Spent XP', points: xp_spent }]
+  # end
 
-  def set_solar_xp_log
-    return if xp_solar_spent.zero? || !xp_log_solar.empty?
+  # def set_solar_xp_log
+  #   return if xp_solar_spent.zero? || !xp_log_solar.empty?
 
-    self.xp_log_solar = [{ label: 'Spent Solar XP', points: xp_solar_spent }]
-  end
+  #   self.xp_log_solar = [{ label: 'Spent Solar XP', points: xp_solar_spent }]
+  # end
 
-  def set_rituals
-    return if shaping_rituals.blank? || !rituals.empty?
+  # def set_rituals
+  #   return if shaping_rituals.blank? || !rituals.empty?
 
-    self.rituals = [shaping_rituals]
-  end
+  #   self.rituals = [shaping_rituals]
+  # end
 
   def entity_type
     'character'

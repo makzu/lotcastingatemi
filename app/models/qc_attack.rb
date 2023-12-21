@@ -4,9 +4,11 @@
 # and add their own bonuses.
 class QcAttack < ApplicationRecord
   include Broadcastable
-  include Sortable
+  include RankedModel
+
   belongs_to :qc_attackable, polymorphic: true
   alias character qc_attackable
+  ranks :sorting, with_same: :qc_attackable_id
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 

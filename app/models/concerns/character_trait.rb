@@ -4,8 +4,6 @@
 module CharacterTrait
   extend ActiveSupport::Concern
   included do
-    include Sortable
-
     belongs_to :character
 
     delegate :player,      to: :character

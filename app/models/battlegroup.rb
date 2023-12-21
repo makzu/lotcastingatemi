@@ -4,13 +4,17 @@
 class Battlegroup < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
-  include Sortable
-  include SortableBySt
+  include RankedModel
   include Willpower
 
-  has_many :qc_attacks, dependent: :destroy, as: :qc_attackable
-  has_many :combat_actors, dependent: :destroy, as: :actor
-  has_many :poisons, as: :poisonable, dependent: :destroy
+  ranks :sorting, with_same: :player_id
+  ranks :chronicle_sorting, with_same: :chronicle_id
+
+  with_options dependent: :destroy do
+    has_many :qc_attacks,    as: :qc_attackable, inverse_of: :qc_attackable
+    has_many :poisons,       as: :poisonable,    inverse_of: :poisonable
+    has_many :combat_actors, as: :actor,         inverse_of: :actor
+  end
 
   validates :size, zero_thru_five_stat: true
 

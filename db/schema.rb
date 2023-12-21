@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
+ActiveRecord::Schema[6.1].define(version: 2023_12_19_012435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.boolean "has_acted", default: false
     t.boolean "public", default: false
     t.string "portrait_link"
+    t.integer "sorting"
+    t.integer "chronicle_sorting"
     t.index ["chronicle_id"], name: "index_battlegroups_on_chronicle_id"
     t.index ["player_id"], name: "index_battlegroups_on_player_id"
   end
@@ -178,6 +180,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.jsonb "base_pool_overrides", default: {}
     t.jsonb "bonuses", default: []
     t.string "active_form", default: "base"
+    t.integer "sorting"
+    t.integer "chronicle_sorting"
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -204,6 +208,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.integer "sort_order", default: 0
     t.string "categories", default: [], array: true
     t.string "summary", default: ""
+    t.integer "sorting"
     t.index ["character_id"], name: "index_charms_on_character_id"
   end
 
@@ -280,6 +285,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.integer "sort_order", default: 0
     t.boolean "mutation", default: false
     t.string "forms", default: [], array: true
+    t.integer "sorting"
     t.index ["character_id"], name: "index_merits_on_character_id"
   end
 
@@ -307,6 +313,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.bigint "poisonable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sorting"
     t.index ["poisonable_type", "poisonable_id"], name: "index_poisons_on_poisonable_type_and_poisonable_id"
   end
 
@@ -322,6 +329,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.datetime "updated_at", null: false
     t.string "qc_attackable_type"
     t.integer "sort_order", default: 0
+    t.integer "sorting"
     t.index ["qc_attackable_id"], name: "index_qc_attacks_on_qc_attackable_id"
   end
 
@@ -339,6 +347,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sort_order", default: 0
+    t.integer "sorting"
     t.index ["qc_id"], name: "index_qc_charms_on_qc_id"
   end
 
@@ -352,6 +361,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sort_order", default: 0
+    t.integer "sorting"
     t.index ["qc_id"], name: "index_qc_merits_on_qc_id"
   end
 
@@ -418,6 +428,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "categories", default: [], array: true
     t.integer "feats_of_strength", default: 0
     t.integer "strength", default: 0
+    t.integer "sorting"
+    t.integer "chronicle_sorting"
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
@@ -437,6 +449,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.integer "sort_order", default: 0
     t.string "categories", default: [], array: true
     t.string "sorcerer_type"
+    t.integer "sorting"
     t.index ["sorcerer_id"], name: "index_spells_on_sorcerer_id"
   end
 
@@ -458,6 +471,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.integer "bonus_overwhelming", default: 0
     t.text "notes", default: ""
     t.jsonb "overrides", default: {}
+    t.integer "sorting"
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 

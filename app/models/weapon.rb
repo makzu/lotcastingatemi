@@ -4,6 +4,9 @@
 class Weapon < ApplicationRecord
   include Broadcastable
   include CharacterTrait
+  include RankedModel
+
+  ranks :sorting, with_same: :character_id
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 

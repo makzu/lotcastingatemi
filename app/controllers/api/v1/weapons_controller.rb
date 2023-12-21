@@ -20,6 +20,7 @@ module Api
 
         params.require(:weapon).permit(
           *base_attributes,
+          :sorting_position,
           tags:      [],
           overrides: {
             attack_attribute:  %i[use base_only],

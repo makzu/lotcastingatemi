@@ -5,6 +5,9 @@ class Charm < ApplicationRecord
   include Broadcastable
   include CharacterTrait
   include EssenceCharm
+  include RankedModel
+
+  ranks :sorting, with_same: :character_id
 
   def charm_type
     'Charm'

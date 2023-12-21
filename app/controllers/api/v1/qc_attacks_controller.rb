@@ -19,7 +19,7 @@ module Api
       def qc_attack_params
         return if params[:qc_attack].blank?
 
-        params.require(:qc_attack).permit(*base_attributes, tags: [])
+        params.require(:qc_attack).permit(*base_attributes, :sorting_position, tags: [])
       end
     end
   end

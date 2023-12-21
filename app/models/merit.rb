@@ -4,6 +4,9 @@
 class Merit < ApplicationRecord
   include Broadcastable
   include CharacterTrait
+  include RankedModel
+
+  ranks :sorting, with_same: :character_id
 
   validates :merit_cat, inclusion: { in: %w[ story innate purchased flaw ] }
 

@@ -18,7 +18,7 @@ module Api
       def qc_merit_params
         return if params[:qc_merit].blank?
 
-        params.require(:qc_merit).permit(*base_attributes, keywords: [])
+        params.require(:qc_merit).permit(*base_attributes, :sorting_position, keywords: [])
       end
     end
   end

@@ -4,5 +4,5 @@
 class PoisonSerializer < BaseSerializer
   attributes :name, :penalty, :interval, :damage, :damage_type,
              :crash_damage_type, :vector, :duration, :duration_type, :notes,
-             :sort_order, :ref
+             :sorting, :ref
 end

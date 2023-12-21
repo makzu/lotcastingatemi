@@ -3,7 +3,6 @@
 # Model for Poisons, as described starting in Core p.232
 class Poison < ApplicationRecord
   include Broadcastable
-  include Sortable
 
   belongs_to :poisonable, polymorphic: true
 

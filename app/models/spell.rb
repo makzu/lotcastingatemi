@@ -3,7 +3,9 @@
 # Spells!  For sorcerers.
 class Spell < ApplicationRecord
   include Broadcastable
-  include Sortable
+  include RankedModel
+
+  ranks :sorting, with_same: :sorcerer_id
 
   belongs_to :sorcerer, polymorphic: true
 

@@ -215,10 +215,11 @@ class QcSheet extends Component<Props> {
       <div key={merit.id}>
         <strong>{merit.name} </strong>
         <ReactMarkdown
-          source={merit.body}
           className={classes.markdown}
           components={{ a: LinkRenderer }}
-        />
+        >
+          {merit.body}
+        </ReactMarkdown>
       </div>
     ))
     const charms = qc_charms.map((charm) => (
@@ -229,10 +230,11 @@ class QcSheet extends Component<Props> {
         )<br />
         Keywords: {charm.keywords.join(', ') || 'none'}
         <ReactMarkdown
-          source={charm.body}
           className={classes.markdown}
           renderers={{ a: LinkRenderer }}
-        />
+        >
+          {charm.body}
+        </ReactMarkdown>
       </div>
     ))
     const spell_list = spells.map((spell) => (
@@ -243,10 +245,11 @@ class QcSheet extends Component<Props> {
           <>Keywords: {spell.keywords.join(', ')}</>
         )}
         <ReactMarkdown
-          source={spell.body}
           className={classes.markdown}
           renderers={{ a: LinkRenderer }}
-        />
+        >
+          {spell.body}
+        </ReactMarkdown>
       </div>
     ))
     const rituals = qc.rituals.map((ritual, i) => (

@@ -32,6 +32,7 @@ export const NIGHT = 'night'
 export const ECLIPSE = 'eclipse'
 
 export const SOLAR_CASTES = [DAWN, ZENITH, TWILIGHT, NIGHT, ECLIPSE] as const
+export type SolarCastes = (typeof SOLAR_CASTES)[number]
 
 export const SOLAR_CASTE_ABILITIES = {
   DAWN: [ARCHERY, AWARENESS, BRAWL, DODGE, MELEE, RESISTANCE, THROWN, WAR],

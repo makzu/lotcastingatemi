@@ -42,7 +42,7 @@ export function maxExcellency(
   character: Character,
   attribute: Attribute,
   ability: Ability,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
   staticRating = false,
   stunt = false,
 ) {

@@ -1,5 +1,3 @@
-// import { Character } from '@/types/character'
-// import { LunarCharacter } from './character'
 import {
   STRENGTH,
   DEXTERITY,
@@ -25,37 +23,11 @@ export const LUNAR_CASTES = [
 ] as const
 export type LunarCastes = (typeof LUNAR_CASTES)[number]
 
-const FULL_MOON_ATTRIBUTES = [STRENGTH, DEXTERITY, STAMINA] as const
-const CHANGING_MOON_ATTRIBUTES = [CHARISMA, MANIPULATION, APPEARANCE] as const
-const NO_MOON_ATTRIBUTES = [PERCEPTION, INTELLIGENCE, WITS] as const
-
 export const LUNAR_CASTE_ATTRIBUTES = {
-  FULL_MOON: FULL_MOON_ATTRIBUTES,
-  CHANGING_MOON: CHANGING_MOON_ATTRIBUTES,
-  NO_MOON: NO_MOON_ATTRIBUTES,
+  FULL_MOON: [STRENGTH, DEXTERITY, STAMINA],
+  CHANGING_MOON: [CHARISMA, MANIPULATION, APPEARANCE],
+  NO_MOON: [PERCEPTION, INTELLIGENCE, WITS],
   CASTELESS: [],
 } as const
 
-// type LimitedTuple<T> = [] | [T] | [T, T]
-
-// export interface IFullMoon extends LunarCharacterType {
-//   caste: typeof FULL_MOON
-//   caste_attributes: LimitedTuple<(typeof FULL_MOON_ATTRIBUTES)[number]>
-// }
-
-// export interface IChangingMoon extends LunarCharacterType {
-//   caste: typeof CHANGING_MOON
-//   caste_attributes: LimitedTuple<(typeof CHANGING_MOON_ATTRIBUTES)[number]>
-// }
-
-// export interface INoMoon extends LunarCharacterType {
-//   caste: typeof NO_MOON
-//   caste_attributes: LimitedTuple<(typeof NO_MOON_ATTRIBUTES)[number]>
-// }
-
-// export interface LunarCharacterType extends Character {
-//   type: typeof LunarCharacter
-//   caste: (typeof LUNAR_CASTES)[number]
-//   aspect: false
-//   exalt_type: 'lunar'
-// }
+export type FullMoonCasteAttributes = typeof LUNAR_CASTE_ATTRIBUTES.FULL_MOON

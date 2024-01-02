@@ -1,19 +1,17 @@
-// @flow
-import SolarExcellency, { solarExcellencyAbils } from './solar.js'
-import DbExcellency, { dbExcellencyAbils } from './dragonblooded.js'
+import { Character, Charm } from '@/types'
+import { Ability } from '@/utils/constants.new/abilities'
+import { Attribute } from '@/utils/constants.new/attributes'
+import CustomExcellency from './custom'
+import DbExcellency, { dbExcellencyAbils } from './dragonblooded'
 import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
-import CustomExcellency from './custom.js'
-import type { Character, Charm } from 'utils/flow-types'
+import SolarExcellency, { solarExcellencyAbils } from './solar'
 
-export const excellencyAbils = (
-  character: Character,
-  charms: Array<Charm>,
-): Array<string> => {
+export const excellencyAbils = (character: Character, charms: Array<Charm>) => {
   // Mortals do not have excellencies
   if (character.type === 'Character') return []
 
-  let excellencies: Array<string> = character.excellencies_for || []
+  let excellencies = character.excellencies_for || []
 
   if (character.type === 'SolarCharacter' || excellencies.includes('solar')) {
     excellencies = excellencies.concat(solarExcellencyAbils(character, charms))
@@ -42,8 +40,8 @@ export const excellencyAbils = (
 
 export function maxExcellency(
   character: Character,
-  attribute: string,
-  ability: string,
+  attribute: Attribute,
+  ability: Ability,
   excellencyAbils: Array<string>,
   staticRating = false,
   stunt = false,

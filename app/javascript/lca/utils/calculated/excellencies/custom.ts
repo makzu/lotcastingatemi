@@ -1,13 +1,12 @@
-// @flow
-import { attr, abil, specialtiesFor } from '..'
+import { Character } from '@/types'
+import { halfRoundDown, halfRoundUp } from '@/utils'
+import { ABILITIES, Ability } from '@/utils/constants.new/abilities'
+import { ATTRIBUTES, Attribute } from '@/utils/constants.new/attributes'
+import { abil, attr, specialtiesFor } from '..'
 
-import { halfRoundUp, halfRoundDown } from 'utils'
-import { ABILITIES, ATTRIBUTES } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
-
-export const highestOtherAbility = (character: Character, ability: string) => {
-  let result = ABILITIES.filter((a) => a.abil !== `abil_${ability}`).map(
-    (a) => character[a.abil],
+export const highestOtherAbility = (character: Character, ability: Ability) => {
+  const result = ABILITIES.filter((a) => a !== ability).map((a) =>
+    abil(character, a),
   )
 
   return Math.max(...result)
@@ -15,10 +14,10 @@ export const highestOtherAbility = (character: Character, ability: string) => {
 
 export const highestOtherAttribute = (
   character: Character,
-  attribute: string,
+  attribute: Attribute,
 ) => {
-  let result = ATTRIBUTES.filter((a) => a.attr !== `attr_${attribute}`).map(
-    (a) => character[a.attr],
+  const result = ATTRIBUTES.filter((a) => a !== attribute).map((a) =>
+    attr(character, a),
   )
 
   return Math.max(...result)
@@ -26,16 +25,16 @@ export const highestOtherAttribute = (
 
 export default (
   character: Character,
-  attribute: string,
-  ability: string,
+  attribute: Attribute,
+  ability: Ability,
   staticRating: boolean,
   stunt = false,
 ) => {
-  let excellency = stunt ? character.excellency_stunt : character.excellency
+  const excellency = stunt ? character.excellency_stunt : character.excellency
   let result = 0
 
   const exArray = excellency.split('+') || []
-  for (let ex of exArray) {
+  for (const ex of exArray) {
     switch (ex) {
       case 'solar':
         result += attr(character, attribute) + abil(character, ability)

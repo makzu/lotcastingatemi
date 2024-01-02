@@ -1,4 +1,3 @@
-// @flow
 /* See Core, p. 205 - 211 */
 import type { Battlegroup, QcAttack, Pool } from 'utils/flow-types'
 

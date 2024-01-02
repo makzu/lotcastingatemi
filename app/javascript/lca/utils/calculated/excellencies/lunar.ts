@@ -1,11 +1,15 @@
-import { Ability, Attribute, Character, Charm } from 'types'
-import { ATTRIBUTES } from 'utils/constants'
+import { Character, Charm } from '@/types'
+import { Ability } from '@/utils/constants.new/abilities'
+import { ATTRIBUTES, Attribute } from '@/utils/constants.new/attributes'
 import { attr } from '..'
-import { highestOtherAttribute } from './custom.js'
+import { highestOtherAttribute } from './custom'
 
+/* Fangs at the Gate, p. 142 */
+
+// Caste and Favored Attrs at 3+ or with 1+ Charm, Other Attrs at 5 or with 2+ Charms
 export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
-  const charmsPerAttribute = {}
-  const casteAndFav: string[] = character.caste_attributes.concat(
+  const charmsPerAttribute = {} as Record<Attribute, number>
+  const casteAndFav: Attribute[] = character.caste_attributes.concat(
     character.favored_attributes,
   )
   charms.forEach((ch) => {
@@ -13,22 +17,18 @@ export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
       charmsPerAttribute[ch.ability] = (charmsPerAttribute[ch.ability] || 0) + 1
   })
 
-  const attributes = ATTRIBUTES.map((a) => {
-    const pretty = a.pretty.toLowerCase()
-
-    if (
-      character[a.attr] >= 5 ||
-      charmsPerAttribute[pretty] >= 2 ||
-      (casteAndFav.includes(pretty) &&
-        (character[a.attr] >= 3 || charmsPerAttribute[pretty] >= 1))
-    ) {
-      return pretty
-    }
-  })
+  const attributes = ATTRIBUTES.filter(
+    (a) =>
+      attr(character, a) >= 5 ||
+      (charmsPerAttribute[a] || 0) >= 2 ||
+      (casteAndFav.includes(a) &&
+        (character[`attr_${a}`] >= 3 || charmsPerAttribute[a] >= 1)),
+  )
 
   return [...new Set(attributes)]
 }
 
+// Attribute, + highest other Attribute with a Stunt. Round down for static ratings
 const LunarExcellency = (
   character: Character,
   attribute: Attribute,

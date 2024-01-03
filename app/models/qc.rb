@@ -20,7 +20,7 @@ class Qc < ApplicationRecord
 
   with_options dependent: :destroy do
     has_many :qc_attacks, -> { order(:sorting) }, as: :qc_attackable, inverse_of: :qc_attackable
-    has_many :spells,     -> { order(:sorting) }, as: :sorcerer,      inverse_of: :qc_attackable
+    has_many :spells,     -> { order(:sorting) }, as: :sorcerer,      inverse_of: :sorcerer
     has_many :poisons,    -> { order(:sorting) }, as: :poisonable,    inverse_of: :poisonable
     # has_many :combat_actors, -> { order(:sorting) }, as: :actor, inverse_of: :actor
   end

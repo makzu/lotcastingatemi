@@ -70,7 +70,7 @@ module Api
         if respond_to?(:"#{resource_name}_params")
           send(:"#{resource_name}_params")
         elsif params[resource_class_sym].present?
-          params.require(resource_class_sym).permit(resource_class.attribute_names - disallowed_attributes)
+          params.require(resource_class_sym).permit(base_attributes)
         end
       end
 

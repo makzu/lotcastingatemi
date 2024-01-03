@@ -8,28 +8,31 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
-import STControls from './StControls.jsx'
-import CharacterAddPopup from './characterAddPopup.jsx'
-import CharacterCard from 'components/characters/CharacterCard.jsx'
-import QcAddPopup from './qcAddPopup.jsx'
-import QcCard from 'components/qcs/QcCard.jsx'
-import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import CharacterCard from 'components/characters/CharacterCard.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
+import BlockPaper from 'components/generic/blockPaper.jsx'
+import QcCard from 'components/qcs/QcCard.jsx'
+import STControls from './StControls.jsx'
+import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
+import CharacterAddPopup from './characterAddPopup.jsx'
+import QcAddPopup from './qcAddPopup.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.js'
+import { updateBattlegroupChronicleSort } from 'ducks/entities/battlegroup'
+import { updateCharacterChronicleSort } from 'ducks/entities/character'
+import { updateQcChronicleSort } from 'ducks/entities/qc'
 import {
-  getSpecificChronicle,
-  getPlayersForChronicle,
-  getCharactersForChronicle,
-  getQcsForChronicle,
-  getBattlegroupsForChronicle,
-  getStorytellerForChronicle,
   amIStOfChronicle,
+  getBattlegroupsForChronicle,
+  getCharactersForChronicle,
+  getPlayersForChronicle,
+  getQcsForChronicle,
+  getSpecificChronicle,
+  getStorytellerForChronicle,
 } from 'selectors'
-import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
+import type { Battlegroup, Character, fullQc } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
@@ -46,34 +49,39 @@ type Props = {
   updateCharacter: Function,
   updateQc: Function,
   updateBattlegroup: Function,
+  updateCharacterChronicleSort: Function,
+  updateQcChronicleSort: Function,
+  updateBattlegroupChronicleSort: Function,
 }
 class ChronicleDashboard extends Component<Props> {
   handleSort = ({ oldIndex, newIndex, collection }) => {
     if (oldIndex === newIndex) return
     // eslint-disable-next-line no-unused-vars
     let update = (...a) => {}
+    let updateSort
     let coll = []
     switch (collection) {
       case 'characters':
         update = this.props.updateCharacter
+        updateSort = this.props.updateCharacterChronicleSort
         coll = this.props.characters
         break
       case 'qcs':
         update = this.props.updateQc
+        updateSort = this.props.updateQcChronicleSort
         coll = this.props.qcs
         break
       case 'battlegroups':
         update = this.props.updateBattlegroup
+        updateSort = this.props.updateBattlegroupChronicleSort
         coll = this.props.battlegroups
         break
     }
     const charA = coll[oldIndex]
     const charB = coll[newIndex]
-    const offset =
-      charA.chronicle_sort_order > charB.chronicle_sort_order ? -1 : 1
-    update(charA.id, {
-      chronicle_sort_order: charB.chronicle_sort_order + offset,
-    })
+    const offset = charA.chronicle_sorting > charB.chronicle_sorting ? -1 : 1
+    updateSort({ id: charA.id, sorting: charB.chronicle_sorting + offset })
+    update(charA.id, { chronicle_sorting_position: newIndex })
   }
 
   render() {
@@ -208,8 +216,12 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(
-    mapStateToProps,
-    { updateCharacter, updateQc, updateBattlegroup }
-  )(ChronicleDashboard)
+  connect(mapStateToProps, {
+    updateCharacter,
+    updateQc,
+    updateBattlegroup,
+    updateCharacterChronicleSort,
+    updateQcChronicleSort,
+    updateBattlegroupChronicleSort,
+  })(ChronicleDashboard),
 )

@@ -20,14 +20,15 @@ import MeritFields from './MeritFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateMerit, createMerit, destroyMerit } from 'ducks/actions.js'
-import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
+import { createMerit, destroyMerit, updateMerit } from 'ducks/actions.js'
+import { updateMeritSort } from 'ducks/entities/merit'
+import { getMeritsForCharacter, getSpecificCharacter } from 'selectors'
 import commonStyles from 'styles'
-import type { Character, fullMerit as Merit, Enhancer } from 'utils/flow-types'
+import type { Character, Enhancer, fullMerit as Merit } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const styles = theme => commonStyles(theme)
+const styles = (theme) => commonStyles(theme)
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
  * ref pre-filled
@@ -42,6 +43,7 @@ type Props = ExposedProps & {
   updateMerit: Function,
   destroyMerit: Function,
   createMerit: Function,
+  updateMeritSort: Function,
   classes: Object,
 }
 
@@ -54,7 +56,7 @@ class MeritEditor extends Component<Props> {
     this.props.createMerit(this.props.character.id)
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyMerit(id, this.props.character.id)
   }
 
@@ -62,9 +64,13 @@ class MeritEditor extends Component<Props> {
     if (oldIndex === newIndex) return
     const meritA = this.props.merits[oldIndex]
     const meritB = this.props.merits[newIndex]
-    const offset = meritA.sort_order > meritB.sort_order ? -1 : 1
+    const offset = meritA.sorting > meritB.sorting ? -1 : 1
+    this.props.updateMeritSort({
+      id: meritA.id,
+      sorting: meritB.sorting + offset,
+    })
     this.props.updateMerit(meritA.id, this.props.character.id, {
-      sort_order: meritB.sort_order + offset,
+      sorting_position: newIndex,
     })
   }
 
@@ -159,12 +165,14 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    { updateMerit, destroyMerit, createMerit }
-  ),
+  connect(mapStateToProps, {
+    updateMerit,
+    destroyMerit,
+    createMerit,
+    updateMeritSort,
+  }),
   withStyles(styles),
-  ProtectedComponent
+  ProtectedComponent,
 )
 
 export default enhance(MeritEditor)

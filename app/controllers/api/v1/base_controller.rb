@@ -18,6 +18,9 @@ module Api
 
       def show
         authorize resource
+
+        return unless stale? resource
+
         render json: resource
       end
 

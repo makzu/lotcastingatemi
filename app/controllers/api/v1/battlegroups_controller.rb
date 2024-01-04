@@ -9,6 +9,9 @@ module Api
       def index
         authorize current_player
         @pagy, @battlegroups = pagy(Battlegroup.includes(:qc_attacks).where(player_id: current_player.id))
+
+        return unless stale? @battlegroups
+
         render json: @battlegroups
       end
 

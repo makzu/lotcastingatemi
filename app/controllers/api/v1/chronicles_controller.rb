@@ -19,6 +19,9 @@ module Api
       def show
         @chronicle = Chronicle.includes(include_hash).find(params[:id])
         authorize @chronicle
+
+        return unless stale? @chronicle
+
         render json: @chronicle, include: include_hash
       end
 

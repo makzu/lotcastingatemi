@@ -47,16 +47,5 @@ RSpec.describe DragonbloodCharacter do
     end
   end
 
-  describe 'converting types' do
-    %i[
-      character solar_character lunar_character sidereal_character
-      custom_ability_character custom_attribute_character custom_essence_character
-    ].each do |char|
-      it "works for #{char}" do
-        g = create(char)
-        m = described_class.from_character!(g)
-        expect(m).to be_valid
-      end
-    end
-  end
+  include_examples 'convertable_character', :dragonblood_character
 end

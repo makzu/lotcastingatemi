@@ -1,4 +1,4 @@
-FROM ruby:3.2.0
+FROM ruby:3.2.1
 
 # Will be needed for Nodejs 18 until webpack/other packages are updated to use newer openssl code:
 # ENV NODE_OPTIONS=--openssl-legacy-provider

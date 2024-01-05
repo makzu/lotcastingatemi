@@ -10,7 +10,7 @@ FactoryBot.define do
     willpower_temporary { 1 }
     chronicle
     player
-    association :actor, factory: :qc
+    actor factory: %i[qc]
   end
 
   factory :battlegroup_combat_actor, class: 'CombatActor' do
@@ -22,6 +22,6 @@ FactoryBot.define do
     willpower_temporary { 1 }
     chronicle
     player
-    association :actor, factory: :battlegroup
+    actor factory: %i[battlegroup]
   end
 end

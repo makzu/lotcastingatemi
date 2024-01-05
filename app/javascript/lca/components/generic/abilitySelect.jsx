@@ -7,7 +7,7 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants.js'
+import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants.ts'
 
 const styles = (theme) => ({
   root: {

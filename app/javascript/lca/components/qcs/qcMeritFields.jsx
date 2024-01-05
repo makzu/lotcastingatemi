@@ -14,7 +14,7 @@ import TextField from 'components/generic/TextField.jsx'
 import type { QcMerit } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
 type Props = {
@@ -61,6 +61,11 @@ export default class QcMeritFields extends React.Component<Props> {
           margin="dense"
           onChange={handleChange}
           fullWidth
+          inputProps={{
+            autocomplete: 'off',
+            'data-1p-ignore': 'true',
+            'data-lp-ignore': 'true',
+          }}
         />
 
         <TextField

@@ -1,21 +1,20 @@
-// @flow
 import React from 'react'
 
 import MenuItem from '@material-ui/core/MenuItem'
 
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
+import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 
 import { nonCasteAbilities } from 'utils/calculated'
-import { SOLAR_CASTE_ABILITIES } from 'utils/constants.ts'
+import { ABYSSAL_CASTE_ABILITIES } from 'utils/constants'
 import type { Character } from 'utils/flow-types'
 
-type Props = { character: Character, onChange: Function }
-function SolarExaltEditor({ character, onChange }: Props) {
-  let casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
+type Props = { character: Character; onChange: React.ChangeEventHandler }
+function AbyssalExaltEditor({ character, onChange }: Props) {
+  const casteAbilities = ABYSSAL_CASTE_ABILITIES[character.caste] || []
   let supernalAbilities = casteAbilities
-  if (character.caste === 'dawn')
+  if (character.caste === 'dusk')
     supernalAbilities = [
       ...casteAbilities.slice(0, 4),
       { abil: 'abil_martial_arts', pretty: 'Martial Arts' },
@@ -29,11 +28,11 @@ function SolarExaltEditor({ character, onChange }: Props) {
 
   return (
     <BlockPaper>
-      <SolarCasteSelect value={character.caste} onChange={onChange} />
+      <AbyssalCasteSelect value={character.caste} onChange={onChange} />
       &nbsp;&nbsp;
       <AbilitySelect
         name="supernal_ability"
-        label="Supernal Ability"
+        label="Apocalyptic Ability"
         value={character.supernal_ability || ''}
         abilities={supernalAbilities}
         prependOptions={noOptionItem}
@@ -67,4 +66,4 @@ function SolarExaltEditor({ character, onChange }: Props) {
   )
 }
 
-export default SolarExaltEditor
+export default AbyssalExaltEditor

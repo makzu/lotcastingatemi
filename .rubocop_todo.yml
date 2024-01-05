@@ -45,6 +45,7 @@ Metrics/AbcSize:
     - 'app/models/character.rb'
     - 'app/models/lunar_character.rb'
     - 'app/models/solar_character.rb'
+    - 'app/models/abyssal_character.rb'
 
 # Offense count: 7
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods, inherit_mode.

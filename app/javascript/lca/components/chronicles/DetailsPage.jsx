@@ -51,7 +51,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
     return { name: chronicle.name }
   }
 
-  onChange = e => {
+  onChange = (e) => {
     const { chronicle, updateChronicle } = this.props
     updateChronicle(chronicle.id, { [e.target.name]: e.target.value })
   }
@@ -71,7 +71,7 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
     const { chronicle, st, is_st, players } = this.props
     const { onChange } = this
 
-    const playerList = players.map(p => (
+    const playerList = players.map((p) => (
       <Fragment key={p.id}>
         <Typography>
           {p.display_name}
@@ -135,6 +135,11 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
                   style={{ width: '30em' }}
                   onChange={onChange}
                   margin="dense"
+                  inputProps={{
+                    autocomplete: 'off',
+                    'data-1p-ignore': 'true',
+                    'data-lp-ignore': 'true',
+                  }}
                 />
               </div>
 
@@ -172,8 +177,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
-  connect(
-    mapStateToProps,
-    { updateChronicle }
-  )
+  connect(mapStateToProps, { updateChronicle }),
 )(ChronicleDetailsPage)

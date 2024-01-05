@@ -1,8 +1,25 @@
-## v97
+## v100
 
 ###### _Unreleased_
 
-- Nothing (yet)
+- Nothing (so far)
+
+## v99
+
+###### Nov 24, 2023
+
+- Fixed characters no longer being aware of Awareness (Thanks, Zergon!)
+- Fixed Charms not being assignable to Attributes or Abilities (Thanks, Zergon!)
+
+## v98
+
+###### Nov 24, 2023
+
+- Abyssal characters can now be created
+- Fix for Charms not appearing on other players' characters in a chronicle until the data is reloaded
+- The Withdraw pool is now correctly calculated using Athletics instead of dodge (Thanks, Kirisu🌹)
+- Disabled browser autocomplete on fields like character name, merit name, etc
+- v97 has been consigned to Oblivion
 
 ## v96
 

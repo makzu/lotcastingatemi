@@ -23,10 +23,10 @@ import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={e => e.preventDefault()} />
+  <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -79,7 +79,7 @@ type Props = ExposedProps & {
 }
 
 class QcAttackFields extends React.Component<Props> {
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
     const { attack } = this.props
 
@@ -110,6 +110,11 @@ class QcAttackFields extends React.Component<Props> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
+          inputProps={{
+            autocomplete: 'off',
+            'data-1p-ignore': 'true',
+            'data-lp-ignore': 'true',
+          }}
         />
 
         <RatingField
@@ -196,7 +201,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )
 
 export default enhance(QcAttackFields)

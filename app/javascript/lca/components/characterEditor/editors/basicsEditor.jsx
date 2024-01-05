@@ -11,7 +11,7 @@ import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { canIDeleteCharacter } from 'selectors'
 import { isUnequalByKeys } from 'utils'
-import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.js'
+import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.ts'
 import type { Character, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {
@@ -32,36 +32,43 @@ const BasicsEditor = ({
   showPublicCheckbox,
 }: Props) => (
   <BlockPaper>
-    <TextField
-      name="name"
-      value={character.name}
-      label="Name"
-      margin="dense"
-      onChange={onChange}
-    />
-
-    <RatingField
-      trait="essence"
-      value={character.essence}
-      label="Essence"
-      min={ESSENCE_MIN}
-      max={ESSENCE_MAX}
-      onChange={onRatingChange}
-      margin="dense"
-    />
-
-    {showPublicCheckbox && (
-      <FormControlLabel
-        label="Publicly Viewable"
-        control={
-          <Checkbox
-            name="public"
-            checked={character.public}
-            onChange={onCheck}
-          />
-        }
+    <div style={{ display: 'flex' }}>
+      <TextField
+        name="name"
+        value={character.name}
+        label="Name"
+        margin="dense"
+        onChange={onChange}
+        inputProps={{
+          autocomplete: 'off',
+          'data-1p-ignore': 'true',
+          'data-lp-ignore': 'true',
+        }}
       />
-    )}
+
+      <RatingField
+        trait="essence"
+        value={character.essence}
+        label="Essence"
+        min={ESSENCE_MIN}
+        max={ESSENCE_MAX}
+        onChange={onRatingChange}
+        margin="dense"
+      />
+
+      {showPublicCheckbox && (
+        <FormControlLabel
+          label="Publicly Viewable"
+          control={
+            <Checkbox
+              name="public"
+              checked={character.public}
+              onChange={onCheck}
+            />
+          }
+        />
+      )}
+    </div>
 
     <TextField
       name="description"
@@ -90,8 +97,8 @@ const enhance: Enhancer<Props, ExposedProps> = compose(
         'essence',
         'description',
         'public',
-      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox
-  )
+      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox,
+  ),
 )
 
 export default enhance(BasicsEditor)

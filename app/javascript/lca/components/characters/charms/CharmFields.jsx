@@ -32,7 +32,7 @@ import {
   ATTRIBUTE_MAX,
   ESSENCE_MIN,
   ESSENCE_MAX,
-} from 'utils/constants.js'
+} from 'utils/constants.ts'
 import type { Charm, Character } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
@@ -141,6 +141,11 @@ class CharmFields extends Component<Props, { charm: Charm }> {
               label="Name"
               margin="dense"
               style={{ width: '25em' }}
+              inputProps={{
+                autocomplete: 'off',
+                'data-1p-ignore': 'true',
+                'data-lp-ignore': 'true',
+              }}
             />
             {charm.charm_type === 'Evocation' && (
               <TextField

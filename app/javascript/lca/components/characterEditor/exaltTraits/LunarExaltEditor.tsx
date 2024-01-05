@@ -8,7 +8,7 @@ import LunarCasteSelect from './LunarCasteSelect'
 
 import { Character } from 'types'
 import { nonCasteAttributes } from 'utils/calculated'
-import { LUNAR_CASTE_ATTRIBUTES } from 'utils/constants.js'
+import { LUNAR_CASTE_ATTRIBUTES } from 'utils/constants'
 
 interface Props {
   character: Character

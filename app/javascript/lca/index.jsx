@@ -1,11 +1,11 @@
 // @flow
 /* eslint-disable no-undef */
-require('typeface-roboto')
+import 'typeface-roboto'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import './i18n'
+// import './i18n'
 
 import configureStore from './store'
 import history from './utils/history'

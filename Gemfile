@@ -2,10 +2,10 @@
 
 source 'https://rubygems.org'
 
-# Rails 5.1+ for Webpacker
 gem 'rails', '~> 6.1'
-# Webpacker allows React/Redux and friends to thrive:
-gem 'webpacker', '~> 5.4'
+
+# Vite_Rails for more modern frontend bundling
+gem 'vite_rails', '~> 3.0'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.4'
@@ -57,7 +57,7 @@ gem 'lograge', '~> 0.12'
 # Force ruby 3.2 compatibile version
 # gem 'nokogiri', '~> 1.14'
 
-group :development, :test, :cypress do
+group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 11.1', platform: :mri
   gem 'cypress-on-rails', '~> 1.13'

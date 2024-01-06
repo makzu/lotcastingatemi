@@ -25,16 +25,18 @@ type Props = {
   source: string,
   noBlocks?: boolean,
   classes: Object,
+  className?: string,
 }
-const MarkdownDisplay = ({ source, noBlocks, classes }: Props) => (
+const MarkdownDisplay = ({ source, noBlocks, classes, className }: Props) => (
   <Typography
     component={ReactMarkdown}
-    source={source}
-    className={classes.markdown}
-    renderers={{ link: LinkRenderer }}
-    allowedTypes={noBlocks && ['text', 'strong', 'emphasis', 'delete', 'link']}
+    className={classes.markdown + ' ' + (className || '')}
+    components={{ a: LinkRenderer }}
+    allowedElements={noBlocks && ['strong', 'em', 'del', 'a']}
     unwrapDisallowed={noBlocks}
-  />
+  >
+    {source}
+  </Typography>
 )
 
 export default withStyles(commonStyles)(MarkdownDisplay)

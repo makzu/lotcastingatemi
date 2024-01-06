@@ -1,4 +1,6 @@
-// eslint-disable-next-line no-undef
+/**
+ * @type {import("eslint").Linter.Config}
+ */
 module.exports = {
   env: {
     browser: true,
@@ -32,7 +34,6 @@ module.exports = {
         SwitchCase: 1,
       },
     ],
-    'linebreak-style': ['error', 'unix'],
     'no-trailing-spaces': ['error'],
     'no-duplicate-imports': ['warn'],
     quotes: ['warn', 'single', { allowTemplateLiterals: true }],
@@ -42,12 +43,14 @@ module.exports = {
     'flowtype/no-types-missing-file-annotation': 0,
     'react/jsx-boolean-value': ['warn', 'never'],
   },
-  overrides: {
-    files: ['*.js', '*.jsx'],
-    rules: {
-      '@typescript-eslint/ban-types': 'off',
+  overrides: [
+    {
+      files: ['*.js', '*.jsx'],
+      rules: {
+        '@typescript-eslint/ban-types': 'off',
+      },
     },
-  },
+  ],
   settings: {
     flowtype: {
       onlyFilesWithFlowAnnotation: true,

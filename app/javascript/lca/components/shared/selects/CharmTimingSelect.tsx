@@ -12,7 +12,7 @@ interface Props extends Pick<TextFieldProps, 'onChange' | 'fullWidth'> {
 
 const CharmTimingSelect = (props: Props) => {
   return (
-    <TextField select label={t('charms:type')} margin="dense" {...props}>
+    <TextField select label="type" margin="dense" {...props}>
       <MenuItem value="simple">Simple</MenuItem>
       <MenuItem value="supplemental">Supplemental</MenuItem>
       <MenuItem value="reflexive">Reflexive</MenuItem>

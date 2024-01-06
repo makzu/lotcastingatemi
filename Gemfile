@@ -2,7 +2,6 @@
 
 source 'https://rubygems.org'
 
-# Rails 5.1+ for Webpacker
 gem 'rails', '~> 6.1'
 
 # Vite_Rails for more modern frontend bundling

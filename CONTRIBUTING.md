@@ -6,7 +6,7 @@ Reddit.
 
 ### What is this?
 
-This is a web app written in React.js, with a backend written in Ruby on Rails. It uses the Webpacker gem to package everything up.
+This is a web app written in React.js, with a backend written in Ruby on Rails. It uses Vite to package everything up.
 
 ### How can I run it?
 

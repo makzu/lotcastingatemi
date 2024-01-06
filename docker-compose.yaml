@@ -32,7 +32,7 @@ services:
       - vite_dev:/app/public/vite-dev
       - vite_test:/app/public/vite-test
 
-  # Runs the webpack dev server
+  # Runs vite with HMR
   vite:
     build: .
     command: ./bin/vite dev

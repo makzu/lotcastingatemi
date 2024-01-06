@@ -10,71 +10,39 @@ import GoodbyePage from 'components/pages/GoodbyePage.jsx'
 import SettingsPage from 'components/pages/SettingsPage.jsx'
 
 const ChronicleWrapper = lazy(() =>
-  import(
-    'components/chronicles/ChronicleWrapper.jsx' /* webpackChunkName: 'Chronicle' */
-  )
+  import('components/chronicles/ChronicleWrapper.jsx'),
 )
 
-const ContentList = lazy(() =>
-  import('components/pages/contentList.jsx' /* webpackChunkName: 'ListPage' */)
-)
-const CharacterList = lazy(() =>
-  import('components/CharacterList/' /* webpackChunkName: 'ListPage' */)
-)
-const QcList = lazy(() =>
-  import('components/qcs/QcList' /* webpackChunkName: 'ListPage' */)
-)
+const ContentList = lazy(() => import('components/pages/contentList.jsx'))
+const CharacterList = lazy(() => import('components/CharacterList/'))
+const QcList = lazy(() => import('components/qcs/QcList'))
 const BattlegroupList = lazy(() =>
-  import(
-    'components/battlegroups/BattlegroupList' /* webpackChunkName: 'ListPage'*/
-  )
+  import('components/battlegroups/BattlegroupList'),
 )
 
-const CharacterSheetWrap = lazy(() =>
-  import(
-    'components/CharacterSheet/' /* webpackPrefetch: 10, webpackChunkName: 'CharacterSheet' */
-  )
-)
+const CharacterSheetWrap = lazy(() => import('components/CharacterSheet/'))
 
 const CharacterEditor = lazy(() =>
-  import(
-    'components/characterEditor/CharacterEditorWrapper.jsx' /* webpackChunkName: 'CharacterEditor' */
-  )
+  import('components/characterEditor/CharacterEditorWrapper.jsx'),
 )
 
 const CharmEditor = lazy(() =>
-  import(
-    'components/characters/charms/CharmEditor.jsx' /* webpackChunkName: 'CharmEditor' */
-  )
+  import('components/characters/charms/CharmEditor.jsx'),
 )
 
-const QcSheet = lazy(() =>
-  import('components/qcs/index.jsx' /* webpackChunkName: 'QcSheet' */)
-)
+const QcSheet = lazy(() => import('components/qcs/index.jsx'))
 
-const QcEditor = lazy(() =>
-  import('components/qcs/editor.jsx' /* webpackChunkName: 'QcBgEditor' */)
-)
+const QcEditor = lazy(() => import('components/qcs/editor.jsx'))
 
-const BattlegroupSheet = lazy(() =>
-  import('components/battlegroups/index.jsx' /* webpackChunkName: 'BgSheet' */)
-)
+const BattlegroupSheet = lazy(() => import('components/battlegroups/index.jsx'))
 
 const BattlegroupEditor = lazy(() =>
-  import(
-    'components/battlegroups/editor.jsx' /* webpackChunkName: 'QcBgEditor' */
-  )
+  import('components/battlegroups/editor.jsx'),
 )
 
-const ResourcesPage = lazy(() =>
-  import(
-    'components/pages/ResourcesPage' /* webpackChunkName: 'ResourcesPage' */
-  )
-)
+const ResourcesPage = lazy(() => import('components/pages/ResourcesPage'))
 
-const HelpPage = lazy(() =>
-  import('components/pages/Help.jsx' /* webpackChunkName: 'Help' */)
-)
+const HelpPage = lazy(() => import('components/pages/Help.jsx'))
 
 export default function Routes() {
   return (

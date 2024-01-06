@@ -7,13 +7,14 @@ AllCops:
   NewCops: enable
   Include:
     - app/**/*.rb
-    - bin/*
+    - bin/setup
     - config/**/*.rb
     - spec/**/*.rb
     - Rakefile
     - config.ru
     - lib/**/*.rake
   Exclude:
+    - bin/*
     - db/schema.rb
     - db/migrate/**/*.rb
     - node_modules/**/*

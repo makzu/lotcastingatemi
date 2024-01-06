@@ -34,8 +34,8 @@ CypressOnRails::SmartFactoryWrapper.configure(
   always_reload: false,
   factory:,
   files:         [
-    Rails.root.join('spec', 'factories.rb'),
-    Rails.root.join('spec', 'factories', '**', '*.rb')
+    Rails.root.join('spec/factories.rb'),
+    Rails.root.join('spec/factories/**/*.rb')
   ]
 )
 

@@ -29,6 +29,9 @@ Bundler/GemVersion:
 # Layout/ClassStructure:
 #   Enabled: true
 
+Layout/EndOfLine:
+  Enabled: false
+
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 

@@ -27,7 +27,7 @@ class Weapon < ApplicationRecord
 
     return unless tags.include?('elemental bolt') && tags_was.exclude?('elemental bolt')
 
-    overrides[:damage_attribute] = { use: 'essence' }
+    overrides['damage_attribute'] = { 'use' => 'essence' }
     self.is_artifact = true
     self.weight = 'light'
     if character.abil_archery > character.abil_thrown

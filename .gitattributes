@@ -12,3 +12,6 @@
 *.sh text eol=lf
 
 *.rb diff=ruby
+
+db/schema.rb linguist-generated
+yarn.lock linguist-generated

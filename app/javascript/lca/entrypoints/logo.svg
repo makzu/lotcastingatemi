@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="192" width="192"
+  enable-background="new">
+  <defs>
+    <linearGradient id="prefix__b">
+      <stop offset="0" />
+      <stop offset="1" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="prefix__a">
+      <stop offset="0" stop-color="#fff" />
+      <stop offset=".333" stop-color="#fff" stop-opacity=".5" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient xlink:href="#prefix__a" id="prefix__h" x1=".354" y1="861.246" x2="192.354" y2="1051.478"
+      gradientUnits="userSpaceOnUse" />
+    <linearGradient xlink:href="#prefix__b" id="prefix__d" x1="108.207" y1="108.207" x2="192" y2="192"
+      gradientUnits="userSpaceOnUse" />
+    <clipPath clipPathUnits="userSpaceOnUse" id="prefix__c">
+      <circle r="88" cy="96" cx="96" fill="#2e7d32" stroke-width="2.781" />
+    </clipPath>
+    <clipPath clipPathUnits="userSpaceOnUse" id="prefix__g">
+      <circle cx="96" cy="956.362" r="88" fill="#2e7d32" stroke-width="2.781" />
+    </clipPath>
+    <filter id="prefix__e" width="2" height="2" x="-.5" y="-.5" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity=".498" flood-color="#000" result="flood" />
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="composite1" />
+      <feGaussianBlur in="composite1" stdDeviation="6" result="blur" />
+      <feOffset dy="6" result="offset" />
+      <feComposite in="SourceGraphic" in2="offset" result="composite2" />
+    </filter>
+    <mask maskUnits="userSpaceOnUse" id="prefix__f">
+      <g transform="rotate(135)">
+        <circle cx="96" cy="96" r="88" fill="#fff" stroke-width="2.781" />
+        <path
+          d="M64.902 64.902a45.394 45.394 0 0164.196 0 45.394 45.394 0 010 64.196 45.394 45.394 0 01-64.196 0 45.394 45.394 0 010-64.196z"
+          fill="none" stroke="#090800" stroke-width="17.5" />
+        <path d="M52.087 97h89.777s-4.01-41.265-43.42-41.926C59.036 54.414 52.088 97 52.088 97z" fill="#090800"
+          stroke-width="1.252" />
+        <path d="M131.724 116.512c2.646-15.172 1.371-22.79-2.14-25.806l14.353 9.384z" fill="#090909" />
+      </g>
+    </mask>
+  </defs>
+  <circle cx="89.635" cy="102.011" r="31.646" transform="matrix(2.78073 0 0 2.78073 -153.251 -187.665)"
+    fill="#2e7d32" />
+  <path d="M52.334 88.955l81.867-31.107 104.444 104.444-44.647 32.583-64.688 11.018-71.553-71.674z"
+    clip-path="url(#prefix__c)" fill="url(#prefix__d)" opacity=".347" />
+  <g filter="url(#prefix__e)">
+    <path d="M51.087 96h89.777s-4.01-41.265-43.42-41.926C58.036 53.414 51.088 96 51.088 96z" fill="#ffeb3b" />
+    <circle transform="rotate(-135)" r="45.394" cx="-135.765" fill="none" stroke="#ffeb3b" stroke-width="17.5" />
+  </g>
+  <circle transform="rotate(-135)" r="45.394" cx="-135.765" mask="url(#prefix__f)" fill="none" stroke="#fff59b"
+    stroke-width="17.5" />
+  <path transform="translate(0 -860.362)" clip-path="url(#prefix__g)" opacity=".1" fill="url(#prefix__h)"
+    d="M0 860.362h192v192H0z" />
+</svg>

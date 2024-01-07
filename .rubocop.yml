@@ -2,6 +2,7 @@ require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-factory_bot
 inherit_from: .rubocop_todo.yml
 AllCops:
   NewCops: enable

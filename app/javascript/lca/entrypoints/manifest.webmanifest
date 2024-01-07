@@ -1,0 +1,9 @@
+{
+  "name": "Lot-Casting Atemi",
+  "icons": [
+    { "src": "/icon-192-0.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512-0.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#2e7d32",
+  "background_color": "#2e7d32"
+}

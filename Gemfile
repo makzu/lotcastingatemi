@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 
 # Vite_Rails for more modern frontend bundling
 gem 'vite_rails', '~> 3.0'
@@ -37,7 +37,7 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 # Validate json fields like craft ratings, qc pools, etc
 # Stick with 1.x for now because we had issues with 2.x
 # TODO: fix these issues?
-gem 'activerecord_json_validator', '~>1.3'
+gem 'activerecord_json_validator', '~> 2.0'
 gem 'email_validator', '~> 2.2'
 
 # For Heroku:
@@ -52,7 +52,6 @@ gem 'scout_apm', '~> 5.3'
 # logging
 gem 'colorize', '~> 0.8'
 gem 'lograge', '~> 0.12'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -97,7 +96,6 @@ group :development do
   # gem 'meta_request'
   gem 'memory_profiler', '~> 1.0'
   gem 'rack-mini-profiler', '~> 3.0', require: false
-  # gem 'scout_apm'
   # gem 'stackprof'
 end
 

@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.0'
+gem 'rails', '~> 7.1'
 
 # Vite_Rails for more modern frontend bundling
 gem 'vite_rails', '~> 3.0'
@@ -91,7 +91,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.1'
 
   # Performance metrics
-  gem 'bullet', '~> 7.0'
+  gem 'bullet', '~> 7.1'
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler', '~> 1.0'

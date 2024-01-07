@@ -10,37 +10,21 @@ module AbilityExalt
 
     alias_method :charms, :ability_charms
 
-    before_validation :ensure_uniqueness_of_caste_and_favored_abilities
+    normalizes :caste_abilities, :favored_abilities, with: method(:trim_array_attribute)
+
     before_validation :check_favored_abilities_on_caste_ability_change
 
-    validate :caste_abilities_are_valid
-    validate :favored_abilities_are_valid
+    validates :caste_abilities, :favored_abilities, inclusion: { in: Constants::ABILITIES }
     validate :caste_and_favored_abilities_dont_overlap
 
-    def ensure_uniqueness_of_caste_and_favored_abilities
-      self.caste_abilities   = caste_abilities.uniq
-      self.favored_abilities = favored_abilities.uniq
-    end
-
     def check_favored_abilities_on_caste_ability_change
-      return unless will_save_change_to_attribute? :caste_abilities
+      return unless will_save_change_to_caste_abilities?
 
       self.favored_abilities = favored_abilities - caste_abilities
     end
 
-    def caste_abilities_are_valid
-      caste_abilities.each do |a|
-        errors.add(:caste_abilities, "#{a} is not a valid ability") unless Constants::ABILITIES.include? a
-      end
-    end
-
-    def favored_abilities_are_valid
-      favored_abilities.each do |a|
-        errors.add(:favored_abilities, "#{a} is not a valid ability") unless Constants::ABILITIES.include? a
-      end
-    end
-
     def caste_and_favored_abilities_dont_overlap
+      return unless will_save_change_to_caste_abilities? || will_save_change_to_favored_abilities?
       return unless caste_abilities.intersect?(favored_abilities)
 
       errors.add(:caste_abilities, 'cannot have the same ability as both caste and favored')

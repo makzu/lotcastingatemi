@@ -24,7 +24,7 @@ class LunarCharacter < Character
 
   validates :caste, inclusion: { in: LUNAR_CASTES }, unless: :caste_is_blank?
   validate  :caste_attributes_are_valid,             unless: :caste_is_blank?
-  validate  :two_caste_and_two_favored_attributes
+  validates :caste_attributes, :favored_attributes, length: { maximum: 2 }
 
   def self.from_character!(character)
     new_cha = character.becomes(LunarCharacter)
@@ -79,13 +79,6 @@ class LunarCharacter < Character
     caste_attributes.each do |a|
       errors.add(:caste_attributes, "#{a} is not a valid caste attribute for #{caste}s") unless (CASTE_ATTRIBUTES[caste.to_sym] || []).include? a
     end
-  end
-
-  def two_caste_and_two_favored_attributes
-    errors.add(:caste_attributes, 'Lunars can only have up to 2 caste attributes') if caste_attributes.count > 2
-    return unless favored_attributes.count > 2
-
-    errors.add(:favored_attributes, 'Lunars can only have up to 2 favored attributes')
   end
 
   def allowed_caste_attributes

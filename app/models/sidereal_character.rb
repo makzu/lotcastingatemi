@@ -24,7 +24,7 @@ class SiderealCharacter < Character
   before_validation :set_caste_abilities
 
   validates :caste, inclusion: { in: SIDEREAL_CASTES }, unless: :caste_is_blank?
-  validate  :favored_ability_count
+  validates :favored_abilities, length: { maximum: 5 }
 
   validates :limit, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10

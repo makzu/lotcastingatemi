@@ -7,19 +7,14 @@ class Weapon < ApplicationRecord
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 
-  before_validation :trim_tags
-  validates :overrides, json: { schema: Schemas::WEAPON_OVERRIDES }
+  normalizes :tags, with: method(:trim_array_attribute)
+
   before_validation :set_traits_for_elemental_bolt
 
+  validates :overrides, json: { schema: Schemas::WEAPON_OVERRIDES }
   validates :weight, inclusion: { in: %w[ light medium heavy ] }
   validates :attr, inclusion: { in: Constants::ATTRIBUTES + ['essence'] }
   validates :damage_attr, inclusion: { in: Constants::ATTRIBUTES + ['essence'] }
-
-  def trim_tags
-    return unless will_save_change_to_attribute? :tags
-
-    self.tags = tags.compact_blank.collect(&:strip).collect(&:downcase).uniq
-  end
 
   # Elemental Bolt stats are in WFHW, page 215
   def set_traits_for_elemental_bolt

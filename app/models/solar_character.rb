@@ -28,7 +28,7 @@ class SolarCharacter < Character
   validate :caste_abilities_are_valid,               unless: :caste_is_blank?
   validate :supernal_ability_is_caste,               unless: :caste_is_blank?
 
-  validate :five_caste_and_five_favored_abilities
+  validates :caste_abilities, :favored_abilities, length: { maximum: 5 }
 
   validates :limit, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 10
@@ -110,11 +110,6 @@ class SolarCharacter < Character
     else
       errors.add(:supernal_ability, 'Must be a caste ability')
     end
-  end
-
-  def five_caste_and_five_favored_abilities
-    errors.add(:caste_abilities, 'Must have at most 5 caste abilities') unless caste_abilities.length <= 5
-    errors.add(:favored_abilities, 'Must have at most 5 favored abilities') unless favored_abilities.length <= 5
   end
 
   def allowed_caste_abilities

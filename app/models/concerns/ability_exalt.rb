@@ -8,7 +8,7 @@ module AbilityExalt
   included do
     include Exalt
 
-    alias_attribute :charms, :ability_charms
+    alias_method :charms, :ability_charms
 
     before_validation :ensure_uniqueness_of_caste_and_favored_abilities
     before_validation :check_favored_abilities_on_caste_ability_change

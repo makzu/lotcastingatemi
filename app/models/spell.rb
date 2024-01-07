@@ -7,7 +7,9 @@ class Spell < ApplicationRecord
 
   belongs_to :sorcerer, polymorphic: true
 
-  alias_attribute :character, :sorcerer
+  alias character sorcerer
+  alias character= sorcerer=
+
   alias_attribute :character_id, :sorcerer_id
   delegate :player,      to: :character
   delegate :chronicle,   to: :character
@@ -34,7 +36,7 @@ class Spell < ApplicationRecord
   def entity_type
     'spell'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 
   def policy_class
     CharacterTraitPolicy

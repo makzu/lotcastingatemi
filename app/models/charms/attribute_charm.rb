@@ -7,9 +7,6 @@ module Charms
     attribute :min_ability, :integer, default: 1
     attribute :ability,     :string,  default: ''
 
-    alias_attribute :attr, :ability
-    alias_attribute :min_attr, :min_ability
-
     validates :min_ability, one_thru_ten_stat: true
 
     validates :ability, inclusion: { in: Constants::ATTRIBUTES + %w[universal] }, unless: :ability_blank?

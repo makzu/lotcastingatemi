@@ -24,20 +24,47 @@ RSpec.describe 'Chronciles' do
     end
 
     describe 'deleting a chronicle' do
-      it 'works' do
+      it 'deletes the Chronicle' do
+        delete "/api/v1/chronicles/#{chronicle.id}",
+               headers: authenticated_header(chronicle.st)
+
+        expect(response).to have_http_status :no_content
+        expect(Chronicle.find_by(id: chronicle.id)).to be_nil
+      end
+
+      it 'removes the chronicle from the ST' do
+        delete "/api/v1/chronicles/#{chronicle.id}",
+               headers: authenticated_header(chronicle.st)
+
+        expect(response).to have_http_status :no_content
+        expect(chronicle.st.reload.chronicle_ids).to be_empty
+      end
+
+      it 'removes characters from the chronicle' do
         character = create(:character, chronicle_id: chronicle.id)
+        delete "/api/v1/chronicles/#{chronicle.id}",
+               headers: authenticated_header(chronicle.st)
+
+        expect(response).to have_http_status :no_content
+        expect(character.reload.chronicle_id).to be_nil
+      end
+
+      it 'removes qcs from the chronicle' do
         qc = create(:qc, chronicle_id: chronicle.id)
+        delete "/api/v1/chronicles/#{chronicle.id}",
+               headers: authenticated_header(chronicle.st)
+
+        expect(response).to have_http_status :no_content
+        expect(qc.reload.chronicle_id).to be_nil
+      end
+
+      it 'removes battlegroups from the chronicle' do
         battlegroup = create(:battlegroup, chronicle_id: chronicle.id)
         delete "/api/v1/chronicles/#{chronicle.id}",
                headers: authenticated_header(chronicle.st)
 
-        expect(response).to have_http_status :ok
-        character.reload
-        expect(character.chronicle_id).to be_nil
-        qc.reload
-        expect(qc.chronicle_id).to be_nil
-        battlegroup.reload
-        expect(battlegroup.chronicle_id).to be_nil
+        expect(response).to have_http_status :no_content
+        expect(battlegroup.reload.chronicle_id).to be_nil
       end
     end
   end
@@ -55,7 +82,7 @@ RSpec.describe 'Chronciles' do
 
           expect(response).to have_http_status :ok
           chronicle.reload
-          expect(chronicle.send("#{char}s")).to include character
+          expect(chronicle.send(:"#{char}s")).to include character
         end
       end
 
@@ -69,7 +96,7 @@ RSpec.describe 'Chronciles' do
 
           expect(response).to have_http_status :ok
           chronicle.reload
-          expect(chronicle.send("#{char}s")).not_to include character
+          expect(chronicle.send(:"#{char}s")).not_to include character
         end
       end
     end

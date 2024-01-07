@@ -6,7 +6,7 @@ class QcAttack < ApplicationRecord
   include Broadcastable
   include Sortable
   belongs_to :qc_attackable, polymorphic: true
-  alias_attribute :character, :qc_attackable
+  alias character qc_attackable
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 
@@ -15,19 +15,14 @@ class QcAttack < ApplicationRecord
   delegate :storyteller, to: :qc_attackable
   delegate :hidden,      to: :qc_attackable
 
-  before_validation :trim_tags
+  normalizes :tags, with: method(:trim_array_attribute)
+
   validates :pool, :damage, :overwhelming, numericality: { greater_than: 0 }
-
-  def trim_tags
-    return unless will_save_change_to_attribute? :tags
-
-    self.tags = tags.compact_blank.collect(&:strip).collect(&:downcase).uniq
-  end
 
   def entity_type
     'qc_attack'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 
   def self.policy_class
     CharacterTraitPolicy

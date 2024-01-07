@@ -6,10 +6,10 @@ namespace :lca do
     desc 'Move weapon pool data (attack attribute, etc) to new Overrides hash'
     task weapon_overrides: :environment do
       Weapon.find_each do |weapon|
-        weapon.overrides[:damage_attribute] = { use: weapon.damage_attr } unless weapon.damage_attr == 'strength'
+        weapon.overrides['damage_attribute'] = { 'use' => weapon.damage_attr } unless weapon.damage_attr == 'strength'
         unless weapon.attr == 'dexterity'
-          weapon.overrides[:attack_attribute] = { use: weapon.attr }
-          weapon.overrides[:defense_attribute] = { use: weapon.attr }
+          weapon.overrides['attack_attribute'] = { 'use' => weapon.attr }
+          weapon.overrides['defense_attribute'] = { 'use' => weapon.attr }
         end
         weapon.save
       end

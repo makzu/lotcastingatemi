@@ -36,6 +36,6 @@ class Qc < ApplicationRecord
   def entity_type
     'qc'
   end
-  alias_attribute :entity_assoc, :entity_type
-  alias_attribute :type, :entity_type
+  alias entity_assoc entity_type
+  alias type entity_type
 end

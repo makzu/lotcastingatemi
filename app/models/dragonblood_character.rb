@@ -27,7 +27,7 @@ class DragonbloodCharacter < Character
 
   validates :caste, inclusion: { in: DRAGONBLOOD_ASPECTS }, unless: :caste_is_blank?
   validates :aura, inclusion:  { in: DRAGONBLOOD_ASPECTS + ['none'] }
-  validate  :favored_ability_count
+  validates :favored_abilities, length: { maximum: 5 }
 
   def self.from_character!(character)
     new_cha = character.becomes(DragonbloodCharacter)
@@ -75,11 +75,5 @@ class DragonbloodCharacter < Character
 
     self.caste_abilities = ASPECT_ABILITIES[caste.to_sym] || []
     self.favored_abilities = favored_abilities - (ASPECT_ABILITIES[caste.to_sym] || [])
-  end
-
-  def favored_ability_count
-    return if favored_abilities.length <= 5
-
-    errors.add(:favored_abilities, 'Must have at most 5 favored abilities')
   end
 end

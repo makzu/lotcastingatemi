@@ -2,7 +2,11 @@ require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-factory_bot
 inherit_from: .rubocop_todo.yml
+inherit_mode:
+  merge:
+    - AllowedNames
 AllCops:
   NewCops: enable
   Include:
@@ -52,8 +56,15 @@ Layout/SpaceInsideHashLiteralBraces:
 Layout/SpaceInsidePercentLiteralDelimiters:
   Enabled: false
 
-Metrics/AbcSize:
-  Max: 25
+# Metrics/AbcSize:
+#   Max: 25
+
+Metrics/ClassLength:
+  CountAsOne:
+    - array
+    - hash
+    - heredoc
+    - method_call
 
 Metrics/MethodLength:
   Max: 15
@@ -65,6 +76,10 @@ Naming/FileName:
 Naming/InclusiveLanguage:
   Enabled: true
 
+Naming/MethodParameterName:
+  AllowedNames:
+    - qc
+
 Style/Documentation:
   Exclude:
     - app/controllers/**/*
@@ -74,6 +89,9 @@ Style/Documentation:
 Style/MixinUsage:
   Exclude:
     - bin/*
+
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
 
 Rails/Output:
   Exclude:

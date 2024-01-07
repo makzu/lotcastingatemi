@@ -28,6 +28,8 @@ class Character < ApplicationRecord
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 
+  normalizes :armor_tags, with: method(:trim_array_attribute)
+
   validates :name, presence: true
 
   # Essence above 5 is explicitly mentioned in the book
@@ -70,7 +72,6 @@ class Character < ApplicationRecord
   after_initialize :set_xp_log
   after_initialize :set_solar_xp_log
   after_initialize :set_rituals
-  before_validation :trim_armor_tags
 
   def set_xp_log
     return if xp_spent.zero? || !xp_log.empty?
@@ -90,16 +91,10 @@ class Character < ApplicationRecord
     self.rituals = [shaping_rituals]
   end
 
-  def trim_armor_tags
-    return unless will_save_change_to_attribute? :armor_tags
-
-    self.armor_tags = armor_tags.compact_blank.collect(&:strip).collect(&:downcase).uniq
-  end
-
   def entity_type
     'character'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 
   def custom_exalt?
     false

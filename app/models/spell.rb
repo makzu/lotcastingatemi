@@ -7,7 +7,9 @@ class Spell < ApplicationRecord
 
   belongs_to :sorcerer, polymorphic: true
 
-  alias_attribute :character, :sorcerer
+  alias character sorcerer
+  alias character= sorcerer=
+
   alias_attribute :character_id, :sorcerer_id
   delegate :player,      to: :character
   delegate :chronicle,   to: :character
@@ -23,18 +25,12 @@ class Spell < ApplicationRecord
   validates :cost, presence: true
   validates :duration, presence: true
 
-  before_validation :trim_keywords
-
-  def trim_keywords
-    return unless will_save_change_to_attribute? :keywords
-
-    self.keywords = keywords.compact_blank.collect(&:strip).collect(&:downcase).uniq
-  end
+  normalizes :keywords, with: method(:trim_array_attribute)
 
   def entity_type
     'spell'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 
   def policy_class
     CharacterTraitPolicy

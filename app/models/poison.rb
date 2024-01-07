@@ -7,7 +7,7 @@ class Poison < ApplicationRecord
 
   belongs_to :poisonable, polymorphic: true
 
-  alias_attribute :character, :poisonable
+  alias character poisonable
   delegate :player,      to: :character
   delegate :chronicle,   to: :character
   delegate :storyteller, to: :character
@@ -16,7 +16,7 @@ class Poison < ApplicationRecord
   def entity_type
     'poison'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 
   def policy_class
     CharacterTraitPolicy

@@ -51,8 +51,7 @@ RSpec.shared_examples 'character trait' do |trait_type, parent_type|
                  headers: authenticated_header(trait.player)
         end.to change { trait.class.count }.by(-1)
 
-        expect(response.media_type).to eq 'application/json'
-        expect(response).to have_http_status :ok
+        expect(response).to have_http_status :no_content
       end
     end
   end

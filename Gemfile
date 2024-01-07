@@ -25,7 +25,6 @@ gem 'deep_cloneable', '~> 3.0'
 gem 'bcrypt', '~> 3.1'
 
 gem 'bootsnap', '~> 1.16', require: false
-gem 'uglifier', '~> 4.2'
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2', git: 'https://github.com/makzu/knock'
@@ -54,14 +53,12 @@ gem 'scout_apm', '~> 5.3'
 gem 'colorize', '~> 0.8'
 gem 'lograge', '~> 0.12'
 
-# Force ruby 3.2 compatibile version
-# gem 'nokogiri', '~> 1.14'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 11.1', platform: :mri
   gem 'cypress-on-rails', '~> 1.13'
-  gem 'database_cleaner', '~> 2.0'
+  gem 'database_cleaner-active_record', '~> 2.1'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'rspec-rails', '~> 6.0'
 
@@ -74,7 +71,6 @@ group :development, :test do
   # Security Tools
   gem 'brakeman', '~> 5.4'
   gem 'bundler-audit', '~> 0.9'
-  gem 'ruby_audit', '~> 2.2'
 
   # profiling
   gem 'derailed_benchmarks', '~> 2.1'
@@ -83,6 +79,9 @@ group :development, :test do
 end
 
 group :development do
+  gem 'ruby-lsp-rails', '~> 0.2', require: false
+  gem 'ruby-lsp-rspec', '~> 0.1', require: false
+
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'listen', '~> 3.8'
   gem 'web-console', '~> 4.2'

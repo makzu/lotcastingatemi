@@ -50,7 +50,7 @@ gem 'barnes', '~>0.0.9'
 gem 'scout_apm', '~> 5.3'
 
 # logging
-gem 'colorize', '~> 0.8'
+gem 'colorize', '~> 1.1'
 gem 'lograge', '~> 0.12'
 
 group :development, :test do
@@ -68,7 +68,7 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 2.18', require: false
 
   # Security Tools
-  gem 'brakeman', '~> 5.4'
+  gem 'brakeman', '~> 6.1'
   gem 'bundler-audit', '~> 0.9'
 
   # profiling
@@ -85,7 +85,7 @@ group :development do
   gem 'listen', '~> 3.8'
   gem 'web-console', '~> 4.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rack-cors', '~> 1.1', require: 'rack/cors'
+  gem 'rack-cors', '~> 2.0', require: 'rack/cors'
   gem 'rails_real_favicon', '~> 0.1'
   gem 'spring', '~> 4.1'
   gem 'spring-watcher-listen', '~> 2.1'
@@ -100,7 +100,7 @@ group :development do
 end
 
 group :test do
-  gem 'pundit-matchers', '~> 1.4'
+  gem 'pundit-matchers', '~> 3.1'
   gem 'simplecov', '~> 0.22', require: false
 end
 

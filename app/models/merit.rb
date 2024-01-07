@@ -15,5 +15,5 @@ class Merit < ApplicationRecord
   def entity_type
     'merit'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 end

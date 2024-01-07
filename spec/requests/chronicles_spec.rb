@@ -31,7 +31,7 @@ RSpec.describe 'Chronciles' do
         delete "/api/v1/chronicles/#{chronicle.id}",
                headers: authenticated_header(chronicle.st)
 
-        expect(response).to have_http_status :ok
+        expect(response).to have_http_status :no_content
         character.reload
         expect(character.chronicle_id).to be_nil
         qc.reload
@@ -55,7 +55,7 @@ RSpec.describe 'Chronciles' do
 
           expect(response).to have_http_status :ok
           chronicle.reload
-          expect(chronicle.send("#{char}s")).to include character
+          expect(chronicle.send(:"#{char}s")).to include character
         end
       end
 
@@ -69,7 +69,7 @@ RSpec.describe 'Chronciles' do
 
           expect(response).to have_http_status :ok
           chronicle.reload
-          expect(chronicle.send("#{char}s")).not_to include character
+          expect(chronicle.send(:"#{char}s")).not_to include character
         end
       end
     end

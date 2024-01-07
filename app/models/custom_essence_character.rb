@@ -7,7 +7,7 @@ class CustomEssenceCharacter < Character
 
   attribute :exalt_type, :string, default: 'Essence Exalt'
 
-  alias_attribute :charms, :essence_charms
+  alias charms essence_charms
 
   def self.from_character!(character)
     new_cha = character.becomes(CustomEssenceCharacter)

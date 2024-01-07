@@ -84,8 +84,7 @@ RSpec.shared_examples 'character' do |character_type, parent|
                  headers: authenticated_header(trait.player)
         end.to change { trait.class.count }.by(-1)
 
-        expect(response.media_type).to eq 'application/json'
-        expect(response).to have_http_status :ok
+        expect(response).to have_http_status :no_content
       end
     end
   end
@@ -100,9 +99,8 @@ RSpec.shared_examples 'character' do |character_type, parent|
 
     describe 'showing a record' do
       it 'returns an auth failure' do
-        expect do
-          get "/api/v1/#{trait.entity_type}s/#{trait.id}"
-        end.to raise_error Pundit::NotAuthorizedError
+        get "/api/v1/#{trait.entity_type}s/#{trait.id}"
+        expect(response).to have_http_status :unauthorized
       end
     end
 

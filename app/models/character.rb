@@ -99,7 +99,7 @@ class Character < ApplicationRecord
   def entity_type
     'character'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 
   def custom_exalt?
     false

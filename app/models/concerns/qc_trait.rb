@@ -7,7 +7,7 @@ module QcTrait
     include Sortable
 
     belongs_to :qc
-    alias_attribute :character, :qc
+    alias_method :character, :qc
 
     delegate :player,      to: :qc
     delegate :chronicle,   to: :qc

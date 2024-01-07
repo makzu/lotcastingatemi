@@ -13,14 +13,14 @@ RSpec.describe 'rake lca:migrate:weapon_overrides', type: :task do
     expect { task.execute }.not_to raise_error
   end
 
-  it 'migrates an ordinary weapon', aggregate_failures: true do
+  it 'migrates an ordinary weapon', :aggregate_failures do
     task.execute
     weapon.reload
     expect(weapon.overrides).to eq({})
     expect(weapon).to be_valid
   end
 
-  it 'migrates The Burning Name', aggregate_failures: true do
+  it 'migrates The Burning Name', :aggregate_failures do
     weapon.update(attr: 'intelligence', ability: 'occult')
     task.execute
     weapon.reload
@@ -28,7 +28,7 @@ RSpec.describe 'rake lca:migrate:weapon_overrides', type: :task do
     expect(weapon).to be_valid
   end
 
-  it 'migrates Elemental Bolt Attack', aggregate_failures: true do
+  it 'migrates Elemental Bolt Attack', :aggregate_failures do
     weapon.update(tags: ['elemental bolt', 'air'])
     task.execute
     expect(weapon.overrides).to eq('damage_attribute' => { 'use' => 'essence' })

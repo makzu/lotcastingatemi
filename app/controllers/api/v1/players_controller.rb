@@ -12,7 +12,14 @@ module Api
       end
 
       # Players do not have a show action
-      def show; end
+      def show
+        head :not_found
+      end
+
+      # Players do not have a create action
+      def create
+        head :forbidden
+      end
 
       def destroy
         authorize current_player

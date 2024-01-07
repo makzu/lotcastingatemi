@@ -32,6 +32,9 @@ yarn-debug.log*
 
 .yarn-integrity
 
+# RSpec thing
+/spec/examples.txt
+
 # Vim
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
@@ -53,4 +56,3 @@ node_modules
 # Vite uses dotenv and suggests to ignore local-only env files. See
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
-

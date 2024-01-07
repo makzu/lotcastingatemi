@@ -29,8 +29,8 @@ class Battlegroup < ApplicationRecord
   def entity_type
     'battlegroup'
   end
-  alias_attribute :entity_assoc, :entity_type
-  alias_attribute :type, :entity_type
+  alias entity_assoc entity_type
+  alias type entity_type
 
   # Creates a battlegroup with the stats of a particular QC and all of its
   # attacks.

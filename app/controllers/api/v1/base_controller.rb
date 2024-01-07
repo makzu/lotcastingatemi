@@ -15,6 +15,11 @@ module Api
       after_action :verify_authorized
 
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+      rescue_from Pundit::NotAuthorizedError, with: :not_authorized
+
+      def index
+        head :not_found
+      end
 
       def show
         authorize resource
@@ -35,13 +40,22 @@ module Api
 
       def destroy
         authorize resource
-        render json: resource.destroy
+
+        head :no_content if resource.destroy
       end
 
       private
 
       def record_not_found
         render status: :not_found
+      end
+
+      def not_authorized
+        if current_player
+          render status: :forbidden
+        else
+          render status: :unauthorized
+        end
       end
 
       def pundit_user
@@ -53,8 +67,8 @@ module Api
       end
 
       def generic_params
-        if respond_to?("#{resource_name}_params")
-          send("#{resource_name}_params")
+        if respond_to?(:"#{resource_name}_params")
+          send(:"#{resource_name}_params")
         elsif params[resource_class_sym].present?
           params.require(resource_class_sym).permit(resource_class.attribute_names - disallowed_attributes)
         end
@@ -62,11 +76,11 @@ module Api
 
       def setup_resource(resource = nil)
         resource ||= resource_class.find(params[:id])
-        instance_variable_set("@#{resource_name}", resource)
+        instance_variable_set(:"@#{resource_name}", resource)
       end
 
       def resource
-        instance_variable_get("@#{resource_name}")
+        instance_variable_get(:"@#{resource_name}")
       end
 
       def resource_name

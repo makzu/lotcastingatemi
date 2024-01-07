@@ -26,7 +26,6 @@ module LotCastingAtemi
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
     # Compress API responses
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
   end

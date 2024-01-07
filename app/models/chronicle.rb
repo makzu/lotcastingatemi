@@ -7,7 +7,7 @@ class Chronicle < ApplicationRecord
   before_destroy :broadcast_destroy
 
   belongs_to :st, class_name: 'Player'
-  alias_attribute :storyteller, :st
+  alias storyteller st
 
   has_secure_token :invite_code
 
@@ -50,5 +50,5 @@ class Chronicle < ApplicationRecord
   def entity_type
     'chronicle'
   end
-  alias_attribute :entity_assoc, :entity_type
+  alias entity_assoc entity_type
 end

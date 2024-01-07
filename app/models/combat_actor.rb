@@ -22,8 +22,8 @@ class CombatActor < ApplicationRecord
   def entity_type
     'combat_actor'
   end
-  alias_attribute :entity_assoc, :entity_type
-  alias_attribute :type, :entity_type
+  alias entity_assoc entity_type
+  alias type entity_type
 
   def in_combat
     true
@@ -32,9 +32,9 @@ class CombatActor < ApplicationRecord
   def not_a_stat
     false
   end
-  alias_attribute :hidden, :not_a_stat
-  alias_attribute :pinned, :not_a_stat
-  alias_attribute :public, :not_a_stat
-  alias_attribute :sort_order, :not_a_stat
-  alias_attribute :chronicle_sort_order, :not_a_stat
+  alias hidden not_a_stat
+  alias pinned not_a_stat
+  alias_method :public, :not_a_stat # rubocop:disable Style/Alias
+  alias sort_order not_a_stat
+  alias chronicle_sort_order not_a_stat
 end

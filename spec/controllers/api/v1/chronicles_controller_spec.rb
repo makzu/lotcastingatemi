@@ -28,10 +28,10 @@ RSpec.describe Api::V1::ChroniclesController do
     context 'with valid attributes' do
       it 'Increases Chronicle count by 1' do
         request.headers['Authorization'] = authenticated_header(@player)
-        @chronicle_params = attributes_for(:chronicle, st_id: @player.id)
+        new_chronicle = attributes_for(:chronicle, st_id: @player.id)
 
         expect do
-          post :create, params: { chronicle: @chronicle_params }, format: :json
+          post :create, params: { chronicle: new_chronicle }, format: :json
         end.to change(Chronicle, :count).by(1)
       end
     end

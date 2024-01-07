@@ -37,11 +37,13 @@ class Chronicle < ApplicationRecord
     )
   end
 
+  # rubocop:disable Rails/SkipsModelValidations
   def remove_characters
-    characters.clear
-    qcs.clear
-    battlegroups.clear
+    characters.update_all(chronicle_id: nil)
+    qcs.update_all(chronicle_id: nil)
+    battlegroups.update_all(chronicle_id: nil)
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   def broadcast_destroy
     DestroyBroadcastJob.perform_later(([st_id] + player_ids), self, st.entity_type, st)

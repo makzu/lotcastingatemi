@@ -75,9 +75,13 @@ group :development, :test do
   gem 'derailed_benchmarks', '~> 2.1'
   gem 'faker', '~> 3.1'
   gem 'stackprof', '~> 0.2'
+
+  # Code Quality
+  gem 'reek', '~> 6.0', require: false
 end
 
 group :development do
+  # Better developer experience in vscode
   gem 'ruby-lsp-rails', '~> 0.2', require: false
   gem 'ruby-lsp-rspec', '~> 0.1', require: false
 

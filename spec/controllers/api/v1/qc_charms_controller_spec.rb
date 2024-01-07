@@ -11,7 +11,6 @@ RSpec.describe Api::V1::QcCharmsController do
   let(:qc) { create(:qc, player_id: player.id) }
   let(:qc_charm) { create(:qc_charm, qc_id: qc.id) }
 
-
   describe 'PATCH #update' do
     it 'Updates charm attributes' do
       request.headers['Authorization'] = authenticated_header(player)

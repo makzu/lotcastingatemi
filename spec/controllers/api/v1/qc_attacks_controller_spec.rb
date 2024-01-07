@@ -11,7 +11,6 @@ RSpec.describe Api::V1::QcAttacksController do
   let(:qc) { create(:qc, player_id: player.id) }
   let(:qc_attack) { create(:qc_attack, qc_attackable: qc) }
 
-
   describe 'POST #create' do
     context 'with invalid attributes' do
       it 'Increases attack count by 0' do

@@ -11,7 +11,6 @@ RSpec.describe Api::V1::QcMeritsController do
   let(:qc) { create(:qc, player_id: player.id) }
   let(:qc_merit) { create(:qc_merit, qc_id: qc.id) }
 
-
   describe 'PATCH #update' do
     it 'Updates merit attributes' do
       request.headers['Authorization'] = authenticated_header(player)

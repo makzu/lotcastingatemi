@@ -41,7 +41,8 @@ RSpec.describe 'Characters' do
 
   context 'when changing types' do
     describe 'with valid types' do
-      %w[SolarCharacter DragonbloodCharacter CustomAbilityCharacter CustomAttributeCharacter CustomEssenceCharacter].each do |type|
+      %w[SolarCharacter DragonbloodCharacter CustomAbilityCharacter CustomAttributeCharacter
+         CustomEssenceCharacter].each do |type|
         it "works for #{type}" do
           post "/api/v1/characters/#{character.id}/change_type",
                headers: authenticated_header(character.player),

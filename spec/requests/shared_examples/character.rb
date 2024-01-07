@@ -28,14 +28,16 @@ RSpec.shared_examples 'character' do |character_type, parent|
     describe 'updating a record' do
       unless %i[battlegroup combat_actor battlegroup_combat_actor].include? character_type
         it 'succeeds for ties' do
-          params = { trait.entity_type => { ties: [{ subject: 'Vincible Sword Princess (respect)', rating: 3, hidden: false }] }}
+          params = { trait.entity_type => { ties: [{ subject: 'Vincible Sword Princess (respect)', rating: 3,
+hidden: false }] }}
           patch "/api/v1/#{trait.entity_type}s/#{trait.id}",
                 params:,
                 headers: authenticated_header(trait.player),
                 as:      :json
 
           expect(response).to have_http_status :ok
-          expect(trait.class.find(trait.id).ties).to eq [{ 'subject' => 'Vincible Sword Princess (respect)', 'rating' => 3, 'hidden' => false }]
+          expect(trait.class.find(trait.id).ties).to eq [{ 'subject' => 'Vincible Sword Princess (respect)',
+'rating' => 3, 'hidden' => false }]
         end
 
         it 'succeeds for principles' do

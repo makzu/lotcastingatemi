@@ -43,11 +43,14 @@ RSpec.describe Api::V1::MeritsController do
     context 'with invalid attributes' do
       it 'Updates merit attributes' do
         request.headers['Authorization'] = authenticated_header(player)
-        invalid_updated_merit_params = attributes_for(:merit, character_id: character.id, merit_cat: 'Invalid merit_cat')
+        invalid_updated_merit_params = attributes_for(:merit,
+                                                      character_id: character.id,
+                                                      merit_cat:    'Invalid merit_cat')
 
         expect(merit.merit_cat).to eq('story')
 
-        patch :update, params: { character_id: character.id, id: merit.id, merit: invalid_updated_merit_params, format: :json }
+        patch :update,
+              params: { character_id: character.id, id: merit.id, merit: invalid_updated_merit_params, format: :json }
         merit.reload
 
         expect(merit.merit_cat).to eq('story')

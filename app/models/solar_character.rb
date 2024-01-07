@@ -10,7 +10,7 @@ class SolarCharacter < Character
   attribute :motes_peripheral_current, :integer, default: 33
   attribute :exalt_type,               :string,  default: 'Solar'
 
-  SOLAR_CASTES = %w[ dawn zenith twilight night eclipse ].freeze
+  CASTES = %w[ dawn zenith twilight night eclipse ].freeze
   CASTE_ABILITIES = {
     dawn:     %w[ archery awareness brawl dodge melee resistance thrown war ],
     zenith:   %w[ athletics integrity performance lore presence resistance survival war ],
@@ -24,9 +24,9 @@ class SolarCharacter < Character
   before_validation :set_caste_abilities_on_supernal_change
   before_validation :set_caste_abilities_on_caste_change
 
-  validates :caste, inclusion: { in: SOLAR_CASTES }, unless: :caste_is_blank?
-  validate :caste_abilities_are_valid,               unless: :caste_is_blank?
-  validate :supernal_ability_is_caste,               unless: :caste_is_blank?
+  validates :caste, inclusion: { in: CASTES }, unless: :caste_is_blank?
+  validate :caste_abilities_are_valid,         unless: :caste_is_blank?
+  validate :supernal_ability_is_caste,         unless: :caste_is_blank?
 
   validates :caste_abilities, :favored_abilities, length: { maximum: 5 }
 
@@ -40,7 +40,7 @@ class SolarCharacter < Character
     new_cha.caste_attributes = []
     new_cha.favored_attributes = []
     new_cha.caste = (new_cha.caste || '').downcase
-    new_cha.caste = '' unless SOLAR_CASTES.include? new_cha.caste
+    new_cha.caste = '' unless CASTES.include? new_cha.caste
     new_cha.caste_abilities = new_cha.caste_abilities & (CASTE_ABILITIES[new_cha.caste.to_sym] || [])
     new_cha.limit = 0 if new_cha.limit.blank?
 
@@ -95,7 +95,10 @@ class SolarCharacter < Character
 
   def caste_abilities_are_valid
     caste_abilities.each do |a|
-      errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s") unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
+      unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
+        errors.add(:caste_abilities,
+                   "#{a} is not a valid caste ability for #{caste}s")
+      end
     end
   end
 

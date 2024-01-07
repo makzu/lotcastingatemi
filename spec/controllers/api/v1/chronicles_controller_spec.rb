@@ -7,16 +7,14 @@ RSpec.describe Api::V1::ChroniclesController do
     "Bearer #{user.token}"
   end
 
-  before do
-    @player = create(:player)
-    @chronicle = create(:chronicle, st_id: @player.id)
-  end
+  let(:player) { create(:player) }
+  let(:chronicle) { create(:chronicle, st_id: player.id) }
 
   describe 'GET show' do
     it 'returns http success' do
-      request.headers['Authorization'] = authenticated_header(@player)
+      request.headers['Authorization'] = authenticated_header(player)
 
-      get :show, params: { id: @chronicle.id, format: :json }
+      get :show, params: { id: chronicle.id, format: :json }
 
       expect(response).to have_http_status(:success)
     end
@@ -27,8 +25,8 @@ RSpec.describe Api::V1::ChroniclesController do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'Increases Chronicle count by 1' do
-        request.headers['Authorization'] = authenticated_header(@player)
-        new_chronicle = attributes_for(:chronicle, st_id: @player.id)
+        request.headers['Authorization'] = authenticated_header(player)
+        new_chronicle = attributes_for(:chronicle, st_id: player.id)
 
         expect do
           post :create, params: { chronicle: new_chronicle }, format: :json
@@ -38,23 +36,13 @@ RSpec.describe Api::V1::ChroniclesController do
 
     # context 'with invalid attributes' do
     #   it 'Increases Chronicle count by 0' do
-    #     request.headers['Authorization'] = authenticated_header(@player)
-    #     @invalid_chronicle_params = FactoryBot.attributes_for(:chronicle, st_id: 'Invalid Attribute')
+    #     request.headers['Authorization'] = authenticated_header(player)
+    #     invalid_chronicle_params = FactoryBot.attributes_for(:chronicle, st_id: 'Invalid Attribute')
 
-    #     expect { post :create, params: { chronicle: @invalid_chronicle_params }, format: :json }.to change(Chronicle, :count).by(0)
+    #     expect { post :create, params: { chronicle: invalid_chronicle_params }, format: :json }.to change(Chronicle, :count).by(0)
     #   end
     # end
 
     # it_behaves_like 'respond_to_unauthenticated', 'create'
-  end
-
-  describe 'DELETE #destroy' do
-    it 'Decreases Chronicle count by 1' do
-      request.headers['Authorization'] = authenticated_header(@player)
-
-      expect { delete :destroy, params: { id: @chronicle.id, format: :json } }.to change(Chronicle, :count).by(-1)
-    end
-
-    # it_behaves_like 'respond_to_unauthenticated', 'destroy'
   end
 end

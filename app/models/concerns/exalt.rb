@@ -15,7 +15,8 @@ module Exalt
     normalizes :excellencies_for, with: method(:trim_array_attribute)
 
     validates :resources, json: { schema: Schemas::RESOURCE }
-    validates :excellencies_for, inclusion: { in: Constants::ATTRIBUTES + Constants::ABILITIES + %w[* dragonblood solar lunar sidereal] }
+    validates :excellencies_for,
+              inclusion: { in: Constants::ATTRIBUTES + Constants::ABILITIES + %w[* dragonblood solar lunar sidereal] }
 
     def caste_is_blank?
       caste.blank?

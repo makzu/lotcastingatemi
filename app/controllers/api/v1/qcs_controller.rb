@@ -7,7 +7,8 @@ module Api
 
       def index
         authorize current_player
-        @pagy, @qcs = pagy(Qc.includes(%i[qc_attacks qc_charms qc_merits poisons spells]).where(player_id: current_player.id))
+        @pagy, @qcs = pagy(Qc.includes(%i[qc_attacks qc_charms qc_merits poisons
+                                          spells]).where(player_id: current_player.id))
 
         return unless stale? @qcs
 

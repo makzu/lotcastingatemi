@@ -77,7 +77,10 @@ class LunarCharacter < Character
 
   def caste_attributes_are_valid
     caste_attributes.each do |a|
-      errors.add(:caste_attributes, "#{a} is not a valid caste attribute for #{caste}s") unless (CASTE_ATTRIBUTES[caste.to_sym] || []).include? a
+      unless (CASTE_ATTRIBUTES[caste.to_sym] || []).include? a
+        errors.add(:caste_attributes,
+                   "#{a} is not a valid caste attribute for #{caste}s")
+      end
     end
   end
 

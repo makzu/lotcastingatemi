@@ -34,7 +34,8 @@ RSpec.describe Api::V1::WeaponsController do
 
         expect(weapon.weight).to eq('light')
 
-        patch :update, params: { character_id: character.id, id: weapon.id, weapon: updated_weapon_params, format: :json }
+        patch :update,
+              params: { character_id: character.id, id: weapon.id, weapon: updated_weapon_params, format: :json }
         weapon.reload
 
         expect(weapon.weight).to eq('heavy')
@@ -48,7 +49,9 @@ RSpec.describe Api::V1::WeaponsController do
 
         expect(weapon.weight).to eq('light')
 
-        patch :update, params: { character_id: character.id, id: weapon.id, weapon: invalid_updated_weapon_params, format: :json }
+        patch :update,
+              params: { character_id: character.id, id: weapon.id, weapon: invalid_updated_weapon_params,
+format: :json }
         weapon.reload
 
         expect(weapon.weight).to eq('light')

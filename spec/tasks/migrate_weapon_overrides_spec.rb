@@ -24,7 +24,8 @@ RSpec.describe 'rake lca:migrate:weapon_overrides', type: :task do
     weapon.update(attr: 'intelligence', ability: 'occult')
     task.execute
     weapon.reload
-    expect(weapon.overrides).to eq('attack_attribute' => { 'use' => 'intelligence' }, 'defense_attribute' => { 'use' => 'intelligence' })
+    expect(weapon.overrides).to eq('attack_attribute' => { 'use' => 'intelligence' },
+                                   'defense_attribute' => { 'use' => 'intelligence' })
     expect(weapon).to be_valid
   end
 

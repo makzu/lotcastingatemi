@@ -95,7 +95,10 @@ class AbyssalCharacter < Character
 
   def caste_abilities_are_valid
     caste_abilities.each do |a|
-      errors.add(:caste_abilities, "#{a} is not a valid caste ability for #{caste}s") unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
+      unless (CASTE_ABILITIES[caste.to_sym] || []).include? a
+        errors.add(:caste_abilities,
+                   "#{a} is not a valid caste ability for #{caste}s")
+      end
     end
   end
 

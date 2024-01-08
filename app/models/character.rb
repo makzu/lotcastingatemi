@@ -6,6 +6,8 @@
 # shaping_rituals, in favor of rituals
 # xp_spent, in favor of xp_log
 # xp_solar_spent, in favor of xp_log_solar
+# sort_order, in favor of sorting via ranked_model
+# chronicle_sort_order, in favor of chronicle_sorting via ranked_model
 class Character < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
@@ -14,7 +16,7 @@ class Character < ApplicationRecord
   include RankedModel
   include Willpower
 
-  ranks :sorting, with_same: :player_id, class_name: 'Character'
+  ranks :sorting,           with_same: :player_id,    class_name: 'Character'
   ranks :chronicle_sorting, with_same: :chronicle_id, class_name: 'Character'
 
   with_options inverse_of: :character, dependent: :destroy do

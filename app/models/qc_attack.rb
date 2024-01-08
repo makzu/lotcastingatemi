@@ -2,6 +2,8 @@
 
 # Represents individual attack pools for QCs.  Battlegroups take these numbers
 # and add their own bonuses.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
 class QcAttack < ApplicationRecord
   include Broadcastable
   include RankedModel

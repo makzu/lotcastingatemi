@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 # Holds traits specific to Battlegroups, as defined starting at Core p.205.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
+# chronicle_sort_order, in favor of chronicle_sorting via ranked_model
 class Battlegroup < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer

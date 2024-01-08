@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 # Traits for QCs.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
+# chronicle_sort_order, in favor of chronicle_sorting via ranked_model
 class Qc < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer

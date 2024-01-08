@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Model for Poisons, as described starting in Core p.232
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
 class Poison < ApplicationRecord
   include Broadcastable
 

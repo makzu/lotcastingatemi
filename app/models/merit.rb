@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Individual merits for characters. QC merits have their own model.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
 class Merit < ApplicationRecord
   include Broadcastable
   include CharacterTrait

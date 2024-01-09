@@ -17,7 +17,7 @@ RSpec.describe 'Weapons' do
           patch "/api/v1/characters/#{weapon.character_id}/weapons/#{weapon.id}",
                 params:,
                 headers: authenticated_header(weapon.player)
-        end.to have_enqueued_job(UpdateBroadcastJob)
+        end.to have_enqueued_job(UpdateBroadcastJob).at_least(2).times
 
         expect(Weapon.find(weapon.id).tags).to eq %w[lethal melee balanced]
       end

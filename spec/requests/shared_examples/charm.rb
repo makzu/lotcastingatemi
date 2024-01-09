@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples 'charm' do |trait_type, parent_type|
-  ActiveJob::Base.queue_adapter = :test
-
   let(:charm) { create(trait_type) }
 
   context 'when logged in' do
@@ -14,7 +12,7 @@ RSpec.shared_examples 'charm' do |trait_type, parent_type|
           patch "/api/v1/#{parent_type}/#{charm.character.id}/#{charm.entity_type}s/#{charm.id}",
                 params:,
                 headers: authenticated_header(charm.player)
-        end.to have_enqueued_job(UpdateBroadcastJob)
+        end.to have_enqueued_job(UpdateBroadcastJob).at_least(2).times
 
         expect(response).to have_http_status :ok
         expect(charm.class.find(charm.id).keywords).to eq %w[decisive-only]

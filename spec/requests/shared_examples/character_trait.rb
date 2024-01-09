@@ -3,9 +3,15 @@
 require 'support/auth_token'
 
 RSpec.shared_examples 'character trait' do |trait_type, parent_type|
-  ActiveJob::Base.queue_adapter = :test
-
   let(:trait) { create(trait_type) }
+
+  before do
+    clear_enqueued_jobs
+  end
+
+  after do
+    clear_performed_jobs
+  end
 
   context 'when logged in' do
     describe 'creating a record' do

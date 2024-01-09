@@ -5,7 +5,7 @@
 class QcAttack < ApplicationRecord
   include Broadcastable
   include Sortable
-  belongs_to :qc_attackable, polymorphic: true
+  belongs_to :qc_attackable, touch: true, polymorphic: true
   alias character qc_attackable
 
   has_many :poisons, as: :poisonable, dependent: :destroy

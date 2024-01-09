@@ -6,8 +6,6 @@ require 'requests/shared_examples/character'
 RSpec.describe 'Battlegroups' do
   it_behaves_like 'character', :battlegroup
 
-  ActiveJob::Base.queue_adapter = :test
-
   def authenticated_header(user)
     { 'Authorization' => "Bearer #{user.token}" }
   end

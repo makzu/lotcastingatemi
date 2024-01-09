@@ -79,7 +79,6 @@ class Character < ApplicationRecord
   # after_initialize :set_xp_log
   # after_initialize :set_solar_xp_log
   # after_initialize :set_rituals
-  before_validation :trim_armor_tags
 
   # def set_xp_log
   #   return if xp_spent.zero? || !xp_log.empty?

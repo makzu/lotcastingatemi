@@ -6,7 +6,7 @@ module CharacterTrait
   included do
     include Sortable
 
-    belongs_to :character
+    belongs_to :character, touch: true
 
     delegate :player,      to: :character
     delegate :chronicle,   to: :character

@@ -6,7 +6,7 @@ module QcTrait
   included do
     include Sortable
 
-    belongs_to :qc
+    belongs_to :qc, touch: true
     alias_method :character, :qc
 
     delegate :player,      to: :qc

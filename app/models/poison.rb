@@ -5,7 +5,7 @@ class Poison < ApplicationRecord
   include Broadcastable
   include Sortable
 
-  belongs_to :poisonable, polymorphic: true
+  belongs_to :poisonable, touch: true, polymorphic: true
 
   alias character poisonable
   delegate :player,      to: :character

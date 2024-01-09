@@ -7,7 +7,7 @@ module BelongsToPlayer
     belongs_to :player
 
     # TODO: validate that if a character is in a chronicle, the player must be too
-    belongs_to :chronicle, optional: true
+    belongs_to :chronicle, optional: true, touch: true
     delegate :storyteller, to: :chronicle, allow_nil: true
   end
 

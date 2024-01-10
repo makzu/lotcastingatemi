@@ -1,9 +1,6 @@
-// @flow
 import * as React from 'react'
 import Typography from '@material-ui/core/Typography'
-
 import { sample } from 'utils'
-
 const errorNames = [
   'Easily-Overlooked Error Method',
   'Friendship With Errors Approach',
@@ -15,21 +12,33 @@ const errorNames = [
   'Hybrid Error Transformation',
   'Crimson Bug Mantle',
 ]
+type Props = {
+  children: React.ReactNode
+}
+type State = {
+  error?: Record<string, $TSFixMe>
+  errorInfo?: Record<string, $TSFixMe>
+}
 
-type Props = { children: React.Node }
-type State = { error?: Object, errorInfo?: Object }
 class ErrorBoundary extends React.Component<Props, State> {
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props)
-    this.state = { error: undefined, errorInfo: undefined }
+    this.state = {
+      error: undefined,
+      errorInfo: undefined,
+    }
   }
 
-  componentDidCatch(error: Object, info: Object) {
-    this.setState({ error: error, errorInfo: info })
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    this.setState({
+      error: error,
+      errorInfo: errorInfo,
+    })
   }
 
   render() {
     const { error } = this.state
+
     if (error) {
       return (
         <div>
@@ -39,7 +48,9 @@ class ErrorBoundary extends React.Component<Props, State> {
         </div>
       )
     }
+
     return this.props.children
   }
 }
+
 export default ErrorBoundary

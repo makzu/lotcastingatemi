@@ -2,9 +2,10 @@
  * @type {import("eslint").Linter.Config}
  */
 module.exports = {
+  root: true,
   env: {
     browser: true,
-    es6: true,
+    es2020: true,
     jest: true,
     'cypress/globals': true,
   },
@@ -12,25 +13,24 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'plugin:flowtype/recommended',
     'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 6,
     ecmaFeatures: {
-      experimentalObjectRestSpread: true,
       jsx: true,
     },
-    sourceType: 'module',
   },
   plugins: ['cypress', 'react', 'flowtype', '@typescript-eslint'],
-  root: true,
   rules: {
     'no-duplicate-imports': ['warn'],
     'flowtype/no-types-missing-file-annotation': 0,
     'react/jsx-boolean-value': ['warn', 'never'],
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
+  ignorePatterns: ['coverage/**/*.js', 'flow-typed/**/*.js', 'public/**/*.js'],
   overrides: [
     {
       files: ['*.js', '*.jsx'],
@@ -42,6 +42,9 @@ module.exports = {
   settings: {
     flowtype: {
       onlyFilesWithFlowAnnotation: true,
+    },
+    react: {
+      version: 'detect',
     },
   },
 }

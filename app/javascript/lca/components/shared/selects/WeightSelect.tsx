@@ -25,7 +25,7 @@ const WeightSelect = (props: Props) => {
       value={props.value}
       className={classes.root}
       onChange={props.onChange}
-      margin={props.margin || 'dense'}
+      margin={props.margin ?? 'dense'}
       style={props.style}
     >
       {props.armor && <MenuItem value="unarmored">Unarmored</MenuItem>}

@@ -12,10 +12,10 @@ const errorNames = [
   'Hybrid Error Transformation',
   'Crimson Bug Mantle',
 ]
-type Props = {
+interface Props {
   children: React.ReactNode
 }
-type State = {
+interface State {
   error?: Record<string, $TSFixMe>
   errorInfo?: Record<string, $TSFixMe>
 }
@@ -44,7 +44,7 @@ class ErrorBoundary extends React.Component<Props, State> {
         <div>
           <Typography variant="h6">{sample(errorNames)}</Typography>
           <Typography>Something went wrong.</Typography>
-          <Typography>{error && error.message}</Typography>
+          <Typography>{error?.message}</Typography>
         </div>
       )
     }

@@ -9,9 +9,8 @@ import { getSpecificCharacter } from './character'
 
 export default createTraitReducer('weapon')
 
-export const [createWeapon, updateWeapon, destroyWeapon] = createApiActions(
-  'weapon'
-)
+export const [createWeapon, updateWeapon, destroyWeapon] =
+  createApiActions('weapon')
 
 const getState = (s: State) => s
 
@@ -28,7 +27,7 @@ export const getWeaponsForCharacter = createCachedSelector(
       return null
     }
     return character.weapons
-      .map(w => getSpecificWeapon(state, w))
+      .map((w) => getSpecificWeapon(state, w))
       .sort(sortOrderSort)
-  }
+  },
 )((s: State, i: number) => i)

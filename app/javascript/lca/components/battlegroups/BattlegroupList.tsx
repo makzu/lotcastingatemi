@@ -35,7 +35,7 @@ const BattlegroupList = () => {
     const charB = battlegroups[newIndex]
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(
-      updateBattlegroup(charA.id, { sort_order: charB.sort_order + offset })
+      updateBattlegroup(charA.id, { sort_order: charB.sort_order + offset }),
     )
   }
 

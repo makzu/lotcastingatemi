@@ -14,9 +14,7 @@ export const authHeaders = () => {
   })
 }
 
-export interface ApiAction<R, S, F> {
-  [propName: string]: ApiCall<R, S, F>
-}
+export type ApiAction<R, S, F> = Record<string, ApiCall<R, S, F>>
 
 export interface ApiCall<R, S, F> {
   endpoint: string

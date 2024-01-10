@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { CssBaseline, Divider, Typography } from '@material-ui/core'
+import { CssBaseline, Divider, Theme, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
@@ -13,7 +13,7 @@ import { drawerWidth } from './_drawerProperties'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const scrollbars = theme => ({
+const scrollbars = (theme: Theme) => ({
   '::-webkit-scrollbar': {
     backgroundColor: theme.palette.background.default,
     height: '8px',
@@ -24,7 +24,7 @@ const scrollbars = theme => ({
   },
 })
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   '@global': theme.disableScrollbars ? {} : scrollbars(theme),
   appFrame: {
     display: 'flex',

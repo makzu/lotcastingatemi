@@ -18,7 +18,10 @@ const arrayMerge = (_: null[], sourceArray: any[]) => sourceArray
 export const mergeEntity = (state: EntityState, action) =>
   deepmerge(state, action.payload.entities || {}, { arrayMerge })
 
-export const createEntityReducer = (entityType: eTypes, reducers: {} = {}) => {
+export const createEntityReducer = (
+  entityType: eTypes,
+  reducers: $TSFixMeFunction,
+) => {
   const pluralType = entityType + 's'
 
   return {

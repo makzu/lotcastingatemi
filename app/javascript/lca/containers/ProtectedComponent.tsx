@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router'
 import LogoutPopup from './LogoutPopup'
 
 const ProtectedComponent = <P extends object>(
-  WrappedComponent: React.ComponentType<P>
+  WrappedComponent: React.ComponentType<P>,
 ) => {
   const protectedComponent = (props: P & RouteComponentProps) => (
     <>

@@ -23,7 +23,7 @@ const middleware = [
 //     devTools: !PRODUCTION,
 //   })
 
-export default function configureAppStore(preloadedState) {
+export default function configureAppStore(preloadedState: $TSFixMe) {
   const store = configureStore({
     reducer,
     middleware: (getDefaultMiddleware) =>

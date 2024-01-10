@@ -1,4 +1,3 @@
-// tslint:disable object-literal-sort-keys variable-name
 import { schema } from 'normalizr'
 
 export const merit = new schema.Entity('merits')

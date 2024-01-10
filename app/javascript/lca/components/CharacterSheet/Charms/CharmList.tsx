@@ -20,7 +20,7 @@ const fullViewMap = (c: Charm) => (
   </Grid>
 )
 
-const CharmList = props => {
+const CharmList = (props) => {
   const mappedCharms = (
     <Grid container spacing={3}>
       {props.charms.map(fullViewMap)}

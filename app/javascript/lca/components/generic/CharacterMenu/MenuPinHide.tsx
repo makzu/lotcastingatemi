@@ -5,13 +5,13 @@ import {
   Divider,
   ListItemIcon,
   ListItemText,
-  MenuItem
+  MenuItem,
 } from '@material-ui/core'
 import {
   Bookmark,
   BookmarkBorder,
   Visibility,
-  VisibilityOff
+  VisibilityOff,
 } from '@material-ui/icons'
 
 import { State } from 'ducks'
@@ -63,7 +63,7 @@ const mapState = (state: State, { characterType, id }: Props): StateProps => ({
 
 const mapDispatch = (
   dispatch,
-  { characterType, id }: Props
+  { characterType, id }: Props,
 ): DispatchProps => ({
   hide: (hidden: boolean) => dispatch(update[characterType](id, { hidden })),
   pin: (pinned: boolean) => dispatch(update[characterType](id, { pinned })),
@@ -71,5 +71,5 @@ const mapDispatch = (
 
 export default connect<StateProps, DispatchProps, Props>(
   mapState,
-  mapDispatch
+  mapDispatch,
 )(CardMenuPin)

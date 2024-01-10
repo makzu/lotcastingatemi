@@ -40,7 +40,6 @@ import QcMeritReducer from './qc_merit'
 import SpellReducer from './spell'
 import WeaponReducer from './weapon'
 
-// tslint:disable object-literal-sort-keys
 export const defaultState: EntityState = {
   currentPlayer: 0,
   players: {
@@ -113,13 +112,13 @@ export default createReducer(defaultState, {
         if (chronicle_id && state.chronicles[chronicle_id]) {
           state.chronicles[chronicle_id][type] = state.chronicles[chronicle_id][
             type
-          ].filter(e => e !== id)
+          ].filter((e) => e !== id)
         }
 
-        if (state[parent_type] && state[parent_type][parent_id]) {
+        if (state[parent_type]?.[parent_id]) {
           state[parent_type][parent_id][assoc] = state[parent_type][parent_id][
             assoc
-          ].filter(e => e !== id)
+          ].filter((e) => e !== id)
         }
 
         delete state[pluralType][id]

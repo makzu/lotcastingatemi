@@ -20,14 +20,14 @@ interface OuterProps {
 }
 // interface Props extends StateProps {}
 
-const mapSpells = s => (
+const mapSpells = (s) => (
   <Grid item key={s.id}>
     <BlockPaper />
   </Grid>
 )
 
 const SpellList = ({ spells }: StateProps) => {
-  const spellList = spells.map(spell => (
+  const spellList = spells.map((spell) => (
     <Grid item xs={12} md={6} xl={4} key={spell.id}>
       <SpellDisplay spell={spell} />
     </Grid>

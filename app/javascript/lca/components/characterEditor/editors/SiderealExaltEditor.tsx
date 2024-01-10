@@ -9,7 +9,10 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import { nonCasteAbilities } from 'utils/calculated'
 import { Character } from 'types'
 
-type Props = { character: Character; onChange: React.ChangeEventHandler }
+interface Props {
+  character: Character
+  onChange: React.ChangeEventHandler
+}
 function SiderealExaltEditor({ character, onChange }: Props) {
   const caste_abilities = character.caste_abilities || []
 

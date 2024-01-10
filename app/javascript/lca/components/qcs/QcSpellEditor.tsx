@@ -92,11 +92,8 @@ const mapState = (state: State, { qc }): StateProps => ({
 
 const mapDispatch = (dispatch, { qc }: OuterProps): DispatchProps => ({
   create: () => dispatch(createSpell(qc.id, { parent: 'qc' })),
-  destroy: id => dispatch(destroySpell(id, qc.id, 'qc')),
+  destroy: (id) => dispatch(destroySpell(id, qc.id, 'qc')),
   update: (id, trait) => dispatch(updateSpell(id, qc.id, trait, 'qc')),
 })
 
-export default connect(
-  mapState,
-  mapDispatch
-)(QcSpellEditor)
+export default connect(mapState, mapDispatch)(QcSpellEditor)

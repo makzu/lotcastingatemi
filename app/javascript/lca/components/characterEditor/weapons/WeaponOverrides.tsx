@@ -8,7 +8,7 @@ import TextField from 'components/generic/TextField.jsx'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import WeaponAttributeSelect from './WeaponAttributeSelect'
 
-const WeaponOverrides = props => {
+const WeaponOverrides = (props) => {
   const { character, weapon, onChange } = props
   const { overrides } = weapon
 
@@ -31,7 +31,7 @@ const WeaponOverrides = props => {
         type="attack"
         label="Attack Attribute"
         name="attack_attribute.use"
-        value={overrides.attack_attribute && overrides.attack_attribute.use}
+        value={overrides.attack_attribute?.use}
         character={character}
         weapon={weapon}
         onChange={handleChange}
@@ -41,7 +41,7 @@ const WeaponOverrides = props => {
         type="defense"
         label="Defense Attribute"
         name="defense_attribute.use"
-        value={overrides.defense_attribute && overrides.defense_attribute.use}
+        value={overrides.defense_attribute?.use}
         character={character}
         weapon={weapon}
         onChange={handleChange}
@@ -50,7 +50,7 @@ const WeaponOverrides = props => {
         type="damage"
         label="Damage Attribute"
         name="damage_attribute.use"
-        value={overrides.damage_attribute && overrides.damage_attribute.use}
+        value={overrides.damage_attribute?.use}
         character={character}
         weapon={weapon}
         onChange={handleChange}

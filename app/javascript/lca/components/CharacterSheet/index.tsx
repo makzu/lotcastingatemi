@@ -19,8 +19,8 @@ interface Props extends RouteProps {
 }
 
 const characterSheetWrapper = ({ match, fetch }: Props) => {
-  const id = parseInt(match.params.id, 10)
-  // tslint:disable:react-hooks-nesting
+  const id = parseInt(match.params.id || '', 10)
+
   useLazyFetch(id, fetch)
 
   return (
@@ -36,9 +36,6 @@ const characterSheetWrapper = ({ match, fetch }: Props) => {
 }
 
 export default compose<Props, RouteProps>(
-  connect(
-    null,
-    { fetch: fetchCharacterIfNecessary }
-  ),
-  ProtectedComponent
+  connect(null, { fetch: fetchCharacterIfNecessary }),
+  ProtectedComponent,
 )(characterSheetWrapper)

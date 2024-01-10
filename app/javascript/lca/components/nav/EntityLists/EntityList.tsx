@@ -4,7 +4,7 @@ import {
   Collapse,
   IconButton,
   ListItemSecondaryAction,
-  ListItemText
+  ListItemText,
 } from '@material-ui/core'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 

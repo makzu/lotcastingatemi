@@ -2,6 +2,7 @@ import {
   Battlegroup,
   Character,
   Charm,
+  Chronicle,
   Merit,
   Poison,
   QC,
@@ -9,23 +10,24 @@ import {
   Weapon,
 } from 'types'
 import { Player } from './player'
+import { QcAttack, QcCharm, QcMerit } from 'utils/flow-types'
 
 export interface EntityState {
   currentPlayer: number
-  players: { [id: number]: Player }
-  chronicles: { [id: number]: any }
-  characters: { [id: number]: Character }
-  weapons: { [id: number]: Weapon }
-  merits: { [id: number]: Merit }
-  charms: { [id: number]: Charm }
-  spells: { [id: number]: Spell }
-  qcs: { [id: number]: QC }
-  qc_merits: { [id: number]: any }
-  qc_charms: { [id: number]: any }
-  qc_attacks: { [id: number]: any }
-  battlegroups: { [id: number]: Battlegroup }
-  combat_actors: { [id: number]: any }
-  poisons: { [id: number]: Poison }
+  players: Record<number, Player>
+  chronicles: Record<number, Chronicle>
+  characters: Record<number, Character>
+  weapons: Record<number, Weapon>
+  merits: Record<number, Merit>
+  charms: Record<number, Charm>
+  spells: Record<number, Spell>
+  qcs: Record<number, QC>
+  qc_merits: Record<number, QcMerit>
+  qc_charms: Record<number, QcCharm>
+  qc_attacks: Record<number, QcAttack>
+  battlegroups: Record<number, Battlegroup>
+  combat_actors: Record<number, never>
+  poisons: Record<number, Poison>
 }
 
 export interface WrappedEntityState {

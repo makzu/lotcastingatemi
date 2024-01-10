@@ -23,7 +23,7 @@ interface Props {
 }
 const LcaCheckbox = ({ name, value, onChange, ...others }: Props) => {
   const classes = useStyles({})
-  const handleCheck = (_: any, checked: boolean) => {
+  const handleCheck = (_: never, checked: boolean) => {
     onChange({ target: { name, value: checked } })
   }
 

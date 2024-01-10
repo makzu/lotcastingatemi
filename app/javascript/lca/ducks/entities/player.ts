@@ -14,11 +14,11 @@ const PLAYER = 'player'
 /* *** Reducer *** */
 export default {
   [crudAction(PLAYER, 'UPDATE').start.toString()]: reducerUpdateAction(
-    PLAYER + 's'
+    PLAYER + 's',
   ),
   [crudAction(PLAYER, 'FETCH').success.toString()]: (
     state: EntityState,
-    action
+    action,
   ) => {
     const newState = mergeEntity(state, action)
 
@@ -62,7 +62,6 @@ export interface Player {
 }
 
 /* *** Selectors *** */
-// tslint:disable object-literal-sort-keys
 export const getSpecificPlayer = (state: State, id: number): Player => ({
   characters: [],
   qcs: [],

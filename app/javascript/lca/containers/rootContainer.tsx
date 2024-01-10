@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom'
 import App from './App'
 import ThemeContainer from './ThemeContainer'
 import Routes from '../routes'
-type Props = {
+interface Props {
   store: $TSFixMe
   history: $TSFixMe
 }

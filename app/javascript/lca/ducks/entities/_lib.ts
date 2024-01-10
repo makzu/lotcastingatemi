@@ -112,7 +112,7 @@ export const optimisticTypes = (
 ]
 
 const meta = (_: any, m: any) => m
-// tslint:disable object-literal-sort-keys
+
 export const crudAction = (
   type: entityTypes,
   action: crudActions,
@@ -121,7 +121,6 @@ export const crudAction = (
   success: createAction(`${API}/${type}/${action}/${SUCCESS}`, null, meta),
   failure: createAction(`${API}/${type}/${action}/${FAILURE}`, null, meta),
 })
-// tslint:enable *
 
 export const reducerUpdateAction =
   (type: string) => (state: EntityState, action) => {

@@ -168,5 +168,5 @@ const mapStateToProps = (state: State, { match }: RouteProps) => ({
 export default compose<Props, RouteProps>(
   ProtectedComponent,
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(BioFullPage)

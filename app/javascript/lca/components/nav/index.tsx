@@ -14,7 +14,7 @@ import NavPanel from './NavPanel'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const drawerScrollbars = theme => ({
+const drawerScrollbars = (theme) => ({
   '&::-webkit-scrollbar': {
     backgroundColor: theme.palette.background.paper,
   },
@@ -39,7 +39,7 @@ const useStyles = makeStyles(
       },
       ...(theme.disableScrollbars ? {} : drawerScrollbars(theme)),
     },
-  })
+  }),
 )
 
 interface StateProps {
@@ -104,8 +104,5 @@ const mapState = (state: State): StateProps => ({
 
 export default compose<Props, {}>(
   withRouter,
-  connect(
-    mapState,
-    { close: closeDrawer }
-  )
+  connect(mapState, { close: closeDrawer }),
 )(NavPanelWrap)

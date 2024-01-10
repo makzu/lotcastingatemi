@@ -32,12 +32,12 @@ const useStyles = makeStyles({
 interface Props {
   filters: CharmFilter
   setfilters: React.Dispatch<CharmFilterAction>
-  allAbilities: Array<Charm['ability']>
+  allAbilities: Charm['ability'][]
   allCategories: string[]
   allKeywords: string[]
 }
 
-const ExclusiveSwitch = props => (
+const ExclusiveSwitch = (props) => (
   <div
     style={{
       alignItems: 'center',
@@ -58,7 +58,7 @@ const ExclusiveSwitch = props => (
 )
 
 const CharmFilterDrawer = (props: Props) => {
-  const handleChange = e =>
+  const handleChange = (e) =>
     void props.setfilters({ type: e.target.name, payload: e.target.value })
 
   const [filtersOpen, setOpen, setClosed] = useDialogLogic()
@@ -88,14 +88,14 @@ const CharmFilterDrawer = (props: Props) => {
           onChange={handleChange}
           margin="dense"
         >
-          {props.allAbilities.map(a =>
+          {props.allAbilities.map((a) =>
             a === 'martial_arts' ? (
               <span key={a} />
             ) : (
               <MenuItem key={a} value={a} className={classes.capitalize}>
                 {a === '' ? 'None' : a}
               </MenuItem>
-            )
+            ),
           )}
         </TextField>
 
@@ -108,7 +108,7 @@ const CharmFilterDrawer = (props: Props) => {
           onChange={handleChange}
           margin="dense"
         >
-          {props.allKeywords.map(a => (
+          {props.allKeywords.map((a) => (
             <MenuItem key={a} value={a}>
               {a}
             </MenuItem>
@@ -129,7 +129,7 @@ const CharmFilterDrawer = (props: Props) => {
           onChange={handleChange}
           margin="dense"
         >
-          {props.allCategories.map(a => (
+          {props.allCategories.map((a) => (
             <MenuItem key={a} value={a}>
               {a}
             </MenuItem>

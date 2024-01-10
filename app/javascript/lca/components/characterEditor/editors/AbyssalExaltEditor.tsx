@@ -10,7 +10,10 @@ import { nonCasteAbilities } from 'utils/calculated'
 import { ABYSSAL_CASTE_ABILITIES } from 'utils/constants'
 import type { Character } from 'utils/flow-types'
 
-type Props = { character: Character; onChange: React.ChangeEventHandler }
+interface Props {
+  character: Character
+  onChange: React.ChangeEventHandler
+}
 function AbyssalExaltEditor({ character, onChange }: Props) {
   const casteAbilities = ABYSSAL_CASTE_ABILITIES[character.caste] || []
   let supernalAbilities = casteAbilities

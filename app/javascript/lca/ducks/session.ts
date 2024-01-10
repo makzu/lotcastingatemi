@@ -18,7 +18,7 @@ const defaultState: ISessionState = {
 
 export default function SessionReducer(
   state: ISessionState = defaultState,
-  action: any
+  action: any,
 ) {
   if (isNonFetchAuthIssue(action)) {
     return {

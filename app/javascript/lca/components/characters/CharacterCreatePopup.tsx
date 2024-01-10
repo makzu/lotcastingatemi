@@ -31,11 +31,11 @@ const initialState = {
   },
 }
 
-type Props = {
+interface Props {
   id: number
   createCharacter: Function
 }
-type State = {
+interface State {
   open: boolean
   character: Object
 }

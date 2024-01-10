@@ -1,6 +1,7 @@
 import pool from '../_pool.js'
 import { penaltyObject } from '../../index.js'
 import type { Character } from 'types'
+import { PoolBonus } from 'utils/flow-types/pool'
 
 /** Withdraw pool, described in the core book, page 199 */
 export function withdraw(
@@ -9,10 +10,10 @@ export function withdraw(
   // TODO: replace this any with a real type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   penalties: any,
-  excellencyAbils: string[]
+  excellencyAbils: string[],
 ) {
-  let bonus = []
-  if (merits.some(m => m.startsWith('fleet of foot')))
+  let bonus = [] as PoolBonus[]
+  if (merits.some((m) => m.startsWith('fleet of foot')))
     bonus = [{ label: 'fleet of foot', bonus: 1 }]
   if (character.type !== 'Character' && character.caste === 'water')
     bonus = bonus.concat([
@@ -26,7 +27,7 @@ export function withdraw(
     'athletics',
     bonus,
     penaltyObject(penalties, { useMobility: true }),
-    excellencyAbils
+    excellencyAbils,
   )
 }
 

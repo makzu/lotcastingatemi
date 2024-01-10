@@ -10,7 +10,7 @@ export const ATTRIBUTES = [
   { attr: 'attr_perception', pretty: 'Perception' },
   { attr: 'attr_intelligence', pretty: 'Intelligence' },
   { attr: 'attr_wits', pretty: 'Wits' },
-]
+] as const
 
 // Does not include Craft or Martial Arts, which get their own handling
 export const ABILITIES = [
@@ -38,7 +38,7 @@ export const ABILITIES = [
   { abil: 'abil_survival', pretty: 'Survival' },
   { abil: 'abil_thrown', pretty: 'Thrown' },
   { abil: 'abil_war', pretty: 'War' },
-]
+] as const
 
 export const ABILITIES_ALL = [
   { abil: 'abil_archery', pretty: 'Archery' },
@@ -67,7 +67,7 @@ export const ABILITIES_ALL = [
   { abil: 'abil_survival', pretty: 'Survival' },
   { abil: 'abil_thrown', pretty: 'Thrown' },
   { abil: 'abil_war', pretty: 'War' },
-]
+] as const
 
 export const ABILITIES_ALL_NO_MA = [
   { abil: 'abil_archery', pretty: 'Archery' },
@@ -95,7 +95,7 @@ export const ABILITIES_ALL_NO_MA = [
   { abil: 'abil_survival', pretty: 'Survival' },
   { abil: 'abil_thrown', pretty: 'Thrown' },
   { abil: 'abil_war', pretty: 'War' },
-]
+] as const
 
 // Does not include Martial Arts, which gets its own handling
 export const ATTACK_ABILITIES = [
@@ -103,7 +103,7 @@ export const ATTACK_ABILITIES = [
   'abil_brawl',
   'abil_melee',
   'abil_thrown',
-]
+] as const
 
 export const NON_ATTACK_ABILITIES = [
   'abil_athletics',
@@ -126,7 +126,7 @@ export const NON_ATTACK_ABILITIES = [
   'abil_stealth',
   'abil_survival',
   'abil_war',
-]
+] as const
 
 export const SOLAR_CASTE_ABILITIES = {
   dawn: [
@@ -179,7 +179,7 @@ export const SOLAR_CASTE_ABILITIES = {
     { abil: 'abil_sail', pretty: 'Sail' },
     { abil: 'abil_socialize', pretty: 'Socialize' },
   ],
-}
+} as const
 
 export const ABYSSAL_CASTE_ABILITIES = {
   dusk: [
@@ -232,7 +232,7 @@ export const ABYSSAL_CASTE_ABILITIES = {
     { abil: 'abil_sail', pretty: 'Sail' },
     { abil: 'abil_socialize', pretty: 'Socialize' },
   ],
-}
+} as const
 
 export const LUNAR_CASTE_ATTRIBUTES = {
   'full moon': [
@@ -251,7 +251,7 @@ export const LUNAR_CASTE_ATTRIBUTES = {
     { attr: 'attr_wits', pretty: 'Wits' },
   ],
   casteless: [],
-}
+} as const
 
 export const ABILITY_NAMES = [
   'archery',
@@ -280,7 +280,7 @@ export const ABILITY_NAMES = [
   'survival',
   'thrown',
   'war',
-]
+] as const
 
 export const ATTRIBUTE_NAMES = [
   'strength',
@@ -292,7 +292,7 @@ export const ATTRIBUTE_NAMES = [
   'perception',
   'intelligence',
   'wits',
-]
+] as const
 
 /* Minimum and maximum */
 export const ESSENCE_MAX = 10

@@ -8,15 +8,16 @@ type MenuElement = HTMLElement | null
  */
 const useMenuLogic = () => {
   const [anchor, setAnchor] = useState<MenuElement>(null)
-  const handleOpen = useCallback((e: MenuEvent) => setAnchor(e.currentTarget), [
-    setAnchor,
-  ])
+  const handleOpen = useCallback(
+    (e: MenuEvent) => setAnchor(e.currentTarget),
+    [setAnchor],
+  )
   const handleClose = useCallback(() => setAnchor(null), [setAnchor])
 
   return [anchor, handleOpen, handleClose] as [
     MenuElement,
     typeof handleOpen,
-    typeof handleClose
+    typeof handleClose,
   ]
 }
 

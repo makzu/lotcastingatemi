@@ -5,7 +5,7 @@ import {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  Switch
+  Switch,
 } from '@material-ui/core'
 
 import { State } from 'ducks'
@@ -35,7 +35,4 @@ const mapState = (state: State) => ({
   theme: state.app.theme,
 })
 
-export default connect(
-  mapState,
-  { action: switchTheme }
-)(NavPanelThemeSwitch)
+export default connect(mapState, { action: switchTheme })(NavPanelThemeSwitch)

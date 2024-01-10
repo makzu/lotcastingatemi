@@ -23,10 +23,10 @@ interface Props extends RouteComponentProps<any> {
   classes: any
 }
 
-const LinkTab = props => <Tab {...props} component={Link as any} />
+const LinkTab = (props) => <Tab {...props} component={Link as any} />
 
 function ChronicleHeader(props: Props) {
-  if (props.chronicle == null || props.chronicle.name == null) {
+  if (props.chronicle?.name == null) {
     return <GenericHeader />
   }
 
@@ -83,5 +83,5 @@ function mapStateToProps(state: State, { match, location }: RouteProps) {
 
 export default compose<Props, RouteProps>(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )(ChronicleHeader)

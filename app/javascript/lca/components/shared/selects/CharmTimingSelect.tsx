@@ -16,7 +16,9 @@ const CharmTimingSelect = (props: Props) => {
       <MenuItem value="simple">Simple</MenuItem>
       <MenuItem value="supplemental">Supplemental</MenuItem>
       <MenuItem value="reflexive">Reflexive</MenuItem>
-      <MenuItem value="supplemental/reflexive">Supplemental/Reflexive      </MenuItem>
+      <MenuItem value="supplemental/reflexive">
+        Supplemental/Reflexive{' '}
+      </MenuItem>
       <MenuItem value="permanent">Permanent</MenuItem>
     </TextField>
   )

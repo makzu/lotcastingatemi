@@ -11,7 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
-  Typography
+  Typography,
 } from '@material-ui/core'
 import Delete from '@material-ui/icons/Delete'
 
@@ -75,10 +75,10 @@ const mapState = (state: State, { id, characterType }: Props): StateProps => ({
 
 const mapDispatch = (
   dispatch,
-  { characterType, id }: Props
+  { characterType, id }: Props,
 ): DispatchProps => ({ action: () => dispatch(destroy[characterType](id)) })
 
 export default connect<StateProps, DispatchProps, Props>(
   mapState,
-  mapDispatch
+  mapDispatch,
 )(MenuDelete)

@@ -28,7 +28,7 @@ const MeritFullPage = (props: Props) => {
     )
   }
 
-  const mts = props.merits.map(m => (
+  const mts = props.merits.map((m) => (
     <Grid item xs={12} md={6} xl={4} key={m.id}>
       <SingleMerit merit={m} />
     </Grid>

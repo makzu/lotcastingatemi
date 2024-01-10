@@ -39,7 +39,7 @@ export function createBattlegroupFromQc(id: number) {
 
 export const fetchBattlegroupIfNecessary = createConditionalFetchAction(
   BATTLEGROUP,
-  fetchBattlegroup
+  fetchBattlegroup,
 )
 
 /* *** Selectors *** */
@@ -48,17 +48,17 @@ const getBattlegroups = (state: State) => unwrapped(state).battlegroups
 export const getMyBattlegroups = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>
-    currentPlayer.battlegroups.map(c => battlegroups[c]).sort(sortOrderSort)
+    currentPlayer.battlegroups.map((c) => battlegroups[c]).sort(sortOrderSort),
 )
 
 export const getMyPinnedBattlegroups = createSelector(
   [getMyBattlegroups],
-  battlegroups => battlegroups.filter(c => c.pinned)
+  (battlegroups) => battlegroups.filter((c) => c.pinned),
 )
 
 export const getMyBattlegroupsWithoutChronicles = createSelector(
   [getMyBattlegroups],
-  battlegroups => battlegroups.filter(c => c.chronicle_id == null)
+  (battlegroups) => battlegroups.filter((c) => c.chronicle_id == null),
 )
 
 export const getSpecificBattlegroup = (state: State, id: number) =>

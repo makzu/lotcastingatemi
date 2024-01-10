@@ -30,7 +30,7 @@ interface Props {
 }
 
 const ResponsiveFilterDrawer = ({ children, open, onClose }: Props) => {
-  const theme = useTheme() as any
+  const theme = useTheme()
   const isXL = useMediaQuery(theme.breakpoints.up('xl'))
 
   const classes = useStyles()

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 
-import ListItem from '@material-ui/core/ListItem'
+import ListItem, { ListItemProps } from '@material-ui/core/ListItem'
 import { Omit } from '@material-ui/types'
 
 import { Location } from 'history'
@@ -15,7 +15,7 @@ interface Props {
   to: string
   children: React.ReactNode
   exact?: boolean
-  isActive?(_: {}, location: Location): boolean
+  isActive?: NavLinkProps['isActive']
   onClick?(): void
 }
 

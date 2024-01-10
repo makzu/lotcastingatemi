@@ -51,7 +51,7 @@ export {
   destroyAccount,
   createPoison,
   updatePoison,
-  destroyPoison
+  destroyPoison,
 } from '../entities'
 
 export { logout } from '../session'

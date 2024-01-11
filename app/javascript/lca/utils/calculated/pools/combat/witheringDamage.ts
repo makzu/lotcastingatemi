@@ -1,6 +1,6 @@
 import { attr } from '../..'
 import { weaponOverwhelming } from '../../weapons'
-import type { Character, fullWeapon, Pool } from 'utils/flow-types'
+import type { Character, fullWeapon, Pool, PoolBonus } from 'utils/flow-types'
 
 function weaponDamageBonus(weapon: fullWeapon) {
   if (weapon.tags.includes('subtle')) return 0
@@ -31,11 +31,11 @@ export function witheringDamage(
 ): Pool {
   const damage = weaponDamageBonus(weapon) + weapon.bonus_damage
 
-  let _attr = weapon.overrides?.damage_attribute?.use || 'strength'
+  let _attr = weapon.overrides?.damage_attribute?.use ?? 'strength'
 
   let attrRating = attr(character, _attr)
   let bonus = [] as PoolBonus[]
-  let specialAttacks = []
+  let specialAttacks = [] as string[]
   let b = 0
   let powDamage
 
@@ -46,6 +46,7 @@ export function witheringDamage(
         noFull: true,
       },
     ])
+    // @ts-expect-error Damage pool typing doesn't account for special damage pools
     _attr = 'subtle'
     attrRating = 0
     specialAttacks = specialAttacks.concat(['subtle'])
@@ -56,6 +57,7 @@ export function witheringDamage(
         noFull: true,
       },
     ])
+    // @ts-expect-error Damage pool typing doesn't account for special damage pools
     _attr = 'flame'
     attrRating = 4
   } else if (weapon.tags.includes('crossbow')) {
@@ -65,6 +67,7 @@ export function witheringDamage(
         noFull: true,
       },
     ])
+    // @ts-expect-error Damage pool typing doesn't account for special damage pools
     _attr = 'crossbow'
     attrRating = 4
   } else if (weapon.tags.includes('firearm')) {
@@ -74,6 +77,7 @@ export function witheringDamage(
         noFull: true,
       },
     ])
+    // @ts-expect-error Damage pool typing doesn't account for special damage pools
     _attr = 'firearm'
     attrRating = 4
   }

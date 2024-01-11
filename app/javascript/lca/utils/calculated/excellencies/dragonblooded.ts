@@ -1,20 +1,17 @@
+import { Ability, Attribute } from 'types'
 import { abil, specialtiesFor } from '..'
 import type { Character, Charm } from 'utils/flow-types'
 
 /* Dragon-Blooded Excellencies: WFHW Backer PDF p.162 */
 // All abilities that have an 'Excellency' keyworded Charm
-export const dbExcellencyAbils = (
-  character: Character,
-  charms: Charm[],
-): string[] => {
+export const dbExcellencyAbils = (character: Character, charms: Charm[]) => {
   let excellencies = charms
-    .filter(
-      (c) =>
-        c.keywords.includes('excellency') || c.keywords.includes('Excellency'),
-    )
-    .map((c) => c.ability)
+    .filter((c) => c.keywords.includes('excellency'))
+    .map((c) => c.ability as Ability)
+
   if (excellencies.includes('brawl'))
     excellencies = excellencies.concat(['martial_arts'])
+
   return excellencies
 }
 
@@ -22,8 +19,8 @@ export const dbExcellencyAbils = (
 // DBs apparently round down now: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1275486#post1275486
 const dbExcellency = (
   character: Character,
-  attribute: string,
-  ability: string,
+  attribute: Attribute,
+  ability: Ability,
   staticRating = false,
 ) =>
   Math.floor(

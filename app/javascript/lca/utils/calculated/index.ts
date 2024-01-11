@@ -113,6 +113,7 @@ export function attackAbilities(character: Character): {
       specialties: character.specialties.filter((spec) => spec.ability == name),
     }
   })
+
   const mas = character.abil_martial_arts.map((abil) => {
     const name = `martial arts (${abil.style})`
     return {

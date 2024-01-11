@@ -1,7 +1,8 @@
 import { attr, abil, specialtiesFor } from '..'
 import { halfRoundUp, halfRoundDown } from 'utils'
-import { ABILITIES, ATTRIBUTES } from 'utils/constants.ts'
-import { Character } from 'types'
+import { ABILITIES, ATTRIBUTES } from 'utils/constants'
+import { Ability, Attribute, Character } from 'types'
+
 export const highestOtherAbility = (character: Character, ability: string) => {
   const result = ABILITIES.filter((a) => a.abil !== `abil_${ability}`).map(
     (a) => character[a.abil],
@@ -19,8 +20,8 @@ export const highestOtherAttribute = (
 }
 export default (
   character: Character,
-  attribute: string,
-  ability: string,
+  attribute: Attribute,
+  ability: Ability,
   staticRating: boolean,
   stunt = false,
 ) => {

@@ -64,7 +64,7 @@ export function parry(
     bonus,
   )
   const rawRating =
-    halfRoundUp(rat.attributeRating + rat.abilityRating) +
+    halfRoundUp((rat.attributeRating ?? 0) + (rat.abilityRating ?? 0)) +
     weaponDefenseBonus(weapon) +
     weapon.bonus_defense
   return {
@@ -74,7 +74,7 @@ export function parry(
     shield: weapon.tags.includes('shield'),
     bonus: bonus,
     //$FlowThisIsOkayISwear
-    total: Math.max(rawRating - rat.totalPenalty, 0),
+    total: Math.max(rawRating - (rat.totalPenalty ?? 0), 0),
     parry: true,
   }
 }

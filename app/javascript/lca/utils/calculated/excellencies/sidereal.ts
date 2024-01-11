@@ -1,5 +1,5 @@
-import { attr, abil } from '..'
-import type { Ability, Character, Charm } from 'types'
+import { abil } from '..'
+import type { Ability, Attribute, Character, Charm } from 'types'
 
 /* Sidereal Excellencies */
 
@@ -7,7 +7,7 @@ import type { Ability, Character, Charm } from 'types'
 export const siderealExcellencyAbils = (
   character: Character,
   charms: Charm[],
-): string[] => {
+) => {
   let excellencies = (character.caste_abilities || [])
     .filter((a) => abil(character, a) > 0)
     .concat(
@@ -28,8 +28,8 @@ export const siderealExcellencyAbils = (
 // Higher of Essence or 3. Sids do not halve static ratings
 const siderealExcellency = (
   character: Character,
-  attribute: string,
-  ability: string,
-  staticRating = false,
+  _attribute: Attribute,
+  _ability: Ability,
+  _staticRating = false,
 ) => Math.max(character.essence, 3)
 export default siderealExcellency

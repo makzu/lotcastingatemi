@@ -1,5 +1,7 @@
-import type { Character, Pool } from 'utils/flow-types'
+import type { Character, Pool, PoolBonus } from 'utils/flow-types'
+
 export const naturalSoak = (character: Character) => character.attr_stamina
+
 export function armorSoak(character: Character) {
   switch (character.armor_weight) {
     case 'light':
@@ -16,6 +18,7 @@ export function armorSoak(character: Character) {
       return 0
   }
 }
+
 export function soak(
   character: Character,
   merits: string[],
@@ -45,10 +48,7 @@ export function soak(
     b += character.essence
     bonus = [
       ...bonus,
-      {
-        label: 'invulnerable skin of bronze',
-        bonus: character.essence,
-      },
+      { label: 'invulnerable skin of bronze', bonus: character.essence },
     ]
   }
 
@@ -65,10 +65,7 @@ export function soak(
           b += Math.max(character.essence, 3)
           bonus = [
             ...bonus,
-            {
-              label: 'anima',
-              bonus: Math.max(character.essence, 3),
-            },
+            { label: 'anima', bonus: Math.max(character.essence, 3) },
           ]
         } else {
           bonus = [

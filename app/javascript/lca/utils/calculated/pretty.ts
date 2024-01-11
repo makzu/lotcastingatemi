@@ -1,11 +1,8 @@
-// @flow
-
-// $FlowFixMe
 import { Character } from 'types'
 import { capitalize, titleCase } from '..'
 
 export const solarXpName = (character: Character) =>
-  capitalize(character.exalt_type.split(/[ -]/)[0] || 'solar')
+  capitalize(character.exalt_type.split(/[ -]/)[0] ?? 'solar')
 
 export function prettyExaltType(character: Character) {
   switch (character.type) {

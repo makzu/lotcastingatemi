@@ -1,32 +1,34 @@
+import { Ability, Attribute } from 'types'
 import { attr, abil } from '..'
 import type { Character, Charm } from 'utils/flow-types'
 
 /* Solar Excellencies: Core p.255 */
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
-export const solarExcellencyAbils = (
-  character: Character,
-  charms: Charm[],
-): string[] => {
+export const solarExcellencyAbils = (character: Character, charms: Charm[]) => {
   let excellencies = (character.caste_abilities || [])
     .filter((a) => abil(character, a) > 0)
     .concat(
       (character.favored_abilities || []).filter((a) => abil(character, a) > 0),
     )
+
   if (excellencies.includes('brawl') && character.abil_martial_arts.length > 0)
     excellencies = excellencies.concat(['martial_arts'])
+
   excellencies = excellencies.concat(
+    // @ts-expect-error Solars only get Ability charms but typings are too general
     charms.map((c) =>
       c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability,
     ),
   )
+
   return excellencies
 }
 
 // Attribute + Ability, round down for static ratings
 const solarExcellency = (
   character: Character,
-  attribute: string,
-  ability: string,
+  attribute: Attribute,
+  ability: Ability,
   staticRating = false,
 ) =>
   Math.floor(

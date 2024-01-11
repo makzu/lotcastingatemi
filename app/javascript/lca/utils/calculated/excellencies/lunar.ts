@@ -4,13 +4,14 @@ import { attr } from '..'
 import { highestOtherAttribute } from './custom.js'
 
 export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
-  const charmsPerAttribute = {}
+  const charmsPerAttribute: { [K in Attribute]?: number } = {}
   const casteAndFav: string[] = character.caste_attributes.concat(
     character.favored_attributes,
   )
+
   charms.forEach((ch) => {
-    charmsPerAttribute[ch.ability || ''] =
-      (charmsPerAttribute[ch.ability || ''] || 0) + 1
+    charmsPerAttribute[(ch.ability as Attribute) ?? ''] =
+      (charmsPerAttribute[(ch.ability as Attribute) ?? ''] ?? 0) + 1
   })
 
   const attributes = ATTRIBUTES.map((a) => {
@@ -18,15 +19,18 @@ export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
 
     if (
       character[a.attr] >= 5 ||
+      // @ts-expect-error Gotta fix this once the new constants are in
       charmsPerAttribute[pretty] >= 2 ||
       (casteAndFav.includes(pretty) &&
+        // @ts-expect-error Gotta fix this once the new constants are in
         (character[a.attr] >= 3 || charmsPerAttribute[pretty] >= 1))
     ) {
       return pretty
     }
   })
 
-  return [...new Set(attributes)]
+  // @ts-expect-error TODO fix me
+  return [...new Set(attributes)] as Attribute
 }
 
 const LunarExcellency = (

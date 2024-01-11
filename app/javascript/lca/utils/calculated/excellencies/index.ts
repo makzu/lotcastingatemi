@@ -4,13 +4,15 @@ import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
 import CustomExcellency from './custom'
 import type { Character, Charm } from 'utils/flow-types'
+import { Ability, Attribute } from 'types'
+
 export const excellencyAbils = (
   character: Character,
   charms: Charm[],
-): string[] => {
+): (Attribute | Ability)[] => {
   // Mortals do not have excellencies
   if (character.type === 'Character') return []
-  let excellencies: string[] = character.excellencies_for || []
+  let excellencies = character.excellencies_for || []
 
   if (character.type === 'SolarCharacter' || excellencies.includes('solar')) {
     excellencies = excellencies.concat(solarExcellencyAbils(character, charms))
@@ -37,12 +39,14 @@ export const excellencyAbils = (
   }
 
   // Because ES6 lacks a .uniq method:
+  // @ts-expect-error TODO fix '*' in excellencies
   return [...new Set(excellencies)]
 }
+
 export function maxExcellency(
   character: Character,
-  attribute: string,
-  ability: string,
+  attribute: Attribute,
+  ability: Ability,
   excellencyAbils: string[],
   staticRating = false,
   stunt = false,

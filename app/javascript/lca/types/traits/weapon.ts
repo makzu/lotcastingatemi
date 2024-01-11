@@ -7,7 +7,7 @@ export interface Weapon extends CharacterTrait {
   tags: string[]
   is_artifact: boolean
   notes: string
-  ability: Ability | string
+  ability: Ability | 'essence'
   bonus_accuracy: number
   bonus_damage: number
   bonus_defense: number

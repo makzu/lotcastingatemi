@@ -1,4 +1,3 @@
-// @flow
 import { createApiActions, createEntityReducer } from './_entity'
 
 export default createEntityReducer('combat_actor')

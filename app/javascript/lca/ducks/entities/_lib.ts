@@ -1,7 +1,6 @@
-import { normalize, schema } from 'normalizr'
+import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
-
 import { Action } from 'redux'
 import { ActionFunctionAny, createAction } from 'redux-actions'
 
@@ -29,7 +28,7 @@ export type characterTypes =
 
 export type listTypes = 'characterList' | 'qcList' | 'battlegroupList'
 
-type entityTypes = characterTraitTypes | characterTypes
+export type entityTypes = characterTraitTypes | characterTypes
 type crudActions =
   | 'CREATE'
   | 'DUPLICATE'
@@ -59,7 +58,7 @@ export interface CrudActionGroup {
 
 export const massagePayload =
   (type: entityTypes | listTypes | string) =>
-  ({} = {}, {} = {}, res) =>
+  (_payload = {}, _meta = {}, res) =>
     getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
 
 export const successMeta = (_: null, __: null, { headers }: Response) => ({
@@ -86,8 +85,8 @@ export const optimisticTypes = (
   action: CrudActionGroup,
   id: number,
   transactionId: string,
-  trait?: any,
-  successPayload?: any,
+  trait?: $TSFixMe,
+  successPayload?: $TSFixMe,
   charId?: number,
   parent?: characterTypes,
 ): TypesTuple => [

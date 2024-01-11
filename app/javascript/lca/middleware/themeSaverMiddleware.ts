@@ -1,9 +1,10 @@
+import { State } from 'ducks'
 import { SWITCH_THEME } from 'ducks/app.js'
 import { Middleware } from 'redux'
 
 // Saves changes to the theme to LocalStorage
 // eslint-disable-next-line no-unused-vars
-const themeSaver: Middleware<> =
+const themeSaver: Middleware<object, State> =
   (_store) =>
   (next: $TSFixMeFunction) =>
   (action: Record<string, $TSFixMe>) => {

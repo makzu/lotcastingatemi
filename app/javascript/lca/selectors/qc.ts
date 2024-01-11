@@ -1,50 +1,64 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
-import type { entitySelector } from './entities'
 import { entities, getCurrentPlayer } from './entities'
 import { sortOrderSort } from 'utils'
 import * as calc from 'utils/calculated/'
-export const getSpecificQc = (state: Record<string, $TSFixMe>, id: number) =>
+import { WrappedEntityState } from 'ducks/entities'
+
+export const getSpecificQc = (state: WrappedEntityState, id: number) =>
   entities(state).qcs[id]
 
-const qcIdMemoizer = (state, id) => id
+const qcIdMemoizer = (_state: WrappedEntityState, id: number) => id
 
-const getQcMerits = (state) => entities(state).qc_merits
+const getQcMerits = (state: WrappedEntityState) => entities(state).qc_merits
 
-// @ts-expect-error
 export const getMeritsForQc = createCachedSelector(
   [getSpecificQc, getQcMerits],
-  (qc, merits) => qc.qc_merits.map((m) => merits[m]).sort(sortOrderSort),
+  (qc, merits) =>
+    // @ts-expect-error TODO fix this
+    (qc?.qc_merits ?? []).map((m) => merits[m]).sort(sortOrderSort),
 )(qcIdMemoizer)
-export const getQcAttacks = (state: Record<string, $TSFixMe>) =>
+
+export const getQcAttacks = (state: WrappedEntityState) =>
   entities(state).qc_attacks
-// @ts-expect-error
+
 export const getAttacksForQc = createCachedSelector(
   [getSpecificQc, getQcAttacks],
-  (qc, attacks) => qc.qc_attacks.map((m) => attacks[m]).sort(sortOrderSort),
+  (qc, attacks) =>
+    // @ts-expect-error TODO fix this
+    (qc?.qc_attacks ?? []).map((m) => attacks[m]).sort(sortOrderSort),
 )(qcIdMemoizer)
-export const getQcCharms = (state: Record<string, $TSFixMe>) =>
+
+export const getQcCharms = (state: WrappedEntityState) =>
   entities(state).qc_charms
-// @ts-expect-error
+
 export const getCharmsForQc = createCachedSelector(
   [getSpecificQc, getQcCharms],
+  // @ts-expect-error TODO fix this
   (qc, charms) => qc.qc_charms.map((m) => charms[m]).sort(sortOrderSort),
 )(qcIdMemoizer)
-// @ts-expect-error
+
 export const getPenaltiesForQc = createCachedSelector(
   [getSpecificQc, getMeritsForQc],
   (character, merits) => {
+    // @ts-expect-error TODO fix this
     const meritNames = merits.map((m) => m.name.toLowerCase())
     return {
+      // @ts-expect-error TODO fix this
       onslaught: character.onslaught,
+      // @ts-expect-error TODO fix this
       wound: calc.woundPenalty(character, meritNames),
     }
   },
 )(qcIdMemoizer)
-// @ts-expect-error
+
 export const getPoolsAndRatingsForQc = createCachedSelector(
   [getSpecificQc, getMeritsForQc, getPenaltiesForQc],
   (qc, merits, penalties) => {
+    if (qc === undefined) {
+      return {}
+    }
+
     const meritNames = [...new Set(merits.map((m) => m.name.toLowerCase()))]
     const tiny = meritNames.some((m) =>
       m.toLowerCase().includes('tiny creature'),
@@ -85,22 +99,27 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
     }
   },
 )(qcIdMemoizer)
-export const doIOwnQc: entitySelector<boolean> = createSelector(
+
+export const doIOwnQc = createSelector(
   [getCurrentPlayer, getSpecificQc],
   (player, qc) => qc !== undefined && player.id === qc.player_id,
 )
-export const amIStOfQc: entitySelector<boolean> = createSelector(
+
+export const amIStOfQc = createSelector(
   [getCurrentPlayer, getSpecificQc, entities],
   (player, qc, ents) =>
     qc?.chronicle_id != null &&
     ents.chronicles[qc.chronicle_id] &&
+    // @ts-expect-error TODO fix this
     ents.chronicles[qc.chronicle_id].st_id === player.id,
 )
-export const canISeeQc: entitySelector<boolean> = createSelector(
+
+export const canISeeQc = createSelector(
   [getSpecificQc, doIOwnQc, amIStOfQc],
   (qc, doI, amI) => !qc.hidden || doI || amI,
 )
-export const canIEditQc: entitySelector<boolean> = createSelector(
+
+export const canIEditQc = createSelector(
   [doIOwnQc, amIStOfQc],
   (doI, amI) => doI || amI,
 )

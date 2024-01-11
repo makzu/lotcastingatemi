@@ -62,7 +62,7 @@ export const createApiActions = (
   createTraitDestroyAction(entityType, parentType),
 ]
 
-const justGetJSON = (_0: any, _1: any, response) => getJSON(response)
+const justGetJSON = (_0: never, _1: never, response) => getJSON(response)
 
 interface CreateActionOptions {
   type?: string

@@ -1,4 +1,3 @@
-// @flow
 import { callApi } from 'utils/api'
 import { createApiActions, mergeEntity } from './_entity'
 import { crudAction, reducerUpdateAction, standardTypes } from './_lib'

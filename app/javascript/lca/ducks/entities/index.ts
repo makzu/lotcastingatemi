@@ -19,7 +19,7 @@ export * from './qc_charm'
 export * from './battlegroup'
 export * from './combat_actor'
 
-export type { EntityState } from './_types'
+export type { EntityState, WrappedEntityState } from './_types'
 
 import { LOGOUT } from '../session'
 import { mergeEntity } from './_entity'
@@ -45,7 +45,7 @@ export const defaultState: EntityState = {
   players: {
     [0]: {
       id: 0,
-      name: 'Anonymous Player',
+      display_name: 'Anonymous Player',
       chronicles: [],
       own_chronicles: [],
       characters: [],

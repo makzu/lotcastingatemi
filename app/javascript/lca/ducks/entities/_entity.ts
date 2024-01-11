@@ -11,16 +11,17 @@ import {
   unwrapped,
 } from './_lib'
 import { EntityState } from './_types'
+import { Action } from '@reduxjs/toolkit'
 
 /* Overwrite arrays instead of concatenating them */
-const arrayMerge = (_: null[], sourceArray: any[]) => sourceArray
+const arrayMerge = <T>(_: never, sourceArray: T[]) => sourceArray
 
-export const mergeEntity = (state: EntityState, action) =>
+export const mergeEntity = (state: EntityState, action: Action) =>
   deepmerge(state, action.payload.entities || {}, { arrayMerge })
 
 export const createEntityReducer = (
   entityType: eTypes,
-  reducers: $TSFixMeFunction,
+  reducers: Record<string, $TSFixMeFunction>,
 ) => {
   const pluralType = entityType + 's'
 
@@ -75,16 +76,14 @@ export const createApiActions = (
 ]
 
 type AIdAction = (id: number) => AApiAction
-export const createFetchAction =
-  (type: eTypes): AIdAction =>
-  (id) => {
-    const action = crudAction(type, 'FETCH')
-    return callApi({
-      endpoint: `/api/v1/${type}s/${id}`,
-      method: 'GET',
-      types: standardTypes(type, action),
-    })
-  }
+export const createFetchAction = (type: eTypes) => (id: number | string) => {
+  const action = crudAction(type, 'FETCH')
+  return callApi({
+    endpoint: `/api/v1/${type}s/${id}`,
+    method: 'GET',
+    types: standardTypes(type, action),
+  })
+}
 
 type AFetchAll = () => AApiAction
 export const createFetchAllAction =

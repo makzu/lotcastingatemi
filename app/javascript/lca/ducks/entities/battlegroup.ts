@@ -13,6 +13,7 @@ import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
 
 const BATTLEGROUP = 'battlegroup'
+const isDefined = <T>(value: T | undefined): value is T => value !== undefined
 
 /* *** Reducer *** */
 export default createEntityReducer('battlegroup', {
@@ -48,7 +49,10 @@ const getBattlegroups = (state: State) => unwrapped(state).battlegroups
 export const getMyBattlegroups = createSelector(
   [getCurrentPlayer, getBattlegroups],
   (currentPlayer, battlegroups) =>
-    currentPlayer.battlegroups.map((c) => battlegroups[c]).sort(sortOrderSort),
+    (currentPlayer?.battlegroups ?? [])
+      .map((c) => battlegroups[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )
 
 export const getMyPinnedBattlegroups = createSelector(

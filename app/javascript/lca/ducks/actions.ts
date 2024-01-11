@@ -58,6 +58,7 @@ export { logout } from './session'
 export { closeDrawer, toggleDrawer, switchTheme } from './app'
 export { spendMotes, spendWillpower, takeDamage } from './events'
 
+import store, { AppDispatch } from 'store'
 import {
   fetchAllCharacters,
   fetchCurrentPlayer,
@@ -69,7 +70,7 @@ import UpdatesCable from 'utils/cable.js'
 export const INIT = 'lca/app/INIT'
 
 export function fetchAll() {
-  return (dispatch: $TSFixMeFunction, getState: $TSFixMeFunction) => {
+  return (dispatch: AppDispatch, getState: typeof store.getState) => {
     dispatch(fetchCurrentPlayer())
       .then(() => dispatch(fetchAllCharacters()))
       .then(() => dispatch(fetchAllQcs()))
@@ -86,7 +87,7 @@ export function fetchAll() {
 }
 
 export function lcaInit() {
-  return (dispatch: $TSFixMeFunction, getState: $TSFixMeFunction) => {
+  return (dispatch: AppDispatch, getState: typeof store.getState) => {
     dispatch({ type: INIT })
 
     if (getState().session.authenticated) {

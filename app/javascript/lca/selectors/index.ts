@@ -19,9 +19,11 @@ import {
 import { amIStOfChronicle } from './chronicle'
 import { entities, getCurrentPlayer } from './entities'
 import { getPoolsAndRatingsForQc, canIEditQc, canIDeleteQc } from './qc'
+import { WrappedEntityState } from 'ducks/entities'
 type CT = 'chronicle' | 'character' | 'qc' | 'battlegroup'
+
 export const canIEdit = (
-  state: Record<string, $TSFixMe>,
+  state: WrappedEntityState,
   id: number,
   characterType: CT,
 ) => {
@@ -42,8 +44,9 @@ export const canIEdit = (
       return false
   }
 }
+
 export const canIDelete = (
-  state: Record<string, $TSFixMe>,
+  state: WrappedEntityState,
   id: number,
   characterType: CT,
 ) => {
@@ -65,7 +68,7 @@ export const canIDelete = (
   }
 }
 export const isPublicCharacterPage = (
-  state: Record<string, $TSFixMe>,
+  state: WrappedEntityState,
   pathName: string,
 ) => {
   const path = pathName.split('/')
@@ -77,9 +80,8 @@ export const isPublicCharacterPage = (
   return false
 }
 
-const getChronicles = (state) => entities(state).chronicles
+const getChronicles = (state: WrappedEntityState) => entities(state).chronicles
 
-// @ts-expect-error
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
@@ -87,7 +89,7 @@ export const getMyOwnChronicles = createSelector(
       .map((c) => chronicles[c])
       .filter((c) => c?.name !== undefined),
 )
-// @ts-expect-error
+
 export const getMyChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
@@ -95,8 +97,9 @@ export const getMyChronicles = createSelector(
       .map((c) => chronicles[c])
       .filter((c) => c?.name !== undefined),
 )
+
 export const getPoolsAndRatingsGeneric = (
-  state: Record<string, $TSFixMe>,
+  state: WrappedEntityState,
   id: number,
   characterType: CT,
 ) => {

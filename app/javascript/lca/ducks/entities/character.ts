@@ -12,6 +12,7 @@ import {
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
+import { Character } from 'types/character'
 
 const CHARACTER = 'character'
 
@@ -50,7 +51,9 @@ const getCharacters = (state: State) => unwrapped(state).characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters.map((c) => characters[c]).sort(sortOrderSort),
+    (currentPlayer.characters.map((c) => characters[c]) as Character[]).sort(
+      sortOrderSort,
+    ),
 )
 
 export const getMyPinnedCharacters = createSelector(
@@ -66,7 +69,7 @@ export const getMyCharactersWithoutChronicles = createSelector(
 export const getSpecificCharacter = (state: State, id: number) =>
   unwrapped(state).characters[id]
 
-export const useCharacterAttribute = (id: number, attribute: string) =>
+export const useCharacterAttribute = (id: number, attribute: keyof Character) =>
   useSelector((state: State) => {
     const character = getSpecificCharacter(state, id)
     return character != null ? character[attribute] : null

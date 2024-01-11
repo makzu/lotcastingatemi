@@ -1,57 +1,63 @@
 import createCachedSelector from 're-reselect'
 import { entities } from './entities'
-import { sortOrderSort } from 'utils'
+import { isDefined, sortOrderSort } from 'utils'
+import { WrappedEntityState } from 'ducks/entities/_types'
+import { Character, Charm, Spell } from 'types'
 
-const characterIdMemoizer = (state, id) => id
+const characterIdMemoizer = (state: WrappedEntityState, id: number) => id
 
-const getSpecificCharacter = (state, id) => entities(state).characters[id]
+const getSpecificCharacter = (state: WrappedEntityState, id: Character['id']) =>
+  entities(state).characters[id]
 
-const getCharms = (state) => entities(state).charms
+const getCharms = (state: WrappedEntityState) => entities(state).charms
 
-// @ts-expect-error
 export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character.charms === undefined
-      ? []
-      : character.charms.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.charms ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getMartialArtsCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character.martial_arts_charms === undefined
-      ? []
-      : character.martial_arts_charms.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.martial_arts_charms ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getEvocationsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character.evocations === undefined
-      ? []
-      : character.evocations.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.evocations ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getSpiritCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character.spirit_charms === undefined
-      ? []
-      : character.spirit_charms.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.spirit_charms ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(characterIdMemoizer)
 
-const getSpells = (state) => entities(state).spells
+const getSpells = (state: WrappedEntityState) => entities(state).spells
 
-// @ts-expect-error
-const getSpellsForCharacter = createCachedSelector(
+export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>
-    character.spells.length === 0
-      ? []
-      : character.spells.map((s) => spells[s]).sort(sortOrderSort),
+    (character?.spells ?? [])
+      .map((s) => spells[s])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
   [getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter],
   (charms, maCharms) => {
@@ -60,7 +66,7 @@ export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
     return abilities.sort()
   },
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getAllMartialArtsCharmStylesForCharacter = createCachedSelector(
   [getMartialArtsCharmsForCharacter],
   (charms) => {
@@ -68,7 +74,7 @@ export const getAllMartialArtsCharmStylesForCharacter = createCachedSelector(
     return [...new Set(ch)]
   },
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getAllEvocationArtifactsForCharacter = createCachedSelector(
   [getEvocationsForCharacter],
   (evocations) => {
@@ -76,7 +82,7 @@ export const getAllEvocationArtifactsForCharacter = createCachedSelector(
     return [...new Set(evo)]
   },
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getAllCharmCategoriesForCharacter = createCachedSelector(
   [
     getNativeCharmsForCharacter,
@@ -86,14 +92,15 @@ export const getAllCharmCategoriesForCharacter = createCachedSelector(
     getSpellsForCharacter,
   ],
   (natives, maCharms, evocations, spiritCharms, spells) => {
-    const ch = natives
+    const ch = (natives as (Charm | Spell)[])
       .concat(maCharms)
       .concat(evocations)
       .concat(spiritCharms)
       .concat(spells)
-      .reduce((a, charm) => [...a, ...charm.categories], [])
+      .flatMap((charm) => charm.categories)
       .concat(['Attack', 'Defense', 'Social'])
       .sort()
+
     return [...new Set(ch)]
   },
 )(characterIdMemoizer)

@@ -60,6 +60,15 @@ export type ExaltType =
   | 'CustomAttributeCharacter'
   | 'CustomEssenceCharacter'
 
+export type ExcellencyBuilderOption =
+  | Attribute
+  | Ability
+  | '*'
+  | 'dragonblood'
+  | 'solar'
+  | 'lunar'
+  | 'sidereal'
+
 export interface Character extends PlayerAsset, WithSharedStats {
   name: string
   description: string
@@ -134,13 +143,13 @@ export interface Character extends PlayerAsset, WithSharedStats {
   xp_craft_silver: number
   xp_craft_gold: number
   xp_craft_white: number
-  anima_powers: any[]
+  anima_powers: never[]
   limit_trigger: string
   limit: number
 
   excellency: string
   excellency_stunt: string
-  excellencies_for: string[]
+  excellencies_for: ExcellencyBuilderOption[]
   charms: number[]
   martial_arts_charms: number[]
   evocations: number[]

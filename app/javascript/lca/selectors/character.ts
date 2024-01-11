@@ -1,42 +1,44 @@
 import createCachedSelector from 're-reselect'
-import type { OutputSelector } from 'reselect'
 import { createSelector } from 'reselect'
 
-import type { WrappedEntityState } from 'ducks/entities'
+import { WrappedEntityState } from 'ducks/entities/_types'
 import { sortOrderSort } from 'utils'
 import { exaltTypeBase, mobilityPenalty, woundPenalty } from 'utils/calculated/'
 import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
 import * as pools from 'utils/calculated/pools'
 import * as ratings from 'utils/calculated/ratings'
-import type { Character, Poison, Spell, fullMerit } from 'utils/flow-types'
+import type { Poison, Spell } from 'utils/flow-types'
 import {
   getMartialArtsCharmsForCharacter,
   getNativeCharmsForCharacter,
+  getSpellsForCharacter,
 } from './charm'
-import type { entitySelector } from './entities'
+
 import { entities, getCurrentPlayer } from './entities'
 import { getPoolsForWeapon, sortByParry } from './weapon'
 
 const getState = (state: WrappedEntityState) => state
 
-const getPoisons = (state: WrappedEntityState) => entities(state).poisons
+const isDefined = <T>(value: T | undefined): value is T => value !== undefined
 
-export const getSpecificCharacter = (
-  state: WrappedEntityState,
-  id: number,
-): Character => entities(state).characters[id]
+// const getPoisons = (state: WrappedEntityState) => entities(state).poisons
 
-const characterIdMemoizer = (state, id: number) => id
+export const getSpecificCharacter = (state: WrappedEntityState, id: number) =>
+  entities(state).characters[id]
 
-const getMerits = (state) => entities(state).merits
+const characterIdMemoizer = (_state: WrappedEntityState, id: number) => id
 
-type CachedEntitySelector<T> = OutputSelector<WrappedEntityState, any, T>
-type gMFC = CachedEntitySelector<fullMerit[]>
-export const getMeritsForCharacter: gMFC = createCachedSelector(
+const getMerits = (state: WrappedEntityState) => entities(state).merits
+
+export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],
   (character, merits) =>
-    character.merits.map((m) => merits[m]).sort(sortOrderSort),
+    (character?.merits ?? [])
+      .map((m) => merits[m])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(characterIdMemoizer)
+
 export const getMeritNamesForCharacter = (
   state: WrappedEntityState,
   id: number,
@@ -44,7 +46,7 @@ export const getMeritNamesForCharacter = (
   getMeritsForCharacter(state, id)
     .map((m) => m.merit_name.toLowerCase() + m.rating)
     .sort()
-export const getEvokableMeritsForCharacter: gMFC = createSelector(
+export const getEvokableMeritsForCharacter = createSelector(
   [getMeritsForCharacter],
   (merits) =>
     merits.filter(
@@ -54,20 +56,14 @@ export const getEvokableMeritsForCharacter: gMFC = createSelector(
     ),
 )
 
-const getSpells = (state) => entities(state).spells
+const getSpells = (state: WrappedEntityState) => entities(state).spells
 
-type gSFC = CachedEntitySelector<Spell[]>
-export const getSpellsForCharacter: gSFC = createCachedSelector(
-  [getSpecificCharacter, getSpells],
-  (character, spells) =>
-    character.spells.map((s) => spells[s]).sort(sortOrderSort),
-)(characterIdMemoizer)
 export const getControlSpellsForCharacter = (
   state: WrappedEntityState,
   id: number,
 ): Spell[] => getSpellsForCharacter(state, id).filter((s) => s.control)
-type gPFC = CachedEntitySelector<Poison[]>
-export const getPoisonsForCharacter: gPFC = () => []
+
+export const getPoisonsForCharacter = () => [] as Poison[]
 // TODO: Poison penalties stack: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1173001#post1173001 */
 // TODO: Poison penalties only effect static ratings:
 
@@ -75,17 +71,25 @@ export const getPoisonsForCharacter: gPFC = () => []
  * even though the DB Integrity excellency says it negates penalties from poison:
  * http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1207986#post1207986
  */
-// @ts-expect-error
+
+export interface PenaltyInput {
+  mobility: number
+  onslaught: number
+  wound: number
+  poisonTotal: number
+}
+
 export const getPenalties = createCachedSelector(
   [getSpecificCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],
   (character, meritNames, poisons) => {
+    if (character == null)
+      return { mobility: 0, onslaught: 0, wound: 0, poisonTotal: 0 }
+
     const worstPoison = poisons.reduce(
       (prev, current) => (prev.penalty > current.penalty ? prev : current),
-      {
-        name: 'not poisoned',
-        penalty: 0,
-      },
+      { name: 'not poisoned', penalty: 0 },
     )
+
     return {
       mobility: mobilityPenalty(character),
       onslaught: character.onslaught,
@@ -94,13 +98,13 @@ export const getPenalties = createCachedSelector(
     }
   },
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getPoolsForAllWeaponsForCharacter = createCachedSelector(
   [getSpecificCharacter, getState],
   (character, state) =>
-    character.weapons.map((id) => getPoolsForWeapon(state, id)),
+    (character?.weapons ?? []).map((id) => getPoolsForWeapon(state, id)),
 )(characterIdMemoizer)
-// @ts-expect-error
+
 export const getPoolsAndRatings = createCachedSelector(
   [
     getSpecificCharacter,
@@ -120,12 +124,14 @@ export const getPoolsAndRatings = createCachedSelector(
     penalties,
     weaponPools,
   ) => {
+    if (character == null) return null
+
     const spellNames = spells.map((m) => m.name.toLowerCase())
     const excellencyAbils = excellencies(
       character,
       nativeCharms.concat(maCharms),
     )
-    const bestParryWeapon = weaponPools.sort(sortByParry)[0] || {
+    const bestParryWeapon = weaponPools.sort(sortByParry)[0] ?? {
       parry: {
         total: 'None',
         noSummary: true,
@@ -203,24 +209,29 @@ export const getPoolsAndRatings = createCachedSelector(
     }
   },
 )(characterIdMemoizer)
-export const doIOwnCharacter: entitySelector<boolean> = createSelector(
+
+export const doIOwnCharacter = createSelector(
   [getCurrentPlayer, getSpecificCharacter],
   (player, character) =>
     character !== undefined && player.id === character.player_id,
 )
-export const amIStOfCharacter: entitySelector<boolean> = createSelector(
+
+export const amIStOfCharacter = createSelector(
   [getCurrentPlayer, getSpecificCharacter, entities],
   (player, character, ents) =>
     character?.chronicle_id != null &&
     ents.chronicles[character.chronicle_id] &&
-    ents.chronicles[character.chronicle_id].st_id === player.id,
+    ents.chronicles[character.chronicle_id]?.st_id === player.id,
 )
-export const canISeeCharacter: entitySelector<boolean> = createSelector(
+
+export const canISeeCharacter = createSelector(
   [getSpecificCharacter, doIOwnCharacter, amIStOfCharacter],
-  (character, doI, amI) => !character.hidden || doI || amI,
+  (character, doI, amI) => !character?.hidden || doI || amI,
 )
-export const canIEditCharacter: entitySelector<boolean> = createSelector(
+
+export const canIEditCharacter = createSelector(
   [doIOwnCharacter, amIStOfCharacter],
   (doI, amI) => doI || amI,
 )
+
 export const canIDeleteCharacter = doIOwnCharacter

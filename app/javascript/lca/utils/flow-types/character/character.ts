@@ -54,6 +54,8 @@ export interface withArmorStats {
   bonus_hardness: number
   bonus_mobility_penalty: number
 }
+
+/** @deprecated */
 export interface specialty {
   ability: string
   context: string
@@ -69,4 +71,6 @@ export interface form {
   form: string
   qc_id: number
 }
+
+/** @deprecated use Character from 'types' instead */
 export type Character = TSCharacter

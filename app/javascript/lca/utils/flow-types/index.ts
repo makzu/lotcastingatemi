@@ -1,29 +1,18 @@
 import * as React from 'react'
+
+import { Battlegroup as TSBattlegroup } from 'types/battlegroup'
 export * from './character'
+export * from './pool'
 export * from './qc'
 export * from './shared'
-export * from './pool'
-import type { withBasicInfo, withCombatInfo, withWillpower } from './shared'
-import type { withQcStats } from './qc'
+
 export type Enhancer<P, EP> = (
   component: React.ComponentType<P>,
 ) => React.ComponentType<EP>
 
-export type Battlegroup = {
-  name: string
-  description: string
-  magnitude: number
-  size: number
-  might: number
-  drill: number
-  soak: number
-  health_levels: number
-  perfect_morale: boolean
-  portrait_link: string
-} & withBasicInfo &
-  withQcStats &
-  withWillpower &
-  withCombatInfo
+/** @deprecated use Battlegroup from 'types' instead */
+export type Battlegroup = TSBattlegroup
+
 export type CombatActor = unknown
 export interface Player {
   id: number
@@ -40,6 +29,8 @@ export interface Chronicle {
   name: string
   players: number[]
 }
+
+/** @deprecated */
 export type Ability =
   | 'archery'
   | 'athletics'
@@ -67,6 +58,8 @@ export type Ability =
   | 'survival'
   | 'thrown'
   | 'war'
+
+/** @deprecated */
 export type Attribute =
   | 'strength'
   | 'dexterity'

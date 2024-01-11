@@ -149,7 +149,7 @@ class CharmFilter extends React.Component<Props> {
                     marginTop: '-16px',
                   }}
                   name={filterName}
-                  label={filterLabel} // $FlowFixMe
+                  label={filterLabel}
                   value={currentAbility}
                   onChange={onChange}
                 >

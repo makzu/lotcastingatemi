@@ -10,7 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItem from '@material-ui/core/ListItem'
 import TextField from '@material-ui/core/TextField'
 import GroupAdd from '@material-ui/icons/GroupAdd'
-import { joinChronicle } from 'ducks/actions.js'
+import { joinChronicle } from 'ducks/actions'
 interface Props {
   joinChronicle: $TSFixMeFunction
 }

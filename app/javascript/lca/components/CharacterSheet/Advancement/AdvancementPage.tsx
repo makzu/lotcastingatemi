@@ -1,5 +1,5 @@
 import * as React from 'react'
 
-const AdvancementPage = (props) => <></>
+const AdvancementPage = (_props: never) => <></>
 
 export default AdvancementPage

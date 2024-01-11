@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import { addThingToChronicle } from 'ducks/actions.js'
+import { addThingToChronicle } from 'ducks/actions'
 import { getSpecificChronicle, getMyQcsWithoutChronicles } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 interface ExposedProps {

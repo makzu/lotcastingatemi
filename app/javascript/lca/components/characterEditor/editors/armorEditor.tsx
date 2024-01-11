@@ -1,41 +1,45 @@
 import React from 'react'
-import { compose, shouldUpdate } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  Theme,
+  WithStyles,
+  createStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
+
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import WeightSelect from 'components/shared/selects/WeightSelect'
-import { isUnequalByKeys } from 'utils'
 import type { withArmorStats as Character } from 'utils/flow-types'
 
-const styles = (theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginTop: theme.spacing(),
-    marginBottom: theme.spacing(),
-  },
-  poolBlock: {
-    margin: theme.spacing(),
-    marginLeft: 0,
-    width: '5.5rem',
-    maxHeight: '5rem',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      marginTop: theme.spacing(),
+      marginBottom: theme.spacing(),
+    },
+    poolBlock: {
+      margin: theme.spacing(),
+      marginLeft: 0,
+      width: '5.5rem',
+      maxHeight: '5rem',
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   character: Character
   pools: Record<string, $TSFixMe>
   penalties: Record<string, $TSFixMe>
   onChange: $TSFixMeFunction
   onCheck: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
 }
 
 function ArmorEditor(props: Props) {
@@ -148,17 +152,4 @@ function ArmorEditor(props: Props) {
   )
 }
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, newProps) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'armor_name',
-      'armor_weight',
-      'armor_tags',
-      'armor_is_artifact',
-      'bonus_soak',
-      'bonus_hardness',
-      'bonus_mobility_penalty',
-    ]),
-  ),
-)(ArmorEditor)
+export default withStyles(styles)(ArmorEditor)

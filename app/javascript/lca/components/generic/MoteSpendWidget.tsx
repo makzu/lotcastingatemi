@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import MoteCommittmentPopup from './MoteCommittmentPopup'
 import RatingField from './RatingField'
 import ResourceDisplay from './ResourceDisplay'
-import { spendMotes } from 'ducks/actions.js'
+import { spendMotes } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import {
@@ -21,7 +21,10 @@ import {
   committedPersonalMotes,
   committedPeripheralMotes,
 } from 'utils/calculated'
-import type { withMotePool, Enhancer } from 'utils/flow-types'
+import { RootState } from 'store'
+import { WithId } from 'types/_lib'
+import { WithSharedStats } from 'types/shared'
+
 interface wraProps {
   current: number
   spending: number
@@ -48,9 +51,7 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
 
 interface ExposedProps {
   children: React.ReactNode
-  character: withMotePool & {
-    id: number
-  }
+  character: WithId & WithSharedStats
   peripheral?: boolean
   qc?: boolean
 }
@@ -104,14 +105,14 @@ class MoteSpendWidget extends React.Component<Props, State> {
   handleClose = () => {
     this.setState(defaultState)
   }
-  handleAdd = (motes) => {
+  handleAdd = (motes: number) => {
     const commit = this.state.toSpend + motes <= 0 ? false : this.state.commit
     this.setState({
       toSpend: clamp(this.state.toSpend + motes, this.min(), this.max()),
       commit: commit,
     })
   }
-  handleChange = (e) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     let { commit } = this.state
 
@@ -123,15 +124,13 @@ class MoteSpendWidget extends React.Component<Props, State> {
         commit: commit,
       })
     } else {
-      this.setState({
-        [name]: value,
-      })
+      // @ts-expect-error TODO Tighten up this typing
+      this.setState({ [name]: value })
     }
   }
-  handleCheck = (e) => {
-    this.setState({
-      [e.target.name]: !this.state[e.target.name],
-    })
+  handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // @ts-expect-error TODO Tighten up this typing
+    this.setState({ [e.target.name]: !this.state[e.target.name] })
   }
   handleSubmit = () => {
     const { toSpend, commit, commitName, mute, scenelong } = this.state
@@ -339,13 +338,10 @@ class MoteSpendWidget extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state, props: ExposedProps) => ({
+const mapStateToProps = (state: RootState, props: ExposedProps) => ({
   canEdit: props.qc
     ? canIEditQc(state, props.character.id)
     : canIEditCharacter(state, props.character.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
-  spendMotes,
-})
-export default enhance(MoteSpendWidget)
+export default connect(mapStateToProps, { spendMotes })(MoteSpendWidget)

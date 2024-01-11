@@ -56,8 +56,6 @@ export const getEvokableMeritsForCharacter = createSelector(
     ),
 )
 
-const getSpells = (state: WrappedEntityState) => entities(state).spells
-
 export const getControlSpellsForCharacter = (
   state: WrappedEntityState,
   id: number,

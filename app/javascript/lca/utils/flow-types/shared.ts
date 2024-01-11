@@ -60,7 +60,7 @@ export interface withMotePool {
   motes_peripheral_current: number
   motes_committed: committment[]
   anima_level: number
-  anima_display: string
+  // anima_display: string
   is_sorcerer: boolean
   sorcerous_motes: number
 }

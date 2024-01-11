@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import { createBattlegroup } from 'ducks/actions.js'
+import { createBattlegroup } from 'ducks/actions'
 import type { Enhancer } from 'utils/flow-types'
 interface Props {
   createBattlegroup: $TSFixMeFunction
@@ -88,7 +88,7 @@ class BattlegroupCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, {}> = connect(null, {
+const enhance: Enhancer<Props, never> = connect(null, {
   createBattlegroup,
 })
 export default enhance(BattlegroupCreatePopup)

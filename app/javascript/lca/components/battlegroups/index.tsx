@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 import PoolDisplay from '../generic/PoolDisplay'
 import BlockPaper from '../generic/blockPaper'
@@ -19,55 +20,56 @@ import {
   bgDefenseBonus,
   bgSoak,
 } from 'utils/calculated'
+import { WithStyles } from '@material-ui/styles'
 
-const styles = (theme) => ({
-  ...sharedStyles(theme),
-  healthBlock: {
-    paddingTop: theme.spacing(-1),
-    marginRight: theme.spacing(),
-    paddingRight: theme.spacing(-1),
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    marginTop: theme.spacing(),
-    width: '4.5rem',
-    maxHeight: '5.5rem',
-    overflow: 'hidden',
-  },
-  label: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-    display: 'flex',
-  },
-  labelSpan: {
-    alignSelf: 'flex-end',
-  },
-  tags: {
-    ...theme.typography.body1,
-    margin: theme.spacing(),
-    marginLeft: 0,
-    textTransform: 'capitalize',
-    minWidth: '5rem',
-    maxHeight: '5rem',
-    overflow: 'hidden',
-  },
-  portrait: {
-    maxWidth: '100%',
-    display: 'block',
-    margin: 'auto',
-  },
-  portraitWrap: {
-    //textAlign: 'center',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    healthBlock: {
+      paddingTop: theme.spacing(-1),
+      marginRight: theme.spacing(),
+      paddingRight: theme.spacing(-1),
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      marginTop: theme.spacing(),
+      width: '4.5rem',
+      maxHeight: '5.5rem',
+      overflow: 'hidden',
+    },
+    label: {
+      ...theme.typography.body1,
+      fontSize: '0.75rem',
+      fontWeight: 500,
+      opacity: 0.7,
+      display: 'flex',
+    },
+    labelSpan: {
+      alignSelf: 'flex-end',
+    },
+    tags: {
+      ...theme.typography.body1,
+      margin: theme.spacing(),
+      marginLeft: 0,
+      textTransform: 'capitalize',
+      minWidth: '5rem',
+      maxHeight: '5rem',
+      overflow: 'hidden',
+    },
+    portrait: {
+      maxWidth: '100%',
+      display: 'block',
+      margin: 'auto',
+    },
+    portraitWrap: {
+      //textAlign: 'center',
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   id: string
   battlegroup: Battlegroup
   qc_attacks: QcAttack[]
-  classes: Record<string, $TSFixMe>
   fetch: $TSFixMeFunction
 }
 

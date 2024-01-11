@@ -6,7 +6,7 @@ import { Typography, Divider } from '@material-ui/core'
 import BlockPaper from '../../generic/blockPaper.jsx'
 import RatingLine from '../../generic/ratingLine.jsx'
 import { Character } from 'types'
-import { Intimacy } from 'types/shared.js'
+import { Intimacy } from 'types/shared'
 
 interface Props {
   character: Character

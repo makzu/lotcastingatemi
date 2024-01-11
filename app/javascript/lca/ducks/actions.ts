@@ -65,7 +65,7 @@ import {
   fetchAllQcs,
   fetchAllBattlegroups,
 } from './entities'
-import UpdatesCable from 'utils/cable.js'
+import UpdatesCable from 'utils/cable'
 
 export const INIT = 'lca/app/INIT'
 

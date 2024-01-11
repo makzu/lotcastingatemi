@@ -1,5 +1,5 @@
 import { State } from 'ducks'
-import { SWITCH_THEME } from 'ducks/app.js'
+import { SWITCH_THEME } from 'ducks/app'
 import { Middleware } from 'redux'
 
 // Saves changes to the theme to LocalStorage

@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'recompose'
-import { Theme, withStyles } from '@material-ui/core/styles'
+
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
+
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import CharacterMenu from '../generic/CharacterMenu'
@@ -16,54 +18,57 @@ import sharedStyles from 'styles/'
 import { doIOwnBattlegroup } from 'selectors'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 import type { Battlegroup, Enhancer } from 'utils/flow-types'
+import { WithStyles } from '@material-ui/styles'
+
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme: Theme) => ({
-  ...sharedStyles(theme),
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-    position: 'relative',
-  },
-  hiddenLabel: {
-    ...theme.typography.caption,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    lineHeight: 'inherit',
-  },
-  nameWrap: {
-    flex: 1,
-    '& a': {
-      color: 'unset',
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    root: {
+      ...theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+      }),
+      height: '100%',
+      position: 'relative',
     },
-  },
-  battlegroupName: {
-    textDecoration: 'none',
-  },
-  icon: {
-    verticalAlign: 'bottom',
-    marginLeft: theme.spacing(),
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    minWidth: '4rem',
-  },
-})
+    hiddenLabel: {
+      ...theme.typography.caption,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      lineHeight: 'inherit',
+    },
+    nameWrap: {
+      flex: 1,
+      '& a': {
+        color: 'unset',
+      },
+    },
+    battlegroupName: {
+      textDecoration: 'none',
+    },
+    icon: {
+      verticalAlign: 'bottom',
+      marginLeft: theme.spacing(),
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      minWidth: '4rem',
+    },
+  })
 
 interface ExposedProps {
   battlegroup: Battlegroup
   chronicle?: boolean
   st?: boolean
 }
-type Props = ExposedProps & {
-  isOwner: boolean
-  classes: Record<string, $TSFixMe>
-}
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    isOwner: boolean
+  }
 
 function BattlegroupCard(props: Props) {
   const { battlegroup, chronicle, st, isOwner, classes } = props

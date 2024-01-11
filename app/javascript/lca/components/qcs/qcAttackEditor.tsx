@@ -5,11 +5,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import QcAttackFields from './qcAttackFields'
-import {
-  createQcAttack,
-  destroyQcAttack,
-  updateQcAttack,
-} from 'ducks/actions.js'
+import { createQcAttack, destroyQcAttack, updateQcAttack } from 'ducks/actions'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 const SortableItem = SortableElement(({ children }) => children)

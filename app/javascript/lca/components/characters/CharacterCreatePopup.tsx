@@ -17,7 +17,7 @@ import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelec
 import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
-import { createCharacter } from 'ducks/actions.js'
+import { createCharacter } from 'ducks/actions'
 import type { Enhancer } from 'utils/flow-types'
 
 const initialState = {
@@ -309,7 +309,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
 
 const mapStateToProps = (state) => ({ id: state.session.id })
 
-const enhance: Enhancer<Props, {}> = connect(mapStateToProps, {
+const enhance: Enhancer<Props, never> = connect(mapStateToProps, {
   createCharacter,
 })
 

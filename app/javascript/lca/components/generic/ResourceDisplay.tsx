@@ -1,43 +1,44 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
+import { WithStyles } from '@material-ui/styles'
 
-const styles = (theme) => ({
-  label: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-  },
-  value: {
-    position: 'relative',
-  },
-  current: {
-    ...theme.typography.h4,
-    display: 'inline-block',
-    verticalAlign: 'top',
-  },
-  total: {
-    ...theme.typography.body1,
-    display: 'inline-block',
-    verticalAlign: 'top',
-    marginTop: '0.125em',
-  },
-  committed: {
-    ...theme.typography.caption,
-    display: 'inline-block',
-    position: 'absolute',
-    bottom: '0.25em',
-    right: '0.25em',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    label: {
+      ...theme.typography.body1,
+      fontSize: '0.75rem',
+      fontWeight: 500,
+      opacity: 0.7,
+    },
+    value: {
+      position: 'relative',
+    },
+    current: {
+      ...theme.typography.h4,
+      display: 'inline-block',
+      verticalAlign: 'top',
+    },
+    total: {
+      ...theme.typography.body1,
+      display: 'inline-block',
+      verticalAlign: 'top',
+      marginTop: '0.125em',
+    },
+    committed: {
+      ...theme.typography.caption,
+      display: 'inline-block',
+      position: 'absolute',
+      bottom: '0.25em',
+      right: '0.25em',
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   current: number
   total?: number
   committed?: number
   label: string
   className?: string
-  classes: Record<string, $TSFixMe>
 }
 
 const ResourceDisplay = ({
@@ -53,7 +54,7 @@ const ResourceDisplay = ({
     <div className={classes.value}>
       <span className={classes.current}>{current}</span>
       {total != null && <span className={classes.total}>/{total}</span>}
-      {(committed || 0) > 0 && (
+      {(committed ?? 0) > 0 && (
         <span className={classes.committed}>{committed}c</span>
       )}
     </div>

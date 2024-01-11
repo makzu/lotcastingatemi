@@ -1,10 +1,11 @@
 import * as React from 'react'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
+
 interface Props {
   value: string
   name: string
-  className?: any
+  className?: React.HTMLAttributes<HTMLDivElement>['className']
   onChange: $TSFixMeFunction
 }
 

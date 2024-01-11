@@ -1,5 +1,5 @@
 import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
+import React, { ChangeEvent, Component } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
@@ -11,17 +11,18 @@ import AnimalFormsEditor from './editors/AnimalFormsEditor'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateCharacter } from 'ducks/actions.js'
+import { updateCharacter } from 'ducks/actions'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { showLunarTraits } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
+
 interface Props {
   character: Character
   updateCharacter: $TSFixMeFunction
 }
 
 class BioEditor extends Component<Props> {
-  handleChange = (e: React.SyntheticEvent) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { character } = this.props
     if (deepEqual(character[name], value)) return

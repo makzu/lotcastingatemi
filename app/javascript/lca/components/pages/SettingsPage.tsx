@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import Button from '@material-ui/core/Button'
@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions.js'
+import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions'
 import { getSpecificPlayer } from 'selectors'
 import type { Player, Enhancer } from 'utils/flow-types'
 interface Props {
@@ -25,13 +25,8 @@ interface Props {
   destroyAccount: $TSFixMeFunction
 }
 
-class SettingsPage extends React.Component<
-  Props,
-  {
-    open: boolean
-  }
-> {
-  constructor(props) {
+class SettingsPage extends React.Component<Props, { open: boolean }> {
+  constructor(props: Props) {
     super(props)
     this.state = {
       open: false,
@@ -48,12 +43,12 @@ class SettingsPage extends React.Component<
       open: false,
     })
   }
-  handleChangeName = (e) => {
+  handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     this.props.updatePlayer(this.props.player.id, {
       [e.target.name]: e.target.value,
     })
   }
-  handleChangeTheme = (e) => {
+  handleChangeTheme = (e: ChangeEvent<HTMLInputElement>) => {
     this.props.switchTheme(e.target.value)
   }
   handleClickDelete = () => {
@@ -150,7 +145,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const enhance: Enhancer<Props, {}> = compose(
+const enhance: Enhancer<Props, never> = compose(
   ProtectedComponent,
   connect(mapStateToProps, {
     updatePlayer,

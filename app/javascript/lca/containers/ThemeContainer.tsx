@@ -9,7 +9,7 @@ import { dark, light } from '@material-ui/core/styles/createPalette'
 import { ThemeProvider } from '@material-ui/styles'
 
 import { State } from 'ducks'
-import { switchTheme } from 'ducks/actions.js'
+import { switchTheme } from 'ducks/actions'
 
 /* When changing these colors, it's also important to change the theme_color
  * entries in /config/favicon.json from #2e7d32 to the new value,
@@ -62,7 +62,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  change(theme: State['app']['theme'] | string): void
+  change(theme: State['app']['theme']): void
 }
 
 interface Props extends ExposedProps, StateProps, DispatchProps {}
@@ -70,9 +70,11 @@ interface Props extends ExposedProps, StateProps, DispatchProps {}
 const ThemeContainer = ({ theme, children, change }: Props) => {
   React.useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key !== 'theme') {
+      if (e.key !== 'theme' || e.newValue == null) {
         return
       }
+
+      // @ts-expect-error FIXME theme in localstorage is not typed
       change(e.newValue)
     }
     window.addEventListener('storage', handleStorageChange)
@@ -80,7 +82,7 @@ const ThemeContainer = ({ theme, children, change }: Props) => {
     return () => {
       window.removeEventListener('storage', handleStorageChange)
     }
-  }, [])
+  }, [change])
 
   return <ThemeProvider theme={themes[theme]}>{children}</ThemeProvider>
 }

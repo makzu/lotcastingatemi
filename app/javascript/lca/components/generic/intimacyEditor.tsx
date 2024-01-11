@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react'
+
 import Checkbox from 'components/shared/inputs/Checkbox'
-import type { ListAttributeFieldTypes } from 'components/generic/ListAttributeEditor.jsx'
-import ListAttributeEditor from 'components/generic/ListAttributeEditor.jsx'
+import ListAttributeEditor, {
+  ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from './RatingField'
 import TextField from 'components/generic/TextField.jsx'
 import {
   INTIMACY_RATING_MAX as MAX,
   INTIMACY_RATING_MIN as MIN,
-} from 'utils/constants.ts'
+} from 'utils/constants'
 import type { withIntimacies } from 'utils/flow-types'
 
 function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
@@ -39,7 +41,7 @@ function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
       <Checkbox
         name="hidden"
         label="Hidden"
-        value={hidden || false}
+        value={hidden ?? false}
         onChange={onChange}
       />
     </Fragment>

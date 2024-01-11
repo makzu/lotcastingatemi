@@ -1,13 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import BlockPaper from '../generic/blockPaper'
 import PoolDisplay from '../generic/PoolDisplay'
 import SpendableBlock from '../generic/SpendableBlock'
-import MarkdownDisplay, {
-  LinkRenderer,
-} from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import sharedStyles from 'styles/'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchQcIfNecessary } from 'ducks/entities/qc'
@@ -23,73 +21,76 @@ import {
 } from 'selectors'
 import { prettyIntimacyRating, qcPool } from 'utils/calculated'
 import type { fullQc, QcMerit, QcAttack, QcCharm } from 'utils/flow-types'
+import { RootState } from 'store'
+import { WithStyles } from '@material-ui/styles'
+import { Spell } from 'types'
 
-const styles = (theme) => ({
-  ...sharedStyles(theme),
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  moteWrap: {
-    marginRight: theme.spacing(),
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    marginTop: theme.spacing(),
-    width: '4.5rem',
-    maxHeight: '5.5rem',
-    overflow: 'hidden',
-  },
-  intimacy: { ...theme.typography.body1 },
-  intimacyTypeLabel: { ...theme.typography.caption },
-  label: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-    width: '5em',
-    display: 'flex',
-  },
-  labelSpan: {
-    alignSelf: 'flex-end',
-  },
-  name: {
-    ...theme.typography.body2,
-    width: '10rem',
-    margin: theme.spacing(),
-    marginLeft: 0,
-    maxHeight: '5rem',
-    textTransform: 'capitalize',
-    overflow: 'hidden',
-  },
-  tags: {
-    ...theme.typography.body1,
-    margin: theme.spacing(),
-    marginLeft: 0,
-    textTransform: 'capitalize',
-    maxHeight: '5rem',
-    overflow: 'hidden',
-  },
-  portrait: {
-    maxWidth: '100%',
-    display: 'block',
-    margin: 'auto',
-  },
-  portraitWrap: {
-    //textAlign: 'center',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    rowContainer: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    moteWrap: {
+      marginRight: theme.spacing(),
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      marginTop: theme.spacing(),
+      width: '4.5rem',
+      maxHeight: '5.5rem',
+      overflow: 'hidden',
+    },
+    intimacy: { ...theme.typography.body1 },
+    intimacyTypeLabel: { ...theme.typography.caption },
+    label: {
+      ...theme.typography.body1,
+      fontSize: '0.75rem',
+      fontWeight: 500,
+      opacity: 0.7,
+      width: '5em',
+      display: 'flex',
+    },
+    labelSpan: {
+      alignSelf: 'flex-end',
+    },
+    name: {
+      ...theme.typography.body2,
+      width: '10rem',
+      margin: theme.spacing(),
+      marginLeft: 0,
+      maxHeight: '5rem',
+      textTransform: 'capitalize',
+      overflow: 'hidden',
+    },
+    tags: {
+      ...theme.typography.body1,
+      margin: theme.spacing(),
+      marginLeft: 0,
+      textTransform: 'capitalize',
+      maxHeight: '5rem',
+      overflow: 'hidden',
+    },
+    portrait: {
+      maxWidth: '100%',
+      display: 'block',
+      margin: 'auto',
+    },
+    portraitWrap: {
+      //textAlign: 'center',
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   id: string
   qc: fullQc
   qc_merits: QcMerit[]
   qc_charms: QcCharm[]
   qc_attacks: QcAttack[]
-  spells: Record<string, $TSFixMe>[]
+  spells: Spell[]
   pools: Record<string, $TSFixMe>
   penalties: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
   canEdit: boolean
   loading: boolean
   fetch: $TSFixMeFunction
@@ -259,7 +260,6 @@ class QcSheet extends Component<Props> {
             }}
           />
 
-          {/* $FlowFixMe */}
           <SpendableBlock character={qc} qc />
         </div>
 
@@ -448,7 +448,7 @@ class QcSheet extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state: RootState, props: Props) {
   const id = props.match.params.qcId
   const qc = getSpecificQc(state, id)
   let qc_attacks = []

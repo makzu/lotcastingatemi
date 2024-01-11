@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
-import { createQc } from 'ducks/actions.js'
+import { createQc } from 'ducks/actions'
 import type { Enhancer } from 'utils/flow-types'
 interface Props {
   createQc: $TSFixMeFunction
@@ -87,7 +87,7 @@ class QcCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, {}> = connect(null, {
+const enhance: Enhancer<Props, never> = connect(null, {
   createQc,
 })
 export default enhance(QcCreatePopup)

@@ -1,5 +1,5 @@
 import * as Redux from 'redux'
-import { RSAA, RSAACall, createAction } from 'redux-api-middleware'
+import { RSAA, RSAACall } from 'redux-api-middleware'
 
 const headersBase = {
   Accept: 'application/json',
@@ -10,7 +10,7 @@ export const nonAuthHeaders = () => new Headers(headersBase)
 export const authHeaders = () => {
   return new Headers({
     ...headersBase,
-    AUTHORIZATION: `Bearer ${localStorage.getItem('jwt') || ''}`,
+    AUTHORIZATION: `Bearer ${localStorage.getItem('jwt') ?? ''}`,
   })
 }
 
@@ -45,4 +45,5 @@ export const callApiNoAuth = (callBody: AApiCall) => ({
   },
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Dispatch<S> = (rsaa: AApiAction) => void

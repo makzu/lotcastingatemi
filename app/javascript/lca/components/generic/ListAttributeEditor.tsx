@@ -5,13 +5,14 @@ import {
   SortableHandle,
   arrayMove,
 } from 'react-sortable-hoc'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
+import { WithStyles } from '@material-ui/styles'
 const SortableItem = SortableElement(({ children }) => children)
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
 const Handle = SortableHandle(() => (
@@ -24,43 +25,44 @@ export interface ListAttributeFieldTypes {
   classes: Record<string, $TSFixMe>
 }
 
-const styles = (theme) => ({
-  fieldContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  grabHandle: {
-    marginRight: theme.spacing(),
-  },
-  nameField: {
-    flex: 1,
-    marginRight: theme.spacing(),
-  },
-  withMargin: {
-    marginRight: theme.spacing(),
-  },
-  checkboxWrap: {
-    paddingTop: theme.spacing(),
-  },
-  floatingLabel: {
-    ...theme.typography.caption,
-    marginBottom: theme.spacing(-1.25),
-    textAlign: 'center',
-  },
-  countLabel: { ...theme.typography.caption },
-  idField: {
-    width: '3em',
-    '& input': {
-      '-moz-appearance': 'textfield',
+const styles = (theme: Theme) =>
+  createStyles({
+    fieldContainer: {
+      display: 'flex',
+      alignItems: 'center',
     },
-    '& ::-webkit-inner-spin-button': {
-      '-webkit-appearance': 'none',
-      margin: 0,
+    grabHandle: {
+      marginRight: theme.spacing(),
     },
-  },
-})
+    nameField: {
+      flex: 1,
+      marginRight: theme.spacing(),
+    },
+    withMargin: {
+      marginRight: theme.spacing(),
+    },
+    checkboxWrap: {
+      paddingTop: theme.spacing(),
+    },
+    floatingLabel: {
+      ...theme.typography.caption,
+      marginBottom: theme.spacing(-1.25),
+      textAlign: 'center',
+    },
+    countLabel: { ...theme.typography.caption },
+    idField: {
+      width: '3em',
+      '& input': {
+        '-moz-appearance': 'textfield',
+      },
+      '& ::-webkit-inner-spin-button': {
+        '-webkit-appearance': 'none',
+        margin: 0,
+      },
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   character: Record<string, $TSFixMe>
   trait: string
   label: string
@@ -69,7 +71,6 @@ interface Props {
   showCount?: boolean
   Fields: $TSFixMeFunction
   onChange: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
 }
 
 class ListAttributeEditor extends Component<Props> {
@@ -130,6 +131,7 @@ class ListAttributeEditor extends Component<Props> {
         </div>
       </SortableItem>
     ))
+
     return (
       <div data-cy={`${this.props.trait}-list-editor`}>
         <Typography variant="subtitle1">

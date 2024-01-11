@@ -3,44 +3,51 @@ import * as React from 'react'
 const { Component } = React
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+
+import {
+  Theme,
+  WithStyles,
+  createStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+
 import BlockPaper from '../generic/blockPaper'
 import RatingField from '../generic/RatingField'
 import TextField from '../generic/TextField'
 import QcAttackEditor from '../qcs/qcAttackEditor'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup } from 'ducks/actions.js'
+import { updateBattlegroup } from 'ducks/actions'
 import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
 import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
 
-const styles = (theme) => ({
-  ...commonStyles(theme),
-  bgBonus: {
-    ...theme.typography.caption,
-    marginLeft: theme.spacing(0.5),
-    marginRight: theme.spacing(),
-    marginBottom: theme.spacing(),
-    alignSelf: 'flex-end',
-  },
-  nameField: {
-    marginRight: theme.spacing(),
-  },
-  drill: {
-    marginRight: theme.spacing(),
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...commonStyles(theme),
+    bgBonus: {
+      ...theme.typography.caption,
+      marginLeft: theme.spacing(0.5),
+      marginRight: theme.spacing(),
+      marginBottom: theme.spacing(),
+      alignSelf: 'flex-end',
+    },
+    nameField: {
+      marginRight: theme.spacing(),
+    },
+    drill: {
+      marginRight: theme.spacing(),
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   battlegroup: Battlegroup
   showPublicCheckbox: boolean
-  classes: Record<string, $TSFixMe>
   updateBattlegroup: $TSFixMeFunction
 }
 

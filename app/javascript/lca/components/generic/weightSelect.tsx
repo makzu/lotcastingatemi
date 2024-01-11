@@ -1,26 +1,27 @@
 import * as React from 'react'
-import { Theme, withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
+import { WithStyles } from '@material-ui/styles'
 
-const styles = (theme: Theme) => ({
-  field: {
-    marginRight: theme.spacing(),
-    width: '5.65em',
-  },
-  armor: {
-    marginRight: theme.spacing(),
-    width: '7em',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    field: {
+      marginRight: theme.spacing(),
+      width: '5.65em',
+    },
+    armor: {
+      marginRight: theme.spacing(),
+      width: '7em',
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   name: string
   armor?: boolean
   value: string
   margin?: 'none' | 'dense' | 'normal'
   style?: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
   onChange: $TSFixMeFunction
 }
 

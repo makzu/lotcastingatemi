@@ -1,6 +1,6 @@
 import { Location } from 'history'
 import * as React from 'react'
-import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
+import { Route, Switch as RouterSwitch } from 'react-router-dom'
 
 import {
   ButtonProps,
@@ -35,13 +35,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const CsrfInput = () => {
-  const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content
+  // TODO this is duplicated in LogoutPopup.tsx
+  const metaTags = document.getElementsByTagName('meta').namedItem('csrf-token')
+  // @ts-expect-error TODO figure out how to convince typescript that this tag will always be here
+  const csrfToken = metaTags.content
   return <input type="hidden" name="authenticity_token" value={csrfToken} />
 }
 
 const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
-const LoginForm = ({ text, action }) => {
+const LoginForm = ({ text, action }: { text: string; action: string }) => {
   return (
     <form action={action} method="POST">
       <CsrfInput />
@@ -52,7 +55,7 @@ const LoginForm = ({ text, action }) => {
   )
 }
 
-const isOnHelpPage = (_: {}, location: Location) =>
+const isOnHelpPage = (_: never, location: Location) =>
   location.pathname.startsWith('/help')
 
 const isDeveloperMode = () => location.hostname === 'localhost'

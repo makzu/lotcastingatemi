@@ -1,21 +1,27 @@
 import React, { Component } from 'react'
+
 import TextField from '@material-ui/core/TextField'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  Theme,
+  WithStyles,
+  createStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 
-const styles = (theme) => ({
-  root: {
-    marginRight: theme.spacing(),
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      marginRight: theme.spacing(),
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   name: string
   label: string
   value: string
   onChange: $TSFixMeFunction
   margin?: 'none' | 'dense' | 'normal'
   className?: string
-  classes: Record<string, $TSFixMe>
 }
 interface State {
   value: string
@@ -23,7 +29,7 @@ interface State {
 }
 
 class LcaTextField extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       value: this.props.value,
@@ -31,19 +37,19 @@ class LcaTextField extends Component<Props, State> {
     }
   }
 
-  static getDerivedStateFromProps = (props, state) => {
+  static getDerivedStateFromProps = (props: Props, state: State) => {
     if (state.oldValue === props.value) return null
     return {
       value: props.value,
       oldValue: props.value,
     }
   }
-  handleChange = (e: React.SyntheticEvent) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       value: e.target.value,
     })
   }
-  handleBlur = (e: React.SyntheticEvent) => {
+  handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const val = e.target.value
     this.setState({
       value: val,
@@ -64,12 +70,12 @@ class LcaTextField extends Component<Props, State> {
     return (
       <TextField
         {...this.props}
-        className={className || classes.root}
+        className={className ?? classes.root}
         name={name}
         label={label}
-        value={value || ''}
+        value={value ?? ''}
         onChange={handleChange}
-        margin={this.props.margin || 'dense'}
+        margin={this.props.margin ?? 'dense'}
         onBlur={handleBlur}
       />
     )

@@ -1,5 +1,6 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
+import { WithStyles } from '@material-ui/styles'
 // TODO: Replace with SVG icons or something?
 const dot = {
   display: 'inline-block',
@@ -12,20 +13,20 @@ const dot = {
   marginLeft: '1px',
 }
 
-const styles = (theme) => ({
-  emptyDot: { ...dot, backgroundColor: theme.palette.background.paper },
-  fullDot: { ...dot, backgroundColor: 'black' },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    emptyDot: { ...dot, backgroundColor: theme.palette.background.paper },
+    fullDot: { ...dot, backgroundColor: 'black' },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   rating: number
   fillTo?: number
   dontFill?: boolean
-  classes: Record<string, $TSFixMe>
 }
 
 function RatingDots(props: Props) {
-  const emptyCount = (props.fillTo || 5) - props.rating
+  const emptyCount = (props.fillTo ?? 5) - props.rating
   const fc = new Array(props.rating).fill('●')
   const fullDots = fc.map((dot, index) => (
     <div key={index} className={props.classes.fullDot}>

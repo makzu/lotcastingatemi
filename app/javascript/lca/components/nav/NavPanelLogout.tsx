@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { Divider, ListItemText } from '@material-ui/core'
 
 import { LinkListItem } from 'components/shared/wrappers'
-import { logout } from 'ducks/actions.js'
+import { logout } from 'ducks/actions'
 
-const NavPanelLogout = (props) => {
+const NavPanelLogout = (props: { logout: typeof logout }) => {
   return (
     <>
       <Divider />

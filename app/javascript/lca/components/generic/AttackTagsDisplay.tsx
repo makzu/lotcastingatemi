@@ -11,7 +11,7 @@ interface Props {
 
 const AttackTagsDisplay = ({ pool }: Props) => {
   let { specialAttacks } = pool
-  specialAttacks = specialAttacks || []
+  specialAttacks = specialAttacks ?? []
   const showFire = pool.attack === 'decisive' && specialAttacks.includes('fire')
   const showDisarming =
     specialAttacks.includes('disarming') || specialAttacks.includes('water')
@@ -27,6 +27,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
     pool.attack === 'decisive'
   const showSmashing =
     specialAttacks.includes('smashing') || specialAttacks.includes('earth')
+
   return (
     <Fragment>
       {specialAttacks.includes('air') && (

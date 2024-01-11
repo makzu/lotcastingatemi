@@ -1,6 +1,6 @@
 import { LOGOUT, authFailure } from 'ducks/session'
 import { crudAction } from 'ducks/entities/_lib'
-import { isNonFetchAuthIssue } from 'ducks/app.js'
+import { isNonFetchAuthIssue } from 'ducks/app'
 
 // Intercepts Logout actions and auth failures and removes the JWT as needed
 const authToken =

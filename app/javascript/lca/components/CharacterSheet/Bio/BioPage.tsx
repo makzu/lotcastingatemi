@@ -15,7 +15,7 @@ import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks/index.js'
+import { State } from 'ducks/index'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { Character, XpLogEntry } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
@@ -65,12 +65,16 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12}>
+          {/*
+          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <MarkdownDisplay source={character.description} />
           </BlockPaper>
         </Grid>
 
         <Grid item xs={12} md={6}>
+          {/*
+          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             {character.type !== 'Character' && (
               <Typography paragraph>
@@ -118,6 +122,8 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12}>
+          {/*
+          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <Typography variant="subtitle1">
               Inventory/Other Equipment
@@ -129,6 +135,8 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12} lg={6}>
+          {/*
+          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <Typography variant="subtitle1">XP</Typography>
             <Typography component="table">
@@ -142,6 +150,8 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12} lg={6}>
+          {/*
+          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <Typography variant="subtitle1">
               {solarXpName(character) + ' XP'}
@@ -162,6 +172,7 @@ const BioFullPage = ({ character, classes }: Props) => {
 }
 
 const mapStateToProps = (state: State, { match }: RouteProps) => ({
+  // @ts-expect-error Hooks migration will fix this
   character: getSpecificCharacter(state, parseInt(match.params.id, 10)),
 })
 

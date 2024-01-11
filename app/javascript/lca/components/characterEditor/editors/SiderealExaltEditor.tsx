@@ -17,6 +17,7 @@ function SiderealExaltEditor({ character, onChange }: Props) {
   const caste_abilities = character.caste_abilities || []
 
   return (
+    // @ts-expect-error I suspect the MUI v5 migration will fix this
     <BlockPaper>
       <SiderealCasteSelect value={character.caste} onChange={onChange} />
 

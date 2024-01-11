@@ -1,7 +1,7 @@
 import { Ability, Attribute, Character, Charm } from 'types'
 import { ATTRIBUTES } from 'utils/constants'
 import { attr } from '..'
-import { highestOtherAttribute } from './custom.js'
+import { highestOtherAttribute } from './custom'
 
 export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
   const charmsPerAttribute: { [K in Attribute]?: number } = {}

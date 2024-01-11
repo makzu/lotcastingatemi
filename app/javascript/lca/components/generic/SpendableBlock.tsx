@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react'
-import { withStyles } from '@material-ui/core/styles'
+
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { WithStyles } from '@material-ui/styles'
+
 import AnimaDisplay from '../generic/AnimaDisplay'
 import AuraDisplay from '../generic/AuraDisplay'
 import DamageWidget from '../generic/DamageWidget'
@@ -11,28 +14,19 @@ import ShapeSorceryWidget from '../generic/ShapeSorceryWidget'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget'
 import sharedStyles from 'styles/'
 import * as calc from 'utils/calculated'
-import type {
-  withMotePool,
-  withWillpower,
-  withHealthLevels,
-} from 'utils/flow-types'
+import { WithSharedStats } from 'types/shared'
+import { WithId } from 'types/_lib'
 
-const styles = (theme) => ({
-  ...sharedStyles(theme),
-  moteWrap: {
-    marginRight: theme.spacing(),
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    moteWrap: {
+      marginRight: theme.spacing(),
+    },
+  })
 
-interface Props {
-  character: withMotePool &
-    withWillpower &
-    withHealthLevels & {
-      id: number
-      aura: string
-      type: string
-    }
-  classes: Record<string, $TSFixMe>
+interface Props extends WithStyles<typeof styles> {
+  character: WithSharedStats & WithId
   qc?: boolean
 }
 export function SpendableBlock({ character, classes, qc }: Props) {

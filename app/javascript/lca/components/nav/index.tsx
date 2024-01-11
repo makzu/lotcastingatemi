@@ -4,21 +4,22 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import { Drawer, Hidden, Theme } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { createStyles, makeStyles } from '@material-ui/styles'
 
 import { State } from 'ducks'
-import { closeDrawer } from 'ducks/actions.js'
+import { closeDrawer } from 'ducks/actions'
 import { getCurrentPlayer } from 'ducks/entities'
 import { drawerWidth } from '../../containers/_drawerProperties'
 import NavPanel from './NavPanel'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const drawerScrollbars = (theme) => ({
-  '&::-webkit-scrollbar': {
-    backgroundColor: theme.palette.background.paper,
-  },
-})
+const drawerScrollbars = (theme: Theme) =>
+  createStyles({
+    '&::-webkit-scrollbar': {
+      backgroundColor: theme.palette.background.paper,
+    },
+  })
 
 const useStyles = makeStyles(
   (theme: Theme & { disableScrollbars: boolean }) => ({
@@ -102,7 +103,7 @@ const mapState = (state: State): StateProps => ({
   drawerOpen: state.app.drawerOpen,
 })
 
-export default compose<Props, {}>(
+export default compose(
   withRouter,
   connect(mapState, { close: closeDrawer }),
 )(NavPanelWrap)

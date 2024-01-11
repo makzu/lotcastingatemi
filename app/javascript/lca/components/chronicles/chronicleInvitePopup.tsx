@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import { updateChronicle, regenChronicleInviteCode } from 'ducks/actions.js'
+import { updateChronicle, regenChronicleInviteCode } from 'ducks/actions'
 import { getSpecificChronicle } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 interface ExposedProps {

@@ -10,7 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import TextField from '@material-ui/core/TextField'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
-import { createChronicle } from 'ducks/actions.js'
+import { createChronicle } from 'ducks/actions'
 interface Props {
   createChronicle: $TSFixMeFunction
 }

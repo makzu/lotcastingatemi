@@ -57,7 +57,7 @@ class AbilitySelect extends Component<Props> {
     const abils = attributesOnly ? [] : abilities || ABILITIES_ALL
     const attrs =
       attributesOnly || withAttributes || (attributes && attributes.length > 0)
-        ? props.attributes || ATTRIBUTES
+        ? props.attributes ?? ATTRIBUTES
         : []
     const abilItems = abils.map((a) => (
       <MenuItem key={a.abil} value={a.abil.substring(5)}>
@@ -77,7 +77,7 @@ class AbilitySelect extends Component<Props> {
         value={props.value}
         label={props.label}
         onChange={checkChange}
-        margin={props.margin || 'none'}
+        margin={props.margin ?? 'none'}
         fullWidth={props.fullWidth}
         SelectProps={{
           multiple: multiple,

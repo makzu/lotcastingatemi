@@ -1,4 +1,4 @@
-import { isNonFetchAuthIssue } from './app.js'
+import { isNonFetchAuthIssue } from './app'
 import { crudAction } from './entities/_lib'
 
 export const LOGOUT = 'lca/session/LOGOUT'

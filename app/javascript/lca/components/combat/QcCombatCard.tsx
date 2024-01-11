@@ -94,7 +94,6 @@ function QcCard(props: Props) {
 
       <CombatControls character={qc} characterType="qc" />
 
-      {/* $FlowFixMe */}
       <SpendableBlock character={qc} qc />
 
       <div className={classes.flexContainerWrap}>

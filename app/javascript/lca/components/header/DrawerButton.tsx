@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton'
 import { Theme, withStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 
-import { toggleDrawer } from 'ducks/actions.js'
+import { toggleDrawer } from 'ducks/actions'
 
 const styles = (theme: Theme) => ({
   drawerButton: {

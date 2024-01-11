@@ -1,47 +1,49 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
+import { WithStyles } from '@material-ui/styles'
+
 import * as calc from 'utils/calculated'
-import type { withHealthLevels } from 'utils/flow-types'
+import { WithSharedStats } from 'types/shared'
 
-const styles = (theme) => ({
-  boxWrap: {
-    display: 'inline-block',
-    textAlign: 'center',
-    marginRight: '0.25em',
-  },
-  healthLevelBox: {
-    backgroundColor: theme.palette.background.paper,
-    width: '1.25em',
-    height: '1.25em',
-    border: '0.2em solid black',
-    overflow: 'hidden',
-  },
-  healthLevelLabel: { ...theme.typography.caption, textAlign: 'center' },
-  bashingDamage: {
-    fontSize: '100%',
-    fontWeight: 'bold',
-    position: 'relative',
-    top: '-0.125em',
-    left: '-0.05em',
-  },
-  lethalDamage: {
-    fontSize: '170%',
-    fontWeight: '100',
-    position: 'relative',
-    top: '-0.3em',
-    left: '-0.15em',
-  },
-  aggDamage: {
-    fontSize: '150%',
-    position: 'relative',
-    top: '-0.25em',
-    left: '-0.15em',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    boxWrap: {
+      display: 'inline-block',
+      textAlign: 'center',
+      marginRight: '0.25em',
+    },
+    healthLevelBox: {
+      backgroundColor: theme.palette.background.paper,
+      width: '1.25em',
+      height: '1.25em',
+      border: '0.2em solid black',
+      overflow: 'hidden',
+    },
+    healthLevelLabel: { ...theme.typography.caption, textAlign: 'center' },
+    bashingDamage: {
+      fontSize: '100%',
+      fontWeight: 'bold',
+      position: 'relative',
+      top: '-0.125em',
+      left: '-0.05em',
+    },
+    lethalDamage: {
+      fontSize: '170%',
+      fontWeight: 100,
+      position: 'relative',
+      top: '-0.3em',
+      left: '-0.15em',
+    },
+    aggDamage: {
+      fontSize: '150%',
+      position: 'relative',
+      top: '-0.25em',
+      left: '-0.15em',
+    },
+  })
 
-interface Props {
-  character: withHealthLevels
-  classes: Record<string, $TSFixMe>
+interface Props extends WithStyles<typeof styles> {
+  character: WithSharedStats
 }
 
 function HealthLevelBoxes({ character, classes }: Props) {

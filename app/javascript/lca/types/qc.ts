@@ -7,6 +7,12 @@ export interface QcAction {
 }
 
 export interface QC extends PlayerAsset, WithSharedStats {
+  description: string
+  movement: number
+  description: string
+  soak: string | number
+  hardness: number
+  armor_name: string
   guile: number
   resolve: number
   appearance: number

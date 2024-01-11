@@ -1,22 +1,23 @@
-import React, { Component } from 'react'
+import React, { ChangeEvent, Component } from 'react'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
+import { WithStyles } from '@material-ui/styles'
 
-const styles = (theme) => ({
-  field: {
-    marginRight: theme.spacing(),
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    field: {
+      marginRight: theme.spacing(),
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   trait: string
   label: string
   value: string[]
-  onChange: $TSFixMeFunction
+  onChange: TextFieldProps['onChange']
   margin?: 'none' | 'dense' | 'normal'
   fullWidth?: boolean
   className?: string
-  classes: Record<string, $TSFixMe>
 }
 interface State {
   value: string
@@ -24,7 +25,7 @@ interface State {
 }
 
 class TagsField extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       value: this.props.value.join(', '),
@@ -36,7 +37,7 @@ class TagsField extends Component<Props, State> {
     min: 0,
     max: Infinity,
   }
-  static getDerivedStateFromProps = (props: Props, state) => {
+  static getDerivedStateFromProps = (props: Props, state: State) => {
     const val = props.value.join(', ')
     if (state.oldValue === val) return null
     return {
@@ -44,13 +45,13 @@ class TagsField extends Component<Props, State> {
       oldValue: val,
     }
   }
-  handleChange = (e: React.SyntheticEvent) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     this.setState({
       value: value.toLowerCase(),
     })
   }
-  handleBlur = (e: TextFieldProps['onBlur']) => {
+  handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const val = e.target.value
       .split(',')
       .map((e) => e.trim())
@@ -73,12 +74,12 @@ class TagsField extends Component<Props, State> {
     const { value } = this.state
     return (
       <TextField
-        className={className || classes.field}
+        className={className ?? classes.field}
         name={trait}
         label={label}
         value={value}
         onChange={handleChange}
-        margin={this.props.margin || 'dense'}
+        margin={this.props.margin ?? 'dense'}
         onBlur={handleBlur}
         fullWidth={fullWidth}
       />

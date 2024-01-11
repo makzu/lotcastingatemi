@@ -113,4 +113,6 @@ export const getPoolsAndRatingsGeneric = (
     default:
       return getPoolsAndRatings(state, id)
   }
-} // export const getPoisons = state => entities(state).poisons
+}
+
+// export const getPoisons = state => entities(state).poisons

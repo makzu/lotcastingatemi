@@ -120,6 +120,7 @@ export function attackAbilities(character: Character): {
       abil: name,
       rating: abil.rating,
       specialties: character.specialties.filter(
+        // @ts-expect-error FIXME check if specialties use 'martial arts' or 'martial_arts'
         (spec) => spec.ability == 'martial arts',
       ),
     }

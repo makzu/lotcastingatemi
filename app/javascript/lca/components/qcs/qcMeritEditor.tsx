@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import QcMeritFields from './qcMeritFields'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
-import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions.js'
+import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions'
 import { getMeritsForQc } from 'selectors'
 import type { fullQc, QcMerit, Enhancer } from 'utils/flow-types'
 const SortableItem = SortableElement(({ children }) => children)
@@ -23,7 +23,7 @@ type Props = ExposedProps & {
 }
 
 class QcMeritEditor extends React.Component<Props> {
-  handleChange = (id, trait) => {
+  handleChange = (id, trait: Partial<QcMerit>) => {
     this.props.updateQcMerit(id, this.props.qc.id, trait)
   }
   handleAdd = () => {
@@ -32,7 +32,13 @@ class QcMeritEditor extends React.Component<Props> {
   handleRemove = (id) => {
     this.props.destroyQcMerit(id, this.props.qc.id)
   }
-  handleSort = ({ oldIndex, newIndex }) => {
+  handleSort = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => {
     if (oldIndex === newIndex) return
     const meritA = this.props.qc_merits[oldIndex]
     const meritB = this.props.qc_merits[newIndex]

@@ -15,7 +15,7 @@ import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 
-interface Props extends RouteComponentProps<any> {
+interface Props extends RouteComponentProps<$TSFixMe> {
   id: number
   chronicle: Chronicle
   path: string

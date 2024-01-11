@@ -5,7 +5,7 @@ import { compose } from 'recompose'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import CharacterCard from '../characters/CharacterCard'
 import CharacterCreatePopup from '../characters/CharacterCreatePopup'
 import QcCard from '../qcs/QcCard'
@@ -14,24 +14,25 @@ import BattlegroupCard from '../battlegroups/BattlegroupCard'
 import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getMyCharacters, getMyQCs, getMyBattlegroups } from 'selectors'
 import commonStyles from 'styles'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
+import { WithStyles } from '@material-ui/styles'
 const SortableItem = SortableElement(({ children }) => children)
 
-const styles = (theme) => ({
-  ...commonStyles(theme),
-  nthTitle: {
-    marginTop: theme.spacing(3),
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...commonStyles(theme),
+    nthTitle: {
+      marginTop: theme.spacing(3),
+    },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   characters: Character[]
   qcs: fullQc[]
   battlegroups: Battlegroup[]
-  classes: Record<string, $TSFixMe>
   updateCharacter: $TSFixMeFunction
   updateQc: $TSFixMeFunction
   updateBattlegroup: $TSFixMeFunction
@@ -161,7 +162,7 @@ const mapStateToProps = (state) => ({
   battlegroups: getMyBattlegroups(state),
 })
 
-const enhance: Enhancer<Props, {}> = compose(
+const enhance: Enhancer<Props, never> = compose(
   connect(mapStateToProps, {
     updateCharacter,
     updateQc,

@@ -1,28 +1,37 @@
 import * as React from 'react'
-const { Component } = React
-import { withStyles } from '@material-ui/core/styles'
+
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
+import { WithStyles } from '@material-ui/styles'
 
-const styles = (theme) => ({
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-    position: 'relative',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      ...theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+      }),
+      height: '100%',
+      position: 'relative',
+    },
+  })
 
-class BlockPaper extends Component<{
+interface Props extends WithStyles<typeof styles> {
   children: React.ReactNode
-  classes: Record<string, $TSFixMe>
-}> {
-  render() {
-    return (
-      <Paper className={this.props.classes.root}>{this.props.children}</Paper>
-    )
-  }
 }
 
+const BlockPaper = (props: Props) => {
+  const { classes, children } = props
+  return <Paper className={classes.root}>{children}</Paper>
+}
+
+// class BlockPaper extends Component<Props> {
+//   render() {
+//     return (
+//       <Paper className={this.props.classes.root}>{this.props.children}</Paper>
+//     )
+//   }
+// }
+
+// @ts-expect-error withStyles HOC will go away in Material UI v5 migration
 export default withStyles(styles)(BlockPaper)

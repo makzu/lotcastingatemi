@@ -1,23 +1,23 @@
 import createCachedSelector from 're-reselect'
 
-import { chronicleSortOrderSort } from 'utils'
+import { chronicleSortOrderSort, isDefined } from 'utils'
 import { canISeeBattlegroup } from './battlegroup'
 import { canISeeCharacter } from './character'
 import { entities, getCurrentPlayer } from './entities'
 import { canISeeQc } from './qc'
 import type { WrappedEntityState } from 'ducks/entities'
 
-const getState = (state) => state
+const getState = (state: WrappedEntityState) => state
 
 export const getSpecificChronicle = (state: WrappedEntityState, id: number) =>
   entities(state).chronicles[id]
 
-const idMemoizer = (state, id) => id
+const idMemoizer = (_state: WrappedEntityState, id: number) => id
 
-const getPlayers = (state) => entities(state).players
+const getPlayers = (state: WrappedEntityState) => entities(state).players
 
 export const isChronicleLoaded = (state: WrappedEntityState, id: number) =>
-  (getSpecificChronicle(state, id) || {}).st != null
+  getSpecificChronicle(state, id)?.st != null
 
 export const getPlayersForChronicle = createCachedSelector(
   [getSpecificChronicle, isChronicleLoaded, getPlayers],
@@ -30,29 +30,31 @@ export const getStorytellerForChronicle = createCachedSelector(
   (chronicle, players) => chronicle?.st_id && players[chronicle.st_id],
 )(idMemoizer)
 
-const getCharacters = (state) => entities(state).characters
+const getCharacters = (state: WrappedEntityState) => entities(state).characters
 
 export const getCharactersForChronicle = createCachedSelector(
   [getSpecificChronicle, getCharacters, getState],
   (chronicle, characters, state) =>
-    chronicle?.characters
-      ?.map((c) => characters[c])
+    (chronicle?.characters ?? [])
+      .map((c) => characters[c])
+      .filter(isDefined)
       .filter((c) => canISeeCharacter(state, c.id))
-      .sort(chronicleSortOrderSort) || [],
+      .sort(chronicleSortOrderSort) ?? [],
 )(idMemoizer)
 
-const getQcs = (state) => entities(state).qcs
+const getQcs = (state: WrappedEntityState) => entities(state).qcs
 
 export const getQcsForChronicle = createCachedSelector(
   [getSpecificChronicle, getQcs, getState],
   (chronicle, qcs, state) =>
-    chronicle?.qcs
-      ?.map((c) => qcs[c])
+    (chronicle?.qcs ?? [])
+      .map((c) => qcs[c])
       .filter((c) => canISeeQc(state, c.id))
       .sort(chronicleSortOrderSort) || [],
 )(idMemoizer)
 
-const getBattlegroups = (state) => entities(state).battlegroups
+const getBattlegroups = (state: WrappedEntityState) =>
+  entities(state).battlegroups
 
 export const getBattlegroupsForChronicle = createCachedSelector(
   [getSpecificChronicle, getBattlegroups, getState],

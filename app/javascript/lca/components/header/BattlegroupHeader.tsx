@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import { Toolbar, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import { createStyles, withStyles } from '@material-ui/core/styles'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
 import { State } from 'ducks'
@@ -15,13 +15,14 @@ import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
+import { WithStyles } from '@material-ui/styles'
 
-interface Props {
+const localStyles = () => createStyles(styles)
+interface Props extends WithStyles<typeof localStyles> {
   id: number
   battlegroup: Battlegroup
   path: string
   canIEdit: boolean
-  classes: any
 }
 function BattlegroupHeader(props: Props) {
   if (props.battlegroup == null) {
@@ -77,6 +78,6 @@ function mapStateToProps(state: State, { location, match }: RouteProps) {
 }
 
 export default compose<Props, RouteProps>(
-  withStyles(styles),
+  withStyles(localStyles),
   connect(mapStateToProps),
 )(BattlegroupHeader)

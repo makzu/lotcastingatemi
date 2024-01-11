@@ -14,7 +14,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateChronicle } from 'ducks/actions.js'
+import { updateChronicle } from 'ducks/actions'
 import {
   getSpecificChronicle,
   getPlayersForChronicle,

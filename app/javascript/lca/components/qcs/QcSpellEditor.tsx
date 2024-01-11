@@ -16,6 +16,7 @@ import commonStyles from 'styles'
 import { QC, Spell } from 'types'
 import QcSpellFields from './QcSpellFields'
 
+// @ts-expect-error Should be fixed on migration to new DnD library
 const SortableItem = SortableElement(({ children }) => children)
 
 interface StateProps {
@@ -37,6 +38,8 @@ interface Props
     WithStyles<typeof commonStyles> {}
 
 const QcSpellEditor = (props: Props) => {
+  // This should go away on migrating to hooks
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   const { qc, classes, create, spells, update, destroy, changeQc } = props
   const handleSort = () => undefined
 

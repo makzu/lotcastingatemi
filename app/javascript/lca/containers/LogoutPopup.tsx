@@ -22,7 +22,10 @@ interface StateProps {
 }
 
 const CsrfInput = () => {
-  const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content
+  // TODO this is duplicated in NavPanel.tsx
+  const metaTags = document.getElementsByTagName('meta').namedItem('csrf-token')
+  // @ts-expect-error TODO figure out how to convince typescript that this tag will always be here
+  const csrfToken = metaTags.content
   return <input type="hidden" name="authenticity_token" value={csrfToken} />
 }
 

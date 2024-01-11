@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import Dialog from '@material-ui/core/Dialog'
@@ -11,27 +11,29 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Divider from '@material-ui/core/Divider'
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
+import { WithStyles } from '@material-ui/styles'
 
 // eslint-disable-next-line no-unused-vars
-const styles = (theme) => ({
-  wrap: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  col: {
-    flex: 1,
-  },
-  divider: {
-    marginBottom: theme.spacing(),
-    marginTop: theme.spacing(),
-  },
-  content: {
-    minWidth: '15em',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    wrap: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    col: {
+      flex: 1,
+    },
+    divider: {
+      marginBottom: theme.spacing(),
+      marginTop: theme.spacing(),
+    },
+    content: {
+      minWidth: '15em',
+    },
+  })
 
 interface ExposedProps {
   children: React.ReactNode
@@ -41,12 +43,12 @@ interface ExposedProps {
     type: 'qc' | string
   }
 }
-type Props = ExposedProps & {
-  canEdit: boolean
-  update: $TSFixMeFunction
-  pools: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
-}
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    update: $TSFixMeFunction
+    pools: Record<string, $TSFixMe>
+    classes: Record<string, $TSFixMe>
+  }
 interface State {
   open: boolean
   roll: number

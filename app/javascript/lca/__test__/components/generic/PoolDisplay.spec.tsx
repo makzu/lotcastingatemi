@@ -20,14 +20,9 @@ describe('PoolDisplay', () => {
       const pools = mockGetPoolsAndRatings(mockCharacter)
       const component = renderer.create(
         <div>
-          {Object.keys(pools).map(
-            (
-              p,
-              i, // $FlowFixMe
-            ) => (
-              <PoolDisplay label="test" pool={p} key={i} />
-            ),
-          )}
+          {Object.keys(pools).map((p, i) => (
+            <PoolDisplay label="test" pool={p} key={i} />
+          ))}
         </div>,
       )
       const tree = component.toJSON()

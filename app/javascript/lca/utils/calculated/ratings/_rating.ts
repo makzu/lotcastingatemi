@@ -24,6 +24,7 @@ export default function rating(
     mb = bonus.reduce((a, b) => a + (b.situational ? 0 : b.bonus ?? 0), 0)
   const excellency = maxExcellency(
     character,
+    // @ts-expect-error FIXME Pool/Rating overhaul
     attribute,
     ability,
     excellencyAbils,
@@ -31,6 +32,7 @@ export default function rating(
   )
   const excellencyStunt = maxExcellency(
     character,
+    // @ts-expect-error FIXME Pool/Rating overhaul
     attribute,
     ability,
     excellencyAbils,

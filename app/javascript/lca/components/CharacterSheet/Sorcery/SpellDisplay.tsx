@@ -22,6 +22,7 @@ const SpellDisplay = ({ spell }: Props) => {
   const classes = useStyles()
 
   return (
+    // @ts-expect-error I suspect the MUI v5 migration will fix this
     <BlockPaper>
       <Typography variant="h6">
         {spell.name}

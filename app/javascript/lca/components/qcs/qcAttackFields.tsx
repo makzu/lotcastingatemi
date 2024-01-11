@@ -1,9 +1,9 @@
 import { deepEqual } from 'fast-equals'
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { SortableHandle } from 'react-sortable-hoc'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
@@ -17,49 +17,51 @@ import TextField from 'components/generic/TextField.jsx'
 import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
+import { WithStyles } from '@material-ui/styles'
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme) => ({
-  wrap: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  grabHandle: {
-    alignSelf: 'center',
-    marginRight: theme.spacing(),
-  },
-  bgBonus: {
-    ...theme.typography.caption,
-    marginLeft: -theme.spacing(0.5),
-    marginRight: theme.spacing(),
-    marginBottom: theme.spacing(),
-    alignSelf: 'flex-end',
-  },
-  nameField: {
-    flex: 2,
-    minWidth: '30%',
-    [theme.breakpoints.down('md')]: {
-      minWidth: '50%',
+const styles = (theme: Theme) =>
+  createStyles({
+    wrap: {
+      display: 'flex',
+      flexWrap: 'wrap',
     },
-  },
-  tagsField: {
-    flex: 1,
-    marginRight: theme.spacing(),
-    minWidth: '30%',
-    [theme.breakpoints.down('md')]: {
-      minWidth: '50%',
+    grabHandle: {
+      alignSelf: 'center',
+      marginRight: theme.spacing(),
     },
-  },
-  rangeField: {
-    width: '6em',
-  },
-  divider: {
-    minWidth: '100%',
-    margin: '0.5em 0 0.5em',
-  },
-})
+    bgBonus: {
+      ...theme.typography.caption,
+      marginLeft: -theme.spacing(0.5),
+      marginRight: theme.spacing(),
+      marginBottom: theme.spacing(),
+      alignSelf: 'flex-end',
+    },
+    nameField: {
+      flex: 2,
+      minWidth: '30%',
+      [theme.breakpoints.down('md')]: {
+        minWidth: '50%',
+      },
+    },
+    tagsField: {
+      flex: 1,
+      marginRight: theme.spacing(),
+      minWidth: '30%',
+      [theme.breakpoints.down('md')]: {
+        minWidth: '50%',
+      },
+    },
+    rangeField: {
+      width: '6em',
+    },
+    divider: {
+      minWidth: '100%',
+      margin: '0.5em 0 0.5em',
+    },
+  })
 
 interface ExposedProps {
   attack: QcAttack
@@ -67,13 +69,13 @@ interface ExposedProps {
   onRemoveClick: $TSFixMeFunction
   battlegroup?: boolean
 }
-type Props = ExposedProps & {
-  fakeBg: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
-}
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    fakeBg: Record<string, $TSFixMe>
+  }
 
 class QcAttackFields extends React.Component<Props> {
-  handleChange = (e) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { attack } = this.props
     if (deepEqual(this.props.attack[name], value)) return
@@ -102,6 +104,7 @@ class QcAttackFields extends React.Component<Props> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
+          // @ts-expect-error TextField doesn't like ignoring lastpass autocomplete
           inputProps={{
             autocomplete: 'off',
             'data-1p-ignore': 'true',

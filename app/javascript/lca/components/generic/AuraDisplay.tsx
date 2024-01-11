@@ -1,15 +1,19 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+
+import { Theme, withStyles } from '@material-ui/core/styles'
 import ButtonBase from '@material-ui/core/ButtonBase'
-import Menu from '@material-ui/core/Menu'
+import Menu, { MenuProps } from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import { updateCharacter, updateQc } from 'ducks/actions.js'
+
+import { updateCharacter, updateQc } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
+import { WithAura } from 'types/shared'
+import { WithId } from 'types/_lib'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   wrap: {
     marginRight: theme.spacing(),
     minWidth: '5.5em',
@@ -33,10 +37,7 @@ const styles = (theme) => ({
 })
 
 interface ExposedProps {
-  character: {
-    id: number
-    aura: string
-  }
+  character: WithAura & WithId
   qc?: boolean
 }
 type Props = ExposedProps & {
@@ -45,21 +46,21 @@ type Props = ExposedProps & {
   classes: Record<string, $TSFixMe>
 }
 interface State {
-  anchor: any
+  anchor: MenuProps['anchorEl']
 }
 
 class AuraDisplay extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       anchor: null,
     }
   }
 
-  handleOpen = (e) => {
+  handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (this.props.canEdit)
       this.setState({
-        anchor: e.currentTarget,
+        anchor: e.currentTarget as Element,
       })
   }
   handleClose = () => {
@@ -67,7 +68,7 @@ class AuraDisplay extends React.Component<Props, State> {
       anchor: null,
     })
   }
-  handleChange = (anima) => {
+  handleChange = (anima: WithAura['aura']) => {
     this.props.update(this.props.character.id, anima)
     this.setState({
       anchor: null,
@@ -78,7 +79,9 @@ class AuraDisplay extends React.Component<Props, State> {
     const { anchor } = this.state
     const { handleOpen, handleClose, handleChange } = this
     const { character, canEdit, classes } = this.props
+
     if (character.aura == null || character.aura === '') return null
+
     return (
       <>
         <ButtonBase onClick={handleOpen} disabled={!canEdit}>
@@ -142,7 +145,7 @@ const mapDispatchToProps = (
   dispatch: $TSFixMeFunction,
   props: ExposedProps,
 ) => ({
-  update: (id, value) =>
+  update: (id: number, value) =>
     props.qc
       ? dispatch(
           updateQc(id, {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { ChangeEvent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import Button from '@material-ui/core/Button'
@@ -9,7 +9,12 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  Theme,
+  WithStyles,
+  createStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import PoolDisplay from '../generic/PoolDisplay'
 import RatingField from '../generic/RatingField'
 import ResourceDisplay from '../generic/ResourceDisplay'
@@ -19,19 +24,19 @@ import { canIEditBattlegroup } from 'selectors'
 import { totalMagnitude } from 'utils/calculated'
 import type { Battlegroup } from 'utils/flow-types'
 
-const styles = (theme) => ({
-  ...sharedStyles(theme),
-  display: {
-    marginRight: theme.spacing(),
-  },
-  rulesRef: { ...theme.typography.caption, marginTop: theme.spacing() },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    display: {
+      marginRight: theme.spacing(),
+    },
+    rulesRef: { ...theme.typography.caption, marginTop: theme.spacing() },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   battlegroup: Battlegroup
   className?: string
   DisplayClassName?: string
-  classes: Record<string, $TSFixMe>
   canEdit: boolean
   update: $TSFixMeFunction
 }
@@ -47,7 +52,7 @@ class BattlegroupHealthDisplay extends React.Component<Props, State> {
     magnitude: this.props.battlegroup.magnitude,
     size: this.props.battlegroup.size,
   }
-  handleChange = (e) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     this.setState({
       [name]: value,
@@ -62,6 +67,7 @@ class BattlegroupHealthDisplay extends React.Component<Props, State> {
       open: false,
     })
   }
+
   handleOpen = () => {
     this.setState({
       open: true,
@@ -69,6 +75,7 @@ class BattlegroupHealthDisplay extends React.Component<Props, State> {
       size: this.props.battlegroup.size,
     })
   }
+
   handleClose = () => {
     this.setState({
       open: false,

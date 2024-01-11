@@ -9,9 +9,15 @@ import {
 } from '@material-ui/core'
 
 import { State } from 'ducks'
-import { switchTheme } from 'ducks/actions.js'
+import { switchTheme } from 'ducks/actions'
 
-const NavPanelThemeSwitch = ({ theme, action }) => {
+const NavPanelThemeSwitch = ({
+  theme,
+  action,
+}: {
+  theme: 'light' | 'dark'
+  action: typeof switchTheme
+}) => {
   return (
     <ListItem
       button

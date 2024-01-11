@@ -7,7 +7,6 @@ import {
   duplicateQc,
   fetchBattlegroup,
   fetchCharacter,
-  fetchChronicle,
   fetchQc,
   updateBattlegroup,
   updateCharacter,

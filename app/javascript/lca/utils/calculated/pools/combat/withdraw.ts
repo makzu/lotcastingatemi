@@ -1,7 +1,8 @@
-import pool from '../_pool.js'
-import { penaltyObject } from '../../index.js'
+import pool from '../_pool'
+import { penaltyObject } from '../../index'
 import type { Character } from 'types'
 import { PoolBonus } from 'utils/flow-types/pool'
+import { PenaltyInput } from 'selectors/character'
 
 /** Withdraw pool, described in the core book, page 199 */
 export function withdraw(
@@ -9,7 +10,7 @@ export function withdraw(
   merits: string[],
   // TODO: replace this any with a real type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  penalties: any,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]

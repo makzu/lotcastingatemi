@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
@@ -14,71 +14,74 @@ import PoolDisplay from '../generic/PoolDisplay'
 import SpendableBlock from '../generic/SpendableBlock'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
+import { WithStyles } from '@material-ui/styles'
+
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme) => ({
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-    position: 'relative',
-  },
-  nameRow: {
-    display: 'flex',
-  },
-  nameWrap: {
-    flex: 1,
-    '& a': {
-      color: 'unset',
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      ...theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+      }),
+      height: '100%',
+      position: 'relative',
     },
-  },
-  hiddenLabel: {
-    ...theme.typography.caption,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    lineHeight: 'inherit',
-  },
-  qcName: {
-    textDecoration: 'none',
-  },
-  icon: {
-    verticalAlign: 'bottom',
-    marginLeft: theme.spacing(),
-  },
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    marginTop: theme.spacing(),
-    width: '4.5rem',
-    maxHeight: '5.5rem',
-    overflow: 'hidden',
-  },
-})
+    nameRow: {
+      display: 'flex',
+    },
+    nameWrap: {
+      flex: 1,
+      '& a': {
+        color: 'unset',
+      },
+    },
+    hiddenLabel: {
+      ...theme.typography.caption,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      lineHeight: 'inherit',
+    },
+    qcName: {
+      textDecoration: 'none',
+    },
+    icon: {
+      verticalAlign: 'bottom',
+      marginLeft: theme.spacing(),
+    },
+    rowContainer: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      marginTop: theme.spacing(),
+      width: '4.5rem',
+      maxHeight: '5.5rem',
+      overflow: 'hidden',
+    },
+  })
 
 interface ExposedProps {
   qc: fullQc
   chronicle?: boolean
   st?: boolean
 }
-type Props = ExposedProps & {
-  penalties: Record<string, $TSFixMe>
-  pools: Record<string, $TSFixMe>
-  isOwner: boolean
-  classes: Record<string, $TSFixMe>
-}
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    penalties: ReturnType<typeof getPenaltiesForQc>
+    pools: ReturnType<typeof getPoolsAndRatingsForQc>
+    isOwner: boolean
+  }
 
 function QcCard(props: Props) {
   const { qc, chronicle, st, penalties, pools, isOwner, classes } = props
   return (
     <Paper className={classes.root}>
-      {((chronicle && st) || (!chronicle && isOwner)) && (
+      {((chronicle && st) || (!chronicle && isOwner)) && ( //eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
         <Typography
           component="div"
           style={{
@@ -121,7 +124,6 @@ function QcCard(props: Props) {
         <CharacterMenu characterType="qc" id={qc.id} chronicle={chronicle} />
       </Typography>
 
-      {/* $FlowFixMe */}
       <SpendableBlock character={qc} qc />
 
       <div className={classes.rowContainer}>

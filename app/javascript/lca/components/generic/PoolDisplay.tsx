@@ -4,50 +4,46 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
 import AttackTagsDisplay from './AttackTagsDisplay'
+import { WithStyles } from '@material-ui/styles'
 
-const styles = (theme) => ({
-  root: {},
-  clickable: {
-    cursor: 'pointer',
-  },
-  label: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-  },
-  labelSpan: {},
-  pool: {
-    ...theme.typography.body2,
-    fontSize: '1.25rem',
-    lineHeight: 'inherit',
-  },
-  specialty: {
-    ...theme.typography.caption,
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    whiteSpace: 'noWrap',
-  },
-  excellency: { ...theme.typography.caption },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {},
+    clickable: {
+      cursor: 'pointer',
+    },
+    label: {
+      ...theme.typography.body1,
+      fontSize: '0.75rem',
+      fontWeight: 500,
+      opacity: 0.7,
+    },
+    labelSpan: {},
+    pool: {
+      ...theme.typography.body2,
+      fontSize: '1.25rem',
+      lineHeight: 'inherit',
+    },
+    specialty: {
+      ...theme.typography.caption,
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+    },
+    excellency: { ...theme.typography.caption },
+  })
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   label: string
   pool: Pool
   noSummary?: boolean
   qc?: boolean
   battlegroup?: boolean
-  classes: Record<string, $TSFixMe>
 }
 
-class PoolDisplay extends Component<
-  Props,
-  {
-    open: boolean
-  }
-> {
+class PoolDisplay extends Component<Props, { open: boolean }> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -80,9 +76,9 @@ class PoolDisplay extends Component<
     const { label, pool, classes } = this.props
     const { open } = this.state
     const { setOpen, setClosed } = this
-    const mb = pool.bonus || []
-    const pen = pool.penalties || []
-    const sp = pool.specialties || []
+    const mb = pool.bonus ?? []
+    const pen = pool.penalties ?? []
+    const sp = pool.specialties ?? []
     const merits = mb.map((m) => (
       <div key={m.label} className={classes.specialty}>
         {m.situational && (
@@ -133,19 +129,19 @@ class PoolDisplay extends Component<
             </div>
             <div>
               <span className={classes.pool}>{pool.total}</span>
-              {(pool.excellency || 0) > 0 && (
+              {(pool.excellency ?? 0) > 0 && (
                 <span className={classes.excellency}>
                   &nbsp;+
                   {pool.excellency}/{pool.excellencyCost}m
                 </span>
               )}
-              {(pool.minimum || 0) > 0 && (
+              {(pool.minimum ?? 0) > 0 && (
                 <span className={classes.excellency}>
                   &nbsp;min {pool.minimum}
                 </span>
               )}
             </div>
-            {(pool.excellencyStunt || 0) > 0 && (
+            {(pool.excellencyStunt ?? 0) > 0 && (
               <div className={classes.excellency}>
                 stunt +{pool.excellencyStunt}/{pool.excellencyStuntCost}m
               </div>
@@ -173,7 +169,7 @@ class PoolDisplay extends Component<
                     </span>
                   )}
                   for {pool.excellencyCost}m
-                  {(pool.excellencyStunt || 0) > 0 && (
+                  {(pool.excellencyStunt ?? 0) > 0 && (
                     <span>
                       &nbsp;(
                       {pool.excellencyStunt} for {pool.excellencyStuntCost}m on
@@ -201,12 +197,12 @@ class PoolDisplay extends Component<
                 {pool.attack === 'withering' && (
                   <span> + {pool.accuracy} weapon accuracy</span>
                 )}
-                {(pool.weaponDamage || 0) > 0 && (
+                {(pool.weaponDamage ?? 0) > 0 && (
                   <span> + {pool.weaponDamage} weapon damage</span>
                 )}
                 {pool.rating && ' /2'}
                 {pool.parry && <span> + {pool.defense} weapon defense</span>}
-                {(pool.raw || 0) > 0 && <span> = {pool.raw}</span>}
+                {(pool.raw ?? 0) > 0 && <span> = {pool.raw}</span>}
               </DialogContentText>
             )}
 
@@ -219,13 +215,13 @@ class PoolDisplay extends Component<
             {pool.soak && (
               <DialogContentText>
                 {pool.natural} Natural
-                {(pool.armored || 0) > 0 && (
+                {(pool.armored ?? 0) > 0 && (
                   <span> + {pool.armored} from Armor</span>
                 )}
               </DialogContentText>
             )}
 
-            {(pool.totalPenalty || 0) !== 0 && (
+            {(pool.totalPenalty ?? 0) !== 0 && (
               <DialogContentText>
                 -{pool.totalPenalty} Penalties
               </DialogContentText>

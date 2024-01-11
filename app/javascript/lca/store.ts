@@ -23,13 +23,13 @@ const middleware = [
 //     devTools: !PRODUCTION,
 //   })
 
-export default function configureAppStore(preloadedState: $TSFixMe) {
-  const store = configureStore({
-    reducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(middleware),
-    preloadedState,
-  })
+export const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
+})
 
-  return store
-}
+export default store
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

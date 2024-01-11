@@ -1,5 +1,5 @@
 import { Character } from 'types'
-import type { Pool } from 'utils/flow-types'
+import type { Pool, PoolBonus } from 'utils/flow-types'
 
 export function hardness(character: Character): Pool {
   let armor = 0

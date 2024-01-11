@@ -1,10 +1,10 @@
 import * as Redux from 'redux'
-import { RSAA } from 'redux-api-middleware'
+import { RSAA, RSAACall, createAction } from 'redux-api-middleware'
 
 const headersBase = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
-}
+} as const
 
 export const nonAuthHeaders = () => new Headers(headersBase)
 export const authHeaders = () => {
@@ -19,7 +19,7 @@ export type ApiAction<R, S, F> = Record<string, ApiCall<R, S, F>>
 export interface ApiCall<R, S, F> {
   endpoint: string
   method?: 'GET' | 'POST' | 'PATCH' | 'DELETE'
-  body?: any
+  body?: RSAACall['body']
   types: [R, S, F]
   headers?: () => Headers
 }

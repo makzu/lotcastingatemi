@@ -1,10 +1,12 @@
 import decisiveAttack from './decisiveAttack'
 import { weaponAccuracyBonus } from '../../weapons'
 import type { Character, fullWeapon } from 'utils/flow-types'
+import { PenaltyInput } from 'selectors'
+
 export function witheringAttack(
   character: Character,
   weapon: fullWeapon,
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   const pool = decisiveAttack(character, weapon, penalties, excellencyAbils)

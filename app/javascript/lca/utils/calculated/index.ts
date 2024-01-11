@@ -2,25 +2,22 @@ export * from './_battlegroups'
 export * from './_qcs'
 export * from './excellencies'
 export * from './pools'
+export * from './pretty'
 export * from './ratings'
 export * from './weapons'
-export * from './pretty'
 
 import { Ability, Attribute, Character } from 'types'
 import {
-  ATTRIBUTES,
   ABILITIES_ALL,
   ABILITIES_ALL_NO_MA,
   ATTACK_ABILITIES,
+  ATTRIBUTES,
   NON_ATTACK_ABILITIES,
 } from '../constants'
 
-import type {
-  withHealthLevels,
-  withMotePool,
-  withArmorStats,
-  specialty,
-} from '../flow-types'
+import { WithSharedStats } from 'types/shared'
+import type { specialty, withArmorStats } from '../flow-types'
+import { PenaltyInput } from 'selectors'
 
 export const attr = (
   character: Character,
@@ -29,6 +26,7 @@ export const attr = (
   attribute === 'essence'
     ? character.essence
     : character[`attr_${attribute}`] || 0
+
 export const abil = (
   character: Character,
   ability: Ability | string,
@@ -54,6 +52,7 @@ export const abil = (
     return character[`abil_${ability}`] || 0
   }
 }
+
 export const specialtiesFor = (
   character: Character,
   ability: string,
@@ -69,13 +68,14 @@ export const specialtiesFor = (
 }
 
 /* Health */
-export const totalHealthLevels = (character: withHealthLevels) =>
+export const totalHealthLevels = (character: WithSharedStats) =>
   character.health_level_0s +
   character.health_level_1s +
   character.health_level_2s +
   character.health_level_4s +
   character.health_level_incap
-export function woundPenalty(character: withHealthLevels, merits: string[]) {
+
+export function woundPenalty(character: WithSharedStats, merits: string[]) {
   const totalDmg =
     character.damage_bashing +
     character.damage_lethal +
@@ -99,6 +99,7 @@ export function woundPenalty(character: withHealthLevels, merits: string[]) {
     return 4 - modifier
   }
 }
+
 export function attackAbilities(character: Character): {
   abil: string
   rating: number
@@ -124,6 +125,7 @@ export function attackAbilities(character: Character): {
   })
   return abils.concat(mas)
 }
+
 export function nonAttackAbilities(character: Character): {
   abil: string
   rating: number
@@ -153,6 +155,7 @@ export function nonAttackAbilities(character: Character): {
   })
   return abils.concat(crafts)
 }
+
 export function abilitiesWithRatings(
   character: Character,
 ): Record<string, $TSFixMe>[] {
@@ -163,6 +166,7 @@ export function abilitiesWithRatings(
   })
   return abils
 }
+
 export const nonCasteAbilities = (
   character: Character,
 ): Record<string, $TSFixMe>[] =>
@@ -171,6 +175,7 @@ export const nonCasteAbilities = (
       a.pretty.toLowerCase() as Ability,
     )
   })
+
 export const nonCasteAttributes = (
   character: Character,
 ): Record<string, $TSFixMe>[] =>
@@ -179,6 +184,7 @@ export const nonCasteAttributes = (
       a.pretty.toLowerCase() as Attribute,
     )
   })
+
 export function mobilityPenalty(character: withArmorStats) {
   switch (character.armor_weight) {
     case 'heavy':
@@ -193,6 +199,7 @@ export function mobilityPenalty(character: withArmorStats) {
       return 0 + character.bonus_mobility_penalty
   }
 }
+
 export const isCustomCharacter = (character: Character) =>
   character.type === 'CustomAbilityCharacter' ||
   character.type === 'CustomAttributeCharacter' ||
@@ -204,28 +211,31 @@ export const showAuraTraits = (character: Character) =>
 export const showLunarTraits = (character: Character) =>
   character.type === 'LunarCharacter' || isCustomCharacter(character)
 
-export const isCasteAbility = (character: Character, ability: string) =>
+export const isCasteAbility = (character: Character, ability: Ability) =>
   character.caste_abilities && character.caste_abilities.includes(ability)
 
-export const isSupernalAbility = (character: Character, ability: string) =>
+export const isSupernalAbility = (character: Character, ability: Ability) =>
   character.supernal_ability === ability
 
-export const isFavoredAbility = (character: Character, ability: string) =>
+export const isFavoredAbility = (character: Character, ability: Ability) =>
   character.favored_abilities && character.favored_abilities.includes(ability)
 
-export const isCasteAttribute = (character: Character, attribute: string) =>
+export const isCasteAttribute = (character: Character, attribute: Attribute) =>
   character.caste_attributes && character.caste_attributes.includes(attribute)
 
-export const isFavoredAttribute = (character: Character, attribute: string) =>
+export const isFavoredAttribute = (
+  character: Character,
+  attribute: Attribute,
+) =>
   character.favored_attributes &&
   character.favored_attributes.includes(attribute)
 
-export const committedPersonalMotes = (character: withMotePool) =>
+export const committedPersonalMotes = (character: WithSharedStats) =>
   character.motes_committed
     .filter((c) => c.pool === 'personal')
     .reduce((total, c) => total + c.motes, 0)
 
-export const committedPeripheralMotes = (character: withMotePool) =>
+export const committedPeripheralMotes = (character: WithSharedStats) =>
   character.motes_committed
     .filter((c) => c.pool === 'peripheral')
     .reduce((total, c) => total + c.motes, 0)
@@ -240,7 +250,7 @@ export const spentBp = (character: Character) =>
   character.bp_log.reduce((total, c) => total + c.points, 0)
 
 export const penaltyObject = (
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   {
     useWound = true,
     useMobility = false,
@@ -253,38 +263,17 @@ export const penaltyObject = (
     useOnslaught?: boolean
   } = {},
 ) => {
-  let penalty = []
+  let penalty: { label: keyof PenaltyInput; penalty: number }[] = []
   if (useWound)
-    penalty = [
-      ...penalty,
-      {
-        label: 'wound',
-        penalty: penalties.wound,
-      },
-    ]
+    penalty = [...penalty, { label: 'wound', penalty: penalties.wound }]
   if (useMobility)
-    penalty = [
-      ...penalty,
-      {
-        label: 'mobility',
-        penalty: penalties.mobility,
-      },
-    ]
+    penalty = [...penalty, { label: 'mobility', penalty: penalties.mobility }]
   if (usePoison)
     penalty = [
       ...penalty,
-      {
-        label: 'poison',
-        penalty: penalties.poisonTotal,
-      },
+      { label: 'poisonTotal', penalty: penalties.poisonTotal },
     ]
   if (useOnslaught)
-    penalty = [
-      ...penalty,
-      {
-        label: 'onslaught',
-        penalty: penalties.onslaught,
-      },
-    ]
+    penalty = [...penalty, { label: 'onslaught', penalty: penalties.onslaught }]
   return penalty
 }

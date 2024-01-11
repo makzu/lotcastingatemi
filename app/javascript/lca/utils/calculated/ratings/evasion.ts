@@ -1,11 +1,13 @@
 import rating from './_rating'
 import { penaltyObject } from '../index'
 import { Character } from 'types'
+import { PenaltyInput } from 'selectors'
+import { PoolBonus } from 'utils/flow-types'
 
 export function evasion(
   character: Character,
   _merits: string[],
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   const bonfire = character.anima_level === 3

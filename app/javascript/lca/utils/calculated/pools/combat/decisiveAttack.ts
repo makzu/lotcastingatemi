@@ -1,6 +1,7 @@
 import pool from '../_pool'
 import { penaltyObject } from '../../index'
-import type { Character, fullWeapon } from 'utils/flow-types'
+import type { Character, PoolBonus, fullWeapon } from 'utils/flow-types'
+import { PenaltyInput } from 'selectors'
 const supportedTags = [
   'chopping',
   'disarming',
@@ -42,11 +43,11 @@ function weaponDamageType(weapon: fullWeapon) {
 export function decisiveAttack(
   character: Character,
   weapon: fullWeapon,
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]
-  let specialAttacks = []
+  let specialAttacks: string[] = []
   if (weapon.tags.includes('paired') || weapon.tags.includes('two-handed'))
     bonus = bonus.concat([
       {

@@ -1,6 +1,6 @@
 import type { fullQc, PoolBonus } from 'utils/flow-types'
 
-function qcExcellencyPoolCap(qc, pool, stunt = false) {
+function qcExcellencyPoolCap(qc: fullQc, pool, stunt = false) {
   if (stunt && qc.excellency != 'lunar') return 0
   let caps
   let bonus = 0
@@ -36,7 +36,7 @@ function qcExcellencyPoolCap(qc, pool, stunt = false) {
   else return caps[3]
 }
 
-function qcExcellencyRatingCap(qc, rating, stunt = false) {
+function qcExcellencyRatingCap(qc: fullQc, rating, stunt = false) {
   if (stunt && qc.excellency != 'lunar') return 0
   let caps
   let bonus = 0

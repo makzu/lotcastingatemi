@@ -1,10 +1,13 @@
 import pool from '../_pool'
 import { penaltyObject } from '../../index'
 import { Character } from 'types'
+import { PenaltyInput } from 'selectors'
+import { PoolBonus } from 'utils/flow-types'
+
 export function disengage(
   character: Character,
   merits: string[],
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]

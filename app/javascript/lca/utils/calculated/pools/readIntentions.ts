@@ -2,11 +2,12 @@ import pool from './_pool'
 import { penaltyObject } from '../index'
 import { Character } from 'types'
 import { PoolBonus } from 'utils/flow-types'
+import { PenaltyInput } from 'selectors'
 
 export function readIntentions(
   character: Character,
   merits: string[],
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]

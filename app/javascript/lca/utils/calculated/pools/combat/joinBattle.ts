@@ -2,11 +2,12 @@ import { Character } from 'types'
 import { PoolBonus } from 'utils/flow-types'
 import { penaltyObject } from '../../index'
 import pool from '../_pool'
+import { PenaltyInput } from 'selectors'
 
 export function joinBattle(
   character: Character,
   merits: string[],
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]

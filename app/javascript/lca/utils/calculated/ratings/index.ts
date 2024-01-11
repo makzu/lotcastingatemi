@@ -1,3 +1,5 @@
+import { PoolBonus } from 'utils/flow-types/pool'
+
 export { evasion } from './evasion'
 export { guile } from './guile'
 export { hardness } from './hardness'

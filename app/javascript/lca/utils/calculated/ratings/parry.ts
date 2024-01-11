@@ -2,23 +2,27 @@ import rating from './_rating'
 import { penaltyObject } from '../index'
 import { weaponIsRanged } from '../weapons'
 import { halfRoundUp } from 'utils'
-import type { Character, fullWeapon } from 'utils/flow-types'
-export function weaponDefenseBonus(weapon: fullWeapon) {
+import type { PoolBonus } from 'utils/flow-types'
+import { Character, Weapon } from 'types'
+import { PenaltyInput } from 'selectors'
+
+export function weaponDefenseBonus(weapon: Weapon) {
   switch (weapon.weight) {
     case 'light':
-      return weapon.is_artifact ? 0 : 0
+      return 0
 
     case 'medium':
-      return weapon.is_artifact ? 1 : 1
+      return 1
 
     case 'heavy':
       return weapon.is_artifact ? 0 : -1
   }
 }
+
 export function parry(
   character: Character,
-  weapon: fullWeapon,
-  penalties: Record<string, $TSFixMe>,
+  weapon: Weapon,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   if (weaponIsRanged(weapon))
@@ -27,12 +31,8 @@ export function parry(
       total: 0,
     }
   let bonus = weapon.tags.includes('shield')
-    ? [
-        {
-          label: 'shield',
-        },
-      ]
-    : []
+    ? [{ label: 'shield' }]
+    : ([] as PoolBonus[])
   const bonfire = character.anima_level === 3
 
   // Earth aspect DBs gain +1 Defense vs Smashing and Grapple attacks at bonfire
@@ -55,7 +55,7 @@ export function parry(
   const rat = rating(
     weapon.name + ' Parry',
     character,
-    weapon.overrides?.defense_attribute?.use || 'dexterity',
+    weapon.overrides?.defense_attribute?.use ?? 'dexterity',
     weapon.ability,
     penaltyObject(penalties, {
       useOnslaught: true,
@@ -78,4 +78,5 @@ export function parry(
     parry: true,
   }
 }
+
 export default parry

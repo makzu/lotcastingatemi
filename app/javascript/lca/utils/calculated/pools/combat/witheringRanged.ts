@@ -7,10 +7,12 @@ import {
   thrownAccuracyBonus,
 } from '../../weapons'
 import type { Character, fullWeapon } from 'utils/flow-types'
+import { PenaltyInput } from 'selectors'
+
 export function rangedWitheringAttackPool(
   character: Character,
   weapon: fullWeapon,
-  penalties: Record<string, $TSFixMe>,
+  penalties: PenaltyInput,
   excellencyAbils: string[],
 ) {
   if (!weaponIsRanged(weapon)) return false

@@ -46,8 +46,8 @@
     "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/rtk-codemods": "0.0.3",
     "@rollup/plugin-inject": "^5.0.3",
-    "@types/actioncable": "^5.2.11",
     "@types/node": "^16.0.0",
+    "@types/rails__actioncable": "^6.1.10",
     "@types/redux-api-middleware": "^3.2.6",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
@@ -59,7 +59,6 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-jest": "^27.1.7",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -74,7 +73,6 @@
     "vite-tsconfig-paths": "^4.0.5"
   },
   "scripts": {
-    "flow": "flow",
     "test": "jest",
     "testcov": "jest --coverage",
     "lint": "eslint app/javascript/"

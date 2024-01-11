@@ -11,26 +11,27 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:flowtype/recommended',
     'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: true,
+    tsconfigRootDir: __dirname,
     ecmaFeatures: {
       jsx: true,
     },
   },
-  plugins: ['cypress', 'react', 'flowtype', '@typescript-eslint'],
+  plugins: ['cypress', 'react', '@typescript-eslint'],
   rules: {
     'no-duplicate-imports': ['warn'],
-    'flowtype/no-types-missing-file-annotation': 0,
     'react/jsx-boolean-value': ['warn', 'never'],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
-  ignorePatterns: ['coverage/**/*.js', 'flow-typed/**/*.js', 'public/**/*.js'],
+  ignorePatterns: ['coverage/**/*.js', 'public/**/*.js'],
   overrides: [
     {
       files: ['*.js', '*.jsx'],

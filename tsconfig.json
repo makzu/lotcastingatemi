@@ -1,22 +1,37 @@
 {
   "compilerOptions": {
-    // "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
     "baseUrl": "app/javascript/lca",
+
+    /* Bundler mode */
+    "moduleResolution": "node",
+    // "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+
+    "allowJs": true,
     "paths": {
       "Docs": ["../../../docs"],
       "Locales": ["../../../locales"]
     },
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": ["es7", "dom"],
-    "module": "es6",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "target": "es6",
-    "jsx": "react"
+
+    /* Linting */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": false,
+
+    "sourceMap": true
   },
-  "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],
+  "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public", "coverage"],
   "compileOnSave": false
 }

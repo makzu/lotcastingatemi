@@ -1,19 +1,20 @@
-import React, { createContext, useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
 import { Button, Divider, Typography } from '@material-ui/core'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/blockPaper'
 import { State } from 'ducks'
 import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
 import { Character } from 'types'
 import WeaponEditorPopup from './WeaponEditorPopup'
 import WeaponRow from './WeaponRow'
+import SortableItem from 'components/generic/SortableItem'
 
-const SortableItem = SortableElement(({ children }) => children)
+// @ts-expect-error TODO migrate to new dnd lib
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)
 
 interface WeaponEditorProps {
@@ -33,9 +34,15 @@ const WeaponEditor = (props: WeaponEditorProps) => {
     dispatch(createWeapon(character.id))
   }
 
-  const handleSort = ({ oldIndex, newIndex }) => {
-    const weaponA = weapons[oldIndex]
-    const weaponB = weapons[newIndex]
+  const handleSort = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => {
+    const weaponA = weapons[oldIndex]!
+    const weaponB = weapons[newIndex]!
     const offset = weaponA.sort_order > weaponB.sort_order ? -1 : 1
     dispatch(
       updateWeapon(weaponA.id, character.id, {
@@ -56,6 +63,8 @@ const WeaponEditor = (props: WeaponEditorProps) => {
   ))
   return (
     <>
+      {/*
+      // @ts-expect-error Should be fixed with MUI v5 */}
       <BlockPaper>
         <Typography variant="h6">
           Weapons

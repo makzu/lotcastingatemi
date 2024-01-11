@@ -1,7 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  Theme,
+  WithStyles,
+  createStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
@@ -13,54 +18,55 @@ import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
-const styles = (theme) => ({
-  ...sharedStyles(theme),
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-  },
-  nameWrap: {
-    flex: 1,
-  },
-  hiddenLabel: {
-    ...theme.typography.caption,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    lineHeight: 'inherit',
-  },
-  characterName: {
-    textDecoration: 'none',
-  },
-  icon: {
-    verticalAlign: 'bottom',
-    marginLeft: theme.spacing(),
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    marginTop: theme.spacing(),
-    width: '5.5rem',
-    maxHeight: '5.5rem',
-    overflow: 'hidden',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    root: {
+      ...theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+      }),
+      height: '100%',
+    },
+    nameWrap: {
+      flex: 1,
+    },
+    hiddenLabel: {
+      ...theme.typography.caption,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      lineHeight: 'inherit',
+    },
+    characterName: {
+      textDecoration: 'none',
+    },
+    icon: {
+      verticalAlign: 'bottom',
+      marginLeft: theme.spacing(),
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      marginTop: theme.spacing(),
+      width: '5.5rem',
+      maxHeight: '5.5rem',
+      overflow: 'hidden',
+    },
+  })
 
 interface ExposedProps {
   character: Character | fullQc | Battlegroup
 }
-type Props = ExposedProps & {
-  canEdit: boolean
-  pools: Record<string, $TSFixMe>
-  update: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
-}
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    canEdit: boolean
+    pools: Record<string, $TSFixMe>
+    update: $TSFixMeFunction
+  }
 
 function OutOfCombatCard({
   character,
   canEdit,
-  //eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update,
   pools,
   classes,

@@ -3,7 +3,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 
-import RatingLine from 'components/generic/ratingLine.jsx'
+import RatingLine from 'components/generic/ratingLine'
 import { isCasteAttribute, isFavoredAttribute } from 'utils/calculated'
 import { Character } from 'types'
 

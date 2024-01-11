@@ -6,7 +6,7 @@ import { Button, Grid, Typography } from '@material-ui/core'
 import { WithStyles } from '@material-ui/core/styles'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
 
 import Checkbox from 'components/shared/inputs/Checkbox'
 import { State } from 'ducks'
@@ -15,9 +15,7 @@ import { getSpellsForQc } from 'ducks/selectors'
 import commonStyles from 'styles'
 import { QC, Spell } from 'types'
 import QcSpellFields from './QcSpellFields'
-
-// @ts-expect-error Should be fixed on migration to new DnD library
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
 
 interface StateProps {
   spells: Spell[]
@@ -25,11 +23,11 @@ interface StateProps {
 interface DispatchProps {
   create(): void
   destroy(id: number): void
-  update(id: number, trait: any): void
+  update: $TSFixMeFunction
 }
 interface OuterProps {
   qc: QC
-  changeQc(): void
+  changeQc: $TSFixMeFunction
 }
 interface Props
   extends OuterProps,
@@ -89,7 +87,7 @@ const QcSpellEditor = (props: Props) => {
   )
 }
 
-const mapState = (state: State, { qc }): StateProps => ({
+const mapState = (state: State, { qc }: OuterProps): StateProps => ({
   spells: getSpellsForQc(state, qc.id),
 })
 

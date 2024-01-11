@@ -25,4 +25,5 @@ export interface Battlegroup extends PlayerAsset, WithCombatStats {
   resolve: number
   appearance: number
   qc_attacks: string[]
+  type: 'battlegroup'
 }

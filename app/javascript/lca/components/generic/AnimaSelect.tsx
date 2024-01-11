@@ -1,10 +1,13 @@
 import * as React from 'react'
+
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import type { withMotePool } from 'utils/flow-types'
+
+import { WithSharedStats } from 'types/shared'
 interface Props {
-  character: withMotePool
+  character: WithSharedStats
   onChange: $TSFixMeFunction
+  style: $TSFixMe
 }
 
 const AnimaSelect = ({ character, onChange, ...props }: Props) => (

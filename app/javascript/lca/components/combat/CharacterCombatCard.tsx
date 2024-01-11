@@ -12,7 +12,7 @@ import PoolDisplay from '../generic/PoolDisplay'
 import SpendableBlock from '../generic/SpendableBlock'
 import CombatControls from './CombatControls'
 import RemoveFromCombatButton from './RemoveFromCombatButton'
-import NotesPopup from 'components/characters/NotesPopup.jsx'
+import NotesPopup from 'components/characters/NotesPopup'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character, Enhancer } from 'utils/flow-types'
 

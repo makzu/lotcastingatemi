@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Box, IconButton, Theme } from '@material-ui/core'
 import { Edit, RemoveCircle } from '@material-ui/icons'
 
-import WeaponLine from 'components/characters/weapons/WeaponLine.jsx'
+import WeaponLine from 'components/characters/weapons/WeaponLine'
 import Handle from 'components/shared/GrabHandle'
 import { destroyWeapon } from 'ducks/actions'
 import { Character, Weapon } from 'types'

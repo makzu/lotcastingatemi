@@ -5,14 +5,13 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@material-ui/core'
 
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-import QcCard from 'components/qcs/QcCard.jsx'
-import QcCreatePopup from 'components/qcs/qcCreatePopup.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
+import QcCard from 'components/qcs/QcCard'
+import QcCreatePopup from 'components/qcs/qcCreatePopup'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyQcs, updateQc } from 'ducks/entities'
-
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
 
 const QcList = () => {
   const qcs = useSelector((state: State) => getMyQcs(state))

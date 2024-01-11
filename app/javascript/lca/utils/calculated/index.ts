@@ -49,7 +49,8 @@ export const abil = (
     )
     return abil != undefined ? abil.rating : 0
   } else {
-    return character[`abil_${ability}`] || 0
+    // @ts-expect-error FIXME Pool/Rating/Excellency rewrite
+    return (character[`abil_${ability}`] as number) || 0
   }
 }
 

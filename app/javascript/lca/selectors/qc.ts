@@ -59,6 +59,7 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
       return {}
     }
 
+    // @ts-expect-error TODO fix this
     const meritNames = [...new Set(merits.map((m) => m.name.toLowerCase()))]
     const tiny = meritNames.some((m) =>
       m.toLowerCase().includes('tiny creature'),
@@ -116,6 +117,7 @@ export const amIStOfQc = createSelector(
 
 export const canISeeQc = createSelector(
   [getSpecificQc, doIOwnQc, amIStOfQc],
+  // @ts-expect-error TODO fix this
   (qc, doI, amI) => !qc.hidden || doI || amI,
 )
 

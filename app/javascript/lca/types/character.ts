@@ -56,6 +56,7 @@ export type ExaltType =
   | 'DragonbloodCharacter'
   | 'LunarCharacter'
   | 'SiderealCharacter'
+  | 'AbyssalCharacter'
   | 'CustomAbilityCharacter'
   | 'CustomAttributeCharacter'
   | 'CustomEssenceCharacter'

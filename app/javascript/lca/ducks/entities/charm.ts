@@ -1,7 +1,7 @@
 import createCachedSelector from 're-reselect'
 
 import { State } from 'ducks'
-import { sortOrderSort } from 'utils'
+import { isDefined, sortOrderSort } from 'utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificCharacter } from './character'
@@ -12,40 +12,44 @@ export const [createCharm, updateCharm, destroyCharm] =
   createApiActions('charm')
 
 /* *** Selectors *** */
-const idMemoizer = (_: any, id: number) => id
+const idMemoizer = (_: unknown, id: number) => id
 
 const getCharms = (state: State) => unwrapped(state).charms
 
 export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character == null
-      ? []
-      : character.charms.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.charms ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(idMemoizer)
 
 export const getMartialArtsCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character == null
-      ? []
-      : character.martial_arts_charms.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.martial_arts_charms ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(idMemoizer)
 
 export const getEvocationsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character == null
-      ? []
-      : character.evocations.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.evocations ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(idMemoizer)
 
 export const getSpiritCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],
   (character, charms) =>
-    character == null
-      ? []
-      : character.spirit_charms.map((c) => charms[c]).sort(sortOrderSort),
+    (character?.spirit_charms ?? [])
+      .map((c) => charms[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(idMemoizer)
 
 export const getCharmsForCharacterByType = {
@@ -83,22 +87,23 @@ export const getAllCharmsForCharacter = createCachedSelector(
   ],
 )(idMemoizer)
 
-export const getAllCharmCategoriesForCharacter = createCachedSelector(
-  [getAllCharmsForCharacter],
-  (charms) => {
-    const ch = charms
-      .reduce((a, charm) => [...a, ...charm.categories], [])
-      .concat(['Attack', 'Defense', 'Social'])
-      .sort()
+// TODO this is also in selectors
+// export const getAllCharmCategoriesForCharacter = createCachedSelector(
+//   [getAllCharmsForCharacter],
+//   (charms) => {
+//     const ch = charms
+//       .reduce((a, charm) => [...a, ...charm.categories], [])
+//       .concat(['Attack', 'Defense', 'Social'])
+//       .sort()
 
-    return [...new Set(ch)]
-  },
-)(idMemoizer)
+//     return [...new Set(ch)]
+//   },
+// )(idMemoizer)
 
 export const getAllCharmKeywordsForCharacter = createCachedSelector(
   [getAllCharmsForCharacter],
   (charms) => {
-    const ch = charms.reduce((a, charm) => [...a, ...charm.keywords], []).sort()
+    const ch = charms.flatMap((charm) => charm?.keywords ?? []).sort()
 
     return [...new Set(ch)]
   },

@@ -7,7 +7,6 @@ export interface QcAction {
 }
 
 export interface QC extends PlayerAsset, WithSharedStats {
-  description: string
   movement: number
   description: string
   soak: string | number

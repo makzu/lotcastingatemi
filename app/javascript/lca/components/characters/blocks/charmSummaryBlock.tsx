@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/blockPaper'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 import {
   getNativeCharmsForCharacter,

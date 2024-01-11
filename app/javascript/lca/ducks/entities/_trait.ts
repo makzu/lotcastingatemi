@@ -8,6 +8,7 @@ import {
   reducerUpdateAction,
   standardTypes,
 } from './_lib'
+import { RootState } from 'store'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
 
@@ -15,7 +16,7 @@ type parentTypes = 'character' | 'qc' | 'battlegroup'
 export const createTraitReducer = (
   entityType: entityTypes,
   parentType: parentTypes = 'character',
-) => {
+): Record<string, $TSFixMeFunction> => {
   const pluralType = entityType + 's'
 
   return {
@@ -77,7 +78,7 @@ const createTraitCreateAction =
   ): CreateAction =>
   (charId: number, options: CreateActionOptions = {}) => {
     const action = crudAction(entityType, 'CREATE')
-    const parent = options.parent || parentType
+    const parent = options.parent ?? parentType
     let createObj = {}
     if (options.type) {
       createObj = { [entityType]: { type: options.type } }

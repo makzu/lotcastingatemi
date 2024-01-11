@@ -3,8 +3,8 @@ import React, { ChangeEvent, useState } from 'react'
 import { Box, Collapse, IconButton, Typography } from '@material-ui/core'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 
-import RatingField from 'components/generic/RatingField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+import RatingField from 'components/generic/RatingField'
+import TextField from 'components/generic/TextField'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import WeaponAttributeSelect from './WeaponAttributeSelect'
 

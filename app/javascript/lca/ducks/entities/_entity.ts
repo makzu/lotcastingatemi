@@ -21,7 +21,7 @@ export const mergeEntity = (state: EntityState, action: Action) =>
 
 export const createEntityReducer = (
   entityType: eTypes,
-  reducers: Record<string, $TSFixMeFunction>,
+  reducers?: Record<string, $TSFixMeFunction>,
 ) => {
   const pluralType = entityType + 's'
 

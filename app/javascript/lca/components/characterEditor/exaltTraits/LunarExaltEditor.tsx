@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import { MenuItem } from '@material-ui/core'
 
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
+import BlockPaper from 'components/generic/blockPaper'
 import LunarCasteSelect from './LunarCasteSelect'
 
 import { Character } from 'types'

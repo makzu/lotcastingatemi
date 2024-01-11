@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { CssBaseline, Divider, Theme, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
+import LoadingIndicator from 'components/generic/LoadingIndicator'
 import LcaHeader from 'components/header/Header'
 import NavPanel from 'components/nav/'
-import ErrorBoundary from 'containers/ErrorBoundary.jsx'
+import ErrorBoundary from 'containers/ErrorBoundary'
 import VERSION from '../VERSION'
 import { drawerWidth } from './_drawerProperties'
 

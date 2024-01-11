@@ -1,7 +1,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import WeaponPoolDisplay from '../weapons/WeaponPoolDisplay'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 import commonStyles from 'styles'
 import type { fullWeapon } from 'utils/flow-types'
 

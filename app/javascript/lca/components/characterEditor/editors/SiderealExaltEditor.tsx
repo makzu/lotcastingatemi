@@ -3,8 +3,8 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
 import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
+import BlockPaper from 'components/generic/blockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'
 import { Character } from 'types'

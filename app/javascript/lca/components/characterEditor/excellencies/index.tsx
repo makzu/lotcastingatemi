@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import CanonExcellencyCopy from './CanonExcellencyCopy'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
 import type { Character } from 'utils/flow-types'
 
 class ExcellencyEditor extends Component<

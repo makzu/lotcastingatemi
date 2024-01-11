@@ -7,13 +7,13 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import STControls from './StControls'
 import CharacterAddPopup from './characterAddPopup'
-import CharacterCard from 'components/characters/CharacterCard.jsx'
+import CharacterCard from 'components/characters/CharacterCard'
 import QcAddPopup from './qcAddPopup'
-import QcCard from 'components/qcs/QcCard.jsx'
+import QcCard from 'components/qcs/QcCard'
 import BattlegroupAddPopup from './battlegroupAddPopup'
-import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import BattlegroupCard from 'components/battlegroups/BattlegroupCard'
+import BlockPaper from 'components/generic/blockPaper'
+import SortableGridList from 'components/generic/SortableGridList'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import {
@@ -26,7 +26,8 @@ import {
   amIStOfChronicle,
 } from 'selectors'
 import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
+
 // TODO: replace with proper objects
 interface Props {
   id: string

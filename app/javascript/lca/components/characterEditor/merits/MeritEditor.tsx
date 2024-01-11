@@ -14,13 +14,13 @@ import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import HelpIcon from '@material-ui/icons/Help'
 import MeritFields from './MeritFields'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateMerit, createMerit, destroyMerit } from 'ducks/actions'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
 import commonStyles from 'styles'
 import type { Character, fullMerit as Merit, Enhancer } from 'utils/flow-types'
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
 
 const styles = (theme) => commonStyles(theme)
 

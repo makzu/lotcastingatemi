@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import BlockPaper from 'components/generic/blockPaper'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 import { prettyFullExaltType } from 'utils/calculated'
 import { Character } from 'types'
 interface Props {

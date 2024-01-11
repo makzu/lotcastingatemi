@@ -8,10 +8,10 @@ import {
   WithStyles,
 } from '@material-ui/core/styles'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import RatingLine from 'components/generic/ratingLine.jsx'
+import BlockPaper from 'components/generic/blockPaper'
+import RatingLine from 'components/generic/ratingLine'
 
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 import { Merit } from 'types'
 
 const styles = (theme: Theme) =>

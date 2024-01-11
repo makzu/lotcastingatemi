@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
-import RatingField from 'components/generic/RatingField.jsx'
+import RatingField from 'components/generic/RatingField'
 import { recoverWillpower } from 'ducks/events'
 interface Props {
   id: number

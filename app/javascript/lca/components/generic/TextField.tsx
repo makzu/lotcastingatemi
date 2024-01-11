@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import TextField from '@material-ui/core/TextField'
+import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import {
   Theme,
   WithStyles,
@@ -22,6 +22,9 @@ interface Props extends WithStyles<typeof styles> {
   onChange: $TSFixMeFunction
   margin?: 'none' | 'dense' | 'normal'
   className?: string
+  fullWidth?: TextFieldProps['fullWidth']
+  multiline?: TextFieldProps['multiline']
+  rowsMax?: TextFieldProps['rowsMax']
 }
 interface State {
   value: string

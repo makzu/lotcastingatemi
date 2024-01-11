@@ -1,3 +1,4 @@
+import store, { AppDispatch } from 'store'
 import { updateCharacter, updateQc, updateBattlegroup } from '../actions'
 export * from './chronicle'
 
@@ -21,7 +22,7 @@ export function spendMotes(
 ) {
   const update = updateEvent(charType)
 
-  return (dispatch: $TSFixMeFunction, getState: $TSFixMeFunction) => {
+  return (dispatch: AppDispatch, getState: typeof store.getState) => {
     dispatch({
       type: SPEND_MOTES,
       id: id,

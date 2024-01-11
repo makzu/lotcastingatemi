@@ -16,9 +16,9 @@ import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import { State } from 'ducks'
 import {
   getAllAbilitiesWithCharmsForCharacter,
-  getAllCharmCategoriesForCharacter,
   getAllCharmKeywordsForCharacter,
 } from 'ducks/entities'
+import { getAllCharmCategoriesForCharacter } from 'selectors'
 import { useDialogLogic } from 'hooks'
 import { Charm } from 'types'
 import { CharmFilter, CharmFilterAction } from '../useCharmFilters'
@@ -159,7 +159,7 @@ const CharmFilterDrawer = (props: Props) => {
   )
 }
 
-const mapState = (state: State, props) => ({
+const mapState = (state: State, props: Props) => ({
   allAbilities: getAllAbilitiesWithCharmsForCharacter(state, props.id),
   allCategories: getAllCharmCategoriesForCharacter(state, props.id),
   allKeywords: getAllCharmKeywordsForCharacter(state, props.id),

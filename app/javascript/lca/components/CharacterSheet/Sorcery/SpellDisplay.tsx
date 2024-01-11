@@ -3,8 +3,8 @@ import * as React from 'react'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import BlockPaper from 'components/generic/blockPaper'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 import SecondaryInfo from 'components/shared/SecondaryInfo'
 import { Spell } from 'types'
 

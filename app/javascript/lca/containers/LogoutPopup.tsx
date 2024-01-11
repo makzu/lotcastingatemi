@@ -33,15 +33,15 @@ const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
 const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   const [isOpen, setOpen] = useDialogLogic()
-  const [timer, setTimer] = React.useState(null)
+  const [timer, setTimer] = React.useState<NodeJS.Timeout | null>(null)
   React.useEffect(() => {
     if (!(authenticated || isLoading || isPublic)) {
       setTimer(setTimeout(() => setOpen(), 500))
     } else {
-      clearTimeout(timer)
+      if (timer) clearTimeout(timer)
     }
     return () => {
-      clearTimeout(timer)
+      if (timer) clearTimeout(timer)
     }
   }, [authenticated, isLoading, isPublic])
 

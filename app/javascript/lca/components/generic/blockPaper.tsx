@@ -25,13 +25,5 @@ const BlockPaper = (props: Props) => {
   return <Paper className={classes.root}>{children}</Paper>
 }
 
-// class BlockPaper extends Component<Props> {
-//   render() {
-//     return (
-//       <Paper className={this.props.classes.root}>{this.props.children}</Paper>
-//     )
-//   }
-// }
-
 // @ts-expect-error withStyles HOC will go away in Material UI v5 migration
 export default withStyles(styles)(BlockPaper)

@@ -11,7 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
-import RatingField from 'components/generic/RatingField.jsx'
+import RatingField from 'components/generic/RatingField'
 import { downtime } from 'ducks/events'
 interface Props {
   id: number

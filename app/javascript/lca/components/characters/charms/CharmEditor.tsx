@@ -1,18 +1,19 @@
 import React, { Component, Fragment } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
+
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
+
 import styles from './CharmStyles'
 import CharmFields from './CharmFields'
 import CharmFilter from './CharmFilter'
 import SpellFields from './SpellFields'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import {
   updateCharm,
@@ -32,12 +33,13 @@ import {
   getSpiritCharmsForCharacter,
 } from 'selectors/'
 import type { Character, Charm, Spell } from 'utils/flow-types'
+import { WithStyles } from '@material-ui/styles'
+import SortableItem from 'components/generic/SortableItem'
 
 const filterByCategory = (categoryFilter) => (charm) =>
   categoryFilter.every((cat) => charm.categories.includes(cat))
 
-const SortableItem = SortableElement(({ children }) => children)
-export interface Props {
+export interface Props extends WithStyles<typeof styles> {
   character: Character
   nativeCharms: Charm[]
   martialArtsCharms: Charm[]
@@ -50,7 +52,6 @@ export interface Props {
   createSpell: $TSFixMeFunction
   updateSpell: $TSFixMeFunction
   destroySpell: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
 }
 interface State {
   filtersOpen: boolean
@@ -515,7 +516,7 @@ class CharmEditor extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state: State, ownProps) {
   const id = ownProps.match.params.characterId
   const character = getSpecificCharacter(state, id)
   let nativeCharms = []

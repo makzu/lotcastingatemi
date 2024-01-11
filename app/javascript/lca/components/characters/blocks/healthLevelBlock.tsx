@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
+import BlockPaper from 'components/generic/blockPaper'
+import HealthLevelBoxes from 'components/generic/HealthLevelBoxes'
 import type { withHealthLevels } from 'utils/flow-types'
 interface Props {
   character: withHealthLevels

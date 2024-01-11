@@ -3,8 +3,8 @@ const { Fragment } = React
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import RatingLine from 'components/generic/ratingLine.jsx'
+import BlockPaper from 'components/generic/blockPaper'
+import RatingLine from 'components/generic/ratingLine'
 import { Character } from 'types'
 import {
   isCasteAbility,

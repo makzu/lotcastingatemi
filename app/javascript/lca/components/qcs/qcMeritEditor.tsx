@@ -6,11 +6,11 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import QcMeritFields from './qcMeritFields'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
 import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions'
 import { getMeritsForQc } from 'selectors'
 import type { fullQc, QcMerit, Enhancer } from 'utils/flow-types'
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
 interface ExposedProps {
   qc: fullQc
   classes: Record<string, $TSFixMe>

@@ -13,11 +13,13 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 import { WithStyles } from '@material-ui/styles'
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
+
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
+
 export interface ListAttributeFieldTypes {
   character: Record<string, $TSFixMe>
   trait: Record<string, $TSFixMe>

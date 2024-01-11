@@ -1,8 +1,13 @@
 import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
+import React, { ChangeEvent, Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  Theme,
+  WithStyles,
+  createStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
@@ -26,8 +31,9 @@ import { getSpecificQc, canIDeleteQc } from 'selectors'
 import commonStyles from 'styles'
 import { woundPenalty } from 'utils/calculated'
 import type { fullQc, Enhancer } from 'utils/flow-types'
+import { State } from 'ducks'
 
-const styles = (theme) => ({ ...commonStyles(theme) })
+const styles = (theme: Theme) => createStyles({ ...commonStyles(theme) })
 
 interface ExposedProps {
   match: {
@@ -36,15 +42,15 @@ interface ExposedProps {
     }
   }
 }
-type Props = ExposedProps & {
-  qc: fullQc
-  showPublicCheckbox: boolean
-  updateQc: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
-}
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    qc: fullQc
+    showPublicCheckbox: boolean
+    updateQc: $TSFixMeFunction
+  }
 
 class QcEditor extends Component<Props> {
-  handleChange = (e) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { qc } = this.props
     if (deepEqual(qc[name], value)) return
@@ -52,7 +58,7 @@ class QcEditor extends Component<Props> {
       [name]: value,
     })
   }
-  handleCheck = (e) => {
+  handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target
     const { qc } = this.props
     const value = !qc[name]
@@ -77,6 +83,8 @@ class QcEditor extends Component<Props> {
     return (
       <Grid container spacing={3}>
         <Grid item xs={12} xl={6}>
+          {/*
+          // @ts-expect-error MUI v5 will hopefully fix this */}
           <BlockPaper>
             <Typography paragraph variant="caption">
               Rules for Quick Characters can be found in the core book starting
@@ -106,6 +114,7 @@ class QcEditor extends Component<Props> {
               label="Name"
               margin="dense"
               onChange={handleChange}
+              // @ts-expect-error TODO make new text field that allows this
               inputProps={{
                 autocomplete: 'off',
                 'data-1p-ignore': 'true',
@@ -156,6 +165,8 @@ class QcEditor extends Component<Props> {
         </Grid>
 
         <Grid item xs={12} sm={6} xl={3}>
+          {/*
+          // @ts-expect-error MUI v5 will hopefully fix this */}
           <BlockPaper>
             <Typography component="div" className={classes.flexContainer}>
               <RatingField
@@ -256,12 +267,16 @@ class QcEditor extends Component<Props> {
         </Grid>
 
         <Grid item xs={12} sm={6} xl={3}>
+          {/*
+          // @ts-expect-error MUI v5 will hopefully fix this */}
           <BlockPaper>
             <div
               style={{
                 textAlign: 'center',
               }}
             >
+              {/*
+              // @ts-expect-error MUI v5 will hopefully fix this */}
               <HealthLevelBoxes character={qc} />
               <Typography>
                 Current wound penalty: -{woundPenalty(qc, [])}
@@ -335,12 +350,16 @@ class QcEditor extends Component<Props> {
         </Grid>
 
         <Grid item xs={12} lg={6}>
+          {/*
+          // @ts-expect-error MUI v5 will hopefully fix this */}
           <BlockPaper>
             <QcActionEditor qc={qc} onChange={handleChange} />
           </BlockPaper>
         </Grid>
 
         <Grid item xs={12} lg={6}>
+          {/*
+          // @ts-expect-error MUI v5 will hopefully fix this */}
           <BlockPaper>
             <Typography variant="h6">Social</Typography>
             <RatingField
@@ -375,6 +394,8 @@ class QcEditor extends Component<Props> {
         </Grid>
 
         <Grid item xs={12}>
+          {/*
+          // @ts-expect-error MUI v5 will hopefully fix this */}
           <BlockPaper>
             <Typography variant="h6">Combat</Typography>
             <RatingField
@@ -463,7 +484,7 @@ class QcEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
+function mapStateToProps(state: State, ownProps: ExposedProps) {
   const id = ownProps.match.params.qcId
   const qc = getSpecificQc(state, id)
   const showPublicCheckbox = canIDeleteQc(state, id)

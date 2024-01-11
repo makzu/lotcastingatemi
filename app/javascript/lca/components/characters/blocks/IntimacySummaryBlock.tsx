@@ -3,8 +3,8 @@ import React from 'react'
 import { VisibilityOff } from '@material-ui/icons'
 import { Typography, Divider } from '@material-ui/core'
 
-import BlockPaper from '../../generic/blockPaper.jsx'
-import RatingLine from '../../generic/ratingLine.jsx'
+import BlockPaper from '../../generic/blockPaper'
+import RatingLine from '../../generic/ratingLine'
 import { Character } from 'types'
 import { Intimacy } from 'types/shared'
 

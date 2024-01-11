@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/blockPaper'
 import { Charm } from 'types'
 
 interface Props {

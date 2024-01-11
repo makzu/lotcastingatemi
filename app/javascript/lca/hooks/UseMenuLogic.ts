@@ -14,11 +14,7 @@ const useMenuLogic = () => {
   )
   const handleClose = useCallback(() => setAnchor(null), [setAnchor])
 
-  return [anchor, handleOpen, handleClose] as [
-    MenuElement,
-    typeof handleOpen,
-    typeof handleClose,
-  ]
+  return [anchor, handleOpen, handleClose] as const
 }
 
 export default useMenuLogic

@@ -1,8 +1,8 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import PoolDisplay from 'components/generic/PoolDisplay.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import PoolDisplay from 'components/generic/PoolDisplay'
+import BlockPaper from 'components/generic/blockPaper'
 import type { withArmorStats } from 'utils/flow-types'
 
 const styles = (theme) => ({

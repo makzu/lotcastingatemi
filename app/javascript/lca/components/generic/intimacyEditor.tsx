@@ -3,9 +3,9 @@ import React, { Fragment } from 'react'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import ListAttributeEditor, {
   ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.jsx'
+} from 'components/generic/ListAttributeEditor'
 import RatingField from './RatingField'
-import TextField from 'components/generic/TextField.jsx'
+import TextField from 'components/generic/TextField'
 import {
   INTIMACY_RATING_MAX as MAX,
   INTIMACY_RATING_MIN as MIN,

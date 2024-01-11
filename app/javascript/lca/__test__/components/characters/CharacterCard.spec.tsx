@@ -6,7 +6,7 @@ require('jasmine-check').install()
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 const renderer = new ShallowRenderer()
-import { CharacterCard } from 'components/characters/CharacterCard.jsx'
+import { CharacterCard } from 'components/characters/CharacterCard'
 import { SEED, genMortal, genSolar } from '../../_mocks'
 import {
   mockGetPoolsAndRatings,

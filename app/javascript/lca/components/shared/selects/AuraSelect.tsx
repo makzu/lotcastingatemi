@@ -11,6 +11,7 @@ interface HavingAura extends WithAura {
 }
 interface Props extends Pick<TextFieldProps, 'onChange'> {
   character: HavingAura
+  style?: $TSFixMe
 }
 
 const AuraSelect = ({ character, onChange, ...props }: Props) => (

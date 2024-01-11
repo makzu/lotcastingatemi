@@ -9,7 +9,7 @@ console.log('Vite ⚡️ Rails')
 //     <%= vite_typescript_tag 'application' %>
 //
 // If you want to use .jsx or .tsx, add the extension:
-//     <%= vite_javascript_tag 'application.jsx' %>
+//     <%= vite_javascript_tag 'application' %>
 
 console.log(
   'Visit the guide for more information: ',

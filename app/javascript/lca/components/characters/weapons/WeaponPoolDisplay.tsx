@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { withStyles } from '@material-ui/core/styles'
-import PoolDisplay from 'components/generic/PoolDisplay.jsx'
+import PoolDisplay from 'components/generic/PoolDisplay'
 import { getPoolsForWeapon } from 'selectors'
 import type { fullWeapon } from 'utils/flow-types'
 

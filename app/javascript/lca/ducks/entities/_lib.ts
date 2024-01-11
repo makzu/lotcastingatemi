@@ -57,8 +57,8 @@ export interface CrudActionGroup {
 }
 
 export const massagePayload =
-  (type: entityTypes | listTypes | string) =>
-  (_payload = {}, _meta = {}, res) =>
+  (type: entityTypes | listTypes) =>
+  (_payload: unknown = {}, _meta: unknown = {}, res: $TSFixMe) =>
     getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
 
 export const successMeta = (_: null, __: null, { headers }: Response) => ({
@@ -70,7 +70,7 @@ type TypesTuple = [Action, Action, Action]
 
 /** Shorthand for a standardized 'types' array for redux-api-middleware actions */
 export const standardTypes = (
-  type: entityTypes | listTypes | string,
+  type: entityTypes | listTypes,
   action: CrudActionGroup,
   payloadFunc = massagePayload(type),
   metaFunc = successMeta,
@@ -110,7 +110,7 @@ export const optimisticTypes = (
   }),
 ]
 
-const meta = (_: any, m: any) => m
+const meta = (_: unknown, m: unknown) => m
 
 export const crudAction = (
   type: entityTypes,

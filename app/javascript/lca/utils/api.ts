@@ -1,5 +1,5 @@
 import * as Redux from 'redux'
-import { RSAA, RSAACall } from 'redux-api-middleware'
+import { RSAA, RSAAAction, RSAACall } from 'redux-api-middleware'
 
 const headersBase = {
   Accept: 'application/json',
@@ -30,7 +30,7 @@ export type AApiAction = ApiAction<Redux.Action, Redux.Action, Redux.Action>
  *
  * Method defaults to POST.
  */
-export const callApi = (callBody: AApiCall): AApiAction => ({
+export const callApi = (callBody: AApiCall): RSAAAction => ({
   [RSAA]: {
     method: 'POST',
     ...callBody,

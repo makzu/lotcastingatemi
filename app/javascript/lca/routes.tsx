@@ -1,16 +1,15 @@
 import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Placeholder from 'components/generic/Placeholder.jsx'
+import Placeholder from 'components/generic/Placeholder'
 import WelcomePage from 'components/pages/WelcomePage'
-import PrivacyPage from 'components/pages/PrivacyPage.jsx'
-import GoodbyePage from 'components/pages/GoodbyePage.jsx'
-import SettingsPage from 'components/pages/SettingsPage.jsx'
+import PrivacyPage from 'components/pages/PrivacyPage'
+import GoodbyePage from 'components/pages/GoodbyePage'
+import SettingsPage from 'components/pages/SettingsPage'
 
 const ChronicleWrapper = lazy(
-  () => import('components/chronicles/ChronicleWrapper.jsx'),
+  () => import('components/chronicles/ChronicleWrapper'),
 )
-const ContentList = lazy(() => import('components/pages/contentList.jsx'))
 const CharacterList = lazy(() => import('components/CharacterList/'))
 const QcList = lazy(() => import('components/qcs/QcList'))
 const BattlegroupList = lazy(
@@ -18,19 +17,19 @@ const BattlegroupList = lazy(
 )
 const CharacterSheetWrap = lazy(() => import('components/CharacterSheet/'))
 const CharacterEditor = lazy(
-  () => import('components/characterEditor/CharacterEditorWrapper.jsx'),
+  () => import('components/characterEditor/CharacterEditorWrapper'),
 )
 const CharmEditor = lazy(
-  () => import('components/characters/charms/CharmEditor.jsx'),
+  () => import('components/characters/charms/CharmEditor'),
 )
-const QcSheet = lazy(() => import('components/qcs/index.jsx'))
-const QcEditor = lazy(() => import('components/qcs/editor.jsx'))
-const BattlegroupSheet = lazy(() => import('components/battlegroups/index.jsx'))
+const QcSheet = lazy(() => import('components/qcs/index'))
+const QcEditor = lazy(() => import('components/qcs/editor'))
+const BattlegroupSheet = lazy(() => import('components/battlegroups/index'))
 const BattlegroupEditor = lazy(
-  () => import('components/battlegroups/editor.jsx'),
+  () => import('components/battlegroups/editor'),
 )
 const ResourcesPage = lazy(() => import('components/pages/ResourcesPage'))
-const HelpPage = lazy(() => import('components/pages/Help.jsx'))
+const HelpPage = lazy(() => import('components/pages/Help'))
 
 export default function Routes() {
   return (
@@ -40,7 +39,6 @@ export default function Routes() {
         <Route path="/deleted" component={GoodbyePage} />
         <Route path="/resources" component={ResourcesPage} />
         <Route path="/privacy" component={PrivacyPage} />
-        <Route path="/content" component={ContentList} />
 
         <Route path="/help/:doc.:ext?" component={HelpPage} />
         <Route path="/help" component={HelpPage} />

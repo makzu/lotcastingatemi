@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core/styles'
 
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import BlockPaper from 'components/generic/blockPaper'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks/index'
 import { getSpecificCharacter } from 'ducks/selectors'

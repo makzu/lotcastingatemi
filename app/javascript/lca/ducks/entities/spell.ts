@@ -4,6 +4,7 @@ import { State } from 'ducks'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificQc } from './qc'
+import { isDefined } from 'utils'
 
 export default createTraitReducer('spell')
 
@@ -15,5 +16,5 @@ const getSpells = (state: State) => unwrapped(state).spells
 
 export const getSpellsForQc = createCachedSelector(
   [getSpecificQc, getSpells],
-  (qc, spells) => (qc == null ? [] : qc.spells.map((s) => spells[s])),
+  (qc, spells) => (qc?.spells ?? []).map((s) => spells[s]).filter(isDefined),
 )((_state, id) => id)

@@ -1,8 +1,8 @@
 import React from 'react'
 import { shouldUpdate } from 'recompose'
 import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import Editor from 'components/generic/intimacyEditor.jsx'
+import BlockPaper from 'components/generic/blockPaper'
+import Editor from 'components/generic/intimacyEditor'
 import { isUnequalByKeys } from 'utils'
 import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
 interface Props {

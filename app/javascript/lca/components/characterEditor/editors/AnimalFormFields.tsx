@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import RatingField from 'components/generic/RatingField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+import RatingField from 'components/generic/RatingField'
+import TextField from 'components/generic/TextField'
 import { Form } from 'types'
 
 type ListAttributeFieldTypes = any

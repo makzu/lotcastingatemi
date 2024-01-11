@@ -8,7 +8,8 @@ import QcAttackFields from './qcAttackFields'
 import { createQcAttack, destroyQcAttack, updateQcAttack } from 'ducks/actions'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
+
 const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)
 interface ExposedProps {
   qc: Record<string, $TSFixMe>

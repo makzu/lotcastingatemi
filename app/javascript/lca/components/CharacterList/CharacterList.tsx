@@ -5,14 +5,13 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@material-ui/core'
 
-import CharacterCard from 'components/characters/CharacterCard.jsx'
+import CharacterCard from 'components/characters/CharacterCard'
 import CharacterCreatePopup from 'components/characters/CharacterCreatePopup'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyCharacters, updateCharacter } from 'ducks/entities'
-
-const SortableItem = SortableElement(({ children }) => children)
+import SortableItem from 'components/generic/SortableItem'
 
 const CharacterList = () => {
   const characters = useSelector((state: State) => getMyCharacters(state))
@@ -26,13 +25,19 @@ const CharacterList = () => {
     </SortableItem>
   ))
 
-  const handleSort = ({ oldIndex, newIndex }) => {
+  const handleSort = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => {
     if (oldIndex === newIndex) {
       return
     }
 
-    const charA = characters[oldIndex]
-    const charB = characters[newIndex]
+    const charA = characters[oldIndex]!
+    const charB = characters[newIndex]!
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(
       updateCharacter(charA.id, { sort_order: charB.sort_order + offset }),

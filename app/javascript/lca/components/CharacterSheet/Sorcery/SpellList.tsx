@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 
 import { Grid, Typography } from '@material-ui/core'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/blockPaper'
 import { State } from 'ducks'
-import { getSpecificCharacter, getSpellsForCharacter } from 'ducks/entities'
+import { getSpecificCharacter } from 'ducks/entities'
+import { getSpellsForCharacter } from 'selectors'
 import { Character, Spell } from 'types'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 import CharacterLoadError from '../CharacterLoadError'

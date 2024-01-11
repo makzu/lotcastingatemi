@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/blockPaper'
 import type { Enhancer } from 'utils/flow-types'
 import { RootState } from 'store'
 

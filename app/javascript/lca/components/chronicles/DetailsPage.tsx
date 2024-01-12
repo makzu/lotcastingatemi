@@ -2,10 +2,12 @@ import React, { Component, Fragment } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
+
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
+
 import ChronicleDeletePopup from './ChronicleDeletePopup'
 import ChronicleInvitePopup from './chronicleInvitePopup'
 import ChronicleLeavePopup from './ChronicleLeavePopup'
@@ -22,6 +24,9 @@ import {
   amIStOfChronicle,
 } from 'selectors'
 import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
+import { Chronicle } from 'types'
+import { RootState } from 'store'
+
 interface Props {
   id: number
   st: Record<string, $TSFixMe>
@@ -30,25 +35,20 @@ interface Props {
   characters: Character[]
   qcs: fullQc[]
   battlegroups: Battlegroup[]
-  chronicle: Record<string, $TSFixMe>
+  chronicle: Chronicle
   classes: Record<string, $TSFixMe>
   updateChronicle: $TSFixMeFunction
 }
 
-class ChronicleDetailsPage extends Component<
-  Props,
-  {
-    name?: string
-  }
-> {
-  constructor(props) {
+class ChronicleDetailsPage extends Component<Props, { name?: string }> {
+  constructor(props: Props) {
     super(props)
     this.state = {}
   }
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props: Props) {
     const { chronicle } = props
-    if (chronicle === undefined || chronicle.st_id === undefined) return null
+    if (chronicle?.st_id === undefined) return null
     return {
       name: chronicle.name,
     }
@@ -179,7 +179,7 @@ class ChronicleDetailsPage extends Component<
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state: RootState, ownProps) {
   const id = ownProps.match.params.chronicleId
   return {
     id,

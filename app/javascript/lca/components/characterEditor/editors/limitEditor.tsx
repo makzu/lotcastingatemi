@@ -5,7 +5,7 @@ import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
 import { isUnequalByKeys } from 'utils'
-import { LIMIT_MAX } from 'utils/constants.ts'
+import { LIMIT_MAX } from 'utils/constants'
 import type { Character, Enhancer } from 'utils/flow-types'
 interface Props {
   character: Character

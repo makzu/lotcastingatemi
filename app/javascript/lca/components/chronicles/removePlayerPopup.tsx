@@ -1,14 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+
 import { removePlayerFromChronicle as removePlayer } from 'ducks/actions'
 import { getSpecificChronicle, getSpecificPlayer } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
+import { RootState } from 'store'
+
 interface ExposedProps {
   chronicleId: number
   playerId: number
@@ -23,7 +27,7 @@ interface State {
 }
 
 class RemovePlayerPopup extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       open: false,
@@ -79,7 +83,7 @@ class RemovePlayerPopup extends React.Component<Props, State> {
   }
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
+function mapStateToProps(state: RootState, ownProps: ExposedProps) {
   let chronicleName,
     playerName = ''
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
@@ -87,8 +91,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   if (chronicle?.name != undefined) {
     chronicleName = chronicle.name
     // TODO add some kind of error here if it can't find a player
-    playerName = (getSpecificPlayer(state, ownProps.playerId) || {})
-      .display_name
+    playerName = getSpecificPlayer(state, ownProps.playerId)?.display_name
   }
 
   return {

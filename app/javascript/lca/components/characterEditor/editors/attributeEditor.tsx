@@ -9,7 +9,7 @@ import {
   ATTRIBUTE_MIN as MIN,
   ATTRIBUTE_MAX as MAX,
   ATTRIBUTES,
-} from 'utils/constants.ts'
+} from 'utils/constants'
 import type { withAttributes as Character } from 'utils/flow-types'
 
 const styles = (theme) => ({

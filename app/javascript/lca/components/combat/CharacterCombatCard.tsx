@@ -2,11 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
+
+import {
+  Theme,
+  WithStyles,
+  createStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Whatshot from '@material-ui/icons/Whatshot'
+
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import PoolDisplay from '../generic/PoolDisplay'
 import SpendableBlock from '../generic/SpendableBlock'
@@ -15,72 +22,68 @@ import RemoveFromCombatButton from './RemoveFromCombatButton'
 import NotesPopup from 'components/characters/NotesPopup'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character, Enhancer } from 'utils/flow-types'
+import { RootState } from 'store'
 
-const styles = (theme) => ({
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-    position: 'relative',
-  },
-  nameRow: {
-    display: 'flex',
-  },
-  nameWrap: {
-    flex: 1,
-    '& a': {
-      color: 'unset',
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      ...theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+      }),
+      height: '100%',
+      position: 'relative',
     },
-  },
-  hiddenLabel: {
-    ...theme.typography.caption,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    lineHeight: 'inherit',
-  },
-  characterName: {
-    textDecoration: 'none',
-  },
-  hasActed: {
-    textDecoration: 'none',
-    opacity: 0.5,
-  },
-  icon: {
-    verticalAlign: 'bottom',
-    marginLeft: theme.spacing(),
-  },
-  rowContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    marginTop: theme.spacing(),
-    width: '5.5rem',
-    maxHeight: '5.5rem',
-    overflow: 'hidden',
-  },
-})
+    nameRow: {
+      display: 'flex',
+    },
+    nameWrap: {
+      flex: 1,
+      '& a': {
+        color: 'unset',
+      },
+    },
+    hiddenLabel: {
+      ...theme.typography.caption,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      lineHeight: 'inherit',
+    },
+    characterName: {
+      textDecoration: 'none',
+    },
+    hasActed: {
+      textDecoration: 'none',
+      opacity: 0.5,
+    },
+    icon: {
+      verticalAlign: 'bottom',
+      marginLeft: theme.spacing(),
+    },
+    rowContainer: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      marginTop: theme.spacing(),
+      width: '5.5rem',
+      maxHeight: '5.5rem',
+      overflow: 'hidden',
+    },
+  })
 
 interface ExposedProps {
   character: Character
 }
-type Props = ExposedProps & {
-  canEdit: boolean
-  pools: Record<string, $TSFixMe>
-  penalties: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
-}
-export function CharacterCard({
-  character,
-  // eslint-disable-next-line no-unused-vars
-  canEdit,
-  penalties,
-  pools,
-  classes,
-}: Props) {
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    canEdit: boolean
+    pools: Record<string, $TSFixMe>
+    penalties: Record<string, $TSFixMe>
+  }
+
+export function CharacterCard({ character, penalties, pools, classes }: Props) {
   return (
     <Paper className={classes.root}>
       <div className={classes.nameRow}>
@@ -178,7 +181,7 @@ export function CharacterCard({
   )
 }
 
-const mapStateToProps = (state, props: ExposedProps) => ({
+const mapStateToProps = (state: RootState, props: ExposedProps) => ({
   canEdit: canIEditCharacter(state, props.character.id),
   penalties: getPenalties(state, props.character.id),
   pools: getPoolsAndRatings(state, props.character.id),

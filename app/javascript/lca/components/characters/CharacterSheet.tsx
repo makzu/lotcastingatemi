@@ -35,6 +35,7 @@ import type {
   fullMerit as Merit,
   fullWeapon as Weapon,
 } from 'utils/flow-types'
+import { RootState } from 'store'
 export function ResourceBlock({ character }: { character: Character }) {
   const re = character.resources || []
   const res = re.map((r, index) => (
@@ -241,11 +242,11 @@ export class CharacterSheet extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, props: Props) {
+function mapStateToProps(state: RootState, props: Props) {
   const id = props.match.params.characterId
   const character = getSpecificCharacter(state, id)
-  let weapons = []
-  let merits = []
+  let weapons: Weapon[] = []
+  let merits: Merit[] = []
   let pools
   let penalties
 
@@ -266,4 +267,5 @@ function mapStateToProps(state, props: Props) {
   }
 }
 
+// @ts-expect-error FIXME function/hook rewrite will fix this
 export default ProtectedComponent(connect(mapStateToProps)(CharacterSheet))

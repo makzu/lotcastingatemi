@@ -11,7 +11,7 @@ import {
   isFavoredAbility,
   isSupernalAbility,
 } from 'utils/calculated'
-import { ABILITY_NAMES } from 'utils/constants.ts'
+import { ABILITY_NAMES } from 'utils/constants'
 
 const styles = (theme) => ({
   abilityName: { ...theme.typography.body1, textTransform: 'capitalize' },

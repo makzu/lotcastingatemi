@@ -1,11 +1,15 @@
 import React from 'react'
+
 import MenuItem from '@material-ui/core/MenuItem'
+
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect'
 import BlockPaper from 'components/generic/blockPaper'
+
 import { nonCasteAbilities } from 'utils/calculated'
-import { SOLAR_CASTE_ABILITIES } from 'utils/constants.ts'
+import { SOLAR_CASTE_ABILITIES } from 'utils/constants'
 import type { Character } from 'utils/flow-types'
+
 interface Props {
   character: Character
   onChange: $TSFixMeFunction

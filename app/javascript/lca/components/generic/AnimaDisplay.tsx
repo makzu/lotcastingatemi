@@ -10,6 +10,7 @@ import { canIEditCharacter, canIEditQc } from 'selectors'
 import { prettyAnimaLevel } from 'utils/calculated'
 import type { withMotePool, Enhancer } from 'utils/flow-types'
 import { Character } from 'types'
+import { WithStyles } from '@material-ui/styles'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -51,20 +52,20 @@ interface ExposedProps {
   }
   qc?: boolean
 }
-type Props = ExposedProps & {
-  canEdit: boolean
-  update: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
-}
+type Props = ExposedProps &
+  WithStyles<typeof styles> & {
+    canEdit: boolean
+    update: $TSFixMeFunction
+  }
 interface State {
-  anchor: any
+  anchor: EventTarget | null
 }
 
 class AnimaDisplay extends React.Component<Props, State> {
   state = {
     anchor: null,
   }
-  handleOpen = (e: ClickEvent) => {
+  handleOpen = (e: MouseEvent) => {
     if (this.props.canEdit)
       this.setState({
         anchor: e.currentTarget,

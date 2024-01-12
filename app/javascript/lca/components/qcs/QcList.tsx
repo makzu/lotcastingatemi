@@ -24,13 +24,19 @@ const QcList = () => {
     </SortableItem>
   ))
 
-  const handleSort = ({ oldIndex, newIndex }) => {
+  const handleSort = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => {
     if (oldIndex === newIndex) {
       return
     }
 
-    const charA = qcs[oldIndex]
-    const charB = qcs[newIndex]
+    const charA = qcs[oldIndex]!
+    const charB = qcs[newIndex]!
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(updateQc(charA.id, { sort_order: charB.sort_order + offset }))
   }

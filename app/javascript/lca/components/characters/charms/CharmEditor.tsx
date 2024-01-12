@@ -35,6 +35,8 @@ import {
 import type { Character, Charm, Spell } from 'utils/flow-types'
 import { WithStyles } from '@material-ui/styles'
 import SortableItem from 'components/generic/SortableItem'
+import { Merit } from 'types'
+import { RootState } from 'store'
 
 const filterByCategory = (categoryFilter) => (charm) =>
   categoryFilter.every((cat) => charm.categories.includes(cat))
@@ -515,15 +517,15 @@ class CharmEditor extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state: State, ownProps) {
+function mapStateToProps(state: RootState, ownProps) {
   const id = ownProps.match.params.characterId
   const character = getSpecificCharacter(state, id)
-  let nativeCharms = []
-  let martialArtsCharms = []
-  let evocations = []
-  let artifacts = []
-  let spiritCharms = []
-  let spells = []
+  let nativeCharms: Charm[] = []
+  let martialArtsCharms: Charm[] = []
+  let evocations: Charm[] = []
+  let artifacts: Merit[] = []
+  let spiritCharms: Charm[] = []
+  let spells: Spell[] = []
 
   if (character !== undefined) {
     nativeCharms = getNativeCharmsForCharacter(state, id)

@@ -20,9 +20,9 @@ export const isChronicleLoaded = (state: WrappedEntityState, id: number) =>
   getSpecificChronicle(state, id)?.st != null
 
 export const getPlayersForChronicle = createCachedSelector(
-  [getSpecificChronicle, isChronicleLoaded, getPlayers],
-  (chronicle, loaded, players) =>
-    loaded ? chronicle.players.map((c) => players[c]) : [],
+  [getSpecificChronicle, getPlayers],
+  (chronicle, players) =>
+    (chronicle?.players ?? []).map((c) => players[c]).filter(isDefined) ?? [],
 )(idMemoizer)
 
 export const getStorytellerForChronicle = createCachedSelector(
@@ -49,6 +49,7 @@ export const getQcsForChronicle = createCachedSelector(
   (chronicle, qcs, state) =>
     (chronicle?.qcs ?? [])
       .map((c) => qcs[c])
+      .filter(isDefined)
       .filter((c) => canISeeQc(state, c.id))
       .sort(chronicleSortOrderSort) || [],
 )(idMemoizer)
@@ -61,6 +62,7 @@ export const getBattlegroupsForChronicle = createCachedSelector(
   (chronicle, battlegroups, state) =>
     chronicle?.battlegroups
       ?.map((c) => battlegroups[c])
+      .filter(isDefined)
       .filter((c) => canISeeBattlegroup(state, c.id))
       .sort(chronicleSortOrderSort) || [],
 )(idMemoizer)
@@ -68,11 +70,4 @@ export const getBattlegroupsForChronicle = createCachedSelector(
 export const amIStOfChronicle = createCachedSelector(
   [getCurrentPlayer, getSpecificChronicle],
   (player, chronicle) => chronicle?.st_id && player.id === chronicle.st_id,
-)(
-  (state, id) =>
-    (
-      getSpecificChronicle(state, id) || {
-        st_id: 0,
-      }
-    ).st_id,
-)
+)((state, id) => (getSpecificChronicle(state, id) ?? { st_id: 0 }).st_id)

@@ -5,7 +5,7 @@ import ResourceEditor from './resourceEditor'
 import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField'
 import commonStyles from 'styles'
-import { WILLPOWER_MAX } from 'utils/constants.ts'
+import { WILLPOWER_MAX } from 'utils/constants'
 import type { Character } from 'utils/flow-types'
 interface Props {
   character: Character

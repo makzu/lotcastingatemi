@@ -12,6 +12,10 @@ import { takeDamage } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withHealthLevels, Enhancer } from 'utils/flow-types'
+import { RootState } from 'store'
+
+type DamageType = 'bashing' | 'lethal' | 'aggravated'
+
 interface ExposedProps {
   children: React.ReactNode
   character: withHealthLevels & {
@@ -40,7 +44,7 @@ const defaultState: State = {
 
 class DamageWidget extends React.Component<Props, State> {
   state = defaultState
-  min = (type) => {
+  min = (type: DamageType) => {
     return -this.props.character[`damage_${type}`]
   }
   handleOpen = () => {
@@ -51,7 +55,7 @@ class DamageWidget extends React.Component<Props, State> {
   handleClose = () => {
     this.setState(defaultState)
   }
-  handleAdd = (dmg, type) => {
+  handleAdd = (dmg: number, type: DamageType) => {
     this.setState({
       [type]: clamp(this.state[type] + dmg, this.min(type), Infinity),
     })
@@ -243,13 +247,10 @@ class DamageWidget extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state, props: ExposedProps) => ({
+const mapStateToProps = (state: RootState, props: ExposedProps) => ({
   canEdit: props.qc
     ? canIEditQc(state, props.character.id)
     : canIEditCharacter(state, props.character.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
-  takeDamage,
-})
-export default enhance(DamageWidget)
+export default connect(mapStateToProps, { takeDamage })(DamageWidget)

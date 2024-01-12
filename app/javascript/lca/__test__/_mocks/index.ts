@@ -1,5 +1,5 @@
 import { gen } from 'testcheck'
-import { ABILITY_NAMES } from 'utils/constants.ts'
+import { ABILITY_NAMES } from 'utils/constants'
 export const SEED = 5 * 684
 
 /* Number of pages in the 3e core book */

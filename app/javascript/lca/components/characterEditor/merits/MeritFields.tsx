@@ -14,7 +14,7 @@ import MeritEffectBlurb from './MeritEffectBlurb'
 import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
-import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants.ts'
+import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants'
 import type { fullMerit as Merit } from 'utils/flow-types'
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

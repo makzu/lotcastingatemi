@@ -1,8 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import Typography from '@material-ui/core/Typography'
+
 import { getSpecificPlayer } from 'selectors'
-import type { Enhancer } from 'utils/flow-types'
+import { RootState } from 'store'
+
 interface ExposedProps {
   playerId: number
 }
@@ -24,9 +27,8 @@ function PlayerNameSubtitle({ name }: Props) {
   )
 }
 
-const mapStateToProps = (state, props: ExposedProps) => ({
+const mapStateToProps = (state: RootState, props: ExposedProps) => ({
   name: getSpecificPlayer(state, props.playerId).display_name,
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps)
-export default enhance(PlayerNameSubtitle)
+export default connect(mapStateToProps)(PlayerNameSubtitle)

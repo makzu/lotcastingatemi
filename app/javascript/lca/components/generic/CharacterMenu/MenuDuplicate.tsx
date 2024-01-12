@@ -7,6 +7,7 @@ import { PersonAdd } from '@material-ui/icons'
 import { State } from 'ducks'
 import { duplicate } from 'ducks/actions/ByType'
 import { MenuItemProps as Props } from './CharacterMenuItem'
+import { AppDispatch } from 'store'
 
 interface StateProps {
   canDupe: boolean
@@ -33,7 +34,7 @@ const mapState = (state: State): StateProps => ({
 })
 
 const mapDispatch = (
-  dispatch,
+  dispatch: AppDispatch,
   { characterType, id }: Props,
 ): DispatchProps => ({
   action: () => dispatch(duplicate[characterType](id)),

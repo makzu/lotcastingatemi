@@ -8,7 +8,7 @@ RUN apt-get update && \
   nano \
   nodejs
 
-RUN npm install --global yarn
+RUN corepack enable
 RUN gem update --system
 
 WORKDIR /myapp
@@ -17,6 +17,6 @@ COPY .ruby-version Gemfile Gemfile.lock /myapp/
 RUN bundle install
 
 COPY package.json yarn.lock /myapp/
-RUN yarn install --check-files
+RUN yarn install
 
 EXPOSE 3000

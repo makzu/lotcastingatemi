@@ -35,7 +35,7 @@ const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
-type ExposedProps = {
+interface ExposedProps {
   match: { params: { id: number } }
 }
 type Props = ExposedProps & {

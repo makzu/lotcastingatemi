@@ -7,7 +7,7 @@ import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import { nonCasteAttributes } from 'utils/calculated'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 interface Props {
   character: Character
   onChange: $TSFixMeFunction

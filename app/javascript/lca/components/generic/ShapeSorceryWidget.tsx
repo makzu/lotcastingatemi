@@ -35,7 +35,7 @@ const styles = (theme) => ({
   },
 })
 
-type ExposedProps = {
+interface ExposedProps {
   children: Node
   character: { id: number; sorcerous_motes: number; type: 'qc' | string }
 }
@@ -59,7 +59,7 @@ class ShapeSorceryWidget extends Component<Props, State> {
   }
 
   handleChangeRoll = (e) => {
-    let { value } = e.target
+    const { value } = e.target
     this.setState({
       roll: value,
       total: value + this.props.character.sorcerous_motes,
@@ -67,7 +67,7 @@ class ShapeSorceryWidget extends Component<Props, State> {
   }
 
   handleChangeTotal = (e) => {
-    let { value } = e.target
+    const { value } = e.target
     this.setState({
       roll: value - this.props.character.sorcerous_motes,
       total: value,

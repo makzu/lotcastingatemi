@@ -13,7 +13,7 @@ import {
 } from 'utils/calculated'
 
 const endSceneObject = (c) => {
-  let obj = {}
+  const obj = {}
   const commits = c.motes_committed.filter((m) => !m.scenelong)
 
   if (!deepEqual(commits, c.motes_committed)) obj.motes_committed = commits

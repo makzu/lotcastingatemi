@@ -6,7 +6,7 @@ import Editor from 'components/generic/intimacyEditor.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import type { withIntimacies as Character } from 'utils/flow-types'
 
-type Props = {
+interface Props {
   character: Character
   onChange: Function
 }

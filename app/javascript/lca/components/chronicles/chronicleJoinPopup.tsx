@@ -15,8 +15,8 @@ import GroupAdd from '@mui/icons-material/GroupAdd'
 
 import { joinChronicle } from 'ducks/actions'
 
-type Props = { joinChronicle: Function }
-type State = { open: boolean; code: string }
+interface Props { joinChronicle: Function }
+interface State { open: boolean; code: string }
 class ChronicleJoinPopup extends Component<Props, State> {
   constructor(props) {
     super(props)

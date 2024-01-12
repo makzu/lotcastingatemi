@@ -32,7 +32,7 @@ const styles = (theme) => ({
   },
 })
 
-type Props = {
+interface Props {
   battlegroup: Battlegroup
   className?: string
   DisplayClassName?: string
@@ -40,7 +40,7 @@ type Props = {
   canEdit: boolean
   update: Function
 }
-type State = { open: boolean; magnitude: number; size: number }
+interface State { open: boolean; magnitude: number; size: number }
 class BattlegroupHealthDisplay extends Component<Props, State> {
   state = {
     open: false,

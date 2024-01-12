@@ -9,7 +9,7 @@ export default function pool(
   character: Character,
   attribute: Attribute,
   ability: Ability,
-  bonus: Array<PoolBonus>,
+  bonus: PoolBonus[],
   penalties: Penalty[],
   excellencyAbils: string[],
   specialAttacks: string[] = [],

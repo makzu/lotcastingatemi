@@ -15,8 +15,8 @@ import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import { createChronicle } from 'ducks/actions'
 
-type Props = { createChronicle: Function }
-type State = { open: boolean; chronicle: { name: string } }
+interface Props { createChronicle: Function }
+interface State { open: boolean; chronicle: { name: string } }
 class ChronicleCreatePopup extends PureComponent<Props, State> {
   state = {
     open: false,

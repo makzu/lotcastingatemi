@@ -32,7 +32,7 @@ import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { getPoolsAndRatings, getPenalties } from 'selectors'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 interface Props {
   character: Character
   pools: Record<string, $TSFixMe>

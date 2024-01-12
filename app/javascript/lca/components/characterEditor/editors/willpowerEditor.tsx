@@ -6,7 +6,7 @@ import RatingField from 'components/generic/RatingField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
 import { WILLPOWER_MAX } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 interface Props {
   character: Character
   onChange: $TSFixMeFunction

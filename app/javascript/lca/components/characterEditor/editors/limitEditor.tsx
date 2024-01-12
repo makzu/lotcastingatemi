@@ -4,9 +4,9 @@ import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
 import { LIMIT_MAX } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 
-type Props = {
+interface Props {
   character: Character
   onChange: Function
 }

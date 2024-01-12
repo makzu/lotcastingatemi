@@ -88,7 +88,7 @@ export const getMyChronicles = createSelector(
   (currentPlayer, chronicles) =>
     currentPlayer.chronicles
       .map((c) => chronicles[c])
-      .filter((c) => c !== undefined && c.name !== undefined),
+      .filter((c) => c?.name !== undefined),
 )
 
 export const getPoolsAndRatingsGeneric = (

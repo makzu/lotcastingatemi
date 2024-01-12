@@ -34,11 +34,11 @@ const initialState = {
   },
 }
 
-type Props = {
+interface Props {
   id: number
   createCharacter: typeof createCharacter
 }
-type State = {
+interface State {
   open: boolean
   character: Partial<Character>
 }

@@ -101,7 +101,7 @@ export function woundPenalty(character: WithSharedStats, merits: string[]) {
 
 export function attackAbilities(
   character: Character,
-): Array<{ abil: string; rating: number; specialties: Array<specialty> }> {
+): { abil: string; rating: number; specialties: specialty[] }[] {
   const abils = ATTACK_ABILITIES.map((abil) => {
     const name = abil.substring(5)
     return {
@@ -127,7 +127,7 @@ export function attackAbilities(
 
 export function nonAttackAbilities(
   character: Character,
-): Array<{ abil: string; rating: number; specialties: Array<specialty> }> {
+): { abil: string; rating: number; specialties: specialty[] }[] {
   const abils = NON_ATTACK_ABILITIES.filter((abil) => character[abil] > 0).map(
     function (abil) {
       const name = abil.substring(5)

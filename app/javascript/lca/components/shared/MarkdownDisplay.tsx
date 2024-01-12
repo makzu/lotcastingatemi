@@ -14,7 +14,7 @@ export const LinkRenderer = ({ href, ...props }: LinkRendererProps) =>
     <Link to={href || '#'} {...props} />
   )
 
-type Props = {
+interface Props {
   source: string
   noBlocks?: boolean
 }

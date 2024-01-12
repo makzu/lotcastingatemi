@@ -16,7 +16,7 @@ import { clamp } from 'utils'
 import type { withHealthLevels, Enhancer } from 'utils/flow-types'
 import { RootState } from 'store'
 
-type ExposedProps = {
+interface ExposedProps {
   children: Node
   character: withHealthLevels & { id: number }
   qc?: boolean

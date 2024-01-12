@@ -10,7 +10,7 @@ import { fetchChronicle } from 'ducks/actions'
 import { isChronicleLoaded } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 
-type ExposedProps = {
+interface ExposedProps {
   params: { id: number }
 }
 type Props = ExposedProps & {

@@ -32,7 +32,7 @@ const styles = (theme) => ({
   },
 })
 
-type Props = { loading: boolean; classes: Object }
+interface Props { loading: boolean; classes: Object }
 class LoadingSpinner extends PureComponent<Props> {
   render() {
     const { loading, classes } = this.props

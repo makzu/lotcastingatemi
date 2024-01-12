@@ -23,11 +23,11 @@ import { Theme } from '@mui/material/styles'
 
 const styles = (theme: Theme) => createStyles({ ...commonStyles(theme) })
 
-type ExposedProps = {
+interface ExposedProps {
   qc: fullQc
 }
 type Props = ExposedProps & {
-  qc_charms: Array<QcCharm>
+  qc_charms: QcCharm[]
   updateQcCharm: Function
   createQcCharm: Function
   destroyQcCharm: Function

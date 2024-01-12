@@ -5,7 +5,7 @@ import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
 import { canIDeleteCharacter } from 'selectors'
 import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 import { useAppSelector } from 'hooks'
 
 interface Props {

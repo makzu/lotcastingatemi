@@ -8,7 +8,7 @@ import BlockPaper from 'components/generic/blockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'
 import { ABYSSAL_CASTE_ABILITIES } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 
 interface Props {
   character: Character

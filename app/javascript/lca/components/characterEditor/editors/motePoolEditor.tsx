@@ -12,7 +12,7 @@ import {
   committedPeripheralMotes,
   showAuraTraits,
 } from 'utils/calculated'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

@@ -35,7 +35,7 @@ class BattlegroupAddPopup extends Component<Props, State> {
   }
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     this.setState({ [name]: value })
   }
   handleOpen = () => {

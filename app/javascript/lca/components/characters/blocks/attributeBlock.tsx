@@ -5,9 +5,12 @@ import AttributeBlockPhysical from './attributeBlockPhysical.jsx'
 import AttributeBlockSocial from './attributeBlockSocial.jsx'
 import AttributeBlockMental from './attributeBlockMental.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 
-export type Props = { character: Character; pools: Object }
+export interface Props {
+  character: Character
+  pools: Object
+}
 function AttributeBlock({ character, pools }: Props) {
   return (
     <BlockPaper>

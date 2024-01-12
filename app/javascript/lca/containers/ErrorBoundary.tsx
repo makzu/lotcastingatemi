@@ -22,8 +22,8 @@ interface State {
   errorInfo?: Record<string, $TSFixMe>
 }
 
-type Props = { children: Node }
-type State = { error?: Object; errorInfo?: Object }
+interface Props { children: Node }
+interface State { error?: Object; errorInfo?: Object }
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Object) {
     super(props)

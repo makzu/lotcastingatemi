@@ -22,7 +22,7 @@ function ChronicleHeader() {
   const path = useLocation().pathname
   const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
-  if (chronicle == null || chronicle.name == null) {
+  if (chronicle?.name == null) {
     return <GenericHeader />
   }
 

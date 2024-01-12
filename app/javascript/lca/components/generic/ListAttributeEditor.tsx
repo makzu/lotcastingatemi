@@ -91,7 +91,7 @@ const styles = (theme) => ({
 
 interface Props extends WithStyles<typeof styles> {
   character: Character | QC
-  trait: keyof Character | keyof QC
+  trait: keyof Character  
   label: string
   newObject: Record<string, $TSFixMe> | string
   nonObject?: boolean

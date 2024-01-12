@@ -48,7 +48,7 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
   handleReset = () => this.setState({ toRecover: 0 })
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
 
     if (name === 'toRecover') {
       const val = Math.max(parseInt(value), 0)

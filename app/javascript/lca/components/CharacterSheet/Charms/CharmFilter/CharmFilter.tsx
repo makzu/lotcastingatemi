@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 interface Props {
   filters: CharmFilter
   setfilters: Dispatch<CharmFilterAction>
-  allAbilities: Array<Charm['ability']>
+  allAbilities: Charm['ability'][]
   allCategories: string[]
   allKeywords: string[]
   id: number

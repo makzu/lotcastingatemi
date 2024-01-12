@@ -7,7 +7,7 @@ import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
 import SolarExcellency, { solarExcellencyAbils } from './solar'
 
-export const excellencyAbils = (character: Character, charms: Array<Charm>) => {
+export const excellencyAbils = (character: Character, charms: Charm[]) => {
   // Mortals do not have excellencies
   if (character.type === 'Character') return []
 

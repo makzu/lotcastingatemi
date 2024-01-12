@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 
-type Props = {
+interface Props {
   name: string
   rating: number
 }

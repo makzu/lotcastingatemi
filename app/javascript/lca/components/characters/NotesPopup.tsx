@@ -18,7 +18,7 @@ import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import { updateCharacter } from 'ducks/actions'
 import { canIEditCharacter } from 'selectors'
 import commonStyles from 'styles'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),
@@ -33,7 +33,10 @@ interface Props {
   classes: Record<string, $TSFixMe>
   updateCharacter: $TSFixMeFunction
 }
-type State = { open: boolean; editing: boolean }
+interface State {
+  open: boolean
+  editing: boolean
+}
 class NotesPopup extends Component<Props, State> {
   constructor(props) {
     super(props)

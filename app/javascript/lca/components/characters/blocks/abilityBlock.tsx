@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 
 import RatingLine from 'components/generic/ratingLine.jsx'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import {

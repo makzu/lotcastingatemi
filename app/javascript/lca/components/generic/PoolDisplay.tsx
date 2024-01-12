@@ -63,7 +63,7 @@ const styles = (theme) => ({
   },
 })
 
-type Props = {
+interface Props {
   label: string
   pool: Pool
   noSummary?: boolean

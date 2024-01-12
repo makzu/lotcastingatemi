@@ -15,7 +15,7 @@ import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withWillpower, Enhancer } from 'utils/flow-types'
 
-type ExposedProps = {
+interface ExposedProps {
   children: Node
   character: withWillpower & { id: number }
   qc?: boolean

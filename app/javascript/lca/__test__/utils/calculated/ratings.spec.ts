@@ -5,7 +5,7 @@ require('jasmine-check').install()
 
 import { genSolar } from '../../_mocks/'
 import { mockGetPoolsAndRatings } from '../../_mocks/selectors'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 const mockCharacter = gen.object(genSolar)
 describe('ratings', () => {
   describe('evasion', () => {

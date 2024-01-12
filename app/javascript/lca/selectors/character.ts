@@ -33,7 +33,7 @@ export const getMeritsForCharacter = createCachedSelector(
     character.merits.map((m) => merits[m]).sort(sortOrderSort),
 )(characterIdMemoizer)
 
-export const getMeritNamesForCharacter = (state, id: number): Array<string> =>
+export const getMeritNamesForCharacter = (state, id: number): string[] =>
   getMeritsForCharacter(state, id)
     .map((m) => m.merit_name.toLowerCase() + m.rating)
     .sort()
@@ -58,7 +58,7 @@ export const getSpellsForCharacter = createCachedSelector(
     character.spells.map((s) => spells[s]).sort(sortOrderSort),
 )(characterIdMemoizer)
 
-export const getControlSpellsForCharacter = (state, id: number): Array<Spell> =>
+export const getControlSpellsForCharacter = (state, id: number): Spell[] =>
   getSpellsForCharacter(state, id).filter((s) => s.control)
 
 export const getPoisonsForCharacter = () => [] as Poison[]

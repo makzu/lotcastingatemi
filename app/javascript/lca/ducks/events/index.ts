@@ -55,11 +55,11 @@ export function spendWillpower(
   willpower: number,
   charType: 'character' | 'qc' = 'character',
 ) {
-  let update = updateEvent(charType)
+  const update = updateEvent(charType)
 
   return (dispatch: Function, getState: Function) => {
     dispatch({ type: SPEND_WP, id: id })
-    let current_wp =
+    const current_wp =
       getState().entities.current[charType + 's'][id].willpower_temporary
     dispatch(
       update(id, { willpower_temporary: Math.max(current_wp - willpower, 0) }),

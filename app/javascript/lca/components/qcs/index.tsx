@@ -88,13 +88,13 @@ const styles = (theme) => ({
   },
 })
 
-type Props = {
+interface Props {
   id: string
   qc: fullQc
-  qc_merits: Array<QcMerit>
-  qc_charms: Array<QcCharm>
-  qc_attacks: Array<QcAttack>
-  spells: Array<object>
+  qc_merits: QcMerit[]
+  qc_charms: QcCharm[]
+  qc_attacks: QcAttack[]
+  spells: object[]
   pools: object
   penalties: object
   classes: object

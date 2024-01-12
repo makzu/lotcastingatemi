@@ -4,7 +4,7 @@ import withStyles from '@mui/styles/withStyles'
 import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import BlockPaper from 'components/shared/BlockPaper'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 
 const styles = (theme) => ({
   subheading: {

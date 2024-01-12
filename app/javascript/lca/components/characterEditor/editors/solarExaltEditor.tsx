@@ -6,7 +6,7 @@ import BlockPaper from 'components/shared/BlockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'
 import { SOLAR_CASTE_ABILITIES } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
+import { Character } from '@/types'
 
 interface Props {
   character: Character

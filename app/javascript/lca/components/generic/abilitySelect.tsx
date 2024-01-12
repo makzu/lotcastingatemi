@@ -19,16 +19,16 @@ const styles = (theme) => ({
   },
 })
 
-type Props = {
-  abilities?: Array<Object>
-  attributes?: Array<Object>
+interface Props {
+  abilities?: Object[]
+  attributes?: Object[]
   prependOptions?: Node
   withAttributes?: boolean
   attributesOnly?: boolean
   includeUniversal?: boolean
   multiple?: boolean
   name: string
-  value: string | Array<string>
+  value: string | string[]
   label: string
   fullWidth?: boolean
   margin?: 'none' | 'dense' | 'normal'

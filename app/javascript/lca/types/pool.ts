@@ -1,20 +1,20 @@
 import { Ability } from '@/utils/constants.new/abilities'
 import { Attribute } from '@/utils/constants.new/attributes'
 
-export type PoolBonus = {
+export interface PoolBonus {
   label: string
   situational?: boolean
   noFull?: boolean
   bonus?: number
 }
 
-type SoakPool = {
+interface SoakPool {
   soak?: boolean
   natural?: number
   armored?: number
 }
 
-type AttackPool = {
+interface AttackPool {
   accuracy?: number
   witheringDamage?: boolean
   weaponDamage?: number
@@ -25,7 +25,7 @@ type AttackPool = {
   minimum?: number
 }
 
-type StaticRating = {
+interface StaticRating {
   rating?: boolean
   specialtyMatters?: boolean
   parry?: boolean
@@ -33,11 +33,11 @@ type StaticRating = {
   shield?: boolean
 }
 
-export type Penalty = {
+export interface Penalty {
   label: string
   penalty: number
 }
-export type penaltyObj = {
+export interface penaltyObj {
   mobility: number
   onslaught: number
   wound: number
@@ -61,7 +61,7 @@ export type Pool = SoakPool &
     penalties?: Penalty[]
     totalPenalty?: number
     total: number | string
-    bonus?: Array<PoolBonus>
+    bonus?: PoolBonus[]
     specialAttacks?: string[]
     noSummary?: boolean
   }

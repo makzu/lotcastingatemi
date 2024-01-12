@@ -45,7 +45,7 @@ class JoinBattlePopup extends Component<Props, State> {
   state = { open: false, initiative: 0 }
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     this.setState({ [name]: value })
   }
   handleChange = (e) => {

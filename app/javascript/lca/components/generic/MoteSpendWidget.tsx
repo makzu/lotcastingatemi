@@ -51,7 +51,7 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
   )
 }
 
-type ExposedProps = {
+interface ExposedProps {
   children: Node
   character: withMotePool & { id: number }
   peripheral?: boolean
@@ -109,7 +109,7 @@ class MoteSpendWidget extends Component<Props, State> {
   }
 
   handleAdd = (motes) => {
-    let commit = this.state.toSpend + motes <= 0 ? false : this.state.commit
+    const commit = this.state.toSpend + motes <= 0 ? false : this.state.commit
     this.setState({
       toSpend: clamp(this.state.toSpend + motes, this.min(), this.max()),
       commit: commit,
@@ -117,7 +117,7 @@ class MoteSpendWidget extends Component<Props, State> {
   }
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     let { commit } = this.state
 
     if (name === 'toSpend') {

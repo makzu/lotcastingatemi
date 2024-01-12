@@ -8,7 +8,7 @@ const defaultState = {
   error: false,
   errorMessage: '',
 }
-export type AppState = {
+export interface AppState {
   loading: boolean
   error: boolean
   errorMessage: string

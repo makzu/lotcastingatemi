@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import { State } from 'ducks'
-import { sortOrderSort } from 'utils'
+import { isDefined, sortOrderSort } from 'utils'
 import { callApi } from 'utils/api'
 import {
   createApiActions,
@@ -51,9 +51,10 @@ const getCharacters = (state: State) => unwrapped(state).characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    (currentPlayer.characters.map((c) => characters[c]) as Character[]).sort(
-      sortOrderSort,
-    ),
+    (currentPlayer?.characters ?? [])
+      .map((c) => characters[c])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )
 
 export const getMyPinnedCharacters = createSelector(

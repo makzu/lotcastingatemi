@@ -31,7 +31,7 @@ const getQcs = (state: State) => unwrapped(state).qcs
 export const getMyQcs = createSelector(
   [getCurrentPlayer, getQcs],
   (currentPlayer, qcs) =>
-    currentPlayer.qcs
+    (currentPlayer?.qcs ?? [])
       .map((c) => qcs[c])
       .filter(isDefined)
       .sort(sortOrderSort),

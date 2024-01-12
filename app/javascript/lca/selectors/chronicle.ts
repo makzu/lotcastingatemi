@@ -60,14 +60,14 @@ const getBattlegroups = (state: WrappedEntityState) =>
 export const getBattlegroupsForChronicle = createCachedSelector(
   [getSpecificChronicle, getBattlegroups, getState],
   (chronicle, battlegroups, state) =>
-    chronicle?.battlegroups
-      ?.map((c) => battlegroups[c])
+    (chronicle?.battlegroups ?? [])
+      .map((c) => battlegroups[c])
       .filter(isDefined)
       .filter((c) => canISeeBattlegroup(state, c.id))
-      .sort(chronicleSortOrderSort) || [],
+      .sort(chronicleSortOrderSort),
 )(idMemoizer)
 
 export const amIStOfChronicle = createCachedSelector(
   [getCurrentPlayer, getSpecificChronicle],
-  (player, chronicle) => chronicle?.st_id && player.id === chronicle.st_id,
+  (player, chronicle) => chronicle?.st_id && player?.id === chronicle.st_id,
 )((state, id) => (getSpecificChronicle(state, id) ?? { st_id: 0 }).st_id)

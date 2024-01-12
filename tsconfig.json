@@ -5,6 +5,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "incremental": true,
 
     "baseUrl": "app/javascript/lca",
 
@@ -32,6 +33,7 @@
 
     "sourceMap": true
   },
+  "include": ["app/javascript/lca/**/*", "./.eslintrc.cjs"],
   "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public", "coverage"],
   "compileOnSave": false
 }

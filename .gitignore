@@ -16,8 +16,6 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-yarn-error.log
-yarn-debug.log*
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -30,7 +28,18 @@ yarn-debug.log*
 /public/packs-test
 /node_modules
 
+# Yarn related files
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 .yarn-integrity
+yarn-error.log
+yarn-debug.log*
 
 # RSpec thing
 /spec/examples.txt

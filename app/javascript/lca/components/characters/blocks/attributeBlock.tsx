@@ -1,16 +1,13 @@
-import React from 'react'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
-import AttributeBlockPhysical from './attributeBlockPhysical'
-import AttributeBlockSocial from './attributeBlockSocial'
-import AttributeBlockMental from './attributeBlockMental'
-import { Character } from 'types'
-export interface Props {
-  character: Character
-  pools: Record<string, $TSFixMe>
-}
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 
+import AttributeBlockPhysical from './attributeBlockPhysical.jsx'
+import AttributeBlockSocial from './attributeBlockSocial.jsx'
+import AttributeBlockMental from './attributeBlockMental.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+import type { Character } from 'utils/flow-types'
+
+export type Props = { character: Character; pools: Object }
 function AttributeBlock({ character, pools }: Props) {
   return (
     <BlockPaper>

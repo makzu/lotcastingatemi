@@ -29,4 +29,10 @@ export default defineConfig({
       utils: resolve(__dirname, 'app/javascript/lca/utils'),
     },
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['testSetup.ts'],
+    exclude: ['**/__test__/**'],
+  },
 })

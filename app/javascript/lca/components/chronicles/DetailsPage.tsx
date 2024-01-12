@@ -1,21 +1,23 @@
-import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
-import Divider from '@material-ui/core/Divider'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
+import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
 
-import ChronicleDeletePopup from './ChronicleDeletePopup'
-import ChronicleInvitePopup from './chronicleInvitePopup'
-import ChronicleLeavePopup from './ChronicleLeavePopup'
-import RemovePlayerPopup from './removePlayerPopup'
-import BlockPaper from 'components/generic/blockPaper'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
-import TextField from 'components/generic/TextField'
+import ChronicleDeletePopup from './ChronicleDeletePopup.jsx'
+import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
+import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
+import RemovePlayerPopup from './removePlayerPopup.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+import DocumentTitle from 'components/generic/DocumentTitle'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
+import TextField from 'components/generic/TextField.jsx'
+
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateChronicle } from 'ducks/actions'
 import {
   getSpecificChronicle,
@@ -179,8 +181,9 @@ class ChronicleDetailsPage extends Component<Props, { name?: string }> {
   }
 }
 
-function mapStateToProps(state: RootState, ownProps) {
-  const id = ownProps.match.params.chronicleId
+function mapStateToProps(state, ownProps) {
+  const id = ownProps.params.id
+
   return {
     id,
     chronicle: getSpecificChronicle(state, id),
@@ -192,7 +195,6 @@ function mapStateToProps(state: RootState, ownProps) {
 
 export default compose(
   ProtectedComponent,
-  connect(mapStateToProps, {
-    updateChronicle,
-  }),
+  withRouter,
+  connect(mapStateToProps, { updateChronicle }),
 )(ChronicleDetailsPage)

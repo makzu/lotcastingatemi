@@ -1,4 +1,3 @@
-import React from 'react'
 import renderer from 'react-test-renderer'
 import RatingDots from '../../../components/generic/ratingDots'
 test('RatingDots renders at all', () => {

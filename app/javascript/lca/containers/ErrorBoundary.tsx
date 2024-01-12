@@ -1,5 +1,7 @@
-import * as React from 'react'
-import Typography from '@material-ui/core/Typography'
+import { Component, Node } from 'react'
+
+import Typography from '@mui/material/Typography'
+
 import { sample } from 'utils'
 const errorNames = [
   'Easily-Overlooked Error Method',
@@ -20,8 +22,10 @@ interface State {
   errorInfo?: Record<string, $TSFixMe>
 }
 
-class ErrorBoundary extends React.Component<Props, State> {
-  constructor(props: Props) {
+type Props = { children: Node }
+type State = { error?: Object; errorInfo?: Object }
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Object) {
     super(props)
     this.state = {
       error: undefined,

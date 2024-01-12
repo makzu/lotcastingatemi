@@ -1,10 +1,10 @@
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer } from 'react-sortable-hoc'
 
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import QcAttackFields from './qcAttackFields'
 import { createQcAttack, destroyQcAttack, updateQcAttack } from 'ducks/actions'
@@ -28,8 +28,8 @@ type Props = ExposedProps & {
   destroyQcAttack: $TSFixMeFunction
 }
 
-class QcAttackEditor extends React.Component<Props> {
-  handleChange = (id: number, trait: Partial<QcAttack>) => {
+class QcAttackEditor extends Component<Props> {
+  handleChange = (id, trait) => {
     this.props.updateQcAttack(id, this.props.qc.id, trait, this.props.type)
   }
   handleAdd = () => {
@@ -53,9 +53,7 @@ class QcAttackEditor extends React.Component<Props> {
     this.props.updateQcAttack(
       attackA.id,
       this.props.qc.id,
-      {
-        sort_order: attackB.sort_order + offset,
-      },
+      { sort_order: attackB.sort_order + offset },
       this.props.type,
     )
   }

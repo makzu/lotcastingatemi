@@ -1,14 +1,13 @@
-import * as React from 'react'
-import { shouldUpdate } from 'recompose'
-import Checkbox from '@material-ui/core/Checkbox'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiTextField from '@material-ui/core/TextField'
-import type { ListAttributeFieldTypes } from 'components/generic/ListAttributeEditor'
-import ListAttributeEditor from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import { isUnequalByKeys } from 'utils'
-import type { withMotePool, Enhancer } from 'utils/flow-types'
+import Checkbox from '@mui/material/Checkbox'
+import MenuItem from '@mui/material/MenuItem'
+import MuiTextField from '@mui/material/TextField'
+
+import ListAttributeEditor, {
+  type ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import type { withMotePool } from 'utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props
@@ -16,6 +15,7 @@ function CommitFields(props: ListAttributeFieldTypes) {
   return (
     <>
       <MuiTextField
+        variant="standard"
         select
         name="pool"
         value={pool}
@@ -83,8 +83,4 @@ const MoteCommittmentEditor = ({ character, onChange }: Props) => {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, ['motes_committed']),
-)
-export default enhance(MoteCommittmentEditor)
+export default MoteCommittmentEditor

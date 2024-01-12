@@ -1,49 +1,50 @@
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import { WithStyles } from '@mui/styles'
+import ButtonBase from '@mui/material/ButtonBase'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+
 import { updateCharacter, updateQc } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { prettyAnimaLevel } from 'utils/calculated'
 import type { withMotePool, Enhancer } from 'utils/flow-types'
 import { Character } from 'types'
-import { WithStyles } from '@material-ui/styles'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    wrap: {
-      marginRight: theme.spacing(),
-      minWidth: '8em',
-      textAlign: 'left',
-    },
-    animaLabel: {
-      ...theme.typography.body1,
-      fontSize: '0.75rem',
-      fontWeight: 500,
-      opacity: 0.7,
-      textAlign: 'left',
-      paddingLeft: '0.25rem',
-    },
-    valueWrap: {
-      textAlign: 'left',
-    },
-    animaCurrent: {
-      ...theme.typography.h4,
-      display: 'inline-block',
-      fontSize: '1.75rem',
-      verticalAlign: 'top',
-    },
-    animaValue: {
-      ...theme.typography.caption,
-      display: 'inline-block',
-      verticalAlign: 'top',
-      marginTop: '0.25em',
-      marginLeft: '0.25em',
-    },
-  })
+const styles = (theme) => ({
+  wrap: {
+    marginRight: theme.spacing(),
+    minWidth: '8em',
+    textAlign: 'left',
+  },
+  animaLabel: {
+    ...theme.typography.body1,
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    opacity: 0.7,
+    textAlign: 'left',
+    paddingLeft: '0.25rem',
+  },
+  valueWrap: {
+    textAlign: 'left',
+  },
+  animaCurrent: {
+    ...theme.typography.h4,
+    display: 'inline-block',
+    fontSize: '1.75rem',
+    verticalAlign: 'top',
+  },
+  animaValue: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    verticalAlign: 'top',
+    marginTop: '0.25em',
+    marginLeft: '0.25em',
+  },
+})
 
 interface ExposedProps {
   character: withMotePool & {
@@ -61,22 +62,21 @@ interface State {
   anchor: EventTarget | null
 }
 
-class AnimaDisplay extends React.Component<Props, State> {
+class AnimaDisplay extends Component<Props, State> {
   state = {
     anchor: null,
   }
-  handleOpen = (e: MouseEvent) => {
-    if (this.props.canEdit)
-      this.setState({
-        anchor: e.currentTarget,
-      })
+
+  handleOpen = (e) => {
+    if (this.props.canEdit) this.setState({ anchor: e.currentTarget })
   }
   handleClose = () => {
     this.setState({
       anchor: null,
     })
   }
-  handleChange = (anima: Character['anima_level']) => {
+
+  handleChange = (anima) => {
     this.props.update(this.props.character.id, anima)
     this.setState({
       anchor: null,

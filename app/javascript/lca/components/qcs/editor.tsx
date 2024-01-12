@@ -1,31 +1,29 @@
 import { deepEqual } from 'fast-equals'
-import React, { ChangeEvent, Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import QcActionEditor from './qcActionEditor'
-import QcAttackEditor from './qcAttackEditor'
-import QcCharmEditor from './qcCharmEditor'
-import QcExcellencySelect from './QcExcellencySelect'
-import QcMeritEditor from './qcMeritEditor'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+
+import QcActionEditor from './qcActionEditor.jsx'
+import QcAttackEditor from './qcAttackEditor.jsx'
+import QcCharmEditor from './qcCharmEditor.jsx'
+import QcExcellencySelect from './QcExcellencySelect.jsx'
+import QcMeritEditor from './qcMeritEditor.jsx'
 import QcSpellEditor from './QcSpellEditor'
-import AnimaSelect from '../generic/AnimaSelect'
-import BlockPaper from '../generic/blockPaper'
-import HealthLevelBoxes from '../generic/HealthLevelBoxes'
-import IntimacyEditor from '../generic/intimacyEditor'
-import RatingField from '../generic/RatingField'
-import TextField from '../generic/TextField'
+import AnimaSelect from '../generic/AnimaSelect.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
+import IntimacyEditor from '../generic/intimacyEditor.jsx'
+import RatingField from '../generic/RatingField.jsx'
+import TextField from '../generic/TextField.jsx'
 import AuraSelect from 'components/shared/selects/AuraSelect'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateQc } from 'ducks/actions'
 import { getSpecificQc, canIDeleteQc } from 'selectors'
 import commonStyles from 'styles'
@@ -33,32 +31,31 @@ import { woundPenalty } from 'utils/calculated'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 import { State } from 'ducks'
 
-const styles = (theme: Theme) => createStyles({ ...commonStyles(theme) })
+const styles = (theme) => ({
+  ...commonStyles(theme),
+})
 
-interface ExposedProps {
-  match: {
-    params: {
-      qcId: number
-    }
-  }
+type ExposedProps = {
+  match: { params: { id: number } }
 }
-type Props = ExposedProps &
-  WithStyles<typeof styles> & {
-    qc: fullQc
-    showPublicCheckbox: boolean
-    updateQc: $TSFixMeFunction
-  }
+type Props = ExposedProps & {
+  qc: fullQc
+  showPublicCheckbox: boolean
+  updateQc: Function
+  classes: Object
+}
 
 class QcEditor extends Component<Props> {
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e) => {
     const { name, value } = e.target
     const { qc } = this.props
+
     if (deepEqual(qc[name], value)) return
-    this.props.updateQc(qc.id, {
-      [name]: value,
-    })
+
+    this.props.updateQc(qc.id, { [name]: value })
   }
-  handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
+
+  handleCheck = (e) => {
     const { name } = e.target
     const { qc } = this.props
     const value = !qc[name]
@@ -150,7 +147,7 @@ class QcEditor extends Component<Props> {
               multiline
               fullWidth
               onChange={handleChange}
-              rowsMax={5}
+              maxRows={5}
             />
 
             <TextField
@@ -484,8 +481,8 @@ class QcEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state: State, ownProps: ExposedProps) {
-  const id = ownProps.match.params.qcId
+function mapStateToProps(state, ownProps: ExposedProps) {
+  const id = ownProps.params.id
   const qc = getSpecificQc(state, id)
   const showPublicCheckbox = canIDeleteQc(state, id)
   return {
@@ -496,9 +493,8 @@ function mapStateToProps(state: State, ownProps: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps, {
-    updateQc,
-  }),
+  withRouter,
+  connect(mapStateToProps, { updateQc }),
   withStyles(styles),
   ProtectedComponent,
 )

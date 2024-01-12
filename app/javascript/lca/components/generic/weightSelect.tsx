@@ -1,20 +1,17 @@
-import * as React from 'react'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-import { WithStyles } from '@material-ui/styles'
+import withStyles from '@mui/styles/withStyles'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    field: {
-      marginRight: theme.spacing(),
-      width: '5.65em',
-    },
-    armor: {
-      marginRight: theme.spacing(),
-      width: '7em',
-    },
-  })
+const styles = (theme) => ({
+  field: {
+    marginRight: theme.spacing(),
+    width: '5.65em',
+  },
+  armor: {
+    marginRight: theme.spacing(),
+    width: '7em',
+  },
+})
 
 interface Props extends WithStyles<typeof styles> {
   name: string
@@ -27,6 +24,7 @@ interface Props extends WithStyles<typeof styles> {
 
 const WeightSelect = (props: Props) => (
   <TextField
+    variant="standard"
     select
     label="Weight"
     name={props.name}

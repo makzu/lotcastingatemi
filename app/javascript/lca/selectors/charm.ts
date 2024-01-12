@@ -4,12 +4,10 @@ import { isDefined, sortOrderSort } from 'utils'
 import { WrappedEntityState } from 'ducks/entities/_types'
 import { Character, Charm, Spell } from 'types'
 
-const characterIdMemoizer = (state: WrappedEntityState, id: number) => id
-
-const getSpecificCharacter = (state: WrappedEntityState, id: Character['id']) =>
-  entities(state).characters[id]
+import { getSpecificCharacter } from '@/ducks/entities/character'
 
 const getCharms = (state: WrappedEntityState) => entities(state).charms
+const characterIdMemoizer = (_state: WrappedEntityState, id: number) => id
 
 export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],

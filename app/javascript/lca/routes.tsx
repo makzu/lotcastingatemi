@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
+import { Route, Routes as Switch } from 'react-router-dom'
 
 import Placeholder from 'components/generic/Placeholder'
 import WelcomePage from 'components/pages/WelcomePage'
@@ -25,9 +25,7 @@ const CharmEditor = lazy(
 const QcSheet = lazy(() => import('components/qcs/index'))
 const QcEditor = lazy(() => import('components/qcs/editor'))
 const BattlegroupSheet = lazy(() => import('components/battlegroups/index'))
-const BattlegroupEditor = lazy(
-  () => import('components/battlegroups/editor'),
-)
+const BattlegroupEditor = lazy(() => import('components/battlegroups/editor'))
 const ResourcesPage = lazy(() => import('components/pages/ResourcesPage'))
 const HelpPage = lazy(() => import('components/pages/Help'))
 
@@ -35,42 +33,33 @@ export default function Routes() {
   return (
     <Suspense fallback={<Placeholder />}>
       <Switch>
-        <Route path="/settings" component={SettingsPage} />
-        <Route path="/deleted" component={GoodbyePage} />
-        <Route path="/resources" component={ResourcesPage} />
-        <Route path="/privacy" component={PrivacyPage} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/deleted" element={<GoodbyePage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
 
-        <Route path="/help/:doc.:ext?" component={HelpPage} />
-        <Route path="/help" component={HelpPage} />
+        <Route path="/help/:doc" element={<HelpPage />} />
+        <Route path="/help" element={<HelpPage />} />
 
-        <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
+        <Route path="/chronicles/:id/*" element={<ChronicleWrapper />} />
 
-        <Route
-          path="/characters/:characterId/edit/charms"
-          component={CharmEditor}
-        />
+        <Route path="/characters/:id/edit/charms" element={<CharmEditor />} />
 
-        <Route
-          path="/characters/:characterId/edit"
-          component={CharacterEditor}
-        />
+        <Route path="/characters/:id/edit/*" element={<CharacterEditor />} />
 
-        <Route path="/characters/:id/" component={CharacterSheetWrap} />
+        <Route path="/characters/:id/*" element={<CharacterSheetWrap />} />
 
-        <Route path="/qcs/:qcId/edit" component={QcEditor} />
-        <Route path="/qcs/:qcId" component={QcSheet} />
+        <Route path="/qcs/:id/edit" element={<QcEditor />} />
+        <Route path="/qcs/:id" element={<QcSheet />} />
 
-        <Route
-          path="/battlegroups/:battlegroupId/edit"
-          component={BattlegroupEditor}
-        />
-        <Route path="/battlegroups/:bgId" component={BattlegroupSheet} />
+        <Route path="/battlegroups/:id/edit" element={<BattlegroupEditor />} />
+        <Route path="/battlegroups/:id" element={<BattlegroupSheet />} />
 
-        <Route path="/characters" component={CharacterList} />
-        <Route path="/qcs" component={QcList} />
-        <Route path="/battlegroups" component={BattlegroupList} />
+        <Route path="/characters" element={<CharacterList />} />
+        <Route path="/qcs" element={<QcList />} />
+        <Route path="/battlegroups" element={<BattlegroupList />} />
 
-        <Route path="/" component={WelcomePage} />
+        <Route path="/" element={<WelcomePage />} />
       </Switch>
     </Suspense>
   )

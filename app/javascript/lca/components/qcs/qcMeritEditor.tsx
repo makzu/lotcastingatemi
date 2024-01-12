@@ -1,12 +1,15 @@
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
-import QcMeritFields from './qcMeritFields'
-import SortableGridList from 'components/generic/SortableGridList'
+
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
+
+import QcMeritFields from './qcMeritFields.jsx'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
+
 import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions'
 import { getMeritsForQc } from 'selectors'
 import type { fullQc, QcMerit, Enhancer } from 'utils/flow-types'
@@ -22,8 +25,8 @@ type Props = ExposedProps & {
   destroyQcMerit: $TSFixMeFunction
 }
 
-class QcMeritEditor extends React.Component<Props> {
-  handleChange = (id, trait: Partial<QcMerit>) => {
+class QcMeritEditor extends Component<Props> {
+  handleChange = (id, trait) => {
     this.props.updateQcMerit(id, this.props.qc.id, trait)
   }
   handleAdd = () => {

@@ -1,4 +1,3 @@
-import React from 'react'
 import renderer from 'react-test-renderer'
 import RatingField from '../../../components/generic/RatingField'
 test('RatingField renders at all', () => {

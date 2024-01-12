@@ -4,13 +4,12 @@ import {
   Charm,
   Chronicle,
   Merit,
+  Player,
   Poison,
   QC,
   Spell,
   Weapon,
 } from 'types'
-import { Player } from './player'
-import { QcAttack, QcCharm, QcMerit } from 'utils/flow-types'
 
 export interface EntityState {
   currentPlayer: number

@@ -1,8 +1,6 @@
-import * as React from 'react'
+import { MenuItem, TextField } from '@mui/material'
 
-import { MenuItem, TextField } from '@material-ui/core'
-
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { TextFieldProps } from '@mui/material/TextField'
 import { ExaltType } from 'types'
 import { WithAura } from 'types/shared'
 
@@ -16,6 +14,7 @@ interface Props extends Pick<TextFieldProps, 'onChange'> {
 
 const AuraSelect = ({ character, onChange, ...props }: Props) => (
   <TextField
+    variant="standard"
     select
     name="aura"
     value={character.aura}

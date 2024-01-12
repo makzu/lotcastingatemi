@@ -1,12 +1,11 @@
-import pool from './_pool'
+import { Character, penaltyObj } from '@/types'
 import { penaltyObject } from '../index'
-import { Character } from 'types'
-import { PenaltyInput } from 'selectors'
+import pool from './_pool'
 
 export function shapeSorcery(
   character: Character,
   merits: string[],
-  penalties: PenaltyInput,
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   const vitalFocus = merits.some((m) => m.startsWith('vital focus cultivation'))
@@ -17,9 +16,7 @@ export function shapeSorcery(
     'intelligence',
     'occult',
     [],
-    penaltyObject(penalties, {
-      useWound: !vitalFocus,
-    }),
+    penaltyObject(penalties, { useWound: !vitalFocus }),
     excellencyAbils,
   )
 }

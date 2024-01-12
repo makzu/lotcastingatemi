@@ -1,20 +1,19 @@
-import React from 'react'
-import DocumentTitle from 'react-document-title'
-import { useDispatch, useSelector } from 'react-redux'
+import { SortableElement } from 'react-sortable-hoc'
 
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
 import SortableGridList from 'components/generic/SortableGridList'
 import QcCard from 'components/qcs/QcCard'
 import QcCreatePopup from 'components/qcs/qcCreatePopup'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks'
 import { getMyQcs, updateQc } from 'ducks/entities'
-import SortableItem from 'components/generic/SortableItem'
+import { useAppDispatch, useAppSelector, useDocumentTitle } from 'hooks'
+import SortableItem from '../generic/SortableItem'
 
 const QcList = () => {
-  const qcs = useSelector((state: State) => getMyQcs(state))
-  const dispatch = useDispatch()
+  useDocumentTitle('Qcs | Lot-Casting Atemi')
+  const qcs = useAppSelector((state) => getMyQcs(state))
+  const dispatch = useAppDispatch()
 
   const chars = qcs.map((c, i) => (
     <SortableItem key={c.id} index={i} collection="qcs">
@@ -45,8 +44,6 @@ const QcList = () => {
 
   return (
     <>
-      <DocumentTitle title="Qcs | Lot-Casting Atemi" />
-
       <SortableGridList
         header={
           <Typography variant="h5">

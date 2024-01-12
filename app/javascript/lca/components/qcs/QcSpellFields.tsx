@@ -1,31 +1,23 @@
-import * as React from 'react'
+import { ChangeEvent } from 'react'
 
-import Button from '@material-ui/core/Button'
-// import Checkbox from '@material-ui/core/Checkbox'
-import { WithStyles } from '@material-ui/core/styles'
-import Delete from '@material-ui/icons/Delete'
+import Delete from '@mui/icons-material/Delete'
+import { Box, Button } from '@mui/material'
 
-import BlockPaper from 'components/generic/blockPaper'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
+import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import SpellCircleSelect from 'components/shared/selects/SpellCircleSelect'
-import commonStyles from 'styles'
 import { Spell } from 'types'
 
-interface Props extends WithStyles<typeof commonStyles> {
+interface Props {
   spell: Spell
-  handleChange(id: number, trait: $TSFixMe): void
+  handleChange(id: number, trait: Partial<Spell>): void
   handleDestroy(id: number): void
 }
 
-const QcSpellFields = ({
-  spell,
-  handleChange,
-  handleDestroy,
-  classes,
-}: Props) => {
-  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
+const QcSpellFields = ({ spell, handleChange, handleDestroy }: Props) => {
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) =>
     handleChange(spell.id, { [target.name]: target.value })
 
   return (
@@ -43,26 +35,26 @@ const QcSpellFields = ({
           'data-lp-ignore': 'true',
         }}
       />
-      <div className={classes.flexContainer}>
+      <Box sx={{ display: 'flex' }}>
         <TextField
           name="cost"
           value={spell.cost}
           onChange={onChange}
           label="Cost"
           margin="dense"
-          style={{ flex: 1 }}
+          sx={{ flex: 1 }}
         />
         <SpellCircleSelect spell={spell} onChange={onChange} />
-      </div>
+      </Box>
 
-      <div className={classes.flexContainer}>
+      <Box sx={{ display: 'flex' }}>
         <TextField
           name="duration"
           value={spell.duration}
           onChange={onChange}
           label="Duration"
           margin="dense"
-          style={{ flex: 1 }}
+          sx={{ flex: 1 }}
         />
 
         <Checkbox
@@ -71,7 +63,7 @@ const QcSpellFields = ({
           value={spell.control}
           onChange={onChange}
         />
-      </div>
+      </Box>
 
       <TagsField
         trait="keywords"
@@ -91,25 +83,26 @@ const QcSpellFields = ({
         label="Effect"
         margin="dense"
         rows={2}
-        rowsMax={15}
+        maxRows={15}
       />
 
-      <div className={classes.flexContainer}>
+      <Box sx={{ display: 'flex' }}>
         <TextField
           name="ref"
           value={spell.ref}
           onChange={onChange}
           label="Reference"
           margin="dense"
-          style={{ flex: 1 }}
+          sx={{ flex: 1 }}
         />
 
         <Button onClick={() => handleDestroy(spell.id)}>
           Delete
           <Delete />
         </Button>
-      </div>
+      </Box>
     </BlockPaper>
   )
 }
+
 export default QcSpellFields

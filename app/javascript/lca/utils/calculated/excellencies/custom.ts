@@ -1,20 +1,21 @@
-import { attr, abil, specialtiesFor } from '..'
-import { halfRoundUp, halfRoundDown } from 'utils'
-import { ABILITIES, ATTRIBUTES } from 'utils/constants'
-import { Ability, Attribute, Character } from 'types'
+import { Character } from '@/types'
+import { halfRoundDown, halfRoundUp } from '@/utils'
+import { ABILITIES, Ability } from '@/utils/constants.new/abilities'
+import { ATTRIBUTES, Attribute } from '@/utils/constants.new/attributes'
+import { abil, attr, specialtiesFor } from '..'
 
-export const highestOtherAbility = (character: Character, ability: string) => {
-  const result = ABILITIES.filter((a) => a.abil !== `abil_${ability}`).map(
-    (a) => character[a.abil],
+export const highestOtherAbility = (character: Character, ability: Ability) => {
+  const result = ABILITIES.filter((a) => a !== ability).map((a) =>
+    abil(character, a),
   )
   return Math.max(...result)
 }
 export const highestOtherAttribute = (
   character: Character,
-  attribute: string,
+  attribute: Attribute,
 ) => {
-  const result = ATTRIBUTES.filter((a) => a.attr !== `attr_${attribute}`).map(
-    (a) => character[a.attr],
+  const result = ATTRIBUTES.filter((a) => a !== attribute).map((a) =>
+    attr(character, a),
   )
   return Math.max(...result)
 }
@@ -28,7 +29,6 @@ export default (
   const excellency = stunt ? character.excellency_stunt : character.excellency
   let result = 0
   const exArray = excellency.split('+') || []
-
   for (const ex of exArray) {
     switch (ex) {
       case 'solar':

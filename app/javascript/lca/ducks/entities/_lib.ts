@@ -4,9 +4,10 @@ import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { Action } from 'redux'
 import { ActionFunctionAny, createAction } from 'redux-actions'
 
-import { State } from 'ducks'
 import * as schemas from './_schemas'
 import { EntityState } from './_types'
+import { RootState } from 'store'
+import { defaultState } from '.'
 
 export type characterTraitTypes =
   | 'charm'
@@ -57,8 +58,7 @@ export interface CrudActionGroup {
 }
 
 export const massagePayload =
-  (type: entityTypes | listTypes) =>
-  (_payload: unknown = {}, _meta: unknown = {}, res: $TSFixMe) =>
+  (type: entityTypes | listTypes | string) => (_a: unknown, _b: unknown, res) =>
     getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
 
 export const successMeta = (_: null, __: null, { headers }: Response) => ({
@@ -133,4 +133,5 @@ export const reducerUpdateAction =
   }
 
 /** Simply unwraps the entity portion of the state */
-export const unwrapped = (state: State): EntityState => state.entities.current
+export const unwrapped = (state: RootState): EntityState =>
+  state.entities.current

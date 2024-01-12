@@ -1,6 +1,4 @@
-import * as React from 'react'
-
-import { ListItemText } from '@material-ui/core'
+import { ListItemText } from '@mui/material'
 
 import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
 
@@ -10,7 +8,7 @@ interface Props {
   desc?: string
 }
 const EntityListItem = ({ link, name, desc }: Props) => (
-  <NavLinkListItem to={link} exact={false}>
+  <NavLinkListItem to={link}>
     <ListItemText primary={name} secondary={desc} />
   </NavLinkListItem>
 )

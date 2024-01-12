@@ -1,99 +1,106 @@
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from '../generic/blockPaper'
-import PoolDisplay from '../generic/PoolDisplay'
-import SpendableBlock from '../generic/SpendableBlock'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
-import sharedStyles from 'styles/'
+
+import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
+
+import BlockPaper from 'components/shared/BlockPaper'
+import MarkdownDisplay, {
+  LinkRenderer,
+} from 'components/shared/MarkdownDisplay'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { fetchQcIfNecessary } from 'ducks/entities/qc'
 import { getSpellsForQc } from 'ducks/selectors'
 import {
   canIEditQc,
-  getSpecificQc,
   getAttacksForQc,
-  getMeritsForQc,
   getCharmsForQc,
+  getMeritsForQc,
   getPenaltiesForQc,
   getPoolsAndRatingsForQc,
+  getSpecificQc,
 } from 'selectors'
+import sharedStyles from 'styles/'
 import { prettyIntimacyRating, qcPool } from 'utils/calculated'
-import type { fullQc, QcMerit, QcAttack, QcCharm } from 'utils/flow-types'
-import { RootState } from 'store'
-import { WithStyles } from '@material-ui/styles'
-import { Spell } from 'types'
+import type { fullQc, QcAttack, QcCharm, QcMerit } from 'utils/flow-types'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    ...sharedStyles(theme),
-    rowContainer: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    moteWrap: {
-      marginRight: theme.spacing(),
-    },
-    poolBlock: {
-      marginRight: theme.spacing(),
-      marginTop: theme.spacing(),
-      width: '4.5rem',
-      maxHeight: '5.5rem',
-      overflow: 'hidden',
-    },
-    intimacy: { ...theme.typography.body1 },
-    intimacyTypeLabel: { ...theme.typography.caption },
-    label: {
-      ...theme.typography.body1,
-      fontSize: '0.75rem',
-      fontWeight: 500,
-      opacity: 0.7,
-      width: '5em',
-      display: 'flex',
-    },
-    labelSpan: {
-      alignSelf: 'flex-end',
-    },
-    name: {
-      ...theme.typography.body2,
-      width: '10rem',
-      margin: theme.spacing(),
-      marginLeft: 0,
-      maxHeight: '5rem',
-      textTransform: 'capitalize',
-      overflow: 'hidden',
-    },
-    tags: {
-      ...theme.typography.body1,
-      margin: theme.spacing(),
-      marginLeft: 0,
-      textTransform: 'capitalize',
-      maxHeight: '5rem',
-      overflow: 'hidden',
-    },
-    portrait: {
-      maxWidth: '100%',
-      display: 'block',
-      margin: 'auto',
-    },
-    portraitWrap: {
-      //textAlign: 'center',
-    },
-  })
+const styles = (theme) => ({
+  ...sharedStyles(theme),
+  rowContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  moteWrap: {
+    marginRight: theme.spacing(),
+  },
+  poolBlock: {
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
+    width: '4.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
+  intimacy: {
+    ...theme.typography.body1,
+  },
+  intimacyTypeLabel: {
+    ...theme.typography.caption,
+  },
+  label: {
+    ...theme.typography.body1,
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    opacity: 0.7,
+    width: '5em',
+    display: 'flex',
+  },
+  labelSpan: {
+    alignSelf: 'flex-end',
+  },
+  name: {
+    ...theme.typography.body2,
+    width: '10rem',
+    margin: theme.spacing(),
+    marginLeft: 0,
+    maxHeight: '5rem',
+    textTransform: 'capitalize',
+    overflow: 'hidden',
+  },
+  tags: {
+    ...theme.typography.body1,
+    margin: theme.spacing(),
+    marginLeft: 0,
+    textTransform: 'capitalize',
+    maxHeight: '5rem',
+    overflow: 'hidden',
+  },
+  portrait: {
+    maxWidth: '100%',
+    display: 'block',
+    margin: 'auto',
+  },
+  portraitWrap: {
+    //textAlign: 'center',
+  },
+})
 
-interface Props extends WithStyles<typeof styles> {
+type Props = {
   id: string
   qc: fullQc
-  qc_merits: QcMerit[]
-  qc_charms: QcCharm[]
-  qc_attacks: QcAttack[]
-  spells: Spell[]
-  pools: Record<string, $TSFixMe>
-  penalties: Record<string, $TSFixMe>
+  qc_merits: Array<QcMerit>
+  qc_charms: Array<QcCharm>
+  qc_attacks: Array<QcAttack>
+  spells: Array<object>
+  pools: object
+  penalties: object
+  classes: object
   canEdit: boolean
   loading: boolean
-  fetch: $TSFixMeFunction
+  fetch: void
 }
 
 class QcSheet extends Component<Props> {
@@ -448,8 +455,8 @@ class QcSheet extends Component<Props> {
   }
 }
 
-function mapStateToProps(state: RootState, props: Props) {
-  const id = props.match.params.qcId
+function mapStateToProps(state, props) {
+  const id = props.params.id
   const qc = getSpecificQc(state, id)
   let qc_attacks = []
   let qc_charms = []
@@ -481,10 +488,10 @@ function mapStateToProps(state: RootState, props: Props) {
   }
 }
 
-export default ProtectedComponent(
-  withStyles(styles)(
-    connect(mapStateToProps, {
-      fetch: fetchQcIfNecessary,
-    })(QcSheet),
+export default withRouter(
+  ProtectedComponent(
+    withStyles(styles)(
+      connect(mapStateToProps, { fetch: fetchQcIfNecessary })(QcSheet),
+    ),
   ),
 )

@@ -1,6 +1,6 @@
-import React from 'react'
-import Typography from '@material-ui/core/Typography'
-interface Props {
+import Typography from '@mui/material/Typography'
+
+type Props = {
   name: string
   rating: number
 }
@@ -8,7 +8,7 @@ interface Props {
 const MeritEffectBlurb = ({ name, rating }: Props) => {
   let effect
 
-  switch ((name || '').toLowerCase()) {
+  switch ((name ?? '').toLowerCase()) {
     case 'exalted healing':
       effect = 'Will heal as an exalt during downtime'
       break

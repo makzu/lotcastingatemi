@@ -1,6 +1,5 @@
-import React from 'react'
-import AttributeLine from './attributeLine'
-import type { Props } from './attributeBlock'
+import AttributeLine from './attributeLine.jsx'
+import type { Props } from './attributeBlock.jsx'
 
 function AttributeBlockMental({ character, pools }: Props) {
   return (

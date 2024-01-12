@@ -1,6 +1,7 @@
-import * as React from 'react'
+import { ChangeEvent, useState } from 'react'
 import { connect } from 'react-redux'
 
+import { SwapHoriz } from '@mui/icons-material'
 import {
   Button,
   Dialog,
@@ -12,8 +13,7 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
-} from '@material-ui/core'
-import { SwapHoriz } from '@material-ui/icons'
+} from '@mui/material'
 
 import ExaltTypeSelect, {
   prettyType,
@@ -43,7 +43,7 @@ const MenuChangeCharacterType = ({
   action,
 }: InnerProps) => {
   const [isOpen, handleOpen, handleClose] = useDialogLogic()
-  const [selectedType, setSelectedType] = React.useState(currentType)
+  const [selectedType, setSelectedType] = useState(currentType)
 
   if (!canEdit || characterType !== 'character') {
     return null
@@ -57,7 +57,7 @@ const MenuChangeCharacterType = ({
     handleClose()
   }
 
-  const actuallySet = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const actuallySet = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') {
       return
     }
@@ -69,7 +69,7 @@ const MenuChangeCharacterType = ({
     <>
       <Divider />
 
-      <MenuItem button onClick={handleOpen}>
+      <MenuItem onClick={handleOpen}>
         <ListItemIcon>
           <SwapHoriz />
         </ListItemIcon>

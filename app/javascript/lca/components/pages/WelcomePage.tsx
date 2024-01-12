@@ -1,14 +1,12 @@
-import React from 'react'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
 
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-
-import BlockPaper from '../generic/blockPaper'
+import BlockPaper from 'components/shared/BlockPaper'
 
 const WelcomePage = () => (
   <Grid container spacing={3}>
-    <Hidden mdDown>
+    <Hidden lgDown>
       <Grid item xs={2} />
     </Hidden>
 
@@ -42,7 +40,7 @@ const WelcomePage = () => (
       <div style={{ height: '8em' }} />
     </Grid>
 
-    <Hidden mdDown>
+    <Hidden lgDown>
       <Grid item xs={1} />
     </Hidden>
     <Grid item xs={12} lg={6}>
@@ -98,7 +96,7 @@ const WelcomePage = () => (
         </Typography>
       </BlockPaper>
     </Grid>
-    <Hidden mdDown>
+    <Hidden lgDown>
       <Grid item lg={6}>
         <Typography variant="h3">
           Ideal Battle(group) Knowledge Prana
@@ -110,7 +108,7 @@ const WelcomePage = () => (
       <div style={{ height: '5em' }} />
     </Grid>
 
-    <Hidden mdDown>
+    <Hidden lgDown>
       <Grid item xs={1} />
     </Hidden>
     <Grid item xs={12} lg={6}>

@@ -58,7 +58,7 @@ group :development, :test do
   gem 'byebug', '~> 11.1', platform: :mri
   gem 'cypress-on-rails', '~> 1.13'
   gem 'database_cleaner-active_record', '~> 2.1'
-  gem 'factory_bot_rails', '~> 6.2'
+  gem 'factory_bot_rails', '~> 6.2.0'
   gem 'rspec-rails', '~> 6.0'
 
   # Linting

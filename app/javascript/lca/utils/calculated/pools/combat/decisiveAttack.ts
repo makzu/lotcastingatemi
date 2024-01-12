@@ -1,7 +1,7 @@
-import pool from '../_pool'
+import type { Character, PoolBonus, Weapon, penaltyObj } from '@/types'
 import { penaltyObject } from '../../index'
-import type { Character, PoolBonus, fullWeapon } from 'utils/flow-types'
-import { PenaltyInput } from 'selectors'
+import pool from '../_pool'
+
 const supportedTags = [
   'chopping',
   'disarming',
@@ -20,9 +20,9 @@ const supportedTags = [
   'air',
   'water',
   'wood',
-]
+] as const
 
-function weaponDamageType(weapon: fullWeapon) {
+function weaponDamageType(weapon: Weapon) {
   if (weapon.tags.includes('aggravated')) return 'Aggravated'
   else if (
     weapon.tags.includes('lethal') ||
@@ -42,12 +42,12 @@ function weaponDamageType(weapon: fullWeapon) {
 
 export function decisiveAttack(
   character: Character,
-  weapon: fullWeapon,
-  penalties: PenaltyInput,
+  weapon: Weapon,
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]
-  let specialAttacks: string[] = []
+  let specialAttacks = []
   if (weapon.tags.includes('paired') || weapon.tags.includes('two-handed'))
     bonus = bonus.concat([
       {

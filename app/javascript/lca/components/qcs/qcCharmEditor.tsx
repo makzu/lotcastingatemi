@@ -1,40 +1,40 @@
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
-import QcCharmFields from './qcCharmFields'
-import SortableGridList from 'components/generic/SortableGridList'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
+
+import QcCharmFields from './qcCharmFields.jsx'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
+
 import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions'
 import { getCharmsForQc } from 'selectors'
 import commonStyles from 'styles'
 import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'
 import { State } from 'ducks'
 import SortableItem from 'components/generic/SortableItem'
+import { createStyles } from '@mui/styles'
+import { Theme } from '@mui/material/styles'
 
 const styles = (theme: Theme) => createStyles({ ...commonStyles(theme) })
 
-interface ExposedProps {
+type ExposedProps = {
   qc: fullQc
 }
-type Props = ExposedProps &
-  WithStyles<typeof styles> & {
-    qc_charms: QcCharm[]
-    updateQcCharm: $TSFixMeFunction
-    createQcCharm: $TSFixMeFunction
-    destroyQcCharm: $TSFixMeFunction
-  }
+type Props = ExposedProps & {
+  qc_charms: Array<QcCharm>
+  updateQcCharm: Function
+  createQcCharm: Function
+  destroyQcCharm: Function
+  classes: Object
+}
 
-class QcCharmEditor extends React.Component<Props> {
+class QcCharmEditor extends Component<Props> {
   handleChange = (id: number, trait: Partial<fullQc>) => {
     this.props.updateQcCharm(id, this.props.qc.id, trait)
   }

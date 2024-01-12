@@ -1,20 +1,22 @@
-import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import withStyles, { WithStyles } from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
 
-import styles from './CharmStyles'
-import CharmFields from './CharmFields'
-import CharmFilter from './CharmFilter'
-import SpellFields from './SpellFields'
-import SortableGridList from 'components/generic/SortableGridList'
+import styles from './CharmStyles.js'
+import CharmFields from './CharmFields.jsx'
+import CharmFilter from './CharmFilter.jsx'
+import SpellFields from './SpellFields.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
+
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import {
   updateCharm,
   createCharm,
@@ -33,7 +35,6 @@ import {
   getSpiritCharmsForCharacter,
 } from 'selectors/'
 import type { Character, Charm, Spell } from 'utils/flow-types'
-import { WithStyles } from '@material-ui/styles'
 import SortableItem from 'components/generic/SortableItem'
 import { Merit } from 'types'
 import { RootState } from 'store'
@@ -82,10 +83,10 @@ class CharmEditor extends Component<Props, State> {
     this.handleSort = this.handleSort.bind(this)
   }
 
+  props: Props
+
   setFilter = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    })
+    this.setState({ [e.target.name]: e.target.value })
   }
   toggleFiltersOpen = () => {
     this.setState({
@@ -158,9 +159,11 @@ class CharmEditor extends Component<Props, State> {
   handleAddSpell = () => {
     this.props.createSpell(this.props.character.id)
   }
+
   handleRemove = (id) => {
     this.props.destroyCharm(id, this.props.character.id)
   }
+
   handleRemoveSpell = (id) => {
     this.props.destroySpell(id, this.props.character.id)
   }
@@ -386,7 +389,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Charms &nbsp;&nbsp;
                   <Button onClick={handleAddNative}>
-                    Add <Hidden smDown>Charm</Hidden>
+                    Add <Hidden mdDown>Charm</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>
@@ -412,7 +415,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Martial Arts &nbsp;&nbsp;
                   <Button onClick={handleAddMA}>
-                    Add <Hidden smDown>MA Charm</Hidden>
+                    Add <Hidden mdDown>MA Charm</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>
@@ -438,7 +441,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Evocations &nbsp;&nbsp;
                   <Button onClick={handleAddEvocation}>
-                    Add <Hidden smDown>Evocation</Hidden>
+                    Add <Hidden mdDown>Evocation</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>
@@ -464,7 +467,7 @@ class CharmEditor extends Component<Props, State> {
                 <Typography variant="h5">
                   Spirit Charms &nbsp;&nbsp;
                   <Button onClick={handleAddSpirit}>
-                    Add <Hidden smDown>Spirit Charm</Hidden>
+                    Add <Hidden mdDown>Spirit Charm</Hidden>
                     &nbsp;
                     <ContentAddCircle />
                   </Button>
@@ -517,8 +520,8 @@ class CharmEditor extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state: RootState, ownProps) {
-  const id = ownProps.match.params.characterId
+function mapStateToProps(state, ownProps) {
+  const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
   let nativeCharms: Charm[] = []
   let martialArtsCharms: Charm[] = []
@@ -548,14 +551,16 @@ function mapStateToProps(state: RootState, ownProps) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(
-    connect(mapStateToProps, {
-      createCharm,
-      updateCharm,
-      destroyCharm,
-      createSpell,
-      updateSpell,
-      destroySpell,
-    })(CharmEditor),
+  withRouter(
+    withStyles(styles)(
+      connect(mapStateToProps, {
+        createCharm,
+        updateCharm,
+        destroyCharm,
+        createSpell,
+        updateSpell,
+        destroySpell,
+      })(CharmEditor),
+    ),
   ),
 )

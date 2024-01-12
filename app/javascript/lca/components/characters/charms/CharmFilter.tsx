@@ -1,10 +1,11 @@
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Hidden from '@material-ui/core/Hidden'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-import Filter from '@material-ui/icons/FilterList'
+
+import Button from '@mui/material/Button'
+import Hidden from '@mui/material/Hidden'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import Filter from '@mui/icons-material/FilterList'
 import {
   getPoolsAndRatings,
   getAllAbilitiesWithCharmsForCharacter,
@@ -30,7 +31,7 @@ export type Props = ExposedProps & {
   categories: string[]
 }
 
-class CharmFilter extends React.Component<Props> {
+class CharmFilter extends Component<Props> {
   render() {
     const {
       abilities,
@@ -78,8 +79,7 @@ class CharmFilter extends React.Component<Props> {
       default:
         filterLabel = 'derp'
     }
-
-    const filterOptions: React.ReactNode = [
+    const filterOptions: Node = [
       <MenuItem key="none" value={null}>
         No Filter
       </MenuItem>,
@@ -116,13 +116,7 @@ class CharmFilter extends React.Component<Props> {
       }),
     ]
     const catOptions = categories.map((cat) => (
-      <MenuItem
-        key={cat}
-        value={cat}
-        style={{
-          textTransform: 'capitalize',
-        }}
-      >
+      <MenuItem key={cat} value={cat} style={{ textTransform: 'capitalize' }}>
         {cat}
       </MenuItem>
     ))
@@ -133,7 +127,7 @@ class CharmFilter extends React.Component<Props> {
       <>
         <Button onClick={toggleOpen}>
           Filter{' '}
-          <Hidden mdDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
+          <Hidden lgDown>{charmType === 'spell' ? 'Spells' : 'Charms'}</Hidden>
           &nbsp;
           <Filter />
         </Button>
@@ -142,6 +136,7 @@ class CharmFilter extends React.Component<Props> {
             {showFilter && (
               <>
                 <TextField
+                  variant="standard"
                   select
                   style={{
                     minWidth: '8em',
@@ -160,6 +155,7 @@ class CharmFilter extends React.Component<Props> {
             )}
 
             <TextField
+              variant="standard"
               select
               style={{
                 minWidth: '8em',

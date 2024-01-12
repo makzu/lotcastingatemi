@@ -1,47 +1,43 @@
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Divider from '@material-ui/core/Divider'
-import PoolDisplay from 'components/generic/PoolDisplay'
-import RatingField from 'components/generic/RatingField'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import ButtonBase from '@mui/material/ButtonBase'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Divider from '@mui/material/Divider'
+
+import PoolDisplay from 'components/generic/PoolDisplay.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
-import { WithStyles } from '@material-ui/styles'
+import { WithStyles } from '@mui/styles'
 
-// eslint-disable-next-line no-unused-vars
-const styles = (theme: Theme) =>
-  createStyles({
-    wrap: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    col: {
-      flex: 1,
-    },
-    divider: {
-      marginBottom: theme.spacing(),
-      marginTop: theme.spacing(),
-    },
-    content: {
-      minWidth: '15em',
-    },
-  })
+const styles = (theme) => ({
+  wrap: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  col: {
+    flex: 1,
+  },
+  divider: {
+    marginBottom: theme.spacing(),
+    marginTop: theme.spacing(),
+  },
+  content: {
+    minWidth: '15em',
+  },
+})
 
-interface ExposedProps {
-  children: React.ReactNode
-  character: {
-    id: number
-    sorcerous_motes: number
-    type: 'qc' | string
-  }
+type ExposedProps = {
+  children: Node
+  character: { id: number; sorcerous_motes: number; type: 'qc' | string }
 }
 type Props = ExposedProps &
   WithStyles<typeof styles> & {
@@ -55,21 +51,23 @@ interface State {
   total: number
 }
 
-class ShapeSorceryWidget extends React.Component<Props, State> {
+class ShapeSorceryWidget extends Component<Props, State> {
   state = {
     open: false,
     roll: 0,
     total: this.props.character.sorcerous_motes || 0,
   }
+
   handleChangeRoll = (e) => {
-    const { value } = e.target
+    let { value } = e.target
     this.setState({
       roll: value,
       total: value + this.props.character.sorcerous_motes,
     })
   }
+
   handleChangeTotal = (e) => {
-    const { value } = e.target
+    let { value } = e.target
     this.setState({
       roll: value - this.props.character.sorcerous_motes,
       total: value,

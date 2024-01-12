@@ -1,20 +1,16 @@
-import * as React from 'react'
-import { ConnectedProps, connect } from 'react-redux'
+import Typography from '@mui/material/Typography'
 
-import Typography from '@material-ui/core/Typography'
+import { useAppSelector } from 'hooks'
 
-import { RootState } from 'store'
+const CharacterLoadError = () => {
+  const loading = useAppSelector((state) => state.app.loading)
+  return (
+    <Typography paragraph>
+      {loading
+        ? 'This Character has not yet loaded.'
+        : 'Could not load Character. It may not be publicly viewable.'}
+    </Typography>
+  )
+}
 
-const CharacterLoadError = ({ loading }: PropsFromRedux) => (
-  <Typography paragraph>
-    {loading
-      ? 'This Character has not yet loaded.'
-      : 'Could not load Character. It may not be publicly viewable.'}
-  </Typography>
-)
-
-const mapState = (state: RootState) => ({ loading: state.app.loading })
-const connector = connect(mapState)
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-export default connector(CharacterLoadError)
+export default CharacterLoadError

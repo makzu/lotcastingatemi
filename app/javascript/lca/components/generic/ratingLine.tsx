@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
+import { Theme, createStyles, withStyles } from '@mui/material/styles'
 import RatingDots from './ratingDots'
-import { WithStyles } from '@material-ui/styles'
+import { WithStyles } from '@mui/styles'
 
 const styles = (theme: Theme) =>
   createStyles({

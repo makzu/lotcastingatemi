@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import { WithStyles } from '@material-ui/styles'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
 
 import AnimaDisplay from '../generic/AnimaDisplay'
 import AuraDisplay from '../generic/AuraDisplay'
@@ -17,13 +16,12 @@ import * as calc from 'utils/calculated'
 import { WithSharedStats } from 'types/shared'
 import { WithId } from 'types/_lib'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    ...sharedStyles(theme),
-    moteWrap: {
-      marginRight: theme.spacing(),
-    },
-  })
+const styles = (theme) => ({
+  ...sharedStyles(theme),
+  moteWrap: {
+    marginRight: theme.spacing(),
+  },
+})
 
 interface Props extends WithStyles<typeof styles> {
   character: WithSharedStats & WithId

@@ -1,25 +1,23 @@
-import * as React from 'react'
-import { withRouter } from 'react-router-dom'
+import { useState } from 'react'
 
+import { ExpandLess, ExpandMore } from '@mui/icons-material/'
 import {
   Collapse,
   Divider,
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
-} from '@material-ui/core/'
-import { ExpandLess, ExpandMore } from '@material-ui/icons/'
+} from '@mui/material/'
 
 import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import { useCharacterAttribute } from 'ducks/entities'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { useIdFromParams } from 'hooks'
 
-const SideNavigation = ({ match }: RouteProps) => {
-  // @ts-expect-error hooks/router upgrade will fix this
-  const id = parseInt(match.params.id, 10)
+const SideNavigation = () => {
+  const id = useIdFromParams()
   const characterName = useCharacterAttribute(id, 'name')
 
-  const [isOpen, setOpen] = React.useState(true)
+  const [isOpen, setOpen] = useState(true)
 
   if (characterName == null) {
     return null
@@ -34,14 +32,14 @@ const SideNavigation = ({ match }: RouteProps) => {
       <LinkListItem to={`${prefix}`}>
         <ListItemText primary={characterName} />
         <ListItemSecondaryAction>
-          <IconButton onClick={() => setOpen(!isOpen)}>
+          <IconButton onClick={() => setOpen(!isOpen)} size="large">
             {isOpen ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
         </ListItemSecondaryAction>
       </LinkListItem>
 
       <Collapse in={isOpen}>
-        <NavLinkListItem to={`${prefix}`}>
+        <NavLinkListItem to={`${prefix}`} end>
           <ListItemText primary="Overview" />
         </NavLinkListItem>
 
@@ -54,12 +52,12 @@ const SideNavigation = ({ match }: RouteProps) => {
         </NavLinkListItem>
 
         {/* <NavLinkListItem to={`${prefix}/charmss`}>
-          <ListItemText primary="New Charms page" />
-        </NavLinkListItem>
+        <ListItemText primary="New Charms page" />
+      </NavLinkListItem>
 
-        <NavLinkListItem to={`${prefix}/sorcery`}>
-          <ListItemText primary="Sorcery" />
-        </NavLinkListItem> */}
+      <NavLinkListItem to={`${prefix}/sorcery`}>
+        <ListItemText primary="Sorcery" />
+      </NavLinkListItem> */}
 
         <NavLinkListItem to={`${prefix}/bio`}>
           <ListItemText primary="Bio/Misc" />
@@ -69,4 +67,4 @@ const SideNavigation = ({ match }: RouteProps) => {
   )
 }
 
-export default withRouter(SideNavigation)
+export default SideNavigation

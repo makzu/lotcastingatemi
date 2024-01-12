@@ -1,7 +1,5 @@
-import * as React from 'react'
-
-import { MenuItem, TextField } from '@material-ui/core'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { MenuItem, TextField } from '@mui/material'
+import { TextFieldProps } from '@mui/material/TextField'
 
 import { Spell } from 'types'
 
@@ -10,6 +8,7 @@ interface Props extends Pick<TextFieldProps, 'onChange' | 'margin'> {
 }
 const SpellCircleSelect = ({ spell, onChange, margin }: Props) => (
   <TextField
+    variant="standard"
     select
     name="circle"
     label="Circle"

@@ -1,24 +1,26 @@
-import * as React from 'react'
-import { ConnectedProps, connect } from 'react-redux'
+import { ChangeEvent, Component } from 'react'
+import { connect } from 'react-redux'
 
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  Switch,
+  TextField,
+  Typography,
+} from '@mui/material'
 
-import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect'
+import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
 import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
-import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
+import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import { createCharacter } from 'ducks/actions'
-
+import type { Enhancer } from 'utils/flow-types'
+import { Character, ExaltType } from 'types'
 import { RootState } from 'store'
 
 const initialState = {
@@ -26,24 +28,22 @@ const initialState = {
   character: {
     name: '',
     caste: '',
-    type: 'SolarCharacter',
+    type: 'SolarCharacter' as ExaltType,
     exalt_type: '',
     aspect: false,
   },
 }
 
-interface State {
+type Props = {
+  id: number
+  createCharacter: typeof createCharacter
+}
+type State = {
   open: boolean
-  character: {
-    exalt_type: string
-    name: string
-    caste: string
-    type: string
-    aspect: boolean
-  }
+  character: Partial<Character>
 }
 
-class CharacterCreatePopup extends React.Component<PropsFromRedux, State> {
+class CharacterCreatePopup extends Component<Props, State> {
   state = initialState
 
   handleOpen = () => {
@@ -54,7 +54,7 @@ class CharacterCreatePopup extends React.Component<PropsFromRedux, State> {
     this.setState(initialState)
   }
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     let exaltType = {}
 
@@ -121,11 +121,13 @@ class CharacterCreatePopup extends React.Component<PropsFromRedux, State> {
         <Button onClick={handleOpen} data-cy="create-character">
           Create New
         </Button>
+
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Create New Character</DialogTitle>
           <DialogContent>
             <div>
               <TextField
+                variant="standard"
                 name="name"
                 value={character.name}
                 label="Name"
@@ -258,6 +260,7 @@ class CharacterCreatePopup extends React.Component<PropsFromRedux, State> {
                 </Typography>
                 <div>
                   <TextField
+                    variant="standard"
                     name="caste"
                     value={character.caste}
                     fullWidth
@@ -269,6 +272,7 @@ class CharacterCreatePopup extends React.Component<PropsFromRedux, State> {
                 </div>
                 <div>
                   <TextField
+                    variant="standard"
                     name="exalt_type"
                     value={character.exalt_type}
                     fullWidth
@@ -311,7 +315,9 @@ class CharacterCreatePopup extends React.Component<PropsFromRedux, State> {
 }
 
 const mapStateToProps = (state: RootState) => ({ id: state.session.id })
-const connector = connect(mapStateToProps, { createCharacter })
-type PropsFromRedux = ConnectedProps<typeof connector>
 
-export default connector(CharacterCreatePopup)
+const enhance: Enhancer<Props, null> = connect(mapStateToProps, {
+  createCharacter,
+})
+
+export default enhance(CharacterCreatePopup)

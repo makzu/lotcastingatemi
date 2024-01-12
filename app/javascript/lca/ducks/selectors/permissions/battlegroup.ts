@@ -1,13 +1,11 @@
 import { createSelector } from 'reselect'
 
 import { unwrapped } from 'ducks/entities/_lib'
-import { getSpecificBattlegroup } from 'ducks/entities/battlegroup'
+import {
+  getSpecificBattlegroup,
+  doIOwnBattlegroup,
+} from 'ducks/entities/battlegroup'
 import { getCurrentPlayer } from 'ducks/entities/player'
-
-const doIOwnBattlegroup = createSelector(
-  [getCurrentPlayer, getSpecificBattlegroup],
-  (player, character) => character != null && player.id === character.player_id,
-)
 
 const amIStOfBattlegroup = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup, unwrapped],

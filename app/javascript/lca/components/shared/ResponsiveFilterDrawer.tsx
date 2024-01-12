@@ -1,8 +1,8 @@
-import * as React from 'react'
+import { ReactNode } from 'react'
 
-import { Drawer, Theme } from '@material-ui/core'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { makeStyles, useTheme } from '@material-ui/styles'
+import { Drawer, Theme } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { makeStyles, useTheme } from '@mui/styles'
 
 import { drawerWidth } from 'containers/_drawerProperties'
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   open: boolean
   onClose(): void
 }

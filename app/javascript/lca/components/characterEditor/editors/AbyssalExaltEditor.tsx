@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MenuItem from '@material-ui/core/MenuItem'
+import MenuItem from '@mui/material/MenuItem'
 
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect'

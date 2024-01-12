@@ -1,20 +1,24 @@
-import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import STControls from './StControls'
-import CharacterAddPopup from './characterAddPopup'
-import CharacterCard from 'components/characters/CharacterCard'
-import QcAddPopup from './qcAddPopup'
-import QcCard from 'components/qcs/QcCard'
-import BattlegroupAddPopup from './battlegroupAddPopup'
-import BattlegroupCard from 'components/battlegroups/BattlegroupCard'
-import BlockPaper from 'components/generic/blockPaper'
-import SortableGridList from 'components/generic/SortableGridList'
+
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+
+import STControls from './StControls.jsx'
+import CharacterAddPopup from './characterAddPopup.jsx'
+import CharacterCard from 'components/characters/CharacterCard.jsx'
+import QcAddPopup from './qcAddPopup.jsx'
+import QcCard from 'components/qcs/QcCard.jsx'
+import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
+import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+import DocumentTitle from 'components/generic/DocumentTitle'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
+
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import {
   getSpecificChronicle,
@@ -46,8 +50,7 @@ interface Props {
 class ChronicleDashboard extends Component<Props> {
   handleSort = ({ oldIndex, newIndex, collection }) => {
     if (oldIndex === newIndex) return
-
-    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     let update = (...a) => {}
 
     let coll = []
@@ -195,7 +198,8 @@ class ChronicleDashboard extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.chronicleId
+  const id = ownProps.params.id
+
   return {
     id: id,
     chronicle: getSpecificChronicle(state, id),
@@ -209,9 +213,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  connect(mapStateToProps, {
-    updateCharacter,
-    updateQc,
-    updateBattlegroup,
-  })(ChronicleDashboard),
+  withRouter(
+    connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
+      ChronicleDashboard,
+    ),
+  ),
 )

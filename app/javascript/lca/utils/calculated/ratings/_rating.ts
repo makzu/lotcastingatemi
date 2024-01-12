@@ -1,15 +1,16 @@
-import { Ability, Attribute, Character } from 'types'
-import { halfRoundUp } from 'utils'
-import type { Pool, PoolBonus } from 'utils/flow-types'
-import { abil, attr, penaltyObject, specialtiesFor } from '..'
+import { Character, Penalty, Pool, PoolBonus } from '@/types'
+import { halfRoundUp } from '@/utils'
+import { Ability } from '@/utils/constants.new/abilities'
+import { Attribute } from '@/utils/constants.new/attributes'
+import { abil, attr, specialtiesFor } from '..'
 import { maxExcellency } from '../excellencies'
 
 export default function rating(
   name: string,
   character: Character,
-  attribute: Attribute | 'essence',
-  ability: Ability | 'essence',
-  penalties: ReturnType<typeof penaltyObject>,
+  attribute: Attribute,
+  ability: Ability,
+  penalties: Penalty[],
   excellencyAbils: string[],
   bonus: PoolBonus[] = [],
 ): Pool {
@@ -24,7 +25,6 @@ export default function rating(
     mb = bonus.reduce((a, b) => a + (b.situational ? 0 : b.bonus ?? 0), 0)
   const excellency = maxExcellency(
     character,
-    // @ts-expect-error FIXME Pool/Rating overhaul
     attribute,
     ability,
     excellencyAbils,
@@ -32,7 +32,6 @@ export default function rating(
   )
   const excellencyStunt = maxExcellency(
     character,
-    // @ts-expect-error FIXME Pool/Rating overhaul
     attribute,
     ability,
     excellencyAbils,

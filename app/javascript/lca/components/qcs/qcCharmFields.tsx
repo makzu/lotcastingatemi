@@ -1,11 +1,13 @@
 import { deepEqual } from 'fast-equals'
-import React from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import Delete from '@material-ui/icons/Delete'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import BlockPaper from 'components/generic/blockPaper'
+
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Delete from '@mui/icons-material/Delete'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+
+import BlockPaper from 'components/shared/BlockPaper'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField'
 import TagsField from 'components/generic/TagsField'
@@ -19,8 +21,8 @@ interface Props {
   onCharmChange: $TSFixMeFunction
   onRemoveClick: $TSFixMeFunction
 }
-export default class QcCharmFields extends React.Component<Props> {
-  handleChange = (e: React.SyntheticEvent) => {
+export default class QcCharmFields extends Component<Props> {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { charm } = this.props
     if (deepEqual(charm[name], value)) return
@@ -105,7 +107,7 @@ export default class QcCharmFields extends React.Component<Props> {
           onChange={handleChange}
           fullWidth
           multiline
-          rowsMax={5}
+          maxRows={5}
         />
         <div
           style={{

@@ -1,8 +1,8 @@
-import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import PoolDisplay from 'components/generic/PoolDisplay'
-import BlockPaper from 'components/generic/blockPaper'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
+
+import PoolDisplay from 'components/generic/PoolDisplay.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 const styles = (theme) => ({
   container: {

@@ -9,11 +9,11 @@ export const [createMerit, updateMerit, destroyMerit] =
 /* Selectors */
 import createCachedSelector from 're-reselect'
 
-import { State } from 'ducks'
 import { unwrapped } from './_lib'
 import { getSpecificCharacter } from './character'
+import { RootState } from 'store'
 
-const getMerits = (state: State) => unwrapped(state).merits
+const getMerits = (state: RootState) => unwrapped(state).merits
 
 export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],

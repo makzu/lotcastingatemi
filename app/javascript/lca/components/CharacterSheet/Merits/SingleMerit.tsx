@@ -1,49 +1,25 @@
-import * as React from 'react'
+import { Typography } from '@mui/material'
 
-import { Typography } from '@material-ui/core'
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core/styles'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
+import RatingLine from 'components/generic/ratingLine.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
-import BlockPaper from 'components/generic/blockPaper'
-import RatingLine from 'components/generic/ratingLine'
+import type { Merit } from 'types'
 
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
-import { Merit } from 'types'
-
-const styles = (theme: Theme) =>
-  createStyles({
-    categoryLine: {
-      textTransform: 'capitalize',
-    },
-    meritName: {
-      ...theme.typography.caption,
-      marginLeft: theme.spacing(),
-      textTransform: 'capitalize',
-    },
-    name: {
-      textTransform: 'capitalize',
-    },
-  })
-
-interface Props extends WithStyles<typeof styles> {
-  merit: Merit
-}
-const SingleMerit = ({ merit, classes }: Props) => (
+const SingleMerit = ({ merit }: { merit: Merit }) => (
   <BlockPaper>
     <Typography variant="h6">
       <RatingLine rating={merit.rating} dontFill merit>
-        <span className={classes.name}>{merit.label || merit.merit_name}</span>
+        <span className="capitalize">{merit.label || merit.merit_name}</span>
         {merit.label && (
-          <span className={classes.meritName}>({merit.merit_name})</span>
+          <Typography component="span" variant="caption" sx={{ ml: 1 }}>
+            <span className="capitalize"> ({merit.merit_name}) </span>
+          </Typography>
         )}
       </RatingLine>
     </Typography>
 
-    <Typography className={classes.categoryLine} variant="caption" gutterBottom>
+    <Typography className="capitalize" variant="caption" gutterBottom>
       {merit.supernatural && 'Supernatural '}
       {merit.merit_cat} {merit.merit_cat !== 'flaw' && 'Merit'}
     </Typography>
@@ -53,4 +29,5 @@ const SingleMerit = ({ merit, classes }: Props) => (
     <Typography variant="caption">Ref: {merit.ref}</Typography>
   </BlockPaper>
 )
-export default withStyles(styles)(SingleMerit)
+
+export default SingleMerit

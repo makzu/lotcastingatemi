@@ -1,35 +1,36 @@
-import React from 'react'
+
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
-import { compose } from 'recompose'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import CharacterMenu from '../generic/CharacterMenu'
-import PoolDisplay from '../generic/PoolDisplay'
-import SpendableBlock from '../generic/SpendableBlock'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
+import CardBase from 'components/shared/CardBase'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
-import { WithStyles } from '@material-ui/styles'
+import { WithStyles } from '@mui/styles'
 import { RootState } from 'store'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      ...theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-      }),
-      height: '100%',
-      position: 'relative',
+const styles = (theme) => ({
+  nameRow: {
+    display: 'flex',
+  },
+  nameWrap: {
+    flex: 1,
+    '& a': {
+      color: 'unset',
     },
     nameRow: {
       display: 'flex',
@@ -81,8 +82,8 @@ type Props = ExposedProps &
 function QcCard(props: Props) {
   const { qc, chronicle, st, penalties, pools, isOwner, classes } = props
   return (
-    <Paper className={classes.root}>
-      {((chronicle && st) || (!chronicle && isOwner)) && ( //eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+    <CardBase>
+      {((chronicle && st) || (!chronicle && isOwner)) && (
         <Typography
           component="div"
           style={{
@@ -223,7 +224,7 @@ function QcCard(props: Props) {
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
-    </Paper>
+    </CardBase>
   )
 }
 

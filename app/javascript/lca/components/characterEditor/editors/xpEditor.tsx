@@ -1,15 +1,14 @@
-import React, { Fragment } from 'react'
-import { compose, shouldUpdate } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
-import type { ListAttributeFieldTypes } from 'components/generic/ListAttributeEditor'
-import ListAttributeEditor from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
+import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
+
+import ListAttributeEditor, {
+  type ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
-import { isUnequalByKeys } from 'utils'
-import { solarXpName, spentXp, spentSolarXp, spentBp } from 'utils/calculated'
+import { solarXpName, spentBp, spentSolarXp, spentXp } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
 const styles = (theme) => ({
@@ -30,7 +29,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
   const { onChange, classes } = props
   const { label, points } = props.trait
   return (
-    <Fragment>
+    <>
       <TextField
         name="label"
         value={label}
@@ -49,7 +48,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
         narrow
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -177,18 +176,4 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
   </BlockPaper>
 )
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, nextProps) =>
-    isUnequalByKeys(props.character, nextProps.character, [
-      'xp_log',
-      'xp_log_solar',
-      'xp_total',
-      'xp_solar_total',
-      'xp_craft_silver',
-      'xp_craft_gold',
-      'xp_craft_white',
-      'bp_log',
-    ]),
-  ),
-)(XpEditor)
+export default withStyles(styles)(XpEditor)

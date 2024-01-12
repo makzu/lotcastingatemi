@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import { WithStyles } from '@material-ui/styles'
+import { Theme, createStyles, withStyles } from '@mui/styles'
+import Paper from '@mui/material/Paper'
+import { WithStyles } from '@mui/styles/withStyles'
 
 const styles = (theme: Theme) =>
   createStyles({

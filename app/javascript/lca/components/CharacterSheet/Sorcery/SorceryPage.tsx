@@ -1,26 +1,15 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
+import { Grid, Typography } from '@mui/material'
 
-import { Grid, Typography } from '@material-ui/core'
-
-import BlockPaper from 'components/generic/blockPaper'
-import { State } from 'ducks'
-import { getSpecificCharacter } from 'ducks/entities'
-import { getSpellsForCharacter } from 'selectors'
-import { Character, Spell } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { useCharacterAttribute } from 'ducks/entities'
+import { useDocumentTitle, useIdFromParams } from 'hooks'
 import CharacterLoadError from '../CharacterLoadError'
 import SpellList from './SpellList'
 
-interface StateProps {
-  id: number
-  name: string
-}
+const SorceryPage = () => {
+  const id = useIdFromParams()
+  const name = useCharacterAttribute(id, 'name')
+  useDocumentTitle(`${name} Sorcery | Lot-Casting Atemi`)
 
-// interface Props extends StateProps {}
-
-const SorceryPage = ({ id, name }: StateProps) => {
   /* Escape hatch */
   if (name == null) {
     return <CharacterLoadError />
@@ -28,25 +17,15 @@ const SorceryPage = ({ id, name }: StateProps) => {
 
   return (
     <>
-      <DocumentTitle title={`${name} Sorcery | Lot-Casting Atemi`} />
-
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h5">Sorcery</Typography>
         </Grid>
       </Grid>
 
-      <SpellList characterId={id} />
+      <SpellList />
     </>
   )
 }
 
-const mapState = (state: State, { match }: RouteProps): StateProps => {
-  const id = parseInt(match.params.id, 10)
-  return {
-    id,
-    name: (getSpecificCharacter(state, id) || ({} as any)).name,
-  }
-}
-
-export default connect(mapState)(SorceryPage)
+export default SorceryPage

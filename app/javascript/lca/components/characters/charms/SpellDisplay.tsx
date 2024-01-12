@@ -1,14 +1,15 @@
-import React from 'react'
 import scrollToElement from 'scroll-to-element'
-import { withStyles } from '@material-ui/core/styles'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import Typography from '@material-ui/core/Typography'
-import Collapse from '@material-ui/core/Collapse'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import styles from './CharmStyles'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+
+import withStyles from '@mui/styles/withStyles'
+import Accordion from '@mui/material/Accordion'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import Typography from '@mui/material/Typography'
+import Collapse from '@mui/material/Collapse'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
+import styles from './CharmStyles.js'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import { checkVisible } from 'utils'
 import type { Spell } from 'utils/flow-types'
 
@@ -59,14 +60,14 @@ function SpellDisplay(props: SpellDisplayProps) {
   const { spell, openSpell, onOpenChange, classes } = props
   const isOpen = openSpell === spell.id
   return (
-    <ExpansionPanel
+    <Accordion
       expanded={isOpen}
       onChange={onOpenChange(spell.id)}
       CollapseProps={{
         onEntered: (e, a) => scrollToPanel(e, a, spell.id),
       }}
     >
-      <ExpansionPanelSummary
+      <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         classes={{
           expanded: classes.expandedSummary,
@@ -80,9 +81,9 @@ function SpellDisplay(props: SpellDisplayProps) {
 
           <SpellSummaryBlock spell={spell} isOpen={isOpen} classes={classes} />
         </div>
-      </ExpansionPanelSummary>
+      </AccordionSummary>
 
-      <ExpansionPanelDetails>
+      <AccordionDetails>
         <div className={classes.detailsWrap}>
           <Typography paragraph>
             <strong>Circle:</strong>{' '}
@@ -106,8 +107,8 @@ function SpellDisplay(props: SpellDisplayProps) {
             <Typography variant="caption">Ref: {spell.ref}</Typography>
           )}
         </div>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   )
 }
 

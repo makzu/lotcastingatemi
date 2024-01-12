@@ -1,11 +1,13 @@
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import TextField from '@material-ui/core/TextField'
+
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import TextField from '@mui/material/TextField'
+
 import { createQc } from 'ducks/actions'
 import type { Enhancer } from 'utils/flow-types'
 interface Props {
@@ -16,13 +18,10 @@ interface State {
   qc: Record<string, $TSFixMe>
 } // TODO: Enable autofill for some example QCs?
 
-class QcCreatePopup extends React.Component<Props, State> {
-  state = {
-    open: false,
-    qc: {
-      name: '',
-    },
-  }
+// TODO: Enable autofill for some example QCs?
+class QcCreatePopup extends Component<Props, State> {
+  state = { open: false, qc: { name: '' } }
+
   handleOpen = () => {
     this.setState({
       open: true,
@@ -33,10 +32,9 @@ class QcCreatePopup extends React.Component<Props, State> {
       open: false,
     })
   }
+
   handleChange = (e) => {
-    this.setState({
-      qc: { ...this.state.qc, name: e.target.value },
-    })
+    this.setState({ qc: { ...this.state.qc, name: e.target.value } })
   }
   handleSubmit = () => {
     this.setState({
@@ -57,6 +55,7 @@ class QcCreatePopup extends React.Component<Props, State> {
           <DialogTitle>Create New Quick Character</DialogTitle>
           <DialogContent>
             <TextField
+              variant="standard"
               name="name"
               value={qc.name}
               label="Name"
@@ -87,7 +86,6 @@ class QcCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, never> = connect(null, {
-  createQc,
-})
+const enhance: Enhancer<Props, {}> = connect(null, { createQc })
+
 export default enhance(QcCreatePopup)

@@ -16,10 +16,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "types": ["vitest/globals"],
 
     "allowJs": true,
     "paths": {
+      "@/*": ["./*"],
       "Docs": ["../../../docs"],
       "Locales": ["../../../locales"]
     },
@@ -33,7 +35,7 @@
 
     "sourceMap": true
   },
-  "include": ["app/javascript/lca/**/*", "./.eslintrc.cjs"],
+  "include": ["app/javascript/lca/**/*", "./.eslintrc.cjs", "./vite.config.ts"],
   "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public", "coverage"],
   "compileOnSave": false
 }

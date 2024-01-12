@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 
-import TextField, { TextFieldProps } from '@material-ui/core/TextField'
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
+import TextField, { TextFieldProps } from '@mui/material/TextField'
+import { Theme, WithStyles, createStyles, withStyles } from '@mui/styles'
 
 const styles = (theme: Theme) =>
   createStyles({

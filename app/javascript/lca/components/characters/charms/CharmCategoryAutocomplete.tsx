@@ -1,15 +1,16 @@
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
+
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
-import { emphasize } from '@material-ui/core/styles/colorManipulator'
-import Chip from '@material-ui/core/Chip'
-import MenuItem from '@material-ui/core/MenuItem'
-import NoSsr from '@material-ui/core/NoSsr'
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import withStyles from '@mui/styles/withStyles'
+import Chip from '@mui/material/Chip'
+import MenuItem from '@mui/material/MenuItem'
+import NoSsr from '@mui/material/NoSsr'
+import Paper from '@mui/material/Paper'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
 import Select from 'react-select/lib/Creatable'
 import { getAllCharmCategoriesForCharacter } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
@@ -33,6 +34,7 @@ function inputComponent({ inputRef, ...props }) {
 
 const Control = (props) => (
   <TextField
+    variant="standard"
     fullWidth
     InputProps={{
       inputComponent,
@@ -145,12 +147,12 @@ const styles = (theme) => ({
     },
   },
   chipFocused: {
-    backgroundColor: emphasize(
-      theme.palette.type === 'light'
-        ? theme.palette.grey[300]
-        : theme.palette.grey[700],
-      0.08,
-    ),
+    //   backgroundColor: emphasize(
+    //     theme.palette.mode === 'light'
+    //       ? theme.palette.grey[300]
+    //       : theme.palette.grey[700],
+    //     0.08,
+    //   ),
   },
   noOptionsMessage: {
     padding: theme.spacing(1, 2),
@@ -187,7 +189,7 @@ interface State {
   categories: string[]
 }
 
-class CharmCategoryAutocomplete extends React.Component<Props, State> {
+class CharmCategoryAutocomplete extends Component<Props, State> {
   handleChange = (value) => {
     this.props.onChange({
       target: {
@@ -199,16 +201,14 @@ class CharmCategoryAutocomplete extends React.Component<Props, State> {
 
   render() {
     const { categories, classes, theme, value } = this.props
-    const suggestions = categories.map((c) => ({
-      value: c,
-      label: c,
-    }))
-    const val = value.map((c) => ({
-      value: c,
-      label: c,
-    }))
+    const suggestions = categories.map((c) => ({ value: c, label: c }))
+    const val = value.map((c) => ({ value: c, label: c }))
+
     const selectStyles = {
-      input: (base) => ({ ...base, color: theme.palette.text.primary }),
+      input: (base) => ({
+        ...base,
+        color: theme.palette.text.primary,
+      }),
     }
     return (
       <div className={classes.root}>
@@ -242,8 +242,6 @@ const mapStateToProps = (state, props) => ({
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
   connect(mapStateToProps),
-  withStyles(styles, {
-    withTheme: true,
-  }),
+  withStyles(styles, { withTheme: true }),
 )
 export default enhance(CharmCategoryAutocomplete)

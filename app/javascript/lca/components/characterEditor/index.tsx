@@ -1,10 +1,11 @@
 import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
+
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+
 import AbilityEditor from './editors/abilityEditor'
 import ArmorEditor from './editors/armorEditor'
 import AttributeEditor from './editors/attributeEditor'
@@ -25,7 +26,9 @@ import SolarExaltEditor from './editors/solarExaltEditor'
 import SorceryEditor from './editors/sorceryEditor'
 import WillpowerEditor from './editors/willpowerEditor'
 import WeaponEditor from './weapons/'
+import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { getPoolsAndRatings, getPenalties } from 'selectors'
@@ -38,7 +41,7 @@ interface Props {
 }
 
 class CharacterEditor extends Component<Props> {
-  handleChange = (e: React.SyntheticEvent) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { character } = this.props
     if (value == null) return
@@ -47,7 +50,8 @@ class CharacterEditor extends Component<Props> {
       [name]: value,
     })
   }
-  handleCheck = (e: React.SyntheticEvent) => {
+
+  handleCheck = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name } = e.target
     const { character } = this.props
     const value = !character[name]
@@ -230,7 +234,7 @@ class CharacterEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, props) {
-  const id = props.match.params.characterId
+  const id = props.params.id
   const character = getSpecificCharacter(state, id)
   let pools, penalties
 
@@ -246,8 +250,8 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default ProtectedComponent(
-  connect(mapStateToProps, {
-    updateCharacter,
-  })(CharacterEditor),
+export default withRouter(
+  ProtectedComponent(
+    connect(mapStateToProps, { updateCharacter })(CharacterEditor),
+  ),
 )

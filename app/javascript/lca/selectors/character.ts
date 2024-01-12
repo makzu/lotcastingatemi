@@ -1,51 +1,43 @@
 import createCachedSelector from 're-reselect'
 import { createSelector } from 'reselect'
 
-import { WrappedEntityState } from 'ducks/entities/_types'
-import { sortOrderSort } from 'utils'
-import { exaltTypeBase, mobilityPenalty, woundPenalty } from 'utils/calculated/'
-import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
-import * as pools from 'utils/calculated/pools'
-import * as ratings from 'utils/calculated/ratings'
-import type { Poison, Spell } from 'utils/flow-types'
+import { getSpecificCharacter as getCharacter } from '@/ducks/entities/character'
+import { RootState } from '@/store'
+import type { Poison, Spell } from '@/types'
+import { sortOrderSort } from '@/utils'
+import {
+  exaltTypeBase,
+  mobilityPenalty,
+  woundPenalty,
+} from '@/utils/calculated/'
+import { excellencyAbils as excellencies } from '@/utils/calculated/excellencies'
+import * as pools from '@/utils/calculated/pools'
+import * as ratings from '@/utils/calculated/ratings'
 import {
   getMartialArtsCharmsForCharacter,
   getNativeCharmsForCharacter,
-  getSpellsForCharacter,
 } from './charm'
-
 import { entities, getCurrentPlayer } from './entities'
 import { getPoolsForWeapon, sortByParry } from './weapon'
 
-const getState = (state: WrappedEntityState) => state
+const getState = (state) => state
+// const getPoisons = (state) => entities(state).poisons
 
-const isDefined = <T>(value: T | undefined): value is T => value !== undefined
+const characterIdMemoizer = (_state, id: number) => id
 
-// const getPoisons = (state: WrappedEntityState) => entities(state).poisons
-
-export const getSpecificCharacter = (state: WrappedEntityState, id: number) =>
-  entities(state).characters[id]
-
-const characterIdMemoizer = (_state: WrappedEntityState, id: number) => id
-
-const getMerits = (state: WrappedEntityState) => entities(state).merits
+const getMerits = (state: RootState) => entities(state).merits
 
 export const getMeritsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getMerits],
+  [getCharacter, getMerits],
   (character, merits) =>
-    (character?.merits ?? [])
-      .map((m) => merits[m])
-      .filter(isDefined)
-      .sort(sortOrderSort),
+    character.merits.map((m) => merits[m]).sort(sortOrderSort),
 )(characterIdMemoizer)
 
-export const getMeritNamesForCharacter = (
-  state: WrappedEntityState,
-  id: number,
-): string[] =>
+export const getMeritNamesForCharacter = (state, id: number): Array<string> =>
   getMeritsForCharacter(state, id)
     .map((m) => m.merit_name.toLowerCase() + m.rating)
     .sort()
+
 export const getEvokableMeritsForCharacter = createSelector(
   [getMeritsForCharacter],
   (merits) =>
@@ -56,12 +48,21 @@ export const getEvokableMeritsForCharacter = createSelector(
     ),
 )
 
-export const getControlSpellsForCharacter = (
-  state: WrappedEntityState,
-  id: number,
-): Spell[] => getSpellsForCharacter(state, id).filter((s) => s.control)
+/** @deprecated use export from 'ducks' instead */
+export const getSpecificCharacter = getCharacter
+
+const getSpells = (state) => entities(state).spells
+export const getSpellsForCharacter = createCachedSelector(
+  [getCharacter, getSpells],
+  (character, spells) =>
+    character.spells.map((s) => spells[s]).sort(sortOrderSort),
+)(characterIdMemoizer)
+
+export const getControlSpellsForCharacter = (state, id: number): Array<Spell> =>
+  getSpellsForCharacter(state, id).filter((s) => s.control)
 
 export const getPoisonsForCharacter = () => [] as Poison[]
+
 // TODO: Poison penalties stack: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1173001#post1173001 */
 // TODO: Poison penalties only effect static ratings:
 
@@ -70,42 +71,32 @@ export const getPoisonsForCharacter = () => [] as Poison[]
  * http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1207986#post1207986
  */
 
-export interface PenaltyInput {
-  mobility: number
-  onslaught: number
-  wound: number
-  poisonTotal: number
-}
-
 export const getPenalties = createCachedSelector(
-  [getSpecificCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],
-  (character, meritNames, poisons) => {
-    if (character == null)
-      return { mobility: 0, onslaught: 0, wound: 0, poisonTotal: 0 }
-
-    const worstPoison = poisons.reduce(
-      (prev, current) => (prev.penalty > current.penalty ? prev : current),
-      { name: 'not poisoned', penalty: 0 },
-    )
+  [getCharacter, getMeritNamesForCharacter, getPoisonsForCharacter],
+  (character, meritNames, _poisons) => {
+    // let worstPoison = poisons.reduce(
+    //   (prev, current) => (prev.penalty > current.penalty ? prev : current),
+    //   { name: 'not poisoned', penalty: 0 },
+    // )
 
     return {
       mobility: mobilityPenalty(character),
       onslaught: character.onslaught,
       wound: woundPenalty(character, meritNames),
-      poisonTotal: worstPoison.penalty,
+      poisonTotal: 0, //worstPoison.penalty,
     }
   },
 )(characterIdMemoizer)
 
 export const getPoolsForAllWeaponsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getState],
+  [getCharacter, getState],
   (character, state) =>
     (character?.weapons ?? []).map((id) => getPoolsForWeapon(state, id)),
 )(characterIdMemoizer)
 
 export const getPoolsAndRatings = createCachedSelector(
   [
-    getSpecificCharacter,
+    getCharacter,
     getMeritNamesForCharacter,
     getNativeCharmsForCharacter,
     getMartialArtsCharmsForCharacter,
@@ -209,13 +200,13 @@ export const getPoolsAndRatings = createCachedSelector(
 )(characterIdMemoizer)
 
 export const doIOwnCharacter = createSelector(
-  [getCurrentPlayer, getSpecificCharacter],
+  [getCurrentPlayer, getCharacter],
   (player, character) =>
     character !== undefined && player.id === character.player_id,
 )
 
 export const amIStOfCharacter = createSelector(
-  [getCurrentPlayer, getSpecificCharacter, entities],
+  [getCurrentPlayer, getCharacter, entities],
   (player, character, ents) =>
     character?.chronicle_id != null &&
     ents.chronicles[character.chronicle_id] &&
@@ -223,7 +214,7 @@ export const amIStOfCharacter = createSelector(
 )
 
 export const canISeeCharacter = createSelector(
-  [getSpecificCharacter, doIOwnCharacter, amIStOfCharacter],
+  [getCharacter, doIOwnCharacter, amIStOfCharacter],
   (character, doI, amI) => !character?.hidden || doI || amI,
 )
 

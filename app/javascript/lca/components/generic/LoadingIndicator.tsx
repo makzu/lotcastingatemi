@@ -1,10 +1,12 @@
-import React from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Slide from '@material-ui/core/Slide'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Paper from '@mui/material/Paper'
+import Slide from '@mui/material/Slide'
+import SvgIcon from '@mui/material/SvgIcon'
+
 import DawnSpinner from 'icons/DawnSpinner'
 
 const styles = (theme) => ({
@@ -30,12 +32,8 @@ const styles = (theme) => ({
   },
 })
 
-interface Props {
-  loading: boolean
-  classes: Record<string, $TSFixMe>
-}
-
-class LoadingSpinner extends React.PureComponent<Props> {
+type Props = { loading: boolean; classes: Object }
+class LoadingSpinner extends PureComponent<Props> {
   render() {
     const { loading, classes } = this.props
     return (

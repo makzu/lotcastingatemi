@@ -1,8 +1,7 @@
-import * as React from 'react'
-
-import { Divider, IconButton, Menu } from '@material-ui/core'
-import { Theme, withStyles, WithStyles } from '@material-ui/core/styles'
-import MoreVert from '@material-ui/icons/MoreVert'
+import MoreVert from '@mui/icons-material/MoreVert'
+import { Divider, IconButton, Menu, Theme } from '@mui/material'
+import { WithStyles } from '@mui/styles'
+import withStyles from '@mui/styles/withStyles'
 
 import { useMenuLogic } from 'hooks'
 import { CharacterType } from './CharacterMenuItem'
@@ -16,8 +15,7 @@ import MenuPinHide from './MenuPinHide'
 import MenuRefresh from './MenuRefresh'
 import MenuRemoveFromChronicle from './MenuRemoveFromChronicle'
 
-// eslint-disable-next-line no-unused-vars
-const styles = (theme: Theme) => ({
+const styles = (_theme: Theme) => ({
   headerWrapper: {},
   wrapper: {
     margin: '-0.75em -1em 0 1.5em',
@@ -37,7 +35,12 @@ const CharacterMenu = (props: Props) => {
 
   return (
     <div className={header ? classes.headerWrapper : classes.wrapper}>
-      <IconButton onClick={handleOpen} data-cy="character-menu" color="inherit">
+      <IconButton
+        onClick={handleOpen}
+        data-cy="character-menu"
+        color="inherit"
+        size="large"
+      >
         <MoreVert />
       </IconButton>
 

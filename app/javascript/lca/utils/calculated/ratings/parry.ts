@@ -73,7 +73,6 @@ export function parry(
     raw: Math.max(rawRating, 0),
     shield: weapon.tags.includes('shield'),
     bonus: bonus,
-    //$FlowThisIsOkayISwear
     total: Math.max(rawRating - (rat.totalPenalty ?? 0), 0),
     parry: true,
   }

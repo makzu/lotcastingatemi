@@ -1,6 +1,6 @@
-import store, { AppDispatch } from 'store'
+import store, { AppDispatch } from '@/store'
 import { updateCharacter, updateQc, updateBattlegroup } from '../actions'
-export * from './chronicle'
+export * from './chronicle.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
 export const SPEND_WP = 'lca/event/SPEND_WP'
@@ -55,18 +55,14 @@ export function spendWillpower(
   willpower: number,
   charType: 'character' | 'qc' = 'character',
 ) {
-  const update = updateEvent(charType)
-  return (dispatch: $TSFixMeFunction, getState: $TSFixMeFunction) => {
-    dispatch({
-      type: SPEND_WP,
-      id: id,
-    })
-    const current_wp =
+  let update = updateEvent(charType)
+
+  return (dispatch: Function, getState: Function) => {
+    dispatch({ type: SPEND_WP, id: id })
+    let current_wp =
       getState().entities.current[charType + 's'][id].willpower_temporary
     dispatch(
-      update(id, {
-        willpower_temporary: Math.max(current_wp - willpower, 0),
-      }),
+      update(id, { willpower_temporary: Math.max(current_wp - willpower, 0) }),
     )
   }
 }

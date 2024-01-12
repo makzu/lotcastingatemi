@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import Checkbox from '@material-ui/core/Checkbox'
-import Button from '@material-ui/core/Button'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import RatingField from '../generic/RatingField'
-import InitiativeField from './InitiativeField'
+
+import Checkbox from '@mui/material/Checkbox'
+import Button from '@mui/material/Button'
+import FormControlLabel from '@mui/material/FormControlLabel'
+
+import RatingField from '../generic/RatingField.jsx'
+import InitiativeField from './InitiativeField.jsx'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { canIEdit } from 'selectors'
 import type { withCombatInfo, Enhancer } from 'utils/flow-types'

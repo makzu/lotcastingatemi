@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import {
@@ -9,11 +9,11 @@ import {
   DialogContent,
   DialogTitle,
   Typography,
-} from '@material-ui/core'
+} from '@mui/material'
 
-import { State } from 'ducks'
 import { useDialogLogic } from 'hooks'
 import { isPublicCharacterPage } from 'selectors'
+import { RootState } from 'store'
 
 interface StateProps {
   authenticated: boolean
@@ -33,17 +33,19 @@ const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
 const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   const [isOpen, setOpen] = useDialogLogic()
-  const [timer, setTimer] = React.useState<NodeJS.Timeout | null>(null)
-  React.useEffect(() => {
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | undefined = undefined
+
     if (!(authenticated || isLoading || isPublic)) {
-      setTimer(setTimeout(() => setOpen(), 500))
-    } else {
-      if (timer) clearTimeout(timer)
+      timer = setTimeout(() => setOpen(), 500)
+    } else if (timer != null) {
+      clearTimeout(timer)
     }
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [authenticated, isLoading, isPublic])
+  }, [authenticated, isLoading, isPublic, setOpen])
 
   return (
     <Dialog open={isOpen}>
@@ -68,7 +70,7 @@ const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   )
 }
 
-const mapState = (state: State): StateProps => ({
+const mapState = (state: RootState): StateProps => ({
   authenticated: state.session.authenticated,
   isLoading: state.app.loading,
   isPublic: isPublicCharacterPage(state, window.location.pathname),

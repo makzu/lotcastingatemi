@@ -1,38 +1,63 @@
 import { deepEqual } from 'fast-equals'
-import React, { ChangeEvent } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 import { SortableHandle } from 'react-sortable-hoc'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
-import RangeSelect from 'components/generic/RangeSelect'
-import RatingField from '../generic/RatingField'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
+
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
+import Hidden from '@mui/material/Hidden'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
+
+import RangeSelect from 'components/generic/RangeSelect.jsx'
+import RatingField from '../generic/RatingField.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
-import { WithStyles } from '@material-ui/styles'
+
 import { Battlegroup } from 'types'
 import { RootState } from 'store'
+
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme: Theme) =>
-  createStyles({
-    wrap: {
-      display: 'flex',
-      flexWrap: 'wrap',
+const styles = (theme) => ({
+  wrap: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  grabHandle: {
+    alignSelf: 'center',
+    marginRight: theme.spacing(),
+  },
+  bgBonus: {
+    ...theme.typography.caption,
+    marginLeft: -theme.spacing(0.5),
+    marginRight: theme.spacing(),
+    marginBottom: theme.spacing(),
+    alignSelf: 'flex-end',
+  },
+  nameField: {
+    flex: 2,
+    minWidth: '30%',
+    [theme.breakpoints.down('lg')]: {
+      minWidth: '50%',
     },
-    grabHandle: {
-      alignSelf: 'center',
-      marginRight: theme.spacing(),
+  },
+  tagsField: {
+    flex: 1,
+    marginRight: theme.spacing(),
+    minWidth: '30%',
+
+    [theme.breakpoints.down('lg')]: {
+      minWidth: '50%',
     },
     bgBonus: {
       ...theme.typography.caption,
@@ -71,9 +96,19 @@ interface ExposedProps {
   onRemoveClick: $TSFixMeFunction
   battlegroup?: boolean
 }
-type Props = ExposedProps &
-  WithStyles<typeof styles> & {
-    fakeBg: Record<string, $TSFixMe>
+type Props = ExposedProps & {
+  fakeBg: Object,
+  classes: Object,
+}
+
+class QcAttackFields extends Component<Props> {
+  handleChange = (e) => {
+    let { name, value } = e.target
+    const { attack } = this.props
+
+    if (deepEqual(this.props.attack[name], value)) return
+
+    this.props.onAttackChange(attack.id, { [name]: value })
   }
 
 class QcAttackFields extends React.Component<Props> {
@@ -171,7 +206,7 @@ class QcAttackFields extends React.Component<Props> {
           className={classes.rangeField}
         />
 
-        <IconButton onClick={handleRemove} style={{}}>
+        <IconButton onClick={handleRemove} style={{}} size="large">
           <ContentRemoveCircle />
         </IconButton>
 

@@ -1,61 +1,25 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { compose } from 'recompose'
+import { Drawer, Theme, useMediaQuery } from '@mui/material'
+import { Box } from '@mui/system'
 
-import { Drawer, Hidden, Theme } from '@material-ui/core'
-import { createStyles, makeStyles } from '@material-ui/styles'
-
-import { State } from 'ducks'
-import { closeDrawer } from 'ducks/actions'
+import { drawerWidth } from 'containers/_drawerProperties'
 import { getCurrentPlayer } from 'ducks/entities'
-import { drawerWidth } from '../../containers/_drawerProperties'
+import { closeDrawer } from 'features/drawerSlice'
+import { useAppDispatch, useAppSelector } from 'hooks'
 import NavPanel from './NavPanel'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const drawerScrollbars = (theme: Theme) =>
-  createStyles({
-    '&::-webkit-scrollbar': {
-      backgroundColor: theme.palette.background.paper,
-    },
-  })
+const NavPanelWrap = () => {
+  const displayName = useAppSelector(
+    (state) => getCurrentPlayer(state).display_name,
+  )
+  const authenticated = useAppSelector((state) => state.session.authenticated)
 
-const useStyles = makeStyles(
-  (theme: Theme & { disableScrollbars: boolean }) => ({
-    drawer: {
-      [theme.breakpoints.up('md')]: {
-        height: '100%',
-      },
-    },
-    drawerPaper: {
-      width: drawerWidth + 10,
-      [theme.breakpoints.up('lg')]: {
-        display: 'block',
-        height: '100%',
-        minHeight: '100vh',
-        overflowY: 'auto',
-        position: 'fixed',
-        width: drawerWidth,
-      },
-      ...(theme.disableScrollbars ? {} : drawerScrollbars(theme)),
-    },
-  }),
-)
+  const drawerOpen = useAppSelector((state) => state.drawer.open)
+  const dispatch = useAppDispatch()
+  const close = () => dispatch(closeDrawer())
 
-interface StateProps {
-  authenticated: State['session']['authenticated']
-  displayName: string
-  drawerOpen: State['app']['drawerOpen']
-}
-interface DispatchProps {
-  close(): void
-}
-interface Props extends StateProps, DispatchProps {}
-
-const NavPanelWrap = (props: Props) => {
-  const classes = useStyles({})
-  const { authenticated, drawerOpen, displayName, close } = props
+  const lgAndUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'))
 
   const Panel = (
     <NavPanel
@@ -67,43 +31,39 @@ const NavPanelWrap = (props: Props) => {
   )
 
   return (
-    <>
-      <Hidden lgUp>
+    <Box
+      component="nav"
+      sx={{ width: { lg: drawerWidth }, flexShrink: { lg: 0 } }}
+    >
+      {lgAndUp ? (
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', lg: 'block' },
+          }}
+          open
+        >
+          {Panel}
+        </Drawer>
+      ) : (
         <Drawer
           variant="temporary"
           open={drawerOpen}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
           onClose={close}
           ModalProps={{ keepMounted: true }}
-        >
-          {Panel}
-        </Drawer>
-      </Hidden>
-      <Hidden mdDown implementation="css">
-        <Drawer
-          variant="permanent"
-          open
-          classes={{
-            docked: classes.drawer,
-            paper: classes.drawerPaper,
+          sx={{
+            display: { xs: 'block', lg: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
           }}
         >
           {Panel}
         </Drawer>
-      </Hidden>
-    </>
+      )}
+    </Box>
   )
 }
 
-const mapState = (state: State): StateProps => ({
-  authenticated: state.session.authenticated,
-  displayName: getCurrentPlayer(state).display_name || 'nobody',
-  drawerOpen: state.app.drawerOpen,
-})
-
-export default compose(
-  withRouter,
-  connect(mapState, { close: closeDrawer }),
-)(NavPanelWrap)
+export default NavPanelWrap

@@ -1,3 +1,5 @@
+import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
+
 export {
   createCharacter,
   duplicateCharacter,
@@ -55,10 +57,9 @@ export {
 } from './entities'
 
 export { logout } from './session'
-export { closeDrawer, toggleDrawer, switchTheme } from './app'
 export { spendMotes, spendWillpower, takeDamage } from './events'
 
-import store, { AppDispatch } from 'store'
+import store, { AppDispatch, RootState } from 'store'
 import {
   fetchAllCharacters,
   fetchCurrentPlayer,
@@ -69,6 +70,13 @@ import UpdatesCable from 'utils/cable'
 
 export const INIT = 'lca/app/INIT'
 
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  AnyAction
+>
+
 export function fetchAll() {
   return (dispatch: AppDispatch, getState: typeof store.getState) => {
     dispatch(fetchCurrentPlayer())
@@ -76,11 +84,8 @@ export function fetchAll() {
       .then(() => dispatch(fetchAllQcs()))
       .then(() => dispatch(fetchAllBattlegroups()))
       .then(() => {
-        UpdatesCable.subscribe(getState, (data: $TSFixMe) =>
-          dispatch({
-            type: 'lca/cable/RECEIVED',
-            payload: data,
-          }),
+        UpdatesCable.subscribe(getState, (data) =>
+          dispatch({ type: 'lca/cable/RECEIVED', payload: data }),
         )
       })
   }

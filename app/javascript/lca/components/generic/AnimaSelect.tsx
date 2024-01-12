@@ -1,9 +1,7 @@
-import * as React from 'react'
-
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
 import { WithSharedStats } from 'types/shared'
+
 interface Props {
   character: WithSharedStats
   onChange: $TSFixMeFunction
@@ -12,6 +10,7 @@ interface Props {
 
 const AnimaSelect = ({ character, onChange, ...props }: Props) => (
   <TextField
+    variant="standard"
     select
     name="anima_level"
     value={character.anima_level}

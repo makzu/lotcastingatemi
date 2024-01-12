@@ -1,71 +1,70 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import { compose } from 'redux'
 
-import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
-import PoolDisplay from '../generic/PoolDisplay'
-import BlockPaper from '../generic/blockPaper'
-import MarkdownDisplay from '../generic/MarkdownDisplay'
-import sharedStyles from 'styles/'
+import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
+
+import BlockPaper from 'components/shared/BlockPaper'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
-import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
-import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import { getAttacksForBattlegroup, getSpecificBattlegroup } from 'selectors'
+import sharedStyles from 'styles/'
 import {
-  prettyDrillRating,
   bgAttackPool,
   bgDamage,
   bgDefenseBonus,
   bgSoak,
+  prettyDrillRating,
 } from 'utils/calculated'
-import { WithStyles } from '@material-ui/styles'
-import { RootState } from 'store'
+import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    ...sharedStyles(theme),
-    healthBlock: {
-      paddingTop: theme.spacing(-1),
-      marginRight: theme.spacing(),
-      paddingRight: theme.spacing(-1),
-    },
-    poolBlock: {
-      marginRight: theme.spacing(),
-      marginTop: theme.spacing(),
-      width: '4.5rem',
-      maxHeight: '5.5rem',
-      overflow: 'hidden',
-    },
-    label: {
-      ...theme.typography.body1,
-      fontSize: '0.75rem',
-      fontWeight: 500,
-      opacity: 0.7,
-      display: 'flex',
-    },
-    labelSpan: {
-      alignSelf: 'flex-end',
-    },
-    tags: {
-      ...theme.typography.body1,
-      margin: theme.spacing(),
-      marginLeft: 0,
-      textTransform: 'capitalize',
-      minWidth: '5rem',
-      maxHeight: '5rem',
-      overflow: 'hidden',
-    },
-    portrait: {
-      maxWidth: '100%',
-      display: 'block',
-      margin: 'auto',
-    },
-    portraitWrap: {
-      //textAlign: 'center',
-    },
-  })
+const styles = (theme) => ({
+  ...sharedStyles(theme),
+  healthBlock: {
+    paddingTop: theme.spacing(-1),
+    marginRight: theme.spacing(),
+    paddingRight: theme.spacing(-1),
+  },
+  poolBlock: {
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
+    width: '4.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
+  label: {
+    ...theme.typography.body1,
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    opacity: 0.7,
+    display: 'flex',
+  },
+  labelSpan: {
+    alignSelf: 'flex-end',
+  },
+  tags: {
+    ...theme.typography.body1,
+    margin: theme.spacing(),
+    marginLeft: 0,
+    textTransform: 'capitalize',
+    minWidth: '5rem',
+    maxHeight: '5rem',
+    overflow: 'hidden',
+  },
+  portrait: {
+    maxWidth: '100%',
+    display: 'block',
+    margin: 'auto',
+  },
+  portraitWrap: {
+    //textAlign: 'center',
+  },
+})
 
 interface Props extends WithStyles<typeof styles> {
   id: string
@@ -89,7 +88,9 @@ class BattlegroupSheet extends Component<Props> {
           </Typography>
         </BlockPaper>
       )
+
     const { battlegroup, qc_attacks, classes } = this.props
+
     const attacks = qc_attacks.map((attack) => (
       <div key={attack.id} className={classes.flexContainerWrap}>
         <div className={classes.tags}>
@@ -367,9 +368,8 @@ function mapStateToProps(state: RootState, ownProps) {
 }
 
 export default compose(
+  withRouter,
   ProtectedComponent,
   withStyles(styles),
-  connect(mapStateToProps, {
-    fetch: fetchBattlegroupIfNecessary,
-  }),
+  connect(mapStateToProps, { fetch: fetchBattlegroupIfNecessary }),
 )(BattlegroupSheet)

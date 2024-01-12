@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import TextField from '@material-ui/core/TextField'
-import { withStyles } from '@material-ui/core/styles'
+import { Component, SyntheticInputEvent } from 'react'
+
+import TextField from '@mui/material/TextField'
+import { withStyles } from '@mui/styles'
 
 const styles = (theme) => ({
   field: {
@@ -39,7 +40,8 @@ class RatingField extends Component<Props, State> {
       oldValue: props.value,
     }
   }
-  handleChange = (e: React.SyntheticEvent) => {
+
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     if (isNaN(parseInt(e.target.value))) {
       // $FlowThisIsOkayISwear
       this.setState({
@@ -52,10 +54,12 @@ class RatingField extends Component<Props, State> {
       value: parseInt(e.target.value),
     })
   }
-  handleFocus = (e: React.SyntheticEvent) => {
+
+  handleFocus = (e: SyntheticInputEvent<HTMLInputElement>) => {
     e.target.select()
   }
-  handleBlur = (e: React.SyntheticEvent) => {
+
+  handleBlur = (e: SyntheticInputEvent<HTMLInputElement>) => {
     if (isNaN(parseInt(this.state.value))) {
       this.setState({
         value: 0,

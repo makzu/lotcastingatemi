@@ -1,28 +1,29 @@
 import { deepEqual } from 'fast-equals'
-import * as React from 'react'
-const { Component } = React
+import { Component } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Checkbox from '@material-ui/core/Checkbox'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiTextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import Collapse from '@material-ui/core/Collapse'
-import Delete from '@material-ui/icons/Delete'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import styles from './CharmStyles'
-import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
-import { SpellSummaryBlock } from './SpellDisplay'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
+
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import Accordion from '@mui/material/Accordion'
+import AccordionActions from '@mui/material/AccordionActions'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import MenuItem from '@mui/material/MenuItem'
+import MuiTextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import Collapse from '@mui/material/Collapse'
+import Delete from '@mui/icons-material/Delete'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
+import styles from './CharmStyles.js'
+import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
+import { SpellSummaryBlock } from './SpellDisplay.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import { checkVisible } from 'utils'
 import type { Character, Spell } from 'utils/flow-types'
 const Handle = SortableHandle(() => (
@@ -70,7 +71,7 @@ class SpellFields extends Component<Props> {
     const { handleChange, handleCheck, handleRemove, scrollToPanel } = this
     const isOpen = openSpell === spell.id
     return (
-      <ExpansionPanel
+      <Accordion
         expanded={isOpen}
         onChange={onOpenChange(spell.id)}
         CollapseProps={{
@@ -79,7 +80,7 @@ class SpellFields extends Component<Props> {
           unmountOnExit: true,
         }}
       >
-        <ExpansionPanelSummary
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           classes={{
             expanded: classes.expandedEditSummary,
@@ -104,9 +105,9 @@ class SpellFields extends Component<Props> {
               />
             </Collapse>
           </div>
-        </ExpansionPanelSummary>
+        </AccordionSummary>
 
-        <ExpansionPanelDetails>
+        <AccordionDetails>
           <div className={classes.detailsWrap}>
             <TextField
               name="name"
@@ -144,6 +145,7 @@ class SpellFields extends Component<Props> {
               margin="dense"
             />
             <MuiTextField
+              variant="standard"
               select
               name="circle"
               label="Circle"
@@ -185,7 +187,7 @@ class SpellFields extends Component<Props> {
               label="Effect"
               margin="dense"
               rows={2}
-              rowsMax={15}
+              maxRows={15}
             />
             <br />
             <TextField
@@ -197,19 +199,14 @@ class SpellFields extends Component<Props> {
               margin="dense"
             />
           </div>
-        </ExpansionPanelDetails>
-        <ExpansionPanelActions>
-          <Button
-            onClick={handleRemove}
-            style={{
-              float: 'right',
-            }}
-          >
+        </AccordionDetails>
+        <AccordionActions>
+          <Button onClick={handleRemove} style={{ float: 'right' }}>
             Delete&nbsp;
             <Delete />
           </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+        </AccordionActions>
+      </Accordion>
     )
   }
 }

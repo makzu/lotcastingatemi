@@ -1,22 +1,23 @@
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import RatingField from './RatingField'
-import ResourceDisplay from './ResourceDisplay'
+
+import Button from '@mui/material/Button'
+import ButtonBase from '@mui/material/ButtonBase'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+
+import RatingField from './RatingField.jsx'
+import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withWillpower, Enhancer } from 'utils/flow-types'
-interface ExposedProps {
-  children: React.ReactNode
-  character: withWillpower & {
-    id: number
-  }
+
+type ExposedProps = {
+  children: Node
+  character: withWillpower & { id: number }
   qc?: boolean
 }
 type Props = ExposedProps & {
@@ -28,8 +29,8 @@ interface State {
   toSpend: number
 }
 
-class WillpowerSpendWidget extends React.Component<Props, State> {
-  constructor(props: Props) {
+class WillpowerSpendWidget extends Component<Props, State> {
+  constructor(props) {
     super(props)
     this.state = {
       open: false,
@@ -54,12 +55,14 @@ class WillpowerSpendWidget extends React.Component<Props, State> {
       toSpend: 0,
     })
   }
-  handleAdd = (wp: number) => {
+
+  handleAdd = (wp) => {
     this.setState({
       toSpend: clamp(this.state.toSpend + wp, this.min(), this.max()),
     })
   }
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  handleChange = (e) => {
     const { name, value } = e.target
     this.setState({
       [name]: value,
@@ -165,6 +168,8 @@ function mapStateToProps(state: Record<string, $TSFixMe>, props: Props) {
   }
 }
 
-export default connect(mapStateToProps, { spendWillpower })(
-  WillpowerSpendWidget,
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  spendWillpower,
+})
+
+export default enhance(WillpowerSpendWidget)

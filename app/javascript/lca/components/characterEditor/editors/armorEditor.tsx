@@ -1,38 +1,31 @@
-import React from 'react'
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Typography from '@material-ui/core/Typography'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
 
-import BlockPaper from 'components/generic/blockPaper'
-import PoolDisplay from 'components/generic/PoolDisplay'
-import RatingField from 'components/generic/RatingField'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
+import PoolDisplay from 'components/generic/PoolDisplay.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import TagsField from 'components/generic/TagsField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import WeightSelect from 'components/shared/selects/WeightSelect'
 import type { withArmorStats as Character } from 'utils/flow-types'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      marginTop: theme.spacing(),
-      marginBottom: theme.spacing(),
-    },
-    poolBlock: {
-      margin: theme.spacing(),
-      marginLeft: 0,
-      width: '5.5rem',
-      maxHeight: '5rem',
-    },
-  })
+const styles = (theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginTop: theme.spacing(),
+    marginBottom: theme.spacing(),
+  },
+  poolBlock: {
+    margin: theme.spacing(),
+    marginLeft: 0,
+    width: '5.5rem',
+    maxHeight: '5rem',
+  },
+})
 
 interface Props extends WithStyles<typeof styles> {
   character: Character

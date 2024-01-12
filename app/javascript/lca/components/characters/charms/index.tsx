@@ -1,16 +1,20 @@
-import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import styles from './CharmStyles'
-import CharmDisplay from './CharmDisplay'
-import CharmFilter from './CharmFilter'
-import SpellDisplay from './SpellDisplay'
+
+import withStyles from '@mui/styles/withStyles'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+
+import styles from './CharmStyles.js'
+import CharmDisplay from './CharmDisplay.jsx'
+import CharmFilter from './CharmFilter.jsx'
+import SpellDisplay from './SpellDisplay.jsx'
 import CharacterLoadError from '../../CharacterSheet/CharacterLoadError'
+
+import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import {
   getSpecificCharacter,
   getNativeCharmsForCharacter,
@@ -64,19 +68,16 @@ class CharmFullPage extends Component<Props, State> {
       filtersOpen: !this.state.filtersOpen,
     })
   }
+
   setFilter = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    })
+    this.setState({ [e.target.name]: e.target.value })
   }
+
   setOpenCharm = (charm) => (e, expanded) =>
-    this.setState({
-      openCharm: expanded ? charm : null,
-    })
+    this.setState({ openCharm: expanded ? charm : null })
+
   setOpenSpell = (spell) => (e, expanded) =>
-    this.setState({
-      openSpell: expanded ? spell : null,
-    })
+    this.setState({ openSpell: expanded ? spell : null })
 
   render() {
     /* Escape hatch */
@@ -109,7 +110,6 @@ class CharmFullPage extends Component<Props, State> {
 
     const filterByCategory = (charm) =>
       categoryFilter.every((cat) => charm.categories.includes(cat))
-
     if (abilityFilter !== null)
       filteredNatives = filteredNatives.filter(
         (c) => c.ability === abilityFilter,
@@ -122,7 +122,6 @@ class CharmFullPage extends Component<Props, State> {
       )
     if (circleFilter !== null)
       filteredSpells = filteredSpells.filter((c) => c.circle === circleFilter)
-
     if (categoryFilter.length > 0) {
       filteredNatives = filteredNatives.filter(filterByCategory)
       filteredMA = filteredMA.filter(filterByCategory)
@@ -292,7 +291,7 @@ class CharmFullPage extends Component<Props, State> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.characterId
+  const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
   let nativeCharms = []
   let martialArtsCharms = []
@@ -319,5 +318,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  withStyles(styles)(connect(mapStateToProps)(CharmFullPage)),
+  withRouter(withStyles(styles)(connect(mapStateToProps)(CharmFullPage))),
 )

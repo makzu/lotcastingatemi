@@ -1,16 +1,17 @@
-import * as React from 'react'
-const { Component, Fragment } = React
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Divider from '@material-ui/core/Divider'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import CanonExcellencyCopy from './CanonExcellencyCopy'
-import AbilitySelect from 'components/generic/abilitySelect'
+import { Component, Fragment } from 'react'
+
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Divider from '@mui/material/Divider'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
+import CanonExcellencyCopy from './CanonExcellencyCopy.jsx'
+import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import type { Character } from 'utils/flow-types'
 
 class ExcellencyEditor extends Component<
@@ -154,6 +155,7 @@ class ExcellencyEditor extends Component<
             </Typography>
 
             <TextField
+              variant="standard"
               select
               label="Excellency Cap"
               name="excellency"
@@ -174,6 +176,7 @@ class ExcellencyEditor extends Component<
             </TextField>
 
             <TextField
+              variant="standard"
               select
               label="Stunt Excellency cap"
               name="excellency_stunt"

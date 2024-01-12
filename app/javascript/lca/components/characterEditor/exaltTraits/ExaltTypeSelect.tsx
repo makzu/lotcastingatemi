@@ -1,8 +1,6 @@
-import * as React from 'react'
+import { ChangeEventHandler } from 'react'
 
-import ListSubheader from '@material-ui/core/ListSubheader'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import { ListSubheader, MenuItem, TextField } from '@mui/material'
 
 export const prettyType = (type: string) => {
   switch (type) {
@@ -30,7 +28,7 @@ export const prettyType = (type: string) => {
 
 interface Props {
   value: string
-  onChange: React.ChangeEventHandler
+  onChange: ChangeEventHandler
 }
 const ExaltTypeSelect = (props: Props) => {
   const { value, onChange } = props
@@ -58,6 +56,7 @@ const ExaltTypeSelect = (props: Props) => {
 
   return (
     <TextField
+      variant="standard"
       select
       name="type"
       value={value}

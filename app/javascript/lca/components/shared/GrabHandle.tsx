@@ -1,9 +1,8 @@
-import React from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
-import { Theme } from '@material-ui/core'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import { makeStyles } from '@material-ui/styles'
+import { Theme } from '@mui/material'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme: Theme) => ({
   handle: {

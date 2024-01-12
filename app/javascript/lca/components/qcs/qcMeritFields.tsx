@@ -1,13 +1,13 @@
 import { deepEqual } from 'fast-equals'
-import React, { ChangeEvent } from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import Delete from '@material-ui/icons/Delete'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Delete from '@mui/icons-material/Delete'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
 
-import BlockPaper from 'components/generic/blockPaper'
+import BlockPaper from 'components/shared/BlockPaper'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import TextField from 'components/generic/TextField'
 import type { QcMerit } from 'utils/flow-types'
@@ -20,8 +20,8 @@ interface Props {
   onMeritChange: $TSFixMeFunction
   onRemoveClick: $TSFixMeFunction
 }
-export default class QcMeritFields extends React.Component<Props> {
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+export default class QcMeritFields extends Component<Props> {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { merit } = this.props
     if (deepEqual(merit[name], value)) return
@@ -72,7 +72,7 @@ export default class QcMeritFields extends React.Component<Props> {
           onChange={handleChange}
           fullWidth
           multiline
-          rowsMax={5}
+          maxRows={5}
         />
         <div
           style={{

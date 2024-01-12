@@ -1,12 +1,14 @@
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Delete from '@material-ui/icons/Delete'
+
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import Delete from '@mui/icons-material/Delete'
+
 import { destroyChronicle } from 'ducks/actions'
 import { getSpecificChronicle } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
@@ -21,7 +23,7 @@ interface State {
   open: boolean
 }
 
-class ChronicleLeavePopup extends React.Component<Props, State> {
+class ChronicleLeavePopup extends Component<Props, State> {
   state = {
     open: false,
   }

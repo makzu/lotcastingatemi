@@ -1,10 +1,8 @@
-import * as React from 'react'
+import { Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
-import { Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
-
-import BlockPaper from 'components/generic/blockPaper'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+import BlockPaper from 'components/shared/BlockPaper'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import SecondaryInfo from 'components/shared/SecondaryInfo'
 import { Spell } from 'types'
 
@@ -22,7 +20,6 @@ const SpellDisplay = ({ spell }: Props) => {
   const classes = useStyles()
 
   return (
-    // @ts-expect-error I suspect the MUI v5 migration will fix this
     <BlockPaper>
       <Typography variant="h6">
         {spell.name}

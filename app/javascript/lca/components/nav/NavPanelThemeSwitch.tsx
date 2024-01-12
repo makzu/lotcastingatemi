@@ -1,23 +1,19 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-
 import {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
   Switch,
-} from '@material-ui/core'
+} from '@mui/material'
 
-import { State } from 'ducks'
-import { switchTheme } from 'ducks/actions'
+import { switchTheme } from 'features/themeSlice'
+import { useAppDispatch, useAppSelector } from 'hooks'
 
-const NavPanelThemeSwitch = ({
-  theme,
-  action,
-}: {
-  theme: 'light' | 'dark'
-  action: typeof switchTheme
-}) => {
+const NavPanelThemeSwitch = () => {
+  const theme = useAppSelector((state) => state.theme)
+  const dispatch = useAppDispatch()
+  const action = (theme: Parameters<typeof switchTheme>[0]) =>
+    dispatch(switchTheme(theme))
+
   return (
     <ListItem
       button
@@ -37,8 +33,4 @@ const NavPanelThemeSwitch = ({
   )
 }
 
-const mapState = (state: State) => ({
-  theme: state.app.theme,
-})
-
-export default connect(mapState, { action: switchTheme })(NavPanelThemeSwitch)
+export default NavPanelThemeSwitch

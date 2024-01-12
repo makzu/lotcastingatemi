@@ -1,17 +1,15 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { Button, Grid, Typography } from '@material-ui/core'
-import { WithStyles } from '@material-ui/core/styles'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
+import { Button, Grid, Typography } from '@mui/material'
 
 import SortableGridList from 'components/generic/SortableGridList'
 
 import Checkbox from 'components/shared/inputs/Checkbox'
-import { State } from 'ducks'
 import { createSpell, destroySpell, updateSpell } from 'ducks/actions'
 import { getSpellsForQc } from 'ducks/selectors'
-import commonStyles from 'styles'
+import { useAppDispatch } from 'hooks'
+import { AppDispatch, RootState } from 'store'
 import { QC, Spell } from 'types'
 import QcSpellFields from './QcSpellFields'
 import SortableItem from 'components/generic/SortableItem'
@@ -20,24 +18,20 @@ interface StateProps {
   spells: Spell[]
 }
 interface DispatchProps {
-  create(): void
   destroy(id: number): void
-  update: $TSFixMeFunction
+  update(id: number, trait: Partial<QC>): void
 }
 interface OuterProps {
   qc: QC
   changeQc: $TSFixMeFunction
 }
-interface Props
-  extends OuterProps,
-    StateProps,
-    DispatchProps,
-    WithStyles<typeof commonStyles> {}
+interface Props extends OuterProps, StateProps, DispatchProps {}
 
 const QcSpellEditor = (props: Props) => {
-  // This should go away on migrating to hooks
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { qc, classes, create, spells, update, destroy, changeQc } = props
+  const dispatch = useAppDispatch()
+  const create = () => dispatch(createSpell(qc.id, { parent: 'qc' }))
+
+  const { qc, spells, update, destroy, changeQc } = props
   const handleSort = () => undefined
 
   const spellList = spells.map((spell, i) => (
@@ -48,7 +42,6 @@ const QcSpellEditor = (props: Props) => {
           spell={spell}
           handleChange={update}
           handleDestroy={destroy}
-          classes={classes}
         />
       </Grid>
     </SortableItem>
@@ -68,15 +61,15 @@ const QcSpellEditor = (props: Props) => {
         &nbsp;&nbsp;
         {qc.is_sorcerer && (
           <Button onClick={create}>
-            Add Spell
-            <ContentAddCircle />
+            {' '}
+            Add Spell <ContentAddCircle />{' '}
           </Button>
         )}
       </Typography>
       {qc.is_sorcerer && (
         <SortableGridList
+          classes={{}}
           items={spellList}
-          classes={classes}
           onSortEnd={handleSort}
           useDragHandle
           axis="x"
@@ -86,12 +79,11 @@ const QcSpellEditor = (props: Props) => {
   )
 }
 
-const mapState = (state: State, { qc }: OuterProps): StateProps => ({
+const mapState = (state: RootState, { qc }): StateProps => ({
   spells: getSpellsForQc(state, qc.id),
 })
 
-const mapDispatch = (dispatch, { qc }: OuterProps): DispatchProps => ({
-  create: () => dispatch(createSpell(qc.id, { parent: 'qc' })),
+const mapDispatch = (dispatch: AppDispatch, { qc }: OuterProps) => ({
   destroy: (id) => dispatch(destroySpell(id, qc.id, 'qc')),
   update: (id, trait) => dispatch(updateSpell(id, qc.id, trait, 'qc')),
 })

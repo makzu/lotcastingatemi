@@ -1,38 +1,31 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import Whatshot from '@material-ui/icons/Whatshot'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Whatshot from '@mui/icons-material/Whatshot'
 
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
-import PoolDisplay from '../generic/PoolDisplay'
-import SpendableBlock from '../generic/SpendableBlock'
-import CombatControls from './CombatControls'
-import RemoveFromCombatButton from './RemoveFromCombatButton'
-import NotesPopup from 'components/characters/NotesPopup'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
+import CombatControls from './CombatControls.jsx'
+import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
+import NotesPopup from 'components/characters/NotesPopup.jsx'
+import CardBase from 'components/shared/CardBase'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character, Enhancer } from 'utils/flow-types'
 import { RootState } from 'store'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      ...theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-      }),
-      height: '100%',
-      position: 'relative',
+const styles = (theme) => ({
+  nameRow: {
+    display: 'flex',
+  },
+  nameWrap: {
+    flex: 1,
+    '& a': {
+      color: 'unset',
     },
     nameRow: {
       display: 'flex',
@@ -83,9 +76,16 @@ type Props = ExposedProps &
     penalties: Record<string, $TSFixMe>
   }
 
-export function CharacterCard({ character, penalties, pools, classes }: Props) {
+export function CharacterCard({
+  character,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  canEdit,
+  penalties,
+  pools,
+  classes,
+}: Props) {
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       <div className={classes.nameRow}>
         <div className={classes.nameWrap}>
           <Typography
@@ -177,7 +177,7 @@ export function CharacterCard({ character, penalties, pools, classes }: Props) {
       )}
 
       <RemoveFromCombatButton character={character} characterType="character" />
-    </Paper>
+    </CardBase>
   )
 }
 

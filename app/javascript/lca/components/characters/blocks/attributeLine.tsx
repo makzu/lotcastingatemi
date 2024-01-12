@@ -1,15 +1,18 @@
-import React from 'react'
-
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
 
 import RatingLine from 'components/generic/ratingLine'
 import { isCasteAttribute, isFavoredAttribute } from 'utils/calculated'
 import { Character } from 'types'
 
 const styles = (theme) => ({
-  attributeName: { ...theme.typography.body1, textTransform: 'capitalize' },
-  attributeFavored: { ...theme.typography.caption },
+  attributeName: {
+    ...theme.typography.body1,
+    textTransform: 'capitalize',
+  },
+  attributeFavored: {
+    ...theme.typography.caption,
+  },
 })
 
 interface Props {

@@ -1,15 +1,16 @@
-import React, { MouseEvent } from 'react'
+import { MouseEvent } from 'react'
 
 import {
   Divider,
   ListSubheader,
-  makeStyles,
   MenuItem,
   TextField,
   Theme,
-} from '@material-ui/core'
+} from '@mui/material'
 
-import { TextFieldProps } from '@material-ui/core/TextField'
+import makeStyles from '@mui/styles/makeStyles'
+
+import { TextFieldProps } from '@mui/material/TextField'
 import { Character, Weapon } from 'types'
 import { ATTRIBUTE_NAMES } from 'utils/constants'
 
@@ -57,6 +58,7 @@ const WeaponAttributeSelect = (props: Props) => {
 
   return (
     <TextField
+      variant="standard"
       select
       className={classes.root}
       value={fixedValue}

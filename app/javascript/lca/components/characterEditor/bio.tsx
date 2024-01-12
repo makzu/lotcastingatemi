@@ -1,16 +1,20 @@
 import { deepEqual } from 'fast-equals'
-import React, { ChangeEvent, Component } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import XpEditor from './editors/xpEditor'
+import { compose } from 'redux'
+
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+
+import XpEditor from './editors/xpEditor.jsx'
 import AnimalFormsEditor from './editors/AnimalFormsEditor'
-import BlockPaper from 'components/generic/blockPaper'
-import TextField from 'components/generic/TextField'
+import DocumentTitle from 'components/generic/DocumentTitle'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { showLunarTraits } from 'utils/calculated'
@@ -22,7 +26,7 @@ interface Props {
 }
 
 class BioEditor extends Component<Props> {
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { character } = this.props
     if (deepEqual(character[name], value)) return
@@ -71,7 +75,7 @@ class BioEditor extends Component<Props> {
                 multiline
                 fullWidth
                 rows={2}
-                rowsMax={100}
+                maxRows={100}
                 onChange={handleChange}
               />
 
@@ -148,7 +152,7 @@ class BioEditor extends Component<Props> {
                 multiline
                 fullWidth
                 rows={2}
-                rowsMax={100}
+                maxRows={100}
                 onChange={handleChange}
               />
 
@@ -161,7 +165,7 @@ class BioEditor extends Component<Props> {
                 multiline
                 fullWidth
                 rows={2}
-                rowsMax={100}
+                maxRows={100}
                 onChange={handleChange}
               />
             </BlockPaper>
@@ -194,12 +198,11 @@ class BioEditor extends Component<Props> {
 }
 
 const mapStateToProps = (state, props) => ({
-  character: getSpecificCharacter(state, props.match.params.characterId),
+  character: getSpecificCharacter(state, props.params.id),
 })
 
 export default compose(
   ProtectedComponent,
-  connect(mapStateToProps, {
-    updateCharacter,
-  }),
+  withRouter,
+  connect(mapStateToProps, { updateCharacter }),
 )(BioEditor)

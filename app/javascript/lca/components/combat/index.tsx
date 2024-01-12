@@ -1,17 +1,21 @@
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import CharacterCard from './CharacterCombatCard'
-import QcCard from './QcCombatCard'
-import BattlegroupCard from './BattlegroupCombatCard'
-import OutOfCombatCard from './OutOfCombatCard'
-import BlockPaper from '../generic/blockPaper'
+import { compose } from 'redux'
+
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+
+import CharacterCard from './CharacterCombatCard.jsx'
+import QcCard from './QcCombatCard.jsx'
+import BattlegroupCard from './BattlegroupCombatCard.jsx'
+import OutOfCombatCard from './OutOfCombatCard.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { nextRound, endCombat } from 'ducks/events'
 import {
   getSpecificChronicle,
@@ -90,7 +94,9 @@ class CombatDashboard extends Component<Props> {
         {c.type === 'battlegroup' && <BattlegroupCard battlegroup={c} />}
       </Grid>
     ))
+
     const nextCharacter = inCombatEntities.filter((c) => !c.has_acted)[0]
+
     return (
       <Grid
         container
@@ -147,7 +153,8 @@ class CombatDashboard extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.chronicleId
+  const id = ownProps.params.id
+
   return {
     id: id,
     chronicle: getSpecificChronicle(state, id),
@@ -162,8 +169,6 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   ProtectedComponent,
-  connect(mapStateToProps, {
-    nextRound,
-    endCombat,
-  }),
+  withRouter,
+  connect(mapStateToProps, { nextRound, endCombat }),
 )(CombatDashboard)

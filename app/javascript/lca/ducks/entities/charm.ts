@@ -5,6 +5,7 @@ import { isDefined, sortOrderSort } from 'utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificCharacter } from './character'
+import { RootState } from 'store'
 
 export default createTraitReducer('charm')
 
@@ -12,9 +13,9 @@ export const [createCharm, updateCharm, destroyCharm] =
   createApiActions('charm')
 
 /* *** Selectors *** */
-const idMemoizer = (_: unknown, id: number) => id
+const idMemoizer = (_state: RootState, id: number) => id
 
-const getCharms = (state: State) => unwrapped(state).charms
+const getCharms = (state: RootState) => unwrapped(state).charms
 
 export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],

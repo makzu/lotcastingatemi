@@ -3,7 +3,6 @@ declare let check: $TSFixMeFunction
 
 require('jasmine-check').install()
 
-import React from 'react'
 import renderer from 'react-test-renderer'
 import PoolDisplay from '../../../components/generic/PoolDisplay'
 import { SEED, genSolar } from '../../_mocks'

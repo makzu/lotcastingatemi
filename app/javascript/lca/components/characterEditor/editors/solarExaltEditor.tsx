@@ -1,10 +1,8 @@
-import React from 'react'
-
-import MenuItem from '@material-ui/core/MenuItem'
+import MenuItem from '@mui/material/MenuItem'
 
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
-import AbilitySelect from 'components/generic/abilitySelect'
-import BlockPaper from 'components/generic/blockPaper'
+import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'
 import { SOLAR_CASTE_ABILITIES } from 'utils/constants'

@@ -1,32 +1,23 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Edit from '@material-ui/icons/Edit'
+import Edit from '@mui/icons-material/Edit'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import { State } from 'ducks'
+import { useAppSelector } from 'hooks'
 import { canIEdit } from 'selectors'
 import { MenuItemProps as Props } from './CharacterMenuItem'
-import LinkMenuItem from './LinkMenuItem'
 
-interface StateProps {
-  canEdit: boolean
-}
-
-interface InnerProps extends StateProps, Props {}
-
-const CardMenuEdit = ({ id, characterType, canEdit }: InnerProps) =>
-  canEdit ? (
-    <LinkMenuItem to={`/${characterType}s/${id}/edit`}>
+const CardMenuEdit = ({ id, characterType }: Props) => {
+  const canEdit = useAppSelector((state) => canIEdit(state, id, characterType))
+  if (!canEdit) return null
+  return (
+    <MenuItem component={Link} to={`/${characterType}s/${id}/edit`}>
       <ListItemIcon>
         <Edit />
       </ListItemIcon>
       <ListItemText inset primary="Edit" />
-    </LinkMenuItem>
-  ) : null
+    </MenuItem>
+  )
+}
 
-const mapState = (state: State, { id, characterType }: Props): StateProps => ({
-  canEdit: canIEdit(state, id, characterType),
-})
-
-export default connect<StateProps, null, Props>(mapState)(CardMenuEdit)
+export default CardMenuEdit

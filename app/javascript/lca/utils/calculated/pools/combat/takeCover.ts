@@ -1,12 +1,11 @@
-import pool from '../_pool'
+import { Character, penaltyObj } from '@/types'
 import { penaltyObject } from '../../index'
-import { Character } from 'types'
-import { PenaltyInput } from 'selectors'
+import pool from '../_pool'
 
 export function takeCover(
   character: Character,
   merits: string[],
-  penalties: PenaltyInput,
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   // TODO: handle merits that affect take cover pool?

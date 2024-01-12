@@ -1,6 +1,5 @@
-import React from 'react'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import { WithStyles } from '@material-ui/styles'
+import withStyles from '@mui/styles/withStyles'
+
 // TODO: Replace with SVG icons or something?
 const dot = {
   display: 'inline-block',
@@ -13,11 +12,16 @@ const dot = {
   marginLeft: '1px',
 }
 
-const styles = (theme: Theme) =>
-  createStyles({
-    emptyDot: { ...dot, backgroundColor: theme.palette.background.paper },
-    fullDot: { ...dot, backgroundColor: 'black' },
-  })
+const styles = () => ({
+  emptyDot: {
+    ...dot,
+    backgroundColor: 'transparent',
+  },
+  fullDot: {
+    ...dot,
+    backgroundColor: 'black',
+  },
+})
 
 interface Props extends WithStyles<typeof styles> {
   rating: number

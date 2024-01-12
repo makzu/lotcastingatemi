@@ -1,15 +1,18 @@
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import IconButton from '@material-ui/core/IconButton'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import Collapse from '@material-ui/core/Collapse'
-import ExpandLess from '@material-ui/icons/ExpandLess'
-import ExpandMore from '@material-ui/icons/ExpandMore'
-import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup'
-import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup'
+
+import IconButton from '@mui/material/IconButton'
+import ListSubheader from '@mui/material/ListSubheader'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+import Collapse from '@mui/material/Collapse'
+
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+
+import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
+import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
 import { NavLinkListItem } from 'components/shared/wrappers'
 import { getMyChronicles, getMyOwnChronicles } from 'selectors'
 import type { Chronicle, Enhancer } from 'utils/flow-types'
@@ -24,10 +27,9 @@ interface State {
   open: boolean
 }
 
-class ChronicleNavList extends React.Component<Props, State> {
-  state = {
-    open: false,
-  }
+class ChronicleNavList extends Component<Props, State> {
+  state = { open: false }
+
   handleClick = () => {
     this.setState({
       open: !this.state.open,
@@ -61,7 +63,7 @@ class ChronicleNavList extends React.Component<Props, State> {
           <ListItemText primary="Chronicles" />
 
           <ListItemSecondaryAction>
-            <IconButton onClick={this.handleClick}>
+            <IconButton onClick={this.handleClick} size="large">
               {this.state.open ? <ExpandLess /> : <ExpandMore />}
             </IconButton>
           </ListItemSecondaryAction>

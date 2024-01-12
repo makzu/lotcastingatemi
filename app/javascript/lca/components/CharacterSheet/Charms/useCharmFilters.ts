@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useReducer } from 'react'
 
 import { Charm } from 'types'
 import { Timing } from 'types/_lib'
@@ -51,7 +51,7 @@ export const reducer = (state: CharmFilter, action: CharmFilterAction) => {
 }
 
 const useCharmFilters = () => {
-  const [state, dispatch] = React.useReducer(reducer, initialFilters)
+  const [state, dispatch] = useReducer(reducer, initialFilters)
   return [state, dispatch]
 }
 

@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
+import { Fragment } from 'react'
+
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
+
+import BlockPaper from 'components/shared/BlockPaper'
 import type { withSpecialties } from 'utils/flow-types'
 
 const styles = (theme) => ({

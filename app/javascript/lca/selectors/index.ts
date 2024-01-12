@@ -1,32 +1,31 @@
 import { createSelector } from 'reselect'
+
+export * from './battlegroup'
+export * from './character'
+export * from './charm'
 export * from './chronicle'
 export * from './entities'
-export * from './character'
-export * from './weapon'
-export * from './charm'
 export * from './qc'
-export * from './battlegroup'
+export * from './weapon'
+
+import { RootState } from '@/store'
 import {
-  getPoolsAndRatingsForBattlegroup,
-  canIEditBattlegroup,
   canIDeleteBattlegroup,
-} from './battlegroup'
+  canIEditBattlegroup,
+} from '@/ducks/entities/battlegroup'
+import { getPoolsAndRatingsForBattlegroup } from './battlegroup'
+
 import {
-  getPoolsAndRatings,
-  canIEditCharacter,
   canIDeleteCharacter,
+  canIEditCharacter,
+  getPoolsAndRatings,
 } from './character'
 import { amIStOfChronicle } from './chronicle'
 import { entities, getCurrentPlayer } from './entities'
-import { getPoolsAndRatingsForQc, canIEditQc, canIDeleteQc } from './qc'
-import { WrappedEntityState } from 'ducks/entities'
-type CT = 'chronicle' | 'character' | 'qc' | 'battlegroup'
+import { canIDeleteQc, canIEditQc, getPoolsAndRatingsForQc } from './qc'
 
-export const canIEdit = (
-  state: WrappedEntityState,
-  id: number,
-  characterType: CT,
-) => {
+type CT = 'chronicle' | 'character' | 'qc' | 'battlegroup'
+export const canIEdit = (state: RootState, id: number, characterType: CT) => {
   switch (characterType) {
     case 'chronicle':
       return amIStOfChronicle(state, id)
@@ -45,11 +44,7 @@ export const canIEdit = (
   }
 }
 
-export const canIDelete = (
-  state: WrappedEntityState,
-  id: number,
-  characterType: CT,
-) => {
+export const canIDelete = (state: RootState, id: number, characterType: CT) => {
   switch (characterType) {
     case 'chronicle':
       return amIStOfChronicle(state, id)
@@ -67,10 +62,8 @@ export const canIDelete = (
       return false
   }
 }
-export const isPublicCharacterPage = (
-  state: WrappedEntityState,
-  pathName: string,
-) => {
+
+export const isPublicCharacterPage = (state: RootState, pathName: string) => {
   const path = pathName.split('/')
   if (
     ['characters', 'qcs', 'battlegroups'].includes(path[1]) &&
@@ -80,7 +73,7 @@ export const isPublicCharacterPage = (
   return false
 }
 
-const getChronicles = (state: WrappedEntityState) => entities(state).chronicles
+const getChronicles = (state: RootState) => entities(state).chronicles
 
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
@@ -95,11 +88,11 @@ export const getMyChronicles = createSelector(
   (currentPlayer, chronicles) =>
     currentPlayer.chronicles
       .map((c) => chronicles[c])
-      .filter((c) => c?.name !== undefined),
+      .filter((c) => c !== undefined && c.name !== undefined),
 )
 
 export const getPoolsAndRatingsGeneric = (
-  state: WrappedEntityState,
+  state: RootState,
   id: number,
   characterType: CT,
 ) => {

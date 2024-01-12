@@ -55,5 +55,4 @@ export {
 } from '../entities'
 
 export { logout } from '../session'
-export { closeDrawer, toggleDrawer, switchTheme } from '../app'
 export { spendMotes, spendWillpower, takeDamage } from '../events'

@@ -1,16 +1,17 @@
-import React from 'react'
-import { shouldUpdate } from 'recompose'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
-import Editor from 'components/generic/intimacyEditor'
-import { isUnequalByKeys } from 'utils'
-import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
-interface Props {
+import { Component } from 'react'
+
+import Typography from '@mui/material/Typography'
+
+import Editor from 'components/generic/intimacyEditor.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+import type { withIntimacies as Character } from 'utils/flow-types'
+
+type Props = {
   character: Character
-  onChange: $TSFixMeFunction
+  onChange: Function
 }
 
-class IntimacyEditor extends React.Component<Props> {
+class IntimacyEditor extends Component<Props> {
   render() {
     const { character, onChange } = this.props
     return (
@@ -27,11 +28,4 @@ class IntimacyEditor extends React.Component<Props> {
   }
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'principles',
-      'ties',
-    ]),
-)
-export default enhance(IntimacyEditor)
+export default IntimacyEditor

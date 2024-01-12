@@ -19,7 +19,7 @@ export * from './qc_charm'
 export * from './battlegroup'
 export * from './combat_actor'
 
-export type { EntityState, WrappedEntityState } from './_types'
+export type { EntityState } from './_types'
 
 import { LOGOUT } from '../session'
 import { mergeEntity } from './_entity'

@@ -1,16 +1,17 @@
-import React from 'react'
 import scrollToElement from 'scroll-to-element'
-import { withStyles } from '@material-ui/core/styles'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import Typography from '@material-ui/core/Typography'
-import Collapse from '@material-ui/core/Collapse'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import styles from './CharmStyles'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import Accordion from '@mui/material/Accordion'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import Collapse from '@mui/material/Collapse'
+import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
+
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import { checkVisible } from 'utils'
 import type { Charm } from 'utils/flow-types'
+import styles from './CharmStyles.js'
 
 function scrollToPanel(e, appearing, id) {
   if (appearing) return false
@@ -78,14 +79,14 @@ type dProps = Props & {
 function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
   const isOpen = openCharm === charm.id
   return (
-    <ExpansionPanel
+    <Accordion
       expanded={isOpen}
       onChange={onOpenChange(charm.id)}
       CollapseProps={{
         onEntered: (e, a) => scrollToPanel(e, a, charm.id),
       }}
     >
-      <ExpansionPanelSummary
+      <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         classes={{
           expanded: classes.expandedSummary,
@@ -99,9 +100,9 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
 
           <CharmSummaryBlock charm={charm} isOpen={isOpen} classes={classes} />
         </div>
-      </ExpansionPanelSummary>
+      </AccordionSummary>
 
-      <ExpansionPanelDetails>
+      <AccordionDetails>
         <div className={classes.detailsWrap}>
           <Typography>
             <strong>Cost:</strong> {charm.cost}
@@ -141,8 +142,8 @@ function CharmDisplay({ charm, openCharm, onOpenChange, classes }: dProps) {
             <Typography variant="caption">Ref: {charm.ref}</Typography>
           )}
         </div>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   )
 }
 

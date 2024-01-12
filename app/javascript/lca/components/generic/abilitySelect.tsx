@@ -1,39 +1,39 @@
-import * as React from 'react'
-const { Component } = React
-import { Theme, withStyles } from '@material-ui/core/styles'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import { Component, Node } from 'react'
+
+import withStyles from '@mui/styles/withStyles'
+import ListSubheader from '@mui/material/ListSubheader'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+
 import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants'
-import { WithStyles, createStyles } from '@material-ui/styles'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      width: '8em',
-      marginRight: theme.spacing(),
-      textTransform: 'capitalize',
-    },
-    multiple: {
-      marginRight: theme.spacing(),
-      textTransform: 'capitalize',
-    },
-  })
+const styles = (theme) => ({
+  root: {
+    width: '8em',
+    marginRight: theme.spacing(),
+    textTransform: 'capitalize',
+  },
+  multiple: {
+    marginRight: theme.spacing(),
+    textTransform: 'capitalize',
+  },
+})
 
-type Props = WithStyles<typeof styles> & {
-  abilities?: Record<string, $TSFixMe>[]
-  attributes?: Record<string, $TSFixMe>[]
-  prependOptions?: React.ReactNode
+type Props = {
+  abilities?: Array<Object>
+  attributes?: Array<Object>
+  prependOptions?: Node
   withAttributes?: boolean
   attributesOnly?: boolean
   includeUniversal?: boolean
   multiple?: boolean
   name: string
-  value: string | string[]
+  value: string | Array<string>
   label: string
   fullWidth?: boolean
   margin?: 'none' | 'dense' | 'normal'
-  onChange: $TSFixMeFunction
+  classes: Object
+  onChange: Function
 }
 
 class AbilitySelect extends Component<Props> {
@@ -71,6 +71,7 @@ class AbilitySelect extends Component<Props> {
     ))
     return (
       <TextField
+        variant="standard"
         select
         className={multiple ? classes.multiple : classes.root}
         name={props.name}

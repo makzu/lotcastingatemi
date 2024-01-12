@@ -1,48 +1,40 @@
-import React from 'react'
-import { Redirect, Route } from 'react-router'
-import BlockPaper from 'components/generic/blockPaper'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+import { useParams } from 'react-router-dom'
+
+import BlockPaper from 'components/shared/BlockPaper'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
+
 import IndexDoc from 'Docs/README.md?raw'
 import WeaponsDoc from 'Docs/weapons.md?raw'
 import MeritsDoc from 'Docs/merits.md?raw'
 import FormsDoc from 'Docs/forms.md?raw'
-interface Props {
-  match: {
-    params: {
-      doc: string
-    }
-  }
-  classes: Record<string, $TSFixMe>
-}
 
-const HelpPage = ({ match }: Props) => {
-  let doc
+const HelpPage = () => {
+  let { doc } = useParams()
+  let md
 
-  switch (match.params.doc) {
+  doc = doc?.replace('.md', '')
+
+  switch (doc) {
     case 'merits':
-      doc = MeritsDoc
+      md = MeritsDoc
       break
 
     case 'weapons':
-      doc = WeaponsDoc
+      md = WeaponsDoc
       break
 
     case 'forms':
-      doc = FormsDoc
+      md = FormsDoc
       break
 
     default:
-      doc = IndexDoc
+      md = IndexDoc
   }
 
   return (
-    <>
-      <Route exact path="/help" render={() => <Redirect to="/help/index" />} />
-
-      <BlockPaper>
-        <MarkdownDisplay source={doc} />
-      </BlockPaper>
-    </>
+    <BlockPaper>
+      <MarkdownDisplay source={md} />
+    </BlockPaper>
   )
 }
 

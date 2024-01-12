@@ -1,12 +1,15 @@
-import React, { Fragment } from 'react'
+
+import { Fragment } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import Typography from '@material-ui/core/Typography'
-import Launch from '@material-ui/icons/Launch'
-import BlockPaper from 'components/generic/blockPaper'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
+import Launch from '@mui/icons-material/Launch'
+
+import BlockPaper from 'components/shared/BlockPaper'
 import {
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,
@@ -31,9 +34,7 @@ const styles = (theme) => ({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'noWrap',
-    [theme.breakpoints.down('md')]: {
-      minWidth: '100%',
-    },
+    [theme.breakpoints.down('lg')]: { minWidth: '100%' },
   },
   name: {
     ...theme.typography.body2,
@@ -69,10 +70,11 @@ function _SingleCharm({
         <MarkdownDisplay
           noBlocks
           className={classes.body}
-          source={charm.summary.length > 0 ? charm.summary : charm.body}
-          allowedTypes={['text', 'strong', 'emphasis', 'delete']}
+          allowedElements={['text', 'strong', 'emphasis', 'delete']}
           unwrapDisallowed
-        />
+        >
+          {charm.summary.length > 0 ? charm.summary : charm.body}
+        </ReactMarkdown>
       </Typography>
 
       <Divider />

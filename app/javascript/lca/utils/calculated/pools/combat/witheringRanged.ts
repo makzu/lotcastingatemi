@@ -1,18 +1,17 @@
-import decisiveAttack from './decisiveAttack'
+import type { Character, Weapon, penaltyObj } from '@/types'
 import {
-  weaponIsRanged,
+  archeryAccuracyBonus,
   rangeTag,
   rangeValue,
-  archeryAccuracyBonus,
   thrownAccuracyBonus,
+  weaponIsRanged,
 } from '../../weapons'
-import type { Character, fullWeapon } from 'utils/flow-types'
-import { PenaltyInput } from 'selectors'
+import decisiveAttack from './decisiveAttack'
 
 export function rangedWitheringAttackPool(
   character: Character,
-  weapon: fullWeapon,
-  penalties: PenaltyInput,
+  weapon: Weapon,
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   if (!weaponIsRanged(weapon)) return false

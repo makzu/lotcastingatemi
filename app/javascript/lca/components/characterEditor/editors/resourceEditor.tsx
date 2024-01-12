@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react'
-import type { ListAttributeFieldTypes } from 'components/generic/ListAttributeEditor'
-import ListAttributeEditor from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
+import ListAttributeEditor, {
+  type ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
 import type { withIntimacies } from 'utils/flow-types'
 
 function ResourceFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props
   const { resource, value } = trait
   return (
-    <Fragment>
+    <>
       <TextField
         name="resource"
         value={resource}
@@ -27,7 +27,7 @@ function ResourceFields(props: ListAttributeFieldTypes) {
         narrow
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 

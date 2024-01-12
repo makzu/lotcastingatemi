@@ -1,24 +1,25 @@
 import { deepEqual } from 'fast-equals'
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import MenuItem from '@material-ui/core/MenuItem'
-import Typography from '@material-ui/core/Typography'
-import Collapse from '@material-ui/core/Collapse'
-import Delete from '@material-ui/icons/Delete'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import styles from './CharmStyles'
-import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
-import { CharmSummaryBlock } from './CharmDisplay'
-import AbilitySelect from 'components/generic/abilitySelect'
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Accordion from '@mui/material/Accordion'
+import AccordionActions from '@mui/material/AccordionActions'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import MenuItem from '@mui/material/MenuItem'
+import Typography from '@mui/material/Typography'
+import Collapse from '@mui/material/Collapse'
+import Delete from '@mui/icons-material/Delete'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
+import styles from './CharmStyles.js'
+import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
+import { CharmSummaryBlock } from './CharmDisplay.jsx'
+import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField'
 import TagsField from 'components/generic/TagsField'
@@ -102,7 +103,7 @@ class CharmFields extends Component<
     if (character.type === 'SiderealCharacter')
       abilOptions = abilOptions.concat(houseOptions)
     return (
-      <ExpansionPanel
+      <Accordion
         expanded={isOpen}
         onChange={onOpenChange(charm.id)}
         CollapseProps={{
@@ -111,7 +112,7 @@ class CharmFields extends Component<
           unmountOnExit: true,
         }}
       >
-        <ExpansionPanelSummary
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           classes={{
             expanded: classes.expandedEditSummary,
@@ -136,9 +137,9 @@ class CharmFields extends Component<
               classes={classes}
             />
           </div>
-        </ExpansionPanelSummary>
+        </AccordionSummary>
 
-        <ExpansionPanelDetails>
+        <AccordionDetails>
           <div className={classes.detailsWrap}>
             <TextField
               name="name"
@@ -284,7 +285,7 @@ class CharmFields extends Component<
               label="Effect"
               margin="dense"
               rows={2}
-              rowsMax={15}
+              maxRows={15}
             />
             <TextField
               name="summary"
@@ -304,19 +305,14 @@ class CharmFields extends Component<
               margin="dense"
             />
           </div>
-        </ExpansionPanelDetails>
-        <ExpansionPanelActions>
-          <Button
-            onClick={handleRemove}
-            style={{
-              float: 'right',
-            }}
-          >
+        </AccordionDetails>
+        <AccordionActions>
+          <Button onClick={handleRemove} style={{ float: 'right' }}>
             Delete&nbsp;
             <Delete />
           </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+        </AccordionActions>
+      </Accordion>
     )
   }
 }

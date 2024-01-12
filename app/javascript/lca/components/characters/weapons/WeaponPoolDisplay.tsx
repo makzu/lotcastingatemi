@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
-import PoolDisplay from 'components/generic/PoolDisplay'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+
+import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import { getPoolsForWeapon } from 'selectors'
 import type { fullWeapon } from 'utils/flow-types'
 
@@ -52,7 +53,7 @@ function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
     labelSpan: classes.labelSpan,
   }
   return (
-    <Fragment>
+    <>
       <PoolDisplay
         pool={pool.close}
         label="Withering Close"
@@ -86,7 +87,7 @@ function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
           classes={poolLineClasses}
         />
       )}
-    </Fragment>
+    </>
   )
 }
 
@@ -119,7 +120,7 @@ function WeaponPoolDisplay({ weaponPools, classes }: WeaponPoolDisplayProps) {
   }
 
   return (
-    <Fragment>
+    <>
       {attackLine}
       <PoolDisplay
         damage
@@ -140,7 +141,7 @@ function WeaponPoolDisplay({ weaponPools, classes }: WeaponPoolDisplayProps) {
           classes={poolLineClasses}
         />
       )}
-    </Fragment>
+    </>
   )
 }
 

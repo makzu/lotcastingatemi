@@ -1,4 +1,4 @@
-import type { Character, Pool, PoolBonus } from 'utils/flow-types'
+import { Character, Pool, PoolBonus } from '@/types'
 
 export const naturalSoak = (character: Character) => character.attr_stamina
 
@@ -30,20 +30,16 @@ export function soak(
   const unusualHide = merits.find((m) => m.startsWith('unusual hide'))
 
   if (unusualHide != undefined) {
-    b += parseInt(unusualHide.substr(-1))
+    b += parseInt(unusualHide.slice(-1))
     bonus = [
       ...bonus,
-      {
-        label: 'unusual hide',
-        bonus: parseInt(unusualHide.substr(-1)),
-      },
+      { label: 'unusual hide', bonus: parseInt(unusualHide.slice(-1)) },
     ]
   }
 
   // ISoB control spell bonus applies even while wearing armor:
   // http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1187120#post1187120
   const isob = spells.find((s) => s === 'invulnerable skin of bronze')
-
   if (isob != undefined) {
     b += character.essence
     bonus = [

@@ -1,12 +1,12 @@
-import * as React from 'react'
+import { ReactNode, useState } from 'react'
 
+import { ExpandLess, ExpandMore } from '@mui/icons-material'
 import {
   Collapse,
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
-} from '@material-ui/core'
-import { ExpandLess, ExpandMore } from '@material-ui/icons'
+} from '@mui/material'
 
 import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
 
@@ -14,22 +14,22 @@ interface Props {
   label: string
   link: string
   count: number
-  children: React.ReactNodeArray
+  children: ReactNode[]
   onClick(): void
 }
 
 const EntityList = ({ label, count, link, children, onClick }: Props) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const showExpando = !!children.length
 
   return (
     <>
-      <NavLinkListItem to={link} onClick={onClick}>
+      <NavLinkListItem to={link} onClick={onClick} end>
         <ListItemText primary={label} secondary={`${count} total`} />
 
         {showExpando && (
           <ListItemSecondaryAction>
-            <IconButton onClick={() => setOpen(!open)}>
+            <IconButton onClick={() => setOpen(!open)} size="large">
               {open ? <ExpandLess /> : <ExpandMore />}
             </IconButton>
           </ListItemSecondaryAction>

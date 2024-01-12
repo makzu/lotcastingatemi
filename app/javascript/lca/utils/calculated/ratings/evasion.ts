@@ -1,13 +1,11 @@
-import rating from './_rating'
+import { Character, PoolBonus, penaltyObj } from '@/types'
 import { penaltyObject } from '../index'
-import { Character } from 'types'
-import { PenaltyInput } from 'selectors'
-import { PoolBonus } from 'utils/flow-types'
+import rating from './_rating'
 
 export function evasion(
   character: Character,
-  _merits: string[],
-  penalties: PenaltyInput,
+  merits: string[],
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   const bonfire = character.anima_level === 3

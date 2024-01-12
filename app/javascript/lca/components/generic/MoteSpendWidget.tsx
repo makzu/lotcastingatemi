@@ -1,18 +1,20 @@
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import MoteCommittmentPopup from './MoteCommittmentPopup'
-import RatingField from './RatingField'
-import ResourceDisplay from './ResourceDisplay'
+
+import Button from '@mui/material/Button'
+import ButtonBase from '@mui/material/ButtonBase'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
+import MoteCommittmentPopup from './MoteCommittmentPopup.jsx'
+import RatingField from './RatingField.jsx'
+import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendMotes } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
@@ -49,9 +51,9 @@ const WillRaiseAnima = ({ current, spending, mute }: wraProps) => {
   )
 }
 
-interface ExposedProps {
-  children: React.ReactNode
-  character: WithId & WithSharedStats
+type ExposedProps = {
+  children: Node
+  character: withMotePool & { id: number }
   peripheral?: boolean
   qc?: boolean
 }
@@ -76,7 +78,7 @@ const defaultState: State = {
   scenelong: false,
 }
 
-class MoteSpendWidget extends React.Component<Props, State> {
+class MoteSpendWidget extends Component<Props, State> {
   state = defaultState
   max = () => {
     const { peripheral, character } = this.props
@@ -105,15 +107,17 @@ class MoteSpendWidget extends React.Component<Props, State> {
   handleClose = () => {
     this.setState(defaultState)
   }
-  handleAdd = (motes: number) => {
-    const commit = this.state.toSpend + motes <= 0 ? false : this.state.commit
+
+  handleAdd = (motes) => {
+    let commit = this.state.toSpend + motes <= 0 ? false : this.state.commit
     this.setState({
       toSpend: clamp(this.state.toSpend + motes, this.min(), this.max()),
       commit: commit,
     })
   }
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+
+  handleChange = (e) => {
+    let { name, value } = e.target
     let { commit } = this.state
 
     if (name === 'toSpend') {
@@ -128,8 +132,8 @@ class MoteSpendWidget extends React.Component<Props, State> {
       this.setState({ [name]: value })
     }
   }
-  handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // @ts-expect-error TODO Tighten up this typing
+
+  handleCheck = (e) => {
     this.setState({ [e.target.name]: !this.state[e.target.name] })
   }
   handleSubmit = () => {
@@ -275,6 +279,7 @@ class MoteSpendWidget extends React.Component<Props, State> {
               {commit && (
                 <>
                   <TextField
+                    variant="standard"
                     name="commitName"
                     value={commitName}
                     label="Commit label"
@@ -344,4 +349,8 @@ const mapStateToProps = (state: RootState, props: ExposedProps) => ({
     : canIEditCharacter(state, props.character.id),
 })
 
-export default connect(mapStateToProps, { spendMotes })(MoteSpendWidget)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  spendMotes,
+})
+
+export default enhance(MoteSpendWidget)

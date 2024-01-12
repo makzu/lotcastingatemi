@@ -1,10 +1,11 @@
 export * from './_battlegroups'
 export * from './_qcs'
-export * from './excellencies'
+export * from './excellencies/index'
 export * from './pools'
 export * from './pretty'
 export * from './ratings'
 export * from './weapons'
+export * from './pretty.js'
 
 import { Ability, Attribute, Character } from 'types'
 import {
@@ -13,11 +14,12 @@ import {
   ATTACK_ABILITIES,
   ATTRIBUTES,
   NON_ATTACK_ABILITIES,
-} from '../constants'
-
-import { WithSharedStats } from 'types/shared'
-import type { specialty, withArmorStats } from '../flow-types'
-import { PenaltyInput } from 'selectors'
+} from '../constants.js'
+import { Character, CraftRating, MARating, Penalty, penaltyObj } from '@/types'
+import type { withArmorStats, specialty } from '../flow-types/index.js'
+import { WithHealthLevels, WithMotePool, WithSharedStats } from '@/types/shared'
+import { Ability } from '../constants.new/abilities'
+import { Attribute } from '../constants.new/attributes'
 
 export const attr = (
   character: Character,
@@ -27,12 +29,8 @@ export const attr = (
     ? character.essence
     : character[`attr_${attribute}`] || 0
 
-export const abil = (
-  character: Character,
-  ability: Ability | string,
-): number => {
-  let abil
-
+export const abil = (character: Character, ability: string): number => {
+  let abil: MARating | CraftRating | undefined
   if (ability.startsWith('martial arts')) {
     abil = character.abil_martial_arts.find(
       (art) => `martial arts (${art.style})` === ability,
@@ -101,11 +99,9 @@ export function woundPenalty(character: WithSharedStats, merits: string[]) {
   }
 }
 
-export function attackAbilities(character: Character): {
-  abil: string
-  rating: number
-  specialties: specialty[]
-}[] {
+export function attackAbilities(
+  character: Character,
+): Array<{ abil: string; rating: number; specialties: Array<specialty> }> {
   const abils = ATTACK_ABILITIES.map((abil) => {
     const name = abil.substring(5)
     return {
@@ -129,11 +125,9 @@ export function attackAbilities(character: Character): {
   return abils.concat(mas)
 }
 
-export function nonAttackAbilities(character: Character): {
-  abil: string
-  rating: number
-  specialties: specialty[]
-}[] {
+export function nonAttackAbilities(
+  character: Character,
+): Array<{ abil: string; rating: number; specialties: Array<specialty> }> {
   const abils = NON_ATTACK_ABILITIES.filter((abil) => character[abil] > 0).map(
     function (abil) {
       const name = abil.substring(5)
@@ -159,9 +153,7 @@ export function nonAttackAbilities(character: Character): {
   return abils.concat(crafts)
 }
 
-export function abilitiesWithRatings(
-  character: Character,
-): Record<string, $TSFixMe>[] {
+export function abilitiesWithRatings(character: Character) {
   const abils = ABILITIES_ALL.filter((a) => {
     if (a.abil === 'abil_craft' || a.abil === 'abil_martial_arts')
       return character[a.abil].length > 0
@@ -170,18 +162,14 @@ export function abilitiesWithRatings(
   return abils
 }
 
-export const nonCasteAbilities = (
-  character: Character,
-): Record<string, $TSFixMe>[] =>
+export const nonCasteAbilities = (character: Character) =>
   ABILITIES_ALL_NO_MA.filter((a) => {
     return !(character.caste_abilities || []).includes(
       a.pretty.toLowerCase() as Ability,
     )
   })
 
-export const nonCasteAttributes = (
-  character: Character,
-): Record<string, $TSFixMe>[] =>
+export const nonCasteAttributes = (character: Character) =>
   ATTRIBUTES.filter((a) => {
     return !(character.caste_attributes || []).includes(
       a.pretty.toLowerCase() as Attribute,
@@ -253,7 +241,7 @@ export const spentBp = (character: Character) =>
   character.bp_log.reduce((total, c) => total + c.points, 0)
 
 export const penaltyObject = (
-  penalties: PenaltyInput,
+  penalties: penaltyObj,
   {
     useWound = true,
     useMobility = false,
@@ -266,7 +254,7 @@ export const penaltyObject = (
     useOnslaught?: boolean
   } = {},
 ) => {
-  let penalty: { label: keyof PenaltyInput; penalty: number }[] = []
+  let penalty: Penalty[] = []
   if (useWound)
     penalty = [...penalty, { label: 'wound', penalty: penalties.wound }]
   if (useMobility)

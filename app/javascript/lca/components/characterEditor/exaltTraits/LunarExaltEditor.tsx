@@ -1,9 +1,9 @@
-import * as React from 'react'
+import { ChangeEventHandler, ReactNode } from 'react'
 
-import { MenuItem } from '@material-ui/core'
+import { MenuItem } from '@mui/material'
 
 import AbilitySelect from 'components/generic/abilitySelect'
-import BlockPaper from 'components/generic/blockPaper'
+import BlockPaper from 'components/shared/BlockPaper'
 import LunarCasteSelect from './LunarCasteSelect'
 
 import { Character } from 'types'
@@ -12,13 +12,13 @@ import { LUNAR_CASTE_ATTRIBUTES } from 'utils/constants'
 
 interface Props {
   character: Character
-  onChange(): React.ChangeEventHandler
+  onChange(): ChangeEventHandler
 }
 
 const LunarExaltEditor = ({ character, onChange }: Props) => {
   const casteAttributeOptions = LUNAR_CASTE_ATTRIBUTES[character.caste] || []
 
-  let noOptionItem: React.ReactNode
+  let noOptionItem: ReactNode
   if (character.caste === '' || character.caste == null) {
     noOptionItem = <MenuItem disabled>Select a Caste</MenuItem>
   } else if (character.caste === 'casteless') {

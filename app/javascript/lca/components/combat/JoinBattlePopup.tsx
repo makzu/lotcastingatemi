@@ -1,20 +1,21 @@
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import PoolDisplay from 'components/generic/PoolDisplay'
-import RatingField from 'components/generic/RatingField'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+
+import PoolDisplay from 'components/generic/PoolDisplay.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
-// eslint-disable-next-line no-unused-vars
 const styles = (theme) => ({
   wrap: {
     display: 'flex',
@@ -40,10 +41,12 @@ interface State {
   initiative: number
 }
 
-class JoinBattlePopup extends React.Component<Props, State> {
-  state = {
-    open: false,
-    initiative: 0,
+class JoinBattlePopup extends Component<Props, State> {
+  state = { open: false, initiative: 0 }
+
+  handleChange = (e) => {
+    let { name, value } = e.target
+    this.setState({ [name]: value })
   }
   handleChange = (e) => {
     const { name, value } = e.target

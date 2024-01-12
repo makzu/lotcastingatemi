@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import MoteCommittmentEditor from './moteCommittmentEditor'
-import AnimaSelect from 'components/generic/AnimaSelect'
-import BlockPaper from 'components/generic/blockPaper'
-import RatingField from 'components/generic/RatingField'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
+
+import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
+import AnimaSelect from 'components/generic/AnimaSelect.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import AuraSelect from 'components/shared/selects/AuraSelect'
 import commonStyles from 'styles'
 import {
@@ -14,13 +14,9 @@ import {
 } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-const styles = (theme) => ({ ...commonStyles(theme) })
-
-interface Props {
-  character: Character
-  onChange: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
-}
+const styles = (theme) => ({
+  ...commonStyles(theme),
+})
 
 function MotePoolEditor({ character, onChange, classes }: Props) {
   if (character.type == 'Character' && !character.is_sorcerer) return <div />
@@ -33,7 +29,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
       <Typography variant="h6">Mote Pools:</Typography>
       <Typography component="div" className={classes.flexContainerWrap}>
         {character.type !== 'Character' && (
-          <Fragment>
+          <>
             <div className={classes.flexCol}>
               <RatingField
                 trait="motes_personal_current"
@@ -89,7 +85,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
                 </span>
               )}
             </div>
-          </Fragment>
+          </>
         )}
         {character.is_sorcerer && (
           <div className={classes.flexCol}>

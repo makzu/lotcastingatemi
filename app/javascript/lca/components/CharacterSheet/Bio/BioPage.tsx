@@ -1,33 +1,14 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
-import { Grid, Typography } from '@material-ui/core'
-import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles'
+import { Grid, Typography } from '@mui/material'
 
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
-import BlockPaper from 'components/generic/blockPaper'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
+import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks/index'
 import { getSpecificCharacter } from 'ducks/selectors'
-import { Character, XpLogEntry } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
+import { XpLogEntry } from 'types'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
-
-const styles = () =>
-  createStyles({
-    portrait: {
-      display: 'block',
-      margin: 'auto',
-      maxWidth: '100%',
-    },
-    portraitWrap: {
-      textAlign: 'center',
-    },
-  })
 
 const xpTable = (log: XpLogEntry[]) =>
   log.map((l, i) => (
@@ -37,14 +18,13 @@ const xpTable = (log: XpLogEntry[]) =>
     </tr>
   ))
 
-interface Props extends WithStyles<typeof styles> {
-  character: Character
-}
+const BioFullPage = () => {
+  const id = useIdFromParams()
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
+  useDocumentTitle(`${character?.name} Bio | Lot-Casting Atemi`)
 
-const BioFullPage = ({ character, classes }: Props) => {
   /* Escape hatch */
   if (character == null) {
-    // @ts-expect-error Hopefully this goes away in a rewrite
     return <CharacterLoadError />
   }
 
@@ -52,24 +32,18 @@ const BioFullPage = ({ character, classes }: Props) => {
 
   return (
     <>
-      <DocumentTitle title={`${character.name} Bio | Lot-Casting Atemi`} />
-
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h5">Bio/Misc</Typography>
         </Grid>
 
         <Grid item xs={12}>
-          {/*
-          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <MarkdownDisplay source={character.description} />
           </BlockPaper>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          {/*
-          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             {character.type !== 'Character' && (
               <Typography paragraph>
@@ -98,10 +72,8 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          {/*
-          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
-            <div className={classes.portraitWrap}>
+            <div style={{ textAlign: 'center' }}>
               {character.portrait_link ? (
                 <a
                   href={character.portrait_link}
@@ -110,7 +82,11 @@ const BioFullPage = ({ character, classes }: Props) => {
                 >
                   <img
                     src={character.portrait_link}
-                    className={classes.portrait}
+                    style={{
+                      display: 'block',
+                      margin: 'auto',
+                      maxWidth: '100%',
+                    }}
                   />
                 </a>
               ) : (
@@ -121,8 +97,6 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12}>
-          {/*
-          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <Typography variant="subtitle1">
               Inventory/Other Equipment
@@ -134,8 +108,6 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12} lg={6}>
-          {/*
-          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <Typography variant="subtitle1">XP</Typography>
             <Typography component="table">
@@ -149,8 +121,6 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12} lg={6}>
-          {/*
-          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <Typography variant="subtitle1">
               {solarXpName(character) + ' XP'}
@@ -170,13 +140,4 @@ const BioFullPage = ({ character, classes }: Props) => {
   )
 }
 
-const mapStateToProps = (state: State, { match }: RouteProps) => ({
-  // @ts-expect-error Hooks migration will fix this
-  character: getSpecificCharacter(state, parseInt(match.params.id, 10)),
-})
-
-export default compose<Props, RouteProps>(
-  ProtectedComponent,
-  withStyles(styles),
-  connect(mapStateToProps),
-)(BioFullPage)
+export default ProtectedComponent(BioFullPage)

@@ -1,13 +1,16 @@
-import { Ability, Attribute } from 'types'
+import { Attribute, Character, Charm } from '@/types'
+import { Ability } from '@/utils/constants.new/abilities'
 import { abil, specialtiesFor } from '..'
-import type { Character, Charm } from 'utils/flow-types'
 
-/* Dragon-Blooded Excellencies: WFHW Backer PDF p.162 */
+/* Dragon-Blooded Excellencies: WFHW p.162 */
+
 // All abilities that have an 'Excellency' keyworded Charm
 export const dbExcellencyAbils = (character: Character, charms: Charm[]) => {
-  let excellencies = charms
-    .filter((c) => c.keywords.includes('excellency'))
-    .map((c) => c.ability as Ability)
+  let excellencies: Ability[] = []
+  charms.forEach((c) => {
+    if (c.keywords.includes('excellency'))
+      excellencies.push(c.ability as Ability)
+  })
 
   if (excellencies.includes('brawl'))
     excellencies = excellencies.concat(['martial_arts'])

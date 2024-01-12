@@ -1,8 +1,8 @@
+import type { Character, Pool, PoolBonus, Weapon } from '@/types'
 import { attr } from '../..'
 import { weaponOverwhelming } from '../../weapons'
-import type { Character, fullWeapon, Pool, PoolBonus } from 'utils/flow-types'
 
-function weaponDamageBonus(weapon: fullWeapon) {
+function weaponDamageBonus(weapon: Weapon) {
   if (weapon.tags.includes('subtle')) return 0
   let damage = 0
 
@@ -25,17 +25,11 @@ function weaponDamageBonus(weapon: fullWeapon) {
   return damage
 }
 
-export function witheringDamage(
-  character: Character,
-  weapon: fullWeapon,
-): Pool {
+export function witheringDamage(character: Character, weapon: Weapon): Pool {
   const damage = weaponDamageBonus(weapon) + weapon.bonus_damage
 
-  let _attr = weapon.overrides?.damage_attribute?.use ?? 'strength'
-
-  let attrRating = attr(character, _attr)
   let bonus = [] as PoolBonus[]
-  let specialAttacks = [] as string[]
+  let specialAttacks = []
   let b = 0
   let powDamage
 

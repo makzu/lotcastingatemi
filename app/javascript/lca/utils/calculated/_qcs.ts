@@ -1,6 +1,6 @@
-import type { fullQc, PoolBonus } from 'utils/flow-types'
+import { QC, QcMerit } from '@/types'
 
-function qcExcellencyPoolCap(qc: fullQc, pool: number, stunt = false) {
+function qcExcellencyPoolCap(qc: QC, pool, stunt = false) {
   if (stunt && qc.excellency != 'lunar') return 0
   let caps
   let bonus = 0
@@ -36,7 +36,7 @@ function qcExcellencyPoolCap(qc: fullQc, pool: number, stunt = false) {
   else return caps[3]
 }
 
-function qcExcellencyRatingCap(qc: fullQc, rating: number, stunt = false) {
+function qcExcellencyRatingCap(qc: QC, rating, stunt = false) {
   if (stunt && qc.excellency != 'lunar') return 0
   let caps: [number, number, number, number]
   let bonus = 0
@@ -73,10 +73,10 @@ function qcExcellencyRatingCap(qc: fullQc, rating: number, stunt = false) {
 }
 
 export function qcPool(
-  qc: fullQc,
+  qc: QC,
   pool: number,
   penalties = 0,
-  merits: PoolBonus[] = [],
+  merits: QcMerit[] = [],
   addExcellency = true,
 ) {
   const excellency = addExcellency ? qcExcellencyPoolCap(qc, pool) : 0
@@ -95,10 +95,10 @@ export function qcPool(
   }
 }
 export function qcRating(
-  qc: fullQc,
+  qc: QC,
   rating: number,
   penalties = 0,
-  merits: Record<string, $TSFixMe>[] = [],
+  merits: QcMerit[] = [],
   addExcellency = true,
 ) {
   const excellency = addExcellency ? qcExcellencyRatingCap(qc, rating) : 0

@@ -1,17 +1,17 @@
-import React from 'react'
-import DocumentTitle from 'react-document-title'
+import { SortableElement } from 'react-sortable-hoc'
 
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
 import CharacterCard from 'components/characters/CharacterCard'
 import CharacterCreatePopup from 'components/characters/CharacterCreatePopup'
 import SortableGridList from 'components/generic/SortableGridList'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { getMyCharacters, updateCharacter } from 'ducks/entities'
-import SortableItem from 'components/generic/SortableItem'
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector, useDocumentTitle } from 'hooks'
+import SortableItem from '../generic/SortableItem'
 
 const CharacterList = () => {
+  useDocumentTitle('Characters | Lot-Casting Atemi')
   const characters = useAppSelector((state) => getMyCharacters(state))
   const dispatch = useAppDispatch()
 
@@ -38,7 +38,6 @@ const CharacterList = () => {
     const charB = characters[newIndex]!
     const offset = charA.sort_order > charB.sort_order ? -1 : 1
     dispatch(
-      // @ts-expect-error TODO
       updateCharacter(charA.id, { sort_order: charB.sort_order + offset }),
     )
   }
@@ -47,14 +46,10 @@ const CharacterList = () => {
 
   return (
     <>
-      <DocumentTitle title="Characters | Lot-Casting Atemi" />
-
       <SortableGridList
         header={
           <Typography variant="h5">
             Characters &nbsp;
-            {/*
-            // @ts-expect-error Hopefully updating react-redux fixes this */}
             <CharacterCreatePopup />
           </Typography>
         }

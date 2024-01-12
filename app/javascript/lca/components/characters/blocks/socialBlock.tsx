@@ -1,10 +1,10 @@
-import React from 'react'
-import { Theme, withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import PoolDisplay from 'components/generic/PoolDisplay'
-import BlockPaper from 'components/generic/blockPaper'
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
 
-const styles = (theme: Theme) => ({
+import PoolDisplay from 'components/generic/PoolDisplay.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',

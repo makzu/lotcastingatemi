@@ -1,6 +1,5 @@
 import { deepEqual } from 'fast-equals'
-import React, { ChangeEvent, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { ChangeEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import {
@@ -12,11 +11,11 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  makeStyles,
   Theme,
   Typography,
-} from '@material-ui/core'
-import { ExpandLess, ExpandMore, Help } from '@material-ui/icons'
+} from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
+import { ExpandLess, ExpandMore, Help } from '@mui/icons-material'
 
 import WeaponPoolDisplay from 'components/characters/weapons/WeaponPoolDisplay'
 import RatingField from 'components/generic/RatingField'
@@ -24,13 +23,11 @@ import TagsField from 'components/generic/TagsField'
 import TextField from 'components/generic/TextField'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import WeightSelect from 'components/shared/selects/WeightSelect'
-import { State } from 'ducks'
-import { getSpecificWeapon, updateWeapon } from 'ducks/entities'
-import { Character } from 'types'
 import WeaponAbilitySelect from './WeaponAbilitySelect'
 import WeaponOverrides from './WeaponOverrides'
-
-const useStyles = makeStyles((theme: Theme) => ({}))
+import { getSpecificWeapon, updateWeapon } from 'ducks/entities'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { Character } from 'types'
 
 interface Props {
   character: Character
@@ -43,11 +40,9 @@ const WeaponEditorPopup = (props: Props) => {
   const setClosed = () => setId(null)
   const [advancedOpen, setAdvancedOpen] = useState(false)
 
-  const weapon = useSelector((state: State) =>
-    getSpecificWeapon(state, openWeapon),
-  )
+  const weapon = useAppSelector((state) => getSpecificWeapon(state, openWeapon))
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (deepEqual(weapon[name], value)) {
@@ -108,7 +103,10 @@ const WeaponEditorPopup = (props: Props) => {
         />
 
         <Typography>
-          <IconButton onClick={() => setAdvancedOpen(!advancedOpen)}>
+          <IconButton
+            onClick={() => setAdvancedOpen(!advancedOpen)}
+            size="large"
+          >
             {advancedOpen ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
           Advanced

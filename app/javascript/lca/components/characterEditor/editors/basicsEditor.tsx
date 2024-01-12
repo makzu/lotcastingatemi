@@ -1,7 +1,4 @@
-import React from 'react'
-
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { Checkbox, FormControlLabel } from '@mui/material'
 
 import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField'

@@ -1,15 +1,14 @@
-import React from 'react'
-import { shouldUpdate } from 'recompose'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import { isUnequalByKeys } from 'utils'
+import Typography from '@mui/material/Typography'
+
+import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { LIMIT_MAX } from 'utils/constants'
-import type { Character, Enhancer } from 'utils/flow-types'
-interface Props {
+import type { Character } from 'utils/flow-types'
+
+type Props = {
   character: Character
-  onChange: $TSFixMeFunction
+  onChange: Function
 }
 
 function LimitEditor({ character, onChange }: Props) {
@@ -34,18 +33,11 @@ function LimitEditor({ character, onChange }: Props) {
         multiline
         fullWidth
         rows={2}
-        rowsMax={5}
+        maxRows={5}
         onChange={onChange}
       />
     </BlockPaper>
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'limit',
-      'limit_trigger',
-    ]),
-)
-export default enhance(LimitEditor)
+export default LimitEditor

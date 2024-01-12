@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
-import { Box, Collapse, IconButton, Typography } from '@material-ui/core'
-import { ExpandLess, ExpandMore } from '@material-ui/icons'
+import { Box, Collapse, IconButton, Typography } from '@mui/material'
+import { ExpandLess, ExpandMore } from '@mui/icons-material'
 
 import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'

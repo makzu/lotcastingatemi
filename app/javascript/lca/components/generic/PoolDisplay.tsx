@@ -1,12 +1,12 @@
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
+
 import type { Pool } from 'utils/flow-types'
-import Dialog from '@material-ui/core/Dialog'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import AttackTagsDisplay from './AttackTagsDisplay'
-import { WithStyles } from '@material-ui/styles'
+
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import withStyles from '@mui/styles/withStyles'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -35,12 +35,41 @@ const styles = (theme: Theme) =>
     excellency: { ...theme.typography.caption },
   })
 
-interface Props extends WithStyles<typeof styles> {
+const styles = (theme) => ({
+  root: {},
+  clickable: {
+    cursor: 'pointer',
+  },
+  label: {
+    ...theme.typography.body1,
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    opacity: 0.7,
+  },
+  labelSpan: {},
+  pool: {
+    ...theme.typography.body2,
+    fontSize: '1.25rem',
+    lineHeight: 'inherit',
+  },
+  specialty: {
+    ...theme.typography.caption,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'noWrap',
+  },
+  excellency: {
+    ...theme.typography.caption,
+  },
+})
+
+type Props = {
   label: string
   pool: Pool
   noSummary?: boolean
   qc?: boolean
   battlegroup?: boolean
+  classes: Object
 }
 
 class PoolDisplay extends Component<Props, { open: boolean }> {
@@ -75,9 +104,10 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     const { label, pool, classes } = this.props
     const { open } = this.state
     const { setOpen, setClosed } = this
-    const mb = pool.bonus ?? []
-    const pen = pool.penalties ?? []
-    const sp = pool.specialties ?? []
+    const mb = pool.bonus || []
+    const pen = pool.penalties || []
+    const sp = pool.specialties || []
+
     const merits = mb.map((m) => (
       <div key={m.label} className={classes.specialty}>
         {m.situational && (

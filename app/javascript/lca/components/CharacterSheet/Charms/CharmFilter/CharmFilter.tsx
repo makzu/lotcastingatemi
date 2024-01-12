@@ -1,15 +1,9 @@
-import * as React from 'react'
+import { Dispatch } from 'react'
 import { connect } from 'react-redux'
 
-import {
-  Button,
-  MenuItem,
-  Switch,
-  TextField,
-  Typography,
-} from '@material-ui/core'
+import { Button, MenuItem, Switch, TextField, Typography } from '@mui/material'
 
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import ResponsiveFilterDrawer from 'components/shared/ResponsiveFilterDrawer'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
@@ -31,18 +25,14 @@ const useStyles = makeStyles({
 
 interface Props {
   filters: CharmFilter
-  setfilters: React.Dispatch<CharmFilterAction>
-  allAbilities: Charm['ability'][]
+  setfilters: Dispatch<CharmFilterAction>
+  allAbilities: Array<Charm['ability']>
   allCategories: string[]
   allKeywords: string[]
   id: number
 }
 
-const ExclusiveSwitch = (props: {
-  name: string
-  value: string
-  onChange: $TSFixMeFunction
-}) => (
+const ExclusiveSwitch = (props) => (
   <div
     style={{
       alignItems: 'center',
@@ -64,8 +54,7 @@ const ExclusiveSwitch = (props: {
 )
 
 const CharmFilterDrawer = (props: Props) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    // @ts-expect-error Charm page rewrite will fix this
+  const handleChange = (e) =>
     void props.setfilters({ type: e.target.name, payload: e.target.value })
 
   const [filtersOpen, setOpen, setClosed] = useDialogLogic()
@@ -87,6 +76,7 @@ const CharmFilterDrawer = (props: Props) => {
         />
 
         <TextField
+          variant="standard"
           name="ability"
           label="Ability/Attribute"
           select
@@ -107,6 +97,7 @@ const CharmFilterDrawer = (props: Props) => {
         </TextField>
 
         <TextField
+          variant="standard"
           name="keyword"
           label="Keyword"
           select
@@ -129,6 +120,7 @@ const CharmFilterDrawer = (props: Props) => {
         />
 
         <TextField
+          variant="standard"
           name="category"
           label="Category"
           select

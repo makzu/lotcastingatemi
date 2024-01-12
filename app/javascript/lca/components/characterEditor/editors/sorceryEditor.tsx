@@ -1,19 +1,17 @@
-import React from 'react'
-import { shouldUpdate } from 'recompose'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
-import type { ListAttributeFieldTypes } from 'components/generic/ListAttributeEditor'
-import ListAttributeEditor from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import { isUnequalByKeys } from 'utils'
-import type { Character, Enhancer } from 'utils/flow-types'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Typography from '@mui/material/Typography'
+
+import ListAttributeEditor, {
+  type ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+import type { Character } from 'utils/flow-types'
+
 export const SorceryFields = (
-  props: {
-    trait: string
-  } & ListAttributeFieldTypes,
+  props: { trait: string } & ListAttributeFieldTypes,
 ) => {
   const { onChange, trait, classes } = props
   return (
@@ -26,7 +24,7 @@ export const SorceryFields = (
         margin="dense"
         multiline
         fullWidth
-        rowsMax={10}
+        maxRows={10}
         onChange={onChange}
       />
     </>
@@ -80,12 +78,4 @@ function SorceryEditor(props: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'is_sorcerer',
-      'sorcerous_motes',
-      'rituals',
-    ]),
-)
-export default enhance(SorceryEditor)
+export default SorceryEditor

@@ -1,11 +1,11 @@
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
-import { Theme, withStyles } from '@material-ui/core/styles'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Menu, { MenuProps } from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
+import withStyles from '@mui/styles/withStyles'
+import ButtonBase from '@mui/material/ButtonBase'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 import { updateCharacter, updateQc } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
@@ -13,7 +13,7 @@ import type { Enhancer } from 'utils/flow-types'
 import { WithAura } from 'types/shared'
 import { WithId } from 'types/_lib'
 
-const styles = (theme: Theme) => ({
+const styles = (theme) => ({
   wrap: {
     marginRight: theme.spacing(),
     minWidth: '5.5em',
@@ -49,26 +49,24 @@ interface State {
   anchor: MenuProps['anchorEl']
 }
 
-class AuraDisplay extends React.Component<Props, State> {
-  constructor(props: Props) {
+class AuraDisplay extends Component<Props, State> {
+  constructor(props) {
     super(props)
     this.state = {
       anchor: null,
     }
   }
 
-  handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (this.props.canEdit)
-      this.setState({
-        anchor: e.currentTarget as Element,
-      })
+  handleOpen = (e) => {
+    if (this.props.canEdit) this.setState({ anchor: e.currentTarget })
   }
   handleClose = () => {
     this.setState({
       anchor: null,
     })
   }
-  handleChange = (anima: WithAura['aura']) => {
+
+  handleChange = (anima) => {
     this.props.update(this.props.character.id, anima)
     this.setState({
       anchor: null,

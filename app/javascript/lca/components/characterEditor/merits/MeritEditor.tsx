@@ -1,21 +1,24 @@
-import * as React from 'react'
-const { Component, Fragment } = React
-import DocumentTitle from 'react-document-title'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
-import HelpIcon from '@material-ui/icons/Help'
-import MeritFields from './MeritFields'
-import SortableGridList from 'components/generic/SortableGridList'
+
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
+import HelpIcon from '@mui/icons-material/Help'
+
+import MeritFields from './MeritFields.jsx'
+import DocumentTitle from 'components/generic/DocumentTitle'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
+
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateMerit, createMerit, destroyMerit } from 'ducks/actions'
 import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
 import commonStyles from 'styles'
@@ -119,13 +122,8 @@ class MeritEditor extends Component<Props> {
                   <ContentAddCircle />
                 </Button>
               </div>
-              <div
-                style={{
-                  flex: 1,
-                  textAlign: 'right',
-                }}
-              >
-                <IconButton component={Link} to="/help/merits">
+              <div style={{ flex: 1, textAlign: 'right' }}>
+                <IconButton component={Link} to="/help/merits" size="large">
                   <HelpIcon />
                 </IconButton>
               </div>
@@ -153,7 +151,7 @@ class MeritEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps: ExposedProps) {
-  const id = ownProps.match.params.characterId
+  const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
   let merits = []
 
@@ -168,12 +166,10 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps, {
-    updateMerit,
-    destroyMerit,
-    createMerit,
-  }),
+  withRouter,
+  connect(mapStateToProps, { updateMerit, destroyMerit, createMerit }),
   withStyles(styles),
   ProtectedComponent,
 )
+
 export default enhance(MeritEditor)

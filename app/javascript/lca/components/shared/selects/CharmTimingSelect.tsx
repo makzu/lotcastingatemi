@@ -1,7 +1,5 @@
-import * as React from 'react'
-
-import { MenuItem, TextField } from '@material-ui/core'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { MenuItem, TextField } from '@mui/material'
+import { TextFieldProps } from '@mui/material/TextField'
 import { Timing } from 'types/_lib'
 
 interface Props extends Pick<TextFieldProps, 'onChange' | 'fullWidth'> {
@@ -12,13 +10,11 @@ interface Props extends Pick<TextFieldProps, 'onChange' | 'fullWidth'> {
 
 const CharmTimingSelect = (props: Props) => {
   return (
-    <TextField select label="type" margin="dense" {...props}>
+    <TextField variant="standard" select label="type" margin="dense" {...props}>
       <MenuItem value="simple">Simple</MenuItem>
       <MenuItem value="supplemental">Supplemental</MenuItem>
       <MenuItem value="reflexive">Reflexive</MenuItem>
-      <MenuItem value="supplemental/reflexive">
-        Supplemental/Reflexive{' '}
-      </MenuItem>
+      <MenuItem value="supplemental/reflexive">Supplemental/Reflexive</MenuItem>
       <MenuItem value="permanent">Permanent</MenuItem>
     </TextField>
   )

@@ -1,13 +1,11 @@
-import pool from '../_pool'
+import { Character, PoolBonus, penaltyObj } from '@/types'
 import { penaltyObject } from '../../index'
-import { Character } from 'types'
-import { PoolBonus } from 'utils/flow-types'
-import { PenaltyInput } from 'selectors'
+import pool from '../_pool'
 
 export function rush(
   character: Character,
   merits: string[],
-  penalties: PenaltyInput,
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]
@@ -20,9 +18,7 @@ export function rush(
     'dexterity',
     'athletics',
     bonus,
-    penaltyObject(penalties, {
-      useMobility: true,
-    }),
+    penaltyObject(penalties, { useMobility: true }),
     excellencyAbils,
   )
 }

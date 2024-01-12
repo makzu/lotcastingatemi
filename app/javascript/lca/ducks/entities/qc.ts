@@ -9,6 +9,7 @@ import {
 } from './_entity'
 import { unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
+import { RootState } from 'store'
 
 /* *** Reducer *** */
 export default createEntityReducer('qc')
@@ -26,7 +27,7 @@ export const [
 export const fetchQcIfNecessary = createConditionalFetchAction('qc', fetchQc)
 
 /* *** Selectors *** */
-const getQcs = (state: State) => unwrapped(state).qcs
+const getQcs = (state: RootState) => unwrapped(state).qcs
 
 export const getMyQcs = createSelector(
   [getCurrentPlayer, getQcs],
@@ -38,12 +39,12 @@ export const getMyQcs = createSelector(
 )
 
 export const getMyPinnedQcs = createSelector([getMyQcs], (qcs) =>
-  qcs.filter(isDefined).filter((c) => c.pinned),
+  qcs.filter((c) => c.pinned),
 )
 
 export const getMyQcsWithoutChronicles = createSelector([getMyQcs], (qcs) =>
-  qcs.filter(isDefined).filter((c) => c?.chronicle_id == null),
+  qcs.filter((c) => c?.chronicle_id == null),
 )
 
-export const getSpecificQc = (state: State, id: number) =>
+export const getSpecificQc = (state: RootState, id: number) =>
   unwrapped(state).qcs[id]

@@ -1,19 +1,20 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
-import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import Whatshot from '@material-ui/icons/Whatshot'
-import NotesPopup from './NotesPopup'
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
-import PoolDisplay from '../generic/PoolDisplay'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Whatshot from '@mui/icons-material/Whatshot'
+
+import NotesPopup from './NotesPopup.jsx'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
 import CharacterMenu from '../generic/CharacterMenu'
-import SpendableBlock from '../generic/SpendableBlock'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
+import CardBase from 'components/shared/CardBase'
 import {
   canIDeleteCharacter,
   getPenalties,
@@ -26,14 +27,6 @@ const Handle = SortableHandle(() => (
 ))
 
 const styles = (theme) => ({
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-    position: 'relative',
-  },
   nameRow: {
     display: 'flex',
   },
@@ -111,7 +104,7 @@ export function CharacterCard({
   classes,
 }: Props) {
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       {((chronicle && st) || (!chronicle && canDelete)) && (
         <Typography
           component="div"
@@ -247,7 +240,7 @@ export function CharacterCard({
           {penalties.wound > 0 && <span>Wound -{penalties.wound}</span>}
         </Typography>
       )}
-    </Paper>
+    </CardBase>
   )
 }
 

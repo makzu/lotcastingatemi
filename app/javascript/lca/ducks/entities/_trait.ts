@@ -1,4 +1,5 @@
 import { getJSON } from 'redux-api-middleware'
+import { Charm } from 'types'
 
 import { callApi } from 'utils/api'
 import {
@@ -16,7 +17,7 @@ type parentTypes = 'character' | 'qc' | 'battlegroup'
 export const createTraitReducer = (
   entityType: entityTypes,
   parentType: parentTypes = 'character',
-): Record<string, $TSFixMeFunction> => {
+) => {
   const pluralType = entityType + 's'
 
   return {
@@ -63,7 +64,7 @@ export const createApiActions = (
   createTraitDestroyAction(entityType, parentType),
 ]
 
-const justGetJSON = (_0: never, _1: never, response) => getJSON(response)
+const justGetJSON = (_0: any, _1: any, response) => getJSON(response)
 
 interface CreateActionOptions {
   type?: string
@@ -160,7 +161,7 @@ const createTraitDestroyAction =
     })
   }
 
-const traitAssoc = (type: string, payload: any) => {
+const traitAssoc = (type: string, payload: Charm) => {
   if (type !== 'charm') {
     return type + 's'
   }

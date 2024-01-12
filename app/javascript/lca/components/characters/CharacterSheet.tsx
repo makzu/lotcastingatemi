@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
-import Launch from '@material-ui/icons/Launch'
+
+import Grid from '@mui/material/Grid'
+import Hidden from '@mui/material/Hidden'
+import Typography from '@mui/material/Typography'
+import Launch from '@mui/icons-material/Launch'
+
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
 import AbilityBlock from './blocks/abilityBlock'
 import ArmorSummary from './blocks/armorSummary'
@@ -14,14 +15,18 @@ import BasicsBlock from './blocks/BasicsBlock'
 import CharmSummaryBlock from './blocks/charmSummaryBlock'
 import CombatBlock from './blocks/combatBlock'
 import IntimacySummary from './blocks/IntimacySummaryBlock'
-import MeritSummaryBlock from './blocks/meritSummaryBlock'
-import SocialBlock from './blocks/socialBlock'
-import SpecialtyBlock from './blocks/specialtyBlock'
-import WeaponSummaryBlock from './blocks/weaponSummaryBlock'
-import BlockPaper from '../generic/blockPaper'
-import RatingLine from '../generic/ratingLine'
-import SpendableBlock from '../generic/SpendableBlock'
+import MeritSummaryBlock from './blocks/meritSummaryBlock.jsx'
+import SocialBlock from './blocks/socialBlock.jsx'
+import SpecialtyBlock from './blocks/specialtyBlock.jsx'
+import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
+
+import DocumentTitle from 'components/generic/DocumentTitle'
+import RatingLine from '../generic/ratingLine.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
+
 import { getSpecificCharacter } from 'ducks/selectors'
 import { getWeaponsForCharacter } from 'ducks/entities/weapon'
 import {
@@ -170,7 +175,7 @@ export class CharacterSheet extends Component<Props> {
                 </BlockPaper>
               </Grid>
 
-              <Hidden smDown>
+              <Hidden mdDown>
                 <Grid item xs={12}>
                   <BlockPaper>
                     <Typography variant="h6">Weapons</Typography>
@@ -242,8 +247,8 @@ export class CharacterSheet extends Component<Props> {
   }
 }
 
-function mapStateToProps(state: RootState, props: Props) {
-  const id = props.match.params.characterId
+function mapStateToProps(state, props) {
+  const id = props.params.id
   const character = getSpecificCharacter(state, id)
   let weapons: Weapon[] = []
   let merits: Merit[] = []
@@ -267,5 +272,6 @@ function mapStateToProps(state: RootState, props: Props) {
   }
 }
 
-// @ts-expect-error FIXME function/hook rewrite will fix this
-export default ProtectedComponent(connect(mapStateToProps)(CharacterSheet))
+export default ProtectedComponent(
+  withRouter(connect(mapStateToProps)(CharacterSheet)),
+)

@@ -1,4 +1,3 @@
-import * as Redux from 'redux'
 import { RSAA, RSAAAction, RSAACall } from 'redux-api-middleware'
 
 const headersBase = {
@@ -6,7 +5,6 @@ const headersBase = {
   'Content-Type': 'application/json',
 } as const
 
-export const nonAuthHeaders = () => new Headers(headersBase)
 export const authHeaders = () => {
   return new Headers({
     ...headersBase,
@@ -14,23 +12,13 @@ export const authHeaders = () => {
   })
 }
 
-export type ApiAction<R, S, F> = Record<string, ApiCall<R, S, F>>
-
-export interface ApiCall<R, S, F> {
-  endpoint: string
-  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE'
-  body?: RSAACall['body']
-  types: [R, S, F]
-  headers?: () => Headers
-}
-export type AApiCall = ApiCall<Redux.Action, Redux.Action, Redux.Action>
-export type AApiAction = ApiAction<Redux.Action, Redux.Action, Redux.Action>
-
 /** Creates an RSAA to call an API endpoint using redux-api-middleware
  *
  * Method defaults to POST.
  */
-export const callApi = (callBody: AApiCall): RSAAAction => ({
+export const callApi = (
+  callBody: Omit<RSAACall, 'method'> & { method?: RSAACall['method'] },
+): RSAAAction => ({
   [RSAA]: {
     method: 'POST',
     ...callBody,
@@ -45,5 +33,4 @@ export const callApiNoAuth = (callBody: AApiCall) => ({
   },
 })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Dispatch<S> = (rsaa: AApiAction) => void

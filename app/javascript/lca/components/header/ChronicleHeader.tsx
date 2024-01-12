@@ -1,36 +1,30 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
-import { Link } from 'react-router-dom'
-import { compose } from 'recompose'
+import { useLocation, Link } from 'react-router-dom'
 
-import { Hidden, Tab, Tabs, Toolbar, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  Tab,
+  Tabs,
+  Theme,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
 
-import { State } from 'ducks'
-import { amIStOfChronicle, getSpecificChronicle } from 'selectors'
-import { Chronicle } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { getSpecificChronicle } from 'selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
+import { useAppSelector, useIdFromParams } from 'hooks'
 
-interface Props extends RouteComponentProps<$TSFixMe> {
-  id: number
-  chronicle: Chronicle
-  path: string
-  isST: boolean
-  classes: any
-}
+const LinkTab = (props) => <Tab {...props} component={Link} />
 
-const LinkTab = (props) => <Tab {...props} component={Link as any} />
+function ChronicleHeader() {
+  const id = useIdFromParams()
+  const chronicle = useAppSelector((state) => getSpecificChronicle(state, id))
+  const path = useLocation().pathname
+  const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
-function ChronicleHeader(props: Props) {
-  if (props.chronicle?.name == null) {
+  if (chronicle == null || chronicle.name == null) {
     return <GenericHeader />
   }
-
-  const { chronicle, path, classes } = props
 
   const tabBasePath = `/chronicles/${chronicle.id}`
 
@@ -42,7 +36,7 @@ function ChronicleHeader(props: Props) {
   }
 
   const tabs = (
-    <Tabs className={classes.tabs} value={tabValue} centered>
+    <Tabs sx={{ flex: 1 }} value={tabValue} centered>
       <LinkTab label="Characters" to={tabBasePath} />
       <LinkTab label="Combat" to={tabBasePath + '/combat'} />
       <LinkTab label="Details" to={tabBasePath + '/details'} />
@@ -54,34 +48,16 @@ function ChronicleHeader(props: Props) {
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit">
           {chronicle.name}
         </Typography>
 
-        <Hidden xsDown>{tabs}</Hidden>
+        {!smDown && tabs}
       </Toolbar>
 
-      <Hidden smUp>{tabs}</Hidden>
+      {smDown && tabs}
     </>
   )
 }
 
-function mapStateToProps(state: State, { match, location }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-
-  const chronicle = getSpecificChronicle(state, id)
-  const isST = amIStOfChronicle(state, id)
-  const path = location.pathname
-
-  return {
-    chronicle,
-    id,
-    isST,
-    path,
-  }
-}
-
-export default compose<Props, RouteProps>(
-  connect(mapStateToProps),
-  withStyles(styles),
-)(ChronicleHeader)
+export default ChronicleHeader

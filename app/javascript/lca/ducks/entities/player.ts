@@ -56,16 +56,6 @@ export function destroyAccount() {
   })
 }
 
-export interface Player {
-  id: number
-  display_name: string
-  characters: number[]
-  qcs: number[]
-  battlegroups: number[]
-  chronicles: number[]
-  own_chronicles: number[]
-}
-
 /* *** Selectors *** */
 export const getSpecificPlayer = (state: RootState, id: number) =>
   unwrapped(state).players[id]

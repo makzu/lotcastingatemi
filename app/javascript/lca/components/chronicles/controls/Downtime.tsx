@@ -1,17 +1,19 @@
-import * as React from 'react'
-const { Component, Fragment } = React
+
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Checkbox from '@material-ui/core/Checkbox'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import Typography from '@material-ui/core/Typography'
-import RatingField from 'components/generic/RatingField'
+
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
+import Typography from '@mui/material/Typography'
+
+import RatingField from 'components/generic/RatingField.jsx'
 import { downtime } from 'ducks/events'
 interface Props {
   id: number
@@ -56,6 +58,10 @@ class DowntimePopup extends Component<Props, State> {
   handleChange = (e) => {
     const { value } = e.target
 
+  handleReset = () => this.setState({ time: 1 })
+
+  handleChange = (e) => {
+    let { value } = e.target
     if (this.state.days) {
       this.setState({
         time: value * 24,
@@ -85,22 +91,15 @@ class DowntimePopup extends Component<Props, State> {
       })
     }
   }
+
   handleCheck = (e) =>
-    this.setState({
-      [e.target.name]: !this.state[e.target.name],
-    })
+    this.setState({ [e.target.name]: !this.state[e.target.name] })
+
   handleSetHours = (hours) =>
-    this.setState({
-      time: hours,
-      parsedTime: hours,
-      days: false,
-    })
+    this.setState({ time: hours, parsedTime: hours, days: false })
   handleSetDays = (days) =>
-    this.setState({
-      time: days * 24,
-      parsedTime: days,
-      days: true,
-    })
+    this.setState({ time: days * 24, parsedTime: days, days: true })
+
   handleSubmit = () => {
     const { time, endScene } = this.state
     this.props.downtime(this.props.id, time, endScene)
@@ -211,6 +210,4 @@ class DowntimePopup extends Component<Props, State> {
   }
 }
 
-export default connect(null, {
-  downtime,
-})(DowntimePopup)
+export default connect(null, { downtime })(DowntimePopup)

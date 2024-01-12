@@ -1,17 +1,16 @@
-import SolarExcellency, { solarExcellencyAbils } from './solar'
+import { Character, Charm } from '@/types'
+import { Ability } from '@/utils/constants.new/abilities'
+import { Attribute } from '@/utils/constants.new/attributes'
+import CustomExcellency from './custom'
 import DbExcellency, { dbExcellencyAbils } from './dragonblooded'
 import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
-import CustomExcellency from './custom'
-import type { Character, Charm } from 'utils/flow-types'
-import { Ability, Attribute } from 'types'
+import SolarExcellency, { solarExcellencyAbils } from './solar'
 
-export const excellencyAbils = (
-  character: Character,
-  charms: Charm[],
-): (Attribute | Ability)[] => {
+export const excellencyAbils = (character: Character, charms: Array<Charm>) => {
   // Mortals do not have excellencies
   if (character.type === 'Character') return []
+
   let excellencies = character.excellencies_for || []
 
   if (character.type === 'SolarCharacter' || excellencies.includes('solar')) {

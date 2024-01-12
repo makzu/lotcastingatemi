@@ -1,58 +1,54 @@
-import React, { ChangeEvent, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import Button from '@material-ui/core/Button'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import Typography from '@material-ui/core/Typography'
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
-import PoolDisplay from '../generic/PoolDisplay'
-import RatingField from '../generic/RatingField'
-import ResourceDisplay from '../generic/ResourceDisplay'
+import { compose } from 'redux'
+
+import Button from '@mui/material/Button'
+import ButtonBase from '@mui/material/ButtonBase'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import Typography from '@mui/material/Typography'
+import withStyles from '@mui/styles/withStyles'
+
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import RatingField from '../generic/RatingField.jsx'
+import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import sharedStyles from 'styles/'
 import { updateBattlegroup as update } from 'ducks/actions'
 import { canIEditBattlegroup } from 'selectors'
 import { totalMagnitude } from 'utils/calculated'
 import type { Battlegroup } from 'utils/flow-types'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    ...sharedStyles(theme),
-    display: {
-      marginRight: theme.spacing(),
-    },
-    rulesRef: { ...theme.typography.caption, marginTop: theme.spacing() },
-  })
+const styles = (theme) => ({
+  ...sharedStyles(theme),
+  display: {
+    marginRight: theme.spacing(),
+  },
+  rulesRef: {
+    ...theme.typography.caption,
+    marginTop: theme.spacing(),
+  },
+})
 
-interface Props extends WithStyles<typeof styles> {
+type Props = {
   battlegroup: Battlegroup
   className?: string
   DisplayClassName?: string
+  classes: Object
   canEdit: boolean
-  update: $TSFixMeFunction
+  update: Function
 }
-interface State {
-  open: boolean
-  magnitude: number
-  size: number
-}
-
-class BattlegroupHealthDisplay extends React.Component<Props, State> {
+type State = { open: boolean; magnitude: number; size: number }
+class BattlegroupHealthDisplay extends Component<Props, State> {
   state = {
     open: false,
     magnitude: this.props.battlegroup.magnitude,
     size: this.props.battlegroup.size,
   }
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+  handleChange = (e) => {
     const { name, value } = e.target
     this.setState({
       [name]: value,
@@ -205,7 +201,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, {
-    update,
-  }),
+  connect(mapStateToProps, { update }),
 )(BattlegroupHealthDisplay)

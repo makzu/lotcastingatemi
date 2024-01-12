@@ -1,39 +1,40 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import withStyles, { WithStyles} from '@mui/styles/withStyles'
+import { Typography } from '@mui/material'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import CharacterMenu from '../generic/CharacterMenu'
-import PoolDisplay from '../generic/PoolDisplay'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
-import { doIOwnBattlegroup } from 'selectors'
+import { doIOwnBattlegroup } from '@/ducks/entities/battlegroup'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 import type { Battlegroup, Enhancer } from 'utils/flow-types'
-import { WithStyles } from '@material-ui/styles'
+
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme: Theme) =>
-  createStyles({
-    ...sharedStyles(theme),
-    root: {
-      ...theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-      }),
-      height: '100%',
-      position: 'relative',
+const styles = (theme) => ({
+  ...sharedStyles(theme),
+  hiddenLabel: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  nameWrap: {
+    flex: 1,
+    '& a': {
+      color: 'unset',
     },
     hiddenLabel: {
       ...theme.typography.caption,
@@ -73,7 +74,7 @@ type Props = ExposedProps &
 function BattlegroupCard(props: Props) {
   const { battlegroup, chronicle, st, isOwner, classes } = props
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       {((chronicle && st) || (!chronicle && isOwner)) && (
         <Typography
           component="div"
@@ -282,7 +283,7 @@ function BattlegroupCard(props: Props) {
           &nbsp;Onslaught -{battlegroup.onslaught}
         </Typography>
       )}
-    </Paper>
+    </CardBase>
   )
 }
 

@@ -5,7 +5,6 @@ import {
   WrappedEntityState,
   getMyCharacters,
   getMyQcs,
-  getMyBattlegroups,
 } from 'ducks/entities'
 
 export const entities = (state: WrappedEntityState): EntityState =>
@@ -24,9 +23,4 @@ export const getMyCharactersWithoutChronicles = createSelector(
 
 export const getMyQcsWithoutChronicles = createSelector([getMyQcs], (qcs) =>
   qcs.filter((c) => c.chronicle_id == null),
-)
-
-export const getMyBattlegroupsWithoutChronicles = createSelector(
-  [getMyBattlegroups],
-  (battlegroups) => battlegroups.filter((c) => c.chronicle_id == null),
 )

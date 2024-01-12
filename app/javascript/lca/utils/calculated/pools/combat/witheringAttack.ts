@@ -1,12 +1,11 @@
+import { Character, Weapon, penaltyObj } from '@/types'
+import { weaponAccuracyBonus } from '../../index'
 import decisiveAttack from './decisiveAttack'
-import { weaponAccuracyBonus } from '../../weapons'
-import type { Character, fullWeapon } from 'utils/flow-types'
-import { PenaltyInput } from 'selectors'
 
 export function witheringAttack(
   character: Character,
-  weapon: fullWeapon,
-  penalties: PenaltyInput,
+  weapon: Weapon,
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   const pool = decisiveAttack(character, weapon, penalties, excellencyAbils)

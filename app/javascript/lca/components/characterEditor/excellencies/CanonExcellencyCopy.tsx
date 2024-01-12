@@ -1,23 +1,17 @@
-import React, { PureComponent } from 'react'
-import Button from '@material-ui/core/Button'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
+import { PureComponent, SyntheticEvent } from 'react'
+
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 class CanonExcellencyCopier extends PureComponent<
-  {
-    onChangeMulti: $TSFixMeFunction
-  },
-  {
-    anchor: any
-  }
+  { onChangeMulti: $TSFixMeFunction },
+  { anchor: $TSFixMe }
 > {
-  state = {
-    anchor: null,
-  }
-  handleOpen = (e: React.SyntheticEvent) => {
-    this.setState({
-      anchor: e.currentTarget,
-    })
+  state = { anchor: null }
+
+  handleOpen = (e: SyntheticEvent<HTMLInputElement>) => {
+    this.setState({ anchor: e.currentTarget })
   }
   handleClose = () => {
     this.setState({

@@ -1,13 +1,7 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
-import {
-  Divider,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-} from '@material-ui/core'
-import RemoveCircle from '@material-ui/icons/RemoveCircle'
+import RemoveCircle from '@mui/icons-material/RemoveCircle'
+import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
 import { State } from 'ducks'
 import { removeThingFromChronicle as removeThing } from 'ducks/actions'
@@ -29,7 +23,7 @@ const CardMenuRemove = ({ chronId, canEdit, action }: InnerProps) =>
   canEdit && chronId ? (
     <>
       <Divider />
-      <MenuItem button onClick={() => action(chronId)}>
+      <MenuItem onClick={() => action(chronId)}>
         <ListItemIcon>
           <RemoveCircle />
         </ListItemIcon>

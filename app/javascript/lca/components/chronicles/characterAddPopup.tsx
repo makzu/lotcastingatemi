@@ -1,14 +1,16 @@
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Divider from '@material-ui/core/Divider'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import Divider from '@mui/material/Divider'
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+
 import { addThingToChronicle } from 'ducks/actions'
 import {
   getSpecificChronicle,
@@ -28,16 +30,15 @@ interface State {
   characterId: number
 }
 
-class CharacterAddPopup extends React.Component<Props, State> {
+class CharacterAddPopup extends Component<Props, State> {
   state = {
     open: false,
     characterId: 0,
   }
+
   handleChange = (e) => {
-    const { name, value } = e.target
-    this.setState({
-      [name]: value,
-    })
+    let { name, value } = e.target
+    this.setState({ [name]: value })
   }
   handleOpen = () => {
     this.setState({
@@ -60,6 +61,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
   render() {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, characters } = this.props
+
     const options: React.ReactNode = [
       <MenuItem key={0} value={0} disabled>
         Select a Character
@@ -83,6 +85,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
           <DialogTitle>Add a Character to {chronicleName}</DialogTitle>
           <DialogContent>
             <TextField
+              variant="standard"
               select
               value={this.state.characterId}
               name="characterId"
@@ -126,7 +129,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Record<string, $TSFixMe> = (dispatch) => ({
+const mapDispatchToProps: Object = (dispatch) => ({
   handleSubmit: (id, charId) =>
     dispatch(addThingToChronicle(id, charId, 'character')),
 })

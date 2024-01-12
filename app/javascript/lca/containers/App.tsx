@@ -1,31 +1,25 @@
-import * as React from 'react'
-import { Link } from 'react-router-dom'
-
-import { CssBaseline, Divider, Theme, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { CssBaseline } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
 import LoadingIndicator from 'components/generic/LoadingIndicator'
 import LcaHeader from 'components/header/Header'
 import NavPanel from 'components/nav/'
-import ErrorBoundary from 'containers/ErrorBoundary'
-import VERSION from '../VERSION'
-import { drawerWidth } from './_drawerProperties'
+import Footer from 'components/shared/Footer'
+import ErrorBoundary from 'containers/ErrorBoundary.jsx'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const scrollbars = (theme: Theme) => ({
-  '::-webkit-scrollbar': {
-    backgroundColor: theme.palette.background.default,
-    height: '8px',
-    width: '8px',
+const useStyles = makeStyles((theme) => ({
+  '@global': {
+    '::-webkit-scrollbar': {
+      backgroundColor: theme.palette.background.default,
+      height: '8px',
+      width: '8px',
+    },
+    '::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.palette.divider,
+    },
   },
-  '::-webkit-scrollbar-thumb': {
-    backgroundColor: theme.palette.divider,
-  },
-})
-
-const useStyles = makeStyles((theme: Theme) => ({
-  '@global': theme.disableScrollbars ? {} : scrollbars(theme),
   appFrame: {
     display: 'flex',
     minHeight: '100vh',
@@ -35,10 +29,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   content: {
     [theme.breakpoints.up('lg')]: {
-      height: 'calc(100% - 64px)',
-      marginLeft: drawerWidth,
-      marginTop: 64,
-      width: `calc(100% - ${drawerWidth}px)`,
+      //   height: 'calc(100% - 64px)',
+      //   marginLeft: drawerWidth,
+      marginLeft: theme.spacing(2),
+      //   marginTop: 64,
+      //   width: `calc(100% - ${drawerWidth}px)`,
     },
     backgroundColor: theme.palette.background.default,
     height: 'calc(100% - 56px)',
@@ -46,25 +41,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(3),
     width: '100%',
   },
-  footer: {
-    marginTop: theme.spacing(6),
-    textAlign: 'center',
-  },
-  footerDivider: {
-    marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(8),
-    marginRight: theme.spacing(8),
-  },
-  footerText: {
-    '& a': {
-      color: theme.palette.text.secondary,
-    },
-    display: 'block',
-    fontSize: '0.75rem',
-  },
 }))
 
-export interface Props {
+interface Props {
   children: React.ReactNode
 }
 
@@ -82,25 +61,7 @@ const App = ({ children }: Props) => {
       <main className={classes.content}>
         <ErrorBoundary>{children}</ErrorBoundary>
 
-        <footer className={classes.footer}>
-          <Divider className={classes.footerDivider} />
-
-          <Typography className={classes.footerText}>
-            <a
-              href={`https://github.com/makzu/lotcastingatemi/blob/master/CHANGELOG.md#${VERSION}`}
-            >
-              {VERSION}
-            </a>
-          </Typography>
-
-          <Typography className={classes.footerText}>
-            Exalted is &copy; White Wolf AB and Onyx Path.
-          </Typography>
-
-          <Typography className={classes.footerText}>
-            <Link to="/privacy">Privacy Policy / Legal Notice</Link>
-          </Typography>
-        </footer>
+        <Footer />
       </main>
 
       <LoadingIndicator />

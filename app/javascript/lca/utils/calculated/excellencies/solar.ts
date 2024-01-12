@@ -1,27 +1,26 @@
-import { Ability, Attribute } from 'types'
-import { attr, abil } from '..'
-import type { Character, Charm } from 'utils/flow-types'
+import { Character, Charm } from '@/types'
+import { Ability } from '@/utils/constants.new/abilities'
+import { Attribute } from '@/utils/constants.new/attributes'
+import { abil, attr } from '..'
 
 /* Solar Excellencies: Core p.255 */
+
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
 export const solarExcellencyAbils = (character: Character, charms: Charm[]) => {
-  let excellencies = (character.caste_abilities || [])
-    .filter((a) => abil(character, a) > 0)
-    .concat(
-      (character.favored_abilities || []).filter((a) => abil(character, a) > 0),
-    )
+  const excellencies: Ability[] = []
 
-  if (excellencies.includes('brawl') && character.abil_martial_arts.length > 0)
-    excellencies = excellencies.concat(['martial_arts'])
+  character.caste_abilities.forEach((a) => {
+    if (abil(character, a) >= 1) excellencies.push(a)
+  })
+  character.favored_abilities.forEach((a) => {
+    if (abil(character, a) >= 1) excellencies.push(a)
+  })
+  charms.forEach((c) => {
+    if (c.ability) excellencies.push(c.ability as Ability)
+    else if (c.charm_type === 'MartialArts') excellencies.push('martial_arts')
+  })
 
-  excellencies = excellencies.concat(
-    // @ts-expect-error Solars only get Ability charms but typings are too general
-    charms.map((c) =>
-      c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability,
-    ),
-  )
-
-  return excellencies
+  return [...new Set(excellencies)]
 }
 
 // Attribute + Ability, round down for static ratings

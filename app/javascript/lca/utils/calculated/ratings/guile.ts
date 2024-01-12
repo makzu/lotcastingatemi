@@ -1,13 +1,11 @@
-import rating from './_rating'
+import { Character, PoolBonus, penaltyObj } from '@/types'
 import { penaltyObject } from '../index'
-import { Character } from 'types'
-import { PoolBonus } from 'utils/flow-types/pool'
-import { PenaltyInput } from 'selectors'
+import rating from './_rating'
 
 export function guile(
   character: Character,
   merits: string[],
-  penalties: PenaltyInput,
+  penalties: penaltyObj,
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]

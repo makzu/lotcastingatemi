@@ -1,26 +1,24 @@
-import * as React from 'react'
+import { Component, Node } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import HealthLevelBoxes from './HealthLevelBoxes'
-import RatingField from './RatingField'
+
+import Button from '@mui/material/Button'
+import ButtonBase from '@mui/material/ButtonBase'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+
+import HealthLevelBoxes from './HealthLevelBoxes.jsx'
+import RatingField from './RatingField.jsx'
 import { takeDamage } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withHealthLevels, Enhancer } from 'utils/flow-types'
 import { RootState } from 'store'
 
-type DamageType = 'bashing' | 'lethal' | 'aggravated'
-
-interface ExposedProps {
-  children: React.ReactNode
-  character: withHealthLevels & {
-    id: number
-  }
+type ExposedProps = {
+  children: Node
+  character: withHealthLevels & { id: number }
   qc?: boolean
 }
 type Props = ExposedProps & {
@@ -42,9 +40,10 @@ const defaultState: State = {
   commit: false,
 }
 
-class DamageWidget extends React.Component<Props, State> {
+class DamageWidget extends Component<Props, State> {
   state = defaultState
-  min = (type: DamageType) => {
+
+  min = (type) => {
     return -this.props.character[`damage_${type}`]
   }
   handleOpen = () => {
@@ -68,10 +67,9 @@ class DamageWidget extends React.Component<Props, State> {
       commit: commit,
     })
   }
+
   handleCheck = (e) => {
-    this.setState({
-      [e.target.name]: !this.state[e.target.name],
-    })
+    this.setState({ [e.target.name]: !this.state[e.target.name] })
   }
   handleSubmit = () => {
     const { bashing, lethal, aggravated } = this.state
@@ -253,4 +251,8 @@ const mapStateToProps = (state: RootState, props: ExposedProps) => ({
     : canIEditCharacter(state, props.character.id),
 })
 
-export default connect(mapStateToProps, { takeDamage })(DamageWidget)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  takeDamage,
+})
+
+export default enhance(DamageWidget)

@@ -1,18 +1,15 @@
-import React from 'react'
-
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import ListAttributeEditor, {
-  ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
-import BlockPaper from 'components/generic/blockPaper'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-
+  type ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import {
+  ABILITIES,
   ABILITY_MAX as MAX,
   ABILITY_MIN as MIN,
-  ABILITIES,
 } from 'utils/constants'
 import type { withAbilities as Character } from 'utils/flow-types'
 
@@ -91,7 +88,6 @@ function AbilityEditor({ character, onChange }: Props) {
     dotsOverThree += Math.max(score - 3, 0)
     dotsUnderThree += Math.min(score, 3)
   })
-  // @ts-expect-error FIXME
   character.abil_craft.concat(character.abil_martial_arts).forEach((a) => {
     const score = a.rating
     totalDots += score

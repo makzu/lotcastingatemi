@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
+
+import Button from '@mui/material/Button'
+
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { canIEdit } from 'selectors'
 import type { withCombatInfo, Enhancer } from 'utils/flow-types'

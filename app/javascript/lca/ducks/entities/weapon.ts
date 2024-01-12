@@ -1,22 +1,22 @@
 import createCachedSelector from 're-reselect'
 
-import { State } from 'ducks'
 import { isDefined, sortOrderSort } from 'utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificCharacter } from './character'
+import { RootState } from 'store'
 
 export default createTraitReducer('weapon')
 
 export const [createWeapon, updateWeapon, destroyWeapon] =
   createApiActions('weapon')
 
-const getState = (s: State) => s
+const getState = (s: RootState) => s
 
-export const getSpecificWeapon = (state: State, id: number) =>
+export const getSpecificWeapon = (state: RootState, id: number) =>
   unwrapped(state).weapons[id]
 
-export const getWeaponIDsForCharacter = (state: State, id: number) =>
+export const getWeaponIDsForCharacter = (state: RootState, id: number) =>
   getSpecificCharacter(state, id)?.weapons ?? []
 
 export const getWeaponsForCharacter = createCachedSelector(
@@ -27,4 +27,4 @@ export const getWeaponsForCharacter = createCachedSelector(
       .filter(isDefined)
       .sort(sortOrderSort)
   },
-)((s: State, i: number) => i)
+)((s: RootState, i: number) => i)

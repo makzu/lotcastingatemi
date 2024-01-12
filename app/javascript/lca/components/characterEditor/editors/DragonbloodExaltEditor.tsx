@@ -1,8 +1,9 @@
-import React from 'react'
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
+
 import DbAspectSelect from '../exaltTraits/DbAspectSelect'
-import AbilitySelect from 'components/generic/abilitySelect'
-import BlockPaper from 'components/generic/blockPaper'
+import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import { nonCasteAbilities } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 interface Props {

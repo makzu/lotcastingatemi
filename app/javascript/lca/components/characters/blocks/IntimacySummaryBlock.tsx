@@ -1,10 +1,8 @@
-import React from 'react'
+import { VisibilityOff } from '@mui/icons-material'
+import { Typography, Divider } from '@mui/material'
 
-import { VisibilityOff } from '@material-ui/icons'
-import { Typography, Divider } from '@material-ui/core'
-
-import BlockPaper from '../../generic/blockPaper'
-import RatingLine from '../../generic/ratingLine'
+import RatingLine from '../../generic/ratingLine.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import { Character } from 'types'
 import { Intimacy } from 'types/shared'
 

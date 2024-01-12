@@ -1,29 +1,10 @@
-import { abil } from '..'
-import type { Ability, Attribute, Character, Charm } from 'types'
+import { Ability, Attribute, Character } from '@/types'
+import { solarExcellencyAbils } from './solar'
 
 /* Sidereal Excellencies */
 
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
-export const siderealExcellencyAbils = (
-  character: Character,
-  charms: Charm[],
-) => {
-  let excellencies = (character.caste_abilities || [])
-    .filter((a) => abil(character, a) > 0)
-    .concat(
-      (character.favored_abilities || []).filter((a) => abil(character, a) > 0),
-    )
-
-  excellencies = excellencies.concat(['martial_arts'])
-
-  excellencies = excellencies.concat(
-    charms.map((c) =>
-      c.charm_type === 'MartialArts' ? 'martial_arts' : (c.ability as Ability),
-    ),
-  )
-
-  return excellencies
-}
+export const siderealExcellencyAbils = solarExcellencyAbils
 
 // Higher of Essence or 3. Sids do not halve static ratings
 const siderealExcellency = (

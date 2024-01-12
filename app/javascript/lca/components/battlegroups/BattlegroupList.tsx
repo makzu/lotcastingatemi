@@ -1,20 +1,17 @@
-import React from 'react'
-import DocumentTitle from 'react-document-title'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard'
 import BattlegroupCreatePopup from 'components/battlegroups/battlegroupCreatePopup'
 import SortableGridList from 'components/generic/SortableGridList'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { State } from 'ducks'
 import { getMyBattlegroups, updateBattlegroup } from 'ducks/entities'
 import SortableItem from 'components/generic/SortableItem'
+import { useAppSelector, useAppDispatch, useDocumentTitle } from 'hooks'
 
 const BattlegroupList = () => {
-  const battlegroups = useSelector((state: State) => getMyBattlegroups(state))
-  const dispatch = useDispatch()
+  useDocumentTitle('Battlegroups | Lot-Casting Atemi')
+  const battlegroups = useAppSelector((state) => getMyBattlegroups(state))
+  const dispatch = useAppDispatch()
 
   const chars = battlegroups.map((c, i) => (
     <SortableItem key={c.id} index={i} collection="battlegroups">
@@ -47,8 +44,6 @@ const BattlegroupList = () => {
 
   return (
     <>
-      <DocumentTitle title="Battlegroups | Lot-Casting Atemi" />
-
       <SortableGridList
         header={
           <Typography variant="h5">

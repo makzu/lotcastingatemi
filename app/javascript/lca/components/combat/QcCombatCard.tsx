@@ -1,30 +1,23 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { compose } from 'recompose'
-import { withStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
-import CombatControls from './CombatControls'
-import RemoveFromCombatButton from './RemoveFromCombatButton'
-import PoolDisplay from '../generic/PoolDisplay'
-import SpendableBlock from '../generic/SpendableBlock'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
+import CombatControls from './CombatControls.jsx'
+import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
+import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
 import { getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-    position: 'relative',
-  },
   nameWrap: {
     flex: 1,
     '& a': {
@@ -61,15 +54,15 @@ interface ExposedProps {
   qc: fullQc
 }
 type Props = ExposedProps & {
-  penalties: Record<string, $TSFixMe>
-  pools: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
+  penalties: object
+  pools: object
+  classes: object
 }
 
 function QcCard(props: Props) {
   const { qc, penalties, pools, classes } = props
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
@@ -157,7 +150,7 @@ function QcCard(props: Props) {
       )}
 
       <RemoveFromCombatButton character={qc} characterType="qc" />
-    </Paper>
+    </CardBase>
   )
 }
 

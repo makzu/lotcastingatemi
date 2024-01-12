@@ -1,34 +1,23 @@
-import rating from './_rating'
+import { Character, Penalty, PoolBonus } from '@/types'
+import { halfRoundUp } from '@/utils'
 import { penaltyObject } from '../index'
-import { halfRoundUp } from 'utils'
-import { Character } from 'types'
-import { PoolBonus } from 'utils/flow-types/pool'
-import { PenaltyInput } from 'selectors'
+import rating from './_rating'
 
 export function resolve(
   character: Character,
   merits: string[],
-  penalties: PenaltyInput,
+  penalties: Penalty[],
   excellencyAbils: string[],
 ) {
   let bonus = [] as PoolBonus[]
   const wellBred = merits.find((m) => m.startsWith('well-bred'))
   if (wellBred !== undefined)
-    bonus = bonus.concat([
-      {
-        label: 'well-bred',
-        bonus: 1,
-        situational: true,
-      },
-    ])
+    bonus = bonus.concat([{ label: 'well-bred', bonus: 1, situational: true }])
+
   const thinBlood = merits.find((m) => m.startsWith('thin-blooded'))
   if (thinBlood !== undefined)
     bonus = bonus.concat([
-      {
-        label: 'thin-blooded',
-        bonus: -1,
-        situational: true,
-      },
+      { label: 'thin-blooded', bonus: -1, situational: true },
     ])
 
   if ((character.caste || '').toLowerCase() === 'full moon') {

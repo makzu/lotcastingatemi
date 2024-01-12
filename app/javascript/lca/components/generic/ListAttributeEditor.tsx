@@ -1,20 +1,18 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import {
   SortableContainer,
   SortableElement,
   SortableHandle,
   arrayMove,
 } from 'react-sortable-hoc'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
-import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
-import { WithStyles } from '@material-ui/styles'
-import SortableItem from 'components/generic/SortableItem'
-import { Character, QC } from 'types'
+
+import withStyles from '@mui/styles/withStyles'
+import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+import ContentAddCircle from '@mui/icons-material/AddCircle'
+import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
 
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
 const Handle = SortableHandle(() => (
@@ -28,11 +26,36 @@ export interface ListAttributeFieldTypes {
   classes: Record<string, $TSFixMe>
 }
 
-const styles = (theme: Theme) =>
-  createStyles({
-    fieldContainer: {
-      display: 'flex',
-      alignItems: 'center',
+const styles = (theme) => ({
+  fieldContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  grabHandle: {
+    marginRight: theme.spacing(),
+  },
+  nameField: {
+    flex: 1,
+    marginRight: theme.spacing(),
+  },
+  withMargin: {
+    marginRight: theme.spacing(),
+  },
+  checkboxWrap: {
+    paddingTop: theme.spacing(),
+  },
+  floatingLabel: {
+    ...theme.typography.caption,
+    marginBottom: theme.spacing(-1.25),
+    textAlign: 'center',
+  },
+  countLabel: {
+    ...theme.typography.caption,
+  },
+  idField: {
+    width: '3em',
+    '& input': {
+      '-moz-appearance': 'textfield',
     },
     grabHandle: {
       marginRight: theme.spacing(),
@@ -63,7 +86,8 @@ const styles = (theme: Theme) =>
         margin: 0,
       },
     },
-  })
+  },
+})
 
 interface Props extends WithStyles<typeof styles> {
   character: Character | QC
@@ -128,7 +152,7 @@ class ListAttributeEditor extends Component<Props> {
             onChange={onChange.bind(this, index)}
             classes={classes}
           />
-          <IconButton onClick={onRemove.bind(this, index)}>
+          <IconButton onClick={onRemove.bind(this, index)} size="large">
             <ContentRemoveCircle />
           </IconButton>
         </div>

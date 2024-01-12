@@ -1,40 +1,34 @@
-import { createAction } from '@reduxjs/toolkit'
-import { Action } from 'redux'
+// TODO: Move from AnyAction to a real typed action
+import { AnyAction } from 'redux'
 
-export const CLOSE_DRAWER = 'lca/app/CLOSE_DRAWER'
-export const TOGGLE_DRAWER = 'lca/app/TOGGLE_DRAWER'
 export const SWITCH_THEME = 'lca/app/SWITCH_THEME'
 
 const defaultState = {
-  drawerOpen: false,
-  theme: (localStorage.theme as 'dark' | 'light') ?? 'light',
   loading: false,
   error: false,
   errorMessage: '',
 }
-interface AppState {
-  readonly drawerOpen: boolean
-  readonly theme: 'dark' | 'light'
-  readonly loading: boolean
-  readonly error: boolean
-  readonly errorMessage: string
+export type AppState = {
+  loading: boolean
+  error: boolean
+  errorMessage: string
 }
 
-export const isAuthFailure = (action: Record<string, $TSFixMe>) =>
-  action.error && action.payload?.status == 401
-export const isForbidden = (action: Record<string, $TSFixMe>) =>
-  action.error && action.payload?.status == 403
-export const is404Error = (action: Record<string, $TSFixMe>) =>
-  action.error && action.payload?.status == 404
+export const isAuthFailure = (action: AnyAction) =>
+  action.error && (action.payload || {}).status == 401
+export const isForbidden = (action: AnyAction) =>
+  action.error && (action.payload || {}).status == 403
+export const is404Error = (action: AnyAction) =>
+  action.error && (action.payload || {}).status == 404
 
-export const isNonFetchAuthIssue = (action: Record<string, $TSFixMe>) =>
+export const isNonFetchAuthIssue = (action: AnyAction) =>
   action.error &&
   [401, 401].includes(action.payload?.status) &&
   action.type !== 'lca-api/character/FETCH/FAILURE'
 
 export default function AppReducer(
   state: AppState = defaultState,
-  action: Action,
+  action: AnyAction,
 ): AppState {
   if (isAuthFailure(action) || isForbidden(action) || is404Error(action)) {
     return {
@@ -46,7 +40,7 @@ export default function AppReducer(
   }
 
   if (action.error) {
-    return { ...state, error: true, errorMessage: action.payload }
+    return { ...state, error: true }
   }
 
   const act = action.type.split('/')
@@ -69,30 +63,12 @@ export default function AppReducer(
     }
   }
 
-  if (switchTheme.match(action)) {
-    return { ...state, theme: action.payload }
-  }
-
-  switch (action.type) {
-    case CLOSE_DRAWER:
-      return { ...state, drawerOpen: false }
-
-    case TOGGLE_DRAWER:
-      return { ...state, drawerOpen: !state.drawerOpen }
-
-    default:
-      return state
-  }
+  return state
 }
 
-export const toggleDrawer = () => ({ type: TOGGLE_DRAWER })
-export const closeDrawer = () => ({ type: CLOSE_DRAWER })
-export const switchTheme = createAction<'light' | 'dark'>(SWITCH_THEME)
-
-export const parseError = (action: Record<string, $TSFixMe>): string => {
+export const parseError = (action: AnyAction): string => {
   if (action.payload === undefined || action.payload.response === undefined) {
-    console.log('Easily Overlooked Error Method', action) // eslint-disable-line no-console
-
+    console.error('Easily Overlooked Error Method', action)
     return 'Error'
   }
 

@@ -1,156 +1,101 @@
-import React, { ChangeEvent } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Divider from '@material-ui/core/Divider'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiTextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
-import TextField from 'components/generic/TextField'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions'
-import { getSpecificPlayer } from 'selectors'
-import type { Player, Enhancer } from 'utils/flow-types'
-interface Props {
-  player: Player
-  theme: string
-  updatePlayer: $TSFixMeFunction
-  switchTheme: $TSFixMeFunction
-  destroyAccount: $TSFixMeFunction
+import { PaletteMode } from '@mui/material'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import Divider from '@mui/material/Divider'
+import MenuItem from '@mui/material/MenuItem'
+import MuiTextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
+import { destroyAccount, updatePlayer } from 'ducks/actions'
+import { getCurrentPlayer } from 'ducks/entities'
+import { switchTheme } from 'features/themeSlice'
+import { useAppDispatch, useAppSelector, useDialogLogic } from 'hooks'
+
+const ThemeSelect = () => {
+  const currentTheme = useAppSelector((state) => state.theme)
+  const dispatch = useAppDispatch()
+  const action = (theme: Parameters<typeof switchTheme>[0]) =>
+    dispatch(switchTheme(theme))
+  return (
+    <MuiTextField
+      variant="standard"
+      select
+      label="Theme"
+      value={currentTheme}
+      onChange={(e) => action(e.target.value as PaletteMode)}
+      margin="dense"
+    >
+      <MenuItem value="light">Light</MenuItem>
+      <MenuItem value="dark">Dark</MenuItem>
+    </MuiTextField>
+  )
 }
 
-class SettingsPage extends React.Component<Props, { open: boolean }> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      open: false,
-    }
+const SettingsPage = () => {
+  const [isOpen, setOpen, setClosed] = useDialogLogic()
+  const player = useAppSelector((state) => getCurrentPlayer(state))
+  const dispatch = useAppDispatch()
+
+  const handleClickDelete = () => {
+    dispatch(destroyAccount())
+    setClosed()
   }
 
-  handleOpen = () => {
-    this.setState({
-      open: true,
-    })
-  }
-  handleClose = () => {
-    this.setState({
-      open: false,
-    })
-  }
-  handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    this.props.updatePlayer(this.props.player.id, {
-      [e.target.name]: e.target.value,
-    })
-  }
-  handleChangeTheme = (e: ChangeEvent<HTMLInputElement>) => {
-    this.props.switchTheme(e.target.value)
-  }
-  handleClickDelete = () => {
-    this.props.destroyAccount()
-    this.setState({
-      open: false,
-    })
+  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updatePlayer(player.id, { display_name: e.target.value }))
   }
 
-  render() {
-    /* Escape hatch */
-    if (this.props.player == undefined)
-      return <Typography paragraph>Not yet loaded</Typography>
-    const {
-      handleOpen,
-      handleClose,
-      handleChangeName,
-      handleChangeTheme,
-      handleClickDelete,
-    } = this
-    const { open } = this.state
-    const { player, theme } = this.props
-    return (
-      <BlockPaper>
-        <Typography variant="h5" gutterBottom>
-          Settings
-        </Typography>
+  return (
+    <BlockPaper>
+      <Typography variant="h5" gutterBottom>
+        Settings
+      </Typography>
 
-        <TextField
-          label="Display Name"
-          name="display_name"
-          value={player.display_name}
-          onChange={handleChangeName}
-          margin="dense"
-        />
-        <Typography paragraph>
-          Displayed to other players in your chronicles.
-        </Typography>
+      <TextField
+        label="Display Name"
+        name="display_name"
+        value={player.display_name}
+        onChange={handleChangeName}
+        margin="dense"
+      />
+      <Typography paragraph>
+        Displayed to other players in your chronicles.
+      </Typography>
 
-        <Divider
-          style={{
-            margin: '1em 0',
-          }}
-        />
+      <Divider style={{ margin: '1em 0' }} />
 
-        <MuiTextField
-          select
-          label="Theme"
-          value={theme}
-          onChange={handleChangeTheme}
-          margin="dense"
-        >
-          <MenuItem value="light">Light</MenuItem>
-          <MenuItem value="dark">Dark</MenuItem>
-        </MuiTextField>
+      <ThemeSelect />
 
-        <Divider
-          style={{
-            margin: '1em 0',
-          }}
-        />
+      <Divider style={{ margin: '1em 0' }} />
 
-        <Button onClick={handleOpen}>Delete Account</Button>
+      <Button onClick={setOpen}>Delete Account</Button>
 
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Delete your account?</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              This will delete your account, as well as all of your chronicles,
-              characters, QCs, and battlegroups. This includes any characters or
-              QCs you may have marked as public.
-            </DialogContentText>
-            <DialogContentText>
-              <strong>This cannot be undone!</strong>
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClickDelete}>Delete Account</Button>
-          </DialogActions>
-        </Dialog>
-      </BlockPaper>
-    )
-  }
+      <Dialog open={isOpen} onClose={setClosed}>
+        <DialogTitle>Delete your account?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This will delete your account, as well as all of your chronicles,
+            characters, QCs, and battlegroups. This includes any characters or
+            QCs you may have marked as public.
+          </DialogContentText>
+          <DialogContentText>
+            <strong>This cannot be undone!</strong>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={setClosed}>Cancel</Button>
+          <Button onClick={handleClickDelete}>Delete Account</Button>
+        </DialogActions>
+      </Dialog>
+    </BlockPaper>
+  )
 }
 
-const mapStateToProps = (state) => {
-  const id = state.session.id
-  const player = getSpecificPlayer(state, id)
-  const { theme } = state.app
-  return {
-    player,
-    theme,
-  }
-}
-
-const enhance: Enhancer<Props, never> = compose(
-  ProtectedComponent,
-  connect(mapStateToProps, {
-    updatePlayer,
-    switchTheme,
-    destroyAccount,
-  }),
-)
-export default enhance(SettingsPage)
+export default SettingsPage

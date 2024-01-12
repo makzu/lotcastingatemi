@@ -1,7 +1,6 @@
-import React from 'react'
 import { connect } from 'react-redux'
 
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 
 import { getSpecificPlayer } from 'selectors'
 import { RootState } from 'store'

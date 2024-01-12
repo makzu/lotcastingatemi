@@ -1,35 +1,24 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { useLocation, Link } from 'react-router-dom'
 
-import { Toolbar, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import { Button, Toolbar, Typography } from '@mui/material'
 
 import CharacterMenu from 'components/generic/CharacterMenu/'
-import { State } from 'ducks'
 import { canIEditQc, getSpecificQc } from 'selectors'
-import { QC } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
-import LinkButton from './LinkButton'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
 
-interface Props {
-  qc: QC
-  id: number
-  path: string
-  canIEdit: boolean
-  classes: any
-}
+function QcHeader() {
+  const id = useIdFromParams()
+  const qc = useAppSelector((state) => getSpecificQc(state, id))
+  const path = useLocation().pathname
+  const canIEdit = useAppSelector((state) => canIEditQc(state, id))
+  useDocumentTitle(`${qc?.name} | Lot-Casting Atemi`)
 
-function QcHeader(props: Props) {
-  if (props.qc == null) {
+  if (qc == null) {
     return <GenericHeader />
   }
 
-  const { id, qc, path, classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/qcs/${id}`
@@ -40,23 +29,21 @@ function QcHeader(props: Props) {
 
   return (
     <>
-      <DocumentTitle title={`${qc.name} | Lot-Casting Atemi`} />
-
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit">
           {editing && 'Editing '}
           {qc.name}
         </Typography>
 
-        {props.canIEdit && (
-          <LinkButton to={editButtonPath} color="inherit">
+        {canIEdit && (
+          <Button component={Link} to={editButtonPath} color="inherit">
             {editing ? 'Done' : 'Edit'}
-          </LinkButton>
+          </Button>
         )}
 
-        <div className={classes.tabs} />
+        <div style={{ flex: 1 }} />
 
         <CharacterMenu id={qc.id} characterType="qc" header />
       </Toolbar>
@@ -64,22 +51,4 @@ function QcHeader(props: Props) {
   )
 }
 
-function mapStateToProps(state: State, { location, match }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-  const qc = getSpecificQc(state, id)
-  const path = location.pathname
-
-  const canIEdit = canIEditQc(state, id)
-
-  return {
-    canIEdit,
-    id,
-    path,
-    qc,
-  }
-}
-
-export default compose<Props, RouteProps>(
-  withStyles(styles),
-  connect(mapStateToProps),
-)(QcHeader)
+export default QcHeader

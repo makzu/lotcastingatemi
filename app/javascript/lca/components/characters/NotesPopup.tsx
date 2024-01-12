@@ -1,17 +1,20 @@
 import { deepEqual } from 'fast-equals'
-import React from 'react'
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import IconButton from '@material-ui/core/IconButton'
-import { withStyles } from '@material-ui/core/styles'
-import DescriptionIcon from '@material-ui/icons/Description'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
-import TextField from 'components/generic/TextField'
+import { compose } from 'redux'
+
+import DescriptionIcon from '@mui/icons-material/Description'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import IconButton from '@mui/material/IconButton'
+import { withStyles } from '@mui/styles'
+
+import TextField from 'components/generic/TextField.jsx'
+import MarkdownDisplay from 'components/shared/MarkdownDisplay'
+
 import { updateCharacter } from 'ducks/actions'
 import { canIEditCharacter } from 'selectors'
 import commonStyles from 'styles'
@@ -30,12 +33,8 @@ interface Props {
   classes: Record<string, $TSFixMe>
   updateCharacter: $TSFixMeFunction
 }
-interface State {
-  open: boolean
-  editing: boolean
-}
-
-class NotesPopup extends React.Component<Props, State> {
+type State = { open: boolean; editing: boolean }
+class NotesPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -45,9 +44,7 @@ class NotesPopup extends React.Component<Props, State> {
   }
 
   handleOpen = (e) => {
-    this.setState({
-      open: true,
-    })
+    this.setState({ open: true })
     e.preventDefault()
   }
   handleClose = () => {
@@ -129,7 +126,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, {
-    updateCharacter,
-  }),
+  connect(mapStateToProps, { updateCharacter }),
 )(NotesPopup)

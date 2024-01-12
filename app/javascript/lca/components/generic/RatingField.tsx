@@ -1,7 +1,9 @@
 import classnames from 'classnames'
-import React, { Component } from 'react'
-import TextField from '@material-ui/core/TextField'
-import { withStyles } from '@material-ui/core/styles'
+import { Component, SyntheticInputEvent } from 'react'
+
+import TextField from '@mui/material/TextField'
+import { withStyles } from '@mui/styles'
+
 import { clamp } from 'utils/'
 
 const styles = (theme) => ({
@@ -53,7 +55,8 @@ class RatingField extends Component<Props, State> {
       oldValue: props.value,
     }
   }
-  handleChange = (e: React.SyntheticEvent) => {
+
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { min, max } = this.props
 
     if (isNaN(parseInt(e.target.value))) {
@@ -78,11 +81,13 @@ class RatingField extends Component<Props, State> {
       })
     this.props.onChange(fakeE)
   }
-  handleFocus = (e: React.SyntheticEvent) => {
+
+  handleFocus = (e: SyntheticInputEvent<HTMLInputElement>) => {
     if (this.props.dontFocus) return
     e.target.select()
   }
-  handleBlur = (e: React.SyntheticEvent) => {
+
+  handleBlur = (e: SyntheticInputEvent<HTMLInputElement>) => {
     if (isNaN(parseInt(this.state.value))) {
       // $FlowThisIsOkayISwear
       this.setState({
@@ -106,7 +111,7 @@ class RatingField extends Component<Props, State> {
       narrow,
       min,
       max,
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       dontFocus,
       ...otherProps
     } = this.props

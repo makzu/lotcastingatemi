@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import Typography from '@material-ui/core/Typography'
+import { Fragment } from 'react'
+
+import DialogContentText from '@mui/material/DialogContentText'
+import Typography from '@mui/material/Typography'
+
 import type { Pool } from 'utils/flow-types'
 const style = {
   marginTop: '0.25em',

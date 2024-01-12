@@ -1,28 +1,28 @@
 import { deepEqual } from 'fast-equals'
-import * as React from 'react'
-const { Component } = React
+import { Component, SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose } from 'redux'
 
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiTextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import { WithStyles, withStyles } from '@mui/styles'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import MenuItem from '@mui/material/MenuItem'
+import MuiTextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import { Theme, createStyles } from '@mui/material'
 
-import BlockPaper from '../generic/blockPaper'
-import RatingField from '../generic/RatingField'
-import TextField from '../generic/TextField'
-import QcAttackEditor from '../qcs/qcAttackEditor'
+import RatingField from '../generic/RatingField.jsx'
+import TextField from '../generic/TextField.jsx'
+import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import ProtectedComponent from 'containers/ProtectedComponent'
+import withRouter from 'containers/withRouter'
 import { updateBattlegroup } from 'ducks/actions'
-import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
+import {
+  getSpecificBattlegroup,
+  canIDeleteBattlegroup,
+} from '@/ducks/entities/battlegroup'
 import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
@@ -52,7 +52,7 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 class BattlegroupEditor extends Component<Props> {
-  handleChange = (e: React.SyntheticEvent) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { battlegroup } = this.props
     if (deepEqual(battlegroup[name], value)) return
@@ -60,7 +60,8 @@ class BattlegroupEditor extends Component<Props> {
       [name]: value,
     })
   }
-  handleCheck = (e: React.SyntheticEvent) => {
+
+  handleCheck = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name } = e.target
     const value = !this.props.battlegroup[name]
     this.props.updateBattlegroup(this.props.battlegroup.id, {
@@ -137,7 +138,7 @@ class BattlegroupEditor extends Component<Props> {
           margin="dense"
           multiline
           fullWidth
-          rowsMax={5}
+          maxRows={5}
           onChange={handleChange}
         />
         <TextField
@@ -352,7 +353,7 @@ class BattlegroupEditor extends Component<Props> {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.battlegroupId
+  const id = ownProps.params.id
   const battlegroup = getSpecificBattlegroup(state, id)
   const showPublicCheckbox = canIDeleteBattlegroup(state, id)
   return {
@@ -363,9 +364,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default compose(
+  withRouter,
   ProtectedComponent,
   withStyles(styles),
-  connect(mapStateToProps, {
-    updateBattlegroup,
-  }),
+  connect(mapStateToProps, { updateBattlegroup }),
 )(BattlegroupEditor)

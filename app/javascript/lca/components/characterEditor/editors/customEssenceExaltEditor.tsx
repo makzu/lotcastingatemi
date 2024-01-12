@@ -1,11 +1,11 @@
-import React from 'react'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import Typography from '@material-ui/core/Typography'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
+import Typography from '@mui/material/Typography'
+
 import ExcellencyEditor from '../excellencies/'
-import AbilitySelect from 'components/generic/abilitySelect'
-import BlockPaper from 'components/generic/blockPaper'
-import TextField from 'components/generic/TextField'
+import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
 import type { Character } from 'utils/flow-types'
 interface Props {
   character: Character

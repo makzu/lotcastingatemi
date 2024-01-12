@@ -1,18 +1,20 @@
-import * as React from 'react'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
-interface Props {
+import { PureComponent } from 'react'
+
+import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+
+type Props = {
   value: string
   name: string
   className?: any
-  onChange: $TSFixMeFunction
+  onChange: Function
 }
-
-class RangeSelect extends React.PureComponent<Props> {
+class RangeSelect extends PureComponent<Props> {
   render() {
     const { name, value, onChange, className } = this.props
     return (
       <TextField
+        variant="standard"
         select
         name={name}
         value={value}

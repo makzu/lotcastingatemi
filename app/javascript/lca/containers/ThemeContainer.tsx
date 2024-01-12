@@ -1,94 +1,87 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
+import { PropsWithChildren, useEffect, useMemo } from 'react'
 
-import green from '@material-ui/core/colors/green'
-import lightgreen from '@material-ui/core/colors/lightGreen'
-import teal from '@material-ui/core/colors/teal'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { dark, light } from '@material-ui/core/styles/createPalette'
-import { ThemeProvider } from '@material-ui/styles'
+import { useMediaQuery } from '@mui/material'
+import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
+import {
+  createTheme,
+  StyledEngineProvider,
+  Theme,
+  ThemeProvider,
+} from '@mui/material/styles'
 
-import { State } from 'ducks'
-import { switchTheme } from 'ducks/actions'
+import { switchTheme } from 'features/themeSlice'
+import { useAppDispatch, useAppSelector } from 'hooks'
 
-/* When changing these colors, it's also important to change the theme_color
- * entries in /config/favicon.json from #2e7d32 to the new value,
- * and to re-run `rails g favicon`
- */
-const themeCommon = {
-  disableScrollbars: false,
-  overrides: {
-    MuiSelect: {
-      selectMenu: {
-        // overflow: 'inherit',
-      },
-    },
-  },
-}
-const themes = {
-  dark: createMuiTheme({
-    palette: {
-      primary: { main: green[900] },
-      secondary: { main: teal[400] },
-      type: 'dark',
-    },
-    ...themeCommon,
-    typography: {
-      caption: {
-        color: dark.text.secondary,
-      },
-    },
-  }),
-  light: createMuiTheme({
-    palette: {
-      primary: { main: green[800] },
-      secondary: { main: lightgreen[400] },
-    },
-    ...themeCommon,
-    typography: {
-      caption: {
-        color: light.text.secondary,
-      },
-    },
-  }),
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
 }
 
-interface ExposedProps {
-  children: React.ReactNode
-}
+const ThemeContainer = ({ children }: PropsWithChildren<null>) => {
+  const dispatch = useAppDispatch()
+  const themeSetting = useAppSelector((state) => state.theme)
+  const defaultPreference = useMediaQuery('(prefers-color-scheme: dark)')
+    ? 'dark'
+    : 'light'
 
-interface StateProps {
-  theme: State['app']['theme']
-}
-
-interface DispatchProps {
-  change(theme: State['app']['theme']): void
-}
-
-interface Props extends ExposedProps, StateProps, DispatchProps {}
-
-const ThemeContainer = ({ theme, children, change }: Props) => {
-  React.useEffect(() => {
+  // Respond to changes to the theme in localstorage in case the theme is changed in another tab
+  useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key !== 'theme' || e.newValue == null) {
-        return
+      if (
+        e.key === 'theme' &&
+        e.newValue !== themeSetting &&
+        (e.newValue === 'light' || e.newValue === 'dark')
+      ) {
+        dispatch(switchTheme(e.newValue))
       }
-
-      // @ts-expect-error FIXME theme in localstorage is not typed
-      change(e.newValue)
     }
     window.addEventListener('storage', handleStorageChange)
 
     return () => {
       window.removeEventListener('storage', handleStorageChange)
     }
-  }, [change])
+  }, [dispatch, themeSetting])
 
-  return <ThemeProvider theme={themes[theme]}>{children}</ThemeProvider>
+  // Set a default theme based on whether the user prefers light or dark mode
+  useEffect(() => {
+    if (themeSetting == null) {
+      dispatch(switchTheme(defaultPreference))
+    }
+  }, [defaultPreference, dispatch, themeSetting])
+
+  const theme = useMemo(() => {
+    /* When changing these colors, it's also important to change the theme_color
+     * entries in /config/favicon.json from #2e7d32 to the new value,
+     * and to re-run `rails g favicon`
+     */
+    return createTheme({
+      components: {
+        MuiTextField: {
+          defaultProps: {
+            variant: 'standard',
+          },
+        },
+      },
+      palette:
+        (themeSetting || defaultPreference) === 'dark'
+          ? {
+              mode: 'dark',
+              primary: { main: green[900] },
+              secondary: { main: teal[400] },
+            }
+          : {
+              mode: 'light',
+              primary: { main: green[800] },
+              secondary: { main: lightgreen[400] },
+            },
+    })
+  }, [defaultPreference, themeSetting])
+
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </StyledEngineProvider>
+  )
 }
 
-const mapStateToProps = (state: State) => ({ theme: state.app.theme })
-
-const enhance = connect(mapStateToProps, { change: switchTheme })
-
-export default enhance(ThemeContainer)
+export default ThemeContainer

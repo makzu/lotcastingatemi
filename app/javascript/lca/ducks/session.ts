@@ -1,4 +1,5 @@
-import { Action } from 'redux'
+import { AnyAction } from 'redux'
+
 import { isNonFetchAuthIssue } from './app'
 import { crudAction } from './entities/_lib'
 
@@ -19,7 +20,7 @@ const defaultState: ISessionState = {
 
 export default function SessionReducer(
   state: ISessionState = defaultState,
-  action: Action,
+  action: AnyAction,
 ) {
   if (isNonFetchAuthIssue(action)) {
     return {

@@ -1,11 +1,13 @@
-import * as React from 'react'
-const { Fragment } = React
-import { withStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import Typography from '@material-ui/core/Typography'
-import BlockPaper from 'components/generic/blockPaper'
-import RatingLine from 'components/generic/ratingLine'
-import { Character } from 'types'
+import { Fragment } from 'react'
+
+import withStyles from '@mui/styles/withStyles'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
+
+import RatingLine from 'components/generic/ratingLine.jsx'
+import type { Character } from 'utils/flow-types'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import {
   isCasteAbility,
   isFavoredAbility,
@@ -14,8 +16,13 @@ import {
 import { ABILITY_NAMES } from 'utils/constants'
 
 const styles = (theme) => ({
-  abilityName: { ...theme.typography.body1, textTransform: 'capitalize' },
-  abilityFavored: { ...theme.typography.caption },
+  abilityName: {
+    ...theme.typography.body1,
+    textTransform: 'capitalize',
+  },
+  abilityFavored: {
+    ...theme.typography.caption,
+  },
 })
 
 interface _AbilityLineProps {
@@ -187,7 +194,6 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
       />
     ))
   }
-
   const line = (array) =>
     array.map((abil) => (
       <AbilityLine

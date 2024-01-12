@@ -1,33 +1,13 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
+import { Grid, Typography } from '@mui/material'
 
-import { Grid, Typography } from '@material-ui/core'
-
-import BlockPaper from 'components/generic/blockPaper'
-import { State } from 'ducks'
-import { getSpecificCharacter } from 'ducks/entities'
-import { getSpellsForCharacter } from 'selectors'
-import { Character, Spell } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
-import CharacterLoadError from '../CharacterLoadError'
+import { getSpellsForCharacter } from 'ducks/entities'
+import { useAppSelector, useIdFromParams } from 'hooks'
 import SpellDisplay from './SpellDisplay'
 
-interface StateProps {
-  spells: Spell[]
-}
-interface OuterProps {
-  characterId: number
-}
-// interface Props extends StateProps {}
+const SpellList = () => {
+  const id = useIdFromParams()
+  const spells = useAppSelector((state) => getSpellsForCharacter(state, id))
 
-const mapSpells = (s) => (
-  <Grid item key={s.id}>
-    <BlockPaper />
-  </Grid>
-)
-
-const SpellList = ({ spells }: StateProps) => {
   const spellList = spells.map((spell) => (
     <Grid item xs={12} md={6} xl={4} key={spell.id}>
       <SpellDisplay spell={spell} />
@@ -46,10 +26,4 @@ const SpellList = ({ spells }: StateProps) => {
   )
 }
 
-const mapState = (state: State, { characterId }: OuterProps): StateProps => {
-  return {
-    spells: getSpellsForCharacter(state, characterId),
-  }
-}
-
-export default connect(mapState)(SpellList)
+export default SpellList

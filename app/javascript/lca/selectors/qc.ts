@@ -66,23 +66,17 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
     const tiny = meritNames.some((m) =>
       m.toLowerCase().includes('tiny creature'),
     )
-      ? [
-          {
-            label: 'tiny creature',
-            bonus: 2,
-            situational: true,
-          },
-        ]
+      ? [{ label: 'tiny creature', bonus: 2, situational: true }]
       : undefined
+
     return {
       guile: calc.qcRating(qc, qc.guile, penalties.wound),
       resolve: calc.qcRating(qc, qc.resolve, penalties.wound),
       appearance: calc.appearanceRating(
-        {
-          attr_appearance: qc.appearance,
-        },
+        { attr_appearance: qc.appearance },
         meritNames,
       ),
+
       evasion: calc.qcRating(
         qc,
         qc.evasion,
@@ -94,10 +88,7 @@ export const getPoolsAndRatingsForQc = createCachedSelector(
       joinBattle: calc.qcPool(qc, qc.join_battle, penalties.wound),
       shapeSorcery: calc.qcPool(qc, qc.shape_sorcery, penalties.wound),
       featsOfStrength: calc.qcPool(qc, qc.feats_of_strength, penalties.wound, [
-        {
-          label: `str ${qc.strength} feats`,
-          bonus: 0,
-        },
+        { label: `str ${qc.strength} feats`, bonus: 0 },
       ]),
     }
   },

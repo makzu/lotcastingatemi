@@ -1,19 +1,21 @@
 import { deepEqual } from 'fast-equals'
-import * as React from 'react'
-const { Component } = React
+import { Component, SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
-import Button from '@material-ui/core/Button'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiTextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import Delete from '@material-ui/icons/Delete'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
-import MeritEffectBlurb from './MeritEffectBlurb'
-import BlockPaper from 'components/generic/blockPaper'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
+
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import MenuItem from '@mui/material/MenuItem'
+import MuiTextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import Delete from '@mui/icons-material/Delete'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
+
+import MeritEffectBlurb from './MeritEffectBlurb.jsx'
+import RatingField from 'components/generic/RatingField.jsx'
+import TextField from 'components/generic/TextField.jsx'
+import BlockPaper from 'components/shared/BlockPaper'
+
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants'
 import type { fullMerit as Merit } from 'utils/flow-types'
 const Handle = SortableHandle(() => (
@@ -26,7 +28,7 @@ interface FieldsProps {
 }
 
 class MeritFields extends Component<FieldsProps> {
-  handleChange = (e: React.SyntheticEvent) => {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { merit } = this.props
     if (deepEqual(merit[name], value)) return
@@ -34,7 +36,8 @@ class MeritFields extends Component<FieldsProps> {
       [name]: value,
     })
   }
-  handleCheck = (e: React.SyntheticEvent) => {
+
+  handleCheck = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { name } = e.target
     const { merit } = this.props
     const value = !merit[name]
@@ -140,7 +143,7 @@ class MeritFields extends Component<FieldsProps> {
             margin="dense"
             multiline
             fullWidth
-            rowsMax={10}
+            maxRows={10}
             onChange={handleChange}
           />
         </div>

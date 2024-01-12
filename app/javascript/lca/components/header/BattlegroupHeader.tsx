@@ -1,35 +1,26 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { Link, useLocation } from 'react-router-dom'
 
-import { Toolbar, Typography } from '@material-ui/core'
-import { createStyles, withStyles } from '@material-ui/core/styles'
+import { Button, Toolbar, Typography } from '@mui/material'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
-import { State } from 'ducks'
 import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
-import { Battlegroup } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
-import LinkButton from './LinkButton'
-import { WithStyles } from '@material-ui/styles'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
 
-const localStyles = () => createStyles(styles)
-interface Props extends WithStyles<typeof localStyles> {
-  id: number
-  battlegroup: Battlegroup
-  path: string
-  canIEdit: boolean
-}
-function BattlegroupHeader(props: Props) {
-  if (props.battlegroup == null) {
+function BattlegroupHeader() {
+  const id = useIdFromParams()
+  const battlegroup = useAppSelector((state) =>
+    getSpecificBattlegroup(state, id),
+  )
+  const canIEdit = useAppSelector((state) => canIEditBattlegroup(state, id))
+  const path = useLocation().pathname
+  useDocumentTitle(`${battlegroup?.name} | Lot-Casting Atemi`)
+
+  if (battlegroup == null) {
     return <GenericHeader />
   }
 
-  const { id, battlegroup, path, canIEdit, classes } = props
   const editing = path.includes('/edit')
 
   let editButtonPath = `/battlegroups/${id}`
@@ -40,44 +31,26 @@ function BattlegroupHeader(props: Props) {
 
   return (
     <>
-      <DocumentTitle title={`${battlegroup.name} | Lot-Casting Atemi`} />
-
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit">
           {editing && 'Editing '}
           {battlegroup.name}
         </Typography>
 
         {canIEdit && (
-          <LinkButton to={editButtonPath} color="inherit">
+          <Button component={Link} to={editButtonPath} color="inherit">
             {editing ? 'Done' : 'Edit'}
-          </LinkButton>
+          </Button>
         )}
-        <div className={classes.tabs} />
+
+        <div style={{ flex: 1 }} />
+
         <CharacterMenu id={battlegroup.id} characterType="battlegroup" header />
       </Toolbar>
     </>
   )
 }
 
-function mapStateToProps(state: State, { location, match }: RouteProps) {
-  const id = parseInt(match.params.id, 10)
-  const battlegroup = getSpecificBattlegroup(state, id)
-  const path = location.pathname
-
-  const canIEdit = canIEditBattlegroup(state, id)
-
-  return {
-    battlegroup,
-    canIEdit,
-    id,
-    path,
-  }
-}
-
-export default compose<Props, RouteProps>(
-  withStyles(localStyles),
-  connect(mapStateToProps),
-)(BattlegroupHeader)
+export default BattlegroupHeader

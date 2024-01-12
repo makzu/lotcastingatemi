@@ -3,8 +3,8 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import authTokenMiddleware from './middleware/authTokenMiddleware'
 import navigatorMiddleware from './middleware/navigatorMiddleware'
-import themeSaverMiddleware from './middleware/themeSaverMiddleware'
 import paginationMiddleware from 'middleware/paginationMiddleware'
+import themeSaverMiddleware from './middleware/themeSaverMiddleware'
 
 import reducer from './ducks'
 
@@ -12,11 +12,11 @@ const middleware = [
   apiMiddleware,
   authTokenMiddleware,
   navigatorMiddleware,
-  themeSaverMiddleware,
   paginationMiddleware,
+  themeSaverMiddleware,
 ]
 
-export const store = configureStore({
+const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middleware),

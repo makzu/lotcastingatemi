@@ -1,57 +1,45 @@
-import React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-import {
-  Theme,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import JoinBattlePopup from './JoinBattlePopup'
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
-import PoolDisplay from '../generic/PoolDisplay'
+import { compose } from 'redux'
+
+import withStyles from '@mui/styles/withStyles'
+import Typography from '@mui/material/Typography'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+
+import JoinBattlePopup from './JoinBattlePopup.jsx'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    ...sharedStyles(theme),
-    root: {
-      ...theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-      }),
-      height: '100%',
-    },
-    nameWrap: {
-      flex: 1,
-    },
-    hiddenLabel: {
-      ...theme.typography.caption,
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      lineHeight: 'inherit',
-    },
-    characterName: {
-      textDecoration: 'none',
-    },
-    icon: {
-      verticalAlign: 'bottom',
-      marginLeft: theme.spacing(),
-    },
-    poolBlock: {
-      marginRight: theme.spacing(),
-      marginTop: theme.spacing(),
-      width: '5.5rem',
-      maxHeight: '5.5rem',
-      overflow: 'hidden',
-    },
-  })
+const styles = (theme) => ({
+  ...sharedStyles(theme),
+  nameWrap: {
+    flex: 1,
+  },
+  hiddenLabel: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  characterName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing(),
+  },
+  poolBlock: {
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
+    width: '5.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
+})
 
 interface ExposedProps {
   character: Character | fullQc | Battlegroup
@@ -72,7 +60,7 @@ function OutOfCombatCard({
   classes,
 }: Props) {
   return (
-    <Paper className={classes.root}>
+    <CardBase>
       <div className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography variant="h6" className={classes.characterName}>
@@ -100,7 +88,7 @@ function OutOfCombatCard({
         />
         {canEdit && <JoinBattlePopup character={character} />}
       </div>
-    </Paper>
+    </CardBase>
   )
 }
 

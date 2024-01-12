@@ -1,4 +1,4 @@
-import { Character, Weapon } from 'types'
+import { Character, Weapon } from '@/types'
 
 export function weaponOverwhelming(character: Character, weapon: Weapon) {
   let bonus = weapon.bonus_overwhelming

@@ -1,8 +1,9 @@
-import { gen } from 'testcheck'
-import { ABILITY_NAMES } from 'utils/constants'
-export const SEED = 5 * 684
 
-/* Number of pages in the 3e core book */
+import { CraftRating, MARating } from '@/types'
+import { gen } from 'testcheck'
+import { ABILITY_NAMES } from 'utils/constants.js'
+export const SEED = 5 * 684 /* Number of pages in the 3e core book */
+
 export const genHealthLevels = {
   health_level_0s: gen.posInt,
   health_level_1s: gen.posInt,
@@ -38,17 +39,14 @@ export const genAbilities = {
   abil_survival: gen.posInt,
   abil_thrown: gen.posInt,
   abil_war: gen.posInt,
-
-  abil_craft: gen.array({
-    craft: gen.string,
-    rating: gen.posInt,
-  } as Record<string, $TSFixMe>),
-
-  abil_martial_arts: gen.array({
-    style: gen.string,
-    rating: gen.posInt,
-  } as Record<string, $TSFixMe>),
+  
+  abil_craft: gen.array<CraftRating>(({ craft: gen.string, rating: gen.posInt })),
+  
+  abil_martial_arts: gen.array<MARating>(
+    ({ style: gen.string, rating: gen.posInt })
+  ),
 }
+
 export const genMortal = {
   name: gen.string,
   ...genHealthLevels,
@@ -64,15 +62,18 @@ export const genMortal = {
   attr_intelligence: gen.sPosInt,
   attr_wits: gen.sPosInt,
   ...genAbilities,
+  // $FlowFixMe
+  specialties: gen.array(
+    ({
+      context: gen.string,
+      ability: gen.oneOf([''].concat(ABILITY_NAMES)),
+    }: Object)
+  ),
 
-  specialties: gen.array({
-    context: gen.string,
-    ability: gen.oneOf([''].concat(ABILITY_NAMES)),
-  } as Record<string, $TSFixMe>),
   armor_name: gen.string,
   armor_weight: gen.oneOf(['unarmored', 'light', 'medium', 'heavy']),
   armor_is_artifact: gen.boolean,
-
+  // $FlowFixMe
   armor_tags: gen.array(gen.string),
   onslaught: gen.posInt,
   poisons: [],
@@ -80,14 +81,16 @@ export const genMortal = {
   bonus_soak: 0,
   bonus_mobility_penalty: 0,
 }
+
 export const genAbilityExalt = {
   ...genMortal,
-
+  // $FlowFixMe
   caste_abilities: gen.array(gen.oneOf(ABILITY_NAMES)),
-
+  // $FlowFixMe
   favored_abilities: gen.array(gen.oneOf(ABILITY_NAMES)),
   anima_level: 3,
 }
+
 export const genSolar = {
   ...genAbilityExalt,
   type: 'SolarCharacter',
@@ -96,11 +99,35 @@ export const genSolar = {
   supernal_ability: gen.oneOf(ABILITY_NAMES),
   caste: gen.oneOf(['dawn', 'zenith', 'twilight', 'night', 'eclipse']),
   charms: [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
   ],
   martial_arts_charms: [26],
 }
+
 export const mockCharacter = {
   type: 'Character',
   exalt_type: 'mortal',

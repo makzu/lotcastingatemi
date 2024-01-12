@@ -1,16 +1,18 @@
-import * as React from 'react'
-const { Component, Fragment } = React
+
+import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Checkbox from '@material-ui/core/Checkbox'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Typography from '@material-ui/core/Typography'
-import RatingField from 'components/generic/RatingField'
+
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Typography from '@mui/material/Typography'
+
+import RatingField from 'components/generic/RatingField.jsx'
 import { respireMotes } from 'ducks/events'
 interface Props {
   id: number
@@ -25,33 +27,30 @@ interface State {
 class MoteRespirePopup extends Component<Props, State> {
   constructor(props) {
     super(props)
-    this.state = {
-      open: false,
-      toRecover: 0,
-      qcs: false,
+    this.state = { open: false, toRecover: 0, qcs: false }
+  }
+
+  handleOpen = () => this.setState({ open: true })
+  handleClose = () => this.setState({ open: false, toRecover: 0, qcs: false })
+
+  handleAdd = (motes) =>
+    this.setState({ toRecover: Math.max(this.state.toRecover + motes, 0) })
+
+  handleReset = () => this.setState({ toRecover: 0 })
+
+  handleChange = (e) => {
+    let { name, value } = e.target
+
+    if (name === 'toRecover') {
+      let val = Math.max(parseInt(value), 0)
+      this.setState({ toRecover: val })
+    } else {
+      this.setState({ [name]: value })
     }
   }
 
-  handleOpen = () =>
-    this.setState({
-      open: true,
-    })
-  handleClose = () =>
-    this.setState({
-      open: false,
-      toRecover: 0,
-      qcs: false,
-    })
-  handleAdd = (motes) =>
-    this.setState({
-      toRecover: Math.max(this.state.toRecover + motes, 0),
-    })
-  handleReset = () =>
-    this.setState({
-      toRecover: 0,
-    })
-  handleChange = (e) => {
-    const { name, value } = e.target
+  handleCheck = (e) =>
+    this.setState({ [e.target.name]: !this.state[e.target.name] })
 
     if (name === 'toRecover') {
       const val = Math.max(parseInt(value), 0)
@@ -150,6 +149,4 @@ class MoteRespirePopup extends Component<Props, State> {
   }
 }
 
-export default connect(null, {
-  respireMotes,
-})(MoteRespirePopup)
+export default connect(null, { respireMotes })(MoteRespirePopup)

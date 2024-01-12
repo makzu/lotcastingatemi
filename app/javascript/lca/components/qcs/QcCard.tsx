@@ -15,6 +15,7 @@ import SpendableBlock from '../generic/SpendableBlock'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 import { WithStyles } from '@material-ui/styles'
+import { RootState } from 'store'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
@@ -226,7 +227,7 @@ function QcCard(props: Props) {
   )
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state: RootState, props) => ({
   penalties: getPenaltiesForQc(state, props.qc.id),
   pools: getPoolsAndRatingsForQc(state, props.qc.id),
   isOwner: doIOwnQc(state, props.qc.id),

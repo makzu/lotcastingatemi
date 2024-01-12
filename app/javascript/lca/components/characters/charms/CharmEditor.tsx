@@ -80,7 +80,6 @@ class CharmEditor extends Component<Props, State> {
     this.handleSort = this.handleSort.bind(this)
   }
 
-  props: Props
   setFilter = (e) => {
     this.setState({
       [e.target.name]: e.target.value,

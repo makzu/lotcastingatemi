@@ -18,6 +18,8 @@ import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 import { WithStyles } from '@material-ui/styles'
+import { Battlegroup } from 'types'
+import { RootState } from 'store'
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
@@ -78,6 +80,7 @@ class QcAttackFields extends React.Component<Props> {
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { attack } = this.props
+    // @ts-expect-error FIXME
     if (deepEqual(this.props.attack[name], value)) return
     this.props.onAttackChange(attack.id, {
       [name]: value,
@@ -104,8 +107,8 @@ class QcAttackFields extends React.Component<Props> {
           className={classes.nameField}
           margin="dense"
           onChange={handleChange}
-          // @ts-expect-error TextField doesn't like ignoring lastpass autocomplete
           inputProps={{
+            // @ts-expect-error TextField doesn't like ignoring lastpass autocomplete
             autocomplete: 'off',
             'data-1p-ignore': 'true',
             'data-lp-ignore': 'true',
@@ -123,7 +126,7 @@ class QcAttackFields extends React.Component<Props> {
         />
         {battlegroup && (
           <div className={classes.bgBonus}>
-            ({bgAttackPool(fakeBg, attack)} total)
+            ({bgAttackPool(fakeBg as Battlegroup, attack)} total)
           </div>
         )}
 
@@ -138,7 +141,7 @@ class QcAttackFields extends React.Component<Props> {
         />
         {battlegroup && (
           <div className={classes.bgBonus}>
-            ({bgDamage(fakeBg, attack)} total)
+            ({bgDamage(fakeBg as Battlegroup, attack)} total)
           </div>
         )}
 
@@ -180,7 +183,7 @@ class QcAttackFields extends React.Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
+function mapStateToProps(state: RootState, ownProps: ExposedProps) {
   let fakeBg
 
   if (ownProps.battlegroup) {

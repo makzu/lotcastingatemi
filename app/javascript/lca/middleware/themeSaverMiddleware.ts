@@ -1,17 +1,12 @@
-import { State } from 'ducks'
-import { SWITCH_THEME } from 'ducks/app'
-import { Middleware } from 'redux'
+import { switchTheme } from 'ducks/app'
+import { Action, Middleware } from 'redux'
+import { RootState } from 'store'
 
 // Saves changes to the theme to LocalStorage
-// eslint-disable-next-line no-unused-vars
-const themeSaver: Middleware<object, State> =
-  (_store) =>
-  (next: $TSFixMeFunction) =>
-  (action: Record<string, $TSFixMe>) => {
-    switch (action.type) {
-      case SWITCH_THEME:
-        localStorage.setItem('theme', action.theme)
-        break
+const themeSaver: Middleware<object, RootState> =
+  (_store) => (next) => (action: Action) => {
+    if (switchTheme.match(action)) {
+      localStorage.setItem('theme', action.payload)
     }
 
     return next(action)

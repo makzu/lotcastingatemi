@@ -13,7 +13,6 @@ import { makeStyles } from '@material-ui/styles'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import ResponsiveFilterDrawer from 'components/shared/ResponsiveFilterDrawer'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
-import { State } from 'ducks'
 import {
   getAllAbilitiesWithCharmsForCharacter,
   getAllCharmKeywordsForCharacter,
@@ -22,6 +21,7 @@ import { getAllCharmCategoriesForCharacter } from 'selectors'
 import { useDialogLogic } from 'hooks'
 import { Charm } from 'types'
 import { CharmFilter, CharmFilterAction } from '../useCharmFilters'
+import { RootState } from 'store'
 
 const useStyles = makeStyles({
   capitalize: {
@@ -35,9 +35,14 @@ interface Props {
   allAbilities: Charm['ability'][]
   allCategories: string[]
   allKeywords: string[]
+  id: number
 }
 
-const ExclusiveSwitch = (props) => (
+const ExclusiveSwitch = (props: {
+  name: string
+  value: string
+  onChange: $TSFixMeFunction
+}) => (
   <div
     style={{
       alignItems: 'center',
@@ -50,6 +55,7 @@ const ExclusiveSwitch = (props) => (
       name={props.name}
       value={props.value}
       onChange={(e, checked) =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         props.onChange({ target: { name: props.name, value: checked } })
       }
     />
@@ -58,7 +64,8 @@ const ExclusiveSwitch = (props) => (
 )
 
 const CharmFilterDrawer = (props: Props) => {
-  const handleChange = (e) =>
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    // @ts-expect-error Charm page rewrite will fix this
     void props.setfilters({ type: e.target.name, payload: e.target.value })
 
   const [filtersOpen, setOpen, setClosed] = useDialogLogic()
@@ -116,6 +123,7 @@ const CharmFilterDrawer = (props: Props) => {
         </TextField>
         <ExclusiveSwitch
           name="keywordInclusive"
+          // @ts-expect-error Charm page rewrite will fix this
           value={props.filters.keywordInclusive}
           onChange={handleChange}
         />
@@ -137,13 +145,18 @@ const CharmFilterDrawer = (props: Props) => {
         </TextField>
         <ExclusiveSwitch
           name="categoryInclusive"
+          // @ts-expect-error Charm page rewrite will fix this
           value={props.filters.categoryInclusive}
           onChange={handleChange}
         />
 
         <div style={{ display: 'flex' }}>
+          {/*
+          // @ts-expect-error Charm page rewrite will fix this */}
           <Checkbox label="Mute Only" name="muteOnly" onChange={handleChange} />
 
+          {/*
+          // @ts-expect-error Charm page rewrite will fix this */}
           <Checkbox
             label="Hide Perilous"
             name="hidePerilous"
@@ -159,7 +172,7 @@ const CharmFilterDrawer = (props: Props) => {
   )
 }
 
-const mapState = (state: State, props: Props) => ({
+const mapState = (state: RootState, props: Props) => ({
   allAbilities: getAllAbilitiesWithCharmsForCharacter(state, props.id),
   allCategories: getAllCharmCategoriesForCharacter(state, props.id),
   allKeywords: getAllCharmKeywordsForCharacter(state, props.id),

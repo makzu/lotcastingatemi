@@ -2,6 +2,7 @@ import { deepEqual } from 'fast-equals'
 import React, { Component, Fragment } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
+
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
@@ -29,7 +30,7 @@ import {
   ATTRIBUTE_MAX,
   ESSENCE_MIN,
   ESSENCE_MAX,
-} from 'utils/constants.ts'
+} from 'utils/constants'
 import type { Charm, Character } from 'utils/flow-types'
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

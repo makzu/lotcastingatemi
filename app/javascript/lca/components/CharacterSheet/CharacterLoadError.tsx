@@ -1,15 +1,11 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { ConnectedProps, connect } from 'react-redux'
 
 import Typography from '@material-ui/core/Typography'
 
-import { State } from 'ducks'
+import { RootState } from 'store'
 
-interface Props {
-  loading: boolean
-}
-
-const CharacterLoadError = ({ loading }: Props) => (
+const CharacterLoadError = ({ loading }: PropsFromRedux) => (
   <Typography paragraph>
     {loading
       ? 'This Character has not yet loaded.'
@@ -17,6 +13,8 @@ const CharacterLoadError = ({ loading }: Props) => (
   </Typography>
 )
 
-const mapState = ({ app }: State): Props => ({ loading: app.loading })
+const mapState = (state: RootState) => ({ loading: state.app.loading })
+const connector = connect(mapState)
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-export default connect<Props>(mapState)(CharacterLoadError)
+export default connector(CharacterLoadError)

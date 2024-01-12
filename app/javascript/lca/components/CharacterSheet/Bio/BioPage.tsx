@@ -4,12 +4,7 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import { Grid, Typography } from '@material-ui/core'
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core/styles'
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles'
 
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import BlockPaper from 'components/generic/blockPaper'
@@ -22,9 +17,8 @@ import { RouteWithIdProps as RouteProps } from 'types/util'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
-    // ...sharedStyles(theme),
     portrait: {
       display: 'block',
       margin: 'auto',
@@ -50,6 +44,7 @@ interface Props extends WithStyles<typeof styles> {
 const BioFullPage = ({ character, classes }: Props) => {
   /* Escape hatch */
   if (character == null) {
+    // @ts-expect-error Hopefully this goes away in a rewrite
     return <CharacterLoadError />
   }
 
@@ -94,6 +89,8 @@ const BioFullPage = ({ character, classes }: Props) => {
             {character.totem && (
               <Typography paragraph>Totem: {character.totem}</Typography>
             )}
+            {/*
+            // @ts-expect-error Lunar forms needs a rewrite anyway */}
             {forms.length > 0 ? (
               <Typography paragraph>Forms: {forms}</Typography>
             ) : null}
@@ -101,6 +98,8 @@ const BioFullPage = ({ character, classes }: Props) => {
         </Grid>
 
         <Grid item xs={12} md={6}>
+          {/*
+          // @ts-expect-error MUI v5 migration should fix this */}
           <BlockPaper>
             <div className={classes.portraitWrap}>
               {character.portrait_link ? (

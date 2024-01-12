@@ -16,13 +16,6 @@ const middleware = [
   paginationMiddleware,
 ]
 
-// export default () =>
-//   configureStore({
-//     reducer,
-//     middleware,
-//     devTools: !PRODUCTION,
-//   })
-
 export const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
@@ -31,5 +24,5 @@ export const store = configureStore({
 
 export default store
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof reducer>
 export type AppDispatch = typeof store.dispatch

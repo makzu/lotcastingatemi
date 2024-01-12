@@ -1,7 +1,6 @@
 import React from 'react'
 import DocumentTitle from 'react-document-title'
 import { useDispatch, useSelector } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@material-ui/core'
 

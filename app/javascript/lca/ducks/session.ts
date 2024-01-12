@@ -1,3 +1,4 @@
+import { Action } from 'redux'
 import { isNonFetchAuthIssue } from './app'
 import { crudAction } from './entities/_lib'
 
@@ -18,7 +19,7 @@ const defaultState: ISessionState = {
 
 export default function SessionReducer(
   state: ISessionState = defaultState,
-  action: any,
+  action: Action,
 ) {
   if (isNonFetchAuthIssue(action)) {
     return {
@@ -47,7 +48,7 @@ export default function SessionReducer(
     case crudAction('player', 'FETCH').success.toString():
       return {
         ...state,
-        id: action.payload.result,
+        id: action.payload.result as number,
       }
 
     default:

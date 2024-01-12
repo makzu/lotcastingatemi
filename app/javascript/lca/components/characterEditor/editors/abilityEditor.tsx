@@ -1,19 +1,20 @@
 import React from 'react'
-import { shouldUpdate } from 'recompose'
+
 import Typography from '@material-ui/core/Typography'
-import type { ListAttributeFieldTypes } from 'components/generic/ListAttributeEditor'
-import ListAttributeEditor from 'components/generic/ListAttributeEditor'
+
+import ListAttributeEditor, {
+  ListAttributeFieldTypes,
+} from 'components/generic/ListAttributeEditor'
 import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
-import { isUnequalByKeys } from 'utils'
+
 import {
   ABILITY_MAX as MAX,
   ABILITY_MIN as MIN,
   ABILITIES,
-  ABILITIES_ALL,
-} from 'utils/constants.ts'
-import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
+} from 'utils/constants'
+import type { withAbilities as Character } from 'utils/flow-types'
 
 function AbilityField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />
@@ -90,6 +91,7 @@ function AbilityEditor({ character, onChange }: Props) {
     dotsOverThree += Math.max(score - 3, 0)
     dotsUnderThree += Math.min(score, 3)
   })
+  // @ts-expect-error FIXME
   character.abil_craft.concat(character.abil_martial_arts).forEach((a) => {
     const score = a.rating
     totalDots += score
@@ -298,11 +300,4 @@ function AbilityEditor({ character, onChange }: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate((props, newProps) =>
-  isUnequalByKeys(
-    props.character,
-    newProps.character,
-    ABILITIES_ALL.map((a) => a.abil),
-  ),
-)
-export default enhance(AbilityEditor)
+export default AbilityEditor

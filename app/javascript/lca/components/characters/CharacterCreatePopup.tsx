@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { ConnectedProps, connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -18,7 +18,8 @@ import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteS
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import { createCharacter } from 'ducks/actions'
-import type { Enhancer } from 'utils/flow-types'
+
+import { RootState } from 'store'
 
 const initialState = {
   open: false,
@@ -31,16 +32,18 @@ const initialState = {
   },
 }
 
-interface Props {
-  id: number
-  createCharacter: Function
-}
 interface State {
   open: boolean
-  character: Object
+  character: {
+    exalt_type: string
+    name: string
+    caste: string
+    type: string
+    aspect: boolean
+  }
 }
 
-class CharacterCreatePopup extends React.Component<Props, State> {
+class CharacterCreatePopup extends React.Component<PropsFromRedux, State> {
   state = initialState
 
   handleOpen = () => {
@@ -307,10 +310,8 @@ class CharacterCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state) => ({ id: state.session.id })
+const mapStateToProps = (state: RootState) => ({ id: state.session.id })
+const connector = connect(mapStateToProps, { createCharacter })
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-const enhance: Enhancer<Props, never> = connect(mapStateToProps, {
-  createCharacter,
-})
-
-export default enhance(CharacterCreatePopup)
+export default connector(CharacterCreatePopup)

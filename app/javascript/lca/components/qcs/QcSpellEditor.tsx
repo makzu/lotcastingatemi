@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
 
 import { Button, Grid, Typography } from '@material-ui/core'
 import { WithStyles } from '@material-ui/core/styles'

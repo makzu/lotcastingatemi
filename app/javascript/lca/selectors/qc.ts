@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { entities, getCurrentPlayer } from './entities'
-import { sortOrderSort } from 'utils'
+import { isDefined, sortOrderSort } from 'utils'
 import * as calc from 'utils/calculated/'
 import { WrappedEntityState } from 'ducks/entities'
 
@@ -25,8 +25,10 @@ export const getQcAttacks = (state: WrappedEntityState) =>
 export const getAttacksForQc = createCachedSelector(
   [getSpecificQc, getQcAttacks],
   (qc, attacks) =>
-    // @ts-expect-error TODO fix this
-    (qc?.qc_attacks ?? []).map((m) => attacks[m]).sort(sortOrderSort),
+    (qc?.qc_attacks ?? [])
+      .map((m) => attacks[m])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(qcIdMemoizer)
 
 export const getQcCharms = (state: WrappedEntityState) =>

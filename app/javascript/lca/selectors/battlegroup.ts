@@ -5,15 +5,15 @@ import { bgJoinBattlePool } from '../utils/calculated/_battlegroups'
 
 import { entities, getCurrentPlayer } from './entities'
 import type { WrappedEntityState } from 'ducks/entities'
-import type { Player, Battlegroup } from 'utils/flow-types'
+import { isDefined } from 'utils'
 
 export const getSpecificBattlegroup = (state: WrappedEntityState, id: number) =>
   entities(state).battlegroups[id]
 
-// @ts-expect-error
-export const getAttacksForBattlegroup: getAttacks = createCachedSelector(
+export const getAttacksForBattlegroup = createCachedSelector(
   [getSpecificBattlegroup, getQcAttacks],
-  (bg, attacks) => bg?.qc_attacks.map((m) => attacks[m]),
+  (bg, attacks) =>
+    (bg?.qc_attacks ?? []).map((m) => attacks[m]).filter(isDefined),
 )((state, id) => id)
 
 export const doIOwnBattlegroup = createSelector(

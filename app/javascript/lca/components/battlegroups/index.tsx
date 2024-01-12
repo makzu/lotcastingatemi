@@ -21,6 +21,7 @@ import {
   bgSoak,
 } from 'utils/calculated'
 import { WithStyles } from '@material-ui/styles'
+import { RootState } from 'store'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -110,7 +111,6 @@ class BattlegroupSheet extends Component<Props> {
         />
         <PoolDisplay
           battlegroup
-          damage
           label="damage"
           pool={{
             total: bgDamage(battlegroup, attack),
@@ -122,7 +122,6 @@ class BattlegroupSheet extends Component<Props> {
         {attack.overwhelming > 1 && (
           <PoolDisplay
             battlegroup
-            damage
             label="Minimum"
             pool={{
               total: attack.overwhelming,
@@ -185,6 +184,7 @@ class BattlegroupSheet extends Component<Props> {
             />
           )}
           {battlegroup.perfect_morale && (
+            // @ts-expect-error Pools and Ratings rewrite
             <PoolDisplay
               battlegroup
               pool={{
@@ -199,6 +199,8 @@ class BattlegroupSheet extends Component<Props> {
         </div>
 
         <div className={classes.flexContainerWrap}>
+          {/*
+          // @ts-expect-error Pools and Ratings rewrite */}
           <PoolDisplay
             battlegroup
             pool={{
@@ -209,6 +211,8 @@ class BattlegroupSheet extends Component<Props> {
               root: classes.poolBlock,
             }}
           />
+          {/*
+          // @ts-expect-error Pools and Ratings rewrite */}
           <PoolDisplay
             battlegroup
             pool={{
@@ -219,6 +223,8 @@ class BattlegroupSheet extends Component<Props> {
               root: classes.poolBlock,
             }}
           />
+          {/*
+          // @ts-expect-error Pools and Ratings rewrite */}
           <PoolDisplay
             battlegroup
             pool={{
@@ -344,7 +350,7 @@ class BattlegroupSheet extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state: RootState, ownProps) {
   const id = ownProps.match.params.bgId
   const battlegroup = getSpecificBattlegroup(state, id)
   let qc_attacks = []

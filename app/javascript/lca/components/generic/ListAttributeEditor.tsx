@@ -14,6 +14,7 @@ import ContentAddCircle from '@material-ui/icons/AddCircle'
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 import { WithStyles } from '@material-ui/styles'
 import SortableItem from 'components/generic/SortableItem'
+import { Character, QC } from 'types'
 
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
 const Handle = SortableHandle(() => (
@@ -65,13 +66,13 @@ const styles = (theme: Theme) =>
   })
 
 interface Props extends WithStyles<typeof styles> {
-  character: Record<string, $TSFixMe>
-  trait: string
+  character: Character | QC
+  trait: keyof Character | keyof QC
   label: string
   newObject: Record<string, $TSFixMe> | string
   nonObject?: boolean
   showCount?: boolean
-  Fields: $TSFixMeFunction
+  Fields: React.ReactNode
   onChange: $TSFixMeFunction
 }
 

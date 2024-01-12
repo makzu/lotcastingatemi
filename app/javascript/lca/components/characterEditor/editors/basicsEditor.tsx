@@ -1,23 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { compose, shouldUpdate } from 'recompose'
+
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+
 import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
 import { canIDeleteCharacter } from 'selectors'
-import { isUnequalByKeys } from 'utils'
-import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.ts'
-import type { Character, Enhancer } from 'utils/flow-types'
-interface ExposedProps {
+import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants'
+import type { Character } from 'utils/flow-types'
+import { useAppSelector } from 'hooks'
+
+interface Props {
   character: Character
   onChange: $TSFixMeFunction
   onRatingChange: $TSFixMeFunction
   onCheck: $TSFixMeFunction
-}
-type Props = ExposedProps & {
-  showPublicCheckbox: boolean
 }
 
 const BasicsEditor = ({
@@ -25,79 +23,71 @@ const BasicsEditor = ({
   onChange,
   onRatingChange,
   onCheck,
-  showPublicCheckbox,
-}: Props) => (
-  <BlockPaper>
-    <div
-      style={{
-        display: 'flex',
-      }}
-    >
-      <TextField
-        name="name"
-        value={character.name}
-        label="Name"
-        margin="dense"
-        onChange={onChange}
-        inputProps={{
-          autocomplete: 'off',
-          'data-1p-ignore': 'true',
-          'data-lp-ignore': 'true',
-        }}
-      />
+}: Props) => {
+  const showPublicCheckbox = useAppSelector((state) =>
+    canIDeleteCharacter(state, character.id),
+  )
+  return (
+    <>
+      {/*
+      // @ts-expect-error MUI v5 should fix this */}
+      <BlockPaper>
+        <div
+          style={{
+            display: 'flex',
+          }}
+        >
+          <TextField
+            name="name"
+            value={character.name}
+            label="Name"
+            margin="dense"
+            onChange={onChange}
+            inputProps={{
+              // @ts-expect-error FIXME
+              autocomplete: 'off',
+              'data-1p-ignore': 'true',
+              'data-lp-ignore': 'true',
+            }}
+          />
 
-      <RatingField
-        trait="essence"
-        value={character.essence}
-        label="Essence"
-        min={ESSENCE_MIN}
-        max={ESSENCE_MAX}
-        onChange={onRatingChange}
-        margin="dense"
-      />
+          <RatingField
+            trait="essence"
+            value={character.essence}
+            label="Essence"
+            min={ESSENCE_MIN}
+            max={ESSENCE_MAX}
+            onChange={onRatingChange}
+            margin="dense"
+          />
 
-      {showPublicCheckbox && (
-        <FormControlLabel
-          label="Publicly Viewable"
-          control={
-            <Checkbox
-              name="public"
-              checked={character.public}
-              onChange={onCheck}
+          {showPublicCheckbox && (
+            <FormControlLabel
+              label="Publicly Viewable"
+              control={
+                <Checkbox
+                  name="public"
+                  checked={character.public}
+                  onChange={onCheck}
+                />
+              }
             />
-          }
+          )}
+        </div>
+        <TextField
+          name="description"
+          value={character.description}
+          label="Description"
+          margin="dense"
+          multiline
+          fullWidth
+          rows={2}
+          rowsMax={10}
+          onChange={onChange}
         />
-      )}
-    </div>
+      </BlockPaper>
+    </>
+  )
+}
 
-    <TextField
-      name="description"
-      value={character.description}
-      label="Description"
-      margin="dense"
-      multiline
-      fullWidth
-      rows={2}
-      rowsMax={10}
-      onChange={onChange}
-    />
-  </BlockPaper>
-)
-
-const mapStateToProps = (state, props) => ({
-  showPublicCheckbox: canIDeleteCharacter(state, props.character.id),
-})
-
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  shouldUpdate(
-    (props, nextProps) =>
-      isUnequalByKeys(props.character, nextProps.character, [
-        'name',
-        'essence',
-        'description',
-        'public',
-      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox,
-  ),
-)
-export default enhance(BasicsEditor)
+export default BasicsEditor

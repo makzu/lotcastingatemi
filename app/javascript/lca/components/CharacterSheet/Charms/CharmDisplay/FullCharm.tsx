@@ -8,6 +8,7 @@ interface Props {
 }
 
 const FullCharmDisplay = ({ charm }: Props) => {
+  // @ts-expect-error MUI v5 should fix this
   return <BlockPaper>{charm.name}</BlockPaper>
 }
 

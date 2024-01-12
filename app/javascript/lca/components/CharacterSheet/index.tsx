@@ -10,7 +10,6 @@ import { RouteWithIdProps as RouteProps } from 'types/util'
 import CharacterSheet from '../characters/CharacterSheet'
 import CharmFullPage from '../characters/charms/'
 import BioPage from './Bio'
-import CharmPage from './Charms'
 import MeritPage from './Merits'
 import SorceryPage from './Sorcery'
 
@@ -18,8 +17,8 @@ interface Props extends RouteProps {
   fetch: typeof fetchCharacterIfNecessary
 }
 
-const characterSheetWrapper = ({ match, fetch }: Props) => {
-  const id = parseInt(match.params.id || '', 10)
+const CharacterSheetWrapper = ({ match, fetch }: Props) => {
+  const id = parseInt(match.params.id ?? '', 10)
 
   useLazyFetch(id, fetch)
 
@@ -27,7 +26,6 @@ const characterSheetWrapper = ({ match, fetch }: Props) => {
     <Switch>
       <Route path="/characters/:id/merits" component={MeritPage} />
       <Route path="/characters/:characterId/charms" component={CharmFullPage} />
-      <Route path="/characters/:id/charmss" component={CharmPage} />
       <Route path="/characters/:id/sorcery" component={SorceryPage} />
       <Route path="/characters/:id/bio" component={BioPage} />
       <Route path="/characters/:characterId" component={CharacterSheet} />
@@ -38,4 +36,4 @@ const characterSheetWrapper = ({ match, fetch }: Props) => {
 export default compose<Props, RouteProps>(
   connect(null, { fetch: fetchCharacterIfNecessary }),
   ProtectedComponent,
-)(characterSheetWrapper)
+)(CharacterSheetWrapper)

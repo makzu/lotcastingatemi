@@ -24,7 +24,9 @@ interface Props extends WithStyles<typeof styles> {
   className?: string
   fullWidth?: TextFieldProps['fullWidth']
   multiline?: TextFieldProps['multiline']
+  rows?: TextFieldProps['rows']
   rowsMax?: TextFieldProps['rowsMax']
+  inputProps?: TextFieldProps['InputProps']
 }
 interface State {
   value: string

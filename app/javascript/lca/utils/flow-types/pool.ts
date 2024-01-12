@@ -1,3 +1,5 @@
+import { penaltyObject } from 'utils/calculated'
+
 export interface PoolBonus {
   label: string
   situational?: boolean
@@ -40,7 +42,7 @@ export type Pool = SoakPool &
     excellencyCost?: number
     excellencyStunt?: number
     excellencyStuntCost?: number
-    penalties?: Record<string, $TSFixMe>[]
+    penalties?: ReturnType<typeof penaltyObject>
     totalPenalty?: number
     total: number | string
     bonus?: PoolBonus[]

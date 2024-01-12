@@ -15,6 +15,7 @@ import { useCharacterAttribute } from 'ducks/entities'
 import { RouteWithIdProps as RouteProps } from 'types/util'
 
 const SideNavigation = ({ match }: RouteProps) => {
+  // @ts-expect-error hooks/router upgrade will fix this
   const id = parseInt(match.params.id, 10)
   const characterName = useCharacterAttribute(id, 'name')
 

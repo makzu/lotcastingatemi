@@ -1,18 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { SortableContainer } from 'react-sortable-hoc'
+
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
+
 import QcAttackFields from './qcAttackFields'
 import { createQcAttack, destroyQcAttack, updateQcAttack } from 'ducks/actions'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 import SortableItem from 'components/generic/SortableItem'
+import { RootState } from 'store'
+import { Battlegroup, QC } from 'types'
 
+// @ts-expect-error New dnd library should fix this
 const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)
 interface ExposedProps {
-  qc: Record<string, $TSFixMe>
+  qc: QC | Battlegroup
   battlegroup?: boolean
 }
 type Props = ExposedProps & {
@@ -24,7 +29,7 @@ type Props = ExposedProps & {
 }
 
 class QcAttackEditor extends React.Component<Props> {
-  handleChange = (id, trait) => {
+  handleChange = (id: number, trait: Partial<QcAttack>) => {
     this.props.updateQcAttack(id, this.props.qc.id, trait, this.props.type)
   }
   handleAdd = () => {
@@ -32,12 +37,18 @@ class QcAttackEditor extends React.Component<Props> {
       parent: this.props.type,
     })
   }
-  handleRemove = (id) => {
+  handleRemove = (id: number) => {
     this.props.destroyQcAttack(id, this.props.qc.id, this.props.type)
   }
-  handleSort = ({ oldIndex, newIndex }) => {
-    const attackA = this.props.qc_attacks[oldIndex]
-    const attackB = this.props.qc_attacks[newIndex]
+  handleSort = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => {
+    const attackA = this.props.qc_attacks[oldIndex]!
+    const attackB = this.props.qc_attacks[newIndex]!
     const offset = attackA.sort_order > attackB.sort_order ? -1 : 1
     this.props.updateQcAttack(
       attackA.id,
@@ -55,7 +66,6 @@ class QcAttackEditor extends React.Component<Props> {
       <SortableItem index={i} key={attack.id}>
         <QcAttackFields
           attack={attack}
-          qc={this.props.qc}
           onAttackChange={handleChange}
           onRemoveClick={handleRemove}
           battlegroup={this.props.battlegroup}
@@ -80,9 +90,9 @@ class QcAttackEditor extends React.Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
+function mapStateToProps(state: RootState, ownProps: ExposedProps) {
   const qc = ownProps.qc
-  let qc_attacks = []
+  let qc_attacks: QcAttack[] = []
   let type = 'qc'
 
   if (qc != undefined) {
@@ -100,6 +110,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
+// @ts-expect-error hooks rewrite will fix this
 const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
   updateQcAttack,
   createQcAttack,

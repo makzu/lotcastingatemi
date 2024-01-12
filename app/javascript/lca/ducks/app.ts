@@ -1,4 +1,5 @@
-import { createAction } from 'redux-actions'
+import { createAction } from '@reduxjs/toolkit'
+import { Action } from 'redux'
 
 export const CLOSE_DRAWER = 'lca/app/CLOSE_DRAWER'
 export const TOGGLE_DRAWER = 'lca/app/TOGGLE_DRAWER'
@@ -6,7 +7,7 @@ export const SWITCH_THEME = 'lca/app/SWITCH_THEME'
 
 const defaultState = {
   drawerOpen: false,
-  theme: (localStorage as Record<string, $TSFixMe>).theme || 'light',
+  theme: (localStorage.theme as 'dark' | 'light') ?? 'light',
   loading: false,
   error: false,
   errorMessage: '',
@@ -20,20 +21,20 @@ interface AppState {
 }
 
 export const isAuthFailure = (action: Record<string, $TSFixMe>) =>
-  action.error && (action.payload || {}).status == 401
+  action.error && action.payload?.status == 401
 export const isForbidden = (action: Record<string, $TSFixMe>) =>
-  action.error && (action.payload || {}).status == 403
+  action.error && action.payload?.status == 403
 export const is404Error = (action: Record<string, $TSFixMe>) =>
-  action.error && (action.payload || {}).status == 404
+  action.error && action.payload?.status == 404
 
 export const isNonFetchAuthIssue = (action: Record<string, $TSFixMe>) =>
   action.error &&
-  [401, 401].includes((action.payload || {}).status) &&
+  [401, 401].includes(action.payload?.status) &&
   action.type !== 'lca-api/character/FETCH/FAILURE'
 
 export default function AppReducer(
   state: AppState = defaultState,
-  action: Record<string, $TSFixMe>,
+  action: Action,
 ): AppState {
   if (isAuthFailure(action) || isForbidden(action) || is404Error(action)) {
     return {
@@ -68,15 +69,16 @@ export default function AppReducer(
     }
   }
 
+  if (switchTheme.match(action)) {
+    return { ...state, theme: action.payload }
+  }
+
   switch (action.type) {
     case CLOSE_DRAWER:
       return { ...state, drawerOpen: false }
 
     case TOGGLE_DRAWER:
       return { ...state, drawerOpen: !state.drawerOpen }
-
-    case SWITCH_THEME:
-      return { ...state, theme: action.theme }
 
     default:
       return state
@@ -85,12 +87,7 @@ export default function AppReducer(
 
 export const toggleDrawer = () => ({ type: TOGGLE_DRAWER })
 export const closeDrawer = () => ({ type: CLOSE_DRAWER })
-export const switchTheme = (theme: string) => ({
-  type: SWITCH_THEME,
-  theme: theme,
-})
-
-// export const switchTheme = createAction<'light' | 'dark'>(SWITCH_THEME)
+export const switchTheme = createAction<'light' | 'dark'>(SWITCH_THEME)
 
 export const parseError = (action: Record<string, $TSFixMe>): string => {
   if (action.payload === undefined || action.payload.response === undefined) {

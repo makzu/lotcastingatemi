@@ -53,7 +53,6 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     this.setClosed = this.setClosed.bind(this)
   }
 
-  props: Props
   setOpen = () => {
     if (
       this.props.noSummary ||

@@ -1,4 +1,3 @@
-import { State } from 'ducks'
 import { callApi } from 'utils/api'
 import { defaultState, EntityState } from './'
 import { createUpdateAction, mergeEntity } from './_entity'
@@ -8,6 +7,7 @@ import {
   standardTypes,
   unwrapped,
 } from './_lib'
+import { RootState } from 'store'
 
 const PLAYER = 'player'
 
@@ -18,10 +18,15 @@ export default {
   ),
   [crudAction(PLAYER, 'FETCH').success.toString()]: (
     state: EntityState,
+    // @ts-expect-error FIXME reducer rewrite
     action,
   ) => {
+    // FIXME
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const newState = mergeEntity(state, action)
 
+    // FIXME
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     newState.currentPlayer = action.payload.result
 
     return newState
@@ -62,14 +67,8 @@ export interface Player {
 }
 
 /* *** Selectors *** */
-export const getSpecificPlayer = (state: State, id: number): Player => ({
-  characters: [],
-  qcs: [],
-  battlegroups: [],
-  chronicles: [],
-  own_chronicles: [],
-  ...unwrapped(state).players[id],
-})
+export const getSpecificPlayer = (state: RootState, id: number) =>
+  unwrapped(state).players[id]
 
-export const getCurrentPlayer = (state: State): Player =>
+export const getCurrentPlayer = (state: RootState) =>
   getSpecificPlayer(state, state.session.id)

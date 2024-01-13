@@ -1,4 +1,4 @@
-import React from 'react'
+import { ChangeEventHandler } from 'react'
 
 import MenuItem from '@mui/material/MenuItem'
 
@@ -12,7 +12,7 @@ import { Character } from '@/types'
 
 interface Props {
   character: Character
-  onChange: React.ChangeEventHandler
+  onChange: ChangeEventHandler
 }
 function AbyssalExaltEditor({ character, onChange }: Props) {
   const casteAbilities = ABYSSAL_CASTE_ABILITIES[character.caste] || []

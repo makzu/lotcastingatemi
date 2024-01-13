@@ -1,6 +1,8 @@
+import { Sortable } from '@/utils'
 import { PlayerAsset } from './_lib'
 import { WithSharedStats } from './shared'
 
+export type AttackRange = 'close' | 'short' | 'medium' | 'long' | 'extreme'
 export interface QcAction {
   action: string
   pool: number
@@ -42,4 +44,19 @@ export interface QC extends PlayerAsset, WithSharedStats {
   qc_merits: number[]
   portrait_link: string
   type: 'qc'
+}
+
+export interface QcAttack extends Sortable {
+  id: number
+  name: string
+  pool: number
+  range: AttackRange
+  damage: number
+  overwhelming: number
+  tags: string[]
+}
+
+export interface QcMerit {
+  id: number
+  name: string
 }

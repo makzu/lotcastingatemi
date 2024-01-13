@@ -4,8 +4,10 @@ export * from './qc'
 export * from './battlegroup'
 export * from './chronicle'
 export * from './traits'
+export * from './pool'
 
-import { Ability, Attribute } from './character'
+import { Ability } from '@/utils/constants.new/abilities'
+import { Attribute } from '@/utils/constants.new/attributes'
 
 export type CharacterType = 'character' | 'qc' | 'battlegroup'
 
@@ -18,3 +20,5 @@ export interface PoolBase {
 export interface StaticRating extends PoolBase {
   specialtyMatters: boolean
 }
+
+export type damageType = 'bashing' | 'lethal' | 'aggravated'

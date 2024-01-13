@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 
@@ -29,8 +27,8 @@ interface Props extends WithStyles<typeof styles> {
 }
 export function SpendableBlock({ character, classes, qc }: Props) {
   return (
-    <Fragment>
-      <Typography className={classes.flexContainerWrap} component="div">
+    <>
+      <Typography className="flexContainerWrap" component="div">
         {character.motes_personal_total > 0 && (
           <MoteSpendWidget character={character} qc={qc}>
             <ResourceDisplay
@@ -79,7 +77,7 @@ export function SpendableBlock({ character, classes, qc }: Props) {
       <DamageWidget character={character} qc={qc}>
         <HealthLevelBoxes character={character} />
       </DamageWidget>
-    </Fragment>
+    </>
   )
 }
 export default withStyles(styles)(SpendableBlock)

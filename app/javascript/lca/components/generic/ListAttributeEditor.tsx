@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
+import SortableItem from './SortableItem'
 
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
 const Handle = SortableHandle(() => (
@@ -91,7 +92,7 @@ const styles = (theme) => ({
 
 interface Props extends WithStyles<typeof styles> {
   character: Character | QC
-  trait: keyof Character  
+  trait: keyof Character
   label: string
   newObject: Record<string, $TSFixMe> | string
   nonObject?: boolean

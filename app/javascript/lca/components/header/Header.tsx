@@ -31,6 +31,7 @@ const LcaHeader = () => {
         transition: (theme) => theme.transitions.create('width'),
         width: { lg: `calc(100% - ${drawerWidth}px)` },
         ml: { lg: `${drawerWidth}px` },
+        pl: { lg: 3 },
       }}
     >
       <Suspense fallback={<div />}>

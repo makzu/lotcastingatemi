@@ -12,6 +12,7 @@ import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
 import { Character } from 'types'
 import { useAppDispatch, useAppSelector } from 'hooks'
+import SortableItem from '@/components/generic/SortableItem'
 
 // @ts-expect-error TODO migrate to new dnd lib
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)

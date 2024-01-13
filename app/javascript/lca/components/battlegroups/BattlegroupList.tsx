@@ -16,7 +16,7 @@ const BattlegroupList = () => {
   const chars = battlegroups.map((c, i) => (
     <SortableItem key={c.id} index={i} collection="battlegroups">
       <Grid item xs={12} md={6} xl={4}>
-        <BattlegroupCard battlegroup={c} />
+        <BattlegroupCard id={c.id} />
       </Grid>
     </SortableItem>
   ))

@@ -3,24 +3,25 @@ import createCachedSelector from 're-reselect'
 import { entities, getCurrentPlayer } from './entities'
 import { isDefined, sortOrderSort } from 'utils'
 import * as calc from 'utils/calculated/'
-import { WrappedEntityState } from 'ducks/entities'
+import { RootState } from '@/store'
 
-export const getSpecificQc = (state: WrappedEntityState, id: number) =>
+export const getSpecificQc = (state: RootState, id: number) =>
   entities(state).qcs[id]
 
-const qcIdMemoizer = (_state: WrappedEntityState, id: number) => id
+const qcIdMemoizer = (_state: RootState, id: number) => id
 
-const getQcMerits = (state: WrappedEntityState) => entities(state).qc_merits
+const getQcMerits = (state: RootState) => entities(state).qc_merits
 
 export const getMeritsForQc = createCachedSelector(
   [getSpecificQc, getQcMerits],
   (qc, merits) =>
-    // @ts-expect-error TODO fix this
-    (qc?.qc_merits ?? []).map((m) => merits[m]).sort(sortOrderSort),
+    (qc?.qc_merits ?? [])
+      .map((m) => merits[m])
+      .filter(isDefined)
+      .sort(sortOrderSort),
 )(qcIdMemoizer)
 
-export const getQcAttacks = (state: WrappedEntityState) =>
-  entities(state).qc_attacks
+export const getQcAttacks = (state: RootState) => entities(state).qc_attacks
 
 export const getAttacksForQc = createCachedSelector(
   [getSpecificQc, getQcAttacks],
@@ -31,8 +32,7 @@ export const getAttacksForQc = createCachedSelector(
       .sort(sortOrderSort),
 )(qcIdMemoizer)
 
-export const getQcCharms = (state: WrappedEntityState) =>
-  entities(state).qc_charms
+export const getQcCharms = (state: RootState) => entities(state).qc_charms
 
 export const getCharmsForQc = createCachedSelector(
   [getSpecificQc, getQcCharms],
@@ -43,7 +43,6 @@ export const getCharmsForQc = createCachedSelector(
 export const getPenaltiesForQc = createCachedSelector(
   [getSpecificQc, getMeritsForQc],
   (character, merits) => {
-    // @ts-expect-error TODO fix this
     const meritNames = merits.map((m) => m.name.toLowerCase())
     return {
       // @ts-expect-error TODO fix this

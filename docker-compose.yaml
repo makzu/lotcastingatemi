@@ -19,8 +19,6 @@ services:
       - postgres
       - vite
     environment:
-      DATABASE_URL: postgres
-      RAILS_ENV: development
       VITE_RUBY_HOST: vite
     ports:
       - 3000:3000

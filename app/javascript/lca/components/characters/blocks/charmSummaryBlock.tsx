@@ -1,6 +1,3 @@
-
-import { Fragment } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -18,6 +15,7 @@ import {
   getSpellsForCharacter,
 } from 'selectors'
 import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
 
 const styles = (theme) => ({
   root: {
@@ -56,7 +54,7 @@ function _SingleCharm({
   classes: Record<string, $TSFixMe>
 }) {
   return (
-    <Fragment>
+    <>
       <Typography component="div" className={classes.root}>
         <div className={classes.name}>{charm.name}</div>
         <div className={classes.info}>
@@ -74,11 +72,11 @@ function _SingleCharm({
           unwrapDisallowed
         >
           {charm.summary.length > 0 ? charm.summary : charm.body}
-        </ReactMarkdown>
+        </MarkdownDisplay>
       </Typography>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 
@@ -92,7 +90,7 @@ function _SingleSpell({
   classes: Record<string, $TSFixMe>
 }) {
   return (
-    <Fragment>
+    <>
       <Typography component="div" className={classes.root}>
         <div className={classes.name}>{spell.name}</div>
         <div className={classes.info}>
@@ -106,7 +104,7 @@ function _SingleSpell({
         <div className={classes.body}>{spell.body}</div>
       </Typography>
       <Divider />
-    </Fragment>
+    </>
   )
 }
 

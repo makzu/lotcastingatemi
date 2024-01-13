@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem'
 import MuiTextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import TextField from 'components/generic/TextField.jsx'
+import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import { destroyAccount, updatePlayer } from 'ducks/actions'

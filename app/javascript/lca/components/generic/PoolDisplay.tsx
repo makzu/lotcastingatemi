@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 
 import type { Pool } from 'utils/flow-types'
 
@@ -7,6 +7,8 @@ import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import withStyles from '@mui/styles/withStyles'
+import { Theme, createStyles } from '@mui/material/styles'
+import AttackTagsDisplay from './AttackTagsDisplay'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -34,34 +36,6 @@ const styles = (theme: Theme) =>
     },
     excellency: { ...theme.typography.caption },
   })
-
-const styles = (theme) => ({
-  root: {},
-  clickable: {
-    cursor: 'pointer',
-  },
-  label: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-  },
-  labelSpan: {},
-  pool: {
-    ...theme.typography.body2,
-    fontSize: '1.25rem',
-    lineHeight: 'inherit',
-  },
-  specialty: {
-    ...theme.typography.caption,
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    whiteSpace: 'noWrap',
-  },
-  excellency: {
-    ...theme.typography.caption,
-  },
-})
 
 interface Props {
   label: string
@@ -147,7 +121,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
       this.props.battlegroup ||
       this.props.pool.noSummary
     return (
-      <Fragment>
+      <>
         {
           // TODO: add ButtonBase here
         }
@@ -288,7 +262,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                   {sp.join(', ')}
                 </span>
                 {pool.rating && (
-                  <Fragment>
+                  <>
                     {pool.specialtyMatters && (
                       <div>
                         Specialt
@@ -303,7 +277,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                         <strong>will not</strong> affect rating
                       </div>
                     )}
-                  </Fragment>
+                  </>
                 )}
               </DialogContentText>
             )}
@@ -324,7 +298,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
             )}
           </DialogContent>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

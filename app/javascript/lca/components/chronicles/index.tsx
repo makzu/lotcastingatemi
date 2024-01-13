@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
@@ -113,7 +113,7 @@ class ChronicleDashboard extends Component<Props> {
       </SortableItem>
     ))
     return (
-      <Fragment>
+      <>
         <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
 
         <Hidden smUp>
@@ -192,7 +192,7 @@ class ChronicleDashboard extends Component<Props> {
             </Grid>
           </Grid>
         )}
-      </Fragment>
+      </>
     )
   }
 }

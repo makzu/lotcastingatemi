@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -40,7 +40,11 @@ interface Props {
   canEdit: boolean
   update: Function
 }
-interface State { open: boolean; magnitude: number; size: number }
+interface State {
+  open: boolean
+  magnitude: number
+  size: number
+}
 class BattlegroupHealthDisplay extends Component<Props, State> {
   state = {
     open: false,
@@ -86,7 +90,7 @@ class BattlegroupHealthDisplay extends Component<Props, State> {
     const { open, size, magnitude } = this.state
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     return (
-      <Fragment>
+      <>
         <ButtonBase
           disabled={!canEdit}
           onClick={handleOpen}
@@ -118,12 +122,8 @@ class BattlegroupHealthDisplay extends Component<Props, State> {
           <DialogTitle>Battlegroup Health</DialogTitle>
 
           <DialogContent>
-            <div className={classes.flexContainer}>
-              <div
-                style={{
-                  flex: 1,
-                }}
-              >
+            <div className="flexContainer">
+              <div style={{ flex: 1 }}>
                 <ResourceDisplay
                   current={battlegroup.magnitude}
                   total={totalMagnitude(battlegroup)}
@@ -147,13 +147,8 @@ class BattlegroupHealthDisplay extends Component<Props, State> {
               </div>
             </div>
 
-            <div className={classes.flexContainer}>
-              <Typography
-                component="div"
-                style={{
-                  flex: 1,
-                }}
-              >
+            <div className="flexContainer">
+              <Typography component="div" style={{ flex: 1 }}>
                 <RatingField
                   label="Magnitude"
                   trait="magnitude"
@@ -190,7 +185,7 @@ class BattlegroupHealthDisplay extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

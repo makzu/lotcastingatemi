@@ -1,5 +1,6 @@
 import store, { AppDispatch } from '@/store'
 import { updateCharacter, updateQc, updateBattlegroup } from '../actions'
+import { damageType } from '@/types'
 export * from './chronicle.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
@@ -70,7 +71,7 @@ export function spendWillpower(
 export function takeDamage(
   id: number,
   damage: number,
-  damageType: 'bashing' | 'lethal' | 'aggravated' = 'bashing',
+  damageType: damageType = 'bashing',
   charType: 'character' | 'qc' = 'character',
 ) {
   const update = updateEvent(charType)

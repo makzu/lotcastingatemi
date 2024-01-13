@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useMemo } from 'react'
 
-import { useMediaQuery } from '@mui/material'
+import { GlobalStyles, useMediaQuery } from '@mui/material'
 import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
 import {
   createTheme,
@@ -56,6 +56,13 @@ const ThemeContainer = ({ children }: PropsWithChildren<null>) => {
      */
     return createTheme({
       components: {
+        // https://mui.com/material-ui/react-text-field/#performance
+        // When changing this let's also update
+        MuiInputBase: {
+          defaultProps: {
+            disableInjectingGlobalStyles: true,
+          },
+        },
         MuiTextField: {
           defaultProps: {
             variant: 'standard',
@@ -79,6 +86,12 @@ const ThemeContainer = ({ children }: PropsWithChildren<null>) => {
 
   return (
     <StyledEngineProvider injectFirst>
+      <GlobalStyles
+        styles={{
+          '@keyframes mui-auto-fill': { from: { display: 'block' } },
+          '@keyframes mui-auto-fill-cancel': { from: { display: 'block' } },
+        }}
+      />
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </StyledEngineProvider>
   )

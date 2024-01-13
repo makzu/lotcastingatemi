@@ -21,3 +21,20 @@
     opacity: 0.7;
   }
 }
+
+.flexContainer {
+  display: flex;
+}
+
+.flexContainerWrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex {
+  flex: 1;
+}
+
+.align span {
+  vertical-align: bottom;
+}

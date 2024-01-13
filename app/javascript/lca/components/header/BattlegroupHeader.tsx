@@ -3,7 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { Button, Toolbar, Typography } from '@mui/material'
 
 import CharacterMenu from 'components/generic/CharacterMenu'
-import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
+import {
+  canIEditBattlegroup,
+  getSpecificBattlegroup,
+} from '@/ducks/entities/battlegroup'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'

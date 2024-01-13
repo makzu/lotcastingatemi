@@ -9,18 +9,18 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import QcActionEditor from './qcActionEditor.jsx'
-import QcAttackEditor from './qcAttackEditor.jsx'
-import QcCharmEditor from './qcCharmEditor.jsx'
-import QcExcellencySelect from './QcExcellencySelect.jsx'
-import QcMeritEditor from './qcMeritEditor.jsx'
+import QcActionEditor from './qcActionEditor'
+import QcAttackEditor from './qcAttackEditor'
+import QcCharmEditor from './qcCharmEditor'
+import QcExcellencySelect from './QcExcellencySelect'
+import QcMeritEditor from './qcMeritEditor'
 import QcSpellEditor from './QcSpellEditor'
-import AnimaSelect from '../generic/AnimaSelect.jsx'
+import AnimaSelect from '../generic/AnimaSelect'
 import BlockPaper from 'components/shared/BlockPaper'
-import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
-import IntimacyEditor from '../generic/intimacyEditor.jsx'
-import RatingField from '../generic/RatingField.jsx'
-import TextField from '../generic/TextField.jsx'
+import HealthLevelBoxes from '../generic/HealthLevelBoxes'
+import IntimacyEditor from '../generic/intimacyEditor'
+import RatingField from '../generic/RatingField'
+import TextField from '../generic/TextField'
 import AuraSelect from 'components/shared/selects/AuraSelect'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
@@ -165,7 +165,7 @@ class QcEditor extends Component<Props> {
           {/*
           // @ts-expect-error MUI v5 will hopefully fix this */}
           <BlockPaper>
-            <Typography component="div" className={classes.flexContainer}>
+            <Typography component="div" className="flexContainer">
               <RatingField
                 trait="essence"
                 value={qc.essence}
@@ -198,7 +198,7 @@ class QcEditor extends Component<Props> {
 
             <Typography component="div">Motes</Typography>
 
-            <Typography component="div" className={classes.flexContainerWrap}>
+            <Typography component="div" className="flexContainerWrap">
               <RatingField
                 trait="motes_personal_current"
                 value={qc.motes_personal_current}
@@ -237,7 +237,7 @@ class QcEditor extends Component<Props> {
               />
             </Typography>
 
-            <div className={classes.flexContainer}>
+            <div className="flexContainer">
               <AnimaSelect
                 character={qc}
                 onChange={handleChange}

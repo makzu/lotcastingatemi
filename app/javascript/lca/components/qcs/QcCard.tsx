@@ -1,4 +1,3 @@
-
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
@@ -9,10 +8,10 @@ import Typography from '@mui/material/Typography'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import CharacterMenu from '../generic/CharacterMenu'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import SpendableBlock from '../generic/SpendableBlock.jsx'
+import PoolDisplay from '../generic/PoolDisplay'
+import SpendableBlock from '../generic/SpendableBlock'
 import CardBase from 'components/shared/CardBase'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
@@ -32,40 +31,41 @@ const styles = (theme) => ({
     '& a': {
       color: 'unset',
     },
-    nameRow: {
-      display: 'flex',
+  },
+  nameRow: {
+    display: 'flex',
+  },
+  nameWrap: {
+    flex: 1,
+    '& a': {
+      color: 'unset',
     },
-    nameWrap: {
-      flex: 1,
-      '& a': {
-        color: 'unset',
-      },
-    },
-    hiddenLabel: {
-      ...theme.typography.caption,
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      lineHeight: 'inherit',
-    },
-    qcName: {
-      textDecoration: 'none',
-    },
-    icon: {
-      verticalAlign: 'bottom',
-      marginLeft: theme.spacing(),
-    },
-    rowContainer: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    poolBlock: {
-      marginRight: theme.spacing(),
-      marginTop: theme.spacing(),
-      width: '4.5rem',
-      maxHeight: '5.5rem',
-      overflow: 'hidden',
-    },
-  })
+  },
+  hiddenLabel: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  qcName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing(),
+  },
+  rowContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  poolBlock: {
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
+    width: '4.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
+})
 
 interface ExposedProps {
   qc: fullQc

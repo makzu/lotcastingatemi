@@ -1,44 +1,8 @@
+import { Ability } from '@/utils/constants.new/abilities'
+import { Attribute } from '@/utils/constants.new/attributes'
+import { CharacterType } from '@/utils/constants.new/character'
 import { PlayerAsset, Weight } from './_lib'
 import { WithSharedStats } from './shared'
-
-export type Ability =
-  | 'archery'
-  | 'athletics'
-  | 'awareness'
-  | 'brawl'
-  | 'bureaucracy'
-  | 'craft'
-  | 'dodge'
-  | 'integrity'
-  | 'investigation'
-  | 'larceny'
-  | 'linguistics'
-  | 'lore'
-  | 'martial_arts'
-  | 'medicine'
-  | 'melee'
-  | 'occult'
-  | 'performance'
-  | 'presence'
-  | 'resistance'
-  | 'ride'
-  | 'sail'
-  | 'socialize'
-  | 'stealth'
-  | 'survival'
-  | 'thrown'
-  | 'war'
-
-export type Attribute =
-  | 'strength'
-  | 'dexterity'
-  | 'stamina'
-  | 'charisma'
-  | 'manipulation'
-  | 'appearance'
-  | 'perception'
-  | 'intelligence'
-  | 'wits'
 
 export interface XpLogEntry {
   label: string
@@ -77,7 +41,7 @@ export interface Character extends PlayerAsset, WithSharedStats {
   lore_background: string
   portrait_link: string
   native_language: string
-  type: ExaltType
+  type: CharacterType
   caste: string
   aspect: boolean
   exalt_type: string

@@ -53,7 +53,7 @@ interface Props {
 function BattlegroupCard({ battlegroup, classes }: Props) {
   return (
     <CardBase>
-      <div className={classes.flexContainer}>
+      <div className="flexContainer">
         <div className={classes.nameWrap}>
           <Typography
             variant="h6"
@@ -79,7 +79,7 @@ function BattlegroupCard({ battlegroup, classes }: Props) {
 
       <CombatControls character={battlegroup} characterType="battlegroup" />
 
-      <div className={classes.flexContainerWrap}>
+      <div className="flexContainerWrap">
         <BattlegroupHealthDisplay
           battlegroup={battlegroup}
           className={classes.poolBlock}
@@ -122,7 +122,7 @@ function BattlegroupCard({ battlegroup, classes }: Props) {
         )}
       </div>
 
-      <div className={classes.flexContainerWrap}>
+      <div className="flexContainerWrap">
         <PoolDisplay
           battlegroup
           pool={{

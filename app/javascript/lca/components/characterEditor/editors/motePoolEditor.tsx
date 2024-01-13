@@ -27,7 +27,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
   return (
     <BlockPaper>
       <Typography variant="h6">Mote Pools:</Typography>
-      <Typography component="div" className={classes.flexContainerWrap}>
+      <Typography component="div" className="flexContainerWrap">
         {character.type !== 'Character' && (
           <>
             <div className={classes.flexCol}>
@@ -100,7 +100,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
         )}
       </Typography>
 
-      <Typography component="div" className={classes.flexContainerWrap}>
+      <Typography component="div" className="flexContainerWrap">
         {character.type !== 'Character' && (
           <div className={classes.flexCol}>
             <AnimaSelect character={character} onChange={onChange} />

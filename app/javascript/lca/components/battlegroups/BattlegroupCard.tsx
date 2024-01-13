@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'redux'
 
-import withStyles, { WithStyles} from '@mui/styles/withStyles'
+import withStyles, { WithStyles } from '@mui/styles/withStyles'
 import { Typography } from '@mui/material'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
@@ -11,13 +11,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import CharacterMenu from '../generic/CharacterMenu'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
+import PoolDisplay from '../generic/PoolDisplay'
 import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
-import { doIOwnBattlegroup } from '@/ducks/entities/battlegroup'
+import {
+  doIOwnBattlegroup,
+  getSpecificBattlegroup,
+} from '@/ducks/entities/battlegroup'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 import type { Battlegroup, Enhancer } from 'utils/flow-types'
-
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
@@ -36,33 +38,35 @@ const styles = (theme) => ({
     '& a': {
       color: 'unset',
     },
-    hiddenLabel: {
-      ...theme.typography.caption,
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      lineHeight: 'inherit',
+  },
+  hiddenLabel: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  nameWrap: {
+    flex: 1,
+    '& a': {
+      color: 'unset',
     },
-    nameWrap: {
-      flex: 1,
-      '& a': {
-        color: 'unset',
-      },
-    },
-    battlegroupName: {
-      textDecoration: 'none',
-    },
-    icon: {
-      verticalAlign: 'bottom',
-      marginLeft: theme.spacing(),
-    },
-    poolBlock: {
-      marginRight: theme.spacing(),
-      minWidth: '4rem',
-    },
-  })
+  },
+  battlegroupName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing(),
+  },
+  poolBlock: {
+    marginRight: theme.spacing(),
+    minWidth: '4rem',
+  },
+})
 
 interface ExposedProps {
   battlegroup: Battlegroup
+  id: number
   chronicle?: boolean
   st?: boolean
 }
@@ -72,7 +76,11 @@ type Props = ExposedProps &
   }
 
 function BattlegroupCard(props: Props) {
-  const { battlegroup, chronicle, st, isOwner, classes } = props
+  const { chronicle, st, isOwner, classes } = props
+  const battlegroup = getSpecificBattlegroup(props.id)
+
+  if (battlegroup === undefined) return null
+
   return (
     <CardBase>
       {((chronicle && st) || (!chronicle && isOwner)) && (
@@ -288,7 +296,7 @@ function BattlegroupCard(props: Props) {
 }
 
 const mapStateToProps = (state: $TSFixMe, props: ExposedProps) => ({
-  isOwner: doIOwnBattlegroup(state, props.battlegroup.id),
+  isOwner: doIOwnBattlegroup(state, props.battlegroup?.id),
 })
 
 const enhance: Enhancer<Props, ExposedProps> = compose(

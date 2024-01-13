@@ -10,7 +10,8 @@ import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
 import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
-import { getAttacksForBattlegroup, getSpecificBattlegroup } from 'selectors'
+import { getAttacksForBattlegroup } from 'selectors'
+import { getSpecificBattlegroup } from '@/ducks/entities/battlegroup'
 import sharedStyles from 'styles/'
 import {
   bgAttackPool,
@@ -20,8 +21,8 @@ import {
   prettyDrillRating,
 } from 'utils/calculated'
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
+import PoolDisplay from '../generic/PoolDisplay'
+import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
@@ -92,7 +93,7 @@ class BattlegroupSheet extends Component<Props> {
     const { battlegroup, qc_attacks, classes } = this.props
 
     const attacks = qc_attacks.map((attack) => (
-      <div key={attack.id} className={classes.flexContainerWrap}>
+      <div key={attack.id} className="flexContainerWrap">
         <div className={classes.tags}>
           <div className={classes.label}>
             <span className={classes.labelSpan}>Name</span>
@@ -154,7 +155,7 @@ class BattlegroupSheet extends Component<Props> {
       <BlockPaper>
         <MarkdownDisplay source={battlegroup.description} />
 
-        <div className={classes.flexContainerWrap}>
+        <div className="flexContainerWrap">
           <BattlegroupHealthDisplay
             battlegroup={battlegroup}
             className={classes.healthBlock}
@@ -199,9 +200,7 @@ class BattlegroupSheet extends Component<Props> {
           )}
         </div>
 
-        <div className={classes.flexContainerWrap}>
-          {/*
-          // @ts-expect-error Pools and Ratings rewrite */}
+        <div className="flexContainerWrap">
           <PoolDisplay
             battlegroup
             pool={{
@@ -290,7 +289,7 @@ class BattlegroupSheet extends Component<Props> {
         <Typography variant="subtitle1">Attacks</Typography>
         {attacks}
 
-        <div className={classes.flexContainerWrap}>
+        <div className="flexContainerWrap">
           <PoolDisplay
             battlegroup
             staticRating
@@ -371,5 +370,7 @@ export default compose(
   withRouter,
   ProtectedComponent,
   withStyles(styles),
-  connect(mapStateToProps, { fetch: fetchBattlegroupIfNecessary }),
+  connect(mapStateToProps, {
+    fetch: fetchBattlegroupIfNecessary,
+  }),
 )(BattlegroupSheet)

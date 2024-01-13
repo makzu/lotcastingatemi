@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import Checkbox from 'components/shared/inputs/Checkbox'
 import ListAttributeEditor, {
   ListAttributeFieldTypes,
@@ -15,7 +13,7 @@ import type { withIntimacies } from 'utils/flow-types'
 function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
   const { subject, rating, hidden } = trait
   return (
-    <Fragment>
+    <>
       <TextField
         name="subject"
         value={subject}
@@ -44,7 +42,7 @@ function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
         value={hidden ?? false}
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 

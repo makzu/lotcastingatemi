@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import withStyles from '@mui/styles/withStyles'
 import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
@@ -48,7 +46,7 @@ function _AbilityLine({
     pools.excellencyAbils.includes('*') ||
     pools.excellencyAbils.includes(ability)
   return (
-    <Fragment>
+    <>
       <RatingLine rating={r}>
         <span className={classes.abilityName}>{ability}</span>
         <span className={classes.abilityFavored}>
@@ -60,7 +58,7 @@ function _AbilityLine({
       </RatingLine>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 
@@ -87,7 +85,7 @@ function _CraftAbilityLine({
     pools.excellencyAbils.includes('*') ||
     pools.excellencyAbils.includes('craft')
   return (
-    <Fragment>
+    <>
       <RatingLine rating={rating}>
         <span className={classes.abilityName}>Craft ({context})</span>
         <span className={classes.abilityFavored}>
@@ -99,7 +97,7 @@ function _CraftAbilityLine({
       </RatingLine>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 
@@ -129,7 +127,7 @@ function _MartialArtsAbilityLine({
     pools.excellencyAbils.includes('*') ||
     pools.excellencyAbils.includes('martial_arts')
   return (
-    <Fragment>
+    <>
       <RatingLine rating={rating}>
         <span className={classes.abilityName}>
           Martial Arts
@@ -144,7 +142,7 @@ function _MartialArtsAbilityLine({
       </RatingLine>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 

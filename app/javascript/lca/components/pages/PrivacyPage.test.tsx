@@ -1,5 +1,5 @@
 import { render, screen } from 'testUtils'
-import PrivacyPage from './PrivacyPage.jsx'
+import PrivacyPage from './PrivacyPage'
 
 it('can render', () => {
   render(<PrivacyPage />)

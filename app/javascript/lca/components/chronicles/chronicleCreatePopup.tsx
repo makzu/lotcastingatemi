@@ -1,4 +1,4 @@
-import { PureComponent, Fragment } from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import Dialog from '@mui/material/Dialog'
@@ -15,8 +15,13 @@ import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import { createChronicle } from 'ducks/actions'
 
-interface Props { createChronicle: Function }
-interface State { open: boolean; chronicle: { name: string } }
+interface Props {
+  createChronicle: Function
+}
+interface State {
+  open: boolean
+  chronicle: { name: string }
+}
 class ChronicleCreatePopup extends PureComponent<Props, State> {
   state = {
     open: false,
@@ -50,7 +55,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicle } = this.state
     return (
-      <Fragment>
+      <>
         <ListItem button onClick={handleOpen}>
           <ListItemIcon>
             <ContentAddCircle />
@@ -84,7 +89,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

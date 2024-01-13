@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -15,8 +15,13 @@ import GroupAdd from '@mui/icons-material/GroupAdd'
 
 import { joinChronicle } from 'ducks/actions'
 
-interface Props { joinChronicle: Function }
-interface State { open: boolean; code: string }
+interface Props {
+  joinChronicle: Function
+}
+interface State {
+  open: boolean
+  code: string
+}
 class ChronicleJoinPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
@@ -51,7 +56,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { code } = this.state
     return (
-      <Fragment>
+      <>
         <ListItem button onClick={handleOpen}>
           <ListItemIcon>
             <GroupAdd />
@@ -80,7 +85,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

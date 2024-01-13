@@ -1,21 +1,10 @@
 import { ReactNode } from 'react'
-
-import { Theme } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import Box from '@mui/material/Box'
 
 import { drawerWidth } from 'containers/_drawerProperties'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: drawerWidth,
-    },
-  },
-}))
-
 const DivWithFilterDrawer = ({ children }: { children: ReactNode }) => {
-  const classes = useStyles()
-  return <div className={classes.root}>{children}</div>
+  return <Box sx={{ xl: { paddingRight: drawerWidth } }}>{children}</Box>
 }
 
 export default DivWithFilterDrawer

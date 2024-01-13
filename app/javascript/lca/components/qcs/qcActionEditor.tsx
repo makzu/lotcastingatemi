@@ -1,17 +1,17 @@
-import { Fragment } from 'react'
+import {} from 'react'
 
-import { SorceryFields } from 'components/characterEditor/editors/sorceryEditor.jsx'
+import { SorceryFields } from 'components/characterEditor/editors/sorceryEditor'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.jsx'
-import RatingField from '../generic/RatingField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+} from 'components/generic/ListAttributeEditor'
+import RatingField from '../generic/RatingField'
+import TextField from 'components/generic/TextField'
 import type { fullQc } from 'utils/flow-types'
 
 function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
   const { action, pool } = trait
   return (
-    <Fragment>
+    <>
       <TextField
         name="action"
         value={action}
@@ -30,7 +30,7 @@ function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
         margin="dense"
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 

@@ -1,5 +1,8 @@
 import { createSelector } from 'reselect'
 
+import { RootState } from '@/store'
+import { sortOrderSort } from '@/utils'
+import { callApi } from '@/utils/api'
 import {
   createApiActions,
   createConditionalFetchAction,
@@ -8,10 +11,6 @@ import {
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
-import { RootState } from 'store'
-import { sortOrderSort } from 'utils'
-import { callApi } from 'utils/api'
-import { entities } from '@/selectors/entities'
 
 const BATTLEGROUP = 'battlegroup'
 const isDefined = <T>(value: T | undefined): value is T => value !== undefined
@@ -56,6 +55,14 @@ export const getMyBattlegroups = createSelector(
       .sort(sortOrderSort),
 )
 
+export const getSpecificBattlegroup = (state: RootState, id: number) =>
+  unwrapped(state).battlegroups[id]
+
+export const doIOwnBattlegroup = createSelector(
+  [getCurrentPlayer, getSpecificBattlegroup],
+  (player, character) => character != null && player.id === character.player_id,
+)
+
 export const getMyPinnedBattlegroups = createSelector(
   [getMyBattlegroups],
   (battlegroups) => battlegroups.filter((c) => c.pinned),
@@ -66,25 +73,15 @@ export const getMyBattlegroupsWithoutChronicles = createSelector(
   (battlegroups) => battlegroups.filter((c) => c.chronicle_id == null),
 )
 
-export const getSpecificBattlegroup = (state: RootState, id: number) =>
-  unwrapped(state).battlegroups[id]
-
-export const doIOwnBattlegroup = createSelector(
-  [getCurrentPlayer, getSpecificBattlegroup],
-  (player, character) => character != null && player.id === character.player_id,
-)
-
 export const amIStOfBattlegroup = createSelector(
-  [getCurrentPlayer, getSpecificBattlegroup, entities],
-  (player, battlegroup, ents) =>
-    battlegroup?.chronicle_id != null &&
-    ents.chronicles[battlegroup.chronicle_id] &&
-    ents.chronicles[battlegroup.chronicle_id].st_id === player.id,
+  [getCurrentPlayer, getSpecificBattlegroup, unwrapped],
+  (player, character, state) =>
+    state.chronicles[character?.chronicle_id ?? 0]?.st_id === player?.id,
 )
+
+export const canIDeleteBattlegroup = doIOwnBattlegroup
 
 export const canIEditBattlegroup = createSelector(
   [doIOwnBattlegroup, amIStOfBattlegroup],
   (doI, amI) => doI || amI,
 )
-
-export const canIDeleteBattlegroup = doIOwnBattlegroup

@@ -9,8 +9,8 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
-import QcCharmFields from './qcCharmFields.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import QcCharmFields from './qcCharmFields'
+import SortableGridList from 'components/generic/SortableGridList'
 
 import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions'
 import { getCharmsForQc } from 'selectors'

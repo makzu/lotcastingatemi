@@ -7,8 +7,8 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
-import QcMeritFields from './qcMeritFields.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import QcMeritFields from './qcMeritFields'
+import SortableGridList from 'components/generic/SortableGridList'
 
 import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions'
 import { getMeritsForQc } from 'selectors'

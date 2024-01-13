@@ -1,15 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
 
 import {
-  ButtonProps,
   Divider,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Theme,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { ButtonHTMLAttributes } from 'react'
 
 import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'
 import CharacterSheetNav from 'components/CharacterSheet/CharacterSheetNav'
@@ -24,14 +22,6 @@ import HtmlLinkListItem from './HtmlLinkListItem'
 import NavPanelLogout from './NavPanelLogout'
 import NavPanelThemeSwitch from './NavPanelThemeSwitch'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  navElement: {
-    '& .active': {
-      backgroundColor: theme.palette.action.selected,
-    },
-  },
-}))
-
 const CsrfInput = () => {
   // TODO this is duplicated in LogoutPopup.tsx
   const metaTags = document.getElementsByTagName('meta').namedItem('csrf-token')
@@ -40,7 +30,9 @@ const CsrfInput = () => {
   return <input type="hidden" name="authenticity_token" value={csrfToken} />
 }
 
-const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
+const SubmitButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <button {...props} type="submit" />
+)
 
 interface LoginFormProps {
   text: string
@@ -74,11 +66,17 @@ const NavPanel = (props: Props) => {
   }
 
   const { authenticated, displayName } = props
-  const classes = useStyles({})
 
   return (
     <ErrorBoundary>
-      <List component="nav" className={classes.navElement}>
+      <List
+        component="nav"
+        sx={{
+          '& .active': {
+            backgroundColor: 'action.selected',
+          },
+        }}
+      >
         {authenticated && (
           <NavLinkListItem to="/settings" onClick={closeCheck}>
             <ListItemText primary={`Logged in as ${displayName}`} />

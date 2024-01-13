@@ -5,7 +5,8 @@ import { Button, Toolbar, Typography } from '@mui/material'
 import CharacterMenu from 'components/generic/CharacterMenu'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { canIEditCharacter, getSpecificCharacter } from 'ducks/selectors'
+import { canIEditCharacter } from 'ducks/selectors'
+import { getSpecificCharacter } from '@/ducks/entities/character'
 import { useAppSelector, useIdFromParams } from 'hooks'
 
 function CharacterHeader() {

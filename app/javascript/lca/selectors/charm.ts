@@ -56,6 +56,9 @@ export const getSpellsForCharacter = createCachedSelector(
       .sort(sortOrderSort),
 )(characterIdMemoizer)
 
+export const getControlSpellsForCharacter = (state, id: number): Spell[] =>
+  getSpellsForCharacter(state, id).filter((s) => s.control)
+
 export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
   [getNativeCharmsForCharacter, getMartialArtsCharmsForCharacter],
   (charms, maCharms) => {

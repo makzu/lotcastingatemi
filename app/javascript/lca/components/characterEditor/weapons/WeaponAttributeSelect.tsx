@@ -47,12 +47,10 @@ const WeaponAttributeSelect = (props: Props) => {
   const fixedValue = value || 'null'
 
   const attributeItems = ATTRIBUTE_NAMES.map((attr) => (
-    <MenuItem
-      key={attr}
-      value={attr === defaultValue ? null : attr}
-      className={classes.capitalize}
-    >
-      {attr} ({character[`attr_${attr}`]})
+    <MenuItem key={attr} value={attr === defaultValue ? null : attr}>
+      <span className="capitalize">
+        {attr} ({character[`attr_${attr}`]})
+      </span>
     </MenuItem>
   ))
 

@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
@@ -25,8 +25,8 @@ import {
 import sharedStyles from 'styles/'
 import { prettyIntimacyRating, qcPool } from 'utils/calculated'
 import type { fullQc, QcAttack, QcCharm, QcMerit } from 'utils/flow-types'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import SpendableBlock from '../generic/SpendableBlock.jsx'
+import PoolDisplay from '../generic/PoolDisplay'
+import SpendableBlock from '../generic/SpendableBlock'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
@@ -421,12 +421,12 @@ class QcSheet extends Component<Props> {
         </Typography>
 
         {charms.length > 0 && (
-          <Fragment>
+          <>
             <Typography variant="subtitle1">Charms</Typography>
             <Typography gutterBottom component="div">
               {charms}
             </Typography>
-          </Fragment>
+          </>
         )}
 
         {spells.length > 0 && (

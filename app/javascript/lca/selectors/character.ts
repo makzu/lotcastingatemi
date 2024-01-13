@@ -14,6 +14,7 @@ import { excellencyAbils as excellencies } from '@/utils/calculated/excellencies
 import * as pools from '@/utils/calculated/pools'
 import * as ratings from '@/utils/calculated/ratings'
 import {
+  getControlSpellsForCharacter,
   getMartialArtsCharmsForCharacter,
   getNativeCharmsForCharacter,
 } from './charm'
@@ -52,14 +53,6 @@ export const getEvokableMeritsForCharacter = createSelector(
 export const getSpecificCharacter = getCharacter
 
 const getSpells = (state) => entities(state).spells
-export const getSpellsForCharacter = createCachedSelector(
-  [getCharacter, getSpells],
-  (character, spells) =>
-    character.spells.map((s) => spells[s]).sort(sortOrderSort),
-)(characterIdMemoizer)
-
-export const getControlSpellsForCharacter = (state, id: number): Spell[] =>
-  getSpellsForCharacter(state, id).filter((s) => s.control)
 
 export const getPoisonsForCharacter = () => [] as Poison[]
 

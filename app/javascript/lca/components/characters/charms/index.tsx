@@ -16,13 +16,14 @@ import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
 import {
-  getSpecificCharacter,
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter,
   getSpellsForCharacter,
   getSpiritCharmsForCharacter,
 } from 'selectors'
+import { getSpecificCharacter } from '@/ducks/entities/character'
+
 import type { Character, Charm, Spell } from 'utils/flow-types'
 interface Props {
   character: Character

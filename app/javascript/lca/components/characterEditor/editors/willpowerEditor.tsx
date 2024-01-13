@@ -17,7 +17,7 @@ const WillpowerEditor = ({ character, onChange, classes }: Props) => (
   <BlockPaper>
     <Typography variant="h6">Willpower:</Typography>
 
-    <Typography component="div" className={classes.flexContainer}>
+    <Typography component="div" className="flexContainer">
       <RatingField
         trait="willpower_temporary"
         value={character.willpower_temporary}

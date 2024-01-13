@@ -1,5 +1,5 @@
 
-import { Component, Fragment } from 'react'
+import { Component,  } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -52,6 +52,8 @@ class MoteRespirePopup extends Component<Props, State> {
   handleCheck = (e) =>
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
+    const { name, value } = e.target
+
     if (name === 'toRecover') {
       const val = Math.max(parseInt(value), 0)
       this.setState({
@@ -85,7 +87,7 @@ class MoteRespirePopup extends Component<Props, State> {
       handleSubmit,
     } = this
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Respire Motes</Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Respire Motes</DialogTitle>
@@ -144,7 +146,7 @@ class MoteRespirePopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

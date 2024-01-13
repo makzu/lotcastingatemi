@@ -1,8 +1,8 @@
-import { ReactChildren } from 'react'
+import { ReactNode } from 'react'
 import { Paper } from '@mui/material'
 
 /** Base element for various Cards (CharacterCard, QcCard, etc) */
-const CardBase = ({ children }: { children: ReactChildren }) => {
+const CardBase = ({ children }: { children: ReactNode }) => {
   return (
     <Paper
       sx={{

@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Theme, createStyles, withStyles } from '@mui/material/styles'
+import { Theme } from '@mui/material/styles'
+import { createStyles, withStyles, WithStyles } from '@mui/styles'
+
 import RatingDots from './ratingDots'
-import { WithStyles } from '@mui/styles'
 
 const styles = (theme: Theme) =>
   createStyles({

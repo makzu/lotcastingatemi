@@ -8,8 +8,8 @@ import {
 } from './charm'
 import { entities } from './entities'
 import * as calc from 'utils/calculated'
-import decisiveAttack from 'utils/calculated/pools/combat/decisiveAttack'
-import witheringAttack from 'utils/calculated/pools/combat/witheringAttack'
+import decisiveAttack from '@/utils/calculated/pools/combat/decisiveAttack'
+import witheringAttack from '@/utils/calculated/pools/combat/witheringAttack'
 import parry from 'utils/calculated/ratings/parry'
 
 const getState = (state) => state

@@ -13,12 +13,12 @@ import Typography from '@mui/material/Typography'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
 
-import RangeSelect from 'components/generic/RangeSelect.jsx'
-import RatingField from '../generic/RatingField.jsx'
-import TagsField from 'components/generic/TagsField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+import RangeSelect from 'components/generic/RangeSelect'
+import RatingField from '../generic/RatingField'
+import TagsField from 'components/generic/TagsField'
+import TextField from 'components/generic/TextField'
 import { bgAttackPool, bgDamage } from 'utils/calculated'
-import { getSpecificBattlegroup } from 'selectors'
+import { getSpecificBattlegroup } from '@/ducks/entities/battlegroup'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 
 import { Battlegroup } from 'types'
@@ -59,36 +59,37 @@ const styles = (theme) => ({
     [theme.breakpoints.down('lg')]: {
       minWidth: '50%',
     },
-    bgBonus: {
-      ...theme.typography.caption,
-      marginLeft: -theme.spacing(0.5),
-      marginRight: theme.spacing(),
-      marginBottom: theme.spacing(),
-      alignSelf: 'flex-end',
+  },
+  bgBonus: {
+    ...theme.typography.caption,
+    marginLeft: -theme.spacing(0.5),
+    marginRight: theme.spacing(),
+    marginBottom: theme.spacing(),
+    alignSelf: 'flex-end',
+  },
+  nameField: {
+    flex: 2,
+    minWidth: '30%',
+    [theme.breakpoints.down('md')]: {
+      minWidth: '50%',
     },
-    nameField: {
-      flex: 2,
-      minWidth: '30%',
-      [theme.breakpoints.down('md')]: {
-        minWidth: '50%',
-      },
+  },
+  tagsField: {
+    flex: 1,
+    marginRight: theme.spacing(),
+    minWidth: '30%',
+    [theme.breakpoints.down('md')]: {
+      minWidth: '50%',
     },
-    tagsField: {
-      flex: 1,
-      marginRight: theme.spacing(),
-      minWidth: '30%',
-      [theme.breakpoints.down('md')]: {
-        minWidth: '50%',
-      },
-    },
-    rangeField: {
-      width: '6em',
-    },
-    divider: {
-      minWidth: '100%',
-      margin: '0.5em 0 0.5em',
-    },
-  })
+  },
+  rangeField: {
+    width: '6em',
+  },
+  divider: {
+    minWidth: '100%',
+    margin: '0.5em 0 0.5em',
+  },
+})
 
 interface ExposedProps {
   attack: QcAttack
@@ -97,13 +98,13 @@ interface ExposedProps {
   battlegroup?: boolean
 }
 type Props = ExposedProps & {
-  fakeBg: Object,
-  classes: Object,
+  fakeBg: Object
+  classes: Object
 }
 
 class QcAttackFields extends Component<Props> {
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     const { attack } = this.props
 
     if (deepEqual(this.props.attack[name], value)) return
@@ -111,16 +112,6 @@ class QcAttackFields extends Component<Props> {
     this.props.onAttackChange(attack.id, { [name]: value })
   }
 
-class QcAttackFields extends React.Component<Props> {
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    const { attack } = this.props
-    // @ts-expect-error FIXME
-    if (deepEqual(this.props.attack[name], value)) return
-    this.props.onAttackChange(attack.id, {
-      [name]: value,
-    })
-  }
   handleRemove = () => {
     this.props.onRemoveClick(this.props.attack.id)
   }

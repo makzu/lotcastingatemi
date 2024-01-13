@@ -22,13 +22,6 @@ export const canISeeBattlegroup = createSelector(
   (battlegroup, doI, amI) => !battlegroup.hidden || doI || amI,
 )
 
-export const canIEditBattlegroup = createSelector(
-  [doIOwnBattlegroup, amIStOfBattlegroup],
-  (doI, amI) => doI || amI,
-)
-
-export const canIDeleteBattlegroup = doIOwnBattlegroup
-
 export const getPoolsAndRatingsForBattlegroup = (
   state: WrappedEntityState,
   id: number,

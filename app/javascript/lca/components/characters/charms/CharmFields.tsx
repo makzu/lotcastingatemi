@@ -1,5 +1,5 @@
 import { deepEqual } from 'fast-equals'
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
@@ -17,9 +17,9 @@ import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import styles from './CharmStyles.js'
-import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
-import { CharmSummaryBlock } from './CharmDisplay.jsx'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
+import { CharmSummaryBlock } from './CharmDisplay'
+import AbilitySelect from 'components/generic/abilitySelect'
 import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField'
 import TagsField from 'components/generic/TagsField'
@@ -213,7 +213,7 @@ class CharmFields extends Component<
               />
             )}
             {charm.charm_type === 'Attribute' && (
-              <Fragment>
+              <>
                 <AbilitySelect
                   attributesOnly
                   name="ability"
@@ -233,7 +233,7 @@ class CharmFields extends Component<
                   label="Attribute"
                   margin="dense"
                 />
-              </Fragment>
+              </>
             )}
             <RatingField
               trait="min_essence"

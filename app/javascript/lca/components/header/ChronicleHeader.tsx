@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from '@mui/material'
 
-import { getSpecificChronicle } from 'selectors'
+import { getSpecificChronicle } from '@/selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { useAppSelector, useIdFromParams } from 'hooks'

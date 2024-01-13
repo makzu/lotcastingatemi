@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -8,10 +8,10 @@ import Grid from '@mui/material/Grid'
 import Hidden from '@mui/material/Hidden'
 import Typography from '@mui/material/Typography'
 
-import CharacterCard from './CharacterCombatCard.jsx'
-import QcCard from './QcCombatCard.jsx'
-import BattlegroupCard from './BattlegroupCombatCard.jsx'
-import OutOfCombatCard from './OutOfCombatCard.jsx'
+import CharacterCard from './CharacterCombatCard'
+import QcCard from './QcCombatCard'
+import BattlegroupCard from './BattlegroupCombatCard'
+import OutOfCombatCard from './OutOfCombatCard'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
@@ -130,11 +130,11 @@ class CombatDashboard extends Component<Props> {
               {nextCharacter ? nextCharacter.name : 'Round over!'}
               &nbsp;
               {this.props.is_st && (
-                <Fragment>
+                <>
                   <Button onClick={this.onClickNextTurn}>Next Turn</Button>
                   &nbsp;
                   <Button onClick={this.onClickEndCombat}>End Combat</Button>
-                </Fragment>
+                </>
               )}
             </Typography>
           )}

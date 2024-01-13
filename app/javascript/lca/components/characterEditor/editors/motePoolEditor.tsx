@@ -1,9 +1,9 @@
 import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 
-import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
-import AnimaSelect from 'components/generic/AnimaSelect.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
+import MoteCommittmentEditor from './moteCommittmentEditor'
+import AnimaSelect from 'components/generic/AnimaSelect'
+import RatingField from 'components/generic/RatingField'
 import BlockPaper from 'components/shared/BlockPaper'
 import AuraSelect from 'components/shared/selects/AuraSelect'
 import commonStyles from 'styles'

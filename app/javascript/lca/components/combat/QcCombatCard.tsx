@@ -6,11 +6,11 @@ import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import CombatControls from './CombatControls.jsx'
-import RemoveFromCombatButton from './RemoveFromCombatButton.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import SpendableBlock from '../generic/SpendableBlock.jsx'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
+import CombatControls from './CombatControls'
+import RemoveFromCombatButton from './RemoveFromCombatButton'
+import PoolDisplay from '../generic/PoolDisplay'
+import SpendableBlock from '../generic/SpendableBlock'
 import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
 import { getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
@@ -63,7 +63,7 @@ function QcCard(props: Props) {
   const { qc, penalties, pools, classes } = props
   return (
     <CardBase>
-      <div className={classes.flexContainer}>
+      <div className="flexContainer">
         <div className={classes.nameWrap}>
           <Typography
             variant="h6"
@@ -89,7 +89,7 @@ function QcCard(props: Props) {
 
       <SpendableBlock character={qc} qc />
 
-      <div className={classes.flexContainerWrap}>
+      <div className="flexContainerWrap">
         <PoolDisplay
           pool={pools.evasion}
           label="Evasion"

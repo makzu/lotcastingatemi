@@ -12,7 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import IconButton from '@mui/material/IconButton'
 import { withStyles } from '@mui/styles'
 
-import TextField from 'components/generic/TextField.jsx'
+import TextField from 'components/generic/TextField'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 
 import { updateCharacter } from 'ducks/actions'

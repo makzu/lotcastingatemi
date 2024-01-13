@@ -9,11 +9,11 @@ import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Whatshot from '@mui/icons-material/Whatshot'
 
-import NotesPopup from './NotesPopup.jsx'
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
+import NotesPopup from './NotesPopup'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
+import PoolDisplay from '../generic/PoolDisplay'
 import CharacterMenu from '../generic/CharacterMenu'
-import SpendableBlock from '../generic/SpendableBlock.jsx'
+import SpendableBlock from '../generic/SpendableBlock'
 import CardBase from 'components/shared/CardBase'
 import {
   canIDeleteCharacter,

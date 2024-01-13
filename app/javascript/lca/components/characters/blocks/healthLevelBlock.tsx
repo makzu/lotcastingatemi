@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 
-import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
+import HealthLevelBoxes from 'components/generic/HealthLevelBoxes'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import type { withHealthLevels } from 'utils/flow-types'

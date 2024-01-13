@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel } from '@mui/material'
 
-import BlockPaper from 'components/generic/blockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
 import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
 import { canIDeleteCharacter } from 'selectors'

@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import DialogContentText from '@mui/material/DialogContentText'
 import Typography from '@mui/material/Typography'
 
@@ -31,7 +29,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
     specialAttacks.includes('smashing') || specialAttacks.includes('earth')
 
   return (
-    <Fragment>
+    <>
       {specialAttacks.includes('air') && (
         <DialogContentText style={style}>
           Air:
@@ -162,7 +160,7 @@ const AttackTagsDisplay = ({ pool }: Props) => {
           </Typography>
         </DialogContentText>
       )}
-    </Fragment>
+    </>
   )
 }
 

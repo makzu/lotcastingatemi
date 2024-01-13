@@ -8,9 +8,9 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-import Downtime from './controls/Downtime.jsx'
-import RecoverMotes from './controls/RecoverMotes.jsx'
-import RecoverWillpower from './controls/RecoverWillpower.jsx'
+import Downtime from './controls/Downtime'
+import RecoverMotes from './controls/RecoverMotes'
+import RecoverWillpower from './controls/RecoverWillpower'
 import { endScene } from 'ducks/events'
 interface Props {
   chronicleId: number

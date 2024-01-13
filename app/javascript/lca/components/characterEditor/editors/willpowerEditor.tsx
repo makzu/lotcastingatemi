@@ -1,8 +1,8 @@
 import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 
-import ResourceEditor from './resourceEditor.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
+import ResourceEditor from './resourceEditor'
+import RatingField from 'components/generic/RatingField'
 import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
 import { WILLPOWER_MAX } from 'utils/constants'

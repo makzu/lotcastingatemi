@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
-import RatingLine from 'components/generic/ratingLine.jsx'
+import RatingLine from 'components/generic/ratingLine'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import type { Merit } from 'types'

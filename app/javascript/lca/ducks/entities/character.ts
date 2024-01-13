@@ -8,11 +8,11 @@ import {
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
-import { useAppSelector } from 'hooks'
-import { RootState } from 'store'
-import { isDefined, sortOrderSort } from 'utils'
-import { callApi } from 'utils/api'
-import { Character } from '@/types'
+import { useAppSelector } from '@/hooks'
+import { RootState } from '@/store'
+import { isDefined, sortOrderSort } from '@/utils'
+import { callApi } from '@/utils/api'
+import { Character } from '@/types/character'
 
 const CHARACTER = 'character'
 
@@ -70,8 +70,9 @@ export const getMyCharactersWithoutChronicles = createSelector(
 export const getSpecificCharacter = (state: RootState, id: number) =>
   unwrapped(state).characters[id]
 
+/* *** Hooks *** */
 export const useCharacterAttribute = (id: number, attribute: keyof Character) =>
-  useSelector((state: State) => {
+  useAppSelector((state) => {
     const character = getSpecificCharacter(state, id)
     return character != null ? character[attribute] : null
   })

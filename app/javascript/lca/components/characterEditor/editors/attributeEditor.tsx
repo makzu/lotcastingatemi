@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography'
 import withStyles from '@mui/styles/withStyles'
 
-import RatingField from 'components/generic/RatingField.jsx'
+import RatingField from 'components/generic/RatingField'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import { ATTRIBUTE_MAX as MAX, ATTRIBUTE_MIN as MIN } from 'utils/constants'

@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 
 import Divider from '@mui/material/Divider'
 
-import WeaponLine from '../weapons/WeaponLine.jsx'
+import WeaponLine from '../weapons/WeaponLine'
 import type { Character, fullWeapon } from 'utils/flow-types'
 interface Props {
   character: Character

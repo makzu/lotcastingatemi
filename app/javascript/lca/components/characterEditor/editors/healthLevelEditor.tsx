@@ -1,8 +1,8 @@
 import Typography from '@mui/material/Typography'
 import withStyles from '@mui/styles/withStyles'
 
-import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
+import HealthLevelBoxes from 'components/generic/HealthLevelBoxes'
+import RatingField from 'components/generic/RatingField'
 import BlockPaper from 'components/shared/BlockPaper'
 import { Character } from '@/types'
 

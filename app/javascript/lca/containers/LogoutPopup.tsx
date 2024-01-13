@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 
 import { useDialogLogic } from 'hooks'
-import { isPublicCharacterPage } from 'selectors'
+import { isPublicCharacterPage } from '@/selectors'
 import { RootState } from 'store'
 
 interface StateProps {

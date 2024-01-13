@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
-import { State } from 'ducks'
-import { isDefined, sortOrderSort } from 'utils'
+import { RootState } from '@/store'
+import { isDefined, sortOrderSort } from '@/utils'
 import {
   createApiActions,
   createConditionalFetchAction,
@@ -9,7 +9,6 @@ import {
 } from './_entity'
 import { unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
-import { RootState } from 'store'
 
 /* *** Reducer *** */
 export default createEntityReducer('qc')

@@ -1,7 +1,7 @@
 import MenuItem from '@mui/material/MenuItem'
 
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'

@@ -3,9 +3,9 @@ import withStyles from '@mui/styles/withStyles'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+} from 'components/generic/ListAttributeEditor'
+import RatingField from 'components/generic/RatingField'
+import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
 import { solarXpName, spentBp, spentSolarXp, spentXp } from 'utils/calculated'
@@ -123,7 +123,7 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
         <Typography variant="subtitle1" className={classes.subheading}>
           Craft XP:
         </Typography>
-        <Typography component="div" className={classes.flexContainerWrap}>
+        <Typography component="div" className="flexContainerWrap">
           <div className={classes.flexCol}>
             <RatingField
               trait="xp_craft_silver"

@@ -1,8 +1,8 @@
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+} from 'components/generic/ListAttributeEditor'
+import RatingField from 'components/generic/RatingField'
+import TextField from 'components/generic/TextField'
 import type { withIntimacies } from 'utils/flow-types'
 
 function ResourceFields(props: ListAttributeFieldTypes) {

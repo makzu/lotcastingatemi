@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography'
 
 import DbAspectSelect from '../exaltTraits/DbAspectSelect'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'

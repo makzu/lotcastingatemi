@@ -17,7 +17,7 @@ import {
 import { State } from 'ducks'
 import { destroy } from 'ducks/actions/ByType'
 import { useDialogLogic } from 'hooks'
-import { canIDelete } from 'selectors'
+import { canIDelete } from '@/selectors'
 import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {

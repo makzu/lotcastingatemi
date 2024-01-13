@@ -1,7 +1,7 @@
 import withStyles from '@mui/styles/withStyles'
 import Divider from '@mui/material/Divider'
 
-import RatingLine from 'components/generic/ratingLine.jsx'
+import RatingLine from 'components/generic/ratingLine'
 import type { Character, fullMerit } from 'utils/flow-types'
 
 const styles = (theme) => ({

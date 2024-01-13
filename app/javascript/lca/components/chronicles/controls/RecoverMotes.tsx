@@ -12,7 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/Typography'
 
-import RatingField from 'components/generic/RatingField.jsx'
+import RatingField from 'components/generic/RatingField'
 import { respireMotes } from 'ducks/events'
 interface Props {
   id: number

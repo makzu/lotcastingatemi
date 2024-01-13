@@ -10,7 +10,7 @@ import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
 import { State } from 'ducks'
 import { update } from 'ducks/actions/ByType'
-import { canIDelete } from 'selectors'
+import { canIDelete } from '@/selectors'
 import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {

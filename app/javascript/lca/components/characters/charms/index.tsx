@@ -7,9 +7,9 @@ import Hidden from '@mui/material/Hidden'
 import Typography from '@mui/material/Typography'
 
 import styles from './CharmStyles.js'
-import CharmDisplay from './CharmDisplay.jsx'
-import CharmFilter from './CharmFilter.jsx'
-import SpellDisplay from './SpellDisplay.jsx'
+import CharmDisplay from './CharmDisplay'
+import CharmFilter from './CharmFilter'
+import SpellDisplay from './SpellDisplay'
 import CharacterLoadError from '../../CharacterSheet/CharacterLoadError'
 
 import DocumentTitle from 'components/generic/DocumentTitle'

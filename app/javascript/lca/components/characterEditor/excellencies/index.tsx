@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -10,8 +10,8 @@ import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import CanonExcellencyCopy from './CanonExcellencyCopy.jsx'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import CanonExcellencyCopy from './CanonExcellencyCopy'
+import AbilitySelect from 'components/generic/abilitySelect'
 import { Character } from '@/types'
 
 class ExcellencyEditor extends Component<
@@ -120,7 +120,7 @@ class ExcellencyEditor extends Component<
       </MenuItem>,
     ]
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Excellencies</Button>
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Edit Excellencies</DialogTitle>
@@ -238,7 +238,7 @@ class ExcellencyEditor extends Component<
             <Button onClick={handleClose}>Done</Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

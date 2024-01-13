@@ -1,5 +1,5 @@
 
-import { Component, Fragment } from 'react'
+import { Component,  } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -13,7 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 
-import RatingField from 'components/generic/RatingField.jsx'
+import RatingField from 'components/generic/RatingField'
 import { downtime } from 'ducks/events'
 interface Props {
   id: number
@@ -119,7 +119,7 @@ class DowntimePopup extends Component<Props, State> {
       handleSubmit,
     } = this
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Downtime...</Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Downtime</DialogTitle>
@@ -205,7 +205,7 @@ class DowntimePopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

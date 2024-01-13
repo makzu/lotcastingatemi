@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/Typography'
 
-import RatingField from 'components/generic/RatingField.jsx'
+import RatingField from 'components/generic/RatingField'
 import { recoverWillpower } from 'ducks/events'
 interface Props {
   id: number
@@ -83,7 +83,7 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
       handleSubmit,
     } = this
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Recover Willpower</Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Recover Willpower</DialogTitle>
@@ -148,7 +148,7 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

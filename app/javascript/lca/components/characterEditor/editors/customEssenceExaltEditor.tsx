@@ -3,8 +3,8 @@ import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 
 import ExcellencyEditor from '../excellencies/'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import TextField from 'components/generic/TextField.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
+import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 import { Character } from '@/types'
 interface Props {

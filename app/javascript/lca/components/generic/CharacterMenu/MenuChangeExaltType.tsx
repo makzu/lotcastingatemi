@@ -21,7 +21,9 @@ import ExaltTypeSelect, {
 import { State } from 'ducks'
 import { changeCharacterType } from 'ducks/actions'
 import { useDialogLogic } from 'hooks'
-import { canIEdit, getSpecificCharacter } from 'selectors'
+import { canIEdit } from '@/selectors'
+import { getSpecificCharacter } from '@/ducks/entities/character'
+
 import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {

@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import AttributeBlockPhysical from './attributeBlockPhysical.jsx'
-import AttributeBlockSocial from './attributeBlockSocial.jsx'
-import AttributeBlockMental from './attributeBlockMental.jsx'
+import AttributeBlockPhysical from './attributeBlockPhysical'
+import AttributeBlockSocial from './attributeBlockSocial'
+import AttributeBlockMental from './attributeBlockMental'
 import BlockPaper from 'components/shared/BlockPaper'
 import { Character } from '@/types'
 

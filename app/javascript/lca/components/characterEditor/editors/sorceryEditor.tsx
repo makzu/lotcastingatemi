@@ -4,9 +4,9 @@ import Typography from '@mui/material/Typography'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+} from 'components/generic/ListAttributeEditor'
+import RatingField from 'components/generic/RatingField'
+import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 import { Character } from '@/types'
 

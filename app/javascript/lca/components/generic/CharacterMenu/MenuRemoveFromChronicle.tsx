@@ -5,7 +5,7 @@ import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
 import { State } from 'ducks'
 import { removeThingFromChronicle as removeThing } from 'ducks/actions'
-import { canIEdit } from 'selectors'
+import { canIEdit } from '@/selectors'
 import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {

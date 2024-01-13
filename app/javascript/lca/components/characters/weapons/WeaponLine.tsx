@@ -1,6 +1,6 @@
 import withStyles from '@mui/styles/withStyles'
 
-import WeaponPoolDisplay from '../weapons/WeaponPoolDisplay.jsx'
+import WeaponPoolDisplay from '../weapons/WeaponPoolDisplay'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import commonStyles from 'styles'
 import type { fullWeapon } from 'utils/flow-types'

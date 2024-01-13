@@ -1,5 +1,5 @@
-import AttributeLine from './attributeLine.jsx'
-import type { Props } from './attributeBlock.jsx'
+import AttributeLine from './attributeLine'
+import type { Props } from './attributeBlock'
 
 function AttributeBlockMental({ character, pools }: Props) {
   return (

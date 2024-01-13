@@ -2,7 +2,7 @@ import { Component } from 'react'
 
 import Typography from '@mui/material/Typography'
 
-import Editor from 'components/generic/intimacyEditor.jsx'
+import Editor from 'components/generic/intimacyEditor'
 import BlockPaper from 'components/shared/BlockPaper'
 import type { withIntimacies as Character } from 'utils/flow-types'
 

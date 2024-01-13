@@ -30,7 +30,7 @@ import DocumentTitle from 'components/generic/DocumentTitle'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions'
-import { getSpecificCharacter } from 'ducks/selectors'
+import { getSpecificCharacter } from '@/ducks/entities/character'
 import { getPoolsAndRatings, getPenalties } from 'selectors'
 import { Character } from '@/types'
 interface Props {

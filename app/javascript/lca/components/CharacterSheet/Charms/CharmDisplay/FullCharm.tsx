@@ -1,4 +1,4 @@
-import BlockPaper from 'components/generic/blockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
 import { Charm } from 'types'
 
 interface Props {

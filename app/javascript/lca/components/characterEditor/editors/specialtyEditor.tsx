@@ -1,10 +1,10 @@
 import MenuItem from '@mui/material/MenuItem'
 
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.jsx'
-import TextField from 'components/generic/TextField.jsx'
+} from 'components/generic/ListAttributeEditor'
+import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 import * as calc from 'utils/calculated'
 import type { withIntimacies as Character } from 'utils/flow-types'

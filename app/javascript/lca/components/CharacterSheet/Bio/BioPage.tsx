@@ -4,10 +4,10 @@ import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import BlockPaper from 'components/shared/BlockPaper'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { getSpecificCharacter } from 'ducks/selectors'
+import { getSpecificCharacter } from '@/ducks/entities/character'
 import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
 import { XpLogEntry } from 'types'
-import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
+import { solarXpName, spentSolarXp, spentXp } from '@/utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
 
 const xpTable = (log: XpLogEntry[]) =>

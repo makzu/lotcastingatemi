@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -13,14 +13,16 @@ import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 import HelpIcon from '@mui/icons-material/Help'
 
-import MeritFields from './MeritFields.jsx'
+import MeritFields from './MeritFields'
 import DocumentTitle from 'components/generic/DocumentTitle'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
 import { updateMerit, createMerit, destroyMerit } from 'ducks/actions'
-import { getSpecificCharacter, getMeritsForCharacter } from 'selectors'
+
+import { getSpecificCharacter } from '@/ducks/entities/character'
+import { getMeritsForCharacter } from 'selectors'
 import commonStyles from 'styles'
 import type { Character, fullMerit as Merit, Enhancer } from 'utils/flow-types'
 import SortableItem from 'components/generic/SortableItem'
@@ -91,7 +93,7 @@ class MeritEditor extends Component<Props> {
     ))
     const totalDots = merits.reduce((acc, merit) => acc + merit.rating, 0)
     return (
-      <Fragment>
+      <>
         <DocumentTitle
           title={`${this.props.character.name} Merits | Lot-Casting Atemi`}
         />
@@ -145,7 +147,7 @@ class MeritEditor extends Component<Props> {
         >
           {totalDots} dots of merits total
         </Typography>
-      </Fragment>
+      </>
     )
   }
 }

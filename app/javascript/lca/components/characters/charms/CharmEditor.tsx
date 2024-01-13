@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import withStyles, { WithStyles } from '@mui/styles/withStyles'
@@ -9,11 +9,11 @@ import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import styles from './CharmStyles.js'
-import CharmFields from './CharmFields.jsx'
-import CharmFilter from './CharmFilter.jsx'
-import SpellFields from './SpellFields.jsx'
+import CharmFields from './CharmFields'
+import CharmFilter from './CharmFilter'
+import SpellFields from './SpellFields'
 import DocumentTitle from 'components/generic/DocumentTitle'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
@@ -25,7 +25,7 @@ import {
   createSpell,
   destroySpell,
 } from 'ducks/actions'
-import { getSpecificCharacter } from 'ducks/selectors'
+import { getSpecificCharacter } from '@/ducks/entities/character'
 import {
   getEvokableMeritsForCharacter,
   getNativeCharmsForCharacter,
@@ -383,7 +383,7 @@ class CharmEditor extends Component<Props, State> {
         </Hidden>
 
         {character.type != 'Character' && (
-          <Fragment>
+          <>
             <SortableGridList
               header={
                 <Typography variant="h5">
@@ -488,7 +488,7 @@ class CharmEditor extends Component<Props, State> {
               useDragHandle
               axis="xy"
             />
-          </Fragment>
+          </>
         )}
         <SortableGridList
           header={

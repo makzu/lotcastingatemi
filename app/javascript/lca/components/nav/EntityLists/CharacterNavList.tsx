@@ -3,7 +3,7 @@ import EntityListItem from './EntityListItem'
 import { getMyCharacters, getMyPinnedCharacters } from 'ducks/entities'
 import { useAppSelector } from 'hooks'
 import { Character } from 'types'
-import { prettyCompactExaltType } from 'utils/calculated'
+import { prettyCompactExaltType } from '@/utils/calculated'
 
 const mapCharacterToListItem = (character: Character) => (
   <EntityListItem

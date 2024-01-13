@@ -11,9 +11,9 @@ import MuiTextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { Theme, createStyles } from '@mui/material'
 
-import RatingField from '../generic/RatingField.jsx'
-import TextField from '../generic/TextField.jsx'
-import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
+import RatingField from '../generic/RatingField'
+import TextField from '../generic/TextField'
+import QcAttackEditor from '../qcs/qcAttackEditor'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
@@ -149,7 +149,7 @@ class BattlegroupEditor extends Component<Props> {
           onChange={handleChange}
           fullWidth
         />
-        <Typography component="div" className={classes.flexContainerWrap}>
+        <Typography component="div" className="flexContainerWrap">
           <div className={classes.flexCol}>
             <RatingField
               trait="essence"
@@ -203,7 +203,7 @@ class BattlegroupEditor extends Component<Props> {
           onChange={handleChange}
         />
 
-        <div className={classes.flexContainerWrap}>
+        <div className="flexContainerWrap">
           <RatingField
             trait="size"
             value={battlegroup.size}
@@ -287,7 +287,7 @@ class BattlegroupEditor extends Component<Props> {
         />
 
         <Typography variant="subtitle1">Combat stats</Typography>
-        <div className={classes.flexContainerWrap}>
+        <div className="flexContainerWrap">
           <RatingField
             trait="join_battle"
             value={battlegroup.join_battle}

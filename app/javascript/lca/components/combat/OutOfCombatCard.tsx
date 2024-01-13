@@ -5,9 +5,9 @@ import withStyles from '@mui/styles/withStyles'
 import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-import JoinBattlePopup from './JoinBattlePopup.jsx'
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
+import JoinBattlePopup from './JoinBattlePopup'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
+import PoolDisplay from '../generic/PoolDisplay'
 import CardBase from 'components/shared/CardBase'
 import sharedStyles from 'styles/'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
@@ -61,7 +61,7 @@ function OutOfCombatCard({
 }: Props) {
   return (
     <CardBase>
-      <div className={classes.flexContainer}>
+      <div className="flexContainer">
         <div className={classes.nameWrap}>
           <Typography variant="h6" className={classes.characterName}>
             {character.name}
@@ -77,7 +77,7 @@ function OutOfCombatCard({
         </div>
       </div>
 
-      <div className={classes.flexContainer}>
+      <div className="flexContainer">
         <PoolDisplay
           qc={character.type === 'qc' || character.type === 'battlegroup'}
           pool={pools.joinBattle}

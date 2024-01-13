@@ -1,10 +1,10 @@
 import Typography from '@mui/material/Typography'
 
 import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
-import AbilitySelect from 'components/generic/abilitySelect.jsx'
+import AbilitySelect from 'components/generic/abilitySelect'
 import BlockPaper from 'components/shared/BlockPaper'
 
-import { nonCasteAbilities } from 'utils/calculated'
+import { nonCasteAbilities } from '@/utils/calculated'
 import { Character } from 'types'
 
 interface Props {

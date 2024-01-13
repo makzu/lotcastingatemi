@@ -1,7 +1,7 @@
 import { VisibilityOff } from '@mui/icons-material'
 import { Typography, Divider } from '@mui/material'
 
-import RatingLine from '../../generic/ratingLine.jsx'
+import RatingLine from '../../generic/ratingLine'
 import BlockPaper from 'components/shared/BlockPaper'
 import { Character } from 'types'
 import { Intimacy } from 'types/shared'

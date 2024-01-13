@@ -11,9 +11,9 @@ import Typography from '@mui/material/Typography'
 import Delete from '@mui/icons-material/Delete'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 
-import MeritEffectBlurb from './MeritEffectBlurb.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
-import TextField from 'components/generic/TextField.jsx'
+import MeritEffectBlurb from './MeritEffectBlurb'
+import RatingField from 'components/generic/RatingField'
+import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants'

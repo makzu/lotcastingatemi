@@ -1,4 +1,3 @@
-
 import { CraftRating, MARating } from '@/types'
 import { gen } from 'testcheck'
 import { ABILITY_NAMES } from 'utils/constants.js'
@@ -39,12 +38,13 @@ export const genAbilities = {
   abil_survival: gen.posInt,
   abil_thrown: gen.posInt,
   abil_war: gen.posInt,
-  
-  abil_craft: gen.array<CraftRating>(({ craft: gen.string, rating: gen.posInt })),
-  
-  abil_martial_arts: gen.array<MARating>(
-    ({ style: gen.string, rating: gen.posInt })
-  ),
+
+  abil_craft: gen.array<CraftRating>({ craft: gen.string, rating: gen.posInt }),
+
+  abil_martial_arts: gen.array<MARating>({
+    style: gen.string,
+    rating: gen.posInt,
+  }),
 }
 
 export const genMortal = {
@@ -63,12 +63,10 @@ export const genMortal = {
   attr_wits: gen.sPosInt,
   ...genAbilities,
   // $FlowFixMe
-  specialties: gen.array(
-    ({
-      context: gen.string,
-      ability: gen.oneOf([''].concat(ABILITY_NAMES)),
-    }: Object)
-  ),
+  specialties: gen.array({
+    context: gen.string,
+    ability: gen.oneOf([''].concat(ABILITY_NAMES)),
+  }),
 
   armor_name: gen.string,
   armor_weight: gen.oneOf(['unarmored', 'light', 'medium', 'heavy']),
@@ -99,31 +97,8 @@ export const genSolar = {
   supernal_ability: gen.oneOf(ABILITY_NAMES),
   caste: gen.oneOf(['dawn', 'zenith', 'twilight', 'night', 'eclipse']),
   charms: [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25,
   ],
   martial_arts_charms: [26],
 }

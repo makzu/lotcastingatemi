@@ -7,7 +7,7 @@ export * from './ratings'
 export * from './weapons'
 export * from './pretty.js'
 
-import { Ability, Attribute, Character } from 'types'
+import { Character, CraftRating, MARating, Penalty, penaltyObj } from 'types'
 import {
   ABILITIES_ALL,
   ABILITIES_ALL_NO_MA,
@@ -15,7 +15,6 @@ import {
   ATTRIBUTES,
   NON_ATTACK_ABILITIES,
 } from '../constants.js'
-import { Character, CraftRating, MARating, Penalty, penaltyObj } from '@/types'
 import type { withArmorStats, specialty } from '../flow-types/index.js'
 import { WithHealthLevels, WithMotePool, WithSharedStats } from '@/types/shared'
 import { Ability } from '../constants.new/abilities'

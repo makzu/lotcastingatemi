@@ -1,5 +1,4 @@
-
-import { Component,  } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -57,6 +56,7 @@ class DowntimePopup extends Component<Props, State> {
     })
   handleChange = (e) => {
     const { value } = e.target
+  }
 
   handleReset = () => this.setState({ time: 1 })
 

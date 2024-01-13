@@ -1,13 +1,12 @@
 import { normalize } from 'normalizr'
-import { getJSON } from 'redux-api-middleware'
-import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 import { Action } from 'redux'
 import { ActionFunctionAny, createAction } from 'redux-actions'
+import { getJSON } from 'redux-api-middleware'
+import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
+import { RootState } from 'store'
 import * as schemas from './_schemas'
 import { EntityState } from './_types'
-import { RootState } from 'store'
-import { defaultState } from '.'
 
 export type characterTraitTypes =
   | 'charm'

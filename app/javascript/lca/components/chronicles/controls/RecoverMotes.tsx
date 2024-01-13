@@ -1,5 +1,4 @@
-
-import { Component,  } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -49,7 +48,7 @@ class MoteRespirePopup extends Component<Props, State> {
     }
   }
 
-  handleCheck = (e) =>
+  handleCheck = (e) => {
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
     const { name, value } = e.target

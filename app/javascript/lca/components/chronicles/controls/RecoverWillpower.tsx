@@ -35,17 +35,21 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
     }
   }
 
-  handleOpen = () =>
+  handleOpen = () => {
     this.setState({
       open: true,
     })
-  handleClose = () =>
+  }
+  handleClose = () => {
     this.setState({ open: false, toRecover: 0, exceed: false, qcs: false })
-
-  handleAdd = (wp) =>
+  }
+  handleAdd = (wp) => {
     this.setState({ toRecover: Math.max(this.state.toRecover + wp, 0) })
+  }
 
-  handleReset = () => this.setState({ toRecover: 0 })
+  handleReset = () => {
+    this.setState({ toRecover: 0 })
+  }
 
   handleChange = (e) => {
     const { name, value } = e.target
@@ -62,8 +66,9 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
     }
   }
 
-  handleCheck = (e) =>
+  handleCheck = (e) => {
     this.setState({ [e.target.name]: !this.state[e.target.name] })
+  }
 
   handleSubmit = () => {
     const { toRecover, exceed, qcs } = this.state

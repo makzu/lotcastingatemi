@@ -22,49 +22,49 @@ const styles = (theme) => ({
   nameRow: {
     display: 'flex',
   },
+  nameWrap: {},
+  flex: 1,
+  '& a': {
+    color: 'unset',
+  },
+  nameRow: {
+    display: 'flex',
+  },
   nameWrap: {
     flex: 1,
     '& a': {
       color: 'unset',
     },
-    nameRow: {
-      display: 'flex',
-    },
-    nameWrap: {
-      flex: 1,
-      '& a': {
-        color: 'unset',
-      },
-    },
-    hiddenLabel: {
-      ...theme.typography.caption,
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      lineHeight: 'inherit',
-    },
-    characterName: {
-      textDecoration: 'none',
-    },
-    hasActed: {
-      textDecoration: 'none',
-      opacity: 0.5,
-    },
-    icon: {
-      verticalAlign: 'bottom',
-      marginLeft: theme.spacing(),
-    },
-    rowContainer: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    poolBlock: {
-      marginRight: theme.spacing(),
-      marginTop: theme.spacing(),
-      width: '5.5rem',
-      maxHeight: '5.5rem',
-      overflow: 'hidden',
-    },
-  })
+  },
+  hiddenLabel: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  characterName: {
+    textDecoration: 'none',
+  },
+  hasActed: {
+    textDecoration: 'none',
+    opacity: 0.5,
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing(),
+  },
+  rowContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  poolBlock: {
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
+    width: '5.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
+})
 
 interface ExposedProps {
   character: Character

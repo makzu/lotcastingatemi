@@ -17,7 +17,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "types": ["vitest/globals"],
+    "types": ["vite/client", "vitest/globals", "vitest/importMeta"],
 
     "allowJs": true,
     "paths": {

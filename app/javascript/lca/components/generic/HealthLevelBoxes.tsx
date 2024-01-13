@@ -1,52 +1,46 @@
-import withStyles from '@mui/styles/withStyles'
+import { Box } from '@mui/material'
 
-import * as calc from 'utils/calculated'
 import { WithSharedStats } from 'types/shared'
+import * as calc from 'utils/calculated'
 
-const styles = (theme) => ({
-  boxWrap: {
-    display: 'inline-block',
-    textAlign: 'center',
-    marginRight: '0.25em',
-  },
-  healthLevelBox: {
-    backgroundColor: theme.palette.background.paper,
-    width: '1.25em',
-    height: '1.25em',
-    border: '0.2em solid black',
-    overflow: 'hidden',
-  },
-  healthLevelLabel: {
-    ...theme.typography.caption,
-    textAlign: 'center',
-  },
-  bashingDamage: {
-    fontSize: '100%',
-    fontWeight: 'bold',
-    position: 'relative',
-    top: '-0.125em',
-    left: '-0.05em',
-  },
-  lethalDamage: {
-    fontSize: '170%',
-    fontWeight: '100',
-    position: 'relative',
-    top: '-0.3em',
-    left: '-0.15em',
-  },
-  aggDamage: {
-    fontSize: '150%',
-    position: 'relative',
-    top: '-0.25em',
-    left: '-0.15em',
-  },
-})
+import AggravatedIcon from '@/icons/health-level-agg.svg?react'
+import BashingIcon from '@/icons/health-level-bashing.svg?react'
+import EmptyIcon from '@/icons/health-level-empty.svg?react'
+import LethalIcon from '@/icons/health-level-lethal.svg?react'
+import { damageType } from '@/types'
+import { ReactNode } from 'react'
 
-function HealthLevelBoxes({ character, classes }: Props) {
+const HLBox = ({
+  type,
+  level,
+}: {
+  type: damageType | 'empty'
+  level: '0' | '-1' | '-2' | '-4' | 'in' | 'X'
+}) => (
+  <>
+    <Box sx={{ width: '1.25em', height: '1.25em', typography: 'body' }}>
+      {
+        {
+          bashing: <BashingIcon />,
+          lethal: <LethalIcon />,
+          aggravated: <AggravatedIcon />,
+          empty: <EmptyIcon />,
+        }[type]
+      }
+      <Box sx={{ textAlign: 'center', typography: 'caption' }}>{level}</Box>
+    </Box>
+  </>
+)
+
+interface Props {
+  character: WithSharedStats
+}
+
+function HealthLevelBoxes({ character }: Props) {
   const totalHealthLevels = calc.totalHealthLevels(character)
   const hlBoxes = []
-  let box
-  let level
+  let box: ReactNode
+  let level: '0' | '-1' | '-2' | '-4' | 'in' | 'X'
   let aggDamage = character.damage_aggravated
   let lthDamage = character.damage_lethal
   let bshDamage = character.damage_bashing
@@ -77,48 +71,33 @@ function HealthLevelBoxes({ character, classes }: Props) {
     }
 
     if (aggDamage > 0) {
-      box = (
-        <div className={classes.boxWrap} key={i}>
-          <div className={classes.healthLevelBox}>
-            <span className={classes.aggDamage}>✱</span>
-          </div>
-          <div className={classes.healthLevelLabel}>{level}</div>
-        </div>
-      )
+      box = HLBox({ type: 'aggravated', level })
       aggDamage--
     } else if (lthDamage > 0) {
-      box = (
-        <div className={classes.boxWrap} key={i}>
-          <div className={classes.healthLevelBox}>
-            <span className={classes.lethalDamage}>✖</span>
-          </div>
-          <div className={classes.healthLevelLabel}>{level}</div>
-        </div>
-      )
+      box = HLBox({ type: 'lethal', level })
       lthDamage--
     } else if (bshDamage > 0) {
-      box = (
-        <div className={classes.boxWrap} key={i}>
-          <div className={classes.healthLevelBox}>
-            <span className={classes.bashingDamage}>╲</span>
-          </div>
-          <div className={classes.healthLevelLabel}>{level}</div>
-        </div>
-      )
+      box = HLBox({ type: 'bashing', level })
       bshDamage--
     } else {
-      box = (
-        <div className={classes.boxWrap} key={i}>
-          <div className={classes.healthLevelBox}>&nbsp;</div>
-          <div className={classes.healthLevelLabel}>{level}</div>
-        </div>
-      )
+      box = HLBox({ type: 'empty', level })
     }
 
-    hlBoxes.push(box)
+    hlBoxes.push(
+      <Box
+        sx={{
+          display: 'inline-block',
+          textAlign: 'center',
+          marginRight: '0.25em',
+        }}
+        key={i}
+      >
+        {box}
+      </Box>,
+    )
   }
 
   return <div>{hlBoxes}</div>
 }
 
-export default withStyles(styles)(HealthLevelBoxes)
+export default HealthLevelBoxes

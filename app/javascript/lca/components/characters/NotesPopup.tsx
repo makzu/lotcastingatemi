@@ -18,7 +18,7 @@ import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import { updateCharacter } from 'ducks/actions'
 import { canIEditCharacter } from 'selectors'
 import commonStyles from 'styles'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

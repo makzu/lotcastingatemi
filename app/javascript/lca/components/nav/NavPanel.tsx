@@ -1,3 +1,4 @@
+import type { ButtonHTMLAttributes } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import {
@@ -7,7 +8,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
-import { ButtonHTMLAttributes } from 'react'
 
 import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'
 import CharacterSheetNav from 'components/CharacterSheet/CharacterSheetNav'

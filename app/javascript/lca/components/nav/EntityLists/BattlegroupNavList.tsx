@@ -3,7 +3,7 @@ import EntityListItem from './EntityListItem'
 
 import { getMyBattlegroups, getMyPinnedBattlegroups } from 'ducks/entities'
 import { useAppSelector } from 'hooks'
-import { Battlegroup } from 'types'
+import type { Battlegroup } from 'types'
 
 const mapBattlegroupToListItem = (battlegroup: Battlegroup) => (
   <EntityListItem

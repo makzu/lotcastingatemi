@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 import { PersonAdd } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import { State } from 'ducks'
+import type { State } from 'ducks'
 import { duplicate } from 'ducks/actions/ByType'
-import { MenuItemProps as Props } from './CharacterMenuItem'
-import { AppDispatch } from 'store'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canDupe: boolean

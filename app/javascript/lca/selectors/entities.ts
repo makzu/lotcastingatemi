@@ -1,19 +1,15 @@
 import { createSelector } from 'reselect'
 
-import {
-  EntityState,
-  WrappedEntityState,
-  getMyCharacters,
-  getMyQcs,
-} from 'ducks/entities'
+import { type RootState } from '@/store'
+import { getMyCharacters, getMyQcs, type EntityState } from 'ducks/entities'
 
-export const entities = (state: WrappedEntityState): EntityState =>
+export const entities = (state: RootState): EntityState =>
   state.entities.current
 
-export const getSpecificPlayer = (state: WrappedEntityState, id: number) =>
+export const getSpecificPlayer = (state: RootState, id: number) =>
   entities(state).players[id]
 
-export const getCurrentPlayer = (state: WrappedEntityState) =>
+export const getCurrentPlayer = (state: RootState) =>
   getSpecificPlayer(state, state.session.id)
 
 export const getMyCharactersWithoutChronicles = createSelector(

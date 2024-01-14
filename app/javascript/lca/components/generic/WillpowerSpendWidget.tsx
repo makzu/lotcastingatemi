@@ -1,4 +1,4 @@
-import { Component, Node } from 'react'
+import { Component, type ReactNode } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -8,15 +8,15 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 
-import RatingField from './RatingField'
-import ResourceDisplay from './ResourceDisplay'
 import { spendWillpower } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
-import type { withWillpower, Enhancer } from 'utils/flow-types'
+import type { Enhancer, withWillpower } from 'utils/flow-types'
+import RatingField from './RatingField'
+import ResourceDisplay from './ResourceDisplay'
 
 interface ExposedProps {
-  children: Node
+  children: ReactNode
   character: withWillpower & { id: number }
   qc?: boolean
 }
@@ -30,7 +30,7 @@ interface State {
 }
 
 class WillpowerSpendWidget extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       open: false,

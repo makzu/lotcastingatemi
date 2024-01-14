@@ -11,7 +11,7 @@ import createCachedSelector from 're-reselect'
 
 import { unwrapped } from './_lib'
 import { getSpecificCharacter } from './character'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 const getMerits = (state: RootState) => unwrapped(state).merits
 

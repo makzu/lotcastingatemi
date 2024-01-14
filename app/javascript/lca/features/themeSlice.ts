@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import { PaletteMode } from '@mui/material'
+import type { PaletteMode } from '@mui/material'
 
 const initialState = localStorage.theme as PaletteMode
 

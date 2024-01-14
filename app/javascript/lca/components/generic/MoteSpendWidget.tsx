@@ -1,31 +1,31 @@
-import { Component, Node } from 'react'
+import { Component, type Node } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import ButtonBase from '@mui/material/ButtonBase'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
+import {
+  Button,
+  ButtonBase,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from '@mui/material'
 
+import { spendMotes } from 'ducks/actions'
+import { canIEditCharacter, canIEditQc } from 'selectors'
+import type { RootState } from 'store'
+import { clamp } from 'utils'
+import {
+  committedPeripheralMotes,
+  committedPersonalMotes,
+  prettyAnimaLevel,
+} from 'utils/calculated'
 import MoteCommittmentPopup from './MoteCommittmentPopup'
 import RatingField from './RatingField'
 import ResourceDisplay from './ResourceDisplay'
-import { spendMotes } from 'ducks/actions'
-import { canIEditCharacter, canIEditQc } from 'selectors'
-import { clamp } from 'utils'
-import {
-  prettyAnimaLevel,
-  committedPersonalMotes,
-  committedPeripheralMotes,
-} from 'utils/calculated'
-import { RootState } from 'store'
-import { WithId } from 'types/_lib'
-import { WithSharedStats } from 'types/shared'
 
 interface wraProps {
   current: number

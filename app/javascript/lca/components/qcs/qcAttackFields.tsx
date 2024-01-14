@@ -21,8 +21,8 @@ import { bgAttackPool, bgDamage } from 'utils/calculated'
 import { getSpecificBattlegroup } from '@/ducks/entities/battlegroup'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 
-import { Battlegroup } from 'types'
-import { RootState } from 'store'
+import type { Battlegroup } from 'types'
+import type { RootState } from 'store'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

@@ -4,7 +4,7 @@ import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 import { LIMIT_MAX } from 'utils/constants'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 interface Props {
   character: Character

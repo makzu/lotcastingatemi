@@ -1,5 +1,5 @@
 import { baselineCharacter } from '@/testMocks'
-import { Character, Charm } from '@/types'
+import type { Character, Charm } from '@/types'
 import { solarExcellencyAbils } from './solar'
 
 describe('solarExcellencyAbils', () => {

@@ -1,7 +1,7 @@
 import { useReducer } from 'react'
 
-import { Charm } from 'types'
-import { Timing } from 'types/_lib'
+import type { Charm } from 'types'
+import type { Timing } from 'types/_lib'
 
 export interface CharmFilter {
   ability: Charm['ability'][]

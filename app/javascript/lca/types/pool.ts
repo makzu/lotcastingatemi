@@ -1,5 +1,5 @@
-import { Ability } from '@/utils/constants.new/abilities'
-import { Attribute } from '@/utils/constants.new/attributes'
+import type { Ability } from '@/utils/constants.new/abilities'
+import type { Attribute } from '@/utils/constants.new/attributes'
 
 export interface PoolBonus {
   label: string

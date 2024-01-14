@@ -1,6 +1,6 @@
-import { Character, Charm } from '@/types'
-import { Ability } from '@/utils/constants.new/abilities'
-import { ATTRIBUTES, Attribute } from '@/utils/constants.new/attributes'
+import type { Character, Charm } from '@/types'
+import type { Ability } from '@/utils/constants.new/abilities'
+import { ATTRIBUTES ,type  Attribute  } from '@/utils/constants.new/attributes';
 import { attr } from '..'
 import { highestOtherAttribute } from './custom'
 

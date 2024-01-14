@@ -4,7 +4,7 @@ import { Refresh } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
 import { fetch } from 'ducks/actions/ByType'
-import { MenuItemProps as Props } from './CharacterMenuItem'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface DispatchProps {
   action(): void

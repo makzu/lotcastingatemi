@@ -1,7 +1,7 @@
-import { Character, Penalty, Pool, PoolBonus } from '@/types'
+import type { Character, Penalty, Pool, PoolBonus } from '@/types'
 import { halfRoundUp } from '@/utils'
-import { Ability } from '@/utils/constants.new/abilities'
-import { Attribute } from '@/utils/constants.new/attributes'
+import type { Ability } from '@/utils/constants.new/abilities'
+import type { Attribute } from '@/utils/constants.new/attributes'
 import { abil, attr, specialtiesFor } from '..'
 import { maxExcellency } from '../excellencies'
 

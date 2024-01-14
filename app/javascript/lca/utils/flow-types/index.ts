@@ -1,6 +1,6 @@
-import * as React from 'react'
+import type * as React from 'react'
 
-import { Battlegroup as TSBattlegroup } from 'types/battlegroup'
+import type { Battlegroup as TSBattlegroup } from 'types/battlegroup'
 export * from './character'
 export * from './pool'
 export * from './qc'

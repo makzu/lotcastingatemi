@@ -1,5 +1,5 @@
 import { deepEqual } from 'fast-equals'
-import { Component, SyntheticInputEvent } from 'react'
+import { Component, type SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 
 import Grid from '@mui/material/Grid'
@@ -32,7 +32,7 @@ import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 import { getPoolsAndRatings, getPenalties } from 'selectors'
-import { Character } from '@/types'
+import { type Character } from '@/types'
 interface Props {
   character: Character
   pools: Record<string, $TSFixMe>

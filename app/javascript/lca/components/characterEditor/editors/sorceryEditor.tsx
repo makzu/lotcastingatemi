@@ -8,7 +8,7 @@ import ListAttributeEditor, {
 import RatingField from 'components/generic/RatingField'
 import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 export const SorceryFields = (
   props: { trait: string } & ListAttributeFieldTypes,

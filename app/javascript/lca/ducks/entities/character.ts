@@ -1,5 +1,10 @@
 import { createSelector } from 'reselect'
 
+import { useAppSelector } from '@/hooks'
+import type { RootState } from '@/store'
+import type { Character } from '@/types/character'
+import { isDefined, sortOrderSort } from '@/utils'
+import { callApi } from '@/utils/api'
 import {
   createApiActions,
   createConditionalFetchAction,
@@ -8,11 +13,6 @@ import {
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
 import { getCurrentPlayer } from './player'
-import { useAppSelector } from '@/hooks'
-import { RootState } from '@/store'
-import { isDefined, sortOrderSort } from '@/utils'
-import { callApi } from '@/utils/api'
-import { Character } from '@/types/character'
 
 const CHARACTER = 'character'
 

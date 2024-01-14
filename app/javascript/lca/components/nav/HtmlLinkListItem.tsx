@@ -1,4 +1,4 @@
-import { Link, ListItemButton, ListItemButtonProps } from '@mui/material'
+import { Link, ListItemButton, type ListItemButtonProps } from '@mui/material'
 
 const HtmlLinkListItem = (props: ListItemButtonProps<'a'>) => (
   <ListItemButton

@@ -11,8 +11,8 @@ import { createQcAttack, destroyQcAttack, updateQcAttack } from 'ducks/actions'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 import type { QcAttack, Enhancer } from 'utils/flow-types'
 import SortableItem from 'components/generic/SortableItem'
-import { RootState } from 'store'
-import { Battlegroup, QC } from 'types'
+import type { RootState } from 'store'
+import type { Battlegroup, QC } from 'types'
 
 // @ts-expect-error New dnd library should fix this
 const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)

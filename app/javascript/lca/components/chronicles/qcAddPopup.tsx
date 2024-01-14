@@ -1,4 +1,4 @@
-import { Component, Node } from 'react'
+import { Component, type Node } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -59,7 +59,7 @@ class QcAddPopup extends Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, qcs } = this.props
 
-    const options: Node = [
+    const options = [
       <MenuItem key={0} value={0} disabled>
         Select a Qc
       </MenuItem>,

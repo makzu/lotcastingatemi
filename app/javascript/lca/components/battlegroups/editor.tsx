@@ -1,28 +1,31 @@
 import { deepEqual } from 'fast-equals'
-import { Component, SyntheticInputEvent } from 'react'
+import { Component, type SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import { WithStyles, withStyles } from '@mui/styles'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import MenuItem from '@mui/material/MenuItem'
-import MuiTextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import { Theme, createStyles } from '@mui/material'
+import {
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  TextField as MuiTextField,
+  Typography,
+  createStyles,
+  type Theme,
+} from '@mui/material'
+import { withStyles, type WithStyles } from '@mui/styles'
 
+import BlockPaper from 'components/shared/BlockPaper'
 import RatingField from '../generic/RatingField'
 import TextField from '../generic/TextField'
 import QcAttackEditor from '../qcs/qcAttackEditor'
-import BlockPaper from 'components/shared/BlockPaper'
 
+import {
+  canIDeleteBattlegroup,
+  getSpecificBattlegroup,
+} from '@/ducks/entities/battlegroup'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import withRouter from 'containers/withRouter'
 import { updateBattlegroup } from 'ducks/actions'
-import {
-  getSpecificBattlegroup,
-  canIDeleteBattlegroup,
-} from '@/ducks/entities/battlegroup'
 import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'

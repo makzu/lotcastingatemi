@@ -1,4 +1,4 @@
-import { Component, Node } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -79,7 +79,7 @@ class CharmFilter extends Component<Props> {
       default:
         filterLabel = 'derp'
     }
-    const filterOptions: Node = [
+    const filterOptions = [
       <MenuItem key="none" value={null}>
         No Filter
       </MenuItem>,

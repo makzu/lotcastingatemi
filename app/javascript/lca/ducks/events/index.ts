@@ -1,6 +1,6 @@
-import store, { AppDispatch } from '@/store'
+import { type GetState, type AppDispatch } from '@/store'
 import { updateCharacter, updateQc, updateBattlegroup } from '../actions'
-import { damageType } from '@/types'
+import type { damageType } from '@/types'
 export * from './chronicle.js'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
@@ -23,7 +23,7 @@ export function spendMotes(
 ) {
   const update = updateEvent(charType)
 
-  return (dispatch: AppDispatch, getState: typeof store.getState) => {
+  return (dispatch: AppDispatch, getState: GetState) => {
     dispatch({
       type: SPEND_MOTES,
       id: id,

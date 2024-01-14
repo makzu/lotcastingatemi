@@ -1,14 +1,14 @@
-import { Box } from '@mui/material'
+import type { ReactNode } from 'react'
 
-import { WithSharedStats } from 'types/shared'
-import * as calc from 'utils/calculated'
+import { Box } from '@mui/material'
 
 import AggravatedIcon from '@/icons/health-level-agg.svg?react'
 import BashingIcon from '@/icons/health-level-bashing.svg?react'
 import EmptyIcon from '@/icons/health-level-empty.svg?react'
 import LethalIcon from '@/icons/health-level-lethal.svg?react'
-import { damageType } from '@/types'
-import { ReactNode } from 'react'
+import type { damageType } from '@/types'
+import type { WithSharedStats } from '@/types/shared'
+import * as calc from 'utils/calculated'
 
 const HLBox = ({
   type,

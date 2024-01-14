@@ -1,4 +1,9 @@
-import { Theme, createStyles, withStyles, WithStyles } from '@mui/styles'
+import {
+  createStyles,
+  withStyles,
+  type Theme,
+  type WithStyles,
+} from '@mui/styles'
 
 const styles = (theme: Theme) =>
   createStyles({

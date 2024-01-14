@@ -3,42 +3,32 @@ import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'redux'
 
-import withStyles, { WithStyles } from '@mui/styles/withStyles'
-import { Typography } from '@mui/material'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { Typography, type Theme } from '@mui/material'
+import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 
-import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
-import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
-import CharacterMenu from '../generic/CharacterMenu'
-import PoolDisplay from '../generic/PoolDisplay'
-import CardBase from 'components/shared/CardBase'
-import sharedStyles from 'styles/'
 import {
   doIOwnBattlegroup,
   getSpecificBattlegroup,
 } from '@/ducks/entities/battlegroup'
+import { useAppSelector } from '@/hooks'
+import { type RootState } from '@/store'
+import CardBase from 'components/shared/CardBase'
+import sharedStyles from 'styles/'
 import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
 import type { Battlegroup, Enhancer } from 'utils/flow-types'
+import CharacterMenu from '../generic/CharacterMenu'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
+import PoolDisplay from '../generic/PoolDisplay'
+import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   ...sharedStyles(theme),
-  hiddenLabel: {
-    ...theme.typography.caption,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    lineHeight: 'inherit',
-  },
-  nameWrap: {
-    flex: 1,
-    '& a': {
-      color: 'unset',
-    },
-  },
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
@@ -77,25 +67,29 @@ type Props = ExposedProps &
 
 function BattlegroupCard(props: Props) {
   const { chronicle, st, isOwner, classes } = props
-  const battlegroup = getSpecificBattlegroup(props.id)
+  const battlegroup = useAppSelector((state) =>
+    getSpecificBattlegroup(state, props.id),
+  )
 
   if (battlegroup === undefined) return null
 
   return (
     <CardBase>
-      {((chronicle && st) || (!chronicle && isOwner)) && (
-        <Typography
-          component="div"
-          style={{
-            position: 'absolute',
-            bottom: '0.5em',
-            right: '0.75em',
-          }}
-        >
-          <Handle />
-        </Typography>
-      )}
-
+      {
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+        ((chronicle && st) || (!chronicle && isOwner)) && (
+          <Typography
+            component="div"
+            sx={{
+              position: 'absolute',
+              bottom: '0.5em',
+              right: '0.75em',
+            }}
+          >
+            <Handle />
+          </Typography>
+        )
+      }
       <Typography component="div" className={classes.flexContainer}>
         <div className={classes.nameWrap}>
           <Typography
@@ -123,7 +117,6 @@ function BattlegroupCard(props: Props) {
           chronicle={chronicle}
         />
       </Typography>
-
       <div className={classes.flexContainerWrap}>
         <BattlegroupHealthDisplay
           battlegroup={battlegroup}
@@ -166,7 +159,6 @@ function BattlegroupCard(props: Props) {
           />
         )}
       </div>
-
       <div className={classes.flexContainerWrap}>
         <PoolDisplay
           battlegroup
@@ -232,7 +224,6 @@ function BattlegroupCard(props: Props) {
           />
         )}
       </div>
-
       <div className={classes.flexContainerWrap}>
         <PoolDisplay
           battlegroup
@@ -279,7 +270,6 @@ function BattlegroupCard(props: Props) {
           }}
         />
       </div>
-
       {battlegroup.onslaught > 0 && (
         <Typography
           paragraph
@@ -295,7 +285,7 @@ function BattlegroupCard(props: Props) {
   )
 }
 
-const mapStateToProps = (state: $TSFixMe, props: ExposedProps) => ({
+const mapStateToProps = (state: RootState, props: ExposedProps) => ({
   isOwner: doIOwnBattlegroup(state, props.battlegroup?.id),
 })
 

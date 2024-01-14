@@ -1,7 +1,7 @@
-import { NavLink, NavLinkProps } from 'react-router-dom'
+import { NavLink, type NavLinkProps } from 'react-router-dom'
 
 import ListItemButton, {
-  ListItemButtonProps,
+  type ListItemButtonProps,
 } from '@mui/material/ListItemButton'
 
 const NavLinkListItem = (props: ListItemButtonProps & NavLinkProps) => (

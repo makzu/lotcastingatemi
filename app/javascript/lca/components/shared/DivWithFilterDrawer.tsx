@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import Box from '@mui/material/Box'
 
 import { drawerWidth } from 'containers/_drawerProperties'

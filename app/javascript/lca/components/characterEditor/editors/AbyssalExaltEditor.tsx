@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react'
+import type { ChangeEventHandler } from 'react'
 
 import MenuItem from '@mui/material/MenuItem'
 
@@ -8,7 +8,7 @@ import BlockPaper from '@/components/shared/BlockPaper'
 
 import { nonCasteAbilities } from 'utils/calculated'
 import { ABYSSAL_CASTE_ABILITIES } from 'utils/constants'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 interface Props {
   character: Character

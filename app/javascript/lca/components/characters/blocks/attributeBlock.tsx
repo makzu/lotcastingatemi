@@ -5,7 +5,7 @@ import AttributeBlockPhysical from './attributeBlockPhysical'
 import AttributeBlockSocial from './attributeBlockSocial'
 import AttributeBlockMental from './attributeBlockMental'
 import BlockPaper from 'components/shared/BlockPaper'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 export interface Props {
   character: Character

@@ -3,7 +3,7 @@ import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 
 import RatingLine from 'components/generic/ratingLine'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 import BlockPaper from 'components/shared/BlockPaper'
 
 import {

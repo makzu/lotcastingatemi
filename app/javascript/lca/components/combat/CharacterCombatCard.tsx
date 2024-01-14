@@ -16,7 +16,7 @@ import NotesPopup from 'components/characters/NotesPopup'
 import CardBase from 'components/shared/CardBase'
 import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 import type { Character, Enhancer } from 'utils/flow-types'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 const styles = (theme) => ({
   nameRow: {

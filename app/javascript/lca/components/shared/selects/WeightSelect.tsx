@@ -1,6 +1,6 @@
-import { MenuItem, TextField, Theme } from '@mui/material'
+import { MenuItem, TextField, type Theme } from '@mui/material'
 import makeStyles from '@mui/styles/makeStyles'
-import { TextFieldProps } from '@mui/material/TextField'
+import type { TextFieldProps } from '@mui/material/TextField'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

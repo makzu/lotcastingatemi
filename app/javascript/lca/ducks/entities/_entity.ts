@@ -1,23 +1,23 @@
+import type { AnyAction } from '@reduxjs/toolkit'
 import deepmerge from 'deepmerge'
-import { getJSON, RSAAAction } from 'redux-api-middleware'
+import { getJSON, type RSAAAction } from 'redux-api-middleware'
 
 import { callApi } from 'utils/api'
 import {
-  characterTypes as eTypes,
   crudAction,
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
   unwrapped,
+  type characterTypes as eTypes,
 } from './_lib'
-import { EntityState } from './_types'
-import { Action } from '@reduxjs/toolkit'
+import type { EntityState } from './_types'
 
 /* Overwrite arrays instead of concatenating them */
 const arrayMerge = <T>(_: never, sourceArray: T[]) => sourceArray
 
-export const mergeEntity = (state: EntityState, action: Action) =>
-  deepmerge(state, action.payload.entities || {}, { arrayMerge })
+export const mergeEntity = (state: EntityState, action: AnyAction) =>
+  deepmerge(state, action.payload.entities ?? {}, { arrayMerge })
 
 export const createEntityReducer = (
   entityType: eTypes,

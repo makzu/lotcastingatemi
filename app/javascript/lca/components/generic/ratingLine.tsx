@@ -1,5 +1,5 @@
-import { Theme } from '@mui/material/styles'
-import { createStyles, withStyles, WithStyles } from '@mui/styles'
+import type { Theme } from '@mui/material/styles'
+import { createStyles, withStyles, type WithStyles } from '@mui/styles'
 
 import RatingDots from './ratingDots'
 

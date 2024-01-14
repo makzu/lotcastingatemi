@@ -1,6 +1,6 @@
-import { Character, Charm } from '@/types'
-import { Ability } from '@/utils/constants.new/abilities'
-import { Attribute } from '@/utils/constants.new/attributes'
+import type { Character, Charm } from '@/types'
+import type { Ability } from '@/utils/constants.new/abilities'
+import type { Attribute } from '@/utils/constants.new/attributes'
 import { abil, attr } from '..'
 
 /* Solar Excellencies: Core p.255 */

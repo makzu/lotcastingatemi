@@ -1,5 +1,5 @@
 import { deepEqual } from 'fast-equals'
-import { Component, SyntheticInputEvent } from 'react'
+import { Component, type SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
 import Button from '@mui/material/Button'

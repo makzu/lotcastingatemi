@@ -1,6 +1,6 @@
-import { Sortable } from '@/utils'
-import { PlayerAsset } from './_lib'
-import { WithSharedStats } from './shared'
+import type { Sortable } from '@/utils'
+import type { PlayerAsset } from './_lib'
+import type { WithSharedStats } from './shared'
 
 export type AttackRange = 'close' | 'short' | 'medium' | 'long' | 'extreme'
 export interface QcAction {

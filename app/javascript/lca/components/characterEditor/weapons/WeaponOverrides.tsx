@@ -1,11 +1,7 @@
-import { ChangeEvent, useState } from 'react'
+import type { ChangeEvent } from 'react'
 
-import { Box, Collapse, IconButton, Typography } from '@mui/material'
-import { ExpandLess, ExpandMore } from '@mui/icons-material'
+import { Box } from '@mui/material'
 
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import Checkbox from 'components/shared/inputs/Checkbox'
 import WeaponAttributeSelect from './WeaponAttributeSelect'
 
 const WeaponOverrides = (props) => {

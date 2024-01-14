@@ -1,7 +1,8 @@
 import { deepEqual } from 'fast-equals'
-import { ChangeEvent, useState } from 'react'
+import { useState, type ChangeEvent } from 'react'
 import { Link } from 'react-router-dom'
 
+import { ExpandLess, ExpandMore, Help } from '@mui/icons-material'
 import {
   Box,
   Button,
@@ -11,11 +12,8 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Theme,
   Typography,
 } from '@mui/material'
-import makeStyles from '@mui/styles/makeStyles'
-import { ExpandLess, ExpandMore, Help } from '@mui/icons-material'
 
 import WeaponPoolDisplay from 'components/characters/weapons/WeaponPoolDisplay'
 import RatingField from 'components/generic/RatingField'
@@ -23,11 +21,11 @@ import TagsField from 'components/generic/TagsField'
 import TextField from 'components/generic/TextField'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import WeightSelect from 'components/shared/selects/WeightSelect'
-import WeaponAbilitySelect from './WeaponAbilitySelect'
-import WeaponOverrides from './WeaponOverrides'
 import { getSpecificWeapon, updateWeapon } from 'ducks/entities'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { Character } from 'types'
+import type { Character } from 'types'
+import WeaponAbilitySelect from './WeaponAbilitySelect'
+import WeaponOverrides from './WeaponOverrides'
 
 interface Props {
   character: Character

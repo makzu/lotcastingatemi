@@ -4,7 +4,7 @@ import { isDefined, sortOrderSort } from 'utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificCharacter } from './character'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 export default createTraitReducer('weapon')
 

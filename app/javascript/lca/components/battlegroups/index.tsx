@@ -2,8 +2,8 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import Typography from '@mui/material/Typography'
-import withStyles from '@mui/styles/withStyles'
+import { Typography, type Theme } from '@mui/material'
+import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 
 import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
@@ -23,8 +23,9 @@ import {
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
 import PoolDisplay from '../generic/PoolDisplay'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
+import { type RootState } from '@/store'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   ...sharedStyles(theme),
   healthBlock: {
     paddingTop: theme.spacing(-1),
@@ -351,7 +352,7 @@ class BattlegroupSheet extends Component<Props> {
 }
 
 function mapStateToProps(state: RootState, ownProps) {
-  const id = ownProps.match.params.bgId
+  const id: Battlegroup['id'] = ownProps?.params?.id ?? 0
   const battlegroup = getSpecificBattlegroup(state, id)
   let qc_attacks = []
 

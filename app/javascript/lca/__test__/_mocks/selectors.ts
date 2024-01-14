@@ -1,5 +1,5 @@
 import { getPoolsAndRatings, getPenalties } from 'selectors'
-import { Character } from 'types'
+import { type Character } from 'types'
 
 export const mockStateForCharacter = (character: Character) => ({
   entities: {

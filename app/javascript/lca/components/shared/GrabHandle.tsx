@@ -1,6 +1,6 @@
 import { SortableHandle } from 'react-sortable-hoc'
 
-import { Theme } from '@mui/material'
+import type { Theme } from '@mui/material'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import { makeStyles } from '@mui/styles'
 

@@ -1,5 +1,6 @@
+import type { RootState } from 'store'
 import { callApi } from 'utils/api'
-import { defaultState, EntityState } from './'
+import { defaultState, type EntityState } from './'
 import { createUpdateAction, mergeEntity } from './_entity'
 import {
   crudAction,
@@ -7,7 +8,6 @@ import {
   standardTypes,
   unwrapped,
 } from './_lib'
-import { RootState } from 'store'
 
 const PLAYER = 'player'
 

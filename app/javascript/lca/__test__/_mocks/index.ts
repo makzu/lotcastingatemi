@@ -1,4 +1,4 @@
-import { CraftRating, MARating } from '@/types'
+import { type CraftRating, type MARating } from '@/types'
 import { gen } from 'testcheck'
 import { ABILITY_NAMES } from 'utils/constants.js'
 export const SEED = 5 * 684 /* Number of pages in the 3e core book */

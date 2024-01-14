@@ -1,4 +1,4 @@
-import { Component, Node } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -16,7 +16,7 @@ import RatingField from 'components/generic/RatingField'
 import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
-import { WithStyles } from '@mui/styles'
+import type { WithStyles } from '@mui/styles'
 
 const styles = (theme) => ({
   wrap: {
@@ -36,7 +36,7 @@ const styles = (theme) => ({
 })
 
 interface ExposedProps {
-  children: Node
+  children: React.ReactNode
   character: { id: number; sorcerous_motes: number; type: 'qc' | string }
 }
 type Props = ExposedProps &

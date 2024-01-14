@@ -1,4 +1,4 @@
-import { Ability, Attribute, Character } from '@/types'
+import type { Ability, Attribute, Character } from '@/types'
 import { solarExcellencyAbils } from './solar'
 
 /* Sidereal Excellencies */

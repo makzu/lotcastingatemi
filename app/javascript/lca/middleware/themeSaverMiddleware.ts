@@ -1,6 +1,7 @@
-import { switchTheme } from 'features/themeSlice'
-import { Middleware } from 'redux'
-import { RootState } from 'store'
+import type { Middleware } from 'redux'
+
+import { switchTheme } from '@/features/themeSlice'
+import type { RootState } from '@/store'
 
 /** Saves changes to the theme to LocalStorage */
 const themeSaverMiddleware: Middleware<object, RootState> =

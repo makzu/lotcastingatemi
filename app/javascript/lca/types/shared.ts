@@ -1,4 +1,4 @@
-import { Element } from './_lib'
+import type { Element } from './_lib'
 
 /** Stats that PCs and QCs have in common */
 export interface WithSharedStats

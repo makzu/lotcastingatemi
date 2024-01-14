@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography'
 
 import CanonExcellencyCopy from './CanonExcellencyCopy'
 import AbilitySelect from 'components/generic/abilitySelect'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 class ExcellencyEditor extends Component<
   {

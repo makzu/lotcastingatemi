@@ -1,18 +1,18 @@
 import { Component } from 'react'
 import {
   SortableContainer,
-  SortableElement,
   SortableHandle,
   arrayMove,
 } from 'react-sortable-hoc'
 
-import withStyles from '@mui/styles/withStyles'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
+import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
+import { Button, IconButton, Typography, type Theme } from '@mui/material'
+import { createStyles } from '@mui/styles'
+import withStyles, { type WithStyles } from '@mui/styles/withStyles'
+
+import { type Character, type QC } from '@/types'
 import SortableItem from './SortableItem'
 
 const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
@@ -27,36 +27,11 @@ export interface ListAttributeFieldTypes {
   classes: Record<string, $TSFixMe>
 }
 
-const styles = (theme) => ({
-  fieldContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  grabHandle: {
-    marginRight: theme.spacing(),
-  },
-  nameField: {
-    flex: 1,
-    marginRight: theme.spacing(),
-  },
-  withMargin: {
-    marginRight: theme.spacing(),
-  },
-  checkboxWrap: {
-    paddingTop: theme.spacing(),
-  },
-  floatingLabel: {
-    ...theme.typography.caption,
-    marginBottom: theme.spacing(-1.25),
-    textAlign: 'center',
-  },
-  countLabel: {
-    ...theme.typography.caption,
-  },
-  idField: {
-    width: '3em',
-    '& input': {
-      '-moz-appearance': 'textfield',
+const styles = (theme: Theme) =>
+  createStyles({
+    fieldContainer: {
+      display: 'flex',
+      alignItems: 'center',
     },
     grabHandle: {
       marginRight: theme.spacing(),
@@ -76,23 +51,49 @@ const styles = (theme) => ({
       marginBottom: theme.spacing(-1.25),
       textAlign: 'center',
     },
-    countLabel: { ...theme.typography.caption },
+    countLabel: {
+      ...theme.typography.caption,
+    },
     idField: {
       width: '3em',
       '& input': {
         '-moz-appearance': 'textfield',
       },
-      '& ::-webkit-inner-spin-button': {
-        '-webkit-appearance': 'none',
-        margin: 0,
+      grabHandle: {
+        marginRight: theme.spacing(),
+      },
+      nameField: {
+        flex: 1,
+        marginRight: theme.spacing(),
+      },
+      withMargin: {
+        marginRight: theme.spacing(),
+      },
+      checkboxWrap: {
+        paddingTop: theme.spacing(),
+      },
+      floatingLabel: {
+        ...theme.typography.caption,
+        marginBottom: theme.spacing(-1.25),
+        textAlign: 'center',
+      },
+      countLabel: { ...theme.typography.caption },
+      idField: {
+        width: '3em',
+        '& input': {
+          '-moz-appearance': 'textfield',
+        },
+        '& ::-webkit-inner-spin-button': {
+          '-webkit-appearance': 'none',
+          margin: 0,
+        },
       },
     },
-  },
-})
+  })
 
 interface Props extends WithStyles<typeof styles> {
   character: Character | QC
-  trait: keyof Character
+  trait: keyof (Character | QC)
   label: string
   newObject: Record<string, $TSFixMe> | string
   nonObject?: boolean
@@ -116,14 +117,20 @@ class ListAttributeEditor extends Component<Props> {
     this.handleChange([...character[trait], this.props.newObject])
   }
 
-  onRemove(index) {
+  onRemove(index: number) {
     const { character, trait } = this.props
     const newTrait = [...character[trait]]
     newTrait.splice(index, 1)
     this.handleChange(newTrait)
   }
 
-  handleSort = ({ oldIndex, newIndex }) => {
+  handleSort = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => {
     const { character, trait } = this.props
     const newTrait = arrayMove(character[trait], oldIndex, newIndex)
     this.handleChange(newTrait)

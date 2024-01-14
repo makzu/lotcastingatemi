@@ -1,4 +1,4 @@
-import { Character as TSCharacter } from 'types'
+import type { Character as TSCharacter } from 'types'
 
 export interface withAttributes {
   attr_strength: number

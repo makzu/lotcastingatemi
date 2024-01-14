@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import type { ChangeEvent } from 'react'
 
 import Delete from '@mui/icons-material/Delete'
 import { Box, Button } from '@mui/material'
@@ -8,7 +8,7 @@ import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import SpellCircleSelect from 'components/shared/selects/SpellCircleSelect'
-import { Spell } from 'types'
+import type { Spell } from 'types'
 
 interface Props {
   spell: Spell

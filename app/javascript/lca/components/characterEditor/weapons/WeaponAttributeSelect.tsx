@@ -1,17 +1,17 @@
-import { MouseEvent } from 'react'
+import { type MouseEvent } from 'react'
 
 import {
   Divider,
   ListSubheader,
   MenuItem,
   TextField,
-  Theme,
+  type Theme,
 } from '@mui/material'
 
 import makeStyles from '@mui/styles/makeStyles'
 
-import { TextFieldProps } from '@mui/material/TextField'
-import { Character, Weapon } from 'types'
+import { type TextFieldProps } from '@mui/material/TextField'
+import { type Character, type Weapon } from 'types'
 import { ATTRIBUTE_NAMES } from 'utils/constants'
 
 const useStyles = makeStyles((theme: Theme) => ({

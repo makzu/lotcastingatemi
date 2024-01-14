@@ -1,4 +1,4 @@
-import { Character, Weapon, penaltyObj } from '@/types'
+import type { Character, Weapon, penaltyObj } from '@/types'
 import { weaponAccuracyBonus } from '../../index'
 import decisiveAttack from './decisiveAttack'
 

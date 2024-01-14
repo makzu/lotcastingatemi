@@ -1,8 +1,8 @@
 import { baselineCharacter } from '@/testMocks'
-import { Character } from '@/types/character'
-import { Charm } from '@/types/traits/charm'
-import { Ability } from '@/utils/constants.new/abilities'
-import { Attribute } from '@/utils/constants.new/attributes'
+import type { Character } from '@/types/character'
+import type { Charm } from '@/types/traits/charm'
+import type { Ability } from '@/utils/constants.new/abilities'
+import type { Attribute } from '@/utils/constants.new/attributes'
 import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 
 /* Fangs at the Gate, p. 142 */

@@ -1,4 +1,4 @@
-import { Component, Node } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@mui/material/Button'
@@ -14,10 +14,10 @@ import { takeDamage } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withHealthLevels, Enhancer } from 'utils/flow-types'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 interface ExposedProps {
-  children: Node
+  children: React.ReactNode
   character: withHealthLevels & { id: number }
   qc?: boolean
 }

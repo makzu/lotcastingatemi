@@ -4,8 +4,8 @@ import { GroupAdd } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material/'
 
 import { createBattlegroupFromQc } from 'ducks/actions'
-import { RootState } from 'store'
-import { MenuItemProps as Props } from './CharacterMenuItem'
+import type { RootState } from 'store'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canCreate: boolean

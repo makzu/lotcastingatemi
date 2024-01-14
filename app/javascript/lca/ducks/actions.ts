@@ -1,4 +1,4 @@
-import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
+import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 
 export {
   createCharacter,
@@ -59,7 +59,7 @@ export {
 export { logout } from './session'
 export { spendMotes, spendWillpower, takeDamage } from './events'
 
-import store, { AppDispatch, RootState } from 'store'
+import { type GetState, type AppDispatch, type RootState } from 'store'
 import {
   fetchAllCharacters,
   fetchCurrentPlayer,
@@ -78,8 +78,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >
 
 export function fetchAll() {
-  return (dispatch: AppDispatch, getState: typeof store.getState) => {
-    dispatch(fetchCurrentPlayer())
+  return (dispatch: AppDispatch, getState: GetState) => {
+    void dispatch(fetchCurrentPlayer())
       .then(() => dispatch(fetchAllCharacters()))
       .then(() => dispatch(fetchAllQcs()))
       .then(() => dispatch(fetchAllBattlegroups()))
@@ -92,7 +92,7 @@ export function fetchAll() {
 }
 
 export function lcaInit() {
-  return (dispatch: AppDispatch, getState: typeof store.getState) => {
+  return (dispatch: AppDispatch, getState: GetState) => {
     dispatch({ type: INIT })
 
     if (getState().session.authenticated) {

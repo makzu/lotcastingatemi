@@ -1,4 +1,4 @@
-import { Character, Pool, PoolBonus } from '@/types'
+import type { Character, Pool, PoolBonus } from '@/types'
 
 export function hardness(character: Character): Pool {
   let armor = 0

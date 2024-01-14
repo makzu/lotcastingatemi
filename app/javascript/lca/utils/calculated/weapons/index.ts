@@ -1,6 +1,6 @@
 export * from './overwhelming'
 
-import { Weapon } from '@/types'
+import type { Weapon } from '@/types'
 
 // Mortal melee/ma weapons: p.580
 // Mortal thrown weapons:   p.587

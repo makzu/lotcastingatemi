@@ -1,10 +1,10 @@
 import MoreVert from '@mui/icons-material/MoreVert'
-import { Divider, IconButton, Menu, Theme } from '@mui/material'
-import { WithStyles } from '@mui/styles'
+import { Divider, IconButton, Menu, type Theme } from '@mui/material'
+import type { WithStyles } from '@mui/styles'
 import withStyles from '@mui/styles/withStyles'
 
 import { useMenuLogic } from 'hooks'
-import { CharacterType } from './CharacterMenuItem'
+import type { CharacterType } from './CharacterMenuItem'
 import MenuBattlegroupFromQc from './MenuBattlegroupFromQc'
 import MenuChangeExaltType from './MenuChangeExaltType'
 import MenuDelete from './MenuDelete'

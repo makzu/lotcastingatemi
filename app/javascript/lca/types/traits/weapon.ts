@@ -1,5 +1,5 @@
-import { Ability, Attribute } from 'types/character'
-import { CharacterTrait, Weight } from '../_lib'
+import type { Ability, Attribute } from 'types/character'
+import type { CharacterTrait, Weight } from '../_lib'
 
 export interface Weapon extends CharacterTrait {
   name: string

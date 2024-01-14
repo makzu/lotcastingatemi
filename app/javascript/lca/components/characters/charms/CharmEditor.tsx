@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import withStyles, { WithStyles } from '@mui/styles/withStyles'
+import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Hidden from '@mui/material/Hidden'
@@ -36,7 +36,7 @@ import {
 } from 'selectors/'
 import type { Character, Charm, Spell } from 'utils/flow-types'
 import SortableItem from 'components/generic/SortableItem'
-import { Merit } from 'types'
+import { type Merit } from 'types'
 import { RootState } from 'store'
 
 const filterByCategory = (categoryFilter) => (charm) =>

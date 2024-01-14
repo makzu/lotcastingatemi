@@ -1,4 +1,4 @@
-import { RSAA, RSAAAction, RSAACall } from 'redux-api-middleware'
+import { RSAA ,type  RSAAAction,type  RSAACall  } from 'redux-api-middleware';
 
 const headersBase = {
   Accept: 'application/json',

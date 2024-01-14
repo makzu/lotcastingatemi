@@ -15,8 +15,8 @@ import SpendableBlock from '../generic/SpendableBlock'
 import CardBase from 'components/shared/CardBase'
 import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 import type { fullQc, Enhancer } from 'utils/flow-types'
-import { WithStyles } from '@mui/styles'
-import { RootState } from 'store'
+import type { WithStyles } from '@mui/styles'
+import type { RootState } from 'store'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

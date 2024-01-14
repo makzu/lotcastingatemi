@@ -1,4 +1,4 @@
-import { Component, Node } from 'react'
+import { Component, type Node } from 'react'
 
 import withStyles from '@mui/styles/withStyles'
 import ListSubheader from '@mui/material/ListSubheader'

@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, Theme } from '@mui/material/'
+import { Checkbox, FormControlLabel, type Theme } from '@mui/material/'
 
 import makeStyles from '@mui/styles/makeStyles'
 

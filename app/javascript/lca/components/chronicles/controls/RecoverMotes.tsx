@@ -38,10 +38,10 @@ class MoteRespirePopup extends Component<Props, State> {
   handleReset = () => this.setState({ toRecover: 0 })
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
 
     if (name === 'toRecover') {
-      let val = Math.max(parseInt(value), 0)
+      const val = Math.max(parseInt(value), 0)
       this.setState({ toRecover: val })
     } else {
       this.setState({ [name]: value })

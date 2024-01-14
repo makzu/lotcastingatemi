@@ -1,4 +1,4 @@
-import { Character, Penalty, PoolBonus } from '@/types'
+import type { Character, Penalty, PoolBonus } from '@/types'
 import { halfRoundUp } from '@/utils'
 import { penaltyObject } from '../index'
 import rating from './_rating'

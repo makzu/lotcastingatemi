@@ -16,10 +16,10 @@ import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions'
 import { getCharmsForQc } from 'selectors'
 import commonStyles from 'styles'
 import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'
-import { State } from 'ducks'
+import type { State } from 'ducks'
 import SortableItem from 'components/generic/SortableItem'
 import { createStyles } from '@mui/styles'
-import { Theme } from '@mui/material/styles'
+import type { Theme } from '@mui/material/styles'
 
 const styles = (theme: Theme) => createStyles({ ...commonStyles(theme) })
 

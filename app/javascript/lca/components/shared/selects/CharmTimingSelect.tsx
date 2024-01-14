@@ -1,6 +1,6 @@
 import { MenuItem, TextField } from '@mui/material'
-import { TextFieldProps } from '@mui/material/TextField'
-import { Timing } from 'types/_lib'
+import type { TextFieldProps } from '@mui/material/TextField'
+import type { Timing } from 'types/_lib'
 
 interface Props extends Pick<TextFieldProps, 'onChange' | 'fullWidth'> {
   value: Timing | Timing[]

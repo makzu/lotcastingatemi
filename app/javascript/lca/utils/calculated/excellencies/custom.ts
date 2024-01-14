@@ -1,7 +1,7 @@
-import { Character } from '@/types'
+import type { Character } from '@/types'
 import { halfRoundDown, halfRoundUp } from '@/utils'
-import { ABILITIES, Ability } from '@/utils/constants.new/abilities'
-import { ATTRIBUTES, Attribute } from '@/utils/constants.new/attributes'
+import { ABILITIES ,type  Ability  } from '@/utils/constants.new/abilities';
+import { ATTRIBUTES ,type  Attribute  } from '@/utils/constants.new/attributes';
 import { abil, attr, specialtiesFor } from '..'
 
 export const highestOtherAbility = (character: Character, ability: Ability) => {

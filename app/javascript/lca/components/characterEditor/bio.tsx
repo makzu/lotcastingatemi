@@ -1,11 +1,9 @@
 import { deepEqual } from 'fast-equals'
-import { Component, SyntheticInputEvent } from 'react'
+import { Component, type SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
+import { Grid, Hidden, Typography } from '@mui/material'
 
 import XpEditor from './editors/xpEditor'
 import AnimalFormsEditor from './editors/AnimalFormsEditor'
@@ -18,7 +16,7 @@ import withRouter from 'containers/withRouter'
 import { updateCharacter } from 'ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 import { showLunarTraits } from 'utils/calculated'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 interface Props {
   character: Character

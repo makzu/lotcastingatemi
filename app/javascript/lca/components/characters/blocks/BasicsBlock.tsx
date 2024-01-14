@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import { prettyFullExaltType } from 'utils/calculated'
-import { Character } from 'types'
+import type { Character } from 'types'
 interface Props {
   character: Character
 }

@@ -3,7 +3,7 @@ import Divider from '@mui/material/Divider'
 
 import RatingLine from 'components/generic/ratingLine'
 import { isCasteAttribute, isFavoredAttribute } from 'utils/calculated'
-import { Character } from 'types'
+import type { Character } from 'types'
 
 const styles = (theme) => ({
   attributeName: {

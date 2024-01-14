@@ -1,5 +1,5 @@
-import { PlayerAsset } from './_lib'
-import { WithCombatStats } from './shared'
+import type { PlayerAsset } from './_lib'
+import type { WithCombatStats } from './shared'
 
 export interface Battlegroup extends PlayerAsset, WithCombatStats {
   name: string

@@ -2,8 +2,8 @@ import { combineReducers } from 'redux'
 import { optimistic } from 'redux-optimistic-ui'
 
 import AppReducer from './app'
-import EntityReducer, { EntityState } from './entities'
-import SessionReducer, { ISessionState } from './session'
+import EntityReducer, { type EntityState } from './entities'
+import SessionReducer, { type ISessionState } from './session'
 import DrawerReducer from 'features/drawerSlice'
 import ThemeReducer from 'features/themeSlice'
 

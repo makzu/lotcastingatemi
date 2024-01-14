@@ -1,4 +1,4 @@
-import { SyntheticEvent, useCallback, useState } from 'react'
+import { useCallback, useState, type SyntheticEvent } from 'react'
 
 type MenuEvent = SyntheticEvent<HTMLElement>
 type MenuElement = HTMLElement | null

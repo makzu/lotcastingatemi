@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { Component, SyntheticInputEvent } from 'react'
+import { Component, type SyntheticInputEvent } from 'react'
 
 import TextField from '@mui/material/TextField'
 import { withStyles } from '@mui/styles'

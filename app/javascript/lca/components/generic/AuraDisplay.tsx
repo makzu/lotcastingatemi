@@ -10,8 +10,8 @@ import MenuItem from '@mui/material/MenuItem'
 import { updateCharacter, updateQc } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
-import { WithAura } from 'types/shared'
-import { WithId } from 'types/_lib'
+import type { WithAura } from 'types/shared'
+import type { WithId } from 'types/_lib'
 
 const styles = (theme) => ({
   wrap: {

@@ -1,5 +1,5 @@
 // TODO: Move from AnyAction to a real typed action
-import { AnyAction } from 'redux'
+import type { AnyAction } from 'redux'
 
 export const SWITCH_THEME = 'lca/app/SWITCH_THEME'
 

@@ -3,17 +3,17 @@ import { connect } from 'react-redux'
 
 import {
   Button,
-  ButtonProps,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Typography,
+  type ButtonProps,
 } from '@mui/material'
 
-import { useDialogLogic } from 'hooks'
+import { useDialogLogic } from '@/hooks'
 import { isPublicCharacterPage } from '@/selectors'
-import { RootState } from 'store'
+import type { RootState } from '@/store'
 
 interface StateProps {
   authenticated: boolean

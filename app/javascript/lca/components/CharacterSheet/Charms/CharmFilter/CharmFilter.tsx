@@ -1,4 +1,4 @@
-import { Dispatch } from 'react'
+import type { Dispatch } from 'react'
 import { connect } from 'react-redux'
 
 import { Button, MenuItem, Switch, TextField, Typography } from '@mui/material'
@@ -13,9 +13,9 @@ import {
 } from 'ducks/entities'
 import { getAllCharmCategoriesForCharacter } from 'selectors'
 import { useDialogLogic } from 'hooks'
-import { Charm } from 'types'
-import { CharmFilter, CharmFilterAction } from '../useCharmFilters'
-import { RootState } from 'store'
+import type { Charm } from 'types'
+import type { CharmFilter, CharmFilterAction } from '../useCharmFilters'
+import type { RootState } from 'store'
 
 const useStyles = makeStyles({
   capitalize: {

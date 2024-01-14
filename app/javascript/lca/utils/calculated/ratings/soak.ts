@@ -1,4 +1,4 @@
-import { Character, Pool, PoolBonus } from '@/types'
+import type { Character, Pool, PoolBonus } from '@/types'
 
 export const naturalSoak = (character: Character) => character.attr_stamina
 

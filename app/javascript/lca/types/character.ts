@@ -1,8 +1,8 @@
-import { Ability } from '@/utils/constants.new/abilities'
-import { Attribute } from '@/utils/constants.new/attributes'
-import { CharacterType } from '@/utils/constants.new/character'
-import { PlayerAsset, Weight } from './_lib'
-import { WithSharedStats } from './shared'
+import type { Ability } from '@/utils/constants.new/abilities'
+import type { Attribute } from '@/utils/constants.new/attributes'
+import type { CharacterType } from '@/utils/constants.new/character'
+import type { PlayerAsset, Weight } from './_lib'
+import type { WithSharedStats } from './shared'
 
 export interface XpLogEntry {
   label: string

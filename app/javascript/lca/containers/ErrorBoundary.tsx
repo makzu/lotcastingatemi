@@ -1,8 +1,9 @@
-import { Component, Node } from 'react'
+import { Component, type ErrorInfo } from 'react'
 
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 
-import { sample } from 'utils'
+import { sample } from '@/utils'
+
 const errorNames = [
   'Easily-Overlooked Error Method',
   'Friendship With Errors Approach',
@@ -14,18 +15,17 @@ const errorNames = [
   'Hybrid Error Transformation',
   'Crimson Bug Mantle',
 ]
+
 interface Props {
   children: React.ReactNode
 }
 interface State {
-  error?: Record<string, $TSFixMe>
-  errorInfo?: Record<string, $TSFixMe>
+  error?: Error
+  errorInfo?: ErrorInfo
 }
 
-interface Props { children: Node }
-interface State { error?: Object; errorInfo?: Object }
 class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       error: undefined,
@@ -33,7 +33,7 @@ class ErrorBoundary extends Component<Props, State> {
     }
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({
       error: error,
       errorInfo: errorInfo,

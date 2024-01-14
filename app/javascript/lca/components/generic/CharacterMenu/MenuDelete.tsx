@@ -14,11 +14,11 @@ import {
   Typography,
 } from '@mui/material'
 
-import { State } from 'ducks'
+import type { State } from 'ducks'
 import { destroy } from 'ducks/actions/ByType'
 import { useDialogLogic } from 'hooks'
 import { canIDelete } from '@/selectors'
-import { MenuItemProps as Props } from './CharacterMenuItem'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canDelete: boolean

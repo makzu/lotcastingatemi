@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { useState, type ChangeEvent } from 'react'
 import { connect } from 'react-redux'
 
 import { SwapHoriz } from '@mui/icons-material'
@@ -18,13 +18,13 @@ import {
 import ExaltTypeSelect, {
   prettyType,
 } from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
-import { State } from 'ducks'
+import type { State } from 'ducks'
 import { changeCharacterType } from 'ducks/actions'
 import { useDialogLogic } from 'hooks'
 import { canIEdit } from '@/selectors'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 
-import { MenuItemProps as Props } from './CharacterMenuItem'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canEdit: boolean

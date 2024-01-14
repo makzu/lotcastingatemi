@@ -1,4 +1,4 @@
-import { ReactChildren } from 'react'
+import type { ReactChildren } from 'react'
 
 import { Divider, Link, Typography } from '@mui/material'
 import { Box } from '@mui/system'

@@ -1,5 +1,5 @@
-import { Attribute, Character, Charm } from '@/types'
-import { Ability } from '@/utils/constants.new/abilities'
+import type { Attribute, Character, Charm } from '@/types'
+import type { Ability } from '@/utils/constants.new/abilities'
 import { abil, specialtiesFor } from '..'
 
 /* Dragon-Blooded Excellencies: WFHW p.162 */

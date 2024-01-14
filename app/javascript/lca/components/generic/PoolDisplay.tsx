@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import withStyles from '@mui/styles/withStyles'
-import { Theme, createStyles } from '@mui/material/styles'
+import { createStyles, type Theme } from '@mui/material/styles'
 import AttackTagsDisplay from './AttackTagsDisplay'
 
 const styles = (theme: Theme) =>

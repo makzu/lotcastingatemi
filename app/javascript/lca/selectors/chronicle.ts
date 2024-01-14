@@ -1,22 +1,23 @@
 import createCachedSelector from 're-reselect'
 
+import type { RootState } from '@/store'
+import { type WithId } from '@/types/_lib'
 import { chronicleSortOrderSort, isDefined } from 'utils'
 import { canISeeBattlegroup } from './battlegroup'
 import { canISeeCharacter } from './character'
 import { entities, getCurrentPlayer } from './entities'
 import { canISeeQc } from './qc'
-import { RootState } from '@/store'
 
 const getState = (state: RootState) => state
 
-export const getSpecificChronicle = (state, id: number) =>
+export const getSpecificChronicle = (state: RootState, id: number) =>
   entities(state).chronicles[id]
 
-const idMemoizer = (_state, id) => id
+const idMemoizer = (_state: RootState, id: WithId['id']) => id
 
 const getPlayers = (state: RootState) => entities(state).players
 
-export const isChronicleLoaded = (state, id: number) =>
+export const isChronicleLoaded = (state: RootState, id: number) =>
   getSpecificChronicle(state, id)?.st != null
 
 export const getPlayersForChronicle = createCachedSelector(

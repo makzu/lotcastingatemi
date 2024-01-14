@@ -1,12 +1,12 @@
-import { PropsWithChildren, useEffect, useMemo } from 'react'
+import { useEffect, useMemo, type PropsWithChildren } from 'react'
 
 import { GlobalStyles, useMediaQuery } from '@mui/material'
 import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
 import {
   createTheme,
   StyledEngineProvider,
-  Theme,
   ThemeProvider,
+  type Theme,
 } from '@mui/material/styles'
 
 import { switchTheme } from 'features/themeSlice'

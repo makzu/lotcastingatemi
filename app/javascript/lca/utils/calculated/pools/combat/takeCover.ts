@@ -1,4 +1,4 @@
-import { Character, penaltyObj } from '@/types'
+import type { Character, penaltyObj } from '@/types'
 import { penaltyObject } from '../../index'
 import pool from '../_pool'
 

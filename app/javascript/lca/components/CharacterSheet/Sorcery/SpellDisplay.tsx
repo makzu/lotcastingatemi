@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles'
 import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay from 'components/shared/MarkdownDisplay'
 import SecondaryInfo from 'components/shared/SecondaryInfo'
-import { Spell } from 'types'
+import type { Spell } from 'types'
 
 const useStyles = makeStyles({
   capitalize: {

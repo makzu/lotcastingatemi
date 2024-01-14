@@ -4,7 +4,7 @@ import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificQc } from './qc'
 import { isDefined } from 'utils'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 import { getSpecificCharacter } from './character'
 
 export default createTraitReducer('spell')

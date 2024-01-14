@@ -26,8 +26,7 @@ import {
   amIStOfChronicle,
 } from 'selectors'
 import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
-import { Chronicle } from 'types'
-import { RootState } from 'store'
+import type { Chronicle } from 'types'
 
 interface Props {
   id: number

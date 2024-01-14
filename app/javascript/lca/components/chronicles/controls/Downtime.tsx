@@ -61,7 +61,7 @@ class DowntimePopup extends Component<Props, State> {
   handleReset = () => this.setState({ time: 1 })
 
   handleChange = (e) => {
-    let { value } = e.target
+    const { value } = e.target
     if (this.state.days) {
       this.setState({
         time: value * 24,

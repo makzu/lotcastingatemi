@@ -59,7 +59,13 @@ class MeritEditor extends Component<Props> {
   handleRemove = (id) => {
     this.props.destroyMerit(id, this.props.character.id)
   }
-  handleSort = ({ oldIndex, newIndex }) => {
+  handleSort = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => {
     if (oldIndex === newIndex) return
     const meritA = this.props.merits[oldIndex]
     const meritB = this.props.merits[newIndex]

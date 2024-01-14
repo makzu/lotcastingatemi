@@ -2,8 +2,8 @@ import createCachedSelector from 're-reselect'
 import { createSelector } from 'reselect'
 
 import { getSpecificCharacter as getCharacter } from '@/ducks/entities/character'
-import { RootState } from '@/store'
-import type { Poison, Spell } from '@/types'
+import type { RootState } from '@/store'
+import type { Poison } from '@/types'
 import { sortOrderSort } from '@/utils'
 import {
   exaltTypeBase,

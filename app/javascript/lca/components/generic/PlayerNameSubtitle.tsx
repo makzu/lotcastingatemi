@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Typography from '@mui/material/Typography'
 
 import { getSpecificPlayer } from 'selectors'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 interface ExposedProps {
   playerId: number

@@ -3,10 +3,10 @@ import { useLocation, Link } from 'react-router-dom'
 import {
   Tab,
   Tabs,
-  Theme,
   Toolbar,
   Typography,
   useMediaQuery,
+  type Theme,
 } from '@mui/material'
 
 import { getSpecificChronicle } from '@/selectors'

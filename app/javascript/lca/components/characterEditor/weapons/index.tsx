@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { SortableContainer } from 'react-sortable-hoc'
 
-import { Button, Divider, Typography } from '@mui/material'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
+import { Button, Divider, Typography } from '@mui/material'
 
+import BlockPaper from 'components/shared/BlockPaper'
 import WeaponEditorPopup from './WeaponEditorPopup'
 import WeaponRow from './WeaponRow'
-import BlockPaper from 'components/shared/BlockPaper'
 
+import SortableItem from '@/components/generic/SortableItem'
 import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
-import { Character } from 'types'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import SortableItem from '@/components/generic/SortableItem'
+import type { Character } from 'types'
 
 // @ts-expect-error TODO migrate to new dnd lib
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)

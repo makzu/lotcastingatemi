@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Form } from 'types'
+import type { Form } from 'types'
 
 const animalFormsList = (forms: Form[]) =>
   forms
@@ -13,6 +13,6 @@ const animalFormsList = (forms: Form[]) =>
         f.form
       ),
     )
-    .reduce((accu, curr, i) => (i === 0 ? [curr] : [...accu, ', ', curr]), [])
+    .join(', ')
 
 export default animalFormsList

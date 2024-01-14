@@ -8,10 +8,10 @@ import {
 } from '@mui/icons-material'
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import { State } from 'ducks'
+import type { State } from 'ducks'
 import { update } from 'ducks/actions/ByType'
 import { canIDelete } from '@/selectors'
-import { MenuItemProps as Props } from './CharacterMenuItem'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
   canEdit: boolean

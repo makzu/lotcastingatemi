@@ -3,7 +3,7 @@ import createCachedSelector from 're-reselect'
 import { entities, getCurrentPlayer } from './entities'
 import { isDefined, sortOrderSort } from 'utils'
 import * as calc from 'utils/calculated/'
-import { RootState } from '@/store'
+import type { RootState } from '@/store'
 
 export const getSpecificQc = (state: RootState, id: number) =>
   entities(state).qcs[id]

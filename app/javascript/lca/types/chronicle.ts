@@ -1,4 +1,4 @@
-import { WithId } from './_lib'
+import type { WithId } from './_lib'
 
 export interface Chronicle extends WithId {
   st_id: number

@@ -5,7 +5,7 @@ import WeaponLine from 'components/characters/weapons/WeaponLine'
 import Handle from 'components/shared/GrabHandle'
 import { destroyWeapon } from 'ducks/actions'
 import { useAppDispatch } from 'hooks'
-import { Character, Weapon } from 'types'
+import type { Character, Weapon } from 'types'
 
 interface WeaponRowProps {
   character: Character

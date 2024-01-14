@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { RootState } from '@/store'
+import type { RootState } from '@/store'
 import { sortOrderSort } from '@/utils'
 import { callApi } from '@/utils/api'
 import {

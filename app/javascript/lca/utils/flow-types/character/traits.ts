@@ -1,4 +1,4 @@
-import { Charm as TSCharm, Spell as TSSpell, Weapon, Merit } from 'types'
+import type { Charm as TSCharm, Spell as TSSpell, Weapon, Merit } from 'types'
 
 /** @deprecated */
 export type Charm = TSCharm

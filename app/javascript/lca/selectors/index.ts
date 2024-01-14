@@ -8,7 +8,7 @@ export * from './entities'
 export * from './qc'
 export * from './weapon'
 export { doIOwnBattlegroup } from '@/ducks/entities/battlegroup'
-import { RootState } from '@/store'
+import type { RootState } from '@/store'
 import {
   canIDeleteBattlegroup,
   canIEditBattlegroup,

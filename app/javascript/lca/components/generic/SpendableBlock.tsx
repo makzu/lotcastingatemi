@@ -11,8 +11,8 @@ import ShapeSorceryWidget from '../generic/ShapeSorceryWidget'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget'
 import sharedStyles from 'styles/'
 import * as calc from 'utils/calculated'
-import { WithSharedStats } from 'types/shared'
-import { WithId } from 'types/_lib'
+import type { WithSharedStats } from 'types/shared'
+import type { WithId } from 'types/_lib'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

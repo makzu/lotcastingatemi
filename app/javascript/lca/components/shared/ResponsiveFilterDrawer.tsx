@@ -1,6 +1,6 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
-import { Drawer, Theme } from '@mui/material'
+import { Drawer, type Theme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { makeStyles, useTheme } from '@mui/styles'
 

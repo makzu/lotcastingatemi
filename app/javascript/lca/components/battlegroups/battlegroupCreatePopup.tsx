@@ -1,4 +1,4 @@
-import { Component, SyntheticInputEvent } from 'react'
+import { Component, type SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 
 import Dialog from '@mui/material/Dialog'

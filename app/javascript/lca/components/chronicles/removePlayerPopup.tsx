@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { removePlayerFromChronicle as removePlayer } from 'ducks/actions'
 import { getSpecificChronicle, getSpecificPlayer } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 interface ExposedProps {
   chronicleId: number

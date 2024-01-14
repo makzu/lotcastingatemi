@@ -1,4 +1,4 @@
-import { QC, QcMerit } from '@/types'
+import type { QC, QcMerit } from '@/types'
 
 function qcExcellencyPoolCap(qc: QC, pool, stunt = false) {
   if (stunt && qc.excellency != 'lunar') return 0

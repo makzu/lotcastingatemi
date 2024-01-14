@@ -1,6 +1,6 @@
 /* https://whereisthemouse.com/how-to-use-withrouter-hoc-in-react-router-v6-with-typescript */
 
-import { ComponentType } from 'react'
+import type { ComponentType } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 
 /** @deprecated Use `React Router hooks` instead */

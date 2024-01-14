@@ -1,12 +1,12 @@
-import { Middleware } from 'redux'
+import type { Middleware } from 'redux'
 
 import {
+  fetchAllBattlegroups,
   fetchAllCharacters,
   fetchAllQcs,
-  fetchAllBattlegroups,
-} from 'ducks/entities'
-import { crudAction } from 'ducks/entities/_lib'
-import { RootState } from 'store'
+} from '@/ducks/entities'
+import { crudAction } from '@/ducks/entities/_lib'
+import type { RootState } from '@/store'
 
 // Detects incomplete paginated requests and requests the next page
 const pagyMiddleware: Middleware<object, RootState> =

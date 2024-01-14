@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux'
+import type { AnyAction } from 'redux'
 
 import { isNonFetchAuthIssue } from './app'
 import { crudAction } from './entities/_lib'

@@ -1,12 +1,12 @@
 import { normalize } from 'normalizr'
-import { Action } from 'redux'
-import { ActionFunctionAny, createAction } from 'redux-actions'
+import type { Action } from 'redux'
+import { createAction, type ActionFunctionAny } from 'redux-actions'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
-import { RootState } from 'store'
+import type { RootState } from 'store'
 import * as schemas from './_schemas'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 
 export type characterTraitTypes =
   | 'charm'

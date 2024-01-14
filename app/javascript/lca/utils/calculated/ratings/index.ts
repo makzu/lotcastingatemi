@@ -1,4 +1,4 @@
-import { Character, PoolBonus } from '@/types'
+import type { Character, PoolBonus } from '@/types'
 export { evasion } from './evasion'
 export { guile } from './guile'
 export { hardness } from './hardness'

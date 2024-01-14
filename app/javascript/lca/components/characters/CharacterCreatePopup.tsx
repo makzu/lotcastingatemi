@@ -1,4 +1,4 @@
-import { ChangeEvent, Component } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { connect } from 'react-redux'
 
 import {
@@ -20,8 +20,8 @@ import SiderealCasteSelect from 'components/characterEditor/exaltTraits/Sidereal
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import { createCharacter } from 'ducks/actions'
 import type { Enhancer } from 'utils/flow-types'
-import { Character, ExaltType } from 'types'
-import { RootState } from 'store'
+import { type Character, type ExaltType } from 'types'
+import { type RootState } from 'store'
 
 const initialState = {
   open: false,

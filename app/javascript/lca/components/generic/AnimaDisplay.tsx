@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import { WithStyles } from '@mui/styles'
+import type { WithStyles } from '@mui/styles'
 import ButtonBase from '@mui/material/ButtonBase'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'

@@ -3,8 +3,8 @@ import { Typography, Divider } from '@mui/material'
 
 import RatingLine from '../../generic/ratingLine'
 import BlockPaper from 'components/shared/BlockPaper'
-import { Character } from 'types'
-import { Intimacy } from 'types/shared'
+import type { Character } from 'types'
+import type { Intimacy } from 'types/shared'
 
 interface Props {
   character: Character

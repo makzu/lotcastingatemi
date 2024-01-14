@@ -1,6 +1,6 @@
 import Checkbox from 'components/shared/inputs/Checkbox'
 import ListAttributeEditor, {
-  ListAttributeFieldTypes,
+  type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor'
 import RatingField from './RatingField'
 import TextField from 'components/generic/TextField'

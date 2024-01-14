@@ -6,8 +6,8 @@ export * from './chronicle'
 export * from './traits'
 export * from './pool'
 
-import { Ability } from '@/utils/constants.new/abilities'
-import { Attribute } from '@/utils/constants.new/attributes'
+import type { Ability } from '@/utils/constants.new/abilities'
+import type { Attribute } from '@/utils/constants.new/attributes'
 
 export type CharacterType = 'character' | 'qc' | 'battlegroup'
 

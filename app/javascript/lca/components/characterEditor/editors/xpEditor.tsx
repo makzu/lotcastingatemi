@@ -9,7 +9,7 @@ import TextField from 'components/generic/TextField'
 import BlockPaper from 'components/shared/BlockPaper'
 import commonStyles from 'styles'
 import { solarXpName, spentBp, spentSolarXp, spentXp } from 'utils/calculated'
-import { Character } from '@/types'
+import type { Character } from '@/types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { PersonAdd } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import type { State } from 'ducks'
-import { duplicate } from 'ducks/actions/ByType'
+import type { State } from '@/ducks'
+import { duplicate } from '@/ducks/actions/ByType'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {

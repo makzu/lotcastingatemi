@@ -1,22 +1,25 @@
 import { Component, Node } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import Divider from '@mui/material/Divider'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-
-import { addThingToChronicle } from 'ducks/actions'
+import { addThingToChronicle } from '@/ducks/actions'
 import {
   getSpecificChronicle,
   getMyCharactersWithoutChronicles,
-} from 'selectors'
-import type { Character, Enhancer } from 'utils/flow-types'
+} from '@/selectors'
+import type { Character, Enhancer } from '@/utils/flow-types'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
+  MenuItem,
+  TextField,
+} from '@mui/material'
+
 interface ExposedProps {
   chronicleId: number
 }

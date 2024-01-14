@@ -1,11 +1,10 @@
 import { Component, type Node } from 'react'
 
 import withStyles from '@mui/styles/withStyles'
-import ListSubheader from '@mui/material/ListSubheader'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
 
-import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants'
+import { ABILITIES_ALL, ATTRIBUTES } from '@/utils/constants'
+
+import { ListSubheader, MenuItem, TextField } from '@mui/material'
 
 const styles = (theme) => ({
   root: {

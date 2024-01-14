@@ -13,14 +13,14 @@ import {
   Typography,
 } from '@mui/material'
 
-import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect'
-import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
-import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
-import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
-import { createCharacter } from 'ducks/actions'
-import type { Enhancer } from 'utils/flow-types'
-import { type Character, type ExaltType } from 'types'
+import DbAspectSelect from '@/components/characterEditor/exaltTraits/DbAspectSelect'
+import ExaltTypeSelect from '@/components/characterEditor/exaltTraits/ExaltTypeSelect'
+import LunarCasteSelect from '@/components/characterEditor/exaltTraits/LunarCasteSelect'
+import SiderealCasteSelect from '@/components/characterEditor/exaltTraits/SiderealCasteSelect'
+import SolarCasteSelect from '@/components/characterEditor/exaltTraits/SolarCasteSelect'
+import { createCharacter } from '@/ducks/actions'
+import type { Enhancer } from '@/utils/flow-types'
+import { type Character, type ExaltType } from '@/types'
 import { type RootState } from 'store'
 
 const initialState = {

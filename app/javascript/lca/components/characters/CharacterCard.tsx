@@ -4,24 +4,24 @@ import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Whatshot from '@mui/icons-material/Whatshot'
-
 import NotesPopup from './NotesPopup'
+
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import PoolDisplay from '../generic/PoolDisplay'
 import CharacterMenu from '../generic/CharacterMenu'
 import SpendableBlock from '../generic/SpendableBlock'
-import CardBase from 'components/shared/CardBase'
+import CardBase from '@/components/shared/CardBase'
 import {
   canIDeleteCharacter,
   getPenalties,
   getPoolsAndRatings,
-} from 'selectors'
-import * as calc from 'utils/calculated'
-import type { Character, Enhancer } from 'utils/flow-types'
+} from '@/selectors'
+import * as calc from '@/utils/calculated'
+import type { Character, Enhancer } from '@/utils/flow-types'
+import { Typography } from '@mui/material'
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))

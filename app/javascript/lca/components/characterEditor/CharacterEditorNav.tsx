@@ -9,9 +9,9 @@ import {
 } from '@mui/material/'
 import { ExpandLess, ExpandMore } from '@mui/icons-material/'
 
-import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
-import { useCharacterAttribute } from 'ducks/entities'
-import { useIdFromParams } from 'hooks'
+import { LinkListItem, NavLinkListItem } from '@/components/shared/wrappers/'
+import { useCharacterAttribute } from '@/ducks/entities'
+import { useIdFromParams } from '@/hooks'
 
 const CharacterEditorNav = () => {
   const id = useIdFromParams()

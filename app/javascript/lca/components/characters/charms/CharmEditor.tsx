@@ -2,21 +2,17 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import withStyles, { type WithStyles } from '@mui/styles/withStyles'
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import styles from './CharmStyles.js'
 import CharmFields from './CharmFields'
 import CharmFilter from './CharmFilter'
 import SpellFields from './SpellFields'
-import DocumentTitle from 'components/generic/DocumentTitle'
-import SortableGridList from 'components/generic/SortableGridList'
+import DocumentTitle from '@/components/generic/DocumentTitle'
+import SortableGridList from '@/components/generic/SortableGridList'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
 import {
   updateCharm,
   createCharm,
@@ -24,7 +20,7 @@ import {
   updateSpell,
   createSpell,
   destroySpell,
-} from 'ducks/actions'
+} from '@/ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 import {
   getEvokableMeritsForCharacter,
@@ -33,11 +29,13 @@ import {
   getEvocationsForCharacter,
   getSpellsForCharacter,
   getSpiritCharmsForCharacter,
-} from 'selectors/'
-import type { Character, Charm, Spell } from 'utils/flow-types'
-import SortableItem from 'components/generic/SortableItem'
-import { type Merit } from 'types'
+} from '@/selectors/'
+import type { Character, Charm, Spell } from '@/utils/flow-types'
+import SortableItem from '@/components/generic/SortableItem'
+import { type Merit } from '@/types'
 import { RootState } from 'store'
+
+import { Button, Grid, Hidden, Typography } from '@mui/material'
 
 const filterByCategory = (categoryFilter) => (charm) =>
   categoryFilter.every((cat) => charm.categories.includes(cat))

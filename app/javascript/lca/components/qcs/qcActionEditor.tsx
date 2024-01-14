@@ -1,12 +1,12 @@
 import {} from 'react'
 
-import { SorceryFields } from 'components/characterEditor/editors/sorceryEditor'
+import { SorceryFields } from '@/components/characterEditor/editors/sorceryEditor'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
+} from '@/components/generic/ListAttributeEditor'
 import RatingField from '../generic/RatingField'
-import TextField from 'components/generic/TextField'
-import type { fullQc } from 'utils/flow-types'
+import TextField from '@/components/generic/TextField'
+import type { fullQc } from '@/utils/flow-types'
 
 function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
   const { action, pool } = trait

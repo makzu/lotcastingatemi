@@ -1,9 +1,9 @@
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import type { withIntimacies } from 'utils/flow-types'
+} from '@/components/generic/ListAttributeEditor'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import type { withIntimacies } from '@/utils/flow-types'
 
 function ResourceFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props

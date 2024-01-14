@@ -2,18 +2,16 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import QcMeritFields from './qcMeritFields'
-import SortableGridList from 'components/generic/SortableGridList'
+import SortableGridList from '@/components/generic/SortableGridList'
 
-import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions'
-import { getMeritsForQc } from 'selectors'
-import type { fullQc, QcMerit, Enhancer } from 'utils/flow-types'
-import SortableItem from 'components/generic/SortableItem'
+import { createQcMerit, destroyQcMerit, updateQcMerit } from '@/ducks/actions'
+import { getMeritsForQc } from '@/selectors'
+import type { fullQc, QcMerit, Enhancer } from '@/utils/flow-types'
+import SortableItem from '@/components/generic/SortableItem'
+import { Button, Grid, Typography } from '@mui/material'
 interface ExposedProps {
   qc: fullQc
   classes: Record<string, $TSFixMe>

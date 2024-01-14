@@ -2,24 +2,20 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
-
 import STControls from './StControls'
 import CharacterAddPopup from './characterAddPopup'
-import CharacterCard from 'components/characters/CharacterCard'
+import CharacterCard from '@/components/characters/CharacterCard'
 import QcAddPopup from './qcAddPopup'
-import QcCard from 'components/qcs/QcCard'
+import QcCard from '@/components/qcs/QcCard'
 import BattlegroupAddPopup from './battlegroupAddPopup'
-import BattlegroupCard from 'components/battlegroups/BattlegroupCard'
-import BlockPaper from 'components/shared/BlockPaper'
-import DocumentTitle from 'components/generic/DocumentTitle'
-import SortableGridList from 'components/generic/SortableGridList'
+import BattlegroupCard from '@/components/battlegroups/BattlegroupCard'
+import BlockPaper from '@/components/shared/BlockPaper'
+import DocumentTitle from '@/components/generic/DocumentTitle'
+import SortableGridList from '@/components/generic/SortableGridList'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import { updateCharacter, updateQc, updateBattlegroup } from '@/ducks/actions'
 import {
   getSpecificChronicle,
   getPlayersForChronicle,
@@ -28,9 +24,11 @@ import {
   getBattlegroupsForChronicle,
   getStorytellerForChronicle,
   amIStOfChronicle,
-} from 'selectors'
-import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
-import SortableItem from 'components/generic/SortableItem'
+} from '@/selectors'
+import type { Character, fullQc, Battlegroup } from '@/utils/flow-types'
+import SortableItem from '@/components/generic/SortableItem'
+
+import { Grid, Hidden, Typography } from '@mui/material'
 
 // TODO: replace with proper objects
 interface Props {

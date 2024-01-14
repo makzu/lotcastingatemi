@@ -9,7 +9,7 @@ import {
 import { bgJoinBattlePool } from '../utils/calculated/_battlegroups'
 import { getQcAttacks } from './qc'
 
-/** @deprecated use export from 'ducks' instead */
+/** @deprecated use export from '@/ducks' instead */
 export const getSpecificBattlegroup = getBattlegroup
 
 export const getAttacksForBattlegroup = createCachedSelector(

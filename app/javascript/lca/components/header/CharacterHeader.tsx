@@ -2,12 +2,12 @@ import { Link, useLocation } from 'react-router-dom'
 
 import { Button, Toolbar, Typography } from '@mui/material'
 
-import CharacterMenu from 'components/generic/CharacterMenu'
+import CharacterMenu from '@/components/generic/CharacterMenu'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { canIEditCharacter } from 'ducks/selectors'
+import { canIEditCharacter } from '@/ducks/selectors'
 import { getSpecificCharacter } from '@/ducks/entities/character'
-import { useAppSelector, useIdFromParams } from 'hooks'
+import { useAppSelector, useIdFromParams } from '@/hooks'
 
 function CharacterHeader() {
   const id = useIdFromParams()

@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 
-import { getSpellsForCharacter } from 'ducks/entities'
-import { useAppSelector, useIdFromParams } from 'hooks'
+import { getSpellsForCharacter } from '@/ducks/entities'
+import { useAppSelector, useIdFromParams } from '@/hooks'
 import SpellDisplay from './SpellDisplay'
 
 const SpellList = () => {

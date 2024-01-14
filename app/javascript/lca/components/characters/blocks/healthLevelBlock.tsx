@@ -1,9 +1,9 @@
-import Typography from '@mui/material/Typography'
+import HealthLevelBoxes from '@/components/generic/HealthLevelBoxes'
 
-import HealthLevelBoxes from 'components/generic/HealthLevelBoxes'
-import BlockPaper from 'components/shared/BlockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
+import type { withHealthLevels } from '@/utils/flow-types'
 
-import type { withHealthLevels } from 'utils/flow-types'
+import { Typography } from '@mui/material'
 interface Props {
   character: withHealthLevels
   penalties: Record<string, $TSFixMe>

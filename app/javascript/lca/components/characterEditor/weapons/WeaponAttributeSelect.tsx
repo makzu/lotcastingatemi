@@ -11,8 +11,8 @@ import {
 import makeStyles from '@mui/styles/makeStyles'
 
 import { type TextFieldProps } from '@mui/material/TextField'
-import { type Character, type Weapon } from 'types'
-import { ATTRIBUTE_NAMES } from 'utils/constants'
+import { type Character, type Weapon } from '@/types'
+import { ATTRIBUTE_NAMES } from '@/utils/constants'
 
 const useStyles = makeStyles((theme: Theme) => ({
   capitalize: {

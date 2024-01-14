@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { Help as HelpIcon } from '@mui/icons-material'
 import {
   Button,
   Dialog,
@@ -8,11 +9,10 @@ import {
   IconButton,
   Typography,
 } from '@mui/material'
-import { Help as HelpIcon } from '@mui/icons-material'
 
-import ListAttributeEditor from 'components/generic/ListAttributeEditor'
-import { useDialogLogic } from 'hooks'
-import type { Character } from 'types'
+import ListAttributeEditor from '@/components/generic/ListAttributeEditor'
+import { useDialogLogic } from '@/hooks'
+import type { Character } from '@/types'
 import AnimalFormFields from './AnimalFormFields'
 import animalFormsList from './AnimalFormsList'
 

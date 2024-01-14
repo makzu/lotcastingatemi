@@ -1,8 +1,8 @@
-import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
-
 import { toggleDrawer } from 'features/drawerSlice'
-import { useAppDispatch } from 'hooks'
+
+import { useAppDispatch } from '@/hooks'
+import { IconButton } from '@mui/material'
 
 const LcaDrawerButton = () => {
   const dispatch = useAppDispatch()

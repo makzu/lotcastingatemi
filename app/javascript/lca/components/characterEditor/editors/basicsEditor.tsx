@@ -1,12 +1,12 @@
 import { Checkbox, FormControlLabel } from '@mui/material'
 
 import BlockPaper from '@/components/shared/BlockPaper'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import { canIDeleteCharacter } from 'selectors'
-import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import { canIDeleteCharacter } from '@/selectors'
+import { ESSENCE_MIN, ESSENCE_MAX } from '@/utils/constants'
 import type { Character } from '@/types'
-import { useAppSelector } from 'hooks'
+import { useAppSelector } from '@/hooks'
 
 interface Props {
   character: Character

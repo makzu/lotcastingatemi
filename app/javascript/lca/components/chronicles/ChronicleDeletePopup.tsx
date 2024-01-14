@@ -1,17 +1,21 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
 import Delete from '@mui/icons-material/Delete'
 
-import { destroyChronicle } from 'ducks/actions'
-import { getSpecificChronicle } from 'selectors'
-import type { Enhancer } from 'utils/flow-types'
+import { destroyChronicle } from '@/ducks/actions'
+import { getSpecificChronicle } from '@/selectors'
+import type { Enhancer } from '@/utils/flow-types'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material'
+
 interface ExposedProps {
   chronicleId: number
 }

@@ -1,4 +1,4 @@
-import type { Sortable } from 'utils'
+import type { Sortable } from '@/utils'
 import type { Timing, WithId } from '../_lib'
 
 export interface Spell extends WithId, Sortable {

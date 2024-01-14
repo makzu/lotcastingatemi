@@ -8,8 +8,8 @@ import {
 } from '@mui/icons-material'
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import type { State } from 'ducks'
-import { update } from 'ducks/actions/ByType'
+import type { State } from '@/ducks'
+import { update } from '@/ducks/actions/ByType'
 import { canIDelete } from '@/selectors'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 

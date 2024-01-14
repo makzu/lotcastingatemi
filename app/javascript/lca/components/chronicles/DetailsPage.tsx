@@ -2,31 +2,28 @@ import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import Divider from '@mui/material/Divider'
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
-
 import ChronicleDeletePopup from './ChronicleDeletePopup'
 import ChronicleInvitePopup from './chronicleInvitePopup'
 import ChronicleLeavePopup from './ChronicleLeavePopup'
 import RemovePlayerPopup from './removePlayerPopup'
-import BlockPaper from 'components/shared/BlockPaper'
-import DocumentTitle from 'components/generic/DocumentTitle'
-import MarkdownDisplay from 'components/shared/MarkdownDisplay'
-import TextField from 'components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import DocumentTitle from '@/components/generic/DocumentTitle'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+import TextField from '@/components/generic/TextField'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { updateChronicle } from 'ducks/actions'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import { updateChronicle } from '@/ducks/actions'
 import {
   getSpecificChronicle,
   getPlayersForChronicle,
   getStorytellerForChronicle,
   amIStOfChronicle,
-} from 'selectors'
-import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
-import type { Chronicle } from 'types'
+} from '@/selectors'
+import type { Character, fullQc, Battlegroup } from '@/utils/flow-types'
+import type { Chronicle } from '@/types'
+
+import { Divider, Grid, Hidden, Typography } from '@mui/material'
 
 interface Props {
   id: number

@@ -1,7 +1,7 @@
 import { getJSON } from 'redux-api-middleware'
-import type { Charm } from 'types'
+import type { Charm } from '@/types'
 
-import { callApi } from 'utils/api'
+import { callApi } from '@/utils/api'
 import {
   crudAction,
   optimisticTypes,

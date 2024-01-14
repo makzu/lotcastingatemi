@@ -1,6 +1,6 @@
-import Typography from '@mui/material/Typography'
+import { sample } from '@/utils'
 
-import { sample } from 'utils'
+import { Typography } from '@mui/material'
 const loadingMessages = [
   'Loading',
   'Waiting for anima banner to fade',

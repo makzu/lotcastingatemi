@@ -2,11 +2,11 @@ import { useEffect } from 'react'
 
 import { Box, CssBaseline } from '@mui/material'
 
-import LoadingIndicator from 'components/generic/LoadingIndicator'
-import LcaHeader from 'components/header/Header'
-import NavPanel from 'components/nav/'
-import Footer from 'components/shared/Footer'
-import ErrorBoundary from 'containers/ErrorBoundary'
+import LoadingIndicator from '@/components/generic/LoadingIndicator'
+import LcaHeader from '@/components/header/Header'
+import NavPanel from '@/components/nav/'
+import Footer from '@/components/shared/Footer'
+import ErrorBoundary from '@/containers/ErrorBoundary'
 
 // Shamelessly stolen from the material-ui drawer demo
 

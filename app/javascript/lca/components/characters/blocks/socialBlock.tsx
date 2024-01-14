@@ -1,8 +1,8 @@
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
+import PoolDisplay from '@/components/generic/PoolDisplay'
 
-import PoolDisplay from 'components/generic/PoolDisplay'
-import BlockPaper from 'components/shared/BlockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
+import { Typography } from '@mui/material'
 
 const styles = (theme) => ({
   container: {

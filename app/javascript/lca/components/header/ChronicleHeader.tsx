@@ -12,7 +12,7 @@ import {
 import { getSpecificChronicle } from '@/selectors'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { useAppSelector, useIdFromParams } from 'hooks'
+import { useAppSelector, useIdFromParams } from '@/hooks'
 
 const LinkTab = (props) => <Tab {...props} component={Link} />
 

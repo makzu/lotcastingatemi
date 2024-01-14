@@ -1,6 +1,5 @@
 import withStyles from '@mui/styles/withStyles'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
+import { MenuItem, TextField } from '@mui/material';
 
 const styles = (theme) => ({
   field: {

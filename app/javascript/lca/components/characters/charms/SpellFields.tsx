@@ -4,17 +4,6 @@ import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
 import withStyles from '@mui/styles/withStyles'
-import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import Accordion from '@mui/material/Accordion'
-import AccordionActions from '@mui/material/AccordionActions'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import MenuItem from '@mui/material/MenuItem'
-import MuiTextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import Collapse from '@mui/material/Collapse'
 import Delete from '@mui/icons-material/Delete'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -22,10 +11,25 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import styles from './CharmStyles.js'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
 import { SpellSummaryBlock } from './SpellDisplay'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
-import { checkVisible } from 'utils'
-import type { Character, Spell } from 'utils/flow-types'
+import TagsField from '@/components/generic/TagsField'
+import TextField from '@/components/generic/TextField'
+import { checkVisible } from '@/utils'
+import type { Character, Spell } from '@/utils/flow-types'
+
+import {
+  Button,
+  Checkbox,
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
+  FormControlLabel,
+  MenuItem,
+  TextField as MuiTextField,
+  Typography,
+  Collapse,
+} from '@mui/material'
+
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))

@@ -49,7 +49,7 @@ export const getEvokableMeritsForCharacter = createSelector(
     ),
 )
 
-/** @deprecated use export from 'ducks' instead */
+/** @deprecated use export from '@/ducks' instead */
 export const getSpecificCharacter = getCharacter
 
 const getSpells = (state) => entities(state).spells

@@ -1,9 +1,9 @@
-import Typography from '@mui/material/Typography'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import BlockPaper from 'components/shared/BlockPaper'
-import MarkdownDisplay from 'components/shared/MarkdownDisplay'
-import { prettyFullExaltType } from 'utils/calculated'
-import type { Character } from 'types'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+import { prettyFullExaltType } from '@/utils/calculated'
+import type { Character } from '@/types'
+import { Typography } from '@mui/material'
 interface Props {
   character: Character
 }

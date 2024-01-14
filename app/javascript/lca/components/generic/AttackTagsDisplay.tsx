@@ -1,7 +1,5 @@
-import DialogContentText from '@mui/material/DialogContentText'
-import Typography from '@mui/material/Typography'
-
-import type { Pool } from 'utils/flow-types'
+import type { Pool } from '@/utils/flow-types'
+import { DialogContentText, Typography } from '@mui/material'
 const style = {
   marginTop: '0.25em',
 }

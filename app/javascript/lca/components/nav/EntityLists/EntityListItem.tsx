@@ -1,6 +1,6 @@
 import { ListItemText } from '@mui/material'
 
-import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
+import NavLinkListItem from '@/components/shared/wrappers/NavLinkListItem'
 
 interface Props {
   link: string

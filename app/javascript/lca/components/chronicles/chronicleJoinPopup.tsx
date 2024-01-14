@@ -1,19 +1,21 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItem from '@mui/material/ListItem'
-import TextField from '@mui/material/TextField'
-
 import GroupAdd from '@mui/icons-material/GroupAdd'
 
-import { joinChronicle } from 'ducks/actions'
+import { joinChronicle } from '@/ducks/actions'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  ListItemText,
+  ListItemIcon,
+  ListItem,
+  TextField,
+} from '@mui/material'
 
 interface Props {
   joinChronicle: Function

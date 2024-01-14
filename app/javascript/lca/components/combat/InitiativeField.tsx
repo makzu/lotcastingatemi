@@ -1,7 +1,7 @@
 import { Component, type SyntheticInputEvent } from 'react'
 
-import TextField from '@mui/material/TextField'
 import { withStyles } from '@mui/styles'
+import { TextField } from '@mui/material';
 
 const styles = (theme) => ({
   field: {

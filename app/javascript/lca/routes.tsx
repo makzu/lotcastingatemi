@@ -1,11 +1,12 @@
 import { Suspense, lazy } from 'react'
 import { Route, Routes as Switch } from 'react-router-dom'
 
-import Placeholder from 'components/generic/Placeholder'
-import WelcomePage from 'components/pages/WelcomePage'
-import PrivacyPage from 'components/pages/PrivacyPage'
-import GoodbyePage from 'components/pages/GoodbyePage'
-import SettingsPage from 'components/pages/SettingsPage'
+import Placeholder from '@/components/generic/Placeholder'
+import WelcomePage from '@/components/pages/WelcomePage'
+import PrivacyPage from '@/components/pages/PrivacyPage'
+import GoodbyePage from '@/components/pages/GoodbyePage'
+import SettingsPage from '@/components/pages/SettingsPage'
+import Test from '@/components/pages/Test'
 
 const ChronicleWrapper = lazy(
   () => import('components/chronicles/ChronicleWrapper'),
@@ -33,6 +34,7 @@ export default function Routes() {
   return (
     <Suspense fallback={<Placeholder />}>
       <Switch>
+        <Route path="/test" element={<Test />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/deleted" element={<GoodbyePage />} />
         <Route path="/resources" element={<ResourcesPage />} />
@@ -58,6 +60,12 @@ export default function Routes() {
         <Route path="/characters" element={<CharacterList />} />
         <Route path="/qcs" element={<QcList />} />
         <Route path="/battlegroups" element={<BattlegroupList />} />
+
+        {/* <Route path="/new-battlegroups/:id" element={<NewBattlegroupSheet />} />
+        <Route
+          path="/new-battlegroups/:id/edit"
+          element={<NewBattlegroupEditor />}
+        /> */}
 
         <Route path="/" element={<WelcomePage />} />
       </Switch>

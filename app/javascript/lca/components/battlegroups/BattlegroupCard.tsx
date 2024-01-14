@@ -3,28 +3,27 @@ import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
 import { compose } from 'redux'
 
-import DragHandleIcon from '@mui/icons-material/DragHandle'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { DragHandle, VisibilityOff } from '@mui/icons-material'
 import { Typography, type Theme } from '@mui/material'
 import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 
+import CardBase from '@/components/shared/CardBase'
 import {
   doIOwnBattlegroup,
   getSpecificBattlegroup,
 } from '@/ducks/entities/battlegroup'
 import { useAppSelector } from '@/hooks'
 import { type RootState } from '@/store'
-import CardBase from 'components/shared/CardBase'
-import sharedStyles from 'styles/'
-import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
-import type { Battlegroup, Enhancer } from 'utils/flow-types'
+import sharedStyles from '@/styles/'
+import { bgDefenseBonus, bgSoak, prettyDrillRating } from '@/utils/calculated'
+import type { Battlegroup, Enhancer } from '@/utils/flow-types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import PoolDisplay from '../generic/PoolDisplay'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 
 const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
+  <DragHandle onClick={(e) => e.preventDefault()} />
 ))
 
 const styles = (theme: Theme) => ({

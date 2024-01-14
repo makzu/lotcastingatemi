@@ -1,13 +1,13 @@
-import MenuItem from '@mui/material/MenuItem'
+import { MenuItem } from '@mui/material'
 
-import AbilitySelect from 'components/generic/abilitySelect'
+import AbilitySelect from '@/components/generic/abilitySelect'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
-import * as calc from 'utils/calculated'
-import type { withIntimacies as Character } from 'utils/flow-types'
+} from '@/components/generic/ListAttributeEditor'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import * as calc from '@/utils/calculated'
+import type { withIntimacies as Character } from '@/utils/flow-types'
 
 function SpecialtyFields(props: ListAttributeFieldTypes) {
   const { trait, character, onChange, classes } = props

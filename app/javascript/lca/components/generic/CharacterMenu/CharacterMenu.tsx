@@ -3,7 +3,7 @@ import { Divider, IconButton, Menu, type Theme } from '@mui/material'
 import type { WithStyles } from '@mui/styles'
 import withStyles from '@mui/styles/withStyles'
 
-import { useMenuLogic } from 'hooks'
+import { useMenuLogic } from '@/hooks'
 import type { CharacterType } from './CharacterMenuItem'
 import MenuBattlegroupFromQc from './MenuBattlegroupFromQc'
 import MenuChangeExaltType from './MenuChangeExaltType'

@@ -1,7 +1,8 @@
-import type { WrappedEntityState } from 'ducks/entities/_types'
 import createCachedSelector from 're-reselect'
-import type { Charm, Spell } from 'types'
-import { isDefined, sortOrderSort } from 'utils'
+
+import type { WrappedEntityState } from '@/ducks/entities/_types'
+import type { Charm, Spell } from '@/types'
+import { isDefined, sortOrderSort } from '@/utils'
 import { entities } from './entities'
 
 import { getSpecificCharacter } from '@/ducks/entities/character'

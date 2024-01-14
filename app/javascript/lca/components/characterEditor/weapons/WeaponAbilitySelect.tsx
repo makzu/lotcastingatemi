@@ -2,7 +2,7 @@ import { ListSubheader, MenuItem, TextField } from '@mui/material/'
 import type { TextFieldProps } from '@mui/material/TextField'
 import makeStyles from '@mui/styles/makeStyles'
 
-import type { Character, Weapon } from 'types'
+import type { Character, Weapon } from '@/types'
 import * as calc from '@/utils/calculated'
 
 const useStyles = makeStyles((theme) => ({

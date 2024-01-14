@@ -1,14 +1,10 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-
-import MoteCommittmentEditor from 'components/characterEditor/editors/moteCommittmentEditor'
-import { updateCharacter, updateQc } from 'ducks/actions'
-import type { withMotePool, Enhancer } from 'utils/flow-types'
+import MoteCommittmentEditor from '@/components/characterEditor/editors/moteCommittmentEditor'
+import { updateCharacter, updateQc } from '@/ducks/actions'
+import type { withMotePool, Enhancer } from '@/utils/flow-types'
+import { Button, Dialog, DialogActions, DialogContent } from '@mui/material'
 interface ExposedProps {
   character: withMotePool & {
     id: number

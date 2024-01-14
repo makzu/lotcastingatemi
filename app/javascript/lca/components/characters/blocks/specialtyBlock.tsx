@@ -1,11 +1,11 @@
 import { Fragment } from 'react'
 
 import withStyles from '@mui/styles/withStyles'
-import Divider from '@mui/material/Divider'
-import Typography from '@mui/material/Typography'
 
-import BlockPaper from 'components/shared/BlockPaper'
-import type { withSpecialties } from 'utils/flow-types'
+import BlockPaper from '@/components/shared/BlockPaper'
+import type { withSpecialties } from '@/utils/flow-types'
+
+import { Divider, Typography } from '@mui/material'
 
 const styles = (theme) => ({
   specialtyWrap: {

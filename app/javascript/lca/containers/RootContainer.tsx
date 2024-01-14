@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import { useDocumentTitle } from 'hooks'
+import { useDocumentTitle } from '@/hooks'
 import Routes from '../routes'
 import App from './App'
 import ThemeContainer from './ThemeContainer'

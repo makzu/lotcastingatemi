@@ -1,22 +1,25 @@
 import type { PaletteMode } from '@mui/material'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import Divider from '@mui/material/Divider'
-import MenuItem from '@mui/material/MenuItem'
-import MuiTextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
 
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import { destroyAccount, updatePlayer } from 'ducks/actions'
-import { getCurrentPlayer } from 'ducks/entities'
+import { destroyAccount, updatePlayer } from '@/ducks/actions'
+import { getCurrentPlayer } from '@/ducks/entities'
 import { switchTheme } from 'features/themeSlice'
-import { useAppDispatch, useAppSelector, useDialogLogic } from 'hooks'
+import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
+  MenuItem,
+  TextField as MuiTextField,
+  Typography,
+} from '@mui/material'
 
 const ThemeSelect = () => {
   const currentTheme = useAppSelector((state) => state.theme)

@@ -1,4 +1,4 @@
-import type { Character as TSCharacter } from 'types'
+import type { Character as TSCharacter } from '@/types'
 
 export interface withAttributes {
   attr_strength: number
@@ -72,5 +72,5 @@ export interface form {
   qc_id: number
 }
 
-/** @deprecated use Character from 'types' instead */
+/** @deprecated use Character from '@/types' instead */
 export type Character = TSCharacter

@@ -1,19 +1,21 @@
 import { Component, type ReactNode } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import ButtonBase from '@mui/material/ButtonBase'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-
-import { spendWillpower } from 'ducks/actions'
-import { canIEditCharacter, canIEditQc } from 'selectors'
-import { clamp } from 'utils'
-import type { Enhancer, withWillpower } from 'utils/flow-types'
+import { spendWillpower } from '@/ducks/actions'
+import { canIEditCharacter, canIEditQc } from '@/selectors'
+import { clamp } from '@/utils'
+import type { Enhancer, withWillpower } from '@/utils/flow-types'
 import RatingField from './RatingField'
 import ResourceDisplay from './ResourceDisplay'
+
+import {
+  Button,
+  ButtonBase,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material'
 
 interface ExposedProps {
   children: ReactNode

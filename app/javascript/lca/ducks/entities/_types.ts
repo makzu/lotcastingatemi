@@ -9,7 +9,7 @@ import type {
   QC,
   Spell,
   Weapon,
-} from 'types'
+} from '@/types'
 
 export interface EntityState {
   currentPlayer: number

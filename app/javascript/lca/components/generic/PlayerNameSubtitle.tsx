@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 
-import Typography from '@mui/material/Typography'
+import { getSpecificPlayer } from '@/selectors'
 
-import { getSpecificPlayer } from 'selectors'
 import type { RootState } from 'store'
+import { Typography } from '@mui/material'
 
 interface ExposedProps {
   playerId: number

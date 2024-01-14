@@ -2,17 +2,21 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer } from 'react-sortable-hoc'
 
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import QcAttackFields from './qcAttackFields'
-import { createQcAttack, destroyQcAttack, updateQcAttack } from 'ducks/actions'
-import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
-import type { QcAttack, Enhancer } from 'utils/flow-types'
-import SortableItem from 'components/generic/SortableItem'
+import {
+  createQcAttack,
+  destroyQcAttack,
+  updateQcAttack,
+} from '@/ducks/actions'
+import { getAttacksForBattlegroup, getAttacksForQc } from '@/selectors'
+import type { QcAttack, Enhancer } from '@/utils/flow-types'
+import SortableItem from '@/components/generic/SortableItem'
 import type { RootState } from 'store'
-import type { Battlegroup, QC } from 'types'
+import type { Battlegroup, QC } from '@/types'
+
+import { Button, Typography } from '@mui/material'
 
 // @ts-expect-error New dnd library should fix this
 const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)

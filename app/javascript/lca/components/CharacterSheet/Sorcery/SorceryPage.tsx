@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 
-import { useCharacterAttribute } from 'ducks/entities'
-import { useDocumentTitle, useIdFromParams } from 'hooks'
+import { useCharacterAttribute } from '@/ducks/entities'
+import { useDocumentTitle, useIdFromParams } from '@/hooks'
 import CharacterLoadError from '../CharacterLoadError'
 import SpellList from './SpellList'
 

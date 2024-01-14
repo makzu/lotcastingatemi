@@ -1,6 +1,4 @@
-import type * as React from 'react'
-
-import type { Battlegroup as TSBattlegroup } from 'types/battlegroup'
+import type { Battlegroup as TSBattlegroup } from '@/types/battlegroup'
 export * from './character'
 export * from './pool'
 export * from './qc'
@@ -10,7 +8,7 @@ export type Enhancer<P, EP> = (
   component: React.ComponentType<P>,
 ) => React.ComponentType<EP>
 
-/** @deprecated use Battlegroup from 'types' instead */
+/** @deprecated use Battlegroup from '@/types' instead */
 export type Battlegroup = TSBattlegroup
 
 export type CombatActor = unknown

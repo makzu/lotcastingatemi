@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 
 import { Grid } from '@mui/material'
-import { type State } from 'ducks'
-import { getCharmsForCharacterByType } from 'ducks/entities'
-import { type Charm } from 'types'
+import { type State } from '@/ducks'
+import { getCharmsForCharacterByType } from '@/ducks/entities'
+import { type Charm } from '@/types'
 import FullCharmDisplay from './CharmDisplay/FullCharm'
 import { type CharmFilter, filterCharms } from './useCharmFilters'
 

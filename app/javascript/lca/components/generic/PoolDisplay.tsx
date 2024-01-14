@@ -1,14 +1,18 @@
 import { Component } from 'react'
 
-import type { Pool } from 'utils/flow-types'
+import type { Pool } from '@/utils/flow-types'
 
-import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import withStyles from '@mui/styles/withStyles'
-import { createStyles, type Theme } from '@mui/material/styles'
+import { type Theme } from '@mui/material/styles'
 import AttackTagsDisplay from './AttackTagsDisplay'
+
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  createStyles,
+} from '@mui/material'
 
 const styles = (theme: Theme) =>
   createStyles({

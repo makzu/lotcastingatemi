@@ -1,6 +1,6 @@
-import ListSubheader from '@mui/material/ListSubheader'
-import MenuItem from '@mui/material/MenuItem'
-import TextField, { type TextFieldProps } from '@mui/material/TextField'
+import { type TextFieldProps } from '@mui/material/TextField';
+
+import { ListSubheader, MenuItem, TextField } from '@mui/material';
 
 const SiderealCasteSelect = (props: TextFieldProps) => (
   <TextField

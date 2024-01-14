@@ -1,5 +1,5 @@
 import { type Theme, createStyles } from '@mui/styles'
-import commonStyles from 'styles'
+import commonStyles from '@/styles'
 
 const styles = (theme: Theme) =>
   createStyles({

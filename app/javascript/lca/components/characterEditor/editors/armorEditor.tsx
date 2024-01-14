@@ -1,15 +1,13 @@
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Typography from '@mui/material/Typography'
+import { Checkbox, FormControlLabel, Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
-import PoolDisplay from 'components/generic/PoolDisplay'
-import RatingField from 'components/generic/RatingField'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
-import WeightSelect from 'components/shared/selects/WeightSelect'
-import type { withArmorStats as Character } from 'utils/flow-types'
+import PoolDisplay from '@/components/generic/PoolDisplay'
+import RatingField from '@/components/generic/RatingField'
+import TagsField from '@/components/generic/TagsField'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import WeightSelect from '@/components/shared/selects/WeightSelect'
+import type { withArmorStats as Character } from '@/utils/flow-types'
 
 const styles = (theme) => ({
   container: {

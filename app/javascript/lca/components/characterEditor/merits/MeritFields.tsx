@@ -2,22 +2,26 @@ import { deepEqual } from 'fast-equals'
 import { Component, type SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
-import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import MenuItem from '@mui/material/MenuItem'
-import MuiTextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
 import Delete from '@mui/icons-material/Delete'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 
 import MeritEffectBlurb from './MeritEffectBlurb'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants'
-import type { fullMerit as Merit } from 'utils/flow-types'
+import { MERIT_RATING_MIN, MERIT_RATING_MAX } from '@/utils/constants'
+import type { fullMerit as Merit } from '@/utils/flow-types'
+
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  TextField as MuiTextField,
+  Typography,
+} from '@mui/material'
+
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))

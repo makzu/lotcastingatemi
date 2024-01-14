@@ -1,7 +1,6 @@
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
-
 import AnimaDisplay from '../generic/AnimaDisplay'
+
 import AuraDisplay from '../generic/AuraDisplay'
 import DamageWidget from '../generic/DamageWidget'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes'
@@ -9,10 +8,11 @@ import MoteSpendWidget from '../generic/MoteSpendWidget'
 import ResourceDisplay from '../generic/ResourceDisplay'
 import ShapeSorceryWidget from '../generic/ShapeSorceryWidget'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget'
-import sharedStyles from 'styles/'
-import * as calc from 'utils/calculated'
-import type { WithSharedStats } from 'types/shared'
-import type { WithId } from 'types/_lib'
+import sharedStyles from '@/styles/'
+import * as calc from '@/utils/calculated'
+import type { WithSharedStats } from '@/types/shared'
+import type { WithId } from '@/types/_lib'
+import { Typography } from '@mui/material'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

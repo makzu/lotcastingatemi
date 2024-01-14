@@ -1,14 +1,14 @@
-import Checkbox from 'components/shared/inputs/Checkbox'
+import Checkbox from '@/components/shared/inputs/Checkbox'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
+} from '@/components/generic/ListAttributeEditor'
 import RatingField from './RatingField'
-import TextField from 'components/generic/TextField'
+import TextField from '@/components/generic/TextField'
 import {
   INTIMACY_RATING_MAX as MAX,
   INTIMACY_RATING_MIN as MIN,
-} from 'utils/constants'
-import type { withIntimacies } from 'utils/flow-types'
+} from '@/utils/constants'
+import type { withIntimacies } from '@/utils/flow-types'
 
 function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
   const { subject, rating, hidden } = trait

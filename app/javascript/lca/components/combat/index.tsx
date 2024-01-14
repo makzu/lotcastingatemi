@@ -3,20 +3,15 @@ import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
-
 import CharacterCard from './CharacterCombatCard'
 import QcCard from './QcCombatCard'
 import BattlegroupCard from './BattlegroupCombatCard'
 import OutOfCombatCard from './OutOfCombatCard'
-import BlockPaper from 'components/shared/BlockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { nextRound, endCombat } from 'ducks/events'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import { nextRound, endCombat } from '@/ducks/events'
 import {
   getSpecificChronicle,
   getPlayersForChronicle,
@@ -25,14 +20,16 @@ import {
   getBattlegroupsForChronicle,
   getStorytellerForChronicle,
   amIStOfChronicle,
-} from 'selectors'
+} from '@/selectors'
 import type {
   Player,
   Character,
   fullQc,
   Battlegroup,
   Chronicle,
-} from 'utils/flow-types'
+} from '@/utils/flow-types'
+
+import { Button, Grid, Hidden, Typography } from '@mui/material'
 
 function initiativeSort(a, b) {
   if (a.initiative > b.initiative) {

@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react'
 
-import { Drawer, type Theme } from '@mui/material'
-import useMediaQuery from '@mui/material/useMediaQuery'
+import { Drawer, type Theme, useMediaQuery } from '@mui/material'
 import { makeStyles, useTheme } from '@mui/styles'
 
-import { drawerWidth } from 'containers/_drawerProperties'
+import { drawerWidth } from '@/containers/_drawerProperties'
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {

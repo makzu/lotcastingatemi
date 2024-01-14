@@ -1,5 +1,5 @@
 import { SortableContainer } from 'react-sortable-hoc'
-import Grid from '@mui/material/Grid'
+import { Grid } from '@mui/material';
 
 const SortableGridList = SortableContainer(({ header, items, classes }) => (
   <Grid container spacing={3}>

@@ -2,20 +2,20 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import withStyles from '@mui/styles/withStyles'
-import Divider from '@mui/material/Divider'
-import Typography from '@mui/material/Typography'
 import Launch from '@mui/icons-material/Launch'
 
-import BlockPaper from 'components/shared/BlockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
 import {
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter,
   getSpiritCharmsForCharacter,
   getSpellsForCharacter,
-} from 'selectors'
-import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
+} from '@/selectors'
+import type { Character, Charm, Spell, Enhancer } from '@/utils/flow-types'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+
+import { Divider, Typography } from '@mui/material'
 
 const styles = (theme) => ({
   root: {

@@ -1,11 +1,10 @@
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
-import RatingField from 'components/generic/RatingField'
-import BlockPaper from 'components/shared/BlockPaper'
-
-import { ATTRIBUTE_MAX as MAX, ATTRIBUTE_MIN as MIN } from 'utils/constants'
-import type { withAttributes as Character } from 'utils/flow-types'
+import RatingField from '@/components/generic/RatingField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import { ATTRIBUTE_MAX as MAX, ATTRIBUTE_MIN as MIN } from '@/utils/constants'
+import type { withAttributes as Character } from '@/utils/flow-types'
 
 const styles = (theme) => ({
   fieldSet: {

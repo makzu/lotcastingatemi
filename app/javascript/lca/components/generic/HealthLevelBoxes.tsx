@@ -8,7 +8,7 @@ import EmptyIcon from '@/icons/health-level-empty.svg?react'
 import LethalIcon from '@/icons/health-level-lethal.svg?react'
 import type { damageType } from '@/types'
 import type { WithSharedStats } from '@/types/shared'
-import * as calc from 'utils/calculated'
+import * as calc from '@/utils/calculated'
 
 const HLBox = ({
   type,

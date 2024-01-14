@@ -1,7 +1,7 @@
 import createCachedSelector from 're-reselect'
 
 import type { RootState } from 'store'
-import { isDefined, sortOrderSort } from 'utils'
+import { isDefined, sortOrderSort } from '@/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificCharacter } from './character'

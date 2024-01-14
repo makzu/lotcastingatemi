@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 
-import BlockPaper from 'components/shared/BlockPaper'
-import MarkdownDisplay from 'components/shared/MarkdownDisplay'
+import BlockPaper from '@/components/shared/BlockPaper'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
 
 import IndexDoc from 'Docs/README.md?raw'
 import WeaponsDoc from 'Docs/weapons.md?raw'

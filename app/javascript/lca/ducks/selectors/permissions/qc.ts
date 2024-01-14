@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
-import { unwrapped } from 'ducks/entities/_lib'
-import { getCurrentPlayer } from 'ducks/entities/player'
-import { getSpecificQc } from 'ducks/entities/qc'
+import { unwrapped } from '@/ducks/entities/_lib'
+import { getCurrentPlayer } from '@/ducks/entities/player'
+import { getSpecificQc } from '@/ducks/entities/qc'
 
 const doIOwnQc = createSelector(
   [getCurrentPlayer, getSpecificQc],

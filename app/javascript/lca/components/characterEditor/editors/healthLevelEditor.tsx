@@ -1,10 +1,10 @@
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
-import HealthLevelBoxes from 'components/generic/HealthLevelBoxes'
-import RatingField from 'components/generic/RatingField'
-import BlockPaper from 'components/shared/BlockPaper'
 import type { Character } from '@/types'
+import HealthLevelBoxes from '@/components/generic/HealthLevelBoxes'
+import RatingField from '@/components/generic/RatingField'
+import BlockPaper from '@/components/shared/BlockPaper'
 
 const styles = (theme) => ({
   subheading: {

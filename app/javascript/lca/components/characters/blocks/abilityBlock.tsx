@@ -1,17 +1,17 @@
 import withStyles from '@mui/styles/withStyles'
-import Divider from '@mui/material/Divider'
-import Typography from '@mui/material/Typography'
 
-import RatingLine from 'components/generic/ratingLine'
+import RatingLine from '@/components/generic/ratingLine'
 import type { Character } from '@/types'
-import BlockPaper from 'components/shared/BlockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
 
 import {
   isCasteAbility,
   isFavoredAbility,
   isSupernalAbility,
-} from 'utils/calculated'
-import { ABILITY_NAMES } from 'utils/constants'
+} from '@/utils/calculated'
+import { ABILITY_NAMES } from '@/utils/constants'
+
+import { Divider, Typography } from '@mui/material'
 
 const styles = (theme) => ({
   abilityName: {

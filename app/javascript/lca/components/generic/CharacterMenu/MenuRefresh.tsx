@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Refresh } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import { fetch } from 'ducks/actions/ByType'
+import { fetch } from '@/ducks/actions/ByType'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface DispatchProps {

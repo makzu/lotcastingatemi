@@ -1,8 +1,6 @@
 import { PureComponent, type SyntheticEvent } from 'react'
 
-import Button from '@mui/material/Button'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
+import { Button, Menu, MenuItem } from '@mui/material';
 
 class CanonExcellencyCopier extends PureComponent<
   { onChangeMulti: $TSFixMeFunction },

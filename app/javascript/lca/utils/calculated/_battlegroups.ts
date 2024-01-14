@@ -1,5 +1,5 @@
 /* See Core, p. 205 - 211 */
-import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import type { Battlegroup, QcAttack } from '@/utils/flow-types'
 
 export function bgAttackPool(battlegroup: Battlegroup, qc_attack: QcAttack) {
   return qc_attack.pool + battlegroup.size + battlegroup.might

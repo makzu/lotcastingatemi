@@ -2,24 +2,26 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import Button from '@mui/material/Button'
-import ButtonBase from '@mui/material/ButtonBase'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import Typography from '@mui/material/Typography'
+import {
+  Button,
+  ButtonBase,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Typography,
+} from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
+import { updateBattlegroup as update } from '@/ducks/actions'
+import { canIEditBattlegroup } from '@/ducks/entities/battlegroup'
+import sharedStyles from '@/styles/'
+import { totalMagnitude } from '@/utils/calculated'
+import type { Battlegroup } from '@/utils/flow-types'
 import PoolDisplay from '../generic/PoolDisplay'
 import RatingField from '../generic/RatingField'
 import ResourceDisplay from '../generic/ResourceDisplay'
-import sharedStyles from 'styles/'
-import { updateBattlegroup as update } from 'ducks/actions'
-import { canIEditBattlegroup } from '@/ducks/entities/battlegroup'
-import { totalMagnitude } from 'utils/calculated'
-import type { Battlegroup } from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

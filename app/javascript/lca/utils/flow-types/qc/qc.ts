@@ -1,7 +1,7 @@
-import type { QC } from 'types'
-import type { Timing } from 'types/_lib'
+import type { QC } from '@/types'
+import type { Timing } from '@/types/_lib'
 
-/** @deprecated Use QC from 'types' instead */
+/** @deprecated Use QC from '@/types' instead */
 export type fullQc = QC
 
 interface QcTrait {

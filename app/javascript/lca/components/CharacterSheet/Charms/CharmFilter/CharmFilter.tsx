@@ -4,16 +4,16 @@ import { connect } from 'react-redux'
 import { Button, MenuItem, Switch, TextField, Typography } from '@mui/material'
 
 import { makeStyles } from '@mui/styles'
-import Checkbox from 'components/shared/inputs/Checkbox'
-import ResponsiveFilterDrawer from 'components/shared/ResponsiveFilterDrawer'
-import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
+import Checkbox from '@/components/shared/inputs/Checkbox'
+import ResponsiveFilterDrawer from '@/components/shared/ResponsiveFilterDrawer'
+import CharmTimingSelect from '@/components/shared/selects/CharmTimingSelect'
 import {
   getAllAbilitiesWithCharmsForCharacter,
   getAllCharmKeywordsForCharacter,
-} from 'ducks/entities'
-import { getAllCharmCategoriesForCharacter } from 'selectors'
-import { useDialogLogic } from 'hooks'
-import type { Charm } from 'types'
+} from '@/ducks/entities'
+import { getAllCharmCategoriesForCharacter } from '@/selectors'
+import { useDialogLogic } from '@/hooks'
+import type { Charm } from '@/types'
 import type { CharmFilter, CharmFilterAction } from '../useCharmFilters'
 import type { RootState } from 'store'
 

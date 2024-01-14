@@ -1,10 +1,10 @@
 import { Typography } from '@mui/material'
 
-import MarkdownDisplay from 'components/shared/MarkdownDisplay'
-import RatingLine from 'components/generic/ratingLine'
-import BlockPaper from 'components/shared/BlockPaper'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+import RatingLine from '@/components/generic/ratingLine'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import type { Merit } from 'types'
+import type { Merit } from '@/types'
 
 const SingleMerit = ({ merit }: { merit: Merit }) => (
   <BlockPaper>

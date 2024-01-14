@@ -1,15 +1,15 @@
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
 
+import type { Character } from '@/types'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
-import commonStyles from 'styles'
-import { solarXpName, spentBp, spentSolarXp, spentXp } from 'utils/calculated'
-import type { Character } from '@/types'
+} from '@/components/generic/ListAttributeEditor'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import commonStyles from '@/styles'
+import { solarXpName, spentBp, spentSolarXp, spentXp } from '@/utils/calculated'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

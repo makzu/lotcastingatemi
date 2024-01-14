@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { GroupAdd } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material/'
 
-import { createBattlegroupFromQc } from 'ducks/actions'
+import { createBattlegroupFromQc } from '@/ducks/actions'
 import type { RootState } from 'store'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 

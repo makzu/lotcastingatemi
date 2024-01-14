@@ -1,11 +1,11 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
+import { updateCharacter, updateQc, updateBattlegroup } from '@/ducks/actions'
 
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
-import { canIEdit } from 'selectors'
-import type { withCombatInfo, Enhancer } from 'utils/flow-types'
+import { canIEdit } from '@/selectors'
+import type { withCombatInfo, Enhancer } from '@/utils/flow-types'
+import { Button } from '@mui/material'
 interface ExposedProps {
   character: withCombatInfo & {
     id: number

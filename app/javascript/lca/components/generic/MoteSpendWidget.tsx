@@ -14,15 +14,15 @@ import {
   Typography,
 } from '@mui/material'
 
-import { spendMotes } from 'ducks/actions'
-import { canIEditCharacter, canIEditQc } from 'selectors'
+import { spendMotes } from '@/ducks/actions'
+import { canIEditCharacter, canIEditQc } from '@/selectors'
 import type { RootState } from 'store'
-import { clamp } from 'utils'
+import { clamp } from '@/utils'
 import {
   committedPeripheralMotes,
   committedPersonalMotes,
   prettyAnimaLevel,
-} from 'utils/calculated'
+} from '@/utils/calculated'
 import MoteCommittmentPopup from './MoteCommittmentPopup'
 import RatingField from './RatingField'
 import ResourceDisplay from './ResourceDisplay'

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 import { type RootState } from '@/store'
-import { getMyCharacters, getMyQcs, type EntityState } from 'ducks/entities'
+import { getMyCharacters, getMyQcs, type EntityState } from '@/ducks/entities'
 
 export const entities = (state: RootState): EntityState =>
   state.entities.current

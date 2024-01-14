@@ -1,6 +1,6 @@
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import type { WithSharedStats } from 'types/shared'
+import type { WithSharedStats } from '@/types/shared'
+
+import { MenuItem, TextField } from '@mui/material'
 
 interface Props {
   character: WithSharedStats

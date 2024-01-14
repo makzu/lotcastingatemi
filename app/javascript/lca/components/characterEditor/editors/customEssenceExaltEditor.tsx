@@ -1,12 +1,10 @@
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import Typography from '@mui/material/Typography'
+import { FormControlLabel, Switch, Typography } from '@mui/material'
 
-import ExcellencyEditor from '../excellencies/'
-import AbilitySelect from 'components/generic/abilitySelect'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
 import type { Character } from '@/types'
+import TextField from '@/components/generic/TextField'
+import AbilitySelect from '@/components/generic/abilitySelect'
+import BlockPaper from '@/components/shared/BlockPaper'
+import ExcellencyEditor from '../excellencies/'
 
 interface Props {
   character: Character

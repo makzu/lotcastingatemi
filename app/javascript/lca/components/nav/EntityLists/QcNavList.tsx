@@ -1,8 +1,8 @@
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
-import { getMyPinnedQcs, getMyQcs } from 'ducks/entities'
-import { useAppSelector } from 'hooks'
-import type { QC } from 'types'
+import { getMyPinnedQcs, getMyQcs } from '@/ducks/entities'
+import { useAppSelector } from '@/hooks'
+import type { QC } from '@/types'
 
 const mapQcToListItem = (qc: QC) => (
   <EntityListItem key={qc.id} link={`/qcs/${qc.id}`} name={qc.name} />

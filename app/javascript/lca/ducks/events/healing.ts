@@ -1,5 +1,5 @@
-import { woundPenalty } from 'utils/calculated'
-import type { Character, fullQc } from 'utils/flow-types'
+import { woundPenalty } from '@/utils/calculated'
+import type { Character, fullQc } from '@/utils/flow-types'
 
 const timeInHours = (time: string): number => {
   switch (time) {

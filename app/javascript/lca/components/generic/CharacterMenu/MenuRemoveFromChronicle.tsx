@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import RemoveCircle from '@mui/icons-material/RemoveCircle'
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import type { State } from 'ducks'
-import { removeThingFromChronicle as removeThing } from 'ducks/actions'
+import type { State } from '@/ducks'
+import { removeThingFromChronicle as removeThing } from '@/ducks/actions'
 import { canIEdit } from '@/selectors'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 

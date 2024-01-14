@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 import { Button, Grid, Typography } from '@mui/material'
 
-import SortableGridList from 'components/generic/SortableGridList'
+import SortableGridList from '@/components/generic/SortableGridList'
 
-import Checkbox from 'components/shared/inputs/Checkbox'
-import { createSpell, destroySpell, updateSpell } from 'ducks/actions'
-import { getSpellsForQc } from 'ducks/selectors'
-import { useAppDispatch } from 'hooks'
+import Checkbox from '@/components/shared/inputs/Checkbox'
+import { createSpell, destroySpell, updateSpell } from '@/ducks/actions'
+import { getSpellsForQc } from '@/ducks/selectors'
+import { useAppDispatch } from '@/hooks'
 import type { AppDispatch, RootState } from 'store'
-import type { QC, Spell } from 'types'
+import type { QC, Spell } from '@/types'
 import QcSpellFields from './QcSpellFields'
-import SortableItem from 'components/generic/SortableItem'
+import SortableItem from '@/components/generic/SortableItem'
 
 interface StateProps {
   spells: Spell[]

@@ -7,15 +7,15 @@ import { Grid, Hidden, Typography } from '@mui/material'
 
 import XpEditor from './editors/xpEditor'
 import AnimalFormsEditor from './editors/AnimalFormsEditor'
-import DocumentTitle from 'components/generic/DocumentTitle'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
+import DocumentTitle from '@/components/generic/DocumentTitle'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { updateCharacter } from 'ducks/actions'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import { updateCharacter } from '@/ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
-import { showLunarTraits } from 'utils/calculated'
+import { showLunarTraits } from '@/utils/calculated'
 import type { Character } from '@/types'
 
 interface Props {

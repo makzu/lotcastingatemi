@@ -1,10 +1,10 @@
 import { Component } from 'react'
 
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 
-import Editor from 'components/generic/intimacyEditor'
-import BlockPaper from 'components/shared/BlockPaper'
-import type { withIntimacies as Character } from 'utils/flow-types'
+import Editor from '@/components/generic/intimacyEditor'
+import BlockPaper from '@/components/shared/BlockPaper'
+import type { withIntimacies as Character } from '@/utils/flow-types'
 
 interface Props {
   character: Character

@@ -1,15 +1,18 @@
 import { Component, type SyntheticInputEvent } from 'react'
 import { connect } from 'react-redux'
 
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from '@mui/material'
 
-import { createBattlegroup } from 'ducks/actions'
-import type { Enhancer } from 'utils/flow-types'
+import { createBattlegroup } from '@/ducks/actions'
+import type { Enhancer } from '@/utils/flow-types'
+
 interface Props {
   createBattlegroup: $TSFixMeFunction
 }

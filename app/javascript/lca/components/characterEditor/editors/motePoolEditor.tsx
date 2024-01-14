@@ -1,18 +1,17 @@
+import { Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
 
-import MoteCommittmentEditor from './moteCommittmentEditor'
-import AnimaSelect from 'components/generic/AnimaSelect'
-import RatingField from 'components/generic/RatingField'
-import BlockPaper from 'components/shared/BlockPaper'
-import AuraSelect from 'components/shared/selects/AuraSelect'
-import commonStyles from 'styles'
+import AnimaSelect from '@/components/generic/AnimaSelect'
+import RatingField from '@/components/generic/RatingField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import AuraSelect from '@/components/shared/selects/AuraSelect'
+import commonStyles from '@/styles'
 import {
-  committedPersonalMotes,
   committedPeripheralMotes,
+  committedPersonalMotes,
   showAuraTraits,
-} from 'utils/calculated'
-import { Character } from '@/types'
+} from '@/utils/calculated'
+import MoteCommittmentEditor from './moteCommittmentEditor'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

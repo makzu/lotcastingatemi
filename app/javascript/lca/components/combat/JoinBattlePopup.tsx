@@ -3,18 +3,26 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
 
-import PoolDisplay from 'components/generic/PoolDisplay'
-import RatingField from 'components/generic/RatingField'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
-import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
-import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
+import PoolDisplay from '@/components/generic/PoolDisplay'
+import RatingField from '@/components/generic/RatingField'
+import { updateCharacter, updateQc, updateBattlegroup } from '@/ducks/actions'
+import { getPoolsAndRatingsGeneric, canIEdit } from '@/selectors'
+import type {
+  Character,
+  fullQc,
+  Battlegroup,
+  Enhancer,
+} from '@/utils/flow-types'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material'
 
 const styles = (theme) => ({
   wrap: {

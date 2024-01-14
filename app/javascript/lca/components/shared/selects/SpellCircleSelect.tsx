@@ -1,7 +1,7 @@
 import { MenuItem, TextField } from '@mui/material'
 import type { TextFieldProps } from '@mui/material/TextField'
 
-import type { Spell } from 'types'
+import type { Spell } from '@/types'
 
 interface Props extends Pick<TextFieldProps, 'onChange' | 'margin'> {
   spell: Spell

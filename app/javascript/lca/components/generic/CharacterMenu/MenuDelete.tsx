@@ -14,9 +14,9 @@ import {
   Typography,
 } from '@mui/material'
 
-import type { State } from 'ducks'
-import { destroy } from 'ducks/actions/ByType'
-import { useDialogLogic } from 'hooks'
+import type { State } from '@/ducks'
+import { destroy } from '@/ducks/actions/ByType'
+import { useDialogLogic } from '@/hooks'
 import { canIDelete } from '@/selectors'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 

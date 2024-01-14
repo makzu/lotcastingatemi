@@ -1,16 +1,18 @@
 import { useEffect, useMemo, type PropsWithChildren } from 'react'
 
-import { GlobalStyles, useMediaQuery } from '@mui/material'
-import { green, lightGreen as lightgreen, teal } from '@mui/material/colors'
 import {
+  GlobalStyles,
+  useMediaQuery,
+  green,
+  teal,
   createTheme,
-  StyledEngineProvider,
   ThemeProvider,
-  type Theme,
-} from '@mui/material/styles'
+} from '@mui/material'
+import { lightGreen as lightgreen } from '@mui/material/colors'
+import { StyledEngineProvider, type Theme } from '@mui/material/styles'
 
 import { switchTheme } from 'features/themeSlice'
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

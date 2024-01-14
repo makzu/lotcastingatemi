@@ -1,19 +1,22 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import Typography from '@mui/material/Typography'
+import RatingField from '@/components/generic/RatingField'
+import { downtime } from '@/ducks/events'
 
-import RatingField from 'components/generic/RatingField'
-import { downtime } from 'ducks/events'
+import {
+  Button,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControlLabel,
+  Switch,
+  Typography,
+} from '@mui/material'
+
 interface Props {
   id: number
   downtime: $TSFixMeFunction

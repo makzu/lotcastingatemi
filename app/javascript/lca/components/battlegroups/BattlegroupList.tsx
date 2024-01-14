@@ -1,12 +1,12 @@
 import { Grid, Typography } from '@mui/material'
 
-import BattlegroupCard from 'components/battlegroups/BattlegroupCard'
-import BattlegroupCreatePopup from 'components/battlegroups/battlegroupCreatePopup'
-import SortableGridList from 'components/generic/SortableGridList'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getMyBattlegroups, updateBattlegroup } from 'ducks/entities'
-import SortableItem from 'components/generic/SortableItem'
-import { useAppSelector, useAppDispatch, useDocumentTitle } from 'hooks'
+import BattlegroupCard from '@/components/battlegroups/BattlegroupCard'
+import BattlegroupCreatePopup from '@/components/battlegroups/battlegroupCreatePopup'
+import SortableGridList from '@/components/generic/SortableGridList'
+import SortableItem from '@/components/generic/SortableItem'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import { getMyBattlegroups, updateBattlegroup } from '@/ducks/entities'
+import { useAppDispatch, useAppSelector, useDocumentTitle } from '@/hooks'
 
 const BattlegroupList = () => {
   useDocumentTitle('Battlegroups | Lot-Casting Atemi')

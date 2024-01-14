@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import { AppBar, Toolbar, Typography } from '@mui/material'
 
-import { drawerWidth } from 'containers/_drawerProperties'
+import { drawerWidth } from '@/containers/_drawerProperties'
 import BattlegroupHeader from './BattlegroupHeader'
 import CharacterHeader from './CharacterHeader'
 import ChronicleHeader from './ChronicleHeader'

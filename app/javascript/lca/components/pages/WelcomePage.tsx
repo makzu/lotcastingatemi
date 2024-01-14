@@ -1,8 +1,6 @@
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import BlockPaper from 'components/shared/BlockPaper'
+import { Grid, Hidden, Typography } from '@mui/material'
 
 const WelcomePage = () => (
   <Grid container spacing={3}>

@@ -4,22 +4,21 @@ import { SortableElement } from 'react-sortable-hoc'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
 import QcCharmFields from './qcCharmFields'
-import SortableGridList from 'components/generic/SortableGridList'
+import SortableGridList from '@/components/generic/SortableGridList'
 
-import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions'
-import { getCharmsForQc } from 'selectors'
-import commonStyles from 'styles'
-import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'
-import type { State } from 'ducks'
-import SortableItem from 'components/generic/SortableItem'
+import { createQcCharm, destroyQcCharm, updateQcCharm } from '@/ducks/actions'
+import { getCharmsForQc } from '@/selectors'
+import commonStyles from '@/styles'
+import type { fullQc, QcCharm, Enhancer } from '@/utils/flow-types'
+import type { State } from '@/ducks'
+import SortableItem from '@/components/generic/SortableItem'
 import { createStyles } from '@mui/styles'
 import type { Theme } from '@mui/material/styles'
+
+import { Button, Grid, Typography } from '@mui/material'
 
 const styles = (theme: Theme) => createStyles({ ...commonStyles(theme) })
 

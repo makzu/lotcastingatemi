@@ -1,11 +1,10 @@
-import Typography from '@mui/material/Typography'
-
-import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
-import AbilitySelect from 'components/generic/abilitySelect'
-import BlockPaper from 'components/shared/BlockPaper'
+import { Typography } from '@mui/material'
 
 import { nonCasteAbilities } from '@/utils/calculated'
-import type { Character } from 'types'
+import AbilitySelect from '@/components/generic/abilitySelect'
+import BlockPaper from '@/components/shared/BlockPaper'
+import type { Character } from '@/types'
+import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
 
 interface Props {
   character: Character
@@ -15,7 +14,6 @@ function SiderealExaltEditor({ character, onChange }: Props) {
   const caste_abilities = character.caste_abilities || []
 
   return (
-    // @ts-expect-error I suspect the MUI v5 migration will fix this
     <BlockPaper>
       <SiderealCasteSelect value={character.caste} onChange={onChange} />
 

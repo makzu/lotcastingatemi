@@ -1,6 +1,6 @@
-import Typography from '@mui/material/Typography'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import BlockPaper from 'components/shared/BlockPaper'
+import { Typography } from '@mui/material'
 
 const PrivacyPage = () => (
   <BlockPaper>

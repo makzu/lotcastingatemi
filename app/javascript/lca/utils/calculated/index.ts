@@ -3,11 +3,18 @@ export * from './_qcs'
 export * from './excellencies/index'
 export * from './pools'
 export * from './pretty'
+export * from './pretty.js'
 export * from './ratings'
 export * from './weapons'
-export * from './pretty.js'
 
-import type { Character, CraftRating, MARating, Penalty, penaltyObj } from 'types'
+import type {
+  Character,
+  CraftRating,
+  MARating,
+  Penalty,
+  penaltyObj,
+} from '@/types'
+import type { WithSharedStats } from '@/types/shared'
 import {
   ABILITIES_ALL,
   ABILITIES_ALL_NO_MA,
@@ -15,10 +22,9 @@ import {
   ATTRIBUTES,
   NON_ATTACK_ABILITIES,
 } from '../constants.js'
-import type { withArmorStats, specialty } from '../flow-types/index.js'
-import type { WithSharedStats , WithHealthLevels, WithMotePool } from '@/types/shared';
 import type { Ability } from '../constants.new/abilities'
 import type { Attribute } from '../constants.new/attributes'
+import type { specialty, withArmorStats } from '../flow-types/index.js'
 
 export const attr = (
   character: Character,

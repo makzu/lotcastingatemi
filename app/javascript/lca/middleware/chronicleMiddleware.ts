@@ -1,8 +1,8 @@
 // import { Middleware } from 'redux'
 
-// import { State } from 'ducks'
-// import { fetchCharactersForChronicle } from 'ducks/entities'
-// import { crudAction } from 'ducks/entities/_lib'
+// import { State } from '@/ducks'
+// import { fetchCharactersForChronicle } from '@/ducks/entities'
+// import { crudAction } from '@/ducks/entities/_lib'
 
 // // Detects incomplete paginated requests and requests the next page
 // const chronicleMiddleware: Middleware<object, State> =

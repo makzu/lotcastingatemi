@@ -2,7 +2,7 @@ import createCachedSelector from 're-reselect'
 
 import type { RootState } from '@/store'
 import { type WithId } from '@/types/_lib'
-import { chronicleSortOrderSort, isDefined } from 'utils'
+import { chronicleSortOrderSort, isDefined } from '@/utils'
 import { canISeeBattlegroup } from './battlegroup'
 import { canISeeCharacter } from './character'
 import { entities, getCurrentPlayer } from './entities'

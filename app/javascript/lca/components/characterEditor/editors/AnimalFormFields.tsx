@@ -1,6 +1,6 @@
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import type { Form } from 'types'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import type { Form } from '@/types'
 
 type ListAttributeFieldTypes = any
 

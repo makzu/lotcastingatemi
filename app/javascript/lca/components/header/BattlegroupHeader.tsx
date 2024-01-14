@@ -2,14 +2,14 @@ import { Link, useLocation } from 'react-router-dom'
 
 import { Button, Toolbar, Typography } from '@mui/material'
 
-import CharacterMenu from 'components/generic/CharacterMenu'
+import CharacterMenu from '@/components/generic/CharacterMenu'
 import {
   canIEditBattlegroup,
   getSpecificBattlegroup,
 } from '@/ducks/entities/battlegroup'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
-import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from '@/hooks'
 
 function BattlegroupHeader() {
   const id = useIdFromParams()

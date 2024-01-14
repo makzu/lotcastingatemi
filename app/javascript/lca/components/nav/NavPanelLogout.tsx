@@ -1,8 +1,8 @@
 import { Divider, ListItemText } from '@mui/material'
 
-import { LinkListItem } from 'components/shared/wrappers'
-import { logout } from 'ducks/actions'
-import { useAppDispatch } from 'hooks'
+import { LinkListItem } from '@/components/shared/wrappers'
+import { logout } from '@/ducks/actions'
+import { useAppDispatch } from '@/hooks'
 
 const NavPanelLogout = () => {
   const dispatch = useAppDispatch()

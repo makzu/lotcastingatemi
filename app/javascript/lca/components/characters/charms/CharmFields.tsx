@@ -4,14 +4,6 @@ import { SortableHandle } from 'react-sortable-hoc'
 import scrollToElement from 'scroll-to-element'
 
 import withStyles from '@mui/styles/withStyles'
-import Button from '@mui/material/Button'
-import Accordion from '@mui/material/Accordion'
-import AccordionActions from '@mui/material/AccordionActions'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import MenuItem from '@mui/material/MenuItem'
-import Typography from '@mui/material/Typography'
-import Collapse from '@mui/material/Collapse'
 import Delete from '@mui/icons-material/Delete'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -19,20 +11,32 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import styles from './CharmStyles.js'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
 import { CharmSummaryBlock } from './CharmDisplay'
-import AbilitySelect from 'components/generic/abilitySelect'
-import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
-import RatingField from 'components/generic/RatingField'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
-import { checkVisible } from 'utils'
-import { abilitiesWithRatings } from 'utils/calculated'
+import AbilitySelect from '@/components/generic/abilitySelect'
+import CharmTimingSelect from '@/components/shared/selects/CharmTimingSelect'
+import RatingField from '@/components/generic/RatingField'
+import TagsField from '@/components/generic/TagsField'
+import TextField from '@/components/generic/TextField'
+import { checkVisible } from '@/utils'
+import { abilitiesWithRatings } from '@/utils/calculated'
 import {
   ABILITY_MAX,
   ATTRIBUTE_MAX,
   ESSENCE_MIN,
   ESSENCE_MAX,
-} from 'utils/constants'
-import type { Charm, Character } from 'utils/flow-types'
+} from '@/utils/constants'
+import type { Charm, Character } from '@/utils/flow-types'
+
+import {
+  Button,
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
+  MenuItem,
+  Typography,
+  Collapse,
+} from '@mui/material'
+
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))

@@ -1,4 +1,4 @@
-import * as calc from 'utils/calculated'
+import * as calc from '@/utils/calculated'
 import { mockCharacter as mockChar } from '../../_mocks'
 describe('Calculated values', () => {
   it('should give correct defense values', () => {

@@ -1,14 +1,13 @@
 import type { ChangeEventHandler } from 'react'
 
-import MenuItem from '@mui/material/MenuItem'
+import { MenuItem } from '@mui/material'
 
-import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
-import AbilitySelect from 'components/generic/abilitySelect'
+import AbyssalCasteSelect from '@/components/characterEditor/exaltTraits/AbyssalCasteSelect'
+import AbilitySelect from '@/components/generic/abilitySelect'
 import BlockPaper from '@/components/shared/BlockPaper'
-
-import { nonCasteAbilities } from 'utils/calculated'
-import { ABYSSAL_CASTE_ABILITIES } from 'utils/constants'
 import type { Character } from '@/types'
+import { nonCasteAbilities } from '@/utils/calculated'
+import { ABYSSAL_CASTE_ABILITIES } from '@/utils/constants'
 
 interface Props {
   character: Character

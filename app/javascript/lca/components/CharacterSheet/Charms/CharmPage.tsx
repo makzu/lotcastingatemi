@@ -1,8 +1,8 @@
 import { useReducer } from 'react'
 
-import DivWithFilterDrawer from 'components/shared/DivWithFilterDrawer'
-import { useCharacterAttribute } from 'ducks/entities'
-import { useDocumentTitle, useIdFromParams } from 'hooks'
+import DivWithFilterDrawer from '@/components/shared/DivWithFilterDrawer'
+import { useCharacterAttribute } from '@/ducks/entities'
+import { useDocumentTitle, useIdFromParams } from '@/hooks'
 import CharacterLoadError from '../CharacterLoadError'
 import CharmFilter from './CharmFilter/'
 import CharmList from './CharmList'

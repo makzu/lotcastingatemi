@@ -3,15 +3,14 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import ButtonBase from '@mui/material/ButtonBase'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 
-import { updateCharacter, updateQc } from 'ducks/actions'
-import { canIEditCharacter, canIEditQc } from 'selectors'
-import type { Enhancer } from 'utils/flow-types'
-import type { WithAura } from 'types/shared'
-import type { WithId } from 'types/_lib'
+import { updateCharacter, updateQc } from '@/ducks/actions'
+import { canIEditCharacter, canIEditQc } from '@/selectors'
+import type { Enhancer } from '@/utils/flow-types'
+import type { WithAura } from '@/types/shared'
+import type { WithId } from '@/types/_lib'
+
+import { ButtonBase, Menu, MenuItem } from '@mui/material'
 
 const styles = (theme) => ({
   wrap: {

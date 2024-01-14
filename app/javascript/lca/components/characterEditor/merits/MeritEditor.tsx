@@ -5,27 +5,28 @@ import { Link } from 'react-router-dom'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 import HelpIcon from '@mui/icons-material/Help'
 
 import MeritFields from './MeritFields'
-import DocumentTitle from 'components/generic/DocumentTitle'
-import SortableGridList from 'components/generic/SortableGridList'
+import DocumentTitle from '@/components/generic/DocumentTitle'
+import SortableGridList from '@/components/generic/SortableGridList'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { updateMerit, createMerit, destroyMerit } from 'ducks/actions'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import { updateMerit, createMerit, destroyMerit } from '@/ducks/actions'
 
 import { getSpecificCharacter } from '@/ducks/entities/character'
-import { getMeritsForCharacter } from 'selectors'
-import commonStyles from 'styles'
-import type { Character, fullMerit as Merit, Enhancer } from 'utils/flow-types'
-import SortableItem from 'components/generic/SortableItem'
+import { getMeritsForCharacter } from '@/selectors'
+import commonStyles from '@/styles'
+import type {
+  Character,
+  fullMerit as Merit,
+  Enhancer,
+} from '@/utils/flow-types'
+import SortableItem from '@/components/generic/SortableItem'
+
+import { Button, Grid, Hidden, IconButton, Typography } from '@mui/material'
 
 const styles = (theme) => commonStyles(theme)
 

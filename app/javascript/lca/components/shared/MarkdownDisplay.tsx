@@ -2,7 +2,7 @@ import type { AnchorHTMLAttributes } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material';
 
 type LinkRendererProps = AnchorHTMLAttributes<HTMLAnchorElement>
 // This won't work for mailto: links or any other non-http(/s) link.

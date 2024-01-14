@@ -2,13 +2,13 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
 
-import ChronicleDashboard from 'components/chronicles/index'
-import ChronicleDetailsPage from 'components/chronicles/DetailsPage'
-import CombatDashboard from 'components/combat/index'
-import withRouter from 'containers/withRouter'
-import { fetchChronicle } from 'ducks/actions'
-import { isChronicleLoaded } from 'selectors'
-import type { Enhancer } from 'utils/flow-types'
+import ChronicleDashboard from '@/components/chronicles/index'
+import ChronicleDetailsPage from '@/components/chronicles/DetailsPage'
+import CombatDashboard from '@/components/combat/index'
+import withRouter from '@/containers/withRouter'
+import { fetchChronicle } from '@/ducks/actions'
+import { isChronicleLoaded } from '@/selectors'
+import type { Enhancer } from '@/utils/flow-types'
 
 interface ExposedProps {
   params: { id: number }

@@ -2,11 +2,11 @@ import { Grid, Paper, Typography } from '@mui/material'
 
 import CharacterLoadError from '../CharacterLoadError'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getMeritsForCharacter } from 'ducks/selectors'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import { getMeritsForCharacter } from '@/ducks/selectors'
 import SingleMerit from './SingleMerit'
-import { useAppSelector, useDocumentTitle, useIdFromParams } from 'hooks'
-import { useCharacterAttribute } from 'ducks/entities'
+import { useAppSelector, useDocumentTitle, useIdFromParams } from '@/hooks'
+import { useCharacterAttribute } from '@/ducks/entities'
 
 const MeritFullPage = () => {
   const id = useIdFromParams()

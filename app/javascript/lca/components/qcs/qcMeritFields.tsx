@@ -2,15 +2,15 @@ import { deepEqual } from 'fast-equals'
 import { Component, type SyntheticInputEvent } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
 import Delete from '@mui/icons-material/Delete'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 
-import BlockPaper from 'components/shared/BlockPaper'
-import Checkbox from 'components/shared/inputs/Checkbox'
-import TextField from 'components/generic/TextField'
-import type { QcMerit } from 'utils/flow-types'
+import BlockPaper from '@/components/shared/BlockPaper'
+import Checkbox from '@/components/shared/inputs/Checkbox'
+import TextField from '@/components/generic/TextField'
+import type { QcMerit } from '@/utils/flow-types'
+
+import { Button, Typography } from '@mui/material'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

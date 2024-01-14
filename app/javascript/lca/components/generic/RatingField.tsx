@@ -1,10 +1,10 @@
 import classnames from 'classnames'
 import { Component, type SyntheticInputEvent } from 'react'
 
-import TextField from '@mui/material/TextField'
 import { withStyles } from '@mui/styles'
+import { clamp } from '@/utils/'
 
-import { clamp } from 'utils/'
+import { TextField } from '@mui/material'
 
 const styles = (theme) => ({
   field: {

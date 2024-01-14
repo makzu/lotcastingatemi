@@ -2,12 +2,12 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { Grid, Typography } from '@mui/material'
 
-import CharacterCard from 'components/characters/CharacterCard'
-import CharacterCreatePopup from 'components/characters/CharacterCreatePopup'
-import SortableGridList from 'components/generic/SortableGridList'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getMyCharacters, updateCharacter } from 'ducks/entities'
-import { useAppDispatch, useAppSelector, useDocumentTitle } from 'hooks'
+import CharacterCard from '@/components/characters/CharacterCard'
+import CharacterCreatePopup from '@/components/characters/CharacterCreatePopup'
+import SortableGridList from '@/components/generic/SortableGridList'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import { getMyCharacters, updateCharacter } from '@/ducks/entities'
+import { useAppDispatch, useAppSelector, useDocumentTitle } from '@/hooks'
 import SortableItem from '../generic/SortableItem'
 
 const CharacterList = () => {

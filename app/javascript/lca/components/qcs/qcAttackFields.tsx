@@ -5,24 +5,22 @@ import { compose } from 'redux'
 import { SortableHandle } from 'react-sortable-hoc'
 
 import withStyles from '@mui/styles/withStyles'
-import Divider from '@mui/material/Divider'
-import Hidden from '@mui/material/Hidden'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
 
-import RangeSelect from 'components/generic/RangeSelect'
+import RangeSelect from '@/components/generic/RangeSelect'
 import RatingField from '../generic/RatingField'
-import TagsField from 'components/generic/TagsField'
-import TextField from 'components/generic/TextField'
-import { bgAttackPool, bgDamage } from 'utils/calculated'
+import TagsField from '@/components/generic/TagsField'
+import TextField from '@/components/generic/TextField'
+import { bgAttackPool, bgDamage } from '@/utils/calculated'
 import { getSpecificBattlegroup } from '@/ducks/entities/battlegroup'
-import type { QcAttack, Enhancer } from 'utils/flow-types'
+import type { QcAttack, Enhancer } from '@/utils/flow-types'
 
-import type { Battlegroup } from 'types'
+import type { Battlegroup } from '@/types'
 import type { RootState } from 'store'
+
+import { Divider, Hidden, IconButton, Typography } from '@mui/material'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

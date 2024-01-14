@@ -1,9 +1,9 @@
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
 
-import { getMyBattlegroups, getMyPinnedBattlegroups } from 'ducks/entities'
-import { useAppSelector } from 'hooks'
-import type { Battlegroup } from 'types'
+import { getMyBattlegroups, getMyPinnedBattlegroups } from '@/ducks/entities'
+import { useAppSelector } from '@/hooks'
+import type { Battlegroup } from '@/types'
 
 const mapBattlegroupToListItem = (battlegroup: Battlegroup) => (
   <EntityListItem

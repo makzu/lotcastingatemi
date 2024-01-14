@@ -1,10 +1,10 @@
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
-import { LIMIT_MAX } from 'utils/constants'
 import type { Character } from '@/types'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import { LIMIT_MAX } from '@/utils/constants'
 
 interface Props {
   character: Character

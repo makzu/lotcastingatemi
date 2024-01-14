@@ -2,9 +2,6 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
 
 import styles from './CharmStyles.js'
 import CharmDisplay from './CharmDisplay'
@@ -12,19 +9,20 @@ import CharmFilter from './CharmFilter'
 import SpellDisplay from './SpellDisplay'
 import CharacterLoadError from '../../CharacterSheet/CharacterLoadError'
 
-import DocumentTitle from 'components/generic/DocumentTitle'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
+import DocumentTitle from '@/components/generic/DocumentTitle'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
 import {
   getNativeCharmsForCharacter,
   getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter,
   getSpellsForCharacter,
   getSpiritCharmsForCharacter,
-} from 'selectors'
+} from '@/selectors'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 
-import type { Character, Charm, Spell } from 'utils/flow-types'
+import type { Character, Charm, Spell } from '@/utils/flow-types'
+import { Grid, Hidden, Typography } from '@mui/material'
 interface Props {
   character: Character
   nativeCharms: Charm[]

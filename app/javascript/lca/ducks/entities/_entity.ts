@@ -2,7 +2,7 @@ import type { AnyAction } from '@reduxjs/toolkit'
 import deepmerge from 'deepmerge'
 import { getJSON, type RSAAAction } from 'redux-api-middleware'
 
-import { callApi } from 'utils/api'
+import { callApi } from '@/utils/api'
 import {
   crudAction,
   optimisticTypes,

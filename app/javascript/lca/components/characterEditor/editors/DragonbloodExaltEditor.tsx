@@ -1,11 +1,11 @@
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 
-import DbAspectSelect from '../exaltTraits/DbAspectSelect'
-import AbilitySelect from 'components/generic/abilitySelect'
-import BlockPaper from 'components/shared/BlockPaper'
-
-import { nonCasteAbilities } from 'utils/calculated'
 import type { Character } from '@/types'
+import AbilitySelect from '@/components/generic/abilitySelect'
+import BlockPaper from '@/components/shared/BlockPaper'
+import { nonCasteAbilities } from '@/utils/calculated'
+import DbAspectSelect from '../exaltTraits/DbAspectSelect'
+
 interface Props {
   character: Character
   onChange: $TSFixMeFunction

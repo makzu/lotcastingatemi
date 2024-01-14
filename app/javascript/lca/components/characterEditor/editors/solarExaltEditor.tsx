@@ -1,12 +1,11 @@
-import MenuItem from '@mui/material/MenuItem'
+import { MenuItem } from '@mui/material'
 
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
-import AbilitySelect from 'components/generic/abilitySelect'
-import BlockPaper from 'components/shared/BlockPaper'
-
-import { nonCasteAbilities } from 'utils/calculated'
-import { SOLAR_CASTE_ABILITIES } from 'utils/constants'
 import type { Character } from '@/types'
+import SolarCasteSelect from '@/components/characterEditor/exaltTraits/SolarCasteSelect'
+import AbilitySelect from '@/components/generic/abilitySelect'
+import BlockPaper from '@/components/shared/BlockPaper'
+import { nonCasteAbilities } from '@/utils/calculated'
+import { SOLAR_CASTE_ABILITIES } from '@/utils/constants'
 
 interface Props {
   character: Character

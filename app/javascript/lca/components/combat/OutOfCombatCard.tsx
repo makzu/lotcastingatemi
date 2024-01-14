@@ -2,17 +2,22 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-
 import JoinBattlePopup from './JoinBattlePopup'
+
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import PoolDisplay from '../generic/PoolDisplay'
-import CardBase from 'components/shared/CardBase'
-import sharedStyles from 'styles/'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
-import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
-import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
+import CardBase from '@/components/shared/CardBase'
+import sharedStyles from '@/styles/'
+import { updateCharacter, updateQc, updateBattlegroup } from '@/ducks/actions'
+import { getPoolsAndRatingsGeneric, canIEdit } from '@/selectors'
+import type {
+  Character,
+  fullQc,
+  Battlegroup,
+  Enhancer,
+} from '@/utils/flow-types'
+import { Typography } from '@mui/material'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

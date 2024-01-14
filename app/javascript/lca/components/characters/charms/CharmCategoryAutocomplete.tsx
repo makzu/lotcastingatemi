@@ -4,16 +4,19 @@ import { compose } from 'redux'
 
 import classNames from 'classnames'
 import withStyles from '@mui/styles/withStyles'
-import Chip from '@mui/material/Chip'
-import MenuItem from '@mui/material/MenuItem'
-import NoSsr from '@mui/material/NoSsr'
-import Paper from '@mui/material/Paper'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
 
 import Select from 'react-select/lib/Creatable'
-import { getAllCharmCategoriesForCharacter } from 'selectors'
-import type { Enhancer } from 'utils/flow-types'
+import { getAllCharmCategoriesForCharacter } from '@/selectors'
+import type { Enhancer } from '@/utils/flow-types'
+
+import {
+  Chip,
+  MenuItem,
+  NoSsr,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material'
 
 /* Shamelessly stolen and crudely reshaped from the Material-ui react-select
  * Autocomplete example

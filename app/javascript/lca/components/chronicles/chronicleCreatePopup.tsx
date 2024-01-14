@@ -1,19 +1,21 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import Button from '@mui/material/Button'
-import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import TextField from '@mui/material/TextField'
-
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 
-import { createChronicle } from 'ducks/actions'
+import { createChronicle } from '@/ducks/actions'
+
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  TextField,
+} from '@mui/material'
 
 interface Props {
   createChronicle: Function

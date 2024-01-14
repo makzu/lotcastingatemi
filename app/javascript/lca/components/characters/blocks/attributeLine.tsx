@@ -1,9 +1,9 @@
 import withStyles from '@mui/styles/withStyles'
-import Divider from '@mui/material/Divider'
+import RatingLine from '@/components/generic/ratingLine'
 
-import RatingLine from 'components/generic/ratingLine'
-import { isCasteAttribute, isFavoredAttribute } from 'utils/calculated'
-import type { Character } from 'types'
+import { isCasteAttribute, isFavoredAttribute } from '@/utils/calculated'
+import type { Character } from '@/types'
+import { Divider } from '@mui/material'
 
 const styles = (theme) => ({
   attributeName: {

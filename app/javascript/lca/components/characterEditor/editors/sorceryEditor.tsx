@@ -1,14 +1,12 @@
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Typography from '@mui/material/Typography'
+import { Checkbox, FormControlLabel, Typography } from '@mui/material'
 
+import type { Character } from '@/types'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
-import type { Character } from '@/types'
+} from '@/components/generic/ListAttributeEditor'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
 
 export const SorceryFields = (
   props: { trait: string } & ListAttributeFieldTypes,

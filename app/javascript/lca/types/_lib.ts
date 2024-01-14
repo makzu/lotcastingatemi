@@ -1,4 +1,4 @@
-import type { ChSortable, Sortable } from 'utils'
+import type { ChSortable, Sortable } from '@/utils'
 
 export type Element = 'earth' | 'air' | 'fire' | 'water' | 'wood'
 

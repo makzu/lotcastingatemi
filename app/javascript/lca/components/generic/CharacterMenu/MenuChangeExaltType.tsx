@@ -17,10 +17,10 @@ import {
 
 import ExaltTypeSelect, {
   prettyType,
-} from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
-import type { State } from 'ducks'
-import { changeCharacterType } from 'ducks/actions'
-import { useDialogLogic } from 'hooks'
+} from '@/components/characterEditor/exaltTraits/ExaltTypeSelect'
+import type { State } from '@/ducks'
+import { changeCharacterType } from '@/ducks/actions'
+import { useDialogLogic } from '@/hooks'
 import { canIEdit } from '@/selectors'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 

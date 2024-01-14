@@ -9,9 +9,9 @@ import {
   ListItemText,
 } from '@mui/material/'
 
-import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
-import { useCharacterAttribute } from 'ducks/entities'
-import { useIdFromParams } from 'hooks'
+import { LinkListItem, NavLinkListItem } from '@/components/shared/wrappers/'
+import { useCharacterAttribute } from '@/ducks/entities'
+import { useIdFromParams } from '@/hooks'
 
 const SideNavigation = () => {
   const id = useIdFromParams()

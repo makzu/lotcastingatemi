@@ -1,10 +1,10 @@
 import rating from './_rating'
 import { penaltyObject } from '../index'
 import { weaponIsRanged } from '../weapons'
-import { halfRoundUp } from 'utils'
-import type { PoolBonus } from 'utils/flow-types'
-import type { Character, Weapon } from 'types'
-import type { PenaltyInput } from 'selectors'
+import { halfRoundUp } from '@/utils'
+import type { PoolBonus } from '@/utils/flow-types'
+import type { Character, Weapon } from '@/types'
+import type { PenaltyInput } from '@/selectors'
 
 export function weaponDefenseBonus(weapon: Weapon) {
   switch (weapon.weight) {

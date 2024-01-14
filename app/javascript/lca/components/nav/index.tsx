@@ -1,10 +1,10 @@
 import { Drawer, useMediaQuery, type Theme } from '@mui/material'
 import { Box } from '@mui/system'
 
-import { drawerWidth } from 'containers/_drawerProperties'
-import { getCurrentPlayer } from 'ducks/entities'
+import { drawerWidth } from '@/containers/_drawerProperties'
+import { getCurrentPlayer } from '@/ducks/entities'
 import { closeDrawer } from 'features/drawerSlice'
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 import NavPanel from './NavPanel'
 
 // Shamelessly stolen from the material-ui drawer demo

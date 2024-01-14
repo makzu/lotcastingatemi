@@ -4,15 +4,14 @@ import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
 import type { WithStyles } from '@mui/styles'
-import ButtonBase from '@mui/material/ButtonBase'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 
-import { updateCharacter, updateQc } from 'ducks/actions'
-import { canIEditCharacter, canIEditQc } from 'selectors'
-import { prettyAnimaLevel } from 'utils/calculated'
-import type { withMotePool, Enhancer } from 'utils/flow-types'
-import { Character } from 'types'
+import { updateCharacter, updateQc } from '@/ducks/actions'
+import { canIEditCharacter, canIEditQc } from '@/selectors'
+import { prettyAnimaLevel } from '@/utils/calculated'
+import type { withMotePool, Enhancer } from '@/utils/flow-types'
+import { Character } from '@/types'
+
+import { ButtonBase, Menu, MenuItem } from '@mui/material'
 
 const styles = (theme) => ({
   wrap: {

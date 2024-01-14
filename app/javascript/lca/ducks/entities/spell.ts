@@ -3,7 +3,7 @@ import createCachedSelector from 're-reselect'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import { getSpecificQc } from './qc'
-import { isDefined } from 'utils'
+import { isDefined } from '@/utils'
 import type { RootState } from 'store'
 import { getSpecificCharacter } from './character'
 

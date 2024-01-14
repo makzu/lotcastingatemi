@@ -1,4 +1,4 @@
-import SvgIcon from '@mui/material/SvgIcon'
+import { SvgIcon } from '@mui/material';
 
 const Logo = (props: Record<string, $TSFixMe>) => (
   <SvgIcon viewBox="0 0 210 210" {...props}>

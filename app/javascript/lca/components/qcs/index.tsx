@@ -2,17 +2,16 @@ import { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 
-import Typography from '@mui/material/Typography'
 import withStyles from '@mui/styles/withStyles'
+import BlockPaper from '@/components/shared/BlockPaper'
 
-import BlockPaper from 'components/shared/BlockPaper'
 import MarkdownDisplay, {
   LinkRenderer,
-} from 'components/shared/MarkdownDisplay'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { fetchQcIfNecessary } from 'ducks/entities/qc'
-import { getSpellsForQc } from 'ducks/selectors'
+} from '@/components/shared/MarkdownDisplay'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import { fetchQcIfNecessary } from '@/ducks/entities/qc'
+import { getSpellsForQc } from '@/ducks/selectors'
 import {
   canIEditQc,
   getAttacksForQc,
@@ -21,12 +20,13 @@ import {
   getPenaltiesForQc,
   getPoolsAndRatingsForQc,
   getSpecificQc,
-} from 'selectors'
-import sharedStyles from 'styles/'
-import { prettyIntimacyRating, qcPool } from 'utils/calculated'
-import type { fullQc, QcAttack, QcCharm, QcMerit } from 'utils/flow-types'
+} from '@/selectors'
+import sharedStyles from '@/styles/'
+import { prettyIntimacyRating, qcPool } from '@/utils/calculated'
+import type { fullQc, QcAttack, QcCharm, QcMerit } from '@/utils/flow-types'
 import PoolDisplay from '../generic/PoolDisplay'
 import SpendableBlock from '../generic/SpendableBlock'
+import { Typography } from '@mui/material'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

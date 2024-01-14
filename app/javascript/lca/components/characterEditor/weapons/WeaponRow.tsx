@@ -1,11 +1,11 @@
 import { Box, IconButton } from '@mui/material'
 import { Edit, RemoveCircle } from '@mui/icons-material'
 
-import WeaponLine from 'components/characters/weapons/WeaponLine'
-import Handle from 'components/shared/GrabHandle'
-import { destroyWeapon } from 'ducks/actions'
-import { useAppDispatch } from 'hooks'
-import type { Character, Weapon } from 'types'
+import WeaponLine from '@/components/characters/weapons/WeaponLine'
+import Handle from '@/components/shared/GrabHandle'
+import { destroyWeapon } from '@/ducks/actions'
+import { useAppDispatch } from '@/hooks'
+import type { Character, Weapon } from '@/types'
 
 interface WeaponRowProps {
   character: Character

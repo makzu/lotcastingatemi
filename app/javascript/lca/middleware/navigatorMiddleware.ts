@@ -1,8 +1,8 @@
 import type { Middleware } from 'redux'
 
-import { globalNavigate } from 'containers/GlobalNavigate'
-import { CABLE_RECEIVED } from 'ducks/entities'
-import { API, crudAction, SUCCESS } from 'ducks/entities/_lib'
+import { globalNavigate } from '@/containers/GlobalNavigate'
+import { CABLE_RECEIVED } from '@/ducks/entities'
+import { API, crudAction, SUCCESS } from '@/ducks/entities/_lib'
 import type { RootState } from 'store'
 
 /* On successfully creating an entity or joining a Chronicle, navigate to that

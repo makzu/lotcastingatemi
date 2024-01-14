@@ -3,9 +3,9 @@ import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
 
-import PoolDisplay from 'components/generic/PoolDisplay'
-import { getPoolsForWeapon } from 'selectors'
-import type { fullWeapon } from 'utils/flow-types'
+import PoolDisplay from '@/components/generic/PoolDisplay'
+import { getPoolsForWeapon } from '@/selectors'
+import type { fullWeapon } from '@/utils/flow-types'
 
 const styles = (theme) => ({
   container: {

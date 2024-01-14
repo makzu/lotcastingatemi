@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import Paper from '@mui/material/Paper'
+import { Paper } from '@mui/material';
 
 const style = {
   padding: 2,

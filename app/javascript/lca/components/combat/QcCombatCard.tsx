@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
+
 import CombatControls from './CombatControls'
 import RemoveFromCombatButton from './RemoveFromCombatButton'
 import PoolDisplay from '../generic/PoolDisplay'
 import SpendableBlock from '../generic/SpendableBlock'
-import CardBase from 'components/shared/CardBase'
-import sharedStyles from 'styles/'
-import { getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
-import type { fullQc, Enhancer } from 'utils/flow-types'
+import CardBase from '@/components/shared/CardBase'
+import sharedStyles from '@/styles/'
+import { getPenaltiesForQc, getPoolsAndRatingsForQc } from '@/selectors'
+import type { fullQc, Enhancer } from '@/utils/flow-types'
+import { Typography } from '@mui/material'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),

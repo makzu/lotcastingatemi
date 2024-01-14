@@ -14,21 +14,20 @@ import {
 } from '@mui/material'
 import { withStyles, type WithStyles } from '@mui/styles'
 
-import BlockPaper from 'components/shared/BlockPaper'
-import RatingField from '../generic/RatingField'
-import TextField from '../generic/TextField'
-import QcAttackEditor from '../qcs/qcAttackEditor'
-
+import BlockPaper from '@/components/shared/BlockPaper'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import { updateBattlegroup } from '@/ducks/actions'
 import {
   canIDeleteBattlegroup,
   getSpecificBattlegroup,
 } from '@/ducks/entities/battlegroup'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { updateBattlegroup } from 'ducks/actions'
-import commonStyles from 'styles'
-import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
-import type { Battlegroup } from 'utils/flow-types'
+import commonStyles from '@/styles'
+import { bgDefenseBonus, bgSoak, totalMagnitude } from '@/utils/calculated/'
+import type { Battlegroup } from '@/utils/flow-types'
+import RatingField from '../generic/RatingField'
+import TextField from '../generic/TextField'
+import QcAttackEditor from '../qcs/qcAttackEditor'
 
 const styles = (theme: Theme) =>
   createStyles({

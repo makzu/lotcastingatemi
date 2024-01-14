@@ -1,17 +1,17 @@
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import BlockPaper from 'components/shared/BlockPaper'
+} from '@/components/generic/ListAttributeEditor'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
 import {
   ABILITIES,
   ABILITY_MAX as MAX,
   ABILITY_MIN as MIN,
-} from 'utils/constants'
-import type { withAbilities as Character } from 'utils/flow-types'
+} from '@/utils/constants'
+import type { withAbilities as Character } from '@/utils/flow-types'
 
 function AbilityField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />

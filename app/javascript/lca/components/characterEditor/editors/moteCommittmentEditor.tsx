@@ -1,13 +1,11 @@
-import Checkbox from '@mui/material/Checkbox'
-import MenuItem from '@mui/material/MenuItem'
-import MuiTextField from '@mui/material/TextField'
+import { Checkbox, MenuItem, TextField as MuiTextField } from '@mui/material'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor'
-import RatingField from 'components/generic/RatingField'
-import TextField from 'components/generic/TextField'
-import type { withMotePool } from 'utils/flow-types'
+} from '@/components/generic/ListAttributeEditor'
+import RatingField from '@/components/generic/RatingField'
+import TextField from '@/components/generic/TextField'
+import type { withMotePool } from '@/utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props

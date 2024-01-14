@@ -1,4 +1,4 @@
-import { penaltyObject } from 'utils/calculated'
+import { type penaltyObject } from '@/utils/calculated'
 
 export interface PoolBonus {
   label: string

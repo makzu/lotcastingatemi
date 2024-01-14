@@ -2,9 +2,6 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import Grid from '@mui/material/Grid'
-import Hidden from '@mui/material/Hidden'
-import Typography from '@mui/material/Typography'
 import Launch from '@mui/icons-material/Launch'
 
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
@@ -20,27 +17,28 @@ import SocialBlock from './blocks/socialBlock'
 import SpecialtyBlock from './blocks/specialtyBlock'
 import WeaponSummaryBlock from './blocks/weaponSummaryBlock'
 
-import DocumentTitle from 'components/generic/DocumentTitle'
+import DocumentTitle from '@/components/generic/DocumentTitle'
 import RatingLine from '../generic/ratingLine'
 import SpendableBlock from '../generic/SpendableBlock'
-import BlockPaper from 'components/shared/BlockPaper'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
+import BlockPaper from '@/components/shared/BlockPaper'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
 
 import { getSpecificCharacter } from '@/ducks/entities/character'
-import { getWeaponsForCharacter } from 'ducks/entities/weapon'
+import { getWeaponsForCharacter } from '@/ducks/entities/weapon'
 import {
   canIEditCharacter,
   getPenalties,
   getPoolsAndRatings,
   getMeritsForCharacter,
-} from 'selectors'
+} from '@/selectors'
 import type {
   Character,
   fullMerit as Merit,
   fullWeapon as Weapon,
-} from 'utils/flow-types'
+} from '@/utils/flow-types'
 import { RootState } from 'store'
+import { Grid, Hidden, Typography } from '@mui/material'
 export function ResourceBlock({ character }: { character: Character }) {
   const re = character.resources || []
   const res = re.map((r, index) => (

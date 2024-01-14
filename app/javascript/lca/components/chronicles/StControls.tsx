@@ -1,17 +1,19 @@
 //@flow
 import { connect } from 'react-redux'
 
-import Button from '@mui/material/Button'
-import Accordion from '@mui/material/Accordion'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import Downtime from './controls/Downtime'
 import RecoverMotes from './controls/RecoverMotes'
 import RecoverWillpower from './controls/RecoverWillpower'
-import { endScene } from 'ducks/events'
+import { endScene } from '@/ducks/events'
+import {
+  Button,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from '@mui/material'
 interface Props {
   chronicleId: number
   endScene: $TSFixMeFunction

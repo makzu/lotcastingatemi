@@ -1,17 +1,20 @@
 import scrollToElement from 'scroll-to-element'
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import Accordion from '@mui/material/Accordion'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import Collapse from '@mui/material/Collapse'
-import Typography from '@mui/material/Typography'
 import withStyles from '@mui/styles/withStyles'
 
-import MarkdownDisplay from 'components/shared/MarkdownDisplay'
-import { checkVisible } from 'utils'
-import type { Charm } from 'utils/flow-types'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+import { checkVisible } from '@/utils'
+import type { Charm } from '@/utils/flow-types'
 import styles from './CharmStyles.js'
+
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Collapse,
+  Typography,
+} from '@mui/material'
 
 function scrollToPanel(e, appearing, id) {
   if (appearing) return false

@@ -4,21 +4,24 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import DescriptionIcon from '@mui/icons-material/Description'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import IconButton from '@mui/material/IconButton'
 import { withStyles } from '@mui/styles'
 
-import TextField from 'components/generic/TextField'
-import MarkdownDisplay from 'components/shared/MarkdownDisplay'
+import TextField from '@/components/generic/TextField'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
 
-import { updateCharacter } from 'ducks/actions'
-import { canIEditCharacter } from 'selectors'
-import commonStyles from 'styles'
+import { updateCharacter } from '@/ducks/actions'
+import { canIEditCharacter } from '@/selectors'
+import commonStyles from '@/styles'
 import type { Character } from '@/types'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+} from '@mui/material'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

@@ -6,11 +6,11 @@ import {
   getMeritNamesForCharacter,
   getQcsForChronicle,
   getBattlegroupsForChronicle,
-} from 'selectors'
+} from '@/selectors'
 import {
   committedPersonalMotes,
   committedPeripheralMotes,
-} from 'utils/calculated'
+} from '@/utils/calculated'
 
 const endSceneObject = (c) => {
   const obj = {}

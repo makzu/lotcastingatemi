@@ -1,6 +1,6 @@
-import Typography from '@mui/material/Typography'
+import { useAppSelector } from '@/hooks'
 
-import { useAppSelector } from 'hooks'
+import { Typography } from '@mui/material'
 
 const CharacterLoadError = () => {
   const loading = useAppSelector((state) => state.app.loading)

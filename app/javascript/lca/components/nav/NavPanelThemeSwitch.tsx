@@ -6,7 +6,7 @@ import {
 } from '@mui/material'
 
 import { switchTheme } from 'features/themeSlice'
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
 const NavPanelThemeSwitch = () => {
   const theme = useAppSelector((state) => state.theme)

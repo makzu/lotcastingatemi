@@ -5,25 +5,27 @@ import { compose } from 'redux'
 import { Typography, type Theme } from '@mui/material'
 import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 
-import BlockPaper from 'components/shared/BlockPaper'
-import MarkdownDisplay from 'components/shared/MarkdownDisplay'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import withRouter from 'containers/withRouter'
-import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
-import { getAttacksForBattlegroup } from 'selectors'
-import { getSpecificBattlegroup } from '@/ducks/entities/battlegroup'
-import sharedStyles from 'styles/'
+import BlockPaper from '@/components/shared/BlockPaper'
+import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
+import {
+  fetchBattlegroupIfNecessary,
+  getSpecificBattlegroup,
+} from '@/ducks/entities/battlegroup'
+import { getAttacksForBattlegroup } from '@/selectors'
+import { type RootState } from '@/store'
+import sharedStyles from '@/styles/'
 import {
   bgAttackPool,
   bgDamage,
   bgDefenseBonus,
   bgSoak,
   prettyDrillRating,
-} from 'utils/calculated'
-import type { Battlegroup, QcAttack } from 'utils/flow-types'
+} from '@/utils/calculated'
+import type { Battlegroup, QcAttack } from '@/utils/flow-types'
 import PoolDisplay from '../generic/PoolDisplay'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
-import { type RootState } from '@/store'
 
 const styles = (theme: Theme) => ({
   ...sharedStyles(theme),

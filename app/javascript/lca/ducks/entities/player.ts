@@ -1,5 +1,5 @@
 import type { RootState } from 'store'
-import { callApi } from 'utils/api'
+import { callApi } from '@/utils/api'
 import { defaultState, type EntityState } from './'
 import { createUpdateAction, mergeEntity } from './_entity'
 import {

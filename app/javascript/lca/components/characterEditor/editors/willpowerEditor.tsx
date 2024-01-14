@@ -1,12 +1,13 @@
+import { Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
 
-import ResourceEditor from './resourceEditor'
-import RatingField from 'components/generic/RatingField'
-import BlockPaper from 'components/shared/BlockPaper'
-import commonStyles from 'styles'
-import { WILLPOWER_MAX } from 'utils/constants'
 import type { Character } from '@/types'
+import RatingField from '@/components/generic/RatingField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import commonStyles from '@/styles'
+import { WILLPOWER_MAX } from '@/utils/constants'
+import ResourceEditor from './resourceEditor'
+
 interface Props {
   character: Character
   onChange: $TSFixMeFunction

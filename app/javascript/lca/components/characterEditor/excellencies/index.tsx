@@ -1,18 +1,20 @@
 import { Component } from 'react'
 
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import Divider from '@mui/material/Divider'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-
 import CanonExcellencyCopy from './CanonExcellencyCopy'
-import AbilitySelect from 'components/generic/abilitySelect'
+import AbilitySelect from '@/components/generic/abilitySelect'
 import type { Character } from '@/types'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material'
 
 class ExcellencyEditor extends Component<
   {

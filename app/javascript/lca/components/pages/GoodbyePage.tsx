@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom'
 
-import Typography from '@mui/material/Typography'
-
 import { useAppSelector } from '@/hooks'
-import BlockPaper from 'components/shared/BlockPaper'
+
+import BlockPaper from '@/components/shared/BlockPaper'
+import { Typography } from '@mui/material'
 
 const GoodbyePage = () => {
   const shouldRedirect = useAppSelector(

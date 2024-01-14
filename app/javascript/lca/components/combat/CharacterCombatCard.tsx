@@ -3,20 +3,24 @@ import { Link } from 'react-router-dom'
 import { compose } from 'redux'
 
 import withStyles from '@mui/styles/withStyles'
-import Typography from '@mui/material/Typography'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Whatshot from '@mui/icons-material/Whatshot'
-
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
+
 import PoolDisplay from '../generic/PoolDisplay'
 import SpendableBlock from '../generic/SpendableBlock'
 import CombatControls from './CombatControls'
 import RemoveFromCombatButton from './RemoveFromCombatButton'
-import NotesPopup from 'components/characters/NotesPopup'
-import CardBase from 'components/shared/CardBase'
-import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
-import type { Character, Enhancer } from 'utils/flow-types'
+import NotesPopup from '@/components/characters/NotesPopup'
+import CardBase from '@/components/shared/CardBase'
+import {
+  canIEditCharacter,
+  getPenalties,
+  getPoolsAndRatings,
+} from '@/selectors'
+import type { Character, Enhancer } from '@/utils/flow-types'
 import type { RootState } from 'store'
+import { Typography } from '@mui/material'
 
 const styles = (theme) => ({
   nameRow: {

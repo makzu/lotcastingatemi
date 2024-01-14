@@ -1,15 +1,12 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Checkbox from '@mui/material/Checkbox'
-import Button from '@mui/material/Button'
-import FormControlLabel from '@mui/material/FormControlLabel'
-
 import RatingField from '../generic/RatingField'
 import InitiativeField from './InitiativeField'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
-import { canIEdit } from 'selectors'
-import type { withCombatInfo, Enhancer } from 'utils/flow-types'
+import { updateCharacter, updateQc, updateBattlegroup } from '@/ducks/actions'
+import { canIEdit } from '@/selectors'
+import type { withCombatInfo, Enhancer } from '@/utils/flow-types'
+import { Checkbox, Button, FormControlLabel } from '@mui/material'
 interface ExposedProps {
   character: withCombatInfo & {
     id: number

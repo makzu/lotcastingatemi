@@ -1,11 +1,10 @@
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-
 import AttributeBlockPhysical from './attributeBlockPhysical'
 import AttributeBlockSocial from './attributeBlockSocial'
 import AttributeBlockMental from './attributeBlockMental'
-import BlockPaper from 'components/shared/BlockPaper'
+import BlockPaper from '@/components/shared/BlockPaper'
 import type { Character } from '@/types'
+
+import { Grid, Typography } from '@mui/material'
 
 export interface Props {
   character: Character

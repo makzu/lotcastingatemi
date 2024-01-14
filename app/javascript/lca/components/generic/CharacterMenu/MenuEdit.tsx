@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Edit from '@mui/icons-material/Edit'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import { useAppSelector } from 'hooks'
+import { useAppSelector } from '@/hooks'
 import { canIEdit } from '@/selectors'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 

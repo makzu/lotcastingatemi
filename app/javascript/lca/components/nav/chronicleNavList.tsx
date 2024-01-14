@@ -1,21 +1,24 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import IconButton from '@mui/material/IconButton'
-import ListSubheader from '@mui/material/ListSubheader'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
-import Collapse from '@mui/material/Collapse'
-
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 
 import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup'
-import { NavLinkListItem } from 'components/shared/wrappers'
-import { getMyChronicles, getMyOwnChronicles } from 'selectors'
-import type { Chronicle, Enhancer } from 'utils/flow-types'
+import { NavLinkListItem } from '@/components/shared/wrappers'
+import { getMyChronicles, getMyOwnChronicles } from '@/selectors'
+import type { Chronicle, Enhancer } from '@/utils/flow-types'
+
+import {
+  IconButton,
+  ListSubheader,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  Collapse,
+} from '@mui/material'
+
 interface ExposedProps {
   closeDrawer: $TSFixMeFunction
 }

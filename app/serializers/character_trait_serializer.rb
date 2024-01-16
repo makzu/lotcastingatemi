@@ -2,5 +2,5 @@
 
 # app/serializers/attribute_charm_serializer.rb
 class CharacterTraitSerializer < BaseSerializer
-  attributes :character_id, :sort_order
+  attributes :character_id, :sorting
 end

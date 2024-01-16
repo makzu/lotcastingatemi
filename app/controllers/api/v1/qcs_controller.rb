@@ -44,7 +44,7 @@ module Api
         @new_qc = @qc.deep_clone include: %i[
           qc_attacks qc_charms qc_merits poisons
         ], except: %i[
-          chronicle_id sort_order chronicle_sort_order pinned hidden public
+          chronicle_id sorting chronicle_sorting pinned hidden public
           in_combat has_acted
         ]
 
@@ -61,6 +61,8 @@ module Api
       def qc_params
         params.require(:qc).permit(
           *base_attributes,
+          :sorting_position,
+          :chronicle_sorting_position,
           ties:            [Schemas::INTIMACY_PARAMS],
           principles:      [Schemas::INTIMACY_PARAMS],
           actions:         [Schemas::QC_ACTION_PARAMS],

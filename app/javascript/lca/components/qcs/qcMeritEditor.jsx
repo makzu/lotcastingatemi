@@ -8,12 +8,13 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import QcMeritFields from './qcMeritFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
+import QcMeritFields from './qcMeritFields.jsx'
 
 import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions.js'
+import { updateQcMeritSort } from 'ducks/entities/qc_merit'
 import { getMeritsForQc } from 'selectors'
-import type { fullQc, QcMerit, Enhancer } from 'utils/flow-types'
+import type { Enhancer, QcMerit, fullQc } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
@@ -26,6 +27,7 @@ type Props = ExposedProps & {
   updateQcMerit: Function,
   createQcMerit: Function,
   destroyQcMerit: Function,
+  updateQcMeritSort: Function,
 }
 
 class QcMeritEditor extends React.Component<Props> {
@@ -37,7 +39,7 @@ class QcMeritEditor extends React.Component<Props> {
     this.props.createQcMerit(this.props.qc.id)
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyQcMerit(id, this.props.qc.id)
   }
 
@@ -45,9 +47,13 @@ class QcMeritEditor extends React.Component<Props> {
     if (oldIndex === newIndex) return
     const meritA = this.props.qc_merits[oldIndex]
     const meritB = this.props.qc_merits[newIndex]
-    const offset = meritA.sort_order > meritB.sort_order ? -1 : 1
+    const offset = meritA.sorting > meritB.sorting ? -1 : 1
+    this.props.updateQcMeritSort({
+      id: meritA.id,
+      sorting: meritB.sorting + offset,
+    })
     this.props.updateQcMerit(meritA.id, this.props.qc.id, {
-      sort_order: meritB.sort_order + offset,
+      sorting_position: newIndex,
     })
   }
 
@@ -98,13 +104,11 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  {
-    updateQcMerit,
-    createQcMerit,
-    destroyQcMerit,
-  }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  updateQcMerit,
+  createQcMerit,
+  destroyQcMerit,
+  updateQcMeritSort,
+})
 
 export default enhance(QcMeritEditor)

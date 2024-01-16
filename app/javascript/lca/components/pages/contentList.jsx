@@ -9,22 +9,22 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
+import SortableGridList from 'components/generic/SortableGridList.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.js'
+import { getMyBattlegroups, getMyCharacters, getMyQCs } from 'selectors'
+import commonStyles from 'styles'
+import type { Battlegroup, Character, Enhancer, fullQc } from 'utils/flow-types'
+import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
+import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
 import CharacterCard from '../characters/CharacterCard.jsx'
 import CharacterCreatePopup from '../characters/CharacterCreatePopup'
 import QcCard from '../qcs/QcCard.jsx'
 import QcCreatePopup from '../qcs/qcCreatePopup.jsx'
-import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
-import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
-import { getMyCharacters, getMyQCs, getMyBattlegroups } from 'selectors'
-import commonStyles from 'styles'
-import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
   nthTitle: { marginTop: theme.spacing(3) },
 })
@@ -60,9 +60,7 @@ class ContentList extends Component<Props> {
         return
     }
     const charA = coll[oldIndex]
-    const charB = coll[newIndex]
-    const offset = charA.sort_order > charB.sort_order ? -1 : 1
-    update(charA.id, { sort_order: charB.sort_order + offset })
+    update(charA.id, { sorting_position: newIndex })
   }
 
   render() {
@@ -142,19 +140,16 @@ class ContentList extends Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   characters: getMyCharacters(state),
   qcs: getMyQCs(state),
   battlegroups: getMyBattlegroups(state),
 })
 
 const enhance: Enhancer<Props, {}> = compose(
-  connect(
-    mapStateToProps,
-    { updateCharacter, updateQc, updateBattlegroup }
-  ),
+  connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup }),
   withStyles(styles),
-  ProtectedComponent
+  ProtectedComponent,
 )
 
 export default enhance(ContentList)

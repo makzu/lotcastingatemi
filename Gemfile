@@ -34,6 +34,9 @@ gem 'omniauth', '~> 2.1'
 gem 'omniauth-google-oauth2', '~> 1.1'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
+# Sorting
+gem "ranked-model", "~> 0.4.9"
+
 # Validate json fields like craft ratings, qc pools, etc
 # Stick with 1.x for now because we had issues with 2.x
 # TODO: fix these issues?

@@ -7,14 +7,15 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import QcAttackFields from './qcAttackFields.jsx'
 import {
   createQcAttack,
   destroyQcAttack,
   updateQcAttack,
 } from 'ducks/actions.js'
+import { updateQcAttackSort } from 'ducks/entities/qc_attack'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
-import type { QcAttack, Enhancer } from 'utils/flow-types'
+import type { Enhancer, QcAttack } from 'utils/flow-types'
+import QcAttackFields from './qcAttackFields.jsx'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)
@@ -29,6 +30,7 @@ type Props = ExposedProps & {
   updateQcAttack: Function,
   createQcAttack: Function,
   destroyQcAttack: Function,
+  updateQcAttackSort: Function,
 }
 
 class QcAttackEditor extends React.Component<Props> {
@@ -40,19 +42,23 @@ class QcAttackEditor extends React.Component<Props> {
     this.props.createQcAttack(this.props.qc.id, { parent: this.props.type })
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyQcAttack(id, this.props.qc.id, this.props.type)
   }
 
   handleSort = ({ oldIndex, newIndex }) => {
     const attackA = this.props.qc_attacks[oldIndex]
     const attackB = this.props.qc_attacks[newIndex]
-    const offset = attackA.sort_order > attackB.sort_order ? -1 : 1
+    const offset = attackA.sorting > attackB.sorting ? -1 : 1
+    this.props.updateQcAttackSort({
+      id: attackA.id,
+      sorting: attackB.sorting + offset,
+    })
     this.props.updateQcAttack(
       attackA.id,
       this.props.qc.id,
-      { sort_order: attackB.sort_order + offset },
-      this.props.type
+      { sorting_position: newIndex },
+      this.props.type,
     )
   }
 
@@ -109,13 +115,11 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  {
-    updateQcAttack,
-    createQcAttack,
-    destroyQcAttack,
-  }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  updateQcAttack,
+  createQcAttack,
+  destroyQcAttack,
+  updateQcAttackSort,
+})
 
 export default enhance(QcAttackEditor)

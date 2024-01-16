@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 # Spells!  For sorcerers.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
 class Spell < ApplicationRecord
   include Broadcastable
-  include Sortable
+  include RankedModel
+
+  ranks :sorting, with_same: :sorcerer_id
 
   belongs_to :sorcerer, touch: true, polymorphic: true
 

@@ -10,17 +10,18 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import QcCharmFields from './qcCharmFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
+import QcCharmFields from './qcCharmFields.jsx'
 
 import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.js'
+import { updateQcCharmSort } from 'ducks/entities/qc_charm'
 import { getCharmsForQc } from 'selectors'
 import commonStyles from 'styles'
-import type { fullQc, QcCharm, Enhancer } from 'utils/flow-types'
+import type { Enhancer, QcCharm, fullQc } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
@@ -32,6 +33,7 @@ type Props = ExposedProps & {
   updateQcCharm: Function,
   createQcCharm: Function,
   destroyQcCharm: Function,
+  updateQcCharmSort: Function,
   classes: Object,
 }
 
@@ -44,20 +46,21 @@ class QcCharmEditor extends React.Component<Props> {
     this.props.createQcCharm(this.props.qc.id)
   }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     this.props.destroyQcCharm(id, this.props.qc.id)
   }
 
   handleSort = ({ oldIndex, newIndex }) => {
     if (oldIndex === newIndex) return
-  }
-  handleSort = ({ oldIndex, newIndex }) => {
-    if (oldIndex === newIndex) return
     const charmA = this.props.qc_charms[oldIndex]
     const charmB = this.props.qc_charms[newIndex]
-    const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
+    const offset = charmA.sorting > charmB.sorting ? -1 : 1
+    this.props.updateQcCharmSort({
+      id: charmA.id,
+      sorting: charmB.sorting + offset,
+    })
     this.props.updateQcCharm(charmA.id, this.props.qc.id, {
-      sort_order: charmB.sort_order + offset,
+      sorting_position: newIndex,
     })
   }
   render() {
@@ -109,15 +112,13 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    {
-      updateQcCharm,
-      createQcCharm,
-      destroyQcCharm,
-    }
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, {
+    updateQcCharm,
+    createQcCharm,
+    destroyQcCharm,
+    updateQcCharmSort,
+  }),
+  withStyles(styles),
 )
 
 export default enhance(QcCharmEditor)

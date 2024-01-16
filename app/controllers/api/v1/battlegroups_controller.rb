@@ -46,7 +46,7 @@ module Api
         @new_bg = @battlegroup.deep_clone include: %i[
           qc_attacks
         ], except: %i[
-          chronicle_id sort_order chronicle_sort_order pinned hidden public
+          chronicle_id sorting chronicle_sorting pinned hidden public
           in_combat has_acted
         ]
 
@@ -58,6 +58,14 @@ module Api
         else
           render json: @new_bg.errors.details, status: :bad_request
         end
+      end
+
+      def battlegroup_params
+        params.require(:battlegroup).permit(
+          *base_attributes,
+          :sorting_position,
+          :chronicle_sorting_position
+        )
       end
     end
   end

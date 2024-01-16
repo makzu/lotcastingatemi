@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
@@ -9,6 +9,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import { State } from 'ducks'
 import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
+import { updateWeaponSort } from 'ducks/entities/weapon'
 import { Character } from 'types'
 import WeaponEditorPopup from './WeaponEditorPopup'
 import WeaponRow from './WeaponRow'
@@ -36,10 +37,11 @@ const WeaponEditor = (props: WeaponEditorProps) => {
   const handleSort = ({ oldIndex, newIndex }) => {
     const weaponA = weapons[oldIndex]
     const weaponB = weapons[newIndex]
-    const offset = weaponA.sort_order > weaponB.sort_order ? -1 : 1
+    const offset = newIndex > oldIndex ? 1 : -1
+    dispatch(updateWeaponSort({id: weaponA.id, sorting: weaponB.sorting + offset}))
     dispatch(
       updateWeapon(weaponA.id, character.id, {
-        sort_order: weaponB.sort_order + offset,
+        sorting_position: newIndex,
       })
     )
   }

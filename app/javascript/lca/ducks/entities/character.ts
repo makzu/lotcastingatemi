@@ -1,3 +1,4 @@
+import { createAction } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
@@ -11,13 +12,38 @@ import {
   mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
+import { EntityState } from './_types'
 import { getCurrentPlayer } from './player'
 
 const CHARACTER = 'character'
 
+export const updateCharacterSort = createAction<{
+  id: number
+  sorting: number
+}>('sort/character')
+
+export const updateCharacterChronicleSort = createAction<{
+  id: number
+  sorting: number
+}>('chronicle_sort/character')
+
 /* *** Reducer *** */
 export default createEntityReducer(CHARACTER, {
   [crudAction(CHARACTER, 'CHANGE_TYPE').success.toString()]: mergeEntity,
+  [updateCharacterSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateCharacterSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.characters[id].sorting = sorting
+  },
+  [updateCharacterChronicleSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateCharacterChronicleSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.characters[id].chronicle_sorting = sorting
+  },
 })
 
 /* *** Actions *** */
@@ -41,7 +67,7 @@ export function changeCharacterType(id: number, type: string) {
 
 export const fetchCharacterIfNecessary = createConditionalFetchAction(
   CHARACTER,
-  fetchCharacter
+  fetchCharacter,
 )
 
 /* *** Selectors *** */
@@ -50,17 +76,17 @@ const getCharacters = (state: State) => unwrapped(state).characters
 export const getMyCharacters = createSelector(
   [getCurrentPlayer, getCharacters],
   (currentPlayer, characters) =>
-    currentPlayer.characters.map(c => characters[c]).sort(sortOrderSort)
+    currentPlayer.characters.map((c) => characters[c]).sort(sortOrderSort),
 )
 
 export const getMyPinnedCharacters = createSelector(
   [getMyCharacters],
-  characters => characters.filter(c => c.pinned)
+  (characters) => characters.filter((c) => c.pinned),
 )
 
 export const getMyCharactersWithoutChronicles = createSelector(
   [getMyCharacters],
-  characters => characters.filter(c => c.chronicle_id == null)
+  (characters) => characters.filter((c) => c.chronicle_id == null),
 )
 
 export const getSpecificCharacter = (state: State, id: number) =>

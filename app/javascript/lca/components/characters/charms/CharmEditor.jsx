@@ -11,27 +11,29 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import styles from './CharmStyles.js'
+import SortableGridList from 'components/generic/SortableGridList.jsx'
 import CharmFields from './CharmFields.jsx'
 import CharmFilter from './CharmFilter.jsx'
+import styles from './CharmStyles.js'
 import SpellFields from './SpellFields.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import {
-  updateCharm,
   createCharm,
-  destroyCharm,
-  updateSpell,
   createSpell,
+  destroyCharm,
   destroySpell,
+  updateCharm,
+  updateSpell,
 } from 'ducks/actions.js'
+import { updateCharmSort } from 'ducks/entities/charm'
+import { updateSpellSort } from 'ducks/entities/spell'
 import { getSpecificCharacter } from 'ducks/selectors'
 import {
-  getEvokableMeritsForCharacter,
-  getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter,
+  getEvokableMeritsForCharacter,
+  getMartialArtsCharmsForCharacter,
+  getNativeCharmsForCharacter,
   getSpellsForCharacter,
   getSpiritCharmsForCharacter,
 } from 'selectors/'
@@ -54,6 +56,8 @@ export type Props = {
   createSpell: Function,
   updateSpell: Function,
   destroySpell: Function,
+  updateCharmSort: Function,
+  updateSpellSort: Function,
   classes: Object,
 }
 type State = {
@@ -259,8 +263,11 @@ class CharmEditor extends Component<Props, State> {
     const charId = this.props.character.id
     const charmA = charms[oldIndex]
     const charmB = charms[newIndex]
-    const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
-    update(charmA.id, charId, { sort_order: charmB.sort_order + offset })
+    const offset = charmA.sorting > charmB.sorting ? -1 : 1
+    const updateSort =
+      collection === 'spell' ? updateSpellSort : updateCharmSort
+    updateSort({ id: charmA.id, sorting: charmB.sorting + offset })
+    update(charmA.id, charId, { sorting_position: newIndex })
   }
 
   render() {
@@ -562,6 +569,8 @@ export default ProtectedComponent(
       createSpell,
       updateSpell,
       destroySpell,
+      updateCharmSort,
+      updateSpellSort,
     })(CharmEditor),
   ),
 )

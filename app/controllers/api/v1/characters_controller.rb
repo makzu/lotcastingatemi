@@ -43,7 +43,7 @@ module Api
           attribute_charms ability_charms essence_charms evocations
           martial_arts_charms weapons merits spirit_charms spells
         ], except: %i[
-          chronicle_id sort_order chronicle_sort_order pinned hidden public
+          chronicle_id sorting chronicle_sorting pinned hidden public
           in_combat has_acted
         ]
 
@@ -81,6 +81,8 @@ module Api
       def character_params
         params.require(:character).permit(
           *base_attributes,
+          :sorting_position,
+          :chronicle_sorting_position,
           ties:               [Schemas::INTIMACY_PARAMS],
           principles:         [Schemas::INTIMACY_PARAMS],
           motes_committed:    [Schemas::MOTE_COMMITTMENT_PARAMS],

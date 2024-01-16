@@ -11,6 +11,7 @@ import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { State } from 'ducks'
 import { getMyCharacters, updateCharacter } from 'ducks/entities'
+import { updateCharacterSort } from 'ducks/entities/character'
 
 const SortableItem = SortableElement(({ children }) => children)
 
@@ -33,9 +34,10 @@ const CharacterList = () => {
 
     const charA = characters[oldIndex]
     const charB = characters[newIndex]
-    const offset = charA.sort_order > charB.sort_order ? -1 : 1
+    const offset = charA.sorting > charB.sorting ? 1 : -1
+    dispatch(updateCharacterSort({id: charA.id, sorting: charB.sorting + offset}))
     dispatch(
-      updateCharacter(charA.id, { sort_order: charB.sort_order + offset }),
+      updateCharacter(charA.id, { sorting_position: newIndex }),
     )
   }
 

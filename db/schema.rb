@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
-
+ActiveRecord::Schema[7.1].define(version: 2023_12_19_012435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,8 +20,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.integer "drill", default: 1
     t.boolean "perfect_morale", default: false
     t.integer "health_levels", default: 7
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name", default: "New Battlegroup"
     t.bigint "player_id"
     t.bigint "chronicle_id"
@@ -52,6 +51,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.boolean "has_acted", default: false
     t.boolean "public", default: false
     t.string "portrait_link"
+    t.integer "sorting"
+    t.integer "chronicle_sorting"
     t.index ["chronicle_id"], name: "index_battlegroups_on_chronicle_id"
     t.index ["player_id"], name: "index_battlegroups_on_player_id"
   end
@@ -126,8 +127,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.text "shaping_rituals", default: ""
     t.string "native_language", default: "Riverspeak"
     t.text "lore_background", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "player_id"
     t.bigint "chronicle_id"
     t.string "type"
@@ -178,6 +179,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.jsonb "base_pool_overrides", default: {}
     t.jsonb "bonuses", default: []
     t.string "active_form", default: "base"
+    t.integer "sorting"
+    t.integer "chronicle_sorting"
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -199,19 +202,20 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "ability"
     t.integer "min_ability"
     t.string "style"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "sort_order", default: 0
     t.string "categories", default: [], array: true
     t.string "summary", default: ""
+    t.integer "sorting"
     t.index ["character_id"], name: "index_charms_on_character_id"
   end
 
   create_table "chronicle_players", force: :cascade do |t|
     t.bigint "chronicle_id"
     t.bigint "player_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["chronicle_id"], name: "index_chronicle_players_on_chronicle_id"
     t.index ["player_id"], name: "index_chronicle_players_on_player_id"
   end
@@ -219,8 +223,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
   create_table "chronicles", force: :cascade do |t|
     t.bigint "st_id"
     t.string "name", default: "New Chronicle"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "invite_code"
     t.text "notes", default: ""
     t.index ["invite_code"], name: "index_chronicles_on_invite_code", unique: true
@@ -243,8 +247,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.bigint "player_id"
     t.string "actor_type"
     t.bigint "actor_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["actor_type", "actor_id"], name: "index_combat_actors_on_actor_type_and_actor_id"
     t.index ["chronicle_id"], name: "index_combat_actors_on_chronicle_id"
     t.index ["player_id"], name: "index_combat_actors_on_player_id"
@@ -259,9 +263,9 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.bigint "player_id"
     t.string "token"
     t.string "refresh_token"
-    t.datetime "expires_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "expires_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["player_id"], name: "index_identities_on_player_id"
   end
 
@@ -275,18 +279,19 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "ref", default: "Core p.157-169"
     t.boolean "supernatural", default: false
     t.string "prereqs", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "sort_order", default: 0
     t.boolean "mutation", default: false
     t.string "forms", default: [], array: true
+    t.integer "sorting"
     t.index ["character_id"], name: "index_merits_on_character_id"
   end
 
   create_table "players", force: :cascade do |t|
     t.string "display_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "email"
   end
 
@@ -305,8 +310,9 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "ref", default: ""
     t.string "poisonable_type"
     t.bigint "poisonable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.integer "sorting"
     t.index ["poisonable_type", "poisonable_id"], name: "index_poisons_on_poisonable_type_and_poisonable_id"
   end
 
@@ -318,10 +324,11 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.integer "damage", default: 1
     t.integer "overwhelming", default: 1
     t.string "tags", default: [], array: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "qc_attackable_type"
     t.integer "sort_order", default: 0
+    t.integer "sorting"
     t.index ["qc_attackable_id"], name: "index_qc_attacks_on_qc_attackable_id"
   end
 
@@ -336,9 +343,10 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.text "body", default: ""
     t.string "ref", default: ""
     t.string "category", default: "miscellaneous"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "sort_order", default: 0
+    t.integer "sorting"
     t.index ["qc_id"], name: "index_qc_charms_on_qc_id"
   end
 
@@ -349,9 +357,10 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.boolean "magical", default: false
     t.text "body", default: ""
     t.string "ref", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "sort_order", default: 0
+    t.integer "sorting"
     t.index ["qc_id"], name: "index_qc_merits_on_qc_id"
   end
 
@@ -387,8 +396,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "armor_name", default: ""
     t.json "actions", default: []
     t.string "ref", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "player_id"
     t.bigint "chronicle_id"
     t.integer "senses", default: 3
@@ -418,6 +427,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "categories", default: [], array: true
     t.integer "feats_of_strength", default: 0
     t.integer "strength", default: 0
+    t.integer "sorting"
+    t.integer "chronicle_sorting"
     t.index ["chronicle_id"], name: "index_qcs_on_chronicle_id"
     t.index ["player_id"], name: "index_qcs_on_player_id"
   end
@@ -431,12 +442,13 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "duration", default: "instant"
     t.text "body", default: ""
     t.string "ref", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "control", default: false
     t.integer "sort_order", default: 0
     t.string "categories", default: [], array: true
     t.string "sorcerer_type"
+    t.integer "sorting"
     t.index ["sorcerer_id"], name: "index_spells_on_sorcerer_id"
   end
 
@@ -447,8 +459,8 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.string "weight", default: "light"
     t.string "tags", default: [], array: true
     t.boolean "is_artifact", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "attr", default: "dexterity"
     t.integer "sort_order", default: 0
     t.string "damage_attr", default: "strength"
@@ -458,6 +470,7 @@ ActiveRecord::Schema[6.1].define(version: 2019_11_11_184714) do
     t.integer "bonus_overwhelming", default: 0
     t.text "notes", default: ""
     t.jsonb "overrides", default: {}
+    t.integer "sorting"
     t.index ["character_id"], name: "index_weapons_on_character_id"
   end
 

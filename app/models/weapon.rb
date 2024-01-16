@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 # Stores traits for individual weapons.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
 class Weapon < ApplicationRecord
   include Broadcastable
   include CharacterTrait
+  include RankedModel
+
+  ranks :sorting, with_same: :character_id
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 

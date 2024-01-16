@@ -3,8 +3,6 @@
 require 'support/auth_token'
 
 RSpec.shared_examples 'character' do |character_type, parent|
-  ActiveJob::Base.queue_adapter = :test
-
   let(:trait) { create(character_type) }
 
   context 'when logged in' do

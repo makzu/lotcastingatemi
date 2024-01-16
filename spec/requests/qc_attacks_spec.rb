@@ -5,8 +5,6 @@ require 'requests/shared_examples/character_trait'
 require 'support/auth_token'
 
 RSpec.describe 'QcAttacks' do
-  ActiveJob::Base.queue_adapter = :test
-
   let(:attack) { create(:qc_attack) }
 
   context 'when logged in' do
@@ -17,7 +15,7 @@ RSpec.describe 'QcAttacks' do
           patch "/api/v1/qcs/#{attack.qc_attackable_id}/qc_attacks/#{attack.id}",
                 params:,
                 headers: authenticated_header(attack.player)
-        end.to have_enqueued_job(UpdateBroadcastJob)
+        end.to have_enqueued_job(UpdateBroadcastJob).at_least(2).times # create chronicle, character, attack | update chronicle, character, attack
 
         expect(response).to have_http_status :ok
         expect(QcAttack.find(attack.id).tags).to eq %w[lethal melee balanced]

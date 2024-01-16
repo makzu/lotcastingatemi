@@ -8,7 +8,7 @@ class QcAttack < ApplicationRecord
   include Broadcastable
   include RankedModel
 
-  belongs_to :qc_attackable, polymorphic: true
+  belongs_to :qc_attackable, touch: true, polymorphic: true
   alias character qc_attackable
   ranks :sorting, with_same: :qc_attackable_id
 

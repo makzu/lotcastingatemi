@@ -4,7 +4,7 @@
 module QcTrait
   extend ActiveSupport::Concern
   included do
-    belongs_to :qc
+    belongs_to :qc, touch: true
     alias_method :character, :qc
 
     delegate :player,      to: :qc

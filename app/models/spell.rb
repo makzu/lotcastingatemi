@@ -9,7 +9,7 @@ class Spell < ApplicationRecord
 
   ranks :sorting, with_same: :sorcerer_id
 
-  belongs_to :sorcerer, polymorphic: true
+  belongs_to :sorcerer, touch: true, polymorphic: true
 
   alias character sorcerer
   alias character= sorcerer=

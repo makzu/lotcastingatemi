@@ -13,7 +13,7 @@ interface Props {
   name: string
   label: string
   value: boolean
-  onChange: (e: any) => void
+  onChange: $TSFixMeFunction
   labelPlacement?: 'end'
 }
 const LcaCheckbox = ({ name, value, onChange, ...others }: Props) => {

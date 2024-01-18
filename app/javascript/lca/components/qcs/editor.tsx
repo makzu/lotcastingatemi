@@ -39,8 +39,8 @@ interface ExposedProps {
 type Props = ExposedProps & {
   qc: fullQc
   showPublicCheckbox: boolean
-  updateQc: Function
-  classes: Object
+  updateQc: $TSFixMeFunction
+  classes: $TSFixMe
 }
 
 class QcEditor extends Component<Props> {

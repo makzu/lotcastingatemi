@@ -96,8 +96,8 @@ interface ExposedProps {
   battlegroup?: boolean
 }
 type Props = ExposedProps & {
-  fakeBg: Object
-  classes: Object
+  fakeBg: $TSFixMe
+  classes: $TSFixMe
 }
 
 class QcAttackFields extends Component<Props> {

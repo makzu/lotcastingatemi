@@ -33,7 +33,7 @@ const styles = (theme) => ({
 
 interface Props {
   loading: boolean
-  classes: Object
+  classes: $TSFixMe
 }
 class LoadingSpinner extends PureComponent<Props> {
   render() {

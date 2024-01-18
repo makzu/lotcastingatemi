@@ -1,5 +1,3 @@
-import { SortableElement } from 'react-sortable-hoc'
-
 import { Grid, Typography } from '@mui/material'
 
 import SortableGridList from '@/components/generic/SortableGridList'

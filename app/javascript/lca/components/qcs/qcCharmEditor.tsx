@@ -27,10 +27,10 @@ interface ExposedProps {
 }
 type Props = ExposedProps & {
   qc_charms: QcCharm[]
-  updateQcCharm: Function
-  createQcCharm: Function
-  destroyQcCharm: Function
-  classes: Object
+  updateQcCharm: $TSFixMeFunction
+  createQcCharm: $TSFixMeFunction
+  destroyQcCharm: $TSFixMeFunction
+  classes: $TSFixMe
 }
 
 class QcCharmEditor extends Component<Props> {

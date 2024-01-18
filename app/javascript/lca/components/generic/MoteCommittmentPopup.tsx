@@ -65,7 +65,7 @@ const mapDispatchToProps = (
   dispatch: $TSFixMeFunction,
   props: ExposedProps,
 ) => ({
-  update: (id: number, trait: string, value: any): $TSFixMeFunction =>
+  update: (id: number, trait: string, value: $TSFixMe): $TSFixMeFunction =>
     dispatch(
       props.qc ? updateQc(id, trait, value) : updateCharacter(id, trait, value),
     ),

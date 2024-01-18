@@ -4,7 +4,6 @@ import ContentAddCircle from '@mui/icons-material/AddCircle'
 import { Button, Grid, Typography } from '@mui/material'
 
 import SortableGridList from '@/components/generic/SortableGridList'
-
 import Checkbox from '@/components/shared/inputs/Checkbox'
 import { createSpell, destroySpell, updateSpell } from '@/ducks/actions'
 import { getSpellsForQc } from '@/ducks/selectors'

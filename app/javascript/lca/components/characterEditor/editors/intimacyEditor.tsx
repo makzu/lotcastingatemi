@@ -8,7 +8,7 @@ import type { withIntimacies as Character } from '@/utils/flow-types'
 
 interface Props {
   character: Character
-  onChange: Function
+  onChange: $TSFixMeFunction
 }
 
 class IntimacyEditor extends Component<Props> {

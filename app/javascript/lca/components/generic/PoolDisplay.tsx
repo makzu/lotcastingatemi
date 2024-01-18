@@ -47,7 +47,7 @@ interface Props {
   noSummary?: boolean
   qc?: boolean
   battlegroup?: boolean
-  classes: Object
+  classes: $TSFixMe
 }
 
 class PoolDisplay extends Component<Props, { open: boolean }> {

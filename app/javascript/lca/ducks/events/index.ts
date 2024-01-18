@@ -58,7 +58,7 @@ export function spendWillpower(
 ) {
   const update = updateEvent(charType)
 
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch: $TSFixMeFunction, getState: $TSFixMeFunction) => {
     dispatch({ type: SPEND_WP, id: id })
     const current_wp =
       getState().entities.current[charType + 's'][id].willpower_temporary

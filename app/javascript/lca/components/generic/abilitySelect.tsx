@@ -19,8 +19,8 @@ const styles = (theme) => ({
 })
 
 interface Props {
-  abilities?: Object[]
-  attributes?: Object[]
+  abilities?: $TSFixMe[]
+  attributes?: $TSFixMe[]
   prependOptions?: Node
   withAttributes?: boolean
   attributesOnly?: boolean
@@ -31,8 +31,8 @@ interface Props {
   label: string
   fullWidth?: boolean
   margin?: 'none' | 'dense' | 'normal'
-  classes: Object
-  onChange: Function
+  classes: $TSFixMe
+  onChange: $TSFixMeFunction
 }
 
 class AbilitySelect extends Component<Props> {

@@ -8,7 +8,7 @@ import { LIMIT_MAX } from '@/utils/constants'
 
 interface Props {
   character: Character
-  onChange: Function
+  onChange: $TSFixMeFunction
 }
 
 function LimitEditor({ character, onChange }: Props) {

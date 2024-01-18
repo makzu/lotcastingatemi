@@ -38,9 +38,9 @@ interface Props {
   battlegroup: Battlegroup
   className?: string
   DisplayClassName?: string
-  classes: Object
+  classes: $TSFixMe
   canEdit: boolean
-  update: Function
+  update: $TSFixMeFunction
 }
 interface State {
   open: boolean

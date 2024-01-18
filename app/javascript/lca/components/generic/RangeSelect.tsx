@@ -1,12 +1,12 @@
 import { PureComponent } from 'react'
 
-import { MenuItem, TextField } from '@mui/material';
+import { MenuItem, TextField } from '@mui/material'
 
 interface Props {
   value: string
   name: string
-  className?: any
-  onChange: Function
+  className?: $TSFixMe
+  onChange: $TSFixMeFunction
 }
 class RangeSelect extends PureComponent<Props> {
   render() {

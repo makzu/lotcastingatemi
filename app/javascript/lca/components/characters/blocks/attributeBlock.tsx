@@ -8,7 +8,7 @@ import { Grid, Typography } from '@mui/material'
 
 export interface Props {
   character: Character
-  pools: Object
+  pools: $TSFixMe
 }
 function AttributeBlock({ character, pools }: Props) {
   return (

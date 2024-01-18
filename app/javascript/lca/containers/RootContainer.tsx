@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
 ])
 
 interface Props {
-  store: any
+  store: $TSFixMe
 }
 
 const RootContainer = ({ store }: Props) => {

@@ -127,7 +127,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Object = (dispatch) => ({
+const mapDispatchToProps: $TSFixMe = (dispatch) => ({
   handleSubmit: (id, qcId) => dispatch(addThingToChronicle(id, qcId, 'qc')),
 })
 

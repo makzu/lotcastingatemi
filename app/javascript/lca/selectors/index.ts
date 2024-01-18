@@ -23,6 +23,7 @@ import {
 import { amIStOfChronicle } from './chronicle'
 import { entities, getCurrentPlayer } from './entities'
 import { canIDeleteQc, canIEditQc, getPoolsAndRatingsForQc } from './qc'
+import { isDefined } from '@/utils'
 
 type CT = 'chronicle' | 'character' | 'qc' | 'battlegroup'
 export const canIEdit = (state: RootState, id: number, characterType: CT) => {
@@ -78,17 +79,17 @@ const getChronicles = (state: RootState) => entities(state).chronicles
 export const getMyOwnChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
-    currentPlayer.own_chronicles
+    (currentPlayer?.own_chronicles ?? [])
       .map((c) => chronicles[c])
-      .filter((c) => c?.name !== undefined),
+      .filter(isDefined),
 )
 
 export const getMyChronicles = createSelector(
   [getCurrentPlayer, getChronicles],
   (currentPlayer, chronicles) =>
-    currentPlayer.chronicles
+    (currentPlayer?.chronicles ?? [])
       .map((c) => chronicles[c])
-      .filter((c) => c?.name !== undefined),
+      .filter(isDefined),
 )
 
 export const getPoolsAndRatingsGeneric = (

@@ -2,7 +2,8 @@
 
 ###### _Unreleased_
 
-- Nothing (so far)
+- Revamped sorting code behind drag-and-drop for characters, Charms, merits, etc.
+- Better caching for characters and other data. Data won't need to be re-downloaded on every visit if it hasn't changed.
 
 ## v99
 

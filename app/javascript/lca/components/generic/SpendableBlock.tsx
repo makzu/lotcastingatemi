@@ -1,7 +1,8 @@
+import { Typography } from '@mui/material'
 import withStyles from '@mui/styles/withStyles'
-import AnimaDisplay from '../generic/AnimaDisplay'
 
-import AuraDisplay from '../generic/AuraDisplay'
+import AnimaDisplay from '../displays/AnimaDisplay'
+import AuraDisplay from '../displays/AuraDisplay'
 import DamageWidget from '../generic/DamageWidget'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes'
 import MoteSpendWidget from '../generic/MoteSpendWidget'
@@ -10,9 +11,7 @@ import ShapeSorceryWidget from '../generic/ShapeSorceryWidget'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget'
 import sharedStyles from '@/styles/'
 import * as calc from '@/utils/calculated'
-import type { WithSharedStats } from '@/types/shared'
-import type { WithId } from '@/types/_lib'
-import { Typography } from '@mui/material'
+import { Character, QC } from '@/types'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
@@ -22,13 +21,13 @@ const styles = (theme) => ({
 })
 
 interface Props extends WithStyles<typeof styles> {
-  character: WithSharedStats & WithId
+  character: Character | QC
   qc?: boolean
 }
 export function SpendableBlock({ character, classes, qc }: Props) {
   return (
     <>
-      <Typography className="flexContainerWrap" component="div">
+      <Typography className="flexContainerWrap" component="div" sx={{ gap: 1 }}>
         {character.motes_personal_total > 0 && (
           <MoteSpendWidget character={character} qc={qc}>
             <ResourceDisplay
@@ -68,10 +67,9 @@ export function SpendableBlock({ character, classes, qc }: Props) {
             label="Willpower"
           />
         </WillpowerSpendWidget>
-        <div className={classes.moteWrap}>
-          <AuraDisplay character={character} qc={qc} />
-          <AnimaDisplay character={character} qc={qc} />
-        </div>
+
+        <AuraDisplay character={character} qc={qc} />
+        <AnimaDisplay character={character} qc={qc} />
       </Typography>
 
       <DamageWidget character={character} qc={qc}>

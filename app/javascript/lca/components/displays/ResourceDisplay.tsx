@@ -22,6 +22,7 @@ const ResourceDisplay = ({
       <Typography variant="h4" component="span">
         {current}
       </Typography>
+
       {total !== undefined && (
         <Typography
           variant="body1"
@@ -35,6 +36,7 @@ const ResourceDisplay = ({
           /{total}
         </Typography>
       )}
+
       {(committed ?? 0) > 0 && (
         <Typography
           component="span"

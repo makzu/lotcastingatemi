@@ -1,8 +1,6 @@
-import type { ReactNode } from 'react'
-
 import { Typography } from '@mui/material'
 
-const DisplayLabel = ({ children }: { children: ReactNode }) => {
+const DisplayLabel = ({ children }: { children: React.ReactNode }) => {
   return (
     <Typography
       variant="body1"

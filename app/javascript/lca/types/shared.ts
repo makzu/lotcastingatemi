@@ -31,6 +31,8 @@ export interface WithSharedStats extends WithSorcery, WithAura, WithIntimacies {
 export interface WithSorcery {
   is_sorcerer: boolean
   sorcerous_motes: number
+  is_necromancer: boolean
+  necromantic_motes: number
   rituals: string[]
   spells: number[]
 }

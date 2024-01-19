@@ -17,7 +17,7 @@ import {
 } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
@@ -99,6 +99,17 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
               trait="sorcerous_motes"
               value={character.sorcerous_motes}
               label="Sorcerous"
+              margin="dense"
+              onChange={onChange}
+            />
+          </div>
+        )}
+        {character.is_necromancer && (
+          <div className={classes.flexCol}>
+            <RatingField
+              trait="necromantic_motes"
+              value={character.necromantic_motes}
+              label="Necromantic"
               margin="dense"
               onChange={onChange}
             />

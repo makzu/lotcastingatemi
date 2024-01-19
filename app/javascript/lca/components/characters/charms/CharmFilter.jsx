@@ -72,7 +72,14 @@ class CharmFilter extends React.Component<Props> {
         filterLabel = 'Filter by Artifact'
         break
       case 'spell':
-        filters = ['terrestrial', 'celestial', 'solar']
+        filters = [
+          'terrestrial',
+          'celestial',
+          'solar',
+          'ivory',
+          'shadow',
+          'void',
+        ]
         filterName = 'circleFilter'
         filterLabel = 'Filter by Circle'
         break
@@ -88,7 +95,7 @@ class CharmFilter extends React.Component<Props> {
           Universal
         </MenuItem>
       ) : null,
-      ...filters.map(abil => {
+      ...filters.map((abil) => {
         switch (abil) {
           case '':
             return (
@@ -111,7 +118,7 @@ class CharmFilter extends React.Component<Props> {
         }
       }),
     ]
-    const catOptions = categories.map(cat => (
+    const catOptions = categories.map((cat) => (
       <MenuItem key={cat} value={cat} style={{ textTransform: 'capitalize' }}>
         {cat}
       </MenuItem>

@@ -20,7 +20,7 @@ class Spell < ApplicationRecord
   delegate :storyteller, to: :character
   delegate :hidden,      to: :character
 
-  CIRCLES = %w[ terrestrial celestial solar ].freeze
+  CIRCLES = %w[ terrestrial celestial solar ivory shadow void ].freeze
 
   attribute :ref, :string, default: 'Core p.471-483'
 

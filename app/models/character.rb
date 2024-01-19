@@ -73,8 +73,9 @@ class Character < ApplicationRecord
 
   validates :armor_weight, inclusion: { in: %w[ unarmored light medium heavy ] }
 
-  validates :sorcerous_motes, numericality: { greater_than_or_equal_to: 0 }
-  validates :onslaught,       numericality: { greater_than_or_equal_to: 0 }
+  validates :sorcerous_motes, :necromantic_motes, numericality: { greater_than_or_equal_to: 0 }
+
+  validates :onslaught, numericality: { greater_than_or_equal_to: 0 }
 
   # after_initialize :set_xp_log
   # after_initialize :set_solar_xp_log

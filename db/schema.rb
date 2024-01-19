@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_19_012435) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_18_223628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -181,6 +181,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_19_012435) do
     t.string "active_form", default: "base"
     t.integer "sorting"
     t.integer "chronicle_sorting"
+    t.boolean "is_necromancer", default: false
+    t.integer "necromantic_motes", default: 0
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end

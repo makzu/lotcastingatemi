@@ -11,6 +11,7 @@ import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import MoteSpendWidget from '../generic/MoteSpendWidget.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import ShapeSorceryWidget from '../generic/ShapeSorceryWidget.jsx'
+import ShapeNecromancyWidget from '../generic/ShapeNecromancyWidget'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
 import sharedStyles from 'styles/'
 import * as calc from 'utils/calculated'
@@ -20,7 +21,7 @@ import type {
   withHealthLevels,
 } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   moteWrap: {
     marginRight: theme.spacing(),
@@ -68,6 +69,15 @@ export function SpendableBlock({ character, classes, qc }: Props) {
               label="Sorcerous"
             />
           </ShapeSorceryWidget>
+        )}
+        {character.is_necromancer && (
+          <ShapeNecromancyWidget character={character}>
+            <ResourceDisplay
+              className={classes.moteWrap}
+              current={character.necromantic_motes}
+              label="Necromantic"
+            />
+          </ShapeNecromancyWidget>
         )}
         <WillpowerSpendWidget character={character} qc={qc}>
           <ResourceDisplay

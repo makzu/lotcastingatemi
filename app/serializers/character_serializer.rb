@@ -27,6 +27,7 @@ class CharacterSerializer < PlayerAssetSerializer
              :armor_name, :armor_weight, :armor_is_artifact, :armor_tags,
 
              :is_sorcerer, :sorcerous_motes, :rituals,
+             :is_necromancer, :necromantic_motes,
 
              :lore_background, :native_language,
 

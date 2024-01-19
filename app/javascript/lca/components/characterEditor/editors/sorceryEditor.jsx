@@ -16,7 +16,7 @@ import { isUnequalByKeys } from 'utils'
 import type { Character, Enhancer } from 'utils/flow-types'
 
 export const SorceryFields = (
-  props: { trait: string } & ListAttributeFieldTypes
+  props: { trait: string } & ListAttributeFieldTypes,
 ) => {
   const { onChange, trait, classes } = props
 
@@ -50,19 +50,19 @@ function SorceryEditor(props: Props) {
     <BlockPaper>
       <Typography variant="h6">Sorcery</Typography>
 
-      <FormControlLabel
-        label="Is sorcerer"
-        control={
-          <Checkbox
-            name="is_sorcerer"
-            checked={character.is_sorcerer}
-            onChange={onCheck}
-          />
-        }
-      />
+      <div>
+        <FormControlLabel
+          label="Is sorcerer"
+          control={
+            <Checkbox
+              name="is_sorcerer"
+              checked={character.is_sorcerer}
+              onChange={onCheck}
+            />
+          }
+        />
 
-      {character.is_sorcerer && (
-        <>
+        {character.is_sorcerer && (
           <RatingField
             trait="sorcerous_motes"
             value={character.sorcerous_motes}
@@ -70,7 +70,32 @@ function SorceryEditor(props: Props) {
             margin="dense"
             onChange={onRatingChange}
           />
-          <br />
+        )}
+      </div>
+
+      <div>
+        <FormControlLabel
+          label="Is necromancer"
+          control={
+            <Checkbox
+              name="is_necromancer"
+              checked={character.is_necromancer}
+              onChange={onCheck}
+            />
+          }
+        />
+        {character.is_necromancer && (
+          <RatingField
+            trait="necromantic_motes"
+            value={character.necromantic_motes}
+            label="Necromantic Motes"
+            margin="dense"
+            onChange={onRatingChange}
+          />
+        )}
+      </div>
+      {(character.is_sorcerer || character.is_necromancer) && (
+        <div>
           <ListAttributeEditor
             label="Shaping Rituals"
             character={character}
@@ -80,7 +105,7 @@ function SorceryEditor(props: Props) {
             onChange={onRatingChange}
             nonObject
           />
-        </>
+        </div>
       )}
     </BlockPaper>
   )
@@ -90,9 +115,11 @@ const enhance: Enhancer<Props, Props> = shouldUpdate(
   (props: Props, newProps: Props) =>
     isUnequalByKeys(props.character, newProps.character, [
       'is_sorcerer',
+      'is_necromancer',
       'sorcerous_motes',
+      'necromantic_motes',
       'rituals',
-    ])
+    ]),
 )
 
 export default enhance(SorceryEditor)

@@ -6,7 +6,7 @@ export interface Spell extends WithId, Sortable {
   sorcerer_id: number
   sorcerer_type: 'character' | 'qc'
   cost: string
-  circle: 'terrestrial' | 'celestial' | 'solar'
+  circle: 'terrestrial' | 'celestial' | 'solar' | 'ivory' | 'shadow' | 'void'
   control: boolean
   timing: Timing
   duration: string

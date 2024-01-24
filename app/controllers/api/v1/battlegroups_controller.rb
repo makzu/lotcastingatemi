@@ -12,7 +12,7 @@ module Api
 
         return unless stale? @battlegroups
 
-        render json: @battlegroups
+        render json: BattlegroupSerializer.many(@battlegroups)
       end
 
       def create
@@ -20,7 +20,7 @@ module Api
         @battlegroup.player ||= current_player
         authorize @battlegroup
         if @battlegroup.save
-          render json: @battlegroup
+          render json: BattlegroupSerializer.one(@battlegroup)
         else
           render json: @battlegroup.errors.details, status: :bad_request
         end

@@ -12,16 +12,18 @@ module Api
 
         return unless stale? @characters
 
-        render json: @characters
+        render json: CharacterSerializer.many(@characters)
       end
 
       def show
         authorize @character
 
+        return unless stale?(@character)
+
         if policy(@character).update?
-          render json: @character
+          render json: CharacterSerializer.one(@character)
         else
-          render json: @character.without_secrets
+          render json: CharacterSerializer.one(@character.without_secrets)
         end
       end
 
@@ -30,7 +32,7 @@ module Api
         @character.player ||= current_player
         authorize @character
         if @character.save
-          render json: @character
+          render json: CharacterSerializer.one(@character)
         else
           render json: @character.errors.details, status: :bad_request
         end
@@ -51,7 +53,7 @@ module Api
         @new_character.player = current_player
 
         if @new_character.save
-          render json: @new_character.reload
+          render json: CharacterSerializer.one(@new_character.reload)
         else
           render json: @new_character.error.details, status: :bad_request
         end

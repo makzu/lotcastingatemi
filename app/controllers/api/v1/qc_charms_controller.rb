@@ -9,7 +9,7 @@ module Api
         @qca.qc = @qc
         authorize @qca
         if @qca.save
-          render json: @qca
+          render json: QcCharmSerializer.one(@qca)
         else
           render json: @qca.errors.details, status: :bad_request
         end

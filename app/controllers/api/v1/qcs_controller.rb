@@ -12,7 +12,7 @@ module Api
 
         return unless stale? @qcs
 
-        render json: @qcs
+        render json: QcSerializer.many(@qcs)
       end
 
       def show
@@ -21,9 +21,9 @@ module Api
         return unless stale? @qc
 
         if policy(@qc).update?
-          render json: @qc
+          render json: QcSerializer.one(@qc)
         else
-          render json: @qc.without_secrets
+          render json: QcSerializer.one(@qc.without_secrets)
         end
       end
 
@@ -32,7 +32,7 @@ module Api
         @qc.player ||= current_player
         authorize @qc
         if @qc.save
-          render json: @qc
+          render json: QcSerializer.one(@qc)
         else
           render json: @qc.errors.details, status: :bad_request
         end
@@ -52,7 +52,7 @@ module Api
         @new_qc.player = current_player
 
         if @new_qc.save
-          render json: @new_qc.reload
+          render json: QcSerializer.one(@new_qc.reload)
         else
           render json: @new_qc.errors.details, status: :bad_request
         end

@@ -10,7 +10,7 @@ module Api
         @qca.qc_attackable = @parent
         authorize @qca
         if @qca.save
-          render json: @qca
+          render json: QcAttackSerializer.one(@qca)
         else
           render json: @qca.errors.details, status: :bad_request
         end

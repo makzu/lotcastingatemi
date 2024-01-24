@@ -13,7 +13,10 @@ gem 'pg', '~> 1.4'
 gem 'puma', '~> 6.4'
 
 # For JSON responses
-gem 'active_model_serializers', '~> 0.10'
+# gem 'active_model_serializers', '~> 0.10'
+# gem 'goldiloader', '~> 5.2.0'
+gem 'oj_serializers', '~> 2.0.0'
+# gem 'types_from_serializers', '~> 2.1.0'
 
 # Pagination
 gem 'pagy', '~> 6.0'

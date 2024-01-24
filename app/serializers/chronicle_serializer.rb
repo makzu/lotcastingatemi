@@ -3,28 +3,32 @@
 # app/serializers/chronicle_serializer.rb
 class ChronicleSerializer < BaseSerializer
   attributes :st_id, :name, :notes
-  attribute :invite_code, if: :storyteller?
+  attributes :invite_code, if: :storyteller?
 
-  belongs_to :st, class: Player
+  belongs_to :st, serializer: PlayerSerializer
 
-  has_many :players
+  has_many :players, serializer: PlayerSerializer
 
-  has_many :characters
-  has_many :qcs
-  has_many :battlegroups
+  has_many :characters, serializer: CharacterSerializer
+  has_many :qcs, serializer: QcSerializer
+  has_many :battlegroups, serializer: BattlegroupSerializer
 
   def storyteller?
-    current_player.id == object.st_id
+    current_player.id == chronicle.st_id
+  end
+
+  def current_player
+    options.fetch(:current_player)
   end
 
   # We don't need the full associations duplicated under Player, because they're
   #   already included above.
   class PlayerSerializer < BaseSerializer
-    attribute :display_name # , :characters, :qcs, :battlegroups, :chronicles, :own_chronicles
+    attributes :display_name # , :characters, :qcs, :battlegroups, :chronicles, :own_chronicles
 
     # Give just the IDs of the associations, that's all we need
-    class IdSerializer < ActiveModel::Serializer
-      attribute :id
+    class IdSerializer < Oj::Serializer
+      attributes :id
     end
 
     class CharacterSerializer < IdSerializer; end

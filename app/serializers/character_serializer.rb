@@ -3,7 +3,8 @@
 # app/serializers/character_serializer.rb
 class CharacterSerializer < PlayerAssetSerializer
   # rubocop:disable Layout/EmptyLinesAroundArguments
-  attributes :name, :essence, :description,
+  attributes :name,
+             :essence, :description,
              :willpower_temporary, :willpower_permanent,
              :health_level_0s, :health_level_1s, :health_level_2s,
              :health_level_4s, :health_level_incap,
@@ -50,14 +51,14 @@ class CharacterSerializer < PlayerAssetSerializer
              :caste_attributes, :favored_attributes,
              :excellency, :excellency_stunt, :excellencies_for
 
-  has_many :charms
-  has_many :martial_arts_charms
-  has_many :evocations
-  has_many :spirit_charms
+  has_many :charms, serializer: CharmSerializer
+  has_many :martial_arts_charms, serializer: MartialArtsCharmSerializer
+  has_many :evocations, serializer: EvocationSerializer
+  has_many :spirit_charms, serializer: CharmSerializer
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
-  has_many :merits
-  has_many :weapons
-  has_many :spells
+  has_many :merits, serializer: MeritSerializer
+  has_many :weapons, serializer: WeaponSerializer
+  has_many :spells, serializer: SpellSerializer
   # has_many :poisons
 end

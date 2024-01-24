@@ -10,7 +10,7 @@ module Api
         @poison.poisonable = @parent
         authorize @poison
         if @poison.save
-          render json: @poison
+          render json: PoisonSerializer.one(@poison)
         else
           render json: @poison.errors.details, status: :bad_request
         end

@@ -13,7 +13,7 @@ module Api
         @combat_actor.actor = @parent
 
         if @combat_actor.save
-          render json: @combat_actor
+          render json: CombatActorSerializer.one(@combat_actor)
         else
           render json: @combat_actor.errors.details, status: :bad_request
         end

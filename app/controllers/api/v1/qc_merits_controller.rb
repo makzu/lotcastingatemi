@@ -9,7 +9,7 @@ module Api
         @qcm.qc = @qc
         authorize @qcm
         if @qcm.save
-          render json: @qcm
+          render json: QcMeritSerializer.one(@qcm)
         else
           render json: @qcm.errors.details, status: :bad_request
         end

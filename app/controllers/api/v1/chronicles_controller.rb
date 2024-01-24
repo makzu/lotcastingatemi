@@ -22,7 +22,7 @@ module Api
 
         return unless stale? @chronicle
 
-        render json: @chronicle, include: include_hash
+        render json: ChronicleSerializer.one(@chronicle, current_player:)
       end
 
       def create
@@ -31,7 +31,7 @@ module Api
         authorize @chronicle
 
         if @chronicle.save
-          render json: @chronicle, include: include_hash
+          render json: ChronicleSerializer.one(@chronicle, current_player:)
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -41,7 +41,7 @@ module Api
         authorize @chronicle, :update?
         @chronicle.regenerate_invite_code
         if @chronicle.save
-          render json: @chronicle, include: []
+          render json: ChronicleSerializer.one(@chronicle, current_player:)
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -52,7 +52,7 @@ module Api
         @chronicle.players << current_player unless @chronicle.players.include? current_player
 
         if @chronicle.save
-          render json: @chronicle, include: include_hash
+          render json: ChronicleSerializer.one(@chronicle, current_player:)
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -70,7 +70,7 @@ module Api
         @chronicle.remove_player(@player)
 
         if @chronicle.save
-          render json: @chronicle, include: include_hash
+          render json: ChronicleSerializer.one(@chronicle, current_player:)
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
@@ -82,7 +82,7 @@ module Api
 
         @chronicle.characters << @character
         broadcast_update(@character)
-        render json: @chronicle, include: include_hash
+        render json: ChronicleSerializer.one(@chronicle, current_player:)
       end
 
       def remove_character
@@ -91,7 +91,7 @@ module Api
 
         @chronicle.characters.delete(@character)
         broadcast_update(@character)
-        render json: @chronicle, include: include_hash
+        render json: ChronicleSerializer.one(@chronicle, current_player:)
       end
 
       def add_qc
@@ -100,7 +100,7 @@ module Api
 
         @chronicle.qcs << @qc
         broadcast_update(@qc)
-        render json: @chronicle, include: include_hash
+        render json: ChronicleSerializer.one(@chronicle, current_player:)
       end
 
       def remove_qc
@@ -109,7 +109,7 @@ module Api
 
         @chronicle.qcs.delete(@qc)
         broadcast_update(@qc)
-        render json: @chronicle, include: include_hash
+        render json: ChronicleSerializer.one(@chronicle, current_player:)
       end
 
       def add_battlegroup
@@ -118,7 +118,7 @@ module Api
 
         @chronicle.battlegroups << @battlegroup
         broadcast_update(@battlegroup)
-        render json: @chronicle, include: include_hash
+        render json: ChronicleSerializer.one(@chronicle, current_player:)
       end
 
       def remove_battlegroup
@@ -127,7 +127,7 @@ module Api
 
         @chronicle.battlegroups.delete(@battlegroup)
         broadcast_update(@battlegroup)
-        render json: @chronicle, include: include_hash
+        render json: ChronicleSerializer.one(@chronicle, current_player:)
       end
 
       private

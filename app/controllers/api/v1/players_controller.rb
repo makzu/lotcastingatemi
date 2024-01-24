@@ -8,7 +8,7 @@ module Api
       # Show the currently logged-in player
       def index
         authorize current_player
-        render json: Player.includes(:chronicles, :own_chronicles).find(current_player.id)
+        render json: PlayerSerializer.one(current_player)
       end
 
       # Players do not have a show action

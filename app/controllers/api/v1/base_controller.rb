@@ -6,7 +6,6 @@ module Api
       include Knock::Authenticable
       include Pagy::Backend
       include Pundit::Authorization
-      serialization_scope :current_player
 
       before_action :authenticate_player
       before_action :setup_resource, except: %i[index create]

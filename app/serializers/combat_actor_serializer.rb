@@ -9,6 +9,6 @@ class CombatActorSerializer < PlayerAssetSerializer
              :motes_peripheral_current,
              :anima_level
 
-  attribute :actor_id
-  has_many :poisons
+  attributes :actor_id
+  # has_many :poisons
 end

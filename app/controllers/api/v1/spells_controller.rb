@@ -10,7 +10,7 @@ module Api
         @spell.sorcerer = @parent
         authorize @spell
         if @spell.save
-          render json: @spell
+          render json: SpellSerializer.one(@spell)
         else
           render json: @spell.errors.details, status: :bad_request
         end

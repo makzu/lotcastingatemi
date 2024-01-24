@@ -28,9 +28,9 @@ class QcSerializer < PlayerAssetSerializer
              :notes
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
-  has_many :qc_attacks
-  has_many :qc_charms
-  has_many :qc_merits
-  has_many :spells
+  has_many :qc_attacks, serializer: QcAttackSerializer
+  has_many :qc_charms, serializer: QcCharmSerializer
+  has_many :qc_merits, serializer: QcMeritSerializer
+  has_many :spells, serializer: SpellSerializer
   # has_many :poisons
 end

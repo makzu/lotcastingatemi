@@ -9,7 +9,7 @@ module Api
         @weapon.character = @character
         authorize @weapon
         if @weapon.save
-          render json: @weapon
+          render json: WeaponSerializer.one(@weapon)
         else
           render json: @weapon.errors.details, status: :bad_request
         end

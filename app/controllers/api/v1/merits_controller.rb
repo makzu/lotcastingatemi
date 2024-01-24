@@ -9,7 +9,7 @@ module Api
         @merit.character = @character
         authorize @merit
         if @merit.save
-          render json: @merit
+          render json: MeritSerializer.one(@merit)
         else
           render json: @merit.errors.details, status: :bad_request
         end

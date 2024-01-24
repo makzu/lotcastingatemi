@@ -2,14 +2,14 @@
 
 # app/serializers/player_serializer.rb
 class PlayerSerializer < BaseSerializer
-  attribute :display_name
+  attributes :display_name
 
   # has_many :characters
   # has_many :qcs
   # has_many :battlegroups
 
-  has_many :own_chronicles, type: 'Chronicle'
-  has_many :chronicles
+  has_many :own_chronicles, type: 'Chronicle', serializer: ::ChronicleSerializer
+  has_many :chronicles, serializer: ::ChronicleSerializer
 
   # We only really need the ID for Chronicles, as each Chronicle will be fetched
   #   later by the client anyway.

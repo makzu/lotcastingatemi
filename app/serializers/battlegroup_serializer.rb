@@ -9,6 +9,6 @@ class BattlegroupSerializer < PlayerAssetSerializer
              :soak, :hardness, :evasion, :parry, :resolve, :guile, :appearance,
              :movement, :senses, :join_battle
 
-  has_many :qc_attacks
+  has_many :qc_attacks, serializer: QcAttackSerializer
   # has_many :poisons
 end

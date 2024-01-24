@@ -9,7 +9,7 @@ module Api
         @charm.character = @character
         authorize @charm
         if @charm.save
-          render json: @charm
+          render json: CharmSerializer.one(@charm)
         else
           render json: @charm.errors.details, status: :bad_request
         end

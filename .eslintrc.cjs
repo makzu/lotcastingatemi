@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     'no-duplicate-imports': ['warn'],
     'react/jsx-boolean-value': ['warn', 'never'],
+    '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
   ignorePatterns: ['coverage/**/*.js', 'public/**/*.js'],

@@ -6,7 +6,7 @@ import WelcomePage from '@/components/pages/WelcomePage'
 import PrivacyPage from '@/components/pages/PrivacyPage'
 import GoodbyePage from '@/components/pages/GoodbyePage'
 import SettingsPage from '@/components/pages/SettingsPage'
-import Test from '@/components/pages/Test'
+// import Test from '@/components/pages/Test'
 
 const ChronicleWrapper = lazy(
   () => import('components/chronicles/ChronicleWrapper'),
@@ -30,11 +30,14 @@ const BattlegroupEditor = lazy(() => import('components/battlegroups/editor'))
 const ResourcesPage = lazy(() => import('components/pages/ResourcesPage'))
 const HelpPage = lazy(() => import('components/pages/Help'))
 
+const NewBattlegroupSheet = lazy(() => import('@/features/battlegroup/sheet'))
+const NewBattlegroupEditor = lazy(() => import('@/features/battlegroup/editor'))
+
 export default function Routes() {
   return (
     <Suspense fallback={<Placeholder />}>
       <Switch>
-        <Route path="/test" element={<Test />} />
+        {/* <Route path="/test" element={<Test />} /> */}
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/deleted" element={<GoodbyePage />} />
         <Route path="/resources" element={<ResourcesPage />} />
@@ -61,11 +64,11 @@ export default function Routes() {
         <Route path="/qcs" element={<QcList />} />
         <Route path="/battlegroups" element={<BattlegroupList />} />
 
-        {/* <Route path="/new-battlegroups/:id" element={<NewBattlegroupSheet />} />
+        <Route path="/new-battlegroups/:id" element={<NewBattlegroupSheet />} />
         <Route
           path="/new-battlegroups/:id/edit"
           element={<NewBattlegroupEditor />}
-        /> */}
+        />
 
         <Route path="/" element={<WelcomePage />} />
       </Switch>

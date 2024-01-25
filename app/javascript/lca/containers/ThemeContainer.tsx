@@ -1,14 +1,12 @@
-import { useEffect, useMemo, type PropsWithChildren } from 'react'
+import { useEffect, useMemo, type ReactNode } from 'react'
 
 import {
   GlobalStyles,
   useMediaQuery,
-  green,
-  teal,
   createTheme,
   ThemeProvider,
 } from '@mui/material'
-import { lightGreen as lightgreen } from '@mui/material/colors'
+import { green, lightGreen, teal } from '@mui/material/colors'
 import { StyledEngineProvider, type Theme } from '@mui/material/styles'
 
 import { switchTheme } from 'features/themeSlice'
@@ -19,7 +17,7 @@ declare module '@mui/styles/defaultTheme' {
   interface DefaultTheme extends Theme {}
 }
 
-const ThemeContainer = ({ children }: PropsWithChildren<null>) => {
+const ThemeContainer = ({ children }: { children: ReactNode }) => {
   const dispatch = useAppDispatch()
   const themeSetting = useAppSelector((state) => state.theme)
   const defaultPreference = useMediaQuery('(prefers-color-scheme: dark)')
@@ -81,7 +79,7 @@ const ThemeContainer = ({ children }: PropsWithChildren<null>) => {
           : {
               mode: 'light',
               primary: { main: green[800] },
-              secondary: { main: lightgreen[400] },
+              secondary: { main: lightGreen[400] },
             },
     })
   }, [defaultPreference, themeSetting])

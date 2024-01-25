@@ -6,7 +6,7 @@ import EntityReducer, { type EntityState } from './entities'
 import SessionReducer, { type ISessionState } from './session'
 import DrawerReducer from 'features/drawerSlice'
 import ThemeReducer from 'features/themeSlice'
-import newEntityReducer from '@/ducks.new/entities'
+// import newEntityReducer from '@/ducks.new/entities'
 import { emptySplitApi } from '@/features/api'
 
 interface AppState {
@@ -26,7 +26,7 @@ const lcaApp = combineReducers({
   app: AppReducer,
   drawer: DrawerReducer,
   entities: optimistic(EntityReducer),
-  newEntities: newEntityReducer,
+  // newEntities: newEntityReducer,
   session: SessionReducer,
   theme: ThemeReducer,
   [emptySplitApi.reducerPath]: emptySplitApi.reducer,

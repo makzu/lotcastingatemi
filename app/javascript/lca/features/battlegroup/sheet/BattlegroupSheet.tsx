@@ -3,18 +3,18 @@ import { Typography } from '@mui/material'
 import BlockPaper from '@/components/shared/BlockPaper'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
 import { useDocumentTitle, useIdFromParams } from '@/hooks'
-import { Battlegroup } from '@/types'
 import BattlegroupAttackDisplay from '../components/BattlegroupAttackDisplay'
 import BattlegroupHealthDisplay from '../components/BattlegroupHealthDisplay'
 import BattlegroupPoolDisplay from '../components/BattlegroupPoolDisplay'
 import BgBox from '../components/BgBox'
 import { bgSoak, prettyDrillRating } from '../lib'
 import { useGetBattlegroupQuery } from '../store'
+import { sortOrderSort } from '@/utils'
 
 const BattlegroupSheet = () => {
   const id = useIdFromParams()
-  const { data } = useGetBattlegroupQuery(id)
-  const battlegroup = data 
+  const { data: battlegroup } = useGetBattlegroupQuery(id)
+
   useDocumentTitle(
     `${battlegroup && battlegroup.name + ' | '}Lot-Casting Atemi`,
   )
@@ -75,7 +75,7 @@ const BattlegroupSheet = () => {
         <BgBox>
           <BattlegroupPoolDisplay
             label="Armor Name"
-            value={battlegroup.armor_name || 'Unarmored'}
+            value={battlegroup.armor_name ?? 'Unarmored'}
           />
         </BgBox>
         {battlegroup.hardness > 0 && (
@@ -107,7 +107,7 @@ const BattlegroupSheet = () => {
       </div>
 
       <div>Attacks</div>
-      {battlegroup.qc_attacks.map((attack) => (
+      {battlegroup.qc_attacks.sort(sortOrderSort).map((attack) => (
         <BattlegroupAttackDisplay
           battlegroup={battlegroup}
           attack={attack}

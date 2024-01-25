@@ -1,13 +1,23 @@
-import { Toolbar, Typography } from '@mui/material'
+import { Link, useLocation } from 'react-router-dom'
+
+import { Button, Toolbar, Typography } from '@mui/material'
 
 import CharacterMenu from '@/components/generic/CharacterMenu'
 import LcaDrawerButton from '@/components/header/DrawerButton'
-import { useIdFromParams } from '@/hooks'
-import { useBattlegroupTrait } from '../hooks'
+import { useAppSelector, useIdFromParams } from '@/hooks'
+import { useGetBattlegroupQuery } from '../store'
+import { GenericHeader } from '@/components/header/Header'
+import { canIEditBattlegroup } from '@/ducks/entities'
 
 function BattlegroupSheetHeader() {
   const id = useIdFromParams()
-  const bgName = useBattlegroupTrait(id, 'name')
+  const { data: battlegroup } = useGetBattlegroupQuery(id)
+  const canIEdit = useAppSelector((state) => canIEditBattlegroup(state, id))
+  const editButtonPath = useLocation().pathname + '/edit'
+
+  if (battlegroup == undefined) {
+    return <GenericHeader />
+  }
 
   return (
     <>
@@ -15,8 +25,14 @@ function BattlegroupSheetHeader() {
         <LcaDrawerButton />
 
         <Typography variant="h6" color="inherit">
-          {bgName}
+          {battlegroup?.name}
         </Typography>
+
+        {canIEdit && (
+          <Button component={Link} to={editButtonPath} color="inherit">
+            Edit
+          </Button>
+        )}
 
         <div className="flex" />
 

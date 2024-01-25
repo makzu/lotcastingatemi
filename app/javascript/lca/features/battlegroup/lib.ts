@@ -1,4 +1,5 @@
-import type { Battlegroup, QcAttack } from '@/types'
+import type { QcAttack } from '@/types'
+import type { Battlegroup } from './types'
 
 /* Battle Group rules are established in the Core book, p. 205 - 211 */
 
@@ -31,6 +32,7 @@ export function bgSoak(battlegroup: Battlegroup) {
   return battlegroup.soak + battlegroup.size
 }
 
+/** Drill is saved as a number in the backend */
 export function prettyDrillRating(battlegroup: Battlegroup) {
   switch (battlegroup.drill) {
     case 0:

@@ -21,7 +21,7 @@ const BattlegroupEditor = () => {
     const checkbox = e.target.type === 'checkbox'
     const { name, value, checked } = e.target
 
-    void updateBattlegroup({ id, [name]: checkbox ? checked : value })
+    updateBattlegroup({ id, [name]: checkbox ? checked : value })
   }
 
   if (!battlegroup)

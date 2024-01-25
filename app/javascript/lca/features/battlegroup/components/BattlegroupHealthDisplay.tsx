@@ -1,4 +1,4 @@
-import { useState ,type  ChangeEvent } from 'react';
+import { useState } from 'react'
 
 import {
   Box,
@@ -13,10 +13,10 @@ import {
 
 import ResourceDisplay from '@/components/displays/ResourceDisplay'
 import RatingField from '@/components/fields/RatingField'
-import BattlegroupPoolDisplay from '@/features/battlegroup/components/BattlegroupPoolDisplay'
 import { useDialogLogic } from '@/hooks'
-import type { Battlegroup } from '@/types'
 import { totalMagnitude } from '@/utils/calculated'
+import type { Battlegroup } from '../types'
+import BattlegroupPoolDisplay from './BattlegroupPoolDisplay'
 
 interface BattlegroupHealthDisplayProps {
   battlegroup: Battlegroup
@@ -69,9 +69,7 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
               <RatingField
                 label="Magnitude"
                 value={magnitude}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setMagnitude(Number(e.target.value))
-                }
+                onChange={(e) => setMagnitude(Number(e.target.value))}
               />
               <span>
                 {' / ' + totalMagnitude({ ...battlegroup, size: size })}
@@ -82,9 +80,7 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
               <RatingField
                 label="Size"
                 value={size}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setSize(Number(e.target.value))
-                }
+                onChange={(e) => setSize(Number(e.target.value))}
               />
             </div>
           </div>

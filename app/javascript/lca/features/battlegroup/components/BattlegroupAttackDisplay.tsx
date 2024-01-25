@@ -1,11 +1,8 @@
-import type { Battlegroup as OldBattlegroup, QcAttack } from '@/types'
+import type { QcAttack } from '@/types'
 import { bgAttackPool, bgDamage } from '@/utils/calculated'
+import type { Battlegroup } from '../types'
 import BattlegroupPoolDisplay from './BattlegroupPoolDisplay'
 import BgBox from './BgBox'
-
-interface Battlegroup extends Omit<OldBattlegroup, 'qc_attacks'> {
-  qc_attacks: QcAttack[]
-}
 
 const BattlegroupAttackDisplay = ({
   battlegroup,

@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { WithId } from '@/types/_lib'
+
+export type APIPartial<T extends WithId> = Pick<T, 'id'> & Partial<T>
+
 export const GET = 'GET'
 export const PATCH = 'PATCH'
 export const POST = 'POST'
@@ -12,7 +16,7 @@ export const emptySplitApi = createApi({
     prepareHeaders: (headers) => {
       headers.append(
         'AUTHORIZATION',
-        `Bearer ${localStorage.getItem('jwt') || ''}`,
+        `Bearer ${localStorage.getItem('jwt') ?? ''}`,
       )
       headers.set('Content-Type', 'application/json')
       headers.set('Accept', 'application/json')

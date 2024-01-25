@@ -55,3 +55,5 @@ export const isUnequalByKeys = <T>(obj1: T, obj2: T, keys: (keyof T)[]) =>
 
 export const isDefined = <T>(value: T | undefined): value is T =>
   value !== undefined
+
+export const noop = () => null

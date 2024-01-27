@@ -31,6 +31,8 @@ export interface WithHealthLevels {
 export interface WithSorcery {
   is_sorcerer: boolean
   sorcerous_motes: number
+  is_necromancer: boolean
+  necromantic_motes: number
   rituals: string[]
   spells: number[]
 }

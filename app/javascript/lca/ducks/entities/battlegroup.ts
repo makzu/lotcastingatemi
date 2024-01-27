@@ -1,3 +1,4 @@
+import { createAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
 
 import type { RootState } from '@/store'
@@ -10,14 +11,39 @@ import {
   mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
+import { EntityState } from './_types'
 import { getCurrentPlayer } from './player'
 
 const BATTLEGROUP = 'battlegroup'
 const isDefined = <T>(value: T | undefined): value is T => value !== undefined
 
+export const updateBattlegroupSort = createAction<{
+  id: number
+  sorting: number
+}>('sort/battlegroup')
+
+export const updateBattlegroupChronicleSort = createAction<{
+  id: number
+  sorting: number
+}>('chronicle_sort/battlegroup')
+
 /* *** Reducer *** */
 export default createEntityReducer('battlegroup', {
   [crudAction(BATTLEGROUP, 'CREATE_FROM_QC').success.toString()]: mergeEntity,
+  [updateBattlegroupSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateBattlegroupSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.battlegroups[id].sorting = sorting
+  },
+  [updateBattlegroupChronicleSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateBattlegroupChronicleSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.battlegroups[id].chronicle_sorting = sorting
+  },
 })
 
 /* *** Actions *** */

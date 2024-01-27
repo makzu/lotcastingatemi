@@ -6,6 +6,7 @@ import SortableGridList from '@/components/generic/SortableGridList'
 import SortableItem from '@/components/generic/SortableItem'
 import ProtectedComponent from '@/containers/ProtectedComponent'
 import { getMyBattlegroups, updateBattlegroup } from '@/ducks/entities'
+import { updateBattlegroupSort } from '@/ducks/entities/battlegroup'
 import { useAppDispatch, useAppSelector, useDocumentTitle } from '@/hooks'
 
 const BattlegroupList = () => {
@@ -16,7 +17,7 @@ const BattlegroupList = () => {
   const chars = battlegroups.map((c, i) => (
     <SortableItem key={c.id} index={i} collection="battlegroups">
       <Grid item xs={12} md={6} xl={4}>
-        <BattlegroupCard id={c.id} />
+        <BattlegroupCard battlegroup={c} id={c.id} />
       </Grid>
     </SortableItem>
   ))
@@ -34,10 +35,11 @@ const BattlegroupList = () => {
 
     const charA = battlegroups[oldIndex]!
     const charB = battlegroups[newIndex]!
-    const offset = charA.sort_order > charB.sort_order ? -1 : 1
+    const offset = charA.sorting > charB.sorting ? -1 : 1
     dispatch(
-      updateBattlegroup(charA.id, { sort_order: charB.sort_order + offset }),
+      updateBattlegroupSort({ id: charA.id, sorting: charB.sorting + offset }),
     )
+    dispatch(updateBattlegroup(charA.id, { sorting_position: newIndex }))
   }
 
   const classes = {}

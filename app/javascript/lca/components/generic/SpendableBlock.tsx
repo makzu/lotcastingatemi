@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material'
-import withStyles from '@mui/styles/withStyles'
+import { Theme, Typography } from '@mui/material'
+import withStyles, { WithStyles } from '@mui/styles/withStyles'
 
 import AnimaDisplay from '../displays/AnimaDisplay'
 import AuraDisplay from '../displays/AuraDisplay'
@@ -8,12 +8,13 @@ import HealthLevelBoxes from '../generic/HealthLevelBoxes'
 import MoteSpendWidget from '../generic/MoteSpendWidget'
 import ResourceDisplay from '../generic/ResourceDisplay'
 import ShapeSorceryWidget from '../generic/ShapeSorceryWidget'
+import ShapeNecromancyWidget from '../generic/ShapeNecromancyWidget'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget'
 import sharedStyles from '@/styles/'
 import * as calc from '@/utils/calculated'
 import { Character, QC } from '@/types'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   ...sharedStyles(theme),
   moteWrap: {
     marginRight: theme.spacing(),
@@ -58,6 +59,15 @@ export function SpendableBlock({ character, classes, qc }: Props) {
               label="Sorcerous"
             />
           </ShapeSorceryWidget>
+        )}
+        {character.is_necromancer && (
+          <ShapeNecromancyWidget character={character}>
+            <ResourceDisplay
+              className={classes.moteWrap}
+              current={character.necromantic_motes}
+              label="Necromantic"
+            />
+          </ShapeNecromancyWidget>
         )}
         <WillpowerSpendWidget character={character} qc={qc}>
           <ResourceDisplay

@@ -40,15 +40,15 @@ export function checkVisible(elm: HTMLElement | null) {
 }
 
 export interface Sortable {
-  sort_order: number
+  sorting: number
 }
 export interface ChSortable {
-  chronicle_sort_order: number
+  chronicle_sorting: number
 }
 export const sortOrderSort = (a: Sortable, b: Sortable) =>
-  a.sort_order - b.sort_order
+  a.sorting - b.sorting
 export const chronicleSortOrderSort = (a: ChSortable, b: ChSortable) =>
-  a.chronicle_sort_order - b.chronicle_sort_order
+  a.chronicle_sorting - b.chronicle_sorting
 
 export const isUnequalByKeys = <T>(obj1: T, obj2: T, keys: (keyof T)[]) =>
   keys.some((key) => !deepEqual(obj1[key], obj2[key]))

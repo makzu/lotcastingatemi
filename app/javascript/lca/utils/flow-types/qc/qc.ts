@@ -1,4 +1,4 @@
-import type { QC } from '@/types'
+import type { QC, QcMerit as newQcMerit } from '@/types'
 import type { Timing } from '@/types/_lib'
 
 /** @deprecated Use QC from '@/types' instead */
@@ -6,7 +6,7 @@ export type fullQc = QC
 
 interface QcTrait {
   id: number
-  sort_order: number
+  sorting: number
 }
 export type QcAttack = QcTrait & {
   name: string
@@ -18,13 +18,10 @@ export type QcAttack = QcTrait & {
   qc_attackable_type: 'Qc' | 'Battlegroup'
   qc_attackable_id: number
 }
-export type QcMerit = QcTrait & {
-  name: string
-  body: string
-  latent: boolean
-  magical: boolean
-  ref: string
-}
+
+/** @deprecated use '@/types' instead */
+export type QcMerit = newQcMerit
+
 export type QcCharm = QcTrait & {
   qc_id: number
   name: string

@@ -97,6 +97,17 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
             />
           </div>
         )}
+        {character.is_necromancer && (
+          <div className={classes.flexCol}>
+            <RatingField
+              trait="necromantic_motes"
+              value={character.necromantic_motes}
+              label="Necromantic"
+              margin="dense"
+              onChange={onChange}
+            />
+          </div>
+        )}
       </Typography>
 
       <Typography component="div" className="flexContainerWrap">

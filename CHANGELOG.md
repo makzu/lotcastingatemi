@@ -2,18 +2,21 @@
 
 ###### _Unreleased_
 
-- Nothing (so far)
+- Added necromantic mote tracking for characters
+- Added necromancy circles for spells
+- Revamped sorting code behind drag-and-drop for characters, Charms, merits, etc.
+- Better caching for characters and other data. Data won't need to be re-downloaded on every visit if it hasn't changed.
 
 ## v99
 
-###### Nov 24, 2023
+###### _Nov 24, 2023_
 
 - Fixed characters no longer being aware of Awareness (Thanks, Zergon!)
 - Fixed Charms not being assignable to Attributes or Abilities (Thanks, Zergon!)
 
 ## v98
 
-###### Nov 24, 2023
+###### _Nov 24, 2023_
 
 - Abyssal characters can now be created
 - Fix for Charms not appearing on other players' characters in a chronicle until the data is reloaded

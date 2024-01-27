@@ -1,34 +1,35 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
 
-import STControls from './StControls'
-import CharacterAddPopup from './characterAddPopup'
-import CharacterCard from '@/components/characters/CharacterCard'
-import QcAddPopup from './qcAddPopup'
-import QcCard from '@/components/qcs/QcCard'
-import BattlegroupAddPopup from './battlegroupAddPopup'
+import { updateBattlegroupChronicleSort } from '@/ducks/entities/battlegroup'
+import { updateCharacterChronicleSort } from '@/ducks/entities/character'
+import { updateQcChronicleSort } from '@/ducks/entities/qc'
+import { Grid, Hidden, Typography } from '@mui/material'
+
 import BattlegroupCard from '@/components/battlegroups/BattlegroupCard'
-import BlockPaper from '@/components/shared/BlockPaper'
+import CharacterCard from '@/components/characters/CharacterCard'
 import DocumentTitle from '@/components/generic/DocumentTitle'
 import SortableGridList from '@/components/generic/SortableGridList'
-
-import ProtectedComponent from '@/containers/ProtectedComponent'
-import withRouter from '@/containers/withRouter'
-import { updateCharacter, updateQc, updateBattlegroup } from '@/ducks/actions'
-import {
-  getSpecificChronicle,
-  getPlayersForChronicle,
-  getCharactersForChronicle,
-  getQcsForChronicle,
-  getBattlegroupsForChronicle,
-  getStorytellerForChronicle,
-  amIStOfChronicle,
-} from '@/selectors'
-import type { Character, fullQc, Battlegroup } from '@/utils/flow-types'
 import SortableItem from '@/components/generic/SortableItem'
-
-import { Grid, Hidden, Typography } from '@mui/material'
+import QcCard from '@/components/qcs/QcCard'
+import BlockPaper from '@/components/shared/BlockPaper'
+import ProtectedComponent from '@/containers/ProtectedComponent'
+import { updateBattlegroup, updateCharacter, updateQc } from '@/ducks/actions'
+import {
+  amIStOfChronicle,
+  getBattlegroupsForChronicle,
+  getCharactersForChronicle,
+  getPlayersForChronicle,
+  getQcsForChronicle,
+  getSpecificChronicle,
+  getStorytellerForChronicle,
+} from '@/selectors'
+import { RootState } from '@/store'
+import type { Battlegroup, Character, fullQc } from '@/utils/flow-types'
+import STControls from './StControls'
+import BattlegroupAddPopup from './battlegroupAddPopup'
+import CharacterAddPopup from './characterAddPopup'
+import QcAddPopup from './qcAddPopup'
 
 // TODO: replace with proper objects
 interface Props {
@@ -43,6 +44,9 @@ interface Props {
   updateCharacter: $TSFixMeFunction
   updateQc: $TSFixMeFunction
   updateBattlegroup: $TSFixMeFunction
+  updateCharacterChronicleSort: $TSFixMeFunction
+  updateQcChronicleSort: $TSFixMeFunction
+  updateBattlegroupChronicleSort: $TSFixMeFunction
 }
 
 class ChronicleDashboard extends Component<Props> {
@@ -50,33 +54,34 @@ class ChronicleDashboard extends Component<Props> {
     if (oldIndex === newIndex) return
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     let update = (...a) => {}
-
+    let updateSort
     let coll = []
 
     switch (collection) {
       case 'characters':
         update = this.props.updateCharacter
+        updateSort = this.props.updateCharacterChronicleSort
         coll = this.props.characters
         break
 
       case 'qcs':
         update = this.props.updateQc
+        updateSort = this.props.updateQcChronicleSort
         coll = this.props.qcs
         break
 
       case 'battlegroups':
         update = this.props.updateBattlegroup
+        updateSort = this.props.updateBattlegroupChronicleSort
         coll = this.props.battlegroups
         break
     }
 
-    const charA = coll[oldIndex]
-    const charB = coll[newIndex]
-    const offset =
-      charA.chronicle_sort_order > charB.chronicle_sort_order ? -1 : 1
-    update(charA.id, {
-      chronicle_sort_order: charB.chronicle_sort_order + offset,
-    })
+    const charA = coll[oldIndex]!
+    const charB = coll[newIndex]!
+    const offset = charA.chronicle_sorting > charB.chronicle_sorting ? -1 : 1
+    updateSort({ id: charA.id, sorting: charB.chronicle_sorting + offset })
+    update(charA.id, { chronicle_sorting_position: newIndex })
   }
 
   render() {
@@ -195,7 +200,7 @@ class ChronicleDashboard extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state: RootState, ownProps) {
   const id = ownProps.params.id
 
   return {
@@ -211,9 +216,12 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  withRouter(
-    connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
-      ChronicleDashboard,
-    ),
-  ),
+  connect(mapStateToProps, {
+    updateCharacter,
+    updateQc,
+    updateBattlegroup,
+    updateCharacterChronicleSort,
+    updateQcChronicleSort,
+    updateBattlegroupChronicleSort,
+  })(ChronicleDashboard),
 )

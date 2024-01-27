@@ -56,7 +56,7 @@ export interface QcAttack extends Sortable {
   tags: string[]
 }
 
-export interface QcMerit {
+export interface QcMerit extends Sortable {
   id: number
   name: string
 }

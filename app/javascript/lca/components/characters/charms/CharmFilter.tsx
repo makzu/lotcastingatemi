@@ -68,7 +68,14 @@ class CharmFilter extends Component<Props> {
         break
 
       case 'spell':
-        filters = ['terrestrial', 'celestial', 'solar']
+        filters = [
+          'terrestrial',
+          'celestial',
+          'solar',
+          'ivory',
+          'shadow',
+          'void',
+        ]
         filterName = 'circleFilter'
         filterLabel = 'Filter by Circle'
         break

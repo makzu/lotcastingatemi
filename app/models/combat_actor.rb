@@ -35,6 +35,6 @@ class CombatActor < ApplicationRecord
   alias hidden not_a_stat
   alias pinned not_a_stat
   alias_method :public, :not_a_stat # rubocop:disable Style/Alias
-  alias sort_order not_a_stat
-  alias chronicle_sort_order not_a_stat
+  alias sorting not_a_stat
+  alias chronicle_sorting not_a_stat
 end

@@ -1,12 +1,12 @@
 import { Checkbox, FormControlLabel, Typography } from '@mui/material'
 
-import type { Character } from '@/types'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from '@/components/generic/ListAttributeEditor'
 import RatingField from '@/components/generic/RatingField'
 import TextField from '@/components/generic/TextField'
 import BlockPaper from '@/components/shared/BlockPaper'
+import type { Character } from '@/types'
 
 export const SorceryFields = (
   props: { trait: string } & ListAttributeFieldTypes,
@@ -40,19 +40,19 @@ function SorceryEditor(props: Props) {
     <BlockPaper>
       <Typography variant="h6">Sorcery</Typography>
 
-      <FormControlLabel
-        label="Is sorcerer"
-        control={
-          <Checkbox
-            name="is_sorcerer"
-            checked={character.is_sorcerer}
-            onChange={onCheck}
-          />
-        }
-      />
+      <div>
+        <FormControlLabel
+          label="Is sorcerer"
+          control={
+            <Checkbox
+              name="is_sorcerer"
+              checked={character.is_sorcerer}
+              onChange={onCheck}
+            />
+          }
+        />
 
-      {character.is_sorcerer && (
-        <>
+        {character.is_sorcerer && (
           <RatingField
             trait="sorcerous_motes"
             value={character.sorcerous_motes}
@@ -60,7 +60,32 @@ function SorceryEditor(props: Props) {
             margin="dense"
             onChange={onRatingChange}
           />
-          <br />
+        )}
+      </div>
+
+      <div>
+        <FormControlLabel
+          label="Is necromancer"
+          control={
+            <Checkbox
+              name="is_necromancer"
+              checked={character.is_necromancer}
+              onChange={onCheck}
+            />
+          }
+        />
+        {character.is_necromancer && (
+          <RatingField
+            trait="necromantic_motes"
+            value={character.necromantic_motes}
+            label="Necromantic Motes"
+            margin="dense"
+            onChange={onRatingChange}
+          />
+        )}
+      </div>
+      {(character.is_sorcerer || character.is_necromancer) && (
+        <div>
           <ListAttributeEditor
             label="Shaping Rituals"
             character={character}
@@ -70,7 +95,7 @@ function SorceryEditor(props: Props) {
             onChange={onRatingChange}
             nonObject
           />
-        </>
+        </div>
       )}
     </BlockPaper>
   )

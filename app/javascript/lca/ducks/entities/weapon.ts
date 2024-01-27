@@ -1,12 +1,26 @@
+import { createAction } from '@reduxjs/toolkit'
 import createCachedSelector from 're-reselect'
 
 import { isDefined, sortOrderSort } from '@/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
+import { EntityState } from './_types'
 import { getSpecificCharacter } from './character'
-import type { RootState } from 'store'
+import { RootState } from '@/store'
 
-export default createTraitReducer('weapon')
+export const updateWeaponSort = createAction<{ id: number; sorting: number }>(
+  'sort/weapon',
+)
+
+export default createTraitReducer('weapon', undefined, {
+  [updateWeaponSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateWeaponSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.weapons[id].sorting = sorting
+  },
+})
 
 export const [createWeapon, updateWeapon, destroyWeapon] =
   createApiActions('weapon')

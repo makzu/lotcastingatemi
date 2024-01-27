@@ -160,6 +160,9 @@ class SpellFields extends Component<Props> {
               <MenuItem value="terrestrial">Terrestrial</MenuItem>
               <MenuItem value="celestial">Celestial</MenuItem>
               <MenuItem value="solar">Solar</MenuItem>
+              <MenuItem value="ivory">Ivory</MenuItem>
+              <MenuItem value="shadow">Shadow</MenuItem>
+              <MenuItem value="void">Void</MenuItem>
             </MuiTextField>
             &nbsp;&nbsp;
             <FormControlLabel

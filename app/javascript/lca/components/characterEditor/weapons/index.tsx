@@ -7,11 +7,11 @@ import { Button, Divider, Typography } from '@mui/material'
 import BlockPaper from '@/components/shared/BlockPaper'
 import WeaponEditorPopup from './WeaponEditorPopup'
 import WeaponRow from './WeaponRow'
-
 import SortableItem from '@/components/generic/SortableItem'
 import { createWeapon, updateWeapon } from '@/ducks/actions'
 import { getWeaponsForCharacter } from '@/ducks/entities'
 import { useAppDispatch, useAppSelector } from '@/hooks'
+import { updateWeaponSort } from 'ducks/entities/weapon'
 import type { Character } from '@/types'
 
 // @ts-expect-error TODO migrate to new dnd lib
@@ -19,6 +19,11 @@ const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)
 
 interface WeaponEditorProps {
   character: Character
+}
+
+interface SortFnProps {
+  oldIndex: number
+  newIndex: number
 }
 
 const WeaponEditor = (props: WeaponEditorProps) => {
@@ -34,19 +39,16 @@ const WeaponEditor = (props: WeaponEditorProps) => {
     dispatch(createWeapon(character.id))
   }
 
-  const handleSort = ({
-    oldIndex,
-    newIndex,
-  }: {
-    oldIndex: number
-    newIndex: number
-  }) => {
+  const handleSort = ({ oldIndex, newIndex }: SortFnProps) => {
     const weaponA = weapons[oldIndex]!
     const weaponB = weapons[newIndex]!
-    const offset = weaponA.sort_order > weaponB.sort_order ? -1 : 1
+    const offset = newIndex > oldIndex ? 1 : -1
+    dispatch(
+      updateWeaponSort({ id: weaponA.id, sorting: weaponB.sorting + offset }),
+    )
     dispatch(
       updateWeapon(weaponA.id, character.id, {
-        sort_order: weaponB.sort_order + offset,
+        sorting_position: newIndex,
       }),
     )
   }
@@ -58,13 +60,11 @@ const WeaponEditor = (props: WeaponEditorProps) => {
         character={character}
         setId={setSelectedWeaponId}
       />
-      {i !== weapons.length - 1 && <Divider />}
+      {i !== weapons.length - 1 ? <Divider /> : <></>}
     </SortableItem>
   ))
   return (
     <>
-      {/*
-      // @ts-expect-error Should be fixed with MUI v5 */}
       <BlockPaper>
         <Typography variant="h6">
           Weapons

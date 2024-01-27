@@ -17,6 +17,7 @@ import type { RootState } from 'store'
 import type { Battlegroup, QC } from '@/types'
 
 import { Button, Typography } from '@mui/material'
+import { updateQcAttackSort } from '@/ducks/entities/qc_attack'
 
 // @ts-expect-error New dnd library should fix this
 const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)
@@ -30,6 +31,7 @@ type Props = ExposedProps & {
   updateQcAttack: $TSFixMeFunction
   createQcAttack: $TSFixMeFunction
   destroyQcAttack: $TSFixMeFunction
+  updateQcAttackSort: $TSFixMeFunction
 }
 
 class QcAttackEditor extends Component<Props> {
@@ -41,9 +43,11 @@ class QcAttackEditor extends Component<Props> {
       parent: this.props.type,
     })
   }
-  handleRemove = (id: number) => {
+
+  handleRemove = (id) => {
     this.props.destroyQcAttack(id, this.props.qc.id, this.props.type)
   }
+
   handleSort = ({
     oldIndex,
     newIndex,
@@ -53,11 +57,15 @@ class QcAttackEditor extends Component<Props> {
   }) => {
     const attackA = this.props.qc_attacks[oldIndex]!
     const attackB = this.props.qc_attacks[newIndex]!
-    const offset = attackA.sort_order > attackB.sort_order ? -1 : 1
+    const offset = attackA.sorting > attackB.sorting ? -1 : 1
+    this.props.updateQcAttackSort({
+      id: attackA.id,
+      sorting: attackB.sorting + offset,
+    })
     this.props.updateQcAttack(
       attackA.id,
       this.props.qc.id,
-      { sort_order: attackB.sort_order + offset },
+      { sorting_position: newIndex },
       this.props.type,
     )
   }
@@ -117,5 +125,7 @@ const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
   updateQcAttack,
   createQcAttack,
   destroyQcAttack,
+  updateQcAttackSort,
 })
+
 export default enhance(QcAttackEditor)

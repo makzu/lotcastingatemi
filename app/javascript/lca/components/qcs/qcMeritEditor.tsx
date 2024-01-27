@@ -1,17 +1,22 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
 
 import ContentAddCircle from '@mui/icons-material/AddCircle'
-
-import QcMeritFields from './qcMeritFields'
-import SortableGridList from '@/components/generic/SortableGridList'
-
-import { createQcMerit, destroyQcMerit, updateQcMerit } from '@/ducks/actions'
-import { getMeritsForQc } from '@/selectors'
-import type { fullQc, QcMerit, Enhancer } from '@/utils/flow-types'
-import SortableItem from '@/components/generic/SortableItem'
 import { Button, Grid, Typography } from '@mui/material'
+
+import SortableGridList from '@/components/generic/SortableGridList.jsx'
+import SortableItem from '@/components/generic/SortableItem'
+import {
+  createQcMerit,
+  destroyQcMerit,
+  updateQcMerit,
+} from '@/ducks/actions.js'
+import { updateQcMeritSort } from '@/ducks/entities/qc_merit'
+import { getMeritsForQc } from '@/selectors'
+import { RootState } from '@/store.js'
+import type { Enhancer, QcMerit, fullQc } from '@/utils/flow-types'
+import QcMeritFields from './qcMeritFields.jsx'
+
 interface ExposedProps {
   qc: fullQc
   classes: Record<string, $TSFixMe>
@@ -21,6 +26,7 @@ type Props = ExposedProps & {
   updateQcMerit: $TSFixMeFunction
   createQcMerit: $TSFixMeFunction
   destroyQcMerit: $TSFixMeFunction
+  updateQcMeritSort: $TSFixMeFunction
 }
 
 class QcMeritEditor extends Component<Props> {
@@ -41,11 +47,16 @@ class QcMeritEditor extends Component<Props> {
     newIndex: number
   }) => {
     if (oldIndex === newIndex) return
-    const meritA = this.props.qc_merits[oldIndex]
-    const meritB = this.props.qc_merits[newIndex]
-    const offset = meritA.sort_order > meritB.sort_order ? -1 : 1
+    const meritA = this.props.qc_merits[oldIndex]!
+    const meritB = this.props.qc_merits[newIndex]!
+    const offset = meritA.sorting > meritB.sorting ? -1 : 1
+
+    this.props.updateQcMeritSort({
+      id: meritA.id,
+      sorting: meritB.sorting + offset,
+    })
     this.props.updateQcMerit(meritA.id, this.props.qc.id, {
-      sort_order: meritB.sort_order + offset,
+      sorting_position: newIndex,
     })
   }
 
@@ -85,7 +96,7 @@ class QcMeritEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
+function mapStateToProps(state: RootState, ownProps: ExposedProps) {
   const qc = ownProps.qc
   const qc_merits = qc !== undefined ? getMeritsForQc(state, qc.id) : []
   return {
@@ -97,5 +108,7 @@ const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
   updateQcMerit,
   createQcMerit,
   destroyQcMerit,
+  updateQcMeritSort,
 })
+
 export default enhance(QcMeritEditor)

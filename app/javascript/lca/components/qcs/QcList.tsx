@@ -4,7 +4,7 @@ import SortableGridList from '@/components/generic/SortableGridList'
 import QcCard from '@/components/qcs/QcCard'
 import QcCreatePopup from '@/components/qcs/qcCreatePopup'
 import ProtectedComponent from '@/containers/ProtectedComponent'
-import { getMyQcs, updateQc } from '@/ducks/entities'
+import { getMyQcs, updateQc, updateQcSort } from '@/ducks/entities'
 import { useAppDispatch, useAppSelector, useDocumentTitle } from '@/hooks'
 import SortableItem from '../generic/SortableItem'
 
@@ -34,8 +34,9 @@ const QcList = () => {
 
     const charA = qcs[oldIndex]!
     const charB = qcs[newIndex]!
-    const offset = charA.sort_order > charB.sort_order ? -1 : 1
-    dispatch(updateQc(charA.id, { sort_order: charB.sort_order + offset }))
+    const offset = charA.sorting > charB.sorting ? 1 : -1
+    dispatch(updateQcSort({ id: charA.id, sorting: charB.sorting + offset }))
+    dispatch(updateQc(charA.id, { sorting_position: newIndex }))
   }
 
   const classes = {}

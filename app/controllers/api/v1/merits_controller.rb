@@ -15,5 +15,9 @@ module Api
         end
       end
     end
+
+    def merit_params
+      params.require(:merit).permit(*base_attributes, :sorting_position)
+    end
   end
 end

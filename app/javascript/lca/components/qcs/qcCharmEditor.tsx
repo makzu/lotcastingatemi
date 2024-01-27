@@ -1,23 +1,22 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
 import { compose } from 'redux'
 
-import withStyles from '@mui/styles/withStyles'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
+import type { Theme } from '@mui/material/styles'
+import { createStyles } from '@mui/styles'
+import withStyles from '@mui/styles/withStyles'
 
-import QcCharmFields from './qcCharmFields'
 import SortableGridList from '@/components/generic/SortableGridList'
-
+import SortableItem from '@/components/generic/SortableItem'
+import type { State } from '@/ducks'
 import { createQcCharm, destroyQcCharm, updateQcCharm } from '@/ducks/actions'
 import { getCharmsForQc } from '@/selectors'
 import commonStyles from '@/styles'
-import type { fullQc, QcCharm, Enhancer } from '@/utils/flow-types'
-import type { State } from '@/ducks'
-import SortableItem from '@/components/generic/SortableItem'
-import { createStyles } from '@mui/styles'
-import type { Theme } from '@mui/material/styles'
+import type { Enhancer, QcCharm, fullQc } from '@/utils/flow-types'
+import QcCharmFields from './qcCharmFields'
 
+import { updateQcCharmSort } from '@/ducks/entities/qc_charm'
 import { Button, Grid, Typography } from '@mui/material'
 
 const styles = (theme: Theme) => createStyles({ ...commonStyles(theme) })
@@ -30,6 +29,7 @@ type Props = ExposedProps & {
   updateQcCharm: $TSFixMeFunction
   createQcCharm: $TSFixMeFunction
   destroyQcCharm: $TSFixMeFunction
+  updateQcCharmSort: $TSFixMeFunction
   classes: $TSFixMe
 }
 
@@ -54,9 +54,13 @@ class QcCharmEditor extends Component<Props> {
     if (oldIndex === newIndex) return
     const charmA = this.props.qc_charms[oldIndex]!
     const charmB = this.props.qc_charms[newIndex]!
-    const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
+    const offset = charmA.sorting > charmB.sorting ? -1 : 1
+    this.props.updateQcCharmSort({
+      id: charmA.id,
+      sorting: charmB.sorting + offset,
+    })
     this.props.updateQcCharm(charmA.id, this.props.qc.id, {
-      sort_order: charmB.sort_order + offset,
+      sorting_position: newIndex,
     })
   }
 
@@ -109,6 +113,7 @@ const enhance: Enhancer<Props, ExposedProps> = compose(
     updateQcCharm,
     createQcCharm,
     destroyQcCharm,
+    updateQcCharmSort,
   }),
   withStyles(styles),
 )

@@ -1,22 +1,32 @@
 # frozen_string_literal: true
 
 # Traits for QCs.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
+# chronicle_sort_order, in favor of chronicle_sorting via ranked_model
 class Qc < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
   include HealthLevels
   include Intimacies
   include MotePool
-  include Sortable
-  include SortableBySt
   include Willpower
+  include RankedModel
 
-  has_many :qc_attacks,   dependent: :destroy, as: :qc_attackable
-  has_many :qc_charms,    dependent: :destroy
-  has_many :qc_merits,    dependent: :destroy
-  has_many :combat_actors, dependent: :destroy, as: :actor
-  has_many :spells,  as: :sorcerer, dependent: :destroy
-  has_many :poisons, as: :poisonable, dependent: :destroy
+  ranks :sorting, with_same: :player_id
+  ranks :chronicle_sorting, with_same: :chronicle_id
+
+  with_options inverse_of: :qc, dependent: :destroy do
+    has_many :qc_charms, -> { order(:sorting) }
+    has_many :qc_merits, -> { order(:sorting) }
+  end
+
+  with_options dependent: :destroy do
+    has_many :qc_attacks, -> { order(:sorting) }, as: :qc_attackable, inverse_of: :qc_attackable
+    has_many :spells,     -> { order(:sorting) }, as: :sorcerer,      inverse_of: :sorcerer
+    has_many :poisons,    -> { order(:sorting) }, as: :poisonable,    inverse_of: :poisonable
+    # has_many :combat_actors, -> { order(:sorting) }, as: :actor, inverse_of: :actor
+  end
 
   # Essence above 5 is explicitly mentioned in the book
   validates :essence, one_thru_ten_stat: true
@@ -30,7 +40,7 @@ class Qc < ApplicationRecord
             :feats_of_strength, :strength,
             numericality: { greater_than_or_equal_to: 0 }
 
-  validates :actions, json: { schema: Schemas::QC_ACTION }
+  validates :actions,   json: { schema: Schemas::QC_ACTION }
   validates :resources, json: { schema: Schemas::RESOURCE }
 
   def entity_type

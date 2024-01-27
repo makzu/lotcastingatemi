@@ -1,34 +1,39 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
 import { compose } from 'redux'
 
-import withStyles from '@mui/styles/withStyles'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
 import HelpIcon from '@mui/icons-material/Help'
+import withStyles from '@mui/styles/withStyles'
 
-import MeritFields from './MeritFields'
 import DocumentTitle from '@/components/generic/DocumentTitle'
 import SortableGridList from '@/components/generic/SortableGridList'
-
+import SortableItem from '@/components/generic/SortableItem'
 import ProtectedComponent from '@/containers/ProtectedComponent'
-import withRouter from '@/containers/withRouter'
-import { updateMerit, createMerit, destroyMerit } from '@/ducks/actions'
-
+import { createMerit, destroyMerit, updateMerit } from '@/ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 import { getMeritsForCharacter } from '@/selectors'
 import commonStyles from '@/styles'
 import type {
   Character,
-  fullMerit as Merit,
   Enhancer,
+  fullMerit as Merit,
 } from '@/utils/flow-types'
-import SortableItem from '@/components/generic/SortableItem'
+import MeritFields from './MeritFields'
 
-import { Button, Grid, Hidden, IconButton, Typography } from '@mui/material'
+import { updateMeritSort } from '@/ducks/entities/merit'
+import { RootState } from '@/store'
+import {
+  Button,
+  Grid,
+  Hidden,
+  IconButton,
+  Theme,
+  Typography,
+} from '@mui/material'
 
-const styles = (theme) => commonStyles(theme)
+const styles = (theme: Theme) => commonStyles(theme)
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
  * ref pre-filled
@@ -47,6 +52,7 @@ type Props = ExposedProps & {
   updateMerit: $TSFixMeFunction
   destroyMerit: $TSFixMeFunction
   createMerit: $TSFixMeFunction
+  updateMeritSort: $TSFixMeFunction
   classes: Record<string, $TSFixMe>
 }
 
@@ -68,11 +74,15 @@ class MeritEditor extends Component<Props> {
     newIndex: number
   }) => {
     if (oldIndex === newIndex) return
-    const meritA = this.props.merits[oldIndex]
-    const meritB = this.props.merits[newIndex]
-    const offset = meritA.sort_order > meritB.sort_order ? -1 : 1
+    const meritA = this.props.merits[oldIndex]!
+    const meritB = this.props.merits[newIndex]!
+    const offset = meritA.sorting > meritB.sorting ? -1 : 1
+    this.props.updateMeritSort({
+      id: meritA.id,
+      sorting: meritB.sorting + offset,
+    })
     this.props.updateMerit(meritA.id, this.props.character.id, {
-      sort_order: meritB.sort_order + offset,
+      sorting_position: newIndex,
     })
   }
 
@@ -159,7 +169,7 @@ class MeritEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
+function mapStateToProps(state: RootState, ownProps: ExposedProps) {
   const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
   let merits = []
@@ -175,8 +185,12 @@ function mapStateToProps(state, ownProps: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  withRouter,
-  connect(mapStateToProps, { updateMerit, destroyMerit, createMerit }),
+  connect(mapStateToProps, {
+    updateMerit,
+    destroyMerit,
+    createMerit,
+    updateMeritSort,
+  }),
   withStyles(styles),
   ProtectedComponent,
 )

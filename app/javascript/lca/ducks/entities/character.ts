@@ -1,3 +1,4 @@
+import { createAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
 
 import { useAppSelector } from '@/hooks'
@@ -12,13 +13,38 @@ import {
   mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
+import { EntityState } from './_types'
 import { getCurrentPlayer } from './player'
 
 const CHARACTER = 'character'
 
+export const updateCharacterSort = createAction<{
+  id: number
+  sorting: number
+}>('sort/character')
+
+export const updateCharacterChronicleSort = createAction<{
+  id: number
+  sorting: number
+}>('chronicle_sort/character')
+
 /* *** Reducer *** */
 export default createEntityReducer(CHARACTER, {
   [crudAction(CHARACTER, 'CHANGE_TYPE').success.toString()]: mergeEntity,
+  [updateCharacterSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateCharacterSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.characters[id].sorting = sorting
+  },
+  [updateCharacterChronicleSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateCharacterChronicleSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.characters[id].chronicle_sorting = sorting
+  },
 })
 
 /* *** Actions *** */

@@ -4,5 +4,5 @@
 class SpellSerializer < BaseSerializer
   attributes :name, :cost, :duration, :circle, :control,
              :keywords, :body, :ref, :categories,
-             :sort_order
+             :sorting
 end

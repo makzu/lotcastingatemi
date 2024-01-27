@@ -1,7 +1,22 @@
+import { createAction } from '@reduxjs/toolkit'
+
 import { createApiActions, createTraitReducer } from './_trait'
+import { EntityState } from './_types'
+
+export const updateMeritSort = createAction<{ id: number; sorting: number }>(
+  'sort/merit',
+)
 
 /* *** Reducer *** */
-export default createTraitReducer('merit')
+export default createTraitReducer('merit', undefined, {
+  [updateMeritSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateMeritSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.merits[id].sorting = sorting
+  },
+})
 
 export const [createMerit, updateMerit, destroyMerit] =
   createApiActions('merit')

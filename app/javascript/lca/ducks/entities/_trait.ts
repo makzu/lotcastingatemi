@@ -4,6 +4,7 @@ import type { Charm } from '@/types'
 import { callApi } from '@/utils/api'
 import {
   crudAction,
+  characterTraitTypes as entityTypes,
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
@@ -16,6 +17,7 @@ type parentTypes = 'character' | 'qc' | 'battlegroup'
 export const createTraitReducer = (
   entityType: entityTypes,
   parentType: parentTypes = 'character',
+  extraReducers?: { [x: string]: (state, action) => void },
 ) => {
   const pluralType = entityType + 's'
 
@@ -48,6 +50,7 @@ export const createTraitReducer = (
       )
       delete state[pluralType][id]
     },
+    ...extraReducers,
   }
 }
 
@@ -118,7 +121,7 @@ const createTraitUpdateAction =
     const transactionId = entityType + nextTransactionId++
     const action = crudAction(entityType, 'UPDATE')
     return callApi({
-      body: JSON.stringify(trait),
+      body: JSON.stringify({ [entityType]: trait }),
       endpoint: `/api/v1/${parent}s/${charId}/${entityType}s/${id}`,
       method: 'PATCH',
       types: optimisticTypes(

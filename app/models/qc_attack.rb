@@ -2,11 +2,15 @@
 
 # Represents individual attack pools for QCs.  Battlegroups take these numbers
 # and add their own bonuses.
+# DEPRECATED ATTRIBUTES:
+# sort_order, in favor of sorting via ranked_model
 class QcAttack < ApplicationRecord
   include Broadcastable
-  include Sortable
+  include RankedModel
+
   belongs_to :qc_attackable, touch: true, polymorphic: true
   alias character qc_attackable
+  ranks :sorting, with_same: :qc_attackable_id
 
   has_many :poisons, as: :poisonable, dependent: :destroy
 

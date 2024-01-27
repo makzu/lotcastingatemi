@@ -19,6 +19,9 @@ const SpellCircleSelect = ({ spell, onChange, margin }: Props) => (
     <MenuItem value="terrestrial">Terrestrial</MenuItem>
     <MenuItem value="celestial">Celestial</MenuItem>
     <MenuItem value="solar">Solar</MenuItem>
+    <MenuItem value="ivory">Ivory</MenuItem>
+    <MenuItem value="shadow">Shadow</MenuItem>
+    <MenuItem value="void">Void</MenuItem>
   </TextField>
 )
 

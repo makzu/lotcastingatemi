@@ -1,14 +1,13 @@
-import { SortableElement } from 'react-sortable-hoc'
-
 import { Grid, Typography } from '@mui/material'
 
-import CharacterCard from '@/components/characters/CharacterCard'
+import CharacterCard from '@/components/characters/CharacterCard.jsx'
 import CharacterCreatePopup from '@/components/characters/CharacterCreatePopup'
-import SortableGridList from '@/components/generic/SortableGridList'
+import SortableGridList from '@/components/generic/SortableGridList.jsx'
+import SortableItem from '@/components/generic/SortableItem'
 import ProtectedComponent from '@/containers/ProtectedComponent'
 import { getMyCharacters, updateCharacter } from '@/ducks/entities'
+import { updateCharacterSort } from '@/ducks/entities/character'
 import { useAppDispatch, useAppSelector, useDocumentTitle } from '@/hooks'
-import SortableItem from '../generic/SortableItem'
 
 const CharacterList = () => {
   useDocumentTitle('Characters | Lot-Casting Atemi')
@@ -36,10 +35,11 @@ const CharacterList = () => {
 
     const charA = characters[oldIndex]!
     const charB = characters[newIndex]!
-    const offset = charA.sort_order > charB.sort_order ? -1 : 1
+    const offset = charA.sorting > charB.sorting ? 1 : -1
     dispatch(
-      updateCharacter(charA.id, { sort_order: charB.sort_order + offset }),
+      updateCharacterSort({ id: charA.id, sorting: charB.sorting + offset }),
     )
+    dispatch(updateCharacter(charA.id, { sorting_position: newIndex }))
   }
 
   const classes = {}

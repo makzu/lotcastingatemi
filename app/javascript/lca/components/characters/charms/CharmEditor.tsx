@@ -1,39 +1,35 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 import ContentAddCircle from '@mui/icons-material/AddCircle'
+import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 
-import styles from './CharmStyles.js'
-import CharmFields from './CharmFields'
-import CharmFilter from './CharmFilter'
-import SpellFields from './SpellFields'
 import DocumentTitle from '@/components/generic/DocumentTitle'
 import SortableGridList from '@/components/generic/SortableGridList'
-
+import SortableItem from '@/components/generic/SortableItem'
 import ProtectedComponent from '@/containers/ProtectedComponent'
-import withRouter from '@/containers/withRouter'
 import {
-  updateCharm,
   createCharm,
-  destroyCharm,
-  updateSpell,
   createSpell,
+  destroyCharm,
   destroySpell,
 } from '@/ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 import {
-  getEvokableMeritsForCharacter,
-  getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter,
+  getEvokableMeritsForCharacter,
+  getMartialArtsCharmsForCharacter,
+  getNativeCharmsForCharacter,
   getSpellsForCharacter,
   getSpiritCharmsForCharacter,
 } from '@/selectors/'
-import type { Character, Charm, Spell } from '@/utils/flow-types'
-import SortableItem from '@/components/generic/SortableItem'
 import { type Merit } from '@/types'
+import type { Character, Charm, Spell } from '@/utils/flow-types'
 import { RootState } from 'store'
+import CharmFields from './CharmFields'
+import CharmFilter from './CharmFilter'
+import styles from './CharmStyles.js'
+import SpellFields from './SpellFields'
 
 import { Button, Grid, Hidden, Typography } from '@mui/material'
 
@@ -53,6 +49,8 @@ export interface Props extends WithStyles<typeof styles> {
   createSpell: $TSFixMeFunction
   updateSpell: $TSFixMeFunction
   destroySpell: $TSFixMeFunction
+  updateCharmSort: $TSFixMeFunction
+  updateSpellSort: $TSFixMeFunction
 }
 interface State {
   filtersOpen: boolean
@@ -247,12 +245,13 @@ class CharmEditor extends Component<Props, State> {
     }
 
     const charId = this.props.character.id
-    const charmA = charms[oldIndex]
-    const charmB = charms[newIndex]
-    const offset = charmA.sort_order > charmB.sort_order ? -1 : 1
-    update(charmA.id, charId, {
-      sort_order: charmB.sort_order + offset,
-    })
+    const charmA = charms[oldIndex]!
+    const charmB = charms[newIndex]!
+    const offset = charmA.sorting > charmB.sorting ? -1 : 1
+    const updateSort =
+      collection === 'spell' ? updateSpellSort : updateCharmSort
+    updateSort({ id: charmA.id, sorting: charmB.sorting + offset })
+    update(charmA.id, charId, { sorting_position: newIndex })
   }
 
   render() {
@@ -518,7 +517,7 @@ class CharmEditor extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state: RootState, ownProps) {
   const id = ownProps.params.id
   const character = getSpecificCharacter(state, id)
   let nativeCharms: Charm[] = []
@@ -549,16 +548,16 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default ProtectedComponent(
-  withRouter(
-    withStyles(styles)(
-      connect(mapStateToProps, {
-        createCharm,
-        updateCharm,
-        destroyCharm,
-        createSpell,
-        updateSpell,
-        destroySpell,
-      })(CharmEditor),
-    ),
+  withStyles(styles)(
+    connect(mapStateToProps, {
+      createCharm,
+      updateCharm,
+      destroyCharm,
+      createSpell,
+      updateSpell,
+      destroySpell,
+      updateCharmSort,
+      updateSpellSort,
+    })(CharmEditor),
   ),
 )

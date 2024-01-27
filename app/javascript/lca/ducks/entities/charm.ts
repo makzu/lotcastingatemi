@@ -1,12 +1,26 @@
+import { createAction } from '@reduxjs/toolkit'
 import createCachedSelector from 're-reselect'
 
 import type { RootState } from 'store'
 import { isDefined, sortOrderSort } from '@/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
+import { EntityState } from './_types'
 import { getSpecificCharacter } from './character'
 
-export default createTraitReducer('charm')
+export const updateCharmSort = createAction<{ id: number; sorting: number }>(
+  'sort/charm',
+)
+
+export default createTraitReducer('charm', undefined, {
+  [updateCharmSort.toString()]: (
+    state: EntityState,
+    action: ReturnType<typeof updateCharmSort>,
+  ) => {
+    const { id, sorting } = action.payload
+    state.charms[id].sorting = sorting
+  },
+})
 
 export const [createCharm, updateCharm, destroyCharm] =
   createApiActions('charm')

@@ -18,7 +18,7 @@ module Api
       def qc_charm_params
         return if params[:qc_charm].blank?
 
-        params.require(:qc_charm).permit(*base_attributes, keywords: [])
+        params.require(:qc_charm).permit(*base_attributes, :sorting_position, keywords: [])
       end
     end
   end

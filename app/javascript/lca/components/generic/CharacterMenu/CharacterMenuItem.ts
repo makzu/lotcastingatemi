@@ -1,6 +1,7 @@
-export type CharacterType = 'character' | 'qc' | 'battlegroup'
+import type { CharacterType } from '@/types'
+import { WithId } from '@/types/_lib'
 
 export interface MenuItemProps {
-  id: number
+  id: WithId['id']
   characterType: CharacterType
 }

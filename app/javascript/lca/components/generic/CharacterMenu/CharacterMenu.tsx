@@ -1,10 +1,8 @@
-import MoreVert from '@mui/icons-material/MoreVert'
-import { Divider, IconButton, Menu, type Theme } from '@mui/material'
-import type { WithStyles } from '@mui/styles'
-import withStyles from '@mui/styles/withStyles'
+import { MoreVert } from '@mui/icons-material'
+import { Box, Divider, IconButton, Menu } from '@mui/material'
 
 import { useMenuLogic } from '@/hooks'
-import type { CharacterType } from './CharacterMenuItem'
+import { MenuItemProps } from './CharacterMenuItem'
 import MenuBattlegroupFromQc from './MenuBattlegroupFromQc'
 import MenuChangeExaltType from './MenuChangeExaltType'
 import MenuDelete from './MenuDelete'
@@ -15,26 +13,16 @@ import MenuPinHide from './MenuPinHide'
 import MenuRefresh from './MenuRefresh'
 import MenuRemoveFromChronicle from './MenuRemoveFromChronicle'
 
-const styles = (_theme: Theme) => ({
-  headerWrapper: {},
-  wrapper: {
-    margin: '-0.75em -1em 0 1.5em',
-  },
-})
-
-interface Props extends WithStyles<typeof styles> {
-  id: number
-  characterType: CharacterType
+interface Props extends MenuItemProps {
   header?: boolean
   chronicle?: boolean
 }
 
-const CharacterMenu = (props: Props) => {
-  const { header, chronicle, characterType, id, classes } = props
+const CharacterMenu = ({ header, chronicle, characterType, id }: Props) => {
   const [menuAnchor, handleOpen, handleClose] = useMenuLogic()
 
   return (
-    <div className={header ? classes.headerWrapper : classes.wrapper}>
+    <Box sx={header ? { margin: '-0.75em -1em 0 1.5em' } : {}}>
       <IconButton
         onClick={handleOpen}
         data-cy="character-menu"
@@ -48,6 +36,7 @@ const CharacterMenu = (props: Props) => {
         <MenuRefresh characterType={characterType} id={id} />
 
         <Divider />
+
         <MenuDuplicate characterType={characterType} id={id} />
 
         <MenuBattlegroupFromQc characterType={characterType} id={id} />
@@ -68,8 +57,8 @@ const CharacterMenu = (props: Props) => {
 
         {!chronicle && <MenuDelete characterType={characterType} id={id} />}
       </Menu>
-    </div>
+    </Box>
   )
 }
 
-export default withStyles(styles)(CharacterMenu)
+export default CharacterMenu

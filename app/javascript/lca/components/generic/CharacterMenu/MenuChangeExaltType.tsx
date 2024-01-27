@@ -1,5 +1,4 @@
 import { useState, type ChangeEvent } from 'react'
-import { connect } from 'react-redux'
 
 import { SwapHoriz } from '@mui/icons-material'
 import {
@@ -18,36 +17,28 @@ import {
 import ExaltTypeSelect, {
   prettyType,
 } from '@/components/characterEditor/exaltTraits/ExaltTypeSelect'
-import type { State } from '@/ducks'
 import { changeCharacterType } from '@/ducks/actions'
-import { useDialogLogic } from '@/hooks'
-import { canIEdit } from '@/selectors'
 import { getSpecificCharacter } from '@/ducks/entities/character'
-
+import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
+import { canIEdit } from '@/selectors'
+import { Character } from '@/types'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface StateProps {
-  canEdit: boolean
-  currentType: string
-}
-
-interface DispatchProps {
-  action: typeof changeCharacterType
-}
-
-interface InnerProps extends StateProps, DispatchProps, Props {}
-
-const MenuChangeCharacterType = ({
-  id,
-  canEdit,
-  characterType,
-  currentType,
-  action,
-}: InnerProps) => {
+const MenuChangeCharacterType = ({ id, characterType }: Props) => {
+  const dispatch = useAppDispatch()
   const [isOpen, handleOpen, handleClose] = useDialogLogic()
+  const canEdit = useAppSelector((state) => canIEdit(state, id, characterType))
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
+  const currentType = character?.type
   const [selectedType, setSelectedType] = useState(currentType)
 
-  if (!canEdit || characterType !== 'character') {
+  if (
+    !canEdit ||
+    characterType !== 'character' ||
+    !currentType ||
+    !character ||
+    !selectedType
+  ) {
     return null
   }
 
@@ -55,7 +46,8 @@ const MenuChangeCharacterType = ({
     selectedType === 'Character' && currentType !== 'Character'
 
   const handleSubmit = () => {
-    action(id, selectedType)
+    if (!selectedType) return
+    dispatch(changeCharacterType(id, selectedType))
     handleClose()
   }
 
@@ -64,7 +56,7 @@ const MenuChangeCharacterType = ({
       return
     }
 
-    setSelectedType(e.target.value)
+    setSelectedType(e.target.value as Character['type'])
   }
 
   return (
@@ -112,14 +104,4 @@ const MenuChangeCharacterType = ({
   )
 }
 
-const mapState = (state: State, { id, characterType }: Props): StateProps => ({
-  canEdit: canIEdit(state, id, characterType),
-  currentType:
-    characterType === 'character'
-      ? getSpecificCharacter(state, id).type
-      : undefined,
-})
-
-export default connect<StateProps, DispatchProps, Props>(mapState, {
-  action: changeCharacterType,
-})(MenuChangeCharacterType)
+export default MenuChangeCharacterType

@@ -1,5 +1,3 @@
-import { connect } from 'react-redux'
-
 import {
   Bookmark,
   BookmarkBorder,
@@ -8,62 +6,51 @@ import {
 } from '@mui/icons-material'
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import type { State } from '@/ducks'
 import { update } from '@/ducks/actions/ByType'
-import { canIDelete } from '@/selectors'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { canIDelete, getEntity } from '@/selectors'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface StateProps {
-  canEdit: boolean
-  isPinned: boolean
-  isHidden: boolean
-}
+const CardMenuPin = ({ id, characterType }: Props) => {
+  const dispatch = useAppDispatch()
+  const canEdit = useAppSelector((state) =>
+    canIDelete(state, id, characterType),
+  )
+  const character = useAppSelector((state) =>
+    getEntity[characterType](state, id),
+  )
 
-interface DispatchProps {
-  hide(hidden: boolean): void
-  pin(pinned: boolean): void
-}
+  const pin = (pinned: boolean) => {
+    dispatch(update[characterType](id, { pinned }))
+  }
+  const hide = (hidden: boolean) => {
+    dispatch(update[characterType](id, { hidden }))
+  }
 
-interface InnerProps extends StateProps, DispatchProps {}
+  if (!canEdit || !character) return null
+  const { hidden, pinned } = character
 
-const CardMenuPin = ({ isPinned, isHidden, canEdit, pin, hide }: InnerProps) =>
-  canEdit ? (
+  return (
     <>
       <Divider />
-      <MenuItem onClick={() => pin(!isPinned)}>
+      <MenuItem onClick={() => pin(!pinned)}>
         <ListItemIcon>
-          {isPinned ? <Bookmark /> : <BookmarkBorder />}
+          {pinned ? <Bookmark /> : <BookmarkBorder />}
         </ListItemIcon>
-        <ListItemText inset primary={isPinned ? 'Unpin' : 'Pin to Menu'} />
+        <ListItemText inset primary={pinned ? 'Unpin' : 'Pin to Menu'} />
       </MenuItem>
 
-      <MenuItem onClick={() => hide(!isHidden)}>
+      <MenuItem onClick={() => hide(!hidden)}>
         <ListItemIcon>
-          {isHidden ? <Visibility /> : <VisibilityOff />}
+          {hidden ? <Visibility /> : <VisibilityOff />}
         </ListItemIcon>
         <ListItemText
           inset
-          primary={isHidden ? 'Unhide' : 'Hide from other players'}
+          primary={hidden ? 'Unhide' : 'Hide from other players'}
         />
       </MenuItem>
     </>
-  ) : null
+  )
+}
 
-const mapState = (state: State, { characterType, id }: Props): StateProps => ({
-  canEdit: canIDelete(state, id, characterType),
-  isHidden: state.entities.current[characterType + 's'][id].hidden,
-  isPinned: state.entities.current[characterType + 's'][id].pinned,
-})
-
-const mapDispatch = (
-  dispatch,
-  { characterType, id }: Props,
-): DispatchProps => ({
-  hide: (hidden: boolean) => dispatch(update[characterType](id, { hidden })),
-  pin: (pinned: boolean) => dispatch(update[characterType](id, { pinned })),
-})
-
-export default connect<StateProps, DispatchProps, Props>(
-  mapState,
-  mapDispatch,
-)(CardMenuPin)
+export default CardMenuPin

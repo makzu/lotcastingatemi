@@ -1,32 +1,24 @@
-import { connect } from 'react-redux'
-
 import { Refresh } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
 import { fetch } from '@/ducks/actions/ByType'
+import { useAppDispatch } from '@/hooks'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface DispatchProps {
-  action(): void
+const CardMenuRefresh = ({ characterType, id }: Props) => {
+  const dispatch = useAppDispatch()
+  const action = () => {
+    dispatch(fetch[characterType](id))
+  }
+
+  return (
+    <MenuItem onClick={action}>
+      <ListItemIcon>
+        <Refresh />
+      </ListItemIcon>
+      <ListItemText primary="Refresh Data" />
+    </MenuItem>
+  )
 }
 
-const CardMenuRefresh = ({ action }: DispatchProps) => (
-  <MenuItem onClick={action}>
-    <ListItemIcon>
-      <Refresh />
-    </ListItemIcon>
-    <ListItemText primary="Refresh Data" />
-  </MenuItem>
-)
-
-const mapDispatch = (
-  dispatch,
-  { characterType, id }: Props,
-): DispatchProps => ({
-  action: () => dispatch(fetch[characterType](id)),
-})
-
-export default connect<null, DispatchProps, Props>(
-  null,
-  mapDispatch,
-)(CardMenuRefresh)
+export default CardMenuRefresh

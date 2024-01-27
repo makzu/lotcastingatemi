@@ -1,50 +1,37 @@
-import { connect } from 'react-redux'
-
 import RemoveCircle from '@mui/icons-material/RemoveCircle'
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import type { State } from '@/ducks'
 import { removeThingFromChronicle as removeThing } from '@/ducks/actions'
-import { canIEdit } from '@/selectors'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { canIEdit, getEntity } from '@/selectors'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface StateProps {
-  canEdit: boolean
-  chronId?: number
-}
+const CardMenuRemove = ({ id, characterType }: Props) => {
+  const dispatch = useAppDispatch()
+  const canEdit = useAppSelector((state) => canIEdit(state, id, characterType))
+  const character = useAppSelector((state) =>
+    getEntity[characterType](state, id),
+  )
+  const chronId = character?.chronicle_id
 
-interface DispatchProps {
-  action(chronId: number): void
-}
+  if (!canEdit) return null
+  if (!chronId) return null
 
-interface InnerProps extends StateProps, DispatchProps, Props {}
+  const action = () => {
+    dispatch(removeThing(chronId, id, characterType))
+  }
 
-const CardMenuRemove = ({ chronId, canEdit, action }: InnerProps) =>
-  canEdit && chronId ? (
+  return (
     <>
       <Divider />
-      <MenuItem onClick={() => action(chronId)}>
+      <MenuItem onClick={action}>
         <ListItemIcon>
           <RemoveCircle />
         </ListItemIcon>
         <ListItemText inset primary="Remove from Chronicle" />
       </MenuItem>
     </>
-  ) : null
+  )
+}
 
-const mapState = (state: State, { id, characterType }: Props): StateProps => ({
-  canEdit: canIEdit(state, id, characterType),
-  chronId: state.entities.current[characterType + 's'][id].chronicle_id,
-})
-
-const mapDispatch = (
-  dispatch,
-  { id, characterType }: Props,
-): DispatchProps => ({
-  action: (chronId) => dispatch(removeThing(chronId, id, characterType)),
-})
-
-export default connect<StateProps, DispatchProps, Props>(
-  mapState,
-  mapDispatch,
-)(CardMenuRemove)
+export default CardMenuRemove

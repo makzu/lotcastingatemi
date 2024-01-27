@@ -1,44 +1,27 @@
-import { connect } from 'react-redux'
-
 import { PersonAdd } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import type { State } from '@/ducks'
 import { duplicate } from '@/ducks/actions/ByType'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface StateProps {
-  canDupe: boolean
-}
+const DuplicateButton = ({ characterType, id }: Props) => {
+  const canDupe = useAppSelector((state) => state.session.authenticated)
+  const dispatch = useAppDispatch()
+  if (!canDupe) return null
 
-interface DispatchProps {
-  action(): void
-}
+  const dupe = () => {
+    dispatch(duplicate[characterType](id))
+  }
 
-interface InnerProps extends StateProps, DispatchProps {}
-
-const DuplicateButton = ({ canDupe, action }: InnerProps) =>
-  canDupe ? (
-    <MenuItem onClick={action}>
+  return (
+    <MenuItem onClick={dupe}>
       <ListItemIcon>
         <PersonAdd />
       </ListItemIcon>
       <ListItemText primary="Duplicate" />
     </MenuItem>
-  ) : null
+  )
+}
 
-const mapState = (state: State): StateProps => ({
-  canDupe: state.session.authenticated,
-})
-
-const mapDispatch = (
-  dispatch,
-  { characterType, id }: Props,
-): DispatchProps => ({
-  action: () => dispatch(duplicate[characterType](id)),
-})
-
-export default connect<StateProps, DispatchProps, Props>(
-  mapState,
-  mapDispatch,
-)(DuplicateButton)
+export default DuplicateButton

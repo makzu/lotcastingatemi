@@ -9,13 +9,13 @@ import {
 } from '@mui/material'
 
 import ChronicleCreateDialog from '@/components/chronicles/ChronicleCreateDialog'
-import ChronicleJoinPopup from '@/components/chronicles/chronicleJoinPopup'
+import { ChronicleJoinDialog } from '@/components/chronicles/ChronicleJoinDialog'
 import NavLinkListItem from '@/components/shared/wrappers/NavLinkListItem'
 import { closeDrawer } from '@/features/drawerSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import useToggleBoolean from '@/hooks/UseToggleBoolean'
 import { getMyChronicles, getMyOwnChronicles } from '@/selectors'
-import { Chronicle } from '@/types'
+import type { Chronicle } from '@/types'
 
 const ChronicleNavList = () => {
   const [open, toggleOpen] = useToggleBoolean(false)
@@ -61,7 +61,7 @@ const ChronicleNavList = () => {
         )}
         {joinedChronicles.map(chronicleMap)}
 
-        <ChronicleJoinPopup />
+        <ChronicleJoinDialog />
         <ChronicleCreateDialog />
       </Collapse>
     </>

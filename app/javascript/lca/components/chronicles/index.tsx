@@ -1,9 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
-import { updateBattlegroupChronicleSort } from '@/ducks/entities/battlegroup'
-import { updateCharacterChronicleSort } from '@/ducks/entities/character'
-import { updateQcChronicleSort } from '@/ducks/entities/qc'
 import { Grid, Hidden, Typography } from '@mui/material'
 
 import BattlegroupCard from '@/components/battlegroups/BattlegroupCard'
@@ -14,7 +12,11 @@ import SortableItem from '@/components/generic/SortableItem'
 import QcCard from '@/components/qcs/QcCard'
 import BlockPaper from '@/components/shared/BlockPaper'
 import ProtectedComponent from '@/containers/ProtectedComponent'
+import withRouter from '@/containers/withRouter'
 import { updateBattlegroup, updateCharacter, updateQc } from '@/ducks/actions'
+import { updateBattlegroupChronicleSort } from '@/ducks/entities/battlegroup'
+import { updateCharacterChronicleSort } from '@/ducks/entities/character'
+import { updateQcChronicleSort } from '@/ducks/entities/qc'
 import {
   amIStOfChronicle,
   getBattlegroupsForChronicle,
@@ -24,12 +26,11 @@ import {
   getSpecificChronicle,
   getStorytellerForChronicle,
 } from '@/selectors'
-import { RootState } from '@/store'
+import { type RootState } from '@/store'
+import { type Chronicle } from '@/types'
 import type { Battlegroup, Character, fullQc } from '@/utils/flow-types'
+import AddToChronicleDialog from './AddToChronicleDialog'
 import STControls from './StControls'
-import BattlegroupAddPopup from './battlegroupAddPopup'
-import CharacterAddPopup from './characterAddPopup'
-import QcAddPopup from './qcAddPopup'
 
 // TODO: replace with proper objects
 interface Props {
@@ -40,7 +41,7 @@ interface Props {
   characters: Character[]
   qcs: fullQc[]
   battlegroups: Battlegroup[]
-  chronicle: Record<string, $TSFixMe>
+  chronicle: Chronicle
   updateCharacter: $TSFixMeFunction
   updateQc: $TSFixMeFunction
   updateBattlegroup: $TSFixMeFunction
@@ -137,7 +138,10 @@ class ChronicleDashboard extends Component<Props> {
           header={
             <Typography variant="h5">
               Characters
-              <CharacterAddPopup chronicleId={chronicle.id} />
+              <AddToChronicleDialog
+                chronicleId={chronicle.id}
+                thingType="character"
+              />
             </Typography>
           }
           items={characterList}
@@ -158,7 +162,7 @@ class ChronicleDashboard extends Component<Props> {
           header={
             <Typography variant="h5">
               Quick Characters
-              <QcAddPopup chronicleId={chronicle.id} />
+              <AddToChronicleDialog chronicleId={chronicle.id} thingType="qc" />
             </Typography>
           }
           items={qcList}
@@ -179,7 +183,10 @@ class ChronicleDashboard extends Component<Props> {
           header={
             <Typography variant="h5">
               Battlegroups
-              <BattlegroupAddPopup chronicleId={chronicle.id} />
+              <AddToChronicleDialog
+                chronicleId={chronicle.id}
+                thingType="battlegroup"
+              />
             </Typography>
           }
           items={bgList}
@@ -215,7 +222,9 @@ function mapStateToProps(state: RootState, ownProps) {
   }
 }
 
-export default ProtectedComponent(
+export default compose(
+  ProtectedComponent,
+  withRouter,
   connect(mapStateToProps, {
     updateCharacter,
     updateQc,
@@ -223,5 +232,5 @@ export default ProtectedComponent(
     updateCharacterChronicleSort,
     updateQcChronicleSort,
     updateBattlegroupChronicleSort,
-  })(ChronicleDashboard),
-)
+  }),
+)(ChronicleDashboard)

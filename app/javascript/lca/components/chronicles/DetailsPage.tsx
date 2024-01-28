@@ -1,196 +1,144 @@
-import { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
+import { Fragment, type ChangeEvent } from 'react'
 
-import ChronicleDeletePopup from './ChronicleDeletePopup'
-import ChronicleInvitePopup from './chronicleInvitePopup'
-import ChronicleLeavePopup from './ChronicleLeavePopup'
-import RemovePlayerPopup from './removePlayerPopup'
+import { Box, Divider, Grid, Typography } from '@mui/material'
+
+import TextField from '@/components/fields/TextField'
 import BlockPaper from '@/components/shared/BlockPaper'
-import DocumentTitle from '@/components/generic/DocumentTitle'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
-import TextField from '@/components/generic/TextField'
-
 import ProtectedComponent from '@/containers/ProtectedComponent'
-import withRouter from '@/containers/withRouter'
 import { updateChronicle } from '@/ducks/actions'
 import {
-  getSpecificChronicle,
-  getPlayersForChronicle,
-  getStorytellerForChronicle,
+  useAppDispatch,
+  useAppSelector,
+  useDocumentTitle,
+  useIdFromParams,
+} from '@/hooks'
+import {
   amIStOfChronicle,
+  getPlayersForChronicle,
+  getSpecificChronicle,
+  getStorytellerForChronicle,
 } from '@/selectors'
-import type { Character, fullQc, Battlegroup } from '@/utils/flow-types'
-import type { Chronicle } from '@/types'
+import { ChronicleDeleteDialog } from './ChronicleDeleteDialog'
+import ChronicleLeavePopup from './ChronicleLeavePopup'
+import ChronicleInvitePopup from './chronicleInvitePopup'
+import RemovePlayerPopup from './removePlayerPopup'
 
-import { Divider, Grid, Hidden, Typography } from '@mui/material'
+const ChronicleDetailsPage = () => {
+  const dispatch = useAppDispatch()
+  const id = useIdFromParams()
+  const chronicle = useAppSelector((state) => getSpecificChronicle(state, id))
+  const st = useAppSelector((state) => getStorytellerForChronicle(state, id))
+  const is_st = useAppSelector((state) => amIStOfChronicle(state, id))
+  const players = useAppSelector((state) => getPlayersForChronicle(state, id))
+  useDocumentTitle(`${chronicle?.name} | Lot-Casting Atemi`)
 
-interface Props {
-  id: number
-  st: Record<string, $TSFixMe>
-  is_st: boolean
-  players: Record<string, $TSFixMe>[]
-  characters: Character[]
-  qcs: fullQc[]
-  battlegroups: Battlegroup[]
-  chronicle: Chronicle
-  classes: Record<string, $TSFixMe>
-  updateChronicle: $TSFixMeFunction
-}
-
-class ChronicleDetailsPage extends Component<Props, { name?: string }> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {}
-  }
-
-  static getDerivedStateFromProps(props: Props) {
-    const { chronicle } = props
-    if (chronicle?.st_id === undefined) return null
-    return {
-      name: chronicle.name,
-    }
-  }
-
-  onChange = (e) => {
-    const { chronicle, updateChronicle } = this.props
-    updateChronicle(chronicle.id, {
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  render() {
-    /* Escape hatch */
-    if (this.props.chronicle?.st_id == undefined)
-      return (
-        <BlockPaper>
-          <Typography paragraph>This Chronicle has not yet loaded.</Typography>
-        </BlockPaper>
-      )
-    const { chronicle, st, is_st, players } = this.props
-    const { onChange } = this
-    const playerList = players.map((p) => (
-      <Fragment key={p.id}>
-        <Typography>
-          {p.display_name}
-          &nbsp;&nbsp;
-          {is_st && (
-            <RemovePlayerPopup chronicleId={chronicle.id} playerId={p.id} />
-          )}
-        </Typography>
-        <Divider />
-      </Fragment>
-    ))
+  if (chronicle === undefined) {
     return (
-      <Grid container spacing={3}>
-        <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
-
-        <Hidden smUp>
-          <Grid item xs={12}>
-            <div
-              style={{
-                height: '1.0em',
-              }}
-            >
-              &nbsp;
-            </div>
-          </Grid>
-        </Hidden>
-
-        {chronicle.notes !== '' && (
-          <Grid item xs={12} md={8}>
-            <BlockPaper>
-              <MarkdownDisplay source={chronicle.notes} />
-            </BlockPaper>
-          </Grid>
-        )}
-
-        <Grid item xs={12} md={4}>
-          <BlockPaper>
-            <Typography variant="h5">
-              Players
-              {is_st && <ChronicleInvitePopup chronicleId={chronicle.id} />}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              Storyteller: {st.display_name}
-            </Typography>
-
-            <Divider />
-
-            {playerList}
-            {!is_st && (
-              <div
-                style={{
-                  marginTop: '1em',
-                }}
-              >
-                <ChronicleLeavePopup chronicleId={chronicle.id} />
-              </div>
-            )}
-          </BlockPaper>
-        </Grid>
-
-        {is_st && (
-          <Grid item xs={12}>
-            <BlockPaper>
-              <Typography variant="subtitle1">ST Controls</Typography>
-
-              <div>
-                <TextField
-                  name="name"
-                  value={chronicle.name}
-                  label="Chronicle Name"
-                  style={{
-                    width: '30em',
-                  }}
-                  onChange={onChange}
-                  margin="dense"
-                  inputProps={{
-                    autocomplete: 'off',
-                    'data-1p-ignore': 'true',
-                    'data-lp-ignore': 'true',
-                  }}
-                />
-              </div>
-
-              <TextField
-                name="notes"
-                label="Chronicle Notes"
-                value={chronicle.notes}
-                margin="dense"
-                onChange={onChange}
-                fullWidth
-                multiline
-              />
-              <div
-                style={{
-                  marginTop: '1em',
-                }}
-              >
-                <ChronicleDeletePopup chronicleId={chronicle.id} />
-              </div>
-            </BlockPaper>
-          </Grid>
-        )}
-      </Grid>
+      <BlockPaper>
+        <Typography paragraph>This Chronicle has not yet loaded.</Typography>
+      </BlockPaper>
     )
   }
-}
 
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.params.id
-
-  return {
-    id,
-    chronicle: getSpecificChronicle(state, id),
-    st: getStorytellerForChronicle(state, id),
-    is_st: amIStOfChronicle(state, id),
-    players: getPlayersForChronicle(state, id),
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateChronicle(chronicle.id, { [e.target.name]: e.target.value }))
   }
+
+  return (
+    <Grid container spacing={3}>
+      <Grid
+        item
+        xs={12}
+        sx={{ display: { xs: 'block', sm: 'none' }, height: '1em' }}
+      >
+        &nbsp;
+      </Grid>
+
+      <Grid item xs={12} md={8}>
+        <BlockPaper>
+          <MarkdownDisplay source={chronicle.notes} />
+        </BlockPaper>
+      </Grid>
+
+      <Grid item xs={12} md={4}>
+        <BlockPaper>
+          <Typography variant="h5" className="flexContainer">
+            <div className="flex">Players</div>
+
+            {is_st && <ChronicleInvitePopup chronicleId={chronicle.id} />}
+          </Typography>
+
+          <Typography variant="subtitle1" gutterBottom>
+            Storyteller: {st?.display_name}
+          </Typography>
+
+          <Divider sx={{ mt: 1, mb: 1 }} />
+
+          {players.map((p, index) => (
+            <Fragment key={p.id}>
+              {!!index && <Divider sx={{ mt: 1, mb: 1 }} />}
+              <div className="flexContainer">
+                <Typography gutterBottom sx={{ flex: 1 }}>
+                  {p.display_name}
+                </Typography>
+                {is_st && (
+                  <RemovePlayerPopup
+                    chronicleId={chronicle.id}
+                    playerId={p.id}
+                  />
+                )}
+              </div>
+            </Fragment>
+          ))}
+
+          {!is_st && (
+            <Box sx={{ mt: 2 }}>
+              <ChronicleLeavePopup chronicleId={chronicle.id} />
+            </Box>
+          )}
+        </BlockPaper>
+      </Grid>
+
+      {is_st && (
+        <Grid item xs={12}>
+          <BlockPaper>
+            <Typography variant="subtitle1">ST Controls</Typography>
+
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                name="name"
+                value={chronicle.name}
+                label="Chronicle Name"
+                sx={{ width: '30em' }}
+                onChange={handleChange}
+                margin="dense"
+                inputProps={{
+                  autocomplete: 'off',
+                  'data-1p-ignore': 'true',
+                  'data-lp-ignore': 'true',
+                }}
+              />
+            </Box>
+
+            <TextField
+              name="notes"
+              label="Chronicle Notes"
+              value={chronicle.notes}
+              margin="dense"
+              onChange={handleChange}
+              fullWidth
+              multiline
+            />
+
+            <Box sx={{ mt: 2 }}>
+              <ChronicleDeleteDialog chronicleId={chronicle.id} />
+            </Box>
+          </BlockPaper>
+        </Grid>
+      )}
+    </Grid>
+  )
 }
 
-export default compose(
-  ProtectedComponent,
-  withRouter,
-  connect(mapStateToProps, { updateChronicle }),
-)(ChronicleDetailsPage)
+export default ProtectedComponent(ChronicleDetailsPage)

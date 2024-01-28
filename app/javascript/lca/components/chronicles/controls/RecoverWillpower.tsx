@@ -1,8 +1,4 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-
-import RatingField from '@/components/generic/RatingField'
-import { recoverWillpower } from '@/ducks/events'
+import { useState } from 'react'
 
 import {
   Button,
@@ -13,152 +9,104 @@ import {
   DialogContentText,
   DialogTitle,
   FormControlLabel,
-  Typography,
 } from '@mui/material'
 
-interface Props {
-  id: number
-  recoverWillpower: $TSFixMeFunction
-}
-interface State {
-  open: boolean
-  toRecover: number
-  exceed: boolean
-  qcs: boolean
-}
+import RatingField from '@/components/fields/RatingField'
+import { recoverWillpower } from '@/ducks/events'
+import { useAppDispatch, useDialogLogic } from '@/hooks'
 
-class WillpowerRecoveryPopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-      toRecover: 0,
-      exceed: false,
-      qcs: false,
-    }
+const WillpowerRecoverDialog = ({ id }: { id: number }) => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+  const [willpower, setWillpower] = useState(0)
+  const [exceed, setExceed] = useState(false)
+  const [alsoQCs, setAlsoQCs] = useState(false)
+
+  const handleSubmit = () => {
+    dispatch(recoverWillpower(id, willpower, exceed, alsoQCs))
+    close()
   }
 
-  handleOpen = () => {
-    this.setState({
-      open: true,
-    })
-  }
-  handleClose = () => {
-    this.setState({ open: false, toRecover: 0, exceed: false, qcs: false })
-  }
-  handleAdd = (wp) => {
-    this.setState({ toRecover: Math.max(this.state.toRecover + wp, 0) })
-  }
+  return (
+    <>
+      <Button onClick={open}>Recover Willpower</Button>
 
-  handleReset = () => {
-    this.setState({ toRecover: 0 })
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Recover Willpower</DialogTitle>
 
-  handleChange = (e) => {
-    const { name, value } = e.target
+        <DialogContent>
+          <DialogContentText>
+            A good night&apos;s sleep restores one point. Willpower is fully
+            restored at the end of each story. Achieving a major character or
+            story goal restores 1-3 points, which can exceed the
+            character&apos;s permanent rating.
+          </DialogContentText>
+          <DialogContentText variant="caption">
+            (Core p.169-170)
+          </DialogContentText>
 
-    if (name === 'toRecover') {
-      const val = Math.max(parseInt(value), 0)
-      this.setState({
-        toRecover: val,
-      })
-    } else {
-      this.setState({
-        [name]: value,
-      })
-    }
-  }
-
-  handleCheck = (e) => {
-    this.setState({ [e.target.name]: !this.state[e.target.name] })
-  }
-
-  handleSubmit = () => {
-    const { toRecover, exceed, qcs } = this.state
-    this.props.recoverWillpower(this.props.id, toRecover, exceed, qcs)
-    this.handleClose()
-  }
-
-  render() {
-    const { toRecover, exceed, qcs, open } = this.state
-    const {
-      handleOpen,
-      handleClose,
-      handleAdd,
-      handleReset,
-      handleChange,
-      handleCheck,
-      handleSubmit,
-    } = this
-    return (
-      <>
-        <Button onClick={handleOpen}>Recover Willpower</Button>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Recover Willpower</DialogTitle>
-
-          <DialogContent>
-            <DialogContentText>
-              A good night&apos;s sleep restores one point. Willpower is fully
-              restored at the end of each story. Achieving a major character or
-              story goal restores 1-3 points, which can exceed the
-              character&apos;s permanent rating.
-            </DialogContentText>
-            <Typography variant="caption">(Core p.169-170)</Typography>
-
-            <div>
-              <Button size="small" onClick={() => handleAdd(-1)}>
-                -1
-              </Button>
-              &nbsp;&nbsp;
-              <RatingField
-                trait="toRecover"
-                value={toRecover}
-                label="Willpower"
-                margin="dense"
-                min={0}
-                max={10}
-                onChange={handleChange}
-              />
-              <Button size="small" onClick={handleReset}>
-                0
-              </Button>
-              <Button size="small" onClick={() => handleAdd(1)}>
-                +1
-              </Button>
-              <Button size="small" onClick={() => handleAdd(5)}>
-                +5
-              </Button>
-            </div>
-            <FormControlLabel
-              label="Exceed permanent ratings (max 10)"
-              control={
-                <Checkbox
-                  name="exceed"
-                  checked={exceed}
-                  onChange={handleCheck}
-                />
-              }
-            />
-            <br />
-
-            <FormControlLabel
-              label="Include QCs"
-              control={
-                <Checkbox name="qcs" checked={qcs} onChange={handleCheck} />
-              }
-            />
-          </DialogContent>
-
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              Recover
+          <div>
+            <Button size="small" onClick={() => setWillpower(willpower - 1)}>
+              -1
             </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+
+            <RatingField
+              name="willpower"
+              value={willpower}
+              label="Willpower"
+              margin="dense"
+              min={0}
+              max={10}
+              sx={{ ml: 1, mr: 1 }}
+              debounceTime={0}
+              onChange={(e) => setWillpower(Number(e.target.value))}
+            />
+
+            <Button size="small" onClick={() => setWillpower(0)}>
+              0
+            </Button>
+            <Button size="small" onClick={() => setWillpower(willpower + 1)}>
+              +1
+            </Button>
+            <Button size="small" onClick={() => setWillpower(willpower + 5)}>
+              +5
+            </Button>
+          </div>
+
+          <FormControlLabel
+            label="Exceed permanent ratings (max 10)"
+            control={
+              <Checkbox
+                name="exceed"
+                checked={exceed}
+                onChange={() => setExceed(!exceed)}
+              />
+            }
+          />
+
+          <br />
+
+          <FormControlLabel
+            label="Include QCs"
+            control={
+              <Checkbox
+                name="qcs"
+                checked={alsoQCs}
+                onChange={() => setAlsoQCs(!alsoQCs)}
+              />
+            }
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Recover
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-export default connect(null, { recoverWillpower })(WillpowerRecoveryPopup)
+export default WillpowerRecoverDialog

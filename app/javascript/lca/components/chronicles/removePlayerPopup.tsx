@@ -1,11 +1,3 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-
-import { removePlayerFromChronicle as removePlayer } from '@/ducks/actions'
-import { getSpecificChronicle, getSpecificPlayer } from '@/selectors'
-import type { Enhancer } from '@/utils/flow-types'
-import type { RootState } from 'store'
-
 import {
   Button,
   Dialog,
@@ -15,94 +7,58 @@ import {
   DialogTitle,
 } from '@mui/material'
 
-interface ExposedProps {
+import { removePlayerFromChronicle as removePlayer } from '@/ducks/actions'
+import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
+import { getSpecificChronicle, getSpecificPlayer } from '@/selectors'
+
+interface Props {
   chronicleId: number
   playerId: number
 }
-type Props = ExposedProps & {
-  chronicleName: string
-  playerName: string
-  removePlayer: $TSFixMeFunction
-}
-interface State {
-  open: boolean
-}
 
-class RemovePlayerPopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-    }
+const RemovePlayerDialog = ({ chronicleId, playerId }: Props) => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+
+  const chronicle = useAppSelector((state) =>
+    getSpecificChronicle(state, chronicleId),
+  )
+  const player = useAppSelector((state) => getSpecificPlayer(state, playerId))
+
+  if (chronicle === undefined || player === undefined) return null
+
+  const handleSubmit = () => {
+    dispatch(removePlayer(chronicleId, playerId))
+    close()
   }
 
-  handleOpen = () => {
-    this.setState({
-      open: true,
-    })
-  }
-  handleClose = () => {
-    this.setState({
-      open: false,
-    })
-  }
-  handleSubmit = () => {
-    this.setState({
-      open: false,
-    })
-    this.props.removePlayer(this.props.chronicleId, this.props.playerId)
-  }
+  return (
+    <>
+      <Button onClick={open}>Kick</Button>
 
-  render() {
-    const { handleOpen, handleClose, handleSubmit } = this
-    const { chronicleName, playerName } = this.props
-    return (
-      <>
-        <Button onClick={handleOpen}>Kick</Button>
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Remove {player.display_name}?</DialogTitle>
 
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Remove {playerName}?</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              This will remove {playerName} and all of their characters from{' '}
-              {chronicleName}.
-            </DialogContentText>
-            <DialogContentText>
-              They will be able to re-join unless you generate a new invite code
-              or disable invitations.
-            </DialogContentText>
-          </DialogContent>
+        <DialogContent>
+          <DialogContentText>
+            This will remove {player.display_name} and all of their characters
+            from {chronicle.name}.
+          </DialogContentText>
+          <DialogContentText>
+            They will be able to re-join unless you generate a new invite code
+            or disable invitations.
+          </DialogContentText>
+        </DialogContent>
 
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained" color="primary">
-              Remove
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Remove
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-function mapStateToProps(state: RootState, ownProps: ExposedProps) {
-  let chronicleName,
-    playerName = ''
-  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
-
-  if (chronicle?.name != undefined) {
-    chronicleName = chronicle.name
-    // TODO add some kind of error here if it can't find a player
-    playerName = getSpecificPlayer(state, ownProps.playerId)?.display_name
-  }
-
-  return {
-    chronicleName: chronicleName,
-    playerName: playerName,
-  }
-}
-
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
-  removePlayer,
-})
-export default enhance(RemovePlayerPopup)
+export default RemovePlayerDialog

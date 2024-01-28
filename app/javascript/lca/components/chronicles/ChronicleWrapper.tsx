@@ -1,53 +1,36 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { Routes, Route } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
 
-import ChronicleDashboard from '@/components/chronicles/index'
 import ChronicleDetailsPage from '@/components/chronicles/DetailsPage'
+import ChronicleDashboard from '@/components/chronicles/index'
 import CombatDashboard from '@/components/combat/index'
-import withRouter from '@/containers/withRouter'
 import { fetchChronicle } from '@/ducks/actions'
+import { useAppDispatch, useAppSelector, useIdFromParams } from '@/hooks'
 import { isChronicleLoaded } from '@/selectors'
-import type { Enhancer } from '@/utils/flow-types'
 
-interface ExposedProps {
-  params: { id: number }
-}
-type Props = ExposedProps & {
-  isLoaded: boolean
-  fetchChronicle: $TSFixMeFunction
-}
+const ChronicleWrap = () => {
+  const dispatch = useAppDispatch()
+  const [loadStarted, setLoadStarted] = useState(false)
+  const id = useIdFromParams()
+  const isLoaded = useAppSelector((state) => isChronicleLoaded(state, id))
 
-class ChronicleWrapper extends Component<Props> {
-  fetchStuff = () => {
-    if (!this.props.isLoaded) this.props.fetchChronicle(this.props.params.id)
-  }
+  useEffect(() => {
+    if (!isLoaded && !loadStarted) {
+      dispatch(fetchChronicle(id))
+      setLoadStarted(true)
+    }
+    return () => {
+      setLoadStarted(false)
+    }
+  }, [dispatch, id, isLoaded, loadStarted])
 
-  componentDidMount() {
-    this.fetchStuff()
-  }
-
-  componentDidUpdate() {
-    this.fetchStuff()
-  }
-
-  render() {
-    return (
-      <Routes>
-        <Route path="combat" element={<CombatDashboard />} />
-        <Route path="details" element={<ChronicleDetailsPage />} />
-        <Route path="*" element={<ChronicleDashboard />} />
-      </Routes>
-    )
-  }
+  return (
+    <Routes>
+      <Route path="combat" element={<CombatDashboard />} />
+      <Route path="details" element={<ChronicleDetailsPage />} />
+      <Route path="*" element={<ChronicleDashboard />} />
+    </Routes>
+  )
 }
 
-const mapStateToProps = (state, props: ExposedProps) => ({
-  isLoaded: isChronicleLoaded(state, props.params.id),
-})
-
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
-  fetchChronicle,
-})
-
-export default withRouter(enhance(ChronicleWrapper))
+export default ChronicleWrap

@@ -27,18 +27,19 @@ type RatingFieldProps = Omit<
   min?: number
   /** @default Infinity */
   max?: number
-
+  /** @default 500 */
+  debounceTime?: number
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 
 const RatingField = (props: RatingFieldProps) => {
-  const { value, onChange, ...otherProps } = props
+  const { value, onChange, debounceTime, ...otherProps } = props
   const [localValue, setLocalValue] = useState<number | '-' | ''>(value ?? 0)
 
   const min = props.min ?? 0
   const max = props.max ?? Infinity
 
-  const debouncedOnChange = useDebounce(onChange, 500)
+  const debouncedOnChange = useDebounce(onChange, debounceTime ?? 500)
 
   useEffect(() => {
     setLocalValue(value)

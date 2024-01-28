@@ -1,3 +1,4 @@
+import { CharacterType } from '@/types'
 import { callApi } from '@/utils/api'
 import { createApiActions, mergeEntity } from './_entity'
 import { crudAction, reducerUpdateAction, standardTypes } from './_lib'
@@ -78,7 +79,7 @@ export function removePlayerFromChronicle(id: number, playerId: number) {
 export function addThingToChronicle(
   id: number,
   thingId: number,
-  thingType: 'character' | 'qc' | 'battlegroup',
+  thingType: CharacterType,
 ) {
   const action = crudAction(CHRONICLE, 'ADD_THING')
   return callApi({
@@ -91,7 +92,7 @@ export function addThingToChronicle(
 export function removeThingFromChronicle(
   id: number,
   thingId: number,
-  type: string,
+  type: CharacterType,
 ) {
   const action = crudAction(CHRONICLE, 'REMOVE_THING')
   return callApi({

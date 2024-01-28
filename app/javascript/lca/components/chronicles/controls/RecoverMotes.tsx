@@ -1,8 +1,4 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-
-import RatingField from '@/components/generic/RatingField'
-import { respireMotes } from '@/ducks/events'
+import { useState } from 'react'
 
 import {
   Button,
@@ -13,144 +9,94 @@ import {
   DialogContentText,
   DialogTitle,
   FormControlLabel,
-  Typography,
 } from '@mui/material'
 
-interface Props {
-  id: number
-  respireMotes: $TSFixMeFunction
-}
-interface State {
-  open: boolean
-  toRecover: number
-  qcs: boolean
-}
+import RatingField from '@/components/fields/RatingField'
+import { respireMotes } from '@/ducks/events'
+import { useAppDispatch, useDialogLogic } from '@/hooks'
 
-class MoteRespirePopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = { open: false, toRecover: 0, qcs: false }
+const MoteRespireDialog = ({ id }: { id: number }) => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+  const [motes, setMotes] = useState(0)
+  const [qcs, setQcs] = useState(false)
+
+  const handleSubmit = () => {
+    dispatch(respireMotes(id, motes, qcs))
+    close()
   }
 
-  handleOpen = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false, toRecover: 0, qcs: false })
+  return (
+    <>
+      <Button onClick={open}>Respire Motes</Button>
 
-  handleAdd = (motes) =>
-    this.setState({ toRecover: Math.max(this.state.toRecover + motes, 0) })
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Respire Motes</DialogTitle>
 
-  handleReset = () => this.setState({ toRecover: 0 })
+        <DialogContent>
+          <DialogContentText>
+            In combat, characters recover 5 motes per round. Out of combat,
+            characters recover 5 motes per hour, or 10 while very relaxed.
+          </DialogContentText>
+          <DialogContentText>
+            Peripheral pools are replenished before Personal.
+          </DialogContentText>
+          <DialogContentText variant="caption">(Core, p.174)</DialogContentText>
 
-  handleChange = (e) => {
-    const { name, value } = e.target
-
-    if (name === 'toRecover') {
-      const val = Math.max(parseInt(value), 0)
-      this.setState({ toRecover: val })
-    } else {
-      this.setState({ [name]: value })
-    }
-  }
-
-  handleCheck = (e) => {
-    this.setState({ [e.target.name]: !this.state[e.target.name] })
-
-    const { name, value } = e.target
-
-    if (name === 'toRecover') {
-      const val = Math.max(parseInt(value), 0)
-      this.setState({
-        toRecover: val,
-      })
-    } else {
-      this.setState({
-        [name]: value,
-      })
-    }
-  }
-  handleCheck = (e) =>
-    this.setState({
-      [e.target.name]: !this.state[e.target.name],
-    })
-  handleSubmit = () => {
-    const { toRecover, qcs } = this.state
-    this.props.respireMotes(this.props.id, toRecover, qcs)
-    this.handleClose()
-  }
-
-  render() {
-    const { toRecover, qcs, open } = this.state
-    const {
-      handleOpen,
-      handleClose,
-      handleAdd,
-      handleReset,
-      handleChange,
-      handleCheck,
-      handleSubmit,
-    } = this
-    return (
-      <>
-        <Button onClick={handleOpen}>Respire Motes</Button>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Respire Motes</DialogTitle>
-
-          <DialogContent>
-            <DialogContentText>
-              In combat, characters recover 5 motes per round. Out of combat,
-              characters recover 5 motes per hour, or 10 while very relaxed.
-            </DialogContentText>
-            <DialogContentText>
-              Peripheral pools are replenished before Personal.
-            </DialogContentText>
-            <Typography variant="caption">(Core, p.174)</Typography>
-            <div>
-              <Button size="small" onClick={() => handleAdd(-5)}>
-                -5
-              </Button>
-              <Button size="small" onClick={() => handleAdd(-1)}>
-                -1
-              </Button>
-              &nbsp;&nbsp;
-              <RatingField
-                trait="toRecover"
-                value={toRecover}
-                label="Motes"
-                margin="dense"
-                min={0}
-                onChange={handleChange}
-              />
-              <Button size="small" onClick={handleReset}>
-                0
-              </Button>
-              <Button size="small" onClick={() => handleAdd(1)}>
-                +1
-              </Button>
-              <Button size="small" onClick={() => handleAdd(5)}>
-                +5
-              </Button>
-              <Button size="small" onClick={() => handleAdd(10)}>
-                +10
-              </Button>
-            </div>
-
-            <FormControlLabel
-              label="Include QCs"
-              control={
-                <Checkbox name="qcs" checked={qcs} onChange={handleCheck} />
-              }
-            />
-          </DialogContent>
-
-          <DialogActions>
-            <Button onClick={handleClose}>Close</Button>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              Respire
+          <div>
+            <Button size="small" onClick={() => setMotes(motes - 5)}>
+              -5
             </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+            <Button size="small" onClick={() => setMotes(motes - 1)}>
+              -1
+            </Button>
+
+            <RatingField
+              name="toRecover"
+              value={motes}
+              label="Motes"
+              margin="dense"
+              min={0}
+              debounceTime={0}
+              sx={{ ml: 1, mr: 1 }}
+              onChange={(e) => setMotes(Number(e.target.value))}
+            />
+
+            <Button size="small" onClick={() => setMotes(0)}>
+              0
+            </Button>
+            <Button size="small" onClick={() => setMotes(motes + 1)}>
+              +1
+            </Button>
+            <Button size="small" onClick={() => setMotes(motes + 5)}>
+              +5
+            </Button>
+            <Button size="small" onClick={() => setMotes(motes + 10)}>
+              +10
+            </Button>
+          </div>
+
+          <FormControlLabel
+            label="Include QCs"
+            control={
+              <Checkbox
+                name="qcs"
+                checked={qcs}
+                onChange={() => setQcs(!qcs)}
+              />
+            }
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={close}>Close</Button>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Respire
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-export default connect(null, { respireMotes })(MoteRespirePopup)
+export default MoteRespireDialog

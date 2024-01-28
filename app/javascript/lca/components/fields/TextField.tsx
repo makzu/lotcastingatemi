@@ -1,4 +1,9 @@
-import { useState, type ChangeEvent, type ChangeEventHandler } from 'react'
+import {
+  useEffect,
+  useState,
+  type ChangeEvent,
+  type ChangeEventHandler,
+} from 'react'
 
 import {
   TextField,
@@ -9,16 +14,21 @@ import { useDebounce } from '@/hooks'
 
 export type TextFieldProps = Omit<
   MuiTextFieldProps,
-  'children' | 'onChange'
+  'value' | 'children' | 'onChange'
 > & {
+  value: string
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 
 const LcaTextField = (props: TextFieldProps) => {
   const { value, onChange, ...otherProps } = props
-  const [localValue, setLocalValue] = useState(value || '')
+  const [localValue, setLocalValue] = useState<string>(value ?? '')
 
   const debouncedOnChange = useDebounce(onChange, 500)
+
+  useEffect(() => {
+    setLocalValue(value)
+  }, [value])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLocalValue(e.target.value)

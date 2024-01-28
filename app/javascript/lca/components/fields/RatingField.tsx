@@ -1,6 +1,15 @@
-import { useState ,type  ChangeEvent,type  ChangeEventHandler,type  FocusEvent  } from 'react';
+import {
+  useEffect,
+  useState,
+  type ChangeEvent,
+  type ChangeEventHandler,
+  type FocusEvent,
+} from 'react'
 
-import { TextField ,type  TextFieldProps as MuiTextFieldProps  } from '@mui/material';
+import {
+  TextField,
+  type TextFieldProps as MuiTextFieldProps,
+} from '@mui/material'
 
 import { useDebounce } from '@/hooks'
 import { nuClamp as clamp } from '@/utils'
@@ -24,16 +33,29 @@ type RatingFieldProps = Omit<
 
 const RatingField = (props: RatingFieldProps) => {
   const { value, onChange, ...otherProps } = props
-  const [localValue, setLocalValue] = useState<number | '-'>(value || 0)
+  const [localValue, setLocalValue] = useState<number | '-' | ''>(value ?? 0)
 
   const min = props.min ?? 0
   const max = props.max ?? Infinity
 
   const debouncedOnChange = useDebounce(onChange, 500)
 
+  useEffect(() => {
+    setLocalValue(value)
+  }, [value])
+
+  const handleBlur = () => {
+    if (localValue === '-' || localValue === '') setLocalValue(value)
+  }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if ((min < 0 && e.target.value === '-') || e.target.value === '0-') {
+    if (min < 0 && (e.target.value === '-' || e.target.value === '0-')) {
       setLocalValue('-')
+      return
+    }
+
+    if (e.target.value === '') {
+      setLocalValue('')
       return
     }
 
@@ -44,8 +66,11 @@ const RatingField = (props: RatingFieldProps) => {
     value = clamp(value, min, max)
 
     setLocalValue(value)
-    debouncedOnChange(e)
+    const fakeEvent = e
+    fakeEvent.target.value = value.toString()
+    debouncedOnChange(fakeEvent)
   }
+
   return (
     <TextField
       {...otherProps}
@@ -61,6 +86,7 @@ const RatingField = (props: RatingFieldProps) => {
         pattern: '-?[0-9]*',
       }}
       onFocus={selectOnFocus}
+      onBlur={handleBlur}
       sx={{
         width: '4em',
         marginRight: 1,

@@ -1,7 +1,6 @@
 import React from '@vitejs/plugin-react-swc'
 import { resolve } from 'path'
-import { splitVendorChunkPlugin } from 'vite'
-import { defineConfig } from 'vitest/config'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import Rails from 'vite-plugin-rails'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'

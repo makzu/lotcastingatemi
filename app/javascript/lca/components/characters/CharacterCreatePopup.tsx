@@ -1,5 +1,4 @@
-import { type ChangeEvent, Component } from 'react'
-import { connect } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 import {
   Button,
@@ -13,311 +12,250 @@ import {
   Typography,
 } from '@mui/material'
 
+import AbyssalCasteSelect from '@/components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import DbAspectSelect from '@/components/characterEditor/exaltTraits/DbAspectSelect'
 import ExaltTypeSelect from '@/components/characterEditor/exaltTraits/ExaltTypeSelect'
 import LunarCasteSelect from '@/components/characterEditor/exaltTraits/LunarCasteSelect'
 import SiderealCasteSelect from '@/components/characterEditor/exaltTraits/SiderealCasteSelect'
 import SolarCasteSelect from '@/components/characterEditor/exaltTraits/SolarCasteSelect'
 import { createCharacter } from '@/ducks/actions'
-import type { Enhancer } from '@/utils/flow-types'
-import { type Character, type ExaltType } from '@/types'
-import { type RootState } from 'store'
+import { useAppDispatch, useDialogLogic } from '@/hooks'
+import { type ExaltType } from '@/types'
 
-const initialState = {
-  open: false,
-  character: {
-    name: '',
-    caste: '',
-    type: 'SolarCharacter' as ExaltType,
-    exalt_type: '',
-    aspect: false,
-  },
-}
+const CreateCharacterDialog = () => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+  const [name, setName] = useState('')
+  const [type, setType] = useState<ExaltType>('SolarCharacter')
+  const [exalt_type, setExaltType] = useState('')
+  const [caste, setCaste] = useState('')
+  const [aspect, setAspect] = useState(false)
 
-interface Props {
-  id: number
-  createCharacter: typeof createCharacter
-}
-interface State {
-  open: boolean
-  character: Partial<Character>
-}
-
-class CharacterCreatePopup extends Component<Props, State> {
-  state = initialState
-
-  handleOpen = () => {
-    this.setState({ open: true })
-  }
-
-  handleClose = () => {
-    this.setState(initialState)
-  }
-
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    let exaltType = {}
-
-    if (name === 'type') {
-      if (value === '' || value == null) {
-        e.preventDefault()
-        return
-      }
-      switch (value) {
-        case 'Character':
-          exaltType = { exalt_type: 'Mortal', aspect: false }
-          break
-        case 'SolarCharacter':
-          exaltType = { exalt_type: 'Solar', aspect: false }
-          break
-        case 'DragonbloodCharacter':
-          exaltType = { exalt_type: 'Dragonblood', aspect: true }
-          break
-        case 'LunarCharacter':
-          exaltType = { exalt_type: 'Lunar', aspect: false }
-          break
-        case 'SiderealCharacter':
-          exaltType = { exalt_type: 'Sidereal', aspect: false }
-          break
-        case 'AbyssalCharacter':
-          exaltType = { exalt_type: 'Abyssal', aspect: false }
-          break
-        default:
-          exaltType = { exalt_type: 'Exalt' }
-      }
+  // Set Aspect to false if the exalt type doesn't have aspects
+  useEffect(() => {
+    switch (type) {
+      case 'SolarCharacter':
+      case 'LunarCharacter':
+      case 'SiderealCharacter':
+      case 'AbyssalCharacter':
+        setAspect(false)
+        setExaltType('')
+        break
+      case 'DragonbloodCharacter':
+        setAspect(true)
+        setExaltType('')
+        break
+      default:
+        break
     }
+  }, [type])
 
-    this.setState({
-      character: { ...this.state.character, [name]: value, ...exaltType },
-    })
+  const handleSubmit = () => {
+    dispatch(createCharacter({ name, type, caste, aspect }))
+    close()
   }
 
-  handleAspectChange = () => {
-    this.setState({
-      character: {
-        ...this.state.character,
-        aspect: !this.state.character.aspect,
-      },
-    })
-  }
+  return (
+    <>
+      <Button onClick={open} data-cy="create-character">
+        Create New
+      </Button>
 
-  handleSubmit = () => {
-    this.setState({ open: false })
-    this.props.createCharacter(this.state.character)
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Create New Character</DialogTitle>
 
-  render() {
-    const {
-      handleOpen,
-      handleClose,
-      handleChange,
-      handleAspectChange,
-      handleSubmit,
-    } = this
-    const { character } = this.state
+        <DialogContent>
+          <div>
+            <TextField
+              variant="standard"
+              name="name"
+              value={name}
+              label="Name"
+              margin="normal"
+              fullWidth
+              onChange={(e) => setName(e.target.value)}
+              inputProps={{
+                autocomplete: 'off',
+                'data-1p-ignore': 'true',
+                'data-lp-ignore': 'true',
+              }}
+            />
+          </div>
 
-    return (
-      <>
-        <Button onClick={handleOpen} data-cy="create-character">
-          Create New
-        </Button>
+          <div>
+            <ExaltTypeSelect
+              value={type}
+              onChange={(e) => setType(e.target.value as ExaltType)}
+            />
+          </div>
 
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Create New Character</DialogTitle>
-          <DialogContent>
-            <div>
-              <TextField
-                variant="standard"
-                name="name"
-                value={character.name}
-                label="Name"
-                margin="normal"
+          {type === 'SolarCharacter' && (
+            <>
+              <Typography paragraph>
+                Selecting this option means the system will try to follow the
+                rules in the core book as closely as it can. If your group uses
+                house rules, especially ones that change available Caste or
+                Supernal abilities, choose Houserule Ability-based exalt
+                instead.
+              </Typography>
+              <SolarCasteSelect
+                value={caste}
+                onChange={(e) => setCaste(e.target.value)}
                 fullWidth
-                onChange={handleChange}
-                inputProps={{
-                  autocomplete: 'off',
-                  'data-1p-ignore': 'true',
-                  'data-lp-ignore': 'true',
-                }}
               />
-            </div>
+            </>
+          )}
+          {type === 'DragonbloodCharacter' && (
+            <>
+              <Typography paragraph>
+                Selecting this option means the system will try to follow the
+                rules in the core book as closely as it can. If your group uses
+                house rules, especially ones that change available Aspect
+                abilities or mote pools, choose Houserule Ability-based exalt
+                instead.
+              </Typography>
+              <DbAspectSelect
+                value={caste}
+                onChange={(e) => setCaste(e.target.value)}
+                fullWidth
+              />
+            </>
+          )}
+          {type === 'LunarCharacter' && (
+            <>
+              <Typography paragraph>
+                Selecting this option means the system will try to follow the
+                rules in the core book as closely as it can. If your group uses
+                house rules, especially ones that change available Caste
+                Attributes, choose Houserule Attribute-based exalt instead.
+              </Typography>
+              <LunarCasteSelect
+                value={caste}
+                onChange={(e) => setCaste(e.target.value)}
+                fullWidth
+              />
+            </>
+          )}
+          {type === 'SiderealCharacter' && (
+            <>
+              <Typography paragraph>
+                Selecting this option means the system will try to follow the
+                rules in the core book as closely as it can. If your group uses
+                house rules, especially ones that change available Caste
+                Abilities, choose Houserule Ability-based exalt instead.
+              </Typography>
+              <SiderealCasteSelect
+                value={caste}
+                onChange={(e) => setCaste(e.target.value)}
+                fullWidth
+              />
+            </>
+          )}
+          {type === 'AbyssalCharacter' && (
+            <>
+              <Typography paragraph>
+                Selecting this option means the system will try to follow the
+                rules in the core book as closely as it can. If your group uses
+                house rules, especially ones that change available Caste or
+                Apocalyptic abilities, choose Houserule Ability-based exalt
+                instead.
+              </Typography>
+              <AbyssalCasteSelect
+                value={caste}
+                onChange={(e) => setCaste(e.target.value)}
+                fullWidth
+              />
+            </>
+          )}
 
-            <div>
-              <ExaltTypeSelect value={character.type} onChange={handleChange} />
-            </div>
+          {(type === 'CustomAttributeCharacter' ||
+            type === 'CustomAbilityCharacter' ||
+            type === 'CustomEssenceCharacter') && (
+            <>
+              <Typography paragraph>
+                {type === 'CustomAttributeCharacter' && (
+                  <>
+                    An Attribute-based Exalt, like Lunars, Liminals, or
+                    Alchemicals. Their Charms are arranged by Attribute. They
+                    can have Caste and Favored Attributes and Favored Abilities.
+                  </>
+                )}
+                {type === 'CustomAbilityCharacter' && (
+                  <>
+                    An Ability-based Exalt, like Solars, Abyssals, Sidereals,
+                    and the Dragon-Blooded. Their Charms are arranged by
+                    Ability. They can have Caste and Favored Abilities, as well
+                    as a Supernal/Apocalyptic Ability.
+                  </>
+                )}
+                {type === 'CustomEssenceCharacter' && (
+                  <>
+                    An Essence-based Exalt, like 2e Infernals. This option also
+                    works well for spirits. Their Charms are not grouped up by
+                    Attribute or Ability.
+                  </>
+                )}
+              </Typography>
+              <Typography>
+                Custom characters&apos; mote pools must be set manually, but can
+                be any size. Their Excellency must also be set up manually, but
+                it has a wide range of options.
+              </Typography>
+              <div>
+                <TextField
+                  variant="standard"
+                  name="caste"
+                  value={caste}
+                  fullWidth
+                  label={aspect ? 'Aspect' : 'Caste'}
+                  onChange={(e) => setCaste(e.target.value)}
+                  margin="dense"
+                  helperText="(Optional)"
+                />
+              </div>
+              <div>
+                <TextField
+                  variant="standard"
+                  name="exalt_type"
+                  value={exalt_type}
+                  fullWidth
+                  label="Type"
+                  onChange={(e) => setExaltType(e.target.value)}
+                  margin="dense"
+                />
+              </div>
 
-            {character.type === 'SolarCharacter' && (
-              <>
-                <Typography paragraph>
-                  Selecting this option means the system will try to follow the
-                  rules in the core book as closely as it can. If your group
-                  uses house rules, especially ones that change available Caste
-                  or Supernal abilities, choose Houserule Ability-based exalt
-                  instead.
-                </Typography>
-                <SolarCasteSelect
-                  value={character.caste}
-                  onChange={handleChange}
-                  fullWidth
+              <Typography component="div">
+                Has Castes&nbsp;&nbsp;&nbsp;
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={aspect}
+                      name="aspect"
+                      onChange={(e) => setAspect(e.target.checked)}
+                    />
+                  }
+                  label="Has Aspects"
                 />
-              </>
-            )}
-            {character.type === 'DragonbloodCharacter' && (
-              <>
-                <Typography paragraph>
-                  Selecting this option means the system will try to follow the
-                  rules in the core book as closely as it can. If your group
-                  uses house rules, especially ones that change available Aspect
-                  abilities or mote pools, choose Houserule Ability-based exalt
-                  instead.
-                </Typography>
-                <DbAspectSelect
-                  value={character.caste}
-                  onChange={handleChange}
-                  fullWidth
-                />
-              </>
-            )}
-            {character.type === 'LunarCharacter' && (
-              <>
-                <Typography paragraph>
-                  Selecting this option means the system will try to follow the
-                  rules in the core book as closely as it can. If your group
-                  uses house rules, especially ones that change available Caste
-                  Attributes, choose Houserule Attribute-based exalt instead.
-                </Typography>
-                <LunarCasteSelect
-                  value={character.caste}
-                  onChange={handleChange}
-                  fullWidth
-                />
-              </>
-            )}
-            {character.type === 'SiderealCharacter' && (
-              <>
-                <Typography paragraph>
-                  Selecting this option means the system will try to follow the
-                  rules in the core book as closely as it can. If your group
-                  uses house rules, especially ones that change available Caste
-                  Abilities, choose Houserule Ability-based exalt instead.
-                </Typography>
-                <SiderealCasteSelect
-                  value={character.caste}
-                  onChange={handleChange}
-                  fullWidth
-                />
-              </>
-            )}
-            {character.type === 'AbyssalCharacter' && (
-              <>
-                <Typography paragraph>
-                  Selecting this option means the system will try to follow the
-                  rules in the core book as closely as it can. If your group
-                  uses house rules, especially ones that change available Caste
-                  or Apocalyptic abilities, choose Houserule Ability-based exalt
-                  instead.
-                </Typography>
-                <AbyssalCasteSelect
-                  value={character.caste}
-                  onChange={handleChange}
-                  fullWidth
-                />
-              </>
-            )}
-            {(character.type === 'CustomAttributeCharacter' ||
-              character.type === 'CustomAbilityCharacter' ||
-              character.type === 'CustomEssenceCharacter') && (
-              <>
-                <Typography paragraph>
-                  {character.type === 'CustomAttributeCharacter' && (
-                    <>
-                      An Attribute-based Exalt, like Lunars, Liminals, or
-                      Alchemicals. Their Charms are arranged by Attribute. They
-                      can have Caste and Favored Attributes and Favored
-                      Abilities.
-                    </>
-                  )}
-                  {character.type === 'CustomAbilityCharacter' && (
-                    <>
-                      An Ability-based Exalt, like Solars, Abyssals, Sidereals,
-                      and the Dragon-Blooded. Their Charms are arranged by
-                      Ability. They can have Caste and Favored Abilities, as
-                      well as a Supernal/Apocalyptic Ability.
-                    </>
-                  )}
-                  {character.type === 'CustomEssenceCharacter' && (
-                    <>
-                      An Essence-based Exalt, like 2e Infernals. This option
-                      also works well for spirits. Their Charms are not grouped
-                      up by Attribute or Ability.
-                    </>
-                  )}
-                </Typography>
-                <Typography>
-                  Custom characters&apos; mote pools must be set manually, but
-                  can be any size. Their Excellency must also be set up
-                  manually, but it has a wide range of options.
-                </Typography>
-                <div>
-                  <TextField
-                    variant="standard"
-                    name="caste"
-                    value={character.caste}
-                    fullWidth
-                    label={character.aspect ? 'Aspect' : 'Caste'}
-                    onChange={handleChange}
-                    margin="dense"
-                    helperText="(Optional)"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    variant="standard"
-                    name="exalt_type"
-                    value={character.exalt_type}
-                    fullWidth
-                    label="Type"
-                    onChange={handleChange}
-                    margin="dense"
-                  />
-                </div>
-                <Typography component="div">
-                  Has Castes&nbsp;&nbsp;&nbsp;
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={character.aspect}
-                        name="aspect"
-                        onChange={handleAspectChange}
-                      />
-                    }
-                    label="Has Aspects"
-                  />
-                </Typography>
-              </>
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              color="primary"
-              data-cy="submit"
-            >
-              Create
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+              </Typography>
+            </>
+          )}
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            data-cy="submit"
+          >
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-const mapStateToProps = (state: RootState) => ({ id: state.session.id })
-
-const enhance: Enhancer<Props, null> = connect(mapStateToProps, {
-  createCharacter,
-})
-
-export default enhance(CharacterCreatePopup)
+export default CreateCharacterDialog

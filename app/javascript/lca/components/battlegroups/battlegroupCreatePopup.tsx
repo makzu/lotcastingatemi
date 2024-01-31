@@ -1,5 +1,4 @@
-import { Component, type SyntheticInputEvent } from 'react'
-import { connect } from 'react-redux'
+import { useState } from 'react'
 
 import {
   Button,
@@ -11,85 +10,57 @@ import {
 } from '@mui/material'
 
 import { createBattlegroup } from '@/ducks/actions'
-import type { Enhancer } from '@/utils/flow-types'
+import { useAppDispatch, useDialogLogic } from '@/hooks'
 
-interface Props {
-  createBattlegroup: $TSFixMeFunction
-}
-interface State {
-  open: boolean
-  battlegroup: Record<string, $TSFixMe>
-}
+const CreateBattlegroupDialog = () => {
+  const dispatch = useAppDispatch()
+  const [bgname, setBgname] = useState('')
+  const [isOpen, open, close] = useDialogLogic()
 
-class BattlegroupCreatePopup extends Component<Props, State> {
-  state = { open: false, battlegroup: { name: '' } }
-
-  handleOpen = () => {
-    this.setState({
-      open: true,
-    })
-  }
-  handleClose = () => {
-    this.setState({
-      open: false,
-    })
+  const handleSubmit = () => {
+    dispatch(createBattlegroup({ name: bgname }))
+    close()
   }
 
-  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    this.setState({
-      battlegroup: { ...this.state.battlegroup, [name]: value },
-    })
-  }
-  handleSubmit = () => {
-    this.setState({
-      open: false,
-    })
-    this.props.createBattlegroup(this.state.battlegroup)
-  }
+  return (
+    <>
+      <Button onClick={open} data-cy="create-battlegroup">
+        Create New
+      </Button>
 
-  render() {
-    const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { battlegroup } = this.state
-    return (
-      <>
-        <Button onClick={handleOpen} data-cy="create-battlegroup">
-          Create New
-        </Button>
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Create New Battlegroup</DialogTitle>
-          <DialogContent>
-            <TextField
-              name="name"
-              value={battlegroup.name}
-              label="Name"
-              margin="normal"
-              fullWidth
-              onChange={handleChange}
-              inputProps={{
-                autocomplete: 'off',
-                'data-1p-ignore': 'true',
-                'data-lp-ignore': 'true',
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              color="primary"
-              data-cy="submit"
-            >
-              Create
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Create New Battlegroup</DialogTitle>
+
+        <DialogContent>
+          <TextField
+            name="name"
+            value={bgname}
+            label="Name"
+            margin="normal"
+            fullWidth
+            onChange={(e) => setBgname(e.target.value)}
+            inputProps={{
+              autocomplete: 'off',
+              'data-1p-ignore': 'true',
+              'data-lp-ignore': 'true',
+            }}
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            data-cy="submit"
+          >
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-const enhance: Enhancer<Props, {}> = connect(null, { createBattlegroup })
-
-export default enhance(BattlegroupCreatePopup)
+export default CreateBattlegroupDialog

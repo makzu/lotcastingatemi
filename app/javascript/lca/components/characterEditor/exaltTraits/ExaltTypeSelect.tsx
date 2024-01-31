@@ -26,33 +26,34 @@ export const prettyType = (type: string) => {
   }
 }
 
+const MenuItemMapping = (t: string) => (
+  <MenuItem key={t} value={t}>
+    {prettyType(t)}
+  </MenuItem>
+)
+
+const canonChoices = [
+  'Character',
+  'SolarCharacter',
+  'DragonbloodCharacter',
+  'LunarCharacter',
+  'SiderealCharacter',
+  'AbyssalCharacter',
+].map(MenuItemMapping)
+
+const customChoices = [
+  'CustomAbilityCharacter',
+  'CustomAttributeCharacter',
+  'CustomEssenceCharacter',
+].map(MenuItemMapping)
+
 interface Props {
   value: string
-  onChange: ChangeEventHandler
+  onChange: ChangeEventHandler<HTMLInputElement>
 }
+
 const ExaltTypeSelect = (props: Props) => {
   const { value, onChange } = props
-
-  const MenuItemMapping = (t: string) => (
-    <MenuItem key={t} value={t}>
-      {prettyType(t)}
-    </MenuItem>
-  )
-
-  const canonChoices = [
-    'Character',
-    'SolarCharacter',
-    'DragonbloodCharacter',
-    'LunarCharacter',
-    'SiderealCharacter',
-    'AbyssalCharacter',
-  ].map(MenuItemMapping)
-
-  const customChoices = [
-    'CustomAbilityCharacter',
-    'CustomAttributeCharacter',
-    'CustomEssenceCharacter',
-  ].map(MenuItemMapping)
 
   return (
     <TextField

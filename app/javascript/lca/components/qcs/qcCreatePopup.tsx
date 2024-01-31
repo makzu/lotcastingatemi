@@ -1,8 +1,5 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
+import { useState } from 'react'
 
-import { createQc } from '@/ducks/actions'
-import type { Enhancer } from '@/utils/flow-types'
 import {
   Button,
   Dialog,
@@ -11,82 +8,60 @@ import {
   DialogTitle,
   TextField,
 } from '@mui/material'
-interface Props {
-  createQc: $TSFixMeFunction
-}
-interface State {
-  open: boolean
-  qc: Record<string, $TSFixMe>
-} // TODO: Enable autofill for some example QCs?
 
-// TODO: Enable autofill for some example QCs?
-class QcCreatePopup extends Component<Props, State> {
-  state = { open: false, qc: { name: '' } }
+import { createQc } from '@/ducks/actions'
+import { useAppDispatch, useDialogLogic } from '@/hooks'
 
-  handleOpen = () => {
-    this.setState({
-      open: true,
-    })
-  }
-  handleClose = () => {
-    this.setState({
-      open: false,
-    })
+const CreateQcDialog = () => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+  const [qcName, setQcName] = useState('')
+
+  const handleSubmit = () => {
+    dispatch(createQc({ name: qcName }))
+    close()
   }
 
-  handleChange = (e) => {
-    this.setState({ qc: { ...this.state.qc, name: e.target.value } })
-  }
-  handleSubmit = () => {
-    this.setState({
-      open: false,
-    })
-    this.props.createQc(this.state.qc)
-  }
+  return (
+    <>
+      <Button onClick={open} data-cy="create-qc">
+        Create New
+      </Button>
 
-  render() {
-    const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { qc } = this.state
-    return (
-      <>
-        <Button onClick={handleOpen} data-cy="create-qc">
-          Create New
-        </Button>
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Create New Quick Character</DialogTitle>
-          <DialogContent>
-            <TextField
-              variant="standard"
-              name="name"
-              value={qc.name}
-              label="Name"
-              margin="normal"
-              fullWidth
-              onChange={handleChange}
-              inputProps={{
-                autocomplete: 'off',
-                'data-1p-ignore': 'true',
-                'data-lp-ignore': 'true',
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              color="primary"
-              data-cy="submit"
-            >
-              Create
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Create New Quick Character</DialogTitle>
+
+        <DialogContent>
+          <TextField
+            variant="standard"
+            name="name"
+            value={qcName}
+            label="Name"
+            margin="normal"
+            fullWidth
+            onChange={(e) => setQcName(e.target.value)}
+            inputProps={{
+              autocomplete: 'off',
+              'data-1p-ignore': 'true',
+              'data-lp-ignore': 'true',
+            }}
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            data-cy="submit"
+          >
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-const enhance: Enhancer<Props, {}> = connect(null, { createQc })
-
-export default enhance(QcCreatePopup)
+export default CreateQcDialog

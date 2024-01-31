@@ -1,32 +1,23 @@
-import { MenuItem, TextField, type Theme } from '@mui/material'
-import makeStyles from '@mui/styles/makeStyles'
-import type { TextFieldProps } from '@mui/material/TextField'
+import { MenuItem, TextField, type TextFieldProps } from '@mui/material'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    marginRight: theme.spacing(),
-    width: (p: Props) => (p.armor ? '7em' : '6em'),
-  },
-}))
+import { type Character, type Weapon } from '@/types'
 
-type PropsUnion = 'name' | 'value' | 'onChange' | 'margin' | 'style'
-
-interface Props extends Pick<TextFieldProps, PropsUnion> {
+interface Props extends Omit<TextFieldProps, 'value' | 'children' | 'variant'> {
+  value: Character['armor_weight'] | Weapon['weight']
   armor?: boolean
 }
+
 const WeightSelect = (props: Props) => {
-  const classes = useStyles(props)
+  const { sx, margin, ...otherProps } = props
+
   return (
     <TextField
       variant="standard"
       select
       label="Weight"
-      name={props.name}
-      value={props.value}
-      className={classes.root}
-      onChange={props.onChange}
-      margin={props.margin ?? 'dense'}
-      style={props.style}
+      margin={margin ?? 'dense'}
+      sx={{ width: props.armor ? '7em' : '6em', ...sx }}
+      {...otherProps}
     >
       {props.armor && <MenuItem value="unarmored">Unarmored</MenuItem>}
       <MenuItem value="light">Light</MenuItem>

@@ -1,37 +1,32 @@
-import { PureComponent } from 'react'
+import { MenuItem, TextField, type TextFieldProps } from '@mui/material'
 
-import { MenuItem, TextField } from '@mui/material';
+import type { QC } from '@/types'
 
-interface Props {
-  value: string
+interface Props extends Omit<TextFieldProps, 'children'> {
+  value: QC['excellency']
   name: string
-  className?: React.HTMLAttributes<HTMLDivElement>['className']
-  onChange: $TSFixMeFunction
-}
-class RangeSelect extends PureComponent<Props> {
-  render() {
-    const { name, value, onChange, className } = this.props
-    return (
-      <TextField
-        variant="standard"
-        select
-        name={name}
-        value={value}
-        label="Excellency"
-        margin="dense"
-        onChange={onChange}
-        className={className}
-        fullWidth
-      >
-        <MenuItem value="">No Excellency</MenuItem>
-        <MenuItem value="dragonblood">Dragon-Blood</MenuItem>
-        <MenuItem value="lunar">Lunar</MenuItem>
-        <MenuItem value="sidereal">Sidereal</MenuItem>
-        <MenuItem value="solar">Solar/Abyssal</MenuItem>
-        <MenuItem value="liminal">Liminal</MenuItem>
-      </TextField>
-    )
-  }
 }
 
-export default RangeSelect
+const QcExcellencySelect = (props: Props) => {
+  const { ...otherProps } = props
+
+  return (
+    <TextField
+      variant="standard"
+      select
+      label="Excellency"
+      margin="dense"
+      fullWidth
+      {...otherProps}
+    >
+      <MenuItem value="">No Excellency</MenuItem>
+      <MenuItem value="dragonblood">Dragon-Blood</MenuItem>
+      <MenuItem value="lunar">Lunar</MenuItem>
+      <MenuItem value="sidereal">Sidereal</MenuItem>
+      <MenuItem value="solar">Solar/Abyssal</MenuItem>
+      <MenuItem value="liminal">Liminal</MenuItem>
+    </TextField>
+  )
+}
+
+export default QcExcellencySelect

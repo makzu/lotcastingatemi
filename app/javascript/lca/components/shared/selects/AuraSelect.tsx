@@ -9,7 +9,6 @@ interface HavingAura extends WithAura {
 }
 interface Props extends Pick<TextFieldProps, 'onChange'> {
   character: HavingAura
-  style?: $TSFixMe
 }
 
 const AuraSelect = ({ character, onChange, ...props }: Props) => (
@@ -20,7 +19,7 @@ const AuraSelect = ({ character, onChange, ...props }: Props) => (
     value={character.aura}
     label="Aura"
     margin="dense"
-    style={{ width: '8em' }}
+    sx={{ width: '8em' }}
     onChange={onChange}
     {...props}
   >

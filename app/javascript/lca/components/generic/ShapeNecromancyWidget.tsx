@@ -1,64 +1,54 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import {
   Button,
   ButtonBase,
-  createStyles,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core'
+} from '@mui/material'
 
-import PoolDisplay from 'components/generic/PoolDisplay.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
-import { useDialogLogic } from 'hooks'
-import { Character, QC } from 'types'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
-import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
+import PoolDisplay from '@/components/generic/PoolDisplay.jsx'
+import { updateCharacter, updateQc } from '@/ducks/actions.js'
+import { useAppSelector, useDialogLogic } from '@/hooks'
+import {
+  canIEdit,
+  getPoolsAndRatingsGeneric,
+  type getPoolsAndRatings,
+  type getPoolsAndRatingsForQc,
+} from '@/selectors'
+import type { Character, QC } from '@/types'
+import RatingField from '../fields/RatingField'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    wrap: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    col: {
-      flex: 1,
-    },
-    divider: {
-      marginBottom: theme.spacing(),
-      marginTop: theme.spacing(),
-    },
-    content: {
-      minWidth: '15em',
-    },
-  })
-
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   character: Character | QC
   children: React.ReactNode
 }
 
-const ShapeNecromancyWidget = ({ character, children, classes }: Props) => {
+const ShapeNecromancyWidget = ({ character, children }: Props) => {
   const [isOpen, open, close] = useDialogLogic()
   const [motes, setMotes] = useState(0)
   const [total, setTotal] = useState(character.necromantic_motes)
   const dispatch = useDispatch()
   const updateAction = character.type === 'qc' ? updateQc : updateCharacter
 
-  const shapeSorceryPool = useSelector(
+  const shapeSorceryPool = useAppSelector(
     (state) =>
-      getPoolsAndRatingsGeneric(state, character.id, character.type)
-        .shapeSorcery,
+      (
+        getPoolsAndRatingsGeneric(
+          state,
+          character.id,
+          character.type,
+        ) as ReturnType<
+          typeof getPoolsAndRatings | typeof getPoolsAndRatingsForQc
+        >
+      )?.shapeSorcery,
   )
 
-  const canEdit = useSelector((state) =>
+  const canEdit = useAppSelector((state) =>
     canIEdit(state, character.id, character.type === 'qc' ? 'qc' : 'character'),
   )
 
@@ -88,36 +78,37 @@ const ShapeNecromancyWidget = ({ character, children, classes }: Props) => {
       <Dialog open={isOpen} onClose={close}>
         <DialogTitle>Shape Sorcery</DialogTitle>
 
-        <DialogContent className={classes.content}>
-          <div className={classes.wrap}>
-            <div className={classes.col}>
+        <DialogContent sx={{ minWidth: '15em' }}>
+          <div className="flexContainerWrap">
+            <div className="flex">
               <PoolDisplay
                 qc={character.type === 'qc'}
                 pool={shapeSorceryPool}
                 label="Pool"
               />
             </div>
-            <div className={classes.col}>
+            <div className="flex">
               <RatingField
-                trait="roll"
+                name="roll"
                 label="Roll"
                 value={motes}
                 onChange={updateRoll}
                 min={-Infinity}
+                debounceTime={0}
               />
             </div>
           </div>
 
-          <Divider className={classes.divider} />
+          <Divider sx={{ mt: 2, mb: 2 }} />
 
-          <center>
-            <RatingField
-              trait="total"
-              label="Total"
-              value={total}
-              onChange={updateTotal}
-            />
-          </center>
+          <RatingField
+            name="total"
+            label="Total"
+            value={total}
+            onChange={updateTotal}
+            debounceTime={0}
+            sx={{ ml: 'auto', mr: 'auto' }}
+          />
         </DialogContent>
 
         <DialogActions>
@@ -131,5 +122,4 @@ const ShapeNecromancyWidget = ({ character, children, classes }: Props) => {
   )
 }
 
-// @ts-expect-error MUI v5 migration will fix this
-export default withStyles(styles)(ShapeNecromancyWidget)
+export default ShapeNecromancyWidget

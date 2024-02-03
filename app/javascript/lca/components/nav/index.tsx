@@ -38,9 +38,7 @@ const NavPanelWrap = () => {
       {lgAndUp ? (
         <Drawer
           variant="permanent"
-          sx={{
-            display: { xs: 'none', lg: 'block' },
-          }}
+          sx={{ display: { xs: 'none', lg: 'block' } }}
           open
         >
           {Panel}

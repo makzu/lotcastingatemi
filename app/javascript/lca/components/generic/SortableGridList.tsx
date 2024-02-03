@@ -1,9 +1,14 @@
 import { SortableContainer } from 'react-sortable-hoc'
-import { Grid } from '@mui/material';
+import { Grid } from '@mui/material'
 
-const SortableGridList = SortableContainer(({ header, items, classes }) => (
+interface Props {
+  header: React.ReactNode
+  items: React.ReactNode
+}
+
+const SortableGridList = SortableContainer(({ header, items }: Props) => (
   <Grid container spacing={3}>
-    <Grid item xs={12} className={classes.stickyHeader}>
+    <Grid item xs={12} sx={{ position: 'sticky', top: 0, zIndex: 2 }}>
       {header}
     </Grid>
     {items}

@@ -2,7 +2,7 @@ import type { AnchorHTMLAttributes } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 
-import { Typography } from '@mui/material';
+import { type SxProps, Typography } from '@mui/material'
 
 type LinkRendererProps = AnchorHTMLAttributes<HTMLAnchorElement>
 // This won't work for mailto: links or any other non-http(/s) link.
@@ -15,11 +15,14 @@ export const LinkRenderer = ({ href, ...props }: LinkRendererProps) =>
   )
 
 interface Props {
-  source: string
+  children?: string
+  // @deprecated
+  source?: string
   noBlocks?: boolean
+  sx?: SxProps
 }
-const MarkdownDisplay = ({ source, noBlocks }: Props) => (
-  <Typography className="markdown" component="div">
+const MarkdownDisplay = ({ children, source, noBlocks, sx }: Props) => (
+  <Typography className="markdown" component="div" sx={sx}>
     <ReactMarkdown
       components={{ a: LinkRenderer }}
       allowedElements={
@@ -27,7 +30,7 @@ const MarkdownDisplay = ({ source, noBlocks }: Props) => (
       }
       unwrapDisallowed={noBlocks}
     >
-      {source}
+      {children ?? source}
     </ReactMarkdown>
   </Typography>
 )

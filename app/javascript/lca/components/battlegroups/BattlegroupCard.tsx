@@ -20,7 +20,7 @@ import type { Battlegroup, Enhancer } from '@/utils/flow-types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import PoolDisplay from '../generic/PoolDisplay'
-import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
+import BattlegroupHealthDisplay from '@/features/battlegroup/components/BattlegroupHealthDisplay'
 
 const Handle = SortableHandle(() => (
   <DragHandle onClick={(e) => e.preventDefault()} />

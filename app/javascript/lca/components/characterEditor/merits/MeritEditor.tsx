@@ -23,13 +23,13 @@ import type {
 import MeritFields from './MeritFields'
 
 import { updateMeritSort } from '@/ducks/entities/merit'
-import { RootState } from '@/store'
+import { type RootState } from '@/store'
 import {
   Button,
   Grid,
   Hidden,
   IconButton,
-  Theme,
+  type Theme,
   Typography,
 } from '@mui/material'
 
@@ -157,10 +157,7 @@ class MeritEditor extends Component<Props> {
 
         <Typography
           variant="caption"
-          style={{
-            marginTop: '2.5em',
-            marginBottom: '-1.5em',
-          }}
+          sx={{ marginTop: '2.5em', marginBottom: '-1.5em' }}
         >
           {totalDots} dots of merits total
         </Typography>

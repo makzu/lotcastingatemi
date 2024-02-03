@@ -1,31 +1,15 @@
-import { Checkbox, FormControlLabel, Typography } from '@mui/material'
-import withStyles from '@mui/styles/withStyles'
+import { Stack, Typography } from '@mui/material'
 
+import RatingField from '@/components/fields/RatingField'
 import PoolDisplay from '@/components/generic/PoolDisplay'
-import RatingField from '@/components/generic/RatingField'
 import TagsField from '@/components/generic/TagsField'
 import TextField from '@/components/generic/TextField'
 import BlockPaper from '@/components/shared/BlockPaper'
+import LcaCheckbox from '@/components/shared/inputs/Checkbox'
 import WeightSelect from '@/components/shared/selects/WeightSelect'
-import type { withArmorStats as Character } from '@/utils/flow-types'
+import type { Character } from '@/types'
 
-const styles = (theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginTop: theme.spacing(),
-    marginBottom: theme.spacing(),
-  },
-  poolBlock: {
-    margin: theme.spacing(),
-    marginLeft: 0,
-    width: '5.5rem',
-    maxHeight: '5rem',
-  },
-})
-
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   character: Character
   pools: Record<string, $TSFixMe>
   penalties: Record<string, $TSFixMe>
@@ -34,7 +18,7 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 function ArmorEditor(props: Props) {
-  const { character, pools, penalties, onChange, onCheck, classes } = props
+  const { character, pools, penalties, onChange, onCheck } = props
   return (
     <BlockPaper>
       <Typography variant="h6">Armor</Typography>
@@ -48,25 +32,22 @@ function ArmorEditor(props: Props) {
         fullWidth
       />
 
-      <WeightSelect
-        armor
-        name="armor_weight"
-        value={character.armor_weight}
-        onChange={onChange}
-        margin="dense"
-      />
+      <Stack direction="row" spacing={1} useFlexGap>
+        <WeightSelect
+          armor
+          name="armor_weight"
+          value={character.armor_weight}
+          onChange={onChange}
+          margin="dense"
+        />
 
-      <FormControlLabel
-        label="Artifact"
-        control={
-          <Checkbox
-            name="armor_is_artifact"
-            checked={character.armor_is_artifact}
-            onChange={onCheck}
-          />
-        }
-      />
-      <br />
+        <LcaCheckbox
+          label="Artifact"
+          name="armor_is_artifact"
+          value={character.armor_is_artifact}
+          onChange={onCheck}
+        />
+      </Stack>
 
       <TagsField
         trait="armor_tags"
@@ -77,70 +58,59 @@ function ArmorEditor(props: Props) {
         onChange={onChange}
       />
 
-      <div
-        style={{
-          display: 'flex',
-        }}
+      <Stack
+        direction="row"
+        spacing={1}
+        useFlexGap
+        alignItems="flex-end"
+        marginY={1}
       >
-        <PoolDisplay
-          staticRating
-          pool={pools.soak}
-          label="Soak"
-          classes={{
-            root: classes.poolBlock,
-          }}
-        />
+        <PoolDisplay staticRating pool={pools.soak} label="Soak" />
         {pools.hardness.total > 0 && (
           <PoolDisplay
             noSummary
             staticRating
             pool={pools.hardness}
             label="Hardness"
-            classes={{
-              root: classes.poolBlock,
-            }}
           />
         )}
         <PoolDisplay
           noSummary
           staticRating
-          pool={{
-            total: -penalties.mobility,
-          }}
+          pool={{ total: -penalties.mobility }}
           label={penalties.mobility < 0 ? 'Mobility Bonus' : 'Mobility Penalty'}
-          classes={{
-            root: classes.poolBlock,
-          }}
         />
-      </div>
+      </Stack>
 
       <Typography>Armor modifiers</Typography>
-      <RatingField
-        trait="bonus_soak"
-        label="Soak"
-        margin="dense"
-        value={character.bonus_soak}
-        min={-Infinity}
-        onChange={onChange}
-      />
-      <RatingField
-        trait="bonus_hardness"
-        label="Hardness"
-        margin="dense"
-        value={character.bonus_hardness}
-        min={-Infinity}
-        onChange={onChange}
-      />
-      <RatingField
-        trait="bonus_mobility_penalty"
-        label="Mobility"
-        margin="dense"
-        value={character.bonus_mobility_penalty}
-        min={-Infinity}
-        onChange={onChange}
-      />
+      <Stack direction="row" spacing={1} useFlexGap alignItems="flex-end">
+        <RatingField
+          name="bonus_soak"
+          label="Soak"
+          margin="dense"
+          value={character.bonus_soak}
+          min={-Infinity}
+          onChange={onChange}
+        />
+        <RatingField
+          name="bonus_hardness"
+          label="Hardness"
+          margin="dense"
+          value={character.bonus_hardness}
+          min={-Infinity}
+          onChange={onChange}
+        />
+        <RatingField
+          name="bonus_mobility_penalty"
+          label="Mobility"
+          margin="dense"
+          value={character.bonus_mobility_penalty}
+          min={-Infinity}
+          onChange={onChange}
+        />
+      </Stack>
     </BlockPaper>
   )
 }
 
-export default withStyles(styles)(ArmorEditor)
+export default ArmorEditor

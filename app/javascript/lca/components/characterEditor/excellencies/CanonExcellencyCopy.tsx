@@ -1,111 +1,75 @@
-import { PureComponent, type SyntheticEvent } from 'react'
+import { Button, Menu, MenuItem } from '@mui/material'
 
-import { Button, Menu, MenuItem } from '@mui/material';
+import { useMenuLogic } from '@/hooks'
 
-class CanonExcellencyCopier extends PureComponent<
-  { onChangeMulti: $TSFixMeFunction },
-  { anchor: $TSFixMe }
-> {
-  state = { anchor: null }
+const copyTargets = {
+  solar: {
+    excellency: 'solar',
+    excellency_stunt: '',
+    excellencies_for: ['solar'],
+  },
+  dragonblood: {
+    excellency: 'dragonblood',
+    excellency_stunt: '',
+    excellencies_for: ['dragonblood'],
+  },
+  lunar: {
+    excellency: 'attribute',
+    excellency_stunt: 'attribute+otherattribute',
+    excellencies_for: ['lunar'],
+  },
+  sidereal: {
+    excellency: 'sidereal',
+    excellency_stunt: '',
+    excellencies_for: ['sidereal'],
+  },
+  liminal: {
+    excellency: 'attribute+essenceonanima',
+    excellency_stunt: '',
+  },
+  revana: {
+    excellency: 'attribute',
+    excellency_stunt: 'attribute+ability',
+  },
+  odara: {
+    excellency: 'attribute+anima',
+    excellency_stunt: 'attribute+subtleanima',
+  },
+}
 
-  handleOpen = (e: SyntheticEvent<HTMLInputElement>) => {
-    this.setState({ anchor: e.currentTarget })
-  }
-  handleClose = () => {
-    this.setState({
-      anchor: null,
-    })
-  }
-  handleChange = (target: string) => {
-    const { onChangeMulti } = this.props
-    let obj = {}
+interface Props {
+  onChangeMulti: $TSFixMeFunction
+}
 
-    switch (target) {
-      case 'solar':
-        obj = {
-          excellency: 'solar',
-          excellency_stunt: '',
-          excellencies_for: ['solar'],
-        }
-        break
+const CanonExcellencyCopier = ({ onChangeMulti }: Props) => {
+  const [anchor, open, close] = useMenuLogic()
 
-      case 'dragonblood':
-        obj = {
-          excellency: 'dragonblood',
-          excellency_stunt: '',
-          excellencies_for: ['dragonblood'],
-        }
-        break
-
-      case 'lunar':
-        obj = {
-          excellency: 'attribute',
-          excellency_stunt: 'attribute+otherattribute',
-          excellencies_for: ['lunar'],
-        }
-        break
-
-      case 'sidereal':
-        obj = {
-          excellency: 'sidereal',
-          excellency_stunt: '',
-          excellencies_for: ['sidereal'],
-        }
-        break
-
-      case 'liminal':
-        obj = {
-          excellency: 'attribute+essenceonanima',
-          excellency_stunt: '',
-        }
-        break
-
-      case 'revana':
-        obj = {
-          excellency: 'attribute',
-          excellency_stunt: 'attribute+ability',
-        }
-        break
-
-      case 'odara':
-        obj = {
-          excellency: 'attribute+anima',
-          excellency_stunt: 'attribute+subtleanima',
-        }
-        break
-    }
-
-    onChangeMulti(obj)
-    this.handleClose()
+  const handleChange = (target: keyof typeof copyTargets) => {
+    onChangeMulti(copyTargets[target])
+    close()
   }
 
-  render() {
-    const { anchor } = this.state
-    const { handleOpen, handleClose, handleChange } = this
-    return (
-      <>
-        <Button onClick={handleOpen}>Copy Canon Excellency...</Button>
+  return (
+    <>
+      <Button onClick={open}>Copy Canon Excellency...</Button>
 
-        <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
-          <MenuItem onClick={() => handleChange('solar')}>
-            Solar/Abyssal
-          </MenuItem>
-          <MenuItem onClick={() => handleChange('dragonblood')}>
-            Dragon-Blooded
-          </MenuItem>
-          <MenuItem onClick={() => handleChange('lunar')}>Lunar</MenuItem>
-          <MenuItem onClick={() => handleChange('sidereal')}>Sidereal</MenuItem>
-          <MenuItem onClick={() => handleChange('liminal')}>Liminal</MenuItem>
-          <MenuItem onClick={() => handleChange('revana')}>
-            Revana Quinn (Core book Exigent)
-          </MenuItem>
-          <MenuItem onClick={() => handleChange('odara')}>
-            Odara, Chosen of Ash (AotR Exigent)
-          </MenuItem>
-        </Menu>
-      </>
-    )
-  }
+      <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={close}>
+        <MenuItem onClick={() => handleChange('solar')}>Solar/Abyssal</MenuItem>
+        <MenuItem onClick={() => handleChange('dragonblood')}>
+          Dragon-Blooded
+        </MenuItem>
+        <MenuItem onClick={() => handleChange('lunar')}>Lunar</MenuItem>
+        <MenuItem onClick={() => handleChange('sidereal')}>Sidereal</MenuItem>
+        <MenuItem onClick={() => handleChange('liminal')}>Liminal</MenuItem>
+        <MenuItem onClick={() => handleChange('revana')}>
+          Revana Quinn (Core book Exigent)
+        </MenuItem>
+        <MenuItem onClick={() => handleChange('odara')}>
+          Odara, Chosen of Ash (AotR Exigent)
+        </MenuItem>
+      </Menu>
+    </>
+  )
 }
 
 export default CanonExcellencyCopier

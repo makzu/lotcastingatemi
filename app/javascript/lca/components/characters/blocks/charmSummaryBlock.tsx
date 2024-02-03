@@ -1,76 +1,58 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import withStyles from '@mui/styles/withStyles'
-import Launch from '@mui/icons-material/Launch'
+import { Launch } from '@mui/icons-material'
+import { Divider, Typography, type SxProps } from '@mui/material'
 
 import BlockPaper from '@/components/shared/BlockPaper'
-import {
-  getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter,
-  getEvocationsForCharacter,
-  getSpiritCharmsForCharacter,
-  getSpellsForCharacter,
-} from '@/selectors'
-import type { Character, Charm, Spell, Enhancer } from '@/utils/flow-types'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+import {
+  getEvocationsForCharacter,
+  getMartialArtsCharmsForCharacter,
+  getNativeCharmsForCharacter,
+  getSpellsForCharacter,
+  getSpiritCharmsForCharacter,
+} from '@/selectors'
+import type { Character, Charm, Enhancer, Spell } from '@/utils/flow-types'
 
-import { Divider, Typography } from '@mui/material'
+const charmName: SxProps = {
+  typography: 'body2',
+  fontSize: '1rem',
+  marginRight: 0.5,
+}
+const charmInfo: SxProps = {
+  typography: 'caption',
+  textTransform: 'capitalize',
+  marginRight: 0.5,
+}
+const charmBody: SxProps = {
+  flex: 1,
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'noWrap',
+  minWidth: { xl: '10em', xs: '100%' },
+}
 
-const styles = (theme) => ({
-  root: {
-    marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(0.5),
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'baseline',
-  },
-  bodyWrap: {},
-  body: {
-    flex: 1,
-    minWidth: '10em',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'noWrap',
-    [theme.breakpoints.down('lg')]: { minWidth: '100%' },
-  },
-  name: {
-    ...theme.typography.body2,
-    fontSize: '1rem',
-    marginRight: theme.spacing(0.5),
-  },
-  info: {
-    ...theme.typography.caption,
-    textTransform: 'capitalize',
-    marginRight: theme.spacing(0.5),
-  },
-})
-
-function _SingleCharm({
-  charm,
-  classes,
-}: {
-  charm: Charm
-  classes: Record<string, $TSFixMe>
-}) {
+function SingleCharm({ charm }: { charm: Charm }) {
   return (
     <>
-      <Typography component="div" className={classes.root}>
-        <div className={classes.name}>{charm.name}</div>
-        <div className={classes.info}>
+      <Typography
+        component="div"
+        className="flexContainerWrap"
+        sx={{ marginY: 0.5, alignItems: 'baseline' }}
+      >
+        <Typography component="div" sx={charmName}>
+          {charm.name}
+        </Typography>
+        <Typography sx={charmInfo}>
           ({charm.cost && charm.cost != '-' && charm.cost + ', '}
           {charm.timing}
           {charm.duration && ', ' + charm.duration}
           {charm.keywords.length > 0 &&
             ', keywords: ' + charm.keywords.join(', ')}
           )
-        </div>
-        <MarkdownDisplay
-          noBlocks
-          className={classes.body}
-          allowedElements={['text', 'strong', 'emphasis', 'delete']}
-          unwrapDisallowed
-        >
+        </Typography>
+        <MarkdownDisplay noBlocks sx={charmBody}>
           {charm.summary.length > 0 ? charm.summary : charm.body}
         </MarkdownDisplay>
       </Typography>
@@ -80,35 +62,34 @@ function _SingleCharm({
   )
 }
 
-const SingleCharm = withStyles(styles)(_SingleCharm)
-
-function _SingleSpell({
-  spell,
-  classes,
-}: {
-  spell: Spell
-  classes: Record<string, $TSFixMe>
-}) {
+function SingleSpell({ spell }: { spell: Spell }) {
   return (
     <>
-      <Typography component="div" className={classes.root}>
-        <div className={classes.name}>{spell.name}</div>
-        <div className={classes.info}>
+      <Typography
+        component="div"
+        className="flexContainerWrap"
+        sx={{ marginY: 0.5, alignItems: 'baseline' }}
+      >
+        <Typography component="div" sx={charmName}>
+          {spell.name}
+        </Typography>
+        <Typography sx={charmInfo}>
           {spell.control && '(Control Spell) '}({spell.cost}
           ,&nbsp;
           {spell.duration}
           {spell.keywords.length > 0 &&
             ', keywords: ' + spell.keywords.join(', ')}
           )
-        </div>
-        <div className={classes.body}>{spell.body}</div>
+        </Typography>
+        <Typography component="div" sx={charmBody}>
+          {spell.body}
+        </Typography>
       </Typography>
       <Divider />
     </>
   )
 }
 
-const SingleSpell = withStyles(styles)(_SingleSpell)
 interface ExposedProps {
   character: Character
 }
@@ -157,17 +138,10 @@ function CharmSummaryBlock(props: Props) {
         gutterBottom
         component={Link}
         to={`/characters/${character.id}/charms`}
-        style={{
-          textDecoration: 'none',
-          color: 'unset',
-        }}
+        sx={{ textDecoration: 'none', color: 'unset' }}
       >
         Charms&nbsp;&nbsp;
-        <Launch
-          style={{
-            verticalAlign: 'bottom',
-          }}
-        />
+        <Launch sx={{ verticalAlign: 'bottom' }} />
       </Typography>
       {natives}
       {maCharms}

@@ -1,6 +1,5 @@
-import { type TextFieldProps } from '@mui/material/TextField';
-
-import { ListSubheader, MenuItem, TextField } from '@mui/material';
+import { ListSubheader, MenuItem, TextField } from '@mui/material'
+import { type TextFieldProps } from '@mui/material/TextField'
 
 const AbyssalCasteSelect = (props: TextFieldProps) => (
   <TextField

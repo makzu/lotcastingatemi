@@ -1,12 +1,13 @@
-import { Checkbox, FormControlLabel } from '@mui/material'
+import { Stack } from '@mui/material'
 
+import RatingField from '@/components/fields/RatingField'
+import TextField from '@/components/fields/TextField'
 import BlockPaper from '@/components/shared/BlockPaper'
-import RatingField from '@/components/generic/RatingField'
-import TextField from '@/components/generic/TextField'
-import { canIDeleteCharacter } from '@/selectors'
-import { ESSENCE_MIN, ESSENCE_MAX } from '@/utils/constants'
-import type { Character } from '@/types'
+import LcaCheckbox from '@/components/shared/inputs/Checkbox'
 import { useAppSelector } from '@/hooks'
+import { canIDeleteCharacter } from '@/selectors'
+import type { Character } from '@/types'
+import { ESSENCE_MAX, ESSENCE_MIN } from '@/utils/constants'
 
 interface Props {
   character: Character
@@ -26,30 +27,20 @@ const BasicsEditor = ({
   )
   return (
     <>
-      {/*
-      // @ts-expect-error MUI v5 should fix this */}
       <BlockPaper>
-        <div
-          style={{
-            display: 'flex',
-          }}
-        >
+        <Stack direction="row" spacing={1} useFlexGap alignItems="flex-end">
           <TextField
             name="name"
             value={character.name}
             label="Name"
             margin="dense"
             onChange={onChange}
-            inputProps={{
-              // @ts-expect-error FIXME
-              autocomplete: 'off',
-              'data-1p-ignore': 'true',
-              'data-lp-ignore': 'true',
-            }}
+            nameField
+            sx={{ flex: 1 }}
           />
 
           <RatingField
-            trait="essence"
+            name="essence"
             value={character.essence}
             label="Essence"
             min={ESSENCE_MIN}
@@ -59,18 +50,16 @@ const BasicsEditor = ({
           />
 
           {showPublicCheckbox && (
-            <FormControlLabel
+            <LcaCheckbox
               label="Publicly Viewable"
-              control={
-                <Checkbox
-                  name="public"
-                  checked={character.public}
-                  onChange={onCheck}
-                />
-              }
+              name="public"
+              value={character.public}
+              onChange={onCheck}
+              labelPlacement="end"
             />
           )}
-        </div>
+        </Stack>
+
         <TextField
           name="description"
           value={character.description}
@@ -79,7 +68,7 @@ const BasicsEditor = ({
           multiline
           fullWidth
           rows={2}
-          rowsMax={10}
+          maxRows={10}
           onChange={onChange}
         />
       </BlockPaper>

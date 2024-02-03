@@ -13,6 +13,8 @@ import {
   createSpell,
   destroyCharm,
   destroySpell,
+  updateCharm,
+  updateSpell,
 } from '@/ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 import {
@@ -32,6 +34,7 @@ import styles from './CharmStyles.js'
 import SpellFields from './SpellFields'
 
 import { Button, Grid, Hidden, Typography } from '@mui/material'
+import { updateSpellSort, updateCharmSort } from '@/ducks/entities'
 
 const filterByCategory = (categoryFilter) => (charm) =>
   categoryFilter.every((cat) => charm.categories.includes(cat))

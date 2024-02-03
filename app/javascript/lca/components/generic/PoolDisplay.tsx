@@ -1,45 +1,37 @@
 import { Component } from 'react'
 
-import type { Pool } from '@/utils/flow-types'
-
-import withStyles from '@mui/styles/withStyles'
-import { type Theme } from '@mui/material/styles'
-import AttackTagsDisplay from './AttackTagsDisplay'
-
 import {
+  Box,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogContentText,
-  createStyles,
+  DialogTitle,
+  Typography,
 } from '@mui/material'
+import { type SxProps } from '@mui/material/styles'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {},
-    clickable: {
-      cursor: 'pointer',
-    },
-    label: {
-      ...theme.typography.body1,
-      fontSize: '0.75rem',
-      fontWeight: 500,
-      opacity: 0.7,
-    },
-    labelSpan: {},
-    pool: {
-      ...theme.typography.body2,
-      fontSize: '1.25rem',
-      lineHeight: 'inherit',
-    },
-    specialty: {
-      ...theme.typography.caption,
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-    },
-    excellency: { ...theme.typography.caption },
-  })
+import type { Pool } from '@/utils/flow-types'
+import AttackTagsDisplay from './AttackTagsDisplay'
+
+const poolSx: SxProps = {
+  typography: 'body2',
+  fontSize: '1.25rem',
+  lineHeight: 'inherit',
+}
+
+const labelSx: SxProps = {
+  typography: 'body1',
+  fontSize: '0.75rem',
+  fontWeight: 500,
+  opacity: 0.7,
+}
+
+const specialtySx: SxProps = {
+  typography: 'caption',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+}
 
 interface Props {
   label: string
@@ -47,7 +39,8 @@ interface Props {
   noSummary?: boolean
   qc?: boolean
   battlegroup?: boolean
-  classes: $TSFixMe
+  className?: string
+  sx?: SxProps
 }
 
 class PoolDisplay extends Component<Props, { open: boolean }> {
@@ -63,8 +56,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
   setOpen = () => {
     if (
       this.props.noSummary ||
-      this.props.qc ||
-      this.props.battlegroup ||
+      (this.props.qc ?? this.props.battlegroup) ||
       this.props.pool.noSummary
     )
       return
@@ -79,7 +71,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
   }
 
   render() {
-    const { label, pool, classes } = this.props
+    const { label, pool } = this.props
     const { open } = this.state
     const { setOpen, setClosed } = this
     const mb = pool.bonus || []
@@ -87,7 +79,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     const sp = pool.specialties || []
 
     const merits = mb.map((m) => (
-      <div key={m.label} className={classes.specialty}>
+      <Box key={m.label} sx={specialtySx}>
         {m.situational && (
           <span>
             {m.bonus != null && m.bonus > 0 && '+'}
@@ -95,14 +87,16 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
           </span>
         )}
         {m.label}
-      </div>
+      </Box>
     ))
     const fullMerits = mb
       .filter((m) => !m.noFull)
       .map((m) => (
         <div key={m.label}>
           {m.situational && (
-            <span className={classes.excellency}>(conditional) </span>
+            <Typography variant="caption" component="span">
+              (conditional){' '}
+            </Typography>
           )}
           {m.bonus != null && m.bonus > 0 && '+'}
           {m.bonus !== 0 && m.bonus} {m.label}
@@ -129,43 +123,48 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
         {
           // TODO: add ButtonBase here
         }
-        <div className={classes.root} onClick={setOpen}>
-          <div className={hideCursor ? undefined : classes.clickable}>
-            <div className={classes.label}>
-              <span className={classes.labelSpan}>{label}</span>
-            </div>
+        <Box
+          sx={{ width: '5.5rem', maxHeight: '5rem', ...this.props.sx }}
+          className={this.props.className}
+          onClick={setOpen}
+        >
+          <Box sx={hideCursor ? {} : { cursor: 'pointer' }}>
+            <Box sx={labelSx}>{label}</Box>
             <div>
-              <span className={classes.pool}>{pool.total}</span>
+              <Box component="span" sx={poolSx}>
+                {pool.total}
+              </Box>
               {(pool.excellency ?? 0) > 0 && (
-                <span className={classes.excellency}>
+                <Typography variant="caption" component="span">
                   &nbsp;+
                   {pool.excellency}/{pool.excellencyCost}m
-                </span>
+                </Typography>
               )}
               {(pool.minimum ?? 0) > 0 && (
-                <span className={classes.excellency}>
+                <Typography variant="caption" component="span">
                   &nbsp;min {pool.minimum}
-                </span>
+                </Typography>
               )}
             </div>
             {(pool.excellencyStunt ?? 0) > 0 && (
-              <div className={classes.excellency}>
+              <Typography variant="caption">
                 stunt +{pool.excellencyStunt}/{pool.excellencyStuntCost}m
-              </div>
+              </Typography>
             )}
             {merits}
-            {showSpecialties && (
-              <div className={classes.specialty}>+1 specialty</div>
-            )}
-          </div>
-        </div>
+            {showSpecialties && <Box sx={specialtySx}>+1 specialty</Box>}
+          </Box>
+        </Box>
 
         <Dialog open={open} onClose={setClosed}>
           <DialogTitle>{pool.name} Summary</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Total: <span className={classes.pool}>{pool.total}</span>
-              {(pool.excellency || 0) > 0 && (
+              Total:{' '}
+              <Box component="span" sx={poolSx}>
+                {pool.total}
+              </Box>
+              {(pool.excellency ?? 0) > 0 && (
                 <span>
                   &nbsp;&nbsp;&nbsp; Can add up to {pool.excellency}
                   &nbsp;
@@ -239,10 +238,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
             {fullMerits.length + fullPen.length > 0 && (
               <DialogContentText
                 component="div"
-                style={{
-                  textTransform: 'capitalize',
-                  marginTop: '0.5em',
-                }}
+                sx={{ textTransform: 'capitalize', marginTop: '0.5em' }}
               >
                 <div>Bonuses / Penalties:</div>
                 {fullMerits}
@@ -251,20 +247,9 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
             )}
 
             {sp.length > 0 && (
-              <DialogContentText
-                component="div"
-                style={{
-                  marginTop: '0.5em',
-                }}
-              >
+              <DialogContentText component="div" style={{ marginTop: '0.5em' }}>
                 Specialties:&nbsp;
-                <span
-                  style={{
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  {sp.join(', ')}
-                </span>
+                <span className="capitalize">{sp.join(', ')}</span>
                 {pool.rating && (
                   <>
                     {pool.specialtyMatters && (
@@ -297,7 +282,10 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                   pool
                 </div>
                 Minimum pool
-                <span className={classes.pool}> {pool.minimum}</span>
+                <Box component="span" sx={poolSx}>
+                  {' '}
+                  {pool.minimum}
+                </Box>
               </DialogContentText>
             )}
           </DialogContent>
@@ -307,4 +295,4 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
   }
 }
 
-export default withStyles(styles)(PoolDisplay)
+export default PoolDisplay

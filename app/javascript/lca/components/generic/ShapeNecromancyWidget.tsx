@@ -99,7 +99,7 @@ const ShapeNecromancyWidget = ({ character, children }: Props) => {
             </div>
           </div>
 
-          <Divider sx={{ mt: 2, mb: 2 }} />
+          <Divider sx={{ my: 2 }} />
 
           <RatingField
             name="total"
@@ -107,7 +107,7 @@ const ShapeNecromancyWidget = ({ character, children }: Props) => {
             value={total}
             onChange={updateTotal}
             debounceTime={0}
-            sx={{ ml: 'auto', mr: 'auto' }}
+            sx={{ mx: 'auto' }}
           />
         </DialogContent>
 

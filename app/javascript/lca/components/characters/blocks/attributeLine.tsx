@@ -1,44 +1,35 @@
-import withStyles from '@mui/styles/withStyles'
+import { Divider, Typography } from '@mui/material'
+
 import RatingLine from '@/components/generic/ratingLine'
-
-import { isCasteAttribute, isFavoredAttribute } from '@/utils/calculated'
 import type { Character } from '@/types'
-import { Divider } from '@mui/material'
-
-const styles = (theme) => ({
-  attributeName: {
-    ...theme.typography.body1,
-    textTransform: 'capitalize',
-  },
-  attributeFavored: {
-    ...theme.typography.caption,
-  },
-})
+import { isCasteAttribute, isFavoredAttribute } from '@/utils/calculated'
 
 interface Props {
   attribute: string
   rating: number
   character: Character
   pools: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
 }
 
 function AttributeLine(props: Props) {
-  const { rating, attribute, character, pools, classes } = props
+  const { rating, attribute, character, pools } = props
   const caste = isCasteAttribute(character, attribute)
   const favored = isFavoredAttribute(character, attribute)
   const excellency =
     pools.excellencyAbils.includes('*') ||
     pools.excellencyAbils.includes(attribute)
+
   return (
     <div>
       <RatingLine rating={rating}>
-        <span className={classes.attributeName}>{attribute}</span>
-        <span className={classes.attributeFavored}>
+        <Typography component="span" className="capitalize">
+          {attribute}
+        </Typography>
+        <Typography component="span" variant="caption">
           {excellency && ' *'}
           {caste && (character.aspect ? ' (a)' : ' (c)')}
           {favored && ' (f)'}
-        </span>
+        </Typography>
       </RatingLine>
 
       <Divider />
@@ -46,4 +37,4 @@ function AttributeLine(props: Props) {
   )
 }
 
-export default withStyles(styles)(AttributeLine)
+export default AttributeLine

@@ -18,7 +18,7 @@ const selectOnFocus = (e: FocusEvent<HTMLInputElement>) => {
   e.target.select()
 }
 
-type RatingFieldProps = Omit<
+export type RatingFieldProps = Omit<
   MuiTextFieldProps,
   'value' | 'children' | 'onChange'
 > & {
@@ -88,11 +88,7 @@ const RatingField = (props: RatingFieldProps) => {
       }}
       onFocus={selectOnFocus}
       onBlur={handleBlur}
-      sx={{
-        width: '4em',
-        marginRight: 1,
-        ...props.sx,
-      }}
+      sx={{ width: '4em', ...props.sx }}
     />
   )
 }

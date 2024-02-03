@@ -1,43 +1,28 @@
-import { Typography } from '@mui/material'
-import withStyles from '@mui/styles/withStyles'
+import { Box, Stack, Typography } from '@mui/material'
 
-import type { Character } from '@/types'
 import HealthLevelBoxes from '@/components/generic/HealthLevelBoxes'
 import RatingField from '@/components/generic/RatingField'
 import BlockPaper from '@/components/shared/BlockPaper'
-
-const styles = (theme) => ({
-  subheading: {
-    marginTop: theme.spacing(),
-  },
-  separator: { ...theme.typography.body1, marginRight: theme.spacing() },
-  healthBoxesWrap: {
-    textAlign: 'center',
-    marginBottom: theme.spacing(2),
-  },
-})
+import type { Character } from '@/types'
 
 interface Props {
   character: Character
   penalties: Record<string, $TSFixMe>
   onChange: $TSFixMeFunction
-  classes: Record<string, $TSFixMe>
 }
 
-function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
+function HealthLevelEditor({ character, penalties, onChange }: Props) {
   return (
     <BlockPaper>
       <Typography variant="h6">Health</Typography>
 
-      <div className={classes.healthBoxesWrap}>
+      <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
         <HealthLevelBoxes character={character} />
         <Typography>Current wound penalty: -{penalties.wound}</Typography>
-      </div>
+      </Box>
 
-      <Typography variant="subtitle1" className={classes.subheading}>
-        Damage:
-      </Typography>
-      <div>
+      <Typography variant="subtitle1">Damage:</Typography>
+      <Stack direction="row" spacing={1} useFlexGap sx={{ mb: 1 }}>
         <RatingField
           trait="damage_bashing"
           value={character.damage_bashing}
@@ -59,12 +44,10 @@ function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
           margin="dense"
           onChange={onChange}
         />
-      </div>
+      </Stack>
 
-      <Typography variant="subtitle1" className={classes.subheading}>
-        Levels:
-      </Typography>
-      <div>
+      <Typography variant="subtitle1">Levels:</Typography>
+      <Stack direction="row" spacing={1} useFlexGap sx={{ mb: 1 }}>
         <RatingField
           trait="health_level_0s"
           value={character.health_level_0s}
@@ -105,9 +88,9 @@ function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
           margin="dense"
           onChange={onChange}
         />
-      </div>
+      </Stack>
     </BlockPaper>
   )
 }
 
-export default withStyles(styles)(HealthLevelEditor)
+export default HealthLevelEditor

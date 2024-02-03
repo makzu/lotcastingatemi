@@ -1,170 +1,98 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-
-import withStyles from '@mui/styles/withStyles'
-
-import PoolDisplay from '@/components/generic/PoolDisplay'
-import RatingField from '@/components/generic/RatingField'
-import { updateCharacter, updateQc, updateBattlegroup } from '@/ducks/actions'
-import { getPoolsAndRatingsGeneric, canIEdit } from '@/selectors'
-import type {
-  Character,
-  fullQc,
-  Battlegroup,
-  Enhancer,
-} from '@/utils/flow-types'
+import { useState } from 'react'
 
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Stack,
 } from '@mui/material'
 
-const styles = (theme) => ({
-  wrap: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    marginBottom: theme.spacing(),
-  },
-  col: {
-    flex: 1,
-  },
-})
+import RatingField from '@/components/fields/RatingField'
+import PoolDisplay from '@/components/generic/PoolDisplay'
+import { updateBattlegroup, updateCharacter, updateQc } from '@/ducks/actions'
+import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
+import { getPoolsAndRatingsGeneric } from '@/selectors'
+import type { Battlegroup, Character, QC } from '@/types'
 
 interface ExposedProps {
-  character: Character | fullQc | Battlegroup
-}
-type Props = ExposedProps & {
-  canEdit: boolean
-  update: $TSFixMeFunction
-  pools: Record<string, $TSFixMe>
-  classes: Record<string, $TSFixMe>
-}
-interface State {
-  open: boolean
-  initiative: number
+  character: Character | QC | Battlegroup
 }
 
-class JoinBattlePopup extends Component<Props, State> {
-  state = { open: false, initiative: 0 }
+const JoinBattleDialog = ({ character }: ExposedProps) => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+  const [initiative, setInitiative] = useState(0)
+  const pools = useAppSelector((state) =>
+    getPoolsAndRatingsGeneric(state, character.id, character.type),
+  )
 
-  handleChange = (e) => {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
-  }
-  handleChange = (e) => {
-    const { name, value } = e.target
-    this.setState({
-      [name]: value,
-    })
-  }
-  handleOpen = () =>
-    this.setState({
-      open: true,
-    })
-  handleClose = () =>
-    this.setState({
-      open: false,
-      initiative: 0,
-    })
-  handleSubmit = () => {
-    this.setState({
-      open: false,
-    })
-    this.props.update(this.props.character.id, this.state.initiative)
-  }
+  if (pools == null) return null
 
-  render() {
-    const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { character, pools, classes } = this.props
-    return (
-      <>
-        <Button onClick={handleOpen}>Roll Join Battle</Button>
+  const handleSubmit = () => {
+    let action
 
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Join Battle</DialogTitle>
-          <DialogContent>
-            <div className={classes.wrap}>
-              <div className={classes.col}>
-                <PoolDisplay
-                  qc={
-                    character.type === 'qc' || character.type === 'battlegroup'
-                  }
-                  pool={pools.joinBattle}
-                  label="Join Battle Pool"
-                />
-              </div>
-              <div className={classes.col}>
-                <RatingField
-                  trait="initiative"
-                  label="Result"
-                  value={this.state.initiative}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <DialogContentText>
-              {character.name} will join combat with {this.state.initiative + 3}{' '}
-              initiative.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained" color="primary">
-              Join Battle
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
+    switch (character.type) {
+      case 'qc':
+        action = updateQc
+        break
+
+      case 'battlegroup':
+        action = updateBattlegroup
+        break
+
+      default:
+        action = updateCharacter
+    }
+    dispatch(
+      action(character.id, { in_combat: true, initiative: 3 + initiative }),
     )
   }
+
+  return (
+    <>
+      <Button onClick={open}>Roll Join Battle</Button>
+
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Join Battle</DialogTitle>
+
+        <DialogContent>
+          <Stack direction="row" spacing={1} useFlexGap alignItems="flex-end">
+            <Box sx={{ flex: 1 }}>
+              <PoolDisplay
+                qc={character.type === 'qc' || character.type === 'battlegroup'}
+                pool={pools.joinBattle}
+                label="Join Battle Pool"
+              />
+            </Box>
+            <Box sx={{ flex: 1 }}>
+              <RatingField
+                name="initiative"
+                label="Result"
+                value={initiative}
+                onChange={(e) => setInitiative(Number(e.target.value))}
+                debounceTime={0}
+              />
+            </Box>
+          </Stack>
+
+          <DialogContentText>
+            {character.name} will join combat with {initiative + 3} initiative.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Join Battle
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-function mapStateToProps(state, props: ExposedProps) {
-  let type
-  if (props.character.type === 'qc') type = 'qc'
-  else if (props.character.type === 'battlegroup') type = 'battlegroup'
-  else type = 'character'
-  return {
-    canEdit: canIEdit(state, props.character.id, type),
-    pools: getPoolsAndRatingsGeneric(state, props.character.id, type),
-  }
-}
-
-function mapDispatchToProps(dispatch: $TSFixMeFunction, props: ExposedProps) {
-  let action
-
-  switch (props.character.type) {
-    case 'qc':
-      action = updateQc
-      break
-
-    case 'battlegroup':
-      action = updateBattlegroup
-      break
-
-    case 'character':
-    default:
-      action = updateCharacter
-  }
-
-  return {
-    update: (id, value) =>
-      dispatch(
-        action(id, {
-          in_combat: true,
-          initiative: 3 + value,
-        }),
-      ),
-  }
-}
-
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withStyles(styles),
-)
-export default enhance(JoinBattlePopup)
+export default JoinBattleDialog

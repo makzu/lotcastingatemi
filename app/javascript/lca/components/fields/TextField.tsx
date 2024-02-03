@@ -18,10 +18,17 @@ export type TextFieldProps = Omit<
 > & {
   value: string
   onChange: ChangeEventHandler<HTMLInputElement>
+  nameField?: boolean
+}
+
+const nameProps: MuiTextFieldProps['inputProps'] = {
+  autocomplete: 'off',
+  'data-1p-ignore': 'true',
+  'data-lp-ignore': 'true',
 }
 
 const LcaTextField = (props: TextFieldProps) => {
-  const { value, onChange, ...otherProps } = props
+  const { value, onChange, nameField, ...otherProps } = props
   const [localValue, setLocalValue] = useState<string>(value ?? '')
 
   const debouncedOnChange = useDebounce(onChange, 500)
@@ -37,6 +44,7 @@ const LcaTextField = (props: TextFieldProps) => {
 
   return (
     <TextField
+      {...(nameField ? { inputProps: nameProps } : {})}
       {...otherProps}
       variant="standard"
       value={localValue}

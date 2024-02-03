@@ -25,7 +25,7 @@ import {
 } from '@/utils/calculated'
 import type { Battlegroup, QcAttack } from '@/utils/flow-types'
 import PoolDisplay from '../generic/PoolDisplay'
-import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
+import BattlegroupHealthDisplay from '@/features/battlegroup/components/BattlegroupHealthDisplay'
 
 const styles = (theme: Theme) => ({
   ...sharedStyles(theme),

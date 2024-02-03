@@ -1,33 +1,25 @@
-import { Checkbox, FormControlLabel, type Theme } from '@mui/material/'
+import { type ChangeEventHandler } from 'react'
 
-import makeStyles from '@mui/styles/makeStyles'
+import {
+  Checkbox,
+  FormControlLabel,
+  type FormControlLabelProps,
+} from '@mui/material/'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  label: {
-    ...theme.typography.caption,
-    marginBottom: '-0.5em',
-  },
-}))
-
-interface Props {
+interface Props
+  extends Pick<FormControlLabelProps, 'sx' | 'label' | 'labelPlacement'> {
   name: string
-  label: string
   value: boolean
-  onChange: $TSFixMeFunction
-  labelPlacement?: 'end'
+  onChange: ChangeEventHandler<HTMLInputElement>
 }
-const LcaCheckbox = ({ name, value, onChange, ...others }: Props) => {
-  const classes = useStyles({})
-  const handleCheck = (_: never, checked: boolean) => {
-    onChange({ target: { name, value: checked } })
-  }
 
+const LcaCheckbox = ({ name, value, onChange, sx, ...others }: Props) => {
   return (
     <FormControlLabel
       labelPlacement="top"
-      classes={classes}
+      sx={{ typography: 'caption', marginBottom: '-0.5em', ...sx }}
       {...others}
-      control={<Checkbox name={name} checked={value} onChange={handleCheck} />}
+      control={<Checkbox name={name} checked={value} onChange={onChange} />}
     />
   )
 }

@@ -1,5 +1,6 @@
 import type { Character as TSCharacter } from '@/types'
 
+/** @deprecated use '@/types' instead */
 export interface withAttributes {
   attr_strength: number
   attr_dexterity: number
@@ -11,6 +12,8 @@ export interface withAttributes {
   attr_intelligence: number
   attr_wits: number
 }
+
+/** @deprecated use '@/types' instead */
 export interface withAbilities {
   abil_archery: number
   abil_athletics: number
@@ -45,6 +48,8 @@ export interface withAbilities {
     rating: number
   }[]
 }
+
+/** @deprecated use '@/types' instead */
 export interface withArmorStats {
   armor_name: string
   armor_weight: 'unarmored' | 'light' | 'medium' | 'heavy'
@@ -55,18 +60,24 @@ export interface withArmorStats {
   bonus_mobility_penalty: number
 }
 
-/** @deprecated */
+/** @deprecated use '@/types' instead */
 export interface specialty {
   ability: string
   context: string
 }
+
+/** @deprecated use '@/types' instead */
 export interface withSpecialties {
   specialties: specialty[]
 }
+
+/** @deprecated use '@/types' instead */
 export interface xpLog {
   label: string
   points: number
 }
+
+/** @deprecated use '@/types' instead */
 export interface form {
   form: string
   qc_id: number

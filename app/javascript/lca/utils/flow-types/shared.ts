@@ -1,4 +1,6 @@
 // Type defs for traits shared between characters and QCs
+
+/** @deprecated use '@/types' instead */
 export interface Poison {
   name: string
   penalty: number
@@ -7,6 +9,8 @@ export interface Poison {
   poisonable_id: number
   sort_order: number
 }
+
+/** @deprecated use '@/types' instead */
 export interface withBasicInfo {
   id: number
   player_id: number
@@ -21,6 +25,8 @@ export interface withBasicInfo {
   chronicle_sort_order: number
   type: string // TODO: constrain this, e.g. 'qc' | 'battlegroup' | 'Character' | 'SolarCharacter'
 }
+
+/** @deprecated use '@/types' instead */
 export interface withCombatInfo {
   initiative: number
   onslaught: number
@@ -28,6 +34,8 @@ export interface withCombatInfo {
   has_acted: boolean
   poisons: number[]
 }
+
+/** @deprecated use '@/types' instead */
 export interface withHealthLevels {
   health_level_0s: number
   health_level_1s: number
@@ -38,21 +46,29 @@ export interface withHealthLevels {
   damage_lethal: number
   damage_aggravated: number
 }
+
+/** @deprecated use '@/types' instead */
 export interface intimacy {
   subject: string
   rating: number
   hidden: boolean | null | undefined
 }
+
+/** @deprecated use '@/types' instead */
 export interface withIntimacies {
   principles: intimacy[]
   ties: intimacy[]
 }
+
+/** @deprecated use '@/types' instead */
 export interface committment {
   pool: 'Personal' | 'Peripheral'
   label: string
   motes: number
   scenelong?: boolean
 }
+
+/** @deprecated use '@/types' instead */
 export interface withMotePool {
   motes_personal_total: number
   motes_personal_current: number
@@ -64,6 +80,8 @@ export interface withMotePool {
   is_sorcerer: boolean
   sorcerous_motes: number
 }
+
+/** @deprecated use '@/types' instead */
 export interface withWillpower {
   willpower_temporary: number
   willpower_permanent: number

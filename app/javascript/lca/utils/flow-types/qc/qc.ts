@@ -8,6 +8,8 @@ interface QcTrait {
   id: number
   sorting: number
 }
+
+/** @deprecated use QcAttack from '@/types' instead*/
 export type QcAttack = QcTrait & {
   name: string
   pool: number
@@ -18,10 +20,10 @@ export type QcAttack = QcTrait & {
   qc_attackable_type: 'Qc' | 'Battlegroup'
   qc_attackable_id: number
 }
-
-/** @deprecated use '@/types' instead */
+/** @deprecated use QcMerit from '@/types' instead*/
 export type QcMerit = newQcMerit
 
+/** @deprecated use QcCharm from '@/types' instead*/
 export type QcCharm = QcTrait & {
   qc_id: number
   name: string

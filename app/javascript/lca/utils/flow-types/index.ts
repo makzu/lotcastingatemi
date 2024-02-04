@@ -4,6 +4,7 @@ export * from './pool'
 export * from './qc'
 export * from './shared'
 
+/** @deprecated should not be necessary with typescript */
 export type Enhancer<P, EP> = (
   component: React.ComponentType<P>,
 ) => React.ComponentType<EP>
@@ -11,7 +12,10 @@ export type Enhancer<P, EP> = (
 /** @deprecated use Battlegroup from '@/types' instead */
 export type Battlegroup = TSBattlegroup
 
+/** @deprecated use '@/types' instead */
 export type CombatActor = unknown
+
+/** @deprecated use '@/types' instead */
 export interface Player {
   id: number
   display_name: string
@@ -21,6 +25,8 @@ export interface Player {
   chronicles: number[]
   own_chronicles: number[]
 }
+
+/** @deprecated use '@/types' instead */
 export interface Chronicle {
   id: number
   st_id: number

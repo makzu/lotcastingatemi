@@ -1,6 +1,12 @@
-## v100
+## v101
 
 ###### _Unreleased_
+
+- Nothing (yet)
+
+## v100
+
+###### _Feb 15, 2024_
 
 - Added necromantic mote tracking for characters
 - Added necromancy circles for spells

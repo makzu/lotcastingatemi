@@ -93,5 +93,8 @@
     ],
     "setupTestFrameworkScriptFile": "mock-local-storage"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.0",
+  "engines": {
+    "yarn": "4.x"
+  }
 }

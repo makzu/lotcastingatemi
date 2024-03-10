@@ -83,7 +83,7 @@ export const createFetchAction =
     })
   }
 
-type AFetchAll = () => AApiAction
+type AFetchAll = (page?: number) => AApiAction
 export const createFetchAllAction =
   (type: eTypes): AFetchAll =>
   (page = 1) => {

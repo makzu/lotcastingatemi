@@ -5,6 +5,9 @@ import {
   fetchAllCharacters,
   fetchAllQcs,
   fetchAllBattlegroups,
+  fetchChronicleCharacters,
+  fetchChronicleQcs,
+  fetchChronicleBattlegroups,
 } from 'ducks/entities'
 import { crudAction } from 'ducks/entities/_lib'
 
@@ -14,6 +17,7 @@ const pagyMiddleware: Middleware<object, State> =
   (store) => (next) => (action) => {
     const page = parseInt(action?.meta?.page)
     const lastPage = parseInt(action?.meta?.lastPage)
+    const chronicleId = parseInt(action?.meta?.chronicleId)
 
     if (page < lastPage) {
       switch (action.type) {
@@ -25,6 +29,15 @@ const pagyMiddleware: Middleware<object, State> =
           break
         case crudAction('battlegroup', 'FETCH_ALL').success.toString():
           store.dispatch(fetchAllBattlegroups(page + 1))
+          break
+        case crudAction('character', 'FETCH_FOR_CHRONICLE').success.toString():
+          store.dispatch(fetchChronicleCharacters(chronicleId, page + 1))
+          break
+        case crudAction('chronicle', 'FETCH_QCS').success.toString():
+          store.dispatch(fetchChronicleQcs(chronicleId, page + 1))
+          break
+        case crudAction('chronicle', 'FETCH_BATTLEGROUPS').success.toString():
+          store.dispatch(fetchChronicleBattlegroups(chronicleId, page + 1))
           break
       }
     }

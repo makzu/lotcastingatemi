@@ -44,6 +44,7 @@ type crudActions =
   | 'REGEN_CODE'
   | 'ADD_THING'
   | 'REMOVE_THING'
+  | 'FETCH_FOR_CHRONICLE'
 
 export const API = 'lca-api'
 

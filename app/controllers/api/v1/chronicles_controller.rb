@@ -76,6 +76,33 @@ module Api
         end
       end
 
+      def characters
+        authorize @chronicle, :show?
+        @pagy, @characters = pagy(Character.includes(Character.association_types).where(chronicle_id: @chronicle.id))
+
+        return unless stale?(@characters)
+
+        render json: @characters
+      end
+
+      def qcs
+        authorize @chronicle, :show?
+        @pagy, @qcs = pagy(Qc.includes(%i[qc_attacks qc_charms qc_merits poisons spells]).where(chronicle_id: @chronicle.id))
+
+        return unless stale?(@qcs)
+
+        render json: @qcs
+      end
+
+      def battlegroups
+        authorize @chronicle, :show?
+        @pagy, @battlegroups = pagy(Battlegroup.includes(%i[qc_attacks]).where(chronicle_id: @chronicle.id))
+
+        return unless stale?(@battlegroups)
+
+        render json: @battlegroups
+      end
+
       def add_character
         @character = Character.find(params[:character_id])
         check_auth @character
@@ -145,9 +172,9 @@ module Api
 
       def include_hash
         {
-          characters:   Character.association_types,
-          qcs:          %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
-          battlegroups: %i[qc_attacks poisons],
+          # characters:   Character.association_types,
+          # qcs:          %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
+          # battlegroups: %i[qc_attacks poisons],
           players:      [],
           st:           []
         }

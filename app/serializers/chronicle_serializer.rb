@@ -9,9 +9,9 @@ class ChronicleSerializer < BaseSerializer
 
   has_many :players
 
-  has_many :characters
-  has_many :qcs
-  has_many :battlegroups
+  # has_many :characters
+  # has_many :qcs
+  # has_many :battlegroups
 
   def storyteller?
     current_player.id == object.st_id

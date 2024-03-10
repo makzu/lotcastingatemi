@@ -7,6 +7,7 @@ import ChronicleDashboard from 'components/chronicles/index.jsx'
 import ChronicleDetailsPage from 'components/chronicles/DetailsPage.jsx'
 import CombatDashboard from 'components/combat/index.jsx'
 import { fetchChronicle } from 'ducks/actions'
+import { fetchChronicleCharacters, fetchChronicleQcs, fetchChronicleBattlegroups } from 'ducks/entities/chronicle'
 import { isChronicleLoaded } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -20,8 +21,12 @@ type Props = ExposedProps & {
 
 class ChronicleWrapper extends React.Component<Props> {
   fetchStuff = () => {
-    if (!this.props.isLoaded)
+    if (!this.props.isLoaded){
       this.props.fetchChronicle(this.props.match.params.chronicleId)
+      this.props.fetchChronicleCharacters(this.props.match.params.chronicleId)
+      this.props.fetchChronicleQcs(this.props.match.params.chronicleId)
+      this.props.fetchChronicleBattlegroups(this.props.match.params.chronicleId)
+    }
   }
 
   componentDidMount() {
@@ -55,7 +60,7 @@ const mapStateToProps = (state, props: ExposedProps) => ({
 
 const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
-  { fetchChronicle }
+  { fetchChronicle, fetchChronicleCharacters, fetchChronicleQcs, fetchChronicleBattlegroups }
 )
 
 export default enhance(ChronicleWrapper)

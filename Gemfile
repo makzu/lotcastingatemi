@@ -8,7 +8,7 @@ gem 'rails', '~> 7.1'
 gem 'vite_rails', '~> 3.0'
 
 # Use postgres as the database for Active Record
-gem 'pg', '~> 1.4'
+gem 'pg', '~> 1.5'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
 
@@ -19,12 +19,12 @@ gem 'active_model_serializers', '~> 0.10'
 gem 'pagy', '~> 6.0'
 
 # For duplicating QCs and Battlegroups
-gem 'deep_cloneable', '~> 3.0'
+gem 'deep_cloneable', '~> 3.2'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1'
 
-gem 'bootsnap', '~> 1.16', require: false
+gem 'bootsnap', '~> 1.18', require: false
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2', git: 'https://github.com/makzu/knock'
@@ -37,9 +37,10 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 # Sorting
 gem "ranked-model", "~> 0.4.9"
 
+# Timeout protection
+gem 'rack-timeout', '~> 0.6'
+
 # Validate json fields like craft ratings, qc pools, etc
-# Stick with 1.x for now because we had issues with 2.x
-# TODO: fix these issues?
 gem 'activerecord_json_validator', '~> 2.0'
 gem 'email_validator', '~> 2.2'
 
@@ -59,16 +60,16 @@ gem 'lograge', '~> 0.12'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 11.1', platform: :mri
-  gem 'cypress-on-rails', '~> 1.13'
+  gem 'cypress-on-rails', '~> 1.17'
   gem 'database_cleaner-active_record', '~> 2.1'
-  gem 'factory_bot_rails', '~> 6.2'
-  gem 'rspec-rails', '~> 6.0'
+  gem 'factory_bot_rails', '~> 6.4'
+  gem 'rspec-rails', '~> 6.1'
 
   # Linting
-  gem 'rubocop', '~> 1.44', require: false
-  gem 'rubocop-performance', '~> 1.15', require: false
-  gem 'rubocop-rails', '~> 2.17', require: false
-  gem 'rubocop-rspec', '~> 2.18', require: false
+  gem 'rubocop', '~> 1.62', require: false
+  gem 'rubocop-performance', '~> 1.20', require: false
+  gem 'rubocop-rails', '~> 2.24', require: false
+  gem 'rubocop-rspec', '~> 2.27', require: false
 
   # Security Tools
   gem 'brakeman', '~> 6.1'
@@ -76,16 +77,16 @@ group :development, :test do
 
   # profiling
   gem 'derailed_benchmarks', '~> 2.1'
-  gem 'faker', '~> 3.1'
+  gem 'faker', '~> 3.2'
   gem 'stackprof', '~> 0.2'
 
   # Code Quality
-  gem 'reek', '~> 6.0', require: false
+  gem 'reek', '~> 6.3', require: false
 end
 
 group :development do
   # Better developer experience in vscode
-  gem 'ruby-lsp-rails', '~> 0.2', require: false
+  gem 'ruby-lsp-rails', '~> 0.3', require: false
   gem 'ruby-lsp-rspec', '~> 0.1', require: false
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -102,7 +103,7 @@ group :development do
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler', '~> 1.0'
-  gem 'rack-mini-profiler', '~> 3.0', require: false
+  gem 'rack-mini-profiler', '~> 3.3', require: false
   # gem 'stackprof'
 end
 

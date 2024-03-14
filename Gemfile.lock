@@ -194,7 +194,8 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.9)
+    newrelic_rpm (9.7.1)
+    nio4r (2.7.0)
     nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
@@ -227,7 +228,7 @@ GEM
       racc
     pg (1.5.3)
     public_suffix (5.0.3)
-    puma (6.3.1)
+    puma (6.4.2)
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
@@ -338,8 +339,6 @@ GEM
     ruby_audit (2.2.0)
       bundler-audit (~> 0.9.0)
     rubyzip (2.3.2)
-    scout_apm (5.3.5)
-      parser
     semantic_range (3.0.0)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -412,6 +411,7 @@ DEPENDENCIES
   listen (~> 3.8)
   lograge (~> 0.12)
   memory_profiler (~> 1.0)
+  newrelic_rpm (~> 9.7)
   omniauth (~> 2.1)
   omniauth-google-oauth2 (~> 1.1)
   omniauth-rails_csrf_protection (~> 1.0)
@@ -431,7 +431,6 @@ DEPENDENCIES
   rubocop-rails (~> 2.17)
   rubocop-rspec (~> 2.18)
   ruby_audit (~> 2.2)
-  scout_apm (~> 5.3)
   simplecov (~> 0.22)
   spring (~> 4.1)
   spring-watcher-listen (~> 2.1)

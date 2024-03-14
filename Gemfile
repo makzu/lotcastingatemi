@@ -48,7 +48,8 @@ end
 
 # For Heroku Ruby metrics
 gem 'barnes', '~>0.0.9'
-gem 'scout_apm', '~> 5.3'
+gem 'newrelic_rpm', '~> 9.7'
+# gem 'scout_apm', '~> 5.3'
 
 # logging
 gem 'colorize', '~> 0.8'

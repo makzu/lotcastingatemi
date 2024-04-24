@@ -8,7 +8,7 @@ module Api
       def index
         authorize current_player
 
-        @pagy, @characters = pagy(Character.includes(Character.association_types).where(player_id: current_player.id))
+        @pagy, @characters = pagy(Character.where(player_id: current_player.id))
 
         return unless stale? @characters
 

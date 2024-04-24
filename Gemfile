@@ -38,11 +38,14 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem "ranked-model", "~> 0.4.9"
 
 # Timeout protection
-gem 'rack-timeout', '~> 0.6'
+# gem 'rack-timeout', '~> 0.6'
 
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator', '~> 2.0'
 gem 'email_validator', '~> 2.2'
+
+# Automatic Eager Loading
+gem 'goldiloader', '~> 5.2'
 
 # For Heroku:
 group :production do

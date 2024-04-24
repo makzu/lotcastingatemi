@@ -1,4 +1,4 @@
-FROM ruby:3.3.0
+FROM ruby:3.3.1
 
 # Nodejs 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -

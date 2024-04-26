@@ -33,10 +33,13 @@ const pagyMiddleware: Middleware<object, State> =
         case crudAction('character', 'FETCH_FOR_CHRONICLE').success.toString():
           store.dispatch(fetchChronicleCharacters(chronicleId, page + 1))
           break
-        case crudAction('chronicle', 'FETCH_QCS').success.toString():
+        case crudAction('qc', 'FETCH_FOR_CHRONICLE').success.toString():
           store.dispatch(fetchChronicleQcs(chronicleId, page + 1))
           break
-        case crudAction('chronicle', 'FETCH_BATTLEGROUPS').success.toString():
+        case crudAction(
+          'battlegroup',
+          'FETCH_FOR_CHRONICLE',
+        ).success.toString():
           store.dispatch(fetchChronicleBattlegroups(chronicleId, page + 1))
           break
       }

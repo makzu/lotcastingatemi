@@ -1,12 +1,18 @@
-## v101
+## v111
 
 ###### _Unreleased_
 
 - Nothing (yet)
 
+## v110
+
+###### _Apr 25, 2024_
+
+- Fixed QCs and Battlegroups in chronicles not loading after the sixth (Thanks, Aster!)
+
 ## v100
 
-###### _(Rolled back)_
+###### _Apr 24, 2024_
 
 - Added necromantic mote tracking for characters
 - Added necromancy circles for spells

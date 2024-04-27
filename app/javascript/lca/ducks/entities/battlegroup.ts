@@ -11,7 +11,7 @@ import {
   mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
-import { EntityState } from './_types'
+import { type EntityState } from './_types'
 import { getCurrentPlayer } from './player'
 
 const BATTLEGROUP = 'battlegroup'
@@ -86,7 +86,8 @@ export const getSpecificBattlegroup = (state: RootState, id: number) =>
 
 export const doIOwnBattlegroup = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup],
-  (player, character) => character != null && player.id === character.player_id,
+  (player, character) =>
+    character != null && player?.id === character.player_id,
 )
 
 export const getMyPinnedBattlegroups = createSelector(

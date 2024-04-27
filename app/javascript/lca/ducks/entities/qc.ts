@@ -9,7 +9,7 @@ import {
   createEntityReducer,
 } from './_entity'
 import { unwrapped } from './_lib'
-import { EntityState } from './_types'
+import { type EntityState } from './_types'
 import { getCurrentPlayer } from './player'
 
 export const updateQcSort = createAction<{ id: number; sorting: number }>(

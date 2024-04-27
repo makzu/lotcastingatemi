@@ -45,9 +45,9 @@ export interface Sortable {
 export interface ChSortable {
   chronicle_sorting: number
 }
-export const sortOrderSort = (a: Sortable, b: Sortable) =>
+export const sortOrderSort = <T extends Sortable>(a: T, b: T) =>
   a.sorting - b.sorting
-export const chronicleSortOrderSort = (a: ChSortable, b: ChSortable) =>
+export const chronicleSortOrderSort = <T extends ChSortable>(a: T, b: T) =>
   a.chronicle_sorting - b.chronicle_sorting
 
 export const isUnequalByKeys = <T>(obj1: T, obj2: T, keys: (keyof T)[]) =>

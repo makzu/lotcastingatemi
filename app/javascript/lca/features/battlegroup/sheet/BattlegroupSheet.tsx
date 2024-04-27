@@ -3,13 +3,13 @@ import { Typography } from '@mui/material'
 import BlockPaper from '@/components/shared/BlockPaper'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
 import { useDocumentTitle, useIdFromParams } from '@/hooks'
+import { sortOrderSort } from '@/utils'
 import BattlegroupAttackDisplay from '../components/BattlegroupAttackDisplay'
 import BattlegroupHealthDisplay from '../components/BattlegroupHealthDisplay'
 import BattlegroupPoolDisplay from '../components/BattlegroupPoolDisplay'
 import BgBox from '../components/BgBox'
 import { bgSoak, prettyDrillRating } from '../lib'
 import { useGetBattlegroupQuery } from '../store'
-import { sortOrderSort } from '@/utils'
 
 const BattlegroupSheet = () => {
   const id = useIdFromParams()

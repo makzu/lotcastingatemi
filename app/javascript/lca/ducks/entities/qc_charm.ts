@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import { type EntityState } from './_types'
 
 export const updateQcCharmSort = createAction<{ id: number; sorting: number }>(
   'sort/qc_charm',

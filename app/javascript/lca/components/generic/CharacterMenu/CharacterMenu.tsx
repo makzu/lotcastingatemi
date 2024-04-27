@@ -2,7 +2,7 @@ import { MoreVert } from '@mui/icons-material'
 import { Box, Divider, IconButton, Menu } from '@mui/material'
 
 import { useMenuLogic } from '@/hooks'
-import { MenuItemProps } from './CharacterMenuItem'
+import { type MenuItemProps } from './CharacterMenuItem'
 import MenuBattlegroupFromQc from './MenuBattlegroupFromQc'
 import MenuChangeExaltType from './MenuChangeExaltType'
 import MenuDelete from './MenuDelete'

@@ -5,7 +5,7 @@ import { isDefined } from '@/utils'
 import type { RootState } from 'store'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import { type EntityState } from './_types'
 import { getSpecificCharacter } from './character'
 import { getSpecificQc } from './qc'
 

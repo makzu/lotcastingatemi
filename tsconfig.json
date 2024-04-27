@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "types": ["vite/client", "vitest/globals", "vitest/importMeta"],
 
     "allowJs": true,

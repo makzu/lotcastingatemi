@@ -35,7 +35,7 @@ function AbyssalExaltEditor({ character, onChange }: Props) {
       <AbilitySelect
         name="supernal_ability"
         label="Apocalyptic Ability"
-        value={character.supernal_ability || ''}
+        value={character.supernal_ability ?? ''}
         abilities={supernalAbilities}
         prependOptions={noOptionItem}
         onChange={onChange}

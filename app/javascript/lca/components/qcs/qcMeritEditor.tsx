@@ -13,7 +13,7 @@ import {
 } from '@/ducks/actions.js'
 import { updateQcMeritSort } from '@/ducks/entities/qc_merit'
 import { getMeritsForQc } from '@/selectors'
-import { RootState } from '@/store.js'
+import { type RootState } from '@/store.js'
 import type { Enhancer, QcMerit, fullQc } from '@/utils/flow-types'
 import QcMeritFields from './qcMeritFields.jsx'
 

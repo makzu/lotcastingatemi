@@ -1,5 +1,5 @@
-import { Theme, Typography } from '@mui/material'
-import withStyles, { WithStyles } from '@mui/styles/withStyles'
+import { type Theme, Typography } from '@mui/material'
+import withStyles, { type WithStyles } from '@mui/styles/withStyles'
 
 import AnimaDisplay from '../displays/AnimaDisplay'
 import AuraDisplay from '../displays/AuraDisplay'
@@ -12,7 +12,7 @@ import ShapeNecromancyWidget from '../generic/ShapeNecromancyWidget'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget'
 import sharedStyles from '@/styles/'
 import * as calc from '@/utils/calculated'
-import { Character, QC } from '@/types'
+import { type Character, type QC } from '@/types'
 
 const styles = (theme: Theme) => ({
   ...sharedStyles(theme),

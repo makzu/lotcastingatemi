@@ -6,8 +6,10 @@ export interface Battlegroup extends PlayerAsset, WithCombatStats {
   description: string
   magnitude: number
   size: number
-  might: number
-  drill: number
+  might: 0 | 1 | 2 | 3
+  // might: number // 0-3
+  drill: 0 | 1 | 2
+  // drill: number // 0-2
   soak: number
   health_levels: number
   perfect_morale: boolean

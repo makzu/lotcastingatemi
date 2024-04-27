@@ -21,7 +21,7 @@ import { changeCharacterType } from '@/ducks/actions'
 import { getSpecificCharacter } from '@/ducks/entities/character'
 import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
 import { canIEdit } from '@/selectors'
-import { Character } from '@/types'
+import { type Character } from '@/types'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 const MenuChangeCharacterType = ({ id, characterType }: Props) => {

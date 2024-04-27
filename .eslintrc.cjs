@@ -30,8 +30,18 @@ module.exports = {
   rules: {
     'no-duplicate-imports': ['warn'],
     'react/jsx-boolean-value': ['warn', 'never'],
+    '@typescript-eslint/consistent-type-exports': 'warn',
+    '@typescript-eslint/consistent-type-imports': [
+      'warn',
+      { fixStyle: 'inline-type-imports' },
+    ],
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    // '@typescript-eslint/no-unsafe-assignment': 'off',
+    // '@typescript-eslint/no-unsafe-member-access': 'off',
+    // '@typescript-eslint/no-unsafe-argument': 'off',
+    // '@typescript-eslint/no-unsafe-return': 'off',
+    // '@typescript-eslint/no-unsafe-call': 'off',
   },
   ignorePatterns: ['coverage/**/*.js', 'public/**/*.js'],
   overrides: [

@@ -1,4 +1,4 @@
-import { CharacterType } from '@/types'
+import { type CharacterType } from '@/types'
 import { callApi } from '@/utils/api'
 import { createApiActions, mergeEntity } from './_entity'
 import { crudAction, reducerUpdateAction, standardTypes } from './_lib'

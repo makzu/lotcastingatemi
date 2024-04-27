@@ -13,7 +13,7 @@ import {
   mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
-import { EntityState } from './_types'
+import { type EntityState } from './_types'
 import { getCurrentPlayer } from './player'
 
 const CHARACTER = 'character'

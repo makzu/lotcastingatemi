@@ -27,7 +27,7 @@ import {
 } from '@/selectors/'
 import { type Merit } from '@/types'
 import type { Character, Charm, Spell } from '@/utils/flow-types'
-import { RootState } from 'store'
+import { type RootState } from 'store'
 import CharmFields from './CharmFields'
 import CharmFilter from './CharmFilter'
 import styles from './CharmStyles.js'

@@ -4,9 +4,9 @@ import createCachedSelector from 're-reselect'
 import { isDefined, sortOrderSort } from '@/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import { type EntityState } from './_types'
 import { getSpecificCharacter } from './character'
-import { RootState } from '@/store'
+import { type RootState } from '@/store'
 
 export const updateWeaponSort = createAction<{ id: number; sorting: number }>(
   'sort/weapon',

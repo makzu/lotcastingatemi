@@ -5,7 +5,7 @@ import type { RootState } from 'store'
 import { isDefined, sortOrderSort } from '@/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import { type EntityState } from './_types'
 import { getSpecificCharacter } from './character'
 
 export const updateCharmSort = createAction<{ id: number; sorting: number }>(

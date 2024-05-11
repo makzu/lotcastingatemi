@@ -1,13 +1,3 @@
-import type { PaletteMode } from '@mui/material'
-
-import TextField from '@/components/generic/TextField'
-import BlockPaper from '@/components/shared/BlockPaper'
-
-import { destroyAccount, updatePlayer } from '@/ducks/actions'
-import { getCurrentPlayer } from '@/ducks/entities'
-import { switchTheme } from 'features/themeSlice'
-import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
-
 import {
   Button,
   Dialog,
@@ -19,13 +9,28 @@ import {
   MenuItem,
   TextField as MuiTextField,
   Typography,
+  type PaletteMode,
 } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+
+import TextField from '@/components/generic/TextField'
+import BlockPaper from '@/components/shared/BlockPaper'
+import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
+import {
+  useDestroyPlayerMutation,
+  useGetCurrentPlayerQuery,
+  useUpdatePlayerMutation,
+} from './player/store'
+import { switchTheme } from './themeSlice'
+import { emptySplitApi } from './api'
 
 const ThemeSelect = () => {
   const currentTheme = useAppSelector((state) => state.theme)
   const dispatch = useAppDispatch()
+
   const action = (theme: Parameters<typeof switchTheme>[0]) =>
     dispatch(switchTheme(theme))
+
   return (
     <MuiTextField
       variant="standard"
@@ -43,16 +48,31 @@ const ThemeSelect = () => {
 
 const SettingsPage = () => {
   const [isOpen, setOpen, setClosed] = useDialogLogic()
-  const player = useAppSelector((state) => getCurrentPlayer(state))
+  const { isError, isLoading, data: player } = useGetCurrentPlayerQuery()
+  const [updatePlayer] = useUpdatePlayerMutation()
+  const [deletePlayer] = useDestroyPlayerMutation()
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const handleClickDelete = () => {
-    dispatch(destroyAccount())
-    setClosed()
+  const handleUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!player) return
+    const { name, value } = e.target
+    updatePlayer({ id: player.id, [name]: value })
   }
 
-  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(updatePlayer(player.id, { display_name: e.target.value }))
+  const handleClickDelete = () => {
+    if (!player) return
+    deletePlayer(player.id)
+    dispatch(emptySplitApi.util.resetApiState())
+    navigate('/')
+  }
+
+  if (isLoading || !player) {
+    return <BlockPaper>Loading...</BlockPaper>
+  }
+
+  if (isError) {
+    return <BlockPaper>Error loading player data.</BlockPaper>
   }
 
   return (
@@ -65,18 +85,18 @@ const SettingsPage = () => {
         label="Display Name"
         name="display_name"
         value={player.display_name}
-        onChange={handleChangeName}
+        onChange={handleUpdate}
         margin="dense"
       />
       <Typography paragraph>
         Displayed to other players in your chronicles.
       </Typography>
 
-      <Divider style={{ margin: '1em 0' }} />
+      <Divider sx={{ margin: '1em 0' }} />
 
       <ThemeSelect />
 
-      <Divider style={{ margin: '1em 0' }} />
+      <Divider sx={{ margin: '1em 0' }} />
 
       <Button onClick={setOpen}>Delete Account</Button>
 
@@ -88,10 +108,12 @@ const SettingsPage = () => {
             characters, QCs, and battlegroups. This includes any characters or
             QCs you may have marked as public.
           </DialogContentText>
+
           <DialogContentText>
             <strong>This cannot be undone!</strong>
           </DialogContentText>
         </DialogContent>
+
         <DialogActions>
           <Button onClick={setClosed}>Cancel</Button>
           <Button onClick={handleClickDelete}>Delete Account</Button>

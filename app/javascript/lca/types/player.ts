@@ -1,5 +1,6 @@
-export interface Player {
-  id: number
+import type { WithId } from './_lib'
+
+export interface Player extends WithId {
   display_name: string
   characters: number[]
   qcs: number[]

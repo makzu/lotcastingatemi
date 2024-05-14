@@ -35,7 +35,7 @@ gem 'omniauth-google-oauth2', '~> 1.1'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Sorting
-gem "ranked-model", "~> 0.4.9"
+gem 'ranked-model', '~> 0.4.9'
 
 # Timeout protection
 # gem 'rack-timeout', '~> 0.6'
@@ -69,10 +69,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1'
 
   # Linting
-  gem 'rubocop', '~> 1.62', require: false
-  gem 'rubocop-performance', '~> 1.20', require: false
+  gem 'rubocop', '~> 1.63', require: false
+  gem 'rubocop-performance', '~> 1.21', require: false
   gem 'rubocop-rails', '~> 2.24', require: false
-  gem 'rubocop-rspec', '~> 2.27', require: false
+  gem 'rubocop-rspec', '~> 2.29', require: false
 
   # Security Tools
   gem 'brakeman', '~> 6.1'

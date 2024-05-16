@@ -1,7 +1,13 @@
 import { type CharacterType } from '@/types'
 import { callApi } from '@/utils/api'
 import { createApiActions, mergeEntity } from './_entity'
-import { crudAction, reducerUpdateAction, standardTypes } from './_lib'
+import {
+  crudAction,
+  massagePayload,
+  reducerUpdateAction,
+  standardTypes,
+  successMeta,
+} from './_lib'
 
 const CHRONICLE = 'chronicle'
 
@@ -14,6 +20,48 @@ export default {
   [crudAction(CHRONICLE, 'UPDATE').start.toString()]: reducerUpdateAction(
     CHRONICLE + 's',
   ),
+  [crudAction('character', 'FETCH_FOR_CHRONICLE').success.toString()]: (
+    state,
+    action,
+  ) => {
+    const newState = mergeEntity(state, action)
+
+    const { chronicleId } = action.meta
+    newState.chronicles[chronicleId].characters = [
+      ...(state.chronicles[chronicleId].characters ?? []),
+      ...action.payload.result,
+    ]
+
+    return newState
+  },
+  [crudAction('qc', 'FETCH_FOR_CHRONICLE').success.toString()]: (
+    state,
+    action,
+  ) => {
+    const newState = mergeEntity(state, action)
+
+    const { chronicleId } = action.meta
+    newState.chronicles[chronicleId].qcs = [
+      ...(state.chronicles[chronicleId].qcs ?? []),
+      ...action.payload.result,
+    ]
+
+    return newState
+  },
+  [crudAction('battlegroup', 'FETCH_FOR_CHRONICLE').success.toString()]: (
+    state,
+    action,
+  ) => {
+    const newState = mergeEntity(state, action)
+
+    const { chronicleId } = action.meta
+    newState.chronicles[chronicleId].battlegroups = [
+      ...(state.chronicles[chronicleId].battlegroups ?? []),
+      ...action.payload.result,
+    ]
+
+    return newState
+  },
   [crudAction(CHRONICLE, 'REMOVE_PLAYER').success.toString()]: (
     state,
     action,
@@ -49,6 +97,46 @@ export const [
   updateChronicle,
   destroyChronicle,
 ] = createApiActions(CHRONICLE)
+
+export function fetchChronicleCharacters(id: number, page = 1) {
+  const action = crudAction('character', 'FETCH_FOR_CHRONICLE')
+  return callApi({
+    endpoint: `/api/v1/chronicles/${id}/characters?page=${page}`,
+    method: 'GET',
+    types: standardTypes(
+      'character',
+      action,
+      massagePayload('characterList'),
+      (...args) => ({ ...successMeta(...args), chronicleId: id }),
+    ),
+  })
+}
+
+export function fetchChronicleQcs(id: number, page = 1) {
+  const action = crudAction('qc', 'FETCH_FOR_CHRONICLE')
+  return callApi({
+    endpoint: `/api/v1/chronicles/${id}/qcs?page=${page}`,
+    method: 'GET',
+    types: standardTypes('qc', action, massagePayload('qcList'), (...args) => ({
+      ...successMeta(...args),
+      chronicleId: id,
+    })),
+  })
+}
+
+export function fetchChronicleBattlegroups(id: number, page = 1) {
+  const action = crudAction('battlegroup', 'FETCH_FOR_CHRONICLE')
+  return callApi({
+    endpoint: `/api/v1/chronicles/${id}/battlegroups?page=${page}`,
+    method: 'GET',
+    types: standardTypes(
+      'battlegroup',
+      action,
+      massagePayload('battlegroupList'),
+      (...args) => ({ ...successMeta(...args), chronicleId: id }),
+    ),
+  })
+}
 
 export function joinChronicle(code: string) {
   const action = crudAction(CHRONICLE, 'JOIN')

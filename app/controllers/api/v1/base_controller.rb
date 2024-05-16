@@ -8,6 +8,8 @@ module Api
       include Pundit::Authorization
       serialization_scope :current_player
 
+      before_action :sample_requests_for_scout_apm
+
       before_action :authenticate_player
       before_action :setup_resource, except: %i[index create]
 
@@ -101,6 +103,14 @@ module Api
 
       def disallowed_attributes
         %w[id character_id qc_id qc_attackable_id poisonable_id created_at updated_at]
+      end
+
+      def sample_requests_for_scout_apm
+        sample_rate = 0.7
+
+        return unless rand > sample_rate
+
+        ScoutApm::Transaction.ignore!
       end
 
       def set_parent

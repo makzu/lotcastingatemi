@@ -87,7 +87,7 @@ export const createFetchAction =
     })
   }
 
-type AFetchAll = (page?: number) => RSAAAction
+type AFetchAll = (page?: number) => AApiAction
 export const createFetchAllAction =
   (type: eTypes): AFetchAll =>
   (page = 1) => {

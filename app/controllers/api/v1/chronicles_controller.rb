@@ -10,14 +10,15 @@ module Api
 
       def index
         authorize current_player
-        @own_chronicles = Chronicle.includes(include_hash).where(st_id: current_player.id)
-        @chronicles = Chronicle.joins(chronicle_players: :player).includes(include_hash).where(chronicle_players: { player_id: current_player.id })
+        @own_chronicles = Chronicle.where(st_id: current_player.id)
+        @chronicles = Chronicle.joins(chronicle_players: :player).where(chronicle_players: { player_id: current_player.id })
         render json:    @own_chronicles + @chronicles,
                include: include_hash
       end
 
       def show
-        @chronicle = Chronicle.includes(include_hash).find(params[:id])
+        @chronicle = Chronicle.find(params[:id])
+
         authorize @chronicle
 
         return unless stale? @chronicle
@@ -74,6 +75,33 @@ module Api
         else
           render json: @chronicle.errors.details, status: :bad_request
         end
+      end
+
+      def characters
+        authorize @chronicle, :show?
+        @pagy, @characters = pagy(Character.where(chronicle_id: @chronicle.id))
+
+        return unless stale?(@characters)
+
+        render json: @characters
+      end
+
+      def qcs
+        authorize @chronicle, :show?
+        @pagy, @qcs = pagy(Qc.where(chronicle_id: @chronicle.id))
+
+        return unless stale?(@qcs)
+
+        render json: @qcs
+      end
+
+      def battlegroups
+        authorize @chronicle, :show?
+        @pagy, @battlegroups = pagy(Battlegroup.where(chronicle_id: @chronicle.id))
+
+        return unless stale?(@battlegroups)
+
+        render json: @battlegroups
       end
 
       def add_character
@@ -133,7 +161,7 @@ module Api
       private
 
       def set_chronicle_from_token
-        @chronicle = Chronicle.includes(include_hash).find_by!(invite_code: params[:invite_code])
+        @chronicle = Chronicle.find_by!(invite_code: params[:invite_code])
       end
 
       def check_auth(char)
@@ -145,11 +173,11 @@ module Api
 
       def include_hash
         {
-          characters:   Character.association_types,
-          qcs:          %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
-          battlegroups: %i[qc_attacks poisons],
-          players:      [],
-          st:           []
+          # characters:   Character.association_types,
+          # qcs:          %i[qc_attacks qc_merits qc_attacks qc_charms poisons],
+          # battlegroups: %i[qc_attacks poisons],
+          players: [],
+          st:      []
         }
       end
 

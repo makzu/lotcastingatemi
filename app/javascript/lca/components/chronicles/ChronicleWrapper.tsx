@@ -7,6 +7,11 @@ import CombatDashboard from '@/components/combat/index'
 import { fetchChronicle } from '@/ducks/actions'
 import { useAppDispatch, useAppSelector, useIdFromParams } from '@/hooks'
 import { isChronicleLoaded } from '@/selectors'
+import {
+  fetchChronicleBattlegroups,
+  fetchChronicleCharacters,
+  fetchChronicleQcs,
+} from '@/ducks/entities'
 
 const ChronicleWrap = () => {
   const dispatch = useAppDispatch()
@@ -17,6 +22,9 @@ const ChronicleWrap = () => {
   useEffect(() => {
     if (!isLoaded && !loadStarted) {
       dispatch(fetchChronicle(id))
+      dispatch(fetchChronicleCharacters(id))
+      dispatch(fetchChronicleQcs(id))
+      dispatch(fetchChronicleBattlegroups(id))
       setLoadStarted(true)
     }
     return () => {

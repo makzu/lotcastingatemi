@@ -74,12 +74,12 @@
     "react-codemod": "^5.4.4",
     "react-test-renderer": "^17.0.2",
     "redux-mock-store": "^1.5.4",
-    "vite": "^5.0.13",
+    "vite": "^5.2.11",
     "vite-plugin-rails": "^0.5.0",
     "vite-plugin-ruby": "^5.0.0",
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.2.3",
-    "vitest": "^1.2.0"
+    "vitest": "^1.6.0"
   },
   "scripts": {
     "test": "vitest",

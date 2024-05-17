@@ -1,2 +1,2 @@
-web: bundle exec rails s --pid /tmp/server.pid -b 0.0.0.0 -p 3000
+web: bin/rails server
 vite: bin/vite dev

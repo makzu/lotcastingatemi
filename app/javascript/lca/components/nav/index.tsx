@@ -2,20 +2,20 @@ import { Drawer, useMediaQuery, type Theme } from '@mui/material'
 import { Box } from '@mui/system'
 
 import { drawerWidth } from '@/containers/_drawerProperties'
-import { getCurrentPlayer } from '@/ducks/entities'
-import { closeDrawer } from 'features/drawerSlice'
+import { useGetCurrentPlayerQuery } from '@/features/player/store'
 import { useAppDispatch, useAppSelector } from '@/hooks'
+import { closeDrawer } from 'features/drawerSlice'
 import NavPanel from './NavPanel'
 
 // Shamelessly stolen from the material-ui drawer demo
 
 const NavPanelWrap = () => {
-  const displayName = useAppSelector(
-    (state) => getCurrentPlayer(state).display_name,
-  )
-  const authenticated = useAppSelector((state) => state.session.authenticated)
+  const { data: player } = useGetCurrentPlayerQuery()
+  const displayName = player?.display_name ?? 'Error'
 
+  const authenticated = useAppSelector((state) => state.session.authenticated)
   const drawerOpen = useAppSelector((state) => state.drawer.open)
+
   const dispatch = useAppDispatch()
   const close = () => dispatch(closeDrawer())
 

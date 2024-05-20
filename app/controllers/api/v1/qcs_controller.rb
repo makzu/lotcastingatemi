@@ -8,7 +8,7 @@ module Api
       def index
         authorize current_player
 
-        @pagy, @qcs = pagy(Qc.where(player_id: current_player.id))
+        @pagy, @qcs = pagy(current_player.qcs.rank(:sorting)
 
         return unless stale? @qcs
 

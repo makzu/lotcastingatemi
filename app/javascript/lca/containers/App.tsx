@@ -7,6 +7,7 @@ import LcaHeader from '@/components/header/Header'
 import NavPanel from '@/components/nav/'
 import Footer from '@/components/shared/Footer'
 import ErrorBoundary from '@/containers/ErrorBoundary'
+import { drawerWidth } from './_drawerProperties'
 
 // Shamelessly stolen from the material-ui drawer demo
 
@@ -50,15 +51,7 @@ const App = ({ children }: Props) => {
   })
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        minHeight: '100vh',
-        overflowY: 'auto',
-        position: 'relative',
-        width: '100%',
-      }}
-    >
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
       <LcaHeader />
@@ -69,16 +62,11 @@ const App = ({ children }: Props) => {
         component="main"
         sx={{
           marginLeft: { lg: 2 },
-          // [theme.breakpoints.up('lg')]: {
-          //   //   height: 'calc(100% - 64px)',
-          //   //   marginLeft: drawerWidth,
-          //   marginLeft: theme.spacing(2),
-          //   //   marginTop: 64,
-          //   //   width: `calc(100% - ${drawerWidth}px)`,
-          // },
-          backgroundColor: 'background.default',
-          height: 'calc(100% - 56px)',
-          marginTop: { xs: '64px ', lg: '76px' },
+          lg: {
+            marginLeft: drawerWidth,
+            width: `calc(100% - ${drawerWidth}px)`,
+          },
+          marginTop: '64px ',
           padding: 3,
           width: '100%',
         }}

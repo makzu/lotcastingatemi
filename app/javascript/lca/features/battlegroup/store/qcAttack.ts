@@ -1,13 +1,12 @@
-import { APIPartial, PATCH, POST } from '@/features/api'
-import { QcAttack } from '@/types/qc'
+import { type APIPartial, PATCH, POST } from '@/features/api'
+import type { QcAttack } from '@/types/qc'
 import { BATTLEGROUP, battlegroupApi } from './battlegroup'
+
+type QcAttackPartial = APIPartial<QcAttack> & Pick<QcAttack, 'qc_attackable_id'>
 
 export const bgAttackApi = battlegroupApi.injectEndpoints({
   endpoints: (build) => ({
-    updateBattlegroupAttack: build.mutation<
-      void,
-      APIPartial<QcAttack> & Pick<QcAttack, 'qc_attackable_id'>
-    >({
+    updateBattlegroupAttack: build.mutation<void, QcAttackPartial>({
       query: ({ id, qc_attackable_id, ...patch }) => ({
         url: `battlegroups/${qc_attackable_id}/qc_attacks/${id}`,
         method: PATCH,
@@ -36,9 +35,9 @@ export const bgAttackApi = battlegroupApi.injectEndpoints({
           patchResult.undo()
         }
       },
-      // invalidatesTags: (_result, _error, id) => [
-
-      // ],
+      invalidatesTags: (_result, _error, { qc_attackable_id }) => [
+        { type: BATTLEGROUP, id: qc_attackable_id },
+      ],
     }),
 
     createBattlegroupAttack: build.mutation<QcAttack, Partial<QcAttack>>({
@@ -52,10 +51,7 @@ export const bgAttackApi = battlegroupApi.injectEndpoints({
       ],
     }),
 
-    deleteBattlegroupAttack: build.mutation<
-      void,
-      APIPartial<QcAttack> & Pick<QcAttack, 'qc_attackable_id'>
-    >({
+    deleteBattlegroupAttack: build.mutation<void, QcAttackPartial>({
       query: ({ id }) => ({ url: `qc_attacks/${id}`, method: 'DELETE' }),
       invalidatesTags: (_result, _error, { qc_attackable_id }) => [
         { type: BATTLEGROUP, id: qc_attackable_id },

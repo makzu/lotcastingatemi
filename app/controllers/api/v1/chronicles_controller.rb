@@ -79,7 +79,7 @@ module Api
 
       def characters
         authorize @chronicle, :show?
-        @pagy, @characters = pagy(Character.where(chronicle_id: @chronicle.id))
+        @pagy, @characters = pagy(@chronicle.characters.rank(:chronicle_sorting))
 
         return unless stale?(@characters)
 
@@ -88,7 +88,7 @@ module Api
 
       def qcs
         authorize @chronicle, :show?
-        @pagy, @qcs = pagy(Qc.where(chronicle_id: @chronicle.id))
+        @pagy, @qcs = pagy(@chronicle.qcs.rank(:chronicle_sorting))
 
         return unless stale?(@qcs)
 
@@ -97,7 +97,7 @@ module Api
 
       def battlegroups
         authorize @chronicle, :show?
-        @pagy, @battlegroups = pagy(Battlegroup.where(chronicle_id: @chronicle.id))
+        @pagy, @battlegroups = pagy(@chronicle.battlegroups.rank(:chronicle_sorting))
 
         return unless stale?(@battlegroups)
 

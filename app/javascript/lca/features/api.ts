@@ -1,8 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { WithId } from '@/types/_lib'
+import { type WithId } from '@/types/_lib'
 
 export type APIPartial<T extends WithId> = Pick<T, 'id'> & Partial<T>
+export type SortPartial<T extends WithId> = Pick<T, 'id'> & {
+  sorting_position: number
+}
 
 export const GET = 'GET'
 export const PATCH = 'PATCH'

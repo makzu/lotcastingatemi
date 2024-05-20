@@ -1,34 +1,41 @@
+import { VisibilityOff } from '@mui/icons-material'
 import { Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 
-import BlockPaper from '@/components/shared/BlockPaper'
-import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
-import { useDocumentTitle, useIdFromParams } from '@/hooks'
-import { sortOrderSort } from '@/utils'
-import BattlegroupAttackDisplay from '../components/BattlegroupAttackDisplay'
-import BattlegroupHealthDisplay from '../components/BattlegroupHealthDisplay'
-import BattlegroupPoolDisplay from '../components/BattlegroupPoolDisplay'
-import BgBox from '../components/BgBox'
+import CardBase from '@/components/shared/CardBase'
+import { type Battlegroup } from '@/types'
 import { bgSoak, prettyDrillRating } from '../lib'
 import { useGetBattlegroupQuery } from '../store'
+import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
+import BattlegroupPoolDisplay from './BattlegroupPoolDisplay'
+import BgBox from './BgBox'
 
-const BattlegroupSheet = () => {
-  const id = useIdFromParams()
-  const { data: battlegroup } = useGetBattlegroupQuery(id)
+interface bgCardProps {
+  id: Battlegroup['id']
+}
 
-  useDocumentTitle(
-    `${battlegroup && battlegroup.name + ' | '}Lot-Casting Atemi`,
-  )
+const BattlegroupCard = ({ id }: bgCardProps) => {
+  const { data: battlegroup, error, isLoading } = useGetBattlegroupQuery(id)
 
-  if (!battlegroup)
-    return (
-      <BlockPaper>
-        <Typography paragraph>This Battlegroup has not yet loaded.</Typography>
-      </BlockPaper>
-    )
+  if (error) return <div>An error has occurred: {JSON.stringify(error)}</div>
+  if (!battlegroup || isLoading) return <div>Loading...</div>
 
   return (
-    <BlockPaper>
-      <MarkdownDisplay source={battlegroup.description} />
+    <CardBase>
+      <Typography
+        variant="h6"
+        component={Link}
+        to={`/new-battlegroups/${battlegroup.id}`}
+        sx={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        {battlegroup.name}
+        {battlegroup.hidden && (
+          <div>
+            <VisibilityOff />
+            Hidden
+          </div>
+        )}
+      </Typography>
 
       <div className="flexContainerWrap">
         <BattlegroupHealthDisplay battlegroup={battlegroup} />
@@ -43,6 +50,7 @@ const BattlegroupSheet = () => {
             <BattlegroupPoolDisplay value={battlegroup.might} label="Might" />
           </BgBox>
         )}
+
         {battlegroup.perfect_morale && (
           <BgBox>
             <BattlegroupPoolDisplay value="Perfect" label="Morale" />
@@ -57,21 +65,26 @@ const BattlegroupSheet = () => {
             label="Join Battle"
           />
         </BgBox>
+
         <BgBox>
           <BattlegroupPoolDisplay
             label="Movement"
             value={battlegroup.movement}
           />
         </BgBox>
+
         <BgBox>
           <BattlegroupPoolDisplay label="Evasion" value={battlegroup.evasion} />
         </BgBox>
+
         <BgBox>
           <BattlegroupPoolDisplay label="Parry" value={battlegroup.parry} />
         </BgBox>
+
         <BgBox>
           <BattlegroupPoolDisplay label="Soak" value={bgSoak(battlegroup)} />
         </BgBox>
+
         {battlegroup.hardness > 0 && (
           <BgBox>
             <BattlegroupPoolDisplay
@@ -80,24 +93,21 @@ const BattlegroupSheet = () => {
             />
           </BgBox>
         )}
-        <BgBox>
-          <BattlegroupPoolDisplay
-            label="Armor Name"
-            value={battlegroup.armor_name ?? 'Unarmored'}
-          />
-        </BgBox>
       </div>
 
       <div className="flexContainerWrap">
         <BgBox>
           <BattlegroupPoolDisplay label="Senses" value={battlegroup.senses} />
         </BgBox>
+
         <BgBox>
           <BattlegroupPoolDisplay label="Resolve" value={battlegroup.resolve} />
         </BgBox>
+
         <BgBox>
           <BattlegroupPoolDisplay label="Guile" value={battlegroup.guile} />
         </BgBox>
+
         <BgBox>
           <BattlegroupPoolDisplay
             label="Appearance"
@@ -106,30 +116,14 @@ const BattlegroupSheet = () => {
         </BgBox>
       </div>
 
-      <Typography variant="subtitle1" sx={{ mt: 2 }}>
-        Attacks
-      </Typography>
-      {battlegroup.qc_attacks.sort(sortOrderSort).map((attack) => (
-        <BattlegroupAttackDisplay
-          battlegroup={battlegroup}
-          attack={attack}
-          key={attack.id}
-        />
-      ))}
-
-      {battlegroup.portrait_link && (
-        <div>
-          <a href={battlegroup.portrait_link}>
-            <img
-              src={battlegroup.portrait_link}
-              alt={battlegroup.name}
-              className="portrait"
-            />
-          </a>
-        </div>
+      {battlegroup.onslaught > 0 && (
+        <Typography paragraph sx={{ mt: '0.5em' }}>
+          <strong>Penalties:</strong>
+          &nbsp;Onslaught -{battlegroup.onslaught}
+        </Typography>
       )}
-    </BlockPaper>
+    </CardBase>
   )
 }
 
-export default BattlegroupSheet
+export default BattlegroupCard

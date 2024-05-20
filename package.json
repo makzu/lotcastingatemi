@@ -36,7 +36,7 @@
     "sass": "^1.69.7",
     "scroll-to-element": "^2.0.3",
     "typeface-roboto": "^0.0.75",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.1.0",
@@ -81,7 +81,7 @@
     "vite-plugin-rails": "^0.5.0",
     "vite-plugin-ruby": "^5.0.0",
     "vite-plugin-svgr": "^4.2.0",
-    "vite-tsconfig-paths": "^4.2.3",
+    "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.6.0"
   },
   "scripts": {

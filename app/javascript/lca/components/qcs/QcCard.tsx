@@ -36,15 +36,6 @@ const styles = (theme) => ({
       color: 'unset',
     },
   },
-  nameRow: {
-    display: 'flex',
-  },
-  nameWrap: {
-    flex: 1,
-    '& a': {
-      color: 'unset',
-    },
-  },
   hiddenLabel: {
     ...theme.typography.caption,
     display: 'inline-block',
@@ -85,6 +76,7 @@ type Props = ExposedProps &
 
 function QcCard(props: Props) {
   const { qc, chronicle, st, penalties, pools, isOwner, classes } = props
+
   return (
     <CardBase>
       {((chronicle && st) || (!chronicle && isOwner)) && (

@@ -43,8 +43,6 @@ const BattlegroupEditor = () => {
         drill/might/etc are added automatically)
       </Typography>
 
-      <p>{battlegroup.name}</p>
-
       <div className="flexContainer">
         <TextField
           label="Name"
@@ -52,6 +50,7 @@ const BattlegroupEditor = () => {
           value={battlegroup.name}
           className="flex"
           onChange={handleUpdate}
+          nameField
         />
         {showDelete && (
           <FormControlLabel

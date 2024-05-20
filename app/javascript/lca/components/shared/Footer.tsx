@@ -24,7 +24,7 @@ const Footer = ({ children }: { children?: ReactChildren }) => {
             color: (theme) => theme.palette.text.secondary,
             textDecorationColor: (theme) => theme.palette.text.secondary,
           },
-          marginTop: (theme) => theme.spacing(2),
+          marginY: (theme) => theme.spacing(2),
           fontSize: '0.75rem',
         }}
       >

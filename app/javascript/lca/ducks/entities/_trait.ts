@@ -4,7 +4,6 @@ import type { Charm } from '@/types'
 import { callApi } from '@/utils/api'
 import {
   crudAction,
-  characterTraitTypes as entityTypes,
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
@@ -17,7 +16,7 @@ type parentTypes = 'character' | 'qc' | 'battlegroup'
 export const createTraitReducer = (
   entityType: entityTypes,
   parentType: parentTypes = 'character',
-  extraReducers?: { [x: string]: (state, action) => void },
+  extraReducers?: Record<string, (state, action) => void>,
 ) => {
   const pluralType = entityType + 's'
 

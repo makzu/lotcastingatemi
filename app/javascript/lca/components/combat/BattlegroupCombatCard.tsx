@@ -4,7 +4,7 @@ import withStyles from '@mui/styles/withStyles'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import CombatControls from './CombatControls'
 
-import BattlegroupHealthDisplay from '../battlegroups/BattlegroupHealthDisplay'
+import BattlegroupHealthDisplay from '@/features/battlegroup/components/BattlegroupHealthDisplay'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle'
 import RemoveFromCombatButton from './RemoveFromCombatButton'
 import PoolDisplay from '../generic/PoolDisplay'

@@ -12,6 +12,7 @@ import type { RootState } from '@/store'
 import {
   canIDeleteBattlegroup,
   canIEditBattlegroup,
+  getSpecificBattlegroup,
 } from '@/ducks/entities/battlegroup'
 import { getPoolsAndRatingsForBattlegroup } from './battlegroup'
 
@@ -22,8 +23,14 @@ import {
 } from './character'
 import { amIStOfChronicle } from './chronicle'
 import { entities, getCurrentPlayer } from './entities'
-import { canIDeleteQc, canIEditQc, getPoolsAndRatingsForQc } from './qc'
+import {
+  canIDeleteQc,
+  canIEditQc,
+  getPoolsAndRatingsForQc,
+  getSpecificQc,
+} from './qc'
 import { isDefined } from '@/utils'
+import { getSpecificCharacter } from '@/ducks/entities'
 
 type CT = 'chronicle' | 'character' | 'qc' | 'battlegroup'
 export const canIEdit = (state: RootState, id: number, characterType: CT) => {
@@ -107,6 +114,12 @@ export const getPoolsAndRatingsGeneric = (
     default:
       return getPoolsAndRatings(state, id)
   }
+}
+
+export const getEntity = {
+  character: getSpecificCharacter,
+  qc: getSpecificQc,
+  battlegroup: getSpecificBattlegroup,
 }
 
 // export const getPoisons = state => entities(state).poisons

@@ -1,10 +1,27 @@
-import { APIPartial, DELETE, PATCH, POST, emptySplitApi } from '@/features/api'
+import {
+  type APIPartial,
+  DELETE,
+  PATCH,
+  POST,
+  emptySplitApi,
+} from '@/features/api'
 import type { QC } from '@/types'
 
 export const qcApi = emptySplitApi
   .enhanceEndpoints({ addTagTypes: ['QC'] })
   .injectEndpoints({
     endpoints: (build) => ({
+      getQcs: build.query<QC[], void>({
+        query: () => 'qcs',
+        providesTags: (result) =>
+          result
+            ? [
+                ...result.map(({ id }) => ({ type: 'QC' as const, id })),
+                { type: 'QC', id: 'LIST' },
+              ]
+            : [{ type: 'QC', id: 'LIST' }],
+      }),
+
       getQc: build.query<QC, QC['id']>({
         query: (id) => ({ url: `qcs/${id}` }),
         providesTags: (_result, _error, id) => [{ type: 'QC', id }],

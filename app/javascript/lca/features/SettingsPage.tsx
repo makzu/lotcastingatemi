@@ -16,13 +16,13 @@ import { useNavigate } from 'react-router-dom'
 import TextField from '@/components/generic/TextField'
 import BlockPaper from '@/components/shared/BlockPaper'
 import { useAppDispatch, useAppSelector, useDialogLogic } from '@/hooks'
+import { emptySplitApi } from './api'
 import {
   useDestroyPlayerMutation,
   useGetCurrentPlayerQuery,
   useUpdatePlayerMutation,
 } from './player/store'
 import { switchTheme } from './themeSlice'
-import { emptySplitApi } from './api'
 
 const ThemeSelect = () => {
   const currentTheme = useAppSelector((state) => state.theme)

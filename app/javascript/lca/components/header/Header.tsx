@@ -9,6 +9,7 @@ import CharacterHeader from './CharacterHeader'
 import ChronicleHeader from './ChronicleHeader'
 import LcaDrawerButton from './DrawerButton'
 import QcHeader from './QcHeader'
+import NewBattlegroupHeader from '@/features/battlegroup/sheet/BattlegroupSheetHeader'
 
 export const GenericHeader = () => {
   return (
@@ -40,6 +41,10 @@ const LcaHeader = () => {
           <Route path="/characters/:id/*" element={<CharacterHeader />} />
           <Route path="/qcs/:id/*" element={<QcHeader />} />
           <Route path="/battlegroups/:id/*" element={<BattlegroupHeader />} />
+          <Route
+            path="/new-battlegroups/:id/*"
+            element={<NewBattlegroupHeader />}
+          />
           <Route path="*" element={<GenericHeader />} />
         </Routes>
       </Suspense>

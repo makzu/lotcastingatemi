@@ -9,7 +9,7 @@ module Api
       def index
         authorize current_player
 
-        @pagy, @battlegroups = pagy(Battlegroup.where(player_id: current_player.id))
+        @pagy, @battlegroups = pagy(current_player.battlegroups.rank(:sorting))
 
         return unless stale? @battlegroups
 

@@ -1,14 +1,13 @@
 import 'typeface-roboto'
 
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
-import store from './store'
-import { lcaInit } from './ducks/actions'
 import RootContainer from './containers/RootContainer'
+import { lcaInit } from './ducks/actions'
+import store from './store'
 
 store.dispatch(lcaInit())
 
-ReactDOM.render(
-  <RootContainer store={store} />,
-  document.getElementById('root'),
-)
+const container = document.getElementById('root')!
+const root = createRoot(container)
+root.render(<RootContainer store={store} />)

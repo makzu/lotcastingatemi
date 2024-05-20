@@ -19,19 +19,20 @@ export type TextFieldProps = Omit<
   value: string
   onChange: ChangeEventHandler<HTMLInputElement>
   nameField?: boolean
+  debounceDelay?: number
 }
 
 const nameProps: MuiTextFieldProps['inputProps'] = {
-  autocomplete: 'off',
+  autoComplete: 'off',
   'data-1p-ignore': 'true',
   'data-lp-ignore': 'true',
 }
 
 const LcaTextField = (props: TextFieldProps) => {
-  const { value, onChange, nameField, ...otherProps } = props
+  const { value, onChange, nameField, debounceDelay, ...otherProps } = props
   const [localValue, setLocalValue] = useState<string>(value ?? '')
 
-  const debouncedOnChange = useDebounce(onChange, 500)
+  const debouncedOnChange = useDebounce(onChange, debounceDelay ?? 500)
 
   useEffect(() => {
     setLocalValue(value)

@@ -10,12 +10,19 @@ interface Props {
 }
 
 const SortableItem = ({ id, children }: Props) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id })
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id })
 
-  const style = {
+  const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
     transition,
+    ...(isDragging && { pointerEvents: 'none' as const }),
   }
 
   return (

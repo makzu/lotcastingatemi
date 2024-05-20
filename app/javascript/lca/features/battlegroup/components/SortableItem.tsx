@@ -20,9 +20,10 @@ const SortableItem = ({ id, children }: Props) => {
   } = useSortable({ id })
 
   const style: React.CSSProperties = {
+    position: 'relative',
     transform: CSS.Transform.toString(transform),
     transition,
-    ...(isDragging && { pointerEvents: 'none' as const }),
+    ...(isDragging && { pointerEvents: 'none' as const, zIndex: 5 }),
   }
 
   return (

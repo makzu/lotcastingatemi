@@ -92,7 +92,7 @@ const BattlegroupList = () => {
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={ids}>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} mt={0}>
             {ids.map((id) => (
               <Grid key={id} item xs={12} md={6} xl={4}>
                 <SortableItem id={id}>

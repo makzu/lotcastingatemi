@@ -74,12 +74,14 @@ const BattlegroupEditor = () => {
           min={1}
           max={10}
           onChange={handleUpdate}
+          sx={{ mr: 1 }}
         />
         <RatingField
           name="health_levels"
           value={battlegroup.health_levels}
-          label="Health Levels"
+          label="Health lvls"
           onChange={handleUpdate}
+          sx={{ mr: 1 }}
         />
         <RatingField
           name="willpower_temporary"
@@ -110,12 +112,14 @@ const BattlegroupEditor = () => {
           min={-Infinity}
           label="Initiative"
           onChange={handleUpdate}
+          sx={{ mr: 1 }}
         />
         <RatingField
           name="onslaught"
           value={battlegroup.onslaught}
           label="Onslaught"
           onChange={handleUpdate}
+          sx={{ mr: 1 }}
         />
       </div>
 
@@ -125,18 +129,21 @@ const BattlegroupEditor = () => {
           value={battlegroup.resolve}
           label="Resolve"
           onChange={handleUpdate}
+          sx={{ mr: 1 }}
         />
         <RatingField
           name="guile"
           value={battlegroup.guile}
           label="Guile"
           onChange={handleUpdate}
+          sx={{ mr: 1 }}
         />
         <RatingField
           name="appearance"
           value={battlegroup.appearance}
           label="Appearance"
           onChange={handleUpdate}
+          sx={{ mr: 1 }}
         />
         <RatingField
           name="senses"

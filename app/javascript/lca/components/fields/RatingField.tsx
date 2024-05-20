@@ -88,7 +88,8 @@ const RatingField = (props: RatingFieldProps) => {
       }}
       onFocus={selectOnFocus}
       onBlur={handleBlur}
-      sx={{ width: '4em', ...props.sx }}
+      sx={{ width: '4.1em', ...props.sx }}
+      margin={props.margin ?? 'dense'}
     />
   )
 }

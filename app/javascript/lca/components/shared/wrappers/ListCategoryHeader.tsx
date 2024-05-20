@@ -10,7 +10,7 @@ const ListCategoryHeader = ({ children }: props) => {
       variant="h5"
       position="sticky"
       top="64px"
-      sx={{ bgcolor: 'background.default', zIndex: 3 }}
+      sx={{ bgcolor: 'background.default', zIndex: 1, ml: -1, pl: 1 }}
     >
       {children}
     </Typography>

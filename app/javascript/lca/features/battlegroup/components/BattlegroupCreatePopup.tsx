@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import TextField from '@/components/fields/TextField'
@@ -22,7 +22,7 @@ const BattlegroupCreatePopup = () => {
     create({ name: bgname })
       .unwrap()
       .then((fulfilled) => {
-        navigate(`/new-battlegroups/${fulfilled.id}/edit`)
+        navigate(`/battlegroups/${fulfilled.id}/edit`)
       })
       .catch((rejected) => {
         console.error(rejected)
@@ -36,7 +36,7 @@ const BattlegroupCreatePopup = () => {
         Create New
       </Button>
 
-      <Dialog open={isOpen} onClose={close}>
+      <Dialog open={isOpen} onClose={close} disableRestoreFocus>
         <DialogTitle>Create New Battlegroup</DialogTitle>
 
         <DialogContent>
@@ -49,6 +49,7 @@ const BattlegroupCreatePopup = () => {
             onChange={(e) => setBgname(e.target.value)}
             nameField
             debounceDelay={0}
+            autoFocus
           />
         </DialogContent>
 

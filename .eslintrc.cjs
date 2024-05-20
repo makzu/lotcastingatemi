@@ -26,7 +26,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['cypress', 'react', '@typescript-eslint'],
+  plugins: ['cypress', 'react', '@typescript-eslint', 'material-ui'],
   rules: {
     'no-duplicate-imports': ['warn'],
     'react/jsx-boolean-value': ['warn', 'never'],

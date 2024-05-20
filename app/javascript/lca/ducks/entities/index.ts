@@ -70,58 +70,58 @@ export const defaultState: EntityState = {
 
 export const CABLE_RECEIVED = 'lca/cable/RECEIVED'
 
-export default createReducer(defaultState, {
-  ...PlayerReducer,
-  ...ChronicleReducer,
-  ...CharacterReducer,
-  ...MeritReducer,
-  ...WeaponReducer,
-  ...CharmReducer,
-  ...SpellReducer,
-  ...PoisonReducer,
-  ...QcReducer,
-  ...QcAttackReducer,
-  ...QcCharmReducer,
-  ...QcMeritReducer,
-  ...BattlegroupReducer,
-  ...CombatActorReducer,
-  [LOGOUT]: () => defaultState,
-  [CABLE_RECEIVED]: (state, action) => {
-    const { payload } = action
-    const { type, id, parent_type, parent_id, assoc } = payload
-    const pluralType = type + 's'
+// export default createReducer(defaultState, {
+//   ...PlayerReducer,
+//   ...ChronicleReducer,
+//   ...CharacterReducer,
+//   ...MeritReducer,
+//   ...WeaponReducer,
+//   ...CharmReducer,
+//   ...SpellReducer,
+//   ...PoisonReducer,
+//   ...QcReducer,
+//   ...QcAttackReducer,
+//   ...QcCharmReducer,
+//   ...QcMeritReducer,
+//   ...BattlegroupReducer,
+//   ...CombatActorReducer,
+//   [LOGOUT]: () => defaultState,
+//   [CABLE_RECEIVED]: (state, action) => {
+//     const { payload } = action
+//     const { type, id, parent_type, parent_id, assoc } = payload
+//     const pluralType = type + 's'
 
-    switch (payload.event) {
-      case 'create':
-        const entity = JSON.parse(payload.entity)
-        const entities = normalize(entity, schemas[type])
-        const newState = mergeEntity(state, { payload: entities })
+//     switch (payload.event) {
+//       case 'create':
+//         const entity = JSON.parse(payload.entity)
+//         const entities = normalize(entity, schemas[type])
+//         const newState = mergeEntity(state, { payload: entities })
 
-        newState[parent_type][parent_id][assoc] = [
-          ...new Set([...state[parent_type][parent_id][assoc], entity.id]),
-        ]
-        return newState
+//         newState[parent_type][parent_id][assoc] = [
+//           ...new Set([...state[parent_type][parent_id][assoc], entity.id]),
+//         ]
+//         return newState
 
-      case 'update':
-        state[pluralType][id] = { ...state[pluralType][id], ...payload.changes }
-        break
+//       case 'update':
+//         state[pluralType][id] = { ...state[pluralType][id], ...payload.changes }
+//         break
 
-      case 'destroy':
-        const { chronicle_id } = payload
+//       case 'destroy':
+//         const { chronicle_id } = payload
 
-        if (chronicle_id && state.chronicles[chronicle_id]) {
-          state.chronicles[chronicle_id][type] = state.chronicles[chronicle_id][
-            type
-          ].filter((e) => e !== id)
-        }
+//         if (chronicle_id && state.chronicles[chronicle_id]) {
+//           state.chronicles[chronicle_id][type] = state.chronicles[chronicle_id][
+//             type
+//           ].filter((e) => e !== id)
+//         }
 
-        if (state[parent_type]?.[parent_id]) {
-          state[parent_type][parent_id][assoc] = state[parent_type][parent_id][
-            assoc
-          ].filter((e) => e !== id)
-        }
+//         if (state[parent_type]?.[parent_id]) {
+//           state[parent_type][parent_id][assoc] = state[parent_type][parent_id][
+//             assoc
+//           ].filter((e) => e !== id)
+//         }
 
-        delete state[pluralType][id]
-    }
-  },
-})
+//         delete state[pluralType][id]
+//     }
+//   },
+// })

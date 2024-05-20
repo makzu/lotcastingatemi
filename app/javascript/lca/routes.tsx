@@ -32,6 +32,7 @@ const HelpPage = lazy(() => import('components/pages/Help'))
 
 const NewBattlegroupSheet = lazy(() => import('@/features/battlegroup/sheet'))
 const NewBattlegroupEditor = lazy(() => import('@/features/battlegroup/editor'))
+const NewBattlegroupList = lazy(() => import('@/features/battlegroup/list'))
 
 export default function Routes() {
   return (
@@ -69,6 +70,7 @@ export default function Routes() {
           path="/new-battlegroups/:id/edit"
           element={<NewBattlegroupEditor />}
         />
+        <Route path="/new-battlegroups" element={<NewBattlegroupList />} />
 
         <Route path="/" element={<WelcomePage />} />
       </Switch>

@@ -80,14 +80,14 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 export function fetchAll() {
   return (dispatch: AppDispatch, getState: GetState) => {
     void dispatch(fetchCurrentPlayer())
-      .then(() => dispatch(fetchAllCharacters()))
-      .then(() => dispatch(fetchAllQcs()))
-      .then(() => dispatch(fetchAllBattlegroups()))
-      .then(() => {
-        UpdatesCable.subscribe(getState, (data) =>
-          dispatch({ type: 'lca/cable/RECEIVED', payload: data }),
-        )
-      })
+    // .then(() => dispatch(fetchAllCharacters()))
+    // .then(() => dispatch(fetchAllQcs()))
+    // .then(() => dispatch(fetchAllBattlegroups()))
+    // .then(() => {
+    //   UpdatesCable.subscribe(getState, (data) =>
+    //     dispatch({ type: 'lca/cable/RECEIVED', payload: data }),
+    //   )
+    // })
   }
 }
 

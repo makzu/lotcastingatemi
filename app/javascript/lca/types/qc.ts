@@ -1,5 +1,5 @@
 import type { Sortable } from '@/utils'
-import type { PlayerAsset } from './_lib'
+import type { PlayerAsset, Timing, WithId } from './_lib'
 import type { WithSharedStats } from './shared'
 
 export type AttackRange = 'close' | 'short' | 'medium' | 'long' | 'extreme'
@@ -23,20 +23,11 @@ export interface QC extends PlayerAsset, WithSharedStats {
   join_battle: number
   name: string
   ref: string
-
-  appearance: number
-  evasion: number
   feats_of_strength: number
   grapple: number
   grapple_control: number
-  guile: number
-  join_battle: number
-  parry: number
-  resolve: number
-  senses: number
   shape_sorcery: number
   strength: number
-
   excellency: string
   actions: QcAction[]
   qc_attacks: number[]
@@ -46,17 +37,35 @@ export interface QC extends PlayerAsset, WithSharedStats {
   type: 'qc'
 }
 
-export interface QcAttack extends Sortable {
-  id: number
+export interface QcAttack extends Sortable, WithId {
   name: string
   pool: number
   range: AttackRange
   damage: number
   overwhelming: number
   tags: string[]
+  qc_attackable_type: 'Qc' | 'Battlegroup'
+  qc_attackable_id: number
 }
 
-export interface QcMerit extends Sortable {
-  id: number
+export interface QcMerit extends Sortable, WithId {
   name: string
+  body: string
+  latent: boolean
+  magical: boolean
+  ref: string
+  qc_id: number
+}
+
+export interface QcCharm extends Sortable, WithId {
+  name: string
+  cost: string
+  timing: Timing
+  duration: string
+  keywords: string[]
+  min_essence: number
+  body: string
+  ref: string
+  category: string
+  qc_id: number
 }

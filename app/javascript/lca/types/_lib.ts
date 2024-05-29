@@ -23,6 +23,8 @@ export interface PlayerAsset extends WithId, ChSortable, Sortable {
   public: boolean
   pinned: boolean
   hidden: boolean
+  editable: boolean
+  deletable: boolean
 }
 
 export interface CharacterTrait extends WithId, Sortable {

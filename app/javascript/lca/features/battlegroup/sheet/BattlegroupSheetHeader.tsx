@@ -5,8 +5,7 @@ import { Button, Toolbar, Typography, type ButtonProps } from '@mui/material'
 import CharacterMenu from '@/components/generic/CharacterMenu'
 import LcaDrawerButton from '@/components/header/DrawerButton'
 import { GenericHeader } from '@/components/header/Header'
-import { canIEditBattlegroup } from '@/ducks/entities'
-import { useAppSelector, useIdFromParams } from '@/hooks'
+import { useIdFromParams } from '@/hooks'
 import { useGetBattlegroupQuery } from '../store'
 
 const LinkButton = (props: ButtonProps & LinkProps) => (
@@ -16,10 +15,13 @@ const LinkButton = (props: ButtonProps & LinkProps) => (
 function BattlegroupSheetHeader() {
   const id = useIdFromParams()
   const { data: battlegroup } = useGetBattlegroupQuery(id)
-  const canIEdit = useAppSelector((state) => canIEditBattlegroup(state, id))
-  const nonEditPath = `/new-battlegroups/${id}`
-  const editPath = `/new-battlegroups/${id}/edit`
-  const isEditing = useLocation().pathname.includes('/edit')
+
+  const editing = useLocation().pathname.includes('/edit')
+  let editButtonPath = `/battlegroups/${id}`
+
+  if (!editing) {
+    editButtonPath += '/edit'
+  }
 
   if (battlegroup == undefined) {
     return <GenericHeader />
@@ -30,15 +32,13 @@ function BattlegroupSheetHeader() {
       <LcaDrawerButton />
 
       <Typography variant="h6" color="inherit">
+        {editing && 'Editing '}
         {battlegroup?.name}
       </Typography>
 
-      {canIEdit &&
-        (isEditing ? (
-          <LinkButton to={nonEditPath}>Done</LinkButton>
-        ) : (
-          <LinkButton to={editPath}>Edit</LinkButton>
-        ))}
+      {battlegroup?.editable && (
+        <LinkButton to={editButtonPath}>{editing ? 'Done' : 'Edit'}</LinkButton>
+      )}
 
       <div className="flex" />
 

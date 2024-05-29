@@ -11,7 +11,6 @@ const BattlegroupEditor = () => {
   const id = useIdFromParams()
   const { data: battlegroup } = useGetBattlegroupQuery(id)
   const [updateBattlegroup] = useUpdateBattlegroupMutation()
-  const showDelete = battlegroup?.id === useCurrentPlayerId()
 
   useDocumentTitle(
     `${battlegroup && battlegroup.name + ' | '}Lot-Casting Atemi`,
@@ -52,7 +51,7 @@ const BattlegroupEditor = () => {
           onChange={handleUpdate}
           nameField
         />
-        {showDelete && (
+        {!!battlegroup.deletable && (
           <FormControlLabel
             label="Publicly Viewable"
             control={

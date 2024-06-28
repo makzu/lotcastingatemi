@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema-jsonc.json",
+
+  "entry": "./app/javascript/lca/entrypoints/application.ts",
+  "project": [
+    "./app/javascript/lca/**/*.ts",
+    "./app/javascript/lca/**/*.tsx",
+    "./docs/*.md"
+  ],
+  "paths": {
+    "Docs/*": ["./docs/*"]
+  }
+}

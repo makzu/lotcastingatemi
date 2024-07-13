@@ -14,7 +14,7 @@ class Weapon < ApplicationRecord
 
   normalizes :tags, with: method(:trim_array_attribute)
 
-  before_validation :set_traits_for_elemental_bolt
+  before_validation :set_traits_for_bolt_attacks
 
   validates :overrides, json: { schema: Schemas::WEAPON_OVERRIDES }
   validates :weight, inclusion: { in: %w[ light medium heavy ] }
@@ -22,10 +22,11 @@ class Weapon < ApplicationRecord
   validates :damage_attr, inclusion: { in: Constants::ATTRIBUTES + ['essence'] }
 
   # Elemental Bolt stats are in WFHW, page 215
-  def set_traits_for_elemental_bolt
+  # Crypt Bolt stats are in the Abyssals manuscript preview, page 290-291
+  def set_traits_for_bolt_attacks
     return unless will_save_change_to_attribute? :tags
 
-    return unless tags.include?('elemental bolt') && tags_was.exclude?('elemental bolt')
+    return unless (tags.include?('elemental bolt') && tags_was.exclude?('elemental bolt')) || (tags.include?('crypt bolt') && tags_was.exclude?('crypt bolt'))
 
     overrides['damage_attribute'] = { 'use' => 'essence' }
     self.is_artifact = true

@@ -8,7 +8,7 @@ import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import commonStyles from 'styles'
 import type { fullWeapon } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
   container: {
     display: 'flex',
@@ -62,10 +62,16 @@ type Props = {
 }
 function WeaponLine({ weapon, classes }: Props) {
   let artifactLabel
-  if (weapon.is_artifact && !weapon.tags.includes('elemental bolt'))
+  if (
+    weapon.is_artifact &&
+    !weapon.tags.includes('elemental bolt') &&
+    !weapon.tags.includes('crypt bolt')
+  )
     artifactLabel = <div className={classes.artifactLabel}>Artifact</div>
   else if (weapon.tags.includes('elemental bolt'))
     artifactLabel = <div className={classes.artifactLabel}>Elemental Bolt</div>
+  else if (weapon.tags.includes('crypt bolt'))
+    artifactLabel = <div className={classes.artifactLabel}>Crypt Bolt</div>
 
   return (
     <div className={classes.container}>

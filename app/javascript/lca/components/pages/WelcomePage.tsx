@@ -71,7 +71,7 @@ const WelcomePage = () => (
           Bonuses and penalties from a growing list of merits, flaws, and
           control spells are automatically included in dice pools. Nearly every
           weapon tag is supported, even for esoteric weapons like The Burning
-          Name and Elemental Bolt Attack.
+          Name, Elemental Bolt Attack, and Crypt Bolt Attack..
         </Typography>
       </BlockPaper>
     </Grid>

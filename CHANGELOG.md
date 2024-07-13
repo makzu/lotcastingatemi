@@ -1,8 +1,14 @@
-## v111
+## v112
 
 ###### _Unreleased_
 
 - Nothing (yet)
+
+## v111
+
+###### _Unreleased_
+
+- Added handling for Crypt Bolt attack. Just add `crypt bolt` to a weapon's tags for automatic handling.
 
 ## v110
 

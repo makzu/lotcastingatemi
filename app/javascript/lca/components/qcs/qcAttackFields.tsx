@@ -9,7 +9,7 @@ import withStyles from '@mui/styles/withStyles'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ContentRemoveCircle from '@mui/icons-material/RemoveCircle'
 
-import RangeSelect from '@/components/generic/RangeSelect'
+import RangeSelect from '@/components/selects/RangeSelect'
 import RatingField from '../generic/RatingField'
 import TagsField from '@/components/generic/TagsField'
 import TextField from '@/components/generic/TextField'

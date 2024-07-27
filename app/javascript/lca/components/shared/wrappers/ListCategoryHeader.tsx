@@ -1,16 +1,23 @@
-import { Typography } from '@mui/material'
+import { type SxProps, Typography } from '@mui/material'
 
-interface props {
+const ListCategoryHeader = (props: {
   children: React.ReactNode
-}
-
-const ListCategoryHeader = ({ children }: props) => {
+  noBg?: boolean
+  sx?: SxProps
+}) => {
+  const { children, noBg, sx } = props
   return (
     <Typography
       variant="h5"
       position="sticky"
       top="64px"
-      sx={{ bgcolor: 'background.default', zIndex: 1, ml: -1, pl: 1 }}
+      sx={{
+        bgcolor: noBg ? 'unset' : 'background.default',
+        zIndex: 1,
+        ml: -1,
+        pl: 1,
+        ...sx,
+      }}
     >
       {children}
     </Typography>

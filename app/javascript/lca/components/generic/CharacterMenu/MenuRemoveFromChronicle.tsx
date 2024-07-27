@@ -28,7 +28,7 @@ const CardMenuRemove = ({ id, characterType }: Props) => {
         <ListItemIcon>
           <RemoveCircle />
         </ListItemIcon>
-        <ListItemText inset primary="Remove from Chronicle" />
+        <ListItemText primary="Remove from Chronicle" />
       </MenuItem>
     </>
   )

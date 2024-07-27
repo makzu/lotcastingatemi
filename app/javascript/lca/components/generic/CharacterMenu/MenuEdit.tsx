@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
-
 import Edit from '@mui/icons-material/Edit'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 import { useAppSelector } from '@/hooks'
 import { canIEdit } from '@/selectors'
@@ -15,7 +14,7 @@ const CardMenuEdit = ({ id, characterType }: Props) => {
       <ListItemIcon>
         <Edit />
       </ListItemIcon>
-      <ListItemText inset primary="Edit" />
+      <ListItemText primary="Edit" />
     </MenuItem>
   )
 }

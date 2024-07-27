@@ -37,17 +37,14 @@ const CardMenuPin = ({ id, characterType }: Props) => {
         <ListItemIcon>
           {pinned ? <Bookmark /> : <BookmarkBorder />}
         </ListItemIcon>
-        <ListItemText inset primary={pinned ? 'Unpin' : 'Pin to Menu'} />
+        <ListItemText primary={pinned ? 'Unpin' : 'Pin to Menu'} />
       </MenuItem>
 
       <MenuItem onClick={() => hide(!hidden)}>
         <ListItemIcon>
           {hidden ? <Visibility /> : <VisibilityOff />}
         </ListItemIcon>
-        <ListItemText
-          inset
-          primary={hidden ? 'Unhide' : 'Hide from other players'}
-        />
+        <ListItemText primary={hidden ? 'Unhide' : 'Hide from other players'} />
       </MenuItem>
     </>
   )

@@ -1,5 +1,4 @@
-import { Drawer, useMediaQuery, type Theme } from '@mui/material'
-import { Box } from '@mui/system'
+import { Box, Drawer, useMediaQuery, type Theme } from '@mui/material'
 
 import { drawerWidth } from '@/containers/_drawerProperties'
 import { useGetCurrentPlayerQuery } from '@/features/player/store'

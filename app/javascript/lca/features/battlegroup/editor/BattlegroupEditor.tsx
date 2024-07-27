@@ -1,15 +1,21 @@
-import { Checkbox, FormControlLabel, Typography } from '@mui/material'
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Skeleton,
+  Typography,
+} from '@mui/material'
 
+import RatingField from '@/components/fields/RatingField'
 import TextField from '@/components/fields/TextField'
 import BlockPaper from '@/components/shared/BlockPaper'
-import { useCurrentPlayerId, useDocumentTitle, useIdFromParams } from '@/hooks'
-import BattlegroupAttackDisplay from '../components/BattlegroupAttackDisplay'
+import { useDocumentTitle, useIdFromParams } from '@/hooks'
 import { useGetBattlegroupQuery, useUpdateBattlegroupMutation } from '../store'
-import RatingField from '@/components/fields/RatingField'
+import BattlegroupAttackEditor from './BattlegroupAttackEditor'
 
 const BattlegroupEditor = () => {
   const id = useIdFromParams()
-  const { data: battlegroup } = useGetBattlegroupQuery(id)
+  const { data: battlegroup, isLoading, error } = useGetBattlegroupQuery(id)
   const [updateBattlegroup] = useUpdateBattlegroupMutation()
 
   useDocumentTitle(
@@ -23,26 +29,45 @@ const BattlegroupEditor = () => {
     updateBattlegroup({ id, [name]: checkbox ? checked : value })
   }
 
-  if (!battlegroup)
+  if (isLoading || !battlegroup) {
     return (
       <BlockPaper>
-        <Typography paragraph>This Battlegroup has not yet loaded.</Typography>
+        <Skeleton variant="text" />
+        <Skeleton variant="text" />
+      </BlockPaper>
+    )
+  }
+
+  if (error)
+    return (
+      <BlockPaper>
+        <Typography paragraph>{JSON.stringify(error)}</Typography>
       </BlockPaper>
     )
 
+  if (!battlegroup?.editable) {
+    return (
+      <BlockPaper>
+        <Typography paragraph>
+          You do not have permission to edit this.
+        </Typography>
+      </BlockPaper>
+    )
+  }
+
   return (
     <BlockPaper>
-      <Typography variant="caption">
+      <Typography variant="caption" paragraph>
         Rules for battlegroups can be found in the Core book starting at page
         205.
       </Typography>
 
-      <Typography variant="caption">
+      <Typography variant="caption" paragraph>
         (Use the stats of an average member of the group - bonuses from
         drill/might/etc are added automatically)
       </Typography>
 
-      <div className="flexContainer">
+      <Box className="flexContainer" sx={{ mb: 1 }}>
         <TextField
           label="Name"
           name="name"
@@ -61,11 +86,12 @@ const BattlegroupEditor = () => {
                 onChange={handleUpdate}
               />
             }
+            sx={{ ml: 1 }}
           />
         )}
-      </div>
+      </Box>
 
-      <div className="flexContainer">
+      <Box className="flexContainer" sx={{ mb: 1 }}>
         <RatingField
           label="Essence"
           name="essence"
@@ -102,9 +128,9 @@ const BattlegroupEditor = () => {
           label="Perm WP"
           onChange={handleUpdate}
         />
-      </div>
+      </Box>
 
-      <div className="flexContainerWrap">
+      <Box className="flexContainerWrap" sx={{ mb: 1 }}>
         <RatingField
           name="initiative"
           value={battlegroup.initiative}
@@ -120,9 +146,9 @@ const BattlegroupEditor = () => {
           onChange={handleUpdate}
           sx={{ mr: 1 }}
         />
-      </div>
+      </Box>
 
-      <div className="flexContainerWrap">
+      <Box className="flexContainerWrap">
         <RatingField
           name="resolve"
           value={battlegroup.resolve}
@@ -150,15 +176,9 @@ const BattlegroupEditor = () => {
           label="Senses"
           onChange={handleUpdate}
         />
-      </div>
+      </Box>
 
-      {battlegroup.qc_attacks.map((attack) => (
-        <BattlegroupAttackDisplay
-          battlegroup={battlegroup}
-          attack={attack}
-          key={attack.id}
-        />
-      ))}
+      <BattlegroupAttackEditor battlegroup={battlegroup} />
     </BlockPaper>
   )
 }

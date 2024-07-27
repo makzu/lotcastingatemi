@@ -3,7 +3,6 @@ import { Typography } from '@mui/material'
 import BlockPaper from '@/components/shared/BlockPaper'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
 import { useDocumentTitle, useIdFromParams } from '@/hooks'
-import { sortOrderSort } from '@/utils'
 import BattlegroupAttackDisplay from '../components/BattlegroupAttackDisplay'
 import BattlegroupHealthDisplay from '../components/BattlegroupHealthDisplay'
 import BattlegroupPoolDisplay from '../components/BattlegroupPoolDisplay'
@@ -109,7 +108,7 @@ const BattlegroupSheet = () => {
       <Typography variant="subtitle1" sx={{ mt: 2 }}>
         Attacks
       </Typography>
-      {battlegroup.qc_attacks.sort(sortOrderSort).map((attack) => (
+      {battlegroup.qc_attacks.map((attack) => (
         <BattlegroupAttackDisplay
           battlegroup={battlegroup}
           attack={attack}

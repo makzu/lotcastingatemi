@@ -1,17 +1,19 @@
 import {
   DELETE,
-  LISTid,
   PATCH,
   POST,
   emptySplitApi,
+  listTag,
+  providesList,
   type APIPartial,
   type SortPartial,
 } from '@/features/api'
-import type { Battlegroup } from '../types'
+// import type { Battlegroup } from '../types'
+import { type Battlegroup } from '../types'
 
-export const BATTLEGROUP = 'BATTLEGROUP'
+export const BATTLEGROUP = 'battlegroup'
 
-const bgListTag = { type: BATTLEGROUP, id: LISTid } as const
+const bgListTag = listTag(BATTLEGROUP)
 
 export const battlegroupApi = emptySplitApi
   .enhanceEndpoints({ addTagTypes: [BATTLEGROUP] })
@@ -19,6 +21,9 @@ export const battlegroupApi = emptySplitApi
     endpoints: (build) => ({
       getBattlegroup: build.query<Battlegroup, Battlegroup['id']>({
         query: (id) => ({ url: `battlegroups/${id}` }),
+        // transformResponse: (response) => {
+        //   return normalize(response, bgSchema)
+        // },
         providesTags: (_result, _error, id) => [{ type: BATTLEGROUP, id }],
       }),
 
@@ -36,12 +41,13 @@ export const battlegroupApi = emptySplitApi
         invalidatesTags: [bgListTag],
       }),
 
-      updateBattlegroup: build.mutation<void, APIPartial<Battlegroup>>({
+      updateBattlegroup: build.mutation<Battlegroup, APIPartial<Battlegroup>>({
         query: ({ id, ...patch }) => ({
           url: `battlegroups/${id}`,
           method: PATCH,
           body: { battlegroup: patch },
         }),
+        // optimistic update
         async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
           const patchResult = dispatch(
             battlegroupApi.util.updateQueryData(
@@ -64,7 +70,10 @@ export const battlegroupApi = emptySplitApi
         ],
       }),
 
-      updateBattlegroupSort: build.mutation<void, SortPartial<Battlegroup>>({
+      updateBattlegroupSort: build.mutation<
+        Battlegroup,
+        SortPartial<Battlegroup>
+      >({
         query: ({ id, sorting_position }) => ({
           url: `battlegroups/${id}`,
           method: PATCH,
@@ -84,13 +93,7 @@ export const battlegroupApi = emptySplitApi
       // TODO make this a separate reducer that hits an endpoint and only gets IDs of things to fetch later
       listBattlegroups: build.query<Battlegroup[], number>({
         query: (page = 1) => ({ url: `battlegroups?page=${page}` }),
-        providesTags: (result, _error, _page) =>
-          result
-            ? [
-                ...result.map(({ id }) => ({ type: BATTLEGROUP, id } as const)),
-                bgListTag,
-              ]
-            : [bgListTag],
+        providesTags: (result) => providesList(result, BATTLEGROUP),
       }),
     }),
     overrideExisting: false,

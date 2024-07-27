@@ -2,6 +2,7 @@ import { VisibilityOff } from '@mui/icons-material'
 import { Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
+import CharacterMenu from '@/components/generic/CharacterMenu'
 import CardBase from '@/components/shared/CardBase'
 import { type Battlegroup } from '@/types'
 import { bgSoak, prettyDrillRating } from '../lib'
@@ -10,11 +11,7 @@ import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 import BattlegroupPoolDisplay from './BattlegroupPoolDisplay'
 import BgBox from './BgBox'
 
-interface bgCardProps {
-  id: Battlegroup['id']
-}
-
-const BattlegroupCard = ({ id }: bgCardProps) => {
+const BattlegroupCard = ({ id }: { id: Battlegroup['id'] }) => {
   const { data: battlegroup, error, isLoading } = useGetBattlegroupQuery(id)
 
   if (error) return <div>An error has occurred: {JSON.stringify(error)}</div>
@@ -22,19 +19,28 @@ const BattlegroupCard = ({ id }: bgCardProps) => {
 
   return (
     <CardBase>
-      <Typography
-        variant="h6"
-        component={Link}
-        to={`/new-battlegroups/${battlegroup.id}`}
-        sx={{ textDecoration: 'none', color: 'inherit' }}
-      >
-        {battlegroup.name}
-        {battlegroup.hidden && (
-          <div>
-            <VisibilityOff />
-            Hidden
-          </div>
-        )}
+      <Typography component="div" className="flexContainer">
+        <Typography
+          variant="h6"
+          component={Link}
+          to={`/battlegroups/${battlegroup.id}`}
+          sx={{ textDecoration: 'none', color: 'inherit' }}
+          className="flex"
+        >
+          {battlegroup.name}
+          {battlegroup.hidden && (
+            <div>
+              <VisibilityOff />
+              Hidden
+            </div>
+          )}
+        </Typography>
+
+        <CharacterMenu
+          characterType="battlegroup"
+          id={battlegroup.id}
+          chronicle={false}
+        />
       </Typography>
 
       <div className="flexContainerWrap">

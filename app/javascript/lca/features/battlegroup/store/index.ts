@@ -3,4 +3,10 @@ export {
   useGetBattlegroupQuery,
   useUpdateBattlegroupMutation,
 } from './battlegroup'
-export { bgAttackApi } from './qcAttack'
+
+export {
+  bgAttackApi,
+  useCreateBattlegroupAttackMutation,
+  useUpdateBattlegroupAttackMutation,
+  useDeleteBattlegroupAttackMutation,
+} from './qcAttack'

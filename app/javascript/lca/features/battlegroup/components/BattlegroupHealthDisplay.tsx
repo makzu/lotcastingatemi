@@ -30,7 +30,7 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
 
   return (
     <>
-      <ButtonBase onClick={setOpen} sx={{ alignItems: 'inherit' }}>
+      <ButtonBase sx={{ alignItems: 'inherit' }} onClick={setOpen}>
         <Box sx={{ mr: 1, minWidth: '4.5rem' }}>
           <ResourceDisplay
             label="Magnitude"
@@ -68,6 +68,8 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
             <div className="flex align">
               <RatingField
                 label="Magnitude"
+                id={`magnitude-${battlegroup.id}`}
+                name="magnitude"
                 value={magnitude}
                 onChange={(e) => setMagnitude(Number(e.target.value))}
               />
@@ -79,6 +81,8 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
             <div className="flex">
               <RatingField
                 label="Size"
+                id={`size-${battlegroup.id}`}
+                name="size"
                 value={size}
                 onChange={(e) => setSize(Number(e.target.value))}
               />
@@ -92,7 +96,7 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
 
         <DialogActions>
           <Button onClick={setClosed}>Close</Button>
-          <Button onClick={setClosed} variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={setClosed}>
             Save
           </Button>
         </DialogActions>

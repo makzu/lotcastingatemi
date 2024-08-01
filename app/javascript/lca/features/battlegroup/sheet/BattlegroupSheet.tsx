@@ -110,9 +110,9 @@ const BattlegroupSheet = () => {
       </Typography>
       {battlegroup.qc_attacks.map((attack) => (
         <BattlegroupAttackDisplay
+          key={attack.id}
           battlegroup={battlegroup}
           attack={attack}
-          key={attack.id}
         />
       ))}
 

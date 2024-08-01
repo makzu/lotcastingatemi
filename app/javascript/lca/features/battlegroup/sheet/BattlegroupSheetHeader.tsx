@@ -42,7 +42,7 @@ function BattlegroupSheetHeader() {
 
       <div className="flex" />
 
-      <CharacterMenu id={id} characterType="battlegroup" header />
+      <CharacterMenu header id={id} characterType="battlegroup" />
     </Toolbar>
   )
 }

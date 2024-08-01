@@ -6,7 +6,7 @@ import TagsField from '@/components/fields/TagsField'
 import LcaTextField from '@/components/fields/TextField'
 import RangeSelect from '@/components/selects/RangeSelect'
 import type { QcAttack } from '@/types'
-import { bgDamage } from '@/utils/calculated'
+import { bgDamage } from '../lib'
 import {
   useDeleteBattlegroupAttackMutation,
   useUpdateBattlegroupAttackMutation,
@@ -36,13 +36,14 @@ const BattlegroupAttackFields = ({ battlegroup, attack }: Props) => {
       <DragHandle sx={{ alignSelf: 'center', mr: 1 }} />
 
       <LcaTextField
+        nameField
         label="Name"
         name="name"
-        nameField
         value={attack.name}
-        onChange={handleChange}
         margin="dense"
         sx={{ mr: 1 }}
+        id={`attack-${attack.id}-name`}
+        onChange={handleChange}
       />
 
       <RatingField
@@ -50,8 +51,9 @@ const BattlegroupAttackFields = ({ battlegroup, attack }: Props) => {
         value={attack.pool}
         label="Pool"
         min={1}
-        onChange={handleChange}
         sx={{ mr: 1 }}
+        id={`attack-${attack.id}-pool`}
+        onChange={handleChange}
       />
 
       <RatingField
@@ -59,6 +61,7 @@ const BattlegroupAttackFields = ({ battlegroup, attack }: Props) => {
         value={attack.damage}
         label="Damage"
         min={1}
+        id={`attack-${attack.id}-damage`}
         onChange={handleChange}
       />
 
@@ -75,8 +78,9 @@ const BattlegroupAttackFields = ({ battlegroup, attack }: Props) => {
         value={attack.overwhelming}
         label="Min"
         min={1}
-        onChange={handleChange}
         sx={{ mr: 1 }}
+        id={`attack-${attack.id}-overwhelming`}
+        onChange={handleChange}
       />
 
       <TagsField
@@ -84,13 +88,14 @@ const BattlegroupAttackFields = ({ battlegroup, attack }: Props) => {
         value={attack.tags}
         label="Tags (comma separated)"
         margin="dense"
-        onChange={handleChange}
         sx={{ mr: 1 }}
+        id={`attack-${attack.id}-tags`}
+        onChange={handleChange}
       />
 
       <RangeSelect name="range" value={attack.range} onChange={handleChange} />
 
-      <IconButton onClick={handleRemove} size="large" aria-label="delete">
+      <IconButton size="large" aria-label="delete" onClick={handleRemove}>
         <RemoveCircle />
       </IconButton>
     </Box>

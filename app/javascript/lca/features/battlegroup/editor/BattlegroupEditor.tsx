@@ -57,35 +57,36 @@ const BattlegroupEditor = () => {
 
   return (
     <BlockPaper>
-      <Typography variant="caption" paragraph>
+      <Typography paragraph variant="caption">
         Rules for battlegroups can be found in the Core book starting at page
         205.
       </Typography>
 
-      <Typography variant="caption" paragraph>
+      <Typography paragraph variant="caption">
         (Use the stats of an average member of the group - bonuses from
         drill/might/etc are added automatically)
       </Typography>
 
       <Box className="flexContainer" sx={{ mb: 1 }}>
         <TextField
+          nameField
+          className="flex"
+          id="battlegroup-name"
           label="Name"
           name="name"
           value={battlegroup.name}
-          className="flex"
           onChange={handleUpdate}
-          nameField
         />
         {!!battlegroup.deletable && (
           <FormControlLabel
-            label="Publicly Viewable"
             control={
               <Checkbox
-                name="public"
                 checked={battlegroup.public}
+                name="public"
                 onChange={handleUpdate}
               />
             }
+            label="Publicly Viewable"
             sx={{ ml: 1 }}
           />
         )}
@@ -93,25 +94,28 @@ const BattlegroupEditor = () => {
 
       <Box className="flexContainer" sx={{ mb: 1 }}>
         <RatingField
+          id="battlegroup-essence"
           label="Essence"
-          name="essence"
           value={battlegroup.essence}
-          min={1}
           max={10}
-          onChange={handleUpdate}
+          min={1}
+          name="essence"
           sx={{ mr: 1 }}
+          onChange={handleUpdate}
         />
         <RatingField
+          id="battlegroup-health_levels"
+          label="Health lvls"
           name="health_levels"
           value={battlegroup.health_levels}
-          label="Health lvls"
-          onChange={handleUpdate}
           sx={{ mr: 1 }}
+          onChange={handleUpdate}
         />
         <RatingField
+          id="battlegroup-willpower_temporary"
+          label="Temp WP"
           name="willpower_temporary"
           value={battlegroup.willpower_temporary}
-          label="Temp WP"
           onChange={handleUpdate}
         />
         <Typography
@@ -121,59 +125,66 @@ const BattlegroupEditor = () => {
           /
         </Typography>
         <RatingField
+          id="battlegroup-willpower_permanent"
           name="willpower_permanent"
           value={battlegroup.willpower_permanent}
-          min={1}
-          max={10}
           label="Perm WP"
+          max={10}
+          min={1}
           onChange={handleUpdate}
         />
       </Box>
 
       <Box className="flexContainerWrap" sx={{ mb: 1 }}>
         <RatingField
+          id="battlegroup-initiative"
           name="initiative"
+          label="Initiative"
           value={battlegroup.initiative}
           min={-Infinity}
-          label="Initiative"
-          onChange={handleUpdate}
           sx={{ mr: 1 }}
+          onChange={handleUpdate}
         />
         <RatingField
+          id="battlegroup-onslaught"
+          label="Onslaught"
           name="onslaught"
           value={battlegroup.onslaught}
-          label="Onslaught"
-          onChange={handleUpdate}
           sx={{ mr: 1 }}
+          onChange={handleUpdate}
         />
       </Box>
 
       <Box className="flexContainerWrap">
         <RatingField
-          name="resolve"
-          value={battlegroup.resolve}
+          id="battlegroup-resolve"
           label="Resolve"
-          onChange={handleUpdate}
+          name="resolve"
           sx={{ mr: 1 }}
+          value={battlegroup.resolve}
+          onChange={handleUpdate}
         />
         <RatingField
+          id="battlegroup-guile"
+          label="Guile"
           name="guile"
           value={battlegroup.guile}
-          label="Guile"
-          onChange={handleUpdate}
           sx={{ mr: 1 }}
+          onChange={handleUpdate}
         />
         <RatingField
+          id="battlegroup-appearance"
+          label="Appearance"
           name="appearance"
           value={battlegroup.appearance}
-          label="Appearance"
-          onChange={handleUpdate}
           sx={{ mr: 1 }}
+          onChange={handleUpdate}
         />
         <RatingField
+          id="battlegroup-senses"
+          label="Senses"
           name="senses"
           value={battlegroup.senses}
-          label="Senses"
           onChange={handleUpdate}
         />
       </Box>

@@ -1,10 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import BattlegroupAttackDisplay from './BattlegroupAttackDisplay'
-import type { Battlegroup as OldBattlegroup, QcAttack } from '@/types'
 
-interface Battlegroup extends Omit<OldBattlegroup, 'qc_attacks'> {
-  qc_attacks: QcAttack[]
-}
+import type { QcAttack } from '@/types'
+import type { Battlegroup } from '../types'
+import BattlegroupAttackDisplay from './BattlegroupAttackDisplay'
 
 describe('BattlegroupAttackDisplay', () => {
   const battlegroup: Partial<Battlegroup> = {

@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import TextField from '@/components/fields/TextField'
@@ -32,35 +32,35 @@ const BattlegroupCreatePopup = () => {
 
   return (
     <>
-      <Button onClick={open} data-cy="create-battlegroup">
+      <Button data-testid="create-battlegroup" onClick={open}>
         Create New
       </Button>
 
-      <Dialog open={isOpen} onClose={close} disableRestoreFocus>
+      <Dialog disableRestoreFocus open={isOpen} onClose={close}>
         <DialogTitle>Create New Battlegroup</DialogTitle>
 
         <DialogContent>
           <TextField
+            fullWidth
+            nameField
+            autoFocus
             name="name"
             value={bgname}
             label="Name"
             margin="normal"
-            fullWidth
-            onChange={(e) => setBgname(e.target.value)}
-            nameField
             debounceDelay={0}
-            autoFocus
+            id="battlegroup-name"
+            onChange={(e) => setBgname(e.target.value)}
           />
         </DialogContent>
 
         <DialogActions>
           <Button onClick={close}>Cancel</Button>
           <Button
-            onClick={handleSubmit}
             variant="contained"
             color="primary"
-            data-cy="submit"
             data-testid="submit"
+            onClick={handleSubmit}
           >
             Create
           </Button>

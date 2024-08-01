@@ -1,14 +1,14 @@
 import {
+  TextField,
+  type TextFieldProps as MuiTextFieldProps,
+} from '@mui/material'
+import {
   useEffect,
   useState,
   type ChangeEvent,
   type ChangeEventHandler,
+  type HTMLAttributes,
 } from 'react'
-
-import {
-  TextField,
-  type TextFieldProps as MuiTextFieldProps,
-} from '@mui/material'
 
 import { useDebounce } from '@/hooks'
 
@@ -20,6 +20,7 @@ export type TextFieldProps = Omit<
   onChange: ChangeEventHandler<HTMLInputElement>
   nameField?: boolean
   debounceDelay?: number
+  id: HTMLAttributes<'id'>
 }
 
 const nameProps: MuiTextFieldProps['inputProps'] = {

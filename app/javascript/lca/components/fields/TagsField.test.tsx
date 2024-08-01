@@ -11,14 +11,14 @@ describe('TagsField', () => {
   })
 
   it('renders without errors', () => {
-    render(<TagsField value="test" onChange={() => null} />)
+    render(<TagsField id="test" value="test" onChange={() => null} />)
     // Add assertions here to verify that the component renders correctly
   })
 
   it('calls onChange handler when input value changes', () => {
     const handleChange = vi.fn()
     const { getByRole } = render(
-      <TagsField value="asdf" name="name" onChange={handleChange} />,
+      <TagsField id="name" value="asdf" name="name" onChange={handleChange} />,
     )
     const input = getByRole('textbox')
 
@@ -32,7 +32,7 @@ describe('TagsField', () => {
   it('trims tags', () => {
     const handleChange = vi.fn()
     const { getByRole } = render(
-      <TagsField value="asdf" name="name" onChange={handleChange} />,
+      <TagsField id="name" value="asdf" name="name" onChange={handleChange} />,
     )
     const input = getByRole('textbox')
 

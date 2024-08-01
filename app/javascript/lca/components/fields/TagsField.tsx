@@ -1,17 +1,27 @@
+import { TextField, type TextFieldProps } from '@mui/material'
 import {
   useEffect,
   useState,
   type ChangeEvent,
   type ChangeEventHandler,
+  type FocusEvent,
+  type HTMLAttributes,
 } from 'react'
-
-import { TextField, type TextFieldProps } from '@mui/material'
 
 import { useDebounce } from '@/hooks'
 
 type Props = Omit<TextFieldProps, 'value' | 'children' | 'onChange'> & {
+  name: string
   value: string[]
   onChange: ChangeEventHandler<HTMLInputElement>
+  id: HTMLAttributes<'id'>
+}
+
+const cleanValue = (value: string) => {
+  return value
+    .split(',')
+    .map((e, i, arr) => (i === arr.length - 1 ? e : e.trim()))
+    .filter((e) => e.length > 0)
 }
 
 const TagsField = (props: Props) => {
@@ -25,26 +35,39 @@ const TagsField = (props: Props) => {
   }, [value])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value
-      .split(',')
-      .map((e, i, arr) => (i === arr.length - 1 ? e : e.trim()))
-      .filter((e) => e.length > 0)
+    if (e.target.value.endsWith(',')) {
+      // @ts-expect-error Don't want to call onChange with trailing comma
+      setLocalValue(e.target.value)
+      debouncedOnChange.cancel()
+      return
+    }
 
+    const val = cleanValue(e.target.value)
     setLocalValue(val)
-    const fakeEvent = e
 
-    // @ts-expect-error Hack to allow string[] to be passed to onChange
-    fakeEvent.target.value = val
-    debouncedOnChange(fakeEvent)
+    // @ts-expect-error OnChange should always be called with an array
+    debouncedOnChange({ target: { name: props.name, value: val } })
+  }
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement, Element>) => {
+    if (e.target.value === localValue.join(',')) {
+      return
+    }
+    debouncedOnChange.cancel()
+    onChange({
+      ...e,
+      target: { ...e.target, name: props.name, value: e.target.value },
+    })
   }
 
   return (
     <TextField
       {...otherProps}
       value={localValue}
-      onChange={handleChange}
       variant="standard"
       margin={props.margin ?? 'none'}
+      onChange={handleChange}
+      onBlur={handleBlur}
     />
   )
 }

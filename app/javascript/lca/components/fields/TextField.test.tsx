@@ -11,14 +11,19 @@ describe('LcaTextField', () => {
   })
 
   it('renders without errors', () => {
-    render(<LcaTextField value="test" onChange={() => null} />)
+    render(<LcaTextField id="name" value="test" onChange={() => null} />)
     // Add assertions here to verify that the component renders correctly
   })
 
   it('calls onChange handler when input value changes', () => {
     const handleChange = vi.fn()
     const { getByRole } = render(
-      <LcaTextField value="asdf" name="name" onChange={handleChange} />,
+      <LcaTextField
+        id="name"
+        value="asdf"
+        name="name"
+        onChange={handleChange}
+      />,
     )
     const input = getByRole('textbox')
 

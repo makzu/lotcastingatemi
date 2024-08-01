@@ -1,15 +1,15 @@
 import {
+  TextField,
+  type TextFieldProps as MuiTextFieldProps,
+} from '@mui/material'
+import {
   useEffect,
   useState,
   type ChangeEvent,
   type ChangeEventHandler,
   type FocusEvent,
+  type HTMLAttributes,
 } from 'react'
-
-import {
-  TextField,
-  type TextFieldProps as MuiTextFieldProps,
-} from '@mui/material'
 
 import { useDebounce } from '@/hooks'
 import { nuClamp as clamp } from '@/utils'
@@ -30,6 +30,7 @@ export type RatingFieldProps = Omit<
   /** @default 500 */
   debounceTime?: number
   onChange: ChangeEventHandler<HTMLInputElement>
+  id: HTMLAttributes<'id'>
 }
 
 const RatingField = (props: RatingFieldProps) => {
@@ -76,7 +77,6 @@ const RatingField = (props: RatingFieldProps) => {
     <TextField
       {...otherProps}
       value={localValue}
-      onChange={handleChange}
       inputMode="numeric"
       inputProps={{
         min,
@@ -86,10 +86,11 @@ const RatingField = (props: RatingFieldProps) => {
         step: 1,
         pattern: '-?[0-9]*',
       }}
-      onFocus={selectOnFocus}
-      onBlur={handleBlur}
       sx={{ width: '4.1em', ...props.sx }}
       margin={props.margin ?? 'dense'}
+      onChange={handleChange}
+      onFocus={selectOnFocus}
+      onBlur={handleBlur}
     />
   )
 }

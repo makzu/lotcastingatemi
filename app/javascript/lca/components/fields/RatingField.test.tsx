@@ -16,7 +16,9 @@ describe('RatingField', () => {
   })
 
   it('should render with the correct initial value', () => {
-    const { getByRole } = render(<RatingField onChange={noop} value={3} />)
+    const { getByRole } = render(
+      <RatingField value={3} id="ratingfield" onChange={noop} />,
+    )
     const inputElement = getByRole('textbox') as HTMLInputElement
     expect(inputElement.value).toBe('3')
   })
@@ -25,7 +27,7 @@ describe('RatingField', () => {
     const handleChange = vi.fn()
     const user = userEvent.setup()
     const { getByRole } = render(
-      <RatingField value={3} onChange={handleChange} />,
+      <RatingField value={3} id="ratingfield" onChange={handleChange} />,
     )
     const inputElement = getByRole('textbox') as HTMLInputElement
 
@@ -39,7 +41,13 @@ describe('RatingField', () => {
     const handleChange = vi.fn()
     const user = userEvent.setup()
     const { getByRole } = render(
-      <RatingField value={3} min={1} max={5} onChange={handleChange} />,
+      <RatingField
+        id="ratingfield"
+        value={3}
+        min={1}
+        max={5}
+        onChange={handleChange}
+      />,
     )
     const inputElement = getByRole('textbox') as HTMLInputElement
 
@@ -60,7 +68,12 @@ describe('RatingField', () => {
   it('should allow the value to be set to "-" when min < 0', () => {
     const handleChange = vi.fn()
     const { getByRole } = render(
-      <RatingField value={3} min={-5} onChange={handleChange} />,
+      <RatingField
+        id="ratingfield"
+        value={3}
+        min={-5}
+        onChange={handleChange}
+      />,
     )
     const inputElement = getByRole('textbox') as HTMLInputElement
 

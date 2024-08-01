@@ -52,7 +52,9 @@ class ExcellencyEditor extends Component<
       <MenuItem key="sidereal" value="sidereal">
         Sidereal (Higher of Essence or 3, will not halve static values)
       </MenuItem>,
+
       <Divider key="div1" style={{ margin: '0.125em 0' }} />,
+
       <MenuItem key="attribute" value="attribute">
         Attribute
       </MenuItem>,
@@ -89,7 +91,35 @@ class ExcellencyEditor extends Component<
       <MenuItem key="essenceor3" value="essenceor3">
         Essence or 3 (whichever is higher)
       </MenuItem>,
+      <MenuItem key="initiative" value="initiative">
+        Initiative
+      </MenuItem>,
+      <MenuItem key="limit" value="limit">
+        Limit
+      </MenuItem>,
+
       <Divider key="div2" style={{ margin: '0.125em 0' }} />,
+
+      <MenuItem key="1" value="1">
+        1
+      </MenuItem>,
+      <MenuItem key="2" value="2">
+        2
+      </MenuItem>,
+      <MenuItem key="3" value="3">
+        3
+      </MenuItem>,
+      <MenuItem key="4" value="4">
+        4
+      </MenuItem>,
+      <MenuItem key="5" value="5">
+        5
+      </MenuItem>,
+
+      <Divider key="div3" style={{ margin: '0.125em 0' }} />,
+      <MenuItem key="max10" value="max10">
+        Cap at 10
+      </MenuItem>,
       <MenuItem key="roundup" value="roundup">
         Round cap up for static ratings
       </MenuItem>,
@@ -179,8 +209,9 @@ class ExcellencyEditor extends Component<
                   All Attribute + Ability rolls
                 </MenuItem>,
                 <MenuItem value="solar" key="solar">
-                  As Solars or Sidereals (caste/favored attributes/abilities
-                  &gt; 0, other attributes/abilities with at least one Charm)
+                  As Solars, Abyssals, or Sidereals (caste/favored
+                  attributes/abilities &gt; 0, other attributes/abilities with
+                  at least one Charm)
                 </MenuItem>,
                 <MenuItem value="dragonblood" key="dragonblood">
                   As Dragon-Blooded (all attributes/abilities with an excellency

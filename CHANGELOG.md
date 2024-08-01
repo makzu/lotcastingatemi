@@ -1,14 +1,15 @@
-## v112
+## v115
 
 ###### _Unreleased_
 
 - Nothing (yet)
 
-## v111
+## v114
 
-###### _Unreleased_
+###### _Jul 31, 2024_
 
 - Added handling for Crypt Bolt attack. Just add `crypt bolt` to a weapon's tags for automatic handling.
+- More options for the Excellency builder, including Initiative, Limit, and flat numbers
 
 ## v110
 

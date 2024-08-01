@@ -86,8 +86,18 @@ export default (
       case 'subtleanima':
         result += 3 - character.anima_level
         break
+      case 'initiative':
+        result += character.initiative
+        break
+      case 'limit':
+        result += character.limit
+        break
+      default:
+        if (!isNaN(ex)) result += parseInt(ex)
     }
   }
+
+  if (exArray.includes('max10')) result = Math.min(result, 10)
 
   if (
     exArray.includes('sidereal') ||

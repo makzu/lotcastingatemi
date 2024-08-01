@@ -31,12 +31,14 @@ class CharacterTraitPolicy < ApplicationPolicy
   end
 
   def player_in_chronicle?
-    false unless trait.chronicle
+    return false unless trait.chronicle
+
     trait.chronicle.players.include? player
   end
 
   def player_is_st?
-    false unless trait.chronicle
+    return false unless trait.chronicle
+
     trait.chronicle.st == player
   end
 

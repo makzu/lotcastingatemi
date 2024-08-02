@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-
 import { Box, CssBaseline } from '@mui/material'
+import { useEffect } from 'react'
+import { Outlet } from 'react-router-dom'
 
 import LoadingIndicator from '@/components/generic/LoadingIndicator'
 import LcaHeader from '@/components/header/Header'
@@ -11,11 +11,7 @@ import { drawerWidth } from './_drawerProperties'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-interface Props {
-  children: React.ReactNode
-}
-
-const App = ({ children }: Props) => {
+const App = () => {
   useEffect(() => {
     // Profiler
     // eslint-disable-next-line no-constant-condition
@@ -71,7 +67,9 @@ const App = ({ children }: Props) => {
           width: '100%',
         }}
       >
-        <ErrorBoundary>{children}</ErrorBoundary>
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
 
         <Footer />
       </Box>

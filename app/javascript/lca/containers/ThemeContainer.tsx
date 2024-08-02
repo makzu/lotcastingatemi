@@ -1,15 +1,14 @@
-import { useEffect, useMemo, type ReactNode } from 'react'
-
 import {
   GlobalStyles,
-  useMediaQuery,
-  createTheme,
   ThemeProvider,
+  createTheme,
+  useMediaQuery,
 } from '@mui/material'
 import { green, lightGreen, teal } from '@mui/material/colors'
 import { StyledEngineProvider, type Theme } from '@mui/material/styles'
+import { useEffect, useMemo, type ReactNode } from 'react'
 
-import { switchTheme } from 'features/themeSlice'
+import { switchTheme } from '@/features/themeSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
 declare module '@mui/styles/defaultTheme' {
@@ -57,7 +56,6 @@ const ThemeContainer = ({ children }: { children: ReactNode }) => {
     return createTheme({
       components: {
         // https://mui.com/material-ui/react-text-field/#performance
-        // When changing this let's also update
         MuiInputBase: {
           defaultProps: {
             disableInjectingGlobalStyles: true,
@@ -69,6 +67,7 @@ const ThemeContainer = ({ children }: { children: ReactNode }) => {
           },
         },
       },
+      // When changing this let's also update the theme in the favicon.json
       palette:
         (themeSetting || defaultPreference) === 'dark'
           ? {

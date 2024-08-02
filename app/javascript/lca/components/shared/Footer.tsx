@@ -1,12 +1,9 @@
-import type { ReactChildren } from 'react'
-
-import { Divider, Link, Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { Box, Divider, Link, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
 import VERSION from '../../VERSION'
 
-const Footer = ({ children }: { children?: ReactChildren }) => {
+const Footer = () => {
   return (
     <Box
       component="footer"
@@ -44,7 +41,6 @@ const Footer = ({ children }: { children?: ReactChildren }) => {
           </Link>
         </div>
       </Typography>
-      {children}
     </Box>
   )
 }

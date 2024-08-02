@@ -1,6 +1,13 @@
-import { type APIPartial, PATCH, POST, type SortPartial } from '@/features/api'
+import {
+  type APIPartial,
+  BATTLEGROUP,
+  DELETE,
+  PATCH,
+  POST,
+  type SortPartial,
+} from '@/features/api'
 import type { QcAttack } from '@/types/qc'
-import { BATTLEGROUP, battlegroupApi } from './battlegroup'
+import { battlegroupApi } from './battlegroup'
 
 type QcAttackPartial = APIPartial<QcAttack> & Pick<QcAttack, 'qc_attackable_id'>
 
@@ -69,7 +76,7 @@ export const bgAttackApi = battlegroupApi.injectEndpoints({
     deleteBattlegroupAttack: build.mutation<void, QcAttackPartial>({
       query: ({ id, qc_attackable_id }) => ({
         url: `battlegroups/${qc_attackable_id}/qc_attacks/${id}`,
-        method: 'DELETE',
+        method: DELETE,
       }),
       invalidatesTags: (_result, _error, { qc_attackable_id }) => [
         { type: BATTLEGROUP, id: qc_attackable_id },

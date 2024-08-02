@@ -1,5 +1,6 @@
-import type { PlayerAsset } from './_lib'
-import type { WithCombatStats } from './shared'
+import { type QcAttack } from '@/features/qc/types'
+import { type PlayerAsset } from '@/types/_lib'
+import { type WithCombatStats } from '@/types/shared'
 
 export interface Battlegroup extends PlayerAsset, WithCombatStats {
   name: string
@@ -26,6 +27,7 @@ export interface Battlegroup extends PlayerAsset, WithCombatStats {
   guile: number
   resolve: number
   appearance: number
-  qc_attacks: number[]
+  portrait_link: string
+  qc_attacks: QcAttack[]
   type: 'battlegroup'
 }

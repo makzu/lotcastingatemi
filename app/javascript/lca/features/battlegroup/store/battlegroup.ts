@@ -5,13 +5,11 @@ import {
   emptySplitApi,
   listTag,
   providesList,
+  BATTLEGROUP,
   type APIPartial,
   type SortPartial,
 } from '@/features/api'
-// import type { Battlegroup } from '../types'
 import { type Battlegroup } from '../types'
-
-export const BATTLEGROUP = 'battlegroup'
 
 const bgListTag = listTag(BATTLEGROUP)
 

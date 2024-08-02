@@ -16,6 +16,10 @@ export const POST = 'POST'
 export const DELETE = 'DELETE'
 export const LISTid = 'LIST'
 
+export const CHARACTER = 'character'
+export const QC = 'qc'
+export const BATTLEGROUP = 'battlegroup'
+
 export function providesList<R extends WithId[], T extends string>(
   resultsWithIds: R | undefined,
   tagType: T,
@@ -45,5 +49,5 @@ export const emptySplitApi = createApi({
     },
   }),
   endpoints: () => ({}),
-  tagTypes: ['character', 'qc', 'battlegroup'],
+  tagTypes: [CHARACTER, QC, BATTLEGROUP],
 })

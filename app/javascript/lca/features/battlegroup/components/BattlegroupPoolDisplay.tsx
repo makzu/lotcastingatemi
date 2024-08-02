@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material'
-
 import PoolDisplayLabel from '@/components/displays/DisplayLabel'
+import PoolDisplayNumericValue from '@/components/displays/PoolDisplayNumericValue'
+import PoolDisplayStringValue from '@/components/displays/PoolDisplayStringValue'
 
 interface Props {
   label: string
@@ -9,19 +9,14 @@ interface Props {
 
 const BattlegroupPoolDisplay = (props: Props) => {
   const isString = typeof props.value === 'string'
+  const ValueDisplay = isString
+    ? PoolDisplayStringValue
+    : PoolDisplayNumericValue
+
   return (
     <div>
       <PoolDisplayLabel>{props.label}</PoolDisplayLabel>
-      <Typography
-        variant="body2"
-        sx={{
-          fontSize: isString ? '1rem' : '1.25rem',
-          lineHeight: 'inherit',
-          textTransform: 'capitalize',
-        }}
-      >
-        {props.value}
-      </Typography>
+      <ValueDisplay>{props.value}</ValueDisplay>
     </div>
   )
 }

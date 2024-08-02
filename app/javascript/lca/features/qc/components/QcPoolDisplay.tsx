@@ -12,6 +12,8 @@ import PoolDisplayLabel from '@/components/displays/DisplayLabel'
 import type { QC } from '../types'
 import { qcWoundPenalty } from '../utils'
 import { useDialogLogic } from '@/hooks'
+import PoolDisplayStringValue from '@/components/displays/PoolDisplayStringValue'
+import PoolDisplayNumericValue from '@/components/displays/PoolDisplayNumericValue'
 
 interface Props {
   qc: QC
@@ -35,23 +37,16 @@ const QcPoolDisplay = (props: Props) => {
   if (typeof value === 'number') {
     value = Math.max(0, value - penalties)
   }
+  const ValueDisplay = isString
+    ? PoolDisplayStringValue
+    : PoolDisplayNumericValue
 
   return (
     <>
       <ButtonBase onClick={open}>
         <Box sx={{ textAlign: 'left' }}>
           <PoolDisplayLabel>{props.label}</PoolDisplayLabel>
-          <Typography
-            variant="body2"
-            component="div"
-            sx={{
-              fontSize: isString ? '1rem' : '1.25rem',
-              lineHeight: 'inherit',
-              textTransform: 'capitalize',
-            }}
-          >
-            {value}
-          </Typography>
+          <ValueDisplay>{value}</ValueDisplay>
         </Box>
       </ButtonBase>
 

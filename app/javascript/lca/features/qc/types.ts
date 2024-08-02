@@ -1,8 +1,8 @@
-import type { Sortable } from '@/utils'
-import type { PlayerAsset, Timing, WithId } from './_lib'
-import type { WithSharedStats } from './shared'
+import { type AttackRange } from '@/types'
+import { type PlayerAsset, type Timing, type WithId } from '@/types/_lib'
+import { type WithSharedStats } from '@/types/shared'
+import { type Sortable } from '@/utils'
 
-export type AttackRange = 'close' | 'short' | 'medium' | 'long' | 'extreme'
 export interface QcAction {
   action: string
   pool: number
@@ -30,9 +30,9 @@ export interface QC extends PlayerAsset, WithSharedStats {
   strength: number
   excellency: string
   actions: QcAction[]
-  qc_attacks: number[]
-  qc_charms: number[]
-  qc_merits: number[]
+  qc_attacks: QcAttack[]
+  qc_charms: QcCharm[]
+  qc_merits: QcMerit[]
   portrait_link: string
   type: 'qc'
 }

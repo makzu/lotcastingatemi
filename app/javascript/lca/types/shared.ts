@@ -1,4 +1,5 @@
 import type { Element } from './_lib'
+import type { Spell } from './traits'
 
 /** Stats that PCs and QCs have in common */
 export interface WithSharedStats
@@ -34,7 +35,8 @@ export interface WithSorcery {
   is_necromancer: boolean
   necromantic_motes: number
   rituals: string[]
-  spells: number[]
+  // spells: number[]
+  spells: Spell[]
 }
 
 export interface WithAura {

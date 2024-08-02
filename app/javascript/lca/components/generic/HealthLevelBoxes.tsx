@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react'
-
 import { Box } from '@mui/material'
+import type { ReactNode } from 'react'
 
 import AggravatedIcon from '@/icons/health-level-agg.svg?react'
 import BashingIcon from '@/icons/health-level-bashing.svg?react'
@@ -8,39 +7,41 @@ import EmptyIcon from '@/icons/health-level-empty.svg?react'
 import LethalIcon from '@/icons/health-level-lethal.svg?react'
 import type { damageType } from '@/types'
 import type { WithSharedStats } from '@/types/shared'
-import * as calc from '@/utils/calculated'
+import { totalHealthLevels as calcTotalHealthLevels } from '@/utils/calculated'
+
+type healthLevel = '0' | '-1' | '-2' | '-3' | '-4' | 'in' | 'X'
+
+const boxes = {
+  bashing: <BashingIcon />,
+  lethal: <LethalIcon />,
+  aggravated: <AggravatedIcon />,
+  empty: <EmptyIcon />,
+} as const
 
 const HLBox = ({
   type,
   level,
 }: {
   type: damageType | 'empty'
-  level: '0' | '-1' | '-2' | '-4' | 'in' | 'X'
+  level: healthLevel
 }) => (
-  <>
-    <Box sx={{ width: '1.25em', height: '1.25em', typography: 'body' }}>
-      {
-        {
-          bashing: <BashingIcon />,
-          lethal: <LethalIcon />,
-          aggravated: <AggravatedIcon />,
-          empty: <EmptyIcon />,
-        }[type]
-      }
-      <Box sx={{ textAlign: 'center', typography: 'caption' }}>{level}</Box>
-    </Box>
-  </>
+  <Box sx={{ width: '1.25em', height: '1.25em', typography: 'body' }}>
+    {boxes[type]}
+    <Box sx={{ textAlign: 'center', typography: 'caption' }}>{level}</Box>
+  </Box>
 )
 
 interface Props {
   character: WithSharedStats
+  painTolerance?: boolean
 }
 
-function HealthLevelBoxes({ character }: Props) {
-  const totalHealthLevels = calc.totalHealthLevels(character)
+function HealthLevelBoxes(props: Props) {
+  const { character, painTolerance } = props
+  const totalHealthLevels = calcTotalHealthLevels(character)
   const hlBoxes = []
   let box: ReactNode
-  let level: '0' | '-1' | '-2' | '-4' | 'in' | 'X'
+  let level: healthLevel
   let aggDamage = character.damage_aggravated
   let lthDamage = character.damage_lethal
   let bshDamage = character.damage_bashing
@@ -58,10 +59,10 @@ function HealthLevelBoxes({ character }: Props) {
       level = '-1'
       lv1s--
     } else if (lv2s > 0) {
-      level = '-2'
+      level = painTolerance ? '-1' : '-2'
       lv2s--
     } else if (lv4s > 0) {
-      level = '-4'
+      level = painTolerance ? '-3' : '-4'
       lv4s--
     } else if (lvis > 0) {
       level = 'in'
@@ -85,12 +86,12 @@ function HealthLevelBoxes({ character }: Props) {
 
     hlBoxes.push(
       <Box
+        key={i}
         sx={{
           display: 'inline-block',
           textAlign: 'center',
           marginRight: '0.25em',
         }}
-        key={i}
       >
         {box}
       </Box>,

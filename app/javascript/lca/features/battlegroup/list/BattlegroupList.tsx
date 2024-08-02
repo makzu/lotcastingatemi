@@ -1,22 +1,11 @@
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
-  closestCenter,
-  useSensor,
-  useSensors,
-  type DragEndEvent,
-} from '@dnd-kit/core'
-import {
-  SortableContext,
-  arrayMove,
-  sortableKeyboardCoordinates,
-} from '@dnd-kit/sortable'
+import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core'
+import { SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import ListCategoryHeader from '@/components/shared/wrappers/ListCategoryHeader'
 import { useDocumentTitle } from '@/hooks'
+import useSensorsWrapped from '@/hooks/UseSensorsWrapped'
 import BattlegroupCard from '../components/BattlegroupCard'
 import BattlegroupCreatePopup from '../components/BattlegroupCreatePopup'
 import SortableItem from '../components/SortableItem'
@@ -51,16 +40,7 @@ const BattlegroupList = () => {
     }
   }, [battlegroups])
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  )
+  const sensors = useSensorsWrapped()
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event

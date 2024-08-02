@@ -1,22 +1,11 @@
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
-  closestCenter,
-  useSensor,
-  useSensors,
-  type DragEndEvent,
-} from '@dnd-kit/core'
-import {
-  SortableContext,
-  arrayMove,
-  sortableKeyboardCoordinates,
-} from '@dnd-kit/sortable'
+import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core'
+import { SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { AddCircle } from '@mui/icons-material'
 import { Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import ListCategoryHeader from '@/components/shared/wrappers/ListCategoryHeader'
+import useSensorsWrapped from '@/hooks/UseSensorsWrapped'
 import { type QcAttack } from '@/types'
 import { sortOrderSort } from '@/utils'
 import SortableItem from '../components/SortableItem'
@@ -28,10 +17,10 @@ import BattlegroupAttackFields from './BattlegroupAttackFields'
 const BattlegroupAttackEditor = (props: { battlegroup: Battlegroup }) => {
   const { battlegroup } = props
   const [add] = useCreateBattlegroupAttackMutation()
-  const handleAdd = () => void add({ qc_attackable_id: battlegroup.id })
   const [mutate] = useUpdateBattlegroupAttackSortMutation()
-
   const [attacks, setAttacks] = useState<QcAttack[]>([])
+
+  const handleAdd = () => void add({ qc_attackable_id: battlegroup.id })
 
   useEffect(() => {
     setAttacks(
@@ -39,16 +28,7 @@ const BattlegroupAttackEditor = (props: { battlegroup: Battlegroup }) => {
     )
   }, [battlegroup?.qc_attacks])
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  )
+  const sensors = useSensorsWrapped()
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
@@ -76,7 +56,7 @@ const BattlegroupAttackEditor = (props: { battlegroup: Battlegroup }) => {
         }}
       >
         Attacks
-        <Button onClick={handleAdd} sx={{ ml: 1 }}>
+        <Button sx={{ ml: 1 }} onClick={handleAdd}>
           Add
           <AddCircle />
         </Button>

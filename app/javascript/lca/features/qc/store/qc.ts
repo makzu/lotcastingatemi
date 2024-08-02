@@ -1,11 +1,12 @@
 import {
-  type APIPartial,
   DELETE,
   PATCH,
   POST,
+  emptySplitApi,
   listTag,
   providesList,
-  emptySplitApi,
+  type APIPartial,
+  type SortPartial,
 } from '@/features/api'
 import type { QC as iQC } from '../types'
 
@@ -15,11 +16,6 @@ export const qcApi = emptySplitApi
   .enhanceEndpoints({ addTagTypes: ['qc'] })
   .injectEndpoints({
     endpoints: (build) => ({
-      getQcs: build.query<iQC[], void>({
-        query: () => 'qcs',
-        providesTags: (result) => providesList(result, 'qc'),
-      }),
-
       getQc: build.query<iQC, iQC['id']>({
         query: (id) => ({ url: `qcs/${id}` }),
         providesTags: (_result, _error, id) => [{ type: 'qc', id }],
@@ -60,19 +56,37 @@ export const qcApi = emptySplitApi
         },
       }),
 
+      updateQcSort: build.mutation<iQC, SortPartial<iQC>>({
+        query: ({ id, sorting_position }) => ({
+          url: `qcs/${id}`,
+          method: PATCH,
+          body: { qc: { sorting_position } },
+        }),
+        invalidatesTags: (_result, _error, { id }) => [
+          qcListTag,
+          { type: 'qc', id },
+        ],
+      }),
+
       deleteQc: build.mutation<void, iQC['id']>({
         query: (id) => ({ url: `qcs/${id}`, method: DELETE }),
         invalidatesTags: (_result, _error, id) => [{ type: 'qc', id }],
+      }),
+
+      listQcs: build.query<iQC[], number>({
+        query: (page = 1) => `qcs?page=${page}`,
+        providesTags: (result) => providesList(result, 'qc'),
       }),
     }),
     overrideExisting: false,
   })
 
 export const {
-  useGetQcsQuery,
-  useGetQcQuery,
   useCreateQcMutation,
-  useDuplicateQcMutation,
-  useUpdateQcMutation,
   useDeleteQcMutation,
+  useDuplicateQcMutation,
+  useGetQcQuery,
+  useListQcsQuery,
+  useUpdateQcMutation,
+  useUpdateQcSortMutation,
 } = qcApi

@@ -1,60 +1,66 @@
-import { useState } from 'react'
-
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  TextField,
 } from '@mui/material'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { createQc } from '@/ducks/actions'
-import { useAppDispatch, useDialogLogic } from '@/hooks'
+import TextField from '@/components/fields/TextField'
+import { useDialogLogic } from '@/hooks'
+import { useCreateQcMutation } from '../store/qc'
 
-const CreateQcDialog = () => {
-  const dispatch = useAppDispatch()
+const CreateQcModal = () => {
   const [isOpen, open, close] = useDialogLogic()
   const [qcName, setQcName] = useState('')
+  const [create] = useCreateQcMutation()
+  const navigate = useNavigate()
 
   const handleSubmit = () => {
-    dispatch(createQc({ name: qcName }))
+    create({ name: qcName })
+      .unwrap()
+      .then((fulfilled) => {
+        navigate(`/qcs/${fulfilled.id}/edit`)
+      })
+      .catch((rejected) => {
+        console.error(rejected)
+      })
     close()
   }
 
   return (
     <>
-      <Button onClick={open} data-cy="create-qc">
+      <Button data-cy="create-qc" onClick={open}>
         Create New
       </Button>
 
-      <Dialog open={isOpen} onClose={close}>
+      <Dialog disableRestoreFocus open={isOpen} onClose={close}>
         <DialogTitle>Create New Quick Character</DialogTitle>
 
         <DialogContent>
           <TextField
-            variant="standard"
+            autoFocus
+            nameField
+            fullWidth
             name="name"
             value={qcName}
             label="Name"
             margin="normal"
-            fullWidth
+            debounceDelay={0}
+            id="qc-name"
             onChange={(e) => setQcName(e.target.value)}
-            inputProps={{
-              autocomplete: 'off',
-              'data-1p-ignore': 'true',
-              'data-lp-ignore': 'true',
-            }}
           />
         </DialogContent>
 
         <DialogActions>
           <Button onClick={close}>Cancel</Button>
           <Button
-            onClick={handleSubmit}
             variant="contained"
             color="primary"
             data-cy="submit"
+            onClick={handleSubmit}
           >
             Create
           </Button>
@@ -64,4 +70,4 @@ const CreateQcDialog = () => {
   )
 }
 
-export default CreateQcDialog
+export default CreateQcModal

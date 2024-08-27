@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 
 import CharacterMenu from '@/components/generic/CharacterMenu'
 import CardBase from '@/components/shared/CardBase'
-import { type Battlegroup } from '@/types'
+import { type Battlegroup } from '../types'
 import { bgSoak, prettyDrillRating } from '../lib'
 import { useGetBattlegroupQuery } from '../store'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
-import BattlegroupPoolDisplay from './BattlegroupPoolDisplay'
+import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import BgBox from './BgBox'
 
 const BattlegroupCard = ({ id }: { id: Battlegroup['id'] }) => {

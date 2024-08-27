@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import type { ReactNode } from 'react'
 
 import AggravatedIcon from '@/icons/health-level-agg.svg?react'
@@ -25,7 +25,7 @@ const HLBox = ({
   type: damageType | 'empty'
   level: healthLevel
 }) => (
-  <Box sx={{ width: '1.25em', height: '1.25em', typography: 'body' }}>
+  <Box sx={{ typography: 'body' }}>
     {boxes[type]}
     <Box sx={{ textAlign: 'center', typography: 'caption' }}>{level}</Box>
   </Box>
@@ -90,7 +90,6 @@ function HealthLevelBoxes(props: Props) {
         sx={{
           display: 'inline-block',
           textAlign: 'center',
-          marginRight: '0.25em',
         }}
       >
         {box}
@@ -98,7 +97,11 @@ function HealthLevelBoxes(props: Props) {
     )
   }
 
-  return <div>{hlBoxes}</div>
+  return (
+    <Stack direction="row" spacing={0.5}>
+      {hlBoxes}
+    </Stack>
+  )
 }
 
 export default HealthLevelBoxes

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 
-import PoolDisplayLabel from './DisplayLabel'
+import PoolDisplayLabel from './pools/DisplayLabel'
 
 interface ResourceDisplayProps {
   label: string

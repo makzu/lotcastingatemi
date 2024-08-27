@@ -1,10 +1,10 @@
 import { Component, type ChangeEvent } from 'react'
 
-import { type TextFieldProps } from '@mui/material/TextField';
+import { type TextFieldProps } from '@mui/material/TextField'
 import { type Theme } from '@mui/material/styles'
 import { createStyles, withStyles, type WithStyles } from '@mui/styles'
 
-import { TextField } from '@mui/material';
+import { TextField } from '@mui/material'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -27,6 +27,7 @@ interface State {
   oldValue: string
 }
 
+/** @deprecated use @/components/fields/TagsField instead */
 class TagsField extends Component<Props, State> {
   constructor(props: Props) {
     super(props)

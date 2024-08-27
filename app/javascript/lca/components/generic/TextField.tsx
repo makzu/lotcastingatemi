@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import { type TextFieldProps } from '@mui/material/TextField';
+import { type TextFieldProps } from '@mui/material/TextField'
 import {
   type Theme,
   type WithStyles,
@@ -8,7 +8,7 @@ import {
   withStyles,
 } from '@mui/styles'
 
-import { TextField } from '@mui/material';
+import { TextField } from '@mui/material'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -35,6 +35,7 @@ interface State {
   oldValue: string
 }
 
+/** @deprecated used components/shared/textfield instead */
 class LcaTextField extends Component<Props, State> {
   constructor(props: Props) {
     super(props)

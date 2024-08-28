@@ -4,12 +4,11 @@ import { Route, Routes } from 'react-router-dom'
 import { AppBar, Toolbar, Typography } from '@mui/material'
 
 import { drawerWidth } from '@/containers/_drawerProperties'
-import BattlegroupHeader from './BattlegroupHeader'
+import { BattlegroupSheetHeader } from '@/features/battlegroup/sheet/'
 import CharacterHeader from './CharacterHeader'
 import ChronicleHeader from './ChronicleHeader'
 import LcaDrawerButton from './DrawerButton'
-import QcHeader from './QcHeader'
-import NewBattlegroupHeader from '@/features/battlegroup/sheet/BattlegroupSheetHeader'
+import { QcSheetHeader } from '@/features/qc/sheet/'
 
 export const GenericHeader = () => {
   return (
@@ -35,15 +34,14 @@ const LcaHeader = () => {
         pl: { lg: 3 },
       }}
     >
-      <Suspense fallback={<div />}>
+      <Suspense fallback={<GenericHeader />}>
         <Routes>
           <Route path="/chronicles/:id/*" element={<ChronicleHeader />} />
           <Route path="/characters/:id/*" element={<CharacterHeader />} />
-          <Route path="/qcs/:id/*" element={<QcHeader />} />
-          <Route path="/battlegroups/:id/*" element={<BattlegroupHeader />} />
+          <Route path="/qcs/:id/*?" element={<QcSheetHeader />} />
           <Route
-            path="/new-battlegroups/:id/*"
-            element={<NewBattlegroupHeader />}
+            path="/battlegroups/:id/*"
+            element={<BattlegroupSheetHeader />}
           />
           <Route path="*" element={<GenericHeader />} />
         </Routes>

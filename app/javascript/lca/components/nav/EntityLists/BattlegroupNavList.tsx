@@ -1,9 +1,7 @@
+import { useListBattlegroupsQuery } from '@/features/battlegroup/store/battlegroup'
+import type { Battlegroup } from '@/features/battlegroup/types'
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
-
-import { getMyBattlegroups, getMyPinnedBattlegroups } from '@/ducks/entities'
-import { useAppSelector } from '@/hooks'
-import type { Battlegroup } from '@/types'
 
 const mapBattlegroupToListItem = (battlegroup: Battlegroup) => (
   <EntityListItem
@@ -14,17 +12,20 @@ const mapBattlegroupToListItem = (battlegroup: Battlegroup) => (
 )
 
 const BattlegroupNavList = ({ closeDrawer }: { closeDrawer(): void }) => {
-  const battlegroups = useAppSelector((state) => getMyPinnedBattlegroups(state))
-  const count = useAppSelector((state) => getMyBattlegroups(state).length)
+  const { data: battlegroups, isLoading, error } = useListBattlegroupsQuery(1)
+  const pinnedBgs = (battlegroups ?? []).filter((bg) => bg.pinned)
+
+  if (isLoading || battlegroups == null) return null
+  if (error) return <div>Error: {JSON.stringify(error)}</div>
 
   return (
     <EntityList
       label="Battlegroups"
       link="/battlegroups"
-      count={count}
+      count={battlegroups.length}
       onClick={closeDrawer}
     >
-      {battlegroups.map(mapBattlegroupToListItem)}
+      {pinnedBgs.map(mapBattlegroupToListItem)}
     </EntityList>
   )
 }

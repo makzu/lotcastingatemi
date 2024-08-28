@@ -1,25 +1,27 @@
+import { useListQcsQuery } from '@/features/qc/store/qc'
+import type { QC } from '@/features/qc/types'
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
-import { getMyPinnedQcs, getMyQcs } from '@/ducks/entities'
-import { useAppSelector } from '@/hooks'
-import type { QC } from '@/types'
 
 const mapQcToListItem = (qc: QC) => (
   <EntityListItem key={qc.id} link={`/qcs/${qc.id}`} name={qc.name} />
 )
 
 const QcNavList = ({ closeDrawer }: { closeDrawer(): void }) => {
-  const qcs = useAppSelector((state) => getMyPinnedQcs(state))
-  const count = useAppSelector((state) => getMyQcs(state).length)
+  const { data: qcs, isLoading, error } = useListQcsQuery(1)
+  const pinnedQcs = (qcs ?? []).filter((qc) => qc.pinned)
+
+  if (isLoading || qcs == null) return null
+  if (error) return <div>Error: {JSON.stringify(error)}</div>
 
   return (
     <EntityList
       label="Quick Characters"
       link="/qcs"
-      count={count}
+      count={qcs.length}
       onClick={closeDrawer}
     >
-      {qcs.map(mapQcToListItem)}
+      {pinnedQcs.map(mapQcToListItem)}
     </EntityList>
   )
 }

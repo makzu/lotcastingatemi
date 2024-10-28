@@ -1,7 +1,4 @@
-import { useState } from 'react'
-
 import {
-  Box,
   Button,
   ButtonBase,
   Dialog,
@@ -10,13 +7,15 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material'
+import { useState } from 'react'
 
+import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import ResourceDisplay from '@/components/displays/ResourceDisplay'
 import RatingField from '@/components/fields/RatingField'
+import PoolStack from '@/components/shared/PoolStack'
 import { useDialogLogic } from '@/hooks'
 import { totalMagnitude } from '@/utils/calculated'
 import type { Battlegroup } from '../types'
-import BattlegroupPoolDisplay from './BattlegroupPoolDisplay'
 
 interface BattlegroupHealthDisplayProps {
   battlegroup: Battlegroup
@@ -30,17 +29,19 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
 
   return (
     <>
-      <ButtonBase sx={{ alignItems: 'inherit' }} onClick={setOpen}>
-        <Box sx={{ mr: 1, minWidth: '4.5rem' }}>
+      <ButtonBase onClick={setOpen}>
+        <PoolStack>
           <ResourceDisplay
             label="Magnitude"
             current={battlegroup.magnitude}
             total={totalMagnitude(battlegroup)}
           />
-        </Box>
-        <Box sx={{ mr: 1, minWidth: '4.5rem' }}>
-          <BattlegroupPoolDisplay label="Size" value={props.battlegroup.size} />
-        </Box>
+          <BattlegroupPoolDisplay
+            sx={{ textAlign: 'left' }}
+            label="Size"
+            value={props.battlegroup.size}
+          />
+        </PoolStack>
       </ButtonBase>
 
       <Dialog open={isOpen} onClose={setClosed}>

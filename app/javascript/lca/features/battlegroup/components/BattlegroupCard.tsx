@@ -10,9 +10,11 @@ import { useGetBattlegroupQuery } from '../store'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
 import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import BgBox from './BgBox'
+import PoolStack from '@/components/shared/PoolStack'
 
 const BattlegroupCard = ({ id }: { id: Battlegroup['id'] }) => {
   const { data: battlegroup, error, isLoading } = useGetBattlegroupQuery(id)
+  const chronicle = false
 
   if (error) return <div>An error has occurred: {JSON.stringify(error)}</div>
   if (!battlegroup || isLoading) return <div>Loading...</div>
@@ -39,11 +41,11 @@ const BattlegroupCard = ({ id }: { id: Battlegroup['id'] }) => {
         <CharacterMenu
           characterType="battlegroup"
           id={battlegroup.id}
-          chronicle={false}
+          chronicle={chronicle}
         />
       </Typography>
 
-      <div className="flexContainerWrap">
+      <PoolStack>
         <BattlegroupHealthDisplay battlegroup={battlegroup} />
 
         <BattlegroupPoolDisplay
@@ -52,75 +54,48 @@ const BattlegroupCard = ({ id }: { id: Battlegroup['id'] }) => {
         />
 
         {battlegroup.might > 0 && (
-          <BgBox>
-            <BattlegroupPoolDisplay value={battlegroup.might} label="Might" />
-          </BgBox>
+          <BattlegroupPoolDisplay value={battlegroup.might} label="Might" />
         )}
 
         {battlegroup.perfect_morale && (
-          <BgBox>
-            <BattlegroupPoolDisplay value="Perfect" label="Morale" />
-          </BgBox>
+          <BattlegroupPoolDisplay value="Perfect" label="Morale" />
         )}
-      </div>
+      </PoolStack>
 
-      <div className="flexContainerWrap">
-        <BgBox>
-          <BattlegroupPoolDisplay
-            value={battlegroup.join_battle}
-            label="Join Battle"
-          />
-        </BgBox>
+      <PoolStack>
+        <BattlegroupPoolDisplay
+          value={battlegroup.join_battle}
+          label="Join Battle"
+        />
 
-        <BgBox>
-          <BattlegroupPoolDisplay
-            label="Movement"
-            value={battlegroup.movement}
-          />
-        </BgBox>
+        <BattlegroupPoolDisplay label="Movement" value={battlegroup.movement} />
 
-        <BgBox>
-          <BattlegroupPoolDisplay label="Evasion" value={battlegroup.evasion} />
-        </BgBox>
+        <BattlegroupPoolDisplay label="Evasion" value={battlegroup.evasion} />
 
-        <BgBox>
-          <BattlegroupPoolDisplay label="Parry" value={battlegroup.parry} />
-        </BgBox>
+        <BattlegroupPoolDisplay label="Parry" value={battlegroup.parry} />
 
-        <BgBox>
-          <BattlegroupPoolDisplay label="Soak" value={bgSoak(battlegroup)} />
-        </BgBox>
+        <BattlegroupPoolDisplay label="Soak" value={bgSoak(battlegroup)} />
 
         {battlegroup.hardness > 0 && (
-          <BgBox>
-            <BattlegroupPoolDisplay
-              label="Hardness"
-              value={battlegroup.hardness}
-            />
-          </BgBox>
-        )}
-      </div>
-
-      <div className="flexContainerWrap">
-        <BgBox>
-          <BattlegroupPoolDisplay label="Senses" value={battlegroup.senses} />
-        </BgBox>
-
-        <BgBox>
-          <BattlegroupPoolDisplay label="Resolve" value={battlegroup.resolve} />
-        </BgBox>
-
-        <BgBox>
-          <BattlegroupPoolDisplay label="Guile" value={battlegroup.guile} />
-        </BgBox>
-
-        <BgBox>
           <BattlegroupPoolDisplay
-            label="Appearance"
-            value={battlegroup.appearance}
+            label="Hardness"
+            value={battlegroup.hardness}
           />
-        </BgBox>
-      </div>
+        )}
+      </PoolStack>
+
+      <PoolStack>
+        <BattlegroupPoolDisplay label="Senses" value={battlegroup.senses} />
+
+        <BattlegroupPoolDisplay label="Resolve" value={battlegroup.resolve} />
+
+        <BattlegroupPoolDisplay label="Guile" value={battlegroup.guile} />
+
+        <BattlegroupPoolDisplay
+          label="Appearance"
+          value={battlegroup.appearance}
+        />
+      </PoolStack>
 
       {battlegroup.onslaught > 0 && (
         <Typography paragraph sx={{ mt: '0.5em' }}>

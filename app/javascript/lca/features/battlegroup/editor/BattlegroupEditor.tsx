@@ -9,6 +9,7 @@ import {
 import RatingField from '@/components/fields/RatingField'
 import TextField from '@/components/fields/TextField'
 import BlockPaper from '@/components/shared/BlockPaper'
+import PoolStack from '@/components/shared/PoolStack'
 import { useDocumentTitle, useIdFromParams } from '@/hooks'
 import { useGetBattlegroupQuery, useUpdateBattlegroupMutation } from '../store'
 import BattlegroupAttackEditor from './BattlegroupAttackEditor'
@@ -57,7 +58,7 @@ const BattlegroupEditor = () => {
 
   return (
     <BlockPaper>
-      <Typography paragraph variant="caption">
+      <Typography variant="caption">
         Rules for battlegroups can be found in the Core book starting at page
         205.
       </Typography>
@@ -67,7 +68,7 @@ const BattlegroupEditor = () => {
         drill/might/etc are added automatically)
       </Typography>
 
-      <Box className="flexContainer" sx={{ mb: 1 }}>
+      <PoolStack>
         <TextField
           nameField
           className="flex"
@@ -87,12 +88,11 @@ const BattlegroupEditor = () => {
               />
             }
             label="Publicly Viewable"
-            sx={{ ml: 1 }}
           />
         )}
-      </Box>
+      </PoolStack>
 
-      <Box className="flexContainer" sx={{ mb: 1 }}>
+      <PoolStack>
         <RatingField
           id="battlegroup-essence"
           label="Essence"
@@ -100,7 +100,6 @@ const BattlegroupEditor = () => {
           max={10}
           min={1}
           name="essence"
-          sx={{ mr: 1 }}
           onChange={handleUpdate}
         />
         <RatingField
@@ -108,7 +107,6 @@ const BattlegroupEditor = () => {
           label="Health lvls"
           name="health_levels"
           value={battlegroup.health_levels}
-          sx={{ mr: 1 }}
           onChange={handleUpdate}
         />
         <RatingField
@@ -118,10 +116,7 @@ const BattlegroupEditor = () => {
           value={battlegroup.willpower_temporary}
           onChange={handleUpdate}
         />
-        <Typography
-          component="span"
-          sx={{ alignSelf: 'flex-end', mr: 1, mb: 1 }}
-        >
+        <Typography component="span" sx={{ alignSelf: 'flex-end', mb: 1 }}>
           /
         </Typography>
         <RatingField
@@ -133,16 +128,49 @@ const BattlegroupEditor = () => {
           min={1}
           onChange={handleUpdate}
         />
-      </Box>
+      </PoolStack>
 
-      <Box className="flexContainerWrap" sx={{ mb: 1 }}>
+      <PoolStack>
+        <RatingField
+          id="battlegroup-size"
+          name="size"
+          label="Size"
+          value={battlegroup.size}
+          onChange={handleUpdate}
+        />
+        <RatingField
+          id="battlegroup-drill"
+          name="drill"
+          label="Drill"
+          value={battlegroup.drill}
+          onChange={handleUpdate}
+        />
+        <RatingField
+          id="battlegroup-might"
+          name="might"
+          label="Might"
+          value={battlegroup.might}
+          onChange={handleUpdate}
+        />
+        <FormControlLabel
+          label="Perfect Morale"
+          control={
+            <Checkbox
+              name="perfect_morale"
+              checked={battlegroup.perfect_morale}
+              onChange={handleUpdate}
+            />
+          }
+        />
+      </PoolStack>
+
+      <PoolStack>
         <RatingField
           id="battlegroup-initiative"
           name="initiative"
           label="Initiative"
           value={battlegroup.initiative}
           min={-Infinity}
-          sx={{ mr: 1 }}
           onChange={handleUpdate}
         />
         <RatingField
@@ -150,17 +178,15 @@ const BattlegroupEditor = () => {
           label="Onslaught"
           name="onslaught"
           value={battlegroup.onslaught}
-          sx={{ mr: 1 }}
           onChange={handleUpdate}
         />
-      </Box>
+      </PoolStack>
 
-      <Box className="flexContainerWrap">
+      <PoolStack>
         <RatingField
           id="battlegroup-resolve"
           label="Resolve"
           name="resolve"
-          sx={{ mr: 1 }}
           value={battlegroup.resolve}
           onChange={handleUpdate}
         />
@@ -169,7 +195,6 @@ const BattlegroupEditor = () => {
           label="Guile"
           name="guile"
           value={battlegroup.guile}
-          sx={{ mr: 1 }}
           onChange={handleUpdate}
         />
         <RatingField
@@ -177,7 +202,6 @@ const BattlegroupEditor = () => {
           label="Appearance"
           name="appearance"
           value={battlegroup.appearance}
-          sx={{ mr: 1 }}
           onChange={handleUpdate}
         />
         <RatingField
@@ -187,7 +211,7 @@ const BattlegroupEditor = () => {
           value={battlegroup.senses}
           onChange={handleUpdate}
         />
-      </Box>
+      </PoolStack>
 
       <BattlegroupAttackEditor battlegroup={battlegroup} />
     </BlockPaper>

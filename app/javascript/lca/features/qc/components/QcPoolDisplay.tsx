@@ -5,15 +5,16 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
   Typography,
 } from '@mui/material'
 
-import PoolDisplayLabel from '@/components/displays/DisplayLabel'
+import PoolDisplayLabel from '@/components/displays/pools/DisplayLabel'
 import type { QC } from '../types'
 import { qcWoundPenalty } from '../utils'
 import { useDialogLogic } from '@/hooks'
-import PoolDisplayStringValue from '@/components/displays/PoolDisplayStringValue'
-import PoolDisplayNumericValue from '@/components/displays/PoolDisplayNumericValue'
+import PoolDisplayStringValue from '@/components/displays/pools/PoolDisplayStringValue'
+import PoolDisplayNumericValue from '@/components/displays/pools/PoolDisplayNumericValue'
 
 interface Props {
   qc: QC
@@ -44,7 +45,7 @@ const QcPoolDisplay = (props: Props) => {
   return (
     <>
       <ButtonBase onClick={open}>
-        <Box sx={{ textAlign: 'left' }}>
+        <Box sx={{ textAlign: 'left', minWidth: '4rem' }}>
           <PoolDisplayLabel>{props.label}</PoolDisplayLabel>
           <ValueDisplay>{value}</ValueDisplay>
         </Box>
@@ -59,17 +60,18 @@ const QcPoolDisplay = (props: Props) => {
             <DialogContentText>No penalties</DialogContentText>
           ) : (
             <>
+              <Divider sx={{ my: 1 }} />
               <DialogContentText>Base: {props.value}</DialogContentText>
 
               {!props.ignoreWoundPenalty && woundPenalty > 0 && (
                 <DialogContentText>
-                  Wound Penalty: -{qcWoundPenalty(qc)}
+                  -{qcWoundPenalty(qc)} Wound Penalty
                 </DialogContentText>
               )}
 
               {props.defense && qc.onslaught > 0 && (
                 <DialogContentText>
-                  Onslaught Penalty: -{qc.onslaught}
+                  -{qc.onslaught} Onslaught Penalty
                 </DialogContentText>
               )}
             </>

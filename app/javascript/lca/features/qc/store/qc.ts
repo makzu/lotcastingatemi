@@ -41,18 +41,14 @@ export const qcApi = emptySplitApi
           method: PATCH,
           body: patch,
         }),
-        async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+        onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
           const patchResult = dispatch(
             qcApi.util.updateQueryData('getQc', id, (draft) => {
               Object.assign(draft, patch)
             }),
           )
 
-          try {
-            await queryFulfilled
-          } catch {
-            patchResult.undo()
-          }
+          queryFulfilled.catch(patchResult.undo)
         },
       }),
 

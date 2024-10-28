@@ -4,6 +4,12 @@ import BlockPaper from '@/components/shared/BlockPaper'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
 import { useDocumentTitle, useIdFromParams } from '@/hooks'
 import { useGetQcQuery } from '../store/qc'
+import {
+  BattlegroupPoolDisplay,
+  BgBox,
+} from '@/features/battlegroup/components'
+import QcPoolDisplay from '../components/QcPoolDisplay'
+import QcSpendableBlock from '../components/QcSpendableBlock'
 
 const QcSheet = () => {
   const id = useIdFromParams()
@@ -21,6 +27,14 @@ const QcSheet = () => {
   return (
     <BlockPaper>
       <MarkdownDisplay source={qc.description} />
+
+      <div className="flexContainerWrap">
+        <BgBox>
+          <BattlegroupPoolDisplay label="Essence" value={qc.essence} />
+        </BgBox>
+
+        <QcSpendableBlock qc={qc} />
+      </div>
 
       <div className="flexContainerWrap"></div>
     </BlockPaper>

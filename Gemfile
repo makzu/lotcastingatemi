@@ -54,7 +54,7 @@ end
 
 # For Heroku Ruby metrics
 gem 'barnes', '~>0.0.9'
-gem 'scout_apm', '~> 5.3'
+gem 'scout_apm', '~> 5.4'
 
 # logging
 gem 'colorize', '~> 1.1'
@@ -69,10 +69,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1'
 
   # Linting
-  gem 'rubocop', '~> 1.65', require: false
-  gem 'rubocop-performance', '~> 1.21', require: false
-  gem 'rubocop-rails', '~> 2.25', require: false
-  gem 'rubocop-rspec', '~> 2.29', require: false
+  gem 'rubocop', '~> 1.67', require: false
+  gem 'rubocop-performance', '~> 1.22', require: false
+  gem 'rubocop-rails', '~> 2.27', require: false
+  gem 'rubocop-rspec', '~> 2.31', require: false
 
   # Security Tools
   gem 'brakeman', '~> 6.1'
@@ -105,7 +105,7 @@ group :development do
   gem 'bullet', '~> 7.1'
   # gem 'flamegraph'
   # gem 'meta_request'
-  gem 'memory_profiler', '~> 1.0'
+  gem 'memory_profiler', '~> 1.1'
   gem 'rack-mini-profiler', '~> 3.3', require: false
   # gem 'stackprof'
 end

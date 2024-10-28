@@ -12,7 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import RatingField from './RatingField.jsx'
 import ResourceDisplay from './ResourceDisplay.jsx'
 import { spendWillpower } from 'ducks/actions.js'
-import { canIEditCharacter, canIEditQc } from 'selectors'
+import { canIEditCharacter, canIEditQc, canIEditBattlegroup } from 'selectors'
 import { clamp } from 'utils'
 import type { withWillpower, Enhancer } from 'utils/flow-types'
 
@@ -20,6 +20,7 @@ type ExposedProps = {
   children: React.Node,
   character: withWillpower & { id: number },
   qc?: boolean,
+  bg?: boolean,
 }
 type Props = ExposedProps & {
   canEdit: boolean,
@@ -52,22 +53,27 @@ class WillpowerSpendWidget extends React.Component<Props, State> {
     this.setState({ open: false, toSpend: 0 })
   }
 
-  handleAdd = wp => {
+  handleAdd = (wp) => {
     this.setState({
       toSpend: clamp(this.state.toSpend + wp, this.min(), this.max()),
     })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
 
   handleSubmit = () => {
     const { toSpend } = this.state
-    const { character, qc } = this.props
+    const { character, qc, bg } = this.props
 
-    const characterType = qc ? 'qc' : 'character'
+    let characterType = 'character'
+    if (qc) {
+      characterType = 'qc'
+    } else if (this.props.bg) {
+      characterType = 'battlegroup'
+    }
 
     this.props.spendWillpower(character.id, toSpend, characterType)
 
@@ -147,6 +153,11 @@ class WillpowerSpendWidget extends React.Component<Props, State> {
 }
 
 function mapStateToProps(state: Object, props: Object) {
+  if (props.bg) {
+    return {
+      canEdit: canIEditBattlegroup(state, props.character.id),
+    }
+  }
   return {
     canEdit: props.qc
       ? canIEditQc(state, props.character.id)
@@ -154,9 +165,8 @@ function mapStateToProps(state: Object, props: Object) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  { spendWillpower }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  spendWillpower,
+})
 
 export default enhance(WillpowerSpendWidget)

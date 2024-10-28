@@ -6,24 +6,26 @@ import { compose } from 'recompose'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
-import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
-import sharedStyles from 'styles/'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
-import { getSpecificBattlegroup, getAttacksForBattlegroup } from 'selectors'
-import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import { getAttacksForBattlegroup, getSpecificBattlegroup } from 'selectors'
+import sharedStyles from 'styles/'
 import {
-  prettyDrillRating,
   bgAttackPool,
   bgDamage,
   bgDefenseBonus,
   bgSoak,
+  prettyDrillRating,
 } from 'utils/calculated'
+import type { Battlegroup, QcAttack } from 'utils/flow-types'
+import BlockPaper from '../generic/blockPaper.jsx'
+import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import ResourceDisplay from '../generic/ResourceDisplay.jsx'
+import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'
+import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.jsx'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   healthBlock: {
     paddingTop: theme.spacing(-1),
@@ -92,7 +94,7 @@ class BattlegroupSheet extends Component<Props> {
 
     const { battlegroup, qc_attacks, classes } = this.props
 
-    const attacks = qc_attacks.map(attack => (
+    const attacks = qc_attacks.map((attack) => (
       <div key={attack.id} className={classes.flexContainerWrap}>
         <div className={classes.tags}>
           <div className={classes.label}>
@@ -153,6 +155,15 @@ class BattlegroupSheet extends Component<Props> {
             DisplayClassName={classes.poolBlock}
           />
 
+          <WillpowerSpendWidget bg character={battlegroup}>
+            <ResourceDisplay
+              className={classes.poolBlock}
+              current={battlegroup.willpower_temporary}
+              total={battlegroup.willpower_permanent}
+              label="Willpower"
+            />
+          </WillpowerSpendWidget>
+
           <PoolDisplay
             battlegroup
             pool={{ total: prettyDrillRating(battlegroup) }}
@@ -187,6 +198,12 @@ class BattlegroupSheet extends Component<Props> {
           />
           <PoolDisplay
             battlegroup
+            pool={{ total: battlegroup.willpower_permanent }}
+            label="Vs Rout"
+            classes={{ root: classes.poolBlock }}
+          />
+          <PoolDisplay
+            battlegroup
             pool={{ total: battlegroup.movement }}
             label="Movement"
             classes={{ root: classes.poolBlock }}
@@ -198,7 +215,7 @@ class BattlegroupSheet extends Component<Props> {
                 battlegroup.evasion +
                   bgDefenseBonus(battlegroup) -
                   battlegroup.onslaught,
-                0
+                0,
               ),
             }}
             label="Evasion"
@@ -212,7 +229,7 @@ class BattlegroupSheet extends Component<Props> {
                 battlegroup.parry +
                   bgDefenseBonus(battlegroup) -
                   battlegroup.onslaught,
-                0
+                0,
               ),
             }}
             label="Parry"
@@ -308,8 +325,5 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   ProtectedComponent,
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { fetch: fetchBattlegroupIfNecessary }
-  )
+  connect(mapStateToProps, { fetch: fetchBattlegroupIfNecessary }),
 )(BattlegroupSheet)

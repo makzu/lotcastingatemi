@@ -1,8 +1,14 @@
-## v115
+## v121
 
 ###### _Unreleased_
 
 - Nothing (yet)
+
+## v120
+
+###### _Oct 28, 2024_
+
+- Add Willpower display and Rout pool to battlegroup pages
 
 ## v114
 

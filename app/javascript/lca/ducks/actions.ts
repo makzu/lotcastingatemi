@@ -1,4 +1,8 @@
-import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
+import {
+  createAction,
+  type AnyAction,
+  type ThunkAction,
+} from '@reduxjs/toolkit'
 
 export {
   createCharacter,
@@ -69,6 +73,7 @@ import {
 import UpdatesCable from '@/utils/cable'
 
 export const INIT = 'lca/app/INIT'
+const initAction = createAction('lca/INIT')
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -78,22 +83,23 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >
 
 export function fetchAll() {
-  return (dispatch: AppDispatch, getState: GetState) => {
-    void dispatch(fetchCurrentPlayer())
-    // .then(() => dispatch(fetchAllCharacters()))
-    // .then(() => dispatch(fetchAllQcs()))
-    // .then(() => dispatch(fetchAllBattlegroups()))
-    // .then(() => {
-    //   UpdatesCable.subscribe(getState, (data) =>
-    //     dispatch({ type: 'lca/cable/RECEIVED', payload: data }),
-    //   )
-    // })
-  }
+  return () => void 0
+  // return (dispatch: AppDispatch, getState: GetState) => {
+  // void dispatch(fetchCurrentPlayer())
+  // .then(() => dispatch(fetchAllCharacters()))
+  // .then(() => dispatch(fetchAllQcs()))
+  // .then(() => dispatch(fetchAllBattlegroups()))
+  // .then(() => {
+  //   UpdatesCable.subscribe(getState, (data) =>
+  //     dispatch({ type: 'lca/cable/RECEIVED', payload: data }),
+  //   )
+  // })
+  // }
 }
 
 export function lcaInit() {
   return (dispatch: AppDispatch, getState: GetState) => {
-    dispatch({ type: INIT })
+    dispatch(initAction())
 
     if (getState().session.authenticated) {
       dispatch(fetchAll())

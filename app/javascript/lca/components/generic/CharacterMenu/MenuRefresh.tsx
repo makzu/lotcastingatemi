@@ -1,14 +1,14 @@
 import { Refresh } from '@mui/icons-material'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import { fetch } from '@/ducks/actions/ByType'
+import { emptySplitApi } from '@/features/api'
 import { useAppDispatch } from '@/hooks'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 const CardMenuRefresh = ({ characterType, id }: Props) => {
   const dispatch = useAppDispatch()
   const action = () => {
-    dispatch(fetch[characterType](id))
+    dispatch(emptySplitApi.util.invalidateTags([{ type: characterType, id }]))
   }
 
   return (

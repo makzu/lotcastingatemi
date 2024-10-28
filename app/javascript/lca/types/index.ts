@@ -1,7 +1,5 @@
 export * from './player'
 export * from './character'
-export * from './qc'
-export * from './battlegroup'
 export * from './chronicle'
 export * from './traits'
 export * from './pool'
@@ -21,4 +19,5 @@ export interface StaticRating extends PoolBase {
   specialtyMatters: boolean
 }
 
+export type AttackRange = 'close' | 'short' | 'medium' | 'long' | 'extreme'
 export type damageType = 'bashing' | 'lethal' | 'aggravated'

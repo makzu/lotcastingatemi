@@ -61,6 +61,11 @@ const ThemeContainer = ({ children }: { children: ReactNode }) => {
             disableInjectingGlobalStyles: true,
           },
         },
+        MuiStack: {
+          defaultProps: {
+            useFlexGap: true,
+          },
+        },
         MuiTextField: {
           defaultProps: {
             variant: 'standard',

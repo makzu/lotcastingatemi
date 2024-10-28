@@ -1,9 +1,6 @@
 /* See Core, p. 205 - 211 */
-import type { Battlegroup as NewBattlegroup } from '@/features/battlegroup/types'
-import type { Battlegroup as OldBattlegroup } from '@/types/battlegroup'
-import type { QcAttack } from '@/types/qc'
-
-type Battlegroup = OldBattlegroup | NewBattlegroup
+import type { Battlegroup } from '@/features/battlegroup/types'
+import type { QcAttack } from '@/features/qc/types'
 
 export function bgAttackPool(battlegroup: Battlegroup, qc_attack: QcAttack) {
   return qc_attack.pool + battlegroup.size + battlegroup.might

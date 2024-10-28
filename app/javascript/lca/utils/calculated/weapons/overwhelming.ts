@@ -4,7 +4,10 @@ export function weaponOverwhelming(character: Character, weapon: Weapon) {
   let bonus = weapon.bonus_overwhelming
 
   if (weapon.tags.includes('subtle')) return 0 + bonus
-  if (weapon.tags.includes('elemental bolt'))
+  if (
+    weapon.tags.includes('elemental bolt') ||
+    weapon.tags.includes('crypt bolt')
+  )
     return 1 + character.essence + bonus
 
   if (weapon.tags.includes('balanced')) bonus += 1

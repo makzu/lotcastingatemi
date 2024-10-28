@@ -1,8 +1,21 @@
-## v111
+## v121
 
 ###### _Unreleased_
 
 - Nothing (yet)
+
+## v120
+
+###### _Oct 28, 2024_
+
+- Add Willpower display and Rout pool to battlegroup pages
+
+## v114
+
+###### _Jul 31, 2024_
+
+- Added handling for Crypt Bolt attack. Just add `crypt bolt` to a weapon's tags for automatic handling.
+- More options for the Excellency builder, including Initiative, Limit, and flat numbers
 
 ## v110
 

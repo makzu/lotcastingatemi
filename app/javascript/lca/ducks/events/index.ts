@@ -54,13 +54,13 @@ export function spendMotes(
 export function spendWillpower(
   id: number,
   willpower: number,
-  charType: 'character' | 'qc' = 'character',
+  charType: 'character' | 'qc' | 'battlegroup' = 'character',
 ) {
   const update = updateEvent(charType)
 
   return (dispatch: $TSFixMeFunction, getState: $TSFixMeFunction) => {
     dispatch({ type: SPEND_WP, id: id })
-    const current_wp =
+    let current_wp =
       getState().entities.current[charType + 's'][id].willpower_temporary
     dispatch(
       update(id, { willpower_temporary: Math.max(current_wp - willpower, 0) }),
@@ -78,7 +78,7 @@ export function takeDamage(
 
   return (dispatch: $TSFixMeFunction, getState: $TSFixMeFunction) => {
     dispatch({ type: TAKE_DAMAGE, id: id, damageType: damageType })
-    const current_dmg =
+    let current_dmg =
       getState().entities.current[charType + 's'][id][`damage_${damageType}`]
     dispatch(update(id, { [`damage_${damageType}`]: current_dmg + damage }))
   }

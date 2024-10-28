@@ -58,10 +58,17 @@ interface Props {
 
 function WeaponLine({ weapon, classes }: Props) {
   let artifactLabel
-  if (weapon.is_artifact && !weapon.tags.includes('elemental bolt'))
+  if (
+    weapon.is_artifact &&
+    !weapon.tags.includes('elemental bolt') &&
+    !weapon.tags.includes('crypt bolt')
+  )
     artifactLabel = <div className={classes.artifactLabel}>Artifact</div>
   else if (weapon.tags.includes('elemental bolt'))
     artifactLabel = <div className={classes.artifactLabel}>Elemental Bolt</div>
+  else if (weapon.tags.includes('crypt bolt'))
+    artifactLabel = <div className={classes.artifactLabel}>Crypt Bolt</div>
+
   return (
     <div className={classes.container}>
       <div className={classes.name}>

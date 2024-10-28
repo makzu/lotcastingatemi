@@ -32,7 +32,13 @@ Tags with a \* symbol do not exist in the rulebook, but still affect LCA's calcu
 
 This weapon has special handling.
 
-Just add `elemental bolt`\* to the weapon's tags and it will automatically set the correct range, damage, and overwhelming values, and will automatically select the higher of Archery or Thrown. (These can all be changed _after_ adding the tag) Add the element of the bolt to the tags to pick up the correct damage type and other benefits. For example, adding `water` to the tags sets the damage type to Bashing and adds Flexible and Disarming blurbs to the weapon pool popup.
+Just add `elemental bolt`\* to the weapon's tags and it will automatically set the correct range, damage, and overwhelming values, and will automatically select the higher of Archery or Thrown. (These can all be changed _after_ adding the tag) Add the element of the bolt to the tags to pick up the correct damage type and other benefits. For example, adding `water`\* to the tags sets the damage type to Bashing and adds Flexible and Disarming blurbs to the weapon pool popup.
+
+#### Crypt Bolt Attack:
+
+This weapon also has special handling.
+
+Add `crypt bolt`\* to the weapon's tags and it will behave exactly like Elemental Bolt attack, setting the correct attributes and selecting the higher of Archery or Thrown. Additional Elemental tags will not have any effect.
 
 #### The Burning Name:
 

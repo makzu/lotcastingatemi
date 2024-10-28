@@ -165,6 +165,15 @@ class BattlegroupSheet extends Component<Props> {
             DisplayClassName={classes.poolBlock}
           />
 
+          <WillpowerSpendWidget bg character={battlegroup}>
+            <ResourceDisplay
+              className={classes.poolBlock}
+              current={battlegroup.willpower_temporary}
+              total={battlegroup.willpower_permanent}
+              label="Willpower"
+            />
+          </WillpowerSpendWidget>
+
           <PoolDisplay
             battlegroup
             pool={{
@@ -236,6 +245,7 @@ class BattlegroupSheet extends Component<Props> {
                   bgDefenseBonus(battlegroup) -
                   battlegroup.onslaught,
                 0,
+                0,
               ),
             }}
             label="Evasion"
@@ -251,6 +261,7 @@ class BattlegroupSheet extends Component<Props> {
                 battlegroup.parry +
                   bgDefenseBonus(battlegroup) -
                   battlegroup.onslaught,
+                0,
                 0,
               ),
             }}

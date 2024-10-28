@@ -28,7 +28,7 @@ class LcaColorLog < Lograge::Formatters::KeyValue
   end
 
   def format(key, value)
-    line = super(key, value)
+    line = super
 
     color = FIELDS_COLORS[key] || FIELDS_COLORS[:default]
     if key == :error

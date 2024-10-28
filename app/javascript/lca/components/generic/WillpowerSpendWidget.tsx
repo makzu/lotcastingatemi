@@ -16,11 +16,13 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material'
+import { canIEditBattlegroup } from '@/ducks/entities'
 
 interface ExposedProps {
   children: ReactNode
   character: withWillpower & { id: number }
   qc?: boolean
+  bg?: boolean
 }
 type Props = ExposedProps & {
   canEdit: boolean
@@ -72,8 +74,15 @@ class WillpowerSpendWidget extends Component<Props, State> {
   }
   handleSubmit = () => {
     const { toSpend } = this.state
-    const { character, qc } = this.props
-    const characterType = qc ? 'qc' : 'character'
+    const { character, qc, bg } = this.props
+
+    let characterType = 'character'
+    if (qc) {
+      characterType = 'qc'
+    } else if (this.props.bg) {
+      characterType = 'battlegroup'
+    }
+
     this.props.spendWillpower(character.id, toSpend, characterType)
     this.setState({
       open: false,
@@ -163,6 +172,11 @@ class WillpowerSpendWidget extends Component<Props, State> {
 }
 
 function mapStateToProps(state: Record<string, $TSFixMe>, props: Props) {
+  if (props.bg) {
+    return {
+      canEdit: canIEditBattlegroup(state, props.character.id),
+    }
+  }
   return {
     canEdit: props.qc
       ? canIEditQc(state, props.character.id)
@@ -170,6 +184,9 @@ function mapStateToProps(state: Record<string, $TSFixMe>, props: Props) {
   }
 }
 
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  spendWillpower,
+})
 const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
   spendWillpower,
 })

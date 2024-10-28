@@ -3,6 +3,7 @@
 module Api
   module V1
     class BaseController < ActionController::API
+      # Something something something Heroku Dyno metadata and env['rails_cache_id']
       include Knock::Authenticable
       include Pagy::Backend
       include Pundit::Authorization

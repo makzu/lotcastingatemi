@@ -1,2 +1,2 @@
-web: bin/rails server
+web: bundle exec rdbg -O -n -c -- bin/rails server
 vite: bin/vite dev

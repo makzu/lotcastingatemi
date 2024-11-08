@@ -1,15 +1,12 @@
-import { Button, Toolbar, Typography, type ButtonProps } from '@mui/material'
-import { Link, useLocation, type LinkProps } from 'react-router-dom'
+import { Toolbar, Typography } from '@mui/material'
+import { useLocation } from 'react-router-dom'
 
 import CharacterMenu from '@/components/generic/CharacterMenu'
 import LcaDrawerButton from '@/components/header/DrawerButton'
 import { GenericHeader } from '@/components/header/Header'
+import { LinkButton } from '@/components/shared/wrappers'
 import { useIdFromParams } from '@/hooks'
 import { useGetQcQuery } from '../store/qc'
-
-const LinkButton = (props: ButtonProps & LinkProps) => (
-  <Button component={Link} color="inherit" {...props} sx={{ ml: 1 }} />
-)
 
 function QcHeader() {
   const id = useIdFromParams()

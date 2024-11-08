@@ -15,10 +15,10 @@ import { useDocumentTitle, useIdFromParams } from '@/hooks'
 import BattlegroupAttackDisplay from '../components/BattlegroupAttackDisplay'
 import BattlegroupHealthDisplay from '../components/BattlegroupHealthDisplay'
 import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
-import BgBox from '../components/BgBox'
 import { bgSoak, prettyDrillRating } from '../lib'
 import { useGetBattlegroupQuery } from '../store'
 import PoolStack from '@/components/shared/PoolStack'
+import ResourceDisplay from '@/components/displays/ResourceDisplay'
 
 const BattlegroupSheet = () => {
   const id = useIdFromParams()
@@ -49,6 +49,12 @@ const BattlegroupSheet = () => {
       <BlockPaper>
         <PoolStack>
           <BattlegroupHealthDisplay battlegroup={battlegroup} />
+
+          <ResourceDisplay
+            label="Willpower"
+            current={battlegroup.willpower_temporary}
+            total={battlegroup.willpower_permanent}
+          />
 
           <BattlegroupPoolDisplay
             value={prettyDrillRating(battlegroup)}
@@ -87,6 +93,11 @@ const BattlegroupSheet = () => {
           <BattlegroupPoolDisplay
             value={battlegroup.join_battle}
             label="Join Battle"
+          />
+
+          <BattlegroupPoolDisplay
+            value={battlegroup.willpower_permanent}
+            label="vs Rout"
           />
 
           <BattlegroupPoolDisplay

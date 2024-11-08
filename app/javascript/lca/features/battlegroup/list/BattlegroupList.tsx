@@ -1,6 +1,6 @@
 import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core'
 import { SortableContext, arrayMove } from '@dnd-kit/sortable'
-import { Grid } from '@mui/material'
+import { Grid2 as Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import ListCategoryHeader from '@/components/shared/wrappers/ListCategoryHeader'
@@ -72,9 +72,9 @@ const BattlegroupList = () => {
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={ids}>
-          <Grid container spacing={3} mt={0}>
+          <Grid container spacing={3} sx={{ mt: 0 }}>
             {ids.map((id) => (
-              <Grid key={id} item xs={12} md={6} xl={4}>
+              <Grid key={id} size={{ xs: 12, md: 6, xl: 4 }}>
                 <SortableItem id={id}>
                   <BattlegroupCard id={id} />
                 </SortableItem>

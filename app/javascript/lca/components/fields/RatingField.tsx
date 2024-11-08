@@ -78,19 +78,21 @@ const RatingField = (props: RatingFieldProps) => {
       {...otherProps}
       value={localValue}
       inputMode="numeric"
-      inputProps={{
-        min,
-        'aria-valuemin': min,
-        max,
-        'aria-valuemax': max,
-        step: 1,
-        pattern: '-?[0-9]*',
-      }}
       sx={{ width: '4.1em', ...props.sx }}
       margin={props.margin ?? 'dense'}
       onChange={handleChange}
       onFocus={selectOnFocus}
       onBlur={handleBlur}
+      slotProps={{
+        htmlInput: {
+          min,
+          'aria-valuemin': min,
+          max,
+          'aria-valuemax': max,
+          step: 1,
+          pattern: '-?[0-9]*',
+        },
+      }}
     />
   )
 }

@@ -137,7 +137,7 @@ const ExcellencyEditor = ({ character, onChange, onChangeMulti }: Props) => {
             select
             label="Excellency Cap"
             name="excellency"
-            SelectProps={{ multiple: true }}
+            slotProps={{ select: { multiple: true } }}
             value={character.excellency.split('+') ?? []}
             // @ts-expect-error MUI typings are wrong, this has a string[] value
             onChange={handleExcellencyChange}
@@ -157,7 +157,7 @@ const ExcellencyEditor = ({ character, onChange, onChangeMulti }: Props) => {
             select
             label="Stunt Excellency cap"
             name="excellency_stunt"
-            SelectProps={{ multiple: true }}
+            slotProps={{ select: { multiple: true } }}
             value={character.excellency_stunt.split('+') ?? []}
             // @ts-expect-error MUI typings are wrong, this has a string[] value
             onChange={handleExcellencyChange}

@@ -14,8 +14,7 @@ export const GenericHeader = () => {
   return (
     <Toolbar>
       <LcaDrawerButton />
-
-      <Typography variant="h6" color="inherit">
+      <Typography variant="h6" sx={{ color: 'inherit' }}>
         Lot-Casting Atemi
       </Typography>
     </Toolbar>
@@ -27,12 +26,12 @@ const LcaHeader = () => {
     <AppBar
       component="header"
       enableColorOnDark
-      sx={{
-        transition: (theme) => theme.transitions.create('width'),
+      sx={(theme) => ({
+        transition: theme.transitions.create('width'),
         width: { lg: `calc(100% - ${drawerWidth}px)` },
         ml: { lg: `${drawerWidth}px` },
         pl: { lg: 3 },
-      }}
+      })}
     >
       <Suspense fallback={<GenericHeader />}>
         <Routes>

@@ -32,7 +32,7 @@ function AttributeEditor(props: Props) {
   return (
     <BlockPaper>
       <Typography variant="h6">Attributes</Typography>
-      <Box mb={2}>
+      <Box sx={{ mb: 2 }}>
         <Typography variant="subtitle1">
           Physical&nbsp;
           <Typography component="span" variant="caption">
@@ -61,7 +61,7 @@ function AttributeEditor(props: Props) {
         <Typography />
       </Box>
 
-      <Box mb={2}>
+      <Box sx={{ mb: 2 }}>
         <Typography variant="subtitle1">
           Social&nbsp;
           <Typography component="span" variant="caption">
@@ -89,7 +89,7 @@ function AttributeEditor(props: Props) {
         />
       </Box>
 
-      <Box mb={2}>
+      <Box sx={{ mb: 2 }}>
         <Typography variant="subtitle1">
           Mental&nbsp;
           <Typography component="span" variant="caption">

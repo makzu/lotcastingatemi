@@ -187,8 +187,5 @@ function mapStateToProps(state: Record<string, $TSFixMe>, props: Props) {
 const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
   spendWillpower,
 })
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
-  spendWillpower,
-})
 
 export default enhance(WillpowerSpendWidget)

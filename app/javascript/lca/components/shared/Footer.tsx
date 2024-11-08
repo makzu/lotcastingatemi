@@ -7,23 +7,23 @@ const Footer = () => {
   return (
     <Box
       component="footer"
-      sx={{
-        marginTop: (theme) => theme.spacing(6),
+      sx={(theme) => ({
+        marginTop: theme.spacing(6),
         textAlign: 'center',
-      }}
+      })}
     >
       <Divider variant="middle" />
 
       <Typography
         component="div"
-        sx={{
+        sx={(theme) => ({
           '& a': {
-            color: (theme) => theme.palette.text.secondary,
-            textDecorationColor: (theme) => theme.palette.text.secondary,
+            color: theme.palette.text.secondary,
+            textDecorationColor: theme.palette.text.secondary,
           },
-          marginY: (theme) => theme.spacing(2),
+          marginY: theme.spacing(2),
           fontSize: '0.75rem',
-        }}
+        })}
       >
         <div>
           <a

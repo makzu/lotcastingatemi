@@ -9,10 +9,10 @@ const ListCategoryHeader = (props: {
   return (
     <Typography
       variant="h5"
-      position="sticky"
-      top="64px"
       sx={{
         bgcolor: noBg ? 'unset' : 'background.default',
+        position: 'sticky',
+        top: '64px',
         zIndex: 1,
         ml: -1,
         pl: 1,

@@ -30,7 +30,7 @@ function QcHeader() {
     <Toolbar>
       <LcaDrawerButton />
 
-      <Typography variant="h6" color="inherit">
+      <Typography variant="h6" sx={{ color: 'inherit' }}>
         {editing && 'Editing '}
         {qc.name}
       </Typography>

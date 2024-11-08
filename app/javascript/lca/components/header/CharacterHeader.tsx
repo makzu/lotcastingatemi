@@ -38,8 +38,7 @@ function CharacterHeader() {
   return (
     <Toolbar>
       <LcaDrawerButton />
-
-      <Typography variant="h6" color="inherit">
+      <Typography variant="h6" sx={{ color: 'inherit' }}>
         {editing && 'Editing '}
         {character.name}
       </Typography>

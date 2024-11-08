@@ -28,7 +28,12 @@ const BasicsEditor = ({
   return (
     <>
       <BlockPaper>
-        <Stack direction="row" spacing={1} useFlexGap alignItems="flex-end">
+        <Stack
+          direction="row"
+          spacing={1}
+          useFlexGap
+          sx={{ alignItems: 'flex-end' }}
+        >
           <TextField
             name="name"
             value={character.name}

@@ -18,7 +18,7 @@ const WeaponRow = (props: WeaponRowProps) => {
   const dispatch = useAppDispatch()
 
   return (
-    <Box display="flex" alignItems="center">
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Handle />
 
       <IconButton onClick={setId} size="large">

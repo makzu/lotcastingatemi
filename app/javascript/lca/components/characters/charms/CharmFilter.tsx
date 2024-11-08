@@ -169,10 +169,12 @@ class CharmFilter extends Component<Props> {
               name="categoryFilter"
               label="Filter by Category"
               value={currentCategory || []}
-              SelectProps={{
-                multiple: true,
-              }}
               onChange={onChange}
+              slotProps={{
+                select: {
+                  multiple: true,
+                },
+              }}
             >
               {catOptions}
             </TextField>

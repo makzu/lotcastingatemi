@@ -22,12 +22,10 @@ import {
  * Autocomplete example
  */
 const NoOptionsMessage = (props) => (
-  <Typography
-    color="textSecondary"
+  <Typography sx={{ color: 'textSecondary' }}
     className={props.selectProps.classes.noOptionsMessage}
     {...props.innerProps}
-  >
-    {props.children}
+    {props.children}>
   </Typography>
 )
 
@@ -39,16 +37,18 @@ const Control = (props) => (
   <TextField
     variant="standard"
     fullWidth
-    InputProps={{
-      inputComponent,
-      inputProps: {
-        className: props.selectProps.classes.input,
-        inputRef: props.innerRef,
-        children: props.children,
-        ...props.innerProps,
+    helperText="Select a category or start typing to create a new one"
+    slotProps={{
+      input: {
+        inputComponent,
+        inputProps: {
+          className: props.selectProps.classes.input,
+          inputRef: props.innerRef,
+          children: props.children,
+          ...props.innerProps,
+        },
       },
     }}
-    helperText="Select a category or start typing to create a new one"
     {...props.selectProps.textFieldProps}
   />
 )
@@ -69,7 +69,7 @@ const Option = (props) => (
 
 const Placeholder = (props) => (
   <Typography
-    color="textSecondary"
+  sx={{      color: 'textSecondary',    }}
     className={props.selectProps.classes.placeholder}
     {...props.innerProps}
   >

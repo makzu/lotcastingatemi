@@ -48,7 +48,7 @@ function ChronicleHeader() {
       <Toolbar>
         <LcaDrawerButton />
 
-        <Typography variant="h6" color="inherit">
+        <Typography variant="h6" sx={{ color: 'inherit' }}>
           {chronicle.name}
         </Typography>
 

@@ -1,14 +1,14 @@
-import BlockPaper from '@/components/shared/BlockPaper'
+import { Grid2 as Grid, Hidden, Typography } from '@mui/material'
 
-import { Grid, Hidden, Typography } from '@mui/material'
+import BlockPaper from '@/components/shared/BlockPaper'
 
 const WelcomePage = () => (
   <Grid container spacing={3}>
     <Hidden lgDown>
-      <Grid item xs={2} />
+      <Grid size={2} />
     </Hidden>
 
-    <Grid item xs={12} lg={8}>
+    <Grid size={{ xs: 12, lg: 8 }}>
       <BlockPaper>
         <Typography variant="h5" gutterBottom>
           Lot-Casting Atemi
@@ -34,21 +34,18 @@ const WelcomePage = () => (
       </BlockPaper>
     </Grid>
 
-    <Grid item xs={12}>
+    <Grid size={12}>
       <div style={{ height: '8em' }} />
     </Grid>
 
-    <Hidden lgDown>
-      <Grid item xs={1} />
-    </Hidden>
-    <Grid item xs={12} lg={6}>
+    <Grid size={{ xs: 12, lg: 6 }}>
       <Typography variant="h3" style={{ textAlign: 'right' }}>
         Harmonious Exalted 3e character management for a new age
       </Typography>
     </Grid>
-    <Grid item xs={12} lg={5}>
+    <Grid size={{ xs: 12, lg: 5 }}>
       <BlockPaper>
-        <Typography paragraph>
+        <Typography gutterBottom>
           Keep track of your characters&apos; attributes, abilities, charms,
           merits, and more all from one place, accessible from any device with
           an Internet connection. PC screens, phones, and tablets are all
@@ -56,7 +53,7 @@ const WelcomePage = () => (
           devices.
         </Typography>
 
-        <Typography paragraph>
+        <Typography gutterBottom>
           Supports Solar, Lunar, and Dragon-Blooded Exalts and Mortal
           Characters, with automatic tracking of Caste/Aspect/Favored Abilities,
           and Excellencies. Or forge your own path with Custom Attribute,
@@ -72,18 +69,18 @@ const WelcomePage = () => (
       </BlockPaper>
     </Grid>
 
-    <Grid item xs={12}>
+    <Grid size={12}>
       <div style={{ height: '5em' }} />
     </Grid>
 
     <Hidden lgUp>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Typography variant="h3" style={{ textAlign: 'right' }}>
           Ideal Battle(group) Knowledge Prana
         </Typography>
       </Grid>
     </Hidden>
-    <Grid item xs={12} lg={5}>
+    <Grid size={{ xs: 12, lg: 5 }}>
       <BlockPaper>
         <Typography>
           Quick characters and Battlegroups are also fully supported, giving you
@@ -95,28 +92,28 @@ const WelcomePage = () => (
       </BlockPaper>
     </Grid>
     <Hidden lgDown>
-      <Grid item lg={6}>
+      <Grid size={{ lg: 6 }}>
         <Typography variant="h3">
           Ideal Battle(group) Knowledge Prana
         </Typography>
       </Grid>
     </Hidden>
 
-    <Grid item xs={12}>
+    <Grid size={12}>
       <div style={{ height: '5em' }} />
     </Grid>
 
     <Hidden lgDown>
-      <Grid item xs={1} />
+      <Grid size={1} />
     </Hidden>
-    <Grid item xs={12} lg={6}>
+    <Grid size={{ xs: 12, lg: 6 }}>
       <Typography variant="h3" style={{ textAlign: 'right' }}>
         Excellent Friend Approach
       </Typography>
     </Grid>
-    <Grid item xs={12} lg={5}>
+    <Grid size={{ xs: 12, lg: 5 }}>
       <BlockPaper>
-        <Typography paragraph>
+        <Typography gutterBottom>
           Create or join a Chronicle to see other players&apos; characters, qcs,
           and battlegroups, with access to a full sheet for each one and a
           summary page showing a subset of dice pools and defenses. Storytellers

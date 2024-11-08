@@ -54,7 +54,7 @@ const WeaponEditorPopup = (props: Props) => {
       <DialogTitle>Edit {weapon.name}</DialogTitle>
 
       <DialogContent>
-        <Box display="flex" justifyContent="space-between">
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <WeaponPoolDisplay weapon={weapon} />
         </Box>
         <TextField
@@ -69,7 +69,7 @@ const WeaponEditorPopup = (props: Props) => {
             'data-lp-ignore': 'true',
           }}
         />
-        <Box display="flex" justifyContent="space-between">
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <WeaponAbilitySelect
             character={character}
             weapon={weapon}
@@ -117,7 +117,7 @@ const WeaponEditorPopup = (props: Props) => {
             onChange={handleChange}
           />
           <Typography variant="subtitle1">Other Bonuses</Typography>
-          <Box display="flex">
+          <Box sx={{ display: 'flex' }}>
             <RatingField
               trait="bonus_accuracy"
               label="Accuracy"
@@ -163,7 +163,7 @@ const WeaponEditorPopup = (props: Props) => {
       </DialogContent>
 
       <DialogActions>
-        <Box flexGrow={1}>
+        <Box sx={{ flexGrow: 1 }}>
           <IconButton component={Link} to={'/help/weapons'} size="small">
             <Help />
           </IconButton>

@@ -22,7 +22,7 @@ const WeaponOverrides = (props) => {
   }
 
   return (
-    <Box display="flex" justifyContent="space-between">
+    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <WeaponAttributeSelect
         type="attack"
         label="Attack Attribute"

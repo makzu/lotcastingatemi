@@ -1,6 +1,6 @@
 import { arrayMove, SortableContext } from '@dnd-kit/sortable'
 import { closestCenter, DndContext, type DragEndEvent } from '@dnd-kit/core'
-import { Grid } from '@mui/material'
+import { Grid2 as Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import ListCategoryHeader from '@/components/shared/wrappers/ListCategoryHeader'
@@ -62,16 +62,25 @@ const QcList = () => {
         QCs
         <CreateQcModal />
       </ListCategoryHeader>
-
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={ids}>
-          <Grid container spacing={3} mt={0}>
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              mt: 0,
+            }}
+          >
             {ids.map((id) => (
-              <Grid key={id} item xs={12} md={6} xl={4} sx={{ height: '100%' }}>
+              <Grid
+                key={id}
+                size={{ xs: 12, sm: 6, xl: 4 }}
+                sx={{ height: '100%' }}
+              >
                 <SortableItem id={id}>
                   <QcCard id={id} />
                 </SortableItem>

@@ -79,8 +79,10 @@ class AbilitySelect extends Component<Props> {
         onChange={checkChange}
         margin={props.margin ?? 'none'}
         fullWidth={props.fullWidth}
-        SelectProps={{
-          multiple: multiple,
+        slotProps={{
+          select: {
+            multiple: multiple,
+          },
         }}
       >
         {includeUniversal && (

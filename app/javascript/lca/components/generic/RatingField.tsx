@@ -129,14 +129,16 @@ class RatingField extends Component<Props, State> {
         name={trait}
         label={label}
         value={value}
-        inputProps={{
-          min: min,
-          max: max,
-        }}
         onChange={handleChange}
         margin={this.props.margin || 'none'}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        slotProps={{
+          htmlInput: {
+            min: min,
+            max: max,
+          },
+        }}
       />
     )
   }

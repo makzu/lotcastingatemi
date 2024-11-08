@@ -39,10 +39,12 @@ const CreateBattlegroupDialog = () => {
             margin="normal"
             fullWidth
             onChange={(e) => setBgname(e.target.value)}
-            inputProps={{
-              autocomplete: 'off',
-              'data-1p-ignore': 'true',
-              'data-lp-ignore': 'true',
+            slotProps={{
+              htmlInput: {
+                autocomplete: 'off',
+                'data-1p-ignore': 'true',
+                'data-lp-ignore': 'true',
+              },
             }}
           />
         </DialogContent>

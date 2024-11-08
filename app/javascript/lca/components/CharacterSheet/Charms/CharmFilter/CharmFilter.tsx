@@ -81,9 +81,11 @@ const CharmFilterDrawer = (props: Props) => {
           label="Ability/Attribute"
           select
           value={props.filters.ability}
-          SelectProps={{ multiple: true }}
           onChange={handleChange}
           margin="dense"
+          slotProps={{
+            select: { multiple: true },
+          }}
         >
           {props.allAbilities.map((a) =>
             a === 'martial_arts' ? (
@@ -102,9 +104,11 @@ const CharmFilterDrawer = (props: Props) => {
           label="Keyword"
           select
           value={props.filters.keyword}
-          SelectProps={{ multiple: true }}
           onChange={handleChange}
           margin="dense"
+          slotProps={{
+            select: { multiple: true },
+          }}
         >
           {props.allKeywords.map((a) => (
             <MenuItem key={a} value={a}>
@@ -125,9 +129,11 @@ const CharmFilterDrawer = (props: Props) => {
           label="Category"
           select
           value={props.filters.category}
-          SelectProps={{ multiple: true }}
           onChange={handleChange}
           margin="dense"
+          slotProps={{
+            select: { multiple: true },
+          }}
         >
           {props.allCategories.map((a) => (
             <MenuItem key={a} value={a}>
@@ -144,11 +150,11 @@ const CharmFilterDrawer = (props: Props) => {
 
         <div style={{ display: 'flex' }}>
           {/*
-          // @ts-expect-error Charm page rewrite will fix this */}
+        // @ts-expect-error Charm page rewrite will fix this */}
           <Checkbox label="Mute Only" name="muteOnly" onChange={handleChange} />
 
           {/*
-          // @ts-expect-error Charm page rewrite will fix this */}
+        // @ts-expect-error Charm page rewrite will fix this */}
           <Checkbox
             label="Hide Perilous"
             name="hidePerilous"

@@ -62,8 +62,10 @@ function ArmorEditor(props: Props) {
         direction="row"
         spacing={1}
         useFlexGap
-        alignItems="flex-end"
-        marginY={1}
+        sx={{
+          alignItems: 'flex-end',
+          marginY: 1,
+        }}
       >
         <PoolDisplay staticRating pool={pools.soak} label="Soak" />
         {pools.hardness.total > 0 && (
@@ -83,7 +85,14 @@ function ArmorEditor(props: Props) {
       </Stack>
 
       <Typography>Armor modifiers</Typography>
-      <Stack direction="row" spacing={1} useFlexGap alignItems="flex-end">
+      <Stack
+        direction="row"
+        spacing={1}
+        useFlexGap
+        sx={{
+          alignItems: 'flex-end',
+        }}
+      >
         <RatingField
           name="bonus_soak"
           label="Soak"

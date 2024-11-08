@@ -1,12 +1,7 @@
-import {
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Switch,
-} from '@mui/material'
+import { ListItem, ListItemText, Switch } from '@mui/material'
 
-import { switchTheme } from 'features/themeSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
+import { switchTheme } from 'features/themeSlice'
 
 const NavPanelThemeSwitch = () => {
   const theme = useAppSelector((state) => state.theme)
@@ -16,19 +11,18 @@ const NavPanelThemeSwitch = () => {
 
   return (
     <ListItem
-      button
       onClick={() => action(theme === 'light' ? 'dark' : 'light')}
+      secondaryAction={
+        <Switch
+          checked={theme === 'dark'}
+          onChange={() => action(theme === 'light' ? 'dark' : 'light')}
+        />
+      }
     >
       <ListItemText
         primary={`Current Theme: ${theme}`}
         style={{ textTransform: 'capitalize' }}
       />
-      <ListItemSecondaryAction>
-        <Switch
-          checked={theme === 'dark'}
-          onChange={() => action(theme === 'light' ? 'dark' : 'light')}
-        />
-      </ListItemSecondaryAction>
     </ListItem>
   )
 }

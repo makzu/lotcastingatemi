@@ -7,7 +7,7 @@ import {
   ListItemSecondaryAction,
   ListItemText,
 } from '@mui/material/'
-import { ExpandLess, ExpandMore } from '@mui/icons-material/'
+import { ExpandLess, ExpandMore } from '@mui/icons-material'
 
 import { LinkListItem, NavLinkListItem } from '@/components/shared/wrappers/'
 import { useCharacterAttribute } from '@/ducks/entities'

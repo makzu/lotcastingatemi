@@ -60,7 +60,14 @@ const JoinBattleDialog = ({ character }: ExposedProps) => {
         <DialogTitle>Join Battle</DialogTitle>
 
         <DialogContent>
-          <Stack direction="row" spacing={1} useFlexGap alignItems="flex-end">
+          <Stack
+            direction="row"
+            spacing={1}
+            useFlexGap
+            sx={{
+              alignItems: 'flex-end',
+            }}
+          >
             <Box sx={{ flex: 1 }}>
               <PoolDisplay
                 qc={character.type === 'qc' || character.type === 'battlegroup'}

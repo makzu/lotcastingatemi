@@ -81,7 +81,13 @@ const DowntimeDialog = ({ id }: { id: number }) => {
             it.
           </DialogContentText>
 
-          <Stack direction="row" alignItems="center" justifyContent="center">
+          <Stack
+            direction="row"
+            sx={{
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <RatingField
               name="time"
               label="Time"

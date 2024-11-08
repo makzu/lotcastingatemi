@@ -1,7 +1,7 @@
-import type { QcAttack } from '@/types'
+import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
+import type { QcAttack } from '@/features/qc/types'
 import { bgAttackPool, bgDamage } from '@/utils/calculated'
 import type { Battlegroup } from '../types'
-import BattlegroupPoolDisplay from './BattlegroupPoolDisplay'
 import BgBox from './BgBox'
 
 const BattlegroupAttackDisplay = ({

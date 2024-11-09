@@ -39,7 +39,7 @@
     "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
+    "@biomejs/biome": "1.9.4",
     "@mui/codemod": "^6.1.6",
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/rtk-codemods": "0.1.2",
@@ -58,23 +58,13 @@
     "@types/redux-api-middleware": "^3.2.6",
     "@types/redux-optimistic-ui": "^0.4.14",
     "@types/scroll-to-element": "^2.0.5",
-    "@typescript-eslint/eslint-plugin": "^7.15.0",
-    "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-react": "^4.3.1",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "cypress": "^12.17.4",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^8.10.0",
-    "eslint-plugin-cypress": "^2.15.2",
-    "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-material-ui": "^1.0.1",
-    "eslint-plugin-react": "^7.34.3",
-    "eslint-plugin-react-hooks": "^4.6.2",
     "jscpd": "^3.5.10",
     "jsdom": "^24.1.0",
     "knip": "^5.24.1",
     "prettier": "^2.8.8",
-    "prettier-eslint": "^15.0.1",
     "react-codemod": "^5.4.4",
     "react-test-renderer": "^18.3.1",
     "redux-mock-store": "^1.5.4",
@@ -86,9 +76,11 @@
     "vitest": "^2.1.4"
   },
   "scripts": {
-    "test": "vitest",
-    "testcov": "jest --coverage",
-    "lint": "eslint app/javascript/"
+    "format": "biome format app/javascript/",
+    "format:fix": "biome format --write app/javascript/",
+    "lint": "biome lint app/javascript/",
+    "lint:fix": "biome lint --write app/javascript/",
+    "test": "vitest"
   },
   "jest": {
     "roots": [

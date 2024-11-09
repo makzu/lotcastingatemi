@@ -29,8 +29,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "biomejs.biome",
         "christian-kohler.npm-intellisense",
-        "esbenp.prettier-vscode",
         "vitest.explorer"
       ]
     }

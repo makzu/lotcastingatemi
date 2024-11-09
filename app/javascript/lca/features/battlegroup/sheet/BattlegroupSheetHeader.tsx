@@ -19,7 +19,7 @@ function BattlegroupSheetHeader() {
     editButtonPath += '/edit'
   }
 
-  if (battlegroup == undefined) {
+  if (battlegroup === undefined) {
     return <GenericHeader />
   }
 

@@ -5,8 +5,8 @@ import {
   POST,
   type SortPartial,
 } from '@/features/api'
+import type { Spell } from '@/types'
 import { qcApi } from './qc'
-import { type Spell } from '@/types'
 
 type SpellPartial = APIPartial<Spell> & Pick<Spell, 'sorcerer_id'>
 

@@ -1,10 +1,4 @@
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  Skeleton,
-  Typography,
-} from '@mui/material'
+import { Checkbox, FormControlLabel, Skeleton, Typography } from '@mui/material'
 
 import RatingField from '@/components/fields/RatingField'
 import TextField from '@/components/fields/TextField'
@@ -20,7 +14,7 @@ const BattlegroupEditor = () => {
   const [updateBattlegroup] = useUpdateBattlegroupMutation()
 
   useDocumentTitle(
-    `${battlegroup && battlegroup.name + ' | '}Lot-Casting Atemi`,
+    `${battlegroup && `${battlegroup.name} | `}Lot-Casting Atemi`,
   )
 
   const handleUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,7 +164,7 @@ const BattlegroupEditor = () => {
           name="initiative"
           label="Initiative"
           value={battlegroup.initiative}
-          min={-Infinity}
+          min={Number.NEGATIVE_INFINITY}
           onChange={handleUpdate}
         />
         <RatingField

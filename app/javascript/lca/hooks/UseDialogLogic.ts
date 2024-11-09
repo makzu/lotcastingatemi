@@ -5,8 +5,8 @@ import { useCallback, useState } from 'react'
  */
 const useDialogLogic = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const setOpen = useCallback(() => setIsOpen(true), [setIsOpen])
-  const setClosed = useCallback(() => setIsOpen(false), [setIsOpen])
+  const setOpen = useCallback(() => setIsOpen(true), [])
+  const setClosed = useCallback(() => setIsOpen(false), [])
 
   return [isOpen, setOpen, setClosed] as const
 }

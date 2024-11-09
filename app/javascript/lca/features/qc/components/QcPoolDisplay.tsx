@@ -6,15 +6,14 @@ import {
   DialogContentText,
   DialogTitle,
   Divider,
-  Typography,
 } from '@mui/material'
 
 import PoolDisplayLabel from '@/components/displays/pools/DisplayLabel'
+import PoolDisplayNumericValue from '@/components/displays/pools/PoolDisplayNumericValue'
+import PoolDisplayStringValue from '@/components/displays/pools/PoolDisplayStringValue'
+import { useDialogLogic } from '@/hooks'
 import type { QC } from '../types'
 import { qcWoundPenalty } from '../utils'
-import { useDialogLogic } from '@/hooks'
-import PoolDisplayStringValue from '@/components/displays/pools/PoolDisplayStringValue'
-import PoolDisplayNumericValue from '@/components/displays/pools/PoolDisplayNumericValue'
 
 interface Props {
   qc: QC

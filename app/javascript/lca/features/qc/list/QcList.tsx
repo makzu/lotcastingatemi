@@ -1,15 +1,15 @@
-import { arrayMove, SortableContext } from '@dnd-kit/sortable'
-import { closestCenter, DndContext, type DragEndEvent } from '@dnd-kit/core'
+import { DndContext, type DragEndEvent, closestCenter } from '@dnd-kit/core'
+import { SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { Grid2 as Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import ListCategoryHeader from '@/components/shared/wrappers/ListCategoryHeader'
-import CreateQcModal from '../components/CreateQcModal'
+import SortableItem from '@/features/battlegroup/components/SortableItem'
 import { useDocumentTitle, useSensorsWrapped } from '@/hooks'
+import CreateQcModal from '../components/CreateQcModal'
+import QcCard from '../components/QcCard'
 import { useListQcsQuery, useUpdateQcSortMutation } from '../store/qc'
 import type { QC } from '../types'
-import QcCard from '../components/QcCard'
-import SortableItem from '@/features/battlegroup/components/SortableItem'
 
 const emptyArray: QC[] = []
 
@@ -52,7 +52,7 @@ const QcList = () => {
     }
   }
 
-  if (error) return 'An error has occurred: ' + JSON.stringify(error)
+  if (error) return `An error has occurred: ${JSON.stringify(error)}`
   // TODO Skeleton here
   if (!qcs || isLoading) return 'Loading...'
 

@@ -19,7 +19,7 @@ function QcHeader() {
     editButtonPath += '/edit'
   }
 
-  if (qc == undefined) {
+  if (qc === undefined) {
     return <GenericHeader />
   }
 

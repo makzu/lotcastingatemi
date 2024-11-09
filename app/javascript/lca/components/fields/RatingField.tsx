@@ -1,14 +1,14 @@
 import {
-  TextField,
   type TextFieldProps as MuiTextFieldProps,
+  TextField,
 } from '@mui/material'
 import {
-  useEffect,
-  useState,
   type ChangeEvent,
   type ChangeEventHandler,
   type FocusEvent,
   type HTMLAttributes,
+  useEffect,
+  useState,
 } from 'react'
 
 import { useDebounce } from '@/hooks'
@@ -38,7 +38,7 @@ const RatingField = (props: RatingFieldProps) => {
   const [localValue, setLocalValue] = useState<number | '-' | ''>(value ?? 0)
 
   const min = props.min ?? 0
-  const max = props.max ?? Infinity
+  const max = props.max ?? Number.POSITIVE_INFINITY
 
   const debouncedOnChange = useDebounce(onChange, debounceTime ?? 500)
 
@@ -62,7 +62,7 @@ const RatingField = (props: RatingFieldProps) => {
     }
 
     let value = Number(e.target.value)
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
       value = 0
     }
     value = clamp(value, min, max)

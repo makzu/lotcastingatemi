@@ -1,5 +1,5 @@
-import { DELETE, PATCH, emptySplitApi, type APIPartial } from '@/features/api'
-import { type Player } from '@/types'
+import { type APIPartial, DELETE, PATCH, emptySplitApi } from '@/features/api'
+import type { Player } from '@/types'
 
 const PLAYER = 'PLAYER'
 
@@ -20,7 +20,7 @@ export const playerApi = emptySplitApi
       }),
 
       destroyPlayer: build.mutation<void, number>({
-        query: () => ({ url: `players`, method: DELETE }),
+        query: () => ({ url: 'players', method: DELETE }),
       }),
     }),
   })

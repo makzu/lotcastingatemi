@@ -1,6 +1,8 @@
-import { type QcAttack } from '@/features/qc/types'
-import { type PlayerAsset } from '@/types/_lib'
-import { type WithCombatStats } from '@/types/shared'
+import type { QcAttack } from '@/features/qc/types'
+import type { PlayerAsset } from '@/types/_lib'
+import type { WithCombatStats } from '@/types/shared'
+
+export type { QcAttack }
 
 export interface Battlegroup extends PlayerAsset, WithCombatStats {
   name: string

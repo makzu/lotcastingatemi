@@ -2,7 +2,6 @@ import { Box, CssBaseline } from '@mui/material'
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import LoadingIndicator from '@/components/generic/LoadingIndicator'
 import LcaHeader from '@/components/header/Header'
 import NavPanel from '@/components/nav/'
 import Footer from '@/components/shared/Footer'
@@ -14,7 +13,7 @@ import { drawerWidth } from './_drawerProperties'
 const App = () => {
   useEffect(() => {
     // Profiler
-    // eslint-disable-next-line no-constant-condition
+    // biome-ignore lint/correctness/noConstantCondition: Development only
     if (true) return
 
     const script = document.createElement('script')
@@ -73,8 +72,6 @@ const App = () => {
 
         <Footer />
       </Box>
-
-      <LoadingIndicator />
     </Box>
   )
 }

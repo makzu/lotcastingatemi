@@ -9,8 +9,8 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 
-import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import ResourceDisplay from '@/components/displays/ResourceDisplay'
+import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import RatingField from '@/components/fields/RatingField'
 import PoolStack from '@/components/shared/PoolStack'
 import { useDialogLogic } from '@/hooks'
@@ -75,7 +75,7 @@ const BattlegroupHealthDisplay = (props: BattlegroupHealthDisplayProps) => {
                 onChange={(e) => setMagnitude(Number(e.target.value))}
               />
               <span>
-                {' / ' + totalMagnitude({ ...battlegroup, size: size })}
+                {` / ${totalMagnitude({ ...battlegroup, size: size })}`}
               </span>
             </div>
 

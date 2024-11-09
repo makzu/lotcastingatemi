@@ -1,8 +1,8 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
-import { type WithId } from '@/types/_lib'
+import type { WithId } from '@/types/_lib'
 
 interface Props {
   id: WithId['id']

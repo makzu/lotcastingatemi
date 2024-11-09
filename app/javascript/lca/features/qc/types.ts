@@ -1,7 +1,7 @@
-import { type AttackRange } from '@/types'
-import { type PlayerAsset, type Timing, type WithId } from '@/types/_lib'
-import { type WithSharedStats } from '@/types/shared'
-import { type Sortable } from '@/utils'
+import type { AttackRange } from '@/types'
+import type { PlayerAsset, Timing, WithId } from '@/types/_lib'
+import type { WithSharedStats } from '@/types/shared'
+import type { Sortable } from '@/utils'
 
 export interface QcAction {
   action: string

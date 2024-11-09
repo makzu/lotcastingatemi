@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@/testUtils'
+import { fireEvent, render } from '@/testUtils'
 import userEvent from '@testing-library/user-event'
 
 import { noop } from '@/utils'

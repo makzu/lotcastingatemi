@@ -2,15 +2,14 @@ import { VisibilityOff } from '@mui/icons-material'
 import { Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
+import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import CharacterMenu from '@/components/generic/CharacterMenu'
 import CardBase from '@/components/shared/CardBase'
-import { type Battlegroup } from '../types'
+import PoolStack from '@/components/shared/PoolStack'
 import { bgSoak, prettyDrillRating } from '../lib'
 import { useGetBattlegroupQuery } from '../store'
+import type { Battlegroup } from '../types'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay'
-import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
-import BgBox from './BgBox'
-import PoolStack from '@/components/shared/PoolStack'
 
 const BattlegroupCard = ({ id }: { id: Battlegroup['id'] }) => {
   const { data: battlegroup, error, isLoading } = useGetBattlegroupQuery(id)

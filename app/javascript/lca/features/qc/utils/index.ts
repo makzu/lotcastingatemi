@@ -25,13 +25,15 @@ export function generalWoundPenalty(
 
   if (totalDmg <= lvl0) {
     return 0
-  } else if (totalDmg <= lvl1) {
+  }
+  if (totalDmg <= lvl1) {
     return 1
-  } else if (totalDmg <= lvl2) {
+  }
+  if (totalDmg <= lvl2) {
     return 2 - modifier
-  } else if (totalDmg <= lvl4) {
-    return 4 - modifier
-  } else {
+  }
+  if (totalDmg <= lvl4) {
     return 4 - modifier
   }
+  return 4 - modifier
 }

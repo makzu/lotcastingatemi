@@ -10,9 +10,9 @@ const useMenuLogic = () => {
   const [anchor, setAnchor] = useState<MenuElement>(null)
   const handleOpen = useCallback(
     (e: MenuEvent) => setAnchor(e.currentTarget),
-    [setAnchor],
+    [],
   )
-  const handleClose = useCallback(() => setAnchor(null), [setAnchor])
+  const handleClose = useCallback(() => setAnchor(null), [])
 
   return [anchor, handleOpen, handleClose] as const
 }

@@ -1,4 +1,4 @@
-import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core'
+import { DndContext, type DragEndEvent, closestCenter } from '@dnd-kit/core'
 import { SortableContext, arrayMove } from '@dnd-kit/sortable'
 import { Grid2 as Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
@@ -56,7 +56,7 @@ const BattlegroupList = () => {
     }
   }
 
-  if (error) return 'An error has occurred: ' + JSON.stringify(error)
+  if (error) return `An error has occurred: ${JSON.stringify(error)}`
   if (!battlegroups || isLoading) return 'Loading...'
 
   return (

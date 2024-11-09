@@ -1,15 +1,15 @@
 import {
+  type APIPartial,
+  BATTLEGROUP,
   DELETE,
   PATCH,
   POST,
+  type SortPartial,
   emptySplitApi,
   listTag,
   providesList,
-  BATTLEGROUP,
-  type APIPartial,
-  type SortPartial,
 } from '@/features/api'
-import { type Battlegroup } from '../types'
+import type { Battlegroup } from '../types'
 
 const bgListTag = listTag(BATTLEGROUP)
 

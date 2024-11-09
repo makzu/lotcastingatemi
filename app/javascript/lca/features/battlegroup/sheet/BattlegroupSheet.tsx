@@ -9,23 +9,23 @@ import {
   Typography,
 } from '@mui/material'
 
+import ResourceDisplay from '@/components/displays/ResourceDisplay'
+import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import BlockPaper from '@/components/shared/BlockPaper'
 import MarkdownDisplay from '@/components/shared/MarkdownDisplay'
+import PoolStack from '@/components/shared/PoolStack'
 import { useDocumentTitle, useIdFromParams } from '@/hooks'
 import BattlegroupAttackDisplay from '../components/BattlegroupAttackDisplay'
 import BattlegroupHealthDisplay from '../components/BattlegroupHealthDisplay'
-import BattlegroupPoolDisplay from '@/components/displays/pools/BattlegroupPoolDisplay'
 import { bgSoak, prettyDrillRating } from '../lib'
 import { useGetBattlegroupQuery } from '../store'
-import PoolStack from '@/components/shared/PoolStack'
-import ResourceDisplay from '@/components/displays/ResourceDisplay'
 
 const BattlegroupSheet = () => {
   const id = useIdFromParams()
   const { data: battlegroup, isLoading, error } = useGetBattlegroupQuery(id)
 
   useDocumentTitle(
-    `${battlegroup && battlegroup.name + ' | '}Lot-Casting Atemi`,
+    `${battlegroup && `${battlegroup.name} | `}Lot-Casting Atemi`,
   )
 
   if (isLoading) return <BlockPaper>Loading...</BlockPaper>

@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "skipLibCheck": true,
     "incremental": true,
@@ -35,7 +35,7 @@
 
     "sourceMap": true
   },
-  "include": ["app/javascript/lca/**/*", "./.eslintrc.cjs", "./vite.config.ts"],
+  "include": ["app/javascript/lca/**/*", "./vite.config.ts"],
   "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public", "coverage"],
   "compileOnSave": false
 }

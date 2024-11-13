@@ -20,8 +20,9 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-# Don't bother tracking test coverage data from simplecov
+# Don't bother tracking test coverage data from simplecov or vitest
 /coverage
+/coverage-frontend
 .jscpd
 
 /public/packs

@@ -24,7 +24,7 @@ describe('BattlegroupPoolDisplay', () => {
 
     const valueElement = screen.getByText(value)
 
-    expect(valueElement).toHaveStyle({ fontSize: '1rem' })
+    expect(valueElement).toHaveStyle({ fontSize: '1.125rem' })
   })
 
   it('renders the value with correct font size when value is a number', () => {

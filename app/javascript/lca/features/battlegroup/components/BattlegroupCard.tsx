@@ -97,7 +97,7 @@ const BattlegroupCard = ({ id }: { id: Battlegroup['id'] }) => {
       </PoolStack>
 
       {battlegroup.onslaught > 0 && (
-        <Typography paragraph sx={{ mt: '0.5em' }}>
+        <Typography sx={{ mt: '0.5em' }}>
           <strong>Penalties:</strong>
           &nbsp;Onslaught -{battlegroup.onslaught}
         </Typography>

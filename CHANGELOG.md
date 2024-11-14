@@ -2,7 +2,7 @@
 
 ###### _Unreleased_
 
-- Nothing (yet)
+- Alchemical characters can now be created
 
 ## v120
 

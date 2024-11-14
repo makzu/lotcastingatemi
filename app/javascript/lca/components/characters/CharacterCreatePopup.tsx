@@ -17,6 +17,7 @@ import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelec
 import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
+import AlchemicalCasteSelect from 'components/characterEditor/exaltTraits/AlchemicalCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -78,6 +79,9 @@ class CharacterCreatePopup extends React.Component<Props, State> {
           break
         case 'AbyssalCharacter':
           exaltType = { exalt_type: 'Abyssal', aspect: false }
+          break
+        case 'AlchemicalCharacter':
+          exaltType = { exalt_type: 'Alchemical', aspect: false }
           break
         default:
           exaltType = { exalt_type: 'Exalt' }
@@ -213,6 +217,21 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                   instead.
                 </Typography>
                 <AbyssalCasteSelect
+                  value={character.caste}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </>
+            )}
+            {character.type === 'AlchemicalCharacter' && (
+              <>
+                <Typography paragraph>
+                  Selecting this option means the system will try to follow the
+                  rules in the core book as closely as it can. If your group
+                  uses house rules, especially ones that change available Caste
+                  Attributes, choose Houserule Attribute-based exalt instead.
+                </Typography>
+                <AlchemicalCasteSelect
                   value={character.caste}
                   onChange={handleChange}
                   fullWidth

@@ -19,6 +19,7 @@ import DragonbloodExaltEditor from './editors/DragonbloodExaltEditor.jsx'
 import LunarExaltEditor from './exaltTraits/LunarExaltEditor'
 import SiderealExaltEditor from './editors/SiderealExaltEditor'
 import AbyssalExaltEditor from './editors/AbyssalExaltEditor'
+import AlchemicalExaltEditor from './exaltTraits/AlchemicalExaltEditor'
 import HealthLevelEditor from './editors/healthLevelEditor.jsx'
 import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
@@ -129,6 +130,16 @@ class CharacterEditor extends Component<Props> {
               <AbyssalExaltEditor
                 character={character}
                 onChange={handleChange}
+              />
+            </Grid>
+          )}
+          {character.type === 'AlchemicalCharacter' && (
+            <Grid item xs={12} md={6}>
+              <AlchemicalExaltEditor
+                character={character}
+                onChange={handleChange}
+                onCheck={handleCheck}
+                onChangeMulti={handleChangeMulti}
               />
             </Grid>
           )}

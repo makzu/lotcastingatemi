@@ -253,6 +253,39 @@ export const LUNAR_CASTE_ATTRIBUTES = {
   casteless: [],
 }
 
+export const ALCHEMICAL_CASTE_ATTRIBUTES = {
+  orichalcum: [
+    { attr: 'attr_strength', pretty: 'Strength' },
+    { attr: 'attr_charisma', pretty: 'Charisma' },
+    { attr: 'attr_intelligence', pretty: 'Intelligence' },
+  ],
+  moonsilver: [
+    { attr: 'attr_dexterity', pretty: 'Dexterity' },
+    { attr: 'attr_appearance', pretty: 'Appearance' },
+    { attr: 'attr_wits', pretty: 'Wits' },
+  ],
+  jade: [
+    { attr: 'attr_stamina', pretty: 'Stamina' },
+    { attr: 'attr_charisma', pretty: 'Charisma' },
+    { attr: 'attr_wits', pretty: 'Wits' },
+  ],
+  starmetal: [
+    { attr: 'attr_dexterity', pretty: 'Dexterity' },
+    { attr: 'attr_manipulation', pretty: 'Manipulation' },
+    { attr: 'attr_intelligence', pretty: 'Intelligence' },
+  ],
+  soulsteel: [
+    { attr: 'attr_strength', pretty: 'Strength' },
+    { attr: 'attr_manipulation', pretty: 'Manipulation' },
+    { attr: 'attr_perception', pretty: 'Perception' },
+  ],
+  adamant: [
+    { attr: 'attr_stamina', pretty: 'Stamina' },
+    { attr: 'attr_appearance', pretty: 'Appearance' },
+    { attr: 'attr_perception', pretty: 'Perception' },
+  ],
+}
+
 export const ABILITY_NAMES = [
   'archery',
   'athletics',

@@ -2,7 +2,7 @@
 
 RSpec.shared_examples 'convertable_character' do |character_type|
   exalt_types = %i[
-    character solar_character dragonblood_character lunar_character sidereal_character abyssal_character
+    character solar_character dragonblood_character lunar_character sidereal_character abyssal_character alchemical_character
     custom_ability_character custom_attribute_character custom_essence_character
   ]
 

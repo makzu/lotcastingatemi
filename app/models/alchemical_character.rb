@@ -4,20 +4,20 @@
 class AlchemicalCharacter < Character
   include AttributeExalt
 
-  attribute :motes_personal_total,     :integer, default: 16
-  attribute :motes_personal_current,   :integer, default: 16
-  attribute :motes_peripheral_total,   :integer, default: 38
-  attribute :motes_peripheral_current, :integer, default: 38
+  attribute :motes_personal_total,     :integer, default: 13
+  attribute :motes_personal_current,   :integer, default: 13
+  attribute :motes_peripheral_total,   :integer, default: 33
+  attribute :motes_peripheral_current, :integer, default: 33
   attribute :exalt_type,               :string,  default: 'Alchemical'
 
   ALCHEMICAL_CASTES = %w[orichalcum jade moonsilver starmetal soulsteel adamant].freeze
   CASTE_ATTRIBUTES = {
-    orichalcum: %w[strength charisma intelligence],
-    moonsilver: %w[dexterity appearance wits],
-    jade:       %w[stamina charisma wits],
-    starmetal:  %w[dexterity manipulation intelligence],
-    soulsteel:  %w[stamina manipulation perception],
-    adamant:    %w[strength appearance perception]
+    orichalcum: %w[charisma intelligence strength],
+    moonsilver: %w[appearance dexterity wits],
+    jade:       %w[charisma stamina wits],
+    starmetal:  %w[dexterity intelligence manipulation],
+    soulsteel:  %w[manipulation perception stamina],
+    adamant:    %w[appearance perception strength]
   }.freeze
 
   before_validation :set_mote_pool_totals
@@ -26,7 +26,7 @@ class AlchemicalCharacter < Character
 
   validates :caste, inclusion: { in: ALCHEMICAL_CASTES }, unless: :caste_is_blank?
   validate  :caste_attributes_are_valid, unless: :caste_is_blank?
-  validates :caste_attributes, :favored_attributes, length: { maximum: 2 }
+  validates :favored_attributes, length: { maximum: 1 }
 
   def self.from_character!(character)
     new_cha = character.becomes(AlchemicalCharacter)
@@ -49,8 +49,8 @@ class AlchemicalCharacter < Character
   def set_mote_pool_totals
     return unless will_save_change_to_attribute?(:essence) || will_save_change_to_attribute?(:type)
 
-    self.motes_personal_total = essence + 15
-    self.motes_peripheral_total = (essence * 4) + 34
+    self.motes_personal_total = (essence * 2) + 11
+    self.motes_peripheral_total = (essence * 6) + 27
     if type_was == 'Character'
       self.motes_personal_current   = motes_personal_available
       self.motes_peripheral_current = motes_peripheral_available
@@ -61,9 +61,10 @@ class AlchemicalCharacter < Character
   end
 
   def set_caste_attributes_on_caste_change
-    return unless will_save_change_to_attribute? :caste
+    return unless will_save_change_to_attribute?(:caste)
 
-    self.caste_attributes = caste_attributes.select { |a| allowed_caste_attributes.include? a }
+    self.caste_attributes = (CASTE_ATTRIBUTES[caste.to_sym] || [])
+    self.favored_attributes = favored_attributes - (CASTE_ATTRIBUTES[caste.to_sym] || [])
   end
 
   def set_defaults

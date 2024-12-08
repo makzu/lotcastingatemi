@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.1'
+gem 'rails', '~> 7.2'
 
 # Vite_Rails for more modern frontend bundling
 gem 'vite_rails', '~> 3.0'

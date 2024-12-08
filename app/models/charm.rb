@@ -11,6 +11,8 @@ class Charm < ApplicationRecord
 
   ranks :sorting, with_same: :character_id
 
+  before_destroy :destroy_charm_slots
+
   def charm_type
     'Charm'
   end
@@ -22,5 +24,11 @@ class Charm < ApplicationRecord
 
   def self.from_charm!
     raise NotImplementedError
+  end
+
+  private
+
+  def destroy_charm_slots
+    CharmSlot.find_by(charm_id: id)&.destroy
   end
 end

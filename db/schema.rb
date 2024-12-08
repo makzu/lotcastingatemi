@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_18_223628) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_04_215719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -185,6 +185,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_223628) do
     t.integer "necromantic_motes", default: 0
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
+  end
+
+  create_table "charm_loadouts", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.boolean "active", default: false, null: false
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_charm_loadouts_on_character_id"
+  end
+
+  create_table "charm_slots", force: :cascade do |t|
+    t.bigint "charm_loadout_id", null: false
+    t.bigint "charm_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["charm_id"], name: "index_charm_slots_on_charm_id"
+    t.index ["charm_loadout_id"], name: "index_charm_slots_on_charm_loadout_id"
   end
 
   create_table "charms", force: :cascade do |t|
@@ -480,6 +498,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_223628) do
   add_foreign_key "battlegroups", "players"
   add_foreign_key "characters", "chronicles"
   add_foreign_key "characters", "players"
+  add_foreign_key "charm_loadouts", "characters"
+  add_foreign_key "charm_slots", "charm_loadouts"
+  add_foreign_key "charm_slots", "charms"
   add_foreign_key "charms", "characters"
   add_foreign_key "chronicle_players", "chronicles"
   add_foreign_key "chronicle_players", "players"

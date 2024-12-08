@@ -86,9 +86,17 @@ export function SorceryBlock({ character }: { character: Character }) {
     <BlockPaper>
       <Typography variant="h6">Sorcery</Typography>
 
-      <Typography paragraph>
+      {character.is_sorcerer && (
+        <Typography paragraph>
         Sorcerous Motes: {character.sorcerous_motes}
-      </Typography>
+        </Typography>
+      )}
+
+      {character.is_necromancer && (
+        <Typography paragraph>
+        Necromantic Motes: {character.necromantic_motes}
+        </Typography>
+      )}
 
       <Typography>Shaping Rituals:</Typography>
       {rituals}
@@ -216,7 +224,7 @@ export class CharacterSheet extends Component<Props> {
             </Grid>
           )}
 
-          {character.is_sorcerer && (
+          {(character.is_sorcerer || character.is_necromancer) && (
             <Grid item xs={12} md={2}>
               <SorceryBlock character={character} />
             </Grid>

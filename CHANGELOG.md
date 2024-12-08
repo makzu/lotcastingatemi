@@ -3,6 +3,7 @@
 ###### _Unreleased_
 
 - Alchemical characters can now be created
+- The sorcery block on the main character sheet now shows necromantic motes and rituals
 
 ## v120
 

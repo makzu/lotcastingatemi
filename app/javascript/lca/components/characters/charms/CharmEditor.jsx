@@ -128,6 +128,7 @@ class CharmEditor extends Component<Props, State> {
         type = 'Charms::AbilityCharm'
         break
       case 'LunarCharacter':
+      case 'AlchemicalCharacter':
       case 'CustomAttributeCharacter':
         type = 'Charms::AttributeCharm'
         break

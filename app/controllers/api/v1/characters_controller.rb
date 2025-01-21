@@ -12,16 +12,16 @@ module Api
 
         return unless stale? @characters
 
-        render json: @characters
+        render json: @characters, include: '**'
       end
 
       def show
         authorize @character
 
         if policy(@character).update?
-          render json: @character
+          render json: @character, include: '**'
         else
-          render json: @character.without_secrets
+          render json: @character.without_secrets, include: '**'
         end
       end
 

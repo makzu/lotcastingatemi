@@ -28,6 +28,7 @@ class Character < ApplicationRecord
     has_many :evocations,          -> { order(:sorting) }, class_name: '::Charms::Evocation'
     has_many :merits,              -> { order(:sorting) }
     has_many :weapons,             -> { order(:sorting) }
+    has_many :charm_loadouts
   end
 
   with_options dependent: :destroy do

@@ -54,6 +54,8 @@ class CharacterSerializer < PlayerAssetSerializer
   has_many :martial_arts_charms
   has_many :evocations
   has_many :spirit_charms
+
+  has_many :charm_loadouts
   # rubocop:enable Layout/EmptyLinesAroundArguments
 
   has_many :merits

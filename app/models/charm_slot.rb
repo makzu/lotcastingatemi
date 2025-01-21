@@ -2,8 +2,8 @@
 
 # Join model for Charm Loadouts to have Charms
 class CharmSlot < ApplicationRecord
-  belongs_to :charm_loadout
-  belongs_to :charm
+  belongs_to :charm_loadout, touch: true
+  belongs_to :charm, touch: true
 
   delegate :character, to: :charm_loadout
 

@@ -10,6 +10,8 @@ class Charm < ApplicationRecord
   include RankedModel
 
   ranks :sorting, with_same: :character_id
+  has_many :charm_slots, dependent: :destroy
+  has_many :charm_loadouts, through: :charm_slots
 
   before_destroy :destroy_charm_slots
 

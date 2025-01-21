@@ -19,6 +19,10 @@ module Api
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
+      # Bust responses cached before the serializers were last modified
+      etag { '2025-1-1' }
+      etag { current_player.try(:id) }
+
       def index
         head :not_found
       end

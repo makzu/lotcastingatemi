@@ -2,6 +2,7 @@ import {
   Battlegroup,
   Character,
   Charm,
+  CharmLoadout,
   Merit,
   Poison,
   QC,
@@ -26,6 +27,7 @@ export interface EntityState {
   battlegroups: { [id: number]: Battlegroup }
   combat_actors: { [id: number]: any }
   poisons: { [id: number]: Poison }
+  charm_loadouts: { [id: number]: CharmLoadout }
 }
 
 export interface WrappedEntityState {

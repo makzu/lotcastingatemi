@@ -5,6 +5,7 @@ export const merit = new schema.Entity('merits')
 export const charm = new schema.Entity('charms')
 export const spell = new schema.Entity('spells')
 export const poison = new schema.Entity('poisons')
+export const loadout = new schema.Entity('loadouts')
 export const weapon = new schema.Entity('weapons', {
   poisons: [poison],
 })
@@ -17,6 +18,7 @@ export const character = new schema.Entity('characters', {
   evocations: [charm],
   spirit_charms: [charm],
   poisons: [poison],
+  charm_loadouts: [loadout],
 })
 
 export const qc_merit = new schema.Entity('qc_merits')

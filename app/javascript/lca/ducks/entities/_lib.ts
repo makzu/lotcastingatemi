@@ -11,6 +11,7 @@ import { EntityState } from './_types'
 
 export type characterTraitTypes =
   | 'charm'
+  | 'charm_loadout'
   | 'merit'
   | 'poison'
   | 'spell'
@@ -45,6 +46,8 @@ type crudActions =
   | 'ADD_THING'
   | 'REMOVE_THING'
   | 'FETCH_FOR_CHRONICLE'
+  | 'ADD_CHARM'
+  | 'REMOVE_CHARM'
 
 export const API = 'lca-api'
 
@@ -60,8 +63,8 @@ export interface CrudActionGroup {
 
 export const massagePayload =
   (type: entityTypes | listTypes | string) =>
-  ({} = {}, {} = {}, res) =>
-    getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
+    ({} = {}, {} = {}, res) =>
+      getJSON(res.clone()).then((json) => normalize(json, schemas[type]))
 
 export const successMeta = (_: null, __: null, { headers }: Response) => ({
   page: headers.get('current-page'),

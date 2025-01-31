@@ -28,6 +28,7 @@ import type { EntityState } from './_types'
 import BattlegroupReducer from './battlegroup'
 import CharacterReducer from './character'
 import CharmReducer from './charm'
+import CharmLoadoutReducer from './charm_loadout'
 import ChronicleReducer from './chronicle'
 import CombatActorReducer from './combat_actor'
 import MeritReducer from './merit'
@@ -67,6 +68,7 @@ export const defaultState: EntityState = {
   battlegroups: {},
   combat_actors: {},
   poisons: {},
+  charm_loadouts: {},
 }
 
 export const CABLE_RECEIVED = 'lca/cable/RECEIVED'
@@ -86,6 +88,7 @@ export default createReducer(defaultState, {
   ...QcMeritReducer,
   ...BattlegroupReducer,
   ...CombatActorReducer,
+  ...CharmLoadoutReducer,
   [LOGOUT]: () => defaultState,
   [CABLE_RECEIVED]: (state, action) => {
     const { payload } = action

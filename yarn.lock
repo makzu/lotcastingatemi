@@ -11316,9 +11316,9 @@ __metadata:
   linkType: hard
 
 "tmpl@npm:1.0.x":
-  version: 1.0.4
-  resolution: "tmpl@npm:1.0.4"
-  checksum: 10c0/1eba5c6cefdc432ba393255d8fa1ada48c7ec3ec0d1c58955bb5293fff4f8a1cc4b305bea7940aba9301006009ea7a38a2f9333db0f332d72a732e9e4ae7ac9c
+  version: 1.0.5
+  resolution: "tmpl@npm:1.0.5"
+  checksum: 10c0/f935537799c2d1922cb5d6d3805f594388f75338fe7a4a9dac41504dd539704ca4db45b883b52e7b0aa5b2fd5ddadb1452bf95cd23a69da2f793a843f9451cc9
   languageName: node
   linkType: hard
 

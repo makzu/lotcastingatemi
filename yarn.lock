@@ -12292,9 +12292,9 @@ __metadata:
   linkType: hard
 
 "y18n@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "y18n@npm:4.0.0"
-  checksum: 10c0/2db291a3288e96916e0afb5cf5d230b9ce75acb7b3d2cd50bfc75b83df512e7a58a69094dab07d72c9f77c0be7c15f50e940c1863c79f5c18f42b8ca90bbfeb2
+  version: 4.0.3
+  resolution: "y18n@npm:4.0.3"
+  checksum: 10c0/308a2efd7cc296ab2c0f3b9284fd4827be01cfeb647b3ba18230e3a416eb1bc887ac050de9f8c4fd9e7856b2e8246e05d190b53c96c5ad8d8cb56dffb6f81024
   languageName: node
   linkType: hard
 

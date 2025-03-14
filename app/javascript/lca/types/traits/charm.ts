@@ -18,4 +18,5 @@ export interface Charm extends CharacterTrait {
   min_ability?: number
   artifact_name?: string
   style?: string
+  loadouts?: string[]
 }

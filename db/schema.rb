@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_18_223628) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_19_214926) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -183,6 +183,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_223628) do
     t.integer "chronicle_sorting"
     t.boolean "is_necromancer", default: false
     t.integer "necromantic_motes", default: 0
+    t.string "active_loadout"
     t.index ["chronicle_id"], name: "index_characters_on_chronicle_id"
     t.index ["player_id"], name: "index_characters_on_player_id"
   end
@@ -210,6 +211,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_223628) do
     t.string "categories", default: [], array: true
     t.string "summary", default: ""
     t.integer "sorting"
+    t.string "loadouts", default: [], array: true
     t.index ["character_id"], name: "index_charms_on_character_id"
   end
 

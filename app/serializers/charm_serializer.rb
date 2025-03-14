@@ -4,5 +4,5 @@
 class CharmSerializer < CharacterTraitSerializer
   attributes :name, :charm_type, :cost, :timing, :duration,
              :keywords, :min_essence, :prereqs, :body, :ref,
-             :categories, :summary
+             :categories, :loadouts, :summary
 end

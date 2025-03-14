@@ -16,7 +16,13 @@ module Api
       end
 
       def charm_params
-        params.require(:charm).permit(*base_attributes, :sorting_position, keywords: [], categories: [])
+        params.require(:charm).permit(
+          *base_attributes,
+          :sorting_position,
+          keywords:   [],
+          categories: [],
+          loadouts:   []
+        )
       end
     end
   end

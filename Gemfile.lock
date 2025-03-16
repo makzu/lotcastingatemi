@@ -125,7 +125,6 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     date (3.4.1)
-    dead_end (4.0.0)
     deep_cloneable (3.2.1)
       activerecord (>= 3.1.0, < 9)
     derailed_benchmarks (2.2.1)
@@ -265,10 +264,10 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
-    nokogiri (1.18.3)
     nio4r (2.7.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    nokogiri (1.18.3)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
@@ -534,7 +533,7 @@ DEPENDENCIES
   pundit-matchers (~> 3.1)
   rack-cors (~> 2.0)
   rack-mini-profiler (~> 3.3)
-  rails (~> 7.1)
+  rails (~> 7.2)
   rails_real_favicon (~> 0.1)
   rails_serve_static_assets (~> 0.0.5)
   ranked-model (~> 0.4.9)

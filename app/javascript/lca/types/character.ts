@@ -137,6 +137,7 @@ export interface Character extends PlayerAsset, WithSharedStats {
   anima_powers: any[]
   limit_trigger: string
   limit: number
+  active_loadout?: string
 
   excellency: string
   excellency_stunt: string

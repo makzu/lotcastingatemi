@@ -111,3 +111,14 @@ export const getAllCharmCategoriesForCharacter = createCachedSelector(
     return [...new Set(ch)]
   }
 )(characterIdMemoizer)
+
+export const getAllCharmLoadoutsForCharacter = createCachedSelector(
+  [getNativeCharmsForCharacter],
+  (charms) => {
+    let ch = charms
+      .reduce((a, charm) => [...a, ...charm.loadouts], [])
+      .sort()
+
+    return [...new Set(ch)]
+  }
+)(characterIdMemoizer)

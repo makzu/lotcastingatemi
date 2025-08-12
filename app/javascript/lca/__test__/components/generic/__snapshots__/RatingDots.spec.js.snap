@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RatingDots renders at all 1`] = `
-<div>
+<div
+  aria-label={3}
+>
   <div
     className="RatingDots-fullDot-2"
   >

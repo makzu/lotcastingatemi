@@ -17,6 +17,7 @@ import STControls from './StControls.jsx'
 import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import CharacterAddPopup from './characterAddPopup.jsx'
 import QcAddPopup from './qcAddPopup.jsx'
+import DiceRoller from 'components/DiceRoller'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.js'
@@ -132,6 +133,8 @@ class ChronicleDashboard extends Component<Props> {
         </Hidden>
 
         {is_st && <STControls chronicleId={chronicle.id} />}
+
+        <DiceRoller />
 
         <SortableGridList
           header={

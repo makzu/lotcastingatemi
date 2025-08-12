@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CharacterCard works for Solars 1`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -13,25 +13,40 @@ exports[`CharacterCard works for Solars 1`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         
-        <pure(WhatshotIcon) />
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+        <Memo(WhatshotIcon) />
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         1
          
-        Zenith Caste Solar
-      </WithStyles(Typography)>
+        Dawn Caste Solar
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -76,7 +91,10 @@ exports[`CharacterCard works for Solars 1`] = `
           "attr_stamina": 1,
           "attr_strength": 1,
           "attr_wits": 1,
-          "caste": "zenith",
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
+          "caste": "dawn",
           "caste_abilities": Array [],
           "charms": Array [
             1,
@@ -122,8 +140,9 @@ exports[`CharacterCard works for Solars 1`] = `
           ],
           "name": "",
           "onslaught": 0,
+          "poisons": Array [],
           "specialties": Array [],
-          "supernal_ability": "integrity",
+          "supernal_ability": "ride",
           "type": "SolarCharacter",
         }
       }
@@ -131,7 +150,7 @@ exports[`CharacterCard works for Solars 1`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -175,7 +194,10 @@ exports[`CharacterCard works for Solars 1`] = `
         "attr_stamina": 1,
         "attr_strength": 1,
         "attr_wits": 1,
-        "caste": "zenith",
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
+        "caste": "dawn",
         "caste_abilities": Array [],
         "charms": Array [
           1,
@@ -221,8 +243,9 @@ exports[`CharacterCard works for Solars 1`] = `
         ],
         "name": "",
         "onslaught": 0,
+        "poisons": Array [],
         "specialties": Array [],
-        "supernal_ability": "integrity",
+        "supernal_ability": "ride",
         "type": "SolarCharacter",
       }
     }
@@ -278,21 +301,21 @@ exports[`CharacterCard works for Solars 1`] = `
           "attribute": "dexterity",
           "attributeRating": 1,
           "bonus": Array [],
-          "defense": 1,
+          "defense": 0,
           "excellency": 0,
           "excellencyCost": 0,
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
-          "name": "medium weapon Parry",
+          "name": "light weapon Parry",
           "parry": true,
           "penalties": Array [],
           "rating": true,
-          "raw": 2,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 2,
+          "total": NaN,
           "totalPenalty": 0,
         }
       }
@@ -313,11 +336,15 @@ exports[`CharacterCard works for Solars 1`] = `
               "bonus": 2,
               "label": "unusual hide",
             },
+            Object {
+              "bonus": 1,
+              "label": "invulnerable skin of bronze",
+            },
           ],
           "name": "Soak",
           "natural": 1,
           "soak": true,
-          "total": 11,
+          "total": 12,
         }
       }
       staticRating={true}
@@ -427,7 +454,7 @@ exports[`CharacterCard works for Solars 1`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -444,13 +471,13 @@ exports[`CharacterCard works for Solars 1`] = `
       1
        
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for Solars 2`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -461,25 +488,40 @@ exports[`CharacterCard works for Solars 2`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         
-        <pure(WhatshotIcon) />
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+        <Memo(WhatshotIcon) />
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         2
          
-        Eclipse Caste Solar
-      </WithStyles(Typography)>
+        Night Caste Solar
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -529,8 +571,13 @@ exports[`CharacterCard works for Solars 2`] = `
           "attr_stamina": 2,
           "attr_strength": 1,
           "attr_wits": 2,
-          "caste": "eclipse",
-          "caste_abilities": Array [],
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
+          "caste": "night",
+          "caste_abilities": Array [
+            "survival",
+          ],
           "charms": Array [
             1,
             2,
@@ -575,8 +622,9 @@ exports[`CharacterCard works for Solars 2`] = `
           ],
           "name": "",
           "onslaught": 0,
+          "poisons": Array [],
           "specialties": Array [],
-          "supernal_ability": "martial_arts",
+          "supernal_ability": "presence",
           "type": "SolarCharacter",
         }
       }
@@ -584,7 +632,7 @@ exports[`CharacterCard works for Solars 2`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -633,8 +681,13 @@ exports[`CharacterCard works for Solars 2`] = `
         "attr_stamina": 2,
         "attr_strength": 1,
         "attr_wits": 2,
-        "caste": "eclipse",
-        "caste_abilities": Array [],
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
+        "caste": "night",
+        "caste_abilities": Array [
+          "survival",
+        ],
         "charms": Array [
           1,
           2,
@@ -679,8 +732,9 @@ exports[`CharacterCard works for Solars 2`] = `
         ],
         "name": "",
         "onslaught": 0,
+        "poisons": Array [],
         "specialties": Array [],
-        "supernal_ability": "martial_arts",
+        "supernal_ability": "presence",
         "type": "SolarCharacter",
       }
     }
@@ -736,26 +790,26 @@ exports[`CharacterCard works for Solars 2`] = `
           "attribute": "dexterity",
           "attributeRating": 2,
           "bonus": Array [],
-          "defense": 1,
+          "defense": 0,
           "excellency": 1,
           "excellencyCost": 2,
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
-          "name": "medium weapon Parry",
+          "name": "light weapon Parry",
           "parry": true,
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
           "rating": true,
-          "raw": 2,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 1,
+          "total": NaN,
           "totalPenalty": 1,
         }
       }
@@ -776,11 +830,15 @@ exports[`CharacterCard works for Solars 2`] = `
               "bonus": 2,
               "label": "unusual hide",
             },
+            Object {
+              "bonus": 2,
+              "label": "invulnerable skin of bronze",
+            },
           ],
           "name": "Soak",
           "natural": 2,
           "soak": true,
-          "total": 9,
+          "total": 11,
         }
       }
       staticRating={true}
@@ -825,7 +883,7 @@ exports[`CharacterCard works for Solars 2`] = `
           "name": "Resolve",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -861,7 +919,7 @@ exports[`CharacterCard works for Solars 2`] = `
           "name": "Guile",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -900,7 +958,7 @@ exports[`CharacterCard works for Solars 2`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -916,13 +974,13 @@ exports[`CharacterCard works for Solars 2`] = `
       Wound -
       1
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for Solars 3`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -933,25 +991,40 @@ exports[`CharacterCard works for Solars 3`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         qÓ
-        <pure(WhatshotIcon) />
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+        <Memo(WhatshotIcon) />
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         2
          
         Twilight Caste Solar
-      </WithStyles(Typography)>
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -1012,11 +1085,11 @@ exports[`CharacterCard works for Solars 3`] = `
           "attr_stamina": 1,
           "attr_strength": 3,
           "attr_wits": 2,
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
           "caste": "twilight",
-          "caste_abilities": Array [
-            "medicine",
-            "presence",
-          ],
+          "caste_abilities": Array [],
           "charms": Array [
             1,
             2,
@@ -1051,7 +1124,7 @@ exports[`CharacterCard works for Solars 3`] = `
           "exalt_type": "solar",
           "excellency": "solar",
           "favored_abilities": Array [
-            "presence",
+            "archery",
           ],
           "health_level_0s": 1,
           "health_level_1s": 1,
@@ -1063,13 +1136,14 @@ exports[`CharacterCard works for Solars 3`] = `
           ],
           "name": "qÓ",
           "onslaught": 2,
+          "poisons": Array [],
           "specialties": Array [
             Object {
               "ability": Object {},
               "context": Object {},
             },
           ],
-          "supernal_ability": "medicine",
+          "supernal_ability": "ride",
           "type": "SolarCharacter",
         }
       }
@@ -1077,7 +1151,7 @@ exports[`CharacterCard works for Solars 3`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -1137,11 +1211,11 @@ exports[`CharacterCard works for Solars 3`] = `
         "attr_stamina": 1,
         "attr_strength": 3,
         "attr_wits": 2,
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
         "caste": "twilight",
-        "caste_abilities": Array [
-          "medicine",
-          "presence",
-        ],
+        "caste_abilities": Array [],
         "charms": Array [
           1,
           2,
@@ -1176,7 +1250,7 @@ exports[`CharacterCard works for Solars 3`] = `
         "exalt_type": "solar",
         "excellency": "solar",
         "favored_abilities": Array [
-          "presence",
+          "archery",
         ],
         "health_level_0s": 1,
         "health_level_1s": 1,
@@ -1188,13 +1262,14 @@ exports[`CharacterCard works for Solars 3`] = `
         ],
         "name": "qÓ",
         "onslaught": 2,
+        "poisons": Array [],
         "specialties": Array [
           Object {
             "ability": Object {},
             "context": Object {},
           },
         ],
-        "supernal_ability": "medicine",
+        "supernal_ability": "ride",
         "type": "SolarCharacter",
       }
     }
@@ -1267,21 +1342,21 @@ exports[`CharacterCard works for Solars 3`] = `
           "parry": true,
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 3,
             },
             Object {
-              "label": "Onslaught",
+              "label": "onslaught",
               "penalty": 2,
             },
           ],
           "rating": true,
-          "raw": 1,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 0,
+          "total": NaN,
           "totalPenalty": 5,
         }
       }
@@ -1302,11 +1377,15 @@ exports[`CharacterCard works for Solars 3`] = `
               "bonus": 2,
               "label": "unusual hide",
             },
+            Object {
+              "bonus": 2,
+              "label": "invulnerable skin of bronze",
+            },
           ],
           "name": "Soak",
           "natural": 1,
           "soak": true,
-          "total": 8,
+          "total": 10,
         }
       }
       staticRating={true}
@@ -1355,7 +1434,7 @@ exports[`CharacterCard works for Solars 3`] = `
           "name": "Resolve",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 3,
             },
           ],
@@ -1391,7 +1470,7 @@ exports[`CharacterCard works for Solars 3`] = `
           "name": "Guile",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 3,
             },
           ],
@@ -1430,7 +1509,7 @@ exports[`CharacterCard works for Solars 3`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -1456,13 +1535,13 @@ exports[`CharacterCard works for Solars 3`] = `
       Wound -
       3
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for Solars 4`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -1473,25 +1552,40 @@ exports[`CharacterCard works for Solars 4`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         ÷È
-        <pure(WhatshotIcon) />
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+        <Memo(WhatshotIcon) />
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         4
          
-        Zenith Caste Solar
-      </WithStyles(Typography)>
+        Dawn Caste Solar
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -1538,11 +1632,14 @@ exports[`CharacterCard works for Solars 4`] = `
           "attr_stamina": 2,
           "attr_strength": 2,
           "attr_wits": 4,
-          "caste": "zenith",
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
+          "caste": "dawn",
           "caste_abilities": Array [
-            "stealth",
-            "sail",
+            "occult",
             "brawl",
+            "craft",
           ],
           "charms": Array [
             1,
@@ -1578,8 +1675,8 @@ exports[`CharacterCard works for Solars 4`] = `
           "exalt_type": "solar",
           "excellency": "solar",
           "favored_abilities": Array [
-            "craft",
-            "ride",
+            "awareness",
+            "survival",
           ],
           "health_level_0s": 1,
           "health_level_1s": 3,
@@ -1591,13 +1688,14 @@ exports[`CharacterCard works for Solars 4`] = `
           ],
           "name": "÷È",
           "onslaught": 0,
+          "poisons": Array [],
           "specialties": Array [
             Object {
               "ability": Object {},
               "context": Object {},
             },
           ],
-          "supernal_ability": "medicine",
+          "supernal_ability": "archery",
           "type": "SolarCharacter",
         }
       }
@@ -1605,7 +1703,7 @@ exports[`CharacterCard works for Solars 4`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -1651,11 +1749,14 @@ exports[`CharacterCard works for Solars 4`] = `
         "attr_stamina": 2,
         "attr_strength": 2,
         "attr_wits": 4,
-        "caste": "zenith",
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
+        "caste": "dawn",
         "caste_abilities": Array [
-          "stealth",
-          "sail",
+          "occult",
           "brawl",
+          "craft",
         ],
         "charms": Array [
           1,
@@ -1691,8 +1792,8 @@ exports[`CharacterCard works for Solars 4`] = `
         "exalt_type": "solar",
         "excellency": "solar",
         "favored_abilities": Array [
-          "craft",
-          "ride",
+          "awareness",
+          "survival",
         ],
         "health_level_0s": 1,
         "health_level_1s": 3,
@@ -1704,13 +1805,14 @@ exports[`CharacterCard works for Solars 4`] = `
         ],
         "name": "÷È",
         "onslaught": 0,
+        "poisons": Array [],
         "specialties": Array [
           Object {
             "ability": Object {},
             "context": Object {},
           },
         ],
-        "supernal_ability": "medicine",
+        "supernal_ability": "archery",
         "type": "SolarCharacter",
       }
     }
@@ -1735,14 +1837,19 @@ exports[`CharacterCard works for Solars 4`] = `
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
           "name": "Evasion",
-          "penalties": Array [],
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 3,
+            },
+          ],
           "rating": true,
           "raw": 3,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 4,
-          "totalPenalty": -1,
+          "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -1761,22 +1868,27 @@ exports[`CharacterCard works for Solars 4`] = `
           "attribute": "dexterity",
           "attributeRating": 3,
           "bonus": Array [],
-          "defense": 1,
+          "defense": 0,
           "excellency": 2,
           "excellencyCost": 4,
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
-          "name": "medium weapon Parry",
+          "name": "light weapon Parry",
           "parry": true,
-          "penalties": Array [],
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 3,
+            },
+          ],
           "rating": true,
-          "raw": 3,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 4,
-          "totalPenalty": -1,
+          "total": NaN,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -1830,14 +1942,19 @@ exports[`CharacterCard works for Solars 4`] = `
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
           "name": "Resolve",
-          "penalties": Array [],
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 3,
+            },
+          ],
           "rating": true,
           "raw": 3,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 4,
-          "totalPenalty": -1,
+          "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -1861,14 +1978,19 @@ exports[`CharacterCard works for Solars 4`] = `
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
           "name": "Guile",
-          "penalties": Array [],
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 3,
+            },
+          ],
           "rating": true,
           "raw": 2,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 3,
-          "totalPenalty": -1,
+          "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -1897,7 +2019,7 @@ exports[`CharacterCard works for Solars 4`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -1909,13 +2031,17 @@ exports[`CharacterCard works for Solars 4`] = `
       Penalties:
     </strong>
      
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+    <span>
+      Wound -
+      3
+    </span>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for Solars 5`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -1926,25 +2052,40 @@ exports[`CharacterCard works for Solars 5`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         L
-        <pure(WhatshotIcon) />
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+        <Memo(WhatshotIcon) />
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         3
          
-        Dawn Caste Solar
-      </WithStyles(Typography)>
+        Zenith Caste Solar
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -2020,11 +2161,12 @@ exports[`CharacterCard works for Solars 5`] = `
           "attr_stamina": 3,
           "attr_strength": 2,
           "attr_wits": 2,
-          "caste": "dawn",
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
+          "caste": "zenith",
           "caste_abilities": Array [
-            "athletics",
-            "linguistics",
-            "lore",
+            "performance",
           ],
           "charms": Array [
             1,
@@ -2061,8 +2203,9 @@ exports[`CharacterCard works for Solars 5`] = `
           "excellency": "solar",
           "favored_abilities": Array [
             "martial_arts",
-            "craft",
-            "awareness",
+            "occult",
+            "larceny",
+            "larceny",
           ],
           "health_level_0s": 4,
           "health_level_1s": 2,
@@ -2074,6 +2217,7 @@ exports[`CharacterCard works for Solars 5`] = `
           ],
           "name": "L",
           "onslaught": 2,
+          "poisons": Array [],
           "specialties": Array [
             Object {
               "ability": Object {},
@@ -2088,7 +2232,7 @@ exports[`CharacterCard works for Solars 5`] = `
               "context": Object {},
             },
           ],
-          "supernal_ability": "survival",
+          "supernal_ability": "performance",
           "type": "SolarCharacter",
         }
       }
@@ -2096,7 +2240,7 @@ exports[`CharacterCard works for Solars 5`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -2171,11 +2315,12 @@ exports[`CharacterCard works for Solars 5`] = `
         "attr_stamina": 3,
         "attr_strength": 2,
         "attr_wits": 2,
-        "caste": "dawn",
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
+        "caste": "zenith",
         "caste_abilities": Array [
-          "athletics",
-          "linguistics",
-          "lore",
+          "performance",
         ],
         "charms": Array [
           1,
@@ -2212,8 +2357,9 @@ exports[`CharacterCard works for Solars 5`] = `
         "excellency": "solar",
         "favored_abilities": Array [
           "martial_arts",
-          "craft",
-          "awareness",
+          "occult",
+          "larceny",
+          "larceny",
         ],
         "health_level_0s": 4,
         "health_level_1s": 2,
@@ -2225,6 +2371,7 @@ exports[`CharacterCard works for Solars 5`] = `
         ],
         "name": "L",
         "onslaught": 2,
+        "poisons": Array [],
         "specialties": Array [
           Object {
             "ability": Object {},
@@ -2239,7 +2386,7 @@ exports[`CharacterCard works for Solars 5`] = `
             "context": Object {},
           },
         ],
-        "supernal_ability": "survival",
+        "supernal_ability": "performance",
         "type": "SolarCharacter",
       }
     }
@@ -2299,30 +2446,30 @@ exports[`CharacterCard works for Solars 5`] = `
           "attribute": "dexterity",
           "attributeRating": 3,
           "bonus": Array [],
-          "defense": 1,
+          "defense": 0,
           "excellency": 3,
           "excellencyCost": 6,
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
-          "name": "medium weapon Parry",
+          "name": "light weapon Parry",
           "parry": true,
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
             Object {
-              "label": "Onslaught",
+              "label": "onslaught",
               "penalty": 2,
             },
           ],
           "rating": true,
-          "raw": 5,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 2,
+          "total": NaN,
           "totalPenalty": 3,
         }
       }
@@ -2379,7 +2526,7 @@ exports[`CharacterCard works for Solars 5`] = `
           "name": "Resolve",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -2415,7 +2562,7 @@ exports[`CharacterCard works for Solars 5`] = `
           "name": "Guile",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -2454,7 +2601,7 @@ exports[`CharacterCard works for Solars 5`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -2475,13 +2622,13 @@ exports[`CharacterCard works for Solars 5`] = `
       Wound -
       1
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for mortals 1`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -2492,24 +2639,39 @@ exports[`CharacterCard works for mortals 1`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         1
          
         Mortal
-      </WithStyles(Typography)>
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -2553,6 +2715,9 @@ exports[`CharacterCard works for mortals 1`] = `
           "attr_stamina": 1,
           "attr_strength": 1,
           "attr_wits": 1,
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
           "damage_aggravated": 0,
           "damage_bashing": 0,
           "damage_lethal": 0,
@@ -2564,6 +2729,7 @@ exports[`CharacterCard works for mortals 1`] = `
           "health_level_incap": 0,
           "name": "",
           "onslaught": 0,
+          "poisons": Array [],
           "specialties": Array [],
           "type": "Character",
         }
@@ -2572,7 +2738,7 @@ exports[`CharacterCard works for mortals 1`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -2615,6 +2781,9 @@ exports[`CharacterCard works for mortals 1`] = `
         "attr_stamina": 1,
         "attr_strength": 1,
         "attr_wits": 1,
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
         "damage_aggravated": 0,
         "damage_bashing": 0,
         "damage_lethal": 0,
@@ -2626,6 +2795,7 @@ exports[`CharacterCard works for mortals 1`] = `
         "health_level_incap": 0,
         "name": "",
         "onslaught": 0,
+        "poisons": Array [],
         "specialties": Array [],
         "type": "Character",
       }
@@ -2682,21 +2852,21 @@ exports[`CharacterCard works for mortals 1`] = `
           "attribute": "dexterity",
           "attributeRating": 1,
           "bonus": Array [],
-          "defense": 1,
+          "defense": 0,
           "excellency": 0,
           "excellencyCost": 0,
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
-          "name": "medium weapon Parry",
+          "name": "light weapon Parry",
           "parry": true,
           "penalties": Array [],
           "rating": true,
-          "raw": 2,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 2,
+          "total": NaN,
           "totalPenalty": 0,
         }
       }
@@ -2717,11 +2887,15 @@ exports[`CharacterCard works for mortals 1`] = `
               "bonus": 2,
               "label": "unusual hide",
             },
+            Object {
+              "bonus": 1,
+              "label": "invulnerable skin of bronze",
+            },
           ],
           "name": "Soak",
           "natural": 1,
           "soak": true,
-          "total": 11,
+          "total": 12,
         }
       }
       staticRating={true}
@@ -2831,7 +3005,7 @@ exports[`CharacterCard works for mortals 1`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -2848,13 +3022,13 @@ exports[`CharacterCard works for mortals 1`] = `
       1
        
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for mortals 2`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -2865,24 +3039,39 @@ exports[`CharacterCard works for mortals 2`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         2
          
         Mortal
-      </WithStyles(Typography)>
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -2931,6 +3120,9 @@ exports[`CharacterCard works for mortals 2`] = `
           "attr_stamina": 2,
           "attr_strength": 1,
           "attr_wits": 2,
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
           "damage_aggravated": 1,
           "damage_bashing": 0,
           "damage_lethal": 1,
@@ -2942,6 +3134,7 @@ exports[`CharacterCard works for mortals 2`] = `
           "health_level_incap": 1,
           "name": "",
           "onslaught": 0,
+          "poisons": Array [],
           "specialties": Array [],
           "type": "Character",
         }
@@ -2950,7 +3143,7 @@ exports[`CharacterCard works for mortals 2`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -2998,6 +3191,9 @@ exports[`CharacterCard works for mortals 2`] = `
         "attr_stamina": 2,
         "attr_strength": 1,
         "attr_wits": 2,
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
         "damage_aggravated": 1,
         "damage_bashing": 0,
         "damage_lethal": 1,
@@ -3009,6 +3205,7 @@ exports[`CharacterCard works for mortals 2`] = `
         "health_level_incap": 1,
         "name": "",
         "onslaught": 0,
+        "poisons": Array [],
         "specialties": Array [],
         "type": "Character",
       }
@@ -3065,26 +3262,26 @@ exports[`CharacterCard works for mortals 2`] = `
           "attribute": "dexterity",
           "attributeRating": 2,
           "bonus": Array [],
-          "defense": 1,
+          "defense": 0,
           "excellency": 0,
           "excellencyCost": 0,
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
-          "name": "medium weapon Parry",
+          "name": "light weapon Parry",
           "parry": true,
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
           "rating": true,
-          "raw": 2,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 1,
+          "total": NaN,
           "totalPenalty": 1,
         }
       }
@@ -3105,11 +3302,15 @@ exports[`CharacterCard works for mortals 2`] = `
               "bonus": 2,
               "label": "unusual hide",
             },
+            Object {
+              "bonus": 2,
+              "label": "invulnerable skin of bronze",
+            },
           ],
           "name": "Soak",
           "natural": 2,
           "soak": true,
-          "total": 9,
+          "total": 11,
         }
       }
       staticRating={true}
@@ -3154,7 +3355,7 @@ exports[`CharacterCard works for mortals 2`] = `
           "name": "Resolve",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -3190,7 +3391,7 @@ exports[`CharacterCard works for mortals 2`] = `
           "name": "Guile",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -3229,7 +3430,7 @@ exports[`CharacterCard works for mortals 2`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -3245,13 +3446,13 @@ exports[`CharacterCard works for mortals 2`] = `
       Wound -
       1
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for mortals 3`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -3262,24 +3463,39 @@ exports[`CharacterCard works for mortals 3`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         qÓ
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         2
          
         Mortal
-      </WithStyles(Typography)>
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -3339,6 +3555,9 @@ exports[`CharacterCard works for mortals 3`] = `
           "attr_stamina": 1,
           "attr_strength": 3,
           "attr_wits": 2,
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
           "damage_aggravated": 2,
           "damage_bashing": 0,
           "damage_lethal": 2,
@@ -3349,7 +3568,8 @@ exports[`CharacterCard works for mortals 3`] = `
           "health_level_4s": 2,
           "health_level_incap": 0,
           "name": "qÓ",
-          "onslaught": 1,
+          "onslaught": 2,
+          "poisons": Array [],
           "specialties": Array [
             Object {
               "ability": Object {},
@@ -3363,7 +3583,7 @@ exports[`CharacterCard works for mortals 3`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -3422,6 +3642,9 @@ exports[`CharacterCard works for mortals 3`] = `
         "attr_stamina": 1,
         "attr_strength": 3,
         "attr_wits": 2,
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
         "damage_aggravated": 2,
         "damage_bashing": 0,
         "damage_lethal": 2,
@@ -3432,7 +3655,8 @@ exports[`CharacterCard works for mortals 3`] = `
         "health_level_4s": 2,
         "health_level_incap": 0,
         "name": "qÓ",
-        "onslaught": 1,
+        "onslaught": 2,
+        "poisons": Array [],
         "specialties": Array [
           Object {
             "ability": Object {},
@@ -3474,7 +3698,7 @@ exports[`CharacterCard works for mortals 3`] = `
             },
             Object {
               "label": "onslaught",
-              "penalty": 1,
+              "penalty": 2,
             },
           ],
           "rating": true,
@@ -3483,7 +3707,7 @@ exports[`CharacterCard works for mortals 3`] = `
           "specialties": Array [],
           "specialtyMatters": false,
           "total": 0,
-          "totalPenalty": 5,
+          "totalPenalty": 6,
         }
       }
       staticRating={true}
@@ -3511,22 +3735,22 @@ exports[`CharacterCard works for mortals 3`] = `
           "parry": true,
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 3,
             },
             Object {
-              "label": "Onslaught",
-              "penalty": 1,
+              "label": "onslaught",
+              "penalty": 2,
             },
           ],
           "rating": true,
-          "raw": 1,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 0,
-          "totalPenalty": 4,
+          "total": NaN,
+          "totalPenalty": 5,
         }
       }
       staticRating={true}
@@ -3546,11 +3770,15 @@ exports[`CharacterCard works for mortals 3`] = `
               "bonus": 2,
               "label": "unusual hide",
             },
+            Object {
+              "bonus": 2,
+              "label": "invulnerable skin of bronze",
+            },
           ],
           "name": "Soak",
           "natural": 1,
           "soak": true,
-          "total": 8,
+          "total": 10,
         }
       }
       staticRating={true}
@@ -3578,7 +3806,7 @@ exports[`CharacterCard works for mortals 3`] = `
           "name": "Resolve",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 3,
             },
           ],
@@ -3614,7 +3842,7 @@ exports[`CharacterCard works for mortals 3`] = `
           "name": "Guile",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 3,
             },
           ],
@@ -3653,7 +3881,7 @@ exports[`CharacterCard works for mortals 3`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -3672,20 +3900,20 @@ exports[`CharacterCard works for mortals 3`] = `
     </span>
     <span>
       Onslaught -
-      1
+      2
        
     </span>
     <span>
       Wound -
       3
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for mortals 4`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -3696,24 +3924,39 @@ exports[`CharacterCard works for mortals 4`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         ÷È
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         4
          
         Mortal
-      </WithStyles(Typography)>
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -3759,6 +4002,9 @@ exports[`CharacterCard works for mortals 4`] = `
           "attr_stamina": 2,
           "attr_strength": 2,
           "attr_wits": 4,
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
           "damage_aggravated": 3,
           "damage_bashing": 1,
           "damage_lethal": 3,
@@ -3769,7 +4015,8 @@ exports[`CharacterCard works for mortals 4`] = `
           "health_level_4s": 0,
           "health_level_incap": 3,
           "name": "÷È",
-          "onslaught": 3,
+          "onslaught": 0,
+          "poisons": Array [],
           "specialties": Array [
             Object {
               "ability": Object {},
@@ -3783,7 +4030,7 @@ exports[`CharacterCard works for mortals 4`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -3828,6 +4075,9 @@ exports[`CharacterCard works for mortals 4`] = `
         "attr_stamina": 2,
         "attr_strength": 2,
         "attr_wits": 4,
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
         "damage_aggravated": 3,
         "damage_bashing": 1,
         "damage_lethal": 3,
@@ -3838,7 +4088,8 @@ exports[`CharacterCard works for mortals 4`] = `
         "health_level_4s": 0,
         "health_level_incap": 3,
         "name": "÷È",
-        "onslaught": 3,
+        "onslaught": 0,
+        "poisons": Array [],
         "specialties": Array [
           Object {
             "ability": Object {},
@@ -3871,7 +4122,7 @@ exports[`CharacterCard works for mortals 4`] = `
           "name": "Evasion",
           "penalties": Array [
             Object {
-              "label": "onslaught",
+              "label": "wound",
               "penalty": 3,
             },
           ],
@@ -3880,8 +4131,8 @@ exports[`CharacterCard works for mortals 4`] = `
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 1,
-          "totalPenalty": 2,
+          "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -3900,27 +4151,27 @@ exports[`CharacterCard works for mortals 4`] = `
           "attribute": "dexterity",
           "attributeRating": 3,
           "bonus": Array [],
-          "defense": 1,
+          "defense": 0,
           "excellency": 0,
           "excellencyCost": 0,
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
-          "name": "medium weapon Parry",
+          "name": "light weapon Parry",
           "parry": true,
           "penalties": Array [
             Object {
-              "label": "Onslaught",
+              "label": "wound",
               "penalty": 3,
             },
           ],
           "rating": true,
-          "raw": 3,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 1,
-          "totalPenalty": 2,
+          "total": NaN,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -3974,14 +4225,19 @@ exports[`CharacterCard works for mortals 4`] = `
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
           "name": "Resolve",
-          "penalties": Array [],
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 3,
+            },
+          ],
           "rating": true,
           "raw": 3,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 4,
-          "totalPenalty": -1,
+          "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -4005,14 +4261,19 @@ exports[`CharacterCard works for mortals 4`] = `
           "excellencyStunt": 0,
           "excellencyStuntCost": 0,
           "name": "Guile",
-          "penalties": Array [],
+          "penalties": Array [
+            Object {
+              "label": "wound",
+              "penalty": 3,
+            },
+          ],
           "rating": true,
           "raw": 2,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 3,
-          "totalPenalty": -1,
+          "total": 0,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -4041,7 +4302,7 @@ exports[`CharacterCard works for mortals 4`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -4054,17 +4315,16 @@ exports[`CharacterCard works for mortals 4`] = `
     </strong>
      
     <span>
-      Onslaught -
+      Wound -
       3
-       
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;
 
 exports[`CharacterCard works for mortals 5`] = `
-<WithStyles(Paper)>
-  <WithStyles(Typography)
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Typography))
     component="div"
     style={
       Object {
@@ -4075,24 +4335,39 @@ exports[`CharacterCard works for mortals 5`] = `
     }
   >
     <sortableHandle />
-  </WithStyles(Typography)>
-  <div>
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    component="div"
+  >
     <div>
-      <WithStyles(Typography)
-        component={[Function]}
+      <WithStyles(ForwardRef(Typography))
+        component={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/characters/undefined"
-        variant="title"
+        variant="h6"
       >
         L
-      </WithStyles(Typography)>
-      <WithStyles(Typography)
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
         paragraph={true}
       >
         Essence 
         3
          
         Mortal
-      </WithStyles(Typography)>
+      </WithStyles(ForwardRef(Typography))>
     </div>
     <WithStyles(Connect(NotesPopup))
       character={
@@ -4167,6 +4442,9 @@ exports[`CharacterCard works for mortals 5`] = `
           "attr_stamina": 3,
           "attr_strength": 2,
           "attr_wits": 2,
+          "bonus_hardness": 0,
+          "bonus_mobility_penalty": 0,
+          "bonus_soak": 0,
           "damage_aggravated": 0,
           "damage_bashing": 3,
           "damage_lethal": 2,
@@ -4177,7 +4455,8 @@ exports[`CharacterCard works for mortals 5`] = `
           "health_level_4s": 4,
           "health_level_incap": 1,
           "name": "L",
-          "onslaught": 4,
+          "onslaught": 2,
+          "poisons": Array [],
           "specialties": Array [
             Object {
               "ability": Object {},
@@ -4199,7 +4478,7 @@ exports[`CharacterCard works for mortals 5`] = `
     <WithStyles(CharacterMenu)
       characterType="character"
     />
-  </div>
+  </WithStyles(ForwardRef(Typography))>
   <WithStyles(SpendableBlock)
     character={
       Object {
@@ -4273,6 +4552,9 @@ exports[`CharacterCard works for mortals 5`] = `
         "attr_stamina": 3,
         "attr_strength": 2,
         "attr_wits": 2,
+        "bonus_hardness": 0,
+        "bonus_mobility_penalty": 0,
+        "bonus_soak": 0,
         "damage_aggravated": 0,
         "damage_bashing": 3,
         "damage_lethal": 2,
@@ -4283,7 +4565,8 @@ exports[`CharacterCard works for mortals 5`] = `
         "health_level_4s": 4,
         "health_level_incap": 1,
         "name": "L",
-        "onslaught": 4,
+        "onslaught": 2,
+        "poisons": Array [],
         "specialties": Array [
           Object {
             "ability": Object {},
@@ -4329,7 +4612,7 @@ exports[`CharacterCard works for mortals 5`] = `
             },
             Object {
               "label": "onslaught",
-              "penalty": 4,
+              "penalty": 2,
             },
           ],
           "rating": true,
@@ -4337,8 +4620,8 @@ exports[`CharacterCard works for mortals 5`] = `
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 0,
-          "totalPenalty": 5,
+          "total": 1,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -4366,22 +4649,22 @@ exports[`CharacterCard works for mortals 5`] = `
           "parry": true,
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
             Object {
-              "label": "Onslaught",
-              "penalty": 4,
+              "label": "onslaught",
+              "penalty": 2,
             },
           ],
           "rating": true,
-          "raw": 4,
+          "raw": NaN,
           "shield": false,
           "specialAttacks": Array [],
           "specialties": Array [],
           "specialtyMatters": false,
-          "total": 0,
-          "totalPenalty": 5,
+          "total": NaN,
+          "totalPenalty": 3,
         }
       }
       staticRating={true}
@@ -4437,7 +4720,7 @@ exports[`CharacterCard works for mortals 5`] = `
           "name": "Resolve",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -4473,7 +4756,7 @@ exports[`CharacterCard works for mortals 5`] = `
           "name": "Guile",
           "penalties": Array [
             Object {
-              "label": "Wound",
+              "label": "wound",
               "penalty": 1,
             },
           ],
@@ -4512,7 +4795,7 @@ exports[`CharacterCard works for mortals 5`] = `
       staticRating={true}
     />
   </div>
-  <WithStyles(Typography)
+  <WithStyles(ForwardRef(Typography))
     paragraph={true}
     style={
       Object {
@@ -4526,13 +4809,13 @@ exports[`CharacterCard works for mortals 5`] = `
      
     <span>
       Onslaught -
-      4
+      2
        
     </span>
     <span>
       Wound -
       1
     </span>
-  </WithStyles(Typography)>
-</WithStyles(Paper)>
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;

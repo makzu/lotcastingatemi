@@ -254,8 +254,14 @@ export const penaltyObject = (
   if (useMobility)
     penalty = [...penalty, { label: 'mobility', penalty: penalties.mobility }]
   if (usePoison)
-    penalty = [...penalty, { label: 'poison', penalty: penalties.poisonTotal }]
+    penalty = [
+      ...penalty,
+      { label: 'poison', penalty: penalties.poisonTotal || 0 },
+    ]
   if (useOnslaught)
-    penalty = [...penalty, { label: 'onslaught', penalty: penalties.onslaught }]
+    penalty = [
+      ...penalty,
+      { label: 'onslaught', penalty: penalties.onslaught || 0 },
+    ]
   return penalty
 }

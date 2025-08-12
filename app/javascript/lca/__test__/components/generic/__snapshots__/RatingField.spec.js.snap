@@ -2,25 +2,27 @@
 
 exports[`RatingField renders at all 1`] = `
 <div
-  className="MuiFormControl-root-3 RatingField-field-1"
+  className="MuiFormControl-root MuiTextField-root RatingField-field-1"
 >
   <label
-    className="MuiFormLabel-root-18 MuiFormLabel-filled-22 MuiInputLabel-root-7 MuiInputLabel-formControl-12 MuiInputLabel-animated-15 MuiInputLabel-shrink-14"
+    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
     data-shrink={true}
   >
     asdf
   </label>
   <div
-    className="MuiInputBase-root-38 MuiInput-root-25 MuiInput-underline-29 MuiInputBase-formControl-39 MuiInput-formControl-26"
+    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
     onClick={[Function]}
   >
     <input
       aria-invalid={false}
-      className="MuiInputBase-input-48 MuiInput-input-33 MuiInputBase-inputType-51 MuiInput-inputType-36"
+      autoFocus={false}
+      className="MuiInputBase-input MuiInput-input"
       disabled={false}
       max={Infinity}
       min={0}
       name="asdf"
+      onAnimationStart={[Function]}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}

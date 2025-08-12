@@ -19,6 +19,7 @@ import SiderealCasteSelect from 'components/characterEditor/exaltTraits/Sidereal
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
 import type { Enhancer } from 'utils/flow-types'
+import { omit } from 'lodash'
 
 const initialState = {
   open: false,
@@ -40,8 +41,44 @@ type State = {
   character: Object
 }
 
+const disallowedKeys = [
+  'id',
+  'character_id',
+  'created_at',
+  'updated_at',
+  'player_id',
+  'chronicle_id',
+  'sorting',
+  'chronicle_sorting',
+  'pinned',
+  'hidden',
+  'public',
+  'in_combat',
+  'has_acted',
+]
+
+const sanitizeObject = (obj) => {
+  if (Array.isArray(obj)) {
+    return obj.map(sanitizeObject)
+  }
+
+  if (obj !== null && typeof obj === 'object') {
+    const newObj = {}
+    for (const key in obj) {
+      if (disallowedKeys.includes(key)) {
+        continue
+      }
+      newObj[key] = sanitizeObject(obj[key])
+    }
+    return newObj
+  }
+
+  return obj
+}
+
 class CharacterCreatePopup extends React.Component<Props, State> {
   state = initialState
+  fileInputRef = React.createRef<HTMLInputElement>()
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -103,6 +140,43 @@ class CharacterCreatePopup extends React.Component<Props, State> {
     this.props.createCharacter(this.state.character)
   }
 
+  handleImportNew = () => {
+    this.fileInputRef.current?.click()
+  }
+
+  handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) {
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const text = e.target?.result
+        if (typeof text === 'string') {
+          const imported = JSON.parse(text)
+          // Basic validation
+          if (imported.name && imported.type) {
+            const sanitized = sanitizeObject(imported)
+            this.props.createCharacter(sanitized)
+            this.handleClose()
+          } else {
+            alert('Invalid character file.')
+          }
+        }
+      } catch (error) {
+        alert('Failed to parse character file.')
+        console.error(error)
+      }
+    }
+    reader.readAsText(file)
+    // Reset file input
+    if(this.fileInputRef.current) {
+      this.fileInputRef.current.value = ''
+    }
+  }
+
   render() {
     const {
       handleOpen,
@@ -110,6 +184,8 @@ class CharacterCreatePopup extends React.Component<Props, State> {
       handleChange,
       handleAspectChange,
       handleSubmit,
+      handleImportNew,
+      handleFileChange,
     } = this
     const { character } = this.state
 
@@ -291,6 +367,15 @@ class CharacterCreatePopup extends React.Component<Props, State> {
             )}
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleImportNew}>Import New</Button>
+            <input
+              type="file"
+              ref={this.fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+              accept=".json,.txt"
+            />
+            <div style={{ flex: '1 0 0' }} />
             <Button onClick={handleClose}>Cancel</Button>
             <Button
               onClick={handleSubmit}

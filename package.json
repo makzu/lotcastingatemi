@@ -43,6 +43,10 @@
     "typescript": "^4.9.5"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-flow": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "@bunchtogether/vite-plugin-flow": "^1.0.2",
     "@eslint/js": "^9.22.0",
     "@redux-devtools/extension": "^3.2.3",
@@ -51,6 +55,7 @@
     "@types/node": "^20.11.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "babel-jest": "^29.7.0",
     "cypress": "^12.8.1",
     "depcheck": "^1.4.7",
     "enzyme": "^3.11.0",
@@ -64,6 +69,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "flow-bin": "^0.122.0",
     "jest": "^25.2.7",
+    "mock-local-storage": "^1.1.24",
     "prettier": "^2.8.8",
     "prettier-eslint": "^15.0.1",
     "react-test-renderer": "^16.13.1",
@@ -85,7 +91,7 @@
       "<rootDir>/app/javascript/lca/"
     ],
     "modulePaths": [
-      "<rootDir>/app/javascript/lca"
+      "<rootDir>"
     ],
     "collectCoverageFrom": [
       "app/javascript/lca/**/*.js",
@@ -93,7 +99,15 @@
       "app/javascript/lca/**/*.ts",
       "app/javascript/lca/**/*.tsx"
     ],
-    "setupTestFrameworkScriptFile": "mock-local-storage"
+    "setupFilesAfterEnv": [
+      "mock-local-storage"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!react-markdown)/"
+    ]
   },
   "packageManager": "yarn@4.1.0",
   "engines": {

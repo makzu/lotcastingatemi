@@ -10,6 +10,8 @@ import MenuBattlegroupFromQc from './MenuBattlegroupFromQc'
 import MenuChangeExaltType from './MenuChangeExaltType'
 import MenuDelete from './MenuDelete'
 import MenuDuplicate from './MenuDuplicate'
+import MenuExport from './MenuExport'
+import MenuImport from './MenuImport'
 import MenuEdit from './MenuEdit'
 import MenuLinks from './MenuLinks'
 import MenuPinHide from './MenuPinHide'
@@ -45,6 +47,8 @@ const CharacterMenu = (props: Props) => {
         <MenuRefresh characterType={characterType} id={id} />
 
         <Divider />
+        <MenuImport characterType={characterType} id={id} />
+        <MenuExport characterType={characterType} id={id} />
         <MenuDuplicate characterType={characterType} id={id} />
 
         <MenuBattlegroupFromQc characterType={characterType} id={id} />

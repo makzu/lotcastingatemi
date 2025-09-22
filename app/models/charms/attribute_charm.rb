@@ -4,6 +4,7 @@ module Charms
   # Attribute-based Charms, for Lunars, Alchemicals, etc
   class AttributeCharm < Charm
     include Constants
+
     attribute :min_ability, :integer, default: 1
     attribute :ability,     :string,  default: ''
 

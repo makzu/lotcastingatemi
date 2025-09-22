@@ -6,6 +6,7 @@ module Api
       include Knock::Authenticable
       include Pagy::Backend
       include Pundit::Authorization
+
       serialization_scope :current_player
 
       before_action :sample_requests_for_scout_apm

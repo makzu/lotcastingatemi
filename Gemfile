@@ -69,10 +69,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 8.0'
 
   # Linting
-  gem 'rubocop', '~> 1.50', require: false
+  gem 'rubocop', '~> 1.80', require: false
+  gem 'rubocop-factory_bot', '~>2.27', require: false
   gem 'rubocop-performance', '~> 1.26', require: false
   gem 'rubocop-rails', '~> 2.33', require: false
   gem 'rubocop-rspec', '~> 3.7', require: false
+  gem 'rubocop-rspec_rails', '~> 2.31', require: false
 
   # Security Tools
   gem 'brakeman', '~> 7.1'
@@ -102,7 +104,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.1'
 
   # Performance metrics
-  gem 'bullet', '~> 7.1'
+  gem 'bullet', '~> 8.0'
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler', '~> 1.1'

@@ -1,5 +1,6 @@
-import { attr, abil } from '..'
+import { abil } from '..'
 import type { Ability, Character, Charm } from 'types'
+import { clamp } from 'utils/math'
 
 /* Sidereal Excellencies */
 
@@ -25,12 +26,13 @@ export const siderealExcellencyAbils = (
   return excellencies
 }
 
-// Higher of Essence or 3. Sids do not halve static ratings
+// Higher of Essence or 3, max 5. Sids do not halve static ratings
 const siderealExcellency = (
   character: Character,
-  attribute: string,
-  ability: string,
-  staticRating: boolean = false
+  _attribute: string,
+  _ability: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _staticRating: boolean = false
 ) =>
-  Math.max(character.essence, 3)
+  clamp(character.essence, 3, 5)
 export default siderealExcellency

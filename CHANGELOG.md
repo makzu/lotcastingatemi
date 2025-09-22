@@ -2,7 +2,7 @@
 
 ###### _Unreleased_
 
-- Nothing (yet)
+- Fixed: Sidereal excellencies showed too many dice at high Essence levels (Thanks, Bklemon!)
 
 ## v120
 

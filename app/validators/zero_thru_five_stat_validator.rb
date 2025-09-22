@@ -9,9 +9,9 @@ class ZeroThruFiveStatValidator < ActiveModel::EachValidator
     end
 
     if value.negative?
-      record.errors.add(attribute, (options[:message] || "#{attribute} cannot be negative"))
+      record.errors.add(attribute, options[:message] || "#{attribute} cannot be negative")
     elsif value > 5
-      record.errors.add(attribute, (options[:message] || "#{attribute} cannot be greater than 5"))
+      record.errors.add(attribute, options[:message] || "#{attribute} cannot be greater than 5")
     end
   end
 end

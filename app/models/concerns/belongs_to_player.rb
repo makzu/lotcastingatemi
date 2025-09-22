@@ -3,6 +3,7 @@
 # Common methods for "top-level" models - Characters, QCs, and Battlegroups
 module BelongsToPlayer
   extend ActiveSupport::Concern
+
   included do
     belongs_to :player
 

@@ -35,5 +35,5 @@ RSpec.describe LunarCharacter do
   #   end
   # end
 
-  include_examples 'convertable_character', :lunar_character
+  it_behaves_like 'convertable_character', :lunar_character
 end

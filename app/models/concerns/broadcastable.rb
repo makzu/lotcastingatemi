@@ -3,6 +3,7 @@
 # Methods to broadcast changes to other sessions (and players) via ActionCable
 module Broadcastable
   extend ActiveSupport::Concern
+
   included do
     after_create_commit :broadcast_create
     before_destroy :broadcast_destroy

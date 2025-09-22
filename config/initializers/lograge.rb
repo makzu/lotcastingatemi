@@ -23,7 +23,7 @@ class LcaColorLog < Lograge::Formatters::KeyValue
   # Shamelessly copied from
   # http://eclecticquill.com/2015/07/26/customizing-lograge-removing-and-adding-fields/
   def call(data)
-    data = data.delete_if { |k| %i[controller action format].include? k }
+    data.delete_if { |k| %i[controller action format].include? k }
     super
   end
 

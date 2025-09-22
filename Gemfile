@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.1'
+gem 'rails', '~> 7.2'
 
 # Vite_Rails for more modern frontend bundling
 gem 'vite_rails', '~> 3.0'
@@ -35,7 +35,7 @@ gem 'omniauth-google-oauth2', '~> 1.1'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Sorting
-gem 'ranked-model', '~> 0.4.9'
+gem 'ranked-model', '~> 0.4.11'
 
 # Timeout protection
 # gem 'rack-timeout', '~> 0.6'
@@ -62,20 +62,22 @@ gem 'lograge', '~> 0.12'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '~> 11.1', platform: :mri
-  gem 'cypress-on-rails', '~> 1.17'
-  gem 'database_cleaner-active_record', '~> 2.1'
+  gem 'byebug', '~> 12.0', platform: :mri
+  gem 'cypress-on-rails', '~> 1.18'
+  gem 'database_cleaner-active_record', '~> 2.2'
   gem 'factory_bot_rails', '~> 6.4'
-  gem 'rspec-rails', '~> 6.1'
+  gem 'rspec-rails', '~> 8.0'
 
   # Linting
-  gem 'rubocop', '~> 1.67', require: false
-  gem 'rubocop-performance', '~> 1.22', require: false
-  gem 'rubocop-rails', '~> 2.27', require: false
-  gem 'rubocop-rspec', '~> 2.31', require: false
+  gem 'rubocop', '~> 1.80', require: false
+  gem 'rubocop-factory_bot', '~>2.27', require: false
+  gem 'rubocop-performance', '~> 1.26', require: false
+  gem 'rubocop-rails', '~> 2.33', require: false
+  gem 'rubocop-rspec', '~> 3.7', require: false
+  gem 'rubocop-rspec_rails', '~> 2.31', require: false
 
   # Security Tools
-  gem 'brakeman', '~> 6.1'
+  gem 'brakeman', '~> 7.1'
   gem 'bundler-audit', '~> 0.9'
 
   # profiling
@@ -84,12 +86,12 @@ group :development, :test do
   gem 'stackprof', '~> 0.2'
 
   # Code Quality
-  gem 'reek', '~> 6.3', require: false
+  gem 'reek', '~> 6.5', require: false
 end
 
 group :development do
   # Better developer experience in vscode
-  gem 'ruby-lsp-rails', '~> 0.3', require: false
+  gem 'ruby-lsp-rails', '~> 0.4', require: false
   gem 'ruby-lsp-rspec', '~> 0.1', require: false
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -98,11 +100,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rack-cors', '~> 2.0', require: 'rack/cors'
   gem 'rails_real_favicon', '~> 0.1'
-  gem 'spring', '~> 4.1'
+  gem 'spring', '~> 4.4'
   gem 'spring-watcher-listen', '~> 2.1'
 
   # Performance metrics
-  gem 'bullet', '~> 7.1'
+  gem 'bullet', '~> 8.0'
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler', '~> 1.1'
@@ -111,11 +113,11 @@ group :development do
 end
 
 group :test do
-  gem 'pundit-matchers', '~> 3.1'
+  gem 'pundit-matchers', '~> 4.0'
   gem 'simplecov', '~> 0.22', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', '~> 1', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data', '~> 1', platforms: %i[windows jruby]
 
 ruby File.read('./.ruby-version').strip

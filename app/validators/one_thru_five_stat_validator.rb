@@ -9,9 +9,9 @@ class OneThruFiveStatValidator < ActiveModel::EachValidator
     end
 
     if value < 1
-      record.errors.add(attribute, (options[:message] || "#{attribute} cannot be less than one"))
+      record.errors.add(attribute, options[:message] || "#{attribute} cannot be less than one")
     elsif value > 5
-      record.errors.add(attribute, (options[:message] || "#{attribute} cannot be greater than 5"))
+      record.errors.add(attribute, options[:message] || "#{attribute} cannot be greater than 5")
     end
   end
 end

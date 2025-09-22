@@ -54,5 +54,5 @@ RSpec.describe AbyssalCharacter do
     end
   end
 
-  include_examples 'convertable_character', :abyssal_character
+  it_behaves_like 'convertable_character', :abyssal_character
 end

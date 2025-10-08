@@ -1839,10 +1839,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actioncable@npm:^6.1.710":
-  version: 6.1.710
-  resolution: "@rails/actioncable@npm:6.1.710"
-  checksum: 10c0/7b1620631b1937eed00ceba9581bdce10dba85f82236aeb0fd58a1805427f6c4460ad99ff675641e56f04b5910a396456eeb343e436df70a6a4ba6ddb8779c0e
+"@rails/actioncable@npm:^7.2.202":
+  version: 7.2.202
+  resolution: "@rails/actioncable@npm:7.2.202"
+  checksum: 10c0/905ff61c35c7274b9e67e2d02275504ada189277caa9f90e2683a5115e8be2d7f6f9076dcd10209cccf0db10bd20572e32365764b8c6df81d906cea327ef99b7
   languageName: node
   linkType: hard
 
@@ -9358,7 +9358,7 @@ __metadata:
     "@material-ui/icons": "npm:^4.11.3"
     "@material-ui/styles": "npm:^4.11.5"
     "@material-ui/types": "npm:^5.1.8"
-    "@rails/actioncable": "npm:^6.1.710"
+    "@rails/actioncable": "npm:^7.2.202"
     "@redux-devtools/extension": "npm:^3.3.0"
     "@reduxjs/rtk-codemods": "npm:0.0.3"
     "@reduxjs/toolkit": "npm:1.9.7"

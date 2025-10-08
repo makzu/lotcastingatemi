@@ -54,5 +54,5 @@ RSpec.describe SolarCharacter do
     end
   end
 
-  include_examples 'convertable_character', :solar_character
+  it_behaves_like 'convertable_character', :solar_character
 end

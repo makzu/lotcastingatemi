@@ -31,7 +31,7 @@ class Chronicle < ApplicationRecord
     changes = saved_changes.dup.transform_values(&:last)
 
     UpdateBroadcastJob.perform_later(
-      ([st_id] + player_ids),
+      [st_id] + player_ids,
       self,
       changes.delete_if { |k| %w[created_at updated_at].include? k }
     )
@@ -46,7 +46,7 @@ class Chronicle < ApplicationRecord
   # rubocop:enable Rails/SkipsModelValidations
 
   def broadcast_destroy
-    DestroyBroadcastJob.perform_later(([st_id] + player_ids), self, st.entity_type, st)
+    DestroyBroadcastJob.perform_later([st_id] + player_ids, self, st.entity_type, st)
   end
 
   def entity_type

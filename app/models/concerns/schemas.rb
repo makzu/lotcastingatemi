@@ -77,6 +77,7 @@ module Schemas
   }.freeze
   RESOURCE_PARAMS = %w[ resource value ].freeze
 
+  # rubocop:disable Lint/EmptyInterpolation
   SPECIALTY = {
     'type' => 'array',
     'items' => {
@@ -97,6 +98,7 @@ module Schemas
       'additionalProperties' => false
     }
   }.freeze
+  # rubocop:enable Lint/EmptyInterpolation
   SPECIALTY_PARAMS = %i[ ability context ].freeze
 
   FORM = {

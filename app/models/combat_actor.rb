@@ -5,6 +5,7 @@
 class CombatActor < ApplicationRecord
   include Broadcastable
   include BelongsToPlayer
+
   belongs_to :actor, polymorphic: true
 
   has_many :poisons, as: :poisonable, dependent: :destroy
@@ -25,11 +26,11 @@ class CombatActor < ApplicationRecord
   alias entity_assoc entity_type
   alias type entity_type
 
-  def in_combat
+  def in_combat # rubocop:disable Naming/PredicateMethod
     true
   end
 
-  def not_a_stat
+  def not_a_stat # rubocop:disable Naming/PredicateMethod
     false
   end
   alias hidden not_a_stat

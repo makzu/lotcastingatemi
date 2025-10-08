@@ -35,5 +35,5 @@ RSpec.describe SiderealCharacter do
   #   end
   # end
 
-  include_examples 'convertable_character', :sidereal_character
+  it_behaves_like 'convertable_character', :sidereal_character
 end

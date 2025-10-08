@@ -3,6 +3,7 @@
 # Common methods for models attached to Characters (merits, Charms, etc)
 module CharacterTrait
   extend ActiveSupport::Concern
+
   included do
     belongs_to :character, touch: true
 

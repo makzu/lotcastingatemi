@@ -65,6 +65,8 @@ export function maxExcellency(
 
   switch (character.type) {
     case 'SolarCharacter':
+    case 'AbyssalCharacter':
+    case 'InfernalCharacter':
       return SolarExcellency(character, attribute, ability, staticRating)
     case 'DragonbloodCharacter':
       return DbExcellency(character, attribute, ability, staticRating)

@@ -6,13 +6,13 @@ import type { Character } from 'utils/flow-types'
 export function evasion(
   character: Character,
   merits: Array<string>,
-  penalties: Object,
+  penalties: object,
   excellencyAbils: Array<string>
 ) {
   const bonfire = character.anima_level === 3
   let bonus = []
 
-  // Earth aspect DBs gain +1 Defense vs Smashing and Grapple attacks at bonfire
+  // Earth Aspect DBs gain +1 Defense vs Smashing and Grapple attacks at bonfire
   if (
     character.type !== 'Character' &&
     (character.type === 'DragonbloodCharacter' ||
@@ -28,6 +28,21 @@ export function evasion(
       },
     ]
   }
+  // Nadir Caste Infernals gain +1 Evasion at bonfire
+  if (
+    character.type !== 'Character' &&
+    character.exalt_type === 'Infernal' &&
+    (character.caste || '').toLowerCase() === 'nadir'
+  ) {
+    bonus = [
+      ...bonus,
+      {
+        label: `${bonfire ? '' : '/5m '} (anima)`,
+        bonus: 1,
+      },
+    ]
+  }
+  
   return rating(
     'Evasion',
     character,

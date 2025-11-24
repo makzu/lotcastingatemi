@@ -54,9 +54,12 @@ export function exaltTypeBase(character: Character) {
     case 'SolarCharacter':
     case 'DragonbloodCharacter':
     case 'SiderealCharacter':
+    case 'AbyssalCharacter':
+    case 'InfernalCharacter':
     case 'CustomAbilityCharacter':
       return 'ability'
     case 'LunarCharacter':
+    case 'AlchemicalCharacter':
     case 'CustomAttributeCharacter':
       return 'attribute'
     case 'CustomEssenceCharacter':

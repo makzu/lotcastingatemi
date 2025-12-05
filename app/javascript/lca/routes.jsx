@@ -2,7 +2,7 @@
 import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Placeholder from 'components/generic/Placeholder.jsx'
+import Placeholder from 'components/generic/Placeholder'
 
 import WelcomePage from 'components/pages/WelcomePage'
 import PrivacyPage from 'components/pages/PrivacyPage.jsx'

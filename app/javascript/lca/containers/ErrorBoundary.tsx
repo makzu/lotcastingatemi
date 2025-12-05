@@ -1,10 +1,10 @@
-// @flow
-import * as React from 'react'
+import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
 import { sample } from 'utils'
 
 const errorNames = [
+  'Bug-Body Technique',
   'Easily-Overlooked Error Method',
   'Friendship With Errors Approach',
   'Heaven Thunder Error',
@@ -14,17 +14,22 @@ const errorNames = [
   'Wind-Carried Bugs',
   'Hybrid Error Transformation',
   'Crimson Bug Mantle',
+  'Shun the Smiling Error',
+  'Pattern Error Touch',
+  'Piston-Driven Megaton Error',
+  'Devil-Bug Apotheosis',
+  'By Bugs Recast',
 ]
 
-type Props = { children: React.Node }
-type State = { error?: Object, errorInfo?: Object }
+type Props = { children: React.ReactNode }
+type State = { error?: Error; errorInfo?: React.ErrorInfo }
 class ErrorBoundary extends React.Component<Props, State> {
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props)
     this.state = { error: undefined, errorInfo: undefined }
   }
 
-  componentDidCatch(error: Object, info: Object) {
+  componentDidCatch(error: Error, info: React.ErrorInfo): void {
     this.setState({ error: error, errorInfo: info })
   }
 

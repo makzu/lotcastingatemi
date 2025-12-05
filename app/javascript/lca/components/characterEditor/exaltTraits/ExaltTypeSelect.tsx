@@ -4,31 +4,7 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-export const prettyType = (type: string) => {
-  switch (type) {
-    case 'Character':
-      return 'Mortal'
-    case 'SolarCharacter':
-      return 'Solar Exalt'
-    case 'DragonbloodCharacter':
-      return 'Dragon-Blooded Exalt'
-    case 'LunarCharacter':
-      return 'Lunar Exalt'
-    case 'SiderealCharacter':
-      return 'Sidereal Exalt'
-    case 'AbyssalCharacter':
-      return 'Abyssal Exalt'
-    case 'AlchemicalCharacter':
-      return 'Alchemical Exalt'
-
-    case 'CustomAbilityCharacter':
-      return 'Ability-Based Exalt'
-    case 'CustomAttributeCharacter':
-      return 'Attribute-Based Exalt'
-    case 'CustomEssenceCharacter':
-      return 'Essence-Based Exalt / Spirit'
-  }
-}
+import { prettyCanonType } from 'utils/calculated/pretty'
 
 interface Props {
   value: string
@@ -39,7 +15,7 @@ const ExaltTypeSelect = (props: Props) => {
 
   const MenuItemMapping = (t: string) => (
     <MenuItem key={t} value={t}>
-      {prettyType(t)}
+      {prettyCanonType(t)}
     </MenuItem>
   )
 
@@ -51,6 +27,7 @@ const ExaltTypeSelect = (props: Props) => {
     'SiderealCharacter',
     'AbyssalCharacter',
     'AlchemicalCharacter',
+    'InfernalCharacter',
   ].map(MenuItemMapping)
 
   const customChoices = [

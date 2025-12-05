@@ -18,8 +18,9 @@ import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteS
 import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import AlchemicalCasteSelect from 'components/characterEditor/exaltTraits/AlchemicalCasteSelect'
+import InfernalCasteSelect from 'components/characterEditor/exaltTraits/InfernalCasteSelect'
 import { createCharacter } from 'ducks/actions.js'
-import type { Enhancer } from 'utils/flow-types'
+import type { Character } from 'types'
 
 const initialState = {
   open: false,
@@ -29,16 +30,16 @@ const initialState = {
     type: 'SolarCharacter',
     exalt_type: '',
     aspect: false,
-  },
+  } as Partial<Character>,
 }
 
 type Props = {
   id: number
-  createCharacter: Function
+  createCharacter: (character: Partial<Character>) => void
 }
 type State = {
   open: boolean
-  character: Object
+  character: Partial<Character>
 }
 
 class CharacterCreatePopup extends React.Component<Props, State> {
@@ -83,6 +84,9 @@ class CharacterCreatePopup extends React.Component<Props, State> {
         case 'AlchemicalCharacter':
           exaltType = { exalt_type: 'Alchemical', aspect: false }
           break
+        case 'InfernalCharacter':
+          exaltType = { exalt_type: 'Infernal', aspect: false }
+          break
         default:
           exaltType = { exalt_type: 'Exalt' }
       }
@@ -122,6 +126,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
         <Button onClick={handleOpen} data-cy="create-character">
           Create New
         </Button>
+
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Create New Character</DialogTitle>
           <DialogContent>
@@ -238,6 +243,22 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                 />
               </>
             )}
+            {character.type === 'InfernalCharacter' && (
+              <>
+                <Typography paragraph>
+                  Selecting this option means the system will try to follow the
+                  rules in the core book as closely as it can. If your group
+                  uses house rules, especially ones that change available Caste
+                  or Primordial Abilities, choose Houserule Ability-based exalt
+                  instead.
+                </Typography>
+                <InfernalCasteSelect
+                  value={character.caste}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </>
+            )}
             {(character.type === 'CustomAttributeCharacter' ||
               character.type === 'CustomAbilityCharacter' ||
               character.type === 'CustomEssenceCharacter') && (
@@ -254,9 +275,9 @@ class CharacterCreatePopup extends React.Component<Props, State> {
                   {character.type === 'CustomAbilityCharacter' && (
                     <>
                       An Ability-based Exalt, like Solars, Abyssals, Sidereals,
-                      and the Dragon-Blooded. Their Charms are arranged by
-                      Ability. They can have Caste and Favored Abilities, as
-                      well as a Supernal/Apocalyptic Ability.
+                      Infernals, and the Dragon-Blooded. Their Charms are
+                      arranged by Ability. They can have Caste and Favored
+                      Abilities, as well as a Supernal/Apocalyptic Ability.
                     </>
                   )}
                   {character.type === 'CustomEssenceCharacter' && (
@@ -328,8 +349,6 @@ class CharacterCreatePopup extends React.Component<Props, State> {
 
 const mapStateToProps = (state) => ({ id: state.session.id })
 
-const enhance: Enhancer<Props, {}> = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   createCharacter,
-})
-
-export default enhance(CharacterCreatePopup)
+})(CharacterCreatePopup)

@@ -17,8 +17,42 @@ export function prettyExaltType(character: Character) {
       return 'Lunar'
     case 'SiderealCharacter':
       return 'Sidereal'
+    case 'AbyssalCharacter':
+      return 'Abyssal '
+    case 'AlchemicalCharacter':
+      return 'Alchemical '
+    case 'InfernalCharacter':
+      return 'Infernal '
     default:
       return titleCase(character.exalt_type)
+  }
+}
+
+export const prettyCanonType = (type: string) => {
+  switch (type) {
+    case 'Character':
+      return 'Mortal'
+    case 'SolarCharacter':
+      return 'Solar Exalt'
+    case 'DragonbloodCharacter':
+      return 'Dragon-Blooded Exalt'
+    case 'LunarCharacter':
+      return 'Lunar Exalt'
+    case 'SiderealCharacter':
+      return 'Sidereal Exalt'
+    case 'AbyssalCharacter':
+      return 'Abyssal Exalt'
+    case 'AlchemicalCharacter':
+      return 'Alchemical Exalt'
+    case 'InfernalCharacter':
+      return 'Infernal Exalt'
+
+    case 'CustomAbilityCharacter':
+      return 'Ability-Based Exalt'
+    case 'CustomAttributeCharacter':
+      return 'Attribute-Based Exalt'
+    case 'CustomEssenceCharacter':
+      return 'Essence-Based Exalt / Spirit'
   }
 }
 

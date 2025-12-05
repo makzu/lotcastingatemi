@@ -3,6 +3,7 @@ import SolarExcellency, { solarExcellencyAbils } from './solar.js'
 import DbExcellency, { dbExcellencyAbils } from './dragonblooded.js'
 import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
+import AlchemicalExcellency, { alchemicalExcellencyAbils } from './alchemical'
 import CustomExcellency from './custom.js'
 import type { Character, Charm } from 'utils/flow-types'
 
@@ -33,6 +34,14 @@ export const excellencyAbils = (
   ) {
     excellencies = excellencies.concat(
       siderealExcellencyAbils(character, charms),
+    )
+  }
+  if (
+    character.type === 'AlchemicalCharacter' ||
+    excellencies.includes('alchemical')
+  ) {
+    excellencies = excellencies.concat(
+      alchemicalExcellencyAbils(character, charms),
     )
   }
 
@@ -74,6 +83,8 @@ export function maxExcellency(
       return LunarExcellency(character, attribute, ability, staticRating, stunt)
     case 'SiderealCharacter':
       return SiderealExcellency(character, attribute, ability)
+    case 'AlchemicalCharacter':
+      return AlchemicalExcellency(character, attribute, ability, staticRating)
   }
 
   return CustomExcellency(character, attribute, ability, staticRating, stunt)

@@ -15,8 +15,6 @@ interface Props {
 }
 
 const AlchemicalExaltEditor = ({ character, onChange }: Props) => {
-
-
   let noOptionItem: React.ReactNode
   if (character.caste === '' || character.caste == null) {
     noOptionItem = <MenuItem disabled>Select a Caste</MenuItem>
@@ -38,6 +36,7 @@ const AlchemicalExaltEditor = ({ character, onChange }: Props) => {
         value={character.favored_attributes}
         attributes={nonCasteAttributes(character)}
         onChange={onChange}
+        multiple
         fullWidth
         margin="dense"
       />

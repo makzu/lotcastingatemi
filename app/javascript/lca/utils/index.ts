@@ -2,7 +2,7 @@ export * from './math'
 import { deepEqual } from 'fast-equals'
 
 /** Returns a random item from an array. */
-export const sample = (array: any[]) =>
+export const sample = <T>(array: T[]): T =>
   array[Math.floor(Math.random() * array.length)]
 
 /** Returns a string with the first letter capitalized and the other letters in
@@ -23,7 +23,7 @@ export const titleCase = (str: string) =>
     .map((s, i, array) =>
       ARTICLES.includes(s) && ![0, array.length - i].includes(i)
         ? s
-        : capitalize(s)
+        : capitalize(s),
     )
     .join(' ')
 
@@ -34,7 +34,7 @@ export function checkVisible(elm: HTMLElement | null) {
   const rect = elm.getBoundingClientRect()
   const viewHeight = Math.max(
     document.documentElement ? document.documentElement.clientHeight : 0,
-    window.innerHeight
+    window.innerHeight,
   )
   return !(rect.bottom < 0 || rect.top - viewHeight >= 0)
 }
@@ -45,10 +45,9 @@ export interface Sortable {
 export interface ChSortable {
   chronicle_sorting: number
 }
-export const sortOrderSort = (a: Sortable, b: Sortable) =>
-  a.sorting - b.sorting
+export const sortOrderSort = (a: Sortable, b: Sortable) => a.sorting - b.sorting
 export const chronicleSortOrderSort = (a: ChSortable, b: ChSortable) =>
   a.chronicle_sorting - b.chronicle_sorting
 
 export const isUnequalByKeys = (obj1: object, obj2: object, keys: string[]) =>
-  keys.some(key => !deepEqual(obj1[key], obj2[key]))
+  keys.some((key) => !deepEqual(obj1[key], obj2[key]))

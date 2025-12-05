@@ -20,6 +20,7 @@ import LunarExaltEditor from './exaltTraits/LunarExaltEditor'
 import SiderealExaltEditor from './editors/SiderealExaltEditor'
 import AbyssalExaltEditor from './editors/AbyssalExaltEditor'
 import AlchemicalExaltEditor from './exaltTraits/AlchemicalExaltEditor'
+import InfernalExaltEditor from './exaltTraits/InfernalExaltEditor'
 import HealthLevelEditor from './editors/healthLevelEditor.jsx'
 import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
@@ -140,6 +141,14 @@ class CharacterEditor extends Component<Props> {
                 onChange={handleChange}
                 onCheck={handleCheck}
                 onChangeMulti={handleChangeMulti}
+              />
+            </Grid>
+          )}
+          {character.type === 'InfernalCharacter' && (
+            <Grid item xs={12} md={6}>
+              <InfernalExaltEditor
+                character={character}
+                onChange={handleChange}
               />
             </Grid>
           )}

@@ -15,13 +15,12 @@ import {
 } from '@material-ui/core'
 import { SwapHoriz } from '@material-ui/icons'
 
-import ExaltTypeSelect, {
-  prettyType,
-} from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
+import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
 import { State } from 'ducks'
 import { changeCharacterType } from 'ducks/actions'
 import { useDialogLogic } from 'hooks'
 import { canIEdit, getSpecificCharacter } from 'selectors'
+import { prettyCanonType } from 'utils/calculated/pretty'
 import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {
@@ -80,7 +79,7 @@ const MenuChangeCharacterType = ({
         <DialogTitle>Change Exalt Type</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Current type: {prettyType(currentType)}
+            Current type: {prettyCanonType(currentType)}
           </DialogContentText>
 
           <ExaltTypeSelect value={selectedType} onChange={actuallySet} />

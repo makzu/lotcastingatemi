@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { MenuItem, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
@@ -15,20 +15,13 @@ interface Props {
 }
 
 const AlchemicalExaltEditor = ({ character, onChange }: Props) => {
-  let noOptionItem: React.ReactNode
-  if (character.caste === '' || character.caste == null) {
-    noOptionItem = <MenuItem disabled>Select a Caste</MenuItem>
-  }
-
   return (
     <BlockPaper>
       <AlchemicalCasteSelect value={character.caste} onChange={onChange} />
-
       <Typography style={{ marginTop: '0.5em', textTransform: 'capitalize' }}>
         Caste Attributes: {character.caste_attributes.join(', ')}
       </Typography>
       <br />
-
       <AbilitySelect
         attributesOnly
         name="favored_attributes"

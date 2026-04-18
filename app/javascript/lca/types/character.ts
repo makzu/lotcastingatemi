@@ -29,6 +29,10 @@ export type Ability =
   | 'thrown'
   | 'war'
 
+export type CapitalizedAbility =
+  | Capitalize<Exclude<Ability, 'martial_arts'>>
+  | 'Martial Arts'
+
 export type Attribute =
   | 'strength'
   | 'dexterity'
@@ -89,6 +93,7 @@ export interface Character extends PlayerAsset, WithSharedStats {
   totem: string
   tell: string
   forms: Form[]
+  active_loadout: string
   merits: number[]
   weapons: number[]
   attr_strength: number
@@ -137,6 +142,7 @@ export interface Character extends PlayerAsset, WithSharedStats {
   xp_craft_silver: number
   xp_craft_gold: number
   xp_craft_white: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   anima_powers: any[]
   limit_trigger: string
   limit: number
@@ -162,6 +168,7 @@ export interface MARating {
 }
 
 export interface Specialty {
-  ability: Ability
+  // TODO: Figure out how the data for martial arts specialties is stored and maybe clean this up
+  ability: Ability | 'martial arts'
   context: string
 }

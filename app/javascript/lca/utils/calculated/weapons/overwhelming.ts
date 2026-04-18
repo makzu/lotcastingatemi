@@ -1,4 +1,3 @@
-// @flow
 import type { Character, Weapon } from 'types'
 
 export function weaponOverwhelming(character: Character, weapon: Weapon) {

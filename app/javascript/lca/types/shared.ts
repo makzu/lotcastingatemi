@@ -1,13 +1,19 @@
 import { Element } from './_lib'
 
 /* Stats that PCs and QCs have in common */
-export interface WithSharedStats extends WithSorcery, WithAura, WithIntimacies {
-  essence: number
-
+export interface WithCombatStats {
   initiative: number
   onslaught: number
   in_combat: boolean
   has_acted: boolean
+}
+export interface WithSharedStats
+  extends WithSorcery,
+    WithAura,
+    WithIntimacies,
+    WithCombatStats {
+  essence: number
+
   willpower_temporary: number
   willpower_permanent: number
   health_level_0s: number

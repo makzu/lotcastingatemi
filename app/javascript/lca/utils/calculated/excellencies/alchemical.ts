@@ -2,14 +2,19 @@ import { Ability, Attribute, Character, Charm } from 'types'
 import { ATTRIBUTES } from 'utils/constants'
 import { attr } from '..'
 
-export const alchemicalExcellencyAbils = (character: Character, charms: Charm[]) => {
+export const alchemicalExcellencyAbils = (
+  character: Character,
+  charms: Charm[],
+) => {
   const charmsPerAttribute = {}
   const casteAndFav: string[] = character.caste_attributes.concat(
     character.favored_attributes,
   )
   charms.forEach((ch) => {
-    charmsPerAttribute[ch.ability || ''] =
-      (charmsPerAttribute[ch.ability || ''] || 0) + 1
+    if (ch.loadouts?.includes(character.active_loadout)) {
+      charmsPerAttribute[ch.ability || ''] =
+        (charmsPerAttribute[ch.ability || ''] || 0) + 1
+    }
   })
 
   const attributes = ATTRIBUTES.map((a) => {
@@ -17,8 +22,7 @@ export const alchemicalExcellencyAbils = (character: Character, charms: Charm[])
 
     if (
       charmsPerAttribute[pretty] >= 1 ||
-      (casteAndFav.includes(pretty) &&
-        (character[a.attr] >= 3 ))
+      (casteAndFav.includes(pretty) && character[a.attr] >= 3)
     ) {
       return pretty
     }

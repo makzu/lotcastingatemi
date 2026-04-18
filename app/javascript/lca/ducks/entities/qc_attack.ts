@@ -12,7 +12,6 @@ export default createTraitReducer('qc_attack', 'qc', {
     state: EntityState,
     action: ReturnType<typeof updateQcAttackSort>,
   ) => {
-    debugger
     const { id, sorting } = action.payload
     state.qc_attacks[id].sorting = sorting
   },

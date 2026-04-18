@@ -1,25 +1,20 @@
 import pool from '../_pool'
-import { penaltyObject } from '../../index.js'
+import { penaltyObject } from '../../index'
 import type { Character } from 'types'
 import { BlockOfPenalties } from 'types/pool'
 
-/** Withdraw pool, described in the core book, page 199 */
-export function withdraw(
+export function rush(
   character: Character,
-  merits: string[],
+  merits: Array<string>,
   penalties: BlockOfPenalties,
-  excellencyAbils: string[],
+  excellencyAbils: Array<string>,
 ) {
   let bonus = []
   if (merits.some((m) => m.startsWith('fleet of foot')))
     bonus = [{ label: 'fleet of foot', bonus: 1 }]
-  if (character.type !== 'Character' && character.caste === 'water')
-    bonus = bonus.concat([
-      { label: 'sux/3m anima', bonus: 1, situational: true },
-    ])
 
   return pool(
-    'Withdraw',
+    'Rush',
     character,
     'dexterity',
     'athletics',
@@ -28,5 +23,4 @@ export function withdraw(
     excellencyAbils,
   )
 }
-
-export default withdraw
+export default rush

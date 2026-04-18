@@ -1,4 +1,4 @@
-import { normalize, schema } from 'normalizr'
+import { normalize } from 'normalizr'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 

@@ -1,6 +1,13 @@
 /* Constants: exactly what it says on the tin */
 
-export const ATTRIBUTES = [
+import { Ability, Attribute, CapitalizedAbility } from 'types'
+
+type PrettyAttribute = {
+  attr: `attr_${Attribute}`
+  pretty: Capitalize<Attribute>
+}
+
+export const ATTRIBUTES: PrettyAttribute[] = [
   { attr: 'attr_strength', pretty: 'Strength' },
   { attr: 'attr_dexterity', pretty: 'Dexterity' },
   { attr: 'attr_stamina', pretty: 'Stamina' },
@@ -12,8 +19,13 @@ export const ATTRIBUTES = [
   { attr: 'attr_wits', pretty: 'Wits' },
 ]
 
+type PrettyAbility = {
+  abil: `abil_${Ability}`
+  pretty: CapitalizedAbility
+}
+
 // Does not include Craft or Martial Arts, which get their own handling
-export const ABILITIES = [
+export const ABILITIES: PrettyAbility[] = [
   { abil: 'abil_archery', pretty: 'Archery' },
   { abil: 'abil_athletics', pretty: 'Athletics' },
   { abil: 'abil_awareness', pretty: 'Awareness' },
@@ -40,7 +52,7 @@ export const ABILITIES = [
   { abil: 'abil_war', pretty: 'War' },
 ]
 
-export const ABILITIES_ALL = [
+export const ABILITIES_ALL: PrettyAbility[] = [
   { abil: 'abil_archery', pretty: 'Archery' },
   { abil: 'abil_athletics', pretty: 'Athletics' },
   { abil: 'abil_awareness', pretty: 'Awareness' },
@@ -69,7 +81,7 @@ export const ABILITIES_ALL = [
   { abil: 'abil_war', pretty: 'War' },
 ]
 
-export const ABILITIES_ALL_NO_MA = [
+export const ABILITIES_ALL_NO_MA: PrettyAbility[] = [
   { abil: 'abil_archery', pretty: 'Archery' },
   { abil: 'abil_athletics', pretty: 'Athletics' },
   { abil: 'abil_awareness', pretty: 'Awareness' },

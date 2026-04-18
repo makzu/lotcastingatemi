@@ -8,7 +8,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 
 import { nonCasteAbilities } from 'utils/calculated'
 import { ABYSSAL_CASTE_ABILITIES } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
+import type { Character } from 'types'
 
 type Props = { character: Character; onChange: React.ChangeEventHandler }
 function AbyssalExaltEditor({ character, onChange }: Props) {

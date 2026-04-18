@@ -1,13 +1,12 @@
-// @flow
 export * from './overwhelming'
 
-import type { fullWeapon } from 'utils/flow-types'
+import type { Weapon } from 'types'
 
 // Mortal melee/ma weapons: p.580
 // Mortal thrown weapons:   p.587
 // Mortal archery weapons:  p.588
 
-export function weaponAccuracyBonus(weapon: fullWeapon) {
+export function weaponAccuracyBonus(weapon: Weapon) {
   switch (weapon.weight) {
     case 'light':
       return weapon.is_artifact ? 5 : 4
@@ -18,7 +17,7 @@ export function weaponAccuracyBonus(weapon: fullWeapon) {
   }
 }
 
-export function archeryAccuracyBonus(weapon: fullWeapon) {
+export function archeryAccuracyBonus(weapon: Weapon) {
   // close -2, short +4, medium +2, long +0, extreme -2
   // close -1, short +5, medium +3, long +1, extreme -1
   const bonus = weapon.is_artifact ? 1 : 0
@@ -31,7 +30,7 @@ export function archeryAccuracyBonus(weapon: fullWeapon) {
   }
 }
 
-export function thrownAccuracyBonus(weapon: fullWeapon) {
+export function thrownAccuracyBonus(weapon: Weapon) {
   // regular  close +4, short +3, medium +2, long -1, extreme -3
   // artifact close +5, short +4, medium +3, long +0, extreme -2
   const bonus = weapon.is_artifact ? 1 : 0
@@ -44,7 +43,7 @@ export function thrownAccuracyBonus(weapon: fullWeapon) {
   }
 }
 
-export function siegeAccuracyBonus(weapon: fullWeapon) {
+export function siegeAccuracyBonus(weapon: Weapon) {
   // regular  close -5, short -3, medium +4, long +2, extreme +0
   // artifact close -4, short -2, medium +5, long +3, extreme +1
   const bonus = weapon.is_artifact ? 1 : 0
@@ -57,7 +56,7 @@ export function siegeAccuracyBonus(weapon: fullWeapon) {
   }
 }
 
-export const rangeTag = (weapon: fullWeapon) =>
+export const rangeTag = (weapon: Weapon) =>
   weapon.tags.find(
     (t) =>
       t.startsWith('thrown') ||
@@ -68,13 +67,15 @@ export const rangeTag = (weapon: fullWeapon) =>
     ? 'thrown (medium)'
     : undefined)
 
-export const rangeValue = (weapon: fullWeapon) => {
+type RangeTypes = 'close' | 'short' | 'medium' | 'long' | 'extreme'
+
+export const rangeValue = (weapon: Weapon) => {
   const tag = rangeTag(weapon)
   if (tag == null) return 0
 
   const rangeRegex = /\(([^)]+)\)/.exec(tag)
-  let range
-  if (rangeRegex != null) range = rangeRegex[1]
+  let range: RangeTypes
+  if (rangeRegex != null) range = rangeRegex[1] as RangeTypes
   switch (range) {
     case 'extreme':
       return 4
@@ -90,7 +91,7 @@ export const rangeValue = (weapon: fullWeapon) => {
   }
 }
 
-export function weaponIsRanged(weapon: fullWeapon) {
+export function weaponIsRanged(weapon: Weapon) {
   const tag = rangeTag(weapon)
   if (['archery', 'thrown'].includes(weapon.ability)) return true
 

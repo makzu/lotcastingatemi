@@ -1,14 +1,13 @@
 import pool from '../_pool'
-import { penaltyObject } from '../../index.js'
+import { penaltyObject } from '../../index'
 import type { Character } from 'types'
 import { BlockOfPenalties } from 'types/pool'
 
-/** Withdraw pool, described in the core book, page 199 */
-export function withdraw(
+export function disengage(
   character: Character,
-  merits: string[],
+  merits: Array<string>,
   penalties: BlockOfPenalties,
-  excellencyAbils: string[],
+  excellencyAbils: Array<string>,
 ) {
   let bonus = []
   if (merits.some((m) => m.startsWith('fleet of foot')))
@@ -19,14 +18,14 @@ export function withdraw(
     ])
 
   return pool(
-    'Withdraw',
+    'Disengage',
     character,
     'dexterity',
-    'athletics',
+    'dodge',
     bonus,
     penaltyObject(penalties, { useMobility: true }),
     excellencyAbils,
   )
 }
 
-export default withdraw
+export default disengage

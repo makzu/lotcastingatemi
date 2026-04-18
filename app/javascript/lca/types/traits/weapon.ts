@@ -26,4 +26,11 @@ interface AttributeOverride {
   base_only?: boolean
 }
 
-type AttributeOrEssence = Attribute | 'essence'
+export type AttributeOrEssence = Attribute | 'essence'
+
+export type DamageAttribute =
+  | Attribute
+  | 'subtle'
+  | 'flame'
+  | 'crossbow'
+  | 'firearm'

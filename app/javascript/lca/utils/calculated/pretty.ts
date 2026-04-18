@@ -1,6 +1,3 @@
-// @flow
-
-// $FlowFixMe
 import { Character } from 'types'
 import { capitalize, titleCase } from '..'
 

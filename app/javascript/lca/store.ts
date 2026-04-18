@@ -33,3 +33,6 @@ export default function configureAppStore(preloadedState) {
 
   return store
 }
+
+export type StoreType = ReturnType<typeof configureAppStore>
+export type RootState = ReturnType<typeof reducer>

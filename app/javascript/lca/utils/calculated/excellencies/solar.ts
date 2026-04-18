@@ -1,10 +1,10 @@
-import { abil } from '..'
+import { attr, abil } from '..'
 import type { Ability, Character, Charm } from 'types'
 
-/* Sidereal Excellencies */
+/* Solar Excellencies: Core p.255 */
 
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
-export const siderealExcellencyAbils = (
+export const solarExcellencyAbils = (
   character: Character,
   charms: Array<Charm>,
 ): Array<string> => {
@@ -14,7 +14,8 @@ export const siderealExcellencyAbils = (
       (character.favored_abilities || []).filter((a) => abil(character, a) > 0),
     )
 
-  excellencies = excellencies.concat(['martial_arts'])
+  if (excellencies.includes('brawl') && character.abil_martial_arts.length > 0)
+    excellencies = excellencies.concat(['martial_arts'])
 
   excellencies = excellencies.concat(
     charms.map((c) =>
@@ -25,12 +26,15 @@ export const siderealExcellencyAbils = (
   return excellencies
 }
 
-// Higher of Essence or 3. Sids do not halve static ratings
-const siderealExcellency = (
+// Attribute + Ability, round down for static ratings
+const solarExcellency = (
   character: Character,
   attribute: string,
   ability: string,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _staticRating: boolean = false,
-) => Math.max(character.essence, 3)
-export default siderealExcellency
+  staticRating: boolean = false,
+) =>
+  Math.floor(
+    (attr(character, attribute) + abil(character, ability)) /
+      (staticRating ? 2 : 1),
+  )
+export default solarExcellency

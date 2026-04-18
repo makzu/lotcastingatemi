@@ -1,5 +1,5 @@
 // @flow
-export * from './overwhelming.js'
+export * from './overwhelming'
 
 import type { fullWeapon } from 'utils/flow-types'
 
@@ -44,8 +44,26 @@ export function thrownAccuracyBonus(weapon: fullWeapon) {
   }
 }
 
+export function siegeAccuracyBonus(weapon: fullWeapon) {
+  // regular  close -5, short -3, medium +4, long +2, extreme +0
+  // artifact close -4, short -2, medium +5, long +3, extreme +1
+  const bonus = weapon.is_artifact ? 1 : 0
+  return {
+    close: -5 + bonus,
+    short: -3 + bonus,
+    medium: 4 + bonus,
+    long: 2 + bonus,
+    extreme: 0 + bonus,
+  }
+}
+
 export const rangeTag = (weapon: fullWeapon) =>
-  weapon.tags.find((t) => t.startsWith('thrown') || t.startsWith('archery')) ||
+  weapon.tags.find(
+    (t) =>
+      t.startsWith('thrown') ||
+      t.startsWith('archery') ||
+      t.startsWith('siege'),
+  ) ||
   (weapon.tags.includes('elemental bolt') || weapon.tags.includes('crypt bolt')
     ? 'thrown (medium)'
     : undefined)

@@ -1,7 +1,7 @@
 // @flow
-import type { Character, fullWeapon } from 'utils/flow-types'
+import type { Character, Weapon } from 'types'
 
-export function weaponOverwhelming(character: Character, weapon: fullWeapon) {
+export function weaponOverwhelming(character: Character, weapon: Weapon) {
   let bonus = weapon.bonus_overwhelming
 
   if (weapon.tags.includes('subtle')) return 0 + bonus
@@ -15,13 +15,19 @@ export function weaponOverwhelming(character: Character, weapon: fullWeapon) {
 
   const overwhelmingTag = weapon.tags.find((t) => t.startsWith('overwhelming+'))
   if (overwhelmingTag) {
-    let theBonus = overwhelmingTag.substr(13)
+    const theBonus = overwhelmingTag.substring(13)
     bonus += theBonus.includes('essence')
       ? character.essence
       : parseInt(theBonus)
   }
 
+  if (weapon.tags.find((t) => t.startsWith('siege'))) {
+    if (weapon.is_artifact) return Math.max(5 + bonus, 0)
+    return Math.max(3 + bonus, 0)
+  }
+
   if (!weapon.is_artifact) return Math.max(1 + bonus, 0)
+
   switch (weapon.weight) {
     case 'light':
       return Math.max(3 + bonus, 0)

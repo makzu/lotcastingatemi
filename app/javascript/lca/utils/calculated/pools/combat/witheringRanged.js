@@ -6,6 +6,7 @@ import {
   rangeValue,
   archeryAccuracyBonus,
   thrownAccuracyBonus,
+  siegeAccuracyBonus,
 } from '../../weapons'
 import type { Character, fullWeapon } from 'utils/flow-types'
 
@@ -13,15 +14,20 @@ export function rangedWitheringAttackPool(
   character: Character,
   weapon: fullWeapon,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   if (!weaponIsRanged(weapon)) return false
 
   const tag = rangeTag(weapon) || ''
   const range = rangeValue(weapon)
-  const rangebonus = tag.startsWith('thrown')
-    ? thrownAccuracyBonus(weapon)
-    : archeryAccuracyBonus(weapon)
+  let rangebonus
+  if (tag.startsWith('siege')) {
+    rangebonus = siegeAccuracyBonus(weapon)
+  } else if (tag.startsWith('thrown')) {
+    rangebonus = thrownAccuracyBonus(weapon)
+  } else {
+    rangebonus = archeryAccuracyBonus(weapon)
+  }
 
   const poolBase = {
     ...decisiveAttack(character, weapon, penalties, excellencyAbils),

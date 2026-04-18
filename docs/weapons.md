@@ -2,7 +2,7 @@
 
 LCA supports a wide range of weapon options. Any Attribute/Ability combination, as well as Essence, can be used for the attack roll, and any Attribute (plus Essence) can be used for the damage roll on **Withering** attacks. The selector will only show Abilities your character has dots in.
 
-For ranged weapons, LCA looks for a range tag. These tags should be formatted like `Archery (long)` or `Thrown (close)` to get the correct pools. The parenthesis are required, but the space is optional and capitalization does not matter.
+For ranged weapons, LCA looks for a range tag. These tags should be formatted like `Archery (long)`, `Thrown (close)`, or `Siege (extreme)` to get the correct pools. The parenthesis are required, but the space is optional and capitalization does not matter.
 
 If a weapon has an "optional" range tag - for example, mortal daggers (_Core, p. 581_) or Frost-Thorn Knuckles (_Arms of the Chosen, p. 31_) it is recommeded that you create two weapon entries - one for Thrown, the other for close range.
 
@@ -43,3 +43,7 @@ Add `crypt bolt`\* to the weapon's tags and it will behave exactly like Elementa
 #### The Burning Name:
 
 The option to change the attack attribute to Intelligence is under the 'Advanced' expando. Occult will appear under Attack Abilities if your character has any dots in Occult.
+
+#### Siege Weapons
+
+Siege weapons will attempt to automatically select the higher of Perception and Intelligence for the attack attribute when you first add the tag.

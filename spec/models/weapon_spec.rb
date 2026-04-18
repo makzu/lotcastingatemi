@@ -62,4 +62,30 @@ RSpec.describe Weapon do
 
     pending 'selects the higher of Thrown or Archery for attack pools'
   end
+
+  describe 'the siege tag' do
+    it 'sets the weight to heavy when adding' do
+      weapon = create(:weapon)
+      weapon.update(tags: ['siege (long)'])
+      expect(weapon.weight).to eq('heavy')
+    end
+
+    it 'sets the attack attribute based on the character when adding' do
+      character = create(:character, attr_intelligence: 4, attr_perception: 3)
+      weapon = create(:weapon, character: character)
+      weapon.update(tags: ['siege (long)'])
+      expect(weapon.overrides['attack_attribute']).to eq('use' => 'intelligence')
+
+      character2 = create(:character, attr_intelligence: 2, attr_perception: 5)
+      weapon2 = create(:weapon, character: character2)
+      weapon2.update(tags: ['siege (long)'])
+      expect(weapon2.overrides['attack_attribute']).to eq('use' => 'perception')
+    end
+
+    it 'sets the ability to war when adding' do
+      weapon = create(:weapon)
+      weapon.update(tags: ['siege (long)'])
+      expect(weapon.ability).to eq('war')
+    end
+  end
 end

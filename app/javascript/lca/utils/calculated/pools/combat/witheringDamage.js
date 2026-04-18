@@ -6,6 +6,10 @@ import type { Character, fullWeapon, Pool } from 'utils/flow-types'
 function weaponDamageBonus(weapon: fullWeapon) {
   if (weapon.tags.includes('subtle')) return 0
 
+  if (weapon.tags.find((t) => t.startsWith('siege'))) {
+    return weapon.is_artifact ? 20 : 15
+  }
+
   let damage = 0
 
   switch (weapon.weight) {
@@ -28,7 +32,7 @@ function weaponDamageBonus(weapon: fullWeapon) {
 
 export function witheringDamage(
   character: Character,
-  weapon: fullWeapon
+  weapon: fullWeapon,
 ): Pool {
   const damage = weaponDamageBonus(weapon) + weapon.bonus_damage
   let _attr = weapon.overrides?.damage_attribute?.use || 'strength'
@@ -68,6 +72,10 @@ export function witheringDamage(
   }
   if (weapon.tags.includes('poisonable'))
     specialAttacks = specialAttacks.concat(['poisonable'])
+  if (weapon.tags.find((t) => t.startsWith('siege'))) {
+    _attr = 'siege'
+    attrRating = 0
+  }
 
   const overwhelming = weaponOverwhelming(character, weapon)
 

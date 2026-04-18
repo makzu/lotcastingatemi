@@ -45,7 +45,7 @@ export function decisiveAttack(
   character: Character,
   weapon: fullWeapon,
   penalties: Object,
-  excellencyAbils: Array<string>
+  excellencyAbils: Array<string>,
 ) {
   let bonus = []
   let specialAttacks = []
@@ -53,8 +53,13 @@ export function decisiveAttack(
     bonus = bonus.concat([
       { label: 'clash', bonus: 2, situational: true, noFull: true },
     ])
+  if (weapon.tags.find((t) => t.startsWith('siege'))) {
+    bonus = bonus.concat([
+      { label: 'vs small targets', bonus: -4, situational: true },
+    ])
+  }
 
-  weapon.tags.forEach(t => {
+  weapon.tags.forEach((t) => {
     if (supportedTags.includes(t)) specialAttacks = specialAttacks.concat([t])
   })
 
@@ -67,7 +72,7 @@ export function decisiveAttack(
       bonus,
       penaltyObject(penalties),
       excellencyAbils,
-      specialAttacks
+      specialAttacks,
     ),
     attack: 'decisive',
     damageType: weaponDamageType(weapon),

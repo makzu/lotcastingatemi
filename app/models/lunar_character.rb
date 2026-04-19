@@ -34,6 +34,7 @@ class LunarCharacter < Character
     new_cha.caste = '' unless LUNAR_CASTES.include? new_cha.caste
     new_cha.caste_attributes = new_cha.caste_attributes & (CASTE_ATTRIBUTES[new_cha.caste.to_sym] || [])
     new_cha.limit = 0 if new_cha.limit.blank?
+    new_cha.active_loadout = nil
 
     new_cha.save!
     (new_cha.ability_charms + new_cha.essence_charms).each do |charm|

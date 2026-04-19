@@ -36,6 +36,7 @@ class DragonbloodCharacter < Character
     new_cha.caste = (new_cha.caste || '').downcase
     new_cha.caste = '' unless DRAGONBLOOD_ASPECTS.include? new_cha.caste
     new_cha.aura = 'none' unless (DRAGONBLOOD_ASPECTS + []).include? new_cha.aura
+    new_cha.active_loadout = nil
 
     new_cha.save!
     (new_cha.attribute_charms + new_cha.essence_charms).each do |charm|

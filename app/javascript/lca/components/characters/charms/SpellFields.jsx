@@ -21,7 +21,7 @@ import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import styles from './CharmStyles.js'
+import styles from './CharmStyles'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 import { SpellSummaryBlock } from './SpellDisplay.jsx'
 import TagsField from 'components/generic/TagsField.jsx'

@@ -1,4 +1,3 @@
-// @flow
 import React, { Component, Fragment } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
@@ -12,9 +11,9 @@ import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import SortableGridList from 'components/generic/SortableGridList.jsx'
-import CharmFields from './CharmFields.jsx'
+import CharmFields from './CharmFields'
 import CharmFilter from './CharmFilter.jsx'
-import styles from './CharmStyles.js'
+import styles from './CharmStyles'
 import SpellFields from './SpellFields.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
@@ -25,7 +24,7 @@ import {
   destroySpell,
   updateCharm,
   updateSpell,
-} from 'ducks/actions.js'
+} from 'ducks/actions'
 import { updateCharmSort } from 'ducks/entities/charm'
 import { updateSpellSort } from 'ducks/entities/spell'
 import { getSpecificCharacter } from 'ducks/selectors'
@@ -44,31 +43,31 @@ const filterByCategory = (categoryFilter) => (charm) =>
 const SortableItem = SortableElement(({ children }) => children)
 
 export type Props = {
-  character: Character,
-  nativeCharms: Array<Charm>,
-  martialArtsCharms: Array<Charm>,
-  evocations: Array<Charm>,
-  spells: Array<Spell>,
-  spiritCharms: Array<Charm>,
-  createCharm: Function,
-  updateCharm: Function,
-  destroyCharm: Function,
-  createSpell: Function,
-  updateSpell: Function,
-  destroySpell: Function,
-  updateCharmSort: Function,
-  updateSpellSort: Function,
-  classes: Object,
+  character: Character
+  nativeCharms: Array<Charm>
+  martialArtsCharms: Array<Charm>
+  evocations: Array<Charm>
+  spells: Array<Spell>
+  spiritCharms: Array<Charm>
+  createCharm: Function
+  updateCharm: Function
+  destroyCharm: Function
+  createSpell: Function
+  updateSpell: Function
+  destroySpell: Function
+  updateCharmSort: Function
+  updateSpellSort: Function
+  classes: Object
 }
 type State = {
-  filtersOpen: boolean,
-  abilityFilter: string,
-  styleFilter: string,
-  artifactFilter: string,
-  circleFilter: string,
-  categoryFilter: Array<string>,
-  openCharm: number | null,
-  openSpell: number | null,
+  filtersOpen: boolean
+  abilityFilter: string
+  styleFilter: string
+  artifactFilter: string
+  circleFilter: string
+  categoryFilter: Array<string>
+  openCharm: number | null
+  openSpell: number | null
 }
 class CharmEditor extends Component<Props, State> {
   constructor(props: Props) {
@@ -119,6 +118,7 @@ class CharmEditor extends Component<Props, State> {
 
   handleAddNative = () => {
     let type
+    let loadouts = null
     switch (this.props.character.type) {
       case 'SolarCharacter':
       case 'DragonbloodCharacter':
@@ -139,7 +139,10 @@ class CharmEditor extends Component<Props, State> {
       default:
         type = ''
     }
-    this.props.createCharm(this.props.character.id, { type })
+    if (this.props.character.type === 'AlchemicalCharacter') {
+      loadouts = [this.props.character.current_loadout]
+    }
+    this.props.createCharm(this.props.character.id, { type, loadouts })
   }
 
   handleAddMA = () => {

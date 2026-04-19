@@ -3,6 +3,7 @@ import { WithCombatStats } from './shared'
 import { PlayerAsset } from './_lib'
 
 export interface Battlegroup extends PlayerAsset, QcStats, WithCombatStats {
+  type: 'battlegroup'
   size: 0 | 1 | 2 | 3 | 4 | 5
   might: 0 | 1 | 2
   drill: 0 | 1 | 2

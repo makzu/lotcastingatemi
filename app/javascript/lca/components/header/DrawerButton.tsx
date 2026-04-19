@@ -1,39 +1,34 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import IconButton from '@material-ui/core/IconButton'
-import { withStyles } from '@material-ui/core/styles'
+import { Theme, withStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 
-import { toggleDrawer  } from 'ducks/actions.js'
+import { toggleDrawer } from 'ducks/actions'
+import { createStyles, WithStyles } from '@material-ui/styles'
 
-const styles = theme => ({
-  drawerButton: {
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
+const styles = (theme: Theme) =>
+  createStyles({
+    drawerButton: {
+      [theme.breakpoints.up('lg')]: {
+        display: 'none',
+      },
     },
-  },
-})
+  })
 
-const LcaDrawerButton = ({
-  classes,
-  toggle,
-}: {
-  classes: any,
-  toggle(): void,
-}) => (
-  <IconButton
-    className={classes.drawerButton}
-    onClick={toggle}
-    color="inherit"
-  >
-    <MenuIcon />
-  </IconButton>
-)
+const LcaDrawerButton = ({ classes }: WithStyles<typeof styles>) => {
+  const dispatch = useDispatch()
+  return (
+    <IconButton
+      className={classes.drawerButton}
+      onClick={() => dispatch(toggleDrawer())}
+      color="inherit"
+    >
+      <MenuIcon />
+    </IconButton>
+  )
+}
 
-export default withStyles(styles)(
-  connect(
-    null,
-    { toggle: toggleDrawer }
-  )(LcaDrawerButton)
-)
+const EnhancedLcaDrawerButton = withStyles(styles)(LcaDrawerButton)
+export default EnhancedLcaDrawerButton

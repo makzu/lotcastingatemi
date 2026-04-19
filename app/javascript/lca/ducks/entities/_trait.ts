@@ -64,7 +64,8 @@ export const createApiActions = (
   createTraitDestroyAction(entityType, parentType),
 ]
 
-const justGetJSON = (_0: any, _1: any, response) => getJSON(response)
+const justGetJSON = (_0: never, _1: never, response: Response) =>
+  getJSON(response)
 
 interface CreateActionOptions {
   type?: string
@@ -90,6 +91,7 @@ const createTraitCreateAction =
     }
 
     return callApi({
+      method: 'POST',
       body: JSON.stringify(createObj),
       endpoint: `/api/v1/${parent}s/${charId}/${entityType}s`,
       types: standardTypes(entityType, action, justGetJSON, metaObj),

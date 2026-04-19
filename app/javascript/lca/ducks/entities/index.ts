@@ -1,6 +1,6 @@
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 import { normalize } from 'normalizr'
-import { createReducer } from '@reduxjs/toolkit'
+import { AnyAction, createReducer } from '@reduxjs/toolkit'
 
 export * from './player'
 export * from './chronicle'
@@ -39,6 +39,7 @@ import QcCharmReducer from './qc_charm'
 import QcMeritReducer from './qc_merit'
 import SpellReducer from './spell'
 import WeaponReducer from './weapon'
+import { RootState } from 'store'
 
 // tslint:disable object-literal-sort-keys
 export const defaultState: EntityState = {
@@ -46,7 +47,7 @@ export const defaultState: EntityState = {
   players: {
     [0]: {
       id: 0,
-      name: 'Anonymous Player',
+      display_name: 'Anonymous Player',
       chronicles: [],
       own_chronicles: [],
       characters: [],
@@ -87,7 +88,7 @@ export default createReducer(defaultState, {
   ...BattlegroupReducer,
   ...CombatActorReducer,
   [LOGOUT]: () => defaultState,
-  [CABLE_RECEIVED]: (state, action) => {
+  [CABLE_RECEIVED]: (state: RootState, action: AnyAction) => {
     const { payload } = action
     const { type, id, parent_type, parent_id, assoc } = payload
     const pluralType = type + 's'
@@ -113,13 +114,13 @@ export default createReducer(defaultState, {
         if (chronicle_id && state.chronicles[chronicle_id]) {
           state.chronicles[chronicle_id][type] = state.chronicles[chronicle_id][
             type
-          ].filter(e => e !== id)
+          ].filter((e) => e !== id)
         }
 
         if (state[parent_type] && state[parent_type][parent_id]) {
           state[parent_type][parent_id][assoc] = state[parent_type][parent_id][
             assoc
-          ].filter(e => e !== id)
+          ].filter((e) => e !== id)
         }
 
         delete state[pluralType][id]

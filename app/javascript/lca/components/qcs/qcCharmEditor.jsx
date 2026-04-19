@@ -13,7 +13,7 @@ import ContentAddCircle from '@material-ui/icons/AddCircle'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import QcCharmFields from './qcCharmFields.jsx'
 
-import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.js'
+import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.ts'
 import { updateQcCharmSort } from 'ducks/entities/qc_charm'
 import { getCharmsForQc } from 'selectors'
 import commonStyles from 'styles'

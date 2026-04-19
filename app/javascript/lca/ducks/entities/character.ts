@@ -59,6 +59,7 @@ export const [
 export function changeCharacterType(id: number, type: string) {
   const action = crudAction(CHARACTER, 'CHANGE_TYPE')
   return callApi({
+    method: 'POST',
     body: JSON.stringify({ type }),
     endpoint: `/api/v1/characters/${id}/change_type`,
     types: standardTypes(CHARACTER, action),

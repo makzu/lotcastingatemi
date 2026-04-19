@@ -1,4 +1,7 @@
-// @flow
+import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
+import type { Dispatch } from 'redux'
+
+import { RootState } from 'store.js'
 import { updateCharacter, updateQc, updateBattlegroup } from '../actions.js'
 export * from './chronicle.js'
 
@@ -19,14 +22,14 @@ export function spendMotes(
   charType: 'character' | 'qc' = 'character',
   committments: Object,
   mute: boolean = false,
-) {
-  let update = updateEvent(charType)
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  const update = updateEvent(charType)
 
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch: Dispatch, getState) => {
     dispatch({ type: SPEND_MOTES, id: id, pool: pool })
     const entity = getState().entities.current[charType + 's'][id]
-    let current_motes = entity[`motes_${pool}_current`]
-    let updateObj = {}
+    const current_motes = entity[`motes_${pool}_current`]
+    const updateObj = {}
     updateObj[`motes_${pool}_current`] = Math.max(current_motes - motes, 0)
 
     // Add to mote committments if specified
@@ -34,7 +37,7 @@ export function spendMotes(
 
     // Raise anima banner level if appropriate
     if (pool == 'peripheral' && motes >= 5 && !mute) {
-      let anima = entity.anima_level
+      const anima = entity.anima_level
       if (anima !== 3) {
         // Do not change Anima level if it's already at Bonfire
         updateObj['anima_level'] = Math.min(anima + Math.floor(motes / 5), 3)
@@ -49,12 +52,12 @@ export function spendWillpower(
   id: number,
   willpower: number,
   charType: 'character' | 'qc' | 'battlegroup' = 'character',
-) {
-  let update = updateEvent(charType)
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  const update = updateEvent(charType)
 
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch: Dispatch, getState) => {
     dispatch({ type: SPEND_WP, id: id })
-    let current_wp =
+    const current_wp =
       getState().entities.current[charType + 's'][id].willpower_temporary
     dispatch(
       update(id, { willpower_temporary: Math.max(current_wp - willpower, 0) }),
@@ -67,12 +70,12 @@ export function takeDamage(
   damage: number,
   damageType: 'bashing' | 'lethal' | 'aggravated' = 'bashing',
   charType: 'character' | 'qc' = 'character',
-) {
-  let update = updateEvent(charType)
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  const update = updateEvent(charType)
 
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch: Dispatch, getState) => {
     dispatch({ type: TAKE_DAMAGE, id: id, damageType: damageType })
-    let current_dmg =
+    const current_dmg =
       getState().entities.current[charType + 's'][id][`damage_${damageType}`]
     dispatch(update(id, { [`damage_${damageType}`]: current_dmg + damage }))
   }

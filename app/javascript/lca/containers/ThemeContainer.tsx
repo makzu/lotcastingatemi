@@ -87,9 +87,6 @@ const ThemeContainer = ({ theme, children, change }: Props) => {
 
 const mapStateToProps = (state: State) => ({ theme: state.app.theme })
 
-const enhance = connect(
-  mapStateToProps,
-  { change: switchTheme }
-)
+const enhance = connect(mapStateToProps, { change: switchTheme })
 
 export default enhance(ThemeContainer)

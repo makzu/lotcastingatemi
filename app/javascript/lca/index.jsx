@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom'
 
 import configureStore from './store'
 import history from './utils/history'
-import { lcaInit } from './ducks/actions.js'
+import { lcaInit } from './ducks/actions.ts'
 
 import RootContainer from './containers/rootContainer.jsx'
 

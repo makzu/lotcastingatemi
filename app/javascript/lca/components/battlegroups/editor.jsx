@@ -18,7 +18,7 @@ import TextField from '../generic/TextField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup } from 'ducks/actions.js'
+import { updateBattlegroup } from 'ducks/actions.ts'
 import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
 import commonStyles from 'styles'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'

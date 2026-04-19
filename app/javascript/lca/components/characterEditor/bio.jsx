@@ -15,7 +15,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateCharacter } from 'ducks/actions.js'
+import { updateCharacter } from 'ducks/actions.ts'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { showLunarTraits } from 'utils/calculated'
 import type { Character } from 'utils/flow-types'
@@ -195,8 +195,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   ProtectedComponent,
-  connect(
-    mapStateToProps,
-    { updateCharacter }
-  )
+  connect(mapStateToProps, { updateCharacter }),
 )(BioEditor)

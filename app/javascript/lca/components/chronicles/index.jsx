@@ -19,7 +19,7 @@ import CharacterAddPopup from './characterAddPopup.jsx'
 import QcAddPopup from './qcAddPopup.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.js'
+import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
 import { updateBattlegroupChronicleSort } from 'ducks/entities/battlegroup'
 import { updateCharacterChronicleSort } from 'ducks/entities/character'
 import { updateQcChronicleSort } from 'ducks/entities/qc'

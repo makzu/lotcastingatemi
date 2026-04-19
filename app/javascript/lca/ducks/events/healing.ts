@@ -1,6 +1,5 @@
-// @flow
 import { woundPenalty } from 'utils/calculated'
-import type { Character, fullQc } from 'utils/flow-types'
+import type { Character, QC } from 'types'
 
 const timeInHours = (time: string): number => {
   switch (time) {
@@ -21,7 +20,7 @@ const timeInHours = (time: string): number => {
   }
 }
 
-const timeToHealWorstExalted = (character: Character | fullQc) => {
+const timeToHealWorstExalted = (character: Character | QC) => {
   const penalty = woundPenalty(character, [])
   const bashing = character.damage_bashing > 0
   switch (penalty) {
@@ -38,7 +37,7 @@ const timeToHealWorstExalted = (character: Character | fullQc) => {
   }
 }
 
-const timeToHealWorstMortal = (character: Character | fullQc) => {
+const timeToHealWorstMortal = (character: Character | QC) => {
   const penalty = woundPenalty(character, [])
   const bashing = character.damage_bashing > 0
   switch (penalty) {
@@ -57,17 +56,17 @@ const timeToHealWorstMortal = (character: Character | fullQc) => {
 
 // Health recovery rates are in Core, p. 173-174
 export const healthRecoverObject = (
-  character: Character | fullQc,
+  character: Character | QC,
   time: number,
-  exaltedHealing: boolean = true
+  exaltedHealing: boolean = true,
 ) => {
-  let obj = {
+  const obj = {
     damage_bashing: character.damage_bashing,
     damage_lethal: character.damage_lethal,
     damage_aggravated: character.damage_aggravated,
   }
-  let bashing = character.damage_bashing
-  let lethal = character.damage_lethal + character.damage_aggravated
+  const bashing = character.damage_bashing
+  const lethal = character.damage_lethal + character.damage_aggravated
 
   // Do nothing if character has no damage
   if (bashing + lethal === 0) return {}
@@ -76,7 +75,7 @@ export const healthRecoverObject = (
   const timeToHealWorst = exaltedHealing
     ? timeToHealWorstExalted
     : timeToHealWorstMortal
-  let timeToHeal
+  let timeToHeal: number
   do {
     timeToHeal = timeToHealWorst({ ...character, ...obj })
     if (remainingTime >= timeToHeal) {

@@ -18,7 +18,7 @@ import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 
-import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions.js'
+import { updatePlayer, switchTheme, destroyAccount } from 'ducks/actions.ts'
 import { getSpecificPlayer } from 'selectors'
 import type { Player, Enhancer } from 'utils/flow-types'
 
@@ -44,13 +44,13 @@ class SettingsPage extends React.Component<Props, { open: boolean }> {
     this.setState({ open: false })
   }
 
-  handleChangeName = e => {
+  handleChangeName = (e) => {
     this.props.updatePlayer(this.props.player.id, {
       [e.target.name]: e.target.value,
     })
   }
 
-  handleChangeTheme = e => {
+  handleChangeTheme = (e) => {
     this.props.switchTheme(e.target.value)
   }
 
@@ -130,7 +130,7 @@ class SettingsPage extends React.Component<Props, { open: boolean }> {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const id = state.session.id
   const player = getSpecificPlayer(state, id)
   const { theme } = state.app
@@ -139,10 +139,7 @@ const mapStateToProps = state => {
 
 const enhance: Enhancer<Props, {}> = compose(
   ProtectedComponent,
-  connect(
-    mapStateToProps,
-    { updatePlayer, switchTheme, destroyAccount }
-  )
+  connect(mapStateToProps, { updatePlayer, switchTheme, destroyAccount }),
 )
 
 export default enhance(SettingsPage)

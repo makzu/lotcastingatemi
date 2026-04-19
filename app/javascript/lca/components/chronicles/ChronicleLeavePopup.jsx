@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
-import { removePlayerFromChronicle as removePlayer } from 'ducks/actions.js'
+import { removePlayerFromChronicle as removePlayer } from 'ducks/actions.ts'
 import { getSpecificChronicle } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 
@@ -84,9 +84,8 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  { removePlayer }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  removePlayer,
+})
 
 export default enhance(ChronicleLeavePopup)

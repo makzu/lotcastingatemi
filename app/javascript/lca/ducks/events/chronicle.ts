@@ -1,6 +1,8 @@
-// @flow
+import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
+import type { Dispatch } from 'redux'
+
 import { deepEqual } from 'fast-equals'
-import { updateEvent } from '.'
+import { updateEvent } from './index.js'
 import { healthRecoverObject } from './healing.js'
 import {
   getCharactersForChronicle,
@@ -12,10 +14,13 @@ import {
   committedPersonalMotes,
   committedPeripheralMotes,
 } from 'utils/calculated'
+import { RootState } from 'store'
+import { Battlegroup, Character, QC } from 'types'
+import { WithSharedStats } from 'types/shared.js'
 
-const endSceneObject = c => {
-  let obj = {}
-  const commits = c.motes_committed.filter(m => !m.scenelong)
+const endSceneObject = (c: Partial<Character | QC>) => {
+  const obj: Partial<Character | QC> = {}
+  const commits = c.motes_committed.filter((m) => !m.scenelong)
 
   if (!deepEqual(commits, c.motes_committed)) obj.motes_committed = commits
   if (c.aura != null && c.aura !== '' && c.aura !== 'none') obj.aura = 'none'
@@ -28,24 +33,26 @@ const endSceneObject = c => {
 }
 
 export const END_SCENE = 'lca/event/CHRONICLE_END_SCENE'
-export function endScene(id: number) {
-  return (dispatch: Function, getState: Function) => {
+export function endScene(
+  id: number,
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch: Dispatch, getState) => {
     dispatch({ type: END_SCENE, id: id })
 
     const state = getState()
-    let chars = [
+    const chars = [
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
     ]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       const obj = endSceneObject(c)
 
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
     })
-    getBattlegroupsForChronicle(state, id).forEach(bg => {
+    getBattlegroupsForChronicle(state, id).forEach((bg) => {
       const update = updateEvent(bg.type)
-      let obj = {}
+      const obj: Partial<Battlegroup> = {}
 
       if (bg.in_combat) obj.in_combat = false
       if (bg.has_acted) obj.has_acted = false
@@ -55,8 +62,8 @@ export function endScene(id: number) {
     })
   }
 }
-const moteRecoveryObject = (character, motes) => {
-  let obj = {}
+const moteRecoveryObject = (character: WithSharedStats, motes: number) => {
+  const obj: Partial<WithSharedStats> = {}
   if (motes === 0) return obj
 
   const availablePeripheral =
@@ -72,24 +79,28 @@ const moteRecoveryObject = (character, motes) => {
   if (spentPeripheral > 0)
     obj.motes_peripheral_current = Math.min(
       character.motes_peripheral_current + motes,
-      availablePeripheral
+      availablePeripheral,
     )
   if (spentPersonal > 0 && motes - spentPeripheral > 0)
     obj.motes_personal_current = Math.min(
       character.motes_personal_current + (motes - spentPeripheral),
-      availablePersonal
+      availablePersonal,
     )
   return obj
 }
 export const RESPIRE_MOTES = 'lca/event/CHRONICLE_RESPIRE_MOTES'
-export function respireMotes(id: number, motes: number, includeQcs: boolean) {
-  return (dispatch: Function, getState: Function) => {
+export function respireMotes(
+  id: number,
+  motes: number,
+  includeQcs: boolean,
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch: Dispatch, getState) => {
     dispatch({ type: RESPIRE_MOTES, id: id, motes: motes })
 
     const state = getState()
-    let chars = [...getCharactersForChronicle(state, id)]
+    let chars: Array<Character | QC> = [...getCharactersForChronicle(state, id)]
     if (includeQcs) chars = [...chars, ...getQcsForChronicle(state, id)]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       const obj = moteRecoveryObject(c, motes)
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
@@ -97,7 +108,11 @@ export function respireMotes(id: number, motes: number, includeQcs: boolean) {
   }
 }
 
-const willpowerRecoveryObject = (character, willpower, exceed = false) => {
+const willpowerRecoveryObject = (
+  character: WithSharedStats,
+  willpower: number,
+  exceed = false,
+) => {
   if (willpower === 0) return {}
 
   const max = exceed ? 10 : character.willpower_permanent
@@ -111,15 +126,15 @@ export function recoverWillpower(
   id: number,
   willpower: number,
   exceed: boolean,
-  includeQcs: boolean
-) {
-  return (dispatch: Function, getState: Function) => {
+  includeQcs: boolean,
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch: Dispatch, getState) => {
     dispatch({ type: RECOVER_WILLPOWER, id: id, willpower: willpower })
 
     const state = getState()
-    let chars = [...getCharactersForChronicle(state, id)]
+    let chars: Array<Character | QC> = [...getCharactersForChronicle(state, id)]
     if (includeQcs) chars = [...chars, ...getQcsForChronicle(state, id)]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       const obj = willpowerRecoveryObject(c, willpower, exceed)
       if (Object.keys(obj).length > 0) dispatch(update(c.id, obj))
@@ -128,18 +143,22 @@ export function recoverWillpower(
 }
 
 export const DOWNTIME = 'lca/event/CHRONICLE_DOWNTIME'
-export function downtime(id: number, time: number, endScene: boolean) {
-  return (dispatch: Function, getState: Function) => {
+export function downtime(
+  id: number,
+  time: number,
+  endScene: boolean,
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch: Dispatch, getState) => {
     dispatch({ type: DOWNTIME, id: id, length: time })
     const state = getState()
-    let chars = [
+    const chars = [
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
     ]
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
-      let obj: { [string]: number } = {}
-      let merits = []
+      let obj: Partial<Character | QC> = {}
+      let merits: string[] = []
       let exaltedHealing = true
       let moteBonus = 0
 
@@ -156,7 +175,7 @@ export function downtime(id: number, time: number, endScene: boolean) {
         // Mortals PCs can use the Exalted Healing merit to heal like Exalts
         exaltedHealing =
           c.type !== 'Character' ||
-          merits.some(m => m.startsWith('exalted healing'))
+          merits.some((m) => m.startsWith('exalted healing'))
       }
 
       obj = {
@@ -173,7 +192,7 @@ export function downtime(id: number, time: number, endScene: boolean) {
       )
         moteBonus = 4
       // 2-dot Hearthstones increase out-of-combat mote regen by 2
-      else if (merits.some(m => m.startsWith('hearthstone'))) moteBonus = 2
+      else if (merits.some((m) => m.startsWith('hearthstone'))) moteBonus = 2
       const motesPerDay = 8 * (10 + moteBonus) + 16 * (5 + moteBonus)
       const motesPerHour =
         time >= 8 ? Math.ceil(motesPerDay / 24) : 5 + moteBonus
@@ -194,16 +213,18 @@ export function downtime(id: number, time: number, endScene: boolean) {
 }
 
 export const NEXT_ROUND = 'lca/event/COMBAT_NEXT_ROUND'
-export function nextRound(id: number) {
-  return (dispatch: Function, getState: Function) => {
+export function nextRound(
+  id: number,
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch: Dispatch, getState) => {
     const state = getState()
-    let chars = [
+    const chars = [
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
       ...getBattlegroupsForChronicle(state, id),
-    ].filter(c => c.in_combat)
+    ].filter((c) => c.in_combat)
 
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
       let obj = { has_acted: false }
       if (c.type !== 'battlegroup')
@@ -215,18 +236,20 @@ export function nextRound(id: number) {
 }
 
 export const END_COMBAT = 'lca/event/COMBAT_END'
-export function endCombat(id: number) {
-  return (dispatch: Function, getState: Function) => {
+export function endCombat(
+  id: number,
+): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch: Dispatch, getState) => {
     const state = getState()
-    let chars = [
+    const chars = [
       ...getCharactersForChronicle(state, id),
       ...getQcsForChronicle(state, id),
       ...getBattlegroupsForChronicle(state, id),
-    ].filter(c => c.in_combat)
+    ].filter((c) => c.in_combat)
 
-    chars.forEach(c => {
+    chars.forEach((c) => {
       const update = updateEvent(c.type)
-      let obj = { in_combat: false, has_acted: false, onslaught: 0 }
+      const obj = { in_combat: false, has_acted: false, onslaught: 0 }
 
       dispatch(update(c.id, obj))
     })

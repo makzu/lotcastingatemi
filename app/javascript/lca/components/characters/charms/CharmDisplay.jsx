@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import Collapse from '@material-ui/core/Collapse'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import styles from './CharmStyles.js'
+import styles from './CharmStyles'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import { checkVisible } from 'utils'
 import type { Charm } from 'utils/flow-types'
@@ -21,7 +21,7 @@ function scrollToPanel(e, appearing, id) {
   if (!checkVisible(elem)) scrollToElement(elem)
 }
 
-const showEvo = charm =>
+const showEvo = (charm) =>
   charm.charm_type === 'Evocation' && charm.artifact_name !== ''
 
 type Props = { charm: Charm, classes: Object }

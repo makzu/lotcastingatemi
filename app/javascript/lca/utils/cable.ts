@@ -1,10 +1,8 @@
-// @flow
-
 import { createConsumer } from '@rails/actioncable'
 const cable = createConsumer()
 
 const UpdatesCable = {
-  subscribe(getState: Function, received: Object) {
+  subscribe(getState, received) {
     this.unsubscribe()
 
     window.ChronicleCable = cable.subscriptions.create(
@@ -14,7 +12,7 @@ const UpdatesCable = {
       },
       {
         received: received,
-      }
+      },
     )
   },
 

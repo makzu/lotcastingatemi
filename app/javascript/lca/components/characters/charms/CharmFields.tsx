@@ -1,4 +1,3 @@
-// @flow
 import { deepEqual } from 'fast-equals'
 import React, { Component, Fragment } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
@@ -16,8 +15,9 @@ import Collapse from '@material-ui/core/Collapse'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { WithStyles } from '@material-ui/styles'
 
-import styles from './CharmStyles.js'
+import styles from './CharmStyles'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.jsx'
 import { CharmSummaryBlock } from './CharmDisplay.jsx'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
@@ -32,24 +32,25 @@ import {
   ATTRIBUTE_MAX,
   ESSENCE_MIN,
   ESSENCE_MAX,
-} from 'utils/constants.ts'
-import type { Charm, Character } from 'utils/flow-types'
+} from 'utils/constants'
+import type { Charm, Character } from 'types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-type Props = {
-  charm: Charm,
-  character: Character,
-  onUpdate: Function,
-  onRemove: Function,
-  openCharm: number | null,
-  onOpenChange: Function,
-  classes: Object,
+interface Props extends WithStyles<typeof styles> {
+  charm: Charm
+  character: Character
+  onUpdate: (id: number, characterId: number, updates: Partial<Charm>) => void
+  onRemove: (id: number) => void
+  openCharm: number | null
+  onOpenChange: (
+    id: number,
+  ) => (e: React.ChangeEvent<unknown>, expanded: boolean) => void
 }
 class CharmFields extends Component<Props, { charm: Charm }> {
-  handleChange = (e) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { charm } = this.props
 
@@ -62,7 +63,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
     this.props.onRemove(this.props.charm.id)
   }
 
-  scrollToPanel = (e, appearing) => {
+  scrollToPanel = (_e: HTMLElement, appearing: boolean) => {
     if (appearing) return false
     const elem = document.getElementById(
       `charm-editor-expando-${this.props.charm.id}`,
@@ -83,7 +84,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
       'secrets',
       'endings',
     ].map((h) => (
-      <MenuItem key={h} value={h} style={{ 'text-transform': 'capitalize' }}>
+      <MenuItem key={h} value={h} style={{ textTransform: 'capitalize' }}>
         {h}
       </MenuItem>
     ))
@@ -101,7 +102,7 @@ class CharmFields extends Component<Props, { charm: Charm }> {
       <ExpansionPanel
         expanded={isOpen}
         onChange={onOpenChange(charm.id)}
-        CollapseProps={{
+        TransitionProps={{
           onEntered: scrollToPanel,
           mountOnEnter: true,
           unmountOnExit: true,
@@ -308,4 +309,5 @@ class CharmFields extends Component<Props, { charm: Charm }> {
   }
 }
 
-export default withStyles(styles)(CharmFields)
+const EnhancedCharmFields = withStyles(styles)(CharmFields)
+export default EnhancedCharmFields

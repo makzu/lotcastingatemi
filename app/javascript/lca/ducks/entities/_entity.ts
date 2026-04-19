@@ -1,7 +1,8 @@
 import deepmerge from 'deepmerge'
+import { AnyAction } from 'redux'
 import { getJSON } from 'redux-api-middleware'
 
-import { AApiAction, callApi } from 'utils/api'
+import { callApi } from 'utils/api'
 import {
   characterTypes as eTypes,
   crudAction,
@@ -13,12 +14,13 @@ import {
 import { EntityState } from './_types'
 
 /* Overwrite arrays instead of concatenating them */
-const arrayMerge = (_: null[], sourceArray: any[]) => sourceArray
+const arrayMerge: deepmerge.Options['arrayMerge'] = (_, sourceArray) =>
+  sourceArray
 
-export const mergeEntity = (state: EntityState, action) =>
+export const mergeEntity = (state: EntityState, action: AnyAction) =>
   deepmerge(state, action.payload.entities || {}, { arrayMerge })
 
-export const createEntityReducer = (entityType: eTypes, reducers: {} = {}) => {
+export const createEntityReducer = (entityType: eTypes, reducers) => {
   const pluralType = entityType + 's'
 
   return {
@@ -60,32 +62,27 @@ export const createEntityReducer = (entityType: eTypes, reducers: {} = {}) => {
 /** Returns an array of API actions, in this shape:
  * [create, duplicate, fetch, fetch_all, update, destroy]
  */
-export const createApiActions = (
-  type: eTypes,
-): [ACreate, AIdAction, AIdAction, AFetchAll, AUpdate, AIdAction] => [
-  createCreateAction(type),
-  createDuplicateAction(type),
-  createFetchAction(type),
-  createFetchAllAction(type),
-  createUpdateAction(type),
-  createDestroyAction(type),
-]
+export const createApiActions = (type: eTypes) =>
+  [
+    createCreateAction(type),
+    createDuplicateAction(type),
+    createFetchAction(type),
+    createFetchAllAction(type),
+    createUpdateAction(type),
+    createDestroyAction(type),
+  ] as const
 
-type AIdAction = (id: number) => AApiAction
-export const createFetchAction =
-  (type: eTypes): AIdAction =>
-  (id) => {
-    const action = crudAction(type, 'FETCH')
-    return callApi({
-      endpoint: `/api/v1/${type}s/${id}`,
-      method: 'GET',
-      types: standardTypes(type, action),
-    })
-  }
+export const createFetchAction = (type: eTypes) => (id: number) => {
+  const action = crudAction(type, 'FETCH')
+  return callApi({
+    endpoint: `/api/v1/${type}s/${id}`,
+    method: 'GET',
+    types: standardTypes(type, action),
+  })
+}
 
-type AFetchAll = (page?: number) => AApiAction
 export const createFetchAllAction =
-  (type: eTypes): AFetchAll =>
+  (type: eTypes) =>
   (page = 1) => {
     const action = crudAction(type, 'FETCH_ALL')
     return callApi({
@@ -95,33 +92,30 @@ export const createFetchAllAction =
     })
   }
 
-type ACreate = (traits: object) => AApiAction
 export const createCreateAction =
-  (type: eTypes): ACreate =>
+  (type: eTypes) =>
   (traits = {}) => {
     const action = crudAction(type, 'CREATE')
     return callApi({
+      method: 'POST',
       body: JSON.stringify(traits),
       endpoint: `/api/v1/${type}s`,
       types: standardTypes(type, action),
     })
   }
 
-export const createDuplicateAction =
-  (type: eTypes): AIdAction =>
-  (id) => {
-    const action = crudAction(type, 'DUPLICATE')
-    return callApi({
-      endpoint: `/api/v1/${type}s/${id}/duplicate`,
-      types: standardTypes(type, action),
-    })
-  }
+export const createDuplicateAction = (type: eTypes) => (id: number) => {
+  const action = crudAction(type, 'DUPLICATE')
+  return callApi({
+    method: 'POST',
+    endpoint: `/api/v1/${type}s/${id}/duplicate`,
+    types: standardTypes(type, action),
+  })
+}
 
-type AUpdate = (id: number, trait: object) => AApiAction
 let nextTransactionId = 0
 export const createUpdateAction =
-  (type: eTypes): AUpdate =>
-  (id, trait) => {
+  (type: eTypes) => (id: number, trait: any) => {
     const transactionId = type + nextTransactionId++
     const action = crudAction(type, 'UPDATE')
     return callApi({
@@ -134,22 +128,20 @@ export const createUpdateAction =
         id,
         transactionId,
         trait,
-        (_0: null, _1: null, res: object) => getJSON(res),
+        (_0: null, _1: null, res: Response) => getJSON(res),
       ),
     })
   }
 
-export const createDestroyAction =
-  (type: eTypes): AIdAction =>
-  (id) => {
-    const transactionId = type + nextTransactionId++
-    const action = crudAction(type, 'DESTROY')
-    return callApi({
-      endpoint: `/api/v1/${type}s/${id}`,
-      method: 'DELETE',
-      types: optimisticTypes(type, action, id, transactionId),
-    })
-  }
+export const createDestroyAction = (type: eTypes) => (id) => {
+  const transactionId = type + nextTransactionId++
+  const action = crudAction(type, 'DESTROY')
+  return callApi({
+    endpoint: `/api/v1/${type}s/${id}`,
+    method: 'DELETE',
+    types: optimisticTypes(type, action, id, transactionId),
+  })
+}
 
 export const createConditionalFetchAction =
   (type: eTypes, fetchAction) => (id) => (dispatch, getState) => {

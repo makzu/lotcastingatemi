@@ -7,14 +7,14 @@ import { Drawer, Hidden, Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import { State } from 'ducks'
-import { closeDrawer } from 'ducks/actions.js'
+import { closeDrawer } from 'ducks/actions.ts'
 import { getCurrentPlayer } from 'ducks/entities'
 import { drawerWidth } from '../../containers/_drawerProperties'
 import NavPanel from './NavPanel'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const drawerScrollbars = theme => ({
+const drawerScrollbars = (theme) => ({
   '&::-webkit-scrollbar': {
     backgroundColor: theme.palette.background.paper,
   },
@@ -39,7 +39,7 @@ const useStyles = makeStyles(
       },
       ...(theme.disableScrollbars ? {} : drawerScrollbars(theme)),
     },
-  })
+  }),
 )
 
 interface StateProps {
@@ -104,8 +104,5 @@ const mapState = (state: State): StateProps => ({
 
 export default compose<Props, {}>(
   withRouter,
-  connect(
-    mapState,
-    { close: closeDrawer }
-  )
+  connect(mapState, { close: closeDrawer }),
 )(NavPanelWrap)

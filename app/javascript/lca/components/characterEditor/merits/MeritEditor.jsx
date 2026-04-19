@@ -20,7 +20,7 @@ import MeritFields from './MeritFields.jsx'
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { createMerit, destroyMerit, updateMerit } from 'ducks/actions.js'
+import { createMerit, destroyMerit, updateMerit } from 'ducks/actions.ts'
 import { updateMeritSort } from 'ducks/entities/merit'
 import { getMeritsForCharacter, getSpecificCharacter } from 'selectors'
 import commonStyles from 'styles'

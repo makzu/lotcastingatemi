@@ -25,7 +25,7 @@ import TextField from '../generic/TextField.jsx'
 import AuraSelect from 'components/shared/selects/AuraSelect'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateQc } from 'ducks/actions.js'
+import { updateQc } from 'ducks/actions.ts'
 import { getSpecificQc, canIDeleteQc } from 'selectors'
 import commonStyles from 'styles'
 import { woundPenalty } from 'utils/calculated'

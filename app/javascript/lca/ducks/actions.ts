@@ -1,4 +1,3 @@
-// @flow
 export {
   createCharacter,
   duplicateCharacter,
@@ -66,25 +65,28 @@ import {
   fetchAllBattlegroups,
 } from './entities'
 import UpdatesCable from 'utils/cable.js'
+import type { Dispatch } from 'redux'
+import { ThunkAction, AnyAction } from '@reduxjs/toolkit'
+import { RootState } from 'store'
 
 export const INIT = 'lca/app/INIT'
 
-export function fetchAll() {
-  return (dispatch: Function, getState: Function) => {
+export function fetchAll(): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch: Dispatch, getState) => {
     dispatch(fetchCurrentPlayer())
       .then(() => dispatch(fetchAllCharacters()))
       .then(() => dispatch(fetchAllQcs()))
       .then(() => dispatch(fetchAllBattlegroups()))
       .then(() => {
-        UpdatesCable.subscribe(getState, data =>
-          dispatch({ type: 'lca/cable/RECEIVED', payload: data })
+        UpdatesCable.subscribe(getState, (data) =>
+          dispatch({ type: 'lca/cable/RECEIVED', payload: data }),
         )
       })
   }
 }
 
-export function lcaInit() {
-  return (dispatch: Function, getState: Function) => {
+export function lcaInit(): ThunkAction<void, RootState, unknown, AnyAction> {
+  return (dispatch, getState) => {
     dispatch({ type: INIT })
 
     if (getState().session.authenticated) {

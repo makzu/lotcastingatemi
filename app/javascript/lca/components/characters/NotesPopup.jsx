@@ -16,12 +16,12 @@ import DescriptionIcon from '@material-ui/icons/Description'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
 
-import { updateCharacter } from 'ducks/actions.js'
+import { updateCharacter } from 'ducks/actions.ts'
 import { canIEditCharacter } from 'selectors'
 import commonStyles from 'styles'
 import type { Character } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...commonStyles(theme),
   wrapper: {
     margin: '-0.75em -1em 0 0',
@@ -42,7 +42,7 @@ class NotesPopup extends React.Component<Props, State> {
     this.state = { open: false, editing: false }
   }
 
-  handleOpen = e => {
+  handleOpen = (e) => {
     this.setState({ open: true })
     e.preventDefault()
   }
@@ -120,8 +120,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { updateCharacter }
-  )
+  connect(mapStateToProps, { updateCharacter }),
 )(NotesPopup)

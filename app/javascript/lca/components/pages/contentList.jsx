@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import SortableGridList from 'components/generic/SortableGridList.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.js'
+import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
 import { getMyBattlegroups, getMyCharacters, getMyQCs } from 'selectors'
 import commonStyles from 'styles'
 import type { Battlegroup, Character, Enhancer, fullQc } from 'utils/flow-types'

@@ -2622,6 +2622,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/redux-api-middleware@npm:^3.2.7":
+  version: 3.2.7
+  resolution: "@types/redux-api-middleware@npm:3.2.7"
+  dependencies:
+    redux: "npm:^4.0.1"
+  checksum: 10c0/9b6c6c1b5dc9e8f5df3429529bcde6e71cebab2b5130717f5f4a3dae826e9417f0397402c031839c14b2d0e6042d690df5a9aa029cdf16b5e800a0843eb62f3e
+  languageName: node
+  linkType: hard
+
 "@types/redux-optimistic-ui@npm:^0.4.14":
   version: 0.4.14
   resolution: "@types/redux-optimistic-ui@npm:0.4.14"
@@ -9371,6 +9380,7 @@ __metadata:
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/recompose": "npm:^0.30.15"
     "@types/redux-actions": "npm:^2.6.5"
+    "@types/redux-api-middleware": "npm:^3.2.7"
     "@types/redux-optimistic-ui": "npm:^0.4.14"
     "@vitejs/plugin-react": "npm:^4.7.0"
     "@vitejs/plugin-react-swc": "npm:^3.11.0"
@@ -11720,7 +11730,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.2.1":
+"redux@npm:^4.0.1, redux@npm:^4.2.1":
   version: 4.2.1
   resolution: "redux@npm:4.2.1"
   dependencies:

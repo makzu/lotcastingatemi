@@ -27,7 +27,7 @@ const CharacterEditor = lazy(() =>
 )
 
 const CharmEditor = lazy(() =>
-  import('components/characters/charms/CharmEditor.jsx'),
+  import('components/characters/charms/CharmEditor'),
 )
 
 const QcSheet = lazy(() => import('components/qcs/index.jsx'))

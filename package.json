@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@material-ui/styles": "^4.11.5",
     "@material-ui/types": "^5.1.8",
     "@rails/actioncable": "^7.2.202",
@@ -43,8 +44,8 @@
     "typescript": "^4.9.5"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.12",
     "@bunchtogether/vite-plugin-flow": "^1.0.2",
-    "@eslint/js": "^9.36.0",
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/rtk-codemods": "0.0.3",
     "@rollup/plugin-inject": "^5.0.5",
@@ -55,31 +56,24 @@
     "cypress": "^12.17.4",
     "depcheck": "^1.4.7",
     "enzyme": "^3.11.0",
-    "eslint": "^9.36.0",
-    "eslint-config-prettier": "^8.10.2",
-    "eslint-plugin-cypress": "^2.15.2",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
     "flow-bin": "^0.122.0",
     "jest": "^25.5.4",
     "prettier": "^2.8.8",
     "prettier-eslint": "^15.0.1",
     "react-test-renderer": "^16.14.0",
     "redux-mock-store": "^1.5.5",
-    "typescript-eslint": "^8.44.1",
     "vite": "^5.4.20",
     "vite-plugin-rails": "^0.5.0",
     "vite-plugin-ruby": "^5.1.1",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "scripts": {
-    "flow": "flow",
+    "format": "biome format app/javascript",
+    "format:fix": "biome format --write app/javascript",
+    "lint": "biome check app/javascript",
+    "lint:fix": "biome check --write app/javascript",
     "test": "jest",
-    "testcov": "jest --coverage",
-    "lint": "eslint app/javascript/ --ext js,jsx"
+    "testcov": "jest --coverage"
   },
   "jest": {
     "roots": [

@@ -20,18 +20,13 @@
     "VITE_RUBY_HOST": "0.0.0.0"
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [
-    3000,
-    3036,
-    6379
-  ],
+  "forwardPorts": [3000, 3036, 6379],
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
       "extensions": [
+        "biomejs.biome",
         "christian-kohler.npm-intellisense",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
         "vitest.explorer"
       ]
     }

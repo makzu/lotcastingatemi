@@ -8,7 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 
 import MoteCommittmentEditor from 'components/characterEditor/editors/moteCommittmentEditor.jsx'
-import { updateCharacter, updateQc } from 'ducks/actions.js'
+import { updateCharacter, updateQc } from 'ducks/actions'
 import type { withMotePool, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {
@@ -33,7 +33,7 @@ class MoteCommittmentPopup extends React.Component<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     this.props.update(this.props.character.id, { [name]: value })
   }
@@ -65,13 +65,10 @@ class MoteCommittmentPopup extends React.Component<Props, State> {
 const mapDispatchToProps = (dispatch: Function, props: ExposedProps) => ({
   update: (id: number, trait: string, value: any): Function =>
     dispatch(
-      props.qc ? updateQc(id, trait, value) : updateCharacter(id, trait, value)
+      props.qc ? updateQc(id, trait, value) : updateCharacter(id, trait, value),
     ),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  null,
-  mapDispatchToProps
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(null, mapDispatchToProps)
 
 export default enhance(MoteCommittmentPopup)

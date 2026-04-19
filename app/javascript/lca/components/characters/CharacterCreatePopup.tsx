@@ -19,7 +19,7 @@ import SiderealCasteSelect from 'components/characterEditor/exaltTraits/Sidereal
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import AlchemicalCasteSelect from 'components/characterEditor/exaltTraits/AlchemicalCasteSelect'
 import InfernalCasteSelect from 'components/characterEditor/exaltTraits/InfernalCasteSelect'
-import { createCharacter } from 'ducks/actions.js'
+import { createCharacter } from 'ducks/actions'
 import type { Character } from 'types'
 
 const initialState = {

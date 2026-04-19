@@ -11,7 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 import HealthLevelBoxes from './HealthLevelBoxes.jsx'
 import RatingField from './RatingField.jsx'
-import { takeDamage } from 'ducks/actions.js'
+import { takeDamage } from 'ducks/actions'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import { clamp } from 'utils'
 import type { withHealthLevels, Enhancer } from 'utils/flow-types'
@@ -43,7 +43,7 @@ const defaultState: State = {
 class DamageWidget extends React.Component<Props, State> {
   state = defaultState
 
-  min = type => {
+  min = (type) => {
     return -this.props.character[`damage_${type}`]
   }
 
@@ -61,13 +61,13 @@ class DamageWidget extends React.Component<Props, State> {
     })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     let commit = this.state.commit
     this.setState({ [name]: value, commit: commit })
   }
 
-  handleCheck = e => {
+  handleCheck = (e) => {
     this.setState({ [e.target.name]: !this.state[e.target.name] })
   }
 
@@ -86,7 +86,7 @@ class DamageWidget extends React.Component<Props, State> {
         character.id,
         aggravated,
         'aggravated',
-        characterType
+        characterType,
       )
 
     this.setState(defaultState)
@@ -236,9 +236,8 @@ const mapStateToProps = (state, props: ExposedProps) => ({
     : canIEditCharacter(state, props.character.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  { takeDamage }
-)
+const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+  takeDamage,
+})
 
 export default enhance(DamageWidget)

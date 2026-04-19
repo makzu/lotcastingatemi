@@ -19,7 +19,7 @@ import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { useDialogLogic } from 'hooks'
 import { Character, QC } from 'types'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 
 const styles = (theme: Theme) =>

@@ -5,7 +5,7 @@ import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core/'
 import { GroupAdd } from '@material-ui/icons'
 
 import { State } from 'ducks'
-import { createBattlegroupFromQc } from 'ducks/actions.js'
+import { createBattlegroupFromQc } from 'ducks/actions'
 import { MenuItemProps as Props } from './CharacterMenuItem'
 
 interface StateProps {

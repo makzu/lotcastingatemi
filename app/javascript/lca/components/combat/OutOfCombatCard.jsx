@@ -12,11 +12,11 @@ import JoinBattlePopup from './JoinBattlePopup.jsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.jsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import sharedStyles from 'styles/'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   root: {
     ...theme.mixins.gutters({
@@ -131,11 +131,8 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
 )
 
 export default enhance(OutOfCombatCard)

@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import green from '@material-ui/core/colors/green'
 import lightgreen from '@material-ui/core/colors/lightGreen'
 import teal from '@material-ui/core/colors/teal'
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 import { dark, light } from '@material-ui/core/styles/createPalette'
 import { ThemeProvider } from '@material-ui/styles'
 
-import { State } from 'ducks'
+import type { State } from 'ducks'
 import { switchTheme } from 'ducks/actions'
 
 /* When changing these colors, it's also important to change the theme_color
@@ -26,7 +26,7 @@ const themeCommon = {
   },
 }
 const themes = {
-  dark: createMuiTheme({
+  dark: createTheme({
     palette: {
       primary: { main: green[900] },
       secondary: { main: teal[400] },
@@ -39,7 +39,7 @@ const themes = {
       },
     },
   }),
-  light: createMuiTheme({
+  light: createTheme({
     palette: {
       primary: { main: green[800] },
       secondary: { main: lightgreen[400] },
@@ -80,7 +80,7 @@ const ThemeContainer = ({ theme, children, change }: Props) => {
     return () => {
       window.removeEventListener('storage', handleStorageChange)
     }
-  }, [])
+  }, [change])
 
   return <ThemeProvider theme={themes[theme]}>{children}</ThemeProvider>
 }

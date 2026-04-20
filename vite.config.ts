@@ -25,7 +25,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'app/javascript/lca'),
+      '@lca': resolve(__dirname, 'app/javascript/lca'),
       Docs: resolve(__dirname, 'docs'),
       components: resolve(__dirname, 'app/javascript/lca/components'),
       containers: resolve(__dirname, 'app/javascript/lca/containers'),

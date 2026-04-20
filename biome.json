@@ -16,7 +16,10 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {
+        "useImportType": { "level": "warn", "options": { "style": "auto" } }
+      }
     }
   },
   "javascript": {
@@ -33,11 +36,14 @@
           "level": "on",
           "options": {
             "groups": [
-              "react",
-
+              ["react", "react/**", "react-*", "react-*/**"],
+              ["redux", "redux-*", "@reduxjs/**"],
+              ":BLANK_LINE:",
               "@material-ui/**",
               ":BLANK_LINE:",
-              [":ALIAS:", ":PATH:"]
+              "@lca/**",
+              ":ALIAS:",
+              ":PATH:"
             ]
           }
         }

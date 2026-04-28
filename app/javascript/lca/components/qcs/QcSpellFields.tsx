@@ -1,41 +1,20 @@
-import { deepEqual } from 'fast-equals'
-import * as React from 'react'
-const { Component } = React
-import { SortableHandle } from 'react-sortable-hoc'
-import scrollToElement from 'scroll-to-element'
+import type React from 'react'
 
 import Button from '@material-ui/core/Button'
-// import Checkbox from '@material-ui/core/Checkbox'
-import Collapse from '@material-ui/core/Collapse'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import { withStyles, WithStyles } from '@material-ui/core/styles'
-import MuiTextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
+import type { WithStyles } from '@material-ui/core/styles'
 import Delete from '@material-ui/icons/Delete'
-import DragHandleIcon from '@material-ui/icons/DragHandle'
 
-import { IconButton } from '@material-ui/core'
 import BlockPaper from 'components/generic/blockPaper'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import SpellCircleSelect from 'components/shared/selects/SpellCircleSelect'
-import commonStyles from 'styles'
-import { Spell } from 'types'
-import { checkVisible } from 'utils'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
-))
+import type commonStyles from 'styles'
+import type { Spell } from 'types'
 
 interface Props extends WithStyles<typeof commonStyles> {
   spell: Spell
-  handleChange(id: number, trait: any): void
+  handleChange(id: number, trait: unknown): void
   handleDestroy(id: number): void
 }
 

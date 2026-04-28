@@ -1,13 +1,14 @@
 import { getJSON } from 'redux-api-middleware'
 
-import { callApi } from 'utils/api'
+import type { Charm } from '@lca/types/traits/charm'
 import {
   crudAction,
-  characterTraitTypes as entityTypes,
+  type characterTraitTypes as entityTypes,
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
 } from './_lib'
+import { callApi } from 'utils/api'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
 
@@ -17,14 +18,14 @@ export const createTraitReducer = (
   parentType: parentTypes = 'character',
   extraReducers?: { [x: string]: (state, action) => void },
 ) => {
-  const pluralType = entityType + 's'
+  const pluralType = `${entityType}s`
 
   return {
     /* Create actions */
     [crudAction(entityType, 'CREATE').success.toString()]: (state, action) => {
       const { id } = action.payload
       const { charId } = action.meta
-      const parent = (action.meta.parent || parentType) + 's'
+      const parent = `${action.meta.parent || parentType}s`
       const assoc = traitAssoc(entityType, action.payload)
       const newTraitIds = state[parent][charId][assoc].concat([id])
 
@@ -40,7 +41,7 @@ export const createTraitReducer = (
     /* Destroy actions */
     [crudAction(entityType, 'DESTROY').start.toString()]: (state, action) => {
       const { charId, id } = action.meta
-      const parent = (action.meta.parent || parentType) + 's'
+      const parent = `${action.meta.parent || parentType}s`
       const assoc = traitAssoc(entityType, state[pluralType][id])
 
       state[parent][charId][assoc] = state[parent][charId][assoc].filter(
@@ -165,7 +166,7 @@ const createTraitDestroyAction =
 
 const traitAssoc = (type: string, payload: any) => {
   if (type !== 'charm') {
-    return type + 's'
+    return `${type}s`
   }
 
   switch (payload.charm_type) {

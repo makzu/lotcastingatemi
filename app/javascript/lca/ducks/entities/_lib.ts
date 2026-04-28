@@ -112,7 +112,7 @@ export const optimisticTypes = (
   }),
 ]
 
-const meta = (_: any, m: any) => m
+const meta = (_: never, m: unknown) => m
 
 export const crudAction = (
   type: entityTypes,

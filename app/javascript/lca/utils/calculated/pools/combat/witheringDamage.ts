@@ -37,7 +37,7 @@ export function witheringDamage(character: Character, weapon: Weapon) {
   let bonus = []
   let specialAttacks = []
   let b = 0
-  let powDamage: number | undefined = undefined
+  let powDamage: number | undefined
 
   if (weapon.tags.includes('subtle')) {
     bonus = bonus.concat([{ label: 'subtle', noFull: true }])
@@ -76,7 +76,7 @@ export function witheringDamage(character: Character, weapon: Weapon) {
   const overwhelming = weaponOverwhelming(character, weapon)
 
   return {
-    name: weapon.name + ' Withering Damage',
+    name: `${weapon.name} Withering Damage`,
     attribute: _attr,
     attributeRating: attrRating,
     weaponDamage: damage,

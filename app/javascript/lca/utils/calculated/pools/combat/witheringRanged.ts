@@ -1,14 +1,14 @@
-import decisiveAttack from './decisiveAttack.js'
 import {
-  weaponIsRanged,
+  archeryAccuracyBonus,
   rangeTag,
   rangeValue,
-  archeryAccuracyBonus,
-  thrownAccuracyBonus,
   siegeAccuracyBonus,
+  thrownAccuracyBonus,
+  weaponIsRanged,
 } from '../../weapons'
+import decisiveAttack from './decisiveAttack.js'
 import type { Character, Weapon } from 'types'
-import { BlockOfPenalties } from 'types/pool.js'
+import type { BlockOfPenalties } from 'types/pool.js'
 
 export function rangedWitheringAttackPool(
   character: Character,
@@ -39,7 +39,7 @@ export function rangedWitheringAttackPool(
   return {
     close: {
       ...poolBase,
-      name: weapon.name + ' Close Range Withering Attack',
+      name: `${weapon.name} Close Range Withering Attack`,
       raw: rawPool + rangebonus.close,
       accuracy: rangebonus.close,
       total: Math.max(rawPool + rangebonus.close - poolBase.totalPenalty, 0),
@@ -47,7 +47,7 @@ export function rangedWitheringAttackPool(
     },
     short: {
       ...poolBase,
-      name: weapon.name + ' Short Range Withering Attack',
+      name: `${weapon.name} Short Range Withering Attack`,
       raw: rawPool + rangebonus.short,
       accuracy: rangebonus.short,
       total: Math.max(rawPool + rangebonus.short - poolBase.totalPenalty, 0),
@@ -55,7 +55,7 @@ export function rangedWitheringAttackPool(
     },
     medium: {
       ...poolBase,
-      name: weapon.name + ' Medium Range Withering Attack',
+      name: `${weapon.name} Medium Range Withering Attack`,
       raw: rawPool + rangebonus.medium,
       accuracy: rangebonus.medium,
       total: Math.max(rawPool + rangebonus.medium - poolBase.totalPenalty, 0),
@@ -63,7 +63,7 @@ export function rangedWitheringAttackPool(
     },
     long: {
       ...poolBase,
-      name: weapon.name + ' Long Range Withering Attack',
+      name: `${weapon.name} Long Range Withering Attack`,
       raw: rawPool + rangebonus.long,
       accuracy: rangebonus.long,
       total: Math.max(rawPool + rangebonus.long - poolBase.totalPenalty, 0),
@@ -71,7 +71,7 @@ export function rangedWitheringAttackPool(
     },
     extreme: {
       ...poolBase,
-      name: weapon.name + ' Extreme Range Withering Attack',
+      name: `${weapon.name} Extreme Range Withering Attack`,
       raw: rawPool + rangebonus.extreme,
       accuracy: rangebonus.extreme,
       total: Math.max(rawPool + rangebonus.extreme - poolBase.totalPenalty, 0),

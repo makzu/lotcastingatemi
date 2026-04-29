@@ -1,7 +1,7 @@
-import pool from '../_pool'
 import { penaltyObject } from '../../index'
+import pool from '../_pool'
 import type { Character, Weapon } from 'types'
-import { BlockOfPenalties } from 'types/pool'
+import type { BlockOfPenalties } from 'types/pool'
 
 const supportedTags = [
   'chopping',
@@ -65,7 +65,7 @@ export function decisiveAttack(
 
   return {
     ...pool(
-      weapon.name + ' Decisive Attack',
+      `${weapon.name} Decisive Attack`,
       character,
       weapon.overrides?.attack_attribute?.use || 'dexterity',
       weapon.ability,

@@ -97,7 +97,7 @@ export function weaponIsRanged(weapon: Weapon) {
 
   if (['melee', 'brawl'].includes(weapon.ability)) return false
 
-  if (tag != undefined) return true
+  if (tag != null) return true
 
   return false
 }

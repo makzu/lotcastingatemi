@@ -1,13 +1,11 @@
-import * as React from 'react'
-import { useDispatch } from 'react-redux'
-
 import { Divider, ListItemText } from '@material-ui/core'
 
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { LinkListItem } from 'components/shared/wrappers'
 import { logout } from 'ducks/actions'
 
 const NavPanelLogout = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   return (
     <>

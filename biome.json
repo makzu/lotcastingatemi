@@ -17,6 +17,7 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "complexity": { "noUselessSwitchCase": "off" },
       "style": {
         "useImportType": { "level": "warn", "options": { "style": "auto" } }
       }
@@ -42,6 +43,8 @@
               "@material-ui/**",
               ":BLANK_LINE:",
               "@lca/**",
+              ["components/**", "containers/**"],
+              ["ducks/**", "hooks/**", "utils/**"],
               ":ALIAS:",
               ":PATH:"
             ]

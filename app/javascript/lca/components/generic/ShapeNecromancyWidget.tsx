@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import type React from 'react'
+import { useState } from 'react'
 
 import {
   Button,
@@ -10,17 +10,19 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  Theme,
+  type Theme,
+  type WithStyles,
   withStyles,
-  WithStyles,
 } from '@material-ui/core'
 
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
+import { updateCharacter, updateQc } from 'ducks/actions'
 import { useDialogLogic } from 'hooks'
-import { Character, QC } from 'types'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
-import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
+import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
+import type { Character, QC } from 'types'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -49,27 +51,27 @@ const ShapeNecromancyWidget = ({ character, children, classes }: Props) => {
   const [isOpen, open, close] = useDialogLogic()
   const [motes, setMotes] = useState(0)
   const [total, setTotal] = useState(character.necromantic_motes)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const updateAction = character.type === 'qc' ? updateQc : updateCharacter
 
-  const shapeSorceryPool = useSelector(
+  const shapeSorceryPool = useAppSelector(
     (state) =>
       getPoolsAndRatingsGeneric(state, character.id, character.type)
         .shapeSorcery,
   )
 
-  const canEdit = useSelector((state) =>
+  const canEdit = useAppSelector((state) =>
     canIEdit(state, character.id, character.type === 'qc' ? 'qc' : 'character'),
   )
 
   const updateRoll = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMotes(parseInt(e.target.value))
-    setTotal(parseInt(e.target.value) + character.necromantic_motes)
+    setMotes(parseInt(e.target.value, 10))
+    setTotal(parseInt(e.target.value, 10) + character.necromantic_motes)
   }
 
   const updateTotal = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMotes(parseInt(e.target.value) - character.necromantic_motes)
-    setTotal(parseInt(e.target.value))
+    setMotes(parseInt(e.target.value, 10) - character.necromantic_motes)
+    setTotal(parseInt(e.target.value, 10))
   }
 
   const submit = () => {

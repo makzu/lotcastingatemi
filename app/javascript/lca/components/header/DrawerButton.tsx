@@ -1,24 +1,22 @@
-import * as React from 'react'
-import { useDispatch } from 'react-redux'
-
 import IconButton from '@material-ui/core/IconButton'
-import { Theme, withStyles } from '@material-ui/core/styles'
+import type { Theme } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
+import { makeStyles } from '@material-ui/styles'
 
-import { toggleDrawer } from 'ducks/actions'
-import { createStyles, WithStyles } from '@material-ui/styles'
+import { toggleDrawer } from '@lca/features/drawerSlice'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    drawerButton: {
-      [theme.breakpoints.up('lg')]: {
-        display: 'none',
-      },
+const useStyles = makeStyles((theme: Theme) => ({
+  drawerButton: {
+    [theme.breakpoints.up('lg')]: {
+      display: 'none',
     },
-  })
+  },
+}))
 
-const LcaDrawerButton = ({ classes }: WithStyles<typeof styles>) => {
-  const dispatch = useDispatch()
+const LcaDrawerButton = () => {
+  const dispatch = useAppDispatch()
+  const classes = useStyles()
   return (
     <IconButton
       className={classes.drawerButton}
@@ -30,5 +28,4 @@ const LcaDrawerButton = ({ classes }: WithStyles<typeof styles>) => {
   )
 }
 
-const EnhancedLcaDrawerButton = withStyles(styles)(LcaDrawerButton)
-export default EnhancedLcaDrawerButton
+export default LcaDrawerButton

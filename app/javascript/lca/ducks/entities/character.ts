@@ -1,9 +1,6 @@
 import { createAction } from '@reduxjs/toolkit'
-import { useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
 
-import { State } from 'ducks'
-import { sortOrderSort } from 'utils'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import { callApi } from 'utils/api'
 import {
   createApiActions,
@@ -12,8 +9,11 @@ import {
   mergeEntity,
 } from './_entity'
 import { crudAction, standardTypes, unwrapped } from './_lib'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 import { getCurrentPlayer } from './player'
+import type { State } from 'ducks'
+import { createSelector } from 'reselect'
+import { sortOrderSort } from 'utils'
 
 const CHARACTER = 'character'
 
@@ -94,7 +94,7 @@ export const getSpecificCharacter = (state: State, id: number) =>
   unwrapped(state).characters[id]
 
 export const useCharacterAttribute = (id: number, attribute: string) =>
-  useSelector((state: State) => {
+  useAppSelector((state) => {
     const character = getSpecificCharacter(state, id)
     return character != null ? character[attribute] : null
   })

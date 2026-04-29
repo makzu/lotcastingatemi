@@ -1,4 +1,3 @@
-import { Location } from 'history'
 import * as React from 'react'
 import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
 
@@ -13,18 +12,20 @@ import {
 import { Theme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/styles'
 
-import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'
 import CharacterSheetNav from 'components/CharacterSheet/CharacterSheetNav'
+
+import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'
 import { NavLinkListItem } from 'components/shared/wrappers/'
 import ErrorBoundary from 'containers/ErrorBoundary'
-import Discord from 'icons/Discord-Logo.jsx'
-import OctoCat from 'icons/OctoCat.jsx'
-import Patreon from 'icons/Patreon-Logo.jsx'
-import ChronicleNavList from './chronicleNavList.jsx'
+import ChronicleNavList from './ChronicleNavList'
 import { BattlegroupNavList, CharacterNavList, QcNavList } from './EntityLists/'
 import HtmlLinkListItem from './HtmlLinkListItem'
 import NavPanelLogout from './NavPanelLogout'
 import NavPanelThemeSwitch from './NavPanelThemeSwitch'
+import { Location } from 'history'
+import Discord from 'icons/Discord-Logo.jsx'
+import OctoCat from 'icons/OctoCat.jsx'
+import Patreon from 'icons/Patreon-Logo.jsx'
 
 const useStyles = makeStyles((theme: Theme) => ({
   navElement: {

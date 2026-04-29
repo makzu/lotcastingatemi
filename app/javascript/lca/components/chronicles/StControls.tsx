@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux'
-
 import {
   Accordion,
   AccordionDetails,
@@ -10,13 +8,14 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import { endScene } from '@lca/ducks/events'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.js'
 import Downtime from './controls/Downtime.jsx'
 import RecoverMotes from './controls/RecoverMotes.jsx'
 import RecoverWillpower from './controls/RecoverWillpower.jsx'
 
 type Props = { chronicleId: number }
 const StControls = ({ chronicleId }: Props) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   return (
     <Accordion>

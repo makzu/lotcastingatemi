@@ -1,11 +1,12 @@
-import { LOGOUT, authFailure } from 'ducks/session'
-import { crudAction } from 'ducks/entities/_lib'
-import { isNonFetchAuthIssue } from 'ducks/app.js'
-import { RootState } from 'store'
-import { Middleware } from 'redux'
+import type { Middleware } from 'redux'
+
+import { isNonFetchAuthIssue } from '@lca/ducks/app.js'
+import { crudAction } from '@lca/ducks/entities/_lib'
+import { authFailure, LOGOUT } from '@lca/ducks/session'
+import type { RootState } from '@lca/store'
 
 // Intercepts Logout actions and auth failures and removes the JWT as needed
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+// biome-ignore lint/complexity/noBannedTypes: https://redux.js.org/usage/usage-with-typescript#type-checking-middleware
 const authToken: Middleware<{}, RootState> = (store) => (next) => (action) => {
   switch (action.type) {
     case LOGOUT:

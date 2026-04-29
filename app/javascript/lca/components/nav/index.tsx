@@ -1,20 +1,21 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { compose } from 'recompose'
 
-import { Drawer, Hidden, Theme } from '@material-ui/core'
+import { Drawer, Hidden, type Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import { State } from 'ducks'
-import { closeDrawer } from 'ducks/actions.ts'
+import { closeDrawer } from '@lca/features/drawerSlice'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import { getCurrentPlayer } from 'ducks/entities'
 import { drawerWidth } from '../../containers/_drawerProperties'
 import NavPanel from './NavPanel'
+import type { State } from 'ducks'
+import { compose } from 'recompose'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const drawerScrollbars = (theme) => ({
+const drawerScrollbars = (theme: Theme) => ({
   '&::-webkit-scrollbar': {
     backgroundColor: theme.palette.background.paper,
   },
@@ -45,16 +46,16 @@ const useStyles = makeStyles(
 interface StateProps {
   authenticated: State['session']['authenticated']
   displayName: string
-  drawerOpen: State['app']['drawerOpen']
 }
-interface DispatchProps {
-  close(): void
-}
-interface Props extends StateProps, DispatchProps {}
+
+interface Props extends StateProps {}
 
 const NavPanelWrap = (props: Props) => {
-  const classes = useStyles({})
-  const { authenticated, drawerOpen, displayName, close } = props
+  const classes = useStyles()
+  const drawerOpen = useAppSelector((state) => state.drawer.open)
+  const dispatch = useAppDispatch()
+  const close = () => dispatch(closeDrawer())
+  const { authenticated, displayName } = props
 
   const Panel = (
     <NavPanel
@@ -99,10 +100,6 @@ const NavPanelWrap = (props: Props) => {
 const mapState = (state: State): StateProps => ({
   authenticated: state.session.authenticated,
   displayName: getCurrentPlayer(state).display_name || 'nobody',
-  drawerOpen: state.app.drawerOpen,
 })
 
-export default compose<Props, {}>(
-  withRouter,
-  connect(mapState, { close: closeDrawer }),
-)(NavPanelWrap)
+export default compose<Props, {}>(withRouter, connect(mapState))(NavPanelWrap)

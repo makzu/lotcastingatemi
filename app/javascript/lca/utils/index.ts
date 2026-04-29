@@ -1,4 +1,5 @@
 export * from './math'
+
 import { deepEqual } from 'fast-equals'
 
 /** Returns a random item from an array. */

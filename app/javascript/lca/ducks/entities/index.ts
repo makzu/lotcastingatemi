@@ -1,25 +1,24 @@
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
+
+import { type AnyAction, createReducer } from '@reduxjs/toolkit'
+
 import { normalize } from 'normalizr'
-import { AnyAction, createReducer } from '@reduxjs/toolkit'
-
-export * from './player'
-export * from './chronicle'
-export * from './character'
-export * from './merit'
-export * from './weapon'
-export * from './charm'
-export * from './spell'
-export * from './poison'
-
-export * from './qc'
-export * from './qc_attack'
-export * from './qc_merit'
-export * from './qc_charm'
-
-export * from './battlegroup'
-export * from './combat_actor'
 
 export type { EntityState } from './_types'
+export * from './battlegroup'
+export * from './character'
+export * from './charm'
+export * from './chronicle'
+export * from './combat_actor'
+export * from './merit'
+export * from './player'
+export * from './poison'
+export * from './qc'
+export * from './qc_attack'
+export * from './qc_charm'
+export * from './qc_merit'
+export * from './spell'
+export * from './weapon'
 
 import { LOGOUT } from '../session'
 import { mergeEntity } from './_entity'
@@ -39,13 +38,12 @@ import QcCharmReducer from './qc_charm'
 import QcMeritReducer from './qc_merit'
 import SpellReducer from './spell'
 import WeaponReducer from './weapon'
-import { RootState } from 'store'
 
 // tslint:disable object-literal-sort-keys
 export const defaultState: EntityState = {
   currentPlayer: 0,
   players: {
-    [0]: {
+    0: {
       id: 0,
       display_name: 'Anonymous Player',
       chronicles: [],
@@ -88,13 +86,13 @@ export default createReducer(defaultState, {
   ...BattlegroupReducer,
   ...CombatActorReducer,
   [LOGOUT]: () => defaultState,
-  [CABLE_RECEIVED]: (state: RootState, action: AnyAction) => {
+  [CABLE_RECEIVED]: (state: EntityState, action: AnyAction) => {
     const { payload } = action
     const { type, id, parent_type, parent_id, assoc } = payload
     const pluralType = type + 's'
 
     switch (payload.event) {
-      case 'create':
+      case 'create': {
         const entity = JSON.parse(payload.entity)
         const entities = normalize(entity, schemas[type])
         const newState = mergeEntity(state, { payload: entities })
@@ -103,12 +101,13 @@ export default createReducer(defaultState, {
           ...new Set([...state[parent_type][parent_id][assoc], entity.id]),
         ]
         return newState
+      }
 
       case 'update':
         state[pluralType][id] = { ...state[pluralType][id], ...payload.changes }
         break
 
-      case 'destroy':
+      case 'destroy': {
         const { chronicle_id } = payload
 
         if (chronicle_id && state.chronicles[chronicle_id]) {
@@ -117,13 +116,14 @@ export default createReducer(defaultState, {
           ].filter((e) => e !== id)
         }
 
-        if (state[parent_type] && state[parent_type][parent_id]) {
+        if (state[parent_type]?.[parent_id]) {
           state[parent_type][parent_id][assoc] = state[parent_type][parent_id][
             assoc
           ].filter((e) => e !== id)
         }
 
         delete state[pluralType][id]
+      }
     }
   },
 })

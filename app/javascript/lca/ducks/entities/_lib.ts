@@ -1,13 +1,13 @@
-import { normalize } from 'normalizr'
+/** biome-ignore-all lint: <Avoid breaking this file since it will be replaced with rtkq in the near future> */
+import type { Action } from 'redux'
+import { type ActionFunctionAny, createAction } from 'redux-actions'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
 
-import { Action } from 'redux'
-import { ActionFunctionAny, createAction } from 'redux-actions'
-
-import { State } from 'ducks'
+import type { State } from '@lca/ducks'
 import * as schemas from './_schemas'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
+import { normalize } from 'normalizr'
 
 export type characterTraitTypes =
   | 'charm'
@@ -83,7 +83,7 @@ export const standardTypes = (
 ]
 
 export const optimisticTypes = (
-  type: entityTypes,
+  _type: entityTypes,
   action: CrudActionGroup,
   id: number,
   transactionId: string,

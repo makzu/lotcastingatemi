@@ -1,6 +1,3 @@
-import * as React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
 import {
   ListItem,
   ListItemSecondaryAction,
@@ -8,12 +5,13 @@ import {
   Switch,
 } from '@material-ui/core'
 
-import { State } from 'ducks'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import { switchTheme } from 'ducks/actions'
 
 const NavPanelThemeSwitch = () => {
-  const theme = useSelector((state: State) => state.app.theme)
-  const dispatch = useDispatch()
+  const theme = useAppSelector((state) => state.app.theme)
+  const dispatch = useAppDispatch()
 
   return (
     <ListItem

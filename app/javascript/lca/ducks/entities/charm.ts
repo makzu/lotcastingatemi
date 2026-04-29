@@ -1,12 +1,13 @@
 import { createAction } from '@reduxjs/toolkit'
-import createCachedSelector from 're-reselect'
 
-import { State } from 'ducks'
-import { sortOrderSort } from 'utils'
+import type { Charm } from '@lca/types'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 import { getSpecificCharacter } from './character'
+import type { State } from 'ducks'
+import createCachedSelector from 're-reselect'
+import { sortOrderSort } from 'utils'
 
 export const updateCharmSort = createAction<{ id: number; sorting: number }>(
   'sort/charm',
@@ -26,7 +27,7 @@ export const [createCharm, updateCharm, destroyCharm] =
   createApiActions('charm')
 
 /* *** Selectors *** */
-const idMemoizer = (_: any, id: number) => id
+const idMemoizer = (_: State, id: number) => id
 
 const getCharms = (state: State) => unwrapped(state).charms
 
@@ -101,7 +102,10 @@ export const getAllCharmCategoriesForCharacter = createCachedSelector(
   [getAllCharmsForCharacter],
   (charms) => {
     const ch = charms
-      .reduce((a, charm) => [...a, ...charm.categories], [])
+      .reduce(
+        (a: Charm['categories'], charm) => Object.assign(a, charm.categories),
+        [],
+      )
       .concat(['Attack', 'Defense', 'Social'])
       .sort()
 
@@ -112,7 +116,12 @@ export const getAllCharmCategoriesForCharacter = createCachedSelector(
 export const getAllCharmKeywordsForCharacter = createCachedSelector(
   [getAllCharmsForCharacter],
   (charms) => {
-    const ch = charms.reduce((a, charm) => [...a, ...charm.keywords], []).sort()
+    const ch = charms
+      .reduce(
+        (a: Charm['keywords'], charm) => Object.assign(a, charm.keywords),
+        [],
+      )
+      .sort()
 
     return [...new Set(ch)]
   },

@@ -1,12 +1,15 @@
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { apiMiddleware } from 'redux-api-middleware'
-import { configureStore } from '@reduxjs/toolkit'
+import { optimistic } from 'redux-optimistic-ui'
 
+import AppReducer from '@lca/ducks/app'
+import EntityReducer from '@lca/ducks/entities'
+import SessionReducer from '@lca/ducks/session'
+import drawerSlice from './features/drawerSlice'
 import authTokenMiddleware from './middleware/authTokenMiddleware.js'
 import navigatorMiddleware from './middleware/navigatorMiddleware.js'
 import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
 import paginationMiddleware from 'middleware/paginationMiddleware'
-
-import reducer from './ducks'
 
 const middleware = [
   apiMiddleware,
@@ -16,23 +19,23 @@ const middleware = [
   paginationMiddleware,
 ]
 
-// export default () =>
-//   configureStore({
-//     reducer,
-//     middleware,
-//     devTools: !PRODUCTION,
-//   })
+const reducer = combineReducers({
+  app: AppReducer,
+  entities: optimistic(EntityReducer),
+  session: SessionReducer,
+  drawer: drawerSlice,
+})
 
-export default function configureAppStore(preloadedState) {
-  const store = configureStore({
-    reducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(middleware),
-    preloadedState,
-  })
+const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
 
-  return store
-}
+  devTools: true,
+})
 
-export type StoreType = ReturnType<typeof configureAppStore>
+export default store
+
+export type AppStore = typeof store
 export type RootState = ReturnType<typeof reducer>
+export type AppDispatch = AppStore['dispatch']

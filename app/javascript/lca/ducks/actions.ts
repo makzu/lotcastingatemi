@@ -1,77 +1,77 @@
+export { switchTheme } from './app.js'
 export {
-  createCharacter,
-  duplicateCharacter,
-  fetchCharacter,
-  updateCharacter,
+  addThingToChronicle,
   changeCharacterType,
-  destroyCharacter,
-  updateWeapon,
-  createWeapon,
-  destroyWeapon,
-  updateMerit,
-  createMerit,
-  destroyMerit,
-  updateCharm,
+  createBattlegroup,
+  createBattlegroupFromQc,
+  createCharacter,
   createCharm,
-  destroyCharm,
-  updateSpell,
-  createSpell,
-  destroySpell,
-  fetchChronicle,
-  updateChronicle,
   createChronicle,
+  createMerit,
+  createPoison,
+  createQc,
+  createQcAttack,
+  createQcCharm,
+  createQcMerit,
+  createSpell,
+  createWeapon,
+  destroyAccount,
+  destroyBattlegroup,
+  destroyCharacter,
+  destroyCharm,
+  destroyChronicle,
+  destroyMerit,
+  destroyPoison,
+  destroyQc,
+  destroyQcAttack,
+  destroyQcCharm,
+  destroyQcMerit,
+  destroySpell,
+  destroyWeapon,
+  duplicateBattlegroup,
+  duplicateCharacter,
+  duplicateQc,
+  fetchBattlegroup,
+  fetchCharacter,
+  fetchChronicle,
+  fetchCurrentPlayer,
+  fetchQc,
   joinChronicle,
   regenChronicleInviteCode,
   removePlayerFromChronicle,
-  addThingToChronicle,
   removeThingFromChronicle,
-  destroyChronicle,
-  createQc,
-  updateQc,
-  duplicateQc,
-  fetchQc,
-  destroyQc,
-  updateQcAttack,
-  createQcAttack,
-  destroyQcAttack,
-  updateQcMerit,
-  createQcMerit,
-  destroyQcMerit,
-  updateQcCharm,
-  createQcCharm,
-  destroyQcCharm,
-  createBattlegroup,
-  createBattlegroupFromQc,
-  duplicateBattlegroup,
-  fetchBattlegroup,
   updateBattlegroup,
-  destroyBattlegroup,
-  fetchCurrentPlayer,
+  updateCharacter,
+  updateCharm,
+  updateChronicle,
+  updateMerit,
   updatePlayer,
-  destroyAccount,
-  createPoison,
   updatePoison,
-  destroyPoison,
+  updateQc,
+  updateQcAttack,
+  updateQcCharm,
+  updateQcMerit,
+  updateSpell,
+  updateWeapon,
 } from './entities'
-
-export { logout } from './session'
-export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
 export { spendMotes, spendWillpower, takeDamage } from './events'
+export { logout } from './session'
 
-import {
-  fetchAllCharacters,
-  fetchCurrentPlayer,
-  fetchAllQcs,
-  fetchAllBattlegroups,
-} from './entities'
-import UpdatesCable from 'utils/cable.js'
+import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 import type { Dispatch } from 'redux'
-import { ThunkAction, AnyAction } from '@reduxjs/toolkit'
-import { RootState } from 'store'
+
+import type { State } from '@lca/ducks'
+import UpdatesCable from 'utils/cable.js'
+import {
+  fetchAllBattlegroups,
+  fetchAllCharacters,
+  fetchAllQcs,
+  fetchCurrentPlayer,
+} from './entities'
 
 export const INIT = 'lca/app/INIT'
 
-export function fetchAll(): ThunkAction<void, RootState, unknown, AnyAction> {
+export function fetchAll(): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch: Dispatch, getState) => {
     dispatch(fetchCurrentPlayer())
       .then(() => dispatch(fetchAllCharacters()))
@@ -85,11 +85,11 @@ export function fetchAll(): ThunkAction<void, RootState, unknown, AnyAction> {
   }
 }
 
-export function lcaInit(): ThunkAction<void, RootState, unknown, AnyAction> {
+export function lcaInit(): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch, getState) => {
     dispatch({ type: INIT })
 
-    if (getState().session.authenticated) {
+    if (getState().session?.authenticated) {
       dispatch(fetchAll())
     }
   }

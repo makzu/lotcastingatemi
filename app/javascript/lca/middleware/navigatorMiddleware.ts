@@ -1,17 +1,16 @@
-import { Middleware } from 'redux'
+import type { Middleware } from 'redux'
 
-import { API, SUCCESS } from 'ducks/entities/_lib'
 import { CABLE_RECEIVED } from 'ducks/entities'
-import { crudAction } from 'ducks/entities/_lib'
+import { API, crudAction, SUCCESS } from 'ducks/entities/_lib'
 import history from 'utils/history'
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 /* On successfully creating an entity or joining a Chronicle, navigate to that
  * entity or Chronicle's page. Uses Push, so that the back button will work
  * as expected.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-object-type
-const Navigator: Middleware<{}, RootState> = (store) => (next) => (action) => {
+// biome-ignore lint/complexity/noBannedTypes: https://redux.js.org/usage/usage-with-typescript#type-checking-middleware
+const Navigator: Middleware<{}, RootState> = (_store) => (next) => (action) => {
   const act = action.type.split('/')
   if (
     act[0] === API &&

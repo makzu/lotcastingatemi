@@ -5,12 +5,12 @@ import {
   Switch,
 } from '@material-ui/core'
 
+import { switchTheme } from '@lca/features/themeSlice'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import { switchTheme } from 'ducks/actions'
 
 const NavPanelThemeSwitch = () => {
-  const theme = useAppSelector((state) => state.app.theme)
+  const theme = useAppSelector((state) => state.theme)
   const dispatch = useAppDispatch()
 
   return (

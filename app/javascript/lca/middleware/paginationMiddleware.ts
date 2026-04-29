@@ -1,23 +1,23 @@
-import { Middleware } from 'redux'
+import type { Middleware } from 'redux'
 
 import {
+  fetchAllBattlegroups,
   fetchAllCharacters,
   fetchAllQcs,
-  fetchAllBattlegroups,
+  fetchChronicleBattlegroups,
   fetchChronicleCharacters,
   fetchChronicleQcs,
-  fetchChronicleBattlegroups,
-} from 'ducks/entities'
-import { crudAction } from 'ducks/entities/_lib'
-import { RootState } from 'store'
+} from '@lca/ducks/entities'
+import { crudAction } from '@lca/ducks/entities/_lib'
+import type { RootState } from '@lca/store'
 
 // Detects incomplete paginated requests and requests the next page
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+// biome-ignore lint/complexity/noBannedTypes: https://redux.js.org/usage/usage-with-typescript#type-checking-middleware
 const pagyMiddleware: Middleware<{}, RootState> =
   (store) => (next) => (action) => {
-    const page = parseInt(action?.meta?.page)
-    const lastPage = parseInt(action?.meta?.lastPage)
-    const chronicleId = parseInt(action?.meta?.chronicleId)
+    const page = parseInt(action?.meta?.page, 10)
+    const lastPage = parseInt(action?.meta?.lastPage, 10)
+    const chronicleId = parseInt(action?.meta?.chronicleId, 10)
 
     if (page < lastPage) {
       switch (action.type) {

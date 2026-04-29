@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
+import { type ReactNode, useEffect } from 'react'
 
 import green from '@material-ui/core/colors/green'
 import lightgreen from '@material-ui/core/colors/lightGreen'
@@ -8,8 +7,10 @@ import { createTheme } from '@material-ui/core/styles'
 import { dark, light } from '@material-ui/core/styles/createPalette'
 import { ThemeProvider } from '@material-ui/styles'
 
-import type { State } from 'ducks'
-import { switchTheme } from 'ducks/actions'
+import { switchTheme } from '@lca/features/themeSlice'
+import useAppDispatch from '@lca/hooks/UseAppDispatch'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import type { RootState } from '@lca/store'
 
 /* When changing these colors, it's also important to change the theme_color
  * entries in /config/favicon.json from #2e7d32 to the new value,
@@ -53,40 +54,31 @@ const themes = {
   }),
 }
 
-interface ExposedProps {
-  children: React.ReactNode
+interface Props {
+  children: ReactNode
 }
 
-interface StateProps {
-  theme: State['app']['theme']
-}
+const ThemeContainer = ({ children }: Props) => {
+  const theme = useAppSelector((state) => state.theme)
+  const dispatch = useAppDispatch()
 
-interface DispatchProps {
-  change(theme: State['app']['theme'] | string): void
-}
-
-interface Props extends ExposedProps, StateProps, DispatchProps {}
-
-const ThemeContainer = ({ theme, children, change }: Props) => {
-  React.useEffect(() => {
+  useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key !== 'theme') {
         return
       }
-      change(e.newValue)
+      if (e.newValue !== theme) {
+        dispatch(switchTheme(e.newValue as RootState['theme']))
+      }
     }
     window.addEventListener('storage', handleStorageChange)
 
     return () => {
       window.removeEventListener('storage', handleStorageChange)
     }
-  }, [change])
+  }, [dispatch, theme])
 
   return <ThemeProvider theme={themes[theme]}>{children}</ThemeProvider>
 }
 
-const mapStateToProps = (state: State) => ({ theme: state.app.theme })
-
-const enhance = connect(mapStateToProps, { change: switchTheme })
-
-export default enhance(ThemeContainer)
+export default ThemeContainer

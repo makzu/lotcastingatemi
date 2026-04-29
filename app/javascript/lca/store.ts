@@ -5,11 +5,12 @@ import { optimistic } from 'redux-optimistic-ui'
 import AppReducer from '@lca/ducks/app'
 import EntityReducer from '@lca/ducks/entities'
 import SessionReducer from '@lca/ducks/session'
-import drawerSlice from './features/drawerSlice'
-import authTokenMiddleware from './middleware/authTokenMiddleware.js'
-import navigatorMiddleware from './middleware/navigatorMiddleware.js'
-import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
-import paginationMiddleware from 'middleware/paginationMiddleware'
+import drawerSlice from '@lca/features/drawerSlice'
+import themeSlice from '@lca/features/themeSlice'
+import authTokenMiddleware from '@lca/middleware/authTokenMiddleware.js'
+import navigatorMiddleware from '@lca/middleware/navigatorMiddleware.js'
+import paginationMiddleware from '@lca/middleware/paginationMiddleware'
+import themeSaverMiddleware from '@lca/middleware/themeSaverMiddleware.js'
 
 const middleware = [
   apiMiddleware,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   entities: optimistic(EntityReducer),
   session: SessionReducer,
   drawer: drawerSlice,
+  theme: themeSlice,
 })
 
 const store = configureStore({

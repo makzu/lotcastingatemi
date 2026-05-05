@@ -1,29 +1,30 @@
 // @flow
 import * as React from 'react'
+
 const { Component, Fragment } = React
+
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
-
-import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import HelpIcon from '@material-ui/icons/Help'
+import { compose } from 'recompose'
+import { getMeritsForCharacter, getSpecificCharacter } from 'selectors'
+import commonStyles from 'styles'
 
-import MeritFields from './MeritFields.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-
+import SortableGridList from 'components/generic/SortableGridList.tsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { createMerit, destroyMerit, updateMerit } from 'ducks/actions.ts'
 import { updateMeritSort } from 'ducks/entities/merit'
-import { getMeritsForCharacter, getSpecificCharacter } from 'selectors'
-import commonStyles from 'styles'
+import MeritFields from './MeritFields.jsx'
+
 import type { Character, Enhancer, fullMerit as Merit } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)

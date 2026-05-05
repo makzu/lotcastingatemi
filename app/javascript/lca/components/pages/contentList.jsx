@@ -2,19 +2,20 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
-
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
+import Typography from '@material-ui/core/Typography'
+import { compose } from 'recompose'
 import { getMyBattlegroups, getMyCharacters, getMyQCs } from 'selectors'
 import commonStyles from 'styles'
+
+import SortableGridList from 'components/generic/SortableGridList.tsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
+
 import type { Battlegroup, Character, Enhancer, fullQc } from 'utils/flow-types'
+
 import BattlegroupCard from '../battlegroups/BattlegroupCard.jsx'
 import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
 import CharacterCard from '../characters/CharacterCard.jsx'

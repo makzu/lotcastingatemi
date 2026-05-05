@@ -1,13 +1,12 @@
 import DocumentTitle from 'react-document-title'
 import { SortableElement } from 'react-sortable-hoc'
-
 import { Grid, Typography } from '@material-ui/core'
 
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import BattlegroupCreatePopup from 'components/battlegroups/battlegroupCreatePopup.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList.tsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { getMyBattlegroups, updateBattlegroup } from 'ducks/entities'
 import { updateBattlegroupSort } from 'ducks/entities/battlegroup'

@@ -3,15 +3,23 @@ import React, { Component, Fragment } from 'react'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
+import {
+  amIStOfChronicle,
+  getBattlegroupsForChronicle,
+  getCharactersForChronicle,
+  getPlayersForChronicle,
+  getQcsForChronicle,
+  getSpecificChronicle,
+  getStorytellerForChronicle,
+} from 'selectors'
 
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import CharacterCard from 'components/characters/CharacterCard.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList.tsx'
 import QcCard from 'components/qcs/QcCard.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
@@ -22,15 +30,6 @@ import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
 import CharacterAddPopup from './characterAddPopup.jsx'
 import QcAddPopup from './qcAddPopup.jsx'
 import STControls from './StControls'
-import {
-  amIStOfChronicle,
-  getBattlegroupsForChronicle,
-  getCharactersForChronicle,
-  getPlayersForChronicle,
-  getQcsForChronicle,
-  getSpecificChronicle,
-  getStorytellerForChronicle,
-} from 'selectors'
 
 import type { Battlegroup, Character, fullQc } from 'utils/flow-types'
 

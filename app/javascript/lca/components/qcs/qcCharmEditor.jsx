@@ -2,21 +2,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-import { compose } from 'recompose'
-
-import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
-
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-import QcCharmFields from './qcCharmFields.jsx'
-
-import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.ts'
-import { updateQcCharmSort } from 'ducks/entities/qc_charm'
+import { compose } from 'recompose'
 import { getCharmsForQc } from 'selectors'
 import commonStyles from 'styles'
+
+import SortableGridList from 'components/generic/SortableGridList.tsx'
+import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.ts'
+import { updateQcCharmSort } from 'ducks/entities/qc_charm'
+import QcCharmFields from './qcCharmFields.jsx'
+
 import type { Enhancer, QcCharm, fullQc } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)

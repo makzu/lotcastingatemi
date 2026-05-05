@@ -2,18 +2,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
+import { getMeritsForQc } from 'selectors'
 
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-import QcMeritFields from './qcMeritFields.jsx'
-
+import SortableGridList from 'components/generic/SortableGridList.tsx'
 import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions.ts'
 import { updateQcMeritSort } from 'ducks/entities/qc_merit'
-import { getMeritsForQc } from 'selectors'
+import QcMeritFields from './qcMeritFields.jsx'
+
 import type { Enhancer, QcMerit, fullQc } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)

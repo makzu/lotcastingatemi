@@ -1,11 +1,10 @@
 import DocumentTitle from 'react-document-title'
 import { SortableElement } from 'react-sortable-hoc'
-
 import { Grid, Typography } from '@material-ui/core'
 
 import useAppDispatch from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList.tsx'
 import QcCard from 'components/qcs/QcCard.jsx'
 import QcCreatePopup from 'components/qcs/qcCreatePopup.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'

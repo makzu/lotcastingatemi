@@ -46,6 +46,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.12",
     "@bunchtogether/vite-plugin-flow": "^1.0.2",
+    "@material-ui/codemod": "^4.5.1",
     "@redux-devtools/extension": "^4.0.0",
     "@reduxjs/rtk-codemods": "0.0.3",
     "@rollup/plugin-inject": "^5.0.5",
@@ -73,7 +74,8 @@
     "format:fix": "biome format --write app/javascript",
     "lint": "biome check app/javascript",
     "lint:fix": "biome check --write app/javascript",
-    "test": "vitest"
+    "test": "vitest",
+    "testcov": "vitest run --coverage"
   },
   "jest": {
     "roots": [

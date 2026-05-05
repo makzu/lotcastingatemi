@@ -6,7 +6,7 @@
     "useIgnoreFile": false
   },
   "files": {
-    "includes": ["**", "!!**/__test__", "**/public/**"],
+    "includes": ["**", "!!**/__test__", "!**/public"],
     "ignoreUnknown": false
   },
   "formatter": {
@@ -37,8 +37,21 @@
           "level": "on",
           "options": {
             "groups": [
+              ":NODE:",
+              ":BLANK_LINE:",
               ["react", "react/**", "react-*", "react-*/**"],
               ["redux", "redux-*", "@reduxjs/**"],
+              [
+                ":PACKAGE:",
+                "!@lca/**",
+                "!components/**",
+                "!containers/**",
+                "!ducks/**",
+                "!hooks/**",
+                "!types/**",
+                "!utils",
+                "!utils/**"
+              ],
               ":BLANK_LINE:",
               "@material-ui/**",
               ":BLANK_LINE:",

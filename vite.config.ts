@@ -1,9 +1,10 @@
+import { resolve } from 'node:path'
+
 import { esbuildFlowPlugin, flowPlugin } from '@bunchtogether/vite-plugin-flow'
 import React from '@vitejs/plugin-react-swc'
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
 import Rails from 'vite-plugin-rails'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   assetsInclude: ['**/*.md'],
@@ -34,6 +35,13 @@ export default defineConfig({
       selectors: resolve(__dirname, 'app/javascript/lca/selectors'),
       styles: resolve(__dirname, 'app/javascript/lca/styles'),
       utils: resolve(__dirname, 'app/javascript/lca/utils'),
+    },
+  },
+  test: {
+    globals: true,
+    coverage: {
+      provider: 'v8',
+      include: ['app/javascript/lca/**/*.{ts,tsx}'],
     },
   },
 })

@@ -1,11 +1,11 @@
-import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
+import { createSelector } from 'reselect'
+import type { Battlegroup, Player } from 'types'
 
-import { getQcAttacks } from './qc'
+import type { RootState } from '@lca/store'
 import { bgJoinBattlePool } from '../utils/calculated/_battlegroups'
 import { entities, getCurrentPlayer } from './entities'
-import type { Player, Battlegroup } from 'types'
-import { RootState } from 'store'
+import { getQcAttacks } from './qc'
 
 export const getSpecificBattlegroup = (
   state: RootState,
@@ -15,7 +15,7 @@ export const getSpecificBattlegroup = (
 export const getAttacksForBattlegroup = createCachedSelector(
   [getSpecificBattlegroup, getQcAttacks],
   (bg, attacks) => bg.qc_attacks.map((m) => attacks[m]),
-)((state, id) => id)
+)((_state, id) => id)
 
 export const doIOwnBattlegroup = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup],

@@ -1,17 +1,17 @@
-import deepmerge from 'deepmerge'
-import { AnyAction } from 'redux'
+import type { AnyAction } from 'redux'
 import { getJSON } from 'redux-api-middleware'
+import deepmerge from 'deepmerge'
 
-import { callApi } from 'utils/api'
+import { callApi } from '@lca/utils/api'
 import {
-  characterTypes as eTypes,
   crudAction,
+  type characterTypes as eTypes,
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
   unwrapped,
 } from './_lib'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 
 /* Overwrite arrays instead of concatenating them */
 const arrayMerge: deepmerge.Options['arrayMerge'] = (_, sourceArray) =>
@@ -21,7 +21,7 @@ export const mergeEntity = (state: EntityState, action: AnyAction) =>
   deepmerge(state, action.payload.entities || {}, { arrayMerge })
 
 export const createEntityReducer = (entityType: eTypes, reducers) => {
-  const pluralType = entityType + 's'
+  const pluralType = `${entityType}s`
 
   return {
     ...reducers,
@@ -146,7 +146,7 @@ export const createDestroyAction = (type: eTypes) => (id) => {
 export const createConditionalFetchAction =
   (type: eTypes, fetchAction) => (id) => (dispatch, getState) => {
     const state = getState()
-    const pluralType = type + 's'
+    const pluralType = `${type}s`
 
     if (unwrapped(state)[pluralType][id] == null) {
       dispatch(fetchAction(id))

@@ -1,9 +1,9 @@
 import createCachedSelector from 're-reselect'
 
+import type { RootState } from '@lca/store'
+import type { Charm, Spell } from '@lca/types/traits'
+import { sortOrderSort } from '@lca/utils'
 import { entities } from './entities'
-import { sortOrderSort } from 'utils'
-import { RootState } from 'store'
-import { Charm, Spell } from 'types/traits'
 
 const characterIdMemoizer = (_state: RootState, id: number) => id
 
@@ -97,7 +97,7 @@ export const getAllCharmCategoriesForCharacter = createCachedSelector(
       .concat(evocations)
       .concat(spiritCharms)
       .concat(spells)
-      .reduce((a, charm) => [...a, ...charm.categories], [])
+      .reduce((a, charm) => Object.assign(a, charm.categories), [])
       .concat(['Attack', 'Defense', 'Social'])
       .sort()
 

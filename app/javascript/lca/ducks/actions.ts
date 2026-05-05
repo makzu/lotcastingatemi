@@ -1,4 +1,3 @@
-export { switchTheme } from './app.js'
 export {
   addThingToChronicle,
   changeCharacterType,

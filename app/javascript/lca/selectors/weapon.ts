@@ -1,19 +1,19 @@
-import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
+import { createSelector } from 'reselect'
 
-import { getPenalties } from './character'
-import {
-  getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter,
-} from './charm'
-import { entities } from './entities'
+import type { RootState } from '@lca/store'
 import { excellencyAbils } from 'utils/calculated/excellencies/index'
-import { RootState } from 'store'
+import { decisiveAttack } from 'utils/calculated/pools/combat/decisiveAttack'
+import { witheringAttack } from 'utils/calculated/pools/combat/witheringAttack'
 import { witheringDamage } from 'utils/calculated/pools/combat/witheringDamage'
 import { rangedWitheringAttackPool } from 'utils/calculated/pools/combat/witheringRanged'
-import { witheringAttack } from 'utils/calculated/pools/combat/witheringAttack'
-import { decisiveAttack } from 'utils/calculated/pools/combat/decisiveAttack'
 import { parry } from 'utils/calculated/ratings/parry'
+import { getPenalties } from './character'
+import {
+  getMartialArtsCharmsForCharacter,
+  getNativeCharmsForCharacter,
+} from './charm'
+import { entities } from './entities'
 
 const getState = (state: RootState) => state
 
@@ -66,7 +66,7 @@ export const getPoolsForWeapon = createCachedSelector(
       excellencyAbils,
     ),
   }),
-)((state, id) => id)
+)((_state, id) => id)
 
 // This is absurd
 export const sortByParry = (weaponA, weaponB) => {

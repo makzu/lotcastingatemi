@@ -1,20 +1,19 @@
-import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
-
-import {
-  getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter,
-} from './charm'
-import { entities, getCurrentPlayer } from './entities'
-import { getPoolsForWeapon, sortByParry } from './weapon'
+import { createSelector } from 'reselect'
+import type { Character, Spell } from 'types'
 import { sortOrderSort } from 'utils'
-import { woundPenalty, mobilityPenalty, exaltTypeBase } from 'utils/calculated/'
+
+import type { RootState } from '@lca/store'
+import { exaltTypeBase, mobilityPenalty, woundPenalty } from 'utils/calculated/'
 import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
 import * as pools from 'utils/calculated/pools'
 import * as ratings from 'utils/calculated/ratings'
-
-import type { Character, Spell } from 'types'
-import { RootState } from 'store'
+import {
+  getMartialArtsCharmsForCharacter,
+  getNativeCharmsForCharacter,
+} from './charm'
+import { entities, getCurrentPlayer } from './entities'
+import { getPoolsForWeapon, sortByParry } from './weapon'
 
 const getState = (state: RootState) => state
 const getPoisons = (state: RootState) => entities(state).poisons
@@ -45,8 +44,8 @@ export const getEvokableMeritsForCharacter = createSelector(
   (merits) =>
     merits.filter(
       (m) =>
-        m.merit_name.toLowerCase() == 'artifact' ||
-        m.merit_name.toLowerCase() == 'hearthstone',
+        m.merit_name.toLowerCase() === 'artifact' ||
+        m.merit_name.toLowerCase() === 'hearthstone',
     ),
 )
 
@@ -64,7 +63,7 @@ export const getControlSpellsForCharacter = (
 ): Array<Spell> => getSpellsForCharacter(state, id).filter((s) => s.control)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getPoisonsForCharacter = (state: RootState, id: number) => []
+export const getPoisonsForCharacter = (_state: RootState, _id: number) => []
 
 // TODO: Poison penalties stack: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1173001#post1173001 */
 // TODO: Poison penalties only effect static ratings:

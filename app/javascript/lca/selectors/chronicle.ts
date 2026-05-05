@@ -1,23 +1,23 @@
 import createCachedSelector from 're-reselect'
 
+import type { RootState } from '@lca/store'
+import { chronicleSortOrderSort } from '@lca/utils'
 import { canISeeBattlegroup } from './battlegroup'
 import { canISeeCharacter } from './character'
 import { entities, getCurrentPlayer } from './entities'
 import { canISeeQc } from './qc'
-import { RootState } from 'store'
-import { chronicleSortOrderSort } from 'utils'
 
 const getState = (state: RootState) => state
 
 export const getSpecificChronicle = (state: RootState, id: number) =>
   entities(state).chronicles[id]
 
-const idMemoizer = (state: RootState, id: number) => id
+const idMemoizer = (_state: RootState, id: number) => id
 
 const getPlayers = (state: RootState) => entities(state).players
 
 export const isChronicleLoaded = (state: RootState, id: number) =>
-  (getSpecificChronicle(state, id) || {}).st != null
+  getSpecificChronicle(state, id)?.st != null
 
 export const getPlayersForChronicle = createCachedSelector(
   [getSpecificChronicle, isChronicleLoaded, getPlayers],
@@ -27,8 +27,7 @@ export const getPlayersForChronicle = createCachedSelector(
 
 export const getStorytellerForChronicle = createCachedSelector(
   [getSpecificChronicle, getPlayers],
-  (chronicle, players) =>
-    chronicle && chronicle.st_id && players[chronicle.st_id],
+  (chronicle, players) => chronicle?.st_id && players[chronicle.st_id],
 )(idMemoizer)
 
 const getCharacters = (state: RootState) => entities(state).characters
@@ -66,6 +65,5 @@ export const getBattlegroupsForChronicle = createCachedSelector(
 
 export const amIStOfChronicle = createCachedSelector(
   [getCurrentPlayer, getSpecificChronicle],
-  (player, chronicle) =>
-    chronicle && chronicle.st_id && player.id === chronicle.st_id,
+  (player, chronicle) => chronicle?.st_id && player.id === chronicle.st_id,
 )((state, id) => (getSpecificChronicle(state, id) || { st_id: 0 }).st_id)

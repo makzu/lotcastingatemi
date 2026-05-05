@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect'
-import { sortOrderSort } from 'utils'
-import type { EntityState } from 'ducks/entities'
-import type { Player } from 'types'
-import { RootState } from 'store'
+
+import type { EntityState } from '@lca/ducks/entities'
+import type { RootState } from '@lca/store'
+import type { Player } from '@lca/types'
+import { sortOrderSort } from '@lca/utils'
 
 export const entities = (state: RootState): EntityState =>
   state.entities.current

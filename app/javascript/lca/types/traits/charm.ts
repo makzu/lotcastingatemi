@@ -1,5 +1,5 @@
-import { CharacterTrait, Timing } from '../_lib'
-import { Ability, Attribute } from '../character'
+import type { CharacterTrait, Timing } from '../_lib'
+import type { Ability, Attribute } from '../character'
 
 export interface Charm extends CharacterTrait {
   name: string

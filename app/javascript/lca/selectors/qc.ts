@@ -1,16 +1,16 @@
-import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
+import { createSelector } from 'reselect'
 
+import type { RootState } from '@lca/store'
+import { sortOrderSort } from '@lca/utils'
+import { woundPenalty } from '@lca/utils/calculated'
+import { qcPool, qcRating } from '@lca/utils/calculated/_qcs'
+import { appearanceRating } from '@lca/utils/calculated/ratings'
 import { entities, getCurrentPlayer } from './entities'
-import { RootState } from 'store'
-import { sortOrderSort } from 'utils'
-import { woundPenalty } from 'utils/calculated'
-import { appearanceRating } from 'utils/calculated/ratings'
-import { qcPool, qcRating } from 'utils/calculated/_qcs'
 
 export const getSpecificQc = (state: RootState, id: number) =>
   entities(state).qcs[id]
-const qcIdMemoizer = (state: RootState, id: number) => id
+const qcIdMemoizer = (_state: RootState, id: number) => id
 
 const getQcMerits = (state: RootState) => entities(state).qc_merits
 

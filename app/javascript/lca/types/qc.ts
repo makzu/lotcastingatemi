@@ -1,9 +1,13 @@
-import { PlayerAsset } from './_lib'
-import { WithSharedStats } from './shared'
+import type { PlayerAsset, Sortable, WithId } from './_lib'
+import type { WithSharedStats } from './shared'
 
 export interface QcAction {
   action: string
   pool: number
+}
+
+export interface QcTrait extends WithId, Sortable {
+  qc_id: number
 }
 
 export interface QcStats {
@@ -20,7 +24,7 @@ export interface QcStats {
   armor_name: string
 }
 
-export interface QcMerit {
+export interface QcMerit extends QcTrait {
   name: string
   latent: boolean
   magical: boolean
@@ -28,7 +32,7 @@ export interface QcMerit {
   ref: string
 }
 
-export interface QcAttack {
+export interface QcAttack extends WithId, Sortable {
   name: string
   pool: number
   damage: number

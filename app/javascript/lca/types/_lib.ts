@@ -1,5 +1,3 @@
-import { ChSortable, Sortable } from 'utils'
-
 export type Element = 'earth' | 'air' | 'fire' | 'water' | 'wood'
 
 export type Weight = 'light' | 'medium' | 'heavy'
@@ -15,6 +13,14 @@ export interface WithId {
   id: number
   created_at: Date
   updated_at: Date
+}
+
+export interface Sortable {
+  sorting: number
+}
+
+export interface ChSortable {
+  chronicle_sorting: number
 }
 
 export interface PlayerAsset extends WithId, ChSortable, Sortable {

@@ -1,17 +1,17 @@
 export * from './_battlegroups'
 export * from './_qcs'
 export * from './pools'
-export * from './ratings'
 export * from './pretty'
+export * from './ratings'
 
-import { Ability, Attribute, Character, Specialty } from 'types/'
-import { BlockOfPenalties, PoolPenalty } from 'types/pool'
-import { WithSharedStats } from 'types/shared'
+import type { Ability, Attribute, Character, Specialty } from '@lca/types'
+import type { BlockOfPenalties, PoolPenalty } from '@lca/types/pool'
+import type { WithSharedStats } from '@lca/types/shared'
 import {
-  ATTRIBUTES,
   ABILITIES_ALL,
   ABILITIES_ALL_NO_MA,
   ATTACK_ABILITIES,
+  ATTRIBUTES,
   NON_ATTACK_ABILITIES,
 } from '../constants'
 
@@ -36,7 +36,7 @@ export const abil = (character: Character, ability: string): number => {
     abil = character.abil_craft.find(
       (craft) => `craft (${craft.craft})` === ability,
     )
-    return abil != undefined ? abil.rating : 0
+    return abil !== undefined ? abil.rating : 0
   } else {
     return character[`abil_${ability}`] || 0
   }
@@ -100,7 +100,9 @@ export function attackAbilities(
     return {
       abil: name,
       rating: character[abil] || 0,
-      specialties: character.specialties.filter((spec) => spec.ability == name),
+      specialties: character.specialties.filter(
+        (spec) => spec.ability === name,
+      ),
     }
   })
 
@@ -110,7 +112,7 @@ export function attackAbilities(
       abil: name,
       rating: abil.rating,
       specialties: character.specialties.filter(
-        (spec) => spec.ability == 'martial arts',
+        (spec) => spec.ability === 'martial arts',
       ),
     }
   })
@@ -122,13 +124,13 @@ export function nonAttackAbilities(
   character: Character,
 ): Array<{ abil: string; rating: number; specialties: Specialty[] }> {
   const abils = NON_ATTACK_ABILITIES.filter((abil) => character[abil] > 0).map(
-    function (abil) {
+    (abil) => {
       const name = abil.substring(5)
       return {
         abil: name,
         rating: character[abil] || 0,
         specialties: character.specialties.filter(
-          (spec) => spec.ability == name,
+          (spec) => spec.ability === name,
         ),
       }
     },
@@ -140,7 +142,7 @@ export function nonAttackAbilities(
       abil: name,
       rating: abil.rating,
       specialties: character.specialties.filter(
-        (spec) => spec.ability == 'craft',
+        (spec) => spec.ability === 'craft',
       ),
     }
   })
@@ -197,23 +199,21 @@ export const showLunarTraits = (character: Character) =>
   character.type === 'LunarCharacter' || isCustomCharacter(character)
 
 export const isCasteAbility = (character: Character, ability: Ability) =>
-  character.caste_abilities && character.caste_abilities.includes(ability)
+  character.caste_abilities?.includes(ability)
 
 export const isSupernalAbility = (character: Character, ability: Ability) =>
   character.supernal_ability === ability
 
 export const isFavoredAbility = (character: Character, ability: Ability) =>
-  character.favored_abilities && character.favored_abilities.includes(ability)
+  character.favored_abilities?.includes(ability)
 
 export const isCasteAttribute = (character: Character, attribute: Attribute) =>
-  character.caste_attributes && character.caste_attributes.includes(attribute)
+  character.caste_attributes?.includes(attribute)
 
 export const isFavoredAttribute = (
   character: Character,
   attribute: Attribute,
-) =>
-  character.favored_attributes &&
-  character.favored_attributes.includes(attribute)
+) => character.favored_attributes?.includes(attribute)
 
 export const committedPersonalMotes = (character: WithSharedStats) =>
   character.motes_committed

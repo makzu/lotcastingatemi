@@ -1,7 +1,7 @@
-import * as React from 'react'
+import { useEffect } from 'react'
 
-const useLazyFetch = (id: number, fetch: (id: number) => void) => {
-  React.useEffect(() => fetch(id), [id])
+export const useLazyFetch = (id: number, fetch: (id: number) => void) => {
+  useEffect(() => fetch(id), [id, fetch])
 }
 
 export default useLazyFetch

@@ -1,9 +1,9 @@
 import type { Middleware } from 'redux'
 
+import type { RootState } from '@lca/store'
 import { CABLE_RECEIVED } from 'ducks/entities'
 import { API, crudAction, SUCCESS } from 'ducks/entities/_lib'
 import history from 'utils/history'
-import type { RootState } from 'store'
 
 /* On successfully creating an entity or joining a Chronicle, navigate to that
  * entity or Chronicle's page. Uses Push, so that the back button will work

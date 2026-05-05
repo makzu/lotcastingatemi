@@ -1,22 +1,22 @@
-import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
+import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 import type { Dispatch } from 'redux'
-
 import { deepEqual } from 'fast-equals'
-import { updateEvent } from './index.js'
-import { healthRecoverObject } from './healing.js'
+
 import {
+  getBattlegroupsForChronicle,
   getCharactersForChronicle,
   getMeritNamesForCharacter,
   getQcsForChronicle,
-  getBattlegroupsForChronicle,
-} from 'selectors'
+} from '@lca/selectors'
+import type { RootState as State } from '@lca/store'
+import type { Battlegroup, Character, QC } from '@lca/types'
+import type { WithSharedStats } from '@lca/types/shared'
 import {
-  committedPersonalMotes,
   committedPeripheralMotes,
-} from 'utils/calculated'
-import { RootState } from 'store'
-import { Battlegroup, Character, QC } from 'types'
-import { WithSharedStats } from 'types/shared.js'
+  committedPersonalMotes,
+} from '@lca/utils/calculated'
+import { healthRecoverObject } from './healing.js'
+import { updateEvent } from './index.js'
 
 const endSceneObject = (c: Partial<Character | QC>) => {
   const obj: Partial<Character | QC> = {}
@@ -35,7 +35,7 @@ const endSceneObject = (c: Partial<Character | QC>) => {
 export const END_SCENE = 'lca/event/CHRONICLE_END_SCENE'
 export function endScene(
   id: number,
-): ThunkAction<void, RootState, unknown, AnyAction> {
+): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch: Dispatch, getState) => {
     dispatch({ type: END_SCENE, id: id })
 
@@ -93,7 +93,7 @@ export function respireMotes(
   id: number,
   motes: number,
   includeQcs: boolean,
-): ThunkAction<void, RootState, unknown, AnyAction> {
+): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch: Dispatch, getState) => {
     dispatch({ type: RESPIRE_MOTES, id: id, motes: motes })
 
@@ -127,7 +127,7 @@ export function recoverWillpower(
   willpower: number,
   exceed: boolean,
   includeQcs: boolean,
-): ThunkAction<void, RootState, unknown, AnyAction> {
+): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch: Dispatch, getState) => {
     dispatch({ type: RECOVER_WILLPOWER, id: id, willpower: willpower })
 
@@ -147,7 +147,7 @@ export function downtime(
   id: number,
   time: number,
   endScene: boolean,
-): ThunkAction<void, RootState, unknown, AnyAction> {
+): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch: Dispatch, getState) => {
     dispatch({ type: DOWNTIME, id: id, length: time })
     const state = getState()
@@ -215,7 +215,7 @@ export function downtime(
 export const NEXT_ROUND = 'lca/event/COMBAT_NEXT_ROUND'
 export function nextRound(
   id: number,
-): ThunkAction<void, RootState, unknown, AnyAction> {
+): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch: Dispatch, getState) => {
     const state = getState()
     const chars = [
@@ -238,7 +238,7 @@ export function nextRound(
 export const END_COMBAT = 'lca/event/COMBAT_END'
 export function endCombat(
   id: number,
-): ThunkAction<void, RootState, unknown, AnyAction> {
+): ThunkAction<void, State, unknown, AnyAction> {
   return (dispatch: Dispatch, getState) => {
     const state = getState()
     const chars = [

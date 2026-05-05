@@ -3,11 +3,11 @@ import type { Action } from 'redux'
 import { type ActionFunctionAny, createAction } from 'redux-actions'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { normalize } from 'normalizr'
 
-import type { State } from '@lca/ducks'
+import type { RootState } from '@lca/store'
 import * as schemas from './_schemas'
 import type { EntityState } from './_types'
-import { normalize } from 'normalizr'
 
 export type characterTraitTypes =
   | 'charm'
@@ -135,4 +135,5 @@ export const reducerUpdateAction =
   }
 
 /** Simply unwraps the entity portion of the state */
-export const unwrapped = (state: State): EntityState => state.entities.current
+export const unwrapped = (state: RootState): EntityState =>
+  state.entities.current

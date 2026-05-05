@@ -2,6 +2,8 @@ export * from './math'
 
 import { deepEqual } from 'fast-equals'
 
+import type { ChSortable, Sortable } from '@lca/types/_lib'
+
 /** Returns a random item from an array. */
 export const sample = <T>(array: T[]): T =>
   array[Math.floor(Math.random() * array.length)]
@@ -40,15 +42,10 @@ export function checkVisible(elm: HTMLElement | null) {
   return !(rect.bottom < 0 || rect.top - viewHeight >= 0)
 }
 
-export interface Sortable {
-  sorting: number
-}
-export interface ChSortable {
-  chronicle_sorting: number
-}
 export const sortOrderSort = (a: Sortable, b: Sortable) => a.sorting - b.sorting
 export const chronicleSortOrderSort = (a: ChSortable, b: ChSortable) =>
   a.chronicle_sorting - b.chronicle_sorting
 
+/** @deprecated use React.memo or something instead */
 export const isUnequalByKeys = (obj1: object, obj2: object, keys: string[]) =>
   keys.some((key) => !deepEqual(obj1[key], obj2[key]))

@@ -1,13 +1,13 @@
 import { createAction } from '@reduxjs/toolkit'
+import createCachedSelector from 're-reselect'
 
+import type { RootState } from '@lca/store'
 import type { Charm } from '@lca/types'
+import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import type { EntityState } from './_types'
 import { getSpecificCharacter } from './character'
-import type { State } from 'ducks'
-import createCachedSelector from 're-reselect'
-import { sortOrderSort } from 'utils'
 
 export const updateCharmSort = createAction<{ id: number; sorting: number }>(
   'sort/charm',
@@ -27,9 +27,9 @@ export const [createCharm, updateCharm, destroyCharm] =
   createApiActions('charm')
 
 /* *** Selectors *** */
-const idMemoizer = (_: State, id: number) => id
+const idMemoizer = (_: RootState, id: number) => id
 
-const getCharms = (state: State) => unwrapped(state).charms
+const getCharms = (state: RootState) => unwrapped(state).charms
 
 export const getNativeCharmsForCharacter = createCachedSelector(
   [getSpecificCharacter, getCharms],

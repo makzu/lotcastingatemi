@@ -6,8 +6,7 @@ import { Button, Grid, Typography } from '@material-ui/core'
 import { WithStyles } from '@material-ui/core/styles'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-
+import SortableGridList from 'components/generic/SortableGridList.tsx'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import { State } from 'ducks'
 import { createSpell, destroySpell, updateSpell } from 'ducks/actions'

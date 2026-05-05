@@ -3,7 +3,6 @@ import { resolve } from 'node:path'
 import { esbuildFlowPlugin, flowPlugin } from '@bunchtogether/vite-plugin-flow'
 import React from '@vitejs/plugin-react-swc'
 import Rails from 'vite-plugin-rails'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -22,7 +21,6 @@ export default defineConfig({
       },
     }),
     React(),
-    tsconfigPaths(),
   ],
   resolve: {
     alias: {
@@ -31,6 +29,7 @@ export default defineConfig({
       components: resolve(__dirname, 'app/javascript/lca/components'),
       containers: resolve(__dirname, 'app/javascript/lca/containers'),
       ducks: resolve(__dirname, 'app/javascript/lca/ducks'),
+      hooks: resolve(__dirname, 'app/javascript/lca/hooks'),
       icons: resolve(__dirname, 'app/javascript/lca/icons'),
       selectors: resolve(__dirname, 'app/javascript/lca/selectors'),
       styles: resolve(__dirname, 'app/javascript/lca/styles'),

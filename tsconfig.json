@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    // "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true, // TODO: remove this once all "import React from 'react'" statements are removed
     "baseUrl": "app/javascript/lca",
     "paths": {
       "@lca/*": ["*"],
@@ -11,13 +10,20 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es7", "dom"],
-    "module": "es6",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "target": "es6",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    //"sourceMap": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
     "jsx": "react-jsx"
   },
-  "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],
+  "exclude": ["node_modules", "vendor", "public"],
   "compileOnSave": false
 }

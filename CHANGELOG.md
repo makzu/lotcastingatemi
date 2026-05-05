@@ -6,6 +6,7 @@
 - Infernal characters can now be created
 - The sorcery block on the main character sheet now shows necromantic motes and rituals
 - Added support for siege weapons. Just add a range tag like `siege (long)` for correct range and damage displays
+- Fixed: Sidereal excellencies showed too many dice at high Essence levels (Thanks, Bklemon!)
 
 ## v120
 

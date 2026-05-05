@@ -1,11 +1,10 @@
-import * as React from 'react'
-
 import { Divider, IconButton, Menu } from '@material-ui/core'
-import { Theme, withStyles, WithStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import MoreVert from '@material-ui/icons/MoreVert'
 
-import { useMenuLogic } from 'hooks'
-import { CharacterType } from './CharacterMenuItem'
+import { useMenuLogic } from '@lca/hooks'
+import type { Character } from '@lca/types/character'
+import type { CharacterType } from './CharacterMenuItem'
 import MenuBattlegroupFromQc from './MenuBattlegroupFromQc'
 import MenuChangeExaltType from './MenuChangeExaltType'
 import MenuDelete from './MenuDelete'
@@ -17,22 +16,23 @@ import MenuRefresh from './MenuRefresh'
 import MenuRemoveFromChronicle from './MenuRemoveFromChronicle'
 
 // eslint-disable-next-line no-unused-vars
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   headerWrapper: {},
   wrapper: {
     margin: '-0.75em -1em 0 1.5em',
   },
-})
+}))
 
-interface Props extends WithStyles<typeof styles> {
-  id: number
+interface Props {
+  id: Character['id']
   characterType: CharacterType
   header?: boolean
   chronicle?: boolean
 }
 
 const CharacterMenu = (props: Props) => {
-  const { header, chronicle, characterType, id, classes } = props
+  const classes = useStyles()
+  const { header, chronicle, characterType, id } = props
   const [menuAnchor, handleOpen, handleClose] = useMenuLogic()
 
   return (
@@ -69,4 +69,4 @@ const CharacterMenu = (props: Props) => {
   )
 }
 
-export default withStyles(styles)(CharacterMenu)
+export default CharacterMenu

@@ -2593,15 +2593,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-document-title@npm:^2.0.10":
-  version: 2.0.10
-  resolution: "@types/react-document-title@npm:2.0.10"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10c0/0a3585a7a41fd7ae59de0dfe3f021f9e97485c249eb8bd5b60bed40b1b70ad59f88a7b1e11665bdbf8e482713b9f697f99277a59ef892d7c4d335cfebab0b377
-  languageName: node
-  linkType: hard
-
 "@types/react-dom@npm:^18.3.7":
   version: 18.3.7
   resolution: "@types/react-dom@npm:18.3.7"
@@ -2665,18 +2656,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 16.14.34
-  resolution: "@types/react@npm:16.14.34"
-  dependencies:
-    "@types/prop-types": "npm:*"
-    "@types/scheduler": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 10c0/0cc204f87badeabd4641beb415e82b574152596e65304f5e63cd41948b23036f3e7ae658a86aa5357c2ab4f0f4f9402dfd5077c3df0c5294130a45d92add9bac
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18.3.28":
+"@types/react@npm:^18.0.0":
   version: 18.3.28
   resolution: "@types/react@npm:18.3.28"
   dependencies:
@@ -2727,13 +2707,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/a58ba341cb9e7d74f71810a88862da7b2a6fa42e2a1fc0ce40498f6ea1d44382f0640117057da779f74c47039f7166bf48fad02dc876f94e005c7afa50f5e129
-  languageName: node
-  linkType: hard
-
-"@types/scheduler@npm:*":
-  version: 0.16.2
-  resolution: "@types/scheduler@npm:0.16.2"
-  checksum: 10c0/89a3a922f03609b61c270d534226791edeedcb1b06f0225d5543ac17830254624ef9d8a97ad05418e4ce549dd545bddf1ff28cb90658ff10721ad14556ca68a5
   languageName: node
   linkType: hard
 
@@ -6230,7 +6203,6 @@ __metadata:
     "@reduxjs/toolkit": "npm:1.9.7"
     "@types/node": "npm:24.12.2"
     "@types/react": "npm:^18.3.28"
-    "@types/react-document-title": "npm:^2.0.10"
     "@types/react-dom": "npm:^18.3.7"
     "@types/react-redux": "npm:^7.1.34"
     "@types/react-router-dom": "npm:^5.3.3"
@@ -6247,7 +6219,6 @@ __metadata:
     normalizr: "npm:^3.6.2"
     re-reselect: "npm:^3.4.0"
     react: "npm:^18.3.1"
-    react-document-title: "npm:^2.0.3"
     react-dom: "npm:^18.3.1"
     react-flip-move: "npm:^3.0.5"
     react-markdown: "npm:^8.0.7"
@@ -7514,7 +7485,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.5.6, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -7624,16 +7595,6 @@ __metadata:
   peerDependencies:
     reselect: ">1.0.0"
   checksum: 10c0/696fb645a8ba223ba0d2c5da4a4735047fe82cb5ba5d07b082d09974b7dd6e89aa03900b10088fff61dfc4f4b1ee6f1fdcc9af84c74bea287bb7ab639d5f3752
-  languageName: node
-  linkType: hard
-
-"react-document-title@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "react-document-title@npm:2.0.3"
-  dependencies:
-    prop-types: "npm:^15.5.6"
-    react-side-effect: "npm:^1.0.2"
-  checksum: 10c0/63407633ce4b401dea462ed59fbfa5e58f7f90b811d27eda7ebd0c08d654d1ea6ba9b8688cfc49b5c0e46a9c5f53d0d2e5a37385293d9e723a4988a3ba887783
   languageName: node
   linkType: hard
 
@@ -7803,17 +7764,6 @@ __metadata:
     react: ^15.3.0 || ^16.0.0
     react-dom: ^15.3.0 || ^16.0.0
   checksum: 10c0/8278c153096b622ac288245174ec55d34f2a5fd9089f65326d424409aadcf1dd6a736b26ef529c5b177494b303127f90bf99c07406d40c7984b2e2f0f6a62679
-  languageName: node
-  linkType: hard
-
-"react-side-effect@npm:^1.0.2":
-  version: 1.2.0
-  resolution: "react-side-effect@npm:1.2.0"
-  dependencies:
-    shallowequal: "npm:^1.0.1"
-  peerDependencies:
-    react: ^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0
-  checksum: 10c0/7f8ad8f6eace0c8c3190624cd11aa71e5868ca7197aa2f28571c76aabbb87894beba22c5ce4eeed63c9e4b9029fb693eceee0a8523d6ee3672aac8de49104204
   languageName: node
   linkType: hard
 
@@ -8558,13 +8508,6 @@ __metadata:
   dependencies:
     kind-of: "npm:^6.0.2"
   checksum: 10c0/7bab09613a1b9f480c85a9823aebec533015579fa055ba6634aa56ba1f984380670eaf33b8217502931872aa1401c9fcadaa15f9f604d631536df475b05bcf1e
-  languageName: node
-  linkType: hard
-
-"shallowequal@npm:^1.0.1":
-  version: 1.1.0
-  resolution: "shallowequal@npm:1.1.0"
-  checksum: 10c0/b926efb51cd0f47aa9bc061add788a4a650550bbe50647962113a4579b60af2abe7b62f9b02314acc6f97151d4cf87033a2b15fc20852fae306d1a095215396c
   languageName: node
   linkType: hard
 

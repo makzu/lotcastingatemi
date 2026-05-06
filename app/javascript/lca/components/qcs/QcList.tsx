@@ -1,7 +1,7 @@
-import DocumentTitle from 'react-document-title'
 import { SortableElement } from 'react-sortable-hoc'
 import { Grid, Typography } from '@material-ui/core'
 
+import { useDocumentTitle } from '@lca/hooks'
 import useAppDispatch from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import SortableGridList from 'components/generic/SortableGridList.tsx'
@@ -14,6 +14,7 @@ import { updateQcSort } from 'ducks/entities/qc'
 const SortableItem = SortableElement(({ children }) => children)
 
 const QcList = () => {
+  useDocumentTitle('Qcs | Lot-Casting Atemi')
   const qcs = useAppSelector((state) => getMyQcs(state))
   const dispatch = useAppDispatch()
 
@@ -40,23 +41,19 @@ const QcList = () => {
   const classes = {}
 
   return (
-    <>
-      <DocumentTitle title="Qcs | Lot-Casting Atemi" />
-
-      <SortableGridList
-        header={
-          <Typography variant="h5">
-            Qcs &nbsp;
-            <QcCreatePopup />
-          </Typography>
-        }
-        items={chars}
-        classes={classes}
-        onSortEnd={handleSort}
-        useDragHandle
-        axis="xy"
-      />
-    </>
+    <SortableGridList
+      header={
+        <Typography variant="h5">
+          Qcs &nbsp;
+          <QcCreatePopup />
+        </Typography>
+      }
+      items={chars}
+      classes={classes}
+      onSortEnd={handleSort}
+      useDragHandle
+      axis="xy"
+    />
   )
 }
 

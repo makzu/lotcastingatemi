@@ -3,7 +3,6 @@ import * as React from 'react'
 
 const { Component, Fragment } = React
 
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'
@@ -19,6 +18,7 @@ import { compose } from 'recompose'
 import { getMeritsForCharacter, getSpecificCharacter } from 'selectors'
 import commonStyles from 'styles'
 
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import SortableGridList from 'components/generic/SortableGridList.tsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { createMerit, destroyMerit, updateMerit } from 'ducks/actions.ts'

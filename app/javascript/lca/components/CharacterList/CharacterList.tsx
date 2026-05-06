@@ -1,13 +1,12 @@
-import DocumentTitle from 'react-document-title'
 import { SortableElement } from 'react-sortable-hoc'
-
 import { Grid, Typography } from '@material-ui/core'
 
+import { useDocumentTitle } from '@lca/hooks'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import CharacterCard from 'components/characters/CharacterCard.jsx'
 import CharacterCreatePopup from 'components/characters/CharacterCreatePopup'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
+import SortableGridList from 'components/generic/SortableGridList.tsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { getMyCharacters, updateCharacter } from 'ducks/entities'
 import { updateCharacterSort } from 'ducks/entities/character'
@@ -42,24 +41,22 @@ const CharacterList = () => {
 
   const classes = {}
 
-  return (
-    <>
-      <DocumentTitle title="Characters | Lot-Casting Atemi" />
+  useDocumentTitle('Characters | Lot-Casting Atemi')
 
-      <SortableGridList
-        header={
-          <Typography variant="h5">
-            Characters &nbsp;
-            <CharacterCreatePopup />
-          </Typography>
-        }
-        items={chars}
-        classes={classes}
-        onSortEnd={handleSort}
-        useDragHandle
-        axis="xy"
-      />
-    </>
+  return (
+    <SortableGridList
+      header={
+        <Typography variant="h5">
+          Characters &nbsp;
+          <CharacterCreatePopup />
+        </Typography>
+      }
+      items={chars}
+      classes={classes}
+      onSortEnd={handleSort}
+      useDragHandle
+      axis="xy"
+    />
   )
 }
 

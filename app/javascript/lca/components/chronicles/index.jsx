@@ -1,6 +1,5 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 import Grid from '@material-ui/core/Grid'
@@ -16,6 +15,7 @@ import {
   getStorytellerForChronicle,
 } from 'selectors'
 
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import CharacterCard from 'components/characters/CharacterCard.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'

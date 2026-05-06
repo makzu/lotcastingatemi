@@ -1,30 +1,29 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
+import { compose } from 'recompose'
+import {
+  amIStOfChronicle,
+  getPlayersForChronicle,
+  getSpecificChronicle,
+  getStorytellerForChronicle,
+} from 'selectors'
 
-import ChronicleDeletePopup from './ChronicleDeletePopup.jsx'
-import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
-import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
-import RemovePlayerPopup from './removePlayerPopup.jsx'
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
 import TextField from 'components/generic/TextField.jsx'
-
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateChronicle } from 'ducks/actions.ts'
-import {
-  getSpecificChronicle,
-  getPlayersForChronicle,
-  getStorytellerForChronicle,
-  amIStOfChronicle,
-} from 'selectors'
+import ChronicleDeletePopup from './ChronicleDeletePopup.jsx'
+import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
+import ChronicleInvitePopup from './chronicleInvitePopup.jsx'
+import RemovePlayerPopup from './removePlayerPopup.jsx'
+
 import type { Character, fullQc, Battlegroup } from 'utils/flow-types'
 
 type Props = {

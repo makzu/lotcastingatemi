@@ -1,16 +1,12 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-
 import { Grid, Typography } from '@material-ui/core'
+import type { State } from 'ducks'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import { State } from 'ducks'
-import { getSpecificCharacter, getSpellsForCharacter } from 'ducks/entities'
-import { Character, Spell } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { useDocumentTitle } from '@lca/hooks'
+import { getSpecificCharacter } from 'ducks/entities'
 import CharacterLoadError from '../CharacterLoadError'
 import SpellList from './SpellList'
+import type { RouteWithIdProps as RouteProps } from 'types/util'
 
 interface StateProps {
   id: number
@@ -20,6 +16,8 @@ interface StateProps {
 // interface Props extends StateProps {}
 
 const SorceryPage = ({ id, name }: StateProps) => {
+  useDocumentTitle(`${name} Sorcery | Lot-Casting Atemi`)
+
   /* Escape hatch */
   if (name == null) {
     return <CharacterLoadError />
@@ -27,8 +25,6 @@ const SorceryPage = ({ id, name }: StateProps) => {
 
   return (
     <>
-      <DocumentTitle title={`${name} Sorcery | Lot-Casting Atemi`} />
-
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h5">Sorcery</Typography>

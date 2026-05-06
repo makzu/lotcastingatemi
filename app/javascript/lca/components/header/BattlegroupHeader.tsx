@@ -1,16 +1,13 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-
-import CharacterMenu from 'components/generic/CharacterMenu'
-import { State } from 'ducks'
+import { compose } from 'recompose'
 import { canIEditBattlegroup, getSpecificBattlegroup } from 'selectors'
-import { Battlegroup } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import type { Battlegroup } from 'types'
+
+import { useDocumentTitle } from '@lca/hooks'
+import type { RootState } from '@lca/store'
+import CharacterMenu from 'components/generic/CharacterMenu'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -24,6 +21,8 @@ interface Props {
   classes: any
 }
 function BattlegroupHeader(props: Props) {
+  useDocumentTitle(`${props.battlegroup?.name} | Lot-Casting Atemi`)
+
   if (props.battlegroup == null) {
     return <GenericHeader />
   }
@@ -38,30 +37,26 @@ function BattlegroupHeader(props: Props) {
   }
 
   return (
-    <>
-      <DocumentTitle title={`${battlegroup.name} | Lot-Casting Atemi`} />
+    <Toolbar>
+      <LcaDrawerButton />
 
-      <Toolbar>
-        <LcaDrawerButton />
+      <Typography variant="h6" color="inherit">
+        {editing && 'Editing '}
+        {battlegroup.name}
+      </Typography>
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
-          {editing && 'Editing '}
-          {battlegroup.name}
-        </Typography>
-
-        {canIEdit && (
-          <LinkButton to={editButtonPath} color="inherit">
-            {editing ? 'Done' : 'Edit'}
-          </LinkButton>
-        )}
-        <div className={classes.tabs} />
-        <CharacterMenu id={battlegroup.id} characterType="battlegroup" header />
-      </Toolbar>
-    </>
+      {canIEdit && (
+        <LinkButton to={editButtonPath} color="inherit">
+          {editing ? 'Done' : 'Edit'}
+        </LinkButton>
+      )}
+      <div className={classes.tabs} />
+      <CharacterMenu id={battlegroup.id} characterType="battlegroup" header />
+    </Toolbar>
   )
 }
 
-function mapStateToProps(state: State, { location, match }: RouteProps) {
+function mapStateToProps(state: RootState, { location, match }: RouteProps) {
   const id = parseInt(match.params.id, 10)
   const battlegroup = getSpecificBattlegroup(state, id)
   const path = location.pathname
@@ -78,5 +73,5 @@ function mapStateToProps(state: State, { location, match }: RouteProps) {
 
 export default compose<Props, RouteProps>(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(BattlegroupHeader)

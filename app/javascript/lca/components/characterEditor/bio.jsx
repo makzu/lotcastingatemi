@@ -1,23 +1,23 @@
 // @flow
-import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
 
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
+import { deepEqual } from 'fast-equals'
+import { compose } from 'recompose'
 
-import XpEditor from './editors/xpEditor.jsx'
-import AnimalFormsEditor from './editors/AnimalFormsEditor'
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import TextField from 'components/generic/TextField.jsx'
-
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter } from 'ducks/actions.ts'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { showLunarTraits } from 'utils/calculated'
+import AnimalFormsEditor from './editors/AnimalFormsEditor'
+import XpEditor from './editors/xpEditor.jsx'
+
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, updateCharacter: Function }

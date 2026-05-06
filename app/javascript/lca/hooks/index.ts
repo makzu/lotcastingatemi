@@ -1,5 +1,6 @@
 export { useAppDispatch } from './UseAppDispatch'
 export { useAppSelector } from './UseAppSelector'
 export { useDialogLogic } from './UseDialogLogic'
+export { useDocumentTitle } from './UseDocumentTitle'
 export { useLazyFetch } from './UseLazyFetch'
 export { useMenuLogic } from './UseMenuLogic'

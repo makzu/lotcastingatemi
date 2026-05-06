@@ -3,7 +3,7 @@ import 'typeface-roboto'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import RootContainer from './containers/rootContainer.jsx'
+import RootContainer from './containers/RootContainer.tsx'
 import { lcaInit } from './ducks/actions.ts'
 import store from './store'
 import history from './utils/history'

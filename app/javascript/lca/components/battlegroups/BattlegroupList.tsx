@@ -1,7 +1,7 @@
-import DocumentTitle from 'react-document-title'
 import { SortableElement } from 'react-sortable-hoc'
 import { Grid, Typography } from '@material-ui/core'
 
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'

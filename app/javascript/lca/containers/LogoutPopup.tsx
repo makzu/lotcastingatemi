@@ -1,9 +1,7 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-
+import { useEffect, useState } from 'react'
 import {
   Button,
-  ButtonProps,
+  type ButtonProps,
   Dialog,
   DialogActions,
   DialogContent,
@@ -11,15 +9,8 @@ import {
   Typography,
 } from '@material-ui/core'
 
-import { State } from 'ducks'
-import { useDialogLogic } from 'hooks'
-import { isPublicCharacterPage } from 'selectors'
-
-interface StateProps {
-  authenticated: boolean
-  isLoading: boolean
-  isPublic: boolean
-}
+import { useAppSelector, useDialogLogic } from '@lca/hooks'
+import { isPublicCharacterPage } from '@lca/selectors'
 
 const CsrfInput = () => {
   const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content
@@ -28,10 +19,15 @@ const CsrfInput = () => {
 
 const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
-const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
+const LogoutPopup = () => {
+  const authenticated = useAppSelector((state) => state.session.authenticated)
+  const isLoading = useAppSelector((state) => state.app.loading)
+  const isPublic = useAppSelector((state) =>
+    isPublicCharacterPage(state, window.location.pathname),
+  )
   const [isOpen, setOpen] = useDialogLogic()
-  const [timer, setTimer] = React.useState(null)
-  React.useEffect(() => {
+  const [timer, setTimer] = useState(null)
+  useEffect(() => {
     if (!(authenticated || isLoading || isPublic)) {
       setTimer(setTimeout(() => setOpen(), 500))
     } else {
@@ -40,7 +36,7 @@ const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
     return () => {
       clearTimeout(timer)
     }
-  }, [authenticated, isLoading, isPublic])
+  }, [authenticated, isLoading, isPublic, setOpen, timer])
 
   return (
     <Dialog open={isOpen}>
@@ -65,10 +61,4 @@ const LogoutPopup = ({ authenticated, isLoading, isPublic }: StateProps) => {
   )
 }
 
-const mapState = (state: State): StateProps => ({
-  authenticated: state.session.authenticated,
-  isLoading: state.app.loading,
-  isPublic: isPublicCharacterPage(state, window.location.pathname),
-})
-
-export default connect(mapState)(LogoutPopup)
+export default LogoutPopup

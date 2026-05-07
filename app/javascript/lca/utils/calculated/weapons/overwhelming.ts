@@ -1,4 +1,4 @@
-import type { Character, Weapon } from 'types'
+import type { Character, Weapon } from '@lca/types'
 
 export function weaponOverwhelming(character: Character, weapon: Weapon) {
   let bonus = weapon.bonus_overwhelming
@@ -17,7 +17,7 @@ export function weaponOverwhelming(character: Character, weapon: Weapon) {
     const theBonus = overwhelmingTag.substring(13)
     bonus += theBonus.includes('essence')
       ? character.essence
-      : parseInt(theBonus)
+      : parseInt(theBonus, 10)
   }
 
   if (weapon.tags.find((t) => t.startsWith('siege'))) {

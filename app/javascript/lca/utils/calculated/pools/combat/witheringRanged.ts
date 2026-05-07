@@ -1,5 +1,8 @@
+import type { Character, Weapon } from '@lca/types'
+import type { BlockOfPenalties } from '@lca/types/pool.js'
 import {
   archeryAccuracyBonus,
+  type RangeBonus,
   rangeTag,
   rangeValue,
   siegeAccuracyBonus,
@@ -7,8 +10,6 @@ import {
   weaponIsRanged,
 } from '../../weapons'
 import decisiveAttack from './decisiveAttack.js'
-import type { Character, Weapon } from 'types'
-import type { BlockOfPenalties } from 'types/pool.js'
 
 export function rangedWitheringAttackPool(
   character: Character,
@@ -20,7 +21,7 @@ export function rangedWitheringAttackPool(
 
   const tag = rangeTag(weapon) || ''
   const range = rangeValue(weapon)
-  let rangebonus
+  let rangebonus: RangeBonus
   if (tag.startsWith('siege')) {
     rangebonus = siegeAccuracyBonus(weapon)
   } else if (tag.startsWith('thrown')) {

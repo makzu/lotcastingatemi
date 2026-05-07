@@ -1,4 +1,5 @@
 import { createConsumer } from '@rails/actioncable'
+
 const cable = createConsumer()
 
 const UpdatesCable = {

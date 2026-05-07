@@ -1,6 +1,6 @@
+import type { Character, Weapon } from '@lca/types'
 import { attr } from '../..'
 import { weaponOverwhelming } from '../../weapons'
-import type { Character, Weapon } from 'types'
 
 function weaponDamageBonus(weapon: Weapon) {
   if (weapon.tags.includes('subtle')) return 0

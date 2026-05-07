@@ -1,7 +1,7 @@
-import pool from './_pool'
+import type { Character } from '@lca/types'
+import type { BlockOfPenalties, PoolBonus } from '@lca/types/pool'
 import { penaltyObject } from '../index'
-import type { Character } from 'types'
-import { BlockOfPenalties, PoolBonus } from 'types/pool'
+import pool from './_pool'
 
 export function readIntentions(
   character: Character,

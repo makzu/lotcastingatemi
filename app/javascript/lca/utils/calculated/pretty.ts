@@ -1,4 +1,4 @@
-import { Character } from 'types'
+import type { Character } from '@lca/types'
 import { capitalize, titleCase } from '..'
 
 export const solarXpName = (character: Character) =>
@@ -55,7 +55,7 @@ export const prettyCanonType = (type: string) => {
 
 const prettyCaste = (character: Character) => {
   let casteLabel = character.aspect ? ' Aspect ' : ' Caste '
-  if ((character.caste || '').toLowerCase() === 'casteless') {
+  if ((character.caste ?? '').toLowerCase() === 'casteless') {
     casteLabel = ' '
   }
   return character.caste === '' || character.caste == null
@@ -75,7 +75,7 @@ export const prettyCompactExaltType = (character: Character) => {
   if (character.type === 'Character') {
     return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
   }
-  const totem = character.totem ? titleCase(character.totem) + ' Totem ' : ''
+  const totem = character.totem ? `${titleCase(character.totem)} Totem ` : ''
 
   return `${totem}${prettyCaste(character)}`
 }

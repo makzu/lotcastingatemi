@@ -1,11 +1,11 @@
-import pool from '../_pool'
+import type { Character } from '@lca/types'
+import type { BlockOfPenalties } from '@lca/types/pool'
 import { penaltyObject } from '../../index'
-import type { Character } from 'types'
-import { BlockOfPenalties } from 'types/pool'
+import pool from '../_pool'
 
 export function riseFromProne(
   character: Character,
-  merits: Array<string>,
+  _merits: Array<string>,
   penalties: BlockOfPenalties,
   excellencyAbils: Array<string>,
 ) {

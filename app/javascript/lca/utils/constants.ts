@@ -1,6 +1,6 @@
 /* Constants: exactly what it says on the tin */
 
-import { Ability, Attribute, CapitalizedAbility } from 'types'
+import type { Ability, Attribute, CapitalizedAbility } from '@lca/types'
 
 type PrettyAttribute = {
   attr: `attr_${Attribute}`

@@ -1,7 +1,7 @@
+import type { Ability, Attribute, Character } from '@lca/types'
+import type { Pool, PoolBonus, PoolPenalty } from '@lca/types/pool'
 import { abil, attr, specialtiesFor } from '..'
 import { maxExcellency } from '../excellencies'
-import type { Ability, Attribute, Character } from 'types'
-import type { Pool, PoolBonus, PoolPenalty } from 'types/pool'
 
 export default function pool(
   name: string,

@@ -1,7 +1,7 @@
-import rating from './_rating'
+import type { Character } from '@lca/types'
+import type { BlockOfPenalties } from '@lca/types/pool'
 import { penaltyObject } from '../index'
-import type { Character } from 'types'
-import { BlockOfPenalties } from 'types/pool'
+import rating from './_rating'
 
 export function guile(
   character: Character,

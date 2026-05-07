@@ -1,6 +1,7 @@
 import { getJSON } from 'redux-api-middleware'
 
 import type { Charm } from '@lca/types/traits/charm'
+import { callApi } from '@lca/utils/api'
 import {
   crudAction,
   type characterTraitTypes as entityTypes,
@@ -8,7 +9,6 @@ import {
   reducerUpdateAction,
   standardTypes,
 } from './_lib'
-import { callApi } from 'utils/api'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
 

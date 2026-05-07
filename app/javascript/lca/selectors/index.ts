@@ -62,7 +62,7 @@ export const isPublicCharacterPage = (state: RootState, pathName: string) => {
     ['characters', 'qcs', 'battlegroups'].includes(path[1]) &&
     entities(state)[path[1]][path[2]] !== undefined
   )
-    return entities(state)[path[1]][path[2]].public
+    return entities(state)[path[1]][path[2]].public as boolean
 
   return false
 }

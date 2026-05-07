@@ -1,16 +1,16 @@
 import { createAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
 
-import { State } from 'ducks'
-import { sortOrderSort } from 'utils'
+import type { RootState } from '@lca/store'
 import {
   createApiActions,
   createConditionalFetchAction,
   createEntityReducer,
 } from './_entity'
 import { unwrapped } from './_lib'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 import { getCurrentPlayer } from './player'
+import { sortOrderSort } from 'utils'
 
 export const updateQcSort = createAction<{ id: number; sorting: number }>(
   'sort/qc',
@@ -52,7 +52,7 @@ export const [
 export const fetchQcIfNecessary = createConditionalFetchAction('qc', fetchQc)
 
 /* *** Selectors *** */
-const getQcs = (state: State) => unwrapped(state).qcs
+const getQcs = (state: RootState) => unwrapped(state).qcs
 
 export const getMyQcs = createSelector(
   [getCurrentPlayer, getQcs],
@@ -68,5 +68,5 @@ export const getMyQcsWithoutChronicles = createSelector([getMyQcs], (qcs) =>
   qcs.filter((c) => c.chronicle_id == null),
 )
 
-export const getSpecificQc = (state: State, id: number) =>
+export const getSpecificQc = (state: RootState, id: number) =>
   unwrapped(state).qcs[id]

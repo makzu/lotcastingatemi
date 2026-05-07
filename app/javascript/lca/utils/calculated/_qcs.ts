@@ -1,8 +1,8 @@
-import { QC, QcMerit } from 'types'
-import { PoolBonus } from 'types/pool'
+import type { QC, QcMerit } from '@lca/types'
+import type { PoolBonus } from '@lca/types/pool'
 
 function qcExcellencyPoolCap(qc: QC, pool: number, stunt = false) {
-  if (stunt && qc.excellency != 'lunar') return 0
+  if (stunt && qc.excellency !== 'lunar') return 0
 
   let caps: number[]
   let bonus = 0
@@ -33,7 +33,7 @@ function qcExcellencyPoolCap(qc: QC, pool: number, stunt = false) {
 }
 
 function qcExcellencyRatingCap(qc: QC, rating: number, stunt = false) {
-  if (stunt && qc.excellency != 'lunar') return 0
+  if (stunt && qc.excellency !== 'lunar') return 0
 
   let caps: number[]
   let bonus = 0

@@ -1,5 +1,5 @@
-import { attr, abil } from '..'
-import type { Ability, Character, Charm } from 'types'
+import type { Ability, Character, Charm } from '@lca/types'
+import { abil, attr } from '..'
 
 /* Solar Excellencies: Core p.255 */
 

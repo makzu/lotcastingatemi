@@ -1,7 +1,7 @@
+import type { Character, Weapon } from '@lca/types'
+import type { BlockOfPenalties } from '@lca/types/pool'
 import { penaltyObject } from '../../index'
 import pool from '../_pool'
-import type { Character, Weapon } from 'types'
-import type { BlockOfPenalties } from 'types/pool'
 
 const supportedTags = [
   'chopping',
@@ -67,7 +67,7 @@ export function decisiveAttack(
     ...pool(
       `${weapon.name} Decisive Attack`,
       character,
-      weapon.overrides?.attack_attribute?.use || 'dexterity',
+      weapon.overrides?.attack_attribute?.use ?? 'dexterity',
       weapon.ability,
       bonus,
       penaltyObject(penalties),

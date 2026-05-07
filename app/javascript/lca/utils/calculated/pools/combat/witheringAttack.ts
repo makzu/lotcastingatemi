@@ -1,8 +1,7 @@
-import decisiveAttack from './decisiveAttack'
+import type { Character, Weapon } from '@lca/types'
+import type { BlockOfPenalties } from '@lca/types/pool'
 import { weaponAccuracyBonus } from '../../weapons'
-import type { Character, Weapon } from 'types'
-import {} from '../_pool'
-import { BlockOfPenalties } from 'types/pool'
+import decisiveAttack from './decisiveAttack'
 
 export function witheringAttack(
   character: Character,
@@ -17,7 +16,7 @@ export function witheringAttack(
 
   return {
     ...pool,
-    name: weapon.name + ' Withering Attack',
+    name: `${weapon.name} Withering Attack`,
     accuracy: accuracy,
     raw: Math.max(rawPool, 0),
     total: Math.max(rawPool - pool.totalPenalty, 0),

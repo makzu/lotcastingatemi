@@ -1,4 +1,4 @@
-import type { Character } from 'types'
+import type { Character } from '@lca/types'
 
 export function hardness(character: Character) {
   let armor = 0

@@ -1,4 +1,4 @@
-import type { Character } from 'types'
+import type { Character } from '@lca/types'
 
 export const naturalSoak = (character: Character) => character.attr_stamina
 
@@ -26,18 +26,18 @@ export function soak(
   const bonfire = character.anima_level === 3
 
   const unusualHide = merits.find((m) => m.startsWith('unusual hide'))
-  if (unusualHide != undefined) {
-    b += parseInt(unusualHide.substr(-1))
+  if (unusualHide != null) {
+    b += parseInt(unusualHide.slice(-1), 10)
     bonus = [
       ...bonus,
-      { label: 'unusual hide', bonus: parseInt(unusualHide.substr(-1)) },
+      { label: 'unusual hide', bonus: parseInt(unusualHide.slice(-1), 10) },
     ]
   }
 
   // ISoB control spell bonus applies even while wearing armor:
   // http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1187120#post1187120
   const isob = spells.find((s) => s === 'invulnerable skin of bronze')
-  if (isob != undefined) {
+  if (isob != null) {
     b += character.essence
     bonus = [
       ...bonus,

@@ -1,5 +1,5 @@
-import { Ability, Attribute, Character, Charm } from 'types'
-import { ATTRIBUTES } from 'utils/constants'
+import type { Ability, Attribute, Character, Charm } from '@lca/types'
+import { ATTRIBUTES } from '@lca/utils/constants'
 import { attr } from '..'
 import { highestOtherAttribute } from './custom.js'
 
@@ -32,7 +32,7 @@ export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
 const LunarExcellency = (
   character: Character,
   attribute: Attribute,
-  ability: Ability,
+  _ability: Ability,
   staticRating: boolean,
   stunt = false,
 ) =>

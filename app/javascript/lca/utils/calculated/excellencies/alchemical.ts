@@ -1,5 +1,5 @@
-import { Ability, Attribute, Character, Charm } from 'types'
-import { ATTRIBUTES } from 'utils/constants'
+import type { Ability, Attribute, Character, Charm } from '@lca/types'
+import { ATTRIBUTES } from '@lca/utils/constants'
 import { attr } from '..'
 
 export const alchemicalExcellencyAbils = (
@@ -34,10 +34,10 @@ export const alchemicalExcellencyAbils = (
 const AlchemicalExcellency = (
   character: Character,
   attribute: Attribute,
-  ability: Ability,
+  _ability: Ability,
   staticRating: boolean,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  stunt = false,
+  _stunt = false,
 ) =>
   Math.floor(
     (attr(character, attribute) + character.essence) / (staticRating ? 2 : 1),

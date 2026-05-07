@@ -1,10 +1,10 @@
-import SolarExcellency, { solarExcellencyAbils } from './solar'
+import type { Ability, Attribute, Character, Charm } from '@lca/types'
+import AlchemicalExcellency, { alchemicalExcellencyAbils } from './alchemical'
+import CustomExcellency from './custom.js'
 import DbExcellency, { dbExcellencyAbils } from './dragonblooded'
 import LunarExcellency, { lunarExcellencyAbils } from './lunar'
 import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
-import AlchemicalExcellency, { alchemicalExcellencyAbils } from './alchemical'
-import CustomExcellency from './custom.js'
-import type { Ability, Attribute, Character, Charm } from 'types'
+import SolarExcellency, { solarExcellencyAbils } from './solar'
 
 export const excellencyAbils = (
   character: Character,

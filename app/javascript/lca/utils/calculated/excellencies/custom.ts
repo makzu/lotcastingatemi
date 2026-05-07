@@ -1,8 +1,7 @@
-import { attr, abil, specialtiesFor } from '..'
-
-import { halfRoundUp, halfRoundDown } from 'utils'
-import { ABILITIES, ATTRIBUTES } from 'utils/constants'
-import type { Character } from 'types'
+import type { Character } from '@lca/types'
+import { halfRoundDown, halfRoundUp } from '@lca/utils'
+import { ABILITIES, ATTRIBUTES } from '@lca/utils/constants'
+import { abil, attr, specialtiesFor } from '..'
 
 export const highestOtherAbility = (character: Character, ability: string) => {
   const result = ABILITIES.filter((a) => a.abil !== `abil_${ability}`).map(
@@ -109,7 +108,7 @@ export default (
         result += character.limit
         break
       default:
-        if (!isNaN(+ex)) result += parseInt(ex)
+        if (!Number.isNaN(+ex)) result += parseInt(ex, 10)
     }
   }
 

@@ -1,5 +1,4 @@
-import type { Ability, Character, Charm } from 'types'
-
+import type { Ability, Character, Charm } from '@lca/types'
 import { abil } from '..'
 
 /* Sidereal Excellencies */

@@ -1,8 +1,8 @@
-import { attr, abil, specialtiesFor } from '..'
+import type { Ability, Attribute, Character } from '@lca/types'
+import type { PoolBonus, PoolPenalty, StaticRating } from '@lca/types/pool'
+import { halfRoundUp } from '@lca/utils'
+import { abil, attr, specialtiesFor } from '..'
 import { maxExcellency } from '../excellencies'
-import { halfRoundUp } from 'utils'
-import type { Ability, Attribute, Character } from 'types'
-import { PoolBonus, PoolPenalty, StaticRating } from 'types/pool'
 
 export default function rating(
   name: string,

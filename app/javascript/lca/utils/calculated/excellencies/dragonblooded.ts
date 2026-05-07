@@ -1,11 +1,11 @@
+import type { Character, Charm } from '@lca/types'
 import { abil, specialtiesFor } from '..'
-import type { Character, Charm } from 'types'
 
 /* Dragon-Blooded Excellencies: WFHW Backer PDF p.162 */
 
 // All abilities that have an 'Excellency' keyworded Charm
 export const dbExcellencyAbils = (
-  character: Character,
+  _character: Character,
   charms: Array<Charm>,
 ): Array<string> => {
   let excellencies = charms
@@ -25,7 +25,7 @@ export const dbExcellencyAbils = (
 // DBs apparently round down now: http://forum.theonyxpath.com/forum/main-category/exalted/1069023-ask-the-devs?p=1275486#post1275486
 const dbExcellency = (
   character: Character,
-  attribute: string,
+  _attribute: string,
   ability: string,
   staticRating: boolean = false,
 ) =>

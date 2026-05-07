@@ -1,8 +1,8 @@
-import rating from './_rating.js'
+import type { BlockOfPenalties } from '@lca/types/pool.js'
+import { halfRoundUp } from '@lca/utils'
+import type { Character } from '@lca/utils/flow-types'
 import { penaltyObject } from '../index'
-import { halfRoundUp } from 'utils'
-import type { Character } from 'utils/flow-types'
-import { BlockOfPenalties } from 'types/pool.js'
+import rating from './_rating.js'
 
 export function resolve(
   character: Character,

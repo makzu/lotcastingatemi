@@ -1,9 +1,9 @@
-import rating from './_rating'
+import type { Character, Weapon } from '@lca/types'
+import type { BlockOfPenalties, PoolBonus } from '@lca/types/pool'
+import { halfRoundUp } from '@lca/utils'
 import { penaltyObject } from '../index'
 import { weaponIsRanged } from '../weapons'
-import { halfRoundUp } from 'utils'
-import type { Character, Weapon } from 'types'
-import { BlockOfPenalties, PoolBonus } from 'types/pool'
+import rating from './_rating'
 
 export function weaponDefenseBonus(weapon: Weapon) {
   switch (weapon.weight) {

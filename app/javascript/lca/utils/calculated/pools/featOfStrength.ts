@@ -1,7 +1,7 @@
-import pool from './_pool'
+import type { Character } from '@lca/types'
+import type { BlockOfPenalties } from '@lca/types/pool'
 import { penaltyObject } from '../index'
-import type { Character } from 'types'
-import { BlockOfPenalties } from 'types/pool'
+import pool from './_pool'
 
 export function featOfStrength(
   character: Character,
@@ -11,8 +11,8 @@ export function featOfStrength(
 ) {
   const thew = merits.find((m) => m.startsWith('mighty thew'))
   let bonus = []
-  if (thew != undefined) {
-    bonus = [{ label: 'mighty thew', bonus: parseInt(thew.substr(-1)) }]
+  if (thew != null) {
+    bonus = [{ label: 'mighty thew', bonus: parseInt(thew.slice(-1), 10) }]
   }
   return pool(
     'Feat of Strength',

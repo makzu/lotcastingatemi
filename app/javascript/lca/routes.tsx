@@ -1,12 +1,11 @@
-// @flow
-import React, { Suspense, lazy } from 'react'
+import { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Placeholder from 'components/generic/Placeholder'
+import Placeholder from 'components/generic/Placeholder.tsx'
 import GoodbyePage from 'components/pages/GoodbyePage.jsx'
 import PrivacyPage from 'components/pages/PrivacyPage.jsx'
-import SettingsPage from 'components/pages/SettingsPage'
-import WelcomePage from 'components/pages/WelcomePage'
+import SettingsPage from 'components/pages/SettingsPage.tsx'
+import WelcomePage from 'components/pages/WelcomePage.tsx'
 
 const ChronicleWrapper = lazy(
   () => import('components/chronicles/ChronicleWrapper.jsx'),
@@ -14,9 +13,9 @@ const ChronicleWrapper = lazy(
 
 const ContentList = lazy(() => import('components/pages/contentList.jsx'))
 const CharacterList = lazy(() => import('components/CharacterList/'))
-const QcList = lazy(() => import('components/qcs/QcList'))
+const QcList = lazy(() => import('components/qcs/QcList.tsx'))
 const BattlegroupList = lazy(
-  () => import('components/battlegroups/BattlegroupList'),
+  () => import('components/battlegroups/BattlegroupList.tsx'),
 )
 
 const CharacterSheetWrap = lazy(() => import('components/CharacterSheet/'))

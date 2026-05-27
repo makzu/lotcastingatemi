@@ -1,58 +1,147 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
+import { useReducer } from 'react'
+import Button from '@material-ui/core/Button'
+import Divider from '@material-ui/core/Divider'
+import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import FilterIcon from '@material-ui/icons/FilterList'
 
-import { Button, Grid } from '@material-ui/core'
-
-import DivWithFilterDrawer from 'components/shared/DivWithFilterDrawer'
-import { State } from 'ducks'
+import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer'
+import { getSpecificCharacter } from '@lca/ducks/entities'
 import {
-  getNativeCharmsForCharacter,
-  getSpecificCharacter,
-} from 'ducks/entities'
-import { useDialogLogic } from 'hooks'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+  useAppSelector,
+  useDialogLogic,
+  useDocumentTitle,
+  useIdFromParams,
+} from '@lca/hooks'
 import CharacterLoadError from '../CharacterLoadError'
 import CharmFilter from './CharmFilter/'
 import CharmList from './CharmList'
+import SpellList from './SpellList'
 import { initialFilters, reducer } from './useCharmFilters'
 
-interface StateProps {
-  id: number
-  name?: string
-}
+const useStyles = makeStyles((theme) => ({
+  divider: {
+    margin: theme.spacing(1),
+    '&:last-child': {
+      display: 'none',
+    },
+  },
+  stickyHeader: {
+    position: 'sticky',
+    top: '64px',
+    zIndex: 2,
+    backgroundColor: theme.palette.background.default,
+  },
+  filterButton: {
+    marginLeft: theme.spacing(2),
+  },
+}))
 
-const CharmPage = (props: StateProps) => {
-  const [filters, setfilters] = React.useReducer(reducer, initialFilters)
+const CharmPage = () => {
+  const id = useIdFromParams()
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
+  const [filters, setFilters] = useReducer(reducer, initialFilters)
+  const [filtersOpen, setOpen, setClosed] = useDialogLogic()
+  const classes = useStyles()
 
-  if (props.name == null) {
+  useDocumentTitle(`${character?.name} Charms | Lot-Casting Atemi`)
+
+  if (character?.name == null) {
     return <CharacterLoadError />
   }
 
+  const FilterButton = () => (
+    <Button
+      onClick={filtersOpen ? setClosed : setOpen}
+      className={classes.filterButton}
+      endIcon={<FilterIcon />}
+    >
+      Filter
+    </Button>
+  )
+
   return (
     <DivWithFilterDrawer>
-      <DocumentTitle title={`${props.name} Charms | Lot-Casting Atemi`} />
+      <CharmFilter
+        id={id}
+        filters={filters}
+        setFilters={setFilters}
+        open={filtersOpen}
+        setClosed={setClosed}
+      />
 
-      <div>
-        Charms!{' '}
-        <CharmFilter id={props.id} filters={filters} setfilters={setfilters} />
-      </div>
-
-      <CharmList type="native" id={props.id} filters={filters} />
-
-      <CharmList type="martialArts" id={props.id} filters={filters} />
-
-      <CharmList type="evocation" id={props.id} filters={filters} />
-
-      <CharmList type="spirit" id={props.id} filters={filters} />
+      <Grid container spacing={3}>
+        {character.charms.length +
+          character.martial_arts_charms.length +
+          character.evocations.length +
+          character.spirit_charms.length ===
+          0 && (
+          <Grid item xs={12}>
+            <Typography>Character has no Charms.</Typography>
+          </Grid>
+        )}
+        {character.charms.length > 0 && (
+          <>
+            <Grid item xs={12} className={classes.stickyHeader}>
+              <Typography variant="h5">
+                Native Charms
+                <FilterButton />
+              </Typography>
+            </Grid>
+            <CharmList type="native" id={id} filters={filters} />
+            <Divider className={classes.divider} />
+          </>
+        )}
+        {character.martial_arts_charms.length > 0 && (
+          <>
+            <Grid item xs={12} className={classes.stickyHeader}>
+              <Typography variant="h5">
+                Martial Arts Charms
+                <FilterButton />
+              </Typography>
+            </Grid>
+            <CharmList type="martialArts" id={id} filters={filters} />
+            <Divider className={classes.divider} />
+          </>
+        )}
+        {character.evocations.length > 0 && (
+          <>
+            <Grid item xs={12} className={classes.stickyHeader}>
+              <Typography variant="h5">
+                Evocations
+                <FilterButton />
+              </Typography>
+            </Grid>
+            <CharmList type="evocation" id={id} filters={filters} />
+            <Divider className={classes.divider} />
+          </>
+        )}
+        {character.spirit_charms.length > 0 && (
+          <>
+            <Grid item xs={12} className={classes.stickyHeader}>
+              <Typography variant="h5">
+                Spirit Charms
+                <FilterButton />
+              </Typography>
+            </Grid>
+            <CharmList type="spirit" id={id} filters={filters} />
+          </>
+        )}
+        {character.spells.length > 0 && (
+          <>
+            <Grid item xs={12} className={classes.stickyHeader}>
+              <Typography variant="h5">
+                Spells
+                <FilterButton />
+              </Typography>
+            </Grid>
+            <SpellList id={id} filters={filters} />
+          </>
+        )}
+      </Grid>
     </DivWithFilterDrawer>
   )
 }
 
-const mapState = (state: State, props: RouteProps) => {
-  const id = parseInt(props.match.params.id, 10)
-
-  return { id, name: (getSpecificCharacter(state, id) || { name: null }).name }
-}
-
-export default connect(mapState)(CharmPage)
+export default CharmPage

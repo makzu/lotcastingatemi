@@ -1,3 +1,3 @@
-import CharmPage from './CharmPage'
+import CharmPage from './CharmPage.tsx'
 
 export default CharmPage

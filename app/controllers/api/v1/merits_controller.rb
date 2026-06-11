@@ -14,10 +14,10 @@ module Api
           render json: @merit.errors.details, status: :bad_request
         end
       end
-    end
 
-    def merit_params
-      params.require(:merit).permit(*base_attributes, :sorting_position)
+      def merit_params
+        params.require(:merit).permit(*base_attributes, :sorting_position)
+      end
     end
   end
 end

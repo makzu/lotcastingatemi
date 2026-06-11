@@ -19,7 +19,7 @@ module Api
       def poison_params
         return if params[:poison].blank?
 
-        params.require(:poison).permit(*base_attributes, :sorting_position)
+        params.expect(poison: [*base_attributes, :sorting_position])
       end
     end
   end

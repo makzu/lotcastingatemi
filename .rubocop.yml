@@ -47,7 +47,7 @@ Layout/HashAlignment:
   EnforcedColonStyle: table
 
 Layout/LineLength:
-  IgnoreCopDirectives: true
+  AllowCopDirectives: true
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: compact

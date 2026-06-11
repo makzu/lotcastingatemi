@@ -23,9 +23,9 @@ module Api
 
       def set_parent
         if params[:qc_id]
-          @parent = Qc.find(params[:qc_id])
+          @parent = Qc.find(params.expect(:qc_id))
         elsif params[:battlegroup_id]
-          @parent = Battlegroup.find(params[:battlegroup_id])
+          @parent = Battlegroup.find(params.expect(:battlegroup_id))
         end
       end
     end

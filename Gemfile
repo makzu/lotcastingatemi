@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.2'
+gem 'rails', '~> 8.0.0'
 
 # Vite_Rails for more modern frontend bundling
 gem 'vite_rails', '~> 3.0'
@@ -41,7 +41,7 @@ gem 'ranked-model', '~> 0.4.11'
 # gem 'rack-timeout', '~> 0.6'
 
 # Validate json fields like craft ratings, qc pools, etc
-gem 'activerecord_json_validator', '~> 2.0'
+gem 'activerecord_json_validator', '~> 3.1'
 gem 'email_validator', '~> 2.2'
 
 # Automatic Eager Loading

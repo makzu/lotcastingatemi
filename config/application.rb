@@ -2,8 +2,6 @@
 
 require_relative 'boot'
 
-require 'rails'
-
 require 'action_cable/engine'
 # require "active_storage/engine"
 require 'action_controller/railtie'
@@ -12,8 +10,10 @@ require 'action_controller/railtie'
 # require "action_text/engine"
 require 'action_view/railtie'
 require 'active_job/railtie'
+# Pick the frameworks you want:
 require 'active_model/railtie'
 require 'active_record/railtie'
+require 'rails'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -23,7 +23,7 @@ Bundler.require(*Rails.groups)
 module LotCastingAtemi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 8.0
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -37,6 +37,9 @@ module LotCastingAtemi
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Don't generate system test files.
+    config.generators.system_tests = nil
 
     # Compress API responses
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater

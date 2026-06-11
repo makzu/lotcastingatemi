@@ -78,7 +78,7 @@ module Api
       end
 
       def setup_resource(resource = nil)
-        resource ||= resource_class.find(params[:id])
+        resource ||= resource_class.find(params.expect(:id))
         instance_variable_set(:"@#{resource_name}", resource)
       end
 
@@ -116,13 +116,13 @@ module Api
 
       def set_parent
         if params[:character_id]
-          @parent = Character.find(params[:character_id])
+          @parent = Character.find(params.expect(:character_id))
         elsif params[:qc_id]
-          @parent = Qc.find(params[:qc_id])
+          @parent = Qc.find(params.expect(:qc_id))
         elsif params[:battlegroup_id]
-          @parent = Battlegroup.find(params[:battlegroup_id])
+          @parent = Battlegroup.find(params.expect(:battlegroup_id))
         elsif params[:combat_actor_id]
-          @parent = CombatActor.find(params[:combat_actor_id])
+          @parent = CombatActor.find(params.expect(:combat_actor_id))
         end
       end
     end

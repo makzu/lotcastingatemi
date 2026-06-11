@@ -1,8 +1,9 @@
-## v121
+## v123
 
-###### _Unreleased_
+###### _June 11, 2026_
 
 - Fixed: Sidereal excellencies showed too many dice at high Essence levels (Thanks, Bklemon!)
+- Fixed: Merit sorting does not persist across reloads (Thanks, lnodiv!)
 
 ## v120
 

@@ -53,7 +53,7 @@ group :production do
 end
 
 # For Heroku Ruby metrics
-gem 'barnes', '~>0.0.9'
+gem 'barnes', '~>1.0.0'
 gem 'scout_apm', '~> 5.4'
 
 # logging
@@ -69,12 +69,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 8.0'
 
   # Linting
-  gem 'rubocop', '~> 1.80', require: false
-  gem 'rubocop-factory_bot', '~>2.27', require: false
+  gem 'rubocop', '~> 1.87', require: false
+  gem 'rubocop-factory_bot', '~>2.28', require: false
   gem 'rubocop-performance', '~> 1.26', require: false
-  gem 'rubocop-rails', '~> 2.33', require: false
-  gem 'rubocop-rspec', '~> 3.7', require: false
-  gem 'rubocop-rspec_rails', '~> 2.31', require: false
+  gem 'rubocop-rails', '~> 2.35', require: false
+  gem 'rubocop-rspec', '~> 3.10', require: false
+  gem 'rubocop-rspec_rails', '~> 2.32', require: false
 
   # Security Tools
   gem 'brakeman', '~> 7.1'

@@ -21,7 +21,7 @@
     "react-redux": "^7.2.9",
     "react-router-dom": "^5.3.4",
     "react-select": "^2.4.4",
-    "react-sortable-hoc": "^1.11.0",
+    "react-sortable-hoc": "^2.0.0",
     "recompose": "^0.30.0",
     "redux": "^4.2.1",
     "redux-actions": "^2.6.5",
@@ -39,7 +39,7 @@
     "@material-ui/codemod": "^4.5.1",
     "@redux-devtools/extension": "^4.0.0",
     "@reduxjs/rtk-codemods": "0.0.3",
-    "@types/node": "24.12.2",
+    "@types/node": "24.12.3",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
     "@types/react-redux": "^7.1.34",
@@ -52,14 +52,15 @@
     "@vitejs/plugin-react-swc": "^3.11.0",
     "cypress": "^12.17.4",
     "flow-bin": "^0.122.0",
-    "react-test-renderer": "^16.14.0",
+    "knip": "^6.12.1",
+    "react-test-renderer": "^18.3.1",
     "vite": "^6.4.2",
     "vite-plugin-rails": "^0.5.0",
     "vite-plugin-ruby": "^5.1.1",
     "vitest": "^4.1.5"
   },
   "resolutions": {
-    "@types/react": "^18.0.0"
+    "@types/react": "^18.3.28"
   },
   "scripts": {
     "format": "biome format app/javascript",

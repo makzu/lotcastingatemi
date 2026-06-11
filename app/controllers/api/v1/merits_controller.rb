@@ -16,6 +16,8 @@ module Api
       end
 
       def merit_params
+        return if params[:merit].blank?
+
         params.require(:merit).permit(*base_attributes, :sorting_position)
       end
     end

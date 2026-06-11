@@ -10,7 +10,7 @@ gem 'vite_rails', '~> 3.0'
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.5'
 # Use Puma as the app server
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 7.2'
 
 # For JSON responses
 gem 'active_model_serializers', '~> 0.10'

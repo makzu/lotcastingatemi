@@ -24,7 +24,7 @@ gem 'deep_cloneable', '~> 3.2'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1'
 
-gem 'bootsnap', '~> 1.18', require: false
+gem 'bootsnap', '~> 1.24', require: false
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2', git: 'https://github.com/makzu/knock'

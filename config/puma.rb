@@ -1,45 +1,38 @@
 # frozen_string_literal: true
 
-# Puma can serve each request in a thread from an internal thread pool.
-# The `threads` method setting takes two numbers: a minimum and maximum.
-# Any libraries that use thread pools should be configured to match
-# the maximum value specified for Puma. Default is set to 5 threads for minimum
-# and maximum; this matches the default thread size of Active Record.
+# Thread per process count allows context switching on IO-bound tasks for better CPU utilization.
+threads_count = ENV.fetch('RAILS_MAX_THREADS', 3)
+threads(threads_count, threads_count)
+
+# Processes count, allows better CPU utilization when executing Ruby code.
+# Recommended to always run in at least one process so `rack-timeout` RACK_TERM_ON_TIMEOUT=1 can be used
+# https://devcenter.heroku.com/articles/h12-request-timeout-in-ruby-mri
+workers(ENV.fetch('WEB_CONCURRENCY', 2))
+
+# Support IPv6 by binding to host `::` in production instead of `0.0.0.0` and `::1` instead of `127.0.0.1` in development.
+host = ENV.fetch('RAILS_ENV', 'development') == 'production' ? '::' : '::1'
+
+# PORT environment variable is set by Heroku in production.
+port(ENV.fetch('PORT', 3000), host)
+
+# Allow Puma to be restarted by the `rails restart` command locally.
+plugin(:tmp_restart)
+
+# Heroku strongly recommends upgrading to Puma 7+. If you cannot upgrade,
+# Please see the Puma 6 and prior configuration section below.
 #
-threads_count = ENV.fetch('RAILS_MAX_THREADS', 5)
-threads threads_count, threads_count
-
-# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
+# Puma 7+ already supports PUMA_PERSISTENT_TIMEOUT natively. Older Puma versions set:
 #
-port        ENV.fetch('PORT', 5000)
-
-# Specifies the `environment` that Puma will run in.
+# ```
+# persistent_timeout(ENV.fetch("PUMA_PERSISTENT_TIMEOUT") { 95 }.to_i)
+# ```
 #
-environment ENV.fetch('RAILS_ENV', 'development')
-
-# Specifies the number of `workers` to boot in clustered mode.
-# Workers are forked webserver processes. If using threads and workers together
-# the concurrency of the application would be max `threads` * `workers`.
-# Workers do not work on JRuby or Windows (both of which do not support
-# processes).
+# Puma 7+ fixes a keepalive issue that affects long tail response time with Router 2.0.
+# Older Puma versions set:
 #
-workers ENV.fetch('WEB_CONCURRENCY', 2)
-
-# Use the `preload_app!` method when specifying a `workers` number.
-# This directive tells Puma to first boot the application and load code
-# before forking the application. This takes advantage of Copy On Write
-# process behavior so workers use less memory.
-#
-preload_app!
-
-# Allow puma to be restarted by `rails restart` command.
-plugin :tmp_restart
-
-# https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
-on_worker_boot do
-  # Valid on Rails 4.1+ using the `config/database.yml` method of setting `pool` size
-  ActiveRecord::Base.establish_connection
-end
+# ```
+# enable_keep_alives(false) if respond_to?(:enable_keep_alives)
+# ```
 
 # https://devcenter.heroku.com/articles/language-runtime-metrics-ruby
 require 'barnes'

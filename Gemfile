@@ -10,7 +10,7 @@ gem 'vite_rails', '~> 3.0'
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.5'
 # Use Puma as the app server
-gem 'puma', '~> 7.2'
+gem 'puma', '~> 8.0'
 
 # For JSON responses
 gem 'active_model_serializers', '~> 0.10'
@@ -96,10 +96,11 @@ group :development do
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'listen', '~> 3.8'
-  gem 'web-console', '~> 4.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rack-cors', '~> 2.0', require: 'rack/cors'
   gem 'rails_real_favicon', '~> 0.1'
+  gem 'web-console', '~> 4.3'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 4.4'
   gem 'spring-watcher-listen', '~> 2.1'
 

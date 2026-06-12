@@ -4,7 +4,7 @@ module Api
   module V1
     class QcCharmsController < Api::V1::BaseController
       def create
-        @qc = Qc.find(params[:qc_id])
+        @qc = Qc.find(params.expect(:qc_id))
         @qca = QcCharm.new(qc_charm_params)
         @qca.qc = @qc
         authorize @qca
@@ -18,7 +18,7 @@ module Api
       def qc_charm_params
         return if params[:qc_charm].blank?
 
-        params.require(:qc_charm).permit(*base_attributes, :sorting_position, keywords: [])
+        params.expect(qc_charm: [*base_attributes, :sorting_position, { keywords: [] }])
       end
     end
   end

@@ -4,7 +4,7 @@ module Api
   module V1
     class MeritsController < Api::V1::BaseController
       def create
-        @character = Character.find(params[:character_id])
+        @character = Character.find(params.expect(:character_id))
         @merit = Merit.new(resource_params)
         @merit.character = @character
         authorize @merit
@@ -18,7 +18,7 @@ module Api
       def merit_params
         return if params[:merit].blank?
 
-        params.require(:merit).permit(*base_attributes, :sorting_position)
+        params.expect(merit: [*base_attributes, :sorting_position])
       end
     end
   end

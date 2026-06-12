@@ -2,21 +2,21 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.2'
+gem 'rails', '~> 8.1.0'
 
 # Vite_Rails for more modern frontend bundling
-gem 'vite_rails', '~> 3.0'
+gem 'vite_rails', '~> 3.11'
 
 # Use postgres as the database for Active Record
-gem 'pg', '~> 1.5'
+gem 'pg', '~> 1.6'
 # Use Puma as the app server
-gem 'puma', '~> 7.2'
+gem 'puma', '~> 8.0'
 
 # For JSON responses
 gem 'active_model_serializers', '~> 0.10'
 
 # Pagination
-gem 'pagy', '~> 6.0'
+gem 'pagy', '~> 43.0'
 
 # For duplicating QCs and Battlegroups
 gem 'deep_cloneable', '~> 3.2'
@@ -24,15 +24,15 @@ gem 'deep_cloneable', '~> 3.2'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1'
 
-gem 'bootsnap', '~> 1.18', require: false
+gem 'bootsnap', '~> 1.24', require: false
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2', git: 'https://github.com/makzu/knock'
 gem 'pundit', '~> 2.3'
 
 gem 'omniauth', '~> 2.1'
-gem 'omniauth-google-oauth2', '~> 1.1'
-gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'omniauth-google-oauth2', '~> 1.2'
+gem 'omniauth-rails_csrf_protection', '~> 2.0'
 
 # Sorting
 gem 'ranked-model', '~> 0.4.11'
@@ -41,11 +41,11 @@ gem 'ranked-model', '~> 0.4.11'
 # gem 'rack-timeout', '~> 0.6'
 
 # Validate json fields like craft ratings, qc pools, etc
-gem 'activerecord_json_validator', '~> 2.0'
+gem 'activerecord_json_validator', '~> 3.1'
 gem 'email_validator', '~> 2.2'
 
 # Automatic Eager Loading
-gem 'goldiloader', '~> 5.2'
+gem 'goldiloader', '~> 6.0'
 
 # For Heroku:
 group :production do
@@ -53,8 +53,8 @@ group :production do
 end
 
 # For Heroku Ruby metrics
-gem 'barnes', '~>0.0.9'
-gem 'scout_apm', '~> 5.4'
+gem 'barnes', '~>1.0'
+gem 'scout_apm', '~> 6.2'
 
 # logging
 gem 'colorize', '~> 1.1'
@@ -62,27 +62,27 @@ gem 'lograge', '~> 0.12'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '~> 12.0', platform: :mri
-  gem 'cypress-on-rails', '~> 1.18'
+  gem 'byebug', '~> 13.0', platform: :mri
+  gem 'cypress-on-rails', '~> 1.20'
   gem 'database_cleaner-active_record', '~> 2.2'
   gem 'factory_bot_rails', '~> 6.4'
   gem 'rspec-rails', '~> 8.0'
 
   # Linting
-  gem 'rubocop', '~> 1.80', require: false
-  gem 'rubocop-factory_bot', '~>2.27', require: false
+  gem 'rubocop', '~> 1.87', require: false
+  gem 'rubocop-factory_bot', '~>2.28', require: false
   gem 'rubocop-performance', '~> 1.26', require: false
-  gem 'rubocop-rails', '~> 2.33', require: false
-  gem 'rubocop-rspec', '~> 3.7', require: false
-  gem 'rubocop-rspec_rails', '~> 2.31', require: false
+  gem 'rubocop-rails', '~> 2.35', require: false
+  gem 'rubocop-rspec', '~> 3.10', require: false
+  gem 'rubocop-rspec_rails', '~> 2.32', require: false
 
   # Security Tools
-  gem 'brakeman', '~> 7.1'
+  gem 'brakeman', '~> 8.0'
   gem 'bundler-audit', '~> 0.9'
 
   # profiling
   gem 'derailed_benchmarks', '~> 2.1'
-  gem 'faker', '~> 3.2'
+  gem 'faker', '~> 3.8'
   gem 'stackprof', '~> 0.2'
 
   # Code Quality
@@ -90,25 +90,27 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rails_real_favicon', '~> 0.1'
+
   # Better developer experience in vscode
   gem 'ruby-lsp-rails', '~> 0.4', require: false
   gem 'ruby-lsp-rspec', '~> 0.1', require: false
 
+  gem 'listen', '~> 3.10'
+
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'listen', '~> 3.8'
-  gem 'web-console', '~> 4.2'
+  gem 'web-console', '~> 4.3'
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rack-cors', '~> 2.0', require: 'rack/cors'
-  gem 'rails_real_favicon', '~> 0.1'
-  gem 'spring', '~> 4.4'
+  gem 'spring', '~> 4.6'
   gem 'spring-watcher-listen', '~> 2.1'
 
   # Performance metrics
-  gem 'bullet', '~> 8.0'
+  gem 'bullet', '~> 8.1'
   # gem 'flamegraph'
   # gem 'meta_request'
   gem 'memory_profiler', '~> 1.1'
-  gem 'rack-mini-profiler', '~> 3.3', require: false
+  gem 'rack-mini-profiler', '~> 4.0', require: false
   # gem 'stackprof'
 end
 

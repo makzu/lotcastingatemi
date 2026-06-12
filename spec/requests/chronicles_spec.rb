@@ -107,7 +107,7 @@ RSpec.describe 'Chronciles' do
              headers: authenticated_header(not_the_st),
              params:  { invite_code: chronicle.invite_code }
 
-        expect(ChroniclePlayer.count).to eq 1
+        expect(chronicle.players.count).to eq 1
       end
     end
   end

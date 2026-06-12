@@ -57,7 +57,6 @@ export {
 
 export { logout } from './session'
 export { closeDrawer, toggleDrawer, switchTheme } from './app.js'
-export { spendMotes, spendWillpower, takeDamage } from './events'
 
 import {
   fetchAllCharacters,

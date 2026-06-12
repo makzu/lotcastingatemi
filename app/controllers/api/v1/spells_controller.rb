@@ -19,7 +19,7 @@ module Api
       def spell_params
         return if params[:spell].blank?
 
-        params.require(:spell).permit(*base_attributes, :sorting_position, keywords: [], categories: [])
+        params.expect(spell: [*base_attributes, :sorting_position, { keywords: [], categories: [] }])
       end
     end
   end

@@ -17,7 +17,7 @@ module Api
       end
 
       def show
-        @chronicle = Chronicle.find(params[:id])
+        @chronicle = Chronicle.find(params.expect(:id))
 
         authorize @chronicle
 
@@ -65,7 +65,7 @@ module Api
           @player = current_player
         else
           authorize @chronicle, :update?
-          @player = Player.find(params[:player_id])
+          @player = Player.find(params.expect(:player_id))
         end
 
         @chronicle.remove_player(@player)
@@ -105,7 +105,7 @@ module Api
       end
 
       def add_character
-        @character = Character.find(params[:character_id])
+        @character = Character.find(params.expect(:character_id))
         check_auth @character
 
         @chronicle.characters << @character
@@ -114,7 +114,7 @@ module Api
       end
 
       def remove_character
-        @character = Character.find(params[:character_id])
+        @character = Character.find(params.expect(:character_id))
         check_auth @character
 
         @chronicle.characters.delete(@character)
@@ -123,7 +123,7 @@ module Api
       end
 
       def add_qc
-        @qc = Qc.find(params[:qc_id])
+        @qc = Qc.find(params.expect(:qc_id))
         check_auth @qc
 
         @chronicle.qcs << @qc
@@ -132,7 +132,7 @@ module Api
       end
 
       def remove_qc
-        @qc = Qc.find(params[:qc_id])
+        @qc = Qc.find(params.expect(:qc_id))
         check_auth @qc
 
         @chronicle.qcs.delete(@qc)
@@ -141,7 +141,7 @@ module Api
       end
 
       def add_battlegroup
-        @battlegroup = Battlegroup.find(params[:battlegroup_id])
+        @battlegroup = Battlegroup.find(params.expect(:battlegroup_id))
         check_auth @battlegroup
 
         @chronicle.battlegroups << @battlegroup
@@ -150,7 +150,7 @@ module Api
       end
 
       def remove_battlegroup
-        @battlegroup = Battlegroup.find(params[:battlegroup_id])
+        @battlegroup = Battlegroup.find(params.expect(:battlegroup_id))
         check_auth @battlegroup
 
         @chronicle.battlegroups.delete(@battlegroup)
@@ -161,7 +161,7 @@ module Api
       private
 
       def set_chronicle_from_token
-        @chronicle = Chronicle.find_by!(invite_code: params[:invite_code])
+        @chronicle = Chronicle.find_by!(invite_code: params.expect(:invite_code))
       end
 
       def check_auth(char)

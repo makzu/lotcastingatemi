@@ -4,7 +4,7 @@ module Api
   module V1
     class WeaponsController < Api::V1::BaseController
       def create
-        @character = Character.find(params[:character_id])
+        @character = Character.find(params.expect(:character_id))
         @weapon = Weapon.new(resource_params)
         @weapon.character = @character
         authorize @weapon
@@ -18,15 +18,17 @@ module Api
       def weapon_params
         return if params[:weapon].blank?
 
-        params.require(:weapon).permit(
-          *base_attributes,
-          :sorting_position,
-          tags:      [],
-          overrides: {
-            attack_attribute:  %i[use base_only],
-            defense_attribute: %i[use base_only],
-            damage_attribute:  %i[use base_only]
-          }
+        params.expect(
+          weapon: [*base_attributes,
+                   :sorting_position,
+                   {
+                     tags:      [],
+                     overrides: {
+                       attack_attribute:  %i[use base_only],
+                       defense_attribute: %i[use base_only],
+                       damage_attribute:  %i[use base_only]
+                     }
+                   }]
         )
       end
     end

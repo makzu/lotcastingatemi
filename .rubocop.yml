@@ -47,7 +47,7 @@ Layout/HashAlignment:
   EnforcedColonStyle: table
 
 Layout/LineLength:
-  IgnoreCopDirectives: true
+  AllowCopDirectives: true
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: compact
@@ -107,6 +107,3 @@ Rails/UnknownEnv:
 
 RSpec/ExampleLength:
   Max: 15
-
-Style/RequireOrder:
-  Enabled: true

@@ -4,7 +4,7 @@ module Api
   module V1
     class CharmsController < Api::V1::BaseController
       def create
-        @character = Character.find(params[:character_id])
+        @character = Character.find(params.expect(:character_id))
         @charm = Charm.new(resource_params)
         @charm.character = @character
         authorize @charm
@@ -16,13 +16,7 @@ module Api
       end
 
       def charm_params
-        params.require(:charm).permit(
-          *base_attributes,
-          :sorting_position,
-          keywords:   [],
-          categories: [],
-          loadouts:   []
-        )
+        params.expect(charm: [*base_attributes, :sorting_position, { keywords: [], categories: [], loadouts: [] }])
       end
     end
   end

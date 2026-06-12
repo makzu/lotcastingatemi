@@ -27,11 +27,12 @@ import createCachedSelector from 're-reselect'
 import { State } from 'ducks'
 import { unwrapped } from './_lib'
 import { getSpecificCharacter } from './character'
+import { sortOrderSort } from 'utils'
 
 const getMerits = (state: State) => unwrapped(state).merits
 
 export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],
   (character, merits) =>
-    character == null ? [] : character.merits.map((m) => merits[m]),
+    character == null ? [] : character.merits.map((m) => merits[m]).sort(sortOrderSort),
 )((_state, id) => id)

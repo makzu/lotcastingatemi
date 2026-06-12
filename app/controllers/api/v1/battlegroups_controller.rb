@@ -28,7 +28,7 @@ module Api
       end
 
       def create_from_qc
-        @qc = Qc.find(params[:qc_id])
+        @qc = Qc.find(params.expect(:qc_id))
         authorize @qc, :show?
 
         @battlegroup = Battlegroup.new_from_qc(@qc)
@@ -62,10 +62,10 @@ module Api
       end
 
       def battlegroup_params
-        params.require(:battlegroup).permit(
-          *base_attributes,
-          :sorting_position,
-          :chronicle_sorting_position
+        params.expect(
+          battlegroup: [*base_attributes,
+                        :sorting_position,
+                        :chronicle_sorting_position]
         )
       end
     end

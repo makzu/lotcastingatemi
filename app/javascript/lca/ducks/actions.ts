@@ -53,7 +53,7 @@ export {
   updateSpell,
   updateWeapon,
 } from './entities'
-export { spendMotes, spendWillpower, takeDamage } from './events'
+
 export { logout } from './session'
 
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'

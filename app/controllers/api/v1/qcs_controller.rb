@@ -57,17 +57,19 @@ module Api
       end
 
       def qc_params
-        params.require(:qc).permit(
-          *base_attributes,
-          :sorting_position,
-          :chronicle_sorting_position,
-          ties:            [Schemas::INTIMACY_PARAMS],
-          principles:      [Schemas::INTIMACY_PARAMS],
-          actions:         [Schemas::QC_ACTION_PARAMS],
-          motes_committed: [Schemas::MOTE_COMMITTMENT_PARAMS],
-          resources:       [Schemas::RESOURCE_PARAMS],
-          categories:      [],
-          rituals:         []
+        params.expect(
+          qc: [*base_attributes,
+               :sorting_position,
+               :chronicle_sorting_position,
+               {
+                 ties:            [Schemas::INTIMACY_PARAMS],
+                 principles:      [Schemas::INTIMACY_PARAMS],
+                 actions:         [Schemas::QC_ACTION_PARAMS],
+                 motes_committed: [Schemas::MOTE_COMMITTMENT_PARAMS],
+                 resources:       [Schemas::RESOURCE_PARAMS],
+                 categories:      [],
+                 rituals:         []
+               }]
         )
       end
     end

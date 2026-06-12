@@ -1,12 +1,13 @@
-## v121
+## v123
 
-###### _Unreleased_
+###### _June 11, 2026_
 
 - Alchemical characters can now be created
 - Infernal characters can now be created
 - The sorcery block on the main character sheet now shows necromantic motes and rituals
 - Added support for siege weapons. Just add a range tag like `siege (long)` for correct range and damage displays
 - Fixed: Sidereal excellencies showed too many dice at high Essence levels (Thanks, Bklemon!)
+- Fixed: Merit sorting does not persist across reloads (Thanks, lnodiv!)
 
 ## v120
 

@@ -79,29 +79,31 @@ module Api
 
       # rubocop:disable Metrics/MethodLength
       def character_params
-        params.require(:character).permit(
-          *base_attributes,
-          :sorting_position,
-          :chronicle_sorting_position,
-          ties:               [Schemas::INTIMACY_PARAMS],
-          principles:         [Schemas::INTIMACY_PARAMS],
-          motes_committed:    [Schemas::MOTE_COMMITTMENT_PARAMS],
-          abil_craft:         [Schemas::CRAFT_PARAMS],
-          abil_martial_arts:  [Schemas::MARTIAL_ARTS_PARAMS],
-          specialties:        [Schemas::SPECIALTY_PARAMS],
-          resources:          [Schemas::RESOURCE_PARAMS],
-          xp_log:             [Schemas::XP_LOG_PARAMS],
-          xp_log_solar:       [Schemas::XP_LOG_PARAMS],
-          bp_log:             [Schemas::XP_LOG_PARAMS],
-          forms:              [Schemas::FORM_PARAMS],
-          caste_attributes:   [],
-          favored_attributes: [],
-          caste_abilities:    [],
-          favored_abilities:  [],
-          excellencies_for:   [],
-          rituals:            [],
-          anima_powers:       [],
-          armor_tags:         []
+        params.expect(
+          character: [*base_attributes,
+                      :sorting_position,
+                      :chronicle_sorting_position,
+                      {
+                        ties:               [Schemas::INTIMACY_PARAMS],
+                        principles:         [Schemas::INTIMACY_PARAMS],
+                        motes_committed:    [Schemas::MOTE_COMMITTMENT_PARAMS],
+                        abil_craft:         [Schemas::CRAFT_PARAMS],
+                        abil_martial_arts:  [Schemas::MARTIAL_ARTS_PARAMS],
+                        specialties:        [Schemas::SPECIALTY_PARAMS],
+                        resources:          [Schemas::RESOURCE_PARAMS],
+                        xp_log:             [Schemas::XP_LOG_PARAMS],
+                        xp_log_solar:       [Schemas::XP_LOG_PARAMS],
+                        bp_log:             [Schemas::XP_LOG_PARAMS],
+                        forms:              [Schemas::FORM_PARAMS],
+                        caste_attributes:   [],
+                        favored_attributes: [],
+                        caste_abilities:    [],
+                        favored_abilities:  [],
+                        excellencies_for:   [],
+                        rituals:            [],
+                        anima_powers:       [],
+                        armor_tags:         []
+                      }]
         )
       end
       # rubocop:enable Metrics/MethodLength

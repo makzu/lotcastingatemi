@@ -29,7 +29,7 @@ module Api
       private
 
       def player_params
-        params.require(:player).permit(:display_name)
+        params.expect(player: [:display_name])
       end
     end
   end

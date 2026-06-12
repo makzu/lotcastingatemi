@@ -8,7 +8,7 @@
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@material-ui/styles": "^4.11.5",
     "@material-ui/types": "^5.1.8",
-    "@rails/actioncable": "^7.2.301",
+    "@rails/actioncable": "^8.1.300",
     "@reduxjs/toolkit": "1.9.7",
     "deepmerge": "^4.2.2",
     "fast-equals": "^2.0.4",

@@ -1,5 +1,4 @@
-import { createAction } from '@reduxjs/toolkit'
-import { AnyAction } from 'redux'
+import type { AnyAction } from 'redux'
 
 import { isNonFetchAuthIssue } from './app.js'
 import { crudAction } from './entities/_lib'

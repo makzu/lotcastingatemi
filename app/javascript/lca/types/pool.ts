@@ -1,5 +1,4 @@
-import { Ability, Attribute } from './character'
-import { AttributeOrEssence } from './traits/weapon'
+import type { Ability, Attribute } from './character'
 
 export interface BlockOfPenalties {
   wound: number

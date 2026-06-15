@@ -1,6 +1,5 @@
-import * as React from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { connect } from 'react-redux'
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -11,16 +10,16 @@ import Switch from '@material-ui/core/Switch'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
-import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
-import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect'
-import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
-import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
+import type { Character } from '@lca/types'
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import AlchemicalCasteSelect from 'components/characterEditor/exaltTraits/AlchemicalCasteSelect'
+import DbAspectSelect from 'components/characterEditor/exaltTraits/DbAspectSelect'
+import ExaltTypeSelect from 'components/characterEditor/exaltTraits/ExaltTypeSelect'
 import InfernalCasteSelect from 'components/characterEditor/exaltTraits/InfernalCasteSelect'
+import LunarCasteSelect from 'components/characterEditor/exaltTraits/LunarCasteSelect'
+import SiderealCasteSelect from 'components/characterEditor/exaltTraits/SiderealCasteSelect'
+import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import { createCharacter } from 'ducks/actions'
-import type { Character } from 'types'
 
 const initialState = {
   open: false,
@@ -42,7 +41,7 @@ type State = {
   character: Partial<Character>
 }
 
-class CharacterCreatePopup extends React.Component<Props, State> {
+class CharacterCreatePopup extends Component<Props, State> {
   state = initialState
 
   handleOpen = () => {
@@ -53,7 +52,7 @@ class CharacterCreatePopup extends React.Component<Props, State> {
     this.setState(initialState)
   }
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     let exaltType = {}
 

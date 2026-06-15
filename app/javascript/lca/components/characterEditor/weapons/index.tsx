@@ -1,18 +1,17 @@
 import { useState } from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
-
 import { Button, Divider, Typography } from '@material-ui/core'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import type { Character } from '@lca/types'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
 import { updateWeaponSort } from 'ducks/entities/weapon'
 import WeaponEditorPopup from './WeaponEditorPopup'
 import WeaponRow from './WeaponRow'
-import type { Character } from 'types'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)

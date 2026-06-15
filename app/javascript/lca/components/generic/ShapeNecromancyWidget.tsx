@@ -1,6 +1,5 @@
 import type React from 'react'
 import { useState } from 'react'
-
 import {
   Button,
   ButtonBase,
@@ -14,15 +13,15 @@ import {
   type WithStyles,
   withStyles,
 } from '@material-ui/core'
+import { useDialogLogic } from 'hooks'
+import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
 
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import type { Character, QC } from '@lca/types'
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { updateCharacter, updateQc } from 'ducks/actions'
-import { useDialogLogic } from 'hooks'
-import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
-import type { Character, QC } from 'types'
 
 const styles = (theme: Theme) =>
   createStyles({

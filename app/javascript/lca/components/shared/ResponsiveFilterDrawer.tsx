@@ -1,6 +1,5 @@
-import * as React from 'react'
-
-import { Drawer, Theme } from '@material-ui/core'
+import type React from 'react'
+import { Drawer, type Theme } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { makeStyles, useTheme } from '@material-ui/styles'
 

@@ -10,8 +10,7 @@
       "hooks": ["./app/javascript/lca/hooks"],
       "selectors": ["./app/javascript/lca/selectors"],
       "styles": ["./app/javascript/lca/styles"],
-      "types": ["./app/javascript/lca/types"],
-      "utils": ["./app/javascript/lca/utils"],
+      "utils/*": ["./app/javascript/lca/utils/*"],
       "Docs": ["./docs"],
       "Locales": ["./locales"]
     },

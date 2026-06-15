@@ -1,5 +1,5 @@
-import { PlayerAsset, Weight } from './_lib'
-import { WithSharedStats } from './shared'
+import type { PlayerAsset, Weight } from './_lib'
+import type { WithSharedStats } from './shared'
 
 export type Ability =
   | 'archery'
@@ -146,6 +146,7 @@ export interface Character extends PlayerAsset, WithSharedStats {
   anima_powers: any[]
   limit_trigger: string
   limit: number
+  current_loadout: string
 
   excellency: string
   excellency_stunt: string

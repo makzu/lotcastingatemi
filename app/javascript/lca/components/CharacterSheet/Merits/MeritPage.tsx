@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 import { Grid, Paper, Typography } from '@material-ui/core'
 import type { State } from 'ducks'
-import type { Character, Merit } from 'types'
 
 import { useDocumentTitle } from '@lca/hooks'
+import type { Character, Merit } from '@lca/types'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { getMeritsForCharacter, getSpecificCharacter } from 'ducks/selectors'
 import CharacterLoadError from '../CharacterLoadError'
 import SingleMerit from './SingleMerit'
-import type { RouteWithIdProps as RouteProps } from 'types/util'
 
 interface Props {
   character: Character

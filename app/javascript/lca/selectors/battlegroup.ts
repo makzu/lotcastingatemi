@@ -1,8 +1,8 @@
 import createCachedSelector from 're-reselect'
 import { createSelector } from 'reselect'
-import type { Battlegroup, Player } from 'types'
 
 import type { RootState } from '@lca/store'
+import type { Battlegroup, Player } from '@lca/types'
 import { bgJoinBattlePool } from '../utils/calculated/_battlegroups'
 import { entities, getCurrentPlayer } from './entities'
 import { getQcAttacks } from './qc'

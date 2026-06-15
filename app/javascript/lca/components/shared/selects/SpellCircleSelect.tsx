@@ -1,9 +1,7 @@
-import * as React from 'react'
-
 import { MenuItem, TextField } from '@material-ui/core'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import { Spell } from 'types'
+import type { Spell } from '@lca/types'
 
 interface Props extends Pick<TextFieldProps, 'onChange' | 'margin'> {
   spell: Spell

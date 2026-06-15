@@ -2,12 +2,13 @@ import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 
 import { useDocumentTitle } from '@lca/hooks/'
-import Routes from '../routes.jsx'
+import type store from '@lca/store.ts'
+import Routes from '../routes.tsx'
 import App from './App'
 import ThemeContainer from './ThemeContainer'
 
 type Props = {
-  store: any
+  store: typeof store
   history: any
 }
 const RootContainer = ({ store, history }: Props) => {

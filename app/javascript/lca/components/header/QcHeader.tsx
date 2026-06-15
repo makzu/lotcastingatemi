@@ -2,17 +2,17 @@ import { connect } from 'react-redux'
 import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
-import { canIEditQc, getSpecificQc } from 'selectors'
-import type { QC } from 'types'
 
 import { useDocumentTitle } from '@lca/hooks'
+import { canIEditQc, getSpecificQc } from '@lca/selectors'
 import type { RootState } from '@lca/store'
+import type { QC } from '@lca/types'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import CharacterMenu from 'components/generic/CharacterMenu/'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
 import LinkButton from './LinkButton'
-import type { RouteWithIdProps as RouteProps } from 'types/util'
 
 interface Props {
   qc: QC

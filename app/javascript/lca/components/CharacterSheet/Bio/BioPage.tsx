@@ -7,10 +7,11 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 import { compose } from 'recompose'
-import type { Character, XpLogEntry } from 'types'
 
 import { useDocumentTitle } from '@lca/hooks'
 import type { RootState } from '@lca/store'
+import type { Character, XpLogEntry } from '@lca/types'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
@@ -18,7 +19,6 @@ import ProtectedComponent from 'containers/ProtectedComponent'
 import { getSpecificCharacter } from 'ducks/selectors'
 import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
-import type { RouteWithIdProps as RouteProps } from 'types/util'
 
 const styles = (_theme: Theme) =>
   createStyles({
@@ -139,7 +139,7 @@ const BioFullPage = ({ character, classes }: Props) => {
       <Grid item xs={12} lg={6}>
         <BlockPaper>
           <Typography variant="subtitle1">
-            {solarXpName(character) + ' XP'}
+            {`${solarXpName(character)} XP`}
           </Typography>
           <Typography component="table">
             <tbody>{xpTable(character.xp_log_solar)}</tbody>

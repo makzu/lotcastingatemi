@@ -1,5 +1,5 @@
-import { Player } from 'types'
-import { WithId } from './_lib'
+import type { Player } from '@lca/types'
+import type { WithId } from './_lib'
 
 export interface Chronicle extends WithId {
   name: string

@@ -1,10 +1,8 @@
-import React from 'react'
-
 import { ListSubheader, MenuItem, TextField } from '@material-ui/core/'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { makeStyles, type Theme } from '@material-ui/core/styles'
+import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import { Character, Weapon } from 'types'
+import type { Character, Weapon } from '@lca/types'
 import * as calc from 'utils/calculated'
 
 const useStyles = makeStyles((theme: Theme) => ({

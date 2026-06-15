@@ -1,4 +1,4 @@
-import {
+import type {
   Battlegroup,
   Character,
   Charm,
@@ -10,8 +10,8 @@ import {
   QcMerit,
   Spell,
   Weapon,
-} from 'types'
-import { Player } from './player'
+} from '@lca/types'
+import type { Player } from './player'
 
 export interface EntityState {
   currentPlayer: number

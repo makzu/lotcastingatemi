@@ -1,12 +1,12 @@
 import { createAction } from '@reduxjs/toolkit'
 import createCachedSelector from 're-reselect'
 
-import { State } from 'ducks'
-import { Weapon } from 'types'
-import { sortOrderSort } from 'utils'
+import type { State } from '@lca/ducks'
+import type { Weapon } from '@lca/types'
+import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 import { getSpecificCharacter } from './character'
 
 export const updateWeaponSort = createAction<{ id: number; sorting: number }>(

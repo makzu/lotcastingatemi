@@ -1,5 +1,4 @@
 import { type ReactNode, useEffect } from 'react'
-
 import green from '@material-ui/core/colors/green'
 import lightgreen from '@material-ui/core/colors/lightGreen'
 import teal from '@material-ui/core/colors/teal'

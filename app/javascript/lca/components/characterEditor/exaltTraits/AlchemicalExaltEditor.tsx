@@ -1,13 +1,11 @@
-import * as React from 'react'
-
+import type * as React from 'react'
 import { Typography } from '@material-ui/core'
 
+import type { Character } from '@lca/types'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import AlchemicalCasteSelect from './AlchemicalCasteSelect'
-
-import { Character } from 'types'
 import { nonCasteAttributes } from 'utils/calculated'
+import AlchemicalCasteSelect from './AlchemicalCasteSelect'
 
 interface Props {
   character: Character

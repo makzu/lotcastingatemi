@@ -1,7 +1,6 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
 import {
   Collapse,
   Divider,
@@ -10,12 +9,12 @@ import {
   ListItemText,
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
+import type { State } from 'ducks'
 
+import type { Character } from '@lca/types'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
-import { State } from 'ducks'
 import { getSpecificCharacter } from 'ducks/entities'
-import { Character } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 
 interface Props {
   character: Character
@@ -24,7 +23,7 @@ interface Props {
 
 const SideNavigation = (props: Props) => {
   const { character, id } = props
-  const [isOpen, setOpen] = React.useState(true)
+  const [isOpen, setOpen] = useState(true)
 
   if (character == null) {
     return null

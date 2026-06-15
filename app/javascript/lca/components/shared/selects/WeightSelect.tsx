@@ -1,7 +1,5 @@
-import React from 'react'
-
-import { makeStyles, MenuItem, TextField, Theme } from '@material-ui/core'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { MenuItem, makeStyles, TextField, type Theme } from '@material-ui/core'
+import type { TextFieldProps } from '@material-ui/core/TextField'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -1,6 +1,5 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-
 import {
   Collapse,
   Divider,
@@ -10,15 +9,15 @@ import {
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
-import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
-import { useCharacterAttribute } from 'ducks/entities'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+import { LinkListItem, NavLinkListItem } from '@lca/components/shared/wrappers/'
+import { useCharacterAttribute } from '@lca/ducks/entities'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 
 const SideNavigation = ({ match }: RouteProps) => {
   const id = parseInt(match.params.id, 10)
   const characterName = useCharacterAttribute(id, 'name')
 
-  const [isOpen, setOpen] = React.useState(true)
+  const [isOpen, setOpen] = useState(true)
 
   if (characterName == null) {
     return null
@@ -52,13 +51,11 @@ const SideNavigation = ({ match }: RouteProps) => {
           <ListItemText primary="Charms" />
         </NavLinkListItem>
 
-        {/* <NavLinkListItem to={`${prefix}/charmss`}>
-          <ListItemText primary="New Charms page" />
-        </NavLinkListItem>
-
+        {/* 
         <NavLinkListItem to={`${prefix}/sorcery`}>
           <ListItemText primary="Sorcery" />
-        </NavLinkListItem> */}
+        </NavLinkListItem>
+        */}
 
         <NavLinkListItem to={`${prefix}/bio`}>
           <ListItemText primary="Bio/Misc" />

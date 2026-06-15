@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
-import { sample } from 'utils'
+import { sample } from '@lca/utils'
 
 const errorNames = [
   'Bug-Body Technique',
@@ -40,7 +40,7 @@ class ErrorBoundary extends React.Component<Props, State> {
         <div>
           <Typography variant="h6">{sample(errorNames)}</Typography>
           <Typography>Something went wrong.</Typography>
-          <Typography>{error && error.message}</Typography>
+          <Typography>{error?.message}</Typography>
         </div>
       )
     }

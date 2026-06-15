@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
 import { Drawer, Hidden, type Theme } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { compose } from 'recompose'
 
+import type { State } from '@lca/ducks'
+import { getCurrentPlayer } from '@lca/ducks/entities'
 import { closeDrawer } from '@lca/features/drawerSlice'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import { getCurrentPlayer } from 'ducks/entities'
 import { drawerWidth } from '../../containers/_drawerProperties'
 import NavPanel from './NavPanel'
-import type { State } from 'ducks'
-import { compose } from 'recompose'
 
 // Shamelessly stolen from the material-ui drawer demo
 

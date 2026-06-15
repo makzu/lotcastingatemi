@@ -1,9 +1,9 @@
 import createCachedSelector from 're-reselect'
 import { createSelector } from 'reselect'
-import type { Character, Spell } from 'types'
-import { sortOrderSort } from 'utils'
 
 import type { RootState } from '@lca/store'
+import type { Character, Spell } from '@lca/types'
+import { sortOrderSort } from '@lca/utils'
 import { exaltTypeBase, mobilityPenalty, woundPenalty } from 'utils/calculated/'
 import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
 import * as pools from 'utils/calculated/pools'

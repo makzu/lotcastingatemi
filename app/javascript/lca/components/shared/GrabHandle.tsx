@@ -1,9 +1,7 @@
-import React from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
-
-import { Theme } from '@material-ui/core'
+import type { Theme } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
-import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles((theme: Theme) => ({
   handle: {
@@ -13,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const Handle = () => {
-  const classes = useStyles({})
+  const classes = useStyles()
   return (
     <div className={classes.handle}>
       <DragHandleIcon />

@@ -1,7 +1,4 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
 import {
   Button,
   Dialog,
@@ -12,9 +9,9 @@ import {
 } from '@material-ui/core'
 import { Help as HelpIcon } from '@material-ui/icons'
 
+import { useDialogLogic } from '@lca/hooks'
+import type { Character } from '@lca/types'
 import ListAttributeEditor from 'components/generic/ListAttributeEditor'
-import { useDialogLogic } from 'hooks'
-import { Character } from 'types'
 import AnimalFormFields from './AnimalFormFields'
 import animalFormsList from './AnimalFormsList'
 

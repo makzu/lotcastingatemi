@@ -1,6 +1,5 @@
 import { type ChangeEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
-
 import {
   Box,
   Button,
@@ -13,9 +12,11 @@ import {
   Typography,
 } from '@material-ui/core'
 import { ExpandLess, ExpandMore, Help } from '@material-ui/icons'
+import { deepEqual } from 'fast-equals'
 
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import type { Character } from '@lca/types'
 import WeaponPoolDisplay from 'components/characters/weapons/WeaponPoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
@@ -25,8 +26,6 @@ import WeightSelect from 'components/shared/selects/WeightSelect'
 import { getSpecificWeapon, updateWeapon } from 'ducks/entities'
 import WeaponAbilitySelect from './WeaponAbilitySelect'
 import WeaponOverrides from './WeaponOverrides'
-import { deepEqual } from 'fast-equals'
-import type { Character } from 'types'
 
 interface Props {
   character: Character

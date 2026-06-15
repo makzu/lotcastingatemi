@@ -1,5 +1,4 @@
-import * as React from 'react'
-
+import type * as React from 'react'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'

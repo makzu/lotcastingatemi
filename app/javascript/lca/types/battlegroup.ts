@@ -1,6 +1,6 @@
-import { QcStats } from './qc'
-import { WithCombatStats } from './shared'
-import { PlayerAsset } from './_lib'
+import type { PlayerAsset } from './_lib'
+import type { QcStats } from './qc'
+import type { WithCombatStats } from './shared'
 
 export interface Battlegroup extends PlayerAsset, QcStats, WithCombatStats {
   type: 'battlegroup'

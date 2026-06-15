@@ -1,15 +1,26 @@
 // @flow
-import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
+import {
+  canIEditCharacter,
+  getMeritsForCharacter,
+  getPenalties,
+  getPoolsAndRatings,
+} from 'selectors'
 
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { getWeaponsForCharacter } from 'ducks/entities/weapon'
+import { getSpecificCharacter } from 'ducks/selectors'
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
+import BlockPaper from '../generic/blockPaper.jsx'
+import RatingLine from '../generic/ratingLine.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
 import AbilityBlock from './blocks/abilityBlock.jsx'
 import ArmorSummary from './blocks/armorSummary.jsx'
 import AttributeBlock from './blocks/attributeBlock.jsx'
@@ -22,19 +33,6 @@ import SocialBlock from './blocks/socialBlock.jsx'
 import SpecialtyBlock from './blocks/specialtyBlock.jsx'
 import WeaponSummaryBlock from './blocks/weaponSummaryBlock.jsx'
 
-import BlockPaper from '../generic/blockPaper.jsx'
-import RatingLine from '../generic/ratingLine.jsx'
-import SpendableBlock from '../generic/SpendableBlock.jsx'
-
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getSpecificCharacter } from 'ducks/selectors'
-import { getWeaponsForCharacter } from 'ducks/entities/weapon'
-import {
-  canIEditCharacter,
-  getPenalties,
-  getPoolsAndRatings,
-  getMeritsForCharacter,
-} from 'selectors'
 import type {
   Character,
   fullMerit as Merit,

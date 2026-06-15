@@ -34,5 +34,5 @@ RSpec.describe AlchemicalCharacter do
     end
   end
 
-  include_examples 'convertable_character', :alchemical_character
+  it_behaves_like 'convertable_character', :alchemical_character
 end

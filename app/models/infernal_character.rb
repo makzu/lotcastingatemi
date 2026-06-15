@@ -124,7 +124,7 @@ class InfernalCharacter < Character
     if caste_abilities.length < 5
       self.caste_abilities += [supernal_or_brawl]
     else
-      self.caste_abilities[4] = supernal_or_brawl
+      caste_abilities[4] = supernal_or_brawl
     end
   end
 

@@ -8,7 +8,7 @@
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/node:2": {},
     "ghcr.io/rails/devcontainer/features/postgres-client": {}
     // "ghcr.io/rails/devcontainer/features/activestorage": {},
     // "ghcr.io/rails/devcontainer/features/sqlite3": {}

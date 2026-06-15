@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true, // TODO: remove this once all "import React from 'react'" statements are removed
-    "baseUrl": "app/javascript/lca",
     "paths": {
-      "@lca/*": ["*"],
-      "Docs": ["../../../docs"],
-      "Locales": ["../../../locales"]
+      "@lca/*": ["./app/javascript/lca/*"],
+      "components/*": ["./app/javascript/lca/components/*"],
+      "containers/*": ["./app/javascript/lca/containers/*"],
+      "ducks": ["./app/javascript/lca/ducks"],
+      "ducks/*": ["./app/javascript/lca/ducks/*"],
+      "hooks": ["./app/javascript/lca/hooks"],
+      "selectors": ["./app/javascript/lca/selectors"],
+      "styles": ["./app/javascript/lca/styles"],
+      "types": ["./app/javascript/lca/types"],
+      "utils": ["./app/javascript/lca/utils"],
+      "Docs": ["./docs"],
+      "Locales": ["./locales"]
     },
     "declaration": false,
     "emitDecoratorMetadata": true,

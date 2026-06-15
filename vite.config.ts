@@ -33,6 +33,7 @@ export default defineConfig({
       icons: resolve(__dirname, 'app/javascript/lca/icons'),
       selectors: resolve(__dirname, 'app/javascript/lca/selectors'),
       styles: resolve(__dirname, 'app/javascript/lca/styles'),
+      types: resolve(__dirname, 'app/javascript/lca/types'),
       utils: resolve(__dirname, 'app/javascript/lca/utils'),
     },
   },

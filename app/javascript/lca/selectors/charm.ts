@@ -1,4 +1,4 @@
-import createCachedSelector from 're-reselect'
+import { createCachedSelector } from 're-reselect'
 
 import type { RootState } from '@lca/store'
 import type { Charm, Spell } from '@lca/types/traits'

@@ -13,7 +13,7 @@
     "deepmerge": "^4.3.1",
     "fast-equals": "^2.0.4",
     "normalizr": "^3.6.2",
-    "re-reselect": "^3.4.0",
+    "re-reselect": "^4.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-flip-move": "^3.0.5",
@@ -39,6 +39,7 @@
     "@material-ui/codemod": "^4.5.1",
     "@redux-devtools/extension": "^4.0.0",
     "@reduxjs/rtk-codemods": "0.0.3",
+    "@rolldown/plugin-transform-imports": "^0.1.1",
     "@types/node": "24.13.2",
     "@types/rails__actioncable": "^8.0.3",
     "@types/react": "^18.3.31",
@@ -49,16 +50,15 @@
     "@types/redux-actions": "^2.6.5",
     "@types/redux-api-middleware": "^3.2.7",
     "@types/redux-optimistic-ui": "^0.4.14",
-    "@vitejs/plugin-react": "^5.1.4",
-    "@vitejs/plugin-react-swc": "^4.3.1",
+    "@vitejs/plugin-react": "^6.0.2",
     "cypress": "^12.17.4",
     "flow-bin": "^0.122.0",
-    "knip": "^6.16.1",
+    "knip": "^6.17.1",
     "react-test-renderer": "^18.3.1",
-    "vite": "^7.3.5",
+    "vite": "^8.0.16",
     "vite-plugin-rails": "^0.6.0",
     "vite-plugin-ruby": "^5.2.2",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   },
   "resolutions": {
     "@types/react": "^18.3.28"

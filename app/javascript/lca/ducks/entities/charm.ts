@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import createCachedSelector from 're-reselect'
+import { createCachedSelector } from 're-reselect'
 
 import type { RootState } from '@lca/store'
 import type { Charm } from '@lca/types'

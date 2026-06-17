@@ -23,11 +23,11 @@ export const [createMerit, updateMerit, destroyMerit] =
 
 import type { State } from 'ducks'
 /* Selectors */
-import createCachedSelector from 're-reselect'
+import { createCachedSelector } from 're-reselect'
 
+import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { getSpecificCharacter } from './character'
-import { sortOrderSort } from 'utils'
 
 const getMerits = (state: State) => unwrapped(state).merits
 

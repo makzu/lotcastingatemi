@@ -1,15 +1,53 @@
 import { resolve } from 'node:path'
 
-import { esbuildFlowPlugin, flowPlugin } from '@bunchtogether/vite-plugin-flow'
-import React from '@vitejs/plugin-react-swc'
+import { flowPlugin } from '@bunchtogether/vite-plugin-flow'
+import transformImports from '@rolldown/plugin-transform-imports'
+import React from '@vitejs/plugin-react'
 import Rails from 'vite-plugin-rails'
 import { defineConfig } from 'vitest/config'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   assetsInclude: ['**/*.md'],
+  legacy: {
+    inconsistentCjsInterop: true,
+  },
+  build: {
+    rolldownOptions: {
+      // lazyBarrel seems like it'd be helpful, but it breaks parts of material-ui
+      // experimental: { lazyBarrel: true },
+      plugins: [
+        transformImports({
+          '@material-ui/core': {
+            transform: [
+              ['styles', '@material-ui/core/styles'],
+              ['*', '@material-ui/core/{{member}}'],
+            ],
+          },
+          '@material-ui/icons': {
+            transform: '@material-ui/icons/esm/{{member}}',
+          },
+        }),
+      ],
+    },
+    sourcemap: mode === 'development',
+  },
   optimizeDeps: {
-    esbuildOptions: {
-      plugins: [esbuildFlowPlugin()],
+    rolldownOptions: {
+      // lazyBarrel seems like it'd be helpful, but it breaks parts of material-ui
+      // experimental: { lazyBarrel: true },
+      plugins: [
+        transformImports({
+          '@material-ui/core': {
+            transform: [
+              ['styles', '@material-ui/core/styles'],
+              ['*', '@material-ui/core/{{member}}'],
+            ],
+          },
+          '@material-ui/icons': {
+            transform: '@material-ui/icons/esm/{{member}}',
+          },
+        }),
+      ],
     },
   },
   plugins: [
@@ -34,6 +72,8 @@ export default defineConfig({
       selectors: resolve(__dirname, 'app/javascript/lca/selectors'),
       styles: resolve(__dirname, 'app/javascript/lca/styles'),
       utils: resolve(__dirname, 'app/javascript/lca/utils'),
+      '@material-ui/core': '@material-ui/core/esm',
+      '@material-ui/icons': '@material-ui/icons/esm',
     },
   },
   test: {
@@ -43,4 +83,4 @@ export default defineConfig({
       include: ['app/javascript/lca/**/*.{ts,tsx}'],
     },
   },
-})
+}))

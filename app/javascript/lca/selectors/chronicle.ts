@@ -1,4 +1,4 @@
-import createCachedSelector from 're-reselect'
+import { createCachedSelector } from 're-reselect'
 
 import type { RootState } from '@lca/store'
 import { chronicleSortOrderSort } from '@lca/utils'

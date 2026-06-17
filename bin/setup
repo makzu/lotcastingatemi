@@ -15,7 +15,7 @@ FileUtils.chdir APP_ROOT do
 
   puts "== Installing dependencies =="
   system("bundle check") || system!("bundle install")
-  system! "corepack enable"
+  system! "corepack yarn"
   system! "yarn"
 
   # puts "\n== Copying sample files =="

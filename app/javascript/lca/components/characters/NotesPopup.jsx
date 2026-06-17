@@ -88,8 +88,8 @@ class NotesPopup extends React.Component<Props, State> {
                 margin="dense"
                 multiline
                 fullWidth
-                rows={5}
-                rowsMax={100}
+                minRows={5}
+                maxRows={100}
                 onChange={handleChange}
               />
             ) : (

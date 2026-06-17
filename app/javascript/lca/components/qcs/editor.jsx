@@ -1,34 +1,34 @@
 // @flow
-import { deepEqual } from 'fast-equals'
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
-import { withStyles } from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { deepEqual } from 'fast-equals'
+import { compose } from 'recompose'
+import { canIDeleteQc, getSpecificQc } from 'selectors'
+import commonStyles from 'styles'
 
-import QcActionEditor from './qcActionEditor.jsx'
-import QcAttackEditor from './qcAttackEditor.jsx'
-import QcCharmEditor from './qcCharmEditor.jsx'
-import QcExcellencySelect from './QcExcellencySelect.jsx'
-import QcMeritEditor from './qcMeritEditor.jsx'
-import QcSpellEditor from './QcSpellEditor'
+import AuraSelect from 'components/shared/selects/AuraSelect'
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { updateQc } from 'ducks/actions.ts'
+import { woundPenalty } from 'utils/calculated'
 import AnimaSelect from '../generic/AnimaSelect.jsx'
 import BlockPaper from '../generic/blockPaper.jsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.jsx'
 import IntimacyEditor from '../generic/intimacyEditor.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
-import AuraSelect from 'components/shared/selects/AuraSelect'
+import QcExcellencySelect from './QcExcellencySelect.jsx'
+import QcSpellEditor from './QcSpellEditor'
+import QcActionEditor from './qcActionEditor.jsx'
+import QcAttackEditor from './qcAttackEditor.jsx'
+import QcCharmEditor from './qcCharmEditor.jsx'
+import QcMeritEditor from './qcMeritEditor.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateQc } from 'ducks/actions.ts'
-import { getSpecificQc, canIDeleteQc } from 'selectors'
-import commonStyles from 'styles'
-import { woundPenalty } from 'utils/calculated'
 import type { fullQc, Enhancer } from 'utils/flow-types'
 
 const styles = (theme) => ({
@@ -140,7 +140,7 @@ class QcEditor extends Component<Props> {
               multiline
               fullWidth
               onChange={handleChange}
-              rowsMax={5}
+              maxRows={5}
             />
 
             <TextField

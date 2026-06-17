@@ -1,18 +1,19 @@
 // @flow
-import { deepEqual } from 'fast-equals'
+
 import React from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
-
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
+import { deepEqual } from 'fast-equals'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
+import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
+
 import type { QcCharm } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
@@ -112,7 +113,7 @@ export default class QcCharmFields extends React.Component<Props> {
           onChange={handleChange}
           fullWidth
           multiline
-          rowsMax={5}
+          maxRows={5}
         />
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <TextField

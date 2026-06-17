@@ -1,16 +1,17 @@
 // @flow
-import { deepEqual } from 'fast-equals'
+
 import React from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
-
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
+import { deepEqual } from 'fast-equals'
 
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import Checkbox from 'components/shared/inputs/Checkbox'
 import TextField from 'components/generic/TextField.jsx'
+import Checkbox from 'components/shared/inputs/Checkbox'
+
 import type { QcMerit } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
@@ -76,7 +77,7 @@ export default class QcMeritFields extends React.Component<Props> {
           onChange={handleChange}
           fullWidth={true}
           multiline
-          rowsMax={5}
+          maxRows={5}
         />
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <TextField

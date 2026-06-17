@@ -88,8 +88,8 @@ const QcSpellFields = ({
         fullWidth
         label="Effect"
         margin="dense"
-        rows={2}
-        rowsMax={15}
+        minRows={2}
+        maxRows={15}
       />
 
       <div className={classes.flexContainer}>

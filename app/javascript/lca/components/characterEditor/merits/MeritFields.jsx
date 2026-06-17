@@ -1,7 +1,10 @@
 // @flow
-import { deepEqual } from 'fast-equals'
+
 import * as React from 'react'
+import { deepEqual } from 'fast-equals'
+
 const { Component } = React
+
 import { SortableHandle } from 'react-sortable-hoc'
 
 import Button from '@material-ui/core/Button'
@@ -13,12 +16,12 @@ import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
-import MeritEffectBlurb from './MeritEffectBlurb.jsx'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
+import { MERIT_RATING_MAX, MERIT_RATING_MIN } from 'utils/constants.ts'
+import MeritEffectBlurb from './MeritEffectBlurb.jsx'
 
-import { MERIT_RATING_MIN, MERIT_RATING_MAX } from 'utils/constants.ts'
 import type { fullMerit as Merit } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
@@ -129,7 +132,7 @@ class MeritFields extends Component<FieldsProps> {
             margin="dense"
             multiline
             fullWidth
-            rowsMax={10}
+            maxRows={10}
             onChange={handleChange}
           />
         </div>

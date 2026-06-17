@@ -66,8 +66,8 @@ class BioEditor extends Component<Props> {
                 margin="dense"
                 multiline
                 fullWidth
-                rows={2}
-                rowsMax={100}
+                minRows={2}
+                maxRows={100}
                 onChange={handleChange}
               />
 
@@ -143,8 +143,8 @@ class BioEditor extends Component<Props> {
                 margin="dense"
                 multiline
                 fullWidth
-                rows={2}
-                rowsMax={100}
+                minRows={2}
+                maxRows={100}
                 onChange={handleChange}
               />
 
@@ -156,8 +156,8 @@ class BioEditor extends Component<Props> {
                 margin="dense"
                 multiline
                 fullWidth
-                rows={2}
-                rowsMax={100}
+                minRows={2}
+                maxRows={100}
                 onChange={handleChange}
               />
             </BlockPaper>

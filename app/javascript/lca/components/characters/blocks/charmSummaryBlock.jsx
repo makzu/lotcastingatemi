@@ -2,21 +2,21 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
 
+import { getSpellsForCharacter } from '@lca/ducks/entities'
+import {
+  getEvocationsForCharacter,
+  getMartialArtsCharmsForCharacter,
+  getNativeCharmsForCharacter,
+  getSpiritCharmsForCharacter,
+} from '@lca/selectors'
 import BlockPaper from 'components/generic/blockPaper.jsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay'
-import {
-  getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter,
-  getEvocationsForCharacter,
-  getSpiritCharmsForCharacter,
-  getSpellsForCharacter,
-} from 'selectors'
+
 import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
 
 const styles = (theme) => ({

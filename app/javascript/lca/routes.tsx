@@ -21,11 +21,7 @@ const BattlegroupList = lazy(
 const CharacterSheetWrap = lazy(() => import('components/CharacterSheet/'))
 
 const CharacterEditor = lazy(
-  () => import('components/characterEditor/CharacterEditorWrapper.jsx'),
-)
-
-const CharmEditor = lazy(
-  () => import('components/characters/charms/CharmEditor'),
+  () => import('components/characterEditor/CharacterEditorWrapper.tsx'),
 )
 
 const QcSheet = lazy(() => import('components/qcs/index.jsx'))
@@ -56,11 +52,6 @@ export default function Routes() {
         <Route path="/help" component={HelpPage} />
 
         <Route path="/chronicles/:chronicleId" component={ChronicleWrapper} />
-
-        <Route
-          path="/characters/:characterId/edit/charms"
-          component={CharmEditor}
-        />
 
         <Route
           path="/characters/:characterId/edit"

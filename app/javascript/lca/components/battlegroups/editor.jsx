@@ -1,27 +1,29 @@
 // @flow
-import { deepEqual } from 'fast-equals'
-import * as React from 'react'
-const { Component } = React
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles'
+import * as React from 'react'
+import { deepEqual } from 'fast-equals'
+
+const { Component } = React
+
+import { connect } from 'react-redux'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MenuItem from '@material-ui/core/MenuItem'
+import { withStyles } from '@material-ui/core/styles'
 import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import { compose } from 'recompose'
+import { canIDeleteBattlegroup, getSpecificBattlegroup } from 'selectors'
+import commonStyles from 'styles'
 
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { updateBattlegroup } from 'ducks/actions.ts'
+import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import BlockPaper from '../generic/blockPaper.jsx'
 import RatingField from '../generic/RatingField.jsx'
 import TextField from '../generic/TextField.jsx'
 import QcAttackEditor from '../qcs/qcAttackEditor.jsx'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup } from 'ducks/actions.ts'
-import { getSpecificBattlegroup, canIDeleteBattlegroup } from 'selectors'
-import commonStyles from 'styles'
-import { bgDefenseBonus, bgSoak, totalMagnitude } from 'utils/calculated/'
 import type { Battlegroup } from 'utils/flow-types'
 
 const styles = (theme) => ({
@@ -129,7 +131,7 @@ class BattlegroupEditor extends Component<Props> {
           margin="dense"
           multiline
           fullWidth
-          rowsMax={5}
+          maxRows={5}
           onChange={handleChange}
         />
         <TextField

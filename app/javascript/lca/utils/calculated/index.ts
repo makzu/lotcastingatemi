@@ -187,6 +187,29 @@ export function mobilityPenalty(character: Character) {
   }
 }
 
+export const nativeCharmType = (character: Character) => {
+  switch (character.type) {
+    case 'SolarCharacter':
+    case 'DragonbloodCharacter':
+    case 'SiderealCharacter':
+    case 'AbyssalCharacter':
+    case 'InfernalCharacter':
+    case 'CustomAbilityCharacter':
+      return 'Charms::AbilityCharm'
+
+    case 'LunarCharacter':
+    case 'AlchemicalCharacter':
+    case 'CustomAttributeCharacter':
+      return 'Charms::AttributeCharm'
+
+    case 'CustomEssenceCharacter':
+      return 'Charms::EssenceCharm'
+
+    default:
+      return ''
+  }
+}
+
 export const isCustomCharacter = (character: Character) =>
   character.type === 'CustomAbilityCharacter' ||
   character.type === 'CustomAttributeCharacter' ||
@@ -197,6 +220,9 @@ export const showAuraTraits = (character: Character) =>
 
 export const showLunarTraits = (character: Character) =>
   character.type === 'LunarCharacter' || isCustomCharacter(character)
+
+export const showLoadoutTraits = (character: Character) =>
+  character.type === 'AlchemicalCharacter' || isCustomCharacter(character)
 
 export const isCasteAbility = (character: Character, ability: Ability) =>
   character.caste_abilities?.includes(ability)

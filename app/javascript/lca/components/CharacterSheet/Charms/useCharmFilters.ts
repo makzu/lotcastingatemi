@@ -10,7 +10,7 @@ export interface CharmFilter {
   hidePerilous: boolean
   keyword: Charm['keywords']
   keywordInclusive: boolean
-  loadout: Charm['loadouts']
+  loadout: NonNullable<Charm['loadouts']>
   loadoutInclusive: boolean
   muteOnly: boolean
   timing: Timing[]
@@ -86,15 +86,15 @@ export const filterCharms = (
   }
 
   if (type === 'native' && filters.loadout.length > 0) {
-    theCharms = (theCharms as Charm[]).filter((charm) =>
+    theCharms = (<Charm[]>theCharms).filter((charm) =>
       filters.loadoutInclusive
-        ? filters.loadout.some((cat) => charm.loadouts.includes(cat))
-        : filters.loadout.every((cat) => charm.loadouts.includes(cat)),
+        ? filters.loadout.some((cat) => charm?.loadouts?.includes(cat))
+        : filters.loadout.every((cat) => charm?.loadouts?.includes(cat)),
     )
   }
 
   if (type === 'native' && filters.ability.length > 0) {
-    theCharms = (theCharms as Charm[]).filter((charm) =>
+    theCharms = (<Charm[]>theCharms).filter((charm) =>
       filters.ability.includes(charm.ability),
     )
   }

@@ -2,7 +2,6 @@ import { createAction } from '@reduxjs/toolkit'
 import { createCachedSelector } from 're-reselect'
 
 import type { RootState } from '@lca/store'
-import type { Charm } from '@lca/types'
 import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
@@ -102,10 +101,7 @@ export const getAllCharmCategoriesForCharacter = createCachedSelector(
   [getAllCharmsForCharacter],
   (charms) => {
     const ch = charms
-      .reduce(
-        (a: Charm['categories'], charm) => Object.assign(a, charm.categories),
-        [],
-      )
+      .flatMap((ch) => ch.categories)
       .concat(['Attack', 'Defense', 'Social'])
       .sort()
 
@@ -116,11 +112,18 @@ export const getAllCharmCategoriesForCharacter = createCachedSelector(
 export const getAllCharmKeywordsForCharacter = createCachedSelector(
   [getAllCharmsForCharacter],
   (charms) => {
+    const ch = charms.flatMap((ch) => ch.keywords).sort()
+
+    return [...new Set(ch)]
+  },
+)(idMemoizer)
+
+export const getAllCharmLoadoutsForCharacter = createCachedSelector(
+  [getAllCharmsForCharacter, getSpecificCharacter],
+  (charms, character) => {
     const ch = charms
-      .reduce(
-        (a: Charm['keywords'], charm) => Object.assign(a, charm.keywords),
-        [],
-      )
+      .flatMap((ch) => ch?.loadouts)
+      .concat(character.current_loadout ?? 'Default')
       .sort()
 
     return [...new Set(ch)]

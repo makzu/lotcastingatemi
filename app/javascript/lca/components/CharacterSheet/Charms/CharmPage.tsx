@@ -1,10 +1,7 @@
 import { useReducer } from 'react'
-import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
-import Grid from '@material-ui/core/Grid'
+import { Button, Divider, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import FilterIcon from '@material-ui/icons/FilterList'
+import { FilterList } from '@material-ui/icons'
 
 import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer'
 import { getSpecificCharacter } from '@lca/ducks/entities'
@@ -15,10 +12,10 @@ import {
   useIdFromParams,
 } from '@lca/hooks'
 import CharacterLoadError from '../CharacterLoadError'
+import SpellList from '../Sorcery/SpellList.tsx'
 import CharmFilter from './CharmFilter/'
-import CharmList from './CharmList'
-import SpellList from './SpellList'
-import { initialFilters, reducer } from './useCharmFilters'
+import CharmList from './CharmList.tsx'
+import { initialFilters, reducer } from './useCharmFilters.ts'
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -55,7 +52,7 @@ const CharmPage = () => {
     <Button
       onClick={filtersOpen ? setClosed : setOpen}
       className={classes.filterButton}
-      endIcon={<FilterIcon />}
+      endIcon={<FilterList />}
     >
       Filter
     </Button>
@@ -81,6 +78,7 @@ const CharmPage = () => {
             <Typography>Character has no Charms.</Typography>
           </Grid>
         )}
+
         {character.charms.length > 0 && (
           <>
             <Grid item xs={12} className={classes.stickyHeader}>
@@ -93,6 +91,7 @@ const CharmPage = () => {
             <Divider className={classes.divider} />
           </>
         )}
+
         {character.martial_arts_charms.length > 0 && (
           <>
             <Grid item xs={12} className={classes.stickyHeader}>
@@ -105,6 +104,7 @@ const CharmPage = () => {
             <Divider className={classes.divider} />
           </>
         )}
+
         {character.evocations.length > 0 && (
           <>
             <Grid item xs={12} className={classes.stickyHeader}>
@@ -117,6 +117,7 @@ const CharmPage = () => {
             <Divider className={classes.divider} />
           </>
         )}
+
         {character.spirit_charms.length > 0 && (
           <>
             <Grid item xs={12} className={classes.stickyHeader}>
@@ -128,6 +129,7 @@ const CharmPage = () => {
             <CharmList type="spirit" id={id} filters={filters} />
           </>
         )}
+
         {character.spells.length > 0 && (
           <>
             <Grid item xs={12} className={classes.stickyHeader}>

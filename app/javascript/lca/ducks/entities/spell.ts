@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit'
 import { createCachedSelector } from 're-reselect'
 
 import type { RootState } from '@lca/store'
+import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
 import type { EntityState } from './_types'
@@ -31,7 +32,9 @@ const getSpells = (state: RootState) => unwrapped(state).spells
 export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>
-    character == null ? [] : character.spells.map((s) => spells[s]),
+    character == null
+      ? []
+      : character.spells.map((s) => spells[s]).sort(sortOrderSort),
 )((_state, id) => id)
 
 export const getSpellsForQc = createCachedSelector(

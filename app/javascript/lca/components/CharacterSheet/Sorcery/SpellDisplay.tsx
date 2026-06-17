@@ -1,12 +1,10 @@
-import * as React from 'react'
-
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
+import type { Spell } from '@lca/types'
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
 import SecondaryInfo from 'components/shared/SecondaryInfo'
-import { Spell } from 'types'
 
 const useStyles = makeStyles({
   capitalize: {
@@ -17,6 +15,8 @@ const useStyles = makeStyles({
 interface Props {
   spell: Spell
 }
+
+export const SpellSummaryBlock = () => <></>
 
 const SpellDisplay = ({ spell }: Props) => {
   const classes = useStyles()

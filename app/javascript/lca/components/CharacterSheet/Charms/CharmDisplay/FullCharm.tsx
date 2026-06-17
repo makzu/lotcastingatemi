@@ -1,4 +1,4 @@
-import Accordion from '@material-ui/core/Accordion'
+import Accordion, { type AccordionProps } from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import { makeStyles } from '@material-ui/core/styles'
@@ -10,6 +10,14 @@ import type { Charm } from '@lca/types'
 import AbbreviatedCharmSummary from './AbbreviatedCharmSummary'
 
 const useStyles = makeStyles((_theme) => ({
+  summary: {
+    alignItems: 'flex-start',
+  },
+  summaryButton: {
+    '&.Mui-expanded': {
+      marginRight: '-0.5em',
+    },
+  },
   expandedSummary: {
     marginBottom: '-20px',
   },
@@ -24,7 +32,7 @@ interface Props {
 const FullCharmDisplay = ({ charm, isOpen, setOpenCharm }: Props) => {
   const classes = useStyles()
   const id = `charm-accordion-${charm.id}`
-  const handleChange = (_event: React.ChangeEvent, isExpanded: boolean) => {
+  const handleChange: AccordionProps['onChange'] = (_e, isExpanded) => {
     setOpenCharm(isExpanded ? charm.id : 0)
   }
 
@@ -38,7 +46,11 @@ const FullCharmDisplay = ({ charm, isOpen, setOpenCharm }: Props) => {
         expandIcon={<ExpandMore />}
         id={`${id}-header`}
         aria-controls={`${id}-content`}
-        classes={{ expanded: classes.expandedSummary }}
+        classes={{
+          root: classes.summary,
+          expanded: classes.expandedSummary,
+          expandIcon: classes.summaryButton,
+        }}
       >
         <div>
           <Typography variant="h6">{charm.name}</Typography>
@@ -48,7 +60,7 @@ const FullCharmDisplay = ({ charm, isOpen, setOpenCharm }: Props) => {
 
       <AccordionDetails>
         <div>
-          <Typography>
+          <Typography component="div">
             <div>
               <strong>Cost:</strong> {charm.cost};&nbsp;
               <strong>Mins:</strong>&nbsp;

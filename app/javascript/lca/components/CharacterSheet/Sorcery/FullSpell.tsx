@@ -1,13 +1,16 @@
-import Accordion from '@material-ui/core/Accordion'
-import AccordionDetails from '@material-ui/core/AccordionDetails'
-import AccordionSummary from '@material-ui/core/AccordionSummary'
-import Collapse from '@material-ui/core/Collapse'
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+} from '@material-ui/core'
+import type { AccordionProps } from '@material-ui/core/Accordion'
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import ExpandMore from '@material-ui/icons/ExpandMore'
+import { ExpandMore } from '@material-ui/icons'
 
-import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import type { Spell } from '@lca/types'
+import SpellSummaryBlock from './SpellSummaryBlock'
 
 const useStyles = makeStyles((_theme) => ({
   expandedSummary: {
@@ -24,7 +27,7 @@ interface Props {
 const FullSpellDisplay = ({ spell, isOpen, setOpenSpell }: Props) => {
   const classes = useStyles()
   const id = `spell-accordion-${spell.id}`
-  const handleChange = (_event: React.ChangeEvent, isExpanded: boolean) => {
+  const handleChange: AccordionProps['onChange'] = (_e, isExpanded) => {
     setOpenSpell(isExpanded ? spell.id : 0)
   }
 
@@ -42,27 +45,13 @@ const FullSpellDisplay = ({ spell, isOpen, setOpenSpell }: Props) => {
       >
         <div>
           <Typography variant="h6">{spell.name}</Typography>
-          {spell.control && (
-            <Typography variant="caption">Control Spell</Typography>
-          )}
-          <Collapse in={!isOpen}>
-            <Typography variant="caption" className="capitalize">
-              {spell.cost}, {spell.duration}
-            </Typography>
-            <MarkdownDisplay
-              source={
-                spell.body.substring(0, 200) +
-                (spell.body.length > 200 ? '...' : '')
-              }
-              noBlocks
-            />
-          </Collapse>
+          <SpellSummaryBlock spell={spell} isOpen={isOpen} />
         </div>
       </AccordionSummary>
 
       <AccordionDetails>
         <div>
-          <Typography>
+          <Typography component="div">
             <div>
               <strong>Circle:</strong>&nbsp;
               <span className="capitalize">{spell.circle}</span>

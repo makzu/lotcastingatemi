@@ -1,15 +1,14 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { compose } from 'recompose'
+import { getAttacksForBattlegroup, getSpecificBattlegroup } from 'selectors'
+import sharedStyles from 'styles/'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
-import { getAttacksForBattlegroup, getSpecificBattlegroup } from 'selectors'
-import sharedStyles from 'styles/'
 import {
   bgAttackPool,
   bgDamage,
@@ -17,9 +16,11 @@ import {
   bgSoak,
   prettyDrillRating,
 } from 'utils/calculated'
+
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
+
 import BlockPaper from '../generic/blockPaper.jsx'
-import MarkdownDisplay from '../generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from '../generic/MarkdownDisplay.tsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.jsx'

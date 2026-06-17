@@ -15,7 +15,7 @@ import {
 
 import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import BlockPaper from 'components/generic/blockPaper.jsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateChronicle } from 'ducks/actions.ts'

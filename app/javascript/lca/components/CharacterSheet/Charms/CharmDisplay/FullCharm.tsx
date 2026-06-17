@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 
-import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import type { Charm } from '@lca/types'
 import AbbreviatedCharmSummary from './AbbreviatedCharmSummary'
 

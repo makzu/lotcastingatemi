@@ -1,16 +1,9 @@
 import Collapse from '@material-ui/core/Collapse'
-import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.jsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import type { Charm } from '@lca/types'
 import { PrereqSummaryLine } from './PrereqSummaryLine'
-
-const useStyles = makeStyles({
-  capitalize: {
-    textTransform: 'capitalize',
-  },
-})
 
 type BlockProps = { charm: Charm; isOpen: boolean }
 const CharmSummaryBlock = ({ charm, isOpen }: BlockProps) => {

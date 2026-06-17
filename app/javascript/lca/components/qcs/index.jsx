@@ -1,31 +1,30 @@
 // @flow
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-
-import BlockPaper from '../generic/blockPaper.jsx'
-import PoolDisplay from '../generic/PoolDisplay.jsx'
-import SpendableBlock from '../generic/SpendableBlock.jsx'
-import MarkdownDisplay, {
-  LinkRenderer,
-} from 'components/generic/MarkdownDisplay.jsx'
+import {
+  canIEditQc,
+  getAttacksForQc,
+  getCharmsForQc,
+  getMeritsForQc,
+  getPenaltiesForQc,
+  getPoolsAndRatingsForQc,
+  getSpecificQc,
+} from 'selectors'
 import sharedStyles from 'styles/'
 
+import MarkdownDisplay, {
+  LinkRenderer,
+} from 'components/generic/MarkdownDisplay.tsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchQcIfNecessary } from 'ducks/entities/qc'
 import { getSpellsForQc } from 'ducks/selectors'
-import {
-  canIEditQc,
-  getSpecificQc,
-  getAttacksForQc,
-  getMeritsForQc,
-  getCharmsForQc,
-  getPenaltiesForQc,
-  getPoolsAndRatingsForQc,
-} from 'selectors'
 import { prettyIntimacyRating, qcPool } from 'utils/calculated'
+import BlockPaper from '../generic/blockPaper.jsx'
+import PoolDisplay from '../generic/PoolDisplay.jsx'
+import SpendableBlock from '../generic/SpendableBlock.jsx'
+
 import type { fullQc, QcMerit, QcAttack, QcCharm } from 'utils/flow-types'
 
 const styles = (theme) => ({

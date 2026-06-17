@@ -1,9 +1,7 @@
 // @flow
-import { deepEqual } from 'fast-equals'
+
 import React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -12,13 +10,15 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import { withStyles } from '@material-ui/core/styles'
 import DescriptionIcon from '@material-ui/icons/Description'
-
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
-import TextField from 'components/generic/TextField.jsx'
-
-import { updateCharacter } from 'ducks/actions.ts'
+import { deepEqual } from 'fast-equals'
+import { compose } from 'recompose'
 import { canIEditCharacter } from 'selectors'
 import commonStyles from 'styles'
+
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
+import TextField from 'components/generic/TextField.jsx'
+import { updateCharacter } from 'ducks/actions.ts'
+
 import type { Character } from 'utils/flow-types'
 
 const styles = (theme) => ({

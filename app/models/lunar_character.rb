@@ -69,6 +69,7 @@ class LunarCharacter < Character
     self.exalt_type = 'Lunar'
     self.aspect = false
     self.aura = ''
+    self.active_loadout = nil
     self.excellency = 'lunar'
     self.excellency_stunt = 'lunar'
     self.excellencies_for = ['lunar']

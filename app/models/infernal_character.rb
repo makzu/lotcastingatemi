@@ -72,6 +72,7 @@ class InfernalCharacter < Character
     self.exalt_type = 'Infernal'
     self.aspect = false
     self.aura = ''
+    self.active_loadout = nil
     self.excellency = 'solar'
     self.excellency_stunt = ''
     self.excellencies_for = ['solar']

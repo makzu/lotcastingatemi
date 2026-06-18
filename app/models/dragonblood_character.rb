@@ -65,6 +65,7 @@ class DragonbloodCharacter < Character
     self.exalt_type = 'Dragon-Blood'
     self.aspect = true
     remove_caste_and_favored_attributes
+    self.active_loadout = nil
     self.excellency = 'dragonblood'
     self.excellency_stunt = ''
     self.excellencies_for = ['dragonblood']

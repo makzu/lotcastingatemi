@@ -9,6 +9,7 @@ class AlchemicalCharacter < Character
   attribute :motes_peripheral_total,   :integer, default: 33
   attribute :motes_peripheral_current, :integer, default: 33
   attribute :exalt_type,               :string,  default: 'Alchemical'
+  attribute :active_loadout,           :string,  default: 'default'
 
   ALCHEMICAL_CASTES = %w[orichalcum jade moonsilver starmetal soulsteel adamant].freeze
   CASTE_ATTRIBUTES = {
@@ -36,6 +37,7 @@ class AlchemicalCharacter < Character
     new_cha.caste = '' unless ALCHEMICAL_CASTES.include? new_cha.caste
     new_cha.caste_attributes = new_cha.caste_attributes & (CASTE_ATTRIBUTES[new_cha.caste.to_sym] || [])
     new_cha.limit = 0 if new_cha.limit.blank?
+    new_cha.active_loadout = 'default'
 
     new_cha.save!
     (new_cha.ability_charms + new_cha.essence_charms).each do |charm|

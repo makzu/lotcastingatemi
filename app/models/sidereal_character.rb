@@ -66,6 +66,7 @@ class SiderealCharacter < Character
     self.exalt_type = 'Sidereal'
     self.aspect = false
     self.aura = ''
+    self.active_loadout = nil
     self.excellency = 'sidereal'
     self.excellency_stunt = ''
     self.excellencies_for = ['sidereal']

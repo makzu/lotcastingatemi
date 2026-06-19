@@ -2,6 +2,13 @@
 
 ###### _Unreleased_
 
+## v128
+
+- Fix logins not working (whoops)
+- Fix MA style and Artifact fields not appearing in the Charm editor (Thanks, Tuskface!)
+
+###### _June 18, 2026_
+
 ## v125
 
 ###### _June 18, 2026_

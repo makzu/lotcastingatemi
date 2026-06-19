@@ -8,9 +8,10 @@ class Identity < ApplicationRecord
     iden = find_or_initialize_by(uid: auth['uid'], provider: auth['provider'])
     iden.email = auth['info']['email']
     iden.image = auth['info']['image']
-    iden.token = auth['credentials']['token']
-    iden.expires_at = Time.at(auth['credentials']['expires_at']).utc
-
+    if auth.credentials.present?
+      iden.token = auth['credentials']['token']
+      iden.expires_at = Time.at(auth['credentials']['expires_at'] || 0).utc
+    end
     iden.player ||= Player.find_or_create_from_oauth(auth)
 
     iden.save

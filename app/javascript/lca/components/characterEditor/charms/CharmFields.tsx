@@ -159,6 +159,30 @@ const CharmFields = (props: Props) => {
             }}
           />
         </div>
+        {charm.charm_type === 'Evocation' && (
+          <div>
+            <TextField
+              name="artifact_name"
+              value={charm.artifact_name ?? ''}
+              onChange={handleChange}
+              label="Artifact Name"
+              margin="dense"
+              fullWidth
+            />
+          </div>
+        )}
+        {charm.charm_type === 'MartialArts' && (
+          <div>
+            <TextField
+              name="style"
+              value={charm.style ?? ''}
+              onChange={handleChange}
+              label="Style"
+              margin="dense"
+              fullWidth
+            />
+          </div>
+        )}
         <div>
           <CharmCategoryAutocomplete
             value={charm.categories}

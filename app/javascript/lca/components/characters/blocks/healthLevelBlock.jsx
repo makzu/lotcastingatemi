@@ -1,9 +1,8 @@
 // @flow
 import React from 'react'
-
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
 
 import type { withHealthLevels } from 'utils/flow-types'

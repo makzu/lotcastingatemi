@@ -1,22 +1,22 @@
 // @flow
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
 import { shouldUpdate } from 'recompose'
 
-import Typography from '@material-ui/core/Typography'
-
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
-import BlockPaper from 'components/generic/blockPaper'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import { isUnequalByKeys } from 'utils'
 import {
-  ABILITY_MAX as MAX,
-  ABILITY_MIN as MIN,
   ABILITIES,
   ABILITIES_ALL,
+  ABILITY_MAX as MAX,
+  ABILITY_MIN as MIN,
 } from 'utils/constants.ts'
+import { isUnequalByKeys } from 'utils'
+
 import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
 
 function AbilityField(props) {

@@ -1,8 +1,8 @@
 import { Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 import type { Spell } from '@lca/types'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
 import SecondaryInfo from 'components/shared/SecondaryInfo'
 

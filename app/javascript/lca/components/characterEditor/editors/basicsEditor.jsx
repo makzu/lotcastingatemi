@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { compose, shouldUpdate } from 'recompose'
 import { canIDeleteCharacter } from 'selectors'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { ESSENCE_MAX, ESSENCE_MIN } from 'utils/constants.ts'

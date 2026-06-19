@@ -1,5 +1,4 @@
 import type React from 'react'
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -10,16 +9,16 @@ import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import { getSpecificPlayer } from 'selectors'
 
 import { destroyAccount, updatePlayer } from '@lca/ducks/actions'
 import { type PaletteMode, switchTheme } from '@lca/features/themeSlice'
 import { useDialogLogic } from '@lca/hooks'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { getSpecificPlayer } from 'selectors'
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch()

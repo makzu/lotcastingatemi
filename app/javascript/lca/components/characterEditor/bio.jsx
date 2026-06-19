@@ -9,7 +9,7 @@ import { deepEqual } from 'fast-equals'
 import { compose } from 'recompose'
 
 import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import TextField from 'components/generic/TextField.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 import { updateCharacter } from 'ducks/actions.ts'

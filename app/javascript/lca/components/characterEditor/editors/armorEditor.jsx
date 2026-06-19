@@ -1,19 +1,19 @@
 // @flow
 import React from 'react'
-import { compose, shouldUpdate } from 'recompose'
-
-import { withStyles } from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { compose, shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import WeightSelect from 'components/shared/selects/WeightSelect'
 import { isUnequalByKeys } from 'utils'
+
 import type { withArmorStats as Character } from 'utils/flow-types'
 
 const styles = theme => ({

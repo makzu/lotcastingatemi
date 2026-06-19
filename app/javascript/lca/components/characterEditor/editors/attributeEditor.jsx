@@ -1,19 +1,18 @@
 // @flow
 import React from 'react'
-import { compose, shouldUpdate } from 'recompose'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { compose, shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import RatingField from 'components/generic/RatingField.jsx'
-
-import { isUnequalByKeys } from 'utils'
 import {
-  ATTRIBUTE_MIN as MIN,
-  ATTRIBUTE_MAX as MAX,
   ATTRIBUTES,
+  ATTRIBUTE_MAX as MAX,
+  ATTRIBUTE_MIN as MIN,
 } from 'utils/constants.ts'
+import { isUnequalByKeys } from 'utils'
+
 import type { withAttributes as Character } from 'utils/flow-types'
 
 const styles = (theme) => ({

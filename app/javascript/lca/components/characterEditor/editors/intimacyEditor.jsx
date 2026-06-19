@@ -1,12 +1,12 @@
 // @flow
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
 import { shouldUpdate } from 'recompose'
 
-import Typography from '@material-ui/core/Typography'
-
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import Editor from 'components/generic/intimacyEditor.jsx'
 import { isUnequalByKeys } from 'utils'
+
 import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
 
 type Props = {

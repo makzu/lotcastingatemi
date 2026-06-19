@@ -1,17 +1,17 @@
 // @flow
 import React from 'react'
+import MenuItem from '@material-ui/core/MenuItem'
 import { shouldUpdate } from 'recompose'
 
-import MenuItem from '@material-ui/core/MenuItem'
-
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import { isUnequalByKeys } from 'utils'
 import * as calc from 'utils/calculated'
+import { isUnequalByKeys } from 'utils'
+
 import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
 
 function SpecialtyFields(props: ListAttributeFieldTypes) {

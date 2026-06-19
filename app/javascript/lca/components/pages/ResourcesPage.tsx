@@ -1,6 +1,6 @@
 import React from 'react'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
 import ResourcesText from 'Docs/resources.md?raw'
 

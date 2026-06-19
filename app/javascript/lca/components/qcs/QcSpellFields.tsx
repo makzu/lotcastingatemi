@@ -5,7 +5,7 @@ import Delete from '@material-ui/icons/Delete'
 
 import type commonStyles from '@lca/styles'
 import type { Spell } from '@lca/types'
-import BlockPaper from 'components/generic/blockPaper'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import Checkbox from 'components/shared/inputs/Checkbox'

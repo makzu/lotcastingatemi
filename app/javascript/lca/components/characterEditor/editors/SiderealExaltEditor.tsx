@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography'
 
 import type { Character } from '@lca/types'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import { nonCasteAbilities } from 'utils/calculated'
 import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
 

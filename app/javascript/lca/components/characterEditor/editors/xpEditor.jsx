@@ -1,19 +1,19 @@
 // @flow
 import React, { Fragment } from 'react'
-import { compose, shouldUpdate } from 'recompose'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { compose, shouldUpdate } from 'recompose'
+import commonStyles from 'styles'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import commonStyles from 'styles'
+import { solarXpName, spentBp, spentSolarXp, spentXp } from 'utils/calculated'
 import { isUnequalByKeys } from 'utils'
-import { solarXpName, spentXp, spentSolarXp, spentBp } from 'utils/calculated'
+
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({

@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import type { Character } from '@lca/types/'
 import InfernalCasteSelect from 'components/characterEditor/exaltTraits/InfernalCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import { nonCasteAbilities } from 'utils/calculated'
 import { INFERNAL_CASTE_ABILITIES } from 'utils/constants'
 

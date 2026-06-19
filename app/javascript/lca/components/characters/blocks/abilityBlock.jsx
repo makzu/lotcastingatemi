@@ -1,14 +1,17 @@
 // @flow
 import * as React from 'react'
+
 const { Fragment } = React
 
-import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import RatingLine from 'components/generic/ratingLine.jsx'
+
 import type { Character } from 'utils/flow-types'
+
 import {
   isCasteAbility,
   isFavoredAbility,

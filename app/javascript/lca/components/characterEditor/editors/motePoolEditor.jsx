@@ -1,20 +1,20 @@
 // @flow
 import React, { Fragment } from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import commonStyles from 'styles'
 
-import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
 import AnimaSelect from 'components/generic/AnimaSelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import AuraSelect from 'components/shared/selects/AuraSelect'
-import commonStyles from 'styles'
 import {
-  committedPersonalMotes,
   committedPeripheralMotes,
+  committedPersonalMotes,
   showAuraTraits,
 } from 'utils/calculated'
+import MoteCommittmentEditor from './moteCommittmentEditor.jsx'
+
 import type { Character } from 'utils/flow-types'
 
 const styles = (theme) => ({

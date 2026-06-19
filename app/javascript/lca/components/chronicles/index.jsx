@@ -18,7 +18,7 @@ import {
 import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
 import CharacterCard from 'components/characters/CharacterCard.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import SortableGridList from 'components/generic/SortableGridList.tsx'
 import QcCard from 'components/qcs/QcCard.jsx'
 import ProtectedComponent from 'containers/ProtectedComponent'

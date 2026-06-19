@@ -132,5 +132,4 @@ const ShapeNecromancyWidget = ({ character, children, classes }: Props) => {
   )
 }
 
-// @ts-expect-error MUI v5 migration will fix this
 export default withStyles(styles)(ShapeNecromancyWidget)

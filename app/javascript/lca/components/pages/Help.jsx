@@ -2,7 +2,7 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
 import FormsDoc from 'Docs/forms.md?raw'
 import MeritsDoc from 'Docs/merits.md?raw'

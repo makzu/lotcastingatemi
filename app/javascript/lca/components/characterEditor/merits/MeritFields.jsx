@@ -6,7 +6,6 @@ import { deepEqual } from 'fast-equals'
 const { Component } = React
 
 import { SortableHandle } from 'react-sortable-hoc'
-
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -16,7 +15,7 @@ import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { MERIT_RATING_MAX, MERIT_RATING_MIN } from 'utils/constants.ts'

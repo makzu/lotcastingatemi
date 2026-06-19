@@ -19,7 +19,7 @@ import {
 
 import type { Battlegroup, QcAttack } from 'utils/flow-types'
 
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from '../generic/BlockPaper.tsx'
 import MarkdownDisplay from '../generic/MarkdownDisplay.tsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import ResourceDisplay from '../generic/ResourceDisplay.jsx'

@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-
-import ResourceEditor from './resourceEditor.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
 import commonStyles from 'styles'
+
+import BlockPaper from 'components/generic/BlockPaper.tsx'
+import RatingField from 'components/generic/RatingField.jsx'
 import { WILLPOWER_MAX } from 'utils/constants.ts'
+import ResourceEditor from './resourceEditor.jsx'
+
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, onChange: Function, classes: Object }

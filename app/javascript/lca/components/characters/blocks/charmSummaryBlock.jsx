@@ -14,7 +14,7 @@ import {
   getNativeCharmsForCharacter,
   getSpiritCharmsForCharacter,
 } from '@lca/selectors'
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 
 import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'

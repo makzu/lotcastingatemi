@@ -3,7 +3,7 @@ import { VisibilityOff } from '@material-ui/icons'
 
 import type { Character } from '@lca/types'
 import type { Intimacy } from '@lca/types/shared.js'
-import BlockPaper from '../../generic/blockPaper.jsx'
+import BlockPaper from '../../generic/BlockPaper.tsx'
 import RatingLine from '../../generic/ratingLine.jsx'
 
 interface Props {

@@ -21,7 +21,7 @@ import ProtectedComponent from 'containers/ProtectedComponent'
 import { fetchQcIfNecessary } from 'ducks/entities/qc'
 import { getSpellsForQc } from 'ducks/selectors'
 import { prettyIntimacyRating, qcPool } from 'utils/calculated'
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from '../generic/BlockPaper.tsx'
 import PoolDisplay from '../generic/PoolDisplay.jsx'
 import SpendableBlock from '../generic/SpendableBlock.jsx'
 

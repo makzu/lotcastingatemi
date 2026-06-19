@@ -21,12 +21,12 @@ export default defineConfig(({ command }) => ({
         transformImports({
           '@material-ui/core': {
             transform: [
-              ['styles', '@material-ui/core/styles'],
+              ['Styles', '@material-ui/core/styles'],
               ['*', '@material-ui/core/{{member}}'],
             ],
           },
           '@material-ui/icons': {
-            transform: '@material-ui/icons/esm/{{member}}',
+            transform: '@material-ui/icons/{{member}}',
           },
         }),
       ],
@@ -43,12 +43,12 @@ export default defineConfig(({ command }) => ({
         transformImports({
           '@material-ui/core': {
             transform: [
-              ['styles', '@material-ui/core/styles'],
+              ['Styles', '@material-ui/core/styles'],
               ['*', '@material-ui/core/{{member}}'],
             ],
           },
           '@material-ui/icons': {
-            transform: '@material-ui/icons/esm/{{member}}',
+            transform: '@material-ui/icons/{{member}}',
           },
         }),
       ],
@@ -76,6 +76,9 @@ export default defineConfig(({ command }) => ({
       selectors: resolve(__dirname, 'app/javascript/lca/selectors'),
       styles: resolve(__dirname, 'app/javascript/lca/styles'),
       utils: resolve(__dirname, 'app/javascript/lca/utils'),
+      '@material-ui/core/createStyles': '@material-ui/core/styles',
+      '@material-ui/core/makeStyles': '@material-ui/core/styles',
+      '@material-ui/core/withStyles': '@material-ui/core/styles',
       '@material-ui/core': '@material-ui/core/esm',
       '@material-ui/icons': '@material-ui/icons/esm',
     },

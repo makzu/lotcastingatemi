@@ -1,11 +1,21 @@
+## Future
+
+###### _Unreleased_
+
+## v125
+
+###### _June 18, 2026_
+
+- Alchemical characters can now be created
+- Infernal characters can now be created
+- Added support for Charm loadouts. Alchemicals (and optionally custom exalts) can set native Charms as belonging to one or more (or all) loadouts. Switching active loadouts effects which Charms count as installed for the purposes of Excellencies and marks them with a check icon.
+- The sorcery block on the main character sheet now shows necromantic motes and rituals
+- Added support for siege weapons. Just add a range tag like `siege (long)` for correct range and damage displays
+
 ## v123
 
 ###### _June 11, 2026_
 
-- Alchemical characters can now be created
-- Infernal characters can now be created
-- The sorcery block on the main character sheet now shows necromantic motes and rituals
-- Added support for siege weapons. Just add a range tag like `siege (long)` for correct range and damage displays
 - Fixed: Sidereal excellencies showed too many dice at high Essence levels (Thanks, Bklemon!)
 - Fixed: Merit sorting does not persist across reloads (Thanks, lnodiv!)
 

@@ -7,16 +7,19 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@material-ui/core'
-import { makeStyles, type Theme } from '@material-ui/core/styles'
+import { makeStyles, type Theme, useTheme } from '@material-ui/core/styles'
 import type { Location } from 'history'
 
 import CharacterSheetNav from '@lca/components/CharacterSheet/CharacterSheetNav.tsx'
 import CharacterEditorNav from '@lca/components/characterEditor/CharacterEditorNav.tsx'
 import { NavLinkListItem } from '@lca/components/shared/wrappers/'
 import ErrorBoundary from '@lca/containers/ErrorBoundary'
-import Discord from '@lca/icons/Discord-Logo.jsx'
-import OctoCat from '@lca/icons/OctoCat.jsx'
-import Patreon from '@lca/icons/Patreon-Logo.jsx'
+import iconDiscordBlack from '@lca/icons/Discord-Symbol-Black.svg'
+import iconDiscordWhite from '@lca/icons/Discord-Symbol-White.svg'
+import iconGithubBlack from '@lca/icons/GitHub_Invertocat_Black.svg'
+import iconGithubWhite from '@lca/icons/GitHub_Invertocat_White.svg'
+import iconPatreonBlack from '@lca/icons/PATREON_SYMBOL_1_BLACK_RGB.svg'
+import iconPatreonWhite from '@lca/icons/PATREON_SYMBOL_1_WHITE_RGB.svg'
 import ChronicleNavList from './ChronicleNavList'
 import { BattlegroupNavList, CharacterNavList, QcNavList } from './EntityLists/'
 import HtmlLinkListItem from './HtmlLinkListItem.tsx'
@@ -29,16 +32,22 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.action.selected,
     },
   },
+  icon: {
+    width: '24px',
+    height: '24px',
+  },
 }))
 
 const CsrfInput = () => {
-  const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content
-  return <input type="hidden" name="authenticity_token" value={csrfToken} />
+  const token = document
+    .querySelector('meta[name=csrf-token]')
+    ?.getAttribute('content')
+  return <input type="hidden" name="authenticity_token" value={token ?? ''} />
 }
 
 const SubmitButton = (props: ButtonProps) => <button {...props} type="submit" />
 
-const LoginForm = ({ text, action }) => {
+const LoginForm = ({ text, action }: { text: string; action: string }) => {
   return (
     <form action={action} method="POST">
       <CsrfInput />
@@ -70,6 +79,8 @@ const NavPanel = (props: Props) => {
 
   const { authenticated, displayName } = props
   const classes = useStyles({})
+  const theme = useTheme()
+  const isDarkMode = theme.palette.type === 'dark'
 
   return (
     <ErrorBoundary>
@@ -100,7 +111,7 @@ const NavPanel = (props: Props) => {
 
             <Divider />
 
-            <ChronicleNavList closeDrawer={closeCheck} />
+            <ChronicleNavList />
           </>
         )}
         {!authenticated && isDeveloperMode() && (
@@ -143,7 +154,11 @@ const NavPanel = (props: Props) => {
           onClick={closeCheck}
         >
           <ListItemIcon>
-            <OctoCat />
+            <img
+              className={classes.icon}
+              src={isDarkMode ? iconGithubWhite : iconGithubBlack}
+              aria-hidden={true}
+            />
           </ListItemIcon>
 
           <ListItemText primary="View Source on GitHub" />
@@ -154,7 +169,11 @@ const NavPanel = (props: Props) => {
           onClick={closeCheck}
         >
           <ListItemIcon>
-            <Discord />
+            <img
+              className={classes.icon}
+              src={isDarkMode ? iconDiscordWhite : iconDiscordBlack}
+              aria-hidden={true}
+            />
           </ListItemIcon>
           <ListItemText primary="Discuss on Discord" />
         </HtmlLinkListItem>
@@ -164,7 +183,11 @@ const NavPanel = (props: Props) => {
           onClick={closeCheck}
         >
           <ListItemIcon>
-            <Patreon />
+            <img
+              className={classes.icon}
+              src={isDarkMode ? iconPatreonWhite : iconPatreonBlack}
+              aria-hidden={true}
+            />
           </ListItemIcon>
           <ListItemText primary="Support on Patreon" />
         </HtmlLinkListItem>

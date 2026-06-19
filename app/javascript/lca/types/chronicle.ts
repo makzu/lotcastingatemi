@@ -5,6 +5,8 @@ export interface Chronicle extends WithId {
   name: string
   st_id: number
   st: Player
+  invite_code: string
+  notes: string
   players: Array<number>
   characters: Array<number>
   qcs: Array<number>

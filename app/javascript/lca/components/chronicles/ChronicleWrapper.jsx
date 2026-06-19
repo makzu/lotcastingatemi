@@ -2,13 +2,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
+import { isChronicleLoaded } from 'selectors'
 
+import ChronicleDetailsPage from 'components/chronicles/DetailsPage.tsx'
 import ChronicleDashboard from 'components/chronicles/index.jsx'
-import ChronicleDetailsPage from 'components/chronicles/DetailsPage.jsx'
 import CombatDashboard from 'components/combat/index.jsx'
 import { fetchChronicle } from 'ducks/actions'
-import { fetchChronicleCharacters, fetchChronicleQcs, fetchChronicleBattlegroups } from 'ducks/entities/chronicle'
-import { isChronicleLoaded } from 'selectors'
+import { fetchChronicleBattlegroups, fetchChronicleCharacters, fetchChronicleQcs } from 'ducks/entities/chronicle'
+
 import type { Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {

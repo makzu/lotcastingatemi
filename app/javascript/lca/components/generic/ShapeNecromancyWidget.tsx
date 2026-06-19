@@ -3,19 +3,21 @@ import { useState } from 'react'
 import {
   Button,
   ButtonBase,
-  createStyles,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
   type Theme,
+} from '@material-ui/core'
+import {
+  createStyles,
   type WithStyles,
   withStyles,
-} from '@material-ui/core'
-import { useDialogLogic } from 'hooks'
+} from '@material-ui/core/styles'
 import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
 
+import { useDialogLogic } from '@lca/hooks'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import type { Character, QC } from '@lca/types'

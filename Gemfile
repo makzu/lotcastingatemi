@@ -61,6 +61,7 @@ gem 'colorize', '~> 1.1'
 gem 'lograge', '~> 0.12'
 
 group :development, :test do
+  gem 'debug', '~> 1.11'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 13.0', platform: :mri
   gem 'cypress-on-rails', '~> 1.20'

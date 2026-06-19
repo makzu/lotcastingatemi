@@ -9,7 +9,7 @@ class Identity < ApplicationRecord
     iden.email = auth['info']['email']
     iden.image = auth['info']['image']
     iden.token = auth['credentials']['token']
-    iden.expires_at = auth['credentials']['expires_at']
+    iden.expires_at = Time.at(auth['credentials']['expires_at']).utc
 
     iden.player ||= Player.find_or_create_from_oauth(auth)
 

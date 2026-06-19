@@ -106,7 +106,7 @@ const NavPanel = (props: Props) => {
         {!authenticated && isDeveloperMode() && (
           <LoginForm action="/auth/developer" text="Log in (Developer)" />
         )}
-        {!authenticated && !isDeveloperMode() && (
+        {!authenticated && (
           <LoginForm action="/auth/google_oauth2" text="Log in with Google" />
         )}
 

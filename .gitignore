@@ -53,11 +53,6 @@ Session.vim
 # Visual Studio Code
 .vscode
 
-# Ignore encrypted secrets key file.
-/config/secrets.yml.key
-
-# Ignore master key for decrypting credentials and more.
-/config/master.key
 
 # Vite Ruby
 /public/vite*
@@ -65,3 +60,7 @@ node_modules
 # Vite uses dotenv and suggests to ignore local-only env files. See
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+

@@ -1,12 +1,13 @@
 import { resolve } from 'node:path'
 
+// @ts-expect-error "This won't have defs"
 import { flowPlugin } from '@bunchtogether/vite-plugin-flow'
 import transformImports from '@rolldown/plugin-transform-imports'
 import React from '@vitejs/plugin-react'
 import Rails from 'vite-plugin-rails'
 import { defineConfig } from 'vitest/config'
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ command }) => ({
   assetsInclude: ['**/*.md'],
   legacy: {
     inconsistentCjsInterop: true,
@@ -16,6 +17,7 @@ export default defineConfig(({ mode }) => ({
       // lazyBarrel seems like it'd be helpful, but it breaks parts of material-ui
       // experimental: { lazyBarrel: true },
       plugins: [
+        flowPlugin(),
         transformImports({
           '@material-ui/core': {
             transform: [
@@ -29,13 +31,15 @@ export default defineConfig(({ mode }) => ({
         }),
       ],
     },
-    sourcemap: mode === 'development',
+    // sourcemap: mode === 'development',
+    sourcemap: command === 'serve',
   },
   optimizeDeps: {
     rolldownOptions: {
       // lazyBarrel seems like it'd be helpful, but it breaks parts of material-ui
       // experimental: { lazyBarrel: true },
       plugins: [
+        flowPlugin(),
         transformImports({
           '@material-ui/core': {
             transform: [
@@ -77,6 +81,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   test: {
+    dir: 'app/javascript/lca',
     globals: true,
     coverage: {
       provider: 'v8',

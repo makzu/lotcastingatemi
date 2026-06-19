@@ -27,7 +27,7 @@ export const getPlayersForChronicle = createCachedSelector(
 
 export const getStorytellerForChronicle = createCachedSelector(
   [getSpecificChronicle, getPlayers],
-  (chronicle, players) => chronicle?.st_id && players[chronicle.st_id],
+  (chronicle, players) => players[chronicle?.st_id],
 )(idMemoizer)
 
 const getCharacters = (state: RootState) => entities(state).characters
@@ -65,5 +65,5 @@ export const getBattlegroupsForChronicle = createCachedSelector(
 
 export const amIStOfChronicle = createCachedSelector(
   [getCurrentPlayer, getSpecificChronicle],
-  (player, chronicle) => chronicle?.st_id && player.id === chronicle.st_id,
+  (player, chronicle) => player.id === chronicle?.st_id,
 )((state, id) => (getSpecificChronicle(state, id) || { st_id: 0 }).st_id)

@@ -10,7 +10,7 @@ describe('Clamp', () => {
   })
 
   it('should throw an error if min is greater than max', () => {
-    expect(() => clamp(5, 10, 0)).toThrowError(
+    expect(() => clamp(5, 10, 0)).toThrow(
       'min must be less than or equal to max',
     )
   })

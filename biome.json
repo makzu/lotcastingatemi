@@ -21,7 +21,9 @@
       "style": {
         "useImportType": { "level": "warn", "options": { "style": "auto" } }
       },
-      "suspicious": { "noImportCycles": "error" }
+      "suspicious": {
+        "noImportCycles": "on"
+      }
     }
   },
   "javascript": {

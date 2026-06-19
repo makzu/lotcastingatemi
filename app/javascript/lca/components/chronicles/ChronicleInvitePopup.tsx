@@ -9,7 +9,6 @@ import {
   DialogTitle,
 } from '@material-ui/core'
 import { FileCopy } from '@material-ui/icons'
-import { makeStyles } from '@material-ui/styles'
 
 import { regenChronicleInviteCode, updateChronicle } from '@lca/ducks/actions'
 import { useAppDispatch, useAppSelector, useDialogLogic } from '@lca/hooks'
@@ -18,10 +17,6 @@ import { getSpecificChronicle } from '@lca/selectors/chronicle'
 type ExposedProps = {
   chronicleId: number
 }
-
-const useStyles = makeStyles((_theme) => ({
-  code: {},
-}))
 
 const ChronicleInvitePopup = ({ chronicleId }: ExposedProps) => {
   const dispatch = useAppDispatch()

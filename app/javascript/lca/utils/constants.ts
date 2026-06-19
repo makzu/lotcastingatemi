@@ -1,13 +1,6 @@
 /* Constants: exactly what it says on the tin */
 
-import type { Ability, Attribute, CapitalizedAbility } from '@lca/types'
-
-type PrettyAttribute = {
-  attr: `attr_${Attribute}`
-  pretty: Capitalize<Attribute>
-}
-
-export const ATTRIBUTES: PrettyAttribute[] = [
+export const ATTRIBUTES = [
   { attr: 'attr_strength', pretty: 'Strength' },
   { attr: 'attr_dexterity', pretty: 'Dexterity' },
   { attr: 'attr_stamina', pretty: 'Stamina' },
@@ -17,15 +10,10 @@ export const ATTRIBUTES: PrettyAttribute[] = [
   { attr: 'attr_perception', pretty: 'Perception' },
   { attr: 'attr_intelligence', pretty: 'Intelligence' },
   { attr: 'attr_wits', pretty: 'Wits' },
-]
-
-type PrettyAbility = {
-  abil: `abil_${Ability}`
-  pretty: CapitalizedAbility
-}
+] as const
 
 // Does not include Craft or Martial Arts, which get their own handling
-export const ABILITIES: PrettyAbility[] = [
+export const ABILITIES = [
   { abil: 'abil_archery', pretty: 'Archery' },
   { abil: 'abil_athletics', pretty: 'Athletics' },
   { abil: 'abil_awareness', pretty: 'Awareness' },
@@ -50,9 +38,9 @@ export const ABILITIES: PrettyAbility[] = [
   { abil: 'abil_survival', pretty: 'Survival' },
   { abil: 'abil_thrown', pretty: 'Thrown' },
   { abil: 'abil_war', pretty: 'War' },
-]
+] as const
 
-export const ABILITIES_ALL: PrettyAbility[] = [
+export const ABILITIES_ALL = [
   { abil: 'abil_archery', pretty: 'Archery' },
   { abil: 'abil_athletics', pretty: 'Athletics' },
   { abil: 'abil_awareness', pretty: 'Awareness' },
@@ -79,9 +67,9 @@ export const ABILITIES_ALL: PrettyAbility[] = [
   { abil: 'abil_survival', pretty: 'Survival' },
   { abil: 'abil_thrown', pretty: 'Thrown' },
   { abil: 'abil_war', pretty: 'War' },
-]
+] as const
 
-export const ABILITIES_ALL_NO_MA: PrettyAbility[] = [
+export const ABILITIES_ALL_NO_MA = [
   { abil: 'abil_archery', pretty: 'Archery' },
   { abil: 'abil_athletics', pretty: 'Athletics' },
   { abil: 'abil_awareness', pretty: 'Awareness' },
@@ -107,7 +95,7 @@ export const ABILITIES_ALL_NO_MA: PrettyAbility[] = [
   { abil: 'abil_survival', pretty: 'Survival' },
   { abil: 'abil_thrown', pretty: 'Thrown' },
   { abil: 'abil_war', pretty: 'War' },
-]
+] as const
 
 // Does not include Martial Arts, which gets its own handling
 export const ATTACK_ABILITIES = [
@@ -115,7 +103,7 @@ export const ATTACK_ABILITIES = [
   'abil_brawl',
   'abil_melee',
   'abil_thrown',
-]
+] as const
 
 export const NON_ATTACK_ABILITIES = [
   'abil_athletics',
@@ -138,7 +126,7 @@ export const NON_ATTACK_ABILITIES = [
   'abil_stealth',
   'abil_survival',
   'abil_war',
-]
+] as const
 
 export const SOLAR_CASTE_ABILITIES = {
   dawn: [
@@ -191,7 +179,7 @@ export const SOLAR_CASTE_ABILITIES = {
     { abil: 'abil_sail', pretty: 'Sail' },
     { abil: 'abil_socialize', pretty: 'Socialize' },
   ],
-}
+} as const
 
 export const ABYSSAL_CASTE_ABILITIES = {
   dusk: [
@@ -244,7 +232,7 @@ export const ABYSSAL_CASTE_ABILITIES = {
     { abil: 'abil_sail', pretty: 'Sail' },
     { abil: 'abil_socialize', pretty: 'Socialize' },
   ],
-}
+} as const
 
 export const LUNAR_CASTE_ATTRIBUTES = {
   'full moon': [
@@ -263,7 +251,7 @@ export const LUNAR_CASTE_ATTRIBUTES = {
     { attr: 'attr_wits', pretty: 'Wits' },
   ],
   casteless: [],
-}
+} as const
 
 export const ALCHEMICAL_CASTE_ATTRIBUTES = {
   orichalcum: [
@@ -296,7 +284,7 @@ export const ALCHEMICAL_CASTE_ATTRIBUTES = {
     { attr: 'attr_appearance', pretty: 'Appearance' },
     { attr: 'attr_perception', pretty: 'Perception' },
   ],
-}
+} as const
 
 export const INFERNAL_CASTE_ABILITIES = {
   azimuth: [
@@ -349,7 +337,7 @@ export const INFERNAL_CASTE_ABILITIES = {
     { abil: 'abil_stealth', pretty: 'Stealth' },
     { abil: 'abil_socialize', pretty: 'Socialize' },
   ],
-}
+} as const
 
 export const ABILITY_NAMES = [
   'archery',
@@ -378,7 +366,7 @@ export const ABILITY_NAMES = [
   'survival',
   'thrown',
   'war',
-]
+] as const
 
 export const ATTRIBUTE_NAMES = [
   'strength',
@@ -390,7 +378,7 @@ export const ATTRIBUTE_NAMES = [
   'perception',
   'intelligence',
   'wits',
-]
+] as const
 
 /* Minimum and maximum */
 export const ESSENCE_MAX = 10

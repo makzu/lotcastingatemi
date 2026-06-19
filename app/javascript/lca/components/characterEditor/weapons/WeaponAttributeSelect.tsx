@@ -3,10 +3,10 @@ import {
   Divider,
   ListSubheader,
   MenuItem,
-  makeStyles,
   TextField,
   type Theme,
 } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import type { TextFieldProps } from '@material-ui/core/TextField'
 
 import type { Character, Weapon } from '@lca/types'

@@ -2,21 +2,23 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import Check from '@material-ui/icons/Check'
 import Launch from '@material-ui/icons/Launch'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+import { getSpellsForCharacter } from '@lca/ducks/entities'
 import {
-  getNativeCharmsForCharacter,
-  getMartialArtsCharmsForCharacter,
   getEvocationsForCharacter,
+  getMartialArtsCharmsForCharacter,
+  getNativeCharmsForCharacter,
   getSpiritCharmsForCharacter,
-  getSpellsForCharacter,
-} from 'selectors'
+} from '@lca/selectors'
+import { isInstalledCharm, showLoadoutTraits } from '@lca/utils/calculated'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay'
+
 import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
 
 const styles = (theme) => ({
@@ -48,17 +50,20 @@ const styles = (theme) => ({
   },
 })
 
-function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
+function _SingleCharm({ character, charm, classes }) {
+  const isInstalled = showLoadoutTraits(character) && isInstalledCharm(character, charm)
+
   return (
     <Fragment>
       <Typography component="div" className={classes.root}>
+        {isInstalled && <Check />}
         <div className={classes.name}>{charm.name}</div>
         <div className={classes.info}>
-          ({charm.cost && charm.cost != '-' && charm.cost + ', '}
+          ({charm.cost && charm.cost !== '-' && `${charm.cost}, `}
           {charm.timing}
-          {charm.duration && ', ' + charm.duration}
+          {charm.duration && `, ${charm.duration}`}
           {charm.keywords.length > 0 &&
-            ', keywords: ' + charm.keywords.join(', ')}
+            `, keywords: ${charm.keywords.join(', ')}`}
           )
         </div>
         <MarkdownDisplay
@@ -86,10 +91,16 @@ function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
           ,&nbsp;
           {spell.duration}
           {spell.keywords.length > 0 &&
-            ', keywords: ' + spell.keywords.join(', ')}
+            `, keywords: ${spell.keywords.join(', ')}`}
           )
         </div>
-        <div className={classes.body}>{spell.body}</div>
+        <MarkdownDisplay
+          noBlocks
+          className={classes.body}
+          source={spell.body}
+          allowedTypes={['text', 'strong', 'emphasis', 'delete']}
+          unwrapDisallowed
+        />
       </Typography>
       <Divider />
     </Fragment>

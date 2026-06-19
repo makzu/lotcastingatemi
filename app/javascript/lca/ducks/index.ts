@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import { optimistic } from 'redux-optimistic-ui'
 
-import AppReducer from './app.js'
-import EntityReducer, { EntityState } from './entities'
-import SessionReducer, { ISessionState } from './session'
+import AppReducer from './app'
+import EntityReducer, { type EntityState } from './entities'
+import SessionReducer, { type ISessionState } from './session'
 
 interface AppState {
   drawerOpen: boolean

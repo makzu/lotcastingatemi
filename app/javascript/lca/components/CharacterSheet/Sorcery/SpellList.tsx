@@ -1,54 +1,35 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
+import { useState } from 'react'
+import Grid from '@material-ui/core/Grid'
 
-import { Grid, Typography } from '@material-ui/core'
+import { getSpellsForCharacter } from '@lca/ducks/entities'
+import { useAppSelector } from '@lca/hooks'
+import type { Character, Spell } from '@lca/types'
+import { type CharmFilter, filterCharms } from '../Charms/useCharmFilters'
+import FullSpellDisplay from '../Sorcery/FullSpell'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import { State } from 'ducks'
-import { getSpecificCharacter, getSpellsForCharacter } from 'ducks/entities'
-import { Character, Spell } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
-import CharacterLoadError from '../CharacterLoadError'
-import SpellDisplay from './SpellDisplay'
-
-interface StateProps {
-  spells: Spell[]
+interface ExposedProps {
+  id: Character['id']
+  filters: CharmFilter
 }
-interface OuterProps {
-  characterId: number
-}
-// interface Props extends StateProps {}
 
-const mapSpells = s => (
-  <Grid item key={s.id}>
-    <BlockPaper />
-  </Grid>
-)
+const SpellList = (props: ExposedProps) => {
+  const [openSpell, setOpenSpell] = useState<Spell['id']>(0)
+  const spells = useAppSelector((state) =>
+    getSpellsForCharacter(state, props.id),
+  )
 
-const SpellList = ({ spells }: StateProps) => {
-  const spellList = spells.map(spell => (
-    <Grid item xs={12} md={6} xl={4} key={spell.id}>
-      <SpellDisplay spell={spell} />
+  const filteredSpells = filterCharms(spells, props.filters, 'spell') as Spell[]
+  const mappedSpells = filteredSpells.map((s) => (
+    <Grid item xs={12} md={6} xl={4} key={s.id}>
+      <FullSpellDisplay
+        spell={s}
+        isOpen={openSpell === s.id}
+        setOpenSpell={setOpenSpell}
+      />
     </Grid>
   ))
-  return (
-    <>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography variant="h5">Spells</Typography>
-        </Grid>
 
-        {spellList}
-      </Grid>
-    </>
-  )
+  return <>{mappedSpells}</>
 }
 
-const mapState = (state: State, { characterId }: OuterProps): StateProps => {
-  return {
-    spells: getSpellsForCharacter(state, characterId),
-  }
-}
-
-export default connect(mapState)(SpellList)
+export default SpellList

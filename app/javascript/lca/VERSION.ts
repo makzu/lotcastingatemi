@@ -1,3 +1,3 @@
-const VERSION = 'v123'
+const VERSION = 'v125'
 
 export default VERSION

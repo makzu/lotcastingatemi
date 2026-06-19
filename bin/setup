@@ -2,6 +2,7 @@
 require "fileutils"
 
 APP_ROOT = File.expand_path("..", __dir__)
+APP_NAME = "lot-casting-atemi"
 
 def system!(*args)
   system(*args, exception: true)
@@ -14,6 +15,7 @@ FileUtils.chdir APP_ROOT do
 
   puts "== Installing dependencies =="
   system("bundle check") || system!("bundle install")
+  ENV['COREPACK_ENABLE_DOWNLOAD_PROMPT'] = '0'
   system! "corepack enable"
   system! "yarn"
 

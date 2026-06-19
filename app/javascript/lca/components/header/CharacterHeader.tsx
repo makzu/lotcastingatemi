@@ -1,15 +1,13 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import type { State } from 'ducks'
+import { compose } from 'recompose'
 
+import type { Character } from '@lca/types'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import CharacterMenu from 'components/generic/CharacterMenu'
-import { State } from 'ducks'
 import { canIEditCharacter, getSpecificCharacter } from 'ducks/selectors'
-import { Character } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -83,5 +81,5 @@ function mapStateToProps(state: State, { location, match }: RouteProps) {
 
 export default compose<Props, RouteProps>(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(CharacterHeader)

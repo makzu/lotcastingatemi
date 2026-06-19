@@ -11,7 +11,7 @@ import {
   createQcAttack,
   destroyQcAttack,
   updateQcAttack,
-} from 'ducks/actions.js'
+} from 'ducks/actions.ts'
 import { updateQcAttackSort } from 'ducks/entities/qc_attack'
 import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 import type { Enhancer, QcAttack } from 'utils/flow-types'

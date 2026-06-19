@@ -1,18 +1,18 @@
 // @flow
 import React from 'react'
-import { shouldUpdate } from 'recompose'
-
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
+import { shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from 'components/generic/ListAttributeEditor.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import { isUnequalByKeys } from 'utils'
+
 import type { Character, Enhancer } from 'utils/flow-types'
 
 export const SorceryFields = (
@@ -30,7 +30,7 @@ export const SorceryFields = (
         margin="dense"
         multiline
         fullWidth
-        rowsMax={10}
+        maxRows={10}
         onChange={onChange}
       />
     </>

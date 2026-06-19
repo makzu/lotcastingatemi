@@ -12,6 +12,8 @@ module Charms
 
     validates :ability, inclusion: { in: Constants::ATTRIBUTES + %w[universal] }, unless: :ability_blank?
 
+    before_create :set_loadout_to_character_active_loadout
+
     def charm_type
       'Attribute'
     end

@@ -13,12 +13,12 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -46,7 +46,7 @@ type State = {
 class JoinBattlePopup extends React.Component<Props, State> {
   state = { open: false, initiative: 0 }
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -140,11 +140,8 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
 )
 
 export default enhance(JoinBattlePopup)

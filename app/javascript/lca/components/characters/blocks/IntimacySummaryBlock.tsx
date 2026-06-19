@@ -1,12 +1,10 @@
-import React from 'react'
-
+import { Divider, Typography } from '@material-ui/core'
 import { VisibilityOff } from '@material-ui/icons'
-import { Typography, Divider } from '@material-ui/core'
 
-import BlockPaper from '../../generic/blockPaper.jsx'
+import type { Character } from '@lca/types'
+import type { Intimacy } from '@lca/types/shared.js'
+import BlockPaper from '../../generic/BlockPaper.tsx'
 import RatingLine from '../../generic/ratingLine.jsx'
-import { Character } from 'types'
-import { Intimacy } from 'types/shared.js'
 
 interface Props {
   character: Character

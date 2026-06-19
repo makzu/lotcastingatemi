@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
-import { compose, shouldUpdate } from 'recompose'
-
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { compose, shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import { isUnequalByKeys } from 'utils'
+
 import type { Character } from 'utils/flow-types'
 
 const styles = theme => ({

@@ -1,12 +1,49 @@
-import { PlayerAsset } from './_lib'
-import { WithSharedStats } from './shared'
+import type { PlayerAsset, Sortable, WithId } from './_lib'
+import type { WithSharedStats } from './shared'
 
 export interface QcAction {
   action: string
   pool: number
 }
 
-export interface QC extends PlayerAsset, WithSharedStats {
+export interface QcTrait extends WithId, Sortable {
+  qc_id: number
+}
+
+export interface QcStats {
+  join_battle: number
+  movement: number
+  soak: number
+  hardness: number
+  appearance: number
+  resolve: number
+  guile: number
+  evasion: number
+  parry: number
+  senses: number
+  armor_name: string
+}
+
+export interface QcMerit extends QcTrait {
+  name: string
+  latent: boolean
+  magical: boolean
+  body: string
+  ref: string
+}
+
+export interface QcAttack extends WithId, Sortable {
+  name: string
+  pool: number
+  damage: number
+  overwhelming: number
+  range: string
+  tags: Array<string>
+  qc_attackable_type: 'Qc' | 'Battlegroup'
+  qc_attackable_id: number
+}
+
+export interface QC extends PlayerAsset, WithSharedStats, QcStats {
   name: string
   ref: string
 
@@ -18,6 +55,7 @@ export interface QC extends PlayerAsset, WithSharedStats {
 
   excellency: string
   actions: QcAction[]
+  qc_attacks: number[]
   qc_charms: number[]
   qc_merits: number[]
   portrait_link: string

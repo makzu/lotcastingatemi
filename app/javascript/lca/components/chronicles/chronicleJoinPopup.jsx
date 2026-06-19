@@ -14,7 +14,7 @@ import TextField from '@material-ui/core/TextField'
 
 import GroupAdd from '@material-ui/icons/GroupAdd'
 
-import { joinChronicle } from 'ducks/actions.js'
+import { joinChronicle } from 'ducks/actions'
 
 type Props = { joinChronicle: Function }
 type State = { open: boolean, code: string }
@@ -32,7 +32,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
     this.setState({ open: false })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ code: e.target.value })
   }
 
@@ -79,7 +79,4 @@ class ChronicleJoinPopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  undefined,
-  { joinChronicle }
-)(ChronicleJoinPopup)
+export default connect(undefined, { joinChronicle })(ChronicleJoinPopup)

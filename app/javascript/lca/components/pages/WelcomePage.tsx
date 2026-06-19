@@ -1,10 +1,9 @@
 import React from 'react'
-
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from '../generic/BlockPaper.tsx'
 
 const WelcomePage = () => (
   <Grid container spacing={3}>

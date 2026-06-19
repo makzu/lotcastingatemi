@@ -1,168 +1,258 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-
 import {
+  Box,
   Button,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
   MenuItem,
+  Checkbox as MuiCheckbox,
+  Select,
   Switch,
+  type SwitchProps,
   TextField,
+  type Theme,
   Typography,
 } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
-import { makeStyles } from '@material-ui/styles'
-import Checkbox from 'components/shared/inputs/Checkbox'
-import ResponsiveFilterDrawer from 'components/shared/ResponsiveFilterDrawer'
-import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
-import { State } from 'ducks'
+import ResponsiveFilterDrawer from '@lca/components/shared/ResponsiveFilterDrawer'
+import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect'
 import {
-  getAllAbilitiesWithCharmsForCharacter,
-  getAllCharmCategoriesForCharacter,
-  getAllCharmKeywordsForCharacter,
-} from 'ducks/entities'
-import { useDialogLogic } from 'hooks'
-import { Charm } from 'types'
-import { CharmFilter, CharmFilterAction } from '../useCharmFilters'
+  getAllAbilitiesWithCharmsForCharacter as getAbilities,
+  getAllCharmCategoriesForCharacter as getCategories,
+  getAllCharmKeywordsForCharacter as getKeywords,
+  getAllCharmLoadoutsForCharacter as getLoadouts,
+  getSpecificCharacter,
+} from '@lca/ducks/entities'
+import { useAppSelector } from '@lca/hooks'
+import type {
+  AbilityCharm,
+  AttributeCharm,
+  Character,
+  Charm,
+  NativeCharm,
+} from '@lca/types'
+import type { Timing } from '@lca/types/_lib'
+import { showLoadoutTraits } from '@lca/utils/calculated'
+import type { CharmFilter, CharmFilterAction } from '../useCharmFilters'
 
-const useStyles = makeStyles({
-  capitalize: {
-    textTransform: 'capitalize',
+const useStyles = makeStyles((theme: Theme) => ({
+  label: {
+    ...theme.typography.caption,
+    marginBottom: '-0.5em',
   },
-})
+}))
 
 interface Props {
+  id: Character['id']
+  open: boolean
+  setClosed: () => void
   filters: CharmFilter
-  setfilters: React.Dispatch<CharmFilterAction>
-  allAbilities: Array<Charm['ability']>
-  allCategories: string[]
-  allKeywords: string[]
+  setFilters: React.Dispatch<CharmFilterAction>
 }
 
-const ExclusiveSwitch = props => (
-  <div
-    style={{
+const ExclusiveSwitch = (
+  props: Pick<SwitchProps, 'name' | 'value' | 'onChange'>,
+) => (
+  <Box
+    sx={{
       alignItems: 'center',
       display: 'flex',
       margin: '-0.5rem auto 0.5rem',
     }}
   >
     All
-    <Switch
-      name={props.name}
-      value={props.value}
-      onChange={(e, checked) =>
-        props.onChange({ target: { name: props.name, value: checked } })
-      }
-    />
+    <Switch name={props.name} value={props.value} onChange={props.onChange} />
     Any
-  </div>
+  </Box>
 )
 
 const CharmFilterDrawer = (props: Props) => {
-  const handleChange = e =>
-    void props.setfilters({ type: e.target.name, payload: e.target.value })
+  const { filters, setFilters, open, setClosed, id } = props
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
+  const allAbilities = useAppSelector((state) => getAbilities(state, id))
+  const allCategories = useAppSelector((state) => getCategories(state, id))
+  const allKeywords = useAppSelector((state) => getKeywords(state, id))
+  const allLoadouts = useAppSelector((state) => getLoadouts(state, id))
 
-  const [filtersOpen, setOpen, setClosed] = useDialogLogic()
   const classes = useStyles()
 
   return (
-    <>
-      <Button onClick={filtersOpen ? setClosed : setOpen}>Filter</Button>
+    <ResponsiveFilterDrawer open={open} onClose={setClosed}>
+      <Typography variant="h6">Filter Charms</Typography>
 
-      <ResponsiveFilterDrawer open={filtersOpen} onClose={setClosed}>
-        <Typography variant="h5">Filter Charms</Typography>
-
-        <CharmTimingSelect
-          name="timing"
-          value={props.filters.timing}
-          SelectProps={{ multiple: true }}
-          onChange={handleChange}
-          fullWidth
-        />
-
+      {showLoadoutTraits(character) && (
         <TextField
-          name="ability"
-          label="Ability/Attribute"
+          name="loadouts"
+          label="Loadouts"
           select
-          value={props.filters.ability}
+          value={filters.loadout}
           SelectProps={{ multiple: true }}
-          onChange={handleChange}
-          margin="dense"
+          onChange={(e) =>
+            setFilters({
+              type: 'loadout',
+              payload: e.target.value as unknown as NonNullable<
+                NativeCharm['loadouts']
+              >,
+            })
+          }
         >
-          {props.allAbilities.map(a =>
-            a === 'martial_arts' ? (
-              <span key={a} />
-            ) : (
-              <MenuItem key={a} value={a} className={classes.capitalize}>
-                {a === '' ? 'None' : a}
-              </MenuItem>
-            )
-          )}
+          {allLoadouts.map((a) => (
+            <MenuItem key={a} value={a}>
+              {a}
+              {character.current_loadout === a && ' (Current)'}
+            </MenuItem>
+          ))}
         </TextField>
+      )}
 
-        <TextField
+      <CharmTimingSelect
+        name="timing"
+        value={filters.timing}
+        SelectProps={{ multiple: true }}
+        onChange={(e) =>
+          setFilters({
+            type: 'timing',
+            payload: e.target.value as unknown as Timing[],
+          })
+        }
+        fullWidth
+      />
+
+      {character.type !== 'CustomEssenceCharacter' && (
+        <FormControl>
+          <InputLabel htmlFor="charmFilter-ability">
+            Ability/Attribute
+          </InputLabel>
+          <Select
+            name="ability"
+            id="charmFilter-ability"
+            multiple
+            fullWidth
+            value={filters.ability}
+            className="capitalize"
+            onChange={(e) =>
+              setFilters({
+                type: 'ability',
+                payload: e.target.value as (
+                  | AbilityCharm
+                  | AttributeCharm
+                )['ability'][],
+              })
+            }
+          >
+            {allAbilities.map((a) =>
+              a === 'martial_arts' ? (
+                <span key={a} />
+              ) : (
+                <MenuItem key={a} value={a} className="capitalize">
+                  {a === '' ? 'None' : a}
+                </MenuItem>
+              ),
+            )}
+          </Select>
+        </FormControl>
+      )}
+
+      <FormControl>
+        <InputLabel htmlFor="charmFilter-keyword">Keywords</InputLabel>
+        <Select
           name="keyword"
-          label="Keyword"
-          select
-          value={props.filters.keyword}
-          SelectProps={{ multiple: true }}
-          onChange={handleChange}
-          margin="dense"
+          id="charmFilter-keyword"
+          value={filters.keyword}
+          multiple
+          onChange={(e) =>
+            setFilters({
+              type: 'keyword',
+              payload: e.target.value as Charm['keywords'],
+            })
+          }
         >
-          {props.allKeywords.map(a => (
-            <MenuItem key={a} value={a}>
+          {allKeywords.map((a) => (
+            <MenuItem key={a} value={a} className="capitalize">
               {a}
             </MenuItem>
           ))}
-        </TextField>
-        <ExclusiveSwitch
-          name="keywordInclusive"
-          value={props.filters.keywordInclusive}
-          onChange={handleChange}
+        </Select>
+      </FormControl>
+      <ExclusiveSwitch
+        name="keywordInclusive"
+        value={filters.keywordInclusive}
+        onChange={(_e, checked) =>
+          setFilters({ type: 'keywordInclusive', payload: checked })
+        }
+      />
+
+      <TextField
+        name="category"
+        label="Categories"
+        select
+        value={filters.category}
+        SelectProps={{ multiple: true }}
+        onChange={(e) =>
+          setFilters({
+            type: 'category',
+            payload: e.target.value as unknown as Charm['categories'],
+          })
+        }
+      >
+        {allCategories.map((a) => (
+          <MenuItem key={a} value={a}>
+            {a}
+          </MenuItem>
+        ))}
+      </TextField>
+      <ExclusiveSwitch
+        name="categoryInclusive"
+        value={filters.categoryInclusive}
+        onChange={(_e, checked) =>
+          setFilters({ type: 'categoryInclusive', payload: checked })
+        }
+      />
+
+      <Box sx={{ display: 'flex' }}>
+        <FormControlLabel
+          label="Mute Only"
+          labelPlacement="top"
+          classes={classes}
+          control={
+            <MuiCheckbox
+              name="muteOnly"
+              checked={filters.muteOnly}
+              onChange={(e) =>
+                setFilters({ type: 'muteOnly', payload: e.target.checked })
+              }
+            />
+          }
         />
-
-        <TextField
-          name="category"
-          label="Category"
-          select
-          value={props.filters.category}
-          SelectProps={{ multiple: true }}
-          onChange={handleChange}
-          margin="dense"
-        >
-          {props.allCategories.map(a => (
-            <MenuItem key={a} value={a}>
-              {a}
-            </MenuItem>
-          ))}
-        </TextField>
-        <ExclusiveSwitch
-          name="categoryInclusive"
-          value={props.filters.categoryInclusive}
-          onChange={handleChange}
+        <FormControlLabel
+          label="Hide Perilous"
+          labelPlacement="top"
+          classes={classes}
+          control={
+            <MuiCheckbox
+              name="hidePerilous"
+              checked={filters.hidePerilous}
+              onChange={(e) =>
+                setFilters({
+                  type: 'hidePerilous',
+                  payload: e.target.checked,
+                })
+              }
+            />
+          }
         />
+      </Box>
 
-        <div style={{ display: 'flex' }}>
-          <Checkbox label="Mute Only" name="muteOnly" onChange={handleChange} />
-
-          <Checkbox
-            label="Hide Perilous"
-            name="hidePerilous"
-            onChange={handleChange}
-          />
-        </div>
-
-        <Button fullWidth onClick={() => props.setfilters({ type: 'reset' })}>
-          Reset Filters
-        </Button>
-      </ResponsiveFilterDrawer>
-    </>
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={() => setFilters({ type: 'reset' })}
+      >
+        Reset Filters
+      </Button>
+    </ResponsiveFilterDrawer>
   )
 }
 
-const mapState = (state: State, props) => ({
-  allAbilities: getAllAbilitiesWithCharmsForCharacter(state, props.id),
-  allCategories: getAllCharmCategoriesForCharacter(state, props.id),
-  allKeywords: getAllCharmKeywordsForCharacter(state, props.id),
-})
-
-export default connect(mapState)(CharmFilterDrawer)
+export default CharmFilterDrawer

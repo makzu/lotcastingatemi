@@ -1,6 +1,5 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { Link } from 'react-router-dom'
-
 import { MenuItem } from '@material-ui/core'
 
 const LcaLink = ({ to, ...props }: any) => <Link to={to} {...props} />

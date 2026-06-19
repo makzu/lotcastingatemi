@@ -1,14 +1,13 @@
 // @flow
 import React from 'react'
-
 import MenuItem from '@material-ui/core/MenuItem'
 
 import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import { nonCasteAbilities } from 'utils/calculated'
 import { SOLAR_CASTE_ABILITIES } from 'utils/constants.ts'
+
 import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character, onChange: Function }

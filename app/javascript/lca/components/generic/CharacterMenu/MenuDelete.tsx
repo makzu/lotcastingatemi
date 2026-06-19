@@ -1,6 +1,3 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-
 import {
   Button,
   Dialog,
@@ -11,28 +8,23 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
-  Typography
+  Typography,
 } from '@material-ui/core'
 import Delete from '@material-ui/icons/Delete'
 
-import { State } from 'ducks'
-import { destroy } from 'ducks/actions/ByType'
-import { useDialogLogic } from 'hooks'
-import { canIDelete } from 'selectors'
-import { MenuItemProps as Props } from './CharacterMenuItem'
+import { destroy } from '@lca/ducks/actions/ByType'
+import { useAppDispatch, useAppSelector, useDialogLogic } from '@lca/hooks'
+import { canIDelete } from '@lca/selectors'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface StateProps {
-  canDelete: boolean
-  name: string
-}
-
-interface DispatchProps {
-  action(): void
-}
-
-interface InnerProps extends StateProps, DispatchProps, Props {}
-
-const MenuDelete = ({ canDelete, action, name }: InnerProps) => {
+const MenuDelete = ({ characterType, id }: Props) => {
+  const dispatch = useAppDispatch()
+  const canDelete = useAppSelector((state) =>
+    canIDelete(state, id, characterType),
+  )
+  const name = useAppSelector(
+    (state) => state.entities.current[`${characterType}s`][id]?.name,
+  )
   const [isOpen, setOpen, setClosed] = useDialogLogic()
 
   if (!canDelete) {
@@ -59,7 +51,11 @@ const MenuDelete = ({ canDelete, action, name }: InnerProps) => {
 
         <DialogActions>
           <Button onClick={setClosed}>Cancel</Button>
-          <Button onClick={action} color="primary" variant="contained">
+          <Button
+            onClick={() => dispatch(destroy[characterType](id))}
+            color="primary"
+            variant="contained"
+          >
             Delete
           </Button>
         </DialogActions>
@@ -68,17 +64,4 @@ const MenuDelete = ({ canDelete, action, name }: InnerProps) => {
   )
 }
 
-const mapState = (state: State, { id, characterType }: Props): StateProps => ({
-  canDelete: canIDelete(state, id, characterType),
-  name: state.entities.current[characterType + 's'][id].name,
-})
-
-const mapDispatch = (
-  dispatch,
-  { characterType, id }: Props
-): DispatchProps => ({ action: () => dispatch(destroy[characterType](id)) })
-
-export default connect<StateProps, DispatchProps, Props>(
-  mapState,
-  mapDispatch
-)(MenuDelete)
+export default MenuDelete

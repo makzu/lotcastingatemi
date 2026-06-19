@@ -1,13 +1,13 @@
-import { normalize, schema } from 'normalizr'
+/** biome-ignore-all lint: <Avoid breaking this file since it will be replaced with rtkq in the near future> */
+import type { Action } from 'redux'
+import { type ActionFunctionAny, createAction } from 'redux-actions'
 import { getJSON } from 'redux-api-middleware'
 import { BEGIN, COMMIT, REVERT } from 'redux-optimistic-ui'
+import { normalize } from 'normalizr'
 
-import { Action } from 'redux'
-import { ActionFunctionAny, createAction } from 'redux-actions'
-
-import { State } from 'ducks'
+import type { RootState } from '@lca/store'
 import * as schemas from './_schemas'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 
 export type characterTraitTypes =
   | 'charm'
@@ -83,7 +83,7 @@ export const standardTypes = (
 ]
 
 export const optimisticTypes = (
-  type: entityTypes,
+  _type: entityTypes,
   action: CrudActionGroup,
   id: number,
   transactionId: string,
@@ -112,8 +112,8 @@ export const optimisticTypes = (
   }),
 ]
 
-const meta = (_: any, m: any) => m
-// tslint:disable object-literal-sort-keys
+const meta = (_: never, m: unknown) => m
+
 export const crudAction = (
   type: entityTypes,
   action: crudActions,
@@ -122,7 +122,6 @@ export const crudAction = (
   success: createAction(`${API}/${type}/${action}/${SUCCESS}`, null, meta),
   failure: createAction(`${API}/${type}/${action}/${FAILURE}`, null, meta),
 })
-// tslint:enable *
 
 export const reducerUpdateAction =
   (type: string) => (state: EntityState, action) => {
@@ -136,4 +135,5 @@ export const reducerUpdateAction =
   }
 
 /** Simply unwraps the entity portion of the state */
-export const unwrapped = (state: State): EntityState => state.entities.current
+export const unwrapped = (state: RootState): EntityState =>
+  state.entities.current

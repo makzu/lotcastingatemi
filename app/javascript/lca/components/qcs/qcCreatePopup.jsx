@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 
-import { createQc } from 'ducks/actions.js'
+import { createQc } from 'ducks/actions.ts'
 import type { Enhancer } from 'utils/flow-types'
 
 type Props = {

@@ -1,17 +1,17 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import { compose, shouldUpdate } from 'recompose'
-
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { compose, shouldUpdate } from 'recompose'
+import { canIDeleteCharacter } from 'selectors'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import { canIDeleteCharacter } from 'selectors'
+import { ESSENCE_MAX, ESSENCE_MIN } from 'utils/constants.ts'
 import { isUnequalByKeys } from 'utils'
-import { ESSENCE_MIN, ESSENCE_MAX } from 'utils/constants.ts'
+
 import type { Character, Enhancer } from 'utils/flow-types'
 
 type ExposedProps = {
@@ -77,8 +77,8 @@ const BasicsEditor = ({
       margin="dense"
       multiline
       fullWidth
-      rows={2}
-      rowsMax={10}
+      minRows={2}
+      maxRows={10}
       onChange={onChange}
     />
   </BlockPaper>

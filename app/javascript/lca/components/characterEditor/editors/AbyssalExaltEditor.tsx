@@ -1,14 +1,12 @@
-import React from 'react'
-
+import type React from 'react'
 import MenuItem from '@material-ui/core/MenuItem'
 
+import type { Character } from '@lca/types'
 import AbyssalCasteSelect from 'components/characterEditor/exaltTraits/AbyssalCasteSelect'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import { nonCasteAbilities } from 'utils/calculated'
 import { ABYSSAL_CASTE_ABILITIES } from 'utils/constants'
-import type { Character } from 'utils/flow-types'
 
 type Props = { character: Character; onChange: React.ChangeEventHandler }
 function AbyssalExaltEditor({ character, onChange }: Props) {

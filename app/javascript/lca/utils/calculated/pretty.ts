@@ -1,7 +1,4 @@
-// @flow
-
-// $FlowFixMe
-import { Character } from 'types'
+import type { Character } from '@lca/types'
 import { capitalize, titleCase } from '..'
 
 export const solarXpName = (character: Character) =>
@@ -17,14 +14,48 @@ export function prettyExaltType(character: Character) {
       return 'Lunar'
     case 'SiderealCharacter':
       return 'Sidereal'
+    case 'AbyssalCharacter':
+      return 'Abyssal '
+    case 'AlchemicalCharacter':
+      return 'Alchemical '
+    case 'InfernalCharacter':
+      return 'Infernal '
     default:
       return titleCase(character.exalt_type)
   }
 }
 
+export const prettyCanonType = (type: string) => {
+  switch (type) {
+    case 'Character':
+      return 'Mortal'
+    case 'SolarCharacter':
+      return 'Solar Exalt'
+    case 'DragonbloodCharacter':
+      return 'Dragon-Blooded Exalt'
+    case 'LunarCharacter':
+      return 'Lunar Exalt'
+    case 'SiderealCharacter':
+      return 'Sidereal Exalt'
+    case 'AbyssalCharacter':
+      return 'Abyssal Exalt'
+    case 'AlchemicalCharacter':
+      return 'Alchemical Exalt'
+    case 'InfernalCharacter':
+      return 'Infernal Exalt'
+
+    case 'CustomAbilityCharacter':
+      return 'Ability-Based Exalt'
+    case 'CustomAttributeCharacter':
+      return 'Attribute-Based Exalt'
+    case 'CustomEssenceCharacter':
+      return 'Essence-Based Exalt / Spirit'
+  }
+}
+
 const prettyCaste = (character: Character) => {
   let casteLabel = character.aspect ? ' Aspect ' : ' Caste '
-  if ((character.caste || '').toLowerCase() === 'casteless') {
+  if ((character.caste ?? '').toLowerCase() === 'casteless') {
     casteLabel = ' '
   }
   return character.caste === '' || character.caste == null
@@ -44,7 +75,7 @@ export const prettyCompactExaltType = (character: Character) => {
   if (character.type === 'Character') {
     return character.is_sorcerer ? 'Sorcerer' : 'Mortal'
   }
-  const totem = character.totem ? titleCase(character.totem) + ' Totem ' : ''
+  const totem = character.totem ? `${titleCase(character.totem)} Totem ` : ''
 
   return `${totem}${prettyCaste(character)}`
 }
@@ -54,9 +85,12 @@ export function exaltTypeBase(character: Character) {
     case 'SolarCharacter':
     case 'DragonbloodCharacter':
     case 'SiderealCharacter':
+    case 'AbyssalCharacter':
+    case 'InfernalCharacter':
     case 'CustomAbilityCharacter':
       return 'ability'
     case 'LunarCharacter':
+    case 'AlchemicalCharacter':
     case 'CustomAttributeCharacter':
       return 'attribute'
     case 'CustomEssenceCharacter':

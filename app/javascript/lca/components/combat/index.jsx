@@ -2,30 +2,29 @@
 import React, { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
-
-import CharacterCard from './CharacterCombatCard.jsx'
-import QcCard from './QcCombatCard.jsx'
-import BattlegroupCard from './BattlegroupCombatCard.jsx'
-import OutOfCombatCard from './OutOfCombatCard.jsx'
-import BlockPaper from '../generic/blockPaper.jsx'
+import { compose } from 'recompose'
+import {
+  amIStOfChronicle,
+  getBattlegroupsForChronicle,
+  getCharactersForChronicle,
+  getPlayersForChronicle,
+  getQcsForChronicle,
+  getSpecificChronicle,
+  getStorytellerForChronicle,
+} from 'selectors'
 
 import ProtectedComponent from 'containers/ProtectedComponent'
-import { nextRound, endCombat } from 'ducks/events'
-import {
-  getSpecificChronicle,
-  getPlayersForChronicle,
-  getCharactersForChronicle,
-  getQcsForChronicle,
-  getBattlegroupsForChronicle,
-  getStorytellerForChronicle,
-  amIStOfChronicle,
-} from 'selectors'
+import { endCombat, nextRound } from 'ducks/events'
+import BlockPaper from '../generic/BlockPaper.tsx'
+import BattlegroupCard from './BattlegroupCombatCard.jsx'
+import CharacterCard from './CharacterCombatCard.jsx'
+import OutOfCombatCard from './OutOfCombatCard.jsx'
+import QcCard from './QcCombatCard.jsx'
+
 import type {
   Player,
   Character,

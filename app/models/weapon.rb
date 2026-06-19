@@ -15,6 +15,7 @@ class Weapon < ApplicationRecord
   normalizes :tags, with: method(:trim_array_attribute)
 
   before_validation :set_traits_for_bolt_attacks
+  before_validation :set_traits_for_siege_weapons
 
   validates :overrides, json: { schema: Schemas::WEAPON_OVERRIDES }
   validates :weight, inclusion: { in: %w[ light medium heavy ] }
@@ -36,6 +37,20 @@ class Weapon < ApplicationRecord
     elsif character.abil_thrown >= character.abil_archery
       self.ability = 'thrown'
     end
+  end
+
+  def set_traits_for_siege_weapons
+    return unless will_save_change_to_attribute? :tags
+    return unless tags.any? { |tag| tag.start_with?('siege') } && tags_was.none? { |tag| tag.start_with?('siege') }
+
+    self.weight = 'heavy'
+    overrides['attack_attribute'] = if character.attr_intelligence >= character.attr_perception
+                                      { 'use' => 'intelligence' }
+                                    else
+                                      { 'use' => 'perception' }
+
+                                    end
+    self.ability = 'war'
   end
 
   def entity_type

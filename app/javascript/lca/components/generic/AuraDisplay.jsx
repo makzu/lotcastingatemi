@@ -8,11 +8,11 @@ import ButtonBase from '@material-ui/core/ButtonBase'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import { updateCharacter, updateQc } from 'ducks/actions.js'
+import { updateCharacter, updateQc } from 'ducks/actions.ts'
 import { canIEditCharacter, canIEditQc } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     marginRight: theme.spacing(),
     minWidth: '5.5em',
@@ -56,7 +56,7 @@ class AuraDisplay extends React.Component<Props, State> {
     }
   }
 
-  handleOpen = e => {
+  handleOpen = (e) => {
     if (this.props.canEdit) this.setState({ anchor: e.currentTarget })
   }
 
@@ -64,7 +64,7 @@ class AuraDisplay extends React.Component<Props, State> {
     this.setState({ anchor: null })
   }
 
-  handleChange = anima => {
+  handleChange = (anima) => {
     this.props.update(this.props.character.id, anima)
     this.setState({ anchor: null })
   }
@@ -143,11 +143,8 @@ const mapDispatchToProps = (dispatch: Function, props: ExposedProps) => ({
 })
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
 )
 
 export default enhance(AuraDisplay)

@@ -1,13 +1,18 @@
 // @flow
-import { deepEqual } from 'fast-equals'
-import React, { Component } from 'react'
-import DocumentTitle from 'react-document-title'
-import { connect } from 'react-redux'
 
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
+import { deepEqual } from 'fast-equals'
+import { getPenalties, getPoolsAndRatings } from 'selectors'
 
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { updateCharacter } from 'ducks/actions.ts'
+import { getSpecificCharacter } from 'ducks/selectors'
+import AbyssalExaltEditor from './editors/AbyssalExaltEditor'
 import AbilityEditor from './editors/abilityEditor.jsx'
 import ArmorEditor from './editors/armorEditor.jsx'
 import AttributeEditor from './editors/attributeEditor.jsx'
@@ -16,22 +21,20 @@ import CustomAbilityExaltEditor from './editors/customAbilityExaltEditor.jsx'
 import CustomAttributeExaltEditor from './editors/customAttributeExaltEditor.jsx'
 import CustomEssenceExaltEditor from './editors/customEssenceExaltEditor.jsx'
 import DragonbloodExaltEditor from './editors/DragonbloodExaltEditor.jsx'
-import LunarExaltEditor from './exaltTraits/LunarExaltEditor'
-import SiderealExaltEditor from './editors/SiderealExaltEditor'
-import AbyssalExaltEditor from './editors/AbyssalExaltEditor'
 import HealthLevelEditor from './editors/healthLevelEditor.jsx'
 import IntimacyEditor from './editors/intimacyEditor.jsx'
 import LimitEditor from './editors/limitEditor.jsx'
 import MotePoolEditor from './editors/motePoolEditor.jsx'
-import SpecialtyEditor from './editors/specialtyEditor.jsx'
+import SiderealExaltEditor from './editors/SiderealExaltEditor'
 import SolarExaltEditor from './editors/solarExaltEditor.jsx'
 import SorceryEditor from './editors/sorceryEditor.jsx'
+import SpecialtyEditor from './editors/specialtyEditor.jsx'
 import WillpowerEditor from './editors/willpowerEditor.jsx'
+import AlchemicalExaltEditor from './exaltTraits/AlchemicalExaltEditor'
+import InfernalExaltEditor from './exaltTraits/InfernalExaltEditor'
+import LunarExaltEditor from './exaltTraits/LunarExaltEditor'
 import WeaponEditor from './weapons/'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateCharacter } from 'ducks/actions.js'
-import { getSpecificCharacter } from 'ducks/selectors'
-import { getPoolsAndRatings, getPenalties } from 'selectors'
+
 import type { Character } from 'utils/flow-types'
 
 type Props = {
@@ -127,6 +130,24 @@ class CharacterEditor extends Component<Props> {
           {character.type === 'AbyssalCharacter' && (
             <Grid item xs={12} md={6}>
               <AbyssalExaltEditor
+                character={character}
+                onChange={handleChange}
+              />
+            </Grid>
+          )}
+          {character.type === 'AlchemicalCharacter' && (
+            <Grid item xs={12} md={6}>
+              <AlchemicalExaltEditor
+                character={character}
+                onChange={handleChange}
+                onCheck={handleCheck}
+                onChangeMulti={handleChangeMulti}
+              />
+            </Grid>
+          )}
+          {character.type === 'InfernalCharacter' && (
+            <Grid item xs={12} md={6}>
+              <InfernalExaltEditor
                 character={character}
                 onChange={handleChange}
               />

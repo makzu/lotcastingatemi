@@ -20,6 +20,12 @@ class Charm < ApplicationRecord
   end
   alias entity_assoc entity_type
 
+  def set_loadout_to_character_active_loadout
+    return if character.active_loadout.blank?
+
+    self.loadouts = [character.active_loadout]
+  end
+
   def self.from_charm!
     raise NotImplementedError
   end

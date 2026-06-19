@@ -1,19 +1,16 @@
-import * as React from 'react'
-import { NavLink, NavLinkProps } from 'react-router-dom'
-
+import { forwardRef, type ReactNode } from 'react'
+import { NavLink, type NavLinkProps } from 'react-router-dom'
 import ListItem from '@material-ui/core/ListItem'
-import { Omit } from '@material-ui/types'
+import type { Location } from 'history'
 
-import { Location } from 'history'
-
-const LcaNavLink = React.forwardRef<
+const LcaNavLink = forwardRef<
   HTMLAnchorElement,
   Omit<NavLinkProps, 'innerRef'>
 >((props, ref) => <NavLink exact innerRef={ref as any} {...props} />)
 
 interface Props {
   to: string
-  children: React.ReactNode
+  children: ReactNode
   exact?: boolean
   isActive?(_: {}, location: Location): boolean
   onClick?(): void

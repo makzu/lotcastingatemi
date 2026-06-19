@@ -14,7 +14,7 @@ import TextField from '@material-ui/core/TextField'
 
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import { createChronicle } from 'ducks/actions.js'
+import { createChronicle } from 'ducks/actions'
 
 type Props = { createChronicle: Function }
 type State = { open: boolean, chronicle: { name: string } }

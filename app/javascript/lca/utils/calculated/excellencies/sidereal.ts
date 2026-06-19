@@ -1,26 +1,25 @@
+import type { Ability, Character, Charm } from '@lca/types'
 import { abil } from '..'
-import type { Ability, Character, Charm } from 'types'
-import { clamp } from 'utils/math'
 
 /* Sidereal Excellencies */
 
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
 export const siderealExcellencyAbils = (
   character: Character,
-  charms: Array<Charm>
+  charms: Array<Charm>,
 ): Array<string> => {
   let excellencies = (character.caste_abilities || [])
-    .filter(a => abil(character, a) > 0)
+    .filter((a) => abil(character, a) > 0)
     .concat(
-      (character.favored_abilities || []).filter(a => abil(character, a) > 0)
+      (character.favored_abilities || []).filter((a) => abil(character, a) > 0),
     )
 
   excellencies = excellencies.concat(['martial_arts'])
 
   excellencies = excellencies.concat(
-    charms.map(c =>
-      c.charm_type === 'MartialArts' ? 'martial_arts' : c.ability as Ability
-    )
+    charms.map((c) =>
+      c.charm_type === 'MartialArts' ? 'martial_arts' : (c.ability as Ability),
+    ),
   )
 
   return excellencies
@@ -31,8 +30,6 @@ const siderealExcellency = (
   character: Character,
   _attribute: string,
   _ability: string,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _staticRating: boolean = false
-) =>
-  clamp(character.essence, 3, 5)
+  _staticRating: boolean = false,
+) => Math.max(character.essence, 3)
 export default siderealExcellency

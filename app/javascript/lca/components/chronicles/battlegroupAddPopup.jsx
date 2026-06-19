@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-import { addThingToChronicle } from 'ducks/actions.js'
+import { addThingToChronicle } from 'ducks/actions.ts'
 import {
   getSpecificChronicle,
   getMyBattlegroupsWithoutChronicles,
@@ -38,7 +38,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
     battlegroupId: 0,
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     let { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -67,7 +67,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
         Select a Battlegroup
       </MenuItem>,
       <Divider key="div" />,
-      ...battlegroups.map(c => (
+      ...battlegroups.map((c) => (
         <MenuItem key={c.id} value={c.id}>
           {c.name}
         </MenuItem>
@@ -75,7 +75,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
     ]
 
     const currentBattlegroup = battlegroups.find(
-      c => c.id == this.state.battlegroupId
+      (c) => c.id == this.state.battlegroupId,
     )
     const hidden = currentBattlegroup && currentBattlegroup.hidden
     return (
@@ -129,14 +129,14 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Object = dispatch => ({
+const mapDispatchToProps: Object = (dispatch) => ({
   handleSubmit: (id, battlegroupId) =>
     dispatch(addThingToChronicle(id, battlegroupId, 'battlegroup')),
 })
 
 const enhance: Enhancer<Props, ExposedProps> = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )
 
 export default enhance(BattlegroupAddPopup)

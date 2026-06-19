@@ -1,18 +1,17 @@
-import pool from '../_pool.js'
+import type { Character } from '@lca/types'
+import type { BlockOfPenalties } from '@lca/types/pool'
 import { penaltyObject } from '../../index.js'
-import type { Character } from 'types'
+import pool from '../_pool'
 
 /** Withdraw pool, described in the core book, page 199 */
 export function withdraw(
   character: Character,
   merits: string[],
-  // TODO: replace this any with a real type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  penalties: any,
-  excellencyAbils: string[]
+  penalties: BlockOfPenalties,
+  excellencyAbils: string[],
 ) {
   let bonus = []
-  if (merits.some(m => m.startsWith('fleet of foot')))
+  if (merits.some((m) => m.startsWith('fleet of foot')))
     bonus = [{ label: 'fleet of foot', bonus: 1 }]
   if (character.type !== 'Character' && character.caste === 'water')
     bonus = bonus.concat([
@@ -20,13 +19,13 @@ export function withdraw(
     ])
 
   return pool(
-    'Disengage',
+    'Withdraw',
     character,
     'dexterity',
     'athletics',
     bonus,
     penaltyObject(penalties, { useMobility: true }),
-    excellencyAbils
+    excellencyAbils,
   )
 }
 

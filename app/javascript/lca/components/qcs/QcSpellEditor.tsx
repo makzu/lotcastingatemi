@@ -1,19 +1,16 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-
 import { Button, Grid, Typography } from '@material-ui/core'
-import { WithStyles } from '@material-ui/core/styles'
+import type { WithStyles } from '@material-ui/core/styles'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-
-import Checkbox from 'components/shared/inputs/Checkbox'
-import { State } from 'ducks'
-import { createSpell, destroySpell, updateSpell } from 'ducks/actions'
-import { getSpellsForQc } from 'ducks/selectors'
-import commonStyles from 'styles'
-import { QC, Spell } from 'types'
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import Checkbox from '@lca/components/shared/inputs/Checkbox'
+import type { State } from '@lca/ducks'
+import { createSpell, destroySpell, updateSpell } from '@lca/ducks/actions'
+import { getSpellsForQc } from '@lca/ducks/selectors'
+import type commonStyles from '@lca/styles'
+import type { QC, Spell } from '@lca/types'
 import QcSpellFields from './QcSpellFields'
 
 const SortableItem = SortableElement(({ children }) => children)
@@ -92,11 +89,8 @@ const mapState = (state: State, { qc }): StateProps => ({
 
 const mapDispatch = (dispatch, { qc }: OuterProps): DispatchProps => ({
   create: () => dispatch(createSpell(qc.id, { parent: 'qc' })),
-  destroy: id => dispatch(destroySpell(id, qc.id, 'qc')),
+  destroy: (id) => dispatch(destroySpell(id, qc.id, 'qc')),
   update: (id, trait) => dispatch(updateSpell(id, qc.id, trait, 'qc')),
 })
 
-export default connect(
-  mapState,
-  mapDispatch
-)(QcSpellEditor)
+export default connect(mapState, mapDispatch)(QcSpellEditor)

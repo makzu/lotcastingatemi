@@ -1,6 +1,4 @@
-import * as React from 'react'
-
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem'
+import ListItem, { type ListItemProps } from '@material-ui/core/ListItem'
 
 const HtmlLinkListItem = (props: ListItemProps & { href: string }) => (
   <ListItem

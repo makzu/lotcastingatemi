@@ -1,10 +1,19 @@
-import { Ability, Attribute, Character, Charm } from 'types'
-import { ATTRIBUTES } from 'utils/constants'
+import type {
+  Ability,
+  Attribute,
+  Character,
+  MartialArtsCharm,
+  NativeCharm,
+} from '@lca/types'
+import { ATTRIBUTES } from '@lca/utils/constants'
 import { attr } from '..'
 import { highestOtherAttribute } from './custom.js'
 
-export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
-  const charmsPerAttribute = {}
+export const lunarExcellencyAbils = (
+  character: Character,
+  charms: (NativeCharm | MartialArtsCharm)[],
+) => {
+  const charmsPerAttribute: Record<string, number> = {}
   const casteAndFav: string[] = character.caste_attributes.concat(
     character.favored_attributes,
   )
@@ -24,15 +33,16 @@ export const lunarExcellencyAbils = (character: Character, charms: Charm[]) => {
     ) {
       return pretty
     }
+    return null
   })
 
-  return [...new Set(attributes)]
+  return [...new Set(attributes.filter((a) => a !== null))]
 }
 
 const LunarExcellency = (
   character: Character,
   attribute: Attribute,
-  ability: Ability,
+  _ability: Ability,
   staticRating: boolean,
   stunt = false,
 ) =>

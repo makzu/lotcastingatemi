@@ -1,12 +1,16 @@
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { apiMiddleware } from 'redux-api-middleware'
-import { configureStore } from '@reduxjs/toolkit'
+import { optimistic } from 'redux-optimistic-ui'
 
-import authTokenMiddleware from './middleware/authTokenMiddleware.js'
-import navigatorMiddleware from './middleware/navigatorMiddleware.js'
-import themeSaverMiddleware from './middleware/themeSaverMiddleware.js'
-import paginationMiddleware from 'middleware/paginationMiddleware'
-
-import reducer from './ducks'
+import AppReducer from '@lca/ducks/app'
+import EntityReducer from '@lca/ducks/entities'
+import SessionReducer from '@lca/ducks/session'
+import drawerSlice from '@lca/features/drawerSlice'
+import themeSlice from '@lca/features/themeSlice'
+import authTokenMiddleware from '@lca/middleware/authTokenMiddleware.js'
+import navigatorMiddleware from '@lca/middleware/navigatorMiddleware.js'
+import paginationMiddleware from '@lca/middleware/paginationMiddleware'
+import themeSaverMiddleware from '@lca/middleware/themeSaverMiddleware.js'
 
 const middleware = [
   apiMiddleware,
@@ -16,20 +20,24 @@ const middleware = [
   paginationMiddleware,
 ]
 
-// export default () =>
-//   configureStore({
-//     reducer,
-//     middleware,
-//     devTools: !PRODUCTION,
-//   })
+const reducer = combineReducers({
+  app: AppReducer,
+  entities: optimistic(EntityReducer),
+  session: SessionReducer,
+  drawer: drawerSlice,
+  theme: themeSlice,
+})
 
-export default function configureAppStore(preloadedState) {
-  const store = configureStore({
-    reducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(middleware),
-    preloadedState,
-  })
+const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
 
-  return store
-}
+  devTools: true,
+})
+
+export default store
+
+export type AppStore = typeof store
+export type RootState = ReturnType<typeof reducer>
+export type AppDispatch = AppStore['dispatch']

@@ -1,10 +1,8 @@
-import React from 'react'
-
 import { ListSubheader, MenuItem, TextField } from '@material-ui/core/'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import { TextFieldProps } from '@material-ui/core/TextField'
+import { makeStyles, type Theme } from '@material-ui/core/styles'
+import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import { Character, Weapon } from 'types'
+import type { Character, Weapon } from '@lca/types'
 import * as calc from 'utils/calculated'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -24,7 +22,7 @@ function WeaponAbilitySelect(props: Props) {
   const classes = useStyles({})
   const { character, weapon, onChange } = props
 
-  const options = calc.attackAbilities(character).map(abil => (
+  const options = calc.attackAbilities(character).map((abil) => (
     <MenuItem
       key={abil.abil}
       value={abil.abil}
@@ -33,7 +31,7 @@ function WeaponAbilitySelect(props: Props) {
       {abil.abil} ({abil.rating})
     </MenuItem>
   ))
-  const nonAttackOptions = calc.nonAttackAbilities(character).map(abil => (
+  const nonAttackOptions = calc.nonAttackAbilities(character).map((abil) => (
     <MenuItem
       key={abil.abil}
       value={abil.abil}

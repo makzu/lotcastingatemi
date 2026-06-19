@@ -1,6 +1,5 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-
 import {
   Collapse,
   Divider,
@@ -10,15 +9,15 @@ import {
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
 import { useCharacterAttribute } from 'ducks/entities'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 
 const CharacterEditorNav = ({ match }: RouteProps) => {
   const id = parseInt(match.params.id, 10)
   const characterName = useCharacterAttribute(id, 'name')
 
-  const [isOpen, setOpen] = React.useState(true)
+  const [isOpen, setOpen] = useState(true)
 
   if (characterName == null) {
     return null

@@ -1,16 +1,15 @@
-import React, { MouseEvent } from 'react'
-
+import type { MouseEvent } from 'react'
 import {
   Divider,
   ListSubheader,
-  makeStyles,
   MenuItem,
+  makeStyles,
   TextField,
-  Theme,
+  type Theme,
 } from '@material-ui/core'
+import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import { TextFieldProps } from '@material-ui/core/TextField'
-import { Character, Weapon } from 'types'
+import type { Character, Weapon } from '@lca/types'
 import { ATTRIBUTE_NAMES } from 'utils/constants'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,7 +44,7 @@ const WeaponAttributeSelect = (props: Props) => {
   const defaultValue = isDamage ? 'strength' : 'dexterity'
   const fixedValue = value || 'null'
 
-  const attributeItems = ATTRIBUTE_NAMES.map(attr => (
+  const attributeItems = ATTRIBUTE_NAMES.map((attr) => (
     <MenuItem
       key={attr}
       value={attr === defaultValue ? null : attr}

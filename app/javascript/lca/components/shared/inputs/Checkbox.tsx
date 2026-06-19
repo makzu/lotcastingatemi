@@ -1,10 +1,8 @@
-import React from 'react'
-
 import {
   Checkbox,
   FormControlLabel,
   makeStyles,
-  Theme,
+  type Theme,
 } from '@material-ui/core/'
 
 const useStyles = makeStyles((theme: Theme) => ({

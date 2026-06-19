@@ -1,9 +1,10 @@
-import { getJSON } from 'redux-api-middleware'
+import { getJSON, type RSAAAction } from 'redux-api-middleware'
 
-import { callApi } from 'utils/api'
+import type { Charm } from '@lca/types/traits/charm'
+import { callApi } from '@lca/utils/api'
 import {
   crudAction,
-  characterTraitTypes as entityTypes,
+  type characterTraitTypes as entityTypes,
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
@@ -17,14 +18,14 @@ export const createTraitReducer = (
   parentType: parentTypes = 'character',
   extraReducers?: { [x: string]: (state, action) => void },
 ) => {
-  const pluralType = entityType + 's'
+  const pluralType = `${entityType}s`
 
   return {
     /* Create actions */
     [crudAction(entityType, 'CREATE').success.toString()]: (state, action) => {
       const { id } = action.payload
       const { charId } = action.meta
-      const parent = (action.meta.parent || parentType) + 's'
+      const parent = `${action.meta.parent || parentType}s`
       const assoc = traitAssoc(entityType, action.payload)
       const newTraitIds = state[parent][charId][assoc].concat([id])
 
@@ -40,7 +41,7 @@ export const createTraitReducer = (
     /* Destroy actions */
     [crudAction(entityType, 'DESTROY').start.toString()]: (state, action) => {
       const { charId, id } = action.meta
-      const parent = (action.meta.parent || parentType) + 's'
+      const parent = `${action.meta.parent || parentType}s`
       const assoc = traitAssoc(entityType, state[pluralType][id])
 
       state[parent][charId][assoc] = state[parent][charId][assoc].filter(
@@ -58,19 +59,25 @@ export const createTraitReducer = (
 export const createApiActions = (
   entityType: entityTypes,
   parentType: parentTypes = 'character',
-): [CreateAction, UpdateAction, DestroyAction] => [
-  createTraitCreateAction(entityType, parentType),
-  createTraitUpdateAction(entityType, parentType),
-  createTraitDestroyAction(entityType, parentType),
-]
+) =>
+  [
+    createTraitCreateAction(entityType, parentType),
+    createTraitUpdateAction(entityType, parentType),
+    createTraitDestroyAction(entityType, parentType),
+  ] as const
 
-const justGetJSON = (_0: any, _1: any, response) => getJSON(response)
+const justGetJSON = (_0: never, _1: never, response: Response) =>
+  getJSON(response)
 
 interface CreateActionOptions {
   type?: string
   parent?: parentTypes
+  loadouts?: Charm['loadouts']
 }
-type CreateAction = (charId: number, options?: CreateActionOptions) => void
+type CreateAction = (
+  charId: number,
+  options?: CreateActionOptions,
+) => RSAAAction
 /** Creates an API-Calling Action to create the specified entity */
 const createTraitCreateAction =
   (
@@ -84,12 +91,19 @@ const createTraitCreateAction =
     if (options.type) {
       createObj = { [entityType]: { type: options.type } }
     }
+    if (options.loadouts) {
+      createObj = {
+        ...createObj,
+        [entityType]: { ...createObj[entityType], loadouts: options.loadouts },
+      }
+    }
     const metaObj: { [x: string]: string | number } = { charId }
     if (options.parent) {
       metaObj.parent = options.parent
     }
 
     return callApi({
+      method: 'POST',
       body: JSON.stringify(createObj),
       endpoint: `/api/v1/${parent}s/${charId}/${entityType}s`,
       types: standardTypes(entityType, action, justGetJSON, metaObj),
@@ -101,7 +115,7 @@ type UpdateAction = (
   charId: number,
   trait: { [x: string]: any },
   parent?: parentTypes,
-) => void
+) => RSAAAction
 
 let nextTransactionId = 0
 /** Creates an API-Calling Action to update the specified entity */
@@ -110,12 +124,7 @@ const createTraitUpdateAction =
     entityType: entityTypes,
     parentType: parentTypes = 'character',
   ): UpdateAction =>
-  (
-    id: number,
-    charId: number,
-    trait: object,
-    parent: parentTypes = parentType,
-  ) => {
+  (id, charId: number, trait: object, parent: parentTypes = parentType) => {
     const transactionId = entityType + nextTransactionId++
     const action = crudAction(entityType, 'UPDATE')
     return callApi({
@@ -135,7 +144,11 @@ const createTraitUpdateAction =
     })
   }
 
-type DestroyAction = (id: number, charId: number, parent?: parentTypes) => void
+type DestroyAction = (
+  id: number,
+  charId: number,
+  parent?: parentTypes,
+) => RSAAAction
 /** Creates an API-Calling Action to destroy the specified entity */
 const createTraitDestroyAction =
   (
@@ -163,7 +176,7 @@ const createTraitDestroyAction =
 
 const traitAssoc = (type: string, payload: any) => {
   if (type !== 'charm') {
-    return type + 's'
+    return `${type}s`
   }
 
   switch (payload.charm_type) {

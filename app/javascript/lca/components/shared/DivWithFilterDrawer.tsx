@@ -1,11 +1,8 @@
-import * as React from 'react'
-
-import { Theme } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 import { drawerWidth } from 'containers/_drawerProperties'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.up('xl')]: {
       paddingRight: drawerWidth,

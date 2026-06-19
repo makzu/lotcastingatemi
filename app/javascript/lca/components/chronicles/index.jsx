@@ -1,28 +1,10 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
-
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
-
-import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
-import CharacterCard from 'components/characters/CharacterCard.jsx'
-import SortableGridList from 'components/generic/SortableGridList.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import QcCard from 'components/qcs/QcCard.jsx'
-import STControls from './StControls.jsx'
-import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
-import CharacterAddPopup from './characterAddPopup.jsx'
-import QcAddPopup from './qcAddPopup.jsx'
-
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.js'
-import { updateBattlegroupChronicleSort } from 'ducks/entities/battlegroup'
-import { updateCharacterChronicleSort } from 'ducks/entities/character'
-import { updateQcChronicleSort } from 'ducks/entities/qc'
 import {
   amIStOfChronicle,
   getBattlegroupsForChronicle,
@@ -32,6 +14,23 @@ import {
   getSpecificChronicle,
   getStorytellerForChronicle,
 } from 'selectors'
+
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
+import BattlegroupCard from 'components/battlegroups/BattlegroupCard.jsx'
+import CharacterCard from 'components/characters/CharacterCard.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
+import SortableGridList from 'components/generic/SortableGridList.tsx'
+import QcCard from 'components/qcs/QcCard.jsx'
+import ProtectedComponent from 'containers/ProtectedComponent'
+import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
+import { updateBattlegroupChronicleSort } from 'ducks/entities/battlegroup'
+import { updateCharacterChronicleSort } from 'ducks/entities/character'
+import { updateQcChronicleSort } from 'ducks/entities/qc'
+import BattlegroupAddPopup from './battlegroupAddPopup.jsx'
+import CharacterAddPopup from './characterAddPopup.jsx'
+import QcAddPopup from './qcAddPopup.jsx'
+import STControls from './StControls'
+
 import type { Battlegroup, Character, fullQc } from 'utils/flow-types'
 
 const SortableItem = SortableElement(({ children }) => children)

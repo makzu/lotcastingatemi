@@ -43,6 +43,7 @@ class SolarCharacter < Character
     new_cha.caste = '' unless CASTES.include? new_cha.caste
     new_cha.caste_abilities = new_cha.caste_abilities & (CASTE_ABILITIES[new_cha.caste.to_sym] || [])
     new_cha.limit = 0 if new_cha.limit.blank?
+    new_cha.active_loadout = nil
 
     new_cha.save!
     (new_cha.attribute_charms + new_cha.essence_charms).each do |charm|
@@ -71,6 +72,7 @@ class SolarCharacter < Character
     self.exalt_type = 'Solar'
     self.aspect = false
     self.aura = ''
+    self.active_loadout = nil
     self.excellency = 'solar'
     self.excellency_stunt = ''
     self.excellencies_for = ['solar']

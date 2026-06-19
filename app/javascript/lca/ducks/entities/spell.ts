@@ -1,10 +1,11 @@
 import { createAction } from '@reduxjs/toolkit'
-import createCachedSelector from 're-reselect'
+import { createCachedSelector } from 're-reselect'
 
-import { State } from 'ducks'
+import type { RootState } from '@lca/store'
+import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 import { getSpecificCharacter } from './character'
 import { getSpecificQc } from './qc'
 
@@ -26,12 +27,14 @@ export const [createSpell, updateSpell, destroySpell] =
   createApiActions('spell')
 
 /* *** Selectors *** */
-const getSpells = (state: State) => unwrapped(state).spells
+const getSpells = (state: RootState) => unwrapped(state).spells
 
 export const getSpellsForCharacter = createCachedSelector(
   [getSpecificCharacter, getSpells],
   (character, spells) =>
-    character == null ? [] : character.spells.map((s) => spells[s]),
+    character == null
+      ? []
+      : character.spells.map((s) => spells[s]).sort(sortOrderSort),
 )((_state, id) => id)
 
 export const getSpellsForQc = createCachedSelector(

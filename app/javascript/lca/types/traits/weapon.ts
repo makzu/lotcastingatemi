@@ -1,5 +1,5 @@
-import { Ability, Attribute } from 'types/character'
-import { CharacterTrait, Weight } from '../_lib'
+import type { CharacterTrait, Weight } from '../_lib'
+import type { Ability, Attribute } from '../character'
 
 export interface Weapon extends CharacterTrait {
   name: string
@@ -26,4 +26,11 @@ interface AttributeOverride {
   base_only?: boolean
 }
 
-type AttributeOrEssence = Attribute | 'essence'
+export type AttributeOrEssence = Attribute | 'essence'
+
+export type DamageAttribute =
+  | Attribute
+  | 'subtle'
+  | 'flame'
+  | 'crossbow'
+  | 'firearm'

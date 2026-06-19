@@ -1,5 +1,4 @@
-// tslint:disable object-literal-sort-keys
-import { createStyles, Theme } from '@material-ui/core/styles'
+import { createStyles, type Theme } from '@material-ui/core/styles'
 
 // Common styling and theming elements used by most things
 const commonStyles = (theme: Theme) =>

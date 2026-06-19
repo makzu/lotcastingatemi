@@ -1,14 +1,12 @@
-import * as React from 'react'
-
+import type * as React from 'react'
 import { MenuItem } from '@material-ui/core'
 
+import type { Character } from '@lca/types'
 import AbilitySelect from 'components/generic/abilitySelect.jsx'
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import LunarCasteSelect from './LunarCasteSelect'
-
-import { Character } from 'types'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import { nonCasteAttributes } from 'utils/calculated'
 import { LUNAR_CASTE_ATTRIBUTES } from 'utils/constants'
+import LunarCasteSelect from './LunarCasteSelect'
 
 interface Props {
   character: Character

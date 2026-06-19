@@ -1,18 +1,15 @@
-import * as React from 'react'
-
 import { Typography } from '@material-ui/core'
 import {
   createStyles,
-  Theme,
+  type Theme,
+  type WithStyles,
   withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import type { Merit } from '@lca/types/traits/merit.ts'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
+import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
 import RatingLine from 'components/generic/ratingLine.jsx'
-
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.jsx'
-import { Merit } from 'types'
 
 const styles = (theme: Theme) =>
   createStyles({

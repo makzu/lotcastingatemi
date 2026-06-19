@@ -1,9 +1,8 @@
 // @flow
 import React from 'react'
-
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from '../generic/blockPaper.jsx'
+import BlockPaper from '../generic/BlockPaper.tsx'
 
 const PrivacyPage = () => (
   <BlockPaper>

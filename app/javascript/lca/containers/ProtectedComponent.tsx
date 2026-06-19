@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { RouteComponentProps } from 'react-router'
+import type { ComponentType } from 'react'
+import type { RouteComponentProps } from 'react-router'
 
-import LogoutPopup from './LogoutPopup'
+import LogoutPopup from './LogoutPopup.tsx'
 
 const ProtectedComponent = <P extends object>(
-  WrappedComponent: React.ComponentType<P>
+  WrappedComponent: ComponentType<P>,
 ) => {
   const protectedComponent = (props: P & RouteComponentProps) => (
     <>

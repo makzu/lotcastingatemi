@@ -14,12 +14,12 @@ import Divider from '@material-ui/core/Divider'
 
 import PoolDisplay from 'components/generic/PoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions.js'
+import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
 import { getPoolsAndRatingsGeneric, canIEdit } from 'selectors'
 import type { Enhancer } from 'utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
-const styles = theme => ({
+const styles = (theme) => ({
   wrap: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -59,7 +59,7 @@ class ShapeSorceryWidget extends React.Component<Props, State> {
     total: this.props.character.sorcerous_motes || 0,
   }
 
-  handleChangeRoll = e => {
+  handleChangeRoll = (e) => {
     let { value } = e.target
     this.setState({
       roll: value,
@@ -67,7 +67,7 @@ class ShapeSorceryWidget extends React.Component<Props, State> {
     })
   }
 
-  handleChangeTotal = e => {
+  handleChangeTotal = (e) => {
     let { value } = e.target
     this.setState({
       roll: value - this.props.character.sorcerous_motes,
@@ -180,11 +180,8 @@ function mapDispatchToProps(dispatch: Function, props) {
 }
 
 const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withStyles(styles)
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
 )
 
 export default enhance(ShapeSorceryWidget)

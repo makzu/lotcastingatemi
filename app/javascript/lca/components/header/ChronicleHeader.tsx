@@ -1,16 +1,14 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
+import type { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
-import { compose } from 'recompose'
-
 import { Hidden, Tab, Tabs, Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-
-import { State } from 'ducks'
+import type { State } from 'ducks'
+import { compose } from 'recompose'
 import { amIStOfChronicle, getSpecificChronicle } from 'selectors'
-import { Chronicle } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
+
+import type { Chronicle } from '@lca/types'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -23,7 +21,7 @@ interface Props extends RouteComponentProps<any> {
   classes: any
 }
 
-const LinkTab = props => <Tab {...props} component={Link as any} />
+const LinkTab = (props) => <Tab {...props} component={Link as any} />
 
 function ChronicleHeader(props: Props) {
   if (props.chronicle == null || props.chronicle.name == null) {
@@ -83,5 +81,5 @@ function mapStateToProps(state: State, { match, location }: RouteProps) {
 
 export default compose<Props, RouteProps>(
   connect(mapStateToProps),
-  withStyles(styles)
+  withStyles(styles),
 )(ChronicleHeader)

@@ -1,10 +1,8 @@
-import * as React from 'react'
-
 import { MenuItem, TextField } from '@material-ui/core'
+import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import { TextFieldProps } from '@material-ui/core/TextField'
-import { ExaltType } from 'types'
-import { WithAura } from 'types/shared'
+import type { ExaltType } from '@lca/types'
+import type { WithAura } from '@lca/types/shared'
 
 interface HavingAura extends WithAura {
   type: ExaltType | 'qc'

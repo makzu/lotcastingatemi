@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
 import { shouldUpdate } from 'recompose'
 
-import Typography from '@material-ui/core/Typography'
-
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TextField from 'components/generic/TextField.jsx'
-import { isUnequalByKeys } from 'utils'
 import { LIMIT_MAX } from 'utils/constants.ts'
+import { isUnequalByKeys } from 'utils'
+
 import type { Character, Enhancer } from 'utils/flow-types'
 
 type Props = {
@@ -37,8 +37,8 @@ function LimitEditor({ character, onChange }: Props) {
         margin="dense"
         multiline
         fullWidth
-        rows={2}
-        rowsMax={5}
+        minRows={2}
+        maxRows={5}
         onChange={onChange}
       />
     </BlockPaper>

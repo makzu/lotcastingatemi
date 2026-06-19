@@ -1,22 +1,16 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-
 import Typography from '@material-ui/core/Typography'
 
-import { State } from 'ducks'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
 
-interface Props {
-  loading: boolean
+const CharacterLoadError = () => {
+  const loading = useAppSelector((state) => state.app.loading)
+  return (
+    <Typography paragraph>
+      {loading
+        ? 'This Character has not yet loaded.'
+        : 'Could not load Character. It may not be publicly viewable.'}
+    </Typography>
+  )
 }
 
-const CharacterLoadError = ({ loading }: Props) => (
-  <Typography paragraph>
-    {loading
-      ? 'This Character has not yet loaded.'
-      : 'Could not load Character. It may not be publicly viewable.'}
-  </Typography>
-)
-
-const mapState = ({ app }: State): Props => ({ loading: app.loading })
-
-export default connect<Props>(mapState)(CharacterLoadError)
+export default CharacterLoadError

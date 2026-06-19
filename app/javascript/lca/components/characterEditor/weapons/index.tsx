@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
-
 import { Button, Divider, Typography } from '@material-ui/core'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
-import { State } from 'ducks'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import type { Character } from '@lca/types'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
 import { createWeapon, updateWeapon } from 'ducks/actions'
 import { getWeaponsForCharacter } from 'ducks/entities'
 import { updateWeaponSort } from 'ducks/entities/weapon'
-import { Character } from 'types'
 import WeaponEditorPopup from './WeaponEditorPopup'
 import WeaponRow from './WeaponRow'
 
@@ -25,11 +24,11 @@ const WeaponEditor = (props: WeaponEditorProps) => {
   const [selectedWeaponId, setSelectedWeaponId] = useState<number | null>(null)
 
   const { character } = props
-  const weapons = useSelector((state: State) =>
-    getWeaponsForCharacter(state, character.id)
+  const weapons = useAppSelector((state) =>
+    getWeaponsForCharacter(state, character.id),
   )
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const onClickCreateWeapon = () => {
     dispatch(createWeapon(character.id))
   }
@@ -38,11 +37,13 @@ const WeaponEditor = (props: WeaponEditorProps) => {
     const weaponA = weapons[oldIndex]
     const weaponB = weapons[newIndex]
     const offset = newIndex > oldIndex ? 1 : -1
-    dispatch(updateWeaponSort({id: weaponA.id, sorting: weaponB.sorting + offset}))
+    dispatch(
+      updateWeaponSort({ id: weaponA.id, sorting: weaponB.sorting + offset }),
+    )
     dispatch(
       updateWeapon(weaponA.id, character.id, {
         sorting_position: newIndex,
-      })
+      }),
     )
   }
 

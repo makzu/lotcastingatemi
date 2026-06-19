@@ -1,42 +1,42 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-
 import {
   Divider,
   ListItemIcon,
   ListItemText,
-  MenuItem
+  MenuItem,
 } from '@material-ui/core'
 import {
   Bookmark,
   BookmarkBorder,
   Visibility,
-  VisibilityOff
+  VisibilityOff,
 } from '@material-ui/icons'
-
-import { State } from 'ducks'
-import { update } from 'ducks/actions/ByType'
 import { canIDelete } from 'selectors'
-import { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface StateProps {
-  canEdit: boolean
-  isPinned: boolean
-  isHidden: boolean
-}
+import { useAppDispatch, useAppSelector } from '@lca/hooks'
+import { update } from 'ducks/actions/ByType'
+import type { MenuItemProps as Props } from './CharacterMenuItem'
 
-interface DispatchProps {
-  hide(hidden: boolean): void
-  pin(pinned: boolean): void
-}
+const CardMenuPin = ({ id, characterType }: Props) => {
+  const dispatch = useAppDispatch()
+  const canEdit = useAppSelector((state) =>
+    canIDelete(state, id, characterType),
+  )
+  const isPinned = useAppSelector(
+    (state) => state.entities.current[`${characterType}s`][id].pinned,
+  )
+  const isHidden = useAppSelector(
+    (state) => state.entities.current[`${characterType}s`][id].hidden,
+  )
 
-interface InnerProps extends StateProps, DispatchProps {}
+  const pin = () => dispatch(update[characterType](id, { pinned: !isPinned }))
+  const hide = () => dispatch(update[characterType](id, { hidden: !isHidden }))
 
-const CardMenuPin = ({ isPinned, isHidden, canEdit, pin, hide }: InnerProps) =>
-  canEdit ? (
+  if (!canEdit) return null
+
+  return (
     <>
       <Divider />
-      <MenuItem button onClick={() => pin(!isPinned)}>
+      <MenuItem button onClick={pin}>
         <ListItemIcon>
           {isPinned ? <Bookmark /> : <BookmarkBorder />}
         </ListItemIcon>
@@ -53,23 +53,7 @@ const CardMenuPin = ({ isPinned, isHidden, canEdit, pin, hide }: InnerProps) =>
         />
       </MenuItem>
     </>
-  ) : null
+  )
+}
 
-const mapState = (state: State, { characterType, id }: Props): StateProps => ({
-  canEdit: canIDelete(state, id, characterType),
-  isHidden: state.entities.current[characterType + 's'][id].hidden,
-  isPinned: state.entities.current[characterType + 's'][id].pinned,
-})
-
-const mapDispatch = (
-  dispatch,
-  { characterType, id }: Props
-): DispatchProps => ({
-  hide: (hidden: boolean) => dispatch(update[characterType](id, { hidden })),
-  pin: (pinned: boolean) => dispatch(update[characterType](id, { pinned })),
-})
-
-export default connect<StateProps, DispatchProps, Props>(
-  mapState,
-  mapDispatch
-)(CardMenuPin)
+export default CardMenuPin

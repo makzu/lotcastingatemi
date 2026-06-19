@@ -1,12 +1,12 @@
 import { createAction } from '@reduxjs/toolkit'
-import createCachedSelector from 're-reselect'
+import { createCachedSelector } from 're-reselect'
 
-import { State } from 'ducks'
-import { Weapon } from 'types'
-import { sortOrderSort } from 'utils'
+import type { RootState } from '@lca/store'
+import type { Weapon } from '@lca/types'
+import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { createApiActions, createTraitReducer } from './_trait'
-import { EntityState } from './_types'
+import type { EntityState } from './_types'
 import { getSpecificCharacter } from './character'
 
 export const updateWeaponSort = createAction<{ id: number; sorting: number }>(
@@ -26,12 +26,12 @@ export default createTraitReducer('weapon', undefined, {
 export const [createWeapon, updateWeapon, destroyWeapon] =
   createApiActions('weapon')
 
-const getState = (s: State) => s
+const getState = (s: RootState) => s
 
-export const getSpecificWeapon = (state: State, id: number): Weapon =>
+export const getSpecificWeapon = (state: RootState, id: number): Weapon =>
   unwrapped(state).weapons[id]
 
-export const getWeaponIDsForCharacter = (state: State, id: number) =>
+export const getWeaponIDsForCharacter = (state: RootState, id: number) =>
   getSpecificCharacter(state, id).weapons
 
 export const getWeaponsForCharacter = createCachedSelector(
@@ -44,4 +44,4 @@ export const getWeaponsForCharacter = createCachedSelector(
       .map((w) => getSpecificWeapon(state, w))
       .sort(sortOrderSort)
   },
-)((s: State, i: number) => i)
+)((_s: RootState, i: number) => i)

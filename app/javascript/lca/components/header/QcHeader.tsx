@@ -1,16 +1,14 @@
-import * as React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
-
 import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import { compose } from 'recompose'
 
+import { useDocumentTitle } from '@lca/hooks'
+import { canIEditQc, getSpecificQc } from '@lca/selectors'
+import type { RootState } from '@lca/store'
+import type { QC } from '@lca/types'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import CharacterMenu from 'components/generic/CharacterMenu/'
-import { State } from 'ducks'
-import { canIEditQc, getSpecificQc } from 'selectors'
-import { QC } from 'types'
-import { RouteWithIdProps as RouteProps } from 'types/util'
 import LcaDrawerButton from './DrawerButton'
 import { GenericHeader } from './Header'
 import { styles } from './HeaderStyles'
@@ -25,6 +23,8 @@ interface Props {
 }
 
 function QcHeader(props: Props) {
+  useDocumentTitle(`${props.qc?.name} | Lot-Casting Atemi`)
+
   if (props.qc == null) {
     return <GenericHeader />
   }
@@ -39,32 +39,28 @@ function QcHeader(props: Props) {
   }
 
   return (
-    <>
-      <DocumentTitle title={`${qc.name} | Lot-Casting Atemi`} />
+    <Toolbar>
+      <LcaDrawerButton />
 
-      <Toolbar>
-        <LcaDrawerButton />
+      <Typography variant="h6" color="inherit" className={classes.title}>
+        {editing && 'Editing '}
+        {qc.name}
+      </Typography>
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
-          {editing && 'Editing '}
-          {qc.name}
-        </Typography>
+      {props.canIEdit && (
+        <LinkButton to={editButtonPath} color="inherit">
+          {editing ? 'Done' : 'Edit'}
+        </LinkButton>
+      )}
 
-        {props.canIEdit && (
-          <LinkButton to={editButtonPath} color="inherit">
-            {editing ? 'Done' : 'Edit'}
-          </LinkButton>
-        )}
+      <div className={classes.tabs} />
 
-        <div className={classes.tabs} />
-
-        <CharacterMenu id={qc.id} characterType="qc" header />
-      </Toolbar>
-    </>
+      <CharacterMenu id={qc.id} characterType="qc" header />
+    </Toolbar>
   )
 }
 
-function mapStateToProps(state: State, { location, match }: RouteProps) {
+function mapStateToProps(state: RootState, { location, match }: RouteProps) {
   const id = parseInt(match.params.id, 10)
   const qc = getSpecificQc(state, id)
   const path = location.pathname
@@ -81,5 +77,5 @@ function mapStateToProps(state: State, { location, match }: RouteProps) {
 
 export default compose<Props, RouteProps>(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(QcHeader)

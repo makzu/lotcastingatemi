@@ -16,7 +16,7 @@ module Api
       end
 
       def charm_params
-        params.expect(charm: [*base_attributes, :sorting_position, { keywords: [], categories: [] }])
+        params.expect(charm: [*base_attributes, :sorting_position, { keywords: [], categories: [], loadouts: [] }])
       end
     end
   end

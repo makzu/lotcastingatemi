@@ -1,30 +1,27 @@
-import { Location } from 'history'
-import * as React from 'react'
-import { Route, Switch as RouterSwitch, withRouter } from 'react-router-dom'
-
+import { Route, Switch as RouterSwitch } from 'react-router-dom'
 import {
-  ButtonProps,
+  type ButtonProps,
   Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from '@material-ui/core'
-import { Theme } from '@material-ui/core/styles'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles, type Theme } from '@material-ui/core/styles'
+import type { Location } from 'history'
 
-import CharacterEditorNav from 'components/characterEditor/CharacterEditorNav'
-import CharacterSheetNav from 'components/CharacterSheet/CharacterSheetNav'
-import { NavLinkListItem } from 'components/shared/wrappers/'
-import ErrorBoundary from 'containers/ErrorBoundary.jsx'
-import Discord from 'icons/Discord-Logo.jsx'
-import OctoCat from 'icons/OctoCat.jsx'
-import Patreon from 'icons/Patreon-Logo.jsx'
-import ChronicleNavList from './chronicleNavList.jsx'
+import CharacterSheetNav from '@lca/components/CharacterSheet/CharacterSheetNav.tsx'
+import CharacterEditorNav from '@lca/components/characterEditor/CharacterEditorNav.tsx'
+import { NavLinkListItem } from '@lca/components/shared/wrappers/'
+import ErrorBoundary from '@lca/containers/ErrorBoundary'
+import Discord from '@lca/icons/Discord-Logo.jsx'
+import OctoCat from '@lca/icons/OctoCat.jsx'
+import Patreon from '@lca/icons/Patreon-Logo.jsx'
+import ChronicleNavList from './ChronicleNavList'
 import { BattlegroupNavList, CharacterNavList, QcNavList } from './EntityLists/'
-import HtmlLinkListItem from './HtmlLinkListItem'
-import NavPanelLogout from './NavPanelLogout'
-import NavPanelThemeSwitch from './NavPanelThemeSwitch'
+import HtmlLinkListItem from './HtmlLinkListItem.tsx'
+import NavPanelLogout from './NavPanelLogout.tsx'
+import NavPanelThemeSwitch from './NavPanelThemeSwitch.tsx'
 
 const useStyles = makeStyles((theme: Theme) => ({
   navElement: {
@@ -35,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const CsrfInput = () => {
-  const csrfToken = document.getElementsByTagName("meta")["csrf-token"].content
+  const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content
   return <input type="hidden" name="authenticity_token" value={csrfToken} />
 }
 
@@ -52,10 +49,10 @@ const LoginForm = ({ text, action }) => {
   )
 }
 
-const isOnHelpPage = (_: {}, location: Location) =>
+const isOnHelpPage = (_: never, location: Location) =>
   location.pathname.startsWith('/help')
 
-const isDeveloperMode = () => location.hostname === "localhost"
+const isDeveloperMode = () => location.hostname === 'localhost'
 
 interface Props {
   authenticated: boolean
@@ -106,15 +103,11 @@ const NavPanel = (props: Props) => {
             <ChronicleNavList closeDrawer={closeCheck} />
           </>
         )}
-        {(!authenticated && isDeveloperMode()) && (
-          <>
-            <LoginForm action="/auth/developer" text="Log in (Developer)" />
-          </>
+        {!authenticated && isDeveloperMode() && (
+          <LoginForm action="/auth/developer" text="Log in (Developer)" />
         )}
-        {(!authenticated && !isDeveloperMode()) && (
-          <>
-            <LoginForm action="/auth/google_oauth2" text="Log in with Google" />
-          </>
+        {!authenticated && !isDeveloperMode() && (
+          <LoginForm action="/auth/google_oauth2" text="Log in with Google" />
         )}
 
         <Divider />
@@ -176,11 +169,7 @@ const NavPanel = (props: Props) => {
           <ListItemText primary="Support on Patreon" />
         </HtmlLinkListItem>
 
-        {authenticated && (
-          <>
-            <NavPanelLogout />
-          </>
-        )}
+        {authenticated && <NavPanelLogout />}
       </List>
     </ErrorBoundary>
   )

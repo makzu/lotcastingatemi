@@ -13,6 +13,8 @@ module Charms
               inclusion: { in: Constants::ABILITIES + SiderealCharacter::SIDEREAL_CASTES + %w[universal] }, unless: :ability_blank?
     validates :min_ability, one_thru_five_stat: true
 
+    before_create :set_loadout_to_character_active_loadout
+
     def charm_type
       'Ability'
     end

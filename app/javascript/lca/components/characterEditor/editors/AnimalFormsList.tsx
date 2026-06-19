@@ -1,7 +1,6 @@
-import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Form } from 'types'
+import type { Form } from '@lca/types'
 
 const animalFormsList = (forms: Form[]) =>
   forms
@@ -12,7 +11,7 @@ const animalFormsList = (forms: Form[]) =>
         </Link>
       ) : (
         f.form
-      )
+      ),
     )
     .reduce((accu, curr, i) => (i === 0 ? [curr] : [...accu, ', ', curr]), [])
 

@@ -1,13 +1,13 @@
 // @flow
 import React from 'react'
-
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
+import AttributeBlockMental from './attributeBlockMental.jsx'
 import AttributeBlockPhysical from './attributeBlockPhysical.jsx'
 import AttributeBlockSocial from './attributeBlockSocial.jsx'
-import AttributeBlockMental from './attributeBlockMental.jsx'
+
 import type { Character } from 'utils/flow-types'
 
 export type Props = { character: Character, pools: Object }

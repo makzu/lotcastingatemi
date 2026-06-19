@@ -1,22 +1,36 @@
 {
   "compilerOptions": {
-    // "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "app/javascript/lca",
+    "allowSyntheticDefaultImports": true, // TODO: remove this once all "import React from 'react'" statements are removed
     "paths": {
-      "Docs": ["../../../docs"],
-      "Locales": ["../../../locales"]
+      "@lca/*": ["./app/javascript/lca/*"],
+      "components/*": ["./app/javascript/lca/components/*"],
+      "containers/*": ["./app/javascript/lca/containers/*"],
+      "ducks": ["./app/javascript/lca/ducks"],
+      "ducks/*": ["./app/javascript/lca/ducks/*"],
+      "hooks": ["./app/javascript/lca/hooks"],
+      "selectors": ["./app/javascript/lca/selectors"],
+      "styles": ["./app/javascript/lca/styles"],
+      "utils/*": ["./app/javascript/lca/utils/*"],
+      "Docs": ["./docs"],
+      "Locales": ["./locales"]
     },
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es7", "dom"],
-    "module": "es6",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "target": "es6",
-    "jsx": "react"
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    //"sourceMap": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],
+  "exclude": ["node_modules", "vendor", "public"],
   "compileOnSave": false
 }

@@ -1,6 +1,5 @@
-import { CharacterType } from 'types'
-import { WithId } from 'types/_lib'
-import { Sortable } from 'utils'
+import type { CharacterType } from '@lca/types'
+import type { Sortable, WithId } from '../_lib'
 
 export interface Poison extends WithId, Sortable {
   poisonable_id: number

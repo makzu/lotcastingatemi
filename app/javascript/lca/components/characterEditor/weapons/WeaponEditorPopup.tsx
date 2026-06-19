@@ -1,8 +1,5 @@
-import { deepEqual } from 'fast-equals'
-import React, { ChangeEvent, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { type ChangeEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
-
 import {
   Box,
   Button,
@@ -12,25 +9,23 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  makeStyles,
-  Theme,
   Typography,
 } from '@material-ui/core'
 import { ExpandLess, ExpandMore, Help } from '@material-ui/icons'
+import { deepEqual } from 'fast-equals'
 
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
+import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import type { Character } from '@lca/types'
 import WeaponPoolDisplay from 'components/characters/weapons/WeaponPoolDisplay.jsx'
 import RatingField from 'components/generic/RatingField.jsx'
 import TagsField from 'components/generic/TagsField.jsx'
 import TextField from 'components/generic/TextField.jsx'
 import Checkbox from 'components/shared/inputs/Checkbox'
 import WeightSelect from 'components/shared/selects/WeightSelect'
-import { State } from 'ducks'
 import { getSpecificWeapon, updateWeapon } from 'ducks/entities'
-import { Character } from 'types'
 import WeaponAbilitySelect from './WeaponAbilitySelect'
 import WeaponOverrides from './WeaponOverrides'
-
-const useStyles = makeStyles((theme: Theme) => ({}))
 
 interface Props {
   character: Character
@@ -43,11 +38,9 @@ const WeaponEditorPopup = (props: Props) => {
   const setClosed = () => setId(null)
   const [advancedOpen, setAdvancedOpen] = useState(false)
 
-  const weapon = useSelector((state: State) =>
-    getSpecificWeapon(state, openWeapon),
-  )
+  const weapon = useAppSelector((state) => getSpecificWeapon(state, openWeapon))
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (deepEqual(weapon[name], value)) {

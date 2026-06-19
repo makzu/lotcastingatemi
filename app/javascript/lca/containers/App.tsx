@@ -1,19 +1,18 @@
-import * as React from 'react'
+import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-
 import { CssBaseline, Divider, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
 import LcaHeader from 'components/header/Header'
 import NavPanel from 'components/nav/'
-import ErrorBoundary from 'containers/ErrorBoundary.jsx'
+import ErrorBoundary from 'containers/ErrorBoundary'
 import VERSION from '../VERSION'
 import { drawerWidth } from './_drawerProperties'
 
 // Shamelessly stolen from the material-ui drawer demo
 
-const scrollbars = theme => ({
+const scrollbars = (theme) => ({
   '::-webkit-scrollbar': {
     backgroundColor: theme.palette.background.default,
     height: '8px',
@@ -24,12 +23,11 @@ const scrollbars = theme => ({
   },
 })
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   '@global': theme.disableScrollbars ? {} : scrollbars(theme),
   appFrame: {
     display: 'flex',
     minHeight: '100vh',
-    overflowY: 'auto',
     position: 'relative',
     width: '100%',
   },
@@ -64,11 +62,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export interface Props {
-  children: React.ReactNode
-}
-
-const App = ({ children }: Props) => {
+const App = ({ children }: { children: ReactNode }) => {
   const classes = useStyles()
 
   return (

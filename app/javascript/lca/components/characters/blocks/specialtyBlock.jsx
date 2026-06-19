@@ -1,11 +1,11 @@
 // @flow
 import React, { Fragment } from 'react'
-
-import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/blockPaper.jsx'
+import BlockPaper from 'components/generic/BlockPaper.tsx'
+
 import type { withSpecialties } from 'utils/flow-types'
 
 const styles = theme => ({

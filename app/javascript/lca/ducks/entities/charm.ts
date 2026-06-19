@@ -139,7 +139,8 @@ export const getAllCharmLoadoutsForCharacter = createCachedSelector(
   (charms, character) => {
     const ch = charms
       .flatMap((ch) => ch?.loadouts ?? [])
-      .concat(character.active_loadout ?? 'Default')
+      .concat([character.active_loadout ?? 'Default'])
+      .concat(['*'])
       .sort()
 
     return [...new Set(ch)]

@@ -159,9 +159,7 @@ export function nonAttackAbilities(
   return abils.concat(crafts)
 }
 
-export function abilitiesWithRatings(
-  character: Character,
-): typeof ABILITIES_ALL {
+export function abilitiesWithRatings(character: Character) {
   const abils = ABILITIES_ALL.filter((a) => {
     if (a.abil === 'abil_craft' || a.abil === 'abil_martial_arts')
       return character[a.abil].length > 0
@@ -171,14 +169,14 @@ export function abilitiesWithRatings(
   return abils
 }
 
-export const nonCasteAbilities = (character: Character): Array<object> =>
+export const nonCasteAbilities = (character: Character) =>
   ABILITIES_ALL_NO_MA.filter((a) => {
     return !(character.caste_abilities || []).includes(
       a.pretty.toLowerCase() as Ability,
     )
   })
 
-export const nonCasteAttributes = (character: Character): Array<object> =>
+export const nonCasteAttributes = (character: Character) =>
   ATTRIBUTES.filter((a) => {
     return !(character.caste_attributes || []).includes(
       a.pretty.toLowerCase() as Attribute,
@@ -225,6 +223,14 @@ export const isNativeCharm = (
   charm: Charm,
 ): charm is AttributeCharm | AbilityCharm | EssenceCharm => {
   return ['Attribute', 'Ability', 'Essence'].includes(charm.charm_type)
+}
+
+export const isInstalledCharm = (character: Character, charm: Charm) => {
+  if (!isNativeCharm(charm)) return true
+
+  if (charm.loadouts?.includes('*')) return true
+
+  return charm.loadouts?.includes(character.active_loadout)
 }
 
 export const isCustomCharacter = (character: Character) =>

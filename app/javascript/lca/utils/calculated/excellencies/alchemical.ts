@@ -6,7 +6,7 @@ import type {
   NativeCharm,
 } from '@lca/types'
 import { ATTRIBUTES } from '@lca/utils/constants'
-import { attr } from '..'
+import { attr, isInstalledCharm } from '..'
 
 export const alchemicalExcellencyAbils = (
   character: Character,
@@ -17,10 +17,7 @@ export const alchemicalExcellencyAbils = (
     character.favored_attributes,
   )
   charms.forEach((ch) => {
-    if (
-      ch.charm_type === 'Attribute' &&
-      ch.loadouts?.includes(character.active_loadout)
-    ) {
+    if (isInstalledCharm(character, ch)) {
       charmsPerAttribute[ch.ability ?? ''] =
         (charmsPerAttribute[ch.ability ?? ''] ?? 0) + 1
     }

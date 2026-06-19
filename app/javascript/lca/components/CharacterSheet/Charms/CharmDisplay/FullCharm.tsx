@@ -10,7 +10,11 @@ import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import { useAppSelector } from '@lca/hooks'
 import { getSpecificCharacter } from '@lca/selectors'
 import type { Charm } from '@lca/types'
-import { isNativeCharm, showLoadoutTraits } from '@lca/utils/calculated'
+import {
+  isInstalledCharm,
+  isNativeCharm,
+  showLoadoutTraits,
+} from '@lca/utils/calculated'
 import AbbreviatedCharmSummary from './AbbreviatedCharmSummary'
 
 const useStyles = makeStyles((_theme) => ({
@@ -45,8 +49,8 @@ const FullCharmDisplay = ({ charm, isOpen, setOpenCharm }: Props) => {
 
   const isInstalled =
     isNativeCharm(charm) &&
-    showLoadoutTraits(character) &&
-    charm.loadouts?.includes(character.active_loadout)
+    isInstalledCharm(character, charm) &&
+    showLoadoutTraits(character)
 
   return (
     <Accordion

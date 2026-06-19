@@ -36,6 +36,7 @@ import {
 } from '@lca/utils/constants'
 import {
   abilitiesWithRatings,
+  isInstalledCharm,
   isNativeCharm,
   showLoadoutTraits,
 } from 'utils/calculated'
@@ -77,7 +78,7 @@ interface Props {
 const CharmFields = (props: Props) => {
   const dispatch = useAppDispatch()
   const classes = useStyles()
-  const { character, charm, type, isOpen } = props
+  const { character, charm, isOpen } = props
 
   const id = `charm-accordion-${charm.id}`
   const handleChangeOpen: AccordionProps['onChange'] = (_e, isExpanded) => {
@@ -107,8 +108,8 @@ const CharmFields = (props: Props) => {
 
   const isInstalled =
     isNativeCharm(charm) &&
-    showLoadoutTraits(character) &&
-    charm.loadouts?.includes(character.active_loadout)
+    isInstalledCharm(character, charm) &&
+    showLoadoutTraits(character)
 
   return (
     <Accordion
@@ -132,8 +133,7 @@ const CharmFields = (props: Props) => {
               <DragHandleIcon onClick={(e) => e.preventDefault()} /> &nbsp;
               {isInstalled && (
                 <>
-                  <Check />
-                  &nbsp;
+                  <Check /> &nbsp;
                 </>
               )}
               {charm.name}

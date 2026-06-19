@@ -1,5 +1,5 @@
 import type React from 'react'
-import { Chip, TextField } from '@material-ui/core'
+import { Chip, MenuItem, TextField } from '@material-ui/core'
 import { Check } from '@material-ui/icons'
 import {
   Autocomplete,
@@ -52,6 +52,9 @@ const CharmLoadoutAutocomplete = (props: CLAProps) => {
     } as React.ChangeEvent<HTMLInputElement>)
   }
 
+  const optionIsInstalled = (option: string) =>
+    option === character.active_loadout || option === '*'
+
   return (
     <Autocomplete
       multiple
@@ -67,7 +70,7 @@ const CharmLoadoutAutocomplete = (props: CLAProps) => {
             key={option}
             label={option}
             size="small"
-            icon={option === character.active_loadout ? <Check /> : undefined}
+            icon={optionIsInstalled(option) ? <Check /> : undefined}
             {...getTagProps({ index })}
           />
         ))
@@ -85,7 +88,13 @@ const CharmLoadoutAutocomplete = (props: CLAProps) => {
         if (state.inputValue !== '') {
           filtered.push(`✚ Add ${state.inputValue}`)
         }
+
         return filtered
+      }}
+      renderOption={(option) => {
+        if (option === '*') return <MenuItem value="*">* All Loadouts</MenuItem>
+
+        return <MenuItem value={option}>{option}</MenuItem>
       }}
     />
   )

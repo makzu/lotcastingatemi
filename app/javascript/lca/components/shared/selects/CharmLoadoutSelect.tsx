@@ -30,11 +30,13 @@ const CharmLoadoutSelect = (props: CharmLoadoutSelectProps) => {
         dispatch(updateCharacter(character.id, { active_loadout: value }))
       }}
     >
-      {options.map((loadout) => (
-        <MenuItem key={loadout} value={loadout}>
-          {loadout}
-        </MenuItem>
-      ))}
+      {options.map((loadout) =>
+        loadout === '*' ? null : (
+          <MenuItem key={loadout} value={loadout}>
+            {loadout}
+          </MenuItem>
+        ),
+      )}
       {isCustomCharacter(character) && (
         <MenuItem key="nothing" value={undefined}>
           Do not use loadouts

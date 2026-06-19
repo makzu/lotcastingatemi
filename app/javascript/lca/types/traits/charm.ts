@@ -19,20 +19,20 @@ export interface AbilityCharm extends CharmBase {
   charm_type: 'Ability'
   ability: Ability | 'universal' | ''
   min_ability: number
-  loadouts?: string[]
+  loadouts: string[] | null
 }
 
 export interface AttributeCharm extends CharmBase {
   charm_type: 'Attribute'
   ability: Attribute | 'universal' | ''
   min_ability: number
-  loadouts?: string[]
+  loadouts: string[] | null
 }
 
 export interface EssenceCharm extends CharmBase {
   charm_type: 'Essence'
   ability: ''
-  loadouts?: string[]
+  loadouts: string[] | null
 }
 
 export interface MartialArtsCharm extends CharmBase {

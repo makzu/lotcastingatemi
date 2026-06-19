@@ -15,7 +15,7 @@ import {
   getNativeCharmsForCharacter,
   getSpiritCharmsForCharacter,
 } from '@lca/selectors'
-import { isNativeCharm, showLoadoutTraits } from '@lca/utils/calculated'
+import { isInstalledCharm, showLoadoutTraits } from '@lca/utils/calculated'
 import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 
@@ -51,10 +51,7 @@ const styles = (theme) => ({
 })
 
 function _SingleCharm({ character, charm, classes }) {
-  const isInstalled =
-  showLoadoutTraits(character) && ((
-    isNativeCharm(charm) &&
-    charm.loadouts?.includes(character.active_loadout)) || !isNativeCharm(charm))
+  const isInstalled = showLoadoutTraits(character) && isInstalledCharm(character, charm)
 
   return (
     <Fragment>

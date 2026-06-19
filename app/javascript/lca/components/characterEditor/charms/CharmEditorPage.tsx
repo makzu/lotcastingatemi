@@ -2,7 +2,6 @@ import { useReducer } from 'react'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
@@ -15,7 +14,8 @@ import {
   reducer,
 } from '@lca/components/CharacterSheet/Charms/useCharmFilters.ts'
 import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer'
-import { createCharm, createSpell } from '@lca/ducks/entities'
+import CharmLoadoutSelect from '@lca/components/shared/selects/CharmLoadoutSelect.tsx'
+import { createCharm, createSpell, updateCharacter } from '@lca/ducks/entities'
 import {
   useAppDispatch,
   useAppSelector,
@@ -23,8 +23,11 @@ import {
   useIdFromParams,
 } from '@lca/hooks'
 import { getSpecificCharacter } from '@lca/selectors'
-import { nativeCharmType } from '@lca/utils/calculated'
-import SortableGridList from 'components/generic/SortableGridList.tsx'
+import {
+  isCustomCharacter,
+  nativeCharmType,
+  showLoadoutTraits,
+} from '@lca/utils/calculated'
 import CharmList from './CharmEditorList.tsx'
 import SpellList from './SpellList.tsx'
 
@@ -83,6 +86,10 @@ const CharmEditorPage = () => {
     dispatch(createSpell(character.id))
   }
 
+  const handleSetupLoadouts = () => {
+    dispatch(updateCharacter(character.id, { active_loadout: 'Default' }))
+  }
+
   const FilterButton = () => (
     <Button
       onClick={filtersOpen ? setClosed : setOpen}
@@ -105,8 +112,13 @@ const CharmEditorPage = () => {
         setClosed={setClosed}
       />
       <Grid container spacing={3}>
-        <Grid item xs={12} className={classes.stickyHeader}>
-          <Typography variant="h5">
+        <Grid
+          item
+          xs={12}
+          className={classes.stickyHeader}
+          style={{ display: 'flex' }}
+        >
+          <Typography variant="h5" style={{ flex: 1 }}>
             Native Charms
             <Button onClick={handleAddNative} className={classes.filterButton}>
               Add Charm &nbsp;
@@ -114,6 +126,12 @@ const CharmEditorPage = () => {
             </Button>
             <FilterButton />
           </Typography>
+          {showLoadoutTraits(character) && (
+            <CharmLoadoutSelect character={character} />
+          )}
+          {isCustomCharacter(character) && !showLoadoutTraits(character) && (
+            <Button onClick={handleSetupLoadouts}>Use Loadouts</Button>
+          )}
         </Grid>
         <CharmList type="native" character={character} filters={filters} />
         <Divider className={classes.divider} />

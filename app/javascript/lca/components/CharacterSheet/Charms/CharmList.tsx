@@ -18,7 +18,11 @@ const CharmList = (props: ExposedProps) => {
   const charms = useAppSelector((state) =>
     getCharmsForCharacterByType[props.type](state, props.id),
   )
-  const filteredCharms = filterCharms(charms, props.filters, props.type)
+  const filteredCharms = filterCharms(
+    charms,
+    props.filters,
+    props.type,
+  ) as Charm[]
   const mappedCharms = filteredCharms.map((c: Charm) => (
     <Grid item xs={12} md={6} xl={4} key={c.id}>
       <FullCharmDisplay

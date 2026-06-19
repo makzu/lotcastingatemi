@@ -1,7 +1,12 @@
 import { createCachedSelector } from 're-reselect'
 
 import type { RootState } from '@lca/store'
-import type { Charm, Spell } from '@lca/types/traits'
+import type {
+  Evocation,
+  MartialArtsCharm,
+  NativeCharm,
+  SpiritCharm,
+} from '@lca/types/traits'
 import { sortOrderSort } from '@lca/utils'
 import { entities } from './entities'
 
@@ -17,7 +22,9 @@ export const getNativeCharmsForCharacter = createCachedSelector(
   (character, charms) =>
     character.charms === undefined
       ? []
-      : character.charms.map((c) => charms[c]).sort(sortOrderSort),
+      : character.charms
+          .map((c) => charms[c] as NativeCharm)
+          .sort(sortOrderSort),
 )(characterIdMemoizer)
 
 export const getMartialArtsCharmsForCharacter = createCachedSelector(
@@ -25,7 +32,9 @@ export const getMartialArtsCharmsForCharacter = createCachedSelector(
   (character, charms) =>
     character.martial_arts_charms === undefined
       ? []
-      : character.martial_arts_charms.map((c) => charms[c]).sort(sortOrderSort),
+      : character.martial_arts_charms
+          .map((c) => charms[c] as MartialArtsCharm)
+          .sort(sortOrderSort),
 )(characterIdMemoizer)
 
 export const getEvocationsForCharacter = createCachedSelector(
@@ -33,7 +42,9 @@ export const getEvocationsForCharacter = createCachedSelector(
   (character, charms) =>
     character.evocations === undefined
       ? []
-      : character.evocations.map((c) => charms[c]).sort(sortOrderSort),
+      : character.evocations
+          .map((c) => charms[c] as Evocation)
+          .sort(sortOrderSort),
 )(characterIdMemoizer)
 
 export const getSpiritCharmsForCharacter = createCachedSelector(
@@ -41,17 +52,9 @@ export const getSpiritCharmsForCharacter = createCachedSelector(
   (character, charms) =>
     character.spirit_charms === undefined
       ? []
-      : character.spirit_charms.map((c) => charms[c]).sort(sortOrderSort),
-)(characterIdMemoizer)
-
-const getSpells = (state: RootState) => entities(state).spells
-
-const getSpellsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getSpells],
-  (character, spells) =>
-    character.spells.length === 0
-      ? []
-      : character.spells.map((s) => spells[s]).sort(sortOrderSort),
+      : character.spirit_charms
+          .map((c) => charms[c] as SpiritCharm)
+          .sort(sortOrderSort),
 )(characterIdMemoizer)
 
 export const getAllAbilitiesWithCharmsForCharacter = createCachedSelector(
@@ -80,27 +83,5 @@ export const getAllEvocationArtifactsForCharacter = createCachedSelector(
     const evo = evocations.map((e) => e.artifact_name).sort()
 
     return [...new Set(evo)]
-  },
-)(characterIdMemoizer)
-
-export const getAllCharmCategoriesForCharacter = createCachedSelector(
-  [
-    getNativeCharmsForCharacter,
-    getMartialArtsCharmsForCharacter,
-    getEvocationsForCharacter,
-    getSpiritCharmsForCharacter,
-    getSpellsForCharacter,
-  ],
-  (natives, maCharms, evocations, spiritCharms, spells) => {
-    const ch = (natives as Array<Charm | Spell>)
-      .concat(maCharms)
-      .concat(evocations)
-      .concat(spiritCharms)
-      .concat(spells)
-      .reduce((a, charm) => Object.assign(a, charm.categories), [])
-      .concat(['Attack', 'Defense', 'Social'])
-      .sort()
-
-    return [...new Set(ch)]
   },
 )(characterIdMemoizer)

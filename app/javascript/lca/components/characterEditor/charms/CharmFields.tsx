@@ -11,6 +11,7 @@ import {
 import type { AccordionProps } from '@material-ui/core/Accordion'
 import { makeStyles } from '@material-ui/core/styles'
 import {
+  Check,
   Delete,
   DragHandle as DragHandleIcon,
   ExpandMore,
@@ -22,6 +23,7 @@ import AbilitySelect from '@lca/components/generic/abilitySelect.jsx'
 import RatingField from '@lca/components/generic/RatingField.jsx'
 import TagsField from '@lca/components/generic/TagsField.jsx'
 import TextField from '@lca/components/generic/TextField.jsx'
+import AttributeSelect from '@lca/components/shared/selects/AttributeSelect'
 import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect.tsx'
 import { destroyCharm, updateCharm } from '@lca/ducks/entities'
 import { useAppDispatch } from '@lca/hooks'
@@ -32,7 +34,11 @@ import {
   ESSENCE_MAX,
   ESSENCE_MIN,
 } from '@lca/utils/constants'
-import { abilitiesWithRatings, showLoadoutTraits } from 'utils/calculated'
+import {
+  abilitiesWithRatings,
+  isNativeCharm,
+  showLoadoutTraits,
+} from 'utils/calculated'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
 import HouseOptions from './CharmHouseOptions'
 import CharmLoadoutAutocomplete from './CharmLoadoutAutocomplete'
@@ -42,13 +48,6 @@ const noAbils = [
     No Abilities with ratings
   </MenuItem>,
 ]
-
-const showLoadout = (
-  character: Character,
-  type: 'evocation' | 'martialArts' | 'native' | 'spirit',
-) => {
-  return showLoadoutTraits(character) && type === 'native'
-}
 
 const useStyles = makeStyles((_theme) => ({
   summary: {
@@ -97,12 +96,19 @@ const CharmFields = (props: Props) => {
     dispatch(destroyCharm(charm.id, character.id))
   }
 
-  const abilities = abilitiesWithRatings(character)
+  const abilities = abilitiesWithRatings(character).filter(
+    (a) => a.abil !== 'abil_martial_arts',
+  )
 
   let abilOptions: JSX.Element[] = []
   if (abilities.length === 0) abilOptions = abilOptions.concat(noAbils)
   if (character.type === 'SiderealCharacter')
     abilOptions = abilOptions.concat(HouseOptions)
+
+  const isInstalled =
+    isNativeCharm(charm) &&
+    showLoadoutTraits(character) &&
+    charm.loadouts?.includes(character.active_loadout)
 
   return (
     <Accordion
@@ -124,6 +130,12 @@ const CharmFields = (props: Props) => {
           <Collapse in={!isOpen}>
             <Typography variant="h6">
               <DragHandleIcon onClick={(e) => e.preventDefault()} /> &nbsp;
+              {isInstalled && (
+                <>
+                  <Check />
+                  &nbsp;
+                </>
+              )}
               {charm.name}
             </Typography>
           </Collapse>
@@ -154,10 +166,10 @@ const CharmFields = (props: Props) => {
             onChange={handleChange}
           />
         </div>
-        {showLoadout(character, type) && (
+        {isNativeCharm(charm) && showLoadoutTraits(character) && (
           <div>
             <CharmLoadoutAutocomplete
-              value={charm.loadouts}
+              value={charm.loadouts ?? []}
               id={character.id}
               onChange={handleChange}
             />
@@ -184,40 +196,30 @@ const CharmFields = (props: Props) => {
               includeUniversal
             />
           )}
-          {(charm.charm_type === 'Ability' ||
+          {charm.charm_type === 'Attribute' && (
+            <AttributeSelect
+              name="ability"
+              label="Attribute"
+              value={charm.ability}
+              onChange={handleChange}
+              includeUniversal
+              margin="dense"
+            />
+          )}
+          {(charm.charm_type === 'Attribute' ||
+            charm.charm_type === 'Ability' ||
             charm.charm_type === 'MartialArts') && (
             <RatingField
               trait="min_ability"
               value={charm.min_ability}
               min={1}
-              max={ABILITY_MAX}
+              max={
+                charm.charm_type === 'Attribute' ? ATTRIBUTE_MAX : ABILITY_MAX
+              }
               onChange={handleChange}
-              label="Ability"
+              label="Rating"
               margin="dense"
             />
-          )}
-          {charm.charm_type === 'Attribute' && (
-            <>
-              <AbilitySelect
-                attributesOnly
-                name="ability"
-                label="Attribute"
-                margin="dense"
-                value={charm.ability}
-                onChange={handleChange}
-                multiple={false}
-                includeUniversal
-              />
-              <RatingField
-                trait="min_ability"
-                value={charm.min_ability}
-                min={1}
-                max={ATTRIBUTE_MAX}
-                onChange={handleChange}
-                label="Attribute"
-                margin="dense"
-              />
-            </>
           )}
           <RatingField
             trait="min_essence"

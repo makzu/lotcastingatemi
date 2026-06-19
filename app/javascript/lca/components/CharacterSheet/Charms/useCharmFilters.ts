@@ -1,16 +1,22 @@
 import { useReducer } from 'react'
 
-import type { Charm, Spell } from '@lca/types'
+import type {
+  AbilityCharm,
+  AttributeCharm,
+  Charm,
+  NativeCharm,
+  Spell,
+} from '@lca/types'
 import type { Timing } from '@lca/types/_lib'
 
 export interface CharmFilter {
-  ability: Array<Charm['ability']>
+  ability: Array<AbilityCharm['ability'] | AttributeCharm['ability']>
   category: string[]
   categoryInclusive: boolean
   hidePerilous: boolean
   keyword: Charm['keywords']
   keywordInclusive: boolean
-  loadout: NonNullable<Charm['loadouts']>
+  loadout: NonNullable<NativeCharm['loadouts']>
   loadoutInclusive: boolean
   muteOnly: boolean
   timing: Timing[]
@@ -86,7 +92,7 @@ export const filterCharms = (
   }
 
   if (type === 'native' && filters.loadout.length > 0) {
-    theCharms = (<Charm[]>theCharms).filter((charm) =>
+    theCharms = (<NativeCharm[]>theCharms).filter((charm) =>
       filters.loadoutInclusive
         ? filters.loadout.some((cat) => charm?.loadouts?.includes(cat))
         : filters.loadout.every((cat) => charm?.loadouts?.includes(cat)),
@@ -94,8 +100,8 @@ export const filterCharms = (
   }
 
   if (type === 'native' && filters.ability.length > 0) {
-    theCharms = (<Charm[]>theCharms).filter((charm) =>
-      filters.ability.includes(charm.ability),
+    theCharms = (<(AttributeCharm | AbilityCharm)[]>theCharms).filter((charm) =>
+      filters?.ability.includes(charm.ability),
     )
   }
 

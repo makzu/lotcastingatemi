@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import Check from '@material-ui/icons/Check'
 import Launch from '@material-ui/icons/Launch'
 
 import { getSpellsForCharacter } from '@lca/ducks/entities'
@@ -14,6 +15,7 @@ import {
   getNativeCharmsForCharacter,
   getSpiritCharmsForCharacter,
 } from '@lca/selectors'
+import { isNativeCharm, showLoadoutTraits } from '@lca/utils/calculated'
 import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay'
 
@@ -48,17 +50,23 @@ const styles = (theme) => ({
   },
 })
 
-function _SingleCharm({ charm, classes }: { charm: Charm, classes: Object }) {
+function _SingleCharm({ character, charm, classes }) {
+  const isInstalled =
+  showLoadoutTraits(character) && ((
+    isNativeCharm(charm) &&
+    charm.loadouts?.includes(character.active_loadout)) || !isNativeCharm(charm))
+
   return (
     <Fragment>
       <Typography component="div" className={classes.root}>
+        {isInstalled && <Check />}
         <div className={classes.name}>{charm.name}</div>
         <div className={classes.info}>
-          ({charm.cost && charm.cost != '-' && charm.cost + ', '}
+          ({charm.cost && charm.cost !== '-' && `${charm.cost}, `}
           {charm.timing}
-          {charm.duration && ', ' + charm.duration}
+          {charm.duration && `, ${charm.duration}`}
           {charm.keywords.length > 0 &&
-            ', keywords: ' + charm.keywords.join(', ')}
+            `, keywords: ${charm.keywords.join(', ')}`}
           )
         </div>
         <MarkdownDisplay
@@ -86,10 +94,16 @@ function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
           ,&nbsp;
           {spell.duration}
           {spell.keywords.length > 0 &&
-            ', keywords: ' + spell.keywords.join(', ')}
+            `, keywords: ${spell.keywords.join(', ')}`}
           )
         </div>
-        <div className={classes.body}>{spell.body}</div>
+        <MarkdownDisplay
+          noBlocks
+          className={classes.body}
+          source={spell.body}
+          allowedTypes={['text', 'strong', 'emphasis', 'delete']}
+          unwrapDisallowed
+        />
       </Typography>
       <Divider />
     </Fragment>

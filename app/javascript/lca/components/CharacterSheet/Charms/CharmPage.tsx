@@ -11,6 +11,7 @@ import {
   useDocumentTitle,
   useIdFromParams,
 } from '@lca/hooks'
+import { showLoadoutTraits } from '@lca/utils/calculated/index.ts'
 import CharacterLoadError from '../CharacterLoadError'
 import SpellList from '../Sorcery/SpellList.tsx'
 import CharmFilter from './CharmFilter/'
@@ -81,11 +82,21 @@ const CharmPage = () => {
 
         {character.charms.length > 0 && (
           <>
-            <Grid item xs={12} className={classes.stickyHeader}>
-              <Typography variant="h5">
+            <Grid
+              item
+              xs={12}
+              className={classes.stickyHeader}
+              style={{ display: 'flex' }}
+            >
+              <Typography variant="h5" style={{ flex: 1 }}>
                 Native Charms
                 <FilterButton />
               </Typography>
+              {showLoadoutTraits(character) && (
+                <Typography>
+                  Current Loadout: {character.active_loadout}
+                </Typography>
+              )}
             </Grid>
             <CharmList type="native" id={id} filters={filters} />
             <Divider className={classes.divider} />

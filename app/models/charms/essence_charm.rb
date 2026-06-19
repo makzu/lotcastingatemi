@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Charms
-  # Charms for Custom Essence Exalts, like some Exigents I'm sure
+  # Charms for Custom Essence Exalts, like some Exigents
   class EssenceCharm < Charm
+    before_create :set_loadout_to_character_active_loadout
+
     def charm_type
       'Essence'
     end

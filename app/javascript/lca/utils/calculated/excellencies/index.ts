@@ -1,4 +1,10 @@
-import type { Ability, Attribute, Character, Charm } from '@lca/types'
+import type {
+  Ability,
+  Attribute,
+  Character,
+  MartialArtsCharm,
+  NativeCharm,
+} from '@lca/types'
 import AlchemicalExcellency, { alchemicalExcellencyAbils } from './alchemical'
 import CustomExcellency from './custom.js'
 import DbExcellency, { dbExcellencyAbils } from './dragonblooded'
@@ -8,7 +14,7 @@ import SolarExcellency, { solarExcellencyAbils } from './solar'
 
 export const excellencyAbils = (
   character: Character,
-  charms: Array<Charm>,
+  charms: Array<NativeCharm | MartialArtsCharm>,
 ): Array<string> => {
   // Mortals do not have excellencies
   if (character.type === 'Character') return []

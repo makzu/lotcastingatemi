@@ -1,17 +1,21 @@
 import type React from 'react'
 import { Chip, TextField } from '@material-ui/core'
+import { Check } from '@material-ui/icons'
 import {
   Autocomplete,
   type AutocompleteProps,
   createFilterOptions,
 } from '@material-ui/lab'
 
-import { getAllCharmLoadoutsForCharacter } from '@lca/ducks/entities'
+import {
+  getAllCharmLoadoutsForCharacter,
+  getSpecificCharacter,
+} from '@lca/ducks/entities'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import type { Character, Charm } from '@lca/types'
+import type { Character, NativeCharm } from '@lca/types'
 
 interface CLAProps {
-  value: Charm['loadouts']
+  value: NonNullable<NativeCharm['loadouts']>
   id: Character['id']
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
@@ -28,6 +32,7 @@ type ChangeHandlerProp = AutocompleteProps<
 const CharmLoadoutAutocomplete = (props: CLAProps) => {
   const { value, id } = props
 
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
   const loadouts = useAppSelector((state) =>
     getAllCharmLoadoutsForCharacter(state, id),
   )
@@ -62,6 +67,7 @@ const CharmLoadoutAutocomplete = (props: CLAProps) => {
             key={option}
             label={option}
             size="small"
+            icon={option === character.active_loadout ? <Check /> : undefined}
             {...getTagProps({ index })}
           />
         ))

@@ -25,7 +25,13 @@ import {
   getSpecificCharacter,
 } from '@lca/ducks/entities'
 import { useAppSelector } from '@lca/hooks'
-import type { Character, Charm } from '@lca/types'
+import type {
+  AbilityCharm,
+  AttributeCharm,
+  Character,
+  Charm,
+  NativeCharm,
+} from '@lca/types'
 import type { Timing } from '@lca/types/_lib'
 import { showLoadoutTraits } from '@lca/utils/calculated'
 import type { CharmFilter, CharmFilterAction } from '../useCharmFilters'
@@ -75,7 +81,7 @@ const CharmFilterDrawer = (props: Props) => {
     <ResponsiveFilterDrawer open={open} onClose={setClosed}>
       <Typography variant="h6">Filter Charms</Typography>
 
-      {false && showLoadoutTraits(character) && (
+      {showLoadoutTraits(character) && (
         <TextField
           name="loadouts"
           label="Loadouts"
@@ -85,13 +91,16 @@ const CharmFilterDrawer = (props: Props) => {
           onChange={(e) =>
             setFilters({
               type: 'loadout',
-              payload: e.target.value as unknown as Charm['loadouts'],
+              payload: e.target.value as unknown as NonNullable<
+                NativeCharm['loadouts']
+              >,
             })
           }
         >
           {allLoadouts.map((a) => (
             <MenuItem key={a} value={a}>
               {a}
+              {character.current_loadout === a && ' (Current)'}
             </MenuItem>
           ))}
         </TextField>
@@ -125,7 +134,10 @@ const CharmFilterDrawer = (props: Props) => {
             onChange={(e) =>
               setFilters({
                 type: 'ability',
-                payload: e.target.value as Charm['ability'][],
+                payload: e.target.value as (
+                  | AbilityCharm
+                  | AttributeCharm
+                )['ability'][],
               })
             }
           >

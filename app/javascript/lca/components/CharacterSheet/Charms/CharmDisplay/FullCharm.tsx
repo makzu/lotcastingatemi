@@ -3,10 +3,14 @@ import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { Check } from '@material-ui/icons'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
+import { useAppSelector } from '@lca/hooks'
+import { getSpecificCharacter } from '@lca/selectors'
 import type { Charm } from '@lca/types'
+import { isNativeCharm, showLoadoutTraits } from '@lca/utils/calculated'
 import AbbreviatedCharmSummary from './AbbreviatedCharmSummary'
 
 const useStyles = makeStyles((_theme) => ({
@@ -35,6 +39,14 @@ const FullCharmDisplay = ({ charm, isOpen, setOpenCharm }: Props) => {
   const handleChange: AccordionProps['onChange'] = (_e, isExpanded) => {
     setOpenCharm(isExpanded ? charm.id : 0)
   }
+  const character = useAppSelector((state) =>
+    getSpecificCharacter(state, charm.character_id),
+  )
+
+  const isInstalled =
+    isNativeCharm(charm) &&
+    showLoadoutTraits(character) &&
+    charm.loadouts?.includes(character.active_loadout)
 
   return (
     <Accordion
@@ -53,7 +65,15 @@ const FullCharmDisplay = ({ charm, isOpen, setOpenCharm }: Props) => {
         }}
       >
         <div>
-          <Typography variant="h6">{charm.name}</Typography>
+          <Typography variant="h6">
+            {isInstalled && (
+              <>
+                <Check />
+                &nbsp;
+              </>
+            )}
+            {charm.name}
+          </Typography>
           <AbbreviatedCharmSummary charm={charm} isOpen={isOpen} />
         </div>
       </AccordionSummary>

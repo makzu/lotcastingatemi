@@ -4,7 +4,16 @@ export * from './pools'
 export * from './pretty'
 export * from './ratings'
 
-import type { Ability, Attribute, Character, Specialty } from '@lca/types'
+import type {
+  Ability,
+  AbilityCharm,
+  Attribute,
+  AttributeCharm,
+  Character,
+  Charm,
+  EssenceCharm,
+  Specialty,
+} from '@lca/types'
 import type { BlockOfPenalties, PoolPenalty } from '@lca/types/pool'
 import type { WithSharedStats } from '@lca/types/shared'
 import {
@@ -150,7 +159,9 @@ export function nonAttackAbilities(
   return abils.concat(crafts)
 }
 
-export function abilitiesWithRatings(character: Character): Array<object> {
+export function abilitiesWithRatings(
+  character: Character,
+): typeof ABILITIES_ALL {
   const abils = ABILITIES_ALL.filter((a) => {
     if (a.abil === 'abil_craft' || a.abil === 'abil_martial_arts')
       return character[a.abil].length > 0
@@ -210,6 +221,12 @@ export const nativeCharmType = (character: Character) => {
   }
 }
 
+export const isNativeCharm = (
+  charm: Charm,
+): charm is AttributeCharm | AbilityCharm | EssenceCharm => {
+  return ['Attribute', 'Ability', 'Essence'].includes(charm.charm_type)
+}
+
 export const isCustomCharacter = (character: Character) =>
   character.type === 'CustomAbilityCharacter' ||
   character.type === 'CustomAttributeCharacter' ||
@@ -222,7 +239,8 @@ export const showLunarTraits = (character: Character) =>
   character.type === 'LunarCharacter' || isCustomCharacter(character)
 
 export const showLoadoutTraits = (character: Character) =>
-  character.type === 'AlchemicalCharacter' || isCustomCharacter(character)
+  character.type === 'AlchemicalCharacter' ||
+  (isCustomCharacter(character) && character.active_loadout !== null)
 
 export const isCasteAbility = (character: Character, ability: Ability) =>
   character.caste_abilities?.includes(ability)

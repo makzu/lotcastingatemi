@@ -6,10 +6,10 @@ import { Grid } from '@material-ui/core'
 import {
   type CharmFilter,
   filterCharms,
-} from '@lca/components/CharacterSheet/Charms/useCharmFilters'
+} from '@lca/components/CharacterSheet/Charms/useCharmFilters.ts'
 import { getSpellsForCharacter, updateSpell } from '@lca/ducks/entities'
 import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
-import useAppSelector from '@lca/hooks/UseAppSelector'
+import useAppSelector from '@lca/hooks/UseAppSelector.ts'
 import type { Character, Spell } from '@lca/types'
 import SpellFields from './SpellFields.tsx'
 

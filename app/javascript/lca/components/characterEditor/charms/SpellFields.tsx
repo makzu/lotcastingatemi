@@ -18,8 +18,8 @@ import {
 import { deepEqual } from 'fast-equals'
 
 import SpellSummaryBlock from '@lca/components/CharacterSheet/Sorcery/SpellSummaryBlock'
-import TagsField from '@lca/components/generic/TagsField.jsx'
-import TextField from '@lca/components/generic/TextField.jsx'
+import TagsField from '@lca/components/generic/TagsField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
 import SpellCircleSelect from '@lca/components/shared/selects/SpellCircleSelect'
 import { updateSpell } from '@lca/ducks/entities'
 import { useAppDispatch } from '@lca/hooks'

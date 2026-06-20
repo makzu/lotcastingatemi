@@ -1,0 +1,137 @@
+// @flow
+import React from 'react'
+import { connect } from 'react-redux'
+import Paper from '@material-ui/core/Paper'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import { compose } from 'recompose'
+import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
+import sharedStyles from 'styles/'
+
+import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions'
+import type { Battlegroup, Character, Enhancer, fullQc } from 'utils/flow-types'
+import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
+import PoolDisplay from '../generic/PoolDisplay.tsx'
+import JoinBattlePopup from './JoinBattlePopup.tsx'
+
+const styles = (theme) => ({
+  ...sharedStyles(theme),
+  root: {
+    ...theme.mixins.gutters({
+      paddingTop: 16,
+      paddingBottom: 16,
+    }),
+    height: '100%',
+  },
+  nameWrap: {
+    flex: 1,
+  },
+  hiddenLabel: {
+    ...theme.typography.caption,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 'inherit',
+  },
+  characterName: {
+    textDecoration: 'none',
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    marginLeft: theme.spacing(),
+  },
+  poolBlock: {
+    marginRight: theme.spacing(),
+    marginTop: theme.spacing(),
+    width: '5.5rem',
+    maxHeight: '5.5rem',
+    overflow: 'hidden',
+  },
+})
+
+type ExposedProps = {
+  character: Character | fullQc | Battlegroup
+}
+type Props = ExposedProps & {
+  canEdit: boolean
+  pools: Object
+  update: Function
+  classes: Object
+}
+
+function OutOfCombatCard({
+  character,
+  canEdit,
+  //eslint-disable-next-line no-unused-vars
+  update,
+  pools,
+  classes,
+}: Props) {
+  return (
+    <Paper className={classes.root}>
+      <div className={classes.flexContainer}>
+        <div className={classes.nameWrap}>
+          <Typography variant="h6" className={classes.characterName}>
+            {character.name}
+
+            {character.hidden && (
+              <div className={classes.hiddenLabel}>
+                <VisibilityOff className={classes.icon} />
+                &nbsp; Hidden
+              </div>
+            )}
+          </Typography>
+          <PlayerNameSubtitle playerId={character.player_id} />
+        </div>
+      </div>
+
+      <div className={classes.flexContainer}>
+        <PoolDisplay
+          qc={character.type === 'qc' || character.type === 'battlegroup'}
+          pool={pools.joinBattle}
+          label="Join Battle"
+          classes={{ root: classes.poolBlock }}
+        />
+        {canEdit && <JoinBattlePopup character={character} />}
+      </div>
+    </Paper>
+  )
+}
+
+function mapStateToProps(state, props: ExposedProps) {
+  let type
+  if (props.character.type === 'qc') type = 'qc'
+  else if (props.character.type === 'battlegroup') type = 'battlegroup'
+  else type = 'character'
+
+  return {
+    canEdit: canIEdit(state, props.character.id, type),
+    pools: getPoolsAndRatingsGeneric(state, props.character.id, type),
+  }
+}
+
+function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
+  let action
+  switch (props.character.type) {
+    case 'qc':
+      action = updateQc
+      break
+    case 'battlegroup':
+      action = updateBattlegroup
+      break
+    case 'character':
+    default:
+      action = updateCharacter
+  }
+
+  return {
+    update: (id, trait, value) => dispatch(action(id, { [trait]: value })),
+  }
+}
+
+const enhance: Enhancer<Props, ExposedProps> = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles),
+)
+
+export default enhance(OutOfCombatCard)

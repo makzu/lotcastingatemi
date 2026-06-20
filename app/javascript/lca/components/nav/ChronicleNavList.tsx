@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import Collapse from '@material-ui/core/Collapse'
 import IconButton from '@material-ui/core/IconButton'
 import ListItem from '@material-ui/core/ListItem'
@@ -8,15 +7,15 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
+import { getMyChronicles, getMyOwnChronicles } from 'selectors'
 
 import { closeDrawer } from '@lca/features/drawerSlice'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch.js'
-import { useAppSelector } from '@lca/hooks/UseAppSelector.js'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
 import { NavLinkListItem } from 'components/shared/wrappers'
 import type { Chronicle } from 'utils/flow-types'
-import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.jsx'
-import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.jsx'
-import { getMyChronicles, getMyOwnChronicles } from 'selectors'
+import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.tsx'
+import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.tsx'
 
 const ChronicleNavList = () => {
   const dispatch = useAppDispatch()

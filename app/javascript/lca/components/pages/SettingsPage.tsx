@@ -17,7 +17,7 @@ import { useDialogLogic } from '@lca/hooks'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
 import BlockPaper from 'components/generic/BlockPaper.tsx'
-import TextField from 'components/generic/TextField.jsx'
+import TextField from 'components/generic/TextField.tsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
 
 const SettingsPage = () => {

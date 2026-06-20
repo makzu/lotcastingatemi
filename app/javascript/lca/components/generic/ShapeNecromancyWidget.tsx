@@ -15,15 +15,15 @@ import {
   type WithStyles,
   withStyles,
 } from '@material-ui/core/styles'
-import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
 
+import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import { updateCharacter, updateQc } from '@lca/ducks/actions'
 import { useDialogLogic } from '@lca/hooks'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
 import type { Character, QC } from '@lca/types'
-import PoolDisplay from 'components/generic/PoolDisplay.jsx'
-import RatingField from 'components/generic/RatingField.jsx'
-import { updateCharacter, updateQc } from 'ducks/actions'
 
 const styles = (theme: Theme) =>
   createStyles({

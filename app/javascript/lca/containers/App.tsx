@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { CssBaseline, Divider, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import LoadingIndicator from 'components/generic/LoadingIndicator.jsx'
+import LoadingIndicator from 'components/generic/LoadingIndicator.tsx'
 import LcaHeader from 'components/header/Header'
 import NavPanel from 'components/nav/'
 import ErrorBoundary from 'containers/ErrorBoundary'

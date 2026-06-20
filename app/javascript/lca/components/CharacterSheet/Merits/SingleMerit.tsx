@@ -9,7 +9,7 @@ import {
 import type { Merit } from '@lca/types/traits/merit.ts'
 import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
-import RatingLine from 'components/generic/ratingLine.jsx'
+import RatingLine from 'components/generic/RatingLine.tsx'
 
 const styles = (theme: Theme) =>
   createStyles({

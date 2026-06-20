@@ -2,16 +2,16 @@ import { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import Placeholder from 'components/generic/Placeholder.tsx'
-import GoodbyePage from 'components/pages/GoodbyePage.jsx'
-import PrivacyPage from 'components/pages/PrivacyPage.jsx'
+import GoodbyePage from 'components/pages/GoodbyePage.tsx'
+import PrivacyPage from 'components/pages/PrivacyPage.tsx'
 import SettingsPage from 'components/pages/SettingsPage.tsx'
 import WelcomePage from 'components/pages/WelcomePage.tsx'
 
 const ChronicleWrapper = lazy(
-  () => import('components/chronicles/ChronicleWrapper.jsx'),
+  () => import('components/chronicles/ChronicleWrapper.tsx'),
 )
 
-const ContentList = lazy(() => import('components/pages/contentList.jsx'))
+const ContentList = lazy(() => import('components/pages/ContentList.tsx'))
 const CharacterList = lazy(() => import('components/CharacterList/'))
 const QcList = lazy(() => import('components/qcs/QcList.tsx'))
 const BattlegroupList = lazy(
@@ -24,19 +24,19 @@ const CharacterEditor = lazy(
   () => import('components/characterEditor/CharacterEditorWrapper.tsx'),
 )
 
-const QcSheet = lazy(() => import('components/qcs/index.jsx'))
+const QcSheet = lazy(() => import('components/qcs/index.tsx'))
 
-const QcEditor = lazy(() => import('components/qcs/editor.jsx'))
+const QcEditor = lazy(() => import('components/qcs/editor.tsx'))
 
-const BattlegroupSheet = lazy(() => import('components/battlegroups/index.jsx'))
+const BattlegroupSheet = lazy(() => import('components/battlegroups/index.tsx'))
 
 const BattlegroupEditor = lazy(
-  () => import('components/battlegroups/editor.jsx'),
+  () => import('components/battlegroups/editor.tsx'),
 )
 
 const ResourcesPage = lazy(() => import('components/pages/ResourcesPage'))
 
-const HelpPage = lazy(() => import('components/pages/Help.jsx'))
+const HelpPage = lazy(() => import('components/pages/Help.tsx'))
 
 export default function Routes() {
   return (

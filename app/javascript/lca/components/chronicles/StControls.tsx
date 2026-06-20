@@ -8,10 +8,10 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import { endScene } from '@lca/ducks/events'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch.js'
-import Downtime from './controls/Downtime.jsx'
-import RecoverMotes from './controls/RecoverMotes.jsx'
-import RecoverWillpower from './controls/RecoverWillpower.jsx'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import Downtime from './controls/Downtime.tsx'
+import RecoverMotes from './controls/RecoverMotes.tsx'
+import RecoverWillpower from './controls/RecoverWillpower.tsx'
 
 type Props = { chronicleId: number }
 const StControls = ({ chronicleId }: Props) => {

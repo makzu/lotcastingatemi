@@ -3,7 +3,7 @@ import { Edit, RemoveCircle } from '@material-ui/icons'
 
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import type { Character, Weapon } from '@lca/types'
-import WeaponLine from 'components/characters/weapons/WeaponLine.jsx'
+import WeaponLine from 'components/characters/weapons/WeaponLine.tsx'
 import Handle from 'components/shared/GrabHandle'
 import { destroyWeapon } from 'ducks/actions'
 

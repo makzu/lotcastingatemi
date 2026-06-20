@@ -19,7 +19,8 @@
       "preset": "recommended",
       "complexity": { "noUselessSwitchCase": "off" },
       "style": {
-        "useImportType": { "level": "warn", "options": { "style": "auto" } }
+        "useImportType": { "level": "warn", "options": { "style": "auto" } },
+        "useFragmentSyntax": "on"
       },
       "suspicious": {
         "noImportCycles": "on"

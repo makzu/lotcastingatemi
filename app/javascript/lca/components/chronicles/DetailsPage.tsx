@@ -17,12 +17,12 @@ import useAppSelector from '@lca/hooks/UseAppSelector.ts'
 import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
 import BlockPaper from 'components/generic/BlockPaper.tsx'
 import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
-import TextField from 'components/generic/TextField.jsx'
+import TextField from 'components/generic/TextField.tsx'
 import ProtectedComponent from 'containers/ProtectedComponent'
-import ChronicleDeletePopup from './ChronicleDeletePopup.jsx'
+import ChronicleDeletePopup from './ChronicleDeletePopup.tsx'
 import ChronicleInvitePopup from './ChronicleInvitePopup.tsx'
-import ChronicleLeavePopup from './ChronicleLeavePopup.jsx'
-import RemovePlayerPopup from './removePlayerPopup.jsx'
+import ChronicleLeavePopup from './ChronicleLeavePopup.tsx'
+import RemovePlayerPopup from './removePlayerPopup.tsx'
 
 const ChronicleDetailsPage = () => {
   const dispatch = useAppDispatch()

@@ -53,6 +53,7 @@ export interface AttackPool extends PoolBase {
   damageType?: 'Bashing' | 'Lethal' | 'Aggravated'
   attack?: 'withering' | 'decisive'
   minimum?: number
+  shield?: boolean
 }
 
 export interface StaticRating extends PoolBase {

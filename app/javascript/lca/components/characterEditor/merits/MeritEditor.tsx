@@ -15,15 +15,19 @@ import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import HelpIcon from '@material-ui/icons/Help'
 import { compose } from 'recompose'
-import { getMeritsForCharacter, getSpecificCharacter } from 'selectors'
-import commonStyles from 'styles'
 
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import SortableGridList from 'components/generic/SortableGridList.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { createMerit, destroyMerit, updateMerit } from 'ducks/actions.ts'
-import { updateMeritSort } from 'ducks/entities/merit'
-import type { Character, Enhancer, fullMerit as Merit } from 'utils/flow-types'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { createMerit, destroyMerit, updateMerit } from '@lca/ducks/actions.ts'
+import { updateMeritSort } from '@lca/ducks/entities/merit'
+import { getMeritsForCharacter, getSpecificCharacter } from '@lca/selectors'
+import commonStyles from '@lca/styles'
+import type {
+  Character,
+  Enhancer,
+  fullMerit as Merit,
+} from '@lca/utils/flow-types'
 import MeritFields from './MeritFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)

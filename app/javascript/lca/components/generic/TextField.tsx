@@ -39,7 +39,7 @@ class LcaTextField extends Component<Props, State> {
   }
 
   handleBlur = (e) => {
-    let val = e.target.value
+    const val = e.target.value
 
     this.setState({ value: val })
     const updateObj = { target: { name: e.target.name, value: val } }

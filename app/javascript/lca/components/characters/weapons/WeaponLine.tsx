@@ -1,12 +1,11 @@
 // @flow
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import commonStyles from 'styles'
 
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
+import commonStyles from '@lca/styles'
+import type { fullWeapon } from '@lca/utils/flow-types'
 import WeaponPoolDisplay from '../weapons/WeaponPoolDisplay.tsx'
-
-import type { fullWeapon } from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),
@@ -57,8 +56,8 @@ const styles = (theme) => ({
 })
 
 type Props = {
-  weapon: fullWeapon,
-  classes: Object,
+  weapon: fullWeapon
+  classes: Object
 }
 function WeaponLine({ weapon, classes }: Props) {
   let artifactLabel

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import { useLazyFetch } from 'hooks'
 import { compose } from 'recompose'
 
 import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { fetchCharacterIfNecessary } from '@lca/ducks/entities/character'
+import { useLazyFetch } from '@lca/hooks'
 import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
 import CharacterSheet from '../characters/CharacterSheet'
 import BioPage from './Bio'

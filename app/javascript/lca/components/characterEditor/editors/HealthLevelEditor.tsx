@@ -4,14 +4,13 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { compose, shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import HealthLevelBoxes from 'components/generic/HealthLevelBoxes.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import { isUnequalByKeys } from 'utils'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import HealthLevelBoxes from '@lca/components/generic/HealthLevelBoxes.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import { isUnequalByKeys } from '@lca/utils'
+import type { Character } from '@lca/utils/flow-types'
 
-import type { Character } from 'utils/flow-types'
-
-const styles = theme => ({
+const styles = (theme) => ({
   subheading: {
     marginTop: theme.spacing(),
   },
@@ -26,10 +25,10 @@ const styles = theme => ({
 })
 
 type Props = {
-  character: Character,
-  penalties: Object,
-  onChange: Function,
-  classes: Object,
+  character: Character
+  penalties: Object
+  onChange: Function
+  classes: Object
 }
 function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
   return (
@@ -129,6 +128,6 @@ export default compose(
       'health_level_2s',
       'health_level_4s',
       'health_level_incap',
-    ])
-  )
+    ]),
+  ),
 )(HealthLevelEditor)

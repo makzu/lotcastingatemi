@@ -4,12 +4,11 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-
-import type { Enhancer } from 'utils/flow-types'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import type { Enhancer } from '@lca/utils/flow-types'
 
 type Props = {
-  shouldRedirect: boolean,
+  shouldRedirect: boolean
 }
 
 const GoodbyePage = ({ shouldRedirect }: Props) => {
@@ -23,7 +22,7 @@ const GoodbyePage = ({ shouldRedirect }: Props) => {
   )
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   shouldRedirect: !state.session.deleted && !state.app.loading,
 })
 

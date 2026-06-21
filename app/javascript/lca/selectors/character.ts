@@ -4,10 +4,14 @@ import { createSelector } from 'reselect'
 import type { RootState } from '@lca/store'
 import type { Character, Spell } from '@lca/types'
 import { sortOrderSort } from '@lca/utils'
-import { exaltTypeBase, mobilityPenalty, woundPenalty } from 'utils/calculated/'
-import { excellencyAbils as excellencies } from 'utils/calculated/excellencies'
-import * as pools from 'utils/calculated/pools'
-import * as ratings from 'utils/calculated/ratings'
+import {
+  exaltTypeBase,
+  mobilityPenalty,
+  woundPenalty,
+} from '@lca/utils/calculated/'
+import { excellencyAbils as excellencies } from '@lca/utils/calculated/excellencies'
+import * as pools from '@lca/utils/calculated/pools'
+import * as ratings from '@lca/utils/calculated/ratings'
 import {
   getMartialArtsCharmsForCharacter,
   getNativeCharmsForCharacter,

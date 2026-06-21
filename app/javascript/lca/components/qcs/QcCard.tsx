@@ -9,14 +9,17 @@ import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import { compose } from 'recompose'
-import { doIOwnQc, getPenaltiesForQc, getPoolsAndRatingsForQc } from 'selectors'
 
+import {
+  doIOwnQc,
+  getPenaltiesForQc,
+  getPoolsAndRatingsForQc,
+} from '@lca/selectors'
+import type { Enhancer, fullQc } from '@lca/utils/flow-types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
-
-import type { fullQc, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
@@ -67,15 +70,15 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  qc: fullQc,
-  chronicle?: boolean,
-  st?: boolean,
+  qc: fullQc
+  chronicle?: boolean
+  st?: boolean
 }
 type Props = ExposedProps & {
-  penalties: Object,
-  pools: Object,
-  isOwner: boolean,
-  classes: Object,
+  penalties: Object
+  pools: Object
+  isOwner: boolean
+  classes: Object
 }
 
 function QcCard(props: Props) {

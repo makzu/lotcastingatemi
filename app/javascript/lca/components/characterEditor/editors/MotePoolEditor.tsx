@@ -2,26 +2,25 @@
 import React, { Fragment } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import commonStyles from 'styles'
 
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
 import AnimaSelect from '@lca/components/shared/selects/AnimaSelect.tsx'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import AuraSelect from 'components/shared/selects/AuraSelect'
+import AuraSelect from '@lca/components/shared/selects/AuraSelect'
+import commonStyles from '@lca/styles'
 import {
   committedPeripheralMotes,
   committedPersonalMotes,
   showAuraTraits,
-} from 'utils/calculated'
+} from '@lca/utils/calculated'
+import type { Character } from '@lca/utils/flow-types'
 import MoteCommittmentEditor from './MoteCommitmentEditor.tsx'
-
-import type { Character } from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
-type Props = { character: Character, onChange: Function, classes: Object }
+type Props = { character: Character; onChange: Function; classes: Object }
 function MotePoolEditor({ character, onChange, classes }: Props) {
   if (character.type == 'Character' && !character.is_sorcerer) return <div />
 

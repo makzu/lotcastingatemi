@@ -3,10 +3,10 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import PoolDisplay from 'components/generic/PoolDisplay.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -21,7 +21,7 @@ const styles = theme => ({
   },
 })
 
-type Props = { pools: Object, classes: Object }
+type Props = { pools: Object; classes: Object }
 export function CombatBlock({ pools, classes }: Props) {
   return (
     <BlockPaper>

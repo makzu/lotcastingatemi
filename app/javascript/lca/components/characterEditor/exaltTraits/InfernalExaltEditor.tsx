@@ -1,12 +1,12 @@
 import type React from 'react'
 import MenuItem from '@material-ui/core/MenuItem'
 
+import InfernalCasteSelect from '@lca/components/characterEditor/exaltTraits/InfernalCasteSelect'
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import type { Character } from '@lca/types/'
-import InfernalCasteSelect from 'components/characterEditor/exaltTraits/InfernalCasteSelect'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import { nonCasteAbilities } from 'utils/calculated'
-import { INFERNAL_CASTE_ABILITIES } from 'utils/constants'
+import { nonCasteAbilities } from '@lca/utils/calculated'
+import { INFERNAL_CASTE_ABILITIES } from '@lca/utils/constants'
 
 type Props = { character: Character; onChange: React.ChangeEventHandler }
 function InfernalExaltEditor({ character, onChange }: Props) {

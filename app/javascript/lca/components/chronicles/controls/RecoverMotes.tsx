@@ -14,11 +14,11 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
 
-import RatingField from 'components/generic/RatingField.tsx'
-import { respireMotes } from 'ducks/events'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import { respireMotes } from '@lca/ducks/events'
 
-type Props = { id: number, respireMotes: Function }
-type State = { open: boolean, toRecover: number, qcs: boolean }
+type Props = { id: number; respireMotes: Function }
+type State = { open: boolean; toRecover: number; qcs: boolean }
 class MoteRespirePopup extends Component<Props, State> {
   constructor(props) {
     super(props)
@@ -28,23 +28,23 @@ class MoteRespirePopup extends Component<Props, State> {
   handleOpen = () => this.setState({ open: true })
   handleClose = () => this.setState({ open: false, toRecover: 0, qcs: false })
 
-  handleAdd = motes =>
+  handleAdd = (motes) =>
     this.setState({ toRecover: Math.max(this.state.toRecover + motes, 0) })
 
   handleReset = () => this.setState({ toRecover: 0 })
 
-  handleChange = e => {
-    let { name, value } = e.target
+  handleChange = (e) => {
+    const { name, value } = e.target
 
     if (name === 'toRecover') {
-      let val = Math.max(parseInt(value), 0)
+      const val = Math.max(parseInt(value), 0)
       this.setState({ toRecover: val })
     } else {
       this.setState({ [name]: value })
     }
   }
 
-  handleCheck = e =>
+  handleCheck = (e) =>
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
   handleSubmit = () => {
@@ -132,7 +132,4 @@ class MoteRespirePopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  { respireMotes }
-)(MoteRespirePopup)
+export default connect(null, { respireMotes })(MoteRespirePopup)

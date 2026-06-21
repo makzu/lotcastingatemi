@@ -10,9 +10,9 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import { canIEditCharacter, canIEditQc } from 'selectors'
 
 import { spendMotes } from '@lca/ducks/events/index.ts'
+import { canIEditCharacter, canIEditQc } from '@lca/selectors'
 import type { WithSharedStats } from '@lca/types/shared.ts'
 import {
   committedPeripheralMotes,
@@ -114,11 +114,11 @@ class MoteSpendWidget extends Component<Props, State> {
   }
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     let { commit } = this.state
 
     if (name === 'toSpend') {
-      let val = parseInt(value)
+      const val = parseInt(value)
       commit = this.state.toSpend + val <= 0 ? false : commit
       this.setState({ toSpend: val, commit: commit })
     } else {

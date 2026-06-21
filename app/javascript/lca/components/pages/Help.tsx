@@ -2,16 +2,16 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import FormsDoc from 'Docs/forms.md?raw'
 import MeritsDoc from 'Docs/merits.md?raw'
 import IndexDoc from 'Docs/README.md?raw'
 import WeaponsDoc from 'Docs/weapons.md?raw'
 
 type Props = {
-  match: { params: { doc: string } },
-  classes: Object,
+  match: { params: { doc: string } }
+  classes: Object
 }
 
 const HelpPage = ({ match }: Props) => {

@@ -3,17 +3,16 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import { shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import { LIMIT_MAX } from 'utils/constants.ts'
-import { isUnequalByKeys } from 'utils'
-
-import type { Character, Enhancer } from 'utils/flow-types'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { isUnequalByKeys } from '@lca/utils'
+import { LIMIT_MAX } from '@lca/utils/constants.ts'
+import type { Character, Enhancer } from '@lca/utils/flow-types'
 
 type Props = {
-  character: Character,
-  onChange: Function,
+  character: Character
+  onChange: Function
 }
 
 function LimitEditor({ character, onChange }: Props) {

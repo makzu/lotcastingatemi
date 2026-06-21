@@ -7,11 +7,11 @@ import { shouldUpdate } from 'recompose'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import type { Enhancer, withMotePool } from 'utils/flow-types'
-import { isUnequalByKeys } from 'utils'
+} from '@lca/components/generic/ListAttributeEditor.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { isUnequalByKeys } from '@lca/utils'
+import type { Enhancer, withMotePool } from '@lca/utils/flow-types'
 
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props

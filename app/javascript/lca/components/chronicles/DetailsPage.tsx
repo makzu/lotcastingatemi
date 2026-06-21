@@ -4,21 +4,21 @@ import type { TextFieldProps } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { updateChronicle } from '@lca/ducks/entities/chronicle.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
+import useAppSelector from '@lca/hooks/UseAppSelector.ts'
+import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
 import {
   amIStOfChronicle,
   getPlayersForChronicle,
   getSpecificChronicle,
   getStorytellerForChronicle,
-} from 'selectors'
-
-import { updateChronicle } from '@lca/ducks/entities/chronicle.ts'
-import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
-import useAppSelector from '@lca/hooks/UseAppSelector.ts'
-import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
+} from '@lca/selectors'
 import ChronicleDeletePopup from './ChronicleDeletePopup.tsx'
 import ChronicleInvitePopup from './ChronicleInvitePopup.tsx'
 import ChronicleLeavePopup from './ChronicleLeavePopup.tsx'

@@ -1,16 +1,16 @@
 // @flow
 import React, { type ChangeEventHandler, Fragment } from 'react'
 
-import type { WithSharedStats } from '@lca/types/shared.ts'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import Checkbox from 'components/shared/inputs/Checkbox'
+} from '@lca/components/generic/ListAttributeEditor.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import Checkbox from '@lca/components/shared/inputs/Checkbox'
+import type { WithSharedStats } from '@lca/types/shared.ts'
 import {
   INTIMACY_RATING_MAX as MAX,
   INTIMACY_RATING_MIN as MIN,
-} from 'utils/constants.ts'
+} from '@lca/utils/constants.ts'
 import RatingField from './RatingField.tsx'
 
 function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {

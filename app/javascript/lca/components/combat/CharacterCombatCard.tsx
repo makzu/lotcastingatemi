@@ -8,10 +8,14 @@ import Typography from '@material-ui/core/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Whatshot from '@material-ui/icons/Whatshot'
 import { compose } from 'recompose'
-import { canIEditCharacter, getPenalties, getPoolsAndRatings } from 'selectors'
 
-import NotesPopup from 'components/characters/NotesPopup.tsx'
-import type { Character, Enhancer } from 'utils/flow-types'
+import NotesPopup from '@lca/components/characters/NotesPopup.tsx'
+import {
+  canIEditCharacter,
+  getPenalties,
+  getPoolsAndRatings,
+} from '@lca/selectors'
+import type { Character, Enhancer } from '@lca/utils/flow-types'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'

@@ -2,9 +2,9 @@ import type React from 'react'
 import Typography from '@material-ui/core/Typography'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import type { Character } from '@lca/types'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import { nonCasteAbilities } from 'utils/calculated'
+import { nonCasteAbilities } from '@lca/utils/calculated'
 import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
 
 type Props = { character: Character; onChange: React.ChangeEventHandler }

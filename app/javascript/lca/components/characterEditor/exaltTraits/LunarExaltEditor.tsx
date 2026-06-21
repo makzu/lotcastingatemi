@@ -2,10 +2,10 @@ import type * as React from 'react'
 import { MenuItem } from '@material-ui/core'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import type { Character } from '@lca/types'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import { nonCasteAttributes } from 'utils/calculated'
-import { LUNAR_CASTE_ATTRIBUTES } from 'utils/constants'
+import { nonCasteAttributes } from '@lca/utils/calculated'
+import { LUNAR_CASTE_ATTRIBUTES } from '@lca/utils/constants'
 import LunarCasteSelect from './LunarCasteSelect'
 
 interface Props {

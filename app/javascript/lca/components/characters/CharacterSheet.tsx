@@ -6,22 +6,22 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
+
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { getWeaponsForCharacter } from '@lca/ducks/entities/weapon'
+import { getSpecificCharacter } from '@lca/ducks/selectors'
 import {
   canIEditCharacter,
   getMeritsForCharacter,
   getPenalties,
   getPoolsAndRatings,
-} from 'selectors'
-
-import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getWeaponsForCharacter } from 'ducks/entities/weapon'
-import { getSpecificCharacter } from 'ducks/selectors'
+} from '@lca/selectors'
 import type {
   Character,
   fullMerit as Merit,
   fullWeapon as Weapon,
-} from 'utils/flow-types'
+} from '@lca/utils/flow-types'
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import RatingLine from '../generic/RatingLine.tsx'

@@ -9,14 +9,14 @@ import {
   type WithStyles,
   withStyles,
 } from '@material-ui/core/styles'
-import { canIEditCharacter, canIEditQc } from 'selectors'
 
+import { updateCharacter, updateQc } from '@lca/ducks/actions.ts'
+import { canIEditCharacter, canIEditQc } from '@lca/selectors'
 import type store from '@lca/store.ts'
 import type { RootState } from '@lca/store.ts'
 import type { Character } from '@lca/types/character.ts'
 import type { QC } from '@lca/types/qc.ts'
-import { updateCharacter, updateQc } from 'ducks/actions.ts'
-import { prettyAnimaLevel } from 'utils/calculated'
+import { prettyAnimaLevel } from '@lca/utils/calculated'
 
 const styles = (theme: Theme) =>
   createStyles({

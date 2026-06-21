@@ -9,13 +9,21 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { withStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
-import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
 
-import PoolDisplay from 'components/generic/PoolDisplay.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions'
-
-import type { Character, fullQc, Battlegroup, Enhancer } from 'utils/flow-types'
+import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import {
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/actions'
+import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
+import type {
+  Battlegroup,
+  Character,
+  Enhancer,
+  fullQc,
+} from '@lca/utils/flow-types'
 
 // eslint-disable-next-line no-unused-vars
 const styles = (theme) => ({
@@ -30,24 +38,24 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  character: Character | fullQc | Battlegroup,
+  character: Character | fullQc | Battlegroup
 }
 type Props = ExposedProps & {
-  canEdit: boolean,
-  update: Function,
-  pools: Object,
-  classes: Object,
+  canEdit: boolean
+  update: Function
+  pools: Object
+  classes: Object
 }
 type State = {
-  open: boolean,
-  initiative: number,
+  open: boolean
+  initiative: number
 }
 
 class JoinBattlePopup extends React.Component<Props, State> {
   state = { open: false, initiative: 0 }
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     this.setState({ [name]: value })
   }
 

@@ -1,8 +1,7 @@
 import * as React from 'react'
-
 import { ListItemText } from '@material-ui/core'
 
-import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
+import NavLinkListItem from '@lca/components/shared/wrappers/NavLinkListItem'
 
 interface Props {
   link: string

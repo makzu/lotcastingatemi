@@ -11,7 +11,7 @@ import {
   fetchQc,
   updateBattlegroup,
   updateCharacter,
-  updateQc
+  updateQc,
 } from './'
 
 export const destroy = {

@@ -3,7 +3,7 @@ import { Drawer, type Theme } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { makeStyles, useTheme } from '@material-ui/styles'
 
-import { drawerWidth } from 'containers/_drawerProperties'
+import { drawerWidth } from '@lca/containers/_drawerProperties'
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {

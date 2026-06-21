@@ -8,8 +8,8 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 
-import { createBattlegroup } from 'ducks/actions.ts'
-import type { Enhancer } from 'utils/flow-types'
+import { createBattlegroup } from '@lca/ducks/actions.ts'
+import type { Enhancer } from '@lca/utils/flow-types'
 
 type Props = { createBattlegroup: Function }
 type State = {

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import { connect } from 'react-redux'
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -12,21 +11,21 @@ import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-import { addThingToChronicle } from 'ducks/actions'
-import { getSpecificChronicle, getMyQcsWithoutChronicles } from 'selectors'
-import type { fullQc, Enhancer } from 'utils/flow-types'
+import { addThingToChronicle } from '@lca/ducks/actions'
+import { getMyQcsWithoutChronicles, getSpecificChronicle } from '@lca/selectors'
+import type { Enhancer, fullQc } from '@lca/utils/flow-types'
 
 type ExposedProps = {
-  chronicleId: number,
+  chronicleId: number
 }
 type Props = ExposedProps & {
-  qcs: Array<fullQc>,
-  chronicleName: string,
-  handleSubmit: Function,
+  qcs: Array<fullQc>
+  chronicleName: string
+  handleSubmit: Function
 }
 type State = {
-  open: boolean,
-  qcId: number,
+  open: boolean
+  qcId: number
 }
 
 class QcAddPopup extends React.Component<Props, State> {
@@ -36,7 +35,7 @@ class QcAddPopup extends React.Component<Props, State> {
   }
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     this.setState({ [name]: value })
   }
 

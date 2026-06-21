@@ -11,18 +11,17 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { compose } from 'recompose'
-import { canIEditBattlegroup } from 'selectors'
-import sharedStyles from 'styles/'
 
-import { updateBattlegroup as update } from 'ducks/actions'
-import { totalMagnitude } from 'utils/calculated'
+import { updateBattlegroup as update } from '@lca/ducks/actions'
+import { canIEditBattlegroup } from '@lca/selectors'
+import sharedStyles from '@lca/styles/'
+import { totalMagnitude } from '@lca/utils/calculated'
+import type { Battlegroup } from '@lca/utils/flow-types'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import RatingField from '../generic/RatingField.tsx'
 import ResourceDisplay from '../generic/ResourceDisplay.tsx'
 
-import type { Battlegroup } from 'utils/flow-types'
-
-const styles = theme => ({
+const styles = (theme) => ({
   ...sharedStyles(theme),
   display: {
     marginRight: theme.spacing(),
@@ -34,14 +33,14 @@ const styles = theme => ({
 })
 
 type Props = {
-  battlegroup: Battlegroup,
-  className?: string,
-  DisplayClassName?: string,
-  classes: Object,
-  canEdit: Boolean,
-  update: Function,
+  battlegroup: Battlegroup
+  className?: string
+  DisplayClassName?: string
+  classes: Object
+  canEdit: boolean
+  update: Function
 }
-type State = { open: boolean, magnitude: number, size: number }
+type State = { open: boolean; magnitude: number; size: number }
 class BattlegroupHealthDisplay extends React.Component<Props, State> {
   state = {
     open: false,
@@ -49,7 +48,7 @@ class BattlegroupHealthDisplay extends React.Component<Props, State> {
     size: this.props.battlegroup.size,
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
@@ -82,13 +81,8 @@ class BattlegroupHealthDisplay extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      battlegroup,
-      className,
-      DisplayClassName,
-      canEdit,
-      classes,
-    } = this.props
+    const { battlegroup, className, DisplayClassName, canEdit, classes } =
+      this.props
     const { open, size, magnitude } = this.state
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
 
@@ -183,8 +177,5 @@ const mapStateToProps = (state, props) => ({
 
 export default compose(
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    { update }
-  )
+  connect(mapStateToProps, { update }),
 )(BattlegroupHealthDisplay)

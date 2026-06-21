@@ -3,10 +3,10 @@ import React, { Fragment } from 'react'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import type { withIntimacies } from 'utils/flow-types'
+} from '@lca/components/generic/ListAttributeEditor.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import type { withIntimacies } from '@lca/utils/flow-types'
 
 function ResourceFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props

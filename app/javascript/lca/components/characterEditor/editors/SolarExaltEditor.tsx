@@ -2,17 +2,16 @@
 import React from 'react'
 import MenuItem from '@material-ui/core/MenuItem'
 
+import SolarCasteSelect from '@lca/components/characterEditor/exaltTraits/SolarCasteSelect'
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
-import SolarCasteSelect from 'components/characterEditor/exaltTraits/SolarCasteSelect'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import { nonCasteAbilities } from 'utils/calculated'
-import { SOLAR_CASTE_ABILITIES } from 'utils/constants.ts'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import { nonCasteAbilities } from '@lca/utils/calculated'
+import { SOLAR_CASTE_ABILITIES } from '@lca/utils/constants.ts'
+import type { Character } from '@lca/utils/flow-types'
 
-import type { Character } from 'utils/flow-types'
-
-type Props = { character: Character, onChange: Function }
+type Props = { character: Character; onChange: Function }
 function SolarExaltEditor({ character, onChange }: Props) {
-  let casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
+  const casteAbilities = SOLAR_CASTE_ABILITIES[character.caste] || []
   let supernalAbilities = casteAbilities
   if (character.caste === 'dawn')
     supernalAbilities = [

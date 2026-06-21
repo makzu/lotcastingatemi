@@ -1,8 +1,8 @@
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
 import { PersonAdd } from '@material-ui/icons'
 
+import { duplicate } from '@lca/ducks/actions/ByType'
 import { useAppDispatch, useAppSelector } from '@lca/hooks'
-import { duplicate } from 'ducks/actions/ByType'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 const DuplicateButton = ({ characterType, id }: Props) => {

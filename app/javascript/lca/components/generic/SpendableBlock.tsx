@@ -2,9 +2,14 @@
 import React, { Fragment } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import sharedStyles from 'styles/'
 
-import * as calc from 'utils/calculated'
+import sharedStyles from '@lca/styles/'
+import * as calc from '@lca/utils/calculated'
+import type {
+  withHealthLevels,
+  withMotePool,
+  withWillpower,
+} from '@lca/utils/flow-types'
 import AnimaDisplay from '../generic/AnimaDisplay.tsx'
 import AuraDisplay from '../generic/AuraDisplay.tsx'
 import DamageWidget from '../generic/DamageWidget.tsx'
@@ -14,12 +19,6 @@ import ResourceDisplay from '../generic/ResourceDisplay.tsx'
 import ShapeNecromancyWidget from '../generic/ShapeNecromancyWidget'
 import ShapeSorceryWidget from '../generic/ShapeSorceryWidget.tsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.tsx'
-
-import type {
-  withMotePool,
-  withWillpower,
-  withHealthLevels,
-} from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
@@ -31,9 +30,9 @@ const styles = (theme) => ({
 type Props = {
   character: withMotePool &
     withWillpower &
-    withHealthLevels & { id: number, aura: string, type: string },
-  classes: Object,
-  qc?: boolean,
+    withHealthLevels & { id: number; aura: string; type: string }
+  classes: Object
+  qc?: boolean
 }
 export function SpendableBlock({ character, classes, qc }: Props) {
   return (

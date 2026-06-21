@@ -1,42 +1,44 @@
 import { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Placeholder from 'components/generic/Placeholder.tsx'
-import GoodbyePage from 'components/pages/GoodbyePage.tsx'
-import PrivacyPage from 'components/pages/PrivacyPage.tsx'
-import SettingsPage from 'components/pages/SettingsPage.tsx'
-import WelcomePage from 'components/pages/WelcomePage.tsx'
+import Placeholder from '@lca/components/generic/Placeholder.tsx'
+import GoodbyePage from '@lca/components/pages/GoodbyePage.tsx'
+import PrivacyPage from '@lca/components/pages/PrivacyPage.tsx'
+import SettingsPage from '@lca/components/pages/SettingsPage.tsx'
+import WelcomePage from '@lca/components/pages/WelcomePage.tsx'
 
 const ChronicleWrapper = lazy(
-  () => import('components/chronicles/ChronicleWrapper.tsx'),
+  () => import('@lca/components/chronicles/ChronicleWrapper.tsx'),
 )
 
-const ContentList = lazy(() => import('components/pages/ContentList.tsx'))
-const CharacterList = lazy(() => import('components/CharacterList/'))
-const QcList = lazy(() => import('components/qcs/QcList.tsx'))
+const ContentList = lazy(() => import('@lca/components/pages/ContentList.tsx'))
+const CharacterList = lazy(() => import('@lca/components/CharacterList/'))
+const QcList = lazy(() => import('@lca/components/qcs/QcList.tsx'))
 const BattlegroupList = lazy(
-  () => import('components/battlegroups/BattlegroupList.tsx'),
+  () => import('@lca/components/battlegroups/BattlegroupList.tsx'),
 )
 
-const CharacterSheetWrap = lazy(() => import('components/CharacterSheet/'))
+const CharacterSheetWrap = lazy(() => import('@lca/components/CharacterSheet/'))
 
 const CharacterEditor = lazy(
-  () => import('components/characterEditor/CharacterEditorWrapper.tsx'),
+  () => import('@lca/components/characterEditor/CharacterEditorWrapper.tsx'),
 )
 
-const QcSheet = lazy(() => import('components/qcs/index.tsx'))
+const QcSheet = lazy(() => import('@lca/components/qcs/index.tsx'))
 
-const QcEditor = lazy(() => import('components/qcs/editor.tsx'))
+const QcEditor = lazy(() => import('@lca/components/qcs/editor.tsx'))
 
-const BattlegroupSheet = lazy(() => import('components/battlegroups/index.tsx'))
+const BattlegroupSheet = lazy(
+  () => import('@lca/components/battlegroups/index.tsx'),
+)
 
 const BattlegroupEditor = lazy(
-  () => import('components/battlegroups/editor.tsx'),
+  () => import('@lca/components/battlegroups/editor.tsx'),
 )
 
-const ResourcesPage = lazy(() => import('components/pages/ResourcesPage'))
+const ResourcesPage = lazy(() => import('@lca/components/pages/ResourcesPage'))
 
-const HelpPage = lazy(() => import('components/pages/Help.tsx'))
+const HelpPage = lazy(() => import('@lca/components/pages/Help.tsx'))
 
 export default function Routes() {
   return (

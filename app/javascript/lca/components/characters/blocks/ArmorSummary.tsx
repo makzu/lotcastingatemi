@@ -3,12 +3,11 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import PoolDisplay from 'components/generic/PoolDisplay.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
+import type { withArmorStats } from '@lca/utils/flow-types'
 
-import type { withArmorStats } from 'utils/flow-types'
-
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -60,9 +59,9 @@ const styles = theme => ({
 })
 
 type Props = {
-  character: withArmorStats,
-  pools: Object,
-  classes: Object,
+  character: withArmorStats
+  pools: Object
+  classes: Object
 }
 function ArmorSummary({ character, pools, classes }: Props) {
   return (

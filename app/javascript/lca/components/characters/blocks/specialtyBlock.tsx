@@ -4,11 +4,10 @@ import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import type { withSpecialties } from '@lca/utils/flow-types'
 
-import type { withSpecialties } from 'utils/flow-types'
-
-const styles = theme => ({
+const styles = (theme) => ({
   specialtyWrap: {
     display: 'flex',
     marginBottom: theme.spacing(0.5),
@@ -25,9 +24,9 @@ const styles = theme => ({
   },
 })
 
-type Props = { character: withSpecialties, classes: Object }
+type Props = { character: withSpecialties; classes: Object }
 function FullSpecialtyBlock({ character, classes }: Props) {
-  const spec = character.specialties.map(s => (
+  const spec = character.specialties.map((s) => (
     <Fragment key={s.ability + s.context}>
       <div className={classes.specialtyWrap}>
         <div className={classes.specialtyAbility}>

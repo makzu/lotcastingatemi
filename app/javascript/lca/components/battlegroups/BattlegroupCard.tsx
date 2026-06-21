@@ -9,11 +9,15 @@ import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import { compose } from 'recompose'
-import { doIOwnBattlegroup } from 'selectors'
-import sharedStyles from 'styles/'
 
-import { bgDefenseBonus, bgSoak, prettyDrillRating } from 'utils/calculated'
-import type { Battlegroup, Enhancer } from 'utils/flow-types'
+import { doIOwnBattlegroup } from '@lca/selectors'
+import sharedStyles from '@lca/styles/'
+import {
+  bgDefenseBonus,
+  bgSoak,
+  prettyDrillRating,
+} from '@lca/utils/calculated'
+import type { Battlegroup, Enhancer } from '@lca/utils/flow-types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'

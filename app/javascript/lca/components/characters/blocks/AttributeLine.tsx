@@ -3,12 +3,11 @@ import React from 'react'
 import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 
-import RatingLine from 'components/generic/RatingLine.tsx'
-import { isCasteAttribute, isFavoredAttribute } from 'utils/calculated'
+import RatingLine from '@lca/components/generic/RatingLine.tsx'
+import { isCasteAttribute, isFavoredAttribute } from '@lca/utils/calculated'
+import type { Character } from '@lca/utils/flow-types'
 
-import type { Character } from 'utils/flow-types'
-
-const styles = theme => ({
+const styles = (theme) => ({
   attributeName: {
     ...theme.typography.body1,
     textTransform: 'capitalize',
@@ -19,11 +18,11 @@ const styles = theme => ({
 })
 
 type Props = {
-  attribute: string,
-  rating: number,
-  character: Character,
-  pools: Object,
-  classes: Object,
+  attribute: string
+  rating: number
+  character: Character
+  pools: Object
+  classes: Object
 }
 function AttributeLine(props: Props) {
   const { rating, attribute, character, pools, classes } = props

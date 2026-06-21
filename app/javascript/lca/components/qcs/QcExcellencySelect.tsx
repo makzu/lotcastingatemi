@@ -1,14 +1,13 @@
 // @flow
 import * as React from 'react'
-
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
 type Props = {
-  value: string,
-  name: string,
-  className?: any,
-  onChange: Function,
+  value: string
+  name: string
+  className?: any
+  onChange: Function
 }
 class RangeSelect extends React.PureComponent<Props> {
   render() {

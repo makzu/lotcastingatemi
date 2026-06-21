@@ -9,9 +9,9 @@ import {
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
+import { LinkListItem, NavLinkListItem } from '@lca/components/shared/wrappers/'
+import { useCharacterAttribute } from '@lca/ducks/entities'
 import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
-import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
-import { useCharacterAttribute } from 'ducks/entities'
 
 const CharacterEditorNav = ({ match }: RouteProps) => {
   const id = parseInt(match.params.id, 10)

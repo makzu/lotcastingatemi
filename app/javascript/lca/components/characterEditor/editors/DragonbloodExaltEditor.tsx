@@ -3,13 +3,12 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import { nonCasteAbilities } from 'utils/calculated'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import { nonCasteAbilities } from '@lca/utils/calculated'
+import type { Character } from '@lca/utils/flow-types'
 import DbAspectSelect from '../exaltTraits/DbAspectSelect'
 
-import type { Character } from 'utils/flow-types'
-
-type Props = { character: Character, onChange: Function }
+type Props = { character: Character; onChange: Function }
 function DragonbloodExaltEditor({ character, onChange }: Props) {
   let caste_abilities = character.caste_abilities || []
   if (character.caste === 'water') {

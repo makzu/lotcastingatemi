@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import { connect } from 'react-redux'
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -12,24 +11,24 @@ import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-import { addThingToChronicle } from 'ducks/actions.ts'
+import { addThingToChronicle } from '@lca/ducks/actions.ts'
 import {
-  getSpecificChronicle,
   getMyBattlegroupsWithoutChronicles,
-} from 'selectors'
-import type { Battlegroup, Enhancer } from 'utils/flow-types'
+  getSpecificChronicle,
+} from '@lca/selectors'
+import type { Battlegroup, Enhancer } from '@lca/utils/flow-types'
 
 type ExposedProps = {
-  chronicleId: number,
+  chronicleId: number
 }
 type Props = ExposedProps & {
-  battlegroups: Array<Battlegroup>,
-  chronicleName: string,
-  handleSubmit: Function,
+  battlegroups: Array<Battlegroup>
+  chronicleName: string
+  handleSubmit: Function
 }
 type State = {
-  open: boolean,
-  battlegroupId: number,
+  open: boolean
+  battlegroupId: number
 }
 
 class BattlegroupAddPopup extends React.Component<Props, State> {
@@ -39,7 +38,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
   }
 
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     this.setState({ [name]: value })
   }
 

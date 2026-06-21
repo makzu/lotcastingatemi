@@ -1,18 +1,15 @@
 // @flow
 import React, { Component, Fragment } from 'react'
-
-import type { Pool } from 'utils/flow-types'
-
-
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { withStyles } from '@material-ui/core/styles'
 
+import type { Pool } from '@lca/utils/flow-types'
 import AttackTagsDisplay from './AttackTagsDisplay.tsx'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {},
   clickable: {
     cursor: 'pointer',
@@ -41,12 +38,12 @@ const styles = theme => ({
 })
 
 type Props = {
-  label: string,
-  pool: Pool,
-  noSummary?: boolean,
-  qc?: boolean,
-  battlegroup?: boolean,
-  classes: Object,
+  label: string
+  pool: Pool
+  noSummary?: boolean
+  qc?: boolean
+  battlegroup?: boolean
+  classes: Object
 }
 class PoolDisplay extends Component<Props, { open: boolean }> {
   constructor(props: Props) {
@@ -82,7 +79,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     const pen = pool.penalties || []
     const sp = pool.specialties || []
 
-    const merits = mb.map(m => (
+    const merits = mb.map((m) => (
       <div key={m.label} className={classes.specialty}>
         {m.situational && (
           <span>
@@ -94,8 +91,8 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
       </div>
     ))
     const fullMerits = mb
-      .filter(m => !m.noFull)
-      .map(m => (
+      .filter((m) => !m.noFull)
+      .map((m) => (
         <div key={m.label}>
           {m.situational && (
             <span className={classes.excellency}>(conditional) </span>
@@ -105,14 +102,14 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
         </div>
       ))
 
-    const fullPen = pen.map(p =>
+    const fullPen = pen.map((p) =>
       p.penalty !== 0 ? (
         <div key={p.label}>
           -{p.penalty} {p.label}
         </div>
       ) : (
         <span key={p.label} />
-      )
+      ),
     )
     const showSpecialties =
       sp.length > 0 && ((pool.rating && pool.specialtyMatters) || !pool.rating)

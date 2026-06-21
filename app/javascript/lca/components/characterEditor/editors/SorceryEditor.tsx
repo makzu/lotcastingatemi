@@ -5,14 +5,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
 import { shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import type { Character, Enhancer } from 'utils/flow-types'
-import { isUnequalByKeys } from 'utils'
+} from '@lca/components/generic/ListAttributeEditor.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { isUnequalByKeys } from '@lca/utils'
+import type { Character, Enhancer } from '@lca/utils/flow-types'
 
 export const SorceryFields = (
   props: { trait: string } & ListAttributeFieldTypes,

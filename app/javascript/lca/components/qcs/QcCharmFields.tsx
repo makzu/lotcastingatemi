@@ -8,12 +8,12 @@ import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import { deepEqual } from 'fast-equals'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TagsField from 'components/generic/TagsField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import CharmTimingSelect from 'components/shared/selects/CharmTimingSelect'
-import type { QcCharm } from 'utils/flow-types'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TagsField from '@lca/components/generic/TagsField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect'
+import type { QcCharm } from '@lca/utils/flow-types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

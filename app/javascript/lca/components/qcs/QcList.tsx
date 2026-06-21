@@ -1,15 +1,15 @@
 import { SortableElement } from 'react-sortable-hoc'
 import { Grid, Typography } from '@material-ui/core'
 
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import QcCard from '@lca/components/qcs/QcCard.tsx'
+import QcCreatePopup from '@lca/components/qcs/QcCreatePopup.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { getMyQcs, updateQc } from '@lca/ducks/entities'
+import { updateQcSort } from '@lca/ducks/entities/qc'
 import { useDocumentTitle } from '@lca/hooks'
 import useAppDispatch from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import SortableGridList from 'components/generic/SortableGridList.tsx'
-import QcCard from 'components/qcs/QcCard.tsx'
-import QcCreatePopup from 'components/qcs/QcCreatePopup.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getMyQcs, updateQc } from 'ducks/entities'
-import { updateQcSort } from 'ducks/entities/qc'
 
 const SortableItem = SortableElement(({ children }) => children)
 

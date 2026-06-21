@@ -1,11 +1,10 @@
 // @flow
 import React from 'react'
-
 import Typography from '@material-ui/core/Typography'
 
 type Props = {
-  name: string,
-  rating: number,
+  name: string
+  rating: number
 }
 
 const MeritEffectBlurb = ({ name, rating }: Props) => {

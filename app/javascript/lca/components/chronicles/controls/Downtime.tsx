@@ -15,16 +15,16 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
 
-import RatingField from 'components/generic/RatingField.tsx'
-import { downtime } from 'ducks/events'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import { downtime } from '@lca/ducks/events'
 
-type Props = { id: number, downtime: Function }
+type Props = { id: number; downtime: Function }
 type State = {
-  open: boolean,
-  time: number,
-  parsedTime: number,
-  days: boolean,
-  endScene: boolean,
+  open: boolean
+  time: number
+  parsedTime: number
+  days: boolean
+  endScene: boolean
 }
 class DowntimePopup extends Component<Props, State> {
   constructor(props) {
@@ -50,8 +50,8 @@ class DowntimePopup extends Component<Props, State> {
 
   handleReset = () => this.setState({ time: 1 })
 
-  handleChange = e => {
-    let { value } = e.target
+  handleChange = (e) => {
+    const { value } = e.target
     if (this.state.days) {
       this.setState({ time: value * 24, parsedTime: value })
     } else {
@@ -72,12 +72,12 @@ class DowntimePopup extends Component<Props, State> {
     }
   }
 
-  handleCheck = e =>
+  handleCheck = (e) =>
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
-  handleSetHours = hours =>
+  handleSetHours = (hours) =>
     this.setState({ time: hours, parsedTime: hours, days: false })
-  handleSetDays = days =>
+  handleSetDays = (days) =>
     this.setState({ time: days * 24, parsedTime: days, days: true })
 
   handleSubmit = () => {
@@ -190,7 +190,4 @@ class DowntimePopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  { downtime }
-)(DowntimePopup)
+export default connect(null, { downtime })(DowntimePopup)

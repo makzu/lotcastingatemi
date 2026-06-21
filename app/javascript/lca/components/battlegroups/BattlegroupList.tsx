@@ -1,15 +1,15 @@
 import { SortableElement } from 'react-sortable-hoc'
 import { Grid, Typography } from '@material-ui/core'
 
+import BattlegroupCard from '@lca/components/battlegroups/BattlegroupCard.tsx'
+import BattlegroupCreatePopup from '@lca/components/battlegroups/BattlegroupCreatePopup.tsx'
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import DocumentTitle from '@lca/components/shared/DocumentTitle'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { getMyBattlegroups, updateBattlegroup } from '@lca/ducks/entities'
+import { updateBattlegroupSort } from '@lca/ducks/entities/battlegroup'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
 import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import BattlegroupCard from 'components/battlegroups/BattlegroupCard.tsx'
-import BattlegroupCreatePopup from 'components/battlegroups/BattlegroupCreatePopup.tsx'
-import SortableGridList from 'components/generic/SortableGridList.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getMyBattlegroups, updateBattlegroup } from 'ducks/entities'
-import { updateBattlegroupSort } from 'ducks/entities/battlegroup'
 
 const SortableItem = SortableElement(({ children }) => children)
 

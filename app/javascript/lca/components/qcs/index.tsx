@@ -3,6 +3,13 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+
+import MarkdownDisplay, {
+  LinkRenderer,
+} from '@lca/components/generic/MarkdownDisplay.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { fetchQcIfNecessary } from '@lca/ducks/entities/qc'
+import { getSpellsForQc } from '@lca/ducks/selectors'
 import {
   canIEditQc,
   getAttacksForQc,
@@ -11,21 +18,13 @@ import {
   getPenaltiesForQc,
   getPoolsAndRatingsForQc,
   getSpecificQc,
-} from 'selectors'
-import sharedStyles from 'styles/'
-
-import MarkdownDisplay, {
-  LinkRenderer,
-} from 'components/generic/MarkdownDisplay.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { fetchQcIfNecessary } from 'ducks/entities/qc'
-import { getSpellsForQc } from 'ducks/selectors'
-import { prettyIntimacyRating, qcPool } from 'utils/calculated'
+} from '@lca/selectors'
+import sharedStyles from '@lca/styles/'
+import { prettyIntimacyRating, qcPool } from '@lca/utils/calculated'
+import type { fullQc, QcAttack, QcCharm, QcMerit } from '@lca/utils/flow-types'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
-
-import type { fullQc, QcMerit, QcAttack, QcCharm } from 'utils/flow-types'
 
 const styles = (theme) => ({
   ...sharedStyles(theme),
@@ -88,18 +87,18 @@ const styles = (theme) => ({
 })
 
 type Props = {
-  id: string,
-  qc: fullQc,
-  qc_merits: Array<QcMerit>,
-  qc_charms: Array<QcCharm>,
-  qc_attacks: Array<QcAttack>,
-  spells: Array<Object>,
-  pools: Object,
-  penalties: Object,
-  classes: Object,
-  canEdit: boolean,
-  loading: boolean,
-  fetch: Function,
+  id: string
+  qc: fullQc
+  qc_merits: Array<QcMerit>
+  qc_charms: Array<QcCharm>
+  qc_attacks: Array<QcAttack>
+  spells: Array<Object>
+  pools: Object
+  penalties: Object
+  classes: Object
+  canEdit: boolean
+  loading: boolean
+  fetch: Function
 }
 
 class QcSheet extends Component<Props> {

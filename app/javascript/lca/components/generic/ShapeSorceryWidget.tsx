@@ -10,12 +10,16 @@ import Divider from '@material-ui/core/Divider'
 import { createStyles, type Theme, withStyles } from '@material-ui/core/styles'
 import type { WithStyles } from '@material-ui/styles'
 
+import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import {
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/actions'
 import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
 import type store from '@lca/store.ts'
 import type { RootState } from '@lca/store.ts'
-import PoolDisplay from 'components/generic/PoolDisplay.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions'
 
 // eslint-disable-next-line no-unused-vars
 const styles = (theme: Theme) =>
@@ -58,7 +62,7 @@ class ShapeSorceryWidget extends Component<Props, State> {
   }
 
   handleChangeRoll = (e: ChangeEvent<HTMLInputElement>) => {
-    let { value } = e.target
+    const { value } = e.target
     this.setState({
       roll: value,
       total: value + this.props.character.sorcerous_motes,
@@ -66,7 +70,7 @@ class ShapeSorceryWidget extends Component<Props, State> {
   }
 
   handleChangeTotal = (e: ChangeEvent<HTMLInputElement>) => {
-    let { value } = e.target
+    const { value } = e.target
     this.setState({
       roll: value - this.props.character.sorcerous_motes,
       total: value,

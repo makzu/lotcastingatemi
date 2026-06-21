@@ -7,17 +7,15 @@ import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import RatingLine from 'components/generic/RatingLine.tsx'
-
-import type { Character } from 'utils/flow-types'
-
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import RatingLine from '@lca/components/generic/RatingLine.tsx'
 import {
   isCasteAbility,
   isFavoredAbility,
   isSupernalAbility,
-} from 'utils/calculated'
-import { ABILITY_NAMES } from 'utils/constants.ts'
+} from '@lca/utils/calculated'
+import { ABILITY_NAMES } from '@lca/utils/constants.ts'
+import type { Character } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   abilityName: {
@@ -30,11 +28,11 @@ const styles = (theme) => ({
 })
 
 type _AbilityLineProps = {
-  ability: string,
-  rating?: number,
-  character: Character,
-  pools: Object,
-  classes: Object,
+  ability: string
+  rating?: number
+  character: Character
+  pools: Object
+  classes: Object
 }
 
 function _AbilityLine({
@@ -71,11 +69,11 @@ function _AbilityLine({
 const AbilityLine = withStyles(styles)(_AbilityLine)
 
 type _CraftAbilityLineProps = {
-  context: string,
-  rating: number,
-  character: Character,
-  pools: Object,
-  classes: Object,
+  context: string
+  rating: number
+  character: Character
+  pools: Object
+  classes: Object
 }
 function _CraftAbilityLine({
   character,
@@ -110,11 +108,11 @@ function _CraftAbilityLine({
 const CraftAbilityLine = withStyles(styles)(_CraftAbilityLine)
 
 type _MartialArtsAbilityLineProps = {
-  style?: string,
-  rating: number,
-  character: Character,
-  pools: Object,
-  classes: Object,
+  style?: string
+  rating: number
+  character: Character
+  pools: Object
+  classes: Object
 }
 function _MartialArtsAbilityLine({
   character,
@@ -155,8 +153,8 @@ function _MartialArtsAbilityLine({
 const MartialArtsAbilityLine = withStyles(styles)(_MartialArtsAbilityLine)
 
 type AbilityBlockProps = {
-  character: Character,
-  pools: Object,
+  character: Character
+  pools: Object
 }
 export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
   let craft = ''

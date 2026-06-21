@@ -56,7 +56,7 @@ class RatingField extends Component<Props, State> {
     }
 
     // $FlowThisIsOkayISwear
-    let value = clamp(parseInt(e.target.value), min, max)
+    const value = clamp(parseInt(e.target.value), min, max)
     const fakeE = { target: { name: e.target.name, value: value } }
 
     if (isNaN(parseInt(this.state.value)))

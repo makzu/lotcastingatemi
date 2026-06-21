@@ -7,6 +7,9 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import { compose } from 'recompose'
+
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { endCombat, nextRound } from '@lca/ducks/events'
 import {
   amIStOfChronicle,
   getBattlegroupsForChronicle,
@@ -15,17 +18,14 @@ import {
   getQcsForChronicle,
   getSpecificChronicle,
   getStorytellerForChronicle,
-} from 'selectors'
-
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { endCombat, nextRound } from 'ducks/events'
+} from '@lca/selectors'
 import type {
   Battlegroup,
   Character,
   Chronicle,
   fullQc,
   Player,
-} from 'utils/flow-types'
+} from '@lca/utils/flow-types'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import BattlegroupCard from './BattlegroupCombatCard.tsx'
 import CharacterCard from './CharacterCombatCard.tsx'

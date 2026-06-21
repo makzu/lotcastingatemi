@@ -53,14 +53,13 @@ export {
   updateSpell,
   updateWeapon,
 } from './entities'
-
 export { logout } from './session'
 
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 import type { Dispatch } from 'redux'
 
 import type { State } from '@lca/ducks'
-import UpdatesCable from 'utils/cable.js'
+import UpdatesCable from '@lca/utils/cable.js'
 import {
   fetchAllBattlegroups,
   fetchAllCharacters,

@@ -1,27 +1,29 @@
 // @flow
-import * as React from 'react'
+import type * as React from 'react'
+
 export * from './character'
+export * from './pool.js'
 export * from './qc'
 export * from './shared.js'
-export * from './pool.js'
-import type { withBasicInfo, withCombatInfo, withWillpower } from './shared.js'
+
 import type { withQcStats } from './qc'
+import type { withBasicInfo, withCombatInfo, withWillpower } from './shared.js'
 
 export type Enhancer<P, EP> = (
-  component: React.ComponentType<P>
+  component: React.ComponentType<P>,
 ) => React.ComponentType<EP>
 
 export type Battlegroup = {
-  name: string,
-  description: string,
-  magnitude: number,
-  size: number,
-  might: number,
-  drill: number,
-  soak: number,
-  health_levels: number,
-  perfect_morale: boolean,
-  portrait_link: string,
+  name: string
+  description: string
+  magnitude: number
+  size: number
+  might: number
+  drill: number
+  soak: number
+  health_levels: number
+  perfect_morale: boolean
+  portrait_link: string
 } & withBasicInfo &
   withQcStats &
   withWillpower &
@@ -30,20 +32,20 @@ export type Battlegroup = {
 export type CombatActor = {}
 
 export type Player = {
-  id: number,
-  display_name: string,
-  characters: Array<number>,
-  qcs: Array<number>,
-  battlegroups: Array<number>,
-  chronicles: Array<number>,
-  own_chronicles: Array<number>,
+  id: number
+  display_name: string
+  characters: Array<number>
+  qcs: Array<number>
+  battlegroups: Array<number>
+  chronicles: Array<number>
+  own_chronicles: Array<number>
 }
 
 export type Chronicle = {
-  id: number,
-  st_id: number,
-  name: string,
-  players: Array<number>,
+  id: number
+  st_id: number
+  name: string
+  players: Array<number>
 }
 
 export type Ability =

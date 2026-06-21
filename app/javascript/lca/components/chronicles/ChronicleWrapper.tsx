@@ -1,3 +1,4 @@
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 
@@ -20,7 +21,7 @@ type Props = ExposedProps & {
   fetchChronicle: Function
 }
 
-class ChronicleWrapper extends React.Component<Props> {
+class ChronicleWrapper extends Component<Props> {
   fetchStuff = () => {
     if (!this.props.isLoaded) {
       this.props.fetchChronicle(this.props.match.params.chronicleId)
@@ -41,10 +42,7 @@ class ChronicleWrapper extends React.Component<Props> {
   render() {
     return (
       <Switch>
-        <Route
-          path="/chronicles/:chronicleId/combat"
-          component={CombatDashboard}
-        />
+        <Route path="/chronicles/:id/combat" component={CombatDashboard} />
         <Route
           path="/chronicles/:chronicleId/details"
           component={ChronicleDetailsPage}

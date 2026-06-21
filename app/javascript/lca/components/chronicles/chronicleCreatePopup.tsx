@@ -1,5 +1,4 @@
-import { PureComponent } from 'react'
-import { connect } from 'react-redux'
+import { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -9,78 +8,58 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import TextField from '@material-ui/core/TextField'
-import ContentAddCircle from '@material-ui/icons/AddCircle'
+import AddCircle from '@material-ui/icons/AddCircle'
 
 import { createChronicle } from '@lca/ducks/actions/index.ts'
+import { useAppDispatch, useDialogLogic } from '@lca/hooks/index.ts'
 
-type Props = { createChronicle: Function }
-type State = { open: boolean; chronicle: { name: string } }
-class ChronicleCreatePopup extends PureComponent<Props, State> {
-  state = {
-    open: false,
-    chronicle: { name: '' },
+const ChronicleCreateDialog = () => {
+  const [isOpen, open, close] = useDialogLogic()
+  const [name, setName] = useState('')
+  const dispatch = useAppDispatch()
+
+  const handleSubmit = () => {
+    close()
+    dispatch(createChronicle({ name }))
   }
 
-  handleOpen = () => {
-    this.setState({ open: true })
-  }
+  return (
+    <>
+      <ListItem button onClick={open}>
+        <ListItemIcon>
+          <AddCircle />
+        </ListItemIcon>
 
-  handleClose = () => {
-    this.setState({ open: false })
-  }
+        <ListItemText primary="Create New" />
+      </ListItem>
 
-  handleChange = (e) => {
-    this.setState({
-      chronicle: { ...this.state.chronicle, name: e.target.value },
-    })
-  }
-
-  handleSubmit = () => {
-    this.setState({ open: false })
-    this.props.createChronicle(this.state.chronicle)
-  }
-
-  render() {
-    const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { chronicle } = this.state
-
-    return (
-      <>
-        <ListItem button onClick={handleOpen}>
-          <ListItemIcon>
-            <ContentAddCircle />
-          </ListItemIcon>
-
-          <ListItemText primary="Create New" />
-        </ListItem>
-
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Be the Storyteller of a new Chronicle</DialogTitle>
-          <DialogContent>
-            <TextField
-              name="name"
-              value={chronicle.name}
-              label="Name"
-              margin="normal"
-              fullWidth
-              onChange={handleChange}
-              inputProps={{
-                autocomplete: 'off',
-                'data-1p-ignore': 'true',
-                'data-lp-ignore': 'true',
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained" color="primary">
-              Create
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Be the Storyteller of a new Chronicle</DialogTitle>
+        <DialogContent>
+          <TextField
+            variant="standard"
+            name="name"
+            value={name}
+            label="Name"
+            margin="normal"
+            fullWidth
+            onChange={(e) => setName(e.target.value)}
+            inputProps={{
+              autocomplete: 'off',
+              'data-1p-ignore': 'true',
+              'data-lp-ignore': 'true',
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-export default connect(undefined, { createChronicle })(ChronicleCreatePopup)
+export default ChronicleCreateDialog

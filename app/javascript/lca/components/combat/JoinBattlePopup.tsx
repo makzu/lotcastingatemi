@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -15,10 +15,11 @@ import {
   updateCharacter,
   updateQc,
 } from '@lca/ducks/actions/index.ts'
+import useDialogLogic from '@lca/hooks/UseDialogLogic.ts'
 import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors/index.ts'
+import type { RootState } from '@lca/store.ts'
 import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 
-// eslint-disable-next-line no-unused-vars
 const styles = (theme) => ({
   wrap: {
     display: 'flex',
@@ -39,76 +40,62 @@ type Props = ExposedProps & {
   pools: Object
   classes: Object
 }
-type State = {
-  open: boolean
-  initiative: number
-}
 
-class JoinBattlePopup extends Component<Props, State> {
-  state = { open: false, initiative: 0 }
+const JoinBattlePopup = (props: Props) => {
+  const { character, update, pools, classes } = props
+  const [isOpen, setOpen, setClosed] = useDialogLogic()
+  const [init, setInit] = useState(0)
 
-  handleChange = (e) => {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
+  const handleClose = () => {
+    setClosed()
+    setInit(0)
   }
 
-  handleOpen = () => this.setState({ open: true })
-
-  handleClose = () => this.setState({ open: false, initiative: 0 })
-
-  handleSubmit = () => {
-    this.setState({ open: false })
-    this.props.update(this.props.character.id, this.state.initiative)
+  const handleSubmit = () => {
+    update(character.id, init)
+    handleClose()
   }
 
-  render() {
-    const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { character, pools, classes } = this.props
+  return (
+    <>
+      <Button onClick={setOpen}>Roll Join Battle</Button>
 
-    return (
-      <>
-        <Button onClick={handleOpen}>Roll Join Battle</Button>
-
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Join Battle</DialogTitle>
-          <DialogContent>
-            <div className={classes.wrap}>
-              <div className={classes.col}>
-                <PoolDisplay
-                  qc={
-                    character.type === 'qc' || character.type === 'battlegroup'
-                  }
-                  pool={pools.joinBattle}
-                  label="Join Battle Pool"
-                />
-              </div>
-              <div className={classes.col}>
-                <RatingField
-                  trait="initiative"
-                  label="Result"
-                  value={this.state.initiative}
-                  onChange={handleChange}
-                />
-              </div>
+      <Dialog open={isOpen} onClose={handleClose}>
+        <DialogTitle>Join Battle</DialogTitle>
+        <DialogContent>
+          <div className={classes.wrap}>
+            <div className={classes.col}>
+              <PoolDisplay
+                qc={character.type === 'qc' || character.type === 'battlegroup'}
+                pool={pools.joinBattle}
+                label="Join Battle Pool"
+              />
             </div>
-            <DialogContentText>
-              {character.name} will join combat with {this.state.initiative + 3}{' '}
-              initiative.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained" color="primary">
-              Join Battle
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+            <div className={classes.col}>
+              <RatingField
+                trait="initiative"
+                label="Result"
+                value={init}
+                onChange={(e) => setInit(e.target.value)}
+              />
+            </div>
+          </div>
+          <DialogContentText>
+            {character.name} will join combat with {init + 3} initiative.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Join Battle
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-function mapStateToProps(state, props: ExposedProps) {
+function mapStateToProps(state: RootState, props: ExposedProps) {
   let type
   if (props.character.type === 'qc') type = 'qc'
   else if (props.character.type === 'battlegroup') type = 'battlegroup'

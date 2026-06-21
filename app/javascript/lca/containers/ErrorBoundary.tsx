@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react'
 import Typography from '@material-ui/core/Typography'
 
 import { sample } from '@lca/utils/index.ts'
@@ -23,7 +23,7 @@ const errorNames = [
 
 type Props = { children: React.ReactNode }
 type State = { error?: Error; errorInfo?: React.ErrorInfo }
-class ErrorBoundary extends React.Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = { error: undefined, errorInfo: undefined }

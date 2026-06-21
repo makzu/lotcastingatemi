@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -7,81 +6,45 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 import { removePlayerFromChronicle as removePlayer } from '@lca/ducks/actions.ts'
+import { useAppSelector, useDialogLogic } from '@lca/hooks/index.ts'
 import { getSpecificChronicle } from '@lca/selectors/index.ts'
 
-type ExposedProps = {
-  chronicleId: number
-}
-type Props = ExposedProps & {
-  playerId: number
-  chronicleName: string
-  removePlayer: Function
-}
-type State = {
-  open: boolean
-}
+const ChronicleLeaveDialog = ({ chronicleId }: { chronicleId: number }) => {
+  const [isOpen, open, close] = useDialogLogic()
+  const chronicle = useAppSelector((state) =>
+    getSpecificChronicle(state, chronicleId),
+  )
+  const playerId = useAppSelector((state) => state.session.id)
 
-class ChronicleLeavePopup extends React.Component<Props, State> {
-  state = { open: false }
+  if (chronicle === undefined) return null
 
-  handleOpen = () => {
-    this.setState({ open: true })
+  const handleSubmit = () => {
+    removePlayer(chronicleId, playerId)
+    close()
   }
 
-  handleClose = () => {
-    this.setState({ open: false })
-  }
+  return (
+    <>
+      <Button onClick={open}>Leave Chronicle</Button>
 
-  handleSubmit = () => {
-    this.setState({ open: false })
-    this.props.removePlayer(this.props.chronicleId, this.props.playerId)
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Leave {chronicle.name}?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This will remove you and all of your characters from{' '}
+            {chronicle.name}.
+          </DialogContentText>
+        </DialogContent>
 
-  render() {
-    const { handleOpen, handleClose, handleSubmit } = this
-    const { chronicleName } = this.props
-
-    return (
-      <>
-        <Button onClick={handleOpen}>Leave Chronicle</Button>
-
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Leave {chronicleName}?</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              This will remove you and all of your characters from{' '}
-              {chronicleName}.
-            </DialogContentText>
-          </DialogContent>
-
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained" color="primary">
-              Leave
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Leave
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
-  let chronicleName = ''
-
-  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
-  if (chronicle !== undefined && chronicle.name !== undefined) {
-    chronicleName = chronicle.name
-  }
-
-  return {
-    chronicleName: chronicleName,
-    playerId: state.session.id,
-  }
-}
-
-const enhance = connect(mapStateToProps, {
-  removePlayer,
-})
-
-export default enhance(ChronicleLeavePopup)
+export default ChronicleLeaveDialog

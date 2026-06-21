@@ -31,7 +31,6 @@ class RatingField extends Component<Props, State> {
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (Number.isNaN(parseInt(e.target.value, 10))) {
-      // $FlowThisIsOkayISwear
       this.setState({ value: e.target.value })
       return
     }

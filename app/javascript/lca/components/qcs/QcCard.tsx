@@ -122,7 +122,6 @@ function QcCard(props: Props) {
         <CharacterMenu characterType="qc" id={qc.id} chronicle={chronicle} />
       </Typography>
 
-      {/* $FlowFixMe */}
       <SpendableBlock character={qc} qc />
 
       <div className={classes.rowContainer}>

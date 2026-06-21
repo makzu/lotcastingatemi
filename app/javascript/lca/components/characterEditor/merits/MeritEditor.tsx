@@ -22,6 +22,7 @@ import {
   getSpecificCharacter,
 } from '@lca/selectors/index.ts'
 import commonStyles from '@lca/styles/index.ts'
+import type { Character, Merit } from '@lca/types/index.ts'
 import MeritFields from './MeritFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)

@@ -1,4 +1,3 @@
-import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
@@ -104,133 +103,128 @@ type Props = {
   pools: Object
   canEdit: boolean
 }
-export class CharacterSheet extends Component<Props> {
-  render() {
-    /* Escape hatch */
-    if (this.props.character === undefined) return <CharacterLoadError />
+export function CharacterSheet(props: Props) {
+  /* Escape hatch */
+  if (props.character === undefined) return <CharacterLoadError />
 
-    const { character, merits, weapons, pools, penalties, canEdit } = this.props
-    const showLimit =
-      character.type !== 'Character' &&
-      (character.exalt_type || '').toLowerCase() !== 'dragon-blood'
-    return (
-      <div>
-        <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />
+  const { character, merits, weapons, pools, penalties, canEdit } = props
+  const showLimit =
+    character.type !== 'Character' &&
+    (character.exalt_type || '').toLowerCase() !== 'dragon-blood'
+  return (
+    <div>
+      <DocumentTitle title={`${character.name} | Lot-Casting Atemi`} />
 
-        <Grid container spacing={3}>
-          <Hidden smUp>
+      <Grid container spacing={3}>
+        <Hidden smUp>
+          <Grid item xs={12}>
+            <div style={{ height: '1em' }}>&nbsp;</div>
+          </Grid>
+        </Hidden>
+
+        <Grid item xs={12} md={6}>
+          <BasicsBlock character={character} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ResourceBlock character={character} />
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+          <AbilityBlock character={character} pools={pools} />
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={9}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
-              <div style={{ height: '1em' }}>&nbsp;</div>
+              <AttributeBlock character={character} pools={pools} />
             </Grid>
-          </Hidden>
 
-          <Grid item xs={12} md={6}>
-            <BasicsBlock character={character} />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <ResourceBlock character={character} />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AbilityBlock character={character} pools={pools} />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={9}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <AttributeBlock character={character} pools={pools} />
-              </Grid>
-
-              <Grid item xs={12} md={5}>
-                <SpecialtyBlock character={character} />
-              </Grid>
-
-              <Grid item xs={12} md={7}>
-                <BlockPaper>
-                  <Typography
-                    variant="h6"
-                    component={Link}
-                    to={`/characters/${character.id}/merits`}
-                    style={{ textDecoration: 'none', color: 'unset' }}
-                  >
-                    Merits&nbsp;&nbsp;
-                    <Launch style={{ verticalAlign: 'bottom' }} />
-                  </Typography>
-
-                  <MeritSummaryBlock character={character} merits={merits} />
-                </BlockPaper>
-              </Grid>
-
-              <Hidden smDown>
-                <Grid item xs={12}>
-                  <BlockPaper>
-                    <Typography variant="h6">Weapons</Typography>
-                    <WeaponSummaryBlock
-                      character={character}
-                      weapons={weapons}
-                    />
-                  </BlockPaper>
-                </Grid>
-              </Hidden>
+            <Grid item xs={12} md={5}>
+              <SpecialtyBlock character={character} />
             </Grid>
-          </Grid>
 
-          <Hidden mdUp>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={7}>
               <BlockPaper>
-                <Typography variant="h6">Weapons</Typography>
-                <WeaponSummaryBlock character={character} weapons={weapons} />
+                <Typography
+                  variant="h6"
+                  component={Link}
+                  to={`/characters/${character.id}/merits`}
+                  style={{ textDecoration: 'none', color: 'unset' }}
+                >
+                  Merits&nbsp;&nbsp;
+                  <Launch style={{ verticalAlign: 'bottom' }} />
+                </Typography>
+
+                <MeritSummaryBlock character={character} merits={merits} />
               </BlockPaper>
             </Grid>
-          </Hidden>
 
-          <Grid item xs={12} md={8}>
-            <CombatBlock
-              character={character}
-              weapons={weapons}
-              merits={merits}
-              penalties={penalties}
-              pools={pools}
-            />
+            <Hidden smDown>
+              <Grid item xs={12}>
+                <BlockPaper>
+                  <Typography variant="h6">Weapons</Typography>
+                  <WeaponSummaryBlock character={character} weapons={weapons} />
+                </BlockPaper>
+              </Grid>
+            </Hidden>
           </Grid>
-
-          <Grid item xs={12} md={4}>
-            <SocialBlock
-              character={character}
-              penalties={penalties}
-              pools={pools}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={5}>
-            <ArmorSummary character={character} pools={pools} />
-          </Grid>
-
-          <Grid item xs={12} md={3}>
-            <IntimacySummary character={character} canEdit={canEdit} />
-          </Grid>
-
-          {showLimit && (
-            <Grid item xs={12} md={2}>
-              <LimitTrackBlock character={character} />
-            </Grid>
-          )}
-
-          {(character.is_sorcerer || character.is_necromancer) && (
-            <Grid item xs={12} md={2}>
-              <SorceryBlock character={character} />
-            </Grid>
-          )}
-
-          {character.type !== 'Character' && (
-            <Grid item xs={12}>
-              <CharmSummaryBlock character={character} />
-            </Grid>
-          )}
         </Grid>
-      </div>
-    )
-  }
+
+        <Hidden mdUp>
+          <Grid item xs={12}>
+            <BlockPaper>
+              <Typography variant="h6">Weapons</Typography>
+              <WeaponSummaryBlock character={character} weapons={weapons} />
+            </BlockPaper>
+          </Grid>
+        </Hidden>
+
+        <Grid item xs={12} md={8}>
+          <CombatBlock
+            character={character}
+            weapons={weapons}
+            merits={merits}
+            penalties={penalties}
+            pools={pools}
+          />
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <SocialBlock
+            character={character}
+            penalties={penalties}
+            pools={pools}
+          />
+        </Grid>
+
+        <Grid item xs={12} md={5}>
+          <ArmorSummary character={character} pools={pools} />
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+          <IntimacySummary character={character} canEdit={canEdit} />
+        </Grid>
+
+        {showLimit && (
+          <Grid item xs={12} md={2}>
+            <LimitTrackBlock character={character} />
+          </Grid>
+        )}
+
+        {(character.is_sorcerer || character.is_necromancer) && (
+          <Grid item xs={12} md={2}>
+            <SorceryBlock character={character} />
+          </Grid>
+        )}
+
+        {character.type !== 'Character' && (
+          <Grid item xs={12}>
+            <CharmSummaryBlock character={character} />
+          </Grid>
+        )}
+      </Grid>
+    </div>
+  )
 }
 
 function mapStateToProps(state, props) {

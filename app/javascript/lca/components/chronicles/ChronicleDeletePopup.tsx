@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -8,79 +7,53 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Delete from '@material-ui/icons/Delete'
 
 import { destroyChronicle } from '@lca/ducks/actions/index.ts'
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDialogLogic,
+} from '@lca/hooks/index.ts'
 import { getSpecificChronicle } from '@lca/selectors/index.ts'
 
-type ExposedProps = {
+interface Props {
   chronicleId: number
 }
-type Props = ExposedProps & {
-  chronicleName: string
-  destroyChronicle: Function
-}
-type State = {
-  open: boolean
-}
 
-class ChronicleLeavePopup extends React.Component<Props, State> {
-  state = {
-    open: false,
+const ChronicleDeletePopup = ({ chronicleId }: Props) => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+  const chronicle = useAppSelector((state) =>
+    getSpecificChronicle(state, chronicleId),
+  )
+  if (chronicle === undefined) return null
+
+  const { name } = chronicle
+  const handleSubmit = () => {
+    dispatch(destroyChronicle(chronicleId))
+    close()
   }
 
-  handleOpen = () => {
-    this.setState({ open: true })
-  }
+  return (
+    <>
+      <Button onClick={open}>
+        Delete Chronicle &nbsp;
+        <Delete />
+      </Button>
 
-  handleClose = () => {
-    this.setState({ open: false })
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Delete {name}?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>This cannot be undone!</DialogContentText>
+        </DialogContent>
 
-  handleSubmit = () => {
-    this.setState({ open: false })
-    this.props.destroyChronicle(this.props.chronicleId)
-  }
-
-  render() {
-    const { handleOpen, handleClose, handleSubmit } = this
-    const { chronicleName } = this.props
-
-    return (
-      <>
-        <Button onClick={handleOpen}>
-          Delete Chronicle &nbsp;
-          <Delete />
-        </Button>
-
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Delete {chronicleName}?</DialogTitle>
-          <DialogContent>
-            <DialogContentText>This cannot be undone!</DialogContentText>
-          </DialogContent>
-
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained" color="primary">
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
-  let chronicleName = ''
-
-  const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
-  if (chronicle !== undefined && chronicle.name !== undefined) {
-    chronicleName = chronicle.name
-  }
-
-  return {
-    chronicleName: chronicleName,
-  }
-}
-
-export default connect(mapStateToProps, {
-  destroyChronicle,
-})(ChronicleLeavePopup)
+export default ChronicleDeletePopup

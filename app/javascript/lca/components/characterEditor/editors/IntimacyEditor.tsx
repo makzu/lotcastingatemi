@@ -1,4 +1,3 @@
-import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
@@ -10,22 +9,20 @@ type Props = {
   onChange: Function
 }
 
-class IntimacyEditor extends React.Component<Props> {
-  render() {
-    const { character, onChange } = this.props
+function IntimacyEditor(props: Props) {
+  const { character, onChange } = props
 
-    return (
-      <BlockPaper>
-        <Typography variant="h6">Intimacies</Typography>
+  return (
+    <BlockPaper>
+      <Typography variant="h6">Intimacies</Typography>
 
-        <Editor
-          character={character}
-          characterType="character"
-          onChange={onChange}
-        />
-      </BlockPaper>
-    )
-  }
+      <Editor
+        character={character}
+        characterType="character"
+        onChange={onChange}
+      />
+    </BlockPaper>
+  )
 }
 
 export default IntimacyEditor

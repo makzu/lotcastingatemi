@@ -1,7 +1,5 @@
-import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 import type { Dispatch } from 'redux'
 
-import type { State as RootState } from '@lca/ducks/index.ts'
 import { updateBattlegroup, updateCharacter, updateQc } from '../actions.ts'
 
 export * from './chronicle.ts'
@@ -23,7 +21,7 @@ export function spendMotes(
   charType: 'character' | 'qc' = 'character',
   committments: Object,
   mute: boolean = false,
-): ThunkAction<void, RootState, unknown, AnyAction> {
+) {
   const update = updateEvent(charType)
 
   return (dispatch: Dispatch, getState) => {
@@ -53,7 +51,7 @@ export function spendWillpower(
   id: number,
   willpower: number,
   charType: 'character' | 'qc' | 'battlegroup' = 'character',
-): ThunkAction<void, RootState, unknown, AnyAction> {
+) {
   const update = updateEvent(charType)
 
   return (dispatch: Dispatch, getState) => {
@@ -71,7 +69,7 @@ export function takeDamage(
   damage: number,
   damageType: 'bashing' | 'lethal' | 'aggravated' = 'bashing',
   charType: 'character' | 'qc' = 'character',
-): ThunkAction<void, RootState, unknown, AnyAction> {
+) {
   const update = updateEvent(charType)
 
   return (dispatch: Dispatch, getState) => {

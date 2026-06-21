@@ -17,7 +17,7 @@ import {
   getSpecificQc,
 } from '@lca/selectors/index.ts'
 import sharedStyles from '@lca/styles/index.ts'
-import type { QC, QcAttack, QcCharm, QcMerit } from '@lca/types/index.ts'
+import type { QC, QcAttack, QcCharm, QcMerit, Spell } from '@lca/types/index.ts'
 import { prettyIntimacyRating, qcPool } from '@lca/utils/calculated/index.ts'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
@@ -89,7 +89,7 @@ type Props = {
   qc_merits: QcMerit[]
   qc_charms: QcCharm[]
   qc_attacks: QcAttack[]
-  spells: Object[]
+  spells: Spell[]
   pools: Object
   penalties: Object
   classes: Object
@@ -249,7 +249,6 @@ class QcSheet extends Component<Props> {
             classes={{ root: classes.poolBlock }}
           />
 
-          {/* $FlowFixMe */}
           <SpendableBlock character={qc} qc />
         </div>
 

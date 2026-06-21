@@ -1,5 +1,4 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
+import { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -12,68 +11,51 @@ import TextField from '@material-ui/core/TextField'
 import GroupAdd from '@material-ui/icons/GroupAdd'
 
 import { joinChronicle } from '@lca/ducks/actions/index.ts'
+import { useAppDispatch, useDialogLogic } from '@lca/hooks/index.ts'
 
-type Props = { joinChronicle: Function }
-type State = { open: boolean; code: string }
-class ChronicleJoinPopup extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = { open: false, code: '' }
+export const ChronicleJoinPopup = () => {
+  const dispatch = useAppDispatch()
+  const [isOpen, open, close] = useDialogLogic()
+  const [code, setCode] = useState('')
+
+  const handleSubmit = () => {
+    dispatch(joinChronicle(code))
+    close()
   }
 
-  handleOpen = () => {
-    this.setState({ open: true })
-  }
+  return (
+    <>
+      <ListItem button onClick={open}>
+        <ListItemIcon>
+          <GroupAdd />
+        </ListItemIcon>
 
-  handleClose = () => {
-    this.setState({ open: false })
-  }
+        <ListItemText primary="Join" />
+      </ListItem>
 
-  handleChange = (e) => {
-    this.setState({ code: e.target.value })
-  }
+      <Dialog open={isOpen} onClose={close}>
+        <DialogTitle>Join a Chronicle</DialogTitle>
+        <DialogContent>
+          <TextField
+            variant="standard"
+            name="code"
+            value={code}
+            label="Invite Code"
+            margin="normal"
+            fullWidth
+            onChange={(e) => setCode(e.target.value)}
+          />
+        </DialogContent>
 
-  handleSubmit = () => {
-    this.setState({ open: false })
-    this.props.joinChronicle(this.state.code)
-  }
-
-  render() {
-    const { handleOpen, handleClose, handleChange, handleSubmit } = this
-    const { code } = this.state
-
-    return (
-      <>
-        <ListItem button onClick={handleOpen}>
-          <ListItemIcon>
-            <GroupAdd />
-          </ListItemIcon>
-
-          <ListItemText primary="Join" />
-        </ListItem>
-
-        <Dialog open={this.state.open} onClose={handleClose}>
-          <DialogTitle>Join a Chronicle</DialogTitle>
-          <DialogContent>
-            <TextField
-              name="code"
-              value={code}
-              label="Invite Code"
-              margin="normal"
-              fullWidth
-              onChange={handleChange}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained" color="primary">
-              Join
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </>
-    )
-  }
+        <DialogActions>
+          <Button onClick={close}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Join
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  )
 }
 
-export default connect(undefined, { joinChronicle })(ChronicleJoinPopup)
+export default ChronicleJoinPopup

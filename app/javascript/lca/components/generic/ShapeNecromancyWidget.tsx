@@ -1,4 +1,3 @@
-import type React from 'react'
 import { useState } from 'react'
 import {
   Button,
@@ -89,7 +88,7 @@ const ShapeNecromancyWidget = ({ character, children, classes }: Props) => {
       <ButtonBase onClick={open}>{children}</ButtonBase>
 
       <Dialog open={isOpen} onClose={close}>
-        <DialogTitle>Shape Sorcery</DialogTitle>
+        <DialogTitle>Shape Necromancy</DialogTitle>
 
         <DialogContent className={classes.content}>
           <div className={classes.wrap}>

@@ -4100,15 +4100,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flow-bin@npm:^0.122.0":
-  version: 0.122.0
-  resolution: "flow-bin@npm:0.122.0"
-  bin:
-    flow: cli.js
-  checksum: 10c0/8617529737e547f472f3b2bb28cd47d84f5daa734fcce295c5639639d8c79af9dc3be8f78e3fa483eeb230bf500c4db26256a767040a0f13824d91da1f02a466
-  languageName: node
-  linkType: hard
-
 "flow-parser@npm:0.*, flow-parser@npm:^0.198.2":
   version: 0.198.2
   resolution: "flow-parser@npm:0.198.2"
@@ -5716,7 +5707,6 @@ __metadata:
     cypress: "npm:^12.17.4"
     deepmerge: "npm:^4.3.1"
     fast-equals: "npm:^2.0.4"
-    flow-bin: "npm:^0.122.0"
     knip: "npm:^6.17.1"
     normalizr: "npm:^3.6.2"
     re-reselect: "npm:^4.0.1"

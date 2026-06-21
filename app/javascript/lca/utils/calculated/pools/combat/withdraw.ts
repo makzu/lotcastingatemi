@@ -1,7 +1,7 @@
-import type { Character } from '@lca/types'
-import type { BlockOfPenalties } from '@lca/types/pool'
-import { penaltyObject } from '../../index.js'
-import pool from '../_pool'
+import type { Character } from '@lca/types/index.ts'
+import type { BlockOfPenalties } from '@lca/types/pool.ts'
+import { penaltyObject } from '../../index.ts'
+import pool from '../_pool.ts'
 
 /** Withdraw pool, described in the core book, page 199 */
 export function withdraw(

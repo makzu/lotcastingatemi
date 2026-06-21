@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import type { Form } from '@lca/types'
+import type { Form } from '@lca/types/index.ts'
 
 const animalFormsList = (forms: Form[]) =>
   forms

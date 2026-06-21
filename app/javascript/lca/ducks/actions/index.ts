@@ -52,6 +52,6 @@ export {
   updateQcMerit,
   updateSpell,
   updateWeapon,
-} from '../entities'
-export { spendMotes, spendWillpower, takeDamage } from '../events'
-export { logout } from '../session'
+} from '../entities/index.ts'
+export { spendMotes, spendWillpower, takeDamage } from '../events/index.ts'
+export { logout } from '../session.ts'

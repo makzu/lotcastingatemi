@@ -9,9 +9,12 @@ import {
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
-import { LinkListItem, NavLinkListItem } from '@lca/components/shared/wrappers/'
-import { useCharacterAttribute } from '@lca/ducks/entities'
-import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
+import {
+  LinkListItem,
+  NavLinkListItem,
+} from '@lca/components/shared/wrappers/index.ts'
+import { useCharacterAttribute } from '@lca/ducks/entities/index.ts'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
 
 const SideNavigation = ({ match }: RouteProps) => {
   const id = parseInt(match.params.id, 10)

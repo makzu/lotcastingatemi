@@ -1,5 +1,5 @@
-import type { Player } from '@lca/types'
-import type { WithId } from './_lib'
+import type { Player } from '@lca/types/index.ts'
+import type { WithId } from './_lib.ts'
 
 export interface Chronicle extends WithId {
   name: string
@@ -7,8 +7,8 @@ export interface Chronicle extends WithId {
   st: Player
   invite_code: string
   notes: string
-  players: Array<number>
-  characters: Array<number>
-  qcs: Array<number>
-  battlegroups: Array<number>
+  players: number[]
+  characters: number[]
+  qcs: number[]
+  battlegroups: number[]
 }

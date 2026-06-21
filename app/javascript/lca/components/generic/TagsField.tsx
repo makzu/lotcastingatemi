@@ -1,4 +1,4 @@
-import React, { type ChangeEvent, Component } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 
@@ -11,7 +11,7 @@ const styles = (theme) => ({
 type Props = {
   trait: string
   label: string
-  value: Array<string>
+  value: string[]
   onChange: Function
   margin?: 'none' | 'dense' | 'normal'
   fullWidth?: boolean

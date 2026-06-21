@@ -3,15 +3,18 @@ import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
 
-import CharacterMenu from '@lca/components/generic/CharacterMenu'
-import type { State } from '@lca/ducks'
-import { canIEditCharacter, getSpecificCharacter } from '@lca/ducks/selectors'
-import type { Character } from '@lca/types'
-import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
-import LcaDrawerButton from './DrawerButton'
-import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
-import LinkButton from './LinkButton'
+import CharacterMenu from '@lca/components/generic/CharacterMenu/index.ts'
+import type { State } from '@lca/ducks/index.ts'
+import {
+  canIEditCharacter,
+  getSpecificCharacter,
+} from '@lca/ducks/selectors/index.ts'
+import type { Character } from '@lca/types/index.ts'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
+import LcaDrawerButton from './DrawerButton.tsx'
+import { GenericHeader } from './Header.tsx'
+import { styles } from './HeaderStyles.ts'
+import LinkButton from './LinkButton.tsx'
 
 interface Props {
   id: number

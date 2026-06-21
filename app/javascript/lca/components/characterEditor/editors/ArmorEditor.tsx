@@ -8,7 +8,7 @@ import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import WeightSelect from '@lca/components/shared/selects/WeightSelect'
+import WeightSelect from '@lca/components/shared/selects/WeightSelect.tsx'
 import type { Character } from '@lca/types/character.ts'
 
 const styles = (theme: Theme) =>

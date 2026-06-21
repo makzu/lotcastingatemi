@@ -13,13 +13,17 @@ import {
 } from '@material-ui/core'
 import { SwapHoriz } from '@material-ui/icons'
 
-import ExaltTypeSelect from '@lca/components/characterEditor/exaltTraits/ExaltTypeSelect'
-import { changeCharacterType } from '@lca/ducks/actions'
-import { useAppDispatch, useAppSelector, useDialogLogic } from '@lca/hooks'
-import { canIEdit, getSpecificCharacter } from '@lca/selectors'
-import type { ExaltType } from '@lca/types/character'
-import { prettyCanonType } from '@lca/utils/calculated/pretty'
-import type { MenuItemProps as Props } from './CharacterMenuItem'
+import ExaltTypeSelect from '@lca/components/characterEditor/exaltTraits/ExaltTypeSelect.tsx'
+import { changeCharacterType } from '@lca/ducks/actions/index.ts'
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDialogLogic,
+} from '@lca/hooks/index.ts'
+import { canIEdit, getSpecificCharacter } from '@lca/selectors/index.ts'
+import type { ExaltType } from '@lca/types/character.ts'
+import { prettyCanonType } from '@lca/utils/calculated/pretty.ts'
+import type { MenuItemProps as Props } from './CharacterMenuItem.ts'
 
 const MenuChangeCharacterType = ({ id, characterType }: Props) => {
   const dispatch = useAppDispatch()

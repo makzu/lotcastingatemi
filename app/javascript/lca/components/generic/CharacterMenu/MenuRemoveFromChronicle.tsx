@@ -6,10 +6,10 @@ import {
 } from '@material-ui/core'
 import RemoveCircle from '@material-ui/icons/RemoveCircle'
 
-import { removeThingFromChronicle as removeThing } from '@lca/ducks/actions'
-import { useAppDispatch, useAppSelector } from '@lca/hooks'
-import { canIEdit } from '@lca/selectors'
-import type { MenuItemProps as Props } from './CharacterMenuItem'
+import { removeThingFromChronicle as removeThing } from '@lca/ducks/actions/index.ts'
+import { useAppDispatch, useAppSelector } from '@lca/hooks/index.ts'
+import { canIEdit } from '@lca/selectors/index.ts'
+import type { MenuItemProps as Props } from './CharacterMenuItem.ts'
 
 const CardMenuRemove = ({ id, characterType }: Props) => {
   const dispatch = useAppDispatch()

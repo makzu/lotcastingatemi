@@ -1,4 +1,4 @@
-import type { CharacterTrait } from '../_lib'
+import type { CharacterTrait } from '../_lib.ts'
 
 export interface Merit extends CharacterTrait {
   merit: string

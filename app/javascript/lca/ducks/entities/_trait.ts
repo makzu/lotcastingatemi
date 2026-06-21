@@ -1,14 +1,14 @@
 import { getJSON, type RSAAAction } from 'redux-api-middleware'
 
-import type { Charm } from '@lca/types/traits/charm'
-import { callApi } from '@lca/utils/api'
+import type { Charm } from '@lca/types/traits/charm.ts'
+import { callApi } from '@lca/utils/api.ts'
 import {
   crudAction,
   type characterTraitTypes as entityTypes,
   optimisticTypes,
   reducerUpdateAction,
   standardTypes,
-} from './_lib'
+} from './_lib.ts'
 
 type parentTypes = 'character' | 'qc' | 'battlegroup'
 

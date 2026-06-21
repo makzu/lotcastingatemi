@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 
-import type { AppDispatch } from '@lca/store'
+import type { AppDispatch } from '@lca/store.ts'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 

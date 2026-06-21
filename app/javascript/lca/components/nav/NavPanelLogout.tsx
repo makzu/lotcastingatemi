@@ -1,8 +1,8 @@
 import { Divider, ListItemText } from '@material-ui/core'
 
-import { LinkListItem } from '@lca/components/shared/wrappers'
-import { logout } from '@lca/ducks/actions'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
+import { LinkListItem } from '@lca/components/shared/wrappers/index.ts'
+import { logout } from '@lca/ducks/actions/index.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
 
 const NavPanelLogout = () => {
   const dispatch = useAppDispatch()

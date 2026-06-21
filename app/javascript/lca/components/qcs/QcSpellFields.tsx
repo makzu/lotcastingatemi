@@ -6,10 +6,10 @@ import Delete from '@material-ui/icons/Delete'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import Checkbox from '@lca/components/shared/inputs/Checkbox'
-import SpellCircleSelect from '@lca/components/shared/selects/SpellCircleSelect'
-import type commonStyles from '@lca/styles'
-import type { Spell } from '@lca/types'
+import Checkbox from '@lca/components/shared/inputs/Checkbox.tsx'
+import SpellCircleSelect from '@lca/components/shared/selects/SpellCircleSelect.tsx'
+import type commonStyles from '@lca/styles/index.ts'
+import type { Spell } from '@lca/types/index.ts'
 
 interface Props extends WithStyles<typeof commonStyles> {
   spell: Spell

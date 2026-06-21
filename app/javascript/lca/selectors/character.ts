@@ -1,26 +1,26 @@
 import { createCachedSelector } from 're-reselect'
 import { createSelector } from 'reselect'
 
-import type { RootState } from '@lca/store'
-import type { Character, Spell } from '@lca/types'
-import { sortOrderSort } from '@lca/utils'
+import type { RootState } from '@lca/store.ts'
+import type { Character, Spell } from '@lca/types/index.ts'
+import { excellencyAbils as excellencies } from '@lca/utils/calculated/excellencies/index.ts'
 import {
   exaltTypeBase,
   mobilityPenalty,
   woundPenalty,
-} from '@lca/utils/calculated/'
-import { excellencyAbils as excellencies } from '@lca/utils/calculated/excellencies'
-import * as pools from '@lca/utils/calculated/pools'
-import * as ratings from '@lca/utils/calculated/ratings'
+} from '@lca/utils/calculated/index.ts'
+import * as pools from '@lca/utils/calculated/pools/index.ts'
+import * as ratings from '@lca/utils/calculated/ratings/index.ts'
+import { sortOrderSort } from '@lca/utils/index.ts'
 import {
   getMartialArtsCharmsForCharacter,
   getNativeCharmsForCharacter,
-} from './charm'
-import { entities, getCurrentPlayer } from './entities'
-import { getPoolsForWeapon, sortByParry } from './weapon'
+} from './charm.ts'
+import { entities, getCurrentPlayer } from './entities.ts'
+import { getPoolsForWeapon, sortByParry } from './weapon.ts'
 
 const getState = (state: RootState) => state
-const getPoisons = (state: RootState) => entities(state).poisons
+const _getPoisons = (state: RootState) => entities(state).poisons
 
 export const getSpecificCharacter = (state: RootState, id: number): Character =>
   entities(state).characters[id]
@@ -38,7 +38,7 @@ export const getMeritsForCharacter = createCachedSelector(
 export const getMeritNamesForCharacter = (
   state: RootState,
   id: number,
-): Array<string> =>
+): string[] =>
   getMeritsForCharacter(state, id)
     .map((m) => m.merit_name.toLowerCase() + m.rating)
     .sort()
@@ -64,7 +64,7 @@ export const getSpellsForCharacter = createCachedSelector(
 export const getControlSpellsForCharacter = (
   state: RootState,
   id: number,
-): Array<Spell> => getSpellsForCharacter(state, id).filter((s) => s.control)
+): Spell[] => getSpellsForCharacter(state, id).filter((s) => s.control)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getPoisonsForCharacter = (_state: RootState, _id: number) => []

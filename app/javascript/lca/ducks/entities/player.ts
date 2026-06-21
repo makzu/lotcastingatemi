@@ -1,13 +1,13 @@
-import type { RootState } from '@lca/store'
-import { callApi } from '@lca/utils/api'
-import { defaultState, type EntityState } from './'
-import { createUpdateAction, mergeEntity } from './_entity'
+import type { RootState } from '@lca/store.ts'
+import { callApi } from '@lca/utils/api.ts'
+import { createUpdateAction, mergeEntity } from './_entity.ts'
 import {
   crudAction,
   reducerUpdateAction,
   standardTypes,
   unwrapped,
-} from './_lib'
+} from './_lib.ts'
+import { defaultState, type EntityState } from './index.ts'
 
 const PLAYER = 'player'
 

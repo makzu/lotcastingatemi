@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import TextField from '@material-ui/core/TextField'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import { createChronicle } from '@lca/ducks/actions'
+import { createChronicle } from '@lca/ducks/actions/index.ts'
 
 type Props = { createChronicle: Function }
 type State = { open: boolean; chronicle: { name: string } }

@@ -1,16 +1,16 @@
 import { createAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
 
-import type { RootState } from '@lca/store'
-import { sortOrderSort } from '@lca/utils'
+import type { RootState } from '@lca/store.ts'
+import { sortOrderSort } from '@lca/utils/index.ts'
 import {
   createApiActions,
   createConditionalFetchAction,
   createEntityReducer,
-} from './_entity'
-import { unwrapped } from './_lib'
-import type { EntityState } from './_types'
-import { getCurrentPlayer } from './player'
+} from './_entity.ts'
+import { unwrapped } from './_lib.ts'
+import type { EntityState } from './_types.ts'
+import { getCurrentPlayer } from './player.ts'
 
 export const updateQcSort = createAction<{ id: number; sorting: number }>(
   'sort/qc',

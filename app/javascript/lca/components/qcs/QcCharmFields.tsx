@@ -10,7 +10,7 @@ import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect'
+import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect.tsx'
 import type { QcCharm } from '@lca/types/qc.ts'
 
 const Handle = SortableHandle(() => (

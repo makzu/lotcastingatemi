@@ -12,13 +12,13 @@ import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { destroyAccount, updatePlayer } from '@lca/ducks/actions'
-import { type PaletteMode, switchTheme } from '@lca/features/themeSlice'
-import { useDialogLogic } from '@lca/hooks'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import { getSpecificPlayer } from '@lca/selectors'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { destroyAccount, updatePlayer } from '@lca/ducks/actions/index.ts'
+import { type PaletteMode, switchTheme } from '@lca/features/themeSlice.ts'
+import { useDialogLogic } from '@lca/hooks/index.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import { getSpecificPlayer } from '@lca/selectors/index.ts'
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch()

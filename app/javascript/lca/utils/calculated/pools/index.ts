@@ -1,4 +1,4 @@
-export * from './combat'
-export { featOfStrength } from './featOfStrength'
-export { readIntentions } from './readIntentions'
-export { shapeSorcery } from './shapeSorcery'
+export * from './combat/index.ts'
+export { featOfStrength } from './featOfStrength.ts'
+export { readIntentions } from './readIntentions.ts'
+export { shapeSorcery } from './shapeSorcery.ts'

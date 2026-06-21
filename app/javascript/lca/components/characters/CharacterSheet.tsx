@@ -6,18 +6,18 @@ import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 import Launch from '@material-ui/icons/Launch'
 
-import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { getWeaponsForCharacter } from '@lca/ducks/entities/weapon'
-import { getSpecificCharacter } from '@lca/ducks/selectors'
+import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { getWeaponsForCharacter } from '@lca/ducks/entities/weapon.ts'
+import { getSpecificCharacter } from '@lca/ducks/selectors/index.ts'
 import {
   canIEditCharacter,
   getMeritsForCharacter,
   getPenalties,
   getPoolsAndRatings,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { Character, Merit, Weapon } from '@lca/types/index.ts'
-import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
+import CharacterLoadError from '../CharacterSheet/CharacterLoadError.tsx'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import RatingLine from '../generic/RatingLine.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
@@ -27,7 +27,7 @@ import AttributeBlock from './blocks/AttributeBlock.tsx'
 import BasicsBlock from './blocks/BasicsBlock.tsx'
 import CombatBlock from './blocks/CombatBlock.tsx'
 import CharmSummaryBlock from './blocks/charmSummaryBlock.tsx'
-import IntimacySummary from './blocks/IntimacySummaryBlock'
+import IntimacySummary from './blocks/IntimacySummaryBlock.tsx'
 import MeritSummaryBlock from './blocks/MeritSummaryBlock.tsx'
 import SocialBlock from './blocks/socialBlock.tsx'
 import SpecialtyBlock from './blocks/specialtyBlock.tsx'

@@ -14,9 +14,9 @@ import { compose } from 'recompose'
 import RangeSelect from '@lca/components/generic/RangeSelect.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import { getSpecificBattlegroup } from '@lca/selectors'
-import type { QcAttack } from '@lca/types'
-import { bgAttackPool, bgDamage } from '@lca/utils/calculated'
+import { getSpecificBattlegroup } from '@lca/selectors/index.ts'
+import type { QcAttack } from '@lca/types/index.ts'
+import { bgAttackPool, bgDamage } from '@lca/utils/calculated/index.ts'
 import RatingField from '../generic/RatingField.tsx'
 
 const Handle = SortableHandle(() => (

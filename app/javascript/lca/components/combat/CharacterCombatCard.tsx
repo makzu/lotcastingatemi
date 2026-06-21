@@ -12,7 +12,7 @@ import {
   canIEditCharacter,
   getPenalties,
   getPoolsAndRatings,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { Character } from '@lca/types/index.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'

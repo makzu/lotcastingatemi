@@ -4,22 +4,24 @@ import type {
   Character,
   MartialArtsCharm,
   NativeCharm,
-} from '@lca/types'
-import AlchemicalExcellency, { alchemicalExcellencyAbils } from './alchemical'
-import CustomExcellency from './custom.js'
-import DbExcellency, { dbExcellencyAbils } from './dragonblooded'
-import LunarExcellency, { lunarExcellencyAbils } from './lunar'
-import SiderealExcellency, { siderealExcellencyAbils } from './sidereal'
-import SolarExcellency, { solarExcellencyAbils } from './solar'
+} from '@lca/types/index.ts'
+import AlchemicalExcellency, {
+  alchemicalExcellencyAbils,
+} from './alchemical.ts'
+import CustomExcellency from './custom.ts'
+import DbExcellency, { dbExcellencyAbils } from './dragonblooded.ts'
+import LunarExcellency, { lunarExcellencyAbils } from './lunar.ts'
+import SiderealExcellency, { siderealExcellencyAbils } from './sidereal.ts'
+import SolarExcellency, { solarExcellencyAbils } from './solar.ts'
 
 export const excellencyAbils = (
   character: Character,
   charms: Array<NativeCharm | MartialArtsCharm>,
-): Array<string> => {
+): string[] => {
   // Mortals do not have excellencies
   if (character.type === 'Character') return []
 
-  let excellencies: Array<string> = character.excellencies_for || []
+  let excellencies: string[] = character.excellencies_for || []
 
   if (character.type === 'SolarCharacter' || excellencies.includes('solar')) {
     excellencies = excellencies.concat(solarExcellencyAbils(character, charms))

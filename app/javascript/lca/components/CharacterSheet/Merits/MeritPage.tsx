@@ -1,17 +1,17 @@
 import { connect } from 'react-redux'
 import { Grid, Paper, Typography } from '@material-ui/core'
 
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import type { State } from '@lca/ducks'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import type { State } from '@lca/ducks/index.ts'
 import {
   getMeritsForCharacter,
   getSpecificCharacter,
-} from '@lca/ducks/selectors'
-import { useDocumentTitle } from '@lca/hooks'
-import type { Character, Merit } from '@lca/types'
-import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
-import CharacterLoadError from '../CharacterLoadError'
-import SingleMerit from './SingleMerit'
+} from '@lca/ducks/selectors/index.ts'
+import { useDocumentTitle } from '@lca/hooks/index.ts'
+import type { Character, Merit } from '@lca/types/index.ts'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
+import CharacterLoadError from '../CharacterLoadError.tsx'
+import SingleMerit from './SingleMerit.tsx'
 
 interface Props {
   character: Character

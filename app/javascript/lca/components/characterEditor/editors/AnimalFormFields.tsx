@@ -1,6 +1,6 @@
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import type { Form } from '@lca/types'
+import type { Form } from '@lca/types/index.ts'
 
 type ListAttributeFieldTypes = any
 

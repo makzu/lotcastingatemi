@@ -1,28 +1,28 @@
 import { createSelector } from 'reselect'
 
-export * from './battlegroup.js'
-export * from './character.js'
-export * from './charm.js'
-export * from './chronicle.js'
-export * from './entities.js'
-export * from './qc.js'
-export * from './weapon.js'
+export * from './battlegroup.ts'
+export * from './character.ts'
+export * from './charm.ts'
+export * from './chronicle.ts'
+export * from './entities.ts'
+export * from './qc.ts'
+export * from './weapon.ts'
 
-import type { RootState } from '@lca/store'
-import type { CharacterType } from '@lca/types'
+import type { RootState } from '@lca/store.ts'
+import type { CharacterType } from '@lca/types/index.ts'
 import {
   canIDeleteBattlegroup,
   canIEditBattlegroup,
   getPoolsAndRatingsForBattlegroup,
-} from './battlegroup'
+} from './battlegroup.ts'
 import {
   canIDeleteCharacter,
   canIEditCharacter,
   getPoolsAndRatings,
-} from './character'
-import { amIStOfChronicle } from './chronicle'
-import { entities, getCurrentPlayer } from './entities'
-import { canIDeleteQc, canIEditQc, getPoolsAndRatingsForQc } from './qc'
+} from './character.ts'
+import { amIStOfChronicle } from './chronicle.ts'
+import { entities, getCurrentPlayer } from './entities.ts'
+import { canIDeleteQc, canIEditQc, getPoolsAndRatingsForQc } from './qc.ts'
 
 type CT = CharacterType | 'chronicle'
 export const canIEdit = (state: RootState, id: number, characterType: CT) => {

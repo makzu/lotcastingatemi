@@ -11,7 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
 
 import RatingField from '@lca/components/generic/RatingField.tsx'
-import { respireMotes } from '@lca/ducks/events'
+import { respireMotes } from '@lca/ducks/events/index.ts'
 
 type Props = { id: number; respireMotes: Function }
 type State = { open: boolean; toRecover: number; qcs: boolean }

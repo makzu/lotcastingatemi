@@ -1,3 +1,3 @@
-import BioPage from './BioPage'
+import BioPage from './BioPage.tsx'
 
 export default BioPage

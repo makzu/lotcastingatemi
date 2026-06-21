@@ -12,15 +12,15 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import useAppSelector from '@lca/hooks/UseAppSelector.ts'
-import { doIOwnBattlegroup } from '@lca/selectors'
-import sharedStyles from '@lca/styles/'
+import { doIOwnBattlegroup } from '@lca/selectors/index.ts'
+import sharedStyles from '@lca/styles/index.ts'
 import type { Battlegroup } from '@lca/types/battlegroup.ts'
 import {
   bgDefenseBonus,
   bgSoak,
   prettyDrillRating,
-} from '@lca/utils/calculated'
-import CharacterMenu from '../generic/CharacterMenu'
+} from '@lca/utils/calculated/index.ts'
+import CharacterMenu from '../generic/CharacterMenu/index.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.tsx'

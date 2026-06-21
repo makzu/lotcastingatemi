@@ -1,5 +1,5 @@
-import type { Character, QC } from '@lca/types'
-import { woundPenalty } from '@lca/utils/calculated'
+import type { Character, QC } from '@lca/types/index.ts'
+import { woundPenalty } from '@lca/utils/calculated/index.ts'
 
 const timeInHours = (time: string): number => {
   switch (time) {

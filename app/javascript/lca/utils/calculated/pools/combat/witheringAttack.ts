@@ -1,13 +1,13 @@
-import type { Character, Weapon } from '@lca/types'
-import type { BlockOfPenalties } from '@lca/types/pool'
-import { weaponAccuracyBonus } from '../../weapons'
-import decisiveAttack from './decisiveAttack'
+import type { Character, Weapon } from '@lca/types/index.ts'
+import type { BlockOfPenalties } from '@lca/types/pool.ts'
+import { weaponAccuracyBonus } from '../../weapons/index.ts'
+import decisiveAttack from './decisiveAttack.ts'
 
 export function witheringAttack(
   character: Character,
   weapon: Weapon,
   penalties: BlockOfPenalties,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
 ) {
   const pool = decisiveAttack(character, weapon, penalties, excellencyAbils)
 

@@ -1,10 +1,10 @@
-import React, { type ChangeEventHandler, Fragment } from 'react'
+import type { ChangeEventHandler } from 'react'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from '@lca/components/generic/ListAttributeEditor.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import Checkbox from '@lca/components/shared/inputs/Checkbox'
+import Checkbox from '@lca/components/shared/inputs/Checkbox.tsx'
 import type { WithSharedStats } from '@lca/types/shared.ts'
 import {
   INTIMACY_RATING_MAX as MAX,

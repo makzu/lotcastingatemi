@@ -3,15 +3,18 @@ import { Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
 
-import CharacterMenu from '@lca/components/generic/CharacterMenu'
-import { useDocumentTitle } from '@lca/hooks'
-import { canIEditBattlegroup, getSpecificBattlegroup } from '@lca/selectors'
-import type { RootState } from '@lca/store'
-import type { Battlegroup } from '@lca/types'
-import LcaDrawerButton from './DrawerButton'
-import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
-import LinkButton from './LinkButton'
+import CharacterMenu from '@lca/components/generic/CharacterMenu/index.ts'
+import { useDocumentTitle } from '@lca/hooks/index.ts'
+import {
+  canIEditBattlegroup,
+  getSpecificBattlegroup,
+} from '@lca/selectors/index.ts'
+import type { RootState } from '@lca/store.ts'
+import type { Battlegroup } from '@lca/types/index.ts'
+import LcaDrawerButton from './DrawerButton.tsx'
+import { GenericHeader } from './Header.tsx'
+import { styles } from './HeaderStyles.ts'
+import LinkButton from './LinkButton.tsx'
 
 interface Props {
   id: number

@@ -17,14 +17,14 @@ import {
 } from '@material-ui/icons'
 import { deepEqual } from 'fast-equals'
 
-import SpellSummaryBlock from '@lca/components/CharacterSheet/Sorcery/SpellSummaryBlock'
+import SpellSummaryBlock from '@lca/components/CharacterSheet/Sorcery/SpellSummaryBlock.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import SpellCircleSelect from '@lca/components/shared/selects/SpellCircleSelect'
-import { updateSpell } from '@lca/ducks/entities'
-import { useAppDispatch } from '@lca/hooks'
-import type { Character, Spell } from '@lca/types'
-import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
+import SpellCircleSelect from '@lca/components/shared/selects/SpellCircleSelect.tsx'
+import { updateSpell } from '@lca/ducks/entities/index.ts'
+import { useAppDispatch } from '@lca/hooks/index.ts'
+import type { Character, Spell } from '@lca/types/index.ts'
+import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.tsx'
 
 const useStyles = makeStyles((_theme) => ({
   summary: {

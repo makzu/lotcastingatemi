@@ -2,7 +2,7 @@ import Collapse from '@material-ui/core/Collapse'
 import Typography from '@material-ui/core/Typography'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import type { Spell } from '@lca/types'
+import type { Spell } from '@lca/types/index.ts'
 
 type BlockProps = { spell: Spell; isOpen: boolean }
 const SpellSummaryBlock = ({ spell, isOpen }: BlockProps) => {

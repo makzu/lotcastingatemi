@@ -4,12 +4,12 @@ import { Grid, Typography } from '@material-ui/core'
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import QcCard from '@lca/components/qcs/QcCard.tsx'
 import QcCreatePopup from '@lca/components/qcs/QcCreatePopup.tsx'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { getMyQcs, updateQc } from '@lca/ducks/entities'
-import { updateQcSort } from '@lca/ducks/entities/qc'
-import { useDocumentTitle } from '@lca/hooks'
-import useAppDispatch from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { getMyQcs, updateQc } from '@lca/ducks/entities/index.ts'
+import { updateQcSort } from '@lca/ducks/entities/qc.ts'
+import { useDocumentTitle } from '@lca/hooks/index.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
 
 const SortableItem = SortableElement(({ children }) => children)
 

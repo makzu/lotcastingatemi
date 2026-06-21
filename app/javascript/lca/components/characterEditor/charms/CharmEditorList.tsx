@@ -7,10 +7,13 @@ import {
   type CharmFilter,
   filterCharms,
 } from '@lca/components/CharacterSheet/Charms/useCharmFilters.ts'
-import { getCharmsForCharacterByType, updateCharm } from '@lca/ducks/entities'
+import {
+  getCharmsForCharacterByType,
+  updateCharm,
+} from '@lca/ducks/entities/index.ts'
 import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
 import useAppSelector from '@lca/hooks/UseAppSelector.ts'
-import type { Character, Charm } from '@lca/types'
+import type { Character, Charm } from '@lca/types/index.ts'
 import CharmFields from './CharmFields.tsx'
 
 interface ExposedProps {

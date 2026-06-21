@@ -1,6 +1,6 @@
-import type { Character } from '@lca/types'
-import { halfRoundDown, halfRoundUp } from '@lca/utils'
-import { ABILITIES, ATTRIBUTES } from '@lca/utils/constants'
+import type { Character } from '@lca/types/index.ts'
+import { ABILITIES, ATTRIBUTES } from '@lca/utils/constants.ts'
+import { halfRoundDown, halfRoundUp } from '@lca/utils/index.ts'
 import { abil, attr, specialtiesFor } from '..'
 
 export const highestOtherAbility = (character: Character, ability: string) => {

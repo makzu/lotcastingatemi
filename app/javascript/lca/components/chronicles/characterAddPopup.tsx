@@ -13,14 +13,14 @@ import { addThingToChronicle } from '@lca/ducks/actions.ts'
 import {
   getMyCharactersWithoutChronicles,
   getSpecificChronicle,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { Character } from '@lca/types/character.ts'
 
 type ExposedProps = {
   chronicleId: number
 }
 type Props = ExposedProps & {
-  characters: Array<Character>
+  characters: Character[]
   chronicleName: string
   handleSubmit: Function
 }

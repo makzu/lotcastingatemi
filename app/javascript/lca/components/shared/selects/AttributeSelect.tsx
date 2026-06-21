@@ -1,8 +1,8 @@
 import { MenuItem, TextField, type TextFieldProps } from '@material-ui/core'
 
-import type { Attribute } from '@lca/types'
-import { capitalize } from '@lca/utils'
-import { ATTRIBUTE_NAMES } from '@lca/utils/constants'
+import type { Attribute } from '@lca/types/index.ts'
+import { ATTRIBUTE_NAMES } from '@lca/utils/constants.ts'
+import { capitalize } from '@lca/utils/index.ts'
 
 type PropsUnion = 'name' | 'label' | 'onChange' | 'margin'
 interface Props extends Pick<TextFieldProps, PropsUnion> {

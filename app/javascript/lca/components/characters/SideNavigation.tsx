@@ -10,11 +10,14 @@ import {
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
 
-import { LinkListItem, NavLinkListItem } from '@lca/components/shared/wrappers/'
-import type { State } from '@lca/ducks'
-import { getSpecificCharacter } from '@lca/ducks/entities'
-import type { Character } from '@lca/types'
-import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
+import {
+  LinkListItem,
+  NavLinkListItem,
+} from '@lca/components/shared/wrappers/index.ts'
+import { getSpecificCharacter } from '@lca/ducks/entities/index.ts'
+import type { State } from '@lca/ducks/index.ts'
+import type { Character } from '@lca/types/index.ts'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
 
 interface Props {
   character: Character

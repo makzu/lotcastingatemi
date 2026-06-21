@@ -4,14 +4,14 @@ import Typography from '@material-ui/core/Typography'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import AnimaSelect from '@lca/components/shared/selects/AnimaSelect.tsx'
-import AuraSelect from '@lca/components/shared/selects/AuraSelect'
-import commonStyles from '@lca/styles'
+import AuraSelect from '@lca/components/shared/selects/AuraSelect.tsx'
+import commonStyles from '@lca/styles/index.ts'
 import type { Character } from '@lca/types/index.ts'
 import {
   committedPeripheralMotes,
   committedPersonalMotes,
   showAuraTraits,
-} from '@lca/utils/calculated'
+} from '@lca/utils/calculated/index.ts'
 import MoteCommittmentEditor from './MoteCommitmentEditor.tsx'
 
 const styles = (theme) => ({

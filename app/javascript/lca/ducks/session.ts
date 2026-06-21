@@ -1,7 +1,7 @@
 import type { AnyAction } from 'redux'
 
-import { isNonFetchAuthIssue } from './app.js'
-import { crudAction } from './entities/_lib'
+import { isNonFetchAuthIssue } from './app.ts'
+import { crudAction } from './entities/_lib.ts'
 
 export const LOGOUT = 'lca/session/LOGOUT'
 export const AUTH_FAILURE = 'lca/session/AUTH_FAILURE'

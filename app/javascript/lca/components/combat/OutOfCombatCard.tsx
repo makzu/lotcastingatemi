@@ -9,9 +9,9 @@ import {
   updateBattlegroup,
   updateCharacter,
   updateQc,
-} from '@lca/ducks/actions'
-import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
-import sharedStyles from '@lca/styles/'
+} from '@lca/ducks/actions/index.ts'
+import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors/index.ts'
+import sharedStyles from '@lca/styles/index.ts'
 import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'

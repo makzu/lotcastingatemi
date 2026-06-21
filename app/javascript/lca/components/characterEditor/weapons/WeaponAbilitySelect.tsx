@@ -2,8 +2,8 @@ import { ListSubheader, MenuItem, TextField } from '@material-ui/core/'
 import { makeStyles, type Theme } from '@material-ui/core/styles'
 import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import type { Character, Weapon } from '@lca/types'
-import * as calc from '@lca/utils/calculated'
+import type { Character, Weapon } from '@lca/types/index.ts'
+import * as calc from '@lca/utils/calculated/index.ts'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

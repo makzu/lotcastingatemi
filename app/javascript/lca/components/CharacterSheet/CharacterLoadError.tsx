@@ -1,6 +1,6 @@
 import Typography from '@material-ui/core/Typography'
 
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
 
 const CharacterLoadError = () => {
   const loading = useAppSelector((state) => state.app.loading)

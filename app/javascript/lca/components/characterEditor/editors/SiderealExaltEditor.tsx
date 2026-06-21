@@ -3,9 +3,9 @@ import Typography from '@material-ui/core/Typography'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import type { Character } from '@lca/types'
-import { nonCasteAbilities } from '@lca/utils/calculated'
-import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect'
+import type { Character } from '@lca/types/index.ts'
+import { nonCasteAbilities } from '@lca/utils/calculated/index.ts'
+import SiderealCasteSelect from '../exaltTraits/SiderealCasteSelect.tsx'
 
 type Props = { character: Character; onChange: React.ChangeEventHandler }
 function SiderealExaltEditor({ character, onChange }: Props) {

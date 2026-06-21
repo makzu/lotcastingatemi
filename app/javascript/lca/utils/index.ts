@@ -1,8 +1,8 @@
-export * from './math'
+export * from './math.ts'
 
 import { deepEqual } from 'fast-equals'
 
-import type { ChSortable, Sortable } from '@lca/types/_lib'
+import type { ChSortable, Sortable } from '@lca/types/_lib.ts'
 
 /** Returns a random item from an array. */
 export const sample = <T>(array: T[]): T =>

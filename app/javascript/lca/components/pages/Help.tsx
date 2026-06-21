@@ -1,4 +1,3 @@
-import React from 'react'
 import { Redirect, Route } from 'react-router'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'

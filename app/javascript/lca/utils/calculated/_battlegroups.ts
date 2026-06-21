@@ -1,6 +1,6 @@
 /* See Core, p. 205 - 211 */
-import type { Battlegroup } from '@lca/types'
-import type { QcAttack } from '@lca/types/qc'
+import type { Battlegroup } from '@lca/types/index.ts'
+import type { QcAttack } from '@lca/types/qc.ts'
 
 export function bgAttackPool(battlegroup: Battlegroup, qc_attack: QcAttack) {
   return qc_attack.pool + battlegroup.size + battlegroup.might

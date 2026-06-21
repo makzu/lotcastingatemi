@@ -3,10 +3,10 @@ import { MenuItem, TextField } from '@material-ui/core'
 import {
   getAllCharmLoadoutsForCharacter,
   updateCharacter,
-} from '@lca/ducks/entities'
-import { useAppDispatch, useAppSelector } from '@lca/hooks'
-import type { Character } from '@lca/types'
-import { isCustomCharacter } from '@lca/utils/calculated'
+} from '@lca/ducks/entities/index.ts'
+import { useAppDispatch, useAppSelector } from '@lca/hooks/index.ts'
+import type { Character } from '@lca/types/index.ts'
+import { isCustomCharacter } from '@lca/utils/calculated/index.ts'
 
 interface CharmLoadoutSelectProps {
   character: Character

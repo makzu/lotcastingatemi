@@ -1,4 +1,4 @@
-import type { Character } from '@lca/types'
+import type { Character } from '@lca/types/index.ts'
 
 export const naturalSoak = (character: Character) => character.attr_stamina
 
@@ -16,11 +16,7 @@ export function armorSoak(character: Character) {
   }
 }
 
-export function soak(
-  character: Character,
-  merits: Array<string>,
-  spells: Array<string>,
-) {
+export function soak(character: Character, merits: string[], spells: string[]) {
   let b = 0
   let bonus = []
   const bonfire = character.anima_level === 3

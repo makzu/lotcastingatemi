@@ -1,3 +1,3 @@
-import CharmEditorPage from './CharmEditorPage'
+import CharmEditorPage from './CharmEditorPage.tsx'
 
 export default CharmEditorPage

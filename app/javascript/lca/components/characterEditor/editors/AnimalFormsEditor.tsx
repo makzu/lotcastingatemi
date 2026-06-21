@@ -9,11 +9,11 @@ import {
 } from '@material-ui/core'
 import { Help as HelpIcon } from '@material-ui/icons'
 
-import ListAttributeEditor from '@lca/components/generic/ListAttributeEditor'
-import { useDialogLogic } from '@lca/hooks'
-import type { Character } from '@lca/types'
-import AnimalFormFields from './AnimalFormFields'
-import animalFormsList from './AnimalFormsList'
+import ListAttributeEditor from '@lca/components/generic/ListAttributeEditor.tsx'
+import { useDialogLogic } from '@lca/hooks/index.ts'
+import type { Character } from '@lca/types/index.ts'
+import AnimalFormFields from './AnimalFormFields.tsx'
+import animalFormsList from './AnimalFormsList.tsx'
 
 interface Props {
   character: Character

@@ -1,14 +1,14 @@
-import type { Character } from '@lca/types'
-import type { BlockOfPenalties } from '@lca/types/pool.js'
-import { halfRoundUp } from '@lca/utils'
-import { penaltyObject } from '../index'
-import rating from './_rating.js'
+import type { Character } from '@lca/types/index.ts'
+import type { BlockOfPenalties } from '@lca/types/pool.ts'
+import { halfRoundUp } from '@lca/utils/index.ts'
+import { penaltyObject } from '../index.ts'
+import rating from './_rating.ts'
 
 export function resolve(
   character: Character,
-  merits: Array<string>,
+  merits: string[],
   penalties: BlockOfPenalties,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
 ) {
   let bonus = []
   const wellBred = merits.find((m) => m.startsWith('well-bred'))

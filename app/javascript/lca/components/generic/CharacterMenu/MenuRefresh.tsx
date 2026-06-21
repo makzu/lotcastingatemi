@@ -1,9 +1,9 @@
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
 import { Refresh } from '@material-ui/icons'
 
-import { fetch } from '@lca/ducks/actions/ByType'
-import useAppDispatch from '@lca/hooks/UseAppDispatch'
-import type { MenuItemProps as Props } from './CharacterMenuItem'
+import { fetch } from '@lca/ducks/actions/ByType.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
+import type { MenuItemProps as Props } from './CharacterMenuItem.ts'
 
 const CardMenuRefresh = ({ characterType, id }: Props) => {
   const dispatch = useAppDispatch()

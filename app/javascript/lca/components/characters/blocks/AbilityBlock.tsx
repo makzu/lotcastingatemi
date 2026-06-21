@@ -9,7 +9,7 @@ import {
   isCasteAbility,
   isFavoredAbility,
   isSupernalAbility,
-} from '@lca/utils/calculated'
+} from '@lca/utils/calculated/index.ts'
 import { ABILITY_NAMES } from '@lca/utils/constants.ts'
 
 const styles = (theme) => ({

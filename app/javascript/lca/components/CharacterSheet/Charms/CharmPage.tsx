@@ -3,18 +3,18 @@ import { Button, Divider, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { FilterList } from '@material-ui/icons'
 
-import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer'
-import { getSpecificCharacter } from '@lca/ducks/entities'
+import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer.tsx'
+import { getSpecificCharacter } from '@lca/ducks/entities/index.ts'
 import {
   useAppSelector,
   useDialogLogic,
   useDocumentTitle,
   useIdFromParams,
-} from '@lca/hooks'
+} from '@lca/hooks/index.ts'
 import { showLoadoutTraits } from '@lca/utils/calculated/index.ts'
-import CharacterLoadError from '../CharacterLoadError'
+import CharacterLoadError from '../CharacterLoadError.tsx'
 import SpellList from '../Sorcery/SpellList.tsx'
-import CharmFilter from './CharmFilter/'
+import CharmFilter from './CharmFilter/index.tsx'
 import CharmList from './CharmList.tsx'
 import { initialFilters, reducer } from './useCharmFilters.ts'
 

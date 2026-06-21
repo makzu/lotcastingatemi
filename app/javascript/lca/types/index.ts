@@ -1,11 +1,11 @@
-export * from './battlegroup'
-export * from './character'
-export * from './chronicle'
+export * from './battlegroup.ts'
+export * from './character.ts'
+export * from './chronicle.ts'
 export type { Player } from './player.ts'
-export * from './qc'
-export * from './traits'
+export * from './qc.ts'
+export * from './traits/index.ts'
 
-import type { Ability, Attribute } from './character'
+import type { Ability, Attribute } from './character.ts'
 
 export type CharacterType = 'character' | 'qc' | 'battlegroup'
 

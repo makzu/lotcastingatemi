@@ -1,6 +1,6 @@
-export * from './overwhelming'
+export * from './overwhelming.ts'
 
-import type { Weapon } from '@lca/types'
+import type { Weapon } from '@lca/types/index.ts'
 
 // Mortal melee/ma weapons: p.580
 // Mortal thrown weapons:   p.587

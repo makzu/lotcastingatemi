@@ -1,12 +1,12 @@
-import { callApi } from '@lca/utils/api'
-import { createApiActions, mergeEntity } from './_entity'
+import { callApi } from '@lca/utils/api.ts'
+import { createApiActions, mergeEntity } from './_entity.ts'
 import {
   crudAction,
   massagePayload,
   reducerUpdateAction,
   standardTypes,
   successMeta,
-} from './_lib'
+} from './_lib.ts'
 
 const CHRONICLE = 'chronicle'
 
@@ -17,7 +17,7 @@ export default {
   [crudAction(CHRONICLE, 'ADD_THING').success.toString()]: mergeEntity,
   [crudAction(CHRONICLE, 'REGEN_CODE').success.toString()]: mergeEntity,
   [crudAction(CHRONICLE, 'UPDATE').start.toString()]: reducerUpdateAction(
-    CHRONICLE + 's',
+    `${CHRONICLE}s`,
   ),
   [crudAction('character', 'FETCH_FOR_CHRONICLE').success.toString()]: (
     state,

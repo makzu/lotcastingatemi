@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import type { Charm } from '@lca/types'
+import type { Charm } from '@lca/types/index.ts'
 
 const useStyles = makeStyles({
   capitalize: {

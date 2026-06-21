@@ -3,8 +3,8 @@ import type { Theme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 
-import { toggleDrawer } from '@lca/features/drawerSlice'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
+import { toggleDrawer } from '@lca/features/drawerSlice.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawerButton: {

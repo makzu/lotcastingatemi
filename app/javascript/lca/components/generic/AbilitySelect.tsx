@@ -33,7 +33,7 @@ interface Props extends WithStyles<typeof styles> {
   includeUniversal?: boolean
   multiple?: boolean
   name: string
-  value: string | Array<string>
+  value: string | string[]
   label: string
   fullWidth?: boolean
   margin?: 'none' | 'dense' | 'normal'

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import commonStyles from '@lca/styles'
+import commonStyles from '@lca/styles/index.ts'
 
 type LinkRendererProps = AnchorHTMLAttributes<HTMLAnchorElement>
 // This won't work for mailto: links or any other non-http(/s) link.

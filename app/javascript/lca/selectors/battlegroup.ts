@@ -1,11 +1,11 @@
 import { createCachedSelector } from 're-reselect'
 import { createSelector } from 'reselect'
 
-import type { RootState } from '@lca/store'
-import type { Battlegroup, Player } from '@lca/types'
-import { bgJoinBattlePool } from '../utils/calculated/_battlegroups'
-import { entities, getCurrentPlayer } from './entities'
-import { getQcAttacks } from './qc'
+import type { RootState } from '@lca/store.ts'
+import type { Battlegroup, Player } from '@lca/types/index.ts'
+import { bgJoinBattlePool } from '../utils/calculated/_battlegroups.ts'
+import { entities, getCurrentPlayer } from './entities.ts'
+import { getQcAttacks } from './qc.ts'
 
 export const getSpecificBattlegroup = (
   state: RootState,

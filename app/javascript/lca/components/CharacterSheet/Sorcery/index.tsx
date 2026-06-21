@@ -1,3 +1,3 @@
-import SorceryPage from './SorceryPage'
+import SorceryPage from './SorceryPage.tsx'
 
 export default SorceryPage

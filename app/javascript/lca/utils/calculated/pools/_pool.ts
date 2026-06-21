@@ -1,17 +1,17 @@
-import type { Ability, Attribute, Character } from '@lca/types'
-import type { Pool, PoolBonus, PoolPenalty } from '@lca/types/pool'
+import type { Ability, Attribute, Character } from '@lca/types/index.ts'
+import type { Pool, PoolBonus, PoolPenalty } from '@lca/types/pool.ts'
 import { abil, attr, specialtiesFor } from '..'
-import { maxExcellency } from '../excellencies'
+import { maxExcellency } from '../excellencies/index.ts'
 
 export default function pool(
   name: string,
   character: Character,
   attribute: Attribute,
   ability: Ability,
-  bonus: Array<PoolBonus>,
-  penalties: Array<PoolPenalty>,
-  excellencyAbils: Array<string>,
-  specialAttacks: Array<string> = [],
+  bonus: PoolBonus[],
+  penalties: PoolPenalty[],
+  excellencyAbils: string[],
+  specialAttacks: string[] = [],
 ): Pool {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)

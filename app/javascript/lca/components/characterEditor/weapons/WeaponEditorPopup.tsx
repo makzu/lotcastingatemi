@@ -18,14 +18,14 @@ import WeaponPoolDisplay from '@lca/components/characters/weapons/WeaponPoolDisp
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import Checkbox from '@lca/components/shared/inputs/Checkbox'
-import WeightSelect from '@lca/components/shared/selects/WeightSelect'
-import { getSpecificWeapon, updateWeapon } from '@lca/ducks/entities'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import type { Character } from '@lca/types'
-import WeaponAbilitySelect from './WeaponAbilitySelect'
-import WeaponOverrides from './WeaponOverrides'
+import Checkbox from '@lca/components/shared/inputs/Checkbox.tsx'
+import WeightSelect from '@lca/components/shared/selects/WeightSelect.tsx'
+import { getSpecificWeapon, updateWeapon } from '@lca/ducks/entities/index.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import type { Character } from '@lca/types/index.ts'
+import WeaponAbilitySelect from './WeaponAbilitySelect.tsx'
+import WeaponOverrides from './WeaponOverrides.tsx'
 
 interface Props {
   character: Character

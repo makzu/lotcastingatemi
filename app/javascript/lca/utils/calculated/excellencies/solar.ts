@@ -1,4 +1,4 @@
-import type { Ability, Character, Charm } from '@lca/types'
+import type { Ability, Character, Charm } from '@lca/types/index.ts'
 import { abil, attr } from '..'
 
 /* Solar Excellencies: Core p.255 */
@@ -6,8 +6,8 @@ import { abil, attr } from '..'
 // Caste and Favored Abilities with at least one dot, plus Abilities with at least one Charm
 export const solarExcellencyAbils = (
   character: Character,
-  charms: Array<Charm>,
-): Array<string> => {
+  charms: Charm[],
+): string[] => {
   let excellencies = (character.caste_abilities || [])
     .filter((a) => abil(character, a) > 0)
     .concat(

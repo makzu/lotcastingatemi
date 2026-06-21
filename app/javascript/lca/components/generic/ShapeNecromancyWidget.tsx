@@ -18,12 +18,12 @@ import {
 
 import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
-import { updateCharacter, updateQc } from '@lca/ducks/actions'
-import { useDialogLogic } from '@lca/hooks'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
-import type { Character, QC } from '@lca/types'
+import { updateCharacter, updateQc } from '@lca/ducks/actions/index.ts'
+import { useDialogLogic } from '@lca/hooks/index.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors/index.ts'
+import type { Character, QC } from '@lca/types/index.ts'
 
 const styles = (theme: Theme) =>
   createStyles({

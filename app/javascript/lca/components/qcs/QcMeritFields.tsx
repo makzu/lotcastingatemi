@@ -8,8 +8,8 @@ import { deepEqual } from 'fast-equals'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import Checkbox from '@lca/components/shared/inputs/Checkbox'
-import type { QcMerit } from '@lca/types'
+import Checkbox from '@lca/components/shared/inputs/Checkbox.tsx'
+import type { QcMerit } from '@lca/types/index.ts'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

@@ -1,13 +1,13 @@
-import type { Character } from '@lca/types'
-import type { BlockOfPenalties, PoolBonus } from '@lca/types/pool'
-import { penaltyObject } from '../index'
-import pool from './_pool'
+import type { Character } from '@lca/types/index.ts'
+import type { BlockOfPenalties, PoolBonus } from '@lca/types/pool.ts'
+import { penaltyObject } from '../index.ts'
+import pool from './_pool.ts'
 
 export function readIntentions(
   character: Character,
-  merits: Array<string>,
+  merits: string[],
   penalties: BlockOfPenalties,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
 ) {
   let bonus: PoolBonus[] = []
   if (merits.some((m) => m.startsWith('danger sense')))

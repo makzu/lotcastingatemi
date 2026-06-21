@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
-import { unwrapped } from '@lca/ducks/entities/_lib'
-import { getSpecificCharacter } from '@lca/ducks/entities/character'
-import { getCurrentPlayer } from '@lca/ducks/entities/player'
+import { unwrapped } from '@lca/ducks/entities/_lib.ts'
+import { getSpecificCharacter } from '@lca/ducks/entities/character.ts'
+import { getCurrentPlayer } from '@lca/ducks/entities/player.ts'
 
 const doIOwnCharacter = createSelector(
   [getCurrentPlayer, getSpecificCharacter],

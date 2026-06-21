@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState } from 'react'
 import {
   Collapse,
   IconButton,
@@ -7,18 +7,18 @@ import {
 } from '@material-ui/core'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 
-import NavLinkListItem from '@lca/components/shared/wrappers/NavLinkListItem'
+import NavLinkListItem from '@lca/components/shared/wrappers/NavLinkListItem.tsx'
 
 interface Props {
   label: string
   link: string
   count: number
-  children: React.ReactNodeArray
+  children: React.ReactNode
   onClick(): void
 }
 
 const EntityList = ({ label, count, link, children, onClick }: Props) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const showExpando = !!children.length
 
   return (

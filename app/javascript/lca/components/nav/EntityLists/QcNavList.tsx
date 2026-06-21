@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
-import type { State } from '@lca/ducks'
-import { getMyPinnedQcs, getMyQcs } from '@lca/ducks/entities'
-import type { QC } from '@lca/types'
-import EntityList from './EntityList'
-import EntityListItem from './EntityListItem'
+import { getMyPinnedQcs, getMyQcs } from '@lca/ducks/entities/index.ts'
+import type { State } from '@lca/ducks/index.ts'
+import type { QC } from '@lca/types/index.ts'
+import EntityList from './EntityList.tsx'
+import EntityListItem from './EntityListItem.tsx'
 
 interface StateProps {
   qcs: QC[]

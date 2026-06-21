@@ -1,10 +1,10 @@
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 import type { Dispatch } from 'redux'
 
-import type { State as RootState } from '@lca/ducks'
-import { updateBattlegroup, updateCharacter, updateQc } from '../actions.js'
+import type { State as RootState } from '@lca/ducks/index.ts'
+import { updateBattlegroup, updateCharacter, updateQc } from '../actions.ts'
 
-export * from './chronicle.js'
+export * from './chronicle.ts'
 
 export const SPEND_MOTES = 'lca/event/SPEND_MOTES'
 export const SPEND_WP = 'lca/event/SPEND_WP'
@@ -34,14 +34,14 @@ export function spendMotes(
     updateObj[`motes_${pool}_current`] = Math.max(current_motes - motes, 0)
 
     // Add to mote committments if specified
-    if (committments != null) updateObj['motes_committed'] = committments
+    if (committments != null) updateObj.motes_committed = committments
 
     // Raise anima banner level if appropriate
     if (pool === 'peripheral' && motes >= 5 && !mute) {
       const anima = entity.anima_level
       if (anima !== 3) {
         // Do not change Anima level if it's already at Bonfire
-        updateObj['anima_level'] = Math.min(anima + Math.floor(motes / 5), 3)
+        updateObj.anima_level = Math.min(anima + Math.floor(motes / 5), 3)
       }
     }
 

@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 import { removePlayerFromChronicle as removePlayer } from '@lca/ducks/actions.ts'
-import { getSpecificChronicle } from '@lca/selectors'
+import { getSpecificChronicle } from '@lca/selectors/index.ts'
 
 type ExposedProps = {
   chronicleId: number

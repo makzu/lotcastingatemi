@@ -8,7 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 import { takeDamage } from '@lca/ducks/events/index.ts'
-import { canIEditCharacter, canIEditQc } from '@lca/selectors'
+import { canIEditCharacter, canIEditQc } from '@lca/selectors/index.ts'
 import type { RootState } from '@lca/store.ts'
 import type { Character } from '@lca/types/character.ts'
 import type { QC } from '@lca/types/qc.ts'

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Grid } from '@material-ui/core'
 
-import { getCharmsForCharacterByType } from '@lca/ducks/entities'
-import useAppSelector from '@lca/hooks/UseAppSelector'
-import type { Character, Charm } from '@lca/types'
+import { getCharmsForCharacterByType } from '@lca/ducks/entities/index.ts'
+import useAppSelector from '@lca/hooks/UseAppSelector.ts'
+import type { Character, Charm } from '@lca/types/index.ts'
 import FullCharmDisplay from './CharmDisplay/FullCharm.tsx'
-import { type CharmFilter, filterCharms } from './useCharmFilters'
+import { type CharmFilter, filterCharms } from './useCharmFilters.ts'
 
 interface ExposedProps {
   id: Character['id']

@@ -4,10 +4,10 @@ import type {
   Character,
   MartialArtsCharm,
   NativeCharm,
-} from '@lca/types'
-import { ATTRIBUTES } from '@lca/utils/constants'
+} from '@lca/types/index.ts'
+import { ATTRIBUTES } from '@lca/utils/constants.ts'
 import { attr } from '..'
-import { highestOtherAttribute } from './custom.js'
+import { highestOtherAttribute } from './custom.ts'
 
 export const lunarExcellencyAbils = (
   character: Character,

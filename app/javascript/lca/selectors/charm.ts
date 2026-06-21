@@ -1,14 +1,14 @@
 import { createCachedSelector } from 're-reselect'
 
-import type { RootState } from '@lca/store'
+import type { RootState } from '@lca/store.ts'
 import type {
   Evocation,
   MartialArtsCharm,
   NativeCharm,
   SpiritCharm,
-} from '@lca/types/traits'
-import { sortOrderSort } from '@lca/utils'
-import { entities } from './entities'
+} from '@lca/types/traits/index.ts'
+import { sortOrderSort } from '@lca/utils/index.ts'
+import { entities } from './entities.ts'
 
 const characterIdMemoizer = (_state: RootState, id: number) => id
 

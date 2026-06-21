@@ -1,10 +1,10 @@
 import MenuItem from '@material-ui/core/MenuItem'
 
-import SolarCasteSelect from '@lca/components/characterEditor/exaltTraits/SolarCasteSelect'
+import SolarCasteSelect from '@lca/components/characterEditor/exaltTraits/SolarCasteSelect.tsx'
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import type { Character } from '@lca/types/index.ts'
-import { nonCasteAbilities } from '@lca/utils/calculated'
+import { nonCasteAbilities } from '@lca/utils/calculated/index.ts'
 import { SOLAR_CASTE_ABILITIES } from '@lca/utils/constants.ts'
 
 type Props = { character: Character; onChange: Function }

@@ -1,5 +1,5 @@
-import type { CharacterType } from '@lca/types'
-import type { Sortable, WithId } from '../_lib'
+import type { CharacterType } from '@lca/types/index.ts'
+import type { Sortable, WithId } from '../_lib.ts'
 
 export interface Poison extends WithId, Sortable {
   poisonable_id: number

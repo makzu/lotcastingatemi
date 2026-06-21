@@ -2,7 +2,7 @@ import type { AnyAction } from 'redux'
 import { getJSON } from 'redux-api-middleware'
 import deepmerge from 'deepmerge'
 
-import { callApi } from '@lca/utils/api'
+import { callApi } from '@lca/utils/api.ts'
 import {
   crudAction,
   type characterTypes as eTypes,
@@ -10,8 +10,8 @@ import {
   reducerUpdateAction,
   standardTypes,
   unwrapped,
-} from './_lib'
-import type { EntityState } from './_types'
+} from './_lib.ts'
+import type { EntityState } from './_types.ts'
 
 /* Overwrite arrays instead of concatenating them */
 const arrayMerge: deepmerge.Options['arrayMerge'] = (_, sourceArray) =>

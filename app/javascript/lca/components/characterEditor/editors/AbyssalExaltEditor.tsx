@@ -1,12 +1,11 @@
-import type React from 'react'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import AbyssalCasteSelect from '@lca/components/characterEditor/exaltTraits/AbyssalCasteSelect'
+import AbyssalCasteSelect from '@lca/components/characterEditor/exaltTraits/AbyssalCasteSelect.tsx'
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import type { Character } from '@lca/types'
-import { nonCasteAbilities } from '@lca/utils/calculated'
-import { ABYSSAL_CASTE_ABILITIES } from '@lca/utils/constants'
+import type { Character } from '@lca/types/index.ts'
+import { nonCasteAbilities } from '@lca/utils/calculated/index.ts'
+import { ABYSSAL_CASTE_ABILITIES } from '@lca/utils/constants.ts'
 
 type Props = { character: Character; onChange: React.ChangeEventHandler }
 function AbyssalExaltEditor({ character, onChange }: Props) {
@@ -20,7 +19,7 @@ function AbyssalExaltEditor({ character, onChange }: Props) {
     ]
 
   const noOptionItem =
-    character.caste == undefined ? (
+    character.caste === undefined ? (
       <MenuItem disabled>Select a Caste</MenuItem>
     ) : undefined
 

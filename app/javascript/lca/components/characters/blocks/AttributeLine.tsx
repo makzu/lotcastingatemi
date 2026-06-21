@@ -3,7 +3,10 @@ import { withStyles } from '@material-ui/core/styles'
 
 import RatingLine from '@lca/components/generic/RatingLine.tsx'
 import type { Character } from '@lca/types/character.ts'
-import { isCasteAttribute, isFavoredAttribute } from '@lca/utils/calculated'
+import {
+  isCasteAttribute,
+  isFavoredAttribute,
+} from '@lca/utils/calculated/index.ts'
 
 const styles = (theme) => ({
   attributeName: {

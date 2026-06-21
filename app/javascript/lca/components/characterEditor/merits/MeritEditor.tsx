@@ -13,12 +13,15 @@ import HelpIcon from '@material-ui/icons/Help'
 import { compose } from 'recompose'
 
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
-import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import { createMerit, destroyMerit, updateMerit } from '@lca/ducks/actions.ts'
-import { updateMeritSort } from '@lca/ducks/entities/merit'
-import { getMeritsForCharacter, getSpecificCharacter } from '@lca/selectors'
-import commonStyles from '@lca/styles'
+import { updateMeritSort } from '@lca/ducks/entities/merit.ts'
+import {
+  getMeritsForCharacter,
+  getSpecificCharacter,
+} from '@lca/selectors/index.ts'
+import commonStyles from '@lca/styles/index.ts'
 import MeritFields from './MeritFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)

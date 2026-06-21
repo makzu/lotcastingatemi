@@ -7,16 +7,19 @@ import Check from '@material-ui/icons/Check'
 import Launch from '@material-ui/icons/Launch'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay'
-import { getSpellsForCharacter } from '@lca/ducks/entities'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
+import { getSpellsForCharacter } from '@lca/ducks/entities/index.ts'
 import {
   getEvocationsForCharacter,
   getMartialArtsCharmsForCharacter,
   getNativeCharmsForCharacter,
   getSpiritCharmsForCharacter,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { Character, Charm, Spell } from '@lca/types/index.ts'
-import { isInstalledCharm, showLoadoutTraits } from '@lca/utils/calculated'
+import {
+  isInstalledCharm,
+  showLoadoutTraits,
+} from '@lca/utils/calculated/index.ts'
 
 const styles = (theme) => ({
   root: {

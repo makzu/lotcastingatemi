@@ -7,12 +7,11 @@ import {
   duplicateQc,
   fetchBattlegroup,
   fetchCharacter,
-  fetchChronicle,
   fetchQc,
   updateBattlegroup,
   updateCharacter,
   updateQc,
-} from './'
+} from './index.ts'
 
 export const destroy = {
   battlegroup: destroyBattlegroup,

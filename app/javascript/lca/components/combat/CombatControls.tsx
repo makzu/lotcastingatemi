@@ -8,8 +8,8 @@ import {
   updateBattlegroup,
   updateCharacter,
   updateQc,
-} from '@lca/ducks/actions'
-import { canIEdit } from '@lca/selectors'
+} from '@lca/ducks/actions/index.ts'
+import { canIEdit } from '@lca/selectors/index.ts'
 import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import RatingField from '../generic/RatingField.tsx'
 import InitiativeField from './InitiativeField.tsx'

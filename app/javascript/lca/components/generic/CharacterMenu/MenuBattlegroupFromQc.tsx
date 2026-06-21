@@ -1,9 +1,9 @@
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core/'
 import { GroupAdd } from '@material-ui/icons'
 
-import { createBattlegroupFromQc } from '@lca/ducks/actions'
-import { useAppDispatch, useAppSelector } from '@lca/hooks'
-import type { MenuItemProps as Props } from './CharacterMenuItem'
+import { createBattlegroupFromQc } from '@lca/ducks/actions/index.ts'
+import { useAppDispatch, useAppSelector } from '@lca/hooks/index.ts'
+import type { MenuItemProps as Props } from './CharacterMenuItem.ts'
 
 const BattlegroupFromQc = ({ characterType, id }: Props) => {
   const dispatch = useAppDispatch()

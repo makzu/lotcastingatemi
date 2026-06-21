@@ -12,7 +12,7 @@ import {
   canIEditBattlegroup,
   canIEditCharacter,
   canIEditQc,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { RootState } from '@lca/store.ts'
 import type { WithSharedStats } from '@lca/types/shared.ts'
 import { clamp } from '@lca/utils/math.ts'

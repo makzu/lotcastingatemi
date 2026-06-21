@@ -13,13 +13,20 @@ import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { deepEqual } from 'fast-equals'
 
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import { updateBattlegroup } from '@lca/ducks/actions.ts'
-import { canIDeleteBattlegroup, getSpecificBattlegroup } from '@lca/selectors'
+import {
+  canIDeleteBattlegroup,
+  getSpecificBattlegroup,
+} from '@lca/selectors/index.ts'
 import type { RootState } from '@lca/store.ts'
-import commonStyles from '@lca/styles'
+import commonStyles from '@lca/styles/index.ts'
 import type { Battlegroup } from '@lca/types/battlegroup.ts'
-import { bgDefenseBonus, bgSoak, totalMagnitude } from '@lca/utils/calculated/'
+import {
+  bgDefenseBonus,
+  bgSoak,
+  totalMagnitude,
+} from '@lca/utils/calculated/index.ts'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import RatingField from '../generic/RatingField.tsx'
 import TextField from '../generic/TextField.tsx'

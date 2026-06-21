@@ -6,10 +6,10 @@ import { createTheme } from '@material-ui/core/styles'
 import { dark, light } from '@material-ui/core/styles/createPalette'
 import { ThemeProvider } from '@material-ui/styles'
 
-import { switchTheme } from '@lca/features/themeSlice'
-import useAppDispatch from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import type { RootState } from '@lca/store'
+import { switchTheme } from '@lca/features/themeSlice.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import type { RootState } from '@lca/store.ts'
 
 /* When changing these colors, it's also important to change the theme_color
  * entries in /config/favicon.json from #2e7d32 to the new value,

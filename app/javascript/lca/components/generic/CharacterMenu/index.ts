@@ -1,3 +1,3 @@
-import CharacterMenu from './CharacterMenu'
+import CharacterMenu from './CharacterMenu.tsx'
 
 export default CharacterMenu

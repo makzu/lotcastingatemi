@@ -1,5 +1,3 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 
 import {
@@ -7,6 +5,8 @@ import {
   updateCharacter,
   updateQc,
 } from '@lca/ducks/actions/index.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
+import useAppSelector from '@lca/hooks/UseAppSelector.ts'
 import { canIEdit } from '@lca/selectors/index.ts'
 import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 
@@ -14,53 +14,37 @@ type ExposedProps = {
   character: Character | QC | Battlegroup
   characterType: 'character' | 'qc' | 'battlegroup'
 }
-type Props = ExposedProps & {
-  canEdit: boolean
-  update: Function
+
+const endCombatPayload = {
+  in_combat: false,
+  has_acted: false,
+  onslaught: 0,
 }
 
-class RemoveFromCombatButton extends Component<Props> {
-  onClickRemoveFromBattle = () => {
-    this.props.update(this.props.character.id, {
-      in_combat: false,
-      has_acted: false,
-      onslaught: 0,
-    })
+const RemoveFromCombatButton = (props: ExposedProps) => {
+  const dispatch = useAppDispatch()
+  const { character, characterType } = props
+  const canEdit = useAppSelector((state) =>
+    canIEdit(state, character.id, characterType),
+  )
+
+  if (!canEdit) return null
+
+  const handleClick = () => {
+    switch (characterType) {
+      case 'qc':
+        dispatch(updateQc(character.id, endCombatPayload))
+        return
+      case 'battlegroup':
+        dispatch(updateBattlegroup(character.id, endCombatPayload))
+        return
+      case 'character':
+      default:
+        dispatch(updateCharacter(character.id, endCombatPayload))
+    }
   }
 
-  render() {
-    const { canEdit } = this.props
-    if (!canEdit) return null
-
-    return (
-      <Button onClick={this.onClickRemoveFromBattle}>Remove from Combat</Button>
-    )
-  }
+  return <Button onClick={handleClick}>Remove from Combat</Button>
 }
 
-const mapStateToProps = (state, props: ExposedProps) => ({
-  canEdit: canIEdit(state, props.character.id, props.characterType),
-})
-
-function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
-  let action
-  switch (props.characterType) {
-    case 'qc':
-      action = updateQc
-      break
-    case 'battlegroup':
-      action = updateBattlegroup
-      break
-    case 'character':
-    default:
-      action = updateCharacter
-  }
-
-  return {
-    update: (id, obj) => dispatch(action(id, obj)),
-  }
-}
-
-const enhance = connect(mapStateToProps, mapDispatchToProps)
-
-export default enhance(RemoveFromCombatButton)
+export default RemoveFromCombatButton

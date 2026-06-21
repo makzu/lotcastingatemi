@@ -1,4 +1,3 @@
-import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Slide from '@material-ui/core/Slide'
@@ -32,27 +31,25 @@ const styles = (theme) => ({
 })
 
 type Props = { loading: boolean; classes: Object }
-class LoadingSpinner extends PureComponent<Props> {
-  render() {
-    const { loading, classes } = this.props
-    return (
-      <Slide
-        direction="up"
-        in={loading}
-        mountOnEnter
-        unmountOnExit
-        style={{ transitionDelay: loading ? 250 : 0 }}
-      >
-        <div className={classes.wrap}>
-          <Paper square={false} elevation={6} classes={{ root: classes.paper }}>
-            <SvgIcon viewBox="0 0 51 51" className={classes.icon}>
-              <DawnSpinner />
-            </SvgIcon>
-          </Paper>
-        </div>
-      </Slide>
-    )
-  }
+function LoadingSpinner(props: Props) {
+  const { loading, classes } = props
+  return (
+    <Slide
+      direction="up"
+      in={loading}
+      mountOnEnter
+      unmountOnExit
+      style={{ transitionDelay: loading ? 250 : 0 }}
+    >
+      <div className={classes.wrap}>
+        <Paper square={false} elevation={6} classes={{ root: classes.paper }}>
+          <SvgIcon viewBox="0 0 51 51" className={classes.icon}>
+            <DawnSpinner />
+          </SvgIcon>
+        </Paper>
+      </div>
+    </Slide>
+  )
 }
 
 const mapStateToProps = (state) => ({

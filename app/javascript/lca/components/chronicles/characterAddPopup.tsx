@@ -1,3 +1,4 @@
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -29,7 +30,7 @@ type State = {
   characterId: number
 }
 
-class CharacterAddPopup extends React.Component<Props, State> {
+class CharacterAddPopup extends Component<Props, State> {
   state = {
     open: false,
     characterId: 0,
@@ -59,7 +60,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, characters } = this.props
 
-    const options: ReactNode = [
+    const options: React.ReactNode = [
       <MenuItem key={0} value={0} disabled>
         Select a Character
       </MenuItem>,

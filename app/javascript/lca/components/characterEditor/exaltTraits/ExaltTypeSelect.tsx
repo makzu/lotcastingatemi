@@ -1,4 +1,3 @@
-import type * as React from 'react'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
@@ -7,7 +6,7 @@ import { prettyCanonType } from '@lca/utils/calculated/pretty.ts'
 
 interface Props {
   value: string
-  onChange: React.ChangeEventHandler
+  onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 const ExaltTypeSelect = (props: Props) => {
   const { value, onChange } = props

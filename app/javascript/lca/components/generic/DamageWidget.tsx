@@ -1,4 +1,4 @@
-import React, { Component, type ReactNode } from 'react'
+import { type ChangeEvent, Component, type ReactNode } from 'react'
 import { type ConnectedProps, connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import ButtonBase from '@material-ui/core/ButtonBase'
@@ -60,13 +60,13 @@ class DamageWidget extends Component<Props, State> {
     })
   }
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const commit = this.state.commit
     this.setState({ [name]: value, commit: commit })
   }
 
-  handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name as 'open' | 'commit'
     this.setState({ [name]: !this.state[name] })
   }

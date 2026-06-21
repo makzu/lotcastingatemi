@@ -35,7 +35,7 @@ const ChronicleInvitePopup = ({ chronicleId }: ExposedProps) => {
   )
 
   const handleDisable = () => {
-    dispatch(updateChronicle(chronicleId, { invite_code: '' }))
+    dispatch(updateChronicle(chronicleId, { invite_code: null }))
     setIsCopied(false)
   }
 
@@ -45,7 +45,8 @@ const ChronicleInvitePopup = ({ chronicleId }: ExposedProps) => {
   }
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(chronicle.invite_code).then(() => {
+    // biome-ignore lint/style/noNonNullAssertion: Button is not rendered if invite_code === null
+    await navigator.clipboard.writeText(chronicle.invite_code!).then(() => {
       setIsCopied(true)
     })
   }
@@ -64,7 +65,7 @@ const ChronicleInvitePopup = ({ chronicleId }: ExposedProps) => {
       <Dialog open={isOpen} onClose={closeDialog}>
         <DialogTitle>Invite a Player</DialogTitle>
         <DialogContent>
-          {chronicle.invite_code !== '' ? (
+          {chronicle.invite_code ? (
             <>
               <DialogContentText paragraph>
                 Another player can join {chronicle.name} if they have this code.
@@ -98,6 +99,7 @@ const ChronicleInvitePopup = ({ chronicleId }: ExposedProps) => {
             </DialogContentText>
           )}
         </DialogContent>
+
         <DialogActions>
           <Button onClick={closeDialog}>Close</Button>
           <Button onClick={handleDisable}>Disable invitations</Button>

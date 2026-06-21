@@ -48,12 +48,10 @@ class RatingField extends Component<Props, State> {
     const { min, max } = this.props
 
     if (Number.isNaN(parseInt(e.target.value, 10))) {
-      // $FlowThisIsOkayISwear
       this.setState({ value: e.target.value })
       return
     }
 
-    // $FlowThisIsOkayISwear
     const value = clamp(parseInt(e.target.value, 10), min, max)
     const fakeE = { target: { name: e.target.name, value: value } }
 
@@ -70,10 +68,8 @@ class RatingField extends Component<Props, State> {
 
   handleBlur = (e: FocusEvent) => {
     if (Number.isNaN(parseInt(this.state.value, 10))) {
-      // $FlowThisIsOkayISwear
       this.setState({ value: Math.max(0, this.props.min) })
       this.props.onChange({
-        // $FlowThisIsOkayISwear
         target: { name: e.target.name, value: Math.max(0, this.props.min) },
       })
     }

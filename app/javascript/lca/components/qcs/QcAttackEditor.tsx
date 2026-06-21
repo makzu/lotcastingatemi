@@ -2,19 +2,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
-
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
-import { getAttacksForBattlegroup, getAttacksForQc } from 'selectors'
 
 import {
   createQcAttack,
   destroyQcAttack,
   updateQcAttack,
-} from 'ducks/actions.ts'
-import { updateQcAttackSort } from 'ducks/entities/qc_attack'
-import type { Enhancer, QcAttack } from 'utils/flow-types'
+} from '@lca/ducks/actions.ts'
+import { updateQcAttackSort } from '@lca/ducks/entities/qc_attack'
+import { getAttacksForBattlegroup, getAttacksForQc } from '@lca/selectors'
+import type { Enhancer, QcAttack } from '@lca/utils/flow-types'
 import QcAttackFields from './QcAttackFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)

@@ -6,11 +6,20 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import { compose } from 'recompose'
-import { canIEdit, getPoolsAndRatingsGeneric } from 'selectors'
-import sharedStyles from 'styles/'
 
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions'
-import type { Battlegroup, Character, Enhancer, fullQc } from 'utils/flow-types'
+import {
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/actions'
+import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
+import sharedStyles from '@lca/styles/'
+import type {
+  Battlegroup,
+  Character,
+  Enhancer,
+  fullQc,
+} from '@lca/utils/flow-types'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import JoinBattlePopup from './JoinBattlePopup.tsx'

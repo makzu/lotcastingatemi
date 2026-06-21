@@ -1,20 +1,23 @@
 // @flow
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import Button from '@material-ui/core/Button'
 
-import { updateCharacter, updateQc, updateBattlegroup } from 'ducks/actions'
-import { canIEdit } from 'selectors'
-import type { withCombatInfo, Enhancer } from 'utils/flow-types'
+import {
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/actions'
+import { canIEdit } from '@lca/selectors'
+import type { Enhancer, withCombatInfo } from '@lca/utils/flow-types'
 
 type ExposedProps = {
-  character: withCombatInfo & { id: number },
-  characterType: 'character' | 'qc' | 'battlegroup',
+  character: withCombatInfo & { id: number }
+  characterType: 'character' | 'qc' | 'battlegroup'
 }
 type Props = ExposedProps & {
-  canEdit: boolean,
-  update: Function,
+  canEdit: boolean
+  update: Function
 }
 
 class RemoveFromCombatButton extends Component<Props> {

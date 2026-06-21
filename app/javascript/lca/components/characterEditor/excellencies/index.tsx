@@ -3,9 +3,6 @@ import * as React from 'react'
 
 const { Component, Fragment } = React
 
-
-
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -17,7 +14,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
-import type { Character } from 'utils/flow-types'
+import type { Character } from'@lca/utils/flow-types'
 import CanonExcellencyCopy from './CanonExcellencyCopy.tsx'
 
 class ExcellencyEditor extends Component<
@@ -30,7 +27,7 @@ class ExcellencyEditor extends Component<
     // Not ideal but Flow complains if I have this set to SyntheticEvent<>
     // TODO: remove other entries on the list with *
     const { name, value } = e.target
-    let val = value.filter((e) => e !== '').join('+')
+    const val = value.filter((e) => e !== '').join('+')
     this.props.onChange({ target: { name: name, value: val } })
   }
 
@@ -46,7 +43,7 @@ class ExcellencyEditor extends Component<
     const { handleOpen, handleClose, handleExcellencyChange } = this
     const { excellency, excellency_stunt } = this.props.character
 
-    let excellencyOptions = [
+    const excellencyOptions = [
       <MenuItem key="solar" value="solar">
         Solar (Attribute + Ability)
       </MenuItem>,

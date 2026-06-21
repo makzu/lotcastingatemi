@@ -6,12 +6,16 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
-import { getMeritsForQc } from 'selectors'
 
-import SortableGridList from 'components/generic/SortableGridList.tsx'
-import { createQcMerit, destroyQcMerit, updateQcMerit } from 'ducks/actions.ts'
-import { updateQcMeritSort } from 'ducks/entities/qc_merit'
-import type { Enhancer, fullQc, QcMerit } from 'utils/flow-types'
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import {
+  createQcMerit,
+  destroyQcMerit,
+  updateQcMerit,
+} from '@lca/ducks/actions.ts'
+import { updateQcMeritSort } from '@lca/ducks/entities/qc_merit'
+import { getMeritsForQc } from '@lca/selectors'
+import type { Enhancer, fullQc, QcMerit } from '@lca/utils/flow-types'
 import QcMeritFields from './QcMeritFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
@@ -95,7 +99,7 @@ class QcMeritEditor extends React.Component<Props> {
 
 function mapStateToProps(state, ownProps: ExposedProps) {
   const qc = ownProps.qc
-  let qc_merits = qc !== undefined ? getMeritsForQc(state, qc.id) : []
+  const qc_merits = qc !== undefined ? getMeritsForQc(state, qc.id) : []
 
   return {
     qc_merits,

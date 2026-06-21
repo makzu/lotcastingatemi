@@ -1,7 +1,6 @@
 // Vaguely follows the Ducks pattern: https://github.com/erikras/ducks-modular-redux
 
 import { type AnyAction, createReducer } from '@reduxjs/toolkit'
-
 import { normalize } from 'normalizr'
 
 export type { EntityState } from './_types'

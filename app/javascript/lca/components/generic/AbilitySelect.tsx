@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core/styles'
 import TextField, { type TextFieldProps } from '@material-ui/core/TextField'
 
-import { ABILITIES_ALL, ATTRIBUTES } from 'utils/constants.ts'
+import { ABILITIES_ALL, ATTRIBUTES } from '@lca/utils/constants.ts'
 
 const styles = (theme: Theme) =>
   createStyles({

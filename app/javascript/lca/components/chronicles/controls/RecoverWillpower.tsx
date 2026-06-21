@@ -14,15 +14,15 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
 
-import RatingField from 'components/generic/RatingField.tsx'
-import { recoverWillpower } from 'ducks/events'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import { recoverWillpower } from '@lca/ducks/events'
 
-type Props = { id: number, recoverWillpower: Function }
+type Props = { id: number; recoverWillpower: Function }
 type State = {
-  open: boolean,
-  toRecover: number,
-  exceed: boolean,
-  qcs: boolean,
+  open: boolean
+  toRecover: number
+  exceed: boolean
+  qcs: boolean
 }
 class WillpowerRecoveryPopup extends Component<Props, State> {
   constructor(props) {
@@ -39,23 +39,23 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
   handleClose = () =>
     this.setState({ open: false, toRecover: 0, exceed: false, qcs: false })
 
-  handleAdd = wp =>
+  handleAdd = (wp) =>
     this.setState({ toRecover: Math.max(this.state.toRecover + wp, 0) })
 
   handleReset = () => this.setState({ toRecover: 0 })
 
-  handleChange = e => {
-    let { name, value } = e.target
+  handleChange = (e) => {
+    const { name, value } = e.target
 
     if (name === 'toRecover') {
-      let val = Math.max(parseInt(value), 0)
+      const val = Math.max(parseInt(value), 0)
       this.setState({ toRecover: val })
     } else {
       this.setState({ [name]: value })
     }
   }
 
-  handleCheck = e =>
+  handleCheck = (e) =>
     this.setState({ [e.target.name]: !this.state[e.target.name] })
 
   handleSubmit = () => {
@@ -147,7 +147,4 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  { recoverWillpower }
-)(WillpowerRecoveryPopup)
+export default connect(null, { recoverWillpower })(WillpowerRecoveryPopup)

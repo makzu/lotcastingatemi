@@ -9,9 +9,9 @@ import {
 } from '@material-ui/core'
 import { Help as HelpIcon } from '@material-ui/icons'
 
+import ListAttributeEditor from '@lca/components/generic/ListAttributeEditor'
 import { useDialogLogic } from '@lca/hooks'
 import type { Character } from '@lca/types'
-import ListAttributeEditor from 'components/generic/ListAttributeEditor'
 import AnimalFormFields from './AnimalFormFields'
 import animalFormsList from './AnimalFormsList'
 

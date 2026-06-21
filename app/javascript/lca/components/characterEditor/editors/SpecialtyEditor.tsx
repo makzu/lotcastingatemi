@@ -4,14 +4,17 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { shouldUpdate } from 'recompose'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import * as calc from 'utils/calculated'
-import type { withIntimacies as Character, Enhancer } from 'utils/flow-types'
-import { isUnequalByKeys } from 'utils'
+} from '@lca/components/generic/ListAttributeEditor.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { isUnequalByKeys } from '@lca/utils'
+import * as calc from '@lca/utils/calculated'
+import type {
+  withIntimacies as Character,
+  Enhancer,
+} from '@lca/utils/flow-types'
 
 function SpecialtyFields(props: ListAttributeFieldTypes) {
   const { trait, character, onChange, classes } = props

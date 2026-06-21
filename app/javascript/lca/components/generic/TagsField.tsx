@@ -43,7 +43,7 @@ class TagsField extends Component<Props, State> {
   }
 
   handleBlur = (e: FocusEvent) => {
-    let val = e.target.value
+    const val = e.target.value
       .split(',')
       .map((e) => e.trim())
       .filter((e) => e !== '')

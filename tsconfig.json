@@ -3,14 +3,6 @@
     "allowSyntheticDefaultImports": true, // TODO: remove this once all "import React from 'react'" statements are removed
     "paths": {
       "@lca/*": ["./app/javascript/lca/*"],
-      "components/*": ["./app/javascript/lca/components/*"],
-      "containers/*": ["./app/javascript/lca/containers/*"],
-      "ducks": ["./app/javascript/lca/ducks"],
-      "ducks/*": ["./app/javascript/lca/ducks/*"],
-      "hooks": ["./app/javascript/lca/hooks"],
-      "selectors": ["./app/javascript/lca/selectors"],
-      "styles": ["./app/javascript/lca/styles"],
-      "utils/*": ["./app/javascript/lca/utils/*"],
       "Docs": ["./docs"],
       "Locales": ["./locales"]
     },

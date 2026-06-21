@@ -6,17 +6,16 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { compose, shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import PoolDisplay from 'components/generic/PoolDisplay.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TagsField from 'components/generic/TagsField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import WeightSelect from 'components/shared/selects/WeightSelect'
-import { isUnequalByKeys } from 'utils'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TagsField from '@lca/components/generic/TagsField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import WeightSelect from '@lca/components/shared/selects/WeightSelect'
+import { isUnequalByKeys } from '@lca/utils'
+import type { withArmorStats as Character } from '@lca/utils/flow-types'
 
-import type { withArmorStats as Character } from 'utils/flow-types'
-
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -33,12 +32,12 @@ const styles = theme => ({
 })
 
 type Props = {
-  character: Character,
-  pools: Object,
-  penalties: Object,
-  onChange: Function,
-  onCheck: Function,
-  classes: Object,
+  character: Character
+  pools: Object
+  penalties: Object
+  onChange: Function
+  onCheck: Function
+  classes: Object
 }
 function ArmorEditor(props: Props) {
   const { character, pools, penalties, onChange, onCheck, classes } = props
@@ -150,6 +149,6 @@ export default compose(
       'bonus_soak',
       'bonus_hardness',
       'bonus_mobility_penalty',
-    ])
-  )
+    ]),
+  ),
 )(ArmorEditor)

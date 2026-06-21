@@ -3,13 +3,13 @@ import Button from '@material-ui/core/Button'
 import type { WithStyles } from '@material-ui/core/styles'
 import Delete from '@material-ui/icons/Delete'
 
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import TagsField from '@lca/components/generic/TagsField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import Checkbox from '@lca/components/shared/inputs/Checkbox'
+import SpellCircleSelect from '@lca/components/shared/selects/SpellCircleSelect'
 import type commonStyles from '@lca/styles'
 import type { Spell } from '@lca/types'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import TagsField from 'components/generic/TagsField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import Checkbox from 'components/shared/inputs/Checkbox'
-import SpellCircleSelect from 'components/shared/selects/SpellCircleSelect'
 
 interface Props extends WithStyles<typeof commonStyles> {
   spell: Spell

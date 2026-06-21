@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -10,19 +9,19 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Delete from '@material-ui/icons/Delete'
 
-import { destroyChronicle } from 'ducks/actions'
-import { getSpecificChronicle } from 'selectors'
-import type { Enhancer } from 'utils/flow-types'
+import { destroyChronicle } from '@lca/ducks/actions'
+import { getSpecificChronicle } from '@lca/selectors'
+import type { Enhancer } from '@lca/utils/flow-types'
 
 type ExposedProps = {
-  chronicleId: number,
+  chronicleId: number
 }
 type Props = ExposedProps & {
-  chronicleName: string,
-  destroyChronicle: Function,
+  chronicleName: string
+  destroyChronicle: Function
 }
 type State = {
-  open: boolean,
+  open: boolean
 }
 
 class ChronicleLeavePopup extends React.Component<Props, State> {

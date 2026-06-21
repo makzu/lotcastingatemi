@@ -3,13 +3,12 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
-import { getPoolsForWeapon } from 'selectors'
 
-import PoolDisplay from 'components/generic/PoolDisplay.tsx'
+import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
+import { getPoolsForWeapon } from '@lca/selectors'
+import type { fullWeapon } from '@lca/utils/flow-types'
 
-import type { fullWeapon } from 'utils/flow-types'
-
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -42,7 +41,7 @@ const styles = theme => ({
   },
 })
 
-type RangedAttacksProps = { weaponPools: Object, classes: Object }
+type RangedAttacksProps = { weaponPools: Object; classes: Object }
 function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
   const pool = weaponPools.rangedWitheringAttack
   const poolLineClasses = {
@@ -91,9 +90,9 @@ function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
 }
 
 type WeaponPoolDisplayProps = {
-  weapon: fullWeapon,
-  weaponPools: Object,
-  classes: Object,
+  weapon: fullWeapon
+  weaponPools: Object
+  classes: Object
 }
 function WeaponPoolDisplay({ weaponPools, classes }: WeaponPoolDisplayProps) {
   const poolLineClasses = {
@@ -147,5 +146,5 @@ const mapStateToProps = (state, props) => ({
 })
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(WeaponPoolDisplay)

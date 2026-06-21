@@ -9,12 +9,12 @@ import {
   ListItemText,
 } from '@material-ui/core/'
 import { ExpandLess, ExpandMore } from '@material-ui/icons/'
-import type { State } from 'ducks'
 
+import { LinkListItem, NavLinkListItem } from '@lca/components/shared/wrappers/'
+import type { State } from '@lca/ducks'
+import { getSpecificCharacter } from '@lca/ducks/entities'
 import type { Character } from '@lca/types'
 import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
-import { LinkListItem, NavLinkListItem } from 'components/shared/wrappers/'
-import { getSpecificCharacter } from 'ducks/entities'
 
 interface Props {
   character: Character

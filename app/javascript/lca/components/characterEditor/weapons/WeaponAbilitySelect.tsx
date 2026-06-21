@@ -3,7 +3,7 @@ import { makeStyles, type Theme } from '@material-ui/core/styles'
 import type { TextFieldProps } from '@material-ui/core/TextField'
 
 import type { Character, Weapon } from '@lca/types'
-import * as calc from 'utils/calculated'
+import * as calc from '@lca/utils/calculated'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

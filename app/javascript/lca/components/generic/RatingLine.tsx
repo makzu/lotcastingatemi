@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import type * as React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 
 import RatingDots from './RatingDots.tsx'

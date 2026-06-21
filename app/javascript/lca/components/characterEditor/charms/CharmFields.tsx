@@ -29,17 +29,17 @@ import { destroyCharm, updateCharm } from '@lca/ducks/entities'
 import { useAppDispatch } from '@lca/hooks'
 import type { Character, Charm } from '@lca/types'
 import {
+  abilitiesWithRatings,
+  isInstalledCharm,
+  isNativeCharm,
+  showLoadoutTraits,
+} from '@lca/utils/calculated'
+import {
   ABILITY_MAX,
   ATTRIBUTE_MAX,
   ESSENCE_MAX,
   ESSENCE_MIN,
 } from '@lca/utils/constants'
-import {
-  abilitiesWithRatings,
-  isInstalledCharm,
-  isNativeCharm,
-  showLoadoutTraits,
-} from 'utils/calculated'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
 import HouseOptions from './CharmHouseOptions'
 import CharmLoadoutAutocomplete from './CharmLoadoutAutocomplete'

@@ -1,9 +1,8 @@
 // @flow
 import React, { Fragment } from 'react'
-
 import Divider from '@material-ui/core/Divider'
 
-import type { Character, fullWeapon } from 'utils/flow-types'
+import type { Character, fullWeapon } from '@lca/utils/flow-types'
 import WeaponLine from '../weapons/WeaponLine.tsx'
 
 type Props = { character: Character; weapons: Array<fullWeapon> }

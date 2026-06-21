@@ -4,10 +4,14 @@ import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { canIEdit } from 'selectors'
 
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions'
-import type { Enhancer, withCombatInfo } from 'utils/flow-types'
+import {
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/actions'
+import { canIEdit } from '@lca/selectors'
+import type { Enhancer, withCombatInfo } from '@lca/utils/flow-types'
 import RatingField from '../generic/RatingField.tsx'
 import InitiativeField from './InitiativeField.tsx'
 

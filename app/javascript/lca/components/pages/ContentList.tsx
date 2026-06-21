@@ -7,17 +7,26 @@ import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { compose } from 'recompose'
-import { getMyBattlegroups, getMyCharacters, getMyQCs } from 'selectors'
-import commonStyles from 'styles'
 
-import SortableGridList from 'components/generic/SortableGridList.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
-import type { Battlegroup, Character, Enhancer, fullQc } from 'utils/flow-types'
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import {
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/actions.ts'
+import { getMyBattlegroups, getMyCharacters, getMyQCs } from '@lca/selectors'
+import commonStyles from '@lca/styles'
+import type {
+  Battlegroup,
+  Character,
+  Enhancer,
+  fullQc,
+} from '@lca/utils/flow-types'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.tsx'
-import BattlegroupCreatePopup from '../battlegroups/battlegroupCreatePopup'
+import BattlegroupCreatePopup from '../battlegroups/BattlegroupCreatePopup.tsx'
 import CharacterCard from '../characters/CharacterCard.tsx'
-import CharacterCreatePopup from '../characters/CharacterCreatePopup'
+import CharacterCreatePopup from '../characters/CharacterCreatePopup.tsx'
 import QcCard from '../qcs/QcCard.tsx'
 import QcCreatePopup from '../qcs/QcCreatePopup.tsx'
 

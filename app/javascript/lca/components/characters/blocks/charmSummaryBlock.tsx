@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography'
 import Check from '@material-ui/icons/Check'
 import Launch from '@material-ui/icons/Launch'
 
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay'
 import { getSpellsForCharacter } from '@lca/ducks/entities'
 import {
   getEvocationsForCharacter,
@@ -16,10 +18,7 @@ import {
   getSpiritCharmsForCharacter,
 } from '@lca/selectors'
 import { isInstalledCharm, showLoadoutTraits } from '@lca/utils/calculated'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay'
-
-import type { Character, Charm, Spell, Enhancer } from 'utils/flow-types'
+import type { Character, Charm, Enhancer, Spell } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   root: {
@@ -51,7 +50,8 @@ const styles = (theme) => ({
 })
 
 function _SingleCharm({ character, charm, classes }) {
-  const isInstalled = showLoadoutTraits(character) && isInstalledCharm(character, charm)
+  const isInstalled =
+    showLoadoutTraits(character) && isInstalledCharm(character, charm)
 
   return (
     <Fragment>
@@ -81,7 +81,7 @@ function _SingleCharm({ character, charm, classes }) {
 }
 const SingleCharm = withStyles(styles)(_SingleCharm)
 
-function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
+function _SingleSpell({ spell, classes }: { spell: Spell; classes: Object }) {
   return (
     <Fragment>
       <Typography component="div" className={classes.root}>
@@ -109,14 +109,14 @@ function _SingleSpell({ spell, classes }: { spell: Spell, classes: Object }) {
 const SingleSpell = withStyles(styles)(_SingleSpell)
 
 type ExposedProps = {
-  character: Character,
+  character: Character
 }
 type Props = ExposedProps & {
-  nativeCharms: Array<Charm>,
-  martialArtsCharms: Array<Charm>,
-  evocations: Array<Charm>,
-  spiritCharms: Array<Charm>,
-  spells: Array<Spell>,
+  nativeCharms: Array<Charm>
+  martialArtsCharms: Array<Charm>
+  evocations: Array<Charm>
+  spiritCharms: Array<Charm>
+  spells: Array<Spell>
 }
 
 function CharmSummaryBlock(props: Props) {

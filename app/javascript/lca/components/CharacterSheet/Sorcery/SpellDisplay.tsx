@@ -1,10 +1,10 @@
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
+import SecondaryInfo from '@lca/components/shared/SecondaryInfo'
 import type { Spell } from '@lca/types'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
-import SecondaryInfo from 'components/shared/SecondaryInfo'
 
 const useStyles = makeStyles({
   capitalize: {

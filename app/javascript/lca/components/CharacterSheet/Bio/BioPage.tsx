@@ -8,16 +8,16 @@ import {
 } from '@material-ui/core/styles'
 import { compose } from 'recompose'
 
+import animalFormsList from '@lca/components/characterEditor/editors/AnimalFormsList'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { getSpecificCharacter } from '@lca/ducks/selectors'
 import { useDocumentTitle } from '@lca/hooks'
 import type { RootState } from '@lca/store'
 import type { Character, XpLogEntry } from '@lca/types'
 import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
-import animalFormsList from 'components/characterEditor/editors/AnimalFormsList'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { getSpecificCharacter } from 'ducks/selectors'
-import { solarXpName, spentSolarXp, spentXp } from 'utils/calculated'
+import { solarXpName, spentSolarXp, spentXp } from '@lca/utils/calculated'
 import CharacterLoadError from '../CharacterLoadError'
 
 const styles = (_theme: Theme) =>

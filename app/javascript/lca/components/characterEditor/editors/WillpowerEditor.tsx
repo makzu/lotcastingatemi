@@ -2,16 +2,15 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import commonStyles from 'styles'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import { WILLPOWER_MAX } from 'utils/constants.ts'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import commonStyles from '@lca/styles'
+import { WILLPOWER_MAX } from '@lca/utils/constants.ts'
+import type { Character } from '@lca/utils/flow-types'
 import ResourceEditor from './ResourceEditor.tsx'
 
-import type { Character } from 'utils/flow-types'
-
-type Props = { character: Character, onChange: Function, classes: Object }
+type Props = { character: Character; onChange: Function; classes: Object }
 const WillpowerEditor = ({ character, onChange, classes }: Props) => (
   <BlockPaper>
     <Typography variant="h6">Willpower:</Typography>

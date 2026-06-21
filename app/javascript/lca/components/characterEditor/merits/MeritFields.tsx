@@ -16,11 +16,11 @@ import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import { MERIT_RATING_MAX, MERIT_RATING_MIN } from 'utils/constants.ts'
-import type { fullMerit as Merit } from 'utils/flow-types'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { MERIT_RATING_MAX, MERIT_RATING_MIN } from '@lca/utils/constants.ts'
+import type { fullMerit as Merit } from '@lca/utils/flow-types'
 import MeritEffectBlurb from './MeritEffectBlurb.tsx'
 
 const Handle = SortableHandle(() => (

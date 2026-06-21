@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
-
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -9,15 +8,15 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 
-import { createQc } from 'ducks/actions.ts'
-import type { Enhancer } from 'utils/flow-types'
+import { createQc } from '@lca/ducks/actions.ts'
+import type { Enhancer } from '@lca/utils/flow-types'
 
 type Props = {
-  createQc: Function,
+  createQc: Function
 }
 type State = {
-  open: boolean,
-  qc: Object,
+  open: boolean
+  qc: Object
 }
 
 // TODO: Enable autofill for some example QCs?

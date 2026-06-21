@@ -12,15 +12,14 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 import { deepEqual } from 'fast-equals'
 import { compose } from 'recompose'
-import { getSpecificBattlegroup } from 'selectors'
 
-import RangeSelect from 'components/generic/RangeSelect.tsx'
-import TagsField from 'components/generic/TagsField.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import { bgAttackPool, bgDamage } from 'utils/calculated'
+import RangeSelect from '@lca/components/generic/RangeSelect.tsx'
+import TagsField from '@lca/components/generic/TagsField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { getSpecificBattlegroup } from '@lca/selectors'
+import { bgAttackPool, bgDamage } from '@lca/utils/calculated'
+import type { Enhancer, QcAttack } from '@lca/utils/flow-types'
 import RatingField from '../generic/RatingField.tsx'
-
-import type { QcAttack, Enhancer } from 'utils/flow-types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
@@ -68,19 +67,19 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  attack: QcAttack,
-  onAttackChange: Function,
-  onRemoveClick: Function,
-  battlegroup?: boolean,
+  attack: QcAttack
+  onAttackChange: Function
+  onRemoveClick: Function
+  battlegroup?: boolean
 }
 type Props = ExposedProps & {
-  fakeBg: Object,
-  classes: Object,
+  fakeBg: Object
+  classes: Object
 }
 
 class QcAttackFields extends React.Component<Props> {
   handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     const { attack } = this.props
 
     if (deepEqual(this.props.attack[name], value)) return
@@ -188,7 +187,10 @@ class QcAttackFields extends React.Component<Props> {
 function mapStateToProps(state, ownProps: ExposedProps) {
   let fakeBg
   if (ownProps.battlegroup) {
-    let owner = getSpecificBattlegroup(state, ownProps.attack.qc_attackable_id)
+    const owner = getSpecificBattlegroup(
+      state,
+      ownProps.attack.qc_attackable_id,
+    )
     fakeBg = {
       size: owner.size,
       might: owner.might,

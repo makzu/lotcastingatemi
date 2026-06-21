@@ -10,14 +10,14 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Whatshot from '@material-ui/icons/Whatshot'
 import { compose } from 'recompose'
+
 import {
   canIDeleteCharacter,
   getPenalties,
   getPoolsAndRatings,
-} from 'selectors'
-
-import * as calc from 'utils/calculated'
-import type { Character, Enhancer } from 'utils/flow-types'
+} from '@lca/selectors'
+import * as calc from '@lca/utils/calculated'
+import type { Character, Enhancer } from '@lca/utils/flow-types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'

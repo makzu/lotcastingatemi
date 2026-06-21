@@ -2,18 +2,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import { isChronicleLoaded } from 'selectors'
 
-import ChronicleDetailsPage from 'components/chronicles/DetailsPage.tsx'
-import ChronicleDashboard from 'components/chronicles/index.tsx'
-import CombatDashboard from 'components/combat/index.tsx'
-import { fetchChronicle } from 'ducks/actions'
+import ChronicleDetailsPage from '@lca/components/chronicles/DetailsPage.tsx'
+import ChronicleDashboard from '@lca/components/chronicles/index.tsx'
+import CombatDashboard from '@lca/components/combat/index.tsx'
+import { fetchChronicle } from '@lca/ducks/actions'
 import {
   fetchChronicleBattlegroups,
   fetchChronicleCharacters,
   fetchChronicleQcs,
-} from 'ducks/entities/chronicle'
-import type { Enhancer } from 'utils/flow-types'
+} from '@lca/ducks/entities/chronicle'
+import { isChronicleLoaded } from '@lca/selectors'
+import type { Enhancer } from '@lca/utils/flow-types'
 
 type ExposedProps = {
   match: { params: { chronicleId: number } }

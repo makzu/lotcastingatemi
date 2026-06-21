@@ -8,10 +8,10 @@ import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import { deepEqual } from 'fast-equals'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import Checkbox from 'components/shared/inputs/Checkbox'
-import type { QcMerit } from 'utils/flow-types'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import Checkbox from '@lca/components/shared/inputs/Checkbox'
+import type { QcMerit } from '@lca/utils/flow-types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />

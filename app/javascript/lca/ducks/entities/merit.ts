@@ -21,10 +21,10 @@ export default createTraitReducer('merit', undefined, {
 export const [createMerit, updateMerit, destroyMerit] =
   createApiActions('merit')
 
-import type { State } from 'ducks'
 /* Selectors */
 import { createCachedSelector } from 're-reselect'
 
+import type { State } from '@lca/ducks'
 import { sortOrderSort } from '@lca/utils'
 import { unwrapped } from './_lib'
 import { getSpecificCharacter } from './character'

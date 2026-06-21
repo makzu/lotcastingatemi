@@ -6,12 +6,16 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import { canIEditBattlegroup, canIEditCharacter, canIEditQc } from 'selectors'
 
+import { spendWillpower } from '@lca/ducks/events/index.ts'
+import {
+  canIEditBattlegroup,
+  canIEditCharacter,
+  canIEditQc,
+} from '@lca/selectors'
 import type { RootState } from '@lca/store.ts'
 import type { WithSharedStats } from '@lca/types/shared.ts'
 import { clamp } from '@lca/utils/math.ts'
-import { spendWillpower } from 'ducks/events/index.ts'
 import RatingField from './RatingField.tsx'
 import ResourceDisplay from './ResourceDisplay.tsx'
 

@@ -1,14 +1,13 @@
 import * as React from 'react'
-
 import {
   Collapse,
   IconButton,
   ListItemSecondaryAction,
-  ListItemText
+  ListItemText,
 } from '@material-ui/core'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 
-import NavLinkListItem from 'components/shared/wrappers/NavLinkListItem'
+import NavLinkListItem from '@lca/components/shared/wrappers/NavLinkListItem'
 
 interface Props {
   label: string

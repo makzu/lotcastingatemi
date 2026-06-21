@@ -5,18 +5,17 @@ import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import { nonCasteAttributes } from 'utils/calculated'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { nonCasteAttributes } from '@lca/utils/calculated'
+import type { Character } from '@lca/utils/flow-types'
 import ExcellencyEditor from '../excellencies/'
 
-import type { Character } from 'utils/flow-types'
-
 type Props = {
-  character: Character,
-  onChange: Function,
-  onCheck: Function,
-  onChangeMulti: Function,
+  character: Character
+  onChange: Function
+  onCheck: Function
+  onChangeMulti: Function
 }
 function CustomAttributeExaltEditor({
   character,

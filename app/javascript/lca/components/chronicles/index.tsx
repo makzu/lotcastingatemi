@@ -5,6 +5,22 @@ import { SortableElement } from 'react-sortable-hoc'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
+
+import BattlegroupCard from '@lca/components/battlegroups/BattlegroupCard.tsx'
+import CharacterCard from '@lca/components/characters/CharacterCard.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import QcCard from '@lca/components/qcs/QcCard.tsx'
+import DocumentTitle from '@lca/components/shared/DocumentTitle'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import {
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/actions.ts'
+import { updateBattlegroupChronicleSort } from '@lca/ducks/entities/battlegroup'
+import { updateCharacterChronicleSort } from '@lca/ducks/entities/character'
+import { updateQcChronicleSort } from '@lca/ducks/entities/qc'
 import {
   amIStOfChronicle,
   getBattlegroupsForChronicle,
@@ -13,20 +29,8 @@ import {
   getQcsForChronicle,
   getSpecificChronicle,
   getStorytellerForChronicle,
-} from 'selectors'
-
-import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import BattlegroupCard from 'components/battlegroups/BattlegroupCard.tsx'
-import CharacterCard from 'components/characters/CharacterCard.tsx'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import SortableGridList from 'components/generic/SortableGridList.tsx'
-import QcCard from 'components/qcs/QcCard.tsx'
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { updateBattlegroup, updateCharacter, updateQc } from 'ducks/actions.ts'
-import { updateBattlegroupChronicleSort } from 'ducks/entities/battlegroup'
-import { updateCharacterChronicleSort } from 'ducks/entities/character'
-import { updateQcChronicleSort } from 'ducks/entities/qc'
-import type { Battlegroup, Character, fullQc } from 'utils/flow-types'
+} from '@lca/selectors'
+import type { Battlegroup, Character, fullQc } from '@lca/utils/flow-types'
 import BattlegroupAddPopup from './battlegroupAddPopup.tsx'
 import CharacterAddPopup from './characterAddPopup.tsx'
 import QcAddPopup from './qcAddPopup.tsx'

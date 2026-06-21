@@ -1,23 +1,21 @@
 // @flow
-import React, { PureComponent, Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
-
+import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import Button from '@material-ui/core/Button'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import TextField from '@material-ui/core/TextField'
-
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import { createChronicle } from 'ducks/actions'
+import { createChronicle } from '@lca/ducks/actions'
 
 type Props = { createChronicle: Function }
-type State = { open: boolean, chronicle: { name: string } }
+type State = { open: boolean; chronicle: { name: string } }
 class ChronicleCreatePopup extends PureComponent<Props, State> {
   state = {
     open: false,

@@ -8,13 +8,17 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import { compose } from 'recompose'
-import { getCharmsForQc } from 'selectors'
-import commonStyles from 'styles'
 
-import SortableGridList from 'components/generic/SortableGridList.tsx'
-import { createQcCharm, destroyQcCharm, updateQcCharm } from 'ducks/actions.ts'
-import { updateQcCharmSort } from 'ducks/entities/qc_charm'
-import type { Enhancer, fullQc, QcCharm } from 'utils/flow-types'
+import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import {
+  createQcCharm,
+  destroyQcCharm,
+  updateQcCharm,
+} from '@lca/ducks/actions.ts'
+import { updateQcCharmSort } from '@lca/ducks/entities/qc_charm'
+import { getCharmsForQc } from '@lca/selectors'
+import commonStyles from '@lca/styles'
+import type { Enhancer, fullQc, QcCharm } from '@lca/utils/flow-types'
 import QcCharmFields from './QcCharmFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
@@ -102,7 +106,7 @@ class QcCharmEditor extends React.Component<Props> {
 
 function mapStateToProps(state, ownProps: ExposedProps) {
   const qc = ownProps.qc
-  let qc_charms = qc !== undefined ? getCharmsForQc(state, qc.id) : []
+  const qc_charms = qc !== undefined ? getCharmsForQc(state, qc.id) : []
 
   return {
     qc_charms,

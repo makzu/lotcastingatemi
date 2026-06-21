@@ -4,21 +4,22 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { compose } from 'recompose'
-import { getAttacksForBattlegroup, getSpecificBattlegroup } from 'selectors'
-import sharedStyles from 'styles/'
 
-import ProtectedComponent from 'containers/ProtectedComponent'
-import { fetchBattlegroupIfNecessary } from 'ducks/entities/battlegroup'
+import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import { fetchBattlegroupIfNecessary } from '@lca/ducks/entities/battlegroup'
+import {
+  getAttacksForBattlegroup,
+  getSpecificBattlegroup,
+} from '@lca/selectors'
+import sharedStyles from '@lca/styles/'
 import {
   bgAttackPool,
   bgDamage,
   bgDefenseBonus,
   bgSoak,
   prettyDrillRating,
-} from 'utils/calculated'
-
-import type { Battlegroup, QcAttack } from 'utils/flow-types'
-
+} from '@lca/utils/calculated'
+import type { Battlegroup, QcAttack } from '@lca/utils/flow-types'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import MarkdownDisplay from '../generic/MarkdownDisplay.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
@@ -70,11 +71,11 @@ const styles = (theme) => ({
 })
 
 type Props = {
-  id: string,
-  battlegroup: Battlegroup,
-  qc_attacks: Array<QcAttack>,
-  classes: Object,
-  fetch: Function,
+  id: string
+  battlegroup: Battlegroup
+  qc_attacks: Array<QcAttack>
+  classes: Object
+  fetch: Function
 }
 
 class BattlegroupSheet extends Component<Props> {

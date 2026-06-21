@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 
 import type { State } from '@lca/ducks'
+import { getMyBattlegroups, getMyPinnedBattlegroups } from '@lca/ducks/entities'
 import type { Battlegroup } from '@lca/types'
-import { getMyBattlegroups, getMyPinnedBattlegroups } from 'ducks/entities'
 import EntityList from './EntityList'
 import EntityListItem from './EntityListItem'
 

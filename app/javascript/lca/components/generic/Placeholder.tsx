@@ -1,8 +1,7 @@
 import React from 'react'
-
 import Typography from '@material-ui/core/Typography'
 
-import { sample } from 'utils'
+import { sample } from '@lca/utils'
 
 const loadingMessages = [
   'Loading',

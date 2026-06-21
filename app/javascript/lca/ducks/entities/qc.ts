@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
 
 import type { RootState } from '@lca/store'
+import { sortOrderSort } from '@lca/utils'
 import {
   createApiActions,
   createConditionalFetchAction,
@@ -10,7 +11,6 @@ import {
 import { unwrapped } from './_lib'
 import type { EntityState } from './_types'
 import { getCurrentPlayer } from './player'
-import { sortOrderSort } from 'utils'
 
 export const updateQcSort = createAction<{ id: number; sorting: number }>(
   'sort/qc',

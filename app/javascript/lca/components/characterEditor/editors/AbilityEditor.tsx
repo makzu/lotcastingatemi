@@ -3,20 +3,23 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import { shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
-} from 'components/generic/ListAttributeEditor.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
-import TextField from 'components/generic/TextField.tsx'
+} from '@lca/components/generic/ListAttributeEditor.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { isUnequalByKeys } from '@lca/utils'
 import {
   ABILITIES,
   ABILITIES_ALL,
   ABILITY_MAX as MAX,
   ABILITY_MIN as MIN,
-} from 'utils/constants.ts'
-import type { withAbilities as Character, Enhancer } from 'utils/flow-types'
-import { isUnequalByKeys } from 'utils'
+} from '@lca/utils/constants.ts'
+import type {
+  withAbilities as Character,
+  Enhancer,
+} from '@lca/utils/flow-types'
 
 function AbilityField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />

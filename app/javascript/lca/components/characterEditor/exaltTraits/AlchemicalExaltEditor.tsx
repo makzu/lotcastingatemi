@@ -2,9 +2,9 @@ import type * as React from 'react'
 import { Typography } from '@material-ui/core'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import type { Character } from '@lca/types'
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import { nonCasteAttributes } from 'utils/calculated'
+import { nonCasteAttributes } from '@lca/utils/calculated'
 import AlchemicalCasteSelect from './AlchemicalCasteSelect'
 
 interface Props {

@@ -1,8 +1,8 @@
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
 import { Refresh } from '@material-ui/icons'
 
+import { fetch } from '@lca/ducks/actions/ByType'
 import useAppDispatch from '@lca/hooks/UseAppDispatch'
-import { fetch } from 'ducks/actions/ByType'
 import type { MenuItemProps as Props } from './CharacterMenuItem'
 
 const CardMenuRefresh = ({ characterType, id }: Props) => {

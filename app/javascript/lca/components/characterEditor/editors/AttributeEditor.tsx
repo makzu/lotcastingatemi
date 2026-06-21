@@ -4,16 +4,15 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { compose, shouldUpdate } from 'recompose'
 
-import BlockPaper from 'components/generic/BlockPaper.tsx'
-import RatingField from 'components/generic/RatingField.tsx'
+import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import RatingField from '@lca/components/generic/RatingField.tsx'
+import { isUnequalByKeys } from '@lca/utils'
 import {
   ATTRIBUTES,
   ATTRIBUTE_MAX as MAX,
   ATTRIBUTE_MIN as MIN,
-} from 'utils/constants.ts'
-import { isUnequalByKeys } from 'utils'
-
-import type { withAttributes as Character } from 'utils/flow-types'
+} from '@lca/utils/constants.ts'
+import type { withAttributes as Character } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   fieldSet: {
@@ -28,7 +27,7 @@ function AttributeField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />
 }
 
-type Props = { character: Character, onChange: Function, classes: Object }
+type Props = { character: Character; onChange: Function; classes: Object }
 function AttributeEditor(props: Props) {
   const { character, onChange, classes } = props
 

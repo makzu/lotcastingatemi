@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import type { Theme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { drawerWidth } from 'containers/_drawerProperties'
+import { drawerWidth } from '@lca/containers/_drawerProperties'
 import BattlegroupHeader from './BattlegroupHeader'
 import CharacterHeader from './CharacterHeader'
 import ChronicleHeader from './ChronicleHeader'

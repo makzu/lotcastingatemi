@@ -12,13 +12,13 @@ import { withStyles } from '@material-ui/core/styles'
 import DescriptionIcon from '@material-ui/icons/Description'
 import { deepEqual } from 'fast-equals'
 import { compose } from 'recompose'
-import { canIEditCharacter } from 'selectors'
-import commonStyles from 'styles'
 
-import MarkdownDisplay from 'components/generic/MarkdownDisplay.tsx'
-import TextField from 'components/generic/TextField.tsx'
-import { updateCharacter } from 'ducks/actions.ts'
-import type { Character } from 'utils/flow-types'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
+import TextField from '@lca/components/generic/TextField.tsx'
+import { updateCharacter } from '@lca/ducks/actions.ts'
+import { canIEditCharacter } from '@lca/selectors'
+import commonStyles from '@lca/styles'
+import type { Character } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

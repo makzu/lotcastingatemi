@@ -3,7 +3,7 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-import { prettyCanonType } from 'utils/calculated/pretty'
+import { prettyCanonType } from '@lca/utils/calculated/pretty'
 
 interface Props {
   value: string

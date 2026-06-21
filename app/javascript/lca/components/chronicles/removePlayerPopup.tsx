@@ -1,5 +1,4 @@
-// @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -10,7 +9,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 import { removePlayerFromChronicle as removePlayer } from '@lca/ducks/actions'
 import { getSpecificChronicle, getSpecificPlayer } from '@lca/selectors'
-import type { Enhancer } from '@lca/utils/flow-types'
 
 type ExposedProps = {
   chronicleId: number
@@ -25,7 +23,7 @@ type State = {
   open: boolean
 }
 
-class RemovePlayerPopup extends React.Component<Props, State> {
+class RemovePlayerPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -82,11 +80,10 @@ function mapStateToProps(state, ownProps: ExposedProps) {
     playerName = ''
 
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
-  if (chronicle != undefined && chronicle.name != undefined) {
+  if (chronicle !== undefined && chronicle.name !== undefined) {
     chronicleName = chronicle.name
     // TODO add some kind of error here if it can't find a player
-    playerName = (getSpecificPlayer(state, ownProps.playerId) || {})
-      .display_name
+    playerName = getSpecificPlayer(state, ownProps.playerId)?.display_name
   }
 
   return {
@@ -95,8 +92,6 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
-  removePlayer,
-})
+const enhance = connect(mapStateToProps, { removePlayer })
 
 export default enhance(RemovePlayerPopup)

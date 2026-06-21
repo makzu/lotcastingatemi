@@ -1,5 +1,4 @@
-// @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 import Button from '@material-ui/core/Button'
@@ -7,7 +6,6 @@ import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
-import { compose } from 'recompose'
 
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import {
@@ -18,7 +16,7 @@ import {
 import { updateQcCharmSort } from '@lca/ducks/entities/qc_charm'
 import { getCharmsForQc } from '@lca/selectors'
 import commonStyles from '@lca/styles'
-import type { Enhancer, fullQc, QcCharm } from '@lca/utils/flow-types'
+import type { QC, QcCharm } from '@lca/types/index.ts'
 import QcCharmFields from './QcCharmFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
@@ -28,10 +26,10 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  qc: fullQc
+  qc: QC
 }
 type Props = ExposedProps & {
-  qc_charms: Array<QcCharm>
+  qc_charms: QcCharm[]
   updateQcCharm: Function
   createQcCharm: Function
   destroyQcCharm: Function
@@ -39,7 +37,7 @@ type Props = ExposedProps & {
   classes: Object
 }
 
-class QcCharmEditor extends React.Component<Props> {
+class QcCharmEditor extends Component<Props> {
   handleChange = (id, trait) => {
     this.props.updateQcCharm(id, this.props.qc.id, trait)
   }
@@ -113,14 +111,11 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
+export default withStyles(styles)(
   connect(mapStateToProps, {
     updateQcCharm,
     createQcCharm,
     destroyQcCharm,
     updateQcCharmSort,
-  }),
-  withStyles(styles),
+  })(QcCharmEditor),
 )
-
-export default enhance(QcCharmEditor)

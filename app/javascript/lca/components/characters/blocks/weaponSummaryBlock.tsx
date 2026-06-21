@@ -1,11 +1,10 @@
-// @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import Divider from '@material-ui/core/Divider'
 
-import type { Character, fullWeapon } from '@lca/utils/flow-types'
+import type { Character, Weapon } from '@lca/types/index.ts'
 import WeaponLine from '../weapons/WeaponLine.tsx'
 
-type Props = { character: Character; weapons: Array<fullWeapon> }
+type Props = { character: Character; weapons: Weapon[] }
 function WeaponSummaryBlock({ weapons }: Props) {
   const weas = weapons.map((weapon) => (
     <Fragment key={weapon.id}>

@@ -1,6 +1,6 @@
+import type { Character } from '@lca/types'
 import type { BlockOfPenalties } from '@lca/types/pool.js'
 import { halfRoundUp } from '@lca/utils'
-import type { Character } from '@lca/utils/flow-types'
 import { penaltyObject } from '../index'
 import rating from './_rating.js'
 

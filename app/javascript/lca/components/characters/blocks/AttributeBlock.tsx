@@ -1,10 +1,8 @@
-// @flow
-import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import type { Character } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types'
 import AttributeBlockMental from './AttributeBlockMental.tsx'
 import AttributeBlockPhysical from './AttributeBlockPhysical.tsx'
 import AttributeBlockSocial from './AttributeBlockSocial.tsx'

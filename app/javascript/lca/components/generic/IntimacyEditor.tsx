@@ -1,4 +1,3 @@
-// @flow
 import React, { type ChangeEventHandler, Fragment } from 'react'
 
 import ListAttributeEditor, {

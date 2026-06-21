@@ -1,11 +1,10 @@
-// @flow
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import type { withSpecialties } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 
 const styles = (theme) => ({
   specialtyWrap: {
@@ -24,7 +23,7 @@ const styles = (theme) => ({
   },
 })
 
-type Props = { character: withSpecialties; classes: Object }
+type Props = { character: Character; classes: Object }
 function FullSpecialtyBlock({ character, classes }: Props) {
   const spec = character.specialties.map((s) => (
     <Fragment key={s.ability + s.context}>

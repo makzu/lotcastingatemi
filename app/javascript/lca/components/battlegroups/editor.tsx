@@ -1,32 +1,31 @@
-// @flow
-
-import * as React from 'react'
-import { deepEqual } from 'fast-equals'
-
-const { Component } = React
-
-import type { ChangeEvent } from 'react'
-import { connect } from 'react-redux'
+import { type ChangeEvent, Component } from 'react'
+import { type ConnectedProps, connect } from 'react-redux'
+import type { RouteComponentProps } from 'react-router-dom'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import MenuItem from '@material-ui/core/MenuItem'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  type Theme,
+  type WithStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import { compose } from 'recompose'
+import { deepEqual } from 'fast-equals'
 
 import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { updateBattlegroup } from '@lca/ducks/actions.ts'
 import { canIDeleteBattlegroup, getSpecificBattlegroup } from '@lca/selectors'
+import type { RootState } from '@lca/store.ts'
 import commonStyles from '@lca/styles'
+import type { Battlegroup } from '@lca/types/battlegroup.ts'
 import { bgDefenseBonus, bgSoak, totalMagnitude } from '@lca/utils/calculated/'
-import type { Battlegroup } from '@lca/utils/flow-types'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import RatingField from '../generic/RatingField.tsx'
 import TextField from '../generic/TextField.tsx'
 import QcAttackEditor from '../qcs/QcAttackEditor.tsx'
 
-const styles = (theme) => ({
+const styles = (theme: Theme) => ({
   ...commonStyles(theme),
 
   bgBonus: {
@@ -43,15 +42,13 @@ const styles = (theme) => ({
     marginRight: theme.spacing(),
   },
 })
-type Props = {
-  battlegroup: Battlegroup
-  showPublicCheckbox: boolean
-  classes: Object
-  updateBattlegroup: Function
-}
+
+interface Props extends WithStyles<typeof styles>, PropsFromRedux {}
 class BattlegroupEditor extends Component<Props> {
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { value } = e.target
+    const name = e.target.name as keyof Battlegroup
+
     const { battlegroup } = this.props
 
     if (deepEqual(battlegroup[name], value)) return
@@ -60,7 +57,7 @@ class BattlegroupEditor extends Component<Props> {
   }
 
   handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target
+    const name = e.target.name as keyof Battlegroup
     const value = !this.props.battlegroup[name]
 
     this.props.updateBattlegroup(this.props.battlegroup.id, { [name]: value })
@@ -70,7 +67,7 @@ class BattlegroupEditor extends Component<Props> {
     const { battlegroup, showPublicCheckbox } = this.props
 
     /* Escape hatch */
-    if (this.props.battlegroup == undefined)
+    if (this.props.battlegroup === undefined)
       return (
         <BlockPaper>
           <Typography paragraph>
@@ -345,8 +342,11 @@ class BattlegroupEditor extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.battlegroupId
+function mapStateToProps(
+  state: RootState,
+  ownProps: RouteComponentProps<{ id: string }>,
+) {
+  const id = parseInt(ownProps.match.params.id, 10)
   const battlegroup = getSpecificBattlegroup(state, id)
   const showPublicCheckbox = canIDeleteBattlegroup(state, id)
 
@@ -357,8 +357,9 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default compose(
-  ProtectedComponent,
-  withStyles(styles),
-  connect(mapStateToProps, { updateBattlegroup }),
-)(BattlegroupEditor)
+const connector = connect(mapStateToProps, { updateBattlegroup })
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default ProtectedComponent(
+  withStyles(styles)(connector(BattlegroupEditor)),
+)

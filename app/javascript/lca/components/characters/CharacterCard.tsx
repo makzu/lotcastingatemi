@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
@@ -16,8 +14,8 @@ import {
   getPenalties,
   getPoolsAndRatings,
 } from '@lca/selectors'
+import type { Character } from '@lca/types/index.ts'
 import * as calc from '@lca/utils/calculated'
-import type { Character, Enhancer } from '@lca/utils/flow-types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
@@ -240,9 +238,6 @@ const mapStateToProps = (state, props: ExposedProps) => ({
   pools: getPoolsAndRatings(state, props.character.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  withStyles(styles),
-)
+const enhance = compose(connect(mapStateToProps), withStyles(styles))
 
 export default enhance(CharacterCard)

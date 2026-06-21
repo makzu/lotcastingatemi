@@ -1,21 +1,16 @@
-// @flow
-import * as React from 'react'
-
-const { Fragment } = React
-
 import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingLine from '@lca/components/generic/RatingLine.tsx'
+import type { Character } from '@lca/types/index.ts'
 import {
   isCasteAbility,
   isFavoredAbility,
   isSupernalAbility,
 } from '@lca/utils/calculated'
 import { ABILITY_NAMES } from '@lca/utils/constants.ts'
-import type { Character } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   abilityName: {
@@ -42,7 +37,7 @@ function _AbilityLine({
   pools,
   classes,
 }: _AbilityLineProps) {
-  const r = rating != undefined ? rating : character[`abil_${ability}`]
+  const r = rating !== undefined ? rating : character[`abil_${ability}`]
   const supernal = isSupernalAbility(character, ability)
   const caste = isCasteAbility(character, ability)
   const favored = isFavoredAbility(character, ability)
@@ -51,7 +46,7 @@ function _AbilityLine({
     pools.excellencyAbils.includes(ability)
 
   return (
-    <Fragment>
+    <>
       <RatingLine rating={r}>
         <span className={classes.abilityName}>{ability}</span>
         <span className={classes.abilityFavored}>
@@ -63,7 +58,7 @@ function _AbilityLine({
       </RatingLine>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 const AbilityLine = withStyles(styles)(_AbilityLine)
@@ -90,7 +85,7 @@ function _CraftAbilityLine({
     pools.excellencyAbils.includes('craft')
 
   return (
-    <Fragment>
+    <>
       <RatingLine rating={rating}>
         <span className={classes.abilityName}>Craft ({context})</span>
         <span className={classes.abilityFavored}>
@@ -102,7 +97,7 @@ function _CraftAbilityLine({
       </RatingLine>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 const CraftAbilityLine = withStyles(styles)(_CraftAbilityLine)
@@ -126,13 +121,13 @@ function _MartialArtsAbilityLine({
     isCasteAbility(character, 'brawl') ||
     isCasteAbility(character, 'martial_arts')
   const favored = isFavoredAbility(character, 'brawl')
-  const s = style ? ' (' + style + ')' : ''
+  const s = style ? ` (${style})` : ''
   const excellency =
     pools.excellencyAbils.includes('*') ||
     pools.excellencyAbils.includes('martial_arts')
 
   return (
-    <Fragment>
+    <>
       <RatingLine rating={rating}>
         <span className={classes.abilityName}>
           Martial Arts
@@ -147,7 +142,7 @@ function _MartialArtsAbilityLine({
       </RatingLine>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 const MartialArtsAbilityLine = withStyles(styles)(_MartialArtsAbilityLine)
@@ -158,7 +153,7 @@ type AbilityBlockProps = {
 }
 export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
   let craft = ''
-  if (character.abil_craft.length == 0) {
+  if (character.abil_craft.length === 0) {
     craft = (
       <AbilityLine
         ability="craft"
@@ -180,7 +175,7 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
   }
 
   let ma = ''
-  if (character.abil_martial_arts.length == 0) {
+  if (character.abil_martial_arts.length === 0) {
     ma = (
       <MartialArtsAbilityLine rating={0} character={character} pools={pools} />
     )

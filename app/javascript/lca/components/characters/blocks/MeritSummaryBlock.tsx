@@ -1,10 +1,8 @@
-// @flow
-import React from 'react'
 import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 
 import RatingLine from '@lca/components/generic/RatingLine.tsx'
-import type { Character, fullMerit } from '@lca/utils/flow-types'
+import type { Character, Merit } from '@lca/types'
 
 const styles = (theme) => ({
   meritLine: {
@@ -16,7 +14,7 @@ const styles = (theme) => ({
   },
 })
 
-type Props = { character: Character; merits: Array<fullMerit>; classes: Object }
+type Props = { character: Character; merits: Merit[]; classes: Object }
 export function MeritSummaryBlock(props: Props) {
   const { classes } = props
 

@@ -1,6 +1,5 @@
-// @flow
-import React, { type ChangeEvent } from 'react'
-import { connect } from 'react-redux'
+import { type ChangeEvent, Component } from 'react'
+import { type ConnectedProps, connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -9,15 +8,14 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 
 import { createBattlegroup } from '@lca/ducks/actions.ts'
-import type { Enhancer } from '@lca/utils/flow-types'
+import type { Battlegroup } from '@lca/types/battlegroup.ts'
 
-type Props = { createBattlegroup: Function }
 type State = {
   open: boolean
-  battlegroup: Object
+  battlegroup: Partial<Battlegroup>
 }
 
-class BattlegroupCreatePopup extends React.Component<Props, State> {
+class BattlegroupCreatePopup extends Component<PropsFromRedux, State> {
   state = { open: false, battlegroup: { name: '' } }
 
   handleOpen = () => {
@@ -81,6 +79,7 @@ class BattlegroupCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, {}> = connect(null, { createBattlegroup })
+const connector = connect(null, { createBattlegroup })
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-export default enhance(BattlegroupCreatePopup)
+export default connector(BattlegroupCreatePopup)

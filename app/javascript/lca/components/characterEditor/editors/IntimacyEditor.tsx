@@ -1,14 +1,9 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import Editor from '@lca/components/generic/IntimacyEditor.tsx'
-import { isUnequalByKeys } from '@lca/utils'
-import type {
-  withIntimacies as Character,
-  Enhancer,
-} from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 
 type Props = {
   character: Character
@@ -33,12 +28,4 @@ class IntimacyEditor extends React.Component<Props> {
   }
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'principles',
-      'ties',
-    ]),
-)
-
-export default enhance(IntimacyEditor)
+export default IntimacyEditor

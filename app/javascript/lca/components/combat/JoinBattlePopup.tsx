@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -8,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { withStyles } from '@material-ui/core/styles'
-import { compose } from 'recompose'
 
 import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
@@ -18,12 +16,7 @@ import {
   updateQc,
 } from '@lca/ducks/actions'
 import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
-import type {
-  Battlegroup,
-  Character,
-  Enhancer,
-  fullQc,
-} from '@lca/utils/flow-types'
+import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 
 // eslint-disable-next-line no-unused-vars
 const styles = (theme) => ({
@@ -38,7 +31,7 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  character: Character | fullQc | Battlegroup
+  character: Character | QC | Battlegroup
 }
 type Props = ExposedProps & {
   canEdit: boolean
@@ -51,7 +44,7 @@ type State = {
   initiative: number
 }
 
-class JoinBattlePopup extends React.Component<Props, State> {
+class JoinBattlePopup extends Component<Props, State> {
   state = { open: false, initiative: 0 }
 
   handleChange = (e) => {
@@ -147,9 +140,6 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withStyles(styles),
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(JoinBattlePopup),
 )
-
-export default enhance(JoinBattlePopup)

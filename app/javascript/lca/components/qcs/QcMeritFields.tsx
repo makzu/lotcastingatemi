@@ -1,6 +1,4 @@
-// @flow
-
-import React, { type ChangeEvent } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -11,7 +9,7 @@ import { deepEqual } from 'fast-equals'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import Checkbox from '@lca/components/shared/inputs/Checkbox'
-import type { QcMerit } from '@lca/utils/flow-types'
+import type { QcMerit } from '@lca/types'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
@@ -22,7 +20,7 @@ type Props = {
   onMeritChange: Function
   onRemoveClick: Function
 }
-export default class QcMeritFields extends React.Component<Props> {
+export default class QcMeritFields extends Component<Props> {
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { merit } = this.props

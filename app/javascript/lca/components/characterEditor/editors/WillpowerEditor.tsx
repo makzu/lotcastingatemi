@@ -1,13 +1,11 @@
-// @flow
-import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import commonStyles from '@lca/styles'
+import type { Character } from '@lca/types/index.ts'
 import { WILLPOWER_MAX } from '@lca/utils/constants.ts'
-import type { Character } from '@lca/utils/flow-types'
 import ResourceEditor from './ResourceEditor.tsx'
 
 type Props = { character: Character; onChange: Function; classes: Object }

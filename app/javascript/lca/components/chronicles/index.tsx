@@ -1,5 +1,4 @@
-// @flow
-import React, { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 import Grid from '@material-ui/core/Grid'
@@ -30,7 +29,7 @@ import {
   getSpecificChronicle,
   getStorytellerForChronicle,
 } from '@lca/selectors'
-import type { Battlegroup, Character, fullQc } from '@lca/utils/flow-types'
+import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import BattlegroupAddPopup from './battlegroupAddPopup.tsx'
 import CharacterAddPopup from './characterAddPopup.tsx'
 import QcAddPopup from './qcAddPopup.tsx'
@@ -45,7 +44,7 @@ type Props = {
   is_st: boolean
   players: Array<Object>
   characters: Array<Character>
-  qcs: Array<fullQc>
+  qcs: Array<QC>
   battlegroups: Array<Battlegroup>
   chronicle: Object
   updateCharacter: Function
@@ -59,7 +58,7 @@ class ChronicleDashboard extends Component<Props> {
   handleSort = ({ oldIndex, newIndex, collection }) => {
     if (oldIndex === newIndex) return
     // eslint-disable-next-line no-unused-vars
-    let update = (...a) => {}
+    let update = (..._a) => {}
     let updateSort
     let coll = []
     switch (collection) {
@@ -89,8 +88,8 @@ class ChronicleDashboard extends Component<Props> {
   render() {
     /* Escape hatch */
     if (
-      this.props.chronicle == undefined ||
-      this.props.chronicle.name == undefined
+      this.props.chronicle === undefined ||
+      this.props.chronicle.name === undefined
     )
       return (
         <BlockPaper>
@@ -124,7 +123,7 @@ class ChronicleDashboard extends Component<Props> {
     ))
 
     return (
-      <Fragment>
+      <>
         <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
 
         <Hidden smUp>
@@ -148,7 +147,7 @@ class ChronicleDashboard extends Component<Props> {
           useDragHandle
           axis="xy"
         />
-        {characterList.length == 0 && (
+        {characterList.length === 0 && (
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography>None yet</Typography>
@@ -169,7 +168,7 @@ class ChronicleDashboard extends Component<Props> {
           useDragHandle
           axis="xy"
         />
-        {qcList.length == 0 && (
+        {qcList.length === 0 && (
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography>None yet</Typography>
@@ -190,14 +189,14 @@ class ChronicleDashboard extends Component<Props> {
           useDragHandle
           axis="xy"
         />
-        {bgList.length == 0 && (
+        {bgList.length === 0 && (
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography>None yet</Typography>
             </Grid>
           </Grid>
         )}
-      </Fragment>
+      </>
     )
   }
 }

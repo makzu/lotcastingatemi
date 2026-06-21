@@ -1,8 +1,4 @@
-// @flow
-import * as React from 'react'
-
-const { Component, Fragment } = React
-
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableElement } from 'react-sortable-hoc'
@@ -23,11 +19,6 @@ import { createMerit, destroyMerit, updateMerit } from '@lca/ducks/actions.ts'
 import { updateMeritSort } from '@lca/ducks/entities/merit'
 import { getMeritsForCharacter, getSpecificCharacter } from '@lca/selectors'
 import commonStyles from '@lca/styles'
-import type {
-  Character,
-  Enhancer,
-  fullMerit as Merit,
-} from '@lca/utils/flow-types'
 import MeritFields from './MeritFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
@@ -43,7 +34,7 @@ type ExposedProps = {
 }
 type Props = ExposedProps & {
   character: Character
-  merits: Array<Merit>
+  merits: Merit[]
   updateMerit: Function
   destroyMerit: Function
   createMerit: Function
@@ -80,7 +71,7 @@ class MeritEditor extends Component<Props> {
 
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined)
+    if (this.props.character === undefined)
       return (
         <div>
           <Typography paragraph>This Character has not yet loaded.</Typography>
@@ -106,7 +97,7 @@ class MeritEditor extends Component<Props> {
     const totalDots = merits.reduce((acc, merit) => acc + merit.rating, 0)
 
     return (
-      <Fragment>
+      <>
         <DocumentTitle
           title={`${this.props.character.name} Merits | Lot-Casting Atemi`}
         />
@@ -149,7 +140,7 @@ class MeritEditor extends Component<Props> {
         >
           {totalDots} dots of merits total
         </Typography>
-      </Fragment>
+      </>
     )
   }
 }
@@ -159,7 +150,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   const character = getSpecificCharacter(state, id)
   let merits = []
 
-  if (character != undefined && character.merits != undefined) {
+  if (character !== undefined && character.merits !== undefined) {
     merits = getMeritsForCharacter(state, id)
   }
 
@@ -168,7 +159,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
     merits,
   }
 }
-const enhance: Enhancer<Props, ExposedProps> = compose(
+const enhance = compose(
   connect(mapStateToProps, {
     updateMerit,
     destroyMerit,

@@ -1,11 +1,4 @@
-// @flow
-
-import * as React from 'react'
-import { deepEqual } from 'fast-equals'
-
-const { Component } = React
-
-import type { ChangeEvent } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -15,12 +8,13 @@ import MuiTextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
+import { deepEqual } from 'fast-equals'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
+import type { Merit } from '@lca/types/index.ts'
 import { MERIT_RATING_MAX, MERIT_RATING_MIN } from '@lca/utils/constants.ts'
-import type { fullMerit as Merit } from '@lca/utils/flow-types'
 import MeritEffectBlurb from './MeritEffectBlurb.tsx'
 
 const Handle = SortableHandle(() => (

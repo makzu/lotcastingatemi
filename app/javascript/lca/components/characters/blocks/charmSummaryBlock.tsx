@@ -1,5 +1,3 @@
-// @flow
-import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Divider from '@material-ui/core/Divider'
@@ -17,8 +15,8 @@ import {
   getNativeCharmsForCharacter,
   getSpiritCharmsForCharacter,
 } from '@lca/selectors'
+import type { Character, Charm, Spell } from '@lca/types/index.ts'
 import { isInstalledCharm, showLoadoutTraits } from '@lca/utils/calculated'
-import type { Character, Charm, Enhancer, Spell } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   root: {
@@ -54,7 +52,7 @@ function _SingleCharm({ character, charm, classes }) {
     showLoadoutTraits(character) && isInstalledCharm(character, charm)
 
   return (
-    <Fragment>
+    <>
       <Typography component="div" className={classes.root}>
         {isInstalled && <Check />}
         <div className={classes.name}>{charm.name}</div>
@@ -76,14 +74,14 @@ function _SingleCharm({ character, charm, classes }) {
       </Typography>
 
       <Divider />
-    </Fragment>
+    </>
   )
 }
 const SingleCharm = withStyles(styles)(_SingleCharm)
 
 function _SingleSpell({ spell, classes }: { spell: Spell; classes: Object }) {
   return (
-    <Fragment>
+    <>
       <Typography component="div" className={classes.root}>
         <div className={classes.name}>{spell.name}</div>
         <div className={classes.info}>
@@ -103,7 +101,7 @@ function _SingleSpell({ spell, classes }: { spell: Spell; classes: Object }) {
         />
       </Typography>
       <Divider />
-    </Fragment>
+    </>
   )
 }
 const SingleSpell = withStyles(styles)(_SingleSpell)
@@ -112,11 +110,11 @@ type ExposedProps = {
   character: Character
 }
 type Props = ExposedProps & {
-  nativeCharms: Array<Charm>
-  martialArtsCharms: Array<Charm>
-  evocations: Array<Charm>
-  spiritCharms: Array<Charm>
-  spells: Array<Spell>
+  nativeCharms: Charm[]
+  martialArtsCharms: Charm[]
+  evocations: Charm[]
+  spiritCharms: Charm[]
+  spells: Spell[]
 }
 
 function CharmSummaryBlock(props: Props) {
@@ -130,7 +128,7 @@ function CharmSummaryBlock(props: Props) {
   } = props
 
   // Mortals don't need Charms displayed
-  if (character.type == 'Character') {
+  if (character.type === 'Character') {
     return <div />
   }
 
@@ -198,6 +196,4 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps)
-
-export default enhance(CharmSummaryBlock)
+export default connect(mapStateToProps)(CharmSummaryBlock)

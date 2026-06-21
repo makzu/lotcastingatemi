@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
@@ -8,14 +6,13 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import { compose } from 'recompose'
 
 import {
   doIOwnQc,
   getPenaltiesForQc,
   getPoolsAndRatingsForQc,
 } from '@lca/selectors'
-import type { Enhancer, fullQc } from '@lca/utils/flow-types'
+import type { QC } from '@lca/types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
@@ -70,7 +67,7 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  qc: fullQc
+  qc: QC
   chronicle?: boolean
   st?: boolean
 }
@@ -207,9 +204,4 @@ const mapStateToProps = (state, props) => ({
   isOwner: doIOwnQc(state, props.qc.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  withStyles(styles),
-)
-
-export default enhance(QcCard)
+export default withStyles(styles)(connect(mapStateToProps)(QcCard))

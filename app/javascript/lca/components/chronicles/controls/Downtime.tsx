@@ -1,8 +1,4 @@
-// @flow
-import * as React from 'react'
-
-const { Component, Fragment } = React
-
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -102,7 +98,7 @@ class DowntimePopup extends Component<Props, State> {
     } = this
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Downtime...</Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Downtime</DialogTitle>
@@ -185,7 +181,7 @@ class DowntimePopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

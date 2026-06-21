@@ -1,14 +1,10 @@
-// @flow
-import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import { isUnequalByKeys } from '@lca/utils'
+import type { Character } from '@lca/types/character.ts'
 import { LIMIT_MAX } from '@lca/utils/constants.ts'
-import type { Character, Enhancer } from '@lca/utils/flow-types'
 
 type Props = {
   character: Character
@@ -44,12 +40,4 @@ function LimitEditor({ character, onChange }: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'limit',
-      'limit_trigger',
-    ]),
-)
-
-export default enhance(LimitEditor)
+export default LimitEditor

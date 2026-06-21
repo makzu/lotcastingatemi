@@ -1,7 +1,4 @@
-// @flow
-import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
@@ -9,17 +6,12 @@ import ListAttributeEditor, {
 } from '@lca/components/generic/ListAttributeEditor.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import { isUnequalByKeys } from '@lca/utils'
+import type { Character } from '@lca/types/character.ts'
 import {
   ABILITIES,
-  ABILITIES_ALL,
   ABILITY_MAX as MAX,
   ABILITY_MIN as MIN,
 } from '@lca/utils/constants.ts'
-import type {
-  withAbilities as Character,
-  Enhancer,
-} from '@lca/utils/flow-types'
 
 function AbilityField(props) {
   return <RatingField min={MIN} max={MAX} margin="dense" {...props} />
@@ -99,7 +91,7 @@ function AbilityEditor({ character, onChange }: Props) {
     dotsOverThree += Math.max(score - 3, 0)
     dotsUnderThree += Math.min(score, 3)
   })
-  character.abil_craft.concat(character.abil_martial_arts).forEach((a) => {
+  ;[...character.abil_craft, ...character.abil_martial_arts].forEach((a) => {
     const score = a.rating
     totalDots += score
     dotsOverThree += Math.max(score - 3, 0)
@@ -300,12 +292,4 @@ function AbilityEditor({ character, onChange }: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate((props, newProps) =>
-  isUnequalByKeys(
-    props.character,
-    newProps.character,
-    ABILITIES_ALL.map((a) => a.abil),
-  ),
-)
-
-export default enhance(AbilityEditor)
+export default AbilityEditor

@@ -1,10 +1,7 @@
-// @flow
-import React from 'react'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles, type Theme, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { compose, shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
@@ -12,24 +9,24 @@ import RatingField from '@lca/components/generic/RatingField.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import WeightSelect from '@lca/components/shared/selects/WeightSelect'
-import { isUnequalByKeys } from '@lca/utils'
-import type { withArmorStats as Character } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 
-const styles = (theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginTop: theme.spacing(),
-    marginBottom: theme.spacing(),
-  },
-  poolBlock: {
-    margin: theme.spacing(),
-    marginLeft: 0,
-    width: '5.5rem',
-    maxHeight: '5rem',
-  },
-})
+const styles = (theme: Theme) =>
+  makeStyles({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      marginTop: theme.spacing(),
+      marginBottom: theme.spacing(),
+    },
+    poolBlock: {
+      margin: theme.spacing(),
+      marginLeft: 0,
+      width: '5.5rem',
+      maxHeight: '5rem',
+    },
+  })
 
 type Props = {
   character: Character
@@ -138,17 +135,4 @@ function ArmorEditor(props: Props) {
   )
 }
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, newProps) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'armor_name',
-      'armor_weight',
-      'armor_tags',
-      'armor_is_artifact',
-      'bonus_soak',
-      'bonus_hardness',
-      'bonus_mobility_penalty',
-    ]),
-  ),
-)(ArmorEditor)
+export default withStyles(styles)(ArmorEditor)

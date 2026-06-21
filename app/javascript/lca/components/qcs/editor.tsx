@@ -1,6 +1,4 @@
-// @flow
-
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -8,7 +6,6 @@ import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { deepEqual } from 'fast-equals'
-import { compose } from 'recompose'
 
 import AnimaSelect from '@lca/components/shared/selects/AnimaSelect.tsx'
 import AuraSelect from '@lca/components/shared/selects/AuraSelect'
@@ -16,8 +13,8 @@ import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { updateQc } from '@lca/ducks/actions.ts'
 import { canIDeleteQc, getSpecificQc } from '@lca/selectors'
 import commonStyles from '@lca/styles'
+import type { QC } from '@lca/types/qc.ts'
 import { woundPenalty } from '@lca/utils/calculated'
-import type { Enhancer, fullQc } from '@lca/utils/flow-types'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import HealthLevelBoxes from '../generic/HealthLevelBoxes.tsx'
 import IntimacyEditor from '../generic/IntimacyEditor.tsx'
@@ -38,7 +35,7 @@ type ExposedProps = {
   match: { params: { qcId: number } }
 }
 type Props = ExposedProps & {
-  qc: fullQc
+  qc: QC
   showPublicCheckbox: boolean
   updateQc: Function
   classes: Object
@@ -67,7 +64,7 @@ class QcEditor extends Component<Props> {
     const { handleChange, handleCheck } = this
 
     /* Escape hatch */
-    if (qc == undefined)
+    if (qc === undefined)
       return (
         <BlockPaper>
           <Typography paragraph>
@@ -464,10 +461,6 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps, { updateQc }),
-  withStyles(styles),
-  ProtectedComponent,
+export default ProtectedComponent(
+  withStyles(styles)(connect(mapStateToProps, { updateQc })(QcEditor)),
 )
-
-export default enhance(QcEditor)

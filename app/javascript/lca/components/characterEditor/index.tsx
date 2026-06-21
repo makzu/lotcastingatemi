@@ -1,6 +1,4 @@
-// @flow
-
-import React, { type ChangeEvent, Component } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
@@ -12,7 +10,7 @@ import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { updateCharacter } from '@lca/ducks/actions.ts'
 import { getSpecificCharacter } from '@lca/ducks/selectors'
 import { getPenalties, getPoolsAndRatings } from '@lca/selectors'
-import type { Character } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 import AbilityEditor from './editors/AbilityEditor.tsx'
 import AbyssalExaltEditor from './editors/AbyssalExaltEditor'
 import ArmorEditor from './editors/ArmorEditor.tsx'
@@ -67,7 +65,7 @@ class CharacterEditor extends Component<Props> {
 
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined)
+    if (this.props.character === undefined)
       return (
         <div>
           <Typography paragraph>This Character has not yet loaded.</Typography>
@@ -255,7 +253,7 @@ function mapStateToProps(state, props) {
   const character = getSpecificCharacter(state, id)
   let pools, penalties
 
-  if (character != undefined) {
+  if (character !== undefined) {
     pools = getPoolsAndRatings(state, id)
     penalties = getPenalties(state, id)
   }

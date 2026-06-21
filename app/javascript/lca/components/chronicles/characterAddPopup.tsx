@@ -1,5 +1,3 @@
-// @flow
-import * as React from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -16,7 +14,7 @@ import {
   getMyCharactersWithoutChronicles,
   getSpecificChronicle,
 } from '@lca/selectors'
-import type { Character, Enhancer } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 
 type ExposedProps = {
   chronicleId: number
@@ -51,7 +49,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
   }
 
   handleSubmit = () => {
-    if (this.state.characterId == 0) return
+    if (this.state.characterId === 0) return
 
     this.setState({ open: false })
     this.props.handleSubmit(this.props.chronicleId, this.state.characterId)
@@ -61,7 +59,7 @@ class CharacterAddPopup extends React.Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, characters } = this.props
 
-    const options: React.Node = [
+    const options: ReactNode = [
       <MenuItem key={0} value={0} disabled>
         Select a Character
       </MenuItem>,
@@ -74,9 +72,9 @@ class CharacterAddPopup extends React.Component<Props, State> {
     ]
 
     const currentCharacter = characters.find(
-      (c) => c.id == this.state.characterId,
+      (c) => c.id === this.state.characterId,
     )
-    const hidden = currentCharacter && currentCharacter.hidden
+    const hidden = currentCharacter?.hidden
 
     return (
       <>
@@ -119,7 +117,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   const characters = getMyCharactersWithoutChronicles(state)
   let chronicleName = ''
 
-  if (chronicle.name != undefined) {
+  if (chronicle.name !== undefined) {
     chronicleName = chronicle.name
   }
 
@@ -129,14 +127,11 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Object = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   handleSubmit: (id, charId) =>
     dispatch(addThingToChronicle(id, charId, 'character')),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)
+const enhance = connect(mapStateToProps, mapDispatchToProps)
 
 export default enhance(CharacterAddPopup)

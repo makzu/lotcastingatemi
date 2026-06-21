@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import { Link } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
@@ -7,12 +5,12 @@ import Typography from '@material-ui/core/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 import sharedStyles from '@lca/styles/'
+import type { Battlegroup } from '@lca/types'
 import {
   bgDefenseBonus,
   bgSoak,
   prettyDrillRating,
 } from '@lca/utils/calculated'
-import type { Battlegroup } from '@lca/utils/flow-types'
 import BattlegroupHealthDisplay from '../battlegroups/BattlegroupHealthDisplay.tsx'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'

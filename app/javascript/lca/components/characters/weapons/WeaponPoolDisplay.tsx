@@ -1,12 +1,8 @@
-// @flow
-import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { compose } from 'recompose'
 
 import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
 import { getPoolsForWeapon } from '@lca/selectors'
-import type { fullWeapon } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   container: {
@@ -51,7 +47,7 @@ function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
   }
 
   return (
-    <Fragment>
+    <>
       <PoolDisplay
         pool={pool.close}
         label="Withering Close"
@@ -85,7 +81,7 @@ function RangedWeaponAttacks({ weaponPools, classes }: RangedAttacksProps) {
           classes={poolLineClasses}
         />
       )}
-    </Fragment>
+    </>
   )
 }
 
@@ -117,7 +113,7 @@ function WeaponPoolDisplay({ weaponPools, classes }: WeaponPoolDisplayProps) {
   }
 
   return (
-    <Fragment>
+    <>
       {attackLine}
       <PoolDisplay
         damage
@@ -138,13 +134,10 @@ function WeaponPoolDisplay({ weaponPools, classes }: WeaponPoolDisplayProps) {
           classes={poolLineClasses}
         />
       )}
-    </Fragment>
+    </>
   )
 }
 const mapStateToProps = (state, props) => ({
   weaponPools: getPoolsForWeapon(state, props.weapon.id),
 })
-export default compose(
-  withStyles(styles),
-  connect(mapStateToProps),
-)(WeaponPoolDisplay)
+export default withStyles(styles)(connect(mapStateToProps)(WeaponPoolDisplay))

@@ -1,5 +1,4 @@
-// @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import Button from '@material-ui/core/Button'
@@ -13,14 +12,14 @@ import {
 } from '@lca/ducks/actions.ts'
 import { updateQcAttackSort } from '@lca/ducks/entities/qc_attack'
 import { getAttacksForBattlegroup, getAttacksForQc } from '@lca/selectors'
-import type { Enhancer, QcAttack } from '@lca/utils/flow-types'
+import type { QC, QcAttack } from '@lca/types'
 import QcAttackFields from './QcAttackFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableAttackList = SortableContainer(({ items }) => <div>{items}</div>)
 
 type ExposedProps = {
-  qc: Object
+  qc: QC
   battlegroup?: boolean
 }
 type Props = ExposedProps & {
@@ -32,7 +31,7 @@ type Props = ExposedProps & {
   updateQcAttackSort: Function
 }
 
-class QcAttackEditor extends React.Component<Props> {
+class QcAttackEditor extends Component<Props> {
   handleChange = (id, trait) => {
     this.props.updateQcAttack(id, this.props.qc.id, trait, this.props.type)
   }
@@ -99,7 +98,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   let qc_attacks = []
   let type = 'qc'
 
-  if (qc != undefined) {
+  if (qc !== undefined) {
     if (qc.type === 'battlegroup') {
       type = 'battlegroup'
       qc_attacks = getAttacksForBattlegroup(state, qc.id)
@@ -114,7 +113,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+const enhance = connect(mapStateToProps, {
   updateQcAttack,
   createQcAttack,
   destroyQcAttack,

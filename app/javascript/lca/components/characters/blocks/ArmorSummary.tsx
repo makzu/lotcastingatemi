@@ -1,11 +1,9 @@
-// @flow
-import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
-import type { withArmorStats } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 
 const styles = (theme) => ({
   container: {
@@ -59,7 +57,7 @@ const styles = (theme) => ({
 })
 
 type Props = {
-  character: withArmorStats
+  character: Character
   pools: Object
   classes: Object
 }

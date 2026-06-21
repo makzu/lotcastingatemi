@@ -1,9 +1,6 @@
-// @flow
-import React from 'react'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Typography from '@material-ui/core/Typography'
-import { shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
@@ -11,8 +8,7 @@ import ListAttributeEditor, {
 } from '@lca/components/generic/ListAttributeEditor.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import { isUnequalByKeys } from '@lca/utils'
-import type { Character, Enhancer } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/index.ts'
 
 export const SorceryFields = (
   props: { trait: string } & ListAttributeFieldTypes,
@@ -20,19 +16,17 @@ export const SorceryFields = (
   const { onChange, trait, classes } = props
 
   return (
-    <>
-      <TextField
-        name="ritual"
-        value={trait}
-        className={classes.nameField}
-        label="Ritual"
-        margin="dense"
-        multiline
-        fullWidth
-        maxRows={10}
-        onChange={onChange}
-      />
-    </>
+    <TextField
+      name="ritual"
+      value={trait}
+      className={classes.nameField}
+      label="Ritual"
+      margin="dense"
+      multiline
+      fullWidth
+      maxRows={10}
+      onChange={onChange}
+    />
   )
 }
 
@@ -110,15 +104,4 @@ function SorceryEditor(props: Props) {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, [
-      'is_sorcerer',
-      'is_necromancer',
-      'sorcerous_motes',
-      'necromantic_motes',
-      'rituals',
-    ]),
-)
-
-export default enhance(SorceryEditor)
+export default SorceryEditor

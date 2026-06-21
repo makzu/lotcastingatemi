@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -11,7 +9,6 @@ import Delete from '@material-ui/icons/Delete'
 
 import { destroyChronicle } from '@lca/ducks/actions'
 import { getSpecificChronicle } from '@lca/selectors'
-import type { Enhancer } from '@lca/utils/flow-types'
 
 type ExposedProps = {
   chronicleId: number
@@ -75,7 +72,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   let chronicleName = ''
 
   const chronicle = getSpecificChronicle(state, ownProps.chronicleId)
-  if (chronicle != undefined && chronicle.name != undefined) {
+  if (chronicle !== undefined && chronicle.name !== undefined) {
     chronicleName = chronicle.name
   }
 
@@ -84,8 +81,6 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   destroyChronicle,
-})
-
-export default enhance(ChronicleLeavePopup)
+})(ChronicleLeavePopup)

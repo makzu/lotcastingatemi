@@ -1,14 +1,10 @@
-// @flow
-import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { compose, shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import HealthLevelBoxes from '@lca/components/generic/HealthLevelBoxes.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
-import { isUnequalByKeys } from '@lca/utils'
-import type { Character } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 
 const styles = (theme) => ({
   subheading: {
@@ -116,18 +112,4 @@ function HealthLevelEditor({ character, penalties, onChange, classes }: Props) {
   )
 }
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, nextProps) =>
-    isUnequalByKeys(props.character, nextProps.character, [
-      'damage_bashing',
-      'damage_lethal',
-      'damage_aggravated',
-      'health_level_0s',
-      'health_level_1s',
-      'health_level_2s',
-      'health_level_4s',
-      'health_level_incap',
-    ]),
-  ),
-)(HealthLevelEditor)
+export default withStyles(styles)(HealthLevelEditor)

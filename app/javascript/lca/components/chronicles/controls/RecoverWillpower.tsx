@@ -1,8 +1,4 @@
-// @flow
-import * as React from 'react'
-
-const { Component, Fragment } = React
-
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -48,7 +44,7 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
     const { name, value } = e.target
 
     if (name === 'toRecover') {
-      const val = Math.max(parseInt(value), 0)
+      const val = Math.max(parseInt(value, 10), 0)
       this.setState({ toRecover: val })
     } else {
       this.setState({ [name]: value })
@@ -77,7 +73,7 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
     } = this
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Recover Willpower</Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Recover Willpower</DialogTitle>
@@ -142,7 +138,7 @@ class WillpowerRecoveryPopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

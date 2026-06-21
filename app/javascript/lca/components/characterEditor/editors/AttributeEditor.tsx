@@ -1,18 +1,13 @@
-// @flow
-import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { compose, shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
-import { isUnequalByKeys } from '@lca/utils'
+import type { Character } from '@lca/types/character.ts'
 import {
-  ATTRIBUTES,
   ATTRIBUTE_MAX as MAX,
   ATTRIBUTE_MIN as MIN,
 } from '@lca/utils/constants.ts'
-import type { withAttributes as Character } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   fieldSet: {
@@ -132,13 +127,4 @@ function AttributeEditor(props: Props) {
   )
 }
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, newProps) =>
-    isUnequalByKeys(
-      props.character,
-      newProps.character,
-      ATTRIBUTES.map((a) => a.attr),
-    ),
-  ),
-)(AttributeEditor)
+export default withStyles(styles)(AttributeEditor)

@@ -1,4 +1,3 @@
-// @flow
 import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
@@ -46,7 +45,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
     const { chronicle } = this.state
 
     return (
-      <Fragment>
+      <>
         <ListItem button onClick={handleOpen}>
           <ListItemIcon>
             <ContentAddCircle />
@@ -79,7 +78,7 @@ class ChronicleCreatePopup extends PureComponent<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

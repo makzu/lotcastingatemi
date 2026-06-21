@@ -11,6 +11,7 @@ export interface QcTrait extends WithId, Sortable {
 }
 
 export interface QcStats {
+  essence: number
   join_battle: number
   movement: number
   soak: number
@@ -22,6 +23,8 @@ export interface QcStats {
   parry: number
   senses: number
   armor_name: string
+  portrait_link: string
+  description: string
 }
 
 export interface QcMerit extends QcTrait {
@@ -30,6 +33,18 @@ export interface QcMerit extends QcTrait {
   magical: boolean
   body: string
   ref: string
+}
+
+export interface QcCharm extends QcTrait {
+  name: string
+  cost: string
+  timing: string
+  duration: string
+  keywords: Array<string>
+  min_essence: number
+  body: string
+  ref: string
+  category: string
 }
 
 export interface QcAttack extends WithId, Sortable {
@@ -58,6 +73,5 @@ export interface QC extends PlayerAsset, WithSharedStats, QcStats {
   qc_attacks: number[]
   qc_charms: number[]
   qc_merits: number[]
-  portrait_link: string
   type: 'qc'
 }

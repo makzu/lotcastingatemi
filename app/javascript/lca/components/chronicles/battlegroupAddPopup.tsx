@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react'
+import { Component, type ReactNode } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -16,7 +15,7 @@ import {
   getMyBattlegroupsWithoutChronicles,
   getSpecificChronicle,
 } from '@lca/selectors'
-import type { Battlegroup, Enhancer } from '@lca/utils/flow-types'
+import type { Battlegroup } from '@lca/types/battlegroup.ts'
 
 type ExposedProps = {
   chronicleId: number
@@ -31,7 +30,7 @@ type State = {
   battlegroupId: number
 }
 
-class BattlegroupAddPopup extends React.Component<Props, State> {
+class BattlegroupAddPopup extends Component<Props, State> {
   state = {
     open: false,
     battlegroupId: 0,
@@ -51,7 +50,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
   }
 
   handleSubmit = () => {
-    if (this.state.battlegroupId == 0) return
+    if (this.state.battlegroupId === 0) return
 
     this.setState({ open: false })
     this.props.handleSubmit(this.props.chronicleId, this.state.battlegroupId)
@@ -61,7 +60,7 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, battlegroups } = this.props
 
-    const options: React.Node = [
+    const options: ReactNode = [
       <MenuItem key={0} value={0} disabled>
         Select a Battlegroup
       </MenuItem>,
@@ -74,9 +73,9 @@ class BattlegroupAddPopup extends React.Component<Props, State> {
     ]
 
     const currentBattlegroup = battlegroups.find(
-      (c) => c.id == this.state.battlegroupId,
+      (c) => c.id === this.state.battlegroupId,
     )
-    const hidden = currentBattlegroup && currentBattlegroup.hidden
+    const hidden = currentBattlegroup?.hidden
     return (
       <>
         <Button onClick={handleOpen}>Add Battlegroup</Button>
@@ -118,7 +117,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   const battlegroups = getMyBattlegroupsWithoutChronicles(state)
   let chronicleName = ''
 
-  if (chronicle.name != undefined) {
+  if (chronicle.name !== undefined) {
     chronicleName = chronicle.name
   }
 
@@ -128,14 +127,11 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Object = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   handleSubmit: (id, battlegroupId) =>
     dispatch(addThingToChronicle(id, battlegroupId, 'battlegroup')),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)
+const enhance = connect(mapStateToProps, mapDispatchToProps)
 
 export default enhance(BattlegroupAddPopup)

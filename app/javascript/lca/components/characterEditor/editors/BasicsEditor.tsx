@@ -1,17 +1,13 @@
-// @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { compose, shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import { canIDeleteCharacter } from '@lca/selectors'
-import { isUnequalByKeys } from '@lca/utils'
+import type { Character } from '@lca/types/character.ts'
 import { ESSENCE_MAX, ESSENCE_MIN } from '@lca/utils/constants.ts'
-import type { Character, Enhancer } from '@lca/utils/flow-types'
 
 type ExposedProps = {
   character: Character
@@ -87,17 +83,4 @@ const mapStateToProps = (state, props) => ({
   showPublicCheckbox: canIDeleteCharacter(state, props.character.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  shouldUpdate(
-    (props, nextProps) =>
-      isUnequalByKeys(props.character, nextProps.character, [
-        'name',
-        'essence',
-        'description',
-        'public',
-      ]) || props.showPublicCheckbox !== nextProps.showPublicCheckbox,
-  ),
-)
-
-export default enhance(BasicsEditor)
+export default connect(mapStateToProps)(BasicsEditor)

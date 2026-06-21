@@ -1,9 +1,13 @@
-// @flow
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
+import { Component } from 'react'
+import { type ConnectedProps, connect } from 'react-redux'
+import type { RouteComponentProps } from 'react-router-dom'
+import {
+  createStyles,
+  type Theme,
+  type WithStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { compose } from 'recompose'
 
 import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { fetchBattlegroupIfNecessary } from '@lca/ducks/entities/battlegroup'
@@ -11,7 +15,9 @@ import {
   getAttacksForBattlegroup,
   getSpecificBattlegroup,
 } from '@lca/selectors'
+import type { RootState } from '@lca/store.ts'
 import sharedStyles from '@lca/styles/'
+import type { QcAttack } from '@lca/types/qc.ts'
 import {
   bgAttackPool,
   bgDamage,
@@ -19,7 +25,6 @@ import {
   bgSoak,
   prettyDrillRating,
 } from '@lca/utils/calculated'
-import type { Battlegroup, QcAttack } from '@lca/utils/flow-types'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import MarkdownDisplay from '../generic/MarkdownDisplay.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
@@ -27,56 +32,54 @@ import ResourceDisplay from '../generic/ResourceDisplay.tsx'
 import WillpowerSpendWidget from '../generic/WillpowerSpendWidget.tsx'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.tsx'
 
-const styles = (theme) => ({
-  ...sharedStyles(theme),
-  healthBlock: {
-    paddingTop: theme.spacing(-1),
-    marginRight: theme.spacing(),
-    paddingRight: theme.spacing(-1),
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    marginTop: theme.spacing(),
-    width: '4.5rem',
-    maxHeight: '5.5rem',
-    overflow: 'hidden',
-  },
-  label: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-    display: 'flex',
-  },
-  labelSpan: {
-    alignSelf: 'flex-end',
-  },
-  tags: {
-    ...theme.typography.body1,
-    margin: theme.spacing(),
-    marginLeft: 0,
-    textTransform: 'capitalize',
-    minWidth: '5rem',
-    maxHeight: '5rem',
-    overflow: 'hidden',
-  },
-  portrait: {
-    maxWidth: '100%',
-    display: 'block',
-    margin: 'auto',
-  },
-  portraitWrap: {
-    //textAlign: 'center',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    healthBlock: {
+      paddingTop: theme.spacing(-1),
+      marginRight: theme.spacing(),
+      paddingRight: theme.spacing(-1),
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      marginTop: theme.spacing(),
+      width: '4.5rem',
+      maxHeight: '5.5rem',
+      overflow: 'hidden',
+    },
+    label: {
+      ...theme.typography.body1,
+      fontSize: '0.75rem',
+      fontWeight: 500,
+      opacity: 0.7,
+      display: 'flex',
+    },
+    labelSpan: {
+      alignSelf: 'flex-end',
+    },
+    tags: {
+      ...theme.typography.body1,
+      margin: theme.spacing(),
+      marginLeft: 0,
+      textTransform: 'capitalize',
+      minWidth: '5rem',
+      maxHeight: '5rem',
+      overflow: 'hidden',
+    },
+    portrait: {
+      maxWidth: '100%',
+      display: 'block',
+      margin: 'auto',
+    },
+    portraitWrap: {
+      //textAlign: 'center',
+    },
+  })
 
-type Props = {
-  id: string
-  battlegroup: Battlegroup
-  qc_attacks: Array<QcAttack>
-  classes: Object
-  fetch: Function
-}
+interface Props
+  extends WithStyles<typeof styles>,
+    PropsFromRedux,
+    RouteComponentProps<{ id: string }> {}
 
 class BattlegroupSheet extends Component<Props> {
   componentDidMount() {
@@ -85,7 +88,7 @@ class BattlegroupSheet extends Component<Props> {
 
   render() {
     /* Escape hatch */
-    if (this.props.battlegroup == undefined)
+    if (this.props.battlegroup === undefined)
       return (
         <BlockPaper>
           <Typography paragraph>
@@ -299,7 +302,11 @@ class BattlegroupSheet extends Component<Props> {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={battlegroup.portrait_link} className={classes.portrait} />
+            <img
+              src={battlegroup.portrait_link}
+              className={classes.portrait}
+              alt={`${battlegroup.name} portrait`}
+            />
           </a>
         </div>
       </BlockPaper>
@@ -307,13 +314,16 @@ class BattlegroupSheet extends Component<Props> {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.bgId
+function mapStateToProps(
+  state: RootState,
+  ownProps: RouteComponentProps<{ id: string }>,
+) {
+  const id = parseInt(ownProps.match.params.id, 10)
   const battlegroup = getSpecificBattlegroup(state, id)
 
-  let qc_attacks = []
+  let qc_attacks: QcAttack[] = []
 
-  if (battlegroup != undefined) {
+  if (battlegroup !== undefined) {
     qc_attacks = getAttacksForBattlegroup(state, id)
   }
 
@@ -324,8 +334,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default compose(
-  ProtectedComponent,
-  withStyles(styles),
-  connect(mapStateToProps, { fetch: fetchBattlegroupIfNecessary }),
-)(BattlegroupSheet)
+const connector = connect(mapStateToProps, {
+  fetch: fetchBattlegroupIfNecessary,
+})
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default ProtectedComponent(
+  withStyles(styles)(connector(BattlegroupSheet)),
+)

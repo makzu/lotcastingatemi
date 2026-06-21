@@ -1,5 +1,3 @@
-// @flow
-import React, { Fragment } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
@@ -8,12 +6,12 @@ import RatingField from '@lca/components/generic/RatingField.tsx'
 import AnimaSelect from '@lca/components/shared/selects/AnimaSelect.tsx'
 import AuraSelect from '@lca/components/shared/selects/AuraSelect'
 import commonStyles from '@lca/styles'
+import type { Character } from '@lca/types/index.ts'
 import {
   committedPeripheralMotes,
   committedPersonalMotes,
   showAuraTraits,
 } from '@lca/utils/calculated'
-import type { Character } from '@lca/utils/flow-types'
 import MoteCommittmentEditor from './MoteCommitmentEditor.tsx'
 
 const styles = (theme) => ({
@@ -22,19 +20,19 @@ const styles = (theme) => ({
 
 type Props = { character: Character; onChange: Function; classes: Object }
 function MotePoolEditor({ character, onChange, classes }: Props) {
-  if (character.type == 'Character' && !character.is_sorcerer) return <div />
+  if (character.type === 'Character' && !character.is_sorcerer) return <div />
 
   const showMoteTotalEditors =
-    character.type == 'CustomAttributeCharacter' ||
-    character.type == 'CustomAbilityCharacter' ||
-    character.type == 'CustomEssenceCharacter'
+    character.type === 'CustomAttributeCharacter' ||
+    character.type === 'CustomAbilityCharacter' ||
+    character.type === 'CustomEssenceCharacter'
 
   return (
     <BlockPaper>
       <Typography variant="h6">Mote Pools:</Typography>
       <Typography component="div" className={classes.flexContainerWrap}>
         {character.type !== 'Character' && (
-          <Fragment>
+          <>
             <div className={classes.flexCol}>
               <RatingField
                 trait="motes_personal_current"
@@ -90,7 +88,7 @@ function MotePoolEditor({ character, onChange, classes }: Props) {
                 </span>
               )}
             </div>
-          </Fragment>
+          </>
         )}
         {character.is_sorcerer && (
           <div className={classes.flexCol}>

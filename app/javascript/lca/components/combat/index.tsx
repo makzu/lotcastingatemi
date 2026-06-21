@@ -1,12 +1,10 @@
-// @flow
-import React, { Component, Fragment } from 'react'
+import { Component } from 'react'
 import FlipMove from 'react-flip-move'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
-import { compose } from 'recompose'
 
 import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { endCombat, nextRound } from '@lca/ducks/events'
@@ -23,9 +21,9 @@ import type {
   Battlegroup,
   Character,
   Chronicle,
-  fullQc,
   Player,
-} from '@lca/utils/flow-types'
+  QC,
+} from '@lca/types/index.ts'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import BattlegroupCard from './BattlegroupCombatCard.tsx'
 import CharacterCard from './CharacterCombatCard.tsx'
@@ -47,7 +45,7 @@ type Props = {
   is_st: boolean
   players: Array<Player>
   characters: Array<Character>
-  qcs: Array<fullQc>
+  qcs: Array<QC>
   battlegroups: Array<Battlegroup>
   chronicle: Chronicle
   nextRound: Function
@@ -120,11 +118,11 @@ class CombatDashboard extends Component<Props> {
               {nextCharacter ? nextCharacter.name : 'Round over!'}
               &nbsp;
               {this.props.is_st && (
-                <Fragment>
+                <>
                   <Button onClick={this.onClickNextTurn}>Next Turn</Button>
                   &nbsp;
                   <Button onClick={this.onClickEndCombat}>End Combat</Button>
-                </Fragment>
+                </>
               )}
             </Typography>
           )}
@@ -157,7 +155,6 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default compose(
-  ProtectedComponent,
-  connect(mapStateToProps, { nextRound, endCombat }),
-)(CombatDashboard)
+export default ProtectedComponent(
+  connect(mapStateToProps, { nextRound, endCombat })(CombatDashboard),
+)

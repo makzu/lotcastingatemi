@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core/'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import { endScene } from '@lca/ducks/events'
+import { endScene } from '@lca/ducks/events/index.ts'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
 import Downtime from './controls/Downtime.tsx'
 import RecoverMotes from './controls/RecoverMotes.tsx'

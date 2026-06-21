@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 
 import MoteCommittmentEditor from '@lca/components/characterEditor/editors/MoteCommitmentEditor.tsx'
-import { updateCharacter, updateQc } from '@lca/ducks/actions'
+import { updateCharacter, updateQc } from '@lca/ducks/actions/index.ts'
 import type { WithSharedStats } from '@lca/types/shared.ts'
 
 interface ExposedProps {

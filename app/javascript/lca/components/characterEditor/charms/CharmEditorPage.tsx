@@ -7,27 +7,31 @@ import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import FilterIcon from '@material-ui/icons/FilterList'
 
-import CharacterLoadError from '@lca/components/CharacterSheet/CharacterLoadError'
-import CharmFilter from '@lca/components/CharacterSheet/Charms/CharmFilter'
+import CharacterLoadError from '@lca/components/CharacterSheet/CharacterLoadError.tsx'
+import CharmFilter from '@lca/components/CharacterSheet/Charms/CharmFilter/index.tsx'
 import {
   initialFilters,
   reducer,
 } from '@lca/components/CharacterSheet/Charms/useCharmFilters.ts'
-import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer'
+import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer.tsx'
 import CharmLoadoutSelect from '@lca/components/shared/selects/CharmLoadoutSelect.tsx'
-import { createCharm, createSpell, updateCharacter } from '@lca/ducks/entities'
+import {
+  createCharm,
+  createSpell,
+  updateCharacter,
+} from '@lca/ducks/entities/index.ts'
 import {
   useAppDispatch,
   useAppSelector,
   useDialogLogic,
   useIdFromParams,
-} from '@lca/hooks'
-import { getSpecificCharacter } from '@lca/selectors'
+} from '@lca/hooks/index.ts'
+import { getSpecificCharacter } from '@lca/selectors/index.ts'
 import {
   isCustomCharacter,
   nativeCharmType,
   showLoadoutTraits,
-} from '@lca/utils/calculated'
+} from '@lca/utils/calculated/index.ts'
 import CharmList from './CharmEditorList.tsx'
 import SpellList from './SpellList.tsx'
 

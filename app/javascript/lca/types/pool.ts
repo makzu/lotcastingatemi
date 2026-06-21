@@ -1,4 +1,4 @@
-import type { Ability, Attribute } from './character'
+import type { Ability, Attribute } from './character.ts'
 
 export interface BlockOfPenalties {
   wound: number
@@ -32,16 +32,16 @@ interface PoolBase {
   ability: Ability
   abilityRating: number
   raw: number
-  specialties?: Array<string>
+  specialties?: string[]
   excellency?: number
   excellencyCost?: number
   excellencyStunt?: number
   excellencyStuntCost?: number
-  penalties?: Array<PoolPenalty>
+  penalties?: PoolPenalty[]
   totalPenalty?: number
   total: number | string
-  bonus?: Array<PoolBonus>
-  specialAttacks?: Array<string>
+  bonus?: PoolBonus[]
+  specialAttacks?: string[]
   noSummary?: boolean
 }
 export interface AttackPool extends PoolBase {

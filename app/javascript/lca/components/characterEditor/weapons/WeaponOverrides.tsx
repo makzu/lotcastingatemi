@@ -1,7 +1,7 @@
 import type { ChangeEvent } from 'react'
 import { Box } from '@material-ui/core'
 
-import WeaponAttributeSelect from './WeaponAttributeSelect'
+import WeaponAttributeSelect from './WeaponAttributeSelect.tsx'
 
 const WeaponOverrides = (props) => {
   const { character, weapon, onChange } = props

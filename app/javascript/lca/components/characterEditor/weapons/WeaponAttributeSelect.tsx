@@ -9,8 +9,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import type { Character, Weapon } from '@lca/types'
-import { ATTRIBUTE_NAMES } from '@lca/utils/constants'
+import type { Character, Weapon } from '@lca/types/index.ts'
+import { ATTRIBUTE_NAMES } from '@lca/utils/constants.ts'
 
 const useStyles = makeStyles((theme: Theme) => ({
   capitalize: {

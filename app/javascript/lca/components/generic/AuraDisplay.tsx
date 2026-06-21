@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core/styles'
 
 import { updateCharacter, updateQc } from '@lca/ducks/actions.ts'
-import { canIEditCharacter, canIEditQc } from '@lca/selectors'
+import { canIEditCharacter, canIEditQc } from '@lca/selectors/index.ts'
 import type store from '@lca/store.ts'
 import type { RootState } from '@lca/store.ts'
 import type { Character, QC } from '@lca/types/index.ts'

@@ -5,8 +5,8 @@ import { createRoot } from 'react-dom/client'
 
 import RootContainer from './containers/RootContainer.tsx'
 import { lcaInit } from './ducks/actions.ts'
-import store from './store'
-import history from './utils/history'
+import store from './store.ts'
+import history from './utils/history.ts'
 
 store.dispatch(lcaInit())
 

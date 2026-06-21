@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core/styles'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import commonStyles from '@lca/styles'
+import commonStyles from '@lca/styles/index.ts'
 import type { Weapon } from '@lca/types/index.ts'
 import WeaponPoolDisplay from '../weapons/WeaponPoolDisplay.tsx'
 

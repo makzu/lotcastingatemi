@@ -13,8 +13,8 @@ import { deepEqual } from 'fast-equals'
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import { updateCharacter } from '@lca/ducks/actions.ts'
-import { canIEditCharacter } from '@lca/selectors'
-import commonStyles from '@lca/styles'
+import { canIEditCharacter } from '@lca/selectors/index.ts'
+import commonStyles from '@lca/styles/index.ts'
 import type { Character } from '@lca/types/index.ts'
 
 const styles = (theme) => ({

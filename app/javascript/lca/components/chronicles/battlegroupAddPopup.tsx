@@ -14,14 +14,14 @@ import { addThingToChronicle } from '@lca/ducks/actions.ts'
 import {
   getMyBattlegroupsWithoutChronicles,
   getSpecificChronicle,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { Battlegroup } from '@lca/types/battlegroup.ts'
 
 type ExposedProps = {
   chronicleId: number
 }
 type Props = ExposedProps & {
-  battlegroups: Array<Battlegroup>
+  battlegroups: Battlegroup[]
   chronicleName: string
   handleSubmit: Function
 }

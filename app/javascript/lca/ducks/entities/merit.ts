@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 
-import { createApiActions, createTraitReducer } from './_trait'
-import type { EntityState } from './_types'
+import { createApiActions, createTraitReducer } from './_trait.ts'
+import type { EntityState } from './_types.ts'
 
 export const updateMeritSort = createAction<{ id: number; sorting: number }>(
   'sort/merit',
@@ -24,10 +24,10 @@ export const [createMerit, updateMerit, destroyMerit] =
 /* Selectors */
 import { createCachedSelector } from 're-reselect'
 
-import type { State } from '@lca/ducks'
-import { sortOrderSort } from '@lca/utils'
-import { unwrapped } from './_lib'
-import { getSpecificCharacter } from './character'
+import type { State } from '@lca/ducks/index.ts'
+import { sortOrderSort } from '@lca/utils/index.ts'
+import { unwrapped } from './_lib.ts'
+import { getSpecificCharacter } from './character.ts'
 
 const getMerits = (state: State) => unwrapped(state).merits
 

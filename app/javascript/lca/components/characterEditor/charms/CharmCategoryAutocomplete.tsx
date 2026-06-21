@@ -6,9 +6,9 @@ import {
   createFilterOptions,
 } from '@material-ui/lab'
 
-import { getAllCharmCategoriesForCharacter } from '@lca/ducks/entities'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import type { Character, Charm } from '@lca/types'
+import { getAllCharmCategoriesForCharacter } from '@lca/ducks/entities/index.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import type { Character, Charm } from '@lca/types/index.ts'
 
 interface CCAProps {
   value: Charm['categories']

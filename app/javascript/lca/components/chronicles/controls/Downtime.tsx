@@ -12,7 +12,7 @@ import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
 
 import RatingField from '@lca/components/generic/RatingField.tsx'
-import { downtime } from '@lca/ducks/events'
+import { downtime } from '@lca/ducks/events/index.ts'
 
 type Props = { id: number; downtime: Function }
 type State = {

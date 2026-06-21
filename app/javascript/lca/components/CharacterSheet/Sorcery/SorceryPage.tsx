@@ -4,14 +4,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import { FilterList } from '@material-ui/icons'
 
 import DivWithFilterDrawer from '@lca/components/shared/DivWithFilterDrawer.tsx'
-import { getSpecificCharacter } from '@lca/ducks/entities'
+import { getSpecificCharacter } from '@lca/ducks/entities/index.ts'
 import {
   useAppSelector,
   useDialogLogic,
   useDocumentTitle,
   useIdFromParams,
-} from '@lca/hooks'
-import CharacterLoadError from '../CharacterLoadError'
+} from '@lca/hooks/index.ts'
+import CharacterLoadError from '../CharacterLoadError.tsx'
 import CharmFilter from '../Charms/CharmFilter/CharmFilter.tsx'
 import { initialFilters, reducer } from '../Charms/useCharmFilters.ts'
 import SpellList from './SpellList.tsx'

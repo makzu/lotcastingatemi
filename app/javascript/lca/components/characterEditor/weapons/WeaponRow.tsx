@@ -2,10 +2,10 @@ import { Box, IconButton } from '@material-ui/core'
 import { Edit, RemoveCircle } from '@material-ui/icons'
 
 import WeaponLine from '@lca/components/characters/weapons/WeaponLine.tsx'
-import Handle from '@lca/components/shared/GrabHandle'
-import { destroyWeapon } from '@lca/ducks/actions'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import type { Character, Weapon } from '@lca/types'
+import Handle from '@lca/components/shared/GrabHandle.tsx'
+import { destroyWeapon } from '@lca/ducks/actions/index.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import type { Character, Weapon } from '@lca/types/index.ts'
 
 interface WeaponRowProps {
   character: Character

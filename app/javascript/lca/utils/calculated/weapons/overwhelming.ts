@@ -1,4 +1,4 @@
-import type { Character, Weapon } from '@lca/types'
+import type { Character, Weapon } from '@lca/types/index.ts'
 
 export function weaponOverwhelming(character: Character, weapon: Weapon) {
   let bonus = weapon.bonus_overwhelming

@@ -11,9 +11,9 @@ import {
   doIOwnQc,
   getPenaltiesForQc,
   getPoolsAndRatingsForQc,
-} from '@lca/selectors'
-import type { QC } from '@lca/types'
-import CharacterMenu from '../generic/CharacterMenu'
+} from '@lca/selectors/index.ts'
+import type { QC } from '@lca/types/index.ts'
+import CharacterMenu from '../generic/CharacterMenu/index.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'

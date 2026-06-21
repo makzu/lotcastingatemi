@@ -1,18 +1,18 @@
 import { createAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
 
-import type { RootState } from '@lca/store'
-import { sortOrderSort } from '@lca/utils'
-import { callApi } from '@lca/utils/api'
+import type { RootState } from '@lca/store.ts'
+import { callApi } from '@lca/utils/api.ts'
+import { sortOrderSort } from '@lca/utils/index.ts'
 import {
   createApiActions,
   createConditionalFetchAction,
   createEntityReducer,
   mergeEntity,
-} from './_entity'
-import { crudAction, standardTypes, unwrapped } from './_lib'
-import type { EntityState } from './_types'
-import { getCurrentPlayer } from './player'
+} from './_entity.ts'
+import { crudAction, standardTypes, unwrapped } from './_lib.ts'
+import type { EntityState } from './_types.ts'
+import { getCurrentPlayer } from './player.ts'
 
 const BATTLEGROUP = 'battlegroup'
 

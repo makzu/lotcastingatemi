@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@lca/hooks'
+import { useDocumentTitle } from '@lca/hooks/index.ts'
 
 const DocumentTitle = ({ title }: { title: string }) => {
   useDocumentTitle(title)

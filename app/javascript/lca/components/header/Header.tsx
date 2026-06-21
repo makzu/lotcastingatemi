@@ -4,12 +4,12 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import type { Theme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { drawerWidth } from '@lca/containers/_drawerProperties'
-import BattlegroupHeader from './BattlegroupHeader'
-import CharacterHeader from './CharacterHeader'
-import ChronicleHeader from './ChronicleHeader'
-import LcaDrawerButton from './DrawerButton'
-import QcHeader from './QcHeader'
+import { drawerWidth } from '@lca/containers/_drawerProperties.ts'
+import BattlegroupHeader from './BattlegroupHeader.tsx'
+import CharacterHeader from './CharacterHeader.tsx'
+import ChronicleHeader from './ChronicleHeader.tsx'
+import LcaDrawerButton from './DrawerButton.tsx'
+import QcHeader from './QcHeader.tsx'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -5,13 +5,13 @@ import { Hidden, Tab, Tabs, Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
 
-import type { State } from '@lca/ducks'
-import { amIStOfChronicle, getSpecificChronicle } from '@lca/selectors'
-import type { Chronicle } from '@lca/types'
-import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
-import LcaDrawerButton from './DrawerButton'
-import { GenericHeader } from './Header'
-import { styles } from './HeaderStyles'
+import type { State } from '@lca/ducks/index.ts'
+import { amIStOfChronicle, getSpecificChronicle } from '@lca/selectors/index.ts'
+import type { Chronicle } from '@lca/types/index.ts'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
+import LcaDrawerButton from './DrawerButton.tsx'
+import { GenericHeader } from './Header.tsx'
+import { styles } from './HeaderStyles.ts'
 
 interface Props extends RouteComponentProps<any> {
   id: number
@@ -42,8 +42,8 @@ function ChronicleHeader(props: Props) {
   const tabs = (
     <Tabs className={classes.tabs} value={tabValue} centered>
       <LinkTab label="Characters" to={tabBasePath} />
-      <LinkTab label="Combat" to={tabBasePath + '/combat'} />
-      <LinkTab label="Details" to={tabBasePath + '/details'} />
+      <LinkTab label="Combat" to={`${tabBasePath}/combat`} />
+      <LinkTab label="Details" to={`${tabBasePath}/details`} />
     </Tabs>
   )
 

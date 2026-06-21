@@ -4,13 +4,13 @@ import { Route, Switch } from 'react-router-dom'
 import ChronicleDetailsPage from '@lca/components/chronicles/DetailsPage.tsx'
 import ChronicleDashboard from '@lca/components/chronicles/index.tsx'
 import CombatDashboard from '@lca/components/combat/index.tsx'
-import { fetchChronicle } from '@lca/ducks/actions'
+import { fetchChronicle } from '@lca/ducks/actions/index.ts'
 import {
   fetchChronicleBattlegroups,
   fetchChronicleCharacters,
   fetchChronicleQcs,
-} from '@lca/ducks/entities/chronicle'
-import { isChronicleLoaded } from '@lca/selectors'
+} from '@lca/ducks/entities/chronicle.ts'
+import { isChronicleLoaded } from '@lca/selectors/index.ts'
 
 type ExposedProps = {
   match: { params: { chronicleId: number } }

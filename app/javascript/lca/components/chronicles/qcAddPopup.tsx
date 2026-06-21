@@ -10,15 +10,18 @@ import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
-import { addThingToChronicle } from '@lca/ducks/actions'
-import { getMyQcsWithoutChronicles, getSpecificChronicle } from '@lca/selectors'
+import { addThingToChronicle } from '@lca/ducks/actions/index.ts'
+import {
+  getMyQcsWithoutChronicles,
+  getSpecificChronicle,
+} from '@lca/selectors/index.ts'
 import type { QC } from '@lca/types/qc.ts'
 
 type ExposedProps = {
   chronicleId: number
 }
 type Props = ExposedProps & {
-  qcs: Array<QC>
+  qcs: QC[]
   chronicleName: string
   handleSubmit: Function
 }

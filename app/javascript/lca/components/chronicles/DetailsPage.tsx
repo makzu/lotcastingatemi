@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import { updateChronicle } from '@lca/ducks/entities/chronicle.ts'
 import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
 import useAppSelector from '@lca/hooks/UseAppSelector.ts'
@@ -18,7 +18,7 @@ import {
   getPlayersForChronicle,
   getSpecificChronicle,
   getStorytellerForChronicle,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import ChronicleDeletePopup from './ChronicleDeletePopup.tsx'
 import ChronicleInvitePopup from './ChronicleInvitePopup.tsx'
 import ChronicleLeavePopup from './ChronicleLeavePopup.tsx'

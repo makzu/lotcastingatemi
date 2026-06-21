@@ -1,4 +1,4 @@
-import React, { type ChangeEvent, Component } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 
@@ -30,13 +30,13 @@ class RatingField extends Component<Props, State> {
   }
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (isNaN(parseInt(e.target.value))) {
+    if (Number.isNaN(parseInt(e.target.value, 10))) {
       // $FlowThisIsOkayISwear
       this.setState({ value: e.target.value })
       return
     }
 
-    this.setState({ value: parseInt(e.target.value) })
+    this.setState({ value: parseInt(e.target.value, 10) })
   }
 
   handleFocus = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,12 +44,12 @@ class RatingField extends Component<Props, State> {
   }
 
   handleBlur = (e: FocusEvent) => {
-    if (isNaN(parseInt(this.state.value))) {
+    if (Number.isNaN(parseInt(this.state.value, 10))) {
       this.setState({ value: 0 })
       this.props.onChange({ target: { name: e.target.name, value: 0 } })
     } else {
       this.props.onChange({
-        target: { name: e.target.name, value: parseInt(this.state.value) },
+        target: { name: e.target.name, value: parseInt(this.state.value, 10) },
       })
     }
   }

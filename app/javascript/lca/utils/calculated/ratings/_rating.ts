@@ -1,17 +1,17 @@
-import type { Ability, Attribute, Character } from '@lca/types'
-import type { PoolBonus, PoolPenalty, StaticRating } from '@lca/types/pool'
-import { halfRoundUp } from '@lca/utils'
+import type { Ability, Attribute, Character } from '@lca/types/index.ts'
+import type { PoolBonus, PoolPenalty, StaticRating } from '@lca/types/pool.ts'
+import { halfRoundUp } from '@lca/utils/index.ts'
 import { abil, attr, specialtiesFor } from '..'
-import { maxExcellency } from '../excellencies'
+import { maxExcellency } from '../excellencies/index.ts'
 
 export default function rating(
   name: string,
   character: Character,
   attribute: Attribute,
   ability: Ability,
-  penalties: Array<PoolPenalty>,
-  excellencyAbils: Array<string>,
-  bonus: Array<PoolBonus> = [],
+  penalties: PoolPenalty[],
+  excellencyAbils: string[],
+  bonus: PoolBonus[] = [],
 ): StaticRating {
   const _attr = attr(character, attribute)
   const _abil = abil(character, ability)

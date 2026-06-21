@@ -1,8 +1,8 @@
 import { MenuItem, TextField } from '@material-ui/core'
 import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import type { ExaltType } from '@lca/types'
-import type { WithAura } from '@lca/types/shared'
+import type { ExaltType } from '@lca/types/index.ts'
+import type { WithAura } from '@lca/types/shared.ts'
 
 interface HavingAura extends WithAura {
   type: ExaltType | 'qc'

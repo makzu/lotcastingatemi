@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
-import { unwrapped } from '@lca/ducks/entities/_lib'
-import { getSpecificBattlegroup } from '@lca/ducks/entities/battlegroup'
-import { getCurrentPlayer } from '@lca/ducks/entities/player'
+import { unwrapped } from '@lca/ducks/entities/_lib.ts'
+import { getSpecificBattlegroup } from '@lca/ducks/entities/battlegroup.ts'
+import { getCurrentPlayer } from '@lca/ducks/entities/player.ts'
 
 const doIOwnBattlegroup = createSelector(
   [getCurrentPlayer, getSpecificBattlegroup],

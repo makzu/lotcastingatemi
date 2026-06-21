@@ -4,11 +4,11 @@ import { CssBaseline, Divider, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import LoadingIndicator from '@lca/components/generic/LoadingIndicator.tsx'
-import LcaHeader from '@lca/components/header/Header'
-import NavPanel from '@lca/components/nav/'
-import ErrorBoundary from '@lca/containers/ErrorBoundary'
-import VERSION from '../VERSION'
-import { drawerWidth } from './_drawerProperties'
+import LcaHeader from '@lca/components/header/Header.tsx'
+import NavPanel from '@lca/components/nav/index.tsx'
+import ErrorBoundary from '@lca/containers/ErrorBoundary.tsx'
+import VERSION from '../VERSION.ts'
+import { drawerWidth } from './_drawerProperties.ts'
 
 // Shamelessly stolen from the material-ui drawer demo
 

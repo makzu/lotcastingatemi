@@ -6,8 +6,11 @@ import Typography from '@material-ui/core/Typography'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import { compose } from 'recompose'
 
-import { getPenaltiesForQc, getPoolsAndRatingsForQc } from '@lca/selectors'
-import sharedStyles from '@lca/styles/'
+import {
+  getPenaltiesForQc,
+  getPoolsAndRatingsForQc,
+} from '@lca/selectors/index.ts'
+import sharedStyles from '@lca/styles/index.ts'
 import type { QC } from '@lca/types/qc.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'

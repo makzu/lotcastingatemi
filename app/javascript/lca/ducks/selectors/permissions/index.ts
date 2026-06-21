@@ -1,6 +1,6 @@
-import { canIDeleteBattlegroup, canIEditBattlegroup } from './battlegroup'
-import { canIDeleteCharacter, canIEditCharacter } from './character'
-import { canIDeleteQc, canIEditQc } from './qc'
+import { canIDeleteBattlegroup, canIEditBattlegroup } from './battlegroup.ts'
+import { canIDeleteCharacter, canIEditCharacter } from './character.ts'
+import { canIDeleteQc, canIEditQc } from './qc.ts'
 
 export const canIEdit = {
   battlegroup: canIEditBattlegroup,
@@ -14,7 +14,7 @@ export const canIDelete = {
   qc: canIDeleteQc,
 }
 
-export * from './battlegroup'
-export * from './character'
-export * from './qc'
+export * from './battlegroup.ts'
+export * from './character.ts'
+export * from './qc.ts'
 export { canIEditCharacter }

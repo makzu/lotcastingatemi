@@ -7,15 +7,15 @@ import { Check } from '@material-ui/icons'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import { useAppSelector } from '@lca/hooks'
-import { getSpecificCharacter } from '@lca/selectors'
-import type { Charm } from '@lca/types'
+import { useAppSelector } from '@lca/hooks/index.ts'
+import { getSpecificCharacter } from '@lca/selectors/index.ts'
+import type { Charm } from '@lca/types/index.ts'
 import {
   isInstalledCharm,
   isNativeCharm,
   showLoadoutTraits,
-} from '@lca/utils/calculated'
-import AbbreviatedCharmSummary from './AbbreviatedCharmSummary'
+} from '@lca/utils/calculated/index.ts'
+import AbbreviatedCharmSummary from './AbbreviatedCharmSummary.tsx'
 
 const useStyles = makeStyles((_theme) => ({
   summary: {

@@ -4,9 +4,9 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { fetchQcIfNecessary } from '@lca/ducks/entities/qc'
-import { getSpellsForQc } from '@lca/ducks/selectors'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { fetchQcIfNecessary } from '@lca/ducks/entities/qc.ts'
+import { getSpellsForQc } from '@lca/ducks/selectors/index.ts'
 import {
   canIEditQc,
   getAttacksForQc,
@@ -15,10 +15,10 @@ import {
   getPenaltiesForQc,
   getPoolsAndRatingsForQc,
   getSpecificQc,
-} from '@lca/selectors'
-import sharedStyles from '@lca/styles/'
-import type { QC, QcAttack, QcCharm, QcMerit } from '@lca/types/'
-import { prettyIntimacyRating, qcPool } from '@lca/utils/calculated'
+} from '@lca/selectors/index.ts'
+import sharedStyles from '@lca/styles/index.ts'
+import type { QC, QcAttack, QcCharm, QcMerit } from '@lca/types/index.ts'
+import { prettyIntimacyRating, qcPool } from '@lca/utils/calculated/index.ts'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
@@ -86,10 +86,10 @@ const styles = (theme) => ({
 type Props = {
   id: string
   qc: QC
-  qc_merits: Array<QcMerit>
-  qc_charms: Array<QcCharm>
-  qc_attacks: Array<QcAttack>
-  spells: Array<Object>
+  qc_merits: QcMerit[]
+  qc_charms: QcCharm[]
+  qc_attacks: QcAttack[]
+  spells: Object[]
   pools: Object
   penalties: Object
   classes: Object

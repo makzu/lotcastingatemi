@@ -1,4 +1,4 @@
-import { createApiActions, createTraitReducer } from './_trait'
+import { createApiActions, createTraitReducer } from './_trait.ts'
 
 export default createTraitReducer('poison')
 

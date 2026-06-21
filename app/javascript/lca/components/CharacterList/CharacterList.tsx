@@ -2,14 +2,14 @@ import { SortableElement } from 'react-sortable-hoc'
 import { Grid, Typography } from '@material-ui/core'
 
 import CharacterCard from '@lca/components/characters/CharacterCard.tsx'
-import CharacterCreatePopup from '@lca/components/characters/CharacterCreatePopup'
+import CharacterCreatePopup from '@lca/components/characters/CharacterCreatePopup.tsx'
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { getMyCharacters, updateCharacter } from '@lca/ducks/entities'
-import { updateCharacterSort } from '@lca/ducks/entities/character'
-import { useDocumentTitle } from '@lca/hooks'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { updateCharacterSort } from '@lca/ducks/entities/character.ts'
+import { getMyCharacters, updateCharacter } from '@lca/ducks/entities/index.ts'
+import { useDocumentTitle } from '@lca/hooks/index.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
 
 const SortableItem = SortableElement(({ children }) => children)
 

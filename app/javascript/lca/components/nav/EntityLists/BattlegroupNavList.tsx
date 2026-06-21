@@ -1,10 +1,13 @@
 import { connect } from 'react-redux'
 
-import type { State } from '@lca/ducks'
-import { getMyBattlegroups, getMyPinnedBattlegroups } from '@lca/ducks/entities'
-import type { Battlegroup } from '@lca/types'
-import EntityList from './EntityList'
-import EntityListItem from './EntityListItem'
+import {
+  getMyBattlegroups,
+  getMyPinnedBattlegroups,
+} from '@lca/ducks/entities/index.ts'
+import type { State } from '@lca/ducks/index.ts'
+import type { Battlegroup } from '@lca/types/index.ts'
+import EntityList from './EntityList.tsx'
+import EntityListItem from './EntityListItem.tsx'
 
 interface StateProps {
   battlegroups: Battlegroup[]

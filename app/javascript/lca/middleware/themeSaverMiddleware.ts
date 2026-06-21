@@ -1,7 +1,7 @@
 import type { Middleware } from 'redux'
 
-import { switchTheme } from '@lca/features/themeSlice'
-import type { RootState } from '@lca/store'
+import { switchTheme } from '@lca/features/themeSlice.ts'
+import type { RootState } from '@lca/store.ts'
 
 // Saves changes to the theme to LocalStorage
 

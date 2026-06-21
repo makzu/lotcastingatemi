@@ -1,13 +1,13 @@
 import { useReducer } from 'react'
 
+import type { Timing } from '@lca/types/_lib.ts'
 import type {
   AbilityCharm,
   AttributeCharm,
   Charm,
   NativeCharm,
   Spell,
-} from '@lca/types'
-import type { Timing } from '@lca/types/_lib'
+} from '@lca/types/index.ts'
 
 export interface CharmFilter {
   ability: Array<AbilityCharm['ability'] | AttributeCharm['ability']>

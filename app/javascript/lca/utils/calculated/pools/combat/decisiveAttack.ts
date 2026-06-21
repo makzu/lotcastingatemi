@@ -1,7 +1,7 @@
-import type { Character, Weapon } from '@lca/types'
-import type { BlockOfPenalties } from '@lca/types/pool'
-import { penaltyObject } from '../../index'
-import pool from '../_pool'
+import type { Character, Weapon } from '@lca/types/index.ts'
+import type { BlockOfPenalties } from '@lca/types/pool.ts'
+import { penaltyObject } from '../../index.ts'
+import pool from '../_pool.ts'
 
 const supportedTags = [
   'chopping',
@@ -45,7 +45,7 @@ export function decisiveAttack(
   character: Character,
   weapon: Weapon,
   penalties: BlockOfPenalties,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
 ) {
   let bonus = []
   let specialAttacks = []

@@ -1,5 +1,5 @@
-import type { Character, Weapon } from '@lca/types'
-import type { BlockOfPenalties } from '@lca/types/pool.js'
+import type { Character, Weapon } from '@lca/types/index.ts'
+import type { BlockOfPenalties } from '@lca/types/pool.ts'
 import {
   archeryAccuracyBonus,
   type RangeBonus,
@@ -8,14 +8,14 @@ import {
   siegeAccuracyBonus,
   thrownAccuracyBonus,
   weaponIsRanged,
-} from '../../weapons'
-import decisiveAttack from './decisiveAttack.js'
+} from '../../weapons/index.ts'
+import decisiveAttack from './decisiveAttack.ts'
 
 export function rangedWitheringAttackPool(
   character: Character,
   weapon: Weapon,
   penalties: BlockOfPenalties,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
 ) {
   if (!weaponIsRanged(weapon)) return false
 

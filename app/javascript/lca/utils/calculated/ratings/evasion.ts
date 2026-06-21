@@ -1,13 +1,13 @@
-import type { Character } from '@lca/types'
-import type { BlockOfPenalties } from '@lca/types/pool'
-import { penaltyObject } from '../index'
-import rating from './_rating'
+import type { Character } from '@lca/types/index.ts'
+import type { BlockOfPenalties } from '@lca/types/pool.ts'
+import { penaltyObject } from '../index.ts'
+import rating from './_rating.ts'
 
 export function evasion(
   character: Character,
-  _merits: Array<string>,
+  _merits: string[],
   penalties: BlockOfPenalties,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
 ) {
   const bonfire = character.anima_level === 3
   let bonus = []

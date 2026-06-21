@@ -2,7 +2,7 @@ import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 
 import RatingLine from '@lca/components/generic/RatingLine.tsx'
-import type { Character, Merit } from '@lca/types'
+import type { Character, Merit } from '@lca/types/index.ts'
 
 const styles = (theme) => ({
   meritLine: {

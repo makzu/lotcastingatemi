@@ -11,10 +11,10 @@ import {
   VisibilityOff,
 } from '@material-ui/icons'
 
-import { update } from '@lca/ducks/actions/ByType'
-import { useAppDispatch, useAppSelector } from '@lca/hooks'
-import { canIDelete } from '@lca/selectors'
-import type { MenuItemProps as Props } from './CharacterMenuItem'
+import { update } from '@lca/ducks/actions/ByType.ts'
+import { useAppDispatch, useAppSelector } from '@lca/hooks/index.ts'
+import { canIDelete } from '@lca/selectors/index.ts'
+import type { MenuItemProps as Props } from './CharacterMenuItem.ts'
 
 const CardMenuPin = ({ id, characterType }: Props) => {
   const dispatch = useAppDispatch()

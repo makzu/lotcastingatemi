@@ -10,9 +10,12 @@ import {
   destroyQcAttack,
   updateQcAttack,
 } from '@lca/ducks/actions.ts'
-import { updateQcAttackSort } from '@lca/ducks/entities/qc_attack'
-import { getAttacksForBattlegroup, getAttacksForQc } from '@lca/selectors'
-import type { QC, QcAttack } from '@lca/types'
+import { updateQcAttackSort } from '@lca/ducks/entities/qc_attack.ts'
+import {
+  getAttacksForBattlegroup,
+  getAttacksForQc,
+} from '@lca/selectors/index.ts'
+import type { QC, QcAttack } from '@lca/types/index.ts'
 import QcAttackFields from './QcAttackFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
@@ -23,7 +26,7 @@ type ExposedProps = {
   battlegroup?: boolean
 }
 type Props = ExposedProps & {
-  qc_attacks: Array<QcAttack>
+  qc_attacks: QcAttack[]
   type: 'qc' | 'battlegroup'
   updateQcAttack: Function
   createQcAttack: Function

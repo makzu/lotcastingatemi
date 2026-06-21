@@ -10,8 +10,8 @@ import type {
   QcMerit,
   Spell,
   Weapon,
-} from '@lca/types'
-import type { Player } from './player'
+} from '@lca/types/index.ts'
+import type { Player } from './player.ts'
 
 export interface EntityState {
   currentPlayer: number

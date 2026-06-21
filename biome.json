@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/public"],
+    "includes": ["**", "!**/public", "!**/tmp"],
     "ignoreUnknown": false
   },
   "formatter": {
@@ -17,8 +17,15 @@
     "enabled": true,
     "rules": {
       "preset": "recommended",
-      "complexity": { "noUselessSwitchCase": "off" },
+      "complexity": {
+        "noUselessSwitchCase": "off"
+      },
+      "correctness": {
+        "useImportExtensions": "error"
+      },
       "style": {
+        "useConsistentArrayType": "on",
+
         "useImportType": { "level": "warn", "options": { "style": "auto" } },
         "useFragmentSyntax": "on"
       },
@@ -45,23 +52,11 @@
               ":BLANK_LINE:",
               ["react", "react/**", "react-*", "react-*/**"],
               ["redux", "redux-*", "@reduxjs/**"],
-              [
-                ":PACKAGE:",
-                "!@lca/**",
-                "!components/**",
-                "!containers/**",
-                "!ducks/**",
-                "!hooks/**",
-                "!types/**",
-                "!utils",
-                "!utils/**"
-              ],
+              [":PACKAGE:", "!@lca/**"],
               ":BLANK_LINE:",
               "@material-ui/**",
               ":BLANK_LINE:",
               "@lca/**",
-              ["components/**", "containers/**"],
-              ["ducks/**", "hooks/**", "utils/**"],
               ":ALIAS:",
               ":PATH:"
             ]

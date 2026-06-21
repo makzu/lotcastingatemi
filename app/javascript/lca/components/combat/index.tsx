@@ -6,8 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
 
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { endCombat, nextRound } from '@lca/ducks/events'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { endCombat, nextRound } from '@lca/ducks/events/index.ts'
 import {
   amIStOfChronicle,
   getBattlegroupsForChronicle,
@@ -16,7 +16,7 @@ import {
   getQcsForChronicle,
   getSpecificChronicle,
   getStorytellerForChronicle,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type {
   Battlegroup,
   Character,
@@ -43,10 +43,10 @@ type Props = {
   id: number
   st: Player
   is_st: boolean
-  players: Array<Player>
-  characters: Array<Character>
-  qcs: Array<QC>
-  battlegroups: Array<Battlegroup>
+  players: Player[]
+  characters: Character[]
+  qcs: QC[]
+  battlegroups: Battlegroup[]
   chronicle: Chronicle
   nextRound: Function
   endCombat: Function

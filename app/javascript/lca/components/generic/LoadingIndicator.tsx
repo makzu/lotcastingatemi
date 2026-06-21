@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Slide from '@material-ui/core/Slide'
@@ -6,7 +6,7 @@ import SvgIcon from '@material-ui/core/SvgIcon'
 import { withStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
 
-import DawnSpinner from '@lca/icons/DawnSpinner'
+import DawnSpinner from '@lca/icons/DawnSpinner.tsx'
 
 const styles = (theme) => ({
   wrap: {

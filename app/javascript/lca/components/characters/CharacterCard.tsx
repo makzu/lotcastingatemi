@@ -13,10 +13,10 @@ import {
   canIDeleteCharacter,
   getPenalties,
   getPoolsAndRatings,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { Character } from '@lca/types/index.ts'
-import * as calc from '@lca/utils/calculated'
-import CharacterMenu from '../generic/CharacterMenu'
+import * as calc from '@lca/utils/calculated/index.ts'
+import CharacterMenu from '../generic/CharacterMenu/index.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'

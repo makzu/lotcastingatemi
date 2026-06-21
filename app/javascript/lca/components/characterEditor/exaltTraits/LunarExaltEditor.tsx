@@ -3,10 +3,10 @@ import { MenuItem } from '@material-ui/core'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import type { Character } from '@lca/types'
-import { nonCasteAttributes } from '@lca/utils/calculated'
-import { LUNAR_CASTE_ATTRIBUTES } from '@lca/utils/constants'
-import LunarCasteSelect from './LunarCasteSelect'
+import type { Character } from '@lca/types/index.ts'
+import { nonCasteAttributes } from '@lca/utils/calculated/index.ts'
+import { LUNAR_CASTE_ATTRIBUTES } from '@lca/utils/constants.ts'
+import LunarCasteSelect from './LunarCasteSelect.tsx'
 
 interface Props {
   character: Character

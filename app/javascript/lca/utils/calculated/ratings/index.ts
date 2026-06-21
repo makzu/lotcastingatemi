@@ -1,11 +1,11 @@
-export { evasion } from './evasion.js'
-export { guile } from './guile.js'
-export { hardness } from './hardness.js'
-export { resolve } from './resolve.js'
-export { armorSoak, naturalSoak, soak } from './soak.js'
+export { evasion } from './evasion.ts'
+export { guile } from './guile.ts'
+export { hardness } from './hardness.ts'
+export { resolve } from './resolve.ts'
+export { armorSoak, naturalSoak, soak } from './soak.ts'
 
 type withApp = { attr_appearance: number }
-export function appearanceRating(character: withApp, merits: Array<string>) {
+export function appearanceRating(character: withApp, merits: string[]) {
   let bonus = []
 
   const hideous = merits.find((m) => m.startsWith('hideous'))

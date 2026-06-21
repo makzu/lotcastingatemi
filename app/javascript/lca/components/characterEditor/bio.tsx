@@ -8,13 +8,13 @@ import { compose } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import { updateCharacter } from '@lca/ducks/actions.ts'
-import { getSpecificCharacter } from '@lca/ducks/selectors'
+import { getSpecificCharacter } from '@lca/ducks/selectors/index.ts'
 import type { Character } from '@lca/types/character.ts'
-import { showLunarTraits } from '@lca/utils/calculated'
-import AnimalFormsEditor from './editors/AnimalFormsEditor'
+import { showLunarTraits } from '@lca/utils/calculated/index.ts'
+import AnimalFormsEditor from './editors/AnimalFormsEditor.tsx'
 import XpEditor from './editors/XpEditor.tsx'
 
 type Props = { character: Character; updateCharacter: Function }

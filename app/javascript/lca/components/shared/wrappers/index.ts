@@ -1,4 +1,4 @@
-import LinkListItem from './LinkListItem'
-import NavLinkListItem from './NavLinkListItem'
+import LinkListItem from './LinkListItem.tsx'
+import NavLinkListItem from './NavLinkListItem.tsx'
 
 export { LinkListItem, NavLinkListItem }

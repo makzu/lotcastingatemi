@@ -1,4 +1,4 @@
-import type { Element } from './_lib'
+import type { Element } from './_lib.ts'
 
 /* Stats that PCs and QCs have in common */
 export interface WithCombatStats {

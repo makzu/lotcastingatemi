@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import SecondaryInfo from '@lca/components/shared/SecondaryInfo'
-import type { Spell } from '@lca/types'
+import SecondaryInfo from '@lca/components/shared/SecondaryInfo.tsx'
+import type { Spell } from '@lca/types/index.ts'
 
 const useStyles = makeStyles({
   capitalize: {

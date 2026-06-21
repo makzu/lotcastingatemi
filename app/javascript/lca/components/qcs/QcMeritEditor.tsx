@@ -12,8 +12,8 @@ import {
   destroyQcMerit,
   updateQcMerit,
 } from '@lca/ducks/actions.ts'
-import { updateQcMeritSort } from '@lca/ducks/entities/qc_merit'
-import { getMeritsForQc } from '@lca/selectors'
+import { updateQcMeritSort } from '@lca/ducks/entities/qc_merit.ts'
+import { getMeritsForQc } from '@lca/selectors/index.ts'
 import type { QC, QcMerit } from '@lca/types/qc.ts'
 import QcMeritFields from './QcMeritFields.tsx'
 
@@ -24,7 +24,7 @@ type ExposedProps = {
   classes: Object
 }
 type Props = ExposedProps & {
-  qc_merits: Array<QcMerit>
+  qc_merits: QcMerit[]
   updateQcMerit: Function
   createQcMerit: Function
   destroyQcMerit: Function

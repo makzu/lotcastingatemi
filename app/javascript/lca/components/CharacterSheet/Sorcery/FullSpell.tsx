@@ -9,8 +9,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { ExpandMore } from '@material-ui/icons'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import type { Spell } from '@lca/types'
-import SpellSummaryBlock from './SpellSummaryBlock'
+import type { Spell } from '@lca/types/index.ts'
+import SpellSummaryBlock from './SpellSummaryBlock.tsx'
 
 const useStyles = makeStyles((_theme) => ({
   expandedSummary: {

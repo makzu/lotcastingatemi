@@ -1,4 +1,4 @@
-export { getSpecificCharacter } from '../entities/character'
-export { getMeritsForCharacter } from '../entities/merit'
-export { getSpellsForQc } from '../entities/spell'
-export * from './permissions'
+export { getSpecificCharacter } from '../entities/character.ts'
+export { getMeritsForCharacter } from '../entities/merit.ts'
+export { getSpellsForQc } from '../entities/spell.ts'
+export * from './permissions/index.ts'

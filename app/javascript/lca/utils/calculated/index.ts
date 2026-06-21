@@ -1,8 +1,8 @@
-export * from './_battlegroups'
-export * from './_qcs'
-export * from './pools'
-export * from './pretty'
-export * from './ratings'
+export * from './_battlegroups.ts'
+export * from './_qcs.ts'
+export * from './pools/index.ts'
+export * from './pretty.ts'
+export * from './ratings/index.ts'
 
 import type {
   Ability,
@@ -13,16 +13,16 @@ import type {
   Charm,
   EssenceCharm,
   Specialty,
-} from '@lca/types'
-import type { BlockOfPenalties, PoolPenalty } from '@lca/types/pool'
-import type { WithSharedStats } from '@lca/types/shared'
+} from '@lca/types/index.ts'
+import type { BlockOfPenalties, PoolPenalty } from '@lca/types/pool.ts'
+import type { WithSharedStats } from '@lca/types/shared.ts'
 import {
   ABILITIES_ALL,
   ABILITIES_ALL_NO_MA,
   ATTACK_ABILITIES,
   ATTRIBUTES,
   NON_ATTACK_ABILITIES,
-} from '../constants'
+} from '../constants.ts'
 
 export const attr = (character: Character, attribute: string): number =>
   attribute === 'essence'
@@ -54,7 +54,7 @@ export const abil = (character: Character, ability: string): number => {
 export const specialtiesFor = (
   character: Character,
   ability: string,
-): Array<string> => {
+): string[] => {
   let abili = ability
   if (abili.startsWith('martial arts')) abili = 'martial_arts'
   else if (abili.startsWith('craft')) abili = 'craft'
@@ -73,10 +73,7 @@ export const totalHealthLevels = (character: WithSharedStats) =>
   character.health_level_4s +
   character.health_level_incap
 
-export function woundPenalty(
-  character: WithSharedStats,
-  merits: Array<string>,
-) {
+export function woundPenalty(character: WithSharedStats, merits: string[]) {
   const totalDmg =
     character.damage_bashing +
     character.damage_lethal +

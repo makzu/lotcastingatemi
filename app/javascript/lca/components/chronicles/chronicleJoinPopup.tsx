@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import TextField from '@material-ui/core/TextField'
 import GroupAdd from '@material-ui/icons/GroupAdd'
 
-import { joinChronicle } from '@lca/ducks/actions'
+import { joinChronicle } from '@lca/ducks/actions/index.ts'
 
 type Props = { joinChronicle: Function }
 type State = { open: boolean; code: string }

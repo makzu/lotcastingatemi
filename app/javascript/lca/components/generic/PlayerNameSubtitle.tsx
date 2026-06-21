@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 
-import { getSpecificPlayer } from '@lca/selectors'
+import { getSpecificPlayer } from '@lca/selectors/index.ts'
 import type { RootState } from '@lca/store.ts'
 
 type ExposedProps = {

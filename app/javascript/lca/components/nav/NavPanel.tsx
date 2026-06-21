@@ -12,16 +12,20 @@ import type { Location } from 'history'
 
 import CharacterSheetNav from '@lca/components/CharacterSheet/CharacterSheetNav.tsx'
 import CharacterEditorNav from '@lca/components/characterEditor/CharacterEditorNav.tsx'
-import { NavLinkListItem } from '@lca/components/shared/wrappers/'
-import ErrorBoundary from '@lca/containers/ErrorBoundary'
+import { NavLinkListItem } from '@lca/components/shared/wrappers/index.ts'
+import ErrorBoundary from '@lca/containers/ErrorBoundary.tsx'
 import iconDiscordBlack from '@lca/icons/Discord-Symbol-Black.svg'
 import iconDiscordWhite from '@lca/icons/Discord-Symbol-White.svg'
 import iconGithubBlack from '@lca/icons/GitHub_Invertocat_Black.svg'
 import iconGithubWhite from '@lca/icons/GitHub_Invertocat_White.svg'
 import iconPatreonBlack from '@lca/icons/PATREON_SYMBOL_1_BLACK_RGB.svg'
 import iconPatreonWhite from '@lca/icons/PATREON_SYMBOL_1_WHITE_RGB.svg'
-import ChronicleNavList from './ChronicleNavList'
-import { BattlegroupNavList, CharacterNavList, QcNavList } from './EntityLists/'
+import ChronicleNavList from './ChronicleNavList.tsx'
+import {
+  BattlegroupNavList,
+  CharacterNavList,
+  QcNavList,
+} from './EntityLists/index.tsx'
 import HtmlLinkListItem from './HtmlLinkListItem.tsx'
 import NavPanelLogout from './NavPanelLogout.tsx'
 import NavPanelThemeSwitch from './NavPanelThemeSwitch.tsx'

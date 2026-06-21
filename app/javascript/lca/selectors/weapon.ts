@@ -1,19 +1,19 @@
 import { createCachedSelector } from 're-reselect'
 import { createSelector } from 'reselect'
 
-import type { RootState } from '@lca/store'
-import { excellencyAbils } from '@lca/utils/calculated/excellencies/index'
-import { decisiveAttack } from '@lca/utils/calculated/pools/combat/decisiveAttack'
-import { witheringAttack } from '@lca/utils/calculated/pools/combat/witheringAttack'
-import { witheringDamage } from '@lca/utils/calculated/pools/combat/witheringDamage'
-import { rangedWitheringAttackPool } from '@lca/utils/calculated/pools/combat/witheringRanged'
-import { parry } from '@lca/utils/calculated/ratings/parry'
-import { getPenalties } from './character'
+import type { RootState } from '@lca/store.ts'
+import { excellencyAbils } from '@lca/utils/calculated/excellencies/index.ts'
+import { decisiveAttack } from '@lca/utils/calculated/pools/combat/decisiveAttack.ts'
+import { witheringAttack } from '@lca/utils/calculated/pools/combat/witheringAttack.ts'
+import { witheringDamage } from '@lca/utils/calculated/pools/combat/witheringDamage.ts'
+import { rangedWitheringAttackPool } from '@lca/utils/calculated/pools/combat/witheringRanged.ts'
+import { parry } from '@lca/utils/calculated/ratings/parry.ts'
+import { getPenalties } from './character.ts'
 import {
   getMartialArtsCharmsForCharacter,
   getNativeCharmsForCharacter,
-} from './charm'
-import { entities } from './entities'
+} from './charm.ts'
+import { entities } from './entities.ts'
 
 const getState = (state: RootState) => state
 

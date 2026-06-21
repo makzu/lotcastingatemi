@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core/styles'
 
 import type { Character, QC } from '@lca/types/index.ts'
-import { totalHealthLevels as totalLevels } from '@lca/utils/calculated'
+import { totalHealthLevels as totalLevels } from '@lca/utils/calculated/index.ts'
 
 const styles = (theme: Theme) =>
   createStyles({

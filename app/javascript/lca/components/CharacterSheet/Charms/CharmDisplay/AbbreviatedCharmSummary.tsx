@@ -2,8 +2,8 @@ import Collapse from '@material-ui/core/Collapse'
 import Typography from '@material-ui/core/Typography'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import type { Charm } from '@lca/types'
-import { PrereqSummaryLine } from './PrereqSummaryLine'
+import type { Charm } from '@lca/types/index.ts'
+import { PrereqSummaryLine } from './PrereqSummaryLine.tsx'
 
 type BlockProps = { charm: Charm; isOpen: boolean }
 const CharmSummaryBlock = ({ charm, isOpen }: BlockProps) => {

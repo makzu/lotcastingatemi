@@ -12,13 +12,17 @@ const ChronicleWrapper = lazy(
 )
 
 const ContentList = lazy(() => import('@lca/components/pages/ContentList.tsx'))
-const CharacterList = lazy(() => import('@lca/components/CharacterList/'))
+const CharacterList = lazy(
+  () => import('@lca/components/CharacterList/index.tsx'),
+)
 const QcList = lazy(() => import('@lca/components/qcs/QcList.tsx'))
 const BattlegroupList = lazy(
   () => import('@lca/components/battlegroups/BattlegroupList.tsx'),
 )
 
-const CharacterSheetWrap = lazy(() => import('@lca/components/CharacterSheet/'))
+const CharacterSheetWrap = lazy(
+  () => import('@lca/components/CharacterSheet/index.tsx'),
+)
 
 const CharacterEditor = lazy(
   () => import('@lca/components/characterEditor/CharacterEditorWrapper.tsx'),
@@ -36,7 +40,9 @@ const BattlegroupEditor = lazy(
   () => import('@lca/components/battlegroups/editor.tsx'),
 )
 
-const ResourcesPage = lazy(() => import('@lca/components/pages/ResourcesPage'))
+const ResourcesPage = lazy(
+  () => import('@lca/components/pages/ResourcesPage.tsx'),
+)
 
 const HelpPage = lazy(() => import('@lca/components/pages/Help.tsx'))
 

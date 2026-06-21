@@ -15,26 +15,26 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import ResponsiveFilterDrawer from '@lca/components/shared/ResponsiveFilterDrawer'
-import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect'
+import ResponsiveFilterDrawer from '@lca/components/shared/ResponsiveFilterDrawer.tsx'
+import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect.tsx'
 import {
   getAllAbilitiesWithCharmsForCharacter as getAbilities,
   getAllCharmCategoriesForCharacter as getCategories,
   getAllCharmKeywordsForCharacter as getKeywords,
   getAllCharmLoadoutsForCharacter as getLoadouts,
   getSpecificCharacter,
-} from '@lca/ducks/entities'
-import { useAppSelector } from '@lca/hooks'
+} from '@lca/ducks/entities/index.ts'
+import { useAppSelector } from '@lca/hooks/index.ts'
+import type { Timing } from '@lca/types/_lib.ts'
 import type {
   AbilityCharm,
   AttributeCharm,
   Character,
   Charm,
   NativeCharm,
-} from '@lca/types'
-import type { Timing } from '@lca/types/_lib'
-import { showLoadoutTraits } from '@lca/utils/calculated'
-import type { CharmFilter, CharmFilterAction } from '../useCharmFilters'
+} from '@lca/types/index.ts'
+import { showLoadoutTraits } from '@lca/utils/calculated/index.ts'
+import type { CharmFilter, CharmFilterAction } from '../useCharmFilters.ts'
 
 const useStyles = makeStyles((theme: Theme) => ({
   label: {

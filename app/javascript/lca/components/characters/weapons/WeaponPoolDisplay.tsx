@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 
 import PoolDisplay from '@lca/components/generic/PoolDisplay.tsx'
-import { getPoolsForWeapon } from '@lca/selectors'
+import { getPoolsForWeapon } from '@lca/selectors/index.ts'
 
 const styles = (theme) => ({
   container: {

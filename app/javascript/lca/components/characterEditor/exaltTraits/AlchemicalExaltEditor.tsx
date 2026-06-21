@@ -3,9 +3,9 @@ import { Typography } from '@material-ui/core'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import type { Character } from '@lca/types'
-import { nonCasteAttributes } from '@lca/utils/calculated'
-import AlchemicalCasteSelect from './AlchemicalCasteSelect'
+import type { Character } from '@lca/types/index.ts'
+import { nonCasteAttributes } from '@lca/utils/calculated/index.ts'
+import AlchemicalCasteSelect from './AlchemicalCasteSelect.tsx'
 
 interface Props {
   character: Character

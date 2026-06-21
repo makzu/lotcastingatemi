@@ -1,5 +1,5 @@
-import type { QC, QcMerit } from '@lca/types'
-import type { PoolBonus } from '@lca/types/pool'
+import type { QC, QcMerit } from '@lca/types/index.ts'
+import type { PoolBonus } from '@lca/types/pool.ts'
 
 function qcExcellencyPoolCap(qc: QC, pool: number, stunt = false) {
   if (stunt && qc.excellency !== 'lunar') return 0
@@ -67,7 +67,7 @@ export function qcPool(
   qc: QC,
   pool: number,
   penalties: number = 0,
-  merits: Array<PoolBonus> = [],
+  merits: PoolBonus[] = [],
   addExcellency: boolean = true,
 ) {
   const excellency = addExcellency ? qcExcellencyPoolCap(qc, pool) : 0
@@ -90,7 +90,7 @@ export function qcRating(
   qc: QC,
   rating: number,
   penalties: number = 0,
-  merits: Array<QcMerit> = [],
+  merits: QcMerit[] = [],
   addExcellency: boolean = true,
 ) {
   const excellency = addExcellency ? qcExcellencyRatingCap(qc, rating) : 0

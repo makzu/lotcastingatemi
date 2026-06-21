@@ -1,11 +1,14 @@
 import { connect } from 'react-redux'
 
-import type { State } from '@lca/ducks'
-import { getMyCharacters, getMyPinnedCharacters } from '@lca/ducks/entities'
-import type { Character } from '@lca/types'
-import { prettyCompactExaltType } from '@lca/utils/calculated'
-import EntityList from './EntityList'
-import EntityListItem from './EntityListItem'
+import {
+  getMyCharacters,
+  getMyPinnedCharacters,
+} from '@lca/ducks/entities/index.ts'
+import type { State } from '@lca/ducks/index.ts'
+import type { Character } from '@lca/types/index.ts'
+import { prettyCompactExaltType } from '@lca/utils/calculated/index.ts'
+import EntityList from './EntityList.tsx'
+import EntityListItem from './EntityListItem.tsx'
 
 interface StateProps {
   characters: Character[]

@@ -1,3 +1,3 @@
-import AdvancementPage from './AdvancementPage'
+import AdvancementPage from './AdvancementPage.tsx'
 
 export default AdvancementPage

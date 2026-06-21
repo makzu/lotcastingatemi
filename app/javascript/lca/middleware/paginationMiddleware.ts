@@ -1,5 +1,6 @@
 import type { Middleware } from 'redux'
 
+import { crudAction } from '@lca/ducks/entities/_lib.ts'
 import {
   fetchAllBattlegroups,
   fetchAllCharacters,
@@ -7,9 +8,8 @@ import {
   fetchChronicleBattlegroups,
   fetchChronicleCharacters,
   fetchChronicleQcs,
-} from '@lca/ducks/entities'
-import { crudAction } from '@lca/ducks/entities/_lib'
-import type { RootState } from '@lca/store'
+} from '@lca/ducks/entities/index.ts'
+import type { RootState } from '@lca/store.ts'
 
 // Detects incomplete paginated requests and requests the next page
 // biome-ignore lint/complexity/noBannedTypes: https://redux.js.org/usage/usage-with-typescript#type-checking-middleware

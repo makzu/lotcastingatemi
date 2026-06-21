@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { clamp, halfRoundDown, halfRoundUp } from './math'
+import { clamp, halfRoundDown, halfRoundUp } from './math.ts'
 
 describe('Clamp', () => {
   it('should clamp a number between a minimum and maximum value', () => {

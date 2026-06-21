@@ -52,20 +52,20 @@ export {
   updateQcMerit,
   updateSpell,
   updateWeapon,
-} from './entities'
-export { logout } from './session'
+} from './entities/index.ts'
+export { logout } from './session.ts'
 
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 import type { Dispatch } from 'redux'
 
-import type { State } from '@lca/ducks'
-import UpdatesCable from '@lca/utils/cable.js'
+import type { State } from '@lca/ducks/index.ts'
+import UpdatesCable from '@lca/utils/cable.ts'
 import {
   fetchAllBattlegroups,
   fetchAllCharacters,
   fetchAllQcs,
   fetchCurrentPlayer,
-} from './entities'
+} from './entities/index.ts'
 
 export const INIT = 'lca/app/INIT'
 

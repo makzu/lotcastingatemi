@@ -8,15 +8,15 @@ import ListAttributeEditor, {
 } from '@lca/components/generic/ListAttributeEditor.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import commonStyles from '@lca/styles'
-import type { Character } from '@lca/types'
-import { isUnequalByKeys } from '@lca/utils'
+import commonStyles from '@lca/styles/index.ts'
+import type { Character } from '@lca/types/index.ts'
 import {
   solarXpName,
   spentBp,
   spentSolarXp,
   spentXp,
-} from '@lca/utils/calculated'
+} from '@lca/utils/calculated/index.ts'
+import { isUnequalByKeys } from '@lca/utils/index.ts'
 
 const styles = (theme) => ({
   ...commonStyles(theme),

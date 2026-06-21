@@ -4,12 +4,15 @@ import { Grid, Typography } from '@material-ui/core'
 import BattlegroupCard from '@lca/components/battlegroups/BattlegroupCard.tsx'
 import BattlegroupCreatePopup from '@lca/components/battlegroups/BattlegroupCreatePopup.tsx'
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
-import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { getMyBattlegroups, updateBattlegroup } from '@lca/ducks/entities'
-import { updateBattlegroupSort } from '@lca/ducks/entities/battlegroup'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { updateBattlegroupSort } from '@lca/ducks/entities/battlegroup.ts'
+import {
+  getMyBattlegroups,
+  updateBattlegroup,
+} from '@lca/ducks/entities/index.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
 
 const SortableItem = SortableElement(({ children }) => children)
 

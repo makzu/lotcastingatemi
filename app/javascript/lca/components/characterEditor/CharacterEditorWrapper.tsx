@@ -1,9 +1,9 @@
 import { Route, Switch } from 'react-router-dom'
 
-import CharacterEditor from './'
-import BioEditor from './bio'
-import CharmEditor from './charms'
-import MeritEditor from './merits/MeritEditor'
+import BioEditor from './bio.tsx'
+import CharmEditor from './charms/index.tsx'
+import CharacterEditor from './index.tsx'
+import MeritEditor from './merits/MeritEditor.tsx'
 
 const CharacterEditorWrapper = () => (
   <Switch>

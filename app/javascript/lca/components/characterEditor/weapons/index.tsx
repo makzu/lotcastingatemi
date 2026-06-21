@@ -4,14 +4,14 @@ import { Button, Divider, Typography } from '@material-ui/core'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import { createWeapon, updateWeapon } from '@lca/ducks/actions'
-import { getWeaponsForCharacter } from '@lca/ducks/entities'
-import { updateWeaponSort } from '@lca/ducks/entities/weapon'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import type { Character } from '@lca/types'
-import WeaponEditorPopup from './WeaponEditorPopup'
-import WeaponRow from './WeaponRow'
+import { createWeapon, updateWeapon } from '@lca/ducks/actions/index.ts'
+import { getWeaponsForCharacter } from '@lca/ducks/entities/index.ts'
+import { updateWeaponSort } from '@lca/ducks/entities/weapon.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import type { Character } from '@lca/types/index.ts'
+import WeaponEditorPopup from './WeaponEditorPopup.tsx'
+import WeaponRow from './WeaponRow.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
 const SortableWeaponList = SortableContainer(({ items }) => <div>{items}</div>)

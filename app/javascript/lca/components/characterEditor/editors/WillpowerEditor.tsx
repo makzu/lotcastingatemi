@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
-import commonStyles from '@lca/styles'
+import commonStyles from '@lca/styles/index.ts'
 import type { Character } from '@lca/types/index.ts'
 import { WILLPOWER_MAX } from '@lca/utils/constants.ts'
 import ResourceEditor from './ResourceEditor.tsx'

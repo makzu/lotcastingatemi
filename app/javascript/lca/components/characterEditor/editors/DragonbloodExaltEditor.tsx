@@ -3,8 +3,8 @@ import Typography from '@material-ui/core/Typography'
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import type { Character } from '@lca/types/character.ts'
-import { nonCasteAbilities } from '@lca/utils/calculated'
-import DbAspectSelect from '../exaltTraits/DbAspectSelect'
+import { nonCasteAbilities } from '@lca/utils/calculated/index.ts'
+import DbAspectSelect from '../exaltTraits/DbAspectSelect.tsx'
 
 type Props = { character: Character; onChange: Function }
 function DragonbloodExaltEditor({ character, onChange }: Props) {

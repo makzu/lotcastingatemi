@@ -10,16 +10,16 @@ import CharacterCard from '@lca/components/characters/CharacterCard.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import QcCard from '@lca/components/qcs/QcCard.tsx'
-import DocumentTitle from '@lca/components/shared/DocumentTitle'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import {
   updateBattlegroup,
   updateCharacter,
   updateQc,
 } from '@lca/ducks/actions.ts'
-import { updateBattlegroupChronicleSort } from '@lca/ducks/entities/battlegroup'
-import { updateCharacterChronicleSort } from '@lca/ducks/entities/character'
-import { updateQcChronicleSort } from '@lca/ducks/entities/qc'
+import { updateBattlegroupChronicleSort } from '@lca/ducks/entities/battlegroup.ts'
+import { updateCharacterChronicleSort } from '@lca/ducks/entities/character.ts'
+import { updateQcChronicleSort } from '@lca/ducks/entities/qc.ts'
 import {
   amIStOfChronicle,
   getBattlegroupsForChronicle,
@@ -28,12 +28,12 @@ import {
   getQcsForChronicle,
   getSpecificChronicle,
   getStorytellerForChronicle,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import BattlegroupAddPopup from './battlegroupAddPopup.tsx'
 import CharacterAddPopup from './characterAddPopup.tsx'
 import QcAddPopup from './qcAddPopup.tsx'
-import STControls from './StControls'
+import STControls from './StControls.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
 
@@ -42,10 +42,10 @@ type Props = {
   id: string
   st: Object
   is_st: boolean
-  players: Array<Object>
-  characters: Array<Character>
-  qcs: Array<QC>
-  battlegroups: Array<Battlegroup>
+  players: Object[]
+  characters: Character[]
+  qcs: QC[]
+  battlegroups: Battlegroup[]
   chronicle: Object
   updateCharacter: Function
   updateQc: Function

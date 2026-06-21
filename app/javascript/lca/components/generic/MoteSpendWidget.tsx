@@ -12,13 +12,13 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import { spendMotes } from '@lca/ducks/events/index.ts'
-import { canIEditCharacter, canIEditQc } from '@lca/selectors'
+import { canIEditCharacter, canIEditQc } from '@lca/selectors/index.ts'
 import type { WithSharedStats } from '@lca/types/shared.ts'
 import {
   committedPeripheralMotes,
   committedPersonalMotes,
   prettyAnimaLevel,
-} from '@lca/utils/calculated'
+} from '@lca/utils/calculated/index.ts'
 import { clamp } from '@lca/utils/math.ts'
 import MoteCommitmentPopup from './MoteCommitmentPopup.tsx'
 import RatingField from './RatingField.tsx'
@@ -118,7 +118,7 @@ class MoteSpendWidget extends Component<Props, State> {
     let { commit } = this.state
 
     if (name === 'toSpend') {
-      const val = parseInt(value)
+      const val = parseInt(value, 10)
       commit = this.state.toSpend + val <= 0 ? false : commit
       this.setState({ toSpend: val, commit: commit })
     } else {

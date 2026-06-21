@@ -7,16 +7,16 @@ import {
   getCharactersForChronicle,
   getMeritNamesForCharacter,
   getQcsForChronicle,
-} from '@lca/selectors'
-import type { RootState as State } from '@lca/store'
-import type { Battlegroup, Character, QC } from '@lca/types'
-import type { WithSharedStats } from '@lca/types/shared'
+} from '@lca/selectors/index.ts'
+import type { RootState as State } from '@lca/store.ts'
+import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
+import type { WithSharedStats } from '@lca/types/shared.ts'
 import {
   committedPeripheralMotes,
   committedPersonalMotes,
-} from '@lca/utils/calculated'
-import { healthRecoverObject } from './healing.js'
-import { updateEvent } from './index.js'
+} from '@lca/utils/calculated/index.ts'
+import { healthRecoverObject } from './healing.ts'
+import { updateEvent } from './index.ts'
 
 const endSceneObject = (c: Partial<Character | QC>) => {
   const obj: Partial<Character | QC> = {}

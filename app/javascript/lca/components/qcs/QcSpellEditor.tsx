@@ -5,13 +5,17 @@ import type { WithStyles } from '@material-ui/core/styles'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
-import Checkbox from '@lca/components/shared/inputs/Checkbox'
-import type { State } from '@lca/ducks'
-import { createSpell, destroySpell, updateSpell } from '@lca/ducks/actions'
-import { getSpellsForQc } from '@lca/ducks/selectors'
-import type commonStyles from '@lca/styles'
-import type { QC, Spell } from '@lca/types'
-import QcSpellFields from './QcSpellFields'
+import Checkbox from '@lca/components/shared/inputs/Checkbox.tsx'
+import {
+  createSpell,
+  destroySpell,
+  updateSpell,
+} from '@lca/ducks/actions/index.ts'
+import type { State } from '@lca/ducks/index.ts'
+import { getSpellsForQc } from '@lca/ducks/selectors/index.ts'
+import type commonStyles from '@lca/styles/index.ts'
+import type { QC, Spell } from '@lca/types/index.ts'
+import QcSpellFields from './QcSpellFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
 

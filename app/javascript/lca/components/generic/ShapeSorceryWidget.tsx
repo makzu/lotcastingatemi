@@ -16,8 +16,8 @@ import {
   updateBattlegroup,
   updateCharacter,
   updateQc,
-} from '@lca/ducks/actions'
-import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
+} from '@lca/ducks/actions/index.ts'
+import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors/index.ts'
 import type store from '@lca/store.ts'
 import type { RootState } from '@lca/store.ts'
 

@@ -9,14 +9,14 @@ import {
 } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { fetchBattlegroupIfNecessary } from '@lca/ducks/entities/battlegroup'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { fetchBattlegroupIfNecessary } from '@lca/ducks/entities/battlegroup.ts'
 import {
   getAttacksForBattlegroup,
   getSpecificBattlegroup,
-} from '@lca/selectors'
+} from '@lca/selectors/index.ts'
 import type { RootState } from '@lca/store.ts'
-import sharedStyles from '@lca/styles/'
+import sharedStyles from '@lca/styles/index.ts'
 import type { QcAttack } from '@lca/types/qc.ts'
 import {
   bgAttackPool,
@@ -24,7 +24,7 @@ import {
   bgDefenseBonus,
   bgSoak,
   prettyDrillRating,
-} from '@lca/utils/calculated'
+} from '@lca/utils/calculated/index.ts'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import MarkdownDisplay from '../generic/MarkdownDisplay.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'

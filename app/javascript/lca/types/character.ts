@@ -1,5 +1,5 @@
-import type { PlayerAsset, Weight } from './_lib'
-import type { WithSharedStats } from './shared'
+import type { PlayerAsset, Weight } from './_lib.ts'
+import type { WithSharedStats } from './shared.ts'
 
 export type Ability =
   | 'archery'

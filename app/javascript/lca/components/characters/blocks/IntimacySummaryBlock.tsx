@@ -1,7 +1,7 @@
 import { Divider, Typography } from '@material-ui/core'
 import { VisibilityOff } from '@material-ui/icons'
 
-import type { Character } from '@lca/types'
+import type { Character } from '@lca/types/index.ts'
 import type { Intimacy } from '@lca/types/shared.ts'
 import BlockPaper from '../../generic/BlockPaper.tsx'
 import RatingLine from '../../generic/RatingLine.tsx'

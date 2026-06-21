@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 
-import { getSpellsForCharacter } from '@lca/ducks/entities'
-import { useAppSelector } from '@lca/hooks'
-import type { Character, Spell } from '@lca/types'
-import { type CharmFilter, filterCharms } from '../Charms/useCharmFilters'
-import FullSpellDisplay from '../Sorcery/FullSpell'
+import { getSpellsForCharacter } from '@lca/ducks/entities/index.ts'
+import { useAppSelector } from '@lca/hooks/index.ts'
+import type { Character, Spell } from '@lca/types/index.ts'
+import { type CharmFilter, filterCharms } from '../Charms/useCharmFilters.ts'
+import FullSpellDisplay from '../Sorcery/FullSpell.tsx'
 
 interface ExposedProps {
   id: Character['id']

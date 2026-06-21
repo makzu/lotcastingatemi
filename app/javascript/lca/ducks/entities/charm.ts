@@ -1,18 +1,18 @@
 import { createAction } from '@reduxjs/toolkit'
 import { createCachedSelector } from 're-reselect'
 
-import type { RootState } from '@lca/store'
+import type { RootState } from '@lca/store.ts'
 import type {
   Evocation,
   MartialArtsCharm,
   NativeCharm,
   SpiritCharm,
-} from '@lca/types'
-import { sortOrderSort } from '@lca/utils'
-import { unwrapped } from './_lib'
-import { createApiActions, createTraitReducer } from './_trait'
-import type { EntityState } from './_types'
-import { getSpecificCharacter } from './character'
+} from '@lca/types/index.ts'
+import { sortOrderSort } from '@lca/utils/index.ts'
+import { unwrapped } from './_lib.ts'
+import { createApiActions, createTraitReducer } from './_trait.ts'
+import type { EntityState } from './_types.ts'
+import { getSpecificCharacter } from './character.ts'
 
 export const updateCharmSort = createAction<{ id: number; sorting: number }>(
   'sort/charm',

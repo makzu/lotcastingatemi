@@ -4,13 +4,13 @@ import { Drawer, Hidden, type Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { compose } from 'recompose'
 
-import type { State } from '@lca/ducks'
-import { getCurrentPlayer } from '@lca/ducks/entities'
-import { closeDrawer } from '@lca/features/drawerSlice'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import { drawerWidth } from '../../containers/_drawerProperties'
-import NavPanel from './NavPanel'
+import { getCurrentPlayer } from '@lca/ducks/entities/index.ts'
+import type { State } from '@lca/ducks/index.ts'
+import { closeDrawer } from '@lca/features/drawerSlice.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import { drawerWidth } from '../../containers/_drawerProperties.ts'
+import NavPanel from './NavPanel.tsx'
 
 // Shamelessly stolen from the material-ui drawer demo
 

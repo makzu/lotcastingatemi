@@ -8,17 +8,21 @@ import {
 } from '@material-ui/core/styles'
 import { compose } from 'recompose'
 
-import animalFormsList from '@lca/components/characterEditor/editors/AnimalFormsList'
+import animalFormsList from '@lca/components/characterEditor/editors/AnimalFormsList.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
-import { getSpecificCharacter } from '@lca/ducks/selectors'
-import { useDocumentTitle } from '@lca/hooks'
-import type { RootState } from '@lca/store'
-import type { Character, XpLogEntry } from '@lca/types'
-import type { RouteWithIdProps as RouteProps } from '@lca/types/util'
-import { solarXpName, spentSolarXp, spentXp } from '@lca/utils/calculated'
-import CharacterLoadError from '../CharacterLoadError'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
+import { getSpecificCharacter } from '@lca/ducks/selectors/index.ts'
+import { useDocumentTitle } from '@lca/hooks/index.ts'
+import type { RootState } from '@lca/store.ts'
+import type { Character, XpLogEntry } from '@lca/types/index.ts'
+import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
+import {
+  solarXpName,
+  spentSolarXp,
+  spentXp,
+} from '@lca/utils/calculated/index.ts'
+import CharacterLoadError from '../CharacterLoadError.tsx'
 
 const styles = (_theme: Theme) =>
   createStyles({

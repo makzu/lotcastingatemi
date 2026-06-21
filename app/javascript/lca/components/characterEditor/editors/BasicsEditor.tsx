@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import { canIDeleteCharacter } from '@lca/selectors'
+import { canIDeleteCharacter } from '@lca/selectors/index.ts'
 import type { Character } from '@lca/types/character.ts'
 import { ESSENCE_MAX, ESSENCE_MIN } from '@lca/utils/constants.ts'
 

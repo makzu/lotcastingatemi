@@ -13,9 +13,9 @@ import {
   destroyQcCharm,
   updateQcCharm,
 } from '@lca/ducks/actions.ts'
-import { updateQcCharmSort } from '@lca/ducks/entities/qc_charm'
-import { getCharmsForQc } from '@lca/selectors'
-import commonStyles from '@lca/styles'
+import { updateQcCharmSort } from '@lca/ducks/entities/qc_charm.ts'
+import { getCharmsForQc } from '@lca/selectors/index.ts'
+import commonStyles from '@lca/styles/index.ts'
 import type { QC, QcCharm } from '@lca/types/index.ts'
 import QcCharmFields from './QcCharmFields.tsx'
 

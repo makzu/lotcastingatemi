@@ -1,3 +1,3 @@
-import MeritPage from './MeritPage'
+import MeritPage from './MeritPage.tsx'
 
 export default MeritPage

@@ -154,7 +154,7 @@ class ListAttributeEditor extends Component<Props> {
             <ContentAddCircle />
           </Button>
         </Typography>
-        {rows.length == 0 && <Typography paragraph>None</Typography>}
+        {rows.length === 0 && <Typography paragraph>None</Typography>}
         <SortableList items={rows} onSortEnd={handleSort} useDragHandle />
       </div>
     )

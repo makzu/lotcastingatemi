@@ -7,14 +7,18 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
-import ProtectedComponent from '@lca/containers/ProtectedComponent'
+import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import {
   updateBattlegroup,
   updateCharacter,
   updateQc,
 } from '@lca/ducks/actions.ts'
-import { getMyBattlegroups, getMyCharacters, getMyQCs } from '@lca/selectors'
-import commonStyles from '@lca/styles'
+import {
+  getMyBattlegroups,
+  getMyCharacters,
+  getMyQCs,
+} from '@lca/selectors/index.ts'
+import commonStyles from '@lca/styles/index.ts'
 import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.tsx'
 import BattlegroupCreatePopup from '../battlegroups/BattlegroupCreatePopup.tsx'
@@ -31,9 +35,9 @@ const styles = (theme) => ({
 })
 
 type Props = {
-  characters: Array<Character>
-  qcs: Array<QC>
-  battlegroups: Array<Battlegroup>
+  characters: Character[]
+  qcs: QC[]
+  battlegroups: Battlegroup[]
   classes: Object
   updateCharacter: Function
   updateQc: Function

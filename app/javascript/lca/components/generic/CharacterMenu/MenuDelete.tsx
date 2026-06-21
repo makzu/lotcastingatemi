@@ -12,10 +12,14 @@ import {
 } from '@material-ui/core'
 import Delete from '@material-ui/icons/Delete'
 
-import { destroy } from '@lca/ducks/actions/ByType'
-import { useAppDispatch, useAppSelector, useDialogLogic } from '@lca/hooks'
-import { canIDelete } from '@lca/selectors'
-import type { MenuItemProps as Props } from './CharacterMenuItem'
+import { destroy } from '@lca/ducks/actions/ByType.ts'
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDialogLogic,
+} from '@lca/hooks/index.ts'
+import { canIDelete } from '@lca/selectors/index.ts'
+import type { MenuItemProps as Props } from './CharacterMenuItem.ts'
 
 const MenuDelete = ({ characterType, id }: Props) => {
   const dispatch = useAppDispatch()

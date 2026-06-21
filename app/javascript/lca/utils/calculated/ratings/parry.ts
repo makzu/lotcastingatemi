@@ -1,9 +1,9 @@
-import type { Character, Weapon } from '@lca/types'
-import type { BlockOfPenalties, PoolBonus } from '@lca/types/pool'
-import { halfRoundUp } from '@lca/utils'
-import { penaltyObject } from '../index'
-import { weaponIsRanged } from '../weapons'
-import rating from './_rating'
+import type { Character, Weapon } from '@lca/types/index.ts'
+import type { BlockOfPenalties, PoolBonus } from '@lca/types/pool.ts'
+import { halfRoundUp } from '@lca/utils/index.ts'
+import { penaltyObject } from '../index.ts'
+import { weaponIsRanged } from '../weapons/index.ts'
+import rating from './_rating.ts'
 
 export function weaponDefenseBonus(weapon: Weapon) {
   switch (weapon.weight) {
@@ -20,7 +20,7 @@ export function parry(
   character: Character,
   weapon: Weapon,
   penalties: BlockOfPenalties,
-  excellencyAbils: Array<string>,
+  excellencyAbils: string[],
 ) {
   if (weaponIsRanged(weapon)) return { raw: 0, total: 0 }
 
@@ -47,7 +47,7 @@ export function parry(
   }
 
   const rat = rating(
-    weapon.name + ' Parry',
+    `${weapon.name} Parry`,
     character,
     weapon.overrides?.defense_attribute?.use || 'dexterity',
     weapon.ability,

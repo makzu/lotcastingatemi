@@ -9,8 +9,8 @@ import {
   Typography,
 } from '@material-ui/core'
 
-import { useAppSelector, useDialogLogic } from '@lca/hooks'
-import { isPublicCharacterPage } from '@lca/selectors'
+import { useAppSelector, useDialogLogic } from '@lca/hooks/index.ts'
+import { isPublicCharacterPage } from '@lca/selectors/index.ts'
 
 const CsrfInput = () => {
   const csrfToken = document.getElementsByTagName('meta')['csrf-token'].content

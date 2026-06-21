@@ -10,9 +10,9 @@ import {
 import {
   getAllCharmLoadoutsForCharacter,
   getSpecificCharacter,
-} from '@lca/ducks/entities'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
-import type { Character, NativeCharm } from '@lca/types'
+} from '@lca/ducks/entities/index.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
+import type { Character, NativeCharm } from '@lca/types/index.ts'
 
 interface CLAProps {
   value: NonNullable<NativeCharm['loadouts']>

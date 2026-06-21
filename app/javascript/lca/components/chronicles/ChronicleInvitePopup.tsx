@@ -10,9 +10,16 @@ import {
 } from '@material-ui/core'
 import { FileCopy } from '@material-ui/icons'
 
-import { regenChronicleInviteCode, updateChronicle } from '@lca/ducks/actions'
-import { useAppDispatch, useAppSelector, useDialogLogic } from '@lca/hooks'
-import { getSpecificChronicle } from '@lca/selectors/chronicle'
+import {
+  regenChronicleInviteCode,
+  updateChronicle,
+} from '@lca/ducks/actions/index.ts'
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDialogLogic,
+} from '@lca/hooks/index.ts'
+import { getSpecificChronicle } from '@lca/selectors/chronicle.ts'
 
 type ExposedProps = {
   chronicleId: number

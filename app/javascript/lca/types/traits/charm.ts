@@ -1,5 +1,5 @@
-import type { CharacterTrait, Timing } from '../_lib'
-import type { Ability, Attribute } from '../character'
+import type { CharacterTrait, Timing } from '../_lib.ts'
+import type { Ability, Attribute } from '../character.ts'
 
 export interface CharmBase extends CharacterTrait {
   name: string

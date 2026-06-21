@@ -1,4 +1,4 @@
-import type { Sortable, Timing, WithId } from '../_lib'
+import type { Sortable, Timing, WithId } from '../_lib.ts'
 
 export interface Spell extends WithId, Sortable {
   name: string

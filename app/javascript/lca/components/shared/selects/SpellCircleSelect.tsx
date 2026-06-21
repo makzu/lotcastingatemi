@@ -2,7 +2,7 @@ import { MenuItem, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import type { TextFieldProps } from '@material-ui/core/TextField'
 
-import type { Spell } from '@lca/types'
+import type { Spell } from '@lca/types/index.ts'
 
 interface Props extends Pick<TextFieldProps, 'onChange' | 'margin'> {
   spell: Spell

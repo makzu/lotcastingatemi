@@ -7,8 +7,8 @@ import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import type { Character } from '@lca/types/character.ts'
-import { nonCasteAbilities } from '@lca/utils/calculated'
-import ExcellencyEditor from '../excellencies/'
+import { nonCasteAbilities } from '@lca/utils/calculated/index.ts'
+import ExcellencyEditor from '../excellencies/index.tsx'
 
 type Props = {
   character: Character

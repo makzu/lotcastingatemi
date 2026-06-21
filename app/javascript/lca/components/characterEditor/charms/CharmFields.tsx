@@ -18,31 +18,31 @@ import {
 } from '@material-ui/icons'
 import { deepEqual } from 'fast-equals'
 
-import CharmSummaryBlock from '@lca/components/CharacterSheet/Charms/CharmDisplay/AbbreviatedCharmSummary'
+import CharmSummaryBlock from '@lca/components/CharacterSheet/Charms/CharmDisplay/AbbreviatedCharmSummary.tsx'
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import AttributeSelect from '@lca/components/shared/selects/AttributeSelect'
+import AttributeSelect from '@lca/components/shared/selects/AttributeSelect.tsx'
 import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect.tsx'
-import { destroyCharm, updateCharm } from '@lca/ducks/entities'
-import { useAppDispatch } from '@lca/hooks'
-import type { Character, Charm } from '@lca/types'
+import { destroyCharm, updateCharm } from '@lca/ducks/entities/index.ts'
+import { useAppDispatch } from '@lca/hooks/index.ts'
+import type { Character, Charm } from '@lca/types/index.ts'
 import {
   abilitiesWithRatings,
   isInstalledCharm,
   isNativeCharm,
   showLoadoutTraits,
-} from '@lca/utils/calculated'
+} from '@lca/utils/calculated/index.ts'
 import {
   ABILITY_MAX,
   ATTRIBUTE_MAX,
   ESSENCE_MAX,
   ESSENCE_MIN,
-} from '@lca/utils/constants'
-import CharmCategoryAutocomplete from './CharmCategoryAutocomplete'
-import HouseOptions from './CharmHouseOptions'
-import CharmLoadoutAutocomplete from './CharmLoadoutAutocomplete'
+} from '@lca/utils/constants.ts'
+import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.tsx'
+import HouseOptions from './CharmHouseOptions.tsx'
+import CharmLoadoutAutocomplete from './CharmLoadoutAutocomplete.tsx'
 
 const noAbils = [
   <MenuItem key="no-abils" disabled>

@@ -4,8 +4,8 @@ import type {
   Character,
   MartialArtsCharm,
   NativeCharm,
-} from '@lca/types'
-import { ATTRIBUTES } from '@lca/utils/constants'
+} from '@lca/types/index.ts'
+import { ATTRIBUTES } from '@lca/utils/constants.ts'
 import { attr, isInstalledCharm } from '..'
 
 export const alchemicalExcellencyAbils = (

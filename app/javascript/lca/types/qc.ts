@@ -1,5 +1,5 @@
-import type { PlayerAsset, Sortable, WithId } from './_lib'
-import type { WithSharedStats } from './shared'
+import type { PlayerAsset, Sortable, WithId } from './_lib.ts'
+import type { WithSharedStats } from './shared.ts'
 
 export interface QcAction {
   action: string
@@ -40,7 +40,7 @@ export interface QcCharm extends QcTrait {
   cost: string
   timing: string
   duration: string
-  keywords: Array<string>
+  keywords: string[]
   min_essence: number
   body: string
   ref: string
@@ -53,7 +53,7 @@ export interface QcAttack extends WithId, Sortable {
   damage: number
   overwhelming: number
   range: string
-  tags: Array<string>
+  tags: string[]
   qc_attackable_type: 'Qc' | 'Battlegroup'
   qc_attackable_id: number
 }

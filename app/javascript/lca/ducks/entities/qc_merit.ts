@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 
-import { createApiActions, createTraitReducer } from './_trait'
-import type { EntityState } from './_types'
+import { createApiActions, createTraitReducer } from './_trait.ts'
+import type { EntityState } from './_types.ts'
 
 export const updateQcMeritSort = createAction<{ id: number; sorting: number }>(
   'sort/qc_merit',

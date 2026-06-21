@@ -1,4 +1,4 @@
-import { createApiActions, createEntityReducer } from './_entity'
+import { createApiActions, createEntityReducer } from './_entity.ts'
 
 export default createEntityReducer('combat_actor')
 

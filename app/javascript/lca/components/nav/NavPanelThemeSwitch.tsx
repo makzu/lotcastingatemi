@@ -5,9 +5,9 @@ import {
   Switch,
 } from '@material-ui/core'
 
-import { switchTheme } from '@lca/features/themeSlice'
-import { useAppDispatch } from '@lca/hooks/UseAppDispatch'
-import { useAppSelector } from '@lca/hooks/UseAppSelector'
+import { switchTheme } from '@lca/features/themeSlice.ts'
+import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
+import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
 
 const NavPanelThemeSwitch = () => {
   const theme = useAppSelector((state) => state.theme)

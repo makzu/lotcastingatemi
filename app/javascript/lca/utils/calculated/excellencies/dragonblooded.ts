@@ -1,4 +1,4 @@
-import type { Character, Charm } from '@lca/types'
+import type { Character, Charm } from '@lca/types/index.ts'
 import { abil, specialtiesFor } from '..'
 
 /* Dragon-Blooded Excellencies: WFHW Backer PDF p.162 */
@@ -6,8 +6,8 @@ import { abil, specialtiesFor } from '..'
 // All abilities that have an 'Excellency' keyworded Charm
 export const dbExcellencyAbils = (
   _character: Character,
-  charms: Array<Charm>,
-): Array<string> => {
+  charms: Charm[],
+): string[] => {
   let excellencies = charms
     .filter(
       (c) =>

@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
@@ -10,7 +8,7 @@ import { compose } from 'recompose'
 
 import { getPenaltiesForQc, getPoolsAndRatingsForQc } from '@lca/selectors'
 import sharedStyles from '@lca/styles/'
-import type { Enhancer, fullQc } from '@lca/utils/flow-types'
+import type { QC } from '@lca/types/qc.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
@@ -60,7 +58,7 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  qc: fullQc
+  qc: QC
 }
 type Props = ExposedProps & {
   penalties: Object
@@ -153,9 +151,6 @@ const mapStateToProps = (state, props: ExposedProps) => ({
   pools: getPoolsAndRatingsForQc(state, props.qc.id),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  withStyles(styles),
-)
+const enhance = compose(connect(mapStateToProps), withStyles(styles))
 
 export default enhance(QcCard)

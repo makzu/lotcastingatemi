@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -13,13 +12,13 @@ import TextField from '@material-ui/core/TextField'
 
 import { addThingToChronicle } from '@lca/ducks/actions'
 import { getMyQcsWithoutChronicles, getSpecificChronicle } from '@lca/selectors'
-import type { Enhancer, fullQc } from '@lca/utils/flow-types'
+import type { QC } from '@lca/types/qc.ts'
 
 type ExposedProps = {
   chronicleId: number
 }
 type Props = ExposedProps & {
-  qcs: Array<fullQc>
+  qcs: Array<QC>
   chronicleName: string
   handleSubmit: Function
 }
@@ -28,7 +27,7 @@ type State = {
   qcId: number
 }
 
-class QcAddPopup extends React.Component<Props, State> {
+class QcAddPopup extends Component<Props, State> {
   state = {
     open: false,
     qcId: 0,
@@ -48,7 +47,7 @@ class QcAddPopup extends React.Component<Props, State> {
   }
 
   handleSubmit = () => {
-    if (this.state.qcId == 0) return
+    if (this.state.qcId === 0) return
 
     this.setState({ open: false })
     this.props.handleSubmit(this.props.chronicleId, this.state.qcId)
@@ -58,7 +57,7 @@ class QcAddPopup extends React.Component<Props, State> {
     const { handleOpen, handleClose, handleChange, handleSubmit } = this
     const { chronicleName, qcs } = this.props
 
-    const options: React.Node = [
+    const options: ReactNode = [
       <MenuItem key={0} value={0} disabled>
         Select a Qc
       </MenuItem>,
@@ -70,8 +69,8 @@ class QcAddPopup extends React.Component<Props, State> {
       )),
     ]
 
-    const currentQc = qcs.find((c) => c.id == this.state.qcId)
-    const hidden = currentQc && currentQc.hidden
+    const currentQc = qcs.find((c) => c.id === this.state.qcId)
+    const hidden = currentQc?.hidden
     return (
       <>
         <Button onClick={handleOpen}>Add Qc</Button>
@@ -113,7 +112,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   const qcs = getMyQcsWithoutChronicles(state)
   let chronicleName = ''
 
-  if (chronicle.name != undefined) {
+  if (chronicle.name !== undefined) {
     chronicleName = chronicle.name
   }
 
@@ -123,13 +122,10 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const mapDispatchToProps: Object = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   handleSubmit: (id, qcId) => dispatch(addThingToChronicle(id, qcId, 'qc')),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)
+const enhance = connect(mapStateToProps, mapDispatchToProps)
 
 export default enhance(QcAddPopup)

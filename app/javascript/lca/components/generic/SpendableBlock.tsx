@@ -1,15 +1,9 @@
-// @flow
-import React, { Fragment } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import sharedStyles from '@lca/styles/'
+import type { WithSharedStats } from '@lca/types/shared.ts'
 import * as calc from '@lca/utils/calculated'
-import type {
-  withHealthLevels,
-  withMotePool,
-  withWillpower,
-} from '@lca/utils/flow-types'
 import AnimaDisplay from '../generic/AnimaDisplay.tsx'
 import AuraDisplay from '../generic/AuraDisplay.tsx'
 import DamageWidget from '../generic/DamageWidget.tsx'
@@ -28,15 +22,13 @@ const styles = (theme) => ({
 })
 
 type Props = {
-  character: withMotePool &
-    withWillpower &
-    withHealthLevels & { id: number; aura: string; type: string }
+  character: WithSharedStats
   classes: Object
   qc?: boolean
 }
 export function SpendableBlock({ character, classes, qc }: Props) {
   return (
-    <Fragment>
+    <>
       <Typography className={classes.flexContainerWrap} component="div">
         {character.motes_personal_total > 0 && (
           <MoteSpendWidget character={character} qc={qc}>
@@ -95,7 +87,7 @@ export function SpendableBlock({ character, classes, qc }: Props) {
       <DamageWidget character={character} qc={qc}>
         <HealthLevelBoxes character={character} />
       </DamageWidget>
-    </Fragment>
+    </>
   )
 }
 

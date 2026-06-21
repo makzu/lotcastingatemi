@@ -1,5 +1,4 @@
-// @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -9,7 +8,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 
 import { createQc } from '@lca/ducks/actions.ts'
-import type { Enhancer } from '@lca/utils/flow-types'
 
 type Props = {
   createQc: Function
@@ -20,7 +18,7 @@ type State = {
 }
 
 // TODO: Enable autofill for some example QCs?
-class QcCreatePopup extends React.Component<Props, State> {
+class QcCreatePopup extends Component<Props, State> {
   state = { open: false, qc: { name: '' } }
 
   handleOpen = () => {
@@ -83,6 +81,4 @@ class QcCreatePopup extends React.Component<Props, State> {
   }
 }
 
-const enhance: Enhancer<Props, {}> = connect(null, { createQc })
-
-export default enhance(QcCreatePopup)
+export default connect(null, { createQc })(QcCreatePopup)

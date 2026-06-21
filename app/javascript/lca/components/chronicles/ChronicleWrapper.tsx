@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 
@@ -13,7 +11,6 @@ import {
   fetchChronicleQcs,
 } from '@lca/ducks/entities/chronicle'
 import { isChronicleLoaded } from '@lca/selectors'
-import type { Enhancer } from '@lca/utils/flow-types'
 
 type ExposedProps = {
   match: { params: { chronicleId: number } }
@@ -62,11 +59,9 @@ const mapStateToProps = (state, props: ExposedProps) => ({
   isLoaded: isChronicleLoaded(state, props.match.params.chronicleId),
 })
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   fetchChronicle,
   fetchChronicleCharacters,
   fetchChronicleQcs,
   fetchChronicleBattlegroups,
-})
-
-export default enhance(ChronicleWrapper)
+})(ChronicleWrapper)

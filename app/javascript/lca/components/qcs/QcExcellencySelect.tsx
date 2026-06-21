@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react'
+import { PureComponent } from 'react'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 
@@ -9,7 +8,7 @@ type Props = {
   className?: any
   onChange: Function
 }
-class RangeSelect extends React.PureComponent<Props> {
+class RangeSelect extends PureComponent<Props> {
   render() {
     const { name, value, onChange, className } = this.props
 

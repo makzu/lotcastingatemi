@@ -1,5 +1,4 @@
-// @flow
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 import Button from '@material-ui/core/Button'
@@ -15,13 +14,13 @@ import {
 } from '@lca/ducks/actions.ts'
 import { updateQcMeritSort } from '@lca/ducks/entities/qc_merit'
 import { getMeritsForQc } from '@lca/selectors'
-import type { Enhancer, fullQc, QcMerit } from '@lca/utils/flow-types'
+import type { QC, QcMerit } from '@lca/types/qc.ts'
 import QcMeritFields from './QcMeritFields.tsx'
 
 const SortableItem = SortableElement(({ children }) => children)
 
 type ExposedProps = {
-  qc: fullQc
+  qc: QC
   classes: Object
 }
 type Props = ExposedProps & {
@@ -32,7 +31,7 @@ type Props = ExposedProps & {
   updateQcMeritSort: Function
 }
 
-class QcMeritEditor extends React.Component<Props> {
+class QcMeritEditor extends Component<Props> {
   handleChange = (id, trait) => {
     this.props.updateQcMerit(id, this.props.qc.id, trait)
   }
@@ -106,7 +105,7 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(mapStateToProps, {
+const enhance = connect(mapStateToProps, {
   updateQcMerit,
   createQcMerit,
   destroyQcMerit,

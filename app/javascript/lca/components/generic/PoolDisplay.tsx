@@ -1,49 +1,53 @@
-// @flow
-import React, { Component, Fragment } from 'react'
+import { Component } from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  type Theme,
+  type WithStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 
-import type { Pool } from '@lca/utils/flow-types'
+import type { Pool } from '@lca/types/pool.ts'
 import AttackTagsDisplay from './AttackTagsDisplay.tsx'
 
-const styles = (theme) => ({
-  root: {},
-  clickable: {
-    cursor: 'pointer',
-  },
-  label: {
-    ...theme.typography.body1,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    opacity: 0.7,
-  },
-  labelSpan: {},
-  pool: {
-    ...theme.typography.body2,
-    fontSize: '1.25rem',
-    lineHeight: 'inherit',
-  },
-  specialty: {
-    ...theme.typography.caption,
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    whiteSpace: 'noWrap',
-  },
-  excellency: {
-    ...theme.typography.caption,
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {},
+    clickable: {
+      cursor: 'pointer',
+    },
+    label: {
+      ...theme.typography.body1,
+      fontSize: '0.75rem',
+      fontWeight: 500,
+      opacity: 0.7,
+    },
+    labelSpan: {},
+    pool: {
+      ...theme.typography.body2,
+      fontSize: '1.25rem',
+      lineHeight: 'inherit',
+    },
+    specialty: {
+      ...theme.typography.caption,
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+    },
+    excellency: {
+      ...theme.typography.caption,
+    },
+  })
 
-type Props = {
+interface Props extends WithStyles<typeof styles> {
   label: string
   pool: Pool
   noSummary?: boolean
   qc?: boolean
   battlegroup?: boolean
-  classes: Object
 }
 class PoolDisplay extends Component<Props, { open: boolean }> {
   constructor(props: Props) {
@@ -52,8 +56,6 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     this.setOpen = this.setOpen.bind(this)
     this.setClosed = this.setClosed.bind(this)
   }
-
-  props: Props
 
   setOpen = () => {
     if (
@@ -75,9 +77,9 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
     const { label, pool, classes } = this.props
     const { open } = this.state
     const { setOpen, setClosed } = this
-    const mb = pool.bonus || []
-    const pen = pool.penalties || []
-    const sp = pool.specialties || []
+    const mb = pool.bonus ?? []
+    const pen = pool.penalties ?? []
+    const sp = pool.specialties ?? []
 
     const merits = mb.map((m) => (
       <div key={m.label} className={classes.specialty}>
@@ -121,7 +123,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
       this.props.pool.noSummary
 
     return (
-      <Fragment>
+      <>
         {
           // TODO: add ButtonBase here
         }
@@ -211,7 +213,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
               </DialogContentText>
             )}
 
-            {pool.soak && (
+            {'soak' in pool && (
               <DialogContentText>
                 {pool.natural} Natural
                 {(pool.armored || 0) > 0 && (
@@ -246,7 +248,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                   {sp.join(', ')}
                 </span>
                 {pool.rating && (
-                  <Fragment>
+                  <>
                     {pool.specialtyMatters && (
                       <div>
                         Specialt
@@ -261,7 +263,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
                         <strong>will not</strong> affect rating
                       </div>
                     )}
-                  </Fragment>
+                  </>
                 )}
               </DialogContentText>
             )}
@@ -282,7 +284,7 @@ class PoolDisplay extends Component<Props, { open: boolean }> {
             )}
           </DialogContent>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

@@ -1,12 +1,9 @@
-// @flow
-import React, { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import MarkdownDisplay, {
-  LinkRenderer,
-} from '@lca/components/generic/MarkdownDisplay.tsx'
+import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { fetchQcIfNecessary } from '@lca/ducks/entities/qc'
 import { getSpellsForQc } from '@lca/ducks/selectors'
@@ -20,8 +17,8 @@ import {
   getSpecificQc,
 } from '@lca/selectors'
 import sharedStyles from '@lca/styles/'
+import type { QC, QcAttack, QcCharm, QcMerit } from '@lca/types/'
 import { prettyIntimacyRating, qcPool } from '@lca/utils/calculated'
-import type { fullQc, QcAttack, QcCharm, QcMerit } from '@lca/utils/flow-types'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
@@ -88,7 +85,7 @@ const styles = (theme) => ({
 
 type Props = {
   id: string
-  qc: fullQc
+  qc: QC
   qc_merits: Array<QcMerit>
   qc_charms: Array<QcCharm>
   qc_attacks: Array<QcAttack>
@@ -108,7 +105,7 @@ class QcSheet extends Component<Props> {
 
   render() {
     /* Escape hatch */
-    if (this.props.qc == undefined)
+    if (this.props.qc === undefined)
       return (
         <Typography paragraph>
           {this.props.loading
@@ -271,7 +268,7 @@ class QcSheet extends Component<Props> {
         </div>
 
         <Typography variant="subtitle1">Attacks</Typography>
-        {attacks.length == 0 && <Typography paragraph>None</Typography>}
+        {attacks.length === 0 && <Typography paragraph>None</Typography>}
         {attacks}
         {qc.grapple > 0 && (
           <div className={classes.rowContainer}>
@@ -366,7 +363,7 @@ class QcSheet extends Component<Props> {
 
         <Typography variant="subtitle1">Intimacies</Typography>
         <Typography gutterBottom component="div">
-          {principles.length == 0 && ties.length == 0 && 'No Intimacies'}
+          {principles.length === 0 && ties.length === 0 && 'No Intimacies'}
           {principles}
           {ties}
         </Typography>
@@ -377,12 +374,12 @@ class QcSheet extends Component<Props> {
         </Typography>
 
         {charms.length > 0 && (
-          <Fragment>
+          <>
             <Typography variant="subtitle1">Charms</Typography>
             <Typography gutterBottom component="div">
               {charms}
             </Typography>
-          </Fragment>
+          </>
         )}
 
         {spells.length > 0 && (
@@ -422,7 +419,7 @@ function mapStateToProps(state, props) {
   let penalties = {}
   let spells = {}
 
-  if (qc != undefined) {
+  if (qc !== undefined) {
     qc_attacks = getAttacksForQc(state, id)
     qc_charms = getCharmsForQc(state, id)
     qc_merits = getMeritsForQc(state, id)

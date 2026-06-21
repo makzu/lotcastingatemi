@@ -1,6 +1,4 @@
-// @flow
-
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableHandle } from 'react-sortable-hoc'
 import Divider from '@material-ui/core/Divider'
@@ -17,8 +15,8 @@ import RangeSelect from '@lca/components/generic/RangeSelect.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import { getSpecificBattlegroup } from '@lca/selectors'
+import type { QcAttack } from '@lca/types'
 import { bgAttackPool, bgDamage } from '@lca/utils/calculated'
-import type { Enhancer, QcAttack } from '@lca/utils/flow-types'
 import RatingField from '../generic/RatingField.tsx'
 
 const Handle = SortableHandle(() => (
@@ -77,7 +75,7 @@ type Props = ExposedProps & {
   classes: Object
 }
 
-class QcAttackFields extends React.Component<Props> {
+class QcAttackFields extends Component<Props> {
   handleChange = (e) => {
     const { name, value } = e.target
     const { attack } = this.props
@@ -201,9 +199,6 @@ function mapStateToProps(state, ownProps: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  withStyles(styles),
-)
+const enhance = compose(connect(mapStateToProps), withStyles(styles))
 
 export default enhance(QcAttackFields)

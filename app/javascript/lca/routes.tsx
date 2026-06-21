@@ -65,11 +65,8 @@ export default function Routes() {
         <Route path="/qcs/:qcId/edit" component={QcEditor} />
         <Route path="/qcs/:qcId" component={QcSheet} />
 
-        <Route
-          path="/battlegroups/:battlegroupId/edit"
-          component={BattlegroupEditor}
-        />
-        <Route path="/battlegroups/:bgId" component={BattlegroupSheet} />
+        <Route path="/battlegroups/:id/edit" component={BattlegroupEditor} />
+        <Route path="/battlegroups/:id" component={BattlegroupSheet} />
 
         <Route path="/characters" component={CharacterList} />
         <Route path="/qcs" component={QcList} />

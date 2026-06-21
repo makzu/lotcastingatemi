@@ -1,5 +1,3 @@
-// @flow
-import React, { Fragment } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { compose, shouldUpdate } from 'recompose'
@@ -11,6 +9,7 @@ import ListAttributeEditor, {
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import commonStyles from '@lca/styles'
+import type { Character } from '@lca/types'
 import { isUnequalByKeys } from '@lca/utils'
 import {
   solarXpName,
@@ -18,7 +17,6 @@ import {
   spentSolarXp,
   spentXp,
 } from '@lca/utils/calculated'
-import type { Character } from '@lca/utils/flow-types'
 
 const styles = (theme) => ({
   ...commonStyles(theme),
@@ -42,7 +40,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
   const { label, points } = props.trait
 
   return (
-    <Fragment>
+    <>
       <TextField
         name="label"
         value={label}
@@ -61,7 +59,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
         narrow
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
@@ -97,7 +95,7 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
 
       <div className={classes.xpCol}>
         <ListAttributeEditor
-          label={solarXpName(character) + ' XP Log'}
+          label={`${solarXpName(character)} XP Log`}
           character={character}
           trait="xp_log_solar"
           Fields={XpFields}

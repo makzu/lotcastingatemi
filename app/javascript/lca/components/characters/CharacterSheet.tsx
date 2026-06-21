@@ -1,4 +1,3 @@
-// @flow
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -17,11 +16,7 @@ import {
   getPenalties,
   getPoolsAndRatings,
 } from '@lca/selectors'
-import type {
-  Character,
-  fullMerit as Merit,
-  fullWeapon as Weapon,
-} from '@lca/utils/flow-types'
+import type { Character, Merit, Weapon } from '@lca/types/index.ts'
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import RatingLine from '../generic/RatingLine.tsx'
@@ -103,8 +98,8 @@ export function SorceryBlock({ character }: { character: Character }) {
 
 type Props = {
   character: Character
-  merits: Array<Merit>
-  weapons: Array<Weapon>
+  merits: Merit[]
+  weapons: Weapon[]
   penalties: Object
   pools: Object
   canEdit: boolean
@@ -112,7 +107,7 @@ type Props = {
 export class CharacterSheet extends Component<Props> {
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined) return <CharacterLoadError />
+    if (this.props.character === undefined) return <CharacterLoadError />
 
     const { character, merits, weapons, pools, penalties, canEdit } = this.props
     const showLimit =
@@ -227,7 +222,7 @@ export class CharacterSheet extends Component<Props> {
             </Grid>
           )}
 
-          {character.type != 'Character' && (
+          {character.type !== 'Character' && (
             <Grid item xs={12}>
               <CharmSummaryBlock character={character} />
             </Grid>
@@ -246,7 +241,7 @@ function mapStateToProps(state, props) {
   let pools
   let penalties
 
-  if (character != undefined) {
+  if (character !== undefined) {
     weapons = getWeaponsForCharacter(state, id)
     merits = getMeritsForCharacter(state, id)
     pools = getPoolsAndRatings(state, id)

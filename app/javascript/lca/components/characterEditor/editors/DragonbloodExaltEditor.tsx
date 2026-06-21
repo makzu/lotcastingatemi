@@ -1,11 +1,9 @@
-// @flow
-import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
+import type { Character } from '@lca/types/character.ts'
 import { nonCasteAbilities } from '@lca/utils/calculated'
-import type { Character } from '@lca/utils/flow-types'
 import DbAspectSelect from '../exaltTraits/DbAspectSelect'
 
 type Props = { character: Character; onChange: Function }

@@ -1,4 +1,3 @@
-// @flow
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
@@ -44,7 +43,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
     const { code } = this.state
 
     return (
-      <Fragment>
+      <>
         <ListItem button onClick={handleOpen}>
           <ListItemIcon>
             <GroupAdd />
@@ -72,7 +71,7 @@ class ChronicleJoinPopup extends Component<Props, State> {
             </Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

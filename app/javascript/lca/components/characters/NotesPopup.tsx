@@ -1,6 +1,4 @@
-// @flow
-
-import React, { type ChangeEvent } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -11,14 +9,13 @@ import IconButton from '@material-ui/core/IconButton'
 import { withStyles } from '@material-ui/core/styles'
 import DescriptionIcon from '@material-ui/icons/Description'
 import { deepEqual } from 'fast-equals'
-import { compose } from 'recompose'
 
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import { updateCharacter } from '@lca/ducks/actions.ts'
 import { canIEditCharacter } from '@lca/selectors'
 import commonStyles from '@lca/styles'
-import type { Character } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/index.ts'
 
 const styles = (theme) => ({
   ...commonStyles(theme),
@@ -34,7 +31,7 @@ type Props = {
   updateCharacter: Function
 }
 type State = { open: boolean; editing: boolean }
-class NotesPopup extends React.Component<Props, State> {
+class NotesPopup extends Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -117,7 +114,6 @@ const mapStateToProps = (state, props) => ({
   canIEdit: canIEditCharacter(state, props.character.id),
 })
 
-export default compose(
-  withStyles(styles),
-  connect(mapStateToProps, { updateCharacter }),
-)(NotesPopup)
+export default withStyles(styles)(
+  connect(mapStateToProps, { updateCharacter })(NotesPopup),
+)

@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
@@ -14,12 +12,7 @@ import {
 } from '@lca/ducks/actions'
 import { canIEdit, getPoolsAndRatingsGeneric } from '@lca/selectors'
 import sharedStyles from '@lca/styles/'
-import type {
-  Battlegroup,
-  Character,
-  Enhancer,
-  fullQc,
-} from '@lca/utils/flow-types'
+import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import JoinBattlePopup from './JoinBattlePopup.tsx'
@@ -59,7 +52,7 @@ const styles = (theme) => ({
 })
 
 type ExposedProps = {
-  character: Character | fullQc | Battlegroup
+  character: Character | QC | Battlegroup
 }
 type Props = ExposedProps & {
   canEdit: boolean
@@ -138,7 +131,7 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = compose(
+const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles),
 )

@@ -1,17 +1,14 @@
-// @flow
-import * as React from 'react'
 import Checkbox from '@material-ui/core/Checkbox'
 import MenuItem from '@material-ui/core/MenuItem'
 import MuiTextField from '@material-ui/core/TextField'
-import { shouldUpdate } from 'recompose'
 
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from '@lca/components/generic/ListAttributeEditor.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import { isUnequalByKeys } from '@lca/utils'
-import type { Enhancer, withMotePool } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
+import type { QC } from '@lca/types/qc.ts'
 
 function CommitFields(props: ListAttributeFieldTypes) {
   const { trait, onChange, classes } = props
@@ -64,7 +61,7 @@ function CommitFields(props: ListAttributeFieldTypes) {
 }
 
 type Props = {
-  character: withMotePool & { id: number }
+  character: Character | QC
   onChange: Function
 }
 
@@ -81,9 +78,4 @@ const MoteCommittmentEditor = ({ character, onChange }: Props) => {
   )
 }
 
-const enhance: Enhancer<Props, Props> = shouldUpdate(
-  (props: Props, newProps: Props) =>
-    isUnequalByKeys(props.character, newProps.character, ['motes_committed']),
-)
-
-export default enhance(MoteCommittmentEditor)
+export default MoteCommittmentEditor

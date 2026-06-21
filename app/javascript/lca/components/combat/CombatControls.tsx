@@ -1,5 +1,4 @@
-// @flow
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -11,12 +10,12 @@ import {
   updateQc,
 } from '@lca/ducks/actions'
 import { canIEdit } from '@lca/selectors'
-import type { Enhancer, withCombatInfo } from '@lca/utils/flow-types'
+import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import RatingField from '../generic/RatingField.tsx'
 import InitiativeField from './InitiativeField.tsx'
 
 type ExposedProps = {
-  character: withCombatInfo & { id: number }
+  character: Character | QC | Battlegroup
   characterType: 'character' | 'qc' | 'battlegroup'
 }
 type Props = ExposedProps & {
@@ -115,9 +114,6 @@ function mapDispatchToProps(dispatch: Function, props: ExposedProps) {
   }
 }
 
-const enhance: Enhancer<Props, ExposedProps> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)
+const enhance = connect(mapStateToProps, mapDispatchToProps)
 
 export default enhance(CombatControls)

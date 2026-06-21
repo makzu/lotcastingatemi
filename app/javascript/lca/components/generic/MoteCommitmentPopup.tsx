@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react'
+import { Component } from 'react'
 import { type ConnectedProps, connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -19,7 +18,7 @@ type State = {
   open: boolean
 }
 
-class MoteCommitmentPopup extends React.Component<Props, State> {
+class MoteCommitmentPopup extends Component<Props, State> {
   state = { open: false }
 
   handleOpen = () => {

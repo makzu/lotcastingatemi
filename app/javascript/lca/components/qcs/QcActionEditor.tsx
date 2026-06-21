@@ -1,19 +1,16 @@
-// @flow
-import React, { Fragment } from 'react'
-
 import { SorceryFields } from '@lca/components/characterEditor/editors/SorceryEditor.tsx'
 import ListAttributeEditor, {
   type ListAttributeFieldTypes,
 } from '@lca/components/generic/ListAttributeEditor.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import type { fullQc } from '@lca/utils/flow-types'
+import type { QC } from '@lca/types/qc.ts'
 import RatingField from '../generic/RatingField.tsx'
 
 function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
   const { action, pool } = trait
 
   return (
-    <Fragment>
+    <>
       <TextField
         name="action"
         value={action}
@@ -32,11 +29,11 @@ function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
         margin="dense"
         onChange={onChange}
       />
-    </Fragment>
+    </>
   )
 }
 
-type Props = { qc: fullQc; onChange: Function }
+type Props = { qc: QC; onChange: Function }
 const QcActionEditor = ({ qc, onChange }: Props) => {
   return (
     <div>

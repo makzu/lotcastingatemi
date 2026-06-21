@@ -1,5 +1,3 @@
-// @flow
-import React from 'react'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
@@ -7,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
-import type { Character } from '@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 import ExcellencyEditor from '../excellencies/'
 
 type Props = {

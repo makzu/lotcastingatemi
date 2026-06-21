@@ -1,4 +1,3 @@
-// @flow
 import React, { type ChangeEvent, Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'

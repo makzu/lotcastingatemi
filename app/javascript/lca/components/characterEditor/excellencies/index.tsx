@@ -1,8 +1,4 @@
-// @flow
-import * as React from 'react'
-
-const { Component, Fragment } = React
-
+import { Component } from 'react'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -14,12 +10,12 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import AbilitySelect from '@lca/components/generic/AbilitySelect.tsx'
-import type { Character } from'@lca/utils/flow-types'
+import type { Character } from '@lca/types/character.ts'
 import CanonExcellencyCopy from './CanonExcellencyCopy.tsx'
 
 class ExcellencyEditor extends Component<
-  { character: Character, onChange: Function, onChangeMulti: Function },
-  { open: boolean },
+  { character: Character; onChange: Function; onChangeMulti: Function },
+  { open: boolean }
 > {
   state = { open: false }
 
@@ -130,7 +126,7 @@ class ExcellencyEditor extends Component<
     ]
 
     return (
-      <Fragment>
+      <>
         <Button onClick={handleOpen}>Excellencies</Button>
         <Dialog open={this.state.open} onClose={handleClose}>
           <DialogTitle>Edit Excellencies</DialogTitle>
@@ -235,7 +231,7 @@ class ExcellencyEditor extends Component<
             <Button onClick={handleClose}>Done</Button>
           </DialogActions>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }

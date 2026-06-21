@@ -13,7 +13,7 @@ import { closeDrawer } from '@lca/features/drawerSlice'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
 import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
 import { getMyChronicles, getMyOwnChronicles } from '@lca/selectors'
-import type { Chronicle } from '@lca/utils/flow-types'
+import type { Chronicle } from '@lca/types/chronicle.ts'
 import ChronicleCreatePopup from '../chronicles/chronicleCreatePopup.tsx'
 import ChronicleJoinPopup from '../chronicles/chronicleJoinPopup.tsx'
 

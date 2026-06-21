@@ -1,23 +1,25 @@
-// @flow
-import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SortableHandle } from 'react-sortable-hoc'
 import Paper from '@material-ui/core/Paper'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  type Theme,
+  type WithStyles,
+  withStyles,
+} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import { compose } from 'recompose'
 
+import useAppSelector from '@lca/hooks/UseAppSelector.ts'
 import { doIOwnBattlegroup } from '@lca/selectors'
 import sharedStyles from '@lca/styles/'
+import type { Battlegroup } from '@lca/types/battlegroup.ts'
 import {
   bgDefenseBonus,
   bgSoak,
   prettyDrillRating,
 } from '@lca/utils/calculated'
-import type { Battlegroup, Enhancer } from '@lca/utils/flow-types'
 import CharacterMenu from '../generic/CharacterMenu'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
@@ -27,53 +29,55 @@ const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
 ))
 
-const styles = (theme) => ({
-  ...sharedStyles(theme),
-  root: {
-    ...theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-    }),
-    height: '100%',
-    position: 'relative',
-  },
-  hiddenLabel: {
-    ...theme.typography.caption,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    lineHeight: 'inherit',
-  },
-  nameWrap: {
-    flex: 1,
-    '& a': {
-      color: 'unset',
+const styles = (theme: Theme) =>
+  createStyles({
+    ...sharedStyles(theme),
+    root: {
+      ...theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+      }),
+      height: '100%',
+      position: 'relative',
     },
-  },
-  battlegroupName: {
-    textDecoration: 'none',
-  },
-  icon: {
-    verticalAlign: 'bottom',
-    marginLeft: theme.spacing(),
-  },
-  poolBlock: {
-    marginRight: theme.spacing(),
-    minWidth: '4rem',
-  },
-})
+    hiddenLabel: {
+      ...theme.typography.caption,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      lineHeight: 'inherit',
+    },
+    nameWrap: {
+      flex: 1,
+      '& a': {
+        color: 'unset',
+      },
+    },
+    battlegroupName: {
+      textDecoration: 'none',
+    },
+    icon: {
+      verticalAlign: 'bottom',
+      marginLeft: theme.spacing(),
+    },
+    poolBlock: {
+      marginRight: theme.spacing(),
+      minWidth: '4rem',
+    },
+  })
 
-type ExposedProps = {
+interface ExposedProps {
   battlegroup: Battlegroup
   chronicle?: boolean
   st?: boolean
 }
-type Props = ExposedProps & {
-  isOwner: boolean
-  classes: Object
-}
+
+interface Props extends ExposedProps, WithStyles<typeof styles> {}
 
 function BattlegroupCard(props: Props) {
-  const { battlegroup, chronicle, st, isOwner, classes } = props
+  const { battlegroup, chronicle, st, classes } = props
+  const isOwner = useAppSelector((state) =>
+    doIOwnBattlegroup(state, battlegroup.id),
+  )
 
   return (
     <Paper className={classes.root}>
@@ -198,28 +202,24 @@ function BattlegroupCard(props: Props) {
       <div className={classes.flexContainerWrap}>
         <PoolDisplay
           battlegroup
-          staticRating
           pool={{ total: battlegroup.senses }}
           label="Senses"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
           battlegroup
-          staticRating
           pool={{ total: battlegroup.resolve }}
           label="Resolve"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
           battlegroup
-          staticRating
           pool={{ total: battlegroup.guile }}
           label="Guile"
           classes={{ root: classes.poolBlock }}
         />
         <PoolDisplay
           battlegroup
-          staticRating
           pool={{ total: battlegroup.appearance }}
           label="Appearance"
           classes={{ root: classes.poolBlock }}
@@ -236,13 +236,4 @@ function BattlegroupCard(props: Props) {
   )
 }
 
-const mapStateToProps = (state, props: ExposedProps) => ({
-  isOwner: doIOwnBattlegroup(state, props.battlegroup.id),
-})
-
-const enhance: Enhancer<Props, ExposedProps> = compose(
-  connect(mapStateToProps),
-  withStyles(styles),
-)
-
-export default enhance(BattlegroupCard)
+export default withStyles(styles)(BattlegroupCard)

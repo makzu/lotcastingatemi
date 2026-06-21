@@ -1,6 +1,4 @@
-// @flow
-
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Slide from '@material-ui/core/Slide'
@@ -34,7 +32,7 @@ const styles = (theme) => ({
 })
 
 type Props = { loading: boolean; classes: Object }
-class LoadingSpinner extends React.PureComponent<Props> {
+class LoadingSpinner extends PureComponent<Props> {
   render() {
     const { loading, classes } = this.props
     return (

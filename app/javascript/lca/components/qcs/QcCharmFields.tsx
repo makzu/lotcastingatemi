@@ -1,6 +1,4 @@
-// @flow
-
-import React, { type ChangeEvent } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -13,7 +11,7 @@ import RatingField from '@lca/components/generic/RatingField.tsx'
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect'
-import type { QcCharm } from '@lca/utils/flow-types'
+import type { QcCharm } from '@lca/types/qc.ts'
 
 const Handle = SortableHandle(() => (
   <DragHandleIcon onClick={(e) => e.preventDefault()} />
@@ -24,7 +22,7 @@ type Props = {
   onCharmChange: Function
   onRemoveClick: Function
 }
-export default class QcCharmFields extends React.Component<Props> {
+export default class QcCharmFields extends Component<Props> {
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const { charm } = this.props

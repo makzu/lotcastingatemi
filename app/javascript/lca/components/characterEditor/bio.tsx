@@ -1,6 +1,4 @@
-// @flow
-
-import React, { type ChangeEvent, Component } from 'react'
+import { type ChangeEvent, Component } from 'react'
 import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
@@ -14,8 +12,8 @@ import DocumentTitle from '@lca/components/shared/DocumentTitle'
 import ProtectedComponent from '@lca/containers/ProtectedComponent'
 import { updateCharacter } from '@lca/ducks/actions.ts'
 import { getSpecificCharacter } from '@lca/ducks/selectors'
+import type { Character } from '@lca/types/character.ts'
 import { showLunarTraits } from '@lca/utils/calculated'
-import type { Character } from '@lca/utils/flow-types'
 import AnimalFormsEditor from './editors/AnimalFormsEditor'
 import XpEditor from './editors/XpEditor.tsx'
 
@@ -32,7 +30,7 @@ class BioEditor extends Component<Props> {
 
   render() {
     /* Escape hatch */
-    if (this.props.character == undefined)
+    if (this.props.character === undefined)
       return (
         <div>
           <Typography paragraph>This Character has not yet loaded.</Typography>

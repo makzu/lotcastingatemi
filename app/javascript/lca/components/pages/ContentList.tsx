@@ -1,12 +1,10 @@
-// @flow
-import React, { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { compose } from 'recompose'
 
 import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent'
@@ -17,12 +15,7 @@ import {
 } from '@lca/ducks/actions.ts'
 import { getMyBattlegroups, getMyCharacters, getMyQCs } from '@lca/selectors'
 import commonStyles from '@lca/styles'
-import type {
-  Battlegroup,
-  Character,
-  Enhancer,
-  fullQc,
-} from '@lca/utils/flow-types'
+import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.tsx'
 import BattlegroupCreatePopup from '../battlegroups/BattlegroupCreatePopup.tsx'
 import CharacterCard from '../characters/CharacterCard.tsx'
@@ -39,7 +32,7 @@ const styles = (theme) => ({
 
 type Props = {
   characters: Array<Character>
-  qcs: Array<fullQc>
+  qcs: Array<QC>
   battlegroups: Array<Battlegroup>
   classes: Object
   updateCharacter: Function
@@ -97,7 +90,7 @@ class ContentList extends Component<Props> {
     ))
 
     return (
-      <Fragment>
+      <>
         <SortableGridList
           header={
             <Typography variant="h5">
@@ -143,7 +136,7 @@ class ContentList extends Component<Props> {
           useDragHandle
           axis="xy"
         />
-      </Fragment>
+      </>
     )
   }
 }
@@ -154,10 +147,10 @@ const mapStateToProps = (state) => ({
   battlegroups: getMyBattlegroups(state),
 })
 
-const enhance: Enhancer<Props, {}> = compose(
-  connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup }),
-  withStyles(styles),
-  ProtectedComponent,
+export default ProtectedComponent(
+  withStyles(styles)(
+    connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
+      ContentList,
+    ),
+  ),
 )
-
-export default enhance(ContentList)

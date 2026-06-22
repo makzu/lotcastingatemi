@@ -27,8 +27,10 @@ export default {
 
     const { chronicleId } = action.meta
     newState.chronicles[chronicleId].characters = [
-      ...(state.chronicles[chronicleId].characters ?? []),
-      ...action.payload.result,
+      ...new Set<number>([
+        ...(state.chronicles[chronicleId].characters ?? []),
+        ...action.payload.result,
+      ]),
     ]
 
     return newState
@@ -41,8 +43,10 @@ export default {
 
     const { chronicleId } = action.meta
     newState.chronicles[chronicleId].qcs = [
-      ...(state.chronicles[chronicleId].qcs ?? []),
-      ...action.payload.result,
+      ...new Set<number>([
+        ...(state.chronicles[chronicleId].qcs ?? []),
+        ...action.payload.result,
+      ]),
     ]
 
     return newState
@@ -55,8 +59,10 @@ export default {
 
     const { chronicleId } = action.meta
     newState.chronicles[chronicleId].battlegroups = [
-      ...(state.chronicles[chronicleId].battlegroups ?? []),
-      ...action.payload.result,
+      ...new Set<number>([
+        ...(state.chronicles[chronicleId].battlegroups ?? []),
+        ...action.payload.result,
+      ]),
     ]
 
     return newState

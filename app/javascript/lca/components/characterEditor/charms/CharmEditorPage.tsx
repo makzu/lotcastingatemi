@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   filterButton: {
     marginLeft: theme.spacing(2),
+    [theme.breakpoints.up('xl')]: {
+      display: 'none',
+    },
   },
   addButton: {
     marginLeft: theme.spacing(2),
@@ -68,8 +71,8 @@ const CharmEditorPage = () => {
     const type = nativeCharmType(character)
     let loadouts: string[] | undefined
 
-    if (character.type === 'AlchemicalCharacter') {
-      loadouts = [character.current_loadout]
+    if (showLoadoutTraits(character)) {
+      loadouts = [character.active_loadout]
     }
     dispatch(createCharm(id, { type, loadouts }))
   }

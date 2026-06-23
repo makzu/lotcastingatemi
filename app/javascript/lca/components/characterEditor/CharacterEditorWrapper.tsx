@@ -8,10 +8,7 @@ import MeritEditor from './merits/MeritEditor.tsx'
 const CharacterEditorWrapper = () => (
   <Switch>
     <Route path="/characters/:id/edit/charms" component={CharmEditor} />
-    <Route
-      path="/characters/:characterId/edit/merits"
-      component={MeritEditor}
-    />
+    <Route path="/characters/:id/edit/merits" component={MeritEditor} />
     <Route path="/characters/:characterId/edit/bio" component={BioEditor} />
     <Route path="/characters/:characterId/edit" component={CharacterEditor} />
   </Switch>

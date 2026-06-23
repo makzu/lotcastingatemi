@@ -6,7 +6,7 @@ export const useDocumentTitle = (title: string) => {
   }, [title])
 }
 
-export const useBetterDocumentTitle = (title: string) => {
+export const useBetterDocumentTitle = (title: string | undefined) => {
   let newTitle: string
   if (title === undefined) {
     newTitle = 'Lot-Casting Atemi'

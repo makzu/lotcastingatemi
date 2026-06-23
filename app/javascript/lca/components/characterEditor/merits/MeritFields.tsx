@@ -1,5 +1,4 @@
-import { type ChangeEvent, Component } from 'react'
-import { SortableHandle } from 'react-sortable-hoc'
+import type { ChangeEvent } from 'react'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -13,147 +12,141 @@ import { deepEqual } from 'fast-equals'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import RatingField from '@lca/components/generic/RatingField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
+import { destroyMerit, updateMerit } from '@lca/ducks/actions.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
 import type { Merit } from '@lca/types/index.ts'
 import { MERIT_RATING_MAX, MERIT_RATING_MIN } from '@lca/utils/constants.ts'
 import MeritEffectBlurb from './MeritEffectBlurb.tsx'
 
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
-))
+type FieldsProps = { merit: Merit }
+const MeritFields = (props: FieldsProps) => {
+  const dispatch = useAppDispatch()
+  const { merit } = props
 
-type FieldsProps = { merit: Merit; onUpdate: Function; onRemove: Function }
-class MeritFields extends Component<FieldsProps> {
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    const { merit } = this.props
-
-    if (deepEqual(merit[name], value)) return
-
-    this.props.onUpdate(merit.id, merit.character_id, { [name]: value })
+  const handleRemove = () => {
+    dispatch(destroyMerit(merit.id, merit.character_id))
   }
 
-  handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target
-    const { merit } = this.props
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    if (deepEqual(merit[name as keyof Merit], value)) return
+
+    dispatch(updateMerit(merit.id, merit.character_id, { [name]: value }))
+  }
+
+  const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name as keyof Merit
     const value = !merit[name]
 
-    this.props.onUpdate(merit.id, merit.character_id, { [name]: value })
+    dispatch(updateMerit(merit.id, merit.character_id, { [name]: value }))
   }
 
-  handleRemove = () => {
-    this.props.onRemove(this.props.merit.id)
-  }
+  return (
+    <BlockPaper>
+      <Button
+        onClick={handleRemove}
+        style={{ position: 'absolute', bottom: '0.5em', right: '0.5em' }}
+      >
+        Delete&nbsp;
+        <Delete />
+      </Button>
 
-  render() {
-    const { merit } = this.props
-    const { handleChange, handleCheck } = this
+      <Typography
+        component="div"
+        style={{ position: 'absolute', top: '0.5em', right: '0.5em' }}
+      >
+        <DragHandleIcon onClick={(e) => e.preventDefault()} />
+      </Typography>
 
-    return (
-      <BlockPaper>
-        <Button
-          onClick={this.handleRemove}
-          style={{ position: 'absolute', bottom: '0.5em', right: '0.5em' }}
+      <Typography component="div">
+        <TextField
+          name="merit_name"
+          value={merit.merit_name}
+          onChange={handleChange}
+          label={merit.merit_cat === 'flaw' ? 'Flaw' : 'Merit'}
+          margin="dense"
+        />
+        &nbsp;&nbsp;
+        <RatingField
+          trait="rating"
+          value={merit.rating}
+          label="Rating"
+          margin="dense"
+          narrow
+          min={MERIT_RATING_MIN}
+          max={MERIT_RATING_MAX}
+          onChange={handleChange}
+        />
+        {merit.rating === 6 && (
+          <span style={{ verticalAlign: 'center' }}>
+            {'(N/A)'}
+            &nbsp;&nbsp;
+          </span>
+        )}
+        <MuiTextField
+          select
+          name="merit_cat"
+          value={merit.merit_cat}
+          label="Type"
+          margin="dense"
+          onChange={handleChange}
         >
-          Delete&nbsp;
-          <Delete />
-        </Button>
+          <MenuItem value="story">Story</MenuItem>
+          <MenuItem value="innate">Innate</MenuItem>
+          <MenuItem value="purchased">Purchased</MenuItem>
+          <MenuItem value="flaw">Flaw</MenuItem>
+        </MuiTextField>
+      </Typography>
 
-        <Typography
-          component="div"
-          style={{ position: 'absolute', top: '0.5em', right: '0.5em' }}
-        >
-          <Handle />
-        </Typography>
+      <div style={{ display: 'flex' }}>
+        <TextField
+          name="label"
+          value={merit.label}
+          style={{ flex: 1 }}
+          label="Display Name (optional)"
+          margin="dense"
+          onChange={handleChange}
+        />
+        &nbsp;
+      </div>
 
-        <Typography component="div">
-          <TextField
-            name="merit_name"
-            value={merit.merit_name}
-            onChange={handleChange}
-            label={merit.merit_cat === 'flaw' ? 'Flaw' : 'Merit'}
-            margin="dense"
-          />
-          &nbsp;&nbsp;
-          <RatingField
-            trait="rating"
-            value={merit.rating}
-            label="Rating"
-            margin="dense"
-            narrow
-            min={MERIT_RATING_MIN}
-            max={MERIT_RATING_MAX}
-            onChange={handleChange}
-          />
-          {merit.rating === 6 && (
-            <span>
-              {'(N/A)'}
-              &nbsp;&nbsp;
-            </span>
-          )}
-          <MuiTextField
-            select
-            name="merit_cat"
-            value={merit.merit_cat}
-            label="Type"
-            margin="dense"
-            onChange={handleChange}
-          >
-            <MenuItem value="story">Story</MenuItem>
-            <MenuItem value="innate">Innate</MenuItem>
-            <MenuItem value="purchased">Purchased</MenuItem>
-            <MenuItem value="flaw">Flaw</MenuItem>
-          </MuiTextField>
-        </Typography>
+      <div>
+        <TextField
+          name="description"
+          value={merit.description}
+          label="Description"
+          margin="dense"
+          multiline
+          fullWidth
+          maxRows={10}
+          onChange={handleChange}
+        />
+      </div>
 
-        <div style={{ display: 'flex' }}>
-          <TextField
-            name="label"
-            value={merit.label}
-            style={{ flex: 1 }}
-            label="Display Name (optional)"
-            margin="dense"
-            onChange={handleChange}
-          />
-          &nbsp;
-        </div>
-
-        <div>
-          <TextField
-            name="description"
-            value={merit.description}
-            label="Description"
-            margin="dense"
-            multiline
-            fullWidth
-            maxRows={10}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div style={{ display: 'flex' }}>
-          <TextField
-            name="ref"
-            value={merit.ref}
-            onChange={handleChange}
-            label="Reference"
-            margin="dense"
-          />
-          &nbsp;&nbsp;
-          <FormControlLabel
-            control={
-              <Checkbox
-                name="supernatural"
-                checked={merit.supernatural}
-                onChange={handleCheck}
-              />
-            }
-            label="Supernatural"
-          />
-        </div>
-        <MeritEffectBlurb name={merit.merit_name} rating={merit.rating} />
-      </BlockPaper>
-    )
-  }
+      <div style={{ display: 'flex' }}>
+        <TextField
+          name="ref"
+          value={merit.ref}
+          onChange={handleChange}
+          label="Reference"
+          margin="dense"
+        />
+        &nbsp;&nbsp;
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="supernatural"
+              checked={merit.supernatural}
+              onChange={handleCheck}
+            />
+          }
+          label="Supernatural"
+        />
+      </div>
+      <MeritEffectBlurb name={merit.merit_name} rating={merit.rating} />
+    </BlockPaper>
+  )
 }
 
 export default MeritFields

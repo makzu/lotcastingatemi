@@ -2,6 +2,9 @@
 
 ###### _Unreleased_
 
+- The Filter button no longer shows on the Charms page in the widest display mode
+- Newly-created Alchemical Charms are now auto-assigned to the Alchemical's current Charm loadout
+
 ## v128
 
 - Fix logins not working (whoops)

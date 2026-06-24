@@ -37,10 +37,13 @@ const ResourceEditor = ({ character, onChange }: Props) => {
   return (
     <ListAttributeEditor
       label="Misc Resources"
-      character={character}
-      trait="resources"
+      traitName="resources"
+      trait={character.resources}
       Fields={ResourceFields}
-      newObject={{ resource: 'New Resource', value: 0 }}
+      newObject={{
+        resource: `New Resource ${character.resources.length + 1}`,
+        value: 0,
+      }}
       onChange={onChange}
     />
   )

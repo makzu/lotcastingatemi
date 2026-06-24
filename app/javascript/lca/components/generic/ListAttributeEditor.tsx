@@ -1,25 +1,16 @@
-import { Component } from 'react'
-import {
-  arrayMove,
-  SortableContainer,
-  SortableElement,
-  SortableHandle,
-} from 'react-sortable-hoc'
+import type React from 'react'
+import type { ReactNode } from 'react'
+import { arrayMove as move } from '@dnd-kit/helpers'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable, useSortable } from '@dnd-kit/react/sortable'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
-import { type Theme, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 
-import type { Character, QC } from '@lca/types/index.ts'
-
-const SortableItem = SortableElement(({ children }) => children)
-const SortableList = SortableContainer(({ items }) => <div>{items}</div>)
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
-))
+import type { Character } from '@lca/types/index.ts'
 
 export type ListAttributeFieldTypes = {
   character: Object
@@ -28,137 +19,122 @@ export type ListAttributeFieldTypes = {
   classes: Object
 }
 
-const styles = (theme: Theme) => ({
-  fieldContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  grabHandle: {
-    marginRight: theme.spacing(),
-  },
-  nameField: {
-    flex: 1,
-    marginRight: theme.spacing(),
-  },
-  withMargin: {
-    marginRight: theme.spacing(),
-  },
-  checkboxWrap: {
-    paddingTop: theme.spacing(),
-  },
-  floatingLabel: {
-    ...theme.typography.caption,
-    marginBottom: theme.spacing(-1.25),
-    textAlign: 'center',
-  },
-  countLabel: {
-    ...theme.typography.caption,
-  },
-  idField: {
-    width: '3em',
-    '& input': {
-      '-moz-appearance': 'textfield',
-    },
-    '& ::-webkit-inner-spin-button': {
-      '-webkit-appearance': 'none',
-      margin: 0,
-    },
-  },
-})
-
-type Props = {
-  character: Character | QC
-  trait: string
-  label: string
-  newObject: Object | string
-  nonObject?: boolean
-  showCount?: boolean
-  Fields: Function
-  onChange: Function
-  classes: Object
+interface SortableProps {
+  id: string
+  index: number
+  children: ReactNode
 }
-class ListAttributeEditor extends Component<Props> {
-  onChange = (index, e) => {
-    const { character, trait, nonObject } = this.props
-    var newTrait = JSON.parse(JSON.stringify(character[trait]))
+const Sortable = ({ id, index, children }: SortableProps) => {
+  const { ref } = useSortable({ id, index })
 
+  return (
+    <div ref={ref} style={{ display: 'flex', alignItems: 'center' }}>
+      {children}
+    </div>
+  )
+}
+
+type ArrayProperties<T> = {
+  [K in keyof T as T[K] extends unknown[] ? K : never]: T[K]
+}
+
+type ArrayAttributeNames<T> = keyof ArrayProperties<T>
+
+interface Props<T extends ArrayAttributeNames<Character>> {
+  trait: Character[T]
+  traitName: T
+  label: string
+  Fields: React.ComponentType<ListAttributeFieldTypes>
+  newObject: Character[T][number]
+  onChange: (e: { target: { name: string; value: any } }) => void
+}
+export const ListAttributeEditor = <T extends ArrayAttributeNames<Character>>(
+  props: Props<T>,
+) => {
+  const { label, trait, newObject, onChange, traitName, Fields } = props
+
+  const change = (value: typeof trait) => {
+    onChange({ target: { name: traitName, value } })
+  }
+
+  const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTrait = structuredClone(trait)
+    const { name } = e.target
     const val = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
-    if (nonObject) newTrait[index] = val
-    else newTrait[index][e.target.name] = val
+    if (typeof newTrait[i] === 'string') newTrait[i] = val
+    else newTrait[i][name] = val
 
-    this.handleChange(newTrait)
+    change(newTrait)
   }
 
-  onAdd() {
-    const { character, trait } = this.props
-    this.handleChange([...character[trait], this.props.newObject])
+  const handleRemove = (i: number) => {
+    const newTrait = structuredClone(trait)
+
+    newTrait.splice(i, 1)
+
+    change(newTrait)
   }
 
-  onRemove(index) {
-    const { character, trait } = this.props
-    var newTrait = [...character[trait]]
-    newTrait.splice(index, 1)
-
-    this.handleChange(newTrait)
+  const handleAdd = () => {
+    onChange({
+      target: { name: traitName, value: [...trait, newObject] },
+    })
   }
 
-  handleSort = ({ oldIndex, newIndex }) => {
-    const { character, trait } = this.props
-    var newTrait = arrayMove(character[trait], oldIndex, newIndex)
+  const formFields = trait.map((t, i) => (
+    <Sortable key={JSON.stringify(t)} id={JSON.stringify(t)} index={i}>
+      <Typography component="div" style={{ marginRight: '8px' }}>
+        <DragHandleIcon onClick={(e) => e.preventDefault()} />
+      </Typography>
 
-    this.handleChange(newTrait)
-  }
+      <Fields trait={t} classes={{}} onChange={(e) => handleChange(i, e)} />
 
-  handleChange(newTrait) {
-    this.props.onChange({ target: { name: this.props.trait, value: newTrait } })
-  }
+      <IconButton
+        onClick={() => {
+          handleRemove(i)
+        }}
+      >
+        <ContentRemoveCircle />
+      </IconButton>
+    </Sortable>
+  ))
 
-  render() {
-    const { character, trait, Fields, showCount, classes } = this.props
-    const { onChange, onAdd, onRemove, handleSort } = this
+  return (
+    <div>
+      <Typography variant="subtitle1" style={{ display: 'flex' }}>
+        <span style={{ flex: 1 }}>{label}</span>
+        {/* {showCount && (
+        <span className={classes.countLabel}>
+          &nbsp;({trait.length} total)
+        </span>
+      )} */}
+        <Button onClick={handleAdd}>
+          Add &nbsp;
+          <ContentAddCircle />
+        </Button>
+      </Typography>
 
-    const rows = character[trait].map((t, index) => (
-      <SortableItem key={index} index={index}>
-        <div className={classes.fieldContainer}>
-          <Typography component="div" className={classes.grabHandle}>
-            <Handle />
-          </Typography>
-          <Fields
-            trait={t}
-            character={character}
-            onChange={onChange.bind(this, index)}
-            classes={classes}
-          />
-          <IconButton onClick={onRemove.bind(this, index)}>
-            <ContentRemoveCircle />
-          </IconButton>
-        </div>
-      </SortableItem>
-    ))
+      <DragDropProvider
+        onDragEnd={(event) => {
+          if (event.canceled) return
 
-    return (
-      <div data-cy={`${this.props.trait}-list-editor`}>
-        <Typography variant="subtitle1">
-          {this.props.label}
-          {showCount && (
-            <span className={classes.countLabel}>
-              &nbsp;({character[trait].length} total)
-            </span>
-          )}
-          <Button
-            onClick={onAdd.bind(this)}
-            data-cy={`add-${this.props.trait}`}
-          >
-            Add &nbsp;
-            <ContentAddCircle />
-          </Button>
-        </Typography>
-        {rows.length === 0 && <Typography paragraph>None</Typography>}
-        <SortableList items={rows} onSortEnd={handleSort} useDragHandle />
-      </div>
-    )
-  }
+          const { source } = event.operation
+          if (isSortable(source)) {
+            if (source.index === source.initialIndex) {
+              return
+            }
+
+            const newTrait = move(trait, source.initialIndex, source.index)
+
+            change(newTrait)
+          }
+        }}
+      >
+        {formFields}
+      </DragDropProvider>
+    </div>
+  )
 }
 
-export default withStyles(styles)(ListAttributeEditor)
+export default ListAttributeEditor

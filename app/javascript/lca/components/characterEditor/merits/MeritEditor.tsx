@@ -1,31 +1,27 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { SortableElement } from 'react-sortable-hoc'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable } from '@dnd-kit/react/sortable'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 import HelpIcon from '@material-ui/icons/Help'
-import { compose } from 'recompose'
 
-import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
-import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import CharacterLoadError from '@lca/components/CharacterSheet/CharacterLoadError.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
-import { createMerit, destroyMerit, updateMerit } from '@lca/ducks/actions.ts'
-import { updateMeritSort } from '@lca/ducks/entities/merit.ts'
+import { createMerit, updateMerit } from '@lca/ducks/actions.ts'
 import {
   getMeritsForCharacter,
   getSpecificCharacter,
-} from '@lca/selectors/index.ts'
+} from '@lca/ducks/entities/index.ts'
+import { useAppSelector, useIdFromParams } from '@lca/hooks/index.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
+import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
 import commonStyles from '@lca/styles/index.ts'
-import type { Character, Merit } from '@lca/types/index.ts'
 import MeritFields from './MeritFields.tsx'
-
-const SortableItem = SortableElement(({ children }) => children)
 
 const styles = (theme) => commonStyles(theme)
 
@@ -33,145 +29,84 @@ const styles = (theme) => commonStyles(theme)
  * ref pre-filled
  * TODO:  See how kosher something like above would be
  * */
-type ExposedProps = {
-  match: { params: { characterId: number } }
-}
-type Props = ExposedProps & {
-  character: Character
-  merits: Merit[]
-  updateMerit: Function
-  destroyMerit: Function
-  createMerit: Function
-  updateMeritSort: Function
+
+type Props = {
   classes: Object
 }
 
-class MeritEditor extends Component<Props> {
-  handleUpdate = (id, charId, trait) => {
-    this.props.updateMerit(id, charId, trait)
+const MeritEditor = (props: Props) => {
+  const { classes } = props
+  const dispatch = useAppDispatch()
+  const id = useIdFromParams()
+  const character = useAppSelector((state) => getSpecificCharacter(state, id))
+  const merits = useAppSelector((state) => getMeritsForCharacter(state, id))
+
+  useBetterDocumentTitle(character ? `${character.name} Merits` : undefined)
+
+  /* Escape hatch */
+  if (character === undefined) return <CharacterLoadError />
+
+  const handleAdd = () => {
+    dispatch(createMerit(character.id))
   }
 
-  handleAdd = () => {
-    this.props.createMerit(this.props.character.id)
-  }
+  const mts = merits.map((m, i) => (
+    <SortableGridItem key={m.id} id={m.id} index={i}>
+      <MeritFields merit={m} />
+    </SortableGridItem>
+  ))
 
-  handleRemove = (id) => {
-    this.props.destroyMerit(id, this.props.character.id)
-  }
+  const totalDots = merits.reduce((acc, merit) => acc + merit.rating, 0)
 
-  handleSort = ({ oldIndex, newIndex }) => {
-    if (oldIndex === newIndex) return
-    const meritA = this.props.merits[oldIndex]
-    const meritB = this.props.merits[newIndex]
-    const offset = meritA.sorting > meritB.sorting ? -1 : 1
-    this.props.updateMeritSort({
-      id: meritA.id,
-      sorting: meritB.sorting + offset,
-    })
-    this.props.updateMerit(meritA.id, this.props.character.id, {
-      sorting_position: newIndex,
-    })
-  }
+  return (
+    <Grid container spacing={3}>
+      <Grid item xs={12} className={classes.stickyHeader}>
+        <Typography variant="h5" component="div" style={{ display: 'flex' }}>
+          <div>
+            Merits &nbsp;&nbsp;
+            <Button onClick={handleAdd}>
+              Add Merit&nbsp;
+              <ContentAddCircle />
+            </Button>
+          </div>
+          <div style={{ flex: 1, textAlign: 'right' }}>
+            <IconButton component={Link} to="/help/merits">
+              <HelpIcon />
+            </IconButton>
+          </div>
+        </Typography>
+      </Grid>
 
-  render() {
-    /* Escape hatch */
-    if (this.props.character === undefined)
-      return (
-        <div>
-          <Typography paragraph>This Character has not yet loaded.</Typography>
-        </div>
-      )
+      <DragDropProvider
+        onDragEnd={(event) => {
+          const { source } = event.operation
 
-    const { handleAdd, handleRemove, handleSort } = this
-    const { merits, updateMerit, classes } = this.props
+          if (isSortable(source)) {
+            if (source.index === source.initialIndex) {
+              return
+            }
 
-    const mts = merits.map((m, i) => (
-      <SortableItem key={m.id} index={i}>
-        <Grid item key={m.id} xs={12} md={6} xl={4}>
-          <MeritFields
-            merit={m}
-            character={this.props.character}
-            onUpdate={updateMerit}
-            onRemove={handleRemove}
-          />
-        </Grid>
-      </SortableItem>
-    ))
-
-    const totalDots = merits.reduce((acc, merit) => acc + merit.rating, 0)
-
-    return (
-      <>
-        <DocumentTitle
-          title={`${this.props.character.name} Merits | Lot-Casting Atemi`}
-        />
-
-        <Hidden smUp>
-          <div style={{ height: '1.5em' }}>&nbsp;</div>
-        </Hidden>
-
-        <SortableGridList
-          header={
-            <Typography
-              variant="h5"
-              component="div"
-              style={{ display: 'flex' }}
-            >
-              <div>
-                Merits &nbsp;&nbsp;
-                <Button onClick={handleAdd}>
-                  Add Merit&nbsp;
-                  <ContentAddCircle />
-                </Button>
-              </div>
-              <div style={{ flex: 1, textAlign: 'right' }}>
-                <IconButton component={Link} to="/help/merits">
-                  <HelpIcon />
-                </IconButton>
-              </div>
-            </Typography>
+            dispatch(
+              updateMerit(source.id as number, character.id, {
+                sorting_position: source.index,
+              }),
+            )
           }
-          items={mts}
-          classes={classes}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="xy"
-        />
+        }}
+      >
+        {mts}
+      </DragDropProvider>
 
+      <Grid item xs={12}>
         <Typography
           variant="caption"
           style={{ marginTop: '2.5em', marginBottom: '-1.5em' }}
         >
           {totalDots} dots of merits total
         </Typography>
-      </>
-    )
-  }
+      </Grid>
+    </Grid>
+  )
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
-  const id = ownProps.match.params.characterId
-  const character = getSpecificCharacter(state, id)
-  let merits = []
-
-  if (character !== undefined && character.merits !== undefined) {
-    merits = getMeritsForCharacter(state, id)
-  }
-
-  return {
-    character,
-    merits,
-  }
-}
-const enhance = compose(
-  connect(mapStateToProps, {
-    updateMerit,
-    destroyMerit,
-    createMerit,
-    updateMeritSort,
-  }),
-  withStyles(styles),
-  ProtectedComponent,
-)
-
-export default enhance(MeritEditor)
+export default ProtectedComponent(withStyles(styles)(MeritEditor))

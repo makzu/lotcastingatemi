@@ -53,18 +53,24 @@ const IntimacyEditor = ({ character, onChange }: Props) => {
     <div>
       <ListAttributeEditor
         label="Principles"
-        character={character}
-        trait="principles"
+        traitName="principles"
+        trait={character.principles}
         Fields={IntimacyFields}
-        newObject={{ subject: 'New Principle', rating: 1 }}
+        newObject={{
+          subject: `New Principle ${character.principles.length + 1}`,
+          rating: 1,
+        }}
         onChange={onChange}
       />
       <ListAttributeEditor
         label="Ties"
-        character={character}
-        trait="ties"
+        traitName="ties"
+        trait={character.ties}
         Fields={IntimacyFields}
-        newObject={{ subject: 'New Tie ', rating: 1 }}
+        newObject={{
+          subject: `New Tie ${character.ties.length + 1}`,
+          rating: 1,
+        }}
         onChange={onChange}
       />
     </div>

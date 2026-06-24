@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import { Help as HelpIcon } from '@material-ui/icons'
 
-import ListAttributeEditor from '@lca/components/generic/ListAttributeEditor.tsx'
+import { ListAttributeEditor } from '@lca/components/generic/ListAttributeEditor.tsx'
 import { useDialogLogic } from '@lca/hooks/index.ts'
 import type { Character } from '@lca/types/index.ts'
 import AnimalFormFields from './AnimalFormFields.tsx'
@@ -36,10 +36,13 @@ const AnimalFormsEditor = ({ character, onChange }: Props) => {
         <DialogContent>
           <ListAttributeEditor
             label="Animal Forms"
-            character={character}
-            trait="forms"
+            traitName="forms"
+            trait={character.forms}
             Fields={AnimalFormFields}
-            newObject={{ form: '' }}
+            newObject={{
+              form: `New Form ${character.forms.length + 1}`,
+              qc_id: undefined,
+            }}
             onChange={onChange}
           />
         </DialogContent>

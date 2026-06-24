@@ -69,10 +69,14 @@ const MoteCommittmentEditor = ({ character, onChange }: Props) => {
   return (
     <ListAttributeEditor
       label="Mote Committments"
-      character={character}
-      trait="motes_committed"
+      traitName="motes_committed"
+      trait={character.motes_committed}
       Fields={CommitFields}
-      newObject={{ pool: 'peripheral', label: '', motes: 0 }}
+      newObject={{
+        pool: 'peripheral',
+        label: `New Commitment ${character.motes_committed.length + 1}`,
+        motes: 0,
+      }}
       onChange={onChange}
     />
   )

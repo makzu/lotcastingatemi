@@ -1,5 +1,4 @@
 import { type ChangeEvent, Component } from 'react'
-import { SortableHandle } from 'react-sortable-hoc'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Delete from '@material-ui/icons/Delete'
@@ -12,10 +11,6 @@ import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import CharmTimingSelect from '@lca/components/shared/selects/CharmTimingSelect.tsx'
 import type { QcCharm } from '@lca/types/qc.ts'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
-))
 
 type Props = {
   charm: QcCharm
@@ -51,7 +46,7 @@ export default class QcCharmFields extends Component<Props> {
             marginRight: '1em',
           }}
         >
-          <Handle />
+          <DragHandleIcon onClick={(e) => e.preventDefault()} />
         </Typography>
         <TextField
           name="name"

@@ -273,19 +273,25 @@ function AbilityEditor({ character, onChange }: Props) {
 
       <ListAttributeEditor
         label="Craft"
-        character={character}
-        trait="abil_craft"
+        traitName="abil_craft"
+        trait={character.abil_craft}
         Fields={CraftFields}
-        newObject={{ craft: 'New Craft', rating: 1 }}
+        newObject={{
+          craft: `New Craft  ${character.abil_craft.length + 1}`,
+          rating: 1,
+        }}
         onChange={onChange}
       />
 
       <ListAttributeEditor
         label="Martial Arts"
-        character={character}
-        trait="abil_martial_arts"
+        traitName={'abil_martial_arts'}
+        trait={character.abil_martial_arts}
         Fields={MartialArtsFields}
-        newObject={{ style: 'New MA', rating: 1 }}
+        newObject={{
+          style: `New MA ${character.abil_martial_arts.length + 1}`,
+          rating: 1,
+        }}
         onChange={onChange}
       />
     </BlockPaper>

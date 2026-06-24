@@ -69,22 +69,21 @@ const QcActionEditor = ({ qc, onChange }: Props) => {
 
       <ListAttributeEditor
         label="Actions"
-        character={qc}
-        trait="actions"
+        traitName="actions"
+        trait={qc.actions}
         Fields={ActionFields}
-        newObject={{ action: 'New Action', pool: 2 }}
+        newObject={{ action: `New Action ${qc.actions.length + 1}`, pool: 2 }}
         onChange={onChange}
       />
 
       {qc.is_sorcerer && (
         <ListAttributeEditor
           label="Shaping Rituals"
-          character={qc}
-          trait="rituals"
+          traitName="rituals"
+          trait={qc.rituals}
           Fields={SorceryFields}
-          newObject={''}
+          newObject={`New Ritual ${qc.rituals.length + 1}`}
           onChange={onChange}
-          nonObject
         />
       )}
     </div>

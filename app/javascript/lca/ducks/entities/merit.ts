@@ -24,12 +24,12 @@ export const [createMerit, updateMerit, destroyMerit] =
 /* Selectors */
 import { createCachedSelector } from 're-reselect'
 
-import type { State } from '@lca/ducks/index.ts'
+import type { RootState } from '@lca/store.ts'
 import { sortOrderSort } from '@lca/utils/index.ts'
 import { unwrapped } from './_lib.ts'
 import { getSpecificCharacter } from './character.ts'
 
-const getMerits = (state: State) => unwrapped(state).merits
+const getMerits = (state: RootState) => unwrapped(state).merits
 
 export const getMeritsForCharacter = createCachedSelector(
   [getSpecificCharacter, getMerits],

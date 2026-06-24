@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { SortableHandle } from 'react-sortable-hoc'
 import Divider from '@material-ui/core/Divider'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
@@ -18,10 +17,6 @@ import { getSpecificBattlegroup } from '@lca/selectors/index.ts'
 import type { QcAttack } from '@lca/types/index.ts'
 import { bgAttackPool, bgDamage } from '@lca/utils/calculated/index.ts'
 import RatingField from '../generic/RatingField.tsx'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
-))
 
 const styles = (theme) => ({
   wrap: {
@@ -97,7 +92,7 @@ class QcAttackFields extends Component<Props> {
     return (
       <div className={classes.wrap}>
         <Typography component="div" className={classes.grabHandle}>
-          <Handle />
+          <DragHandleIcon onClick={(e) => e.preventDefault()} />
         </Typography>
 
         <TextField

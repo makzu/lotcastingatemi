@@ -1,12 +1,12 @@
-import { type ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { DragDropProvider } from '@dnd-kit/react'
-import { isSortable, useSortable } from '@dnd-kit/react/sortable'
-import { Grid } from '@material-ui/core'
+import { isSortable } from '@dnd-kit/react/sortable'
 
 import {
   type CharmFilter,
   filterCharms,
 } from '@lca/components/CharacterSheet/Charms/useCharmFilters.ts'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import {
   getSpellsForCharacter,
   updateSpell,
@@ -21,22 +21,6 @@ interface ExposedProps {
   filters: CharmFilter
 }
 
-interface SortableProps {
-  id: number
-  index: number
-  children: ReactNode
-}
-
-function Sortable({ id, index, children }: SortableProps) {
-  const { ref } = useSortable({ id, index })
-
-  return (
-    <Grid item ref={ref} xs={12} md={6} xl={4}>
-      {children}
-    </Grid>
-  )
-}
-
 const SpellList = (props: ExposedProps) => {
   const dispatch = useAppDispatch()
   const { character, filters } = props
@@ -46,14 +30,14 @@ const SpellList = (props: ExposedProps) => {
   )
   const filteredSpells = filterCharms(spells, filters, 'spell') as Spell[]
   const mappedSpells = filteredSpells.map((s, i) => (
-    <Sortable key={s.id} id={s.id} index={i}>
+    <SortableGridItem key={s.id} id={s.id} index={i}>
       <SpellFields
         character={character}
         spell={s}
         isOpen={openSpell === s.id}
         setOpenSpell={setOpenSpell}
       />
-    </Sortable>
+    </SortableGridItem>
   ))
 
   return (

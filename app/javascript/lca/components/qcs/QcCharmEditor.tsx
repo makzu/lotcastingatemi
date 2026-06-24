@@ -1,121 +1,91 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable } from '@dnd-kit/react/sortable'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import {
   createQcCharm,
   destroyQcCharm,
   updateQcCharm,
-} from '@lca/ducks/actions.ts'
-import { updateQcCharmSort } from '@lca/ducks/entities/qc_charm.ts'
-import { getCharmsForQc } from '@lca/selectors/index.ts'
+} from '@lca/ducks/entities/qc_charm.ts'
+import { useAppDispatch, useAppSelector } from '@lca/hooks/index.ts'
+import { getCharmsForQc } from '@lca/selectors/qc.ts'
 import commonStyles from '@lca/styles/index.ts'
-import type { QC, QcCharm } from '@lca/types/index.ts'
+import type { QC } from '@lca/types/index.ts'
 import QcCharmFields from './QcCharmFields.tsx'
-
-const SortableItem = SortableElement(({ children }) => children)
 
 const styles = (theme) => ({
   ...commonStyles(theme),
 })
 
-type ExposedProps = {
+type Props = {
   qc: QC
-}
-type Props = ExposedProps & {
-  qc_charms: QcCharm[]
-  updateQcCharm: Function
-  createQcCharm: Function
-  destroyQcCharm: Function
-  updateQcCharmSort: Function
   classes: Object
 }
+const QcCharmEditor = (props: Props) => {
+  const dispatch = useAppDispatch()
+  const { qc, classes } = props
 
-class QcCharmEditor extends Component<Props> {
-  handleChange = (id, trait) => {
-    this.props.updateQcCharm(id, this.props.qc.id, trait)
+  const handleAdd = () => {
+    dispatch(createQcCharm(qc.id))
   }
 
-  handleAdd = () => {
-    this.props.createQcCharm(this.props.qc.id)
+  const handleChange = (id, trait) => {
+    dispatch(updateQcCharm(id, qc.id, trait))
   }
 
-  handleRemove = (id) => {
-    this.props.destroyQcCharm(id, this.props.qc.id)
+  const handleRemove = (id: number) => {
+    dispatch(destroyQcCharm(id, qc.id))
   }
 
-  handleSort = ({ oldIndex, newIndex }) => {
-    if (oldIndex === newIndex) return
-    const charmA = this.props.qc_charms[oldIndex]
-    const charmB = this.props.qc_charms[newIndex]
-    const offset = charmA.sorting > charmB.sorting ? -1 : 1
-    this.props.updateQcCharmSort({
-      id: charmA.id,
-      sorting: charmB.sorting + offset,
-    })
-    this.props.updateQcCharm(charmA.id, this.props.qc.id, {
-      sorting_position: newIndex,
-    })
-  }
-  render() {
-    const { handleChange, handleAdd, handleRemove, handleSort } = this
-    const { classes } = this.props
+  const qc_charms = useAppSelector((state) => getCharmsForQc(state, qc.id))
 
-    const qcCharms = this.props.qc_charms.map((charm, i) => (
-      <SortableItem key={charm.id} index={i}>
-        <Grid item xs={12} md={6} lg={4}>
-          <QcCharmFields
-            key={charm.id}
-            charm={charm}
-            qc={this.props.qc}
-            onCharmChange={handleChange}
-            onRemoveClick={handleRemove}
-          />
-        </Grid>
-      </SortableItem>
-    ))
-
-    return (
-      <SortableGridList
-        header={
-          <Typography variant="h6">
-            Charms
-            <Button onClick={handleAdd}>
-              Add Charm
-              <ContentAddCircle />
-            </Button>
-          </Typography>
-        }
-        items={qcCharms}
-        classes={classes}
-        onSortEnd={handleSort}
-        useDragHandle
-        axis="x"
+  const qcCharms = qc_charms.map((charm, i) => (
+    <SortableGridItem id={charm.id} key={charm.id} index={i}>
+      <QcCharmFields
+        key={charm.id}
+        charm={charm}
+        onCharmChange={handleChange}
+        onRemoveClick={handleRemove}
       />
-    )
-  }
+    </SortableGridItem>
+  ))
+
+  return (
+    <Grid container spacing={3}>
+      <Grid item xs={12} className={classes.stickyHeader}>
+        <Typography variant="h6">
+          Charms
+          <Button onClick={handleAdd}>
+            Add Charm
+            <ContentAddCircle />
+          </Button>
+        </Typography>
+      </Grid>
+
+      <DragDropProvider
+        onDragEnd={(event) => {
+          const { source } = event.operation
+
+          if (isSortable(source)) {
+            if (source.index === source.initialIndex) {
+              return
+            }
+
+            handleChange(source.id as number, {
+              sorting_position: source.index,
+            })
+          }
+        }}
+      >
+        {qcCharms}
+      </DragDropProvider>
+    </Grid>
+  )
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
-  const qc = ownProps.qc
-  const qc_charms = qc !== undefined ? getCharmsForQc(state, qc.id) : []
-
-  return {
-    qc_charms,
-  }
-}
-
-export default withStyles(styles)(
-  connect(mapStateToProps, {
-    updateQcCharm,
-    createQcCharm,
-    destroyQcCharm,
-    updateQcCharmSort,
-  })(QcCharmEditor),
-)
+export default withStyles(styles)(QcCharmEditor)

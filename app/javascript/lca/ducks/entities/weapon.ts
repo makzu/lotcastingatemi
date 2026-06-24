@@ -26,22 +26,18 @@ export default createTraitReducer('weapon', undefined, {
 export const [createWeapon, updateWeapon, destroyWeapon] =
   createApiActions('weapon')
 
-const getState = (s: RootState) => s
-
 export const getSpecificWeapon = (state: RootState, id: number): Weapon =>
   unwrapped(state).weapons[id]
 
 export const getWeaponIDsForCharacter = (state: RootState, id: number) =>
   getSpecificCharacter(state, id).weapons
 
+const getWeapons = (state: RootState) => unwrapped(state).weapons
+
 export const getWeaponsForCharacter = createCachedSelector(
-  [getSpecificCharacter, getState],
-  (character, state) => {
-    if (character == null) {
-      return null
-    }
-    return character.weapons
-      .map((w) => getSpecificWeapon(state, w))
-      .sort(sortOrderSort)
-  },
+  [getSpecificCharacter, getWeapons],
+  (character, weapons) =>
+    character == null
+      ? []
+      : character.weapons.map((w) => weapons[w]).sort(sortOrderSort),
 )((_s: RootState, i: number) => i)

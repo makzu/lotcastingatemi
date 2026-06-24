@@ -51,7 +51,7 @@ export interface XpLogEntry {
 
 export interface Form {
   form: string
-  qc_id: number
+  qc_id?: number
 }
 
 export type ExaltType =
@@ -142,8 +142,7 @@ export interface Character extends PlayerAsset, WithSharedStats {
   xp_craft_silver: number
   xp_craft_gold: number
   xp_craft_white: number
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  anima_powers: any[]
+  anima_powers: never[]
   limit_trigger: string
   limit: number
 

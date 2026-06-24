@@ -9,54 +9,53 @@ import TextField from '@lca/components/generic/TextField.tsx'
 import type { Character } from '@lca/types/index.ts'
 import { abilitiesWithRatings } from '@lca/utils/calculated/index.ts'
 
-function SpecialtyFields(props: ListAttributeFieldTypes) {
-  const { trait, character, onChange, classes } = props
-  const { ability, context } = trait
-  const abilities = abilitiesWithRatings(character)
-
-  return (
-    <>
-      <AbilitySelect
-        name="ability"
-        value={ability}
-        label="Ability"
-        onChange={onChange}
-        abilities={abilities}
-        prependOptions={
-          abilities.length === 0 && (
-            <MenuItem disabled>No Abilities with ratings &gt; 0</MenuItem>
-          )
-        }
-      />
-
-      <TextField
-        name="context"
-        value={context}
-        className={classes.nameField}
-        label="Specialty"
-        margin="dense"
-        onChange={onChange}
-      />
-    </>
-  )
-}
-
 type Props = {
   character: Character
   onChange: Function
 }
 
 const SpecialtyEditor = ({ character, onChange }: Props) => {
+  const abilities = abilitiesWithRatings(character)
+
+  const SpecialtyFields = (props: ListAttributeFieldTypes) => {
+    return (
+      <>
+        <AbilitySelect
+          name="ability"
+          value={props.trait.ability}
+          label="Ability"
+          onChange={props.onChange}
+          abilities={abilities}
+          prependOptions={
+            abilities.length === 0 && (
+              <MenuItem disabled>No Abilities with ratings &gt; 0</MenuItem>
+            )
+          }
+        />
+
+        <TextField
+          name="context"
+          value={props.trait.context}
+          label="Specialty"
+          margin="dense"
+          onChange={props.onChange}
+        />
+      </>
+    )
+  }
+
   return (
     <BlockPaper>
       <ListAttributeEditor
         label="Specialties"
-        character={character}
-        trait="specialties"
+        traitName="specialties"
+        trait={character.specialties}
         Fields={SpecialtyFields}
-        newObject={{ context: 'New Specialty', ability: '' }}
+        newObject={{
+          context: `New Specialty ${character.specialties.length + 1}`,
+          ability: '',
+        }}
         onChange={onChange}
-        showCount
       />
     </BlockPaper>
   )

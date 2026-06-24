@@ -1,6 +1,6 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable } from '@dnd-kit/react/sortable'
+import { Divider } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Typography from '@material-ui/core/Typography'
@@ -8,221 +8,197 @@ import Typography from '@material-ui/core/Typography'
 import BattlegroupCard from '@lca/components/battlegroups/BattlegroupCard.tsx'
 import CharacterCard from '@lca/components/characters/CharacterCard.tsx'
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
-import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import QcCard from '@lca/components/qcs/QcCard.tsx'
-import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import {
   updateBattlegroup,
   updateCharacter,
   updateQc,
 } from '@lca/ducks/actions.ts'
-import { updateBattlegroupChronicleSort } from '@lca/ducks/entities/battlegroup.ts'
-import { updateCharacterChronicleSort } from '@lca/ducks/entities/character.ts'
-import { updateQcChronicleSort } from '@lca/ducks/entities/qc.ts'
+import {
+  useAppDispatch,
+  useAppSelector,
+  useIdFromParams,
+} from '@lca/hooks/index.ts'
+import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
 import {
   amIStOfChronicle,
   getBattlegroupsForChronicle,
   getCharactersForChronicle,
-  getPlayersForChronicle,
   getQcsForChronicle,
   getSpecificChronicle,
-  getStorytellerForChronicle,
 } from '@lca/selectors/index.ts'
-import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
 import BattlegroupAddPopup from './battlegroupAddPopup.tsx'
 import CharacterAddPopup from './characterAddPopup.tsx'
 import QcAddPopup from './qcAddPopup.tsx'
 import STControls from './StControls.tsx'
 
-const SortableItem = SortableElement(({ children }) => children)
+const ChronicleDashboard = () => {
+  const dispatch = useAppDispatch()
+  const id = useIdFromParams()
+  const chronicle = useAppSelector((state) => getSpecificChronicle(state, id))
+  const characters = useAppSelector((state) =>
+    getCharactersForChronicle(state, id),
+  )
+  const qcs = useAppSelector((state) => getQcsForChronicle(state, id))
+  const battlegroups = useAppSelector((state) =>
+    getBattlegroupsForChronicle(state, id),
+  )
+  const is_st = useAppSelector((state) => amIStOfChronicle(state, id))
 
-// TODO: replace with proper objects
-type Props = {
-  id: string
-  st: Object
-  is_st: boolean
-  players: Object[]
-  characters: Character[]
-  qcs: QC[]
-  battlegroups: Battlegroup[]
-  chronicle: Object
-  updateCharacter: Function
-  updateQc: Function
-  updateBattlegroup: Function
-  updateCharacterChronicleSort: Function
-  updateQcChronicleSort: Function
-  updateBattlegroupChronicleSort: Function
-}
-class ChronicleDashboard extends Component<Props> {
-  handleSort = ({ oldIndex, newIndex, collection }) => {
-    if (oldIndex === newIndex) return
-    // eslint-disable-next-line no-unused-vars
-    let update = (..._a) => {}
-    let updateSort
-    let coll = []
-    switch (collection) {
-      case 'characters':
-        update = this.props.updateCharacter
-        updateSort = this.props.updateCharacterChronicleSort
-        coll = this.props.characters
-        break
-      case 'qcs':
-        update = this.props.updateQc
-        updateSort = this.props.updateQcChronicleSort
-        coll = this.props.qcs
-        break
-      case 'battlegroups':
-        update = this.props.updateBattlegroup
-        updateSort = this.props.updateBattlegroupChronicleSort
-        coll = this.props.battlegroups
-        break
-    }
-    const charA = coll[oldIndex]
-    const charB = coll[newIndex]
-    const offset = charA.chronicle_sorting > charB.chronicle_sorting ? -1 : 1
-    updateSort({ id: charA.id, sorting: charB.chronicle_sorting + offset })
-    update(charA.id, { chronicle_sorting_position: newIndex })
-  }
+  useBetterDocumentTitle(chronicle ? chronicle.name : undefined)
 
-  render() {
-    /* Escape hatch */
-    if (
-      this.props.chronicle === undefined ||
-      this.props.chronicle.name === undefined
-    )
-      return (
-        <BlockPaper>
-          <Typography paragraph>This Chronicle has not yet loaded.</Typography>
-        </BlockPaper>
-      )
-
-    const { chronicle, characters, qcs, battlegroups, is_st } = this.props
-    const { handleSort } = this
-
-    const characterList = characters.map((c, i) => (
-      <SortableItem key={c.id} index={i} collection="characters">
-        <Grid item xs={12} lg={6} xl={4}>
-          <CharacterCard character={c} chronicle st={is_st} />
-        </Grid>
-      </SortableItem>
-    ))
-    const qcList = qcs.map((c, i) => (
-      <SortableItem key={c.id} index={i} collection="qcs">
-        <Grid item xs={12} md={6} lg={4} xl={3}>
-          <QcCard qc={c} chronicle st={is_st} />
-        </Grid>
-      </SortableItem>
-    ))
-    const bgList = battlegroups.map((c, i) => (
-      <SortableItem key={c.id} index={i} collection="battlegroups">
-        <Grid item xs={12} md={6} lg={4} xl={3}>
-          <BattlegroupCard battlegroup={c} chronicle st={is_st} />
-        </Grid>
-      </SortableItem>
-    ))
-
+  /* Escape hatch */
+  if (chronicle === undefined)
     return (
-      <>
-        <DocumentTitle title={`${chronicle.name} | Lot-Casting Atemi`} />
+      <BlockPaper>
+        <Typography paragraph>This Chronicle has not yet loaded.</Typography>
+      </BlockPaper>
+    )
 
+  const characterList = characters.map((c, i) => (
+    <SortableGridItem id={c.id} key={c.id} index={i}>
+      <CharacterCard character={c} chronicle st={is_st} />
+    </SortableGridItem>
+  ))
+  const qcList = qcs.map((c, i) => (
+    <SortableGridItem id={c.id} key={c.id} index={i}>
+      <QcCard qc={c} chronicle st={is_st} />
+    </SortableGridItem>
+  ))
+  const bgList = battlegroups.map((c, i) => (
+    <SortableGridItem id={c.id} key={c.id} index={i}>
+      <BattlegroupCard battlegroup={c} chronicle st={is_st} />
+    </SortableGridItem>
+  ))
+
+  return (
+    <>
+      <Grid container spacing={3}>
         <Hidden smUp>
           <Grid item xs={12}>
             <div style={{ height: '1em' }}>&nbsp;</div>
           </Grid>
         </Hidden>
 
-        {is_st && <STControls chronicleId={chronicle.id} />}
+        {is_st && (
+          <Grid item xs={12}>
+            <STControls chronicleId={chronicle.id} />
+          </Grid>
+        )}
+      </Grid>
 
-        <SortableGridList
-          header={
-            <Typography variant="h5">
-              Characters
-              <CharacterAddPopup chronicleId={chronicle.id} />
-            </Typography>
-          }
-          items={characterList}
-          classes={{}}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="xy"
-        />
+      <Grid container spacing={3}>
+        <Grid item xs={12} className="stickyHeader">
+          <Typography variant="h5">
+            Characters
+            <CharacterAddPopup chronicleId={chronicle.id} />
+          </Typography>
+        </Grid>
+
         {characterList.length === 0 && (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography>None yet</Typography>
-            </Grid>
+          <Grid item xs={12}>
+            <Typography>None yet</Typography>
           </Grid>
         )}
 
-        <SortableGridList
-          header={
-            <Typography variant="h5">
-              Quick Characters
-              <QcAddPopup chronicleId={chronicle.id} />
-            </Typography>
-          }
-          items={qcList}
-          classes={{}}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="xy"
-        />
+        <DragDropProvider
+          onDragEnd={(event) => {
+            const { source } = event.operation
+
+            if (isSortable(source)) {
+              if (source.index === source.initialIndex) {
+                return
+              }
+
+              dispatch(
+                updateCharacter(source.id as number, {
+                  chronicle_sorting_position: source.index,
+                }),
+              )
+            }
+          }}
+        >
+          {characterList}
+        </DragDropProvider>
+      </Grid>
+
+      <Divider style={{ margin: '1em 0' }} />
+
+      <Grid container spacing={3}>
+        <Grid item xs={12} className="stickyHeader">
+          <Typography variant="h5">
+            Quick Characters
+            <QcAddPopup chronicleId={chronicle.id} />
+          </Typography>
+        </Grid>
+
         {qcList.length === 0 && (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography>None yet</Typography>
-            </Grid>
+          <Grid item xs={12}>
+            <Typography>None yet</Typography>
           </Grid>
         )}
 
-        <SortableGridList
-          header={
-            <Typography variant="h5">
-              Battlegroups
-              <BattlegroupAddPopup chronicleId={chronicle.id} />
-            </Typography>
-          }
-          items={bgList}
-          classes={{}}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="xy"
-        />
+        <DragDropProvider
+          onDragEnd={(event) => {
+            const { source } = event.operation
+
+            if (isSortable(source)) {
+              if (source.index === source.initialIndex) {
+                return
+              }
+
+              dispatch(
+                updateQc(source.id as number, {
+                  chronicle_sorting_position: source.index,
+                }),
+              )
+            }
+          }}
+        >
+          {qcList}
+        </DragDropProvider>
+      </Grid>
+
+      <Divider style={{ margin: '1em 0' }} />
+
+      <Grid container spacing={3}>
+        <Grid item xs={12} className="stickyHeader">
+          <Typography variant="h5">
+            Battlegroups
+            <BattlegroupAddPopup chronicleId={chronicle.id} />
+          </Typography>
+        </Grid>
+
         {bgList.length === 0 && (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography>None yet</Typography>
-            </Grid>
+          <Grid item xs={12}>
+            <Typography>None yet</Typography>
           </Grid>
         )}
-      </>
-    )
-  }
+
+        <DragDropProvider
+          onDragEnd={(event) => {
+            const { source } = event.operation
+
+            if (isSortable(source)) {
+              if (source.index === source.initialIndex) {
+                return
+              }
+
+              dispatch(
+                updateBattlegroup(source.id as number, {
+                  sorting_position: source.index,
+                }),
+              )
+            }
+          }}
+        >
+          {bgList}
+        </DragDropProvider>
+      </Grid>
+    </>
+  )
 }
 
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.chronicleId
-
-  return {
-    id: id,
-    chronicle: getSpecificChronicle(state, id),
-    st: getStorytellerForChronicle(state, id),
-    is_st: amIStOfChronicle(state, id),
-    players: getPlayersForChronicle(state, id),
-    characters: getCharactersForChronicle(state, id),
-    qcs: getQcsForChronicle(state, id),
-    battlegroups: getBattlegroupsForChronicle(state, id),
-  }
-}
-
-export default ProtectedComponent(
-  connect(mapStateToProps, {
-    updateCharacter,
-    updateQc,
-    updateBattlegroup,
-    updateCharacterChronicleSort,
-    updateQcChronicleSort,
-    updateBattlegroupChronicleSort,
-  })(ChronicleDashboard),
-)
+export default ProtectedComponent(ChronicleDashboard)

@@ -1,6 +1,5 @@
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { compose, shouldUpdate } from 'recompose'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import ListAttributeEditor, {
@@ -16,7 +15,6 @@ import {
   spentSolarXp,
   spentXp,
 } from '@lca/utils/calculated/index.ts'
-import { isUnequalByKeys } from '@lca/utils/index.ts'
 
 const styles = (theme) => ({
   ...commonStyles(theme),
@@ -72,10 +70,13 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
       <div className={classes.xpCol}>
         <ListAttributeEditor
           label="XP Log"
-          character={character}
-          trait="xp_log"
+          trait={character.xp_log}
+          traitName="xp_log"
           Fields={XpFields}
-          newObject={{ label: '', points: 0 }}
+          newObject={{
+            label: `New entry ${character.xp_log.length + 1}`,
+            points: 0,
+          }}
           onChange={onChange}
         />
 
@@ -96,10 +97,13 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
       <div className={classes.xpCol}>
         <ListAttributeEditor
           label={`${solarXpName(character)} XP Log`}
-          character={character}
-          trait="xp_log_solar"
+          traitName="xp_log_solar"
+          trait={character.xp_log_solar}
           Fields={XpFields}
-          newObject={{ label: '', points: 0 }}
+          newObject={{
+            label: `New entry ${character.xp_log_solar.length + 1}`,
+            points: 0,
+          }}
           onChange={onChange}
         />
 
@@ -161,10 +165,13 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
       <div className={classes.xpCol}>
         <ListAttributeEditor
           label="BP Log"
-          character={character}
-          trait="bp_log"
+          traitName="bp_log"
+          trait={character.bp_log}
           Fields={XpFields}
-          newObject={{ label: '', points: 0 }}
+          newObject={{
+            label: `New entry ${character.bp_log.length + 1}`,
+            points: 0,
+          }}
           onChange={onChange}
         />
         <Typography>Total: {spentBp(character)}</Typography>
@@ -173,18 +180,4 @@ const XpEditor = ({ character, onChange, classes }: Props) => (
   </BlockPaper>
 )
 
-export default compose(
-  withStyles(styles),
-  shouldUpdate((props, nextProps) =>
-    isUnequalByKeys(props.character, nextProps.character, [
-      'xp_log',
-      'xp_log_solar',
-      'xp_total',
-      'xp_solar_total',
-      'xp_craft_silver',
-      'xp_craft_gold',
-      'xp_craft_white',
-      'bp_log',
-    ]),
-  ),
-)(XpEditor)
+export default withStyles(styles)(XpEditor)

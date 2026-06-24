@@ -91,12 +91,11 @@ function SorceryEditor(props: Props) {
         <div>
           <ListAttributeEditor
             label="Shaping Rituals"
-            character={character}
-            trait="rituals"
+            traitName="rituals"
+            trait={character.rituals}
             Fields={SorceryFields}
-            newObject={''}
+            newObject={`New ritual ${character.rituals.length + 1}`}
             onChange={onRatingChange}
-            nonObject
           />
         </div>
       )}

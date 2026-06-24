@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { SortableHandle } from 'react-sortable-hoc'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -21,10 +20,6 @@ import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
 import NotesPopup from './NotesPopup.tsx'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
-))
 
 const styles = (theme) => ({
   root: {
@@ -121,7 +116,7 @@ export function CharacterCard({
           component="div"
           style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
         >
-          <Handle />
+          <DragHandleIcon onClick={(e) => e.preventDefault()} />
         </Typography>
       )}
 

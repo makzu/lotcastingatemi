@@ -1,25 +1,20 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable } from '@dnd-kit/react/sortable'
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
-import {
-  updateBattlegroup,
-  updateCharacter,
-  updateQc,
-} from '@lca/ducks/actions.ts'
 import {
   getMyBattlegroups,
   getMyCharacters,
-  getMyQCs,
-} from '@lca/selectors/index.ts'
-import commonStyles from '@lca/styles/index.ts'
-import type { Battlegroup, Character, QC } from '@lca/types/index.ts'
+  getMyQcs,
+  updateBattlegroup,
+  updateCharacter,
+  updateQc,
+} from '@lca/ducks/entities/index.ts'
+import { useAppDispatch, useAppSelector } from '@lca/hooks/index.ts'
 import BattlegroupCard from '../battlegroups/BattlegroupCard.tsx'
 import BattlegroupCreatePopup from '../battlegroups/BattlegroupCreatePopup.tsx'
 import CharacterCard from '../characters/CharacterCard.tsx'
@@ -27,134 +22,126 @@ import CharacterCreatePopup from '../characters/CharacterCreatePopup.tsx'
 import QcCard from '../qcs/QcCard.tsx'
 import QcCreatePopup from '../qcs/QcCreatePopup.tsx'
 
-const SortableItem = SortableElement(({ children }) => children)
+const ContentList = () => {
+  const characters = useAppSelector((state) => getMyCharacters(state))
+  const dispatch = useAppDispatch()
 
-const styles = (theme) => ({
-  ...commonStyles(theme),
-  nthTitle: { marginTop: theme.spacing(3) },
-})
+  const mappedChars = characters.map((c, i) => (
+    <SortableGridItem id={c.id} key={c.id} index={i}>
+      <CharacterCard character={c} />
+    </SortableGridItem>
+  ))
 
-type Props = {
-  characters: Character[]
-  qcs: QC[]
-  battlegroups: Battlegroup[]
-  classes: Object
-  updateCharacter: Function
-  updateQc: Function
-  updateBattlegroup: Function
+  const rawQcs = useAppSelector((state) => getMyQcs(state))
+
+  const mappedQcs = rawQcs.map((c, i) => (
+    <SortableGridItem id={c.id} key={c.id} index={i}>
+      <QcCard qc={c} />
+    </SortableGridItem>
+  ))
+
+  const rawBgs = useAppSelector((state) => getMyBattlegroups(state))
+
+  const mappedBgs = rawBgs.map((c, i) => (
+    <SortableGridItem id={c.id} key={c.id} index={i}>
+      <BattlegroupCard battlegroup={c} />
+    </SortableGridItem>
+  ))
+
+  return (
+    <>
+      <Grid container spacing={3}>
+        <Grid item xs={12} className="stickyHeader">
+          <Typography variant="h5">
+            Characters &nbsp;
+            <CharacterCreatePopup />
+          </Typography>
+        </Grid>
+
+        <DragDropProvider
+          onDragEnd={(event) => {
+            const { source } = event.operation
+
+            if (isSortable(source)) {
+              if (source.index === source.initialIndex) {
+                return
+              }
+
+              dispatch(
+                updateCharacter(source.id as number, {
+                  sorting_position: source.index,
+                }),
+              )
+            }
+          }}
+        >
+          {mappedChars}
+        </DragDropProvider>
+      </Grid>
+
+      <Divider style={{ margin: '1em 0' }} />
+
+      <Grid container spacing={3}>
+        <Grid item xs={12} className="stickyHeader">
+          <Typography variant="h5">
+            Qcs &nbsp;
+            <QcCreatePopup />
+          </Typography>
+        </Grid>
+
+        <DragDropProvider
+          onDragEnd={(event) => {
+            const { source } = event.operation
+
+            if (isSortable(source)) {
+              if (source.index === source.initialIndex) {
+                return
+              }
+
+              dispatch(
+                updateQc(source.id as number, {
+                  sorting_position: source.index,
+                }),
+              )
+            }
+          }}
+        >
+          {mappedQcs}
+        </DragDropProvider>
+      </Grid>
+
+      <Divider style={{ margin: '1em 0' }} />
+
+      <Grid container spacing={3}>
+        <Grid item xs={12} className="stickyHeader">
+          <Typography variant="h5">
+            Battlegroups &nbsp;
+            <BattlegroupCreatePopup />
+          </Typography>
+        </Grid>
+
+        <DragDropProvider
+          onDragEnd={(event) => {
+            const { source } = event.operation
+
+            if (isSortable(source)) {
+              if (source.index === source.initialIndex) {
+                return
+              }
+
+              dispatch(
+                updateBattlegroup(source.id as number, {
+                  sorting_position: source.index,
+                }),
+              )
+            }
+          }}
+        >
+          {mappedBgs}
+        </DragDropProvider>
+      </Grid>
+    </>
+  )
 }
-class ContentList extends Component<Props> {
-  handleSort = ({ oldIndex, newIndex, collection }) => {
-    if (oldIndex === newIndex) return
-    let update
-    let coll = []
-    switch (collection) {
-      case 'characters':
-        update = this.props.updateCharacter
-        coll = this.props.characters
-        break
-      case 'qcs':
-        update = this.props.updateQc
-        coll = this.props.qcs
-        break
-      case 'battlegroups':
-        update = this.props.updateBattlegroup
-        coll = this.props.battlegroups
-        break
-      default:
-        return
-    }
-    const charA = coll[oldIndex]
-    update(charA.id, { sorting_position: newIndex })
-  }
 
-  render() {
-    const { handleSort } = this
-    const { classes } = this.props
-    const chars = this.props.characters.map((c, i) => (
-      <SortableItem key={c.id} index={i} collection="characters">
-        <Grid item xs={12} md={6} xl={4}>
-          <CharacterCard character={c} />
-        </Grid>
-      </SortableItem>
-    ))
-    const qcs = this.props.qcs.map((q, i) => (
-      <SortableItem key={q.id} index={i} collection="qcs">
-        <Grid item xs={12} md={6} lg={4}>
-          <QcCard qc={q} />
-        </Grid>
-      </SortableItem>
-    ))
-    const bgs = this.props.battlegroups.map((b, i) => (
-      <SortableItem key={b.id} index={i} collection="battlegroups">
-        <Grid item xs={12} md={6} lg={4}>
-          <BattlegroupCard battlegroup={b} />
-        </Grid>
-      </SortableItem>
-    ))
-
-    return (
-      <>
-        <SortableGridList
-          header={
-            <Typography variant="h5">
-              Characters &nbsp;
-              <CharacterCreatePopup />
-            </Typography>
-          }
-          items={chars}
-          classes={classes}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="xy"
-        />
-
-        <Divider style={{ margin: '1em 0' }} />
-
-        <SortableGridList
-          header={
-            <Typography variant="h5">
-              Quick Characters &nbsp;
-              <QcCreatePopup />
-            </Typography>
-          }
-          items={qcs}
-          classes={classes}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="xy"
-        />
-
-        <Divider style={{ margin: '1em 0' }} />
-
-        <SortableGridList
-          header={
-            <Typography variant="h5">
-              Battlegroups &nbsp;
-              <BattlegroupCreatePopup />
-            </Typography>
-          }
-          items={bgs}
-          classes={classes}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="xy"
-        />
-      </>
-    )
-  }
-}
-
-const mapStateToProps = (state) => ({
-  characters: getMyCharacters(state),
-  qcs: getMyQCs(state),
-  battlegroups: getMyBattlegroups(state),
-})
-
-export default ProtectedComponent(
-  withStyles(styles)(
-    connect(mapStateToProps, { updateCharacter, updateQc, updateBattlegroup })(
-      ContentList,
-    ),
-  ),
-)
+export default ProtectedComponent(ContentList)

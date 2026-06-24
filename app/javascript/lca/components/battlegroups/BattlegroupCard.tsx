@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { SortableHandle } from 'react-sortable-hoc'
 import Paper from '@material-ui/core/Paper'
 import {
   createStyles,
@@ -24,10 +23,6 @@ import CharacterMenu from '../generic/CharacterMenu/index.ts'
 import PlayerNameSubtitle from '../generic/PlayerNameSubtitle.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import BattlegroupHealthDisplay from './BattlegroupHealthDisplay.tsx'
-
-const Handle = SortableHandle(() => (
-  <DragHandleIcon onClick={(e) => e.preventDefault()} />
-))
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -86,7 +81,7 @@ function BattlegroupCard(props: Props) {
           component="div"
           style={{ position: 'absolute', bottom: '0.5em', right: '0.75em' }}
         >
-          <Handle />
+          <DragHandleIcon onClick={(e) => e.preventDefault()} />
         </Typography>
       )}
 

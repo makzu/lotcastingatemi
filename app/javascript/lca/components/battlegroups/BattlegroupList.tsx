@@ -1,67 +1,59 @@
-import { SortableElement } from 'react-sortable-hoc'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable } from '@dnd-kit/react/sortable'
 import { Grid, Typography } from '@material-ui/core'
 
 import BattlegroupCard from '@lca/components/battlegroups/BattlegroupCard.tsx'
-import BattlegroupCreatePopup from '@lca/components/battlegroups/BattlegroupCreatePopup.tsx'
-import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
-import DocumentTitle from '@lca/components/shared/DocumentTitle.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
-import { updateBattlegroupSort } from '@lca/ducks/entities/battlegroup.ts'
 import {
   getMyBattlegroups,
   updateBattlegroup,
 } from '@lca/ducks/entities/index.ts'
 import { useAppDispatch } from '@lca/hooks/UseAppDispatch.ts'
 import { useAppSelector } from '@lca/hooks/UseAppSelector.ts'
-
-const SortableItem = SortableElement(({ children }) => children)
+import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
+import BattlegroupCreatePopup from './BattlegroupCreatePopup.tsx'
 
 const BattlegroupList = () => {
+  useBetterDocumentTitle('Battlegroups')
   const battlegroups = useAppSelector((state) => getMyBattlegroups(state))
   const dispatch = useAppDispatch()
 
-  const chars = battlegroups.map((c, i) => (
-    <SortableItem key={c.id} index={i} collection="battlegroups">
-      <Grid item xs={12} md={6} xl={4}>
-        <BattlegroupCard battlegroup={c} />
-      </Grid>
-    </SortableItem>
+  const mappedBgs = battlegroups.map((c, i) => (
+    <SortableGridItem id={c.id} key={c.id} index={i}>
+      <BattlegroupCard battlegroup={c} />
+    </SortableGridItem>
   ))
 
-  const handleSort = ({ oldIndex, newIndex }) => {
-    if (oldIndex === newIndex) {
-      return
-    }
-
-    const charA = battlegroups[oldIndex]
-    const charB = battlegroups[newIndex]
-    const offset = charA.sorting > charB.sorting ? 1 : -1
-    dispatch(
-      updateBattlegroupSort({ id: charA.id, sorting: charB.sorting + offset }),
-    )
-    dispatch(updateBattlegroup(charA.id, { sorting_position: newIndex }))
-  }
-
-  const classes = {}
-
   return (
-    <>
-      <DocumentTitle title="Battlegroups | Lot-Casting Atemi" />
+    <Grid container spacing={3}>
+      <Grid item xs={12} className="stickyHeader">
+        <Typography variant="h5">
+          Battlegroups &nbsp;
+          <BattlegroupCreatePopup />
+        </Typography>
+      </Grid>
 
-      <SortableGridList
-        header={
-          <Typography variant="h5">
-            Battlegroups &nbsp;
-            <BattlegroupCreatePopup />
-          </Typography>
-        }
-        items={chars}
-        classes={classes}
-        onSortEnd={handleSort}
-        useDragHandle
-        axis="xy"
-      />
-    </>
+      <DragDropProvider
+        onDragEnd={(event) => {
+          const { source } = event.operation
+
+          if (isSortable(source)) {
+            if (source.index === source.initialIndex) {
+              return
+            }
+
+            dispatch(
+              updateBattlegroup(source.id as number, {
+                sorting_position: source.index,
+              }),
+            )
+          }
+        }}
+      >
+        {mappedBgs}
+      </DragDropProvider>
+    </Grid>
   )
 }
 

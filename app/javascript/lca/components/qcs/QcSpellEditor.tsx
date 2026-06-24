@@ -1,58 +1,56 @@
-import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable } from '@dnd-kit/react/sortable'
 import { Button, Grid, Typography } from '@material-ui/core'
 import type { WithStyles } from '@material-ui/core/styles'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
 import Checkbox from '@lca/components/shared/inputs/Checkbox.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import {
   createSpell,
   destroySpell,
   updateSpell,
-} from '@lca/ducks/actions/index.ts'
-import type { State } from '@lca/ducks/index.ts'
+} from '@lca/ducks/entities/spell.ts'
 import { getSpellsForQc } from '@lca/ducks/selectors/index.ts'
+import useAppDispatch from '@lca/hooks/UseAppDispatch.ts'
+import useAppSelector from '@lca/hooks/UseAppSelector.ts'
 import type commonStyles from '@lca/styles/index.ts'
-import type { QC, Spell } from '@lca/types/index.ts'
+import type { QC } from '@lca/types/index.ts'
 import QcSpellFields from './QcSpellFields.tsx'
 
-const SortableItem = SortableElement(({ children }) => children)
-
-interface StateProps {
-  spells: Spell[]
-}
-interface DispatchProps {
-  create(): void
-  destroy(id: number): void
-  update(id: number, trait: any): void
-}
 interface OuterProps {
   qc: QC
   changeQc(): void
 }
-interface Props
-  extends OuterProps,
-    StateProps,
-    DispatchProps,
-    WithStyles<typeof commonStyles> {}
+interface Props extends OuterProps, WithStyles<typeof commonStyles> {}
 
 const QcSpellEditor = (props: Props) => {
-  const { qc, classes, create, spells, update, destroy, changeQc } = props
-  const handleSort = () => undefined
+  const dispatch = useAppDispatch()
+  const { qc, classes, changeQc } = props
+  const spells = useAppSelector((state) => getSpellsForQc(state, qc.id))
+
+  const handleCreate = () => {
+    dispatch(createSpell(qc.id, { parent: 'qc' }))
+  }
+
+  const handleUpdate = (id: number, trait) => {
+    dispatch(updateSpell(id, qc.id, trait, 'qc'))
+  }
+
+  const handleDestroy = (id: number) => {
+    dispatch(destroySpell(id, qc.id, 'qc'))
+  }
 
   const spellList = spells.map((spell, i) => (
-    <SortableItem key={spell.id} index={i}>
-      <Grid item xs={12} md={6} lg={4}>
-        <QcSpellFields
-          key={spell.id}
-          spell={spell}
-          handleChange={update}
-          handleDestroy={destroy}
-          classes={classes}
-        />
-      </Grid>
-    </SortableItem>
+    <SortableGridItem id={spell.id} key={spell.id} index={i}>
+      <QcSpellFields
+        key={spell.id}
+        spell={spell}
+        handleChange={handleUpdate}
+        handleDestroy={handleDestroy}
+        classes={classes}
+      />
+    </SortableGridItem>
   ))
 
   return (
@@ -68,33 +66,35 @@ const QcSpellEditor = (props: Props) => {
         />
         &nbsp;&nbsp;
         {qc.is_sorcerer && (
-          <Button onClick={create}>
+          <Button onClick={handleCreate}>
             Add Spell
             <ContentAddCircle />
           </Button>
         )}
       </Typography>
       {qc.is_sorcerer && (
-        <SortableGridList
-          items={spellList}
-          classes={classes}
-          onSortEnd={handleSort}
-          useDragHandle
-          axis="x"
-        />
+        <Grid container spacing={3}>
+          <DragDropProvider
+            onDragEnd={(event) => {
+              const { source } = event.operation
+
+              if (isSortable(source)) {
+                if (source.index === source.initialIndex) {
+                  return
+                }
+
+                handleUpdate(source.id as number, {
+                  sorting_position: source.index,
+                })
+              }
+            }}
+          >
+            {spellList}
+          </DragDropProvider>
+        </Grid>
       )}
     </>
   )
 }
 
-const mapState = (state: State, { qc }): StateProps => ({
-  spells: getSpellsForQc(state, qc.id),
-})
-
-const mapDispatch = (dispatch, { qc }: OuterProps): DispatchProps => ({
-  create: () => dispatch(createSpell(qc.id, { parent: 'qc' })),
-  destroy: (id) => dispatch(destroySpell(id, qc.id, 'qc')),
-  update: (id, trait) => dispatch(updateSpell(id, qc.id, trait, 'qc')),
-})
-
-export default connect(mapState, mapDispatch)(QcSpellEditor)
+export default QcSpellEditor

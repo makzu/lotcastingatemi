@@ -1,115 +1,91 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
+import { DragDropProvider } from '@dnd-kit/react'
+import { isSortable } from '@dnd-kit/react/sortable'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ContentAddCircle from '@material-ui/icons/AddCircle'
 
-import SortableGridList from '@lca/components/generic/SortableGridList.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import {
   createQcMerit,
   destroyQcMerit,
   updateQcMerit,
-} from '@lca/ducks/actions.ts'
-import { updateQcMeritSort } from '@lca/ducks/entities/qc_merit.ts'
-import { getMeritsForQc } from '@lca/selectors/index.ts'
-import type { QC, QcMerit } from '@lca/types/qc.ts'
+} from '@lca/ducks/entities/qc_merit.ts'
+import { useAppDispatch, useAppSelector } from '@lca/hooks/index.ts'
+import { getMeritsForQc } from '@lca/selectors/qc.ts'
+import commonStyles from '@lca/styles/index.ts'
+import type { QC } from '@lca/types/index.ts'
 import QcMeritFields from './QcMeritFields.tsx'
 
-const SortableItem = SortableElement(({ children }) => children)
+const styles = (theme) => ({
+  ...commonStyles(theme),
+})
 
-type ExposedProps = {
+type Props = {
   qc: QC
   classes: Object
 }
-type Props = ExposedProps & {
-  qc_merits: QcMerit[]
-  updateQcMerit: Function
-  createQcMerit: Function
-  destroyQcMerit: Function
-  updateQcMeritSort: Function
-}
+const QcMeritEditor = (props: Props) => {
+  const dispatch = useAppDispatch()
+  const { qc, classes } = props
 
-class QcMeritEditor extends Component<Props> {
-  handleChange = (id, trait) => {
-    this.props.updateQcMerit(id, this.props.qc.id, trait)
+  const handleAdd = () => {
+    dispatch(createQcMerit(qc.id))
   }
 
-  handleAdd = () => {
-    this.props.createQcMerit(this.props.qc.id)
+  const handleChange = (id, trait) => {
+    dispatch(updateQcMerit(id, qc.id, trait))
   }
 
-  handleRemove = (id) => {
-    this.props.destroyQcMerit(id, this.props.qc.id)
+  const handleRemove = (id: number) => {
+    dispatch(destroyQcMerit(id, qc.id))
   }
 
-  handleSort = ({ oldIndex, newIndex }) => {
-    if (oldIndex === newIndex) return
-    const meritA = this.props.qc_merits[oldIndex]
-    const meritB = this.props.qc_merits[newIndex]
-    const offset = meritA.sorting > meritB.sorting ? -1 : 1
-    this.props.updateQcMeritSort({
-      id: meritA.id,
-      sorting: meritB.sorting + offset,
-    })
-    this.props.updateQcMerit(meritA.id, this.props.qc.id, {
-      sorting_position: newIndex,
-    })
-  }
+  const qc_merits = useAppSelector((state) => getMeritsForQc(state, qc.id))
 
-  render() {
-    const { handleChange, handleAdd, handleRemove, handleSort } = this
-    const { classes } = this.props
-
-    const qcMerits = this.props.qc_merits.map((merit, i) => (
-      <SortableItem key={merit.id} index={i}>
-        <Grid item xs={12} md={6} xl={4}>
-          <QcMeritFields
-            merit={merit}
-            qc={this.props.qc}
-            onMeritChange={handleChange}
-            onRemoveClick={handleRemove}
-          />
-        </Grid>
-      </SortableItem>
-    ))
-
-    return (
-      <SortableGridList
-        header={
-          <Typography variant="h6">
-            Merits
-            <Button onClick={handleAdd}>
-              Add Merit
-              <ContentAddCircle />
-            </Button>
-          </Typography>
-        }
-        items={qcMerits}
-        classes={classes}
-        onSortEnd={handleSort}
-        useDragHandle={true}
-        axis="xy"
+  const qcMerits = qc_merits.map((merit, i) => (
+    <SortableGridItem id={merit.id} key={merit.id} index={i}>
+      <QcMeritFields
+        key={merit.id}
+        merit={merit}
+        onMeritChange={handleChange}
+        onRemoveClick={handleRemove}
       />
-    )
-  }
+    </SortableGridItem>
+  ))
+
+  return (
+    <Grid container spacing={3}>
+      <Grid item xs={12} className={classes.stickyHeader}>
+        <Typography variant="h6">
+          Merits
+          <Button onClick={handleAdd}>
+            Add Merit
+            <ContentAddCircle />
+          </Button>
+        </Typography>
+      </Grid>
+
+      <DragDropProvider
+        onDragEnd={(event) => {
+          const { source } = event.operation
+
+          if (isSortable(source)) {
+            if (source.index === source.initialIndex) {
+              return
+            }
+
+            handleChange(source.id as number, {
+              sorting_position: source.index,
+            })
+          }
+        }}
+      >
+        {qcMerits}
+      </DragDropProvider>
+    </Grid>
+  )
 }
 
-function mapStateToProps(state, ownProps: ExposedProps) {
-  const qc = ownProps.qc
-  const qc_merits = qc !== undefined ? getMeritsForQc(state, qc.id) : []
-
-  return {
-    qc_merits,
-  }
-}
-
-const enhance = connect(mapStateToProps, {
-  updateQcMerit,
-  createQcMerit,
-  destroyQcMerit,
-  updateQcMeritSort,
-})
-
-export default enhance(QcMeritEditor)
+export default withStyles(styles)(QcMeritEditor)

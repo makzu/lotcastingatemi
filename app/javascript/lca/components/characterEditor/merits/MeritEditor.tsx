@@ -1,7 +1,6 @@
-import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { DragDropProvider } from '@dnd-kit/react'
-import { isSortable, useSortable } from '@dnd-kit/react/sortable'
+import { isSortable } from '@dnd-kit/react/sortable'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
@@ -11,6 +10,7 @@ import ContentAddCircle from '@material-ui/icons/AddCircle'
 import HelpIcon from '@material-ui/icons/Help'
 
 import CharacterLoadError from '@lca/components/CharacterSheet/CharacterLoadError.tsx'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import { createMerit, updateMerit } from '@lca/ducks/actions.ts'
 import {
@@ -24,21 +24,6 @@ import commonStyles from '@lca/styles/index.ts'
 import MeritFields from './MeritFields.tsx'
 
 const styles = (theme) => commonStyles(theme)
-
-interface SortableProps {
-  id: number
-  index: number
-  children: ReactNode
-}
-const Sortable = ({ id, index, children }: SortableProps) => {
-  const { ref } = useSortable({ id, index })
-
-  return (
-    <Grid item ref={ref} xs={12} md={6} xl={4}>
-      {children}
-    </Grid>
-  )
-}
 
 /* LATER: possible autocomplete for merits in the book with merit_name, cat, and
  * ref pre-filled
@@ -66,9 +51,9 @@ const MeritEditor = (props: Props) => {
   }
 
   const mts = merits.map((m, i) => (
-    <Sortable key={m.id} id={m.id} index={i}>
+    <SortableGridItem key={m.id} id={m.id} index={i}>
       <MeritFields merit={m} />
-    </Sortable>
+    </SortableGridItem>
   ))
 
   const totalDots = merits.reduce((acc, merit) => acc + merit.rating, 0)

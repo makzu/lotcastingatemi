@@ -1,12 +1,12 @@
-import { type ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { DragDropProvider } from '@dnd-kit/react'
-import { isSortable, useSortable } from '@dnd-kit/react/sortable'
-import { Grid } from '@material-ui/core'
+import { isSortable } from '@dnd-kit/react/sortable'
 
 import {
   type CharmFilter,
   filterCharms,
 } from '@lca/components/CharacterSheet/Charms/useCharmFilters.ts'
+import SortableGridItem from '@lca/components/shared/wrappers/SortableGridItem.tsx'
 import {
   getCharmsForCharacterByType,
   updateCharm,
@@ -22,21 +22,6 @@ interface ExposedProps {
   filters: CharmFilter
 }
 
-interface SortableProps {
-  id: number
-  index: number
-  children: ReactNode
-}
-function Sortable({ id, index, children }: SortableProps) {
-  const { ref } = useSortable({ id, index })
-
-  return (
-    <Grid item ref={ref} xs={12} md={6} xl={4}>
-      {children}
-    </Grid>
-  )
-}
-
 const CharmList = (props: ExposedProps) => {
   const dispatch = useAppDispatch()
   const { character, type, filters } = props
@@ -49,7 +34,7 @@ const CharmList = (props: ExposedProps) => {
   const filteredCharms = filterCharms(charms, filters, type) as Charm[]
 
   const mappedCharms = filteredCharms.map((c, i) => (
-    <Sortable key={c.id} id={c.id} index={i}>
+    <SortableGridItem key={c.id} id={c.id} index={i}>
       <CharmFields
         character={character}
         charm={c}
@@ -57,7 +42,7 @@ const CharmList = (props: ExposedProps) => {
         setOpenCharm={setOpenCharm}
         type={type}
       />
-    </Sortable>
+    </SortableGridItem>
   ))
 
   return (

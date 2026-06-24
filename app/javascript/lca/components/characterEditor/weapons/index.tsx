@@ -28,6 +28,7 @@ interface WeaponEditorProps {
   character: Character
 }
 const WeaponEditor = (props: WeaponEditorProps) => {
+  const dispatch = useAppDispatch()
   const [selectedWeaponId, setSelectedWeaponId] = useState<number | null>(null)
 
   const { character } = props
@@ -35,7 +36,6 @@ const WeaponEditor = (props: WeaponEditorProps) => {
     getWeaponsForCharacter(state, character.id),
   )
 
-  const dispatch = useAppDispatch()
   const onClickCreateWeapon = () => {
     dispatch(createWeapon(character.id))
   }

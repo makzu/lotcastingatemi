@@ -47,7 +47,7 @@ class ChronicleWrapper extends Component<Props> {
           path="/chronicles/:chronicleId/details"
           component={ChronicleDetailsPage}
         />
-        <Route path="/chronicles/:chronicleId" component={ChronicleDashboard} />
+        <Route path="/chronicles/:id" component={ChronicleDashboard} />
       </Switch>
     )
   }

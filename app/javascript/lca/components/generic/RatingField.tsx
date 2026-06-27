@@ -1,7 +1,7 @@
 import { type ChangeEvent, Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import classnames from 'classnames'
+import classnames from 'clsx'
 
 import { clamp } from '@lca/utils/math.ts'
 

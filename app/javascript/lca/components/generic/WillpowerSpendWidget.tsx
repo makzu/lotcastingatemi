@@ -77,7 +77,7 @@ const WillpowerSpendWidgetNew = (props: Props) => {
             margin="dense"
             max={max}
             min={min}
-            onChange={(e) => handleUpdate(e.currentTarget.value)}
+            onChange={(e) => handleUpdate(e.target.value)}
           />
           <Button size="small" onClick={() => setToSpend(0)}>
             0

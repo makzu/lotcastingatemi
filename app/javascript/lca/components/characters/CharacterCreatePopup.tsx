@@ -37,6 +37,8 @@ const CharacterCreatePopup = () => {
       case 'LunarCharacter':
       case 'SiderealCharacter':
       case 'AbyssalCharacter':
+      case 'AlchemicalCharacter':
+      case 'InfernalCharacter':
         setAspect(false)
         setExaltType('')
         break
@@ -83,7 +85,7 @@ const CharacterCreatePopup = () => {
           <div>
             <ExaltTypeSelect
               value={type}
-              onChange={(e) => setType(e.currentTarget.value as ExaltType)}
+              onChange={(e) => setType(e.target.value as ExaltType)}
             />
           </div>
           {type === 'SolarCharacter' && (

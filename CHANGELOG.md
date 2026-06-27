@@ -2,7 +2,14 @@
 
 ###### _Unreleased_
 
-- The Filter button no longer shows on the Charms page in the widest display mode
+## v129
+
+###### _June 26, 2026_
+
+- Charms set as being in all loadouts are now displayed with any loadout filter (Thanks, Benooj!)
+- Added "all/any" switch to Charm loadout filter options
+- The Filter button no longer shows on the Charms page when the browser is wide enough for the filters to be permanently open
+- Fixed control spell checkbox and spell delete button not working (Thanks, The Elder!)
 - Newly-created Alchemical Charms are now auto-assigned to the Alchemical's current Charm loadout
 
 ## v128

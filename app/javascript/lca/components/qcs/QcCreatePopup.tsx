@@ -40,7 +40,7 @@ const QcCreatePopup = () => {
             label="Name"
             margin="normal"
             fullWidth
-            onChange={(e) => setQcName(e.currentTarget.value)}
+            onChange={(e) => setQcName(e.target.value)}
             inputProps={{
               autocomplete: 'off',
               'data-1p-ignore': 'true',

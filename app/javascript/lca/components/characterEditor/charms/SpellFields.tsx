@@ -1,3 +1,4 @@
+import type { ChangeEvent, SetStateAction } from 'react'
 import {
   AccordionActions,
   Button,
@@ -21,7 +22,7 @@ import SpellSummaryBlock from '@lca/components/CharacterSheet/Sorcery/SpellSumma
 import TagsField from '@lca/components/generic/TagsField.tsx'
 import TextField from '@lca/components/generic/TextField.tsx'
 import SpellCircleSelect from '@lca/components/shared/selects/SpellCircleSelect.tsx'
-import { updateSpell } from '@lca/ducks/entities/index.ts'
+import { destroySpell, updateSpell } from '@lca/ducks/entities/index.ts'
 import { useAppDispatch } from '@lca/hooks/index.ts'
 import type { Character, Spell } from '@lca/types/index.ts'
 import CharmCategoryAutocomplete from './CharmCategoryAutocomplete.tsx'
@@ -53,7 +54,7 @@ interface Props {
   spell: Spell
   character: Character
   isOpen: boolean
-  setOpenSpell: React.Dispatch<React.SetStateAction<number>>
+  setOpenSpell: React.Dispatch<SetStateAction<number>>
 }
 
 const SpellFields = (props: Props) => {
@@ -66,7 +67,7 @@ const SpellFields = (props: Props) => {
     props.setOpenSpell(isExpanded ? spell.id : 0)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
     if (deepEqual(spell[name as keyof Spell], value)) return
@@ -74,8 +75,15 @@ const SpellFields = (props: Props) => {
     dispatch(updateSpell(spell.id, character.id, { [name]: value }))
   }
 
-  const handleCheck = () => {}
-  const handleRemove = () => {}
+  const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target
+
+    dispatch(updateSpell(spell.id, character.id, { [name]: checked }))
+  }
+
+  const handleRemove = () => {
+    dispatch(destroySpell(spell.id, character.id))
+  }
 
   return (
     <Accordion

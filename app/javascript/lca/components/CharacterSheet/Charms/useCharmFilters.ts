@@ -45,7 +45,7 @@ export const initialFilters: CharmFilter = {
   keyword: [],
   keywordInclusive: false,
   loadout: [],
-  loadoutInclusive: false,
+  loadoutInclusive: true,
   muteOnly: false,
   timing: [],
 }
@@ -92,10 +92,12 @@ export const filterCharms = (
   }
 
   if (type === 'native' && filters.loadout.length > 0) {
-    theCharms = (<NativeCharm[]>theCharms).filter((charm) =>
-      filters.loadoutInclusive
-        ? filters.loadout.some((cat) => charm?.loadouts?.includes(cat))
-        : filters.loadout.every((cat) => charm?.loadouts?.includes(cat)),
+    theCharms = (<NativeCharm[]>theCharms).filter(
+      (charm) =>
+        charm?.loadouts?.includes('*') ||
+        (filters.loadoutInclusive
+          ? filters.loadout.some((cat) => charm?.loadouts?.includes(cat))
+          : filters.loadout.every((cat) => charm?.loadouts?.includes(cat))),
     )
   }
 

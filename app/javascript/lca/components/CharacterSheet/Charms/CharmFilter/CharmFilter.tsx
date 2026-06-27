@@ -82,28 +82,40 @@ const CharmFilterDrawer = (props: Props) => {
       <Typography variant="h6">Filter Charms</Typography>
 
       {showLoadoutTraits(character) && (
-        <TextField
-          name="loadouts"
-          label="Loadouts"
-          select
-          value={filters.loadout}
-          SelectProps={{ multiple: true }}
-          onChange={(e) =>
-            setFilters({
-              type: 'loadout',
-              payload: e.target.value as unknown as NonNullable<
-                NativeCharm['loadouts']
-              >,
-            })
-          }
-        >
-          {allLoadouts.map((a) => (
-            <MenuItem key={a} value={a}>
-              {a}
-              {character.current_loadout === a && ' (Current)'}
-            </MenuItem>
-          ))}
-        </TextField>
+        <>
+          <TextField
+            name="loadouts"
+            label="Loadouts"
+            select
+            value={filters.loadout}
+            SelectProps={{ multiple: true }}
+            onChange={(e) =>
+              setFilters({
+                type: 'loadout',
+                payload: e.target.value as unknown as NonNullable<
+                  NativeCharm['loadouts']
+                >,
+              })
+            }
+          >
+            {allLoadouts.map((a) =>
+              a === '*' ? null : (
+                <MenuItem key={a} value={a}>
+                  {a}
+                  {character.active_loadout === a ? ' (Current)' : ''}
+                </MenuItem>
+              ),
+            )}
+          </TextField>
+
+          <ExclusiveSwitch
+            name="loadoutInclusive"
+            value={filters.keywordInclusive}
+            onChange={(_e, checked) =>
+              setFilters({ type: 'loadoutInclusive', payload: checked })
+            }
+          />
+        </>
       )}
 
       <CharmTimingSelect

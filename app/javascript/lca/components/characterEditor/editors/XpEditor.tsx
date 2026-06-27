@@ -46,6 +46,7 @@ const XpFields = (props: ListAttributeFieldTypes) => {
         label="For"
         margin="dense"
         onChange={onChange}
+        style={{ flex: 1 }}
       />
 
       <RatingField

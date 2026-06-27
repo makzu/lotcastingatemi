@@ -30,6 +30,7 @@ const CraftFields = (props: ListAttributeFieldTypes) => {
         label="Craft"
         margin="dense"
         onChange={onChange}
+        style={{ flex: 1 }}
       />
 
       <RatingField
@@ -59,6 +60,7 @@ const MartialArtsFields = (props: ListAttributeFieldTypes) => {
         label="Style"
         margin="dense"
         onChange={onChange}
+        style={{ flex: 1 }}
       />
 
       <RatingField

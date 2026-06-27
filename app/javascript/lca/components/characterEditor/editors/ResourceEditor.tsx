@@ -18,6 +18,7 @@ function ResourceFields(props: ListAttributeFieldTypes) {
         label="Resource"
         margin="dense"
         onChange={onChange}
+        style={{ flex: 1 }}
       />
       <RatingField
         trait="value"

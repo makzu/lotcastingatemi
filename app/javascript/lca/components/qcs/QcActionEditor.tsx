@@ -18,6 +18,7 @@ function ActionFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
         label="Action"
         margin="dense"
         onChange={onChange}
+        style={{ flex: 1 }}
       />
 
       <RatingField

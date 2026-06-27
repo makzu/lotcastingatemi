@@ -35,7 +35,7 @@ const BattlegroupCreatePopup = () => {
             label="Name"
             margin="normal"
             fullWidth
-            onChange={(e) => setBgName(e.target.name)}
+            onChange={(e) => setBgName(e.target.value)}
             inputProps={{
               autocomplete: 'off',
               'data-1p-ignore': 'true',

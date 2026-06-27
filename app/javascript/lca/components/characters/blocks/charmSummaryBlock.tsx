@@ -83,9 +83,11 @@ function _SingleCharm({ character, charm, classes }) {
 const SingleCharm = withStyles(styles)(_SingleCharm)
 
 function _SingleSpell({ spell, classes }: { spell: Spell; classes: Object }) {
+  const isInstalled = showLoadoutTraits(character)
   return (
     <>
       <Typography component="div" className={classes.root}>
+        {isInstalled && <Check />}
         <div className={classes.name}>{spell.name}</div>
         <div className={classes.info}>
           {spell.control && '(Control Spell) '}({spell.cost}

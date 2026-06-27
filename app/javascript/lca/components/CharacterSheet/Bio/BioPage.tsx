@@ -13,7 +13,7 @@ import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import MarkdownDisplay from '@lca/components/generic/MarkdownDisplay.tsx'
 import ProtectedComponent from '@lca/containers/ProtectedComponent.tsx'
 import { getSpecificCharacter } from '@lca/ducks/selectors/index.ts'
-import { useDocumentTitle } from '@lca/hooks/index.ts'
+import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
 import type { RootState } from '@lca/store.ts'
 import type { Character, XpLogEntry } from '@lca/types/index.ts'
 import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
@@ -50,7 +50,7 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 const BioFullPage = ({ character, classes }: Props) => {
-  useDocumentTitle(`${character.name} Bio | Lot-Casting Atemi`)
+  useBetterDocumentTitle(character ? `${character.name} | bio` : undefined)
 
   /* Escape hatch */
   if (character == null) {

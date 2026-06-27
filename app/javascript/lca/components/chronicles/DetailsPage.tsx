@@ -34,7 +34,7 @@ const ChronicleDetailsPage = () => {
   const st = useAppSelector((state) => getStorytellerForChronicle(state, id))
   const is_st = useAppSelector((state) => amIStOfChronicle(state, id))
 
-  useBetterDocumentTitle(chronicle.name)
+  useBetterDocumentTitle(chronicle ? chronicle.name : undefined)
 
   const onChange: TextFieldProps['onChange'] = (e) => {
     const { name, value } = e.target

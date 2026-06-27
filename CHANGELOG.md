@@ -2,6 +2,12 @@
 
 ###### _Unreleased_
 
+## v130
+
+###### _June 27, 2026_
+
+- Fix 'characer is not defined' errors on characters with spells
+
 ## v129
 
 ###### _June 26, 2026_

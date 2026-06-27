@@ -39,6 +39,7 @@ const SpecialtyEditor = ({ character, onChange }: Props) => {
           label="Specialty"
           margin="dense"
           onChange={props.onChange}
+          style={{ flex: 1 }}
         />
       </>
     )

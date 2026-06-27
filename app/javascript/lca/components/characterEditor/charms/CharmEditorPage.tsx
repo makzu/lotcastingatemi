@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
     backgroundColor: theme.palette.background.default,
   },
+  button: {
+    marginLeft: theme.spacing(2),
+  },
   filterButton: {
     marginLeft: theme.spacing(2),
     [theme.breakpoints.up('xl')]: {
@@ -127,7 +130,7 @@ const CharmEditorPage = () => {
         >
           <Typography variant="h5" style={{ flex: 1 }}>
             Native Charms
-            <Button onClick={handleAddNative} className={classes.filterButton}>
+            <Button onClick={handleAddNative} className={classes.button}>
               Add Charm &nbsp;
               <ContentAddCircle />
             </Button>
@@ -146,7 +149,7 @@ const CharmEditorPage = () => {
         <Grid item xs={12} className={classes.stickyHeader}>
           <Typography variant="h5">
             Martial Arts Charms
-            <Button onClick={handleAddMA} className={classes.filterButton}>
+            <Button onClick={handleAddMA} className={classes.button}>
               Add Charm &nbsp;
               <ContentAddCircle />
             </Button>
@@ -161,7 +164,7 @@ const CharmEditorPage = () => {
         <Grid item xs={12} className={classes.stickyHeader}>
           <Typography variant="h5">
             Evocations
-            <Button onClick={handleAddEvo} className={classes.filterButton}>
+            <Button onClick={handleAddEvo} className={classes.button}>
               Add Charm &nbsp;
               <ContentAddCircle />
             </Button>
@@ -174,7 +177,7 @@ const CharmEditorPage = () => {
         <Grid item xs={12} className={classes.stickyHeader}>
           <Typography variant="h5">
             Spirit Charms
-            <Button onClick={handleAddSpirit} className={classes.filterButton}>
+            <Button onClick={handleAddSpirit} className={classes.button}>
               Add Charm &nbsp;
               <ContentAddCircle />
             </Button>
@@ -186,7 +189,7 @@ const CharmEditorPage = () => {
         <Grid item xs={12} className={classes.stickyHeader}>
           <Typography variant="h5">
             Spells
-            <Button onClick={handleAddSpell} className={classes.filterButton}>
+            <Button onClick={handleAddSpell} className={classes.button}>
               Add Spell &nbsp;
               <ContentAddCircle />
             </Button>

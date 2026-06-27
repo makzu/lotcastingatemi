@@ -24,6 +24,7 @@ function IntimacyFields({ trait, onChange, classes }: ListAttributeFieldTypes) {
         label="Subject"
         margin="dense"
         onChange={onChange}
+        style={{ flex: 1 }}
         inputProps={{ 'data-cy': 'intimacy-subject' }}
       />
       <RatingField

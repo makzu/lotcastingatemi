@@ -7,7 +7,7 @@ import {
   getMeritsForCharacter,
   getSpecificCharacter,
 } from '@lca/ducks/selectors/index.ts'
-import { useDocumentTitle } from '@lca/hooks/index.ts'
+import { useBetterDocumentTitle } from '@lca/hooks/UseDocumentTitle.ts'
 import type { Character, Merit } from '@lca/types/index.ts'
 import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
 import CharacterLoadError from '../CharacterLoadError.tsx'
@@ -19,7 +19,10 @@ interface Props {
 }
 
 const MeritFullPage = (props: Props) => {
-  useDocumentTitle(`${props.character.name} Merits | Lot-Casting Atemi`)
+  useBetterDocumentTitle(
+    props.character ? `${props.character.name} Merits` : undefined,
+  )
+
   /* Escape hatch */
   if (props.character == null) {
     return (

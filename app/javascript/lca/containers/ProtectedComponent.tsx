@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 import type { RouteComponentProps } from 'react-router'
 
+import ErrorBoundary from './ErrorBoundary.tsx'
 import LogoutPopup from './LogoutPopup.tsx'
 
 const ProtectedComponent = <P extends object>(
@@ -8,7 +9,9 @@ const ProtectedComponent = <P extends object>(
 ) => {
   const protectedComponent = (props: P & RouteComponentProps) => (
     <>
-      <WrappedComponent {...props} />
+      <ErrorBoundary>
+        <WrappedComponent {...props} />
+      </ErrorBoundary>
       <LogoutPopup />
     </>
   )

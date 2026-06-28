@@ -85,7 +85,7 @@ const MoteSpendWidgetNew = (props: ExposedProps) => {
   const handleSubmit = () => {
     const pool = peripheral ? 'peripheral' : 'personal'
     const characterType = qc ? 'qc' : 'character'
-    let commitments: WithSharedStats['motes_committed'] = []
+    let commitments: WithSharedStats['motes_committed'] | null = null
     if (commit) {
       commitments = [
         ...character.motes_committed,

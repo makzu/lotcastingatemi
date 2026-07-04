@@ -34,8 +34,7 @@ hidden: false }] }}
                 as:      :json
 
           expect(response).to have_http_status :ok
-          expect(trait.class.find(trait.id).ties).to eq [{ 'subject' => 'Vincible Sword Princess (respect)',
-'rating' => 3, 'hidden' => false }]
+          expect(trait.class.find(trait.id).ties.first).to include('subject' => 'Vincible Sword Princess (respect)', 'rating' => 3, 'hidden' => false)
         end
 
         it 'succeeds for principles' do
@@ -46,7 +45,7 @@ hidden: false }] }}
                 as:      :json
 
           expect(response).to have_http_status :ok
-          expect(trait.class.find(trait.id).principles).to eq [{ 'subject' => "I don't have any bugs", 'rating' => 2 }]
+          expect(trait.class.find(trait.id).principles.first).to include('subject' => "I don't have any bugs", 'rating' => 2)
         end
       end
     end

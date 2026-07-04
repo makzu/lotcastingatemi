@@ -1,5 +1,6 @@
 import type React from 'react'
-import type { ReactNode } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
+import { nanoid } from '@reduxjs/toolkit'
 import { arrayMove as move } from '@dnd-kit/helpers'
 import { DragDropProvider } from '@dnd-kit/react'
 import { isSortable, useSortable } from '@dnd-kit/react/sortable'
@@ -76,14 +77,26 @@ export const ListAttributeEditor = <T extends ArrayAttributeNames<Character>>(
     change(newTrait)
   }
 
+  const makeId = (t: typeof newObject) => {
+    if (typeof t === 'object' && 'id' in t) return t.id
+
+    return JSON.stringify(t)
+  }
+
+  const makeNewObject = () => {
+    if (typeof newObject === 'object') return { ...newObject, id: nanoid(5) }
+
+    return newObject
+  }
+
   const handleAdd = () => {
     onChange({
-      target: { name: traitName, value: [...trait, newObject] },
+      target: { name: traitName, value: [...trait, makeNewObject()] },
     })
   }
 
   const formFields = trait.map((t, i) => (
-    <Sortable key={JSON.stringify(t)} id={JSON.stringify(t)} index={i}>
+    <Sortable key={makeId(t)} id={makeId(t)} index={i}>
       <Typography component="div" style={{ marginRight: '8px' }}>
         <DragHandleIcon onClick={(e) => e.preventDefault()} />
       </Typography>
@@ -104,11 +117,6 @@ export const ListAttributeEditor = <T extends ArrayAttributeNames<Character>>(
     <div>
       <Typography variant="subtitle1" style={{ display: 'flex' }}>
         <span style={{ flex: 1 }}>{label}</span>
-        {/* {showCount && (
-        <span className={classes.countLabel}>
-          &nbsp;({trait.length} total)
-        </span>
-      )} */}
         <Button onClick={handleAdd}>
           Add &nbsp;
           <ContentAddCircle />

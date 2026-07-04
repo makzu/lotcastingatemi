@@ -60,13 +60,29 @@ class Character < ApplicationRecord
             :abil_survival,    :abil_thrown,         :abil_war,
             zero_thru_five_stat: true
 
-  validates :abil_craft,        json: { schema: Schemas::CRAFT        }
-  validates :abil_martial_arts, json: { schema: Schemas::MARTIAL_ARTS }
-  validates :specialties,       json: { schema: Schemas::SPECIALTY    }
-  validates :xp_log,            json: { schema: Schemas::XP_LOG       }
-  validates :xp_log_solar,      json: { schema: Schemas::XP_LOG       }
-  validates :bp_log,            json: { schema: Schemas::XP_LOG       }
-  validates :forms,             json: { schema: Schemas::FORM         }
+  validates :abil_craft,        json: { schema: Schemas::CRAFT            }
+  validates :abil_martial_arts, json: { schema: Schemas::MARTIAL_ARTS     }
+  validates :motes_committed,   json: { schema: Schemas::MOTE_COMMITTMENT }
+  validates :specialties,       json: { schema: Schemas::SPECIALTY        }
+  validates :principles,        json: { schema: Schemas::INTIMACY         }
+  validates :ties,              json: { schema: Schemas::INTIMACY         }
+  validates :resources,         json: { schema: Schemas::RESOURCE         }
+  validates :xp_log,            json: { schema: Schemas::XP_LOG           }
+  validates :xp_log_solar,      json: { schema: Schemas::XP_LOG           }
+  validates :bp_log,            json: { schema: Schemas::XP_LOG           }
+  validates :forms,             json: { schema: Schemas::FORM             }
+
+  normalizes :abil_craft,
+             :abil_martial_arts,
+             :motes_committed,
+             :specialties,
+             :principles,
+             :ties,
+             :resources,
+             :xp_log,
+             :xp_log_solar,
+             :bp_log,
+             :forms, with: ArrayAttributeNormalizer
 
   validates :xp_craft_silver, :xp_craft_gold, :xp_craft_white,
             numericality: { greater_than_or_equal_to: 0 }
@@ -98,6 +114,12 @@ class Character < ApplicationRecord
 
   #   self.rituals = [shaping_rituals]
   # end
+
+  def self.normalize_array_attributes(the_attr)
+    the_attr.map do |aa|
+      aa.id ||= Nanoid.generate(size: 5)
+    end
+  end
 
   def entity_type
     'character'

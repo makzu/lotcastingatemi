@@ -43,6 +43,7 @@ gem 'ranked-model', '~> 0.4.11'
 # Validate json fields like craft ratings, qc pools, etc
 gem 'activerecord_json_validator', '~> 3.1'
 gem 'email_validator', '~> 2.2'
+gem 'nanoid', '~> 2.0.0'
 
 # Automatic Eager Loading
 gem 'goldiloader', '~> 6.0'
@@ -70,7 +71,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 8.0'
 
   # Linting
-  gem 'rubocop', '~> 1.87', require: false
+  gem 'rubocop', '~> 1.88', require: false
   gem 'rubocop-factory_bot', '~>2.28', require: false
   gem 'rubocop-performance', '~> 1.26', require: false
   gem 'rubocop-rails', '~> 2.35', require: false
@@ -103,7 +104,7 @@ group :development do
   gem 'web-console', '~> 4.3'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '~> 4.6'
+  gem 'spring', '~> 4.7'
   gem 'spring-watcher-listen', '~> 2.1'
 
   # Performance metrics

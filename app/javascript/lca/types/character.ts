@@ -45,11 +45,13 @@ export type Attribute =
   | 'wits'
 
 export interface XpLogEntry {
+  id: string
   label: string
   points: number
 }
 
 export interface Form {
+  id: string
   form: string
   qc_id?: number
 }
@@ -157,16 +159,19 @@ export interface Character extends PlayerAsset, WithSharedStats {
 }
 
 export interface CraftRating {
+  id: string
   craft: string
   rating: number
 }
 
 export interface MARating {
+  id: string
   style: string
   rating: number
 }
 
 export interface Specialty {
+  id: string
   // TODO: Figure out how the data for martial arts specialties is stored and maybe clean this up
   ability: Ability | 'martial arts'
   context: string

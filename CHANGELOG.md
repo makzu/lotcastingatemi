@@ -2,7 +2,11 @@
 
 ###### _Unreleased_
 
-## v130
+## v133
+
+###### _July 5, 2026_
+
+- Assorted bug fixes
 
 ###### _June 27, 2026_
 

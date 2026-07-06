@@ -10,13 +10,14 @@ module Schemas
       'type' => 'object',
       'required' => %w[ craft rating ],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'craft' => { 'type' => 'string' },
         'rating' => { 'type' => 'integer', 'minimum' => 0, 'maximum' => 5 }
       },
       'additionalProperties' => false
     }
   }.freeze
-  CRAFT_PARAMS = %w[ craft rating ].freeze
+  CRAFT_PARAMS = %w[ id craft rating ].freeze
 
   MARTIAL_ARTS = {
     'type' => 'array',
@@ -24,13 +25,14 @@ module Schemas
       'type' => 'object',
       'required' => %w[ style rating ],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'style' => { 'type' => 'string' },
         'rating' => { 'type' => 'integer', 'minimum' => 0, 'maximum' => 5 }
       },
       'additionalProperties' => false
     }
   }.freeze
-  MARTIAL_ARTS_PARAMS = %w[ style rating ].freeze
+  MARTIAL_ARTS_PARAMS = %w[ id style rating ].freeze
 
   INTIMACY = {
     'type' => 'array',
@@ -38,6 +40,7 @@ module Schemas
       'type' => 'object',
       'required' => %w[subject rating],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'subject' => { 'type' => 'string' },
         'rating' => { 'type' => 'integer', 'minimum' => 0, 'maximum' => 3 },
         'hidden' => { 'type' => 'boolean' }
@@ -45,7 +48,7 @@ module Schemas
       'additionalProperties' => false
     }
   }.freeze
-  INTIMACY_PARAMS = %w[ subject rating hidden ].freeze
+  INTIMACY_PARAMS = %w[ id subject rating hidden ].freeze
 
   MOTE_COMMITTMENT = {
     'type' => 'array',
@@ -53,6 +56,7 @@ module Schemas
       'type' => 'object',
       'required' => %w[pool label motes],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'pool' => { 'type' => 'string', 'enum' => %w[personal peripheral] },
         'label' => { 'type' => 'string' },
         'motes' => { 'type' => 'integer', 'minimum' => 0 },
@@ -61,7 +65,7 @@ module Schemas
       'additionalProperties' => false
     }
   }.freeze
-  MOTE_COMMITTMENT_PARAMS = %w[ pool label motes scenelong ].freeze
+  MOTE_COMMITTMENT_PARAMS = %w[ id pool label motes scenelong ].freeze
 
   RESOURCE = {
     'type' => 'array',
@@ -69,13 +73,14 @@ module Schemas
       'type' => 'object',
       'required' => %w[resource value],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'resource' => { 'type' => 'string' },
         'value' => { 'type' => 'integer', 'minimum' => 0 }
       },
       'additionalProperties' => false
     }
   }.freeze
-  RESOURCE_PARAMS = %w[ resource value ].freeze
+  RESOURCE_PARAMS = %w[ id resource value ].freeze
 
   SPECIALTY = {
     'type' => 'array',
@@ -83,6 +88,7 @@ module Schemas
       'type' => 'object',
       'required' => %w[ ability context ],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'ability' => {
           'type' => 'string',
           'enum' => %W[
@@ -97,7 +103,7 @@ module Schemas
       'additionalProperties' => false
     }
   }.freeze
-  SPECIALTY_PARAMS = %i[ ability context ].freeze
+  SPECIALTY_PARAMS = %i[ id ability context ].freeze
 
   FORM = {
     'type' => 'array',
@@ -105,12 +111,13 @@ module Schemas
       'type' => 'object',
       'required' => %w[form],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'form' => { 'type' => 'string' },
         'qc_id' => { 'type' => 'integer' }
       }
     }
   }.freeze
-  FORM_PARAMS = %w[ form qc_id ].freeze
+  FORM_PARAMS = %w[ id form qc_id ].freeze
 
   XP_LOG = {
     'type' => 'array',
@@ -118,12 +125,13 @@ module Schemas
       'type' => 'object',
       'required' => %w[label points],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'label' => { 'type' => 'string' },
         'points' => { 'type' => 'integer' }
       }
     }
   }.freeze
-  XP_LOG_PARAMS = %w[ label points ].freeze
+  XP_LOG_PARAMS = %w[ id label points ].freeze
 
   QC_ACTION = {
     'type' => 'array',
@@ -131,13 +139,14 @@ module Schemas
       'type' => 'object',
       'required' => %w[action pool],
       'properties' => {
+        'id' => { 'type' => 'string' },
         'action' => { 'type' => 'string' },
         'pool' => { 'type' => 'integer', 'minimum' => 0 }
       },
       'additionalProperties' => false
     }
   }.freeze
-  QC_ACTION_PARAMS = %w[ action pool ].freeze
+  QC_ACTION_PARAMS = %w[ id action pool ].freeze
 
   WEAPON_OVERRIDES = {
     'type' => 'object',

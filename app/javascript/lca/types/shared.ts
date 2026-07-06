@@ -48,6 +48,7 @@ export interface WithAura {
 }
 
 export interface Intimacy {
+  id: string
   subject: string
   rating: number
   hidden?: boolean
@@ -59,6 +60,7 @@ export interface WithIntimacies {
 }
 
 export interface MotesCommitted {
+  id: string
   pool: 'personal' | 'peripheral'
   label: string
   motes: number
@@ -66,6 +68,7 @@ export interface MotesCommitted {
 }
 
 export interface Resource {
+  id: string
   resource: string
   value: number
 }

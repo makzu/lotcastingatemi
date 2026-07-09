@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 
 import BlockPaper from '@lca/components/generic/BlockPaper.tsx'
 import type { Character } from '@lca/types/character.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 
 const styles = (theme) => ({
   specialtyWrap: {
@@ -26,7 +27,7 @@ const styles = (theme) => ({
 type Props = { character: Character; classes: Object }
 function FullSpecialtyBlock({ character, classes }: Props) {
   const spec = character.specialties.map((s) => (
-    <Fragment key={s.ability + s.context}>
+    <Fragment key={makeListAttributeId(s)}>
       <div className={classes.specialtyWrap}>
         <div className={classes.specialtyAbility}>
           {s.ability === 'martial_arts' ? 'Martial Arts' : s.ability}
@@ -40,7 +41,6 @@ function FullSpecialtyBlock({ character, classes }: Props) {
   return (
     <BlockPaper>
       <Typography variant="h6">Specialties</Typography>
-
       {spec}
     </BlockPaper>
   )

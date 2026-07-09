@@ -22,6 +22,7 @@ import {
   spentSolarXp,
   spentXp,
 } from '@lca/utils/calculated/index.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 import CharacterLoadError from '../CharacterLoadError.tsx'
 
 const styles = (_theme: Theme) =>
@@ -38,8 +39,8 @@ const styles = (_theme: Theme) =>
   })
 
 const xpTable = (log: XpLogEntry[]) =>
-  log.map((l, i) => (
-    <tr key={`${l.label}_${i}`}>
+  log.map((l) => (
+    <tr key={makeListAttributeId(l)}>
       <td style={{ textAlign: 'right' }}>{l.points}:</td>
       <td style={{ width: '100%' }}>{l.label}</td>
     </tr>

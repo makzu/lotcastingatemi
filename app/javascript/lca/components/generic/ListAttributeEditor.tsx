@@ -12,6 +12,7 @@ import DragHandleIcon from '@material-ui/icons/DragHandle'
 import ContentRemoveCircle from '@material-ui/icons/RemoveCircle'
 
 import type { Character } from '@lca/types/index.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 
 export type ListAttributeFieldTypes = {
   character: Object
@@ -77,12 +78,6 @@ export const ListAttributeEditor = <T extends ArrayAttributeNames<Character>>(
     change(newTrait)
   }
 
-  const makeId = (t: typeof newObject) => {
-    if (typeof t === 'object' && 'id' in t) return t.id
-
-    return JSON.stringify(t)
-  }
-
   const makeNewObject = () => {
     if (typeof newObject === 'object') return { ...newObject, id: nanoid(5) }
 
@@ -96,7 +91,11 @@ export const ListAttributeEditor = <T extends ArrayAttributeNames<Character>>(
   }
 
   const formFields = trait.map((t, i) => (
-    <Sortable key={makeId(t)} id={makeId(t)} index={i}>
+    <Sortable
+      key={makeListAttributeId(t)}
+      id={makeListAttributeId(t)}
+      index={i}
+    >
       <Typography component="div" style={{ marginRight: '8px' }}>
         <DragHandleIcon onClick={(e) => e.preventDefault()} />
       </Typography>

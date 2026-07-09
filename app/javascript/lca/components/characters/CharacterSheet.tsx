@@ -16,6 +16,7 @@ import {
   getPoolsAndRatings,
 } from '@lca/selectors/index.ts'
 import type { Character, Merit, Weapon } from '@lca/types/index.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 import CharacterLoadError from '../CharacterSheet/CharacterLoadError.tsx'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import RatingLine from '../generic/RatingLine.tsx'
@@ -34,8 +35,8 @@ import WeaponSummaryBlock from './blocks/weaponSummaryBlock.tsx'
 
 export function ResourceBlock({ character }: { character: Character }) {
   const re = character.resources || []
-  const res = re.map((r, index) => (
-    <Typography key={index}>
+  const res = re.map((r) => (
+    <Typography key={makeListAttributeId(r)}>
       {r.resource}: {r.value}
     </Typography>
   ))
@@ -68,8 +69,8 @@ export function LimitTrackBlock({ character }: { character: Character }) {
 }
 
 export function SorceryBlock({ character }: { character: Character }) {
-  const rituals = character.rituals.map((r, i) => (
-    <Typography paragraph key={i}>
+  const rituals = character.rituals.map((r) => (
+    <Typography paragraph key={makeListAttributeId(r)}>
       {r}
     </Typography>
   ))

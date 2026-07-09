@@ -11,6 +11,7 @@ import {
   isSupernalAbility,
 } from '@lca/utils/calculated/index.ts'
 import { ABILITY_NAMES } from '@lca/utils/constants.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 
 const styles = (theme) => ({
   abilityName: {
@@ -165,7 +166,7 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
   } else {
     craft = character.abil_craft.map((craft) => (
       <CraftAbilityLine
-        key={craft.craft}
+        key={makeListAttributeId(craft)}
         context={craft.craft}
         rating={craft.rating}
         character={character}
@@ -182,7 +183,7 @@ export default function AbilityBlock({ character, pools }: AbilityBlockProps) {
   } else {
     ma = character.abil_martial_arts.map((ma) => (
       <MartialArtsAbilityLine
-        key={ma.style}
+        key={makeListAttributeId(ma)}
         style={ma.style}
         rating={ma.rating}
         character={character}

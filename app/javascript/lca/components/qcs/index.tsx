@@ -19,6 +19,7 @@ import {
 import sharedStyles from '@lca/styles/index.ts'
 import type { QC, QcAttack, QcCharm, QcMerit, Spell } from '@lca/types/index.ts'
 import { prettyIntimacyRating, qcPool } from '@lca/utils/calculated/index.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 import BlockPaper from '../generic/BlockPaper.tsx'
 import PoolDisplay from '../generic/PoolDisplay.tsx'
 import SpendableBlock from '../generic/SpendableBlock.tsx'
@@ -126,19 +127,19 @@ class QcSheet extends Component<Props> {
       classes,
     } = this.props
 
-    const actions = qc.actions.map((action, index) => (
+    const actions = qc.actions.map((action) => (
       <PoolDisplay
-        key={index}
+        key={makeListAttributeId(action)}
         label={action.action}
         pool={qcPool(qc, action.pool, penalties.wound)}
         classes={{ root: classes.poolBlock }}
       />
     ))
-    const principles = qc.principles.map((p, index) =>
+    const principles = qc.principles.map((p) =>
       p.hidden && !canEdit ? (
-        <span key={index} />
+        <span key={makeListAttributeId(p)} />
       ) : (
-        <div key={index}>
+        <div key={makeListAttributeId(p)}>
           <span className={classes.intimacyTypeLabel}>Principle: </span>
           <span className={classes.intimacy}>
             {p.subject} ({prettyIntimacyRating(p.rating)})
@@ -146,11 +147,11 @@ class QcSheet extends Component<Props> {
         </div>
       ),
     )
-    const ties = qc.ties.map((tie, index) =>
+    const ties = qc.ties.map((tie) =>
       tie.hidden && !canEdit ? (
-        <span key={index} />
+        <span key={makeListAttributeId(tie)} />
       ) : (
-        <div key={index}>
+        <div key={makeListAttributeId(tie)}>
           <span className={classes.intimacyTypeLabel}>Tie: </span>
           <span className={classes.intimacy}>
             {tie.subject} ({prettyIntimacyRating(tie.rating)})
@@ -231,8 +232,8 @@ class QcSheet extends Component<Props> {
         <MarkdownDisplay source={spell.body} />
       </div>
     ))
-    const rituals = qc.rituals.map((ritual, i) => (
-      <Typography paragraph key={i}>
+    const rituals = qc.rituals.map((ritual) => (
+      <Typography paragraph key={ritual}>
         {ritual}
       </Typography>
     ))

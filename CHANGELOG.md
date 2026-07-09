@@ -2,11 +2,19 @@
 
 ###### _Unreleased_
 
+## v134
+
+###### _July 8, 2026_
+
+- Characters' BP logs are now visible alongside XP and Splat XP
+
 ## v133
 
 ###### _July 5, 2026_
 
 - Assorted bug fixes
+
+## v130
 
 ###### _June 27, 2026_
 

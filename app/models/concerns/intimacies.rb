@@ -8,6 +8,9 @@ module Intimacies
     validates :principles, json: { schema: Schemas::INTIMACY }
     validates :ties,       json: { schema: Schemas::INTIMACY }
 
+    normalizes :principles,
+               :ties, with: ArrayAttributeNormalizer
+
     def without_secrets
       c = dup
       c.id = id

@@ -2,6 +2,7 @@ import type { PlayerAsset, Sortable, WithId } from './_lib.ts'
 import type { WithSharedStats } from './shared.ts'
 
 export interface QcAction {
+  id?: string
   action: string
   pool: number
 }

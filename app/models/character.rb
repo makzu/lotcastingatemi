@@ -60,24 +60,21 @@ class Character < ApplicationRecord
             :abil_survival,    :abil_thrown,         :abil_war,
             zero_thru_five_stat: true
 
-  validates :abil_craft,        json: { schema: Schemas::CRAFT            }
-  validates :abil_martial_arts, json: { schema: Schemas::MARTIAL_ARTS     }
-  validates :motes_committed,   json: { schema: Schemas::MOTE_COMMITTMENT }
-  validates :specialties,       json: { schema: Schemas::SPECIALTY        }
-  validates :principles,        json: { schema: Schemas::INTIMACY         }
-  validates :ties,              json: { schema: Schemas::INTIMACY         }
-  validates :resources,         json: { schema: Schemas::RESOURCE         }
-  validates :xp_log,            json: { schema: Schemas::XP_LOG           }
-  validates :xp_log_solar,      json: { schema: Schemas::XP_LOG           }
-  validates :bp_log,            json: { schema: Schemas::XP_LOG           }
-  validates :forms,             json: { schema: Schemas::FORM             }
+  # Various array attributes need schemas
+  # TODO: Replace these with an actual model gem OR independant model
+  # Intimacies / Mote Commitments / etc are validated in their own concerns
+  validates :abil_craft,        json: { schema: Schemas::CRAFT        }
+  validates :abil_martial_arts, json: { schema: Schemas::MARTIAL_ARTS }
+  validates :specialties,       json: { schema: Schemas::SPECIALTY    }
+  validates :resources,         json: { schema: Schemas::RESOURCE     }
+  validates :xp_log,            json: { schema: Schemas::XP_LOG       }
+  validates :xp_log_solar,      json: { schema: Schemas::XP_LOG       }
+  validates :bp_log,            json: { schema: Schemas::XP_LOG       }
+  validates :forms,             json: { schema: Schemas::FORM         }
 
   normalizes :abil_craft,
              :abil_martial_arts,
-             :motes_committed,
              :specialties,
-             :principles,
-             :ties,
              :resources,
              :xp_log,
              :xp_log_solar,

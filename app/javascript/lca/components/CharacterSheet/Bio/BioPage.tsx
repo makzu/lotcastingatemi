@@ -19,9 +19,11 @@ import type { Character, XpLogEntry } from '@lca/types/index.ts'
 import type { RouteWithIdProps as RouteProps } from '@lca/types/util.ts'
 import {
   solarXpName,
+  spentBp,
   spentSolarXp,
   spentXp,
 } from '@lca/utils/calculated/index.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 import CharacterLoadError from '../CharacterLoadError.tsx'
 
 const styles = (_theme: Theme) =>
@@ -38,8 +40,8 @@ const styles = (_theme: Theme) =>
   })
 
 const xpTable = (log: XpLogEntry[]) =>
-  log.map((l, i) => (
-    <tr key={`${l.label}_${i}`}>
+  log.map((l) => (
+    <tr key={makeListAttributeId(l)}>
       <td style={{ textAlign: 'right' }}>{l.points}:</td>
       <td style={{ width: '100%' }}>{l.label}</td>
     </tr>
@@ -127,7 +129,7 @@ const BioFullPage = ({ character, classes }: Props) => {
         </BlockPaper>
       </Grid>
 
-      <Grid item xs={12} lg={6}>
+      <Grid item xs={12} lg={6} xl={4}>
         <BlockPaper>
           <Typography variant="subtitle1">XP</Typography>
           <Typography component="table">
@@ -140,7 +142,7 @@ const BioFullPage = ({ character, classes }: Props) => {
         </BlockPaper>
       </Grid>
 
-      <Grid item xs={12} lg={6}>
+      <Grid item xs={12} lg={6} xl={4}>
         <BlockPaper>
           <Typography variant="subtitle1">
             {`${solarXpName(character)} XP`}
@@ -152,6 +154,16 @@ const BioFullPage = ({ character, classes }: Props) => {
             Earned: {character.xp_solar_total}, Spent: {spentSolarXp(character)}
             , Remaining: {character.xp_solar_total - spentSolarXp(character)}
           </Typography>
+        </BlockPaper>
+      </Grid>
+
+      <Grid item xs={12} lg={6} xl={4}>
+        <BlockPaper>
+          <Typography variant="subtitle1">BP</Typography>
+          <Typography component="table">
+            <tbody>{xpTable(character.bp_log)}</tbody>
+          </Typography>
+          <Typography>Spent: {spentBp(character)}</Typography>
         </BlockPaper>
       </Grid>
     </Grid>

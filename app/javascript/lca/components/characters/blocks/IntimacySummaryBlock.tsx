@@ -3,6 +3,7 @@ import { VisibilityOff } from '@material-ui/icons'
 
 import type { Character } from '@lca/types/index.ts'
 import type { Intimacy } from '@lca/types/shared.ts'
+import { makeListAttributeId } from '@lca/utils/listAttributes.ts'
 import BlockPaper from '../../generic/BlockPaper.tsx'
 import RatingLine from '../../generic/RatingLine.tsx'
 
@@ -12,11 +13,11 @@ interface Props {
 }
 
 const IntimacySummaryBlock = ({ character, canEdit }: Props) => {
-  const intimacyMap = (p: Intimacy, index: number) =>
+  const intimacyMap = (p: Intimacy) =>
     p.hidden && !canEdit ? (
-      <span key={index} />
+      <span key={makeListAttributeId(p)} />
     ) : (
-      <Typography key={index} component="div">
+      <Typography key={makeListAttributeId(p)} component="div">
         <RatingLine rating={p.rating} fillTo={3}>
           {p.hidden && <VisibilityOff />} {p.subject}
         </RatingLine>

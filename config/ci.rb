@@ -15,7 +15,8 @@ CI.run do
 
   step 'Tests: Rails', 'bin/rspec'
   step 'Tests: Seeds', 'env RAILS_ENV=test bin/rails db:seed:replant'
-  # TODO: Add vitest or other frontend testing
+
+  step 'Tests: Frontend', 'yarn test'
   # TODO: Add playwright or other e2e testing
 
   # Optional: set a green GitHub commit status to unblock PR merge.

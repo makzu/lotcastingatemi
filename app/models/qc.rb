@@ -41,7 +41,10 @@ class Qc < ApplicationRecord
             numericality: { greater_than_or_equal_to: 0 }
 
   validates :actions,   json: { schema: Schemas::QC_ACTION }
-  validates :resources, json: { schema: Schemas::RESOURCE }
+  validates :resources, json: { schema: Schemas::RESOURCE  }
+
+  normalizes :actions,
+             :resources, with: ArrayAttributeNormalizer
 
   def entity_type
     'qc'

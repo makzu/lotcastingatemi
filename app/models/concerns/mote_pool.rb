@@ -16,6 +16,8 @@ module MotePool
 
     validate :cant_have_more_current_motes_than_total
 
+    normalizes :motes_committed, with: ArrayAttributeNormalizer
+
     private
 
     def cant_have_more_current_motes_than_total

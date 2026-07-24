@@ -128,6 +128,29 @@ export const getPoolsAndRatings = createCachedSelector(
       parry: { total: 'None', noSummary: true },
     }
 
+    // Determine best attack pool across all weapons. We consider withering,
+    // decisive and ranged withering ranges and pick the highest total.
+    let bestAttack = null
+    const rangedKeys = ['close', 'short', 'medium', 'long', 'extreme']
+    weaponPools.forEach((wp) => {
+      const candidates = []
+      if (wp.witheringAttack) candidates.push(wp.witheringAttack)
+      if (wp.decisiveAttack) candidates.push(wp.decisiveAttack)
+      if (wp.rangedWitheringAttack) {
+        rangedKeys.forEach((k) => {
+          if (wp.rangedWitheringAttack[k] && wp.rangedWitheringAttack[k].available)
+            candidates.push(wp.rangedWitheringAttack[k])
+        })
+      }
+
+      candidates.forEach((p) => {
+        const total = p.total !== undefined ? p.total : p.raw !== undefined ? p.raw : 0
+        if (bestAttack === null || total > (bestAttack.total || 0)) {
+          bestAttack = p
+        }
+      })
+    })
+
     return {
       exaltTypeBase: exaltTypeBase(character),
       excellencyAbils: excellencyAbils,
@@ -155,6 +178,7 @@ export const getPoolsAndRatings = createCachedSelector(
       bestParry: bestParryWeapon.parry,
       soak: ratings.soak(character, meritNames, spellNames),
       hardness: ratings.hardness(character),
+      bestAttack: bestAttack || { name: 'No Attack', total: 0, raw: 0, attributeRating: 0, abilityRating: 0, bonus: [], penalties: [], totalPenalty: 0 },
       joinBattle: pools.joinBattle(
         character,
         meritNames,

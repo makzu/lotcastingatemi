@@ -3,14 +3,14 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@dnd-kit/helpers": "^0.5.0",
-    "@dnd-kit/react": "^0.5.0",
+    "@dnd-kit/helpers": "^0.5.3",
+    "@dnd-kit/react": "^0.5.3",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@material-ui/styles": "^4.11.5",
     "@material-ui/types": "^5.1.8",
-    "@rails/actioncable": "^8.1.300",
+    "@rails/actioncable": "^8.1.401",
     "@reduxjs/toolkit": "1.9.7",
     "deepmerge": "^4.3.1",
     "fast-equals": "^2.0.4",
@@ -28,35 +28,34 @@
     "redux-api-middleware": "^3.2.1",
     "redux-optimistic-ui": "^3.1.0",
     "reselect": "^4.1.8",
-    "sass": "^1.101.0",
+    "sass": "^1.108.1",
     "typeface-roboto": "^0.0.75",
     "typescript": "7.0.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.3",
-    "@bunchtogether/vite-plugin-flow": "^1.0.2",
+    "@biomejs/biome": "2.6.6",
     "@material-ui/codemod": "^4.5.1",
-    "@redux-devtools/extension": "^4.0.0",
+    "@redux-devtools/extension": "^4.0.1",
     "@reduxjs/rtk-codemods": "0.0.3",
-    "@rolldown/plugin-transform-imports": "^0.1.1",
-    "@types/node": "24.13.3",
+    "@rolldown/plugin-transform-imports": "^0.1.3",
+    "@types/node": "24.19.2",
     "@types/rails__actioncable": "^8.0.3",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
-    "@types/react-redux": "^7.1.34",
+    "@types/react-redux": "^7.1.35",
     "@types/react-router-dom": "^5.3.3",
     "@types/recompose": "^0.30.15",
     "@types/redux-actions": "^2.6.5",
     "@types/redux-api-middleware": "^3.2.7",
     "@types/redux-optimistic-ui": "^0.4.14",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^6.3.0",
     "cypress": "^12.17.4",
-    "knip": "^6.25.0",
+    "knip": "^6.45.0",
     "react-test-renderer": "^18.3.1",
-    "vite": "^8.1.3",
+    "vite": "^8.3.7",
     "vite-plugin-rails": "^0.6.0",
-    "vite-plugin-ruby": "^5.2.2",
-    "vitest": "^4.1.10"
+    "vite-plugin-ruby": "^5.2.6",
+    "vitest": "^5.1.0"
   },
   "resolutions": {
     "@types/react": "^18.3.28"
@@ -84,7 +83,7 @@
     ],
     "setupTestFrameworkScriptFile": "mock-local-storage"
   },
-  "packageManager": "yarn@4.14.1",
+  "packageManager": "yarn@4.18.1",
   "engines": {
     "yarn": "4.x"
   }

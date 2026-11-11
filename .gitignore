@@ -64,3 +64,4 @@ node_modules
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+.ms-playwright

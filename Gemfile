@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 8.1.0'
+gem 'rails', '~> 8.1.4'
 
 # Vite_Rails for more modern frontend bundling
 gem 'vite_rails', '~> 3.11'
@@ -24,18 +24,18 @@ gem 'deep_cloneable', '~> 3.2'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1'
 
-gem 'bootsnap', '~> 1.24', require: false
+gem 'bootsnap', '~> 1.26', require: false
 
 # Authentication/Authorization
 gem 'knock', '~> 2.2', git: 'https://github.com/makzu/knock'
-gem 'pundit', '~> 2.3'
+gem 'pundit', '~> 2.5'
 
 gem 'omniauth', '~> 2.1'
 gem 'omniauth-google-oauth2', '~> 1.2'
 gem 'omniauth-rails_csrf_protection', '~> 2.0'
 
 # Sorting
-gem 'ranked-model', '~> 0.4.11'
+gem 'ranked-model', '~> 0.5.0'
 
 # Timeout protection
 # gem 'rack-timeout', '~> 0.6'
@@ -54,8 +54,8 @@ group :production do
 end
 
 # For Heroku Ruby metrics
-gem 'barnes', '~>1.0'
-gem 'scout_apm', '~> 6.2'
+gem 'barnes', '~> 1.0'
+gem 'scout_apm', '~> 6.3'
 
 # logging
 gem 'colorize', '~> 1.1'
@@ -73,10 +73,10 @@ group :development, :test do
   # Linting
   gem 'rubocop', '~> 1.88', require: false
   gem 'rubocop-factory_bot', '~>2.28', require: false
-  gem 'rubocop-performance', '~> 1.26', require: false
+  gem 'rubocop-performance', '~> 1.27', require: false
   gem 'rubocop-rails', '~> 2.35', require: false
   gem 'rubocop-rspec', '~> 3.10', require: false
-  gem 'rubocop-rspec_rails', '~> 2.32', require: false
+  gem 'rubocop-rspec_rails', '~> 2.33', require: false
 
   # Security Tools
   gem 'brakeman', '~> 8.0'
@@ -92,7 +92,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'rails_real_favicon', '~> 0.1'
 
   # Better developer experience in vscode
   gem 'ruby-lsp-rails', '~> 0.4', require: false

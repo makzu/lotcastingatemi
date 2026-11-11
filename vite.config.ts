@@ -1,7 +1,5 @@
 import { resolve } from 'node:path'
 
-// @ts-expect-error "This won't have defs"
-import { flowPlugin } from '@bunchtogether/vite-plugin-flow'
 import transformImports from '@rolldown/plugin-transform-imports'
 import React from '@vitejs/plugin-react'
 import Rails from 'vite-plugin-rails'
@@ -17,7 +15,6 @@ export default defineConfig(({ command }) => ({
       // lazyBarrel seems like it'd be helpful, but it breaks parts of material-ui
       // experimental: { lazyBarrel: true },
       plugins: [
-        flowPlugin(),
         transformImports({
           '@material-ui/core': {
             transform: [
@@ -39,7 +36,6 @@ export default defineConfig(({ command }) => ({
       // lazyBarrel seems like it'd be helpful, but it breaks parts of material-ui
       // experimental: { lazyBarrel: true },
       plugins: [
-        flowPlugin(),
         transformImports({
           '@material-ui/core': {
             transform: [
@@ -55,7 +51,6 @@ export default defineConfig(({ command }) => ({
     },
   },
   plugins: [
-    flowPlugin(),
     Rails({
       fullReload: {
         additionalPaths: ['config/routes.rb', 'app/views/**/*'],
@@ -66,8 +61,8 @@ export default defineConfig(({ command }) => ({
   ],
   resolve: {
     alias: {
-      '@lca': resolve(__dirname, 'app/javascript/lca'),
-      Docs: resolve(__dirname, 'docs'),
+      '@lca': resolve(import.meta.dirname, 'app/javascript/lca'),
+      Docs: resolve(import.meta.dirname, 'docs'),
       '@material-ui/core/createStyles': '@material-ui/core/styles',
       '@material-ui/core/makeStyles': '@material-ui/core/styles',
       '@material-ui/core/withStyles': '@material-ui/core/styles',
